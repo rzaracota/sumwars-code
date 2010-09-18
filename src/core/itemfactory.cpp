@@ -14,6 +14,16 @@ ItemFactory::ItemFactory()
 {
 }
 
+ItemBasicData* ItemFactory::getItemBasicData(Item::Subtype subtype)
+{
+	std::map<Item::Subtype,ItemBasicData*>::iterator it;
+	it = m_item_data.find(subtype);
+	if (it != m_item_data.end())
+		return it->second;
+	
+	return 0;
+}
+
 
 Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, float magic_power, Item::Rarity rarity)
 {
@@ -38,7 +48,7 @@ Item* ItemFactory::createItem(Item::Type type, Item::Subtype subtype, int id, fl
 		item = new Item(*idata,id);
 		item->m_rarity = rarity;
 		
-
+		item->m_magic_power =0;
 		createMagicMods(item,idata->m_modchance,magic_power, idata->m_min_enchant, idata->m_max_enchant, idata->m_enchant_multiplier);
 
 		// Preis ausrechnen
@@ -78,7 +88,7 @@ Item* ItemFactory::createGold(int value, int id)
 }
 
 
-void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant, float enchant_multiplier, bool duplicate_enchant)
+int ItemFactory::createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant, float enchant_multiplier, bool duplicate_enchant, int max_enchant_number)
 {
 	DEBUGX("magic power %f min_enchant %f",magic_power, min_enchant);
 	if (magic_power < min_enchant && magic_power != 0)
@@ -89,20 +99,17 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 		}
 		else
 		{
-			return;
+			return 0;
 		}
 	}
 	
 	// Modifikationen des Items auswuerfeln
 	DEBUGX("mods auswuerfeln");
-
-	magic_power = std::min(magic_power, max_enchant*4);
-	item->m_magic_power =0;
 	
 	// bisher zugeteilte Staerke der Modifikation
-	float mod_power[31];
-	float modprob[31];
-	for (int i=0; i<31; i++)
+	float mod_power[NUM_MAGIC_MODS];
+	float modprob[NUM_MAGIC_MODS];
+	for (int i=0; i<NUM_MAGIC_MODS; i++)
 	{
 		if (duplicate_enchant || !item->m_magic_mods.test(i))
 		{
@@ -114,11 +121,11 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 		}
 	}
 	
-	memset(mod_power,0,31*sizeof(float));
+	memset(mod_power,0,NUM_MAGIC_MODS*sizeof(float));
 
 	float sum =0;
 	int i;
-	for (i=0;i<31;i++)
+	for (i=0;i<NUM_MAGIC_MODS;i++)
 	{
 		sum += modprob[i];
 	}
@@ -138,7 +145,7 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 
 		// Anzahl verschiedene Verzauberungen
 	int num_mods=0;
-	while (magic_power>=min_enchant && num_mods<4)
+	while (magic_power>=min_enchant && num_mods<max_enchant_number)
 	{
 		
 		if (sum < 0.001)
@@ -158,7 +165,7 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 		
 		
 		// Modifikation auswuerfeln
-		mod = Random::randDiscrete(modprob,31,sum);
+		mod = Random::randDiscrete(modprob,NUM_MAGIC_MODS,sum);
 		DEBUGX("ausgewuerfelt: Starke der Verzauberung: %f",mp);
 		DEBUGX("Art der Verzauberung: %i",mod);
 
@@ -301,6 +308,8 @@ void ItemFactory::createMagicMods(Item* item, float* modchance, float magic_powe
 
 	item->m_level_req = std::max(item->m_level_req,(char) levelreq);
 	DEBUGX("level req %i",item->m_level_req);
+	
+	return num_mods;
 }
 
 Item::Type  ItemFactory::getBaseType(Item::Subtype subtype)

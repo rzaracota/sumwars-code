@@ -80,7 +80,7 @@ ItemBasicData::ItemBasicData()
 	m_level_req = 0;
 	m_char_req = "all";
 
-	for (int i=0;i<31;i++)
+	for (int i=0;i<NUM_MAGIC_MODS;i++)
 	{
 		m_modchance[i] =0;
 	}

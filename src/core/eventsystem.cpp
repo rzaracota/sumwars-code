@@ -71,6 +71,7 @@ void EventSystem::init()
 	lua_register(m_lua, "createRandomItem", createRandomItem);
 	lua_register(m_lua, "getItemValue", getItemValue);
 	lua_register(m_lua, "setItemValue", setItemValue);
+	lua_register(m_lua, "addItemMagicMods",addItemMagicMods);
 	lua_register(m_lua, "searchPlayerItem", searchPlayerItem);
 	lua_register(m_lua, "getPlayerItem", getPlayerItem);
 	lua_register(m_lua, "removePlayerItem", removePlayerItem);
@@ -484,9 +485,9 @@ void EventSystem::getTranslatableString(lua_State *L, TranslatableString& t, int
 		
 		int id = 1;
 		std::vector<std::string> substrings;
-		while (1)
+		while (id <=9)
 		{
-			lua_pushinteger(L, 0);
+			lua_pushinteger(L, id);
 			lua_gettable(L, idx);
 			if (!lua_isstring(L,-1))
 				break;
@@ -494,6 +495,7 @@ void EventSystem::getTranslatableString(lua_State *L, TranslatableString& t, int
 			lua_pop(L, 1);
 			
 			substrings.push_back(subtext);
+			id ++;
 		}
 		
 		t.setText(text,substrings);
@@ -1671,6 +1673,88 @@ int EventSystem::setItemValue(lua_State *L)
 	return 0;
 }
 
+int EventSystem::addItemMagicMods(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2  && lua_isstring(L,1) && lua_isnumber(L,2))
+	{
+		// map from strings to magic mod enum
+		std::map<std::string, int> magic_mods;
+		magic_mods["max_health"] = ItemFactory::HEALTH_MOD;
+		magic_mods["armor"] = ItemFactory::ARMOR_MOD;
+		magic_mods["block"] = ItemFactory::BLOCK_MOD;
+		magic_mods["strength"] = ItemFactory::STRENGTH_MOD;
+		magic_mods["dexterity"] = ItemFactory::DEXTERITY_MOD;
+		magic_mods["willpower"] = ItemFactory::MAGIC_POWER_MOD;
+		magic_mods["magic_power"] = ItemFactory::WILLPOWER_MOD;
+		magic_mods["resist_phys"] = ItemFactory::RESIST_PHYS_MOD;
+		magic_mods["resist_fire"] = ItemFactory::RESIST_FIRE_MOD;
+		magic_mods["resist_ice"] = ItemFactory::RESIST_ICE_MOD;
+		magic_mods["resist_air"] = ItemFactory::RESIST_AIR_MOD;
+		magic_mods["resist_all"] = ItemFactory::RESIST_ALL_MOD;
+		magic_mods["phys_dmg"] = ItemFactory::DAMAGE_PHYS_MOD;
+		magic_mods["fire_dmg"] = ItemFactory::DAMAGE_FIRE_MOD;
+		magic_mods["ice_dmg"] = ItemFactory::DAMAGE_ICE_MOD;
+		magic_mods["air_dmg"] = ItemFactory::DAMAGE_AIR_MOD;
+		magic_mods["phys_mult"] = ItemFactory::DAMAGE_MULT_PHYS_MOD;
+		magic_mods["fire_mult"] = ItemFactory::DAMAGE_MULT_FIRE_MOD;
+		magic_mods["ice_mult"] = ItemFactory::DAMAGE_MULT_ICE_MOD;
+		magic_mods["air_mult"] = ItemFactory::DAMAGE_MULT_AIR_MOD;
+		magic_mods["attack_speed"] = ItemFactory::ATTACK_SPEED_MOD;
+		magic_mods["attack"] = ItemFactory::ATTACK_MOD;
+		magic_mods["power"] = ItemFactory::POWER_MOD;
+		
+		std::string modtype = lua_tostring(L, 1);
+		float min_enchant = lua_tonumber(L,2);
+		float max_enchant = min_enchant;
+		if (argc >= 3)
+		{
+			max_enchant = lua_tonumber(L,3);
+		}
+		
+		if (magic_mods.count(modtype) == 0)
+		{
+			ERRORMSG("magic modifier type %s unknown",modtype.c_str());
+		}
+		
+		if (m_item != 0)
+		{
+			// create probability array
+			// all probabilities set to 0, except the selected one, that is 1
+			float modprobs[NUM_MAGIC_MODS];
+			for (int i=0; i<NUM_MAGIC_MODS; i++)
+			{
+				modprobs[i] = 0;
+			}
+			
+			int selectedmod = magic_mods[modtype];
+			modprobs[selectedmod] = 1;
+			
+			// Get general information on the item type
+			ItemBasicData* idata = ItemFactory::getItemBasicData(m_item->m_subtype);
+			if (idata == 0)
+			{
+				ERRORMSG("No Item Data for Item type %s found",m_item->m_subtype.c_str());
+			}
+			
+			// cap enchantment values with items values
+			min_enchant = std::min(min_enchant, idata->m_max_enchant);
+			max_enchant = std::min(max_enchant, idata->m_max_enchant);
+			
+			int num_mods = ItemFactory::createMagicMods(m_item,modprobs ,max_enchant, min_enchant, max_enchant, idata->m_enchant_multiplier, false, 1);
+			
+			lua_pushnumber(L,num_mods);
+			return 1;
+		}
+		return 0;
+	}
+	else
+	{
+		ERRORMSG("Syntax: addItemMagicMods(string modtype, int min_enchant, int max_enchant)");
+	}
+	return 0;
+}
+
 int EventSystem::searchPlayerItem(lua_State *L)
 {
 	int argc = lua_gettop(L);
@@ -1722,8 +1806,15 @@ int EventSystem::getPlayerItem(lua_State *L)
 			else
 			{
 				std::string subtype = lua_tostring(L,2);
-				pos = pl->getEquipement()->findItem(subtype);
+				pos = Equipement::stringToPosition(subtype, pl->isUsingSecondaryEquip ());
+				if (pos == Equipement::NONE)
+				{
+					pos = pl->getEquipement()->findItem(subtype);
+				}
 			}
+			
+			if (pos == Equipement::NONE)
+				return 0;
 			
 			Item* item = pl->getEquipement()->getItem(pos);
 			if (item != 0)
@@ -1763,8 +1854,15 @@ int EventSystem::removePlayerItem(lua_State *L)
 			else
 			{
 				std::string subtype = lua_tostring(L,2);
-				pos = pl->getEquipement()->findItem(subtype);
+				pos = Equipement::stringToPosition(subtype, pl->isUsingSecondaryEquip ());
+				if (pos == Equipement::NONE)
+				{
+					pos = pl->getEquipement()->findItem(subtype);
+				}
 			}
+			
+			if (pos == Equipement::NONE)
+				return 0;
 			
 			Item* item = 0;
 			pl->getEquipement()->swapItem(item,pos);
@@ -2104,7 +2202,7 @@ int EventSystem::speak(lua_State *L)
 		return 0;
 
 	int argc = lua_gettop(L);
-	if (argc>=2 && lua_isstring(L,1) && lua_isstring(L,2))
+	if (argc>=2 && lua_isstring(L,1) && (lua_isstring(L,2) || lua_istable(L,2)))
 	{
 		std::string refname = lua_tostring(L, 1);
 		TranslatableString text;

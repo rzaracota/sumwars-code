@@ -51,7 +51,7 @@ public:
 		MAGE_FIRE_SKILLS_MOD = 24,
 		MAGE_ICE_SKILLS_MOD = 25,
 		MAGE_AIR_SKILLS_MOD = 26,
-
+		
 	};
 	/**
 	 * \fn ItemFactory()
@@ -89,8 +89,9 @@ public:
 	 * \param max_enchant maximale Starke einer einzelnen Verzauberung
 	 * \param enchant_multiplier Faktor mit den die effektive Staerke jeder Verzauberung multipliziert wird
 	 * \param duplicate_enchant if set to true, the item might get an enchantment of a type, it already has
+	 * \param max_enchant_number maximal number of enchantments added by the function
 	 */
-	static void createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant, float enchant_multiplier=1.0, bool duplicate_enchant = false);
+	static int createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant, float enchant_multiplier=1.0, bool duplicate_enchant = false, int max_enchant_number = 4);
 
 	/**
 	 * \fn static void registerItem(Item::Type type, Item::Subtype subtype, ItemBasicData* data)
@@ -141,6 +142,13 @@ public:
 	 * \brief Gibt allokierten Speicher frei
 	 */
 	static void cleanup();
+	
+	/**
+	 * \brief Returns the ItemBasicData structure for the selected Item type. 
+	 * \param subtype Item subtype
+	 * Return 0 if no data was found
+	 */
+	static ItemBasicData* getItemBasicData(Item::Subtype subtype);
 
 
 	private:

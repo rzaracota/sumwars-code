@@ -377,7 +377,7 @@ bool Dialogue::checkTopic(std::string topic)
 	return false;
 }
 
-void Dialogue::changeTopic(std::string topic)
+void Dialogue::changeTopic(std::string topic, int answer_id)
 {
 	if (topic =="abort")
 	{
@@ -519,10 +519,16 @@ void Dialogue::changeTopic(std::string topic)
 
 	// globale Dialoge loesen Events aus
 	// lokale Topics
+	
+	
 	if (m_topic_base == "global")
 	{
 		Trigger* tr = new Trigger(topic);
 		tr->addVariable("_dialogue",getId());
+		if (answer_id != -1)
+		{
+			tr->addVariable("answer_id",answer_id);
+		}
 		m_region->insertTrigger(tr);
 	}
 	else
@@ -539,6 +545,14 @@ void Dialogue::changeTopic(std::string topic)
 		if (st->checkCondition())
 		{
 			EventSystem::setRegion(m_region);
+			
+			if (answer_id != -1)
+			{
+				Trigger tr("");
+				tr. addVariable("answer_id",answer_id);
+				EventSystem::doString((char*) tr.getLuaVariables().c_str());
+			}
+			
 			st->doEffect();
 		}
 	}
@@ -586,6 +600,8 @@ void Dialogue::chooseAnswer(int playerid, int answer_nr)
 			}
 		}
 		
+		int answer_id = answernr +1;
+		
 		std::list < std::pair<TranslatableString, std::string> >::iterator jt;
 		jt = m_question->m_answers.begin();
 		while (jt !=m_question->m_answers.end() && answernr >0)
@@ -603,7 +619,7 @@ void Dialogue::chooseAnswer(int playerid, int answer_nr)
 		delete m_question;
 		m_question = 0;
 		
-		changeTopic(newtopic);
+		changeTopic(newtopic, answer_id);
 	}
 }
 
