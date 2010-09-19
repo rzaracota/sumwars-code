@@ -427,6 +427,11 @@ class EventSystem
 		static int setItemValue(lua_State *L);
 		
 		/**
+		 * \brief Adds magic mods to an item
+		 */
+		static int addItemMagicMods(lua_State *L);
+		
+		/**
 		 * \fn static int searchPlayerItem(lua_State *L)
 		 * \brief Durchsucht das Inventar eines Spieler nach einem Item
 		 */

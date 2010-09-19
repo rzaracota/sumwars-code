@@ -32,6 +32,14 @@
 #include <math.h>
 #include <bitset>
 
+enum NumMagicMods
+{
+	/**
+	 * \brief Number of magical modifications for items
+	 */
+	NUM_MAGIC_MODS = 31
+};
+
 /**
 * \struct ItemRequirementsMet
 * \brief Holds information about whether the players attributes meet the rquirements by this item
@@ -468,10 +476,10 @@ struct ItemBasicData
 	int m_price;
 
 	/**
-	 * \var float m_modchance[31]
+	 * \var float m_modchance[NUM_MAGIC_MODS]
 	 * \brief relative Chance auf die verschiedenen Modifikationen
 	 */
-	float m_modchance[31];
+	float m_modchance[NUM_MAGIC_MODS];
 
 	/**
 	 * \var float m_min_enchant

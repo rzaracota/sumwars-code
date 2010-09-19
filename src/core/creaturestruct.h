@@ -13,7 +13,15 @@
 
 #define NR_EFFECTS 1
 
-struct Item;
+enum NrTimers
+{
+	/**
+	 * \brief Number of Timers for actions
+	 */
+	NR_TIMERS = 9
+};
+
+class Item;
 
 /**
  * \struct AbilityInfo

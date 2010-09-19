@@ -25,3 +25,8 @@ function cam(location, distance)
 	end;
 	addCameraPosition(0,position,-90,60,distance)
 end;
+
+function plpos()
+	pl = getPlayers()[1];
+	pos = getPosition(pl);
+end;

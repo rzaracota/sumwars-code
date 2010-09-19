@@ -636,7 +636,7 @@ void Monster::evalCommand(Action::ActionType act)
 	}
 
 	int timernr = getTimerNr(act);
-	if (timernr==1 && m_timer1>0 || timernr==2 && m_timer2>0)
+	if (timernr!=0 && m_timers[timernr-1])
 	{
 		// Aktion erfordert einen Timer, der nicht frei ist
 		return;

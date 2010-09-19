@@ -60,7 +60,7 @@ const std::string& TranslatableString::getTranslation()
 			{
 				std::string replace;
 				char next = m_translation.at(pos+1);
-				if (next = '$')
+				if (next == '$')
 				{
 					replace = "$";
 				}

@@ -782,29 +782,17 @@ private:
 		*/
 		int m_dialogue_id;
 
-		/**
-		* \var m_timer1
-		* \brief Gibt die Zeit in ms an, fuer welche Aktionen die Timer1 benoetigen nicht benutzt werden koennen
-		*/
-		float m_timer1;
 
 		/**
-		* \var m_timer2
-		* \brief Gibt die Zeit in ms an, fuer welche Aktionen die Timer2 benoetigen nicht benutzt werden koennen
+		* \brief Timers for actions - if a timer is running no action using this timer may be used
 		*/
-		float m_timer2;
+		float m_timers[NR_TIMERS];
 
+	
 		/**
-		* \var float m_timer2_max
-		* \brief Zeit von Timer2 in ms beim starten des Timers
+		* \brief Timer value when starting the timer
 		*/
-		float m_timer2_max;
-
-		/**
-		* \var float m_timer1_max
-		* \brief Zeit von Timer1 in ms beim starten des Timers
-		*/
-		float m_timer1_max;
+		float m_timers_max[NR_TIMERS];
 
 		/**
 		 * \var  std::string m_emotion_set

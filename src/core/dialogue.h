@@ -383,8 +383,9 @@ class Dialogue
 		 * \fn void changeTopic(std::string topic)
 		 * \brief Setzt das Thema auf das angegebene Thema
 		 * Themen mit besonderen Bedeutungen sind 'start' und 'end'
+		 * \param selection if the topic was chosen by a player, the ID of the answer is given with this parameter
 		 */
-		void changeTopic(std::string topic);
+		void changeTopic(std::string topic, int answer_id=-1);
 		
 		/**
 		 * \fn void update(float time)
