@@ -374,8 +374,6 @@ bool Application::setupResources()
     Ogre::String path = "";
 #ifdef __APPLE__
     path = macPath();
-#else
-    path = ".";
 #endif
 	
 	
@@ -397,10 +395,7 @@ bool Application::setupResources()
 		{
 			typeName = i->first;
 			archName = i->second;
-			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
-				path + archName, typeName, secName);
-			
-			std::cout << path + archName << " - " << typeName << " - " << secName << std::endl;
+			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + archName, typeName, secName);
 		}
 	}
 	
