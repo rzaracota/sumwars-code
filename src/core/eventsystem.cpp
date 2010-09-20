@@ -46,7 +46,11 @@ void EventSystem::init()
 	m_lua = lua_open();
 
 	luaL_openlibs(m_lua);
-
+	luaopen_debug(m_lua);
+	
+	lua_getfield(m_lua, LUA_GLOBALSINDEX, "debug");
+	lua_setfield (m_lua, LUA_GLOBALSINDEX, "debugSaveCopy");
+	
 	lua_register(m_lua, "getRegion", getRegion);
 	lua_register(m_lua, "getObjectValue", getObjectValue);
 	lua_register(m_lua, "get", getObjectValue);
@@ -176,18 +180,29 @@ void  EventSystem::cleanup()
 
 void EventSystem::doString(const char* instructions)
 {
-	//DEBUG("instr %s",instructions);
-	int err  = luaL_dostring(m_lua, instructions);
+	lua_State *L = EventSystem::getLuaState();
+	int error_index = lua_gettop(L);
+	lua_pushcfunction(L, luaErrorHandler);
+	lua_insert(L, error_index);
+	
+	int err = (luaL_loadstring(L, instructions) || lua_pcall(L, 0, LUA_MULTRET,error_index));
 
 	if (err!=0)
 	{
-		reportErrors(m_lua, err,instructions);
+		reportErrors(L, err,instructions);
 	}
+	
+	lua_remove(L, error_index);
 }
 
 void EventSystem::doFile(const char* file)
 {
-	int err  = luaL_dofile(m_lua, file);
+	int error_index = lua_gettop(EventSystem::getLuaState());
+	lua_pushcfunction(EventSystem::getLuaState(), luaErrorHandler);
+	lua_insert(EventSystem::getLuaState(), error_index);
+	
+	lua_State *L = EventSystem::getLuaState();
+	int err  = (luaL_loadfile(L, file) || lua_pcall(L, 0, LUA_MULTRET,error_index));
 
 	if (err!=0)
 	{
@@ -195,6 +210,8 @@ void EventSystem::doFile(const char* file)
 		expl += file;
 		reportErrors(m_lua, err,expl.c_str());
 	}
+	
+	lua_remove(EventSystem::getLuaState(), error_index);
 }
 
 void EventSystem::clearCodeReference(int& coderef)
@@ -216,22 +233,29 @@ bool EventSystem::executeCodeReference(int coderef)
 	DEBUG("instr %s",instr);
 #endif
 	*/	
+	int error_index = lua_gettop(EventSystem::getLuaState());
+	lua_pushcfunction(EventSystem::getLuaState(), luaErrorHandler);
+	lua_insert(EventSystem::getLuaState(), error_index);
+	
+	
+	bool ret = true;
 	
 	lua_rawgeti(EventSystem::getLuaState(),LUA_REGISTRYINDEX , coderef);
-	int err = lua_pcall(EventSystem::getLuaState(), 0, LUA_MULTRET, 0);
+	int err = lua_pcall(EventSystem::getLuaState(), 0, LUA_MULTRET, error_index);
 	if (err !=0)
 	{	
 		
 #ifdef DEBUG_DATABASE
 		const char* instr = m_code_fragments[coderef].c_str();
-		DEBUG("instr %s",instr);
 #else
 		char* instr =0;
 #endif
 		EventSystem::reportErrors(EventSystem::getLuaState(), err,instr);
-		return false;
+		ret = false;
 	}
-	return true;
+	
+	lua_remove(EventSystem::getLuaState(), error_index);
+	return ret;
 }
 
 int EventSystem::createCodeReference(const char* code)
@@ -285,13 +309,37 @@ void EventSystem::reportErrors(lua_State *L, int status, const char* instr)
 
 std::string EventSystem::getReturnValue()
 {
-	if (lua_gettop(m_lua) >0)
+	if (lua_gettop(m_lua) >0 && lua_isstring(m_lua,-1))
 	{
 		std::string ret = lua_tostring(m_lua, -1);
 		lua_pop(m_lua, 1);
 		return ret;
 	}
 	return "";
+}
+
+int EventSystem::luaErrorHandler(lua_State *L)
+{
+	lua_getfield(L, LUA_GLOBALSINDEX, "debugSaveCopy");
+	if (!lua_istable(L, -1)) 
+	{
+		lua_pop(L, 1);
+		DEBUG("no stack info");
+		return 1;
+	}
+	
+	lua_getfield(L, -1, "traceback");
+	if (!lua_isfunction(L, -1)) 
+	{
+		lua_pop(L, 2);
+		DEBUG("no traceback function");
+		return 1;
+	}
+	
+	lua_pushvalue(L, 1);
+	lua_pushinteger(L, 2);
+	lua_call(L, 2, 1);
+	return 1;
 }
 
 void EventSystem::setItem(Item* item)
