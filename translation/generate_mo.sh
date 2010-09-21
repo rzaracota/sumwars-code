@@ -10,6 +10,11 @@ msgfmt -c -v -o it/LC_MESSAGES/sumwars-sumwars.mo it/sumwars-sumwars.po
 msgfmt -c -v -o it/LC_MESSAGES/sumwars-xml.mo it/sumwars-xml.po
 msgfmt -c -v -o it/LC_MESSAGES/sumwars-events.mo it/sumwars-events.po
 
+echo "Russian sumwars xml events"
+msgfmt -c -v -o ru/LC_MESSAGES/sumwars-sumwars.mo ru/sumwars-sumwars.po
+#msgfmt -c -v -o ru/LC_MESSAGES/sumwars-xml.mo ru/sumwars-xml.po
+#msgfmt -c -v -o ru/LC_MESSAGES/sumwars-events.mo ru/sumwars-events.po
+
 #echo "Polish sumwars xml events"
 #msgfmt -c -v -o pl/LC_MESSAGES/sumwars-sumwars.mo pl/sumwars-sumwars.po
 #msgfmt -c -v -o pl/LC_MESSAGES/sumwars-xml.mo pl/sumwars-xml.po
