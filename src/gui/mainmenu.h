@@ -55,6 +55,12 @@ class MainMenu : public Window
 		bool onShowCredits(const CEGUI::EventArgs& evt);
 		
 		/**
+		 * \fn bool onShowOptions(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Klick auf Optionen
+		 */
+		bool onShowOptions(const CEGUI::EventArgs& evt);
+		
+		/**
 		 * \fn bool onQuitGamePlayerHost(const CEGUI::EventArgs& evt)
 		 * \brief Behandelt Start eines Einzelspielerspieles
 		 */

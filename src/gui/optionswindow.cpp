@@ -21,6 +21,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	options->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.05f))); //0.0/0.8
 	options->setSize(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim( 0.8f))); //1.0/0.2
 	options->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&OptionsWindow::onAreaMouseButtonPressed, this));
+	options->setAlwaysOnTop(true);
 
 	// Rahmen fuer das Menue Savegame auswaehlen
 	CEGUI::TabControl* optionstab = (CEGUI::TabControl*) win_mgr.createWindow("TaharezLook/TabControl", "OptionsWindowTab");
