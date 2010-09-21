@@ -70,6 +70,23 @@
 	<Action name = "noaction">
 		<Animation name = "attack"/>
 	</Action>
+	<Action name="shake">
+		<Animation name="shake"/>
+	</Action>
+</RenderInfo>
+<RenderInfo name = "slave_scaffolding" parent="playerbase">
+	<Entity source="slave_m.mesh"/>
+	<Entity objectname="weapon" bone="itemRightHand" source="hammer_hmr.mesh" />
+	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
+	<Entity objectname="helm" bone="crown" source="capWhite.mesh" />
+	
+	<Action name = "noaction">
+		<Animation name = "attack"/>
+	</Action>
+	<Action name = "die">
+		<Animation name = "die_scaffolding"/>
+	</Action>
+	
 </RenderInfo>
 <RenderInfo name = "slave_miner" parent="playerbase">
 	<Entity source="slave_m.mesh"/>

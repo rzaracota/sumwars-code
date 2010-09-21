@@ -30,9 +30,7 @@
 				if (tutorial.finished == false) then
 					addArea("entryPlayerArea",{"circle","locEntryPlayer",5});
 					addArea("dangerArea",{"circle","locBackroute2",4});
-					addArea("locDoorArea",{"circle","locLibrarySecretDoor",3});
 					addArea("mutantSlugsArea",{"rect","locBackroute3",{5,5}});
-					
 					
 					local tolecpos = "locTolec";
 					local derredpos = "locDerred";
@@ -526,16 +524,22 @@
 		<Event trigger="behemoth_start" once="true">
 			<Effect>
 				setCutsceneMode(true);
+				
+				local scaff = getObjectByNameRef("workerScaffolding")
+				set(scaff,"layer","nocollision")
+				
 				moveObject(tutorial_tmp.tolec,"locWay2");
 				moveObject(tutorial_tmp.derred,"locWay2");
 				addUnitCommand(tutorial_tmp.tolec,"walk","locBehemothDoorEast",1);
 				addUnitCommand(tutorial_tmp.derred,"walk","locBehemothDoorEast",1);
 				
-				tutorial_tmp.worker = createObject("slave_worker","locWorker");
+				tutorial_tmp.worker = createObject("slave_scaffolding","locWorker");
 				setRefName(tutorial_tmp.worker, "Arbeiter");
 				set(tutorial_tmp.worker,"angle",90);
+				set(tutorial_tmp.worker,"height",3)
+				moveObject(tutorial_tmp.worker,"locWorker");
 				
-				tutorial_tmp.worker2 = createObject("slave_worker","locWorker2");
+				tutorial_tmp.worker2 = createObject("slave_worker","locWorker2Start");
 				setRefName(tutorial_tmp.worker2, "Arbeiter");
 				
 				tutorial_tmp.behemoth = createObject("tutorialBehemoth","locBehemothStart");
@@ -549,6 +553,10 @@
 		<Event trigger="behemoth_attack1" once="true">
 			<Effect>
 				addUnitCommand(tutorial_tmp.behemoth,"tutorial_behemoth_fire_storm",tutorial_tmp.worker);
+				quake("locBehemothStart","locQuake1",{90,20,30},6)
+				
+				lookAtObject(tutorial_tmp.worker2,tutorial_tmp.behemoth)
+				setObjectAnimation(tutorial_tmp.worker2,"shake",1000,true);
 			</Effect>
 		</Event>
 		
@@ -557,8 +565,9 @@
 				return (trigger.defender == tutorial_tmp.worker);
 			</Condition>
 			<Effect>
-				unitSpeak(tutorial_tmp.worker,_("*Argh!!!*"),"injured3");
 				set(tutorial_tmp.worker,"health",0);
+				
+				addUnitCommand(tutorial_tmp.worker2,"walk","locWorker2")
 				
 				startTimer("behemoth_attack2",1000);
 			</Effect>
@@ -568,8 +577,32 @@
 		<Event trigger="behemoth_attack2" once="true">
 			<Effect>
 				addUnitCommand(tutorial_tmp.behemoth,"tutorial_behemoth_fire_storm",tutorial_tmp.worker2);
+				quake("locBehemothStart","locQuake1",{90,20,30},6)
+				
+				--trap the worker in a fire cage
+				clearUnitCommands(tutorial_tmp.worker2)
+				setObjectAnimation(tutorial_tmp.worker2,"shake",1000,true);
+				
+				startTimer("fireCage",200)
+				unitSpeak(tutorial_tmp.worker2,_("Akeran!"),panic)
+				timedExecute('unitSpeak(tutorial_tmp.worker2,_("Help!"),panic)',500)
+				timedExecute('unitSpeak(tutorial_tmp.worker2,_("Someone!"),panic)',1500)
+				timedExecute('unitSpeak(tutorial_tmp.worker2,_("Save me!"),panic)',2800)
+				timedExecute('unitSpeak(tutorial_tmp.worker2,_("I will work twice as hard!"),panic)',3500)
+				timedExecute('unitSpeak(tutorial_tmp.worker2,_("Dont let me die!"),panic)',4500)
+				timedExecute('unitSpeak(tutorial_tmp.worker2,_("Please!"),panic)',7500)
+				timedExecute('unitSpeak(tutorial_tmp.worker2,_("Noo!"),panic)',8000)
+				lookAtObject(tutorial_tmp.worker2,tutorial_tmp.behemoth)
+				
 				startTimer("destroy_bprison",1500);
 				startTimer("behemoth_attack3",2000);
+			</Effect>
+		</Event>
+		
+		<Event trigger="fireCage" once="true">
+			<Effect>
+				local wpos = getPosition(tutorial_tmp.worker2)
+				tutorial_tmp.cage = createObject("fireCage",wpos)				
 			</Effect>
 		</Event>
 		
@@ -594,6 +627,7 @@
 			<Effect>
 				set(tutorial_tmp.worker2,"health",0);
 				startTimer("closeBehemothDoor1",2000);
+				deleteObject(tutorial_tmp.cage)
 			</Effect>	
 		</Event>
 		
@@ -992,6 +1026,7 @@
 				moveObject(tutorial_tmp.behemoth, "locBehemoth");
 				lookAtObject(tutorial_tmp.behemoth, tutorial_tmp.bguard1);
 				
+				quake("locBehemoth", "locQuake2",{90,20,20},10)
 				addUnitCommand(tutorial_tmp.behemoth,"tutorial_behemoth_fire_storm",tutorial_tmp.bguard1);
 				addUnitCommand(tutorial_tmp.behemoth,"tutorial_behemoth_fire_storm",tutorial_tmp.bguard1);
 			</Effect>

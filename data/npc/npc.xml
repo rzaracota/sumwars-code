@@ -100,6 +100,12 @@
 			mymods[2].allowed_mods = {"fire_dmg", "ice_dmg", "air_dmg"}
 			mymods[2].mod_answers = {_("Fire damage"), _("Ice damage"), _("Air damage")}
 			
+			mymods[3] = {}
+			mymods[3].answer_str = _("Gloves")
+			mymods[3].itempos = "glove"		-- position of the item
+			mymods[3].allowed_mods = {"dexterity", "armor", "block"}
+			mymods[3].mod_answers = {_("Dexterity"), _("Armor"), _("Block")}
+			
 			-- create item Selection
 			addQuestion(_("Which part of your equipment should be enchanted?"))
 			local nr, mod
