@@ -231,7 +231,7 @@
 				else
 					speak("Tolec",_("He awaits you now."));
 				end;
-				executeInDialog("insertTrigger('enter_soren_room')");
+				--executeInDialog("insertTrigger('enter_soren_room')");
 
 			</Effect>
 		</Event>
@@ -241,6 +241,7 @@
 				local door = getObjectByNameRef("doorSorenSouth");
 				addUnitCommand(fortify_dwall_tmp.tolec,"walk",get(door,"position"),1);
 				addCameraPosition(3000,"locWay4", -90,60, 20);
+				startTimer("enter_soren_room",3000);
 			</Effect>
 		</Event>
 		
