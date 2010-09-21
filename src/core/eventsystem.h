@@ -93,11 +93,6 @@ class EventSystem
 		static int createCodeReference(const char* code);
 		
 		/**
-		 * \brief Handler function for lua errors
-		 */
-		static int luaErrorHandler(lua_State *L);
-		
-		/**
 		 * \brief Pushes a new element to the gettext domain stack
 		 * \param domain new topmost element of the stack
 		 */

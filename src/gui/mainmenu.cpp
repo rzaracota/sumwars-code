@@ -12,8 +12,8 @@ MainMenu::MainMenu (Document* doc)
 	m_window = start_menu;
 	
 	
-	start_menu->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.25f))); //0.0/0.8
-	start_menu->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.5f))); //1.0/0.2
+	start_menu->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.20f))); //0.0/0.8
+	start_menu->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.6f))); //1.0/0.2
 	start_menu->setProperty("FrameEnabled","false");
 	start_menu->setProperty("TitlebarEnabled","false");
 	start_menu->setProperty("CloseButtonEnabled","false");
@@ -22,40 +22,49 @@ MainMenu::MainMenu (Document* doc)
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SinglePlayerButton"));
 	start_menu->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.05f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.12f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.10f)));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartSinglePlayer, this));
 	btn->setWantsMultiClickEvents(false);
 
 		// Button Server beitreten
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "ServerJoinButton"));
 	start_menu->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.22f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.12f)));
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.20f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.10f)));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartMultiPlayer, this));
 	btn->setWantsMultiClickEvents(false);
 
 	// Button Server aufsetzen
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "ServerHostButton"));
 	start_menu->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.39f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.12f)));
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.35f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.10f)));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartMultiPlayerHost, this));
 	btn->setWantsMultiClickEvents(false);
 
 	
-	// Button Server aufsetzen
+	// Button Credits
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "CreditsButton"));
 	start_menu->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.56f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.12f)));
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.50f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.10f)));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onShowCredits, this));
 	btn->setWantsMultiClickEvents(false);
 	
-	// Button Server aufsetzen
+	// Button Optionen
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "MainOptionsButton"));
+	start_menu->addChildWindow(btn);
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.65f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.10f)));
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onShowOptions, this));
+	btn->setWantsMultiClickEvents(false);
+	
+	
+	// Button beenden
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "EndGameButton"));
 	start_menu->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.83f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.12f)));
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.85f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.10f)));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onQuitGameHost, this));
 	btn->setWantsMultiClickEvents(false);
 	
@@ -85,6 +94,9 @@ void MainMenu::updateTranslation()
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CreditsButton"));
 	btn->setText((CEGUI::utf8*) gettext("Credits"));
 	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("MainOptionsButton"));
+	btn->setText((CEGUI::utf8*) gettext("Options"));
+	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("EndGameButton"));
 	btn->setText((CEGUI::utf8*) gettext("Quit"));
 
@@ -113,6 +125,13 @@ bool MainMenu::onShowCredits(const CEGUI::EventArgs& evt)
 	m_document->onButtonCredits();
 	return true;
 }
+
+bool MainMenu::onShowOptions(const CEGUI::EventArgs& evt)
+{
+	m_document->onButtonOptionsClicked();
+	return true;
+}
+
 
 bool MainMenu::onQuitGameHost(const CEGUI::EventArgs& evt)
 {

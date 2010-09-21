@@ -1284,7 +1284,7 @@
 	
 		<Topic name="secret_door"  start_option="Open secret door">
 			<Condition>
-				return (tutorial_tmp.mutslugs_dead==true);
+				return (tutorial_tmp.mutslugs_dead==true and tutorial_tmp.phase == "findSecretDoor");
 			</Condition>
 			<Effect>
 				addAllPlayersToDialog();

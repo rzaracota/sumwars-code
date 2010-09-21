@@ -280,7 +280,7 @@ void  Player::revive()
 	getNextCommand()->m_range =1;
 
 	getAction()->m_action_equip = Action::NO_WEAPON;
-	getAction()->m_time =0;
+	getAction()->m_time =2000;
 	getAction()->m_elapsed_time =0;
 
 	calcBaseAttrMod();
