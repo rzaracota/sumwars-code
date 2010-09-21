@@ -309,6 +309,11 @@ void  Scene::insertObject(GameObject* gobj, bool is_static)
 		
 		}
 		
+		if (gobj->getType() == "PLAYER")
+		{
+			obj->setExactAnimations(true);
+		}
+		
 		if (gobj->getBaseType() == GameObject::WORLDOBJECT)
 		{
 			if (gobj->getState() == WorldObject::STATE_ACTIVE)
@@ -393,7 +398,7 @@ void Scene::updateGraphicObject(GraphicObject* obj, GameObject* gobj,float time)
 }
 
 bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
-{
+{	
 	MovableObjectInfo minfo;
 	bool update = false;
 	
