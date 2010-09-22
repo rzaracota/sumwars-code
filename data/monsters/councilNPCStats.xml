@@ -167,6 +167,45 @@
 	
 	<AI ai_sight_range="8" />
 </Monster>
+<!-- slave worker, only suitable for standing on a scaffolding if he can die-->
+<Monster type="NPC" subtype="slave_scaffolding" name="Worker" fraction="human" race="human" layer="NORMAL">
+	<RenderInfo name = "slave_scaffolding" />
+	<EmotionSet name="human_standard" />
+	<BasicAttributes
+					experience="0"
+					level="1"
+					max_health="75"
+					armor="0"
+					block="0"
+					attack="0"
+					strength="25"
+					dexterity="10"
+					magic_power="0"
+					willpower="5"
+					resistances_physical="-20"
+					resistances_air="0"
+					resistances_ice="0"
+					resistances_fire="0"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="2000"
+					step_length="1.2"
+					attack_range="0.5"
+					>
+		
+		<Ability type="noaction"/>
+		<Ability type="walk"/>
+		<Ability type="die"/>
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="8" />
+</Monster>
 
 <!-- Sklavenminenarbeiter -->
 <Monster type="NPC" subtype="slave_miner" name="Worker" fraction="human" race="human" layer="NORMAL">
