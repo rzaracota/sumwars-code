@@ -1,16 +1,18 @@
-# Italian translations for sumwars package
+# Italian translations for sumwars package.
 # Copyright (C) 2009 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the sumwars package
+#
+# Francesco Miglietta (fra9000) <miglietta.francesco@gmail.com>, 2010
 # Axander <axander79@gmail.com>, 2010
-# 
-# 
+#
+
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
 "PO-Revision-Date: 2010-07-25 09:49ora so4l\n"
-"Last-Translator: Axander <axander79@gmail.com>\n"
+"Last-Translator: Francesco Miglietta (fra9000) <miglietta.francesco@gmail.com>\n"
 "Language-Team: Italian <http://gamesopensource.altervista.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -20,11 +22,11 @@ msgstr ""
 
 #: shortbow.xml
 msgid "practice bow"
-msgstr "Arco pratico"
+msgstr "Arco dell'addestramento"
 
 #: shortbow.xml
 msgid "yew shortbow"
-msgstr "Arco corto del tasso"
+msgstr "Arco corto in tasso"
 
 #: shortbow.xml
 msgid "shortbow"
@@ -36,11 +38,11 @@ msgstr "Arco da caccia"
 
 #: shortbow.xml
 msgid "rattan bow"
-msgstr "Arco rattan"
+msgstr "Arco in rattan"
 
 #: shortbow.xml
 msgid "bandit bow"
-msgstr "Arco da bandito"
+msgstr "Arco del brigante"
 
 #: shortbow.xml
 msgid "northeye"
@@ -48,7 +50,7 @@ msgstr "Occhio del nord"
 
 #: shortbow.xml
 msgid "battle shortbow"
-msgstr "Arco corto da Battaglia"
+msgstr "Arco corto da battaglia"
 
 #: shortbow.xml
 msgid "composite shortbow"
@@ -56,15 +58,15 @@ msgstr "Arco corto composito"
 
 #: shortbow.xml
 msgid "rider bow"
-msgstr "Arco dell'Est"
+msgstr "Arco del cavaliere"
 
 #: shortbow.xml
 msgid "coal bow"
-msgstr "Arco di carbonio"
+msgstr "Arco della brace"
 
 #: shortbow.xml
 msgid "ash bow"
-msgstr "Arco di cenere"
+msgstr "Arco delle ceneri"
 
 #: shortbow.xml
 msgid "bane bow"
@@ -72,11 +74,11 @@ msgstr "Arco della rovina"
 
 #: shortbow.xml
 msgid "oak shortbow"
-msgstr "Arco corto di quercia"
+msgstr "Arco corto in quercia"
 
 #: shortbow.xml
 msgid "soul bow"
-msgstr "Arco dell'anima"
+msgstr "Arco delle anime"
 
 #: shortbow.xml
 msgid "seeker"
@@ -84,19 +86,19 @@ msgstr "Cercatore"
 
 #: shortbow.xml
 msgid "chaos shortbow"
-msgstr "Arco corto del Chaos"
+msgstr "Arco corto del caos"
 
 #: shortbow.xml
 msgid "fairy bow"
-msgstr "Arco Fatato"
+msgstr "Arco fatato"
 
 #: polearms.xml
 msgid "pike"
-msgstr "Vanga"
+msgstr "Picca"
 
 #: potion.xml
 msgid "scroll of town portal"
-msgstr "Portale magico della città"
+msgstr "Pergamena del Portale Magico"
 
 #: potion.xml
 msgid "small potion"
@@ -124,7 +126,7 @@ msgstr "Pozione della determinazione"
 
 #: potion.xml
 msgid "echo potion"
-msgstr "Pozione del silenzio"
+msgstr "Pozione dell'eco"
 
 #: potion.xml
 msgid "muscle salve"
@@ -136,7 +138,7 @@ msgstr "Pozione della fusione"
 
 #: potion.xml
 msgid "spike oil"
-msgstr "Olio di lavanda"
+msgstr "Olio essenziale di lavanda"
 
 #: axes2h.xml
 msgid "lumberjack axe"
@@ -144,15 +146,15 @@ msgstr "Ascia del taglialegna"
 
 #: axes2h.xml
 msgid "great axe"
-msgstr "Grande Acia"
+msgstr "Ascia grande"
 
 #: axes2h.xml
 msgid "ripping axe"
-msgstr "Ascia resistente"
+msgstr "Ascia affilata"
 
 #: axes2h.xml
 msgid "executioner axe"
-msgstr "Ascia dell'esecutore"
+msgstr "Ascia del boia"
 
 #: axes2h.xml
 msgid "smashing axe"
@@ -172,31 +174,31 @@ msgstr "Ascia barbarica"
 
 #: axes2h.xml
 msgid "bonebreaker axe"
-msgstr "Ascia rompiossa"
+msgstr "Ascia spaccaossa"
 
 #: axes2h.xml
 msgid "giant axe"
-msgstr "Ascia Gigante"
+msgstr "Ascia gigante"
 
 #: axes2h.xml
 msgid "slaughter axe"
-msgstr "Ascia dell'eccidio"
+msgstr "Ascia delle stragi"
 
 #: axes2h.xml
 msgid "ogretearer"
-msgstr "Lacrime di orco"
+msgstr "Flagello degli orchi"
 
 #: axes2h.xml
 msgid "dwarfensteel axe"
-msgstr "Ascia dei nani"
+msgstr "Ascia in acciaio nanico"
 
 #: axes2h.xml
 msgid "star axe"
-msgstr "Ascia stellare"
+msgstr "Ascia delle stelle"
 
 #: axes2h.xml
 msgid "kings axe"
-msgstr "Ascia regale"
+msgstr "Ascia dei re"
 
 #: axes2h.xml
 msgid "torture axe"
@@ -204,7 +206,7 @@ msgstr "Ascia della tortura"
 
 #: axes2h.xml
 msgid "iceland axe"
-msgstr "Ascia di ghiaccio"
+msgstr "Ascia dei ghiacci"
 
 #: axes2h.xml
 msgid "death axe"
@@ -220,11 +222,11 @@ msgstr "Martello di bronzo"
 
 #: hammer2h.xml
 msgid "longshaft"
-msgstr "Ramo lungo"
+msgstr "Bastone lungo"
 
 #: hammer2h.xml
 msgid "guard hammer"
-msgstr "Martello della Guardia"
+msgstr "Martello della guardia"
 
 #: hammer2h.xml
 msgid "silverterror"
@@ -232,19 +234,19 @@ msgstr "Terrore d'argento"
 
 #: hammer2h.xml
 msgid "glow hammer"
-msgstr "Martello di vetro"
+msgstr "Martello splendente"
 
 #: hammer2h.xml
 msgid "bonebreaker"
-msgstr "Frantuma ossa"
+msgstr "Frantumaossa"
 
 #: hammer2h.xml
 msgid "smashhead"
-msgstr "Spaccatesta"
+msgstr "Spaccateste"
 
 #: hammer2h.xml
 msgid "aisener warhammer"
-msgstr "Martello da guerra Aisener"
+msgstr "Martello da guerra di Aisen"
 
 #: hammer2h.xml
 msgid "judgement hammer"
@@ -252,7 +254,7 @@ msgstr "Martello del giudizio"
 
 #: hammer2h.xml
 msgid "priest hammer"
-msgstr "Martello del prete"
+msgstr "Martello del sacerdote"
 
 #: hammer2h.xml
 msgid "obsidian hammer"
@@ -260,19 +262,19 @@ msgstr "Martello di ossidiana"
 
 #: hammer2h.xml
 msgid "judge hammer"
-msgstr "Martello della giustizia"
+msgstr "Martello del giudice"
 
 #: hammer2h.xml
 msgid "cyclops hammer"
-msgstr "Martello del ciclope"
+msgstr "Martello dei ciclopi"
 
 #: hammer2h.xml
 msgid "dwarfensteel hammer"
-msgstr "Martello dei nani"
+msgstr "Martello in acciaio nanico"
 
 #: hammer2h.xml
 msgid "elementhunter"
-msgstr "Fukmine elementare"
+msgstr "Cacciatore di elementali"
 
 #: hammer2h.xml
 msgid "exorcists hammer"
@@ -280,31 +282,31 @@ msgstr "Martello dell'esorcista"
 
 #: hammer2h.xml
 msgid "worldshaker"
-msgstr "Mondo Ombra"
+msgstr "Terratremor"
 
 #: helmet.xml
 msgid "cap"
-msgstr "Copricapo"
+msgstr "Cappuccio"
 
 #: helmet.xml
 msgid "leather cap"
-msgstr "Copricapo di pelle"
+msgstr "Cappuccio di cuoio"
 
 #: helmet.xml
 msgid "leather helmet"
-msgstr "Elmo di pelle"
+msgstr "Elmo di cuoio"
 
 #: helmet.xml
 msgid "mercenary head"
-msgstr "Copricapo dei mercenari"
+msgstr "Copricapo del mercenario"
 
 #: helmet.xml
 msgid "novice headgear"
-msgstr "copricapo del novizio"
+msgstr "Copricapo del novizio"
 
 #: helmet.xml
 msgid "mercenary helmet"
-msgstr "Elmo dei mercenari"
+msgstr "Elmo del mercenario"
 
 #: helmet.xml
 msgid "ranger bandana"
@@ -312,11 +314,11 @@ msgstr "Bandana del ranger"
 
 #: helmet.xml
 msgid "assassin hood"
-msgstr "Cappuccio da assassino"
+msgstr "Cappuccio dell'assassino"
 
 #: helmet.xml
 msgid "biretta"
-msgstr "berretto da prete"
+msgstr "Cappa sacerdotale"
 
 #: helmet.xml
 msgid "chain turban"
@@ -332,11 +334,11 @@ msgstr "Martello cerimoniale"
 
 #: hammer1h.xml
 msgid "iron hammer"
-msgstr "Martello d'argento"
+msgstr "Martello di ferro"
 
 #: hammer1h.xml
 msgid "iron club"
-msgstr "Bastone d'argento"
+msgstr "Mazza di ferro"
 
 #: hammer1h.xml
 msgid "maul"
@@ -344,7 +346,7 @@ msgstr "Maglio"
 
 #: hammer1h.xml
 msgid "morning star"
-msgstr "Stella nascente"
+msgstr "Morning star"
 
 #: hammer1h.xml
 msgid "crowhead"
@@ -352,7 +354,7 @@ msgstr "Elmo del corvo"
 
 #: hammer1h.xml
 msgid "rider hammer"
-msgstr "Martello del nord"
+msgstr "Martello del cavaliere"
 
 #: hammer1h.xml
 msgid "mace"
@@ -360,7 +362,7 @@ msgstr "Mazza"
 
 #: hammer1h.xml
 msgid "steel hammer"
-msgstr "Martello di ferro"
+msgstr "Martello di acciaio"
 
 #: hammer1h.xml
 msgid "battle hammer"
@@ -368,15 +370,15 @@ msgstr "Martello da battaglia"
 
 #: hammer1h.xml
 msgid "steel mace"
-msgstr "Mazza di ferro"
+msgstr "Mazza di acciaio"
 
 #: hammer1h.xml
 msgid "steel maul"
-msgstr "maglio di ferro"
+msgstr "Maglio di acciaio"
 
 #: hammer1h.xml
 msgid "sixedged mace"
-msgstr "Mazza lamellare"
+msgstr "Mazza d'arme"
 
 #: hammer1h.xml
 msgid "silver hammer"
@@ -388,19 +390,19 @@ msgstr "Martello di diamanti"
 
 #: hammer1h.xml
 msgid "priest mace"
-msgstr "Mazza del prete"
+msgstr "Mazza del chierico"
 
 #: hammer1h.xml
 msgid "holy hammer"
-msgstr "Martello santo"
+msgstr "Martello sacro"
 
 #: shields.xml
 msgid "targe"
-msgstr "Targa"
+msgstr "Scudo targa"
 
 #: shields.xml
 msgid "buckler"
-msgstr "Scudo"
+msgstr "Scudo buckler"
 
 #: shields.xml
 msgid "wood shield"
@@ -420,7 +422,7 @@ msgstr "Scudo di acciaio"
 
 #: wands.xml
 msgid "spruce wand"
-msgstr "Bacchetta di legno"
+msgstr "Bacchetta in abete"
 
 #: wands.xml
 msgid "apprentice wand"
@@ -436,11 +438,11 @@ msgstr "Bacchetta dell'eremita"
 
 #: wands.xml
 msgid "rock wand"
-msgstr "Bacchetta di roccia"
+msgstr "Bacchetta di pietra"
 
 #: wands.xml
 msgid "alder wand"
-msgstr "Bacchetta d'Ontano"
+msgstr "Bacchetta in ontano"
 
 #: wands.xml
 msgid "bard's wand"
@@ -448,7 +450,7 @@ msgstr "Bacchetta del bardo"
 
 #: wands.xml
 msgid "magus wand"
-msgstr "Bacchetta da Mado"
+msgstr "Bacchetta del mago"
 
 #: wands.xml
 msgid "silver wand"
@@ -456,7 +458,7 @@ msgstr "Bacchetta d'argento"
 
 #: wands.xml
 msgid "oak wand"
-msgstr "Bacchetta di quercia"
+msgstr "Bacchetta in quercia"
 
 #: wands.xml
 msgid "phenix wand"
@@ -468,11 +470,11 @@ msgstr "Bacchetta dei ghiacci"
 
 #: wands.xml
 msgid "thunder wand"
-msgstr "Bacchetta dei fulmini"
+msgstr "Bacchetta del tuono"
 
 #: wands.xml
 msgid "ash wand"
-msgstr "Bacchetta di cenere"
+msgstr "Bacchetta delle ceneri"
 
 #: wands.xml
 msgid "summoner wand"
@@ -484,11 +486,11 @@ msgstr "Bacchetta del maestro"
 
 #: wands.xml
 msgid "necromancer wand"
-msgstr "Bacchetta del negromante"
+msgstr "Bacchetta del necromante"
 
 #: wands.xml
 msgid "demon wand"
-msgstr "Bacchetta demoniaca"
+msgstr "Bacchetta dei demoni"
 
 #: wands.xml
 msgid "fairy wand"
@@ -500,7 +502,7 @@ msgstr "Bacchetta dell'arcimago"
 
 #: axes1h.xml
 msgid "hatchet"
-msgstr "accetta"
+msgstr "Accetta"
 
 #: axes1h.xml
 msgid "bronze axe"
@@ -524,7 +526,7 @@ msgstr "Ascia del mercenario"
 
 #: axes1h.xml
 msgid "steel axe"
-msgstr "Ascia d'acciao"
+msgstr "Ascia di acciao"
 
 #: axes1h.xml
 msgid "battle axe"
@@ -532,7 +534,7 @@ msgstr "Ascia da battaglia"
 
 #: axes1h.xml
 msgid "guard axe"
-msgstr "Ascia da battaglia"
+msgstr "Ascia della guardia"
 
 #: axes1h.xml
 msgid "minotaur axe"
@@ -540,11 +542,11 @@ msgstr "Ascia del minotauro"
 
 #: axes1h.xml
 msgid "thunder axe"
-msgstr "Ascia dei Fulmini"
+msgstr "Ascia del tuono"
 
 #: axes1h.xml
 msgid "demon axe"
-msgstr "Ascia demoniaca"
+msgstr "Ascia del demone"
 
 #: axes1h.xml
 msgid "obsidian axe"
@@ -556,7 +558,7 @@ msgstr "Ascia del vulcano"
 
 #: axes1h.xml
 msgid "berserker axe"
-msgstr "Ascia del massacro"
+msgstr "Ascia della furia"
 
 #: axes1h.xml
 msgid "diamont axe"
@@ -564,7 +566,7 @@ msgstr "Ascia di diamanti"
 
 #: axes1h.xml
 msgid "dwarfen axe"
-msgstr "Ascia dei nani"
+msgstr "Ascia nanica"
 
 #: axes1h.xml
 msgid "hell axe"
@@ -588,7 +590,7 @@ msgstr "Sciabola"
 
 #: swords1h.xml
 msgid "legion blade"
-msgstr "Lama della legione"
+msgstr "Daga"
 
 #: swords1h.xml
 msgid "long sword"
@@ -612,15 +614,15 @@ msgstr "Spada barbarica"
 
 #: swords1h.xml
 msgid "northlings blade"
-msgstr "ama delle terre del nord"
+msgstr "Lama delle terre del nord"
 
 #: swords1h.xml
 msgid "steel sword"
-msgstr "Spada d'acciao"
+msgstr "Spada di acciao"
 
 #: swords1h.xml
 msgid "assassins blade"
-msgstr "Lama da assassino"
+msgstr "Lama dell'assassinio"
 
 #: swords1h.xml
 msgid "diamont sword"
@@ -628,7 +630,7 @@ msgstr "Spada di diamanti"
 
 #: swords1h.xml
 msgid "dwarfsteel sword"
-msgstr "Spada d'acciao dei nani"
+msgstr "Spada in acciaio nanico"
 
 #: swords1h.xml
 msgid "demon blade"
@@ -636,7 +638,7 @@ msgstr "Lama demoniaca"
 
 #: swords1h.xml
 msgid "hero blade"
-msgstr "Lama dell'eroe"
+msgstr "Lama degli eroi"
 
 #: swords1h.xml
 msgid "angel blade"
@@ -648,99 +650,99 @@ msgstr "Lama degli dei"
 
 #: staff.xml
 msgid "spruce staff"
-msgstr "Staffa di abete"
+msgstr "Bastone in abete"
 
 #: staff.xml
 msgid "apprentice staff"
-msgstr "Staffa  dell'apprendista"
+msgstr "Bastone dell'apprendista"
 
 #: staff.xml
 msgid "novice staff"
-msgstr "Staffa del novizio"
+msgstr "Bastone del novizio"
 
 #: staff.xml
 msgid "hermit staff"
-msgstr "Staffa dell'eremita"
+msgstr "Bastone dell'eremita"
 
 #: staff.xml
 msgid "rock staff"
-msgstr "Staffa di roccia"
+msgstr "Bastone di pietra"
 
 #: staff.xml
 msgid "alder staff"
-msgstr "Staffa dell'aiutante"
+msgstr "Bastone in ontano"
 
 #: staff.xml
 msgid "bard's staff"
-msgstr "Staffa del bardo"
+msgstr "Bastone del bardo"
 
 #: staff.xml
 msgid "magus staff"
-msgstr "Staffa del mago"
+msgstr "Bastone del mago"
 
 #: staff.xml
 msgid "silver staff"
-msgstr "Staffa d'argento"
+msgstr "Bastone d'argento"
 
 #: staff.xml
 msgid "inferno staff"
-msgstr "Staffa dell'inferno"
+msgstr "Bastone degli inferi"
 
 #: staff.xml
 msgid "oak staff"
-msgstr "Staffa di quercia"
+msgstr "Bastone in quercia"
 
 #: staff.xml
 msgid "phenix staff"
-msgstr "Staffa della fenice"
+msgstr "Bastone della fenice"
 
 #: staff.xml
 msgid "frost staff"
-msgstr "Staffa dei ghiacci"
+msgstr "Bastone dei ghiacci"
 
 #: staff.xml
 msgid "thunder staff"
-msgstr "Staffa dei fulmini"
+msgstr "Bastone del tuono"
 
 #: staff.xml
 msgid "ash staff"
-msgstr "Staffa di cenere"
+msgstr "Bastone delle ceneri"
 
 #: staff.xml
 msgid "summoner staff"
-msgstr "Staffa dell'evocatore"
+msgstr "Bastone dell'evocatore"
 
 #: staff.xml
 msgid "master staff"
-msgstr "Staffa del maestro"
+msgstr "Bastone del maestro"
 
 #: staff.xml
 msgid "necromancer staff"
-msgstr "Staffa del negromante"
+msgstr "Bastone del necromante"
 
 #: staff.xml
 msgid "demon staff"
-msgstr "Staffa del demonio"
+msgstr "Bastone del demonio"
 
 #: staff.xml
 msgid "fairy staff"
-msgstr "Staffa fatata"
+msgstr "Bastone fatato"
 
 #: staff.xml
 msgid "ifreet staff"
-msgstr "Staffa di Ifrit"
+msgstr "Bastone dell'Ifrit"
 
 #: staff.xml
 msgid "icewitch staff"
-msgstr "Staffa di ghiaccio stregata"
+msgstr "Bastone della strega dei ghiacci"
 
 #: staff.xml
 msgid "sylph staff"
-msgstr "Staffa di silfo"
+msgstr "Bastone delle Silfidi"
 
 #: staff.xml
 msgid "archmage staff"
-msgstr "Staffa dell'arcimago"
+msgstr "Bastone dell'arcimago"
 
 #: ring.xml
 msgid "bronze ring"
@@ -764,15 +766,15 @@ msgstr "Anello d'oro"
 
 #: swords2h.xml
 msgid "farmer sword"
-msgstr "Spada da agricoltore"
+msgstr "Spada del contadino"
 
 #: swords2h.xml
 msgid "mercenary blade"
-msgstr "Lama da mercenario"
+msgstr "Lama del mercenario"
 
 #: swords2h.xml
 msgid "two handed steel sword"
-msgstr "Spada d'accio a due mani"
+msgstr "Spada a due mani in acciaio"
 
 #: swords2h.xml
 msgid "smash sword"
@@ -780,11 +782,11 @@ msgstr "Spada della distruzione"
 
 #: swords2h.xml
 msgid "horse killer"
-msgstr "Ammazza cavalli"
+msgstr "Ammazza-cavalli"
 
 #: swords2h.xml
 msgid "bastard sword"
-msgstr "Spada Bastarda"
+msgstr "Spada bastarda"
 
 #: swords2h.xml
 msgid "ogre dagger"
@@ -792,7 +794,7 @@ msgstr "Pugnale da orco"
 
 #: swords2h.xml
 msgid "goblinkiller"
-msgstr "Ammazza Goblin"
+msgstr "Ammazza-goblin"
 
 #: swords2h.xml
 msgid "executioner's sword"
@@ -800,7 +802,7 @@ msgstr "Spada dell'esecutore"
 
 #: swords2h.xml
 msgid "two handed guardsman sword"
-msgstr "Spada a due mani della guradia"
+msgstr "Spada a due mani della guardia"
 
 #: swords2h.xml
 msgid "flamberg"
@@ -808,7 +810,7 @@ msgstr "Flamberga"
 
 #: swords2h.xml
 msgid "aisener battle sword"
-msgstr "Spada dell'aiutante di battaglia"
+msgstr "Spada di battaglia di Aisen"
 
 #: swords2h.xml
 msgid "monster sword"
@@ -816,7 +818,7 @@ msgstr "Spada mostruosa"
 
 #: swords2h.xml
 msgid "tear sword"
-msgstr "Spada della lacrima"
+msgstr "Spada delle lacrime"
 
 #: swords2h.xml
 msgid "deathwind"
@@ -828,11 +830,11 @@ msgstr "Spada del terrore"
 
 #: swords2h.xml
 msgid "great sword"
-msgstr "Spada Grande"
+msgstr "Spada grande"
 
 #: swords2h.xml
 msgid "angel sword"
-msgstr "Spada Angelica"
+msgstr "Spada dell'angelo"
 
 #: undeadEqu.xml
 msgid "broken shield"
@@ -844,7 +846,7 @@ msgstr "Spada vecchia"
 
 #: longbow.xml
 msgid "tourney bow"
-msgstr "Arco del torneo"
+msgstr "Arco da torneo"
 
 #: longbow.xml
 msgid "orc bow"
@@ -852,11 +854,11 @@ msgstr "Arco dell'orco"
 
 #: longbow.xml
 msgid "yew bow"
-msgstr "Arco del tasso"
+msgstr "Arco in tasso"
 
 #: longbow.xml
 msgid "longbow"
-msgstr "arco lungo"
+msgstr "Arco lungo"
 
 #: longbow.xml
 msgid "soldier bow"
@@ -864,11 +866,11 @@ msgstr "Arco del soldato"
 
 #: longbow.xml
 msgid "horn bow"
-msgstr "Arco del corno"
+msgstr "Arco in avorio"
 
 #: longbow.xml
 msgid "maple bow"
-msgstr "Arco di acero"
+msgstr "Arco in acero"
 
 #: longbow.xml
 msgid "battle bow"
@@ -884,11 +886,11 @@ msgstr "Tempesta tuonante"
 
 #: longbow.xml
 msgid "oak bow"
-msgstr "Arco di quercia"
+msgstr "Arco in quercia"
 
 #: longbow.xml
 msgid "demonhorn bow"
-msgstr "Arco demoniaco"
+msgstr "Arco demoniaco in corno"
 
 #: longbow.xml
 msgid "ranger bow"
@@ -896,7 +898,7 @@ msgstr "Arco del ranger"
 
 #: longbow.xml
 msgid "ash longbow"
-msgstr "Arco di cenere"
+msgstr "Arco delle ceneri"
 
 #: longbow.xml
 msgid "demon compositebow"
@@ -904,7 +906,7 @@ msgstr "Arco demoniaco composito"
 
 #: longbow.xml
 msgid "hero bow"
-msgstr "Arco dell'eroe"
+msgstr "Arco degli eroi"
 
 #: longbow.xml
 msgid "elf bow"
@@ -912,7 +914,7 @@ msgstr "Arco elfico"
 
 #: hat.xml
 msgid "vagabond hat"
-msgstr "Berretto da vagabondo"
+msgstr "Cappello del fuorilegge"
 
 #: hat.xml
 msgid "apprentice cap"
@@ -920,7 +922,7 @@ msgstr "Cappuccio dell'apprendista"
 
 #: hat.xml
 msgid "novice hat"
-msgstr "Berretto del novizio"
+msgstr "Cappello del novizio"
 
 #: hat.xml
 msgid "alchemist cap"
@@ -928,7 +930,7 @@ msgstr "Cappuccio dell'alchimista"
 
 #: hat.xml
 msgid "beret"
-msgstr "Berretto da prete"
+msgstr "Cappello"
 
 #: hat.xml
 msgid "magus hat"
@@ -940,17 +942,18 @@ msgstr "Turbante"
 
 #: armor.xml
 msgid "cloth armor"
-msgstr "Armatura di tela"
+msgstr "Armatura di stoffa"
 
 #: armor.xml
 msgid "leather armor"
-msgstr "Armatura di pelle"
+msgstr "Armatura di cuoio"
 
 #: armor.xml
 msgid "rivet armor"
-msgstr "Armatura rivettata"
+msgstr "Armatura di cuoio borchiato"
 
 #: armor.xml
+
 msgid "bandit armor"
 msgstr "Armatura del bandito"
 
@@ -960,11 +963,11 @@ msgstr "Armatura del novizio"
 
 #: armor.xml
 msgid "mercenary armor"
-msgstr "Armatura da mercenario"
+msgstr "Armatura del mercenario"
 
 #: armor.xml
 msgid "ranger shirt"
-msgstr "Maglietta da ranger"
+msgstr "Casacca da esploratore"
 
 #: armor.xml
 msgid "assassin armor"
@@ -972,7 +975,7 @@ msgstr "Armatura dell'assassino"
 
 #: armor.xml
 msgid "temple armor"
-msgstr "Armatura da templare"
+msgstr "Armatura del tempio"
 
 #: armor.xml
 msgid "council armor"
@@ -980,39 +983,39 @@ msgstr "Armatura del consiglio"
 
 #: robes.xml
 msgid "ragged robe"
-msgstr "Abito cencioso"
+msgstr "Tunica logora"
 
 #: robes.xml
 msgid "apprentice robe"
-msgstr "Abito dell'apprendista"
+msgstr "Tunica dell'apprendista"
 
 #: robes.xml
 msgid "novice robe"
-msgstr "Abito del novizio"
+msgstr "Tunica del novizio"
 
 #: robes.xml
 msgid "alchemist robe"
-msgstr "Abito dell'alchimista"
+msgstr "Tunica dell'alchimista"
 
 #: robes.xml
 msgid "scholar robe"
-msgstr "Abito da scolaro"
+msgstr "Tunica dell'allievo"
 
 #: robes.xml
 msgid "magus robe"
-msgstr "Abito dei maghi"
+msgstr "Tunica del mago"
 
 #: robes.xml
 msgid "council robe"
-msgstr "Abito del consiglio"
+msgstr "Tunica del consiglio"
 
 #: glove.xml
 msgid "leather gloves"
-msgstr "Guanti di pelle"
+msgstr "Guanti di cuoio"
 
 #: glove.xml
 msgid "snakehide gloves"
-msgstr "Guanti di pelle di serpente"
+msgstr "Guanti in pelle di serpente"
 
 #: glove.xml
 msgid "chain gloves"
@@ -1020,19 +1023,19 @@ msgstr "Guanti di maglia"
 
 #: glove.xml
 msgid "buckskin gloves"
-msgstr "Guanti di pelle di daino"
+msgstr "Guanti in pelle di daino"
 
 #: glove.xml
 msgid "spidersilk gloves"
-msgstr "Guanti di tela di ragno"
+msgstr "Guanti in tela di ragno"
 
 #: glove.xml
 msgid "marksman gloves"
-msgstr "Guanti da tiratore scelto"
+msgstr "Guanti del tiratore scelto"
 
 #: glove.xml
 msgid "assassin gloves"
-msgstr "Guanti da assassino"
+msgstr "Guanti dell'assassino"
 
 #: glove.xml
 msgid "shark gloves"
@@ -1052,7 +1055,7 @@ msgstr "Maschera dello sciamano"
 
 #: goblinEqu.xml
 msgid "goblin club"
-msgstr "Bastone goblin"
+msgstr "Mazza goblin"
 
 #: goblinEqu.xml
 msgid "rusty dagger"
@@ -1060,11 +1063,11 @@ msgstr "Pugnale arrugginito"
 
 #: goblinEqu.xml
 msgid "shaman staff"
-msgstr "Staffa da sciamano"
+msgstr "Staffa dello sciamano"
 
 #: goblinEqu.xml
 msgid "nail club"
-msgstr "Bastone chiodato"
+msgstr "Mazza chiodata"
 
 #: goblinEqu.xml
 msgid "goblin bow"
@@ -1076,11 +1079,11 @@ msgstr "Lancia goblin"
 
 #: amulet.xml
 msgid "feather amulet"
-msgstr "Amuleto piumato"
+msgstr "Amuleto della piuma"
 
 #: amulet.xml
 msgid "amber amulet"
-msgstr "Amuleto di ambra"
+msgstr "Amuleto d'ambra"
 
 #: amulet.xml
 msgid "silver amulet"
@@ -1096,43 +1099,43 @@ msgstr "Amuleto d'oro"
 
 #: theTrader.xml
 msgid "The Trader"
-msgstr "Commerciante"
+msgstr "Il Mercante"
 
 #: theTrader.xml
 msgid "elCnlLobby"
-msgstr "Consiglieri"
+msgstr "Consiglio degli Elementalisti, Dungeon sotterraneo"
 
 #: theTrader.xml
 msgid "medMercCamp"
-msgstr "Mercenari del campo Medair"
+msgstr "Campo dei Mercenari di Medair"
 
 #: theTrader.xml
 msgid "joringsbridge"
-msgstr " Ponte di Jorings"
+msgstr "Joringsbridge"
 
 #: theTrader.xml
 msgid "What are you doing here?"
-msgstr "Cosa fai qui?"
+msgstr "Cosa ti porta da queste parti?"
 
 #: theTrader.xml
 msgid "greyCurseCaveFis"
-msgstr "Caverna grigia maledetta"
+msgstr "La grotta sotterranea - Il crepaccio"
 
 #: theTrader.xml
 msgid "dwarfenwall"
-msgstr "Mura dei nani"
+msgstr "Dwarfenwall"
 
 #: theTrader.xml
 msgid "I see you have reached dwarfenwall safely."
-msgstr "Ho visto che hai trovato le mura dei nani tranquillamente."
+msgstr "Vedo che hai raggiunto Dwarfenwall sano e salvo."
 
 #: goblins.xml
 msgid "The goblinslayer"
-msgstr "Schiavo Goblin"
+msgstr "Il cacciatore di goblin"
 
 #: goblins.xml
 msgid "peasant"
-msgstr "Contadina"
+msgstr "Contadino"
 
 #: goblins.xml
 msgid "Goblins"
@@ -1140,7 +1143,7 @@ msgstr "Goblins"
 
 #: goblins.xml
 msgid "Goblins (reward)"
-msgstr "Goblins (premio)"
+msgstr "Goblins (ricompensa)"
 
 #: goblins.xml
 msgid "region1"
@@ -1148,7 +1151,7 @@ msgstr "Regione 1"
 
 #: tutorial.xml
 msgid "Tutorial"
-msgstr "Guida"
+msgstr "Tutorial"
 
 #: tutorial.xml
 msgid "Derred"
@@ -1156,7 +1159,7 @@ msgstr "Derred"
 
 #: tutorial.xml
 msgid "Surrender weapons"
-msgstr "Consegna le armi"
+msgstr "Consegna delle armi"
 
 #: tutorial.xml
 msgid "Tolec"
@@ -1164,23 +1167,23 @@ msgstr "Tolec"
 
 #: tutorial.xml
 msgid "Explain inventory"
-msgstr "Spiegazione Inventario"
+msgstr "Tutorial inventario"
 
 #: tutorial.xml
 msgid "Attack slugs"
-msgstr "Uccidi le Lumache"
+msgstr "Attacca le lumache"
 
 #: tutorial.xml
 msgid "Explain level up"
-msgstr "Spiegazione Level Up"
+msgstr "Tutorial passaggio di livello"
 
 #: tutorial.xml
 msgid "Open hatch"
-msgstr "Apri Boccaporto"
+msgstr "Apri il passaggio"
 
 #: tutorial.xml
 msgid "Explain skills"
-msgstr "Spiegazione Skill"
+msgstr "Tutorial abilita'"
 
 #: tutorial.xml
 msgid "Open secret door"
@@ -1188,43 +1191,43 @@ msgstr "Apri la porta segreta"
 
 #: scene7.xml
 msgid "The Poolmonster"
-msgstr "I mostri dello stagno"
+msgstr "I Mostri dello stagno"
 
 #: scene7.xml
 msgid "Soren Windclaw"
-msgstr "Soren Windklaue"
+msgstr "Soren Windclaw"
 
 #: scene7.xml
 msgid "greyCurseLake"
-msgstr "Lago grigio maledetto"
+msgstr "La grotta sotterranea - Il lago nascosto"
 
 #: theFissure.xml
 msgid "The ambush of the undead"
-msgstr "L'imboscata dei non morti"
+msgstr "L'imboscata dei non-morti"
 
 #: theFissure.xml
 msgid "aisMounPath"
-msgstr "Percorso di montagna"
+msgstr "Sentiero di montagna"
 
 #: theFissure.xml
 msgid "greyCurseCaveDep"
-msgstr "Percorso della caverna grigia maledetta"
+msgstr "La grotta sotterranea - Profondita'"
 
 #: siegeOfDwarfenwall.xml
 msgid "Defend Dwarfenwall"
-msgstr "Difendi il muro dei nani"
+msgstr "Difendi Dwarfenwall"
 
 #: siegeOfDwarfenwall.xml
 msgid "dwarfenwallCommand"
-msgstr "Comandante  del murodei nani"
+msgstr "Al Centro di Comando di Dwarfenwall"
 
 #: siegeOfDwarfenwall.xml
 msgid "dwarfenwallRampart"
-msgstr "Bastione del muro"
+msgstr "Il Bastione di Dwarfenwall"
 
 #: siegeOfDwarfenwall.xml
 msgid "necFieldcamp"
-msgstr "Campo Nec"
+msgstr "Il Campo base dei non-morti"
 
 #: theAmbush.xml
 msgid "The Ambush"
@@ -1232,7 +1235,7 @@ msgstr "L'agguato"
 
 #: theAmbush.xml
 msgid "aisWolfstones"
-msgstr "Pietra del lupo"
+msgstr "Le pietre dei lupi"
 
 #: besieged_farm.xml
 msgid "The besieged farm"
@@ -1252,31 +1255,31 @@ msgstr "Nord Meadow"
 
 #: besieged_farm.xml
 msgid "Brons Farm"
-msgstr "Fattoria Brons"
+msgstr "Fattoria Bron"
 
 #: maylons_grave.xml
 msgid "Maylons Grave"
-msgstr "Grotta di Maylons"
+msgstr "La Tomba di Maylons"
 
 #: maylons_grave.xml
 msgid "aisMaylonsGraveEntry"
-msgstr "Ingresso della grotta di Maylons"
+msgstr "La Tomba di Maylons - L'ingresso"
 
 #: maylons_grave.xml
 msgid "Gab Resh"
-msgstr "Gab Resh"
+msgstr "La Tomba di Maylons - Gab Resh"
 
 #: maylons_grave.xml
 msgid "aisMaylonsGraveL1"
-msgstr "Grotta di Maylons livello 1"
+msgstr "La Tomba di Maylons - Primo livello"
 
 #: maylons_grave.xml
 msgid "aisMaylonsGraveL2"
-msgstr "Grotta di Maylons cripta"
+msgstr "La Tomba di Maylons - La cripta"
 
 #: herbalist.xml
 msgid "Herb collector"
-msgstr "Collezionasta di erbe"
+msgstr "L'erborista"
 
 #: herbalist.xml
 msgid "Gertlinde Kampfer"
@@ -1284,7 +1287,7 @@ msgstr "Gertlinde Kampfer"
 
 #: herbalist.xml
 msgid "Herb gathering"
-msgstr "Raccolta di erbe"
+msgstr "Raccolta delle erbe"
 
 #: testquest.xml
 msgid "testquest"
@@ -1300,11 +1303,11 @@ msgstr "Test"
 
 #: joringsbridge.xml
 msgid "Joringsbridge"
-msgstr "Ponte di Jorings"
+msgstr "Joringsbridge"
 
 #: fortify_dwarfenwall.xml
 msgid "Fortify Dwarfenwall"
-msgstr "Mura fortificate dei nani"
+msgstr "Fortifica Dwarfenwall"
 
 #: fortify_dwarfenwall.xml
 msgid "Speak with Windclaw"
@@ -1312,15 +1315,15 @@ msgstr "Parla con Windclaw"
 
 #: fortify_dwarfenwall.xml
 msgid "medBackalley"
-msgstr "Hintergassen"
+msgstr "Vicolo interno"
 
 #: rob_the_robber.xml
 msgid "Rob the robber"
-msgstr "Rob il ladro"
+msgstr "Rob il Ladrone"
 
 #: rob_the_robber.xml
 msgid "Wanted poster"
-msgstr "Ricerca manifesti"
+msgstr "Il manifesto del Ricercato"
 
 #: rob_the_robber.xml
 msgid "Sergeant Wober"
@@ -1328,15 +1331,15 @@ msgstr "Sergente Wober"
 
 #: rob_the_robber.xml
 msgid "Rob the Robber (Reward)"
-msgstr "Rob il ladro (premio)"
+msgstr "Rob il Ladrone (ricompensa)"
 
 #: rob_the_robber.xml
 msgid "aisDarkFairyforest"
-msgstr "Foresta oscura fatata"
+msgstr "La tetra foresta incantata"
 
 #: rescue_willard.xml
 msgid "A friend in need"
-msgstr "Il soccorso di un amico"
+msgstr "Un amico bisognoso"
 
 #: rescue_willard.xml
 msgid "Willard"
@@ -1344,7 +1347,7 @@ msgstr "Willard"
 
 #: rescue_willard.xml
 msgid "Give Willard the stone (Reward)"
-msgstr "Dai la pietra a Willard (premio)"
+msgstr "Consegna la pietra a Willard (ricompensa)"
 
 #: rescue_willard.xml
 msgid "aisMeadow"
@@ -1368,7 +1371,7 @@ msgstr "Halgor"
 
 #: joringsbridge_npc.xml
 msgid "Armors"
-msgstr "Armi"
+msgstr "Armature"
 
 #: joringsbridge_npc.xml
 msgid "Marco"
@@ -1376,7 +1379,7 @@ msgstr "Marco"
 
 #: joringsbridge_npc.xml
 msgid "Fundgegenstaende"
-msgstr "Fundgegenstaende"
+msgstr "Oggetti smarriti"
 
 #: joringsbridge_npc.xml
 msgid "What are these Items?"
@@ -1384,7 +1387,7 @@ msgstr "Cosa sono questi oggetti?"
 
 #: joringsbridge_npc.xml
 msgid "The surroundings of Joringsbridge"
-msgstr "L'arresa del ponte Jorings"
+msgstr "I dintorni di Joringsbridge"
 
 #: joringsbridge_npc.xml
 msgid "Michel Bron"
@@ -1392,7 +1395,7 @@ msgstr "Michel Bron"
 
 #: joringsbridge_npc.xml
 msgid "Magus Convocatis Relau Fireweaver"
-msgstr "Magus Convocatis Relau Feuerweber"
+msgstr "Magus Convocatis Relau Fireweaver"
 
 #: dwarfcastle.xml
 msgid "Haffgar"
@@ -1400,7 +1403,7 @@ msgstr "Haffgar"
 
 #: dwarfcastle.xml
 msgid "Trade"
-msgstr "Commerciare"
+msgstr "Commercio"
 
 #: dwarfcastle.xml
 msgid "Amelia"
@@ -1416,7 +1419,7 @@ msgstr "Flynn"
 
 #: dwarfcastle.xml
 msgid "What is all this?"
-msgstr "Cosa è tutto questo?"
+msgstr "Cos'e' tutto questo casino?"
 
 #: medairnpc.xml
 msgid "Robert"
@@ -1433,7 +1436,7 @@ msgstr "Cain"
 # Bron's door
 #: npc.xml
 msgid "Brons Tuer"
-msgstr "Brons Tür"
+msgstr "Brons Tuer"
 
 #: npc.xml
 msgid "Guard"
@@ -1445,7 +1448,7 @@ msgstr "Fantasma di Maylons"
 
 #: npc.xml
 msgid "Leonard von Robenforst"
-msgstr "Leonard von Robenforst"
+msgstr "Leonard di Robenforst"
 
 #: npc.xml
 msgid "General Greif"
@@ -1453,7 +1456,7 @@ msgstr "Generale Greif"
 
 #: npc.xml
 msgid "Maga Convocatis Darna Eistaucher"
-msgstr "Maga Convocatis Darna Eistaucher"
+msgstr "Maga Convocatis Darna Icediver"
 
 #: npc.xml
 msgid "Prince Karlen"
@@ -1461,19 +1464,19 @@ msgstr "Principe Karlen"
 
 #: npc.xml
 msgid "Erzmaga Ireana von Nordenburg"
-msgstr "Erzmaga Ireana von Nordenburg"
+msgstr "Arcimaga Ireana di Nordburg"
 
 #: npc.xml
 msgid "Hauptmann der Wache"
-msgstr "Hauptmann der Wache"
+msgstr "Capitano delle Guardie"
 
 #: npc.xml
 msgid "Elementaristenwaechter"
-msgstr "Elementaristenwaechter"
+msgstr "La Guardia del Consiglio"
 
 #: npc.xml
 msgid "Vorarbeiter Nekromant"
-msgstr "Vorarbeiter Nekromant"
+msgstr "Sorveglianza del Necromante"
 
 #: npc.xml
 msgid "Nar'Asoroth"
@@ -1481,63 +1484,63 @@ msgstr "Nar'Asoroth"
 
 #: npc.xml
 msgid "Buy empty scrolls"
-msgstr ""
+msgstr "Compra pergamene vuote"
 
 #: npc.xml
 msgid "Access stash"
-msgstr ""
+msgstr "Accesso allo scrigno"
 
 #: npc.xml
 msgid "The Lost Trader"
-msgstr "Il commerciante disperso"
+msgstr "Il mercante disperso"
 
 #: npc.xml
 msgid "Leere Schriftrollen kaufen"
-msgstr "Leere Schriftrollen kaufen"
+msgstr "Compra pergamene vuote"
 
 #: cursedCaves.xml
 msgid "greyCurseCave"
-msgstr "Caverna grigia maledetta"
+msgstr "La grotta sotterranea"
 
 #: cursedCaves.xml
 msgid "greyCurseGrotto"
-msgstr "Grotta grigia maledetta"
+msgstr "La caverna sotterranea"
 
 #: cursedCaves.xml
 msgid "greyWolfcave"
-msgstr "Caverna del lupo"
+msgstr "La cava del lupo"
 
 #: cursedCaves.xml
 msgid "greyCurseGrotDep"
-msgstr "Passaggio della grotta grigia maledetta"
+msgstr "La caverna sotterranea - Profondita'"
 
 #: cursedCaves.xml
 msgid "greyCursedCavern"
-msgstr "Caverna maledetta"
+msgstr "Il tunnel sotterraneo"
 
 #: cursedCaves.xml
 msgid "greyCurseCaveEast"
-msgstr "Caverna grigia maledetta zona est"
+msgstr "La grotta sotterranea - Parte Est"
 
 #: aisen.xml
 msgid "aisPlains"
-msgstr "Pianure di Aisener"
+msgstr "Aperta pianura"
 
 #: aisen.xml
 msgid "aisHeath"
-msgstr "Brughiera di Aisener"
+msgstr "Brughiere silenziose"
 
 #: aisen.xml
 msgid "aisStonePlains"
-msgstr "Pietre della pianura di Aisener"
+msgstr "Pianure rocciose"
 
 #: aisen.xml
 msgid "aisDarkClearing"
-msgstr "Radura oscura di Aisener"
+msgstr "La tetra radura"
 
 #: aisen.xml
 msgid "aisWideHeath"
-msgstr "Ampia brughiera di Aisener"
+msgstr "La vasta spianata"
 
 #: aisen.xml
 msgid "aisJoringsforest"
@@ -1545,27 +1548,27 @@ msgstr "Foresta di Jorings"
 
 #: aisen.xml
 msgid "aisFairyforest"
-msgstr "Foresta Fatata di Aisener"
+msgstr "Foresta incantata"
 
 #: aisen.xml
 msgid "aisWestwoods"
-msgstr "Bosco ovest di Aisener"
+msgstr "Boschi dell'ovest"
 
 #: aisen.xml
 msgid "aisMistslope"
-msgstr "Pendenze di nebbia di Aisener"
+msgstr "Pendii nebbiosi"
 
 #: aisen.xml
 msgid "aisEastslope"
-msgstr "Pendenze est di Aisener"
+msgstr "Pendio orientale"
 
 #: testregions.xml
 msgid "maptest"
-msgstr "Mappa test"
+msgstr "maptest"
 
 #: testregions.xml
 msgid "sandbox"
-msgstr "Contenitore di sabbia"
+msgstr "sandbox"
 
 #: testregions.xml
 msgid "spawnAbyss"
@@ -1573,11 +1576,11 @@ msgstr "spawnAbyss"
 
 #: testregions.xml
 msgid "region0"
-msgstr "Regione 0"
+msgstr "region0"
 
 #: testregions.xml
 msgid "testregion"
-msgstr "Regione test"
+msgstr "testregion"
 
 #: humans.xml
 msgid "Bandit"
@@ -1589,7 +1592,7 @@ msgstr "Teppista"
 
 #: humans.xml
 msgid "Rogue"
-msgstr "Briccone"
+msgstr "Furfante"
 
 #: humans.xml
 msgid "Brigand"
@@ -1613,7 +1616,7 @@ msgstr "Rapinatore"
 
 #: humans.xml
 msgid "Highwayman"
-msgstr "Bandito di strada"
+msgstr "Delinquente"
 
 #: humans.xml
 msgid "Buck"
@@ -1633,11 +1636,11 @@ msgstr "Todd"
 
 #: humans.xml
 msgid "Rob the Robber"
-msgstr "Rob il rapinatore"
+msgstr "Rob il Ladrone"
 
 #: humans.xml
 msgid "Ronny the Rat"
-msgstr "Ronny il ratto"
+msgstr "Ronny il Ratto"
 
 #: goblinStats.xml
 msgid "goblin brawler"
@@ -1665,11 +1668,11 @@ msgstr "Nubreck"
 
 #: goblinStats.xml
 msgid "goblin dog"
-msgstr "Cane Goblin"
+msgstr "Cane goblin"
 
 #: goblinStats.xml
 msgid "boneshaker"
-msgstr "OssaShaker"
+msgstr "Squotiossa"
 
 #: goblinStats.xml
 msgid "Gobrusch"
@@ -1681,7 +1684,7 @@ msgstr "Dobrusch"
 
 #: goblinStats.xml
 msgid "Lurdrak with the Hammer"
-msgstr "Lurdrak con martelllo"
+msgstr "Lurdrak e il suo Martelllo"
 
 #: goblinStats.xml
 msgid "goblin fighter"
@@ -1697,15 +1700,15 @@ msgstr "Goblin bandito"
 
 #: goblinStats.xml
 msgid "snowcaller"
-msgstr "Rufer"
+msgstr "Evocatore delle Nevi"
 
 #: goblinStats.xml
 msgid "reg'resh"
-msgstr "Reg Resh"
+msgstr "Reg'Resh"
 
 #: goblinStats.xml
 msgid "goblin temple guard"
-msgstr "Goblin guardiano del tempio"
+msgstr "Goblin guardia del tempio"
 
 #: goblinStats.xml
 msgid "goblin apprentice"
@@ -1717,15 +1720,15 @@ msgstr "Marblak"
 
 #: goblinStats.xml
 msgid "goblin youngling"
-msgstr "Cucciolo di Goblin"
+msgstr "Cucciolo di goblin"
 
 #: goblinStats.xml
 msgid "Gab'Resh"
-msgstr "Gab Resh"
+msgstr "Gab'Resh"
 
 #: goblinStats.xml
 msgid "Gab Clan Goblin"
-msgstr "Gab Klan Goblin"
+msgstr "Gab Clan Goblin"
 
 #: goblinStats.xml
 msgid "goblin warrior"
@@ -1733,7 +1736,7 @@ msgstr "Goblin guerriero"
 
 #: goblinStats.xml
 msgid "goblin rocklobber"
-msgstr "Goblin tagliatore di pietre"
+msgstr "Goblin fromboliere"
 
 #: goblinStats.xml
 msgid "goblin shaman"
@@ -1741,7 +1744,7 @@ msgstr "Goblin sciamano"
 
 #: goblinStats.xml
 msgid "goblin slayer"
-msgstr "Goblin schiavo"
+msgstr "Goblin mietitore"
 
 #: goblinStats.xml
 msgid "goblin assassin"
@@ -1749,7 +1752,7 @@ msgstr "Goblin assassino"
 
 #: aisenMonsterStats.xml
 msgid "Bloodbeak"
-msgstr "Becco di sangue"
+msgstr "Becco Insanguinato"
 
 #: aisenMonsterStats.xml
 msgid "Giant wolf"
@@ -1762,7 +1765,7 @@ msgstr "Lupo"
 #: aisenMonsterStats.xml
 #, fuzzy
 msgid "Spider"
-msgstr "Rapinatore"
+msgstr "Ragno"
 
 #: councilNPCStats.xml
 msgid "Worker"
@@ -1770,27 +1773,27 @@ msgstr "Lavoratore"
 
 #: councilNPCStats.xml
 msgid "Council Guard"
-msgstr "Guardia del consiglio"
+msgstr "Guardia del Consiglio"
 
 #: councilNPCStats.xml
 msgid "Council Mage"
-msgstr "Mago del consiglio"
+msgstr "Mago del Consiglio"
 
 #: councilNPCStats.xml
 msgid "Ireana von Nordenburg"
-msgstr "Ireana von Nordenburg"
+msgstr "Ireana di Nordburg"
 
 #: councilNPCStats.xml
 msgid "Council Guard Captain"
-msgstr "Capitano della guardia del consiglio"
+msgstr "Capitano della Guardia del Consiglio"
 
 #: councilNPCStats.xml
 msgid "Fireguardian"
-msgstr "Guardiano di fuoco"
+msgstr "Guardiano del fuoco"
 
 #: council_monsters.xml
 msgid "Fire Slug"
-msgstr "Lumaca di fuoco"
+msgstr "Lumaca del fuoco"
 
 #: council_monsters.xml
 msgid "Mutant Slug"
@@ -1798,11 +1801,11 @@ msgstr "Lumaca mutante"
 
 #: council_monsters.xml
 msgid "Fire Louse"
-msgstr "Pidocchio di fuoco"
+msgstr "Insetto del fuoco"
 
 #: council_monsters.xml
 msgid "Firefletchling"
-msgstr "Uccello di fuoco"
+msgstr "Firefletchling"
 
 #: council_monsters.xml
 msgid "Inferno Behemoth"
@@ -1814,7 +1817,7 @@ msgstr "Guaritore"
 
 #: aisenNPCStats.xml
 msgid "Trader"
-msgstr "Commerciante"
+msgstr "Mercante"
 
 #: aisenNPCStats.xml
 msgid "Bowman"
@@ -1822,7 +1825,7 @@ msgstr "Venditore di archi"
 
 #: aisenNPCStats.xml
 msgid "Avaeras Order, Firemage"
-msgstr "Avaeras dell'ordine dei maghi di fuoco"
+msgstr "Avaeras Order, Mago del Fuoco"
 
 #: aisenNPCStats.xml
 msgid "Elite Swordsman"
@@ -1854,11 +1857,11 @@ msgstr "Scheletro arciere"
 
 #: undeadStats.xml
 msgid "Skeleton Shadow Archer"
-msgstr "Scheletro oscuro arciere"
+msgstr "Scheletro arciere oscuro"
 
 #: undeadStats.xml
 msgid "Frostbone"
-msgstr "Ossa di gelo"
+msgstr "Ossa di Ghiaccio"
 
 #: undeadStats.xml
 msgid "Burning Skeleton"
@@ -1866,11 +1869,11 @@ msgstr "Scheletro infuocato"
 
 #: undeadStats.xml
 msgid "Undead Scythe"
-msgstr "Falciatrice di anime"
+msgstr "Falciatore di anime"
 
 #: undeadStats.xml
 msgid "Necromancer"
-msgstr "Negromante"
+msgstr "Necromante"
 
 #: undeadStats.xml
 msgid "Worker Skeleton"
@@ -1894,7 +1897,7 @@ msgstr "Scheletro del gelo arciere"
 
 #: undeadStats.xml
 msgid "Chilling Death"
-msgstr "Morte bianca"
+msgstr "Morte Congelante"
 
 #: undeadStats.xml
 msgid "Savage Skeleton"
@@ -1906,7 +1909,7 @@ msgstr "Fratelli Boney"
 
 #: undeadStats.xml
 msgid "Icemage"
-msgstr "Mago di ghiaccio"
+msgstr "Mago del ghiaccio"
 
 #: undeadStats.xml
 msgid "Frostmage"
@@ -1914,7 +1917,7 @@ msgstr "Mago del gelo"
 
 #: undeadStats.xml
 msgid "Neivan the Frostbringer"
-msgstr "Neivan portatore di gelo"
+msgstr "Neivan il Gelido"
 
 #: undeadStats.xml
 msgid "Blackmage"
@@ -1922,23 +1925,23 @@ msgstr "Mago oscuro"
 
 #: undeadStats.xml
 msgid "Black Raven"
-msgstr "Corvo nero"
+msgstr "Corvo Nero"
 
 #: undeadStats.xml
 msgid "Ice Obelisk"
-msgstr "Obelisco di ghiaccio"
+msgstr "Obelisco di Ghiaccio"
 
 #: monsters.xml
 msgid "small mandragora"
-msgstr "Piccola mandragora"
+msgstr "Mandragora piccola"
 
 #: monsters.xml
 msgid "mandragora"
-msgstr "Alraune"
+msgstr "Mandragora"
 
 #: npcStats.xml
 msgid "Peasant"
-msgstr "Contadina"
+msgstr "Contadino"
 
 #~ msgid "lich"
 #~ msgstr "Lich"
