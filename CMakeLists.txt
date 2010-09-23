@@ -7,6 +7,8 @@ SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
 ENDIF()
 
 OPTION(NO_RAKNET "Avoid use of Raknet Lib" OFF)
+OPTION(NO_TINYXML "Avoid use of TinyXML Lib" OFF)
+
 PROJECT(SUMWARS)
 
 # for unknown reasons, sumwars target was always built first, leading to errors
@@ -52,8 +54,17 @@ INCLUDE_DIRECTORIES(${PTHREADS_INCLUDE_DIR})
 #	INCLUDE_DIRECTORIES(${RakNet_INCLUDES})
 #endif()
 
+SET(SRCS_NLFG ./Dependencies/nlfg/nlfg.c)
+SET(SRCS_TINYXML
+  ./src/tinyxml/tinystr.cpp
+  ./src/tinyxml/tinyxmlerror.cpp
+  ./src/tinyxml/tinyxml.cpp
+  ./src/tinyxml/tinyxmlparser.cpp)
+IF(NO_TINYXML)
+  SET(SRCS_TINYXML "")
+ENDIF()
+
 SET(SRCS
-  ./Dependencies/nlfg/nlfg.c
   ./src/core/worldobject.cpp
   ./src/core/itemloader.cpp
   ./src/core/itemlist.cpp
@@ -138,13 +149,9 @@ SET(SRCS
   ./src/gui/questinfo.cpp
   ./src/gui/sound.cpp
   ./src/gui/optionswindow.cpp
-  ./src/tinyxml/tinystr.cpp
-  ./src/tinyxml/tinyxmlerror.cpp
-  ./src/tinyxml/tinyxml.cpp
-  ./src/tinyxml/tinyxmlparser.cpp
 )
 
-ADD_EXECUTABLE(sumwars ${SRCS})
+ADD_EXECUTABLE(sumwars ${SRCS} ${SRCS_NLFG} ${SRCS_TINYXML})
 TARGET_LINK_LIBRARIES(sumwars ${OGRE_LIBRARIES} ${OIS_LIBRARY_DBG} ${CEGUI_LIBRARIES} ${CEGUIOGRE_LIBRARIES} ${LUA_LIBRARIES} ${OPENAL_LIBRARY} ${ALUT_LIBRARY} ${Enet_LIBRARY} ${PTHREADS_LIBRARY} ${OGGVORBIS_LIBRARIES})
 
 INSTALL(TARGETS sumwars
