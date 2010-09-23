@@ -1,0 +1,28 @@
+This package was debianized by Manuel A. Fernandez Montecelo
+<manuel.montezelo@gmail.com> on 2010-09-23 10:12:35 UTC
+
+It was downloaded from http://sourceforge.net/projects/sumwars/
+
+Upstream Authors: See AUTHORS file.
+
+Copyright: 2007-2010 The Summoning Wars Team
+	   See AUTHORS file for more information.
+
+License:
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+On Debian GNU/Linux systems, the complete text of the GNU General
+Public License (v3) can be found in '/usr/share/common-licenses/GPL-3'.

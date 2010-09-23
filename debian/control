@@ -1,0 +1,29 @@
+Source: sumwars
+Section: games
+Priority: extra
+Maintainer: Manuel A. Fernandez Montecelo <manuel.montezelo@gmail.com>
+DM-Upload-Allowed: yes
+Build-Depends: debhelper (>= 7.0.0), cmake (>> 2.6), pkg-config, libalut-dev, libopenal-dev, libvorbis-dev, libenet-dev, libogre-dev, libois-dev, libcegui-mk2-dev, liblua5.1-0-dev, libceguiogre-dev
+Standards-Version: 3.9.1
+Homepage: http://www.sumwars.org/
+Vcs-Svn: http://sumwars.svn.sourceforge.net/svnroot/sumwars/trunk
+Vcs-Browser: http://sumwars.svn.sourceforge.net/viewvc/sumwars/
+
+Package: sumwars-bin
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}, sumwars-data (= ${source:Version})
+Description: Summoning Wars is a role-playing game, binary files
+ Summoning Wars is an open source role-playing game, featuring both a
+ single-player and a multiplayer mode for about 2 to 8 players.
+ .
+ This package contains binaries and libraries.
+
+Package: sumwars-data
+Architecture: all
+Depends: ${misc:Depends}
+Description: Summoning Wars is a role-playing game, data files
+ Summoning Wars is an open source role-playing game, featuring both a
+ single-player and a multiplayer mode for about 2 to 8 players.
+ .
+ This package contains data needed by the binaries (game data, GUI
+ elements, sound, ...).
