@@ -29,7 +29,7 @@ int main (int argc, char *argv[]) {
 	}
 	#else
         save = "./save/default.sav";
-    #endif
+	#endif
 
 	bool server = true;
 	if (argc>=3)
@@ -62,9 +62,8 @@ int main (int argc, char *argv[]) {
 	{
 		ERRORMSG("Error message: %s",e.what());
 	}
-*/
-	
-		app->run();
+	*/
+	app->run();
 	
 	
 	// Applikation loeschen
