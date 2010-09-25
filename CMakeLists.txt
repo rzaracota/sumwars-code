@@ -22,6 +22,8 @@ SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
 ENDIF()
 
 OPTION(NO_RAKNET "Avoid use of Raknet Lib" OFF)
+OPTION(NO_TINYXML "Avoid use of TinyXML Lib" OFF)
+
 PROJECT(SUMWARS)
 
 project(sumwars)
@@ -106,7 +108,18 @@ ENDIF()
 
 
 
+SET(SRCS_NLFG ./Dependencies/nlfg/nlfg.c)
+SET(SRCS_TINYXML
+  ./src/tinyxml/tinystr.cpp
+  ./src/tinyxml/tinyxmlerror.cpp
+  ./src/tinyxml/tinyxml.cpp
+  ./src/tinyxml/tinyxmlparser.cpp)
+IF(NO_TINYXML)
+  SET(SRCS_TINYXML "")
+ENDIF()
+
 SET(SRCS
+	${SRCS_TINYXML}
   ./src/core/nlfg.cpp
   ./src/core/worldobject.cpp
   ./src/core/itemloader.cpp
@@ -201,10 +214,6 @@ SET(SRCS
   ./src/gui/debugpanel/guidebugtab.cpp
   ./src/gui/debugpanel/luascripttab.cpp
   ./src/gui/debugpanel/textfileeditwindow.cpp
-  ./src/tinyxml/tinystr.cpp
-  ./src/tinyxml/tinyxmlerror.cpp
-  ./src/tinyxml/tinyxml.cpp
-  ./src/tinyxml/tinyxmlparser.cpp
   ./src/enet/callbacks.c
   ./src/enet/compress.c
   ./src/enet/host.c
