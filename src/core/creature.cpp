@@ -14,10 +14,10 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 #include "creature.h"
-#include <sys/time.h>
 #include "eventsystem.h"
 #include "math.h"
 #include "itemfactory.h"
+#include "mathhelper.h"
 
 //Constructors/Destructors
 Creature::Creature(int id) : WorldObject(id)
@@ -372,7 +372,7 @@ void Creature::initAction()
 	// Fuer Aktionen die auf physischen Angriffen beruhen sowie fuer den normalen Magieangriff Waffengeschwindigkeit einrechnen
 	if (baseact == "attack" || baseact == "range_attack" || baseact == "holy_attack" || m_action.m_type == "magic_attack")
 	{
-		float atksp = std::min((short) 5000,getBaseAttrMod()->m_attack_speed);
+		float atksp = MathHelper::Min((short) 5000,getBaseAttrMod()->m_attack_speed);
 
 
 		m_action.m_time *= 1000000/atksp;
@@ -2912,8 +2912,8 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 		dmg.m_min_damage[Damage::PHYSICAL]*=0.75;
 		dmg.m_max_damage[Damage::PHYSICAL]*=0.75;
 		// Feuerschaden hinzufuegen
-		dmg.m_min_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_magic_power*4.0f,dmg.m_min_damage[Damage::PHYSICAL]);
-		dmg.m_max_damage[Damage::FIRE] += std::min(m_base_attr_mod.m_magic_power*6.0f,dmg.m_max_damage[Damage::PHYSICAL]);
+		dmg.m_min_damage[Damage::FIRE] += MathHelper::Min(m_base_attr_mod.m_magic_power*4.0f,dmg.m_min_damage[Damage::PHYSICAL]);
+		dmg.m_max_damage[Damage::FIRE] += MathHelper::Min(m_base_attr_mod.m_magic_power*6.0f,dmg.m_max_damage[Damage::PHYSICAL]);
 
 		// kein Eisschaden
 		dmg.m_min_damage[Damage::ICE]=0;
@@ -2939,8 +2939,8 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 	// Eispfeile
 	if (m_base_attr_mod.m_special_flags & ICE_ARROWS)
 	{
-		dmg.m_min_damage[Damage::ICE] += std::min(m_base_attr_mod.m_magic_power*4.0f,dmg.m_min_damage[Damage::PHYSICAL]);
-		dmg.m_max_damage[Damage::ICE] += std::min(m_base_attr_mod.m_magic_power*6.0f,dmg.m_max_damage[Damage::PHYSICAL]);
+		dmg.m_min_damage[Damage::ICE] += MathHelper::Min(m_base_attr_mod.m_magic_power*4.0f,dmg.m_min_damage[Damage::PHYSICAL]);
+		dmg.m_max_damage[Damage::ICE] += MathHelper::Min(m_base_attr_mod.m_magic_power*6.0f,dmg.m_max_damage[Damage::PHYSICAL]);
 		dmg.m_min_damage[Damage::PHYSICAL]*=0.5;
 		dmg.m_max_damage[Damage::PHYSICAL]*=0.5;
 		dmg.m_min_damage[Damage::FIRE]=0;
@@ -2957,8 +2957,8 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 	// Windpfeile
 	if (m_base_attr_mod.m_special_flags & WIND_ARROWS)
 	{
-		dmg.m_min_damage[Damage::AIR] += std::min(m_base_attr_mod.m_magic_power*4.0f,dmg.m_min_damage[Damage::PHYSICAL]);
-		dmg.m_max_damage[Damage::AIR] += std::min(m_base_attr_mod.m_magic_power*6.0f,dmg.m_max_damage[Damage::PHYSICAL]);
+		dmg.m_min_damage[Damage::AIR] += MathHelper::Min(m_base_attr_mod.m_magic_power*4.0f,dmg.m_min_damage[Damage::PHYSICAL]);
+		dmg.m_max_damage[Damage::AIR] += MathHelper::Min(m_base_attr_mod.m_magic_power*6.0f,dmg.m_max_damage[Damage::PHYSICAL]);
 		dmg.m_min_damage[Damage::PHYSICAL]*=0.5;
 		dmg.m_max_damage[Damage::PHYSICAL]*=0.5;
 
@@ -3278,7 +3278,7 @@ bool Creature::takeDamage(Damage* d)
 	dmgt *= d->m_multiplier[Damage::PHYSICAL];
 
 	// Resistenz anwenden
-	res = std::min (m_base_attr_mod.m_resistances_cap[Damage::PHYSICAL],m_base_attr_mod.m_resistances[Damage::PHYSICAL]);
+	res = MathHelper::Min (m_base_attr_mod.m_resistances_cap[Damage::PHYSICAL],m_base_attr_mod.m_resistances[Damage::PHYSICAL]);
 	dmgt *= 0.01*(100-res);
 
 	// Ruestung anwenden
@@ -3351,7 +3351,7 @@ bool Creature::takeDamage(Damage* d)
 		dmgt *= d->m_multiplier[i];
 
 		// Resistenz anwenden
-		res = std::min(m_base_attr_mod.m_resistances_cap[i],m_base_attr_mod.m_resistances[i]);
+		res = MathHelper::Min(m_base_attr_mod.m_resistances_cap[i],m_base_attr_mod.m_resistances[i]);
 		dmgt *=0.01*(100-res);
 
 		DEBUGX("dmg %i min %f max %f real %f",i,d->m_min_damage[i],d->m_max_damage[i],dmgt);
@@ -3408,7 +3408,7 @@ bool Creature::takeDamage(Damage* d)
 
 	if (dmg>0)
 	{
-		m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING] = std::max(m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING],150.0f);
+		m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING] = MathHelper::Max(m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING],150.0f);
 		addToNetEventMask(NetEvent::DATA_HP | NetEvent::DATA_EFFECTS);
 	}
 
@@ -3477,7 +3477,7 @@ void Creature::applyDynAttrMod(CreatureDynAttrMod* mod)
 	{
 		if (mod->m_dstatus_mod_immune_time[i]>0)
 		{
-			m_dyn_attr.m_status_mod_immune_time[i] = std::max(m_dyn_attr.m_status_mod_immune_time[i],mod->m_dstatus_mod_immune_time[i]);
+			m_dyn_attr.m_status_mod_immune_time[i] = MathHelper::Max(m_dyn_attr.m_status_mod_immune_time[i],mod->m_dstatus_mod_immune_time[i]);
 			m_dyn_attr.m_status_mod_time[i]=0;
 
 			if (i==Damage::CONFUSED || i==Damage::BERSERK)
@@ -3537,12 +3537,12 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	}
 
 	// einige Untergrenzen pruefen
-	m_base_attr_mod.m_strength = std::max(m_base_attr_mod.m_strength,(short) 1);
-	m_base_attr_mod.m_dexterity = std::max(m_base_attr_mod.m_dexterity,(short) 1);
-	m_base_attr_mod.m_willpower = std::max(m_base_attr_mod.m_willpower,(short) 1);
-	m_base_attr_mod.m_magic_power = std::max(m_base_attr_mod.m_magic_power,(short) 1);
-	m_base_attr_mod.m_walk_speed = std::max(m_base_attr_mod.m_walk_speed,(short) 200);
-	m_base_attr_mod.m_attack_speed = std::max(m_base_attr_mod.m_attack_speed,(short) 200);
+	m_base_attr_mod.m_strength = MathHelper::Max(m_base_attr_mod.m_strength,(short) 1);
+	m_base_attr_mod.m_dexterity = MathHelper::Max(m_base_attr_mod.m_dexterity,(short) 1);
+	m_base_attr_mod.m_willpower = MathHelper::Max(m_base_attr_mod.m_willpower,(short) 1);
+	m_base_attr_mod.m_magic_power = MathHelper::Max(m_base_attr_mod.m_magic_power,(short) 1);
+	m_base_attr_mod.m_walk_speed = MathHelper::Max(m_base_attr_mod.m_walk_speed,(short) 200);
+	m_base_attr_mod.m_attack_speed = MathHelper::Max(m_base_attr_mod.m_attack_speed,(short) 200);
 
 	// Resistenzen dazu addieren
 	for (i=0;i<4;i++)
@@ -4672,7 +4672,7 @@ void Creature::buyItem(Item* &item, int& gold)
 		}
 		else
 		{
-			gold += std::max(1, int(item->m_price*factor));
+			gold += MathHelper::Max(1, int(item->m_price*factor));
 		}
 		item->m_price = (int) (item->m_price * m_trade_info.m_price_factor);
 

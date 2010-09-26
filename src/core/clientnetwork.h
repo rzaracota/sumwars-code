@@ -7,6 +7,10 @@
 #include "debug.h"
 #include "charconv.h"
 
+#ifdef WIN32
+#include <windows.h>
+#endif
+
 
 /**
  * \class ClientNetwork

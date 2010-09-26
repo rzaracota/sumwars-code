@@ -1,11 +1,11 @@
 #include "scene.h"
 
-#include "OgreCEGUIRenderer.h"
-#include "OgreCEGUITexture.h"
-#include "OgreCEGUIResourceProvider.h"
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreTexture.h"
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreResourceProvider.h"
 #include <OgrePanelOverlayElement.h>
 
-#include "CEGUI.h"
+#include "CEGUI/CEGUI.h"
 
 #include "graphicmanager.h"
 
@@ -47,9 +47,8 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	minimap_camera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
 	minimap_camera->setFOVy(Ogre::Degree(90.0));
 
-	Ogre::TexturePtr minimap_texture = Ogre::TextureManager::getSingleton().createManual( "minimap_tex",
-			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, Ogre::TEX_TYPE_2D,
-   512, 512, 0, Ogre::PF_R8G8B8A8, Ogre::TU_RENDERTARGET );
+	Ogre::TexturePtr minimap_texture = Ogre::TextureManager::getSingleton().createManual( "minimap_tex", "General", Ogre::TEX_TYPE_2D,
+                                                                                          512, 512, 0, Ogre::PF_R8G8B8A8, Ogre::TU_RENDERTARGET );
 
 	Ogre::RenderTarget* minimap_rt = minimap_texture->getBuffer()->getRenderTarget();
 	minimap_rt ->setAutoUpdated(false);
@@ -63,13 +62,14 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	DEBUGX("viewport size %i %i ratio %f",v->getActualWidth(),v->getActualHeight(), ratio);
 	minimap_camera->setAspectRatio(ratio);
 
-	CEGUI::OgreCEGUITexture* ceguiTex = (CEGUI::OgreCEGUITexture*)((CEGUI::OgreCEGUIRenderer*)CEGUI::System::getSingleton().getRenderer())->createTexture((CEGUI::utf8*)"minimap_tex");
+    // get the OgreRenderer from CEGUI and create a CEGUI texture from the Ogre texture
+    CEGUI::Texture &ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(minimap_texture);
+  
+	CEGUI::Imageset& textureImageSet = CEGUI::ImagesetManager::getSingleton().create("minimap", ceguiTex);
 
-	CEGUI::Imageset* textureImageSet = CEGUI::ImagesetManager::getSingleton().createImageset("minimap", ceguiTex);
-
-	textureImageSet->defineImage( "minimap_img",
+	textureImageSet.defineImage( "minimap_img",
 				CEGUI::Point( 0.0f, 0.0f ),
-				CEGUI::Size( ceguiTex->getWidth(), ceguiTex->getHeight() ),
+				CEGUI::Size( ceguiTex.getSize().d_width, ceguiTex.getSize().d_height ),
 				CEGUI::Point( 0.0f, 0.0f ) );
 
 	// Setup fuer die Spieleransicht
@@ -100,14 +100,14 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	char_view->setOverlaysEnabled (false);
 	char_view->setBackgroundColour(Ogre::ColourValue(0,0,0,1.0) );
 	char_rt->update();
-	
-	CEGUI::OgreCEGUITexture* char_ceguiTex = (CEGUI::OgreCEGUITexture*)((CEGUI::OgreCEGUIRenderer*) CEGUI::System::getSingleton().getRenderer())->createTexture((CEGUI::utf8*)"character_tex");
 
-	CEGUI::Imageset* char_textureImageSet = CEGUI::ImagesetManager::getSingleton().createImageset("character", char_ceguiTex);
+    CEGUI::Texture& char_ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(char_texture);
+    
+	CEGUI::Imageset& char_textureImageSet = CEGUI::ImagesetManager::getSingleton().create("character", char_ceguiTex);
 
-	char_textureImageSet->defineImage( "character_img",
+	char_textureImageSet.defineImage( "character_img",
 			CEGUI::Point( 0.0f, 0.0f ),
-			CEGUI::Size( char_ceguiTex->getWidth(), char_ceguiTex->getHeight() ),
+			CEGUI::Size( char_ceguiTex.getSize().d_width, char_ceguiTex.getSize().d_height ),
 			CEGUI::Point( 0.0f, 0.0f ) );
 	
 	/*
@@ -266,20 +266,21 @@ void Scene::update(float ms)
 	// Licht aktualisieren
 	float *colour;
 	Ogre::Light* light;
-	light= m_scene_manager->getLight("HeroLight");
+	/*light= m_scene_manager->getLight("HeroLight");
 	light->setPosition(Ogre::Vector3(pos.m_x*GraphicManager::g_global_scale,
 									 6*GraphicManager::g_global_scale,
 									 pos.m_y*GraphicManager::g_global_scale));
 	colour= region->getLight().getHeroLight();
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
-	
-	colour= region->getLight().getDirectionalLight();
+	*/
+    
+    colour= region->getLight().getDirectionalLight();
 	light = m_scene_manager->getLight("RegionLight");
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(colour[0], colour[1], colour[2]);
 	
 	colour= region->getLight().getAmbientLight();
-	m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
+	//m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
 	
 	updateGraphicObjects(ms);
 }
@@ -683,11 +684,11 @@ void Scene::createScene()
 	SoundSystem::clearObjects();
 	
 	GraphicManager::clearParticlePool();
-	
+
 	m_scene_manager->clearScene();
 	
 	updateCharacterView();
-
+	
 	// Liste der statischen Objekte
 	Ogre::StaticGeometry* static_geom = m_scene_manager->createStaticGeometry ("StaticGeometry");
 
@@ -696,8 +697,7 @@ void Scene::createScene()
 	Region* region = m_document->getLocalPlayer()->getRegion();
 
 	float *colour;
-	m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
-	
+
 	colour= region->getLight().getHeroLight();
 	Ogre::Light *light = m_scene_manager->createLight("HeroLight");
 	light->setType(Ogre::Light::LT_POINT);
@@ -705,15 +705,16 @@ void Scene::createScene()
 	light->setSpecularColour(0.0, 0.0, 0.0);
 	light->setAttenuation(20*GraphicManager::g_global_scale,0.5,0.000,
 						  0.025/(GraphicManager::g_global_scale*GraphicManager::g_global_scale));
-	light->setCastShadows(false);
+	light->setCastShadows(true);
 	DEBUGX("hero light %f %f %f",colour[0], colour[1], colour[2]);
-
+    
 	colour= region->getLight().getDirectionalLight();
-	light = m_scene_manager->createLight("RegionLight");
+    light = m_scene_manager->createLight("RegionLight");
 	light->setType(Ogre::Light::LT_DIRECTIONAL);
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(colour[0], colour[1], colour[2]);
 	light->setDirection(Ogre::Vector3(-1,-1,-1));
+    light->setCastShadows(true);
 	DEBUGX("directional light %f %f %f",colour[0], colour[1], colour[2]);
 
 	if (region !=0)
@@ -733,14 +734,16 @@ void Scene::createScene()
 			   std::max(dimx,dimy)*GraphicManager::g_global_scale*6,
 			   dimy*GraphicManager::g_global_scale*2);
 		minimap_camera->setPosition(Ogre::Vector3(dimx*GraphicManager::g_global_scale*2,
-												  std::max(dimx,dimy)*GraphicManager::g_global_scale*4,
+												  MathHelper::Max(dimx,dimy)*GraphicManager::g_global_scale*4,
 												  dimy*GraphicManager::g_global_scale*2+1));
 		minimap_camera->lookAt(Ogre::Vector3(dimx*GraphicManager::g_global_scale*2,0,dimy*GraphicManager::g_global_scale*2));
 #if (OGRE_VERSION >= ((1 << 16) | (6 << 8)))
 			// >= Ogre 1.6
-			minimap_camera->setOrthoWindow(std::max(dimx,dimy)*GraphicManager::g_global_scale*4, std::max(dimx,dimy)*GraphicManager::g_global_scale*4);
+
+			minimap_camera->setOrthoWindow(MathHelper::Max(dimx,dimy)*GraphicManager::g_global_scale*4, MathHelper::Max(dimx,dimy)*GraphicManager::g_global_scale*4);
 #else
-			minimap_camera->setNearClipDistance(std::max(dimx,dimy)*GraphicManager::g_global_scale*2);
+
+			minimap_camera->setNearClipDistance(MathHelper::Max(dimx,dimy)*GraphicManager::g_global_scale*2);
 #endif
 		Ogre::Resource* res= Ogre::TextureManager::getSingleton().createOrRetrieve ("minimap_tex",Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).first.getPointer();
 		Ogre::Texture* texture = dynamic_cast<Ogre::Texture*>(res);
@@ -752,7 +755,9 @@ void Scene::createScene()
 		//m_minimap_camera->setFrustumExtents (0,dimx*200,0,dimy*200);
 		//DEBUG("camera up %f %f %f",up.x, up.y, up.z);
 
-
+        m_scene_manager->setAmbientLight(Ogre::ColourValue(1.0f,1.0f,1.0f));
+        
+        std::cout << colour[0] << " + " << colour[1] << " + " << colour[2] << std::endl;
 		// Boden erstellen
 		if (region->getGroundMaterial() != "")
 		{
@@ -778,7 +783,7 @@ void Scene::createScene()
 					stream << "GroundEntity"<<i<<"_"<<j;
 					ground = m_scene_manager->createEntity(stream.str(), "ground");
 					ground->setMaterialName(region->getGroundMaterial());
-					ground->setCastShadows(true);
+					ground->setCastShadows(false);
 					ground->setQueryFlags(0);
 					node->attachObject(ground);
 
@@ -794,20 +799,7 @@ void Scene::createScene()
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
 		DEBUGX("ambient light %f %f %f",colour[0], colour[1], colour[2]);
 		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
-
-		// Schatten
-		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
-		/*
-		light = m_scene_manager->getLight("RegionLight");
-		light->setCastShadows(true);
-		m_scene_manager->setShadowTextureConfig(0,2048,2048,Ogre::PF_X8R8G8B8);
-		m_scene_manager->setShadowColour( Ogre::ColourValue(0.5, 0.5, 0.5) );
-		m_scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
-		*/
-		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
-		//m_scene_manager->setShadowFarDistance (10);
 	}
-
 }
 
 void Scene::getMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, Ogre::Vector3* &vertices,  size_t &index_count,

@@ -1457,7 +1457,7 @@ int EventSystem::getObjectsInArea(lua_State *L)
 			WorldObjectList::iterator it;
 			Shape s = getArea(L,1);
 
-			short layer = WorldObject::WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+			short layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
 			if (argc>=3 && lua_isstring(L,3))
 			{
 				std::string lstr = lua_tostring(L,3);
@@ -3025,7 +3025,7 @@ void EventSystem::readSavegame(CharConv* savegame, int playerid, bool local_play
 		}
 	}
 
-	if (not local_player)
+	if (!local_player)
 	{
 		stream.str("");
 		stream << "initPlayerVars("<<playerid<<");";

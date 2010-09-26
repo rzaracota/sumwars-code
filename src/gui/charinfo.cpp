@@ -668,7 +668,7 @@ CharInfo::CharInfo (Document* doc)
 	// Label Angriffsgeschwindigkeit
 	label =  win_mgr.getWindow("AttackSpeedValueLabel");
 	out_stream.str("");
-	out_stream << 0.001*std::min((short) 5000, player->getBaseAttrMod()->m_attack_speed);
+	out_stream << 0.001*MathHelper::Min((short) 5000, player->getBaseAttrMod()->m_attack_speed);
 	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
 	{
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());

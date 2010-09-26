@@ -1,5 +1,6 @@
 
 #include "geometry.h"
+#include "mathhelper.h"
 
 float Line::getDistance(Vector point)
 {
@@ -195,8 +196,8 @@ bool Shape::intersects(Shape& s2)
 		
 		
 		// Kreis liegt auf dem Reckteck, wenn Abstand zu einer der Ecken kleiner als r
-		float mx = std::min (fabs(newcent.m_x+rext.m_x), fabs(newcent.m_x-rext.m_x));
-		float my = std::min (fabs(newcent.m_y+rext.m_y), fabs(newcent.m_y-rext.m_y));
+		float mx = MathHelper::Min (fabs(newcent.m_x+rext.m_x), fabs(newcent.m_x-rext.m_x));
+		float my = MathHelper::Min (fabs(newcent.m_y+rext.m_y), fabs(newcent.m_y-rext.m_y));
 		if (mx*mx + my*my < r*r)
 		{
 			return true;
@@ -216,7 +217,7 @@ float Shape::getDistance(Shape& s2)
 	if (m_type == Shape::CIRCLE && s2.m_type == Shape::CIRCLE)
 	{
 		// Fall: zwei Kreise
-		return std::max(0.0f,(m_center-s2.m_center).getLength() - m_radius - s2.m_radius);
+		return MathHelper::Max(0.0f,(m_center-s2.m_center).getLength() - m_radius - s2.m_radius);
 	}
 	else if (m_type == Shape::RECT && s2.m_type == Shape::RECT)
 	{
@@ -254,18 +255,18 @@ float Shape::getDistance(Shape& s2)
 				}
 				else
 				{
-					dmin = std::min(dmin,float(fabs(c.m_y)-m_extent.m_y));
+					dmin = MathHelper::Min(dmin,float(fabs(c.m_y)-m_extent.m_y));
 				}
 			}
 			else if (fabs(c.m_y) < m_extent.m_y)
 			{
-				dmin = std::min(dmin,float(fabs(c.m_x)-m_extent.m_x));
+				dmin = MathHelper::Min(dmin,float(fabs(c.m_x)-m_extent.m_x));
 			}
 			else
 			{
 				c.m_x = fabs(c.m_x) - m_extent.m_x;
 				c.m_y = fabs(c.m_y) - m_extent.m_y;
-				dmin = std::min(dmin,c.getLength());
+				dmin = MathHelper::Min(dmin,c.getLength());
 			}
 		}
 		
@@ -293,18 +294,18 @@ float Shape::getDistance(Shape& s2)
 				}
 				else
 				{
-					dmin = std::min(dmin, float(fabs(c.m_y) - s2.m_extent.m_y));
+					dmin = MathHelper::Min(dmin, float(fabs(c.m_y) - s2.m_extent.m_y));
 				}
 			}
 			else if (fabs(c.m_y) < s2.m_extent.m_y)
 			{
-				dmin = std::min(dmin,float(fabs(c.m_x)-s2.m_extent.m_x));
+				dmin = MathHelper::Min(dmin,float(fabs(c.m_x)-s2.m_extent.m_x));
 			}
 			else
 			{
 				c.m_x = fabs(c.m_x) - s2.m_extent.m_x;
 				c.m_y = fabs(c.m_y) - s2.m_extent.m_y;
-				dmin = std::min(dmin,c.getLength());
+				dmin = MathHelper::Min(dmin,c.getLength());
 			}
 		}
 		
@@ -345,13 +346,13 @@ float Shape::getDistance(Shape& s2)
 		if ( fabs(newcent.m_x) < rext.m_x || fabs(newcent.m_y) < rext.m_y)
 		{
 			// Abstand zur naechsten Kante
-			return std::max( std::max(0.0,fabs(newcent.m_x) - rext.m_x -r), std::max(0.0,fabs(newcent.m_y) - rext.m_y-r));
+			return MathHelper::Max( MathHelper::Max(0.0f,fabs(newcent.m_x) - rext.m_x -r), MathHelper::Max(0.0f,fabs(newcent.m_y) - rext.m_y-r));
 		}
 
 		
 		// Abstand zur naechsten Ecke
-		float mx = std::min (fabs(newcent.m_x+rext.m_x), fabs(newcent.m_x-rext.m_x));
-		float my = std::min (fabs(newcent.m_y+rext.m_y), fabs(newcent.m_y-rext.m_y));
+		float mx = MathHelper::Min (fabs(newcent.m_x+rext.m_x), fabs(newcent.m_x-rext.m_x));
+		float my = MathHelper::Min (fabs(newcent.m_y+rext.m_y), fabs(newcent.m_y-rext.m_y));
 		return sqrt(mx*mx + my*my) - r;
 	}
 	
@@ -392,8 +393,8 @@ Vector Shape::projectionOnBorder(Vector point)
 		if (projx && projy)
 		{
 			// Entscheidung fuer die Kante, die naeher ist
-			float diffx = std::min(fabs(locpos.m_x-m_extent.m_x), fabs(locpos.m_x+m_extent.m_x));
-			float diffy = std::min(fabs(locpos.m_y-m_extent.m_y), fabs(locpos.m_y+m_extent.m_y));
+			float diffx = MathHelper::Min(fabs(locpos.m_x-m_extent.m_x), fabs(locpos.m_x+m_extent.m_x));
+			float diffy = MathHelper::Min(fabs(locpos.m_y-m_extent.m_y), fabs(locpos.m_y+m_extent.m_y));
 			if (diffx < diffy)
 				projx = false;
 			else

@@ -1,9 +1,15 @@
 #include "application.h"
 
-#include "tooltip.h"
+#include "tooltipmanager.h"
 #include "itemwindow.h"
 #include "templateloader.h"
 #include "music.h"
+#include "debugpanel.h"
+#include "guidebugtab.h"
+#include "luascripttab.h"
+#include "textfileeditwindow.h"
+
+#include "OgreConfigFile.h"
 
 #ifdef __APPLE__
 #include <physfs.h>
@@ -176,9 +182,10 @@ Application::~Application()
 	printf("deleting application\n");
 	delete m_main_window;
 	delete m_document;
-	delete m_ogre_cegui_renderer;
+    CEGUI::OgreRenderer::destroySystem(); // deletes everything
 	delete m_ogre_root;
-
+	
+	
 	ObjectFactory::cleanup();
 	ItemFactory::cleanup();
 	SoundSystem::cleanup();
@@ -328,6 +335,13 @@ bool Application::initOgre()
 	// Szenemanager anlegen
 	m_scene_manager = m_ogre_root->createSceneManager(Ogre::ST_GENERIC,"DefaultSceneManager");
 
+    // set Shadows enabled before any mesh is loaded
+	m_scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
+	m_scene_manager->setShadowTextureSelfShadow(false);
+	m_scene_manager->setShadowTextureConfig(0,2048,2048,Ogre::PF_X8R8G8B8);
+	m_scene_manager->setShadowColour( Ogre::ColourValue(0.4, 0.4, 0.4) );
+	m_scene_manager->setShadowFarDistance(2000);
+
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW);
 	return true;
 
@@ -340,28 +354,13 @@ bool Application::configureOgre()
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW );
 	// Rendering System waehlen
 	// Liste aller verfuegbaren Systeme ausgeben lassen und das erste davon nehmen
-	Ogre::RenderSystemList *renderSystems = NULL;
-	Ogre::RenderSystemList::iterator r_it;
-	renderSystems = m_ogre_root->getAvailableRenderers();
-	if (renderSystems->empty())
-	{
-		ERRORMSG("no rendering system available");
-		return false;
-	}
-	r_it = renderSystems->begin();
-	m_ogre_root->setRenderSystem(*r_it);
 
-	// config Dialog anzeigen
-	// TODO: Einstellungen direkt setzen oder aus einem File einlesen
-	bool result = true;
-	//result = m_ogre_root->showConfigDialog();
-	m_ogre_root->restoreConfig();
-	if (result == false)
-	{
-		// DEBUG("User pressed Cancel on config Dialog");
-		return false;
-	}
-
+    if(!m_ogre_root->showConfigDialog())
+    {
+        //Ogre
+        delete m_ogre_root;
+        return false; // Exit the application on cancel
+    }
 
 	return true;
 }
@@ -375,57 +374,40 @@ bool Application::setupResources()
     Ogre::String path = "";
 #ifdef __APPLE__
     path = macPath();
-#else
-    path = ".";
 #endif
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/models", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/materials/scripts", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/materials/programs", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/materials/textures", "FileSystem", "General");
-	if (OGRE_VERSION >= ((1 << 16) | (6 << 8)))
+	
+	
+	
+	Ogre::ConfigFile cf;
+	cf.load("resources.cfg");
+
+
+	// Go through all sections & settings in the file
+	Ogre::ConfigFile::SectionIterator seci = cf.getSectionIterator();
+ 
+	Ogre::String secName, typeName, archName;
+	while (seci.hasMoreElements())
 	{
-		Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/particle/ogre_1_6", "FileSystem", "General");
+		secName = seci.peekNextKey();
+		Ogre::ConfigFile::SettingsMultiMap *settings = seci.getNext();
+		Ogre::ConfigFile::SettingsMultiMap::iterator i;
+		for (i = settings->begin(); i != settings->end(); ++i)
+		{
+			typeName = i->first;
+			archName = i->second;
+			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + archName, typeName, secName);
+		}
 	}
-	else
-	{
-		Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/particle", "FileSystem", "General");
-	}
+	
+	
 
-	// CEGUI Resourcen laden
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/configs", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/fonts", "FileSystem", "GUI");
-
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/imagesets", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/emotionsets", "FileSystem", "emotionsets");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/layouts", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/looknfeel", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/schemes", "FileSystem", "GUI");
-
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/gui/schemes", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/itempictures", "FileSystem", "itempictures");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/sound", "FileSystem", "sound");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/resources/music", "FileSystem", "music");
-
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/world", "FileSystem", "world");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/npc", "FileSystem", "npc");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/quests", "FileSystem", "quests");
 #ifndef __APPLE__
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./save", "FileSystem", "Savegame");
 #else
     Ogre::String homePath = userPath();
     Ogre::ResourceGroupManager::getSingleton().addResourceLocation(homePath, "FileSystem", "Savegame");
 #endif
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/items", "FileSystem", "items");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/abilities", "FileSystem", "abilities");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/monsters", "FileSystem", "monsters");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/playerclasses", "FileSystem", "playerclasses");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/projectiles", "FileSystem", "projectiles");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/objects", "FileSystem", "objects");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/obj_templates", "FileSystem", "obj_templates");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/object_groups", "FileSystem", "object_groups");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/renderinfo", "FileSystem", "renderinfo");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/lua", "FileSystem", "lua");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/data/sound", "FileSystem", "sounddata");
+
 
 
 #if defined(WIN32)
@@ -463,66 +445,50 @@ bool Application::initGettext()
 bool Application::initCEGUI()
 {
 	DEBUG("init CEGUI\n");
-	m_ogre_cegui_renderer = new CEGUI::OgreCEGUIRenderer(
-			m_window,							// Fenster in das CEGUi rendert
-   Ogre::RENDER_QUEUE_OVERLAY,	// Render Queue von CEGUI
-   false,								// CEGUI in der Render Queue zuerst bearbeitet
-   3000,									// max quads for the UI
-   m_scene_manager						// verwendeter Szenemanager
-														);
     
-	// Groesse festlegen
-	m_ogre_cegui_renderer->setDisplaySize(CEGUI::Size((int) m_window->getWidth(),(int) m_window->getHeight()));
+	CEGUI::OgreRenderer::bootstrapSystem();
 
-#ifndef __APPLE__
-	// Basisklasse von CEGUI erzeugen
-	m_cegui_system = new CEGUI::System(m_ogre_cegui_renderer);
-#else
-    // set the cegui log file on mac
-    std::string path = userPath() + "/cegui.log";
-    m_cegui_system = new CEGUI::System(m_ogre_cegui_renderer, NULL, NULL, NULL, "", path.c_str());
-#endif
 
 	// Log level
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
     
 	// Scheme laden
-	CEGUI::SchemeManager::getSingleton().loadScheme((CEGUI::utf8*)"TaharezLook.scheme", (CEGUI::utf8*)"GUI");
+	CEGUI::SchemeManager::getSingleton().create((CEGUI::utf8*)"TaharezLook.scheme", (CEGUI::utf8*)"GUI");
 
 	// Imagesets laden
-	CEGUI::ImagesetManager::getSingleton().createImageset("skills.imageset");
+	CEGUI::ImagesetManager::getSingleton().create("skills.imageset");
 
+    CEGUI::Texture &startScreenTex = CEGUI::System::getSingleton().getRenderer()->createTexture("startscreen.png", (CEGUI::utf8*)"GUI");
+    
 	try
 	{
-		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("startscreen.png","startscreen.png",(CEGUI::utf8*)"GUI");
-		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile ("worldMap.png","worldMap.png",(CEGUI::utf8*)"GUI");
+		CEGUI::ImagesetManager::getSingleton().createFromImageFile("startscreen.png", "startscreen.png");
+		CEGUI::ImagesetManager::getSingleton().createFromImageFile("worldMap.png","worldMap.png",(CEGUI::utf8*)"GUI");
 	}
 	catch (CEGUI::Exception& e)
 	{
 		DEBUG("CEGUI exception %s",e.getMessage().c_str());
 	}
-
+    m_cegui_system = CEGUI::System::getSingletonPtr();
 
 	// Mauscursor setzen (evtl eher in View auslagern ? )
 	m_cegui_system->setDefaultMouseCursor((CEGUI::utf8*)"TaharezLook", (CEGUI::utf8*)"MouseArrow");
-
+    m_cegui_system->setDefaultTooltip((CEGUI::utf8*)"TaharezLook/Tooltip");
+    
 	// Font setzen
-	CEGUI::FontManager::getSingleton().createFont("DejaVuSerif-8.font", (CEGUI::utf8*)"GUI");
-	CEGUI::FontManager::getSingleton().createFont("DejaVuSerif-10.font", (CEGUI::utf8*)"GUI");
-	CEGUI::FontManager::getSingleton().createFont("DejaVuSerif-12.font", (CEGUI::utf8*)"GUI");
-	CEGUI::FontManager::getSingleton().createFont("DejaVuSerif-16.font", (CEGUI::utf8*)"GUI");
-	CEGUI::FontManager::getSingleton().createFont("DejaVuSans-10.font", (CEGUI::utf8*)"GUI");
+	CEGUI::FontManager::getSingleton().create("DejaVuSerif-8.font", (CEGUI::utf8*)"GUI");
+	CEGUI::FontManager::getSingleton().create("DejaVuSerif-10.font", (CEGUI::utf8*)"GUI");
+	CEGUI::FontManager::getSingleton().create("DejaVuSerif-12.font", (CEGUI::utf8*)"GUI");
+	CEGUI::FontManager::getSingleton().create("DejaVuSerif-16.font", (CEGUI::utf8*)"GUI");
+	CEGUI::FontManager::getSingleton().create("DejaVuSans-10.font", (CEGUI::utf8*)"GUI");
 	m_cegui_system->setDefaultFont((CEGUI::utf8*)"DejaVuSerif-8");
 
 	// eigene Factorys einfuegen
-	CEGUI::WindowFactoryManager::getSingleton().addFactory( new TextWrapTooltipFactory );
-	CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("TextWrapTooltip", "CEGUI/Tooltip", "TaharezLook/Tooltip","Falagard/Tooltip");
-
-	// default ToolTip erzeugen
-	CEGUI::System::getSingleton().setDefaultTooltip( (CEGUI::utf8*)"TextWrapTooltip" );
-	CEGUI::Tooltip* ttip = CEGUI::System::getSingleton().getDefaultTooltip();
-	ttip->setDisplayTime(0);
-	ttip->setMaxSize(CEGUI::UVector2(cegui_reldim(0.4), cegui_reldim(1.0)));
+    CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("SumwarsTooltip", "DefaultWindow", "TaharezLook/Tooltip", "Falagard/Default");
+	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<GuiDebugTab> >();
+	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<LuaScriptTab> >();
+	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<TextFileEditWindow> >();
+	
 	return true;
 }
 
@@ -591,6 +557,15 @@ bool Application::createView()
 	DEBUG("create view\n");
 	m_main_window = new MainWindow(m_ogre_root, m_cegui_system,m_window,m_document);
 
+	
+	new DebugPanel();
+	DebugPanel::getSingleton().init(true);
+	
+	TooltipManager *mgr = new TooltipManager();
+	mgr->setFadeInTime(200.0f);
+	mgr->setFadeOutTime(200.0f);
+	mgr->setVisibleTime(5000.0f);
+	
 	return true;
 }
 
@@ -608,7 +583,7 @@ bool Application::loadResources()
 
 		file = it->filename;
 
-		CEGUI::ImagesetManager::getSingleton().createImagesetFromImageFile (file,file,(CEGUI::utf8*)"itempictures");
+		CEGUI::ImagesetManager::getSingleton().createFromImageFile(file,file,(CEGUI::utf8*)"itempictures");
 
 		updateStartScreen(0.1);
 	}
@@ -620,7 +595,7 @@ bool Application::loadResources()
 
 		file = it->filename;
 
-		CEGUI::ImagesetManager::getSingleton().createImageset(file);
+		CEGUI::ImagesetManager::getSingleton().create(file);
 
 		updateStartScreen(0.2);
 	}
@@ -631,7 +606,7 @@ bool Application::loadResources()
 
 		file = it->filename;
 
-		CEGUI::ImagesetManager::getSingleton().createImageset(file);
+		CEGUI::ImagesetManager::getSingleton().create(file);
 
 		updateStartScreen(0.3);
 	}

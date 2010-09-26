@@ -21,7 +21,7 @@
 #include <cstdlib>
 #include <algorithm>
 
-class Gridunit;
+struct Gridunit;
 class Region;
 
 typedef std::string RegionName;

@@ -1,4 +1,4 @@
-#include "item.h"
+// #include "item.h"
 #include "itemfactory.h"
 
 void WeaponAttr::operator=(WeaponAttr& other)
@@ -316,7 +316,7 @@ int Item::getValue(std::string valname)
 	}
 	else if (valname == "level_requirement")
 	{
-		lua_pushnumber(EventSystem::getLuaState() , fabs(m_level_req) );
+		lua_pushnumber(EventSystem::getLuaState() , fabs((float)m_level_req) );
 		return 1;
 	}
 	else if (valname == "rarity")
@@ -646,27 +646,52 @@ void Item::fromStringComplete(CharConv* cv)
 
 }
 
-std::string Item::getDescription(float price_factor)
+std::string Item::getDescription(float price_factor, ItemRequirementsMet irm)
 {
+    std::string defaultColor = "[colour='FF2F2F2F']";
+    std::string rarityColor;
+    switch (m_rarity)
+    {
+        case MAGICAL:
+            rarityColor = "[colour='FF00C000']";
+            break;
+        case RARE:
+            rarityColor = "[colour='FF2573D9']";
+            break;
+        case UNIQUE:
+            rarityColor = "[colour='FFFF0000']";
+            break;
+        case QUEST:
+            rarityColor = "[colour='FFC05600']";
+            break;
+        default:
+            rarityColor = defaultColor;
+    }
 
 	// String fuer die Beschreibung
 	std::ostringstream out_stream;
 	out_stream.str("");
-	out_stream<<getName()<<"\n";
+    out_stream<<rarityColor<<getName()<<"\n" << defaultColor;
 	int i;
 	// Levelbeschraenkung
 	out_stream <<gettext("Value")<<": "<<m_price;
 	if (price_factor != 0 && price_factor != 1)
 	{
-		out_stream <<"\n" << gettext("Selling Value")<<": "<<std::max(1,int(m_price*price_factor));
+		out_stream <<"\n" << gettext("Selling Value")<<": "<<MathHelper::Max(1,int(m_price*price_factor));
 	}
 	if (m_level_req>0)
 	{
-		out_stream<<"\n" << gettext("Required level")<<": "<<(int) m_level_req;
+        if (irm.m_level)
+            out_stream<<"\n" << gettext("Required level")<<": "<<(int) m_level_req;
+        else
+            out_stream<<"\n" << "[colour='FFFF0000']" << gettext("Required level")<<": "<<(int) m_level_req << "[colour='FF2F2F2F']";
 	}
 	
 	if (m_char_req != "15" && m_char_req != "all")
 	{
+        if (!irm.m_class)
+            out_stream<< "[colour='FFFF0000']";
+        
 		size_t pos=0,pos2;
 		out_stream<<"\n" << gettext("Required class")<<": ";
 		
@@ -717,7 +742,7 @@ std::string Item::getDescription(float price_factor)
 			
 			first = false;
 		}
-		
+		out_stream<< defaultColor; 
 	}
 
 	// Effekt beim Verbrauchen
@@ -838,6 +863,286 @@ std::string Item::getDescription(float price_factor)
 	return out_stream.str();
 }
 
+std::list<std::string> Item::getDescriptionAsStringList(float price_factor, ItemRequirementsMet irm)
+{
+    std::list<std::string> itemDescList;
+    std::string defaultColor = "[colour='FF2F2F2F']";
+    std::string rarityColor;
+    switch (m_rarity)
+    {
+        case MAGICAL:
+            rarityColor = "[colour='FF00C000']";
+            break;
+        case RARE:
+            rarityColor = "[colour='FF2573D9']";
+            break;
+        case UNIQUE:
+            rarityColor = "[colour='FFFF0000']";
+            break;
+        case QUEST:
+            rarityColor = "[colour='FFC05600']";
+            break;
+        default:
+            rarityColor = defaultColor;
+    }
+    
+    // String fuer die Beschreibung
+    std::ostringstream out_stream;
+    out_stream.str("");
+    out_stream<<rarityColor<<getName()<<"\n" << defaultColor;
+    itemDescList.push_back(out_stream.str());
+    out_stream.str("");
+    
+    int i;
+    // Levelbeschraenkung
+    out_stream <<gettext("Value")<<": "<<m_price;
+    itemDescList.push_back(out_stream.str());
+    out_stream.str("");
+    
+    if (price_factor != 0 && price_factor != 1)
+    {
+        out_stream <<"\n" << gettext("Selling Value")<<": "<<MathHelper::Max(1,int(m_price*price_factor));
+        itemDescList.push_back(out_stream.str());
+        out_stream.str("");
+    }
+    if (m_level_req>0)
+    {
+        if (irm.m_level)
+        {
+            out_stream<<"\n" << gettext("Required level")<<": "<<(int) m_level_req;
+            itemDescList.push_back(out_stream.str());
+            out_stream.str("");
+        }
+        else
+        {
+            out_stream<<"\n" << "[colour='FFFF0000']" << gettext("Required level")<<": "<<(int) m_level_req << "[colour='FF2F2F2F']";
+            itemDescList.push_back(out_stream.str());
+            out_stream.str("");
+        }
+    }
+    
+    if (m_char_req != "15" && m_char_req != "all")
+    {
+        if (!irm.m_class)
+        {
+            out_stream<< "[colour='FFFF0000']";
+            itemDescList.push_back(out_stream.str());
+            out_stream.str("");
+        }
+        size_t pos=0,pos2;
+        out_stream<<"\n" << gettext("Required class")<<": ";
+        
+        std::string type;
+        bool end = false;
+        
+        // alle Klassen ermitteln, die das Item verwenden koennen
+        //  fuer jedes Teilstueck in dem string werden alle Klassen gesucht, die das entsprechende Tag besitzen
+        std::set<std::string> classes;
+        std::set<std::string>::iterator ct;
+        std::map<GameObject::Subtype, PlayerBasicData*>& pdata = ObjectFactory::getPlayerData();
+        std::map<GameObject::Subtype, PlayerBasicData*>::iterator it;
+        do
+        {
+            pos2 = m_char_req.find_first_of(",|",pos);
+            if (pos2 == std::string::npos)
+            {
+                pos2 = m_char_req.length();
+                end = true;
+            }
+            type = m_char_req.substr(pos,pos2-pos);
+            
+            // Schleife ueber die Spielerklassen
+            for (it = pdata.begin(); it != pdata.end(); ++it)
+            {
+                // Schleife ueber die Tags der Klasse
+                std::list<std::string>::iterator jt;
+                for (jt = it->second->m_item_req_tags.begin(); jt != it->second->m_item_req_tags.end(); ++jt)
+                {
+                    if (*jt == type)
+                    {
+                        classes.insert(it->second->m_name);
+                    }
+                }
+                
+            }
+            pos = pos2+1;
+        }
+        while (!end);
+        
+        // Ausgabe schreiben
+        bool first = true;
+        for (ct = classes.begin(); ct != classes.end(); ++ct)
+        {
+            if (!first)
+                out_stream<<", ";
+            out_stream<<gettext(ct->c_str());
+            
+            first = false;
+        }
+        out_stream<< defaultColor;
+        itemDescList.push_back(out_stream.str());
+        out_stream.str("");
+    }
+    
+    // Effekt beim Verbrauchen
+    if (m_useup_effect)
+    {
+        // HP Heilung
+        if (m_useup_effect->m_dhealth>0)
+        {
+            out_stream <<"\n"<< gettext("Heals ")<<(int) m_useup_effect->m_dhealth<<gettext(" hitpoints");
+            itemDescList.push_back(out_stream.str());
+            out_stream.str("");
+        }
+        
+        // Heilen/ Immunisieren gegen Statusmods
+        for (i=0;i<8;i++)
+        {
+            if (    m_useup_effect->m_dstatus_mod_immune_time[i]>0)
+            {
+                out_stream <<"\n"<< gettext("Heals ")<<Damage::getStatusModName((Damage::StatusMods) i);
+                itemDescList.push_back(out_stream.str());
+                out_stream.str("");
+                
+                if (m_useup_effect->m_dstatus_mod_immune_time[i]>=1000)
+                {
+                    out_stream <<", "<< gettext("immune for ")<< (int) (m_useup_effect->m_dstatus_mod_immune_time[i]*0.001f)<<"s";
+                    itemDescList.push_back(out_stream.str());
+                    out_stream.str("");
+                }
+            }
+        }
+        
+    }
+    
+    // Daten einer Waffe
+    if (m_weapon_attr)
+    {
+        if (m_weapon_attr->m_two_handed)
+        {
+            out_stream <<"\n"<< gettext("Two-handed weapon");
+            itemDescList.push_back(out_stream.str());
+            out_stream.str("");
+        }
+        // Reichweite / Angriffsgeschwindigkeit
+        if (m_type == WEAPON)
+        {
+            out_stream << "\n" << gettext("Range")<<": "<<m_weapon_attr->m_attack_range;
+            itemDescList.push_back(out_stream.str());
+            out_stream.str("");
+        }
+        
+        //out_stream << "\n" << "Angriffe: "<<m_weapon_attr->m_attack_speed*0.001f<<"/s";
+        
+        // Schaden
+        std::string dmgstring = m_weapon_attr->m_damage.getDamageString(Damage::ITEM);
+        if (dmgstring != "")
+        {
+            if (m_type == WEAPON)
+            {
+                out_stream << "\n" << gettext("Damage")<<":\n";
+                itemDescList.push_back(out_stream.str());
+                out_stream.str("");
+            }
+            std::string::size_type pos = dmgstring.find("\n");
+            while(pos != std::string::npos)
+            {
+                out_stream << dmgstring.substr(0, pos+1);
+                itemDescList.push_back(out_stream.str());
+                out_stream.str("");
+                dmgstring.erase(0,pos+1);
+                pos = dmgstring.find("\n");
+            }
+            out_stream << "\n" << dmgstring;
+            itemDescList.push_back(out_stream.str());
+            out_stream.str("");
+        }
+    }
+    
+    // Effekte von Ausruestungsgegenstaenden
+    if (m_equip_effect)
+    {
+        if (m_equip_effect->m_darmor>0)
+        {
+            out_stream<<"\n"<<gettext("Armor")<<": "<<m_equip_effect->m_darmor;
+            itemDescList.push_back(out_stream.str());
+            out_stream.str("");
+        }
+        
+        if (m_equip_effect->m_dblock>0)
+        {
+            out_stream<<"\n"<<gettext("Block")<<": "<<m_equip_effect->m_dblock;
+            itemDescList.push_back(out_stream.str());
+            out_stream.str("");
+        }
+        
+        if (m_equip_effect->m_dmax_health>0)
+        {
+            out_stream<<"\n"<<"+"<<(int) m_equip_effect->m_dmax_health<< " "<<gettext("max hitpoints");
+            itemDescList.push_back(out_stream.str());
+            out_stream.str("");
+        }
+        
+        if (m_equip_effect->m_dstrength>0)
+        {
+            out_stream<<"\n"<<"+"<<m_equip_effect->m_dstrength<< " "<<gettext("Strength");
+            itemDescList.push_back(out_stream.str());
+            out_stream.str("");
+        }
+        
+        if (m_equip_effect->m_ddexterity>0)
+        {
+            out_stream<<"\n"<<"+"<<m_equip_effect->m_ddexterity<< " "<<gettext("Dexterity");
+            itemDescList.push_back(out_stream.str());
+            out_stream.str("");
+        }
+        
+        if (m_equip_effect->m_dmagic_power>0)
+        {
+            out_stream<<"\n"<<"+"<<m_equip_effect->m_dmagic_power<< " "<<gettext("Magic Power");
+            itemDescList.push_back(out_stream.str());
+            out_stream.str("");
+        }
+        
+        if (m_equip_effect->m_dwillpower>0)
+        {
+            out_stream<<"\n"<<"+"<<m_equip_effect->m_dwillpower<< " "<<gettext("Willpower");
+            itemDescList.push_back(out_stream.str());
+            out_stream.str("");
+        }
+        
+        for (i=0;i<4;i++)
+        {
+            if (m_equip_effect->m_dresistances[i]>0)
+            {
+                out_stream<<"\n"<<"+"<<m_equip_effect->m_dresistances[i]<<" "<<Damage::getDamageResistanceName((Damage::DamageType) i);
+                itemDescList.push_back(out_stream.str());
+                out_stream.str("");
+            }
+        }
+        
+        for (i=0;i<4;i++)
+        {
+            if (m_equip_effect->m_dresistances_cap[i]>0)
+            {
+                out_stream<<"\n"<<"+"<<m_equip_effect->m_dresistances_cap[i]<<gettext(" max. ")<<Damage::getDamageResistanceName((Damage::DamageType) i);
+                itemDescList.push_back(out_stream.str());
+                out_stream.str("");
+            }
+        }
+        
+        
+        // TODO: Angriffsgeschwindigkeit
+        // TODO: special Flags
+        // TODO: Faehigkeiten
+        // TODO: Immunitaeten
+        
+    }
+    
+    
+    return itemDescList;
+}
+
 void Item::calcPrice()
 {
 	if (m_useup_effect !=0)
@@ -883,7 +1188,7 @@ void Item::calcPrice()
 			dvalue += dmg.m_status_mod_power[i]*0.2;
 		}
 		// TODO: Flags einberechnen
-		value += dvalue * std::max(1.0,std::min(1.5,sqrt(m_weapon_attr->m_attack_range)));
+		value += dvalue * MathHelper::Max(1.0f,MathHelper::Min(1.5f,sqrt(m_weapon_attr->m_attack_range)));
 		
 	}
 
@@ -923,7 +1228,7 @@ void Item::calcPrice()
 	
 	value = (2+0.5*(1+0.1*value)*value)* mult;
 
-	value = std::min (value,100000.0f);
+	value = MathHelper::Min (value,100000.0f);
 	m_price += (int) value;
 }
 

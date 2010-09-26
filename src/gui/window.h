@@ -7,7 +7,7 @@
 #include "gettext.h"
 
 // CEGUI includes
-#include "CEGUI.h"
+#include "CEGUI/CEGUI.h"
 
 /**
  * \fn class Window

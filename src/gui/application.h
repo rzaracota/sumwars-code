@@ -10,17 +10,16 @@
 #include "OgreMeshManager.h"
 
 // needed to be able to create the CEGUI renderer interface
-#include "OgreCEGUIRenderer.h"
-
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 
 // CEGUI includes
-#include "CEGUISystem.h"
-#include "CEGUIInputEvent.h"
-#include "CEGUIWindow.h"
-#include "CEGUIWindowManager.h"
-#include "CEGUISchemeManager.h"
-#include "CEGUIFontManager.h"
-#include "elements/CEGUIFrameWindow.h"
+#include "CEGUI/CEGUISystem.h"
+#include "CEGUI/CEGUIInputEvent.h"
+#include "CEGUI/CEGUIWindow.h"
+#include "CEGUI/CEGUIWindowManager.h"
+#include "CEGUI/CEGUISchemeManager.h"
+#include "CEGUI/CEGUIFontManager.h"
+#include "CEGUI/elements/CEGUIFrameWindow.h"
 
 #include <stdio.h>
 
@@ -171,13 +170,13 @@ class Application
 		 * \var CEGUI::System* m_cegui_system
 		 * \brief Basisobjekt von CEGUI
 		 */
-		CEGUI::System* m_cegui_system;
+		CEGUI::System *m_cegui_system;
 
 		/**
-		 * \var CEGUI::OgreCEGUIRenderer* m_ogre_cegui_renderer
+		 * \var CEGUI::OgreRenderer* m_ogre_cegui_renderer
 		 * \brief Objekt zum Rendern von CEGUI mittels Ogre
 		 */
-		CEGUI::OgreCEGUIRenderer* m_ogre_cegui_renderer;
+		//CEGUI::OgreRenderer *m_ogre_cegui_renderer;
 
 		/**
 		 * \var Ogre::RenderWindow *m_window
@@ -190,8 +189,11 @@ class Application
 		 * \brief Objekt fuer das Management der Szene
 		 */
  		Ogre::SceneManager *m_scene_manager;
+        
 
-
+        /**
+         * \var Ogre::RTS
+        
 		/**
 		 * \var bool m_shutdown
 		 * \brief true, wenn die Anwendung beendet werden soll

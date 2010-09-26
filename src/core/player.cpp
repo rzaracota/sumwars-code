@@ -43,8 +43,8 @@ void PlayerCamera::moveTo(float distance, float theta, float phi, float time)
 //    min_theta = 5;
 
 
-	m_goal_distance = std::max(std::min(distance,max_distance),5.0f);
-	m_goal_theta = std::max(std::min(theta,90.0f),min_theta);
+	m_goal_distance = MathHelper::Max(MathHelper::Min(distance,max_distance),5.0f);
+	m_goal_theta = MathHelper::Max(MathHelper::Min(theta,90.0f),min_theta);
 	m_goal_phi = fmod(phi+360,360);
 
 	// Phi so anpassen, dass jeweils der kuerzere Teilkreis genutzt wird
@@ -560,7 +560,7 @@ bool Player::onItemClick(ClientCommand* command)
 			{
 
 				// Item soll als Ausruestungsgegenstand benutzt werden
-				req = checkItemRequirements(it);
+				req = checkItemRequirements(it).m_overall;
 				pos = m_equipement-> getItemEquipPosition(it, m_secondary_equip, (Equipement::Position) pos);
 			}
 			else
@@ -690,7 +690,7 @@ bool Player::onItemClick(ClientCommand* command)
 					// equip Item to Autoposition
 					if (pos >= Equipement::CURSOR_ITEM)
 					{
-						bool req = checkItemRequirements(it);
+						bool req = checkItemRequirements(it).m_overall;
 						Equipement::Position pos2 = m_equipement-> getItemEquipPosition(it, m_secondary_equip);
 						
 						if (req && pos2 <= Equipement::CURSOR_ITEM && pos2 != Equipement::NONE)
@@ -876,7 +876,7 @@ short Player::insertItem(Item* itm, bool use_equip, bool emit_event)
 		ERRORMSG("tried to insert null item");
 		return 0;
 	}
-	bool may_equip = use_equip && checkItemRequirements(itm);
+	bool may_equip = use_equip && checkItemRequirements(itm).m_overall;
 
 	short pos = getEquipement()->insertItem(itm,true,may_equip, m_secondary_equip);
 
@@ -915,14 +915,17 @@ short Player::insertItem(Item* itm, bool use_equip, bool emit_event)
 	return pos;
 }
 
-bool Player::checkItemRequirements(Item* itm)
+ItemRequirementsMet Player::checkItemRequirements(Item* itm)
 {
+    ItemRequirementsMet irm;
+    
 	// testen ob Level ausreicht
 	if (getBaseAttr()->m_level < itm->m_level_req)
 	{
 		// Level Vorraussetzung nicht erfuellt
 		DEBUGX("level too low: own level: %i item level: %i",getBaseAttr()->m_level,itm->m_level_req);
-		return false;
+        irm.m_overall = false;
+        irm.m_level = false;
 	}
 
 	// testen ob Item fuer die Charakterklasse zugelassen ist
@@ -939,14 +942,15 @@ bool Player::checkItemRequirements(Item* itm)
 			{
 				if (itm->m_char_req.find(*it) != std::string::npos)
 				{
-					return true;
+					return irm;
 				}
 			}
 		}
-		return false;
+		irm.m_overall = false;
+        irm.m_class = false;
 	}
 
-	return true;
+	return irm;
 }
 
 Item* Player::getWeapon()
@@ -1449,7 +1453,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 			// Action entsprechend der Verzoegerung schneller ausfuehren
 			// aber maximal doppelt so schnell
-			float mult = std::max(getAction()->m_time-delay, getAction()->m_time/2)/getAction()->m_time;
+			float mult = MathHelper::Max(getAction()->m_time-delay, getAction()->m_time/2)/getAction()->m_time;
 			DEBUGX("delay %f mult %f",delay,mult);
 			if (getAction()->m_type == "walk")
 			{

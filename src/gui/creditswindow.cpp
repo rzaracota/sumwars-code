@@ -1,4 +1,5 @@
 #include "creditswindow.h"
+#include "ceguiutility.h"
 
 CreditsWindow::CreditsWindow(Document* doc)
 	:Window(doc)
@@ -12,7 +13,7 @@ CreditsWindow::CreditsWindow(Document* doc)
 	creditsframe->setProperty("FrameEnabled","false");
 	creditsframe->setProperty("TitlebarEnabled","false");
 	creditsframe->setProperty("CloseButtonEnabled","false");
-	creditsframe->setAlpha(0.0);
+	creditsframe->setAlpha(0.4);
 	
 	m_window = creditsframe;
 	
@@ -26,38 +27,40 @@ CreditsWindow::CreditsWindow(Document* doc)
 	CEGUI::Window* credits;
 	credits = win_mgr.createWindow("TaharezLook/StaticText", "CreditWindow");
 	pane->addChildWindow(credits);
-	credits->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.00f)));
+	credits->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f)));
 	credits->setSize(CEGUI::UVector2(cegui_reldim(1.00f), cegui_reldim( 1.0f)));
 	credits->setProperty("FrameEnabled", "false");
 	credits->setProperty("BackgroundEnabled", "true");
 	credits->setProperty("HorzFormatting", "HorzCentred");
-	credits->setMaxSize(CEGUI::UVector2(cegui_reldim(1.00f), cegui_reldim(10.0f)));
+
+	std::string content = CEGUIUtility::getColourizedString(CEGUIUtility::Red, "Programming:", CEGUIUtility::White);
+	content += "\n Hans Wulf (Lastmerlin) \
+			\n Stefan Stammberger (fusion44) \
+			\n Nicholas Cosens (gnemo)\
+                        \n Network Library For Games (NLFG): \
+                        \n David Athay (trapdoor) \
+                        \n Mac conversion: \
+                        \n David Athay (trapdoor)\
+                        \n Ben Anderman (crimson_penguin)";
 	
-	std::string content = "Programming: \
-			\n Hans Wulf (Lastmerlin) \
-			\n fusion44 \
-			\n Nicholas Cosens (gnemo) \
-            \n\nNetwork Library For Games (NLFG): \
-            \n David Athay (trapdoor) \
-            \n\nMac conversion: \
-            \n David Athay (trapdoor) \
-            \n Ben Anderman (crimson_penguin) \
+	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nGraphics:", CEGUIUtility::White);
+	content +="\n Andreas Schönefeldt \
 			\n\nGraphics: \
 			\n Andreas Schönefeldt \
 			\n Steffen Schönefeldt (Kalimgard) \
-			\n psycho \
-			\n Francesco Miglietta (hal9000 ) \
-			\n\n Scripting: \
-			\n Steffen Schönefeldt (Kalimgard) \
-			\n Hans Wulf (Lastmerlin) \
-			\n\nStory: \
-			\n Steffen Schönefeldt (Kalimgard) \
-			\n Andreas Schönefeldt \
-			\n\nSounds: \
-			\n Michael Kempf (Hangman) \
-			\n artisticdude \
-			\n quobodup \
-			\n\nMusic: \
+			\n Christian Wittmann (psycho)\
+			\n Francesco Miglietta (hal9000)";
+	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\n Scripting:", CEGUIUtility::White);
+	content += "\n Steffen Schönefeldt (Kalimgard) \
+			\n Hans Wulf (Lastmerlin)";
+	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nStory:", CEGUIUtility::White);
+	content += "\n Steffen Schönefeldt (Kalimgard) \
+			\n Andreas Schönefeldt";
+	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nSounds:", CEGUIUtility::White);
+	content += "\n Michael Kempf (Hangman) \
+				\n artisticdude \
+				\n quobodup \ ";
+	content += "\n\nMusic: \
 			\n Mattias Westlund (West) \
 			\n Cheeselord \
 			\n\nTranslation: \
@@ -66,8 +69,11 @@ CreditsWindow::CreditsWindow(Document* doc)
 			\n kroni \
 			\n Brian Jeffears (getter77) \
 			\n Nicholas Cosens (gnemo) \
-			\n axander\
-			\n\nBuild system: \
+			\n axander \
+			\n Build system: \
+			\n Stefan Stammberger (fusion44)";
+	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\n Website:", CEGUIUtility::White);
+	content += "\n Andreas Schönefeldt \
 			\n Michael Kempf (Hangman) \
 			\n fusion44 \
 			\n\nWebsite: \
@@ -95,7 +101,7 @@ void CreditsWindow::updateTranslation()
 	// Set Size of the Window automatically
 	CEGUI::UVector2 size = wtext->getSize();
 	CEGUI::Rect isize = wtext->getUnclippedInnerRect ();
-	float height = PixelAligned(fnt->getFormattedLineCount(wtext->getText(), isize, CEGUI::WordWrapCentred) * fnt->getLineSpacing());
+	float height = PixelAligned(CEGUIUtility::fitTextToWindow(wtext->getText(), isize, CEGUIUtility::WordWrapCentred, fnt).lines * fnt->getLineSpacing());
 	size.d_y = CEGUI::UDim(0.0, height);
 	wtext->setSize(size);
 }
@@ -114,9 +120,6 @@ void CreditsWindow::update()
 		float alltime = 20000;	// time for scrolling
 		float pos = (m_shown_timer.getTime()-starttime)/alltime;
 		
-		if (pos < 0)
-			pos = 0;
-		
 		if (pos > 1.0)
 			pos = 1.0;
 		
@@ -126,7 +129,7 @@ void CreditsWindow::update()
 		CEGUI::ScrollablePane* pane  = static_cast<CEGUI::ScrollablePane*>(win_mgr.getWindow("CreditsPane"));
 		
 		CEGUI::Font* fnt = wtext->getFont();
-		
+
 		pane->setVerticalScrollPosition(pos);
 	}
 }

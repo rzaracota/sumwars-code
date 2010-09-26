@@ -18,9 +18,6 @@
 #define WORLD_H
 
 
-
-#include <sys/time.h>
-
 #include <string>
 #include <iostream>
 #include <list>

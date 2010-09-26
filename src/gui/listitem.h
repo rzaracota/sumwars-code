@@ -1,7 +1,7 @@
 #ifndef LISTITEM_H
 #define LISTITEM_H
 
-#include "CEGUI.h"
+#include "CEGUI/CEGUI.h"
 
 /**
  * \class ListItem

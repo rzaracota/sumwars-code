@@ -5,7 +5,7 @@
 
 
 // needed to be able to create the CEGUI renderer interface
-#include "OgreCEGUIRenderer.h"
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 
 // CEGUI includes
 

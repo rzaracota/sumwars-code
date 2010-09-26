@@ -664,7 +664,7 @@ void Document::onItemRightClick(short pos)
 
 }
 
-void Document::Document::onTradeItemLeftClick(short pos)
+void Document::onTradeItemLeftClick(short pos)
 {
 	ClientCommand command;
 	command.m_button = BUTTON_TRADE_ITEM_LEFT;
@@ -673,7 +673,7 @@ void Document::Document::onTradeItemLeftClick(short pos)
 
 }
 
-void Document::Document::onTradeItemRightClick(short pos)
+void Document::onTradeItemRightClick(short pos)
 {
 	ClientCommand command;
 	command.m_button = BUTTON_TRADE_ITEM_RIGHT;

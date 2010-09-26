@@ -26,6 +26,8 @@
 #include "dialoguewindow.h"
 #include "creditswindow.h"
 #include "music.h"
+#include "tooltipmanager.h"
+#include "debugpanel.h"
 
 MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc)
 {
@@ -122,7 +124,7 @@ bool MainWindow::setupMainMenu()
 		CEGUI::Window* img;
 		img  = win_mgr.createWindow("TaharezLook/StaticImage", "StartScreenImage");
 		m_main_menu->addChildWindow(img);
-		img->setProperty("Image", "set:startscreen.png image:full_image");
+        img->setProperty("Image", "set:startscreen.png image:full_image");
 		img->moveToBack ();
 		img->setMousePassThroughEnabled(true);
 		
@@ -207,6 +209,9 @@ void MainWindow::update(float time)
 	// Eingaben abfangen
 	m_mouse->capture();
 	m_keyboard->capture();
+
+	TooltipManager::getSingleton().update(time);
+	DebugPanel::getSingleton().update();
 	
 	if (m_document->getGUIState()->m_left_mouse_pressed || m_document->getGUIState()->m_right_mouse_pressed)
 	{
@@ -280,6 +285,7 @@ void MainWindow::update(float time)
 		if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		{
 			m_cegui_system->setGUISheet(m_game_screen);
+			TooltipManager::getSingleton().setParent(m_game_screen);
 			m_game_screen->addChildWindow(m_sub_windows["Options"]->getCEGUIWindow());
 			MusicManager::instance().stop();
 		}
@@ -1432,7 +1438,7 @@ void MainWindow::updateObjectInfo()
 				{
 					CEGUI::Font* font = itmlabel->getFont();
 					float width = font->getTextExtent((CEGUI::utf8*) name.c_str());
-					CEGUI::Rect rect = m_game_screen->getInnerRect();
+					CEGUI::Rect rect = m_game_screen->getInnerRectClipper();
 					len = width / rect.getWidth();
 					
 					itmlabel->setText((CEGUI::utf8*) name.c_str());
@@ -1457,7 +1463,7 @@ void MainWindow::updateObjectInfo()
 				
 				
 				std::pair<float,float> rpos = m_scene->getProjection(di->getPosition());
-				itmlabel->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0,rpos.first-0.03),0), CEGUI::UDim(std::max(0.0,rpos.second-0.05),0)));
+				itmlabel->setPosition(CEGUI::UVector2(CEGUI::UDim(MathHelper::Max(0.0,rpos.first-0.03),0), CEGUI::UDim(MathHelper::Max(0.0,rpos.second-0.05),0)));
 			}
 			else
 			{
@@ -1642,7 +1648,7 @@ void MainWindow::updateItemInfo()
 			// Laenge des Schriftzugs
 			CEGUI::Font* font = label->getFont();
 			float width = font->getTextExtent((CEGUI::utf8*) name.c_str());
-			CEGUI::Rect rect = m_game_screen->getInnerRect();
+			CEGUI::Rect rect = m_game_screen->getInnerRectClipper();
 			len = width / rect.getWidth();
 			
 			// eine Laenge fuer die Darstellung (mit Rand), eine ohne
@@ -1828,7 +1834,7 @@ void MainWindow::updateItemInfo()
 			label->setID(it->first);
 			
 			
-			label->setPosition(CEGUI::UVector2(CEGUI::UDim(std::max(0.0f,rpos.first+margin),0), CEGUI::UDim(std::max(0.0f,rpos.second),0)));
+			label->setPosition(CEGUI::UVector2(CEGUI::UDim(MathHelper::Max(0.0f,rpos.first+margin),0), CEGUI::UDim(MathHelper::Max(0.0f,rpos.second),0)));
 			
 			propold = label->getProperty("TextColours").c_str();
 			propnew = "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF";
@@ -2171,24 +2177,25 @@ void MainWindow::updateChatContent()
 	{
 		// Fenster auf die richtige Groesse bringen
 		CEGUI::Font* fnt = label->getFont();
-		CEGUI::Rect area(CEGUI::System::getSingleton().getRenderer()->getRect());
-		
+		CEGUI::Size area(CEGUI::System::getSingleton().getRenderer()->getDisplaySize());
+
+        //TODO
 		CEGUI::String text = label->getText();
-		float width = PixelAligned(fnt->getFormattedTextExtent(text, area, CEGUI::LeftAligned));
+		float width =  50; //PixelAligned(fnt->getFormattedTextExtent(text, area, CEGUI::LeftAligned));
 		
-		float maxwidth = area.getSize().d_width * 0.43;
+		float maxwidth = area.d_width * 0.43;
 		width += 3;
 		if (width > maxwidth)
 		{
 			width = maxwidth;
 		}
 		
-		CEGUI::Rect larea = area;
-		larea.setWidth(width);
-		float height = PixelAligned(fnt->getFormattedLineCount(text, larea, CEGUI::WordWrapLeftAligned) * fnt->getLineSpacing());
-		
-		float relwidth = width / area.getSize().d_width;
-		float relheight = (height+6) / area.getSize().d_height;
+		CEGUI::Size larea = area;
+		larea.d_width = width;
+		float height =  50; //PixelAligned(fnt->getFormattedLineCount(text, larea, CEGUI::WordWrapLeftAligned) * fnt->getLineSpacing());
+        
+		float relwidth = width / area.d_width;
+		float relheight = (height+6) / area.d_height;
 		
 		if ( fabs(label->getArea().getWidth().d_scale - relwidth) > 0.0001
 				   || fabs(label->getArea().getHeight().d_scale - relheight) > 0.0001)
@@ -2330,8 +2337,6 @@ bool MainWindow::mouseMoved(const OIS::MouseEvent &evt) {
 	//DEBUG("injection position %i %i",evt.state.X.abs,evt.state.Y.abs);
 	m_document->onMouseMove(evt.state.X.rel, evt.state.Y.rel,evt.state.Z.rel);
 	
-	
-	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label = win_mgr.getWindow("CursorItemImage");
 	
@@ -2344,7 +2349,7 @@ bool MainWindow::mouseMoved(const OIS::MouseEvent &evt) {
 		off = 12;
 	
 	
-	label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,std::max(0,evt.state.X.abs-off)),CEGUI::UDim(0,std::max(0,evt.state.Y.abs- off))));
+	label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,MathHelper::Max(0,evt.state.X.abs-off)),CEGUI::UDim(0,MathHelper::Max(0,evt.state.Y.abs- off))));
 	
 	
 	return m_cegui_system->injectMousePosition(evt.state.X.abs,evt.state.Y.abs);
@@ -2365,8 +2370,15 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 	else
 		return true;
 
-	bool ret = m_cegui_system->injectMouseButtonDown(button);
-	
+    bool ret = false; // CEGUI 0.7 changed its default behaviour a little bit and creates a invisible root window that always processes events
+
+    // if the returned window is anything else than "GameScreen" then CEGUI needs to process the input
+    if (!(m_cegui_system->getWindowContainingMouse()->getName() == "GameScreen")) 
+    {
+        ret = true; // set ret to false if the events where processed by the invisible window
+        m_cegui_system->injectMouseButtonDown(button);
+    }
+    
 	if (m_document->getGUIState()->m_sheet ==  Document::MAIN_MENU && m_ready_to_start)
 	{
 		m_document->onStartScreenClicked();
@@ -2388,7 +2400,7 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 		}
 
 		// Testet, dass man nicht auf die untere Steuerleiste geklickt hat
-		if (not ret)
+		if (!ret)
 		{
 			if (player->getEquipement()->getItem(Equipement::CURSOR_ITEM)!=0)
 			{
@@ -2476,6 +2488,11 @@ bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 		return true;
 	}
 	
+    if (evt.key == OIS::KC_S)
+    {
+        m_scene_manager->setShadowTextureSelfShadow(!m_scene_manager->getShadowTextureSelfShadow());
+    }
+	
 	bool ret =m_cegui_system->injectKeyDown(evt.key);
 	
 	ret |= m_cegui_system->injectChar(ch);
@@ -2493,7 +2510,7 @@ bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 		m_document->getGUIState()->m_shift_hold = true;
 	}
 	
-	if (not ret)
+	if (!ret)
 	{
 		ret = m_document->onKeyPress(evt.key);
 	}
@@ -2513,7 +2530,7 @@ bool MainWindow::keyReleased(const OIS::KeyEvent &evt)
 		m_document->getGUIState()->m_shift_hold = false;
 	}
 
-	if (not ret)
+	if (!ret)
 	{
 		ret = m_document->onKeyRelease(evt.key);
 	}

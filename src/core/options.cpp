@@ -104,6 +104,7 @@ bool Options::readFromFile(const std::string& filename)
 		TiXmlNode* root;
 
 		root = doc.FirstChild();
+		root = root->NextSibling();
 		if (root->Type() == TiXmlNode::ELEMENT && !strcmp(root->Value(), "Options"))
 		{
 			for ( child = root->FirstChild(); child != 0; child = child->NextSibling())
@@ -133,13 +134,13 @@ bool Options::readFromFile(const std::string& filename)
 					else if (!strcmp(child->Value(), "Music"))
 					{
 						float volume;
-						attr.getFloat("volume",volume,1.0);
+						attr.getFloat("volume", volume, 1.0f);
 						setMusicVolume(volume);
 					}
 					else if (!strcmp(child->Value(), "Sound"))
 					{
 						float volume;
-						attr.getFloat("volume",volume,1.0);
+						attr.getFloat("volume", volume, 1.0f);
 						setSoundVolume(volume);
 					}
 					else if (!strcmp(child->Value(), "Language"))

@@ -2,6 +2,9 @@
 #else
 #define NETWORK_H
 
+#define ID_USER_PACKET_ENUM  80
+
+
 #include "debug.h"
 #include "networkpacket.h"
 #include <queue>

@@ -260,7 +260,7 @@ public:
 	 * \fn bool checkItemRequirements(Item* itm)
 	 * \brief prueft, ob der Spieler das Item verwenden kann
 	 */
-	bool checkItemRequirements(Item* itm);
+    ItemRequirementsMet checkItemRequirements(Item* itm);
 
 	/**
 	 * \fn void abortAction()

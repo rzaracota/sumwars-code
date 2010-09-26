@@ -1,5 +1,6 @@
 
 #include "itemwindow.h"
+#include "tooltipmanager.h"
 
 std::map<Item::Subtype, std::string> ItemWindow::m_item_images;
 
@@ -110,7 +111,7 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 	{
 		// rot wenn Spieler Item nicht verwenden kann
 		// oder es bezahlen muss und nicht genug Geld hat
-		if (!player->checkItemRequirements(item))
+		if (!player->checkItemRequirements(item).m_overall)
 		{
 			propnew = "tl:FFAA5555 tr:FFAA5555 bl:FFAA5555 br:FFAA5555";
 		}
@@ -133,17 +134,80 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 
 void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player* player, int gold,float price_factor)
 {
+	TooltipManager *tMgr = TooltipManager::getSingletonPtr();
+
+	if ( item == 0 )
+		return;
+
+	CEGUI::Font *font = img->getTooltip()->getFont();
 	std::string msg;
-	
-	if (item ==0)
+	ItemRequirementsMet irm = player->checkItemRequirements ( item );
+	std::list<std::string> l = item->getDescriptionAsStringList ( price_factor, irm );
+	l.push_front ( "Hovered:\n" );
+	std::ostringstream out_stream;
+
+	tMgr->createTooltip ( l, 0, font, Tooltip::Main );
+
+	Item *currentEqItem = 0;
+	Item *currentEqItemOffhand = 0;
+
+	switch ( item->m_type )
 	{
-		msg = "";
+		case Item::NOITEM:
+			break;
+
+		case Item::ARMOR:
+			currentEqItem = player->getEquipement()->getItem ( Equipement::ARMOR );
+			break;
+
+		case Item::HELMET:
+			currentEqItem = player->getEquipement()->getItem ( Equipement::HELMET );
+			break;
+
+		case Item::GLOVES:
+			currentEqItem = player->getEquipement()->getItem ( Equipement::GLOVES );
+			break;
+
+		case Item::WEAPON:
+			currentEqItem = player->getEquipement()->getItem ( Equipement::WEAPON );
+			currentEqItemOffhand = player->getEquipement()->getItem ( Equipement::WEAPON2 );
+			break;
+
+		case Item::SHIELD:
+			currentEqItem = player->getEquipement()->getItem ( Equipement::SHIELD );
+			break;
+
+		case Item::POTION:
+			break;
+
+		case Item::RING:
+			currentEqItem = player->getEquipement()->getItem ( Equipement::RING_LEFT );
+			currentEqItemOffhand = player->getEquipement()->getItem ( Equipement::RING_RIGHT );
+			break;
+
+		case Item::AMULET:
+			currentEqItem = player->getEquipement()->getItem ( Equipement::AMULET );
+			break;
+
+		case Item::GOLD_TYPE:
+			break;
+
+		default:
+			break;
+
 	}
-	else
+
+	if ( currentEqItem )
 	{
-		msg =item->getDescription(price_factor);
+		l = currentEqItem->getDescriptionAsStringList ( price_factor );
+		tMgr->createTooltip ( l, 0, font, Tooltip::Comparision );
+
+		if ( currentEqItemOffhand )
+		{
+			l = currentEqItemOffhand->getDescriptionAsStringList ( price_factor );
+			tMgr->createTooltip ( l, 0, font, Tooltip::Comparision );
+		}
 	}
-	img->setTooltipText((CEGUI::utf8*) msg.c_str());
 }
 
 void ItemWindow::registerItemImage(Item::Subtype type, std::string image)

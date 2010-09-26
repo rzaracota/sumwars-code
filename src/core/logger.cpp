@@ -1,6 +1,7 @@
 #include "logger.h"
 #include <fstream>
 #include <iostream>
+#include <string>
 
 void Log::writeMessage(const char* message, int loglevel)
 {

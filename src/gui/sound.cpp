@@ -169,7 +169,7 @@ void SoundSystem::setListenerPosition(Vector pos)
 
 void SoundSystem::cleanup()
 {
-	std::map<SoundName, Sound>::iterator it;
+	std::multimap<SoundName, Sound>::iterator it = m_sounds.begin();
 	for (it = m_sounds.begin(); it != m_sounds.end(); ++it)
 	{
 		alDeleteBuffers(1,&(it->second));

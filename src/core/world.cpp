@@ -464,7 +464,7 @@ Fraction::Relation World::getRelation(Fraction::Id frac, Fraction::Id frac2)
 	else
 	{
 		// Beziehung zwischen Spielern
-		return std::min(m_parties[frac].getRelations()[frac2], m_parties[frac2].getRelations()[frac]);
+		 return Fraction::Relation(MathHelper::Min(m_parties[frac].getRelations()[frac2], m_parties[frac2].getRelations()[frac]));
 	}
 
 
@@ -2686,8 +2686,8 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 			// Mittelpunkt des Objektes im Grid
 			js = (int) floor((wos->m_center.m_y - c1.m_y)/sqs);
 			is = (int) floor((wos->m_center.m_x - c1.m_x)/sqs);
-			is = std::max(std::min(is,pathinfo->m_dim-1),0);
-			js = std::max(std::min(js,pathinfo->m_dim-1),0);
+			is = MathHelper::Max(MathHelper::Min(is,pathinfo->m_dim-1),0);
+			js = MathHelper::Max(MathHelper::Min(js,pathinfo->m_dim-1),0);
 
 			// Form zum Testen auf Kollisionen
 			s2.m_center.m_y = (js+0.5)*sqs+c1.m_y;

@@ -239,10 +239,10 @@ bool  ObjectLoader::loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& basa
 			|| basattr.m_resistances[Damage::PHYSICAL] > basattr.m_resistances_cap[Damage::PHYSICAL])
 	{
 		WARNING("%s : resistance exceeds resistance cap", m_filename.c_str());
-		basattr.m_resistances_cap[Damage::FIRE] = std::max(basattr.m_resistances_cap[Damage::FIRE], basattr.m_resistances[Damage::FIRE]);
-		basattr.m_resistances_cap[Damage::ICE] = std::max(basattr.m_resistances_cap[Damage::ICE], basattr.m_resistances[Damage::ICE]);
-		basattr.m_resistances_cap[Damage::AIR] = std::max(basattr.m_resistances_cap[Damage::AIR], basattr.m_resistances[Damage::AIR]);
-		basattr.m_resistances_cap[Damage::PHYSICAL] = std::max(basattr.m_resistances_cap[Damage::PHYSICAL], basattr.m_resistances[Damage::PHYSICAL]);
+		basattr.m_resistances_cap[Damage::FIRE] = MathHelper::Max(basattr.m_resistances_cap[Damage::FIRE], basattr.m_resistances[Damage::FIRE]);
+		basattr.m_resistances_cap[Damage::ICE] = MathHelper::Max(basattr.m_resistances_cap[Damage::ICE], basattr.m_resistances[Damage::ICE]);
+		basattr.m_resistances_cap[Damage::AIR] = MathHelper::Max(basattr.m_resistances_cap[Damage::AIR], basattr.m_resistances[Damage::AIR]);
+		basattr.m_resistances_cap[Damage::PHYSICAL] = MathHelper::Max(basattr.m_resistances_cap[Damage::PHYSICAL], basattr.m_resistances[Damage::PHYSICAL]);
 		
 	}
 

@@ -88,8 +88,6 @@ class ItemWindow : public Window
 		 * \brief Enthaelt fuer jeden Itemtyp das passende Bild
 		 */
 		static std::map<Item::Subtype, std::string> m_item_images;
-		
-		
 };
 
 #endif

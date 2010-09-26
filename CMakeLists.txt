@@ -1,6 +1,21 @@
-CMAKE_MINIMUM_REQUIRED( VERSION 2.6.0)
+#/*
+#-----------------------------------------------------------------------------
+#Filename:    CMakeLists.txt
+#-----------------------------------------------------------------------------
+#
+#This source file is part of the
+#   ___                 __    __ _ _    _ 
+#  /___\__ _ _ __ ___  / / /\ \ (_) | _(_)
+# //  // _` | '__/ _ \ \ \/  \/ / | |/ / |
+#/ \_// (_| | | |  __/  \  /\  /| |   <| |
+#\___/ \__, |_|  \___|   \/  \/ |_|_|\_\_|
+#      |___/                              
+#	  Tutorial Framework
+#	  http://www.ogre3d.org/tikiwiki/
+#-----------------------------------------------------------------------------
+#*/
+cmake_minimum_required(VERSION 2.6)
 
-cmake_policy(SET CMP0011 NEW)
 
 IF( NOT CMAKE_BUILD_TYPE )
 SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
@@ -11,48 +26,87 @@ OPTION(NO_TINYXML "Avoid use of TinyXML Lib" OFF)
 
 PROJECT(SUMWARS)
 
-# for unknown reasons, sumwars target was always built first, leading to errors
-# SET(RakNet_LIBRARY ${CMAKE_CURRENT_BINARY_DIR}/Dependencies/Raknet2_0/libRakNet.a)
-# ADD_SUBDIRECTORY(${CMAKE_CURRENT_BINARY_DIR}/Dependencies/Raknet2_0)
+project(sumwars)
 
 SET(VERSION_MAJOR "0")
 SET(VERSION_MINOR "5")
 SET(VERSION_PATCH "2")
 SET(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/;${CMAKE_MODULE_PATH}")
 
-FIND_PACKAGE(Lua51 REQUIRED)
-FIND_PACKAGE(OGRE 1.6 REQUIRED)
+	
+SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules/;${CMAKE_MODULE_PATH}")
+
+IF(WIN32)
+	set(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
+ENDIF(WIN32)
+
+IF(UNIX)
+	SET(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
+ENDIF(UNIX)
+
+IF (CMAKE_BUILD_TYPE STREQUAL "")
+  # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
+  # differentiation between debug and release builds.
+  SET(CMAKE_BUILD_TYPE "RelWithDebInfo" CACHE STRING "Choose the type of build, options are: None (CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel." FORCE)
+ENDIF ()
+
+SET(CMAKE_DEBUG_POSTFIX "_d")
+
+SET(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
+
+FIND_PACKAGE(OGRE REQUIRED)
+ 
+IF(NOT "${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
+  MESSAGE(SEND_ERROR "You need Ogre 1.7 Cthugha to build this.")
+ENDIF()
+
 FIND_PACKAGE(OIS REQUIRED)
+FIND_PACKAGE(Lua51 REQUIRED)
 FIND_PACKAGE(CEGUI REQUIRED)
 FIND_PACKAGE(CEGUIOGRE REQUIRED)
 FIND_PACKAGE(OpenAL REQUIRED)
-FIND_PACKAGE(Enet REQUIRED)
-FIND_PACKAGE(Pthreads REQUIRED)
-#if(NOT NO_RAKNET)
-#	FIND_PACKAGE(RakNet REQUIRED)
-#else()
-#	set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -DNO_RAKNET)
-#endif()
 FIND_PACKAGE(ALUT REQUIRED)
-FIND_PACKAGE(OggVorbis REQUIRED)
+FIND_PACKAGE(Ogg REQUIRED)
+FIND_PACKAGE(Vorbis REQUIRED)
+IF(!WIN32)
+	FIND_PACKAGE(Pthreads REQUIRED)
+ENDIF()
 
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml ${PROJECT_SOURCE_DIR}/src/core ${PROJECT_SOURCE_DIR}/src/gui)
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/./Dependencies/nlfg )
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/enet/include)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/core)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
 INCLUDE_DIRECTORIES(${OGRE_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${OIS_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
-INCLUDE_DIRECTORIES(${CEGUI_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${CEGUI_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${CEGUIOGRE_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${OPENAL_INCLUDE_DIR})
-INCLUDE_DIRECTORIES(${ALUT_INCLUDES})
-INCLUDE_DIRECTORIES(${ENET_INCLUDES})
-INCLUDE_DIRECTORIES(${PTHREADS_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${ALUT_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${OGG_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${VORBIS_INCLUDE_DIR})
 
-#if(NOT NO_RAKNET)
-#	INCLUDE_DIRECTORIES(${RakNet_INCLUDES})
-#endif()
+
+
+MESSAGE(${CEGUIOGRE_INCLUDE_DIRS})
+
+IF(!WIN32)
+INCLUDE_DIRECTORIES(${PTHREADS_INCLUDE_DIR})
+ENDIF()
+
+IF(WIN32)
+	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/)
+	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/include/)
+	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/pthreads/)
+	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/other/) #this is for stdint.h wich isn't included with visual studio until version 2010
+	ADD_DEFINITIONS( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4800 /wd4244 /wd4305 /nologo" )
+	MESSAGE("WARNING: Compiler warnings 4800, 4244 and 4305 disabled!")
+ENDIF()
+
+
+
 
 SET(SRCS_NLFG ./Dependencies/nlfg/nlfg.c)
 SET(SRCS_TINYXML
@@ -65,6 +119,8 @@ IF(NO_TINYXML)
 ENDIF()
 
 SET(SRCS
+	${SRCS_TINYXML}
+  ./src/core/nlfg.cpp
   ./src/core/worldobject.cpp
   ./src/core/itemloader.cpp
   ./src/core/itemlist.cpp
@@ -119,12 +175,17 @@ SET(SRCS
   ./src/core/command.cpp
   ./src/core/mapgenerator.cpp
   ./src/core/options.cpp
+  ./src/gui/debugpanel/debugpanel.cpp
+  ./src/gui/debugpanel/guidebugtab.cpp
+  ./src/gui/debugpanel/luascripttab.cpp
+  ./src/gui/debugpanel/textfileeditwindow.cpp
   ./src/gui/minimapwindow.cpp
   ./src/gui/worldmap.cpp
   ./src/gui/mainmenu.cpp
   ./src/gui/ogg.cpp
   ./src/gui/charcreate.cpp
-  ./src/gui/tooltip.cpp
+  ./src/gui/ceguiutility.cpp
+  ./src/gui/tooltipmanager.cpp
   ./src/gui/music.cpp
   ./src/gui/controlpanel.cpp
   ./src/gui/inventory.cpp
@@ -149,22 +210,78 @@ SET(SRCS
   ./src/gui/questinfo.cpp
   ./src/gui/sound.cpp
   ./src/gui/optionswindow.cpp
+  ./src/gui/debugpanel/debugpanel.cpp
+  ./src/gui/debugpanel/guidebugtab.cpp
+  ./src/gui/debugpanel/luascripttab.cpp
+  ./src/gui/debugpanel/textfileeditwindow.cpp
+  ./src/enet/callbacks.c
+  ./src/enet/compress.c
+  ./src/enet/host.c
+  ./src/enet/list.c
+  ./src/enet/packet.c
+  ./src/enet/peer.c
+  ./src/enet/protocol.c
+  ./src/enet/unix.c
+  ./src/enet/win32.c
+)
+ 
+
+
+ADD_EXECUTABLE(sumwars ${HDRS} ${SRCS})
+
+SET(LINK_LIBS
+	${OGRE_LIBRARIES} 
+	${OIS_LIBRARIES} 
+	${CEGUI_LIBRARY} 
+	${CEGUIOGRE_LIBRARY} 
+	${LUA_LIBRARIES} 
+	${OPENAL_LIBRARY} 
+	${ALUT_LIBRARY} 
+	${RakNet_LIBRARY} 
+	${VORBIS_LIBRARIES} 
+	${VORBIS_LIBRARIES}
+	${Enet_LIBRARY}
 )
 
-set(DATA_DIR "${CMAKE_CURRENT_SOURCE_DIR}/data/")
-set(RESOURCES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/resources/")
+MESSAGE(${LINK_LIBS})
 
-ADD_EXECUTABLE(sumwars ${SRCS} ${SRCS_NLFG} ${SRCS_TINYXML})
-TARGET_LINK_LIBRARIES(sumwars ${OGRE_LIBRARIES} ${OIS_LIBRARY_DBG} ${CEGUI_LIBRARIES} ${CEGUIOGRE_LIBRARIES} ${LUA_LIBRARIES} ${OPENAL_LIBRARY} ${ALUT_LIBRARY} ${Enet_LIBRARY} ${PTHREADS_LIBRARY} ${OGGVORBIS_LIBRARIES})
+IF(WIN32)
+	SET(LINK_LIBS
+		ws2_32.lib
+		winmm.lib
+		${LINK_LIBS}	
+		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/libgettextlib.lib
+		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/libintl.lib
+		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/pthreads/pthreadVC2.lib
+		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_thread-vc90-mt-gd-1_42.lib
+		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_date_time-vc90-mt-gd-1_42.lib
+		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_thread-vc90-mt-1_42.lib
+		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_date_time-vc90-mt-1_42.lib
+		)
+ENDIF()
 
-install(DIRECTORY ${DATA_DIR}
-  DESTINATION "share/sumwars/data")
-install(DIRECTORY ${RESOURCES_DIR}
-  DESTINATION "share/sumwars/resources")
-install(FILES ogre.cfg plugins.cfg
-  DESTINATION "share/sumwars")
+TARGET_LINK_LIBRARIES(sumwars ${LINK_LIBS})
 
-install(TARGETS sumwars
-        RUNTIME DESTINATION bin
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

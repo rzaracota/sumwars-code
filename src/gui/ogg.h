@@ -5,7 +5,12 @@
 #include <iostream>
 using namespace std;
 
-#include <AL/al.h>
+#ifdef WIN32
+	#include <al.h>
+#else
+	#include <AL/al.h>
+#endif
+
 #include <ogg/ogg.h>
 #include <vorbis/vorbisfile.h>
 

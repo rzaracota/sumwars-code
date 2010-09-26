@@ -34,8 +34,7 @@ SaveExitWindow::SaveExitWindow (Document* doc)
 	label->setProperty("FrameEnabled", "true");
 	label->setProperty("BackgroundEnabled", "true");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim(0.1f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.3f)));	
-	
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.3f)));
 	
 	updateTranslation();
 }

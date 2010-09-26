@@ -13,7 +13,6 @@
 
 #define NR_EFFECTS 1
 
-
 enum NrTimers
 {
 	/**
