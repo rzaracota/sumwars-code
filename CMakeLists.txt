@@ -21,7 +21,6 @@ IF( NOT CMAKE_BUILD_TYPE )
 SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
 ENDIF()
 
-OPTION(NO_RAKNET "Avoid use of Raknet Lib" OFF)
 OPTION(NO_TINYXML "Avoid use of TinyXML Lib" OFF)
 
 PROJECT(SUMWARS)
@@ -228,7 +227,7 @@ SET(SRCS
  
 
 
-ADD_EXECUTABLE(sumwars ${HDRS} ${SRCS})
+ADD_EXECUTABLE(sumwars ${SRCS})
 
 SET(LINK_LIBS
 	${OGRE_LIBRARIES} 
@@ -238,7 +237,6 @@ SET(LINK_LIBS
 	${LUA_LIBRARIES} 
 	${OPENAL_LIBRARY} 
 	${ALUT_LIBRARY} 
-	${RakNet_LIBRARY} 
 	${VORBIS_LIBRARIES} 
 	${VORBIS_LIBRARIES}
 	${Enet_LIBRARY}
@@ -262,27 +260,3 @@ IF(WIN32)
 ENDIF()
 
 TARGET_LINK_LIBRARIES(sumwars ${LINK_LIBS})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
