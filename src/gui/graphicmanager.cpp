@@ -173,7 +173,7 @@ Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info
 		{
 			obj_ent = m_scene_manager->createEntity(name, info.m_source);
 			// TODO: really always shadow caster ?
-			obj_ent->setCastShadows(true);
+			//obj_ent->setCastShadows(true);
 		}
 		catch (Ogre::Exception& e)
 		{

@@ -2490,7 +2490,7 @@ bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 	
     if (evt.key == OIS::KC_S)
     {
-        m_scene_manager->setShadowTextureSelfShadow(!m_scene_manager->getShadowTextureSelfShadow());
+        //m_scene_manager->setShadowTextureSelfShadow(!m_scene_manager->getShadowTextureSelfShadow());
     }
 	
 	bool ret =m_cegui_system->injectKeyDown(evt.key);

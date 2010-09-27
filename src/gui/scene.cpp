@@ -266,13 +266,13 @@ void Scene::update(float ms)
 	// Licht aktualisieren
 	float *colour;
 	Ogre::Light* light;
-	/*light= m_scene_manager->getLight("HeroLight");
+	light= m_scene_manager->getLight("HeroLight");
 	light->setPosition(Ogre::Vector3(pos.m_x*GraphicManager::g_global_scale,
 									 6*GraphicManager::g_global_scale,
 									 pos.m_y*GraphicManager::g_global_scale));
 	colour= region->getLight().getHeroLight();
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
-	*/
+	
     
     colour= region->getLight().getDirectionalLight();
 	light = m_scene_manager->getLight("RegionLight");
@@ -280,7 +280,7 @@ void Scene::update(float ms)
 	light->setSpecularColour(colour[0], colour[1], colour[2]);
 	
 	colour= region->getLight().getAmbientLight();
-	//m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
+	m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
 	
 	updateGraphicObjects(ms);
 }
@@ -705,7 +705,7 @@ void Scene::createScene()
 	light->setSpecularColour(0.0, 0.0, 0.0);
 	light->setAttenuation(20*GraphicManager::g_global_scale,0.5,0.000,
 						  0.025/(GraphicManager::g_global_scale*GraphicManager::g_global_scale));
-	light->setCastShadows(true);
+	//light->setCastShadows(true);
 	DEBUGX("hero light %f %f %f",colour[0], colour[1], colour[2]);
     
 	colour= region->getLight().getDirectionalLight();
@@ -714,7 +714,7 @@ void Scene::createScene()
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(colour[0], colour[1], colour[2]);
 	light->setDirection(Ogre::Vector3(-1,-1,-1));
-    light->setCastShadows(true);
+    //light->setCastShadows(true);
 	DEBUGX("directional light %f %f %f",colour[0], colour[1], colour[2]);
 
 	if (region !=0)

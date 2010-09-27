@@ -59,7 +59,7 @@ CreditsWindow::CreditsWindow(Document* doc)
 	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nSounds:", CEGUIUtility::White);
 	content += "\n Michael Kempf (Hangman) \
 				\n artisticdude \
-				\n quobodup \ ";
+				\n quobodup";
 	content += "\n\nMusic: \
 			\n Mattias Westlund (West) \
 			\n Cheeselord \

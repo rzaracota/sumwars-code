@@ -11,8 +11,8 @@ namespace MathHelper
 	static inline double Max(double x, double y) { return x > y ? x : y; }
 	static inline double Min(double x, double y) { return x < y ? x : y; }
 
-	static inline float Max(float x, float y) { return x > y ? x : y; }
-	static inline float Min(float x, float y) { return x < y ? x : y; }
+//	static inline float Max(float x, float y) { return x > y ? x : y; }
+//	static inline float Min(float x, float y) { return x < y ? x : y; }
 
 	static inline int Max(int x, int y) { return x > y ? x : y; }
 	static inline int Min(int x, int y) { return x < y ? x : y; }
