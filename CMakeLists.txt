@@ -209,6 +209,7 @@ SET(SRCS
   ./src/gui/graphicobject.cpp
   ./src/gui/questinfo.cpp
   ./src/gui/sound.cpp
+  ./src/gui/tooltip.cpp
   ./src/gui/optionswindow.cpp
   ./src/gui/debugpanel/debugpanel.cpp
   ./src/gui/debugpanel/guidebugtab.cpp
