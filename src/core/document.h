@@ -308,13 +308,6 @@ class Document
 	 */
 	void writeSavegame();
 
-	/**
-	 * \fn static void* writeSaveFile(void* doc_data_ptr)
-	 * \param doc_ptr Zeiger auf ein std::pair(Dokument, Daten)
-	 * \brief Schreibt das Savefile
-	 */
-	static void* writeSaveFile(void* doc_data_ptr);
-
 
 	/**
 	 * \fn GUISTate* getGUIState()

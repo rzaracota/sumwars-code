@@ -32,7 +32,6 @@
 #include "world.h"
 #include "player.h"
 #include "timer.h"
-#include <pthread.h>
 
 #include "gettext.h"
 #include "stdstreamconv.h"
@@ -1732,36 +1731,25 @@ void Document::writeSavegame()
 
 	// Savegame schreiben (ansynchron)
 	std::pair<Document*, CharConv*>* param = new std::pair<Document*, CharConv*>(this,save);
-	pthread_t thread;
-	pthread_create(&thread,0,&Document::writeSaveFile,param);
-
-}
-
-void* Document::writeSaveFile(void* doc_data_ptr)
-{
-
-	std::pair<Document*, CharConv*>* param = static_cast< std::pair<Document*, CharConv*>* >(doc_data_ptr);
-	CharConv* save = param->second;
-	Document* doc = param->first;
-
+	
 	// Savegame schreiben
 	std::stringstream* stream = dynamic_cast<std::stringstream*> (static_cast<StdStreamConv*>(save)->getStream());
 	char* bp=0;
 	int len=0;
 	char bin ='0';
-
+	
 	// binary savegames are not used anymore
-
-
+	
+	
 	// Daten byteweise in Datei schreiben
 	std::ofstream file;
 	if (bin =='1')
 	{
-		file.open(doc->m_save_file.c_str(),std::ios::out | std::ios::binary);
+		file.open(m_save_file.c_str(),std::ios::out | std::ios::binary);
 	}
 	else
 	{
-		file.open(doc->m_save_file.c_str());
+		file.open(m_save_file.c_str());
 	}
 	if ( file.is_open() )
 	{
@@ -1776,21 +1764,19 @@ void* Document::writeSaveFile(void* doc_data_ptr)
 			file << stream->str();
 			DEBUGX("save: \n %s",stream->str().c_str());
 		}
-
+		
 		file.close();
 	}
 	else
 	{
-		ERRORMSG("cannot open save file: %s",doc->m_save_file.c_str());
+		ERRORMSG("cannot open save file: %s",m_save_file.c_str());
 	}
 	if (stream != 0)
 	{
 		delete stream;
 	}
-	delete save;
-	delete param;
+	
 
-	return 0;
 }
 
 
