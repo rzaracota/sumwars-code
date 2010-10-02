@@ -68,9 +68,6 @@ FIND_PACKAGE(OpenAL REQUIRED)
 FIND_PACKAGE(ALUT REQUIRED)
 FIND_PACKAGE(Ogg REQUIRED)
 FIND_PACKAGE(Vorbis REQUIRED)
-IF(!WIN32)
-	FIND_PACKAGE(Pthreads REQUIRED)
-ENDIF()
 
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/enet/include)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml)
@@ -98,7 +95,6 @@ ENDIF()
 IF(WIN32)
 	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/)
 	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/include/)
-	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/pthreads/)
 	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/other/) #this is for stdint.h wich isn't included with visual studio until version 2010
 	ADD_DEFINITIONS( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4800 /wd4244 /wd4305 /nologo" )
 	MESSAGE("WARNING: Compiler warnings 4800, 4244 and 4305 disabled!")
@@ -251,7 +247,6 @@ IF(WIN32)
 		${LINK_LIBS}	
 		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/libgettextlib.lib
 		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/libintl.lib
-		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/pthreads/pthreadVC2.lib
 		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_thread-vc90-mt-gd-1_42.lib
 		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_date_time-vc90-mt-gd-1_42.lib
 		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_thread-vc90-mt-1_42.lib
