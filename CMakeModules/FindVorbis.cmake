@@ -21,24 +21,24 @@ FIND_PATH(VORBIS_INCLUDE_DIR vorbis/codec.h
   PATH_SUFFIXES include
 )
 FIND_LIBRARY(VORBIS_LIBRARY_OPTIMIZED
-  NAMES vorbis
+  NAMES libvorbis
   PATHS $ENV{VORBISDIR}
-  PATH_SUFFIXES lib
+  PATH_SUFFIXES Release
 )
 FIND_LIBRARY(VORBIS_LIBRARY_DEBUG
-  NAMES vorbisd vorbis_d vorbisD vorbis_D
+  NAMES libvorbis vorbis_d vorbisD vorbis_D
   PATHS $ENV{VORBISDIR}
-  PATH_SUFFIXES lib
+  PATH_SUFFIXES Debug
 )
 FIND_LIBRARY(VORBISFILE_LIBRARY_OPTIMIZED
-  NAMES vorbisfile
+  NAMES libvorbisfile
   PATHS $ENV{VORBISDIR}
-  PATH_SUFFIXES lib
+  PATH_SUFFIXES Release
 )
 FIND_LIBRARY(VORBISFILE_LIBRARY_DEBUG
-  NAMES vorbisfiled vorbisfile_d vorbisfileD vorbisfile_D
+  NAMES libvorbisfile vorbisfile_d vorbisfileD vorbisfile_D
   PATHS $ENV{VORBISDIR}
-  PATH_SUFFIXES lib
+  PATH_SUFFIXES Debug
 )
 
 # Handle the REQUIRED argument and set VORBIS_FOUND

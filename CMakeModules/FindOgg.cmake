@@ -21,14 +21,14 @@ FIND_PATH(OGG_INCLUDE_DIR ogg/ogg.h
   PATH_SUFFIXES include
 )
 FIND_LIBRARY(OGG_LIBRARY_OPTIMIZED
-  NAMES ogg
+  NAMES libogg
   PATHS $ENV{OGGDIR}
-  PATH_SUFFIXES lib
+  PATH_SUFFIXES Release
 )
 FIND_LIBRARY(OGG_LIBRARY_DEBUG
-  NAMES oggd ogg_d oggD ogg_D
+  NAMES libogg ogg_d oggD ogg_D
   PATHS $ENV{OGGDIR}
-  PATH_SUFFIXES lib
+  PATH_SUFFIXES Debug
 )
 
 # Handle the REQUIRED argument and set OGG_FOUND
