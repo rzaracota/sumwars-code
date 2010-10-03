@@ -2976,6 +2976,91 @@
                     </Dim>
                 </Area>
                 <!--Colours topLeft="FF000000" topRight="FF000000" bottomLeft="FF000000" bottomRight="FF000000" /-->
+				<Colours topLeft="FF000000" topRight="FF000000" bottomLeft="FF000000" bottomRight="FF000000"/>
+                <VertFormat type="CentreAligned" />
+				<HorzFormat type="WordWrapCentreAligned" />
+            </TextComponent>
+        </ImagerySection>
+        <StateImagery name="Enabled">
+            <Layer>
+                <Section section="main" />
+                <Section section="label" />
+            </Layer>
+        </StateImagery>
+        <StateImagery name="Disabled">
+            <Layer>
+                <Section section="main" />
+                <Section section="label" />
+            </Layer>
+        </StateImagery>
+    </WidgetLook>
+
+
+    <!--
+    ***************************************************
+        TaharezLook/Tooltip
+    ***************************************************
+    -->
+    <WidgetLook name="TaharezLook/CustomTooltip">
+        <NamedArea name="TextArea">
+            <Area>
+                <Dim type="LeftEdge" ><ImageDim imageset="TaharezLook" image="TooltipLeftEdge" dimension="Width" /></Dim>
+                <Dim type="TopEdge" ><ImageDim imageset="TaharezLook" image="TooltipTopEdge" dimension="Height" /></Dim>
+                <Dim type="RightEdge" >
+                    <UnifiedDim scale="1" type="RightEdge">
+                        <DimOperator op="Subtract">
+                            <ImageDim imageset="TaharezLook" image="TooltipRightEdge" dimension="Width" />
+                        </DimOperator>
+                    </UnifiedDim>
+                </Dim>
+                <Dim type="BottomEdge" >
+                    <UnifiedDim scale="1" type="BottomEdge">
+                        <DimOperator op="Subtract">
+                            <ImageDim imageset="TaharezLook" image="TooltipBottomEdge" dimension="Height" />
+                        </DimOperator>
+                    </UnifiedDim>
+                </Dim>
+            </Area>
+        </NamedArea>
+        <ImagerySection name="main">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
+                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
+                </Area>
+                <Image type="TopLeftCorner" imageset="TaharezLook" image="TooltipTopLeft" />
+                <Image type="TopRightCorner" imageset="TaharezLook" image="TooltipTopRight" />
+                <Image type="BottomLeftCorner" imageset="TaharezLook" image="TooltipBottomLeft" />
+                <Image type="BottomRightCorner" imageset="TaharezLook" image="TooltipBottomRight" />
+                <Image type="LeftEdge" imageset="TaharezLook" image="TooltipLeftEdge" />
+                <Image type="RightEdge" imageset="TaharezLook" image="TooltipRightEdge" />
+                <Image type="TopEdge" imageset="TaharezLook" image="TooltipTopEdge" />
+                <Image type="BottomEdge" imageset="TaharezLook" image="TooltipBottomEdge" />
+                <Image type="Background" imageset="TaharezLook" image="TooltipMiddle" />
+            </FrameComponent>
+        </ImagerySection>
+        <ImagerySection name="label">
+            <TextComponent>
+                <Area>
+                    <Dim type="LeftEdge" ><ImageDim imageset="TaharezLook" image="TooltipLeftEdge" dimension="Width" /></Dim>
+                    <Dim type="TopEdge" ><ImageDim imageset="TaharezLook" image="TooltipTopEdge" dimension="Height" /></Dim>
+                    <Dim type="RightEdge" >
+                        <UnifiedDim scale="1" type="RightEdge">
+                            <DimOperator op="Subtract">
+                                <ImageDim imageset="TaharezLook" image="TooltipRightEdge" dimension="Width" />
+                            </DimOperator>
+                        </UnifiedDim>
+                    </Dim>
+                    <Dim type="BottomEdge" >
+                        <UnifiedDim scale="1" type="BottomEdge">
+                            <DimOperator op="Subtract">
+                                <ImageDim imageset="TaharezLook" image="TooltipBottomEdge" dimension="Height" />
+                            </DimOperator>
+                        </UnifiedDim>
+                    </Dim>
+                </Area>
                 <VertFormat type="CentreAligned" />
 				<HorzFormat type="WordWrapCentreAligned" />
             </TextComponent>

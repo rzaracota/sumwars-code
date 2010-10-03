@@ -9,7 +9,6 @@ ChatLine::ChatLine (Document* doc)
 	
 	// Rahmen fuer CharInfo Fenster
 	
-	
 	CEGUI::Editbox* chatline;
 	
 	chatline = static_cast<CEGUI::Editbox*>(win_mgr.createWindow("TaharezLook/Editbox", "Chatline"));

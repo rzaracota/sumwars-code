@@ -247,6 +247,38 @@ Inventory::Inventory (Document* doc)
 	box->setText("0");
 	
 	updateTranslation();
+	
+	/*CEGUI::AnimationManager *amgr = CEGUI::AnimationManager::getSingletonPtr();
+	CEGUI::Animation *anim = amgr->createAnimation("InventoryAnimation");
+	anim->setDuration(0.5f);
+    anim->setReplayMode(CEGUI::Animation::RM_Once);
+    // now we define affector inside our Testing animation
+    {
+        // this affector changes YRotation and interpolates keyframes with float interpolator
+        CEGUI::Affector* affector = anim->createAffector("YRotation", "float");
+        // at 0.0 seconds, the animation should set YRotation to 10.0 degrees
+        affector->createKeyFrame(0.0f, "90.0");
+        // at 0.3 seconds, YRotation should be 0 degrees and animation should progress towards this in an accelerating manner
+        affector->createKeyFrame(0.5f, "0.0", CEGUI::KeyFrame::P_QuadraticAccelerating);
+    }
+
+    // animation can have more than one affectors! lets define another affector that changes Alpha
+    {
+        // this affector will again use float interpolator
+        CEGUI::Affector* affector = anim->createAffector("Alpha", "float");
+        affector->createKeyFrame(0.0f, "0.0"); // at 0.0 seconds, set alpha to 0.5
+        affector->createKeyFrame(0.5f, "0.9", CEGUI::KeyFrame::P_QuadraticDecelerating); // at 1.0 seconds, set alpha to 1.0, now decelerating!
+    }
+    
+    CEGUI::AnimationInstance* instance = CEGUI::AnimationManager::getSingleton().instantiateAnimation(anim);
+	// after we instantiate the animation, we have to set it's target window
+    instance->setTargetWindow(inventory);
+
+	// at this point, you can start this instance and see the results
+    instance->start();
+
+	inventory->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&CEGUI::AnimationInstance::handleStart, instance));*/
+
 }
 
 void Inventory::update()

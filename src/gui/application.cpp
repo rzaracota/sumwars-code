@@ -448,7 +448,6 @@ bool Application::initCEGUI()
     
 	CEGUI::OgreRenderer::bootstrapSystem();
 
-
 	// Log level
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
     
@@ -484,7 +483,7 @@ bool Application::initCEGUI()
 	m_cegui_system->setDefaultFont((CEGUI::utf8*)"DejaVuSerif-8");
 
 	// eigene Factorys einfuegen
-    CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("SumwarsTooltip", "DefaultWindow", "TaharezLook/Tooltip", "Falagard/Default");
+    CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("SumwarsTooltip", "DefaultWindow", "TaharezLook/CustomTooltip", "Falagard/Default");
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<GuiDebugTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<LuaScriptTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<TextFileEditWindow> >();
