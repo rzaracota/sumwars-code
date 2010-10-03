@@ -2,20 +2,15 @@
 
 Following libraries are required to build Summoning Wars:
 
-OGRE >= 1.4
+OGRE >= 1.7.0
 OIS
-CEGUI >= 0.5
-enet 1.2
+CEGUI >= 0.7
 freealut, openal
 lua5.1
 ogg, vorbis, vorbisfile
 
 If you are lucky, all libs may be installed via package manager (apt-get, yum, emerge, pacman, ...).
 Have a look at the "OS dependant install" section below.
-
-After installing the dependencies run these commands and cross your fingers:
-./configure
-make
 
 Alternatively you can use the cmake build system by typing:
 cmake .
@@ -28,8 +23,11 @@ Please visit our Website www.sumwars.org to give some feedback or report bugs.
 
 Ubuntu:
 
+Ogre 1.7 and CEGUI 0.7 are not included in the standard repositories yet. But you may get them from this additional repo:
+https://launchpad.net/~andrewfenn/+archive/ogredev
+
 To install all needed dependencies enter the following command into the terminal:
-sudo apt-get install libogremain-1.6.4 libogre-dev libois-1.2.0 libois-dev libalut0 libalut-dev liblua5.1-0 liblua5.1-0-dev libopenal1 libopenal-dev libogg0 libvorbis0a libvorbis-dev libvorbisfile3 libenet-dev libceguiogre-dev libcegui-mk2-dev
+sudo apt-get install libogre-dev libcegui-dev libois-dev libalut-dev liblua5.1-0-dev libopenal-dev libvorbis-dev
 
 Then follow the "General instructions" section above to install the game.
 
