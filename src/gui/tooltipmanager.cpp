@@ -19,7 +19,7 @@ void TooltipManager::setParent(CEGUI::Window* parent)
 }
 
 
-void TooltipManager::createTooltip ( std::list<std::string> list, float timeVisible, CEGUI::Font *font, Tooltip::TooltipType type)
+void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string > list, float timeVisible, CEGUI::Font* font, Tooltip::TooltipType type)
 {
     std::string msg;
     CEGUI::UVector2 size;
@@ -47,7 +47,8 @@ void TooltipManager::createTooltip ( std::list<std::string> list, float timeVisi
         Tooltip *tt = new Tooltip(m_Parent, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f);
         fadeAllOut();
         m_CurrentMain = tt;
-        tt->create(msg, position, size, tempFont);		
+        tt->create(msg, position, size, tempFont);
+		win->subscribeEvent(CEGUI::Window::EventMouseLeaves, CEGUI::Event::Subscriber(&TooltipManager::handleMouseLeave, this));
         m_Tooltips[windowName.str()] = tt;
         m_toolTipsCreatedCount++;
     }
@@ -97,6 +98,12 @@ void TooltipManager::fadeAllOut()
         if (!tt->isDead())
             tt->fadeOut();
     }
+}
+
+bool TooltipManager::handleMouseLeave(const CEGUI::EventArgs& e)
+{
+	fadeAllOut();
+	return true;
 }
 
 
