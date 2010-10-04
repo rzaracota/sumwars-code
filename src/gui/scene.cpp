@@ -918,4 +918,14 @@ void Scene::getMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, O
 		ibuf->unlock();
 		current_offset = next_offset;
 	}
+	
+	if (index_offset != index_count)
+	{
+		ERRORMSG("Index offset %i is not index count %i",index_offset,index_count);
+	}
+	
+	if (current_offset != vertex_count)
+	{
+		ERRORMSG("vertex offset %i is not vertex count %i",current_offset,vertex_count);
+	}
 } 

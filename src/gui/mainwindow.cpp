@@ -1290,21 +1290,34 @@ void MainWindow::updateObjectInfo()
 										pentity->getParentNode()->_getDerivedScale());
 	
 				// test for hitting individual triangles on the mesh
-				for (int i = 0; i < static_cast<int>(index_count); i += 3)
+				for (int i = 0; i < static_cast<int>(index_count)-2; i += 3)
 				{
 					// check for a hit against this triangle
-					std::pair<bool, Ogre::Real> hit = Ogre::Math::intersects(ray, vertices[indices[i]],
-							vertices[indices[i+1]], vertices[indices[i+2]], true, false);
-	
-					// if it was a hit check if its the closest
-					if (hit.first)
+					// I hope that volatile avoids that these variables are optimized out
+					volatile int index1 = indices[i];
+					volatile int index2 = indices[i+1];
+					volatile int index3 = indices[i+2];
+					if (index1 >=0 && index2>=0 && index3>=0
+						&& index1 < vertex_count && index2 < vertex_count &&  index3 < vertex_count)
 					{
-						if ( (hit.second < dist))
+					
+						std::pair<bool, Ogre::Real> hit = Ogre::Math::intersects(ray, vertices[index1],
+								vertices[index2], vertices[index3], true, false);
+		
+						// if it was a hit check if its the closest
+						if (hit.first)
 						{
-							// this is the closest so far, save it off
-							dist = hit.second;
+							if ( (hit.second < dist))
+							{
+								// this is the closest so far, save it off
+								dist = hit.second;
+							}
+							rayhit = true;
 						}
-						rayhit = true;
+					}
+					else
+					{
+						ERRORMSG("Invalid indices: %i %i %i",index1,index2,index3);
 					}
 				}
 	
