@@ -1,6 +1,7 @@
 
 #include "itemwindow.h"
 #include "tooltipmanager.h"
+#include "ceguiutility.h"
 
 std::map<Item::Subtype, std::string> ItemWindow::m_item_images;
 
@@ -143,7 +144,8 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	std::string msg;
 	ItemRequirementsMet irm = player->checkItemRequirements ( item );
 	std::list<std::string> l = item->getDescriptionAsStringList ( price_factor, irm );
-	l.push_front ( "Hovered:\n" );
+	l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, "Hovered:\n", CEGUIUtility::Black ));
+	
 	std::ostringstream out_stream;
 
 	tMgr->createTooltip ( img, l, 0, font, Tooltip::Main );

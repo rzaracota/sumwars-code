@@ -1139,7 +1139,19 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
         
     }
     
-    
+/*    // Strip away all new lines at the end of the list
+    size_t pos = itemDescList.back().find_first_of("\n");
+    while(pos != std::string::npos)
+	{
+		std::string temp = itemDescList.back();
+		temp = temp.erase(pos, pos+1);
+		itemDescList.remove(itemDescList.back());
+		itemDescList.push_back(temp);
+		pos = itemDescList.back().find_first_of("\n");
+		
+	}
+*/
+
     return itemDescList;
 }
 

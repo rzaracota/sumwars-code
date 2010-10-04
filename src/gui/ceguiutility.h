@@ -116,6 +116,16 @@ class CEGUIUtility
 		* \returns the formated text and the line count
 		*/
 		static FormatedText fitTextToWindow (const CEGUI::String& text, const CEGUI::Rect& format_area,TextFormatting fmt, CEGUI::Font *font, float x_scale = 1.0f);
+		
+private:
+		/**
+		* \fn static const size_t getNextWord(const CEGUI::String& in_string, size_t start_idx, CEGUI::String& out_string)
+		* \brief 
+		* \param in_string String to search
+		* \param start_idx The start index
+		* \param out_string The word get written into this string
+		* \returns The new index
+		*/
 		static const size_t getNextWord(const CEGUI::String& in_string, size_t start_idx, CEGUI::String& out_string);
 		
 };

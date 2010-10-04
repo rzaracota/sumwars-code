@@ -40,12 +40,13 @@ std::list< std::string > CEGUIUtility::getTextAsList(const std::string &text)
 			pos = temp.find("\n");
 		}
     }
-
+	
     return l;
 }
 
 CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> list, CEGUI::Font *font, std::string &added)
 {
+	std::cout << "--------------------------------------------" << std::endl;
     using namespace CEGUI;
 
     float textWidth = 0.0f;
@@ -53,20 +54,44 @@ CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> list, 
     Size screenSize = CEGUI::System::getSingleton().getRenderer()->getDisplaySize();
 
     added = "";
-
+	size_t count = 0;
+	
     std::list<std::string>::iterator iter = list.begin();
     while (iter != list.end())
     {
-        std::string s = *iter;
-        added += s;
+		std::string s = *iter;
+		std::cout << s.size() << std::endl;
+		
+		std::string::size_type word_pos = 0;
+        while ( word_pos!=std::string::npos )
+        {
+            word_pos = s.find ( "\n", word_pos );
+            if ( word_pos != std::string::npos )
+            {
+                ++count;
+
+                // start next search after this word
+                word_pos += 2;
+            }
+        }
+		
+		
+		added += s;
         float tempwidth = font->getTextExtent(stripColours(s).c_str()) ;
         if (tempwidth > textWidth)
             textWidth = tempwidth;
 
         iter++;
     }
-
-    textHeight = list.size() * font->getFontHeight();
+	size_t size = list.size();
+	
+	//std::cout << count << "<- count size -> " << size << std::endl;
+	
+	// increase the counter intil we have at least one line break more than we have text
+	while(count <= size)  
+		count++;
+	
+    textHeight = count * font->getFontHeight();
 
     return UVector2(UDim((textWidth/screenSize.d_width) + 0.05f, 0), UDim(textHeight / screenSize.d_height, 0) );
 }
