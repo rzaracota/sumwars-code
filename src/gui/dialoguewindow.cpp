@@ -635,7 +635,6 @@ void DialogueWindow::updateSpeechBubbles()
 		std::list < std::pair<TranslatableString, std::string> >::iterator it;
 		for (it = question->m_answers.begin(); it != question->m_answers.end(); ++it)
 		{
-			std::cout << "this" << std::endl;
 			stream.str("");
 			stream << "AnswerLabel";
 			stream << nr;

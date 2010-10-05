@@ -22,6 +22,9 @@ void Gettext::init(const char* locale)
 	bindtextdomain ("sumwars-xml","./translation/");
 	bind_textdomain_codeset ("sumwars-xml","UTF-8");
 
+	bindtextdomain ("the_besieged_farm","./translation/");
+	bind_textdomain_codeset ("the_besieged_farm","UTF-8");
+	
 	textdomain ("sumwars-sumwars");
 
 	Gettext::setLocale(locale);

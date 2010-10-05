@@ -429,13 +429,15 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 				DEBUGX("found Topic %s for %s",topic.c_str(),refname.c_str());
 				
 				ev = new Event;
+				ev->setGettextDomain(EventSystem::GetGettextDomain());
+				
 				// Topic kann mit der selben Funktion geladen werden wie Events
 				loadEvent(child,ev,dummy);
 				
 				Dialogue::getTopicList(refname).addTopic(topic,ev);
 				if (start_op != "" || topic == "start_dialogue")
 				{
-					Dialogue::getTopicList(refname).addStartTopic(TranslatableString(start_op,EventSystem:: GetGettextDomain()), topic);
+					Dialogue::getTopicList(refname).addStartTopic(TranslatableString(start_op,EventSystem::GetGettextDomain()), topic);
 				}
 			}
 			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Trade"))
@@ -516,12 +518,19 @@ void WorldLoader::loadQuests(TiXmlNode* node)
 		std::string tabname,name;
 		attr.getString("table_name",tabname);
 		attr.getString("name",name);
+	
+		std::string domain = EventSystem::GetGettextDomain();
+		attr.getString("domain",domain);
+		
+		EventSystem::pushGettextDomain(domain);
 		
 		qu = new Quest(name,tabname);
 		
 		loadQuest(node,qu);
 		qu->init();
 		World::getWorld()->addQuest(tabname,qu);
+		
+		EventSystem::popGettextDomain();
 	}
 	else
 	{
@@ -576,6 +585,7 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 					if (child2->Type()==TiXmlNode::ELEMENT && !strcmp(child2->Value(), "Event"))
 					{
 						ev = new Event;
+						ev->setGettextDomain(EventSystem::GetGettextDomain());
 						loadEvent(child2, ev,type);
 						if (type == "")
 						{
