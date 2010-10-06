@@ -1,4 +1,4 @@
-<Quest name="Herb collector" table_name="herbalist">
+<Quest name="Herb collector" table_name="herbalist" domain="herb_collector">
 	
 	<Init>
 		herbalist.bushes = 0

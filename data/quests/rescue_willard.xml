@@ -1,4 +1,4 @@
-<Quest name="A friend in need" table_name="rescue_willard">
+<Quest name="A friend in need" table_name="rescue_willard" domain="rescue_willard">
 	
 	<Description>
 		if (rescue_willard.finished) then

@@ -1,4 +1,4 @@
-<Quest name="The Poolmonster" table_name="scene7">
+<Quest name="The Poolmonster" table_name="scene7" domain="the_poolmonster">
 	
 	<Init>
 		local a = 2

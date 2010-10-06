@@ -1,4 +1,4 @@
-﻿<Quest name="The Ambush" table_name="ambush">
+﻿<Quest name="The Ambush" table_name="ambush" domain="the_ambush">
 	<Description>
 		if (ambush.finished) then
 			return _("Ireana survived and, as a token of her gratitude, provided our next job. I always knew the councilmen only wanted an exterminator.")

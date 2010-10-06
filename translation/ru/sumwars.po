@@ -1,16 +1,18 @@
-# SOME DESCRIPTIVE TITLE
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# FULL NAME <EMAIL@ADDRESS>, 2010.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n""Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: sumwars 0.5\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2010-09-11 23:13+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -112,8 +114,9 @@ msgid "antidot"
 msgstr ""
 
 #: potion.xml
+#, fuzzy
 msgid "calming salve"
-msgstr ""
+msgstr "Цена на продажу"
 
 #: potion.xml
 msgid "potion of determination"
@@ -140,8 +143,9 @@ msgid "lumberjack axe"
 msgstr ""
 
 #: axes2h.xml
+#, fuzzy
 msgid "great axe"
-msgstr ""
+msgstr "Создать"
 
 #: axes2h.xml
 msgid "ripping axe"
@@ -552,8 +556,9 @@ msgid "vulcano axe"
 msgstr ""
 
 #: axes1h.xml
+#, fuzzy
 msgid "berserker axe"
-msgstr ""
+msgstr "берсерк"
 
 #: axes1h.xml
 msgid "diamont axe"
@@ -944,16 +949,18 @@ msgid "leather armor"
 msgstr ""
 
 #: armor.xml
+#, fuzzy
 msgid "rivet armor"
-msgstr ""
+msgstr "игнорирует броню"
 
 #: armor.xml
 msgid "bandit armor"
 msgstr ""
 
 #: armor.xml
+#, fuzzy
 msgid "novice armor"
-msgstr ""
+msgstr "игнорирует броню"
 
 #: armor.xml
 msgid "mercenary armor"
@@ -1036,8 +1043,9 @@ msgid "shark gloves"
 msgstr ""
 
 #: goblinEqu.xml
+#, fuzzy
 msgid "goblin armor"
-msgstr ""
+msgstr "игнорирует броню"
 
 #: goblinEqu.xml
 msgid "goblin bracer"
@@ -1091,265 +1099,14 @@ msgstr ""
 msgid "gold amulet"
 msgstr ""
 
-#: theTrader.xml
-msgid "The Trader"
-msgstr ""
-
-#: theTrader.xml
-msgid "elCnlLobby"
-msgstr ""
-
-#: theTrader.xml
-msgid "medMercCamp"
-msgstr ""
-
-#: theTrader.xml
-msgid "joringsbridge"
-msgstr ""
-
-#: theTrader.xml
-msgid "What are you doing here?"
-msgstr ""
-
-#: theTrader.xml
-msgid "greyCurseCaveFis"
-msgstr ""
-
-#: theTrader.xml
-msgid "dwarfenwall"
-msgstr ""
-
-#: theTrader.xml
-msgid "I see you have reached dwarfenwall safely."
-msgstr ""
-
-#: goblins.xml
-msgid "The goblinslayer"
-msgstr ""
-
-#: goblins.xml
-msgid "peasant"
-msgstr ""
-
-#: goblins.xml
-msgid "Goblins"
-msgstr ""
-
-#: goblins.xml
-msgid "Goblins (reward)"
-msgstr ""
-
-#: goblins.xml
-msgid "region1"
-msgstr ""
-
-#: tutorial.xml
-msgid "Tutorial"
-msgstr ""
-
-#: tutorial.xml
-msgid "Derred"
-msgstr ""
-
-#: tutorial.xml
-msgid "Surrender weapons"
-msgstr ""
-
-#: tutorial.xml
-msgid "Tolec"
-msgstr ""
-
-#: tutorial.xml
-msgid "Explain inventory"
-msgstr ""
-
-#: tutorial.xml
-msgid "Attack slugs"
-msgstr ""
-
-#: tutorial.xml
-msgid "Explain level up"
-msgstr ""
-
-#: tutorial.xml
-msgid "Open hatch"
-msgstr ""
-
-#: tutorial.xml
-msgid "Explain skills"
-msgstr ""
-
-#: tutorial.xml
-msgid "Open secret door"
-msgstr ""
-
-#: scene7.xml
-msgid "The Poolmonster"
-msgstr ""
-
-#: scene7.xml
-msgid "Soren Windclaw"
-msgstr ""
-
-#: scene7.xml
-msgid "greyCurseLake"
-msgstr ""
-
-#: theFissure.xml
-msgid "The ambush of the undead"
-msgstr ""
-
-#: theFissure.xml
-msgid "aisMounPath"
-msgstr ""
-
-#: theFissure.xml
-msgid "greyCurseCaveDep"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml
-msgid "Defend Dwarfenwall"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml
-msgid "dwarfenwallCommand"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml
-msgid "dwarfenwallRampart"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml
-msgid "necFieldcamp"
-msgstr ""
-
-#: theAmbush.xml
-msgid "The Ambush"
-msgstr ""
-
-#: theAmbush.xml
-msgid "aisWolfstones"
-msgstr ""
-
-#: besieged_farm.xml
-msgid "The besieged farm"
-msgstr ""
-
-#: besieged_farm.xml
-msgid "Sergeant Lutterer"
-msgstr ""
-
-#: besieged_farm.xml
-msgid "The farm"
-msgstr ""
-
-#: besieged_farm.xml
-msgid "aisNorthMeadow"
-msgstr ""
-
-#: besieged_farm.xml
-msgid "Brons Farm"
-msgstr ""
-
-#: maylons_grave.xml
-msgid "Maylons Grave"
-msgstr ""
-
-#: maylons_grave.xml
-msgid "aisMaylonsGraveEntry"
-msgstr ""
-
-#: maylons_grave.xml
-msgid "Gab Resh"
-msgstr ""
-
-#: maylons_grave.xml
-msgid "aisMaylonsGraveL1"
-msgstr ""
-
-#: maylons_grave.xml
-msgid "aisMaylonsGraveL2"
-msgstr ""
-
-#: herbalist.xml
-msgid "Herb collector"
-msgstr ""
-
-#: herbalist.xml
+#: joringsbridge_npc.xml
 msgid "Gertlinde Kampfer"
 msgstr ""
 
-#: herbalist.xml
-msgid "Herb gathering"
-msgstr ""
-
-#: testquest.xml
-msgid "testquest"
-msgstr ""
-
-#: testquest.xml
-msgid "Fenor Marken"
-msgstr ""
-
-#: testquest.xml
-msgid "Test"
-msgstr ""
-
-#: joringsbridge.xml
-msgid "Joringsbridge"
-msgstr ""
-
-#: fortify_dwarfenwall.xml
-msgid "Fortify Dwarfenwall"
-msgstr ""
-
-#: fortify_dwarfenwall.xml
-msgid "Speak with Windclaw"
-msgstr ""
-
-#: fortify_dwarfenwall.xml
-msgid "medBackalley"
-msgstr ""
-
-#: rob_the_robber.xml
-msgid "Rob the robber"
-msgstr ""
-
-#: rob_the_robber.xml
-msgid "Wanted poster"
-msgstr ""
-
-#: rob_the_robber.xml
-msgid "Sergeant Wober"
-msgstr ""
-
-#: rob_the_robber.xml
-msgid "Rob the Robber (Reward)"
-msgstr ""
-
-#: rob_the_robber.xml
-msgid "aisDarkFairyforest"
-msgstr ""
-
-#: rescue_willard.xml
-msgid "A friend in need"
-msgstr ""
-
-#: rescue_willard.xml
-msgid "Willard"
-msgstr ""
-
-#: rescue_willard.xml
-msgid "Give Willard the stone (Reward)"
-msgstr ""
-
-#: rescue_willard.xml
-msgid "aisMeadow"
-msgstr ""
-
 #: joringsbridge_npc.xml
+#, fuzzy
 msgid "Potions"
-msgstr ""
+msgstr "Опции"
 
 #: joringsbridge_npc.xml
 msgid "Sybill"
@@ -1364,8 +1121,9 @@ msgid "Halgor"
 msgstr ""
 
 #: joringsbridge_npc.xml
+#, fuzzy
 msgid "Armors"
-msgstr ""
+msgstr "Защита"
 
 #: joringsbridge_npc.xml
 msgid "Marco"
@@ -1380,7 +1138,72 @@ msgid "What are these Items?"
 msgstr ""
 
 #: joringsbridge_npc.xml
+msgid "Ah, you noticed my lost and found?"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Everything I find in and around Joringsbridge is stored here."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid ""
+"If something is your's just say the word. For a small finder's fee you can "
+"have it back."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Sergeant Lutterer"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Joringsbridge"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid ""
+"Having the responsibility for Joringsbridge is never easy, not even when I "
+"had enough soldiers."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid ""
+"Lately, someone in the guard has been appropriating confiscated magical "
+"items."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid ""
+"And I'm not even one step closer to find out who, than when I first noticed!"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid ""
+"((A guard is diverting items? Surely not for hard times. I should take a "
+"look around.))"
+msgstr ""
+
+#: joringsbridge_npc.xml
 msgid "The surroundings of Joringsbridge"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "You better be careful when leaving the village."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid ""
+"Now, with almost all troops standing at the borders, we have to deal with an "
+"unmanageable flood of goblins."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid ""
+"And everyone not drafted for the army seems to have discovered the happy "
+"bandit life for themselves."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Thanks for the warning, sergeant."
 msgstr ""
 
 #: joringsbridge_npc.xml
@@ -1389,6 +1212,20 @@ msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "Magus Convocatis Relau Fireweaver"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "You are the backup sent by Lord Master Windclaw, arn't you?"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid ""
+"I suggest you quickly journey on. There have been people dying by boredom in "
+"this village. "
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Who knows if your physique will help you against that, too?"
 msgstr ""
 
 #: dwarfcastle.xml
@@ -1415,6 +1252,22 @@ msgstr ""
 msgid "What is all this?"
 msgstr ""
 
+#: dwarfcastle.xml
+msgid "Quite a lot of boxes..."
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "My predecessor left me with that chaos."
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "These are all old army supplies."
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "If you like something just point it out and I'll tell you a price."
+msgstr ""
+
 #: medairnpc.xml
 msgid "Robert"
 msgstr ""
@@ -1427,8 +1280,16 @@ msgstr ""
 msgid "Cain"
 msgstr ""
 
+#: medairnpc.xml
+msgid "Fenor Marken"
+msgstr ""
+
 #: npc.xml
 msgid "Brons Tuer"
+msgstr ""
+
+#: npc.xml
+msgid "Sergeant Wober"
 msgstr ""
 
 #: npc.xml
@@ -1440,7 +1301,15 @@ msgid "Maylons Ghost"
 msgstr ""
 
 #: npc.xml
+msgid "Soren Windclaw"
+msgstr ""
+
+#: npc.xml
 msgid "Leonard von Robenforst"
+msgstr ""
+
+#: npc.xml
+msgid "Gab Resh"
 msgstr ""
 
 #: npc.xml
@@ -1476,6 +1345,10 @@ msgid "Nar'Asoroth"
 msgstr ""
 
 #: npc.xml
+msgid "The Trader"
+msgstr ""
+
+#: npc.xml
 msgid "Buy empty scrolls"
 msgstr ""
 
@@ -1489,6 +1362,106 @@ msgstr ""
 
 #: npc.xml
 msgid "Leere Schriftrollen kaufen"
+msgstr ""
+
+#: npc.xml
+msgid "Enchanter"
+msgstr ""
+
+#: npc.xml
+msgid "Enchant Items"
+msgstr ""
+
+#: npc.xml
+msgid "Armor"
+msgstr "Защита"
+
+#: npc.xml
+msgid "Health Bonus"
+msgstr ""
+
+#: npc.xml
+#, fuzzy
+msgid "Armor class"
+msgstr "Защита"
+
+#: npc.xml
+msgid "Fire resistance"
+msgstr "Устойчивость к огню"
+
+#: npc.xml
+msgid "Ice resistance"
+msgstr "Устойчивость к льду"
+
+#: npc.xml
+msgid "Air resistance"
+msgstr "Устойчивость к воздуху"
+
+#: npc.xml
+msgid "Weapon"
+msgstr ""
+
+#: npc.xml
+#, fuzzy
+msgid "Fire damage"
+msgstr "Основной урон"
+
+#: npc.xml
+#, fuzzy
+msgid "Ice damage"
+msgstr "Основной урон"
+
+#: npc.xml
+#, fuzzy
+msgid "Air damage"
+msgstr "урон"
+
+#: npc.xml
+msgid "Gloves"
+msgstr ""
+
+#: npc.xml
+msgid "Dexterity"
+msgstr "Ловкость"
+
+#: npc.xml
+msgid "Block"
+msgstr "Блок"
+
+#: npc.xml
+msgid "Which part of your equipment should be enchanted?"
+msgstr ""
+
+#: npc.xml
+msgid "Hey you have no item equiped there"
+msgstr ""
+
+#: npc.xml
+msgid "Which Enchantment do you want?"
+msgstr ""
+
+#: npc.xml
+msgid "You dont have enough gold to pay the price of $1"
+msgstr ""
+
+#: npc.xml
+msgid "The price is $1"
+msgstr ""
+
+#: npc.xml
+msgid "It seems that this item already has such an enchantment."
+msgstr ""
+
+#: medair.xml
+msgid "elCnlLobby"
+msgstr ""
+
+#: medair.xml
+msgid "medBackalley"
+msgstr ""
+
+#: medair.xml
+msgid "medMercCamp"
 msgstr ""
 
 #: cursedCaves.xml
@@ -1512,11 +1485,39 @@ msgid "greyCursedCavern"
 msgstr ""
 
 #: cursedCaves.xml
+msgid "greyCurseCaveDep"
+msgstr ""
+
+#: cursedCaves.xml
+msgid "greyCurseCaveFis"
+msgstr ""
+
+#: cursedCaves.xml
 msgid "greyCurseCaveEast"
+msgstr ""
+
+#: cursedCaves.xml
+msgid "greyCurseLake"
+msgstr ""
+
+#: aisen.xml
+msgid "aisMeadow"
 msgstr ""
 
 #: aisen.xml
 msgid "aisPlains"
+msgstr ""
+
+#: aisen.xml
+msgid "aisMaylonsGraveEntry"
+msgstr ""
+
+#: aisen.xml
+msgid "aisMaylonsGraveL1"
+msgstr ""
+
+#: aisen.xml
+msgid "aisMaylonsGraveL2"
 msgstr ""
 
 #: aisen.xml
@@ -1536,6 +1537,14 @@ msgid "aisWideHeath"
 msgstr ""
 
 #: aisen.xml
+msgid "joringsbridge"
+msgstr ""
+
+#: aisen.xml
+msgid "aisNorthMeadow"
+msgstr ""
+
+#: aisen.xml
 msgid "aisJoringsforest"
 msgstr ""
 
@@ -1544,7 +1553,19 @@ msgid "aisFairyforest"
 msgstr ""
 
 #: aisen.xml
+msgid "aisDarkFairyforest"
+msgstr ""
+
+#: aisen.xml
+msgid "aisWolfstones"
+msgstr ""
+
+#: aisen.xml
 msgid "aisWestwoods"
+msgstr ""
+
+#: aisen.xml
+msgid "aisMounPath"
 msgstr ""
 
 #: aisen.xml
@@ -1553,6 +1574,66 @@ msgstr ""
 
 #: aisen.xml
 msgid "aisEastslope"
+msgstr ""
+
+#: aisen.xml
+msgid "Watch out! Monsters from the mine! Help me!"
+msgstr ""
+
+#: aisen.xml
+msgid "Let me tell you I'm no monster. I'm worse."
+msgstr ""
+
+#: aisen.xml
+msgid "aisBoulderGrounds"
+msgstr ""
+
+#: aisen.xml
+msgid "aisMounMeadows"
+msgstr ""
+
+#: aisen.xml
+msgid "aisOldDwarfRuins"
+msgstr ""
+
+#: aisen.xml
+msgid "aisOldCellar"
+msgstr ""
+
+#: aisen.xml
+msgid "aisBaelensRift"
+msgstr ""
+
+#: aisen.xml
+msgid "aisHillRoad"
+msgstr ""
+
+#: aisen.xml
+msgid "copperRock"
+msgstr ""
+
+#: aisen.xml
+msgid "aisCopperFields"
+msgstr ""
+
+#: aisen.xml
+msgid "aisMineEntry"
+msgstr ""
+
+#: greySkyladder.xml
+msgid "greySnowNose"
+msgstr ""
+
+#: greySkyladder.xml
+msgid "greyOldMine"
+msgstr ""
+
+#: greySkyladder.xml
+msgid "greyOldMineL2"
+msgstr ""
+
+#: greySkyladder.xml
+msgid "greyOldMineDeep"
 msgstr ""
 
 #: testregions.xml
@@ -1573,6 +1654,26 @@ msgstr ""
 
 #: testregions.xml
 msgid "testregion"
+msgstr ""
+
+#: testregions.xml
+msgid "region1"
+msgstr ""
+
+#: dwarfenwall.xml
+msgid "dwarfenwall"
+msgstr ""
+
+#: dwarfenwall.xml
+msgid "dwarfenwallCommand"
+msgstr ""
+
+#: dwarfenwall.xml
+msgid "dwarfenwallRampart"
+msgstr ""
+
+#: necrotia.xml
+msgid "necFieldcamp"
 msgstr ""
 
 #: humans.xml
@@ -1660,8 +1761,9 @@ msgid "Nubreck"
 msgstr ""
 
 #: goblinStats.xml
+#, fuzzy
 msgid "goblin dog"
-msgstr ""
+msgstr "слепой"
 
 #: goblinStats.xml
 msgid "boneshaker"
@@ -1736,8 +1838,9 @@ msgid "goblin shaman"
 msgstr ""
 
 #: goblinStats.xml
+#, fuzzy
 msgid "goblin slayer"
-msgstr ""
+msgstr "Одиночная игра"
 
 #: goblinStats.xml
 msgid "goblin assassin"
@@ -1757,6 +1860,14 @@ msgstr ""
 
 #: aisenMonsterStats.xml
 msgid "Spider"
+msgstr ""
+
+#: councilNPCStats.xml
+msgid "Tolec"
+msgstr ""
+
+#: councilNPCStats.xml
+msgid "Derred"
 msgstr ""
 
 #: councilNPCStats.xml
@@ -1784,8 +1895,9 @@ msgid "Fireguardian"
 msgstr ""
 
 #: council_monsters.xml
+#, fuzzy
 msgid "Fire Slug"
-msgstr ""
+msgstr "Огонь"
 
 #: council_monsters.xml
 msgid "Mutant Slug"
@@ -1804,8 +1916,9 @@ msgid "Inferno Behemoth"
 msgstr ""
 
 #: aisenNPCStats.xml
+#, fuzzy
 msgid "Healer"
-msgstr ""
+msgstr "Лечит"
 
 #: aisenNPCStats.xml
 msgid "Trader"
@@ -1900,8 +2013,9 @@ msgid "Boney Brothers"
 msgstr ""
 
 #: undeadStats.xml
+#, fuzzy
 msgid "Icemage"
-msgstr ""
+msgstr "урон"
 
 #: undeadStats.xml
 msgid "Frostmage"
@@ -1912,8 +2026,9 @@ msgid "Neivan the Frostbringer"
 msgstr ""
 
 #: undeadStats.xml
+#, fuzzy
 msgid "Blackmage"
-msgstr ""
+msgstr "урон"
 
 #: undeadStats.xml
 msgid "Black Raven"

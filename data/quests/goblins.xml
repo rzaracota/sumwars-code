@@ -1,4 +1,4 @@
-<Quest name="The goblinslayer" table_name="goblins">
+<Quest name="The goblinslayer" table_name="goblins" domain="the_goblinslayer">
 	
 	<Init>
 		goblins.nr =0;

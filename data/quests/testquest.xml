@@ -1,4 +1,4 @@
-<Quest name="testquest" table_name="testquest">
+<Quest name="testquest" table_name="testquest" domain="testquest">
 	<NPC refname="Fenor Marken">
 		<Topic name="testtopic1" start_option="Test">
 			<Effect>

@@ -1,4 +1,4 @@
-<Quest name="Rob the robber" table_name="rob_the_robber">
+<Quest name="Rob the robber" table_name="rob_the_robber" domain="rob_the_robber">
 	<Description>
 		if (rob_the_robber.finished) then
 			return _("Rob the robber breathed his last and provided a downright windfall while he was on it.");

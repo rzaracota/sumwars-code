@@ -1,4 +1,4 @@
-<Quest name="Maylons Grave" table_name="maylons_grave">
+<Quest name="Maylons Grave" table_name="maylons_grave" domain="maylons_grave">
 	
 	<Description>
 		if (maylons_grave.finished) then

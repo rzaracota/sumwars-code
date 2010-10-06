@@ -1,4 +1,4 @@
-<Quest name="Tutorial" table_name="tutorial">
+<Quest name="Tutorial" table_name="tutorial" domain="tutorial">
 	
 	<Init>
 		tutorial.phase="intro"
