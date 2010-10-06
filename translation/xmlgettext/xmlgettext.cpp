@@ -161,7 +161,8 @@ void parseXML( TiXmlNode* node, char* filename, std::map<std::string, std::strin
 	std::map<std::string, std::set<std::string> >& foundstrings)
 {
 	std::list<std::string> elem_strings;
-	std::string str;
+	std::list<std::string> str;
+	std::string str_tmp;
 	std::string domain;
 	TiXmlNode* child;
 	
@@ -178,19 +179,31 @@ void parseXML( TiXmlNode* node, char* filename, std::map<std::string, std::strin
 					!strcmp(node->Value(), "Region"))
 		{
 			attrib.parseElement(elem, elem_strings);
-			attrib.getString("name",str);
+			attrib.getString("name",str_tmp);
+			str.push_back(str_tmp);
+		}
+		
+		if (!strcmp(node->Value(), "Ability"))
+		{
+			attrib.parseElement(elem, elem_strings);
+			attrib.getString("name",str_tmp);
+			str.push_back(str_tmp);
+			attrib.getString("description",str_tmp);
+			str.push_back(str_tmp);
 		}
 		
 		if (!strcmp(node->Value(), "NPC"))
 		{
 			attrib.parseElement(elem, elem_strings);
-			attrib.getString("refname",str);
+			attrib.getString("refname",str_tmp);
+			str.push_back(str_tmp);
 		}
 		
 		if (!strcmp(node->Value(), "Topic"))
 		{
 			attrib.parseElement(elem, elem_strings);
-			attrib.getString("start_option",str);
+			attrib.getString("start_option",str_tmp);
+			str.push_back(str_tmp);
 		}
 		
 		if (!strcmp(node->Value(), "Effect") ||
@@ -210,19 +223,22 @@ void parseXML( TiXmlNode* node, char* filename, std::map<std::string, std::strin
 		}
 		
 		// add strings to map
-		if (str != "")
+		for (std::list<std::string>::iterator it = str.begin(); it != str.end(); ++it)
 		{
-			size_t pos=0;
-			while ((pos = str.find("\"",pos)) != std::string::npos)
+			if ((*it) != "")
 			{
-				str = str.replace(pos,1,"\\\"");
-				std::cout << pos << str << "\n";
-				pos +=2;
-			}
-			if (foundstrings[domains.top()].count(str) == 0)
-			{
-				strings[domains.top()] += std::string("#: ") + filename + "\n" + "msgid \"" + str + "\"\n" + "msgstr \"\"\n\n";
-				foundstrings[domains.top()].insert(str);
+				size_t pos=0;
+				while ((pos = (*it).find("\"",pos)) != std::string::npos)
+				{
+					(*it) = (*it).replace(pos,1,"\\\"");
+					std::cout << pos << (*it) << "\n";
+					pos +=2;
+				}
+				if (foundstrings[domains.top()].count((*it)) == 0)
+				{
+					strings[domains.top()] += std::string("#: ") + filename + "\n" + "msgid \"" + (*it) + "\"\n" + "msgstr \"\"\n\n";
+					foundstrings[domains.top()].insert((*it));
+				}
 			}
 		}
 		for (std::list<std::string>::iterator it = elem_strings.begin(); it != elem_strings.end(); ++it)

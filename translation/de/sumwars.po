@@ -1691,6 +1691,1301 @@ msgstr "Burgwall"
 msgid "necFieldcamp"
 msgstr "Feldlager der Untoten"
 
+#: unique_ablt.xml
+#, fuzzy
+msgid "ice attack"
+msgstr "Novizenhut"
+
+#: unique_ablt.xml
+msgid "melee attack with ice damage of Nar'Asoroth"
+msgstr ""
+
+#: unique_ablt.xml
+msgid "Ice arrow"
+msgstr ""
+
+#: unique_ablt.xml
+msgid "An icicle hunting the nearest target. The Nar'Asoroth-version."
+msgstr ""
+
+#: unique_ablt.xml
+#, fuzzy
+msgid "Summon Skeleton"
+msgstr "Gewaltiges Skelett"
+
+#: unique_ablt.xml
+#, fuzzy
+msgid "Creates a skeleton."
+msgstr "Riesenskelett"
+
+#: unique_ablt.xml
+msgid "a ball of ice that will hunt it's victim and explode"
+msgstr ""
+
+#: unique_ablt.xml
+#, fuzzy
+msgid "Frost Wave"
+msgstr "Frostmagier"
+
+#: unique_ablt.xml
+msgid ""
+"Nar'Asoroth conjures a wave of ice, that damages enemies in a circle around "
+"him."
+msgstr ""
+
+#: unique_ablt.xml
+#, fuzzy
+msgid "Summon Ice Obelisk"
+msgstr "Eisobelisk"
+
+#: unique_ablt.xml
+msgid "Creates a obelisk of ice."
+msgstr ""
+
+#: unique_ablt.xml
+msgid "Summon meteor"
+msgstr ""
+
+#: unique_ablt.xml
+msgid "Army of Darkness"
+msgstr ""
+
+#: unique_ablt.xml
+msgid "Nar'Asoroth raises a group of skeletons."
+msgstr ""
+
+#: unique_ablt.xml
+msgid "Cloud of Despair"
+msgstr ""
+
+#: unique_ablt.xml
+msgid "The mage calls forth a black cloud that stuns and blinds his foes."
+msgstr ""
+
+#: monster_shadow_ablt.xml
+msgid "Magic attack"
+msgstr ""
+
+#: monster_shadow_ablt.xml
+msgid "Basic magic attack"
+msgstr ""
+
+#: monster_shadow_ablt.xml
+#, fuzzy
+msgid "Magic Shield"
+msgstr "Eisenschild"
+
+#: mage_ablt.xml
+msgid "Blizzard"
+msgstr ""
+
+#: mage_ablt.xml
+msgid ""
+"The mage summons a leathal cold blizzard that freezes every enemy caught in "
+"it to death."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Chainlightning"
+msgstr ""
+
+#: mage_ablt.xml
+msgid ""
+"The mage unleashes a ball of lightning, that may jump from one enemy to "
+"another. It hits a maximum of five enemies and the damage is reduced "
+"everytime it jumps."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Ball lightning"
+msgstr ""
+
+#: mage_ablt.xml
+msgid ""
+"The mage unleashes a mighty ball lightning, that can jump over to nearby "
+"enemies. A maximum of nine enemies is hit and the damage is reduced with "
+"every jump."
+msgstr ""
+
+#: mage_ablt.xml
+#, fuzzy
+msgid "Chilling cold"
+msgstr "Weißer Tod"
+
+#: mage_ablt.xml
+msgid ""
+"The mage has understood everything about ice and snow, allowing him to "
+"increase the effectiveness of his icespells by 20%."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Fireball"
+msgstr ""
+
+#: mage_ablt.xml
+msgid ""
+"The mage casts a bolt of fire, that explodes upon hitting an enemy. Other "
+"enemies nearby the victim are also caught in the explosion."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Firebolt"
+msgstr ""
+
+#: mage_ablt.xml
+msgid "The mage unleashes a small bolt of fire, that damages a single enemy."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Firestorm"
+msgstr ""
+
+#: mage_ablt.xml
+msgid ""
+"The mage conjures a deadly wave of fire, that burns every enemy in a circle "
+"around him."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Fireblow"
+msgstr ""
+
+#: mage_ablt.xml
+msgid "The mage casts a strong bolt of fire, that damages one enemy."
+msgstr ""
+
+#: mage_ablt.xml
+#, fuzzy
+msgid "Firecolumn"
+msgstr "Feuerschnecke"
+
+#: mage_ablt.xml
+msgid ""
+"The mage conjurs a column made of hellfire, that will stay for 5 seconds and "
+"turn every enemy stupid enough to stay in there to ashes."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Flame wave"
+msgstr ""
+
+#: mage_ablt.xml
+msgid ""
+"The mage conjures a wave of flames, that damages enemies in a circle around "
+"him."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Freeze"
+msgstr ""
+
+#: mage_ablt.xml
+msgid ""
+"The mage catches an enemy in a block of pure ice, instantly sealing his "
+"movements."
+msgstr ""
+
+#: mage_ablt.xml
+#, fuzzy
+msgid "Frost ring"
+msgstr "Jettring"
+
+#: mage_ablt.xml
+msgid "The mage calls upon a deadlier version of the icering."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Icicle"
+msgstr ""
+
+#: mage_ablt.xml
+msgid "The mage casts a shard of pure ice, that damages his foes."
+msgstr ""
+
+#: mage_ablt.xml
+#, fuzzy
+msgid "Ice ring"
+msgstr "Jettring"
+
+#: mage_ablt.xml
+msgid ""
+"The mage casts a ring of ice around himself that will damage enemies in "
+"range."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Spear of ice"
+msgstr ""
+
+#: mage_ablt.xml
+msgid "The mage attacks one enemy with a powerful spear of magical ice."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Infernoball"
+msgstr ""
+
+#: mage_ablt.xml
+msgid "The mage casts an even more powerful fireball."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Ignite"
+msgstr ""
+
+#: mage_ablt.xml
+msgid ""
+"The mage embraces the heat of fire, so that victims of his firespells will "
+"likely suffer burn."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Ionisation"
+msgstr ""
+
+#: mage_ablt.xml
+msgid ""
+"The mage has become one with the storm, leading to 20 percent extra damage "
+"from his lightning spells."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Lightning"
+msgstr ""
+
+#: mage_ablt.xml
+msgid "The mage summons a lightning to attack one foe."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Lightning strike"
+msgstr ""
+
+#: mage_ablt.xml
+msgid "The mage calls upon a mighty lightning to kill an enemy."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Snow storm"
+msgstr ""
+
+#: mage_ablt.xml
+msgid "The mage calls upon a snow storm to kill every enemy in a circle."
+msgstr ""
+
+#: mage_ablt.xml
+#, fuzzy
+msgid "Static shield"
+msgstr "Eisenschild"
+
+#: mage_ablt.xml
+msgid ""
+"The mage surrounds himself with an armor of lightning, that will stun and "
+"damage enemies who are bolt enough to attack in close combat."
+msgstr ""
+
+#: mage_ablt.xml
+#, fuzzy
+msgid "Thunderstorm"
+msgstr "Gewitterstab"
+
+#: mage_ablt.xml
+msgid ""
+"The mage summons a thunderstorm that will assault enemies in its range with "
+"lightnings."
+msgstr ""
+
+#: mage_ablt.xml
+msgid "Tempest"
+msgstr ""
+
+#: mage_ablt.xml
+msgid ""
+"The mage summons a ferocious tempest that bombards enemies in its wake with "
+"lightnings."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Acid"
+msgstr ""
+
+#: priest_ablt.xml
+msgid "The priest turns normal water into deadly acid, poisoning one enemy."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Bladestorm"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priest strengthens the weaponarms of his comrades, leading to increased "
+"attackspeed for everyone. With increasing willpower the priest can hold this "
+"effect longer."
+msgstr ""
+
+#: priest_ablt.xml
+#, fuzzy
+msgid "Blazing Shield"
+msgstr "Eisenschild"
+
+#: priest_ablt.xml
+msgid ""
+"The party is surrounded by holy energy. Everyones defense is increased. With "
+"increasing willpower the priest can hold this effect longer."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Breaking Blow"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priest attacks an enemy with energy that causes elementals to be blown "
+"back where they come from."
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priest conjures a magic shield for all partymembers thats reduces the "
+"damage dealt by elemental attacks."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Glaring Sun"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priest calls forth a mighty explosion of light that can make every enemy "
+"in an area to be affected by blind."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Gentle Glow"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priest bathes a partymember in a mild light, releaving him of blindness "
+"and silence."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Omniscent Eye"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The party will be immune to blind and berserk for some time. With increasing "
+"willpower the priest can hold this effect longer."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Restore Concentration"
+msgstr ""
+
+#: priest_ablt.xml
+msgid "The priest heals one friend from confusion and berserk."
+msgstr ""
+
+#: priest_ablt.xml
+#, fuzzy
+msgid "Spirit Shield"
+msgstr "Eisenschild"
+
+#: priest_ablt.xml
+msgid ""
+"The priest grants immunity to berserk and confuse to all his partymembers "
+"for a small amount of time. With increasing willpower the priest can hold "
+"this effect longer."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Ease Pain"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priest treats a partymemener with healing water that washes away every "
+"poison and stops burns."
+msgstr ""
+
+#: priest_ablt.xml
+#, fuzzy
+msgid "Remedial Water"
+msgstr "Zeremonienhammer"
+
+#: priest_ablt.xml
+msgid ""
+"The priests grants every partymember immunity to poison and burn for a small "
+"amount of time while healing these effects. With increasing willpower the "
+"priest can hold this effect longer."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Dismissing Strike"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priest strikes with all his might. While normal monsters have little to "
+"fear from this attack elementals will be easily destroyed by it."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "God Strike"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"Only strong and durable demons will be able to resist the priests sacred "
+"strike."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Windstrike"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priest creates a vortex with his attack, that can suck a demonic "
+"creature right back to hell."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Cure"
+msgstr ""
+
+#: priest_ablt.xml
+msgid "The priest restores the hitpoints of one partymemeber."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Grand Cure"
+msgstr ""
+
+#: priest_ablt.xml
+msgid "The priest restores hitpoints for every partymember."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Sanctified Strike"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priest attacks with godly power, easily sending undead creatures back to "
+"their graves."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Bright Blow"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priest attacks an enemy with a blow imbued with holy power. Undead will "
+"be severely damaged by the sacred energies."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Hypnosis"
+msgstr ""
+
+#: priest_ablt.xml
+msgid "The priest confuses a monster, causing it to attack at random."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Hypnotic Vortex"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priest creates a distracting vortex with the ability to confuse every "
+"enemy caught in it."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Keen Mind"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priest increases everyones spellpower for a short time. Everyones spells "
+"will surely be more effective. With increasing willpower the priest can hold "
+"this effect longer."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Glistening Glare"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priest casts a dazzling light, that can cause an enemy to be affected by "
+"blind."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Divine Will"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priests protecting influence raises the willpower of all partymembers "
+"temporarily. With increasing willpower the priest can hold this effect "
+"longer."
+msgstr ""
+
+#: monster_ablt.xml
+msgid "steal"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "Steals gold"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "Alternativer Feuerball."
+msgstr ""
+
+#: monster_ablt.xml
+msgid "Booster"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "completely overpowered Booster"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "Healer"
+msgstr "Heiler"
+
+#: monster_ablt.xml
+msgid "Heilt alles"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "Firestorm with increased range."
+msgstr ""
+
+#: monster_ablt.xml
+#, fuzzy
+msgid "Goblin Lightning"
+msgstr "Goblinkämpfer"
+
+#: monster_ablt.xml
+#, fuzzy
+msgid "goblin curse"
+msgstr "Goblinkeule"
+
+#: monster_ablt.xml
+#, fuzzy
+msgid "monster Bash"
+msgstr "Monsterschwert"
+
+#: monster_ablt.xml
+msgid "Attacks one enemy for serious damage."
+msgstr ""
+
+#: monster_ablt.xml
+msgid "poison_attack"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "Sweeping blow"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "Attacks every enemy in weapon range with slightly reduced damage."
+msgstr ""
+
+#: monster_ablt.xml
+#, fuzzy
+msgid "Fire arrow"
+msgstr "Feuerassel"
+
+#: monster_ablt.xml
+msgid "Basic ranged attack"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "Poison arrow"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "Poisonous ranged attack"
+msgstr ""
+
+#: monster_ablt.xml
+#, fuzzy
+msgid "throw dagger"
+msgstr "Ogerdolch"
+
+#: monster_ablt.xml
+#, fuzzy
+msgid "Throw a dagger"
+msgstr "Ogerdolch"
+
+#: monster_ablt.xml
+msgid "throw berry"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "Throw a berry"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "throw rock"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "throw bomb"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "Throw a bomb"
+msgstr ""
+
+#: monster_ablt.xml
+#, fuzzy
+msgid "saboteur_move"
+msgstr "Saboteur"
+
+#: monster_ablt.xml
+msgid "Flee from enemy"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "Flame Throw"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "The basic attack of a flaming skeleton."
+msgstr ""
+
+#: monster_ablt.xml
+msgid "dark arrow"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "Blind ranged attack"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "Stats Down"
+msgstr ""
+
+#: monster_ablt.xml
+msgid "Decrease block-value"
+msgstr ""
+
+#: monster_ice_ablt.xml
+msgid "melee attack with ice damage"
+msgstr ""
+
+#: monster_ice_ablt.xml
+msgid "basic ranged attack with ice damage"
+msgstr ""
+
+#: monster_ice_ablt.xml
+msgid "Ice Arrow"
+msgstr ""
+
+#: monster_ice_ablt.xml
+msgid "an arrow of ice that will hunt it's prey"
+msgstr ""
+
+#: monster_ice_ablt.xml
+msgid "Iceball"
+msgstr ""
+
+#: monster_ice_ablt.xml
+msgid ""
+"The mage casts a bolt of ice that explodes in a ring upon hitting an enemy. "
+"Other enemies nearby the victim are also caught in the explosion."
+msgstr ""
+
+#: monster_ice_ablt.xml
+msgid ""
+"The mage conjures a wave of ice, that damages enemies in a circle around him."
+msgstr ""
+
+#: warrior_ablt.xml
+#, fuzzy
+msgid "Barbarian anger"
+msgstr "Barbarenstreitaxt"
+
+#: warrior_ablt.xml
+msgid ""
+"The warrior sets himself in the state of berserk, attacking his enemies with "
+"vicious blows, while completely neglecting his defence."
+msgstr ""
+
+#: warrior_ablt.xml
+msgid "Bash"
+msgstr ""
+
+#: warrior_ablt.xml
+msgid "Battlecry"
+msgstr ""
+
+#: warrior_ablt.xml
+msgid ""
+"The warrior releases a mighty cry that causes his enemies to lose "
+"concentration, ultimatly reducing their defence."
+msgstr ""
+
+#: warrior_ablt.xml
+msgid ""
+"The warriors mastery of shields and weapons allows him to block damage at an "
+"increased rate."
+msgstr ""
+
+#: warrior_ablt.xml
+#, fuzzy
+msgid "Charge"
+msgstr "Tartsche"
+
+#: warrior_ablt.xml
+msgid ""
+"Launches an assault at an enemy with increasing speed. The faster the "
+"warrior is, the more damage a charge inflicts."
+msgstr ""
+
+#: warrior_ablt.xml
+msgid "Taunt"
+msgstr ""
+
+#: warrior_ablt.xml
+msgid "Causes surrounding monsters to attack the warrior more likely."
+msgstr ""
+
+#: warrior_ablt.xml
+#, fuzzy
+msgid "Warmaster"
+msgstr "Magisterzauberstab"
+
+#: warrior_ablt.xml
+msgid ""
+"The warrior has become used to the ways of the battlefield to a point, where "
+"he can regenerate his abilities faster than normal."
+msgstr ""
+
+#: warrior_ablt.xml
+#, fuzzy
+msgid "Fire and sword"
+msgstr "Schreckensschwert"
+
+#: warrior_ablt.xml
+msgid ""
+"The warrior calls the spirits of fire upon his weapon, causing it to deal "
+"firedamage. The damage depends on the warriors spellpower."
+msgstr ""
+
+#: warrior_ablt.xml
+#, fuzzy
+msgid "Flame armor"
+msgstr "Lederrüstung"
+
+#: warrior_ablt.xml
+msgid ""
+"The warrior surrounds himself with angry spirits of fire, who will burn his "
+"enemies to ashes, if they dare to come to close."
+msgstr ""
+
+#: warrior_ablt.xml
+msgid "Pact of flames"
+msgstr ""
+
+#: warrior_ablt.xml
+msgid ""
+"The warrior calls upon the fires of hell, causing his weapon to deal "
+"firedamage for a significant time. His enemies might catch fire when hit."
+msgstr ""
+
+#: warrior_ablt.xml
+#, fuzzy
+msgid "barbarian power"
+msgstr "Barbarenschwert"
+
+#: warrior_ablt.xml
+msgid ""
+"The warrior becomes even more bloodthirsty, launching at his enemies with "
+"increased attackspeed and damage in a berserk state. Even while neglecting "
+"his defence, the impact is not as big as with the barbarian anger."
+msgstr ""
+
+#: warrior_ablt.xml
+#, fuzzy
+msgid "Hammer blow"
+msgstr "Waldläuferbogen"
+
+#: warrior_ablt.xml
+msgid ""
+"Attacks one enemy with a brutal blow and damages nearby enemies as well."
+msgstr ""
+
+#: warrior_ablt.xml
+msgid "Silencer"
+msgstr ""
+
+#: warrior_ablt.xml
+msgid "Attacks an enemy with a chance to inflict silence."
+msgstr ""
+
+#: warrior_ablt.xml
+#, fuzzy
+msgid "Monster hunter"
+msgstr "Goblinjäger"
+
+#: warrior_ablt.xml
+msgid ""
+"For each monster the warrior kills, his strength increases for a short "
+"amount of time."
+msgstr ""
+
+#: warrior_ablt.xml
+#, fuzzy
+msgid "Monster slayer"
+msgstr "Monsterschwert"
+
+#: warrior_ablt.xml
+msgid ""
+"The warrior has become the worst nightmare of monsters, with every one of "
+"them falling at his feet increasing his strength and attackspeed for a short "
+"amount of time."
+msgstr ""
+
+#: warrior_ablt.xml
+msgid "Regeneration"
+msgstr ""
+
+#: warrior_ablt.xml
+msgid ""
+"The warrior regains up to 50 percent hitpoints of his total hitpoints "
+"through the sheer power of his will."
+msgstr ""
+
+#: warrior_ablt.xml
+msgid "Defiances"
+msgstr ""
+
+#: warrior_ablt.xml
+msgid ""
+"Nearby monsters will attack the warrior, if they are able to. The warriors "
+"defence is increased."
+msgstr ""
+
+#: warrior_ablt.xml
+#, fuzzy
+msgid "Smash blow"
+msgstr "Eschenbogen"
+
+#: warrior_ablt.xml
+msgid "Attacks an enemy with an unblockable, armor piercing blow."
+msgstr ""
+
+#: warrior_ablt.xml
+#, fuzzy
+msgid "Perseverance"
+msgstr "Berserkeraxt"
+
+#: warrior_ablt.xml
+msgid ""
+"The warriors defence increases proportional to the cuts and bruises he "
+"receives in combat. The more serious the wounds, the more difficult he is to "
+"kill."
+msgstr ""
+
+#: warrior_ablt.xml
+msgid "Charge scythe"
+msgstr ""
+
+#: warrior_ablt.xml
+msgid "Launches an even stronger charge attack, that may inflict stun."
+msgstr ""
+
+#: warrior_ablt.xml
+msgid "Warcry"
+msgstr ""
+
+#: warrior_ablt.xml
+msgid ""
+"The battle hardened warriors scream leaves his enemies defence wide open, "
+"sometimes confusing them as well."
+msgstr ""
+
+#: warrior_ablt.xml
+#, fuzzy
+msgid "Weaponmaster"
+msgstr "Waffen"
+
+#: warrior_ablt.xml
+msgid ""
+"The warriors mastery of weapons increases the damage of his basic attacks by "
+"20%."
+msgstr ""
+
+#: warrior_ablt.xml
+msgid "Whirl blow"
+msgstr ""
+
+#: warrior_ablt.xml
+msgid "Attacks every enemy in weapon range."
+msgstr ""
+
+#: npc_abilities.xml
+#, fuzzy
+msgid "Freezing Death"
+msgstr "Weißer Tod"
+
+#: npc_abilities.xml
+msgid ""
+"The mage conjures a devastating ring of ice, that damages enemies in a "
+"circle around him."
+msgstr ""
+
+#: npc_abilities.xml
+msgid ""
+"The mage conjures a deadly wave of fire on the verge of death, that burns "
+"every enemy in a circle around him to a crisp."
+msgstr ""
+
+#: monster_air_ablt.xml
+msgid "air attack"
+msgstr ""
+
+#: monster_air_ablt.xml
+msgid "attack with ice damage"
+msgstr ""
+
+#: base_abilities.xml
+msgid "dead"
+msgstr ""
+
+#: base_abilities.xml
+msgid "die"
+msgstr ""
+
+#: base_abilities.xml
+#, fuzzy
+msgid "summoned"
+msgstr "Beschwörerzauberstab"
+
+#: base_abilities.xml
+msgid "first action that is performed by a summoned monster"
+msgstr ""
+
+#: base_abilities.xml
+#, fuzzy
+msgid "no action"
+msgstr "Tränke"
+
+#: base_abilities.xml
+msgid "speak"
+msgstr ""
+
+#: base_abilities.xml
+msgid "speak with someone"
+msgstr ""
+
+#: base_abilities.xml
+msgid "take up item"
+msgstr ""
+
+#: base_abilities.xml
+msgid "take item"
+msgstr ""
+
+#: base_abilities.xml
+msgid "use"
+msgstr ""
+
+#: base_abilities.xml
+msgid "walk"
+msgstr ""
+
+#: base_abilities.xml
+#, fuzzy
+msgid "guard"
+msgstr "Wache"
+
+#: base_abilities.xml
+msgid "Attack"
+msgstr ""
+
+#: base_abilities.xml
+msgid "Basic melee attack"
+msgstr ""
+
+#: base_abilities.xml
+msgid "Holy attack"
+msgstr ""
+
+#: base_abilities.xml
+msgid "Basic holy melee attack"
+msgstr ""
+
+#: base_abilities.xml
+msgid "Ranged attack"
+msgstr ""
+
+#: monster_fire_ablt.xml
+msgid "fire attack"
+msgstr ""
+
+#: monster_fire_ablt.xml
+msgid "attack with fire damage"
+msgstr ""
+
+#: monster_fire_ablt.xml
+msgid "throw grenade"
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Snipe"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The archers deadly precision causes his shots to deal more damage than "
+"normal."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Blind Rage"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The archer attacks the enemies eyes, causing him to go berserk, but be "
+"blinded at the same time."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Bow Spirit"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The archer becomes one with his weapon, dealing more damage over a longer "
+"time. Additionally his critical strike chance is increased. This effect "
+"stacks with Elfeyes."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Concentration"
+msgstr ""
+
+#: archer_ablt.xml
+msgid "The archers steady mind can no longer be confused."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Elfeyes"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The archer shoots with deadly precision, leading to an increased critical "
+"hit rate."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Deadly Roulette"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The projectile has a fifty percent probability to attack another target, if "
+"it hits someone. Be careful not to stand in its way, for it distinguishes "
+"not between friend and foe."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Catlike Reflexes"
+msgstr ""
+
+#: archer_ablt.xml
+msgid "The archers nimble mind allows him to avoid damage better."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Explosion Arrow"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The projectile is imbued with the power of a weak firespirit. It will deal "
+"damage in a small area, if it hits."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Blast Cascade"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The projectile is imbued with the power of a firespirit. It will explode "
+"with areadamage on hitting. Additionally four more explosions will go of in "
+"every direction."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Frost Arrows"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The archer summons a spirit of ice into his weapon, causing his shots to "
+"deal icedamage over a greater amount of time. There is a chance that his "
+"enemies will be frozen solid if they are hit."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Deadly Swarm"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The archer shoots four consecutive projectiles that are imbued with vengeful "
+"spirits. They will pursue the enemy, even if he tries to run."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Ice Arrows"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The archer calls upon the spirits of ice to imbue his projectiles with "
+"icedamage."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Mind Wall"
+msgstr ""
+
+#: archer_ablt.xml
+msgid "The archer has become immune to anger. He will never go berserk again."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Fanshot"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The archer shoots five projectiles at a time, aimed at enemies in front of "
+"him. The damage dealt by each projectile suffers a little."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Elfwanderer"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The archer unleashes a mighty shot that pierces right through an enemy and "
+"might hit another enemy behind him."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "North Hunter"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The archers good longterm relations with the spirits of wind and ice has "
+"caused his resistence and his maximum resistance of these elements to rise "
+"by 10 percent."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "North Roamer"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The archer has made a pact with the spirits of wind and ice. His resistance "
+"against wind- and icedamage is increased by 20 percent."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Storm Arrows"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The mighty spirits of wind themselfes help the archer by imbuing his "
+"projectiles with their power, causing them to deal more winddamage for a "
+"longer time."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Tripple Shot"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The archers mastery of ranged weapons allows him to shoot three projectiles "
+"in a short amount of time."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Vacuum"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The archer attacks with an arrow imbued with a weaker windspirit, that "
+"causes an enemy hit by it to be stunned."
+msgstr ""
+
+#: archer_ablt.xml
+#, fuzzy
+msgid "Iron Hail"
+msgstr "Eisenschild"
+
+#: archer_ablt.xml
+msgid ""
+"The archer handles his weapons with elflike precision, attacking up to seven "
+"enemys in front of him. The damage dealt by each projectile suffers a little."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Weak Spot"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The archer attacks a weak point of his enemy, causing the victim to go "
+"berserk."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Wind Arrows"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The archer has been grantet the power to imbue his projectiles with "
+"winddamage by the spirits of wind."
+msgstr ""
+
+#: archer_ablt.xml
+msgid "Windwalk"
+msgstr ""
+
+#: archer_ablt.xml
+msgid ""
+"The spirits of wind help the archer to move faster than normal and avoid "
+"damage."
+msgstr ""
+
 #: humans.xml
 msgid "Bandit"
 msgstr "Bandit"
@@ -1927,10 +3222,6 @@ msgstr "Feuerküken"
 #: council_monsters.xml
 msgid "Inferno Behemoth"
 msgstr "Inferno Behemoth"
-
-#: aisenNPCStats.xml
-msgid "Healer"
-msgstr "Heiler"
 
 #: aisenNPCStats.xml
 msgid "Trader"
