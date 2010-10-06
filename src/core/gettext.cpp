@@ -12,19 +12,59 @@ bool Gettext::m_changed;
 
 void Gettext::init(const char* locale)
 {
+	bindtextdomain ("defend_dwarfenwall","./translation/");
+	bind_textdomain_codeset ("defend_dwarfenwall","UTF-8");
+
+	bindtextdomain ("fortify_dwarfenwall","./translation/");
+	bind_textdomain_codeset ("fortify_dwarfenwall","UTF-8");
+
+	bindtextdomain ("herb_collector","./translation/");
+	bind_textdomain_codeset ("herb_collector","UTF-8");
+
+	bindtextdomain ("joringsbridge","./translation/");
+	bind_textdomain_codeset ("joringsbridge","UTF-8");
+
+	bindtextdomain ("maylons_grave","./translation/");
+	bind_textdomain_codeset ("maylons_grave","UTF-8");
+
 	bindtextdomain ("menu","./translation/");
 	bind_textdomain_codeset ("menu","UTF-8");
-	
-	//bindtextdomain ("sumwars-events","./translation/");
-	//bind_textdomain_codeset ("sumwars-events","UTF-8");
-	//bindtextdomain ("sumwars-xml","./translation/");
-	//bind_textdomain_codeset ("sumwars-xml","UTF-8");
-	
+
+	bindtextdomain ("rescue_willard","./translation/");
+	bind_textdomain_codeset ("rescue_willard","UTF-8");
+
+	bindtextdomain ("rob_the_robber","./translation/");
+	bind_textdomain_codeset ("rob_the_robber","UTF-8");
+
+	bindtextdomain ("sumwars","./translation/");
+	bind_textdomain_codeset ("sumwars","UTF-8");
+
+	bindtextdomain ("testquest","./translation/");
+	bind_textdomain_codeset ("testquest","UTF-8");
+
+	bindtextdomain ("the_ambush_of_the_undead","./translation/");
+	bind_textdomain_codeset ("the_ambush_of_the_undead","UTF-8");
+
+	bindtextdomain ("the_ambush","./translation/");
+	bind_textdomain_codeset ("the_ambush","UTF-8");
+
 	bindtextdomain ("the_besieged_farm","./translation/");
 	bind_textdomain_codeset ("the_besieged_farm","UTF-8");
-	
+
+	bindtextdomain ("the_goblinslayer","./translation/");
+	bind_textdomain_codeset ("the_goblinslayer","UTF-8");
+
+	bindtextdomain ("the_poolmonster","./translation/");
+	bind_textdomain_codeset ("the_poolmonster","UTF-8");
+
+	bindtextdomain ("the_trader","./translation/");
+	bind_textdomain_codeset ("the_trader","UTF-8");
+
+	bindtextdomain ("tutorial","./translation/");
+	bind_textdomain_codeset ("tutorial","UTF-8");
+
 	textdomain ("menu");
-	
+
 	Gettext::setLocale(locale);
 }
 

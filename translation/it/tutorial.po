@@ -1,0 +1,1234 @@
+# Italian translations for sumwars package.
+# Copyright (C) 2009 THE sumwars'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the sumwars package
+# 
+# Francesco Miglietta (fra9000) <miglietta.francesco@gmail.com>, 2010
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: sumwars 0.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-09 15:15+0100\n"
+"PO-Revision-Date: 2010-07-25 09:49\n"
+"Last-Translator: Francesco Miglietta (fra9000) <miglietta.francesco@gmail."
+"com>\n"
+"Language-Team: Italian <http://gamesopensource.altervista.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: tutorial.xml
+msgid "Tutorial"
+msgstr "Tutorial"
+
+#: tutorial.xml
+msgid "Tutorial finished"
+msgstr "Tutorial completato con successo."
+
+#: tutorial.xml
+msgid "Hand your weapon over to Derred."
+msgstr "Consegna le tue armi a Drerred."
+
+#: tutorial.xml
+msgid "Follow Tolec and Derred."
+msgstr "Segui Tolec e Derred."
+
+#: tutorial.xml
+msgid "Kill all Fire Slugs in the enclosure."
+msgstr "Uccidi tutte le Lumache del Fuoco."
+
+#: tutorial.xml
+msgid "Find the secret entrance to the library."
+msgstr "Cerca il passaggio segreto che porta alla libreria."
+
+#: tutorial.xml
+msgid "Kill every spawn of the behemoth."
+msgstr "Uccidi tutte le larve di Behemoth."
+
+#: tutorial.xml
+msgid "Quest description"
+msgstr "Obbiettivi della Quest"
+
+#: tutorial.xml
+msgid "elCnlLobby"
+msgstr "Consiglio degli Elementalisti, Dungeon sotterraneo"
+
+#: tutorial.xml
+msgid "*urgh*"
+msgstr "*urgh*"
+
+#: tutorial.xml
+msgid "Harad's bones!"
+msgstr "Ossa di Herad!"
+
+#: tutorial.xml
+msgid "That was at least as nasty as the first years in hell! Where am I?"
+msgstr "E' stato orrbile..almeno quanto vivere all'inferno! Dove sono finito?"
+
+#: tutorial.xml
+msgid "And who is the other sad character?"
+msgstr "Chi e' l'altro individuo afflitto?"
+
+#: tutorial.xml
+msgid "And who are the other sad characters?"
+msgstr "Chi sono gli altri individui afflitti?"
+
+#: tutorial.xml
+msgid "Are you looking for trouble? Who is responsible for this mess!?!"
+msgstr "Stai cercando guai? Chi e' responsabile di questo casino!?!"
+
+#: tutorial.xml
+msgid ""
+"I almost had that damn ogre and suddenly someones ripping out my guts who's "
+"not even near me!"
+msgstr ""
+"Avevo appena avuto la meglio su quel dannato orco che improvvisamente sono "
+"stato attaccato da qualcuno che non era neanche vicino a me!"
+
+#: tutorial.xml
+msgid "Oh yes! The miraculous mental abilities of club swingers."
+msgstr "Gia'! Le miracolose facolta' mentali dei guerrieri dotati di clava.."
+
+#: tutorial.xml
+msgid "I'll show you the endurance capacities of magic squirters!"
+msgstr "Ti faro' vedere la resistenza di questi maghi spruzza-incantesimi!"
+
+#: tutorial.xml
+msgid ""
+"What a disgusting ambiance. I did not desire to be here... and I had just "
+"found a nice and safe place. "
+msgstr ""
+"Che atmosfera disgustosa. L'ultima cosa che avrei voluto era di trovarmi "
+"qua...avevo appena scoperto un posto sicuro."
+
+#: tutorial.xml
+msgid "Excuse me..."
+msgstr "Mi scusi..."
+
+#: tutorial.xml
+msgid "No, you have to say that much more authoritative."
+msgstr "No, lo devi dire molto piu' autorevolmente."
+
+#: tutorial.xml
+msgid ""
+"It seems someone here has greater knowledge about how Harad is keeping me "
+"alive and moves me."
+msgstr ""
+"Sembra che qualcuno qui sappia qualcosa di piu' su come Harad mi sta "
+"mantenendo vivo e mi manovri."
+
+#: tutorial.xml
+msgid ""
+"It seems someone here has greater knowledge about how Harad is keeping us "
+"alive and moves us."
+msgstr ""
+"Sembra che qualcuno qui sappia qualcosa di piu' su come Harad ci sia "
+"mantenendo in vita e ci manovri."
+
+#: tutorial.xml
+msgid ""
+"Whoever is the head honcho here: He had better known what he's gotten "
+"himself into."
+msgstr ""
+"Chiunque sia il boss qui farebbe meglio a valutare in cosa si sta cacciando."
+
+#: tutorial.xml
+msgid "Lot's of money could appease me again."
+msgstr "Tanto denaro potrebbe appagarmi nuovamente."
+
+#: tutorial.xml
+msgid ""
+"Please excuse your slightly rough arrival. Lord Master Soren Windclaw "
+"requests your presence. ##solo"
+msgstr ""
+"Ci scusiamo per la burrascosa accoglienza, ma il Signore e Maetro Soren "
+"Winclaw richiede la tua presenza. ##solo"
+
+#: tutorial.xml
+msgid ""
+"Please excuse your slightly rough arrival. Lord Master Soren Windclaw "
+"requests your presence."
+msgstr ""
+"Ci scusiamo per la burrascosa accoglienza, ma il Signore e Maetro Soren "
+"Winclaw richiede la tua presenza. ##solo"
+
+#: tutorial.xml
+msgid "I see!"
+msgstr "Noto!"
+
+#: tutorial.xml
+msgid "Lord"
+msgstr "Signore"
+
+#: tutorial.xml
+msgid "Master"
+msgstr "Maestro"
+
+#: tutorial.xml
+msgid "Windclaw."
+msgstr "Windclaw."
+
+#: tutorial.xml
+msgid "Why didn't you say so in the first place?"
+msgstr "Perche' non lo hai detto subito?"
+
+#: tutorial.xml
+msgid "Well, if you would follow us, please?"
+msgstr "Bene, potresti seguirci, per piacere?"
+
+#: tutorial.xml
+msgid "Are you kidding us? Who the hell is this windpaw?"
+msgstr "Ci stai prendendo in giro? Chi diavolo e' questo Windpaw?"
+
+#: tutorial.xml
+msgid "Are you kidding me? Who the hell is this windpaw?"
+msgstr "Mi stai prendendo in giro? Chi diavolo e' questo Windpaw?"
+
+#: tutorial.xml
+msgid ""
+"A splendid question. Short and precise. Maybe one can actually work with "
+"that one."
+msgstr "Ottima domanda. Sei rapido e acuto. Forse con te puo' funzionare."
+
+#: tutorial.xml
+msgid "Er..."
+msgstr "Ehm..."
+
+#: tutorial.xml
+msgid "Keep your head, my son. Take your time to think the answer over."
+msgstr "Rifletti figliolo. Prendi tutto il tempo che desideri per rispondere."
+
+#: tutorial.xml
+msgid "It may well be your last."
+msgstr "Potrebbe essere la tua ultima decisione."
+
+#: tutorial.xml
+msgid "Spill it. Where are we and who has the nerve to cross Branded Ones?!"
+msgstr "Forza parla. Dove siamo e chi ha il coraggio di seccare un Marchiato?!"
+
+#: tutorial.xml
+msgid ""
+"Well, the Lord Master has affirmed that he will explain everything in detail "
+"to you. ##solo"
+msgstr ""
+"Bene, il Signore e Maestro mi disse che ti avrebbe spiegato tutto nel "
+"dettaglio. ##solo"
+
+#: tutorial.xml
+msgid "Further more your arrival was... somewhat exhausting. ##solo"
+msgstr ""
+"Oltretutto il tuo arrivo dev'essere stato...in un certo senso..estenuante. "
+"##solo"
+
+#: tutorial.xml
+msgid "You shouldn't be able to pose a threat to us at the moment. ##solo"
+msgstr "Al momento non sei in grado di minacciarmi. ##solo"
+
+#: tutorial.xml
+msgid ""
+"Well, the Lord Master has affirmed that he will explain everything in detail "
+"to you."
+msgstr ""
+"Bene, il Signore e Maestro mi disse che vi avrebbe spiegato tutto nel "
+"dettaglio."
+
+#: tutorial.xml
+msgid "Further more your arrival was... somewhat exhausting."
+msgstr ""
+"Oltretutto il vostro arrivo dev'essere stato...in un certo senso..estenuante."
+
+#: tutorial.xml
+msgid "You shouldn't be able to pose a threat to us at the moment."
+msgstr "Al momento non sei in grado di minacciarci."
+
+#: tutorial.xml
+msgid "What have you done, you bastards?!"
+msgstr "Cosa hai intenzione di fare, bastardo?!"
+
+#: tutorial.xml
+msgid "Don't worry. We have strict orders not to kill you. ##solo"
+msgstr "Non preoccuparti, non ho l'ordine preciso di ucciderti. ##solo"
+
+#: tutorial.xml
+msgid "Don't worry. We have strict orders not to kill you."
+msgstr "Non preoccuparti, non abbiamo l'ordine preciso di uccidervi."
+
+#: tutorial.xml
+msgid "That guy seems to know what he's doing."
+msgstr "Costui sembra sapere cosa stia facendo."
+
+#: tutorial.xml
+msgid "This is not the right time to be impressed."
+msgstr "Non e' il momento di complimentarsi."
+
+#: tutorial.xml
+msgid ""
+"Fine. Now that that's clarified I'd like to ask you to surrender your "
+"weapons. ##solo"
+msgstr ""
+"Bene. Adesso che tutto e' stato chiarito, ti devo chiedere di deporre le "
+"armi. ##solo"
+
+#: tutorial.xml
+msgid ""
+"Fine. Now that that's clarified I'd like to ask you to surrender your "
+"weapons."
+msgstr ""
+"Bene. Adesso che tutto e' stato chiarito, vi devo chiedere di deporre le "
+"armi."
+
+#: tutorial.xml
+msgid "Kindly ask."
+msgstr "Che gentil domanda.."
+
+#: tutorial.xml
+msgid "We cannot take any risks and inside the council you are safe. ##solo"
+msgstr ""
+"Non possiamo correre alcun rischio e comunque all'interno del Consiglio sei "
+"al sicuro. ##solo"
+
+#: tutorial.xml
+msgid "We cannot take any risks and inside the council you are safe."
+msgstr ""
+"Non possiamo correre alcun rischio e comunque all'interno del Consiglio "
+"siete al sicuro."
+
+#: tutorial.xml
+msgid "Council? The Council of Summoners?! Is this Aisen?"
+msgstr "Consiglio? Il Consiglio degli Evocatori?! Siamo ad Aisen?"
+
+#: tutorial.xml
+msgid "Yes, but that's neither here nor there!"
+msgstr "Si', ma e' irrilevante!"
+
+#: tutorial.xml
+msgid "What if we don't feel like surrendering our weapons?"
+msgstr "E se non ce la sentissimo di consegnarvi le armi?"
+
+#: tutorial.xml
+msgid ""
+"I'm very sorry, but before that we cannot release you of the safety area."
+msgstr ""
+"Sono spiacente, ma non potremmo farvi allontanare dalla zona di sicurezza."
+
+#: tutorial.xml
+msgid "What if I don't feel like surrendering my weapons?"
+msgstr "E se non me la sentissi di consegnarvi le armi?"
+
+#: tutorial.xml
+msgid ""
+"I'm very sorry, but before that we cannot release you of the safety area. "
+"##solo"
+msgstr ""
+"Sono spiacente, ma non potrei farti allontanare dalla zona di sicurezza. "
+"##solo"
+
+#: tutorial.xml
+msgid "Safety area?! This is a goddamn prison!"
+msgstr "Zona di sicurezza?! E' una dannata prigione!"
+
+#: tutorial.xml
+msgid "the choice is your's."
+msgstr "La scelta e' vostra."
+
+#: tutorial.xml
+msgid "Derred"
+msgstr "Derred"
+
+#: tutorial.xml
+msgid "Surrender weapons"
+msgstr "Consegna delle armi"
+
+#: tutorial.xml
+msgid "Do you want to surrender your weapons?"
+msgstr "Vuoi deporre le armi?"
+
+#: tutorial.xml
+msgid "It seems we have no choice..."
+msgstr "Sembra che non abbiamo scelta..."
+
+#: tutorial.xml
+msgid "It seems I have no choice..."
+msgstr "Sembra che non abbia scelta..."
+
+#: tutorial.xml
+msgid "Very well. Follow me, please."
+msgstr "Benissimo. Ora, seguimi."
+
+#: tutorial.xml
+msgid "Forget it!"
+msgstr "Scordatelo!"
+
+#: tutorial.xml
+msgid "As you wish, but this room is safe."
+msgstr "Come vuoi, ma da questa stanza non si esce."
+
+#: tutorial.xml
+msgid "You will not leave it until you surrender your weapon. ##solo"
+msgstr ""
+"Non lascerai questa cella fino a quando non consegnerai le armi. ##solo"
+
+#: tutorial.xml
+msgid ""
+"Just tell us by clicking on one of us, when you change your mind. ##solo"
+msgstr ""
+"Facci sapere se cambi idea. Clicca col tasto sinistro del mouse per parlare. "
+"##solo"
+
+#: tutorial.xml
+msgid "You will not leave it until you surrender your weapon."
+msgstr "Non lascerete questa cella fino a quando non ci consegnerete le armi."
+
+#: tutorial.xml
+msgid "Just tell us by clicking on one of us, when you change your mind."
+msgstr ""
+"Fateci sapere se cambiate idea. Clicca col tasto sinistro del mouse per "
+"parlare)."
+
+#: tutorial.xml
+msgid "Tolec"
+msgstr "Tolec"
+
+#: tutorial.xml
+msgid "Follow me, please."
+msgstr "Seguitemi."
+
+#: tutorial.xml
+msgid ""
+"What's keeping you? Has the transport afflicted you so much that you don't "
+"even know how to walk anymore? Just click with the left mouse button at a "
+"place on the ground, then it will all come back to you on its own."
+msgstr ""
+"Cosa stai aspettando? Il viaggio ti ha cosi' affaticato che non riesci "
+"nemmeno a camminare? Clicca sul terreno col tasto sinistro del mouse per "
+"muoverti."
+
+#: tutorial.xml
+msgid "Akeran!"
+msgstr ""
+
+#: tutorial.xml
+msgid "Help!"
+msgstr "Aiuto!"
+
+#: tutorial.xml
+msgid "Someone!"
+msgstr ""
+
+#: tutorial.xml
+#, fuzzy
+msgid "Save me!"
+msgstr "Salvataggio partita"
+
+#: tutorial.xml
+msgid "I will work twice as hard!"
+msgstr ""
+
+#: tutorial.xml
+msgid "Dont let me die!"
+msgstr ""
+
+#: tutorial.xml
+msgid "Please!"
+msgstr ""
+
+#: tutorial.xml
+msgid "Noo!"
+msgstr ""
+
+#: tutorial.xml
+msgid "Oh Akeran! Close the gates!"
+msgstr "Per Akeran! Chiudere i cancelli!"
+
+#: tutorial.xml
+msgid "Akeran's Shield! The THING is free! Back everyone! Go, go, go!"
+msgstr ""
+"Akeran proteggici! La COSA si e' liberata! Tutti indetro! Muoversi, "
+"muoversi!!"
+
+#: tutorial.xml
+msgid "We can't pass there. What do we do now?"
+msgstr "Di li' non possiamo passare. Adesso cosa facciamo?"
+
+#: tutorial.xml
+msgid "Is this thing really that bad?"
+msgstr "Questa COSA e' davvero cosi' pericolosa?"
+
+#: tutorial.xml
+msgid "Are you blind? The beast is gigantic!"
+msgstr "Sei cieco? Quella bestia e' gigantesca!"
+
+#: tutorial.xml
+msgid "Size isn't everything."
+msgstr "Le dimensioni non sono tutto."
+
+#: tutorial.xml
+msgid ""
+"Looks like a departure ticket to me. It can't be more painful than the "
+"arrival."
+msgstr "Mi sembra tutto piacevole se paragonato al mio arrivo."
+
+#: tutorial.xml
+msgid "Er yes... about that..."
+msgstr "Ah gia'...approposito..."
+
+#: tutorial.xml
+msgid "What?"
+msgstr "Che cosa?!"
+
+#: tutorial.xml
+msgid ""
+"The Lord Master Windclaw feared, you would disembody yourselves after your "
+"arrival to disappear, so he took... measures."
+msgstr ""
+"Il Signore e Maestro Windclaw aveva paura che dopo il tuo arrivo avresti "
+"voluto smaterializzarti, quindi diciamo che ha preso delle...precauzioni."
+
+#: tutorial.xml
+msgid "Measures?"
+msgstr "Precauzioni?"
+
+#: tutorial.xml
+msgid "Well, we don't understand much, but it seems you don't die like us."
+msgstr ""
+"Beh, non e' che ne capiamo molto, ma sembra che tu non possa morire come noi "
+"comuni mortali."
+
+#: tutorial.xml
+msgid "Instead you can resurrect where you want after your body was destroyed."
+msgstr ""
+"A quanto pare tu puoi risorgere dove vuoi nel momento stesso in cui vieni "
+"ucciso."
+
+#: tutorial.xml
+msgid "Akeran must truly hate you..."
+msgstr "Akeran ti deve davvero odiare..."
+
+#: tutorial.xml
+msgid "So? None of us was wishing for this ability."
+msgstr "E quindi? Nessuno di noi desiderava possedere questa capacita'."
+
+#: tutorial.xml
+msgid "So? I didn't wish for this ability."
+msgstr "E quindi? Io non avrei mai voluto possedere questa capacita'."
+
+#: tutorial.xml
+msgid ""
+"Well, as you are now you can do that only at places of great magical "
+"concentrations. In other words..."
+msgstr ""
+"Bene, ora come ora potrai farlo solo in luoghi ad alta concentrazione "
+"magica. In altre parole..."
+
+#: tutorial.xml
+msgid "... just back there with all the junk."
+msgstr "...tornerai li' con tutta la spazzatura."
+
+#: tutorial.xml
+msgid "I wouldn't necessarily call that junk."
+msgstr "Io non la chiamerei necessariamente spazzatura."
+
+#: tutorial.xml
+msgid "Exactly, only there."
+msgstr "Esattamente, solo li'."
+
+#: tutorial.xml
+msgid "It is time we talk with this Windclaw. He seems to be a smart toad."
+msgstr ""
+"E' il momento di andare a parlare con questo Windclaw. Sembra essere un "
+"vecchio volpone astuto."
+
+#: tutorial.xml
+msgid "It is time I talk with this Windclaw. He seems to be a smart toad."
+msgstr ""
+"E' il momento di andare a parlare con questo Windclaw. Sembra essere un "
+"vecchio volpone astuto."
+
+#: tutorial.xml
+msgid "It can't be all too healthy to be this smart."
+msgstr "Non si puo' essere del tutto sani per essere cosi' intelligenti."
+
+#: tutorial.xml
+msgid ""
+"Er, well, yes. Since the main way is currently blocked, we'll have to try to "
+"get through the enclosure with the new experiments."
+msgstr ""
+"Ehm, gia'. Dal momento che la via principale e' bloccata, dovremmo cercare "
+"di passare dal retro..quel corridoio e' pieno dei nuovi esperimenti."
+
+#: tutorial.xml
+msgid "There's a back door for feeding and word is..."
+msgstr ""
+"C'e' una porta sul retro per dar da mangiare alle creature, il fatto e' "
+"che..."
+
+#: tutorial.xml
+msgid ""
+"... that the old Firewhirl has a secret door for a direct connection to the "
+"kitchen. That could work! But the beast are not exactly without danger."
+msgstr ""
+"...e' che il vecchio Firewhirl ha una porta segreta che collega direttamente "
+"alle cucine. Potrebbe funzionare! Anche se gli esperimenti non sono del "
+"tutto innoqui."
+
+#: tutorial.xml
+msgid "It's only those sluglings."
+msgstr "Si tratta solo di qualche viscida lumaca."
+
+#: tutorial.xml
+msgid ""
+"I don't know... I don't feel like being bedridden for three weeks just "
+"because of some slimy fire breath."
+msgstr ""
+"Non lo so...non me la sento di essere costretto a letto per tre settimane "
+"solo a causa di qualche Lumaca del Fuoco."
+
+#: tutorial.xml
+msgid ""
+"To Harad! That's impossible to put up with. Give us our weapons and we take "
+"care of that."
+msgstr ""
+"Per Harad! Una cosa del genere non potremmo mai sopportarla. Dacci le nostre "
+"armi e ci pensiamo noi."
+
+#: tutorial.xml
+msgid ""
+"To Harad! That's impossible to put up with. Give me my weapon and I take "
+"care of that."
+msgstr ""
+"Per Harad! Una cosa del genere non potrei mai sopportarla. Ridammi le mie "
+"armi e ci pensero' io personalmente."
+
+#: tutorial.xml
+msgid "Well, you are right about that..."
+msgstr "Beh, su questo hai ragione..."
+
+#: tutorial.xml
+msgid ""
+"Yes, considering the difficult circumstances we can do that, I guess. Here "
+"you go."
+msgstr "Gia', date le circostanze faremo come dici. Ecco qui."
+
+#: tutorial.xml
+msgid "What is this supposed to be?"
+msgstr "Cosa dovrebbe essere?"
+
+#: tutorial.xml
+msgid "Where is my weapon?"
+msgstr "Dove sono le mie armi?"
+
+#: tutorial.xml
+msgid ""
+"Er... Lord Master Windclaw feared, there could be a situation in which you "
+"had to fall back to, er, force of arms."
+msgstr ""
+"Ehm...Lord Winclaw temeva che tu potessi ricadere in tentazione...e volessi "
+"riavere le tue armi."
+
+#: tutorial.xml
+msgid "That's why he gave us these."
+msgstr "Ecco perche' ci ha dato questi."
+
+#: tutorial.xml
+msgid ""
+"Surely you understand that you cannot run around here with unchecked weapons."
+msgstr ""
+"Sicuramente capisci perche' non possiamo farti andare in giro armato e "
+"incontrollato."
+
+#: tutorial.xml
+msgid "Slowly you're getting to me."
+msgstr "State iniziando a innervosirmi."
+
+#: tutorial.xml
+msgid "What didn't he take into consideration? He is clearly paranoid."
+msgstr ""
+"C'e' qualcosa che non ha preso in considerazione?? E' chiaramente paranoico."
+
+#: tutorial.xml
+msgid "You... can still remember how to use a weapon, right?"
+msgstr "Tu...dovresti ricordarti come si usano le armi, giusto?"
+
+#: tutorial.xml
+msgid ""
+"We were told, the first minutes are as if one takes a step for the first "
+"time."
+msgstr ""
+"Ci e' stato detto, che i primi minuti sono come fare il primo passo quando "
+"si impara a camminare."
+
+#: tutorial.xml
+msgid "Explain inventory?"
+msgstr "Vuoi che ti spieghi come si usa l'inventario?"
+
+#: tutorial.xml
+msgid "Explain inventory"
+msgstr "Tutorial inventario"
+
+#: tutorial.xml
+msgid ""
+"At first you have to open your inventory. By default you do so with the 'i'-"
+"key."
+msgstr ""
+"Per cominciare devi aprire l'inventario. Premi il pulsante I sulla tastiera."
+
+#: tutorial.xml
+msgid ""
+"Alternative you can click on the inventory button down in the status bar."
+msgstr "Alternativamente clicca il pulsante I presente in basso nella barra."
+
+#: tutorial.xml
+msgid "In the inventory you see your items. They are ordered by their size."
+msgstr "Nell'inventario sono riposti i tuoi oggetti, ordinati per dimensione."
+
+#: tutorial.xml
+msgid ""
+"The weapon you just got is a mid-sized item and thus is found in the middle "
+"field."
+msgstr ""
+"L'arma che ti e' appena stata data e' di media dimensione; la troverai "
+"quindi nelle caselle centrali."
+
+#: tutorial.xml
+msgid ""
+"Click on the weapon with the left mouse button and then click on the weapon "
+"field in your equipment above the inventory. And you'll be equipped with it."
+msgstr ""
+"Clicca col tasto sinistro del mouse l'arma, successivamente clicca la "
+"relativa casella dell'equipaggiamento che trovi appena sopra le caselle "
+"dell'inventario."
+
+#: tutorial.xml
+msgid "Let us know when you're ready."
+msgstr "Facci sapere quando sei pronto"
+
+#: tutorial.xml
+msgid "Attack slugs"
+msgstr "Attacca le lumache"
+
+#: tutorial.xml
+msgid "You should equip your weapon first."
+msgstr "Prima devi equipaggiare l'arma."
+
+#: tutorial.xml
+msgid "Everyone should equip their weapon first."
+msgstr "Prima ognuno di voi deve aver equipaggiato la propria arma."
+
+#: tutorial.xml
+msgid "But you still know how to fight, right? ##solo"
+msgstr "Tu ti ricordi ancora come si combatte, giusto? ##solo"
+
+#: tutorial.xml
+msgid "But you still know how to fight, right?"
+msgstr "Voi vi ricordate come si combatte giusto?"
+
+#: tutorial.xml
+msgid "Go in, click on it, kill it. A Branded One wouldn't forget about that."
+msgstr ""
+"E' semplice: vai dentro e clicca sulle creature per ucciderle.  Un Marchiato "
+"come te non dovrebbe avere problemi."
+
+#: tutorial.xml
+msgid "What does this click on it mean, really?"
+msgstr "Cosa significa precisamente...ehm, clicca?"
+
+#: tutorial.xml
+msgid "No idea, but the Lord Master said, she talks like this."
+msgstr "Non ne ho idea ma il Maestro disse: lei parla cosi'."
+
+#: tutorial.xml
+msgid "No idea, but the Lord Master said, he talks like this."
+msgstr "Non ne ho idea ma il Maestro disse: lui parla cosi'."
+
+#: tutorial.xml
+msgid "No idea, but the Lord Master said, they talk like this."
+msgstr "Non ne ho idea ma il Maestro disse: loro parlano cosi'."
+
+#: tutorial.xml
+msgid "Than I shall put the fear of Harad into these experiments!"
+msgstr "Bene che il terrore di Harad travolga questi esperimenti!"
+
+#: tutorial.xml
+msgid "Let's put the fear of Harad into these experiments!"
+msgstr "Bene che il terrore di Harad travolga questi esperimenti!"
+
+#: tutorial.xml
+msgid "I just hope they have a soul."
+msgstr "Spero solo abbiano un'anima."
+
+#: tutorial.xml
+msgid ""
+"Don't worry. Even a golem has one. Those things will not be the exception."
+msgstr ""
+"Non preoccuparti, Anche i golem ne hanno una. Queste cose non saranno "
+"l'eccezzione."
+
+#: tutorial.xml
+msgid "Very well. Just cover our backs while we try to open the hatch. "
+msgstr ""
+"Bene, ora coprici le spalle, mentre noi cerchiamo di aprire l'inferriata."
+
+#: tutorial.xml
+msgid "Forget it! I'm not going in while those beasts are on the loose."
+msgstr "Scordatelo! Non andro' la' dentro con tutte quelle bestie in giro."
+
+#: tutorial.xml
+msgid "Yuck, those things are really disgusting."
+msgstr "Mhhpf, queste cose sono davvero disgustose."
+
+#: tutorial.xml
+msgid "What kind of sissy are you?"
+msgstr "Che razza di femminuccia sei?"
+
+#: tutorial.xml
+msgid "Are you looking for trouble, weakling?!"
+msgstr "Sei in cerca di guai, smidollato?!"
+
+#: tutorial.xml
+msgid "Wait a sec, they somehow seem stronger."
+msgstr ""
+"Aspetta un secondo, non capisco come ma..sembrano diventati piu' forti."
+
+#: tutorial.xml
+msgid ""
+"Your witch stuff may have weakened me, but I take a bit of the power of "
+"every being I kill and become stronger."
+msgstr ""
+"Le tue stregonerie possono anche avermi indebolito, ma ricorda...ogni "
+"creatura che uccido divento sempre piu' forte."
+
+#: tutorial.xml
+msgid ""
+"Your witch stuff may have weakened us, but we take a bit of the power of "
+"every being we kill and become stronger."
+msgstr ""
+"Le tue stregonerie possono anche averci indebolito, ma ricorda...ogni "
+"creatura che uccidiamo diventiamo sempre piu' forti."
+
+#: tutorial.xml
+msgid "Better think about who you're calling weakling here!"
+msgstr "E' meglio riflettere prima di dare a chiunque dello smidollato!"
+
+#: tutorial.xml
+msgid ""
+"Hm, right, the Lord Master said, something like this could happen. Do you "
+"know how to convert this power into proper abilities?"
+msgstr ""
+"Mhh, giusto. Il Maestro aveva detto che qualcosa del genere poteva accadere. "
+"Sai come convertire questo potere in vere e proprie abilita'?"
+
+#: tutorial.xml
+msgid "Explain level up"
+msgstr "Tutorial passaggio di livello"
+
+#: tutorial.xml
+msgid ""
+"You can upgrade your attributes every time, and sometimes you even have "
+"enough energy for a new skill. ##solo"
+msgstr ""
+"Ogni nuovo livello puoi aumentare le tue caratteristiche usando Punti "
+"Attributo. Certe volte acquisirai cosi' tanta esperienza da apprendere una "
+"nuova abilita'. ##solo"
+
+#: tutorial.xml
+msgid ""
+"Yes, that was the thing with the big plus in the lower left corner. Just "
+"click on it and distribute your attribute points. ##solo"
+msgstr ""
+"Si', e' proprio il pulsante comparso a sinistra col simbolo piu'. Cliccaci "
+"sopra per distribuire i Punti Attributo. ##solo"
+
+#: tutorial.xml
+msgid ""
+"Exactly. And you can distribute the skill point in the skill window. The "
+"Lord Master said, you could choose from three categories. ##solo"
+msgstr ""
+"Esatto. Ora puoi distribuire i Punti Abilita' nell'apposita finestra; basta "
+"cliccare sul pulsante comparso sulla destra. Potrai scegliere le abilita' da "
+"tre categorie principali. ##solo"
+
+#: tutorial.xml
+msgid "Depending on your... character mass. ##solo"
+msgstr "In base al tuo...ehm, tipo di personaggio. ##solo"
+
+#: tutorial.xml
+msgid ""
+"You can upgrade your attributes every time, and sometimes you even have "
+"enough energy for a new skill."
+msgstr ""
+"Ogni nuovo livello potrete aumentare le vostre caratteristiche usando Punti "
+"Attributo. Certe volte acquisirete cosi' tanta esperienza da apprendere "
+"nuove abilita'."
+
+#: tutorial.xml
+msgid ""
+"Yes, that was the thing with the big plus in the lower left corner. Just "
+"click on it and distribute your attribute points."
+msgstr ""
+"Si', e' proprio il pulsante comparso a sinistra col simbolo piu'. Cliccateci "
+"sopra per distribuire i Punti Attributo."
+
+#: tutorial.xml
+msgid ""
+"Exactly. And you can distribute the skill point in the skill window. The "
+"Lord Master said, you could choose from three categories."
+msgstr ""
+"Esatto. Ora potete distribuire i Punti Abilita' nell'apposita finestra; "
+"basta cliccare sul pulsante comparso sulla destra. Potrete scegliere le "
+"abilita' da tre categorie ."
+
+#: tutorial.xml
+msgid "Depending on your... character mass."
+msgstr "In base al vostro...ehm, tipo di personaggio."
+
+#: tutorial.xml
+msgid "Character class."
+msgstr "..Classe."
+
+#: tutorial.xml
+msgid "Oh, right!"
+msgstr "Ah, esatto..Classe!"
+
+#: tutorial.xml
+msgid "Branded Ones use strange phrases indeed."
+msgstr "I Marchiati usano sempre strane parole."
+
+#: tutorial.xml
+msgid "I wonder why this Soren knows so much about the Branded Ones..."
+msgstr ""
+"Mi domando perche' questo Soren conosca cosi' tante cose sui Marchiati..."
+
+#: tutorial.xml
+msgid "Mages are exceedingly strange. Every single one of them."
+msgstr "I maghi sono estremamente singolari. E parlo di ogni mago."
+
+#: tutorial.xml
+msgid "Better strange then..."
+msgstr "Meglio strani che..."
+
+#: tutorial.xml
+msgid "That blasted thing. I hope the walls hold out."
+msgstr "Quella maledetta cosa! Spero che le pareti tengano."
+
+#: tutorial.xml
+msgid "Quickly distribute your new points and then let's get out of here."
+msgstr "Distribuisci velocemente i tuoi nuovi punti e andiamo via da qui."
+
+#: tutorial.xml
+msgid "Open hatch"
+msgstr "Apri il passaggio"
+
+#: tutorial.xml
+msgid "Please distribute your attribute points first."
+msgstr "Prima...distribuisci i tuoi Punti Attributo."
+
+#: tutorial.xml
+msgid "More of those beasts?"
+msgstr "Altre di quelle bestie?"
+
+#: tutorial.xml
+msgid ""
+"Urk! They seem to broken out somehow. I hope they don't breed in the "
+"crevices."
+msgstr ""
+"Dannazione! Sembra stiano fuoriuscendo da qualche parte. Spero non vadano a "
+"riprodursi in qualche crepa."
+
+#: tutorial.xml
+msgid "Have you ever heard of safety measures?"
+msgstr "Hai mai sentito parlare di misure di sicurezza?"
+
+#: tutorial.xml
+msgid "Somewhere back there has to be the secret door."
+msgstr "Da qualche parte sul retro deve esserci una porta segreta."
+
+#: tutorial.xml
+msgid "You're not even sure it's there?"
+msgstr "Non sei nemmeno sicuro sia li'?"
+
+#: tutorial.xml
+msgid "I don' waste my time crawling through kitchen corridors, Cursed One."
+msgstr ""
+"Generalmente non passo il mio tempo a strisciare per i corridoi delle "
+"cucine, Condannato!"
+
+#: tutorial.xml
+msgid ""
+"That's correctly Branded One. You wouldn't want to be called harvest now, "
+"would you?"
+msgstr "Marchiato...per l'esattezza."
+
+#: tutorial.xml
+msgid "All right allready!"
+msgstr "Va bene, tutti pronti!"
+
+#: tutorial.xml
+msgid "That should have been the last one."
+msgstr "Questo dovrebbe essere stato l'ultimo."
+
+#: tutorial.xml
+msgid "What a massacre."
+msgstr "Che massacro."
+
+#: tutorial.xml
+msgid "Really, somehow lacking in style."
+msgstr "Un massacro davvero privo di stile."
+
+#: tutorial.xml
+msgid "Are you looking for trouble?!"
+msgstr "Sei in cerca di guai?!"
+
+#: tutorial.xml
+msgid "In fact, have you thought of using your powerful skills?"
+msgstr ""
+"Hai provato ad usare una delle tue potenti abilita' o ti sei limitato ad "
+"attaccare come un barbaro goblin?"
+
+#: tutorial.xml
+msgid ""
+"The Lord Master thought, you could do considerably more than dully beat your "
+"enemies."
+msgstr ""
+"Il Maestro pensa si possa fare di piu' che semplicemente sconfiggere il "
+"nemico."
+
+#: tutorial.xml
+msgid "Really?"
+msgstr "Davvero?"
+
+#: tutorial.xml
+msgid "Explain skills?"
+msgstr "Vuoi che ti spieghi come si usano le abilita'?"
+
+#: tutorial.xml
+msgid "Explain skills"
+msgstr "Tutorial abilita'"
+
+#: tutorial.xml
+msgid ""
+"With the 't'-key you open the skill window. Here you can choose a skill."
+msgstr ""
+"Premi il pulsante T sulla tastiera per aprire la finestra delle abilita'. "
+"Ora ne puoi scegliere una."
+
+#: tutorial.xml
+msgid ""
+"Just click with the mouse button, you would like to use the skill with, on "
+"the skill icon."
+msgstr ""
+"Clicca col tasto sinistro del mouse su una delle icone e potrai usarla in "
+"combattimento."
+
+#: tutorial.xml
+msgid "Skills are distinguished into two groups."
+msgstr "Le abilita' si distinguono in tre categorie."
+
+#: tutorial.xml
+msgid ""
+"After you have used a skill, you cannot use a skill of that group for a "
+"while."
+msgstr ""
+"Una volta usata un'abilita', per qualche secondo non potrai usarne un'altra "
+"della stessa categoria."
+
+#: tutorial.xml
+msgid ""
+"Look at the picture in the status bar to learn, if a skill is ready for use."
+msgstr ""
+"Per capire se un'abilita' e' pronta per essere usata nuovamente basta "
+"controllare la barra di stato."
+
+#: tutorial.xml
+msgid "Don't worry, I'm almost feeling fit again."
+msgstr "Non preoccuparti, mi sento nuovamente in forma."
+
+#: tutorial.xml
+msgid "Don't worry, we're almost feeling fit again."
+msgstr "Non preoccuparti, ci sentiamo nuovamente in forma."
+
+#: tutorial.xml
+msgid "Very well. Die Geheimtür ist hier hinten."
+msgstr "Perfetto. La porta segreta e' proprio qua dietro."
+
+#: tutorial.xml
+msgid "Wait a second. What if the old geezer has attached a trap to it?"
+msgstr "Aspetta un secondo. E se il vecchio ci avesse messo una trappola?"
+
+#: tutorial.xml
+msgid ""
+"You're right. It's best if you do it, Branded One. At least nothing lasting "
+"can happen that way."
+msgstr ""
+"Hai ragione. E' meglio se la apre un Marchiato come te. Almeno non puo' "
+"succedere niente di irreparabile."
+
+#: tutorial.xml
+msgid "'course. Send the Branded One first."
+msgstr "Certo. Manda avanti il Marchiato."
+
+#: tutorial.xml
+msgid "Open secret door"
+msgstr "Apri la porta segreta"
+
+#: tutorial.xml
+msgid ""
+"Do you see the shelf in that passage? That is the door. Just move it by "
+"clicking on it."
+msgstr ""
+"Riesci a vedere il ripiano dietro il passaggio? Cliccaci sopra col tasto "
+"sinistro e aprirai la porta nascosta."
+
+#: tutorial.xml
+msgid "And you better hope, there is no trap."
+msgstr "Efarai meglio a sperare che non ci siano trappole."
+
+#: tutorial.xml
+msgid "I hope nothing explodes."
+msgstr "Spero non esploda nulla."
+
+#: tutorial.xml
+msgid "Good, Firewhirl is not here."
+msgstr "Bene, Firewhirl non e' qui."
+
+#: tutorial.xml
+msgid ""
+"What is he researching here all the time? All those flowers can hardly be "
+"for the purpose of the Council and Akeran."
+msgstr ""
+"Cosa cercava qui tutto il tempo? Dubito che tutti questi fiori siano qui per "
+"volonta' del Consiglio o di Akeran."
+
+#: tutorial.xml
+msgid ""
+"I'm sure there's more to it than meets the eye. An apple elemental for "
+"example."
+msgstr ""
+"Sono sicuro che c'e' qualcosa al di la' di quello che vedono i nostri occhi. "
+"Il suo elementale preferito per esempio."
+
+#: tutorial.xml
+msgid "I wouldn't put it past him."
+msgstr "Non mi stupirebbe."
+
+#: tutorial.xml
+msgid "Joking aside! We have to go on."
+msgstr "Scherzi a parte. Dobbiamo procedere."
+
+#: tutorial.xml
+msgid ""
+"With all the damn beasts roaming around here freely, I almost think they "
+"just want me as an exterminator."
+msgstr ""
+"Con tutte queste bestie libere qui attorno, comincio a credere che pensiate "
+"di avere a che fare con uno sterminatore."
+
+#: tutorial.xml
+msgid ""
+"With all the damn beasts roaming around here freely, I almost think they "
+"just want us as exterminators."
+msgstr ""
+"Con tutte queste bestie libere qui attorno, comincio a credere che pensiate "
+"di avere a che fare con una squadra di sterminatori."
+
+#: tutorial.xml
+msgid "Oops"
+msgstr "Oops"
+
+#: tutorial.xml
+msgid "What a day. Did you know that thing could spit little monsters?"
+msgstr ""
+"Che giornataccia. Avresti mai creduto che quella cosa potesse sputare tanti "
+"piccoli mostri?"
+
+#: tutorial.xml
+msgid "The Lord Master didn't say something about that..."
+msgstr "Il Maestro non ci disse niente in proposito..."
+
+#: tutorial.xml
+msgid "Somthing unwritten in the book of the omniscient airpaw?"
+msgstr "Il vostro onniscente 'Airpaw' ha tralasciato di dirvi qualcosa?"
+
+#: tutorial.xml
+msgid "Windclaw, heretic!"
+msgstr "'Windclaw', eretico!"
+
+#: tutorial.xml
+msgid ""
+"A Cursed One has to be happy, if he's got something to kill all along, right?"
+msgstr "Un Condannato dovrebbe essere felice di avere qualcosa da uccidere no?"
+
+#: tutorial.xml
+msgid "I'm a Branded One! That is far worse than a curse."
+msgstr ""
+"Sono un Marchiato! Che praticamente e' molto peggio di essere un "
+"'condannato'."
+
+#: tutorial.xml
+msgid "The mighty Akeran truly punished you dearly."
+msgstr "Possa il potente Akeran punirti."
+
+#: tutorial.xml
+msgid "Spare me your elementalist drivel and make way!"
+msgstr "Risparmiami le tue sciocchezze da elementalista e fai strada!"
+
+#: tutorial.xml
+msgid "I truly am the exterminator here."
+msgstr "Sono o non sono uno sterminatore."
+
+#: tutorial.xml
+msgid ""
+"Cursed Ones have to be happy, if they got something to kill all along, right?"
+msgstr ""
+"I Condannati dovrebbero essere felici di avere qualcosa da uccidere no?"
+
+#: tutorial.xml
+msgid "We're Branded Ones! That is far worse than a curse."
+msgstr ""
+"Siamo dei Marchiati! Che praticamente e' molto peggio di essere dei "
+"'condannati'."
+
+#: tutorial.xml
+msgid "The mighty Akeran truly punished them dearly."
+msgstr "Possa il potente Akeran punirvi."
+
+#: tutorial.xml
+msgid "Spare us your elementalist drivel and make way!"
+msgstr "Risparmiaci le tue sciocchezze da elementalista e fai strada!"
+
+#: tutorial.xml
+msgid "We truly are the exterminators here."
+msgstr "Siamo o non siamo una squadra di sterminatori."
+
+#: tutorial.xml
+msgid "Wow. They really believe in orderly and thorough research."
+msgstr "Wow. Credono davvero nella ricerca sistematica e scrupolosa."
+
+#: tutorial.xml
+msgid "How many slugs do you have to cut to believe they are slimy?"
+msgstr "Quante lumache devo fare a pezzi per capire che sono viscide?"
+
+#: tutorial.xml
+msgid "Take a look around. That stuff has to be worth a fortune."
+msgstr "Date un'occhiata in giro. Questa roba deve valere una fortuna!"
+
+#: tutorial.xml
+msgid "That stuff has to be worth a fortune!"
+msgstr "Questa roba deve valere una fortuna!"
+
+#: tutorial.xml
+msgid "This junk?"
+msgstr "Questa spazzatura?"
+
+#: tutorial.xml
+msgid "Philistine."
+msgstr "Ignorante."
+
+#: tutorial.xml
+msgid ""
+"If they hadn't all those needless balustrades into the void, they wouldn't "
+"have to mop escaped sluglings from the floor."
+msgstr ""
+"Se non avessero tenuto vuote tutte queste inutili balaustre, forse ora non "
+"avremmo il pavimento pieno di viscide lumache."

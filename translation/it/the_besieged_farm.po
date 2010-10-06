@@ -1,0 +1,199 @@
+# Italian translations for sumwars package.
+# Copyright (C) 2009 THE sumwars'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the sumwars package
+# 
+# Francesco Miglietta (fra9000) <miglietta.francesco@gmail.com>, 2010
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: sumwars 0.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-09 15:15+0100\n"
+"PO-Revision-Date: 2010-07-25 09:49\n"
+"Last-Translator: Francesco Miglietta (fra9000) <miglietta.francesco@gmail."
+"com>\n"
+"Language-Team: Italian <http://gamesopensource.altervista.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: besieged_farm.xml
+msgid "The besieged farm"
+msgstr "La fattoria assediata"
+
+#: besieged_farm.xml
+msgid ""
+"The peasants are rescued, the goblins slain, and the service paid. What more "
+"can you ask for?"
+msgstr ""
+"I contadini sono in salvo, i goblin uccisi e le armate hanno avuto il loro "
+"compenso. Cosa possiamo chiedere di piu'?"
+
+#: besieged_farm.xml
+msgid ""
+"The peasants are rescued and the goblins slain. Time to collect the reward "
+"for the trouble in Joringsbridge."
+msgstr ""
+"I contadini sono in salvo e il goblin uccisi. È ora di risquotere la "
+"ricompensa per la faccenda di Joringsbridge."
+
+#: besieged_farm.xml
+msgid ""
+"The goblins around Bron's farm are not among the living anymore. I should "
+"knock at the door and make sure, everything is all right. No peasants, no "
+"money."
+msgstr ""
+"I goblin nei dintorni della fattoria Bron sono stati tutti uccisi. Ora "
+"vorrei solo assicurarmi che tutto sia apposto. Niente contadini, niente "
+"denaro."
+
+#: besieged_farm.xml
+msgid ""
+"The farm of a peasant named Michel Bron is besieged by goblins. His family "
+"needs help - fast."
+msgstr ""
+"Veniamo al dunque. La fattoria di Michel Bron e' assediata dai goblin. La "
+"sua famiglia ha bisogno del tuo aiuto..veloce!"
+
+#: besieged_farm.xml
+msgid "Sergeant Lutterer"
+msgstr "Sergente Lutterer"
+
+#: besieged_farm.xml
+msgid "The farm"
+msgstr "La fattoria"
+
+#: besieged_farm.xml
+msgid "Ah! Are you feeling like earning the money after all?"
+msgstr "Te la senti alla fine di guadagnare qualcosa?"
+
+#: besieged_farm.xml
+msgid "Don't think, I haven't seen you hanging around back there."
+msgstr "Non penso. Non ti ho visto aggirare qua attorno."
+
+#: besieged_farm.xml
+msgid ""
+"Don't think, I haven't seen you and your friend hanging around back there."
+msgstr "Non penso, non ho visto te o il tuo amico in giro qui attorno."
+
+#: besieged_farm.xml
+msgid ""
+"Don't think, I haven't seen you and your friends hanging around back there."
+msgstr "Non penso. No ho visto ne' te ne' i tuoi amici aggirarsi qua attorno."
+
+#: besieged_farm.xml
+msgid "But I don't want to complain."
+msgstr "Ma non voglio lamentarmi."
+
+#: besieged_farm.xml
+msgid ""
+"You know the drill: Get to the Northern Meadow and drive away the goblins "
+"around Bron's farm."
+msgstr ""
+"Conosci la procedura: procedi verso Nord Meadow e scaccia i goblin che "
+"infestano la fattoria Bron."
+
+#: besieged_farm.xml
+msgid "I don't care, how you do it, even if you gobble them raw."
+msgstr "Non mi interessa come farai, anche se li dovessi ingurgitare vivi."
+
+#: besieged_farm.xml
+msgid "Just kidding."
+msgstr "Sto solo scherzando!."
+
+#: besieged_farm.xml
+msgid "When you're done come back to me."
+msgstr "Quando hai finito torna qui da me."
+
+#: besieged_farm.xml
+msgid "On my way."
+msgstr "A modo mio."
+
+#: besieged_farm.xml
+msgid "aisNorthMeadow"
+msgstr "Nord Meadow"
+
+#: besieged_farm.xml
+msgid ""
+"That should have been enough goblins. I better look after Bron's family."
+msgstr ""
+"Devono esserci stati parecchi goblin. Devo tener d'occhio la famiglia di "
+"Bron."
+
+#: besieged_farm.xml
+msgid "The goblins are gone. Are you alright?"
+msgstr "I goblin sono andati via. Tu stai bene?"
+
+#: besieged_farm.xml
+msgid "Thank you very much."
+msgstr "Grazie davvero."
+
+#: besieged_farm.xml
+msgid "Sadly I cannot ask you in."
+msgstr "Purtroppo non posso farti accomodare."
+
+#: besieged_farm.xml
+msgid "Our barricade is quite heavy."
+msgstr "La nostra barricata e' abbastanza resistente."
+
+#: besieged_farm.xml
+msgid "But I will give word to my husband that we are alive and well."
+msgstr "Diro' a mio marito che siamo ancora vivi e che stiamo bene."
+
+#: besieged_farm.xml
+msgid "How so?"
+msgstr "Come mai?"
+
+#: besieged_farm.xml
+msgid ""
+"With a crytal of Avearea, of course. It's been handed down in my family for "
+"generations."
+msgstr ""
+"Con un cristallo di Avearea, naturalmente. E' stato tramandato per "
+"generazioni nella mia famiglia."
+
+#: besieged_farm.xml
+msgid "Of course. Silly of me."
+msgstr "Ma certo! Che sciocco che sono."
+
+#: besieged_farm.xml
+#, fuzzy
+msgid ""
+"Really now. Did you think she'd use carrier pigeons in this day and age?\".."
+"name..\". Dachtest du, irgendwer benutzt heutzutage noch Brieftauben?"
+msgstr ""
+"Credi davvero che lei voglia utilizzare di questi tempi i piccioni "
+"viaggiatori?"
+
+#: besieged_farm.xml
+msgid "Let's just go collect the money."
+msgstr "Bene, andiamo a raccogliere i soldi."
+
+#: besieged_farm.xml
+msgid "Brons Farm"
+msgstr "Fattoria Bron"
+
+#: besieged_farm.xml
+msgid "It's done."
+msgstr "Fatto."
+
+#: besieged_farm.xml
+msgid "I've already heard of it."
+msgstr "Ne ho gia' sentito parlare."
+
+#: besieged_farm.xml
+msgid ""
+"Michel is in the tavern and getting plastered. All in honor of your bravery, "
+"of course."
+msgstr ""
+"Michel e' alla taverna a sbronzarsi. Ovviamente in onore del tuo coraggio."
+
+#: besieged_farm.xml
+msgid "But that shall be of no concern to you."
+msgstr "Ma questo non dovrebbe preoccuparti."
+
+#: besieged_farm.xml
+msgid "Here's the money."
+msgstr "Eccoti il denaro."

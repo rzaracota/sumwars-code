@@ -1,0 +1,506 @@
+# Italian translations for sumwars package.
+# Copyright (C) 2009 THE sumwars'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the sumwars package
+# 
+# Francesco Miglietta (fra9000) <miglietta.francesco@gmail.com>, 2010
+# Axander <axander79@gmail.com>, 2010
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: sumwars 0.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-10-06 20:28+0200\n"
+"PO-Revision-Date: 2010-07-25 09:49\n"
+"Last-Translator: Francesco Miglietta (fra9000) <miglietta.francesco@gmail."
+"com>\n"
+"Language-Team: Italian <http://gamesopensource.altervista.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/core/damage.cpp:142 ../src/gui/charinfo.cpp:916
+msgid "Physical"
+msgstr "Fisico"
+
+#: ../src/core/damage.cpp:144 ../src/gui/charinfo.cpp:925
+msgid "Fire"
+msgstr "Fuoco"
+
+#: ../src/core/damage.cpp:146 ../src/gui/charinfo.cpp:922
+msgid "Ice"
+msgstr "Ghiaccio"
+
+#: ../src/core/damage.cpp:148 ../src/gui/charinfo.cpp:919
+msgid "Air"
+msgstr "Aria"
+
+#: ../src/core/damage.cpp:158
+msgid "Physical resistance"
+msgstr "Resistenza fisica"
+
+#: ../src/core/damage.cpp:160
+msgid "Fire resistance"
+msgstr "Resistenza al fuoco"
+
+#: ../src/core/damage.cpp:162
+msgid "Ice resistance"
+msgstr "Resistenza al ghiaccio"
+
+#: ../src/core/damage.cpp:164
+msgid "Air resistance"
+msgstr "Resistenza all'aria"
+
+#: ../src/core/damage.cpp:174
+msgid "blind"
+msgstr "Accecato"
+
+#: ../src/core/damage.cpp:176
+msgid "poisoned"
+msgstr "Avvelenato"
+
+#: ../src/core/damage.cpp:178
+msgid "mute"
+msgstr "Silenziato"
+
+#: ../src/core/damage.cpp:180
+msgid "confused"
+msgstr "Confuso"
+
+#: ../src/core/damage.cpp:182
+msgid "berserk"
+msgstr "Furioso"
+
+#: ../src/core/damage.cpp:184
+msgid "paralyzed"
+msgstr "Paralizzato"
+
+#: ../src/core/damage.cpp:186
+msgid "frozen"
+msgstr "Congelato"
+
+#: ../src/core/damage.cpp:188
+msgid "burning"
+msgstr "Scottato"
+
+#: ../src/core/damage.cpp:250 ../src/core/damage.cpp:254
+msgid "damage"
+msgstr "Danno"
+
+#: ../src/core/damage.cpp:269
+msgid "can not be blocked"
+msgstr "Non puo' essere bloccato"
+
+#: ../src/core/damage.cpp:273 ../src/gui/charinfo.cpp:886
+msgid "Attack"
+msgstr "Attacco"
+
+#: ../src/core/damage.cpp:286
+msgid "ignores armor"
+msgstr "ignora armatura"
+
+#: ../src/core/damage.cpp:290 ../src/gui/charinfo.cpp:901
+msgid "Power"
+msgstr "Potere"
+
+#: ../src/core/damage.cpp:299
+msgid "Chance for critical hit"
+msgstr "Probabilita' colpo critico"
+
+#: ../src/core/document.cpp:1194 ../src/core/item.cpp:685
+#: ../src/core/item.cpp:687 ../src/core/item.cpp:912 ../src/core/item.cpp:918
+msgid "Required level"
+msgstr "Livello richiesto"
+
+#: ../src/core/document.cpp:1204
+msgid "Timer"
+msgstr "Timer"
+
+#: ../src/core/document.cpp:1205
+msgid "Cast delay"
+msgstr "Tempo di lancio"
+
+#: ../src/core/item.cpp:677 ../src/core/item.cpp:898
+msgid "Value"
+msgstr "Valore"
+
+#: ../src/core/item.cpp:680 ../src/core/item.cpp:904
+msgid "Selling Value"
+msgstr "Prezzo"
+
+#: ../src/core/item.cpp:696 ../src/core/item.cpp:933
+msgid "Required class"
+msgstr "Classe richiesta"
+
+#: ../src/core/item.cpp:754 ../src/core/item.cpp:762 ../src/core/item.cpp:993
+#: ../src/core/item.cpp:1003
+msgid "Heals "
+msgstr "Guarisce "
+
+#: ../src/core/item.cpp:754 ../src/core/item.cpp:993
+msgid " hitpoints"
+msgstr " Punti Vita"
+
+#: ../src/core/item.cpp:765 ../src/core/item.cpp:1009
+msgid "immune for "
+msgstr "immune a "
+
+#: ../src/core/item.cpp:777 ../src/core/item.cpp:1023
+msgid "Two-handed weapon"
+msgstr "Arma a due mani"
+
+#: ../src/core/item.cpp:782 ../src/core/item.cpp:1030
+#: ../src/gui/charinfo.cpp:896
+msgid "Range"
+msgstr "Distanza"
+
+#: ../src/core/item.cpp:793 ../src/core/item.cpp:1043
+msgid "Damage"
+msgstr "Danno"
+
+#: ../src/core/item.cpp:805 ../src/core/item.cpp:1067
+#: ../src/gui/charinfo.cpp:906
+msgid "Armor"
+msgstr "Armatura"
+
+#: ../src/core/item.cpp:810 ../src/core/item.cpp:1074
+#: ../src/gui/charinfo.cpp:911
+msgid "Block"
+msgstr "Difesa"
+
+#: ../src/core/item.cpp:815 ../src/core/item.cpp:1081
+msgid "max hitpoints"
+msgstr "Punti Vita massimi"
+
+#: ../src/core/item.cpp:820 ../src/core/item.cpp:1088
+#: ../src/gui/charinfo.cpp:856
+msgid "Strength"
+msgstr "Forza"
+
+#: ../src/core/item.cpp:825 ../src/core/item.cpp:1095
+#: ../src/gui/charinfo.cpp:860
+msgid "Dexterity"
+msgstr "Destrezza"
+
+#: ../src/core/item.cpp:830 ../src/core/item.cpp:1102
+msgid "Magic Power"
+msgstr "Potere Magico"
+
+#: ../src/core/item.cpp:835 ../src/core/item.cpp:1109
+#: ../src/gui/charinfo.cpp:864
+msgid "Willpower"
+msgstr "Volonta'"
+
+#: ../src/core/item.cpp:850 ../src/core/item.cpp:1128
+msgid " max. "
+msgstr " max. "
+
+#: ../src/gui/charcreate.cpp:120 ../src/gui/charinfo.cpp:849
+#: ../src/gui/partyinfo.cpp:450 ../src/gui/savegamelist.cpp:179
+msgid "Name"
+msgstr "Nome"
+
+#: ../src/gui/charcreate.cpp:123 ../src/gui/charinfo.cpp:852
+#: ../src/gui/savegamelist.cpp:180
+msgid "Class"
+msgstr "Classe"
+
+#: ../src/gui/charcreate.cpp:126
+msgid "Cancel"
+msgstr "Cancella"
+
+#: ../src/gui/charcreate.cpp:129
+msgid "Create"
+msgstr "Crea"
+
+#: ../src/gui/charinfo.cpp:323
+msgid "Base damage"
+msgstr "Danno base"
+
+#: ../src/gui/charinfo.cpp:569
+msgid "Damage dealt by "
+msgstr "Danno inferto da "
+
+#: ../src/gui/charinfo.cpp:588
+#, fuzzy
+msgid "Chance to hit "
+msgstr "Probabilita' colpo critico "
+
+#: ../src/gui/charinfo.cpp:607
+#, fuzzy
+msgid "Chance to get hit by "
+msgstr "Probabilita' di essere colpito da "
+
+#: ../src/gui/charinfo.cpp:698
+msgid "Damage dealt to  "
+msgstr "Danno inferto a "
+
+#: ../src/gui/charinfo.cpp:857
+msgid "Strength increases hitpoints, melee damage and attack power."
+msgstr ""
+"La Forza incrementa i Punti Vita, il Danno in Mischia e il Potere di Attacco."
+
+#: ../src/gui/charinfo.cpp:861
+msgid "Dexterity increases ranged damage, attack accuracy and attack speed"
+msgstr ""
+"La Destrezza incrementa il Danno a Distanza, la Precisione e la Velocita' di "
+"Attacco."
+
+#: ../src/gui/charinfo.cpp:865
+msgid ""
+"Willpower decreases the duration and the impact of status changes and "
+"increases magical melee damage."
+msgstr ""
+"La Volonta' diminuisce durata ed efficacia degli effetti negativi ed "
+"incrementa il Danno Magico in Mischia."
+
+#: ../src/gui/charinfo.cpp:869
+msgid "Magic power"
+msgstr "Potere Magico"
+
+#: ../src/gui/charinfo.cpp:870
+msgid "Magic power increases the damage of magical attacks."
+msgstr "Il Potere Magico incrementa il danno degli Attacchi Magici."
+
+#: ../src/gui/charinfo.cpp:873
+msgid "Attr points"
+msgstr "P.ti Attributo"
+
+#: ../src/gui/charinfo.cpp:874
+msgid "Attribute points remaining to distribute"
+msgstr "P.ti Attributo"
+
+#: ../src/gui/charinfo.cpp:877 ../src/gui/controlpanel.cpp:220
+msgid "Experience"
+msgstr "Esperienza"
+
+#: ../src/gui/charinfo.cpp:878
+msgid "Current experience and experience necessary for next level-up."
+msgstr "Esperienza Attuale ed Esperienza Necessaria al prossimo livello."
+
+#: ../src/gui/charinfo.cpp:881 ../src/gui/controlpanel.cpp:204
+msgid "Hitpoints"
+msgstr "Punti Vita"
+
+#: ../src/gui/charinfo.cpp:882
+msgid "Current and maximal hitpoints."
+msgstr "Punti Vita Attuali e Massimi."
+
+#: ../src/gui/charinfo.cpp:887
+msgid ""
+"Attack value determines the chance to hit enemies that can block or evade."
+msgstr ""
+"Il valore di Attacco determina la probabilita' di colpire nemici che possono "
+"evadere o eludere."
+
+#: ../src/gui/charinfo.cpp:891
+msgid "Attacks/s"
+msgstr "Attacchi/s"
+
+#: ../src/gui/charinfo.cpp:892
+msgid "Number of attacks per second."
+msgstr "Numero di Attacchi al secondo."
+
+#: ../src/gui/charinfo.cpp:897
+msgid "Weapon Range in meters."
+msgstr "Range dell'arma (metri)."
+
+#: ../src/gui/charinfo.cpp:902
+msgid "Attack power influences the damage dealt to armored enemies."
+msgstr ""
+"La Potenza di Attacco influisce sul danno inflitto a nemici protetti da "
+"armatura."
+
+#: ../src/gui/charinfo.cpp:907
+msgid "Armor reduces the damage of physical attacks."
+msgstr "L'Armatura riduce il Danno Fisico subito."
+
+#: ../src/gui/charinfo.cpp:912
+msgid ""
+"Block value determines the chance to avoid damage from physical attacks."
+msgstr ""
+"Il valore di Difesa determina la probabilita' di bloccare il danno subito da "
+"Attacchi Fisici."
+
+#: ../src/gui/controlpanel.cpp:73
+msgid "Chat"
+msgstr "Chat"
+
+#: ../src/gui/controlpanel.cpp:339 ../src/gui/mainmenu.cpp:98
+msgid "Options"
+msgstr "Opzioni"
+
+#: ../src/gui/controlpanel.cpp:342
+msgid "Save & Exit"
+msgstr "Salva ed Esci"
+
+#: ../src/gui/controlpanel.cpp:345 ../src/gui/optionswindow.cpp:290
+msgid "Inventory"
+msgstr "Inventario"
+
+#: ../src/gui/controlpanel.cpp:348
+msgid "Character"
+msgstr "Personaggio"
+
+#: ../src/gui/controlpanel.cpp:351 ../src/gui/optionswindow.cpp:296
+msgid "Skilltree"
+msgstr "Abilita'"
+
+#: ../src/gui/controlpanel.cpp:354
+msgid "Party"
+msgstr "Party"
+
+#: ../src/gui/controlpanel.cpp:357 ../src/gui/optionswindow.cpp:305
+msgid "Quests"
+msgstr "Quests"
+
+#: ../src/gui/inventory.cpp:420
+msgid "Gold"
+msgstr "Oro"
+
+#: ../src/gui/inventory.cpp:423
+msgid "Drop:"
+msgstr "Lascia:"
+
+#: ../src/gui/mainmenu.cpp:86
+msgid "Single player"
+msgstr "Giocatore Singolo"
+
+#: ../src/gui/mainmenu.cpp:89
+msgid "Join game"
+msgstr "Partecipa ad una partita"
+
+#: ../src/gui/mainmenu.cpp:92
+msgid "Host game"
+msgstr "Ospita partita"
+
+#: ../src/gui/mainmenu.cpp:95
+msgid "Credits"
+msgstr "Crediti"
+
+#: ../src/gui/mainmenu.cpp:101
+msgid "Quit"
+msgstr "Chiudi"
+
+#: ../src/gui/messageboxes.cpp:52 ../src/gui/networkwindows.cpp:95
+#: ../src/gui/networkwindows.cpp:223 ../src/gui/optionswindow.cpp:335
+#: ../src/gui/savegamelist.cpp:170 ../src/gui/tradewindow.cpp:265
+msgid "Ok"
+msgstr "Ok"
+
+#: ../src/gui/messageboxes.cpp:55
+msgid "Abort"
+msgstr "Annulla"
+
+#: ../src/gui/messageboxes.cpp:58
+msgid "Save and Exit?"
+msgstr "Salvare ed uscire?"
+
+#: ../src/gui/networkwindows.cpp:98
+msgid "Max. number of players"
+msgstr "Numero massimo di giocatori"
+
+#: ../src/gui/networkwindows.cpp:101 ../src/gui/networkwindows.cpp:229
+msgid "Port"
+msgstr "Porta"
+
+#: ../src/gui/networkwindows.cpp:226
+msgid "Host"
+msgstr "Ospita"
+
+#: ../src/gui/optionswindow.cpp:279
+msgid "Shortkeys"
+msgstr "Tasti rapidi"
+
+#: ../src/gui/optionswindow.cpp:281
+msgid "Gameplay"
+msgstr "Gameplay"
+
+#: ../src/gui/optionswindow.cpp:283
+msgid "Audio"
+msgstr "Audio"
+
+#: ../src/gui/optionswindow.cpp:285
+msgid "Graphic"
+msgstr "Grafica"
+
+#: ../src/gui/optionswindow.cpp:287 ../src/gui/optionswindow.cpp:332
+msgid "Language"
+msgstr "Lingua"
+
+#: ../src/gui/optionswindow.cpp:293
+msgid "Character screen"
+msgstr "Personaggio"
+
+#: ../src/gui/optionswindow.cpp:299
+msgid "Party screen"
+msgstr "Party"
+
+#: ../src/gui/optionswindow.cpp:302
+msgid "Chatbox"
+msgstr "Chat"
+
+#: ../src/gui/optionswindow.cpp:308
+msgid "Minimap"
+msgstr "Mini Mappa"
+
+#: ../src/gui/optionswindow.cpp:311
+msgid "Swap equipement"
+msgstr "Equipaggiamenti"
+
+#: ../src/gui/optionswindow.cpp:314
+msgid "Item Labels"
+msgstr "Tooltips oggetti"
+
+#: ../src/gui/optionswindow.cpp:317
+msgid "Difficulty"
+msgstr "Difficolta'"
+
+#: ../src/gui/optionswindow.cpp:320
+msgid "Text Speed"
+msgstr "Velocita' dei dialoghi"
+
+#: ../src/gui/optionswindow.cpp:323
+msgid "Sound"
+msgstr "Suono"
+
+#: ../src/gui/optionswindow.cpp:326
+msgid "Music"
+msgstr "Musica"
+
+#: ../src/gui/optionswindow.cpp:329
+msgid "Enemy Highlight Color"
+msgstr "Colore di evidenziazione (nemici)"
+
+#: ../src/gui/questinfo.cpp:158
+msgid "open"
+msgstr "attive"
+
+#: ../src/gui/questinfo.cpp:161
+msgid "finished"
+msgstr "concluse"
+
+#: ../src/gui/questinfo.cpp:164
+msgid "failed"
+msgstr "fallite"
+
+#: ../src/gui/savegamelist.cpp:167
+msgid "Savegame"
+msgstr "Salvataggio partita"
+
+#: ../src/gui/savegamelist.cpp:173
+msgid "Create Character"
+msgstr "Crea Personaggio"
+
+#: ../src/gui/savegamelist.cpp:176
+msgid "Delete Character"
+msgstr "Elimina Personaggio"
+
+#: ../src/gui/savegamelist.cpp:181
+msgid "Level"
+msgstr "Livello"
+
+#: ../src/gui/worldmap.cpp:141
+msgid "Town Portal"
+msgstr "Portale Magico"
