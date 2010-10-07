@@ -293,7 +293,9 @@
 			<SpawnGroup group_name="bandits_l6" number="10" />
 		</SpawnGroups>
 	</Region>
-	
+
+<!-- Dunkle Lichtung -->
+<!-- Goblin Cultsite -->
 	<Region id="2080" name="aisDarkClearing">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
@@ -333,15 +335,6 @@
 			<SpawnGroup group_name="goblins_temple1" number="15"/>
 			<SpawnGroup group_name="goblins_temple2" number="15"/> 
 		</SpawnGroups>
-		
-		<Event trigger ="create_region" once = "true">
-			<Effect>
-				createObject("goblin_regresh", "temple:locGoblinShaman");
-					createObject("goblin_tguard", "temple:locGoblinGuard1");
-				createObject("goblin_apprtc", "temple:locGoblinGuard2");
-				createObject("goblin_tguard", "temple:locGoblinGuard3");
-			</Effect>
-		</Event>
 	</Region>
 	
 	<Region id="2090" name="aisWideHeath">

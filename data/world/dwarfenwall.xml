@@ -255,7 +255,7 @@
 			<Track source="treacherous_paths.ogg" />
 		</Music>
 		
-		<Settings dimx="4" dimy="6" region_template="commandHouse"  ground="council_ground"/>
+		<Settings dimx="6" dimy="6" region_template="commandHouse"  ground="council_ground"/>
 		<WorldPosition world_x="0.73" world_y ="0.47"/>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
@@ -280,6 +280,11 @@
 				
 				dwarfenwall.council = createObject("council_dwarfenwall", "locDarna");
 				setRefName(dwarfenwall.council, "Maga Convocatis Darna Eistaucher");
+				lookAtEachOther(dwarfenwall.general, dwarfenwall.council)
+				
+				dwarfenwall.enchanter = createObject("council_mage","locEnchanter")
+				setRefName(dwarfenwall.enchanter, "Enchanter Fazhir");
+				set(dwarfenwall.enchanter,"angle",130)
 				
 				addArea("GeneralGreifArea",{"circle","locGeneral",5});
 			</Effect>

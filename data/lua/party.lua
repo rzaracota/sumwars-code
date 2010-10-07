@@ -176,3 +176,12 @@ function addPlayersGold(gold, players)
 		set(player,"gold",get(player,"gold") + gold);
 	end;
 end;
+--counts the number of players in the game
+function getPlayerNumber()
+	local players = getPlayers()
+	local count = 0
+	for i,player in ipairs(players) do
+		count = count + 1
+	end
+	return count
+end;

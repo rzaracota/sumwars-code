@@ -143,7 +143,120 @@
 			speak("Flynn",_("These are all old army supplies."),"unhappy");
 			speak("Flynn",_("If you like something just point it out and I'll tell you a price."),"unhappy");
 		</Effect>
+	</Topic>	
+</NPC>	
+
+
+<NPC refname="Enchanter Fazhir">
+	<Topic name="enchant_start" start_option="Enchant Items" >
+		<Effect>
+			-- chose a unique variable name here
+			mods_dwarfenwall = {};
+			
+			-- List of all possible mods:
+			-- max_health armor block strength dexterity willpower magic_power
+			-- resist_phys resist_fire resist_ice resist_air resist_all
+			-- phys_dmg fire_dmg ice_dmg air_dmg phys_mult fire_mult ice_mult air_mult attack_speed attack power
+
+			-- options for Armor enchanting
+			-- dont forget the _() markers for strings that are displayed ingame
+			mods_dwarfenwall[1] = {};
+			mods_dwarfenwall[1].answer_str = _("Armor")	-- string displayed in selection menu
+			mods_dwarfenwall[1].itempos = "armor"		-- position of the item
+			mods_dwarfenwall[1].allowed_mods = {"max_health","armor","willpower"}
+			mods_dwarfenwall[1].mod_answers = {_("Health Bonus"),_("Armor class"),_("Willpower")}
+			
+			mods_dwarfenwall[2] = {};
+			mods_dwarfenwall[2].answer_str = _("Weapon")	-- string displayed in selection menu
+			mods_dwarfenwall[2].itempos = "weapon"		-- position of the item
+			if(defend_dwall.outcome=="godlike")then
+				mods_dwarfenwall[2].allowed_mods = {"attack_speed", "attack", "power","fire_dmg", "ice_dmg", "air_dmg"}
+				mods_dwarfenwall[2].mod_answers = {_("Attack speed"), _("Attack"), _("Power"), _("Fire damage"), _("Ice damage"), _("Air damage")}
+			else
+				mods_dwarfenwall[2].allowed_mods = {"attack_speed", "attack", "power"}
+				mods_dwarfenwall[2].mod_answers = {_("Attack speed"), _("Attack"), _("Power")}
+			end;
+			
+			if(defend_dwall.outcome=="godlike")then
+				mods_dwarfenwall[3] = {}
+				mods_dwarfenwall[3].answer_str = _("Gloves")
+				mods_dwarfenwall[3].itempos = "glove"		-- position of the item
+				mods_dwarfenwall[3].allowed_mods = {"dexterity", "armor", "block"}
+				mods_dwarfenwall[3].mod_answers = {_("Dexterity"), _("Armor"), _("Block")}
+			end
+			
+			-- create item Selection
+			addQuestion(_("Which part of your equipment should be enchanted?"))
+			local nr, mod
+			for nr,mod in pairs(mods_dwarfenwall) do
+				addAnswer(mod.answer_str,"select_mod");
+			end;
+		</Effect>
+		
 	</Topic>
 	
 	
-</NPC>	
+	<Topic name="select_mod">
+		<Effect>
+			enchanter_mod_dwarfenwall = mods_dwarfenwall[trigger.answer_id];
+			
+			-- select the item as current item
+			local pl = getSpeaker("main_player");
+			getPlayerItem(pl,enchanter_mod_dwarfenwall.itempos);
+			if (not hasCurrentItem()) then
+				speak("Enchanter Fazhir",_("Hey you have no item equiped there"))
+			else
+				-- create modifier selection
+				addQuestion(_("Which Enchantment do you want?"))
+				local nr, answer
+				for nr,answer in pairs(enchanter_mod_dwarfenwall.mod_answers) do
+					addAnswer(answer,"check_price");
+				end;
+			end;
+		</Effect>
+	</Topic>
+	
+	<Topic name="check_price">
+		<Effect>
+			-- chose another unique variable here
+			enchanter_modtype_dwarfenwall = trigger.answer_id;
+			
+			local pl = getSpeaker("main_player");
+			local pgold = get(pl,"gold");
+			
+			local magic = getItemValue("magic_power");
+			enchanter_price = math.ceil(500 + magic*20 + 200*math.exp( magic / 100 - 1))
+			
+			if (enchanter_price > pgold) then
+				speak("Enchanter Fazhir",_("You dont have enough gold to pay the price of $1",{enchanter_price}))
+			else
+				addQuestion(_("The price is $1",{enchanter_price}))
+				addAnswer("OK","do_enchant");
+				addAnswer("Nah to expensive","end")
+			end
+		</Effect>
+	</Topic>
+	
+	<Topic name="do_enchant">
+		<Effect>
+			local pl = getSpeaker("main_player");
+			local pgold = get(pl,"gold");
+			set(pl,"gold",pgold - enchanter_price);
+			
+			-- enchant strength is set here
+			local mods = addItemMagicMods(enchanter_mod_dwarfenwall.allowed_mods[enchanter_modtype_dwarfenwall] ,200);
+			if (mods == nil) then
+				mods = 0;
+			end;
+			if (mods == 0) then
+				speak("Enchanter Fazhir",_("It seems that this item already has such an enchantment."));
+				set(pl,"gold",pgold);
+			else
+				-- removing the item from inventory and reinserting
+				-- ensures, that the item is unequiped if level requirement is not met
+				removePlayerItem(pl,enchanter_mod_dwarfenwall.itempos);
+				insertPlayerItem(pl,true);
+			end;
+		</Effect>
+	</Topic>
+</NPC>
