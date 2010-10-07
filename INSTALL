@@ -27,7 +27,7 @@ Ogre 1.7 and CEGUI 0.7 are not included in the standard repositories yet. But yo
 https://launchpad.net/~andrewfenn/+archive/ogredev
 
 To install all needed dependencies enter the following command into the terminal:
-sudo apt-get install libogre-dev libcegui-dev libois-dev libalut-dev liblua5.1-0-dev libopenal-dev libvorbis-dev
+sudo apt-get install libogre-dev libcegui-dev libois-dev libalut-dev liblua5.1-0-dev libopenal-dev libvorbis-dev libfreeimage-dev
 
 Then follow the "General instructions" section above to install the game.
 
