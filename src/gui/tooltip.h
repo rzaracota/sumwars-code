@@ -6,6 +6,10 @@
 class Tooltip
 {
 public:
+	/**
+	 * \enum Tooltiptype
+	 * \brief Tooltip types
+	 */
 	enum TooltipType
 	{
 		Main = 1,

@@ -285,7 +285,6 @@ void MainWindow::update(float time)
 		if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		{
 			m_cegui_system->setGUISheet(m_game_screen);
-			TooltipManager::getSingleton().setParent(m_game_screen);
 			m_game_screen->addChildWindow(m_sub_windows["Options"]->getCEGUIWindow());
 			MusicManager::instance().stop();
 		}

@@ -6,18 +6,10 @@ template<> TooltipManager* Ogre::Singleton<TooltipManager>::ms_Singleton = 0;
 TooltipManager::TooltipManager ()
 {
     m_toolTipsCreatedCount = 0;
-    m_Parent = 0;
-    m_Position = CEGUI::UVector2();
     m_CEGUIWinMgr = CEGUI::WindowManager::getSingletonPtr();
     m_CEGUISystem = CEGUI::System::getSingletonPtr();
     m_DefaultFont = m_CEGUISystem->getDefaultFont();
 }
-
-void TooltipManager::setParent ( CEGUI::Window* parent )
-{
-    m_Parent = parent;
-}
-
 
 void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string > list, float timeVisible, CEGUI::Font* font, Tooltip::TooltipType type )
 {
@@ -44,7 +36,7 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
 
     if ( type == Tooltip::Main )
     {
-        Tooltip *tt = new Tooltip ( m_Parent, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f );
+        Tooltip *tt = new Tooltip ( win, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f );
         fadeAllOut();
         m_CurrentMain = tt;
         tt->create ( msg, position, size, tempFont );
@@ -61,7 +53,7 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
             {
                 if ( !temp->getChild() )
                 {
-                    Tooltip *tt = new Tooltip ( m_Parent, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f );
+                    Tooltip *tt = new Tooltip ( win, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f );
                     CEGUI::UVector2 pos = temp->getCEGUIWindow()->getPosition();
                     pos.d_x += m_CurrentMain->getCEGUIWindow()->getWidth();
                     tt->create ( msg, pos, size, tempFont );
@@ -77,7 +69,7 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
         }
         else
         {
-            Tooltip *tt = new Tooltip ( m_Parent, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f );
+            Tooltip *tt = new Tooltip ( win, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f );
             CEGUI::UVector2 pos = m_CurrentMain->getCEGUIWindow()->getPosition();
             pos.d_x += m_CurrentMain->getCEGUIWindow()->getWidth();
             tt->create ( msg, pos, size, tempFont );
@@ -105,17 +97,6 @@ bool TooltipManager::handleMouseLeave ( const CEGUI::EventArgs& e )
 {
     fadeAllOut();
     return true;
-}
-
-
-void TooltipManager::setPosition ( const CEGUI::UVector2& position )
-{
-    m_Position = position;
-}
-
-CEGUI::UVector2 TooltipManager::getPosition()
-{
-    return m_Position;
 }
 
 
