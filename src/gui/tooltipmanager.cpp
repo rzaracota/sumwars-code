@@ -13,6 +13,7 @@ TooltipManager::TooltipManager ()
 
 void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string > list, float timeVisible, CEGUI::Font* font, Tooltip::TooltipType type )
 {
+	CEGUI::Window *gamescreen = CEGUI::WindowManager::getSingleton().getWindow("GameScreen");
     std::string msg;
     CEGUI::UVector2 size;
     std::ostringstream windowName;
@@ -36,7 +37,7 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
 
     if ( type == Tooltip::Main )
     {
-        Tooltip *tt = new Tooltip ( win, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f );
+        Tooltip *tt = new Tooltip ( gamescreen, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f );
         fadeAllOut();
         m_CurrentMain = tt;
         tt->create ( msg, position, size, tempFont );
@@ -53,7 +54,7 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
             {
                 if ( !temp->getChild() )
                 {
-                    Tooltip *tt = new Tooltip ( win, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f );
+                    Tooltip *tt = new Tooltip ( gamescreen, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f );
                     CEGUI::UVector2 pos = temp->getCEGUIWindow()->getPosition();
                     pos.d_x += m_CurrentMain->getCEGUIWindow()->getWidth();
                     tt->create ( msg, pos, size, tempFont );
@@ -69,7 +70,7 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
         }
         else
         {
-            Tooltip *tt = new Tooltip ( win, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f );
+            Tooltip *tt = new Tooltip ( gamescreen, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f );
             CEGUI::UVector2 pos = m_CurrentMain->getCEGUIWindow()->getPosition();
             pos.d_x += m_CurrentMain->getCEGUIWindow()->getWidth();
             tt->create ( msg, pos, size, tempFont );
