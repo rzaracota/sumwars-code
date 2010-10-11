@@ -563,7 +563,7 @@ bool Application::createView()
 	TooltipManager *mgr = new TooltipManager();
 	mgr->setFadeInTime(200.0f);
 	mgr->setFadeOutTime(200.0f);
-	mgr->setVisibleTime(5000.0f);
+	mgr->setVisibleTime(0.0f);
 	
 	return true;
 }

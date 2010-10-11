@@ -287,7 +287,7 @@ std::string Damage::getDamageString(Damage::Usage usage)
 			}
 			else
 			{
-				out_stream <<gettext("Power")<<": "<<(int) m_power;
+				out_stream <<gettext("Power")<<": "<<(int) m_power << "\n";
 			}
 		}
 

@@ -889,19 +889,19 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
     // String fuer die Beschreibung
     std::ostringstream out_stream;
     out_stream.str("");
-    out_stream<<rarityColor<<getName()<<"\n" << defaultColor;
+    out_stream<<rarityColor<<getName() << defaultColor << "\n";
     itemDescList.push_back(out_stream.str());
     out_stream.str("");
     
     int i;
     // Levelbeschraenkung
-    out_stream <<gettext("Value")<<": "<<m_price;
+    out_stream <<gettext("Value")<<": "<<m_price << "\n";
     itemDescList.push_back(out_stream.str());
     out_stream.str("");
     
     if (price_factor != 0 && price_factor != 1)
     {
-        out_stream <<"\n" << gettext("Selling Value")<<": "<<MathHelper::Max(1,int(m_price*price_factor));
+        out_stream << gettext("Selling Value")<<": "<<MathHelper::Max(1,int(m_price*price_factor)) << "\n";
         itemDescList.push_back(out_stream.str());
         out_stream.str("");
     }
@@ -909,13 +909,13 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
     {
         if (irm.m_level)
         {
-            out_stream<<"\n" << gettext("Required level")<<": "<<(int) m_level_req;
+            out_stream<<gettext("Required level")<<": "<<(int) m_level_req << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         else
         {
-            out_stream<<"\n" << "[colour='FFFF0000']" << gettext("Required level")<<": "<<(int) m_level_req << "[colour='FF2F2F2F']";
+            out_stream<< "[colour='FFFF0000']" << gettext("Required level")<<": "<<(int) m_level_req << "[colour='FF2F2F2F']" << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
@@ -925,12 +925,12 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
     {
         if (!irm.m_class)
         {
-            out_stream<< "[colour='FFFF0000']";
+            out_stream<< "[colour='FFFF0000']" << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         size_t pos=0,pos2;
-        out_stream<<"\n" << gettext("Required class")<<": ";
+        out_stream<< gettext("Required class")<<": ";
         
         std::string type;
         bool end = false;
@@ -979,7 +979,7 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
             
             first = false;
         }
-        out_stream<< defaultColor;
+        out_stream<< defaultColor << "\n";
         itemDescList.push_back(out_stream.str());
         out_stream.str("");
     }
@@ -990,7 +990,7 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
         // HP Heilung
         if (m_useup_effect->m_dhealth>0)
         {
-            out_stream <<"\n"<< gettext("Heals ")<<(int) m_useup_effect->m_dhealth<<gettext(" hitpoints");
+            out_stream << gettext("Heals ")<<(int) m_useup_effect->m_dhealth<<gettext(" hitpoints") << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
@@ -1000,13 +1000,13 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
         {
             if (    m_useup_effect->m_dstatus_mod_immune_time[i]>0)
             {
-                out_stream <<"\n"<< gettext("Heals ")<<Damage::getStatusModName((Damage::StatusMods) i);
+                out_stream << gettext("Heals ")<<Damage::getStatusModName((Damage::StatusMods) i) << "\n";
                 itemDescList.push_back(out_stream.str());
                 out_stream.str("");
                 
                 if (m_useup_effect->m_dstatus_mod_immune_time[i]>=1000)
                 {
-                    out_stream <<", "<< gettext("immune for ")<< (int) (m_useup_effect->m_dstatus_mod_immune_time[i]*0.001f)<<"s";
+                    out_stream <<", "<< gettext("immune for ")<< (int) (m_useup_effect->m_dstatus_mod_immune_time[i]*0.001f)<<"s" << "\n";
                     itemDescList.push_back(out_stream.str());
                     out_stream.str("");
                 }
@@ -1020,19 +1020,19 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
     {
         if (m_weapon_attr->m_two_handed)
         {
-            out_stream <<"\n"<< gettext("Two-handed weapon");
+            out_stream << gettext("Two-handed weapon") << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         // Reichweite / Angriffsgeschwindigkeit
         if (m_type == WEAPON)
         {
-            out_stream << "\n" << gettext("Range")<<": "<<m_weapon_attr->m_attack_range;
+            out_stream << gettext("Range")<<": "<<m_weapon_attr->m_attack_range << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         
-        //out_stream << "\n" << "Angriffe: "<<m_weapon_attr->m_attack_speed*0.001f<<"/s";
+        //out_stream << "Angriffe: "<<m_weapon_attr->m_attack_speed*0.001f<<"/s";
         
         // Schaden
         std::string dmgstring = m_weapon_attr->m_damage.getDamageString(Damage::ITEM);
@@ -1040,7 +1040,7 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
         {
             if (m_type == WEAPON)
             {
-                out_stream << "\n" << gettext("Damage")<<":\n";
+                out_stream << gettext("Damage")<<":" << "\n";
                 itemDescList.push_back(out_stream.str());
                 out_stream.str("");
             }
@@ -1053,7 +1053,7 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
                 dmgstring.erase(0,pos+1);
                 pos = dmgstring.find("\n");
             }
-            out_stream << "\n" << dmgstring;
+            out_stream << dmgstring;
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
@@ -1064,49 +1064,49 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
     {
         if (m_equip_effect->m_darmor>0)
         {
-            out_stream<<"\n"<<gettext("Armor")<<": "<<m_equip_effect->m_darmor;
+            out_stream<< gettext("Armor")<<": "<<m_equip_effect->m_darmor << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         
         if (m_equip_effect->m_dblock>0)
         {
-            out_stream<<"\n"<<gettext("Block")<<": "<<m_equip_effect->m_dblock;
+            out_stream<< gettext("Block")<<": "<<m_equip_effect->m_dblock << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         
         if (m_equip_effect->m_dmax_health>0)
         {
-            out_stream<<"\n"<<"+"<<(int) m_equip_effect->m_dmax_health<< " "<<gettext("max hitpoints");
+            out_stream<< "+" <<(int) m_equip_effect->m_dmax_health<< " "<<gettext("max hitpoints") << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         
         if (m_equip_effect->m_dstrength>0)
         {
-            out_stream<<"\n"<<"+"<<m_equip_effect->m_dstrength<< " "<<gettext("Strength");
+            out_stream<< "+"<<m_equip_effect->m_dstrength<< " "<<gettext("Strength") << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         
         if (m_equip_effect->m_ddexterity>0)
         {
-            out_stream<<"\n"<<"+"<<m_equip_effect->m_ddexterity<< " "<<gettext("Dexterity");
+            out_stream<<"+"<<m_equip_effect->m_ddexterity<< " "<<gettext("Dexterity") << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         
         if (m_equip_effect->m_dmagic_power>0)
         {
-            out_stream<<"\n"<<"+"<<m_equip_effect->m_dmagic_power<< " "<<gettext("Magic Power");
+            out_stream<< "+"<<m_equip_effect->m_dmagic_power<< " "<<gettext("Magic Power") << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         
         if (m_equip_effect->m_dwillpower>0)
         {
-            out_stream<<"\n"<<"+"<<m_equip_effect->m_dwillpower<< " "<<gettext("Willpower");
+            out_stream<< "+"<<m_equip_effect->m_dwillpower<< " "<<gettext("Willpower") << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
@@ -1115,7 +1115,7 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
         {
             if (m_equip_effect->m_dresistances[i]>0)
             {
-                out_stream<<"\n"<<"+"<<m_equip_effect->m_dresistances[i]<<" "<<Damage::getDamageResistanceName((Damage::DamageType) i);
+                out_stream<< "+"<<m_equip_effect->m_dresistances[i]<<" "<<Damage::getDamageResistanceName((Damage::DamageType) i) << "\n";
                 itemDescList.push_back(out_stream.str());
                 out_stream.str("");
             }
@@ -1125,7 +1125,7 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
         {
             if (m_equip_effect->m_dresistances_cap[i]>0)
             {
-                out_stream<<"\n"<<"+"<<m_equip_effect->m_dresistances_cap[i]<<gettext(" max. ")<<Damage::getDamageResistanceName((Damage::DamageType) i);
+                out_stream<< "+"<<m_equip_effect->m_dresistances_cap[i]<<gettext(" max. ")<<Damage::getDamageResistanceName((Damage::DamageType) i) << "\n";
                 itemDescList.push_back(out_stream.str());
                 out_stream.str("");
             }

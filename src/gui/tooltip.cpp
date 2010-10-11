@@ -1,4 +1,5 @@
 #include "tooltip.h"
+#include <iostream>
 
 Tooltip::Tooltip ( CEGUI::Window* parent, std::string name, float fadeInTime, float fadeOutTime, float visibilityTime, float targetAlpha, TooltipType type)
 {
@@ -77,7 +78,7 @@ void Tooltip::update ( float timeSinceLastUpdate )
         }
 
     }
-    else if (m_Visible)
+    else if (m_Visible && m_VisibilityTime != 0)
     {
         m_CurrentVisibleTime += timeSinceLastUpdate;
 
