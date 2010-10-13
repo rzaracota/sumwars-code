@@ -70,7 +70,7 @@
 				<Shape shape="RECT" extent_x="4.0" extent_y="4.0" />
 			</Exit>
 			<Exit name="maylonsGrave:entry_crypt" destination_region="aisMaylonsGraveEntry" destination_location="entry_south" >
-				<Shape shape="RECT" extent_x="2.0" extent_y="1.0" />
+				<Shape shape="RECT" extent_x="1.0" extent_y="1.0" />
 			</Exit>
 		</Exits>
 

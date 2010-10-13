@@ -71,3 +71,8 @@ Files:
 	spells.material
 	undead
 	Army.material
+	
+Artwork provided by: Psycho
+Default license: CC-BY-SA
+Files:
+	Krypta.png
