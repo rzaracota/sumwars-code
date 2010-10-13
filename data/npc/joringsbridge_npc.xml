@@ -306,7 +306,7 @@
 				mods = 0;
 			end;
 			if (mods == 0) then
-				speak("Magus Convocatis Relau Fireweaver",_("As I always say: No enchantment should be applyed a second time."),"unhappy");
+				speak("Magus Convocatis Relau Fireweaver",_("As I always say: No enchantment should be applied a second time."),"unhappy");
 				set(pl,"gold",pgold);
 			else
 				-- removing the item from inventory and reinserting

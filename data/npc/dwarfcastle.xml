@@ -244,7 +244,7 @@
 			set(pl,"gold",pgold - enchanter_price);
 			
 			-- enchant strength is set here
-			local mods = addItemMagicMods(enchanter_mod_dwarfenwall.allowed_mods[enchanter_modtype_dwarfenwall] ,200);
+			local mods = addItemMagicMods(enchanter_mod_dwarfenwall.allowed_mods[enchanter_modtype_dwarfenwall] ,400);
 			if (mods == nil) then
 				mods = 0;
 			end;
