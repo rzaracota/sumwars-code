@@ -18,7 +18,6 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	m_document = doc;
 	m_window = window;
 	m_scene_manager = Ogre::Root::getSingleton().getSceneManager("DefaultSceneManager");
-
 	GraphicManager::init();
 	GraphicManager::setSceneManager(m_scene_manager);
 	
@@ -840,7 +839,11 @@ void Scene::getMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, O
     // Allocate space for the vertices and indices
 	vertices = new Ogre::Vector3[vertex_count];
 	indices = new unsigned long[index_count];
-
+	for (int i=0; i<index_count; i++)
+	{
+		indices[i] = 0;
+	}
+	
 	added_shared = false;
 
     // Run through the submeshes again, adding the data into the arrays
@@ -888,6 +891,7 @@ void Scene::getMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, O
 
 
 		Ogre::IndexData* index_data = submesh->indexData;
+		
 		size_t numTris = index_data->indexCount / 3;
 		Ogre::HardwareIndexBufferSharedPtr ibuf = index_data->indexBuffer;
 
@@ -903,15 +907,32 @@ void Scene::getMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, O
 		{
 			for ( size_t k = 0; k < numTris*3; ++k)
 			{
-				indices[index_offset++] = pLong[k] + static_cast<unsigned long>(offset);
+				indices[index_offset] = pLong[k] + static_cast<unsigned long>(offset);
+				if (indices[index_offset] <0 || indices[index_offset] >= vertex_count)
+				{
+					DEBUG("-----------------------------");
+					DEBUG("illegal index %i at pos %i",indices[index_offset], offset);
+					DEBUG("submesh %i  triangle %i", i,k);
+					DEBUG("vertex count %i  index count %i",vertex_count, index_count);
+					DEBUG("32bit index %i  shared %i",use32bitindexes, submesh->useSharedVertices);
+				}
+				index_offset++;
 			}
 		}
 		else
 		{
 			for ( size_t k = 0; k < numTris*3; ++k)
 			{
-				indices[index_offset++] = static_cast<unsigned long>(pShort[k]) +
+				indices[index_offset] = static_cast<unsigned long>(pShort[k]) +
 						static_cast<unsigned long>(offset);
+						if (indices[index_offset] <0 || indices[index_offset] >= vertex_count)
+						{
+							DEBUG("illegal index %i at pos %i",indices[index_offset], index_offset);
+							DEBUG("submesh %i  triangle %i", i,k);
+							DEBUG("vertex count %i  index count %i",vertex_count, index_count);
+							DEBUG("32bit index %i  shared %i",use32bitindexes, submesh->useSharedVertices);
+						}
+				index_offset++;
 			}
 		}
 
