@@ -352,15 +352,13 @@ bool Application::configureOgre()
 	DEBUG("configure ogre");
 	// Logging nur fuer Fehlermeldungen verwenden
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW );
-	// Rendering System waehlen
-	// Liste aller verfuegbaren Systeme ausgeben lassen und das erste davon nehmen
-
-    if(!m_ogre_root->showConfigDialog())
-    {
-        //Ogre
-        delete m_ogre_root;
-        return false; // Exit the application on cancel
-    }
+	
+	// Restore config if ogre.cfg is show, otherwise show the config dialog
+	if(!(m_ogre_root->restoreConfig() || m_ogre_root->showConfigDialog()))
+	{
+		delete m_ogre_root;
+		return false;
+	}
 
 	return true;
 }
