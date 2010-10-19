@@ -556,7 +556,7 @@ bool Application::createView()
 
 	
 	new DebugPanel();
-	DebugPanel::getSingleton().init(true);
+	DebugPanel::getSingleton().init(false);
 	
 	TooltipManager *mgr = new TooltipManager();
 	mgr->setFadeInTime(200.0f);

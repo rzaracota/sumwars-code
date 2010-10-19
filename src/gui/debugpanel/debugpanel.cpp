@@ -1,6 +1,7 @@
 #include "debugpanel.h"
 #include "guidebugtab.h"
 #include "luascripttab.h"
+#include "OgreRoot.h"
 
 using namespace CEGUI;
 
@@ -11,8 +12,19 @@ void DebugPanel::init(bool visible)
 	m_guiSystem = System::getSingletonPtr();
 	m_winManager = WindowManager::getSingletonPtr();
 	m_gameScreen = m_winManager->getWindow("GameScreen");
+	m_lastVisibilitySwitch = 0;
 	createPanel(visible);
 }
+
+void DebugPanel::toogleVisibility()
+{
+	if((Ogre::Root::getSingleton().getTimer()->getMilliseconds() - m_lastVisibilitySwitch) > 500)
+	{
+		m_rootWindow->setVisible(!m_rootWindow->isVisible());
+		m_lastVisibilitySwitch = Ogre::Root::getSingleton().getTimer()->getMilliseconds();
+	}
+}
+
 
 void DebugPanel::createPanel(bool visible)
 {
@@ -38,6 +50,9 @@ void DebugPanel::createPanel(bool visible)
 	luaTab->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
 	luaTab->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	addTabWindow("LuaScriptTab", luaTab);
+	
+	if(!visible)
+	  m_rootWindow->setVisible(visible);
 }
 
 void DebugPanel::addTabWindow(std::string name, DebugTab* tab)
@@ -58,10 +73,13 @@ bool DebugPanel::tabExists(std::string tabName)
 }
 
 
-void DebugPanel::update()
+void DebugPanel::update(OIS::Keyboard *keyboard)
 {
 	if(m_tabs.size() < 1)
 		return;
+	
+	if(keyboard->isKeyDown(OIS::KC_LCONTROL) && keyboard->isKeyDown(OIS::KC_D))
+		toogleVisibility();
 	
 	std::map<std::string, DebugTab*>::iterator iter;
 	for (iter = m_tabs.begin(); iter != m_tabs.end(); iter++)

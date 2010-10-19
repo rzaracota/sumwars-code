@@ -211,7 +211,7 @@ void MainWindow::update(float time)
 	m_keyboard->capture();
 
 	TooltipManager::getSingleton().update(time);
-	DebugPanel::getSingleton().update();
+	DebugPanel::getSingleton().update(m_keyboard);
 	
 	if (m_document->getGUIState()->m_left_mouse_pressed || m_document->getGUIState()->m_right_mouse_pressed)
 	{

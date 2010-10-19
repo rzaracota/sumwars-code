@@ -4,8 +4,10 @@
 #include <OgreSingleton.h>
 #include "CEGUI/CEGUI.h"
 #include "debugtab.h"
+#include "OISKeyboard.h"
 
 #include <map>
+
 
 class DebugPanel : public Ogre::Singleton<DebugPanel>
 {
@@ -17,11 +19,19 @@ public:
 	*/
 	void init(bool visible);
 	
+	
+	/**
+	* \fn void toogleVisibility();
+	* \brief Toggle the visibility
+	*/
+	void toogleVisibility();
+
+	
 	/**
 	* \fn void update();
 	* \brief Updates all registered tabs
 	*/
-	void update();
+	void update(OIS::Keyboard *keyboard);
 
 	/**
 	* \fn void addTabWindow(CEGUI::Window *tab);
@@ -89,6 +99,11 @@ private:
 	std::map<std::string, DebugTab*> m_tabs;
     CEGUI::TabControl* m_tabControl;
 	
+	/**
+	* \var 	float m_lastVisibilitySwitch;
+	* \brief Buffers the last visibility toggle time
+	*/
+	long m_lastVisibilitySwitch;
 	
 };
 
