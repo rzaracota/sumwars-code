@@ -93,9 +93,8 @@ INCLUDE_DIRECTORIES(${PTHREADS_INCLUDE_DIR})
 ENDIF()
 
 IF(WIN32)
-	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/)
+	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost)
 	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/include/)
-	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/other/) #this is for stdint.h wich isn't included with visual studio until version 2010
 	ADD_DEFINITIONS( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4800 /wd4244 /wd4305 /nologo" )
 	MESSAGE("WARNING: Compiler warnings 4800, 4244 and 4305 disabled!")
 ENDIF()
@@ -233,9 +232,8 @@ SET(LINK_LIBS
 	${LUA_LIBRARIES} 
 	${OPENAL_LIBRARY} 
 	${ALUT_LIBRARY} 
+	${OGG_LIBRARY_DEBUG}
 	${VORBIS_LIBRARIES} 
-	${VORBIS_LIBRARIES}
-	${Enet_LIBRARY}
 )
 
 MESSAGE(${LINK_LIBS})
@@ -245,12 +243,12 @@ IF(WIN32)
 		ws2_32.lib
 		winmm.lib
 		${LINK_LIBS}	
-		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/libgettextlib.lib
-		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/libintl.lib
-		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_thread-vc90-mt-gd-1_42.lib
-		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_date_time-vc90-mt-gd-1_42.lib
-		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_thread-vc90-mt-1_42.lib
-		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost_1_42/lib/libboost_date_time-vc90-mt-1_42.lib
+		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/lib/libgettextlib.lib
+		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/lib/libintl.lib
+		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_thread-vc100-mt-gd-1_44.lib
+		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_date_time-vc100-mt-gd-1_44.lib
+		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_thread-vc100-mt-1_44.lib
+		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_date_time-vc100-mt-1_44.lib
 		)
 ENDIF()
 

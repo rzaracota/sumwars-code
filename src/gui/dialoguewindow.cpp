@@ -570,7 +570,6 @@ void DialogueWindow::updateSpeechBubbles()
 			m_document->setModified(m_document->getModified() | Document::WINDOWS_MODIFIED);
 		}
 		
-		
 		if (acount ==0)
 		{
 			ques = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "QuestionWindow");
@@ -590,7 +589,7 @@ void DialogueWindow::updateSpeechBubbles()
 		{
 			ques = (CEGUI::FrameWindow*)win_mgr.getWindow("QuestionWindow");
 			label = (CEGUI::Window*) win_mgr.getWindow("QuestionLabel");
-			//label->setProperty("HorzFormatting", "WordWrapLeftAligned");
+			label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 		}
 		
 		nr =0;
@@ -684,6 +683,7 @@ void DialogueWindow::updateSpeechBubbles()
 			
 			label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,horzoffset), CEGUI::UDim(0,height)));
 			label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), CEGUI::UDim(0,elemheight)));
+
 			label->setVisible(true);
 
 			float alpha = 1.0;
@@ -701,8 +701,10 @@ void DialogueWindow::updateSpeechBubbles()
 		}
 		
 		width += 2* horzoffset;
+		
 		ques->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5f,-width/2), cegui_reldim(0.2)));
 		ques->setSize(CEGUI::UVector2(CEGUI::UDim(0,width), CEGUI::UDim(0,height)));
+		
 		ques->setVisible(true);
 
 		// restliche Antwortlabels ausblenden

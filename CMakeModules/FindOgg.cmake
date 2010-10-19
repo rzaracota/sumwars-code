@@ -22,7 +22,7 @@ FIND_PATH(OGG_INCLUDE_DIR ogg/ogg.h
 )
 FIND_LIBRARY(OGG_LIBRARY_OPTIMIZED
 IF (WIN32)
-  NAMES libogg
+  NAMES libogg libogg-static-mt
   PATHS $ENV{OGGDIR}
   PATH_SUFFIXES Release
 ELSE
@@ -33,7 +33,7 @@ ENDIF(WIN32)
 
 FIND_LIBRARY(OGG_LIBRARY_DEBUG
 IF(WIN32)
-  NAMES liboggd libogg_d liboggD libogg_D
+  NAMES liboggd libogg_d liboggD libogg_D libogg-static-mt-debug
   PATHS $ENV{OGGDIR}
   PATH_SUFFIXES Debug
 ELSE

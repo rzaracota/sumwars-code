@@ -133,20 +133,22 @@ float TooltipManager::getFadeOutTime()
 
 void TooltipManager::update ( float timeSinceLastUpdate )
 {
-
     std::map<std::string, Tooltip*>::iterator iter;
-    for ( iter = m_Tooltips.begin(); iter != m_Tooltips.end(); iter++ )
+    for ( iter = m_Tooltips.begin(); iter != m_Tooltips.end();)
     {
         Tooltip *tt = iter->second;
 
         if ( tt->isDead() )
         {
             CEGUI::WindowManager::getSingleton().destroyWindow ( tt->getName() );
-            m_Tooltips.erase ( iter );
+            m_Tooltips.erase ( iter++ );
             delete tt;
         }
         else
+		{
             tt->update ( timeSinceLastUpdate );
+			++iter;
+		}
     }
 }
 

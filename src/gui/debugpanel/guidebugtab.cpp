@@ -25,7 +25,18 @@ void GuiDebugTab::initialiseComponents(void )
 
 void GuiDebugTab::update()
 {
-	m_tabLayout->getChild("windowUnderMouseStaticText")->setText(CEGUI::System::getSingleton().getWindowContainingMouse()->getName());
+	CEGUI::Window *win = CEGUI::System::getSingleton().getWindowContainingMouse();
+	m_tabLayout->getChild("windowUnderMouseStaticText")->setText(win->getName());
+	m_tabLayout->getChild("typeStaticText")->setText(win->getType());
+
+	std::ostringstream floatStringHelper;
+    floatStringHelper << win->getSize().d_x.d_offset;
+	m_tabLayout->getChild("xSizeLabel")->setText(floatStringHelper.str());
+	
+    floatStringHelper << win->getSize().d_y.d_offset;
+	m_tabLayout->getChild("ySizeLabel")->setText(floatStringHelper.str());
+	
+	m_tabLayout->getChild("contentsTextbox")->setText(win->getText());
 }
 
 

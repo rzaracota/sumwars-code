@@ -21,7 +21,7 @@ enum NrTimers
 	NR_TIMERS = 9
 };
 
-class Item;
+struct Item;
 
 /**
  * \struct AbilityInfo
