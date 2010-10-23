@@ -258,7 +258,7 @@ void EventSystem::reportErrors(lua_State *L, int status, const char* instr)
 {
 	if ( status!=0 )
 	{
-		DEBUG("lua error %s \n", lua_tostring(L, -1));
+		ERRORMSG("lua error %s \n", lua_tostring(L, -1));
 		lua_pop(L, 1); // remove error message
 		if (instr != 0)
 		{

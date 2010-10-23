@@ -339,9 +339,9 @@
 				end;
 				speak("waropt",_("Difficult?"),"surprised");
 				if(solo())then
-					speak("waropt",_("I'm putting in so much effort, and everything I get is "difficult""),"offended");
+					speak("waropt",_("I'm putting in so much effort, and everything I get is \"difficult\""),"offended");
 				elseif(getSpeaker("waropt")~=getSpeaker("magopt"))then
-					speak("waropt",_("You're putting in so much effort, and everything you get is "difficult""),"sneer");
+					speak("waropt",_("You're putting in so much effort, and everything you get is \"difficult\""),"sneer");
 					speak("magopt",_("Tsk. I feel like burning off the whole place."),"unhappy");
 				else
 					speak("magopt",_("I feel like burning off the whole place."),"unhappy");
