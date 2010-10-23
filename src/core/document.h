@@ -879,6 +879,11 @@ class Document
 		* \brief Timer fuer das automatische speichern
 		*/
 		Timer m_save_timer;
+		
+		/**
+		 * \brief Timer for automatic options saving
+		 */
+		Timer m_options_timer;
 
 		/**
 		* \var m_shutdown_timer

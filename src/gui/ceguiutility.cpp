@@ -46,7 +46,6 @@ std::list< std::string > CEGUIUtility::getTextAsList(const std::string &text)
 
 CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> list, CEGUI::Font *font, std::string &added)
 {
-    std::cout << "--------------------------------------------" << std::endl;
     using namespace CEGUI;
 
     float textWidth = 0.0f;

@@ -69,7 +69,7 @@ Document::Document()
 
 	// Pointer/Inhalte mit 0 initialisieren
 	m_gui_state.m_chat_window_content = "";
-
+	m_options_timer.start();
 
 	// aktuell eingestellte Aktionen setzen
 
@@ -1462,6 +1462,12 @@ void Document::update(float time)
 			World::getWorld()->update(time);
 		}
 
+	}
+
+	if (m_options_timer.getTime() > 60000)
+	{
+		saveSettings();
+		m_options_timer.start();
 	}
 
 	DEBUGX("modified is %i",m_modified);
