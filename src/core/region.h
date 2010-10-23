@@ -771,7 +771,7 @@ class Region
 		 * \param gu Gridunit aus der Objekte hinzugefuegt werden
 		 * \return bool, der angibt, ob die Operation erfolgreich war
 		 **/
-		bool addObjectsOnLineFromGridunit(Line& line, Gridunit* gu, WorldObjectList* result, short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false );
+		bool addObjectsOnLineFromGridunit(struct Line& line, Gridunit* gu, WorldObjectList* result, short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL,WorldObject* omit=0, bool empty_test = false );
 
 		/**
 		 * \fn bool changeObjectGroup(WorldObject* object,WorldObject::Group group )
@@ -816,7 +816,7 @@ class Region
 		 * \param group Gruppen die durchsucht werden sollen
 		 * \param omit Objekt, das ausgelassen wird
 		 */
-		void getObjectsOnLine( Line& line,  WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
+		void getObjectsOnLine(struct Line& line,  WorldObjectList* result,short layer=WorldObject::LAYER_ALL, short group = WorldObject::GROUP_ALL, WorldObject* omit=0 );
 
 
 		/**

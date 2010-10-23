@@ -50,7 +50,7 @@ CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> list, 
 
     float textWidth = 0.0f;
     float textHeight = 0.0f;
-    Size screenSize = CEGUI::System::getSingleton().getRenderer()->getDisplaySize();
+    CEGUI::Size screenSize = CEGUI::System::getSingleton().getRenderer()->getDisplaySize();
 
     added = "";
 	size_t count = 0;

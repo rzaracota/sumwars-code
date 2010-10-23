@@ -48,7 +48,7 @@ class ogg_stream
 
         bool stream(ALuint buffer);
         void empty();
-        void check();
+        void oggcheck();
         string errorString(int code);
 
     private:

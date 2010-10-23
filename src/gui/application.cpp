@@ -372,13 +372,13 @@ bool Application::setupResources()
     Ogre::String path = "";
 #ifdef __APPLE__
     path = macPath();
+    path.append("/");
 #endif
 	
 	
 	
 	Ogre::ConfigFile cf;
-	cf.load("resources.cfg");
-
+	cf.load(path + "resources.cfg");
 
 	// Go through all sections & settings in the file
 	Ogre::ConfigFile::SectionIterator seci = cf.getSectionIterator();

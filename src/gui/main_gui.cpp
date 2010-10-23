@@ -63,7 +63,8 @@ int main (int argc, char *argv[]) {
 		ERRORMSG("Error message: %s",e.what());
 	}
 	*/
-	app->run();
+    
+    app->run();
 	
 	
 	// Applikation loeschen

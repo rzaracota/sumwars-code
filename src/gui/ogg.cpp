@@ -27,9 +27,9 @@ void ogg_stream::open(string path)
         format = AL_FORMAT_STEREO16;
         
     alGenBuffers(2, buffers);
-	check();
+	oggcheck();
 	alGenSources(1, &source);
-    check();
+    oggcheck();
     alSource3f(source, AL_POSITION,        0.0, 0.0, 0.0);
     alSource3f(source, AL_VELOCITY,        0.0, 0.0, 0.0);
     alSource3f(source, AL_DIRECTION,       0.0, 0.0, 0.0);
@@ -47,9 +47,9 @@ void ogg_stream::release()
     alSourceStop(source);
     empty();
     alDeleteSources(1, &source);
-    check();
+    oggcheck();
     alDeleteBuffers(2, buffers);
-    check();
+    oggcheck();
 
     ov_clear(&oggStream);
 }
@@ -117,7 +117,7 @@ bool ogg_stream::update()
     bool active = true;
 
     alGetSourcei(source, AL_BUFFERS_PROCESSED, &processed);
-	check();
+	oggcheck();
 	while(processed--)
     {
 		DEBUGX("processed %i",processed+1);
@@ -125,12 +125,12 @@ bool ogg_stream::update()
         
         alSourceUnqueueBuffers(source, 1, &buffer);
 		DEBUGX("unqueued buffer %i", buffer);
-        check();
+        oggcheck();
 
         active = stream(buffer);
 
         alSourceQueueBuffers(source, 1, &buffer);
-        check();
+        oggcheck();
 		
 		
     }
@@ -177,7 +177,7 @@ bool ogg_stream::stream(ALuint buffer)
 		DEBUG("specified number is not a buffer");
 	}
     alBufferData(buffer, format, pcm, size, vorbisInfo->rate);
-    check();
+    oggcheck();
     
     return true;
 }
@@ -196,14 +196,14 @@ void ogg_stream::empty()
         ALuint buffer;
     
         alSourceUnqueueBuffers(source, 1, &buffer);
-        check();
+        oggcheck();
     }
 }
 
 
 
 
-void ogg_stream::check()
+void ogg_stream::oggcheck()
 {
 	int error = alGetError();
 

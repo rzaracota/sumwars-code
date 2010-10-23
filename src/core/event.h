@@ -1,5 +1,5 @@
-#ifndef EVENT_H
-#define EVENT_H
+#ifndef _EVENT_H
+#define _EVENT_H
 
 #include <string>
 #include <map>

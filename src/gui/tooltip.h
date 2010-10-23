@@ -1,7 +1,7 @@
 #ifndef TOOLTIP_H
 #define TOOLTIP_H
 
-#include "CEGUI.h"
+#include "CEGUI/CEGUI.h"
 
 class Tooltip
 {

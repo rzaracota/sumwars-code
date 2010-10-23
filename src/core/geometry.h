@@ -371,7 +371,7 @@ struct Shape
 	 * \brief Gibt true aus, wenn die Linie die Flaeche schneidet
 	 * \param line Linie
 	 */
-	bool intersects(Line& line);
+	bool intersects(struct Line& line);
 	
 	/**
 	 * \fn Vector projectionOnBorder(Vector point)

@@ -286,7 +286,7 @@ struct ClientCommand
 	 * \var m_button;
 	 * \brief Gibt den angelickten Button an
 	 */
-	Button m_button;
+	enum Button m_button;
 
 	/**
 	 * \var Action::ActionType m_action

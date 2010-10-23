@@ -1,6 +1,6 @@
 
 #include "nlfgclientnetwork.h"
-#include <nlfg.h>
+#include "nlfg.h"
 
 #ifdef WIN32
 #include <windows.h>

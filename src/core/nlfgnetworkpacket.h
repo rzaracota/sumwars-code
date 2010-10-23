@@ -5,7 +5,7 @@
 #define ID_TIMESTAMP                    23
 
 #include "networkpacket.h"
-#include <nlfg.h>
+#include "nlfg.h"
 #include <time.h>
 /**
  * Class for data sent or received with NLFG
