@@ -1472,6 +1472,34 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 	return true;
 }
 
+void Player::initAction()
+{
+	// automatically take up all gold in 2 meter radius
+	if (getAction()->m_type != "noaction")
+	{
+		DropItemMap* itms = getRegion()->getDropItems();
+		DropItemMap::iterator it, next;
+		for ( it = itms->begin();it != itms->end();it = next)
+		{
+			next = it;
+			++next;
+			
+			DropItem* di = it->second;
+			// only items, that have finished falling down
+			// only gold
+			// only if distance < 2
+			if (di->getItem()->m_size == Item::GOLD && di->getActionString() == "dropped" && di->getPosition().distanceTo(getPosition()) < 3)
+			{
+				// delete from Region and insert into player inventory
+				Item* itm = di->getItem();
+				getRegion()->deleteItem(di->getId());
+				insertItem(itm,true);
+			}
+		}
+	}
+	
+	Creature::initAction();
+}
 
 void Player::abortAction()
 {

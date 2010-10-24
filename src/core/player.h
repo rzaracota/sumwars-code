@@ -199,6 +199,12 @@ public:
 	 * \brief Die modifizierten Basisattribute werden neu berechnet. Verwendet die Basisattribute, verwendete Items, sowie temporaere Modifikationen.
 	 */
 	virtual void calcBaseAttrMod();
+	
+	/**
+	 * \fn virtual void initAction()
+	 * \brief initialisiert die aktuell gesetzte Aktion
+	 */
+	virtual void initAction();
 
 	/**
 	 * \fn Item* getWeapon()
