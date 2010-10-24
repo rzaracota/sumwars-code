@@ -95,13 +95,11 @@ CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> list, 
         iter++;
     }
 	size_t size = list.size();
-	
-	//std::cout << count << "<- count size -> " << size << std::endl;
-	
+
 	// increase the counter intil we have at least one line break more than we have text
 	while(count <= size)  
 		count++;
-	float fontheight = font->getFontHeight();
+
     textHeight = count * font->getFontHeight();
 
     return UVector2(UDim((textWidth/screenSize.d_width) + 0.05f, 0), UDim(textHeight / screenSize.d_height, 0) );
@@ -155,11 +153,7 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 		return std::count(text.begin(), text.end(), static_cast<CEGUI::utf8>('\n')) + 1;
 	}
 	*/
-	std::string testSTD = text.c_str();
-	if(testSTD.find_first_of("I will") > 0)
-	{
-		std::cout << ("SAf") << std::endl;
-	}
+
 	CEGUI::String newText(text.c_str());
 	
 	// handle wraping cases
@@ -178,7 +172,6 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 		}
 		
 		sourceLine = text.substr(lineStart, lineEnd - lineStart);
-		std::string sourceLineSTD = text.substr(lineStart, lineEnd - lineStart).c_str();
 		lineStart = lineEnd + 1;
 		
 		// get first word.
