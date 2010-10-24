@@ -234,7 +234,7 @@ void DialogueWindow::update()
 						{
 							CEGUI::UVector2 size = wtext->getSize();
 							CEGUI::Rect isize = wtext->getUnclippedInnerRect ();
-							FormatedText txt = CEGUIUtility::fitTextToWindow(text, isize, CEGUIUtility::WordWrapCentred, fnt);
+                                                        FormatedText txt = CEGUIUtility::fitTextToWindow(text, isize.getWidth(), CEGUIUtility::WordWrapCentred, fnt);
 							float height = PixelAligned(txt.lines * fnt->getLineSpacing());
 							size.d_y = CEGUI::UDim(0.0, height);
 							wtext->setSize(size);
@@ -486,10 +486,10 @@ void DialogueWindow::updateSpeechBubbles()
 			CEGUI::Rect rect = game_screen->getInnerRectClipper();
 
 			float maxwidth = rect.getWidth()/4;
-			CEGUI::Rect maxWidthRect;
-			maxWidthRect.setWidth(maxwidth);
+                        //CEGUI::Rect maxWidthRect;
+                        //maxWidthRect.setWidth(maxwidth);
 			
-			FormatedText txt = CEGUIUtility::fitTextToWindow((CEGUI::utf8*) text.c_str(), maxWidthRect, CEGUIUtility::WordWrapLeftAligned, font);
+                        FormatedText txt = CEGUIUtility::fitTextToWindow((CEGUI::utf8*) text.c_str(), maxwidth, CEGUIUtility::WordWrapLeftAligned, font);
 			size_t lines = txt.lines;
 			label->setText((CEGUI::utf8*) txt.text.c_str());
 			
@@ -615,7 +615,7 @@ void DialogueWindow::updateSpeechBubbles()
 		if (elemwidth > maxwidth)
 		{
 			elemwidth = maxwidth;
-			lines = CEGUIUtility::fitTextToWindow(ctext,rect, CEGUIUtility::WordWrapLeftAligned, font).lines;
+                        lines = CEGUIUtility::fitTextToWindow(ctext,rect.getWidth(), CEGUIUtility::WordWrapLeftAligned, font).lines;
 			elemheight = lines * lineheight;
 		}
 		width = MathHelper::Max(width,elemwidth);
@@ -654,7 +654,7 @@ void DialogueWindow::updateSpeechBubbles()
 				label = win_mgr.getWindow(stream.str());
 			}
 			
-			CEGUI::String cstring = (CEGUI::utf8*) it->first.getTranslation().c_str();
+                        CEGUI::String cstring = (CEGUI::utf8*) it->first.getTranslation().c_str();
 			
 			// Anzahl Antworten bei Voting eintragen
 			if (question->m_weighted_answers.count(nr) > 0)
@@ -670,7 +670,7 @@ void DialogueWindow::updateSpeechBubbles()
 			if (elemwidth > maxwidth)
 			{
 				elemwidth = maxwidth;
-				lines = CEGUIUtility::fitTextToWindow(cstring,rect, CEGUIUtility::WordWrapLeftAligned, font).lines;
+                                lines = CEGUIUtility::fitTextToWindow(cstring,maxwidth, CEGUIUtility::WordWrapLeftAligned, font).lines;
 				elemheight = lines * lineheight;
 			}
 			width = MathHelper::Max(width,elemwidth);

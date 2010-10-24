@@ -109,13 +109,13 @@ class CEGUIUtility
 		* \fn static size_t fitTextToWindow (const CEGUI::String& text, const CEGUI::Rect& format_area,TextFormatting fmt, CEGUI::Font *font, float x_scale = 1.0f, CEGUI::String& out_string = "")
 		* \brief Returns the number of lines the text will have within a given CEGUI window
 		* \param text Fits the text to a window
-		* \param format_area The CEGUI Rect from the window
+                * \param maxWidth The maximum width
 		* \param fmt The text format
 		* \param font The CEGUI::Font
 		* \param x_scale Optional text scale
 		* \returns the formated text and the line count
 		*/
-		static FormatedText fitTextToWindow (const CEGUI::String& text, const CEGUI::Rect& format_area,TextFormatting fmt, CEGUI::Font *font, float x_scale = 1.0f);
+                static FormatedText fitTextToWindow (const CEGUI::String& text, float maxWidth, TextFormatting fmt, CEGUI::Font *font, float x_scale = 1.0f);
 		
 private:
 		/**

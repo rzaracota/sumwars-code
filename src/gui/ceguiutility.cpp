@@ -3,6 +3,14 @@
 #include <iostream>
 #include <algorithm>
 
+#ifdef WIN32
+#define LINE_ENDING "\r\n"
+#define ERASE_CNT 2
+#else
+#define LINE_ENDING "\n"
+#define ERASE_CNT 1
+#endif
+
 std::string CEGUIUtility::stripColours(const std::string &input)
 {
     std::string output = input;
@@ -21,23 +29,23 @@ std::list< std::string > CEGUIUtility::getTextAsList(const std::string &text)
 {
     std::list<std::string> l;
     std::string temp = text;
-
-    std::string::size_type pos = text.find_first_of("\n");
+	
+    std::string::size_type pos = text.find_first_of(LINE_ENDING);
     while (pos != std::string::npos)
     {
         // ignore new line directly at the beginning of the string
         if (pos != 0)
         {
-            std::string substr = temp.substr(0, pos-1);
-            l.push_back(temp.substr(0, pos-1));
-            temp.erase(0, pos+1);
-            pos = temp.find("\n");
+            std::string substr = temp.substr(0, pos-ERASE_CNT);
+            l.push_back(temp.substr(0, pos-ERASE_CNT));
+            temp.erase(0, pos+ERASE_CNT);
+            pos = temp.find(LINE_ENDING);
         }
         else
 		{
-			temp.erase(0, 1);
+			temp.erase(0, ERASE_CNT);
 			//l.push_back(" ");
-			pos = temp.find("\n");
+			pos = temp.find(LINE_ENDING);
 		}
     }
 	
@@ -68,7 +76,7 @@ CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> list, 
 		std::string::size_type word_pos = 0;
 		while ( word_pos!=std::string::npos )
 		{
-			word_pos = s.find ( "\n", word_pos );
+			word_pos = s.find ( LINE_ENDING, word_pos );
 			if ( word_pos != std::string::npos )
 			{
 				++count;
@@ -140,33 +148,37 @@ const size_t CEGUIUtility::getNextWord(const CEGUI::String& in_string, size_t st
 	return out_string.length();
 }
 
-FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, const CEGUI::Rect& format_area,TextFormatting fmt, CEGUI::Font *font, float x_scale)
+FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxWidth, TextFormatting fmt, CEGUI::Font *font, float x_scale)
 {
 /*	if ((fmt == LeftAligned) || (fmt == Centred) || (fmt == RightAligned) || (fmt == Justified))
 	{
 		return std::count(text.begin(), text.end(), static_cast<CEGUI::utf8>('\n')) + 1;
 	}
 	*/
-
+	std::string testSTD = text.c_str();
+	if(testSTD.find_first_of("I will") > 0)
+	{
+		std::cout << ("SAf") << std::endl;
+	}
 	CEGUI::String newText(text.c_str());
 	
 	// handle wraping cases
 	size_t lineStart = 0, lineEnd = 0;
 	CEGUI::String	sourceLine;
-	
-	float	wrap_width = format_area.getWidth();
+
 	CEGUI::String  whitespace = CEGUI::TextUtils::DefaultWhitespace;
 	CEGUI::String	thisLine, thisWord;
 	size_t	line_count = 0, currpos = 0;
 	
 	while (lineEnd < text.length())
 	{
-		if ((lineEnd = text.find_first_of('\n', lineStart)) == CEGUI::String::npos)
+		if ((lineEnd = text.find_first_of(LINE_ENDING, lineStart)) == CEGUI::String::npos)
 		{
 			lineEnd = text.length();
 		}
 		
 		sourceLine = text.substr(lineStart, lineEnd - lineStart);
+		std::string sourceLineSTD = text.substr(lineStart, lineEnd - lineStart).c_str();
 		lineStart = lineEnd + 1;
 		
 		// get first word.
@@ -179,7 +191,7 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, const CEGU
 			currpos += getNextWord(sourceLine, currpos, thisWord);
 			
 			// if the new word would make the string too long
-			if ((font->getTextExtent(thisLine, x_scale) + font->getTextExtent(thisWord, x_scale)) > wrap_width)
+                        if ((font->getTextExtent(thisLine, x_scale) + font->getTextExtent(thisWord, x_scale)) > maxWidth)
 			{
 				// too long, so that's another line of text
 				line_count++;
@@ -187,7 +199,7 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, const CEGU
 				// remove whitespace from next word - it will form start of next line
 				thisWord = thisWord.substr(thisWord.find_first_not_of(whitespace));
 				
-				newText.insert(currpos - thisWord.size(), "\n");
+				newText.insert(currpos - thisWord.size(), LINE_ENDING);
 				// reset for a new line.
 				thisLine.clear();
 			}

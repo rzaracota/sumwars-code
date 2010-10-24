@@ -101,7 +101,7 @@ void CreditsWindow::updateTranslation()
 	// Set Size of the Window automatically
 	CEGUI::UVector2 size = wtext->getSize();
 	CEGUI::Rect isize = wtext->getUnclippedInnerRect ();
-	float height = PixelAligned(CEGUIUtility::fitTextToWindow(wtext->getText(), isize, CEGUIUtility::WordWrapCentred, fnt).lines * fnt->getLineSpacing());
+	float height = PixelAligned(CEGUIUtility::fitTextToWindow(wtext->getText(), isize.getWidth(), CEGUIUtility::WordWrapCentred, fnt).lines * fnt->getLineSpacing());
 	size.d_y = CEGUI::UDim(0.0, height);
 	wtext->setSize(size);
 }
