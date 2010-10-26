@@ -42,7 +42,6 @@ CreditsWindow::CreditsWindow(Document* doc)
                         \n Mac conversion: \
                         \n David Athay (trapdoor)\
                         \n Ben Anderman (crimson_penguin)";
-	
 	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nGraphics:", CEGUIUtility::White);
 	content +="\n Andreas Schönefeldt \
 			\n\nGraphics: \
@@ -60,18 +59,19 @@ CreditsWindow::CreditsWindow(Document* doc)
 	content += "\n Michael Kempf (Hangman) \
 				\n artisticdude \
 				\n quobodup";
-	content += "\n\nMusic: \
-			\n Mattias Westlund (West) \
-			\n Cheeselord \
-			\n\nTranslation: \
-			\n Steffen Schönefeldt (Kalimgard) \
+	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nMusic:", CEGUIUtility::White);
+	content += 		"\n Mattias Westlund (West) \
+			\n Cheeselord";
+	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nTranslation:", CEGUIUtility::White);
+	content += "\n Steffen Schönefeldt (Kalimgard) \
 			\n Michael Kempf (Hangman) \
 			\n kroni \
 			\n Brian Jeffears (getter77) \
 			\n Nicholas Cosens (gnemo) \
 			\n axander \
-			\n Build system: \
-			\n Stefan Stammberger (fusion44)";
+			\n Simeon Dear (Trilby)";
+	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nBuild system:", CEGUIUtility::White);
+	content += "\n Stefan Stammberger (fusion44)";
 	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\n Website:", CEGUIUtility::White);
 	content += "\n Andreas Schönefeldt \
 			\n Michael Kempf (Hangman) \
