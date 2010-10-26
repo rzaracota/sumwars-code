@@ -2,7 +2,7 @@
 #else
 #define NETWORK_H
 
-#define ID_USER_PACKET_ENUM  80
+#define ID_USER_PACKET_ENUM  100
 
 
 #include "debug.h"
