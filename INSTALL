@@ -12,7 +12,7 @@ ogg, vorbis, vorbisfile
 If you are lucky, all libs may be installed via package manager (apt-get, yum, emerge, pacman, ...).
 Have a look at the "OS dependant install" section below.
 
-Alternatively you can use the cmake build system by typing:
+After installing all required libraries type:
 cmake .
 make
 
