@@ -444,10 +444,14 @@ bool Application::initCEGUI()
 {
 	DEBUG("init CEGUI\n");
     
+	// Log level
+	new CEGUI::DefaultLogger();	
+	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
+	CEGUI::DefaultLogger::getSingleton().setLogFilename("CEGUI.log");
+	
+	// Bootstrap the CEGUI System
 	CEGUI::OgreRenderer::bootstrapSystem();
 
-	// Log level
-	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
     
 	// Scheme laden
 	CEGUI::SchemeManager::getSingleton().create((CEGUI::utf8*)"TaharezLook.scheme", (CEGUI::utf8*)"GUI");
