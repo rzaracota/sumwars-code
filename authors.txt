@@ -1,0 +1,51 @@
+[A Programming]
+=Hans Wulf (Lastmerlin)
+=Stefan Stammberger (fusion44)
+=Nicholas Cosens (gnemo)
+
+[B Network Library For Games (NLFG)]
+=David Athay (trapdoor)
+
+[C Mac Conversion]
+=David Athay (trapdoor)
+=Ben Anderman (crimson_penguin)
+	
+[D Graphics]
+=Andreas Schönefeldt
+=Andreas Schönefeldt
+=Steffen Schönefeldt (Kalimgard)
+=Christian Wittmann (psycho)
+=Francesco Miglietta (hal9000)
+	
+[E Scripting]
+=Steffen Schönefeldt (Kalimgard)
+=Hans Wulf (Lastmerlin)
+	
+[F Story]
+=Steffen Schönefeldt (Kalimgard)
+=Andreas Schönefeldt
+
+[G Sounds]
+=Michael Kempf (Hangman)
+=rtisticdude
+=quobodup
+
+[H Music]
+=Mattias Westlund (West)
+=Cheeselord
+
+[I Translation]
+=Steffen Schönefeldt (Kalimgard)
+=Michael Kempf (Hangman)
+=kroni
+=Brian Jeffears (getter77)
+=Nicholas Cosens (gnemo)
+=axander
+=Simeon Dear (Trilby)
+
+[J Build system]
+=Stefan Stammberger (fusion44)
+
+[K Website]
+=Andreas Schönefeldt 
+=Michael Kempf (Hangman)

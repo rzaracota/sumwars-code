@@ -3,14 +3,6 @@
 #include <iostream>
 #include <algorithm>
 
-#ifdef WIN32
-#define LINE_ENDING "\r\n"
-#define ERASE_CNT 2
-#else
-#define LINE_ENDING "\n"
-#define ERASE_CNT 1
-#endif
-
 std::string CEGUIUtility::stripColours(const std::string &input)
 {
     std::string output = input;
@@ -88,6 +80,7 @@ CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> list, 
 		
 		
 		added += s;
+
         float tempwidth = font->getTextExtent(stripColours(s).c_str()) ;
         if (tempwidth > textWidth)
             textWidth = tempwidth;

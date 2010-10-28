@@ -1,5 +1,6 @@
 #include "creditswindow.h"
 #include "ceguiutility.h"
+#include "OgreConfigFile.h"
 
 CreditsWindow::CreditsWindow(Document* doc)
 	:Window(doc)
@@ -33,54 +34,35 @@ CreditsWindow::CreditsWindow(Document* doc)
 	credits->setProperty("BackgroundEnabled", "true");
 	credits->setProperty("HorzFormatting", "HorzCentred");
 
-	std::string content = CEGUIUtility::getColourizedString(CEGUIUtility::Red, "Programming:", CEGUIUtility::White);
-	content += "\n Hans Wulf (Lastmerlin) \
-			\n Stefan Stammberger (fusion44) \
-			\n Nicholas Cosens (gnemo)\
-                        \n Network Library For Games (NLFG): \
-                        \n David Athay (trapdoor) \
-                        \n Mac conversion: \
-                        \n David Athay (trapdoor)\
-                        \n Ben Anderman (crimson_penguin)";
-	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nGraphics:", CEGUIUtility::White);
-	content +="\n Andreas Schönefeldt \
-			\n\nGraphics: \
-			\n Andreas Schönefeldt \
-			\n Steffen Schönefeldt (Kalimgard) \
-			\n Christian Wittmann (psycho)\
-			\n Francesco Miglietta (hal9000)";
-	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\n Scripting:", CEGUIUtility::White);
-	content += "\n Steffen Schönefeldt (Kalimgard) \
-			\n Hans Wulf (Lastmerlin)";
-	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nStory:", CEGUIUtility::White);
-	content += "\n Steffen Schönefeldt (Kalimgard) \
-			\n Andreas Schönefeldt";
-	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nSounds:", CEGUIUtility::White);
-	content += "\n Michael Kempf (Hangman) \
-				\n artisticdude \
-				\n quobodup";
-	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nMusic:", CEGUIUtility::White);
-	content += 		"\n Mattias Westlund (West) \
-			\n Cheeselord";
-	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nTranslation:", CEGUIUtility::White);
-	content += "\n Steffen Schönefeldt (Kalimgard) \
-			\n Michael Kempf (Hangman) \
-			\n kroni \
-			\n Brian Jeffears (getter77) \
-			\n Nicholas Cosens (gnemo) \
-			\n axander \
-			\n Simeon Dear (Trilby)";
-	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\nBuild system:", CEGUIUtility::White);
-	content += "\n Stefan Stammberger (fusion44)";
-	content += CEGUIUtility::getColourizedString(CEGUIUtility::Red, "\n\n Website:", CEGUIUtility::White);
-	content += "\n Andreas Schönefeldt \
-			\n Michael Kempf (Hangman) \
-			\n fusion44 \
-			\n\nWebsite: \
-			\n Andreas Schönefeldt \
-			\n Michael Kempf (Hangman)";
+	Ogre::ConfigFile cf;
+	cf.load("authors.txt");
+
+	// Go through all sections & settings in the file
+	Ogre::ConfigFile::SectionIterator seci = cf.getSectionIterator();
+
+	std::list<std::string> content;
+
+	std::string secName, typeName, archName;
+	while (seci.hasMoreElements())
+	{
+		secName = seci.peekNextKey();
+		secName = secName.erase(0,2) + LINE_ENDING;
+		content.push_back(CEGUIUtility::getColourizedString(CEGUIUtility::Red, secName, CEGUIUtility::White).c_str());
+		Ogre::ConfigFile::SettingsMultiMap *settings = seci.getNext();
+		Ogre::ConfigFile::SettingsMultiMap::iterator i;
+		for (i = settings->begin(); i != settings->end(); ++i)
+		{
+			typeName = i->first;
+			archName = i->second;
+			content.push_back(archName + LINE_ENDING);
+		}
+	}
 	
-	credits->setText((CEGUI::utf8*) content.c_str());
+	std::string added;
+	CEGUI::UVector2 sz = credits->getSize();
+	sz.d_y = CEGUIUtility::getWindowSizeForText(content, credits->getFont(), added).d_y;
+	credits->setSize(sz);
+	credits->setText(added);
 	credits->setProperty("BackgroundColours", "tl:99000000 tr:99000000 bl:99000000 br:99000000");
 	credits->setAlpha(0.9);
 	credits->setFont("DejaVuSerif-12");
@@ -101,9 +83,11 @@ void CreditsWindow::updateTranslation()
 	// Set Size of the Window automatically
 	CEGUI::UVector2 size = wtext->getSize();
 	CEGUI::Rect isize = wtext->getUnclippedInnerRect ();
-	float height = PixelAligned(CEGUIUtility::fitTextToWindow(wtext->getText(), isize.getWidth(), CEGUIUtility::WordWrapCentred, fnt).lines * fnt->getLineSpacing());
-	size.d_y = CEGUI::UDim(0.0, height);
+	//float height = PixelAligned(CEGUIUtility::fitTextToWindow(wtext->getText(), isize.getWidth(), CEGUIUtility::WordWrapCentred, fnt).lines * fnt->getLineSpacing());
+	//float height = CEGUIUtility::getWindowSizeForText(wtext->getText().c_str(), fnt);
+	size.d_y = CEGUIUtility::getWindowSizeForText(wtext->getText().c_str(), fnt).d_y; //CEGUI::UDim(0.0, height);
 	wtext->setSize(size);
+	
 }
 
 void CreditsWindow::update()
