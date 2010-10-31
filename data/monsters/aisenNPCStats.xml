@@ -217,7 +217,7 @@
 
 <!-- wounded scout for the scout quest-->
 <Monster type="NPC" subtype="questScout" name="Scout" fraction="neutral_to_all" race="default" layer="NORMAL">
-	<Mesh file="scout_quest" />
+	<Mesh file="guard_ais" />
 	<EmotionSet name="tolec_emotion" />
 	<BasicAttributes
 					experience="0"
@@ -244,7 +244,8 @@
 					attack_range="2"
 					>
 		
-		<Ability type="noaction"/>
+	<Ability type="noaction"/>
+		
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
