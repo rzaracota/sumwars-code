@@ -221,6 +221,23 @@
 	<Entity objectname="hat" bone="crown" source="peasent_hatF.mesh" />
 </RenderInfo>
 
+<RenderInfo name="scout_quest" parent="unarmedBase">
+	<Entity source="guardAisen.mesh"/>
+	<Entity objectname="head" bone="crown" source="head1.mesh" />
+	<Entity objectname="helm" bone="crown" source="merc_hlm.mesh" />
+	
+	<Action name="noaction">
+		<Animation name="lieOneHand"/>
+	</Action>
+	<Action name="getUp">
+		<Animation name="getUpOneHand" />
+	</Action>
+	<Action name="healed">
+		<Animation name="idle" />
+	</Action>
+</RenderInfo>
+
+
 <!-- momentan nur General Greif, Zivil -->
 <RenderInfo name="general" parent="unarmedBase">
 	<Entity source="knight.mesh"/>

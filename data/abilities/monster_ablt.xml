@@ -705,3 +705,22 @@
 		</LuaImplementation>
 	</Effect>
 </Ability>
+
+<Ability type="stun_attack" 
+		 name="stun_attack" 
+		time="1.000000" 
+		 timer_nr="1.000000" 
+		 timer_value="2000.000000" 
+		 base_ability="attack" 
+		 critical_percent="0.660000" 
+		 target_type="melee" >
+	<Effect>
+		<CppImplementation type="dmg_at_target" />
+	</Effect>
+	<Damage>
+		<CppImplementation type="attack" />
+		<LuaImplementation>
+			setDamageValue("paralyzed", get(self,"magic_power"));
+		</LuaImplementation>	
+	</Damage>
+</Ability>

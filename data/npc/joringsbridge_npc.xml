@@ -200,10 +200,10 @@
 		<Effect>
 			tutorial.smith = true
 			addSpeaker(joringsbridge.council,"council")
-			speak("council",_("Welcome to the humble... village they call it... of Joringsbridge."),"aloof")
+			speak("council",_("Welcome to the humble... village, they call it... of Joringsbridge."),"aloof")
 			speak("council",_("I have been stationed here due to the unfathomable wisdom of the Council."),"unhappy")
-			speak("council",_("If you want I can add the certain something to your weapons."),"normal")
-			speak("council",_("I'm also quite adept at protecting clothes against the elements."))
+			speak("council",_("If you want, I can add a certain something to your weapons."),"normal")
+			speak("council",_("I am also quite adept at imbuing clothes with extra protection against the elements."))
 			speak("council",_("Nothing more to do anyway."))
 		</Effect>
 	</Topic>
@@ -211,10 +211,10 @@
 	<Topic name="no_ice" start_option="Why can't you use ice?">
 		<Effect>
 			addSpeaker(joringsbridge.council,"council")
-			speak("council",_("Of course I know how to conjure ice."),"aloof")
-			speak("council",_("But as you are no doubt not aware casting and enchanting are two utterly different activities."),"aloof")
+			speak("council",_("Of course I know how to conjure ice..."),"aloof")
+			speak("council",_("but, as you are no doubt unaware, casting and enchanting are two utterly different activities."),"aloof")
 			speak("council",_("Be grateful I am able to enchant two elements."),"aloof")
-			speak("council",_("That's rare talent, just so you know."),"aloof")
+			speak("council",_("That's a rare talent, just so you know. "),"aloof")
 		</Effect>
 	</Topic>
 	

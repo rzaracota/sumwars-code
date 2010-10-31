@@ -74,6 +74,8 @@
 	</Topic>
 </NPC>
 
+<NPC refname="Wounded Scout">
+</NPC>
 
 <NPC refname="Enchanter">
 	<Topic name="enchant_start" start_option="Enchant Items" >

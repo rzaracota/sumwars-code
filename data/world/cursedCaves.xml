@@ -34,6 +34,10 @@
 			<Environment height="1.0" name="cave" />
 		</Environments>
 		
+		<NamedObjectGroups>
+			<NameObjectGroup name="soldier" object_group="caveHideOut" priority="4"/>
+		</NamedObjectGroups>
+		
 		<SpawnGroups>
 			<SpawnGroup group_name="goblins_l13_1" number="20" />
 			<SpawnGroup group_name="goblins_l13_2" number="20" />
@@ -89,7 +93,7 @@
 		<HeroLight red="0.6" green="0.6" blue="0.6" /> 
 		<DirectionalLight red="0.0" green="0.0" blue="0.0" />
 		
-		<Settings dimx="30" dimy="30" area_percent="0.4" complexity="0.3" granularity="4"  ground="cave_ground"/>
+		<Settings dimx="40" dimy="40" area_percent="0.4" complexity="0.3" granularity="4"  ground="cave_ground"/>
 		<WorldPosition world_x="0.63" world_y ="0.42"/>
 		
 		<Music>
@@ -108,6 +112,10 @@
 		<Environments>
 			<Environment height="1.0" name="cave" />
 		</Environments>
+		
+		<NamedObjectGroups>
+			<NameObjectGroup name="spiders" object_group="spiderLair" priority="4"/>
+		</NamedObjectGroups>
 		
 		<SpawnGroups>
 			<SpawnGroup group_name="wolves" number="20" />

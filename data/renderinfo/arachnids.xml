@@ -10,6 +10,13 @@
 	<Action name="attack">
 		<Animation name="attack2" />
 	</Action>
+	
+	<Action name="stun_attack">
+		<Animation name="attack1" />
+	</Action>
+	<Action name="stun_attack">
+		<Animation name="attack2" />
+	</Action>
 
 	<Action name="die">
 		<Animation name="die" />
@@ -26,4 +33,8 @@
 
 <RenderInfo name="caveSpider" parent="spiderbase">
 	<Entity source="spider.mesh"/>
+</RenderInfo>
+
+<RenderInfo name="caveSpiderSmall" parent="spiderbase">
+	<Entity source="spider.mesh" scale="0.5"/>
 </RenderInfo>

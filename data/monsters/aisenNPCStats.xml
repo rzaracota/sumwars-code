@@ -132,7 +132,7 @@
 <!-- Prinz Karlen -->
 <Monster type="NPC" subtype="prince" name="Prince Karlen" fraction="human" race="human" layer="NORMAL">
 	<RenderInfo name="prince" />
-	<EmotionSet name="human_standard" />
+	<EmotionSet name="general_emotion" />
 	<BasicAttributes
 					experience="0"
 					level="83"
@@ -208,6 +208,43 @@
 		<Ability type="attack" rating="1"/>
 		
 		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="8" />
+</Monster>
+
+<!-- wounded scout for the scout quest-->
+<Monster type="NPC" subtype="questScout" name="Scout" fraction="neutral_to_all" race="default" layer="NORMAL">
+	<Mesh file="scout_quest" />
+	<EmotionSet name="tolec_emotion" />
+	<BasicAttributes
+					experience="0"
+					level="20"
+					max_health="500"
+					armor="60"
+					block="0"
+					attack="40"
+					strength="50"
+					dexterity="35"
+					magic_power="15"
+					willpower="20"
+					resistances_physical="30"
+					resistances_air="10"
+					resistances_ice="10"
+					resistances_fire="10"
+					resistances_cap_physical="50"
+					resistances_cap_air="50"
+					resistances_cap_ice="50"
+					resistances_cap_fire="50"
+					walk_speed="2500"
+					attack_speed="1000"
+					step_length="1.2"
+					attack_range="2"
+					>
+		
+		<Ability type="noaction"/>
 	</BasicAttributes>
 	
 	<Geometry radius="0.5" />
