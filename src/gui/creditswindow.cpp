@@ -35,7 +35,18 @@ CreditsWindow::CreditsWindow(Document* doc)
 	credits->setProperty("HorzFormatting", "HorzCentred");
 
 	Ogre::ConfigFile cf;
+#ifndef __APPLE__
 	cf.load("authors.txt");
+#else
+    Ogre::String path;
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+    char resPath[PATH_MAX];
+    CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)resPath, PATH_MAX);
+    CFRelease(resourcesURL);
+    path = resPath;
+    cf.load(path + "/authors.txt");
+#endif
 
 	// Go through all sections & settings in the file
 	Ogre::ConfigFile::SectionIterator seci = cf.getSectionIterator();

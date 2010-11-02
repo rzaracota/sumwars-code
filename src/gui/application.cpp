@@ -447,7 +447,11 @@ bool Application::initCEGUI()
 	// Log level
 	new CEGUI::DefaultLogger();	
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
+#ifndef __APPLE__
 	CEGUI::DefaultLogger::getSingleton().setLogFilename("CEGUI.log");
+#else
+    CEGUI::DefaultLogger::getSingleton().setLogFilename(macPath() + "/CEGUI.log");
+#endif
 	
 	// Bootstrap the CEGUI System
 	CEGUI::OgreRenderer::bootstrapSystem();
