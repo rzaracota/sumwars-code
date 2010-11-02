@@ -3,6 +3,7 @@
 
 
 #ifdef WIN32
+	#define WIN32_LEAN_AND_MEAN
     #include <windows.h>
 #endif
 
@@ -65,7 +66,17 @@ void Gettext::init(const char* locale)
 
 	textdomain ("menu");
 
+#ifdef WIN32
+	char loc[100];
+	GetLocaleInfo(LOCALE_USER_DEFAULT,
+						  LOCALE_SISO639LANGNAME,
+						  loc, sizeof(loc));
+	Gettext::setLocale(loc);
+#else
 	Gettext::setLocale(locale);
+#endif
+
+
 }
 
 const char* Gettext::getLocale()

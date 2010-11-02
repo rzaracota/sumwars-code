@@ -622,7 +622,7 @@ void DialogueWindow::updateSpeechBubbles()
 		
 		if (label->getText() != ctext)
 		{
-			label->setText(ctext);
+			label->setText((CEGUI::utf8*)ctext);
 		}
 		
 		label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,horzoffset), CEGUI::UDim(0,height)));
@@ -678,7 +678,7 @@ void DialogueWindow::updateSpeechBubbles()
 
 			if (label->getText() != cstring)
 			{
-				label->setText(cstring);
+				label->setText((CEGUI::utf8*)cstring.c_str());
 			}
 			
 			label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,horzoffset), CEGUI::UDim(0,height)));

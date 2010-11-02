@@ -28,6 +28,7 @@
 #include "music.h"
 #include "tooltipmanager.h"
 #include "debugpanel.h"
+#include "ceguiutility.h"
 
 MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc)
 {
@@ -2201,7 +2202,12 @@ void MainWindow::updateChatContent()
 
         //TODO
 		CEGUI::String text = label->getText();
-		float width =  50; //PixelAligned(fnt->getFormattedTextExtent(text, area, CEGUI::LeftAligned));
+		std::string dext = text.c_str();
+
+		CEGUI::UVector2 vec = CEGUIUtility::getWindowSizeForText(text.c_str(), fnt);
+
+		//PixelAligned(fnt->getFormattedTextExtent(text, area, CEGUI::LeftAligned));
+		float width =  CEGUIUtility::getWindowSizeForText(text.c_str(), fnt).asRelative(area).d_x; 
 		
 		float maxwidth = area.d_width * 0.43;
 		width += 3;
@@ -2212,8 +2218,8 @@ void MainWindow::updateChatContent()
 		
 		CEGUI::Size larea = area;
 		larea.d_width = width;
-		float height =  50; //PixelAligned(fnt->getFormattedLineCount(text, larea, CEGUI::WordWrapLeftAligned) * fnt->getLineSpacing());
-        
+		float height =  CEGUIUtility::getWindowSizeForText(text.c_str(), fnt).asRelative(area).d_y; //PixelAligned(fnt->getFormattedLineCount(text, larea, CEGUI::WordWrapLeftAligned) * fnt->getLineSpacing());
+
 		float relwidth = width / area.d_width;
 		float relheight = (height+6) / area.d_height;
 		
@@ -2221,7 +2227,8 @@ void MainWindow::updateChatContent()
 				   || fabs(label->getArea().getHeight().d_scale - relheight) > 0.0001)
 		{
 			label->setPosition(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.82f - relheight)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(relwidth), cegui_reldim(relheight)));
+			//label->setSize(CEGUI::UVector2(cegui_reldim(relwidth), cegui_reldim(relheight)));
+			label->setSize(vec);
 		}
 		
 		pl->updateMessageTimer(timer.getTime());

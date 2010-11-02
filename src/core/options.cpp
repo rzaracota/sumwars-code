@@ -9,6 +9,11 @@
 #include "../tinyxml/tinyxml.h"
 #include "elementattrib.h"
 
+#ifdef WIN32
+#define WIN32_LEAN_AND_MEAN
+#include "Windows.h"
+#endif
+
 Options::Options()
 {
 	init();
@@ -318,7 +323,14 @@ float Options::getMusicVolume()
 
 std::string Options::getLocale()
 {
+#ifdef WIN32
+	char locale[100];
+	GetLocaleInfo(LOCALE_USER_DEFAULT,
+						  LOCALE_SISO639LANGNAME,
+						  locale, sizeof(locale));
+#else
 	const char* locale = Gettext::getLocale();
+#endif
 
 	std::string locstr = "";
 	if (locale != 0)

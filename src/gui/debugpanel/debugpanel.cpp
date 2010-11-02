@@ -31,7 +31,7 @@ void DebugPanel::createPanel(bool visible)
 	m_rootWindow = m_winManager->createWindow("TaharezLook/FrameWindow", "DebugPanel");
 	m_rootWindow->setPosition(UVector2(UDim(0.1f, 0.0f), UDim(0.1f, 0.0f)));
 	m_rootWindow->setSize(UVector2(UDim(0.6f, 0.0f), UDim(0.6f, 0.0f)));
-	m_rootWindow->setText("Debug Panel");
+	m_rootWindow->setText((CEGUI::utf8*)"Debug Panel");
 	m_gameScreen->addChildWindow(m_rootWindow);
 
 	m_rootWindow->subscribeEvent(CEGUI::FrameWindow::EventCloseClicked, Event::Subscriber(&DebugPanel::handleCloseWindow, this));
