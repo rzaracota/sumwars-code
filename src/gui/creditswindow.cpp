@@ -67,16 +67,20 @@ CreditsWindow::CreditsWindow(Document* doc)
 			archName = i->second;
 			content.push_back(archName + LINE_ENDING);
 		}
+		content.push_back(std::string(" ") + LINE_ENDING);
 	}
+	
+	credits->setFont("DejaVuSerif-12");
 	
 	std::string added;
 	CEGUI::UVector2 sz = credits->getSize();
 	sz.d_y = CEGUIUtility::getWindowSizeForText(content, credits->getFont(), added).d_y;
 	credits->setSize(sz);
+	credits->setMaxSize(CEGUI::UVector2(CEGUI::UDim(5.0,5.0), CEGUI::UDim(5.0,5.0)));
 	credits->setText(added);
 	credits->setProperty("BackgroundColours", "tl:99000000 tr:99000000 bl:99000000 br:99000000");
 	credits->setAlpha(0.9);
-	credits->setFont("DejaVuSerif-12");
+	
 	
 	updateTranslation();
 	
@@ -95,10 +99,11 @@ void CreditsWindow::updateTranslation()
 	CEGUI::UVector2 size = wtext->getSize();
 	CEGUI::Rect isize = wtext->getUnclippedInnerRect ();
 	//float height = PixelAligned(CEGUIUtility::fitTextToWindow(wtext->getText(), isize.getWidth(), CEGUIUtility::WordWrapCentred, fnt).lines * fnt->getLineSpacing());
-	//float height = CEGUIUtility::getWindowSizeForText(wtext->getText().c_str(), fnt);
 	size.d_y = CEGUIUtility::getWindowSizeForText(wtext->getText().c_str(), fnt).d_y; //CEGUI::UDim(0.0, height);
-	wtext->setSize(size);
 	
+	// FIXME: this factor is a hack to achieve the right window size. Size computation is not correct yet
+	size.d_y.d_scale *= 1.2;
+	wtext->setSize(size);
 }
 
 void CreditsWindow::update()
@@ -112,18 +117,18 @@ void CreditsWindow::update()
 	else
 	{
 		float starttime = 2000;	// time before scrolling starts
-		float alltime = 20000;	// time for scrolling
+		float alltime = 40000;	// time for scrolling
 		float pos = (m_shown_timer.getTime()-starttime)/alltime;
 		
 		if (pos > 1.0)
 			pos = 1.0;
 		
+		if (pos < 0.0)
+			pos = 0.0;
 		
 		// credits scrolling
 		CEGUI::Window* wtext = win_mgr.getWindow("CreditWindow");
 		CEGUI::ScrollablePane* pane  = static_cast<CEGUI::ScrollablePane*>(win_mgr.getWindow("CreditsPane"));
-		
-		CEGUI::Font* fnt = wtext->getFont();
 
 		pane->setVerticalScrollPosition(pos);
 	}

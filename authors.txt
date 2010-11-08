@@ -12,7 +12,6 @@
 	
 [D Graphics]
 =Andreas Schönefeldt
-=Andreas Schönefeldt
 =Steffen Schönefeldt (Kalimgard)
 =Christian Wittmann (psycho)
 =Francesco Miglietta (hal9000)
@@ -27,7 +26,7 @@
 
 [G Sounds]
 =Michael Kempf (Hangman)
-=rtisticdude
+=artisticdude
 =quobodup
 
 [H Music]

@@ -2,6 +2,7 @@
 #include "CEGUI/CEGUI.h"
 #include <iostream>
 #include <algorithm>
+#include "debug.h"
 
 std::string CEGUIUtility::stripColours(const std::string &input)
 {
@@ -93,7 +94,7 @@ CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> list, 
 	while(count <= size)  
 		count++;
 
-    textHeight = count * font->getFontHeight();
+	textHeight = count * (font->getLineSpacing());
 
     return UVector2(UDim((textWidth/screenSize.d_width) + 0.05f, 0), UDim(textHeight / screenSize.d_height, 0) );
 }
