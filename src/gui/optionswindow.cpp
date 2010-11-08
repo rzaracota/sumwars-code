@@ -207,7 +207,24 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 
 	cbo->setReadOnly(true);
 
-	cbo->setItemSelectState((size_t) 0,true);
+	int selection = 0;
+	std::string locale = Options::getInstance()->getLocale();
+	int pos = locale.find(".");
+	if (pos != std::string::npos)
+	{
+		locale = locale.substr(0,pos);
+	}
+	DEBUG("%s",locale.c_str());
+	
+	for (int i=0; i<cbo->getItemCount(); i++)
+	{
+		StrListItem* item = static_cast<StrListItem*>(cbo->getListboxItemFromIndex(i));
+		if (locale == item->m_data)
+		{
+			selection = i;
+		}
+	}
+	cbo->setItemSelectState((size_t) selection,true);
 	cbo->handleUpdatedListItemData();
 
 	cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onLanguageSelected, this));

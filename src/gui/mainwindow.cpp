@@ -267,7 +267,7 @@ void MainWindow::update(float time)
 	// Sprache anpassen
 	if (Gettext::getLocaleChanged())
 	{
-		DEBUG("language changed");
+		DEBUGX("language changed");
 		std::map<std::string, Window*>::iterator it;
 		for (it= m_sub_windows.begin(); it != m_sub_windows.end(); ++it)
 		{
