@@ -1068,7 +1068,7 @@ void World::handleMessage(TranslatableString msg, int slot)
 			Player* pl = static_cast<Player*>((*m_player_slots)[slot]);
 			if (pl != 0)
 			{
-				plmsg += "[";
+				plmsg += "<";
 				plmsg += pl->getName().getRawText();
 
 				if (pl->getSpeakText().m_text == "" && pl->getDialogue() == 0)
@@ -1079,7 +1079,7 @@ void World::handleMessage(TranslatableString msg, int slot)
 					text.m_in_dialogue = false;
 					pl->speakText(text);
 				}
-				plmsg += "] ";
+				plmsg += "> ";
 				
 				trsmsg = plmsg + smsg;
 			}

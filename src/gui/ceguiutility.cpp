@@ -29,8 +29,7 @@ std::list< std::string > CEGUIUtility::getTextAsList(const std::string &text)
         // ignore new line directly at the beginning of the string
         if (pos != 0)
         {
-            std::string substr = temp.substr(0, pos-ERASE_CNT);
-            l.push_back(temp.substr(0, pos-ERASE_CNT));
+            l.push_back(temp.substr(0, pos));
             temp.erase(0, pos+ERASE_CNT);
             pos = temp.find(LINE_ENDING);
         }
@@ -41,6 +40,11 @@ std::list< std::string > CEGUIUtility::getTextAsList(const std::string &text)
 			pos = temp.find(LINE_ENDING);
 		}
     }
+    
+    if (temp != "")
+	{
+		l.push_back(temp);
+	}
 	
     return l;
 }

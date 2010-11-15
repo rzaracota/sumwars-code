@@ -2183,10 +2183,19 @@ void MainWindow::updateChatContent()
 	CEGUI::Window* label;
 	label =  win_mgr.getWindow("ChatContent");
 	
-	if (label->getText() != (CEGUI::utf8*) pl->getMessages().c_str())
+	// escape all the [ brackets
+	// CEGUI >= 0.7 uses [brackets] for markup
+	std::string rawtext = pl->getMessages();
+	size_t pos = 0;
+	while ((pos = rawtext.find('[',pos)) != std::string::npos)
 	{
-		label->setText((CEGUI::utf8*) pl->getMessages().c_str());
-		
+		rawtext.replace(pos,1,"\\[");
+		pos += 2;
+	}
+	
+	if (label->getText() != (CEGUI::utf8*) rawtext.c_str())
+	{
+		label->setText((CEGUI::utf8*) rawtext.c_str() );
 	}
 	
 	bool vis = true;
@@ -2202,6 +2211,7 @@ void MainWindow::updateChatContent()
 
         //TODO
 		CEGUI::String text = label->getText();
+		//std::cout << text << "\n";
 		std::string dext = text.c_str();
 
 		CEGUI::UVector2 vec = CEGUIUtility::getWindowSizeForText(text.c_str(), fnt);
@@ -2223,12 +2233,14 @@ void MainWindow::updateChatContent()
 		float relwidth = width / area.d_width;
 		float relheight = (height+6) / area.d_height;
 		
-		if ( fabs(label->getArea().getWidth().d_scale - relwidth) > 0.0001
-				   || fabs(label->getArea().getHeight().d_scale - relheight) > 0.0001)
+		if ( fabs(label->getArea().getWidth().d_scale - vec.d_x.d_scale) > 0.0001
+			|| fabs(label->getArea().getHeight().d_scale - vec.d_y.d_scale) > 0.0001)
 		{
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.82f - relheight)));
+			label->setPosition(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.82f - vec.d_y.d_scale)));
 			//label->setSize(CEGUI::UVector2(cegui_reldim(relwidth), cegui_reldim(relheight)));
 			label->setSize(vec);
+			DEBUGX("old size %f %f",label->getArea().getWidth().d_scale, label->getArea().getHeight().d_scale);
+			DEBUGX("new size %f %f", vec.d_x.d_scale, vec.d_y.d_scale);
 		}
 		
 		pl->updateMessageTimer(timer.getTime());
