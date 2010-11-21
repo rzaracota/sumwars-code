@@ -74,7 +74,7 @@
 		
 		<Topic name="talk_antidot" start_option="Still alive?">
 			<Condition>
-				return((scout.started == true) and (scout.antidot ~= true))
+				return((scout.antidot == true) and (scout.finished ~=true))
 			</Condition>
 			<Effect>
 				addSpeaker(getSpeaker("Wounded Scout"),"scout")
@@ -85,9 +85,6 @@
 		</Topic>
 		
 		<Topic name="antidot">
-			<Condition>
-				return((scout.antidot == true) and (scout.finished ~=true))
-			</Condition>
 			<Effect>
 				speak("scout",_("good... now, blue potion"),"injured3")
 				speak("player",_("A blue potion?"), "thoughtful")
