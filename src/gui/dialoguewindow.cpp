@@ -654,7 +654,7 @@ void DialogueWindow::updateSpeechBubbles()
 				label = win_mgr.getWindow(stream.str());
 			}
 			
-                        CEGUI::String cstring = (CEGUI::utf8*) it->first.getTranslation().c_str();
+			CEGUI::String cstring = (CEGUI::utf8*) it->first.getTranslation().c_str();
 			
 			// Anzahl Antworten bei Voting eintragen
 			if (question->m_weighted_answers.count(nr) > 0)
