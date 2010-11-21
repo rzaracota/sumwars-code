@@ -234,7 +234,7 @@ void DialogueWindow::update()
 						{
 							CEGUI::UVector2 size = wtext->getSize();
 							CEGUI::Rect isize = wtext->getUnclippedInnerRect ();
-                                                        FormatedText txt = CEGUIUtility::fitTextToWindow(text, isize.getWidth(), CEGUIUtility::WordWrapCentred, fnt);
+							FormatedText txt = CEGUIUtility::fitTextToWindow((CEGUI::utf8*)text.c_str(), isize.getWidth(), CEGUIUtility::WordWrapCentred, fnt);
 							float height = PixelAligned(txt.lines * fnt->getLineSpacing());
 							size.d_y = CEGUI::UDim(0.0, height);
 							wtext->setSize(size);
@@ -615,7 +615,7 @@ void DialogueWindow::updateSpeechBubbles()
 		if (elemwidth > maxwidth)
 		{
 			elemwidth = maxwidth;
-                        lines = CEGUIUtility::fitTextToWindow(ctext,rect.getWidth(), CEGUIUtility::WordWrapLeftAligned, font).lines;
+						lines = CEGUIUtility::fitTextToWindow((CEGUI::utf8*)ctext,rect.getWidth(), CEGUIUtility::WordWrapLeftAligned, font).lines;
 			elemheight = lines * lineheight;
 		}
 		width = MathHelper::Max(width,elemwidth);
@@ -670,7 +670,7 @@ void DialogueWindow::updateSpeechBubbles()
 			if (elemwidth > maxwidth)
 			{
 				elemwidth = maxwidth;
-                                lines = CEGUIUtility::fitTextToWindow(cstring,maxwidth, CEGUIUtility::WordWrapLeftAligned, font).lines;
+				lines = CEGUIUtility::fitTextToWindow((CEGUI::utf8*)cstring.c_str(),maxwidth, CEGUIUtility::WordWrapLeftAligned, font).lines;
 				elemheight = lines * lineheight;
 			}
 			width = MathHelper::Max(width,elemwidth);

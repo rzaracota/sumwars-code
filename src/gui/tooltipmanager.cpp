@@ -37,7 +37,7 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
 
     if ( type == Tooltip::Main )
     {
-        Tooltip *tt = new Tooltip ( gamescreen, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f );
+		Tooltip *tt = new Tooltip ( gamescreen, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.7f );
         fadeAllOut();
         m_CurrentMain = tt;
         tt->create ( msg, position, size, tempFont );
@@ -54,7 +54,7 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
             {
                 if ( !temp->getChild() )
                 {
-                    Tooltip *tt = new Tooltip ( gamescreen, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f );
+					Tooltip *tt = new Tooltip ( gamescreen, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.7f );
                     CEGUI::UVector2 pos = temp->getCEGUIWindow()->getPosition();
                     pos.d_x += m_CurrentMain->getCEGUIWindow()->getWidth();
                     tt->create ( msg, pos, size, tempFont );
@@ -70,7 +70,7 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
         }
         else
         {
-            Tooltip *tt = new Tooltip ( gamescreen, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.9f );
+			Tooltip *tt = new Tooltip ( gamescreen, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.7f );
             CEGUI::UVector2 pos = m_CurrentMain->getCEGUIWindow()->getPosition();
             pos.d_x += m_CurrentMain->getCEGUIWindow()->getWidth();
             tt->create ( msg, pos, size, tempFont );

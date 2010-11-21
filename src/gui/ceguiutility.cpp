@@ -152,7 +152,7 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 	}
 	*/
 
-	CEGUI::String newText(text.c_str());
+	CEGUI::String newText((CEGUI::utf8*)text.c_str());
 	
 	// handle wraping cases
 	size_t lineStart = 0, lineEnd = 0;
