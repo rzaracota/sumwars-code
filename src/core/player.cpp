@@ -1079,6 +1079,10 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 	Item* si;
 	DropSlot ds;
 	int gold;
+	
+	Item::Size itemsize;
+	short pos;
+	
 	// Wahrscheinlichkeiten BIG, MEDIUM, SMALL, GOLD
 	float prob[4] = {0.1, 0.2, 0.2, 0.2};
 
@@ -1331,7 +1335,30 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				}
 				else
 				{
-					getStash()->swapItem(si,command->m_id);
+					// expected size of the item
+					itemsize = Item::BIG;
+					if (command->m_id >= Equipement::MEDIUM_ITEMS)
+						itemsize = Item::MEDIUM;
+					if (command->m_id >= Equipement::SMALL_ITEMS)
+						itemsize = Item::SMALL;
+					
+					if (itemsize == si->m_size)
+					{
+						getStash()->swapItem(si,command->m_id);
+					}
+					else
+					{
+						// item did not fit where the player placed it
+						// just drop it into the first free place
+						pos = getStash()->insertItem(si);
+						
+						// if insert was succesful, set pointer to 0
+						// else, the item will be reinserted into player inventory
+						if (pos != Equipement::NONE)
+						{
+							si = 0;
+						}
+					}
 				}
 
 				// wieder hinein getauscht, wenn Handel nicht erfolgreich
