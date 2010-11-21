@@ -94,8 +94,8 @@ bool MainWindow::initInputs()
 	pl.insert(OIS::ParamList::value_type("WINDOW", Ogre::StringConverter::toString(hWnd)));
 
 #ifndef WIN32
-	pl.insert( std::make_pair(std::string("x11_mouse_grab"), std::string("false") ) );
-	pl.insert( std::make_pair(std::string("x11_keyboard_grab"), std::string("false")));
+	//pl.insert( std::make_pair(std::string("x11_mouse_grab"), std::string("false") ) );
+	//pl.insert( std::make_pair(std::string("x11_keyboard_grab"), std::string("false")));
 #else
 	pl.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_FOREGROUND" )));
     pl.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_NONEXCLUSIVE")));
@@ -2211,14 +2211,10 @@ void MainWindow::updateChatContent()
 
         //TODO
 		CEGUI::String text = label->getText();
-		//std::cout << text << "\n";
-		std::string dext = text.c_str();
 
 		CEGUI::UVector2 vec = CEGUIUtility::getWindowSizeForText(text.c_str(), fnt);
 
-		//PixelAligned(fnt->getFormattedTextExtent(text, area, CEGUI::LeftAligned));
-		float width =  CEGUIUtility::getWindowSizeForText(text.c_str(), fnt).asRelative(area).d_x; 
-		
+		float width = vec.asRelative(area).d_x;
 		float maxwidth = area.d_width * 0.43;
 		width += 3;
 		if (width > maxwidth)
@@ -2228,7 +2224,7 @@ void MainWindow::updateChatContent()
 		
 		CEGUI::Size larea = area;
 		larea.d_width = width;
-		float height =  CEGUIUtility::getWindowSizeForText(text.c_str(), fnt).asRelative(area).d_y; //PixelAligned(fnt->getFormattedLineCount(text, larea, CEGUI::WordWrapLeftAligned) * fnt->getLineSpacing());
+		float height =  vec.asRelative(larea).d_y; 
 
 		float relwidth = width / area.d_width;
 		float relheight = (height+6) / area.d_height;

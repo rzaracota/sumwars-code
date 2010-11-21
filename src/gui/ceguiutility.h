@@ -13,13 +13,8 @@ public:
 	size_t lines;
 };
 
-#ifdef WIN32
-#define LINE_ENDING "\r\n"
-#define ERASE_CNT 2
-#else
 #define LINE_ENDING "\n"
 #define ERASE_CNT 1
-#endif
 
 class CEGUIUtility
 {
