@@ -19,3 +19,7 @@
 <RenderInfo name="bloodbeak" parent="birdbase">
 	<Entity source="bloodbeak.mesh"/>
 </RenderInfo>
+
+<RenderInfo name="bat" parent="birdbase">
+	<Entity source="bat.mesh"/>
+</RenderInfo>

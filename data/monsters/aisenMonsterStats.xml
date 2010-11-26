@@ -275,3 +275,48 @@
 	<SubGroup subtype="spider_cave" number="3" prob="1" />
 	<SubGroup subtype="spider_cave" number="5" prob="0.4" />
 </MonsterGroup>
+
+<Monster type="MONSTER" subtype="bat_giant" name="Giant Bat" fraction="monster" race="animal" layer="AIR">
+	<RenderInfo name="bat" />
+	<Dropslots >
+		<Dropslot pbig="0.06" pmedium="0.08" psmall="0.07" pgold="0.05" min_gold="30" max_gold="80" min_level="5" max_level="13" magic_prob="0.2" magic_power="450" />
+		<Dropslot pbig="0.06" pmedium="0.08" psmall="0.04" pgold="0.05" min_gold="20" max_gold="50" min_level="4" max_level="8" magic_prob="0.4" magic_power="300" />
+	</Dropslots>
+	
+	<BasicAttributes
+		experience="40"
+		level="11"
+		max_health="180"
+		armor="5"
+		block="0"
+		attack="120"
+		power="150"
+		strength="25"
+		dexterity="30"
+		magic_power="0"
+		willpower="15"
+		resistances_physical="0"
+		resistances_air="40"
+		resistances_ice="0"
+		resistances_fire="-30"
+		resistances_cap_physical="50"
+		resistances_cap_air="50"
+		resistances_cap_ice="50"
+		resistances_cap_fire="0"
+		walk_speed="3000"
+		attack_speed="1200"
+		step_length="1.0"
+		attack_range="2.5"
+	>
+		<Ability type="walk"/>
+		
+		<Ability type="attack" rating="1"/>
+		<Ability type="noaction" />
+		<Ability type="die"/>
+		
+	</BasicAttributes>
+	
+	<Geometry radius="0.5" />
+	
+	<AI ai_sight_range="12" />
+</Monster>
