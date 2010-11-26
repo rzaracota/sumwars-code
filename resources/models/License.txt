@@ -467,12 +467,14 @@ Files:
 	skeleton.skeleton
 	spider.skeleton
 	wolf.skeleton
-
+	bat.skeleton
 
 
 Artwork provided by: Psycho
 Default license: CC-BY-SA
 Files:
-	spider.mesh
+	bat.mesh
 	cryptMaylon.mesh
+	spider.mesh
+	
 	
