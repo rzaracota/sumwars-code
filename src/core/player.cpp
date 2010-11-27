@@ -1342,21 +1342,24 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					if (command->m_id >= Equipement::SMALL_ITEMS)
 						itemsize = Item::SMALL;
 					
-					if (itemsize == si->m_size)
+					if(si != 0)
 					{
-						getStash()->swapItem(si,command->m_id);
-					}
-					else
-					{
-						// item did not fit where the player placed it
-						// just drop it into the first free place
-						pos = getStash()->insertItem(si);
-						
-						// if insert was succesful, set pointer to 0
-						// else, the item will be reinserted into player inventory
-						if (pos != Equipement::NONE)
+						if (itemsize == si->m_size)
 						{
-							si = 0;
+							getStash()->swapItem(si,command->m_id);
+						}
+						else
+						{
+							// item did not fit where the player placed it
+							// just drop it into the first free place
+							pos = getStash()->insertItem(si);
+						
+							// if insert was succesful, set pointer to 0
+							// else, the item will be reinserted into player inventory
+							if (pos != Equipement::NONE)
+							{
+								si = 0;
+							}
 						}
 					}
 				}
