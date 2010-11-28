@@ -1336,7 +1336,9 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				else
 				{
 					// expected size of the item
-					itemsize = Item::BIG;
+					itemsize = Item::SIZE_NONE;
+					if (command->m_id >= Equipement::BIG_ITEMS)
+						itemsize = Item::BIG;
 					if (command->m_id >= Equipement::MEDIUM_ITEMS)
 						itemsize = Item::MEDIUM;
 					if (command->m_id >= Equipement::SMALL_ITEMS)
