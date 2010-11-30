@@ -1099,6 +1099,342 @@ msgstr ""
 msgid "gold amulet"
 msgstr ""
 
+#: scout.xml
+msgid "The wounded scout"
+msgstr ""
+
+#: scout.xml
+msgid ""
+"I rescued a scout and hopefully gained some goodwill from the local militia. "
+"Whatever good that will do."
+msgstr ""
+
+#: scout.xml
+msgid ""
+"I really stumbled across a scout in the goblin infested caves west of "
+"Dwarfenwall. He is wounded, lost his gear to some spiders and asked me to "
+"fix it for him. I really wonder if I should do this... then again it would "
+"be an excuse to venture deeper into the caves that are obviously not under "
+"control by the undead."
+msgstr ""
+
+#: scout.xml
+msgid "greyCurseCave"
+msgstr ""
+
+#: scout.xml
+msgid "Wounded Scout"
+msgstr ""
+
+#: scout.xml
+msgid "Are you alive?"
+msgstr ""
+
+#: scout.xml
+msgid "Hey, are you alright?"
+msgstr ""
+
+#: scout.xml
+msgid "Does it look... 'alright' to you?"
+msgstr ""
+
+#: scout.xml
+msgid "Pretty much, yes."
+msgstr ""
+
+#: scout.xml
+msgid "You can still talk, right?"
+msgstr ""
+
+#: scout.xml
+msgid ""
+"Yeah, right... now, when you're done laughing... maybe you could help me?"
+msgstr ""
+
+#: scout.xml
+msgid "I guess I could patch you up, but I can't carry you out of here."
+msgstr ""
+
+#: scout.xml
+msgid ""
+"Where I'm headed you will most certainly die a quick and meaningless death."
+msgstr ""
+
+#: scout.xml
+msgid "I can... watch my own back..."
+msgstr ""
+
+#: scout.xml
+msgid "Most of the time... at least."
+msgstr ""
+
+#: scout.xml
+msgid "But spying on the undead... evading... those blasted goblins..."
+msgstr ""
+
+#: scout.xml
+msgid "I got a little... careless."
+msgstr ""
+
+#: scout.xml
+msgid "West of here... there's a cave... pretty deep inside..."
+msgstr ""
+
+#: scout.xml
+msgid ""
+"Lot's of wolves... but a nest of spiders, too... thought I had... it under "
+"control"
+msgstr ""
+
+#: scout.xml
+msgid ""
+"really big one... there. Spider, I mean... got me good... lost my gear... "
+"but got away... somehow"
+msgstr ""
+
+#: scout.xml
+msgid ""
+"The venom... can't move at all... anymore... I had an antidote in my pack..."
+msgstr ""
+
+#: scout.xml
+msgid "So... if you could get... me my gear, I... would be good to go again..."
+msgstr ""
+
+#: scout.xml
+msgid "If you're... not afraid... that is."
+msgstr ""
+
+#: scout.xml
+msgid "You have a strange manner of asking for favors."
+msgstr ""
+
+#: scout.xml
+msgid "But since I don't have to carry you to safety, I guess it is allright."
+msgstr ""
+
+#: scout.xml
+msgid "This wouldn't happen to be your stuff, would it?"
+msgstr ""
+
+#: scout.xml
+msgid "You already... found it?"
+msgstr ""
+
+#: scout.xml
+msgid "Thanks..."
+msgstr ""
+
+#: scout.xml
+msgid "Still alive?"
+msgstr ""
+
+#: scout.xml
+msgid "Do you... have my gear?"
+msgstr ""
+
+#: scout.xml
+msgid "Not yet, no."
+msgstr ""
+
+#: scout.xml
+msgid ""
+"Shame. It seems I'm already capable of... being paralyzed... without your "
+"help."
+msgstr ""
+
+#: scout.xml
+msgid ""
+"Thanks for... checking back on me though. I'll be here... if you need me."
+msgstr ""
+
+#: scout.xml
+msgid "You are kind of messed up, you know that?"
+msgstr ""
+
+#: scout.xml
+msgid "..."
+msgstr ""
+
+#: scout.xml
+msgid "Here it is."
+msgstr ""
+
+#: scout.xml
+msgid "good... now, blue potion"
+msgstr ""
+
+#: scout.xml
+msgid "A blue potion?"
+msgstr ""
+
+#: scout.xml
+msgid "You do realize there is at least a score of 'blue' potions here?"
+msgstr ""
+
+#: scout.xml
+msgid ""
+"They just... turn out that... way everytime... it's the one... with the "
+"light shade of turquoise."
+msgstr ""
+
+#: scout.xml
+msgid "No... too... light blue"
+msgstr ""
+
+#: scout.xml
+msgid "That's... it"
+msgstr ""
+
+#: scout.xml
+msgid "Finally!"
+msgstr ""
+
+#: scout.xml
+msgid "Remember me not to kill you after all the trouble I went through."
+msgstr ""
+
+#: scout.xml
+msgid "Gladly. Really, thank you for saving my hide."
+msgstr ""
+
+#: scout.xml
+msgid "You best stay out of trouble."
+msgstr ""
+
+#: scout.xml
+msgid ""
+"Because I seriously do NOT want to rummage through your happy collection of "
+"identical looking special-purpose-potions."
+msgstr ""
+
+#: scout.xml
+msgid "Sorry about that. Normally I'm the only one who has to keep them apart."
+msgstr ""
+
+#: scout.xml
+msgid "Allright. Now that this is done, I will be on my way."
+msgstr ""
+
+#: scout.xml
+msgid ""
+"I will rest a little more and then be on my way too, but in the other "
+"direction."
+msgstr ""
+
+#: scout.xml
+msgid "greyWolfcave"
+msgstr ""
+
+#: goblin_raid.xml
+#, fuzzy
+msgid "goblin_raid"
+msgstr "слепой"
+
+#: goblin_raid.xml
+msgid ""
+"Well, I got a little money for killing some goblins I would have wasted "
+"anyway. Not a bad day."
+msgstr ""
+
+#: goblin_raid.xml
+msgid ""
+"It seems the sergeant from Joringsbridge is willing to pay, but he wants me "
+"to help those peasants first. There's no trust in this world anymore."
+msgstr ""
+
+#: goblin_raid.xml
+msgid ""
+"I discovered plans of a goblin raid set for a village called Joringsbridge. "
+"They were found amongst the remains of some goblin tribe. Guess I busted "
+"that party prematurely. Maybe someone official will appreciate not having "
+"hordes of goblins kicking in their doors."
+msgstr ""
+
+#: goblin_raid.xml
+msgid "aisDarkClearing"
+msgstr ""
+
+#: goblin_raid.xml
+msgid "Sergeant Lutterer"
+msgstr ""
+
+#: goblin_raid.xml
+msgid "Crude battle plans"
+msgstr ""
+
+#: goblin_raid.xml
+msgid "Hey, sergeant, I found these in the woods with some goblins."
+msgstr ""
+
+#: goblin_raid.xml
+msgid "This looks like it could be Joringsbridge. Are you sure it's reliable?"
+msgstr ""
+
+#: goblin_raid.xml
+msgid "Some kind of head honcho shaman had them, so I figure they mean it."
+msgstr ""
+
+#: goblin_raid.xml
+msgid "Meant it. Whatever."
+msgstr ""
+
+#: goblin_raid.xml
+msgid "Hey, sergeant, ready to pay for the pre-emptive rescue of the village?"
+msgstr ""
+
+#: goblin_raid.xml
+msgid "I guess you can be trusted."
+msgstr ""
+
+#: goblin_raid.xml
+msgid "Let me thank you on behalf of the whole village."
+msgstr ""
+
+#: goblin_raid.xml
+msgid "It's always a pleasure when a good deed goes rewarded."
+msgstr ""
+
+#: goblin_raid.xml
+msgid "Sorry, but I don't know you."
+msgstr ""
+
+#: goblin_raid.xml
+msgid "Maybe I will show some gratitude after you help Michel's family."
+msgstr ""
+
+#: goblin_raid.xml
+msgid "As they say: One hand washes the other."
+msgstr ""
+
+#: goblin_raid.xml
+msgid "Do you want to help the peasant?"
+msgstr ""
+
+#: goblin_raid.xml
+msgid "Then I better get back to saving helpless peasants, no?"
+msgstr ""
+
+#: goblin_raid.xml
+msgid "Fine, I'll wipe out those goblins for you."
+msgstr ""
+
+#: goblin_raid.xml
+msgid "You do realise there's plenty more where they came from?"
+msgstr ""
+
+#: goblin_raid.xml
+msgid "Just go already."
+msgstr ""
+
+#: goblin_raid.xml
+msgid "Whatever. It's not like I need the money or anything."
+msgstr ""
+
+#: goblin_raid.xml
+msgid "And I could care less what happens to some peasant family."
+msgstr ""
+
 #: joringsbridge_npc.xml
 msgid "Gertlinde Kampfer"
 msgstr ""
@@ -1149,10 +1485,6 @@ msgstr ""
 msgid ""
 "If something is your's just say the word. For a small finder's fee you can "
 "have it back."
-msgstr ""
-
-#: joringsbridge_npc.xml
-msgid "Sergeant Lutterer"
 msgstr ""
 
 #: joringsbridge_npc.xml
@@ -1228,6 +1560,109 @@ msgstr ""
 msgid "Who knows if your physique will help you against that, too?"
 msgstr ""
 
+#: joringsbridge_npc.xml
+msgid "Welcome to the humble... village, they call it... of Joringsbridge."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid ""
+"I have been stationed here due to the unfathomable wisdom of the Council."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "If you want, I can add a certain something to your weapons."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid ""
+"I am also quite adept at imbuing clothes with extra protection against the "
+"elements."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Nothing more to do anyway."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Why can't you use ice?"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Of course I know how to conjure ice..."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid ""
+"but, as you are no doubt unaware, casting and enchanting are two utterly "
+"different activities."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Be grateful I am able to enchant two elements."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "That's a rare talent, just so you know. "
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Enchant Equipment"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Armor"
+msgstr "Защита"
+
+#: joringsbridge_npc.xml
+msgid "Fire resistance"
+msgstr "Устойчивость к огню"
+
+#: joringsbridge_npc.xml
+msgid "Air resistance"
+msgstr "Устойчивость к воздуху"
+
+#: joringsbridge_npc.xml
+msgid "Weapon"
+msgstr ""
+
+#: joringsbridge_npc.xml
+#, fuzzy
+msgid "Fire damage"
+msgstr "Основной урон"
+
+#: joringsbridge_npc.xml
+#, fuzzy
+msgid "Air damage"
+msgstr "урон"
+
+#: joringsbridge_npc.xml
+msgid "Increase Firemagic"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Which part of your equipment should be enchanted?"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "It may be helpful if you would equip something first."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "Which Enchantment do you want?"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "I may work for the Council, but I don't run a charity. The price is $1."
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "The price is $1"
+msgstr ""
+
+#: joringsbridge_npc.xml
+msgid "As I always say: No enchantment should be applied a second time."
+msgstr ""
+
 #: dwarfcastle.xml
 msgid "Haffgar"
 msgstr ""
@@ -1266,6 +1701,68 @@ msgstr ""
 
 #: dwarfcastle.xml
 msgid "If you like something just point it out and I'll tell you a price."
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "Enchanter Fazhir"
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "Enchant Items"
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "Health Bonus"
+msgstr ""
+
+#: dwarfcastle.xml
+#, fuzzy
+msgid "Armor class"
+msgstr "Защита"
+
+#: dwarfcastle.xml
+msgid "Willpower"
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "Attack speed"
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "Attack"
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "Power"
+msgstr ""
+
+#: dwarfcastle.xml
+#, fuzzy
+msgid "Ice damage"
+msgstr "Основной урон"
+
+#: dwarfcastle.xml
+msgid "Gloves"
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "Dexterity"
+msgstr "Ловкость"
+
+#: dwarfcastle.xml
+msgid "Block"
+msgstr "Блок"
+
+#: dwarfcastle.xml
+msgid "Hey you have no item equiped there"
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "You dont have enough gold to pay the price of $1"
+msgstr ""
+
+#: dwarfcastle.xml
+msgid "It seems that this item already has such an enchantment."
 msgstr ""
 
 #: medairnpc.xml
@@ -1369,88 +1866,8 @@ msgid "Enchanter"
 msgstr ""
 
 #: npc.xml
-msgid "Enchant Items"
-msgstr ""
-
-#: npc.xml
-msgid "Armor"
-msgstr "Защита"
-
-#: npc.xml
-msgid "Health Bonus"
-msgstr ""
-
-#: npc.xml
-#, fuzzy
-msgid "Armor class"
-msgstr "Защита"
-
-#: npc.xml
-msgid "Fire resistance"
-msgstr "Устойчивость к огню"
-
-#: npc.xml
 msgid "Ice resistance"
 msgstr "Устойчивость к льду"
-
-#: npc.xml
-msgid "Air resistance"
-msgstr "Устойчивость к воздуху"
-
-#: npc.xml
-msgid "Weapon"
-msgstr ""
-
-#: npc.xml
-#, fuzzy
-msgid "Fire damage"
-msgstr "Основной урон"
-
-#: npc.xml
-#, fuzzy
-msgid "Ice damage"
-msgstr "Основной урон"
-
-#: npc.xml
-#, fuzzy
-msgid "Air damage"
-msgstr "урон"
-
-#: npc.xml
-msgid "Gloves"
-msgstr ""
-
-#: npc.xml
-msgid "Dexterity"
-msgstr "Ловкость"
-
-#: npc.xml
-msgid "Block"
-msgstr "Блок"
-
-#: npc.xml
-msgid "Which part of your equipment should be enchanted?"
-msgstr ""
-
-#: npc.xml
-msgid "Hey you have no item equiped there"
-msgstr ""
-
-#: npc.xml
-msgid "Which Enchantment do you want?"
-msgstr ""
-
-#: npc.xml
-msgid "You dont have enough gold to pay the price of $1"
-msgstr ""
-
-#: npc.xml
-msgid "The price is $1"
-msgstr ""
-
-#: npc.xml
-msgid "It seems that this item already has such an enchantment."
-msgstr ""
 
 #: medair.xml
 msgid "elCnlLobby"
@@ -1465,15 +1882,7 @@ msgid "medMercCamp"
 msgstr ""
 
 #: cursedCaves.xml
-msgid "greyCurseCave"
-msgstr ""
-
-#: cursedCaves.xml
 msgid "greyCurseGrotto"
-msgstr ""
-
-#: cursedCaves.xml
-msgid "greyWolfcave"
 msgstr ""
 
 #: cursedCaves.xml
@@ -1526,10 +1935,6 @@ msgstr ""
 
 #: aisen.xml
 msgid "aisStonePlains"
-msgstr ""
-
-#: aisen.xml
-msgid "aisDarkClearing"
 msgstr ""
 
 #: aisen.xml
@@ -2349,6 +2754,10 @@ msgstr ""
 msgid "Decrease block-value"
 msgstr ""
 
+#: monster_ablt.xml
+msgid "stun_attack"
+msgstr ""
+
 #: monster_ice_ablt.xml
 msgid "melee attack with ice damage"
 msgstr ""
@@ -2666,10 +3075,6 @@ msgstr ""
 
 #: base_abilities.xml
 msgid "guard"
-msgstr ""
-
-#: base_abilities.xml
-msgid "Attack"
 msgstr ""
 
 #: base_abilities.xml
@@ -3126,6 +3531,18 @@ msgstr ""
 msgid "Spider"
 msgstr ""
 
+#: aisenMonsterStats.xml
+msgid "Psychotic Spider"
+msgstr ""
+
+#: aisenMonsterStats.xml
+msgid "Cave Spider"
+msgstr ""
+
+#: aisenMonsterStats.xml
+msgid "Giant Bat"
+msgstr ""
+
 #: councilNPCStats.xml
 msgid "Tolec"
 msgstr ""
@@ -3177,6 +3594,10 @@ msgstr ""
 
 #: council_monsters.xml
 msgid "Inferno Behemoth"
+msgstr ""
+
+#: aisenNPCStats.xml
+msgid "Scout"
 msgstr ""
 
 #: aisenNPCStats.xml

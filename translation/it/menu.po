@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-06 22:38+0200\n"
+"POT-Creation-Date: 2010-11-30 21:38+0100\n"
 "PO-Revision-Date: 2010-07-25 09:49\n"
 "Last-Translator: Francesco Miglietta (fra9000) <miglietta.francesco@gmail."
 "com>\n"
@@ -335,7 +335,7 @@ msgstr "Opzioni"
 msgid "Save & Exit"
 msgstr "Salva ed Esci"
 
-#: ../src/gui/controlpanel.cpp:345 ../src/gui/optionswindow.cpp:290
+#: ../src/gui/controlpanel.cpp:345 ../src/gui/optionswindow.cpp:307
 msgid "Inventory"
 msgstr "Inventario"
 
@@ -343,7 +343,7 @@ msgstr "Inventario"
 msgid "Character"
 msgstr "Personaggio"
 
-#: ../src/gui/controlpanel.cpp:351 ../src/gui/optionswindow.cpp:296
+#: ../src/gui/controlpanel.cpp:351 ../src/gui/optionswindow.cpp:313
 msgid "Skilltree"
 msgstr "Abilita'"
 
@@ -351,7 +351,7 @@ msgstr "Abilita'"
 msgid "Party"
 msgstr "Party"
 
-#: ../src/gui/controlpanel.cpp:357 ../src/gui/optionswindow.cpp:305
+#: ../src/gui/controlpanel.cpp:357 ../src/gui/optionswindow.cpp:322
 msgid "Quests"
 msgstr "Quests"
 
@@ -384,7 +384,7 @@ msgid "Quit"
 msgstr "Chiudi"
 
 #: ../src/gui/messageboxes.cpp:52 ../src/gui/networkwindows.cpp:95
-#: ../src/gui/networkwindows.cpp:223 ../src/gui/optionswindow.cpp:335
+#: ../src/gui/networkwindows.cpp:223 ../src/gui/optionswindow.cpp:352
 #: ../src/gui/savegamelist.cpp:170 ../src/gui/tradewindow.cpp:265
 msgid "Ok"
 msgstr "Ok"
@@ -409,67 +409,67 @@ msgstr "Porta"
 msgid "Host"
 msgstr "Ospita"
 
-#: ../src/gui/optionswindow.cpp:279
+#: ../src/gui/optionswindow.cpp:296
 msgid "Shortkeys"
 msgstr "Tasti rapidi"
 
-#: ../src/gui/optionswindow.cpp:281
+#: ../src/gui/optionswindow.cpp:298
 msgid "Gameplay"
 msgstr "Gameplay"
 
-#: ../src/gui/optionswindow.cpp:283
+#: ../src/gui/optionswindow.cpp:300
 msgid "Audio"
 msgstr "Audio"
 
-#: ../src/gui/optionswindow.cpp:285
+#: ../src/gui/optionswindow.cpp:302
 msgid "Graphic"
 msgstr "Grafica"
 
-#: ../src/gui/optionswindow.cpp:287 ../src/gui/optionswindow.cpp:332
+#: ../src/gui/optionswindow.cpp:304 ../src/gui/optionswindow.cpp:349
 msgid "Language"
 msgstr "Lingua"
 
-#: ../src/gui/optionswindow.cpp:293
+#: ../src/gui/optionswindow.cpp:310
 msgid "Character screen"
 msgstr "Personaggio"
 
-#: ../src/gui/optionswindow.cpp:299
+#: ../src/gui/optionswindow.cpp:316
 msgid "Party screen"
 msgstr "Party"
 
-#: ../src/gui/optionswindow.cpp:302
+#: ../src/gui/optionswindow.cpp:319
 msgid "Chatbox"
 msgstr "Chat"
 
-#: ../src/gui/optionswindow.cpp:308
+#: ../src/gui/optionswindow.cpp:325
 msgid "Minimap"
 msgstr "Mini Mappa"
 
-#: ../src/gui/optionswindow.cpp:311
+#: ../src/gui/optionswindow.cpp:328
 msgid "Swap equipement"
 msgstr "Equipaggiamenti"
 
-#: ../src/gui/optionswindow.cpp:314
+#: ../src/gui/optionswindow.cpp:331
 msgid "Item Labels"
 msgstr "Tooltips oggetti"
 
-#: ../src/gui/optionswindow.cpp:317
+#: ../src/gui/optionswindow.cpp:334
 msgid "Difficulty"
 msgstr "Difficolta'"
 
-#: ../src/gui/optionswindow.cpp:320
+#: ../src/gui/optionswindow.cpp:337
 msgid "Text Speed"
 msgstr "Velocita' dei dialoghi"
 
-#: ../src/gui/optionswindow.cpp:323
+#: ../src/gui/optionswindow.cpp:340
 msgid "Sound"
 msgstr "Suono"
 
-#: ../src/gui/optionswindow.cpp:326
+#: ../src/gui/optionswindow.cpp:343
 msgid "Music"
 msgstr "Musica"
 
-#: ../src/gui/optionswindow.cpp:329
+#: ../src/gui/optionswindow.cpp:346
 msgid "Enemy Highlight Color"
 msgstr "Colore di evidenziazione (nemici)"
 
