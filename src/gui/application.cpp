@@ -210,6 +210,18 @@ void Application::run()
 	{
 
 		frametime =timer.getMicroseconds ()/1000.0;
+		// cap framerate at 50 fps
+		if (frametime < 20.0)
+		{
+			#ifdef WIN32
+				Sleep(20-frametime);
+			#elif defined __APPLE__
+				// TODO
+			#else
+				usleep(1000*(20-frametime));
+			#endif
+			frametime =timer.getMicroseconds ()/1000.0;
+		}
 		time[0] += frametime;
 		timer.reset();
 
@@ -219,7 +231,7 @@ void Application::run()
 		{
 
 			count =0;
-			/*
+			
 			DEBUG("average stats over %i frames",nr);
 			DEBUG("frame time: %f (%f fps)",time[0]/nr, 1000/(time[0]/nr));
 			DEBUG("app update time: %f",time[1]/nr);
@@ -232,7 +244,7 @@ void Application::run()
 
 			for (int i=0; i<7; i++)
 			time[i]=0;
-			*/
+			
 
 		}
 
