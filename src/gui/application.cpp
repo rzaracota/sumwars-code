@@ -273,8 +273,18 @@ void Application::run()
 
 		timer2.reset();
 
+		bool inactive_on_focus = m_window->isDeactivatedOnFocusChange();
+		if (m_document->isSinglePlayer() != inactive_on_focus)
+		{
+			m_window->setDeactivateOnFocusChange( m_document->isSinglePlayer() );
+		}
+		
 		// Document aktualisieren
-		m_document->update(frametime);
+		bool active = m_window->isActive() || ! (m_document->isSinglePlayer());
+		if (active)
+		{
+			m_document->update(frametime);
+		}
 
 		t =timer2.getMicroseconds ()/1000.0;
 		time[3] += t;
@@ -321,7 +331,10 @@ void Application::run()
 		// rendern
 		timer2.reset();
 
-		m_ogre_root->renderOneFrame();
+		if (active)
+		{
+			m_ogre_root->renderOneFrame();
+		}
 
 		t =timer2.getMicroseconds ()/1000.0;
 		time[6] += t;

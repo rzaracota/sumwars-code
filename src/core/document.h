@@ -785,6 +785,14 @@ class Document
 	 * \brief Gibt den Spieler aus, der lokal an dem Rechner ist
 	 */
 	Player* getLocalPlayer();
+	
+	/**
+	 * \brief returns true, is a single player game is running
+	 */
+	bool isSinglePlayer()
+	{
+		return (World::getWorld() != 0 && m_single_player && m_state == RUNNING);
+	}
 
 	// Private stuff
 	private:
