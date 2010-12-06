@@ -229,7 +229,7 @@ void Application::run()
 		count ++;
 		if (count ==nr)
 		{
-
+			/*
 			count =0;
 			
 			DEBUG("average stats over %i frames",nr);
@@ -244,7 +244,7 @@ void Application::run()
 
 			for (int i=0; i<7; i++)
 			time[i]=0;
-			
+			*/
 
 		}
 
