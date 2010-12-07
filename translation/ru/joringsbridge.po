@@ -288,6 +288,14 @@ msgid "Help the peasant?"
 msgstr ""
 
 #: joringsbridge.xml
+msgid "Yes"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "No"
+msgstr ""
+
+#: joringsbridge.xml
 msgid "Only a stone would watch deedless."
 msgstr ""
 
@@ -336,11 +344,11 @@ msgid "Prince, we take the job!"
 msgstr ""
 
 #: joringsbridge.xml
-msgid "Bei Marek!"
+msgid "By Marek!"
 msgstr ""
 
 #: joringsbridge.xml
-msgid "Wer ist das?"
+msgid "Who is that?"
 msgstr ""
 
 #: joringsbridge.xml
@@ -428,4 +436,3 @@ msgstr ""
 #: joringsbridge.xml
 msgid "I will pray that your family is safe long enough."
 msgstr ""
-

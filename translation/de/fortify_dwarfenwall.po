@@ -280,8 +280,7 @@ msgstr "Das kennen wir schon, also spart dir die langen Reden."
 
 #: fortify_dwarfenwall.xml
 msgid ""
-"What?!! Der Fluch kann von uns genommen werden? Warum hoere ich das erst "
-"jetzt?"
+"What?!! The curse can be lifted from us? Why do I hear of this only now?"
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -673,14 +672,14 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml
 msgid ""
-"Mach das sofort rueckgaengig, oder jede Wache in Aisen wird hinter dir her "
-"sein, Verfluchte!"
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##female"
 msgstr ""
 
 #: fortify_dwarfenwall.xml
 msgid ""
-"Mach das sofort rueckgaengig, oder jede Wache in Aisen wird hinter dir her "
-"sein, Verfluchter!"
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##male"
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -696,7 +695,7 @@ msgid "And it's Branded One."
 msgstr "Und das heißt Gezeichnete."
 
 #: fortify_dwarfenwall.xml
-msgid "Du bist besser bereit, die Konsequenzen zu tragen, elende Kreatur."
+msgid "You are better prepared to suffer the consequences, wretched creature."
 msgstr ""
 
 #: fortify_dwarfenwall.xml

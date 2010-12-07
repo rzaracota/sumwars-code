@@ -27,8 +27,8 @@ msgstr ""
 
 #: herbalist.xml
 msgid ""
-"The herbalist of Joringsbridge wants to have the berries of 10 bushes.\".."
-"(10 - herbalist.bushes)..\" Stueck gesammelt werden."
+"The herbalist of Joringsbridge wants to have the berries of 10 bushes. \".."
+"(10 - herbalist.bushes)..\" berries have been collected."
 msgstr ""
 
 #: herbalist.xml
@@ -200,4 +200,3 @@ msgstr ""
 #: herbalist.xml
 msgid "Collect\"..bushes_left..\" more herbs."
 msgstr ""
-

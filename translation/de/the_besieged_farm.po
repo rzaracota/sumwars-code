@@ -163,8 +163,8 @@ msgstr "Natürlich. Dumm von mir."
 #: besieged_farm.xml
 #, fuzzy
 msgid ""
-"Really now. Did you think she'd use carrier pigeons in this day and age?\".."
-"name..\". Dachtest du, irgendwer benutzt heutzutage noch Brieftauben?"
+"Really now, \"..name..\". Did you think she'd use carrier pigeons in this "
+"day and age?"
 msgstr ""
 "Also ehrlich, dachtest du, sie würde in der heutigen Zeit eine Brieftaube "
 "benutzen?"

@@ -234,6 +234,13 @@ void parseXML( TiXmlNode* node, char* filename, std::map<std::string, std::strin
 					std::cout << pos << (*it) << "\n";
 					pos +=2;
 				}
+				pos=0;
+				while ((pos = (*it).find("\\\\\"",pos)) != std::string::npos)
+				{
+					(*it) = (*it).replace(pos,3,"\\\"");
+					std::cout << pos << (*it) << "\n";
+					pos +=2;
+				}
 				if (foundstrings[domains.top()].count((*it)) == 0)
 				{
 					strings[domains.top()] += std::string("#: ") + filename + "\n" + "msgid \"" + (*it) + "\"\n" + "msgstr \"\"\n\n";
@@ -248,8 +255,13 @@ void parseXML( TiXmlNode* node, char* filename, std::map<std::string, std::strin
 			{
 				(*it) = (*it).replace(pos,1,"\\\"");
 				std::cout << pos << *it << "\n";
-				//char dummy;
-				//std::cin >> dummy;
+				pos += 2;
+			}
+			pos=0;
+			while ((pos = (*it).find("\\\\\"",pos)) != std::string::npos)
+			{
+				(*it) = (*it).replace(pos,3,"\\\"");
+				std::cout << pos << *it << "\n";
 				pos += 2;
 			}
 			if (foundstrings[domains.top()].count(*it) == 0)

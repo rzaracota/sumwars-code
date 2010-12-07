@@ -346,6 +346,14 @@ msgid "Do you want to surrender your weapons?"
 msgstr "Vuoi deporre le armi?"
 
 #: tutorial.xml
+msgid "Yes"
+msgstr ""
+
+#: tutorial.xml
+msgid "No"
+msgstr ""
+
+#: tutorial.xml
 msgid "It seems we have no choice..."
 msgstr "Sembra che non abbiamo scelta..."
 
@@ -1049,7 +1057,8 @@ msgid "Don't worry, we're almost feeling fit again."
 msgstr "Non preoccuparti, ci sentiamo nuovamente in forma."
 
 #: tutorial.xml
-msgid "Very well. Die Geheimtür ist hier hinten."
+#, fuzzy
+msgid "Very well. The secret door is here."
 msgstr "Perfetto. La porta segreta e' proprio qua dietro."
 
 #: tutorial.xml

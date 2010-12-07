@@ -30,8 +30,8 @@ msgstr "E un'altra buona azione e' stata fatta. Ormai potrei abituarmici."
 #: herbalist.xml
 #, fuzzy
 msgid ""
-"The herbalist of Joringsbridge wants to have the berries of 10 bushes.\".."
-"(10 - herbalist.bushes)..\" Stueck gesammelt werden."
+"The herbalist of Joringsbridge wants to have the berries of 10 bushes. \".."
+"(10 - herbalist.bushes)..\" berries have been collected."
 msgstr "L'erborista di Joringsbridge vuole avere le bacche di 10 arbusti."
 
 #: herbalist.xml

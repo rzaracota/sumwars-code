@@ -1,0 +1,1893 @@
+# Italian translations for sumwars package.
+# Copyright (C) 2009 THE sumwars'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the sumwars package
+# 
+# Francesco Miglietta (fra9000) <miglietta.francesco@gmail.com>, 2010
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: sumwars 0.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-09 15:15+0100\n"
+"PO-Revision-Date: 2010-07-25 09:49\n"
+"Last-Translator: Francesco Miglietta (fra9000) <miglietta.francesco@gmail."
+"com>\n"
+"Language-Team: Italian <http://gamesopensource.altervista.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: scout.xml
+msgid "The wounded scout"
+msgstr ""
+
+#: scout.xml
+msgid ""
+"I rescued a scout and hopefully gained some goodwill from the local militia. "
+"Whatever good that will do."
+msgstr ""
+
+#: scout.xml
+msgid ""
+"I really stumbled across a scout in the goblin infested caves west of "
+"Dwarfenwall. He is wounded, lost his gear to some spiders and asked me to "
+"fix it for him. I really wonder if I should do this... then again it would "
+"be an excuse to venture deeper into the caves that are obviously not under "
+"control by the undead."
+msgstr ""
+
+#: scout.xml
+msgid "greyCurseCave"
+msgstr "La grotta sotterranea"
+
+#: scout.xml
+#, fuzzy
+msgid "Wounded Scout"
+msgstr "Falciatore di anime"
+
+#: scout.xml
+msgid "Are you alive?"
+msgstr ""
+
+#: scout.xml
+msgid "Hey, are you alright?"
+msgstr ""
+
+#: scout.xml
+msgid "Does it look... 'alright' to you?"
+msgstr ""
+
+#: scout.xml
+msgid "Pretty much, yes."
+msgstr ""
+
+#: scout.xml
+msgid "You can still talk, right?"
+msgstr ""
+
+#: scout.xml
+msgid ""
+"Yeah, right... now, when you're done laughing... maybe you could help me?"
+msgstr ""
+
+#: scout.xml
+msgid "I guess I could patch you up, but I can't carry you out of here."
+msgstr ""
+
+#: scout.xml
+msgid ""
+"Where I'm headed you will most certainly die a quick and meaningless death."
+msgstr ""
+
+#: scout.xml
+msgid "I can... watch my own back..."
+msgstr ""
+
+#: scout.xml
+msgid "Most of the time... at least."
+msgstr ""
+
+#: scout.xml
+msgid "But spying on the undead... evading... those blasted goblins..."
+msgstr ""
+
+#: scout.xml
+msgid "I got a little... careless."
+msgstr ""
+
+#: scout.xml
+msgid "West of here... there's a cave... pretty deep inside..."
+msgstr ""
+
+#: scout.xml
+msgid ""
+"Lot's of wolves... but a nest of spiders, too... thought I had... it under "
+"control"
+msgstr ""
+
+#: scout.xml
+msgid ""
+"really big one... there. Spider, I mean... got me good... lost my gear... "
+"but got away... somehow"
+msgstr ""
+
+#: scout.xml
+msgid ""
+"The venom... can't move at all... anymore... I had an antidote in my pack..."
+msgstr ""
+
+#: scout.xml
+msgid "So... if you could get... me my gear, I... would be good to go again..."
+msgstr ""
+
+#: scout.xml
+msgid "If you're... not afraid... that is."
+msgstr ""
+
+#: scout.xml
+msgid "You have a strange manner of asking for favors."
+msgstr ""
+
+#: scout.xml
+msgid "But since I don't have to carry you to safety, I guess it is allright."
+msgstr ""
+
+#: scout.xml
+msgid "This wouldn't happen to be your stuff, would it?"
+msgstr ""
+
+#: scout.xml
+msgid "You already... found it?"
+msgstr ""
+
+#: scout.xml
+msgid "Thanks..."
+msgstr ""
+
+#: scout.xml
+msgid "Still alive?"
+msgstr ""
+
+#: scout.xml
+msgid "Do you... have my gear?"
+msgstr ""
+
+#: scout.xml
+msgid "Not yet, no."
+msgstr ""
+
+#: scout.xml
+msgid ""
+"Shame. It seems I'm already capable of... being paralyzed... without your "
+"help."
+msgstr ""
+
+#: scout.xml
+msgid ""
+"Thanks for... checking back on me though. I'll be here... if you need me."
+msgstr ""
+
+#: scout.xml
+msgid "You are kind of messed up, you know that?"
+msgstr ""
+
+#: scout.xml
+msgid "..."
+msgstr ""
+
+#: scout.xml
+msgid "Here it is."
+msgstr ""
+
+#: scout.xml
+msgid "good... now, blue potion"
+msgstr ""
+
+#: scout.xml
+#, fuzzy
+msgid "A blue potion?"
+msgstr "Pozione dell'eco"
+
+#: scout.xml
+msgid "You do realize there is at least a score of 'blue' potions here?"
+msgstr ""
+
+#: scout.xml
+msgid ""
+"They just... turn out that... way everytime... it's the one... with the "
+"light shade of turquoise."
+msgstr ""
+
+#: scout.xml
+msgid "No... too... light blue"
+msgstr ""
+
+#: scout.xml
+msgid "That's... it"
+msgstr ""
+
+#: scout.xml
+msgid "Finally!"
+msgstr ""
+
+#: scout.xml
+msgid "Remember me not to kill you after all the trouble I went through."
+msgstr ""
+
+#: scout.xml
+msgid "Gladly. Really, thank you for saving my hide."
+msgstr ""
+
+#: scout.xml
+msgid "You best stay out of trouble."
+msgstr ""
+
+#: scout.xml
+msgid ""
+"Because I seriously do NOT want to rummage through your happy collection of "
+"identical looking special-purpose-potions."
+msgstr ""
+
+#: scout.xml
+msgid "Sorry about that. Normally I'm the only one who has to keep them apart."
+msgstr ""
+
+#: scout.xml
+msgid "Allright. Now that this is done, I will be on my way."
+msgstr ""
+
+#: scout.xml
+msgid ""
+"I will rest a little more and then be on my way too, but in the other "
+"direction."
+msgstr ""
+
+#: scout.xml
+msgid "greyWolfcave"
+msgstr "La cava del lupo"
+
+#~ msgid "practice bow"
+#~ msgstr "Arco dell'addestramento"
+
+#~ msgid "yew shortbow"
+#~ msgstr "Arco corto in tasso"
+
+#~ msgid "shortbow"
+#~ msgstr "Arco corto"
+
+#~ msgid "hunting bow"
+#~ msgstr "Arco da caccia"
+
+#~ msgid "rattan bow"
+#~ msgstr "Arco in rattan"
+
+#~ msgid "bandit bow"
+#~ msgstr "Arco del brigante"
+
+#~ msgid "northeye"
+#~ msgstr "Occhio del nord"
+
+#~ msgid "battle shortbow"
+#~ msgstr "Arco corto da battaglia"
+
+#~ msgid "composite shortbow"
+#~ msgstr "Arco corto composito"
+
+#~ msgid "rider bow"
+#~ msgstr "Arco del cavaliere"
+
+#~ msgid "coal bow"
+#~ msgstr "Arco della brace"
+
+#~ msgid "ash bow"
+#~ msgstr "Arco delle ceneri"
+
+#~ msgid "bane bow"
+#~ msgstr "Arco della rovina"
+
+#~ msgid "oak shortbow"
+#~ msgstr "Arco corto in quercia"
+
+#~ msgid "soul bow"
+#~ msgstr "Arco delle anime"
+
+#~ msgid "seeker"
+#~ msgstr "Cercatore"
+
+#~ msgid "chaos shortbow"
+#~ msgstr "Arco corto del caos"
+
+#~ msgid "fairy bow"
+#~ msgstr "Arco fatato"
+
+#~ msgid "pike"
+#~ msgstr "Picca"
+
+#~ msgid "scroll of town portal"
+#~ msgstr "Pergamena del Portale Magico"
+
+#~ msgid "small potion"
+#~ msgstr "Pozione piccola"
+
+#~ msgid "medium potion"
+#~ msgstr "Pozione Media"
+
+#~ msgid "eyedrops"
+#~ msgstr "Collirio"
+
+#~ msgid "antidot"
+#~ msgstr "Antidoto"
+
+#~ msgid "calming salve"
+#~ msgstr "Unguento calmante"
+
+#~ msgid "potion of determination"
+#~ msgstr "Pozione della determinazione"
+
+#~ msgid "echo potion"
+#~ msgstr "Pozione dell'eco"
+
+#~ msgid "muscle salve"
+#~ msgstr "Unguento muscolare"
+
+#~ msgid "potion of melting"
+#~ msgstr "Pozione della fusione"
+
+#~ msgid "spike oil"
+#~ msgstr "Olio essenziale di lavanda"
+
+#~ msgid "lumberjack axe"
+#~ msgstr "Ascia del taglialegna"
+
+#~ msgid "great axe"
+#~ msgstr "Ascia grande"
+
+#~ msgid "ripping axe"
+#~ msgstr "Ascia affilata"
+
+#~ msgid "executioner axe"
+#~ msgstr "Ascia del boia"
+
+#~ msgid "smashing axe"
+#~ msgstr "Ascia del massacro"
+
+#~ msgid "ogre hatchet"
+#~ msgstr "Accetta dell'orco"
+
+#~ msgid "scythe axe"
+#~ msgstr "Falce"
+
+#~ msgid "barbarian axe"
+#~ msgstr "Ascia barbarica"
+
+#~ msgid "bonebreaker axe"
+#~ msgstr "Ascia spaccaossa"
+
+#~ msgid "giant axe"
+#~ msgstr "Ascia gigante"
+
+#~ msgid "slaughter axe"
+#~ msgstr "Ascia delle stragi"
+
+#~ msgid "ogretearer"
+#~ msgstr "Flagello degli orchi"
+
+#~ msgid "dwarfensteel axe"
+#~ msgstr "Ascia in acciaio nanico"
+
+#~ msgid "star axe"
+#~ msgstr "Ascia delle stelle"
+
+#~ msgid "kings axe"
+#~ msgstr "Ascia dei re"
+
+#~ msgid "torture axe"
+#~ msgstr "Ascia della tortura"
+
+#~ msgid "iceland axe"
+#~ msgstr "Ascia dei ghiacci"
+
+#~ msgid "death axe"
+#~ msgstr "Ascia della morte"
+
+#~ msgid "sledgehammer"
+#~ msgstr "Martello"
+
+#~ msgid "bronze hammer"
+#~ msgstr "Martello di bronzo"
+
+#~ msgid "longshaft"
+#~ msgstr "Bastone lungo"
+
+#~ msgid "guard hammer"
+#~ msgstr "Martello della guardia"
+
+#~ msgid "silverterror"
+#~ msgstr "Terrore d'argento"
+
+#~ msgid "glow hammer"
+#~ msgstr "Martello splendente"
+
+#~ msgid "bonebreaker"
+#~ msgstr "Frantumaossa"
+
+#~ msgid "smashhead"
+#~ msgstr "Spaccateste"
+
+#~ msgid "aisener warhammer"
+#~ msgstr "Martello da guerra di Aisen"
+
+#~ msgid "judgement hammer"
+#~ msgstr "Martello del giudizio"
+
+#~ msgid "priest hammer"
+#~ msgstr "Martello del sacerdote"
+
+#~ msgid "obsidian hammer"
+#~ msgstr "Martello di ossidiana"
+
+#~ msgid "judge hammer"
+#~ msgstr "Martello del giudice"
+
+#~ msgid "cyclops hammer"
+#~ msgstr "Martello dei ciclopi"
+
+#~ msgid "dwarfensteel hammer"
+#~ msgstr "Martello in acciaio nanico"
+
+#~ msgid "elementhunter"
+#~ msgstr "Cacciatore di elementali"
+
+#~ msgid "exorcists hammer"
+#~ msgstr "Martello dell'esorcista"
+
+#~ msgid "worldshaker"
+#~ msgstr "Terratremor"
+
+#~ msgid "cap"
+#~ msgstr "Cappuccio"
+
+#~ msgid "leather cap"
+#~ msgstr "Cappuccio di cuoio"
+
+#~ msgid "leather helmet"
+#~ msgstr "Elmo di cuoio"
+
+#~ msgid "mercenary head"
+#~ msgstr "Copricapo del mercenario"
+
+#~ msgid "novice headgear"
+#~ msgstr "Copricapo del novizio"
+
+#~ msgid "mercenary helmet"
+#~ msgstr "Elmo del mercenario"
+
+#~ msgid "ranger bandana"
+#~ msgstr "Bandana del ranger"
+
+#~ msgid "assassin hood"
+#~ msgstr "Cappuccio dell'assassino"
+
+#~ msgid "biretta"
+#~ msgstr "Cappa sacerdotale"
+
+#~ msgid "chain turban"
+#~ msgstr "Turbante"
+
+#~ msgid "hammer"
+#~ msgstr "Martello"
+
+#~ msgid "cermeonial hammer"
+#~ msgstr "Martello cerimoniale"
+
+#~ msgid "iron hammer"
+#~ msgstr "Martello di ferro"
+
+#~ msgid "iron club"
+#~ msgstr "Mazza di ferro"
+
+#~ msgid "maul"
+#~ msgstr "Maglio"
+
+#~ msgid "morning star"
+#~ msgstr "Morning star"
+
+#~ msgid "crowhead"
+#~ msgstr "Elmo del corvo"
+
+#~ msgid "rider hammer"
+#~ msgstr "Martello del cavaliere"
+
+#~ msgid "mace"
+#~ msgstr "Mazza"
+
+#~ msgid "steel hammer"
+#~ msgstr "Martello di acciaio"
+
+#~ msgid "battle hammer"
+#~ msgstr "Martello da battaglia"
+
+#~ msgid "steel mace"
+#~ msgstr "Mazza di acciaio"
+
+#~ msgid "steel maul"
+#~ msgstr "Maglio di acciaio"
+
+#~ msgid "sixedged mace"
+#~ msgstr "Mazza d'arme"
+
+#~ msgid "silver hammer"
+#~ msgstr "Martello d'argento"
+
+#~ msgid "diamont hammer"
+#~ msgstr "Martello di diamanti"
+
+#~ msgid "priest mace"
+#~ msgstr "Mazza del chierico"
+
+#~ msgid "holy hammer"
+#~ msgstr "Martello sacro"
+
+#~ msgid "targe"
+#~ msgstr "Scudo targa"
+
+#~ msgid "buckler"
+#~ msgstr "Scudo buckler"
+
+#~ msgid "wood shield"
+#~ msgstr "Scudo di legno"
+
+#~ msgid "bronze shield"
+#~ msgstr "Scudo di bronzo"
+
+#~ msgid "iron shield"
+#~ msgstr "Scudo di ferro"
+
+#~ msgid "steel shield"
+#~ msgstr "Scudo di acciaio"
+
+#~ msgid "spruce wand"
+#~ msgstr "Bacchetta in abete"
+
+#~ msgid "apprentice wand"
+#~ msgstr "Bacchetta dell'apprendista"
+
+#~ msgid "novice wand"
+#~ msgstr "Bacchetta del novizio"
+
+#~ msgid "hermit wand"
+#~ msgstr "Bacchetta dell'eremita"
+
+#~ msgid "rock wand"
+#~ msgstr "Bacchetta di pietra"
+
+#~ msgid "alder wand"
+#~ msgstr "Bacchetta in ontano"
+
+#~ msgid "bard's wand"
+#~ msgstr "Bacchetta del bardo"
+
+#~ msgid "magus wand"
+#~ msgstr "Bacchetta del mago"
+
+#~ msgid "silver wand"
+#~ msgstr "Bacchetta d'argento"
+
+#~ msgid "oak wand"
+#~ msgstr "Bacchetta in quercia"
+
+#~ msgid "phenix wand"
+#~ msgstr "Bacchetta della fenice"
+
+#~ msgid "frost wand"
+#~ msgstr "Bacchetta dei ghiacci"
+
+#~ msgid "thunder wand"
+#~ msgstr "Bacchetta del tuono"
+
+#~ msgid "ash wand"
+#~ msgstr "Bacchetta delle ceneri"
+
+#~ msgid "summoner wand"
+#~ msgstr "Bacchetta dell'evocatore"
+
+#~ msgid "master wand"
+#~ msgstr "Bacchetta del maestro"
+
+#~ msgid "necromancer wand"
+#~ msgstr "Bacchetta del necromante"
+
+#~ msgid "demon wand"
+#~ msgstr "Bacchetta dei demoni"
+
+#~ msgid "fairy wand"
+#~ msgstr "Bacchetta fatata"
+
+#~ msgid "archmage wand"
+#~ msgstr "Bacchetta dell'arcimago"
+
+#~ msgid "hatchet"
+#~ msgstr "Accetta"
+
+#~ msgid "bronze axe"
+#~ msgstr "Ascia di bronzo"
+
+#~ msgid "iron hatchet"
+#~ msgstr "Accetta di ferro"
+
+#~ msgid "cleaver"
+#~ msgstr "Mannaia"
+
+#~ msgid "iron axe"
+#~ msgstr "Ascia di ferro"
+
+#~ msgid "mercenary axe"
+#~ msgstr "Ascia del mercenario"
+
+#~ msgid "steel axe"
+#~ msgstr "Ascia di acciao"
+
+#~ msgid "battle axe"
+#~ msgstr "Ascia da battaglia"
+
+#~ msgid "guard axe"
+#~ msgstr "Ascia della guardia"
+
+#~ msgid "minotaur axe"
+#~ msgstr "Ascia del minotauro"
+
+#~ msgid "thunder axe"
+#~ msgstr "Ascia del tuono"
+
+#~ msgid "demon axe"
+#~ msgstr "Ascia del demone"
+
+#~ msgid "obsidian axe"
+#~ msgstr "Ascia di ossidiana"
+
+#~ msgid "vulcano axe"
+#~ msgstr "Ascia del vulcano"
+
+#~ msgid "berserker axe"
+#~ msgstr "Ascia della furia"
+
+#~ msgid "diamont axe"
+#~ msgstr "Ascia di diamanti"
+
+#~ msgid "dwarfen axe"
+#~ msgstr "Ascia nanica"
+
+#~ msgid "hell axe"
+#~ msgstr "Ascia dell'inferno"
+
+#~ msgid "dagger"
+#~ msgstr "Pugnale"
+
+#~ msgid "shortsword"
+#~ msgstr "Spada corta"
+
+#~ msgid "bronzesword"
+#~ msgstr "Spada di bronzo"
+
+#~ msgid "sabre"
+#~ msgstr "Sciabola"
+
+#~ msgid "legion blade"
+#~ msgstr "Daga"
+
+#~ msgid "long sword"
+#~ msgstr "Spada lunga"
+
+#~ msgid "sword of the coast"
+#~ msgstr "Spada della costa"
+
+#~ msgid "council sabre"
+#~ msgstr "Sciabola del consiglio"
+
+#~ msgid "scimitar"
+#~ msgstr "Scimitarra"
+
+#~ msgid "barbarian sword"
+#~ msgstr "Spada barbarica"
+
+#~ msgid "northlings blade"
+#~ msgstr "Lama delle terre del nord"
+
+#~ msgid "steel sword"
+#~ msgstr "Spada di acciao"
+
+#~ msgid "assassins blade"
+#~ msgstr "Lama dell'assassinio"
+
+#~ msgid "diamont sword"
+#~ msgstr "Spada di diamanti"
+
+#~ msgid "dwarfsteel sword"
+#~ msgstr "Spada in acciaio nanico"
+
+#~ msgid "demon blade"
+#~ msgstr "Lama demoniaca"
+
+#~ msgid "hero blade"
+#~ msgstr "Lama degli eroi"
+
+#~ msgid "angel blade"
+#~ msgstr "Lama dell'angelo"
+
+#~ msgid "gods blade"
+#~ msgstr "Lama degli dei"
+
+#~ msgid "spruce staff"
+#~ msgstr "Bastone in abete"
+
+#~ msgid "apprentice staff"
+#~ msgstr "Bastone dell'apprendista"
+
+#~ msgid "novice staff"
+#~ msgstr "Bastone del novizio"
+
+#~ msgid "hermit staff"
+#~ msgstr "Bastone dell'eremita"
+
+#~ msgid "rock staff"
+#~ msgstr "Bastone di pietra"
+
+#~ msgid "alder staff"
+#~ msgstr "Bastone in ontano"
+
+#~ msgid "bard's staff"
+#~ msgstr "Bastone del bardo"
+
+#~ msgid "magus staff"
+#~ msgstr "Bastone del mago"
+
+#~ msgid "silver staff"
+#~ msgstr "Bastone d'argento"
+
+#~ msgid "inferno staff"
+#~ msgstr "Bastone degli inferi"
+
+#~ msgid "oak staff"
+#~ msgstr "Bastone in quercia"
+
+#~ msgid "phenix staff"
+#~ msgstr "Bastone della fenice"
+
+#~ msgid "frost staff"
+#~ msgstr "Bastone dei ghiacci"
+
+#~ msgid "thunder staff"
+#~ msgstr "Bastone del tuono"
+
+#~ msgid "ash staff"
+#~ msgstr "Bastone delle ceneri"
+
+#~ msgid "summoner staff"
+#~ msgstr "Bastone dell'evocatore"
+
+#~ msgid "master staff"
+#~ msgstr "Bastone del maestro"
+
+#~ msgid "necromancer staff"
+#~ msgstr "Bastone del necromante"
+
+#~ msgid "demon staff"
+#~ msgstr "Bastone del demonio"
+
+#~ msgid "fairy staff"
+#~ msgstr "Bastone fatato"
+
+#~ msgid "ifreet staff"
+#~ msgstr "Bastone dell'Ifrit"
+
+#~ msgid "icewitch staff"
+#~ msgstr "Bastone della strega dei ghiacci"
+
+#~ msgid "sylph staff"
+#~ msgstr "Bastone delle Silfidi"
+
+#~ msgid "archmage staff"
+#~ msgstr "Bastone dell'arcimago"
+
+#~ msgid "bronze ring"
+#~ msgstr "Anello di bronzo"
+
+#~ msgid "amber ring"
+#~ msgstr "Anello d'ambra"
+
+#~ msgid "silver ring"
+#~ msgstr "Anello d'argento"
+
+#~ msgid "jet ring"
+#~ msgstr "Anello lucido"
+
+#~ msgid "gold ring"
+#~ msgstr "Anello d'oro"
+
+#~ msgid "farmer sword"
+#~ msgstr "Spada del contadino"
+
+#~ msgid "mercenary blade"
+#~ msgstr "Lama del mercenario"
+
+#~ msgid "two handed steel sword"
+#~ msgstr "Spada a due mani in acciaio"
+
+#~ msgid "smash sword"
+#~ msgstr "Spada della distruzione"
+
+#~ msgid "horse killer"
+#~ msgstr "Ammazza-cavalli"
+
+#~ msgid "bastard sword"
+#~ msgstr "Spada bastarda"
+
+#~ msgid "ogre dagger"
+#~ msgstr "Pugnale da orco"
+
+#~ msgid "goblinkiller"
+#~ msgstr "Ammazza-goblin"
+
+#~ msgid "executioner's sword"
+#~ msgstr "Spada dell'esecutore"
+
+#~ msgid "two handed guardsman sword"
+#~ msgstr "Spada a due mani della guardia"
+
+#~ msgid "flamberg"
+#~ msgstr "Flamberga"
+
+#~ msgid "aisener battle sword"
+#~ msgstr "Spada di battaglia di Aisen"
+
+#~ msgid "monster sword"
+#~ msgstr "Spada mostruosa"
+
+#~ msgid "tear sword"
+#~ msgstr "Spada delle lacrime"
+
+#~ msgid "deathwind"
+#~ msgstr "Vento Mortale"
+
+#~ msgid "dread sword"
+#~ msgstr "Spada del terrore"
+
+#~ msgid "great sword"
+#~ msgstr "Spada grande"
+
+#~ msgid "angel sword"
+#~ msgstr "Spada dell'angelo"
+
+#~ msgid "broken shield"
+#~ msgstr "Scudo spezzato"
+
+#~ msgid "old sword"
+#~ msgstr "Spada vecchia"
+
+#~ msgid "tourney bow"
+#~ msgstr "Arco da torneo"
+
+#~ msgid "orc bow"
+#~ msgstr "Arco dell'orco"
+
+#~ msgid "yew bow"
+#~ msgstr "Arco in tasso"
+
+#~ msgid "longbow"
+#~ msgstr "Arco lungo"
+
+#~ msgid "soldier bow"
+#~ msgstr "Arco del soldato"
+
+#~ msgid "horn bow"
+#~ msgstr "Arco in avorio"
+
+#~ msgid "maple bow"
+#~ msgstr "Arco in acero"
+
+#~ msgid "battle bow"
+#~ msgstr "Arco da battaglia"
+
+#~ msgid "composite longbow"
+#~ msgstr "Arco lungo composito"
+
+#~ msgid "stormsinger"
+#~ msgstr "Tempesta tuonante"
+
+#~ msgid "oak bow"
+#~ msgstr "Arco in quercia"
+
+#~ msgid "demonhorn bow"
+#~ msgstr "Arco demoniaco in corno"
+
+#~ msgid "ranger bow"
+#~ msgstr "Arco del ranger"
+
+#~ msgid "ash longbow"
+#~ msgstr "Arco delle ceneri"
+
+#~ msgid "demon compositebow"
+#~ msgstr "Arco demoniaco composito"
+
+#~ msgid "hero bow"
+#~ msgstr "Arco degli eroi"
+
+#~ msgid "elf bow"
+#~ msgstr "Arco elfico"
+
+#~ msgid "vagabond hat"
+#~ msgstr "Cappello del fuorilegge"
+
+#~ msgid "apprentice cap"
+#~ msgstr "Cappuccio dell'apprendista"
+
+#~ msgid "novice hat"
+#~ msgstr "Cappello del novizio"
+
+#~ msgid "alchemist cap"
+#~ msgstr "Cappuccio dell'alchimista"
+
+#~ msgid "beret"
+#~ msgstr "Cappello"
+
+#~ msgid "magus hat"
+#~ msgstr "Cappello da mago"
+
+#~ msgid "turban"
+#~ msgstr "Turbante"
+
+#~ msgid "cloth armor"
+#~ msgstr "Armatura di stoffa"
+
+#~ msgid "leather armor"
+#~ msgstr "Armatura di cuoio"
+
+#~ msgid "rivet armor"
+#~ msgstr "Armatura di cuoio borchiato"
+
+#~ msgid "bandit armor"
+#~ msgstr "Armatura del bandito"
+
+#~ msgid "novice armor"
+#~ msgstr "Armatura del novizio"
+
+#~ msgid "mercenary armor"
+#~ msgstr "Armatura del mercenario"
+
+#~ msgid "ranger shirt"
+#~ msgstr "Casacca da esploratore"
+
+#~ msgid "assassin armor"
+#~ msgstr "Armatura dell'assassino"
+
+#~ msgid "temple armor"
+#~ msgstr "Armatura del tempio"
+
+#~ msgid "council armor"
+#~ msgstr "Armatura del consiglio"
+
+#~ msgid "ragged robe"
+#~ msgstr "Tunica logora"
+
+#~ msgid "apprentice robe"
+#~ msgstr "Tunica dell'apprendista"
+
+#~ msgid "novice robe"
+#~ msgstr "Tunica del novizio"
+
+#~ msgid "alchemist robe"
+#~ msgstr "Tunica dell'alchimista"
+
+#~ msgid "scholar robe"
+#~ msgstr "Tunica dell'allievo"
+
+#~ msgid "magus robe"
+#~ msgstr "Tunica del mago"
+
+#~ msgid "council robe"
+#~ msgstr "Tunica del consiglio"
+
+#~ msgid "leather gloves"
+#~ msgstr "Guanti di cuoio"
+
+#~ msgid "snakehide gloves"
+#~ msgstr "Guanti in pelle di serpente"
+
+#~ msgid "chain gloves"
+#~ msgstr "Guanti di maglia"
+
+#~ msgid "buckskin gloves"
+#~ msgstr "Guanti in pelle di daino"
+
+#~ msgid "spidersilk gloves"
+#~ msgstr "Guanti in tela di ragno"
+
+#~ msgid "marksman gloves"
+#~ msgstr "Guanti del tiratore scelto"
+
+#~ msgid "assassin gloves"
+#~ msgstr "Guanti dell'assassino"
+
+#~ msgid "shark gloves"
+#~ msgstr "Guanti dello squalo"
+
+#~ msgid "goblin armor"
+#~ msgstr "Armatura goblin"
+
+#~ msgid "goblin bracer"
+#~ msgstr "Bracciale goblin"
+
+#~ msgid "shaman mask"
+#~ msgstr "Maschera dello sciamano"
+
+#~ msgid "goblin club"
+#~ msgstr "Mazza goblin"
+
+#~ msgid "rusty dagger"
+#~ msgstr "Pugnale arrugginito"
+
+#~ msgid "shaman staff"
+#~ msgstr "Staffa dello sciamano"
+
+#~ msgid "nail club"
+#~ msgstr "Mazza chiodata"
+
+#~ msgid "goblin bow"
+#~ msgstr "Arco goblin"
+
+#~ msgid "goblin spear"
+#~ msgstr "Lancia goblin"
+
+#~ msgid "feather amulet"
+#~ msgstr "Amuleto della piuma"
+
+#~ msgid "amber amulet"
+#~ msgstr "Amuleto d'ambra"
+
+#~ msgid "silver amulet"
+#~ msgstr "Amuleto d'argento"
+
+#~ msgid "coral amulet"
+#~ msgstr "Amuleto di corallo"
+
+#~ msgid "gold amulet"
+#~ msgstr "Amuleto d'oro"
+
+#, fuzzy
+#~ msgid "goblin_raid"
+#~ msgstr "Goblin bandito"
+
+#~ msgid "aisDarkClearing"
+#~ msgstr "La tetra radura"
+
+#~ msgid "Sergeant Lutterer"
+#~ msgstr "Sergente Lutterer"
+
+#~ msgid "Gertlinde Kampfer"
+#~ msgstr "Gertlinde Kampfer"
+
+#~ msgid "Potions"
+#~ msgstr "Pozioni"
+
+#~ msgid "Sybill"
+#~ msgstr "Sybill"
+
+#~ msgid "Weapons"
+#~ msgstr "Armi"
+
+#~ msgid "Halgor"
+#~ msgstr "Halgor"
+
+#~ msgid "Armors"
+#~ msgstr "Armature"
+
+#~ msgid "Marco"
+#~ msgstr "Marco"
+
+#~ msgid "Fundgegenstaende"
+#~ msgstr "Oggetti smarriti"
+
+#~ msgid "What are these Items?"
+#~ msgstr "Cosa sono questi oggetti?"
+
+#~ msgid "Ah, you noticed my lost and found?"
+#~ msgstr "Hei, sai qualcosa dei miei oggetti smarriti?"
+
+#~ msgid "Everything I find in and around Joringsbridge is stored here."
+#~ msgstr ""
+#~ "Tutto quello che ho trovato a Joringsbridge e nei dintorni ora e' qui."
+
+#~ msgid ""
+#~ "If something is your's just say the word. For a small finder's fee you "
+#~ "can have it back."
+#~ msgstr ""
+#~ "Se qualcosa e' tuo dillo. Potrai riaverlo indietro per una minima somma."
+
+#~ msgid "Joringsbridge"
+#~ msgstr "Joringsbridge"
+
+#~ msgid ""
+#~ "Having the responsibility for Joringsbridge is never easy, not even when "
+#~ "I had enough soldiers."
+#~ msgstr ""
+#~ "Avere la responsabilita' di tutta Joringsbridge non e' mai stato facile, "
+#~ "nemmeno quando avevo abbastanza soldati."
+
+#~ msgid ""
+#~ "Lately, someone in the guard has been appropriating confiscated magical "
+#~ "items."
+#~ msgstr ""
+#~ "Ultimamente, qualcuno all'interno del corpo delle guardie si sta "
+#~ "appropriando di oggetti magici confiscati."
+
+#~ msgid ""
+#~ "And I'm not even one step closer to find out who, than when I first "
+#~ "noticed!"
+#~ msgstr ""
+#~ "E non son riuscito ancora a scoprire chi sia, sono ancora al punto di "
+#~ "partenza!"
+
+#~ msgid ""
+#~ "((A guard is diverting items? Surely not for hard times. I should take a "
+#~ "look around.))"
+#~ msgstr ""
+#~ "(Una guardia sta spostando gli oggetti? Non lo fara' ancora per molto. "
+#~ "Andro' a dare un'occhiata in giro.)"
+
+#~ msgid "The surroundings of Joringsbridge"
+#~ msgstr "I dintorni di Joringsbridge"
+
+#~ msgid "You better be careful when leaving the village."
+#~ msgstr "Dovresti stare attento quando ti allontanti dal villaggio."
+
+#~ msgid ""
+#~ "Now, with almost all troops standing at the borders, we have to deal with "
+#~ "an unmanageable flood of goblins."
+#~ msgstr ""
+#~ "Ora, con quasi tutte le truppe a guardia delle frontiere, ci troviamo ad "
+#~ "affrontare orde incontrollate di goblin."
+
+#~ msgid ""
+#~ "And everyone not drafted for the army seems to have discovered the happy "
+#~ "bandit life for themselves."
+#~ msgstr ""
+#~ "Inoltre sembra che tutti quelli che non si sono arruolati nell'esercito "
+#~ "abbiano scoperto le gioie di una vita da briganti."
+
+#~ msgid "Thanks for the warning, sergeant."
+#~ msgstr "Grazie per l'avvertimento, sergente."
+
+#~ msgid "Michel Bron"
+#~ msgstr "Michel Bron"
+
+#~ msgid "Magus Convocatis Relau Fireweaver"
+#~ msgstr "Magus Convocatis Relau Fireweaver"
+
+#~ msgid "You are the backup sent by Lord Master Windclaw, arn't you?"
+#~ msgstr "Sei tu il rimpiazzo inviato da Lord Magister Windclaw?"
+
+#~ msgid ""
+#~ "I suggest you quickly journey on. There have been people dying by boredom "
+#~ "in this village. "
+#~ msgstr ""
+#~ "Vi suggerisco di rimettervi subito in viaggio. Buona parte delle persone "
+#~ "muore di noia in questo villaggio. "
+
+#~ msgid "Who knows if your physique will help you against that, too?"
+#~ msgstr "Chissa' se il tuo fisico ti aiutera' anche con quello?"
+
+#~ msgid "Armor"
+#~ msgstr "Armatura"
+
+#~ msgid "Fire resistance"
+#~ msgstr "Resistenza al fuoco"
+
+#~ msgid "Air resistance"
+#~ msgstr "Resistenza all'aria"
+
+#, fuzzy
+#~ msgid "Weapon"
+#~ msgstr "Armi"
+
+#, fuzzy
+#~ msgid "Fire damage"
+#~ msgstr "Danno base"
+
+#, fuzzy
+#~ msgid "Air damage"
+#~ msgstr "Danno"
+
+#, fuzzy
+#~ msgid "Which Enchantment do you want?"
+#~ msgstr "Cosa vorresti dire, quando dici 'ricadere'?..."
+
+#~ msgid "Haffgar"
+#~ msgstr "Haffgar"
+
+#~ msgid "Trade"
+#~ msgstr "Commercio"
+
+#~ msgid "Amelia"
+#~ msgstr "Amelia"
+
+#~ msgid "Drago"
+#~ msgstr "Drago"
+
+#~ msgid "Flynn"
+#~ msgstr "Flynn"
+
+#~ msgid "What is all this?"
+#~ msgstr "Cos'e' tutto questo casino?"
+
+#~ msgid "Quite a lot of boxes..."
+#~ msgstr "Tante, tante casse..."
+
+#~ msgid "My predecessor left me with that chaos."
+#~ msgstr "Il mio predessore mi ha lasciato in questo caos."
+
+#~ msgid "These are all old army supplies."
+#~ msgstr "Questi sono tutti i rifornimenti del vecchio esercito."
+
+#~ msgid "If you like something just point it out and I'll tell you a price."
+#~ msgstr "Dimmi se ti interessa qualcosa e ti diro' il prezzo."
+
+#, fuzzy
+#~ msgid "Armor class"
+#~ msgstr "Armature"
+
+#, fuzzy
+#~ msgid "Ice damage"
+#~ msgstr "Mago del ghiaccio"
+
+#~ msgid "Dexterity"
+#~ msgstr "Destrezza"
+
+#~ msgid "Block"
+#~ msgstr "Difesa"
+
+#~ msgid "Robert"
+#~ msgstr "Robert"
+
+#~ msgid "Elgor"
+#~ msgstr "Elgor"
+
+#~ msgid "Cain"
+#~ msgstr "Cain"
+
+#~ msgid "Fenor Marken"
+#~ msgstr "Fenor Marken"
+
+# Bron's door
+#~ msgid "Brons Tuer"
+#~ msgstr "Brons Tuer"
+
+#~ msgid "Sergeant Wober"
+#~ msgstr "Sergente Wober"
+
+#~ msgid "Guard"
+#~ msgstr "Guardia"
+
+#~ msgid "Maylons Ghost"
+#~ msgstr "Fantasma di Maylons"
+
+#~ msgid "Soren Windclaw"
+#~ msgstr "Soren Windclaw"
+
+#~ msgid "Leonard von Robenforst"
+#~ msgstr "Leonard di Robenforst"
+
+#~ msgid "Gab Resh"
+#~ msgstr "La Tomba di Maylons - Gab Resh"
+
+#~ msgid "General Greif"
+#~ msgstr "Generale Greif"
+
+#~ msgid "Maga Convocatis Darna Eistaucher"
+#~ msgstr "Maga Convocatis Darna Icediver"
+
+#~ msgid "Prince Karlen"
+#~ msgstr "Principe Karlen"
+
+#~ msgid "Erzmaga Ireana von Nordenburg"
+#~ msgstr "Arcimaga Ireana di Nordburg"
+
+#~ msgid "Hauptmann der Wache"
+#~ msgstr "Capitano delle Guardie"
+
+#~ msgid "Elementaristenwaechter"
+#~ msgstr "La Guardia del Consiglio"
+
+#~ msgid "Vorarbeiter Nekromant"
+#~ msgstr "Sorveglianza del Necromante"
+
+#~ msgid "Nar'Asoroth"
+#~ msgstr "Nar'Asoroth"
+
+#~ msgid "The Trader"
+#~ msgstr "Il Mercante"
+
+#~ msgid "Buy empty scrolls"
+#~ msgstr "Compra pergamene vuote"
+
+#~ msgid "Access stash"
+#~ msgstr "Accesso allo scrigno"
+
+#~ msgid "The Lost Trader"
+#~ msgstr "Il mercante disperso"
+
+#~ msgid "Leere Schriftrollen kaufen"
+#~ msgstr "Compra pergamene vuote"
+
+#~ msgid "Ice resistance"
+#~ msgstr "Resistenza al ghiaccio"
+
+#~ msgid "elCnlLobby"
+#~ msgstr "Consiglio degli Elementalisti, Dungeon sotterraneo"
+
+#~ msgid "medBackalley"
+#~ msgstr "Vicolo interno"
+
+#~ msgid "medMercCamp"
+#~ msgstr "Campo dei Mercenari di Medair"
+
+#~ msgid "greyCurseGrotto"
+#~ msgstr "La caverna sotterranea"
+
+#~ msgid "greyCurseGrotDep"
+#~ msgstr "La caverna sotterranea - Profondita'"
+
+#~ msgid "greyCursedCavern"
+#~ msgstr "Il tunnel sotterraneo"
+
+#~ msgid "greyCurseCaveDep"
+#~ msgstr "La grotta sotterranea - Profondita'"
+
+#~ msgid "greyCurseCaveFis"
+#~ msgstr "La grotta sotterranea - Il crepaccio"
+
+#~ msgid "greyCurseCaveEast"
+#~ msgstr "La grotta sotterranea - Parte Est"
+
+#~ msgid "greyCurseLake"
+#~ msgstr "La grotta sotterranea - Il lago nascosto"
+
+#~ msgid "aisMeadow"
+#~ msgstr "Meadow"
+
+#~ msgid "aisPlains"
+#~ msgstr "Aperta pianura"
+
+#~ msgid "aisMaylonsGraveEntry"
+#~ msgstr "La Tomba di Maylons - L'ingresso"
+
+#~ msgid "aisMaylonsGraveL1"
+#~ msgstr "La Tomba di Maylons - Primo livello"
+
+#~ msgid "aisMaylonsGraveL2"
+#~ msgstr "La Tomba di Maylons - La cripta"
+
+#~ msgid "aisHeath"
+#~ msgstr "Brughiere silenziose"
+
+#~ msgid "aisStonePlains"
+#~ msgstr "Pianure rocciose"
+
+#~ msgid "aisWideHeath"
+#~ msgstr "La vasta spianata"
+
+#~ msgid "joringsbridge"
+#~ msgstr "Joringsbridge"
+
+#~ msgid "aisNorthMeadow"
+#~ msgstr "Nord Meadow"
+
+#~ msgid "aisJoringsforest"
+#~ msgstr "Foresta di Jorings"
+
+#~ msgid "aisFairyforest"
+#~ msgstr "Foresta incantata"
+
+#~ msgid "aisDarkFairyforest"
+#~ msgstr "La tetra foresta incantata"
+
+#~ msgid "aisWolfstones"
+#~ msgstr "Le pietre dei lupi"
+
+#~ msgid "aisWestwoods"
+#~ msgstr "Boschi dell'ovest"
+
+#~ msgid "aisMounPath"
+#~ msgstr "Sentiero di montagna"
+
+#~ msgid "aisMistslope"
+#~ msgstr "Pendii nebbiosi"
+
+#~ msgid "aisEastslope"
+#~ msgstr "Pendio orientale"
+
+#~ msgid "Watch out! Monsters from the mine! Help me!"
+#~ msgstr "Attenzione! Mostri dalla miniera! Aiutatemi!"
+
+#~ msgid "Let me tell you I'm no monster. I'm worse."
+#~ msgstr "Lasciatelo dire...non sono un mostro. Sono peggio."
+
+#, fuzzy
+#~ msgid "aisMounMeadows"
+#~ msgstr "Meadow"
+
+#, fuzzy
+#~ msgid "aisMineEntry"
+#~ msgstr "La Tomba di Maylons - L'ingresso"
+
+#~ msgid "maptest"
+#~ msgstr "maptest"
+
+#~ msgid "sandbox"
+#~ msgstr "sandbox"
+
+#~ msgid "spawnAbyss"
+#~ msgstr "spawnAbyss"
+
+#~ msgid "region0"
+#~ msgstr "region0"
+
+#~ msgid "testregion"
+#~ msgstr "testregion"
+
+#~ msgid "region1"
+#~ msgstr "Regione 1"
+
+#~ msgid "dwarfenwall"
+#~ msgstr "Dwarfenwall"
+
+#~ msgid "dwarfenwallCommand"
+#~ msgstr "Al Centro di Comando di Dwarfenwall"
+
+#~ msgid "dwarfenwallRampart"
+#~ msgstr "Il Bastione di Dwarfenwall"
+
+#~ msgid "necFieldcamp"
+#~ msgstr "Il Campo base dei non-morti"
+
+#, fuzzy
+#~ msgid "ice attack"
+#~ msgstr "Cappello del novizio"
+
+#, fuzzy
+#~ msgid "Summon Skeleton"
+#~ msgstr "Scheletro enorme"
+
+#, fuzzy
+#~ msgid "Creates a skeleton."
+#~ msgstr "Scheletro gigante"
+
+#, fuzzy
+#~ msgid "Frost Wave"
+#~ msgstr "Mago del gelo"
+
+#, fuzzy
+#~ msgid "Summon Ice Obelisk"
+#~ msgstr "Obelisco di Ghiaccio"
+
+#, fuzzy
+#~ msgid "Magic Shield"
+#~ msgstr "Scudo di ferro"
+
+#, fuzzy
+#~ msgid "Chilling cold"
+#~ msgstr "Morte Congelante"
+
+#, fuzzy
+#~ msgid "Firecolumn"
+#~ msgstr "Lumaca del fuoco"
+
+#, fuzzy
+#~ msgid "Frost ring"
+#~ msgstr "Anello lucido"
+
+#, fuzzy
+#~ msgid "Ice ring"
+#~ msgstr "Anello lucido"
+
+#, fuzzy
+#~ msgid "Static shield"
+#~ msgstr "Scudo di ferro"
+
+#, fuzzy
+#~ msgid "Thunderstorm"
+#~ msgstr "Bastone del tuono"
+
+#, fuzzy
+#~ msgid "Blazing Shield"
+#~ msgstr "Scudo di ferro"
+
+#, fuzzy
+#~ msgid "Spirit Shield"
+#~ msgstr "Scudo di ferro"
+
+#, fuzzy
+#~ msgid "Remedial Water"
+#~ msgstr "Martello cerimoniale"
+
+#~ msgid "Healer"
+#~ msgstr "Guaritore"
+
+#, fuzzy
+#~ msgid "Goblin Lightning"
+#~ msgstr "Goblin combattente"
+
+#, fuzzy
+#~ msgid "goblin curse"
+#~ msgstr "Mazza goblin"
+
+#, fuzzy
+#~ msgid "monster Bash"
+#~ msgstr "Spada mostruosa"
+
+#, fuzzy
+#~ msgid "Fire arrow"
+#~ msgstr "Insetto del fuoco"
+
+#, fuzzy
+#~ msgid "throw dagger"
+#~ msgstr "Pugnale da orco"
+
+#, fuzzy
+#~ msgid "Throw a dagger"
+#~ msgstr "Pugnale da orco"
+
+#, fuzzy
+#~ msgid "saboteur_move"
+#~ msgstr "Sabotatore"
+
+#, fuzzy
+#~ msgid "Barbarian anger"
+#~ msgstr "Ascia barbarica"
+
+#, fuzzy
+#~ msgid "Charge"
+#~ msgstr "Scudo targa"
+
+#, fuzzy
+#~ msgid "Warmaster"
+#~ msgstr "Bacchetta del maestro"
+
+#, fuzzy
+#~ msgid "Fire and sword"
+#~ msgstr "Spada del terrore"
+
+#, fuzzy
+#~ msgid "Flame armor"
+#~ msgstr "Armatura di cuoio"
+
+#, fuzzy
+#~ msgid "barbarian power"
+#~ msgstr "Spada barbarica"
+
+#, fuzzy
+#~ msgid "Hammer blow"
+#~ msgstr "Arco del ranger"
+
+#, fuzzy
+#~ msgid "Monster hunter"
+#~ msgstr "Goblin cacciatore"
+
+#, fuzzy
+#~ msgid "Monster slayer"
+#~ msgstr "Spada mostruosa"
+
+#, fuzzy
+#~ msgid "Smash blow"
+#~ msgstr "Arco delle ceneri"
+
+#, fuzzy
+#~ msgid "Perseverance"
+#~ msgstr "Ascia della furia"
+
+#, fuzzy
+#~ msgid "Weaponmaster"
+#~ msgstr "Armi"
+
+#, fuzzy
+#~ msgid "Freezing Death"
+#~ msgstr "Morte Congelante"
+
+#, fuzzy
+#~ msgid "summoned"
+#~ msgstr "Bacchetta dell'evocatore"
+
+#, fuzzy
+#~ msgid "no action"
+#~ msgstr "Pozioni"
+
+#, fuzzy
+#~ msgid "guard"
+#~ msgstr "Guardia"
+
+#, fuzzy
+#~ msgid "Iron Hail"
+#~ msgstr "Scudo di ferro"
+
+#~ msgid "Bandit"
+#~ msgstr "Bandito"
+
+#~ msgid "Thug"
+#~ msgstr "Teppista"
+
+#~ msgid "Rogue"
+#~ msgstr "Furfante"
+
+#~ msgid "Brigand"
+#~ msgstr "Brigante"
+
+#~ msgid "Poacher"
+#~ msgstr "Bracconiere"
+
+#~ msgid "Alwin"
+#~ msgstr "Alwin"
+
+#~ msgid "Thief"
+#~ msgstr "Ladro"
+
+#~ msgid "Raider"
+#~ msgstr "Rapinatore"
+
+#~ msgid "Highwayman"
+#~ msgstr "Delinquente"
+
+#~ msgid "Buck"
+#~ msgstr "Buck"
+
+#~ msgid "Deserter"
+#~ msgstr "Disertore"
+
+#~ msgid "Saboteur"
+#~ msgstr "Sabotatore"
+
+#~ msgid "Todd"
+#~ msgstr "Todd"
+
+#~ msgid "Rob the Robber"
+#~ msgstr "Rob il Ladrone"
+
+#~ msgid "Ronny the Rat"
+#~ msgstr "Ronny il Ratto"
+
+#~ msgid "goblin brawler"
+#~ msgstr "Goblin attaccabrighe"
+
+#~ msgid "goblin hunter"
+#~ msgstr "Goblin cacciatore"
+
+#~ msgid "goblin robber"
+#~ msgstr "Goblin rapinatore"
+
+#~ msgid "Drakrazz"
+#~ msgstr "Drakrazz"
+
+#~ msgid "Roruz"
+#~ msgstr "Roruz"
+
+#~ msgid "Nubreck"
+#~ msgstr "Nubreck"
+
+#~ msgid "goblin dog"
+#~ msgstr "Cane goblin"
+
+#~ msgid "boneshaker"
+#~ msgstr "Squotiossa"
+
+#~ msgid "Gobrusch"
+#~ msgstr "Gobrusch"
+
+#~ msgid "Dobrusch"
+#~ msgstr "Dobrusch"
+
+#~ msgid "Lurdrak with the Hammer"
+#~ msgstr "Lurdrak e il suo Martelllo"
+
+#~ msgid "goblin fighter"
+#~ msgstr "Goblin combattente"
+
+#~ msgid "goblin poacher"
+#~ msgstr "Goblin bracconiere"
+
+#~ msgid "goblin rider"
+#~ msgstr "Goblin bandito"
+
+#~ msgid "snowcaller"
+#~ msgstr "Evocatore delle Nevi"
+
+#~ msgid "reg'resh"
+#~ msgstr "Reg'Resh"
+
+#~ msgid "goblin temple guard"
+#~ msgstr "Goblin guardia del tempio"
+
+#~ msgid "goblin apprentice"
+#~ msgstr "Goblin apprendista"
+
+#~ msgid "Marblak"
+#~ msgstr "Marblak"
+
+#~ msgid "goblin youngling"
+#~ msgstr "Cucciolo di goblin"
+
+#~ msgid "Gab'Resh"
+#~ msgstr "Gab'Resh"
+
+#~ msgid "Gab Clan Goblin"
+#~ msgstr "Gab Clan Goblin"
+
+#~ msgid "goblin warrior"
+#~ msgstr "Goblin guerriero"
+
+#~ msgid "goblin rocklobber"
+#~ msgstr "Goblin fromboliere"
+
+#~ msgid "goblin shaman"
+#~ msgstr "Goblin sciamano"
+
+#~ msgid "goblin slayer"
+#~ msgstr "Goblin mietitore"
+
+#~ msgid "goblin assassin"
+#~ msgstr "Goblin assassino"
+
+#~ msgid "Bloodbeak"
+#~ msgstr "Becco Insanguinato"
+
+#~ msgid "Giant wolf"
+#~ msgstr "Lupo gigante"
+
+#~ msgid "wolf"
+#~ msgstr "Lupo"
+
+#, fuzzy
+#~ msgid "Spider"
+#~ msgstr "Ragno"
+
+#, fuzzy
+#~ msgid "Cave Spider"
+#~ msgstr "Ragno"
+
+#, fuzzy
+#~ msgid "Giant Bat"
+#~ msgstr "Ascia gigante"
+
+#~ msgid "Tolec"
+#~ msgstr "Tolec"
+
+#~ msgid "Derred"
+#~ msgstr "Derred"
+
+#~ msgid "Worker"
+#~ msgstr "Lavoratore"
+
+#~ msgid "Council Guard"
+#~ msgstr "Guardia del Consiglio"
+
+#~ msgid "Council Mage"
+#~ msgstr "Mago del Consiglio"
+
+#~ msgid "Ireana von Nordenburg"
+#~ msgstr "Ireana di Nordburg"
+
+#~ msgid "Council Guard Captain"
+#~ msgstr "Capitano della Guardia del Consiglio"
+
+#~ msgid "Fireguardian"
+#~ msgstr "Guardiano del fuoco"
+
+#~ msgid "Fire Slug"
+#~ msgstr "Lumaca del fuoco"
+
+#~ msgid "Mutant Slug"
+#~ msgstr "Lumaca mutante"
+
+#~ msgid "Fire Louse"
+#~ msgstr "Insetto del fuoco"
+
+#~ msgid "Firefletchling"
+#~ msgstr "Firefletchling"
+
+#~ msgid "Inferno Behemoth"
+#~ msgstr "Behemoth infernale"
+
+#~ msgid "Trader"
+#~ msgstr "Mercante"
+
+#~ msgid "Bowman"
+#~ msgstr "Venditore di archi"
+
+#~ msgid "Avaeras Order, Firemage"
+#~ msgstr "Avaeras Order, Mago del Fuoco"
+
+#~ msgid "Elite Swordsman"
+#~ msgstr "Spadaccino elite"
+
+#~ msgid "Guardian Skeleton"
+#~ msgstr "Scheletro guardiano"
+
+#~ msgid "Zombie"
+#~ msgstr "Zombie"
+
+#~ msgid "Maylon"
+#~ msgstr "Maylon"
+
+#~ msgid "Skeleton"
+#~ msgstr "Scheletro"
+
+#~ msgid "Giant Skeleton"
+#~ msgstr "Scheletro gigante"
+
+#~ msgid "Skeleton Archer"
+#~ msgstr "Scheletro arciere"
+
+#~ msgid "Skeleton Shadow Archer"
+#~ msgstr "Scheletro arciere oscuro"
+
+#~ msgid "Frostbone"
+#~ msgstr "Ossa di Ghiaccio"
+
+#~ msgid "Burning Skeleton"
+#~ msgstr "Scheletro infuocato"
+
+#~ msgid "Undead Scythe"
+#~ msgstr "Falciatore di anime"
+
+#~ msgid "Necromancer"
+#~ msgstr "Necromante"
+
+#~ msgid "Worker Skeleton"
+#~ msgstr "Scheletro lavoratore"
+
+#~ msgid "Lich"
+#~ msgstr "Lich"
+
+#~ msgid "Huge Skeleton"
+#~ msgstr "Scheletro enorme"
+
+#~ msgid "Frost Skeleton"
+#~ msgstr "Scheletro del gelo"
+
+#~ msgid "Frost Skeleton Archer"
+#~ msgstr "Scheletro del gelo arciere"
+
+#~ msgid "Chilling Death"
+#~ msgstr "Morte Congelante"
+
+#~ msgid "Savage Skeleton"
+#~ msgstr "Scheletro selvaggio"
+
+#~ msgid "Boney Brothers"
+#~ msgstr "Fratelli Boney"
+
+#~ msgid "Icemage"
+#~ msgstr "Mago del ghiaccio"
+
+#~ msgid "Frostmage"
+#~ msgstr "Mago del gelo"
+
+#~ msgid "Neivan the Frostbringer"
+#~ msgstr "Neivan il Gelido"
+
+#~ msgid "Blackmage"
+#~ msgstr "Mago oscuro"
+
+#~ msgid "Black Raven"
+#~ msgstr "Corvo Nero"
+
+#~ msgid "Ice Obelisk"
+#~ msgstr "Obelisco di Ghiaccio"
+
+#~ msgid "small mandragora"
+#~ msgstr "Mandragora piccola"
+
+#~ msgid "mandragora"
+#~ msgstr "Mandragora"
+
+#~ msgid "Peasant"
+#~ msgstr "Contadino"
