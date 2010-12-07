@@ -349,8 +349,8 @@
 				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
 				addQuestion(_("Do you want to surrender your weapons?"),"all");
-				addAnswer("Yes","give_weapons_yes");
-				addAnswer("No","give_weapons_no");
+				addAnswer(_("Yes"),"give_weapons_yes");
+				addAnswer(_("No"),"give_weapons_no");
 			</Effect>
 		</Topic>
 		
@@ -758,8 +758,8 @@
 				
 				setTopicBase("Derred");
 				addQuestion(_("Explain inventory?"));
-				addAnswer("Yes","explain_inventory");
-				addAnswer("No","explain_inv_no");
+				addAnswer(_("Yes"),"explain_inventory");
+				addAnswer(_("No"),"explain_inv_no");
 			</Effect>
 		</Event>
 		
@@ -964,8 +964,8 @@
 				
 				setTopicBase("Tolec");
 				addQuestion("Levelup erklären?");
-				addAnswer("Yes","explain_levelup");
-				addAnswer("No","explain_levelup_continue");
+				addAnswer(_("Yes"),"explain_levelup");
+				addAnswer(_("No"),"explain_levelup_continue");
 				
 			</Effect>
 		</Event>
@@ -1263,8 +1263,8 @@
 				
 				setTopicBase("Derred");
 				addQuestion(_("Explain skills?"));
-				addAnswer("Yes","explain_skills");
-				addAnswer("No","explain_skills_no");
+				addAnswer(_("Yes"),"explain_skills");
+				addAnswer(_("No"),"explain_skills_no");
 			</Effect>	
 		</Event>
 	</Region>

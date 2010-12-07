@@ -79,6 +79,7 @@
 				end
 				addPlayersGold(3000/getPlayerNumber(), getPlayers())
 				speak("player",_("It's always a pleasure when a good deed goes rewarded."),"grin")
+				goblin_raid.finished = true
 			</Effect>
 		</Topic>
 		<Topic name="no_trust">
@@ -88,8 +89,8 @@
 				speak("sergeant",_("As they say: One hand washes the other."),"normal")
 				if(farm_siege.started~=true)then
 					addQuestion(_("Do you want to help the peasant?"),"all");
-					addAnswer("Yes","help_michel");
-					addAnswer("No","dont_help_michel");
+					addAnswer(_("Yes"),"help_michel");
+					addAnswer(_("No"),"dont_help_michel");
 				else
 					speak("player",_("Then I better get back to saving helpless peasants, no?"),"unhappy")
 				end

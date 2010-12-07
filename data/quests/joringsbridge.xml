@@ -258,8 +258,8 @@
 				end;
 
 				addQuestion(_("Help the peasant?"));
-				addAnswer("Yes","help_peasent");
-				addAnswer("No","no_help");
+				addAnswer(_("Yes"),"help_peasent");
+				addAnswer(_("No"),"no_help");
 			</Effect>
 		</Topic>
 		
