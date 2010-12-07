@@ -12,7 +12,7 @@ msgstr ""
 "Language-Team: german <translation-team-de@lists.sourceforge.net>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -353,12 +353,11 @@ msgstr "Wollt ihr die Waffen abgeben?"
 
 #: tutorial.xml
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: tutorial.xml
-#, fuzzy
 msgid "No"
-msgstr "Neeeeeein!"
+msgstr "Nein"
 
 #: tutorial.xml
 msgid "It seems we have no choice..."
@@ -1069,7 +1068,6 @@ msgid "Don't worry, we're almost feeling fit again."
 msgstr "Keine Sorge, wir sind schon fast wieder auf der vollen Höhe."
 
 #: tutorial.xml
-#, fuzzy
 msgid "Very well. The secret door is here."
 msgstr "Sehr gut. Die Geheimtür ist hier hinten."
 
