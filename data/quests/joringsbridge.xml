@@ -320,8 +320,8 @@
 					speak("PL", _("Prince, we take the job!"),"normal");
 				end;
 				
-				executeInDialog('unitSpeak('..prince_tmp.leonard..',_("Bei Marek!"),"fear")');
-				executeInDialog('unitSpeak('..joringsbridge.sergeant..',_("Wer ist das?"),"surprised")');
+				executeInDialog('unitSpeak('..prince_tmp.leonard..',_("By Marek!"),"fear")');
+				executeInDialog('unitSpeak('..joringsbridge.sergeant..',_("Who is that?"),"surprised")');
 				executeInDialog('lookAt('..prince_tmp.karlen..',"locLeader");');
 				executeInDialog('lookAt('..prince_tmp.leonard..',"locLeader");');
 				executeInDialog('lookAt('..prince_tmp.peasent..',"locLeader");');

@@ -394,7 +394,7 @@
 					speak("leader",_("We know that one already. Cut the speach."),"bored");
 				end;
 				if (getSpeaker("leader") ~= getSpeaker("any")) then
-					insertInDialog("getSpeaker('any'), _('What?!! Der Fluch kann von uns genommen werden? Warum hoere ich das erst jetzt?'),'surprised');")
+					insertInDialog("getSpeaker('any'), _('What?!! The curse can be lifted from us? Why do I hear of this only now?'),'surprised');")
 				end;
 				speak("Soren",_("As you wish."),"grin");
 				speak("Soren",_("But I should warn you. The task is pretty dangerous and you are likely to die more than once."));
@@ -719,9 +719,9 @@
 					speakPause(1000);
 					removeSpeaker(soren);
 					if(femaleOnly())then
-						executeInDialog('unitSpeak('..soren..', _("Mach das sofort rueckgaengig, oder jede Wache in Aisen wird hinter dir her sein, Verfluchte!"),"threaten")');
+						executeInDialog('unitSpeak('..soren..', _("Reverse this at once or every guard of Aisen will be on your trail, Cursed One! ##female"),"threaten")');
 					else
-						executeInDialog('unitSpeak('..soren..', _("Mach das sofort rueckgaengig, oder jede Wache in Aisen wird hinter dir her sein, Verfluchter!"),"threaten")');
+						executeInDialog('unitSpeak('..soren..', _("Reverse this at once or every guard of Aisen will be on your trail, Cursed One! ##male"),"threaten")');
 					end;
 					speak("PL", _("Right, right."),"grin");
 					speak("PL", _("Your people would be quite surprised were I came from."),"sneer");
@@ -730,7 +730,7 @@
 					else
 						speak("PL", _("And it's Branded One."),"unhappy");
 					end;
-						executeInDialog('unitSpeak('..soren..', _("Du bist besser bereit, die Konsequenzen zu tragen, elende Kreatur."),"angry")');
+						executeInDialog('unitSpeak('..soren..', _("You are better prepared to suffer the consequences, wretched creature."),"angry")');
 					speak("PL", _("Blind and deaf, but not mute, eh?"),"thoughtful");
 					speak("PL", _("It's going to be a wearisome journey, if this keeps going on..."),"unhappy");
 					speak("PL", _("Calm yourself, Lord of the unpleasent airs!"),"normal");

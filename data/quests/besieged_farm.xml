@@ -117,7 +117,7 @@
 				speak("wife",_("With a crytal of Avearea, of course. It's been handed down in my family for generations."));
 				speak("PL",_("Of course. Silly of me."),"normal");
 				if((getSpeaker("mage")~=nil)and(getSpeaker("PL")~=getSpeaker("mage")))then
-					speak("mage",_("Really now. Did you think she'd use carrier pigeons in this day and age?"..name..". Dachtest du, irgendwer benutzt heutzutage noch Brieftauben?"));
+					speak("mage",_("Really now, "..name..". Did you think she'd use carrier pigeons in this day and age?"));
 					if(duo())then
 						speak("PL",_("Let's just go collect the money."),"offended");
 					else

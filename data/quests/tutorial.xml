@@ -1298,7 +1298,7 @@
 						end
 					end;
 					
-					speak("Tolec",_("Very well. Die Geheimtür ist hier hinten."),"happy");
+					speak("Tolec",_("Very well. The secret door is here."),"happy");
 					speak("Derred",_("Wait a second. What if the old geezer has attached a trap to it?"),"thoughtful");
 					if (solo() and femaleOnly()) then
 						speak("Tolec",_("You're right. It's best if you do it, Branded One. At least nothing lasting can happen that way."),"surprised") ;
