@@ -219,8 +219,10 @@ struct Damage
 	 * \fn std::string getDamageString((Usage usage= NORMAL)
 	 * \brief Erzeugt einen String der den angegebenen Schaden anzeigt
 	 * \param usage Gibt an wofuer die Beschreibung verwendet wird (beeinflusst welche Daten angegeben werden)
+	 * \param rarityColor color used to display magically enhanced values
+	 * \param magic_mods bitset with ones set for magically enhanced values (see \ref ItemFactory::ItemMod )
 	 */
-	std::string getDamageString(Usage usage= NORMAL);
+	std::string getDamageString(Usage usage= NORMAL, std::string rarityColor="", std::bitset<32>* magic_mods=0);
 	
 	/**
 	 * \fn int getValue(std::string valname)

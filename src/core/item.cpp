@@ -865,13 +865,16 @@ std::string Item::getDescription(float price_factor, ItemRequirementsMet irm)
 
 std::list<std::string> Item::getDescriptionAsStringList(float price_factor, ItemRequirementsMet irm)
 {
+	// this mapping is necessary because order of element is differen in item and damage x(
+	int elemmap[4] = {0,3,2,1};
+	
     std::list<std::string> itemDescList;
     std::string defaultColor = "[colour='FF2F2F2F']";
     std::string rarityColor;
     switch (m_rarity)
     {
         case MAGICAL:
-            rarityColor = "[colour='FF00C000']";
+            rarityColor = "[colour='FF00A000']";
             break;
         case RARE:
             rarityColor = "[colour='FF2573D9']";
@@ -1035,7 +1038,7 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
         //out_stream << "Angriffe: "<<m_weapon_attr->m_attack_speed*0.001f<<"/s";
         
         // Schaden
-        std::string dmgstring = m_weapon_attr->m_damage.getDamageString(Damage::ITEM);
+        std::string dmgstring = m_weapon_attr->m_damage.getDamageString(Damage::ITEM,rarityColor,&m_magic_mods);
         if (dmgstring != "")
         {
             if (m_type == WEAPON)
@@ -1044,6 +1047,8 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
                 itemDescList.push_back(out_stream.str());
                 out_stream.str("");
             }
+            
+            // split damage string into lines
             std::string::size_type pos = dmgstring.find("\n");
             while(pos != std::string::npos)
             {
@@ -1053,7 +1058,7 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
                 dmgstring.erase(0,pos+1);
                 pos = dmgstring.find("\n");
             }
-            out_stream << dmgstring;
+            out_stream << dmgstring << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
@@ -1064,49 +1069,84 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
     {
         if (m_equip_effect->m_darmor>0)
         {
-            out_stream<< gettext("Armor")<<": "<<m_equip_effect->m_darmor << "\n";
+			if (m_magic_mods.test(ItemFactory::ARMOR_MOD)) 
+				out_stream << rarityColor;
+            out_stream<< gettext("Armor")<<": "<<m_equip_effect->m_darmor ;
+			if (m_magic_mods.test(ItemFactory::ARMOR_MOD)) 
+				out_stream << defaultColor;
+			out_stream << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         
         if (m_equip_effect->m_dblock>0)
         {
-            out_stream<< gettext("Block")<<": "<<m_equip_effect->m_dblock << "\n";
+			if (m_magic_mods.test(ItemFactory::BLOCK_MOD)) 
+				out_stream << rarityColor;
+            out_stream<< gettext("Block")<<": "<<m_equip_effect->m_dblock;
+			if (m_magic_mods.test(ItemFactory::BLOCK_MOD)) 
+				out_stream << defaultColor;
+			out_stream << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         
         if (m_equip_effect->m_dmax_health>0)
         {
-            out_stream<< "+" <<(int) m_equip_effect->m_dmax_health<< " "<<gettext("max hitpoints") << "\n";
+			if (m_magic_mods.test(ItemFactory::HEALTH_MOD)) 
+				out_stream << rarityColor;
+            out_stream<< "+" <<(int) m_equip_effect->m_dmax_health<< " "<<gettext("max hitpoints");
+			if (m_magic_mods.test(ItemFactory::HEALTH_MOD)) 
+				out_stream << defaultColor;
+			out_stream << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         
         if (m_equip_effect->m_dstrength>0)
         {
-            out_stream<< "+"<<m_equip_effect->m_dstrength<< " "<<gettext("Strength") << "\n";
+			if (m_magic_mods.test(ItemFactory::STRENGTH_MOD)) 
+				out_stream << rarityColor;
+            out_stream<< "+"<<m_equip_effect->m_dstrength<< " "<<gettext("Strength");
+			if (m_magic_mods.test(ItemFactory::STRENGTH_MOD)) 
+				out_stream << defaultColor;
+			out_stream << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         
         if (m_equip_effect->m_ddexterity>0)
         {
-            out_stream<<"+"<<m_equip_effect->m_ddexterity<< " "<<gettext("Dexterity") << "\n";
+			if (m_magic_mods.test(ItemFactory::DEXTERITY_MOD)) 
+				out_stream << rarityColor;
+            out_stream<<"+"<<m_equip_effect->m_ddexterity<< " "<<gettext("Dexterity");
+			if (m_magic_mods.test(ItemFactory::DEXTERITY_MOD)) 
+				out_stream << defaultColor;
+			out_stream << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         
         if (m_equip_effect->m_dmagic_power>0)
         {
-            out_stream<< "+"<<m_equip_effect->m_dmagic_power<< " "<<gettext("Magic Power") << "\n";
+			if (m_magic_mods.test(ItemFactory::MAGIC_POWER_MOD)) 
+				out_stream << rarityColor;
+            out_stream<< "+"<<m_equip_effect->m_dmagic_power<< " "<<gettext("Magic Power");
+			if (m_magic_mods.test(ItemFactory::MAGIC_POWER_MOD)) 
+				out_stream << defaultColor;
+			out_stream << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
         
         if (m_equip_effect->m_dwillpower>0)
         {
-            out_stream<< "+"<<m_equip_effect->m_dwillpower<< " "<<gettext("Willpower") << "\n";
+			if (m_magic_mods.test(ItemFactory::WILLPOWER_MOD)) 
+				out_stream << rarityColor;
+            out_stream<< "+"<<m_equip_effect->m_dwillpower<< " "<<gettext("Willpower");
+			if (m_magic_mods.test(ItemFactory::WILLPOWER_MOD)) 
+				out_stream << defaultColor;
+			out_stream << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
@@ -1115,7 +1155,14 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
         {
             if (m_equip_effect->m_dresistances[i]>0)
             {
-                out_stream<< "+"<<m_equip_effect->m_dresistances[i]<<" "<<Damage::getDamageResistanceName((Damage::DamageType) i) << "\n";
+				if (m_magic_mods.test(ItemFactory::RESIST_PHYS_MOD + elemmap[i])) 
+					out_stream << rarityColor;
+				
+                out_stream<< "+"<<m_equip_effect->m_dresistances[i]<<" "<<Damage::getDamageResistanceName((Damage::DamageType) i);
+				
+				if (m_magic_mods.test(ItemFactory::RESIST_PHYS_MOD+elemmap[i])) 
+					out_stream << defaultColor;
+				out_stream << "\n";
                 itemDescList.push_back(out_stream.str());
                 out_stream.str("");
             }
@@ -1125,7 +1172,13 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
         {
             if (m_equip_effect->m_dresistances_cap[i]>0)
             {
-                out_stream<< "+"<<m_equip_effect->m_dresistances_cap[i]<<gettext(" max. ")<<Damage::getDamageResistanceName((Damage::DamageType) i) << "\n";
+				out_stream << rarityColor;
+				
+                out_stream<< "+"<<m_equip_effect->m_dresistances_cap[i]<<gettext(" max. ")<<Damage::getDamageResistanceName((Damage::DamageType) i);
+				
+				out_stream << defaultColor;
+				out_stream << "\n";
+				
                 itemDescList.push_back(out_stream.str());
                 out_stream.str("");
             }

@@ -1,6 +1,7 @@
 #include "damage.h"
 #include "eventsystem.h"
 #include "gettext.h"
+#include "itemfactory.h"
 
 Damage::Damage()
 {
@@ -217,8 +218,12 @@ float Damage::getSumMaxDamage()
 	return s;
 }
 
-std::string Damage::getDamageString(Damage::Usage usage)
+std::string Damage::getDamageString(Damage::Usage usage, std::string rarityColor, std::bitset<32>* magic_mods)
 {
+	// this mapping is necessary because order of element is differen in item and damage x(
+	int elemmap[4] = {0,3,2,1};
+	std::string defaultColor = "[colour='FF2F2F2F']";
+	
 	std::ostringstream out_stream;
 	out_stream.str("");
 	bool first = true;
@@ -231,8 +236,14 @@ std::string Damage::getDamageString(Damage::Usage usage)
 			if (!first)
 				out_stream << "\n";
 
+			if (magic_mods && magic_mods->test(ItemFactory::DAMAGE_PHYS_MOD+ elemmap[i])) 
+				out_stream << rarityColor;
+			
 			first = false;
 			out_stream <<getDamageTypeName((DamageType) i) <<": "<<(int) m_min_damage[i]<<"-"<< (int) m_max_damage[i];
+			
+			if (magic_mods && magic_mods->test(ItemFactory::DAMAGE_PHYS_MOD+ elemmap[i])) 
+				out_stream << defaultColor;
 		}
 	}
 
@@ -244,6 +255,9 @@ std::string Damage::getDamageString(Damage::Usage usage)
 			if (!first)
 				out_stream << "\n";
 
+			if (magic_mods && magic_mods->test(ItemFactory::DAMAGE_MULT_PHYS_MOD+ elemmap[i])) 
+				out_stream << rarityColor;
+			
 			first = false;
 			if (m_multiplier[i]>1)
 			{
@@ -253,6 +267,9 @@ std::string Damage::getDamageString(Damage::Usage usage)
 			{
 				out_stream <<getDamageTypeName((DamageType) i) <<": -"<<(int) (100*(1-m_multiplier[i]))<< "% "<< gettext("damage");
 			}
+			
+			if (magic_mods && magic_mods->test(ItemFactory::DAMAGE_MULT_PHYS_MOD+ elemmap[i])) 
+				out_stream << defaultColor;
 		}
 	}
 	if (usage != NORMAL)
@@ -270,7 +287,13 @@ std::string Damage::getDamageString(Damage::Usage usage)
 			}
 			else
 			{
+				if (magic_mods && magic_mods->test(ItemFactory::ATTACK_MOD)) 
+					out_stream << rarityColor;
+				
 				out_stream <<gettext("Attack")<<": "<<(int) m_attack;
+				
+				if (magic_mods && magic_mods->test(ItemFactory::ATTACK_MOD)) 
+					out_stream << defaultColor;
 			}
 		}
 
@@ -287,7 +310,13 @@ std::string Damage::getDamageString(Damage::Usage usage)
 			}
 			else
 			{
+				if (magic_mods && magic_mods->test(ItemFactory::POWER_MOD)) 
+					out_stream << rarityColor;
+				
 				out_stream <<gettext("Power")<<": "<<(int) m_power << "\n";
+				
+				if (magic_mods && magic_mods->test(ItemFactory::POWER_MOD)) 
+					out_stream << defaultColor;
 			}
 		}
 
@@ -295,9 +324,9 @@ std::string Damage::getDamageString(Damage::Usage usage)
 		if (m_crit_perc>0 && !first)
 		{
 			out_stream << "\n";
-
+			out_stream << rarityColor;
 			out_stream << gettext("Chance for critical hit")<<": "<<(int) (100*m_crit_perc)<<"%";
-
+			out_stream << defaultColor;
 		}
 	}
 
@@ -310,8 +339,10 @@ std::string Damage::getDamageString(Damage::Usage usage)
 				out_stream << "\n";
 
 			first = false;
-
+			
+			out_stream << rarityColor;
 			out_stream <<getStatusModName((StatusMods) i) <<": "<<m_status_mod_power[i];
+			out_stream << defaultColor;
 		}
  	}
 
