@@ -1089,14 +1089,15 @@ void  MainWindow::updateCharCreate()
 void MainWindow::updateCursorItemImage()
 {
 	Player* player = m_document->getLocalPlayer();
-	Item* item = player->getEquipement()->getItem(Equipement::CURSOR_ITEM);
+	Item* item = 0;
+	item = player->getEquipement()->getItem(Equipement::CURSOR_ITEM);
 	
 	
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label = win_mgr.getWindow("CursorItemImage");
 	
-	if (item ==0)
+	if (item == 0)
 	{
 		// Kein Item mehr am Cursor
 		// Bild verstecken
@@ -1118,7 +1119,7 @@ void MainWindow::updateCursorItemImage()
 		
 		// Groesse des Items am Cursor ermitteln
 		unsigned int size = item->m_size;
-		
+
 			
 		if (size != label->getID())
 		{

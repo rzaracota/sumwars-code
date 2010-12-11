@@ -1,6 +1,7 @@
-
 #include "skilltree.h"
 
+#include "tooltipmanager.h"
+#include "ceguiutility.h"
 
 SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard)
 	:Window(doc)
@@ -352,20 +353,20 @@ void SkillTree::updateAbilityTooltip(unsigned int pos)
 	
 	DEBUGX("update tooltip for %i %s", pos, ablts[pos].m_type.c_str());
 
-		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-		CEGUI::Window* label;
-		std::ostringstream out_stream;
-		out_stream.str("");
-		out_stream << "SkillImage" << pos;
-
-		label = win_mgr.getWindow(out_stream.str());
-
-		std::string tooltip = m_document->getAbilityDescription(ablts[pos].m_type);
-
-		label->setTooltipText((CEGUI::utf8*) tooltip.c_str());
-
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+	std::ostringstream out_stream;
+	out_stream.str("");
+	out_stream << "SkillImage" << pos;
 	
-
+	label = win_mgr.getWindow(out_stream.str());
+	std::string tooltip = m_document->getAbilityDescription(ablts[pos].m_type);
+	
+	FormatedText txt =  CEGUIUtility::fitTextToWindow((CEGUI::utf8*)tooltip.c_str(), 400, CEGUIUtility::Centred, label->getFont());
+	std::string asf = txt.text.c_str();
+	
+	TooltipManager::getSingleton().createTooltip(label, txt.text.c_str());
+	
 }
 
 bool SkillTree::onSkillMouseClicked(const CEGUI::EventArgs& evt)

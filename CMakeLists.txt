@@ -100,7 +100,7 @@ IF(WIN32)
 ENDIF()
 
 
-
+MESSAGE(${CMAKE_BUILD_TYPE})
 
 SET(SRCS_NLFG ./Dependencies/nlfg/nlfg.c)
 SET(SRCS_TINYXML

@@ -81,6 +81,11 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
     }
 }
 
+void TooltipManager::createTooltip(CEGUI::Window* win, std::string text, float timeVisible, CEGUI::Font* font, Tooltip::TooltipType type)
+{
+	createTooltip(win, CEGUIUtility::getTextAsList(text), timeVisible, font, type);
+}
+
 
 void TooltipManager::fadeAllOut()
 {

@@ -84,7 +84,7 @@ CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> list, 
 		 }
 		
 		
-		added += s;
+		added += s + "\n";
 
         float tempwidth = font->getTextExtent(stripColours(s).c_str()) ;
         if (tempwidth > textWidth)
@@ -152,7 +152,8 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 	}
 	*/
 
-	CEGUI::String newText((CEGUI::utf8*)text.c_str());
+	//CEGUI::String newText((CEGUI::utf8*)text.c_str());
+	CEGUI::String newText(text.c_str());
 	
 	// handle wraping cases
 	size_t lineStart = 0, lineEnd = 0;
@@ -173,7 +174,7 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 		lineStart = lineEnd + 1;
 		
 		// get first word.
-		currpos = getNextWord(sourceLine, 0, thisLine);
+		currpos += getNextWord(sourceLine, 0, thisLine);
 		
 		// while there are words left in the string...
 		while (CEGUI::String::npos != sourceLine.find_first_not_of(whitespace, currpos))
@@ -181,8 +182,11 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 			// get next word of the string...
 			currpos += getNextWord(sourceLine, currpos, thisWord);
 			
+			float davor = (font->getTextExtent(thisLine, x_scale));
+			float danach = (font->getTextExtent(thisLine, x_scale) + font->getTextExtent(thisWord, x_scale));
+			
 			// if the new word would make the string too long
-                        if ((font->getTextExtent(thisLine, x_scale) + font->getTextExtent(thisWord, x_scale)) > maxWidth)
+			if ((font->getTextExtent(thisLine, x_scale) + font->getTextExtent(thisWord, x_scale)) > maxWidth)
 			{
 				// too long, so that's another line of text
 				line_count++;
@@ -190,7 +194,9 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 				// remove whitespace from next word - it will form start of next line
 				thisWord = thisWord.substr(thisWord.find_first_not_of(whitespace));
 				
+				int sz = thisWord.size();
 				newText.insert(currpos - thisWord.size(), LINE_ENDING);
+				
 				// reset for a new line.
 				thisLine.clear();
 			}
