@@ -143,16 +143,13 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	CEGUI::Font *font = img->getTooltip()->getFont();
 	std::string msg;
 	ItemRequirementsMet irm = player->checkItemRequirements ( item );
-	std::list<std::string> l = item->getDescriptionAsStringList ( price_factor, irm );
-	l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, "Hovered:\n", CEGUIUtility::Black ));
 	
-	std::ostringstream out_stream;
-
-	tMgr->createTooltip ( img, l, 0, font, Tooltip::Main );
-
 	Item *currentEqItem = 0;
 	Item *currentEqItemOffhand = 0;
 
+	std::string primary_eq_head = "Equipped:\n";
+	std::string secondary_eq_head = "Equipped:\n";
+	
 	switch ( item->m_type )
 	{
 		case Item::NOITEM:
@@ -173,6 +170,13 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 		case Item::WEAPON:
 			currentEqItem = player->getEquipement()->getItem ( Equipement::WEAPON );
 			currentEqItemOffhand = player->getEquipement()->getItem ( Equipement::WEAPON2 );
+			secondary_eq_head = "Equipped (secondary):\n";
+			
+			// swap pointers if secondary equip is activated
+			if (player->isUsingSecondaryEquip())
+			{
+				std::swap(currentEqItem,currentEqItemOffhand); 
+			}
 			break;
 
 		case Item::SHIELD:
@@ -185,6 +189,8 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 		case Item::RING:
 			currentEqItem = player->getEquipement()->getItem ( Equipement::RING_LEFT );
 			currentEqItemOffhand = player->getEquipement()->getItem ( Equipement::RING_RIGHT );
+			primary_eq_head = "Equipped (left):\n";
+			secondary_eq_head = "Equipped (right):\n";
 			break;
 
 		case Item::AMULET:
@@ -198,17 +204,34 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 			break;
 
 	}
+	
+	// Do not display the same item twice (happens if you hover an equiped item)
+	if (item == currentEqItem)
+		currentEqItem = 0;
+	if (item == currentEqItemOffhand)
+		currentEqItemOffhand = 0;
+	
+	// create main tooltip
+	std::list<std::string> l = item->getDescriptionAsStringList ( price_factor, irm );
+	l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, "Hovered:\n", CEGUIUtility::Black ));
 
+	std::ostringstream out_stream;
+
+	tMgr->createTooltip ( img, l, 0, font, Tooltip::Main );
+
+	// create secondary tooltips
 	if ( currentEqItem )
 	{
 		l = currentEqItem->getDescriptionAsStringList ( price_factor );
+		l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, primary_eq_head, CEGUIUtility::Black ));
 		tMgr->createTooltip ( img, l, 0, font, Tooltip::Comparision );
-
-		if ( currentEqItemOffhand )
-		{
-			l = currentEqItemOffhand->getDescriptionAsStringList ( price_factor );
-			tMgr->createTooltip ( img, l, 0, font, Tooltip::Comparision );
-		}
+	}
+	
+	if ( currentEqItemOffhand )
+	{
+		l = currentEqItemOffhand->getDescriptionAsStringList ( price_factor );
+		l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, secondary_eq_head, CEGUIUtility::Black ));
+		tMgr->createTooltip ( img, l, 0, font, Tooltip::Comparision );
 	}
 }
 
