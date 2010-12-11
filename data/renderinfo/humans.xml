@@ -121,7 +121,7 @@
 <RenderInfo name="human_alwin" parent="bandit_base">
 	<Entity source="rogue.mesh" scale="1.1"/>
 	<Subobject objectname="armor" source="rogueArmorEnemy" />
-	<ParticleSystem objectname="fire" bone="itemLeftHand" source="HandFire" />
+	<ParticleSystem objectname="fire" bone="itemLeftHand" source="HandFire"  scale="1.1"/>
 	<Entity objectname="weapon" bone="itemLeftHand" source="bow.mesh"  />
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
 	<Entity objectname="hair" bone="crown" source="hairShort_ms3.mesh" />
@@ -163,7 +163,7 @@
 
 <RenderInfo name="human_buck" parent="bandit_base">
 	<Entity source="rogue.mesh" scale="1.2"/>
-	<Subobject objectname="armor" source="rogueArmorEnemy" />
+	<Subobject objectname="armor" source="rogueArmorEnemy"  scale="1.2"/>
 	<Entity objectname="weapon" source="iroclb_hmr.mesh" bone="itemRightHand" />
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
 	<Entity objectname="hair" bone="crown" source="hairShort_ms5.mesh" />
@@ -189,7 +189,7 @@
 
 <RenderInfo name="human_rob_fairy" parent="bandit_2h_base">
 	<Entity source="rogue.mesh" scale="1.2"/>
-	<Subobject objectname="armor" source="rogueArmorEnemy2h" />
+	<Subobject objectname="armor" source="rogueArmorEnemy2h"  scale="1.2"/>
 	<Entity objectname="weapon" bone="itemRightHand" source="great_axe.mesh"/>
 	<Entity objectname="head" bone="crown" source="head1.mesh" />
 	<Entity objectname="hair" bone="crown" source="hairShort_ms4.mesh" />
