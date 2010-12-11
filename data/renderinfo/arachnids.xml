@@ -18,6 +18,13 @@
 		<Animation name="attack2" />
 	</Action>
 
+	<Action name="poison_attack">
+		<Animation name="attack1" />
+	</Action>
+	<Action name="poison_attack">
+		<Animation name="attack2" />
+	</Action>
+
 	<Action name="die">
 		<Animation name="die" />
 		<Sound objectname="sound" name="worm_die"/>
