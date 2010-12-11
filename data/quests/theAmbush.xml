@@ -18,7 +18,11 @@
 		
 		<Event trigger="player_moved">
 			<Condition>
-				return unitIsInArea(trigger.player,"northernExit")
+				if(fissure.finished ~= true)then
+					return unitIsInArea(trigger.player,"northernExit")
+				else
+					return false
+				end
 			</Condition>
 			<Effect>
 				unitSpeak(trigger.player,_("Dwarfenwall is in that direction. I shouldn't go this way yet."),"thoughtful");
