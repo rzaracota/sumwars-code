@@ -20,10 +20,11 @@ class Gettext
 	public:
 		/**
 		 * \fn static void init(const char* locale)
-		 * \brief initialisiert Gettext
-		 * \param locale Sprache
+		 * \brief initializes Gettext
+		 * \param locale Language
+		 * \param pathToTranslationFiles Path to the translation files
 		 */
-		static void init(const char* locale);
+		static void init(const char* locale, std::string pathToTranslationFiles);
 
 		/**
 		 * \fn static const char* getLocale()

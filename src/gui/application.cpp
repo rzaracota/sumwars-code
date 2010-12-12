@@ -460,8 +460,8 @@ bool Application::setupResources()
 bool Application::initGettext()
 {
 	DEBUG("initializing internationalisation");
-
-	Gettext::init("");
+	Ogre::StringVectorPtr path = Ogre::ResourceGroupManager::getSingleton().findResourceLocation("translation", "*");
+	Gettext::init("", path.get()->at(0));
 	return true;
 }
 

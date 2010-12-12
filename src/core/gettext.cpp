@@ -1,7 +1,6 @@
 #include "gettext.h"
 #include "debug.h"
 
-
 #ifdef WIN32
 	#define WIN32_LEAN_AND_MEAN
     #include <windows.h>
@@ -11,57 +10,57 @@ std::string Gettext::m_locale;
 
 bool Gettext::m_changed;
 
-void Gettext::init(const char* locale)
+void Gettext::init(const char* locale, std::string pathToTranslationFiles)
 {
-	bindtextdomain ("defend_dwarfenwall","./translation/");
+	bindtextdomain ("defend_dwarfenwall",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("defend_dwarfenwall","UTF-8");
 
-	bindtextdomain ("fortify_dwarfenwall","./translation/");
+	bindtextdomain ("fortify_dwarfenwall",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("fortify_dwarfenwall","UTF-8");
 
-	bindtextdomain ("herb_collector","./translation/");
+	bindtextdomain ("herb_collector",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("herb_collector","UTF-8");
 
-	bindtextdomain ("joringsbridge","./translation/");
+	bindtextdomain ("joringsbridge",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("joringsbridge","UTF-8");
 
-	bindtextdomain ("maylons_grave","./translation/");
+	bindtextdomain ("maylons_grave",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("maylons_grave","UTF-8");
 
-	bindtextdomain ("menu","./translation/");
+	bindtextdomain ("menu",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("menu","UTF-8");
 
-	bindtextdomain ("rescue_willard","./translation/");
+	bindtextdomain ("rescue_willard",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("rescue_willard","UTF-8");
 
-	bindtextdomain ("rob_the_robber","./translation/");
+	bindtextdomain ("rob_the_robber",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("rob_the_robber","UTF-8");
 
-	bindtextdomain ("sumwars","./translation/");
+	bindtextdomain ("sumwars",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("sumwars","UTF-8");
 
-	bindtextdomain ("testquest","./translation/");
+	bindtextdomain ("testquest",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("testquest","UTF-8");
 
-	bindtextdomain ("the_ambush_of_the_undead","./translation/");
+	bindtextdomain ("the_ambush_of_the_undead",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("the_ambush_of_the_undead","UTF-8");
 
-	bindtextdomain ("the_ambush","./translation/");
+	bindtextdomain ("the_ambush",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("the_ambush","UTF-8");
 
-	bindtextdomain ("the_besieged_farm","./translation/");
+	bindtextdomain ("the_besieged_farm",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("the_besieged_farm","UTF-8");
 
-	bindtextdomain ("the_goblinslayer","./translation/");
+	bindtextdomain ("the_goblinslayer",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("the_goblinslayer","UTF-8");
 
-	bindtextdomain ("the_poolmonster","./translation/");
+	bindtextdomain ("the_poolmonster",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("the_poolmonster","UTF-8");
 
-	bindtextdomain ("the_trader","./translation/");
+	bindtextdomain ("the_trader",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("the_trader","UTF-8");
 
-	bindtextdomain ("tutorial","./translation/");
+	bindtextdomain ("tutorial",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("tutorial","UTF-8");
 
 	textdomain ("menu");
