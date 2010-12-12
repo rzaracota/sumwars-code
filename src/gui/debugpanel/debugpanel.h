@@ -8,7 +8,6 @@
 
 #include <map>
 
-
 class DebugPanel : public Ogre::Singleton<DebugPanel>
 {
 public:
@@ -85,7 +84,6 @@ private:
 	*/
 	CEGUI::Window *m_rootWindow;
 
-	
 	/**
 	* \var 	CEGUI::Window* m_gameScreen;
 	* \brief  Pointer to the root gamescreen

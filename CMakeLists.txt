@@ -74,6 +74,7 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/core)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel/filebrowser)
 INCLUDE_DIRECTORIES(${OGRE_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${OIS_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
@@ -93,6 +94,7 @@ INCLUDE_DIRECTORIES(${PTHREADS_INCLUDE_DIR})
 ENDIF()
 
 IF(WIN32)
+	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/dirent)
 	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost)
 	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/include/)
 	ADD_DEFINITIONS( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4800 /wd4244 /wd4305 /nologo" )
@@ -173,6 +175,7 @@ SET(SRCS
   ./src/gui/debugpanel/guidebugtab.cpp
   ./src/gui/debugpanel/luascripttab.cpp
   ./src/gui/debugpanel/textfileeditwindow.cpp
+  ./src/gui/debugpanel/filebrowser/filebrowser.cpp
   ./src/gui/minimapwindow.cpp
   ./src/gui/worldmap.cpp
   ./src/gui/mainmenu.cpp

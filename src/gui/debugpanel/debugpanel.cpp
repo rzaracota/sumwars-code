@@ -2,6 +2,7 @@
 #include "guidebugtab.h"
 #include "luascripttab.h"
 #include "OgreRoot.h"
+#include "filebrowser.h"
 
 using namespace CEGUI;
 
@@ -14,6 +15,9 @@ void DebugPanel::init(bool visible)
 	m_gameScreen = m_winManager->getWindow("GameScreen");
 	m_lastVisibilitySwitch = 0;
 	createPanel(visible);
+
+	//FileBrowser *fb = new FileBrowser();
+	//fb->init("C:\\", true);
 }
 
 void DebugPanel::toogleVisibility()
@@ -87,7 +91,6 @@ void DebugPanel::update(OIS::Keyboard *keyboard)
 		DebugTab *dt = iter->second;
 		dt->update();
 	}
-
 }
 
 
