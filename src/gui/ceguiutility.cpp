@@ -152,7 +152,6 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 	}
 	*/
 
-	//CEGUI::String newText((CEGUI::utf8*)text.c_str());
 	CEGUI::String newText(text.c_str());
 	
 	// handle wraping cases
@@ -162,6 +161,8 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 	CEGUI::String  whitespace = CEGUI::TextUtils::DefaultWhitespace;
 	CEGUI::String	thisLine, thisWord;
 	size_t	line_count = 0, currpos = 0;
+	
+	size_t fullPosCtr = 0;
 	
 	while (lineEnd < text.length())
 	{
@@ -174,7 +175,7 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 		lineStart = lineEnd + 1;
 		
 		// get first word.
-		currpos += getNextWord(sourceLine, 0, thisLine);
+		currpos = getNextWord(sourceLine, 0, thisLine);
 		
 		// while there are words left in the string...
 		while (CEGUI::String::npos != sourceLine.find_first_not_of(whitespace, currpos))
@@ -189,13 +190,15 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 			if ((font->getTextExtent(thisLine, x_scale) + font->getTextExtent(thisWord, x_scale)) > maxWidth)
 			{
 				// too long, so that's another line of text
+				fullPosCtr += thisLine.size();
 				line_count++;
 				
 				// remove whitespace from next word - it will form start of next line
 				thisWord = thisWord.substr(thisWord.find_first_not_of(whitespace));
 				
 				int sz = thisWord.size();
-				newText.insert(currpos - thisWord.size(), LINE_ENDING);
+				newText.insert(fullPosCtr+1, LINE_ENDING);
+				fullPosCtr += 2;
 				
 				// reset for a new line.
 				thisLine.clear();
@@ -205,6 +208,7 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 			thisLine += thisWord;
 		}
 		
+		fullPosCtr += thisLine.size();
 		// plus one for final line
 		line_count++;
 	}
@@ -213,6 +217,5 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 	formt.lines = line_count;
 	return formt;
 }
-
 
 
