@@ -138,7 +138,7 @@
 		<TradeItem subtype="silver_aml"  number="0" number_magical="7" min_enchant="100" max_enchant="300" probability="0.6"/>
 	</Trade>	
 	
-	<Topic name="trade" start_option="Fundgegenstaende" />
+	<Topic name="trade" start_option="Objects found" />
 	
 	<Topic name="the_goods" start_option="What are these Items?">
 		<Condition>

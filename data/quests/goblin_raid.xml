@@ -1,4 +1,4 @@
-<Quest name="goblin_raid" table_name="goblin_raid">
+<Quest name="goblin_raid" table_name="goblin_raid" domain = "goblin_raid">
 	<Description>
 		if (goblin_raid.finished==true) then
 			return _("Well, I got a little money for killing some goblins I would have wasted anyway. Not a bad day.")

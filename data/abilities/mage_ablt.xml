@@ -496,7 +496,7 @@
 
 <Ability type="static_shield"
 		 name="Static shield"
-		 description="The mage surrounds himself with an armor of lightning, that will stun and damage enemies who are bolt enough to attack in close combat."
+		 description="The mage surrounds himself with an armor of lightning, that will stun and damage enemies who are bold enough to attack in close combat."
 		 time="501.000000" 
 		 timer_nr="2.000000"
 		 timer_value="20000.000000"

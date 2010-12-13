@@ -173,7 +173,7 @@
 
 <Ability type="cure_blind_mute_party"
 		 name="Omniscent Eye"
-		 description="The party will be immune to blind and berserk for some time. With increasing willpower the priest can hold this effect longer."
+		 description="The party will be immune to blind and mute for some time. With increasing willpower the priest can hold this effect longer."
 		 time="501.000000"
 		 timer_nr="2.000000"
 		 timer_value="6000.000000" 
@@ -365,7 +365,7 @@
 
 <Ability type="heal"
 		 name="Cure"
-		 description="The priest restores the hitpoints of one partymemeber."
+		 description="The priest restores the hitpoints of one partymember."
 		 time="701.000000"
 		 timer_nr="1.000000"
 		 timer_value="20000.000000"
