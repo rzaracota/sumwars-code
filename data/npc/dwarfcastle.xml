@@ -252,6 +252,8 @@
 				speak("Enchanter Fazhir",_("It seems that this item already has such an enchantment."));
 				set(pl,"gold",pgold);
 			else
+				--set enchant animation
+				setObjectAnimation(joringsbridge.council, "enchant", 1500)
 				-- removing the item from inventory and reinserting
 				-- ensures, that the item is unequiped if level requirement is not met
 				removePlayerItem(pl,enchanter_mod_dwarfenwall.itempos);

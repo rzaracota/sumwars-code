@@ -753,6 +753,22 @@
 		<Detach time="0.9" objectname="attackLine" />
 	</Action>
 
+	<Action name="enchant">
+		<Animation name = "swordMagic"/>
+		<ParticleSystem time = "0.2" objectname="fire1" source="BurningBlade" bone="itemRightHand" position= "0 0 -0.3"/>
+		<Rotation objectname="fire1" start="0.2" end="0.2" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+		<ParticleSystem time = "0.3" objectname="fire2" source="BurningBlade" bone="itemRightHand" position= "0 0 -0.6"/>
+		<Rotation objectname="fire2" start="0.3" end="0.3" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+		<ParticleSystem time = "0.4" objectname="fire3" source="BurningBlade" bone="itemRightHand" position= "0 0 -0.9"/>
+		<Rotation objectname="fire3" start="0.4" end="0.4" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+		<ParticleSystem time = "0.5" objectname="fire4" source="BurningBlade" bone="itemRightHand" position= "0 0 -1.2"/>
+		<Rotation objectname="fire4" start="0.5" end="0.5" start_vec="0.0 0.0 0.0" end_vec="0.0 180.0 0.0" />
+		<Detach time = "1.0" objectname="fire1"/>
+		<Detach time = "1.0" objectname="fire2"/>
+		<Detach time = "1.0" objectname="fire3"/>
+		<Detach time = "1.0" objectname="fire4"/>
+	</Action>
+	
 	<Action name="firesword">
 		<Animation name = "swordMagic" />
 		<ParticleSystem time = "0.2" objectname="fire1" source="BurningBlade" bone="itemRightHand" position= "0 0 -0.3"/>
