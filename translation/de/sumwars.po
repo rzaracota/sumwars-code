@@ -12,7 +12,7 @@ msgstr ""
 "Language-Team: german <translation-team-de@lists.sourceforge.net>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -1092,122 +1092,6 @@ msgstr "Korallenamulett"
 msgid "gold amulet"
 msgstr "Goldamulett"
 
-#: goblin_raid.xml
-msgid "goblin_raid"
-msgstr "Goblinüberfall"
-
-#: goblin_raid.xml
-msgid ""
-"Well, I got a little money for killing some goblins I would have wasted "
-"anyway. Not a bad day."
-msgstr ""
-
-#: goblin_raid.xml
-msgid ""
-"It seems the sergeant from Joringsbridge is willing to pay, but he wants me "
-"to help those peasants first. There's no trust in this world anymore."
-msgstr ""
-
-#: goblin_raid.xml
-msgid ""
-"I discovered plans of a goblin raid set for a village called Joringsbridge. "
-"They were found amongst the remains of some goblin tribe. Guess I busted "
-"that party prematurely. Maybe someone official will appreciate not having "
-"hordes of goblins kicking in their doors."
-msgstr ""
-
-#: goblin_raid.xml
-msgid "aisDarkClearing"
-msgstr "Dunkle Lichtung"
-
-#: goblin_raid.xml
-msgid "Sergeant Lutterer"
-msgstr "Sergeant Lutterer"
-
-#: goblin_raid.xml
-msgid "Crude battle plans"
-msgstr ""
-
-#: goblin_raid.xml
-msgid "Hey, sergeant, I found these in the woods with some goblins."
-msgstr ""
-
-#: goblin_raid.xml
-msgid "This looks like it could be Joringsbridge. Are you sure it's reliable?"
-msgstr ""
-
-#: goblin_raid.xml
-msgid "Some kind of head honcho shaman had them, so I figure they mean it."
-msgstr ""
-
-#: goblin_raid.xml
-msgid "Meant it. Whatever."
-msgstr ""
-
-#: goblin_raid.xml
-msgid "Hey, sergeant, ready to pay for the pre-emptive rescue of the village?"
-msgstr ""
-
-#: goblin_raid.xml
-msgid "I guess you can be trusted."
-msgstr ""
-
-#: goblin_raid.xml
-msgid "Let me thank you on behalf of the whole village."
-msgstr ""
-
-#: goblin_raid.xml
-msgid "It's always a pleasure when a good deed goes rewarded."
-msgstr ""
-
-#: goblin_raid.xml
-msgid "Sorry, but I don't know you."
-msgstr ""
-
-#: goblin_raid.xml
-msgid "Maybe I will show some gratitude after you help Michel's family."
-msgstr ""
-
-#: goblin_raid.xml
-msgid "As they say: One hand washes the other."
-msgstr ""
-
-#: goblin_raid.xml
-msgid "Do you want to help the peasant?"
-msgstr ""
-
-#: goblin_raid.xml
-msgid "Yes"
-msgstr "Ja"
-
-#: goblin_raid.xml
-msgid "No"
-msgstr "Nein"
-
-#: goblin_raid.xml
-msgid "Then I better get back to saving helpless peasants, no?"
-msgstr ""
-
-#: goblin_raid.xml
-msgid "Fine, I'll wipe out those goblins for you."
-msgstr ""
-
-#: goblin_raid.xml
-msgid "You do realise there's plenty more where they came from?"
-msgstr ""
-
-#: goblin_raid.xml
-msgid "Just go already."
-msgstr ""
-
-#: goblin_raid.xml
-msgid "Whatever. It's not like I need the money or anything."
-msgstr ""
-
-#: goblin_raid.xml
-msgid "And I could care less what happens to some peasant family."
-msgstr ""
-
 #: joringsbridge_npc.xml
 msgid "Gertlinde Kampfer"
 msgstr "Gertlinde Kampfer"
@@ -1237,8 +1121,8 @@ msgid "Marco"
 msgstr "Marco"
 
 #: joringsbridge_npc.xml
-msgid "Fundgegenstaende"
-msgstr "Fundgegenstände"
+msgid "Objects found"
+msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "What are these Items?"
@@ -1261,6 +1145,10 @@ msgid ""
 msgstr ""
 "Wenn Euch etwas davon gehört, sagt einfach Bescheid. Für einen geringen "
 "Finderlohn könnt Ihr es wiederhaben."
+
+#: joringsbridge_npc.xml
+msgid "Sergeant Lutterer"
+msgstr "Sergeant Lutterer"
 
 #: joringsbridge_npc.xml
 msgid "Joringsbridge"
@@ -1746,6 +1634,10 @@ msgid "aisStonePlains"
 msgstr "Steinige Ebene"
 
 #: aisen.xml
+msgid "aisDarkClearing"
+msgstr "Dunkle Lichtung"
+
+#: aisen.xml
 msgid "aisWideHeath"
 msgstr "Weite Heide"
 
@@ -2203,9 +2095,10 @@ msgid "Static shield"
 msgstr "Statischer Schild"
 
 #: mage_ablt.xml
+#, fuzzy
 msgid ""
 "The mage surrounds himself with an armor of lightning, that will stun and "
-"damage enemies who are bolt enough to attack in close combat."
+"damage enemies who are bold enough to attack in close combat."
 msgstr ""
 "Der Magier umgibt sich mit einer Rüstung aus Blitzen, die Gegner schädigen "
 "und lähmen, die dreist genug sind, ihn im Nahkampf anzugreifen."
@@ -2320,8 +2213,9 @@ msgid "Omniscent Eye"
 msgstr "Allessehendes Auge"
 
 #: priest_ablt.xml
+#, fuzzy
 msgid ""
-"The party will be immune to blind and berserk for some time. With increasing "
+"The party will be immune to blind and mute for some time. With increasing "
 "willpower the priest can hold this effect longer."
 msgstr ""
 "Die Gruppe wird eine zeitlang immun gegen Blind- und Stummheit. Mit "
@@ -2417,7 +2311,8 @@ msgid "Cure"
 msgstr "Heilung"
 
 #: priest_ablt.xml
-msgid "The priest restores the hitpoints of one partymemeber."
+#, fuzzy
+msgid "The priest restores the hitpoints of one partymember."
 msgstr ""
 "Der Priester stellt die Lebenspunkte eines Gruppenmitglieds wieder her."
 
@@ -3515,16 +3410,16 @@ msgid "wolf"
 msgstr "Wolf"
 
 #: aisenMonsterStats.xml
-msgid "Spider"
-msgstr "Spinne"
-
-#: aisenMonsterStats.xml
 msgid "Psychotic Spider"
 msgstr "Psychotische Spinne"
 
 #: aisenMonsterStats.xml
 msgid "Cave Spider"
 msgstr "Höhlenspinne"
+
+#: aisenMonsterStats.xml
+msgid "Spider"
+msgstr "Spinne"
 
 #: aisenMonsterStats.xml
 msgid "Giant Bat"
@@ -3713,6 +3608,18 @@ msgstr "Alraune"
 #: npcStats.xml
 msgid "Peasant"
 msgstr "Bauer"
+
+#~ msgid "goblin_raid"
+#~ msgstr "Goblinüberfall"
+
+#~ msgid "Yes"
+#~ msgstr "Ja"
+
+#~ msgid "No"
+#~ msgstr "Nein"
+
+#~ msgid "Fundgegenstaende"
+#~ msgstr "Fundgegenstände"
 
 #, fuzzy
 #~ msgid "A blue potion?"

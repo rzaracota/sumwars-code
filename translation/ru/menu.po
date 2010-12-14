@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-30 21:38+0100\n"
+"POT-Creation-Date: 2010-12-14 17:12+0100\n"
 "PO-Revision-Date: 2010-09-11 23:13+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,96 +17,96 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/core/damage.cpp:142 ../src/gui/charinfo.cpp:916
+#: ../src/core/damage.cpp:143 ../src/gui/charinfo.cpp:916
 msgid "Physical"
 msgstr "Физический"
 
-#: ../src/core/damage.cpp:144 ../src/gui/charinfo.cpp:925
+#: ../src/core/damage.cpp:145 ../src/gui/charinfo.cpp:925
 msgid "Fire"
 msgstr "Огонь"
 
-#: ../src/core/damage.cpp:146 ../src/gui/charinfo.cpp:922
+#: ../src/core/damage.cpp:147 ../src/gui/charinfo.cpp:922
 msgid "Ice"
 msgstr "Лед"
 
-#: ../src/core/damage.cpp:148 ../src/gui/charinfo.cpp:919
+#: ../src/core/damage.cpp:149 ../src/gui/charinfo.cpp:919
 msgid "Air"
 msgstr "Воздух"
 
-#: ../src/core/damage.cpp:158
+#: ../src/core/damage.cpp:159
 msgid "Physical resistance"
 msgstr "Физическая устойчивость"
 
-#: ../src/core/damage.cpp:160
+#: ../src/core/damage.cpp:161
 msgid "Fire resistance"
 msgstr "Устойчивость к огню"
 
-#: ../src/core/damage.cpp:162
+#: ../src/core/damage.cpp:163
 msgid "Ice resistance"
 msgstr "Устойчивость к льду"
 
-#: ../src/core/damage.cpp:164
+#: ../src/core/damage.cpp:165
 msgid "Air resistance"
 msgstr "Устойчивость к воздуху"
 
-#: ../src/core/damage.cpp:174
+#: ../src/core/damage.cpp:175
 msgid "blind"
 msgstr "слепой"
 
-#: ../src/core/damage.cpp:176
+#: ../src/core/damage.cpp:177
 msgid "poisoned"
 msgstr "отравлен"
 
-#: ../src/core/damage.cpp:178
+#: ../src/core/damage.cpp:179
 msgid "mute"
 msgstr ""
 
-#: ../src/core/damage.cpp:180
+#: ../src/core/damage.cpp:181
 msgid "confused"
 msgstr ""
 
-#: ../src/core/damage.cpp:182
+#: ../src/core/damage.cpp:183
 msgid "berserk"
 msgstr "берсерк"
 
-#: ../src/core/damage.cpp:184
+#: ../src/core/damage.cpp:185
 msgid "paralyzed"
 msgstr "парализован"
 
-#: ../src/core/damage.cpp:186
+#: ../src/core/damage.cpp:187
 msgid "frozen"
 msgstr "заморожен"
 
-#: ../src/core/damage.cpp:188
+#: ../src/core/damage.cpp:189
 msgid "burning"
 msgstr "горящий"
 
-#: ../src/core/damage.cpp:250 ../src/core/damage.cpp:254
+#: ../src/core/damage.cpp:264 ../src/core/damage.cpp:268
 msgid "damage"
 msgstr "урон"
 
-#: ../src/core/damage.cpp:269
+#: ../src/core/damage.cpp:286
 msgid "can not be blocked"
 msgstr "не может быть заблокирован"
 
-#: ../src/core/damage.cpp:273 ../src/gui/charinfo.cpp:886
+#: ../src/core/damage.cpp:293 ../src/gui/charinfo.cpp:886
 msgid "Attack"
 msgstr "Атака"
 
-#: ../src/core/damage.cpp:286
+#: ../src/core/damage.cpp:309
 msgid "ignores armor"
 msgstr "игнорирует броню"
 
-#: ../src/core/damage.cpp:290 ../src/gui/charinfo.cpp:901
+#: ../src/core/damage.cpp:316 ../src/gui/charinfo.cpp:901
 msgid "Power"
 msgstr "Сила"
 
-#: ../src/core/damage.cpp:299
+#: ../src/core/damage.cpp:328
 msgid "Chance for critical hit"
 msgstr "Шанс критического удара"
 
 #: ../src/core/document.cpp:1194 ../src/core/item.cpp:685
-#: ../src/core/item.cpp:687 ../src/core/item.cpp:912 ../src/core/item.cpp:918
+#: ../src/core/item.cpp:687 ../src/core/item.cpp:915 ../src/core/item.cpp:921
 msgid "Required level"
 msgstr "Требуемый уровень"
 
@@ -118,78 +118,78 @@ msgstr "Таймер"
 msgid "Cast delay"
 msgstr "Задержка каста"
 
-#: ../src/core/item.cpp:677 ../src/core/item.cpp:898
+#: ../src/core/item.cpp:677 ../src/core/item.cpp:901
 msgid "Value"
 msgstr "Стоимость"
 
-#: ../src/core/item.cpp:680 ../src/core/item.cpp:904
+#: ../src/core/item.cpp:680 ../src/core/item.cpp:907
 msgid "Selling Value"
 msgstr "Цена на продажу"
 
-#: ../src/core/item.cpp:696 ../src/core/item.cpp:933
+#: ../src/core/item.cpp:696 ../src/core/item.cpp:936
 msgid "Required class"
 msgstr "Требуемый класс"
 
-#: ../src/core/item.cpp:754 ../src/core/item.cpp:762 ../src/core/item.cpp:993
-#: ../src/core/item.cpp:1003
+#: ../src/core/item.cpp:754 ../src/core/item.cpp:762 ../src/core/item.cpp:996
+#: ../src/core/item.cpp:1006
 msgid "Heals "
 msgstr "Лечит"
 
-#: ../src/core/item.cpp:754 ../src/core/item.cpp:993
+#: ../src/core/item.cpp:754 ../src/core/item.cpp:996
 msgid " hitpoints"
 msgstr "здоровья"
 
-#: ../src/core/item.cpp:765 ../src/core/item.cpp:1009
+#: ../src/core/item.cpp:765 ../src/core/item.cpp:1012
 msgid "immune for "
 msgstr "устойчивость к"
 
-#: ../src/core/item.cpp:777 ../src/core/item.cpp:1023
+#: ../src/core/item.cpp:777 ../src/core/item.cpp:1026
 msgid "Two-handed weapon"
 msgstr "Двуручное оружие"
 
-#: ../src/core/item.cpp:782 ../src/core/item.cpp:1030
+#: ../src/core/item.cpp:782 ../src/core/item.cpp:1033
 #: ../src/gui/charinfo.cpp:896
 msgid "Range"
 msgstr "Дальность"
 
-#: ../src/core/item.cpp:793 ../src/core/item.cpp:1043
+#: ../src/core/item.cpp:793 ../src/core/item.cpp:1046
 msgid "Damage"
 msgstr "Урон"
 
-#: ../src/core/item.cpp:805 ../src/core/item.cpp:1067
+#: ../src/core/item.cpp:805 ../src/core/item.cpp:1074
 #: ../src/gui/charinfo.cpp:906
 msgid "Armor"
 msgstr "Защита"
 
-#: ../src/core/item.cpp:810 ../src/core/item.cpp:1074
+#: ../src/core/item.cpp:810 ../src/core/item.cpp:1086
 #: ../src/gui/charinfo.cpp:911
 msgid "Block"
 msgstr "Блок"
 
-#: ../src/core/item.cpp:815 ../src/core/item.cpp:1081
+#: ../src/core/item.cpp:815 ../src/core/item.cpp:1098
 msgid "max hitpoints"
 msgstr "максимальное здоровье"
 
-#: ../src/core/item.cpp:820 ../src/core/item.cpp:1088
+#: ../src/core/item.cpp:820 ../src/core/item.cpp:1110
 #: ../src/gui/charinfo.cpp:856
 msgid "Strength"
 msgstr "Сила"
 
-#: ../src/core/item.cpp:825 ../src/core/item.cpp:1095
+#: ../src/core/item.cpp:825 ../src/core/item.cpp:1122
 #: ../src/gui/charinfo.cpp:860
 msgid "Dexterity"
 msgstr "Ловкость"
 
-#: ../src/core/item.cpp:830 ../src/core/item.cpp:1102
+#: ../src/core/item.cpp:830 ../src/core/item.cpp:1134
 msgid "Magic Power"
 msgstr "Магич. сила"
 
-#: ../src/core/item.cpp:835 ../src/core/item.cpp:1109
+#: ../src/core/item.cpp:835 ../src/core/item.cpp:1146
 #: ../src/gui/charinfo.cpp:864
 msgid "Willpower"
 msgstr "Сила воли"
 
-#: ../src/core/item.cpp:850 ../src/core/item.cpp:1128
+#: ../src/core/item.cpp:850 ../src/core/item.cpp:1177
 msgid " max. "
 msgstr "макс."
 
