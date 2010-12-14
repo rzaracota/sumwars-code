@@ -112,7 +112,7 @@ bool FileBrowser::handleBrowserDblClick(const CEGUI::EventArgs &e)
 	if(selectedDir == "..")
 	{
 		if(oldDir.find_last_of(dirDelemiter) == oldDir.size())
-			oldDir = oldDir.erase(oldDir.size()-1);
+			oldDir = oldDir.erase(oldDir.size()-1, CEGUI::String::npos);
 
 		int pos = oldDir.find_last_of(dirDelemiter);
 		newDir = oldDir.erase(pos, oldDir.size()- pos);
