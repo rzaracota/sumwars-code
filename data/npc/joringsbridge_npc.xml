@@ -282,7 +282,10 @@
 			local pgold = get(pl,"gold");
 			
 			local magic = getItemValue("magic_power");
-			enchanter_price_joringsbridge = math.ceil(500 + magic*20 + 200*math.exp( magic / 100 - 1))
+			print(magic)
+			print(math.exp( magic / 100 - 1))
+			enchanter_price_joringsbridge = math.ceil(500 + magic*15 + 150*math.exp( magic / 80 - 1))
+			print(enchanter_price_joringsbridge)
 			
 			if (enchanter_price_joringsbridge > pgold) then
 				speak("Magus Convocatis Relau Fireweaver",_("I may work for the Council, but I don't run a charity. The price is $1.",{enchanter_price_joringsbridge}))
@@ -301,7 +304,7 @@
 			set(pl,"gold",pgold - enchanter_price_joringsbridge);
 			
 			-- enchant strength is set here
-			local mods = addItemMagicMods(enchanter_mod.allowed_mods[enchanter_modtype_joringsbridge] ,200);
+			local mods = addItemMagicMods(enchanter_mod.allowed_mods[enchanter_modtype_joringsbridge] ,120);
 			if (mods == nil) then
 				mods = 0;
 			end;

@@ -225,7 +225,7 @@
 			local pgold = get(pl,"gold");
 			
 			local magic = getItemValue("magic_power");
-			enchanter_price = math.ceil(500 + magic*20 + 200*math.exp( magic / 100 - 1))
+			enchanter_price = math.ceil(800 + magic*20 + 200*math.exp( magic / 120 - 1))
 			
 			if (enchanter_price > pgold) then
 				speak("Enchanter Fazhir",_("You dont have enough gold to pay the price of $1",{enchanter_price}))
@@ -244,7 +244,7 @@
 			set(pl,"gold",pgold - enchanter_price);
 			
 			-- enchant strength is set here
-			local mods = addItemMagicMods(enchanter_mod_dwarfenwall.allowed_mods[enchanter_modtype_dwarfenwall] ,400);
+			local mods = addItemMagicMods(enchanter_mod_dwarfenwall.allowed_mods[enchanter_modtype_dwarfenwall] ,160);
 			if (mods == nil) then
 				mods = 0;
 			end;
