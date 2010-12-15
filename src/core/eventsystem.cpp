@@ -341,7 +341,7 @@ int EventSystem::timedExecute(lua_State *L)
 		m_event = new Event();
 		m_event->setOnce(true);
 		m_event->setEffect(code.c_str());
-		
+		m_event->setGettextDomain(m_gettext_domains.top());
 		std::stringstream stream;
 		stream << counter << "_event";
 		
