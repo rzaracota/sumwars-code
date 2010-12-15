@@ -363,9 +363,8 @@ void SkillTree::updateAbilityTooltip(unsigned int pos)
 	std::string tooltip = m_document->getAbilityDescription(ablts[pos].m_type);
 	
 	FormatedText txt =  CEGUIUtility::fitTextToWindow((CEGUI::utf8*)tooltip.c_str(), 400, CEGUIUtility::Centred, label->getFont());
-	std::string asf = txt.text.c_str();
-	
-	TooltipManager::getSingleton().createTooltip(label, txt.text.c_str());
+
+	TooltipManager::getSingleton().createTooltip(label, CEGUIUtility::getColourizedString(CEGUIUtility::Black, txt.text.c_str(), CEGUIUtility::Black));
 	
 }
 
