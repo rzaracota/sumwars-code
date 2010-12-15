@@ -215,7 +215,7 @@ std::string Action::getName(ActionType type)
 		WARNING("unknown action: %s",type.c_str());
 		return "";
 	}
-      return gettext(aci->m_name.c_str()) ;
+	return dgettext("sumwars",aci->m_name.c_str()) ;
 
 }
 
@@ -228,7 +228,7 @@ std::string Action::getDescription(ActionType type)
 		WARNING("unknown action: %s",type.c_str());
 		return "";
 	}
-       return  gettext(aci->m_description.c_str());
+	return  dgettext("sumwars",aci->m_description.c_str());
 }
 
 Action::ActionType Action::getActionType(std::string name)

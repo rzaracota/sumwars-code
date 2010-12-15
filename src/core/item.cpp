@@ -216,7 +216,7 @@ std::string Item::getName()
 	{
 		ret << m_price << " ";
 	}
-    ret <<  (dgettext("sumwars-xml",(getString()).c_str()));
+    ret <<  (dgettext("sumwars",(getString()).c_str()));
 
 
 	return ret.str();

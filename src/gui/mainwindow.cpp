@@ -2063,7 +2063,7 @@ void MainWindow::updateRegionInfo()
 			
 			if (vis == true)
 			{
-				label->setText( (CEGUI::utf8*) dgettext("sumwars-xml",pl->getRegion()->getName().c_str()));
+				label->setText( (CEGUI::utf8*) dgettext("sumwars",pl->getRegion()->getName().c_str()));
 			}
 		}
 		

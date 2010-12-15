@@ -175,7 +175,7 @@ void MinimapWindow::update()
 	
 	label = win_mgr.getWindow("RegionNameLabel");
 	
-	CEGUI::utf8* ctext = (CEGUI::utf8*) dgettext("sumwars-xml",region->getName().c_str());
+	CEGUI::utf8* ctext = (CEGUI::utf8*) dgettext("sumwars",region->getName().c_str());
 	if (label->getText() != ctext)
 	{
 		label->setText( ctext );

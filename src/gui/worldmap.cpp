@@ -88,7 +88,7 @@ void Worldmap::update()
 		label->setID(it->first);
 		label->setPosition(CEGUI::UVector2(cegui_reldim(pos.m_x), cegui_reldim(pos.m_y)));
 		label->setVisible(true);
-		label->setTooltipText((CEGUI::utf8*) dgettext("sumwars-xml",it->second.m_name.c_str()));
+		label->setTooltipText((CEGUI::utf8*) dgettext("sumwars",it->second.m_name.c_str()));
 		cnt++;
 	}
 	
@@ -138,8 +138,8 @@ void Worldmap::update()
 			}
 			label->setVisible(true);
 			std::stringstream stream;
-			stream << dgettext("sumwars-xml","Town Portal") << "\n";
-			stream << dgettext("sumwars-xml",it->second.m_name.c_str());
+			stream << dgettext("sumwars","Town Portal") << "\n";
+			stream << dgettext("sumwars",it->second.m_name.c_str());
 			label->setTooltipText((CEGUI::utf8*) stream.str().c_str());
 			
 			cnt++;

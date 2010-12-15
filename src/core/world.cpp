@@ -93,7 +93,7 @@ bool World::init(int port)
 	std::string file;
 
 	EventSystem::init();
-	EventSystem::pushGettextDomain("sumwars-xml");
+	EventSystem::pushGettextDomain("sumwars");
 	Dialogue::init();
 
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("lua","*.lua");
@@ -157,7 +157,7 @@ bool World::init(int port)
 	
 	if (m_server)
 	{
-		EventSystem::pushGettextDomain("sumwars-xml");
+		EventSystem::pushGettextDomain("sumwars");
 		WorldLoader worldloader;
 		std::list<RegionData*> region_list;
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("world","*.xml");
