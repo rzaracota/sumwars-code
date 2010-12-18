@@ -224,7 +224,7 @@ bool EventSystem::executeCodeReference(int coderef)
 		
 #ifdef DEBUG_DATABASE
 		const char* instr = m_code_fragments[coderef].c_str();
-		DEBUG("instr %s",instr);
+		std::cout << instr;
 #else
 		char* instr =0;
 #endif
