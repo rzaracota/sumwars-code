@@ -97,17 +97,7 @@ void LuaScriptTab::onCharacter(CEGUI::KeyEventArgs& e)
 
 bool LuaScriptTab::handleNew(const CEGUI::EventArgs& e)
 {
-	std::stringstream s;
-	std::ifstream myfile (m_filePathEditBox->getText().c_str());
-	if (myfile.is_open())
-	{
-			m_filePathEditBox->setText("File exists");
-			myfile.close();
-			return false;
-	}
-	s << m_filePathEditBox->getText() << m_newFileCtr;
-	TextFileEditWindow *win = static_cast<TextFileEditWindow*>(WindowManager::getSingleton().createWindow("TextFileEditWindow", s.str()));
-	win->setFilepath(m_filePathEditBox->getText());
+	TextFileEditWindow *win = static_cast<TextFileEditWindow*>(WindowManager::getSingleton().createWindow("TextFileEditWindow"));
 	m_fileTabControl->addTab(win);
 	win->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
 	win->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
@@ -118,7 +108,11 @@ bool LuaScriptTab::handleNew(const CEGUI::EventArgs& e)
 
 bool LuaScriptTab::handleOpen(const CEGUI::EventArgs& e)
 {
-	CEGUI::String s = m_filePathEditBox->getText();
+	m_fb = new FileBrowser();
+	m_fb->init("/home/stefan/Dev/s07c/sumwars", FileBrowser::FB_TYPE_OPEN_FILE, true);
+	m_fb->m_acceptBtn->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&LuaScriptTab::handleFileBrowserAcceptClicked, this));
+	
+	/*CEGUI::String s = m_filePathEditBox->getText();
 	TextFileEditWindow *win = static_cast<TextFileEditWindow*>(WindowManager::getSingleton().createWindow("TextFileEditWindow", s));
 
 	
@@ -132,7 +126,7 @@ bool LuaScriptTab::handleOpen(const CEGUI::EventArgs& e)
 	{
 		m_filePathEditBox->setText("File failed to load");
 		WindowManager::getSingleton().destroyWindow(win);
-	}
+	}*/
 	return true;
 }
 
@@ -156,6 +150,15 @@ bool LuaScriptTab::handleTabChanged(const CEGUI::EventArgs& e)
 {
 	TextFileEditWindow* win = static_cast<TextFileEditWindow*>(m_fileTabControl->getTabContentsAtIndex(m_fileTabControl->getSelectedTabIndex()));
 	m_filePathEditBox->setText(win->getFilepath());
+	return true;
+}
+
+bool LuaScriptTab::handleFileBrowserAcceptClicked(const CEGUI::EventArgs& e)
+{
+	std::cout << m_fb->getCurrentSelected().c_str() << std::endl;
+	m_fb->destroy();
+	delete m_fb;
+	m_fb = 0;
 	return true;
 }
 

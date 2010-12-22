@@ -18,6 +18,8 @@ TextFileEditWindow::TextFileEditWindow(const CEGUI::String& type, const CEGUI::S
 	addChildWindow(m_textEditBox);
 	m_isDirty = false;
 	m_spaceCounter = "";
+	m_filePath = "";
+	m_fb = 0;
 	
 	m_textEditBox->subscribeEvent(MultiLineEditbox::EventCharacterKey, Event::Subscriber(&TextFileEditWindow::handleCharacterKey, this));
 }
@@ -25,8 +27,13 @@ TextFileEditWindow::TextFileEditWindow(const CEGUI::String& type, const CEGUI::S
 void TextFileEditWindow::close()
 {
 	
-	//save();
+	save();
 	
+}
+
+void TextFileEditWindow::getNewFileNameForName()
+{
+
 }
 
 
@@ -80,6 +87,12 @@ bool TextFileEditWindow::load(const String &fileName)
 
 void TextFileEditWindow::save()
 {
+	if(m_filePath = "")
+	{
+		getNewFileNameForName();
+		return;
+	}
+	
 	if(!m_isDirty)
 		return;
 	else
@@ -165,4 +178,14 @@ void TextFileEditWindow::replaceSpacesWithMidpoints()
 	s = s.erase(pos, 3);
 	s = s.insert(pos, TAB);
 	m_textEditBox->setText(s);
+}
+
+bool TextFileEditWindow::handleFileBrowserAcceptClicked(const CEGUI::EventArgs& e)
+{
+	setFilepath(m_fb->getCurrentSelected());
+	save();
+	m_fb->destroy();
+	delete m_fb;
+	m_fb = 0;
+	return true;
 }

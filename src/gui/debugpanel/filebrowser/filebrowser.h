@@ -9,18 +9,34 @@
 #include <map>
 
 
+
 class FileBrowser
 {
 public:
+	
+	enum FileBrowserType
+	{
+		FB_TYPE_SAVE_FILE = 1,
+		FB_TYPE_OPEN_FILE = 10,
+		FB_TYPE_SELECT_DIRECTORY = 20
+	};
+	
 	~FileBrowser();
 
 	/**
 	* \fn void init(CEGUI::String defaultDir, bool visible);
 	* \brief Initialises the panel
-	* \brief dir The directory that will be opened when initialzing
+	* \param dir The directory that will be opened when initialzing
+	* \param type The FileBrowser type
 	* \param visible Whether the panel is visible or not at the begining
 	*/
-	void init(CEGUI::String defaultDir, bool visible);
+	void init(CEGUI::String defaultDir, FileBrowserType type, bool visible);
+	
+	/**
+	* \fn void destroy();
+	* \brief Initialises the panel
+	*/
+	void destroy();
 	
 	/**
 	* \fn handleCloseWindow(const CEGUI::EventArgs& e);
@@ -28,7 +44,7 @@ public:
 	* \param e Event Args from CEGUI
 	*/
 	virtual bool handleCloseWindow(const CEGUI::EventArgs& e);
-
+	
 	/**
 	* \fn handleBrowserDblClick(const CEGUI::EventArgs& e);
 	* \brief Handles Doubleclicks on items in the browser
@@ -36,6 +52,24 @@ public:
 	*/
 	virtual bool handleBrowserDblClick(const CEGUI::EventArgs& e);
 
+	/**
+	* \fn CEGUI::String getCurrentSelected();
+	* \brief Returns the current selected value
+	*/
+	virtual CEGUI::String getCurrentSelected(); 
+	
+	/**
+	* \var 	CEGUI::Window *m_acceptBtn;
+	* \brief  Pointer to the Accept (Open,Save,Select) button window of this panel
+	*/
+	CEGUI::PushButton *m_acceptBtn;
+	
+		/**
+	* \var 	CEGUI::Window *m_cancelBtn;
+	* \brief  Pointer to the Accept (Open,Save,Select) button window of this panel
+	*/
+	CEGUI::PushButton *m_cancelBtn;
+	
 protected:
 	/**
 	* \fn void fillBrowser(CEGUI::String dir);
@@ -44,6 +78,11 @@ protected:
 	*/
 	void fillBrowser(CEGUI::String dir);
 
+	/**
+	* \fn void createLayout();
+	* \brief Creates the window layout
+	*/
+	void createLayout();
 private:
 	/**
 	* \var 	CEGUI::System *m_guiSystem;
@@ -80,7 +119,12 @@ private:
 	* \brief  Pointer to the Editbox that shows the current path
 	*/
 	CEGUI::ItemListbox* m_browserBox;
-
+	
+	/**
+	* \var 	FileBrowserType m_type;
+	* \brief  Type of the FileBrowser
+	*/
+	FileBrowserType m_type;
 };
 
 #endif // DEBUGPANEL_H

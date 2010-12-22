@@ -3,6 +3,7 @@
 
 #include <CEGUI/CEGUIWindow.h>
 #include <CEGUI/CEGUIEvent.h>
+#include "filebrowser/filebrowser.h"
 
 class TextFileEditWindow : public CEGUI::Window
 {
@@ -16,6 +17,8 @@ public:
 	
 	virtual bool handleTextChanged(const CEGUI::EventArgs& e);
 	virtual bool handleCharacterKey(const CEGUI::EventArgs& e);
+    virtual bool handleFileBrowserAcceptClicked(const CEGUI::EventArgs& e);
+	
 protected:
 	CEGUI::Event::Connection m_handleTextChangedConnection;
 	CEGUI::String m_spaceCounter;
@@ -23,8 +26,10 @@ protected:
 	CEGUI::MultiLineEditbox *m_textEditBox;
 	bool m_isDirty;
 public:
+	FileBrowser *m_fb;
 	static CEGUI::String WidgetTypeName;
 private:
+	void getNewFileNameForName();
     void replaceSpacesWithMidpoints();
 };
 

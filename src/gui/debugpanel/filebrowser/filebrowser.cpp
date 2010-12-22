@@ -1,16 +1,24 @@
 #include "filebrowser.h"
 #include <dirent.h>
 #include <list>
+#include <fstream>
 
 using namespace CEGUI;
+
+bool fexists(const char *filename)
+{
+	std::ifstream ifile(filename);
+	return ifile;
+}
 
 FileBrowser::~FileBrowser()
 {
 	m_winManager->destroyWindow(m_rootWindow);
 }
 
-void FileBrowser::init(CEGUI::String defaultDir, bool visible)
+void FileBrowser::init(CEGUI::String defaultDir, FileBrowserType type, bool visible)
 {
+	m_type = type;
 	m_guiSystem = System::getSingletonPtr();
 	m_winManager = WindowManager::getSingletonPtr();
 	m_gameScreen = m_winManager->getWindow("GameScreen");
@@ -19,16 +27,43 @@ void FileBrowser::init(CEGUI::String defaultDir, bool visible)
 	m_gameScreen->addChildWindow(m_rootWindow);
 	m_rootWindow->setVisible(visible);
 
+	m_acceptBtn = static_cast<PushButton*>(m_rootWindow->getChild("Ok"));
+	m_cancelBtn = static_cast<PushButton*>(m_rootWindow->getChild("Cancel"));
+	
 	m_rootWindow->subscribeEvent(CEGUI::FrameWindow::EventCloseClicked, Event::Subscriber(&FileBrowser::handleCloseWindow, this));
 
+	switch(m_type)
+	{
+		case FB_TYPE_OPEN_FILE:
+			m_rootWindow->setText("Select file");
+			m_acceptBtn->setText("Open");
+			break;
+		case FB_TYPE_SAVE_FILE:
+			m_rootWindow->setText("Select file");
+			m_acceptBtn->setText("Save");
+			break;
+		case FB_TYPE_SELECT_DIRECTORY:
+			m_rootWindow->setText("Select directory");
+			m_acceptBtn->setText("Select");
+			break;
+		default:
+			break;
+	}
+	
 	m_pathBox = static_cast<Editbox*>(m_rootWindow->getChild("CurrentPath"));
 	m_pathBox->setText(defaultDir);
 
 	m_browserBox = static_cast<ItemListbox*>(m_rootWindow->getChild("Browser"));
-
+	
 	fillBrowser(defaultDir);
 
 }
+
+void FileBrowser::destroy()
+{
+	m_winManager->destroyWindow(m_rootWindow);
+}
+
 
 void FileBrowser::fillBrowser(CEGUI::String inDir)
 {
@@ -128,6 +163,27 @@ bool FileBrowser::handleBrowserDblClick(const CEGUI::EventArgs &e)
 	fillBrowser(newDir + dirDelemiter);
 
 	return true;
+}
+
+CEGUI::String FileBrowser::getCurrentSelected()
+{
+	CEGUI::String currentDir = m_pathBox->getText() + "/";
+	CEGUI::String currentSelectedItemText = m_browserBox->getFirstSelectedItem()->getText();
+		
+	switch(m_type)
+	{
+		case FB_TYPE_OPEN_FILE:
+			if(fexists((currentDir + currentSelectedItemText).c_str()))
+				return currentDir + currentSelectedItemText;
+			else
+				break;
+		case FB_TYPE_SAVE_FILE:
+			return currentDir + currentSelectedItemText;
+		case FB_TYPE_SELECT_DIRECTORY:
+			return currentDir;
+		default:
+			return "";
+	}
 }
 
 bool FileBrowser::handleCloseWindow(const CEGUI::EventArgs& e)

@@ -3,6 +3,7 @@
 
 #include <CEGUI/CEGUIWindow.h>
 #include "debugtab.h"
+#include "filebrowser/filebrowser.h"
 
 class LuaScriptTab : public CEGUI::Window, public DebugTab
 {
@@ -29,9 +30,11 @@ protected:
 	virtual bool handleSave(const CEGUI::EventArgs& e);
 	virtual bool handleClose(const CEGUI::EventArgs& e);
 	virtual bool handleTabChanged(const CEGUI::EventArgs& e);
+	virtual bool handleFileBrowserAcceptClicked(const CEGUI::EventArgs& e);
 	
 	void createMenu();
 protected:
+	FileBrowser *m_fb;
 	int m_newFileCtr;
 	CEGUI::Window *m_tabLayout;
 	CEGUI::Editbox *m_filePathEditBox;

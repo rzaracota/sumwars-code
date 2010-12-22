@@ -9,6 +9,8 @@
 #include "luascripttab.h"
 #include "textfileeditwindow.h"
 
+#include "CEGUI/ScriptingModules/LuaScriptModule/CEGUILua.h"
+
 #include "OgreConfigFile.h"
 
 #ifdef __APPLE__
@@ -480,7 +482,6 @@ bool Application::initCEGUI()
 	
 	// Bootstrap the CEGUI System
 	CEGUI::OgreRenderer::bootstrapSystem();
-
     
 	// Scheme laden
 	CEGUI::SchemeManager::getSingleton().create((CEGUI::utf8*)"TaharezLook.scheme", (CEGUI::utf8*)"GUI");
@@ -500,7 +501,10 @@ bool Application::initCEGUI()
 		DEBUG("CEGUI exception %s",e.getMessage().c_str());
 	}
     m_cegui_system = CEGUI::System::getSingletonPtr();
-
+	
+	CEGUI::LuaScriptModule &scriptm(CEGUI::LuaScriptModule::create());
+	m_cegui_system->setScriptingModule(&scriptm);
+	
 	// Mauscursor setzen (evtl eher in View auslagern ? )
 	m_cegui_system->setDefaultMouseCursor((CEGUI::utf8*)"TaharezLook", (CEGUI::utf8*)"MouseArrow");
     m_cegui_system->setDefaultTooltip((CEGUI::utf8*)"TaharezLook/Tooltip");
