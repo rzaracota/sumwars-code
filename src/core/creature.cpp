@@ -2964,6 +2964,8 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 
 		if (m_base_attr_mod.m_special_flags & STORM_ARROWS)
 		{
+			// Statusmod paralyze
+			dmg.m_status_mod_power[Damage::PARALYZED] += m_base_attr_mod.m_magic_power*2;
 			dmg.m_multiplier[Damage::AIR] *= 1.4;
 		}
 		dmg.m_multiplier[Damage::AIR] *= dmg.m_multiplier[Damage::PHYSICAL];

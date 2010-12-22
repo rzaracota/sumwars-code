@@ -180,7 +180,7 @@
 		 name="Frost Arrows"
 		 description="The archer summons a spirit of ice into his weapon, causing his shots to deal icedamage over a greater amount of time. There is a chance that his enemies will be frozen solid if they are hit."
 		 time="801.000000"
-		 timer_nr="2.000000"
+		 timer_nr="3.000000"
 		 timer_value="240000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
@@ -220,7 +220,7 @@
 		 name="Ice Arrows"
 		 description="The archer calls upon the spirits of ice to imbue his projectiles with icedamage."
 		 time="801.000000"
-		 timer_nr="2.000000"
+		 timer_nr="3.000000"
 		 timer_value="240000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000" 
@@ -319,7 +319,7 @@
 		 name="Storm Arrows"
 		 description="The mighty spirits of wind themselfes help the archer by imbuing his projectiles with their power, causing them to deal more winddamage for a longer time."
 		 time="801.000000"
-		 timer_nr="2.000000"
+		 timer_nr="3.000000"
 		 timer_value="240000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
@@ -428,7 +428,7 @@
 		 name="Wind Arrows"
 		 description="The archer has been grantet the power to imbue his projectiles with winddamage by the spirits of wind."
 		 time="801.000000"
-		 timer_nr="2.000000"
+		 timer_nr="3.000000"
 		 timer_value="240000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
@@ -450,7 +450,7 @@
 		 description="The spirits of wind help the archer to move faster than normal and avoid damage."
 		 time="801.000000"
 		 timer_nr="2.000000"
-		 timer_value="60000.000000"
+		 timer_value="120000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
 		 target_type="self">
@@ -461,7 +461,7 @@
 	<BaseAttributesMod>
 		<CppImplementation type="wind_walk" />
 		<LuaImplementation>
-			setBaseModValue("time",30000);
+			setBaseModValue("time",80000);
 			setBaseModValue("walk_speed",1500);
 			setBaseModValue("block",0.2*get(self,"dexterity"));
 		</LuaImplementation>
