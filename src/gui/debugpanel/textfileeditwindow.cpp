@@ -87,7 +87,7 @@ bool TextFileEditWindow::load(const String &fileName)
 
 void TextFileEditWindow::save()
 {
-	if(m_filePath = "")
+	if(m_filePath == "")
 	{
 		getNewFileNameForName();
 		return;
