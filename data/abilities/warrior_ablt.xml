@@ -3,7 +3,7 @@
 		 description="The warrior sets himself in the state of berserk, attacking his enemies with vicious blows, while completely neglecting his defence." 
 		 time="501.000000" 
 		 timer_nr="2.000000" 
-		 timer_value="300000.000000" 
+		 timer_value="40000" 
 		 base_ability="noaction" 
 		 critical_percent="0.800000" 
 		 target_type="self">
@@ -14,7 +14,7 @@
 	<BaseAttributesMod>
 		<LuaImplementation>
 			local str = get(self,"strength");
-			setBaseModValue("time",40000);
+			setBaseModValue("time",10000);
 			setBaseModValue("strength",str);
 			setBaseModValue("armor",-0.5*get(self,"armor"));
 		</LuaImplementation>
@@ -24,9 +24,9 @@
 <Ability type="around_blow" 
 		 name="Sweeping blow" 
 		 description="Attacks every enemy in weapon range with slightly reduced damage." 
-		 time="1.000000" 
+		 time="0.700000" 
 		 timer_nr="1.000000" 
-		 timer_value="3000.000000" 
+		 timer_value="3500.000000" 
 		 base_ability="attack" 
 		 critical_percent="0.800000" 
 		 target_type="melee"
@@ -39,7 +39,6 @@
 		<CppImplementation type="weapon_damage" />
 		<CppImplementation type="small_numbers" />
 		<LuaImplementation>
-			setDamageValue("phys_mult", getDamageValue("phys_mult")*0.7);
 			setDamageValue("attack", getDamageValue("attack")*1.5);
 		</LuaImplementation>	
 	</Damage>
@@ -72,7 +71,7 @@
 		 description="The warrior releases a mighty cry that causes his enemies to lose concentration, ultimatly reducing their defence."
 		 time="501.000000"
 		 timer_nr="2.000000"
-		 timer_value="200000.000000" 
+		 timer_value="30000" 
 		 base_ability="noaction" 
 		 critical_percent="0.800000"
 		 radius="12"
@@ -116,7 +115,7 @@
 		 description="Causes surrounding monsters to attack the warrior more likely." 
 		 time="501.000000" 
 		 timer_nr="2.000000" 
-		 timer_value="1500.000000" 
+		 timer_value="20000" 
 		 base_ability="noaction" 
 		 critical_percent="0.800000"
 		 target_type="self">
@@ -148,7 +147,7 @@
 		 name="Fire and sword" 
 		 description="The warrior calls the spirits of fire upon his weapon, causing it to deal firedamage. The damage depends on the warriors spellpower." 
 		 time="501.000000" 
-		 timer_nr="2.000000" 
+		 timer_nr="3.000000" 
 		 timer_value="240000.000000"
 		 base_ability="noaction" 
 		 critical_percent="0.800000"
@@ -169,7 +168,7 @@
 		 name="Flame armor" 
 		 description="The warrior surrounds himself with angry spirits of fire, who will burn his enemies to ashes, if they dare to come to close." 
 		 time="501.000000" 
-		 timer_nr="2.000000" 
+		 timer_nr="3.000000" 
 		 timer_value="300000.000000" 
 		 base_ability="noaction" 
 		 critical_percent="0.800000"
@@ -192,7 +191,7 @@
 		 name="Pact of flames" 
 		 description="The warrior calls upon the fires of hell, causing his weapon to deal firedamage for a significant time. His enemies might catch fire when hit."
 		 time="501.000000" 
-		 timer_nr="2.000000" 
+		 timer_nr="3.000000" 
 		 timer_value="240000.000000" 
 		 base_ability="noaction" 
 		 critical_percent="0.800000"
@@ -214,7 +213,7 @@
 		 description="The warrior becomes even more bloodthirsty, launching at his enemies with increased attackspeed and damage in a berserk state. Even while neglecting his defence, the impact is not as big as with the barbarian anger."
 		 time="500.000000" 
 		 timer_nr="2.000000" 
-		 timer_value="200000.000000" 
+		 timer_value="40000.000000" 
 		 base_ability="noaction" 
 		 critical_percent="0.800000" 
 		 target_type="self">
@@ -225,7 +224,7 @@
 	<BaseAttributesMod>
 		<LuaImplementation>
 			local str = get(self,"strength");
-			setBaseModValue("time",40000);
+			setBaseModValue("time",10000);
 			setBaseModValue("strength",str);
 			setBaseModValue("attack_speed",1000);
 			setBaseModValue("armor",-0.25*get(self,"armor"));
@@ -301,8 +300,8 @@
 		 name="Regeneration" 
 		 description="The warrior regains up to 50 percent hitpoints of his total hitpoints through the sheer power of his will."
 		 time="1001.000000" 
-		 timer_nr="2.000000" 
-		 timer_value="60000.000000"
+		 timer_nr="3.000000" 
+		 timer_value="120000.000000"
 		 base_ability="noaction" 
 		 critical_percent="0.800000"
 		 target_type="self">
@@ -321,7 +320,7 @@
 		 description="Nearby monsters will attack the warrior, if they are able to. The warriors defence is increased."
 		 time="501.000000" 
 		 timer_nr="2.000000" 
-		 timer_value="150000.000000" 
+		 timer_value="30000.000000" 
 		 base_ability="noaction" 
 		 critical_percent="0.800000"
 		 target_type="self">
@@ -340,7 +339,7 @@
 	</Damage>
 	<BaseAttributesMod>
 		<LuaImplementation>
-			setBaseModValue("time",60000);
+			setBaseModValue("time",10000);
 			setBaseModValue("armor",get(self,"armor"));
 		</LuaImplementation>
 	</BaseAttributesMod>
@@ -402,7 +401,7 @@
 		 name="Warcry" 
 		 description="The battle hardened warriors scream leaves his enemies defence wide open, sometimes confusing them as well." time="501.000000" 
 		 timer_nr="2.000000" 
-		 timer_value="200000.000000" 
+		 timer_value="30000.000000" 
 		 base_ability="noaction"
 		 critical_percent="0.800000"
 		 radius="12"

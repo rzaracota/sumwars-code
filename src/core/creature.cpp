@@ -1119,7 +1119,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		{
 		// alle Lebewesen im Umkreis um den Ausfuehrenden auswaehlen
 			// Radius gleich Waffenreichweite
-			cbam.m_time =60000;
+			cbam.m_time =10000;
 
 			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
 
@@ -1218,12 +1218,12 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		CreatureBaseAttrMod cbam;
 
 		// Modifikation:
-		// 10% mehr Staerke, bei aufgewerteter Version erhoehte Angriffsgeschwindigkeit fuer 10 sec
-		cbam.m_dstrength = getBaseAttr()->m_strength / 10;
+		// 5% mehr Staerke, bei aufgewerteter Version erhoehte Angriffsgeschwindigkeit fuer 10 sec
+		cbam.m_dstrength = getBaseAttr()->m_strength / 5;
 		cbam.m_time = 10000;
 		if (checkAbility("monster_slayer"))
 		{
-			cbam.m_dattack_speed = 200;
+			cbam.m_dattack_speed = 100;
 		}
 		applyBaseAttrMod(&cbam);
 
