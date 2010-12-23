@@ -3,13 +3,10 @@
 #include <list>
 #include <fstream>
 
-using namespace CEGUI;
+#include  <stdio.h>
+#include  <stdlib.h>
 
-bool fexists(const char *filename)
-{
-	std::ifstream ifile(filename);
-	return ifile;
-}
+using namespace CEGUI;
 
 FileBrowser::~FileBrowser()
 {
@@ -31,7 +28,7 @@ void FileBrowser::init(CEGUI::String defaultDir, FileBrowserType type, bool visi
 	m_cancelBtn = static_cast<PushButton*>(m_rootWindow->getChild("Cancel"));
 	
 	m_rootWindow->subscribeEvent(CEGUI::FrameWindow::EventCloseClicked, Event::Subscriber(&FileBrowser::handleCloseWindow, this));
-
+	
 	switch(m_type)
 	{
 		case FB_TYPE_OPEN_FILE:
@@ -53,7 +50,14 @@ void FileBrowser::init(CEGUI::String defaultDir, FileBrowserType type, bool visi
 	m_pathBox = static_cast<Editbox*>(m_rootWindow->getChild("CurrentPath"));
 	m_pathBox->setText(defaultDir);
 
-	m_browserBox = static_cast<ItemListbox*>(m_rootWindow->getChild("Browser"));
+	m_fileNameBox = static_cast<Editbox*>(m_rootWindow->getChild("FileName"));
+	
+	m_browserBox = static_cast<MultiColumnList*>(m_rootWindow->getChild("Browser"));
+	m_browserBox->subscribeEvent(CEGUI::MultiColumnList::EventSelectionChanged, Event::Subscriber(&FileBrowser::handleSelectionChanged, this));
+	m_browserBox->subscribeEvent(CEGUI::MultiColumnList::EventMouseDoubleClick, CEGUI::Event::Subscriber(&FileBrowser::handleBrowserDblClick, this));
+	m_browserBox->addColumn("", 0, CEGUI::UDim(0.8, 0));
+	m_browserBox->addColumn("Type", 1, CEGUI::UDim(0.2, 0));
+	m_browserBox->setSelectionMode(CEGUI::MultiColumnList::RowSingle);
 	
 	fillBrowser(defaultDir);
 
@@ -67,15 +71,17 @@ void FileBrowser::destroy()
 
 void FileBrowser::fillBrowser(CEGUI::String inDir)
 {
+	m_dirs.clear();
+	m_files.clear();
 	m_browserBox->resetList();
 
 	DIR *dir;
 	struct dirent *ent;
 
-	CEGUI::ItemEntry *item;
+	CEGUI::ListboxTextItem *item;
 
-	std::list<std::string> dirs;
-	std::list<std::string> files;
+	std::list<std::string> m_dirs;
+	std::list<std::string> m_files;
 	std::list<std::string>::iterator it;
 
 	/* open directory stream */
@@ -89,12 +95,12 @@ void FileBrowser::fillBrowser(CEGUI::String inDir)
 			switch (ent->d_type)
 			{
 			case DT_REG:
-				files.push_back(ent->d_name);
+				m_files.push_back(ent->d_name);
 				//printf ("%*.*s\n", ent->d_namlen, ent->d_namlen, ent->d_name);
 				break;
 
 			case DT_DIR:
-				dirs.push_back(ent->d_name);
+				m_dirs.push_back(ent->d_name);
 				//printf ("%s (dir)\n", ent->d_name);
 				break;
 
@@ -107,44 +113,47 @@ void FileBrowser::fillBrowser(CEGUI::String inDir)
 		closedir (dir);
 	}
 
-	dirs.sort();
-	files.sort();
+	m_dirs.sort();
+	m_files.sort();
 
-	for (it=dirs.begin(); it!=dirs.end(); ++it)
+	for (it=m_dirs.begin(); it!=m_dirs.end(); ++it)
 	{
 		if(*it != ".")
 		{
-			dirs.insert(dirs.begin(), ".");
-			dirs.insert(dirs.begin(), "..");
+			m_dirs.insert(m_dirs.begin(), ".");
+			m_dirs.insert(m_dirs.begin(), "..");
 		}
 
-		item = (CEGUI::ItemEntry*)m_winManager->createWindow("TaharezLook/ListboxItem");
-		item->setText(*it);
-		item->subscribeEvent(CEGUI::ItemEntry::EventMouseDoubleClick, CEGUI::Event::Subscriber(&FileBrowser::handleBrowserDblClick, this));
-		m_browserBox->addItem(item);
+		item = new ListboxTextItem(*it);
+		int id = m_browserBox->addRow(item, 0);
+		
+		item = new ListboxTextItem("d");
+		m_browserBox->addRow(item, 1, id);
 	}
-	for (it=files.begin(); it!=files.end(); ++it)
+	for (it=m_files.begin(); it!=m_files.end(); ++it)
 	{
-		item = (CEGUI::ItemEntry*)m_winManager->createWindow("TaharezLook/ListboxItem");
-		item->setText(*it);
-		item->subscribeEvent(CEGUI::ItemEntry::EventMouseDoubleClick, CEGUI::Event::Subscriber(&FileBrowser::handleBrowserDblClick, this));
-		m_browserBox->addItem(item);
+		item = new ListboxTextItem(*it);
+		int id = m_browserBox->addRow(item, 0);
+		
+		item = new ListboxTextItem("f");
+		m_browserBox->addRow(item, 1, id);
 	}
 }
+
 
 bool FileBrowser::handleBrowserDblClick(const CEGUI::EventArgs &e)
 {
 	CEGUI::String newDir;
-	CEGUI::String selectedDir = m_browserBox->getFirstSelectedItem()->getText();
+	ListboxItem *selectedDir = m_browserBox->getFirstSelectedItem();
 	CEGUI::String oldDir = m_pathBox->getText();
-
+	
 #ifdef WIN32
 	CEGUI::String dirDelemiter = "\\";
 #else
 	CEGUI::String dirDelemiter = "/";
 #endif
 
-	if(selectedDir == "..")
+	if(selectedDir->getText() == "..")
 	{
 		if(oldDir.find_last_of(dirDelemiter) == oldDir.size())
 			oldDir = oldDir.erase(oldDir.size()-1, CEGUI::String::npos);
@@ -154,9 +163,9 @@ bool FileBrowser::handleBrowserDblClick(const CEGUI::EventArgs &e)
 	}
 	else
 		if(oldDir.find_last_of(dirDelemiter) == oldDir.size()-1)
-			newDir = oldDir + selectedDir;
+			newDir = oldDir + selectedDir->getText();
 		else
-			newDir = oldDir +  dirDelemiter + selectedDir;
+			newDir = oldDir +  dirDelemiter + selectedDir->getText();
 
 	m_pathBox->setText(newDir);
 
@@ -164,6 +173,22 @@ bool FileBrowser::handleBrowserDblClick(const CEGUI::EventArgs &e)
 
 	return true;
 }
+
+bool FileBrowser::handleSelectionChanged(const CEGUI::EventArgs& e)
+{
+	if(m_browserBox->getFirstSelectedItem() != 0)
+	{
+		CEGUI::String selectedItem = m_browserBox->getFirstSelectedItem()->getText();
+		CEGUI::String dir = m_pathBox->getText();
+		
+		if(fileExists((dir + "/" + selectedItem).c_str()))
+			m_fileNameBox->setText(selectedItem);
+		else
+			m_fileNameBox->setText("");
+	}
+	return true;
+}
+
 
 CEGUI::String FileBrowser::getCurrentSelected()
 {
@@ -173,7 +198,7 @@ CEGUI::String FileBrowser::getCurrentSelected()
 	switch(m_type)
 	{
 		case FB_TYPE_OPEN_FILE:
-			if(fexists((currentDir + currentSelectedItemText).c_str()))
+			if(fileExists((currentDir + currentSelectedItemText).c_str()))
 				return currentDir + currentSelectedItemText;
 			else
 				break;
@@ -192,4 +217,24 @@ bool FileBrowser::handleCloseWindow(const CEGUI::EventArgs& e)
 	return true;
 }
 
-
+bool FileBrowser::fileExists(const char *strFilename) 
+{
+/*#ifdef WIN32
+	CEGUI::String dirDelemiter = "\\";
+#else
+	CEGUI::String dirDelemiter = "/";
+#endif
+	CEGUI::String temp(strFilename);
+	
+	int pos = temp.find_last_of(dirDelemiter);
+	*/
+	std::cout << strFilename << std::endl;
+	struct stat stFileInfo;
+	stat(strFilename,&stFileInfo);
+	if(stFileInfo.st_mode == S_IFDIR)
+		std::cout << "dir " << stFileInfo.st_mode << std::endl;
+	else
+		std::cout << "file " << stFileInfo.st_mode << std::endl;
+	
+	return true;
+}

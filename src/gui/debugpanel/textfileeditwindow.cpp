@@ -33,7 +33,9 @@ void TextFileEditWindow::close()
 
 void TextFileEditWindow::getNewFileNameForName()
 {
-
+	m_fb = new FileBrowser();
+	m_fb->init("/home/stefan/Dev/s07c/sumwars", FileBrowser::FB_TYPE_OPEN_FILE, true);
+	m_fb->m_acceptBtn->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&TextFileEditWindow::handleFileBrowserAcceptClicked, this));
 }
 
 
@@ -87,6 +89,8 @@ bool TextFileEditWindow::load(const String &fileName)
 
 void TextFileEditWindow::save()
 {
+	std::cout << m_filePath.c_str() << std::endl;
+	
 	if(m_filePath == "")
 	{
 		getNewFileNameForName();

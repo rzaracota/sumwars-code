@@ -39,18 +39,25 @@ public:
 	void destroy();
 	
 	/**
-	* \fn handleCloseWindow(const CEGUI::EventArgs& e);
+	* \fn bool handleCloseWindow(const CEGUI::EventArgs& e);
 	* \brief Handles clicks on the "Close Window" button
 	* \param e Event Args from CEGUI
 	*/
 	virtual bool handleCloseWindow(const CEGUI::EventArgs& e);
 	
 	/**
-	* \fn handleBrowserDblClick(const CEGUI::EventArgs& e);
+	* \fn bool handleBrowserDblClick(const CEGUI::EventArgs& e);
 	* \brief Handles Doubleclicks on items in the browser
 	* \param e Event Args from CEGUI
 	*/
 	virtual bool handleBrowserDblClick(const CEGUI::EventArgs& e);
+	
+	/**
+	* \fn bool handleSelectionChanged(const CEGUI::EventArgs& e);
+	* \brief Handles ecerything when selection in the browser is changed
+	* \param e Event Args from CEGUI
+	*/
+	virtual bool handleSelectionChanged(const CEGUI::EventArgs& e);
 
 	/**
 	* \fn CEGUI::String getCurrentSelected();
@@ -85,6 +92,13 @@ protected:
 	void createLayout();
 private:
 	/**
+	* \fn bool FileBrowser::fileExists(const char *strFilename)
+	* \brief Echecks if a file exists
+	* \brief strFilename The directory to check
+	*/
+	bool fileExists(const char *strFilename);
+	
+	/**
 	* \var 	CEGUI::System *m_guiSystem;
 	* \brief  Pointer to the CEGUI::System
 	*/
@@ -115,16 +129,34 @@ private:
 	CEGUI::Editbox* m_pathBox;
 
 	/**
-	* \var 	CEGUI::ItemListbox* m_browserBox;
-	* \brief  Pointer to the Editbox that shows the current path
+	* \var 	CEGUI::MultiColumnList* m_browserBox;
+	* \brief  Holds the current directoryview
 	*/
-	CEGUI::ItemListbox* m_browserBox;
+	CEGUI::MultiColumnList* m_browserBox;
+	
+	/**
+	* \var 	CEGUI::EditBox* m_fileNameBox;
+	* \brief  Pointer to the Editbox that shows the current filename
+	*/
+	CEGUI::Editbox* m_fileNameBox;
 	
 	/**
 	* \var 	FileBrowserType m_type;
 	* \brief  Type of the FileBrowser
 	*/
 	FileBrowserType m_type;
+	
+	/**
+	* \var 	std::list<std::string> m_dirs;
+	* \brief  Holds the directorys currently shown
+	*/
+	std::list<std::string> m_dirs;
+	
+	/**
+	* \var 	std::list<std::string> m_files;
+	* \brief  Holds the files currently shown
+	*/
+	std::list<std::string> m_files;
 };
 
 #endif // DEBUGPANEL_H
