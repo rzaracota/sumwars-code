@@ -4,7 +4,7 @@
     <Window Type="TaharezLook/FrameWindow" Name="FileBrowserMain" >
         <Property Name="TitlebarFont" Value="Commonwealth-10" />
         <Property Name="TitlebarEnabled" Value="True" />
-        <Property Name="UnifiedAreaRect" Value="{{0.0398442,0},{0.0333333,0},{0.803516,0},{0.926562,0}}" />
+        <Property Name="UnifiedAreaRect" Value="{{0.0398442,0},{0.0320312,0},{0.803516,0},{0.92526,0}}" />
         <Window Type="TaharezLook/Button" Name="Ok" >
             <Property Name="Text" >Ok
 </Property>
@@ -20,13 +20,13 @@
             <Property Name="UnifiedAreaRect" Value="{{0.0188777,0},{0.0637985,0},{0.981058,0},{0.141126,0}}" />
             <Property Name="TextParsingEnabled" Value="False" />
         </Window>
-        <Window Type="TaharezLook/ItemListbox" Name="Browser" >
-            <Property Name="UnifiedAreaRect" Value="{{0.0200473,0},{0.149582,0},{0.985349,0},{0.899578,0}}" />
-        </Window>
         <Window Type="TaharezLook/Editbox" Name="FileName" >
             <Property Name="MaxTextLength" Value="1073741823" />
             <Property Name="UnifiedAreaRect" Value="{{0.0215894,0},{0.90975,0},{0.542052,0},{0.982869,0}}" />
             <Property Name="TextParsingEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/MultiColumnList" Name="Browser" >
+            <Property Name="UnifiedAreaRect" Value="{{0.0240409,0},{0.150729,0},{0.981202,0},{0.894899,0}}" />
         </Window>
     </Window>
 </GUILayout>
