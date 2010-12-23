@@ -63,6 +63,16 @@
 		<Scale objectname="particle" start_val="0.5" end_val="7.0" />
 	</Action>
 </RenderInfo>
+
+<RenderInfo name="fire_storm">
+	<Soundobject objectname="sound" />
+	<ParticleSystem objectname="particle" source="Firewave" position="0 1.2 0" />
+	
+	<Action name="grow">
+		<Scale objectname="particle" start_val="0.5" end_val="10.0" />
+	</Action>
+</RenderInfo>
+
 <RenderInfo name="frost_wave">
 	<ParticleSystem objectname="particle" source="Frostwave" position="0 1.2 0" />
 	
@@ -111,6 +121,11 @@
 </RenderInfo>
 
 <RenderInfo name="thunderstorm">
+	<Soundobject objectname="sound" />
+	<ParticleSystem objectname="particle" source="Thunderstorm" position="0 1.6 0" />
+</RenderInfo>
+
+<RenderInfo name="tempest">
 	<Soundobject objectname="sound" />
 	<ParticleSystem objectname="particle" source="Thunderstorm" position="0 1.6 0" />
 </RenderInfo>
@@ -235,6 +250,39 @@
 	<ParticleSystem objectname="particle" source="Wind_Explosion" position="0 1.6 0" />
 	<Action name="stable">
 		<Scale objectname="particle" start_val="0.1" end_val="1.2" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="explosion_3">
+	<Soundobject objectname="sound" />
+	<ParticleSystem objectname="particle" source="Explosion" position="0 1.3 0" />
+	<Action name="stable">
+		<Scale objectname="particle" start_val="0.1" end_val="1.8" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="fire_explosion_3">
+	<Soundobject objectname="sound" />
+	<ParticleSystem objectname="particle" source="Fire_Explosion" position="0 1.6 0" />
+	
+	<Action name="stable">
+		<Scale objectname="particle" start_val="0.1" end_val="1.8" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="ice_explosion_3">
+	<Soundobject objectname="sound" />
+	<ParticleSystem objectname="particle" source="Ice_Explosion" position="0 1.6 0" />
+	<Action name="stable">
+		<Scale objectname="particle" start_val="0.1" end_val="1.8" />
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="wind_explosion_3">
+	<Soundobject objectname="sound" />
+	<ParticleSystem objectname="particle" source="Wind_Explosion" position="0 1.6 0" />
+	<Action name="stable">
+		<Scale objectname="particle" start_val="0.1" end_val="1.8" />
 	</Action>
 </RenderInfo>
 

@@ -636,40 +636,49 @@ void Projectile::doEffect(GameObject* target)
 			WorldObject* hit;
 			
 			float r = getShape()->m_radius;
-			// Punkt in der Flaeche des Zaubers auswuerfeln
-			Vector dir = Vector(r, r);
-			Vector pos = getShape()->m_center;
 			
-			while (dir.getLength() > r)
+			// three attempts to find a legal target
+			for (int ii=0; ii<3; ii++)
 			{
-				dir.m_x = r*(1 - 2*rand()*1.0/RAND_MAX);
-				dir.m_y = r*(1 - 2*rand()*1.0/RAND_MAX);
-			}
-
-			// Kreis um den ausgewuerfelten Punkt mit Radius 1.5
-			Shape s;
-			s.m_center = dir+pos;
-			s.m_type = Shape::CIRCLE;
-			s.m_radius = 1.5;
-			hitobj.clear();
-
-			// Alle Objekte in dem Kreis suchen
-			getRegion()->getObjectsInShape(&s,&hitobj,getLayer(),WorldObject::CREATURE,0);
-
-			// Alle nicht feindlichen Objekte aus der Liste entfernen
-			if (!hitobj.empty())
-			{
-				i = hitobj.begin();
-				hit = (*i);
-				while (i != hitobj.end() && World::getWorld()->getRelation(getFraction(),hit) != Fraction::HOSTILE)
+				// Punkt in der Flaeche des Zaubers auswuerfeln
+				Vector dir = Vector(r, r);
+				Vector pos = getShape()->m_center;
+				
+				while (dir.getLength() > r)
 				{
-					i=hitobj.erase(i);
-					if (i!=hitobj.end())
-						hit=(*i);
-
+					dir.m_x = r*(1 - 2*Random::random());
+					dir.m_y = r*(1 - 2*Random::random());
 				}
-			}
 
+				// Kreis um den ausgewuerfelten Punkt mit Radius 2.0
+				Shape s;
+				s.m_center = dir+pos;
+				s.m_type = Shape::CIRCLE;
+				s.m_radius = 2.0;
+				hitobj.clear();
+				
+				// Alle Objekte in dem Kreis suchen
+				getRegion()->getObjectsInShape(&s,&hitobj,getLayer(),WorldObject::CREATURE,0);
+
+				// Alle nicht feindlichen Objekte aus der Liste entfernen
+				if (!hitobj.empty())
+				{
+					i = hitobj.begin();
+					hit = (*i);
+					while (i != hitobj.end() && World::getWorld()->getRelation(getFraction(),hit) != Fraction::HOSTILE)
+					{
+						i=hitobj.erase(i);
+						if (i!=hitobj.end())
+							hit=(*i);
+
+					}
+				}
+				
+				// stop if target found
+				if (!hitobj.empty())
+					break;
+			}
+			
 			if (!hitobj.empty())
 			{
 				// Ziel gefunden
@@ -688,6 +697,10 @@ void Projectile::doEffect(GameObject* target)
 						getRegion()->insertProjectile(pr,hit->getShape()->m_center);
 					}
 				}
+			}
+			else
+			{
+				DEBUGX("nothing hit");
 			}
 		}
 	}

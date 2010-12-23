@@ -2,8 +2,8 @@
 		 name="Blizzard" 
 		 description="The mage summons a leathal cold blizzard that freezes every enemy caught in it to death."
 		 time="1401.000000" 
-		 timer_nr="2.000000"
-		 timer_value="14000.000000" 
+		 timer_nr="3.000000"
+		 timer_value="60000.000000" 
 		 base_ability="magic_attack" 
 		 critical_percent="0.800000"
 		 target_type="ranged">
@@ -18,7 +18,7 @@
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local idmg = getDamageValue("ice_dmg");
-			setDamageValue("ice_dmg", {idmg[1] + magic*0.5, idmg[2] + magic*0.8});
+			setDamageValue("ice_dmg", {idmg[1] + magic*1.2, idmg[2] + magic*1.6});
 			setDamageValue("fire_dmg",{0,0});
 		</LuaImplementation>	
 	</Damage>
@@ -29,8 +29,8 @@
 		 name="Chainlightning"
 		 description="The mage unleashes a ball of lightning, that may jump from one enemy to another. It hits a maximum of five enemies and the damage is reduced everytime it jumps." 
 		 time="801.000000" 
-		 timer_nr="1.000000" 
-		 timer_value="7000.000000" 
+		 timer_nr="2.000000" 
+		 timer_value="8000.000000" 
 		 base_ability="magic_attack" 
 		 critical_percent="0.800000" 
 		 target_type="ranged"
@@ -46,7 +46,7 @@
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local admg = getDamageValue("air_dmg");
-			setDamageValue("air_dmg", {admg[1] + magic*0.6, admg[2] + magic*3});
+			setDamageValue("air_dmg", {admg[1] + magic*0.6, admg[2] + magic*2.4});
 		</LuaImplementation>	
 	</Damage>
 </Ability>
@@ -55,8 +55,8 @@
 		 name="Ball lightning" 
 		 description="The mage unleashes a mighty ball lightning, that can jump over to nearby enemies. A maximum of nine enemies is hit and the damage is reduced with every jump." 
 		 time="801.000000" 
-		 timer_nr="1.000000"
-		 timer_value="7000.000000" 
+		 timer_nr="2.000000"
+		 timer_value="8000.000000" 
 		 base_ability="magic_attack" 
 		 critical_percent="0.800000" 
 		 target_type="ranged"
@@ -72,7 +72,7 @@
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local admg = getDamageValue("air_dmg");
-			setDamageValue("air_dmg", {admg[1] + magic*1, admg[2] + magic*5});
+			setDamageValue("air_dmg", {admg[1] + magic*0.9, admg[2] + magic*3.6});
 		</LuaImplementation>	
 	</Damage>
 </Ability>
@@ -91,8 +91,8 @@
 		 name="Fireball" 
 		 description="The mage casts a bolt of fire, that explodes upon hitting an enemy. Other enemies nearby the victim are also caught in the explosion." 
 		 time="1001.000000" 
-		 timer_nr="1.000000"
-		 timer_value="6000.000000" 
+		 timer_nr="2.000000"
+		 timer_value="9000.000000" 
 		 base_ability="magic_attack" 
 		 critical_percent="0.800000" 
 		 target_type="ranged">
@@ -107,7 +107,7 @@
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local fdmg = getDamageValue("fire_dmg");
-			setDamageValue("fire_dmg", {fdmg[1] + magic*1.4, fdmg[2] + magic*2.4});
+			setDamageValue("fire_dmg", {fdmg[1] + magic*1.2, fdmg[2] + magic*2});
 			setDamageValue("ice_dmg",{0,0});
 		</LuaImplementation>	
 	</Damage>
@@ -118,7 +118,7 @@
 		 description="The mage unleashes a small bolt of fire, that damages a single enemy." 
 		 time="701.000000" 
 		 timer_nr="1.000000" 
-		 timer_value="2500.000000" 
+		 timer_value="2700.000000" 
 		 base_ability="magic_attack" 
 		 critical_percent="0.800000"
 		 target_type="ranged">
@@ -143,8 +143,8 @@
 		 name="Firestorm" 
 		 description="The mage conjures a deadly wave of fire, that burns every enemy in a circle around him." 
 		 time="1301.000000" 
-		 timer_nr="2.000000" 
-		 timer_value="15000.000000" 
+		 timer_nr="3.000000" 
+		 timer_value="70000.000000" 
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
 		 target_type="circle">
@@ -152,14 +152,14 @@
 	<Effect>
 		<CppImplementation type="proj_at_self" />
 	</Effect>
-	<Projectile type="fire_wave" />
+	<Projectile type="fire_storm" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local fdmg = getDamageValue("fire_dmg");
-			setDamageValue("fire_dmg", {fdmg[1] + magic*2.5, fdmg[2] + magic*3});
+			setDamageValue("fire_dmg", {fdmg[1] + magic*4, fdmg[2] + magic*5});
 			setDamageValue("ice_dmg",{0,0});
 		</LuaImplementation>	
 	</Damage>
@@ -170,7 +170,7 @@
 		 description="The mage casts a strong bolt of fire, that damages one enemy." 
 		 time="701.000000" 
 		 timer_nr="1.000000" 
-		 timer_value="2500.000000" 
+		 timer_value="2700.000000" 
 		 base_ability="magic_attack" 
 		 critical_percent="0.800000" 
 		 target_type="ranged">
@@ -185,7 +185,7 @@
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local fdmg = getDamageValue("fire_dmg");
-			setDamageValue("fire_dmg", {fdmg[1] + magic*1.8, fdmg[2] + magic*3.4});
+			setDamageValue("fire_dmg", {fdmg[1] + magic*1.6, fdmg[2] + magic*3});
 			setDamageValue("ice_dmg",{0,0});
 		</LuaImplementation>	
 	</Damage>
@@ -195,8 +195,8 @@
 			name="Firecolumn" 
 			description="The mage conjurs a column made of hellfire, that will stay for 5 seconds and turn every enemy stupid enough to stay in there to ashes."
 			time="1001.000000" 
-			timer_nr="2.000000" 
-			timer_value="12000.000000"
+			timer_nr="3.000000" 
+			timer_value="50000.000000"
 			base_ability="magic_attack" 
 			critical_percent="0.800000" 
 			target_type="ranged">
@@ -211,7 +211,7 @@
 			<LuaImplementation>
 				local magic = get(self,"magic_power");
 				local fdmg = getDamageValue("fire_dmg");
-				setDamageValue("fire_dmg", {fdmg[1] + magic*0.33, fdmg[2] + magic*0.5});
+				setDamageValue("fire_dmg", {fdmg[1] + magic*0.3, fdmg[2] + magic*0.5});
 				setDamageValue("ice_dmg",{0,0});
 			</LuaImplementation>	
 		</Damage>
@@ -221,8 +221,8 @@
 		 name="Flame wave"
 		 description="The mage conjures a wave of flames, that damages enemies in a circle around him."
 		 time="1301.000000"
-		 timer_nr="2.000000"
-		 timer_value="15000.000000"
+		 timer_nr="3.000000"
+		 timer_value="70000.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
 		 target_type="circle">
@@ -237,7 +237,7 @@
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local fdmg = getDamageValue("fire_dmg");
-			setDamageValue("fire_dmg", {fdmg[1] + magic*1.5, fdmg[2] + magic*2});
+			setDamageValue("fire_dmg", {fdmg[1] + magic*3, fdmg[2] + magic*4});
 			setDamageValue("ice_dmg",{0,0});
 		</LuaImplementation>	
 	</Damage>
@@ -272,8 +272,8 @@
 		 name="Frost ring"
 		 description="The mage calls upon a deadlier version of the icering."
 		 time="801.000000" 
-		 timer_nr="1.000000"
-		 timer_value="4000.000000"
+		 timer_nr="2.000000"
+		 timer_value="7000.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
 		 target_type="circle">
@@ -288,8 +288,9 @@
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local idmg = getDamageValue("ice_dmg");
-			setDamageValue("ice_dmg", {idmg[1] + magic*2.4, idmg[2] + magic*2.8});
+			setDamageValue("ice_dmg", {idmg[1] + magic*2.1, idmg[2] + magic*2.6});
 			setDamageValue("fire_dmg",{0,0});
+			setDamageValue("frozen", magic/2);
 		</LuaImplementation>	
 	</Damage>
 </Ability>
@@ -299,7 +300,7 @@
 		 description="The mage casts a shard of pure ice, that damages his foes."
 		 time="701.000000"
 		 timer_nr="1.000000"
-		 timer_value="3000.000000"
+		 timer_value="3500.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
 		 target_type="ranged">
@@ -324,8 +325,8 @@
 		 name="Ice ring"
 		 description="The mage casts a ring of ice around himself that will damage enemies in range."
 		 time="801.000000"
-		 timer_nr="1.000000"
-		 timer_value="4000.000000"
+		 timer_nr="2.000000"
+		 timer_value="7000.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
 		 target_type="circle">
@@ -351,7 +352,7 @@
 		 description="The mage attacks one enemy with a powerful spear of magical ice."
 		 time="701.000000"
 		 timer_nr="1.000000"
-		 timer_value="3000.000000"
+		 timer_value="3500.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
 		 target_type="ranged">
@@ -366,7 +367,7 @@
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local idmg = getDamageValue("ice_dmg");
-			setDamageValue("ice_dmg", {idmg[1] + magic*2.6, idmg[2] + magic*3.4});
+			setDamageValue("ice_dmg", {idmg[1] + magic*2.5, idmg[2] + magic*3.3});
 			setDamageValue("fire_dmg",{0,0});
 		</LuaImplementation>	
 	</Damage>
@@ -376,8 +377,8 @@
 		 name="Infernoball"
 		 description="The mage casts an even more powerful fireball."
 		 time="1001.000000"
-		 timer_nr="1.000000"
-		 timer_value="6000.000000"
+		 timer_nr="2.000000"
+		 timer_value="9000.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
 		 target_type="ranged">
@@ -385,14 +386,14 @@
 	<Effect>
 		<CppImplementation type="proj_fly_at_target" />
 	</Effect>
-	<Projectile type="fire_ball" speed="15000" />
+	<Projectile type="inferno_ball" speed="15000" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local fdmg = getDamageValue("fire_dmg");
-			setDamageValue("fire_dmg", {fdmg[1] + magic*2.2, fdmg[2] + magic*4});
+			setDamageValue("fire_dmg", {fdmg[1] + magic*1.6, fdmg[2] + magic*2.8});
 			setDamageValue("ice_dmg",{0,0});
 		</LuaImplementation>	
 	</Damage>
@@ -438,7 +439,7 @@
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local admg = getDamageValue("air_dmg");
-			setDamageValue("air_dmg", {admg[1] + magic*0.5, admg[2] + magic*2.5});
+			setDamageValue("air_dmg", {admg[1] + magic*0.5, admg[2] + magic*2});
 		</LuaImplementation>	
 	</Damage>
 </Ability>
@@ -463,7 +464,7 @@
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local admg = getDamageValue("air_dmg");
-			setDamageValue("air_dmg", {admg[1] + magic*0.8, admg[2] + magic*4});
+			setDamageValue("air_dmg", {admg[1] + magic*0.7, admg[2] + magic*2.8});
 		</LuaImplementation>	
 	</Damage>
 </Ability>
@@ -472,8 +473,8 @@
 		 name="Snow storm"
 		 description="The mage calls upon a snow storm to kill every enemy in a circle."
 		 time="1401.000000"
-		 timer_nr="2.000000"
-		 timer_value="14000.000000"
+		 timer_nr="3.000000"
+		 timer_value="60000.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
 		 target_type="ranged">
@@ -488,7 +489,7 @@
 		<LuaImplementation>
 			local magic = get(self,"magic_power");
 			local idmg = getDamageValue("ice_dmg");
-			setDamageValue("ice_dmg", {idmg[1] + magic*0.33, idmg[2] + magic*0.5});
+			setDamageValue("ice_dmg", {idmg[1] + magic*0.7, idmg[2] + magic*1.0});
 			setDamageValue("fire_dmg",{0,0});
 		</LuaImplementation>	
 	</Damage>
@@ -520,8 +521,8 @@
 		 name="Thunderstorm"
 		 description="The mage summons a thunderstorm that will assault enemies in its range with lightnings." 
 		 time="2000.000000"
-		 timer_nr="2.000000"
-		 timer_value="12000.000000"
+		 timer_nr="3.000000"
+		 timer_value="50000.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
 		 target_type="ranged">
@@ -543,7 +544,7 @@
 			
 			local magic = get(self,"magic_power");
 			local admg = getDamageValue("air_dmg");
-			setDamageValue("air_dmg", {0.5*admg[1] + magic*0.15, 0.5*admg[2] + magic*0.6});
+			setDamageValue("air_dmg", {0.5*admg[1] + magic*0.2, 0.5*admg[2] + magic*0.8});
 		</LuaImplementation>	
 	</Damage>
 </Ability>
@@ -552,8 +553,8 @@
 		 name="Tempest"
 		 description="The mage summons a ferocious tempest that bombards enemies in its wake with lightnings."
 		 time="1301.000000"
-		 timer_nr="2.000000"
-		 timer_value="12000.000000"
+		 timer_nr="3.000000"
+		 timer_value="50000.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
 		 target_type="ranged">
@@ -561,7 +562,7 @@
 	<Effect>
 		<CppImplementation type="proj_at_target" />
 	</Effect>
-	<Projectile type="thunderstorm" />
+	<Projectile type="tempest" />
 	<Damage>
 		<CppImplementation type="magic_attack" />
 		<CppImplementation type="weapon_damage" />
