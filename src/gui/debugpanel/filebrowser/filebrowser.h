@@ -5,6 +5,7 @@
 #include "CEGUI/CEGUI.h"
 #include "debugtab.h"
 #include "OISKeyboard.h"
+#include "Poco/Path.h"
 
 #include <map>
 
@@ -53,6 +54,13 @@ public:
 	virtual bool handleBrowserDblClick(const CEGUI::EventArgs& e);
 	
 	/**
+	* \fn bool handlePopDirectory(const CEGUI::EventArgs& e);
+	* \brief Handles clicks on the pop directory button
+	* \param e Event Args from CEGUI
+	*/
+	virtual bool handlePopDirectory(const CEGUI::EventArgs& e);
+
+	/**
 	* \fn bool handleSelectionChanged(const CEGUI::EventArgs& e);
 	* \brief Handles ecerything when selection in the browser is changed
 	* \param e Event Args from CEGUI
@@ -79,11 +87,10 @@ public:
 	
 protected:
 	/**
-	* \fn void fillBrowser(CEGUI::String dir);
+	* \fn void fillBrowser();
 	* \brief Fills the browser window
-	* \brief dir The directory that will be opened when initialzing
 	*/
-	void fillBrowser(CEGUI::String dir);
+	void fillBrowser();
 
 	/**
 	* \fn void createLayout();
@@ -157,6 +164,12 @@ private:
 	* \brief  Holds the files currently shown
 	*/
 	std::list<std::string> m_files;
+
+	/**
+	* \var 	Poco::Path p;
+	* \brief  Holds the path currently viewed
+	*/
+	Poco::Path m_currentPath;
 };
 
 #endif // DEBUGPANEL_H

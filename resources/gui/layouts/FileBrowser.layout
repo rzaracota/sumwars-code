@@ -17,7 +17,7 @@
         </Window>
         <Window Type="TaharezLook/Editbox" Name="CurrentPath" >
             <Property Name="MaxTextLength" Value="1073741823" />
-            <Property Name="UnifiedAreaRect" Value="{{0.0188777,0},{0.0637985,0},{0.981058,0},{0.141126,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0188777,0},{0.0637985,0},{0.903054,0},{0.141126,0}}" />
             <Property Name="TextParsingEnabled" Value="False" />
         </Window>
         <Window Type="TaharezLook/Editbox" Name="FileName" >
@@ -27,6 +27,10 @@
         </Window>
         <Window Type="TaharezLook/MultiColumnList" Name="Browser" >
             <Property Name="UnifiedAreaRect" Value="{{0.0240409,0},{0.150729,0},{0.981202,0},{0.894899,0}}" />
+        </Window>
+        <Window Type="TaharezLook/Button" Name="PopDir" >
+            <Property Name="Text" Value="Up" />
+            <Property Name="UnifiedAreaRect" Value="{{0.911764,0},{0.0641398,0},{0.973785,0},{0.136297,0}}" />
         </Window>
     </Window>
 </GUILayout>

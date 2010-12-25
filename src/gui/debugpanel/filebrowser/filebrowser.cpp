@@ -1,10 +1,12 @@
 #include "filebrowser.h"
-#include <dirent.h>
+#include "listitem.h"
+
 #include <list>
 #include <fstream>
 
-#include  <stdio.h>
-#include  <stdlib.h>
+#include "Poco/Path.h"
+#include "Poco/DirectoryIterator.h"
+#include "Poco/Exception.h"
 
 using namespace CEGUI;
 
@@ -15,6 +17,8 @@ FileBrowser::~FileBrowser()
 
 void FileBrowser::init(CEGUI::String defaultDir, FileBrowserType type, bool visible)
 {
+	m_currentPath = Poco::Path::current();
+
 	m_type = type;
 	m_guiSystem = System::getSingletonPtr();
 	m_winManager = WindowManager::getSingletonPtr();
@@ -26,9 +30,11 @@ void FileBrowser::init(CEGUI::String defaultDir, FileBrowserType type, bool visi
 
 	m_acceptBtn = static_cast<PushButton*>(m_rootWindow->getChild("Ok"));
 	m_cancelBtn = static_cast<PushButton*>(m_rootWindow->getChild("Cancel"));
-	
+	CEGUI::PushButton *btn = static_cast<PushButton*>(m_rootWindow->getChild("PopDir"));
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked, Event::Subscriber(&FileBrowser::handlePopDirectory, this));
+
 	m_rootWindow->subscribeEvent(CEGUI::FrameWindow::EventCloseClicked, Event::Subscriber(&FileBrowser::handleCloseWindow, this));
-	
+
 	switch(m_type)
 	{
 		case FB_TYPE_OPEN_FILE:
@@ -48,7 +54,7 @@ void FileBrowser::init(CEGUI::String defaultDir, FileBrowserType type, bool visi
 	}
 	
 	m_pathBox = static_cast<Editbox*>(m_rootWindow->getChild("CurrentPath"));
-	m_pathBox->setText(defaultDir);
+	m_pathBox->setText(m_currentPath.toString());
 
 	m_fileNameBox = static_cast<Editbox*>(m_rootWindow->getChild("FileName"));
 	
@@ -59,8 +65,7 @@ void FileBrowser::init(CEGUI::String defaultDir, FileBrowserType type, bool visi
 	m_browserBox->addColumn("Type", 1, CEGUI::UDim(0.2, 0));
 	m_browserBox->setSelectionMode(CEGUI::MultiColumnList::RowSingle);
 	
-	fillBrowser(defaultDir);
-
+	fillBrowser();
 }
 
 void FileBrowser::destroy()
@@ -69,114 +74,91 @@ void FileBrowser::destroy()
 }
 
 
-void FileBrowser::fillBrowser(CEGUI::String inDir)
+void FileBrowser::fillBrowser()
 {
 	m_dirs.clear();
 	m_files.clear();
 	m_browserBox->resetList();
 
-	DIR *dir;
-	struct dirent *ent;
+	Poco::DirectoryIterator it(m_currentPath);
+	Poco::DirectoryIterator end;
 
-	CEGUI::ListboxTextItem *item;
-
-	std::list<std::string> m_dirs;
-	std::list<std::string> m_files;
-	std::list<std::string>::iterator it;
-
-	/* open directory stream */
-	dir = opendir (inDir.c_str());
-	if (dir != NULL)
+	while (it != end)
 	{
-
-		/* print all the files and directories within directory */
-		while ((ent = readdir (dir)) != NULL)
+		try
 		{
-			switch (ent->d_type)
-			{
-			case DT_REG:
-				m_files.push_back(ent->d_name);
-				//printf ("%*.*s\n", ent->d_namlen, ent->d_namlen, ent->d_name);
-				break;
-
-			case DT_DIR:
-				m_dirs.push_back(ent->d_name);
-				//printf ("%s (dir)\n", ent->d_name);
-				break;
-
-			default:
-				break;
-				//printf ("%s:\n", ent->d_name);
-			}
+			if (it->isFile())
+				m_files.push_back(it.name());
+			else
+				m_dirs.push_back(it.name());
+			++it;
 		}
-
-		closedir (dir);
+		catch (Poco::Exception& exc)
+		{
+			std::cout << exc.displayText() << std::endl;
+			++it;
+		}
 	}
+
 
 	m_dirs.sort();
 	m_files.sort();
 
-	for (it=m_dirs.begin(); it!=m_dirs.end(); ++it)
+	std::list<std::string>::iterator sit;
+	for (sit=m_dirs.begin(); sit!=m_dirs.end(); ++sit)
 	{
-		if(*it != ".")
-		{
-			m_dirs.insert(m_dirs.begin(), ".");
-			m_dirs.insert(m_dirs.begin(), "..");
-		}
-
-		item = new ListboxTextItem(*it);
-		int id = m_browserBox->addRow(item, 0);
-		
-		item = new ListboxTextItem("d");
-		m_browserBox->addRow(item, 1, id);
+		int id = m_browserBox->addRow();
+		StrListItem* ite1 = new StrListItem(*sit, "2");
+		StrListItem* ite2 = new StrListItem("Directory", "4");
+		m_browserBox->setItem(ite1, 0, id);
+		m_browserBox->setItem(ite2, 1, id);
 	}
-	for (it=m_files.begin(); it!=m_files.end(); ++it)
+	for (sit=m_files.begin(); sit!=m_files.end(); ++sit)
 	{
-		item = new ListboxTextItem(*it);
-		int id = m_browserBox->addRow(item, 0);
-		
-		item = new ListboxTextItem("f");
-		m_browserBox->addRow(item, 1, id);
+		int id = m_browserBox->addRow();
+		StrListItem* ite1 = new StrListItem(*sit, "f2");
+		StrListItem* ite2 = new StrListItem("File", "f4");
+		m_browserBox->setItem(ite1, 0, id);
+		m_browserBox->setItem(ite2, 1, id);
 	}
 }
 
 
 bool FileBrowser::handleBrowserDblClick(const CEGUI::EventArgs &e)
 {
-	CEGUI::String newDir;
-	ListboxItem *selectedDir = m_browserBox->getFirstSelectedItem();
-	CEGUI::String oldDir = m_pathBox->getText();
-	
-#ifdef WIN32
-	CEGUI::String dirDelemiter = "\\";
-#else
-	CEGUI::String dirDelemiter = "/";
-#endif
-
-	if(selectedDir->getText() == "..")
+	try
 	{
-		if(oldDir.find_last_of(dirDelemiter) == oldDir.size())
-			oldDir = oldDir.erase(oldDir.size()-1, CEGUI::String::npos);
-
-		int pos = oldDir.find_last_of(dirDelemiter);
-		newDir = oldDir.erase(pos, oldDir.size()- pos);
+		m_currentPath.pushDirectory(m_browserBox->getFirstSelectedItem()->getText().c_str());
+		m_pathBox->setText(m_currentPath.toString());
+		fillBrowser();
 	}
-	else
-		if(oldDir.find_last_of(dirDelemiter) == oldDir.size()-1)
-			newDir = oldDir + selectedDir->getText();
-		else
-			newDir = oldDir +  dirDelemiter + selectedDir->getText();
+	catch (Poco::Exception& exc)
+	{
+		std::cout << exc.displayText() << std::endl;
+		return true;
+	}
+	return true;
+}
 
-	m_pathBox->setText(newDir);
-
-	fillBrowser(newDir + dirDelemiter);
-
+bool FileBrowser::handlePopDirectory(const CEGUI::EventArgs &e)
+{
+	try
+	{
+		m_currentPath.popDirectory();
+		m_pathBox->setText(m_currentPath.toString());
+		fillBrowser();
+	}
+	catch (Poco::Exception& exc)
+	{
+		std::cout << exc.displayText() << std::endl;
+		return true;
+	}
 	return true;
 }
 
 bool FileBrowser::handleSelectionChanged(const CEGUI::EventArgs& e)
 {
-	if(m_browserBox->getFirstSelectedItem() != 0)
+	/*if(m_browserBox->getFirstSelectedItem() != 0)
 	{
 		CEGUI::String selectedItem = m_browserBox->getFirstSelectedItem()->getText();
 		CEGUI::String dir = m_pathBox->getText();
@@ -185,7 +167,7 @@ bool FileBrowser::handleSelectionChanged(const CEGUI::EventArgs& e)
 			m_fileNameBox->setText(selectedItem);
 		else
 			m_fileNameBox->setText("");
-	}
+	}*/
 	return true;
 }
 
@@ -209,6 +191,7 @@ CEGUI::String FileBrowser::getCurrentSelected()
 		default:
 			return "";
 	}
+	return "";
 }
 
 bool FileBrowser::handleCloseWindow(const CEGUI::EventArgs& e)
