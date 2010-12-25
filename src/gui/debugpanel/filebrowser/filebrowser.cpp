@@ -158,36 +158,39 @@ bool FileBrowser::handlePopDirectory(const CEGUI::EventArgs &e)
 
 bool FileBrowser::handleSelectionChanged(const CEGUI::EventArgs& e)
 {
-	/*if(m_browserBox->getFirstSelectedItem() != 0)
-	{
-		CEGUI::String selectedItem = m_browserBox->getFirstSelectedItem()->getText();
-		CEGUI::String dir = m_pathBox->getText();
-		
-		if(fileExists((dir + "/" + selectedItem).c_str()))
-			m_fileNameBox->setText(selectedItem);
-		else
-			m_fileNameBox->setText("");
-	}*/
+	Poco::Path tempPath(m_currentPath);
+	CEGUI::String selectedItem = m_browserBox->getFirstSelectedItem()->getText();
+	tempPath.pushDirectory(selectedItem.c_str());
+	Poco::File file(tempPath);
+
+	if(file.isFile())
+		m_fileNameBox->setText(selectedItem);
+	else
+		m_fileNameBox->setText("");
 	return true;
 }
 
 
 CEGUI::String FileBrowser::getCurrentSelected()
 {
-	CEGUI::String currentDir = m_pathBox->getText() + "/";
-	CEGUI::String currentSelectedItemText = m_browserBox->getFirstSelectedItem()->getText();
-		
+	Poco::Path tempPath(m_currentPath);
+	CEGUI::String fileName = m_fileNameBox->getText();
+	if(fileName != "")
+		tempPath.pushDirectory(fileName.c_str());
+	Poco::File f(tempPath);
 	switch(m_type)
 	{
 		case FB_TYPE_OPEN_FILE:
-			if(fileExists((currentDir + currentSelectedItemText).c_str()))
-				return currentDir + currentSelectedItemText;
+			if(f.isFile() && f.exists())
+				return f.path();
 			else
-				break;
+				return "";
 		case FB_TYPE_SAVE_FILE:
-			return currentDir + currentSelectedItemText;
+			if(f.isFile())
+				return tempPath.toString();
+			else return "";
 		case FB_TYPE_SELECT_DIRECTORY:
-			return currentDir;
+			return m_currentPath.toString();
 		default:
 			return "";
 	}
@@ -196,28 +199,5 @@ CEGUI::String FileBrowser::getCurrentSelected()
 
 bool FileBrowser::handleCloseWindow(const CEGUI::EventArgs& e)
 {
-	m_rootWindow->hide();
-	return true;
-}
-
-bool FileBrowser::fileExists(const char *strFilename) 
-{
-/*#ifdef WIN32
-	CEGUI::String dirDelemiter = "\\";
-#else
-	CEGUI::String dirDelemiter = "/";
-#endif
-	CEGUI::String temp(strFilename);
-	
-	int pos = temp.find_last_of(dirDelemiter);
-	*/
-	std::cout << strFilename << std::endl;
-	struct stat stFileInfo;
-	stat(strFilename,&stFileInfo);
-	if(stFileInfo.st_mode == S_IFDIR)
-		std::cout << "dir " << stFileInfo.st_mode << std::endl;
-	else
-		std::cout << "file " << stFileInfo.st_mode << std::endl;
-	
 	return true;
 }

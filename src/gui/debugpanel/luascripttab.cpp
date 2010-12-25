@@ -111,22 +111,8 @@ bool LuaScriptTab::handleOpen(const CEGUI::EventArgs& e)
 	m_fb = new FileBrowser();
 	m_fb->init("/home/stefan/Dev/s07c/sumwars", FileBrowser::FB_TYPE_OPEN_FILE, true);
 	m_fb->m_acceptBtn->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&LuaScriptTab::handleFileBrowserAcceptClicked, this));
+	m_fb->m_cancelBtn->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&LuaScriptTab::handleFileBrowserCancelClicked, this));
 	
-	/*CEGUI::String s = m_filePathEditBox->getText();
-	TextFileEditWindow *win = static_cast<TextFileEditWindow*>(WindowManager::getSingleton().createWindow("TextFileEditWindow", s));
-
-	
-	if(win->load(s))
-	{
-		m_fileTabControl->addTab(win);
-		win->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
-		win->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
-	}
-	else
-	{
-		m_filePathEditBox->setText("File failed to load");
-		WindowManager::getSingleton().destroyWindow(win);
-	}*/
 	return true;
 }
 
@@ -156,6 +142,14 @@ bool LuaScriptTab::handleTabChanged(const CEGUI::EventArgs& e)
 bool LuaScriptTab::handleFileBrowserAcceptClicked(const CEGUI::EventArgs& e)
 {
 	std::cout << m_fb->getCurrentSelected().c_str() << std::endl;
+	m_fb->destroy();
+	delete m_fb;
+	m_fb = 0;
+	return true;
+}
+
+bool LuaScriptTab::handleFileBrowserCancelClicked(const CEGUI::EventArgs& e)
+{
 	m_fb->destroy();
 	delete m_fb;
 	m_fb = 0;

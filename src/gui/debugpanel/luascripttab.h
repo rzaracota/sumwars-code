@@ -31,6 +31,7 @@ protected:
 	virtual bool handleClose(const CEGUI::EventArgs& e);
 	virtual bool handleTabChanged(const CEGUI::EventArgs& e);
 	virtual bool handleFileBrowserAcceptClicked(const CEGUI::EventArgs& e);
+	virtual bool handleFileBrowserCancelClicked(const CEGUI::EventArgs& e);
 	
 	void createMenu();
 protected:

@@ -18,10 +18,10 @@ public:
 	virtual bool handleTextChanged(const CEGUI::EventArgs& e);
 	virtual bool handleCharacterKey(const CEGUI::EventArgs& e);
     virtual bool handleFileBrowserAcceptClicked(const CEGUI::EventArgs& e);
+	virtual bool handleFileBrowserCancelClicked(const CEGUI::EventArgs& e);
 	
 protected:
 	CEGUI::Event::Connection m_handleTextChangedConnection;
-	CEGUI::String m_spaceCounter;
 	CEGUI::String m_filePath;
 	CEGUI::MultiLineEditbox *m_textEditBox;
 	bool m_isDirty;
@@ -29,8 +29,7 @@ public:
 	FileBrowser *m_fb;
 	static CEGUI::String WidgetTypeName;
 private:
-	void getNewFileNameForName();
-    void replaceSpacesWithMidpoints();
+	void getNewFileName();
 };
 
 #endif // TEXTFILEEDITWINDOW_H

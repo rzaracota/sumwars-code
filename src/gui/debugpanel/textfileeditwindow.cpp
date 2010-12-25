@@ -17,7 +17,6 @@ TextFileEditWindow::TextFileEditWindow(const CEGUI::String& type, const CEGUI::S
 	m_textEditBox->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	addChildWindow(m_textEditBox);
 	m_isDirty = false;
-	m_spaceCounter = "";
 	m_filePath = "";
 	m_fb = 0;
 	
@@ -31,11 +30,12 @@ void TextFileEditWindow::close()
 	
 }
 
-void TextFileEditWindow::getNewFileNameForName()
+void TextFileEditWindow::getNewFileName()
 {
 	m_fb = new FileBrowser();
 	m_fb->init("/home/stefan/Dev/s07c/sumwars", FileBrowser::FB_TYPE_OPEN_FILE, true);
 	m_fb->m_acceptBtn->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&TextFileEditWindow::handleFileBrowserAcceptClicked, this));
+	m_fb->m_cancelBtn->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&TextFileEditWindow::handleFileBrowserCancelClicked, this));
 }
 
 
@@ -89,11 +89,9 @@ bool TextFileEditWindow::load(const String &fileName)
 
 void TextFileEditWindow::save()
 {
-	std::cout << m_filePath.c_str() << std::endl;
-	
 	if(m_filePath == "")
 	{
-		getNewFileNameForName();
+		getNewFileName();
 		return;
 	}
 	
@@ -142,21 +140,18 @@ bool TextFileEditWindow::handleTextChanged(const CEGUI::EventArgs& e)
 bool TextFileEditWindow::handleCharacterKey(const CEGUI::EventArgs& ee)
 {
 	KeyEventArgs e = static_cast<const KeyEventArgs&>(ee);
-	
-	if(m_spaceCounter.length() == 3)
+
+	if(e.codepoint == 9)
 	{
-		// replace spaces here
-		replaceSpacesWithMidpoints();
-		
-		m_spaceCounter = "";
+		CEGUI::String s = m_textEditBox->getText();
+		int pos = m_textEditBox->getSelectionStartIndex();
+		s = s.insert(pos, TAB);
+		m_textEditBox->setText(s);
+		m_textEditBox->setCaratIndex(pos+3);
+		return true;
 	}
 	
-	if(e.codepoint == 32)
-		m_spaceCounter += " ";
-	else
-		m_spaceCounter = "";
-
-	return true;
+	return false;
 }
 
 
@@ -164,24 +159,14 @@ void TextFileEditWindow::setFilepath(String path)
 {
 	m_filePath = path;
 	
-	#ifdef WIN32
+#ifdef WIN32
 	String::size_type pos = m_filePath.find_last_of("\\");
-	#else
+#else
 	String::size_type pos = m_filePath.find_last_of("/");
-	#endif
+#endif
 	
 	String name = m_filePath.substr(pos+1);
 	setText(name);
-}
-
-void TextFileEditWindow::replaceSpacesWithMidpoints()
-{
-	CEGUI::String s = m_textEditBox->getText();
-	
-	size_t pos = s.find("   ");
-	s = s.erase(pos, 3);
-	s = s.insert(pos, TAB);
-	m_textEditBox->setText(s);
 }
 
 bool TextFileEditWindow::handleFileBrowserAcceptClicked(const CEGUI::EventArgs& e)
@@ -193,3 +178,23 @@ bool TextFileEditWindow::handleFileBrowserAcceptClicked(const CEGUI::EventArgs& 
 	m_fb = 0;
 	return true;
 }
+
+bool TextFileEditWindow::handleFileBrowserCancelClicked(const CEGUI::EventArgs& e)
+{
+	m_fb->destroy();
+	delete m_fb;
+	m_fb = 0;
+	return true;
+}
+
+
+
+
+
+
+
+
+
+
+
+

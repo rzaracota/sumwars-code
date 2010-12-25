@@ -99,13 +99,6 @@ protected:
 	void createLayout();
 private:
 	/**
-	* \fn bool FileBrowser::fileExists(const char *strFilename)
-	* \brief Echecks if a file exists
-	* \brief strFilename The directory to check
-	*/
-	bool fileExists(const char *strFilename);
-	
-	/**
 	* \var 	CEGUI::System *m_guiSystem;
 	* \brief  Pointer to the CEGUI::System
 	*/
