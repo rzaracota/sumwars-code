@@ -1,13 +1,15 @@
 #include "application.h"
-
 #include "tooltipmanager.h"
 #include "itemwindow.h"
 #include "templateloader.h"
 #include "music.h"
+
+#ifdef BUILD_TOOLS
 #include "debugpanel.h"
 #include "guidebugtab.h"
 #include "luascripttab.h"
 #include "textfileeditwindow.h"
+#endif
 
 #include "CEGUI/ScriptingModules/LuaScriptModule/CEGUILua.h"
 
@@ -519,10 +521,13 @@ bool Application::initCEGUI()
 
 	// eigene Factorys einfuegen
     CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("SumwarsTooltip", "DefaultWindow", "TaharezLook/CustomTooltip", "Falagard/Default");
+
+#ifdef BUILD_TOOLS
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<GuiDebugTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<LuaScriptTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<TextFileEditWindow> >();
-	
+#endif
+
 	return true;
 }
 
@@ -591,10 +596,11 @@ bool Application::createView()
 	DEBUG("create view\n");
 	m_main_window = new MainWindow(m_ogre_root, m_cegui_system,m_window,m_document);
 
-	
+#ifdef BUILD_TOOLS
 	new DebugPanel();
 	DebugPanel::getSingleton().init(false);
-	
+#endif
+
 	TooltipManager *mgr = new TooltipManager();
 	mgr->setFadeInTime(200.0f);
 	mgr->setFadeOutTime(200.0f);

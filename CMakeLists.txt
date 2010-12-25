@@ -22,6 +22,7 @@ SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
 ENDIF()
 
 OPTION(NO_TINYXML "Avoid use of TinyXML Lib" OFF)
+OPTION(BUILD_TOOLS "Builds editor tools" OFF)
 
 PROJECT(SUMWARS)
 
@@ -73,8 +74,6 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/enet/include)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/core)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui)
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel/filebrowser)
 INCLUDE_DIRECTORIES(${OGRE_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${OIS_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
@@ -85,9 +84,11 @@ INCLUDE_DIRECTORIES(${ALUT_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${OGG_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${VORBIS_INCLUDE_DIR})
 
+IF(BUILD_TOOLS)
+	INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
+	INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel/filebrowser)
+ENDIF()
 
-
-MESSAGE(${CEGUIOGRE_INCLUDE_DIRS})
 
 IF(!WIN32)
 INCLUDE_DIRECTORIES(${PTHREADS_INCLUDE_DIR})
@@ -104,7 +105,6 @@ ENDIF()
 
 MESSAGE(${CMAKE_BUILD_TYPE})
 
-SET(SRCS_NLFG ./Dependencies/nlfg/nlfg.c)
 SET(SRCS_TINYXML
   ./src/tinyxml/tinystr.cpp
   ./src/tinyxml/tinyxmlerror.cpp
@@ -171,11 +171,6 @@ SET(SRCS
   ./src/core/command.cpp
   ./src/core/mapgenerator.cpp
   ./src/core/options.cpp
-  ./src/gui/debugpanel/debugpanel.cpp
-  ./src/gui/debugpanel/guidebugtab.cpp
-  ./src/gui/debugpanel/luascripttab.cpp
-  ./src/gui/debugpanel/textfileeditwindow.cpp
-  ./src/gui/debugpanel/filebrowser/filebrowser.cpp
   ./src/gui/minimapwindow.cpp
   ./src/gui/worldmap.cpp
   ./src/gui/mainmenu.cpp
@@ -208,10 +203,6 @@ SET(SRCS
   ./src/gui/sound.cpp
   ./src/gui/tooltip.cpp
   ./src/gui/optionswindow.cpp
-  ./src/gui/debugpanel/debugpanel.cpp
-  ./src/gui/debugpanel/guidebugtab.cpp
-  ./src/gui/debugpanel/luascripttab.cpp
-  ./src/gui/debugpanel/textfileeditwindow.cpp
   ./src/enet/callbacks.c
   ./src/enet/compress.c
   ./src/enet/host.c
@@ -223,7 +214,16 @@ SET(SRCS
   ./src/enet/win32.c
 )
  
-
+IF(BUILD_TOOLS)
+SET(SRCS
+	${SRCS}
+	./src/gui/debugpanel/debugpanel.cpp
+	./src/gui/debugpanel/guidebugtab.cpp
+	./src/gui/debugpanel/luascripttab.cpp
+	./src/gui/debugpanel/textfileeditwindow.cpp
+	./src/gui/debugpanel/filebrowser/filebrowser.cpp
+	)
+ENDIF()
 
 ADD_EXECUTABLE(sumwars ${SRCS})
 
