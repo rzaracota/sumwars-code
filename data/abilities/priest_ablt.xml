@@ -28,8 +28,8 @@
 		 name="Bladestorm"
 		 description="The priest strengthens the weaponarms of his comrades, leading to increased attackspeed for everyone. With increasing willpower the priest can hold this effect longer."
 		 time="1001.000000"
-		 timer_nr="2.000000"
-		 timer_value="160000.000000"
+		 timer_nr="3.000000"
+		 timer_value="240000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
 		 target_type="party_all"
@@ -40,7 +40,7 @@
 	</Effect>
 	<BaseAttributesMod>
 		<LuaImplementation>
-			setBaseModValue("time",70000);
+			setBaseModValue("time",80000);
 			setBaseModValue("attack_speed",700);
 			setBaseModValue("flag","blade_storm");
 		</LuaImplementation>
@@ -51,8 +51,8 @@
 		 name="Blazing Shield"
 		 description="The party is surrounded by holy energy. Everyones defense is increased. With increasing willpower the priest can hold this effect longer."
 		 time="1001.000000"
-		 timer_nr="2.000000"
-		 timer_value="140000.000000"
+		 timer_nr="3.000000"
+		 timer_value="240000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
 		 target_type="party_all"
@@ -63,9 +63,10 @@
 	</Effect>
 	<BaseAttributesMod>
 		<LuaImplementation>
-			setBaseModValue("time",60000);
+			setBaseModValue("time",80000);
 			setBaseModValue("block",get(self,"willpower")*0.25)
 			setBaseModValue("armor",get(self,"willpower")*0.5)
+			setBaseModValue("flag","blazing_shield");
 		</LuaImplementation>
 	</BaseAttributesMod>
 </Ability>
@@ -103,8 +104,8 @@
 		 name="Magic Shield"
 		 description="The priest conjures a magic shield for all partymembers thats reduces the damage dealt by elemental attacks."
 		 time="1001.000000"
-		 timer_nr="2.000000"
-		 timer_value="180000.000000"
+		 timer_nr="3.000000"
+		 timer_value="280000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
 		 target_type="party_all"
@@ -115,7 +116,7 @@
 	</Effect>
 	<BaseAttributesMod>
 		<LuaImplementation>
-			setBaseModValue("time",80000);
+			setBaseModValue("time",90000);
 			setBaseModValue("resist_ice",20);
 			setBaseModValue("resist_fire",20);
 			setBaseModValue("resist_air",20);
@@ -155,7 +156,7 @@
 		 name="Gentle Glow"
 		 description="The priest bathes a partymember in a mild light, releaving him of blindness and silence."
 		 time="501.000000"
-		 timer_nr="1.000000"
+		 timer_nr="2.000000"
 		 timer_value="3000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
@@ -196,7 +197,7 @@
 		 name="Restore Concentration"
 		 description="The priest heals one friend from confusion and berserk."
 		 time="501.000000"
-		 timer_nr="1.000000"
+		 timer_nr="2.000000"
 		 timer_value="3000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
@@ -239,7 +240,7 @@
 		 name="Ease Pain"
 		 description="The priest treats a partymemener with healing water that washes away every poison and stops burns."
 		 time="501.000000"
-		 timer_nr="1.000000"
+		 timer_nr="2.000000"
 		 timer_value="3000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
@@ -300,6 +301,7 @@
 			setDamageValue("ice_dmg", { edmg*1.5,  edmg*2});
 			setDamageValue("fire_dmg", { edmg*1.2,  edmg*2.4});
 			setDamageValue("air_dmg", { edmg*0.7,  edmg*3});
+			setDamageValue("mute",willpower*2/3);
 			setDamageValue("blockable",false);
 			setDamageValue("extra_dmg_race","elemental");
 		</LuaImplementation>	
@@ -367,7 +369,7 @@
 		 name="Cure"
 		 description="The priest restores the hitpoints of one partymember."
 		 time="701.000000"
-		 timer_nr="1.000000"
+		 timer_nr="2.000000"
 		 timer_value="20000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
@@ -520,8 +522,8 @@
 		 name="Keen Mind"
 		 description="The priest increases everyones spellpower for a short time. Everyones spells will surely be more effective. With increasing willpower the priest can hold this effect longer."
 		 time="701.000000"
-		 timer_nr="2.000000"
-		 timer_value="180000.000000"
+		 timer_nr="3.000000"
+		 timer_value="280000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
 		 target_type="party_all"
@@ -532,7 +534,7 @@
 	</Effect>
 	<BaseAttributesMod>
 		<LuaImplementation>
-			setBaseModValue("time",70000);
+			setBaseModValue("time",80000);
 			setBaseModValue("magic_power",get(self,"willpower")*0.5)
 			setBaseModValue("flag","keen_mind");
 		</LuaImplementation>
@@ -570,7 +572,7 @@
 		 description="The priests protecting influence raises the willpower of all partymembers temporarily. With increasing willpower the priest can hold this effect longer."
 		 time="1001.000000"
 		 timer_nr="2.000000"
-		 timer_value="200000.000000" 
+		 timer_value="300000.000000" 
 		 base_ability="noaction"
 		 critical_percent="0.660000"
 		 target_type="party_all"
@@ -581,7 +583,7 @@
 	</Effect>
 	<BaseAttributesMod>
 		<LuaImplementation>
-			setBaseModValue("time",60000);
+			setBaseModValue("time",90000);
 			setBaseModValue("willpower",get(self,"willpower")*0.5)
 			setBaseModValue("flag","divine_will");
 		</LuaImplementation>
