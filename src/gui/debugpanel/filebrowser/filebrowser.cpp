@@ -12,7 +12,6 @@ using namespace CEGUI;
 
 FileBrowser::~FileBrowser()
 {
-	m_winManager->destroyWindow(m_rootWindow);
 }
 
 void FileBrowser::init(CEGUI::String defaultDir, FileBrowserType type, bool visible)
@@ -38,11 +37,11 @@ void FileBrowser::init(CEGUI::String defaultDir, FileBrowserType type, bool visi
 	switch(m_type)
 	{
 		case FB_TYPE_OPEN_FILE:
-			m_rootWindow->setText("Select file");
+			m_rootWindow->setText("Open - Select file");
 			m_acceptBtn->setText("Open");
 			break;
 		case FB_TYPE_SAVE_FILE:
-			m_rootWindow->setText("Select file");
+			m_rootWindow->setText("Save - Select filename");
 			m_acceptBtn->setText("Save");
 			break;
 		case FB_TYPE_SELECT_DIRECTORY:
@@ -64,7 +63,10 @@ void FileBrowser::init(CEGUI::String defaultDir, FileBrowserType type, bool visi
 	m_browserBox->addColumn("", 0, CEGUI::UDim(0.8, 0));
 	m_browserBox->addColumn("Type", 1, CEGUI::UDim(0.2, 0));
 	m_browserBox->setSelectionMode(CEGUI::MultiColumnList::RowSingle);
-	
+
+	std::cout << m_browserBox->isDestroyedByParent() << m_fileNameBox->isDestroyedByParent() << std::endl;
+	std::cout << m_pathBox->isDestroyedByParent() << m_acceptBtn->isDestroyedByParent() << std::endl;
+
 	fillBrowser();
 }
 
@@ -158,43 +160,68 @@ bool FileBrowser::handlePopDirectory(const CEGUI::EventArgs &e)
 
 bool FileBrowser::handleSelectionChanged(const CEGUI::EventArgs& e)
 {
-	Poco::Path tempPath(m_currentPath);
-	CEGUI::String selectedItem = m_browserBox->getFirstSelectedItem()->getText();
-	tempPath.pushDirectory(selectedItem.c_str());
-	Poco::File file(tempPath);
+	try
+	{
+		Poco::Path tempPath(m_currentPath);
+		CEGUI::String selectedItem = m_browserBox->getFirstSelectedItem()->getText();
+		tempPath.pushDirectory(selectedItem.c_str());
+		Poco::File file(tempPath);
 
-	if(file.isFile())
-		m_fileNameBox->setText(selectedItem);
-	else
-		m_fileNameBox->setText("");
-	return true;
+		if(file.isFile())
+			m_fileNameBox->setText(selectedItem);
+		else
+			m_fileNameBox->setText("");
+		return true;
+	}
+	catch (Poco::Exception& exc)
+	{
+		std::cout << exc.displayText() << std::endl;
+		return true;
+	}
 }
 
 
 CEGUI::String FileBrowser::getCurrentSelected()
 {
-	Poco::Path tempPath(m_currentPath);
-	CEGUI::String fileName = m_fileNameBox->getText();
-	if(fileName != "")
-		tempPath.pushDirectory(fileName.c_str());
-	Poco::File f(tempPath);
-	switch(m_type)
+	try
 	{
-		case FB_TYPE_OPEN_FILE:
-			if(f.isFile() && f.exists())
-				return f.path();
-			else
+		Poco::Path tempPath(m_currentPath);
+		std::string fileName = m_fileNameBox->getText().c_str();
+
+		if(fileName != "")
+			tempPath.pushDirectory(fileName.c_str());
+
+		Poco::File f(tempPath);
+
+		switch(m_type)
+		{
+			case FB_TYPE_OPEN_FILE:
+				if(f.isFile() && f.exists())
+					return f.path();
+				else
+					return "";
+			case FB_TYPE_SAVE_FILE:
+				if(!f.exists())
+				{
+					return tempPath.toString();
+				}
+				else
+				{
+					// TODO file exists already, ask the user if he wants to overwrite the file
+					return tempPath.toString();
+				}
+			case FB_TYPE_SELECT_DIRECTORY:
+				return m_currentPath.toString();
+			default:
 				return "";
-		case FB_TYPE_SAVE_FILE:
-			if(f.isFile())
-				return tempPath.toString();
-			else return "";
-		case FB_TYPE_SELECT_DIRECTORY:
-			return m_currentPath.toString();
-		default:
-			return "";
+		}
+		return "";
 	}
-	return "";
+	catch (Poco::Exception& exc)
+	{
+		std::cout << exc.displayText() << std::endl;
+		return "";
+	}
 }
 
 bool FileBrowser::handleCloseWindow(const CEGUI::EventArgs& e)

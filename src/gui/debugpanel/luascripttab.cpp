@@ -142,9 +142,21 @@ bool LuaScriptTab::handleTabChanged(const CEGUI::EventArgs& e)
 bool LuaScriptTab::handleFileBrowserAcceptClicked(const CEGUI::EventArgs& e)
 {
 	std::cout << m_fb->getCurrentSelected().c_str() << std::endl;
+
+	if(m_fb->getType() == FileBrowser::FB_TYPE_OPEN_FILE)
+	{
+		TextFileEditWindow *win = static_cast<TextFileEditWindow*>(WindowManager::getSingleton().createWindow("TextFileEditWindow"));
+		m_fileTabControl->addTab(win);
+		win->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
+		win->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
+		win->load(m_fb->getCurrentSelected());
+		m_newFileCtr++;
+	}
+
 	m_fb->destroy();
 	delete m_fb;
 	m_fb = 0;
+
 	return true;
 }
 

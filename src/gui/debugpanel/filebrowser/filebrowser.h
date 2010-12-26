@@ -71,8 +71,15 @@ public:
 	* \fn CEGUI::String getCurrentSelected();
 	* \brief Returns the current selected value
 	*/
-	virtual CEGUI::String getCurrentSelected(); 
-	
+	virtual CEGUI::String getCurrentSelected();
+
+	/**
+	* \fn FileBrowserType getType();
+	* \brief Returns filebrowser type
+	*/
+	virtual FileBrowserType getType() { return m_type; }
+
+
 	/**
 	* \var 	CEGUI::Window *m_acceptBtn;
 	* \brief  Pointer to the Accept (Open,Save,Select) button window of this panel

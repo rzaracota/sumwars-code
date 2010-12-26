@@ -16,7 +16,6 @@
 #*/
 cmake_minimum_required(VERSION 2.6)
 
-
 OPTION(NO_TINYXML "Avoid use of TinyXML Lib" OFF)
 OPTION(BUILD_TOOLS "Builds editor tools" OFF)
 

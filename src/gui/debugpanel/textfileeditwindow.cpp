@@ -4,6 +4,8 @@
 #include <fstream>
 #include <string>
 
+#include "Poco/String.h"
+
 #define TAB "\267\267\267"
 
 using namespace CEGUI;
@@ -17,7 +19,7 @@ TextFileEditWindow::TextFileEditWindow(const CEGUI::String& type, const CEGUI::S
 	m_textEditBox->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	addChildWindow(m_textEditBox);
 	m_isDirty = false;
-	m_filePath = "";
+	m_file = Poco::File();
 	m_fb = 0;
 	
 	m_textEditBox->subscribeEvent(MultiLineEditbox::EventCharacterKey, Event::Subscriber(&TextFileEditWindow::handleCharacterKey, this));
@@ -25,62 +27,67 @@ TextFileEditWindow::TextFileEditWindow(const CEGUI::String& type, const CEGUI::S
 
 void TextFileEditWindow::close()
 {
-	
 	save();
-	
 }
 
 void TextFileEditWindow::getNewFileName()
 {
 	m_fb = new FileBrowser();
-	m_fb->init("/home/stefan/Dev/s07c/sumwars", FileBrowser::FB_TYPE_OPEN_FILE, true);
-	m_fb->m_acceptBtn->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&TextFileEditWindow::handleFileBrowserAcceptClicked, this));
+	m_fb->init("/home/stefan/Dev/s07c/sumwars", FileBrowser::FB_TYPE_SAVE_FILE, true);
+	m_fb->m_acceptBtn->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&TextFileEditWindow::handleFileBrowserSaveClicked, this));
 	m_fb->m_cancelBtn->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&TextFileEditWindow::handleFileBrowserCancelClicked, this));
+
+	// Not in constructor to avoid the first event when initialy seting the Tab text
+	m_handleTextChangedConnection = m_textEditBox->subscribeEvent(MultiLineEditbox::EventTextChanged, CEGUI::Event::Subscriber(&TextFileEditWindow::handleTextChanged, this));
+
 }
 
 
 bool TextFileEditWindow::load(const String &fileName)
 {
-	m_filePath = fileName;
-	std::string s;
-	std::string line;
-	std::ifstream myfile (fileName.c_str());
-	if (myfile.is_open())
+	setFilepath(fileName.c_str());
+
+	if(m_file.exists())
 	{
-		s += '\t';
-		while (! myfile.eof() )
+		std::string s;
+		std::string line;
+		std::ifstream myfile;
+		myfile.open(fileName.c_str());
+		if (myfile.is_open())
 		{
-			std::getline (myfile,line);
-			
-			int pos =  line.find_last_of('\t');
-			while(pos != line.npos)
+			s += '\t';
+			while (! myfile.eof() )
 			{
-				line.erase(pos, 1);
-				line.insert(pos, TAB);
-				pos =  line.find_last_of('\t');
+				std::getline (myfile,line);
+
+				int pos =  line.find_last_of('\t');
+				while(pos != line.npos)
+				{
+					line.erase(pos, 1);
+					line.insert(pos, TAB);
+					pos =  line.find_last_of('\t');
+				}
+
+				s += (line + "\n");
 			}
-			
-			s += (line + "\n");
+
+#ifdef WIN32
+			String::size_type pos = fileName.find_last_of("\\");
+#else
+			String::size_type pos = fileName.find_last_of("/");
+#endif
+
+			String name = fileName.substr(pos+1);
+			setText(name);
+			m_textEditBox->setText(s.c_str());
+		}
+		else
+		{
+			myfile.close();
+			return false;
 		}
 	}
-	else
-	{
-		myfile.close();
-		return false;
-	}
-		
 	
-
-	#ifdef WIN32
-		String::size_type pos = fileName.find_last_of("\\");
-	#else
-		String::size_type pos = fileName.find_last_of("/");
-	#endif
-
-	String name = fileName.substr(pos+1);
-	setText(name);
-	m_textEditBox->setText(s.c_str());
-
 	// Not in constructor to avoid the first event when initialy seting the Tab text
 	m_handleTextChangedConnection = m_textEditBox->subscribeEvent(MultiLineEditbox::EventTextChanged, CEGUI::Event::Subscriber(&TextFileEditWindow::handleTextChanged, this));
 
@@ -89,7 +96,7 @@ bool TextFileEditWindow::load(const String &fileName)
 
 void TextFileEditWindow::save()
 {
-	if(m_filePath == "")
+	if(m_file.path() == "")
 	{
 		getNewFileName();
 		return;
@@ -100,29 +107,24 @@ void TextFileEditWindow::save()
 	else
 	{
 		CEGUI::String s = m_textEditBox->getText();
-		std::ofstream myfile (m_filePath.c_str());
-		if (myfile.is_open())
-		{
-			int pos =  s.find(TAB);
-			while(pos != s.npos)
-			{
-				s.erase(pos, 3);
-				s.insert(pos, "\t");
-				pos =  s.find(TAB);
-			}
-			myfile << s.c_str();
-			myfile.close();
-		}
-		else
-		{
-			myfile.close();
-			return;
-		}
 
-		s = getText().c_str();
-		size_t length = s.length();
-		s.erase(length-2, 2);
-		setText(s);
+		if (!m_file.exists())
+			m_file.createFile();
+		
+		std::ofstream myfile;
+		myfile.open(m_file.path().c_str());
+		myfile.clear();
+		int pos =  s.find(TAB);
+		while(pos != s.npos)
+		{
+			s.erase(pos, 3);
+			s.insert(pos, "\t");
+			pos =  s.find(TAB);
+		}
+		myfile << s.c_str();
+		myfile.close();
+		std::string temp = getText().c_str();
+		setText(Poco::replace(temp, " *", ""));
 	}
 }
 
@@ -130,7 +132,7 @@ bool TextFileEditWindow::handleTextChanged(const CEGUI::EventArgs& e)
 {
 	m_isDirty = true;
 	String s = getText();
-	
+
 	if(s.find(" *") == s.npos)
 		setText(s + " *");
 
@@ -157,19 +159,19 @@ bool TextFileEditWindow::handleCharacterKey(const CEGUI::EventArgs& ee)
 
 void TextFileEditWindow::setFilepath(String path)
 {
-	m_filePath = path;
-	
+	m_file = Poco::File(path.c_str());
+
 #ifdef WIN32
-	String::size_type pos = m_filePath.find_last_of("\\");
+	String::size_type pos = m_file.path().find_last_of("\\");
 #else
-	String::size_type pos = m_filePath.find_last_of("/");
+	String::size_type pos = m_file.path().find_last_of("/");
 #endif
-	
-	String name = m_filePath.substr(pos+1);
+
+	String name = m_file.path().substr(pos+1);
 	setText(name);
 }
 
-bool TextFileEditWindow::handleFileBrowserAcceptClicked(const CEGUI::EventArgs& e)
+bool TextFileEditWindow::handleFileBrowserSaveClicked(const CEGUI::EventArgs& e)
 {
 	setFilepath(m_fb->getCurrentSelected());
 	save();
