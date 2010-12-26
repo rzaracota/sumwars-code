@@ -145,12 +145,28 @@ bool TextFileEditWindow::handleCharacterKey(const CEGUI::EventArgs& ee)
 
 	if(e.codepoint == 9)
 	{
+		// Handle Tabs
 		CEGUI::String s = m_textEditBox->getText();
 		int pos = m_textEditBox->getSelectionStartIndex();
 		s = s.insert(pos, TAB);
 		m_textEditBox->setText(s);
 		m_textEditBox->setCaratIndex(pos+3);
 		return true;
+	}
+	else if(e.codepoint == 40)
+	{
+		// Handle (
+		m_textEditBox->insertText(")", m_textEditBox->getCaratIndex());
+	}
+	else if(e.codepoint == 91)
+	{
+		// Handle [
+		m_textEditBox->insertText("]", m_textEditBox->getCaratIndex());
+	}
+	else if(e.codepoint == 123)
+	{
+		// Handle {
+		m_textEditBox->insertText("}", m_textEditBox->getCaratIndex());
 	}
 	
 	return false;

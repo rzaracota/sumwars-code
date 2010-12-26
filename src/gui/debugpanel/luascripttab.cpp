@@ -141,8 +141,6 @@ bool LuaScriptTab::handleTabChanged(const CEGUI::EventArgs& e)
 
 bool LuaScriptTab::handleFileBrowserAcceptClicked(const CEGUI::EventArgs& e)
 {
-	std::cout << m_fb->getCurrentSelected().c_str() << std::endl;
-
 	if(m_fb->getType() == FileBrowser::FB_TYPE_OPEN_FILE)
 	{
 		TextFileEditWindow *win = static_cast<TextFileEditWindow*>(WindowManager::getSingleton().createWindow("TextFileEditWindow"));
