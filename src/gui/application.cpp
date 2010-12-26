@@ -11,7 +11,7 @@
 #include "textfileeditwindow.h"
 #endif
 
-#include "CEGUI/ScriptingModules/LuaScriptModule/CEGUILua.h"
+//#include "CEGUI/ScriptingModules/LuaScriptModule/CEGUILua.h"
 
 #include "OgreConfigFile.h"
 
@@ -504,9 +504,9 @@ bool Application::initCEGUI()
 	}
     m_cegui_system = CEGUI::System::getSingletonPtr();
 	
-	CEGUI::LuaScriptModule &scriptm(CEGUI::LuaScriptModule::create());
-	m_cegui_system->setScriptingModule(&scriptm);
-	
+	/*CEGUI::LuaScriptModule &scriptm(CEGUI::LuaScriptModule::create());
+	m_cegui_system->setScriptingModule(&scriptm);*/
+
 	// Mauscursor setzen (evtl eher in View auslagern ? )
 	m_cegui_system->setDefaultMouseCursor((CEGUI::utf8*)"TaharezLook", (CEGUI::utf8*)"MouseArrow");
     m_cegui_system->setDefaultTooltip((CEGUI::utf8*)"TaharezLook/Tooltip");
