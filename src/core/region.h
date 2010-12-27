@@ -31,34 +31,55 @@ typedef std::string MusicTrack;
 typedef std::pair<RegionName, LocationName> RegionLocation;
 
 /**
- * \struct DamageVisualizer
- * \brief Objekt fuer die Visualisierung von Schaden
+ * \struct FloatingText
+ * \brief Objekt fuer creating colored one-line text overlays, mainly for damage visualization
  */
-struct DamageVisualizer
+struct FloatingText
 {
 	/**
-	 * \var int m_number
-	 * \brief Dargestellte Zahl
+	 * \brief Size of the text
 	 */
-	int m_number;
+	enum Size
+	{
+		SMALL = 1,
+		NORMAL = 2,
+		BIG = 3,
+	};
 	
 	/**
-	 * \var float m_time
-	 * \brief Zeit, die die Zahl noch dargestellt wird
+	 * \brief displayed Text
+	 */
+	TranslatableString m_text;
+	
+	/**
+	 * \brief remaining time the text will stay visible
 	 */
 	float m_time;
 	
 	/**
-	 * \var short m_size
-	 * \brief Schriftgroesse
+	 * \brief overall text display time
 	 */
-	short m_size;
+	float m_maxtime;
 	
 	/**
-	 * \var Vector m_position
+	 * \brief maximal offset of the  text when floating upwards 
+	 */
+	float m_float_offset;
+	
+	/**
+	 * \brief size of the text
+	 */
+	Size m_size;
+	
+	/**
 	 * \brief Dargestellter Ort
 	 */
 	Vector m_position;
+	
+	/**
+	 * \brief Colour of the text as hexadecimal AARRGGBB
+	 */
+	std::string m_colour;
 };
 
 /**
@@ -1313,12 +1334,11 @@ class Region
 		}
 		
 		/**
-		 * \fn std::map<int,DamageVisualizer>& getDamageVisualizer()
 		 * \brief Gibt die Schadensanzegier aus
 		 */
-		std::map<int,DamageVisualizer>& getDamageVisualizer()
+		std::map<int,FloatingText*>& getFloatingTexts()
 		{
-			return m_damage_visualizer;
+			return m_floating_texts;
 		}
 		
 		/**
@@ -1360,7 +1380,18 @@ class Region
 		 * \param position Position an der der Schaden dargestellt wird
 		 * \param size Schriftgroesse
 		 */
-		void visualizeDamage(int number, Vector position, short size=1);
+		void visualizeDamage(int number, Vector position, FloatingText::Size size = FloatingText::NORMAL);
+		
+		/**
+		 * \brief Create a floating text overlay
+		 * \param text the text displayed
+		 * \param position position of the text 
+		 * \param size Size of the text
+		 * \param  colour colour of the text as hexadecimal AARRGGBB
+		 * \param time how long the text is displayed
+		 * \param float_offset distance the text floats up (1 is screen height)
+		 */
+		void createFloatingText(TranslatableString text,  Vector position, FloatingText::Size size = FloatingText::NORMAL, std::string colour="FFFF5555", float time = 1000, float float_offset = 0.1);
 		
 		/**
 		 * \fn void setNamedId(std::string name, int id)
@@ -1553,10 +1584,9 @@ class Region
 		std::map<std::string,int> m_name_ids;
 		
 		/**
-		 * \var std::map<int,DamageVisualizer> m_damage_visualizer;
-		 * \brief Visualisierer fuer Schaden
+		 * \brief floating text overlays
 		 */
-		std::map<int,DamageVisualizer> m_damage_visualizer;
+		std::map<int,FloatingText*> m_floating_texts;
 		
 		/**
 		 * \var RegionCamera m_camera

@@ -3342,6 +3342,12 @@ bool Creature::takeDamage(Damage* d)
 	// wenn Schaden geblockt wurde, hier beenden
 	if (blocked)
 	{
+		FloatingText::Size size = FloatingText::NORMAL;
+		if (d->m_special_flags & Damage::VISUALIZE_SMALL)
+		{
+			size =FloatingText::SMALL;
+		}
+		getRegion()->createFloatingText(TranslatableString("Miss"),getShape()->m_center,size);
 		return true;
 	}
 
@@ -3449,10 +3455,10 @@ bool Creature::takeDamage(Damage* d)
 	// Visualisierung erzeugen
 	if (getRegion()!= 0 && World::getWorld()->isServer() && dmg>0.5 && !(d->m_special_flags & Damage::NOVISUALIZE))
 	{
-		short size =2;
+		FloatingText::Size size = FloatingText::NORMAL;
 		if ((d->m_special_flags & Damage::VISUALIZE_SMALL) && !critical)
 		{
-			size =1;
+			size =FloatingText::SMALL;
 		}
 		getRegion()->visualizeDamage(int(dmg + 0.5),getShape()->m_center,size);
 	}

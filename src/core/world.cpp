@@ -1948,15 +1948,17 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 		}
 		else if (event->m_type == NetEvent::DAMAGE_VISUALIZER_CREATED)
 		{
-			std::map<int,DamageVisualizer>& dmgvis = region->getDamageVisualizer();
-			std::map<int,DamageVisualizer>::iterator it= dmgvis.find(event->m_id);
+			std::map<int,FloatingText*>& dmgvis = region->getFloatingTexts();
+			std::map<int,FloatingText*>::iterator it= dmgvis.find(event->m_id);
 			if (it != dmgvis.end())
 			{
-				cv->toBuffer(it->second.m_number);
-				cv->toBuffer(it->second.m_time);
-				cv->toBuffer(it->second.m_size);
-				cv->toBuffer(it->second.m_position.m_x);
-				cv->toBuffer(it->second.m_position.m_y);
+				it->second->m_text.toString(cv);
+				cv->toBuffer(it->second->m_time);
+				cv->toBuffer(it->second->m_maxtime);
+				cv->toBuffer(it->second->m_float_offset);
+				cv->toBuffer((short) it->second->m_size);
+				cv->toBuffer(it->second->m_position.m_x);
+				cv->toBuffer(it->second->m_position.m_y);
 			}
 		}
 	}
@@ -2533,14 +2535,20 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 		case NetEvent::DAMAGE_VISUALIZER_CREATED:
 			if (region != 0)
 			{
-				DamageVisualizer& dmgvis = region->getDamageVisualizer()[event.m_id];
-				cv->fromBuffer(dmgvis.m_number);
-				cv->fromBuffer(dmgvis.m_time);
-				dmgvis.m_time -= cv->getDelay();
-				cv->fromBuffer(dmgvis.m_size);
-				cv->fromBuffer(dmgvis.m_position.m_x);
-				cv->fromBuffer(dmgvis.m_position.m_y);
-
+				FloatingText* dmgvis = new FloatingText;
+				
+				dmgvis->m_text.fromString(cv);
+				cv->fromBuffer(dmgvis->m_time);
+				cv->fromBuffer(dmgvis->m_maxtime);
+				cv->fromBuffer(dmgvis->m_float_offset);
+				dmgvis->m_time -= cv->getDelay();
+				short size;
+				cv->fromBuffer(size);
+				dmgvis->m_size = (FloatingText::Size) size;
+				cv->fromBuffer(dmgvis->m_position.m_x);
+				cv->fromBuffer(dmgvis->m_position.m_y);
+				// hacky: you should use a function for that...
+				region->getFloatingTexts()[event.m_id] = dmgvis;
 			}
 			break;
 

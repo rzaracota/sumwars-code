@@ -373,6 +373,11 @@ Region::~Region()
 		delete m->second;
 	}
 	
+	for (std::map<int,FloatingText*>::iterator it = m_floating_texts.begin(); it != m_floating_texts.end(); ++it)
+	{
+		delete it->second;
+	}
+	
 	delete m_objects;
 	delete m_static_objects;
 	delete m_players;
@@ -1923,13 +1928,14 @@ void Region::update(float time)
 	m_light.update(time);
 	
 	// Schadensanzeigen aktualisieren
-	std::map<int,DamageVisualizer>::iterator dit;
-	for (dit = m_damage_visualizer.begin(); dit != m_damage_visualizer.end(); )
+	std::map<int,FloatingText*>::iterator dit;
+	for (dit = m_floating_texts.begin(); dit != m_floating_texts.end(); )
 	{
-		dit->second.m_time -= time;
-		if (dit->second.m_time <= 0)
+		dit->second->m_time -= time;
+		if (dit->second->m_time <= 0)
 		{
-			m_damage_visualizer.erase(dit++);
+			delete dit->second;
+			m_floating_texts.erase(dit++);
 		}
 		else
 		{
@@ -2977,15 +2983,27 @@ int Region::getIdByName(std::string name)
 	return it->second;
 }
 
-void Region::visualizeDamage(int number, Vector position, short size)
+void Region::visualizeDamage(int number, Vector position, FloatingText::Size size)
+{
+	std::stringstream stream;
+	stream << number;
+	TranslatableString text(stream.str());
+	createFloatingText(text, position, size);
+}
+
+void Region::createFloatingText(TranslatableString text,  Vector position, FloatingText::Size size, std::string colour, float time, float float_offset)
 {
 	static int id =0;
 	id ++;
-	DamageVisualizer& dmgvis = m_damage_visualizer[id];
-	dmgvis.m_time = 1000;
-	dmgvis.m_number = number;
-	dmgvis.m_position = position;
-	dmgvis.m_size = size;
+	FloatingText* dmgvis = new FloatingText;
+	m_floating_texts[id] = dmgvis;
+	dmgvis->m_text = text;
+	dmgvis->m_position = position;
+	dmgvis->m_size = size;
+	dmgvis->m_maxtime = time;
+	dmgvis->m_time = time;
+	dmgvis->m_float_offset = float_offset;
+	dmgvis->m_colour = colour;
 	
 	if (World::getWorld()->isServer())
 	{

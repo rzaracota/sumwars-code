@@ -548,7 +548,7 @@ void MainWindow::update(float time)
 		updateItemInfo();
 		updateRegionInfo();
 		updateChatContent();
-		updateDamageVisualizer();
+		updateFloatingText();
 		
 		// Szene aktualisieren
 		m_scene->update(time);
@@ -2076,7 +2076,7 @@ void MainWindow::updateRegionInfo()
 	}
 }
 
-void MainWindow::updateDamageVisualizer()
+void MainWindow::updateFloatingText()
 {
 	// Zaehler wie viele Labels fuer Schaden existieren
 	static int lcount =0;
@@ -2085,20 +2085,23 @@ void MainWindow::updateDamageVisualizer()
 			
 	Player* player = m_document->getLocalPlayer();
 	Region* reg = player->getRegion();
-	std::map<int,DamageVisualizer>& dmgvis = reg->getDamageVisualizer();
-	std::map<int,DamageVisualizer>::iterator it;
+	std::map<int,FloatingText*>& dmgvis = reg->getFloatingTexts();
+	std::map<int,FloatingText*>::iterator it;
 	
 	int nr =0;
 	std::stringstream stream;
 	
 	std::pair<float,float> pos;
 	
-	float maxtime = 1000.f;
+	float maxtime;
 	
 	for (it = dmgvis.begin(); it != dmgvis.end(); ++it)
 	{
-		pos = m_scene->getProjection(it->second.m_position,1.0f);
-		pos.second -= 0.1*(maxtime -it->second.m_time)/maxtime;
+		FloatingText& dmgv = *(it->second);
+		
+		maxtime = dmgv.m_maxtime;
+		pos = m_scene->getProjection(dmgv.m_position,1.0f);
+		pos.second -= dmgv. m_float_offset *(maxtime -dmgv.m_time)/maxtime;
 		
 		
 		// nur Kreaturen behandeln, die wirklich zu sehen sind
@@ -2106,8 +2109,11 @@ void MainWindow::updateDamageVisualizer()
 			continue;
 		
 		stream.str("");
-		stream << "DamageVisualizerLabel";
+		stream << "FloatingTextLabel";
 		stream << nr;
+		
+		std::string col = dmgv.m_colour;
+		std::string colour = std::string("tl:") + col + " tr:" + col + " bl:" + col + " br:"+ col;
 		
 		if (nr >= lcount)
 		{
@@ -2119,7 +2125,8 @@ void MainWindow::updateDamageVisualizer()
 			label->setText("");
 			label->setAlpha(0.9);
 			label->setFont("DejaVuSerif-12");
-			label->setProperty("TextColours","tl:FFFF5555 tr:FFFF5555 bl:FFFF5555 br:FFFF5555" ); 
+			
+			label->setProperty("TextColours",colour ); 
 			label->	setMousePassThroughEnabled(true);
 		}
 		else
@@ -2128,16 +2135,20 @@ void MainWindow::updateDamageVisualizer()
 				
 		}
 		
-		stream.str("");
-		stream << it->second.m_number;
-		
-		if (label->getText() != (CEGUI::utf8*) stream.str().c_str())
+		if (label->getProperty("TextColours") != colour)
 		{
-			label->setText((CEGUI::utf8*) stream.str().c_str());
+			label->setProperty("TextColours",colour );
+		}
+		
+		const std::string& text =  dmgv.m_text.getTranslation();
+		
+		if (label->getText() != (CEGUI::utf8*) text.c_str())
+		{
+			label->setText((CEGUI::utf8*) text.c_str());
 		}
 		
 		std::string fontname = "DejaVuSerif-16";
-		if (it->second.m_size == 1)
+		if (dmgv.m_size == 1)
 		{
 			fontname = "DejaVuSerif-12";
 		}
@@ -2148,16 +2159,16 @@ void MainWindow::updateDamageVisualizer()
 		
 		CEGUI::Font* font = label->getFont();
 			
-		float width = font->getTextExtent((CEGUI::utf8*) stream.str().c_str())+15;
+		float width = font->getTextExtent((CEGUI::utf8*) text.c_str())+15;
 		float height = font->getFontHeight() +15;
 			
 		label->setSize(CEGUI::UVector2(CEGUI::UDim(0,width),  CEGUI::UDim(0,height)));
 		label->setPosition(CEGUI::UVector2(CEGUI::UDim(pos.first,-width/2), CEGUI::UDim(pos.second,-height)));
 		
-		float fadetime = 400;
-		if (it->second.m_time < fadetime)
+		float fadetime = 0.4* maxtime;
+		if (dmgv.m_time < fadetime)
 		{
-			label->setAlpha(0.9 * it->second.m_time / fadetime);
+			label->setAlpha(0.9 * dmgv.m_time / fadetime);
 		}
 		else
 		{
@@ -2171,7 +2182,7 @@ void MainWindow::updateDamageVisualizer()
 	for (; nr<lcount; nr++)
 	{
 		stream.str("");
-		stream << "DamageVisualizerLabel";
+		stream << "FloatingTextLabel";
 		stream << nr;
 			
 		label = win_mgr.getWindow(stream.str());
