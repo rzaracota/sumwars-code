@@ -110,6 +110,7 @@ void EventSystem::init()
 	lua_register(m_lua, "setCutsceneMode", setCutsceneMode);
 	lua_register(m_lua, "addCameraPosition", addCameraPosition);
 	lua_register(m_lua, "setLight", setLight);
+	lua_register(m_lua, "createFloatingText", createFloatingText);
 	
 	lua_register(m_lua, "speak", speak);
 	lua_register(m_lua, "unitSpeak", unitSpeak);
@@ -1944,6 +1945,58 @@ int EventSystem::deleteItem(lua_State *L)
 	return 0;
 }
 
+
+int EventSystem::createFloatingText(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 && (lua_isstring(L,1) || lua_istable(L,1)) && (lua_isstring(L,2) || lua_istable(L,2)))
+	{
+		TranslatableString text;
+		getTranslatableString(L,text,1);
+		
+		Vector position;
+		position = getVector(L,2);
+		
+		std::string colour="FFFF5555";
+		if (argc>=3 && lua_isstring(L,3))
+		{
+			colour = lua_tostring(L,3);
+			// if only RRGGBB is given, add full alpha value
+			if (colour.size() == 6)
+			{
+				colour = std::string("FF") + colour;
+			}
+		}
+		
+		FloatingText::Size size = FloatingText::NORMAL;
+		if (argc>=4 && lua_isstring(L,4))
+		{
+			std::string sizestr = lua_tostring(L,4);
+			if (sizestr == "small")
+				size = FloatingText::SMALL;
+			if (sizestr == "big")
+				size = FloatingText::BIG;
+		}
+		
+		float time = 1000;
+		if (argc>=5 && lua_isnumber(L,5))
+		{
+			time = lua_tonumber(L,5);
+		}
+		
+		float offset = 0.1;
+		if (argc>=6 && lua_isnumber(L,6))
+		{
+			offset = lua_tonumber(L,6);
+		}
+		
+		m_region->createFloatingText(text,position,size,colour,time,offset);
+	}
+	else
+	{
+		ERRORMSG("Syntax: createFloatingText(string text,Vector position, [string colour], [string size], [float time], [float offset] )");
+	}
+}
 
 int EventSystem::addLocation(lua_State *L)
 {

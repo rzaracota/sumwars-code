@@ -468,6 +468,12 @@ class EventSystem
 		static int deleteItem(lua_State *L);
 		
 		/**
+		 * \brief creates colored single line of text floating upwards (used for damage numbers and similar)
+		 * \param L Lua state
+		 */
+		static int createFloatingText(lua_State *L);
+		
+		/**
 		 * \fn static int addLocation(lua_State *L)
 		 * \brief Fuegt einen neuen Ort hinzu
 		 * \param L Lua Status
