@@ -97,6 +97,23 @@ Inventory::Inventory (Document* doc)
 			label->setWantsMultiClickEvents(false);
 		}
 	}
+	
+	for (i=0;i<10;i++)
+	{
+		outStream.str("");
+		outStream << "BeltShortcutLabel" << i;
+		label = win_mgr.createWindow("TaharezLook/StaticText", outStream.str());
+		inventory->addChildWindow(label);
+		label->setPosition(CEGUI::UVector2(cegui_reldim(0.024f+i*0.096f), cegui_reldim( 0.76f)));
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.086f), cegui_reldim( 0.056f)));
+		label->setProperty("FrameEnabled", "false");
+		label->setProperty("BackgroundEnabled", "false");
+		std::stringstream stream;
+		stream << (i+1)%10;
+		label->setText(stream.str());
+		label->setAlwaysOnTop(true);
+		label->setMousePassThroughEnabled(true);
+	}
 
 	// Label Ruestung
 	label = win_mgr.createWindow("TaharezLook/StaticImage", "ArmorItemLabel");

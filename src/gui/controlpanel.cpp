@@ -175,6 +175,20 @@ ControlPanel::ControlPanel (Document* doc)
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&ControlPanel::onItemMouseButtonReleased, (ItemWindow*) this));
 		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&ControlPanel::onItemHover, (ItemWindow*) this));
 		label->setWantsMultiClickEvents(false);
+		
+		outStream.str("");
+		outStream << "InventoryShortcutLabel" << i;
+		label = win_mgr.createWindow("TaharezLook/StaticText", outStream.str());
+		ctrl_panel->addChildWindow(label);
+		label->setPosition(CEGUI::UVector2(cegui_reldim(0.228f+i*0.05f), cegui_reldim( 0.16f)));
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.045f), cegui_reldim( 0.5f)));
+		label->setProperty("FrameEnabled", "false");
+		label->setProperty("BackgroundEnabled", "false");
+		std::stringstream stream;
+		stream << (i+1)%10;
+		label->setText(stream.str());
+		label->setAlwaysOnTop(true);
+		label->setMousePassThroughEnabled(true);
 	}
 
 	
