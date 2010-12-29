@@ -74,9 +74,25 @@ class SkillTree : public Window
 		 */
 		int m_player_id;
 		
+		/**
+		 * \brief number of skilltree tabs
+		 */
 		int m_nr_tabs;
 		
+		/**
+		 * \brief number of skills
+		 */
 		int m_nr_skills;
+		
+		/**
+		 * \brief number of dependency connections
+		 */
+		int m_nr_dependencies;
+		
+		/**
+		 * \brief number of shortkey labels
+		 */
+		int m_shortkey_labels;
 };
 
 #endif

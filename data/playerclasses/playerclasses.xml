@@ -189,7 +189,6 @@
 		<RequiredAbility type="ice_ring" />
 	</LearnableAbility>
 	<LearnableAbility type="blizzard" skilltree_tab="2" skilltree_posx="0.450000" skilltree_posy="0.850000" required_level="60">
-		<RequiredAbility type="frost_ring" />
 		<RequiredAbility type="snow_storm" />
 	</LearnableAbility>
 	<LearnableAbility type="ice_ring" skilltree_tab="2" skilltree_posx="0.200000" skilltree_posy="0.250000" required_level="5">
@@ -208,6 +207,7 @@
 	</LearnableAbility>
 	<LearnableAbility type="thunderstorm" skilltree_tab="3" skilltree_posx="0.450000" skilltree_posy="0.450000" required_level="15">
 		<RequiredAbility type="chain_lightning" />
+		<RequiredAbility type="lightning" />
 	</LearnableAbility>
 	<LearnableAbility type="thunderstorm2" skilltree_tab="3" skilltree_posx="0.450000" skilltree_posy="0.850000" required_level="60">
 		<RequiredAbility type="thunderstorm" />

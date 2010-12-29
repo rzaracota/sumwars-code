@@ -33,7 +33,8 @@ SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard)
 	
 	m_nr_tabs =0;
 	m_nr_skills =0;
-	
+	m_nr_dependencies = 0;
+	m_shortkey_labels = 0;
 }
 
 void SkillTree::update()
@@ -72,6 +73,28 @@ void SkillTree::update()
 			win_mgr.destroyWindow(wnd);
 		}
 		
+		for (int i=0; i<m_nr_dependencies; i++)
+		{
+			stream.str("");
+			stream << "SkillDependencyConnection"<<i;
+			wnd = win_mgr.getWindow(stream.str());
+			
+			wnd->getParent()->removeChildWindow(wnd);
+			win_mgr.destroyWindow(wnd);
+		}
+		m_nr_dependencies=0;
+		
+		for (int i=0; i<m_shortkey_labels; i++)
+		{
+			stream.str("");
+			stream << "SkillShortkeyLabel"<<i;
+			wnd = win_mgr.getWindow(stream.str());
+			
+			wnd->getParent()->removeChildWindow(wnd);
+			win_mgr.destroyWindow(wnd);
+		}
+		m_shortkey_labels=0;
+		
 		for (int i=0; i<m_nr_tabs; i++)
 		{
 			stream.str("");
@@ -81,6 +104,9 @@ void SkillTree::update()
 			skilltree->removeTab(wnd->getID());
 			win_mgr.destroyWindow(wnd);
 		}
+		
+		
+		
 		
 		// neue Tabs
 		// TODO: generisch ausprogrammieren
@@ -144,6 +170,48 @@ void SkillTree::update()
 			button->setID(it->first);
 			button->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillLearnMouseClicked, this));
 			
+			// create Connections for Dependencies
+			// loop over dependencies
+			for (std::list< Action::ActionType >::iterator at = it->second.m_req_abilities.begin(); at != it->second.m_req_abilities.end(); ++at)
+			{
+				// another loop over all abilities
+				std::map<int,LearnableAbility>::iterator jt;
+				for (jt = player->getLearnableAbilities().begin(); jt != player->getLearnableAbilities().end(); ++jt)
+				{
+					if (*at == jt->second.m_type)
+					{
+						// found dependency
+						Vector deppos = jt->second.m_skilltree_position;
+						
+						stream.str("");
+						stream << "SkillDependencyConnection"<<m_nr_dependencies;
+						label = win_mgr.createWindow("TaharezLook/StaticImage", stream.str());
+						tabs[it->second.m_skilltree_tab-1]->addChildWindow(label);
+						label->setMousePassThroughEnabled(true);
+						label->setProperty("FrameEnabled", "false");
+						label->setProperty("BackgroundEnabled", "false");
+			
+						CEGUI::UVector2 start= CEGUI::UVector2(cegui_reldim(deppos.m_x+0.06f), cegui_reldim( deppos.m_y+0.1f));
+						CEGUI::UVector2 end= CEGUI::UVector2(cegui_reldim(spos.m_x+0.07f), cegui_reldim( spos.m_y));
+						label->setPosition(start);
+						label->setSize(end - start);
+						label->setID(jt->first);
+						
+						// distinguish vertical and diagonal connectors
+						if (deppos.m_x == spos.m_x)
+						{
+							label->setProperty("Image", "set:TaharezLook image:SkilltreeVertConnection"); 
+						}
+						else
+						{
+							label->setProperty("Image", "set:TaharezLook image:SkilltreeDiagConnection"); 
+						}
+						
+						m_nr_dependencies++;
+					}
+				}
+			}
+			
 			cnt ++;
 		}
 		
@@ -178,7 +246,7 @@ void SkillTree::update()
 		}
 		else
 		{
-			alpha = 0.5;
+			alpha = 0.3;
 		}
 
 		if (label->getAlpha() != alpha)
@@ -197,10 +265,35 @@ void SkillTree::update()
 		}
 	}
 	
+	// Loop over all Dependencies
+	for (int j=0;j<m_nr_dependencies;j++)
+	{
+		out_stream.str("");
+		out_stream << "SkillDependencyConnection" << j;
+
+		// Label for the dependency connecntion
+		label = win_mgr.getWindow(out_stream.str());
+		act = ablts[label->getID()].m_type;
+		
+		float alpha = 0.2;
+		if (player->checkAbility(act))
+		{
+			// Faehigkeit steht zur Verfuegung
+			alpha = 1.0;
+		}
+		else
+		{
+			alpha = 0.3;
+		}
+
+		if (label->getAlpha() != alpha)
+		{
+			label->setAlpha(alpha);
+		}
+	}
 	
 	// Markierer fuer Shortkeys einbauen
 	// Zaehler fuer die Fenster
-	static int acount =0;
 	
 	ShortkeyMap& shortkeys = m_document->getAbilityShortkeys();
 	ShortkeyMap::iterator it;
@@ -240,9 +333,9 @@ void SkillTree::update()
 		stream << "SkillShortkeyLabel";
 		stream << nr;
 		
-		if (nr >= acount)
+		if (nr >= m_shortkey_labels)
 		{
-			acount ++;
+			m_shortkey_labels ++;
 			label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
 			label->setProperty("FrameEnabled", "false");
 			label->setProperty("BackgroundEnabled", "false");
@@ -303,7 +396,7 @@ void SkillTree::update()
 	
 	
 	// restliche Labels ausblenden
-	for (; nr<acount; nr++)
+	for (; nr<m_shortkey_labels; nr++)
 	{
 		stream.str("");
 		stream << "SkillShortkeyLabel";

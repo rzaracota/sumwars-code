@@ -241,4 +241,6 @@
 	<Image Name="PopupMenuArrowLeft" XPos="179" YPos="210" Width="5" Height="5" />
 	
 	<Image Name="WaypointMark" XPos="110" YPos="42" Width="12" Height="12" />
+	<Image Name="SkilltreeVertConnection" XPos="94" YPos="162" Width="3" Height="41" />
+	<Image Name="SkilltreeDiagConnection" XPos="103" YPos="163" Width="38" Height="38" />
 </Imageset>
