@@ -576,6 +576,11 @@ protected:
 	 * \brief Berechnet Kommando, die aufgrund eines Statusmods ausgefuehrt wird
 	 */
 	void calcStatusModCommand();
+	
+	/**
+	 * \brief calculated the action that is used for berserk
+	 */
+	Action::ActionType getBerserkAction();
 
 	/**
 	 * \fn virtual void initAction()

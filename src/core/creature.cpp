@@ -259,10 +259,12 @@ void Creature::initAction()
 	if (m_action.m_type== "noaction" && m_action.m_elapsed_time>0)
 	{
 		return;
-
 	}
 
-	DEBUGX("init Action %s", m_action.m_type.c_str());
+	if (m_action.m_type!= "noaction")
+	{
+		DEBUGX("init Action %s", m_action.m_type.c_str());
+	}
 
 	m_action.m_elapsed_time = 0;
 	Action::ActionInfo* aci = Action::getActionInfo(m_action.m_type);
@@ -319,29 +321,6 @@ void Creature::initAction()
 
 	// setzen der Standarddauer der Aktion
 	m_action.m_time = getActionTime(m_action.m_type);
-	
-	if (getBaseAttrMod()->m_abilities.count(m_action.m_type) == 0 && m_action.m_type!= "noaction" && m_action.m_type!= "die"  && m_action.m_type != "walk")
-	{
-			// this happens, when action is not present due to berserk
-			// TODO: better strategy for berserk
-			std::map<std::string, AbilityInfo>::iterator it;
-			for (it = getBaseAttrMod()->m_abilities.begin(); it != getBaseAttrMod()->m_abilities.end(); ++it)
-			{
-				if (it->first == "noaction" || it->first == "die" || it->first == "walk")
-					continue;
-				
-				Action::ActionInfo* aci2 = Action::getActionInfo(it->first);
-				if (aci2 != 0 && aci->m_timer_nr == 0)
-				{
-					m_action.m_type = it->first;
-					m_action.m_time = getActionTime(m_action.m_type);
-					
-					DEBUGX("set berserk action to %s",m_action.m_type.c_str());
-					
-					break;
-				}
-			}
-	}
 
 	Action::ActionType baseact = "noaction";
 	Action::ActionInfo* ainfo = Action::getActionInfo(m_action.m_type);
@@ -1687,7 +1666,9 @@ void Creature::calcAction()
 	}
 
 
-	if (Action::getActionInfo(m_command.m_type)->m_target_type == Action::MELEE || Action::getActionInfo(m_command.m_type)->m_base_action == "walk")
+	if (Action::getActionInfo(m_command.m_type)->m_target_type == Action::MELEE 
+		|| Action::getActionInfo(m_command.m_type)->m_base_action == "walk" 
+		|| m_dyn_attr.m_status_mod_time[Damage::BERSERK]>0)
 	{
 		// Aktion fuer die man an das Ziel hinreichend nahe herankommen muss
 		DEBUGX("range %f dist %f",range,dist);
@@ -1789,104 +1770,39 @@ void Creature::calcAction()
 	}
 }
 
+Action::ActionType Creature::getBerserkAction()
+{
+	Action::ActionType act = "attack";
+	
+	if (getBaseAttrMod()->m_abilities.count(act) == 0)
+	{
+		// this happens, when action is not present due to berserk
+		std::map<std::string, AbilityInfo>::iterator it;
+		for (it = getBaseAttrMod()->m_abilities.begin(); it != getBaseAttrMod()->m_abilities.end(); ++it)
+		{
+			if (it->first == "noaction" || it->first == "die" || it->first == "walk" || it->first == "dead" 
+				|| it->first == "take_item" || it->first == "use" || it->first == "speak" || it->first == "trade")
+				continue;
+			
+			Action::ActionInfo* aci2 = Action::getActionInfo(it->first);
+			if (aci2 != 0 && aci2->m_timer_nr == 0 && (aci2->m_target_type == Action::MELEE || aci2->m_target_type == Action::RANGED))
+			{
+				act = it->first;
+				DEBUGX("set berserk action to %s",act.c_str());
+				
+				break;
+			}
+		}
+	}
+	return act;
+}
+
 void Creature::calcStatusModCommand()
 {
 	// eigene Position
 	Vector& pos = getShape()->m_center;
 
-	// Statusmod verwirrt
-	// diese Aktion nur vom Server ausloesen lassen
-	if (m_dyn_attr.m_status_mod_time[Damage::CONFUSED]>0 && World::getWorld()->isServer())
-	{
-		// aktuelle Bewegungsrichtung
-		Vector v = getSpeed();
-		float range = m_base_attr.m_step_length;
-		if (v.getLength() == 0)
-		{
-			v.m_x = Random::random();
-			v.m_y = Random::random();
-		}
-
-		// Normieren der Bewegungsgeschwindigkeit
-		v.normalize();
-
-
-		// zufaellige Richtung auswuerfeln und normieren
-		Vector dir(1-rand()*2.0/RAND_MAX, 1-rand()*2.0/RAND_MAX) ;
-		dir.normalize();
-
-		// neue Bewegungsrichtung = 70% der alten + 30% der zufaellig ausgewaehlten
-		v = v*0.7+dir*0.3;
-
-		// neue Bewegungsrichtung normieren
-		v.normalize();
-
-		// Berechnen den Punktes der bei dieser Bewegung erreicht wird
-		Vector npos = pos + v*range;
-
-		// Kreis um den Zielpunkt, Radius gleich Radius des Lebewesens
-		Shape s;
-		s.m_center =npos;
-		s.m_type = Shape::CIRCLE;
-		s.m_radius = getShape()->m_radius;
-		WorldObject* wo =0;
-		WorldObjectList res;
-		WorldObjectList::iterator it;
-
-		// ermitteln der Objekte mit denen bei der Bewegung kollidiert wird
-		getRegion()->getObjectsInShape(&s,&res,LAYER_AIR,CREATURE | FIXED,this);
-
-		// Zufallszahl fuer zufaellige Angriffe
-		float r = rand()*1.0/RAND_MAX;
-		if (!res.empty())
-		{
-			// Es gibt ein kollidierendes Objekt, als Zielobjekt setzen
-			wo = *(res.begin());
-			npos = wo->getShape()->m_center;
-
-		}
-		else
-		{
-			// es gibt kein kollidierendes Objekt, mit 30% Wahrscheinlichkeit Angriff ins nichts
-			if (r>0.7)
-			{
-				range += m_base_attr_mod.m_attack_range;
-				npos = pos + v*range;
-			}
-		}
-		DEBUGX("entscheidung durch %p, %f",wo,r);
-		// Angriff ausfuehren, wenn Zielobjekt vorhanden, sonst mit 30% Wahrscheinlichkeit
-		if (wo!=0 || r > 0.7)
-		{
-			// Angriff
-			m_command.m_type = m_base_action;
-			m_command.m_goal = npos;
-			m_command.m_goal_object_id =0;
-			m_command.m_range = getBaseAttrMod()->m_attack_range;
-			addToNetEventMask(NetEvent::DATA_COMMAND);
-
-			// Im Falle von Beserker nur Nahkampf
-			if (m_dyn_attr.m_status_mod_time[Damage::BERSERK]>0)
-			{
-				m_command.m_type = "attack";
-				if (m_command.m_range >4)
-				{
-					m_command.m_range= 1;
-				}
-			}
-		}
-		else
-		{
-			// Laufen
-			m_command.m_type = "walk";
-			setSpeed(v);
-			addToNetEventMask(NetEvent::DATA_COMMAND);
-			return;
-		}
-		DEBUGX("confused command %s",m_command.m_type.c_str());
-
-	}
-	else if (m_dyn_attr.m_status_mod_time[Damage::BERSERK]>0)
+	if (m_dyn_attr.m_status_mod_time[Damage::BERSERK]>0)
 	{
 		// Behandlung von Berserker
 		int id =0;
@@ -1947,7 +1863,7 @@ void Creature::calcStatusModCommand()
 			getDynAttr()->m_timer.start();
 			DEBUGX("attack id %i",id);
 			// Angriff
-			m_command.m_type = "attack";
+			m_command.m_type = getBerserkAction();
 			m_command.m_goal_object_id = id;
 			m_command.m_goal = goal;
 			m_command.m_range = getBaseAttrMod()->m_attack_range;
@@ -1956,7 +1872,7 @@ void Creature::calcStatusModCommand()
 			if (m_command.m_range >4)
 			{
 				DEBUGX("capped range for berserk");
-				m_command.m_range= 1;
+				m_command.m_range= 2;
 			}
 
 		}
@@ -1973,6 +1889,89 @@ void Creature::calcStatusModCommand()
 		}
 		addToNetEventMask(NetEvent::DATA_COMMAND);
 	}
+	
+	// Statusmod verwirrt
+	// diese Aktion nur vom Server ausloesen lassen
+	if (m_command.m_type != "noaction" 
+		&& Random::randi(3) >0
+		&& m_dyn_attr.m_status_mod_time[Damage::CONFUSED]>0 
+		&& World::getWorld()->isServer())
+	{
+		// aktuelle Bewegungsrichtung
+		Vector goal = m_command.m_goal;
+		if (m_command.m_goal_object_id != 0)
+		{
+			WorldObject* obj = getRegion()->getObject(m_command.m_goal_object_id);
+			if (obj != 0)
+			{
+				goal = obj->getShape()->m_center;
+			}
+		}
+		
+		// change v by a random angle
+		Vector v = goal- getShape()->m_center;
+		float angle = 3.14159*(Random::random()-0.5)*0.5;
+		v.rotate(angle);
+
+		// 30% chance to reduce distance to melee
+		bool melee= false;
+		if (Random::random() < 0.0)
+		{
+			v.normalize();
+			v *= (m_base_attr_mod.m_attack_range + getShape()->m_radius);
+			melee = true;
+		}
+		
+		Vector newgoal = getShape()->m_center + v;
+
+		// Kreis um den Zielpunkt, Radius gleich Radius des Lebewesens
+		Shape s;
+		s.m_center =newgoal;
+		s.m_type = Shape::CIRCLE;
+		s.m_radius = getShape()->m_radius;
+		WorldObject* wo =0;
+		WorldObjectList res;
+		WorldObjectList::iterator it;
+
+		// ermitteln der Objekte mit denen bei der Bewegung kollidiert wird
+		getRegion()->getObjectsInShape(&s,&res,LAYER_AIR,CREATURE | FIXED,this);
+
+		if (!res.empty())
+		{
+			// Es gibt ein kollidierendes Objekt, als Zielobjekt setzen
+			int num = Random::randi(res.size());
+			it = res.begin();
+			for (int i=0; i<num; i++)
+			{
+				++it;
+			}
+			wo = *it;
+			newgoal = wo->getShape()->m_center;
+		}
+		
+		// 30% chance to change the action
+		float r = Random::random();
+		if (r < 0.3 && !melee)
+		{
+			DEBUGX("confused: swap command");
+			if (m_command.m_type == "walk")
+			{
+				m_command.m_type = getBerserkAction();
+				m_command.m_range = getBaseAttrMod()->m_attack_range;
+			}
+			else
+			{
+				m_command.m_type = "walk";
+				m_command.m_range = 2;
+			}
+		}
+		m_command.m_goal = newgoal;
+		m_command.m_goal_object_id =0;
+		addToNetEventMask(NetEvent::DATA_COMMAND);
+
+		DEBUGX("confused command %s to %f %f",m_command.m_type.c_str(), newgoal.m_x, newgoal.m_y);
+	}
+	
 }
 
 void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)

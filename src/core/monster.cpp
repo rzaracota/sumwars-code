@@ -297,6 +297,14 @@ void Monster::updateCommand()
 	if (getRegion()->getCutsceneMode() || getDialogueId() != 0)
 		return;
 
+	// if confused, recalculate the command less often
+	if (getCommand()->m_type != "noaction" 
+		&& getDynAttr()->m_status_mod_time[Damage::CONFUSED]>0)
+	{
+		calcStatusModCommand();
+		return;
+	}
+	
 	m_ai.m_goals->clear();
 	m_ai.m_visible_goals->clear();
 	m_ai.m_allies->clear();

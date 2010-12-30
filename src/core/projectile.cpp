@@ -172,6 +172,12 @@ void Projectile::handleFlying(float dtime)
 	
 	Vector speed = getSpeed();
 
+	WorldObject* creator=0;
+	if (m_damage!= 0 && m_damage->m_attacker_id != 0)
+	{
+		creator = getRegion()->getObject(m_damage->m_attacker_id);
+	}
+	
 	if (m_implementation == "fly_guided")
 	{
 		// Lenkpfeil
@@ -197,7 +203,7 @@ void Projectile::handleFlying(float dtime)
 
 
 			// alle Objekte im Kreis suchen
-			getRegion()->getObjectsInShape(&s,&hitobj,getLayer(), WorldObject::CREATURE,0);
+			getRegion()->getObjectsInShape(&s,&hitobj,getLayer(), WorldObject::CREATURE,creator);
 
 			// alle Objekte als potentielle Ziele loeschen, die dem Erschaffer des Projektils nicht feindlich gesinnt sind
 			for (i=hitobj.begin();i!=hitobj.end();)
@@ -311,10 +317,10 @@ void Projectile::handleFlying(float dtime)
 
 
 	// Objekt an der aktuellen Position suchen
-	getRegion()->getObjectsOnLine(line,&hitobj,getLayer(),WorldObject::CREATURE | WorldObject::FIXED,0);
+	getRegion()->getObjectsOnLine(line,&hitobj,getLayer(),WorldObject::CREATURE | WorldObject::FIXED,creator);
 	if (hitobj.empty())
 	{
-		getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,0);
+		getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,creator);
 	}
 	
 	// Alle Objekte herausfiltern die verbuendet sind, sowie das zuletzt gerade getroffene Objekt
@@ -393,7 +399,7 @@ void Projectile::handleFlying(float dtime)
 
 			// Alle Objekte im Kreis suchen
 			hitobj.clear();
-			getRegion()->getObjectsInShape(&s,&hitobj,WorldObject::LAYER_AIR,WorldObject::CREATURE,0);
+			getRegion()->getObjectsInShape(&s,&hitobj,WorldObject::LAYER_AIR,WorldObject::CREATURE,creator);
 			rmin = sqr(s.m_radius);
 			hit =0;
 
