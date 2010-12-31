@@ -436,9 +436,9 @@
 		 description="Attacks every enemy in weapon range." 
 		 time="1.500000" 
 		 timer_nr="1.000000" 
-		 timer_value="3000.000000"
+		 timer_value="6500.000000"
 		 base_ability="attack" 
-		 critical_percent="0.800000" 
+		 critical_percent="0.300000" 
 		 target_type="melee"
 		 radius ="-1">
 	<Effect>

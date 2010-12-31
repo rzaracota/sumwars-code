@@ -244,8 +244,24 @@
 		<Detach time="0.75" objectname="attackLine" />
 	</Action>
 	
+	<Action name="whirl_blow">
+		<Animation name="sweepStrikeOneHand" start="0.0" end="0.33"/>
+		<Animation name="sweepStrikeOneHand" start="0.33" end="0.66"/>
+		<Animation name="sweepStrikeOneHand" start="0.66" end="1.0"/>
+		<ParticleSystem time = "0.1" objectname="attackLine" bone="mainmesh:itemRightHand" source="SpecialAttackLineWhite" position="0.0 0.0 -1.0" />
+		<Detach time="0.95" objectname="attackLine" />
+	</Action>
+	<Action name="whirl_blow#TwoHands">
+		<Animation name="sweepStrikeTwoHands" start="0.0" end="0.33"/>
+		<Animation name="sweepStrikeTwoHands" start="0.33" end="0.66"/>
+		<Animation name="sweepStrikeTwoHands" start="0.66" end="1.0"/>
+		<ParticleSystem time = "0.1" objectname="attackLine" bone="mainmesh:itemRightHand" source="SpecialAttackLineSweepStrike" position="0.0 0.0 -2.0" />
+		<Detach time="0.95" objectname="attackLine" />
+	</Action>
+	<!--
 	<Action name="whirl_blow" reference="around_blow" />
 	<Action name="whirl_blow#TwoHands" reference="around_blow#TwoHands" />
+	-->
 	
 	<Action name="smash#Unarmed" reference="attack#Unarmed" />
 	<Action name="smash#OneHand" reference="attack#OneHand" />
@@ -716,8 +732,24 @@
 		<Detach time="0.9" objectname="attackLine" />
 	</Action>
 	
+	<Action name="whirl_blow">
+		<Animation name="sweepStrikeOneHand" start="0.0" end="0.33"/>
+		<Animation name="sweepStrikeOneHand" start="0.33" end="0.66"/>
+		<Animation name="sweepStrikeOneHand" start="0.66" end="1.0"/>
+		<ParticleSystem time = "0.1" objectname="attackLine" bone="mainmesh:itemRightHand" source="SpecialAttackLineWhite" position="0.0 0.0 -1.0" />
+		<Detach time="0.95" objectname="attackLine" />
+	</Action>
+	<Action name="whirl_blow#TwoHands">
+		<Animation name="sweepStrikeTwoHands" start="0.0" end="0.33"/>
+		<Animation name="sweepStrikeTwoHands" start="0.33" end="0.66"/>
+		<Animation name="sweepStrikeTwoHands" start="0.66" end="1.0"/>
+		<ParticleSystem time = "0.1" objectname="attackLine" bone="mainmesh:itemRightHand" source="SpecialAttackLineSweepStrike" position="0.0 0.0 -2.0" />
+		<Detach time="0.95" objectname="attackLine" />
+	</Action>
+	<!--
 	<Action name="whirl_blow" reference="around_blow" />
 	<Action name="whirl_blow#TwoHands" reference="around_blow#TwoHands" />
+	-->
 	
 	<Action name="smash#Unarmed" reference="bash#Unarmed" />
 	<Action name="smash#OneHand" reference="attack#OneHand" />

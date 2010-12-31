@@ -493,7 +493,7 @@ void Creature::performAction(float &time)
 	}
 
 	// Triple Shot
-	if (m_action.m_type == "triple_shot" || m_action.m_type == "guided_triple_shot")
+	if (m_action.m_type == "triple_shot" || m_action.m_type == "guided_triple_shot" ||  m_action.m_type =="whirl_blow")
 	{
 		// Faehigkeit hat drei Prozentsaetze
 		if (p1>0.3)
