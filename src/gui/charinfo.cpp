@@ -601,6 +601,21 @@ CharInfo::CharInfo (Document* doc)
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
 	}
 	
+	label = win_mgr.getWindow("BlockLabel" );
+	CEGUI::utf8* blocktext;
+	if (player->getShield() != 0)
+	{	
+		blocktext = (CEGUI::utf8*) gettext("Block");
+	}
+	else
+	{
+		blocktext = (CEGUI::utf8*) gettext("Evade");
+	}
+	if (label->getText() != blocktext)
+	{
+		label->setText(blocktext);
+	}
+	
 	out_stream.str("");
 	if (fstat->m_last_attacker.getTranslation() != "")
 	{
@@ -908,7 +923,6 @@ void CharInfo::updateTranslation()
 	
 	
 	label = win_mgr.getWindow("BlockLabel" );
-	label->setText((CEGUI::utf8*) gettext("Block"));
 	label->setTooltipText((CEGUI::utf8*) gettext("Block value determines the chance to avoid damage from physical attacks."));
 	
 	

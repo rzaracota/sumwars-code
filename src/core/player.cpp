@@ -1806,29 +1806,21 @@ void Player::calcBaseAttrMod()
 	// Faehigkeit ausweichen
 	if (checkAbility("evade"))
 	{
-		getBaseAttrMod()->m_block += getBaseAttrMod()->m_dexterity/5;
+		getBaseAttrMod()->m_block += getBaseAttrMod()->m_dexterity/3;
 	}
 
 
-	// Blockbonus durch Geschick (nur wenn schon ein Blockwert vorhanden ist)
-	if (getBaseAttrMod()->m_block!=0 || getSubtype() == "archer")
-	{
-		getBaseAttrMod()->m_block += getBaseAttrMod()->m_dexterity/ 4;
-	}
+	// Blockbonus durch Geschick 
+	getBaseAttrMod()->m_block += getBaseAttrMod()->m_dexterity/ 4;
 
 	// Faehigkeit Blocken
 	if (checkAbility("block"))
 	{
-		getBaseAttrMod()->m_block += (short) (0.3f*getBaseAttrMod()->m_block);
+		getBaseAttrMod()->m_block += (short) (0.4f*getBaseAttrMod()->m_block);
 	}
-
-
-
 
 	// Schaden neu berechnen
 	recalcDamage();
-
-
 }
 
 void Player::addMessage(std::string msg)
