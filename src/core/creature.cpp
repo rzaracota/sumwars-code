@@ -2899,10 +2899,9 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 
 
 	// Entzuenden
-	// TODO: korrekte Bedingung wiederherstellen
 	if (checkAbility("inflame") && dmg.m_min_damage[Damage::FIRE]>0 )
 	{
-		dmg.m_status_mod_power[Damage::BURNING] += m_base_attr_mod.m_magic_power;
+		dmg.m_status_mod_power[Damage::BURNING] += MathHelper::Min(int(dmg.m_min_damage[Damage::FIRE]) , m_base_attr_mod.m_magic_power);
 	}
 
 
