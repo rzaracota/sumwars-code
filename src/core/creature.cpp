@@ -297,6 +297,15 @@ void Creature::initAction()
 		// Timerlaufzeit um 15% verringern
 		timer *= 0.85;
 	}
+	
+	// Ionisation skill
+	if (checkAbility("ionisation") 
+		&& (m_action.m_type == "lightning" || m_action.m_type == "lightning_strike"
+		|| m_action.m_type == "thunderstorm" || m_action.m_type == "thunderstorm2"
+		|| m_action.m_type == "chain_lightning" || m_action.m_type == "chain_lightning2"))
+	{
+		timer *= 0.8;
+	}
 
 
 	// Testen ob der benoetigte Timer frei ist
@@ -2888,12 +2897,6 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 		dmg.m_multiplier[Damage::ICE] *= 1.2;
 	}
 
-	// Ionisation
-	if (checkAbility("ionisation"))
-	{
-		// 20% mehr Schaden
-		dmg.m_multiplier[Damage::AIR] *= 1.2;
-	}
 
 	// Entzuenden
 	// TODO: korrekte Bedingung wiederherstellen
