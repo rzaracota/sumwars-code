@@ -1,5 +1,4 @@
 <RenderInfo name="playerbase" parent="creaturebase">
-	<Soundobject objectname="actionsound" />
 	
 	<Action name="noaction">
 		<Animation name="idle" />

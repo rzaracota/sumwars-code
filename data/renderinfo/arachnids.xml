@@ -36,6 +36,12 @@
 	<Action name="noaction">
 		<Animation name="idle2" />
 	</Action>
+	
+	<State name="bleed">
+		<Active>
+		  <!-- <Sound objectname="general" name="some_hit_sound"/> -->
+		</Active>
+	</State>
 </RenderInfo>
 
 <RenderInfo name="caveSpider" parent="spiderbase">

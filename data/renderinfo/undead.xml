@@ -1,10 +1,8 @@
 <!-- Monsterbases -->
 <RenderInfo name="skeletonbase" parent="playerbase">
-	<Soundobject objectname="sound" />
-
 	<Action name="die">
 		<Animation name="dieOneHand" />
-		<Sound objectname="sound" name="skel_die"/>
+		<Sound objectname="general" name="skel_die"/>
 	</Action>
 	
 	<Action name="ice_attack">
@@ -18,6 +16,13 @@
 	<Action name="summoned">
 		<Animation name="raise" />
 	</Action>
+	
+	<State name="bleed">
+		<Active>
+		  <!-- <Sound objectname="general" name="some_hit_sound"/> -->
+		</Active>
+	</State>
+	
 </RenderInfo>
 
 <RenderInfo name="reaperbase" parent="skeletonbase">
@@ -50,6 +55,12 @@
 	<Action name="noaction">
 		<Animation name="idleZombie" />
 	</Action>
+	
+	<State name="bleed">
+		<Active>
+		  <!-- <Sound objectname="general" name="some_hit_sound"/> -->
+		</Active>
+	</State>
 </RenderInfo>
 
 <RenderInfo name="lichbase" parent="creaturebase">
@@ -172,7 +183,11 @@
 		<ParticleSystem time = "0.4" objectname="handIce1" bone="mainmesh:itemLeftHand" source="Icesphere" position="0.0 0.0 0.0" />
 		<Detach time="0.7" objectname="handIce1" />
 	</Action>
-
+	<State name="bleed">
+		<Active>
+		  <!-- <Sound objectname="general" name="some_hit_sound"/> -->
+		</Active>
+	</State>
 </RenderInfo>
 
 <RenderInfo name = "necromancerBase" parent="playerbase">
@@ -305,7 +320,11 @@
 </RenderInfo>
 
 <RenderInfo name="obeliskbase" parent="creaturebase">
-	
+	<State name="bleed">
+		<Active>
+		  <!-- <Sound objectname="general" name="some_hit_sound"/> -->
+		</Active>
+	</State>
 </RenderInfo>
 
 

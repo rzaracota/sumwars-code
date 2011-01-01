@@ -1,4 +1,4 @@
-﻿<RenderInfo name="birdbase" parent="creaturebase">
+<RenderInfo name="birdbase" parent="creaturebase">
 	<Action name="walk">
 		<Animation name="fly" />
 	</Action>
@@ -14,6 +14,12 @@
 	<Action name="noaction">
 		<Animation name="fly" />
 	</Action>
+	
+	<State name="bleed">
+		<Active>
+		  <!-- <Sound objectname="general" name="some_hit_sound"/> -->
+		</Active>
+	</State>
 </RenderInfo>
 
 <RenderInfo name="bloodbeak" parent="birdbase">

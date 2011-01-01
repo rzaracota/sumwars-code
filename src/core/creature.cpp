@@ -3417,7 +3417,7 @@ bool Creature::takeDamage(Damage* d)
 
 	if (dmg>0)
 	{
-		m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING] = MathHelper::Max(m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING],150.0f);
+		m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING] = MathHelper::Max(m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING],250.0f);
 		addToNetEventMask(NetEvent::DATA_HP | NetEvent::DATA_EFFECTS);
 	}
 

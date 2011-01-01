@@ -52,6 +52,12 @@
 	<Action name="magic_attack_ice">
 		<Animation name="attackMagic2" />
 	</Action>
+	
+	<State name="bleed">
+		<Active>
+		  <!-- <Sound objectname="general" name="some_hit_sound"/> -->
+		</Active>
+	</State>
 </RenderInfo>
 
 <RenderInfo name = "goblinRiderBase" parent="creaturebase">

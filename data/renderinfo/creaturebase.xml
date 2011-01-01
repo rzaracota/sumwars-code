@@ -1,4 +1,6 @@
 <RenderInfo name="creaturebase" >
+	<Soundobject objectname="general" />
+	<Soundobject objectname="voice" />
 	
 	<State name="mute">
 		<Activation>
