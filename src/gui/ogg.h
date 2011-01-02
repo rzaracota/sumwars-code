@@ -26,8 +26,18 @@ class ogg_stream
 	ogg_stream()
 	{
 		m_volume = 1;
+		m_initialized = false;
 	}
 	
+	~ogg_stream()
+	{ 
+		if (m_initialized)
+		{
+			alDeleteSources(1, &source);
+			oggcheck();
+		}
+	}
+    
         void open(string path);
         void release();
         void display();
@@ -62,6 +72,7 @@ class ogg_stream
         ALuint source;
         ALenum format;
 		float m_volume;
+		bool m_initialized;
 };
 
 

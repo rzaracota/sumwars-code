@@ -538,6 +538,9 @@ void MainWindow::update(float time)
 		m_sub_windows["Options"]->update();
 	}
 
+	// Musik aktualisieren
+	updateMusic();
+
 	// Objekte aus dem Dokument darstellen
 	if (m_document->getLocalPlayer()!=0 && m_document->getLocalPlayer()->getRegion()!=0)
 	{
@@ -650,9 +653,6 @@ void MainWindow::update(float time)
 		}
 		*/
 	}
-	
-	// Musik aktualisieren
-	updateMusic();
 }
 
 

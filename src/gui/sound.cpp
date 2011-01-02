@@ -72,6 +72,7 @@ void SoundSystem::loadSoundFile(std::string file, SoundName sname)
 			ERRORMSG( "Could not load %s",filename.c_str());
 		}
 	}
+	checkErrors();
 }
 
 void SoundSystem::loadSoundData(const char* pFilename)
@@ -155,7 +156,7 @@ void SoundSystem::init()
 	alutInitWithoutContext(NULL,NULL);
 	
 	alDistanceModel(AL_LINEAR_DISTANCE_CLAMPED);
-	
+	checkErrors();
 }
 
 void SoundSystem::setListenerPosition(Vector pos)
@@ -165,6 +166,7 @@ void SoundSystem::setListenerPosition(Vector pos)
 	listenerPos[1] = pos.m_y;
 
 	alListenerfv(AL_POSITION,listenerPos);
+	checkErrors();
 }
 
 void SoundSystem::cleanup()
@@ -210,11 +212,14 @@ SoundObject* SoundSystem::createSoundObject(std::string name)
 		ERRORMSG("Sound object with name %s already exists",name.c_str());
 		return getSoundObject(name);
 	}
+	DEBUGX("creating sound object with name %s",name.c_str());
 
 	SoundObject* so;
 	so = new SoundObject(name);
 	so->setVolume(m_sound_volume);
 	m_sound_objects.insert(std::make_pair(name,so));
+	checkErrors();
+	
 	return so;
 
 }
@@ -251,17 +256,46 @@ void SoundSystem::deleteSoundObject(SoundObject* object)
 	deleteSoundObject(object->getName());
 }
 
+
+bool SoundSystem::getSourceHandle(ALuint &handle)
+{
+	bool success = true;
+	
+	alGenSources(1, &handle);
+	if (alGetError() != AL_NO_ERROR)
+	{
+		success = false;
+	}
+	else
+	{
+		//alSourcei(m_handle, AL_LOOPING, AL_TRUE);
+		alSourcef(handle, AL_REFERENCE_DISTANCE, 5);
+		//alSourcef(m_handle, AL_ROLLOFF_FACTOR, 0.5);
+		alSourcef(handle,AL_MAX_DISTANCE , 20);
+	}
+	return success;
+}
+
+bool SoundSystem::checkErrors()
+{
+	int error = alGetError();
+
+	if(error != AL_NO_ERROR)
+	{
+		ERRORMSG("AL error %i: %s",error, alGetString(error)) ;
+		return true;
+	}
+	return false;
+}
+
 SoundObject::SoundObject(std::string name, Vector pos)
 {
-	alGenSources(1, &m_handle);
+	/*
+	m_handle_valid = SoundSystem::getSourceHandle(m_handle);
 	setPosition(pos);
-
-	// zum testen
-	//alSourcei(m_handle, AL_LOOPING, AL_TRUE);
-	alSourcef(m_handle, AL_REFERENCE_DISTANCE, 5);
-	//alSourcef(m_handle, AL_ROLLOFF_FACTOR, 0.5);
-	alSourcef(m_handle,AL_MAX_DISTANCE , 20);
-
+	SoundSystem::checkErrors();
+	*/
+	m_handle_valid = false;
 	m_sound_name = "";
 	m_name = name;
 	m_global_volume = 1.0;
@@ -270,29 +304,51 @@ SoundObject::SoundObject(std::string name, Vector pos)
 
 SoundObject::~SoundObject()
 {
-	alDeleteSources(1,&m_handle);
+	if (m_handle_valid)
+	{
+		alDeleteSources(1,&m_handle);
+	}
 }
 
 void SoundObject::setPosition(Vector pos)
 {
-	ALfloat spos[3]={0.0,0.0,0.0};
-	spos[0] = pos.m_x;
-	spos[1] = pos.m_y;
+	m_position = pos;
+	
 
-	alSourcefv(m_handle, AL_POSITION, spos);
+	if (m_handle_valid)
+	{
+		ALfloat spos[3]={0.0,0.0,0.0};
+		spos[0] = pos.m_x;
+		spos[1] = pos.m_y;
+	
+		alSourcefv(m_handle, AL_POSITION, spos);
+	}
 }
 
 Vector SoundObject::getPosition()
 {
-	ALfloat spos[3]={0.0,0.0,0.0};
-	alGetSourcefv(m_handle, AL_POSITION, spos);
-
-	return Vector(spos[0],spos[1]);
+	return m_position;
 }
 
 void SoundObject::setSound(Sound snd)
 {
-	alSourcei(m_handle, AL_BUFFER, snd);
+	// if this object has no valid handle, try to get a valid one
+	if (!m_handle_valid)
+	{
+		m_handle_valid = SoundSystem::getSourceHandle(m_handle);
+		setPosition(m_position);
+		setVolume(m_volume);
+	}
+	
+	if (m_handle_valid)
+	{
+		alSourcei(m_handle, AL_BUFFER, snd);
+		SoundSystem::checkErrors();
+	}
+	else
+	{
+		m_sound_name = "";
+	}
 }
 
 void SoundObject::setSound(SoundName sname)
@@ -322,28 +378,45 @@ void SoundObject::setSound(SoundName sname)
 
 void SoundObject::play()
 {
-	alSourcePlay(m_handle);
+	if (m_handle_valid)
+	{
+		alSourcePlay(m_handle);
+		SoundSystem::checkErrors();
+	}
 }
 
 void SoundObject::stop()
 {
-	alSourceStop(m_handle);
+	if (m_handle_valid)
+	{
+		alSourceStop(m_handle);
+		SoundSystem::checkErrors();
+	}
 	m_sound_name="";
 }
 
 void SoundObject::rewind()
 {
-	alSourceRewind(m_handle);
+	if (m_handle_valid)
+	{
+		alSourceRewind(m_handle);
+		SoundSystem::checkErrors();
+	}
 }
 
 void SoundObject::update()
 {
-	int state;
-	alGetSourcei(m_handle,AL_SOURCE_STATE,&state);
-
-	if (state == AL_STOPPED)
+	if (m_handle_valid)
 	{
-		m_sound_name = "";
+		int state;
+		alGetSourcei(m_handle,AL_SOURCE_STATE,&state);
+
+		if (state == AL_STOPPED)
+		{
+			m_sound_name = "";
+			alDeleteSources(1, &m_handle);
+			m_handle_valid = false;
+		}
 	}
 }
 

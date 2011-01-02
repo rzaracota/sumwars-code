@@ -5,7 +5,17 @@
 
 void ogg_stream::open(string path)
 {
-	
+	if (!m_initialized)
+	{
+		alGenSources(1, &source);
+		int error = alGetError();
+
+		if(error != AL_NO_ERROR)
+		{
+			return;
+		}
+		m_initialized = true;
+	}
     int result;
     
     if(!(oggFile = fopen(path.c_str(), "rb")))
@@ -28,8 +38,6 @@ void ogg_stream::open(string path)
         
     alGenBuffers(2, buffers);
 	oggcheck();
-	alGenSources(1, &source);
-    oggcheck();
     alSource3f(source, AL_POSITION,        0.0, 0.0, 0.0);
     alSource3f(source, AL_VELOCITY,        0.0, 0.0, 0.0);
     alSource3f(source, AL_DIRECTION,       0.0, 0.0, 0.0);
@@ -46,8 +54,6 @@ void ogg_stream::release()
 {
     alSourceStop(source);
     empty();
-    alDeleteSources(1, &source);
-    oggcheck();
     alDeleteBuffers(2, buffers);
     oggcheck();
 
@@ -118,8 +124,9 @@ bool ogg_stream::update()
 
     alGetSourcei(source, AL_BUFFERS_PROCESSED, &processed);
 	oggcheck();
-	while(processed--)
+	while(processed>0)
     {
+		processed--;
 		DEBUGX("processed %i",processed+1);
         ALuint buffer;
         
@@ -131,8 +138,6 @@ bool ogg_stream::update()
 
         alSourceQueueBuffers(source, 1, &buffer);
         oggcheck();
-		
-		
     }
 
 	if (active && !playing())

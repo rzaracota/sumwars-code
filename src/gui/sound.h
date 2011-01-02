@@ -77,17 +77,7 @@ class SoundSystem
 		 */
 		static void setListenerPosition(Vector pos);
 		
-		static bool checkErrors()
-		{
-			int error = alGetError();
-
-			if(error != AL_NO_ERROR)
-			{
-				ERRORMSG("AL error %i: %s",error, alGetString(error)) ;
-				return true;
-			}
-			return false;
-		}
+		static bool checkErrors();
 
 		/**
 		 * \fn static void cleanup()
@@ -128,6 +118,13 @@ class SoundSystem
 		 */
 		static void deleteSoundObject(SoundObject* object);
 
+		/**
+		 * \brief tries to create a valid OpenAL source handle
+		 * \param handle return parameter, containing the handle
+		 * \return true if the handle is valid
+		 */
+		static bool getSourceHandle(ALuint &handle);
+		
 		/**
 		 * \fn static void setSoundVolume(float vol)
 		 * \brief Stellt die Lautstaerke ein
@@ -233,7 +230,8 @@ class SoundObject
 		 */
 		void setVolume(float vol)
 		{
-			alSourcef(m_handle, AL_GAIN, vol*m_global_volume);
+			if (m_handle_valid) 
+				alSourcef(m_handle, AL_GAIN, vol*m_global_volume);
 			m_volume = vol;
 		}
 		
@@ -244,7 +242,8 @@ class SoundObject
 		 */
 		void setGlobalVolume(float vol)
 		{
-			alSourcef(m_handle, AL_GAIN, m_volume*vol);
+			if (m_handle_valid) 
+				alSourcef(m_handle, AL_GAIN, m_volume*vol);
 			m_global_volume = vol;
 		}
 
@@ -305,6 +304,11 @@ class SoundObject
 		 * \brief OpenAL handle fuer die Soundquelle
 		 **/
 		ALuint m_handle;
+		
+		/**
+		 * \brief true, if the handle belongs to a valid OpenAL Source
+		 */
+		bool m_handle_valid;
 
 		/**
 		 * \var SoundName m_sound_name
@@ -327,6 +331,11 @@ class SoundObject
 		 * \brief Lautstarke
 		 */
 		float m_volume;
+		
+		/**
+		 * \brief position of the sound source
+		 */
+		Vector m_position;
 };
 
 #endif
