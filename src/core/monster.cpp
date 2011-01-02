@@ -372,78 +372,89 @@ void Monster::updateCommand()
 		}
 	}
 
+	// Taunt: attack taunting player only
+	if (m_ai.m_mod_time[TAUNT]>0 && m_ai.m_chase_player_id!=0)
+	{
+		pl = dynamic_cast<Creature*>(getRegion()->getObject(m_ai.m_chase_player_id));
+		if (pl != 0)
+		{
+			potgoals.clear();
+			potgoals.push_back(pl);
+		}
+	}
+
 	// Entfernungen und Sichtbarkeit der Ziele ermitteln
 	// nur, wenn das Monster nicht wegen Taunt einen bestimmten Spieler angreifen muss
 	float dist;
-	if (m_ai.m_mod_time[TAUNT]<=0 || m_ai.m_chase_player_id==0)
+	for (WorldObjectList::iterator it = potgoals.begin(); it!=potgoals.end(); ++it)
 	{
-		for (WorldObjectList::iterator it = potgoals.begin(); it!=potgoals.end(); ++it)
+		if (!(*it)->isCreature())
+			continue;
+
+		pl = static_cast<Creature*>(*it);
+		if (pl->getBaseAttrMod()->m_special_flags & IGNORED_BY_AI)
+			continue;
+
+		// Spieler nur als Ziel, wenn aktiv und nicht in Dialog
+		if (! pl->canBeAttacked())
+			continue;
+
+		// nur Feinde
+		if (World::getWorld()->getRelation(getFraction(), pl ) != Fraction::HOSTILE)
+			continue;
+
+		dist = getShape()->getDistance(*(pl->getShape()));
+		if ( dist< m_ai.m_vars.m_sight_range)
 		{
-			if (!(*it)->isCreature())
-				continue;
 
-			pl = static_cast<Creature*>(*it);
-			if (pl->getBaseAttrMod()->m_special_flags & IGNORED_BY_AI)
-				continue;
 
-			// Spieler nur als Ziel, wenn aktiv und nicht in Dialog
-			if (! pl->canBeAttacked())
-				continue;
+			// Spieler ist in Sichtweite
+			m_ai.m_goals->push_back(std::make_pair(pl,dist));
 
-			// nur Feinde
-			if (World::getWorld()->getRelation(getFraction(), pl ) != Fraction::HOSTILE)
-				continue;
+			gline.m_end = pl->getShape()->m_center;
 
-			dist = getShape()->getDistance(*(pl->getShape()));
-			if ( dist< m_ai.m_vars.m_sight_range)
+			// Testen, ob der Weg zum Spieler frei ist
+			ret.clear();
+			getRegion()->getObjectsOnLine(gline,&ret,LAYER_AIR, CREATURE | FIXED,pl);
+
+			// alle verbuendeten Objekte loeschen, weil durch diese *durchgeschossen* werden kann
+			WorldObjectList::iterator it;
+			for (it = ret.begin(); it != ret.end();)
 			{
-
-
-				// Spieler ist in Sichtweite
-				m_ai.m_goals->push_back(std::make_pair(pl,dist));
-
-				gline.m_end = pl->getShape()->m_center;
-
-				// Testen, ob der Weg zum Spieler frei ist
-				ret.clear();
-				getRegion()->getObjectsOnLine(gline,&ret,LAYER_AIR, CREATURE | FIXED,pl);
-
-				// alle verbuendeten Objekte loeschen, weil durch diese *durchgeschossen* werden kann
-				WorldObjectList::iterator it;
-				for (it = ret.begin(); it != ret.end();)
+				if (World::getWorld()->getRelation(m_fraction,*it) == Fraction::ALLIED)
 				{
-					if (World::getWorld()->getRelation(m_fraction,*it) == Fraction::ALLIED)
-					{
-						it = ret.erase(it);
-					}
-					else
-					{
-						++it;
-					}
-				}
-
-				if (ret.empty() && dist< m_ai.m_vars.m_shoot_range)
-				{
-					// Keine Objekte auf der Linie vom Monster zum Ziel
-					m_ai.m_visible_goals->push_back(std::make_pair(pl,dist));
-
+					it = ret.erase(it);
 				}
 				else
 				{
-
-					WorldObjectList::iterator it;
-					for (it = ret.begin(); it != ret.end();++it)
-					{
-						DEBUGX("blocking obj %i",(*it)->getId());
-					}
-					DEBUGX("dist %f max dist %f",dist, m_ai.m_vars.m_shoot_range);
+					++it;
 				}
 			}
+
+			
+			float shootrange = m_ai.m_vars.m_shoot_range;
+			if (m_ai.m_mod_time[TAUNT] > 0)
+			{
+				shootrange *= 0.5;
+			}
+			
+			if (ret.empty() && dist< shootrange)
+			{
+				// Keine Objekte auf der Linie vom Monster zum Ziel
+				m_ai.m_visible_goals->push_back(std::make_pair(pl,dist));
+
+			}
+			else
+			{
+
+				WorldObjectList::iterator it;
+				for (it = ret.begin(); it != ret.end();++it)
+				{
+					DEBUGX("blocking obj %i",(*it)->getId());
+				}
+				DEBUGX("dist %f max dist %f",dist, m_ai.m_vars.m_shoot_range);
+			}
 		}
-	}
-	else
-	{
-		DEBUGX("taunt %f",m_ai.m_mod_time[TAUNT]);
 	}
 
 	// Angriff auf Spieler durch anlocken
@@ -485,7 +496,6 @@ void Monster::updateCommand()
 	}
 
 	// Verbuendete ermitteln
-
 	s.m_center = pos;
 	s.m_radius = 12;
 	ret.clear();

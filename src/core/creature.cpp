@@ -1123,9 +1123,44 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				}
 			}
 		}
+		else if (*kt == "scare" )
+		{
+			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
+
+			// make enemies run away
+			for (it=res.begin();it!=res.end();++it)
+			{
+				if ((*it)->isCreature() && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  Fraction::HOSTILE)
+				{
+					cr = (Creature*) (*it);
+					float rel = m_damage.m_ai_mod_power[TAUNT]*1.0 / cr->getBaseAttrMod()->m_willpower;
+					float chance = atan(rel)/(3.1415/2);
+					if (Random::random() < chance && Random::random() < 0.5)
+					{
+						// vector pointing away from the caster
+						Vector dir = cr->getShape()->m_center - getShape()->m_center;
+						// rotate by [-90,90] degreee at random
+						float angle = 3.14159*(Random::random()-0.5)*0.5;
+						dir.rotate(angle);
+						
+						float length = MathHelper::Min(8.0f, 3*rel);
+						dir.normalize();
+						dir *= length;
+						
+						Vector goal = cr->getShape()->m_center + dir;
+						Command cmd;
+						cmd.m_goal = goal;
+						cmd.m_goal_object_id = 0;
+						cmd.m_range = 1;
+						cmd.m_type = "walk";
+						cr->insertScriptCommand(cmd,5000);
+					}
+				}
+			}
+		}		
 		else if (*kt == "berserk")
 		{
-			m_dyn_attr.m_status_mod_time[Damage::BERSERK] = 30000;
+			m_dyn_attr.m_status_mod_time[Damage::BERSERK] = 15000;
 			addToNetEventMask(NetEvent::DATA_STATUS_MODS);
 		}
 		else if (*kt == "speak")

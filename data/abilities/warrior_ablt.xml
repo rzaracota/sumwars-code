@@ -118,6 +118,7 @@
 		 timer_value="20000" 
 		 base_ability="noaction" 
 		 critical_percent="0.800000"
+		 radius="12"
 		 target_type="self">
 	<Flag name="mute_affected" />
 	<Effect>
@@ -320,14 +321,16 @@
 		 description="Nearby monsters will attack the warrior, if they are able to. The warriors defence is increased."
 		 time="501.000000" 
 		 timer_nr="2.000000" 
-		 timer_value="30000.000000" 
+		 timer_value="20000.000000" 
 		 base_ability="noaction" 
 		 critical_percent="0.800000"
-		 target_type="self">
+		 target_type="self"
+		 radius="12">
 	<Flag name="mute_affected" />
 	<Effect>
 		<CppImplementation type="dmg_at_enemies_in_radius" />
 		<CppImplementation type="basemod_at_self" />
+		<CppImplementation type="scare" />
 	</Effect>
 	<Damage>
 		<LuaImplementation>
@@ -336,7 +339,7 @@
 			setDamageValue("taunt", 0.5*(strength + math.min(strength,willpower*4)));
 			setDamageValue("blockable", false);
 		</LuaImplementation>	
-	</Damage>
+	</Damage>	
 	<BaseAttributesMod>
 		<LuaImplementation>
 			setBaseModValue("time",10000);
