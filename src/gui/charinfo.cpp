@@ -593,14 +593,6 @@ CharInfo::CharInfo (Document* doc)
 	}
 
 	// Label Block
-	label =  win_mgr.getWindow("BlockValueLabel");
-	out_stream.str("");
-	out_stream << player->getBaseAttrMod()->m_block;
-	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
-	{
-		label->setText((CEGUI::utf8*) out_stream.str().c_str());
-	}
-	
 	label = win_mgr.getWindow("BlockLabel" );
 	CEGUI::utf8* blocktext;
 	if (player->getShield() != 0)
@@ -614,6 +606,14 @@ CharInfo::CharInfo (Document* doc)
 	if (label->getText() != blocktext)
 	{
 		label->setText(blocktext);
+	}
+	
+	label =  win_mgr.getWindow("BlockValueLabel");
+	out_stream.str("");
+	out_stream << player->getBaseAttrMod()->m_block;
+	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
+	{
+		label->setText((CEGUI::utf8*) out_stream.str().c_str());
 	}
 	
 	out_stream.str("");

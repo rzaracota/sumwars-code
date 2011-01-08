@@ -3365,7 +3365,7 @@ bool Creature::takeDamage(Damage* d)
 			fstat->m_damage_got_perc = armorfak;
 			addToNetEventMask(NetEvent::DATA_FIGHT_STAT);
 
-			DEBUGX("blockchance %f damage perc %f attacker %s",blockchance, armorfak, fstat->m_last_attacker.c_str());
+			DEBUGX("blockchance %f damage perc %f attacker %s",blockchance, armorfak, fstat->m_last_attacker.getTranslation().c_str());
 		}
 	}
 
