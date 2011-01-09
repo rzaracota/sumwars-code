@@ -589,3 +589,33 @@
 		</LuaImplementation>
 	</BaseAttributesMod>
 </Ability>
+
+<Ability type="dmgreduce_undead" 
+		 name="Reduce damage from undead"
+		 description="Reduces damage from undead by one third." 
+		 time="0.000000" 
+		 timer_nr="0.000000" 
+		 timer_value="0.000000" 
+		 base_ability="noaction" 
+		 critical_percent="0.000000" 
+		 target_type="passive" />
+		 
+<Ability type="dmgreduce_demon" 
+		 name="Reduce damage from demons"
+		 description="Reduces damage from demons by one third." 
+		 time="0.000000" 
+		 timer_nr="0.000000" 
+		 timer_value="0.000000" 
+		 base_ability="noaction" 
+		 critical_percent="0.000000" 
+		 target_type="passive" />
+		 
+ <Ability type="dmgreduce_elemental" 
+		 name="Reduce damage from elemental"
+		 description="Reduces damage from elemental by one third." 
+		 time="0.000000" 
+		 timer_nr="0.000000" 
+		 timer_value="0.000000" 
+		 base_ability="noaction" 
+		 critical_percent="0.000000" 
+		 target_type="passive" />

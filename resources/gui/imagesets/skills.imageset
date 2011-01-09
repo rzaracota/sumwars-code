@@ -30,7 +30,7 @@
     <Image Name="holy_light" XPos="554" YPos="2" Width="90" Height="90" />
     <Image Name="holy_fire" XPos="646" YPos="2" Width="90" Height="90" />
     <Image Name="burning_rage" XPos="738" YPos="2" Width="90" Height="90" />
-    <Image Name="cure_blind_mute" XPos="830" YPos="2" Width="90" Height="90" />
+    <Image Name="dmgreduce_undead" XPos="830" YPos="2" Width="90" Height="90" />
     <Image Name="cure_blind_mute_party" XPos="922" YPos="2" Width="90" Height="90" />
     <Image Name="blazing_shield" XPos="554" YPos="94" Width="90" Height="90" />
     <Image Name="light_beam" XPos="646" YPos="94" Width="90" Height="90" />
@@ -38,7 +38,7 @@
     <Image Name="break_binding" XPos="830" YPos="94" Width="90" Height="90" />
     <Image Name="disrupt_binding" XPos="922" YPos="94" Width="90" Height="90" />
     <Image Name="magic_shield" XPos="554" YPos="186" Width="90" Height="90" />
-    <Image Name="cure_pois_burn" XPos="646" YPos="186" Width="90" Height="90" />
+    <Image Name="dmgreduce_demon" XPos="646" YPos="186" Width="90" Height="90" />
     <Image Name="cure_pois_burn_party" XPos="738" YPos="186" Width="90" Height="90" />
     <Image Name="acid" XPos="830" YPos="186" Width="90" Height="90" />
     <Image Name="heal" XPos="922" YPos="186" Width="90" Height="90" />
@@ -46,7 +46,7 @@
     <Image Name="divine_wind" XPos="646" YPos="278" Width="90" Height="90" />
     <Image Name="divine_storm" XPos="738" YPos="278" Width="90" Height="90" />
     <Image Name="blade_storm" XPos="830" YPos="278" Width="90" Height="90" />
-    <Image Name="cure_conf_bsrk" XPos="922" YPos="278" Width="90" Height="90" />
+    <Image Name="dmgreduce_elemental" XPos="922" YPos="278" Width="90" Height="90" />
     <Image Name="cure_conf_bsrk_party" XPos="554" YPos="370" Width="90" Height="90" />
     <Image Name="hypnosis" XPos="646" YPos="370" Width="90" Height="90" />
     <Image Name="hypnosis2" XPos="738" YPos="370" Width="90" Height="90" />

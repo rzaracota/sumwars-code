@@ -3446,6 +3446,17 @@ bool Creature::takeDamage(Damage* d)
 		dmg *= 3;
 		critical = true;
 	}
+	
+	// defensive passive abilities agains specific races
+	if (attacker != 0 && attacker->getRace() != "")
+	{
+		if ((checkAbility("dmgreduce_undead") && attacker->getRace() == "undead")
+			|| (checkAbility("dmgreduce_demon") && attacker->getRace() == "demon")
+			|| (checkAbility("dmgreduce_elemental") && attacker->getRace() == "elemental"))
+		{
+			dmg *= (2.0/3.0);
+		}
+	}
 
 	// Lebenspunkte abziehen
 	getDynAttr()->m_health -= dmg;

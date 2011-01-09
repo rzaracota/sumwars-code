@@ -382,50 +382,53 @@
 	<LearnableAbility type="holy_fire" skilltree_tab="1" skilltree_posx="0.200000" skilltree_posy="0.590000" required_level="35">
 		<RequiredAbility type="holy_light" />
 	</LearnableAbility>
-	<LearnableAbility type="cure_blind_mute" skilltree_tab="1" skilltree_posx="0.700000" skilltree_posy="0.400000" required_level="15" />
-	<LearnableAbility type="cure_blind_mute_party" skilltree_tab="1" skilltree_posx="0.700000" skilltree_posy="0.590000" required_level="35">
-		<RequiredAbility type="cure_blind_mute" />
+	<LearnableAbility type="dmgreduce_undead" skilltree_tab="1" skilltree_posx="0.450000" skilltree_posy="0.400000" required_level="15" >
+		<RequiredAbility type="holy_light" />
+	</LearnableAbility>
+	<LearnableAbility type="light_beam" skilltree_tab="1" skilltree_posx="0.700000" skilltree_posy="0.210000" required_level="5" />
+	<LearnableAbility type="cure_blind_mute_party" skilltree_tab="1" skilltree_posx="0.700000" skilltree_posy="0.400000" required_level="15">
+		<RequiredAbility type="light_beam" />
 	</LearnableAbility>
 	<LearnableAbility type="blazing_shield" skilltree_tab="1" skilltree_posx="0.450000" skilltree_posy="0.020000" required_level="1" />
-	<LearnableAbility type="light_beam" skilltree_tab="1" skilltree_posx="0.450000" skilltree_posy="0.210000" required_level="5" />
-	<LearnableAbility type="burning_sun" skilltree_tab="1" skilltree_posx="0.450000" skilltree_posy="0.780000" required_level="60">
-		<RequiredAbility type="light_beam" />
-		<RequiredAbility type="cure_blind_mute" />
+	<LearnableAbility type="burning_sun" skilltree_tab="1" skilltree_posx="0.700000" skilltree_posy="0.780000" required_level="60">
+		<RequiredAbility type="cure_blind_mute_party" />
 	</LearnableAbility>
+	
 	<LearnableAbility type="break_binding" skilltree_tab="2" skilltree_posx="0.200000" skilltree_posy="0.400000" required_level="15" />
 	<LearnableAbility type="disrupt_binding" skilltree_tab="2" skilltree_posx="0.200000" skilltree_posy="0.780000" required_level="60">
 		<RequiredAbility type="break_binding" />
 	</LearnableAbility>
 	<LearnableAbility type="magic_shield" skilltree_tab="2" skilltree_posx="0.200000" skilltree_posy="0.210000" required_level="5" />
-	<LearnableAbility type="cure_pois_burn" skilltree_tab="2" skilltree_posx="0.700000" skilltree_posy="0.210000" required_level="5">
+	<LearnableAbility type="cure_pois_burn_party" skilltree_tab="2" skilltree_posx="0.700000" skilltree_posy="0.210000" required_level="5">
 		<RequiredAbility type="heal" />
 	</LearnableAbility>
-	<LearnableAbility type="cure_pois_burn_party" skilltree_tab="2" skilltree_posx="0.700000" skilltree_posy="0.590000" required_level="35">
-		<RequiredAbility type="acid" />
+	<LearnableAbility type="dmgreduce_elemental" skilltree_tab="2" skilltree_posx="0.450000" skilltree_posy="0.590000" required_level="35">
+		<RequiredAbility type="break_binding" />
 	</LearnableAbility>
 	<LearnableAbility type="acid" skilltree_tab="2" skilltree_posx="0.700000" skilltree_posy="0.400000" required_level="15">
-		<RequiredAbility type="cure_pois_burn" />
+		<RequiredAbility type="cure_pois_burn_party" />
 	</LearnableAbility>
 	<LearnableAbility type="heal" skilltree_tab="2" skilltree_posx="0.450000" skilltree_posy="0.020000" required_level="1" />
 	<LearnableAbility type="heal_party" skilltree_tab="2" skilltree_posx="0.450000" skilltree_posy="0.400000" required_level="15">
 		<RequiredAbility type="heal" />
 	</LearnableAbility>
+	
 	<LearnableAbility type="divine_wind" skilltree_tab="3" skilltree_posx="0.200000" skilltree_posy="0.210000" required_level="5" />
 	<LearnableAbility type="divine_storm" skilltree_tab="3" skilltree_posx="0.200000" skilltree_posy="0.590000" required_level="35">
 		<RequiredAbility type="divine_wind" />
 	</LearnableAbility>
 	<LearnableAbility type="blade_storm" skilltree_tab="3" skilltree_posx="0.450000" skilltree_posy="0.020000" required_level="1" />
-	<LearnableAbility type="cure_conf_bsrk" skilltree_tab="3" skilltree_posx="0.450000" skilltree_posy="0.210000" required_level="5" />
-	<LearnableAbility type="cure_conf_bsrk_party" skilltree_tab="3" skilltree_posx="0.450000" skilltree_posy="0.400000" required_level="35">
-		<RequiredAbility type="cure_conf_bsrk" />
+	<LearnableAbility type="cure_conf_bsrk_party" skilltree_tab="3" skilltree_posx="0.700000" skilltree_posy="0.210000" required_level="5" />
+	<LearnableAbility type="dmgreduce_demon" skilltree_tab="3" skilltree_posx="0.450000" skilltree_posy="0.400000" required_level="35">
+		<RequiredAbility type="divine_wind" />
 	</LearnableAbility>
 	<LearnableAbility type="hypnosis" skilltree_tab="3" skilltree_posx="0.700000" skilltree_posy="0.400000" required_level="15">
-		<RequiredAbility type="cure_conf_bsrk" />
+		<RequiredAbility type="cure_conf_bsrk_party" />
 	</LearnableAbility>
 	<LearnableAbility type="hypnosis2" skilltree_tab="3" skilltree_posx="0.700000" skilltree_posy="0.780000" required_level="60">
 		<RequiredAbility type="hypnosis" />
 	</LearnableAbility>
-	<LearnableAbility type="keen_mind" skilltree_tab="3" skilltree_posx="0.700000" skilltree_posy="0.210000" required_level="5">
+	<LearnableAbility type="keen_mind" skilltree_tab="3" skilltree_posx="0.450000" skilltree_posy="0.210000" required_level="5">
 		<RequiredAbility type="blade_storm" />
 	</LearnableAbility>
 
