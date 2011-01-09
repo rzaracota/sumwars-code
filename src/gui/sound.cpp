@@ -10,6 +10,7 @@ std::map<std::string, SoundObject*> SoundSystem::m_sound_objects;
 float SoundSystem::m_sound_volume = 0.0f;
 ALCdevice * SoundSystem::m_device;
 ALCcontext* SoundSystem::m_context;
+std::list<SoundObject*> SoundSystem::m_ambient_sounds;
 
 Sound SoundSystem::getSound(SoundName sname)
 {
@@ -169,6 +170,26 @@ void SoundSystem::setListenerPosition(Vector pos)
 	checkErrors();
 }
 
+void SoundSystem::update()
+{
+	std::list<SoundObject*>::iterator it;
+	for (it = m_ambient_sounds.begin(); it != m_ambient_sounds.end(); )
+	{
+		(*it)->update();
+		if ((*it)->isPlaying())
+		{
+			++it;
+		}
+		else
+		{
+			std::list<SoundObject*>::iterator todel = it;
+			++it;
+			deleteSoundObject(*todel);
+			m_ambient_sounds.erase(todel);
+		}
+	}
+}
+
 void SoundSystem::cleanup()
 {
 	std::multimap<SoundName, Sound>::iterator it = m_sounds.begin();
@@ -177,6 +198,14 @@ void SoundSystem::cleanup()
 		alDeleteBuffers(1,&(it->second));
 	}
 	m_sounds.clear();
+	
+	std::list<SoundObject*>::iterator jt;
+	for (jt = m_ambient_sounds.begin(); jt != m_ambient_sounds.end(); ++jt)
+	{
+		deleteSoundObject(*jt);
+	}
+	m_ambient_sounds.clear();
+		
 
 	clearObjects();
 }
@@ -269,11 +298,38 @@ bool SoundSystem::getSourceHandle(ALuint &handle)
 	else
 	{
 		//alSourcei(m_handle, AL_LOOPING, AL_TRUE);
-		alSourcef(handle, AL_REFERENCE_DISTANCE, 5);
-		//alSourcef(m_handle, AL_ROLLOFF_FACTOR, 0.5);
-		alSourcef(handle,AL_MAX_DISTANCE , 20);
+		alSourcef(m_handle, AL_REFERENCE_DISTANCE, 5);
+		alSourcef(m_handle, AL_ROLLOFF_FACTOR, 0.5);
+		
+		alSourcef(m_handle,AL_MAX_DISTANCE , 20);
 	}
 	return success;
+}
+
+void SoundSystem::playAmbientSound(SoundName sname, float volume, Vector* position)
+{
+	static int id=1;
+	std::stringstream stream;
+	stream << "ambient#"<<id;
+	id ++;
+	
+	DEBUGX("play ambient sound %s volume %f",sname.c_str(), volume);
+	
+	SoundObject* sobj = createSoundObject(stream.str());
+	sobj->setVolume(volume);
+	sobj->setSound(sname);
+	
+	// if position is given: set it,
+	// otherwise the object is directly attached to the listener
+	if (position != 0)
+	{
+		sobj->setPosition(*position);
+	}
+	else
+	{
+		sobj->setPositionRelative(Vector(0,0));
+	}
+	m_ambient_sounds.push_back(sobj);
 }
 
 bool SoundSystem::checkErrors()
@@ -287,6 +343,10 @@ bool SoundSystem::checkErrors()
 	}
 	return false;
 }
+
+
+
+
 
 SoundObject::SoundObject(std::string name, Vector pos)
 {
@@ -322,6 +382,22 @@ void SoundObject::setPosition(Vector pos)
 		spos[1] = pos.m_y;
 	
 		alSourcefv(m_handle, AL_POSITION, spos);
+		alSourcei (m_handle, AL_SOURCE_RELATIVE, AL_FALSE);
+	}
+}
+
+void SoundObject::setPositionRelative(Vector pos)
+{
+	m_position = pos;
+	
+	if (m_handle_valid)
+	{
+		ALfloat spos[3]={0.0,0.0,0.0};
+		spos[0] = pos.m_x;
+		spos[1] = pos.m_y;
+	
+		alSourcefv(m_handle, AL_POSITION, spos);
+		alSourcei (m_handle, AL_SOURCE_RELATIVE, AL_TRUE      );
 	}
 }
 
@@ -420,4 +496,16 @@ void SoundObject::update()
 	}
 }
 
+bool SoundObject::isPlaying()
+{
+	if (!m_handle_valid)
+		return false;
+	
+	int state;
+	alGetSourcei(m_handle,AL_SOURCE_STATE,&state);
+	if (state == AL_STOPPED)
+		return false;
+	
+	return true;
+}
 

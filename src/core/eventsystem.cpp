@@ -6,6 +6,7 @@
 #include "dialogue.h"
 #include "scriptobject.h"
 #include "options.h"
+#include "sound.h"
 
 #ifdef DEBUG_DATABASE
 		std::map<int, std::string> EventSystem::m_code_fragments;
@@ -154,6 +155,7 @@ void EventSystem::init()
 	
 	lua_register(m_lua, "addMusic",addMusic);
 	lua_register(m_lua, "clearMusicList",clearMusicList);
+	lua_register(m_lua, "playSound",playSound);
 	
 	lua_register(m_lua, "writeString", writeString);
 	lua_register(m_lua, "writeNewline", writeNewline);
@@ -3006,6 +3008,35 @@ int EventSystem::clearMusicList(lua_State *L)
 	if (m_region != 0)
 	{
 			m_region->clearMusicTracks();
+	}
+	return 0;
+}
+
+int EventSystem::playSound(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		SoundName sname = lua_tostring(L,1);
+		float volume = 1.0;
+		if (argc>=2 && lua_isnumber(L,2))
+		{
+			volume = lua_tonumber(L,2);
+		}
+		
+		Vector position;
+		Vector* ppos =0;
+		if (argc>=3)
+		{
+			position = getVector(L,3);
+			ppos = &position;
+		}
+		
+		SoundSystem::playAmbientSound(sname, volume, ppos);
+	}
+	else
+	{
+		ERRORMSG("Syntax: playSound(string soundname, float volume=1.0, Vector position=(playerpos))");		
 	}
 	return 0;
 }

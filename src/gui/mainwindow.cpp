@@ -2271,6 +2271,8 @@ void MainWindow::updateChatContent()
 
 void MainWindow::updateMusic()
 {
+	SoundSystem::update();
+	
 	// laufende Musik nicht unterbrechen
 	if (MusicManager::instance().isPlaying())
 		return;

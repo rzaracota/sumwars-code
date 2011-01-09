@@ -80,11 +80,16 @@ class SoundSystem
 		static bool checkErrors();
 
 		/**
+		 * \brief updates the object
+		 */
+		static void update();
+		
+		/**
 		 * \fn static void cleanup()
 		 * \brief gibt Speicher frei
 		 */
 		static void cleanup();
-
+		
 		/**
 		 * \fn static void clearObjects()
 		 * \brief Loescht alle SoundObjekte
@@ -140,6 +145,15 @@ class SoundSystem
 		{
 			return m_sound_volume;
 		}
+		
+		/**
+		 * \brief Plays an ambient sound
+		 * \param sname Name of the sound
+		 * \param volume Volume of the sound
+		 * \param position Position of the sound
+		 * If position is NULL, the sound is attached to the listener.
+		 */
+		static void playAmbientSound(SoundName sname, float volume = 1.0, Vector* position=0); 
 
 	private:
 
@@ -172,6 +186,11 @@ class SoundSystem
 		 * \brief AL Sound Kontext
 		 */
 		static ALCcontext* m_context;
+		
+		/**
+		 * \brief List of background sounds played without specific object
+		 */
+		static std::list<SoundObject*> m_ambient_sounds;
 
 };
 
@@ -202,6 +221,12 @@ class SoundObject
 		 * \param pos neue Position
 		 */
 		void setPosition(Vector pos);
+		
+		/**
+		 * \brief Sets the position relative to the listener
+		 * \param pos relative Position
+		 **/
+		void setPositionRelative(Vector pos);
 
 		/**
 		 * \fn Vector getPosition()
@@ -297,6 +322,11 @@ class SoundObject
 		{
 			return m_name;
 		}
+		
+		/**
+		 * \brief indicates if the sound source is playing sound right now
+		 */
+		bool isPlaying();
 
 	private:
 		/**

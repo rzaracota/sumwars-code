@@ -775,6 +775,11 @@ class EventSystem
 		static int clearMusicList(lua_State *L);
 		
 		/**
+		 * \brief Plays a given sound
+		 */
+		static int playSound(lua_State *L);
+		
+		/**
 		 * \fn static int writeString(lua_State *L)
 		 * \brief schreibt einen String in den Stream
 		 * \param L Lua Status
