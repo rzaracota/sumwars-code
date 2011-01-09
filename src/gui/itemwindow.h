@@ -39,6 +39,14 @@ class ItemWindow : public Window
 		 */
 		static std::string getItemImage(Item::Subtype type);
 		
+		/**
+		 * \brief set silent status
+		 * \param silent If set to true, this window will not play sounds
+		 */
+		void setSilent(bool silent)
+		{
+			m_silent = silent;
+		}
 		
 	protected:
 		
@@ -83,11 +91,18 @@ class ItemWindow : public Window
 		bool onItemMouseButtonReleased(const CEGUI::EventArgs& evt);
 		
 		
+		
+		
 		/**
 		 * \var static std::map<Item::Subtype, std::string> m_item_images
 		 * \brief Enthaelt fuer jeden Itemtyp das passende Bild
 		 */
 		static std::map<Item::Subtype, std::string> m_item_images;
+		
+		/**
+		 * \brief if set, this window may not play sounds
+		 */
+		bool m_silent;
 };
 
 #endif

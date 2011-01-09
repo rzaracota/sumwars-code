@@ -298,10 +298,10 @@ bool SoundSystem::getSourceHandle(ALuint &handle)
 	else
 	{
 		//alSourcei(m_handle, AL_LOOPING, AL_TRUE);
-		alSourcef(m_handle, AL_REFERENCE_DISTANCE, 5);
-		alSourcef(m_handle, AL_ROLLOFF_FACTOR, 0.5);
+		alSourcef(handle, AL_REFERENCE_DISTANCE, 5);
+		alSourcef(handle, AL_ROLLOFF_FACTOR, 0.5);
 		
-		alSourcef(m_handle,AL_MAX_DISTANCE , 20);
+		alSourcef(handle,AL_MAX_DISTANCE , 20);
 	}
 	return success;
 }

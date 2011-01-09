@@ -1,7 +1,10 @@
 
+#include "graphicmanager.h"
 #include "itemwindow.h"
 #include "tooltipmanager.h"
 #include "ceguiutility.h"
+#include "sound.h"
+
 
 std::map<Item::Subtype, std::string> ItemWindow::m_item_images;
 
@@ -9,7 +12,7 @@ std::map<Item::Subtype, std::string> ItemWindow::m_item_images;
 ItemWindow::ItemWindow (Document* doc)
 	: Window(doc)
 {
-	
+	m_silent = false;
 }
 
 bool ItemWindow::onItemHover(const CEGUI::EventArgs& evt)
@@ -101,9 +104,14 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 		imgname= getItemImage(item->m_subtype); 
 	}
 	
+	bool playsound = false;
 	if (img->getProperty("Image")!=imgname)
 	{
 		img->setProperty("Image", imgname);
+		if (item != 0)
+		{
+			playsound = true;
+		}
 	}
 	
 	std::string propold = img->getProperty("BackgroundColours").c_str();
@@ -131,6 +139,15 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 		img->setProperty("BackgroundColours", propnew); 
 	}
 	
+	if (playsound && !m_silent)
+	{
+		SoundName sname = GraphicManager::getDropSound(item->m_subtype);
+		if (sname != "")
+		{
+			SoundSystem::playAmbientSound(sname);
+		}
+		DEBUGX("drop sound %s",sname.c_str());
+	}
 }
 
 void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player* player, int gold,float price_factor)

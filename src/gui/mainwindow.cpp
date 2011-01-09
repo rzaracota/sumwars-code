@@ -302,6 +302,13 @@ void MainWindow::update(float time)
 			m_cegui_system->setGUISheet(m_game_screen);
 			m_game_screen->addChildWindow(m_sub_windows["Options"]->getCEGUIWindow());
 			MusicManager::instance().stop();
+			
+			// one silent update of the belt
+			// to avoid silly sounds on startup
+			static_cast<ItemWindow*>(m_sub_windows["ControlPanel"])->setSilent(true);
+			m_sub_windows["ControlPanel"]->update();
+			static_cast<ItemWindow*>(m_sub_windows["ControlPanel"])->setSilent(false);
+			
 		}
 		m_document->setModified(m_document->getModified() & (~Document::GUISHEET_MODIFIED));
 	}
@@ -414,10 +421,18 @@ void MainWindow::update(float time)
 			if (wflags & Document::INVENTORY)
 			{
 				inventory->setVisible(true);
+				// make one silent update to avoid that new inventory items play sounds
+				static_cast<ItemWindow*>(m_sub_windows["Inventory"])->setSilent(true);
+				m_sub_windows["Inventory"]->update();
+				static_cast<ItemWindow*>(m_sub_windows["Inventory"])->setSilent(false);
+				
+				// set control panel to silent to avoid duplicate item sounds
+				static_cast<ItemWindow*>(m_sub_windows["ControlPanel"])->setSilent(true);
 			}
 			else
 			{
 				inventory->setVisible(false);
+				static_cast<ItemWindow*>(m_sub_windows["ControlPanel"])->setSilent(false);
 			}
 			
 			// QuestInfo anzeigen wenn entsprechendes Flag gesetzt

@@ -331,15 +331,8 @@ void ControlPanel::update()
 		out_stream << "InventoryItem" << i;
 		img =  win_mgr.getWindow(out_stream.str().c_str());
 		it = equ->getItem(Equipement::SMALL_ITEMS+i);
-		out_stream.str("");
-		if (it!=0)
-		{
-			out_stream<< getItemImage(it->m_subtype);
-		}
-		if (img->getProperty("Image")!=out_stream.str())
-		{
-			img->setProperty("Image", out_stream.str());
-		}
+
+		updateItemWindow(img, it, player);
 	}
 }
 

@@ -216,6 +216,32 @@ void GraphicManager::destroyMovableObject(Ogre::MovableObject* obj)
 	}
 }
 
+SoundName GraphicManager::getDropSound(std::string objecttype)
+{
+	 // Get the renderinfo
+	 GraphicObject::Type gtype = getGraphicType(objecttype);
+	 GraphicRenderInfo* ri = getRenderInfo(gtype);
+	 if (ri == 0)
+		 return "";
+	 
+	 // search for a drop action
+	 ActionRenderInfo* actionri = ri->getActionRenderInfo("drop");
+	 if (actionri == 0)
+		 return "";
+	 
+	 // return the first sound found there
+	 std::list< ActionRenderpart >::iterator it;
+	 for (it = actionri->m_renderparts.begin(); it != actionri->m_renderparts.end(); ++it)
+	 {
+		 ActionRenderpart& apart = *it;
+		 if (apart.m_type == ActionRenderpart::SOUND)
+		 {
+			 return apart.m_animation;
+		 }
+	 }
+	 return "";
+}
+
 void GraphicManager::loadRenderInfoData(const char* pFilename)
 {
 	TiXmlDocument doc(pFilename);
