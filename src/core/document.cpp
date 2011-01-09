@@ -305,7 +305,7 @@ void Document::createNewCharacter(std::string name)
 			return;
 		}
 
-		writeSavegame();
+		writeSavegame(false);
 
 		getGUIState()->m_shown_windows = Document::START_MENU;
 		setModified(Document::WINDOWS_MODIFIED);
@@ -1700,7 +1700,7 @@ void Document::updateClickedObjectId()
 	}
 }
 
-void Document::writeSavegame()
+void Document::writeSavegame(bool writeShortkeys)
 {
 	if (getLocalPlayer()==0)
 		return;
@@ -1715,24 +1715,33 @@ void Document::writeSavegame()
 	getLocalPlayer()->toSavegame(save);
 
 	// Shortkeys hinzufuegen
-	ShortkeyMap::iterator it;
-	int nr =0;
-	for (it = m_ability_shortkey_map.begin(); it != m_ability_shortkey_map.end(); ++it)
+	if (writeShortkeys)
 	{
-		if (it->second >= USE_SKILL_LEFT && it->second < USE_SKILL_RIGHT + 200)
-			nr ++;
-	}
-	save->printNewline();
-	save->toBuffer(nr);
-	save->printNewline();
-	for (it = m_ability_shortkey_map.begin(); it != m_ability_shortkey_map.end(); ++it)
-	{
-		if (it->second >= USE_SKILL_LEFT && it->second < USE_SKILL_RIGHT + 200)
+		
+		ShortkeyMap::iterator it;
+		int nr =0;
+		for (it = m_ability_shortkey_map.begin(); it != m_ability_shortkey_map.end(); ++it)
 		{
-			save->toBuffer(static_cast<short>(it->first));
-			save->toBuffer(static_cast<short>(it->second));
-			save->printNewline();
+			if (it->second >= USE_SKILL_LEFT && it->second < USE_SKILL_RIGHT + 200)
+				nr ++;
 		}
+		save->printNewline();
+		save->toBuffer(nr);
+		save->printNewline();
+		for (it = m_ability_shortkey_map.begin(); it != m_ability_shortkey_map.end(); ++it)
+		{
+			if (it->second >= USE_SKILL_LEFT && it->second < USE_SKILL_RIGHT + 200)
+			{
+				save->toBuffer(static_cast<short>(it->first));
+				save->toBuffer(static_cast<short>(it->second));
+				save->printNewline();
+			}
+		}
+	}
+	else
+	{
+		save->printNewline();
+		save->toBuffer(0);
 	}
 
 	// Savegame schreiben (ansynchron)

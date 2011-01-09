@@ -303,10 +303,10 @@ class Document
 	}
 
 	/**
-	 * \fn void writeSavegame()
 	 * \brief Schreibt ein Savegame des aktuellen Spielers
+	 * \param writeShortkeys if set, shortkeys will be written to the savegame
 	 */
-	void writeSavegame();
+	void writeSavegame(bool writeShortkeys = true);
 
 
 	/**
