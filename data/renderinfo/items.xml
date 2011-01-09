@@ -1,89 +1,46 @@
-<RenderInfo name="potion">
+<RenderInfo name="potionBase">
+	<Soundobject objectname="sound" />
+	<Action name="drop">
+		<Sound objectname="sound" name="drop_potion"/>
+	</Action>
+</RenderInfo>
+
+<RenderInfo name="potion"  parent="potionBase">
 	<Entity  source="heal_1.mesh"/> 
-	<Soundobject objectname="sound" />
-	
-	<Action name="drop">
-		<Sound objectname="sound" name="drop_potion"/>
-	</Action>
 </RenderInfo>
 
-<RenderInfo name="mediumPotion">
+<RenderInfo name="mediumPotion" parent="potionBase">
 	<Entity  source="heal_2.mesh"/> 
-	<Soundobject objectname="sound" />
-	
-	<Action name="drop">
-		<Sound objectname="sound" name="drop_potion"/>
-	</Action>
 </RenderInfo>
 
-<RenderInfo name="antiBlind">
+<RenderInfo name="antiBlind" parent="potionBase">
 	<Entity  source="heal_bl.mesh"/> 
-	<Soundobject objectname="sound" />
-	
-	<Action name="drop">
-		<Sound objectname="sound" name="drop_potion"/>
-	</Action>
 </RenderInfo>
 
-<RenderInfo name="antiBerserk">
+<RenderInfo name="antiBerserk" parent="potionBase">
 	<Entity  source="heal_br.mesh"/> 
-	<Soundobject objectname="sound" />
-	
-	<Action name="drop">
-		<Sound objectname="sound" name="drop_potion"/>
-	</Action>
 </RenderInfo>
 
-<RenderInfo name="antiConfuse">
+<RenderInfo name="antiConfuse" parent="potionBase">
 	<Entity  source="heal_cf.mesh"/> 
-	<Soundobject objectname="sound" />
-	
-	<Action name="drop">
-		<Sound objectname="sound" name="drop_potion"/>
-	</Action>
 </RenderInfo>
 
-<RenderInfo name="antiMute">
+<RenderInfo name="antiMute" parent="potionBase">
 	<Entity  source="heal_mt.mesh"/> 
-	<Soundobject objectname="sound" />
-	
-	<Action name="drop">
-		<Sound objectname="sound" name="drop_potion"/>
-	</Action>
 </RenderInfo>
 
-<RenderInfo name="antiBurn">
+<RenderInfo name="antiBurn" parent="potionBase">
 	<Entity  source="heal_bu.mesh"/> 
-	<Soundobject objectname="sound" />
-	
-	<Action name="drop">
-		<Sound objectname="sound" name="drop_potion"/>
-	</Action>
 </RenderInfo>
 
-<RenderInfo name="antiParalyze">
+<RenderInfo name="antiParalyze" parent="potionBase">
 	<Entity  source="heal_py.mesh"/> 
-	<Soundobject objectname="sound" />
-	
-	<Action name="drop">
-		<Sound objectname="sound" name="drop_potion"/>
-	</Action>
 </RenderInfo>
 
-<RenderInfo name="antiFreeze">
+<RenderInfo name="antiFreeze" parent="potionBase">
 	<Entity  source="heal_fr.mesh"/> 
-	<Soundobject objectname="sound" />
-	
-	<Action name="drop">
-		<Sound objectname="sound" name="drop_potion"/>
-	</Action>
 </RenderInfo>
 
-<RenderInfo name="antiPoison">
+<RenderInfo name="antiPoison" parent="potionBase">
 	<Entity  source="heal_ps.mesh"/> 
-	<Soundobject objectname="sound" />
-	
-	<Action name="drop">
-		<Sound objectname="sound" name="drop_potion"/>
-	</Action>
 </RenderInfo>

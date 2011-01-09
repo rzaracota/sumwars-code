@@ -20,6 +20,11 @@
 	<Soundfile source="inventory_sound_effects/metal_clash.wav"/>
 </Sound>
 
+<Sound name="drop_metal_armor">
+	<Soundfile source="inventory_sound_effects/leather_inventory.wav"/>
+</Sound>
+
+
 <Sound name="drop_ring">
 	<Soundfile source="inventory_sound_effects/ring_inventory.wav"/>
 </Sound>

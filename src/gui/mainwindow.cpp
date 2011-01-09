@@ -461,8 +461,12 @@ void MainWindow::update(float time)
 			if (wflags & Document::TRADE)
 			{
 				static_cast<TradeWindow*>(m_sub_windows["Trade"])->reset();
-				m_sub_windows["Trade"]->update();
 				trade->setVisible(true);
+				
+				// make one silent update to avoid that new inventory items play sounds
+				static_cast<ItemWindow*>(m_sub_windows["Trade"])->setSilent(true);
+				m_sub_windows["Trade"]->update();
+				static_cast<ItemWindow*>(m_sub_windows["Trade"])->setSilent(false);
 			}
 			else
 			{
