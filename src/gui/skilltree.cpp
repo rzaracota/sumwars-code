@@ -241,12 +241,21 @@ void SkillTree::update()
 						{
 							label->setProperty("Image", "set:TaharezLook image:SkilltreeVertConnection"); 
 						}
-						else
+						else if (deppos.m_x <= spos.m_x)
 						{
 							label->setProperty("Image", "set:TaharezLook image:SkilltreeDiagConnection"); 
 						}
-						
+						else
+						{
+							label->setProperty("Image", "set:TaharezLook image:SkilltreeDiag2Connection");
+							start= CEGUI::UVector2(cegui_reldim(spos.m_x+0.07f), cegui_reldim( deppos.m_y+0.1f));
+							end= CEGUI::UVector2(cegui_reldim(deppos.m_x+0.06f), cegui_reldim( spos.m_y));
+							label->setPosition(start);
+							label->setSize(end - start);
+						}
 						m_nr_dependencies++;
+						
+						DEBUGX("dependency %s from %s", it->second.m_type.c_str(), at->c_str());
 					}
 				}
 			}

@@ -243,4 +243,5 @@
 	<Image Name="WaypointMark" XPos="110" YPos="42" Width="12" Height="12" />
 	<Image Name="SkilltreeVertConnection" XPos="94" YPos="162" Width="3" Height="41" />
 	<Image Name="SkilltreeDiagConnection" XPos="103" YPos="163" Width="38" Height="38" />
+	<Image Name="SkilltreeDiag2Connection" XPos="103" YPos="204" Width="38" Height="38" />
 </Imageset>
