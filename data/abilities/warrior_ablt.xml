@@ -402,7 +402,7 @@
 
 <Ability type="warcry"
 		 name="Warcry" 
-		 description="The battle hardened warriors scream leaves his enemies defence wide open, sometimes confusing them as well." time="501.000000" 
+		 description="The battle hardened warriors scream slows down his opponents, sometimes confusing them as well." time="501.000000" 
 		 timer_nr="2.000000" 
 		 timer_value="30000.000000" 
 		 base_ability="noaction"

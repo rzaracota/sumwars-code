@@ -411,7 +411,7 @@
 
 <Ability type="ionisation"
 		 name="Ionisation"
-		 description="The mage has become one with the storm, leading to 20 percent extra damage from his lightning spells." time="0.000000"
+		 description="The mage has become one with the storm and can cast lightning spells 25% faster." time="0.000000"
 		 timer_nr="0.000000"
 		 timer_value="0.000000"
 		 base_ability="noaction"
