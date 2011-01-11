@@ -14,18 +14,19 @@
 
 
 <RenderInfo name="bronze_rng" parent= "ringBase">
-	<Entity source="bronze_rng.mesh"/>
+	<Entity source="bronze_rng.mesh" scale = "2.5"/>
+	<!--<ParticleSystem objectname="particle" source="Magic_Arrow2" position="0 0 0"/>-->
 </RenderInfo>
 
 <RenderInfo name="silver_rng" parent= "ringBase">
-	<Entity source="silver_rng.mesh"/>
+	<Entity source="silver_rng.mesh" scale = "2.5"/>
 </RenderInfo>
 
 <RenderInfo name="gold_rng" parent= "ringBase">
-	<Entity source="gold_rng.mesh"/>
+	<Entity source="gold_rng.mesh" scale = "2.5"/>
 </RenderInfo>
 
 
 <RenderInfo name="feath_aml" parent= "amuletBase">
-	<Entity source="feath_aml.mesh"/>
+	<Entity source="feath_aml.mesh" scale = "2.5"/>
 </RenderInfo>
