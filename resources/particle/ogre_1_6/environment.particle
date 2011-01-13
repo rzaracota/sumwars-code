@@ -122,6 +122,30 @@ particle_system Bomb
 
 }
 
+//Items
+particle_system ItemFlare
+{
+    material Flare
+    particle_width 0.2
+    particle_height 0.2
+    cull_each false
+    quota 5
+    billboard_type point
+ 
+
+   emitter Point
+{
+        angle 15
+        emission_rate 5
+        time_to_live 1
+        direction 0 1 0
+        velocity_min 0.3
+        velocity_max 1.4
+        colour_range_start 0.6 0.6 0.4
+        colour_range_end 0.6 0.3 0.3
+}
+}
+
 
 //Outdoors
 particle_system CampFire
