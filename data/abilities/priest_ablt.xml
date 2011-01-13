@@ -26,7 +26,7 @@
 
 <Ability type="blade_storm"
 		 name="Bladestorm"
-		 description="The priest strengthens the weaponarms of his comrades, leading to increased attackspeed for everyone. With increasing willpower the priest can hold this effect longer."
+		 description="The priest strengthens the weaponarms of his comrades, leading to increased attackspeed for everyone."
 		 time="1001.000000"
 		 timer_nr="3.000000"
 		 timer_value="240000.000000"
@@ -49,7 +49,7 @@
 
 <Ability type="blazing_shield"
 		 name="Blazing Shield"
-		 description="The party is surrounded by holy energy. Everyones defense is increased. With increasing willpower the priest can hold this effect longer."
+		 description="The party is surrounded by holy energy. Everyones defense is increased. With increasing willpower the effect improves."
 		 time="1001.000000"
 		 timer_nr="3.000000"
 		 timer_value="240000.000000"
@@ -216,7 +216,7 @@
 
 <Ability type="cure_conf_bsrk_party"
 		 name="Spirit Shield"
-		 description="The priest grants immunity to berserk and confuse to all his partymembers for a small amount of time. With increasing willpower the priest can hold this effect longer."
+		 description="The priest grants immunity to berserk and confuse to all his partymembers for a small amount of time."
 		 time="501.000000"
 		 timer_nr="2.000000"
 		 timer_value="6000.000000"
@@ -259,7 +259,7 @@
 
 <Ability type="cure_pois_burn_party"
 		 name="Remedial Water"
-		 description="The priests grants every partymember immunity to poison and burn for a small amount of time while healing these effects. With increasing willpower the priest can hold this effect longer."
+		 description="The priests grants every partymember immunity to poison and burn for a small amount of time while healing these effects."
 		 time="501.000000"
 		 timer_nr="2.000000"
 		 timer_value="6000.000000"
@@ -520,7 +520,7 @@
 
 <Ability type="keen_mind"
 		 name="Keen Mind"
-		 description="The priest increases everyones spellpower for a short time. Everyones spells will surely be more effective. With increasing willpower the priest can hold this effect longer."
+		 description="The priest increases everyones spellpower for a short time making spells more effective. The effect becomes stronger with increasing willpower of the priest."
 		 time="701.000000"
 		 timer_nr="3.000000"
 		 timer_value="280000.000000"
@@ -569,7 +569,7 @@
 
 <Ability type="divine_will"
 		 name="Divine Will"
-		 description="The priests protecting influence raises the willpower of all partymembers temporarily. With increasing willpower the priest can hold this effect longer."
+		 description="The priests protecting influence raises the willpower of all partymembers temporarily. The effect becomes stronger with increasing willpower of the priest."
 		 time="1001.000000"
 		 timer_nr="2.000000"
 		 timer_value="300000.000000" 
@@ -591,8 +591,8 @@
 </Ability>
 
 <Ability type="dmgreduce_undead" 
-		 name="Reduce damage from undead"
-		 description="Reduces damage from undead by one third." 
+		 name="Holy Shield"
+		 description="The priest is surrounded by a shimmering light that repells undead attacks. Damage from undead beings is reduced by one third." 
 		 time="0.000000" 
 		 timer_nr="0.000000" 
 		 timer_value="0.000000" 
@@ -601,8 +601,8 @@
 		 target_type="passive" />
 		 
 <Ability type="dmgreduce_demon" 
-		 name="Reduce damage from demons"
-		 description="Reduces damage from demons by one third." 
+		 name="Banishing Aura"
+		 description="The priests powers allow him to surround himself with an aura that immitates a banishment. While it holds no real power over demons, demonic beings will be frightened, thus leading to their damage being reduced by one third." 
 		 time="0.000000" 
 		 timer_nr="0.000000" 
 		 timer_value="0.000000" 
@@ -611,8 +611,8 @@
 		 target_type="passive" />
 		 
  <Ability type="dmgreduce_elemental" 
-		 name="Reduce damage from elemental"
-		 description="Reduces damage from elemental by one third." 
+		 name="Elemental Vortex"
+		 description="The priest can unconsciously create an elemental vortex that will drain one third of incoming damage from elemental beings." 
 		 time="0.000000" 
 		 timer_nr="0.000000" 
 		 timer_value="0.000000" 
