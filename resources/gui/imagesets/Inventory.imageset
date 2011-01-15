@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Imageset Name="Inventory" Imagefile="Inventory.png" NativeHorzRes="304" NativeVertRes="424" AutoScaled="true" >
+	<Image Name="InvBackground" XPos="0" YPos="0" Width="274" Height="424" />
+	<Image Name="InvMoneyPile" XPos="276" YPos="0" Width="29" Height="18" />
+</Imageset>

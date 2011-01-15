@@ -1998,6 +1998,7 @@ int EventSystem::createFloatingText(lua_State *L)
 	{
 		ERRORMSG("Syntax: createFloatingText(string text,Vector position, [string colour], [string size], [float time], [float offset] )");
 	}
+	return 0;
 }
 
 int EventSystem::addLocation(lua_State *L)

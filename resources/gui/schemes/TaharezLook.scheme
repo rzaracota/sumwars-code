@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
 <GUIScheme Name="TaharezLook">
+	<Imageset Name="Inventory" Filename="Inventory.imageset" />
 	<Imageset Name="TaharezLook" Filename="TaharezLook.imageset" />
 	<LookNFeel Filename="TaharezLook.looknfeel" />
 	<WindowRendererSet Filename="CEGUIFalagardWRBase" />
