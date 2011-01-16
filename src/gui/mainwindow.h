@@ -251,7 +251,11 @@ class MainWindow :
 	 */
 	void updateMusic();
 
-
+	/**
+	 * \brief Updates the sound system
+	 */
+	void updateSound();
+	
 	/**
 	 * \fn bool mouseMoved(const OIS::MouseEvent &evt)
 	 * \brief Behandelt Mausbewegung

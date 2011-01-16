@@ -83,6 +83,33 @@ struct FloatingText
 };
 
 /**
+ * \brief Structure for a sound played in the region
+ */
+struct PlayedSound
+{
+	/**
+	 * \brief Name of the sound
+	 */
+	std::string m_soundname;
+	
+	/**
+	 * \brief Position where the sound should be played
+	 */
+	Vector m_position;
+	
+	/**
+	 * \brief Volume of the sound
+	 */
+	float m_volume;
+	
+	/**
+	 * \brief if set to true, this sound will be played on all clients
+	 */
+	bool m_global;
+};
+
+
+/**
  * \enum ExitDirection
  * \brief Verschiedene Richtungen in denen man die Region verlassen kann
  */
@@ -1394,6 +1421,23 @@ class Region
 		void createFloatingText(TranslatableString text,  Vector position, FloatingText::Size size = FloatingText::NORMAL, std::string colour="FFFF5555", float time = 1000, float float_offset = 0.1);
 		
 		/**
+		 * \brief Plays a Sound in this regionloc
+		 * \param soundname Name of the sound
+		 * \param position Position where the Sound should be played
+		 * \param volume Volume of the sound
+		 * \param global if true, the sound will be played on all clients, too
+		 */
+		void playSound(std::string soundname, Vector position, float volume = 1.0, bool global= true);
+		
+		/** 
+		 * \brief Returns list of sounds played during current update
+		 */
+		const std::list<PlayedSound*>& getPlayedSounds()
+		{
+			return m_played_sounds;
+		}
+		
+		/**
 		 * \fn void setNamedId(std::string name, int id)
 		 * \brief Speichert Id unter einem bestimmten Name
 		 */
@@ -1587,6 +1631,11 @@ class Region
 		 * \brief floating text overlays
 		 */
 		std::map<int,FloatingText*> m_floating_texts;
+		
+		/**
+		 * \brief floating text overlays
+		 */
+		std::list<PlayedSound*> m_played_sounds;
 		
 		/**
 		 * \var RegionCamera m_camera

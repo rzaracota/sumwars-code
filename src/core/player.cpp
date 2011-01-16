@@ -706,6 +706,9 @@ bool Player::onItemClick(ClientCommand* command)
 			{
 				// Wirkung des Items
 				applyDynAttrMod(it->m_useup_effect);
+				
+				// play sound
+				getRegion()->playSound("use_potion", getShape()->m_center, 1.0, false);
 			}
 
 			// entfernen aus dem Inventar durch Tausch mit einem Nullpointer
@@ -1019,6 +1022,8 @@ void Player::increaseAttribute(CreatureBaseAttr::Attribute attr)
 			break;
 
 	}
+	
+	getRegion()->playSound("increase_attribute", getShape()->m_center, 1.0, false);
 
 	calcBaseAttrMod();
 	addToNetEventMask(NetEvent::DATA_SKILL_ATTR_POINTS | NetEvent::DATA_ATTRIBUTES_LEVEL );
@@ -1042,6 +1047,9 @@ void Player::gainLevel()
 	{
 		getDynAttr()->m_experience=0;
 	}
+
+	// play sound
+	getRegion()->playSound("levelup", getShape()->m_center, 1.0, false);
 
 	// maximale Erfahrungspunkte erhoehen
 	getBaseAttr()->m_max_experience += getBaseAttr()->m_level*100;
@@ -1184,6 +1192,9 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 			calcBaseAttrMod();
 
+			// play sound
+			getRegion()->playSound("swap_equip", getShape()->m_center, 1.0, false);
+			
 			if (World::getWorld()->isServer())
 			{
 				NetEvent event;
@@ -1218,6 +1229,9 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 					// Bit fuer die Faehigkeit setzen
 					getBaseAttr()->m_abilities[command->m_action].m_time=0;
+					
+					// play sound
+					getRegion()->playSound("select_skill", getShape()->m_center, 1.0, false);
 
 					DEBUGX("lerne Faehigkeit %s", command->m_action.c_str());
 
@@ -1589,6 +1603,9 @@ void Player::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 			// Item einfuegen
 			insertItem(itm,true);
+			
+			// play sound
+			getRegion()->playSound("collect_item", getShape()->m_center, 1.0, false);
 			DEBUGX("take item %p",itm);
 		}
 		else

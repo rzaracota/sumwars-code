@@ -378,6 +378,11 @@ Region::~Region()
 		delete it->second;
 	}
 	
+	for (std::list<PlayedSound*>::iterator it = m_played_sounds.begin(); it != m_played_sounds.end(); ++it)
+	{
+		delete *it;
+	}
+	
 	delete m_objects;
 	delete m_static_objects;
 	delete m_players;
@@ -1585,6 +1590,14 @@ void Region::update(float time)
 	WorldObject* object;
 	ProjectileMap::iterator it3;
 
+	// clear the list of sounds from the previous update
+	for (std::list<PlayedSound*>::iterator it = m_played_sounds.begin(); it != m_played_sounds.end(); ++it)
+	{
+		delete *it;
+	}
+	m_played_sounds.clear();
+	
+	
 	// Durchmustern aller WorldObjects
 	for (iter =m_objects->begin(); iter!=m_objects->end(); )
 	{
@@ -3012,6 +3025,17 @@ void Region::createFloatingText(TranslatableString text,  Vector position, Float
 		event.m_id = id;
 		insertNetEvent(event);
 	}
+}
+
+void Region::playSound(std::string soundname, Vector position, float volume , bool global)
+{
+	PlayedSound* sound = new PlayedSound;
+	sound->m_soundname = soundname;
+	sound->m_position = position;
+	sound->m_volume = volume;
+	sound->m_global = global;
+	
+	m_played_sounds.push_back(sound);
 }
 
 void Region::addMusicTrack(MusicTrack track)

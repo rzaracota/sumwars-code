@@ -1,4 +1,5 @@
 #include "inventory.h"
+#include "sound.h"
 
 Inventory::Inventory (Document* doc)
 	: ItemWindow(doc)
@@ -325,6 +326,10 @@ void Inventory::update()
 	if (label->getText()!=out_stream.str())
 	{
 		label->setText(out_stream.str());
+		if (!m_silent)
+		{
+			SoundSystem::playAmbientSound("sell_buy");
+		}
 	}
 	
 }

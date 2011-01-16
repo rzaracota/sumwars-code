@@ -3384,6 +3384,9 @@ bool Creature::takeDamage(Damage* d)
 			size =FloatingText::SMALL;
 		}
 		getRegion()->createFloatingText(TranslatableString("Miss"),getShape()->m_center,size);
+		// play sound
+		getRegion()->playSound("block", getShape()->m_center, 1.0, true);
+		
 		return true;
 	}
 

@@ -558,6 +558,7 @@ void MainWindow::update(float time)
 	}
 
 	// Musik aktualisieren
+	updateSound();
 	updateMusic();
 
 	// Objekte aus dem Dokument darstellen
@@ -2289,10 +2290,29 @@ void MainWindow::updateChatContent()
 	timer.start();
 }
 
+void MainWindow::updateSound()
+{
+	// play all region sounds from the last updated
+	Player* player = m_document->getLocalPlayer();
+	if (player != 0)
+	{
+		Region* reg = player->getRegion();
+		if (reg != 0)
+		{
+			const std::list<PlayedSound*> sounds = reg->getPlayedSounds();
+			for (std::list<PlayedSound*>::const_iterator it = sounds.begin(); it != sounds.end(); ++it)
+			{
+				SoundSystem::playAmbientSound((*it)->m_soundname, (*it)->m_volume, &((*it)->m_position));
+			}
+		}
+	}
+	
+	SoundSystem::update();
+}
+
 void MainWindow::updateMusic()
 {
-	SoundSystem::update();
-	
+
 	// laufende Musik nicht unterbrechen
 	if (MusicManager::instance().isPlaying())
 		return;
