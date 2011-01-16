@@ -164,7 +164,8 @@ Inventory::Inventory (Document* doc)
 	box->subscribeEvent(CEGUI::Editbox::EventTextAccepted, CEGUI::Event::Subscriber(&Inventory::onDropGoldClicked,  this));
 	
 	updateTranslation();
-	
+
+/*
 	CEGUI::AnimationManager *amgr = CEGUI::AnimationManager::getSingletonPtr();
 	CEGUI::Animation *anim = amgr->createAnimation("InventoryAnimation");
 	anim->setDuration(0.5f);
@@ -195,7 +196,7 @@ Inventory::Inventory (Document* doc)
     instance->start();
 
 	inventory->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&CEGUI::AnimationInstance::handleStart, instance));
-
+*/
 }
 
 void Inventory::update()
