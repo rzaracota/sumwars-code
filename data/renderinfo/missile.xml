@@ -30,22 +30,25 @@
 
 <RenderInfo name="ice_arrow"  parent="arrowbase" >
 	<Entity objectname="arrow" source="arrow.mesh" position="0 1.6 0" />
-	<ParticleSystem objectname="particle" source="Ice_Arrow" position="0 1.6 0" />
-	
+	<ParticleSystem objectname="particle" source="Ice_Arrow" position="0.65 1.6 0" />
+	<ParticleSystem objectname="trail" source="IceArrowTrail" position="0.65 1.6 0" />
 	<Action name="explode">
 		<Detach objectname="arrow" />
 		<Detach objectname="particle" />
+		<Detach objectname="trail" />
 		<ParticleSystem objectname="explosion" source="Ice_Explosion" position="0 1.6 0" />
 	</Action>
 </RenderInfo>
 
 <RenderInfo name="wind_arrow" parent="arrowbase">
 	<Entity objectname="arrow" source="arrow.mesh" position="0 1.6 0" />
-	<ParticleSystem objectname="particle"  source="Wind_Arrow" position="0 1.6 0" />
+	<ParticleSystem objectname="particle"  source="Wind_Arrow" position="0.65 1.6 0" />
+	<ParticleSystem objectname="trail" source="WindArrowTrail" position="0.65 1.6 0" />
 	
 	<Action name="explode">
 		<Detach objectname="arrow" />
 		<Detach objectname="particle" />
+		<Detach objectname="trail" />
 		<ParticleSystem objectname="explosion" source="Wind_Explosion" position="0 1.6 0" />
 	</Action>
 </RenderInfo>

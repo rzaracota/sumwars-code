@@ -330,6 +330,29 @@ particle_system BurningAxeRing
 
 }
 
+particle_system Snipe
+{
+    material        eye
+    particle_width  1
+    particle_height 1
+    cull_each       false
+    quota           1
+    billboard_type  point
+    
+    emitter Point
+{
+        angle           0
+        emission_rate   1500
+        time_to_live    0.0001
+        position    0.0 1.0 0.0
+        direction       0 1 0
+        velocity        0
+        colour_range_start    1 1 1
+        colour_range_end    1 1 1
+}
+}
+
+
 //the blindness imbued into a projectile
 particle_system BlindShot
 {

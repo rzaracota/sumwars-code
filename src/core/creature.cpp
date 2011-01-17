@@ -1041,7 +1041,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		// spezielle Implementationen
 		else if (*kt == "hammer_bash")
 		{
-			m_damage.m_multiplier[Damage::PHYSICAL]=1;
+			m_damage.m_multiplier[Damage::PHYSICAL] *= 0.5;
 			s.m_center = goal;
 			s.m_radius = 1.5;
 			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
@@ -1778,6 +1778,8 @@ void Creature::calcAction()
 					if (dir.getLength()!=0)
 					{
 						m_command.m_damage_mult = (m_command.m_damage_mult+2);
+						dir *= sqrt(m_command.m_damage_mult);
+						setSpeed(dir);
 					}
 					else
 					{

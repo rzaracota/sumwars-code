@@ -100,41 +100,16 @@
 	</Damage>
 </Ability>
 
-<Ability type="magic_shield"
-		 name="Magic Shield"
-		 description="The priest conjures a magic shield for all partymembers thats reduces the damage dealt by elemental attacks."
-		 time="1001.000000"
-		 timer_nr="3.000000"
-		 timer_value="280000.000000"
-		 base_ability="noaction"
-		 critical_percent="0.660000"
-		 target_type="party_all"
-		 radius="12">
-	<Flag name="mute_affected" />
-	<Effect>
-		<CppImplementation type="basemod_at_allies_in_radius" />
-	</Effect>
-	<BaseAttributesMod>
-		<LuaImplementation>
-			setBaseModValue("time",90000);
-			setBaseModValue("resist_ice",20);
-			setBaseModValue("resist_fire",20);
-			setBaseModValue("resist_air",20);
-			setBaseModValue("flag","magic_shield");
-		</LuaImplementation>
-	</BaseAttributesMod>
-</Ability>
-
 <Ability type="burning_sun"
 		 name="Glaring Sun"
-		 description="The priest calls forth a mighty explosion of light that can make every enemy in an area to be affected by blind."
+		 description="The priest calls forth a mighty explosion of light that can blind every enemy in an area."
 		 time="701.000000"
 		 timer_nr="1.000000"
-		 timer_value="7000.000000"
+		 timer_value="11000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
 		 target_type="ranged"
-		 radius="3">
+		 radius="5">
 	<Flag name="mute_affected" />
 	<Effect>
 		<CppImplementation type="proj_at_enemies_around_target" />
@@ -174,7 +149,7 @@
 
 <Ability type="cure_blind_mute_party"
 		 name="Omniscent Eye"
-		 description="The party will be immune to blind and mute for some time. With increasing willpower the priest can hold this effect longer."
+		 description="The party will be immune to blind and mute for some time. Those ailments will also be healed."
 		 time="501.000000"
 		 timer_nr="2.000000"
 		 timer_value="6000.000000" 
@@ -183,8 +158,15 @@
 		 target_type="party_all"
 		 radius="12">
 	<Effect>
+		<CppImplementation type="basemod_at_allies_in_radius" />
 		<CppImplementation type="dynmod_at_allies_in_radius" />
 	</Effect>
+	<BaseAttributesMod>
+		<LuaImplementation>
+			setBaseModValue("time",30000);
+			setBaseModValue("flag","omniscent_eye");
+		</LuaImplementation>
+	</BaseAttributesMod>
 	<DynAttributesMod>
 		<LuaImplementation>
 			setDynModValue("blind_immune_time",30000);
@@ -195,7 +177,7 @@
 
 <Ability type="cure_conf_bsrk"
 		 name="Restore Concentration"
-		 description="The priest heals one friend from confusion and berserk."
+		 description="The priest heals one friend from confusion and berserk. Those ailments will also be healed."
 		 time="501.000000"
 		 timer_nr="2.000000"
 		 timer_value="3000.000000"
@@ -216,7 +198,7 @@
 
 <Ability type="cure_conf_bsrk_party"
 		 name="Spirit Shield"
-		 description="The priest grants immunity to berserk and confuse to all his partymembers for a small amount of time."
+		 description="The priest grants immunity to berserk and confuse to all his partymembers for a small amount of time. Those ailments will also be healed."
 		 time="501.000000"
 		 timer_nr="2.000000"
 		 timer_value="6000.000000"
@@ -226,14 +208,49 @@
 		 radius="12">
 	<Flag name="mute_affected" />
 	<Effect>
+		<CppImplementation type="basemod_at_allies_in_radius" />
 		<CppImplementation type="dynmod_at_allies_in_radius" />
 	</Effect>
+	<BaseAttributesMod>
+		<LuaImplementation>
+			setBaseModValue("time",30000);
+			setBaseModValue("flag","spirit_shield");
+		</LuaImplementation>
+	</BaseAttributesMod>
 	<DynAttributesMod>
 		<LuaImplementation>
 			setDynModValue("confused_immune_time",30000);
 			setDynModValue("berserk_immune_time",30000);
 		</LuaImplementation>
 	</DynAttributesMod>
+</Ability>
+
+<Ability type="magic_shield"
+		 name="Magic Shield"
+		 description="The priest conjures a magic shield for all partymembers thats reduces the damage dealt by elemental attacks."
+		 time="1001.000000"
+		 timer_nr="3.000000"
+		 timer_value="280000.000000"
+		 base_ability="noaction"
+		 critical_percent="0.660000"
+		 target_type="party_all"
+		 radius="12">
+	<Flag name="mute_affected" />
+	<Effect>
+		<CppImplementation type="basemod_at_allies_in_radius" />
+	</Effect>
+	<BaseAttributesMod>
+		<LuaImplementation>
+			setBaseModValue("time",90000);
+			setBaseModValue("resist_ice",20);
+			setBaseModValue("resist_fire",20);
+			setBaseModValue("resist_air",20);
+			setBaseModValue("max_resist_ice",10);
+			setBaseModValue("max_resist_fire",10);
+			setBaseModValue("max_resist_air",10);
+			setBaseModValue("flag","magic_shield");
+		</LuaImplementation>
+	</BaseAttributesMod>
 </Ability>
 
 <Ability type="cure_pois_burn"
@@ -269,8 +286,15 @@
 		 radius="12">
 	<Flag name="mute_affected" />
 	<Effect>
+		<CppImplementation type="basemod_at_allies_in_radius" />
 		<CppImplementation type="dynmod_at_allies_in_radius" />
 	</Effect>
+	<BaseAttributesMod>
+		<LuaImplementation>
+			setBaseModValue("time",30000);
+			setBaseModValue("flag","remedial_water");
+		</LuaImplementation>
+	</BaseAttributesMod>
 	<DynAttributesMod>
 		<LuaImplementation>
 			setDynModValue("poisoned_immune_time",30000);
@@ -370,7 +394,7 @@
 		 description="The priest restores the hitpoints of one partymember."
 		 time="701.000000"
 		 timer_nr="2.000000"
-		 timer_value="20000.000000"
+		 timer_value="30000.000000"
 		 base_ability="noaction"
 		 critical_percent="0.660000"
 		 target_type="party">
@@ -390,7 +414,7 @@
 		 description="The priest restores hitpoints for every partymember."
 		 time="701.000000"
 		 timer_nr="2.000000"
-		 timer_value="30000.000000" 
+		 timer_value="60000.000000" 
 		 base_ability="noaction"
 		 critical_percent="0.660000"
 		 target_type="party_all"
@@ -571,7 +595,7 @@
 		 name="Divine Will"
 		 description="The priests protecting influence raises the willpower of all partymembers temporarily. The effect becomes stronger with increasing willpower of the priest."
 		 time="1001.000000"
-		 timer_nr="2.000000"
+		 timer_nr="3.000000"
 		 timer_value="300000.000000" 
 		 base_ability="noaction"
 		 critical_percent="0.660000"

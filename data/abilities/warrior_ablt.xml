@@ -23,7 +23,7 @@
 
 <Ability type="around_blow" 
 		 name="Sweeping blow" 
-		 description="Attacks every enemy in weapon range with slightly reduced damage." 
+		 description="Attacks every enemy in weapon range." 
 		 time="0.700000" 
 		 timer_nr="1.000000" 
 		 timer_value="3500.000000" 
@@ -68,7 +68,7 @@
 
 <Ability type="battle_cry"
 		 name="Battlecry" 
-		 description="The warrior releases a mighty cry that causes his enemies to lose concentration, ultimatly reducing their defence."
+		 description="The warrior releases a mighty cry that causes his enemies to lose concentration, ultimatly reducing their defence and slowing them down."
 		 time="501.000000"
 		 timer_nr="2.000000"
 		 timer_value="30000" 
@@ -102,11 +102,13 @@
 		 target_type="melee" >
 	<Effect>
 		<CppImplementation type="dmg_at_target" />
+		<CppImplementation type="hammer_bash" />
 	</Effect>
 	<Damage>
 		<CppImplementation type="attack" />
 		<CppImplementation type="weapon_damage" />
 		<CppImplementation type="charge" />
+
 	</Damage>
 </Ability>
 
@@ -184,6 +186,7 @@
 			setBaseModValue("time",100000);
 			setBaseModValue("max_resist_fire",25);
 			setBaseModValue("resist_fire",50);
+			setBaseModValue("flag","flame_armor");
 		</LuaImplementation>
 	</BaseAttributesMod>
 </Ability>
@@ -318,7 +321,7 @@
 
 <Ability type="scare" 
 		 name="Defiances" 
-		 description="Nearby monsters will attack the warrior, if they are able to. The warriors defence is increased."
+		 description="Nearby monsters will attack the warrior, if they are able to. Some will run away in fear. The warriors defence is increased. "
 		 time="501.000000" 
 		 timer_nr="2.000000" 
 		 timer_value="20000.000000" 
@@ -392,17 +395,19 @@
 		 target_type="melee" >
 	<Effect>
 		<CppImplementation type="dmg_at_target" />
+		<CppImplementation type="hammer_bash" />
 	</Effect>
 	<Damage>
 		<CppImplementation type="attack" />
 		<CppImplementation type="weapon_damage" />
 		<CppImplementation type="storm_charge" />
+
 	</Damage>
 </Ability>
 
 <Ability type="warcry"
 		 name="Warcry" 
-		 description="The battle hardened warriors scream slows down his opponents, sometimes confusing them as well." time="501.000000" 
+		 description="The battle hardened warrior's scream slows down his opponents, sometimes confusing them as well." time="501.000000" 
 		 timer_nr="2.000000" 
 		 timer_value="30000.000000" 
 		 base_ability="noaction"
@@ -436,7 +441,7 @@
 
 <Ability type="whirl_blow" 
 		 name="Whirl blow" 
-		 description="Attacks every enemy in weapon range." 
+		 description="Attacks every enemy in weapon range with a triple sweeping strike." 
 		 time="1.500000" 
 		 timer_nr="1.000000" 
 		 timer_value="6500.000000"

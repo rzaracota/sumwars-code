@@ -464,6 +464,7 @@
 			setBaseModValue("time",80000);
 			setBaseModValue("walk_speed",1500);
 			setBaseModValue("block",0.2*get(self,"dexterity"));
+			setBaseModValue("flag","wind_walk");
 		</LuaImplementation>
 	</BaseAttributesMod>
 </Ability>
