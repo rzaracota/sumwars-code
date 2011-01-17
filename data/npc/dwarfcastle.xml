@@ -163,8 +163,8 @@
 			mods_dwarfenwall[1] = {};
 			mods_dwarfenwall[1].answer_str = _("Armor")	-- string displayed in selection menu
 			mods_dwarfenwall[1].itempos = "armor"		-- position of the item
-			mods_dwarfenwall[1].allowed_mods = {"max_health","armor","willpower"}
-			mods_dwarfenwall[1].mod_answers = {_("Health Bonus"),_("Armor class"),_("Willpower")}
+			mods_dwarfenwall[1].allowed_mods = {"max_health","armor","magic_power","willpower"}
+			mods_dwarfenwall[1].mod_answers = {_("Health Bonus"),_("Armor class"),_("Magic power"),_("Willpower")}
 			
 			mods_dwarfenwall[2] = {};
 			mods_dwarfenwall[2].answer_str = _("Weapon")	-- string displayed in selection menu
@@ -173,17 +173,21 @@
 				mods_dwarfenwall[2].allowed_mods = {"attack_speed", "attack", "power","fire_dmg", "ice_dmg", "air_dmg"}
 				mods_dwarfenwall[2].mod_answers = {_("Attack speed"), _("Attack"), _("Power"), _("Fire damage"), _("Ice damage"), _("Air damage")}
 			else
-				mods_dwarfenwall[2].allowed_mods = {"attack_speed", "attack", "power"}
-				mods_dwarfenwall[2].mod_answers = {_("Attack speed"), _("Attack"), _("Power")}
+				mods_dwarfenwall[2].allowed_mods = {"attack_speed", "attack", "power","fire_dmg"}
+				mods_dwarfenwall[2].mod_answers = {_("Attack speed"), _("Attack"), _("Power"), _("Fire damage")}
 			end;
 			
+			mods_dwarfenwall[3] = {}
+			mods_dwarfenwall[3].answer_str = _("Gloves")
+			mods_dwarfenwall[3].itempos = "glove"		-- position of the item
 			if(defend_dwall.outcome=="godlike")then
-				mods_dwarfenwall[3] = {}
-				mods_dwarfenwall[3].answer_str = _("Gloves")
-				mods_dwarfenwall[3].itempos = "glove"		-- position of the item
-				mods_dwarfenwall[3].allowed_mods = {"dexterity", "armor", "block"}
-				mods_dwarfenwall[3].mod_answers = {_("Dexterity"), _("Armor"), _("Block")}
+				mods_dwarfenwall[3].allowed_mods = {"dexterity", "strength", "armor", "block"}
+				mods_dwarfenwall[3].mod_answers = {_("Dexterity"), _("Strength"), _("Armor"), _("Block")}
+			else
+				mods_dwarfenwall[3].allowed_mods = {"dexterity", "strength"}
+				mods_dwarfenwall[3].mod_answers = {_("Dexterity"), _("Strength")}
 			end
+			
 			
 			-- create item Selection
 			addQuestion(_("Which part of your equipment should be enchanted?"))
