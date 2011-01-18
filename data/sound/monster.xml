@@ -1,3 +1,20 @@
+<Sound name="goblin_attack">
+	<Soundfile source="monster_sound_effects/goblin_att_1.wav"/>
+	<Soundfile source="monster_sound_effects/goblin_att_2.wav"/>
+	<Soundfile source="monster_sound_effects/goblin_att_3.wav"/>
+	<Soundfile source="monster_sound_effects/goblin_att_4.wav"/>
+</Sound>
+
+<Sound name="goblin_hit">
+	<Soundfile source="monster_sound_effects/goblin_hit_1.wav"/>
+	<Soundfile source="monster_sound_effects/goblin_hit_2.wav"/>
+	<Soundfile source="monster_sound_effects/goblin_hit_3.wav"/>
+</Sound>
+
+<Sound name="goblin_die">
+	<Soundfile source="monster_sound_effects/goblin_die_1.wav"/>
+	<Soundfile source="monster_sound_effects/goblin_die_2.wav"/>
+</Sound>
 
 <Sound name="worm_die">
 	<Soundfile source="monster_sound_effects/hiss.wav"/>

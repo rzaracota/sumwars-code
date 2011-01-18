@@ -5,6 +5,18 @@
 	<Soundfile source="battle_sound_effects/swish_8.wav"/>
 </Sound>
 
+<Sound name="heavy_sword_attack">
+	<Soundfile source="battle_sound_effects/swish_11.wav"/>
+	<Soundfile source="battle_sound_effects/swish_12.wav"/>
+	<Soundfile source="battle_sound_effects/swish_13.wav"/>
+</Sound>
+
+<Sound name="light_sword_attack">
+	<Soundfile source="battle_sound_effects/swish_14.wav"/>
+	<Soundfile source="battle_sound_effects/swish_15.wav"/>
+	<Soundfile source="battle_sound_effects/swish_16.wav"/>
+</Sound>
+
 <Sound name="arrow">
 	<Soundfile source="battle_sound_effects/swish_2.wav"/>
 </Sound>

@@ -1,7 +1,13 @@
 
 <RenderInfo name="goblinbase" parent="creaturebase">
+	<Soundobject objectname="sound" />
+	
 	<Action name="walk">
 		<Animation name="walk" />
+	</Action>
+	
+	<Action name="attack">
+		<Sound objectname="sound" name="goblin_attack"/>
 	</Action>
 	
 	<Action name="attack">
@@ -19,6 +25,7 @@
 	
 	<Action name="die">
 		<Animation name="die" />
+		<Sound objectname="sound" name="goblin_die"/>
 	</Action>
 	
 	<Action name="noaction">
@@ -55,7 +62,7 @@
 	
 	<State name="bleed">
 		<Active>
-		  <!-- <Sound objectname="general" name="some_hit_sound"/> -->
+			<Sound objectname="sound" name="goblin_hit"/>
 		</Active>
 	</State>
 </RenderInfo>

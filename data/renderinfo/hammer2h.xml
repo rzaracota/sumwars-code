@@ -1,5 +1,10 @@
 ﻿<RenderInfo name="twoHandHammerBase" parent="hammerBase">
-
+	<Soundobject objectname="sound" />
+	
+	<Action name="attack">
+		<Sound objectname="sound" name="heavy_sword_attack"/>
+	</Action>
+	
 	<State name="firesword">
 		<Activation>
 		<ParticleSystem objectname="firesword1" source="BurningAxeRing" position= "0 0 -1.3"/>
