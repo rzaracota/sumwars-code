@@ -2240,8 +2240,8 @@
 				
 				speak("greif",_("It is over."),"injured2");
 				speak("darna",_("And thanks to the councils backing the city is still standing."),"amused");
-				--TODO ernstzunehmende Werte eintragen
-				if(500 > defend_dwall_tmp.penalty)then
+
+				if(350 > defend_dwall_tmp.penalty)then
 					speak("greif",_("I have to admit, I wouldn't have thought in my wildest dreams that someone could fight like that."),"thoughtful");
 					if(solo() and maleOnly())then
 						speak("greif", _("It is good that he is on our side at the moment."),"happy");
@@ -2252,7 +2252,7 @@
 					end;
 					
 					speak("arcopt",_("If both sides have souls to offer, you take the one paying, of course."),"grin");
-					speak("greif","","unhappy");
+					speak("greif","","unhappy",1000);
 					speak("greif",_("Thank you for reminding me, why I cannot stand your kind."),"unhappy");
 					speak("arcopt",_("There is no big difference to normal mercenaries."),"amused");
 					speak("arcopt",_("Maybe aside from the fact, that Branded Ones don't change sides in the middle."),"sneer");
@@ -2260,7 +2260,10 @@
 					speak("darna",_("It wouldn't be wise to hit the soldiers over the head who their saviours were."),"aloof");
 					
 					defend_dwall.outcome="godlike";
-				elseif(1500 > defend_dwall_tmp.penalty)then
+				elseif(450 > defend_dwall_tmp.penalty)then
+					speak("greif",_("I've never seen anyone who could fight like this."),"thoughtful");
+					defend_dwall.outcome="good";
+				elseif(600 > defend_dwall_tmp.penalty)then
 					speak("greif",_("Indeed."),"unhappy");
 					if(solo() and maleOnly())then
 						speak("greif",_("Without your 'friend' this would look different."),"unhappy");
@@ -2271,7 +2274,7 @@
 					end;
 					
 					defend_dwall.outcome="average";
-				elseif(2500 > defend_dwall_tmp.penalty)then
+				elseif(800 > defend_dwall_tmp.penalty)then
 					speak("greif",_("At least more effective than one could have expected from a band of mercenaries."),"injured2");
 					speak("greif",_("But we have quite some losses."),"unhappy");
 					speak("greif",_("I hope they will not plan a new raid soon."),"unhappy");
