@@ -96,7 +96,7 @@
 		 description="Launches an assault at an enemy with increasing speed. The faster the warrior is, the more damage a charge inflicts." 
 		 time="0.500000" 
 		 timer_nr="1.000000" 
-		 timer_value="6000.000000" 
+		 timer_value="5000.000000" 
 		 base_ability="attack"
 		 critical_percent="0.660000" 
 		 target_type="melee" >
@@ -108,7 +108,9 @@
 		<CppImplementation type="attack" />
 		<CppImplementation type="weapon_damage" />
 		<CppImplementation type="charge" />
-
+		<LuaImplementation>
+			setDamageValue("phys_mult", getDamageValue("phys_mult")*2);
+		</LuaImplementation>	
 	</Damage>
 </Ability>
 
@@ -389,7 +391,7 @@
 		 description="Launches an even stronger charge attack, that may inflict stun." 
 		 time="0.500000" 
 		 timer_nr="1.000000" 
-		 timer_value="6000.000000" 
+		 timer_value="5000.000000" 
 		 base_ability="attack" 
 		 critical_percent="0.660000" 
 		 target_type="melee" >
@@ -401,7 +403,9 @@
 		<CppImplementation type="attack" />
 		<CppImplementation type="weapon_damage" />
 		<CppImplementation type="storm_charge" />
-
+		<LuaImplementation>
+			setDamageValue("phys_mult", getDamageValue("phys_mult")*2);
+		</LuaImplementation>	
 	</Damage>
 </Ability>
 

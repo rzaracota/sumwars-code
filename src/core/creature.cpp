@@ -1702,11 +1702,53 @@ void Creature::calcAction()
 	}
 
 
-	// Stuermen ohne Zielobjekt hat keinen Zielradius
-	if ((m_command.m_type == "charge" || m_command.m_type == "storm_charge") &&  m_command.m_goal_object_id==0)
+	// Stuermen, naechstes Kollisionsobjekt als Ziel nehmen
+	if ((m_command.m_type == "charge" || m_command.m_type == "storm_charge") &&  
+		(m_action.m_goal_object_id == 0 || dist > range))
 	{
-		range=0;
-		dist =1;
+		// calculate position where the next walk command will land
+		Vector dir = goal-pos;
+		dir.normalize();
+		dir *= range;
+		
+		// Shape where the creature will land
+		// and line to this point
+		Shape s = *getShape();
+		s.m_center = pos + dir;
+		Line line(pos,s.m_center);
+		
+		// captures (most of) the creatures that will be hit during the walk
+		WorldObjectList hitobj;
+		WorldObjectList::iterator i;
+		getRegion()->getObjectsInShape(&s,&hitobj,getLayer(), WorldObject::CREATURE,this);
+		getRegion()->getObjectsOnLine(line,&hitobj,getLayer(),WorldObject::CREATURE,this);
+		
+		// Remove all that are not hostile
+		WorldObject* hit;
+		i = hitobj.begin();
+		hit = (*i);
+		while (!hitobj.empty() && (World::getWorld()->getRelation(getFraction(),hit->getFraction()) != Fraction::HOSTILE))
+		{
+			i=hitobj.erase(i);
+			if (i!=hitobj.end())
+				hit=(*i);
+		}
+		
+		// hit an object, set it as new target
+		if (!hitobj.empty())
+		{
+			i = hitobj.begin();
+			hit = (*i);
+			DEBUGX("hit object %i %s", hit->getId(), hit->getName().getTranslation().c_str());
+			
+			m_action.m_goal_object_id = hit->getId();
+			dist =pos.distanceTo(hit->getShape()->m_center);
+		}
+		else
+		{
+			range=0;
+			dist = 1;
+		}
 	}
 
 
@@ -1746,7 +1788,7 @@ void Creature::calcAction()
 
 				// beim ersten Mal richtung neu ausrechnen, das ist der Fall wenn der Schadensmultiplikator gleich 1 ist
 				// sonst nur beschleunigen
-				if (m_command.m_damage_mult>1)
+				if (m_command.m_damage_mult>2)
 				{
 					// Richtung nicht neu ausrechnen, beschleunigen
 					m_command.m_damage_mult += 2;
@@ -1756,9 +1798,9 @@ void Creature::calcAction()
 					speed.normalize();
 
 					if (m_command.m_type == "charge")
-						m_command.m_damage_mult *= 0.85;
+						m_command.m_damage_mult *= 0.7;
 					else
-						m_command.m_damage_mult *= 0.93;
+						m_command.m_damage_mult *= 0.8;
 
 					// Schaden neu berechnen
 					recalcDamage();
