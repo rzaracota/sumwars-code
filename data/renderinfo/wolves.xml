@@ -9,6 +9,7 @@
 
 	<Action name="die">
 		<Animation name="die" />
+		<Sound objectname="general" name="wolf_die"/>
 	</Action>
 	
 	<Action name="noaction">

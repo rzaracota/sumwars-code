@@ -46,10 +46,12 @@
 	
 	<Action name="attack">
 		<Animation name="zombieAttack1" />
+		<Sound objectname="general" name="zombie_attack"/>
 	</Action>
 
 	<Action name="die">
 		<Animation name="die" />
+		<Sound objectname="general" name="zombie_die"/>
 	</Action>
 	
 	<Action name="noaction">
@@ -58,7 +60,7 @@
 	
 	<State name="bleed">
 		<Active>
-		  <!-- <Sound objectname="general" name="some_hit_sound"/> -->
+			<Sound objectname="general" name="zombie_hit"/>
 		</Active>
 	</State>
 </RenderInfo>

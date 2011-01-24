@@ -1,33 +1,38 @@
 <RenderInfo name="spiderbase" parent="creaturebase">
-	<Soundobject objectname="sound" />
 	<Action name="walk">
 		<Animation name="walk" />
 	</Action>
 	
 	<Action name="attack">
 		<Animation name="attack1" />
+		<Sound objectname="general" name="spider_attack"/>
 	</Action>
 	<Action name="attack">
 		<Animation name="attack2" />
+		<Sound objectname="general" name="spider_attack"/>
 	</Action>
 	
 	<Action name="stun_attack">
 		<Animation name="attack1" />
+		<Sound objectname="general" name="spider_attack"/>
 	</Action>
 	<Action name="stun_attack">
 		<Animation name="attack2" />
+		<Sound objectname="general" name="spider_attack"/>
 	</Action>
 
 	<Action name="poison_attack">
 		<Animation name="attack1" />
+		<Sound objectname="general" name="spider_attack"/>
 	</Action>
 	<Action name="poison_attack">
 		<Animation name="attack2" />
+		<Sound objectname="general" name="spider_attack"/>
 	</Action>
 
 	<Action name="die">
 		<Animation name="die" />
-		<Sound objectname="sound" name="worm_die"/>
+		<Sound objectname="general" name="slug_die"/>
 	</Action>
 	
 	<Action name="noaction">

@@ -29,8 +29,6 @@
 </RenderInfo>
 
 <RenderInfo name="slugbase" parent="creaturebase">
-	<Soundobject objectname="sound" />
-
 	<Action name="walk">
 		<Animation name="walk" />
 	</Action>
@@ -39,11 +37,12 @@
 		<Animation name="attack" />
 		<ParticleSystem time = "0.3" objectname="spit" bone="mainmesh:crown" source="SlugSpit" position="0.0 -0.1 -0.07" />
 		<Detach time="0.9" objectname="spit" />
+		<Sound objectname="general" name="slug_attack"/>
 	</Action>
 
 	<Action name="die">
 		<Animation name="die" />
-		<Sound objectname="sound" name="worm_die"/>
+		<Sound objectname="general" name="slug_die"/>
 	</Action>
 	
 	<Action name="noaction">
@@ -61,17 +60,17 @@
 </RenderInfo>
 
 <RenderInfo name="lousebase" parent="creaturebase">
-	<Soundobject objectname="sound" />
 	<Action name="walk">
 		<Animation name="walk" />
 	</Action>
 	
 	<Action name="attack">
 		<Animation name="attack" />
+		<Sound objectname="general" name="slug_attack"/>
 	</Action>
 
 	<Action name="die">
-		<Sound objectname="sound" name="worm_die"/>
+		<Sound objectname="general" name="slug_die"/>
 		<Animation name="die" />
 	</Action>
 	
