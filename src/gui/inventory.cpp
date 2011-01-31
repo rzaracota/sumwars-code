@@ -8,18 +8,35 @@ Inventory::Inventory (Document* doc)
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
-	CEGUI::FrameWindow* inventory = (CEGUI::FrameWindow*)win_mgr.loadWindowLayout( "inventory.layout" );
+	// Rahmen fuer Inventar Fenster
+	CEGUI::FrameWindow* inventory = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "Inventory");
 	m_window = inventory;
-	inventory->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
-	inventory->setWantsMultiClickEvents(false);
+	
 	inventory->setPosition(CEGUI::UVector2(cegui_reldim(0.52f), cegui_reldim( 0.0f)));
 	inventory->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.85f)));
-
+	inventory->setProperty("FrameEnabled","false");
+	inventory->setProperty("TitlebarEnabled","false");
+	inventory->setProperty("CloseButtonEnabled","false");
+	inventory->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
+	inventory->setWantsMultiClickEvents(false);
+	inventory->setAlpha(0.7);
 
 	// Bestandteile des Charakterfensters hinzufuegen
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
 	
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "CharacterImage");
+	inventory->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.02)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.4f)));
+	label->setProperty("Image", "set:character image:character_img"); 
+	label->setInheritsAlpha (false);
+	label->setID(Equipement::NONE);
+	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
+	//label->setAlpha(1.0);
+
 	int i,j;
 
 	// Label fuer grosse Items
@@ -28,7 +45,12 @@ Inventory::Inventory (Document* doc)
 	{
 		outStream.str("");
 		outStream << "BigItem" << i<< "Label";
-		label = win_mgr.getWindow(outStream.str());
+		label = win_mgr.createWindow("TaharezLook/StaticImage", outStream.str());
+		inventory->addChildWindow(label);
+		label->setProperty("FrameEnabled", "true");
+		label->setProperty("BackgroundEnabled", "true");
+		label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f+i*0.18f), cegui_reldim( 0.47f)));
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.09f)));
 		label->setID(Equipement::BIG_ITEMS+i);
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -43,7 +65,12 @@ Inventory::Inventory (Document* doc)
 		{
 			outStream.str("");
 			outStream << "MediumItem" << j*7+i<< "Label";
-			label = win_mgr.getWindow(outStream.str());
+			label = win_mgr.createWindow("TaharezLook/StaticImage", outStream.str());
+			inventory->addChildWindow(label);
+			label->setProperty("FrameEnabled", "true");
+			label->setProperty("BackgroundEnabled", "true");
+			label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f+i*0.13f), cegui_reldim( 0.58f+0.085*j)));
+			label->setSize(CEGUI::UVector2(cegui_reldim(0.115f), cegui_reldim( 0.075f)));
 			label->setID(Equipement::MEDIUM_ITEMS+j*7+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -58,7 +85,12 @@ Inventory::Inventory (Document* doc)
 		{
 			outStream.str("");
 			outStream << "SmallItem" << j*10+i<< "Label";
-			label = win_mgr.getWindow(outStream.str());
+			label = win_mgr.createWindow("TaharezLook/StaticImage", outStream.str());
+			inventory->addChildWindow(label);
+			label->setProperty("FrameEnabled", "true");
+			label->setProperty("BackgroundEnabled", "true");
+			label->setPosition(CEGUI::UVector2(cegui_reldim(0.02f+i*0.096f), cegui_reldim( 0.75f+0.065*j)));
+			label->setSize(CEGUI::UVector2(cegui_reldim(0.086f), cegui_reldim( 0.056f)));
 			label->setID(Equipement::SMALL_ITEMS+j*10+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -85,7 +117,12 @@ Inventory::Inventory (Document* doc)
 	}
 
 	// Label Ruestung
-	label = win_mgr.getWindow("ArmorItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "ArmorItemLabel");
+	inventory->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.35f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
 	label->setID(Equipement::ARMOR);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -94,7 +131,12 @@ Inventory::Inventory (Document* doc)
 
 
 	// Label Waffe
-	label = win_mgr.getWindow("WeaponItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "WeaponItemLabel");
+	inventory->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.14f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
 	label->setID(Equipement::WEAPON);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -102,7 +144,12 @@ Inventory::Inventory (Document* doc)
 	label->setWantsMultiClickEvents(false);
 	
 	// Label Helm
-	label = win_mgr.getWindow("HelmetItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "HelmetItemLabel");
+	inventory->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.07f)));
 	label->setID(Equipement::HELMET);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -110,7 +157,12 @@ Inventory::Inventory (Document* doc)
 	label->setWantsMultiClickEvents(false);
 	
 	// Label Schild
-	label = win_mgr.getWindow("ShieldItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "ShieldItemLabel");
+	inventory->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.14f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
 	label->setID(Equipement::SHIELD);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -118,7 +170,12 @@ Inventory::Inventory (Document* doc)
 	label->setWantsMultiClickEvents(false);
 	
 	// Label Handschuhe
-	label = win_mgr.getWindow("GlovesItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "GlovesItemLabel");
+	inventory->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.83f), cegui_reldim( 0.35f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.07f)));
 	label->setID(Equipement::GLOVES);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
@@ -126,7 +183,12 @@ Inventory::Inventory (Document* doc)
 	label->setWantsMultiClickEvents(false);
 	
 	// Ring links
-	label = win_mgr.getWindow("RingLeftItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "RingLeftItemLabel");
+	inventory->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.85f), cegui_reldim( 0.26f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.086f), cegui_reldim( 0.06f)));
 	label->setID(Equipement::RING_LEFT);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
@@ -134,7 +196,12 @@ Inventory::Inventory (Document* doc)
 	label->setWantsMultiClickEvents(false);
 	
 	// Ring rechts
-	label = win_mgr.getWindow("RingRightItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "RingRightItemLabel");
+	inventory->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.26f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.086f), cegui_reldim( 0.06f)));
 	label->setID(Equipement::RING_RIGHT);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
@@ -142,7 +209,12 @@ Inventory::Inventory (Document* doc)
 	label->setWantsMultiClickEvents(false);
 	
 	// Amulett
-	label = win_mgr.getWindow("AmuletItemLabel");
+	label = win_mgr.createWindow("TaharezLook/StaticImage", "AmuletItemLabel");
+	inventory->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.85f), cegui_reldim( 0.06f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.086f), cegui_reldim( 0.06f)));
 	label->setID(Equipement::AMULET);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
@@ -150,19 +222,47 @@ Inventory::Inventory (Document* doc)
 	label->setWantsMultiClickEvents(false);
 	
 	// Button Ausruestung umschalten
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SwapEquipButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SwapEquipButton"));
+	inventory->addChildWindow(btn);
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.77f), cegui_reldim( 0.04f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 	btn->setText("1");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&Inventory::onSwapEquipClicked, this));
 
+	
+	// Label Gold
+	label = win_mgr.createWindow("TaharezLook/StaticText", "GoldLabel");
+	inventory->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.94f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.05f)));
+	
+	// Label Gold (Wert)
+	label = win_mgr.createWindow("TaharezLook/StaticText", "GoldValueLabel");
+	inventory->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.22f), cegui_reldim( 0.94f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.05f)));
+	label->setText("0");
+	
 	// Label drop Gold
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("GoldDropButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "GoldDropButton"));
+	inventory->addChildWindow(btn);
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.50f), cegui_reldim( 0.94f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.05f)));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked,CEGUI::Event::Subscriber(&Inventory::onDropGoldClicked, this));
 	
 	
 	// Label drop Gold (Wert)
 	CEGUI::Editbox* box;
-	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("GoldDropValueBox"));
+	box = static_cast<CEGUI::Editbox*>(win_mgr.createWindow("TaharezLook/Editbox", "GoldDropValueBox"));
+	inventory->addChildWindow(box);
+	box->setPosition(CEGUI::UVector2(cegui_reldim(0.67f), cegui_reldim( 0.94f)));
+	box->setSize(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.05f)));
 	box->subscribeEvent(CEGUI::Editbox::EventTextAccepted, CEGUI::Event::Subscriber(&Inventory::onDropGoldClicked,  this));
+	box->setText("0");
 	
 	updateTranslation();
 
@@ -338,6 +438,9 @@ void Inventory::updateTranslation()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
+	
+	label = win_mgr.getWindow("GoldLabel");
+	label->setText((CEGUI::utf8*) gettext("Gold"));
 	
 	label = win_mgr.getWindow("GoldDropButton");
 	label->setText((CEGUI::utf8*) gettext("Drop:"));
