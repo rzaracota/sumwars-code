@@ -1688,8 +1688,8 @@ int EventSystem::addItemMagicMods(lua_State *L)
 		magic_mods["block"] = ItemFactory::BLOCK_MOD;
 		magic_mods["strength"] = ItemFactory::STRENGTH_MOD;
 		magic_mods["dexterity"] = ItemFactory::DEXTERITY_MOD;
-		magic_mods["willpower"] = ItemFactory::MAGIC_POWER_MOD;
-		magic_mods["magic_power"] = ItemFactory::WILLPOWER_MOD;
+		magic_mods["willpower"] = ItemFactory::WILLPOWER_MOD;
+		magic_mods["magic_power"] = ItemFactory::MAGIC_MOD;
 		magic_mods["resist_phys"] = ItemFactory::RESIST_PHYS_MOD;
 		magic_mods["resist_fire"] = ItemFactory::RESIST_FIRE_MOD;
 		magic_mods["resist_ice"] = ItemFactory::RESIST_ICE_MOD;
@@ -1718,6 +1718,7 @@ int EventSystem::addItemMagicMods(lua_State *L)
 		if (magic_mods.count(modtype) == 0)
 		{
 			ERRORMSG("magic modifier type %s unknown",modtype.c_str());
+			return 0;
 		}
 		
 		if (m_item != 0)

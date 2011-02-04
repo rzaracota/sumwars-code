@@ -394,6 +394,10 @@ bool TradeWindow::onTradeNextItems(const CEGUI::EventArgs& evt)
 		m_small_sheet++;
 	}
 	
+	setSilent(true);
+	update();
+	setSilent(false);
+	
 	return true;
 }
 
