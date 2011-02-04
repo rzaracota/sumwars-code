@@ -1689,7 +1689,7 @@ int EventSystem::addItemMagicMods(lua_State *L)
 		magic_mods["strength"] = ItemFactory::STRENGTH_MOD;
 		magic_mods["dexterity"] = ItemFactory::DEXTERITY_MOD;
 		magic_mods["willpower"] = ItemFactory::WILLPOWER_MOD;
-		magic_mods["magic_power"] = ItemFactory::MAGIC_MOD;
+		magic_mods["magic_power"] = ItemFactory::MAGIC_POWER_MOD;
 		magic_mods["resist_phys"] = ItemFactory::RESIST_PHYS_MOD;
 		magic_mods["resist_fire"] = ItemFactory::RESIST_FIRE_MOD;
 		magic_mods["resist_ice"] = ItemFactory::RESIST_ICE_MOD;
