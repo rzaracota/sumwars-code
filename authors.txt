@@ -41,6 +41,7 @@
 =Nicholas Cosens (gnemo)
 =axander
 =Simeon Dear (Trilby)
+=Patrick McMunn (PaddyMac)
 
 [J Build system]
 =Stefan Stammberger (fusion44)

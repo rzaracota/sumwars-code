@@ -14,7 +14,7 @@
 			elseif (tutorial.phase == "learnwalk") then
 				return _("Follow Tolec and Derred.")
 			elseif (tutorial.phase == "fightslugs") then
-				return _("Kill all Fire Slugs in the enclosure.");
+				return _("Kill all of the Fire Slugs in the enclosure.");
 			elseif (tutorial.phase == "findSecretDoor") then
 				return _("Find the secret entrance to the library.");
 			elseif (tutorial.phase == "killlouses") then
@@ -216,7 +216,7 @@
 				end;
 				-- TODO:  (blickt sich um)
 				
-				speak("warrior",_("I almost had that damn ogre and suddenly someones ripping out my guts who's not even near me!"),"offended");
+				speak("warrior",_("I almost had that damn ogre and suddenly someone's ripping out my guts who's not even near me!"),"offended");
 				
 				if (warrior ~=0 and mage ~= 0 ) then
 					speak("mage",_("Oh yes! The miraculous mental abilities of club swingers."),"sneer");
@@ -226,23 +226,23 @@
 				speak("mage",_("What a disgusting ambiance. I did not desire to be here... and I had just found a nice and safe place. "),"normal");
 				
 				speak("Tolec",_("Excuse me..."),"thoughtful");
-				speak("Derred",_("No, you have to say that much more authoritative."),"angry");
+				speak("Derred",_("No, Tolec. You must say that with much more authority."),"angry");
 				
 				if (priest ~= 0) then
 					executeInDialog('lookAt('..priest..',getLocation("locEvilMachine"))');
 				end;
 				if(solo())then
-					speak("priest",_("It seems someone here has greater knowledge about how Harad is keeping me alive and moves me."), "thoughtful");
+					speak("priest",_("It seems someone here has greater knowledge of how Harad is keeping me alive and moves me."), "thoughtful");
 				else
-					speak("priest",_("It seems someone here has greater knowledge about how Harad is keeping us alive and moves us."), "thoughtful");
+					speak("priest",_("It seems someone here has greater knowledge of how Harad is keeping us alive and moves us."), "thoughtful");
 				end;
-				speak("archer",_("Whoever is the head honcho here: He had better known what he's gotten himself into."),"threaten");
-				speak("archer",_("Lot's of money could appease me again."),"grin");
+				speak("archer",_("Whoever the head honcho is here: He'd better know what he's gotten himself into."),"threaten");
+				speak("archer",_("Lots of money could appease me again."),"grin");
 				
 				if(solo())then
-					speak("Tolec",_("Please excuse your slightly rough arrival. Lord Master Soren Windclaw requests your presence. ##solo"),"unhappy")
+					speak("Tolec",_("Please excuse your somewhat unpleasant arrival. Lord Master Soren Windclaw requests your presence. ##solo"),"unhappy")
 				else
-					speak("Tolec",_("Please excuse your slightly rough arrival. Lord Master Soren Windclaw requests your presence."),"unhappy")
+					speak("Tolec",_("Please excuse your somewhat unpleasant arrival. Lord Master Soren Windclaw requests your presence."),"unhappy")
 				end;
 				
 				local magopt = getRolePlayerPref("all",nil,mage);
@@ -265,9 +265,9 @@
 				end;
 				
 				if ((mage ~= waropt)and(isFemale(waropt)==true)) then
-					speak("mage",_("A splendid question. Short and precise. Maybe one can actually work with that one."),"thoughtful");
+					speak("mage",_("A splendid question! Short and precise. Maybe one can actually work with that one."),"thoughtful");
 				elseif((mage ~= waropt)and(isMale(waropt)==true))then
-					speak("mage",_("A splendid question. Short and precise. Maybe one can actually work with that one."),"thoughtful");
+					speak("mage",_("A splendid question! Short and precise. Maybe one can actually work with that one."),"thoughtful");
 				end;
 				
 				speak("Derred",_("Er..."),"fear");
@@ -284,10 +284,10 @@
 				end;
 				
 				executeInDialog("addUnitCommand("..leader..",'walk',tutorial_tmp.derred,3)");
-				speak("PL",_("Spill it. Where are we and who has the nerve to cross Branded Ones?!"),"threaten");
+				speak("PL",_("Spill it! Where are we, and who has the nerve to cross Branded Ones?!"),"threaten");
 				if(solo())then
 					speak("Tolec",_("Well, the Lord Master has affirmed that he will explain everything in detail to you. ##solo"),"aloof");
-					speak("Derred",_("Further more your arrival was... somewhat exhausting. ##solo"),"amused");
+					speak("Derred",_("Further more, your arrival was... somewhat exhausting. ##solo"),"amused");
 					speak("Derred",_("You shouldn't be able to pose a threat to us at the moment. ##solo"),"amused");
 				else
 					speak("Tolec",_("Well, the Lord Master has affirmed that he will explain everything in detail to you."),"aloof");
@@ -309,20 +309,20 @@
 				if(solo())then
 					speak("Derred",_("Fine. Now that that's clarified I'd like to ask you to surrender your weapons. ##solo"),"aloof");
 				else	
-					speak("Derred",_("Fine. Now that that's clarified I'd like to ask you to surrender your weapons."),"aloof");
+					speak("Derred",_("Fine. Now that that's clarified I'd like to ask you all to surrender your weapons."),"aloof");
 				end;
 				speak("Tolec",_("Kindly ask."),"happy");
 				if(solo())then
-					speak("Derred",_("We cannot take any risks and inside the council you are safe. ##solo"),"normal");
+					speak("Derred",_("We cannot take any risks, and inside the council you are safe. ##solo"),"normal");
 				else	
-					speak("Derred",_("We cannot take any risks and inside the council you are safe."),"normal");
+					speak("Derred",_("We cannot take any risks, and inside the council you are safe."),"normal");
 				end;
 				
 				speak("arcopt",_("Council? The Council of Summoners?! Is this Aisen?"),"surprised");
 				speak("Tolec",_("Yes, but that's neither here nor there!"),"angry");
 				if ( not solo()) then
 					speak("PL",_("What if we don't feel like surrendering our weapons?"),"surprised");
-					speak("Tolec",_("I'm very sorry, but before that we cannot release you of the safety area."),"aloof");
+					speak("Tolec",_("I'm very sorry, but before that we cannot release any of you of the safety area."),"aloof");
 				else
 					speak("PL",_("What if I don't feel like surrendering my weapons?"),"surprised");
 					speak("Tolec",_("I'm very sorry, but before that we cannot release you of the safety area. ##solo"),"aloof");
@@ -330,7 +330,7 @@
 				
 				
 				speak("magopt",_("Safety area?! This is a goddamn prison!"),"unhappy");
-				speak("Derred",_("the choice is your's."),"bored");
+				speak("Derred",_("The choice is yours."),"bored");
 				
 				setTopicBase("Derred");
 				changeTopic("give_weapons");
@@ -379,8 +379,8 @@
 					speak("Tolec",_("You will not leave it until you surrender your weapon. ##solo"),"aloof");
 					speak("Derred",_("Just tell us by clicking on one of us, when you change your mind. ##solo"),"bored");
 				else
-					speak("Tolec",_("You will not leave it until you surrender your weapon."),"aloof");
-					speak("Derred",_("Just tell us by clicking on one of us, when you change your mind."),"bored");
+					speak("Tolec",_("None of you will leave it until you surrender your weapons."),"aloof");
+					speak("Derred",_("Just tell us by clicking on one of us, when you change your minds."),"bored");
 				end;
 				
 				setSpeakerEmotion("Tolec","excited");
@@ -475,7 +475,7 @@
 				and tutorial_tmp.tolecway1 == false);
 			</Condition>	
 			<Effect>
-				unitSpeak(tutorial_tmp.tolec,_("What's keeping you? Has the transport afflicted you so much that you don't even know how to walk anymore? Just click with the left mouse button at a place on the ground, then it will all come back to you on its own."),"unhappy");
+				unitSpeak(tutorial_tmp.tolec,_("What's keeping you? Has the transport afflicted you so much that you don't even know how to walk anymore? Just click with the left mouse button at a place on the ground. Then it will all come back to you on its own."),"unhappy");
 				startTimer("tolec_back_way1",2000);
 			</Effect>
 		</Event>
@@ -653,7 +653,7 @@
 				addCameraPosition(500, "locBehemothDoorEast" , -90,70, 20);
 				addUnitCommand(tutorial_tmp.tolec,"walk","locWay2",1);
 				addUnitCommand(tutorial_tmp.derred,"walk","locWay2",1);
-				unitSpeak(tutorial_tmp.tolec,_("Akeran's Shield! The THING is free! Back everyone! Go, go, go!"),"fear");
+				unitSpeak(tutorial_tmp.tolec,_("Akeran's Shield! That THING is free! Back everyone! Go, go, go!"),"fear");
 				startTimer("explain_fight",3000);
 			</Effect>
 		</Event>
@@ -698,52 +698,52 @@
 				speak("arcopt",_("Looks like a departure ticket to me. It can't be more painful than the arrival."),"happy");
 				speak("Tolec",_("Er yes... about that..."),"thoughtful");
 				speak("priopt",_("What?"),"threaten");
-				speak("Tolec",_("The Lord Master Windclaw feared, you would disembody yourselves after your arrival to disappear, so he took... measures."),"aloof");
+				speak("Tolec",_("The Lord Master Windclaw feared that you would kill yourself after your arrival in order to escape, so he took... measures."),"aloof");
 				
 				executeInDialog("addUnitCommand("..waropt..",'walk',tutorial_tmp.tolec)");
 				speak("waropt",_("Measures?"),"threaten");
 				speak("Derred",_("Well, we don't understand much, but it seems you don't die like us."),"thoughtful");
-				speak("Derred",_("Instead you can resurrect where you want after your body was destroyed."),"thoughtful");
+				speak("Derred",_("Instead you can resurrect where you want after your body is destroyed."),"thoughtful");
 				speak("Tolec",_("Akeran must truly hate you..."),"grin");
 				if (not solo()) then
-					speak("priopt",_("So? None of us was wishing for this ability."),"threaten");
+					speak("priopt",_("So? None of us wished for this ability."),"threaten");
 				else
 					speak("priopt",_("So? I didn't wish for this ability."),"threaten");
 				end;
 				
-				speak("Derred",_("Well, as you are now you can do that only at places of great magical concentrations. In other words..."),"amused");
+				speak("Derred",_("Well, as you are now, you can only do that at places of great magical concentrations. In other words..."),"amused");
 				speak("waropt",_("... just back there with all the junk."),"thoughtful");
 				if (mage ~= waropt and waropt ~= 0) then
-					speak("mage",_("I wouldn't necessarily call that junk."),"sad")
+					speak("mage",_("I wouldn't necessarily call that 'junk'."),"sad")
 				end;
 				
 				speak("Tolec",_("Exactly, only there."),"surprised");
 				if (not solo()) then
-					speak("PL",_("It is time we talk with this Windclaw. He seems to be a smart toad."),"unhappy");
+					speak("PL",_("It is time we speak with this Windclaw. He seems to be a smart toad."),"unhappy");
 				else
-					speak("PL",_("It is time I talk with this Windclaw. He seems to be a smart toad."),"unhappy");
+					speak("PL",_("It is time I speak with this Windclaw. He seems to be a smart toad."),"unhappy");
 				end;
 				speak("arcopt",_("It can't be all too healthy to be this smart."),"sneer");
 				speak("Derred",_("Er, well, yes. Since the main way is currently blocked, we'll have to try to get through the enclosure with the new experiments."),"unhappy")
-				speak("Derred",_("There's a back door for feeding and word is..."));
-				speak("Tolec",_("... that the old Firewhirl has a secret door for a direct connection to the kitchen. That could work! But the beast are not exactly without danger."),"surprised");
+				speak("Derred",_("There's a back door for feeding, and word is..."));
+				speak("Tolec",_("... that the old Firewhirl has a secret door for a direct connection to the kitchen. That could work! But the beasts are not exactly without danger."),"surprised");
 				speak("Derred",_("It's only those sluglings."),"sneer");
 				speak("Tolec",_("I don't know... I don't feel like being bedridden for three weeks just because of some slimy fire breath."),"disgust");
 				
 				if (not solo()) then
-					speak("priopt", _("To Harad! That's impossible to put up with. Give us our weapons and we take care of that."),"unhappy");
+					speak("priopt", _("To Harad! That's impossible to put up with. Give us our weapons and we'll take care of that."),"unhappy");
 				else
-					speak("priopt", _("To Harad! That's impossible to put up with. Give me my weapon and I take care of that."),"thoughtful");
+					speak("priopt", _("To Harad! That's impossible to put up with. Give me my weapon and I'll take care of that."),"thoughtful");
 				end;
-				speak("Derred",_("Well, you are right about that..."),"thoughtful");
-				speak("Tolec",_("Yes, considering the difficult circumstances we can do that, I guess. Here you go."),"thoughtful");
+				speak("Derred",_("Well, you're right about that..."),"thoughtful");
+				speak("Tolec",_("Yes. Considering the difficult circumstances we can do that, I guess. Here you go."),"thoughtful");
 				
 				executeInDialog("insertTrigger('give_back_weapons')");
 				
 				speak("waropt",_("What is this supposed to be?"),"surprised")
 				speak("waropt",_("Where is my weapon?"),"warcry");
 				
-				speak("Tolec",_("Er... Lord Master Windclaw feared, there could be a situation in which you had to fall back to, er, force of arms."),"aloof");
+				speak("Tolec",_("Er... Lord Master Windclaw feared that there could be a situation in which you had to fall back to, er, force of arms."),"aloof");
 				speak("Tolec",_("That's why he gave us these."),"aloof");
 				speak("Derred",_("Surely you understand that you cannot run around here with unchecked weapons."),"aloof");
 				
@@ -751,7 +751,7 @@
 				speak("arcopt",_("What didn't he take into consideration? He is clearly paranoid."),"unhappy");
 				
 				speak("Derred",_("You... can still remember how to use a weapon, right?"),"aloof");
-				speak("Derred",_("We were told, the first minutes are as if one takes a step for the first time."),"aloof");
+				speak("Derred",_("We were told that the first minutes are like one taking a step for the first time."),"aloof");
 				
 				tutorial.phase = "fightslugs";
 				tutorial.phasenr = 2;
@@ -786,11 +786,11 @@
 				return (tutorial.phase == "fightslugs" and tutorial_tmp.slugdoor_open ~= true)
 			</Condition>
 			<Effect>
-				speak("Derred",_("At first you have to open your inventory. By default you do so with the 'i'-key."),"normal");
-				speak("Derred",_("Alternative you can click on the inventory button down in the status bar."));
-				speak("Derred",_("In the inventory you see your items. They are ordered by their size."));
-				speak("Derred",_("The weapon you just got is a mid-sized item and thus is found in the middle field."));
-				speak("Derred",_("Click on the weapon with the left mouse button and then click on the weapon field in your equipment above the inventory. And you'll be equipped with it."));
+				speak("Derred",_("First you must open your inventory. By default, you do so with the 'i'-key."),"normal");
+				speak("Derred",_("Alternatively, you can click on the inventory button below in the status bar."));
+				speak("Derred",_("In the inventory you'll see your items. They are ordered by their size."));
+				speak("Derred",_("The weapon you just obtained is a mid-sized item and thus is found in the middle field."));
+				speak("Derred",_("Click on the weapon with the left mouse button. Next click on the weapon field in the equipment above your inventory, and it will be equipped."));
 				changeTopic("explain_inv_no");
 			</Effect>
 		</Topic>
@@ -849,29 +849,29 @@
 					if (solo()) then
 						speak("Tolec",_("You should equip your weapon first."));
 					else
-						speak("Tolec",_("Everyone should equip their weapon first."));
+						speak("Tolec",_("Everyone should equip their weapons first."));
 					end;
 					return;
 				end
 				
 				if(solo())then
-					speak("Tolec",_("But you still know how to fight, right? ##solo"),"surprised");
+					speak("Tolec",_("You still know how to fight, don't you? ##solo"),"surprised");
 				else
-					speak("Tolec",_("But you still know how to fight, right?"),"surprised");
+					speak("Tolec",_("You all still know how to fight, don't you?"),"surprised");
 				end;
 				speak("PL",_("Go in, click on it, kill it. A Branded One wouldn't forget about that."),"bored");
-				speak("Tolec",_("What does this click on it mean, really?"),"surprised");
+				speak("Tolec",_("What does this 'click on it' mean, anyway?"),"surprised");
 				if(solo())then
 					if(femaleOnly())then
-						speak("Derred",_("No idea, but the Lord Master said, she talks like this."),"thoughtful");
+						speak("Derred",_("No idea, but the Lord Master said that she speaks like this."),"thoughtful");
 					else
-						speak("Derred",_("No idea, but the Lord Master said, he talks like this."),"thoughtful");
+						speak("Derred",_("No idea, but the Lord Master said that he speaks like this."),"thoughtful");
 					end;
 				else
-					speak("Derred",_("No idea, but the Lord Master said, they talk like this."),"thoughtful");
+					speak("Derred",_("No idea, but the Lord Master said that they speak like this."),"thoughtful");
 				end;
 				if(solo())then
-					speak("waropt",_("Than I shall put the fear of Harad into these experiments!"),"excited");
+					speak("waropt",_("Then I shall put the fear of Harad into these experiments!"),"excited");
 				elseif(duo())then
 					speak("waropt",_("Let's put the fear of Harad into these experiments!"),"excited");
 				else
@@ -946,17 +946,17 @@
 				lookAtObject(tutorial_tmp.derred,leader);
 				playersLookAt(get(tutorial_tmp.tolec,"position"));
 				
-				speak("Tolec",_("Yuck, those things are really disgusting."),"digust");
+				speak("Tolec",_("Yuck! Those things are really disgusting."),"digust");
 				speak("any",_("What kind of sissy are you?"),"sneer");
 				speak("Derred",_("Are you looking for trouble, weakling?!"),"threaten");
-				speak("Tolec",_("Wait a sec, they somehow seem stronger."),"thoughtful");
+				speak("Tolec",_("Wait a sec, Derred. They somehow seem stronger."),"thoughtful");
 				if(solo())then
-					speak("leader",_("Your witch stuff may have weakened me, but I take a bit of the power of every being I kill and become stronger."),"excited");
+					speak("leader",_("Your witch stuff may have weakened me, but I take some of the power from every being I kill and become stronger."),"excited");
 				else
-					speak("leader",_("Your witch stuff may have weakened us, but we take a bit of the power of every being we kill and become stronger."),"excited");
+					speak("leader",_("Your witch stuff may have weakened us, but we take some of the power from every being we kill and become stronger."),"excited");
 				end;
-				speak("any",_("Better think about who you're calling weakling here!"),"grin");
-				speak("Tolec",_("Hm, right, the Lord Master said, something like this could happen. Do you know how to convert this power into proper abilities?"),"thoughtful");
+				speak("any",_("You'd better think about who you're calling `weakling' here!"),"grin");
+				speak("Tolec",_("Hm, right. The Lord Master said that something like this could happen. Do you know how to convert this power into proper abilities?"),"thoughtful");
 				
 				tutorial_tmp.behemoth_show = true;
 				tutorial.phase = "findSecretDoor";
@@ -983,13 +983,13 @@
 				end;
 				if(solo())then
 					speak("Tolec",_("You can upgrade your attributes every time, and sometimes you even have enough energy for a new skill. ##solo"),"normal");
-					speak("Derred",_("Yes, that was the thing with the big plus in the lower left corner. Just click on it and distribute your attribute points. ##solo"),"normal");
-					speak("Tolec",_("Exactly. And you can distribute the skill point in the skill window. The Lord Master said, you could choose from three categories. ##solo"));
+					speak("Derred",_("Yes. That was the thing with the big plus in the lower left corner. Just click on it and distribute your attribute points. ##solo"),"normal");
+					speak("Tolec",_("Exactly. You can distribute the skill point in the skill window. The Lord Master said that you could choose from three categories. ##solo"));
 					speak("Tolec",_("Depending on your... character mass. ##solo"),"thoughtful");
 				else
 					speak("Tolec",_("You can upgrade your attributes every time, and sometimes you even have enough energy for a new skill."),"normal");
-					speak("Derred",_("Yes, that was the thing with the big plus in the lower left corner. Just click on it and distribute your attribute points."),"normal");
-					speak("Tolec",_("Exactly. And you can distribute the skill point in the skill window. The Lord Master said, you could choose from three categories."));
+					speak("Derred",_("Yes. That was the thing with the big plus in the lower left corner. Just click on it and distribute your attribute points."),"normal");
+					speak("Tolec",_("Exactly. You can distribute the skill point in the skill window. The Lord Master said that you could choose from three categories."));
 					speak("Tolec",_("Depending on your... character mass."),"thoughtful");
 				end;
 				
@@ -998,9 +998,9 @@
 				speak("Tolec",_("Branded Ones use strange phrases indeed."),"thoughtful");
 				
 				speak("priopt",_("I wonder why this Soren knows so much about the Branded Ones..."),"thoughtful");
-				speak("warrior",_("Mages are exceedingly strange. Every single one of them."),"unhappy");
+				speak("warrior",_("Mages are exceedingly strange... Every single one of them."),"unhappy");
 				if (getSpeaker("warrior") ~= 0) then
-					speak("mage",_("Better strange then..."),"sneer");
+					speak("mage",_("Better strange than..."),"sneer");
 				end;
 				if (tutorial_tmp.behemoth_show) then
 					changeTopic("explain_levelup_continue");
@@ -1039,8 +1039,8 @@
 				addSpeaker(tutorial_tmp.tolec,"Tolec",true);
 				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
-				speak("Tolec",_("That blasted thing. I hope the walls hold out."),"fear")
-				speak("Derred",_("Quickly distribute your new points and then let's get out of here."),"fear");
+				speak("Tolec",_("That blasted thing! I hope the walls hold out."),"fear")
+				speak("Derred",_("Quickly distribute your new points, and then let's get out of here!"),"fear");
 			</Effect>
 		</Event>
 		
@@ -1173,13 +1173,13 @@
 				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
 				speak("PL",_("More of those beasts?"),"unhappy");
-				speak("Tolec",_("Urk! They seem to broken out somehow. I hope they don't breed in the crevices."),"disgust");
+				speak("Tolec",_("Urk! They seem to have broken out somehow. I hope they don't breed in the crevices."),"disgust");
 				speak("mage",_("Have you ever heard of safety measures?"),"grin");
 				speak("Derred",_("Somewhere back there has to be the secret door."),"thoughtful");
 				speak("arcopt",_("You're not even sure it's there?"),"disgust");
 				
-				speak("Tolec",_("I don' waste my time crawling through kitchen corridors, Cursed One."),"threaten");
-				speak("priopt",_("That's correctly Branded One. You wouldn't want to be called harvest now, would you?"),"angry");
+				speak("Tolec",_("I don't waste my time crawling through kitchen corridors, Cursed One."),"threaten");
+				speak("priopt",_("That's correct, Branded One. You wouldn't want to be called `harvest' now, would you?"),"angry");
 				
 				speak("Tolec",_("All right allready!"),"fear");
 				
@@ -1256,7 +1256,7 @@
 				speak("Tolec",_("Really, somehow lacking in style."),"thoughtful");
 				speak("warrior",_("Are you looking for trouble?!"),"threaten");
 				speak("Tolec",_("In fact, have you thought of using your powerful skills?"),"aloof");
-				speak("Tolec",_("The Lord Master thought, you could do considerably more than dully beat your enemies."));
+				speak("Tolec",_("The Lord Master thought that you could do considerably more than dully beat your enemies."));
 				speak("magopt",_("Really?"),"surprised");
 				
 				tutorial_tmp.skill_continue = true;
@@ -1276,10 +1276,10 @@
 			</Condition>
 			<Effect>
 				speak("Derred",_("With the 't'-key you open the skill window. Here you can choose a skill."));
-				speak("Derred",_("Just click with the mouse button, you would like to use the skill with, on the skill icon."));
+				speak("Derred",_("Just click with the same mouse button you would like to use the skill with on the skill icon."));
 				speak("Derred",_("Skills are distinguished into two groups."));
 				speak("Derred",_("After you have used a skill, you cannot use a skill of that group for a while."));
-				speak("Derred",_("Look at the picture in the status bar to learn, if a skill is ready for use."));
+				speak("Derred",_("Look at the picture in the status bar to know if a skill is ready for use."));
 				
 				if (tutorial_tmp.skill_continue) then
 					tutorial_tmp.skill_continue = nil;
@@ -1327,7 +1327,7 @@
 				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
 				speak("Derred",_("Do you see the shelf in that passage? That is the door. Just move it by clicking on it."),"normal");
-				speak("Derred",_("And you better hope, there is no trap."),"grin");
+				speak("Derred",_("You'd better hope there's no trap."),"grin");
 			</Effect>
 		</Topic>
 	</NPC>
@@ -1393,7 +1393,7 @@
 				speak("Derred",_("What is he researching here all the time? All those flowers can hardly be for the purpose of the Council and Akeran."),"thoughtful");
 				speak("magopt",_("I'm sure there's more to it than meets the eye. An apple elemental for example."),"sneer");
 				speak("Derred",_("I wouldn't put it past him."),"amused");
-				speak("Tolec",_("Joking aside! We have to go on."));
+				speak("Tolec",_("Joking aside! We must go on."));
 				
 				if (solo()) then
 					speak("leader",_("With all the damn beasts roaming around here freely, I almost think they just want me as an exterminator."),"unhappy");
@@ -1542,20 +1542,20 @@
 				addSpeaker(tutorial_tmp.derred,"Derred",true);
 				
 				speak("Derred",_("What a day. Did you know that thing could spit little monsters?"),"unhappy");
-				speak("Tolec",_("The Lord Master didn't say something about that..."),"thoughtful");
-				speak("magopt",_("Somthing unwritten in the book of the omniscient airpaw?"),"sneer");
+				speak("Tolec",_("The Lord Master didn't say anything about that..."),"thoughtful");
+				speak("magopt",_("Something unwritten in the book of the omniscient airpaw?"),"sneer");
 				speak("Tolec",_("Windclaw, heretic!"),"threaten");
 				if (solo()) then
-					speak("Derred",_("A Cursed One has to be happy, if he's got something to kill all along, right?"),"disgust");
-					speak("any",_("I'm a Branded One! That is far worse than a curse."),"threaten");
+					speak("Derred",_("A Cursed One has to be happy if he has something to kill all along, right?"),"disgust");
+					speak("any",_("I'm a Branded One! That is far worse than being cursed."),"threaten");
 					speak("Tolec",_("The mighty Akeran truly punished you dearly."),"thoughtful");
-					speak("PL",_("Spare me your elementalist drivel and make way!"),"angry");
+					speak("PL",_("Spare me your elementalist drivel and get out of my way!"),"angry");
 					speak("warrior",_("I truly am the exterminator here."),"bored");
 				else
-					speak("Derred",_("Cursed Ones have to be happy, if they got something to kill all along, right?"),"disgust");
-					speak("any",_("We're Branded Ones! That is far worse than a curse."),"threaten");
+					speak("Derred",_("Cursed Ones have to be happy if they have something to kill all along, right?"),"disgust");
+					speak("any",_("We're Branded Ones! That is far worse than being cursed."),"threaten");
 					speak("Tolec",_("The mighty Akeran truly punished them dearly."),"thoughtful");
-					speak("PL",_("Spare us your elementalist drivel and make way!"),"angry");
+					speak("PL",_("Spare us your elementalist drivel and get out of our way!"),"angry");
 					speak("warrior",_("We truly are the exterminators here."),"bored");
 				end;
 				
@@ -1621,12 +1621,12 @@
 				local archer = getSpeaker("archer");
 				local mage = getSpeaker("mage");
 				
-				speak("leader",_("Wow. They really believe in orderly and thorough research."),"sneer");
+				speak("leader",_("Wow! They really believe in orderly and thorough research."),"sneer");
 				speak("leader", _("How many slugs do you have to cut to believe they are slimy?"),"sneer");
 				if (solo() ~= true) then
-					speak("archer",_("Take a look around. That stuff has to be worth a fortune."),"excited");
+					speak("archer",_("Take a look around. That stuff has to be worth a fortune!"),"excited");
 				else
-					speak("archer",_("That stuff has to be worth a fortune!"),"excited");
+					speak("archer",_("That stuff must be worth a fortune!"),"excited");
 				end;
 				if (archer ~= nil) then
 					speak("warrior",_("This junk?"),"bored");
