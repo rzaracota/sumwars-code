@@ -6,6 +6,16 @@ function initDialog()
 	addAllPlayersToDialog();
 	addStandardRoles();
 end;
+
+--returns the name of a speaker or "" if no such speaker exists
+function getName(speaker)
+	local name = get(getSpeaker(speaker),"name")
+	if(name == nil)then
+		name = ""
+	end
+	return name;
+end;
+
 --pitch black darkness
 function fadeOut(millisecs)
 	setLight("ambient",{0,0,0},millisecs)
