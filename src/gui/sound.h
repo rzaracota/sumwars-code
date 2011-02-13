@@ -45,6 +45,28 @@ class SoundObject;
 class SoundSystem
 {
 	public:
+        /**
+         * \brief Structure for a Set of sounds that might be played on a specific occasion
+         */
+        struct SoundSet
+        {
+            /**
+             * \brief probability, that a sound it played at all
+             */
+            float m_probability;
+            
+            /**
+             * \brief Number of weights for the different sounds
+             * The relative values of the weights determine the probability which sound is played, if a sound is played
+             */
+            std::vector<float> m_weights;
+            
+            /**
+             * \brief AL handles of the sounds
+             */
+            std::vector<Sound> m_sounds;
+        };
+        
 		/**
 		 * \fn static void init()
 		 * \brief initialisiert das Soundsystem
@@ -59,10 +81,9 @@ class SoundSystem
 		static Sound getSound(SoundName sname);
 
 		/**
-		 * \fn static void loadSoundFile(std::string file, SoundName sname)
 		 * \brief Laedt ein Soundfile und registriert den Sound unter einen gegebenen Name
 		 */
-		static void loadSoundFile(std::string file, SoundName sname);
+		static void loadSoundFile(std::string file, SoundName sname, float weight);
 
 		/**
 		 * \fn static void loadSoundData(const char* pFilename)
@@ -160,10 +181,9 @@ class SoundSystem
 		static void loadSoundInfos(TiXmlNode* node);
 
 		/**
-		 * \var static std::multimap<SoundName, Sound> m_sounds
 		 * \brief Bildet die Name der Sounds auf die OpenAL IDs ab
 		 */
-		static std::multimap<SoundName, Sound> m_sounds;
+		static std::map<SoundName, SoundSet> m_sounds;
 
 		/**
 		 * \var static std::map<std::string, SoundObject*> m_sound_objects

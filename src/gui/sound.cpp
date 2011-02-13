@@ -1,9 +1,10 @@
 #include "sound.h"
 
 #include "elementattrib.h"
+#include "random.h"
 #include <OgreResourceGroupManager.h>
 
-std::multimap<SoundName, Sound> SoundSystem::m_sounds;
+std::map<SoundName, SoundSystem::SoundSet> SoundSystem::m_sounds;
 
 std::map<std::string, SoundObject*> SoundSystem::m_sound_objects;
 
@@ -15,38 +16,33 @@ std::list<SoundObject*> SoundSystem::m_ambient_sounds;
 Sound SoundSystem::getSound(SoundName sname)
 {
 	// Iteratoren auf den ersten und letzten Sound mit dem gewuenschten Name
-	std::multimap<SoundName, Sound>::iterator it,jt;
-	it = m_sounds.lower_bound(sname);
-	jt = m_sounds.upper_bound(sname);
-
-	// NONE ausgeben, wenn kein Sound vorhanden
-	if (m_sounds.count(sname) ==0)
-	{
-		return AL_NONE;
-	}
-
-	// unter allen Sounds gleichmaessig einen auswuerfeln
-	Sound snd = it->second;
-
-	int count =2;
-	++it;
-	while (it != jt)
-	{
-		if (rand() %count ==0)
-		{
-			snd = it->second;
-		}
-		count ++;
-		++it;
-
-	}
-
-	return snd;
+	std::map<SoundName, SoundSet>::iterator it;
+    it = m_sounds.find(sname);
+    if ( it == m_sounds.end())
+    {
+        return AL_NONE;
+    }
+    SoundSet& sset = it->second;
+    
+    // roll whether to play a sound
+    if (Random::random() > sset.m_probability)
+    {
+        return AL_NONE;
+    }
+    
+    // check that there are sounds in the list
+    if (sset.m_weights.size() == 0)
+    {
+        return AL_NONE;
+    }
 
 
+    int soundnr = Random::randDiscrete(sset.m_weights);
+    DEBUGX("play sound %i for soundname %s",sset.m_sounds[soundnr], sname.c_str());
+    return sset.m_sounds[soundnr];
 }
 
-void SoundSystem::loadSoundFile(std::string file, SoundName sname)
+void SoundSystem::loadSoundFile(std::string file, SoundName sname, float weight)
 {
 	Ogre::FileInfoListPtr files;
 	Ogre::FileInfoList::iterator it;
@@ -65,8 +61,8 @@ void SoundSystem::loadSoundFile(std::string file, SoundName sname)
 		buffernr = alutCreateBufferFromFile(filename.c_str());
 		if (buffernr !=  AL_NONE)
 		{
-			m_sounds.insert(std::make_pair(sname,buffernr));
-			
+			m_sounds[sname].m_weights.push_back(weight);
+            m_sounds[sname].m_sounds.push_back(buffernr);
 		}
 		else
 		{
@@ -101,6 +97,8 @@ void SoundSystem::loadSoundInfos(TiXmlNode* node)
 		
 		std::string name,file;
 		attr.getString("name",name);
+        attr.getFloat("probability",m_sounds[name].m_probability, 1.0);
+
 		
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
@@ -110,8 +108,11 @@ void SoundSystem::loadSoundInfos(TiXmlNode* node)
 				if (!strcmp(child->Value(), "Soundfile"))
 				{
 					attr.getString("source",file);
+                    float weight;
+                    attr.getFloat("weight",weight,1.0);
+                    
 					DEBUGX("loading sound file %s for sound %s",file.c_str(), name.c_str());
-					loadSoundFile(file, name);
+					loadSoundFile(file, name,weight);
 				}
 			}
 		}
@@ -192,10 +193,14 @@ void SoundSystem::update()
 
 void SoundSystem::cleanup()
 {
-	std::multimap<SoundName, Sound>::iterator it = m_sounds.begin();
+	std::map<SoundName, SoundSet>::iterator it;
+    std::vector<Sound>::iterator st;
 	for (it = m_sounds.begin(); it != m_sounds.end(); ++it)
 	{
-		alDeleteBuffers(1,&(it->second));
+        for (st = it->second.m_sounds.begin(); st != it->second.m_sounds.end(); ++st)
+        {
+            alDeleteBuffers(1,&(*st));
+        }
 	}
 	m_sounds.clear();
 	
