@@ -163,6 +163,7 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	
 	Item *currentEqItem = 0;
 	Item *currentEqItemOffhand = 0;
+	Item *attachedItem = player->getEquipement()->getItem (Equipement::CURSOR_ITEM);
 
 	std::string primary_eq_head = "Equipped:\n";
 	std::string secondary_eq_head = "Equipped:\n";
@@ -198,6 +199,12 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 
 		case Item::SHIELD:
 			currentEqItem = player->getEquipement()->getItem ( Equipement::SHIELD );
+			currentEqItemOffhand = player->getEquipement()->getItem ( Equipement::SHIELD2 );
+			// swap pointers if secondary equip is activated
+			if (player->isUsingSecondaryEquip())
+			{
+				std::swap(currentEqItem,currentEqItemOffhand); 
+			}
 			break;
 
 		case Item::POTION:
@@ -222,33 +229,57 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 
 	}
 	
+	bool hoverEqItem = false;
+	bool hoverEqItemOffhand = false;
 	// Do not display the same item twice (happens if you hover an equiped item)
 	if (item == currentEqItem)
+	{
 		currentEqItem = 0;
-	if (item == currentEqItemOffhand)
+		hoverEqItem = true;
+	}
+	else if (item == currentEqItemOffhand)
+	{
+		hoverEqItemOffhand = true;
 		currentEqItemOffhand = 0;
+	}
 	
 	// create main tooltip
 	std::list<std::string> l = item->getDescriptionAsStringList ( price_factor, irm );
+	if (hoverEqItem)
+	{
+		l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, primary_eq_head, CEGUIUtility::Black ));
+	}
+	if (hoverEqItemOffhand)
+	{
+		l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, secondary_eq_head, CEGUIUtility::Black ));
+	}
 	l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, "Hovered:\n", CEGUIUtility::Black ));
-
 	std::ostringstream out_stream;
 
 	tMgr->createTooltip ( img, l, 0, font, Tooltip::Main );
 
 	// create secondary tooltips
-	if ( currentEqItem )
+	if (attachedItem != 0)
 	{
-		l = currentEqItem->getDescriptionAsStringList ( price_factor );
-		l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, primary_eq_head, CEGUIUtility::Black ));
+		l = attachedItem->getDescriptionAsStringList ( price_factor );
+		l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, "Attached:\n", CEGUIUtility::Black ));
 		tMgr->createTooltip ( img, l, 0, font, Tooltip::Comparision );
 	}
-	
-	if ( currentEqItemOffhand )
+	else
 	{
-		l = currentEqItemOffhand->getDescriptionAsStringList ( price_factor );
-		l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, secondary_eq_head, CEGUIUtility::Black ));
-		tMgr->createTooltip ( img, l, 0, font, Tooltip::Comparision );
+		if ( currentEqItem )
+		{
+			l = currentEqItem->getDescriptionAsStringList ( price_factor );
+			l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, primary_eq_head, CEGUIUtility::Black ));
+			tMgr->createTooltip ( img, l, 0, font, Tooltip::Comparision );
+		}
+		
+		if ( currentEqItemOffhand )
+		{
+			l = currentEqItemOffhand->getDescriptionAsStringList ( price_factor );
+			l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, secondary_eq_head, CEGUIUtility::Black ));
+			tMgr->createTooltip ( img, l, 0, font, Tooltip::Comparision );
+		}
 	}
 }
 
