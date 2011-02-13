@@ -2222,7 +2222,10 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	for (k =  m_drop_items->begin(); k != m_drop_items->end(); k++)
 	{
 		if (k->second->getItem() !=0)
+		{
 			delete k->second->getItem();
+		}
+		m_game_objects.erase(k->second->getId());
 		delete k->second;
 	}
 	m_drop_items->clear();
@@ -2275,7 +2278,6 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	for (int i=0; i<nr_items;i++)
 	{
 		createItemFromString(cv);
-
 	}
 	
 	// Dialoge einlesen
