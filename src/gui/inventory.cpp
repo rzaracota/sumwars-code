@@ -20,6 +20,12 @@ Inventory::Inventory (Document* doc)
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
 	
+	label = win_mgr.getWindow("CharacterImage");
+	label->setProperty("Image", "set:character image:character_img"); 
+	label->setID(Equipement::NONE);
+	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
+	//label->setAlpha(1.0);
+	
 	int i,j;
 
 	// Label fuer grosse Items
@@ -73,7 +79,7 @@ Inventory::Inventory (Document* doc)
 		outStream << "BeltShortcutLabel" << i;
 		label = win_mgr.createWindow("TaharezLook/StaticText", outStream.str());
 		inventory->addChildWindow(label);
-		label->setPosition(CEGUI::UVector2(cegui_reldim(0.024f+i*0.096f), cegui_reldim( 0.76f)));
+		label->setPosition(CEGUI::UVector2(cegui_reldim(0.125f+i*0.0815f), cegui_reldim( 0.74f)));
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.086f), cegui_reldim( 0.056f)));
 		label->setProperty("FrameEnabled", "false");
 		label->setProperty("BackgroundEnabled", "false");
