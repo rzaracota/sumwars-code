@@ -1,4 +1,4 @@
-<Sound name="goblin_attack">
+<Sound name="goblin_attack" probability="0.3">
 	<Soundfile source="monster_sound_effects/goblin_att_1.wav"/>
 	<Soundfile source="monster_sound_effects/goblin_att_2.wav"/>
 	<Soundfile source="monster_sound_effects/goblin_att_3.wav"/>
@@ -14,7 +14,7 @@
 	<Soundfile source="monster_sound_effects/goblin_die_2.wav"/>
 </Sound>
 
-<Sound name="zombie_attack">
+<Sound name="zombie_attack" probability="0.3">
 	<Soundfile source="monster_sound_effects/zombie_att_1.wav"/>
 	<Soundfile source="monster_sound_effects/zombie_att_2.wav"/>
 	<Soundfile source="monster_sound_effects/zombie_att_3.wav"/>
@@ -37,7 +37,7 @@
 	<Soundfile source="monster_sound_effects/bone3.wav"/>
 </Sound>
 
-<Sound name="slug_attack">
+<Sound name="slug_attack" probability="0.3">
 	<Soundfile source="monster_sound_effects/slug_att_1.wav"/>
 	<Soundfile source="monster_sound_effects/slug_att_2.wav"/>
 	<Soundfile source="monster_sound_effects/slug_att_3.wav"/>
@@ -52,6 +52,6 @@
 	<Soundfile source="monster_sound_effects/wolf_die_1.wav"/>
 </Sound>
 
-<Sound name="spider_attack">
+<Sound name="spider_attack" probability="0.3">
 	<Soundfile source="monster_sound_effects/spider_att_1.wav"/>
 </Sound>
