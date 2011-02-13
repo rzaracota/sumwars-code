@@ -30,7 +30,7 @@
 		 description="The mage unleashes a ball of lightning, that may jump from one enemy to another. It hits a maximum of five enemies and the damage is reduced everytime it jumps." 
 		 time="801.000000" 
 		 timer_nr="2.000000" 
-		 timer_value="8000.000000" 
+		 timer_value="7000.000000" 
 		 base_ability="magic_attack" 
 		 critical_percent="0.800000" 
 		 target_type="ranged"
@@ -56,7 +56,7 @@
 		 description="The mage unleashes a mighty ball lightning, that can jump over to nearby enemies. A maximum of nine enemies is hit and the damage is reduced with every jump." 
 		 time="801.000000" 
 		 timer_nr="2.000000"
-		 timer_value="8000.000000" 
+		 timer_value="7000.000000" 
 		 base_ability="magic_attack" 
 		 critical_percent="0.800000" 
 		 target_type="ranged"
@@ -92,7 +92,7 @@
 		 description="The mage casts a bolt of fire, that explodes upon hitting an enemy. Other enemies nearby the victim are also caught in the explosion." 
 		 time="1001.000000" 
 		 timer_nr="2.000000"
-		 timer_value="9000.000000" 
+		 timer_value="10000.000000" 
 		 base_ability="magic_attack" 
 		 critical_percent="0.800000" 
 		 target_type="ranged">
@@ -144,7 +144,7 @@
 		 description="The mage conjures a deadly wave of fire, that burns every enemy in a circle around him." 
 		 time="1301.000000" 
 		 timer_nr="3.000000" 
-		 timer_value="70000.000000" 
+		 timer_value="80000.000000" 
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
 		 target_type="circle">
@@ -196,7 +196,7 @@
 			description="The mage conjurs a column made of hellfire, that will stay for 5 seconds and turn every enemy stupid enough to stay in there to ashes."
 			time="1001.000000" 
 			timer_nr="3.000000" 
-			timer_value="50000.000000"
+			timer_value="60000.000000"
 			base_ability="magic_attack" 
 			critical_percent="0.800000" 
 			target_type="ranged">
@@ -222,7 +222,7 @@
 		 description="The mage conjures a wave of flames, that damages enemies in a circle around him."
 		 time="1301.000000"
 		 timer_nr="3.000000"
-		 timer_value="70000.000000"
+		 timer_value="80000.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
 		 target_type="circle">
@@ -378,7 +378,7 @@
 		 description="The mage casts an even more powerful fireball."
 		 time="1001.000000"
 		 timer_nr="2.000000"
-		 timer_value="9000.000000"
+		 timer_value="10000.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
 		 target_type="ranged">
@@ -522,7 +522,7 @@
 		 description="The mage summons a thunderstorm that will assault enemies in its range with lightnings." 
 		 time="2000.000000"
 		 timer_nr="3.000000"
-		 timer_value="50000.000000"
+		 timer_value="90000.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
 		 target_type="ranged">
@@ -554,7 +554,7 @@
 		 description="The mage summons a ferocious tempest that bombards enemies in its wake with lightnings."
 		 time="1301.000000"
 		 timer_nr="3.000000"
-		 timer_value="50000.000000"
+		 timer_value="90000.000000"
 		 base_ability="magic_attack"
 		 critical_percent="0.800000"
 		 target_type="ranged">

@@ -1242,7 +1242,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 		// Modifikation:
 		// 5% mehr Staerke, bei aufgewerteter Version erhoehte Angriffsgeschwindigkeit fuer 10 sec
-		cbam.m_dstrength = getBaseAttr()->m_strength / 5;
+		cbam.m_dstrength = getBaseAttr()->m_strength / 20;
 		cbam.m_time = 10000;
 		if (checkAbility("monster_slayer"))
 		{
