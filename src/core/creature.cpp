@@ -3513,6 +3513,12 @@ bool Creature::takeDamage(Damage* d)
 		m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING] = MathHelper::Max(m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING],250.0f);
 		addToNetEventMask(NetEvent::DATA_HP | NetEvent::DATA_EFFECTS);
 	}
+    
+    
+	if (getDynAttr()->m_health <= 0)
+	{
+		die();
+	}
 
 	// Statikschild wenn mehr als 2% der Lebenspunkte verloren
 	if ((m_base_attr_mod.m_special_flags & STATIC_SHIELD) && dmg > m_base_attr_mod.m_max_health * 0.02)
