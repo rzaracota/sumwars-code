@@ -29,7 +29,7 @@
 					/>
 	<DropChance
 			   level="1"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="spruce_wnd_air" name="spruce wand" size="medium">
@@ -60,7 +60,7 @@
 					/>
 	<DropChance
 			   level="1"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="spruce_wnd_ice" name="spruce wand" size="medium">
@@ -91,7 +91,7 @@
 					/>
 	<DropChance
 			   level="1"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -124,7 +124,7 @@
 					/>
 	<DropChance
 			   level="2"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="prntc_wnd_air" name="apprentice wand" size="medium">
@@ -155,7 +155,7 @@
 					/>
 	<DropChance
 			   level="2"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="prntc_wnd_ice" name="apprentice wand" size="medium">
@@ -186,7 +186,7 @@
 					/>
 	<DropChance
 			   level="2"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -218,7 +218,7 @@
 					/>
 	<DropChance
 			   level="4"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="novice_wnd_air" name="novice wand" size="medium">
@@ -249,7 +249,7 @@
 					/>
 	<DropChance
 			   level="4"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="novice_wnd_ice" name="novice wand" size="medium">
@@ -280,7 +280,7 @@
 					/>
 	<DropChance
 			   level="4"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -311,7 +311,7 @@
 					/>
 	<DropChance
 			   level="6"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="hermit_wnd_air" name="hermit wand" size="medium">
@@ -340,7 +340,7 @@
 					/>
 	<DropChance
 			   level="6"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="hermit_wnd_ice" name="hermit wand" size="medium">
@@ -368,7 +368,7 @@
 					/>
 	<DropChance
 			   level="6"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -403,7 +403,7 @@
 					/>
 	<DropChance
 			   level="7"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -434,7 +434,7 @@
 					/>
 	<DropChance
 			   level="12"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="alder_wnd_air" name="alder wand" size="medium">
@@ -463,7 +463,7 @@
 					/>
 	<DropChance
 			   level="12"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="alder_wnd_ice" name="alder wand" size="medium">
@@ -491,7 +491,7 @@
 					/>
 	<DropChance
 			   level="12"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -524,7 +524,7 @@
 					/>
 	<DropChance
 			   level="14"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="bard_wnd_air" name="bard's wand" size="medium">
@@ -555,7 +555,7 @@
 					/>
 	<DropChance
 			   level="14"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="bard_wnd_ice" name="bard's wand" size="medium">
@@ -586,7 +586,7 @@
 					/>
 	<DropChance
 			   level="14"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -616,7 +616,7 @@
 					/>
 	<DropChance
 			   level="19"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="magus_wnd_air" name="magus wand" size="medium">
@@ -645,7 +645,7 @@
 					/>
 	<DropChance
 			   level="19"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="magus_wnd_ice" name="magus wand" size="medium">
@@ -673,7 +673,7 @@
 					/>
 	<DropChance
 			   level="19"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -703,7 +703,7 @@
 					/>
 	<DropChance
 			   level="22"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="silver_wnd_air" name="silver wand" size="medium">
@@ -732,7 +732,7 @@
 					/>
 	<DropChance
 			   level="22"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 <Item type="weapon" subtype="silver_wnd_ice" name="silver wand" size="medium">
@@ -760,7 +760,7 @@
 					/>
 	<DropChance
 			   level="22"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -790,7 +790,7 @@
 					/>
 	<DropChance
 			   level="25"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -820,7 +820,7 @@
 					/>
 	<DropChance
 			   level="29"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -850,7 +850,7 @@
 					/>
 	<DropChance
 			   level="34"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -880,7 +880,7 @@
 					/>
 	<DropChance
 			   level="39"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -910,7 +910,7 @@
 					/>
 	<DropChance
 			   level="44"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -940,7 +940,7 @@
 					/>
 	<DropChance
 			   level="49"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -970,7 +970,7 @@
 					/>
 	<DropChance
 			   level="54"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -1000,7 +1000,7 @@
 					/>
 	<DropChance
 			   level="59"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -1030,7 +1030,7 @@
 					/>
 	<DropChance
 			   level="64"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -1060,7 +1060,7 @@
 					/>
 	<DropChance
 			   level="69"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -1093,7 +1093,7 @@
 					/>
 	<DropChance
 			   level="74"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
@@ -1130,7 +1130,7 @@
 					/>
 	<DropChance
 			   level="80"
-			   probability="1.0"
+			   probability="0.33"
 			   />
 </Item>
 
