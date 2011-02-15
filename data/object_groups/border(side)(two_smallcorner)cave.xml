@@ -57,14 +57,14 @@
             center_x="2" 
             center_y="-3.5" 
             angle="-90" 
-            probability="0.7" 
+            probability="1" 
             prob_angle="false" 
     />
     <Object subtype="$ground_square_m" 
             center_x="2" 
             center_y="1" 
             angle="0" 
-            probability="0.7" 
+            probability="1" 
             prob_angle="false" 
     />
     <Object subtype="$ground_square_m" 
