@@ -21,24 +21,3 @@ material cave_ground
 		}
 	}
 }
-
-material ruins
-{
-	technique
-	{
-		pass
-		{
-			ambient 0.8 0.8 0.8 1
-			diffuse 1 1 1 1
-			specular 0 0 0 1
-			emissive 0 0 0
-
-			texture_unit
-			{
-				texture Krypta.png
-				tex_coord_set 0
-				colour_op modulate
-			}
-		}
-	}
-}

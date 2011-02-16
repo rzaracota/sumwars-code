@@ -49,6 +49,11 @@ FIXED_OBJECT
                 <Object name="sarkophagusMaylon" />
         </Environment>
 </ObjectTemplate>
+<ObjectTemplate name="$script_teleporter" type="SCRIPTOBJECT">
+        <Environment name="council" >
+                <Object name="hole" />
+        </Environment>
+</ObjectTemplate>
 
 <ObjectTemplate name="$border" type="FIXED_OBJECT">
 		<Environment name="council">
@@ -758,6 +763,18 @@ FIXED_OBJECT
 <ObjectTemplate name="ruin_crypt">
 	<Environment name="meadow">
 		<Object name="cryptMaylon"/>
+	</Environment>
+</ObjectTemplate>
+<ObjectTemplate name="ruin_crypt_debris">
+	<Environment name="meadow" default="true">
+		<Object name="cryptDebris1"/>
+		<Object name="cryptDebris2"/>
+		<Object name="cryptDebris3"/>
+		<Object name="cryptDebris4"/>
+		<Object name="cryptDebris5"/>
+		<Object name="cryptDebris6"/>
+		<Object name="cryptDebris7"/>
+		<Object name="cryptDebris8"/>
 	</Environment>
 </ObjectTemplate>
 
