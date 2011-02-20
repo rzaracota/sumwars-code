@@ -180,6 +180,16 @@ int WorldObject::getValue(std::string valname)
 		}
 		return 1;
 	}
+	else if (valname == "usable")
+	{
+		lua_pushboolean(EventSystem::getLuaState(),bool(m_interaction_flags & USABLE));
+		return 1;
+	}
+	else if (valname == "exact_picking")
+	{
+		lua_pushboolean(EventSystem::getLuaState(),bool(m_interaction_flags & EXACT_MOUSE_PICKING));
+		return 1;
+	}
 	else
 	{
 		return GameObject::getValue(valname);
@@ -220,6 +230,32 @@ bool WorldObject::setValue(std::string valname)
 		
 		getRegion()->getFreePlace (getShape(), getLayer(), pos);
 		moveTo(pos);
+		return true;
+	}
+	else if (valname == "usable")
+	{
+		bool opt = lua_toboolean(EventSystem::getLuaState() ,-1);
+		if (opt)
+		{
+			m_interaction_flags |= USABLE;
+		}
+		else
+		{
+			m_interaction_flags &= (~USABLE);
+		}
+		return true;
+	}
+	else if (valname == "exact_picking")
+	{
+		bool opt = lua_toboolean(EventSystem::getLuaState() ,-1);
+		if (opt)
+		{
+			m_interaction_flags |= EXACT_MOUSE_PICKING;
+		}
+		else
+		{
+			m_interaction_flags &= (~EXACT_MOUSE_PICKING);
+		}
 		return true;
 	}
 	else 
