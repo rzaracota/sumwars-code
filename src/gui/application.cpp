@@ -6,6 +6,7 @@
 
 #ifdef BUILD_TOOLS
 #include "debugpanel.h"
+#include "iconeditortab.h"
 #include "guidebugtab.h"
 #include "luascripttab.h"
 #include "textfileeditwindow.h"
@@ -524,6 +525,7 @@ bool Application::initCEGUI()
 
 #ifdef BUILD_TOOLS
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<GuiDebugTab> >();
+	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<IconEditorTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<LuaScriptTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<TextFileEditWindow> >();
 #endif

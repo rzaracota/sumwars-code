@@ -221,6 +221,7 @@ IF(BUILD_TOOLS)
 SET(SRCS
 	${SRCS}
 	./src/gui/debugpanel/debugpanel.cpp
+	./src/gui/debugpanel/iconeditortab.cpp
 	./src/gui/debugpanel/guidebugtab.cpp
 	./src/gui/debugpanel/luascripttab.cpp
 	./src/gui/debugpanel/textfileeditwindow.cpp

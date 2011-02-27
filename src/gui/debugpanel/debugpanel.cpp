@@ -1,6 +1,7 @@
 #include "debugpanel.h"
 #include "guidebugtab.h"
 #include "luascripttab.h"
+#include "iconeditortab.h"
 #include "OgreRoot.h"
 
 using namespace CEGUI;
@@ -51,6 +52,11 @@ void DebugPanel::createPanel(bool visible)
 	luaTab->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	addTabWindow("LuaScriptTab", luaTab);
 	
+	IconEditorTab *iconEdTab = static_cast<IconEditorTab*>(m_winManager->createWindow("IconEditorTab", "IconEditorTab"));
+	iconEdTab->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
+	iconEdTab->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
+	addTabWindow("IconEditorTab", iconEdTab);
+
 	if(!visible)
 	  m_rootWindow->setVisible(visible);
 }
