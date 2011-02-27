@@ -763,34 +763,26 @@ void Scene::createScene()
 			std::stringstream stream;
 			short dimx = region->getDimX();
 			short dimy = region->getDimY();
-			Ogre::SceneNode *node;
 			Ogre::Entity* ground;
+			ground = m_scene_manager->createEntity(stream.str(), "ground");
+			ground->setMaterialName(region->getGroundMaterial());
+			ground->setCastShadows(false);
+			ground->setQueryFlags(0);
+			
 			for (int i=0; i< dimx; ++i)
 			{
 				for (int j=0; j<dimy; ++j)
 				{
-					stream.str("");
-					stream << "GroundNode"<<i<<"_"<<j;
-					node = m_scene_manager->getRootSceneNode()->createChildSceneNode(stream.str());
-					node->setPosition(Ogre::Vector3(i*GraphicManager::g_global_scale*4+GraphicManager::g_global_scale*2,0,j*GraphicManager::g_global_scale*4+GraphicManager::g_global_scale*2));
-
-					
+					Ogre::Vector3 pos(i*GraphicManager::g_global_scale*4+GraphicManager::g_global_scale*2,0,j*GraphicManager::g_global_scale*4+GraphicManager::g_global_scale*2);
 					// This scales entity to the right size unit meshes are scaled
-					node->setScale(GraphicManager::g_global_scale/50, GraphicManager::g_global_scale/50, GraphicManager::g_global_scale/50);
+					Ogre::Vector3 scale(GraphicManager::g_global_scale/50, GraphicManager::g_global_scale/50, GraphicManager::g_global_scale/50);
 					
-					stream.str("");
-					stream << "GroundEntity"<<i<<"_"<<j;
-					ground = m_scene_manager->createEntity(stream.str(), "ground");
-					ground->setMaterialName(region->getGroundMaterial());
-					ground->setCastShadows(false);
-					ground->setQueryFlags(0);
-					node->attachObject(ground);
-
-					static_geom->addSceneNode(node);
+					static_geom->addEntity(ground, pos, Ogre::Quaternion::IDENTITY, scale);
 				}
 			}
 		}
-
+		static_geom->build();
+		
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
 		target->update();
 
