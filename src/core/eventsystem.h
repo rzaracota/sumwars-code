@@ -785,6 +785,24 @@ class EventSystem
 		 * \param L Lua Status
 		 */
 		static int writeString(lua_State *L);
+		
+		/**
+		 * \brief Schreibt einen Eintrag in sumwars.log
+		 * \param L Lua Status
+		 */
+		static int writeLog(lua_State *L);
+		
+		/**
+		 * \brief Setzt die Statistiken von OGRE zurueck
+		 * \param L Lua Status
+		 */
+		static int clearOgreStatistics(lua_State *L);
+		
+		/**
+		 * \brief Gibt die Statistiken von OGRE aus
+		 * \param L Lua Status
+		 */
+		static int getOgreStatistics(lua_State *L);
 
 		/**
 		 * \fn static int writeNewline(lua_State *L)

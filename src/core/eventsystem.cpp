@@ -1,3 +1,8 @@
+
+#include <OgreRoot.h>
+#include <OgreRenderTarget.h>
+#include <OgreRenderWindow.h>
+
 #include "eventsystem.h"
 #include "region.h"
 #include "player.h"
@@ -11,6 +16,8 @@
 #ifdef DEBUG_DATABASE
 		std::map<int, std::string> EventSystem::m_code_fragments;
 #endif
+
+
 
 lua_State * EventSystem::m_lua=0;
 
@@ -156,6 +163,10 @@ void EventSystem::init()
 	lua_register(m_lua, "addMusic",addMusic);
 	lua_register(m_lua, "clearMusicList",clearMusicList);
 	lua_register(m_lua, "playSound",playSound);
+	
+	lua_register(m_lua, "writeLog", writeLog);
+	lua_register(m_lua, "clearOgreStatistics", clearOgreStatistics);
+	lua_register(m_lua, "getOgreStatistics", getOgreStatistics);
 	
 	lua_register(m_lua, "writeString", writeString);
 	lua_register(m_lua, "writeNewline", writeNewline);
@@ -3041,6 +3052,66 @@ int EventSystem::playSound(lua_State *L)
 		ERRORMSG("Syntax: playSound(string soundname, float volume=1.0, Vector position=(playerpos))");		
 	}
 	return 0;
+}
+
+int EventSystem::writeLog(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isstring(L,1) && lua_isstring(L,2))
+	{
+		std::string loglevel = lua_tostring(L,1);
+		std::string text = lua_tostring(L,2);
+		
+		Log::MessageLogLevel level = Log::MSG_INFO;
+		if (loglevel == "debug" || loglevel == "DEBUG")
+			level = Log::MSG_DEBUG;
+		if (loglevel == "warning" || loglevel == "WARNING")
+			level = Log::Log::MSG_WARNING;
+		if (loglevel == "error" || loglevel == "ERROR")
+			level = Log::Log::MSG_ERROR;
+		
+		LOGGER(level, text.c_str());
+	}
+	else
+	{
+		ERRORMSG("Syntax: writeLog(string loglevel, string text)");
+	}
+	return 0;
+}
+
+int EventSystem::clearOgreStatistics(lua_State *L)
+{
+	Ogre::Root::getSingleton().getAutoCreatedWindow()->resetStatistics();
+	return 0;
+}
+
+int EventSystem::getOgreStatistics(lua_State *L)
+{
+	lua_newtable(L);
+	
+	const Ogre::RenderTarget::FrameStats& stats = Ogre::Root::getSingleton().getAutoCreatedWindow()->getStatistics();
+	
+	lua_pushstring(L, "avgFPS");
+	lua_pushnumber(L, stats.avgFPS);
+	lua_settable(L, -3);
+	
+	lua_pushstring(L, "worstFPS");
+	lua_pushnumber(L, stats.worstFPS);
+	lua_settable(L, -3);
+	
+	lua_pushstring(L, "worstFrameTime");
+	lua_pushnumber(L, stats.worstFrameTime);
+	lua_settable(L, -3);
+	
+	lua_pushstring(L, "triangleCount");
+	lua_pushnumber(L, stats.triangleCount);
+	lua_settable(L, -3);
+	
+	lua_pushstring(L, "batchCount");
+	lua_pushnumber(L, stats.batchCount);
+	lua_settable(L, -3);
+	
+	return 1;
 }
 
 int EventSystem::writeString(lua_State *L)
