@@ -3066,9 +3066,9 @@ int EventSystem::writeLog(lua_State *L)
 		if (loglevel == "debug" || loglevel == "DEBUG")
 			level = Log::MSG_DEBUG;
 		if (loglevel == "warning" || loglevel == "WARNING")
-			level = Log::Log::MSG_WARNING;
+			level = Log::MSG_WARNING;
 		if (loglevel == "error" || loglevel == "ERROR")
-			level = Log::Log::MSG_ERROR;
+			level = Log::MSG_ERROR;
 		
 		LOGGER(level, text.c_str());
 	}
