@@ -18,7 +18,7 @@
 #include "player.h"
 #include "eventsystem.h"
 #include "itemfactory.h"
-
+#include "options.h"
 #include "../tinyxml/tinyxml.h"
 
 PlayerCamera::PlayerCamera()
@@ -39,9 +39,12 @@ void PlayerCamera::moveTo(float distance, float theta, float phi, float time)
     float min_theta;
     max_distance = 20;
     min_theta = 45;
-//    max_distance = 50;
-//    min_theta = 5;
-
+	// set print_fps to true to get some data
+	if (Options::getInstance()->getDebugOption("restrict_camera","true") == "false")
+	{
+		max_distance = 60;
+		min_theta = 5;
+	}
 
 	m_goal_distance = MathHelper::Max(MathHelper::Min(distance,max_distance),5.0f);
 	m_goal_theta = MathHelper::Max(MathHelper::Min(theta,90.0f),min_theta);

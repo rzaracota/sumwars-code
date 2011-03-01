@@ -214,42 +214,49 @@ void Application::run()
 	while (m_document->getState() != Document::END_GAME)
 	{
 
+		
 		frametime =timer.getMicroseconds ()/1000.0;
-		// cap framerate at 50 fps
-		if (frametime < 20.0)
+		// set cap_fps to no to disable fps reduction
+		if (Options::getInstance()->getDebugOption("cap_fps","true") == "true")
 		{
-			#ifdef WIN32
-				Sleep(20-frametime);
-			#elif defined __APPLE__
-				// TODO
-			#else
-				usleep(1000*(20-frametime));
-			#endif
-			frametime =timer.getMicroseconds ()/1000.0;
+			// cap framerate at 50 fps
+			if (frametime < 20.0)
+			{
+				#ifdef WIN32
+					Sleep(20-frametime);
+				#elif defined __APPLE__
+					// TODO
+				#else
+					usleep(1000*(20-frametime));
+				#endif
+				frametime =timer.getMicroseconds ()/1000.0;
+			}
 		}
 		time[0] += frametime;
 		timer.reset();
 
 
 		count ++;
-		if (count ==nr)
+		if (count >=nr)
 		{
-			/*
-			count =0;
-			
-			DEBUG("average stats over %i frames",nr);
-			DEBUG("frame time: %f (%f fps)",time[0]/nr, 1000/(time[0]/nr));
-			DEBUG("app update time: %f",time[1]/nr);
-			DEBUG("message pump time: %f",time[2]/nr);
-			DEBUG("world update time: %f",time[3]/nr);
-			DEBUG("scene update time: %f",time[4]/nr);
-			DEBUG("gui update time: %f",time[5]/nr);
-			DEBUG("ogre  time: %f \n",time[6]/nr);
+			// set print_fps to true to get some data
+			if (Options::getInstance()->getDebugOption("print_fps","false") == "true")
+			{
+				count =0;
+				
+				DEBUG("average stats over %i frames",nr);
+				DEBUG("frame time: %f (%f fps)",time[0]/nr, 1000/(time[0]/nr));
+				DEBUG("app update time: %f",time[1]/nr);
+				DEBUG("message pump time: %f",time[2]/nr);
+				DEBUG("world update time: %f",time[3]/nr);
+				DEBUG("scene update time: %f",time[4]/nr);
+				DEBUG("gui update time: %f",time[5]/nr);
+				DEBUG("ogre  time: %f \n",time[6]/nr);
 
 
-			for (int i=0; i<7; i++)
-			time[i]=0;
-			*/
+				for (int i=0; i<7; i++)
+				time[i]=0;
+			}
 
 		}
 
