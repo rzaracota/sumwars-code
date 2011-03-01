@@ -264,6 +264,44 @@ class Options
 		{
 			m_enemy_highlight_color = color;
 		}
+		
+		/**
+		 * \brief Sets the value of a debug option
+		 * \param valname Name of the option
+		 * \param value value as string
+		 */
+		void setDebugOption(std::string valname, std::string value)
+		{
+			m_debug_options[valname] = value;
+		}
+		
+		/**
+		 * \brief Returns the value of a debug option
+		 * Returns the default, if the string is not set
+		 * \param valname Name of the option
+		 * \param defaultval value that is returned if no value is set
+		 */
+		std::string getDebugOption(std::string valname, std::string defaultval ="")
+		{
+			if (m_debug_options.count(valname) == 0)
+				return defaultval;
+			
+			return m_debug_options[valname];
+		}
+		
+		/**
+		 * \brief Pushes the named value on the lua stack
+		 * \param valname name of the value
+		 * \return number of values pushed to the stack
+		 */
+		int getValue(std::string valname);
+		
+		/**
+		 * \brief Set the named member, value is taken from lua stack
+		 * \param valname of the value
+		 * \param bool true if successful, else false
+		 */
+		bool setValue(std::string valname);
 
 	private:
 		/**
@@ -315,5 +353,10 @@ class Options
 		 *\brief Enemy highlight color
 		 */
 		std::string m_enemy_highlight_color;
+		
+		/**
+		 * \brief Collection of additional options used for debugging
+		 */
+		std::map<std::string, std::string> m_debug_options;
 
 };

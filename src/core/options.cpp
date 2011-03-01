@@ -9,6 +9,17 @@
 #include "../tinyxml/tinyxml.h"
 #include "elementattrib.h"
 
+extern "C"
+{
+	
+	#include "lua.h"
+	#include "lualib.h"
+	#include "lauxlib.h"
+}
+
+#include "eventsystem.h"
+
+
 #ifdef WIN32
 #define WIN32_LEAN_AND_MEAN
 #include "Windows.h"
@@ -182,6 +193,13 @@ bool Options::readFromFile(const std::string& filename)
 						attr.getString("ehl_color", color);
 						setEnemyHighlightColor(color);
 					}
+					else if (!strcmp(child->Value(), "Debug"))
+					{
+						for (const TiXmlAttribute* attr = child->ToElement()->FirstAttribute(); attr != 0; attr = attr->Next())
+						{
+							m_debug_options[attr->Name()] = attr->Value();
+						}
+					}
 					else if (child->Type()!=TiXmlNode::COMMENT)
 					{
 						WARNING("unexpected element in options.xml: %s",child->Value());
@@ -253,6 +271,17 @@ bool Options::writeToFile(const std::string& filename)
 	element->SetAttribute("host",getServerHost().c_str());
 	element->SetAttribute("port",getPort());
 	element->SetAttribute("max_players",getMaxNumberPlayers());
+	
+	if (!m_debug_options.empty())
+	{
+		element = new TiXmlElement( "Debug" );
+		root->LinkEndChild(element);
+		std::map<std::string, std::string>::iterator it;
+		for(it = m_debug_options.begin(); it != m_debug_options.end(); ++it)
+		{
+			element->SetAttribute(it->first.c_str(), it->second.c_str());
+		}
+	}
 
 	doc.SaveFile( filename.c_str());
 	return true;
@@ -351,3 +380,74 @@ void Options::setLocale(const std::string& locale)
 	}
 }
 
+int Options::getValue(std::string valname)
+{
+	if (valname =="server_host")
+	{
+		lua_pushstring(EventSystem::getLuaState() , m_server_host.c_str() );
+		return 1;
+	}
+	else if (valname =="port")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_port );
+		return 1;
+	}
+	else if (valname =="difficulty")
+	{
+		std::string values[4] = {"easy","normal","hard","insane"};
+		lua_pushstring(EventSystem::getLuaState() , values[m_difficulty- EASY].c_str() );
+		return 1;
+	}
+	else if (valname =="text_speed")
+	{
+		lua_pushnumber(EventSystem::getLuaState() , m_text_speed );
+		return 1;
+	}
+	else
+	{
+		if (m_debug_options.count(valname))
+		{
+			lua_pushstring(EventSystem::getLuaState() , m_debug_options[valname].c_str() );
+			return 1;
+		}
+	}
+	return 0;
+}
+
+bool Options::setValue(std::string valname)
+{
+	if (valname =="server_host")
+	{
+		m_server_host = lua_tostring(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="port")
+	{
+		m_port = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="difficulty")
+	{
+		std::string diffstr = lua_tostring(EventSystem::getLuaState() ,-1);
+		if (diffstr == "easy") m_difficulty = EASY;
+		if (diffstr == "normal") m_difficulty = NORMAL;
+		if (diffstr == "hard") m_difficulty = HARD;
+		if (diffstr == "insane") m_difficulty = INSANE;
+		
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else if (valname =="text_speed")
+	{
+		m_text_speed = lua_tonumber(EventSystem::getLuaState() ,-1);
+		lua_pop(EventSystem::getLuaState(), 1);
+		return true;
+	}
+	else
+	{
+		std::string value = lua_tostring(EventSystem::getLuaState() ,-1);
+		m_debug_options[valname] = value;
+	}
+}

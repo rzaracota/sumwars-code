@@ -780,6 +780,19 @@ class EventSystem
 		static int playSound(lua_State *L);
 		
 		/**
+		 * \brief Returns a value from \a Options class
+		 * \param L Lua Status
+		 */
+		static int getOption(lua_State *L);
+		
+		/**
+		 * \brief Writes a value to \a Options class
+		 * \param L Lua Status
+		 */
+		static int setOption(lua_State *L);
+		
+		
+		/**
 		 * \fn static int writeString(lua_State *L)
 		 * \brief schreibt einen String in den Stream
 		 * \param L Lua Status

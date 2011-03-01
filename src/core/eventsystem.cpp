@@ -164,6 +164,8 @@ void EventSystem::init()
 	lua_register(m_lua, "clearMusicList",clearMusicList);
 	lua_register(m_lua, "playSound",playSound);
 	
+	lua_register(m_lua, "getOption", getOption);
+	lua_register(m_lua, "setOption", setOption);
 	lua_register(m_lua, "writeLog", writeLog);
 	lua_register(m_lua, "clearOgreStatistics", clearOgreStatistics);
 	lua_register(m_lua, "getOgreStatistics", getOgreStatistics);
@@ -3050,6 +3052,36 @@ int EventSystem::playSound(lua_State *L)
 	else
 	{
 		ERRORMSG("Syntax: playSound(string soundname, float volume=1.0, Vector position=(playerpos))");		
+	}
+	return 0;
+}
+
+int EventSystem::getOption(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		std::string valname = lua_tostring(L,1);
+		return Options::getInstance()->getValue(valname);
+	}
+	else
+	{
+		ERRORMSG("Syntax: getOption(string optionname)");		
+	}
+	return 0;
+}
+
+int EventSystem::setOption(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && lua_isstring(L,1))
+	{
+		std::string valname = lua_tostring(L,1);
+		Options::getInstance()->setValue(valname);
+	}
+	else
+	{
+		ERRORMSG("Syntax: setOption(string optionname, value)");		
 	}
 	return 0;
 }
