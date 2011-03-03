@@ -4,9 +4,9 @@
 		if (farm_siege.finished==true) then
 			return _("The peasants are rescued, the goblins slain, and the service paid. What more can you ask for?")
 		elseif(farm_siege.rescued==true)then
-			return(_("The peasants are rescued and the goblins slain. Time to collect the reward for the trouble in Joringsbridge."))
+			return(_("The peasants are rescued and the goblins slain. It's time to collect the reward for the trouble in Joringsbridge."))
 		elseif(farm_siege.goblins_cleared==true)then
-			return(_("The goblins around Bron's farm are not among the living anymore. I should knock at the door and make sure, everything is all right. No peasants, no money."))
+			return(_("The goblins around Bron's farm are not among the living anymore. I should knock at the door and make sure everything is all right. No peasants, no money."))
 		else
 			return _("The farm of a peasant named Michel Bron is besieged by goblins. His family needs help - fast.")
 		end
@@ -22,18 +22,18 @@
 				addSpeaker(joringsbridge.sergeant,"sergeant");
 					speak("sergeant",_("Ah! Are you feeling like earning the money after all?"),"aloof");
 					if(solo())then
-						speak("sergeant",_("Don't think, I haven't seen you hanging around back there."));
+						speak("sergeant",_("Don't think I haven't seen you hanging around back there."));
 					elseif(duo())then
-						speak("sergeant",_("Don't think, I haven't seen you and your friend hanging around back there."));
+						speak("sergeant",_("Don't think I haven't seen you and your friend hanging around back there."));
 					else
-						speak("sergeant",_("Don't think, I haven't seen you and your friends hanging around back there."));
+						speak("sergeant",_("Don't think I haven't seen you and your friends hanging around back there."));
 					end;
 					speak("sergeant",_("But I don't want to complain."),"thoughtful");
 					speak("sergeant",_("You know the drill: Get to the Northern Meadow and drive away the goblins around Bron's farm."),"normal");
-					speak("sergeant",_("I don't care, how you do it, even if you gobble them raw."));
+					speak("sergeant",_("I don't care how you do it, even if you gobble them raw."));
 					speak("sergeant",_("Just kidding."),"amused");
-					speak("sergeant",_("When you're done come back to me."),"normal");
-					speak("PL",_("On my way."));
+					speak("sergeant",_("When you're done, come back to me."),"normal");
+					speak("PL",_("I'm on my way."));
 					farm_siege.started=true;
 			</Effect>
 		</Topic>
@@ -140,7 +140,7 @@
 				addSpeaker(joringsbridge.sergeant,"sergeant")
 				speak("player",_("It's done."));
 				speak("sergeant",_("I've already heard of it."),"amused");
-				speak("sergeant",_("Michel is in the tavern and getting plastered. All in honor of your bravery, of course."),"amused");
+				speak("sergeant",_("Michel is in the tavern getting plastered - all in honor of your bravery, of course."),"amused");
 				speak("sergeant",_("But that shall be of no concern to you."),"normal");
 				speak("sergeant",_("Here's the money."),"normal")
 				addPlayersGold(2000, getPlayers());
