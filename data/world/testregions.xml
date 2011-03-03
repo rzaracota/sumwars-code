@@ -215,6 +215,197 @@
 			</SpawnGroups>
 		</Region>
 		 
+	<Region id="1003" name="benchmarkBox">
+		<AmbientLight red="0.4" green="0.4" blue="0.4" />
+		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
+		<DirectionalLight red="0.3" green="0.3" blue="0.3" />
+		
+		<Settings dimx="50" dimy="50" region_template="benchmarkRegion" ground="council_ground"/>
+		<WorldPosition world_x="0.0" world_y ="0.0" />
+		
+		<Music>
+			<Track source="treacherous_paths.ogg" />
+		</Music>
+		
+		<ReviveLocation  location="locCenter" />
+		<Environments>
+			<Environment height="1.0" name="council" />
+		</Environments>
+		
+		<Event trigger ="create_region" once = "true">
+			<Effect>
+				the_switch = createObject("switch","locCenter");
+				created_objects = {};
+				objectinfo = {};
+			</Effect>
+		</Event>
+		<Event trigger ="object_use" >
+			<Condition>
+				return (trigger.used_object == the_switch)
+			</Condition>
+			<Effect>
+				createDialogue  ()
+				local pl = getPlayers()[1];
+				addSpeaker(pl);
+				addQuestion("Which benchmark test");
+				addAnswer("400 fixed objects","fixed1");
+				addAnswer("1600 fixed objects","fixed2");
+				addAnswer("6400 fixed objects","fixed3");
+				addAnswer("25 animated objects","animated1");
+				addAnswer("100 animated objects","animated2");
+				addAnswer("400 animated objects","animated3");
+				addAnswer("16 particle systems", "particle1");
+				addAnswer("64 particle systems", "particle2");
+				addAnswer("256 particle systems", "particle3");
+				addAnswer("back to camp", "tocamp");
+			</Effect>
+		</Event>
+		
+		<Event trigger ="tocamp" >
+			<Effect>
+				camp();
+			</Effect>
+		</Event>
+
+		<Event trigger ="fixed1" >
+			<Effect>
+				objectinfo["fardist"] = 50;
+				objectinfo["neardist"] = 35;
+				objectinfo["type"]="signpost";
+				objectinfo["num"] = 20;
+				
+				insertTrigger("init_benchmark");
+			</Effect>
+		</Event>
+		<Event trigger ="fixed2" >
+			<Effect>
+				objectinfo["fardist"] = 90;
+				objectinfo["neardist"] = 60;
+				objectinfo["type"]="signpost";
+				objectinfo["num"] = 40;
+				
+				insertTrigger("init_benchmark");
+			</Effect>
+		</Event>
+		<Event trigger ="fixed3" >
+			<Effect>
+				objectinfo["fardist"] = 160;
+				objectinfo["neardist"] = 120;
+				objectinfo["type"]="signpost";
+				objectinfo["num"] = 80;
+				
+				insertTrigger("init_benchmark");
+			</Effect>
+		</Event>
+		
+		<Event trigger ="animated1" >
+			<Effect>
+				objectinfo["fardist"] = 20;
+				objectinfo["neardist"] = 10;
+				objectinfo["type"]="axe_skel";
+				objectinfo["num"] = 5;
+				
+				insertTrigger("init_benchmark");
+			</Effect>
+		</Event>
+		<Event trigger ="animated2" >
+			<Effect>
+				objectinfo["fardist"] = 30;
+				objectinfo["neardist"] = 20;
+				objectinfo["type"]="axe_skel";
+				objectinfo["num"] = 10;
+				
+				insertTrigger("init_benchmark");
+			</Effect>
+		</Event>
+		<Event trigger ="animated3" >
+			<Effect>
+				objectinfo["fardist"] = 50;
+				objectinfo["neardist"] = 35;
+				objectinfo["type"]="axe_skel";
+				objectinfo["num"] = 20;
+				
+				insertTrigger("init_benchmark");
+			</Effect>
+		</Event>
+		
+		<Event trigger ="particle1" >
+			<Effect>
+				objectinfo["fardist"] = 20;
+				objectinfo["neardist"] = 10;
+				objectinfo["type"]="pureFire";
+				objectinfo["num"] = 4;
+				
+				insertTrigger("init_benchmark");
+			</Effect>
+		</Event>
+		<Event trigger ="particle2" >
+			<Effect>
+				objectinfo["fardist"] = 30;
+				objectinfo["neardist"] = 20;
+				objectinfo["type"]="pureFire";
+				objectinfo["num"] = 8;
+				
+				insertTrigger("init_benchmark");
+			</Effect>
+		</Event>
+		<Event trigger ="particle3" >
+			<Effect>
+				objectinfo["fardist"] = 40;
+				objectinfo["neardist"] = 30;
+				objectinfo["type"]="pureFire";
+				objectinfo["num"] = 16;
+				
+				insertTrigger("init_benchmark");
+			</Effect>
+		</Event>
+		
+		<Event trigger ="init_benchmark" >
+			<Effect>
+				
+				setCutsceneMode(true);
+				
+				addCameraPosition(0,"locCorner1", 0,70,objectinfo["fardist"]);
+				
+				 for i = 1,objectinfo["num"] do
+					 for j = 1,objectinfo["num"] do
+						local index =(i-1)*objectinfo["num"]+j;
+						local pos = getLocation("locCorner1");
+						pos[1] = pos[1] + i-objectinfo["num"]/2;
+						pos[2] = pos[2] + j-objectinfo["num"]/2;
+						
+						created_objects[index] = createObject(objectinfo["type"],pos);
+					end
+				end
+				the_location = "locCorner1";
+				
+				
+				startTimer("start_benchmark",2000);
+			</Effect>
+		</Event>	
+		
+		
+		<Event trigger ="start_benchmark" >
+			<Effect>
+				benchmark();
+				addCameraPosition(1000,location, 0,45,objectinfo["neardist"]);
+				addCameraPosition(1500,location, 180,45,objectinfo["neardist"]);
+				addCameraPosition(1500,location, 360,45,objectinfo["neardist"]);
+				addCameraPosition(1000,location, 0,45,objectinfo["fardist"]);
+				startTimer("end_benchmark",6000);
+			</Effect>
+		</Event>
+		
+		<Event trigger ="end_benchmark" >
+			<Effect>
+				for index,id in pairs(created_objects) do
+					deleteObject(id);
+				end
+				setCutsceneMode(false);
+			</Effect>
+		</Event>
+	</Region>
+		 
 		 <!-- soon to be tutorial-Region-->
 		 <Region id="0" name="region0">
 			 <Settings dimx="64" dimy="64" area_percent="0.30" complexity="0.4" granularity="8" ground="grass1"/>

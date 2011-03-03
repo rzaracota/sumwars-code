@@ -15,6 +15,10 @@ function printOgreStats()
 	printMessage("------------------------");
 end;
 
+function startBenchmark()
+	jump("benchmarkBox","locCenter");
+end;
+
 function benchmark(duration, repetitions, first)
 	duration = duration or 5000;
 	repetitions = repetitions or 1;

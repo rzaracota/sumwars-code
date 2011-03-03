@@ -2,3 +2,8 @@
         <RenderInfo name="campFire" />
         <Geometry shape="CIRCLE" radius="0.753211179"/>
 </Object>
+
+<Object type="FIXED_OBJECT" subtype="pureFire" layer="NORMAL">
+        <RenderInfo name="pureFire" />
+        <Geometry shape="CIRCLE" radius="0.753211179"/>
+</Object>

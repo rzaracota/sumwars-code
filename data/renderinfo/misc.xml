@@ -4,6 +4,12 @@
 	<ParticleSystem objectname="fireBase" source="CampFireBase"/>
 </RenderInfo>
 
+<RenderInfo name="pureFire">
+	<ParticleSystem objectname="fire" source="CampFire"/>
+	<ParticleSystem objectname="fireBase" source="CampFireBase"/>
+</RenderInfo>
+
+
 <RenderInfo name="waypoint">
 	<Entity  source="waypoint.mesh"/>
 	
