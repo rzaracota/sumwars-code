@@ -13,6 +13,8 @@
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
 			<Track source="dark_descent.ogg" />
+			<Track source="ambience_1.ogg" />
+			<Track source="ambience_2.ogg" />
 		</Music>
 		
 		<ExitDirections north="true" south="true" west="true" east="false" />
@@ -58,6 +60,8 @@
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
 			<Track source="dark_descent.ogg" />
+			<Track source="ambience_1.ogg" />
+			<Track source="ambience_2.ogg" />
 		</Music>
 		
 		<ExitDirections north="true" south="false" west="true" east="true" />
@@ -99,6 +103,8 @@
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
 			<Track source="dark_descent.ogg" />
+			<Track source="ambience_1.ogg" />
+			<Track source="ambience_2.ogg" />
 		</Music>
 		
 		<ExitDirections north="false" south="false" west="false" east="true" />
@@ -136,6 +142,8 @@
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
 			<Track source="dark_descent.ogg" />
+			<Track source="ambience_1.ogg" />
+			<Track source="ambience_2.ogg" />
 		</Music>
 		
 		<ExitDirections north="false" south="true" west="false" east="false" />
@@ -168,6 +176,8 @@
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
 			<Track source="dark_descent.ogg" />
+			<Track source="ambience_1.ogg" />
+			<Track source="ambience_2.ogg" />
 		</Music>
 		
 		<ExitDirections north="true" south="true" west="false" east="false" />
@@ -206,6 +216,8 @@
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
 			<Track source="dark_descent.ogg" />
+			<Track source="ambience_1.ogg" />
+			<Track source="ambience_2.ogg" />
 		</Music>
 		
 		<ExitDirections north="true" south="true" west="false" east="true" />
@@ -275,6 +287,8 @@
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
 			<Track source="dark_descent.ogg" />
+			<Track source="ambience_1.ogg" />
+			<Track source="ambience_2.ogg" />
 		</Music>
 		
 		<ExitDirections north="false" south="false" west="true" east="true" />
@@ -318,6 +332,8 @@
 		<Music>
 			<Track source="Dark_Exploration.ogg" />
 			<Track source="dark_descent.ogg" />
+			<Track source="ambience_1.ogg" />
+			<Track source="ambience_2.ogg" />
 		</Music>
 		
 		<ExitDirections north="false" south="false" west="true" east="true" />

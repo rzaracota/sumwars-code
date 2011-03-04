@@ -19,5 +19,6 @@ Files:
 	the_prophecy.ogg
 	treacherous_paths.ogg
 	tread_lightly.ogg
-	
+	ambience_1.ogg
+	ambience_2.ogg
 	
