@@ -58,6 +58,25 @@
 				speak('player', _("Just curious."))
 			</Effect>	
 		</Topic>
+		
+		<Topic name="rob_the_robber_reward" start_option="Rob the Robber killed">
+			<Condition>
+				if (rob_the_robber.started == true and rob_the_robber.finished ~= true and rob_the_robber.killed == true) then
+					return true
+				else
+					return false
+				end
+			</Condition>
+			<Effect>
+				rob_the_robber.finished = true
+				speak("player", _("Here is the necklace of Rob the robber."))
+				speak("Sergeant Lutterer",_("I'll be damned!"))
+				speak("Sergeant Lutterer",_("You really got him?"))
+				speak("Sergeant Lutterer",_("Better hope that the stories about him rising from his grave are just fairytales."))
+				speak("player", _("What about my reward?"))
+				speak("Sergeant Lutterer",_("Sergeant Wober in Dwarfenwall has it."))
+			</Effect>
+		</Topic>
 	</NPC>
 	
 	
