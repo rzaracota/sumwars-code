@@ -263,6 +263,7 @@
 		
 		<Event trigger ="tocamp" >
 			<Effect>
+				setOption("cap_fps","true");
 				camp();
 			</Effect>
 		</Event>

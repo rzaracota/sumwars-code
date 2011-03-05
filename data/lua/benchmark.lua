@@ -16,6 +16,7 @@ function printOgreStats()
 end;
 
 function startBenchmark()
+	setOption("cap_fps","false");
 	jump("benchmarkBox","locCenter");
 end;
 
