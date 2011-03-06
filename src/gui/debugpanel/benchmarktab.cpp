@@ -57,6 +57,8 @@ bool BenchmarkTab::handleStartBenchmark(const CEGUI::EventArgs& e)
 	m_log->logMessage("\n");
 	EventSystem::doString("startBenchmark()");
 	DebugPanel::getSingleton().toogleVisibility();
+
+	return true;
 }
 
 void BenchmarkTab::messageLogged(const Ogre::String& message, Ogre::LogMessageLevel lml, bool maskDebug, const Ogre::String& logName)
