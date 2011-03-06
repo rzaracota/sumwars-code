@@ -220,6 +220,7 @@ SET(SRCS
 IF(BUILD_TOOLS)
 SET(SRCS
 	${SRCS}
+	./src/gui/debugpanel/benchmarktab.cpp
 	./src/gui/debugpanel/debugpanel.cpp
 	./src/gui/debugpanel/iconeditortab.cpp
 	./src/gui/debugpanel/guidebugtab.cpp
@@ -233,8 +234,10 @@ ADD_EXECUTABLE(sumwars ${SRCS})
 
 #${CEGUILUA_LIBRARY}
 
+
 SET(LINK_LIBS
-	${OGRE_LIBRARIES} 
+	${OGRE_LIBRARIES}
+	${OGRE_Terrain_LIBRARY}
 	${OIS_LIBRARIES} 
 	${CEGUI_LIBRARY} 
 	${CEGUIOGRE_LIBRARY}
