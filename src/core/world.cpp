@@ -281,9 +281,8 @@ bool World::loadGameData()
 	}
 	
 	m_data_reload_requests = 0;
+	return true;
 }
-
-bool World::loadGameData();
 
 void World::deleteGameData()
 {
