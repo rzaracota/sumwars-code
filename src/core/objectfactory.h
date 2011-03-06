@@ -595,16 +595,16 @@ class ObjectFactory
 	static void init();
 	
 	/**
-	 * \fn static void cleanup()
-	 * \brief Gibt den Speicher aller Daten frei
+	 * \brief Clears up the data loaded by the World constructor
+	 * \param bitmask Specifies which data to delete, see also \ref World::DataGroups
 	 */
-	static void cleanup();
+	static void cleanup(int bitmask = 0xfffffff);
 	
 	/**
-	 * \fn static void cleanupObjectData()
 	 * \brief Loescht die Daten fuer Monster, FixedObject, Projectile, Scriptobject
+	 * \param bitmask Specifies which data to delete, see also \ref World::DataGroups
 	 */
-	static void cleanupObjectData();
+	static void cleanupObjectData(int bitmask = 0xfffffff);
 	
 	/**
 	 * \fn static std::map<GameObject::Subtype, PlayerBasicData*>& getPlayerData()

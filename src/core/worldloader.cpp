@@ -83,7 +83,7 @@ bool WorldLoader::loadRegions(TiXmlNode* node)
 		attr.getInt("id",id,-1);
 		rdata->m_id = id;
 		attr.getString("name",rdata->m_name);
-		DEBUGX("Region %s %i",rdata->m_name.c_str(), id);
+		DEBUGX("Region %s %i %p",rdata->m_name.c_str(), id, rdata);
 		World::getWorld()->registerRegionData(rdata, rdata->m_id);
 		loadRegion(node,rdata);
 		

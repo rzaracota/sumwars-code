@@ -695,8 +695,6 @@ bool Application::loadResources()
 		updateStartScreen(0.6);
 	}
 
-	// Monster initialisieren
-
 	// Objekt Templates
 	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("obj_templates","*.xml");
 	for (it = files->begin(); it != files->end(); ++it)
@@ -760,7 +758,15 @@ bool Application::loadResources()
 
 void  Application::update()
 {
-
+	if (World::getWorld() != 0)
+	{
+		World* world = World::getWorld();
+		if (world->getDataReloadRequests() != World::DATA_NONE)
+		{
+			DEBUGX("reload request %x",world->getDataReloadRequests());
+			world->loadGameData();
+		}
+	}
 }
 
 void Application::updateStartScreen(float percent)

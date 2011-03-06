@@ -23,11 +23,11 @@ void TopicList::addTopic(std::string topic, Event* speech)
 	if (m_topics.count(topic) != 0)
 	{
 			WARNING("duplicate topic %s",topic.c_str());
+			delete m_topics[topic];
+			m_topics.erase(topic);
 	}
-	else
-	{
-		m_topics.insert(std::make_pair(topic,speech));
-	}
+	
+	m_topics.insert(std::make_pair(topic,speech));
 
 }
 

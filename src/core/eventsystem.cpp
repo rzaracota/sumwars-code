@@ -12,6 +12,8 @@
 #include "scriptobject.h"
 #include "options.h"
 #include "sound.h"
+#include <algorithm> 
+#include <cctype>
 
 #ifdef DEBUG_DATABASE
 		std::map<int, std::string> EventSystem::m_code_fragments;
@@ -169,6 +171,7 @@ void EventSystem::init()
 	lua_register(m_lua, "writeLog", writeLog);
 	lua_register(m_lua, "clearOgreStatistics", clearOgreStatistics);
 	lua_register(m_lua, "getOgreStatistics", getOgreStatistics);
+	lua_register(m_lua, "reloadData", reloadData);
 	
 	lua_register(m_lua, "writeString", writeString);
 	lua_register(m_lua, "writeNewline", writeNewline);
@@ -185,7 +188,10 @@ void EventSystem::init()
 
 void  EventSystem::cleanup()
 {
-	lua_close(m_lua);
+	if (m_lua != 0)
+	{
+		lua_close(m_lua);
+	}
 	m_lua =0;
 }
 
@@ -3152,6 +3158,37 @@ int EventSystem::getOgreStatistics(lua_State *L)
 	lua_settable(L, -3);
 	
 	return 1;
+}
+
+int  EventSystem::reloadData(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 && lua_isstring(L,1))
+	{
+		std::string dataname = lua_tostring(L,1);
+		// std::transform(dataname.begin(), dataname.end(), dataname.begin(), std::tolower);
+		int bitmask = 0;
+		if (dataname == "monsters")
+			bitmask = World::DATA_MONSTERS;
+		if (dataname == "objects")
+			bitmask = World::DATA_OBJECTS;
+		if (dataname == "projectiles" || dataname == "missiles")
+			bitmask = World::DATA_PROJECTILES;
+		if (dataname == "luacode")
+			bitmask = World::DATA_LUACODE;
+		if (dataname == "abilities")
+			bitmask = World::DATA_ABILITIES;
+		if (dataname == "events")
+			bitmask = World::DATA_EVENTS;
+		
+		World::getWorld()->requestDataReload(bitmask);
+			
+	}
+	else
+	{
+		ERRORMSG("Syntax: reloadData(string dataname)");		
+	}
+	return 0;
 }
 
 int EventSystem::writeString(lua_State *L)

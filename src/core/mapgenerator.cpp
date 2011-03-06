@@ -342,13 +342,7 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 		}
 		
 		// Events kopieren
-		std::multimap<TriggerType, Event*>::iterator it;
-		Event* ev;
-		for (it = rdata->m_events.begin(); it != rdata ->m_events.end(); ++it)
-		{
-			ev = new Event(*(it->second));
-			mdata.m_region->addEvent(it->first,ev);
-		}
+		mdata.m_region->copyEventsFromRegionData(rdata);
 		
 		mdata.m_region->setReviveLocation(rdata->m_revive_location);
 		mdata.m_region->setGroundMaterial(rdata->m_ground_material);

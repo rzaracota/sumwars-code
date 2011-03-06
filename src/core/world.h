@@ -74,6 +74,48 @@ typedef std::list<int> LoginList;
 class World {
 //Public stuff
 public:
+	
+	/**
+	 * \brief Different groups of ingame data
+	 */
+	enum DataGroups
+	{
+		DATA_NONE = 0x0,
+		DATA_PLAYERCLASSES = 0x1,
+		DATA_MONSTERS = 0x2,
+		DATA_OBJECTS = 0x4,
+		
+		DATA_ALL_CREATURES = 0xF,
+		
+		DATA_PROJECTILES = 0x10,
+		DATA_ITEMS = 0x20,
+		DATA_ABILITIES = 0x40,
+		
+		DATA_ALL_OBJECTS = 0xff,	
+		
+		DATA_LUACODE = 0x100,
+		DATA_EVENTS = 0x400,
+		DATA_LUAENVIRONMENT = 0x800,
+		
+		DATA_ALL_INGAME = 0x7ff,
+		DATA_ALL_SCRIPT = 0x748,
+		
+		DATA_SOUND = 0x1000,
+		DATA_MUSIC = 0x2000,
+		DATA_RENDERINFO = 0x4000,
+		
+		DATA_ALL_CONTENT_INFO = 0xf000,
+		
+		DATA_MODELS = 0x10000,
+		DATA_GUI = 0x20000,
+		DATA_PARTICLESYSTEMS = 0x40000,
+		
+		DATA_ALL_CONTENT = 0xff000,
+		DATA_ALL = 0xfff7ff,
+		
+	};
+	
+	
 	//Fields
 	//Constructors
 	/**
@@ -93,7 +135,10 @@ public:
 	 */
 	~World();
 
-
+	/**
+	 * \brief Deletes data in global data structures and Factories
+	 */
+	void cleanup();
 
 	/**
 	 * \fn bool init(int port)
@@ -102,6 +147,18 @@ public:
 	 * \return true, wenn kein Fehler aufgetreten ist, sonst false
 	 */
 	bool init(int port );
+	
+	/**
+	 * \brief Loads all the game Data from the XML files
+	 * This function uses the \a m_data_reload_requests to determine which data to load and resets the bitmask afterwards
+	 */
+	bool loadGameData();
+	
+	/**
+	 * \brief Deletes game data loaded by \ref loadGameData
+	 * This function uses the \a m_data_reload_requests to determine which data delete
+	 */
+	void deleteGameData();
 
 	/**
 	 * \fn bool createRegion(short region)
@@ -459,11 +516,7 @@ public:
 	 * \param data Daten
 	 * \param id ID der Region
 	 */
-	void registerRegionData(RegionData* data, int id)
-	{
-		m_region_data.insert(std::make_pair(id,data));
-		m_region_name_id.insert(std::make_pair(data->m_name,id));
-	}
+	void registerRegionData(RegionData* data, int id);
 
 	/**
 	 * \fn void addEvent(RegionName rname, TriggerType type, Event* event)
@@ -556,7 +609,23 @@ public:
 	 */
 	static void deleteWorld();
 
-
+	/**
+	 * \brief Requests reloading of the components contained in the bitmask
+	 * \param bitmask Bitmask consisting of elements from \ref DataGroups
+	 */
+	void requestDataReload(int bitmask)
+	{
+		m_data_reload_requests |= bitmask;
+	}
+	
+	/**
+	 * \brief returns a bitmask that specified data to be reloaded in the next frame
+	 */
+	int getDataReloadRequests()
+	{
+		return m_data_reload_requests;
+	}
+		
 //Private stuff
 private:
 	//Fields
@@ -694,5 +763,11 @@ private:
 	 * \brief Versionsnummer
 	 */
 	static int m_version;
+	
+	/**
+	 * \brief Bitmask assembled from elements of \ref DataGroups
+	 * Initiates reloading of that data groupds contained in the bismask
+	 */
+	int m_data_reload_requests;
 };
 #endif //WORLD_H

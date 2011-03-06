@@ -396,6 +396,13 @@ ProjectileBasicData* ObjectFactory::getProjectileData(GameObject::Subtype subtyp
 		
 void ObjectFactory::registerMonster(GameObject::Subtype subtype, MonsterBasicData* data)
 {
+	if (m_monster_data.count(subtype) != 0)
+	{
+		WARNING("Duplicate Monster type %s. Replacing data.",subtype.c_str());
+		m_object_types.erase(subtype);
+		delete m_monster_data[subtype];
+		m_monster_data.erase(subtype);
+	}
 	m_object_types.insert(std::make_pair(subtype, "MONSTER"));
 	
 	DEBUGX("registered monster for subtype %s",subtype.c_str());
@@ -404,30 +411,66 @@ void ObjectFactory::registerMonster(GameObject::Subtype subtype, MonsterBasicDat
 
 void ObjectFactory::registerFixedObject(GameObject::Subtype subtype, FixedObjectData* data)
 {
+	if (m_fixed_object_data.count(subtype) != 0)
+	{
+		WARNING("Duplicate fixed object type %s. Replacing data.",subtype.c_str());
+		m_object_types.erase(subtype);
+		delete m_fixed_object_data[subtype];
+		m_fixed_object_data.erase(subtype);
+	}
 	m_object_types.insert(std::make_pair(subtype, "FIXED_OBJECT"));
 	m_fixed_object_data.insert(std::make_pair(subtype,data));
 }
 
 void ObjectFactory::registerScriptObject(GameObject::Subtype subtype, ScriptObjectData* data)
 {
+	if (m_script_object_data.count(subtype) != 0)
+	{
+		WARNING("Duplicate scriptobject type %s. Replacing data.",subtype.c_str());
+		m_object_types.erase(subtype);
+		delete m_script_object_data[subtype];
+		m_script_object_data.erase(subtype);
+	}
 	m_object_types.insert(std::make_pair(subtype, "SCRIPTOBJECT"));
 	m_script_object_data.insert(std::make_pair(subtype,data));
 }
 
 void ObjectFactory::registerProjectile(GameObject::Subtype subtype, ProjectileBasicData* data)
 {
+	if (m_projectile_data.count(subtype) != 0)
+	{
+		WARNING("Duplicate missile type %s. Replacing data.",subtype.c_str());
+		m_object_types.erase(subtype);
+		delete m_projectile_data[subtype];
+		m_projectile_data.erase(subtype);
+	}
 	m_object_types.insert(std::make_pair(subtype, "PROJECTILE"));
 	m_projectile_data.insert(std::make_pair(subtype,data));
 }
 
 void ObjectFactory::registerTreasure(GameObject::Subtype subtype, TreasureBasicData* data)
 {
+	if (m_treasure_data.count(subtype) != 0)
+	{
+		WARNING("Duplicate treasure type %s. Replacing data.",subtype.c_str());
+		m_object_types.erase(subtype);
+		delete m_treasure_data[subtype];
+		m_treasure_data.erase(subtype);
+	}
 	m_object_types.insert(std::make_pair(subtype, "TREASURE"));
 	m_treasure_data.insert(std::make_pair(subtype,data));
 }
 
 void ObjectFactory::registerPlayer(GameObject::Subtype subtype, PlayerBasicData* data)
 {
+	if (m_player_data.count(subtype) != 0)
+	{
+		WARNING("Duplicate player type %s. Replacing data.",subtype.c_str());
+		m_object_types.erase(subtype);
+		delete m_player_data[subtype];
+		m_player_data.erase(subtype);
+	}
+	
 	m_object_types.insert(std::make_pair(subtype, "PLAYER"));
 	
 	DEBUGX("registered playerclass for subtype %s",subtype.c_str());
@@ -436,14 +479,15 @@ void ObjectFactory::registerPlayer(GameObject::Subtype subtype, PlayerBasicData*
 
 void ObjectFactory::registerObjectTemplate(ObjectTemplateType type, ObjectTemplate* templ)
 {
-	if (m_object_templates.count(type)>0)
+	if (m_object_templates.count(type) != 0)
 	{
-		ERRORMSG("Object template with name %s already exists",type.c_str());
+		WARNING("Duplicate template type %s. Replacing data.",type.c_str());
+		delete m_object_templates[type];
+		m_object_templates.erase(type);
 	}
-	else
-	{
-		m_object_templates[type] = templ;
-	}
+	
+	
+	m_object_templates[type] = templ;
 }
 
 void ObjectFactory::registerObjectGroup(ObjectGroupName name, ObjectGroup* data)
@@ -547,9 +591,9 @@ void ObjectFactory::init()
 	
 }
 
-void ObjectFactory::cleanup()
+void ObjectFactory::cleanup(int bitmask)
 {
-	cleanupObjectData();
+	cleanupObjectData(bitmask);
 	
 	std::map<ObjectTemplateType, ObjectTemplate*>::iterator it3;
 	for (it3 = m_object_templates.begin(); it3 != m_object_templates.end(); ++it3)
@@ -583,58 +627,66 @@ void ObjectFactory::cleanup()
 	
 }
 
-void ObjectFactory::cleanupObjectData()
+void ObjectFactory::cleanupObjectData(int bitmask)
 {
-	std::map<GameObject::Subtype, MonsterBasicData*>::iterator it1;
-	for (it1 = m_monster_data.begin(); it1 != m_monster_data.end(); ++it1)
+	if (bitmask & World::DATA_MONSTERS)
 	{
-		delete it1->second;
+		std::map<GameObject::Subtype, MonsterBasicData*>::iterator it1;
+		for (it1 = m_monster_data.begin(); it1 != m_monster_data.end(); ++it1)
+		{
+			delete it1->second;
+		}
+		m_monster_data.clear();
+		
+		std::map< MonsterGroupName, MonsterGroup*>::iterator it5;
+		for (it5 = m_monster_groups.begin(); it5!=m_monster_groups.end(); ++it5)
+		{
+			delete it5->second;
+		}
+		m_monster_groups.clear();
+		
+		std::map<std::string, EmotionSet*>::iterator it8;
+		for (it8 = m_emotion_sets.begin(); it8 != m_emotion_sets.end(); ++it8)
+		{
+			delete it8->second;
+		}
+		m_emotion_sets.clear();
 	}
-	m_monster_data.clear();
-
-	std::map<GameObject::Subtype, FixedObjectData*>::iterator it2;
-	for (it2 = m_fixed_object_data.begin(); it2 != m_fixed_object_data.end(); ++it2)
-	{
-		delete it2->second;
-	} 
-	m_fixed_object_data.clear();
 	
-	std::map< MonsterGroupName, MonsterGroup*>::iterator it5;
-	for (it5 = m_monster_groups.begin(); it5!=m_monster_groups.end(); ++it5)
+	if (bitmask & World::DATA_OBJECTS)
 	{
-		delete it5->second;
+		std::map<GameObject::Subtype, FixedObjectData*>::iterator it2;
+		for (it2 = m_fixed_object_data.begin(); it2 != m_fixed_object_data.end(); ++it2)
+		{
+			delete it2->second;
+		} 
+		m_fixed_object_data.clear();
+		
+		std::map<GameObject::Subtype, ScriptObjectData*>::iterator it9;
+		for (it9 = m_script_object_data.begin(); it9 !=m_script_object_data.end(); ++it9)
+		{
+			delete it9->second;
+		}
+		m_script_object_data.clear();
+		
+		std::map<GameObject::Subtype, TreasureBasicData*>::iterator it10;
+		for (it10 = m_treasure_data.begin(); it10 != m_treasure_data.end(); ++it10)
+		{
+			delete it10->second;
+		}
+		m_treasure_data.clear();
 	}
-	m_monster_groups.clear();
 	
-	std::map<GameObject::Subtype, ProjectileBasicData*>::iterator it7;
-	for (it7= m_projectile_data.begin(); it7 != m_projectile_data.end(); ++it7)
-	{
-		delete it7->second;
-	} 
-	m_projectile_data.clear();
 	
-	// TODO: Emotionset wirklich loeschen ???
-	std::map<std::string, EmotionSet*>::iterator it8;
-	for (it8 = m_emotion_sets.begin(); it8 != m_emotion_sets.end(); ++it8)
+	if (bitmask & World::DATA_PROJECTILES)
 	{
-		delete it8->second;
+		std::map<GameObject::Subtype, ProjectileBasicData*>::iterator it7;
+		for (it7= m_projectile_data.begin(); it7 != m_projectile_data.end(); ++it7)
+		{
+			delete it7->second;
+		} 
+		m_projectile_data.clear();
 	}
-	m_emotion_sets.clear();
-	
-	std::map<GameObject::Subtype, ScriptObjectData*>::iterator it9;
-	for (it9 = m_script_object_data.begin(); it9 !=m_script_object_data.end(); ++it9)
-	{
-		delete it9->second;
-	}
-	m_script_object_data.clear();
-	
-	std::map<GameObject::Subtype, TreasureBasicData*>::iterator it10;
-	for (it10 = m_treasure_data.begin(); it10 != m_treasure_data.end(); ++it10)
-	{
-		delete it10->second;
-	}
-	m_treasure_data.clear();
-	
 	
 	// Zuordnung Klassenname -> Spieler wieder eintragen
 	std::map<GameObject::Subtype, PlayerBasicData*>::iterator it;

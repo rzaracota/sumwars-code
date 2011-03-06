@@ -10,6 +10,7 @@ extern "C"
 #include "lauxlib.h"
 }
 
+#include "eventsystem.h"
 
 /**
  * \var struct HybridImplementation
@@ -32,6 +33,14 @@ struct HybridImplementation
 	HybridImplementation()
 	{
 		m_lua_impl = LUA_NOREF;
+	}
+	
+	/**
+	 * \brief Destructor
+	 */
+	~HybridImplementation()
+	{
+		EventSystem::clearCodeReference(m_lua_impl);
 	}
 };
 

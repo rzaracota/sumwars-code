@@ -88,119 +88,9 @@ void  World::createWorld(bool server, int port, bool cooperative, int max_player
 
 bool World::init(int port)
 {
-	Ogre::FileInfoListPtr files;
-	Ogre::FileInfoList::iterator it;
-	std::string file;
-
-	EventSystem::init();
-	EventSystem::pushGettextDomain("sumwars");
-	Dialogue::init();
-
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("lua","*.lua");
-	for (it = files->begin(); it != files->end(); ++it)
-	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
-		EventSystem::doFile(file.c_str());
-	}
-
-	// Aktionen initialisieren
-	Action::init();
-
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("abilities","*.xml");
-	for (it = files->begin(); it != files->end(); ++it)
-	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
-
-		Action::loadAbilityData(file.c_str());
-
-	}
-
-	ObjectFactory::init();
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("monsters","*.xml");
-	for (it = files->begin(); it != files->end(); ++it)
-	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
-
-		ObjectLoader::loadMonsterData(file.c_str());
-
-	}
-
-	// TODO: funktioniert nur, solange kein LUA Code enthalten
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("projectiles","*.xml");
-	for (it = files->begin(); it != files->end(); ++it)
-	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
-
-		ObjectLoader::loadProjectileData(file.c_str());
-	}
-
-	// feste Objekte Initialisieren
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("objects","*.xml");
-	for (it = files->begin(); it != files->end(); ++it)
-	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
-
-		ObjectLoader::loadObjectData(file.c_str());
-
-	}
-	EventSystem::popGettextDomain();
-	
-	if (m_server)
-	{
-		EventSystem::pushGettextDomain("sumwars");
-		WorldLoader worldloader;
-		std::list<RegionData*> region_list;
-		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("world","*.xml");
-
-		for (it = files->begin(); it != files->end(); ++it)
-		{
-			file = it->archive->getName();
-			file += "/";
-			file += it->filename;
-			//worldloader.loadRegionData(file.c_str(), region_list);
-			worldloader.loadRegionData(file.c_str());
-		}
-
-		/*
-		std::list<RegionData*>::iterator rt;
-		for (rt = region_list.begin(); rt != region_list.end();rt++)
-		{
-			registerRegionData(*rt, (*rt)->m_id);
-		}
-		*/
-
-		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("npc","*.xml");
-		for (it = files->begin(); it != files->end(); ++it)
-		{
-			file = it->archive->getName();
-			file += "/";
-			file += it->filename;
-			worldloader.loadNPCData(file.c_str());
-		}
-		EventSystem::popGettextDomain();
-
-		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("quests","*.xml");
-		for (it = files->begin(); it != files->end(); ++it)
-		{
-			file = it->archive->getName();
-			file += "/";
-			file += it->filename;
-			worldloader.loadQuestsData(file.c_str());
-		}
-
-
-	}
-
+	m_data_reload_requests = DATA_MONSTERS | DATA_OBJECTS | DATA_PROJECTILES | DATA_ABILITIES
+		| DATA_LUACODE | DATA_EVENTS | DATA_LUAENVIRONMENT;
+	loadGameData();
 
 	if (m_max_nr_players > 1)
 	{
@@ -227,10 +117,235 @@ bool World::init(int port)
 
 	// Regionen aus XML Laden
 
-
 	return true;
 }
 
+
+bool World::loadGameData()
+{
+	// deletes exactly the data that is reloaded afterwards
+	deleteGameData();
+	
+	Ogre::FileInfoListPtr files;
+	Ogre::FileInfoList::iterator it;
+	std::string file;
+	
+	if (m_data_reload_requests & DATA_LUAENVIRONMENT)
+	{
+		EventSystem::init();
+	}
+	
+	EventSystem::pushGettextDomain("sumwars");
+	Dialogue::init();
+
+	if (m_data_reload_requests & DATA_LUACODE)
+	{
+		DEBUG("Loading lua files.");
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("lua","*.lua");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+			file = it->archive->getName();
+			file += "/";
+			file += it->filename;
+			EventSystem::doFile(file.c_str());
+		}
+	}
+
+	// Aktionen initialisieren
+	if (m_data_reload_requests & DATA_ABILITIES)
+	{
+		DEBUG("Loading ability data.");
+		Action::init();
+
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("abilities","*.xml");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+			file = it->archive->getName();
+			file += "/";
+			file += it->filename;
+
+			Action::loadAbilityData(file.c_str());
+
+		}
+	}
+
+	if (m_data_reload_requests & DATA_MONSTERS)
+	{
+		DEBUG("Loading monster data.");
+		// Monster Data
+		ObjectFactory::init();
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("monsters","*.xml");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+			file = it->archive->getName();
+			file += "/";
+			file += it->filename;
+
+			ObjectLoader::loadMonsterData(file.c_str());
+
+		}
+	}
+
+	if (m_data_reload_requests & DATA_PROJECTILES)
+	{
+		DEBUG("Loading missile data.");
+		// Projectile Data
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("projectiles","*.xml");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+			file = it->archive->getName();
+			file += "/";
+			file += it->filename;
+
+			ObjectLoader::loadProjectileData(file.c_str());
+		}
+	}
+
+	if (m_data_reload_requests & DATA_OBJECTS)
+	{
+		DEBUG("Loading fixed object data.");
+		// fixed object Data
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("objects","*.xml");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+			file = it->archive->getName();
+			file += "/";
+			file += it->filename;
+			ObjectLoader::loadObjectData(file.c_str());
+		}
+	}
+	EventSystem::popGettextDomain();
+	
+	if (m_server)
+	{
+		EventSystem::pushGettextDomain("sumwars");
+		WorldLoader worldloader;
+
+		if (m_data_reload_requests & DATA_EVENTS)
+		{
+			DEBUG("Loading region data.");
+			files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("world","*.xml");
+			for (it = files->begin(); it != files->end(); ++it)
+			{
+				file = it->archive->getName();
+				file += "/";
+				file += it->filename;
+				worldloader.loadRegionData(file.c_str());
+			}
+		}
+
+		if (m_data_reload_requests & DATA_EVENTS)
+		{
+			DEBUG("Loading npc data.");
+
+			files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("npc","*.xml");
+			for (it = files->begin(); it != files->end(); ++it)
+			{
+				file = it->archive->getName();
+				file += "/";
+				file += it->filename;
+				worldloader.loadNPCData(file.c_str());
+			}
+			
+			DEBUG("Loading quest data.");
+
+			files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("quests","*.xml");
+			for (it = files->begin(); it != files->end(); ++it)
+			{
+				file = it->archive->getName();
+				file += "/";
+				file += it->filename;
+				worldloader.loadQuestsData(file.c_str());
+			}
+			
+			// If regions are already present, reload the events, 
+			// that are copied from RegionData structures
+			std::map<int,Region*>::iterator rit;
+			for (rit = m_regions.begin(); rit != m_regions.end(); rit++)
+			{
+				Region* region = rit->second;
+				
+				RegionData* rdata;
+				std::map<int, RegionData*>::iterator it;
+				it = m_region_data.find(region->getId());
+				if (it == m_region_data.end())
+				{
+					ERRORMSG("No data for region %i",region->getId());
+					continue;
+				}
+				
+				rdata = it->second;
+				rit->second->copyEventsFromRegionData(rdata);
+			}
+		}
+	}
+	
+	m_data_reload_requests = 0;
+}
+
+bool World::loadGameData();
+
+void World::deleteGameData()
+{
+	if (m_data_reload_requests & DATA_EVENTS)
+	{
+		// Clear copied events from Regions
+		// as these events lua code pointers point into the RegionData deleted now
+		std::map<int,Region*>::iterator rit;
+		for (rit = m_regions.begin(); rit != m_regions.end(); rit++)
+		{
+			rit->second->deleteCopiedEvents();
+		}
+		
+		std::map<Fraction::Id, Fraction*>::iterator fit;
+		for (fit =m_fractions.begin(); fit != m_fractions.end(); ++fit)
+		{
+			delete fit->second;
+		}
+		m_fractions.clear();
+		
+		std::map<int, RegionData*>::iterator it;
+		for (it = m_region_data.begin(); it != m_region_data.end(); ++it)
+		{
+			delete it->second;
+		}
+		m_region_data.clear();
+		m_region_name_id.clear();
+		
+		std::map<std::string, Quest*>::iterator qit;
+		for (qit = m_quests.begin(); qit != m_quests.end(); ++qit)
+		{
+			delete qit->second;
+		}
+		m_quests.clear();
+		Dialogue::cleanup();
+	}
+	
+	ObjectFactory::cleanupObjectData(m_data_reload_requests);
+	
+	if (m_data_reload_requests & DATA_ABILITIES)
+	{
+		Action::cleanup();
+	}
+	
+	if (m_data_reload_requests & DATA_LUAENVIRONMENT)
+	{
+		EventSystem::cleanup();
+	}
+}
+
+void World::registerRegionData(RegionData* data, int id)
+{
+	if (m_region_data.count(id) > 0)
+	{
+		WARNING("Duplicate region data for Region %i",id);
+		delete m_region_data[id];
+		m_region_data.erase(id);
+	}
+	
+	m_region_data.insert(std::make_pair(id,data));
+	m_region_name_id[data->m_name] = id;
+}
 
 bool World::createRegion(short region)
 {
@@ -364,36 +479,26 @@ World::~World()
 		delete m_network;
 	}
 
-
-	std::map<int, RegionData*>::iterator it;
-
-	for (it = m_region_data.begin(); it != m_region_data.end(); ++it)
-	{
-		delete it->second;
-	}
-
 	std::map<int,Region*>::iterator rit;
 	for (rit = m_regions.begin(); rit != m_regions.end(); rit++)
 	{
 		delete rit->second;
 	}
+	m_regions.clear();
 
-	std::map<std::string, Quest*>::iterator qit;
-	for (qit = m_quests.begin(); qit != m_quests.end(); ++qit)
-	{
-		delete qit->second;
-	}
-
+	cleanup();
 
 	//delete[] m_parties;
 	delete m_player_slots;
 	delete m_players;
 	delete m_events;
+}
 
-	ObjectFactory::cleanupObjectData();
-	Action::cleanup();
-	Dialogue::cleanup();
-	EventSystem::cleanup();
+void World::cleanup()
+{
+	// this makes sure, that cleanup deletes all data
+	m_data_reload_requests = DATA_ALL;	
+	deleteGameData();
 }
 
 Region* World::getRegion(int rid)

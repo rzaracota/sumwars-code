@@ -1233,6 +1233,17 @@ class Region
 		void addEvent(TriggerType trigger, Event* event);
 		
 		/**
+		 * \brief Deletes all Events that were copied from RegionData* structures
+		 */
+		void deleteCopiedEvents();
+		
+		/**
+		 * \brief Copies the events from a \ref RegionData structure
+		 * \rdata RegionData to copy events from
+		 */
+		void copyEventsFromRegionData(RegionData* rdata);
+		
+		/**
 		 * \fn Damage& getDamageObject(std::string name)
 		 * \brief Gibt das Schadensobjekt mit dem angegebenen Name aus. Wenn das Objekt noch nicht existierte wird es angelegt
 		 * \param name Name

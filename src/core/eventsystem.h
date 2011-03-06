@@ -806,6 +806,12 @@ class EventSystem
 		static int writeLog(lua_State *L);
 		
 		/**
+		 * \brief Reloads a certain set of game data
+		 * \param L Lua Status
+		 */
+		static int reloadData(lua_State *L);
+		
+		/**
 		 * \brief Setzt die Statistiken von OGRE zurueck
 		 * \param L Lua Status
 		 */

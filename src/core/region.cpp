@@ -2925,6 +2925,33 @@ void Region::addEvent(TriggerType trigger, Event* event)
 	m_events.insert(std::make_pair(trigger,event));
 }
 
+void Region::deleteCopiedEvents()
+{
+	std::multimap<TriggerType, Event*>::iterator it,jt;
+	for (it = m_events.begin(); it != m_events.end(); )
+	{
+		jt = it;
+		++it;
+		Event* ev = jt->second;
+		if (ev->isCopy())
+		{
+			delete ev;
+			m_events.erase(jt);
+		}
+	}
+}
+
+void Region::copyEventsFromRegionData(RegionData* rdata)
+{
+	std::multimap<TriggerType, Event*>::iterator it;
+	Event* ev;
+	for (it = rdata->m_events.begin(); it != rdata ->m_events.end(); ++it)
+	{
+		ev = new Event(*(it->second));
+		addEvent(it->first,ev);
+	}
+}
+
 void Region::setCutsceneMode(bool mode)
 {
 	NetEvent event;

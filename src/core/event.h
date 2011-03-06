@@ -237,6 +237,14 @@ class Event
 		}
 		
 		/**
+		 * \brief Returns if this event is a copy from a \ref RegionData 
+		 */
+		bool isCopy()
+		{
+			return m_copy;
+		}
+		
+		/**
 		 * \brief Setzt die Gettextdomain
 		 */
 		void setGettextDomain(std::string gettext_domain)
