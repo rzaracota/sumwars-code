@@ -3,6 +3,8 @@
 #include "Ogre.h"
 #include "OgrePlatformInformation.h"
 
+#include "Poco/Environment.h"
+
 #include "CEGUIWindowManager.h"
 #include "CEGUI.h"
 
@@ -10,6 +12,7 @@
 #include <debugpanel.h>
 
 using namespace CEGUI;
+using Poco::Environment;
 
 CEGUI::String BenchmarkTab::WidgetTypeName = "BenchmarkTab";
 
@@ -36,6 +39,10 @@ BenchmarkTab::BenchmarkTab(const CEGUI::String& type, const CEGUI::String& name)
 
 bool BenchmarkTab::handleStartBenchmark(const CEGUI::EventArgs& e)
 {
+	m_log->logMessage(Environment::osName() + " " + Environment::osVersion() + " " + Environment::osArchitecture());
+	m_log->logMessage("\n---------------------");
+
+
 	Ogre::PlatformInformation::log(m_log);
 	const_cast<Ogre::RenderSystemCapabilities*>(m_ogreRoot->getRenderSystem()->getCapabilities())->log(m_log);
 	

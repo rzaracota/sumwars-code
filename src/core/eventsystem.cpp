@@ -3128,7 +3128,6 @@ int EventSystem::getOgreStatistics(lua_State *L)
 	lua_newtable(L);
 	
 	const Ogre::RenderTarget::FrameStats& stats = Ogre::Root::getSingleton().getAutoCreatedWindow()->getStatistics();
-
 	
 	Ogre::LogManager::getSingleton().getLog("BenchLog.log")->logMessage("------------------------------");
 	Ogre::LogManager::getSingleton().getLog("BenchLog.log")->logMessage("avarage FPS:     " + Ogre::StringConverter::toString(stats.avgFPS));
