@@ -3130,12 +3130,12 @@ int EventSystem::getOgreStatistics(lua_State *L)
 	const Ogre::RenderTarget::FrameStats& stats = Ogre::Root::getSingleton().getAutoCreatedWindow()->getStatistics();
 
 	
-	Ogre::LogManager::getSingleton().getLog("BenchLog")->logMessage("------------------------------");
-	Ogre::LogManager::getSingleton().getLog("BenchLog")->logMessage("avarage FPS:     " + Ogre::StringConverter::toString(stats.avgFPS));
-	Ogre::LogManager::getSingleton().getLog("BenchLog")->logMessage("worst FPS:       " + Ogre::StringConverter::toString(stats.worstFPS));
-	Ogre::LogManager::getSingleton().getLog("BenchLog")->logMessage("worst FrameTime: " + Ogre::StringConverter::toString(stats.worstFrameTime));
-	Ogre::LogManager::getSingleton().getLog("BenchLog")->logMessage("Triangles:       " + Ogre::StringConverter::toString(stats.triangleCount));
-	Ogre::LogManager::getSingleton().getLog("BenchLog")->logMessage("Batches:         " + Ogre::StringConverter::toString(stats.batchCount));
+	Ogre::LogManager::getSingleton().getLog("BenchLog.log")->logMessage("------------------------------");
+	Ogre::LogManager::getSingleton().getLog("BenchLog.log")->logMessage("avarage FPS:     " + Ogre::StringConverter::toString(stats.avgFPS));
+	Ogre::LogManager::getSingleton().getLog("BenchLog.log")->logMessage("worst FPS:       " + Ogre::StringConverter::toString(stats.worstFPS));
+	Ogre::LogManager::getSingleton().getLog("BenchLog.log")->logMessage("worst FrameTime: " + Ogre::StringConverter::toString(stats.worstFrameTime));
+	Ogre::LogManager::getSingleton().getLog("BenchLog.log")->logMessage("Triangles:       " + Ogre::StringConverter::toString(stats.triangleCount));
+	Ogre::LogManager::getSingleton().getLog("BenchLog.log")->logMessage("Batches:         " + Ogre::StringConverter::toString(stats.batchCount));
 	
 	lua_pushstring(L, "avgFPS");
 	lua_pushnumber(L, stats.avgFPS);
