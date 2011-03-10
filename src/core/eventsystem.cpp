@@ -3185,6 +3185,8 @@ int  EventSystem::reloadData(lua_State *L)
 			bitmask = World::DATA_EVENTS;
 		if (dataname == "sounds")
 			bitmask = World::DATA_SOUND;
+		if (dataname == "music")
+			bitmask = World::DATA_MUSIC;
 		if (dataname == "renderinfo")
 			bitmask = World::DATA_RENDERINFO;
 		if (dataname == "models")

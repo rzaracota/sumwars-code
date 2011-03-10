@@ -215,6 +215,32 @@ void SoundSystem::cleanup()
 	clearObjects();
 }
 
+void SoundSystem::cleanupBuffers()
+{
+	// stop the soundsobjects from using buffer contents
+	std::list<SoundObject*>::iterator jt;
+	for (jt = m_ambient_sounds.begin(); jt != m_ambient_sounds.end(); ++jt)
+	{
+		(*jt)->stop();
+	}
+	
+	std::map<std::string, SoundObject*>::iterator it;
+	for (it = m_sound_objects.begin(); it != m_sound_objects.end(); ++it)
+	{
+		it->second->stop();
+	}
+	
+	std::vector<Sound>::iterator st;
+	for (std::map<SoundName, SoundSet>::iterator it = m_sounds.begin(); it != m_sounds.end(); ++it)
+	{
+		for (st = it->second.m_sounds.begin(); st != it->second.m_sounds.end(); ++st)
+		{
+			alDeleteBuffers(1,&(*st));
+		}
+	}
+	m_sounds.clear();
+}
+
 void SoundSystem::clearObjects()
 {
 	std::map<std::string, SoundObject*>::iterator it;

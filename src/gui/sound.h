@@ -112,6 +112,11 @@ class SoundSystem
 		static void cleanup();
 		
 		/**
+		 * \brief Deletes the buffers only and prepares for reloading
+		 */
+		static void cleanupBuffers();
+		
+		/**
 		 * \fn static void clearObjects()
 		 * \brief Loescht alle SoundObjekte
 		 */

@@ -869,7 +869,13 @@ void Application::cleanup(int datagroups)
 	
 	if (datagroups & World::DATA_SOUND)
 	{
-		// TODO
+		SoundSystem::cleanupBuffers();
+	}
+	
+	if (datagroups & World::DATA_MUSIC)
+	{
+		// just stop the music to release the buffers
+		MusicManager::instance().stop();
 	}
 }
 
