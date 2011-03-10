@@ -16,6 +16,7 @@
 //#include "CEGUI/ScriptingModules/LuaScriptModule/CEGUILua.h"
 
 #include "OgreConfigFile.h"
+#include <OgreParticleSystemManager.h>
 
 #ifdef __APPLE__
 #include <physfs.h>
@@ -32,6 +33,7 @@ Application::Application(char *argv)
 {
 	// Anwendung initialisieren
 	bool ret = false;
+	m_running = false;
 	try
 	{
 		ret = init(argv);
@@ -204,6 +206,8 @@ Application::~Application()
 
 void Application::run()
 {
+	m_running = true;
+	
 	Ogre::Timer timer;
 	float time[7]={0,0,0,0,0,0,0},t;
 	float frametime;
@@ -452,6 +456,7 @@ bool Application::setupResources()
 
 	// Gruppen initialisieren
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("General");
+	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Particles");
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Savegame");
 	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("GUI");
 
@@ -620,7 +625,7 @@ bool Application::createView()
 	return true;
 }
 
-bool Application::loadResources()
+bool Application::loadResources(int datagroups)
 {
 	TiXmlBase::SetCondenseWhiteSpace(false);
 
@@ -628,132 +633,244 @@ bool Application::loadResources()
 	Ogre::FileInfoList::iterator it;
 	std::string file;
 
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.png");
-	for (it = files->begin(); it != files->end(); ++it)
+	if (datagroups & World::DATA_IMAGES)
 	{
+		DEBUG("Loading images.");
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.png");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
 
-		file = it->filename;
+			file = it->filename;
 
-		CEGUI::ImagesetManager::getSingleton().createFromImageFile(file,file,(CEGUI::utf8*)"itempictures");
+			CEGUI::ImagesetManager::getSingleton().createFromImageFile(file,file,(CEGUI::utf8*)"itempictures");
 
-		updateStartScreen(0.1);
+			updateStartScreen(0.1);
+		}
+
+		// Imagesets laden
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.imageset");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+
+			file = it->filename;
+
+			CEGUI::ImagesetManager::getSingleton().create(file);
+
+			updateStartScreen(0.2);
+		}
+	
+
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("emotionsets","*.imageset");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+
+			file = it->filename;
+
+			CEGUI::ImagesetManager::getSingleton().create(file);
+
+			updateStartScreen(0.3);
+		}
+	
 	}
 
-	// Imagesets laden
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.imageset");
-	for (it = files->begin(); it != files->end(); ++it)
+	if (datagroups & World::DATA_MODELS)
 	{
-
-		file = it->filename;
-
-		CEGUI::ImagesetManager::getSingleton().create(file);
-
-		updateStartScreen(0.2);
+		DEBUG("Loading models.");
+		Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("General");
 	}
-
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("emotionsets","*.imageset");
-	for (it = files->begin(); it != files->end(); ++it)
+	if (datagroups & World::DATA_PARTICLESYSTEMS)
 	{
-
-		file = it->filename;
-
-		CEGUI::ImagesetManager::getSingleton().create(file);
-
-		updateStartScreen(0.3);
+		DEBUG("Loading particlesystems.");
+		
+		Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("Particles");
+		if (m_running)
+		{
+			files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("Particles","*.particle");
+			for (it = files->begin(); it != files->end(); ++it)
+			{
+				try
+				{
+					file = it->filename;
+					DEBUGX("loading script file %s",file.c_str());
+					Ogre::DataStreamPtr filehandle;
+					filehandle = Ogre::ResourceGroupManager::getSingleton().openResource(file);
+					Ogre::ParticleSystemManager::getSingleton().parseScript(filehandle,"Particles" ); 
+				}
+				catch (Ogre::Exception& e)
+				{
+					DEBUG("failed with exception %s",e.what());
+				}
+			}
+		}
+		
 	}
-
-	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("General");
 	updateStartScreen(0.4);
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("Savegame");
 	updateStartScreen(0.5);
-	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("GUI");
+	if (datagroups & World::DATA_GUI)
+	{
+		Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("GUI");
+	}
 
 	// Spielerklassen initialisieren
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("playerclasses","*.xml");
-	for (it = files->begin(); it != files->end(); ++it)
+	if (datagroups & World::DATA_PLAYERCLASSES)
 	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
+		DEBUG("Loading playerclasses.");
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("playerclasses","*.xml");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+			file = it->archive->getName();
+			file += "/";
+			file += it->filename;
 
-		ObjectLoader::loadPlayerData(file.c_str());
+			ObjectLoader::loadPlayerData(file.c_str());
 
-		updateStartScreen(0.55);
+			updateStartScreen(0.55);
+		}
+	}
+	
+	if (datagroups & World::DATA_ITEMS)
+	{
+		DEBUG("Loading items.");
+		// Items initialisieren
+		ItemFactory::init();
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("items","*.xml");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+			file = it->archive->getName();
+			file += "/";
+			file += it->filename;
+
+			ItemLoader::loadItemData(file.c_str());
+
+			updateStartScreen(0.6);
+		}
 	}
 
-	// Items initialisieren
-	ItemFactory::init();
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("items","*.xml");
-	for (it = files->begin(); it != files->end(); ++it)
+	if (datagroups & World::DATA_OBJECTS)
 	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
+		// Objekt Templates
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("obj_templates","*.xml");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+			file = it->archive->getName();
+			file += "/";
+			file += it->filename;
 
-		ItemLoader::loadItemData(file.c_str());
+			TemplateLoader::loadObjectTemplateData(file.c_str());
 
-		updateStartScreen(0.6);
+			updateStartScreen(0.65);
+		}
+		
+		// Objekt Gruppen Templates
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("object_groups","*.xml");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+			file = it->archive->getName();
+			file += "/";
+			file += it->filename;
+			TemplateLoader::loadObjectGroupData(file.c_str());
+
+			updateStartScreen(0.7);
+		}
 	}
 
-	// Objekt Templates
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("obj_templates","*.xml");
-	for (it = files->begin(); it != files->end(); ++it)
+	if (datagroups & World::DATA_RENDERINFO)
 	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
+		DEBUG("Loading renderinfo.");
+		
+		// Render Infos
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("renderinfo","*.xml");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+			file = it->archive->getName();
+			file += "/";
+			file += it->filename;
+			GraphicManager::loadRenderInfoData(file.c_str());
 
-		TemplateLoader::loadObjectTemplateData(file.c_str());
-
-		updateStartScreen(0.65);
+			updateStartScreen(0.8);
+		}
 	}
 
-	// Objekt Gruppen Templates
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("object_groups","*.xml");
-	for (it = files->begin(); it != files->end(); ++it)
+	if (datagroups & World::DATA_SOUND)
 	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
-		TemplateLoader::loadObjectGroupData(file.c_str());
+		DEBUG("Loading sound.");
+		
+		// Sounds
+		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("sounddata","*.xml");
+		for (it = files->begin(); it != files->end(); ++it)
+		{
+			file = it->archive->getName();
+			file += "/";
+			file += it->filename;
 
-		updateStartScreen(0.7);
+			SoundSystem::loadSoundData(file.c_str());
+
+			updateStartScreen(0.9);
+		}
 	}
-
-	// Render Infos
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("renderinfo","*.xml");
-	for (it = files->begin(); it != files->end(); ++it)
+	
+	if (!m_running)
 	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
-		GraphicManager::loadRenderInfoData(file.c_str());
+		Ogre::MeshManager& mesh_mgr = Ogre::MeshManager::getSingleton();
+		Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
+		mesh_mgr.createPlane("ground", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane, 200, 200, 5, 5, true, 1,1,1,Ogre::Vector3::UNIT_X);
 
-		updateStartScreen(0.8);
+		updateStartScreen(1.0);
+	
+	
+		m_main_window->setReadyToStart(true);
 	}
-
-	// Sounds
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("sounddata","*.xml");
-	for (it = files->begin(); it != files->end(); ++it)
-	{
-		file = it->archive->getName();
-		file += "/";
-		file += it->filename;
-
-		SoundSystem::loadSoundData(file.c_str());
-
-		updateStartScreen(0.9);
-	}
-
-	Ogre::MeshManager& mesh_mgr = Ogre::MeshManager::getSingleton();
-	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
-	mesh_mgr.createPlane("ground", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane, 200, 200, 5, 5, true, 1,1,1,Ogre::Vector3::UNIT_X);
-
-	updateStartScreen(1.0);
-
-	m_main_window->setReadyToStart(true);
 
 	return true;
+}
+
+void Application::cleanup(int datagroups)
+{
+	if (datagroups & World::DATA_IMAGES)
+	{
+		// TODO
+	}
+	
+	if (datagroups & World::DATA_MODELS)
+	{
+		// only unload ressources that can be reloaded later
+		Ogre::ResourceGroupManager::getSingleton().unloadResourceGroup("General", true);
+	}
+	
+	if (datagroups & World::DATA_PARTICLESYSTEMS)
+	{
+		//Ogre::ResourceGroupManager::getSingleton().unloadResourceGroup("Particles", true);
+		// delete all the templates from the ParticleSystemManager
+		Ogre::ParticleSystemManager& pmgr = Ogre::ParticleSystemManager::getSingleton();
+		pmgr.removeAllTemplates();
+		
+		GraphicManager::clearParticlePool();
+		DEBUGX("deleting particlesystems");
+	}
+	
+	if (datagroups & World::DATA_GUI)
+	{
+		// only unload ressources that can be reloaded later
+		Ogre::ResourceGroupManager::getSingleton().unloadResourceGroup("GUI", true);
+	}
+	
+	ObjectFactory::cleanup(datagroups);
+	
+	if (datagroups & World::DATA_ITEMS)
+	{
+		ItemFactory::cleanup();
+	}
+	
+	if (datagroups & World::DATA_RENDERINFO)
+	{
+		// TODO
+	}
+	
+	if (datagroups & World::DATA_SOUND)
+	{
+		// TODO
+	}
 }
 
 void  Application::update()
@@ -763,7 +880,13 @@ void  Application::update()
 		World* world = World::getWorld();
 		if (world->getDataReloadRequests() != World::DATA_NONE)
 		{
-			DEBUGX("reload request %x",world->getDataReloadRequests());
+			DEBUG("reload request %x",world->getDataReloadRequests());
+			
+			int datagroups = world->getDataReloadRequests();
+			
+			cleanup(datagroups);
+			Application::loadResources(datagroups);
+			
 			world->loadGameData();
 		}
 	}
@@ -771,6 +894,10 @@ void  Application::update()
 
 void Application::updateStartScreen(float percent)
 {
+	// this occurs when ressources are loaded while running
+	if (m_running)
+		return;
+	
 	if (m_timer.getTime() < 20)
 	{
 		return;

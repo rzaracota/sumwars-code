@@ -364,6 +364,10 @@ void ItemFactory::cleanup()
 		DEBUGX("deleting item data %s",it->first.c_str());
 		delete it->second;
 	}
+	m_item_data.clear();
+	m_item_types.clear();
+	m_item_probabilities.clear();
+	
 }
 
 Item* ItemFactory::createItem(DropSlot &slot, float factor )

@@ -123,10 +123,16 @@ class Application
 		bool createDocument();
 
 		/**
-		 * \fn bool loadResources()
-		 * \brief liest die Ressourcen
+		 * \brief loads the ressources specified by \a datagroups
+		 * \param datagroups bitmask consisting of members of \ref World::DataGroups
 		 */
-		bool loadResources();
+		bool loadResources(int datagroups=0xfffffff);
+		
+		/**
+		 * \brief clears the Ressources specified by \a datagroups
+		 * \param datagroups bitmask consisting of members of \ref World::DataGroups
+		 */
+		void cleanup(int datagroups=0xfffffff);
 
 		/**
 		 * \fn virtual void update()
@@ -191,10 +197,7 @@ class Application
  		Ogre::SceneManager *m_scene_manager;
         
 
-        /**
-         * \var Ogre::RTS
-        
-		/**
+ 		/**
 		 * \var bool m_shutdown
 		 * \brief true, wenn die Anwendung beendet werden soll
 		 */
@@ -219,6 +222,11 @@ class Application
 		 * \brief Timer fuer verschiedene Verwendungszwecke
 		 */
 		Timer m_timer;
+		
+		/**
+		 * \brief Set to true if the application has reached the run loop
+		 */
+		bool m_running;
 };
 
 

@@ -594,37 +594,39 @@ void ObjectFactory::init()
 void ObjectFactory::cleanup(int bitmask)
 {
 	cleanupObjectData(bitmask);
-	
-	std::map<ObjectTemplateType, ObjectTemplate*>::iterator it3;
-	for (it3 = m_object_templates.begin(); it3 != m_object_templates.end(); ++it3)
+	if (bitmask & World::DATA_OBJECTS)
 	{
-		delete it3->second;
-	} 
-	m_object_templates.clear();
-	
-	std::map<ObjectGroupName, ObjectGroup*>::iterator it4;
-	for (it4 = m_object_groups.begin(); it4!= m_object_groups.end(); ++it4)
-	{
-		delete it4->second;
-	} 
-	m_object_groups.clear();
-	
+		std::map<ObjectTemplateType, ObjectTemplate*>::iterator it3;
+		for (it3 = m_object_templates.begin(); it3 != m_object_templates.end(); ++it3)
+		{
+			delete it3->second;
+		} 
+		m_object_templates.clear();
 
-	
-	std::map<GameObject::Subtype, PlayerBasicData*>::iterator it6;
-	for (it6= m_player_data.begin(); it6 != m_player_data.end(); ++it6)
-	{
-		delete it6->second;
+		std::map<ObjectGroupName, ObjectGroup*>::iterator it4;
+		for (it4 = m_object_groups.begin(); it4!= m_object_groups.end(); ++it4)
+		{
+			delete it4->second;
+		} 
+		m_object_groups.clear();
+		
+		std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it13;
+		for (it13 = m_object_group_templates.begin(); it13 != m_object_group_templates.end(); ++it13)
+		{
+			delete it13->second;
+		}
+		m_object_group_templates.clear();
 	}
-	m_player_data.clear();
-	
-	std::map<ObjectGroupTemplateName, ObjectGroupTemplate*>::iterator it13;
-	for (it13 = m_object_group_templates.begin(); it13 != m_object_group_templates.end(); ++it13)
+
+	if (bitmask & World::DATA_PLAYERCLASSES)
 	{
-		delete it13->second;
+		std::map<GameObject::Subtype, PlayerBasicData*>::iterator it6;
+		for (it6= m_player_data.begin(); it6 != m_player_data.end(); ++it6)
+		{
+			delete it6->second;
+		}
+		m_player_data.clear();
 	}
-	m_object_group_templates.clear();
-	
 }
 
 void ObjectFactory::cleanupObjectData(int bitmask)

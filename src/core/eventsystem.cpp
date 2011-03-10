@@ -3167,18 +3167,34 @@ int  EventSystem::reloadData(lua_State *L)
 		std::string dataname = lua_tostring(L,1);
 		// std::transform(dataname.begin(), dataname.end(), dataname.begin(), std::tolower);
 		int bitmask = 0;
+		if (dataname == "playerclasses")
+			bitmask = World::DATA_PLAYERCLASSES;
 		if (dataname == "monsters")
 			bitmask = World::DATA_MONSTERS;
 		if (dataname == "objects")
 			bitmask = World::DATA_OBJECTS;
 		if (dataname == "projectiles" || dataname == "missiles")
 			bitmask = World::DATA_PROJECTILES;
-		if (dataname == "luacode")
-			bitmask = World::DATA_LUACODE;
+		if (dataname == "items")
+			bitmask = World::DATA_ITEMS;
 		if (dataname == "abilities")
 			bitmask = World::DATA_ABILITIES;
+		if (dataname == "luacode")
+			bitmask = World::DATA_LUACODE;
 		if (dataname == "events")
 			bitmask = World::DATA_EVENTS;
+		if (dataname == "sounds")
+			bitmask = World::DATA_SOUND;
+		if (dataname == "renderinfo")
+			bitmask = World::DATA_RENDERINFO;
+		if (dataname == "models")
+			bitmask = World::DATA_MODELS;
+		if (dataname == "gui")
+			bitmask = World::DATA_GUI;
+		if (dataname == "particlesystems")
+			bitmask = World::DATA_PARTICLESYSTEMS;
+		if (dataname == "images")
+			bitmask = World::DATA_IMAGES;
 		
 		World::getWorld()->requestDataReload(bitmask);
 			
