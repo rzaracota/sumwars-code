@@ -10,6 +10,7 @@ std::map<std::string, GraphicObject::Type> GraphicManager::m_graphic_mapping;
 StencilOpQueueListener* GraphicManager::m_stencil_listener;
 std::multimap<std::string, Ogre::ParticleSystem*> GraphicManager::m_particle_system_pool;
 std::string GraphicManager::m_filename;
+std::map<int, GraphicObject*> GraphicManager::m_graphic_objects;
 
 void StencilOpQueueListener::renderQueueStarted(Ogre::uint8 queueGroupId, const Ogre::String& invocation, bool& skipThisInvocation) 
 { 
@@ -83,7 +84,63 @@ void GraphicManager::cleanup()
 	}
 	m_render_infos.clear();
 	
+	// Graphic objects are deleted by the scene object, just clear the pointer map
+	m_graphic_objects.clear();
+	
 	clearParticlePool();
+}
+
+void GraphicManager::clearRenderInfos()
+{
+	// delete the renderinfo Data
+	std::map<std::string, GraphicRenderInfo*>::iterator it;
+	for (it = m_render_infos.begin(); it != m_render_infos.end(); ++it)
+	{
+		delete it->second;
+	}
+	
+	// Mark RenderInfo for all GraphicObjects as invalid
+	std::map<int, GraphicObject*>::iterator gt;
+	for (gt = m_graphic_objects.begin(); gt != m_graphic_objects.end(); ++gt)
+	{
+		gt->second->invalidateRenderInfo();
+	}
+}
+
+void GraphicManager::clearRenderInfo(std::string name)
+{
+	// find the RenderInfo
+	std::map<std::string, GraphicRenderInfo*>::iterator it;
+	it = m_render_infos.find(name);
+	if (it == m_render_infos.end())
+		return;
+	
+	GraphicRenderInfo* rinfo = it->second;
+	
+	// all Renderinfo that inherit from this are invalid now
+	// for direct siblings the parent pointer must be reset, too
+	std::set<std::string> invalid_rinfos;
+	
+	// Loop that searched the inheritance tree, one layer per iteration
+	std::set<std::string> last_set;	// set for the current iteration
+	std::set<std::string> next_set; // invalidated RenderInfo found for the nextlayer
+	
+	last_set.insert(name);
+	invalid_rinfos.insert(name);
+	while (!last_set.empty())
+	{
+		std::map<std::string, GraphicRenderInfo*>::iterator rt;
+		for (rt = m_render_infos.begin(); rt != m_render_infos.end(); ++rt)
+		{
+			
+		}
+	}
+	
+	std::map<int, GraphicObject*>::iterator gt;
+	for (gt = m_graphic_objects.begin(); gt != m_graphic_objects.end(); ++gt)
+	{
+		gt->second->invalidateRenderInfo();
+	}
 }
 
 void GraphicManager::clearParticlePool()
@@ -125,6 +182,10 @@ GraphicObject* GraphicManager::createGraphicObject(GraphicObject::Type type, std
 	GraphicRenderInfo* rinfo =  getRenderInfo(type);
 	
 	GraphicObject* go = new GraphicObject(type, rinfo,name,id);
+	if (go != 0)
+	{
+		m_graphic_objects[id] = go;
+	}
 	return go;
 }
 
@@ -134,6 +195,7 @@ void GraphicManager::destroyGraphicObject(GraphicObject* obj)
 	if (obj != 0)
 	{
 		DEBUGX("removing object %s",obj->getName().c_str());
+		m_graphic_objects.erase(obj->getId());
 		delete obj;
 	}
 }

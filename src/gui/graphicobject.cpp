@@ -14,23 +14,28 @@ GraphicObject::GraphicObject(Type type, GraphicRenderInfo* render_info, std::str
 	m_action.m_current_percent=1.0;
 	
 	m_top_node = GraphicManager::getSceneManager()->getRootSceneNode()->createChildSceneNode();
-	// this scales Object to the right size until meshes have been scaled
 	
+	m_render_info_valid = true;
+	initContent();
+	
+	m_highlight = false;
+	m_exact_animations = false; // as default ?
+}
+
+void GraphicObject::initContent()
+{
 	if (m_render_info != 0)
 	{
-		addObjectsFromRenderInfo(render_info);
+		addObjectsFromRenderInfo(m_render_info);
 	}
 	else
 	{
 		// special case: No Renderinfo, GraphicObject is a single mesh
 		MovableObjectInfo mainmesh;
-		mainmesh.m_source = type;
+		mainmesh.m_source = m_type;
 		mainmesh.m_type = MovableObjectInfo::ENTITY;
 		addMovableObject(mainmesh);
 	}
-	
-	m_highlight = false;
-	m_exact_animations = false; // as default ?
 }
 
 GraphicObject::~GraphicObject()
@@ -55,6 +60,26 @@ GraphicObject::~GraphicObject()
 		removeMovableObject(m_dependencies.begin()->first);
 	}
 	m_top_node->getCreator()->destroySceneNode(m_top_node->getName());
+}
+
+void GraphicObject::clearContent()
+{
+	while (! m_dependencies.empty())
+	{
+		removeMovableObject(m_dependencies.begin()->first);
+	}
+}
+
+void GraphicObject::ensureRenderInfoValid()
+{
+	if (!m_render_info_valid)
+	{
+		clearContent();
+		m_render_info = GraphicManager::getRenderInfo(m_type);
+		
+		initContent();
+		m_render_info_valid = true;
+	}
 }
 
 void GraphicObject::addObjectsFromRenderInfo(GraphicRenderInfo* info)
@@ -518,6 +543,8 @@ void GraphicObject::initAttachedAction(AttachedAction& attchaction, std::string 
 
 void GraphicObject::updateAction(std::string action, float percent, int random_action_nr)
 {
+	ensureRenderInfoValid();
+	
 	if (m_render_info ==0)	// static mesh
 		return;
 	
@@ -644,6 +671,8 @@ void GraphicObject::updateAttachedAction(AttachedAction& attchaction, std::strin
 
 void GraphicObject::updateState(std::string state, bool active)
 {
+	ensureRenderInfoValid();
+	
 	if (m_render_info ==0)	// static mesh
 		return;
 
@@ -700,6 +729,9 @@ void GraphicObject::updateState(std::string state, bool active)
 
 void GraphicObject::updateAllStates(std::set<std::string>& states)
 {
+	ensureRenderInfoValid();
+
+	
 	std::set<std::string>::iterator it = states.begin();
 	std::map<std::string,  AttachedState>::iterator jt = m_attached_states.begin(),jtold;
 	
@@ -762,6 +794,9 @@ bool GraphicObject::updateSubobject(MovableObjectInfo& object)
 
 void GraphicObject::update(float time)
 {
+	ensureRenderInfoValid();
+
+	
 	if (m_render_info ==0)
 		return;
 	

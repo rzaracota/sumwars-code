@@ -161,6 +161,21 @@ class GraphicManager
 		 */
 		static void clearParticlePool();
 		
+		/**
+		 * \brief Clears all RenderInfo Data
+		 * This function invalidates the RenderInfo for the GraphicObject objects forcing them to reload their data.
+		 * New RenderInfo data must be loaded in order to provide fresh, correct RenderInfo for them.
+		 */
+		static void clearRenderInfos();
+		
+		/**
+		 * \brief Clears on specific RenderInfo
+		 * \param name  Name of a Renderinfo
+		 * Invalidates RenderInfo for all GraphicObjects using this RenderInfo, forcing them to reload their data. 
+		 * A new RenderInfo data (with the same name) must be loaded in order to provide fresh, correct RenderInfo for them.
+		 */
+		static void clearRenderInfo(std::string name);
+		
 	private:
 		/**
 		 * \brief Registers a Renderinfo data structure with the given name
@@ -199,6 +214,11 @@ class GraphicManager
 		 * Data structure containing the mapping of ingame object types to the name of renderinfos used to display these objects
 		 */
 		static std::map<std::string, GraphicObject::Type> m_graphic_mapping;
+		
+		/**
+		 * \brief all GraphicObject objects, ordered by ID
+		 */
+		static std::map<int, GraphicObject*> m_graphic_objects;
 		
 		/**
 		 * \brief Reads the Renderinfos recursively from an XML node

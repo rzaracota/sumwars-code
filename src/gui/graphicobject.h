@@ -200,6 +200,16 @@ class GraphicObject
 		~GraphicObject();
 		
 		/**
+		 * \brief Creates the content objects from the RenderInfo
+		 */
+		void initContent();
+		
+		/**
+		 * \brief Deletes all the content objects
+		 */
+		void clearContent();
+		
+		/**
 		 * \brief Sets the action that is displayed
 		 * \param action Name of the action
 		 * \param percent elapsed time / overall time of the action
@@ -265,6 +275,14 @@ class GraphicObject
 		}
 		
 		/**
+		 * \brief Returns the ID
+		 */
+		int getId()
+		{
+			return m_id;
+		}
+		
+		/**
 		 * \brief Sets the highlighting state of the GraphicObject
 		 * Highlighting is applied to all entities in the Scene tree. These entities are duplicated and rerendered with the supplied material
 		 * \param highligh highlighting state
@@ -283,6 +301,36 @@ class GraphicObject
 		 * \param exact_animations new flag value
 		 */
 		void setExactAnimations(bool exact_animations);
+		
+		/**
+		 * \brief Replaces the RenderInfo used for this Object
+		 * This functions clears all the objects contents and replaces it with the new RenderInfo contents
+		 * \param renderinfo new RenderInfo
+		 */
+		void  replaceRenderInfo(GraphicRenderInfo* renderinfo);
+		
+		/**
+		 * \brief Returns if the objects RenderInfo is valid
+		 */
+		bool getRenderInfoValid()
+		{
+			return (m_render_info_valid);
+		}
+		
+		/**
+		 * \brief Makes sure, that the renderinfo of the Object is valid.
+		 * If the RenderInfo is invalid, it will try to reload it
+		 */
+		void ensureRenderInfoValid();
+		
+		/**
+		 * \brief Invalidates the the RenderInfo of this object
+		 * If an objects RenderInfo is set to invalid, the RenderInfo will be reloaded with \ref replaceRenderInfo on the next frame
+		 */
+		void invalidateRenderInfo()
+		{
+			m_render_info_valid = false;
+		}
 		
 	private:
 		
@@ -450,6 +498,10 @@ class GraphicObject
 		 */
 		bool m_own_random_number;
 		
+		/**
+		 * \brief Signals if the objects Renderinfo is still valid
+		 */
+		bool m_render_info_valid;
 };
 
 

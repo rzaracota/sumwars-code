@@ -864,7 +864,7 @@ void Application::cleanup(int datagroups)
 	
 	if (datagroups & World::DATA_RENDERINFO)
 	{
-		// TODO
+		GraphicManager::clearRenderInfos();
 	}
 	
 	if (datagroups & World::DATA_SOUND)

@@ -159,6 +159,15 @@ class GraphicRenderInfo
 		
 		GraphicRenderInfo* getParentInfo();
 		
+		/**
+		 * \brief Clears the pointer to the parent GraphicRenderInfo
+		 * This forces the Renderinfo to update the parent on the next use, allowing to replace the parent RenderInfo
+		 */
+		void clearParentInfoPtr()
+		{
+			m_parent_ptr = 0;
+		}
+		
 		void setInheritMask(unsigned int mask)
 		{
 			m_inherit_mask = mask;	
