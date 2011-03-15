@@ -327,10 +327,8 @@ class GraphicObject
 		 * \brief Invalidates the the RenderInfo of this object
 		 * If an objects RenderInfo is set to invalid, the RenderInfo will be reloaded with \ref replaceRenderInfo on the next frame
 		 */
-		void invalidateRenderInfo()
-		{
-			m_render_info_valid = false;
-		}
+		void invalidateRenderInfo();
+
 		
 	private:
 		

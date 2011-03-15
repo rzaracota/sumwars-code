@@ -181,16 +181,11 @@ class GraphicManager
 		 * \brief Registers a Renderinfo data structure with the given name
 		 * \param name Name of a Renderinfo
 		 * \param info corresponding data structure
+		 * \param silent_replace if set to true, the data is replaced without error message. 
 		 * The data can be retrieved by a getRenderInfo call
 		 * \sa getRenderInfo
 		 */
-		static void registerRenderInfo(std::string name, GraphicRenderInfo* info)
-		{
-			if (m_render_infos.count(name) ==0)
-			{
-				m_render_infos[name] = info;
-			}
-		}
+		static bool registerRenderInfo(std::string name, GraphicRenderInfo* info, bool silent_replace = false);
 		
 		/**
 		 * \brief Returns an OGRE Particlesystem with the requested type
@@ -218,13 +213,14 @@ class GraphicManager
 		/**
 		 * \brief all GraphicObject objects, ordered by ID
 		 */
-		static std::map<int, GraphicObject*> m_graphic_objects;
+		static std::map<std::string, GraphicObject*> m_graphic_objects;
 		
 		/**
 		 * \brief Reads the Renderinfos recursively from an XML node
 		 * \param node XML node
+		 * \param silent_replace if set to true, existing data is overwritten without error message
 		 */
-		static void loadRenderInfos(TiXmlNode* node);
+		static void loadRenderInfos(TiXmlNode* node, bool silent_replace = false);
 		
 		/**
 		 * \brief Reads Renderinfo from an XML node

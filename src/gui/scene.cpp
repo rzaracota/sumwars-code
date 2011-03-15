@@ -402,8 +402,12 @@ bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
 	MovableObjectInfo minfo;
 	bool update = false;
 	
+	std::stringstream stream;
+	
 	// Waffe
-	minfo.m_objectname="weapon";
+	stream.str("");
+	stream << "weapon:"<<pl->getId();
+	minfo.m_objectname= stream.str();
 	minfo.m_type = MovableObjectInfo::SUBOBJECT;
 	
 	std::string& suffix = pl->getPlayerLook().m_item_suffix;
@@ -431,7 +435,9 @@ bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
 	update |= obj->updateSubobject(minfo);
 	
 	// Schild
-	minfo.m_objectname="shield";
+	stream.str("");
+	stream << "shield:"<<pl->getId();
+	minfo.m_objectname= stream.str();
 	minfo.m_type = MovableObjectInfo::SUBOBJECT;
 	itm = pl->getShield();
 	if (itm !=0)
@@ -450,7 +456,9 @@ bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
 	DEBUGX("update %s : bone %s source %s", minfo.m_objectname.c_str(), minfo.m_bone.c_str(), minfo.m_source.c_str());
 	
 	// Handschuhe
-	minfo.m_objectname="gloves";
+	stream.str("");
+	stream << "gloves:"<<pl->getId();
+	minfo.m_objectname= stream.str();
 	minfo.m_type = MovableObjectInfo::SUBOBJECT;
 	itm = pl->getEquipement()->getItem(Equipement::GLOVES);
 	
@@ -470,7 +478,9 @@ bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
 	update |= obj->updateSubobject(minfo);
 	
 	// Helm
-	minfo.m_objectname="helmet";
+	stream.str("");
+	stream << "helmet:"<<pl->getId();
+	minfo.m_objectname= stream.str();
 	minfo.m_type = MovableObjectInfo::SUBOBJECT;
 	itm = pl->getEquipement()->getItem(Equipement::HELMET);
 	minfo.m_bone = "crown";
@@ -491,7 +501,9 @@ bool Scene::updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
 	update |= obj->updateSubobject(minfo);
 	
 	// Ruestung
-	minfo.m_objectname="armor";
+	stream.str("");
+	stream << "armor:"<<pl->getId();
+	minfo.m_objectname= stream.str();
 	minfo.m_type = MovableObjectInfo::SUBOBJECT;
 	itm = pl->getEquipement()->getItem(Equipement::ARMOR);
 	

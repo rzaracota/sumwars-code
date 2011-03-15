@@ -62,12 +62,24 @@ GraphicObject::~GraphicObject()
 	m_top_node->getCreator()->destroySceneNode(m_top_node->getName());
 }
 
+void GraphicObject::invalidateRenderInfo()
+{
+	m_render_info_valid = false;
+	m_render_info = 0;
+}
+
 void GraphicObject::clearContent()
 {
 	while (! m_dependencies.empty())
 	{
 		removeMovableObject(m_dependencies.begin()->first);
 	}
+	m_attached_states.clear();
+	m_action.m_arinfo = 0;
+	m_action.m_active_parts.clear();
+	m_action.m_current_action = "";
+	m_action.m_current_percent = 1.0;
+	
 }
 
 void GraphicObject::ensureRenderInfoValid()

@@ -160,6 +160,15 @@ class GraphicRenderInfo
 		GraphicRenderInfo* getParentInfo();
 		
 		/**
+		 * \brief Returns the raw parent member pointer
+		 * In contrast to \ref getParentInfo this function does not search for the parent RenderInfo if the pointer is NULL
+		 */
+		GraphicRenderInfo* getParentInfoPtr()
+		{
+			return m_parent_ptr;
+		}
+		
+		/**
 		 * \brief Clears the pointer to the parent GraphicRenderInfo
 		 * This forces the Renderinfo to update the parent on the next use, allowing to replace the parent RenderInfo
 		 */
@@ -178,6 +187,23 @@ class GraphicRenderInfo
 		bool checkInheritMask(unsigned int mask)
 		{
 			return m_inherit_mask & mask;
+		}
+		
+		/**
+		 * \brief Sets the name
+		 * \param name new name
+		 */
+		void setName(std::string name)
+		{
+			m_name = name;
+		}
+		
+		/**
+		 * \brief Returns the name
+		 */
+		std::string getName() const
+		{
+			return m_name;
 		}
 
 	private:
@@ -217,6 +243,11 @@ class GraphicRenderInfo
 		 * Bei Gegenstaenden wird haeufig verlangt, dass zwar die Animationen uebernommen werden, aber keine neuen Objekte (Partikel etc) angehaengt werden
 		 **/
 		unsigned int m_inherit_mask;
+		
+		/**
+		 *  \brief Name of the RenderInfo
+		 */
+		std::string m_name;
 };
 
 #endif
