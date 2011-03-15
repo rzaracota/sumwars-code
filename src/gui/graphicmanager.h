@@ -176,6 +176,11 @@ class GraphicManager
 		 */
 		static void clearRenderInfo(std::string name);
 		
+		/**
+		 * \brief Marks the RenderInfo for all GraphicObjects as invalid
+		 */
+		static void invalidateGraphicObjects();
+		
 	private:
 		/**
 		 * \brief Registers a Renderinfo data structure with the given name

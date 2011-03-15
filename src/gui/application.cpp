@@ -836,6 +836,7 @@ void Application::cleanup(int datagroups)
 	{
 		// only unload ressources that can be reloaded later
 		Ogre::ResourceGroupManager::getSingleton().unloadResourceGroup("General", true);
+		GraphicManager::invalidateGraphicObjects();
 	}
 	
 	if (datagroups & World::DATA_PARTICLESYSTEMS)
@@ -860,6 +861,11 @@ void Application::cleanup(int datagroups)
 	if (datagroups & World::DATA_ITEMS)
 	{
 		ItemFactory::cleanup();
+	}
+	
+	if (datagroups & World::DATA_RENDERINFO)
+	{
+		GraphicManager::clearRenderInfos();
 	}
 	
 	if (datagroups & World::DATA_RENDERINFO)

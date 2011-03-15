@@ -117,6 +117,15 @@ bool GraphicManager::registerRenderInfo(std::string name, GraphicRenderInfo* inf
 	}
 }
 
+void  GraphicManager::invalidateGraphicObjects()
+{
+	std::map<std::string, GraphicObject*>::iterator gt;
+	for (gt = m_graphic_objects.begin(); gt != m_graphic_objects.end(); ++gt)
+	{
+		gt->second->invalidateRenderInfo();
+	}
+}
+
 void GraphicManager::clearRenderInfos()
 {
 	DEBUG("clearing all renderinfos");
@@ -129,11 +138,7 @@ void GraphicManager::clearRenderInfos()
 	m_render_infos.clear();
 	
 	// Mark RenderInfo for all GraphicObjects as invalid
-	std::map<std::string, GraphicObject*>::iterator gt;
-	for (gt = m_graphic_objects.begin(); gt != m_graphic_objects.end(); ++gt)
-	{
-		gt->second->invalidateRenderInfo();
-	}
+	invalidateGraphicObjects();
 }
 
 void GraphicManager::clearRenderInfo(std::string name)
