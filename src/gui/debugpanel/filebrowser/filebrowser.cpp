@@ -4,6 +4,7 @@
 #include <list>
 #include <fstream>
 
+#include "Poco/File.h"
 #include "Poco/Path.h"
 #include "Poco/DirectoryIterator.h"
 #include "Poco/Exception.h"
@@ -131,8 +132,12 @@ bool FileBrowser::handleBrowserDblClick(const CEGUI::EventArgs &e)
 	try
 	{
 		m_currentPath.pushDirectory(m_browserBox->getFirstSelectedItem()->getText().c_str());
-		m_pathBox->setText(m_currentPath.toString());
-		fillBrowser();
+		Poco::File f(m_currentPath);
+		if(f.isFile())
+			m_currentPath.popDirectory();
+		else
+			m_pathBox->setText(m_currentPath.toString());
+			fillBrowser();
 	}
 	catch (Poco::Exception& exc)
 	{
