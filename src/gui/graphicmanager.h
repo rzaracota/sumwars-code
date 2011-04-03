@@ -7,6 +7,7 @@
 #include "OgreParticleSystem.h"
 #include "OgreEntity.h"
 #include "OgreMovableObject.h"
+#include "OgreStaticGeometry.h"
 #include "graphicobject.h"
 #include "graphicobjectrenderinfo.h"
 
@@ -76,6 +77,15 @@ class GraphicManager
 		static GraphicObject* createGraphicObject(GraphicObject::Type type, std::string name, int id);
 		
 		/**
+		 * \brief Adds a static GraphicObject with the requested type to the scene
+		 * \param type Name of the Renderinfo used for this object
+		 * \param position position where the object should be placed
+		 * \param angle Rotation about y-Achses (yaw)
+		 * The Object is created if it does not exist in the static geometry yet. The object is automatically added to an appropriate static geometry. 
+		 */
+		static void insertStaticGraphicObject(std::string type, Ogre::Vector3 position, float angle);
+		
+		/**
 		 * \brief Destroys a GraphicObject
 		 * \param obj pointer to the object
 		 * Currently this just calls delete on the pointer, put some caching might be done in future
@@ -91,6 +101,16 @@ class GraphicManager
 		{
 			return m_scene_manager;
 		}
+		
+		/**
+		 * \brief Returns the container for all static meshes
+		 */
+		static Ogre::StaticGeometry* getStaticGeometry();
+		
+		/**
+		 * \brief builds the static geometry
+		 */
+		static void buildStaticGeometry();
 		
 		/**
 		 * \brief Sets the Scenemanager that is used to create new Ogre Objects
@@ -162,6 +182,11 @@ class GraphicManager
 		static void clearParticlePool();
 		
 		/**
+		 * \brief clears the contents of static geometry and the set of static entities
+		 */
+		static void clearStaticGeometry();
+		
+		/**
 		 * \brief Clears all RenderInfo Data
 		 * This function invalidates the RenderInfo for the GraphicObject objects forcing them to reload their data.
 		 * New RenderInfo data must be loaded in order to provide fresh, correct RenderInfo for them.
@@ -206,6 +231,12 @@ class GraphicManager
 		static void putBackParticleSystem(Ogre::ParticleSystem* part);
 		
 		/**
+		 * \brief Adds all entities in the subtree below the given scene node to the static geometry
+		 * \param node Top node of the scene subtree
+		 */
+		static void addSceneNodeToStaticGeometry(Ogre::SceneNode* node);
+		
+		/**
 		 * Data structure containg all Renderinfo data. Maps name of Renderinfos to the real data
 		 */
 		static std::map<std::string, GraphicRenderInfo*> m_render_infos;
@@ -219,6 +250,11 @@ class GraphicManager
 		 * \brief all GraphicObject objects, ordered by ID
 		 */
 		static std::map<std::string, GraphicObject*> m_graphic_objects;
+		
+		/**
+		 * \brief internal pool of objects in static geometry, ordered by renderinfo type
+		 */
+		static std::map<std::string, GraphicObject*> m_static_graphic_objects;
 		
 		/**
 		 * \brief Reads the Renderinfos recursively from an XML node

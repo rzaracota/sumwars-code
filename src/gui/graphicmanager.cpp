@@ -10,7 +10,9 @@ std::map<std::string, GraphicObject::Type> GraphicManager::m_graphic_mapping;
 StencilOpQueueListener* GraphicManager::m_stencil_listener;
 std::multimap<std::string, Ogre::ParticleSystem*> GraphicManager::m_particle_system_pool;
 std::string GraphicManager::m_filename;
+
 std::map<std::string, GraphicObject*> GraphicManager::m_graphic_objects;
+std::map<std::string, GraphicObject*> GraphicManager::m_static_graphic_objects;
 
 void StencilOpQueueListener::renderQueueStarted(Ogre::uint8 queueGroupId, const Ogre::String& invocation, bool& skipThisInvocation) 
 { 
@@ -87,6 +89,7 @@ void GraphicManager::cleanup()
 	// Graphic objects are deleted by the scene object, just clear the pointer map
 	m_graphic_objects.clear();
 	
+	clearStaticGeometry();
 	clearParticlePool();
 }
 
@@ -214,6 +217,16 @@ void GraphicManager::clearParticlePool()
 	m_particle_system_pool.clear();
 }
 
+void GraphicManager::clearStaticGeometry()
+{
+	std::map<std::string, GraphicObject*>::iterator it;
+	for (it = m_static_graphic_objects.begin(); it != m_static_graphic_objects.end(); ++it)
+	{
+		delete it->second;
+	}
+	m_static_graphic_objects.clear();
+}
+
 GraphicRenderInfo* GraphicManager::getRenderInfo(std::string type)
 {
 	std::map<std::string, GraphicRenderInfo*>::iterator it;
@@ -266,6 +279,105 @@ GraphicObject* GraphicManager::createGraphicObject(GraphicObject::Type type, std
 	return go;
 }
 
+
+void  GraphicManager::insertStaticGraphicObject(std::string type, Ogre::Vector3 position, float angle)
+{
+	// search if a static object with this type already exists
+	std::map<std::string, GraphicObject*>::iterator git = m_static_graphic_objects.find(type);
+	GraphicObject* go;
+	
+	if (git != m_static_graphic_objects.end())
+	{
+		// reuse it, just reinsert into the static geometry
+		go = git->second;
+		DEBUGX("reuse static object %s",type.c_str());
+	}
+	else
+	{
+		DEBUGX("create static object %s",type.c_str());
+		// create a new one
+		GraphicRenderInfo* rinfo =  getRenderInfo(type);
+		go = new GraphicObject(type, rinfo,"",0);
+		
+		m_static_graphic_objects[type] = go;
+	}
+	
+	// set position and rotation
+	Ogre::SceneNode* node = go->getTopNode();
+	node->setPosition(position);
+	node->setOrientation(1,0,0,0);
+	node->yaw(Ogre::Radian(-angle));
+	node->_update(true, true);
+	
+	// add to static Geometry
+	//addSceneNodeToStaticGeometry(node);
+	getStaticGeometry()->addSceneNode(node);
+}
+
+void GraphicManager::addSceneNodeToStaticGeometry(Ogre::SceneNode* node)
+{
+	Ogre::StaticGeometry* static_geom = getStaticGeometry();
+	Ogre::Vector3 pos = node->_getDerivedPosition();
+	
+	DEBUGX("SceneNode global position %p %f %f %f",node, pos[0], pos[1], pos[2]);
+	Ogre::Vector3 locpos = node->getPosition();
+	DEBUGX("SceneNode offset %f %f %f", locpos[0], locpos[1], locpos[2]);
+	
+	
+	// loop over all sub-entities
+	for (Ogre::SceneNode::ObjectIterator it = node->getAttachedObjectIterator(); it.hasMoreElements() ; it.moveNext ())
+	{
+		Ogre::Entity* ent = dynamic_cast<Ogre::Entity*>(it.peekNextValue());
+		if (ent)
+		{
+			DEBUGX("adding entity %p at %f %f %f",ent, pos[0], pos[1], pos[2]);
+			static_geom->addEntity(ent, pos, node->_getDerivedOrientation(), node->_getDerivedScale());
+		}
+	}
+	
+	//loop over all subtrees
+	for (Ogre::SceneNode::ChildNodeIterator it =node->getChildIterator();  it.hasMoreElements() ; it.moveNext ())
+	{
+		Ogre::SceneNode* snode = dynamic_cast<Ogre::SceneNode*>(it.peekNextValue());
+		addSceneNodeToStaticGeometry(snode);
+	}
+}
+
+Ogre::StaticGeometry* GraphicManager::getStaticGeometry()
+{
+	if (m_scene_manager->hasStaticGeometry("StaticObjects"))
+	{
+		return m_scene_manager->getStaticGeometry("StaticObjects");
+	}
+	
+	Ogre::StaticGeometry* stat_geom = m_scene_manager->createStaticGeometry("StaticObjects");
+	stat_geom->setRegionDimensions(Ogre::Vector3(16,16,16));
+	
+	return stat_geom;
+}
+
+
+void GraphicManager::buildStaticGeometry()
+{
+	if (m_scene_manager->hasStaticGeometry("StaticObjects"))
+	{
+		std::map<std::string, GraphicObject*>::iterator git;
+		for (git = m_static_graphic_objects.begin(); git != m_static_graphic_objects.end(); ++git)
+		{
+			GraphicObject* go = git->second;
+			
+			// detach the object from the root scene node
+			// to avoid duplicate rendering with static geometry
+			Ogre::SceneNode* node = go->getTopNode();
+			node->getParent()->removeChild(node);
+		}
+		
+		
+		Ogre::StaticGeometry* static_geom = m_scene_manager->getStaticGeometry("StaticObjects");
+		static_geom->build();
+	}
+	
+}
 
 void GraphicManager::destroyGraphicObject(GraphicObject* obj)
 {

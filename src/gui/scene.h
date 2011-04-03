@@ -178,13 +178,6 @@ class Scene
 	 * \brief Registriert fuer alle Objekte, Projektile, Items und Tiles die zugehoerigen Meshes
 	 */
 	static void registerMeshes();
-
-
-	/**
-	 * \var std::map<int,GraphicObject*> m_static_objects
-	 * \brief Graphikobjekte fuer alle statischen Objekte
-	 */
-	std::map<int,GraphicObject*> m_static_objects;
 	
 	/**
 	 * \var std::map<int,GraphicObject*> m_graphic_objects

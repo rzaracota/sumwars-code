@@ -286,17 +286,33 @@ void Scene::update(float ms)
 
 void  Scene::insertObject(GameObject* gobj, bool is_static)
 {
-	GraphicObject* obj = createGraphicObject(gobj);
+	GraphicObject* obj
 
 	DEBUGX("insert graphic object for %s",gobj->getNameId().c_str());
 	if (is_static)
 	{
-		m_static_objects.insert(std::make_pair(gobj->getId(), obj));
+		
+		// Object placement
+		float x=gobj->getShape()->m_center.m_x;
+		float z=gobj->getShape()->m_center.m_y;
+		float y = gobj->getHeight();
+		Ogre::Vector3 vec(x*GraphicManager::g_global_scale,y*GraphicManager::g_global_scale,z*GraphicManager::g_global_scale);
+			
+		// Object rotation
+		float angle = gobj->getShape()->m_angle;
+		
+		std::string otype = gobj->getSubtype();
+		GraphicObject::Type type = GraphicManager::getGraphicType(otype);
+		GraphicManager::insertStaticGraphicObject(type,vec,angle);
+		return;
 	}
 	else
 	{
+		obj = createGraphicObject(gobj);
 		m_graphic_objects.insert(std::make_pair(gobj->getId(), obj));
 	}
+	
+	
 	if (obj != 0)
 	{	
 		Ogre::SceneNode* node = obj->getTopNode();
@@ -535,15 +551,6 @@ void  Scene::deleteGraphicObject(int id)
 		GraphicManager::destroyGraphicObject(it->second);
 		m_graphic_objects.erase(id);
 	}
-	else
-	{
-		it = m_static_objects.find(id);
-		if (it !=  m_static_objects.end())
-		{
-			GraphicManager::destroyGraphicObject(it->second);
-			m_static_objects.erase(id);
-		}
-	}
 }
 
 void Scene::updateGraphicObjects(float time)
@@ -669,11 +676,6 @@ void Scene::updateCharacterView()
 void Scene::clearObjects()
 {
 	std::map<int,GraphicObject*>::iterator it;
-	for (it = m_static_objects.begin(); it != m_static_objects.end(); ++it)
-	{
-		GraphicManager::destroyGraphicObject(it->second);
-	}
-	m_static_objects.clear();
 	
 	for (it = m_graphic_objects.begin(); it != m_graphic_objects.end(); ++it)
 	{
@@ -694,6 +696,7 @@ void Scene::createScene()
 	m_temp_player="";
 	SoundSystem::clearObjects();
 	
+	GraphicManager::clearStaticGeometry();
 	GraphicManager::clearParticlePool();
 
 	m_scene_manager->clearScene();
@@ -737,6 +740,7 @@ void Scene::createScene()
 			// Objekt in der Szene erzeugen
 			insertObject(it->second,true);
 		}
+		GraphicManager::buildStaticGeometry();
 
 		short dimx = region->getDimX();
 		short dimy = region->getDimY();
