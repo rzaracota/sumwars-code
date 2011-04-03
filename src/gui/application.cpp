@@ -384,6 +384,7 @@ bool Application::initOgre()
 	m_scene_manager->setShadowColour( Ogre::ColourValue(0.4, 0.4, 0.4) );
 	m_scene_manager->setShadowFarDistance(2000);
 */
+	Ogre::LogManager::getSingleton().createLog("BenchLog.log");
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW);
 	return true;
 

@@ -30,7 +30,7 @@ BenchmarkTab::BenchmarkTab(const CEGUI::String& type, const CEGUI::String& name)
 	
 	m_ogreRoot = Ogre::Root::getSingletonPtr();
 
-	m_log = Ogre::LogManager::getSingleton().createLog("BenchLog.log");
+	m_log = Ogre::LogManager::getSingleton().getLog("BenchLog.log");// Ogre::LogManager::getSingleton().createLog("BenchLog.log");
 	m_log->addListener(this);
 	m_log->logMessage("-------------------------");
 
