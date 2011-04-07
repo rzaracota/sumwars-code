@@ -755,6 +755,10 @@ msgstr ""
 "Es wäre wohl nicht klug, die Soldaten mit der Nase auf ihre Retter zu stoßen."
 
 #: siegeOfDwarfenwall.xml
+msgid "I've never seen anyone who could fight like this."
+msgstr ""
+
+#: siegeOfDwarfenwall.xml
 msgid "Indeed."
 msgstr "Allerdings."
 

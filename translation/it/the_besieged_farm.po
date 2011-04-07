@@ -32,17 +32,19 @@ msgstr ""
 "compenso. Cosa possiamo chiedere di piu'?"
 
 #: besieged_farm.xml
+#, fuzzy
 msgid ""
-"The peasants are rescued and the goblins slain. Time to collect the reward "
-"for the trouble in Joringsbridge."
+"The peasants are rescued and the goblins slain. It's time to collect the "
+"reward for the trouble in Joringsbridge."
 msgstr ""
 "I contadini sono in salvo e il goblin uccisi. È ora di risquotere la "
 "ricompensa per la faccenda di Joringsbridge."
 
 #: besieged_farm.xml
+#, fuzzy
 msgid ""
 "The goblins around Bron's farm are not among the living anymore. I should "
-"knock at the door and make sure, everything is all right. No peasants, no "
+"knock at the door and make sure everything is all right. No peasants, no "
 "money."
 msgstr ""
 "I goblin nei dintorni della fattoria Bron sono stati tutti uccisi. Ora "
@@ -70,17 +72,20 @@ msgid "Ah! Are you feeling like earning the money after all?"
 msgstr "Te la senti alla fine di guadagnare qualcosa?"
 
 #: besieged_farm.xml
-msgid "Don't think, I haven't seen you hanging around back there."
+#, fuzzy
+msgid "Don't think I haven't seen you hanging around back there."
 msgstr "Non penso. Non ti ho visto aggirare qua attorno."
 
 #: besieged_farm.xml
+#, fuzzy
 msgid ""
-"Don't think, I haven't seen you and your friend hanging around back there."
+"Don't think I haven't seen you and your friend hanging around back there."
 msgstr "Non penso, non ho visto te o il tuo amico in giro qui attorno."
 
 #: besieged_farm.xml
+#, fuzzy
 msgid ""
-"Don't think, I haven't seen you and your friends hanging around back there."
+"Don't think I haven't seen you and your friends hanging around back there."
 msgstr "Non penso. No ho visto ne' te ne' i tuoi amici aggirarsi qua attorno."
 
 #: besieged_farm.xml
@@ -96,7 +101,8 @@ msgstr ""
 "infestano la fattoria Bron."
 
 #: besieged_farm.xml
-msgid "I don't care, how you do it, even if you gobble them raw."
+#, fuzzy
+msgid "I don't care how you do it, even if you gobble them raw."
 msgstr "Non mi interessa come farai, anche se li dovessi ingurgitare vivi."
 
 #: besieged_farm.xml
@@ -104,11 +110,13 @@ msgid "Just kidding."
 msgstr "Sto solo scherzando!."
 
 #: besieged_farm.xml
-msgid "When you're done come back to me."
+#, fuzzy
+msgid "When you're done, come back to me."
 msgstr "Quando hai finito torna qui da me."
 
 #: besieged_farm.xml
-msgid "On my way."
+#, fuzzy
+msgid "I'm on my way."
 msgstr "A modo mio."
 
 #: besieged_farm.xml
@@ -184,9 +192,10 @@ msgid "I've already heard of it."
 msgstr "Ne ho gia' sentito parlare."
 
 #: besieged_farm.xml
+#, fuzzy
 msgid ""
-"Michel is in the tavern and getting plastered. All in honor of your bravery, "
-"of course."
+"Michel is in the tavern getting plastered - all in honor of your bravery, of "
+"course."
 msgstr ""
 "Michel e' alla taverna a sbronzarsi. Ovviamente in onore del tuo coraggio."
 

@@ -39,6 +39,14 @@ while read LINE; do
 	msgmerge -v -U $LANGUAGE/$LINE.po potfiles/$LINE.pot
 	echo "[ MO ]"
 	msgfmt -c -v -o $LANGUAGE/LC_MESSAGES/$LINE.mo $LANGUAGE/$LINE.po
+
+
+	LANGUAGE="pt"
+	echo "+++ "$LINE" - PORTUGUESE +++"
+	echo "[ PO ]"
+	msgmerge -v -U $LANGUAGE/$LINE.po potfiles/$LINE.pot
+	echo "[ MO ]"
+	msgfmt -c -v -o $LANGUAGE/LC_MESSAGES/$LINE.mo $LANGUAGE/$LINE.po
 done < domains
 
 

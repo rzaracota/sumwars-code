@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-14 17:12+0100\n"
+"POT-Creation-Date: 2011-04-07 20:56+0200\n"
 "PO-Revision-Date: 2010-07-25 09:49\n"
 "Last-Translator: Francesco Miglietta (fra9000) <miglietta.francesco@gmail."
 "com>\n"
@@ -20,19 +20,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/core/damage.cpp:143 ../src/gui/charinfo.cpp:916
+#: ../src/core/damage.cpp:143 ../src/gui/charinfo.cpp:930
 msgid "Physical"
 msgstr "Fisico"
 
-#: ../src/core/damage.cpp:145 ../src/gui/charinfo.cpp:925
+#: ../src/core/damage.cpp:145 ../src/gui/charinfo.cpp:939
 msgid "Fire"
 msgstr "Fuoco"
 
-#: ../src/core/damage.cpp:147 ../src/gui/charinfo.cpp:922
+#: ../src/core/damage.cpp:147 ../src/gui/charinfo.cpp:936
 msgid "Ice"
 msgstr "Ghiaccio"
 
-#: ../src/core/damage.cpp:149 ../src/gui/charinfo.cpp:919
+#: ../src/core/damage.cpp:149 ../src/gui/charinfo.cpp:933
 msgid "Air"
 msgstr "Aria"
 
@@ -92,7 +92,7 @@ msgstr "Danno"
 msgid "can not be blocked"
 msgstr "Non puo' essere bloccato"
 
-#: ../src/core/damage.cpp:293 ../src/gui/charinfo.cpp:886
+#: ../src/core/damage.cpp:293 ../src/gui/charinfo.cpp:901
 msgid "Attack"
 msgstr "Attacco"
 
@@ -100,7 +100,7 @@ msgstr "Attacco"
 msgid "ignores armor"
 msgstr "ignora armatura"
 
-#: ../src/core/damage.cpp:316 ../src/gui/charinfo.cpp:901
+#: ../src/core/damage.cpp:316 ../src/gui/charinfo.cpp:916
 msgid "Power"
 msgstr "Potere"
 
@@ -151,7 +151,7 @@ msgid "Two-handed weapon"
 msgstr "Arma a due mani"
 
 #: ../src/core/item.cpp:782 ../src/core/item.cpp:1033
-#: ../src/gui/charinfo.cpp:896
+#: ../src/gui/charinfo.cpp:911
 msgid "Range"
 msgstr "Distanza"
 
@@ -160,12 +160,12 @@ msgid "Damage"
 msgstr "Danno"
 
 #: ../src/core/item.cpp:805 ../src/core/item.cpp:1074
-#: ../src/gui/charinfo.cpp:906
+#: ../src/gui/charinfo.cpp:921
 msgid "Armor"
 msgstr "Armatura"
 
 #: ../src/core/item.cpp:810 ../src/core/item.cpp:1086
-#: ../src/gui/charinfo.cpp:911
+#: ../src/gui/charinfo.cpp:600
 msgid "Block"
 msgstr "Difesa"
 
@@ -174,12 +174,12 @@ msgid "max hitpoints"
 msgstr "Punti Vita massimi"
 
 #: ../src/core/item.cpp:820 ../src/core/item.cpp:1110
-#: ../src/gui/charinfo.cpp:856
+#: ../src/gui/charinfo.cpp:871
 msgid "Strength"
 msgstr "Forza"
 
 #: ../src/core/item.cpp:825 ../src/core/item.cpp:1122
-#: ../src/gui/charinfo.cpp:860
+#: ../src/gui/charinfo.cpp:875
 msgid "Dexterity"
 msgstr "Destrezza"
 
@@ -188,7 +188,7 @@ msgid "Magic Power"
 msgstr "Potere Magico"
 
 #: ../src/core/item.cpp:835 ../src/core/item.cpp:1146
-#: ../src/gui/charinfo.cpp:864
+#: ../src/gui/charinfo.cpp:879
 msgid "Willpower"
 msgstr "Volonta'"
 
@@ -196,12 +196,12 @@ msgstr "Volonta'"
 msgid " max. "
 msgstr " max. "
 
-#: ../src/gui/charcreate.cpp:120 ../src/gui/charinfo.cpp:849
+#: ../src/gui/charcreate.cpp:120 ../src/gui/charinfo.cpp:864
 #: ../src/gui/partyinfo.cpp:450 ../src/gui/savegamelist.cpp:179
 msgid "Name"
 msgstr "Nome"
 
-#: ../src/gui/charcreate.cpp:123 ../src/gui/charinfo.cpp:852
+#: ../src/gui/charcreate.cpp:123 ../src/gui/charinfo.cpp:867
 #: ../src/gui/savegamelist.cpp:180
 msgid "Class"
 msgstr "Classe"
@@ -227,27 +227,31 @@ msgstr "Danno inferto da "
 msgid "Chance to hit "
 msgstr "Probabilita' colpo critico "
 
-#: ../src/gui/charinfo.cpp:607
+#: ../src/gui/charinfo.cpp:604
+msgid "Evade"
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:622
 #, fuzzy
 msgid "Chance to get hit by "
 msgstr "Probabilita' di essere colpito da "
 
-#: ../src/gui/charinfo.cpp:698
+#: ../src/gui/charinfo.cpp:713
 msgid "Damage dealt to  "
 msgstr "Danno inferto a "
 
-#: ../src/gui/charinfo.cpp:857
+#: ../src/gui/charinfo.cpp:872
 msgid "Strength increases hitpoints, melee damage and attack power."
 msgstr ""
 "La Forza incrementa i Punti Vita, il Danno in Mischia e il Potere di Attacco."
 
-#: ../src/gui/charinfo.cpp:861
+#: ../src/gui/charinfo.cpp:876
 msgid "Dexterity increases ranged damage, attack accuracy and attack speed"
 msgstr ""
 "La Destrezza incrementa il Danno a Distanza, la Precisione e la Velocita' di "
 "Attacco."
 
-#: ../src/gui/charinfo.cpp:865
+#: ../src/gui/charinfo.cpp:880
 msgid ""
 "Willpower decreases the duration and the impact of status changes and "
 "increases magical melee damage."
@@ -255,68 +259,68 @@ msgstr ""
 "La Volonta' diminuisce durata ed efficacia degli effetti negativi ed "
 "incrementa il Danno Magico in Mischia."
 
-#: ../src/gui/charinfo.cpp:869
+#: ../src/gui/charinfo.cpp:884
 msgid "Magic power"
 msgstr "Potere Magico"
 
-#: ../src/gui/charinfo.cpp:870
+#: ../src/gui/charinfo.cpp:885
 msgid "Magic power increases the damage of magical attacks."
 msgstr "Il Potere Magico incrementa il danno degli Attacchi Magici."
 
-#: ../src/gui/charinfo.cpp:873
+#: ../src/gui/charinfo.cpp:888
 msgid "Attr points"
 msgstr "P.ti Attributo"
 
-#: ../src/gui/charinfo.cpp:874
+#: ../src/gui/charinfo.cpp:889
 msgid "Attribute points remaining to distribute"
 msgstr "P.ti Attributo"
 
-#: ../src/gui/charinfo.cpp:877 ../src/gui/controlpanel.cpp:220
+#: ../src/gui/charinfo.cpp:892 ../src/gui/controlpanel.cpp:234
 msgid "Experience"
 msgstr "Esperienza"
 
-#: ../src/gui/charinfo.cpp:878
+#: ../src/gui/charinfo.cpp:893
 msgid "Current experience and experience necessary for next level-up."
 msgstr "Esperienza Attuale ed Esperienza Necessaria al prossimo livello."
 
-#: ../src/gui/charinfo.cpp:881 ../src/gui/controlpanel.cpp:204
+#: ../src/gui/charinfo.cpp:896 ../src/gui/controlpanel.cpp:218
 msgid "Hitpoints"
 msgstr "Punti Vita"
 
-#: ../src/gui/charinfo.cpp:882
+#: ../src/gui/charinfo.cpp:897
 msgid "Current and maximal hitpoints."
 msgstr "Punti Vita Attuali e Massimi."
 
-#: ../src/gui/charinfo.cpp:887
+#: ../src/gui/charinfo.cpp:902
 msgid ""
 "Attack value determines the chance to hit enemies that can block or evade."
 msgstr ""
 "Il valore di Attacco determina la probabilita' di colpire nemici che possono "
 "evadere o eludere."
 
-#: ../src/gui/charinfo.cpp:891
+#: ../src/gui/charinfo.cpp:906
 msgid "Attacks/s"
 msgstr "Attacchi/s"
 
-#: ../src/gui/charinfo.cpp:892
+#: ../src/gui/charinfo.cpp:907
 msgid "Number of attacks per second."
 msgstr "Numero di Attacchi al secondo."
 
-#: ../src/gui/charinfo.cpp:897
+#: ../src/gui/charinfo.cpp:912
 msgid "Weapon Range in meters."
 msgstr "Range dell'arma (metri)."
 
-#: ../src/gui/charinfo.cpp:902
+#: ../src/gui/charinfo.cpp:917
 msgid "Attack power influences the damage dealt to armored enemies."
 msgstr ""
 "La Potenza di Attacco influisce sul danno inflitto a nemici protetti da "
 "armatura."
 
-#: ../src/gui/charinfo.cpp:907
+#: ../src/gui/charinfo.cpp:922
 msgid "Armor reduces the damage of physical attacks."
 msgstr "L'Armatura riduce il Danno Fisico subito."
 
-#: ../src/gui/charinfo.cpp:912
+#: ../src/gui/charinfo.cpp:926
 msgid ""
 "Block value determines the chance to avoid damage from physical attacks."
 msgstr ""
@@ -327,39 +331,35 @@ msgstr ""
 msgid "Chat"
 msgstr "Chat"
 
-#: ../src/gui/controlpanel.cpp:339 ../src/gui/mainmenu.cpp:98
+#: ../src/gui/controlpanel.cpp:346 ../src/gui/mainmenu.cpp:98
 msgid "Options"
 msgstr "Opzioni"
 
-#: ../src/gui/controlpanel.cpp:342
+#: ../src/gui/controlpanel.cpp:349
 msgid "Save & Exit"
 msgstr "Salva ed Esci"
 
-#: ../src/gui/controlpanel.cpp:345 ../src/gui/optionswindow.cpp:307
+#: ../src/gui/controlpanel.cpp:352 ../src/gui/optionswindow.cpp:307
 msgid "Inventory"
 msgstr "Inventario"
 
-#: ../src/gui/controlpanel.cpp:348
+#: ../src/gui/controlpanel.cpp:355
 msgid "Character"
 msgstr "Personaggio"
 
-#: ../src/gui/controlpanel.cpp:351 ../src/gui/optionswindow.cpp:313
+#: ../src/gui/controlpanel.cpp:358 ../src/gui/optionswindow.cpp:313
 msgid "Skilltree"
 msgstr "Abilita'"
 
-#: ../src/gui/controlpanel.cpp:354
+#: ../src/gui/controlpanel.cpp:361
 msgid "Party"
 msgstr "Party"
 
-#: ../src/gui/controlpanel.cpp:357 ../src/gui/optionswindow.cpp:322
+#: ../src/gui/controlpanel.cpp:364 ../src/gui/optionswindow.cpp:322
 msgid "Quests"
 msgstr "Quests"
 
-#: ../src/gui/inventory.cpp:420
-msgid "Gold"
-msgstr "Oro"
-
-#: ../src/gui/inventory.cpp:423
+#: ../src/gui/inventory.cpp:349
 msgid "Drop:"
 msgstr "Lascia:"
 
@@ -501,6 +501,18 @@ msgstr "Elimina Personaggio"
 msgid "Level"
 msgstr "Livello"
 
+#: ../src/gui/skilltree.cpp:537
+#, fuzzy
+msgid "Skillpoints"
+msgstr "Punti Vita"
+
+#: ../src/gui/skilltree.cpp:542
+msgid "Next Skillpoint at Level"
+msgstr ""
+
 #: ../src/gui/worldmap.cpp:141
 msgid "Town Portal"
 msgstr "Portale Magico"
+
+#~ msgid "Gold"
+#~ msgstr "Oro"

@@ -33,7 +33,8 @@ msgid "Follow Tolec and Derred."
 msgstr "Folge Tolec und Derred."
 
 #: tutorial.xml
-msgid "Kill all Fire Slugs in the enclosure."
+#, fuzzy
+msgid "Kill all of the Fire Slugs in the enclosure."
 msgstr "Töte alle Feuerschnecken in dem Gehege."
 
 #: tutorial.xml
@@ -79,8 +80,9 @@ msgid "Are you looking for trouble? Who is responsible for this mess!?!"
 msgstr "Suchst du Streit? Wer ist für diesen Schlammassel verantwortlich!?!"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"I almost had that damn ogre and suddenly someones ripping out my guts who's "
+"I almost had that damn ogre and suddenly someone's ripping out my guts who's "
 "not even near me!"
 msgstr ""
 "Beinahe hätte ich den verdammten Oger gehabt und plötzlich reißt mir jemand "
@@ -107,48 +109,55 @@ msgid "Excuse me..."
 msgstr "Entschuldigt..."
 
 #: tutorial.xml
-msgid "No, you have to say that much more authoritative."
+#, fuzzy
+msgid "No, Tolec. You must say that with much more authority."
 msgstr "Nein, du musst das viel bestimmter sagen."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"It seems someone here has greater knowledge about how Harad is keeping me "
-"alive and moves me."
+"It seems someone here has greater knowledge of how Harad is keeping me alive "
+"and moves me."
 msgstr ""
 "Es scheint, als besäße hier jemand größeres Wissen über die Art und Weise, "
 "wie Harad mich am Leben hält und bewegt."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"It seems someone here has greater knowledge about how Harad is keeping us "
-"alive and moves us."
+"It seems someone here has greater knowledge of how Harad is keeping us alive "
+"and moves us."
 msgstr ""
 "Es scheint, als besäße hier jemand größeres Wissen über die Art und Weise, "
 "wie Harad uns am Leben hält und bewegt."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Whoever is the head honcho here: He had better known what he's gotten "
-"himself into."
+"Whoever the head honcho is here: He'd better know what he's gotten himself "
+"into."
 msgstr ""
 "Wer auch immer hier das Sagen hat: Er hat sich besser überlegt, worauf er "
 "sich einlässt."
 
 #: tutorial.xml
-msgid "Lot's of money could appease me again."
+#, fuzzy
+msgid "Lots of money could appease me again."
 msgstr "Viel Geld könnte mich wieder gnädig stimmen."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Please excuse your slightly rough arrival. Lord Master Soren Windclaw "
+"Please excuse your somewhat unpleasant arrival. Lord Master Soren Windclaw "
 "requests your presence. ##solo"
 msgstr ""
 "Bitte entschuldigt die etwas raue Ankunft. Lord Magister Soren Windklaue "
 "erbittet eure Audienz. ##solo"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Please excuse your slightly rough arrival. Lord Master Soren Windclaw "
+"Please excuse your somewhat unpleasant arrival. Lord Master Soren Windclaw "
 "requests your presence."
 msgstr ""
 "Bitte entschuldigt die etwas raue Ankunft. Lord Magister Soren Windklaue "
@@ -188,8 +197,9 @@ msgstr ""
 "Wollt ihr mich verarschen? Wer bitte schön ist denn dieser Windwichtel?"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"A splendid question. Short and precise. Maybe one can actually work with "
+"A splendid question! Short and precise. Maybe one can actually work with "
 "that one."
 msgstr ""
 "Eine brillante Frage. Kurz und Präzise. Vielleicht kann man doch mit ihr "
@@ -208,7 +218,8 @@ msgid "It may well be your last."
 msgstr "Es könnte deine Letzte sein."
 
 #: tutorial.xml
-msgid "Spill it. Where are we and who has the nerve to cross Branded Ones?!"
+#, fuzzy
+msgid "Spill it! Where are we, and who has the nerve to cross Branded Ones?!"
 msgstr ""
 "Raus damit. Wo sind wir und wer hat den Nerv, Gezeichnete gegen sich auf zu "
 "bringen?!"
@@ -222,7 +233,8 @@ msgstr ""
 "wird. ##solo"
 
 #: tutorial.xml
-msgid "Further more your arrival was... somewhat exhausting. ##solo"
+#, fuzzy
+msgid "Further more, your arrival was... somewhat exhausting. ##solo"
 msgstr "Außerdem war Eure Ankunft... etwas beschwerlich. ##solo"
 
 #: tutorial.xml
@@ -278,8 +290,9 @@ msgstr ""
 "überlassen. ##solo"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Fine. Now that that's clarified I'd like to ask you to surrender your "
+"Fine. Now that that's clarified I'd like to ask you all to surrender your "
 "weapons."
 msgstr ""
 "Schön. Da das geklärt ist, möchte ich Euch bitten, mir eure Ausrüstung zu "
@@ -290,13 +303,15 @@ msgid "Kindly ask."
 msgstr "Freundlich bitten."
 
 #: tutorial.xml
-msgid "We cannot take any risks and inside the council you are safe. ##solo"
+#, fuzzy
+msgid "We cannot take any risks, and inside the council you are safe. ##solo"
 msgstr ""
 "Wir können kein Risiko eingehen und innerhalb der Konzils seid Ihr sicher. "
 "##solo"
 
 #: tutorial.xml
-msgid "We cannot take any risks and inside the council you are safe."
+#, fuzzy
+msgid "We cannot take any risks, and inside the council you are safe."
 msgstr ""
 "Wir können kein Risiko eingehen und innerhalb der Konzils seid Ihr sicher."
 
@@ -313,8 +328,10 @@ msgid "What if we don't feel like surrendering our weapons?"
 msgstr "Was wenn wir gar keine Lust haben unsere Waffen ab zu geben?"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"I'm very sorry, but before that we cannot release you of the safety area."
+"I'm very sorry, but before that we cannot release any of you of the safety "
+"area."
 msgstr ""
 "Es tut uns leid, wir können euch nicht vorher aus dem Sicherheitsbereich "
 "lassen."
@@ -336,7 +353,8 @@ msgid "Safety area?! This is a goddamn prison!"
 msgstr "Sicherheitsbereich?! Das ist ein verdammtes Gefängnis!"
 
 #: tutorial.xml
-msgid "the choice is your's."
+#, fuzzy
+msgid "The choice is yours."
 msgstr "Es ist eure Entscheidung"
 
 #: tutorial.xml
@@ -392,11 +410,13 @@ msgstr ""
 "anders überlegt habt. ##solo"
 
 #: tutorial.xml
-msgid "You will not leave it until you surrender your weapon."
+#, fuzzy
+msgid "None of you will leave it until you surrender your weapons."
 msgstr "Ihr werdet ihn nicht verlassen, wenn ihr nicht eure Waffen abgebt."
 
 #: tutorial.xml
-msgid "Just tell us by clicking on one of us, when you change your mind."
+#, fuzzy
+msgid "Just tell us by clicking on one of us, when you change your minds."
 msgstr ""
 "Sagt einfach bescheid, indem ihr einen von uns anklickt, wenn ihr es euch "
 "anders überlegt habt."
@@ -410,10 +430,11 @@ msgid "Follow me, please."
 msgstr "Folgt mir bitte."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
 "What's keeping you? Has the transport afflicted you so much that you don't "
 "even know how to walk anymore? Just click with the left mouse button at a "
-"place on the ground, then it will all come back to you on its own."
+"place on the ground. Then it will all come back to you on its own."
 msgstr ""
 "Wo bleibt Ihr denn? Hat Euch der Transport so sehr zugesetzt, dass ihr nicht "
 "mal mehr wisst, wie man sich bewegt? Klickt einfach mit der linken Maustaste "
@@ -456,7 +477,8 @@ msgid "Oh Akeran! Close the gates!"
 msgstr "Bei Akeran! Verschließt die Tore!!!"
 
 #: tutorial.xml
-msgid "Akeran's Shield! The THING is free! Back everyone! Go, go, go!"
+#, fuzzy
+msgid "Akeran's Shield! That THING is free! Back everyone! Go, go, go!"
 msgstr "Akerans Schild! Das DING ist frei! Alle zurück! Los, los, los!"
 
 #: tutorial.xml
@@ -492,9 +514,10 @@ msgid "What?"
 msgstr "Was?!?"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"The Lord Master Windclaw feared, you would disembody yourselves after your "
-"arrival to disappear, so he took... measures."
+"The Lord Master Windclaw feared that you would kill yourself after your "
+"arrival in order to escape, so he took... measures."
 msgstr ""
 "Der Lord Magister Windklaue befürchtete, Ihr könntet Euch nach eurem "
 "Eintreffen selbst entleiben, um wieder zu verschwinden, deswegen hat er... "
@@ -511,7 +534,8 @@ msgstr ""
 "wir."
 
 #: tutorial.xml
-msgid "Instead you can resurrect where you want after your body was destroyed."
+#, fuzzy
+msgid "Instead you can resurrect where you want after your body is destroyed."
 msgstr ""
 "Statt dessen könnt einfach, wo Ihr wollt wiederauferstehen, nachdem euer "
 "Körper zerstört wurde."
@@ -521,7 +545,8 @@ msgid "Akeran must truly hate you..."
 msgstr "Akeran muss euch wirklich hassen..."
 
 #: tutorial.xml
-msgid "So? None of us was wishing for this ability."
+#, fuzzy
+msgid "So? None of us wished for this ability."
 msgstr "Und? Niemand von uns hat um diese Fähigkeit gebeten."
 
 #: tutorial.xml
@@ -529,8 +554,9 @@ msgid "So? I didn't wish for this ability."
 msgstr "Und? Ich habe nicht um diese Fähigkeit gebeten."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Well, as you are now you can do that only at places of great magical "
+"Well, as you are now, you can only do that at places of great magical "
 "concentrations. In other words..."
 msgstr ""
 "Nun, in eurem jetzigen Zustand könnt ihr das nur an Orten großer magischer "
@@ -541,7 +567,8 @@ msgid "... just back there with all the junk."
 msgstr "...nur dahinten bei dem ganzen Krempel."
 
 #: tutorial.xml
-msgid "I wouldn't necessarily call that junk."
+#, fuzzy
+msgid "I wouldn't necessarily call that 'junk'."
 msgstr "Krempel würde ich das nicht unbedingt nennen."
 
 #: tutorial.xml
@@ -549,13 +576,15 @@ msgid "Exactly, only there."
 msgstr "Genau, nur an dieser Stelle."
 
 #: tutorial.xml
-msgid "It is time we talk with this Windclaw. He seems to be a smart toad."
+#, fuzzy
+msgid "It is time we speak with this Windclaw. He seems to be a smart toad."
 msgstr ""
 "Es wird Zeit, dass wir mit diesem Windklaue reden. Scheint ja ein gewitztes "
 "Kerlchen zu sein."
 
 #: tutorial.xml
-msgid "It is time I talk with this Windclaw. He seems to be a smart toad."
+#, fuzzy
+msgid "It is time I speak with this Windclaw. He seems to be a smart toad."
 msgstr ""
 "Es wird Zeit, dass ich mit diesem Windklaue rede. Scheint ja ein gewitztes "
 "Kerlchen zu sein."
@@ -573,13 +602,15 @@ msgstr ""
 "versuchen, durch das Gehege mit den neuen Experimenten zu kommen."
 
 #: tutorial.xml
-msgid "There's a back door for feeding and word is..."
+#, fuzzy
+msgid "There's a back door for feeding, and word is..."
 msgstr "Es gibt da eine Hintertür für die Fütterung und angeblich..."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
 "... that the old Firewhirl has a secret door for a direct connection to the "
-"kitchen. That could work! But the beast are not exactly without danger."
+"kitchen. That could work! But the beasts are not exactly without danger."
 msgstr ""
 "...hat sich der alte Feuerwirbel eine Geheimtür als Direktverbindung zur "
 "Küche eingebaut. Das könnte klappen! Aber die Viecher sind nicht "
@@ -598,28 +629,32 @@ msgstr ""
 "Feueratem drei Wochen das Bett zu hüten."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"To Harad! That's impossible to put up with. Give us our weapons and we take "
-"care of that."
+"To Harad! That's impossible to put up with. Give us our weapons and we'll "
+"take care of that."
 msgstr ""
 "Bei Harad! Das kann man sich ja unmöglich antun. Gebt uns unsere Waffen und "
 "wir kümmern uns darum."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"To Harad! That's impossible to put up with. Give me my weapon and I take "
+"To Harad! That's impossible to put up with. Give me my weapon and I'll take "
 "care of that."
 msgstr ""
 "Bei Harad! Das kann man sich ja unmöglich antun. Gib mir meine  Waffe und "
 "ich kümmere mich darum."
 
 #: tutorial.xml
-msgid "Well, you are right about that..."
+#, fuzzy
+msgid "Well, you're right about that..."
 msgstr "Nun, da habt Ihr nicht unrecht..."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Yes, considering the difficult circumstances we can do that, I guess. Here "
+"Yes. Considering the difficult circumstances we can do that, I guess. Here "
 "you go."
 msgstr ""
 "Ja, in Anbetracht der schwierigen Umstände können wir das wohl machen. Hier "
@@ -634,9 +669,10 @@ msgid "Where is my weapon?"
 msgstr "Wo ist meine Waffe?"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Er... Lord Master Windclaw feared, there could be a situation in which you "
-"had to fall back to, er, force of arms."
+"Er... Lord Master Windclaw feared that there could be a situation in which "
+"you had to fall back to, er, force of arms."
 msgstr ""
 "Ähm... Lord Magister Windklaue befürchtete, dass es zu einer Situation "
 "kommen könnte, in der ihr auf, äh, Waffengewalt zurückgreifen müsst."
@@ -666,8 +702,9 @@ msgid "You... can still remember how to use a weapon, right?"
 msgstr "Ihr... könnt euch noch erinnern, wie man eine Waffe benutzt richtig?"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"We were told, the first minutes are as if one takes a step for the first "
+"We were told that the first minutes are like one taking a step for the first "
 "time."
 msgstr ""
 "Uns wurde gesagt, dass die ersten Minuten sind, als träte man zum ersten Mal "
@@ -682,38 +719,42 @@ msgid "Explain inventory"
 msgstr "Inventar erklären"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"At first you have to open your inventory. By default you do so with the 'i'-"
-"key."
+"First you must open your inventory. By default, you do so with the 'i'-key."
 msgstr ""
 "Zuerst müsst Ihr euer Inventar öffnen. Dies tut ihr standardmäßig mit der "
 "'i'-Taste."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Alternative you can click on the inventory button down in the status bar."
+"Alternatively, you can click on the inventory button below in the status bar."
 msgstr ""
 "Alternativ könnt ihr auch auf den Inventarknopf unten in der Statusleiste "
 "drücken."
 
 #: tutorial.xml
-msgid "In the inventory you see your items. They are ordered by their size."
+#, fuzzy
+msgid "In the inventory you'll see your items. They are ordered by their size."
 msgstr ""
 "Im Inventar seht ihr dann Eure Gegenstände. Sie sind unterteilt nach ihrer "
 "Größe."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"The weapon you just got is a mid-sized item and thus is found in the middle "
-"field."
+"The weapon you just obtained is a mid-sized item and thus is found in the "
+"middle field."
 msgstr ""
 "Die Waffe, die Ihr gerade erhalten habt ist ein mittelgroßer Gegenstand und "
 "befindet sich deshalb im mittleren Feld"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Click on the weapon with the left mouse button and then click on the weapon "
-"field in your equipment above the inventory. And you'll be equipped with it."
+"Click on the weapon with the left mouse button. Next click on the weapon "
+"field in the equipment above your inventory, and it will be equipped."
 msgstr ""
 "Klickt die Waffe mit der linken Maustaste an und klickt danach auf das "
 "Waffenfeld in Eurer Ausrüstung über dem Inventar. Und schon habt ihr sie "
@@ -732,15 +773,18 @@ msgid "You should equip your weapon first."
 msgstr "Ihr solltet zunächst eure Waffe anlegen."
 
 #: tutorial.xml
-msgid "Everyone should equip their weapon first."
+#, fuzzy
+msgid "Everyone should equip their weapons first."
 msgstr "Ihr solltet alle zunächst eure Waffen anlegen."
 
 #: tutorial.xml
-msgid "But you still know how to fight, right? ##solo"
+#, fuzzy
+msgid "You still know how to fight, don't you? ##solo"
 msgstr "Aber wie man kämpft wisst Ihr doch noch, oder? ##solo"
 
 #: tutorial.xml
-msgid "But you still know how to fight, right?"
+#, fuzzy
+msgid "You all still know how to fight, don't you?"
 msgstr "Aber wie man kämpft wisst ihr doch noch, oder?"
 
 #: tutorial.xml
@@ -749,23 +793,28 @@ msgstr ""
 "Reingehen, anklicken, töten. Das vergisst man niemals als Gezeichneter."
 
 #: tutorial.xml
-msgid "What does this click on it mean, really?"
+#, fuzzy
+msgid "What does this 'click on it' mean, anyway?"
 msgstr "Was soll eigentlich dieses anklicken?"
 
 #: tutorial.xml
-msgid "No idea, but the Lord Master said, she talks like this."
+#, fuzzy
+msgid "No idea, but the Lord Master said that she speaks like this."
 msgstr "Keine Ahnung, der Lord Magister hat gesagt, die versteht das schon."
 
 #: tutorial.xml
-msgid "No idea, but the Lord Master said, he talks like this."
+#, fuzzy
+msgid "No idea, but the Lord Master said that he speaks like this."
 msgstr "Keine Ahnung, der Lord Magister hat gesagt, der versteht das schon."
 
 #: tutorial.xml
-msgid "No idea, but the Lord Master said, they talk like this."
+#, fuzzy
+msgid "No idea, but the Lord Master said that they speak like this."
 msgstr "Keine Ahnung, der Lord Magister hat gesagt, die verstehen das schon."
 
 #: tutorial.xml
-msgid "Than I shall put the fear of Harad into these experiments!"
+#, fuzzy
+msgid "Then I shall put the fear of Harad into these experiments!"
 msgstr "Dann werde ich diese Experimente mal das Fürchten lehren!"
 
 #: tutorial.xml
@@ -795,7 +844,8 @@ msgstr ""
 "Vergiss es! Ich geh da nicht rein, wenn die Viecher noch auf freiem Fuß sind!"
 
 #: tutorial.xml
-msgid "Yuck, those things are really disgusting."
+#, fuzzy
+msgid "Yuck! Those things are really disgusting."
 msgstr "Ihh, die Dinger sind echt widerlich"
 
 #: tutorial.xml
@@ -807,33 +857,38 @@ msgid "Are you looking for trouble, weakling?!"
 msgstr "Suchst du streit, du Schwächling?!"
 
 #: tutorial.xml
-msgid "Wait a sec, they somehow seem stronger."
+#, fuzzy
+msgid "Wait a sec, Derred. They somehow seem stronger."
 msgstr "Warte mal, irgendwie sind sie stärker geworden."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Your witch stuff may have weakened me, but I take a bit of the power of "
+"Your witch stuff may have weakened me, but I take some of the power from "
 "every being I kill and become stronger."
 msgstr ""
 "Euer Hexenkram mag mich ja geschwächt haben, aber mit jedem getöteten Wesen "
 "nehme ich einen Teil seiner Kraft auf und werde stärker."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Your witch stuff may have weakened us, but we take a bit of the power of "
+"Your witch stuff may have weakened us, but we take some of the power from "
 "every being we kill and become stronger."
 msgstr ""
 "Euer Hexenkram mag uns ja geschwächt haben, aber mit jedem getöteten Wesen "
 "nehmen wir einen Teil seiner Kraft auf und werden stärker."
 
 #: tutorial.xml
-msgid "Better think about who you're calling weakling here!"
+#, fuzzy
+msgid "You'd better think about who you're calling `weakling' here!"
 msgstr "Überleg dir also lieber, wen du hier Schwächling nennst!"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Hm, right, the Lord Master said, something like this could happen. Do you "
-"know how to convert this power into proper abilities?"
+"Hm, right. The Lord Master said that something like this could happen. Do "
+"you know how to convert this power into proper abilities?"
 msgstr ""
 "Hm, stimmt der Lord Magister hat gesagt, das so etwas passieren kann. Wisst "
 "ihr auch, wie ihr diese Kraft in vernünftige Fähigkeiten umwandelt?"
@@ -851,8 +906,9 @@ msgstr ""
 "sogar genug Energie für eine neue Fähigkeit. ##solo"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Yes, that was the thing with the big plus in the lower left corner. Just "
+"Yes. That was the thing with the big plus in the lower left corner. Just "
 "click on it and distribute your attribute points. ##solo"
 msgstr ""
 "Ja genau, das war doch das, mit dem großen Plus in der linken unteren Ecke. "
@@ -860,9 +916,10 @@ msgstr ""
 "Attribut Punkte. ##solo"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Exactly. And you can distribute the skill point in the skill window. The "
-"Lord Master said, you could choose from three categories. ##solo"
+"Exactly. You can distribute the skill point in the skill window. The Lord "
+"Master said that you could choose from three categories. ##solo"
 msgstr ""
 "Genau, und den Fähigkeitenpunkt könnt ihr im Fähigkeitenfenster verteilen. "
 "Der Lord Magister hat gesagt, dass ihr die aus drei verschiedenen Kategorien "
@@ -881,8 +938,9 @@ msgstr ""
 "sogar genug Energie für eine neue Fähigkeit."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Yes, that was the thing with the big plus in the lower left corner. Just "
+"Yes. That was the thing with the big plus in the lower left corner. Just "
 "click on it and distribute your attribute points."
 msgstr ""
 "Ja genau, das war doch das, mit dem großen Plus in der linken unteren Ecke. "
@@ -890,9 +948,10 @@ msgstr ""
 "Attribut Punkte."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Exactly. And you can distribute the skill point in the skill window. The "
-"Lord Master said, you could choose from three categories."
+"Exactly. You can distribute the skill point in the skill window. The Lord "
+"Master said that you could choose from three categories."
 msgstr ""
 "Genau, und den Fähigkeitenpunkt könnt ihr im Fähigkeitenfenster verteilen. "
 "Der Lord Magister hat gesagt, dass ihr die aus drei verschiedenen Kategorien "
@@ -919,19 +978,23 @@ msgid "I wonder why this Soren knows so much about the Branded Ones..."
 msgstr "Ich frage mich, woher dieser Soren so viel über die Gefallenen weiß..."
 
 #: tutorial.xml
-msgid "Mages are exceedingly strange. Every single one of them."
+#, fuzzy
+msgid "Mages are exceedingly strange... Every single one of them."
 msgstr "Magier sind äußerst merkwürdig. Alle."
 
 #: tutorial.xml
-msgid "Better strange then..."
+#, fuzzy
+msgid "Better strange than..."
 msgstr "Besser merkwürdig als..."
 
 #: tutorial.xml
-msgid "That blasted thing. I hope the walls hold out."
+#, fuzzy
+msgid "That blasted thing! I hope the walls hold out."
 msgstr "Dieses verdammte Ding. Ich hoffe die Wände halten."
 
 #: tutorial.xml
-msgid "Quickly distribute your new points and then let's get out of here."
+#, fuzzy
+msgid "Quickly distribute your new points, and then let's get out of here!"
 msgstr "Verteilt schnell euren neuen Punkte und dann nichts wie weg von hier."
 
 #: tutorial.xml
@@ -947,8 +1010,9 @@ msgid "More of those beasts?"
 msgstr "Noch mehr von den Viechern?"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Urk! They seem to broken out somehow. I hope they don't breed in the "
+"Urk! They seem to have broken out somehow. I hope they don't breed in the "
 "crevices."
 msgstr ""
 "Uäks! Die scheinen irgendwie ausgebrochen zu sein. Hoffentlich vermehren die "
@@ -967,14 +1031,16 @@ msgid "You're not even sure it's there?"
 msgstr "Ihr wisst gar nicht sicher, ob sie da ist?"
 
 #: tutorial.xml
-msgid "I don' waste my time crawling through kitchen corridors, Cursed One."
+#, fuzzy
+msgid "I don't waste my time crawling through kitchen corridors, Cursed One."
 msgstr ""
 "Ich verbringe meine Zeit nicht damit, durch Küchengänge zu kriechen, "
 "Verfluchter!"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"That's correctly Branded One. You wouldn't want to be called harvest now, "
+"That's correct, Branded One. You wouldn't want to be called `harvest' now, "
 "would you?"
 msgstr ""
 "Das heißt korrekt Gezeichneter. Du willst ja auch nicht Ernte genannt "
@@ -1006,9 +1072,10 @@ msgstr ""
 "Habt ihr eigentlich daran gedacht, eure mächtigen Fähigkeiten einzusetzen?"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"The Lord Master thought, you could do considerably more than dully beat your "
-"enemies."
+"The Lord Master thought that you could do considerably more than dully beat "
+"your enemies."
 msgstr ""
 "Der Lord Magister meinte, ihr könnt wesentlich mehr als nur stumpfsinnig auf "
 "die Gegner einzuschlagen."
@@ -1033,9 +1100,10 @@ msgstr ""
 "Fähigkeit auswählen."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Just click with the mouse button, you would like to use the skill with, on "
-"the skill icon."
+"Just click with the same mouse button you would like to use the skill with "
+"on the skill icon."
 msgstr ""
 "Klickt einfach mit der Maustaste, mit der Ihr die Fähigkeit später einsetzen "
 "wollt, auf das Fähigkeitenbild."
@@ -1053,8 +1121,9 @@ msgstr ""
 "dieser Gruppe für eine Weile nicht verwenden."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Look at the picture in the status bar to learn, if a skill is ready for use."
+"Look at the picture in the status bar to know if a skill is ready for use."
 msgstr ""
 "Schaut auf das Bild in der unteren Leiste um zu erfahren, ob eine Fähigkeit "
 "einsatzbereit ist."
@@ -1100,7 +1169,8 @@ msgstr ""
 "schieben, indem Ihr darauf klickt."
 
 #: tutorial.xml
-msgid "And you better hope, there is no trap."
+#, fuzzy
+msgid "You'd better hope there's no trap."
 msgstr "Und Ihr solltet wohl darauf hoffen, dass keine Falle daran ist."
 
 #: tutorial.xml
@@ -1132,7 +1202,8 @@ msgid "I wouldn't put it past him."
 msgstr "Zuzutrauen wäre es ihm jedenfalls."
 
 #: tutorial.xml
-msgid "Joking aside! We have to go on."
+#, fuzzy
+msgid "Joking aside! We must go on."
 msgstr "Spaß bei Seite! Wir müssen weiter. "
 
 #: tutorial.xml
@@ -1162,11 +1233,13 @@ msgstr ""
 "kann?"
 
 #: tutorial.xml
-msgid "The Lord Master didn't say something about that..."
+#, fuzzy
+msgid "The Lord Master didn't say anything about that..."
 msgstr "Darüber hat der Lord Magister nichts gesagt..."
 
 #: tutorial.xml
-msgid "Somthing unwritten in the book of the omniscient airpaw?"
+#, fuzzy
+msgid "Something unwritten in the book of the omniscient airpaw?"
 msgstr "Etwas, das nicht im Buch des allwissenden Luftpfote geschrieben steht?"
 
 #: tutorial.xml
@@ -1174,14 +1247,16 @@ msgid "Windclaw, heretic!"
 msgstr "Windklaue, du Häretiker!"
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"A Cursed One has to be happy, if he's got something to kill all along, right?"
+"A Cursed One has to be happy if he has something to kill all along, right?"
 msgstr ""
 "Einen Verfluchten freut das sicher noch, wenn er alle Nase lang was zum "
 "töten hat."
 
 #: tutorial.xml
-msgid "I'm a Branded One! That is far worse than a curse."
+#, fuzzy
+msgid "I'm a Branded One! That is far worse than being cursed."
 msgstr "Ich bin ein Gezeichneter! Das ist viel schlimmer als ein Fluch."
 
 #: tutorial.xml
@@ -1189,7 +1264,8 @@ msgid "The mighty Akeran truly punished you dearly."
 msgstr "Der mächtige Akeran hat dich wahrlich schlimm gestraft."
 
 #: tutorial.xml
-msgid "Spare me your elementalist drivel and make way!"
+#, fuzzy
+msgid "Spare me your elementalist drivel and get out of my way!"
 msgstr "Verschone mich mit deinem Elementaristengelaber und gib den Weg frei!"
 
 #: tutorial.xml
@@ -1197,14 +1273,16 @@ msgid "I truly am the exterminator here."
 msgstr "Ich bin wohl wirklich der Kammerjäger."
 
 #: tutorial.xml
+#, fuzzy
 msgid ""
-"Cursed Ones have to be happy, if they got something to kill all along, right?"
+"Cursed Ones have to be happy if they have something to kill all along, right?"
 msgstr ""
 "Die Verfluchten freut das sicher noch, wenn sie alle Nase lang was zum Töten "
 "haben."
 
 #: tutorial.xml
-msgid "We're Branded Ones! That is far worse than a curse."
+#, fuzzy
+msgid "We're Branded Ones! That is far worse than being cursed."
 msgstr "Wir sind Gezeichnete! Das ist viel schlimmer als ein Fluch."
 
 #: tutorial.xml
@@ -1212,7 +1290,8 @@ msgid "The mighty Akeran truly punished them dearly."
 msgstr "Der mächtige Akeran hat sie wahrlich schlimm gestraft."
 
 #: tutorial.xml
-msgid "Spare us your elementalist drivel and make way!"
+#, fuzzy
+msgid "Spare us your elementalist drivel and get out of our way!"
 msgstr "Verschone uns mit deinem Elementaristengelaber und gib den Weg frei!"
 
 #: tutorial.xml
@@ -1220,7 +1299,8 @@ msgid "We truly are the exterminators here."
 msgstr "Wir sind wohl wirklich die Kammerjäger."
 
 #: tutorial.xml
-msgid "Wow. They really believe in orderly and thorough research."
+#, fuzzy
+msgid "Wow! They really believe in orderly and thorough research."
 msgstr ""
 "Wow. Die halten hier aber echt was von Ordnung und gründlicher Forschung."
 
@@ -1231,11 +1311,13 @@ msgstr ""
 "sind?"
 
 #: tutorial.xml
-msgid "Take a look around. That stuff has to be worth a fortune."
+#, fuzzy
+msgid "Take a look around. That stuff has to be worth a fortune!"
 msgstr "Schaut euch doch mal um, das Zeug muss ein Vermögen wert sein!"
 
 #: tutorial.xml
-msgid "That stuff has to be worth a fortune!"
+#, fuzzy
+msgid "That stuff must be worth a fortune!"
 msgstr "Das Zeug muss ein Vermögen wert sein!"
 
 #: tutorial.xml

@@ -157,6 +157,38 @@ msgid "Just curious."
 msgstr "Nur neugierig."
 
 #: rob_the_robber.xml
+#, fuzzy
+msgid "Rob the Robber killed"
+msgstr "Rob der Räuber (Belohnung)"
+
+#: rob_the_robber.xml
+msgid "Here is the necklace of Rob the robber."
+msgstr "Hier ist das Halsband von Rob, dem Räuber."
+
+#: rob_the_robber.xml
+msgid "I'll be damned!"
+msgstr ""
+
+#: rob_the_robber.xml
+#, fuzzy
+msgid "You really got him?"
+msgstr "Hat ihn tatsächlich jemand erwischt?"
+
+#: rob_the_robber.xml
+msgid ""
+"Better hope that the stories about him rising from his grave are just "
+"fairytales."
+msgstr ""
+
+#: rob_the_robber.xml
+msgid "What about my reward?"
+msgstr ""
+
+#: rob_the_robber.xml
+msgid "Sergeant Wober in Dwarfenwall has it."
+msgstr ""
+
+#: rob_the_robber.xml
 msgid "Sergeant Wober"
 msgstr "Sergeant Wober"
 
@@ -182,10 +214,6 @@ msgstr "Momentan vermuten wir ihn ihm Feenwald zwischen hier und Joringsbrück."
 #: rob_the_robber.xml
 msgid "Rob the Robber (Reward)"
 msgstr "Rob der Räuber (Belohnung)"
-
-#: rob_the_robber.xml
-msgid "Here is the necklace of Rob the robber."
-msgstr "Hier ist das Halsband von Rob, dem Räuber."
 
 #: rob_the_robber.xml
 msgid "By all devils!"

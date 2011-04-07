@@ -701,6 +701,10 @@ msgid ""
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
+msgid "I've never seen anyone who could fight like this."
+msgstr ""
+
+#: siegeOfDwarfenwall.xml
 msgid "Indeed."
 msgstr ""
 
@@ -1051,4 +1055,3 @@ msgstr ""
 #: siegeOfDwarfenwall.xml
 msgid "With this, the demo is officially over."
 msgstr ""
-

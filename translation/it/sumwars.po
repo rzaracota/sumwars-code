@@ -1400,6 +1400,11 @@ msgid "Armor class"
 msgstr "Armature"
 
 #: dwarfcastle.xml
+#, fuzzy
+msgid "Magic power"
+msgstr "Spada barbarica"
+
+#: dwarfcastle.xml
 msgid "Willpower"
 msgstr ""
 
@@ -1427,6 +1432,10 @@ msgstr ""
 #: dwarfcastle.xml
 msgid "Dexterity"
 msgstr "Destrezza"
+
+#: dwarfcastle.xml
+msgid "Strength"
+msgstr ""
 
 #: dwarfcastle.xml
 msgid "Block"
@@ -1753,6 +1762,10 @@ msgid "spawnAbyss"
 msgstr "spawnAbyss"
 
 #: testregions.xml
+msgid "benchmarkBox"
+msgstr ""
+
+#: testregions.xml
 msgid "region0"
 msgstr "region0"
 
@@ -2034,8 +2047,8 @@ msgstr ""
 
 #: mage_ablt.xml
 msgid ""
-"The mage has become one with the storm, leading to 20 percent extra damage "
-"from his lightning spells."
+"The mage has become one with the storm and can cast lightning spells 25% "
+"faster."
 msgstr ""
 
 #: mage_ablt.xml
@@ -2109,8 +2122,7 @@ msgstr ""
 #: priest_ablt.xml
 msgid ""
 "The priest strengthens the weaponarms of his comrades, leading to increased "
-"attackspeed for everyone. With increasing willpower the priest can hold this "
-"effect longer."
+"attackspeed for everyone."
 msgstr ""
 
 #: priest_ablt.xml
@@ -2121,7 +2133,7 @@ msgstr "Scudo di ferro"
 #: priest_ablt.xml
 msgid ""
 "The party is surrounded by holy energy. Everyones defense is increased. With "
-"increasing willpower the priest can hold this effect longer."
+"increasing willpower the effect improves."
 msgstr ""
 
 #: priest_ablt.xml
@@ -2135,19 +2147,13 @@ msgid ""
 msgstr ""
 
 #: priest_ablt.xml
-msgid ""
-"The priest conjures a magic shield for all partymembers thats reduces the "
-"damage dealt by elemental attacks."
-msgstr ""
-
-#: priest_ablt.xml
 msgid "Glaring Sun"
 msgstr ""
 
 #: priest_ablt.xml
 msgid ""
-"The priest calls forth a mighty explosion of light that can make every enemy "
-"in an area to be affected by blind."
+"The priest calls forth a mighty explosion of light that can blind every "
+"enemy in an area."
 msgstr ""
 
 #: priest_ablt.xml
@@ -2166,8 +2172,8 @@ msgstr ""
 
 #: priest_ablt.xml
 msgid ""
-"The party will be immune to blind and mute for some time. With increasing "
-"willpower the priest can hold this effect longer."
+"The party will be immune to blind and mute for some time. Those ailments "
+"will also be healed."
 msgstr ""
 
 #: priest_ablt.xml
@@ -2175,7 +2181,9 @@ msgid "Restore Concentration"
 msgstr ""
 
 #: priest_ablt.xml
-msgid "The priest heals one friend from confusion and berserk."
+msgid ""
+"The priest heals one friend from confusion and berserk. Those ailments will "
+"also be healed."
 msgstr ""
 
 #: priest_ablt.xml
@@ -2186,8 +2194,13 @@ msgstr "Scudo di ferro"
 #: priest_ablt.xml
 msgid ""
 "The priest grants immunity to berserk and confuse to all his partymembers "
-"for a small amount of time. With increasing willpower the priest can hold "
-"this effect longer."
+"for a small amount of time. Those ailments will also be healed."
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priest conjures a magic shield for all partymembers thats reduces the "
+"damage dealt by elemental attacks."
 msgstr ""
 
 #: priest_ablt.xml
@@ -2208,8 +2221,7 @@ msgstr "Martello cerimoniale"
 #: priest_ablt.xml
 msgid ""
 "The priests grants every partymember immunity to poison and burn for a small "
-"amount of time while healing these effects. With increasing willpower the "
-"priest can hold this effect longer."
+"amount of time while healing these effects."
 msgstr ""
 
 #: priest_ablt.xml
@@ -2302,9 +2314,9 @@ msgstr ""
 
 #: priest_ablt.xml
 msgid ""
-"The priest increases everyones spellpower for a short time. Everyones spells "
-"will surely be more effective. With increasing willpower the priest can hold "
-"this effect longer."
+"The priest increases everyones spellpower for a short time making spells "
+"more effective. The effect becomes stronger with increasing willpower of the "
+"priest."
 msgstr ""
 
 #: priest_ablt.xml
@@ -2324,8 +2336,41 @@ msgstr ""
 #: priest_ablt.xml
 msgid ""
 "The priests protecting influence raises the willpower of all partymembers "
-"temporarily. With increasing willpower the priest can hold this effect "
-"longer."
+"temporarily. The effect becomes stronger with increasing willpower of the "
+"priest."
+msgstr ""
+
+#: priest_ablt.xml
+#, fuzzy
+msgid "Holy Shield"
+msgstr "Scudo di ferro"
+
+#: priest_ablt.xml
+msgid ""
+"The priest is surrounded by a shimmering light that repells undead attacks. "
+"Damage from undead beings is reduced by one third."
+msgstr ""
+
+#: priest_ablt.xml
+#, fuzzy
+msgid "Banishing Aura"
+msgstr "Ascia del massacro"
+
+#: priest_ablt.xml
+msgid ""
+"The priests powers allow him to surround himself with an aura that immitates "
+"a banishment. While it holds no real power over demons, demonic beings will "
+"be frightened, thus leading to their damage being reduced by one third."
+msgstr ""
+
+#: priest_ablt.xml
+msgid "Elemental Vortex"
+msgstr ""
+
+#: priest_ablt.xml
+msgid ""
+"The priest can unconsciously create an elemental vortex that will drain one "
+"third of incoming damage from elemental beings."
 msgstr ""
 
 #: monster_ablt.xml
@@ -2518,6 +2563,10 @@ msgid ""
 msgstr ""
 
 #: warrior_ablt.xml
+msgid "Attacks every enemy in weapon range."
+msgstr ""
+
+#: warrior_ablt.xml
 msgid "Bash"
 msgstr ""
 
@@ -2528,7 +2577,7 @@ msgstr ""
 #: warrior_ablt.xml
 msgid ""
 "The warrior releases a mighty cry that causes his enemies to lose "
-"concentration, ultimatly reducing their defence."
+"concentration, ultimatly reducing their defence and slowing them down."
 msgstr ""
 
 #: warrior_ablt.xml
@@ -2668,8 +2717,8 @@ msgstr ""
 
 #: warrior_ablt.xml
 msgid ""
-"Nearby monsters will attack the warrior, if they are able to. The warriors "
-"defence is increased."
+"Nearby monsters will attack the warrior, if they are able to. Some will run "
+"away in fear. The warriors defence is increased. "
 msgstr ""
 
 #: warrior_ablt.xml
@@ -2707,8 +2756,8 @@ msgstr ""
 
 #: warrior_ablt.xml
 msgid ""
-"The battle hardened warriors scream leaves his enemies defence wide open, "
-"sometimes confusing them as well."
+"The battle hardened warrior's scream slows down his opponents, sometimes "
+"confusing them as well."
 msgstr ""
 
 #: warrior_ablt.xml
@@ -2727,7 +2776,7 @@ msgid "Whirl blow"
 msgstr ""
 
 #: warrior_ablt.xml
-msgid "Attacks every enemy in weapon range."
+msgid "Attacks every enemy in weapon range with a triple sweeping strike."
 msgstr ""
 
 #: npc_abilities.xml

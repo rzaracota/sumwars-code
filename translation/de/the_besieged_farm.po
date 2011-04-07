@@ -29,17 +29,19 @@ msgstr ""
 "bezahlt. Was will man mehr?"
 
 #: besieged_farm.xml
+#, fuzzy
 msgid ""
-"The peasants are rescued and the goblins slain. Time to collect the reward "
-"for the trouble in Joringsbridge."
+"The peasants are rescued and the goblins slain. It's time to collect the "
+"reward for the trouble in Joringsbridge."
 msgstr ""
 "Die Bauern sind gerettet und die Goblins erschlagen. Zeit, den Lohn fuer all "
 "die Muehen in Joringsbrueck abzuholen."
 
 #: besieged_farm.xml
+#, fuzzy
 msgid ""
 "The goblins around Bron's farm are not among the living anymore. I should "
-"knock at the door and make sure, everything is all right. No peasants, no "
+"knock at the door and make sure everything is all right. No peasants, no "
 "money."
 msgstr ""
 "Die Goblins rund um Brons Farm weilen nicht mehr unter den Lebenden. Ich "
@@ -67,19 +69,22 @@ msgid "Ah! Are you feeling like earning the money after all?"
 msgstr "Ah! Habt ihr doch noch Lust bekommen, Euch das Gold zu verdienen?"
 
 #: besieged_farm.xml
-msgid "Don't think, I haven't seen you hanging around back there."
+#, fuzzy
+msgid "Don't think I haven't seen you hanging around back there."
 msgstr "Glaubt ja nicht, ich habe Euch nicht dort herumlungern sehen."
 
 #: besieged_farm.xml
+#, fuzzy
 msgid ""
-"Don't think, I haven't seen you and your friend hanging around back there."
+"Don't think I haven't seen you and your friend hanging around back there."
 msgstr ""
 "Glaubt ja nicht, ich habe Euch und Euren Freund nicht dort herumlungern "
 "sehen."
 
 #: besieged_farm.xml
+#, fuzzy
 msgid ""
-"Don't think, I haven't seen you and your friends hanging around back there."
+"Don't think I haven't seen you and your friends hanging around back there."
 msgstr ""
 "Glaubt ja nicht, ich habe Euch und Eure Freunde nicht dort herumlungern "
 "sehen."
@@ -97,7 +102,8 @@ msgstr ""
 "Goblins, die sich um Brons Hof herum aufhalten."
 
 #: besieged_farm.xml
-msgid "I don't care, how you do it, even if you gobble them raw."
+#, fuzzy
+msgid "I don't care how you do it, even if you gobble them raw."
 msgstr ""
 "Wie Ihr das anstellt, ist mir egal, und wenn Ihr sie alle roh verschlingt."
 
@@ -106,11 +112,13 @@ msgid "Just kidding."
 msgstr "Nur ein Scherz."
 
 #: besieged_farm.xml
-msgid "When you're done come back to me."
+#, fuzzy
+msgid "When you're done, come back to me."
 msgstr "Wenn Ihr es geschafft habt, kommt Ihr zu mir zurueck."
 
 #: besieged_farm.xml
-msgid "On my way."
+#, fuzzy
+msgid "I'm on my way."
 msgstr "Schon unterwegs."
 
 #: besieged_farm.xml
@@ -185,9 +193,10 @@ msgid "I've already heard of it."
 msgstr "Hab ich schon gehört."
 
 #: besieged_farm.xml
+#, fuzzy
 msgid ""
-"Michel is in the tavern and getting plastered. All in honor of your bravery, "
-"of course."
+"Michel is in the tavern getting plastered - all in honor of your bravery, of "
+"course."
 msgstr "Michel ist gerade in der Schenke und besäuft sich auf Euer Wohl."
 
 #: besieged_farm.xml
