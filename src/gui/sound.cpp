@@ -347,7 +347,7 @@ void SoundSystem::playAmbientSound(SoundName sname, float volume, Vector* positi
 	DEBUGX("play ambient sound %s volume %f",sname.c_str(), volume);
 	
 	SoundObject* sobj = createSoundObject(stream.str());
-	sobj->setVolume(volume);
+	sobj->setVolume(volume*m_sound_volume);
 	sobj->setSound(sname);
 	
 	// if position is given: set it,
