@@ -122,12 +122,14 @@ void QuestInfo::update()
 	CEGUI::ListboxItem* newitem;
 	for (it = quests.begin(); it != quests.end(); ++it)
 	{
+		Quest* quest = it->second;
 		state = it->second->getState();
 		if (state == Quest::STARTED && open || state == Quest::FINISHED && done || state == Quest::FAILED && failed)
 		{
-			newitem = new StrListItem(dgettext("sumwars",it->second->getName().c_str()),it->first);
+			CEGUI::utf8* name = (CEGUI::utf8*) quest->getName().getTranslation().c_str();
+			newitem = new StrListItem(name,it->first);
 			questlist->addItem(newitem);
-			DEBUGX("add quest %s %s",it->second->getName().c_str(),it->first.c_str());
+			DEBUGX("add quest %s %s",quest->getName().getTranslation().c_str(),it->first.c_str());
 			
 			if (it->first == m_questname)
 			{

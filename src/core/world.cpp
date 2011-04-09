@@ -1736,8 +1736,9 @@ void World::updatePlayers()
 				}
 				else if (headerp.m_content == PTYPE_S2C_QUEST)
 				{
-					std::string name,tabname;
-					cv->fromBuffer(name);
+					TranslatableString name;
+					std::string tabname;
+					name.fromString(cv);
 					cv->fromBuffer(tabname);
 					DEBUGX("got data for quest %s %s",name.c_str(), tabname.c_str());
 

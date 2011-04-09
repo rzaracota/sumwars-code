@@ -27,12 +27,11 @@ class Quest
 		};
 		
 		/**
-		 * \fn Quest(std::string name, std::string table_name)
 		 * \brief Konstruktor
 		 * \param name Name des Quests
 		 * \param table_name Name der Lua Tabelle in der die Variablen zu dem Quest gespeichert werden
 		 */
-		Quest(std::string name, std::string table_name);
+		Quest(TranslatableString name, std::string table_name);
 		
 		/**
 		 * \fn virtual ~Quest()
@@ -73,10 +72,9 @@ class Quest
 		std::string getDescription();
 		
 		/**
-		 * \fn std::string getName()
 		 * \brief Gibt den Name aus
 		 */
-		std::string getName();
+		TranslatableString getName();
 		
 		/**
 		 * \fn void toString(CharConv* cv)
@@ -93,13 +91,20 @@ class Quest
 		 */
 		virtual void fromString(CharConv* cv);
 		
+		/**
+		 * \brief Setzt die Gettextdomain
+		 */
+		void setGettextDomain(std::string gettext_domain)
+		{
+			m_gettext_domain = gettext_domain;
+		}
+		
 	
 	private:
 		/**
-	 	 * \var std::string m_name
-		 * \brief Name des Quests
+		 * \brief Name of the quest that is intended to be translated and displayed 
 		 */
-		std::string m_name;
+		TranslatableString m_name;
 		
 		/**
 		 * \var std::string m_table_name
@@ -126,6 +131,11 @@ class Quest
 		 * \brief Lua Code, der die Beschreibung zurueck gibt
 		 */
 		std::string m_description_code;
+		
+		/**
+		 * \brief gettext domain used for translating the description
+		 */
+		std::string m_gettext_domain;
 		
 };
 

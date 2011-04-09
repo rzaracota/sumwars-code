@@ -1,7 +1,7 @@
 #include "quest.h"
 #include <libintl.h>
 
-Quest::Quest(std::string name, std::string table_name)
+Quest::Quest(TranslatableString name, std::string table_name)
 {
 	m_name = name;
 	m_table_name = table_name;
@@ -88,21 +88,27 @@ Quest::State Quest::getState()
 
 std::string Quest::getDescription()
 {
+	EventSystem::pushGettextDomain(m_gettext_domain);
 	EventSystem::executeCodeReference(m_description);
 	
-	std::string ret = EventSystem::getReturnValue();
+	TranslatableString descr;
+	descr.setTextDomain(EventSystem::GetGettextDomain());
+	EventSystem::getTranslatableString(EventSystem::getLuaState(), descr, -1);
 	
-	return ret;
+	EventSystem::getReturnValue();
+	EventSystem::popGettextDomain();
+	
+	return descr.getTranslation();
 }
 
-std::string Quest::getName()
+TranslatableString Quest::getName()
 {
 	return m_name;
 }
 
 void Quest::toString(CharConv* cv)
 {
-	cv->toBuffer(m_name);
+	m_name.toString(cv);
 	cv->toBuffer(m_table_name);
 	cv->toBuffer(m_description_code);
 }

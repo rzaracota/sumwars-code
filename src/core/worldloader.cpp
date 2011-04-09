@@ -515,16 +515,20 @@ void WorldLoader::loadQuests(TiXmlNode* node)
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
 		
-		std::string tabname,name;
+		std::string tabname, sname;
 		attr.getString("table_name",tabname);
-		attr.getString("name",name);
+		attr.getString("name",sname);
 	
 		std::string domain = EventSystem::GetGettextDomain();
 		attr.getString("domain",domain);
+		TranslatableString name;
+		name= sname;
+		name.setTextDomain(domain);
 		
 		EventSystem::pushGettextDomain(domain);
 		
 		qu = new Quest(name,tabname);
+		qu->setGettextDomain(domain);
 		
 		loadQuest(node,qu);
 		qu->init();
