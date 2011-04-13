@@ -76,6 +76,7 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/enet/include)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/core)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/contenteditor)
 INCLUDE_DIRECTORIES(${OGRE_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${OIS_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
@@ -215,6 +216,8 @@ SET(SRCS
   ./src/enet/protocol.c
   ./src/enet/unix.c
   ./src/enet/win32.c
+  ./src/gui/contenteditor/contenteditor.cpp
+  ./src/gui/contenteditor/renderinfotab.cpp
 )
  
 IF(BUILD_TOOLS)
@@ -227,6 +230,7 @@ SET(SRCS
 	./src/gui/debugpanel/luascripttab.cpp
 	./src/gui/debugpanel/textfileeditwindow.cpp
 	./src/gui/debugpanel/filebrowser/filebrowser.cpp
+	./src/gui/debugpanel/reloadtab.cpp
 	)
 ENDIF()
 

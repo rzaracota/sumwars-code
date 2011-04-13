@@ -3,6 +3,8 @@
 #include "luascripttab.h"
 #include "iconeditortab.h"
 #include "benchmarktab.h"
+#include "contenttab.h"
+//#include "reloadtab.h"
 #include "OgreRoot.h"
 
 using namespace CEGUI;
@@ -62,7 +64,12 @@ void DebugPanel::createPanel(bool visible)
 	benchTab->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
 	benchTab->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	addTabWindow("BenchmarkTab", benchTab);
-
+	/* not yet implemented
+	ReloadTab *reloadTab = static_cast<ReloadTab*>(m_winManager->createWindow("ReloadTab", "ReloadTab"));
+	reloadTab->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
+	reloadTab->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
+	addTabWindow("ReloadTab", reloadTab);
+	*/
 	if(!visible)
 	  m_rootWindow->setVisible(visible);
 }

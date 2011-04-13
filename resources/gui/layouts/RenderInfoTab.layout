@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout >
+    <Window Type="DefaultWindow" Name="RenderInfo" >
+        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Window Type="TaharezLook/Combobox" Name="RenderInfo/selectMainMesh" >
+            <Property Name="Tooltip" Value="select the main mesh" />
+            <Property Name="ReadOnly" Value="True" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0373047,0},{0.0382813,0},{0.425977,0},{0.617708,0}}" />
+            <Property Name="MaxEditTextLength" Value="1073741823" />
+        </Window>
+    </Window>
+</GUILayout>

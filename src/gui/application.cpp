@@ -11,8 +11,11 @@
 #include "guidebugtab.h"
 #include "luascripttab.h"
 #include "textfileeditwindow.h"
+//#include "reloadtab.h"
+//content editor
+#include "contenteditor.h"
+#include "renderinfotab.h"
 #endif
-
 //#include "CEGUI/ScriptingModules/LuaScriptModule/CEGUILua.h"
 
 #include "OgreConfigFile.h"
@@ -538,13 +541,16 @@ bool Application::initCEGUI()
     CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("SumwarsTooltip", "DefaultWindow", "TaharezLook/CustomTooltip", "Falagard/Default");
 
 #ifdef BUILD_TOOLS
+	
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<GuiDebugTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<IconEditorTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<BenchmarkTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<LuaScriptTab> >();
+	//CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<ReloadTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<TextFileEditWindow> >();
 #endif
-
+//CONTENTEDITOR
+	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<RenderInfoTab> >();
 	return true;
 }
 
@@ -616,6 +622,8 @@ bool Application::createView()
 #ifdef BUILD_TOOLS
 	new DebugPanel();
 	DebugPanel::getSingleton().init(false);
+	new ContentEditor();
+	ContentEditor::getSingleton().init(false);
 #endif
 
 	TooltipManager *mgr = new TooltipManager();
