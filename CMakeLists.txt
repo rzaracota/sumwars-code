@@ -230,7 +230,7 @@ SET(SRCS
 	./src/gui/debugpanel/luascripttab.cpp
 	./src/gui/debugpanel/textfileeditwindow.cpp
 	./src/gui/debugpanel/filebrowser/filebrowser.cpp
-	./src/gui/debugpanel/reloadtab.cpp
+	#./src/gui/debugpanel/reloadtab.cpp
 	)
 ENDIF()
 
