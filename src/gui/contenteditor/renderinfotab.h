@@ -11,6 +11,7 @@ namespace Ogre
 	class SceneManager;
 	class Camera;
 	class RenderTexture;
+	class Entity;
 }
 
 class RenderInfoTab : public CEGUI::Window, public ContentTab, public Ogre::LogListener
@@ -23,6 +24,14 @@ public:
 	virtual void messageLogged (const Ogre::String &message, Ogre::LogMessageLevel lml, bool maskDebug, const Ogre::String &logName);
 
 	virtual bool handleStartBenchmark(const CEGUI::EventArgs& e);
+	
+	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called upon selecting a mesh from the combobox
+	 * Updates the content of the editor scene to display the selected mesh.
+	 */
+	bool onMeshSelected(const CEGUI::EventArgs& evt);
+	
 private:
 	CEGUI::Window *m_tabLayout;
 	CEGUI::ListboxTextItem *m_listItem;

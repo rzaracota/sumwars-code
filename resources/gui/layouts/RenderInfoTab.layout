@@ -9,5 +9,8 @@
             <Property Name="UnifiedAreaRect" Value="{{0.0373047,0},{0.0382813,0},{0.425977,0},{0.617708,0}}" />
             <Property Name="MaxEditTextLength" Value="1073741823" />
         </Window>
+        <Window Type="TaharezLook/StaticImage" Name="EditorSceneImage" >
+            <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.2,0},{0.8,0},{0.9,0}}" />
+        </Window>
     </Window>
 </GUILayout>
