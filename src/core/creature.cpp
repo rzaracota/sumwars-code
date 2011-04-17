@@ -4222,6 +4222,10 @@ void Creature::writeNetEvent(NetEvent* event, CharConv* cv)
 			cv->toBuffer(it->second.m_timer_nr);
 			cv->toBuffer(it->second.m_time);
 			cv->toBuffer(it->second.m_timer);
+			if (World::getWorld()->getVersion() >= 18)
+			{
+				cv->toBuffer(it->second.m_rating);
+			}
 		}
 
 	}
@@ -4408,6 +4412,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 		cv->fromBuffer(nr);
 		int timer_nr;
 		float time, timer;
+		float rating;
 		Action::ActionType type;
 		for (int i=0; i<nr; i++)
 		{
@@ -4415,6 +4420,11 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 			cv->fromBuffer(timer_nr);
 			cv->fromBuffer(time);
 			cv->fromBuffer(timer);
+			if (World::getWorld()->getVersion() >= 18)
+			{
+				cv->fromBuffer(rating);
+				getBaseAttr()->m_abilities[type].m_rating = rating;
+			}
 			getBaseAttr()->m_abilities[type].m_timer_nr = timer_nr;
 			getBaseAttr()->m_abilities[type].m_timer = timer;
 			getBaseAttr()->m_abilities[type].m_time = time;

@@ -994,7 +994,8 @@ bool Monster::setValue(std::string valname)
 				at->second.m_rating = lua_tonumber(EventSystem::getLuaState(),-1);
 				lua_pop(EventSystem::getLuaState(), 1);
 				ret = true;
-				// TODO: An Clients uebertragen
+				// An Clients uebertragen
+				addToNetEventMask(NetEvent::DATA_ABILITIES);
 			}
 		}
 	}
