@@ -56,6 +56,7 @@ void EventSystem::init()
 	m_lua = lua_open();
 
 	luaL_openlibs(m_lua);
+	luaopen_debug(m_lua);
 
 	lua_register(m_lua, "getRegion", getRegion);
 	lua_register(m_lua, "getObjectValue", getObjectValue);
@@ -309,9 +310,12 @@ std::string EventSystem::getReturnValue()
 {
 	if (lua_gettop(m_lua) >0)
 	{
-		std::string ret = lua_tostring(m_lua, -1);
+		const char* cret = lua_tostring(m_lua, -1);
 		lua_pop(m_lua, 1);
-		return ret;
+		if (cret != 0)
+		{
+			return std::string(cret);	
+		}
 	}
 	return "";
 }

@@ -2411,7 +2411,7 @@
 	
 	
 	
-	<AI ai_sight_range="12" ai_shoot_range="12" ai_randaction_prob="0.0" />
+	<AI ai_sight_range="15" ai_shoot_range="15" ai_randaction_prob="0.0" />
 </Monster>
 
 <MonsterGroup name="campSkeletons" >

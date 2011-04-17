@@ -458,7 +458,9 @@ void Monster::updateCommand()
 	}
 
 	// Angriff auf Spieler durch anlocken
-	if (m_ai.m_goals->empty() && m_ai.m_chase_player_id !=0)
+	// additional condition: only chase attack if ability walk is present
+	if (m_ai.m_goals->empty() && m_ai.m_chase_player_id !=0
+		&& checkAbility("walk") && getBaseAttrMod()->m_abilities["walk"].m_rating >= 0)
 	{
 		pl = dynamic_cast<Creature*>(getRegion()->getObject(m_ai.m_chase_player_id));
 
@@ -627,7 +629,8 @@ void Monster::evalCommand(Action::ActionType act)
 		// Fernkamfangriff, Ziele sind alle Objekte die direkt Sichtbar sind
 		goal_list = m_ai.m_visible_goals;
 
-		if (goal_list->empty() && !m_ai.m_goals->empty())
+		if (goal_list->empty() && !m_ai.m_goals->empty()
+			&& checkAbility("walk") && getBaseAttrMod()->m_abilities["walk"].m_rating >= 0)
 		{
 			ranged_move = true;
 			goal_list =m_ai.m_goals;
