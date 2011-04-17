@@ -7,7 +7,7 @@ MONSTER
 TRADER
 FIXED_OBJECT
 -->
-
+<!--
 <ObjectTemplate name="$tree" type="FIXED_OBJECT">
         <Environment name="meadow" default="true">
                 <Object name="tree1" />
@@ -20,7 +20,7 @@ FIXED_OBJECT
 		<Environment name="cave">
         </Environment>
 </ObjectTemplate>
-
+-->
 <ObjectTemplate name="$flower" type="FIXED_OBJECT">
         <Environment name="hills" default="true">
                 <Object name="flower1" />
