@@ -24,3 +24,24 @@ material vegetation
 		}
 	}
 }
+
+material Vegetation_Atlas
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.800000 0.800000 0.800000
+			specular 0.500000 0.500000 0.500000 12.500000
+			
+			scene_blend alpha_blend
+			depth_write off
+			
+			texture_unit
+			{
+				texture Atlastex_veg.png
+			}
+		}
+	}
+}
+
