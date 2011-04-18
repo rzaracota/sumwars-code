@@ -35,7 +35,9 @@ material Vegetation_Atlas
 			specular 0.500000 0.500000 0.500000 12.500000
 			
 			scene_blend alpha_blend
-			depth_write off
+			alpha_rejection greater 120
+			depth_write on
+			depth_check on
 			
 			texture_unit
 			{
