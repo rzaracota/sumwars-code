@@ -474,7 +474,76 @@ Artwork provided by: Psycho
 Default license: CC-BY-SA
 Files:
 	bat.mesh
+	cryptDebris1.mesh
+	cryptDebris2.mesh
+	cryptDebris3.mesh
+	cryptDebris4.mesh
+	cryptDebris5.mesh
+	cryptDebris6.mesh
+	cryptDebris7.mesh
+	cryptDebris8.mesh
 	cryptMaylon.mesh
 	spider.mesh
-	
-	
+	Tree01_01.mesh
+	Tree01_02.mesh
+	Tree01_03.mesh
+	Tree01_04.mesh
+	Tree01_05.mesh
+	Tree01_06.mesh
+	Tree01_07.mesh
+	Tree02_01.mesh
+	Tree02_02.mesh
+	Tree02_03.mesh
+	Tree02_04.mesh
+	Tree02_05.mesh
+	Tree02_06.mesh
+	Tree02_07.mesh
+	Tree03_01.mesh
+	Tree03_02.mesh
+	Tree03_03.mesh
+	Tree03_04.mesh
+	Tree03_05.mesh
+	Tree03_06.mesh
+	Tree03_07.mesh
+	Tree04_01.mesh
+	Tree04_02.mesh
+	Tree04_03.mesh
+	Tree04_04.mesh
+	Tree04_05.mesh
+	Tree04_06.mesh
+	Tree04_07.mesh
+	Tree05_01.mesh
+	Tree05_02.mesh
+	Tree05_03.mesh
+	Tree05_04.mesh
+	Tree05_05.mesh
+	Tree05_06.mesh
+	Tree05_07.mesh
+	Tree06_01.mesh
+	Tree06_02.mesh
+	Tree06_03.mesh
+	Tree06_04.mesh
+	Tree06_05.mesh
+	Tree06_06.mesh
+	Tree06_07.mesh
+	Tree07_01.mesh
+	Tree07_02.mesh
+	Tree07_03.mesh
+	Tree07_04.mesh
+	Tree07_05.mesh
+	Tree07_06.mesh
+	Tree07_07.mesh
+	Tree08_01.mesh
+	Tree08_02.mesh
+	Tree08_03.mesh
+	Tree08_04.mesh
+	Tree08_05.mesh
+	Tree08_06.mesh
+	Tree08_07.mesh
+	Tree09_01.mesh
+	Tree09_02.mesh
+	Tree09_03.mesh
+	Tree09_04.mesh
+	Tree09_05.mesh
+	Tree09_06.mesh
+	Tree09_07.mesh
