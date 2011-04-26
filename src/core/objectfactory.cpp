@@ -44,15 +44,32 @@ GameObject::Subtype ObjectTemplate::getObject(EnvironmentName env)
 	std::map<EnvironmentName, WorldObjectTypeList >::iterator it;
 	it = m_env_objects.find(env);
 	
+	// If the name contains some # symbols, the last # and all subsequent characters are removed
+	// abc#def#ghi -> abc#def -> abc -> nothing was found
+	while (it == m_env_objects.end())
+	{
+		size_t pos = env.find_last_of('#');
+		if (pos != std::string::npos)
+		{
+			env.erase(pos);
+			it = m_env_objects.find(env);
+		}
+		else
+		{
+			break;
+		}
+	}
+	
+	// try default information
 	if (it == m_env_objects.end())
 	{
 		it = m_env_objects.find(m_default_environment);
-		
-		if (it == m_env_objects.end() || it->second.empty())
-		{
-			// nichts gefunden
-			return "";
-		}
+	}
+	
+	if (it == m_env_objects.end() || it->second.empty())
+	{
+		// nothing found
+		return "";
 	}
 	
 	if (it->second.empty())
@@ -79,15 +96,32 @@ ObjectGroupName ObjectGroupTemplate::getObjectGroup(EnvironmentName env)
 	std::map<EnvironmentName, std::list<ObjectGroupName > >::iterator it;
 	it = m_env_object_groups.find(env);
 	
+	// If the name contains some # symbols, the last # and all subsequent characters are removed
+	// abc#def#ghi -> abc#def -> abc -> nothing was found
+	while (it == m_env_object_groups.end())
+	{
+		size_t pos = env.find_last_of('#');
+		if (pos != std::string::npos)
+		{
+			env.erase(pos);
+			it = m_env_object_groups.find(env);
+		}
+		else
+		{
+			break;
+		}
+	}
+	
+	// try default information
 	if (it == m_env_object_groups.end())
 	{
 		it = m_env_object_groups.find(m_default_environment);
-		
-		if (it == m_env_object_groups.end() || it->second.empty())
-		{
-			// nichts gefunden
-			return "";
-		}
+	}
+	
+	if (it == m_env_object_groups.end() || it->second.empty())
+	{
+		// nothing found
+		return "";
 	}
 	
 	if (it->second.empty())
