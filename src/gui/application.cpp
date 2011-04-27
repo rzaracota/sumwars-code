@@ -14,7 +14,7 @@
 //#include "reloadtab.h"
 //content editor
 #include "contenteditor.h"
-#include "renderinfotab.h"
+#include "guiTabs.h"
 #endif
 //#include "CEGUI/ScriptingModules/LuaScriptModule/CEGUILua.h"
 
@@ -549,7 +549,7 @@ bool Application::initCEGUI()
 	//CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<ReloadTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<TextFileEditWindow> >();
 	//CONTENTEDITOR
-	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<RenderInfoTab> >();
+	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<GuiTabs> >();
 #endif
 
 	return true;

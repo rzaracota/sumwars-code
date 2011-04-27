@@ -1,5 +1,6 @@
 #include "contenteditor.h"
 #include "renderinfotab.h"
+#include "guiTabs.h"
 #include "OgreRoot.h"
 #include "debug.h"
 
@@ -29,9 +30,9 @@ void ContentEditor::toggleVisibility()
 void ContentEditor::createPanel(bool visible)
 {
 	m_rootWindow = m_winManager->createWindow("TaharezLook/FrameWindow", "ContentEditor");
-	m_rootWindow->setPosition(UVector2(UDim(0.1f, 0.0f), UDim(0.1f, 0.0f)));
-	m_rootWindow->setSize(UVector2(UDim(0.6f, 0.0f), UDim(0.6f, 0.0f)));
-	m_rootWindow->setText((CEGUI::utf8*)"Debug Panel");
+	m_rootWindow->setPosition(UVector2(UDim(0.025f, 0.0f), UDim(0.025f, 0.0f)));
+	m_rootWindow->setSize(UVector2(UDim(0.9f, 0.0f), UDim(0.85f, 0.0f)));
+	m_rootWindow->setText((CEGUI::utf8*)"Content Editor");
 	m_gameScreen->addChildWindow(m_rootWindow);
 
 	m_rootWindow->subscribeEvent(CEGUI::FrameWindow::EventCloseClicked, Event::Subscriber(&ContentEditor::handleCloseWindow, this));
@@ -40,12 +41,12 @@ void ContentEditor::createPanel(bool visible)
 	m_tabControl->setPosition(UVector2(UDim(0.03f, 0.0f), UDim(0.06f, 0.0f)));
 	m_tabControl->setSize(UVector2(UDim(0.95f, 0.0f), UDim(0.9f, 0.0f)));
 	m_rootWindow->addChildWindow(m_tabControl);
-	
-	RenderInfoTab *renderInfoTab = static_cast<RenderInfoTab*>(m_winManager->createWindow("RenderInfoTab", "RenderInfoTab"));
-	renderInfoTab->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
-	renderInfoTab->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
-	addTabWindow("RenderInfoTab", renderInfoTab);
-	
+
+	GuiTabs *guiTabs = static_cast<GuiTabs*>(m_winManager->createWindow("GuiTabs", "GuiTabs"));
+	guiTabs->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
+	guiTabs->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
+	addTabWindow("GuiTabs", guiTabs);
+
 	if(!visible)
 	  m_rootWindow->setVisible(visible);
 }

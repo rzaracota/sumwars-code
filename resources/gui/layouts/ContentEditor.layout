@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout >
+    <Window Type="DefaultWindow" Name="Root" >
+        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Window Type="TaharezLook/TabControl" Name="ObjectInfoTabControl" >
+            <Property Name="TabHeight" Value="{0,31.1724}" />
+            <Property Name="TabPanePosition" Value="Top" />
+            <Property Name="UnifiedAreaRect" Value="{{0.324414,0},{0.00312498,0},{0.997266,0},{0.898958,0}}" />
+            <Window Type="DefaultWindow" Name="RenderInfoTab" >
+                <Property Name="Text" Value="Render Info" />
+                <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Window Type="TaharezLook/TabControl" Name="RenderInfoTabControl" >
+                    <Property Name="TabHeight" Value="{0,31.1724}" />
+                    <Property Name="TabPanePosition" Value="Top" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.00391872,0},{0.00348824,0},{0.998476,0},{1.00058,0}}" />
+                    <Window Type="DefaultWindow" Name="RITab/BasicMesh" >
+                        <Property Name="Text" Value="Mesh" />
+                        <Property Name="Visible" Value="False" />
+                        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+                        <Window Type="TaharezLook/Combobox" Name="RITab/BM/MeshSelector" >
+                            <Property Name="UnifiedAreaRect" Value="{{0.0373223,0},{0.0507286,0},{0.315049,0},{0.965455,0}}" />
+                            <Property Name="MaxEditTextLength" Value="1073741823" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticImage" Name="RITab/BM/meshPreview" >
+                            <Property Name="UnifiedAreaRect" Value="{{0.339401,0},{0.0565595,0},{0.984886,0},{0.972743,0}}" />
+                        </Window>
+                    </Window>
+                    <Window Type="DefaultWindow" Name="RITab/SubMesh" >
+                        <Property Name="Text" Value="Submeshes" />
+                        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+                        <Window Type="TaharezLook/Combobox" Name="RITab/SubMesh/Selector" >
+                            <Property Name="UnifiedAreaRect" Value="{{0.037322,0},{0.050729,0},{0.315049,0},{0.245335,0}}" />
+                            <Property Name="MaxEditTextLength" Value="1073741823" />
+                        </Window>
+                        <Window Type="TaharezLook/Combobox" Name="RITab/SubMesh/BoneSelector" >
+                            <Property Name="UnifiedAreaRect" Value="{{0.34378,0},{0.050729,0},{0.621508,0},{0.245335,0}}" />
+                            <Property Name="MaxEditTextLength" Value="1073741823" />
+                        </Window>
+                        <Window Type="TaharezLook/Button" Name="RITab/SubMesh/AddSubMeshButton" >
+                            <Property Name="Text" Value="Add Submesh" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.661218,0},{0.051603,0},{0.938945,0},{0.113556,0}}" />
+                        </Window>
+                    </Window>
+                </Window>
+            </Window>
+        </Window>
+        <Window Type="TaharezLook/Editbox" Name="XMLBox" >
+            <Property Name="MaxTextLength" Value="1073741823" />
+            <Property Name="UnifiedAreaRect" Value="{{0.000195324,0},{0.00572911,0},{0.326367,0},{0.900259,0}}" />
+            <Property Name="TextParsingEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/Button" Name="XMLGenerateButton" >
+            <Property Name="UnifiedAreaRect" Value="{{0.00156251,0},{0.898698,0},{0.166602,0},{0.997656,0}}" />
+        </Window>
+        <Window Type="TaharezLook/Button" Name="CloseButton" >
+            <Property Name="Text" Value="Close" />
+            <Property Name="UnifiedAreaRect" Value="{{0.84668,0},{0.897134,0},{0.996094,0},{0.997395,0}}" />
+        </Window>
+    </Window>
+</GUILayout>

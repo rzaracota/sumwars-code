@@ -1,37 +1,46 @@
-#include "contenttab.h"
+#include "guiTabs.h"
 
 #include "Ogre.h"
 #include "OgrePlatformInformation.h"
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 
 #include "Poco/Environment.h"
 
 #include "CEGUIWindowManager.h"
 #include "CEGUI.h"
 
-#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
-#include "CEGUI/RendererModules/Ogre/CEGUIOgreTexture.h"
-#include "CEGUI/RendererModules/Ogre/CEGUIOgreResourceProvider.h"
-
 #include <eventsystem.h>
-#include <renderinfotab.h>
+#include <contenteditor.h>
+
+#include "contenttab.h"
+#include "debug.h"
 
 using namespace CEGUI;
 using Poco::Environment;
 
-CEGUI::String RenderInfoTab::WidgetTypeName = "RenderInfoTab";
+CEGUI::String GuiTabs::WidgetTypeName = "GuiTabs";
 
-RenderInfoTab::RenderInfoTab(const CEGUI::String& type, const CEGUI::String& name): CEGUI::Window(type, name), ContentTab(), Ogre::LogListener()
+GuiTabs::GuiTabs(const CEGUI::String& type, const CEGUI::String& name): CEGUI::Window(type, name), ContentTab(), Ogre::LogListener()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	setText("RenderInfoTab");
-
-	m_tabLayout = CEGUI::WindowManager::getSingleton().loadWindowLayout("RenderInfoTab.layout");
+	//m_tabLayout->getChild("windowUnderMouseStaticText")->setText(win->getName());
+	m_tabLayout = CEGUI::WindowManager::getSingleton().loadWindowLayout("ContentEditor.layout");
 	m_tabLayout->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
 	m_tabLayout->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	this->addChildWindow(m_tabLayout);
-	
+
+	WindowManager::getSingleton().getWindow("RITab/BasicMesh")->setVisible(true);
+
+	initMeshSelector();
+
+	//m_rootWindow->getChild("CloseButton")->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&GuiTabs::onCloseButton, this));
+	//WindowManager::getSingleton().getWindow("RITab/SubMesh/AddSubMeshButton")->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&GuiTabs::onAddSubMesh, this));
+}
+
+void GuiTabs::initMeshSelector()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	//get the mainmesh selector combobox and fill it with the names of all meshes
-	Combobox* selector = static_cast<Combobox*>(m_tabLayout->getChild("RenderInfo/selectMainMesh"));
+	Combobox* selector = static_cast<Combobox*>(WindowManager::getSingleton().getWindow("RITab/BM/MeshSelector"));
 	
 	Ogre::FileInfoListPtr files;
 	Ogre::FileInfoList::iterator it;
@@ -60,7 +69,7 @@ RenderInfoTab::RenderInfoTab(const CEGUI::String& type, const CEGUI::String& nam
 		}
 	}
 	
-	selector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&RenderInfoTab::onMeshSelected, this));
+	selector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&GuiTabs::onMeshSelected, this));
 	
 	
 	// create SceneManager for renderering images for the content editor
@@ -101,31 +110,11 @@ RenderInfoTab::RenderInfoTab(const CEGUI::String& type, const CEGUI::String& nam
 			CEGUI::Point( 0.0f, 0.0f ) );
 	
 	// place the image in a the CEGUI label
-	CEGUI::Window* label = win_mgr.getWindow("EditorSceneImage");
+	CEGUI::Window* label = win_mgr.getWindow("RITab/BM/meshPreview");
 	label->setProperty("Image", "set:editor_imageset image:editor_img"); 
-	
 }
 
-bool RenderInfoTab::handleStartBenchmark(const CEGUI::EventArgs& e)
-{
-	return true;
-}
-
-void RenderInfoTab::messageLogged(const Ogre::String& message, Ogre::LogMessageLevel lml, bool maskDebug, const Ogre::String& logName)
-{
-}
-
-void RenderInfoTab::update()
-{
-	
-}
-
-void RenderInfoTab::initialiseComponents()
-{
-
-}
-
-bool RenderInfoTab::onMeshSelected(const CEGUI::EventArgs& evt)
+bool GuiTabs::onMeshSelected(const CEGUI::EventArgs& evt)
 {
 	const CEGUI::MouseEventArgs& we =
 	static_cast<const CEGUI::MouseEventArgs&>(evt);
@@ -165,4 +154,44 @@ bool RenderInfoTab::onMeshSelected(const CEGUI::EventArgs& evt)
 	}
 	
 	return true;
+}
+
+void GuiTabs::onCloseButton(const CEGUI::EventArgs& evt)
+{
+	m_rootWindow->setVisible(false);
+}
+
+void GuiTabs::onAddSubMesh(const CEGUI::EventArgs& evt)
+{
+	//get SubMesh info, get optional Bone Info, add Submesh to mainmesh
+	//add a line for this bone with a button "kill me"
+}
+
+void GuiTabs::addTabWindow(std::string name, ContentTab* tab)
+{
+	//most likely obsolete
+	if(!tabExists(name))
+	{
+		m_tabs[name] = tab;
+		m_tabControl->addTab(dynamic_cast<CEGUI::Window*>(tab));
+	}
+}
+
+bool GuiTabs::tabExists(std::string tabName)
+{
+	//most likely obsolete
+	if(m_tabs.find(tabName) != m_tabs.end())
+		return true;
+
+	return false;
+}
+
+void GuiTabs::messageLogged(const Ogre::String& message, Ogre::LogMessageLevel lml, bool maskDebug, const Ogre::String& logName)
+{
+	//obsolete
+}
+
+
+void GuiTabs::update()
+{
 }

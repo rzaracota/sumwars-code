@@ -474,6 +474,12 @@ Artwork provided by: Psycho
 Default license: CC-BY-SA
 Files:
 	bat.mesh
+	Beam_01.mesh
+	Beam_02.mesh
+	Beam_03.mesh
+	beams_Stones_01.mesh
+	beams_Stones_02.mesh
+	Braid.mesh
 	cryptDebris1.mesh
 	cryptDebris2.mesh
 	cryptDebris3.mesh
@@ -483,7 +489,10 @@ Files:
 	cryptDebris7.mesh
 	cryptDebris8.mesh
 	cryptMaylon.mesh
+	pillar.mesh
+	Root.mesh
 	spider.mesh
+	Stalagmiten.mesh
 	Tree01_01.mesh
 	Tree01_02.mesh
 	Tree01_03.mesh
@@ -547,3 +556,9 @@ Files:
 	Tree09_05.mesh
 	Tree09_06.mesh
 	Tree09_07.mesh
+	wall_1x1x5.mesh
+	wall_1x1x5_Corner_inside.mesh
+	wall_1x1x5_Corner_outside.mesh
+	wall_2x1x5.mesh
+	wall_4x1x5.mesh
+	wall_8x1x5.mesh

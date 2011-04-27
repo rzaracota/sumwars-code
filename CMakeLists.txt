@@ -216,8 +216,6 @@ SET(SRCS
   ./src/enet/protocol.c
   ./src/enet/unix.c
   ./src/enet/win32.c
-  ./src/gui/contenteditor/contenteditor.cpp
-  ./src/gui/contenteditor/renderinfotab.cpp
 )
  
 IF(BUILD_TOOLS)
@@ -231,6 +229,8 @@ SET(SRCS
 	./src/gui/debugpanel/textfileeditwindow.cpp
 	./src/gui/debugpanel/filebrowser/filebrowser.cpp
 	#./src/gui/debugpanel/reloadtab.cpp
+	./src/gui/contenteditor/contenteditor.cpp
+	./src/gui/contenteditor/guiTabs.cpp
 	)
 ENDIF()
 
