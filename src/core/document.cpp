@@ -36,9 +36,7 @@
 #include "gettext.h"
 #include "stdstreamconv.h"
 
-#ifdef __APPLE__
 #include <physfs.h>
-#endif
 
 // Constructors/Destructors
 // Initialisiert Document zu Testzwecken
@@ -284,13 +282,14 @@ void Document::createNewCharacter(std::string name)
 {
 	if (m_temp_player)
 	{
-#ifndef __APPLE__
-		m_save_file = "./save/";
-#else
+
         std::string path = PHYSFS_getUserDir();
-        path.append("Library/Application Support/Sumwars/");
-        m_save_file = path;
+#ifndef __APPLE__
+		path.append("/.sumwars/save/");
+#else
+        path.append("/Library/Application Support/Sumwars/");
 #endif
+        m_save_file = path;
 		m_save_file += name;
 		m_save_file += ".sav";
 
@@ -796,7 +795,7 @@ void Document::onButtonJoinGame()
 
 void Document::onButtonStartHostGame()
 {
-	DEBUG("start single player game");
+	DEBUG("start multiplayer game");
 	// Spieler ist selbst der Host
 	setServer(true);
 	m_single_player = false;
@@ -1039,6 +1038,13 @@ void Document::onButtonWorldmap()
 	}
 
 
+}
+
+void Document::onButtonErrorDialogConfirm()
+{
+	getGUIState()->m_shown_windows &= ~MESSAGE;
+	m_modified |= WINDOWS_MODIFIED;
+    setState(SHUTDOWN_REQUEST);
 }
 
 void Document::onSkipDialogueTextClicked()
@@ -1495,7 +1501,9 @@ void Document::update(float time)
 			if (status == NET_REJECTED || status == NET_SLOTS_FULL || status == NET_TIMEOUT)
 			{
 				// Verbindung abgelehnt
-				m_state = SHUTDOWN;
+				//m_state = SHUTDOWN;
+                getGUIState()->m_shown_windows = MESSAGE;
+                m_modified |= WINDOWS_MODIFIED;
 			}
 
 
@@ -1514,7 +1522,9 @@ void Document::update(float time)
 			{
 				if (World::getWorld()->getNetwork()->getSlotStatus() == NET_TIMEOUT)
 				{
-					setState(SHUTDOWN_REQUEST);
+					setState(INACTIVE);
+                    getGUIState()->m_shown_windows = MESSAGE;
+                    m_modified |= WINDOWS_MODIFIED;
 				}
 			}
 
@@ -1797,24 +1807,25 @@ void Document::writeSavegame(bool writeShortkeys)
 
 void Document::saveSettings()
 {
-#ifdef __APPLE__
+
     std::string path = PHYSFS_getUserDir();
+#ifdef __APPLE__
     path.append("/Library/Application Support/Sumwars/");
-    Options::getInstance()->writeToFile(path + "options.xml");
 #else
-	Options::getInstance()->writeToFile("options.xml");
+    path.append("/.sumwars/save/");
 #endif
+    Options::getInstance()->writeToFile(path + "options.xml");
 }
 
 void Document::loadSettings()
 {
-#ifdef __APPLE__
     std::string path = PHYSFS_getUserDir();
+#ifdef __APPLE__
     path.append("/Library/Application Support/Sumwars/");
-    Options::getInstance()->readFromFile(path + "options.xml");
 #else
-	Options::getInstance()->readFromFile("options.xml");
+	path.append("/.sumwars/save/");
 #endif
+    Options::getInstance()->readFromFile(path + "options.xml");
 }
 
 Player*  Document::getLocalPlayer()

@@ -28,6 +28,7 @@ void NLFGClientNetwork::serverConnect(const char* hostname, int req_port )
 	unsigned success = nlfg_connect(hostname, req_port);
 	if (!success)
 	{
+        DEBUG("error connecting to server");
 		m_status = NET_ERROR;
 	}
 	else
@@ -40,11 +41,11 @@ void NLFGClientNetwork::serverDisconnect()
 {
 	DEBUG("closing connection");
 	nlfg_disconnect();
-	// wait to allow Raknet to deliver disconnect message
+	// wait to deliver disconnect message
 #ifdef WIN32
-	Sleep( 30 );
+	Sleep( 10 );
 #else
-	usleep(30000 );
+	usleep(10000 );
 #endif
 	m_status = NET_CLOSE;
 }
@@ -157,7 +158,7 @@ void NLFGClientNetwork::deallocatePacket(NetworkPacket* packet)
 		return;
 	}
 	
-	// first delete Raknet Packet, and then the object itself
+	// first delete Packet, and then the object itself
 	NLFG_Message* p = nlfgpacket->getPacket();
 	nlfg_destroyPacket(p);
 	delete packet;

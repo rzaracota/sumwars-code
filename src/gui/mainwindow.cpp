@@ -404,6 +404,19 @@ void MainWindow::update(float time)
 		{
 			char_create->setVisible(false);
 		}
+        
+        CEGUI::FrameWindow* error_dialog = (CEGUI::FrameWindow*) win_mgr.getWindow("ErrorDialogWindow");
+        if (wflags & Document::MESSAGE)
+        {
+            m_sub_windows["errorDialog"]->update();
+            error_dialog->setVisible(true);
+            //error_dialog->setModalState(true);
+        }
+        else
+        {
+            error_dialog->setVisible(false);
+            //error_dialog->setModalState(false);
+        }
 
 		if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		{
@@ -712,6 +725,7 @@ bool MainWindow::setupGameScreen()
 		setupItemInfo();
 		setupRegionInfo();
 		setupSaveExitWindow();
+        setupErrorDialogWindow();
 		setupChatContent();
 		
 		// Chatfenster anlegen
@@ -1050,6 +1064,17 @@ void MainWindow::setupSaveExitWindow()
 	
 	// Inventar anfangs ausblenden
 	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
+	wnd->getCEGUIWindow()->setVisible(false);
+}
+
+void MainWindow::setupErrorDialogWindow()
+{
+	Window* wnd = new ErrorDialogWindow(m_document);
+	m_sub_windows["errorDialog"] = wnd;
+	
+	
+	// Inventar anfangs ausblenden
+	m_main_menu->addChildWindow(wnd->getCEGUIWindow());
 	wnd->getCEGUIWindow()->setVisible(false);
 }
 

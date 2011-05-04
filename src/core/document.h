@@ -532,6 +532,12 @@ class Document
 	 * \brief Behandelt Klick auf Button Optionen
 	 */
 	void onButtonOptionsClicked();
+    
+    /**
+	 * \fn void onButtonErrorDialogConfirm( )
+	 * \brief The player has confirmed error
+	 */
+	void onButtonErrorDialogConfirm();
 
 	/**
 	 * \fn void onSwapEquip()

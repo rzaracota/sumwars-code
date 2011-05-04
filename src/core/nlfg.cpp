@@ -91,15 +91,14 @@ int nlfg_init_client()
 		    0,
                     57600 / 8 /* 56K modem with 56 Kbps downstream bandwidth */,
                     14400 / 8 /* 56K modem with 14 Kbps upstream bandwidth */);
-    nlfgQueue.head = 0;
 #else
     // enet 1.2
     host = enet_host_create (NULL,
                     1 /* only allow 1 outgoing connection */,
                     57600 / 8 /* 56K modem with 56 Kbps downstream bandwidth */,
                     14400 / 8 /* 56K modem with 14 Kbps upstream bandwidth */);
-    nlfgQueue.head = 0;
 #endif
+    nlfgQueue.head = 0;
     return 1;
 }
 

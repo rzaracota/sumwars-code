@@ -21,16 +21,18 @@
 #include "OgreConfigFile.h"
 #include <OgreParticleSystemManager.h>
 
-#ifdef __APPLE__
 #include <physfs.h>
 // Return the path to where files should be stored on mac
 Ogre::String userPath()
 {
     Ogre::String path = PHYSFS_getUserDir();
-    path.append("Library/Application Support/Sumwars");
+#ifdef __APPLE__
+    path.append("/Library/Application Support/Sumwars");
+#else
+    path.append("/.sumwars");
+#endif
     return path;
 }
-#endif
 
 Application::Application(char *argv)
 {
@@ -56,7 +58,6 @@ Application::Application(char *argv)
 
 bool Application::init(char *argv)
 {
-#ifdef __APPLE__
     // Initialise PHYSFS for later on
     if (PHYSFS_init(argv) == 0)
     {
@@ -69,6 +70,7 @@ bool Application::init(char *argv)
         printf("setWriteDir failed: %s\n", PHYSFS_getLastError());
         return false;
     }
+#ifdef __APPLE__
     if (!PHYSFS_exists("Library/Application Support/Sumwars"))
     {
         if (PHYSFS_mkdir("Library/Application Support/Sumwars") == 0)
@@ -76,16 +78,21 @@ bool Application::init(char *argv)
             printf("mkdir failed: %s\n", PHYSFS_getLastError());
             return false;
         }
-    }    
+    }
+#else
+    if (!PHYSFS_exists(".sumwars"))
+    {
+        if (PHYSFS_mkdir(".sumwars") == 0)
+        {
+            printf("mkdir failed: %s\n", PHYSFS_getLastError());
+            return false;
+        }
+    }
 #endif
     
 	// Logger initialisieren
 	LogManager::instance().addLog("stdout",new StdOutLog(Log::LOGLEVEL_DEBUG));
-#ifndef __APPLE__
-	LogManager::instance().addLog("logfile",new FileLog("sumwars.log",Log::LOGLEVEL_INFO));
-#else
     LogManager::instance().addLog("logfile",new FileLog(path + "/sumwars.log",Log::LOGLEVEL_INFO));
-#endif
 
 	Timer tm;
 	m_timer.start();
@@ -202,9 +209,7 @@ Application::~Application()
 	SoundSystem::cleanup();
 	LogManager::cleanup();
     
-#ifdef __APPLE__
     PHYSFS_deinit();
-#endif
 }
 
 void Application::run()
@@ -232,8 +237,6 @@ void Application::run()
 			{
 				#ifdef WIN32
 					Sleep(20-frametime);
-				#elif defined __APPLE__
-					// TODO
 				#else
 					usleep(1000*(20-frametime));
 				#endif
@@ -421,8 +424,6 @@ bool Application::setupResources()
     path.append("/");
 #endif
 	
-	
-	
 	Ogre::ConfigFile cf;
 	cf.load(path + "resources.cfg");
 
@@ -443,16 +444,7 @@ bool Application::setupResources()
 		}
 	}
 	
-	
-
-#ifndef __APPLE__
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./save", "FileSystem", "Savegame");
-#else
-    Ogre::String homePath = userPath();
-    Ogre::ResourceGroupManager::getSingleton().addResourceLocation(homePath, "FileSystem", "Savegame");
-#endif
-
-
+    Ogre::ResourceGroupManager::getSingleton().addResourceLocation(userPath(), "FileSystem", "Savegame");
 
 #if defined(WIN32)
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("c:\\windows\\fonts", "FileSystem", "GUI");
@@ -494,11 +486,7 @@ bool Application::initCEGUI()
 	// Log level
 	new CEGUI::DefaultLogger();	
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
-#ifndef __APPLE__
-	CEGUI::DefaultLogger::getSingleton().setLogFilename("CEGUI.log");
-#else
-    CEGUI::DefaultLogger::getSingleton().setLogFilename(macPath() + "/CEGUI.log");
-#endif
+    CEGUI::DefaultLogger::getSingleton().setLogFilename(userPath() + "/CEGUI.log");
 	
 	// Bootstrap the CEGUI System
 	CEGUI::OgreRenderer::bootstrapSystem();

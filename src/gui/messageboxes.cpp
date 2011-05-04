@@ -152,3 +152,65 @@ void MessageQuestionWindow::setQuestion(std::string question)
 	updateTranslation();
 }
 
+ErrorDialogWindow::ErrorDialogWindow (Document* doc)
+:Window(doc)
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::PushButton* btn;
+	CEGUI::Window* label;
+	
+	CEGUI::FrameWindow* error_dialog = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "ErrorDialogWindow");
+	m_window = error_dialog;
+	m_error = "Network connection timed out";
+	
+	error_dialog->setPosition(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.25f))); //0.0/0.8
+	error_dialog->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.2f))); //1.0/0.2
+	error_dialog->setProperty("FrameEnabled","false");
+	error_dialog->setProperty("TitlebarEnabled","false");
+	error_dialog->setProperty("CloseButtonEnabled","false");
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "ErrorDialogConfirmButton"));
+	error_dialog->addChildWindow(btn);
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.6f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.3f)));
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ErrorDialogWindow ::onConfirmed, this));
+	
+	label = win_mgr.createWindow("TaharezLook/StaticText", "ErrorDialogLabel");
+	error_dialog->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim(0.1f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.75f), cegui_reldim( 0.3f)));
+	
+	updateTranslation();
+}
+
+void ErrorDialogWindow::update()
+{
+}
+
+void ErrorDialogWindow::updateTranslation()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+	
+	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "ErrorDialogConfirmButton"));
+	btn->setText((CEGUI::utf8*) gettext("Ok"));
+	
+	label = win_mgr.getWindow("ErrorDialogLabel");
+	label->setText((CEGUI::utf8*) gettext(m_error.c_str()));
+}
+
+
+bool ErrorDialogWindow::onConfirmed(const CEGUI::EventArgs& evt)
+{
+	m_document->onButtonErrorDialogConfirm();
+	return true;
+}
+
+void ErrorDialogWindow::setError(std::string error)
+{
+	m_error = error;
+	updateTranslation();
+}
+

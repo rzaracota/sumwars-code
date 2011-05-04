@@ -177,6 +177,12 @@ class MainWindow :
 	 * \brief erstellt Fenster Speichern & Beenden
 	 */
 	void setupSaveExitWindow();
+    
+    /**
+	 * \fn void setupErrorDialogWindow()
+	 * \brief unknown
+	 */
+	void setupErrorDialogWindow();
 	
 	/**
 	 * \fn void setupChatContent()

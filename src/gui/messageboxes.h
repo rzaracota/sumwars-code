@@ -106,5 +106,51 @@ class MessageQuestionWindow : public Window
 		
 };
 
+/**
+ * \class ErrorDialogWindow
+ * \brief Dialog for Errors
+ */
+class ErrorDialogWindow : public Window
+{
+public:
+	/**
+	 * \fn SaveExitWindow (Document* doc
+	 * \brief Konstruktor
+	 */
+    ErrorDialogWindow (Document* doc);
+	
+    /**
+     * \fn virtual void update()
+     * \brief aktualisiert den Inhalt des Fensters
+     */
+    virtual void update();
+    
+    /**
+     * \fn virtual void updateTranslation
+     * \brief aktualisiert die Uebersetzungen
+     */
+    virtual void updateTranslation();
+    
+    /**
+     * \fn void setError(std::string error)
+     * \brief Set the error text
+     */
+    void setError(std::string error);
+	
+private:
+    /**
+     * \fn bool onConfirmed(const CEGUI::EventArgs& evt)
+     * \brief User clicked OK
+     */
+    bool onConfirmed(const CEGUI::EventArgs& evt);
+    
+    /**
+     * \var std::string m_error
+     * \brief The error text
+     */
+    std::string m_error;
+};
+
+
 #endif
 
