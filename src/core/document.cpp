@@ -287,7 +287,7 @@ void Document::createNewCharacter(std::string name)
 #ifndef __APPLE__
 		path.append("/.sumwars/save/");
 #else
-        path.append("/Library/Application Support/Sumwars/");
+        path.append("/Library/Application Support/Sumwars/save/");
 #endif
         m_save_file = path;
 		m_save_file += name;
@@ -1812,7 +1812,7 @@ void Document::saveSettings()
 #ifdef __APPLE__
     path.append("/Library/Application Support/Sumwars/");
 #else
-    path.append("/.sumwars/save/");
+    path.append("/.sumwars/");
 #endif
     Options::getInstance()->writeToFile(path + "options.xml");
 }
@@ -1823,7 +1823,7 @@ void Document::loadSettings()
 #ifdef __APPLE__
     path.append("/Library/Application Support/Sumwars/");
 #else
-	path.append("/.sumwars/save/");
+	path.append("/.sumwars/");
 #endif
     Options::getInstance()->readFromFile(path + "options.xml");
 }

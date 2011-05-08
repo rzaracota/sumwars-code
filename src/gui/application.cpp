@@ -78,11 +78,37 @@ bool Application::init(char *argv)
             printf("mkdir failed: %s\n", PHYSFS_getLastError());
             return false;
         }
+        if (PHYSFS_mkdir("Library/Application Support/Sumwars/save") == 0)
+        {
+            printf("mkdir failed: %s\n", PHYSFS_getLastError());
+            return false;
+        }
+    }
+    if (!PHYSFS_exists("Library/Application Support/Sumwars/save"))
+    {
+        if (PHYSFS_mkdir("Library/Application Support/Sumwars/save") == 0)
+        {
+            printf("mkdir failed: %s\n", PHYSFS_getLastError());
+            return false;
+        }
     }
 #else
     if (!PHYSFS_exists(".sumwars"))
     {
         if (PHYSFS_mkdir(".sumwars") == 0)
+        {
+            printf("mkdir failed: %s\n", PHYSFS_getLastError());
+            return false;
+        }
+        if (PHYSFS_mkdir(".sumwars/save") == 0)
+        {
+            printf("mkdir failed: %s\n", PHYSFS_getLastError());
+            return false;
+        }
+    }
+    if (!PHYSFS_exists(".sumwars/save"))
+    {
+        if (PHYSFS_mkdir(".sumwars/save") == 0)
         {
             printf("mkdir failed: %s\n", PHYSFS_getLastError());
             return false;
@@ -444,7 +470,8 @@ bool Application::setupResources()
 		}
 	}
 	
-    Ogre::ResourceGroupManager::getSingleton().addResourceLocation(userPath(), "FileSystem", "Savegame");
+    Ogre::String savePath = userPath() + "/save";
+    Ogre::ResourceGroupManager::getSingleton().addResourceLocation(savePath, "FileSystem", "Savegame");
 
 #if defined(WIN32)
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("c:\\windows\\fonts", "FileSystem", "GUI");
