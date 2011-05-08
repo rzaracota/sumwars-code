@@ -17,7 +17,8 @@
 cmake_minimum_required(VERSION 2.6)
 
 OPTION(NO_TINYXML "Avoid use of TinyXML Lib" OFF)
-OPTION(BUILD_TOOLS "Builds editor tools" OFF)
+OPTION(BUILD_TOOLS "Builds editor tools" ON)
+#SET(BUILD_TOOLS ON)
 
 IF( NOT CMAKE_BUILD_TYPE )
 SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
@@ -45,7 +46,7 @@ ENDIF(UNIX)
 IF (CMAKE_BUILD_TYPE STREQUAL "")
   # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
   # differentiation between debug and release builds.
-  SET(CMAKE_BUILD_TYPE "RelWithDebInfo" CACHE STRING "Choose the type of build, options are: None (CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel." FORCE)
+  SET(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose the type of build, options are: None (CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF ()
 
 SET(CMAKE_DEBUG_POSTFIX "_d")
@@ -66,6 +67,7 @@ FIND_PACKAGE(OpenAL REQUIRED)
 FIND_PACKAGE(ALUT REQUIRED)
 FIND_PACKAGE(Ogg REQUIRED)
 FIND_PACKAGE(Vorbis REQUIRED)
+FIND_PACKAGE(PhysFS REQUIRED)
 
 IF(BUILD_TOOLS)
 FIND_PACKAGE(POCO REQUIRED)
@@ -91,6 +93,7 @@ IF(BUILD_TOOLS)
 	INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
 	INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel/filebrowser)
 	INCLUDE_DIRECTORIES(${POCO_INCLUDE_DIR})
+	MESSAGE("Activated ingame build tools.")
 ENDIF()
 
 
@@ -250,6 +253,7 @@ SET(LINK_LIBS
 	${ALUT_LIBRARY} 
 	${OGG_LIBRARY_DEBUG}
 	${VORBIS_LIBRARIES} 
+	${PHYSFS_LIBRARY}
 )
 
 IF(BUILD_TOOLS)
