@@ -129,7 +129,7 @@ Item* ItemList::getItem(Item::Size m_size, int index)
 	return 0;
 }
 
-int ItemList::getFreePlace(Item::Size size, bool useup_possible)
+int ItemList::getFreePlace(Item::Size size)
 {
 	Item** arr = m_small_items;
 	short k = m_max_small;
@@ -146,14 +146,7 @@ int ItemList::getFreePlace(Item::Size size, bool useup_possible)
 		k = m_max_big;
 	}
 
-	int i=0;
-	// im ersten drittel der kleinen Items duerfen nur verbrauchbare Gegenstaende sein
-	if (size == Item::SMALL && !useup_possible)
-	{
-		i = k/3;
-	}
-
-	for (;i<k;i++)
+	for (int i=0 ;i<k;i++)
 	{
 		if (arr[i]==0)
 			return i;
@@ -196,6 +189,11 @@ Equipement::Equipement(short max_small, short max_medium, short max_big)
 	{
 		m_body_items[i] =0;
 	}
+	
+	for (int i=0; i< getMaxBeltItemNumber(); i++)
+	{
+		m_belt_items[i] = 0;
+	}
 
 	m_gold = 0;
 };
@@ -215,6 +213,15 @@ void Equipement::clear()
 			m_body_items[i] =0;
 		}
 	}
+	
+	for (int i=0; i< getMaxBeltItemNumber(); i++)
+	{
+		if (m_belt_items[i] != 0)
+		{
+			delete m_belt_items[i];
+			m_belt_items[i] = 0;
+		}
+	}
 
 	DEBUGX("clearing equipement");
 	m_inventory.clear();
@@ -227,7 +234,12 @@ Item* Equipement::getItem(int pos)
 	{
 		return m_body_items[pos];
 	}
-
+	
+	if (pos >=BELT_ITEMS && pos < BELT_ITEMS_END)
+	{
+		return m_belt_items[pos - BELT_ITEMS];
+	}
+	
 	if (pos>=BIG_ITEMS && pos < MEDIUM_ITEMS)
 	{
 		return m_inventory.getItem(Item::BIG,pos-BIG_ITEMS);
@@ -255,6 +267,12 @@ bool Equipement::swapItem(Item* &item,int pos)
 	{
 		// Tausch mit einem Ausruestungsgegenstand
 		std::swap(item, m_body_items[pos]);
+		return true;
+	}
+	else if (pos >=BELT_ITEMS && pos < BELT_ITEMS_END)
+	{
+		// swap into belt
+		std::swap(item, m_belt_items[pos - BELT_ITEMS]);
 		return true;
 	}
 	else
@@ -288,7 +306,7 @@ bool Equipement::swapCursorItem(int pos)
 	return ret;
 }
 
-short  Equipement::insertItem(Item* item, bool check_useup,bool use_equip, bool use_secondary)
+short  Equipement::insertItem(Item* item, bool use_belt, bool use_equip, bool use_secondary)
 {
 	if (item ==0)
 		return NONE;
@@ -355,11 +373,36 @@ short  Equipement::insertItem(Item* item, bool check_useup,bool use_equip, bool 
 	}
 
 	Item* itm = item;
-	int pos;
+	int pos = -1;
 	bool useup = (item->m_useup_effect != 0);
-	if (!check_useup)
-		useup = true;
-	pos = m_inventory.getFreePlace(item->m_size,useup);
+	
+	if (useup && use_belt)
+	{
+		// might be placed in belt
+		// check if this object is not placed in the belt yet
+		for (int i=0; i< getMaxBeltItemNumber(); i++)
+		{
+			if (pos == -1 && m_belt_items[i] == 0)
+			{
+				pos = i+ BELT_ITEMS;
+			}
+			else if (m_belt_items[i] != 0
+				&& m_belt_items[i]->m_subtype == item->m_subtype)
+			{
+				// item of this type is already placed in the belt
+				pos = -1;
+				break;
+			}
+		}
+		
+		if (pos != -1)
+		{
+			std::swap(item, m_belt_items[pos - BELT_ITEMS]);
+			return true;
+		}
+	}
+	
+	pos = m_inventory.getFreePlace(item->m_size);
 	DEBUGX("free pos: %i",pos);
 
 
@@ -423,6 +466,13 @@ short Equipement::findItem(Item::Subtype subtype,short startpos)
 	for (int i= MathHelper::Max(int(SMALL_ITEMS),start); i< SMALL_ITEMS+m_inventory.getMaxSmall(); i++)
 	{
 		item = m_inventory.getItem(Item::SMALL, i - SMALL_ITEMS);
+		if (item != 0 && item->m_subtype == subtype)
+			return i;
+	}
+	
+	for (int i= MathHelper::Max(int(BELT_ITEMS),start); i< BELT_ITEMS_END; i++)
+	{
+		item = m_belt_items[i - BELT_ITEMS];
 		if (item != 0 && item->m_subtype == subtype)
 			return i;
 	}
@@ -499,7 +549,11 @@ int Equipement::getNumberItems()
 			nr++;
 	}
 
-
+	for (i=0;i<getMaxBeltItemNumber();i++)
+	{
+		if (m_belt_items[i])
+			nr++;
+	}
 
 	return nr;
 }
@@ -535,6 +589,38 @@ int Equipement::getMaxItemNumber(Item::Size size)
 		}
 	}
 	return pos;
+}
+
+int Equipement::getNumSmallItemsOfType(Item::Subtype subtype)
+{
+	int ret = 0;
+	for (int i=0;i<m_inventory.getMaxSmall();i++)
+	{
+		Item* it = m_inventory.getItem(Item::SMALL,i);
+		if (it!=0 && it->m_subtype == subtype)
+		{
+			ret++;
+		}
+	}
+	
+	for (int i=0;i<getMaxBeltItemNumber();i++)
+	{
+		Item* it = m_belt_items[i];
+		if (it!=0 && it->m_subtype == subtype)
+		{
+			ret++;
+		}
+	}
+	
+	for (int i=0; i<=CURSOR_ITEM; i++)
+	{
+		Item* it = m_body_items[i];
+		if (it!=0 && it->m_subtype == subtype)
+		{
+			ret++;
+		}
+	}
+	return ret;
 }
 
 Equipement::Position Equipement::getItemEquipPosition(Item* item, bool secondary_equip, Equipement::Position proposed)
@@ -627,7 +713,18 @@ void Equipement::toString(CharConv* cv)
 		}
 	}
 
-
+	// belt
+	for (int i=0;i<getMaxBeltItemNumber();i++)
+	{
+		it = m_belt_items[i];
+		if (it!=0)
+		{
+			cv->printNewline();
+			cv->toBuffer(static_cast<short>(BELT_ITEMS+i));
+			it->toString(cv);
+			nr++;
+		}
+	}
 
 }
 
@@ -721,6 +818,20 @@ void Equipement::toStringComplete(CharConv* cv)
 			nr++;
 		}
 	}
+	
+		// belt
+	for (int i=0;i<getMaxBeltItemNumber();i++)
+	{
+		it = m_belt_items[i];
+		if (it!=0)
+		{
+			cv->printNewline();
+			cv->toBuffer(static_cast<short>(BELT_ITEMS+i));
+			it->toStringComplete(cv);
+			nr++;
+		}
+	}
+	
 	cv->printNewline();
 	cv->toBuffer(m_gold);
 

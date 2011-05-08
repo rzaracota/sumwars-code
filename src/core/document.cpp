@@ -1335,7 +1335,7 @@ bool Document::onKeyPress(KeyCode key)
 		}
 		else if (dest >=USE_POTION && dest < USE_POTION+10)
 		{
-			onItemRightClick(Equipement::SMALL_ITEMS + (dest-USE_POTION));
+			onItemRightClick(Equipement::BELT_ITEMS + (dest-USE_POTION));
 		}
 		else if (dest>=USE_SKILL_LEFT && dest <USE_SKILL_RIGHT)
 		{

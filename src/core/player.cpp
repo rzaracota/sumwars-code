@@ -177,7 +177,7 @@ bool Player::init()
 	for( it = pdata->m_start_items.begin(); it != pdata->m_start_items.end(); ++it)
 	{
 		item = ItemFactory::createItem(ItemFactory::getBaseType(*it),*it);
-		insertItem(item,true,false);
+		insertItem(item,true);
 	}
 
 	bas->m_level=1;
@@ -590,13 +590,11 @@ bool Player::onItemClick(ClientCommand* command)
 					insertItem(itm,false);
 					req = false;
 				}
-				else if (pos >= Equipement::SMALL_ITEMS && pos < Equipement::SMALL_ITEMS+10)
+				else if (pos>=Equipement::BELT_ITEMS && pos < Equipement::BELT_ITEMS_END)
 				{
-					// Guertel, nur Traenke zulassen
-					if (it->m_type != Item::POTION)
+					if (it->m_useup_effect == 0)
 					{
-
-						// Item vom Cursor nehmen
+						// non-consumable items must not placed in belt
 						Item* itm =0;
 						m_equipement->swapItem(itm, Equipement::CURSOR_ITEM);
 
@@ -605,7 +603,6 @@ bool Player::onItemClick(ClientCommand* command)
 						req = false;
 					}
 				}
-
 			}
 
 			if (req == false)
@@ -653,7 +650,7 @@ bool Player::onItemClick(ClientCommand* command)
 				}
 				else
 				{
-					int pos = getStash()->insertItem(it,false);
+					int pos = getStash()->insertItem(it,false,false);
 					if (pos != Equipement::NONE)
 					{
 						it = 0;
@@ -724,12 +721,13 @@ bool Player::onItemClick(ClientCommand* command)
 
 			// Item loeschen
 			delete it;
-
-			if (pos>=Equipement::SMALL_ITEMS && pos < Equipement::SMALL_ITEMS+10)
+			
+			if (pos>=Equipement::BELT_ITEMS && pos < Equipement::BELT_ITEMS_END)
 			{
 				// Item befand sich im Guertel
 				// suchen nach einem aehnlichen Item zum nachruecken
-				for (int i=29;i>(pos - Equipement::SMALL_ITEMS);i--)
+				// TODO: magic number: # small items -1
+				for (int i=29; i>=0 ;i--)
 				{
 					it = m_equipement->getItem(Equipement::SMALL_ITEMS+i);
 

@@ -73,6 +73,7 @@ Inventory::Inventory (Document* doc)
 		}
 	}
 	
+	/*
 	for (i=0;i<10;i++)
 	{
 		outStream.str("");
@@ -89,6 +90,7 @@ Inventory::Inventory (Document* doc)
 		label->setAlwaysOnTop(true);
 		label->setMousePassThroughEnabled(true);
 	}
+	*/
 
 	// Label Ruestung
 	label = win_mgr.getWindow("ArmorItemLabel");

@@ -97,7 +97,7 @@ bool NPCTrade::checkRefresh(Equipement* &equ)
 					itm->m_price = (int) (itm->m_price * m_cost_multiplier);
 	
 					// einfuegen und erfolg testen
-					if (equ->insertItem(itm,false) == Equipement::NONE)
+					if (equ->insertItem(itm,false,false) == Equipement::NONE)
 					{
 						delete itm;
 					}
@@ -121,7 +121,7 @@ bool NPCTrade::checkRefresh(Equipement* &equ)
 				itm->m_price = (int) (itm->m_price * m_cost_multiplier);
 
 				// einfuegen und erfolg testen
-				if (equ->insertItem(itm,false) == Equipement::NONE)
+				if (equ->insertItem(itm,false,false) == Equipement::NONE)
 				{
 					delete itm;
 				}

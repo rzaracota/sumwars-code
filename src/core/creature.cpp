@@ -4795,7 +4795,7 @@ void Creature::buyItem(Item* &item, int& gold)
 		item->m_price = (int) (item->m_price * m_trade_info.m_price_factor);
 
 		// beim Haendler einfuegen
-		short pos = getEquipement()->insertItem(item,false);
+		short pos = getEquipement()->insertItem(item,false,false);
 		if (pos == Equipement::NONE)
 		{
 			delete item;

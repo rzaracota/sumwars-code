@@ -80,10 +80,9 @@ public:
 	 * \fn int getFreePlace(Item::Size size, bool useup_possible = false)
 	 * \brief Gibt den Indes  des ersten freien Platzes fuer ein Item der angegebenen Groesse aus.
 	 * \param size Groesse des Items
-	 * \param useup_possible auf true gesetzt, wenn der Gegenstand verbraucht werden kann
 	 * \return Index fuer einen freien Platz
 	 */
-	int getFreePlace(Item::Size size, bool useup_possible = false);
+	int getFreePlace(Item::Size size);
 
 	/**
 	 * \fn  swapItem(Item* &item,Item::Size size, int index)
@@ -223,6 +222,8 @@ class Equipement
 		BIG_ITEMS=1000,
 		MEDIUM_ITEMS=2000,
 		SMALL_ITEMS = 3000,
+		BELT_ITEMS = 3500,
+		BELT_ITEMS_END = 3510,
 		GOLD = 4000
 	};
 
@@ -252,12 +253,12 @@ class Equipement
 	 * \fn short insertItem(Item* item)
 	 * \brief Fuegt Gegenstand ins Inventar ein
 	 * \param item Zeiger auf den Gegenstand
-	 * \param check_useup wenn auf true gesetzt, wird sichergestellt, dass in den ersten 10 Objekten (Guertel) nur Verbrauchsgegenstaende landen
+	 * \param use_belt  Bei der Suche nach einem Platz wird auch der Guertel verwendet
 	 * \param use_equip Bei der Suche nach einem Platz werden auch die Ausruestungsslots verwendet
 	 * \param use_secondary Ruestungen und Schilde werden in den zweiten Slot eingefuegt
 	 * \return Gibt an, wo das item eingefuegt wurde
 	 */
-	short insertItem(Item* item, bool check_useup=true, bool use_equip= false, bool use_secondary=false);
+	short insertItem(Item* item, bool use_belt=false, bool use_equip= false, bool use_secondary=false);
 
 	/**
 	 * \fn short findItem(Item::Subtype subtype, short startpos = 0)
@@ -302,6 +303,21 @@ class Equipement
 	 * \brief Gibt die Nummer des letzten belegten Platzes einer bestimmten Groesse aus
 	 */
 	int getMaxItemNumber(Item::Size size);
+	
+	/**
+	 * \brief Returns the number of small objects with the specified subtype
+	 * \param subtype subtype of the items to look for
+	 * \return number of items found
+	 */
+	int getNumSmallItemsOfType(Item::Subtype subtype);
+	
+	/**
+	 * \brief returns the number of object slots in the belt
+	 */
+	static int getMaxBeltItemNumber()
+	{
+		return BELT_ITEMS_END - BELT_ITEMS;
+	}
 
 	/**
 	 * \fn virtual void toString(CharConv* cv)
@@ -370,10 +386,14 @@ class Equipement
 	private:
 
 	/**
-	 * \var Item* m_body_items[12]
 	 * \brief am Koeper getragene Gegenstaende
 	 */
 	Item* m_body_items[12];
+	
+	/**
+	 * \brief Items placed in the Belt
+	 */
+	Item* m_belt_items[BELT_ITEMS_END - BELT_ITEMS];
 
 	/**
 	 * \var ItemList m_inventory
