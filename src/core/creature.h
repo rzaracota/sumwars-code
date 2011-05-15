@@ -37,16 +37,11 @@
 /**
  * \class Creature
  *
-  * \brief Lebewesen
- *
- * Alle Lebewesen in der Welt sind Objekte der Klasse Creature
+ * \brief Base class for living objects like monsters, players and npcs
  *
  */
 
-/**
- * \class Creature
- * \brief Klasse fuer Lebewesen
- */
+
 class Creature : public WorldObject
  {
 //Public stuff
@@ -54,19 +49,13 @@ public:
 	//Fields
 	//Constructors
 	/**
-	 * \fn Creature(int id)
-	 * \brief Konstruktor
-	 * \param id Id des Objekts
-	 *
-	 * Legt ein neues Creature Objekt an.
+	 * \brief Constructor^
+	 * \param id id of the object
 	 */
 	Creature(int id);
 
 	/**
-	 * \fn ~Creature();
-	 * \brief Destruktor
-	 *
-	 * Gibt den Allokierten Speicher wieder frei
+	 * \brief Destructor
 	 */
 	~Creature();
 	//Accessor Methods
@@ -75,9 +64,9 @@ public:
 
 
 	/**
-	 * \fn Action* getAction()
-	 * \brief Gibt einen Zeiger auf die aktuelle Aktion zur&uuml;ck
-	 * \return Action*, Zeiger auf die aktuelle Aktion
+	 * \brief returns the current action of the object
+	 * \return action pointer
+	 * Avoid modifying the data structure from the outside using the pointer - its only non-const for historical reason. Changes made with this pointer will not be propagated via network.
 	 */
 	Action* getAction()
 	{
@@ -85,8 +74,9 @@ public:
 	}
 
 	/**
-	 * \fn void setAction(Action* act)
-	 * \brief Setzt die aktuelle Aktion
+	 * \brief Sets the current action of the object
+	 * \param act action object to be copied
+	 * Deep copies the provided \a act parameters. This function also propagates the changes via network.
 	 **/
 	void setAction(Action& act)
 	{
@@ -95,9 +85,9 @@ public:
 	}
 
 	/**
-	 * \fn Command* getCommand()
-	 * \brief Gibt einen Zeiger auf das aktuelle Kommando zur&uuml;ck
-	 * \return Command*, Zeiger auf das aktuelle Kommando
+	 * \brief returns the current command of the object
+	 * \return command pointer
+	 * Avoid modifying the data structure from the outside using the pointer - its only non-const for historical reason. Changes made with this pointer will not be propagated via network.
 	 */
 	Command* getCommand()
 	{
@@ -105,9 +95,9 @@ public:
 	}
 
 	/**
-	 * \fn Command* getNextCommand()
-	 * \brief Gibt einen Zeiger auf das naechsteKommando zur&uuml;ck
-	 * \return Command*, Zeiger auf das naechste Kommando
+	 * \brief returns the next command of the object
+	 * \return command pointer
+	 * The next command replaces the current command after completion of the current action. Different behavior may result if specific flags are set. See \ref Command for further reference.
 	 */
 	Command* getNextCommand()
 	{
@@ -117,9 +107,9 @@ public:
 
 
 	/**
-	 * \fn Damage* getDamage()
-	 * \brief Gibt einen Pointer auf die Damagestruktur zurueck, die den Schaden der aktuellen Aktion des Lebewesens bezeichnet.
-	 * \return Zeiger auf Damage
+	 * \brief returns the damage associated with the current command
+	 * \return current damage object
+	 * The returned object usually specifies the damage dealt with the commands final action.
 	 */
 	Damage* getDamage()
 	{
@@ -127,18 +117,9 @@ public:
 	}
 
 	/**
-	 * \fn CreatureBaseAttr* getBaseAttrMod()
-	 * \brief Gibt einen Zeiger auf die Struktur mit den modifizierten Basisattributen des Lebewesens zurueck
-	 */
-	CreatureBaseAttr* getBaseAttrMod()
-	{
-		return &m_base_attr_mod;
-
-	}
-
-	/**
-	 * \fn CreatureBaseAttr* getBaseAttr()
-	 * \brief Gibt einen Zeiger auf die Struktur mit den Basisattributen des Lebewesens zurueck
+	 * \brief returns the struct containing base attributes of the creature
+	 * \sa getBaseAttrMod
+	 * 
 	 */
 	CreatureBaseAttr* getBaseAttr()
 	{
@@ -147,8 +128,21 @@ public:
 	}
 
 	/**
-	 * \fn CreatureDynAttr* getDynAttr()
-	 * \brief Gibt einen Zeiger auf die Struktur mit den dynamischen Attributen des Lebewesens zurueck
+	 * \brief returns the modified base attributes of the creature
+	 * The modified attributes include the effects of equipement as well as temporary boosts or inflictions.
+	 * \sa getBaseAttr
+	 * \sa calcBaseAttrMod
+	 */
+	CreatureBaseAttr* getBaseAttrMod()
+	{
+		return &m_base_attr_mod;
+
+	}
+
+	
+
+	/**
+	 * \brief returns the struct containing dynamic attributs of the creature
 	 */
 	CreatureDynAttr* getDynAttr()
 	{
@@ -157,156 +151,147 @@ public:
 
 
 	/**
-	 * \fn float getTimerPercent(int timer)
-	 * \brief Gibt den Prozentsatz des gewaehlten Timers aus
+	 * \brief returns which share of the timer's delay is expired
+	 * \param timer Number of the timer. Valid values are 1 to NR_TIMERS
+	 * Timers are used to realize the cooldown time for abilities. 
+	 * A value of 0.0 signals that the timer is not ticking and hence an ability requiring this timer may be used.
 	 */
 	float getTimerPercent(int timer);
 
 
 	//Operations
 	/**
-	 * \fn virtual bool init ()
-	 * \brief Initialisiert das Objekt. Die Funktion ist virtuell und wird durch die abgeleiteten Klassen &uuml;berschrieben.
-	 * \return bool, der angibt ob die initialisierung erfolgreich war
+	 * \brief Initializes all internal data structures
+	 * \return true on success, false otherwise
 	 */
 	virtual bool init ();
 
 	/**
-	 * \fn virtual bool destroy ()
-	 * \brief Zerstoert das Objekt. Die Funktion ist virtuell und wird durch die abgeleiteten Klassen &uuml;berschrieben.
-	 * \return bool, der angibt ob die Zerstoerung erfolgreich war
+	 * \brief clears all internal data structures
+	 * \return true on success, false otherwise
 	 */
 	virtual bool destroy();
 
 
 	/**
-	 * \fn virtual bool  update (float time);
-	 * \brief Updatefunktion des Lebewesens, welche für die angebene Zeit ausgeführt wird.
-	 * \param time Zeit die für update zur Verfügung steht
-	 * \return bool, Erfolgreiches Update?
+	 * \brief central update routing
+	 * \param time update time in milliseconds
+	 * \return true on success, false otherwise
 	 *
-	 * Die Updatefunktion des Lebewesens wird in regelm&auml;ssigen Abst&auml;nden von der World aufgerufen und ben&ouml;tigt die Angabe, wie viel Zeit f&uuml;r das Update zur Verf&uuml;gung gestellt wird. Der R&uuml;ckgabewert gibt dann an ob die Funktion erfolgreich ausgef&uuml;hrt wurde. Da die Funktion hier virtuell definiert wird, wird sie erst in den abgeleiteten Klassen implementiert.
+	 * The update routine is called each frame with the duration of the previous frame as argument. It updates the whole internal status of the object, especially the progress of action and the status of temporary effects.
 	 */
 	virtual bool  update (float time);
 
 
 
 	/**
-	 * \fn void gainExperience (float exp)
-	 * \brief Das Lebewesen gewinnt exp Erfahrungspunkte. Wenn dabei die noetigen Erfahrungspunkte fuer ein Levelup erreicht werden wird gainLevel() aufgerufen.
-	 * \param exp gewonnene Erfahrungspunkte
+	 * \brief increases the experience value by the specified amount
+	 * \param exp gained experience
 	 */
 	virtual void gainExperience (float exp);
 
 
 	/**
-	 * \fn bool takeDamage(Damage* damage)
-	 * \brief Das Lebewesen nimmt Schaden in der in damage angegebenen Art und Hoehe. Verändert die dynamischen Attribute des Lebewesens.
-	 * \param damage Schadensart und -hoehe
+	 * \brief Applies a damage object on the creature making it take damage
+	 * \param damage damage object
+	 * This function calculates the actual damage based on several creature properties like armor, resists and others. The possibility of miss of block is also taken into account. In addition to direct damage, status changes can be inflicted. The effects of the damage object are propagated via network.
 	 */
 	virtual bool takeDamage(Damage* damage);
 
 	/**
-	 * \fn void applyBaseAttrMod(CreatureBaseAttrMod* mod,bool add = true)
-	 * \brief Wendet fuer die Zeitdauer time die temporaere Modifikation mod auf das Lebewesen an. Falls time gleich 0 so wird die Veraenderung permanent angewendet
-	 * \param mod Modifikation
-	 * \param add Gibt an, ob die die Modifikation zur Liste der wirksamen Modifikationen hinzugefuegt werden soll
+	 * \brief Applies a modification to the base attributes
+	 * \param mod modification object
+	 * \param add true, if the modification is newly added. Only set to false in internal recalculation functions.
+	 * \sa getBaseAttrMod
+	 * The modification is added to the modified base attributes. If the time set in the \a mod structure is inequal to 0, the modification is treated as temporary and will be removed after the specified amount of milliseconds. 
 	 */
 	void applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add = true);
 
 	/**
-	 * \fn applyDynAttrMod(CreatureDynAttrMod* mod);
-	 * \brief Wendet eine Modifikation der Dynamischen Attribute an
-	 * \param mod Modifikation
+	 * \brief Applies a modification to the dynamic attributes
+	 * \param mod modification object
 	 */
 	void applyDynAttrMod(CreatureDynAttrMod* mod);
 
 	/**
-	 * \fn void removeBaseAttrMod(CreatureBaseAttrMod* mod)
-	 * \brief Entfernt alle Veraenderungen, die durch die Modifikation entstanden sind
-	 * \param mod Modifikation
-	 * return gibt an, ob die Basisattribute komplett neu berechnet werden muessen
+	 * \brief Removes a modification applied to the base attributes
+	 * \param mod modification object
+	 * \return true, if a complete recalculation of the modified base attributes is necessary
 	 */
 	bool removeBaseAttrMod(CreatureBaseAttrMod* mod);
 
 	/**
-	 * Entfernt alle Veraenderungen, die durch saemtliche Modifikation entstanden sind
+	 * \brief Removes all modifications to the base attributs
 	 */
 	void removeAllBaseAttrMod();
 
 	/**
-	 * \fn void getPathDirection(Vector pos,short region, float base_size, short layer,  Vector& dir)
-	 * \brief Gibt die Richtung zurueck, in die man vom Startpunkt aus gehen muss um zu dem Lebewesen zu gelangen
-	 * \param pos Startpunkt
-	 * \param base_size Durchmesser der Standflaeche des Weg suchenden Lebewesens
-	 * \param layer Ebene in der auf Kollisionen getestet werden soll
-	 * \param region Region in der gesucht werden soll
-	 * \param dir Rueckgabevektor
+	 * \brief returns a direction to get to this creature
+	 * \param pos starting point
+	 * \param base_size radius of the base circle of the other object searching for a path
+	 * \param layer layer used for collision testing (used to differentiate flying and walking)
+	 * \param region region id of the objects
+	 * \param dir return value: direction to get to this creature from \a pos
+	 * The pathfinding algorithm uses a gradient array approach. For efficiency reason, the gradient is calculated once and stored inside the creature. All other objects seeking a path to this object use this function to evaluate the gradient field.
 	 */
 	void getPathDirection(Vector pos,short region, float base_size, short layer,  Vector& dir);
 
 
 	/**
-	 * \fn void calcWalkDir(Vector goal,WorldObject* goalobj)
-	 * \brief Sucht den Weg zu einem Punkt und setzt die Bewegungsgeschwindigkeit entspechend
-	 * \param goal Zielpunkt
-	 * \param goalobj Zeiger auf das Zielobject
+	 * \brief Calculates the walk direction of this object to another object
+	 * \param goal target position, only used if the target object is NULL
+	 * \param goalobj target object
+	 * This function calculates a movement direction for this object. Note difference to \ref getPathDirection which returns a direction for another object leading to this creature.
 	 */
 	void calcWalkDir(Vector goal,WorldObject* goalobj);
 
 	/**
-	 * \fn void clearCommand(bool success, bool norepeat = true)
-	 * \brief Bricht das aktuelle Kommando ab
-	 * \param success Gibt an, ob die Ausfuehrung erfolgreich war
-	 * \param norepeat Wenn auf true gesetzt, so werden auch wird ein zu wiederholendes Kommando komplett abgebrochen (nicht nur der aktuelle Durchlauf)
+	 * \brief Ends the current command
+	 * \param success specifies if the command ended successfully
+	 * \param norepeat if true, a command with repeat flag set will be cancelled completely (not just the current instance)
 	 */
 	virtual void clearCommand(bool success, bool norepeat = true);
 
 	/**
-	 * \fn virtual void toString(CharConv* cv)
-	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
-	 * \param cv Ausgabepuffer
-	 * \return Zeiger hinter den beschriebenen Datenbereich
-		 */
+	 * \brief Serializes the object to the specified buffer
+	 * \param cv output buffer
+	 */
 	virtual void toString(CharConv* cv);
 
 	/**
-	 * \fn virtual void fromString(CharConv* cv)
-	 * \brief Erzeugt das Objekt aus einem String
-	 * \param cv Eingabepuffer
-	 * \return Zeiger hinter den gelesenen Datenbereich
+	 * \brief Deserializes the object from the specified buffer
+	 * \param cv input buffer
 	 */
 	virtual void fromString(CharConv* cv);
 
 	/**
-	 * \fn bool checkAbility(Action::ActionType at)
-	 * \brief Prueft ob die Kreatur ueber die angegebene Faehigkeit verfuegt
-	 * \param at Faehigkeit
-	 * \return true, wenn die Faehigkeit verfuegbar ist
+	 * \brief Checks if the creature can perform a specific ability
+	 * \param at ability
+	 * \return true, if the ability is available
 	 */
 	bool checkAbility(Action::ActionType at);
 
 
 	/**
-	 * \fn virtual void calcDamage(Action::ActionType act,Damage& dmg)
-	 * \brief Berechnet den Schaden fuer die aktuell ausgefuehrte Aktion
-	 * \param act Aktion, die ausgefuehrt wird
-	 * \param dmg Schaden der Aktion
+	 * \brief Calculates the damage associated with an action that may be performed by this creature
+	 * \param act action type
+	 * \param dmg return value: damage object
+	 * The returned damage object is usually the damage inflicted on the targets if the action is carried out.
 	 */
 	virtual void calcDamage(Action::ActionType act,Damage& dmg);
 
 	/**
-	 * \fn virtual void calcActionAttrMod(Action::ActionType act,CreatureBaseAttrMod & bmod, CreatureDynAttrMod& dmod)
-	 * \brief Berechnet den Attributaenderung fuer die aktuell ausgefuehrte Aktion
-	 * \param act Aktion, die ausgefuehrt wird
-	 * \param bmod Basisattribute, die geaendert werden. Kann entweder die Kreatur selbst oder das Ziel der Aktion betreffen
-	 * \param dmod CreatureDynAttrMod
+	 * \brief Calculates the attribute modification associated with an action  that may be performed by this creature
+	 * \param act action type
+	 * \param bmod modifications to base attributes
+	 * \param dmod modifications to dynamic attributes
+	 * The modifiers can be applied on other creatures or on itselfs, depending on the type of the action.
 	 */
 	virtual void calcActionAttrMod(Action::ActionType act,CreatureBaseAttrMod & bmod, CreatureDynAttrMod& dmod);
 
 	/**
-	 * \fn virtual Action::ActionEquip getActionEquip()
-	 * \brief Gibt aus, ob die Aktion einhaendig oder zweihaendig ausgefuehrt wird
+	 * \brief Returns if the action is carried out unarmed, with a one- or two-hand weapon
+	 * This information is required for graphic representation only.
 	 */
 	virtual Action::ActionEquip getActionEquip()
 	{
@@ -314,82 +299,84 @@ public:
 	}
 
 	/**
-	 * \fn virtual bool canBeAttacked()
-	 * \brief Gibt an, ob die Kreatur gerade angegriffen werden darf
-	*/
+	 * \brief Returns whether the object is allowed as attack target
+	 * There are several reasons for disallowing attacks including already dead, involved in a dialog, invincible by script and others.
+	 */
 	virtual bool canBeAttacked();
 
 	/**
-	 * \fn virtual int getValue(std::string valname)
-	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
-	 * \param valname Name des Wertes
+	 * \brief Pushes the  value with the required name to the lua stack
+	 * \param valname Name of the value
+	 * This function serves as a universal get function for the lua script interface. Lua interface code uses this to get data from the C++ to the lua stack. Refer to the scripting documentation for valid value names.
 	 */
 	virtual int getValue(std::string valname);
 
 	/**
-	 * \fn virtual bool setValue(std::string valname)
-	 * \brief Setzt den gewuenschten Attributwert eines Objektes
-	 * \param valname Name des Wertes
+	 * \brief Sets a member taking the value from the lua stack
+	 * \param valname Name of the value
+	 * This function serves as a universal set function for the lua script interface. Lua interface code uses this to get data from the lua stack to C++. The value is popped from the stack afterwards. Refer to the scripting documentation for valid value names.
 	 */
 	virtual bool setValue(std::string valname);
 
 	/**
-	 * \fn void insertScriptCommand(Command &cmd, float time=50000)
-	 * \brief Fuegt fuer die Kreatur ein neues Kommando per Script hinzu
-	 * \param cmd Kommando
-	 * \param time Zeit die bleibt um das Kommando zu beenden
+	 * \brief Adds a command which was set by script
+	 * \param cmd command
+	 * \param time time limit for the command
+	 * Commands created by script are added to a special queue which is completed using FIFO regime. If a command can not completed within the provided \a time, it is aborted. Scripted commands superseed other command generation mechanism like the monster AI.
 	 */
 	virtual void insertScriptCommand(Command &cmd, float time=50000);
 
 	/**
-	 * \fn void clearScriptCommands()
-	 * \brief Loescht alle per Script gesetzten Kommandos
+	 * \brief Clears the queue of scripted commands, ending scripted behavior of the creature
 	 */
 	virtual void clearScriptCommands();
 
 	/**
-	 * \fn bool hasScriptCommand()
-	 * \brief Gibt true zurueck, wenn das aktuelle Kommando per Script gesetzt wurde
+	 * \brief Returns, whether the creature is steered by script right now
+	 * \return true, if there are scripted commands in the queue
 	 */
 	bool hasScriptCommand();
 
 	/**
-	 * \fn int sellItem(Item* &item)
-	 * \brief verkauft das angegebene Item
-	 * \param position Positio des verkauften Items
-	 * \param item Zeiger auf das verkaufte Item (bei erfolgreichem Verkauf)
-	 * \param gold Gold des kaufenden Spielers
+	 * \brief sells an item specified by an inventory position
+	 * \param position position of the item
+	 * \param item return value: pointer to the item removed from this creatures inventory
+	 * \param gold reference to the gold value of the buying creature
+	 * This function removes the item from this objects inventory and returns the pointer in the \a item parameter. Other functions are used to insert the item into the buyers inventory. The price of the items is substracted from the \a gold amount. It is also checks if the gold amount is sufficient.
+	 * This function is used (on the trader) if the trader is the seller and the player is the buyer.
 	 */
 	void sellItem(short position, Item* &item, int& gold);
 
-		/**
-	 * \fn int buyItem(short position, Item* &item, int& gold)
-	 * \brief Kauft das Item
-	 * \param item gekauftes Item (wird bei erfolgreichem Kauf auf 0 gesetzt
-	 * \param gold Gold des verkaufenden Spielers
-		 */
+	/**
+	 * \brief buys an item
+	 * \param item item buyed. It is inserted to the inventory and the pointer is set to NULL
+	 * \param gold reference to the gold value of the selling creature
+	 *
+	 * This function adds the object to this creatures inventory and resets the \a item parameter. The price of the item is added to the \a gold amount. 
+	 * This function is used (on the trader) if the trader is the buyer and the player is the seller.
+	 */
 	void buyItem(Item* &item, int& gold);
 
 
 	/**
-	 * \fn void speakText(CreatureSpeakText& text)
-	 * \brief Laesst die Kreatur einen bestimmten Text sprechen
-	 * \param text Text der angezeigt wird
+	 * \brief Sets the text spoken by the creature right now
+	 * \param text spoken text
+	 * This is mainly used in dialogs, but may be used for speech bubbles as well.
 	 **/
 	void speakText(CreatureSpeakText& text);
 
 	/**
-	 * \brief aktualisiert Kampfinformationen
-	 * \param blockchance Chance zu treffen
-	 * \param armorperc Prozentsatz, zu dem der Schaden durch die Ruestung geht
-	 * \param attacker Name des Angegriffenen
+	 * \brief updates the combat information displayed in the attack tooltips
+	 * \param blockchance chance to hit the enemy
+	 * \param armorperc damage reduction by the armor of the enemy
+	 * \param attacker name of the enemy
 	 */
 	void updateFightStat(float hitchance, float armorperc, TranslatableString attacked);
 
 
 	/**
-	 * \fn  CreatureSpeakText& getSpeakText()
-	 * \brief Gibt den aktuell gesprochenen Text aus
+	 * \brief Returns the currently spoken text
+	 * \return currently spoken text
 	 */
 	CreatureSpeakText& getSpeakText()
 	{
@@ -397,19 +384,23 @@ public:
 	}
 
 	/**
-	 * \fn  CreatureTradeInfo& getTradeInfo()
-	 * \brief Gibt Informationen zum Handel aus
+	 * \brief Returns the struct containing information on the trade status
+	 * \return trade status
 	 */
 	CreatureTradeInfo& getTradeInfo()
 	{
 		return m_trade_info;
 	}
 
+	/**
+     * \brief Clears the spoken text
+	 */
 	void clearSpeakText();
 
 	/**
-	 * \fn Dialogue* getDialogue()
-	 * \brief Gibt den aktuellen Dialog der Kreatur aus
+	 * \brief Returns the current dialogue of the creature
+	 * \return dialogue
+	 * Returns NULL if the creature is not involved in a dialogue right now.
 	 */
 	Dialogue* getDialogue()
 	{
@@ -417,8 +408,9 @@ public:
 	}
 
 	/**
-	 * \fn int getDialogueId()
-	 * \brief Gibt die ID des Dialogs aus
+	 * \brief Returns the ID of the current dialogue of the creature
+	 * \return dialogue id
+	 * Returns 0 if the creature is not involved in a dialogue right now.
 	 */
 	int getDialogueId()
 	{
@@ -426,15 +418,26 @@ public:
 	}
 
 	/**
-	 * \fn void setDialogue(int id)
-	 * \brief Setzt den aktuellen Dialog
-	 * \param id ID des Dialogs
+	 * \brief Assigns a dialogue to the creature
+	 * \param id ID of the dialogue
 	 */
 	void setDialogue(int id);
 
-
 	/**
-	 * \brief Gibt den Referenzname aus, mit dem bei Gespraechen auf die Person verwiesen wird
+	 * \brief Sets the reference name
+	 * \param name reference name
+	 * The reference name is used to is used to mark creatures as specific persons occuring in storyline.  Dialogue options and spoken text are usually connected to reference names. This name is also displayed (potentially translated) in the dialogue windows and in the health bar.
+	 */
+	void setRefName(std::string name)
+	{
+		m_refname = name;
+		addToNetEventMask(NetEvent::DATA_NAME);
+	}
+	
+	/**
+	 * \brief Returns the reference name of the creature
+	 * return  reference name
+	 * \sa setRefName
 	 */
 	virtual std::string getRefName()
 	{
@@ -444,19 +447,11 @@ public:
 		return m_refname;
 	}
 
-	/**
-	 * \fn void setRefName(std::string name)
-	 * \brief Setzt den Referenzname
-	 * \param name Referenzname
-	 */
-	void setRefName(std::string name)
-	{
-		m_refname = name;
-		addToNetEventMask(NetEvent::DATA_NAME);
-	}
+
 
 	/**
-	 * \brief Gibt den Name des Objektes aus
+	 * \brief Returns the translatable name of the creature
+	 * This is the name intented for display in the GUI. If a reference name is set, this is returned. Otherwise, the object type is used.
 	 */
 	virtual TranslatableString  getName()
 	{
@@ -467,9 +462,8 @@ public:
 	}
 
 	/**
-	 * fn Equipement* getEquipement()
-	 * \brief Gibt einen Zeiger auf die Ausruestung des Spielers zurück
-	 * \return Zeiger auf die Ausruestung
+	 * \brief Returns the equipement of the creature
+	 * \return equipement
 	 */
 	Equipement* getEquipement()
 	{
@@ -477,9 +471,9 @@ public:
 	}
 
 	/**
-	 * \fn void setEquipement(Equipement* equ)
-	 * \brief Setzt das Inventar
-	 * \param equ Inventar
+	 * \brief Sets the equipement
+	 * \param equ equipement
+	 * This function does a mere pointer copy  and is intended for internal use only.
 	 */
 	void setEquipement(Equipement* equ)
 	{
@@ -487,15 +481,15 @@ public:
 	}
 
 	/**
-	 * \fn Creature* getTradePartner()
-	 * \brief Gibt den Handelspartner aus
+	 * \brief Returns the current trade partner
+	 * \return trade partner
+	 * Returns NULL if the creature is not involved in a trade right now.
 	 */
 	Creature* getTradePartner();
 
 	/**
-	 * \fn void setTradePartner(int id)
-	 * \brief Setzt den Handelspartner
-	 * \param id ID des Handelspartners
+	 * \brief Sets the trade partner
+	 * \param id id of the tradepartner
 	 */
 	void setTradePartner(int id)
 	{
@@ -505,8 +499,8 @@ public:
 	}
 
 	/**
-	 * \fn FightStatistic& getFightStatistic()
-	 * \brief Gibt statistische Daten zum Kampf aus
+	 * \brief Returns statistic combat data
+	 * \return combat data
 	 */
 	FightStatistic& getFightStatistic()
 	{
@@ -514,172 +508,180 @@ public:
 	}
 
 	/**
-	 * \fn std::string getEmotionImage(std::string emotion)
-	 * \brief Gibt zu einer Emotion das passende Bild aus
+	 * \brief Returns the image for a specified emotion
+	 * \param emotion emotion name
+	 * \return emotion image name
+	 * Emotion images are displayed in dialogues. Refer to the scripting documentation for valid emotion names.
 	 */
 	std::string getEmotionImage(std::string emotion);
 
 protected:
 
 	/**
- 	* \fn virtual void gainLevel()
-	* \brief Wird aufgerufen, wenn das Lebewesen ein Levelup erhält. Passt Erfahrung und alle Basisattribute an.
+	* \brief Called on level-up - increases several attributes and does a full-heal.
 	*/
 	virtual void gainLevel();
 
 	/**
-	 * \fn virtual void calcBaseAttrMod()
-	 * \brief Die modifizierten Basisattribute werden neu berechnet. Verwendet die Basisattribute, verwendete Items, sowie temporaere Modifikationen.
+	 * \brief Recalculates the modified base attributes
+	 * Starts with the base attributes and adds all modifications by equipement, skills and temporary modifications.
 	 */
 	virtual void calcBaseAttrMod();
 
 
 
 	/**
-	 * \fn virtual void recalcDamage();
-	 * \brief Berechnet den Schaden, der in internen Damage Objekten angezeigt wird neu
+	 * \brief Recalculates the damage objects associated with the currently selected actions
 	 */
 	virtual void recalcDamage();
 
 	/**
-	 * \fn virtual void calcBaseDamage(std::string impl,Damage& dmg)
-	 * \param impl String der bestimmt, welche Implementation verwendet wird
-	 * \param dmg Schaden der Aktion
-	 * \brief Berechnet den Basisschaden einer Aktion
+	 * \param impl implementation used for calculation the damage
+	 * \param dmg input/output value: damage object
+	 * \brief Calculates the damage based on the creatures attributes
+	 * The calculated damage is added to the provided \a dmg object. The \a impl parameter is mainly used to differentiate the character and attack typ dependant formulas. Refer to the scripting documentation for a list of valid implementations.
 	 */
 	virtual void calcBaseDamage(std::string impl,Damage& dmg);
 
 	/**
-	 * \fn virtual void calcAbilityDamage(std::string impl,Damage& dmg)
-	 * \param impl String der bestimmt, welche Implementation verwendet wird
-	 * \param dmg Schaden der Aktion
-	 * \brief Berechnet den Schaden mit Modifikationen durch Faehigkeiten aus dem Basisschaden
+	 * \param impl implementation used for calculation the damagemplementation used for calculation the damage
+	 * \param dmg input/output value: damage object
+	 * \brief Calculates the damage of an action
+	 * The calculated damage is added to the provided \a dmg object. The damage is added to the amount calculated by the \ref calcBaseDamage function. This function is used for those damage calculation which can not be done in Lua only.
 	 */
 	virtual void calcAbilityDamage(std::string impl,Damage& dmg);
 
 
 
 	/**
-	 * \fn virtual void calcAction()
-	 * \brief Berechnet die naechste Aktion
+	 * \brief Calculates the next action based on the current command
 	 */
 	virtual void calcAction();
 
 	/**
-	 * \fn virtual void updateCommand()
-	 * \brief aktualisiert das aktuelle Kommando
+	 * \brief Updates the current command
+	 * This function checks if the current command is complete and might replace is with the next command or a command from the script queue.
 	 */
 	virtual void updateCommand();
 
 	/**
-	 * \fn void calcStatusModCommand()
-	 * \brief Berechnet Kommando, die aufgrund eines Statusmods ausgefuehrt wird
+	 * \brief Special routine which generates commands based on status modifications like berserk or confused.
+	 * Does not generate any command if none of the relevant status modifications is active.
 	 */
 	void calcStatusModCommand();
 	
 	/**
-	 * \brief calculated the action that is used for berserk
+	 * \brief Calculates the action that is used for berserk
+	 * Does not generate any command if no berserk mod is inflicted.
 	 */
 	Action::ActionType getBerserkAction();
 
 	/**
-	 * \fn virtual void initAction()
-	 * \brief initialisiert die aktuell gesetzte Aktion
+	 * \brief Initializes the current action.
+	 * Usually called after \ref calcAction.
 	 */
 	virtual void initAction();
 
 	/**
-	 * \fn virtual float performAction(float &time)
-	 * \brief Fuehrt die aktuell gesetzte Aktion fuer die Zeit time aus. Falls der Abschluss der Aktion weniger Zeit in Anspruch nimmt, wird die restliche Zeit zurueckgegeben.
-	 * \param time zur Verfuegung stehende Zeit in ms
-	 * \return Restzeit
+	 * \brief Performs the current action for the provided time.
+	 * \param time available time in milliseconds
+	 * \return remaining time if the action was completed, 0 otherwise
+	 * Updates the action completion status and performs the critical part of the action, if the critical point of the action was passed. If the action needs less that the available \a time to complete, the remaining time is stored to the \a time parameter.
 	 */
 	virtual void performAction(float &time);
 
 	/**
-	 * \fn virtual void performActionCritPart(Vector goal, WorldObject* goalobj)
-	 * \brief Fuehrt den entscheidenden Part einer Action (Schaden austeilen, Status veraendern usw aus
-	 * \param goal Zielpunkt
-	 * \param goalobj Zeiger auf der Zielobjekt, ist NULL wenn kein Zielobjekt existiert
+	 * \brief Performs the critical part of the action
+	 * \param goal target point
+	 * \param goalobj Target object, might be NULL if no target object is set
+	 * The critical part of the action might be dishing out damage, creation of arrows or missiles, application of modifiers and various others. The specific implementation is stored in the \ref Action database.
 	 */
 	virtual void performActionCritPart(Vector goal, WorldObject* goalobj);
 
 	/**
-	 * \fn virtual void die()
-	 * \brief Wird aufgerufen, wenn die aktuellen Lebenspunkte unter 0 sinken. Die genaue Wirkung der Funktion ist abhängig vom exakten Typ des Lebewesens (Monster etc)
+	 * \brief Called on death of the creature
 	*/
 	virtual void die();
 
 
 
 	/**
-	 * \fn bool handleCollision(Shape* s)
-	 * \brief Fuehrt die Behandlung einer Kollision mit einem Objekt mit der angegebenen Grundfläche aus
-	 * \param s Form der Grundfläche des kollidierenden Objektes
+	 * \brief Handles the collision with another object
+	 * \param s shape of the colliding object
+	 * Updates the movement direction and might abort the command if the creature got stuck.
 	 */
 	bool handleCollision(Shape* s);
 
 	/**
-	 * \fn void collisionDetection(float time)
-	 * \brief Untersucht ob in der naechsten Zeit Kollisionen zu erwarten sind
-	 * \param time Zeitraum um den vorrausgerechnet wird
+	 * \brief Tries to detect and avoid collisions that might occur in future
+	 * \param time time to look forward in milliseconds
 	 */
 	void collisionDetection(float time);
 
 
 	/**
-	 * \fn virtual void writeNetEvent(NetEvent* event, CharConv* cv)
-	 * \brief Schreibt die Daten zu einem NetEvent in den Bitstream
-	 * \param event NetEvent das beschrieben wird
-	 * \param cv Bitstream
+	 * \brief Writes the data for a NetEvent concerning this creature to the buffer
+	 * \param event netevent
+	 * \param cv output buffer
+	 * A NetEvent is any change to the internal data of the creature that must be transferred via network. This functions writes all the data needed on other clients to the buffer.
+	 * \sa processNetEvent
 	 */
 	virtual void writeNetEvent(NetEvent* event, CharConv* cv);
 
 	/**
-	 * \fn virtual void processNetEvent(NetEvent* event, CharConv* cv)
-	 * \brief Fuehrt die Wirkung eines NetEvents auf das Objekt aus. Weitere Daten werden aus dem Bitstream gelesen
+	 * \brief Reads the data for a NetEvent concerning this creature from the buffer and applies the changes
+	 * \param event netevent
+	 * \param cv input buffer
+	 * \sa writeNetEvent
+	 * Reads a NetEvent written by \ref writeNetEvent and updates the internal data accordingly. This function also takes the delay of the data transfer into account. In addition, the game may approach the new status instead of setting it instantly. Required prediction and interpolation is done by this function.
 	 */
 	virtual void processNetEvent(NetEvent* event, CharConv* cv);
 
 	/**
-	 * \fn std::string getActionString()
-	 * \brief Gibt die aktuelle Aktion als String aus
+	 * \brief Returns the current action name as string
+	 * \return action name
 	 */
 	virtual std::string getActionString();
 
 	/**
-	 * \fn virtual float getActionPercent()
-	 * \brief Gibt den Prozentsatz, zu dem die aktuelle Aktion fortgeschritten ist aus
+	 * \brief Returns the progress of the current action
+	 * \return progress as value in the interval 0-1
 	 */
 	virtual float getActionPercent();
 
 	/**
-	 * \fn virtual void getFlags(std::set<std::string>& flags)
-	 * \brief Gibt den Status der bekannten Flags aus
-	 * \param flags Ausgabeparameter: Flags
+	 * \brief Returns the list of flags set
+	 * \param flags return value: list of flags
+	 * Flags might be set by game logic, but also by script. This list of flags is directly connected to the graphical display of object statuus.
 	 */
 	virtual void getFlags(std::set<std::string>& flags);
 
 	/**
-	 * Entfernt alle Flags
+	 * \brief clears all flags
 	 */
 	virtual void clearFlags();
 
 	/**
-	 * \fn int getTimerNr(Action::ActionType action)
-	 * \brief Gibt die Timernr fuer die angegebene Aktionaus
+	 * \brief Returns the timer required for an action
+	 * \param action action name
+	 * \return number of the timer required for this action.
+	 * \sa getTimer
+	 * \sa getTimerPercent
+	 * Actions may only be started if their timer is not running. A return value of 0 signals, that no timer is required.
 	 */
 	int getTimerNr(Action::ActionType action);
 
 	/**
-	 * \fn float getTimer(Action::ActionType action)
-	 * \brief Gibt aus, wie lange der Timer nach Ausfuehren der Aktion laeuft
+	 * \brief Returns the remaining cooldown time of the timer required for an action
+	 * \param action action name
+	 * \return remaining timer time. A value of 0 signals that the timer is not running and the action may be started
 	 */
 	float getTimer(Action::ActionType action);
 
 	/**
-	 * \fn float getActionTime(Action::ActionType action)
-	 * \brief Berechnet die Dauer einer Aktion
+	 * \brief Calculates the time requires to perform an action
+	 * \param action action name
+	 * \return action execution time in milliseconds
 	 */
 	float getActionTime(Action::ActionType action);
 
@@ -693,88 +695,77 @@ private:
 
 
 	/**
-	 * \var m_action;
-	 * \brief Aktion die gerade ausgef&uuml;hrt wird
+	 * \brief action currently performed
 	 */
 	Action m_action;
 
 	/**
-	 * \var m_command;
-	 * \brief Kommando das gerade abgearbeitet wird
+	 * \brief current command
 	 */
 	Command m_command;
 
 	/**
-	 * \var m_next_command;
-	 * \brief Kommando das als naechstes abgearbeitet wird
+	 * \brief next command
 	 */
 	Command m_next_command;
 
 	/**
-	 * \var std::list<std::pair<Command,float> > m_script_commands
-	 * \brief Liste von Kommandos, die durch Scripte vorgeschrieben wurden
+	 * \brief List of commands added by script
+	 * Scripted commands superseed the normal commands. Script commands are executed in a FIFO regime. The float value specifies a time limit how long the command may take before it is aborted.
 	 **/
 	std::list<std::pair<Command,float> > m_script_commands;
 
 	/**
-	 * \var CreatureSpeakText m_speak_text
-	 * \brief Folge von Texten, die die Kreature sprechen soll
+	 * \brief Text currently spoken by the creature
 	 */
 	CreatureSpeakText m_speak_text;
 
 	/**
-	 * \var CreatureTradeInfo m_trade_info
-	 * \brief Struktur mit aktuellem Handelsvorgang
+	 * \brief Information on the current trade status
 	 */
 	CreatureTradeInfo m_trade_info;
 
 	/**
-	 * \var int m_speak_id
-	 * \brief ID der Person, zu der die Kreatur gerade spricht
+	 * \brief ID of the current dialogue partner
 	 */
 	int m_speak_id;
 
 	/**
-	 * \var std::string m_refname
-	 * \brief Referenzname, mit dem die Kreatur bei Dialogen angesprochen wird
+	 * \brief Reference name of the creature
+	 * The reference name is used to bind ingame creature objects to objects referenced in script code. It determines the dialogue options and speech roles.
 	 */
 	std::string m_refname;
 
 	/**
-	 * \var float m_script_command_timer
-	 * \brief Zeigt an, wie lange das aktuelle Kommando noch dauern darf
+	 * \brief Remaining time before a scripted command is aborted
 	 */
 	float m_script_command_timer;
 
 
 	/**
-	 * \var m_trade_id
-	 * \brief Id des aktuellen Handelsvorgangs
+	 * \brief ID of the current trade
+	 * Is 0 if the creature is not involved in a trade right now.
 	 */
 	int m_trade_id;
 
 	/**
-	 * \var m_base_attr
-	 * \brief Basisattribute des Lebewesens
+	 * \brief Base attributes
 	 */
 	CreatureBaseAttr m_base_attr;
 
 	/**
-	 * \var m_base_attr_mod
-	 * \brief Basisattribute des Lebewesens nach Modifikationen durch Items und temporaere Effekte
+	 * \brief Base attributes with modification by equipment and temporary effects
 	 */
 	CreatureBaseAttr m_base_attr_mod;
 
 
 	/**
-	 * \var m_dyn_attr
-	 * \brief alle sich schnell aendernden Attribute und temporaeren Modifikationen des Lebewesens
+	 * \brief dynamic attributes
 	 */
 	CreatureDynAttr m_dyn_attr;
 
 	/**
-	 * \var m_damage
-	 * \brief Objekt welches angibt, welcher Schaden mit der aktuellen Aktion angerichtet wird
+	 * \brief Damage associated with the current action
 	 */
 	Damage m_damage;
 
@@ -782,83 +773,78 @@ private:
 
 
 		/**
-		* \var int m_dialogue_id
-		* \brief ID des Dialogs, an dem sich die Kreatur beteiligt
+		* \brief ID of the current dialogue
+		* Is 0 if the creature is not involved in a dialogue right now.
 		*/
 		int m_dialogue_id;
 
 
 		/**
-		* \brief Timers for actions - if a timer is running no action using this timer may be used
+		* \brief Cooldown times for the different timers in milliseconds
+		* As long as a timer is running, action requiring this timer can not be used. 
+		* If a timer is not running, the value is set to 0. 
 		*/
 		float m_timers[NR_TIMERS];
 
 	
 		/**
-		* \brief Timer value when starting the timer
+		* \brief Timer values set when starting a timer
+		* Used to calculate how much of the cooldown time has elapsed in percent.
 		*/
 		float m_timers_max[NR_TIMERS];
 
 		/**
-		 * \var  std::string m_emotion_set
-		 * \brief Name des Satzes der Emotionsbilder
+		 * \brief name of the emotionset
+		 * The emotionset is used to map emotion names to emotion images.
 		 */
 		std::string m_emotion_set;
 
 		/**
-		* \var Action::ActionType m_base_action
-		* \brief Grundaktion
+		* \brief Name of the base action
+		* The base action is started if the intended action is not available due to cooldown timer or status modifications like mute.
 		*/
 		Action::ActionType m_base_action;
 
 		/**
-		* \var m_equipement
-		* \brief Enthaelt die Ausruestung des Spielers
+		* \brief Equipement
 		*/
 		Equipement* m_equipement;
 
 		/**
-		* \var FightStatistic m_fight_statistic
-		* \brief statistische Daten zum Kampf
+		* \brief statistic combat data
 		*/
 		FightStatistic m_fight_statistic;
 
 		/**
-		* \var PathfindInfo* m_small_path_info
-		* \brief Wegsucheinformationen fuer kleine Kreaturen (Information ueber den Weg zu diesem Objekt)
+		* \brief Gradient field leading small objects to this creature
 		*/
 		PathfindInfo* m_small_path_info;
 
 		/**
-		* \var PathfindInfo* m_small_flying_path_info
-		* \brief Wegsucheinformationen fuer kleine fliegende Kreaturen (Information ueber den Weg zu diesem Objekt)
+		* \brief Gradient field leading small flying objects to this creature
 		*/
 		PathfindInfo* m_small_flying_path_info;
 
 
 		/**
-		* \var PathfindInfo* m_medium_path_info
-		* \brief Wegsucheinformationen fuer mittelgrosse Kreaturen (Information ueber den Weg zu diesem Objekt)
+		* \brief Gradient field leading medium objects to this creature
 		*/
 		PathfindInfo* m_medium_path_info;
 
 
 		/**
-		* \var PathfindInfo* m_big_path_info
-		* \brief Wegsucheinformationen fuer grosse Kreaturen (Information ueber den Weg zu diesem Objekt)
+		* \brief Gradient field leading big objects to this creature
 		*/
 		PathfindInfo* m_big_path_info;
 
 
 		/**
-		* \var PathfindInfo* m_small_path_info
-		* \brief eigene Wegsucheinformationen, wenn das Zielobjekt keine Kreatur ist
+		* \brief Gradient field used for non-object target points
 		*/
 		PathfindInfo* m_path_info;
 
 		/**
-		 * \var float m_pathfind_counter
-		 * \brief Zaehler, der zaehlt wie oft kein verbessernder Weg gefunden wurde, bei einem Wert von 3 wird der Befehl abgebrochen
+		 * \brief counter used to detect if the creature gets stuck while searching for a path
 		 */
 		float m_pathfind_counter;
 };
