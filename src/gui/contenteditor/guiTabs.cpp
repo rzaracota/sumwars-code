@@ -31,17 +31,17 @@ GuiTabs::GuiTabs(const CEGUI::String& type, const CEGUI::String& name): CEGUI::W
 	WindowManager::getSingleton().getWindow("RITab/BasicMesh")->setVisible(true);
 
 	initMeshSelector();
-
-	//m_rootWindow->getChild("CloseButton")->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&GuiTabs::onCloseButton, this));
+	WindowManager::getSingleton().getWindow("CloseButton")->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&GuiTabs::onCloseButton, this));
 	//WindowManager::getSingleton().getWindow("RITab/SubMesh/AddSubMeshButton")->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&GuiTabs::onAddSubMesh, this));
 }
 
 void GuiTabs::initMeshSelector()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	//get the mainmesh selector combobox and fill it with the names of all meshes
+	//get the mainmesh selector and the submesh selector combobox and fill it with the names of all meshes
 	Combobox* selector = static_cast<Combobox*>(WindowManager::getSingleton().getWindow("RITab/BM/MeshSelector"));
-	
+	Combobox* subSelector = static_cast<Combobox*>(WindowManager::getSingleton().getWindow("RITab/SubMesh/Selector"));
+
 	Ogre::FileInfoListPtr files;
 	Ogre::FileInfoList::iterator it;
 	std::string file;
@@ -61,7 +61,9 @@ void GuiTabs::initMeshSelector()
 		{
 			file = *it;
 			m_listItem = new ListboxTextItem(file);
+			m_subMeshListItem = new ListboxTextItem(file);
 			selector->addItem(m_listItem);
+			subSelector->addItem(m_subMeshListItem);
 		}
 		catch (Ogre::Exception& e)
 		{
@@ -70,7 +72,7 @@ void GuiTabs::initMeshSelector()
 	}
 	
 	selector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&GuiTabs::onMeshSelected, this));
-	
+	subSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&GuiTabs::onSubMeshSelected, this));
 	
 	// create SceneManager for renderering images for the content editor
 	Ogre::SceneManager* editor_scene_mng = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC,"EditorSceneManager");
@@ -146,6 +148,31 @@ bool GuiTabs::onMeshSelected(const CEGUI::EventArgs& evt)
 			Ogre::Texture* texture = dynamic_cast<Ogre::Texture*>(res);
 			Ogre::RenderTarget* target = texture->getBuffer()->getRenderTarget();
 			target->update();
+
+			//get the skeleton of the main mesh and fill the submesh bone selector combo box
+			Ogre::Skeleton *skel = entity->getMesh()->getSkeleton().getPointer();
+			if(skel!=0){
+				Ogre::Skeleton::BoneIterator bit = skel->getBoneIterator();
+				Combobox* boneSelector = static_cast<Combobox*>(WindowManager::getSingleton().getWindow("RITab/SubMesh/BoneSelector"));
+				std::list<std::string> boneNames;
+								
+				while (bit.hasMoreElements())
+				{
+					Ogre::Bone *bone = bit.getNext();
+					boneNames.push_back(bone->getName());
+				}
+
+				//Ogre::FileInfoList::iterator it;
+				std::string bone;
+
+				for (std::list<std::string>::iterator it = boneNames.begin(); it != boneNames.end(); ++it)
+				{
+					
+						bone = *it;
+						m_listItem = new ListboxTextItem(bone);
+						boneSelector->addItem(m_listItem);
+				}
+			}
 		}
 		catch (Ogre::Exception& e)
 		{
@@ -156,9 +183,29 @@ bool GuiTabs::onMeshSelected(const CEGUI::EventArgs& evt)
 	return true;
 }
 
-void GuiTabs::onCloseButton(const CEGUI::EventArgs& evt)
+bool GuiTabs::onSubMeshSelected(const CEGUI::EventArgs& evt)
 {
-	m_rootWindow->setVisible(false);
+	const CEGUI::MouseEventArgs& we =
+	static_cast<const CEGUI::MouseEventArgs&>(evt);
+	
+	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(we.window);
+	
+	CEGUI::ListboxItem* item = cbo->getSelectedItem();
+	
+	if (item != 0)
+	{
+		// do nothing of importance yet
+		std::string meshname = item->getText().c_str();
+		DEBUG("selected mesh %s",meshname.c_str());
+	}
+	
+	return true;
+}
+
+bool GuiTabs::onCloseButton(const CEGUI::EventArgs& evt)
+{
+	WindowManager::getSingleton().getWindow("ContentEditor")->hide();
+	return true;
 }
 
 void GuiTabs::onAddSubMesh(const CEGUI::EventArgs& evt)
@@ -190,7 +237,6 @@ void GuiTabs::messageLogged(const Ogre::String& message, Ogre::LogMessageLevel l
 {
 	//obsolete
 }
-
 
 void GuiTabs::update()
 {

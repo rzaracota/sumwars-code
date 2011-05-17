@@ -35,6 +35,12 @@ public:
 	 * Updates the content of the editor scene to display the selected mesh.
 	 */
 	bool onMeshSelected(const CEGUI::EventArgs& evt);
+
+	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called upon selecting a mesh from the submesh combobox
+	 */
+	bool onSubMeshSelected(const CEGUI::EventArgs& evt);
 	
 	/**
 	 * \fn void tabExists(std::string tabName);
@@ -44,6 +50,7 @@ public:
 	bool tabExists(std::string tabName);
 private:
 	CEGUI::ListboxTextItem *m_listItem;
+	CEGUI::ListboxTextItem *m_subMeshListItem;
 	CEGUI::Window *m_tabLayout;
 	CEGUI::MultiLineEditbox *m_CapsBox;
 	CEGUI::PushButton *m_startBenchmarkButton;
@@ -68,7 +75,7 @@ private:
 	CEGUI::WindowManager *m_winManager;
 
 	void initMeshSelector();
-	void onCloseButton(const CEGUI::EventArgs& evt);
+	bool onCloseButton(const CEGUI::EventArgs& evt);
 	void onAddSubMesh(const CEGUI::EventArgs& evt);
 public:
 	static CEGUI::String WidgetTypeName;

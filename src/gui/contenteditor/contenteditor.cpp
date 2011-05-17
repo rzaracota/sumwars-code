@@ -1,5 +1,4 @@
 #include "contenteditor.h"
-//#include "renderinfotab.h"
 #include "guiTabs.h"
 #include "OgreRoot.h"
 #include "debug.h"
