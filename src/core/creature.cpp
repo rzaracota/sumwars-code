@@ -33,31 +33,26 @@ Creature::~Creature()
 {
 	if (m_small_path_info)
 	{
-		// Wegfindeinformationen fuer kleine Lebewesen loeschen
 		delete m_small_path_info;
 	}
 
 	if (m_medium_path_info)
 	{
-		// Wegfindeinformationen fuer mittelgrosse Lebewesen loeschen
 		delete m_medium_path_info;
 	}
 
 	if (m_big_path_info)
 	{
-		// Wegfindeinformationen fuer grosse Lebewesen loeschen
 		delete m_big_path_info;
 	}
 
 	if (m_small_flying_path_info)
 	{
-		// Wegfindeinformationen fuer kleine fliegende Lebewesen loeschen
 		delete m_small_flying_path_info;
 	}
 
 	if (m_path_info)
 	{
-		// eigene Wegfindeinformationen loeschen
 		delete m_path_info;
 	}
 
@@ -74,9 +69,8 @@ bool Creature::init()
 	 DEBUGX("Creature::init");
 
 	bool tmp=true;
-	// eigene Initialisierung
 
-	// keine Aktion/Kommando
+	// init action/command
 	m_action.m_type = "noaction";
 
 	m_command.m_type = "noaction";
@@ -90,10 +84,10 @@ bool Creature::init()
 
 	m_interaction_flags = COLLISION_DETECTION | USABLE;
 
-	// Bewegung auf 0 setzen
+	// reset speed
 	setSpeed(Vector(0,0));
 
-	// Wegfindeinformationen auf 0 setzen
+	// reset pathfind data
 	m_small_path_info=0;
 	m_small_flying_path_info=0;
 	m_medium_path_info=0;
@@ -101,7 +95,7 @@ bool Creature::init()
 	m_path_info=0;
 	m_pathfind_counter =0;
 
-	// Timer nullen
+	// clear timers
 	for (int i=0; i<NR_TIMERS; i++)
 	{
 		m_timers[i] = 0;
@@ -111,7 +105,7 @@ bool Creature::init()
 	m_dyn_attr.m_last_attacker_id=0;
 	m_dyn_attr.m_experience=0;
 
-	// Statusmods auf null setzen
+	// clear status mods
 	int i;
 	for (i=0;i<NR_STATUS_MODS;i++)
 	{
@@ -162,9 +156,10 @@ bool Creature::destroy()
 void Creature::die()
 {
 	clearFlags();
+	// especially removes booster flags etc
 	removeAllBaseAttrMod();
 
-	// eigenen Status auf sterbend STATE_DIEING setzen
+	// set status to dieing
 	getRegion()->changeObjectGroup(this,DEAD);
 	setState(STATE_DIEING);
 	m_action.m_type ="die";
@@ -173,8 +168,10 @@ void Creature::die()
 
 	m_action.m_elapsed_time =0;
 
+	// send information via network
 	addToNetEventMask(NetEvent::DATA_ACTION | NetEvent::DATA_STATUS_MODS | NetEvent::DATA_FLAGS);
 
+	// trigger for the scripting system
 	Trigger* tr = new Trigger("unit_die");
 	tr->addVariable("unit",getId());
 	getRegion()->insertTrigger(tr);
@@ -192,7 +189,8 @@ int Creature::getTimerNr(Action::ActionType action)
 
 	if (it != getBaseAttr()->m_abilities.end())
 	{
-		// wenn gleich -1, so wird der Standardtimer verwendet
+		// -1 means use the default timer for this action
+		// else return the timer number set for this object specifically
 		if (it->second.m_timer_nr != -1)
 		{
 			return it->second.m_timer_nr;
@@ -216,7 +214,8 @@ float Creature::getTimer(Action::ActionType action)
 
 	if (it != getBaseAttr()->m_abilities.end())
 	{
-		// wenn gleich -1, so wird der Standardtimer verwendet
+		// -1 means use the default timer for this action
+		// else return the timer number set for this object specifically
 		if (it->second.m_timer_nr != -1 && it->second.m_timer != -1)
 			return it->second.m_timer;
 
@@ -236,7 +235,8 @@ float Creature::getActionTime(Action::ActionType action)
 
 	if (it != getBaseAttrMod()->m_abilities.end())
 	{
-		// wenn gleich 0, so wird der Standardtimer verwendet
+		// if time set for this object specifically is inequal zero, use this data
+		// otherwise, use the default time for the action
 		if (it->second.m_time != 0)
 			return it->second.m_time;
 
@@ -255,7 +255,7 @@ float Creature::getActionTime(Action::ActionType action)
 
 void Creature::initAction()
 {
-	//wenn Idle Animation schon laeuft, laufen lassen
+	// if idle animation is running, just continue
 	if (m_action.m_type== "noaction" && m_action.m_elapsed_time>0)
 	{
 		return;
@@ -269,19 +269,19 @@ void Creature::initAction()
 	m_action.m_elapsed_time = 0;
 	Action::ActionInfo* aci = Action::getActionInfo(m_action.m_type);
 	
-	// Stumm behandeln
+	// special effect: mute
 	if (m_dyn_attr.m_status_mod_time[Damage::MUTE]>0 )
 	{
-		// Wenn die Aktion durch Stumm beeinfluss wird
+		// if action is affected by mute
 		if (aci->m_flags & Action::MUTE_AFFECTED)
 		{
-			// Basisaktion verwenden
+			// use the base action
 			m_action.m_type = aci->m_base_action;
 			DEBUG("using Base Action due to mute");
 		}
 	}
 
-	//Timer und Timerlaufzeit ermitteln
+	// get timer and cooldown for this action
 	int timernr = getTimerNr(m_action.m_type);
 	float timer = getTimer(m_action.m_type);
 
@@ -290,15 +290,16 @@ void Creature::initAction()
 		DEBUGX("timer nr %i time %f Action %s",timernr,timer,m_action.m_type.c_str());
 	}
 
-	// Faehigkeit Ausdauer
+	// endurance skill:
+	// reduce cooldown by 15%
 	if (checkAbility("endurance") && timer ==1)
 	{
 		DEBUGX("ausdauer");
-		// Timerlaufzeit um 15% verringern
 		timer *= 0.85;
 	}
 	
-	// Ionisation skill
+	// ionisation skill:
+	// reduce cooldown by 20%
 	if (checkAbility("ionisation") 
 		&& (m_action.m_type == "lightning" || m_action.m_type == "lightning_strike"
 		|| m_action.m_type == "thunderstorm" || m_action.m_type == "thunderstorm2"
@@ -308,27 +309,27 @@ void Creature::initAction()
 	}
 
 
-	// Testen ob der benoetigte Timer frei ist
-	// Wenn der benoetigte Timer noch laeuft wird die Basisaktion ausgefuehrt
+	// check if the required timer is free
+	// if timer is blocked, fall back to base action
 	if (timernr != 0)
 	{
 		if (m_timers[timernr-1] ==0)
 		{
-			// Timer ist frei, Timer starten
+			// Timer is free, start it
 			m_timers[timernr-1] = timer;
 			m_timers_max[timernr-1] = timer;
 			addToNetEventMask(NetEvent::DATA_TIMER);
 		}
 		else
 		{
-			// Timer laeuft noch, Basisaktion verwenden
+			// Timer is running, use base action
 			m_action.m_type = aci->m_base_action;
 			aci = Action::getActionInfo(m_action.m_type);
 
 		}
 	}
 
-	// setzen der Standarddauer der Aktion
+	// set default duration of the action
 	m_action.m_time = getActionTime(m_action.m_type);
 
 	Action::ActionType baseact = "noaction";
@@ -338,10 +339,9 @@ void Creature::initAction()
 		baseact = ainfo->m_base_action;
 	}
 
-	// Zeit der Aktion modifizieren
+	// modify walk time according to walk speed
 	if (baseact == "walk")
 	{
-			// Bei Aktion laufen die Laufgeschwindigkeit einrechnen
 			m_action.m_time = 1000000 / getBaseAttrMod()->m_walk_speed;
 			Vector speed = getSpeed();
 			speed *= getBaseAttr()->m_step_length/m_action.m_time;
@@ -357,7 +357,7 @@ void Creature::initAction()
 
 
 
-	// Fuer Aktionen die auf physischen Angriffen beruhen sowie fuer den normalen Magieangriff Waffengeschwindigkeit einrechnen
+	// modify phyical attacks and magical basic attack by attack speed
 	if (baseact == "attack" || baseact == "range_attack" || baseact == "holy_attack" || m_action.m_type == "magic_attack")
 	{
 		float atksp = MathHelper::Min((short) 5000,getBaseAttrMod()->m_attack_speed);
@@ -368,7 +368,7 @@ void Creature::initAction()
 	}
 
 	DEBUGX("resulting time %f",m_action.m_time);
-	// Drehwinkel setzen
+	// rotate the object 
 	if (aci->m_target_type != Action::SELF && m_action.m_type != "take_item" && m_action.m_type != "noaction")
 	{
 
@@ -380,7 +380,7 @@ void Creature::initAction()
 		setAngle(getShape()->m_angle = getSpeed().angle());
 	}
 
-	// Daten fuer die Animation setzen
+	// set additional information for the animation
 	m_action.m_action_equip = getActionEquip();
 
 	addToNetEventMask(NetEvent::DATA_ACTION);
@@ -391,7 +391,7 @@ void Creature::initAction()
 		m_action.m_type = "noaction";
 	}
 
-	// wenn keine Aktion berechnet wurde, Kommando beenden
+	// end command if no action was computed
 	if (m_action.m_type == "noaction" && m_command.m_type !="noaction")
 	{
 		clearCommand(false,true);
@@ -401,30 +401,30 @@ void Creature::initAction()
 
 void Creature::performAction(float &time)
 {
-	// Wenn Idle Aktion ausgefuehrt wird, aber ein Kommando vorliegt, IdleAktion sofort beenden
+	// abort idle action if some command is present
 	if (m_action.m_type == "noaction" && m_command.m_type != "noaction")
 	{
 		return;
 	}
 
 
-	// Reziprokes des Ausfuehrungszeit
+	// reciprocal of action duration
 	float rezt = 1/m_action.m_time;
 
-	// Prozentsatz der Ausfuehrung vor und nach dem Zeitquantum
+	// completion in percent before and after the time
 	float p1 = rezt * m_action.m_elapsed_time,p2;
 
-	// Zeitdauer die die aktuelle Aktion tatsaechlich ausgefuehrt wird
+	// time really consumed by the current action
 	float dtime;
 
-	// true, wenn die aktuelle Aktion beendet wird
+	// true if current action is finished
 	bool finish = false;
 
 
-	// Testen ob man die Aktion abschließen kann
+	// test if action is finished
 	if (time >= m_action.m_time-m_action.m_elapsed_time)
 	{
-		// Aktion wird abgeschlossen
+		// action finished
 		p2=1;
 		dtime = m_action.m_time-m_action.m_elapsed_time;
 		time -= dtime;
@@ -432,14 +432,15 @@ void Creature::performAction(float &time)
 	}
 	else
 	{
-		// Aktion wird nicht abgeschlossen
+		// action not finished
 		m_action.m_elapsed_time += time;
 		dtime =time;
 		time=0;
 		p2 = rezt * m_action.m_elapsed_time;
 	}
 
-	// Fuer gescriptete Kommandos Zeitschranken pruefen
+	// check time limits for scripted commands
+	// abort command if limit is exceeded
 	if (m_script_command_timer>0)
 	{
 		m_script_command_timer -= time;
@@ -456,24 +457,20 @@ void Creature::performAction(float &time)
 	}
 
 
-	//Behandlung des Laufens
+	// special logic for walking
 	if (m_action.m_type == "walk")
 	{
 
-		// Kollisionen behandeln
+		// check for collisions
 		collisionDetection(dtime);
 
-		// neue Koordinaten ausrechnen
+		// move to new location
 		Vector newpos = getShape()->m_center + getSpeed()*dtime;
-
-		// Bewegung ausfuehren
 		moveTo(newpos,false);
 
 	}
 
 
-
-	// Behandlung der Wirkung der Aktion
 	Action::ActionInfo* ainfo = Action::getActionInfo(m_action.m_type);
 	if (ainfo == 0)
 	{
@@ -484,7 +481,8 @@ void Creature::performAction(float &time)
 
 	}
 
-	// Prozentsatz bei dessen Erreichen die Wirkung der Aktion berechnet wird
+	// critical point of the action
+	// completion percent where the real effect occurs
 	float pct = ainfo->m_critical_perc;
 
 	if (m_action.m_type != "noaction")
@@ -492,35 +490,33 @@ void Creature::performAction(float &time)
 		DEBUGX("pos %f %f  speed %f %f  pct %f",getShape()->m_center.m_x, getShape()->m_center.m_y, getSpeed().m_x,getSpeed().m_y,p1);
 	}
 
-	// Triple Shot
+	// Triple Shot has three critical points
 	if (m_action.m_type == "triple_shot" || m_action.m_type == "guided_triple_shot" ||  m_action.m_type =="whirl_blow")
 	{
-		// Faehigkeit hat drei Prozentsaetze
 		if (p1>0.3)
 			pct = 0.6;
 		if (p1>0.6)
 			pct = 0.9;
 	}
 
-	// Zielobjekt der Aktion
+	// target object
 	WorldObject* goalobj =0;
 	Vector goal = m_action.m_goal;
 
 
-	// Testen ob der kritische Prozentsatz durch das aktuelle Zeitquantum ueberschritten wurde
+	// check if the critical point was passed with the current time share
 	if (p1<pct && pct <=p2 && World::getWorld()->isServer())
 	{
+		// real effect of the action is done now
 		DEBUGX("critical point %f %f %f",p1,pct,p2);
 
-		// Statusmod blind behandeln
-		// TODO: aktuell wird die Richtung beim austeilen des Schadens ausgewuerfelt
-		// besser waere es, sie beim starten der Aktion auszuwuerfeln
+		// status mod blind
+		// modify the direction of the action
 		if (m_dyn_attr.m_status_mod_time[Damage::BLIND]>0)
 		{
-			// Ziehe Kreis um die eigentlichen Zielkoordinaten der Aktion
-			// Durchmesser = halber Abstand zum Zielpunkt
-			// Waehle in dem Kreis einen Punkt der der neue Zielpunkt wird
-			// konkretes Objekt kann nicht Ziel der Aktion sein
+			// create circle around the real target of the action
+			// diameter = half distance to target
+			// select random point in the circle as new target
 			m_action.m_goal_object_id =0;
 			Vector dir;
 			dir = goal - getShape()->m_center;
@@ -536,17 +532,17 @@ void Creature::performAction(float &time)
 
 		}
 
-		// Zielobjekt ermitteln
+		// get the target object
 		if (m_action.m_goal_object_id!=0 && m_action.m_type!= "take_item")
 		{
-			// Zielobjekt durch ID gegeben, Objekt von der Welt holen
+			// target object given by ID, get it from the Region
 			goalobj = getRegion()->getObject(m_action.m_goal_object_id);
 		}
 		else
 		{
-			// Kein Zielobjekt per ID gegeben
+			// No target Object ID specifiec
+			// look for an object at the target position
 			DEBUGX("no Goal ID!");
-			// Im Falle von Nahkampf Ziel anhand des Zielpunktes suchen
 			if (ainfo->m_target_type == Action::MELEE && m_action.m_type!= "take_item")
 			{
 				DEBUGX("Searching goal %f %f",goal.m_x,goal.m_y);
@@ -559,7 +555,7 @@ void Creature::performAction(float &time)
 					Line line(getShape()->m_center, goal);
 					getRegion()->getObjectsOnLine( line, &hitobj, LAYER_AIR);
 					
-					// get the first object, that is really hostile
+					// get the first object that is really hostile
 					WorldObjectList::iterator it;
 					for (it = hitobj.begin(); it != hitobj.end(); ++it)
 					{
@@ -574,7 +570,7 @@ void Creature::performAction(float &time)
 			}
 		}
 
-		// Party Zauber suchen sich ihr Ziel
+		// Party boosting spells are target seeking
 		if (ainfo->m_target_type == Action::PARTY)
 		{
 			Shape s;
@@ -586,7 +582,7 @@ void Creature::performAction(float &time)
 
 			getRegion()->getObjectsInShape(&s, &res, LAYER_ALL,CREATURE,0);
 
-			// naechstgelegenen verbuendeten Spieler suchen
+			// search for the closest friendly player
 			float dist = 10000;
 			goalobj = this;
 
@@ -604,48 +600,47 @@ void Creature::performAction(float &time)
 			}
 
 		}
-
-
-		// Zielobjekt als Creature* pointer
+		
+		// Target object as Creature*
 		Creature* cgoal=0;
 
-		// Zielobjekt im Nahkampf suchen an der Stelle an der die Waffe trifft
+		// if no target found yet (for melee)
+		// search object at the position where the weapon hits
 		if (goalobj ==0 && ainfo->m_target_type == Action::MELEE && m_action.m_type!= "take_item")
 		{
 			goalobj = getRegion()->getObjectAt(goal,LAYER_AIR);
 		}
 
-		// Wenn ein Zielobjekt existiert
+		// check if the target is a creature
 		if (goalobj !=0)
 		{
 			if (!goalobj->isCreature())
 			{
 				cgoal =0;
-				// Ziel existiert nicht mehr, evtl abbrechen
+				// lost the target, abort
 			}
 			else
 			{
-				// umwandeln in Creature* Pointer
 				cgoal = (Creature*) goalobj;
-				// anpassen des Zielpunktes
 				goal = cgoal->getShape()->m_center;
 
 				DEBUGX("goal object %p",cgoal);
 			}
 		}
+		// end of logic for searching a target object
 
-		// ausfuehren des kritischen Teiles der Aktion
+		// finally do the critical part
 		performActionCritPart(goal, goalobj);
-
-	}
-
-	// Wenn die Aktion beenden wurde evtl Kommando abschließen
+	}	// end of logic for doing the critical part
+	
+	
+	// If the action was finished, the command might be complete
 	if (finish)
 	{
+		// compute distance to target
 		float disttogoal = getShape()->m_center.distanceTo(goal);
 		if (m_action.m_goal_object_id!=0 && m_action.m_type!= "take_item")
 		{
-			// Zielobjekt durch ID gegeben, Objekt von der Welt holen
 			goalobj = getRegion()->getObject(m_action.m_goal_object_id);
 			if (goalobj != 0)
 			{
@@ -655,11 +650,10 @@ void Creature::performAction(float &time)
 
 		}
 
+		// create triggers for the scripting system
 		DEBUGX("finished action");
-
 		if (m_action.m_type == "walk")
 		{
-			// Trigger erzeugen
 			Trigger* tr = new Trigger("unit_moved");
 			tr->addVariable("unit",getId());
 			getRegion()->insertTrigger(tr);
@@ -673,12 +667,17 @@ void Creature::performAction(float &time)
 
 		}
 
-		// Kommando ist beendet wenn die gleichnamige Aktion beendet wurde
-		// Ausnahme: Bewegungskommando ist beendet wenn das Ziel erreicht ist
+		// complex logic for checking if the command is complete
+		// walk is complete if distance to target is smaller than step_length
+		// most other commands are complete if the action named in the command was completed (like bash command ends with a bash action)
+		// completing the base action of the command action is sufficient as well (e.g. completing a bash command with a melee attack)
+		// 
+		// charge and storm_charge get special logic
 		Action::ActionType baseact = ainfo->m_base_action;
 		if ((((m_action.m_type == m_command.m_type) || m_action.m_type == baseact) && m_action.m_type != "walk") || (m_command.m_type == "walk" && disttogoal < getBaseAttr()->m_step_length
 				  && !(m_command.m_type == "charge" || m_command.m_type == "storm_charge")))
 		{
+			// command is complete
 			bool recalc = false;
 
 			if (m_command.m_type == "charge" || m_command.m_type == "storm_charge")
@@ -697,14 +696,14 @@ void Creature::performAction(float &time)
 			m_command.m_damage_mult = 1;
 
 
-			// Schaden neu berechnen
+			// recalc damage (required for charge)
 			if (recalc)
 			{
 				recalcDamage();
 			}
 		}
 
-		// Aktion ist beendet
+		// action is complete
 		if (m_action.m_type != "noaction")
 		{
 			addToNetEventMask(NetEvent::DATA_ACTION);
@@ -712,17 +711,12 @@ void Creature::performAction(float &time)
 		m_action.m_type = "noaction";
 		m_action.m_elapsed_time =0;
 		addToNetEventMask(NetEvent::DATA_ACTION);
-	}
-
-
-
-
+	}	// end if action complete
 }
 
 void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 {
-	// Zielobjekt als Creature* pointer
-	// null, wenn das Objekt kein Lebewesen ist
+	// Target object as Creature* pointer
 	Creature* cgoal =0;
 	int cgoalid = 0;
 	if (goalobj !=0 && !goalobj->isCreature())
@@ -747,36 +741,37 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 	res.clear();
 	WorldObjectList::iterator it;
 
-	// Koordinaten das ausfuehrenden Objektes
+	// own center
 	Vector &pos = getShape()->m_center;
 
 	Creature* cr =0;
 	Projectile* pr =0;
 
-	// Struktur fuer Basisattributmods, initialisiert mit Nullen
+	// base attribute modifications inflicted by the action
 	CreatureBaseAttrMod cbam;
 
-	// Struktur fuer Modifikationen der dyn. Attribute, initialisiert mit Nullen
+	// dynamic attribute modifications inflicted by the action
 	CreatureDynAttrMod cdam;
 
+	// calculate the modifiers
 	calcActionAttrMod(m_action.m_type,cbam,cdam);
 
-	// Projectiltyp
+	// type of the missile that might be created by the action
 	Projectile::Subtype projtype = ainfo->m_projectile_type;
 
-	//Faehigkeit Windpfeile
+	// skill windarrows
 	if (projtype == "arrow" && m_base_attr_mod.m_special_flags & WIND_ARROWS)
 		projtype = "wind_arrow";
 
-	// Faehigkeit Eispfeile
+	// skill ice arrows
 	if (projtype == "arrow" && m_base_attr_mod.m_special_flags & ICE_ARROWS)
 		projtype = "ice_arrow";
 
-
+	// Loop over all effects of the action
 	std::list<std::string>::iterator kt;
 	for (kt = ainfo->m_effect.m_cpp_impl.begin(); kt != ainfo->m_effect.m_cpp_impl.end(); ++kt)
 	{
-		// Form, wird initialisiert mit der Form des Ausfuehrenden
+		// Shape initialized with the shape of this object
 		Shape s;
 		s.m_center = pos;
 		s.m_type = Shape::CIRCLE;
@@ -792,14 +787,15 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		Vector dir2,tdir;
 		dir.normalize();
 
-		// Startpunkt fuer Geschosse
-		// aeusserer Rand des Ausfuehrenden plus 5%
+		// starting point for missiles:
+		// border of this object plus 5% margin
 		Vector sproj;
 		Fraction::Id fr = m_fraction;
 		sproj = pos + dir*1.05*s.m_radius;
 
 		if (*kt == "dmg_at_target")
 		{
+			// just dish out damage
 			if (cgoal != 0)
 			{
 				cgoal->takeDamage(&m_damage);
@@ -809,7 +805,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		{
 			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
 
-			// an alle Schaden austeilen
+			// damage all enemies in a circle around this object
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if ((*it)->isCreature())
@@ -825,7 +821,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 			s.m_center = goal;
 			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
 
-			// an alle einfachen Schaden austeilen
+			// damage all enemies in a circle around the target point
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if ((*it)->isCreature())
@@ -838,10 +834,12 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "basemod_at_self")
 		{
+			// apply base modifier on itself
 			applyBaseAttrMod(&cbam);
 		}
 		else if (*kt == "basemod_at_allies_in_radius")
 		{
+			// apply base modifier on all allies in a circle around this object
 			s.m_center = pos;
 			getRegion()->getObjectsInShape(&s, &res, LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
@@ -858,6 +856,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "basemod_at_target")
 		{
+			// apply base modifier on the target object
 			if (cgoal != 0)
 			{
 				cgoal->applyBaseAttrMod(&cbam);
@@ -865,6 +864,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "basemod_at_enemies_in_radius")
 		{
+			// apply base modifier on all enemies in a circle around this object
 			s.m_center = pos;
 			getRegion()->getObjectsInShape(&s, &res, LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
@@ -881,10 +881,12 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "dynmod_at_self")
 		{
+			// apply dyn modifier on this object
 			applyDynAttrMod(&cdam);
 		}
 		else if (*kt == "dynmod_at_allies_in_radius")
 		{
+			// apply base modifier on all allies in a circle around this object
 			s.m_center = pos;
 			getRegion()->getObjectsInShape(&s, &res, LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
@@ -901,6 +903,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "dynmod_at_target")
 		{
+			// apply dyn modifier on the target object
 			if (cgoal != 0)
 			{
 				cgoal->applyDynAttrMod(&cdam);
@@ -908,6 +911,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "dynmod_at_enemies_in_radius")
 		{
+			// apply dyn modifier on all enemies in a circle around this object
 			s.m_center = pos;
 			getRegion()->getObjectsInShape(&s, &res, LAYER_AIR,CREATURE,0);
 			for (it=res.begin();it!=res.end();++it)
@@ -924,6 +928,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "proj_at_target")
 		{
+			// create a (stationary) missile at the target
 			pr = ObjectFactory::createProjectile(projtype);
 			if (pr !=0)
 			{
@@ -943,6 +948,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "proj_fly_at_target")
 		{
+			// shoot a flying missile at the target
 			pr = ObjectFactory::createProjectile(projtype);
 
 			if (pr !=0)
@@ -966,6 +972,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		else if (*kt == "proj_at_self")
 		{
 
+			// create a (stationary) missile at the own position
 			pr = ObjectFactory::createProjectile(projtype);
 			if (pr !=0)
 			{
@@ -985,10 +992,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "proj_at_enemies_around_target")
 		{
+			// create a (stationary) missile at all enemies in a circle around the target
 			s.m_center = goal;
 			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
 
-			// an alle einfachen Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if ((*it)->isCreature() && World::getWorld()->getRelation(fr,(*it)) == Fraction::HOSTILE)
@@ -1011,10 +1018,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "proj_at_enemies_in_radius")
 		{
+			// create a (stationary) missile at all enemies in a circle around this object
 			s.m_center = pos;
 			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
 
-			// an alle einfachen Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if ((*it)->isCreature() && World::getWorld()->getRelation(fr,(*it)) == Fraction::HOSTILE)
@@ -1038,15 +1045,15 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				}
 			}
 		}
-		// spezielle Implementationen
+		// specialized implementations
 		else if (*kt == "hammer_bash")
 		{
+			// hammer bash: inflict reduced damage to enemies around the target
 			m_damage.m_multiplier[Damage::PHYSICAL] *= 0.5;
 			s.m_center = goal;
 			s.m_radius = 1.5;
 			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
 
-			// an alle einfachen Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if ((*it)->isCreature() && (*it)!=goalobj)
@@ -1060,8 +1067,8 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		else if (*kt == "multishot" )
 		{
 
-			// 5 Pfeile erzeugen
-			// mittlerer Pfeil erhaelt die Zielrichtung
+			// create 5 arrows
+			// third arrows shots directly at the target, the rest scatters
 			for (int i=-2;i<=2;i++)
 			{
 				dir2 = dir;
@@ -1083,8 +1090,8 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "volley_shot" )
 		{
-			// 7 Pfeile erzeugen
-			// mittlerer Pfeil erhaelt die Zielrichtung
+			// create 7 arrows
+			// third arrows shots directly at the target, the rest scatters
 			for (int i=-3;i<=3;i++)
 			{
 				dir2 = dir;
@@ -1105,13 +1112,13 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "battle_cry" )
 		{
-		// alle Lebewesen im Umkreis um den Ausfuehrenden auswaehlen
-			// Radius gleich Waffenreichweite
+			// affect all enemies in a radius around this object
+			// half attack speed and walk speed
+			// duration: 10 seconds
 			cbam.m_time =10000;
 
 			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
 
-			// an alle Schaden austeilen
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if ((*it)->isCreature() && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  Fraction::HOSTILE)
@@ -1125,9 +1132,10 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "scare" )
 		{
+			// affect all enemies in a radius around this object
+			// inflict taunt mod with probability and duration based on their willpower
 			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
 
-			// make enemies run away
 			for (it=res.begin();it!=res.end();++it)
 			{
 				if ((*it)->isCreature() && World::getWorld()->getRelation(getFraction(),(*it)->getFraction()) ==  Fraction::HOSTILE)
@@ -1135,6 +1143,8 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					cr = (Creature*) (*it);
 					float rel = m_damage.m_ai_mod_power[TAUNT]*1.0 / cr->getBaseAttrMod()->m_willpower;
 					float chance = atan(rel)/(3.1415/2);
+					
+					// make them run away with 50% chance
 					if (Random::random() < chance && Random::random() < 0.5)
 					{
 						// vector pointing away from the caster
@@ -1160,19 +1170,26 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}		
 		else if (*kt == "berserk")
 		{
+			// inflict berserk on itself
 			m_dyn_attr.m_status_mod_time[Damage::BERSERK] = 15000;
 			addToNetEventMask(NetEvent::DATA_STATUS_MODS);
 		}
 		else if (*kt == "speak")
 		{
+			// try to start a dialogue
+			// check that the target object is a creature as well
+			// check that neither on has already a dialog or is blocked by script
 			if (goalobj != 0 && goalobj->isCreature() && getDialogueId() ==0)
 			{
 				cr = static_cast<Creature*>(goalobj);
 				if (cr->getDialogueId() ==0 && !(cr->hasScriptCommand()))
 				{
+					// rotate speaker towards each other
 					Vector dir = getShape()->m_center - cr->getShape()->m_center;
 					cr->setAngle(dir.angle());
 					setAngle(dir.angle() + PI);
+					
+					// set up the dialogue
 					Dialogue* dia = new Dialogue(getRegion(), cr->getRefName());
 					EventSystem::setDialogue(dia);
 					dia->addSpeaker(getId(),"player");
@@ -1184,7 +1201,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 
 					if (dia->isFinished())
 					{
-						// keine Gespraechsoption vorhanden
+						// no dialogue options available
 						delete dia;
 					}
 					else
@@ -1197,15 +1214,19 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else if (*kt == "use")
 		{
+			// use some object
 			if (goalobj)
 				goalobj->reactOnUse(getId());
 		}
 
-	}
+	}	// end loop over C++ implementations
 
 	if (ainfo->m_effect.m_lua_impl != LUA_NOREF)
 	{
-
+		// effect decribed by lua code
+		// setup environment for action lua code:
+		// set Region and Damage object
+		// set variables for target, self, projectile_type and projectile_speed
 		EventSystem::setRegion(getRegion());
 		EventSystem::setDamage(&m_damage);
 
@@ -1227,21 +1248,23 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 		lua_pushnumber(EventSystem::getLuaState(),ainfo->m_projectile_speed);
 		lua_setglobal(EventSystem::getLuaState(), "projectile_speed");
 
+		// execute the lua code
 		EventSystem::executeCodeReference(ainfo->m_effect.m_lua_impl);
 
 		EventSystem::setDamage(0);
 
 	}
 
-	// Faehigkeit Monsterjaeger
-	// Wenn das Ziel nach der Aktion unter 0 Lebenspunkte hat Bonus austeilen
+	// monster hunter skill
+	// if the target has below 0 HP now, apply some mod
 	if ((checkAbility("monster_hunter") || (checkAbility("monster_slayer"))) && cgoal && cgoal->getDynAttr()->m_health<0)
 	{
 		DEBUGX("monster killed, apply mod");
 		CreatureBaseAttrMod cbam;
 
-		// Modifikation:
-		// 5% mehr Staerke, bei aufgewerteter Version erhoehte Angriffsgeschwindigkeit fuer 10 sec
+		// modifications:
+		// 5% addition strenght
+		// additional attack speed in case of upgraded skill
 		cbam.m_dstrength = getBaseAttr()->m_strength / 20;
 		cbam.m_time = 10000;
 		if (checkAbility("monster_slayer"))
@@ -1259,83 +1282,84 @@ void Creature::collisionDetection(float time)
 		return;
 
 	WorldObjectList result;
-	// Punkt zu dem das Objekt bewegt werden soll
+	// predicted new position
 	Vector newpos = getShape()->m_center + getSpeed()*time;
 
-	// Kreis um den Zielpunkt
+	// circle around the new position
+	// (new base circle plus 5% margin)
 	Shape scopy;
 	scopy.m_radius = getShape()->m_radius*1.05;
 	scopy.m_center = newpos;
 	scopy.m_type = Shape::CIRCLE;
 
-	// Ebene in der gesucht werden soll
+	// layer used for collision
 	short layer = getLayer();
 
-	// Alle kollidierenden Objekte suchen
+	// get colliding objects
 	getRegion()->getObjectsInShape(&(scopy),&result,layer, CREATURE | FIXED,this);
 
 	if (result.size()!=0)
 	{
-		// es gibt kollidierende Objekte
+		// there are colliding objects
 		DEBUGX("aktuelle Koordinaten %f %f",getShape()->m_center.m_x, getShape()->m_center.m_y);
 		WorldObjectList::iterator i;
 
 		Shape* s2;
-        // Liste der kollidierenden Objekte durchgehen
+        // loop over all colliding objects
 		for (i= result.begin();i!=result.end();++i)
 		{
 			DEBUGX("Kollision %i",(*i)->getId());
 			s2 =(*i)->getShape();
-			// wenn mit dem Zielobjekt kollidiert Bewegung beenden
+			// end movement if the object is the target
 			if ((*i)->getId() == getCommand()->m_goal_object_id)
 			{
 				setSpeed(Vector(0,0));
 				break;
 			}
 
-			// Wenn die Faehigkeit Stuermen ist dann Bewegung beenden
+			// if action is charge, end it
 			if (m_command.m_type == "charge" || m_command.m_type == "storm_charge")
 			{
 				DEBUGX("charge goal object %i",(*i)->getId());
-				// Behandlung von *Charge*
 				m_command.m_goal_object_id = (*i)->getId();
 				setSpeed(Vector(0,0));
 				return;
 			}
 			else
 			{
-				// Kollision behandeln
+				// handle collision otherwise
 				handleCollision(s2);
 			}
 
 		}
 
+		// speed vector might have changed
+		// check if speed is not effectively 0
 		if (getSpeed().getLength() > 0.000001)
 		{
-			// neuen erreichten Punkt ausrechnen und testen ob dieser akzeptabel ist
+			// new predicted position after the frame
 			newpos = getShape()->m_center + getSpeed()*time;
 
 
-			// Kreis um den neuen Zielpunkt
+			// new base circle (again)
 			scopy.m_center = newpos;
 			DEBUGX("neue Koordinaten %f %f",newpos.m_x, newpos.m_y);
 			scopy.m_radius = getShape()->m_radius;
 			result.clear();
 
-			// Suchen der Objekte um den neuen Zielpunkt
+			// check for colliding objects again
 			getRegion()->getObjectsInShape(&(scopy),&result,layer, CREATURE | FIXED,this);
 
-			// Testen ob die Richtung fuer alle diese Objekte akzeptabel ist
+			// loop over colliding objects
 			bool change;
 			for (i= result.begin();i!=result.end();++i)
 			{
 				DEBUGX("Kollision %i",(*i)->getId());
 				s2 =(*i)->getShape();
-				// Kollision behandeln
+				// handle collisions (again)
 				change = handleCollision(s2);
 
-				// Richtung wurde geaendert, war also nicht akzeptabel
-				// Bewegung abbrechen
+				// if direction was changed again, abort the action
 				if (change)
 				{
 					DEBUGX("still colliding");
@@ -1346,7 +1370,8 @@ void Creature::collisionDetection(float time)
 			}
 		}
 
-		// Kommando abbrechen, wenn man zu lange sich nicht bewegen kann
+		// if speed is reduced to (almost) zero, the object is stuck
+		// first increase the counter, if it reaches a limit abort the movement
 		if (getSpeed().getLength() <= 0.000001)
 		{
 			m_pathfind_counter +=15;
@@ -1362,37 +1387,40 @@ void Creature::collisionDetection(float time)
 
 bool Creature::handleCollision(Shape* s2)
 {
-	// eigene Koordinaten
+	// own position
 	Vector pos = getShape()->m_center;
 
-	// Koordinaten des kollidierenden Objektes
+	// position of the colliding object
 	Vector cpos = s2->m_center;
 
 	DEBUGX("collision %f %f",cpos.m_x, cpos.m_y);
 	DEBUGX("player pos %f %f",pos.m_x, pos.m_y);
 	DEBUGX("old speed %f %f", getSpeed().m_x, getSpeed().m_y);
 
-	// erlaubte Richtung berechnen
-	// Projektion des Punktes auf den Rand der Flaeche
+	// project own position on the border of the collidion object
 	Vector proj = s2->projectionOnBorder(pos);
 	if (proj.distanceTo(pos) < 0.0001)
 		proj = cpos;
 
 	DEBUGX("projection %f %f",proj.m_x, proj.m_y);
 
-	// Vektor der erlaubten Richtung
-	// immer von der Flaeche weg
+	// Vektor pointing away from the colliding object
 	Vector dir = pos - proj;
 	if (cpos.distanceTo(proj) > cpos.distanceTo(pos))
 		dir = proj - pos;
 
 	DEBUGX("direction %f %f",dir.m_x, dir.m_y);
 
-	// Erlaubt sind alle Richtungen, die maximal einen rechten Winkel mit der erlaubten Richtung bilden
+	// all directions with an angle less than 90 degree with dir are feasible
+	// because they do not reduce the distance to the colliding object
+	// this is also important for the case, that objects are already overlapping accidently:
+	// you may always move out of the obstacle, but not further in
+	
+	// find the feasible direction closest to the original speed
+	// abort, if this required a turn of more than 90 degree
 	Vector sp = getSpeed();
 	if (dir*sp < 0)
 	{
-		// Geschwindigkeit aendern
 		sp.normalPartTo(dir);
 		setSpeed(sp);
 	}
@@ -1401,109 +1429,7 @@ bool Creature::handleCollision(Shape* s2)
 		return false;
 	}
 
-	/*
-	// alte Kollisionsengine
-	bool circ = true;
-
-	DEBUGX("old speed %f %f", getSpeed().m_x, getSpeed().m_y);
-	if (s2->m_type==Shape::RECT)
-	{
-		// Kollision mit Rechteckt
-		// Drehen des Bezugssystems, sodass das Rechteck ausgerichtet ist
-
-		Vector locpos = pos - cpos;
-		locpos.rotate(-s2->m_angle);
-
-		Vector locspeed = getSpeed();
-		locspeed.rotate(-s2->m_angle);
-
-		circ = false;
-		DEBUGX("Rechteck");
-
-		// Ausdehnung des Rechtseckes
-		Vector ext = s2->m_extent;
-		float r = getShape()->m_radius;
-
-		if (fabs(locpos.m_x) > ext.m_x+r)
-		{
-			// Kollision mit einer senkrechten Kante
-			// x-Anteil der Bewegung auf 0 setzen
-			locspeed.m_x =0;
-			DEBUGX("x-anteil genullt");
-		}
-		else
-		{
-			if (fabs(locpos.m_y) >ext.m_y+r)
-			{
-				// Kollision mit einer waagerechten Kante
-				// y-Anteil der Bewegung auf 0 setzen
-				DEBUGX("y-anteil genullt");
-				locspeed.m_y =0;
-			}
-			else
-			{
-				// Kollision an der Ecke des Rechteckes
-				DEBUGX("kollision an einer Ecke");
-
-				// ermitteln der Ecke an der die Kollision stattfand
-				if (locpos.m_x>0)
-				{
-					cpos.m_x += ext.m_x*cos(s2->m_angle);
-					cpos.m_y += ext.m_x*sin(s2->m_angle);
-
-				}
-				else
-				{
-					cpos.m_x -= ext.m_x*cos(s2->m_angle);
-					cpos.m_y -= ext.m_x*sin(s2->m_angle);
-				}
-				if (locpos.m_y>0)
-				{
-					cpos.m_x -= ext.m_y*sin(s2->m_angle);
-					cpos.m_y += ext.m_y*cos(s2->m_angle);
-				}
-				else
-				{
-					cpos.m_x += ext.m_y*sin(s2->m_angle);
-					cpos.m_y -= ext.m_y*cos(s2->m_angle);
-				}
-
-				// Problem behandeln wie einen Kreis um diese Ecke
-				circ = true;
-			}
-		}
-
-
-		if (!circ)
-		{
-			DEBUGX("locspeed %f %f",locspeed.m_x, locspeed.m_y);
-			locspeed.rotate(s2->m_angle);
-			setSpeed(locspeed);
-
-		}
-
-	}
-
-	if (circ)
-	{
-		// Behandlung Kollision mit Kreis
-		DEBUGX("obj pos %f %f", pos.m_x, pos.m_y);
-		DEBUGX("collision pos %f %f", cpos.m_x, cpos.m_y);
-
-
-		// Vektor vom eigenen Mittelpunkt zum Mittelpunkt des kollidierenden Objektes (normiert)
-		Vector dir = cpos - pos;
-		dir.normalize();
-		DEBUGX("normal dir %f %f", dir.m_x, dir.m_y);
-
-
-		// vom Geschwindigkeitsvektor nur den zu dieser Richtung senkrechten Teil uebrig lassen
-		Vector speed = getSpeed();
-		speed.normalPartTo(dir);
-		setSpeed(speed);
-	}
-*/
-	// neue Geschwindigkeit normieren
+	// scale the new speed vector to the original absolute speed
 	Vector speed = getSpeed();
 	DEBUGX("new speed %f %f", getSpeed().m_x, getSpeed().m_y);
 	if (speed.getLength() < 0.000001)
@@ -1517,9 +1443,6 @@ bool Creature::handleCollision(Shape* s2)
 		speed *= getBaseAttr()->m_step_length/m_action.m_time;
 		setSpeed(speed);
 	}
-
-	//char dummy;
-	//std::cin >> dummy;
 
 	return true;
 
@@ -1554,12 +1477,14 @@ void Creature::clearScriptCommands()
 
 void Creature::updateCommand()
 {
-	// Wenn aktuelles Kommando keine Aktion vorschreibt
+	// Change command if:
+	// a) neither cutscene nor scripting dictates a command and user has entered a new command
+	// b) scripted commands exist and current command is complete
 	DEBUGX("next command: %s ",m_next_command.m_type.c_str());
 	if ((!hasScriptCommand() && m_next_command.m_type != "noaction" && !getRegion()->getCutsceneMode()) ||
 			 (!m_script_commands.empty() && m_command.m_type == "noaction"))
 	{
-		// Naechstes Kommando uebernehmen
+		// priority: scripted command superseeds user command
 		if (!m_script_commands.empty())
 		{
 
@@ -1591,20 +1516,15 @@ void Creature::updateCommand()
 
 	}
 
-	// Kommando ausrechnen das evtl aus einem Statusmod resultiert
+	// commands resulting from status mods
 	calcStatusModCommand();
-
-
-
 }
 
 void Creature::calcAction()
 {
-
-
 	updateCommand();
 
-	// wenn kein Kommando existiert keine Aktion ausfuehren, beenden
+	// if no command exists, idle
 	if (m_command.m_type == "noaction")
 	{
 		if (m_action.m_type!= "noaction")
@@ -1621,8 +1541,8 @@ void Creature::calcAction()
 	DEBUGX("calc action for command %s",m_command.m_type.c_str());
 	addToNetEventMask(NetEvent::DATA_ACTION);
 
-
-	// Reichweite der Aktion berechnen
+	// range of the command
+	// how close you need to get to the target to start the final action
 	float range = m_command.m_range;
 
 	/*
@@ -1635,36 +1555,35 @@ void Creature::calcAction()
 	if (m_command.m_type == "take_item")
 		range = 2;
 
-	// Koordinaten des Zielpunktes
+	// target vector
 	Vector goal = m_command.m_goal;
 	m_action.m_goal = goal;
 
-	// Zeiger auf das Zielobjekt
+	// target object
 	WorldObject* goalobj=0;
 
-	// eigene Position
+	// own position
 	Vector& pos = getShape()->m_center;
 
-	// Abstand zum Ziel
+	// distance to the target
 	float dist = pos.distanceTo(goal)-getShape()->m_radius;
 
-	// Wenn Zielobjekt per ID gegeben
+	// get the target from the ID
 	if ( m_command.m_goal_object_id !=0 && m_command.m_type != "take_item")
 	{
 		DEBUGX("goal ID: %i",m_command.m_goal_object_id);
-		// Zielobjekt holen
 		goalobj = getRegion()->getObject(m_command.m_goal_object_id);
 
 		if (goalobj ==0)
 		{
-			// Zielobjekt existiert nicht mehr, abbrechen
+			// lost the target, abort the command
 			m_action.m_type = "noaction";
 			m_action.m_elapsed_time =0;
 			clearCommand(false,true);
 			return;
 		}
 
-		// Ziel muss aktiv sein
+		// check that the Target is active
 		if (goalobj->getState() != STATE_ACTIVE)
 		{
 			DEBUGX("refused to interact with inactive object %i",m_command.m_goal_object_id);
@@ -1674,20 +1593,20 @@ void Creature::calcAction()
 			return;
 		}
 
-		// Zielkoordinaten neu setzen (Koordinaten des Zielobjektes)
+		// if target is given by an object, set the target vector to its position
 		goal = goalobj->getShape()->m_center;
 
-		// Abstandsberechnung
+		// update distance
 		dist = getShape()->getDistance(*(goalobj->getShape()));
 	}
 
-	// Aktion Item aufheben
+	// if action is take_item, the ID refers to a dropped item
 	if (m_command.m_type == "take_item")
 	{
 		DropItem* di = getRegion()->getDropItem(m_command.m_goal_object_id);
 		if (di ==0)
 		{
-			// Zielobjekt existiert nicht mehr, abbrechen
+			// item lost, abort the command
 			m_action.m_type = "noaction";
 			m_action.m_elapsed_time =0;
 			clearCommand(false,true);
@@ -1702,7 +1621,7 @@ void Creature::calcAction()
 	}
 
 
-	// Stuermen, naechstes Kollisionsobjekt als Ziel nehmen
+	// special logic for charge
 	if ((m_command.m_type == "charge" || m_command.m_type == "storm_charge") &&  
 		(m_action.m_goal_object_id == 0 || dist > range))
 	{
@@ -1749,20 +1668,24 @@ void Creature::calcAction()
 			range=0;
 			dist = 1;
 		}
-	}
+	}	// end of special logic for charge
 
 
+	// check if the action is one where range matters:
+	// melee attack
+	// walk
+	// berserk active (always go to melee range)
 	if (Action::getActionInfo(m_command.m_type)->m_target_type == Action::MELEE 
 		|| Action::getActionInfo(m_command.m_type)->m_base_action == "walk" 
 		|| m_dyn_attr.m_status_mod_time[Damage::BERSERK]>0)
 	{
-		// Aktion fuer die man an das Ziel hinreichend nahe herankommen muss
 		DEBUGX("range %f dist %f",range,dist);
 
-		// Testen ob das Ziel in Reichweite ist
+		// check if target is in range
 		if (range > dist)
 		{
-			// Ziel ist in Reichweite, geplante Aktion ausfuehren
+			// target is in range
+			// if command is walk, just stop, else, do the final action
 			if (m_command.m_type != "walk")
 			{
 				m_action.m_type = m_command.m_type;
@@ -1778,22 +1701,22 @@ void Creature::calcAction()
 		}
 		else
 		{
-			// Ziel ist nicht in Reichweite, hinlaufen
-
+			// target is too far away, walk 
 			m_action.m_type = "walk";
+			// special logic for charge
 			if ((m_command.m_type == "charge" || m_command.m_type == "storm_charge")  )
 			{
-				// Sturmangriff
 				DEBUGX("Charge");
 
-				// beim ersten Mal richtung neu ausrechnen, das ist der Fall wenn der Schadensmultiplikator gleich 1 ist
-				// sonst nur beschleunigen
+				// only compute the direction the first time,
+				// this is when multiplier is 1
+				// else, just accelarates
 				if (m_command.m_damage_mult>2)
 				{
-					// Richtung nicht neu ausrechnen, beschleunigen
+					// not the first step charge, accelerate
 					m_command.m_damage_mult += 2;
 
-					// Geschwindigkeit normieren, mit Schadensmultiplikator multiplizieren
+					// adapt multiplier according to speed
 					Vector speed = getSpeed();
 					speed.normalize();
 
@@ -1802,7 +1725,7 @@ void Creature::calcAction()
 					else
 						m_command.m_damage_mult *= 0.8;
 
-					// Schaden neu berechnen
+					// update the damage
 					recalcDamage();
 
 					speed *= sqrt(m_command.m_damage_mult);
@@ -1810,9 +1733,9 @@ void Creature::calcAction()
 				}
 				else
 				{
-					// Richtung: direct zum Ziel;
+					// first step of the charging run
+					// direction is just towards the target
 					DEBUGX("calc charge dir");
-					// Vektor von der eigenen Position zum Ziel, normieren
 					Vector dir = goal-pos;
 					dir.normalize();
 					setSpeed(dir);
@@ -1828,14 +1751,11 @@ void Creature::calcAction()
 						m_action.m_type = "noaction";
 						m_action.m_elapsed_time =0;
 					}
-
 				}
-
-
-			}
+			}	// End of special logic for charge
 			else
 			{
-				// Berechnen der Bewegungsrichtung
+				// compute the walk direction
 				calcWalkDir(goal, goalobj);
 
 			}
@@ -1845,13 +1765,13 @@ void Creature::calcAction()
 	}
 	else
 	{
-		// keine Nahkampfaktion bzw laufen -> Action direkt ausfuehren
+		// range does not matter, execute the final action
 		m_action.m_type = m_command.m_type;
 		m_action.m_goal_object_id = m_command.m_goal_object_id;
 		m_action.m_goal = goal;
 	}
 
-	// wenn keine Aktion berechnet wurde, Kommando beenden
+	// if no action was computed, clear the command
 	if (m_action.m_type == "noaction")
 	{
 		clearCommand(true,false);
@@ -1860,11 +1780,13 @@ void Creature::calcAction()
 
 Action::ActionType Creature::getBerserkAction()
 {
+	// default: just do normal melee attacks
 	Action::ActionType act = "attack";
 	
 	if (getBaseAttrMod()->m_abilities.count(act) == 0)
 	{
-		// this happens, when action is not present due to berserk
+		// this happens, when melee attack is not available
+		// choose one of the other offensive skills at random
 		std::map<std::string, AbilityInfo>::iterator it;
 		for (it = getBaseAttrMod()->m_abilities.begin(); it != getBaseAttrMod()->m_abilities.end(); ++it)
 		{
@@ -1887,18 +1809,18 @@ Action::ActionType Creature::getBerserkAction()
 
 void Creature::calcStatusModCommand()
 {
-	// eigene Position
+	// own position
 	Vector& pos = getShape()->m_center;
 
 	if (m_dyn_attr.m_status_mod_time[Damage::BERSERK]>0)
 	{
-		// Behandlung von Berserker
+		// berserk action
 		int id =0;
 		float rmin =1000;
 
 		Vector wpos , goal(0,0);
 
-		// Kreis mit Radius 8 um eigenen Mittelpunkt
+		// circle with radius 8 around itself
 		Shape s;
 		s.m_type = Shape::CIRCLE;
 		s.m_radius =8;
@@ -1907,7 +1829,7 @@ void Creature::calcStatusModCommand()
 		WorldObjectList::iterator i;
 		res.clear();
 
-		// Suchen aller Objekte im Kreis
+		// get all creatures in the circle
 		getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
 		if (res.empty())
 		{
@@ -1918,23 +1840,20 @@ void Creature::calcStatusModCommand()
 			}
 		}
 
+		// choose the closest, hostile, active creature
 		for (i=res.begin();i!= res.end();++i)
 		{
-			// nur aktive Lebewesen beruecksichtigen
 			if ((*i)->getState() != STATE_ACTIVE)
 			{
 				continue;
 			}
 
 			DEBUGX("checking obj %i",(*i)->getId());
-			// Fuer feindliche Lebewesen
 			if (World::getWorld()->getRelation(m_fraction,*i) == Fraction::HOSTILE)
 			{
-				// Abstand zum eigenen Mittelpunkt berechnen
 				DEBUGX("hostile");
 				wpos = (*i)->getShape()->m_center;
 
-				// Objekt mit dem kleinsten Abstand als Zielobjekt setzen
 				if (pos.distanceTo(wpos)<rmin)
 				{
 					rmin =pos.distanceTo(wpos);
@@ -1945,18 +1864,18 @@ void Creature::calcStatusModCommand()
 			}
 		}
 
-		// Wenn Zielobjekt gefunden wurde
+		// if target was found
 		if (id !=0)
 		{
 			getDynAttr()->m_timer.start();
 			DEBUGX("attack id %i",id);
-			// Angriff
+			// attack !
 			m_command.m_type = getBerserkAction();
 			m_command.m_goal_object_id = id;
 			m_command.m_goal = goal;
 			m_command.m_range = getBaseAttrMod()->m_attack_range;
 
-			// nur Nahkampf, daher Reichweite die von Fernwaffen kommt reduzieren
+			// reduce the range to force shooters in to melee
 			if (m_command.m_range >4)
 			{
 				DEBUGX("capped range for berserk");
@@ -1966,7 +1885,7 @@ void Creature::calcStatusModCommand()
 		}
 		else
 		{
-			// nichts machen
+			// no target was found, end berserk mode
 			m_command.m_type = "noaction";
 			if (getDynAttr()->m_timer.getTime() >1000)
 			{
@@ -1978,14 +1897,14 @@ void Creature::calcStatusModCommand()
 		addToNetEventMask(NetEvent::DATA_COMMAND);
 	}
 	
-	// Statusmod verwirrt
-	// diese Aktion nur vom Server ausloesen lassen
+	// status mod confused
+	// only compute this on server because of heavy random influence
 	if (m_command.m_type != "noaction" 
 		&& Random::randi(3) >0
 		&& m_dyn_attr.m_status_mod_time[Damage::CONFUSED]>0 
 		&& World::getWorld()->isServer())
 	{
-		// aktuelle Bewegungsrichtung
+		// compute current vector to target
 		Vector goal = m_command.m_goal;
 		if (m_command.m_goal_object_id != 0)
 		{
@@ -2012,7 +1931,7 @@ void Creature::calcStatusModCommand()
 		
 		Vector newgoal = getShape()->m_center + v;
 
-		// Kreis um den Zielpunkt, Radius gleich Radius des Lebewesens
+		// position where we will land with the new movement vector
 		Shape s;
 		s.m_center =newgoal;
 		s.m_type = Shape::CIRCLE;
@@ -2021,12 +1940,12 @@ void Creature::calcStatusModCommand()
 		WorldObjectList res;
 		WorldObjectList::iterator it;
 
-		// ermitteln der Objekte mit denen bei der Bewegung kollidiert wird
+		// check something colliding is at the new target point
 		getRegion()->getObjectsInShape(&s,&res,LAYER_AIR,CREATURE | FIXED,this);
 
 		if (!res.empty())
 		{
-			// Es gibt ein kollidierendes Objekt, als Zielobjekt setzen
+			// colliding object found, attack it (no matter if hostile!)
 			int num = Random::randi(res.size());
 			it = res.begin();
 			for (int i=0; i<num; i++)
@@ -2037,7 +1956,7 @@ void Creature::calcStatusModCommand()
 			newgoal = wo->getShape()->m_center;
 		}
 		
-		// 30% chance to change the action
+		// 30% chance to change the action walk <-> attack
 		float r = Random::random();
 		if (r < 0.3 && !melee)
 		{
@@ -2064,10 +1983,11 @@ void Creature::calcStatusModCommand()
 
 void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 {
-	// maximale Entfernung bei der normale Wegfindung genommen wird
+	// maximal distance where normal pathfinding is used
+	// this determines the size of the gradient field
 	int pathmaxdist = 16;
 
-	// Qualitaet der Suche, geht quadratisch in die Laufzeit ein
+	// quality of the search, quadratic impact on the computation time
 	int qual=4;
 
 	float recalctime = 500;
@@ -2082,31 +2002,31 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 		recalctime = 1000;
 	}
 
-	// eigene Position
+	// own position
 	Vector& pos = getShape()->m_center;
 	Vector dir;
 
-	// wenn als Ziel ein Lebenwesen angegeben ist
+	// every creature has a gradient field leading to its position
+	// if the target is a creature, use the gradient field provieded by the creature
 	if (goalobj !=0 && goalobj->isCreature() )
 	{
 		DEBUGX("using pot field of object %i",goalobj->getId());
 		Creature* cr = (Creature*) goalobj;
-		// Potentialfeld des Ziellebewesens verwenden
 		cr->getPathDirection(pos,getRegionId(), 2*getShape()->m_radius, getLayer(),dir);
 	}
 	else
 	{
 		DEBUGX("using own pot field");
-		// Bewegung zu einem Punkt oder festen Objekt
-		// eigenes Potentialfeld verwenden
+		// target position is not a creature
+		// we need another gradient field with the target point as *sink*
 
-		// true, wenn das eigene Potentailfeld neu berechnet werden muss
+		// true, if the gradient field need recalculation
 		bool recalc = false;
 
-		// true, wenn als Richtung die direkte Verbindung genutzt wird
+		// true, if the gradient field is not used, but the plain direction to the target
 		bool direct = false;
 
-		// Wenn in einer Koordinatenrichtung Abstand groesser 10 ist direkte Verbindung benutzen
+		// use direct direction if distance is too high for gradient field use
 		if (fabs(pos.m_x-goal.m_x)>pathmaxdist || fabs(pos.m_y-goal.m_y)>pathmaxdist)
 		{
 			direct = true;
@@ -2114,22 +2034,19 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 
 		if (m_path_info ==0)
 		{
-			// Potentialfeld existiertnoch nicht
+			// data structure does not exist yet
 			DEBUGX("allocating new pot field");
 			m_path_info = new PathfindInfo;
 
 
 			int dim = 2*pathmaxdist*qual+1;
 
-			// Potentialfeld
+			// array with *height*/potential of each field
 			m_path_info->m_pot = new Matrix2d<float>(dim,dim);
-			// Blockmatrix
+			// array of blocked fields
 			m_path_info->m_block = new Matrix2d<char>(dim,dim);
 
-			// Kantenlaenge eines Quadrates im Suchfeld
-			//float sqs =  getGeometry()->m_shape.m_radius*2/ qual;
-
-			// Senke des Feldes ist der Zielpunkt
+			// sink of the field is the target point
 			m_path_info->m_start= goal;
 
 			m_path_info->m_dim = dim;
@@ -2138,7 +2055,7 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 			m_path_info->m_base_size = getShape()->m_radius*2;
 			m_path_info->m_quality=qual;
 			m_path_info->m_id = getId();
-			// neu berechnen noetig
+			// recalculate
 			recalc = true;
 
 		}
@@ -2147,18 +2064,17 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 
 			if ( m_path_info->m_region != getRegionId())
 			{
-				// Ziel befindet sich in einer anderen Region als die des Potentialfeldes
-				// Region anpassen, neu berechnen
+				// gradient field belongs to another region, recalculate
 				m_path_info->m_region=getRegionId();
 				recalc = true;
 			}
 
-			// Ziel hat sich deutlich bewegt, neuen Weg suchen
+			// recalculate if target has changed considerably
 			float d = m_path_info->m_start.distanceTo(goal);
 			if (d>1)
 				recalc = true;
 
-			// Potentialfeld ist aelter als 500 ms, neu berechnen
+			// recalculate if the field is too old
 			if (m_path_info->m_timer > recalctime)
 				recalc = true;
 
@@ -2168,46 +2084,44 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 		{
 			if (recalc)
 			{
-				// neu berechnen notwendig
+				// recalculate
 				DEBUGX("recalc walk field");
 
-				// Zentrum ist die eigene Position
+				// center of the field is the own position
 				m_path_info->m_center.m_x= goal.m_x +roundf(pos.m_x-goal.m_x);
 				m_path_info->m_center.m_y=goal.m_y +roundf(pos.m_y-goal.m_y);
-				// Senke ist der Zielpunkt
+				// sink is the target point
 				m_path_info->m_start= goal;
 
-
-				// Timer auf 0 setzen
+				// age of the data
 				m_path_info->m_timer=0;
 
-
-				// Blockmatrix berechnen
+				// matrix of blocked fields
 				World::getWorld()->calcBlockmat(m_path_info);
 
-
-				// Potentialfeld berechnen
+				// compute the potential
 				World::getWorld()->calcPotential(m_path_info);
 
 			}
 
-			// Richtung auf Basis des eigenen Potentialfeldes berechnen
+			// compute direction based on the potential field
 			World::getWorld()->calcPathDirection(m_path_info, pos, dir);
 		}
 		else
 		{
-			// direkte Verbindung als Richtung verwenden
+			// just use the direct position->target direction
 			DEBUGX("using direct way");
 			dir = goal - pos;
 		}
 
 	}
 
-	// Richtung normieren
+	// direction is computed, now scale it
 	dir.normalize();
 
 	if (dir.getLength() ==0)
 	{
+		// did not compute any valid direction, abort the command
 		clearCommand(true,false);
 		m_action.m_type = "noaction";
 		m_action.m_elapsed_time =0;
@@ -2217,7 +2131,9 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 	}
 	else
 	{
-		// TODO: Wende über 90 Grad behandeln
+		// if walk direction changed by more than 90 degree, increase the pathfind counter
+		// abort if the counter hits a limit
+		// this is used to detect if creatures get stuck and walk up and down
 		Vector oldspeed = getSpeed();
 		if (oldspeed * dir <0)
 		{
@@ -2234,21 +2150,24 @@ void Creature::calcWalkDir(Vector goal,WorldObject* goalobj)
 		}
 		else
 		{
+			// decrease the counter, if pathfinding was successful
 			m_pathfind_counter -=8;
 			if (m_pathfind_counter<0)
 				m_pathfind_counter =0;
 		}
 
 		setSpeed(dir);
-
 	}
 }
 
 void Creature::clearCommand(bool success, bool norepeat)
 {
 	DEBUGX("%s clear command %s %f",getRefName().c_str(),m_command.m_type.c_str() , m_script_command_timer);
+	// if the command was created by script
 	if (hasScriptCommand() && m_command.m_type!= "noaction")
 	{
+		// create the event for the scripting engine
+		// telling that the command is complete
 		m_script_command_timer =0;
 		DEBUGX("command %s by %s ended with success %i",m_command.m_type.c_str(), getRefName().c_str(), success);
 		Trigger* tr = new Trigger("command_complete");
@@ -2258,13 +2177,14 @@ void Creature::clearCommand(bool success, bool norepeat)
 		tr->addVariable("last_command",!(hasScriptCommand()));
 		getRegion()->insertTrigger(tr);
 
-		// ein wiederholtes Kommando bleibt in der Script Kommand Queue
-		// und muss deshalb auch von dort entfernt werden
+		// a repeated command stays in the script command queue
+		// if repeated commands should be delete as well, remove it from the queue, too
 		if (norepeat && (m_command.m_flags & Command::REPEAT) && !m_script_commands.empty())
 		{
 			m_script_commands.pop_front();
 		}
 
+		// create an event if the script command queue is empty
 		if (m_script_commands.empty())
 		{
 			Trigger* tr = new Trigger("all_commands_complete");
@@ -2274,6 +2194,8 @@ void Creature::clearCommand(bool success, bool norepeat)
 			getRegion()->insertTrigger(tr);
 		}
 	}
+	
+	// clear all the data fields
 	m_command.m_type = "noaction";
 	m_command.m_damage_mult = 1;
 	m_command.m_goal = Vector(0,0);
@@ -2286,9 +2208,9 @@ void Creature::clearCommand(bool success, bool norepeat)
 
 bool Creature::update (float time)
 {
-
 	WorldObject::update(time);
 
+	// timer just for debugging
 	Timer timer;
 	timer.start();
 
@@ -2298,11 +2220,11 @@ bool Creature::update (float time)
 	}
 
 	DEBUGX("Update des Creatureobjekts [%i] wird gestartet", getId());
-	// interne Variable um Fehler zu speichern
+	// set to false if errors occur
 	bool result=true;
 
 
-	// Timer fuer Sprache anpassen
+	// reduce speech timers
 	if (!m_speak_text.empty())
 	{
 		if (m_speak_text.m_time < time)
@@ -2318,7 +2240,7 @@ bool Creature::update (float time)
 
 
 
-	// Timer herunterzaehlen lassen
+	// reduce ability cooldown timers
 	for (int i=0; i<NR_TIMERS; i++)
 	{
 		m_timers[i] -= time;
@@ -2327,7 +2249,7 @@ bool Creature::update (float time)
 	}
 
 
-	// Timer fuer Wegsucheinfo inkrementieren
+	// increase age of pathfinding information
 	if (m_path_info)
 		m_path_info->m_timer += time;
 
@@ -2345,7 +2267,7 @@ bool Creature::update (float time)
 
 
 
-	// Zeit fuer Statusveraenderungen / Immunisierungen reduzieren
+	// reduce remaining time of status mods and modificaions
 	for (int i=0;i<NR_STATUS_MODS;i++)
 	{
 		if (m_dyn_attr.m_status_mod_time[i] >0)
@@ -2353,10 +2275,10 @@ bool Creature::update (float time)
 			m_dyn_attr.m_status_mod_time[i] -= time;
 			if (m_dyn_attr.m_status_mod_time[i]<0)
 			{
-				// Statusmod beenden
+				// end status mod
 				m_dyn_attr.m_status_mod_time[i]=0;
-				// aktuelle Aktion abbrechen nach auslaufen von Berserker / verwirrt
-				// (da die Aktion idr ungewollt bzw ungeplant ist)
+				// if confused or berserk ends, cancel the current action
+				// as it is usually unintended and harmful
 				if (i==Damage::BERSERK || i==Damage::CONFUSED)
 				{
 					m_command.m_type = "noaction";
@@ -2373,7 +2295,7 @@ bool Creature::update (float time)
 
 	}
 
-	// Zeit fuer Effekte reduzieren
+	// reduce time for other effects
 	for (int i=0;i<NR_EFFECTS;i++)
 	{
 		m_dyn_attr.m_effect_time[i] -= time;
@@ -2383,8 +2305,8 @@ bool Creature::update (float time)
 		}
 	}
 
-	// Zeit fuer temporaere Effekte reduzieren und ggf deaktivieren
-	// true, wenn die modifizierten Attribute neu berechnet werden muessen
+	// reduce time for base attribute modifiers (boosters/ mali)
+	// true if recalculation of the modified base attributes is required
 	bool recalc = false;
 	std::list<CreatureBaseAttrMod>::iterator i;
 	for (i=m_dyn_attr.m_temp_mods.begin();i!=m_dyn_attr.m_temp_mods.end();)
@@ -2393,7 +2315,7 @@ bool Creature::update (float time)
 		i->m_time -= time;
 		if (i->m_time <=0)
 		{
-			// Zeit abgelaufen, Modifikation deaktivieren
+			// duration expired, remove the modification
 			DEBUGX("removing base attr mod");
 			recalc |= removeBaseAttrMod((CreatureBaseAttrMod*) &(*i));
 			i=m_dyn_attr.m_temp_mods.erase(i);
@@ -2407,7 +2329,7 @@ bool Creature::update (float time)
 
 	if (recalc)
 	{
-		// modifizierte Attribute neu berechnen
+		// recalculate the modified base attributes
 		DEBUGX("modifizierte Attribute neu berechnen");
 		calcBaseAttrMod();
 
@@ -2415,15 +2337,15 @@ bool Creature::update (float time)
 
 
 
-	// besondere zeitabhaengige Effekte berechnen
+	// other special effects
 	if (World::getWorld()->isServer())
 	{
 		if (m_base_attr_mod.m_special_flags & FLAMEARMOR && World::getWorld()->timerLimit(1))
 		{
-			// Flammenruestung
+			// flame armor
 
-
-			// Schaden fuer Flammenruestung setzen
+			// flame armor does damage over timer
+			// so damage depends on the frame time
 			Damage d;
 			d.m_min_damage[Damage::FIRE] = 500*m_base_attr_mod.m_magic_power*0.0003;
 			d.m_max_damage[Damage::FIRE] = 500*m_base_attr_mod.m_magic_power*0.0005;
@@ -2435,18 +2357,17 @@ bool Creature::update (float time)
 			res.clear();
 			WorldObjectList::iterator it;
 
-			// Kreis um eigenen Mittelpunkt mit Radius eigener Radius plus 1
+			// circle around own position with radius 1+ own_radius
 			Shape s;
 			s.m_center  = getShape()->m_center;
 			s.m_type = Shape::CIRCLE;
 			s.m_radius = getShape()->m_radius+1;
 			Creature* cr;
 
-			// Alle Objekte im Kreis suchen
+			// damage all hostile creatures in the circle
 			getRegion()->getObjectsInShape(&s, &res,LAYER_AIR,CREATURE,this);
 			for (it=res.begin();it!=res.end();++it)
 			{
-				// Schaden austeilen
 				if ((*it)->isCreature())
 				{
 					cr = (Creature*) (*it);
@@ -2456,65 +2377,59 @@ bool Creature::update (float time)
 			}
 
 		}
-	}
+	}	// end flame armor
 
-	// Statusmods behandeln
+	// effect of time-dependant status mods
 	if (getState()==STATE_ACTIVE)
 	{
 		if (World::getWorld()->isServer() && World::getWorld()->timerLimit(1))
 		{
-			// Vergiftet
+			// poisoned
 			if (m_dyn_attr.m_status_mod_time[Damage::POISONED]>0)
 			{
-				// Schaden pro Sekunde 1/90 der HP
+				// Damage per second is 1/90 of max. HP
 				DEBUGX("poisoned");
 				m_dyn_attr.m_health -= 500*m_base_attr_mod.m_max_health / 90000;
 				addToNetEventMask(NetEvent::DATA_HP);
 			}
 
-			// brennend
+			// burning
 			if (m_dyn_attr.m_status_mod_time[Damage::BURNING]>0)
 			{
-				// Schaden pro Sekunde 1/60 der HP (bei 0 Feuerresistenz)
+				// Damage per second is 1/60 of max. HP at 0 fire resistance
 				DEBUGX("burning");
 				m_dyn_attr.m_health -= (100-m_base_attr_mod.m_resistances[Damage::FIRE])*500*m_base_attr_mod.m_max_health / 6000000;
 				addToNetEventMask(NetEvent::DATA_HP);
 			}
 		}
 
-		// eingefroren
+		// frozen: reduce the time for actions to 0
 		if (m_dyn_attr.m_status_mod_time[Damage::FROZEN]>0)
 		{
 			// keine Zeit fuer Aktionen
 			time=0;
 		}
 
-		// gelaehmt
+		// paralyzed: reduce the time for actions by 60%
 		if (m_dyn_attr.m_status_mod_time[Damage::PARALYZED]>0)
 		{
-			// Zeit auf 40% reduziert
 			time *= 0.4;
 		}
 
-		// Wenn Lebenspunkte unter 0
+		// if health drops to 0, die
 		if (m_dyn_attr.m_health <= 0)
 		{
-			// sterben
 			die();
 		}
 	}
 
-	// Solange noch Zeit zur Verfügung steht Aktionen ausfuehren lassen
+	// loop doing actions as long a time it left
 	while (time>0)
 	{
 		switch (getState())
 		{
-			// wenn das Objekt aktiv ist
 			case STATE_ACTIVE:
-
-
-
-				// wenn die Lebenspunkte des Lebewesens kleiner gleich 0 sind stirbt das Lebewesen
+				// if health drops to 0, die
 				DEBUGX("health %f",m_dyn_attr.m_health);
 				if (m_dyn_attr.m_health <= 0)
 				{
@@ -2522,12 +2437,12 @@ bool Creature::update (float time)
 				}
 				else
 				{
-					// Solange noch Zeit zur Verfügung steht
+					// while time is left
 					DEBUGX("Objekt aktiv");
 
 					while (time>0)
 					{
-						// Wenn keine Aktion gesetzt Aktion ausrechnen und initialisieren
+						// calculate a new action if none is set so far
 						if (m_action.m_type == "noaction")
 						{
 							calcAction();
@@ -2535,17 +2450,14 @@ bool Creature::update (float time)
 							calcDamage(m_action.m_type,m_damage);
 						}
 
-						// Aktion ausfuehren
+						// and execute it
 						performAction(time);
 
 					}
 				}
-
-
 				break;
 
-
-			// sonst, eventuell hier später weitere Stati gesondert bearbeiten STATES_DEAD, STATES_INACTIVE
+			// special state: dieing
  			case STATE_DIEING:
 				performAction(time);
 				if (m_action.m_type == "noaction")
@@ -2553,7 +2465,7 @@ bool Creature::update (float time)
 					setState(STATE_DEAD);
 					m_action.m_type = "dead";
 					m_action.m_time = 1000;
-					// Fliegende Objekte bleiben nicht lange liegen
+					// flying creatures are deleted faster
 					if ((getLayer() & LAYER_BASE) ==0)
 					{
 						m_action.m_time = 50;
@@ -2596,11 +2508,12 @@ void Creature::gainExperience (float exp)
 		return;
 
 
-	// Erfahrung dazu addieren
+	// add the experience
 	m_dyn_attr.m_experience += exp;
 	addToNetEventMask(NetEvent::DATA_EXPERIENCE);
 
-	// Solange Level aufsteigen, bis exp < max_exp
+	// levelup until experience is below max experience
+	// allows to get several levelups at once
 	while (m_dyn_attr.m_experience>= m_base_attr.m_max_experience)
 	{
 		gainLevel();
@@ -2609,8 +2522,8 @@ void Creature::gainExperience (float exp)
 
 void Creature::gainLevel()
 {
+	// the real work is done in Player::gainLevel
 	addToNetEventMask(NetEvent::DATA_ATTRIBUTES_LEVEL);
-
 }
 
 void  Creature::calcActionAttrMod(Action::ActionType act,CreatureBaseAttrMod & bmod, CreatureDynAttrMod& dmod)
@@ -2622,7 +2535,8 @@ void  Creature::calcActionAttrMod(Action::ActionType act,CreatureBaseAttrMod & b
 	if (ainfo ==0 )
 		return;
 
-	// Cpp Implementation fuer Bmod
+	// cpp Implementations
+	// mainly setting special flags, because they still rely on enums...
 	std::list<std::string>::iterator kt;
 	for (kt = ainfo->m_base_mod.m_cpp_impl.begin(); kt != ainfo->m_base_mod.m_cpp_impl.end(); ++kt)
 	{
@@ -2672,254 +2586,55 @@ void  Creature::calcActionAttrMod(Action::ActionType act,CreatureBaseAttrMod & b
 		}
 	}
 
-	// Lua Implementation fuer bmod
+	// Lua Implementation
 	if (ainfo->m_base_mod.m_lua_impl != LUA_NOREF)
 	{
-
+		// only variable set in the code is
+		// self == own ID
 		EventSystem::setRegion(getRegion());
+		// set the base mod as *current object*
+		// and lua code with automatically write to it
 		EventSystem::setCreatureBaseAttrMod(&bmod);
 
 		lua_pushnumber(EventSystem::getLuaState(),getId());
 		lua_setglobal(EventSystem::getLuaState(), "self");
 
+		// execute the lua chunk
 		EventSystem::executeCodeReference(ainfo->m_base_mod.m_lua_impl);
-
 		EventSystem::setCreatureBaseAttrMod(0);
 	}
 
-	// Cpp Implementation fuer dmod
+	// Cpp Implementation for dynamic attribute mod
 	for (kt = ainfo->m_dyn_mod.m_cpp_impl.begin(); kt != ainfo->m_dyn_mod.m_cpp_impl.end(); ++kt)
 	{
-
-
+		// everything can be done with lua now
 	}
 
-	// Lua Implementation fuer bmod
+	// Lua Implementation for dynamic attribute mod
 	if (ainfo->m_dyn_mod.m_lua_impl != LUA_NOREF)
 	{
-
+		// only variable set in the code is
+		// self == own ID
 		EventSystem::setRegion(getRegion());
+		// set the dyn mod as *current object*
+		// and lua code with automatically write to it
 		EventSystem::setCreatureDynAttrMod(&dmod);
 
 		lua_pushnumber(EventSystem::getLuaState(),getId());
 		lua_setglobal(EventSystem::getLuaState(), "self");
 
+		// execute the lua chunk
 		EventSystem::executeCodeReference(ainfo->m_dyn_mod.m_lua_impl);
-
 		EventSystem::setCreatureDynAttrMod(0);
 	}
-
-	/*
-	if (act == "scare")
-	{
-
-			bmod.m_time =60000;
-			bmod.m_darmor = getBaseAttrMod()->m_armor;
-	}
-	else if (act == "berserk")
-	{
-			// Nur eine Schaetzung !
-			bmod.m_dwalk_speed = -1000;
-			bmod.m_dattack_speed = -500;
-	}
-	else if (act == "flamesword")
-	{
-
-			// Modifikationen:
-			// Flags fuer 120 sec
-			bmod.m_time =120000;
-			bmod.m_xspecial_flags |= (FLAMESWORD | FIRESWORD);
-	}
-	else if (act == "firesword")
-	{
-			// Modifikationen:
-			// Flag fuer 60 sec
-			bmod.m_time =60000;
-			bmod.m_xspecial_flags |=  FIRESWORD;
-	}
-	else if (act == "flamearmor")
-	{
-			// Modifikationen:
-			// Flag, 50% Feuerres,25% Feuermaxres fuer 60 sec
-			bmod.m_time = 100000;
-			bmod.m_xspecial_flags |= FLAMEARMOR;
-			bmod.m_dresistances_cap[Damage::FIRE] = 25;
-			bmod.m_dresistances[Damage::FIRE] = 50;
-	}
-	else if (act == "anger")
-	{
-
-			// Modifikationen:
-			// doppelte Staerke, halbierte Ruestung, Berserker fuer 30 sec
-			bmod.m_time = 40000;
-			bmod.m_dstrength =m_base_attr.m_strength;
-			bmod.m_darmor = -m_base_attr_mod.m_armor /2;
-	}
-	else if (act == "regenerate")
-	{
-		dmod.m_dhealth = 0.5f*m_base_attr_mod.m_max_health;
-	}
-	else if (act == "fury")
-	{
-
-
-			// Modifikationen:
-			// doppelte Staerke, -25% Ruestung, Berserker, erhoehte Angriffsgeschwindigkeit fuer 80 sec
-			bmod.m_time = 40000;
-			bmod.m_dstrength =m_base_attr.m_strength;
-			bmod.m_darmor = -m_base_attr_mod.m_armor /4;
-			bmod.m_dattack_speed = 1000;
-	}
-	else if (act == "static_shield")
-	{
-			// Modifikation:
-			// Flag fuer 18 Sekunden
-			bmod.m_time =18000;
-			bmod.m_xspecial_flags |= (STATIC_SHIELD);
-	}
-	else if (act == "aimed_shot")
-	{			// Modifikationen:
-			// 50% mehr Geschick fuer 50 sec
-			bmod.m_time = 50000;
-			bmod.m_ddexterity =m_base_attr.m_dexterity/2;
-	}
-	else if (act == "bow_spirit")
-	{
-			// Modifikationen
-			// 50% mehr Geschick, Flag fuer 50 sec
-			bmod.m_time = 50000;
-			bmod.m_ddexterity =m_base_attr.m_dexterity/2;
-			bmod.m_xspecial_flags |= CRIT_HITS;
-	}
-	else if (act == "ice_arrows")
-	{
-			// Modifikationen:
-			// Flag fuer 80 sec
-			bmod.m_time = 80000;
-			bmod.m_xspecial_flags |= ICE_ARROWS;
-	}
-	else if (act == "freezing_arrows")
-	{
-			// Modifikationen:
-			// Flags fuer 80 sec
-			bmod.m_time = 80000;
-			bmod.m_xspecial_flags |= (ICE_ARROWS | FROST_ARROWS);
-	}
-	else if (act == "wind_arrows")
-	{
-			// Modifikationen:
-			// Flag fuer 80 sec
-			bmod.m_time = 80000;
-			bmod.m_xspecial_flags |= WIND_ARROWS;
-	}
-	else if (act == "storm_arrows")
-	{
-			// Modifikationen:
-			// Flags fuer 80 sec
-			bmod.m_time = 80000;
-			bmod.m_xspecial_flags |= (WIND_ARROWS | STORM_ARROWS);
-	}
-	else if (act == "wind_walk")
-	{
-			// Modifikationen:
-			// Flag, erhoehte Laufgeschwindigkeit fuer 25 sec
-			bmod.m_time = 25000;
-			bmod.m_xspecial_flags |= WIND_WALK;
-			bmod.m_dwalk_speed = 1500;
-	}
-	else if (act == "burning_rage")
-	{
-			// Modifikationen:
-			// Flag fuer 80 sec
-			bmod.m_time =80000;
-			bmod.m_xspecial_flags |= BURNING_RAGE;
-	}
-	else if (act == "cure_blind_mute")
-	{
-			// Modifikation:
-			// heilt blind/stumm (wirkt nur auf Verbuendete)
-			dmod.m_dstatus_mod_immune_time[Damage::BLIND] = 1;
-			dmod.m_dstatus_mod_immune_time[Damage::MUTE] = 1;
-	}
-	else if (act == "blazing_shield")
-	{
-			// Modifikationen
-			// 50% der Willenskraft auf Blockwert fuer 60 sec
-			bmod.m_time =60000;
-			bmod.m_dblock = m_base_attr_mod.m_willpower /2;
-	}
-	else if (act == "cure_blind_mute_party")
-	{
-			// Modifikation:
-			// heilt blind/stumm, immunisiert fuer 30 sec (wirkt nur auf Verbuendete)
-			dmod.m_dstatus_mod_immune_time[Damage::BLIND] = 30000;
-			dmod.m_dstatus_mod_immune_time[Damage::MUTE] = 30000;
-	}
-	else if (act == "magic_shield")
-	{
-			// Modifikation:
-			// 50% mehr Willenskraft fuer 90 sec
-			bmod.m_time =90000;
-			bmod.m_dwillpower = m_base_attr_mod.m_willpower /2;
-	}
-	else if (act == "cure_pois_burn")
-	{
-			// Modifikation:
-			// heilt vergiftet/brennend (wirkt nur auf Verbuendete)
-			dmod.m_dstatus_mod_immune_time[Damage::POISONED] = 1;
-			dmod.m_dstatus_mod_immune_time[Damage::BURNING] = 1;
-	}
-	else if (act == "cure_pois_burn_party")
-	{
-			// Modifikation:
-			// heilt vergiftet/brennend und immunisiert fuer 30 sec (wirkt nur auf Verbuendete)
-			dmod.m_dstatus_mod_immune_time[Damage::POISONED] = 30000;
-			dmod.m_dstatus_mod_immune_time[Damage::BURNING] = 30000;
-	}
-	else if (act == "blade_storm")
-	{
-			// Modifikation:
-			// Angriffsgeschwindigkeit erhoeht fuer 70 sec
-			bmod.m_time =70000;
-			bmod.m_dattack_speed = 600;
-	}
-	else if (act == "cure_conf_bsrk")
-	{
-			// Modifikation:
-			// heilt verwirrt/Berserker (wirkt nur auf Verbuendete)
-			dmod.m_dstatus_mod_immune_time[Damage::CONFUSED] = 1;
-			dmod.m_dstatus_mod_immune_time[Damage::BERSERK] = 1;
-	}
-	else if (act == "cure_conf_bsrk_party")
-	{
-			// Modifikation:
-			// heilt verwirrt/Berserker und immunisiert fuer 30 sec (wirkt nur auf Verbuendete)
-			dmod.m_dstatus_mod_immune_time[Damage::CONFUSED] = 30000;
-			dmod.m_dstatus_mod_immune_time[Damage::BERSERK] = 30000;
-	}
-	else if (act == "keen_mind")
-	{
-			// Modifikation:
-			// 50% der Willenskraft auf Magie
-			bmod.m_time =70000;
-			bmod.m_dmagic_power = m_base_attr_mod.m_willpower/2;
-	}
-	else if (act == "heal")
-	{
-			dmod.m_dhealth = 3* m_base_attr_mod.m_willpower;
-	}
-	else if (act == "heal_party")
-	{
-			dmod.m_dhealth = 3* m_base_attr_mod.m_willpower;
-	}
-	*/
 }
 
 void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 {
-	// alles nullen
+	// initialize with zeros
 	dmg.init();
 
+	// set fraction to avoid friendly fire
 	dmg.m_attacker_id = getId();
 	dmg.m_attacker_fraction = m_fraction;
 
@@ -2930,95 +2645,101 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 		return;
 
 	DEBUGX("Calc Damage for action %s",act.c_str());
-
 	Action::ActionInfo* ainfo = Action::getActionInfo(act);
 	if (ainfo ==0 )
 		return;
 
+	// loop over C++ damage implementations
 	std::list<std::string>::iterator kt;
 	for (kt = ainfo->m_damage.m_cpp_impl.begin(); kt != ainfo->m_damage.m_cpp_impl.end(); ++kt)
 	{
 
-		// Schaden durch Basisattribute und ggf Ausruestung
+		// damage provided by attributes and equipement
 		calcBaseDamage(*kt,dmg);
 
-		// Modifikation des Schadens durch Faehigkeiten
+		// modify the damage according to the ability
 		calcAbilityDamage(*kt,dmg);
 	}
 
+	// lua implementation of the damage
 	if (ainfo->m_damage.m_lua_impl != LUA_NOREF)
 	{
+		// only variable set in the code is
+		// self == own ID
 		EventSystem::setRegion(getRegion());
+		// set the damage as *current object*
+		// and lua code with automatically write to it
 		EventSystem::setDamage(&dmg);
 
 		lua_pushnumber(EventSystem::getLuaState(),getId());
 		lua_setglobal(EventSystem::getLuaState(), "self");
 
-		//Timer t;
-		//t.start();
+		// execute the lua chunk
 		EventSystem::executeCodeReference(ainfo->m_damage.m_lua_impl);
-		//DEBUG("time %f",t.getTime());
 		EventSystem::setDamage(0);
 
 	}
 
-	// Eigenschaften durch passive  Faehigkeiten
+	// modifications by passive skills
 	if (checkAbility("critical_strike"))
 	{
-		// 10% extra Chance auf kritische Treffer
+		// 10% extra critical chance
 		dmg.m_crit_perc += 0.1;
 	}
 
-	// klirrende Kaelte
 	if (checkAbility("chill"))
 	{
-		// 20% mehr Schaden
+		// 20% additional ice damage
 		dmg.m_multiplier[Damage::ICE] *= 1.2;
 	}
 
 
-	// Entzuenden
+	// inflame: add some burning proportional to damage and magic power
 	if (checkAbility("inflame") && dmg.m_min_damage[Damage::FIRE]>0 )
 	{
 		dmg.m_status_mod_power[Damage::BURNING] += MathHelper::Min(int(dmg.m_min_damage[Damage::FIRE]) , m_base_attr_mod.m_magic_power);
 	}
 
 
-	// Eigenschaften durch temporaere Faehigkeiten
+	// modifications due to buffs
 
-	// Faehigkeit Feuer und Schwert
+	// firesword
 	if (m_base_attr_mod.m_special_flags & FIRESWORD)
 	{
+		// add fire damage
+		// but reduce physical damage
 		dmg.m_min_damage[Damage::PHYSICAL]*=0.75;
 		dmg.m_max_damage[Damage::PHYSICAL]*=0.75;
-		// Feuerschaden hinzufuegen
 		dmg.m_min_damage[Damage::FIRE] += MathHelper::Min(m_base_attr_mod.m_magic_power*4.0f,dmg.m_min_damage[Damage::PHYSICAL]);
 		dmg.m_max_damage[Damage::FIRE] += MathHelper::Min(m_base_attr_mod.m_magic_power*6.0f,dmg.m_max_damage[Damage::PHYSICAL]);
 
-		// kein Eisschaden
+		// remove the ice damage
 		dmg.m_min_damage[Damage::ICE]=0;
 		dmg.m_max_damage[Damage::ICE]=0;
 
 		if (m_base_attr_mod.m_special_flags & FLAMESWORD)
 		{
-			// Statusmod brennend austeilen
+			// for flamesword also add burning
 			dmg.m_status_mod_power[Damage::BURNING] += m_base_attr_mod.m_magic_power*3;
 		}
-
+		// convert the physical multiplier to fire
 		dmg.m_multiplier[Damage::FIRE] *= dmg.m_multiplier[Damage::PHYSICAL];
 		dmg.m_multiplier[Damage::PHYSICAL]=1;
 	}
 
-	// Elfenaugen
+	// elven eyes
 	if (m_base_attr_mod.m_special_flags & CRIT_HITS)
 	{
-		// +20% Chance auf kritische Treffer
+		// +20% extra critical chance
 		dmg.m_crit_perc += 0.2;
 	}
 
-	// Eispfeile
+	// ice arrows
 	if (m_base_attr_mod.m_special_flags & ICE_ARROWS)
 	{
+		// reduce physical damage
+		// but add ice damage
+		// remove fire damage
 		dmg.m_min_damage[Damage::ICE] += MathHelper::Min(m_base_attr_mod.m_magic_power*4.0f,dmg.m_min_damage[Damage::PHYSICAL]);
 		dmg.m_max_damage[Damage::ICE] += MathHelper::Min(m_base_attr_mod.m_magic_power*6.0f,dmg.m_max_damage[Damage::PHYSICAL]);
 		dmg.m_min_damage[Damage::PHYSICAL]*=0.5;
@@ -3028,15 +2749,19 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 
 		if (m_base_attr_mod.m_special_flags & FROST_ARROWS)
 		{
-			// Statusmod einfrieren
+			// for frost arrows also add freeze
 			dmg.m_status_mod_power[Damage::FROZEN] += m_base_attr_mod.m_magic_power*3;
 		}
+		// convert the physical multiplier to ice
 		dmg.m_multiplier[Damage::ICE] *= dmg.m_multiplier[Damage::PHYSICAL];
+		dmg.m_multiplier[Damage::PHYSICAL]=1;
 	}
 
-	// Windpfeile
+	// wind arrows
 	if (m_base_attr_mod.m_special_flags & WIND_ARROWS)
 	{
+		// reduce physical damage
+		// but add air damage
 		dmg.m_min_damage[Damage::AIR] += MathHelper::Min(m_base_attr_mod.m_magic_power*4.0f,dmg.m_min_damage[Damage::PHYSICAL]);
 		dmg.m_max_damage[Damage::AIR] += MathHelper::Min(m_base_attr_mod.m_magic_power*6.0f,dmg.m_max_damage[Damage::PHYSICAL]);
 		dmg.m_min_damage[Damage::PHYSICAL]*=0.5;
@@ -3044,33 +2769,34 @@ void Creature::calcDamage(Action::ActionType act,Damage& dmg)
 
 		if (m_base_attr_mod.m_special_flags & STORM_ARROWS)
 		{
-			// Statusmod paralyze
+			// for storm arrows also add paralyze and even more damage
 			dmg.m_status_mod_power[Damage::PARALYZED] += m_base_attr_mod.m_magic_power*2;
 			dmg.m_multiplier[Damage::AIR] *= 1.4;
 		}
 		dmg.m_multiplier[Damage::AIR] *= dmg.m_multiplier[Damage::PHYSICAL];
+		dmg.m_multiplier[Damage::PHYSICAL]=1;
 	}
 
-	// Statusmods
-	// Blind
+	// damage modifications due to status mods
+	// blind
 	if (m_dyn_attr.m_status_mod_time[Damage::BLIND]>0)
 	{
-		// keine kritischen Treffer, Attackewert reduzieren
+		// no critical hits, reduce precision
 		dmg.m_crit_perc=0;
 		dmg.m_attack *= 0.5;
 	}
 
-	// verwirrt
+	// confused
 	if (m_dyn_attr.m_status_mod_time[Damage::CONFUSED]>0)
 	{
-		// Fraktion auf feindlich gegen alle setzen
+		// set fraction to hostile to all -> allow friendly fire
 		dmg.m_attacker_fraction = Fraction::HOSTILE_TO_ALL;
 	}
 
-	// Faehigkeit brennende Wut
+	// skill burning rage
 	if (getBaseAttrMod()->m_special_flags & BURNING_RAGE)
 	{
-		// 50% mehr physischen Schaden
+		// 50% addition physical damage
 		dmg.m_multiplier[Damage::PHYSICAL] *= 1.5;
 	}
 }
@@ -3080,7 +2806,8 @@ void Creature::calcBaseDamage(std::string impl ,Damage& dmg)
 	CreatureBaseAttr* basm = getBaseAttrMod();
 	if (impl == "attack")
 	{
-		// Basisaktion ist normaler Angriff
+		// base action is normal melee attack
+		// damage based on strength (primary) and dexterity (secondary)
 		DEBUGX("base str %i mod str %i",m_base_attr.m_strength,basm->m_strength);
 
 		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_strength/4;
@@ -3101,7 +2828,8 @@ void Creature::calcBaseDamage(std::string impl ,Damage& dmg)
 
 	if (impl == "magic_attack")
 	{
-		// Basisaktion ist magischer Angriff
+		// base action is normal magic missile
+		// damage based on magic power (primary) and willpower (secondary)
 		dmg.m_min_damage[Damage::FIRE] += basm->m_magic_power/10;
 		dmg.m_min_damage[Damage::FIRE] += basm->m_willpower/20;
 		dmg.m_max_damage[Damage::FIRE] += basm->m_magic_power/6;
@@ -3113,7 +2841,8 @@ void Creature::calcBaseDamage(std::string impl ,Damage& dmg)
 
 	if (impl == "magic_attack_fire")
 	{
-		// Basisaktion ist magischer Angriff
+		// base action is magic fire missile
+		// damage based on magic power (primary) and willpower (secondary)
 		dmg.m_min_damage[Damage::FIRE] += basm->m_magic_power/6;
 		dmg.m_max_damage[Damage::FIRE] += basm->m_magic_power/3;
 		dmg.m_special_flags |= Damage::UNBLOCKABLE | Damage::IGNORE_ARMOR;
@@ -3122,7 +2851,8 @@ void Creature::calcBaseDamage(std::string impl ,Damage& dmg)
 
 	if (impl == "magic_attack_ice")
 	{
-		// Basisaktion ist magischer Angriff
+		// base action is magic ice missile
+		// damage based on magic power (primary) and willpower (secondary)
 		dmg.m_min_damage[Damage::ICE] += basm->m_magic_power/5;
 		dmg.m_max_damage[Damage::ICE] += basm->m_magic_power/4;
 		dmg.m_special_flags |= Damage::UNBLOCKABLE | Damage::IGNORE_ARMOR;
@@ -3131,7 +2861,8 @@ void Creature::calcBaseDamage(std::string impl ,Damage& dmg)
 
 	if (impl == "magic_attack_air")
 	{
-		// Basisaktion ist magischer Angriff
+		// base action is magic air missile
+		// damage based on magic power (primary) and willpower (secondary)
 		dmg.m_min_damage[Damage::AIR] += basm->m_magic_power/8;
 		dmg.m_max_damage[Damage::AIR] += basm->m_magic_power/2;
 		dmg.m_special_flags |= Damage::UNBLOCKABLE | Damage::IGNORE_ARMOR;
@@ -3140,7 +2871,8 @@ void Creature::calcBaseDamage(std::string impl ,Damage& dmg)
 
 	if (impl == "range_attack")
 	{
-		// Basisaktion ist Fernangriff
+		// base action is normal ranged attack
+		// damage based on dexterity (primary) and strength (secondary)
 		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_strength/10;
 		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_dexterity/6;
 		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_strength/8;
@@ -3158,7 +2890,8 @@ void Creature::calcBaseDamage(std::string impl ,Damage& dmg)
 
 	if (impl == "holy_attack")
 	{
-		// Basisaktion ist heiliger Angriff
+		// base action is basic holy attack
+		// damage based on willpower (primary) and strength (secondary)
 		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_strength/9;
 		dmg.m_min_damage[Damage::PHYSICAL] += basm->m_willpower/6;
 		dmg.m_max_damage[Damage::PHYSICAL] += basm->m_strength/6;
@@ -3177,8 +2910,8 @@ void Creature::calcBaseDamage(std::string impl ,Damage& dmg)
 
 void Creature::calcAbilityDamage(std::string impl, Damage& dmg)
 {
-	// CreatureBaseAttr* basm = getBaseAttrMod();
-
+	// few special modifications that can not be done in lua
+	// apply the speed multiplier for charge
 	if (impl == "charge")
 	{
 		dmg.m_multiplier[Damage::PHYSICAL] *= m_command.m_damage_mult;
@@ -3200,19 +2933,20 @@ void Creature::calcAbilityDamage(std::string impl, Damage& dmg)
 
 void Creature::recalcDamage()
 {
-
+	// interesting code only in Player::recalcDamage
 }
 
 void Creature::calcBaseAttrMod()
 {
 
 	int i;
+	// if HP or max HP is changed, the ratio is preserved
 	float hppercent = 1;
 	if (m_base_attr_mod.m_max_health != 0)
 	{
 		hppercent = m_dyn_attr.m_health / m_base_attr_mod.m_max_health;
 	}
-	// Alle Werte auf die Basiswerte setzen
+	// set all values to the base value
 	m_base_attr_mod.m_armor = m_base_attr.m_armor;
 	m_base_attr_mod.m_block =m_base_attr.m_block;
 	m_base_attr_mod.m_attack =m_base_attr.m_attack;
@@ -3242,7 +2976,8 @@ void Creature::calcBaseAttrMod()
 
 	m_base_attr_mod.m_special_flags = m_base_attr.m_special_flags;
 
-	// Alle Modifikationen neu anwenden, aber nicht neu in die Liste aufnehmen
+	// Reapply all current modifications, but do not add the to the list
+	// they are on the list already
 	std::list<CreatureBaseAttrMod>::iterator j;
 	for (j=m_dyn_attr.m_temp_mods.begin(); j!= m_dyn_attr.m_temp_mods.end();++j)
 	{
@@ -3251,7 +2986,7 @@ void Creature::calcBaseAttrMod()
 		applyBaseAttrMod(&(*j),false);
 	}
 
-	// Wirkungen durch passive Faehigkeiten
+	// modifications due to passive skills
 	if (checkAbility("resist_ice"))
 	{
 		m_base_attr_mod.m_resistances[Damage::ICE] += 20;
@@ -3267,31 +3002,29 @@ void Creature::calcBaseAttrMod()
 		m_base_attr_mod.m_resistances_cap[Damage::AIR] += 10;
 
 	}
-
-
 }
 
 
 bool Creature::takeDamage(Damage* d)
 {
-	// Lebewesen kann nur im Zustand aktiv Schaden nehmen
-	// und wenn es nicht gerade in einen Dialog verwickelt ist
+	// Check if it can be attacked
+	// false if dying or inactive for instance
 	if (!canBeAttacked())
 		return false;
 
 	DEBUGX("take Damage %i",getId());
-	// Testen ob der Verursacher des Schadens feindlich gesinnt ist
+	// check if own fraction and the damage fraction are hostile to each other
 	if (World::getWorld()->getRelation(d->m_attacker_fraction,this) != Fraction::HOSTILE)
 	{
-		// Verursacher ist nicht feindlich, kein Schaden
+		// no friendly fire
 		DEBUGX("not hostile, no dmg");
 		DEBUGX("fractions %i %i",d->m_attacker_fraction, this->getFraction());
 		return false;
 	}
 
 
-	// Testen ob man selbst der Verursacher ist
-	// (man kann sich selbst generell nicht schaden)
+	// check if you are not the damage-dealer
+	// (even with confused other other mods, one can never damage itself)
 	if (d->m_attacker_id == getId())
 	{
 		return false;
@@ -3302,17 +3035,18 @@ bool Creature::takeDamage(Damage* d)
 	float dmg=0,dmgt;
 	short res;
 	float rez = 1.0/RAND_MAX;
-	// testen ob der Schaden geblockt wird
+	// test for block
 	float blockchance =0;
 	if (!(d->m_special_flags & Damage::UNBLOCKABLE))
 	{
 		float block = m_base_attr_mod.m_block  ;
 		if (m_dyn_attr.m_status_mod_time[Damage::BLIND]>0)
 		{
+			// blind reduced block chance
 			block *= 0.5;
 		}
 
-		// Chance zu blocken
+		// compute the block chance the make the roll
 		if (d->m_attack>0 && block>0)
 		{
 			blockchance = 1-atan(d->m_attack/block)/(3.1415/2);
@@ -3321,7 +3055,7 @@ bool Creature::takeDamage(Damage* d)
 			DEBUGX("attack %f block %f -> blockchance %f",d->m_attack,block, blockchance);
 			if (Random::random()<blockchance)
 			{
-				// Schaden abgewehrt
+				// blocked, no damage
 				blocked = true;
 			}
 		}
@@ -3332,7 +3066,7 @@ bool Creature::takeDamage(Damage* d)
 
 	m_dyn_attr.m_last_attacker_id = d->m_attacker_id;
 
-	// Wirkungen durch passive Faehigkeiten
+	// avoid some status mods due to passive skills
 	if (checkAbility("concentration"))
 	{
 		d->m_status_mod_power[Damage::CONFUSED]=0;
@@ -3343,7 +3077,7 @@ bool Creature::takeDamage(Damage* d)
 		d->m_status_mod_power[Damage::BERSERK]=0;
 	}
 
-	// Testen auf kritische Treffer
+	// check for critical hits
 	bool critical = false;
 	if (rand()*rez <d->m_crit_perc)
 	{
@@ -3353,20 +3087,20 @@ bool Creature::takeDamage(Damage* d)
 	}
 
 
-	// Berechnen des Schadens
+	// compute the damage
 
-	// physischer Schaden
+	// physical damage first
 	dmgt = d->m_min_damage[Damage::PHYSICAL] + rand()*rez *(d->m_max_damage[Damage::PHYSICAL] -d->m_min_damage[Damage::PHYSICAL]);
 	dmgt *= d->m_multiplier[Damage::PHYSICAL];
 
-	// Resistenz anwenden
+	// resistance
 	res = MathHelper::Min (m_base_attr_mod.m_resistances_cap[Damage::PHYSICAL],m_base_attr_mod.m_resistances[Damage::PHYSICAL]);
 	dmgt *= 0.01*(100-res);
 
-	// Ruestung anwenden
+	// armor rating
 	float armor = m_base_attr_mod.m_armor;
 
-	// Faehigkeit Turm in der Schlacht
+	// increase armore due to steadfast ability
 	float physfaktor = 1.0;
 	if (checkAbility("steadfast"))
 	{
@@ -3375,6 +3109,7 @@ bool Creature::takeDamage(Damage* d)
 	}
 	dmgt *= physfaktor;
 
+	// reduce the damage due to armor
 	float armorfak = 1.0;
 	if (armor>0 && !(d->m_special_flags & Damage::IGNORE_ARMOR) && dmgt>0)
 	{
@@ -3387,7 +3122,7 @@ bool Creature::takeDamage(Damage* d)
 
 	DEBUGX("phys dmg %f",dmgt);
 
-	// Daten um Trefferwahrscheinlichkeiten / Schadensreduktion anzuzeigen
+	// update the statistics shows in the character screen
 	WorldObject* wo = getRegion()->getObject(d->m_attacker_id);
 	FightStatistic* fstat= &(getFightStatistic());
 	FightStatistic* attfstat=0;
@@ -3397,7 +3132,7 @@ bool Creature::takeDamage(Damage* d)
 		attfstat = &(attacker->getFightStatistic());
 	}
 
-	// eigene Daten setzen
+	// update own statistic data
 	if (wo !=0 && getType()=="PLAYER")
 	{
 		if (fabs(fstat->m_block_chance - blockchance) >0.01
@@ -3413,13 +3148,13 @@ bool Creature::takeDamage(Damage* d)
 		}
 	}
 
-	// Daten des Angreifers setzen
+	// update attackers statistic data
 	if (attacker !=0 && attacker->getType()=="PLAYER")
 	{
 		attacker->updateFightStat(1-blockchance, armorfak,getName());
 	}
 
-	// wenn Schaden geblockt wurde, hier beenden
+	// if damage was blocked end here
 	if (blocked)
 	{
 		FloatingText::Size size = FloatingText::NORMAL;
@@ -3434,14 +3169,14 @@ bool Creature::takeDamage(Damage* d)
 		return true;
 	}
 
-	// restliche 3 Schadensarten
+	// remaining three damage types
 	int i;
 	for (i=Damage::AIR;i<=Damage::FIRE;i++)
 	{
 		dmgt = d->m_min_damage[i] + rand()*rez *(d->m_max_damage[i] -d->m_min_damage[i]);
 		dmgt *= d->m_multiplier[i];
 
-		// Resistenz anwenden
+		// apply resistance
 		res = MathHelper::Min(m_base_attr_mod.m_resistances_cap[i],m_base_attr_mod.m_resistances[i]);
 		dmgt *=0.01*(100-res);
 
@@ -3451,12 +3186,14 @@ bool Creature::takeDamage(Damage* d)
 	}
 
 	float t;
-	// Anwenden der Statusveraenderungen
+	// apply status mods: loop over status mods
 	for (i=0;i<NR_STATUS_MODS;i++)
 	{
-		// Anwenden wenn nicht immun, nicht temporaer immun und Staerke der Modifikation groesser als die eigene Willenskraft
+		// check that mod power is >0
+		// and this creature is neither permanent nor temporily immune
 		if (d->m_status_mod_power[i]>0 && !(m_base_attr_mod.m_immunity & (1 << i)) && m_dyn_attr.m_status_mod_immune_time[i]==0)
 		{
+			// compute chance to be affected
 			float rel;
 			if (m_base_attr_mod.m_willpower == 0)
 			{
@@ -3468,9 +3205,12 @@ bool Creature::takeDamage(Damage* d)
 			}
 			float chance = atan(rel)/(3.1415/2);
 			DEBUGX("mod %i modpow %i wp %i chance %f",i,d->m_status_mod_power[i],m_base_attr_mod.m_willpower,chance);
+			
+			// make the roll
 			if (Random::random()<chance)
 			{
-				// Modifikation anwenden
+				// apply modification
+				// duration depends on the type and on modpower/willpower ratio
 				float times[NR_STATUS_MODS] = {15000 /* BLIND*/,10000 /*POISONED*/ ,10000 /*BERSERK*/ ,8000 /*CONFUSED*/,15000 /*MUTE*/,4000 /*PARALYZED*/,2500 /*FROZEN*/,10000 /*BURNING*/};
 				t = rel * times[i];
 				if (t>m_dyn_attr.m_status_mod_time[i] && t>500)
@@ -3486,7 +3226,7 @@ bool Creature::takeDamage(Damage* d)
 
 	DEBUGX("sum dmg %f / %f",dmg,getDynAttr()->m_health );
 
-	// Extraschaden berechnen
+	// triple damage, if the damage is especially efficient agains the own race
 	if (d->m_extra_dmg_race == getRace() && getRace() != "")
 	{
 		DEBUGX("triple damage");
@@ -3494,7 +3234,7 @@ bool Creature::takeDamage(Damage* d)
 		critical = true;
 	}
 	
-	// defensive passive abilities agains specific races
+	// defensive passive abilities agains specific races (priest)
 	if (attacker != 0 && attacker->getRace() != "")
 	{
 		if ((checkAbility("dmgreduce_undead") && attacker->getRace() == "undead")
@@ -3505,25 +3245,26 @@ bool Creature::takeDamage(Damage* d)
 		}
 	}
 
-	// Lebenspunkte abziehen
+	// reduce the hitpoints (finally)
 	getDynAttr()->m_health -= dmg;
 
+	// apply bleeding effect
 	if (dmg>0)
 	{
 		m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING] = MathHelper::Max(m_dyn_attr.m_effect_time[CreatureDynAttr::BLEEDING],250.0f);
 		addToNetEventMask(NetEvent::DATA_HP | NetEvent::DATA_EFFECTS);
 	}
-    
-    
+
+	// if health drops below 0, die
 	if (getDynAttr()->m_health <= 0)
 	{
 		die();
 	}
 
-	// Statikschild wenn mehr als 2% der Lebenspunkte verloren
+	// static shield can trigger if more than 2% of the HP were lost
 	if ((m_base_attr_mod.m_special_flags & STATIC_SHIELD) && dmg > m_base_attr_mod.m_max_health * 0.02)
 	{
-		// Schaden festlegen
+		// compute static shield damage
 		Damage dmg;
 		dmg.m_status_mod_power[Damage::PARALYZED] = m_base_attr_mod.m_magic_power;
 		dmg.m_min_damage[Damage::AIR] = m_base_attr_mod.m_magic_power*0.2;
@@ -3531,7 +3272,7 @@ bool Creature::takeDamage(Damage* d)
 		dmg.m_multiplier[Damage::AIR]=1;
 		dmg.m_attacker_fraction = m_fraction;
 
-		// Projektil Statikschild erzeugen
+		// create the static shield effect
 		Projectile* pr = ObjectFactory::createProjectile("static_shield");
 		if (pr !=0)
 		{
@@ -3542,8 +3283,7 @@ bool Creature::takeDamage(Damage* d)
 	}
 
 
-
-	// Trigger erzeugen
+	// create event for the scripting engine
 	Trigger* tr = new Trigger("unit_hit");
 	tr->addVariable("defender",getId());
 	tr->addVariable("attacker",d->m_attacker_id);
@@ -3552,7 +3292,7 @@ bool Creature::takeDamage(Damage* d)
 
 	WorldObject::takeDamage(d);
 
-	// Visualisierung erzeugen
+	// create the damage visualization
 	if (getRegion()!= 0 && World::getWorld()->isServer() && dmg>0.5 && !(d->m_special_flags & Damage::NOVISUALIZE))
 	{
 		FloatingText::Size size = FloatingText::NORMAL;
@@ -3602,9 +3342,10 @@ void Creature::applyDynAttrMod(CreatureDynAttrMod* mod)
 void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 {
 	int i;
-	// Deltawerte dazu addieren
+	// add all the delta values
 	float oldmaxhp = m_base_attr_mod.m_max_health;
 
+	// dexterity influences attack speed only up to a value of 80 for balancing reasons
 	if (m_base_attr_mod.m_dexterity + mod->m_ddexterity < 80)
 	{
 		m_base_attr_mod.m_attack_speed += mod->m_ddexterity*10;
@@ -3630,7 +3371,7 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 
 	m_base_attr_mod.m_attack_speed +=mod->m_dattack_speed;
 
-	// Modifikationen feststellen
+	// check which data to send via network
 	if (mod->m_dwalk_speed!=0 )
 	{
 		addToNetEventMask(NetEvent::DATA_ATTACK_WALK_SPEED);
@@ -3644,7 +3385,7 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 		addToNetEventMask(NetEvent::DATA_ATTRIBUTES_LEVEL | NetEvent::DATA_HP);
 	}
 
-	// einige Untergrenzen pruefen
+	// check a few lower bounds
 	m_base_attr_mod.m_strength = MathHelper::Max(m_base_attr_mod.m_strength,(short) 1);
 	m_base_attr_mod.m_dexterity = MathHelper::Max(m_base_attr_mod.m_dexterity,(short) 1);
 	m_base_attr_mod.m_willpower = MathHelper::Max(m_base_attr_mod.m_willpower,(short) 1);
@@ -3652,7 +3393,7 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 	m_base_attr_mod.m_walk_speed = MathHelper::Max(m_base_attr_mod.m_walk_speed,(short) 200);
 	m_base_attr_mod.m_attack_speed = MathHelper::Max(m_base_attr_mod.m_attack_speed,(short) 200);
 
-	// Resistenzen dazu addieren
+	// add resistances
 	for (i=0;i<4;i++)
 	{
 		m_base_attr_mod.m_resistances[i] += mod->m_dresistances[i];
@@ -3660,7 +3401,7 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 
 	}
 
-	// Faehigkeiten mit OR hinzufuegen
+	// skills are managed with bitmasks, OR them
 	std::set<std::string>::iterator it;
 	for (it = mod->m_xabilities.begin(); it != mod->m_xabilities.end(); ++it )
 	{
@@ -3668,14 +3409,14 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 		addToNetEventMask(NetEvent::DATA_ABILITIES);
 	}
 
-	// Flags setzen
+	// set flags
 	if (mod->m_flag != "")
 	{
 		setFlag(mod->m_flag, true);
 		addToNetEventMask(NetEvent::DATA_FLAGS);
 	}
 
-	// Flags mit OR hinzufuegen
+	// immunities are stored in bitmasks, OR them
 	m_base_attr_mod.m_special_flags |= mod->m_xspecial_flags;
 	m_base_attr_mod.m_immunity |= mod->m_ximmunity;
 
@@ -3684,12 +3425,12 @@ void Creature::applyBaseAttrMod(CreatureBaseAttrMod* mod, bool add)
 		addToNetEventMask(NetEvent::DATA_FLAGS);
 	}
 
-	// Wenn add == true in die Liste der wirksamen Modifikationen aufnehmen
+	// add it to the list
 	if (mod->m_time!=0 && add)
 	{
 		m_dyn_attr.m_temp_mods.push_back(*mod);
 
-		// Schaden neu berechnen
+		// update damage
 		recalcDamage();
 	}
 
@@ -3701,7 +3442,7 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 	bool ret = false;
 	float oldmaxhp = m_base_attr_mod.m_max_health;
 
-	// Deltas abziehen
+	// substract all the deltas
 	m_base_attr_mod.m_armor -=mod->m_darmor;
 	m_base_attr_mod.m_block -=mod->m_dblock;
 	m_base_attr_mod.m_strength -=mod->m_dstrength;
@@ -3712,6 +3453,7 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 	m_base_attr_mod.m_attack_speed -=mod->m_dattack_speed;
 	m_base_attr_mod.m_max_health -= mod->m_dstrength*5;
 
+	// dexterity influences attack speed only up to a value of 80 for balancing reasons
 	if (m_base_attr_mod.m_dexterity + mod->m_ddexterity < 80)
 	{
 		m_base_attr_mod.m_attack_speed -= mod->m_ddexterity*10;
@@ -3727,7 +3469,7 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 	m_base_attr_mod.m_attack -=mod->m_dattack;
 	m_base_attr_mod.m_power -=mod->m_dpower;
 
-	// Modifikationen feststellen
+	// check which data to send via network
 	if (mod->m_dwalk_speed!=0)
 	{
 		addToNetEventMask(NetEvent::DATA_ATTACK_WALK_SPEED);
@@ -3748,21 +3490,24 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 
 	}
 
-	// Flags entfernen
+	// remove flag
+	// recalculate the modified attribute, because the flag might be still activated by another mod
 	if (mod->m_flag != "")
 	{
 		setFlag(mod->m_flag, false);
 		ret = true;
 	}
 
-	// Wenn Faehigkeit veraendert wurde neu berechnen
+	// recalculate if abilities were altered
+	// because you can not know if the ability was available before applying the mod
 	if ( mod->m_xabilities.size() !=0)
 	{
 		ret = true;
 		addToNetEventMask(NetEvent::DATA_ABILITIES);
 	}
 
-	// Wenn Flags veraendert wurden neu berechnen
+	// remove flag
+	// recalculate the modified attribute, because the flag might be still activated by another mod
 	if (mod->m_xspecial_flags!=0)
 	{
 		addToNetEventMask(NetEvent::DATA_FLAGS);
@@ -3772,7 +3517,6 @@ bool Creature::removeBaseAttrMod(CreatureBaseAttrMod* mod)
 	if( mod->m_ximmunity!=0)
 		ret = true;
 
-	// Schaden neu berechnen
 	recalcDamage();
 
 	return ret;
@@ -3791,15 +3535,15 @@ void Creature::removeAllBaseAttrMod()
 
 void Creature::getPathDirection(Vector pos,short region, float base_size, short layer, Vector& dir)
 {
-	// maximale Entfernung bei der normale Wegfindung genommen wird
+	// maximal distance where the gradient field is used
 	int pathmaxdist = 16;
 
 	PathfindInfo** pi= &m_small_path_info;
 	int bsize =1;
-	// true wenn wegsuchendes Objekt fliegt
+	// true if the other object is flying
 	bool fly=false;
 
-	// ermitteln welche Wegfindeinformation genutzt werden soll
+	// select the gradient field based on information about the other object
 	if (base_size>1)
 	{
 		DEBUGX("switching to medium size info");
@@ -3821,37 +3565,38 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 		fly = true;
 	}
 
-	// true, wenn einfach direkter Weg zum Ziel gewaehlt werden soll
+	// true, if direct position->target vector should be used
 	bool direct = false;
 
-	// true, wenn Wegfindeinformation neu berechnet werden muss
+	// true, if gradient field has to be recalculated
 	bool recalc = false;
 
-	// Position des Zielobjekts
+	// position of the target
+	// (itself, as the goal is to get to this object)
 	Vector goal = getShape()->m_center;
 
 
 	if (*pi == 0)
 	{
-		// Wegfindeinfo existiert noch nicht
+		// data structure does not exist yet
 		*pi = new PathfindInfo;
-		// Qualitaet der Suche
 		int qual=4;
 		int dim = 2*pathmaxdist * qual / bsize +1;
 
-		// Potenzialmatrix
+		// matrix containing *height*/potential of fields
 		(*pi)->m_pot = new Matrix2d<float>(dim,dim);
-		// Blockmatrix
+		// matrix containing blocked fields
 		(*pi)->m_block = new Matrix2d<char>(dim,dim);
 
 		(*pi)->m_dim = dim;
 
-		// Ebene ist Base und Air fuer normale, nur AIR fuer fliegende Lebewesen
+		// layer to search for obstacles
 		(*pi)->m_layer= LAYER_BASE | LAYER_AIR;
 		if (fly)
 		{
 			(*pi)->m_layer= LAYER_AIR;
 		}
+		
 		(*pi)->m_region=getRegionId();
 		(*pi)->m_base_size = bsize;
 		(*pi)->m_quality=qual;
@@ -3863,39 +3608,38 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 	{
 		if ( (*pi)->m_region != getRegionId())
 		{
-			// Wegfindeinformation gilt fuer eine andere Region als die, in der sich das Lebewesen befindet
-			// Region neu setzen und neu berechnen
+			// gradient field belongs to another region, recalculate
 			(*pi)->m_region=getRegionId();
 			recalc = true;
 			DEBUGX("recalc: new in Region");
 		}
 
-		// Ziel befindet sich in einer anderen Region, keinen Weg angeben
+		// target is in another region, do not return any direction
 		if ( region != getRegionId())
 		{
 			dir = Vector(0,0);
 			return;
 		}
 
-		// Abstand aktuelle Position zu Position fuer die die Wegfindeinformation erstellt wurde
+		// distance of current position <-> own position when last gradient field was computed
 		float d = (*pi)->m_start.distanceTo(goal);
 
-		// Abstand des wegsuchenden Objektes zur einen Position
+		// distance of path searching object to itself
 		float d2 = (*pi)->m_start.distanceTo(pos);
 
 		if (fabs(goal.m_x - pos.m_x)>pathmaxdist || fabs(goal.m_y - pos.m_y)>pathmaxdist)
 		{
-			// Direkte Wegsuche wenn das Ziel in einer Richtung mehr als 10 entfernt ist
+			// direct connection, if other object is too far away
 			direct = true;
 		}
 		else if (d>(*pi)->m_base_size && d > 0.25*d2)
 		{
-			// Ziel hat sich deutlich bewegt, neuen Weg suchen
+			// target has moved considerably, recalculate
 			DEBUGX("recalc: goal has moved");
 			recalc = true;
 		}
 
-		// Wenn Informationen ueber 500ms alt neu berechnen
+		// data is too old, recalculate
 		if ((*pi)->m_timer >500)
 		{
 			DEBUGX("recalc: info too old");
@@ -3906,21 +3650,21 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 
 	if (recalc && !direct)
 	{
-		// neu berechnen
+		// recalculate the gradient field
 		DEBUGX("recalc");
-		// Zentrum und Senke sind die aktuelle Position
+		// center and sink of the field is the own position
 		(*pi)->m_start= goal;
 		(*pi)->m_center= goal;
 		(*pi)->m_timer =0;
 
-		// Blockmatrix berechnen
+		// get matrix of blocked fields
 		bool suc;
 		suc = World::getWorld()->calcBlockmat(*pi);
 		if (suc!=true)
 			direct = true;
 		else
 		{
-			// Potentialfeld berechnen
+			// calculate the field
 			suc = World::getWorld()->calcPotential(*pi);
 			if (suc!=true)
 				direct = true;
@@ -3930,8 +3674,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 	if (direct)
 	{
 		DEBUGX("direct way");
-		// Direkte Richtung
-		// Vektor vom Start zum Ziel, normiert
+		// use the direct vector to the target
 		dir = goal - pos;
 		dir.normalize();
 
@@ -3939,7 +3682,7 @@ void Creature::getPathDirection(Vector pos,short region, float base_size, short 
 	else
 	{
 		DEBUGX("use pot field");
-		// Potentialfeld verwenden um die Richtung zu berechnen
+		// use the gradient field to compute the direction
 		World::getWorld()->calcPathDirection(*pi, pos, dir);
 	}
 }
@@ -3960,7 +3703,7 @@ void Creature::toString(CharConv* cv)
 
 
 
-	// Statusveraenderungen
+	// status mods
 	char c=0;
 	for (int i=0;i<NR_STATUS_MODS;i++)
 	{
@@ -3978,7 +3721,7 @@ void Creature::toString(CharConv* cv)
 		}
 	}
 
-	// Effekte
+	// effects
 	for (int i=0;i<NR_EFFECTS;i++)
 	{
 		cv->toBuffer(m_dyn_attr.m_effect_time[i]);
@@ -4029,7 +3772,7 @@ void Creature::fromString(CharConv* cv)
 	cv->fromBuffer(m_base_attr_mod.m_max_health);
 	m_base_attr.m_max_health = m_base_attr_mod.m_max_health;
 	DEBUGX("read offset: %i",cv->getBitStream()->GetReadOffset());
-	// Statusveraenderungen
+	// status mods
 	char c=0;
 	cv->fromBuffer(c);
 
@@ -4298,6 +4041,8 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 		DEBUGX("got Command %s",m_command.m_type.c_str());
 	}
 
+	// most data is just set instantly
+	// speed and position are interpolated
 	float  atime = m_action.m_time - m_action.m_elapsed_time;
 
 	Vector newpos= getShape()->m_center;
@@ -4382,7 +4127,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 		char ctmp;
 		cv->fromBuffer(ctmp);
 
-		// einige fuer die Steuerung wichtige zustaende werden ausgeklammert
+		// few internal states are not copied
 		if (ctmp <=STATE_DEAD || ctmp >=STATE_STATIC)
 		{
 			if (oldstate != STATE_DIEING && oldstate != STATE_DEAD && (ctmp==STATE_DIEING || ctmp == STATE_DEAD))
@@ -4489,9 +4234,10 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 		setDialogue(id);
 	}
 
+	// interpolation code for movement
 	if (newmove)
 	{
-		// Zielort der Aktion berechnen
+		// compute final position of the movement
 		float acttime = m_action.m_time - m_action.m_elapsed_time;
 		goal = newpos + newspeed * acttime;
 
@@ -4500,7 +4246,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 		gettimeofday(&tv, NULL);
 		DEBUG("time elapsed ingame %f delay %i system time %i",etime,cv->getDelay(),tv.tv_usec/1000);
 		*/
-		// Zeit die zum erreichen des Zieles uebrig ist
+		// time remaining to reach this point
 		float goaltime = acttime;
 		if (event->m_data & NetEvent::DATA_ACTION)
 		{
@@ -4516,16 +4262,18 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 
 		if (goaltime <0)
 		{
-			// wenn man schon lange da sein muesste, Objekt an den Zielort versetzen
+			// you should be already there, jump to the target position
 			moveTo(goal);
 		}
 		else
 		{
 			DEBUGX("pos %f %f speed %f %f", getShape()->m_center.m_x, getShape()->m_center.m_y, getSpeed().m_x, getSpeed().m_y);
-			// Bewegungsgeschwindigkeit so setzen, dass Ziel in der richtigen Zeit erreicht wird
+			// adjust speed, so that the target position is reached in time
 			Vector calcspeed = (goal - getShape()->m_center) * (1/goaltime);
 			setSpeed(calcspeed);
 
+			// if calculated speed gets to high
+			// reduce speed and do a jump instead
 			if (calcspeed.getLength() > 4* newspeed.getLength())
 			{
 				moveTo(goal - newspeed * goaltime);
@@ -4536,13 +4284,14 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 
 	}
 
+	// action interpolation code
 	if (newact)
 	{
 		m_action.m_elapsed_time += delay;
 
 		if (m_action.m_elapsed_time> m_action.m_time)
 		{
-			// Aktion sollte schon beenden sein
+			// action should be completed already
 			if (!newmove)
 			{
 				moveTo(newpos);
@@ -4555,10 +4304,11 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 		}
 		else
 		{
-			// Drehwinkel korrekt setzen
+			// adjust the angle
 			if (!newmove && m_action.m_type != "noaction")
 			{
-				// Wenn die Aktion nicht laufen ist, Spieler an die richtige Position versetzen
+				// if the action is not walk, jump to the correct position
+				// TODO: perhaps allow some small differences here
 				moveTo(newpos);
 				getShape()->m_angle = newangle;
 
@@ -4695,8 +4445,8 @@ bool Creature::setValue(std::string valname)
 			addToNetEventMask(NetEvent::DATA_ACTION | NetEvent::DATA_STATE);
 		}
 
-		// Solange Level aufsteigen, bis exp < max_exp
-		// Fuer den Fall dass Exp geaendert wurde
+		// if experience was changed
+		// gain levelups until experience is smaller than max experience
 		while (m_dyn_attr.m_experience>= m_base_attr.m_max_experience && m_dyn_attr.m_experience>0)
 		{
 			gainLevel();
@@ -4717,7 +4467,8 @@ void Creature::clearSpeakText()
 
 void Creature::speakText(CreatureSpeakText& text)
 {
-	// Text aus Dialogen hat Vorrang
+	// text from dialogues has higher priority
+	// do not overwrite dialogue text with non-dialogue text
 	if (text.m_in_dialogue == false && !m_speak_text.empty() && m_speak_text.m_in_dialogue)
 	{
 		return;
@@ -4746,7 +4497,7 @@ void Creature::sellItem(short position, Item* &item, int& gold)
 {
 	if (getEquipement() !=0)
 	{
-		// Item das verkauft wird
+		// get the item to be sold from the inventory
 		Item* it = 0;
 		getEquipement()->swapItem(it,position);
 
@@ -4754,10 +4505,12 @@ void Creature::sellItem(short position, Item* &item, int& gold)
 		{
 			item = it;
 
-			// Geld abziehen
+			// the gold variable references to the buyers gold
+			// so substract the price
 			gold -= item->m_price;
 			item->m_price = (int) ((item->m_price+0.999f) / m_trade_info.m_price_factor );
 
+			// inform other clients via network
 			NetEvent event;
 			event.m_type =  NetEvent::TRADER_ITEM_SELL;
 			event.m_data = position;
@@ -4765,6 +4518,7 @@ void Creature::sellItem(short position, Item* &item, int& gold)
 
 			getRegion()->insertNetEvent(event);
 
+			// this ensures that the last sold item can be taken back for full price
 			m_trade_info.m_last_sold_item = item;
 		}
 		else
@@ -4782,8 +4536,9 @@ void Creature::buyItem(Item* &item, int& gold)
 		NPCTrade& tradeinfo = Dialogue::getNPCTrade(getRefName());
 		float factor = tradeinfo.m_pay_multiplier;
 
-		// Geld auszahlen
-		// zuletzt gekauftes Item kann zum vollen Preis zurueck gegebebn werden
+		// gold refers to the sellers gold
+		// so add the price
+		// special rule: last item bought can be give back for the full price
 		if (item == m_trade_info.m_last_sold_item)
 		{
 			gold +=(int) (item->m_price * m_trade_info.m_price_factor);
@@ -4794,7 +4549,7 @@ void Creature::buyItem(Item* &item, int& gold)
 		}
 		item->m_price = (int) (item->m_price * m_trade_info.m_price_factor);
 
-		// beim Haendler einfuegen
+		// insert the item into the traders inventory
 		short pos = getEquipement()->insertItem(item,false,false);
 		if (pos == Equipement::NONE)
 		{
@@ -4802,6 +4557,7 @@ void Creature::buyItem(Item* &item, int& gold)
 		}
 		else
 		{
+			// inform other clients via network
 			NetEvent event;
 			event.m_type =  NetEvent::TRADER_ITEM_BUY;
 			event.m_data = pos;
@@ -4854,14 +4610,15 @@ std::string Creature::getActionString()
 
 	if (m_action.m_type == "noaction")
 	{
-		// bei Noaction wird das Animationssystem von WorldObject angefragt
-		// im Fall von Sprechen statt noaction talk ausgeben
+		// Base class has a system for displaying animations without any ingame action
+		// check this before playing an idle animation
 		std::string act = WorldObject::getActionString();
 		if (act != "")
 		{
 			return act;
 		}
 
+		// do a speak animation instead of idle, if speech text is present
 		if (!getSpeakText().empty())
 		{
 			return "talk";
@@ -4873,21 +4630,24 @@ std::string Creature::getActionString()
 
 float Creature::getActionPercent()
 {
+	// this ensures that the corpse is just lying there...
 	if (getState() == STATE_DEAD)
 		return 0.999999;
 
 	if (m_action.m_type == "noaction")
 	{
-		// bei Noaction wird das Animationssystem von WorldObject angefragt
-		// im Fall von Sprechen statt noaction talk ausgeben
+		// Base class has a system for displaying animations without any ingame action
+		// check this before playing an idle animation
 		std::string act = WorldObject::getActionString();
 		if (act != "")
 		{
 			return WorldObject::getActionPercent();
 		}
 
+		// do a speak animation instead of idle, if speech text is present
 		if (!getSpeakText().empty())
 		{
+			// periodic animation with period of 1000ms
 			return fmod(getSpeakText().m_displayed_time,1000.0f)/1000.0f;
 		}
 	}
@@ -4899,7 +4659,7 @@ void Creature::getFlags(std::set<std::string>& flags)
 {
 	WorldObject::getFlags(flags);
 
-	// Statusmods
+	// status mods
 	float* mods = m_dyn_attr.m_status_mod_time;
 	static const std::string modnames[NR_STATUS_MODS]= {"blind", "poisoned", "berserk","confused", "mute", "paralyzed", "frozen", "burning" };
 	for (int i=0; i<NR_STATUS_MODS; i++)
@@ -4910,7 +4670,7 @@ void Creature::getFlags(std::set<std::string>& flags)
 		}
 	}
 
-	// Effekte
+	// other effects
 	float* effects = m_dyn_attr.m_effect_time;
 	static const std::string effectnames[NR_EFFECTS]= {"bleed"};
 	for (int i=0; i<NR_EFFECTS; i++)
@@ -4921,7 +4681,7 @@ void Creature::getFlags(std::set<std::string>& flags)
 		}
 	}
 
-	// weitere Flags
+	// additional flags
 	int flgs = m_base_attr_mod.m_special_flags;
 	if (flgs & FIRESWORD)
 		flags.insert("firesword");
@@ -4951,7 +4711,6 @@ void Creature::clearFlags()
 {
 	WorldObject::clearFlags();
 
-	// Status flags loeschen
 	for ( int i=0; i< NR_STATUS_MODS; i++)
 	{
 		m_dyn_attr.m_status_mod_time[i] =0;
