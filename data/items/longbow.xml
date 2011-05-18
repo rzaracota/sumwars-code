@@ -64,7 +64,7 @@
 		damage_max_physical="17"
 		damage_attack="42"
 		damage_power="45"
-		attack_range="1.0"
+		attack_range="8.0"
 		two_handed="yes"
 		dattack_speed="-300"
 	/>
