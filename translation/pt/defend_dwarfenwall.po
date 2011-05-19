@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-07 21:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: siegeOfDwarfenwall.xml
@@ -39,7 +39,8 @@ msgid "dwarfenwallCommand"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "... wind-elementals did see it clearly: It's only this one lich leading them."
+msgid ""
+"... wind-elementals did see it clearly: It's only this one lich leading them."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -71,7 +72,9 @@ msgid "It should be here shortly."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "First they send away the mage of Northborough and than they send in backup again?"
+msgid ""
+"First they send away the mage of Northborough and than they send in backup "
+"again?"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -87,11 +90,15 @@ msgid "Of course."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "I don't like saying this, but until an army makes it's way here, our bodies are long fighting for the other side, venerated lady."
+msgid ""
+"I don't like saying this, but until an army makes it's way here, our bodies "
+"are long fighting for the other side, venerated lady."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "Excuse me for interrupting like that, but small groups travel considerably faster then armies."
+msgid ""
+"Excuse me for interrupting like that, but small groups travel considerably "
+"faster then armies."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -139,7 +146,9 @@ msgid "A handful of mercenaries?"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "You will realize the worth of our assistance, when they fall for you again and again."
+msgid ""
+"You will realize the worth of our assistance, when they fall for you again "
+"and again."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -159,11 +168,15 @@ msgid "Personally I like the term Branded One somehow better."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "If the price is right I let myself be torn apart as often as need be to protect the town."
+msgid ""
+"If the price is right I let myself be torn apart as often as need be to "
+"protect the town."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "If the price is right we let ourselves be torn apart as often as need be to protect the town."
+msgid ""
+"If the price is right we let ourselves be torn apart as often as need be to "
+"protect the town."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -299,11 +312,15 @@ msgid "Let us begin with the last rush on this wretched stronghold."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "I reckon there is so many undead back there that your oh-so mighty backup will not be able to avert our death."
+msgid ""
+"I reckon there is so many undead back there that your oh-so mighty backup "
+"will not be able to avert our death."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "This... backup is not the only thing the council can and will do for Dwarfenwall."
+msgid ""
+"This... backup is not the only thing the council can and will do for "
+"Dwarfenwall."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -319,7 +336,8 @@ msgid "Of course I couldn't know, where the undead would attack."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "I'm afraid, there will be quite some cleaning up to do by the survivors."
+msgid ""
+"I'm afraid, there will be quite some cleaning up to do by the survivors."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -331,7 +349,9 @@ msgid "Acursed elementalists!"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "It will be a great pleasure to reanimate the body of that witch only to burn her!"
+msgid ""
+"It will be a great pleasure to reanimate the body of that witch only to burn "
+"her!"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -451,7 +471,9 @@ msgid "Did you now there was a wild man here two-hundred years ago?"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "The humans called him the giant killer and didn't want to have anything to do with him."
+msgid ""
+"The humans called him the giant killer and didn't want to have anything to "
+"do with him."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -507,7 +529,9 @@ msgid "Finally."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "The road from the Grey Skyladder into this desolate and sear plain was long, you know."
+msgid ""
+"The road from the Grey Skyladder into this desolate and sear plain was long, "
+"you know."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -519,7 +543,9 @@ msgid "Are we here to count the bugs on our estates?"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "You are right. Could you move those really unnerving people over there out of the way?"
+msgid ""
+"You are right. Could you move those really unnerving people over there out "
+"of the way?"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -571,7 +597,9 @@ msgid "That explaines a lot."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "But even they will not be able to hold the city once the wretched humans are gone."
+msgid ""
+"But even they will not be able to hold the city once the wretched humans are "
+"gone."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -627,7 +655,9 @@ msgid "And thanks to the councils backing the city is still standing."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "I have to admit, I wouldn't have thought in my wildest dreams that someone could fight like that."
+msgid ""
+"I have to admit, I wouldn't have thought in my wildest dreams that someone "
+"could fight like that."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -655,7 +685,9 @@ msgid "There is no big difference to normal mercenaries."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "Maybe aside from the fact, that Branded Ones don't change sides in the middle."
+msgid ""
+"Maybe aside from the fact, that Branded Ones don't change sides in the "
+"middle."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -663,7 +695,9 @@ msgid "Enough of that. Let's talk in the command center."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "It wouldn't be wise to hit the soldiers over the head who their saviours were."
+msgid ""
+"It wouldn't be wise to hit the soldiers over the head who their saviours "
+"were."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -683,7 +717,9 @@ msgid "Without your 'friends' this would look different."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "At least more effective than one could have expected from a band of mercenaries."
+msgid ""
+"At least more effective than one could have expected from a band of "
+"mercenaries."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -795,7 +831,9 @@ msgid "You are sending them into their sure death!"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "Not that I would cry a tear over them, but we cannot waste a single soul right now!"
+msgid ""
+"Not that I would cry a tear over them, but we cannot waste a single soul "
+"right now!"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -847,7 +885,8 @@ msgid "As you wish..."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "One of these arrows could have come from anywhere in the heat of battle..."
+msgid ""
+"One of these arrows could have come from anywhere in the heat of battle..."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -875,11 +914,15 @@ msgid "Prepare to pass off forever!"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "I can't believe that a single Branded One would be sufficient to cause so much chaos."
+msgid ""
+"I can't believe that a single Branded One would be sufficient to cause so "
+"much chaos."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "Of course, if some Branded Ones are in the vicinity everything is a bit different."
+msgid ""
+"Of course, if some Branded Ones are in the vicinity everything is a bit "
+"different."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -891,15 +934,20 @@ msgid "Not so fast."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "Sure, you are immortal, or at least they say so, but you do feel pain, don't you? ##solo"
+msgid ""
+"Sure, you are immortal, or at least they say so, but you do feel pain, don't "
+"you? ##solo"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "Do you really want to be hacked into pieces by me over and over again? ##solo"
+msgid ""
+"Do you really want to be hacked into pieces by me over and over again? ##solo"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "Sure, you are immortal, or at least they say so, but you do feel pain, don't you?"
+msgid ""
+"Sure, you are immortal, or at least they say so, but you do feel pain, don't "
+"you?"
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -987,7 +1035,9 @@ msgid "If you want the process to be faster, just help out a bit."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
-msgid "Or visit www.sumwars.org and take a look at the forum. Criticism, hints and comments are always welcome."
+msgid ""
+"Or visit www.sumwars.org and take a look at the forum. Criticism, hints and "
+"comments are always welcome."
 msgstr ""
 
 #: siegeOfDwarfenwall.xml
@@ -1005,4 +1055,3 @@ msgstr ""
 #: siegeOfDwarfenwall.xml
 msgid "With this, the demo is officially over."
 msgstr ""
-

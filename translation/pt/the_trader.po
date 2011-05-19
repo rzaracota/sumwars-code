@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-07 21:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: theTrader.xml
@@ -83,7 +83,9 @@ msgid "Indeed."
 msgstr ""
 
 #: theTrader.xml
-msgid "Unfortunatly I bet on the wrong branch and now I'm stuck with a large contingent of Empty Scrolls."
+msgid ""
+"Unfortunatly I bet on the wrong branch and now I'm stuck with a large "
+"contingent of Empty Scrolls."
 msgstr ""
 
 #: theTrader.xml
@@ -115,7 +117,9 @@ msgid "Establish a way through Harads Black Abyss."
 msgstr ""
 
 #: theTrader.xml
-msgid "And to make it worse only to spots of great magical concentration like the big road shrine over there."
+msgid ""
+"And to make it worse only to spots of great magical concentration like the "
+"big road shrine over there."
 msgstr ""
 
 #: theTrader.xml
@@ -135,23 +139,32 @@ msgid "No"
 msgstr ""
 
 #: theTrader.xml
-msgid "If you are getting close to a waypoint, your aura will bring the familiar spirits of this place to ignite warning flames."
+msgid ""
+"If you are getting close to a waypoint, your aura will bring the familiar "
+"spirits of this place to ignite warning flames."
 msgstr ""
 
 #: theTrader.xml
-msgid "But do not fear, they don't have the power to harm you in any way, really."
+msgid ""
+"But do not fear, they don't have the power to harm you in any way, really."
 msgstr ""
 
 #: theTrader.xml
-msgid "Counterwise you can be sure that you are able to use the road shrine if you see the flames."
+msgid ""
+"Counterwise you can be sure that you are able to use the road shrine if you "
+"see the flames."
 msgstr ""
 
 #: theTrader.xml
-msgid "If you click on a road shrine, your body will volatilize into Harad's Black Abyss."
+msgid ""
+"If you click on a road shrine, your body will volatilize into Harad's Black "
+"Abyss."
 msgstr ""
 
 #: theTrader.xml
-msgid "Before your inner eye there will be a map with all the places, you have already visited."
+msgid ""
+"Before your inner eye there will be a map with all the places, you have "
+"already visited."
 msgstr ""
 
 #: theTrader.xml
@@ -159,11 +172,15 @@ msgid "They are shown as a circle."
 msgstr ""
 
 #: theTrader.xml
-msgid "If you have an open portal in the world, it will be shown too, but by a red dot."
+msgid ""
+"If you have an open portal in the world, it will be shown too, but by a red "
+"dot."
 msgstr ""
 
 #: theTrader.xml
-msgid "Click on one of these symbols, and your body will reassemble itself fast as the wind at your destination."
+msgid ""
+"Click on one of these symbols, and your body will reassemble itself fast as "
+"the wind at your destination."
 msgstr ""
 
 #: theTrader.xml
@@ -183,11 +200,14 @@ msgid "Actually not, regrettably."
 msgstr ""
 
 #: theTrader.xml
-msgid "As reported, I misinvested in the Empty Scrolls and have no available capital."
+msgid ""
+"As reported, I misinvested in the Empty Scrolls and have no available "
+"capital."
 msgstr ""
 
 #: theTrader.xml
-msgid "I'm afraid all I can give you for your wares in gold would be insufficient."
+msgid ""
+"I'm afraid all I can give you for your wares in gold would be insufficient."
 msgstr ""
 
 #: theTrader.xml
@@ -227,7 +247,9 @@ msgid "Why not town portal or something like that?"
 msgstr ""
 
 #: theTrader.xml
-msgid "Well, they were sold to me as Empty Scrolls, but how you call them is entirely up to you."
+msgid ""
+"Well, they were sold to me as Empty Scrolls, but how you call them is "
+"entirely up to you."
 msgstr ""
 
 #: theTrader.xml
@@ -247,7 +269,9 @@ msgid "Now, now, honorable customers!"
 msgstr ""
 
 #: theTrader.xml
-msgid "They were sold to me as Empty Scrolls, but how you call them is entirely up to you!"
+msgid ""
+"They were sold to me as Empty Scrolls, but how you call them is entirely up "
+"to you!"
 msgstr ""
 
 #: theTrader.xml
@@ -287,7 +311,9 @@ msgid "I'm sure you noticed, right?"
 msgstr ""
 
 #: theTrader.xml
-msgid "And long years on the battlefield caused me to change potions for similar potions immediately once I used one."
+msgid ""
+"And long years on the battlefield caused me to change potions for similar "
+"potions immediately once I used one."
 msgstr ""
 
 #: theTrader.xml
@@ -303,7 +329,9 @@ msgid "Well, whatever."
 msgstr ""
 
 #: theTrader.xml
-msgid "If you want to use a potion you can do so by clicking on it with the right mouse button in the inventory or the belt."
+msgid ""
+"If you want to use a potion you can do so by clicking on it with the right "
+"mouse button in the inventory or the belt."
 msgstr ""
 
 #: theTrader.xml
@@ -311,11 +339,14 @@ msgid "Alternativly you can choose the number of the belt slot it is in."
 msgstr ""
 
 #: theTrader.xml
-msgid "That is, 1 for the potion on the left, 2 for the second from the left and so on."
+msgid ""
+"That is, 1 for the potion on the left, 2 for the second from the left and so "
+"on."
 msgstr ""
 
 #: theTrader.xml
-msgid "This works for all usable items alike, so naturally for the scrolls, too."
+msgid ""
+"This works for all usable items alike, so naturally for the scrolls, too."
 msgstr ""
 
 #: theTrader.xml
@@ -335,7 +366,9 @@ msgid "What are you doing here?"
 msgstr ""
 
 #: theTrader.xml
-msgid "Well, I noticed you were headed north, and I thought it would be convenient for you to know I'm nearby."
+msgid ""
+"Well, I noticed you were headed north, and I thought it would be convenient "
+"for you to know I'm nearby."
 msgstr ""
 
 #: theTrader.xml
@@ -365,4 +398,3 @@ msgstr ""
 #: theTrader.xml
 msgid "Surely. Now that I finally have a sound anchor again."
 msgstr ""
-

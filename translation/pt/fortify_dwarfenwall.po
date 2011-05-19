@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-07 21:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: fortify_dwarfenwall.xml
@@ -147,7 +147,8 @@ msgid "I'm putting in so much effort, and everything I get is \"difficult\""
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "You're putting in so much effort, and everything you get is \"difficult\""
+msgid ""
+"You're putting in so much effort, and everything you get is \"difficult\""
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -167,11 +168,14 @@ msgid "Then again..."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "If more of those giant things break free that could cause a little trouble..."
+msgid ""
+"If more of those giant things break free that could cause a little trouble..."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "And the odds are pretty high... after all the monsters here have their own head."
+msgid ""
+"And the odds are pretty high... after all the monsters here have their own "
+"head."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -211,7 +215,8 @@ msgid "With an answer, that could release you from your suffering."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "With an answer, that could release every one of you from your suffering."
+msgid ""
+"With an answer, that could release every one of you from your suffering."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -235,11 +240,15 @@ msgid "You're missing the main point."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "You should realize that it is entirely up to you, how long you will be in the slavery of the deathgod."
+msgid ""
+"You should realize that it is entirely up to you, how long you will be in "
+"the slavery of the deathgod."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "Fulfill my orders to Akeran's and the council's satisfaction and I have the power to release you of his claws."
+msgid ""
+"Fulfill my orders to Akeran's and the council's satisfaction and I have the "
+"power to release you of his claws."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -259,7 +268,8 @@ msgid "We know that one already. Cut the speach."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "What?!! The curse can be lifted from us? Why do I hear of this only now?"
+msgid ""
+"What?!! The curse can be lifted from us? Why do I hear of this only now?"
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -267,7 +277,9 @@ msgid "As you wish."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "But I should warn you. The task is pretty dangerous and you are likely to die more than once."
+msgid ""
+"But I should warn you. The task is pretty dangerous and you are likely to "
+"die more than once."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -343,7 +355,8 @@ msgid "for who's chestnuts I pulled out of the fire."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "Me too, I don't understand why we should do his bidding. In the end he is -"
+msgid ""
+"Me too, I don't understand why we should do his bidding. In the end he is -"
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -359,7 +372,9 @@ msgid "What do you think will happen, if you're revealed in town?"
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "We know everything about your accursed kind, and believe me, no one will be stupid enough to kill you."
+msgid ""
+"We know everything about your accursed kind, and believe me, no one will be "
+"stupid enough to kill you."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -411,7 +426,9 @@ msgid "I will keep an eye on you and give you orders with this crystal."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "This simple elemental will remind you now that immortality has little meaning here."
+msgid ""
+"This simple elemental will remind you now that immortality has little "
+"meaning here."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -419,7 +436,9 @@ msgid "Of course."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "With our freedom as the price we will do everything in our might to be successful."
+msgid ""
+"With our freedom as the price we will do everything in our might to be "
+"successful."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -427,7 +446,9 @@ msgid "I don't like it."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "I have to take care of the preparations for the prince's imminent wedding now."
+msgid ""
+"I have to take care of the preparations for the prince's imminent wedding "
+"now."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -455,7 +476,8 @@ msgid "Always remember that."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "Take some gold and equip yourselves in the mercenary camp north of town."
+msgid ""
+"Take some gold and equip yourselves in the mercenary camp north of town."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -479,11 +501,15 @@ msgid "With this crystal I will keep in touch with you."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "Surely it's not really allowed by the most divine Akeran to blackmail my combat strength."
+msgid ""
+"Surely it's not really allowed by the most divine Akeran to blackmail my "
+"combat strength."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "Surely it's not really allowed by the most divine Akeran to blackmail our combat strength."
+msgid ""
+"Surely it's not really allowed by the most divine Akeran to blackmail our "
+"combat strength."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -567,11 +593,15 @@ msgid "You're a zealot, aren't you?"
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "Avaera, goddess of magic? Ring a bell? The people there are pretty devotional."
+msgid ""
+"Avaera, goddess of magic? Ring a bell? The people there are pretty "
+"devotional."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "They are bound to have given Avaeras blessing on that crystal to make it work that much better."
+msgid ""
+"They are bound to have given Avaeras blessing on that crystal to make it "
+"work that much better."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -583,19 +613,27 @@ msgid "Everything."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "Do you know what happens, if that comes into contact with the blood of Branded Ones?"
+msgid ""
+"Do you know what happens, if that comes into contact with the blood of "
+"Branded Ones?"
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "It's not as if I had a bunch of you Cursed Ones here for experimental purposes."
+msgid ""
+"It's not as if I had a bunch of you Cursed Ones here for experimental "
+"purposes."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "Reverse this at once or every guard of Aisen will be on your trail, Cursed One! ##female"
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##female"
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "Reverse this at once or every guard of Aisen will be on your trail, Cursed One! ##male"
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##male"
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -635,15 +673,21 @@ msgid "That's enough, don't you think?"
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "You can't possibly have enough money, so that I would let you gawp at me all the time."
+msgid ""
+"You can't possibly have enough money, so that I would let you gawp at me all "
+"the time."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "Just pray to your Akeran that I never find a way to send a fireball through that blasted thing."
+msgid ""
+"Just pray to your Akeran that I never find a way to send a fireball through "
+"that blasted thing."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "Well, well... knowledge about the gods is power, if you are exposed to their moods."
+msgid ""
+"Well, well... knowledge about the gods is power, if you are exposed to their "
+"moods."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -651,7 +695,9 @@ msgid "Just be glad I didn't smash the whole crystal."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "Allow yourself more of such impertinences and I'll have you thrown into the dungeon tower!"
+msgid ""
+"Allow yourself more of such impertinences and I'll have you thrown into the "
+"dungeon tower!"
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -663,7 +709,9 @@ msgid "Can we blind that crystal somehow?"
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "I bet the guy is sitting in a cozy armchair right now and watching that we don't break ranks."
+msgid ""
+"I bet the guy is sitting in a cozy armchair right now and watching that we "
+"don't break ranks."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -691,7 +739,9 @@ msgid "Only if we want to. Our blood works wonders on blessed items."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "It's a good thing that this was blessed by devoted aisen mages to Avaera. Even if the goddess of magic is unlikely to be amused about my attachment."
+msgid ""
+"It's a good thing that this was blessed by devoted aisen mages to Avaera. "
+"Even if the goddess of magic is unlikely to be amused about my attachment."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -719,7 +769,9 @@ msgid "That's what he said."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "I for one have never heard, that someone besides us could take anything from hell."
+msgid ""
+"I for one have never heard, that someone besides us could take anything from "
+"hell."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -779,7 +831,9 @@ msgid "I'll see, how this is developing."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "Until the cards are on the table I'll be powerful enough to take what's mine by force, if needed."
+msgid ""
+"Until the cards are on the table I'll be powerful enough to take what's mine "
+"by force, if needed."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
@@ -811,10 +865,11 @@ msgid "The whole thing is too unsure."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
-msgid "But we can't afford open resistance right now, so we have to grin and bear it."
+msgid ""
+"But we can't afford open resistance right now, so we have to grin and bear "
+"it."
 msgstr ""
 
 #: fortify_dwarfenwall.xml
 msgid "Let's gain their trust."
 msgstr ""
-

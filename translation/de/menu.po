@@ -1,13 +1,14 @@
 # German translations for sumwars package
 # Copyright (C) 2009
 # This file is distributed under the same license as the sumwars package.
-# kalimgard <kalimgard@users.sourceforge.net>, 2010.
+# kalimgard <kalimgard@users.sourceforge.net>, 2010., 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-07 20:56+0200\n"
-"PO-Revision-Date: 2010-08-31 17:29+0200\n"
+"POT-Creation-Date: 2011-05-19 12:20+0200\n"
+"PO-Revision-Date: 2011-05-19 12:02+0200\n"
 "Last-Translator: kalimgard <kalimgard@users.sourceforge.net>\n"
 "Language-Team: german <de@sumwars>\n"
 "Language: \n"
@@ -104,16 +105,16 @@ msgstr "Kraft"
 msgid "Chance for critical hit"
 msgstr "Chance für kritischen Treffer"
 
-#: ../src/core/document.cpp:1194 ../src/core/item.cpp:685
+#: ../src/core/document.cpp:1200 ../src/core/item.cpp:685
 #: ../src/core/item.cpp:687 ../src/core/item.cpp:915 ../src/core/item.cpp:921
 msgid "Required level"
 msgstr "Benötigtes Level"
 
-#: ../src/core/document.cpp:1204
+#: ../src/core/document.cpp:1210
 msgid "Timer"
 msgstr "Timer"
 
-#: ../src/core/document.cpp:1205
+#: ../src/core/document.cpp:1211
 msgid "Cast delay"
 msgstr "Verzögerung"
 
@@ -269,7 +270,7 @@ msgstr "Punkte"
 msgid "Attribute points remaining to distribute"
 msgstr "Verbleibende Punkte"
 
-#: ../src/gui/charinfo.cpp:892 ../src/gui/controlpanel.cpp:234
+#: ../src/gui/charinfo.cpp:892 ../src/gui/controlpanel.cpp:245
 msgid "Experience"
 msgstr "Erfahrung"
 
@@ -278,7 +279,7 @@ msgid "Current experience and experience necessary for next level-up."
 msgstr ""
 "Aktuelle Erfahrung und für das nächste Level-up erforderliche Erfahrung"
 
-#: ../src/gui/charinfo.cpp:896 ../src/gui/controlpanel.cpp:218
+#: ../src/gui/charinfo.cpp:896 ../src/gui/controlpanel.cpp:229
 msgid "Hitpoints"
 msgstr "Lebenspunkte"
 
@@ -322,35 +323,35 @@ msgstr ""
 msgid "Chat"
 msgstr "Chat Fenster"
 
-#: ../src/gui/controlpanel.cpp:346 ../src/gui/mainmenu.cpp:98
+#: ../src/gui/controlpanel.cpp:387 ../src/gui/mainmenu.cpp:98
 msgid "Options"
 msgstr "Optionen"
 
-#: ../src/gui/controlpanel.cpp:349
+#: ../src/gui/controlpanel.cpp:390
 msgid "Save & Exit"
 msgstr "Speichern & Ende"
 
-#: ../src/gui/controlpanel.cpp:352 ../src/gui/optionswindow.cpp:307
+#: ../src/gui/controlpanel.cpp:393 ../src/gui/optionswindow.cpp:307
 msgid "Inventory"
 msgstr "Inventar"
 
-#: ../src/gui/controlpanel.cpp:355
+#: ../src/gui/controlpanel.cpp:396
 msgid "Character"
 msgstr "Charakter Bildschirm"
 
-#: ../src/gui/controlpanel.cpp:358 ../src/gui/optionswindow.cpp:313
+#: ../src/gui/controlpanel.cpp:399 ../src/gui/optionswindow.cpp:313
 msgid "Skilltree"
 msgstr "Fähigkeiten"
 
-#: ../src/gui/controlpanel.cpp:361
+#: ../src/gui/controlpanel.cpp:402
 msgid "Party"
 msgstr "Partei"
 
-#: ../src/gui/controlpanel.cpp:364 ../src/gui/optionswindow.cpp:322
+#: ../src/gui/controlpanel.cpp:405 ../src/gui/optionswindow.cpp:322
 msgid "Quests"
 msgstr "Quests"
 
-#: ../src/gui/inventory.cpp:349
+#: ../src/gui/inventory.cpp:351
 msgid "Drop:"
 msgstr "Drop:"
 
@@ -374,9 +375,10 @@ msgstr "Credits"
 msgid "Quit"
 msgstr "Beenden"
 
-#: ../src/gui/messageboxes.cpp:52 ../src/gui/networkwindows.cpp:95
-#: ../src/gui/networkwindows.cpp:223 ../src/gui/optionswindow.cpp:352
-#: ../src/gui/savegamelist.cpp:170 ../src/gui/tradewindow.cpp:265
+#: ../src/gui/messageboxes.cpp:52 ../src/gui/messageboxes.cpp:198
+#: ../src/gui/networkwindows.cpp:95 ../src/gui/networkwindows.cpp:223
+#: ../src/gui/optionswindow.cpp:352 ../src/gui/savegamelist.cpp:170
+#: ../src/gui/tradewindow.cpp:265
 msgid "Ok"
 msgstr "Ok"
 
@@ -464,15 +466,15 @@ msgstr "Musik"
 msgid "Enemy Highlight Color"
 msgstr "Hervorhebungsfarbe für Gegner"
 
-#: ../src/gui/questinfo.cpp:158
+#: ../src/gui/questinfo.cpp:160
 msgid "open"
 msgstr "offen"
 
-#: ../src/gui/questinfo.cpp:161
+#: ../src/gui/questinfo.cpp:163
 msgid "finished"
 msgstr "abgeschlossen"
 
-#: ../src/gui/questinfo.cpp:164
+#: ../src/gui/questinfo.cpp:166
 msgid "failed"
 msgstr "gescheitert"
 
@@ -493,9 +495,8 @@ msgid "Level"
 msgstr "Level"
 
 #: ../src/gui/skilltree.cpp:537
-#, fuzzy
 msgid "Skillpoints"
-msgstr "Lebenspunkte"
+msgstr ""
 
 #: ../src/gui/skilltree.cpp:542
 msgid "Next Skillpoint at Level"
@@ -504,6 +505,3 @@ msgstr ""
 #: ../src/gui/worldmap.cpp:141
 msgid "Town Portal"
 msgstr "Stadtportal"
-
-#~ msgid "Gold"
-#~ msgstr "Gold"

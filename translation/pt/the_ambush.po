@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-07 21:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: theAmbush.xml
@@ -23,11 +23,16 @@ msgid "The Ambush"
 msgstr ""
 
 #: theAmbush.xml
-msgid "Ireana survived and, as a token of her gratitude, provided our next job. I always knew the councilmen only wanted an exterminator."
+msgid ""
+"Ireana survived and, as a token of her gratitude, provided our next job. I "
+"always knew the councilmen only wanted an exterminator."
 msgstr ""
 
 #: theAmbush.xml
-msgid "A female council-mage by the name of Ireana of Northborough seems to be in trouble west of Dwarfenwall. Nothing a Branded One couldn't solve. If she survives long enough..."
+msgid ""
+"A female council-mage by the name of Ireana of Northborough seems to be in "
+"trouble west of Dwarfenwall. Nothing a Branded One couldn't solve. If she "
+"survives long enough..."
 msgstr ""
 
 #: theAmbush.xml
@@ -75,7 +80,9 @@ msgid "What?"
 msgstr ""
 
 #: theAmbush.xml
-msgid "I thought she was one of your fancy elementalist amazones. Can't she look after herself?"
+msgid ""
+"I thought she was one of your fancy elementalist amazones. Can't she look "
+"after herself?"
 msgstr ""
 
 #: theAmbush.xml
@@ -113,4 +120,3 @@ msgstr ""
 #: theAmbush.xml
 msgid "The firefighters are on the way."
 msgstr ""
-

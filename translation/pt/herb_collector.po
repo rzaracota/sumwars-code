@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-07 21:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: herbalist.xml
@@ -27,7 +27,9 @@ msgid "And another good deed done. I could get used to this."
 msgstr ""
 
 #: herbalist.xml
-msgid "The herbalist of Joringsbridge wants to have the berries of 10 bushes. \"..(10 - herbalist.bushes)..\" berries have been collected."
+msgid ""
+"The herbalist of Joringsbridge wants to have the berries of 10 bushes. \".."
+"(10 - herbalist.bushes)..\" berries have been collected."
 msgstr ""
 
 #: herbalist.xml
@@ -99,11 +101,15 @@ msgid "Peace."
 msgstr ""
 
 #: herbalist.xml
-msgid "If you are roaming around there anyway, why don't you collect some berries for me?"
+msgid ""
+"If you are roaming around there anyway, why don't you collect some berries "
+"for me?"
 msgstr ""
 
 #: herbalist.xml
-msgid "With all those goblins about an old woman can't even set a foot out of the village."
+msgid ""
+"With all those goblins about an old woman can't even set a foot out of the "
+"village."
 msgstr ""
 
 #: herbalist.xml
@@ -159,7 +165,9 @@ msgid "Forget it, herb woman."
 msgstr ""
 
 #: herbalist.xml
-msgid "I'm not going to crawl through the meadows just to search for some stupid bushes."
+msgid ""
+"I'm not going to crawl through the meadows just to search for some stupid "
+"bushes."
 msgstr ""
 
 #: herbalist.xml
@@ -193,4 +201,3 @@ msgstr ""
 #: herbalist.xml
 msgid "Collect\"..bushes_left..\" more herbs."
 msgstr ""
-

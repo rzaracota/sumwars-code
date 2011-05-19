@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-07 21:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: goblin_raid.xml
@@ -23,15 +23,23 @@ msgid "goblin_raid"
 msgstr ""
 
 #: goblin_raid.xml
-msgid "Well, I got a little money for killing some goblins I would have wasted anyway. Not a bad day."
+msgid ""
+"Well, I got a little money for killing some goblins I would have wasted "
+"anyway. Not a bad day."
 msgstr ""
 
 #: goblin_raid.xml
-msgid "It seems the sergeant from Joringsbridge is willing to pay, but he wants me to help those peasants first. There's no trust in this world anymore."
+msgid ""
+"It seems the sergeant from Joringsbridge is willing to pay, but he wants me "
+"to help those peasants first. There's no trust in this world anymore."
 msgstr ""
 
 #: goblin_raid.xml
-msgid "I discovered plans of a goblin raid set for a village called Joringsbridge. They were found amongst the remains of some goblin tribe. Guess I busted that party prematurely. Maybe someone official will appreciate not having hordes of goblins kicking in their doors."
+msgid ""
+"I discovered plans of a goblin raid set for a village called Joringsbridge. "
+"They were found amongst the remains of some goblin tribe. Guess I busted "
+"that party prematurely. Maybe someone official will appreciate not having "
+"hordes of goblins kicking in their doors."
 msgstr ""
 
 #: goblin_raid.xml
@@ -125,4 +133,3 @@ msgstr ""
 #: goblin_raid.xml
 msgid "And I could care less what happens to some peasant family."
 msgstr ""
-

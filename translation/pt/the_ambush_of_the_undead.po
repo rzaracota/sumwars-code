@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-07 21:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: theFissure.xml
@@ -23,11 +23,17 @@ msgid "The ambush of the undead"
 msgstr ""
 
 #: theFissure.xml
-msgid "The good news: No one will come through that tunnel anymore. The bad news: The way back has caved in, too. Hopefully there is another exit."
+msgid ""
+"The good news: No one will come through that tunnel anymore. The bad news: "
+"The way back has caved in, too. Hopefully there is another exit."
 msgstr ""
 
 #: theFissure.xml
-msgid "The undead found a way under the Grey Skyladder enabling them to bypass Dwarfenwall. Because this threatens the kingdom of Aisen directly it has to be shut as fast as possible. The passage in the Cursed Caves has to be found and the destroyed with the explosion spell of Ireana of Northborough."
+msgid ""
+"The undead found a way under the Grey Skyladder enabling them to bypass "
+"Dwarfenwall. Because this threatens the kingdom of Aisen directly it has to "
+"be shut as fast as possible. The passage in the Cursed Caves has to be found "
+"and the destroyed with the explosion spell of Ireana of Northborough."
 msgstr ""
 
 #: theFissure.xml
@@ -103,7 +109,9 @@ msgid "No, no, it's the truth."
 msgstr ""
 
 #: theFissure.xml
-msgid "It was not the best idea, but the streets are not safe these days and thus we wanted to travel concealed."
+msgid ""
+"It was not the best idea, but the streets are not safe these days and thus "
+"we wanted to travel concealed."
 msgstr ""
 
 #: theFissure.xml
@@ -123,7 +131,8 @@ msgid "No, Dwarfenwall hasn't fallen yet."
 msgstr ""
 
 #: theFissure.xml
-msgid "As long as that city stands, the entry to the lands of the undead is blocked."
+msgid ""
+"As long as that city stands, the entry to the lands of the undead is blocked."
 msgstr ""
 
 #: theFissure.xml
@@ -135,7 +144,9 @@ msgid "We mustn't allow this."
 msgstr ""
 
 #: theFissure.xml
-msgid "If those monsters could avoid Dwarfenwall they would advance into Aisen before one week is gone."
+msgid ""
+"If those monsters could avoid Dwarfenwall they would advance into Aisen "
+"before one week is gone."
 msgstr ""
 
 #: theFissure.xml
@@ -283,7 +294,9 @@ msgid "Nar'Asoroth, my lord."
 msgstr ""
 
 #: theFissure.xml
-msgid "The stone is solid,but if I let the skeletons work any faster they will break apart!"
+msgid ""
+"The stone is solid,but if I let the skeletons work any faster they will "
+"break apart!"
 msgstr ""
 
 #: theFissure.xml
@@ -335,7 +348,8 @@ msgid "Let those aisen dogs burn their backup troops there."
 msgstr ""
 
 #: theFissure.xml
-msgid "The army passing through this tunnel has nothing to do with Dwarfenwall."
+msgid ""
+"The army passing through this tunnel has nothing to do with Dwarfenwall."
 msgstr ""
 
 #: theFissure.xml
@@ -379,7 +393,9 @@ msgid "Harvest!"
 msgstr ""
 
 #: theFissure.xml
-msgid "What do you know. There are rats everywhere. Kill them and bring me their bones!"
+msgid ""
+"What do you know. There are rats everywhere. Kill them and bring me their "
+"bones!"
 msgstr ""
 
 #: theFissure.xml
@@ -423,7 +439,9 @@ msgid "You fools! Get yourselves out of this mountain!"
 msgstr ""
 
 #: theFissure.xml
-msgid "Let's go. If we are lucky the passage is blocked too and we can all take a break."
+msgid ""
+"Let's go. If we are lucky the passage is blocked too and we can all take a "
+"break."
 msgstr ""
 
 #: theFissure.xml
@@ -455,7 +473,9 @@ msgid "Who goes there?"
 msgstr ""
 
 #: theFissure.xml
-msgid "Oh by the gods, if some of them have their eyes on this unpleasent piece of land right now."
+msgid ""
+"Oh by the gods, if some of them have their eyes on this unpleasent piece of "
+"land right now."
 msgstr ""
 
 #: theFissure.xml
@@ -479,11 +499,15 @@ msgid "Oh! Well, you see..."
 msgstr ""
 
 #: theFissure.xml
-msgid "I wanted to take a short cut through the mountains when suddenly the ground was caving in."
+msgid ""
+"I wanted to take a short cut through the mountains when suddenly the ground "
+"was caving in."
 msgstr ""
 
 #: theFissure.xml
-msgid "And after I took a careful look around I sadly had to notice the way south was blocked."
+msgid ""
+"And after I took a careful look around I sadly had to notice the way south "
+"was blocked."
 msgstr ""
 
 #: theFissure.xml
@@ -503,7 +527,9 @@ msgid "I will just wait until the road is clear."
 msgstr ""
 
 #: theFissure.xml
-msgid "Your distress aside, what makes you so sure I'll not simply vanish with a town portal?"
+msgid ""
+"Your distress aside, what makes you so sure I'll not simply vanish with a "
+"town portal?"
 msgstr ""
 
 #: theFissure.xml
@@ -511,11 +537,15 @@ msgid "But since you are here, appreciated friends, there is still hope."
 msgstr ""
 
 #: theFissure.xml
-msgid "Your distress aside, what makes you so sure we'll not simply vanish with a town portal?"
+msgid ""
+"Your distress aside, what makes you so sure we'll not simply vanish with a "
+"town portal?"
 msgstr ""
 
 #: theFissure.xml
-msgid "Well, that would work normally and I would gladly offer you a grand price for the help."
+msgid ""
+"Well, that would work normally and I would gladly offer you a grand price "
+"for the help."
 msgstr ""
 
 #: theFissure.xml
@@ -539,7 +569,9 @@ msgid "Fine. Then we do it the hard way."
 msgstr ""
 
 #: theFissure.xml
-msgid "If you need something let me know. I discovered some potions back there, and I would part with them for a small amount of gold."
+msgid ""
+"If you need something let me know. I discovered some potions back there, and "
+"I would part with them for a small amount of gold."
 msgstr ""
 
 #: theFissure.xml
@@ -553,4 +585,3 @@ msgstr ""
 #: theFissure.xml
 msgid "greyCurseCaveDep"
 msgstr ""
-

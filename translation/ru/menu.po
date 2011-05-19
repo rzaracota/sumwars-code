@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-07 20:56+0200\n"
+"POT-Creation-Date: 2011-05-19 11:43+0200\n"
 "PO-Revision-Date: 2010-09-11 23:13+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,16 +105,16 @@ msgstr "Сила"
 msgid "Chance for critical hit"
 msgstr "Шанс критического удара"
 
-#: ../src/core/document.cpp:1194 ../src/core/item.cpp:685
+#: ../src/core/document.cpp:1200 ../src/core/item.cpp:685
 #: ../src/core/item.cpp:687 ../src/core/item.cpp:915 ../src/core/item.cpp:921
 msgid "Required level"
 msgstr "Требуемый уровень"
 
-#: ../src/core/document.cpp:1204
+#: ../src/core/document.cpp:1210
 msgid "Timer"
 msgstr "Таймер"
 
-#: ../src/core/document.cpp:1205
+#: ../src/core/document.cpp:1211
 msgid "Cast delay"
 msgstr "Задержка каста"
 
@@ -269,7 +269,7 @@ msgstr "Очки умений"
 msgid "Attribute points remaining to distribute"
 msgstr "Оставшиеся очки умений"
 
-#: ../src/gui/charinfo.cpp:892 ../src/gui/controlpanel.cpp:234
+#: ../src/gui/charinfo.cpp:892 ../src/gui/controlpanel.cpp:245
 msgid "Experience"
 msgstr "Опыт"
 
@@ -277,7 +277,7 @@ msgstr "Опыт"
 msgid "Current experience and experience necessary for next level-up."
 msgstr "Текущий опыт и опыт, необходимый для достижения следующего уровня"
 
-#: ../src/gui/charinfo.cpp:896 ../src/gui/controlpanel.cpp:218
+#: ../src/gui/charinfo.cpp:896 ../src/gui/controlpanel.cpp:229
 msgid "Hitpoints"
 msgstr "Здоровье"
 
@@ -321,35 +321,35 @@ msgstr "Значение блока означает шанс избежать �
 msgid "Chat"
 msgstr "Чат"
 
-#: ../src/gui/controlpanel.cpp:346 ../src/gui/mainmenu.cpp:98
+#: ../src/gui/controlpanel.cpp:387 ../src/gui/mainmenu.cpp:98
 msgid "Options"
 msgstr "Опции"
 
-#: ../src/gui/controlpanel.cpp:349
+#: ../src/gui/controlpanel.cpp:390
 msgid "Save & Exit"
 msgstr "Сохранить и выйти"
 
-#: ../src/gui/controlpanel.cpp:352 ../src/gui/optionswindow.cpp:307
+#: ../src/gui/controlpanel.cpp:393 ../src/gui/optionswindow.cpp:307
 msgid "Inventory"
 msgstr "Инвентарь"
 
-#: ../src/gui/controlpanel.cpp:355
+#: ../src/gui/controlpanel.cpp:396
 msgid "Character"
 msgstr "Персонаж"
 
-#: ../src/gui/controlpanel.cpp:358 ../src/gui/optionswindow.cpp:313
+#: ../src/gui/controlpanel.cpp:399 ../src/gui/optionswindow.cpp:313
 msgid "Skilltree"
 msgstr "Дерево умений"
 
-#: ../src/gui/controlpanel.cpp:361
+#: ../src/gui/controlpanel.cpp:402
 msgid "Party"
 msgstr "Группа"
 
-#: ../src/gui/controlpanel.cpp:364 ../src/gui/optionswindow.cpp:322
+#: ../src/gui/controlpanel.cpp:405 ../src/gui/optionswindow.cpp:322
 msgid "Quests"
 msgstr "Квесты"
 
-#: ../src/gui/inventory.cpp:349
+#: ../src/gui/inventory.cpp:351
 msgid "Drop:"
 msgstr "Выбросить"
 
@@ -373,9 +373,10 @@ msgstr "Об игре"
 msgid "Quit"
 msgstr "Выход"
 
-#: ../src/gui/messageboxes.cpp:52 ../src/gui/networkwindows.cpp:95
-#: ../src/gui/networkwindows.cpp:223 ../src/gui/optionswindow.cpp:352
-#: ../src/gui/savegamelist.cpp:170 ../src/gui/tradewindow.cpp:265
+#: ../src/gui/messageboxes.cpp:52 ../src/gui/messageboxes.cpp:198
+#: ../src/gui/networkwindows.cpp:95 ../src/gui/networkwindows.cpp:223
+#: ../src/gui/optionswindow.cpp:352 ../src/gui/savegamelist.cpp:170
+#: ../src/gui/tradewindow.cpp:265
 msgid "Ok"
 msgstr "Ок"
 
@@ -463,15 +464,15 @@ msgstr "Музыка"
 msgid "Enemy Highlight Color"
 msgstr ""
 
-#: ../src/gui/questinfo.cpp:158
+#: ../src/gui/questinfo.cpp:160
 msgid "open"
 msgstr "открытые"
 
-#: ../src/gui/questinfo.cpp:161
+#: ../src/gui/questinfo.cpp:163
 msgid "finished"
 msgstr "завершенные"
 
-#: ../src/gui/questinfo.cpp:164
+#: ../src/gui/questinfo.cpp:166
 msgid "failed"
 msgstr "проваленные"
 

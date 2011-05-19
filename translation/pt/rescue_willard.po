@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-07 21:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: rescue_willard.xml
@@ -23,15 +23,22 @@ msgid "A friend in need"
 msgstr ""
 
 #: rescue_willard.xml
-msgid "Willard is back in Medair and he even forked out some money. Who said it wouldn't pay to let people live? At least as long there are enough goblins around."
+msgid ""
+"Willard is back in Medair and he even forked out some money. Who said it "
+"wouldn't pay to let people live? At least as long there are enough goblins "
+"around."
 msgstr ""
 
 #: rescue_willard.xml
-msgid "Willard is in hiding somewhere around the Aisen Meadow. Due to his injury he will show himself only if there are no goblins around."
+msgid ""
+"Willard is in hiding somewhere around the Aisen Meadow. Due to his injury he "
+"will show himself only if there are no goblins around."
 msgstr ""
 
 #: rescue_willard.xml
-msgid "A long search and quite a lot of dead goblins later Willard has finally shown himself. I should give him the stone and be done with it."
+msgid ""
+"A long search and quite a lot of dead goblins later Willard has finally "
+"shown himself. I should give him the stone and be done with it."
 msgstr ""
 
 #: rescue_willard.xml
@@ -99,7 +106,9 @@ msgid "I could always feel if someone was a Branded One."
 msgstr ""
 
 #: rescue_willard.xml
-msgid "But don't worry, I will give noone away, as long as they are behaving correctly."
+msgid ""
+"But don't worry, I will give noone away, as long as they are behaving "
+"correctly."
 msgstr ""
 
 #: rescue_willard.xml
@@ -131,7 +140,9 @@ msgid "What? I could have hired a professional assassin for that."
 msgstr ""
 
 #: rescue_willard.xml
-msgid "I thought you were the kind of Branded Ones that doesn't kill every human crossing their way."
+msgid ""
+"I thought you were the kind of Branded Ones that doesn't kill every human "
+"crossing their way."
 msgstr ""
 
 #: rescue_willard.xml
@@ -151,7 +162,8 @@ msgid "I have a friend with the gamekeepers."
 msgstr ""
 
 #: rescue_willard.xml
-msgid "He was in the meadows with two collegues, when they were attacked by goblins."
+msgid ""
+"He was in the meadows with two collegues, when they were attacked by goblins."
 msgstr ""
 
 #: rescue_willard.xml
@@ -231,7 +243,8 @@ msgid "Thank you."
 msgstr ""
 
 #: rescue_willard.xml
-msgid "I'm sorry, but I don't want to waste my time searching for any gamekeepers."
+msgid ""
+"I'm sorry, but I don't want to waste my time searching for any gamekeepers."
 msgstr ""
 
 #: rescue_willard.xml
@@ -329,4 +342,3 @@ msgstr ""
 #: rescue_willard.xml
 msgid "So here is this Willard."
 msgstr ""
-

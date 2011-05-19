@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-07 21:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: scout.xml
@@ -23,11 +23,18 @@ msgid "The wounded scout"
 msgstr ""
 
 #: scout.xml
-msgid "I rescued a scout and hopefully gained some goodwill from the local militia. Whatever good that will do."
+msgid ""
+"I rescued a scout and hopefully gained some goodwill from the local militia. "
+"Whatever good that will do."
 msgstr ""
 
 #: scout.xml
-msgid "I really stumbled across a scout in the goblin infested caves west of Dwarfenwall. He is wounded, lost his gear to some spiders and asked me to fix it for him. I really wonder if I should do this... then again it would be an excuse to venture deeper into the caves that are obviously not under control by the undead."
+msgid ""
+"I really stumbled across a scout in the goblin infested caves west of "
+"Dwarfenwall. He is wounded, lost his gear to some spiders and asked me to "
+"fix it for him. I really wonder if I should do this... then again it would "
+"be an excuse to venture deeper into the caves that are obviously not under "
+"control by the undead."
 msgstr ""
 
 #: scout.xml
@@ -59,7 +66,8 @@ msgid "You can still talk, right?"
 msgstr ""
 
 #: scout.xml
-msgid "Yeah, right... now, when you're done laughing... maybe you could help me?"
+msgid ""
+"Yeah, right... now, when you're done laughing... maybe you could help me?"
 msgstr ""
 
 #: scout.xml
@@ -67,7 +75,8 @@ msgid "I guess I could patch you up, but I can't carry you out of here."
 msgstr ""
 
 #: scout.xml
-msgid "Where I'm headed you will most certainly die a quick and meaningless death."
+msgid ""
+"Where I'm headed you will most certainly die a quick and meaningless death."
 msgstr ""
 
 #: scout.xml
@@ -91,15 +100,20 @@ msgid "West of here... there's a cave... pretty deep inside..."
 msgstr ""
 
 #: scout.xml
-msgid "Lot's of wolves... but a nest of spiders, too... thought I had... it under control"
+msgid ""
+"Lot's of wolves... but a nest of spiders, too... thought I had... it under "
+"control"
 msgstr ""
 
 #: scout.xml
-msgid "really big one... there. Spider, I mean... got me good... lost my gear... but got away... somehow"
+msgid ""
+"really big one... there. Spider, I mean... got me good... lost my gear... "
+"but got away... somehow"
 msgstr ""
 
 #: scout.xml
-msgid "The venom... can't move at all... anymore... I had an antidote in my pack..."
+msgid ""
+"The venom... can't move at all... anymore... I had an antidote in my pack..."
 msgstr ""
 
 #: scout.xml
@@ -143,11 +157,14 @@ msgid "Not yet, no."
 msgstr ""
 
 #: scout.xml
-msgid "Shame. It seems I'm already capable of... being paralyzed... without your help."
+msgid ""
+"Shame. It seems I'm already capable of... being paralyzed... without your "
+"help."
 msgstr ""
 
 #: scout.xml
-msgid "Thanks for... checking back on me though. I'll be here... if you need me."
+msgid ""
+"Thanks for... checking back on me though. I'll be here... if you need me."
 msgstr ""
 
 #: scout.xml
@@ -175,7 +192,9 @@ msgid "You do realize there is at least a score of 'blue' potions here?"
 msgstr ""
 
 #: scout.xml
-msgid "They just... turn out that... way everytime... it's the one... with the light shade of turquoise."
+msgid ""
+"They just... turn out that... way everytime... it's the one... with the "
+"light shade of turquoise."
 msgstr ""
 
 #: scout.xml
@@ -203,7 +222,9 @@ msgid "You best stay out of trouble."
 msgstr ""
 
 #: scout.xml
-msgid "Because I seriously do NOT want to rummage through your happy collection of identical looking special-purpose-potions."
+msgid ""
+"Because I seriously do NOT want to rummage through your happy collection of "
+"identical looking special-purpose-potions."
 msgstr ""
 
 #: scout.xml
@@ -215,10 +236,11 @@ msgid "Allright. Now that this is done, I will be on my way."
 msgstr ""
 
 #: scout.xml
-msgid "I will rest a little more and then be on my way too, but in the other direction."
+msgid ""
+"I will rest a little more and then be on my way too, but in the other "
+"direction."
 msgstr ""
 
 #: scout.xml
 msgid "greyWolfcave"
 msgstr ""
-

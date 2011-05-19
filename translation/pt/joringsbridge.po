@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-07 21:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: joringsbridge.xml
@@ -71,11 +71,15 @@ msgid "Quite so!"
 msgstr ""
 
 #: joringsbridge.xml
-msgid "The pursuit of pathetic goblins is neither my duty nor do I see the point of such absurd amusement."
+msgid ""
+"The pursuit of pathetic goblins is neither my duty nor do I see the point of "
+"such absurd amusement."
 msgstr ""
 
 #: joringsbridge.xml
-msgid "What would you do were the village to be attacked while I was on a fruitless hunt for goblins?"
+msgid ""
+"What would you do were the village to be attacked while I was on a fruitless "
+"hunt for goblins?"
 msgstr ""
 
 #: joringsbridge.xml
@@ -91,7 +95,9 @@ msgid "As much as I'd like to help, I don't have any room for such a thing."
 msgstr ""
 
 #: joringsbridge.xml
-msgid "But may I use this unique opportunity to congratulate you on your upcoming wedding with the archmage Ireana of"
+msgid ""
+"But may I use this unique opportunity to congratulate you on your upcoming "
+"wedding with the archmage Ireana of"
 msgstr ""
 
 #: joringsbridge.xml
@@ -107,7 +113,9 @@ msgid "Self-satisfied parasite, that mage!"
 msgstr ""
 
 #: joringsbridge.xml
-msgid "I just hope the kingdom has big granaries, if the greenskins torch the fields."
+msgid ""
+"I just hope the kingdom has big granaries, if the greenskins torch the "
+"fields."
 msgstr ""
 
 #: joringsbridge.xml
@@ -239,7 +247,8 @@ msgid "Ah!"
 msgstr ""
 
 #: joringsbridge.xml
-msgid "The mage over there has another of those crystals on his staff, hasn't he?"
+msgid ""
+"The mage over there has another of those crystals on his staff, hasn't he?"
 msgstr ""
 
 #: joringsbridge.xml
@@ -383,7 +392,9 @@ msgid "Sergeant!"
 msgstr ""
 
 #: joringsbridge.xml
-msgid "Only hand over the gold if the goblins are driven off and the peasants are alive in the end."
+msgid ""
+"Only hand over the gold if the goblins are driven off and the peasants are "
+"alive in the end."
 msgstr ""
 
 #: joringsbridge.xml
@@ -425,4 +436,3 @@ msgstr ""
 #: joringsbridge.xml
 msgid "I will pray that your family is safe long enough."
 msgstr ""
-
