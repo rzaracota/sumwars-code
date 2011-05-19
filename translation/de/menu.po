@@ -221,7 +221,7 @@ msgstr "Schaden ausgeteilt von "
 
 #: ../src/gui/charinfo.cpp:588
 msgid "Chance to hit "
-msgstr "Chance für kritischen Treffer"
+msgstr "Trefferchance"
 
 #: ../src/gui/charinfo.cpp:604
 msgid "Evade"
@@ -229,7 +229,7 @@ msgstr ""
 
 #: ../src/gui/charinfo.cpp:622
 msgid "Chance to get hit by "
-msgstr "Chance für kritischen Treffer"
+msgstr "Chance getroffen zu werden"
 
 #: ../src/gui/charinfo.cpp:713
 msgid "Damage dealt to  "
@@ -408,7 +408,7 @@ msgstr "Shortkeys"
 
 #: ../src/gui/optionswindow.cpp:298
 msgid "Gameplay"
-msgstr "Spiel"
+msgstr "Gameplay"
 
 #: ../src/gui/optionswindow.cpp:300
 msgid "Audio"
@@ -428,7 +428,7 @@ msgstr "Charakter Bildschirm"
 
 #: ../src/gui/optionswindow.cpp:316
 msgid "Party screen"
-msgstr "Partei Bildschirm"
+msgstr "Party Bildschirm"
 
 #: ../src/gui/optionswindow.cpp:319
 msgid "Chatbox"
@@ -444,7 +444,7 @@ msgstr "Ausrüstung wechseln"
 
 #: ../src/gui/optionswindow.cpp:331
 msgid "Item Labels"
-msgstr "Gegenstands Beschreibungen"
+msgstr "Gegenstandsbeschreibungen"
 
 #: ../src/gui/optionswindow.cpp:334
 msgid "Difficulty"
