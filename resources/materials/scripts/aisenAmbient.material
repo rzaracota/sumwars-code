@@ -1,3 +1,19 @@
+material env_nightsky
+{
+	technique
+	{
+		pass
+		{
+			emissive 1 1 1
+			
+			texture_unit
+			{
+				texture night_sky.png
+			}
+		}
+	}
+}
+
 material env_waldland
 {
 	technique

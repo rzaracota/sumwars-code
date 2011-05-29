@@ -36,6 +36,9 @@
 #include "gettext.h"
 #include "stdstreamconv.h"
 
+
+#include "CEGUI.h"
+
 #include <physfs.h>
 
 // Constructors/Destructors
@@ -552,7 +555,8 @@ void Document::onStartScreenClicked()
 {
 	if (getGUIState()->m_shown_windows == NO_WINDOWS)
 	{
-		getGUIState()->m_shown_windows = SAVEGAME_LIST;
+		//getGUIState()->m_shown_windows = SAVEGAME_LIST;
+		getGUIState()->m_shown_windows = START_MENU;
 		m_modified =WINDOWS_MODIFIED;
 	}
 
@@ -1459,6 +1463,7 @@ bool  Document::onKeyRelease(KeyCode key)
 
 void Document::update(float time)
 {
+	std::cout << CEGUI::System::getSingleton().getWindowContainingMouse()->getName() << std::endl;
 	// Welt eine Zeitscheibe weiter laufen lassen
 	if (World::getWorld() != 0)
 	{

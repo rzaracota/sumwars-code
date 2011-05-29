@@ -132,8 +132,7 @@ bool MainWindow::setupMainMenu()
 
 		// Oberstes Fenster der Hauptmenue Schicht
 		m_main_menu = win_mgr.createWindow("DefaultWindow", "MainMenu");
-		
-		
+				
 		CEGUI::Window* img;
 		img  = win_mgr.createWindow("TaharezLook/StaticImage", "StartScreenImage");
 		m_main_menu->addChildWindow(img);
@@ -180,14 +179,14 @@ bool MainWindow::setupMainMenu()
 		m_sub_windows["CreditsWindow"] = crd;
 		m_main_menu->addChildWindow(crd->getCEGUIWindow());
 
-		SavegameList* sgl = new SavegameList(m_document);
+		/*SavegameList* sgl = new SavegameList(m_document);
 		m_sub_windows["SavegameList"] = sgl;
 		m_main_menu->addChildWindow(sgl->getCEGUIWindow());
 		
 		MessageQuestionWindow * delchar = new MessageQuestionWindow(m_document,"DeleteChar","Really delete savegame?", "Yes",CEGUI::Event::Subscriber(&SavegameList:: onDeleteCharConfirmClicked, sgl),"No",CEGUI::Event::Subscriber(&SavegameList:: onDeleteCharAbortClicked, sgl));
 		m_sub_windows["DeleteChar"] = delchar;
 		m_main_menu->addChildWindow(delchar->getCEGUIWindow());
-		
+		*/
 		Window * wnd = new MainMenu(m_document);
 		m_sub_windows["MainMenu"] = wnd;
 		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
@@ -324,7 +323,7 @@ void MainWindow::update(float time)
 		}
 		DEBUGX("new shown windows %x",wflags);
 
-		// Auswahlliste Savegames  anzeigen wenn entsprechendes Flag gesetzt
+		/*// Auswahlliste Savegames  anzeigen wenn entsprechendes Flag gesetzt
 		CEGUI::FrameWindow* savelist = (CEGUI::FrameWindow*) win_mgr.getWindow("SavegameMenu");
 		if (wflags & Document::SAVEGAME_LIST)
 		{
@@ -335,10 +334,10 @@ void MainWindow::update(float time)
 		else
 		{
 			savelist->setVisible(false);
-		}
+		}*/
 
 		// Menu Spielstart anzeigen wenn entsprechendes Flag gesetzt
-		CEGUI::FrameWindow* start_menu = (CEGUI::FrameWindow*) win_mgr.getWindow("StartMenu");
+		CEGUI::FrameWindow* start_menu = (CEGUI::FrameWindow*) win_mgr.getWindow("StartMenuRoot");
 		if (wflags & Document::START_MENU)
 		{
 			start_menu->setVisible(true);
@@ -390,6 +389,7 @@ void MainWindow::update(float time)
 		{
 			options->setVisible(false);
 		}
+		
 		
 		CEGUI::FrameWindow* char_create = (CEGUI::FrameWindow*) win_mgr.getWindow("CharCreate");
 		if (wflags & Document::CHAR_CREATE)
