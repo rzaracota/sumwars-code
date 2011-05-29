@@ -1463,7 +1463,6 @@ bool  Document::onKeyRelease(KeyCode key)
 
 void Document::update(float time)
 {
-	std::cout << CEGUI::System::getSingleton().getWindowContainingMouse()->getName() << std::endl;
 	// Welt eine Zeitscheibe weiter laufen lassen
 	if (World::getWorld() != 0)
 	{
