@@ -2,6 +2,102 @@
 
 #include "graphicmanager.h"
 
+
+void MovableObjectInfo::writeToXML(TiXmlNode* node)
+{
+	TiXmlElement* elem = node->ToElement();
+	if (elem == 0) 
+		return;
+	
+	// This should be done somewhat more elegant x(
+	if (m_type == MovableObjectInfo::ENTITY)
+	{
+		elem->SetValue("Entity");
+	}
+	else if (m_type == MovableObjectInfo::PARTICLE_SYSTEM)
+	{
+		elem->SetValue("ParticleSystem");
+	}	
+	else if (m_type == MovableObjectInfo::BILLBOARD_SET)
+	{
+		elem->SetValue("BillboardSet");
+	}	
+	else if (m_type == MovableObjectInfo::BILLBOARD_CHAIN)
+	{
+		elem->SetValue("BillboardChain");
+	}	
+	else if (m_type == MovableObjectInfo::SUBOBJECT)
+	{
+		elem->SetValue("Subobject");
+	}	
+	else if (m_type == MovableObjectInfo::SOUNDOBJECT)
+	{
+		elem->SetValue("Soundobject");
+	}	
+	
+	if (m_objectname != "mainmesh" && m_objectname != "")
+	{
+		elem->SetAttribute("objectname", m_objectname.c_str());
+	}
+	else
+	{
+		elem->RemoveAttribute("objectname");
+	}
+	
+	elem->SetAttribute("source", m_source.c_str());
+	
+	
+	if (m_bone != "")
+	{
+		elem->SetAttribute("bone", m_bone.c_str());
+	}
+	else
+	{
+		elem->RemoveAttribute("bone");
+	}
+	
+	if (m_scale != 1.0)
+	{
+		elem->SetAttribute("scale", m_scale);
+	}
+	else
+	{
+		elem->RemoveAttribute("scale");
+	}
+	
+	if (m_position[0]!=0 || m_position[1]!=0 || m_position[2]!=0)
+	{
+		std::stringstream stream;
+		stream << m_position[0] << " " <<  m_position[1] << " " << m_position[2];
+		elem->SetAttribute("position", stream.str().c_str());
+	}
+	else
+	{
+		elem->RemoveAttribute("position");
+	}
+	
+	if (m_rotation[0]!=0 || m_rotation[1]!=0 || m_rotation[2]!=0)
+	{
+		std::stringstream stream;
+		stream << m_rotation[0] << " " <<  m_rotation[1] << " " << m_rotation[2];
+		elem->SetAttribute("rotation", stream.str().c_str());
+	}
+	else
+	{
+		elem->RemoveAttribute("rotation");
+	}
+	
+	if (m_highlightable != true)
+	{
+		elem->SetAttribute("highlightable", "false");
+	}
+	else
+	{
+		elem->RemoveAttribute("highlightable");
+	}
+
+}
+
 GraphicRenderInfo::GraphicRenderInfo(std::string parent)
 	:m_objects(),m_action_infos(), m_action_references()
 {
@@ -16,6 +112,25 @@ GraphicRenderInfo::~GraphicRenderInfo()
 	for (it =m_action_infos.begin(); it != m_action_infos.end(); ++it)
 	{
 		delete	it->second;
+	}
+}
+
+MovableObjectInfo* GraphicRenderInfo::getObject(std::string objectname)
+{
+	for (std::list<MovableObjectInfo>::iterator it = m_objects.begin(); it != m_objects.end(); ++it)
+	{
+		if (it->m_objectname == objectname)
+			return &(*it);
+	}
+	return 0;
+}
+
+void GraphicRenderInfo::removeObject(std::string objectname)
+{
+	for (std::list<MovableObjectInfo>::iterator it = m_objects.begin(); it != m_objects.end(); ++it)
+	{
+		m_objects.erase(it);
+		return;
 	}
 }
 
@@ -131,4 +246,87 @@ bool GraphicRenderInfo::checkActionInheritMask(ActionRenderpart::Type arpart)
 		mask = INHERIT_SOUND;
 	
 	return checkInheritMask(mask);
+}
+
+
+void GraphicRenderInfo::writeToXML(TiXmlNode* node)
+{
+	// make a map of all Subobjects by Name
+	// this also has the character of a todo list
+	// all updated structures are deleted from the list
+	std::map<std::string, MovableObjectInfo*> objects;
+	for (std::list<MovableObjectInfo>::iterator it = m_objects.begin(); it != m_objects.end(); ++it)
+	{
+		std::string objectname = it->m_objectname;
+		if (objectname == "")
+		{
+			objectname = "mainmesh";
+		}
+		objects[objectname] = &(*it);
+	}
+	
+	std::list<TiXmlElement*> delete_list;
+	
+	// loop over existing subobjects
+	TiXmlElement* child;
+	// point where to insert additional subobjects
+	TiXmlElement* insert_point = 0; 
+	for ( child = node->FirstChildElement(); child != 0; child = child->NextSiblingElement())
+	{
+		if ((!strcmp(child->Value(), "Entity")) || (!strcmp(child->Value(), "ParticleSystem")) || (!strcmp(child->Value(), "BillboardSet")) || (!strcmp(child->Value(), "BillboardChain")) || (!strcmp(child->Value(), "Subobject")) || (!strcmp(child->Value(), "Soundobject")))
+		{
+			// check if the Objekt is still present in the current map
+			std::string objectname = "mainmesh";
+			const char* attr = child->Attribute("objectname");
+			if (attr != 0)
+				objectname = attr;
+			if (objects.count(objectname) > 0)
+			{
+				// exists, update
+				objects[objectname]->writeToXML(child);
+				objects.erase(objectname);
+				insert_point = child;
+			}
+			else
+			{
+				// mark for deletion
+				delete_list.push_back(child);
+			}
+		}
+	}
+	
+	// now delete the obsolete child nodes
+	for (std::list<TiXmlElement*>::iterator it = delete_list.begin(); it != delete_list.end(); ++it)
+	{
+		node->RemoveChild(*it);
+	}
+	
+	// insert new Childs for all newly added subobjects
+	TiXmlElement inserter("dummy");	// dummy node just for being compied by tinyxml x(
+	TiXmlElement* newobject;
+	for (std::map<std::string, MovableObjectInfo*>::iterator it =  objects.begin(); it != objects.end(); ++it)
+	{
+		// normally, insert after the last subobject
+		// special cases for empty node and no other subobject found so far
+		if (insert_point == 0)
+		{
+			TiXmlElement* first = node->FirstChildElement();
+			if (first == 0)
+			{
+				newobject = node->InsertEndChild(inserter)->ToElement();
+			}
+			else
+			{
+				newobject = node->InsertBeforeChild(first,inserter)->ToElement();
+			}
+		}
+		else
+		{
+			newobject = node->InsertAfterChild(insert_point, inserter)->ToElement();
+		}
+		
+		// write the subobject
+		it->second->writeToXML(newobject);
+		insert_point = newobject;
+	}
 }

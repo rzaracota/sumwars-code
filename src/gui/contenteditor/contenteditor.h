@@ -9,6 +9,8 @@
 
 #include <map>
 
+#include "graphicobjectrenderinfo.h"
+
 class ContentEditor : public Ogre::Singleton<ContentEditor>
 {
 public:
@@ -32,32 +34,63 @@ public:
 	* \brief Updates all registered tabs
 	*/
 	void update(OIS::Keyboard *keyboard);
-
-	/**
-	* \fn void addTabWindow(CEGUI::Window *tab);
-	* \brief Adds a tab ContentTab window to the ContentEditor
-	* \param tab The ContentTab to add
-	*/
-	void addTabWindow(std::string name, ContentTab *tab);
-
-	/**
-	* \fn void tabExists(std::string tabName);
-	* \brief Checks if a ContentTab exists
-	* \param tabName Name of the ContentTab to check
-	*/
-	bool tabExists(std::string tabName);
+	
 	
 	static ContentEditor& getSingleton(void);
 	static ContentEditor* getSingletonPtr(void);
 
+	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called upon selecting a mesh from the combobox
+	 * Updates the content of the editor scene to display the selected mesh.
+	 */
+	bool onMeshSelected(const CEGUI::EventArgs& evt);
+	
+	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called clicking add Submesh button
+	 */
+	bool onSubMeshAdded(const CEGUI::EventArgs& evt);
+	
+	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called upon selecting a mesh from the submesh combobox
+	 */
+	bool onSubMeshSelected(const CEGUI::EventArgs& evt);
+	
+	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called upon changing any element in the submesh tab
+	 */
+	bool onSubMeshModified(const CEGUI::EventArgs& evt);
 
 protected:
+
 	/**
-	* \fn createPanel(bool visible);
-	* \brief Creates the panel
-	* \param visible Whether the panel is visible or not at the begining
-	*/
-	void createPanel(bool visible);
+	 * \brief updates the content of the preview image and the GUI Elements
+	 */
+	void updateRenderInfoGUI();
+	
+	/**
+	 * \brief updates the content of the Renderinfo XML editor
+	 */
+	void updateRenderInfoXML();
+	
+	/**
+	 * \brief updates the preview Image
+	 */
+	void updatePreviewImage();
+	
+	/**
+	 * \brief Checks for all attached Objects, whether their parent mesh and bone are still present
+	 * Dangling submeshes are deleted
+	 */ 
+	void checkAttachedObjects();
+	
+	/**
+	 * \brief updates the Translation of the labels
+	 */
+	virtual void updateTranslation();
 	
 	/**
 	* \fn handleCloseWindow(const CEGUI::EventArgs& e);
@@ -104,6 +137,25 @@ private:
 	*/
 	long m_lastVisibilitySwitch;
 	
+	/**
+	 * \brief marks if the renderinfo has been modified
+	 */
+	bool m_modified_renderinfo;
+	
+	/**
+	 * \brief marks that the XML of the renderinfo was modified
+	 */
+	bool m_modified_renderinfo_xml;
+	
+	/**
+	 * \brief Renderinfo edited with this window
+	 */
+	GraphicRenderInfo m_edited_renderinfo;
+	
+	/**
+	 * \brief XML representation of the  Renderinfo edited with this window
+	 */
+	TiXmlDocument m_renderinfo_xml;  
 };
 
 #endif // ContentEditor_H

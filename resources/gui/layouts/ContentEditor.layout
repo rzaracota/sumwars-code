@@ -6,52 +6,189 @@
         <Window Type="TaharezLook/TabControl" Name="ObjectInfoTabControl" >
             <Property Name="TabHeight" Value="{0,31.1724}" />
             <Property Name="TabPanePosition" Value="Top" />
-            <Property Name="UnifiedAreaRect" Value="{{0.324414,0},{0.00312498,0},{0.997266,0},{0.898958,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.000539273,0},{0.00312498,0},{0.997266,0},{0.898958,0}}" />
             <Window Type="DefaultWindow" Name="RenderInfoTab" >
                 <Property Name="Text" Value="Render Info" />
                 <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Window Type="TaharezLook/TabControl" Name="RenderInfoTabControl" >
                     <Property Name="TabHeight" Value="{0,31.1724}" />
                     <Property Name="TabPanePosition" Value="Top" />
-                    <Property Name="UnifiedAreaRect" Value="{{0.00391872,0},{0.00348824,0},{0.998476,0},{1.00058,0}}" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.00391872,0},{0.00348824,0},{0.527266,0},{1.00058,0}}" />
                     <Window Type="DefaultWindow" Name="RITab/BasicMesh" >
                         <Property Name="Text" Value="Mesh" />
                         <Property Name="Visible" Value="False" />
                         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                         <Window Type="TaharezLook/Combobox" Name="RITab/BM/MeshSelector" >
-                            <Property Name="UnifiedAreaRect" Value="{{0.0373223,0},{0.0507286,0},{0.315049,0},{0.965455,0}}" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.334514,0},{0.0363174,0},{0.662888,0},{0.905855,0}}" />
                             <Property Name="MaxEditTextLength" Value="1073741823" />
                         </Window>
-                        <Window Type="TaharezLook/StaticImage" Name="RITab/BM/meshPreview" >
-                            <Property Name="UnifiedAreaRect" Value="{{0.339401,0},{0.0565595,0},{0.984886,0},{0.972743,0}}" />
+                        <Window Type="TaharezLook/StaticText" Name="RITab/BM/MainMeshLabel" >
+                            <Property Name="Text" Value="Select main mesh:" />
+                            <Property Name="HorzExtent" Value="131" />
+                            <Property Name="VertExtent" Value="15.8785" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03739,0},{0.0186585,0},{0.347415,0},{0.0879001,0}}" />
                         </Window>
                     </Window>
                     <Window Type="DefaultWindow" Name="RITab/SubMesh" >
                         <Property Name="Text" Value="Submeshes" />
+                        <Property Name="Visible" Value="False" />
                         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                         <Window Type="TaharezLook/Combobox" Name="RITab/SubMesh/Selector" >
-                            <Property Name="UnifiedAreaRect" Value="{{0.037322,0},{0.050729,0},{0.315049,0},{0.245335,0}}" />
-                            <Property Name="MaxEditTextLength" Value="1073741823" />
-                        </Window>
-                        <Window Type="TaharezLook/Combobox" Name="RITab/SubMesh/BoneSelector" >
-                            <Property Name="UnifiedAreaRect" Value="{{0.34378,0},{0.050729,0},{0.621508,0},{0.245335,0}}" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.287206,0},{0.0239609,0},{0.564933,0},{0.50428,0}}" />
                             <Property Name="MaxEditTextLength" Value="1073741823" />
                         </Window>
                         <Window Type="TaharezLook/Button" Name="RITab/SubMesh/AddSubMeshButton" >
                             <Property Name="Text" Value="Add Submesh" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.661218,0},{0.051603,0},{0.938945,0},{0.113556,0}}" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.672314,0},{0.0661804,0},{0.950041,0},{0.128133,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="RITab/SM/NewSubmeshLabel" >
+                            <Property Name="Text" Value="New submesh:" />
+                            <Property Name="HorzExtent" Value="103" />
+                            <Property Name="VertExtent" Value="15.8785" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.0326589,0},{0.0228984,0},{0.238785,0},{0.0682017,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="RITab/SM/NewSMNameLabel" >
+                            <Property Name="Text" Value="submesh name:" />
+                            <Property Name="HorzExtent" Value="110" />
+                            <Property Name="VertExtent" Value="15.8785" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.0270315,0},{0.0721111,0},{0.233158,0},{0.127415,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="RITab/SM/EditSMLabel" >
+                            <Property Name="Text" Value="Edit submesh:" />
+                            <Property Name="HorzExtent" Value="101" />
+                            <Property Name="VertExtent" Value="15.8785" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.0232801,0},{0.181441,0},{0.229406,0},{0.236745,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Combobox" Name="RITab/SubMesh/EditSMSelector" >
+                            <Property Name="UnifiedAreaRect" Value="{{0.271771,0},{0.185165,0},{0.622654,0},{0.575544,0}}" />
+                            <Property Name="MaxEditTextLength" Value="1073741823" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="RITab/SM/AttachMeshLabel" >
+                            <Property Name="Text" Value="Attach to:" />
+                            <Property Name="HorzExtent" Value="71" />
+                            <Property Name="VertExtent" Value="15.8785" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.0964356,0},{0.228963,0},{0.259419,0},{0.304266,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Combobox" Name="RITab/SubMesh/AttachMeshSelector" >
+                            <Property Name="UnifiedAreaRect" Value="{{0.28115,0},{0.251637,0},{0.558877,0},{0.396243,0}}" />
+                            <Property Name="MaxEditTextLength" Value="1073741823" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="RITab/SM/BoneLabel" >
+                            <Property Name="Text" Value="at bone:" />
+                            <Property Name="HorzExtent" Value="58" />
+                            <Property Name="VertExtent" Value="15.8785" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.592684,0},{0.242082,0},{0.721903,0},{0.301351,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Combobox" Name="RITab/SubMesh/BoneSelector" >
+                            <Property Name="UnifiedAreaRect" Value="{{0.732379,0},{0.254553,0},{0.979511,0},{0.399159,0}}" />
+                            <Property Name="MaxEditTextLength" Value="1073741823" />
+                        </Window>
+                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMNameEditbox" >
+                            <Property Name="MaxTextLength" Value="1073741823" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.272446,0},{0.077842,0},{0.599352,0},{0.122302,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
+                        </Window>
+                        <Window Type="TaharezLook/Checkbox" Name="RITab/SM/AttachSMCheckbox" >
+                            <Property Name="UnifiedAreaRect" Value="{{0.0329296,0},{0.24344,0},{0.0784697,0},{0.293731,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="RITab/SM/RotateLabel" >
+                            <Property Name="Text" Value="Rotate(x,y,z):" />
+                            <Property Name="HorzExtent" Value="94" />
+                            <Property Name="VertExtent" Value="15.8785" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.4,0},{0.219404,0},{0.46,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMRotateX" >
+                            <Property Name="MaxTextLength" Value="1073741823" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.40842,0},{0.45,0},{0.46,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
+                        </Window>
+                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMRotateY" >
+                            <Property Name="MaxTextLength" Value="1073741823" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.5,0},{0.40842,0},{0.7,0},{0.46,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
+                        </Window>
+                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMRotateZ" >
+                            <Property Name="MaxTextLength" Value="1073741823" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.75,0},{0.40842,0},{0.95,0},{0.46,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="RITab/SM/ScaleLabel" >
+                            <Property Name="Text" Value="Scale (x,y,z):" />
+                            <Property Name="HorzExtent" Value="91" />
+                            <Property Name="VertExtent" Value="15.8785" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.5,0},{0.22,0},{0.56,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMScaleX" >
+                            <Property Name="MaxTextLength" Value="1073741823" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.5,0},{0.45,0},{0.56,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
+                        </Window>
+                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMScaleY" >
+                            <Property Name="MaxTextLength" Value="1073741823" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.5,0},{0.5,0},{0.7,0},{0.56,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
+                        </Window>
+                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMScaleZ" >
+                            <Property Name="MaxTextLength" Value="1073741823" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.75,0},{0.5,0},{0.95,0},{0.56,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="RITab/SM/OffsetLabel" >
+                            <Property Name="Text" Value="Offset (x,y,z):" />
+                            <Property Name="HorzExtent" Value="93" />
+                            <Property Name="VertExtent" Value="15.8785" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.6,0},{0.22,0},{0.66,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMOffsetX" >
+                            <Property Name="MaxTextLength" Value="1073741823" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.6,0},{0.45,0},{0.66,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
+                        </Window>
+                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMOffsetY" >
+                            <Property Name="MaxTextLength" Value="1073741823" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.5,0},{0.6,0},{0.7,0},{0.66,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
+                        </Window>
+                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMOffsetZ" >
+                            <Property Name="MaxTextLength" Value="1073741823" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.75,0},{0.6,0},{0.95,0},{0.66,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
+                        </Window>
+                        <Window Type="TaharezLook/Button" Name="RITab/SubMesh/DelSubMeshButton" >
+                            <Property Name="Text" Value="Delete Submesh" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.672314,0},{0.76618,0},{0.950041,0},{0.828133,0}}" />
+                        </Window>
+                    </Window>
+                    <Window Type="DefaultWindow" Name="RITab/Animations" >
+                        <Property Name="Text" Value="Animations" />
+                        <Property Name="Visible" Value="False" />
+                        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+                    </Window>
+                    <Window Type="DefaultWindow" Name="RITab/XML" >
+                        <Property Name="Text" Value="XML" />
+                        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+                        <Window Type="TaharezLook/MultiLineEditbox" Name="RITab/XML/RIXMLEditbox" >
+                            <Property Name="Text" >
+</Property>
+                            <Property Name="MaxTextLength" Value="1073741823" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.0229259,0},{0.0172008,0},{0.986204,0},{0.901313,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
                         </Window>
                     </Window>
                 </Window>
+                <Window Type="TaharezLook/StaticImage" Name="RITab/BM/meshPreview" >
+                    <Property Name="UnifiedAreaRect" Value="{{0.535738,0},{0.0565595,0},{0.983904,0},{0.772162,0}}" />
+                </Window>
             </Window>
-        </Window>
-        <Window Type="TaharezLook/Editbox" Name="XMLBox" >
-            <Property Name="MaxTextLength" Value="1073741823" />
-            <Property Name="UnifiedAreaRect" Value="{{0.000195324,0},{0.00572911,0},{0.326367,0},{0.900259,0}}" />
-            <Property Name="TextParsingEnabled" Value="False" />
-        </Window>
-        <Window Type="TaharezLook/Button" Name="XMLGenerateButton" >
-            <Property Name="UnifiedAreaRect" Value="{{0.00156251,0},{0.898698,0},{0.166602,0},{0.997656,0}}" />
         </Window>
         <Window Type="TaharezLook/Button" Name="CloseButton" >
             <Property Name="Text" Value="Close" />

@@ -7,6 +7,8 @@
 #include <list>
 #include <map>
 
+#include "../tinyxml/tinyxml.h"
+
 
 
 struct ActionRenderpart
@@ -77,6 +79,13 @@ struct MovableObjectInfo
 	float m_scale;
 	
 	bool m_highlightable;
+	
+	/**
+	 * \brief Writes the DataStructure to the XML node
+	 * \param node XML node
+	 * This function also deals with XML trees that are already written. In this case, only the difference is written.
+	 */
+	void writeToXML(TiXmlNode* node);
 };
 
 /**
@@ -127,7 +136,8 @@ class GraphicRenderInfo
 			INHERIT_OBJECTS = 0x100,
 		};
 		
-		GraphicRenderInfo(std::string parent);
+		GraphicRenderInfo(std::string parent="");
+		
 
 		~GraphicRenderInfo();
 
@@ -135,6 +145,11 @@ class GraphicRenderInfo
 		{
 			m_objects.push_back(minfo);
 		}
+		
+		MovableObjectInfo* getObject(std::string objectname);
+
+		
+		void removeObject(std::string objectname);
 
 		void addActionRenderInfo(std::string action, ActionRenderInfo* info)
 		{
@@ -176,6 +191,13 @@ class GraphicRenderInfo
 		{
 			m_parent_ptr = 0;
 		}
+		
+		/**
+		 * \brief Writes the DataStructure to the XML node
+		 * \param node XML node
+		 * This function also deals with XML trees that are already written. In this case, only the difference is written.
+		 */
+		void writeToXML(TiXmlNode* node);
 		
 		void setInheritMask(unsigned int mask)
 		{
