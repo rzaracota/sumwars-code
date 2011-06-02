@@ -104,41 +104,31 @@
                             <Property Name="FrameEnabled" Value="False" />
                             <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.4,0},{0.219404,0},{0.46,0}}" />
                         </Window>
-                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMRotateX" >
+                        <Window Type="TaharezLook/Spinner" Name="RITab/SM/SMRotateX" >
                             <Property Name="MaxTextLength" Value="1073741823" />
                             <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.40842,0},{0.45,0},{0.46,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
                         </Window>
-                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMRotateY" >
+                        <Window Type="TaharezLook/Spinner" Name="RITab/SM/SMRotateY" >
                             <Property Name="MaxTextLength" Value="1073741823" />
                             <Property Name="UnifiedAreaRect" Value="{{0.5,0},{0.40842,0},{0.7,0},{0.46,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
                         </Window>
-                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMRotateZ" >
+                        <Window Type="TaharezLook/Spinner" Name="RITab/SM/SMRotateZ" >
                             <Property Name="MaxTextLength" Value="1073741823" />
                             <Property Name="UnifiedAreaRect" Value="{{0.75,0},{0.40842,0},{0.95,0},{0.46,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
                         </Window>
                         <Window Type="TaharezLook/StaticText" Name="RITab/SM/ScaleLabel" >
-                            <Property Name="Text" Value="Scale (x,y,z):" />
+                            <Property Name="Text" Value="Scale:" />
                             <Property Name="HorzExtent" Value="91" />
                             <Property Name="VertExtent" Value="15.8785" />
                             <Property Name="FrameEnabled" Value="False" />
                             <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.5,0},{0.22,0},{0.56,0}}" />
                         </Window>
-                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMScaleX" >
+                        <Window Type="TaharezLook/Spinner" Name="RITab/SM/SMScale" >
                             <Property Name="MaxTextLength" Value="1073741823" />
                             <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.5,0},{0.45,0},{0.56,0}}" />
-                            <Property Name="TextParsingEnabled" Value="False" />
-                        </Window>
-                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMScaleY" >
-                            <Property Name="MaxTextLength" Value="1073741823" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.5,0},{0.5,0},{0.7,0},{0.56,0}}" />
-                            <Property Name="TextParsingEnabled" Value="False" />
-                        </Window>
-                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMScaleZ" >
-                            <Property Name="MaxTextLength" Value="1073741823" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.75,0},{0.5,0},{0.95,0},{0.56,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
                         </Window>
                         <Window Type="TaharezLook/StaticText" Name="RITab/SM/OffsetLabel" >
@@ -148,17 +138,17 @@
                             <Property Name="FrameEnabled" Value="False" />
                             <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.6,0},{0.22,0},{0.66,0}}" />
                         </Window>
-                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMOffsetX" >
+                        <Window Type="TaharezLook/Spinner" Name="RITab/SM/SMOffsetX" >
                             <Property Name="MaxTextLength" Value="1073741823" />
                             <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.6,0},{0.45,0},{0.66,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
                         </Window>
-                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMOffsetY" >
+                        <Window Type="TaharezLook/Spinner" Name="RITab/SM/SMOffsetY" >
                             <Property Name="MaxTextLength" Value="1073741823" />
                             <Property Name="UnifiedAreaRect" Value="{{0.5,0},{0.6,0},{0.7,0},{0.66,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
                         </Window>
-                        <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMOffsetZ" >
+                        <Window Type="TaharezLook/Spinner" Name="RITab/SM/SMOffsetZ" >
                             <Property Name="MaxTextLength" Value="1073741823" />
                             <Property Name="UnifiedAreaRect" Value="{{0.75,0},{0.6,0},{0.95,0},{0.66,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />

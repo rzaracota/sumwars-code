@@ -39,6 +39,10 @@ public:
 	static ContentEditor& getSingleton(void);
 	static ContentEditor* getSingletonPtr(void);
 
+
+
+protected:
+
 	/**
 	 * \param evt CEGUI event arguments
 	 * \brief Called upon selecting a mesh from the combobox
@@ -63,13 +67,18 @@ public:
 	 * \brief Called upon changing any element in the submesh tab
 	 */
 	bool onSubMeshModified(const CEGUI::EventArgs& evt);
-
-protected:
-
+	
 	/**
 	 * \brief updates the content of the preview image and the GUI Elements
 	 */
 	void updateRenderInfoGUI();
+	
+	/**
+	 * \brief updates the submesh editor component
+	 * \param objectname name of the Object to be edited
+	 * \param updateList if set to true, the list of objects will be updated, too
+	 */
+	void updateSubmeshEditor(std::string& objectname, bool updateList = true);
 	
 	/**
 	 * \brief updates the content of the Renderinfo XML editor
