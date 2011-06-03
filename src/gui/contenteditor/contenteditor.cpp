@@ -446,12 +446,13 @@ bool ContentEditor::onSubMeshAdded(const CEGUI::EventArgs& evt)
 		}
 		m_modified_renderinfo = true;
 	}
+	return true;
 }
 
 bool ContentEditor::onSubMeshModified(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
+	return true;
 }
 
 ContentEditor* ContentEditor::getSingletonPtr(void)
