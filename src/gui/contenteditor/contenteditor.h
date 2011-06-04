@@ -10,6 +10,7 @@
 #include <map>
 
 #include "graphicobjectrenderinfo.h"
+#include "graphicobject.h"
 
 class ContentEditor : public Ogre::Singleton<ContentEditor>
 {
@@ -60,13 +61,19 @@ protected:
 	 * \param evt CEGUI event arguments
 	 * \brief Called upon selecting a mesh from the submesh combobox
 	 */
-	bool onSubMeshSelected(const CEGUI::EventArgs& evt);
+	bool onSubObjectSelected(const CEGUI::EventArgs& evt);
 	
 	/**
 	 * \param evt CEGUI event arguments
 	 * \brief Called upon changing any element in the submesh tab
 	 */
 	bool onSubMeshModified(const CEGUI::EventArgs& evt);
+	
+	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called submitting new RenderinfoXML
+	 */
+	bool onRenderinfoXMLModified(const CEGUI::EventArgs& evt);
 	
 	/**
 	 * \brief updates the content of the preview image and the GUI Elements
@@ -78,7 +85,13 @@ protected:
 	 * \param objectname name of the Object to be edited
 	 * \param updateList if set to true, the list of objects will be updated, too
 	 */
-	void updateSubmeshEditor(std::string& objectname, bool updateList = true);
+	void updateSubmeshEditor(std::string objectname="", bool updateList = true);
+	
+	/**
+	 * \brief updates the list of bones to attach to
+	 * \param minfo data structure with information on the mesh
+	 */
+	void updateBoneList();
 	
 	/**
 	 * \brief updates the content of the Renderinfo XML editor
@@ -165,6 +178,17 @@ private:
 	 * \brief XML representation of the  Renderinfo edited with this window
 	 */
 	TiXmlDocument m_renderinfo_xml;  
+	
+	/**
+	 * \brief GraphicObject of the Renderinfo edited with this window
+	 */
+	GraphicObject* m_edited_graphicobject;
+	
+	/**
+	 * \brief while set to true, all CEGUI events will be ignored
+	 * This allows setting some GUI elements in event handlers without getting inifinite loops due.
+	 */
+	bool m_no_cegui_events;
 };
 
 #endif // ContentEditor_H

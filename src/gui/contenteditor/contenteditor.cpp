@@ -5,7 +5,7 @@
 
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 #include <OgreHardwarePixelBuffer.h>
-
+#include <OgreMeshManager.h>
 
 #include "graphicmanager.h"
 
@@ -15,6 +15,9 @@ template<> ContentEditor* Ogre::Singleton<ContentEditor>::ms_Singleton = 0;
 
 void ContentEditor::init(bool visible)
 {
+	m_no_cegui_events = false;
+	m_edited_graphicobject=0;
+	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	m_guiSystem = System::getSingletonPtr();
@@ -115,6 +118,44 @@ void ContentEditor::init(bool visible)
 	CEGUI::PushButton* addSubmeshbutton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("RITab/SubMesh/AddSubMeshButton"));
 	addSubmeshbutton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshAdded, this));
 	
+	//CEGUI::PushButton* submitRIXMLbutton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("RITab/XML/SubmitButton"));
+	//submitRIXMLbutton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ContentEditor::onRenderinfoXMLModified, this));
+	
+	
+	CEGUI::Spinner* rotXspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateX"));
+	CEGUI::Spinner* rotYspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateY"));
+	CEGUI::Spinner* rotZspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateZ"));
+	
+	CEGUI::Spinner* posXspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetX"));
+	CEGUI::Spinner* posYspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetY"));
+	CEGUI::Spinner* posZspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetZ"));
+	
+	CEGUI::Spinner* scalespinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMScale"));
+	
+	CEGUI::Combobox* objSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/EditSMSelector"));
+	CEGUI::Combobox* boneobjSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/AttachMeshSelector"));
+	CEGUI::Combobox* boneSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/BoneSelector"));
+	CEGUI::Checkbox* attachCheckbox = static_cast<CEGUI::Checkbox*>(win_mgr.getWindow("RITab/SM/AttachSMCheckbox"));
+	
+	
+	objSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&ContentEditor::onSubObjectSelected, this));
+	
+	rotXspinner->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshModified, this));
+	rotYspinner->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshModified, this));
+	rotZspinner->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshModified, this));
+	
+	posXspinner->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshModified, this));
+	posYspinner->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshModified, this));
+	posZspinner->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshModified, this));
+	
+	scalespinner->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshModified, this));
+	
+	boneobjSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshModified, this));
+	boneSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshModified, this));
+	attachCheckbox->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshModified, this));
+	
+	
+	
 	if(!visible)
 		m_rootWindow->setVisible(visible);
 	
@@ -146,6 +187,13 @@ void ContentEditor::update(OIS::Keyboard *keyboard)
 		updatePreviewImage();
 	}
 	
+	if (m_modified_renderinfo_xml)
+	{
+		updateSubmeshEditor();
+		updatePreviewImage();
+	}
+	
+	m_modified_renderinfo_xml = false;
 	m_modified_renderinfo = false;
 }
 
@@ -155,14 +203,30 @@ void ContentEditor::updatePreviewImage()
 	Ogre::SceneManager* editor_scene_mng = Ogre::Root::getSingleton().getSceneManager("EditorSceneManager");
 	GraphicManager::setSceneManager(editor_scene_mng);
 	
-	// radical solutions: clear the scene
-	editor_scene_mng->clearScene();
+	// reparse and update the renderinfo
+	GraphicRenderInfo* edited_renderinfo = new GraphicRenderInfo;
+	GraphicManager::loadRenderInfo(m_renderinfo_xml.FirstChildElement(), edited_renderinfo);
+	GraphicManager::registerRenderInfo("EditorRenderInfo", edited_renderinfo, true);
 	
+	// if not present: create the graphicObject
+	if (m_edited_graphicobject == 0)
+	{
+		// the ID is just arbitrary...
+		m_edited_graphicobject = GraphicManager::createGraphicObject("EditorRenderInfo", "EditedGraphicObject", 123456789);
+	}
+	m_edited_graphicobject->getTopNode()->setPosition(0,0,0);
+	m_edited_graphicobject->update(0);
+	
+	// update the texture
+	Ogre::Resource* res= Ogre::TextureManager::getSingleton().createOrRetrieve ("editor_tex",Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).first.getPointer();
+	Ogre::Texture* texture = dynamic_cast<Ogre::Texture*>(res);
+	Ogre::RenderTarget* target = texture->getBuffer()->getRenderTarget();
+	target->update();
 	
 	GraphicManager::setSceneManager(old_scene_mng);
 }
 
-void ContentEditor::updateSubmeshEditor(std::string& objectname, bool updateList)
+void ContentEditor::updateSubmeshEditor(std::string objectname, bool updateList)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
@@ -174,16 +238,26 @@ void ContentEditor::updateSubmeshEditor(std::string& objectname, bool updateList
 	CEGUI::Spinner* posYspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetY"));
 	CEGUI::Spinner* posZspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetZ"));
 
-	CEGUI::Spinner* scalespinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/RITab/SM/SMScale"));
+	CEGUI::Spinner* scalespinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMScale"));
 
 	CEGUI::Combobox* objSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/EditSMSelector"));
 	CEGUI::Combobox* boneobjSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/AttachMeshSelector"));
 	CEGUI::Combobox* boneSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/BoneSelector"));
 	CEGUI::Checkbox* attachCheckbox = static_cast<CEGUI::Checkbox*>(win_mgr.getWindow("RITab/SM/AttachSMCheckbox"));
 	
+	CEGUI::ListboxItem* objitem = objSelector->getSelectedItem();
+	if (objitem != 0 && objectname == "")
+		objectname = objitem->getText().c_str();
+	
 	// update the content of the objectSelector
 	if (updateList)
 	{
+		// preserve selected boneobj if possible (store the name)
+		CEGUI::ListboxItem* boneobjitem = boneobjSelector->getSelectedItem();
+		std::string boneobj = "mainmesh";
+		if (boneobjitem != 0)
+			boneobj = boneobjitem->getText().c_str();
+		
 		objSelector->resetList();
 		boneobjSelector->resetList();
 		
@@ -205,10 +279,23 @@ void ContentEditor::updateSubmeshEditor(std::string& objectname, bool updateList
 			}
 			
 			// also update the list of objects to attach to
-			listitem = new ListboxTextItem(it->m_objectname);
-			boneobjSelector->addItem(listitem);
+			// do not list the object itself
+			if (objectname != it->m_objectname)
+			{
+				listitem = new ListboxTextItem(it->m_objectname);
+				boneobjSelector->addItem(listitem);
+				
+				// automatically select the right object
+				if (boneobj == objectname)
+				{
+					boneobjSelector->setItemSelectState(listitem,true);
+				}
+			}
 		}
+		
 	}
+
+	m_no_cegui_events = true;
 
 	// get the selected item and the underlying RenderInfo data structure
 	CEGUI::ListboxItem* item = objSelector->getSelectedItem();
@@ -221,6 +308,9 @@ void ContentEditor::updateSubmeshEditor(std::string& objectname, bool updateList
 		objSelector->clearAllSelections();
 		return;
 	}
+	
+	// update the list of bones if required
+	updateBoneList();
 	
 	// now update all the GUI elements
 	// bone and *attached to*
@@ -280,6 +370,78 @@ void ContentEditor::updateSubmeshEditor(std::string& objectname, bool updateList
 	
 	// set scale spinner
 	scalespinner->setCurrentValue(minfo->m_scale);
+	
+	m_no_cegui_events = false;
+}
+
+void ContentEditor::updateBoneList()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Combobox* boneSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/BoneSelector"));
+	CEGUI::Combobox* boneobjSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/AttachMeshSelector"));
+	
+	// get the selected object and the underlying RenderInfo data structure
+	CEGUI::ListboxItem* item = boneobjSelector->getSelectedItem();
+	if (item == 0)
+		return;
+	
+	std::string boneobj = item->getText().c_str();
+	
+	MovableObjectInfo* minfo = m_edited_renderinfo.getObject(boneobj);
+
+	if (minfo == 0)
+	{
+		boneSelector->resetList();
+		return;
+	}
+	
+	CEGUI::ListboxItem* boneitem = boneSelector->getSelectedItem();
+	std::string bonesel = "";
+	if (boneitem != 0)
+		bonesel = boneitem->getText().c_str();
+	
+	boneSelector->resetList();
+	if (minfo->m_type == MovableObjectInfo::ENTITY)
+	{
+		//get the skeleton of the selected mesh and fill the bone selector combo box
+		Ogre::Mesh* mesh = dynamic_cast<Ogre::Mesh*>(Ogre::MeshManager::getSingleton().createOrRetrieve(minfo->m_source,"General").first.getPointer());
+		
+		Ogre::Skeleton *skel = 0;
+		
+		if (mesh != 0)
+		{
+			skel = mesh->getSkeleton().getPointer();
+		}
+		
+		if(skel!=0)
+		{
+			// iterate the skeleton to get the bones
+			Ogre::Skeleton::BoneIterator bit = skel->getBoneIterator();
+			std::list<std::string> boneNames;
+			
+			while (bit.hasMoreElements())
+			{
+				Ogre::Bone *bone = bit.getNext();
+				boneNames.push_back(bone->getName());
+			}
+			
+			// add the bones to the combo box
+			std::string bone;
+			ListboxTextItem* item;
+			for (std::list<std::string>::iterator it = boneNames.begin(); it != boneNames.end(); ++it)
+			{
+				
+				bone = *it;
+				item = new ListboxTextItem(bone);
+				boneSelector->addItem(item);
+				// automatically select the right object
+				if (bonesel == bone)
+				{
+					boneSelector->setItemSelectState(item,true);
+				}
+			}
+		}
+	}
 }
 
 void ContentEditor::updateRenderInfoXML()
@@ -355,7 +517,7 @@ bool ContentEditor::onMeshSelected(const CEGUI::EventArgs& evt)
 }
 
 
-bool ContentEditor::onSubMeshSelected(const CEGUI::EventArgs& evt)
+bool ContentEditor::onSubObjectSelected(const CEGUI::EventArgs& evt)
 {
 	const CEGUI::MouseEventArgs& we =
 	static_cast<const CEGUI::MouseEventArgs&>(evt);
@@ -370,30 +532,7 @@ bool ContentEditor::onSubMeshSelected(const CEGUI::EventArgs& evt)
 		std::string meshname = item->getText().c_str();
 		DEBUG("selected mesh %s",meshname.c_str());
 		
-		// if the Renderinfo already has a main mesh, edit it
-		// otherwise, create it
-		MovableObjectInfo* minfo = m_edited_renderinfo.getObject("mainmesh");
-		MovableObjectInfo newminfo;
-		bool addnew = false;
-		
-		if (minfo == 0)
-		{
-			// no mainmesh yet
-			minfo = &newminfo;
-			addnew = true;
-		}
-		
-		// edit the Object
-		minfo->m_type = MovableObjectInfo::ENTITY;
-		minfo->m_objectname = "mainmesh";
-		minfo->m_source = meshname;
-		
-		if (addnew)
-		{
-			m_edited_renderinfo.addObject(*minfo);
-		}
-		
-		m_modified_renderinfo = true;
+		updateSubmeshEditor(meshname, false);
 	}
 	
 	return true;
@@ -445,14 +584,106 @@ bool ContentEditor::onSubMeshAdded(const CEGUI::EventArgs& evt)
 			m_edited_renderinfo.addObject(*minfo);
 		}
 		m_modified_renderinfo = true;
+		
+		updateSubmeshEditor(objectname, true);
 	}
 	return true;
 }
 
 bool ContentEditor::onSubMeshModified(const CEGUI::EventArgs& evt)
 {
+	if (m_no_cegui_events)
+		return true;
+	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	// the the GUI parts
+	CEGUI::Spinner* rotXspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateX"));
+	CEGUI::Spinner* rotYspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateY"));
+	CEGUI::Spinner* rotZspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateZ"));
+	
+	CEGUI::Spinner* posXspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetX"));
+	CEGUI::Spinner* posYspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetY"));
+	CEGUI::Spinner* posZspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetZ"));
+	
+	CEGUI::Spinner* scalespinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMScale"));
+	
+	CEGUI::Combobox* objSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/EditSMSelector"));
+	CEGUI::Combobox* boneobjSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/AttachMeshSelector"));
+	CEGUI::Combobox* boneSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/BoneSelector"));
+	CEGUI::Checkbox* attachCheckbox = static_cast<CEGUI::Checkbox*>(win_mgr.getWindow("RITab/SM/AttachSMCheckbox"));
+	
+	// get the MovableObjectInfo
+	CEGUI::ListboxItem* item = objSelector->getSelectedItem();
+	if (item == 0)
+		return true;
+	
+	MovableObjectInfo* minfo = m_edited_renderinfo.getObject(item->getText().c_str());
+	if (minfo == 0)
+		return true;
+	
+	// update MovableObjectInfo data
+	updateBoneList();
+	
+	// the bone
+	minfo->m_bone = "";
+	if (attachCheckbox->isSelected())
+	{
+		std::string objname="";
+		std::string bone="";
+		CEGUI::ListboxItem* boneobjitem = boneobjSelector->getSelectedItem();
+		if (boneobjitem != 0)
+		{
+			objname = boneobjitem->getText().c_str();
+		}
+		CEGUI::ListboxItem* boneitem = boneSelector->getSelectedItem();
+		if (boneitem != 0)
+		{
+			bone = boneitem->getText().c_str();
+		}
+		
+		if (objname != "" && objname != "mainmesh" && bone != "")
+		{
+			minfo->m_bone += objname;
+			minfo->m_bone += ":";
+		}
+		minfo->m_bone += bone;
+	}
+	
+	// rotation
+	minfo->m_rotation[0] = rotXspinner->getCurrentValue();
+	minfo->m_rotation[1] = rotYspinner->getCurrentValue();
+	minfo->m_rotation[2] = rotZspinner->getCurrentValue();
+	
+	// position
+	minfo->m_position[0] = posXspinner->getCurrentValue();
+	minfo->m_position[1] = posYspinner->getCurrentValue();
+	minfo->m_position[2] = posZspinner->getCurrentValue();
+	
+	// scale
+	minfo->m_scale = scalespinner->getCurrentValue();
+
+	m_modified_renderinfo = true;
+	
 	return true;
+}
+
+bool ContentEditor::onRenderinfoXMLModified(const CEGUI::EventArgs& evt)
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.getWindow("RITab/XML/RIXMLEditbox"));
+	
+	// Parse the editor text to XML
+	m_renderinfo_xml.Parse(editor->getText().c_str());
+	
+	if (!m_renderinfo_xml.Error())
+	{
+		// parse the XML to the renderinfo
+		
+		GraphicManager::loadRenderInfo(m_renderinfo_xml.FirstChildElement(), &m_edited_renderinfo);
+		
+		m_modified_renderinfo_xml = true;
+	}
 }
 
 ContentEditor* ContentEditor::getSingletonPtr(void)

@@ -206,7 +206,6 @@ class GraphicManager
 		 */
 		static void invalidateGraphicObjects();
 		
-	private:
 		/**
 		 * \brief Registers a Renderinfo data structure with the given name
 		 * \param name Name of a Renderinfo
@@ -216,6 +215,22 @@ class GraphicManager
 		 * \sa getRenderInfo
 		 */
 		static bool registerRenderInfo(std::string name, GraphicRenderInfo* info, bool silent_replace = false);
+		
+		/**
+		 * \brief Reads the Renderinfos recursively from an XML node
+		 * \param node XML node
+		 * \param silent_replace if set to true, existing data is overwritten without error message
+		 */
+		static void loadRenderInfos(TiXmlNode* node, bool silent_replace = false);
+		
+		/**
+		 * \brief Reads Renderinfo from an XML node
+		 * \param node XML node
+		 */
+		static void loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info);
+		
+	private:
+		
 		
 		/**
 		 * \brief Returns an OGRE Particlesystem with the requested type
@@ -256,18 +271,7 @@ class GraphicManager
 		 */
 		static std::map<std::string, GraphicObject*> m_static_graphic_objects;
 		
-		/**
-		 * \brief Reads the Renderinfos recursively from an XML node
-		 * \param node XML node
-		 * \param silent_replace if set to true, existing data is overwritten without error message
-		 */
-		static void loadRenderInfos(TiXmlNode* node, bool silent_replace = false);
 		
-		/**
-		 * \brief Reads Renderinfo from an XML node
-		 * \param node XML node
-		 */
-		static void loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info);
 		
 		/**
 		 * \brief Reads MovableObjectInfo from an XML node
