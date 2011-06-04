@@ -1762,26 +1762,17 @@ bool TiXmlPrinter::VisitEnter( const TiXmlDocument& )
 
 bool TiXmlPrinter::VisitExit( const TiXmlDocument& )
 {
-	DoLineBreak();
 	return true;
 }
 
 bool TiXmlPrinter::VisitEnter( const TiXmlElement& element, const TiXmlAttribute* firstAttribute )
 {
-	if (!currentPositionInitialized)
-	{
-		currentRow = element.Row();
-		currentPositionInitialized = true;
-	}
-	
-	DoIndentIdentic(element.Row(), element.Column(), true);
+	DoIndent();
 	buffer += "<";
 	buffer += element.Value();
 
 	for( const TiXmlAttribute* attrib = firstAttribute; attrib; attrib = attrib->Next() )
 	{
-		DoIndentIdentic(attrib->Row(), attrib->Column()-1, false);
-		
 		buffer += " ";
 		attrib->Print( 0, 0, &buffer );
 	}
@@ -1789,8 +1780,7 @@ bool TiXmlPrinter::VisitEnter( const TiXmlElement& element, const TiXmlAttribute
 	if ( !element.FirstChild() ) 
 	{
 		buffer += " />";
-		if (!identicPrint)
-			DoLineBreak();
+		DoLineBreak();
 	}
 	else 
 	{
@@ -1804,8 +1794,7 @@ bool TiXmlPrinter::VisitEnter( const TiXmlElement& element, const TiXmlAttribute
 		}
 		else
 		{
-			if (!identicPrint)
-				DoLineBreak();
+			DoLineBreak();
 		}
 	}
 	++depth;	
@@ -1828,22 +1817,12 @@ bool TiXmlPrinter::VisitExit( const TiXmlElement& element )
 		}
 		else
 		{
-			
-			if (!identicPrint)
-			{
-				DoLineBreak();
-				DoIndent();
-			}
-			else
-			{
-				DoIndentIdentic(currentRow+1, element.Column(), false);
-			}
+			DoIndent();
 		}
 		buffer += "</";
 		buffer += element.Value();
 		buffer += ">";
-		if (!identicPrint)
-			DoLineBreak();
+		DoLineBreak();
 	}
 	return true;
 }
@@ -1851,15 +1830,9 @@ bool TiXmlPrinter::VisitExit( const TiXmlElement& element )
 
 bool TiXmlPrinter::Visit( const TiXmlText& text )
 {
-	if (!currentPositionInitialized)
-	{
-		currentRow = text.Row();
-		currentPositionInitialized = true;
-	}
-	
 	if ( text.CDATA() )
 	{
-		DoIndentIdentic(text.Row(), text.Column(), true);
+		DoIndent();
 		buffer += "<![CDATA[";
 		buffer += text.Value();
 		buffer += "]]>";
@@ -1867,15 +1840,13 @@ bool TiXmlPrinter::Visit( const TiXmlText& text )
 	}
 	else if ( simpleTextPrint )
 	{
-		DoIndentIdentic(text.Row(), text.Column(), false);
 		TIXML_STRING str;
 		TiXmlBase::EncodeString( text.ValueTStr(), &str );
 		buffer += str;
 	}
 	else
 	{
-		DoIndentIdentic(text.Row(), text.Column(), true);
-		
+		DoIndent();
 		TIXML_STRING str;
 		TiXmlBase::EncodeString( text.ValueTStr(), &str );
 		buffer += str;
@@ -1887,99 +1858,31 @@ bool TiXmlPrinter::Visit( const TiXmlText& text )
 
 bool TiXmlPrinter::Visit( const TiXmlDeclaration& declaration )
 {
-	if (!currentPositionInitialized)
-	{
-		currentRow = declaration.Row();
-		currentPositionInitialized = true;
-	}
-	DoIndentIdentic(declaration.Row(), declaration.Column(), true);
+	DoIndent();
 	declaration.Print( 0, 0, &buffer );
-	if (!identicPrint)
-		DoLineBreak();
+	DoLineBreak();
 	return true;
 }
 
 
 bool TiXmlPrinter::Visit( const TiXmlComment& comment )
-{	
-	if (!currentPositionInitialized)
-	{
-		currentRow = comment.Row();
-		currentPositionInitialized = true;
-	}
-	
-	DoIndentIdentic(comment.Row(), comment.Column(), true);
+{
+	DoIndent();
 	buffer += "<!--";
 	buffer += comment.Value();
 	buffer += "-->";
-	if (!identicPrint)
-		DoLineBreak();
+	DoLineBreak();
 	return true;
 }
 
 
 bool TiXmlPrinter::Visit( const TiXmlUnknown& unknown )
 {
-	if (!currentPositionInitialized)
-	{
-		currentRow = unknown.Row();
-		currentPositionInitialized = true;
-	}
-	
-	DoIndentIdentic(unknown.Row(), unknown.Column(), true);
+	DoIndent();
 	buffer += "<";
 	buffer += unknown.Value();
 	buffer += ">";
-	if (!identicPrint)
-		DoLineBreak();
+	DoLineBreak();
 	return true;
 }
 
-void TiXmlPrinter::DoIndentIdentic(int row, int column, bool alwaysindent)
-{
-	// plain version for not-identic print
-	if (!identicPrint)
-	{
-		if (alwaysindent)
-		{
-			DoIndent();
-		}
-		return;
-	}
-	std::cout << "indent to " << row << " " << column << "\n";
-	
-	if (!currentPositionInitialized)
-		return;
-	
-	// print linebreaks till the right line
-	bool didlinebreak = false;
-	while (currentRow < row)
-	{
-		DoLineBreak();
-		didlinebreak = true;
-	}
-	
-	// indent
-	int identsize = indent.size();
-	if (tabsize != 0)
-		identsize = tabsize-1;
-	
-	if (didlinebreak)
-	{
-		DoIndent();
-		std::cout << "indenting at column " << Column() << "offset " << columnOffset << "\n";
-		// additional indentation if the original had additional indentation
-		while (Column() + identsize < column)
-		{
-			DoSingleIndent();
-			std::cout << "indenting at column " << Column() << "offset " << columnOffset << "\n";
-		}
-	}
-	
-	// Fill the rest with blanks
-	while (Column() < column)
-	{
-		buffer += " ";
-	}
-	
-}

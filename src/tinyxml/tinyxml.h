@@ -52,7 +52,7 @@ distribution.
 	#include "tinystr.h"
 	#define TIXML_STRING		TiXmlString
 #endif
-#include <iostream>
+
 // Deprecated library function hell. Compilers want to use the
 // new safe versions. This probably doesn't fully address the problem,
 // but it gets closer. There are too many compilers for me to fully
@@ -1734,10 +1734,7 @@ class TiXmlPrinter : public TiXmlVisitor
 {
 public:
 	TiXmlPrinter() : depth( 0 ), simpleTextPrint( false ),
-					 buffer(), indent( "    " ), lineBreak( "\n" )
-					 , currentPositionInitialized(false)
-					 , currentLineStart(0), tabsize(0)
-					 {}
+					 buffer(), indent( "    " ), lineBreak( "\n" ) {}
 
 	virtual bool VisitEnter( const TiXmlDocument& doc );
 	virtual bool VisitExit( const TiXmlDocument& doc );
@@ -1770,20 +1767,6 @@ public:
 	void SetStreamPrinting()						{ indent = "";
 													  lineBreak = "";
 													}	
-	
-	/**
-	 * If set to true, printer tries to reproduce the input file exactly
-	 */
-	void SetIdenticPrinting(bool _identicPrint)
-	{
-		identicPrint = _identicPrint;
-	}
-	
-	void SetTabSize(int _tabsize)
-	{
-		tabsize = _tabsize;
-	}
-	
 	/// Return the result.
 	const char* CStr()								{ return buffer.c_str(); }
 	/// Return the length of the result string.
@@ -1795,48 +1778,19 @@ public:
 	#endif
 
 private:
-	void DoSingleIndent()
-	{
-		buffer += indent;
-		if (tabsize != 0)
-		{
-			columnOffset += tabsize-1;
-		}
-	}
-	
 	void DoIndent()	{
 		for( int i=0; i<depth; ++i )
-		{
-			DoSingleIndent();
-		}
+			buffer += indent;
 	}
 	void DoLineBreak() {
 		buffer += lineBreak;
-		
-		currentRow ++;
-		currentLineStart = Size();
-		columnOffset = 0;
 	}
-	
-	int Column()
-	{
-		return Size() - currentLineStart + 1 + columnOffset;
-	}
-	
-	void DoIndentIdentic(int row, int column, bool alwaysindent);
 
 	int depth;
 	bool simpleTextPrint;
-	bool identicPrint;
 	TIXML_STRING buffer;
 	TIXML_STRING indent;
 	TIXML_STRING lineBreak;
-	
-	int currentLineStart;
-	int currentRow;
-	int columnOffset;
-	bool currentPositionInitialized;
-	int tabsize;
 };
 
 
