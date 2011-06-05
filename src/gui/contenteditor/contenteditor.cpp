@@ -684,6 +684,7 @@ bool ContentEditor::onRenderinfoXMLModified(const CEGUI::EventArgs& evt)
 		
 		m_modified_renderinfo_xml = true;
 	}
+	return true;
 }
 
 ContentEditor* ContentEditor::getSingletonPtr(void)
