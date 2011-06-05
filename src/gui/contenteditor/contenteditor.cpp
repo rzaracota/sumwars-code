@@ -115,11 +115,16 @@ void ContentEditor::init(bool visible)
 	
 	// wire the GUI
 	selector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&ContentEditor::onMeshSelected, this));
+	subSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshSelected, this));
+	
 	CEGUI::PushButton* addSubmeshbutton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("RITab/SubMesh/AddSubMeshButton"));
 	addSubmeshbutton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshAdded, this));
 	
-	//CEGUI::PushButton* submitRIXMLbutton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("RITab/XML/SubmitButton"));
-	//submitRIXMLbutton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ContentEditor::onRenderinfoXMLModified, this));
+	CEGUI::PushButton* submitRIXMLbutton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("RITab/XML/SubmitButton"));
+	submitRIXMLbutton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ContentEditor::onRenderinfoXMLModified, this));
+	
+	CEGUI::PushButton* delSubmeshbutton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("RITab/SubMesh/DelSubMeshButton"));
+	delSubmeshbutton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshDeleted, this));
 	
 	
 	CEGUI::Spinner* rotXspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateX"));
@@ -217,11 +222,33 @@ void ContentEditor::updatePreviewImage()
 	m_edited_graphicobject->getTopNode()->setPosition(0,0,0);
 	m_edited_graphicobject->update(0);
 	
+	// update the camera to show the full object
+	// first, the subtree needs to be updated
+	Ogre::SceneNode* topnode = m_edited_graphicobject->getTopNode();
+	topnode->_update(true,false);
+	const Ogre::AxisAlignedBox& boundingbox = topnode->_getWorldAABB();
+	
+	// camera is placed looking along negative X axis, with Y and Z offset
+	Ogre::Vector3 bbox_min = boundingbox.getMinimum();
+	Ogre::Vector3 bbox_max = boundingbox.getMaximum();
+	double center_y = 0.5*(bbox_max[1] + bbox_min[1]);
+	double center_z = 0.5*(bbox_max[2] + bbox_min[2]);
+	double size_y = bbox_max[1] - bbox_min[1];
+	double size_z = bbox_max[2] - bbox_min[2];
+	
+	double viewsize = MathHelper::Max(size_y, size_z);
+	
+	Ogre::Camera* editor_camera = editor_scene_mng->getCamera("editor_camera");
+	//editor_camera->setPosition(Ogre::Vector3(bbox_max[0] + viewsize/sqrt(2) , center_y,center_z));
+	//editor_camera->lookAt(Ogre::Vector3(bbox_max[0], center_y,center_z));
+	
 	// update the texture
 	Ogre::Resource* res= Ogre::TextureManager::getSingleton().createOrRetrieve ("editor_tex",Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).first.getPointer();
 	Ogre::Texture* texture = dynamic_cast<Ogre::Texture*>(res);
 	Ogre::RenderTarget* target = texture->getBuffer()->getRenderTarget();
 	target->update();
+	
+
 	
 	GraphicManager::setSceneManager(old_scene_mng);
 }
@@ -245,13 +272,15 @@ void ContentEditor::updateSubmeshEditor(std::string objectname, bool updateList)
 	CEGUI::Combobox* boneSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/BoneSelector"));
 	CEGUI::Checkbox* attachCheckbox = static_cast<CEGUI::Checkbox*>(win_mgr.getWindow("RITab/SM/AttachSMCheckbox"));
 	
-	CEGUI::ListboxItem* objitem = objSelector->getSelectedItem();
-	if (objitem != 0 && objectname == "")
-		objectname = objitem->getText().c_str();
+	if (objectname == "")
+		objectname = objSelector->getText().c_str();
 	
 	// update the content of the objectSelector
 	if (updateList)
 	{
+		bool objectfound = false;
+		bool boneobjfound = false;
+		
 		// preserve selected boneobj if possible (store the name)
 		CEGUI::ListboxItem* boneobjitem = boneobjSelector->getSelectedItem();
 		std::string boneobj = "mainmesh";
@@ -260,6 +289,9 @@ void ContentEditor::updateSubmeshEditor(std::string objectname, bool updateList)
 		
 		objSelector->resetList();
 		boneobjSelector->resetList();
+		objSelector->setText("");
+		boneobjSelector->setText("");
+		
 		
 		std::list<MovableObjectInfo>& objects = m_edited_renderinfo.getObjects();
 		CEGUI::ListboxTextItem* listitem;
@@ -276,6 +308,8 @@ void ContentEditor::updateSubmeshEditor(std::string objectname, bool updateList)
 			if (it->m_objectname == objectname)
 			{
 				objSelector->setItemSelectState(listitem,true);
+				objSelector->setText(objectname);
+				objectfound = true;
 			}
 			
 			// also update the list of objects to attach to
@@ -286,26 +320,48 @@ void ContentEditor::updateSubmeshEditor(std::string objectname, bool updateList)
 				boneobjSelector->addItem(listitem);
 				
 				// automatically select the right object
-				if (boneobj == objectname)
+				if (boneobj == it->m_objectname)
 				{
 					boneobjSelector->setItemSelectState(listitem,true);
+					objSelector->setText(boneobj);
+					boneobjfound = true;
 				}
 			}
 		}
 		
+		// if the whole object is missing, clear all attach selections
+		if (!objectfound)
+		{
+			boneobjSelector->clearAllSelections();
+			boneobjSelector->setText("");
+			boneSelector->clearAllSelections();
+			boneSelector->setText("");
+		}
+		
+		// if just the object to attach to is missing, clear the bone selection
+		if (!boneobjfound)
+		{
+			boneSelector->clearAllSelections();
+			boneSelector->setText("");
+		}
 	}
 
 	m_no_cegui_events = true;
 
 	// get the selected item and the underlying RenderInfo data structure
 	CEGUI::ListboxItem* item = objSelector->getSelectedItem();
-	if (item == 0)
-		return;
+	MovableObjectInfo* minfo = 0;
+	if (item != 0)
+		minfo = m_edited_renderinfo.getObject(objectname);
 	
-	MovableObjectInfo* minfo = m_edited_renderinfo.getObject(objectname);
 	if (minfo == 0)
 	{
 		objSelector->clearAllSelections();
+		objSelector->setText("");
+		boneobjSelector->clearAllSelections();
+		boneobjSelector->setText("");
+		boneSelector->clearAllSelections();
+		boneSelector->setText("");
 		return;
 	}
 	
@@ -337,11 +393,15 @@ void ContentEditor::updateSubmeshEditor(std::string objectname, bool updateList)
 	{
 		boneobjSelector->clearAllSelections();
 		boneSelector->clearAllSelections();
+		boneobjSelector->setText("");
+		boneSelector->setText("");
+		
 		for (int i=0; i<boneobjSelector->getItemCount(); i++)
 		{
 			if (boneobjSelector->getListboxItemFromIndex(i)->getText() == boneobj)
 			{
 				boneobjSelector->setSelection(i,i);
+				boneobjSelector->setText(boneobj);
 			}
 		}
 		for (int i=0; i<boneSelector->getItemCount(); i++)
@@ -349,6 +409,7 @@ void ContentEditor::updateSubmeshEditor(std::string objectname, bool updateList)
 			if (boneSelector->getListboxItemFromIndex(i)->getText() == bone)
 			{
 				boneSelector->setSelection(i,i);
+				boneSelector->setText(bone);
 			}
 		}
 	}
@@ -381,11 +442,7 @@ void ContentEditor::updateBoneList()
 	CEGUI::Combobox* boneobjSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/AttachMeshSelector"));
 	
 	// get the selected object and the underlying RenderInfo data structure
-	CEGUI::ListboxItem* item = boneobjSelector->getSelectedItem();
-	if (item == 0)
-		return;
-	
-	std::string boneobj = item->getText().c_str();
+	std::string boneobj = boneobjSelector->getText().c_str();
 	
 	MovableObjectInfo* minfo = m_edited_renderinfo.getObject(boneobj);
 
@@ -395,12 +452,12 @@ void ContentEditor::updateBoneList()
 		return;
 	}
 	
-	CEGUI::ListboxItem* boneitem = boneSelector->getSelectedItem();
-	std::string bonesel = "";
-	if (boneitem != 0)
-		bonesel = boneitem->getText().c_str();
+
+	std::string bonesel = boneSelector->getText().c_str();
 	
 	boneSelector->resetList();
+	boneSelector->setText("");
+	
 	if (minfo->m_type == MovableObjectInfo::ENTITY)
 	{
 		//get the skeleton of the selected mesh and fill the bone selector combo box
@@ -417,18 +474,18 @@ void ContentEditor::updateBoneList()
 		{
 			// iterate the skeleton to get the bones
 			Ogre::Skeleton::BoneIterator bit = skel->getBoneIterator();
-			std::list<std::string> boneNames;
+			std::set<std::string> boneNames;
 			
 			while (bit.hasMoreElements())
 			{
 				Ogre::Bone *bone = bit.getNext();
-				boneNames.push_back(bone->getName());
+				boneNames.insert(bone->getName());
 			}
 			
 			// add the bones to the combo box
 			std::string bone;
 			ListboxTextItem* item;
-			for (std::list<std::string>::iterator it = boneNames.begin(); it != boneNames.end(); ++it)
+			for (std::set<std::string>::iterator it = boneNames.begin(); it != boneNames.end(); ++it)
 			{
 				
 				bone = *it;
@@ -438,6 +495,7 @@ void ContentEditor::updateBoneList()
 				if (bonesel == bone)
 				{
 					boneSelector->setItemSelectState(item,true);
+					boneSelector->setText(bone);
 				}
 			}
 		}
@@ -485,7 +543,7 @@ bool ContentEditor::onMeshSelected(const CEGUI::EventArgs& evt)
 	{
 		// place the required mesh in the editor scene
 		std::string meshname = item->getText().c_str();
-		DEBUG("selected mesh %s",meshname.c_str());
+		DEBUGX("selected mesh %s",meshname.c_str());
 		
 		// if the Renderinfo already has a main mesh, edit it
 		// otherwise, create it
@@ -535,6 +593,28 @@ bool ContentEditor::onSubObjectSelected(const CEGUI::EventArgs& evt)
 		updateSubmeshEditor(meshname, false);
 	}
 	
+	return true;
+}
+
+bool ContentEditor::onSubMeshSelected(const CEGUI::EventArgs& evt)
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Combobox* subSelector = static_cast<CEGUI::Combobox*>(WindowManager::getSingleton().getWindow("RITab/SubMesh/Selector"));
+	CEGUI::Editbox* subMeshNameBox = static_cast<CEGUI::Editbox*>(WindowManager::getSingleton().getWindow("RITab/SM/SMNameEditbox"));
+	
+	CEGUI::ListboxItem* item = subSelector->getSelectedItem();
+	if (item != 0)
+	{
+		std::string meshname = item->getText().c_str();
+		
+		// crop the .mesh...
+		size_t pos = meshname.find_first_of('.');
+		if (pos != std::string::npos)
+		{
+			meshname.erase(pos);
+		}
+		subMeshNameBox->setText(meshname);
+	}
 	return true;
 }
 
@@ -668,21 +748,93 @@ bool ContentEditor::onSubMeshModified(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+bool ContentEditor::onSubMeshDeleted(const CEGUI::EventArgs& evt)
+{
+	if (m_no_cegui_events)
+		return true;
+	
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Combobox* objSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/EditSMSelector"));
+	
+	// get the MovableObjectInfo
+	CEGUI::ListboxItem* item = objSelector->getSelectedItem();
+	if (item == 0)
+		return true;
+	
+	MovableObjectInfo* minfo = m_edited_renderinfo.getObject(item->getText().c_str());
+	if (minfo == 0)
+		return true;
+	
+	// Remove it from the renderinfo
+	m_edited_renderinfo.removeObject(minfo->m_objectname);
+	
+	m_modified_renderinfo = true;
+	return true;
+}
+
 bool ContentEditor::onRenderinfoXMLModified(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.getWindow("RITab/XML/RIXMLEditbox"));
 	
 	// Parse the editor text to XML
-	m_renderinfo_xml.Parse(editor->getText().c_str());
+	// use temporary XML document for recovering from errors
+	TiXmlDocument ri_temp_xml;
+	ri_temp_xml.Parse(editor->getText().c_str());
 	
-	if (!m_renderinfo_xml.Error())
+	if (!ri_temp_xml.Error())
 	{
-		// parse the XML to the renderinfo
+		// copy the first Element to the real Renderinfo
+		// first, remove the old root
+		TiXmlElement* oldroot = m_renderinfo_xml.RootElement();
+		if (oldroot != 0)
+		{
+			m_renderinfo_xml.RemoveChild(oldroot);
+		}
+		m_renderinfo_xml.LinkEndChild(ri_temp_xml.RootElement()->Clone());
 		
+		// parse the XML to the renderinfo
+		// firs,t clear the RenderInfo
+		m_edited_renderinfo.clear();
 		GraphicManager::loadRenderInfo(m_renderinfo_xml.FirstChildElement(), &m_edited_renderinfo);
 		
 		m_modified_renderinfo_xml = true;
+	}
+	else
+	{
+		// XML parse error
+		// set the cursor to the position of the first error
+		int err_row = ri_temp_xml.ErrorRow();
+		int err_col = ri_temp_xml.ErrorCol();
+		
+		int row =1, col = 1;	
+		int pos = 0;	// cursor position found
+		const CEGUI::String& text = editor->getText();
+		while (pos < text.size())
+		{
+			// second condition ensures, that cursor is placed on the end,
+			// if the row err_row is shorter than err_col for some reason
+			if ((row == err_row && col == err_col)
+				|| (row > err_row))
+			{
+				break;
+			}
+			
+			if (text.compare(pos,1,"\n") == 0)
+			{
+				row++;
+				col = 1;
+			}
+			else
+			{
+				col ++;
+			}
+			pos++;
+		}
+		
+		editor->setCaratIndex(pos);
+		editor->ensureCaratIsVisible();
+		editor->activate();
 	}
 	return true;
 }

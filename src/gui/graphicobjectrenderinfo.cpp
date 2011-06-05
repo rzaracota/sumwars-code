@@ -115,6 +115,20 @@ GraphicRenderInfo::~GraphicRenderInfo()
 	}
 }
 
+void GraphicRenderInfo::clear()
+{
+	std::multimap<std::string, ActionRenderInfo*>::iterator it;
+	for (it =m_action_infos.begin(); it != m_action_infos.end(); ++it)
+	{
+		delete	it->second;
+	}
+	
+	m_action_references.clear();
+	m_action_infos.clear();
+	m_objects.clear();
+	m_parent_ptr = 0;
+}
+
 MovableObjectInfo* GraphicRenderInfo::getObject(std::string objectname)
 {
 	for (std::list<MovableObjectInfo>::iterator it = m_objects.begin(); it != m_objects.end(); ++it)
@@ -129,8 +143,11 @@ void GraphicRenderInfo::removeObject(std::string objectname)
 {
 	for (std::list<MovableObjectInfo>::iterator it = m_objects.begin(); it != m_objects.end(); ++it)
 	{
-		m_objects.erase(it);
-		return;
+		if (it->m_objectname == objectname)
+		{
+			m_objects.erase(it);
+			return;
+		}
 	}
 }
 

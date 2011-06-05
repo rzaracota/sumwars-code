@@ -53,13 +53,19 @@ protected:
 	
 	/**
 	 * \param evt CEGUI event arguments
+	 * \brief Called upon selecting a mesh from the submesh combobox
+	 */
+	bool onSubMeshSelected(const CEGUI::EventArgs& evt);
+	
+	/**
+	 * \param evt CEGUI event arguments
 	 * \brief Called clicking add Submesh button
 	 */
 	bool onSubMeshAdded(const CEGUI::EventArgs& evt);
 	
 	/**
 	 * \param evt CEGUI event arguments
-	 * \brief Called upon selecting a mesh from the submesh combobox
+	 * \brief Called upon selecting a subobject from the subobject combobox
 	 */
 	bool onSubObjectSelected(const CEGUI::EventArgs& evt);
 	
@@ -68,6 +74,12 @@ protected:
 	 * \brief Called upon changing any element in the submesh tab
 	 */
 	bool onSubMeshModified(const CEGUI::EventArgs& evt);
+	
+	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called upon clicking on the delete Submesh button
+	 */
+	bool onSubMeshDeleted(const CEGUI::EventArgs& evt);
 	
 	/**
 	 * \param evt CEGUI event arguments

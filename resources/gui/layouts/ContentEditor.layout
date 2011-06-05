@@ -54,14 +54,14 @@
                             <Property Name="HorzExtent" Value="97" />
                             <Property Name="VertExtent" Value="15.5148" />
                             <Property Name="FrameEnabled" Value="False" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.0270315,0},{0.0721111,0},{0.233158,0},{0.127415,0}}" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.0270315,0},{0.0721111,0},{0.243158,0},{0.127415,0}}" />
                         </Window>
                         <Window Type="TaharezLook/StaticText" Name="RITab/SM/EditSMLabel" >
                             <Property Name="Text" Value="Edit submesh:" />
                             <Property Name="HorzExtent" Value="86" />
                             <Property Name="VertExtent" Value="15.5148" />
                             <Property Name="FrameEnabled" Value="False" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.0232801,0},{0.181441,0},{0.229406,0},{0.236745,0}}" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.0232801,0},{0.181441,0},{0.249406,0},{0.236745,0}}" />
                         </Window>
                         <Window Type="TaharezLook/Combobox" Name="RITab/SubMesh/EditSMSelector" >
                             <Property Name="UnifiedAreaRect" Value="{{0.3,0},{0.185165,0},{0.65,0},{0.575544,0}}" />

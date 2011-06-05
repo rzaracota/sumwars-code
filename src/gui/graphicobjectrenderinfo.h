@@ -140,6 +140,8 @@ class GraphicRenderInfo
 		
 
 		~GraphicRenderInfo();
+		
+		void clear();
 
 		void addObject(MovableObjectInfo& minfo)
 		{
