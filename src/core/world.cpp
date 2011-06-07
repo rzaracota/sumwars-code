@@ -2899,15 +2899,18 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 					// Richtung testweise eins zurueck setzen
 					// damit werden auch nicht konvexe Objekte korrekt behandelt
 					DEBUGX("intersecting: %i %i %f %f",is+idir[d][0],js+idir[d][1],s2.m_center.m_x,s2.m_center.m_y);
-					d--;
-					s2.m_center.m_x = x+dir[d][0];
-					s2.m_center.m_y = y+dir[d][1];
-					if (s2.m_center.m_x<c1.m_x || s2.m_center.m_y<c1.m_y ||
-									   s2.m_center.m_x> c2.m_x|| s2.m_center.m_y>c2.m_y || !wos->intersects(s2))
+					if (d > 0)
 					{
-						d++;
+						d--;
 						s2.m_center.m_x = x+dir[d][0];
 						s2.m_center.m_y = y+dir[d][1];
+						if (s2.m_center.m_x<c1.m_x || s2.m_center.m_y<c1.m_y ||
+										s2.m_center.m_x> c2.m_x|| s2.m_center.m_y>c2.m_y || !wos->intersects(s2))
+						{
+							d++;
+							s2.m_center.m_x = x+dir[d][0];
+							s2.m_center.m_y = y+dir[d][1];
+						}
 					}
 				}
 				else
