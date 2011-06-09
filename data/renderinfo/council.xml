@@ -57,6 +57,11 @@
 		<Animation name="rise" />
 	</Action>
 	
+	<State name="bleed">
+		<Active>
+			<Sound objectname="general" name="slug_hit"/>
+		</Active>
+	</State>
 </RenderInfo>
 
 <RenderInfo name="lousebase" parent="creaturebase">
@@ -66,11 +71,11 @@
 	
 	<Action name="attack">
 		<Animation name="attack" />
-		<Sound objectname="general" name="slug_attack"/>
+		<Sound objectname="general" name="beatle_attack"/>
 	</Action>
 
 	<Action name="die">
-		<Sound objectname="general" name="slug_die"/>
+		<Sound objectname="general" name="beatle_die"/>
 		<Animation name="die" />
 	</Action>
 	
@@ -83,6 +88,12 @@
 	<Action name="summoned">
 		<Animation name="jump" />
 	</Action>
+	
+	<State name="bleed">
+		<Active>
+			<Sound objectname="general" name="beatle_hit"/>
+		</Active>
+	</State>
 </RenderInfo>
 
 <RenderInfo name="behemothbase" parent="creaturebase">

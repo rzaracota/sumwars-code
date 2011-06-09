@@ -5,6 +5,7 @@
 	
 	<Action name="attack">
 		<Animation name="attack" />
+		<Sound objectname="general" name="wolf_att"/>
 	</Action>
 
 	<Action name="die">

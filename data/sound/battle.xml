@@ -24,6 +24,9 @@
 
 <Sound name="arrow">
 	<Soundfile source="battle_sound_effects/swish_2.wav"/>
+	<Soundfile source="battle_sound_effects/swing_1.wav"/>
+	<Soundfile source="battle_sound_effects/swing_2.wav"/>
+	<Soundfile source="battle_sound_effects/swing_3.wav"/>
 </Sound>
 
 <Sound name="throw_knife">
