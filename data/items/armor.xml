@@ -66,7 +66,7 @@
 <!-- WAR, PRI, ARC-->
 <Item type="armor" subtype="rivet_arm" name="rivet armor" size="big">
 	<Image image="set:leath_arm.png image:full_image" />
-	<RenderInfo name="leathArm" />
+	<RenderInfo name="rivetArmor" />
 	<Attribute
 			level_requirement="5"
 			character_requirement="warrior,priest,archer" 
@@ -98,7 +98,7 @@
 <!-- WAR, ARC-->
 <Item type="armor" subtype="bandit_arm" name="bandit armor" size="big">
 	<Image image="set:leath_arm.png image:full_image" />
-	<RenderInfo name="leathArm" />
+	<RenderInfo name="rivetArmorOld" />
 	<Attribute
 			level_requirement="8"
 			character_requirement="warrior,archer" 
@@ -130,7 +130,7 @@
 <!-- PRI-->
 <Item type="armor" subtype="novice_arm" name="novice armor" size="big">
 	<Image image="set:merc_arm.png image:full_image" />
-	<RenderInfo name="mercArm" />
+	<RenderInfo name="noviceArmor" />
 	<Attribute
 			level_requirement="8"
 			character_requirement="priest" 
@@ -194,7 +194,7 @@
 <!-- ARC -->
 <Item type="armor" subtype="rngsh_arm" name="ranger shirt" size="big">
 	<Image image="set:leath_arm.png image:full_image" />
-	<RenderInfo name="leathArm" />
+	<RenderInfo name="rangerArmor" />
 	<Attribute
 			level_requirement="13"
 			character_requirement="archer" 
@@ -226,7 +226,7 @@
 <!-- WAR, ARC -->
 <Item type="armor" subtype="assass_arm" name="assassin armor" size="big">
 	<Image image="set:leath_arm.png image:full_image" />
-	<RenderInfo name="leathArm" />
+	<RenderInfo name="rangerArmor" />
 	<Attribute
 			level_requirement="19"
 			character_requirement="warrior,archer" 
@@ -259,7 +259,7 @@
 <!-- PRI -->
 <Item type="armor" subtype="temple_arm" name="temple armor" size="big">
 	<Image image="set:merc_arm.png image:full_image" />
-	<RenderInfo name="mercArm" />
+	<RenderInfo name="templeArmor" />
 	<Attribute
 			level_requirement="19"
 			character_requirement="priest" 

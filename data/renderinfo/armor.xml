@@ -33,16 +33,101 @@
 	<Entity source="leathArm_fs.mesh"/>
 </RenderInfo>
 
+<!-- armorRanger.mesh -->
+<RenderInfo name="rangerArmor" parent="leatherArmorBase">
+	<Entity source = "armorRanger.mesh"/>
+</RenderInfo>
+<RenderInfo name="rangerArmor#m" parent="playerbaseM" inherit="animation">
+	<Entity source = "armorRanger_M.mesh"/>
+</RenderInfo>
+<RenderInfo name="rangerArmor#f" parent="playerbase" inherit="animation">
+	<Entity source="leathArmFA.mesh"/>
+</RenderInfo>
+<RenderInfo name="rangerArmor#fs" parent="playerbase" inherit="animation">
+	<Entity source="leathArm_fs.mesh"/>
+</RenderInfo>
+
+<!-- armorRivet.mesh-->
+<RenderInfo name="rivetArmor" parent="leatherArmorBase">
+	<Entity source = "armorRivet.mesh"/>
+</RenderInfo>
+<RenderInfo name="rivetArmor#m" parent="playerbaseM" inherit="animation">
+	<Entity source = "armorRivet_M.mesh"/>
+</RenderInfo>
+<RenderInfo name="rivetArmor#f" parent="playerbase" inherit="animation">
+	<Entity source="leathArmFA.mesh"/>
+</RenderInfo>
+<RenderInfo name="rivetArmor#fs" parent="playerbase" inherit="animation">
+	<Entity source="leathArm_fs.mesh"/>
+</RenderInfo>
+
+<!-- armorOldRivet.mesh-->
+<RenderInfo name="rivetArmorOld" parent="leatherArmorBase">
+	<Entity source = "armorOldRivet.mesh"/>
+</RenderInfo>
+<RenderInfo name="rivetArmorOld#m" parent="playerbaseM" inherit="animation">
+	<Entity source = "armorOldRivet_M.mesh"/>
+</RenderInfo>
+<RenderInfo name="rivetArmorOld#f" parent="playerbase" inherit="animation">
+	<Entity source="leathArmFA.mesh"/>
+</RenderInfo>
+<RenderInfo name="rivetArmorOld#fs" parent="playerbase" inherit="animation">
+	<Entity source="leathArm_fs.mesh"/>
+</RenderInfo>
+
+<!-- armorChainMail.mesh -->
 <RenderInfo name="mercArm" parent="metalArmorBase">
-	<Entity source="merc_arm.mesh"/> 
+	<Entity source="armorChainMail.mesh"/> 
 </RenderInfo>
 <RenderInfo name="mercArm#m" parent="playerbaseM" inherit="animation">
-	<Entity source="merc_armM.mesh"/> 
+	<Entity source="armorChainMail_M.mesh"/> 
 </RenderInfo>
 <RenderInfo name="mercArm#f" parent="playerbase" inherit="animation">
 	<Entity source="merc_armF.mesh"/>
 </RenderInfo>
 <RenderInfo name="mercArm#fs" parent="playerbase" inherit="animation">
+	<Entity source="merc_arm_fs.mesh"/>
+</RenderInfo>
+
+<!-- armorChainPlate.mesh -->
+<RenderInfo name="chainPlate" parent="metalArmorBase">
+	<Entity source="armorChainMail.mesh"/> 
+</RenderInfo>
+<RenderInfo name="chainPlate#m" parent="playerbaseM" inherit="animation">
+	<Entity source="armorChainMail_M.mesh"/> 
+</RenderInfo>
+<RenderInfo name="chainPlate#f" parent="playerbase" inherit="animation">
+	<Entity source="merc_armF.mesh"/>
+</RenderInfo>
+<RenderInfo name="chainPlate#fs" parent="playerbase" inherit="animation">
+	<Entity source="merc_arm_fs.mesh"/>
+</RenderInfo>
+
+<!-- armorLightPlate.mesh -->
+<RenderInfo name="noviceArmor" parent="metalArmorBase">
+	<Entity source="armorLightPlate.mesh"/> 
+</RenderInfo>
+<RenderInfo name="noviceArmor#m" parent="playerbaseM" inherit="animation">
+	<Entity source="armorLightPlate_M.mesh"/> 
+</RenderInfo>
+<RenderInfo name="noviceArmor#f" parent="playerbase" inherit="animation">
+	<Entity source="merc_armF.mesh"/>
+</RenderInfo>
+<RenderInfo name="noviceArmor#fs" parent="playerbase" inherit="animation">
+	<Entity source="merc_arm_fs.mesh"/>
+</RenderInfo>
+
+<!-- armorFinePlate.mesh -->
+<RenderInfo name="templeArmor" parent="metalArmorBase">
+	<Entity source="armorFinePlate.mesh"/> 
+</RenderInfo>
+<RenderInfo name="templeArmor#m" parent="playerbaseM" inherit="animation">
+	<Entity source="armorFinePlate_M.mesh"/> 
+</RenderInfo>
+<RenderInfo name="templeArmor#f" parent="playerbase" inherit="animation">
+	<Entity source="merc_armF.mesh"/>
+</RenderInfo>
+<RenderInfo name="templeArmor#fs" parent="playerbase" inherit="animation">
 	<Entity source="merc_arm_fs.mesh"/>
 </RenderInfo>
 
