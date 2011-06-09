@@ -16,8 +16,8 @@ particle_system Hit
         direction       0 1 0
         velocity_min    1.0
         velocity_max    1.0
-        colour_range_start  1 0 0 
-        colour_range_end    1 0 0 
+        colour_range_start  0 0 1 
+        colour_range_end    0 0 1 
         width           2.0
         height          2.0
         depth           0.6

@@ -154,6 +154,35 @@ particle_system Magic_Arrow_Ice
 }
     
 }
+particle_system Magic_Arrow_BlueIce
+{
+    material         Flare
+    particle_width     0.5
+    particle_height    0.5
+    cull_each        false
+    quota            200
+    billboard_type    point
+
+    emitter Point
+{
+        angle 5
+        emission_rate 100
+        time_to_live    0.05
+        direction       0 0 0
+        velocity_min    5.0
+        velocity_max    6.0
+        colour_range_start  0.0 0.4 1
+        colour_range_end    0.0 0.2 1
+        
+}
+    affector ColourFader
+{
+        red -1
+        green -1
+        blue -0.5
+}
+    
+}
 
 //FIRE
 

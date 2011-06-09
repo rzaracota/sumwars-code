@@ -473,6 +473,20 @@ Files:
 Artwork provided by: Psycho
 Default license: CC-BY-SA
 Files:
+	armorChainMail.mesh
+	armorChainPlate.mesh
+	armorFinePlate.mesh
+	armorLightPlate.mesh
+	armorOldRivet.mesh
+	armorRanger.mesh
+	armorRivet.mesh
+	armorChainMail_M.mesh
+	armorChainPlate_M.mesh
+	armorFinePlate_M.mesh
+	armorLightPlate_M.mesh
+	armorOldRivet_M.mesh
+	armorRanger_M.mesh
+	armorRivet_M.mesh
 	bat.mesh
 	Beam_01.mesh
 	Beam_02.mesh

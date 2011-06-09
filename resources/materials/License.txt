@@ -59,6 +59,7 @@ Files:
 	eye.material
 	gimcrack.material
 	grass.material
+	hero_armor.material
 	highlight.material
 	ice.material
 	Item.material
@@ -80,3 +81,4 @@ Artwork provided by: Psycho
 Default license: CC-BY-SA
 Files:
 	Krypta.png
+	Atlastex_heroArmor.png
