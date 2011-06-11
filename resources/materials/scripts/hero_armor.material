@@ -10,7 +10,7 @@ material hero_armor
 			emissive 0 0 0
 
 			scene_blend alpha_blend
-			depth_write off
+			depth_write on
 
 			texture_unit
 			{
