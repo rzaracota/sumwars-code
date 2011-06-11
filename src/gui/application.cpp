@@ -128,13 +128,12 @@ bool Application::init(char *argv)
 	// pluginfile: plugins.cfg
 	// configfile: keines
 #ifdef WIN32
-
-	m_ogre_root = new Ogre::Root("plugins_win.cfg", "ogre.cfg");
+	m_ogre_root = new Ogre::Root("plugins_win.cfg", userPath() + "/ogre.cfg", userPath() + "/ogre.log");
 #elif defined __APPLE__
     Ogre::String plugins = macPath();
     m_ogre_root = new Ogre::Root(plugins + "/plugins_mac.cfg", plugins + "/ogre.cfg", path + "/ogre.log");
 #else
-	m_ogre_root = new Ogre::Root("plugins.cfg", "ogre.cfg");
+	m_ogre_root = new Ogre::Root("plugins.cfg", userPath() + "/ogre.cfg", userPath() + "/Ogre.log");
 #endif
 
 	if (m_ogre_root ==0)
@@ -416,7 +415,7 @@ bool Application::initOgre()
 	m_scene_manager->setShadowColour( Ogre::ColourValue(0.4, 0.4, 0.4) );
 	m_scene_manager->setShadowFarDistance(2000);
 */
-	Ogre::LogManager::getSingleton().createLog("BenchLog.log");
+	Ogre::LogManager::getSingleton().createLog(userPath() + "/BenchLog.log");
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW);
 	return true;
 

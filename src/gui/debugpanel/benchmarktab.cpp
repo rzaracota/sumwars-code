@@ -10,11 +10,14 @@
 
 #include <eventsystem.h>
 #include <debugpanel.h>
+#include <physfs.h>
 
 using namespace CEGUI;
 using Poco::Environment;
 
 CEGUI::String BenchmarkTab::WidgetTypeName = "BenchmarkTab";
+
+
 
 BenchmarkTab::BenchmarkTab(const CEGUI::String& type, const CEGUI::String& name): CEGUI::Window(type, name), DebugTab(), Ogre::LogListener()
 {
@@ -30,7 +33,14 @@ BenchmarkTab::BenchmarkTab(const CEGUI::String& type, const CEGUI::String& name)
 	
 	m_ogreRoot = Ogre::Root::getSingletonPtr();
 
-	m_log = Ogre::LogManager::getSingleton().getLog("BenchLog.log");// Ogre::LogManager::getSingleton().createLog("BenchLog.log");
+	Ogre::String path = PHYSFS_getUserDir();
+#ifdef __APPLE__
+    path.append("/Library/Application Support/Sumwars");
+#else
+    path.append("/.sumwars");
+#endif
+	
+	m_log = Ogre::LogManager::getSingleton().getLog(path + "/BenchLog.log");// Ogre::LogManager::getSingleton().createLog("BenchLog.log");
 	m_log->addListener(this);
 	m_log->logMessage("-------------------------");
 
