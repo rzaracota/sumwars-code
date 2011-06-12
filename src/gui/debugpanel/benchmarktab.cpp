@@ -1,4 +1,5 @@
 #include "benchmarktab.h"
+#include "sumwarshelper.h"
 
 #include "Ogre.h"
 #include "OgrePlatformInformation.h"
@@ -10,7 +11,7 @@
 
 #include <eventsystem.h>
 #include <debugpanel.h>
-#include <physfs.h>
+
 
 using namespace CEGUI;
 using Poco::Environment;
@@ -33,14 +34,7 @@ BenchmarkTab::BenchmarkTab(const CEGUI::String& type, const CEGUI::String& name)
 	
 	m_ogreRoot = Ogre::Root::getSingletonPtr();
 
-	Ogre::String path = PHYSFS_getUserDir();
-#ifdef __APPLE__
-    path.append("/Library/Application Support/Sumwars");
-#else
-    path.append("/.sumwars");
-#endif
-	
-	m_log = Ogre::LogManager::getSingleton().getLog(path + "/BenchLog.log");// Ogre::LogManager::getSingleton().createLog("BenchLog.log");
+	m_log = Ogre::LogManager::getSingleton().getLog(SumwarsHelper::userPath() + "/BenchLog.log");// Ogre::LogManager::getSingleton().createLog("BenchLog.log");
 	m_log->addListener(this);
 	m_log->logMessage("-------------------------");
 

@@ -32,6 +32,7 @@
 #include "world.h"
 #include "player.h"
 #include "timer.h"
+#include "sumwarshelper.h"
 
 #include "gettext.h"
 #include "stdstreamconv.h"
@@ -1811,25 +1812,12 @@ void Document::writeSavegame(bool writeShortkeys)
 
 void Document::saveSettings()
 {
-
-    std::string path = PHYSFS_getUserDir();
-#ifdef __APPLE__
-    path.append("/Library/Application Support/Sumwars/");
-#else
-    path.append("/.sumwars/");
-#endif
-    Options::getInstance()->writeToFile(path + "options.xml");
+    Options::getInstance()->writeToFile(SumwarsHelper::userPath() + "/options.xml");
 }
 
 void Document::loadSettings()
 {
-    std::string path = PHYSFS_getUserDir();
-#ifdef __APPLE__
-    path.append("/Library/Application Support/Sumwars/");
-#else
-	path.append("/.sumwars/");
-#endif
-    Options::getInstance()->readFromFile(path + "options.xml");
+    Options::getInstance()->readFromFile(SumwarsHelper::userPath() + "options.xml");
 }
 
 Player*  Document::getLocalPlayer()

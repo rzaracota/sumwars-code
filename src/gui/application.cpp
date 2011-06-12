@@ -3,6 +3,7 @@
 #include "itemwindow.h"
 #include "templateloader.h"
 #include "music.h"
+#include "sumwarshelper.h"
 
 #ifdef BUILD_TOOLS
 #include "benchmarktab.h"
@@ -21,18 +22,6 @@
 #include "OgreConfigFile.h"
 #include <OgreParticleSystemManager.h>
 
-#include <physfs.h>
-// Return the path to where files should be stored on mac
-Ogre::String userPath()
-{
-    Ogre::String path = PHYSFS_getUserDir();
-#ifdef __APPLE__
-    path.append("/Library/Application Support/Sumwars");
-#else
-    path.append("/.sumwars");
-#endif
-    return path;
-}
 
 Application::Application(char *argv)
 {
@@ -64,7 +53,7 @@ bool Application::init(char *argv)
         printf("init failed: %s\n", PHYSFS_getLastError());
         return false;
     }
-    Ogre::String path = userPath();
+	Ogre::String path = SumwarsHelper::userPath();
     if (PHYSFS_setWriteDir(PHYSFS_getUserDir()) == 0)
     {
         printf("setWriteDir failed: %s\n", PHYSFS_getLastError());
@@ -128,12 +117,12 @@ bool Application::init(char *argv)
 	// pluginfile: plugins.cfg
 	// configfile: keines
 #ifdef WIN32
-	m_ogre_root = new Ogre::Root("plugins_win.cfg", userPath() + "/ogre.cfg", userPath() + "/ogre.log");
+	m_ogre_root = new Ogre::Root("plugins_win.cfg", SumwarsHelper::userPath() + "/ogre.cfg", SumwarsHelper::userPath() + "/ogre.log");
 #elif defined __APPLE__
     Ogre::String plugins = macPath();
-    m_ogre_root = new Ogre::Root(plugins + "/plugins_mac.cfg", plugins + "/ogre.cfg", path + "/ogre.log");
+    m_ogre_root = new Ogre::Root(plugins + "/plugins_mac.cfg", plugins + "/ogre.cfg", SumwarsHelper::userPath() + "/ogre.log");
 #else
-	m_ogre_root = new Ogre::Root("plugins.cfg", userPath() + "/ogre.cfg", userPath() + "/Ogre.log");
+	m_ogre_root = new Ogre::Root("plugins.cfg", SumwarsHelper::userPath() + "/ogre.cfg", SumwarsHelper::userPath() + "/Ogre.log");
 #endif
 
 	if (m_ogre_root ==0)
@@ -415,7 +404,7 @@ bool Application::initOgre()
 	m_scene_manager->setShadowColour( Ogre::ColourValue(0.4, 0.4, 0.4) );
 	m_scene_manager->setShadowFarDistance(2000);
 */
-	Ogre::LogManager::getSingleton().createLog(userPath() + "/BenchLog.log");
+	Ogre::LogManager::getSingleton().createLog(SumwarsHelper::userPath() + "/BenchLog.log");
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW);
 	return true;
 
@@ -469,7 +458,7 @@ bool Application::setupResources()
 		}
 	}
 	
-    Ogre::String savePath = userPath() + "/save";
+    Ogre::String savePath = SumwarsHelper::userPath() + "/save";
     Ogre::ResourceGroupManager::getSingleton().addResourceLocation(savePath, "FileSystem", "Savegame");
 
 #if defined(WIN32)
@@ -512,7 +501,7 @@ bool Application::initCEGUI()
 	// Log level
 	new CEGUI::DefaultLogger();	
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
-    CEGUI::DefaultLogger::getSingleton().setLogFilename(userPath() + "/CEGUI.log");
+    CEGUI::DefaultLogger::getSingleton().setLogFilename(SumwarsHelper::userPath() + "/CEGUI.log");
 	
 	// Bootstrap the CEGUI System
 	CEGUI::OgreRenderer::bootstrapSystem();
