@@ -110,6 +110,13 @@ class OptionsWindow : public Window
 		bool onLanguageSelected(const CEGUI::EventArgs& evt);
 		
 		/**
+		 * \fn bool onGrabMouseChanged(const CEGUI::EventArgs& evt)
+		 * \brief Handles changes to wheter the mouse will be grabbed or not in window mode
+		 */
+		bool onGrabMouseChanged(const CEGUI::EventArgs& evt);
+		
+		
+		/**
 		 * \brief returns index of highlight color
 		 */
 		unsigned int getColorSelectionIndex(std::string name);

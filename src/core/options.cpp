@@ -192,6 +192,10 @@ bool Options::readFromFile(const std::string& filename)
 						std::string color = getEnemyHighlightColor();
 						attr.getString("ehl_color", color);
 						setEnemyHighlightColor(color);
+						
+						int grabMouse;
+						attr.getInt("grabMouseWhenWindowed", grabMouse);
+						setGrabMouseInWindowedMode(grabMouse);
 					}
 					else if (!strcmp(child->Value(), "Debug"))
 					{
@@ -261,7 +265,8 @@ bool Options::writeToFile(const std::string& filename)
 	element = new TiXmlElement("Graphic");
 	root->LinkEndChild(element);
 	element->SetAttribute("ehl_color", getEnemyHighlightColor().c_str());
-
+	element->SetAttribute("grabMouseWhenWindowed", getGrabMouseInWindowedMode());
+	
 	element = new TiXmlElement( "Language" );
 	root->LinkEndChild(element);
 	element->SetAttribute("locale",getLocale().c_str());

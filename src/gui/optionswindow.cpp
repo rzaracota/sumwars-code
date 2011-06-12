@@ -180,6 +180,15 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	ehlcbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onEnemyHighlightChanged, this));
 	ehlcbo->setItemSelectState((size_t) (getColorSelectionIndex(Options::getInstance()->getEnemyHighlightColor())), true);
 
+
+	CEGUI::Checkbox *chkbox = (CEGUI::Checkbox *) win_mgr.createWindow("TaharezLook/Checkbox", "GrabMouseInWindowedModeBox");
+	chkbox->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.1f)));
+	chkbox->setSize(CEGUI::UVector2(cegui_reldim(0.6f), cegui_reldim( 0.06f)));
+	graphic->addChildWindow(chkbox);
+	chkbox->setSelected(Options::getInstance()->getGrabMouseInWindowedMode());
+	chkbox->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&OptionsWindow::onGrabMouseChanged, this));
+	
+	
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "OptionsCloseButton"));
 	options->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim( 0.94f)));
@@ -292,7 +301,8 @@ void OptionsWindow::updateTranslation()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
-
+	CEGUI::Checkbox* box;
+	
 	CEGUI::DefaultWindow* keys =  (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsShortkeys");
 	keys->setText((CEGUI::utf8*) gettext("Shortkeys"));
 	CEGUI::DefaultWindow* gameplay =  (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsGameplay");
@@ -349,6 +359,9 @@ void OptionsWindow::updateTranslation()
 	label = win_mgr.getWindow("LanguageLabel");
 	label->setText((CEGUI::utf8*) gettext("Language"));
 
+	box = static_cast<CEGUI::Checkbox*>(win_mgr.getWindow("GrabMouseInWindowedModeBox"));
+	box->setText((CEGUI::utf8*) gettext("Grab mouse in windowed mode (needs restart)"));
+	
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "OptionsCloseButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));
 }
@@ -489,6 +502,19 @@ bool OptionsWindow::onLanguageSelected(const CEGUI::EventArgs& evt)
 
 	return true;
 }
+
+bool OptionsWindow::onGrabMouseChanged(const CEGUI::EventArgs& evt)
+{
+	const CEGUI::MouseEventArgs& we =
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
+
+	CEGUI::Checkbox* cbo = static_cast<CEGUI::Checkbox*>(we.window);
+	
+	Options::getInstance()->setGrabMouseInWindowedMode(cbo->isSelected());
+	
+	return true;
+}
+
 
 unsigned int OptionsWindow::getColorSelectionIndex(std::string name)
 {

@@ -290,6 +290,24 @@ class Options
 		}
 		
 		/**
+		 * \brief Returns grab mouse setting
+		 */
+		bool getGrabMouseInWindowedMode()
+		{
+			return m_grab_mouse;
+		}
+
+		/**
+		 * \brief Sets the grab mouse setting
+		 * \param bool grabMouse True / False
+		 */
+		void setGrabMouseInWindowedMode(bool grabMouse)
+		{
+			m_grab_mouse = grabMouse;
+		}
+		
+		
+		/**
 		 * \brief Pushes the named value on the lua stack
 		 * \param valname name of the value
 		 * \return number of values pushed to the stack
@@ -358,5 +376,10 @@ class Options
 		 * \brief Collection of additional options used for debugging
 		 */
 		std::map<std::string, std::string> m_debug_options;
+		
+		/**
+		 * \brief Grab mouse in windowed mode setting
+		 */
+		bool m_grab_mouse;
 
 };

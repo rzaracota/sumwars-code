@@ -97,15 +97,18 @@ bool MainWindow::initInputs()
 	// OIS mitteilen fuer welches Fenster die Eingaben abgefangen werden sollen
 	pl.insert(OIS::ParamList::value_type("WINDOW", Ogre::StringConverter::toString(hWnd)));
 
-#ifndef WIN32
-	pl.insert( std::make_pair(std::string("x11_mouse_grab"), std::string("false") ) );
-	pl.insert( std::make_pair(std::string("x11_keyboard_grab"), std::string("false")));
-#else
-	/*pl.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_FOREGROUND" )));
-    pl.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_NONEXCLUSIVE")));
-	pl.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_FOREGROUND")));
-	pl.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_NONEXCLUSIVE")));*/
-#endif
+	if(!Options::getInstance()->getGrabMouseInWindowedMode() && !m_window->isFullScreen())
+	{
+	#ifndef WIN32
+		pl.insert( std::make_pair(std::string("x11_mouse_grab"), std::string("false") ) );
+		pl.insert( std::make_pair(std::string("x11_keyboard_grab"), std::string("false")));
+	#else
+		pl.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_FOREGROUND" )));
+		pl.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_NONEXCLUSIVE")));
+		pl.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_FOREGROUND")));
+		pl.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_NONEXCLUSIVE")));
+	#endif
+	}
 
 	m_ois = OIS::InputManager::createInputSystem( pl );
 
