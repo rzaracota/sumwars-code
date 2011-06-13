@@ -168,6 +168,16 @@ void ContentEditor::init(bool visible)
 	TiXmlElement * renderinfo_root = new TiXmlElement("RenderInfo");  
 	m_renderinfo_xml.LinkEndChild( renderinfo_root );  
 	renderinfo_root->SetAttribute("name","editor_RI");
+	
+	
+	/******* Fixed object Init ****/
+	CEGUI::PushButton* detectCircleButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Prop/DetectCircleButton"));
+	CEGUI::PushButton* detectRectButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Prop/DetectRectButton"));
+	
+	CEGUI::Editbox* radiusBox = static_cast<CEGUI::Editbox*>(WindowManager::getSingleton().getWindow("FOTab/Prop/RadiusEditbox"));
+	CEGUI::Editbox* subMeshNameBox = static_cast<CEGUI::Editbox*>(WindowManager::getSingleton().getWindow("FOTab/Prop/RadiusEditbox"));
+	
+	
 }
 
 void ContentEditor::toggleVisibility()
@@ -838,6 +848,8 @@ bool ContentEditor::onRenderinfoXMLModified(const CEGUI::EventArgs& evt)
 	}
 	return true;
 }
+
+
 
 ContentEditor* ContentEditor::getSingletonPtr(void)
 {

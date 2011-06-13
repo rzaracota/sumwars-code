@@ -11,6 +11,7 @@
 
 #include "graphicobjectrenderinfo.h"
 #include "graphicobject.h"
+#include "fixedbase.h"
 
 class ContentEditor : public Ogre::Singleton<ContentEditor>
 {
@@ -122,6 +123,40 @@ protected:
 	void checkAttachedObjects();
 	
 	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called upon changing any element FixedObject tab
+	 */
+	bool onFixedObjectModified(const CEGUI::EventArgs& evt);
+	
+	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called upon submitting XML for FixedObject
+	 */
+	bool onFixedObjectXMLModified(const CEGUI::EventArgs& evt);
+	
+	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called upon clicking the autodetect size button
+	 */
+	bool onFixedObjectAutodetectSize(const CEGUI::EventArgs& evt);
+	
+	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called upon clicking create Fixed Object Button
+	 */
+	bool onFixedObjectCreate(const CEGUI::EventArgs& evt);
+	
+	/**
+	 * \brief updates the content of the FixedObject XML editor
+	 */
+	void updateFixedObjectXML();
+	
+	/**
+	 * \brief updates the content of the FixedObject XML editor
+	 */
+	void updateFixedObjectEditor();
+	
+	/**
 	 * \brief updates the Translation of the labels
 	 */
 	virtual void updateTranslation();
@@ -197,8 +232,18 @@ private:
 	GraphicObject* m_edited_graphicobject;
 	
 	/**
+	 * \brief marks if the fixed object data has been modified
+	 */
+	bool m_modified_fixed_object;
+	
+	/**
+	 * \brief FixedObject currently edited
+	 */
+	FixedObjectData m_edited_fixed_object;
+	
+	/**
 	 * \brief while set to true, all CEGUI events will be ignored
-	 * This allows setting some GUI elements in event handlers without getting inifinite loops due.
+	 * This allows setting some GUI elements in event handlers without getting infinite loops due.
 	 */
 	bool m_no_cegui_events;
 };
