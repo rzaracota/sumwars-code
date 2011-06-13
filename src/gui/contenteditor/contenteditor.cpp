@@ -8,6 +8,9 @@
 #include <OgreMeshManager.h>
 
 #include "graphicmanager.h"
+#include "worldobject.h"
+#include "objectloader.h"
+#include "world.h"
 
 using namespace CEGUI;
 
@@ -113,6 +116,12 @@ void ContentEditor::init(bool visible)
 		}
 	}
 	
+	CEGUI::PushButton* closebutton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CloseButton"));
+	closebutton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ContentEditor::onClose, this));
+	
+	closebutton = static_cast<CEGUI::FrameWindow*>(m_rootWindow)->getCloseButton();
+	closebutton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ContentEditor::onClose, this));
+	
 	// wire the GUI
 	selector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&ContentEditor::onMeshSelected, this));
 	subSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshSelected, this));
@@ -159,25 +168,56 @@ void ContentEditor::init(bool visible)
 	boneSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshModified, this));
 	attachCheckbox->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&ContentEditor::onSubMeshModified, this));
 	
-	
-	
 	if(!visible)
 		m_rootWindow->setVisible(visible);
 	
 	// init the internal data
 	TiXmlElement * renderinfo_root = new TiXmlElement("RenderInfo");  
 	m_renderinfo_xml.LinkEndChild( renderinfo_root );  
-	renderinfo_root->SetAttribute("name","editor_RI");
+	renderinfo_root->SetAttribute("name","EditorRenderInfo");
 	
 	
 	/******* Fixed object Init ****/
 	CEGUI::PushButton* detectCircleButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Prop/DetectCircleButton"));
 	CEGUI::PushButton* detectRectButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Prop/DetectRectButton"));
 	
-	CEGUI::Editbox* radiusBox = static_cast<CEGUI::Editbox*>(WindowManager::getSingleton().getWindow("FOTab/Prop/RadiusEditbox"));
-	CEGUI::Editbox* subMeshNameBox = static_cast<CEGUI::Editbox*>(WindowManager::getSingleton().getWindow("FOTab/Prop/RadiusEditbox"));
+	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/RadiusSpinner"));
+	CEGUI::Spinner* widthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/WidthSpinner"));
+	CEGUI::Spinner* depthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/DepthSpinner"));
 	
+	CEGUI::RadioButton* circleButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/CircleCheckbox"));
+	CEGUI::RadioButton* rectButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/RectangleCheckbox"));
 	
+	radiusSpinner->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ContentEditor::onFixedObjectModified, this));
+	widthSpinner->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ContentEditor::onFixedObjectModified, this));
+	depthSpinner->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ContentEditor::onFixedObjectModified, this));
+	
+	circleButton->subscribeEvent(CEGUI::RadioButton::EventSelectStateChanged, CEGUI::Event::Subscriber(&ContentEditor::onFixedObjectModified, this));
+	rectButton->subscribeEvent(CEGUI::RadioButton::EventSelectStateChanged, CEGUI::Event::Subscriber(&ContentEditor::onFixedObjectModified, this));
+	circleButton->setSelected(true);
+	
+	detectCircleButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ContentEditor::onFixedObjectAutodetectSize, this));
+	detectRectButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ContentEditor::onFixedObjectAutodetectSize, this));
+	
+	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("FOTab/Prop/LayerSelector"));
+	layerSelector->addItem(new ListboxTextItem("Normal"));
+	layerSelector->addItem(new ListboxTextItem("Base"));
+	layerSelector->addItem(new ListboxTextItem("Air"));
+	layerSelector->addItem(new ListboxTextItem("NoCollision"));
+	
+	layerSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&ContentEditor::onFixedObjectModified, this));
+	
+	CEGUI::PushButton* createFOButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/XML/CreateButton"));
+	createFOButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ContentEditor::onFixedObjectCreate, this));
+	
+	// init the internal data
+	TiXmlElement * fixed_root = new TiXmlElement("Object");  
+	m_fixed_object_xml.LinkEndChild( fixed_root );  
+	fixed_root->SetAttribute("subtype","EditorFixedObject");
+	
+	TiXmlElement * fixed_ri = new TiXmlElement("RenderInfo");  
+	fixed_ri->SetAttribute("name","EditorRenderInfo");
+	fixed_root->LinkEndChild(fixed_ri);
 }
 
 void ContentEditor::toggleVisibility()
@@ -210,6 +250,124 @@ void ContentEditor::update(OIS::Keyboard *keyboard)
 	
 	m_modified_renderinfo_xml = false;
 	m_modified_renderinfo = false;
+	
+	
+	if (m_modified_fixed_object)
+	{
+		updateFixedObjectXML();
+	}
+	
+	if (m_modified_fixed_object_xml)
+	{
+		updateFixedObjectEditor();
+	}
+	
+	m_modified_fixed_object = false;
+	m_modified_fixed_object_xml = false;
+}
+
+void checkBounds(const Ogre::SceneNode* node, int level=0)
+{
+	const Ogre::AxisAlignedBox& boundingbox = node->_getWorldAABB();
+	
+	// current node boundss
+	Ogre::Vector3 bbox_min = boundingbox.getMinimum();
+	Ogre::Vector3 bbox_max = boundingbox.getMaximum();
+	
+	std::string indent = "";
+	for (int i=0; i<level; i++)
+		indent += "  ";
+	std::cout << indent << "Node: " << node->getName() << "\n";
+	std::cout << indent << bbox_min[0] << " " << bbox_min[1] << " " <<  bbox_min[2] << "\n";
+	std::cout << indent << bbox_max[0] << " " << bbox_max[1] << " " <<  bbox_max[2] << "\n";
+	
+	// SubNodes
+	Ogre::SceneNode::ConstChildNodeIterator child_it = node->getChildIterator();
+	while (child_it.hasMoreElements())
+	{
+		const Ogre::SceneNode* subnode = dynamic_cast<Ogre::SceneNode*>(child_it.getNext());
+		if (subnode != 0)
+		{
+			checkBounds(subnode,level+1);
+		}
+	}
+	
+	// Entities
+	indent += "  ";
+	Ogre::SceneNode::ConstObjectIterator attch_obj_it = node->getAttachedObjectIterator();
+	while (attch_obj_it.hasMoreElements())
+	{
+		const Ogre::Entity* ent = dynamic_cast<Ogre::Entity*>(attch_obj_it.getNext());
+		if (ent != 0)
+		{
+			const Ogre::AxisAlignedBox  & box = ent->getMesh()->getBounds();
+			Ogre::Vector3 box_min = box.getMinimum();
+			Ogre::Vector3 box_max = box.getMaximum();
+			
+			std::cout << indent << "Entity: " << ent->getName() << "\n";
+			std::cout << indent << box_min[0] << " " << box_min[1] << " " <<  box_min[2] << "\n";
+			std::cout << indent << box_max[0] << " " << box_max[1] << " " <<  box_max[2] << "\n";
+		}
+	}
+	
+}
+
+
+void getBounds(const Ogre::SceneNode* node, Ogre::Vector3& minimum, Ogre::Vector3& maximum, int level=0)
+{
+	const Ogre::AxisAlignedBox& boundingbox = node->_getWorldAABB();
+	
+	// current node boundss
+	Ogre::Vector3 bbox_min = boundingbox.getMinimum();
+	Ogre::Vector3 bbox_max = boundingbox.getMaximum();
+	
+	std::string indent = "";
+	for (int i=0; i<level; i++)
+		indent += "  ";
+
+	
+	// SubNodes
+	Ogre::SceneNode::ConstChildNodeIterator child_it = node->getChildIterator();
+	while (child_it.hasMoreElements())
+	{
+		const Ogre::SceneNode* subnode = dynamic_cast<Ogre::SceneNode*>(child_it.getNext());
+		if (subnode != 0)
+		{
+			getBounds(subnode,minimum,maximum,level+1);
+		}
+	}
+	
+	// Entities
+	indent += "  ";
+	Ogre::SceneNode::ConstObjectIterator attch_obj_it = node->getAttachedObjectIterator();
+	while (attch_obj_it.hasMoreElements())
+	{
+		const Ogre::Entity* ent = dynamic_cast<Ogre::Entity*>(attch_obj_it.getNext());
+		if (ent != 0)
+		{
+			const Ogre::AxisAlignedBox  & box = ent->getMesh()->getBounds();
+			Ogre::Vector3 box_min = box.getMinimum();
+			Ogre::Vector3 box_max = box.getMaximum();
+			
+			box_min = ent->getParentSceneNode()->_getFullTransform() * box_min;
+			box_max = ent->getParentSceneNode()->_getFullTransform() * box_max;
+			/*
+			std::cout << indent << "Entity: " << ent->getName() << "\n";
+			std::cout << indent << box_min[0] << " " << box_min[1] << " " <<  box_min[2] << "\n";
+			std::cout << indent << box_max[0] << " " << box_max[1] << " " <<  box_max[2] << "\n";
+			*/
+			for (int i=0; i<3; i++)
+			{
+				minimum[i] = MathHelper::Min(minimum[i], box_min[i]);
+				maximum[i] = MathHelper::Max(maximum[i], box_max[i]);
+			}
+		}
+	}
+	/*
+	std::cout << indent << "Node: " << node->getName() << "\n";
+	std::cout << indent << minimum[0] << " " << minimum[1] << " " <<  minimum[2] << "\n";
+	std::cout << indent << maximum[0] << " " << maximum[1] << " " <<  maximum[2] << "\n";
+	*/
 }
 
 void ContentEditor::updatePreviewImage()
@@ -229,36 +387,42 @@ void ContentEditor::updatePreviewImage()
 		// the ID is just arbitrary...
 		m_edited_graphicobject = GraphicManager::createGraphicObject("EditorRenderInfo", "EditedGraphicObject", 123456789);
 	}
-	m_edited_graphicobject->getTopNode()->setPosition(0,0,0);
+	
+	Ogre::MeshManager::getSingleton().setBoundsPaddingFactor(0.0f);
+	m_edited_graphicobject->getTopNode()->setPosition(0.0,0.0,0.0);
 	m_edited_graphicobject->update(0);
 	
 	// update the camera to show the full object
 	// first, the subtree needs to be updated
 	Ogre::SceneNode* topnode = m_edited_graphicobject->getTopNode();
-	topnode->_update(true,false);
+	topnode->_update(true,true);
+	topnode->_updateBounds();
+	topnode->showBoundingBox(true);
 	const Ogre::AxisAlignedBox& boundingbox = topnode->_getWorldAABB();
 	
+	Ogre::Vector3 bbox_min(1000,1000,1000);
+	Ogre::Vector3 bbox_max(-1000,-1000,-1000);
+	
+	getBounds(topnode,bbox_min,bbox_max);
+	
 	// camera is placed looking along negative X axis, with Y and Z offset
-	Ogre::Vector3 bbox_min = boundingbox.getMinimum();
-	Ogre::Vector3 bbox_max = boundingbox.getMaximum();
 	double center_y = 0.5*(bbox_max[1] + bbox_min[1]);
 	double center_z = 0.5*(bbox_max[2] + bbox_min[2]);
 	double size_y = bbox_max[1] - bbox_min[1];
 	double size_z = bbox_max[2] - bbox_min[2];
 	
+	
 	double viewsize = MathHelper::Max(size_y, size_z);
 	
 	Ogre::Camera* editor_camera = editor_scene_mng->getCamera("editor_camera");
-	//editor_camera->setPosition(Ogre::Vector3(bbox_max[0] + viewsize/sqrt(2) , center_y,center_z));
-	//editor_camera->lookAt(Ogre::Vector3(bbox_max[0], center_y,center_z));
+	editor_camera->setPosition(Ogre::Vector3(bbox_max[0] + viewsize*sqrt(2) , center_y,center_z));
+	editor_camera->lookAt(Ogre::Vector3(bbox_max[0], center_y,center_z));
 	
 	// update the texture
 	Ogre::Resource* res= Ogre::TextureManager::getSingleton().createOrRetrieve ("editor_tex",Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).first.getPointer();
 	Ogre::Texture* texture = dynamic_cast<Ogre::Texture*>(res);
 	Ogre::RenderTarget* target = texture->getBuffer()->getRenderTarget();
 	target->update();
-	
-
 	
 	GraphicManager::setSceneManager(old_scene_mng);
 }
@@ -850,6 +1014,229 @@ bool ContentEditor::onRenderinfoXMLModified(const CEGUI::EventArgs& evt)
 }
 
 
+void ContentEditor::updateFixedObjectXML()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	// update the XML representation
+	m_edited_fixed_object.writeToXML(m_fixed_object_xml.FirstChildElement());
+	
+	// write to the editor
+	TiXmlPrinter printer;
+	m_fixed_object_xml.Accept(&printer);
+	
+	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.getWindow("FOTab/XML/FOXMLEditbox"));
+	editor->setText(printer.CStr());
+}
+
+void ContentEditor::updateFixedObjectEditor()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("FOTab/Prop/LayerSelector"));
+	
+	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/RadiusSpinner"));
+	CEGUI::Spinner* widthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/WidthSpinner"));
+	CEGUI::Spinner* depthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/DepthSpinner"));
+	
+	CEGUI::RadioButton* circleButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/CircleCheckbox"));
+	CEGUI::RadioButton* rectButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/RectangleCheckbox"));
+	
+	// adjust the spinner values
+	if (circleButton->getSelectedButtonInGroup() == circleButton)
+	{
+		radiusSpinner->setCurrentValue(m_edited_fixed_object.m_shape.m_radius);
+		circleButton->setSelected(true);
+	}
+	else
+	{
+		widthSpinner->setCurrentValue(m_edited_fixed_object.m_shape.m_extent.m_x*2);
+		depthSpinner->setCurrentValue(m_edited_fixed_object.m_shape.m_extent.m_y*2);
+		rectButton->setSelected(true);
+	}
+	
+	// set the layer combobox
+	std::string layer = "Normal";
+	if (m_edited_fixed_object.m_layer == WorldObject::LAYER_BASE)
+		layer = "Base";
+	else if (m_edited_fixed_object.m_layer == WorldObject::LAYER_AIR)
+		layer = "Air";
+	else if (m_edited_fixed_object.m_layer == WorldObject::LAYER_NOCOLLISION)
+		layer == "NoCollision";
+	
+	CEGUI::ListboxItem* selection = layerSelector->findItemWithText(CEGUI::String(layer),0);
+	if (selection != 0)
+	{
+		int id = selection->getID();
+		layerSelector->setSelection(id,id);
+	}
+}
+
+
+bool ContentEditor::onFixedObjectModified(const CEGUI::EventArgs& evt)
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	CEGUI::RadioButton* CircleButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/CircleCheckbox"));
+	CEGUI::RadioButton* RectButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/RectangleCheckbox"));
+	
+	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/RadiusSpinner"));
+	CEGUI::Spinner* widthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/WidthSpinner"));
+	CEGUI::Spinner* depthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/DepthSpinner"));
+	
+	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("FOTab/Prop/LayerSelector"));
+	
+	if (CircleButton->getSelectedButtonInGroup() == CircleButton)
+	{
+		m_edited_fixed_object.m_shape.m_type = Shape::CIRCLE;
+		m_edited_fixed_object.m_shape.m_radius = radiusSpinner->getCurrentValue();
+	}
+	else
+	{
+		m_edited_fixed_object.m_shape.m_type = Shape::RECT;
+		m_edited_fixed_object.m_shape.m_extent.m_x = 0.5*widthSpinner->getCurrentValue();
+		m_edited_fixed_object.m_shape.m_extent.m_y = 0.5*depthSpinner->getCurrentValue();
+	}
+	
+	std::string layer = layerSelector->getText().c_str();
+	if (layer == "Base")
+		m_edited_fixed_object.m_layer = WorldObject::LAYER_BASE;
+	else if (layer == "Air")
+		m_edited_fixed_object.m_layer = WorldObject::LAYER_AIR;
+	else if (layer == "NoCollision")
+		m_edited_fixed_object.m_layer = WorldObject::LAYER_NOCOLLISION;
+	else
+		m_edited_fixed_object.m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
+	
+	m_modified_fixed_object = true;
+}
+
+bool ContentEditor::onFixedObjectAutodetectSize(const CEGUI::EventArgs& evt)
+{
+	const CEGUI::MouseEventArgs& we =
+	static_cast<const CEGUI::MouseEventArgs&>(evt);
+	
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	CEGUI::PushButton* detectCircleButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Prop/DetectCircleButton"));
+	CEGUI::PushButton* detectRectButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Prop/DetectRectButton"));
+	
+	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/RadiusSpinner"));
+	CEGUI::Spinner* widthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/WidthSpinner"));
+	CEGUI::Spinner* depthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/DepthSpinner"));
+	
+	// calculate the size of the bounding box
+	Ogre::SceneNode* topnode = m_edited_graphicobject->getTopNode();
+	topnode->_updateBounds();
+	
+	Ogre::Vector3 bbox_min(1000,1000,1000);
+	Ogre::Vector3 bbox_max(-1000,-1000,-1000);
+	
+	getBounds(topnode,bbox_min,bbox_max);
+	
+	double size_x = bbox_max[0] - bbox_min[0];
+	double size_z = bbox_max[2] - bbox_min[2];
+	
+	// set spinner values according to boundingbox
+	if (we.window == detectCircleButton)
+	{
+		radiusSpinner->setCurrentValue(0.5*sqrt(size_x*size_x + size_z*size_z));
+	}
+	else
+	{
+		widthSpinner->setCurrentValue(size_x);
+		depthSpinner->setCurrentValue(size_z);
+	}
+	
+	m_modified_fixed_object = true;
+}
+
+bool ContentEditor::onFixedObjectXMLModified(const CEGUI::EventArgs& evt)
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.getWindow("FOTab/XML/FOXMLEditbox"));
+	
+	// Parse the editor text to XML
+	// use temporary XML document for recovering from errors
+	TiXmlDocument ri_temp_xml;
+	ri_temp_xml.Parse(editor->getText().c_str());
+	
+	if (!ri_temp_xml.Error())
+	{
+		// copy the first Element to the real Renderinfo
+		// first, remove the old root
+		TiXmlElement* oldroot = m_fixed_object_xml.RootElement();
+		if (oldroot != 0)
+		{
+			m_fixed_object_xml.RemoveChild(oldroot);
+		}
+		m_fixed_object_xml.LinkEndChild(ri_temp_xml.RootElement()->Clone());
+		
+		// parse the XML to the fixed object data
+		m_modified_fixed_object_xml = true;
+	}
+	else
+	{
+		// XML parse error
+		// set the cursor to the position of the first error
+		int err_row = ri_temp_xml.ErrorRow();
+		int err_col = ri_temp_xml.ErrorCol();
+		
+		int row =1, col = 1;	
+		int pos = 0;	// cursor position found
+		const CEGUI::String& text = editor->getText();
+		while (pos < text.size())
+		{
+			// second condition ensures, that cursor is placed on the end,
+			// if the row err_row is shorter than err_col for some reason
+			if ((row == err_row && col == err_col)
+				|| (row > err_row))
+			{
+				break;
+			}
+			
+			if (text.compare(pos,1,"\n") == 0)
+			{
+				row++;
+				col = 1;
+			}
+			else
+			{
+				col ++;
+			}
+			pos++;
+		}
+		
+		editor->setCaratIndex(pos);
+		editor->ensureCaratIsVisible();
+		editor->activate();
+	}
+	
+	return true;
+}
+
+bool ContentEditor::onFixedObjectCreate(const CEGUI::EventArgs& evt)
+{
+	// reparse and update the FixedObject Data
+	ObjectLoader::loadObject(m_fixed_object_xml.FirstChildElement(),true);
+
+	World* world = World::getWorld();
+	if (world == 0)
+		return true;
+	
+	WorldObject* player = world->getLocalPlayer();
+	if (player == 0)
+		return true;
+	Region* region = player->getRegion();
+	
+	Vector pos = player->getShape()->m_center;
+	
+	float angle = 0.0;
+	float height = 0.0;
+	
+	DEBUG("creating object");
+	region->createObject("EditorFixedObject", pos,angle, height,WorldObject::STATE_AUTO);
+}
 
 ContentEditor* ContentEditor::getSingletonPtr(void)
 {
@@ -862,4 +1249,10 @@ ContentEditor& ContentEditor::getSingleton(void)
 	return ( *ms_Singleton );
 }
 
+bool ContentEditor::onClose(const CEGUI::EventArgs& evt)
+{
+	m_rootWindow->setVisible(!m_rootWindow->isVisible());
+	m_lastVisibilitySwitch = Ogre::Root::getSingleton().getTimer()->getMilliseconds();
+	return true;
+}
 

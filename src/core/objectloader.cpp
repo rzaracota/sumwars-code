@@ -473,7 +473,7 @@ bool ObjectLoader::loadObjectData(const char* pFilename)
 	}
 }
 
-bool ObjectLoader::loadObject(TiXmlNode* node)
+bool ObjectLoader::loadObject(TiXmlNode* node, bool silent_replace)
 {
 	
 	TiXmlNode* child;
@@ -527,7 +527,7 @@ bool ObjectLoader::loadObject(TiXmlNode* node)
 				std::string mesh;
 				attr.getString("file",mesh);
 				
-				GraphicManager::registerGraphicMapping(subtype, mesh);
+				GraphicManager::registerGraphicMapping(subtype, mesh, silent_replace);
 				if (sdata != 0)
 				{
 					sdata->m_render_info = mesh;
@@ -539,7 +539,7 @@ bool ObjectLoader::loadObject(TiXmlNode* node)
 				std::string mesh;
 				attr.parseElement(child->ToElement());
 				attr.getString("name",mesh);
-				GraphicManager::registerGraphicMapping(subtype, mesh);
+				GraphicManager::registerGraphicMapping(subtype, mesh, silent_replace);
 				if (sdata != 0)
 				{
 					sdata->m_render_info = mesh;
@@ -637,7 +637,7 @@ bool ObjectLoader::loadObject(TiXmlNode* node)
 		}
 		else
 		{
-			ObjectFactory::registerFixedObject(subtype,data);
+			ObjectFactory::registerFixedObject(subtype,data, silent_replace);
 		}
 	}
 	else

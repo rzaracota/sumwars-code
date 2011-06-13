@@ -149,9 +149,10 @@ class GraphicManager
 		 * \brief Registers a mapping that describes which renderinfo is used to visualize an ingame object
 		 * \param objecttype Ingame Object type
 		 * \param renderinfo Renderinfo used to display objects of type \a objecttype
+		 * \param silent_replace if set to true, the data is replaced without error message. 
 		 * \sa getGraphicType
 		 */
-		static void registerGraphicMapping(std::string objecttype, GraphicObject::Type renderinfo);
+		static void registerGraphicMapping(std::string objecttype, GraphicObject::Type renderinfo, bool silent_replace = false);
 		
 		/**
 		 * \brief Returns the Renderinfo that is used to display the given objecttype

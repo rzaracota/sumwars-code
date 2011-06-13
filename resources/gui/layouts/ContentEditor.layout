@@ -9,6 +9,7 @@
             <Property Name="UnifiedAreaRect" Value="{{0.000539273,0},{0.00312498,0},{0.997266,0},{0.898958,0}}" />
             <Window Type="DefaultWindow" Name="RenderInfoTab" >
                 <Property Name="Text" Value="Render Info" />
+                <Property Name="Visible" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Window Type="TaharezLook/TabControl" Name="RenderInfoTabControl" >
                     <Property Name="TabHeight" Value="{0,31.1724}" />
@@ -16,7 +17,6 @@
                     <Property Name="UnifiedAreaRect" Value="{{0.00391872,0},{0.00348824,0},{0.527266,0},{1.00058,0}}" />
                     <Window Type="DefaultWindow" Name="RITab/BasicMesh" >
                         <Property Name="Text" Value="Mesh" />
-                        <Property Name="Visible" Value="True" />
                         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                         <Window Type="TaharezLook/Combobox" Name="RITab/BM/MeshSelector" >
                             <Property Name="UnifiedAreaRect" Value="{{0.334514,0},{0.0363174,0},{0.662888,0},{0.905855,0}}" />
@@ -105,28 +105,31 @@
                             <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.4,0},{0.219404,0},{0.46,0}}" />
                         </Window>
                         <Window Type="TaharezLook/Spinner" Name="RITab/SM/SMRotateX" >
-                            <Property Name="StepSize" Value="1" />
+                            <Property Name="StepSize" Value="5" />
                             <Property Name="CurrentValue" Value="0" />
-                            <Property Name="MaximumValue" Value="32767" />
-                            <Property Name="MinimumValue" Value="-32768" />
+                            <Property Name="MaximumValue" Value="3600" />
+                            <Property Name="MinimumValue" Value="-3600" />
                             <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.40842,0},{0.45,0},{0.46,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
+                            <Property Name="TextInputMode" Value="FloatingPoint" />  
                         </Window>
                         <Window Type="TaharezLook/Spinner" Name="RITab/SM/SMRotateY" >
-                            <Property Name="StepSize" Value="1" />
+                            <Property Name="StepSize" Value="5" />
                             <Property Name="CurrentValue" Value="0" />
-                            <Property Name="MaximumValue" Value="32767" />
-                            <Property Name="MinimumValue" Value="-32768" />
+                            <Property Name="MaximumValue" Value="3600" />
+                            <Property Name="MinimumValue" Value="-3600" />
                             <Property Name="UnifiedAreaRect" Value="{{0.5,0},{0.40842,0},{0.7,0},{0.46,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
+                            <Property Name="TextInputMode" Value="FloatingPoint" />  
                         </Window>
                         <Window Type="TaharezLook/Spinner" Name="RITab/SM/SMRotateZ" >
-                            <Property Name="StepSize" Value="1" />
+                            <Property Name="StepSize" Value="5" />
                             <Property Name="CurrentValue" Value="0" />
-                            <Property Name="MaximumValue" Value="32767" />
-                            <Property Name="MinimumValue" Value="-32768" />
+                            <Property Name="MaximumValue" Value="3600" />
+                            <Property Name="MinimumValue" Value="-3600" />
                             <Property Name="UnifiedAreaRect" Value="{{0.75,0},{0.40842,0},{0.95,0},{0.46,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
+                            <Property Name="TextInputMode" Value="FloatingPoint" />  
                         </Window>
                         <Window Type="TaharezLook/StaticText" Name="RITab/SM/ScaleLabel" >
                             <Property Name="Text" Value="Scale:" />
@@ -136,12 +139,13 @@
                             <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.5,0},{0.22,0},{0.56,0}}" />
                         </Window>
                         <Window Type="TaharezLook/Spinner" Name="RITab/SM/SMScale" >
-                            <Property Name="StepSize" Value="1" />
-                            <Property Name="CurrentValue" Value="0" />
-                            <Property Name="MaximumValue" Value="32767" />
-                            <Property Name="MinimumValue" Value="-32768" />
+                            <Property Name="StepSize" Value="0.1" />
+                            <Property Name="CurrentValue" Value="1" />
+                            <Property Name="MaximumValue" Value="100" />
+                            <Property Name="MinimumValue" Value="0" />
                             <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.5,0},{0.45,0},{0.56,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
+                            <Property Name="TextInputMode" Value="FloatingPoint" />                            
                         </Window>
                         <Window Type="TaharezLook/StaticText" Name="RITab/SM/OffsetLabel" >
                             <Property Name="Text" Value="Offset (x,y,z):" />
@@ -151,28 +155,31 @@
                             <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.6,0},{0.22,0},{0.66,0}}" />
                         </Window>
                         <Window Type="TaharezLook/Spinner" Name="RITab/SM/SMOffsetX" >
-                            <Property Name="StepSize" Value="1" />
+                            <Property Name="StepSize" Value="0.1" />
                             <Property Name="CurrentValue" Value="0" />
-                            <Property Name="MaximumValue" Value="32767" />
-                            <Property Name="MinimumValue" Value="-32768" />
+                            <Property Name="MaximumValue" Value="200" />
+                            <Property Name="MinimumValue" Value="-200" />
                             <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.6,0},{0.45,0},{0.66,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
+                            <Property Name="TextInputMode" Value="FloatingPoint" />  
                         </Window>
                         <Window Type="TaharezLook/Spinner" Name="RITab/SM/SMOffsetY" >
-                            <Property Name="StepSize" Value="1" />
+                            <Property Name="StepSize" Value="0.1" />
                             <Property Name="CurrentValue" Value="0" />
-                            <Property Name="MaximumValue" Value="32767" />
-                            <Property Name="MinimumValue" Value="-32768" />
+                            <Property Name="MaximumValue" Value="200" />
+                            <Property Name="MinimumValue" Value="-200" />
                             <Property Name="UnifiedAreaRect" Value="{{0.5,0},{0.6,0},{0.7,0},{0.66,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
+                            <Property Name="TextInputMode" Value="FloatingPoint" />  
                         </Window>
                         <Window Type="TaharezLook/Spinner" Name="RITab/SM/SMOffsetZ" >
-                            <Property Name="StepSize" Value="1" />
+                            <Property Name="StepSize" Value="0.1" />
                             <Property Name="CurrentValue" Value="0" />
-                            <Property Name="MaximumValue" Value="32767" />
-                            <Property Name="MinimumValue" Value="-32768" />
+                            <Property Name="MaximumValue" Value="200" />
+                            <Property Name="MinimumValue" Value="-200" />
                             <Property Name="UnifiedAreaRect" Value="{{0.75,0},{0.6,0},{0.95,0},{0.66,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
+                            <Property Name="TextInputMode" Value="FloatingPoint" />  
                         </Window>
                         <Window Type="TaharezLook/Button" Name="RITab/SubMesh/DelSubMeshButton" >
                             <Property Name="Text" Value="Delete Submesh" />
@@ -186,6 +193,7 @@
                     </Window>
                     <Window Type="DefaultWindow" Name="RITab/XML" >
                         <Property Name="Text" Value="XML" />
+                        <Property Name="Visible" Value="False" />
                         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                         <Window Type="TaharezLook/MultiLineEditbox" Name="RITab/XML/RIXMLEditbox" >
                             <Property Name="Text" >
@@ -204,8 +212,7 @@
                     <Property Name="UnifiedAreaRect" Value="{{0.535738,0},{0.0565595,0},{0.983904,0},{0.772162,0}}" />
                 </Window>
             </Window>
-			
-			<Window Type="DefaultWindow" Name="FixedObjectTab" >
+            <Window Type="DefaultWindow" Name="FixedObjectTab" >
                 <Property Name="Text" Value="FixedObject" />
                 <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Window Type="TaharezLook/TabControl" Name="FixedObjectTabControl" >
@@ -214,116 +221,107 @@
                     <Property Name="UnifiedAreaRect" Value="{{0.00391872,0},{0.00348824,0},{0.527266,0},{1.00058,0}}" />
                     <Window Type="DefaultWindow" Name="FOTab/Properties" >
                         <Property Name="Text" Value="Properties" />
-                        <Property Name="Visible" Value="True" />
                         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
-						 <Window Type="TaharezLook/StaticText" Name="FOTab/Prop/ShapeLabel" >
+                        <Window Type="TaharezLook/StaticText" Name="FOTab/Prop/ShapeLabel" >
                             <Property Name="Text" Value="Shape:" />
-                            <Property Name="HorzExtent" Value="115" />
+                            <Property Name="HorzExtent" Value="42" />
                             <Property Name="VertExtent" Value="15.5148" />
                             <Property Name="FrameEnabled" Value="False" />
                             <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.01,0},{0.347415,0},{0.1,0}}" />
                         </Window>
-						<Window Type="TaharezLook/Checkbox" Name="FOTab/Prop/CircleCheckbox" >
+                        <Window Type="TaharezLook/RadioButton" Name="FOTab/Prop/CircleCheckbox" >
                             <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.1,0},{0.1,0},{0.15,0}}" />
                         </Window>
-						<Window Type="TaharezLook/StaticText" Name="FOTab/Prop/CircleLabel" >
+                        <Window Type="TaharezLook/StaticText" Name="FOTab/Prop/CircleLabel" >
                             <Property Name="Text" Value="Circle" />
-                            <Property Name="HorzExtent" Value="115" />
+                            <Property Name="HorzExtent" Value="37" />
                             <Property Name="VertExtent" Value="15.5148" />
                             <Property Name="FrameEnabled" Value="False" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.1,0},{0.20,0},{0.15,0}" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.1,0},{0.2,0},{0.15,0}}" />
                         </Window>
-						
-						<Window Type="TaharezLook/StaticText" Name="FOTab/Prop/RadiusLabel" >
+                        <Window Type="TaharezLook/StaticText" Name="FOTab/Prop/RadiusLabel" >
                             <Property Name="Text" Value="Radius:" />
-                            <Property Name="HorzExtent" Value="115" />
+                            <Property Name="HorzExtent" Value="42" />
                             <Property Name="VertExtent" Value="15.5148" />
                             <Property Name="FrameEnabled" Value="False" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.1,0},{0.40,0},{0.15,0}}" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.1,0},{0.4,0},{0.15,0}}" />
                         </Window>
-						<Window Type="TaharezLook/Editbox" Name="FOTab/Prop/RadiusEditbox" >
-                            <Property Name="MaxTextLength" Value="1073741823" />
+                        
+                        <Window Type="TaharezLook/Spinner" Name="FOTab/Prop/RadiusSpinner" >
+                            <Property Name="StepSize" Value="0.1" />
+                            <Property Name="CurrentValue" Value="1" />
+                            <Property Name="MaximumValue" Value="20" />
+                            <Property Name="MinimumValue" Value="0" />
                             <Property Name="UnifiedAreaRect" Value="{{0.42,0},{0.1,0},{0.62,0},{0.15,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
+                            <Property Name="TextInputMode" Value="FloatingPoint" />  
                         </Window>
-						 <Window Type="TaharezLook/Button" Name="FOTab/Prop/DetectCircleButton" >
+                        <Window Type="TaharezLook/Button" Name="FOTab/Prop/DetectCircleButton" >
                             <Property Name="Text" Value="Autodetect" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.70,0},{0.1,0},{0.92,0},{0.15,0}}" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.7,0},{0.1,0},{0.92,0},{0.15,0}}" />
                         </Window>
-						
-						
-						<Window Type="TaharezLook/Checkbox" Name="FOTab/Prop/RectangleCheckbox" >
+                        <Window Type="TaharezLook/RadioButton" Name="FOTab/Prop/RectangleCheckbox" >
                             <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.2,0},{0.1,0},{0.25,0}}" />
                         </Window>
-						
-						<Window Type="TaharezLook/StaticText" Name="FOTab/Prop/RectangleLabel" >
+                        <Window Type="TaharezLook/StaticText" Name="FOTab/Prop/RectangleLabel" >
                             <Property Name="Text" Value="Rectangle" />
-                            <Property Name="HorzExtent" Value="115" />
+                            <Property Name="HorzExtent" Value="63" />
                             <Property Name="VertExtent" Value="15.5148" />
                             <Property Name="FrameEnabled" Value="False" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.2,0},{0.20,0},{0.25,0}}" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.2,0},{0.2,0},{0.25,0}}" />
                         </Window>
-						
-						<Window Type="TaharezLook/StaticText" Name="FOTab/Prop/WidthLabel" >
+                        <Window Type="TaharezLook/StaticText" Name="FOTab/Prop/WidthLabel" >
                             <Property Name="Text" Value="Width:" />
-                            <Property Name="HorzExtent" Value="115" />
+                            <Property Name="HorzExtent" Value="38" />
                             <Property Name="VertExtent" Value="15.5148" />
                             <Property Name="FrameEnabled" Value="False" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.2,0},{0.40,0},{0.25,0}}" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.2,0},{0.4,0},{0.25,0}}" />
                         </Window>
-						<Window Type="TaharezLook/Editbox" Name="FOTab/Prop/WidthEditbox" >
-                            <Property Name="MaxTextLength" Value="1073741823" />
+                        <Window Type="TaharezLook/Spinner" Name="FOTab/Prop/WidthSpinner" >
+                            <Property Name="StepSize" Value="0.1" />
+                            <Property Name="CurrentValue" Value="1" />
+                            <Property Name="MaximumValue" Value="20" />
+                            <Property Name="MinimumValue" Value="0" />
                             <Property Name="UnifiedAreaRect" Value="{{0.42,0},{0.2,0},{0.62,0},{0.25,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
+                            <Property Name="TextInputMode" Value="FloatingPoint" />  
                         </Window>
-						
-						<Window Type="TaharezLook/StaticText" Name="FOTab/Prop/DepthLabel" >
+                        
+                        <Window Type="TaharezLook/StaticText" Name="FOTab/Prop/DepthLabel" >
                             <Property Name="Text" Value="Depth:" />
-                            <Property Name="HorzExtent" Value="115" />
+                            <Property Name="HorzExtent" Value="42" />
                             <Property Name="VertExtent" Value="15.5148" />
                             <Property Name="FrameEnabled" Value="False" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.3,0},{0.40,0},{0.35,0}}" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.3,0},{0.4,0},{0.35,0}}" />
                         </Window>
-						<Window Type="TaharezLook/Editbox" Name="FOTab/Prop/DepthEditbox" >
-                            <Property Name="MaxTextLength" Value="1073741823" />
+                        <Window Type="TaharezLook/Spinner" Name="FOTab/Prop/DepthSpinner" >
+                            <Property Name="StepSize" Value="0.1" />
+                            <Property Name="CurrentValue" Value="1" />
+                            <Property Name="MaximumValue" Value="20" />
+                            <Property Name="MinimumValue" Value="0" />
                             <Property Name="UnifiedAreaRect" Value="{{0.42,0},{0.3,0},{0.62,0},{0.35,0}}" />
                             <Property Name="TextParsingEnabled" Value="False" />
-                        </Window>
-						<Window Type="TaharezLook/Button" Name="FOTab/Prop/DetectRectButton" >
+                            <Property Name="TextInputMode" Value="FloatingPoint" />  
+                        </Window>                        
+                        <Window Type="TaharezLook/Button" Name="FOTab/Prop/DetectRectButton" >
                             <Property Name="Text" Value="Autodetect" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.70,0},{0.3,0},{0.92,0},{0.35,0}}" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.7,0},{0.3,0},{0.92,0},{0.35,0}}" />
                         </Window>
-						
                         <Window Type="TaharezLook/StaticText" Name="FOTab/Prop/CollisionLabel" >
                             <Property Name="Text" Value="Collision type" />
-                            <Property Name="HorzExtent" Value="115" />
+                            <Property Name="HorzExtent" Value="85" />
                             <Property Name="VertExtent" Value="15.5148" />
                             <Property Name="FrameEnabled" Value="False" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.10,0},{0.4,0},{0.40,0},{0.45,0}}" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.4,0},{0.4,0},{0.45,0}}" />
                         </Window>
-						
-						<Window Type="TaharezLook/Combobox" Name="FOTab/Prop/LayerSelector" >
+                        <Window Type="TaharezLook/Combobox" Name="FOTab/Prop/LayerSelector" >
                             <Property Name="UnifiedAreaRect" Value="{{0.42,0},{0.4,0},{0.62,0},{0.8,0}}" />
                             <Property Name="MaxEditTextLength" Value="1073741823" />
                         </Window>
-						
-						<!--
-						 <Window Type="TaharezLook/Button" Name="RITab/SubMesh/AddSubMeshButton" >
-                            <Property Name="Text" Value="Add Submesh" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.7,0},{0.06618,0},{0.950041,0},{0.128133,0}}" />
-                        </Window>
-						 <Window Type="TaharezLook/Editbox" Name="RITab/SM/SMNameEditbox" >
-                            <Property Name="MaxTextLength" Value="1073741823" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.3,0},{0.077842,0},{0.65,0},{0.122302,0}}" />
-                            <Property Name="TextParsingEnabled" Value="False" />
-                        </Window>
-                        <Window Type="TaharezLook/Checkbox" Name="RITab/SM/AttachSMCheckbox" >
-                            <Property Name="UnifiedAreaRect" Value="{{0.0329296,0},{0.24344,0},{0.0784697,0},{0.293731,0}}" />
-                        </Window>
-						-->
-                    </Window>  
-					<Window Type="DefaultWindow" Name="FOTab/Create" >
+                    </Window>
+                    <Window Type="DefaultWindow" Name="FOTab/Create" >
                         <Property Name="Text" Value="Create Object" />
+                        <Property Name="Visible" Value="False" />
                         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                         <Window Type="TaharezLook/Button" Name="FOTab/XML/CreateButton" >
                             <Property Name="Text" Value="Create Object" />
@@ -332,6 +330,7 @@
                     </Window>
                     <Window Type="DefaultWindow" Name="FOTab/XML" >
                         <Property Name="Text" Value="XML" />
+                        <Property Name="Visible" Value="False" />
                         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                         <Window Type="TaharezLook/MultiLineEditbox" Name="FOTab/XML/FOXMLEditbox" >
                             <Property Name="Text" >
@@ -348,7 +347,6 @@
                 </Window>
             </Window>
         </Window>
-		
         <Window Type="TaharezLook/Button" Name="CloseButton" >
             <Property Name="Text" Value="Close" />
             <Property Name="UnifiedAreaRect" Value="{{0.84668,0},{0.897134,0},{0.996094,0},{0.997395,0}}" />

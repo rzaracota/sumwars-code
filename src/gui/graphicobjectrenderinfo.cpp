@@ -58,7 +58,7 @@ void MovableObjectInfo::writeToXML(TiXmlNode* node)
 	
 	if (m_scale != 1.0)
 	{
-		elem->SetAttribute("scale", m_scale);
+		elem->SetDoubleAttribute("scale", m_scale);
 	}
 	else
 	{

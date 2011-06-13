@@ -828,7 +828,7 @@ void GraphicManager::loadMovableObjectInfo(TiXmlNode* node, MovableObjectInfo* i
 	
 }
 
-void GraphicManager::registerGraphicMapping(std::string objecttype, GraphicObject::Type renderinfo)
+void GraphicManager::registerGraphicMapping(std::string objecttype, GraphicObject::Type renderinfo, bool silent_replace)
 {
 	DEBUGX("registered graphic %s for object type %s",graphic.c_str(), objecttype.c_str());
 	m_graphic_mapping[objecttype] = renderinfo;

@@ -44,6 +44,12 @@ public:
 
 
 protected:
+	
+	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called upon click on close button
+	 */
+	bool onClose(const CEGUI::EventArgs& evt);
 
 	/**
 	 * \param evt CEGUI event arguments
@@ -237,9 +243,20 @@ private:
 	bool m_modified_fixed_object;
 	
 	/**
+	 * \brief marks that the XML of the fixed object data has been modified
+	 */
+	bool m_modified_fixed_object_xml;
+	
+	/**
 	 * \brief FixedObject currently edited
 	 */
 	FixedObjectData m_edited_fixed_object;
+	
+	/**
+	 * \brief XML representation of the  FixedObject edited with this window
+	 */
+	TiXmlDocument m_fixed_object_xml; 
+	
 	
 	/**
 	 * \brief while set to true, all CEGUI events will be ignored

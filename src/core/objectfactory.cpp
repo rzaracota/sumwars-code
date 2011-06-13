@@ -443,7 +443,7 @@ void ObjectFactory::registerMonster(GameObject::Subtype subtype, MonsterBasicDat
 	m_monster_data.insert(std::make_pair(subtype,data));
 }
 
-void ObjectFactory::registerFixedObject(GameObject::Subtype subtype, FixedObjectData* data)
+void ObjectFactory::registerFixedObject(GameObject::Subtype subtype, FixedObjectData* data, bool silent_replace)
 {
 	if (m_fixed_object_data.count(subtype) != 0)
 	{

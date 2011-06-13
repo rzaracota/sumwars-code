@@ -500,12 +500,12 @@ class ObjectFactory
 	static void registerPlayer(GameObject::Subtype subtype, PlayerBasicData* data);
 	
 	/**
-	 * \fn static void registerFixedObject(GameObject::Subtype subtype, FixedObjectData* data)
 	 * \brief Registriert die Daten fuer ein bestimmten Monstertyp
 	 * \param subtype Subtyp des Objektes
 	 * \param data Daten des festen Objekts
+	 * \param silent_replace if set to true, the data is replaced without error message.
 	 */
-	static void registerFixedObject(GameObject::Subtype subtype, FixedObjectData* data);
+	static void registerFixedObject(GameObject::Subtype subtype, FixedObjectData* data,  bool silent_replace = false);
 	
 	/**
 	 * \fn static void registerScriptObject(GameObject::Subtype subtype, ScriptObjectData* data)

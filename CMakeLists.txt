@@ -170,6 +170,7 @@ SET(SRCS
   ./src/core/debug.cpp
   ./src/core/unionfindtree.cpp
   ./src/core/world.cpp
+  ./src/core/fixedbase.cpp
   ./src/core/fixedobject.cpp
   ./src/core/templateloader.cpp
   ./src/core/elementattrib.cpp
