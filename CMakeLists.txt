@@ -237,7 +237,9 @@ SET(SRCS
 	./src/gui/debugpanel/filebrowser/filebrowser.cpp
 	#./src/gui/debugpanel/reloadtab.cpp
 	./src/gui/contenteditor/contenteditor.cpp
-	./src/gui/contenteditor/guiTabs.cpp
+	./src/gui/contenteditor/contenteditortab.cpp
+	./src/gui/contenteditor/fixedobjecteditor.cpp
+	./src/gui/contenteditor/renderinfoeditor.cpp
 	)
 ENDIF()
 

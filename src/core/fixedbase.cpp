@@ -34,16 +34,22 @@ void FixedObjectData::writeToXML(TiXmlNode* node)
 	
 	if (m_shape.m_type == Shape::CIRCLE)
 	{
-		geom_node->SetAttribute("type","CIRCLE");
+		geom_node->SetAttribute("shape","CIRCLE");
 		geom_node->SetDoubleAttribute("radius",m_shape.m_radius);
 		geom_node->RemoveAttribute("extent_x");
 		geom_node->RemoveAttribute("extent_y");
 	}
 	else
 	{
-		geom_node->SetAttribute("type","RECT");
+		geom_node->SetAttribute("shape","RECT");
 		geom_node->SetDoubleAttribute("extent_x",m_shape.m_extent.m_x);
 		geom_node->SetDoubleAttribute("extent_y",m_shape.m_extent.m_y);
 		geom_node->RemoveAttribute("radius");	
 	}
+}
+
+void FixedObjectData::operator=(const FixedObjectData& other)
+{
+	m_layer = other.m_layer;
+	m_shape = other.m_shape;
 }

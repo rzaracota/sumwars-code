@@ -30,6 +30,14 @@ class ContentEditorTab
 		{
 		};
 		
+		/**
+		 * \brief tells the object to update underlying game data
+		 */
+		void setUpdateBaseContent()
+		{
+			m_update_base_content = true;
+		}
+		
 	protected:
 		/**
 		 * \brief Sets the text of a CEGUI window
@@ -91,12 +99,19 @@ class ContentEditorTab
 		
 		void getNodeBounds(const Ogre::SceneNode* node, Ogre::Vector3& minimum, Ogre::Vector3& maximum, int level=1);
 		
+
+		
 	protected:
 		/**
 		 * \brief while set to true, all CEGUI events will be ignored
 		 * This allows setting some GUI elements in event handlers without getting infinite loops due.
 		 */
 		bool m_no_cegui_events;
+		
+		/**
+		 * \brief marks that underlying game data should be reloaded
+		 */
+		bool m_update_base_content;
 		
 };
 

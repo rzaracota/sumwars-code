@@ -28,6 +28,12 @@ struct FixedObjectData
 	 * This function also deals with XML trees that are already written. In this case, only the difference is written.
 	 */
 	void writeToXML(TiXmlNode* node);
+	
+	/**
+	 * \brief assignment operator
+	 * \param other object to be copied from
+	 */
+	void operator=(const FixedObjectData& other);
 };
 
 #endif

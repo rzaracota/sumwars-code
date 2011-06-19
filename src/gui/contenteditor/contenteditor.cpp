@@ -126,6 +126,13 @@ void ContentEditor::update(OIS::Keyboard *keyboard)
 	}
 }
 
+void ContentEditor::fullUpdateComponent(std::string name)
+{
+	if (m_components.count(name) == 0)
+		return;
+	
+	m_components[name]->setUpdateBaseContent();
+}
 
 bool ContentEditor::handleCloseWindow(const CEGUI::EventArgs& e)
 {

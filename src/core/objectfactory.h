@@ -629,6 +629,20 @@ class ObjectFactory
 	 */
 	static PlayerLook* getPlayerLook(GameObject::Subtype subtype, std::string name);
 	
+	/**
+	 * \brief returns the base data for a FixedObject
+	 * \param subtype type of the object
+	 */
+	static FixedObjectData* getFixedObjectData(GameObject::Subtype subtype);
+	
+	/**
+	 * \brief returns the data structure with all registered fixedObjects
+	 */
+	static const std::map<GameObject::Subtype, FixedObjectData*>& getAllFixedObjectData()
+	{
+		return m_fixed_object_data;
+	}
+	
 	private:	
 	/**
 	 * \var static std::map<GameObject::Subtype, MonsterBasicData*> m_monster_data

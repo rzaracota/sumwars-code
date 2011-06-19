@@ -26,6 +26,11 @@ class FixedObjectEditor : public ContentEditorTab
 	private:
 		
 		/**
+		 * \brief is called if the list of all FixedObjects has been modified
+		 */
+		void updateAllFixedObjectList();
+		
+		/**
 		 * \param evt CEGUI event arguments
 		 * \brief Called upon changing any element FixedObject tab
 		 */
@@ -50,6 +55,12 @@ class FixedObjectEditor : public ContentEditorTab
 		bool onFixedObjectCreate(const CEGUI::EventArgs& evt);
 		
 		/**
+		 * \param evt CEGUI event arguments
+		 * \brief Called upon clicking the Copy Data from existing object Button
+		 */
+		bool onCopyData(const CEGUI::EventArgs& evt);
+		
+		/**
 		 * \brief updates the content of the FixedObject XML editor
 		 */
 		void updateFixedObjectXML();
@@ -70,6 +81,11 @@ class FixedObjectEditor : public ContentEditorTab
 		 * \brief marks that the XML of the fixed object data has been modified
 		 */
 		bool m_modified_fixed_object_xml;
+		
+		/**
+		 * \brief marks whether the list of all fixed objects is dirty
+		 */
+		bool m_modified_fixed_object_list;
 		
 		/**
 		 * \brief FixedObject currently edited

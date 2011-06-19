@@ -102,6 +102,56 @@ ItemBasicData::~ItemBasicData()
 
 }
 
+void ItemBasicData::operator=(const ItemBasicData& other)
+{
+	if (other.m_useup_effect!=0)
+	{
+		m_useup_effect = new CreatureDynAttrMod;
+		*m_useup_effect = *(other.m_useup_effect);
+	}
+	else
+	{
+		delete m_useup_effect;
+		m_useup_effect = 0;
+	}
+	
+	if (other.m_equip_effect!=0)
+	{
+		m_equip_effect = new CreatureBaseAttrMod;
+		*m_equip_effect =  *(other.m_equip_effect);
+	}
+	else
+	{
+		delete m_equip_effect;
+		m_equip_effect = 0;
+	}
+	
+	if (other.m_weapon_attr!=0)
+	{
+		m_weapon_attr = new WeaponAttr;
+		*m_weapon_attr = *(other.m_weapon_attr);
+		m_weapon_attr->m_damage = other.m_weapon_attr->m_damage;
+	}
+	else
+	{	
+		delete m_weapon_attr;
+		m_weapon_attr = 0;
+	}
+	
+	m_level_req = other.m_level_req;
+	m_char_req = other.m_char_req;
+	m_subtype = other.m_subtype;
+	m_type = other.m_type;
+	m_size = other.m_size;
+	m_price = other.m_price;
+	for (int i=0; i< NUM_MAGIC_MODS; i++)
+		m_modchance[i] = other.m_modchance[i];
+	m_min_enchant = other.m_min_enchant;
+	m_max_enchant = other.m_max_enchant;
+	m_enchant_multiplier = other.m_enchant_multiplier;
+	m_name = other.m_name;
+
+}
 
 Item::Item(int id)
 {

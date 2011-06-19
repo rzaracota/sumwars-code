@@ -37,6 +37,12 @@ public:
 	*/
 	void update(OIS::Keyboard *keyboard);
 	
+	/**
+	 * \brief Tells the editor, that one component needs a full update
+	 * \param name Name of the editor tab
+	 */
+	void fullUpdateComponent(std::string name);
+	
 	
 	static ContentEditor& getSingleton(void);
 	static ContentEditor* getSingletonPtr(void);

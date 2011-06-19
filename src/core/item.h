@@ -514,6 +514,12 @@ struct ItemBasicData
 	 * \brief Destruktor
 	 */
 	~ItemBasicData();
+	
+	/**
+	 * \brief assignment operator
+	 * \param other object to be copied from
+	 */
+	void operator=(const ItemBasicData& other);
 
 };
 

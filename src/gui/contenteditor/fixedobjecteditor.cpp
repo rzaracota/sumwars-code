@@ -42,6 +42,9 @@ void FixedObjectEditor::init(CEGUI::Window* parent)
 	
 	layerSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&FixedObjectEditor::onFixedObjectModified, this));
 	
+	CEGUI::PushButton* xmlsubmitButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/XML/SubmitButton"));
+	xmlsubmitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&FixedObjectEditor::onFixedObjectXMLModified, this));
+	
 	CEGUI::PushButton* createFOButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/XML/CreateButton"));
 	createFOButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&FixedObjectEditor::onFixedObjectCreate, this));
 	
@@ -53,10 +56,18 @@ void FixedObjectEditor::init(CEGUI::Window* parent)
 	TiXmlElement * fixed_ri = new TiXmlElement("RenderInfo");  
 	fixed_ri->SetAttribute("name","EditorRenderInfo");
 	fixed_root->LinkEndChild(fixed_ri);
+	
+	m_update_base_content = true;
 }
 
 void FixedObjectEditor::update()
 {
+	if (m_update_base_content == true)
+	{
+		updateAllFixedObjectList();
+		m_update_base_content = false;
+	}
+	
 	if (m_modified_fixed_object)
 	{
 		updateFixedObjectXML();
@@ -69,6 +80,24 @@ void FixedObjectEditor::update()
 	
 	m_modified_fixed_object = false;
 	m_modified_fixed_object_xml = false;
+}
+
+void FixedObjectEditor::updateAllFixedObjectList()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	CEGUI::Combobox* copyfoSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("FOTab/Properties/CopyDataBox"));
+	
+	// Fill list of all FixedObjects
+	const std::map<GameObject::Subtype, FixedObjectData*>& all_fo = ObjectFactory::getAllFixedObjectData();
+	std::map<GameObject::Subtype, FixedObjectData*>::const_iterator it;
+	for (it = all_fo.begin(); it != all_fo.end(); ++it)
+	{
+		copyfoSelector->addItem(new CEGUI::ListboxTextItem(it->first.c_str()));
+	}
+	
+	CEGUI::PushButton* copyfoButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Properties/CopyDataButton"));
+	copyfoButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&FixedObjectEditor::onCopyData, this));
 }
 
 void FixedObjectEditor::updateFixedObjectXML()
@@ -88,6 +117,8 @@ void FixedObjectEditor::updateFixedObjectXML()
 
 void FixedObjectEditor::updateFixedObjectEditor()
 {
+	m_no_cegui_events = true;
+	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("FOTab/Prop/LayerSelector"));
@@ -100,7 +131,7 @@ void FixedObjectEditor::updateFixedObjectEditor()
 	CEGUI::RadioButton* rectButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/RectangleCheckbox"));
 	
 	// adjust the spinner values
-	if (circleButton->getSelectedButtonInGroup() == circleButton)
+	if (m_edited_fixed_object.m_shape.m_type == Shape::CIRCLE)
 	{
 		radiusSpinner->setCurrentValue(m_edited_fixed_object.m_shape.m_radius);
 		circleButton->setSelected(true);
@@ -126,12 +157,18 @@ void FixedObjectEditor::updateFixedObjectEditor()
 	{
 		int id = selection->getID();
 		layerSelector->setSelection(id,id);
+		layerSelector->setText(layer);
 	}
+	
+	m_no_cegui_events = false;
 }
 
 
 bool FixedObjectEditor::onFixedObjectModified(const CEGUI::EventArgs& evt)
 {
+	if (m_no_cegui_events)
+		return true;
+	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	CEGUI::RadioButton* CircleButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/CircleCheckbox"));
@@ -231,6 +268,14 @@ bool FixedObjectEditor::onFixedObjectXMLModified(const CEGUI::EventArgs& evt)
 		m_fixed_object_xml.LinkEndChild(ri_temp_xml.RootElement()->Clone());
 		
 		// parse the XML to the fixed object data
+		ObjectLoader::loadObject(m_fixed_object_xml.FirstChildElement(),true);
+		// copy to the local Data structure
+		FixedObjectData* data = ObjectFactory::getFixedObjectData("EditorFixedObject");
+		if (data != 0)
+		{
+			m_edited_fixed_object = *data;
+		}
+		
 		m_modified_fixed_object_xml = true;
 	}
 	else
@@ -240,34 +285,7 @@ bool FixedObjectEditor::onFixedObjectXMLModified(const CEGUI::EventArgs& evt)
 		int err_row = ri_temp_xml.ErrorRow();
 		int err_col = ri_temp_xml.ErrorCol();
 		
-		int row =1, col = 1;	
-		int pos = 0;	// cursor position found
-		const CEGUI::String& text = editor->getText();
-		while (pos < text.size())
-		{
-			// second condition ensures, that cursor is placed on the end,
-			// if the row err_row is shorter than err_col for some reason
-			if ((row == err_row && col == err_col)
-				|| (row > err_row))
-			{
-				break;
-			}
-			
-			if (text.compare(pos,1,"\n") == 0)
-			{
-				row++;
-				col = 1;
-			}
-			else
-			{
-				col ++;
-			}
-			pos++;
-		}
-		
-		editor->setCaratIndex(pos);
-		editor->ensureCaratIsVisible();
-		editor->activate();
+		setMultiLineEditboxCursor("FOTab/XML/FOXMLEditbox",err_row,err_col);
 	}
 	
 	return true;
@@ -296,3 +314,20 @@ bool FixedObjectEditor::onFixedObjectCreate(const CEGUI::EventArgs& evt)
 	region->createObject("EditorFixedObject", pos,angle, height,WorldObject::STATE_AUTO);
 }
 
+bool FixedObjectEditor::onCopyData(const CEGUI::EventArgs& evt)
+{
+	std::string objname	= getComboboxSelection("FOTab/Properties/CopyDataBox", "");
+	if (objname == "")
+		return true;
+	
+	FixedObjectData* fodata = ObjectFactory::getFixedObjectData(objname);
+	if (fodata == 0)
+		return true;
+	
+	m_edited_fixed_object = *fodata;
+	
+	m_modified_fixed_object = true;
+	m_modified_fixed_object_xml = true;
+	
+	return true;
+}

@@ -447,7 +447,10 @@ void ObjectFactory::registerFixedObject(GameObject::Subtype subtype, FixedObject
 {
 	if (m_fixed_object_data.count(subtype) != 0)
 	{
-		WARNING("Duplicate fixed object type %s. Replacing data.",subtype.c_str());
+		if (!silent_replace)
+		{
+			WARNING("Duplicate fixed object type %s. Replacing data.",subtype.c_str());
+		}
 		m_object_types.erase(subtype);
 		delete m_fixed_object_data[subtype];
 		m_fixed_object_data.erase(subtype);
@@ -616,6 +619,20 @@ PlayerLook* ObjectFactory::getPlayerLook(GameObject::Subtype subtype, std::strin
 		++it;
 	}
 	return 0;
+}
+
+FixedObjectData* ObjectFactory::getFixedObjectData(GameObject::Subtype subtype)
+{
+	FixedObjectData* data;
+	std::map<GameObject::Subtype, FixedObjectData*>::iterator i;
+	
+	i = m_fixed_object_data.find(subtype);
+	if (i== m_fixed_object_data.end())
+	{
+		ERRORMSG("subtype not found: %s",subtype.c_str());
+		return 0;
+	}
+	return i->second;
 }
 
 void ObjectFactory::init()

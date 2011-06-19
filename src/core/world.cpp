@@ -14,6 +14,10 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
+#ifdef BUILD_TOOLS
+#include "contenteditor.h"
+#endif
+
 #include "world.h"
 #include "player.h"
 #include "mapgenerator.h"
@@ -34,6 +38,8 @@
 #include "options.h"
 
 #include "OgreResourceGroupManager.h"
+
+
 
 World* World::m_world=0;
 int World::m_version = 18;
@@ -279,6 +285,10 @@ bool World::loadGameData()
 			}
 		}
 	}
+	
+#ifdef BUILD_TOOLS
+	ContentEditor::getSingleton().fullUpdateComponent("FOEditor");
+#endif
 	
 	m_data_reload_requests = 0;
 	return true;

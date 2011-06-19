@@ -30,9 +30,6 @@ class ObjectLoader
 {
 	public:
 	
-
-
-	
 	/**
 	 * \fn loadMonsterData(const char* pFilename);
 	 * \brief Liest die Daten zu Monstern aus einer XML Datei
