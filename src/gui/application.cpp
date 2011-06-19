@@ -552,7 +552,6 @@ bool Application::initCEGUI()
 	//CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<ReloadTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<TextFileEditWindow> >();
 	//CONTENTEDITOR
-	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<GuiTabs> >();
 #endif
 
 	return true;
