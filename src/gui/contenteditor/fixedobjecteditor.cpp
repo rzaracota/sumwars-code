@@ -48,6 +48,13 @@ void FixedObjectEditor::init(CEGUI::Window* parent)
 	CEGUI::PushButton* createFOButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/XML/CreateButton"));
 	createFOButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&FixedObjectEditor::onFixedObjectCreate, this));
 	
+	CEGUI::PushButton* delallFOButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Create/DelAllButton"));
+	delallFOButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&FixedObjectEditor::onDelAllObjects, this));
+	
+	CEGUI::PushButton* getplayerButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Create/GetPlPosButton"));
+	getplayerButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&FixedObjectEditor::onGetPlayerPosition, this));
+	
+	
 	// init the internal data
 	TiXmlElement * fixed_root = new TiXmlElement("Object");  
 	m_fixed_object_xml.LinkEndChild( fixed_root );  
@@ -294,7 +301,25 @@ bool FixedObjectEditor::onFixedObjectXMLModified(const CEGUI::EventArgs& evt)
 bool FixedObjectEditor::onFixedObjectCreate(const CEGUI::EventArgs& evt)
 {
 	// reparse and update the FixedObject Data
+	
+	// create a unique renderinfo (to avoid that the object is modified by the editor after creation)
+	RenderInfoEditor* ri_editor = dynamic_cast<RenderInfoEditor*>(ContentEditor::getSingleton().getComponent("RIEditor"));
+	std::string unique_ri = ri_editor->getUniqueRenderinfo();
+	// temporarily replace the renderinfo name
+	TiXmlElement * fixed_ri = m_fixed_object_xml.RootElement()->FirstChildElement("RenderInfo");
+	if (fixed_ri == 0)
+		return true;
+	
+	std::string name = fixed_ri->Attribute("name");
+	fixed_ri->SetAttribute("name",unique_ri.c_str());
+	
 	ObjectLoader::loadObject(m_fixed_object_xml.FirstChildElement(),true);
+	
+	fixed_ri->SetAttribute("name",name.c_str());
+	
+	Vector pos;
+	float angle;
+	float height = 0.0;
 	
 	World* world = World::getWorld();
 	if (world == 0)
@@ -305,13 +330,18 @@ bool FixedObjectEditor::onFixedObjectCreate(const CEGUI::EventArgs& evt)
 		return true;
 	Region* region = player->getRegion();
 	
-	Vector pos = player->getShape()->m_center;
+	// if the position is set to default, use the player position
+	pos.m_x = getSpinnerValue("FOTab/Create/PosXSpinner",0);
+	pos.m_y = getSpinnerValue("FOTab/Create/PosYSpinner",0);
+	angle = getSpinnerValue("FOTab/Create/AngleSpinner",0);
+	if (pos.m_x == 0 && pos.m_y == 0)
+	{
+		pos = player->getShape()->m_center;
+	}
 	
-	float angle = 0.0;
-	float height = 0.0;
-	
-	DEBUG("creating object");
-	region->createObject("EditorFixedObject", pos,angle, height,WorldObject::STATE_AUTO);
+	// create the object
+	int id = region->createObject("EditorFixedObject", pos,angle, height,WorldObject::STATE_ACTIVE);
+	m_created_objects.push_back(std::make_pair(region->getId(), id));
 }
 
 bool FixedObjectEditor::onCopyData(const CEGUI::EventArgs& evt)
@@ -328,6 +358,45 @@ bool FixedObjectEditor::onCopyData(const CEGUI::EventArgs& evt)
 	
 	m_modified_fixed_object = true;
 	m_modified_fixed_object_xml = true;
+	
+	return true;
+}
+
+bool FixedObjectEditor::onGetPlayerPosition(const CEGUI::EventArgs& evt)
+{
+	World* world = World::getWorld();
+	if (world == 0)
+		return true;
+	
+	WorldObject* player = world->getLocalPlayer();
+	if (player == 0)
+		return true;
+	Region* region = player->getRegion();
+	
+	Vector pos = player->getShape()->m_center;
+	
+	setSpinnerValue("FOTab/Create/PosXSpinner", pos.m_x);
+	setSpinnerValue("FOTab/Create/PosYSpinner", pos.m_y);
+	
+	return true;
+}
+
+bool FixedObjectEditor::onDelAllObjects(const CEGUI::EventArgs& evt)
+{
+	World* world = World::getWorld();
+	if (world == 0)
+		return true;
+	
+	std::list< std::pair<int,int> >::iterator it;
+	for (it = m_created_objects.begin(); it != m_created_objects.end(); ++it)
+	{
+		Region* region = world->getRegion(it->first);
+		if (region == 0)
+			continue;
+		
+		region->deleteObject(it->second);
+	}
+	m_created_objects.clear();
 	
 	return true;
 }

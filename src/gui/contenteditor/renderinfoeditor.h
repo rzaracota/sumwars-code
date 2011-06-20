@@ -32,6 +32,11 @@ class RenderInfoEditor : public ContentEditorTab
 			return m_edited_graphicobject;
 		}
 		
+		/**
+		 * \brief Makes a unique copy of the current renderinfo
+		 */
+		std::string getUniqueRenderinfo();
+		
 	private:
 		/**
 		 * \param evt CEGUI event arguments
@@ -110,8 +115,6 @@ class RenderInfoEditor : public ContentEditorTab
 		 */ 
 		void checkAttachedObjects();
 		
-		
-		
 		/**
 		 * \brief marks if the renderinfo has been modified
 		 */
@@ -136,6 +139,11 @@ class RenderInfoEditor : public ContentEditorTab
 		 * \brief GraphicObject of the Renderinfo edited with this window
 		 */
 		GraphicObject* m_edited_graphicobject;
+		
+		/**
+		 * \brief unique ID for renderinfo objects
+		 */
+		int m_unique_id;
 
 };
 

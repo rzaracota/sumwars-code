@@ -12,6 +12,7 @@ void RenderInfoEditor::init(CEGUI::Window* parent)
 	ContentEditorTab::init(parent);
 	
 	m_edited_graphicobject=0;
+	m_unique_id = 1;
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton(); 
 	
@@ -802,3 +803,15 @@ bool RenderInfoEditor::onRenderinfoXMLModified(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+std::string RenderInfoEditor::getUniqueRenderinfo()
+{
+	GraphicRenderInfo* edited_renderinfo = new GraphicRenderInfo;
+	GraphicManager::loadRenderInfo(m_renderinfo_xml.FirstChildElement(), edited_renderinfo);
+	
+	std::stringstream stream;
+	stream << "EditorRenderInfo_" << m_unique_id;
+	m_unique_id++;
+	GraphicManager::registerRenderInfo(stream.str(), edited_renderinfo, true);
+	
+	return stream.str();
+}

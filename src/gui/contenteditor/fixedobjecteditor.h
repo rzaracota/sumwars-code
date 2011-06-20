@@ -60,6 +60,19 @@ class FixedObjectEditor : public ContentEditorTab
 		 */
 		bool onCopyData(const CEGUI::EventArgs& evt);
 		
+		
+		/**
+		 * \param evt CEGUI event arguments
+		 * \brief Called upon clicking the delete all objects Button
+		 */
+		bool onDelAllObjects(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \param evt CEGUI event arguments
+		 * \brief Called upon clicking the get player position Button
+		 */
+		bool onGetPlayerPosition(const CEGUI::EventArgs& evt);
+		
 		/**
 		 * \brief updates the content of the FixedObject XML editor
 		 */
@@ -96,6 +109,12 @@ class FixedObjectEditor : public ContentEditorTab
 		 * \brief XML representation of the  FixedObject edited with this window
 		 */
 		TiXmlDocument m_fixed_object_xml; 
+		
+		/**
+		 * \brief List of all created objects
+		 * The first integer is the region ID, the second is the object ID
+		 */
+		std::list< std::pair<int,int> > m_created_objects;
 };
 
 

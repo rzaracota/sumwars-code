@@ -17,6 +17,7 @@
                     <Property Name="UnifiedAreaRect" Value="{{0.00391872,0},{0.00348824,0},{0.527266,0},{1.00058,0}}" />
                     <Window Type="DefaultWindow" Name="RITab/BasicMesh" >
                         <Property Name="Text" Value="Mesh" />
+                        <Property Name="Visible" Value="False" />
                         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                         <Window Type="TaharezLook/Combobox" Name="RITab/BM/MeshSelector" >
                             <Property Name="UnifiedAreaRect" Value="{{0.334514,0},{0.0363174,0},{0.662888,0},{0.905855,0}}" />
@@ -32,7 +33,6 @@
                     </Window>
                     <Window Type="DefaultWindow" Name="RITab/SubMesh" >
                         <Property Name="Text" Value="Submeshes" />
-                        <Property Name="Visible" Value="False" />
                         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                         <Window Type="TaharezLook/Combobox" Name="RITab/SubMesh/Selector" >
                             <Property Name="UnifiedAreaRect" Value="{{0.3,0},{0.023961,0},{0.65,0},{0.50428,0}}" />
@@ -221,6 +221,7 @@
                     <Property Name="UnifiedAreaRect" Value="{{0.00391872,0},{0.00348824,0},{0.527266,0},{1.00058,0}}" />
                     <Window Type="DefaultWindow" Name="FOTab/Properties" >
                         <Property Name="Text" Value="Properties" />
+                        <Property Name="Visible" Value="False" />
                         <Property Name="UnifiedAreaRect" Value="{{-0.00215884,0},{0,0},{0.997841,0},{1,0}}" />
                         <Window Type="TaharezLook/StaticText" Name="FOTab/Prop/ShapeLabel" >
                             <Property Name="Text" Value="Shape:" />
@@ -334,11 +335,53 @@
                     </Window>
                     <Window Type="DefaultWindow" Name="FOTab/Create" >
                         <Property Name="Text" Value="Create Object" />
-                        <Property Name="Visible" Value="False" />
                         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                         <Window Type="TaharezLook/Button" Name="FOTab/XML/CreateButton" >
                             <Property Name="Text" Value="Create Object" />
-                            <Property Name="UnifiedAreaRect" Value="{{0.0344625,0},{0.119477,0},{0.390245,0},{0.176916,0}}" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.0452567,0},{0.320993,0},{0.401039,0},{0.378432,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="FOTab/Create/PosLabel" >
+                            <Property Name="Text" Value="Position:" />
+                            <Property Name="HorzExtent" Value="53" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.05,0},{0.03,0},{0.22,0},{0.1,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Spinner" Name="FOTab/Create/PosXSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="32767" />
+                            <Property Name="MinimumValue" Value="0" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.28,0},{0.03,0},{0.54,0},{0.1,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Spinner" Name="FOTab/Create/PosYSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="32767" />
+                            <Property Name="MinimumValue" Value="0" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.61,0},{0.03,0},{0.88,0},{0.1,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Button" Name="FOTab/Create/GetPlPosButton" >
+                            <Property Name="Text" Value="Get Player Position" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.495761,0},{0.123872,0},{0.858021,0},{0.184297,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="FOTab/Create/AngleLabel" >
+                            <Property Name="Text" Value="Angle:" />
+                            <Property Name="HorzExtent" Value="39" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.2,0},{0.2,0},{0.28,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Spinner" Name="FOTab/Create/AngleSpinner" >
+                            <Property Name="StepSize" Value="5" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="3600" />
+                            <Property Name="MinimumValue" Value="-3600" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.28,0},{0.2,0},{0.54,0},{0.27,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Button" Name="FOTab/Create/DelAllButton" >
+                            <Property Name="Text" Value="Delete all objects" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.0552785,0},{0.871688,0},{0.436968,0},{0.94256,0}}" />
                         </Window>
                     </Window>
                     <Window Type="DefaultWindow" Name="FOTab/XML" >
