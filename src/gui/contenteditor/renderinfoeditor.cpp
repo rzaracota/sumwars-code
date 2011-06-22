@@ -215,7 +215,7 @@ void RenderInfoEditor::updatePreviewImage()
 	double viewsize = MathHelper::Max(size_y, size_z);
 	
 	Ogre::Camera* editor_camera = editor_scene_mng->getCamera("editor_camera");
-	editor_camera->setPosition(Ogre::Vector3(bbox_max[0] + viewsize*sqrt(2) , center_y,center_z));
+	editor_camera->setPosition(Ogre::Vector3(bbox_max[0] + viewsize*sqrt(double(2)) , center_y,center_z));
 	editor_camera->lookAt(Ogre::Vector3(bbox_max[0], center_y,center_z));
 	
 	// update the texture

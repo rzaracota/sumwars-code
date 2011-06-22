@@ -251,6 +251,7 @@ bool FixedObjectEditor::onFixedObjectAutodetectSize(const CEGUI::EventArgs& evt)
 	}
 	
 	m_modified_fixed_object = true;
+	return true;
 }
 
 bool FixedObjectEditor::onFixedObjectXMLModified(const CEGUI::EventArgs& evt)
