@@ -42,6 +42,11 @@ void ContentEditor::init(bool visible)
 	rootWindow->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	m_rootWindow->addChildWindow(rootWindow);
 	
+	// initialisation of the selected tabs for more intuitive use
+	static_cast<CEGUI::TabControl*>(win_mgr.getWindow("ObjectInfoTabControl"))->setSelectedTab("RenderInfoTab");
+	static_cast<CEGUI::TabControl*>(win_mgr.getWindow("RenderInfoTabControl"))->setSelectedTab("RITab/BasicMesh");
+	static_cast<CEGUI::TabControl*>(win_mgr.getWindow("FixedObjectTabControl"))->setSelectedTab("FOTab/Properties");
+
 	// create SceneManager for renderering images for the content editor
 	Ogre::SceneManager* editor_scene_mng = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC,"EditorSceneManager");
 	editor_scene_mng->setAmbientLight(Ogre::ColourValue(1,1,1));
@@ -82,8 +87,8 @@ void ContentEditor::init(bool visible)
 	
 	// place the image in a the CEGUI label
 	CEGUI::Window* label = win_mgr.getWindow("RITab/BM/meshPreview");
-	label->setProperty("Image", "set:editor_imageset image:editor_img"); 
-	
+	label->setProperty("Image", "set:editor_imageset image:editor_img");
+
 	CEGUI::PushButton* closebutton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CloseButton"));
 	closebutton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ContentEditor::onClose, this));
 	
