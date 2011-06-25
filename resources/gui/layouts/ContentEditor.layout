@@ -33,6 +33,7 @@
                     </Window>
                     <Window Type="DefaultWindow" Name="RITab/SubMesh" >
                         <Property Name="Text" Value="Submeshes" />
+                        <Property Name="Visible" Value="False" />
                         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                         <Window Type="TaharezLook/Combobox" Name="RITab/SubMesh/Selector" >
                             <Property Name="UnifiedAreaRect" Value="{{0.3,0},{0.023961,0},{0.65,0},{0.50428,0}}" />
@@ -214,6 +215,7 @@
             </Window>
             <Window Type="DefaultWindow" Name="FixedObjectTab" >
                 <Property Name="Text" Value="FixedObject" />
+                <Property Name="Visible" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Window Type="TaharezLook/TabControl" Name="FixedObjectTabControl" >
                     <Property Name="TabHeight" Value="{0,31.1724}" />
@@ -396,6 +398,169 @@
                             <Property Name="TextParsingEnabled" Value="False" />
                         </Window>
                         <Window Type="TaharezLook/Button" Name="FOTab/XML/SubmitButton" >
+                            <Property Name="Text" Value="Submit XML" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.0344625,0},{0.919477,0},{0.390245,0},{0.976916,0}}" />
+                        </Window>
+                    </Window>
+                </Window>
+            </Window>
+            <Window Type="DefaultWindow" Name="ItemTab" >
+                <Property Name="Text" Value="Item" />
+                <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Window Type="TaharezLook/TabControl" Name="ItemTabControl" >
+                    <Property Name="TabHeight" Value="{0,31.1724}" />
+                    <Property Name="TabPanePosition" Value="Top" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.00391872,0},{0.00348824,0},{0.527266,0},{1.00058,0}}" />
+                    <Window Type="DefaultWindow" Name="ItemTab/General" >
+                        <Property Name="Text" Value="General" />
+                        <Property Name="UnifiedAreaRect" Value="{{-0.00215884,0},{0,0},{0.997841,0},{1,0}}" />
+                        <Window Type="TaharezLook/StaticText" Name="ItemTab/Properties/TypeLabel" >
+                            <Property Name="Text" Value="Type:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.09,0},{0.2,0},{0.15,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Combobox" Name="ItemTab/Properties/TypeBox" >
+                            <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.1,0},{0.65,0},{0.5,0}}" />
+                            <Property Name="MaxEditTextLength" Value="1073741823" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="ItemTab/Properties/SizeLabel" >
+                            <Property Name="Text" Value="Size:" />
+                            <Property Name="HorzExtent" Value="29" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.16,0},{0.2,0},{0.24,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Combobox" Name="ItemTab/Properties/SizeBox" >
+                            <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.17,0},{0.65,0},{0.65,0}}" />
+                            <Property Name="MaxEditTextLength" Value="1073741823" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="ItemTab/Properties/CopyDataLabel" >
+                            <Property Name="Text" Value="Copy data from:" />
+                            <Property Name="HorzExtent" Value="100" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.6,0},{0.3,0},{0.65,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Combobox" Name="ItemTab/Properties/CopyDataBox" >
+                            <Property Name="UnifiedAreaRect" Value="{{0.28,0},{0.6,0},{0.65,0},{0.95,0}}" />
+                            <Property Name="MaxEditTextLength" Value="1073741823" />
+                        </Window>
+                        <Window Type="TaharezLook/Button" Name="ItemTab/Properties/CopyDataButton" >
+                            <Property Name="Text" Value="Copy" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.7,0},{0.6,0},{0.85,0},{0.65,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="ItemTab/General/NameLabel" >
+                            <Property Name="Text" Value="Name:" />
+                            <Property Name="HorzExtent" Value="41" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.03,0},{0.2,0},{0.08,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Editbox" Name="ItemTab/General/NameBox" >
+                            <Property Name="MaxTextLength" Value="1073741823" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.03,0},{0.65,0},{0.08,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="ItemTab/General/PriceLabel" >
+                            <Property Name="Text" Value="Value:" />
+                            <Property Name="HorzExtent" Value="38" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.25,0},{0.2,0},{0.3,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Editbox" Name="ItemTab/General/PriceBox" >
+                            <Property Name="MaxTextLength" Value="1073741823" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.25,0},{0.65,0},{0.3,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="ItemTab/General/EnchantRangeLabel" >
+                            <Property Name="Text" Value="Enchant min:" />
+                            <Property Name="HorzExtent" Value="82" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.34,0},{0.24,0},{0.4,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Spinner" Name="ItemTab/General/EnchantMinSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="32767" />
+                            <Property Name="MinimumValue" Value="-32768" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.24,0},{0.34,0},{0.5,0},{0.4,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="ItemTab/General/EnchantMaxLabel" >
+                            <Property Name="Text" Value="max:" />
+                            <Property Name="HorzExtent" Value="29" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.55,0},{0.34,0},{0.65,0},{0.4,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Spinner" Name="ItemTab/General/EnchantMaxSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="32767" />
+                            <Property Name="MinimumValue" Value="-32768" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.65,0},{0.34,0},{0.9,0},{0.4,0}}" />
+                        </Window>
+                    </Window>
+                    <Window Type="DefaultWindow" Name="ItemTab/Equip" >
+                        <Property Name="Text" >Equip Prop
+</Property>
+                        <Property Name="Visible" Value="False" />
+                        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+                    </Window>
+                    <Window Type="DefaultWindow" Name="ItemTab/Weapon" >
+                        <Property Name="Text" >Weapon Prop
+</Property>
+                        <Property Name="Visible" Value="False" />
+                        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+                    </Window>
+                    <Window Type="DefaultWindow" Name="ItemTab/Consume" >
+                        <Property Name="Text" >Consume Prop
+</Property>
+                        <Property Name="Visible" Value="False" />
+                        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+                    </Window>
+                    <Window Type="DefaultWindow" Name="ItemTab/Create" >
+                        <Property Name="Text" Value="Create Item" />
+                        <Property Name="Visible" Value="False" />
+                        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+                        <Window Type="TaharezLook/StaticText" Name="ItemTab/Create/EnchantLabel" >
+                            <Property Name="Text" Value="Enchant:" />
+                            <Property Name="HorzExtent" Value="55" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.03,0},{0.2,0},{0.1,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Spinner" Name="ItemTab/Create/EnchantSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="32767" />
+                            <Property Name="MinimumValue" Value="-32768" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.03,0},{0.5,0},{0.1,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Button" Name="ItemTab/Create/CreateInventoryButton" >
+                            <Property Name="Text" Value="Create in inventory" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.2,0},{0.4,0},{0.26,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Button" Name="ItemTab/Create/CreateDropButton" >
+                            <Property Name="Text" Value="Create an drop" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.5,0},{0.2,0},{0.9,0},{0.26,0}}" />
+                        </Window>
+                    </Window>
+                    <Window Type="DefaultWindow" Name="ItemTab/XML" >
+                        <Property Name="Text" Value="XML" />
+                        <Property Name="Visible" Value="False" />
+                        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+                        <Window Type="TaharezLook/MultiLineEditbox" Name="ItemTab/XML/ItemXMLEditbox" >
+                            <Property Name="Text" >
+</Property>
+                            <Property Name="MaxTextLength" Value="1073741823" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.0229259,0},{0.0172008,0},{0.986204,0},{0.901313,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
+                        </Window>
+                        <Window Type="TaharezLook/Button" Name="ItemTab/XML/SubmitButton" >
                             <Property Name="Text" Value="Submit XML" />
                             <Property Name="UnifiedAreaRect" Value="{{0.0344625,0},{0.919477,0},{0.390245,0},{0.976916,0}}" />
                         </Window>
