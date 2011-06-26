@@ -229,7 +229,7 @@ void MainWindow::update(float time)
 
 #ifdef BUILD_TOOLS
 	DebugPanel::getSingleton().update(m_keyboard);
-	ContentEditor::getSingleton().update(m_keyboard);
+	ContentEditor::getSingleton().update(m_keyboard, m_mouse);
 #endif
 
 	if (m_document->getGUIState()->m_left_mouse_pressed || m_document->getGUIState()->m_right_mouse_pressed)

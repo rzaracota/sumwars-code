@@ -28,7 +28,7 @@ class ContentEditorTab
 		*/
 		virtual void update()
 		{
-		};
+		}
 		
 		/**
 		 * \brief tells the object to update underlying game data

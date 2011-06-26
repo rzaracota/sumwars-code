@@ -35,7 +35,7 @@ public:
 	* \fn void update();
 	* \brief Updates all registered tabs
 	*/
-	void update(OIS::Keyboard *keyboard);
+	void update(OIS::Keyboard* keyboard, OIS::Mouse* mouse);
 	
 	/**
 	 * \brief Tells the editor, that one component needs a full update
@@ -53,7 +53,24 @@ public:
 	 */
 	ContentEditorTab* getComponent(std::string name);
 	
-
+	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called upon clicking a mouse button down to the preview window
+	 */
+	bool onPreviewWindowMouseDown(const CEGUI::EventArgs& evt);
+	
+	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called upon releasing a mouse button to the preview window
+	 */
+	bool onPreviewWindowMouseUp(const CEGUI::EventArgs& evt);
+	
+	/**
+	 * \param evt CEGUI event arguments
+	 * \brief Called upon using the scrollwheel
+	 */
+	bool onPreviewWindowScrollWheel(const CEGUI::EventArgs& evt);
+	
 protected:
 	
 	/**
@@ -93,6 +110,17 @@ private:
 	*/
 	long m_lastVisibilitySwitch;
 		
+	
+	/**
+	 * \brief While true, the user rotates the camera in the preview window
+	 */
+	bool m_leftMouseDown;
+	
+	/**
+	 * \brief While true, the user zooms the camera in the preview window
+	 */
+	bool m_rightMouseDown;
+	
 	/**
 	 * \brief data structure with all editor components
 	 */
