@@ -129,8 +129,10 @@ void Gettext::setLocale(const char* loc)
         {
             locale_ext = locale;
             locale_ext += extensions[i];
+#ifndef WIN32
 			setenv("LANG", locale_ext.c_str(), 1);     // fixes gettext problems with Ubuntu
 			setenv("LANGUAGE", locale_ext.c_str(), 1); // fixes gettext problems with Ubuntu
+#endif
             ret = setlocale( LC_MESSAGES, locale_ext.c_str() );
             if (ret !=0)
             {
