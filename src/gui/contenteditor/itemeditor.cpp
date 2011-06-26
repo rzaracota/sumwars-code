@@ -215,6 +215,7 @@ bool ItemEditor::onItemXMLModified(const CEGUI::EventArgs& evt)
 Item* ItemEditor::createItem()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	RenderInfoEditor* ri_editor = dynamic_cast<RenderInfoEditor*>(ContentEditor::getSingleton().getComponent("RIEditor"));
 	
 	// create an item picture
 	std::stringstream idstream;
@@ -222,6 +223,28 @@ Item* ItemEditor::createItem()
 	
 	Ogre::SceneManager* editor_scene_mng = Ogre::Root::getSingleton().getSceneManager("EditorSceneManager");
 	Ogre::Camera* item_camera = editor_scene_mng->getCamera("item_camera");
+	
+	// adjust the camera
+	Ogre::SceneNode* topnode = ri_editor->getEditedGraphicObject()->getTopNode();
+	topnode->_updateBounds();
+	
+	Ogre::Vector3 bbox_min(1000,1000,1000);
+	Ogre::Vector3 bbox_max(-1000,-1000,-1000);
+	
+	getNodeBounds(topnode,bbox_min,bbox_max);
+	
+	double size_x = bbox_max[0] - bbox_min[0];
+	double size_z = bbox_max[2] - bbox_min[2];
+	double center_x = 0.5*(bbox_max[0] + bbox_min[0]);
+	double center_z = 0.5*(bbox_max[2] + bbox_min[2]);
+	double viewsize = MathHelper::Max(size_x, size_z);
+	
+	//DEBUG("box %f %f %f - %f %f %f",bbox_min[0],bbox_min[1],bbox_min[2],bbox_max[0],bbox_max[1],bbox_max[2]);
+	
+	item_camera->setPosition(Ogre::Vector3(center_x, viewsize*sqrt(double(2)),center_z));
+	// item_camera->setPosition(Ogre::Vector3(center_x, 1,center_z));
+	//item_camera->setPosition(Ogre::Vector3(0,1,0));
+	item_camera->lookAt(Ogre::Vector3(center_x, 0,center_z));
 	
 	// texture that is created from the camera image
 	Ogre::TexturePtr item_texture = Ogre::TextureManager::getSingleton().createManual( std::string("item_tex_") + idstream.str(),
@@ -232,9 +255,9 @@ Item* ItemEditor::createItem()
 	Ogre::RenderTarget* item_rt = item_texture->getBuffer()->getRenderTarget();
 	item_rt->setAutoUpdated(false);
 	Ogre::Viewport *item_view = item_rt->addViewport(item_camera );
-	item_view->setClearEveryFrame( false );
+	item_view->setClearEveryFrame( true );
 	item_view->setOverlaysEnabled (false);
-	item_view->setBackgroundColour(Ogre::ColourValue(0,0,1,1.0) );
+	item_view->setBackgroundColour(Ogre::ColourValue(0,0,0,1.0) );
 
 	// create a CEGUI Image from the Texture
     CEGUI::Texture& item_ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(item_texture);
@@ -252,7 +275,6 @@ Item* ItemEditor::createItem()
 
 	// reparse and update the FixedObject Data
 	// create a unique renderinfo (to avoid that the object is modified by the editor after creation)
-	RenderInfoEditor* ri_editor = dynamic_cast<RenderInfoEditor*>(ContentEditor::getSingleton().getComponent("RIEditor"));
 	std::string unique_ri = ri_editor->getUniqueRenderinfo();
 	// temporarily replace the renderinfo name
 	TiXmlElement * item_ri = m_item_xml.RootElement()->FirstChildElement("RenderInfo");
@@ -271,13 +293,11 @@ Item* ItemEditor::createItem()
 	{
 		std::stringstream itemimage;
 		itemimage <<  "set:item_imageset_" << idstream.str()<< " " << "image:item_img_" << idstream.str();
-		DEBUG("item %s", itemimage.str().c_str());
-		itemimage.str("");
-		itemimage << "set:editor_imageset image:editor_img";
-		item_image->SetAttribute("image",itemimage.str().c_str());
 		label->setProperty("Image", itemimage.str().c_str());
 		
-		DEBUG("image info %s %s %i",item_textureImageSet.getName().c_str(),("item_img_"+ idstream.str()).c_str(), item_textureImageSet.isImageDefined("item_img_"+ idstream.str()));
+		// itemimage.str("");
+		// itemimage << "set:editor_imageset image:editor_img";
+		item_image->SetAttribute("image",itemimage.str().c_str());
 	}
 
 	// make the item subtype unique by adding a number
