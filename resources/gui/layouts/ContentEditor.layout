@@ -568,6 +568,9 @@
                         </Window>
                     </Window>
                 </Window>
+				<Window Type="TaharezLook/StaticImage" Name="ItemTab/BM/itemPreview" >
+                    <Property Name="UnifiedAreaRect" Value="{{0.535738,0},{0.0565595,0},{0.983904,0},{0.772162,0}}" />
+                </Window>
             </Window>
         </Window>
         <Window Type="TaharezLook/Button" Name="CloseButton" >

@@ -230,7 +230,7 @@ void Inventory::update()
 	updateItemWindow(img,it,player);
 	weapon = it;
 	bool two_hand = false;
-	if (weapon !=0 && weapon->m_weapon_attr->m_two_handed)
+	if (weapon !=0 && weapon->m_weapon_attr !=0 && weapon->m_weapon_attr->m_two_handed)
 	{
 		two_hand = true;
 	}

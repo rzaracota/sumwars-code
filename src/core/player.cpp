@@ -789,7 +789,7 @@ void Player::swapEquipItems(Equipement::Position pos1, Equipement::Position pos2
 	{
 			// Waffe wurde angelegt, bei zweihaendig testen ob der Schild Slot frei ist
 		Item* weapon = getWeapon();
-		if (weapon!=0 && weapon->m_weapon_attr->m_two_handed)
+		if (weapon!=0 && weapon->m_weapon_attr != 0 && weapon->m_weapon_attr->m_two_handed)
 		{
 			if (getShield()!=0)
 			{
@@ -841,7 +841,7 @@ void Player::swapEquipItems(Equipement::Position pos1, Equipement::Position pos2
 	{
 		// Schild soll verwendet werden, testen dass keine zweihaendige Waffe benutzt wird
 		Item* weapon = getWeapon();
-		if (weapon!=0 && weapon->m_weapon_attr->m_two_handed)
+		if (weapon!=0 && weapon->m_weapon_attr != 0 && weapon->m_weapon_attr->m_two_handed)
 		{
 
 			// zweihaendige Waffe wird verwendet, muss entfernt werden
@@ -2497,14 +2497,14 @@ std::string Player::getActionWeaponSuffix()
 {
 	std::string ret ="";
 	Item* weapon=getWeapon();
-	if (weapon == 0)
+	if (weapon == 0 )
 		ret += "#Unarmed";
-	else if (weapon->m_weapon_attr->m_two_handed == false)
+	else if (weapon->m_weapon_attr ==0 || weapon->m_weapon_attr->m_two_handed == false)
 		ret += "#OneHand";
 	else if (weapon->m_weapon_attr->m_two_handed == true)
 		ret += "#TwoHands";
 
-	if (weapon != 0)
+	if (weapon != 0 && weapon->m_weapon_attr !=0)
 	{
 		ret += "#";
 		ret += weapon->m_weapon_attr->m_weapon_type;

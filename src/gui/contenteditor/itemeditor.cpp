@@ -1,3 +1,7 @@
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
+#include <OgreHardwarePixelBuffer.h>
+#include <OgreMeshManager.h>
+
 #include "graphicmanager.h"
 #include "itemeditor.h"
 #include "renderinfoeditor.h"
@@ -29,7 +33,7 @@ void ItemEditor::init(CEGUI::Window* parent)
 	price->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	
 	CEGUI::Editbox* nameBox = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("ItemTab/General/NameBox"));
-	nameBox->subscribeEvent(CEGUI::Editbox::EventTextAccepted, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
+	nameBox->subscribeEvent(CEGUI::Editbox::EventTextChanged, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	
 	CEGUI::Combobox* typeSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("ItemTab/Properties/TypeBox"));
 	typeSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
@@ -73,6 +77,16 @@ void ItemEditor::init(CEGUI::Window* parent)
 	m_edited_item.m_subtype = "EditorItem";
 	
 	m_update_base_content = true;
+	m_modified_item = true;
+	
+	// create camera for item photos
+	Ogre::SceneManager* editor_scene_mng = Ogre::Root::getSingleton().getSceneManager("EditorSceneManager");
+	Ogre::Camera* item_camera = editor_scene_mng->createCamera("item_camera");
+	item_camera->setNearClipDistance(0.1);
+	item_camera->setAspectRatio(1.0);
+	item_camera->setPosition(Ogre::Vector3(0,1,0));
+	item_camera->lookAt(Ogre::Vector3(0,0,0));
+	
 	m_unique_id = 1;
 
 }
@@ -200,8 +214,43 @@ bool ItemEditor::onItemXMLModified(const CEGUI::EventArgs& evt)
 
 Item* ItemEditor::createItem()
 {
-	// reparse and update the FixedObject Data
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
+	// create an item picture
+	std::stringstream idstream;
+	idstream << m_unique_id;
+	
+	Ogre::SceneManager* editor_scene_mng = Ogre::Root::getSingleton().getSceneManager("EditorSceneManager");
+	Ogre::Camera* item_camera = editor_scene_mng->getCamera("item_camera");
+	
+	// texture that is created from the camera image
+	Ogre::TexturePtr item_texture = Ogre::TextureManager::getSingleton().createManual( std::string("item_tex_") + idstream.str(),
+			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, Ogre::TEX_TYPE_2D,
+   256, 256, 0, Ogre::PF_R8G8B8A8, Ogre::TU_RENDERTARGET );
+	
+   // connection texture and camera via RenderTarget
+	Ogre::RenderTarget* item_rt = item_texture->getBuffer()->getRenderTarget();
+	item_rt->setAutoUpdated(false);
+	Ogre::Viewport *item_view = item_rt->addViewport(item_camera );
+	item_view->setClearEveryFrame( false );
+	item_view->setOverlaysEnabled (false);
+	item_view->setBackgroundColour(Ogre::ColourValue(0,0,1,1.0) );
+
+	// create a CEGUI Image from the Texture
+    CEGUI::Texture& item_ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(item_texture);
+    
+	CEGUI::Imageset& item_textureImageSet = CEGUI::ImagesetManager::getSingleton().create(std::string("item_imageset_") + idstream.str(), item_ceguiTex);
+
+	item_textureImageSet.defineImage( "item_img_"+ idstream.str(),
+			CEGUI::Point( 0.0f, 0.0f ),
+			CEGUI::Size( item_ceguiTex.getSize().d_width, item_ceguiTex.getSize().d_height ),
+			CEGUI::Point( 0.0f, 0.0f ) );
+	
+	item_rt->update();
+	
+	CEGUI::Window* label = win_mgr.getWindow("ItemTab/BM/itemPreview");
+
+	// reparse and update the FixedObject Data
 	// create a unique renderinfo (to avoid that the object is modified by the editor after creation)
 	RenderInfoEditor* ri_editor = dynamic_cast<RenderInfoEditor*>(ContentEditor::getSingleton().getComponent("RIEditor"));
 	std::string unique_ri = ri_editor->getUniqueRenderinfo();
@@ -209,10 +258,28 @@ Item* ItemEditor::createItem()
 	TiXmlElement * item_ri = m_item_xml.RootElement()->FirstChildElement("RenderInfo");
 	if (item_ri == 0)
 		return 0;
-	
 	std::string name = item_ri->Attribute("name");
 	item_ri->SetAttribute("name",unique_ri.c_str());
 	
+	// temporarily replace the image name
+	TiXmlElement * item_image = m_item_xml.RootElement()->FirstChildElement("Image");
+	if (item_image == 0)
+		return 0;
+	std::string image = item_image->Attribute("image");
+	
+	if (image == "set:noMedia.png image:full_image")
+	{
+		std::stringstream itemimage;
+		itemimage <<  "set:item_imageset_" << idstream.str()<< " " << "image:item_img_" << idstream.str();
+		DEBUG("item %s", itemimage.str().c_str());
+		itemimage.str("");
+		itemimage << "set:editor_imageset image:editor_img";
+		item_image->SetAttribute("image",itemimage.str().c_str());
+		label->setProperty("Image", itemimage.str().c_str());
+		
+		DEBUG("image info %s %s %i",item_textureImageSet.getName().c_str(),("item_img_"+ idstream.str()).c_str(), item_textureImageSet.isImageDefined("item_img_"+ idstream.str()));
+	}
+
 	// make the item subtype unique by adding a number
 	std::string plain_subtype = m_item_xml.RootElement()->Attribute("subtype");
 	std::stringstream stream;
@@ -225,6 +292,7 @@ Item* ItemEditor::createItem()
 	// reset the changed attributes
 	item_ri->SetAttribute("name",name.c_str());
 	m_item_xml.RootElement()->SetAttribute("subtype",plain_subtype.c_str());
+	item_image->SetAttribute("image",image.c_str());
 	
 	float magic = getSpinnerValue("ItemTab/Create/EnchantSpinner",0);
 	Item::Type type = ItemFactory::getBaseType(subtype);
