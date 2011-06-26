@@ -10,6 +10,50 @@ void WeaponAttr::operator=(WeaponAttr& other)
 	m_dattack_speed = other.m_dattack_speed;
 }
 
+
+void  WeaponAttr::writeToXML(TiXmlNode* node)
+{
+	TiXmlElement* elem = node->ToElement();
+	if (elem == 0) 
+		return;
+	
+	XMLUtil::setAttribute(elem, "weapon_type",m_weapon_type);
+	
+	Damage& dmg = m_damage;
+	XMLUtil::setDoubleAttribute(elem, "damage_min_physical",dmg.m_min_damage[Damage::PHYSICAL]);
+	XMLUtil::setDoubleAttribute(elem, "damage_min_fire",dmg.m_min_damage[Damage::FIRE]);
+	XMLUtil::setDoubleAttribute(elem, "damage_min_ice",dmg.m_min_damage[Damage::ICE]);
+	XMLUtil::setDoubleAttribute(elem, "damage_min_air",dmg.m_min_damage[Damage::AIR]);
+
+	XMLUtil::setDoubleAttribute(elem, "damage_max_physical",dmg.m_max_damage[Damage::PHYSICAL]);
+	XMLUtil::setDoubleAttribute(elem, "damage_max_fire",dmg.m_max_damage[Damage::FIRE]);
+	XMLUtil::setDoubleAttribute(elem, "damage_max_ice",dmg.m_max_damage[Damage::ICE]);
+	XMLUtil::setDoubleAttribute(elem, "damage_max_air",dmg.m_max_damage[Damage::AIR]);
+
+	XMLUtil::setDoubleAttribute(elem, "multiplier_physical",dmg.m_multiplier[Damage::PHYSICAL],1.0);
+	XMLUtil::setDoubleAttribute(elem, "multiplier_fire",dmg.m_multiplier[Damage::FIRE],1.0);
+	XMLUtil::setDoubleAttribute(elem, "multiplier_ice",dmg.m_multiplier[Damage::ICE],1.0);
+	XMLUtil::setDoubleAttribute(elem, "multiplier_air",dmg.m_multiplier[Damage::AIR],1.0);
+
+	XMLUtil::setDoubleAttribute(elem, "damage_attack",dmg.m_attack);
+	XMLUtil::setDoubleAttribute(elem, "damage_power",dmg.m_power);
+
+	XMLUtil::setAttribute(elem, "damage_blind_power",dmg.m_status_mod_power[Damage::BLIND]);
+	XMLUtil::setAttribute(elem, "damage_poison_power",dmg.m_status_mod_power[Damage::POISONED]);
+	XMLUtil::setAttribute(elem, "damage_berserk_power",dmg.m_status_mod_power[Damage::BERSERK]);
+	XMLUtil::setAttribute(elem, "damage_confuse_power",dmg.m_status_mod_power[Damage::CONFUSED]);
+	XMLUtil::setAttribute(elem, "damage_mute_power",dmg.m_status_mod_power[Damage::MUTE]);
+	XMLUtil::setAttribute(elem, "damage_paralyze_power",dmg.m_status_mod_power[Damage::PARALYZED]);
+	XMLUtil::setAttribute(elem, "damage_frozen_power",dmg.m_status_mod_power[Damage::FROZEN]);
+	XMLUtil::setAttribute(elem, "damage_burning_power",dmg.m_status_mod_power[Damage::BURNING]);
+	
+
+	XMLUtil::setAttribute(elem, "dattack_speed",m_dattack_speed);
+	XMLUtil::setDoubleAttribute(elem, "attack_range",m_attack_range);
+	std::string twohanded = m_two_handed ? "yes" : "no";
+	XMLUtil::setAttribute(elem, "two_handed",twohanded);
+}
+
 int WeaponAttr::getValue(std::string valname)
 {
 	if (valname =="weapon_type")
@@ -150,7 +194,181 @@ void ItemBasicData::operator=(const ItemBasicData& other)
 	m_max_enchant = other.m_max_enchant;
 	m_enchant_multiplier = other.m_enchant_multiplier;
 	m_name = other.m_name;
+	
+	m_drop_level = other.m_drop_level;
+	m_drop_probability = other.m_drop_probability;
 
+}
+
+void ItemBasicData::writeToXML(TiXmlNode* node)
+{
+	TiXmlElement* elem = node->ToElement();
+	if (elem == 0) 
+		return;
+	
+	std::string typestr = "weapon";
+	if (m_type == Item::WEAPON) typestr = "weapon";
+	else if (m_type == Item::ARMOR) typestr = "armor";
+	else if (m_type == Item::HELMET) typestr = "helmet";
+	else if (m_type == Item::GLOVES) typestr = "gloves";
+	else if (m_type == Item::RING) typestr = "ring";
+	else if (m_type == Item::AMULET) typestr = "amulet";
+	else if (m_type == Item::SHIELD) typestr = "shield";
+	else if (m_type == Item::POTION) typestr = "potion";
+	XMLUtil::setAttribute(elem,"type",typestr);
+	
+	XMLUtil::setAttribute(elem,"subtype",m_subtype);
+	XMLUtil::setAttribute(elem,"name",m_name);
+	
+	std::string sizestr = "small";
+	if (m_size == Item::SMALL) sizestr = "small";
+	else if (m_size == Item::MEDIUM) sizestr = "medium";
+	else if (m_size == Item::BIG) sizestr = "big";
+	
+	XMLUtil::setAttribute(elem,"size",sizestr);
+	
+	// point where to insert additional subobjects
+	TiXmlElement* insert_point = 0;
+	
+	// search for the position after potential <Mesh> and <Image> elements
+	insert_point = node->FirstChildElement("Mesh");
+	if (insert_point == 0)
+		insert_point = node->FirstChildElement("RenderInfo");
+	
+	TiXmlElement* insert_point_tmp;
+	insert_point_tmp = XMLUtil::findElementAfter(elem, insert_point, "Image");
+	if (insert_point_tmp != 0)
+	{
+		insert_point = insert_point_tmp;
+	}
+	
+	TiXmlElement inserter("dummy");	// dummy node just for being compied by tinyxml x(
+	
+	// detect attribute element
+	TiXmlElement* attr =  node->FirstChildElement("Attribute");
+	if (attr == 0)
+	{
+		attr = XMLUtil::insertNodeAfter(elem, insert_point, &inserter);
+		attr->SetValue("Attribute");
+	}
+	
+	XMLUtil::setAttribute(attr, "level_requirement",m_level_req,0);
+	XMLUtil::setAttribute(attr, "character_requirement",m_char_req,"all");
+	XMLUtil::setDoubleAttribute(attr, "min_enchant",m_min_enchant,0);
+	XMLUtil::setDoubleAttribute(attr, "max_enchant",m_max_enchant,0);
+	XMLUtil::setDoubleAttribute(attr, "enchant_multiplier",m_enchant_multiplier,1.0);
+	XMLUtil::setAttribute(attr, "price",m_price,0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_health_mod",m_modchance[ItemFactory::HEALTH_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_strength_mod",m_modchance[ItemFactory::STRENGTH_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_willpower_mod",m_modchance[ItemFactory::WILLPOWER_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_dexterity_mod",m_modchance[ItemFactory::DEXTERITY_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_magic_power_mod",m_modchance[ItemFactory::MAGIC_POWER_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_armor_mod",m_modchance[ItemFactory::ARMOR_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_block_mod",m_modchance[ItemFactory::BLOCK_MOD],0);
+	
+	XMLUtil::setDoubleAttribute(attr, "modchance_resist_phys_mod",m_modchance[ItemFactory::RESIST_PHYS_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_resist_fire_mod",m_modchance[ItemFactory::RESIST_FIRE_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_resist_ice_mod",m_modchance[ItemFactory::RESIST_ICE_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_resist_air_mod",m_modchance[ItemFactory::RESIST_AIR_MOD],0);
+	
+	XMLUtil::setDoubleAttribute(attr, "modchance_damage_phys_mod",m_modchance[ItemFactory::DAMAGE_PHYS_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_damage_fire_mod",m_modchance[ItemFactory::DAMAGE_FIRE_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_damage_ice_mod",m_modchance[ItemFactory::DAMAGE_ICE_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_damage_air_mod",m_modchance[ItemFactory::DAMAGE_AIR_MOD],0);
+	
+	XMLUtil::setDoubleAttribute(attr, "modchance_damage_mult_phys_mod",m_modchance[ItemFactory::DAMAGE_MULT_PHYS_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_damage_mult_fire_mod",m_modchance[ItemFactory::DAMAGE_MULT_FIRE_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_damage_mult_ice_mod",m_modchance[ItemFactory::DAMAGE_MULT_ICE_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_damage_mult_air_mod",m_modchance[ItemFactory::DAMAGE_MULT_AIR_MOD],0);
+	
+	XMLUtil::setDoubleAttribute(attr, "modchance_attack_speed_mod",m_modchance[ItemFactory::ATTACK_SPEED_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_attack_mod",m_modchance[ItemFactory::ATTACK_MOD],0);
+	XMLUtil::setDoubleAttribute(attr, "modchance_power_mod",m_modchance[ItemFactory::POWER_MOD],0);
+	insert_point = attr;
+	
+	// detect UseupEffect element
+	TiXmlElement* useup =  node->FirstChildElement("UseupEffect");
+	if (m_useup_effect != 0)
+	{
+		if (useup == 0)
+		{
+			useup = XMLUtil::insertNodeAfter(elem, insert_point, &inserter);
+			useup->SetValue("UseupEffect");
+		}
+		
+		// write Useup effects
+		m_useup_effect->writeToXML(useup);
+		
+		insert_point = useup;
+	}
+	else
+	{
+		// remove UseupEffect element if present
+		if (useup !=0)
+		{
+			elem->RemoveChild(useup);
+		}
+	}
+	
+	// detect UseupEffect element
+	TiXmlElement* equip =  node->FirstChildElement("EquipEffect");
+	if (m_equip_effect != 0)
+	{
+		if (equip == 0)
+		{
+			equip = XMLUtil::insertNodeAfter(elem, insert_point, &inserter);
+			equip->SetValue("EquipEffect");
+		}
+		
+		// write Useup effects
+		m_equip_effect->writeToXML(equip);
+		
+		insert_point = equip;
+	}
+	else
+	{
+		// remove UseupEffect element if present
+		if (equip !=0)
+		{
+			elem->RemoveChild(equip);
+		}
+	}
+	
+	// detect WeaponAttribute element
+	TiXmlElement* weapon =  node->FirstChildElement("WeaponAttribute");
+	if (m_weapon_attr != 0)
+	{
+		if (weapon == 0)
+		{
+			weapon = XMLUtil::insertNodeAfter(elem, insert_point, &inserter);
+			weapon->SetValue("WeaponAttribute");
+		}
+		
+		// write Useup effects
+		m_weapon_attr->writeToXML(weapon);
+		
+		insert_point = weapon;
+	}
+	else
+	{
+		// remove UseupEffect element if present
+		if (weapon !=0)
+		{
+			elem->RemoveChild(weapon);
+		}
+	}
+	
+	// update DropChance element
+	TiXmlElement* drop =  node->FirstChildElement("DropChance");
+	if (drop == 0)
+	{
+		drop = XMLUtil::insertNodeAfter(elem, insert_point, &inserter);
+		drop->SetValue("DropChance");
+	}
+	
+	XMLUtil::setAttribute(drop, "level",m_drop_level,0);
+	XMLUtil::setDoubleAttribute(drop, "probability",m_drop_probability,0);
+	
 }
 
 Item::Item(int id)

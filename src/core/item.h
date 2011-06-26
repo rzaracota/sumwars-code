@@ -31,6 +31,7 @@
 
 #include <math.h>
 #include <bitset>
+#include "xmlutil.h"
 
 enum NumMagicMods
 {
@@ -143,6 +144,13 @@ struct WeaponAttr
 	 * \brief Zuweisungsoperator
 	 */
 	void operator=(WeaponAttr& other);
+	
+	/**
+	 * \brief Writes the DataStructure to the XML node
+	 * \param node XML node
+	 * This function also deals with XML trees that are already written. In this case, only the difference is written.
+	 */
+	void writeToXML(TiXmlNode* node);
 
 	/**
 	 * \fn int getValue(std::string valname)
@@ -502,6 +510,18 @@ struct ItemBasicData
 	 * \var  Name des Items
 	 */
 	std::string m_name;
+	
+	/**
+	 * \brief required level of the drop slot
+	 * Normally, only items within the range of the dropslot level will be dropped. Negative numbers mean, item will be dropped, even if level is too low.
+	 */
+	int m_drop_level;
+	
+	/**
+	 * \brief relative drop probability
+	 * A value of 1.0 denotes standard probability
+	 */
+	float m_drop_probability;
 
 	/**
 	 * \fn ItemBasicData()
@@ -520,6 +540,13 @@ struct ItemBasicData
 	 * \param other object to be copied from
 	 */
 	void operator=(const ItemBasicData& other);
+	
+	/**
+	 * \brief Writes the DataStructure to the XML node
+	 * \param node XML node
+	 * This function also deals with XML trees that are already written. In this case, only the difference is written.
+	 */
+	void writeToXML(TiXmlNode* node);
 
 };
 

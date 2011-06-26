@@ -51,7 +51,7 @@ class ContentEditorTab
 		 * \param windowname Name of the window
 		 * \return text of the window
 		 */
-		std::string getWindowText(std::string windowname);
+		std::string getWindowText(std::string windowname, std::string def="");
 		
 		/**
 		 * \brief Sets the value of a CEGUI spinner
@@ -65,7 +65,7 @@ class ContentEditorTab
 		 * \param windowname Name of the window
 		 * \return current spinner value
 		 */
-		double getSpinnerValue(std::string windowname, double value);
+		double getSpinnerValue(std::string windowname, double def=0);
 		
 		/**
 		 * \brief Sets the state of a CEGUI Checkbox
@@ -88,6 +88,13 @@ class ContentEditorTab
 		 * \return text of the selected item
 		 */
 		std::string getComboboxSelection(std::string windowname, std::string def="");
+		
+		/**
+		 * \brief set the selection of a CEGUI combobox
+		 * \param windowname Name of the window
+		 * \param selection name of the selected item
+		 */
+		void setComboboxSelection(std::string windowname, std::string selection);
 		
 		/**
 		 * \brief Sets the cursor in a CEGUI MultiLineEditbox at the specified position

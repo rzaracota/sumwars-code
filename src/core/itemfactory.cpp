@@ -342,11 +342,19 @@ void ItemFactory::registerItemDrop(Item::Subtype subtype, DropChance chance)
 	m_item_probabilities.insert(make_pair(subtype, chance));
 }
 
-void ItemFactory::registerItem(Item::Type type,Item::Subtype subtype, ItemBasicData* data)
+void ItemFactory::registerItem(Item::Type type,Item::Subtype subtype, ItemBasicData* data, bool silent_replace)
 {
 	DEBUGX("registered item %s %p",subtype.c_str(), data->m_weapon_attr);
-	m_item_data.insert(make_pair(subtype, data));
-	m_item_types.insert(make_pair(subtype,type));
+	if (m_item_data.count(subtype) != 0)
+	{
+		if (!silent_replace)
+		{
+			WARNING("Duplicate item data: %s",subtype.c_str());
+		}
+		delete m_item_data[subtype];
+	}
+	m_item_data[subtype] = data;
+	m_item_types[subtype] = type;
 }
 
 void ItemFactory::init()

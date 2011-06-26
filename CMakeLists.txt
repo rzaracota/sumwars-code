@@ -18,7 +18,7 @@ cmake_minimum_required(VERSION 2.6)
 
 OPTION(NO_TINYXML "Avoid use of TinyXML Lib" OFF)
 OPTION(BUILD_TOOLS "Builds editor tools" ON)
-#SET(BUILD_TOOLS ON)
+SET(BUILD_TOOLS ON)
 
 SET(BUILD_TOOLS ON)
 
@@ -240,6 +240,7 @@ SET(SRCS
 	./src/gui/contenteditor/contenteditortab.cpp
 	./src/gui/contenteditor/fixedobjecteditor.cpp
 	./src/gui/contenteditor/renderinfoeditor.cpp
+	./src/gui/contenteditor/itemeditor.cpp
 	)
 ENDIF()
 

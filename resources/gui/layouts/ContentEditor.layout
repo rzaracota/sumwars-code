@@ -470,10 +470,12 @@
                             <Property Name="FrameEnabled" Value="False" />
                             <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.25,0},{0.2,0},{0.3,0}}" />
                         </Window>
-                        <Window Type="TaharezLook/Editbox" Name="ItemTab/General/PriceBox" >
-                            <Property Name="MaxTextLength" Value="1073741823" />
+                        <Window Type="TaharezLook/Spinner" Name="ItemTab/General/PriceSpinner" >
                             <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.25,0},{0.65,0},{0.3,0}}" />
-                            <Property Name="TextParsingEnabled" Value="False" />
+							<Property Name="StepSize" Value="50" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="10000" />
+                            <Property Name="MinimumValue" Value="0" />
                         </Window>
                         <Window Type="TaharezLook/StaticText" Name="ItemTab/General/EnchantRangeLabel" >
                             <Property Name="Text" Value="Enchant min:" />
@@ -483,10 +485,10 @@
                             <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.34,0},{0.24,0},{0.4,0}}" />
                         </Window>
                         <Window Type="TaharezLook/Spinner" Name="ItemTab/General/EnchantMinSpinner" >
-                            <Property Name="StepSize" Value="1" />
+                            <Property Name="StepSize" Value="50" />
                             <Property Name="CurrentValue" Value="0" />
-                            <Property Name="MaximumValue" Value="32767" />
-                            <Property Name="MinimumValue" Value="-32768" />
+                            <Property Name="MaximumValue" Value="10000" />
+                            <Property Name="MinimumValue" Value="0" />
                             <Property Name="UnifiedAreaRect" Value="{{0.24,0},{0.34,0},{0.5,0},{0.4,0}}" />
                         </Window>
                         <Window Type="TaharezLook/StaticText" Name="ItemTab/General/EnchantMaxLabel" >
@@ -497,27 +499,27 @@
                             <Property Name="UnifiedAreaRect" Value="{{0.55,0},{0.34,0},{0.65,0},{0.4,0}}" />
                         </Window>
                         <Window Type="TaharezLook/Spinner" Name="ItemTab/General/EnchantMaxSpinner" >
-                            <Property Name="StepSize" Value="1" />
+                            <Property Name="StepSize" Value="50" />
                             <Property Name="CurrentValue" Value="0" />
-                            <Property Name="MaximumValue" Value="32767" />
-                            <Property Name="MinimumValue" Value="-32768" />
+                            <Property Name="MaximumValue" Value="10000" />
+                            <Property Name="MinimumValue" Value="0" />
                             <Property Name="UnifiedAreaRect" Value="{{0.65,0},{0.34,0},{0.9,0},{0.4,0}}" />
                         </Window>
                     </Window>
                     <Window Type="DefaultWindow" Name="ItemTab/Equip" >
-                        <Property Name="Text" >Equip Prop
+                        <Property Name="Text" >Equip
 </Property>
                         <Property Name="Visible" Value="False" />
                         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                     </Window>
                     <Window Type="DefaultWindow" Name="ItemTab/Weapon" >
-                        <Property Name="Text" >Weapon Prop
+                        <Property Name="Text" >Weapon
 </Property>
                         <Property Name="Visible" Value="False" />
                         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
                     </Window>
                     <Window Type="DefaultWindow" Name="ItemTab/Consume" >
-                        <Property Name="Text" >Consume Prop
+                        <Property Name="Text" >Consume
 </Property>
                         <Property Name="Visible" Value="False" />
                         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
@@ -534,10 +536,10 @@
                             <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.03,0},{0.2,0},{0.1,0}}" />
                         </Window>
                         <Window Type="TaharezLook/Spinner" Name="ItemTab/Create/EnchantSpinner" >
-                            <Property Name="StepSize" Value="1" />
+                            <Property Name="StepSize" Value="50" />
                             <Property Name="CurrentValue" Value="0" />
-                            <Property Name="MaximumValue" Value="32767" />
-                            <Property Name="MinimumValue" Value="-32768" />
+                            <Property Name="MaximumValue" Value="10000" />
+                            <Property Name="MinimumValue" Value="0" />
                             <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.03,0},{0.5,0},{0.1,0}}" />
                         </Window>
                         <Window Type="TaharezLook/Button" Name="ItemTab/Create/CreateInventoryButton" >

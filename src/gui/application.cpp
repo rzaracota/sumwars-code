@@ -757,6 +757,10 @@ bool Application::loadResources(int datagroups)
 
 			updateStartScreen(0.6);
 		}
+		
+#ifdef BUILD_TOOLS
+		ContentEditor::getSingleton().fullUpdateComponent("ItemEditor");
+#endif
 	}
 
 	if (datagroups & World::DATA_OBJECTS)

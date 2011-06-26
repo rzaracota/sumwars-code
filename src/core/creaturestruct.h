@@ -12,6 +12,7 @@
 #define NR_STATUS_MODS 8
 
 #define NR_EFFECTS 1
+#include "../tinyxml/tinyxml.h"
 
 enum NrTimers
 {
@@ -405,6 +406,13 @@ struct CreatureBaseAttrMod
 	void operator=(CreatureBaseAttrMod other);
 	
 	/**
+	 * \brief Writes the DataStructure to the XML node
+	 * \param node XML node
+	 * This function also deals with XML trees that are already written. In this case, only the difference is written.
+	 */
+	void writeToXML(TiXmlNode* node);
+	
+	/**
 	 * \fn int getValue(std::string valname)
 	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
 	 * \param valname Name des Wertes
@@ -554,6 +562,13 @@ struct CreatureDynAttrMod
 	 * \brief Zuweisungsoperator
 	*/
 	void operator=(CreatureDynAttrMod other);
+	
+	/**
+	 * \brief Writes the DataStructure to the XML node
+	 * \param node XML node
+	 * This function also deals with XML trees that are already written. In this case, only the difference is written.
+	 */
+	void writeToXML(TiXmlNode* node);
 	
 	/**
 	 * \fn int getValue(std::string valname)

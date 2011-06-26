@@ -266,7 +266,6 @@ bool FixedObjectEditor::onFixedObjectXMLModified(const CEGUI::EventArgs& evt)
 	
 	if (!ri_temp_xml.Error())
 	{
-		// copy the first Element to the real Renderinfo
 		// first, remove the old root
 		TiXmlElement* oldroot = m_fixed_object_xml.RootElement();
 		if (oldroot != 0)

@@ -19,7 +19,7 @@ void ContentEditorTab::setWindowText(std::string windowname, std::string text)
 	}
 }
 
-std::string ContentEditorTab::getWindowText(std::string windowname)
+std::string ContentEditorTab::getWindowText(std::string windowname, std::string def)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* win = win_mgr.getWindow(windowname);
@@ -28,6 +28,7 @@ std::string ContentEditorTab::getWindowText(std::string windowname)
 	{
 		return win->getText().c_str();
 	}
+	return def;
 }
 
 void ContentEditorTab::setSpinnerValue(std::string windowname, double value)
@@ -44,7 +45,7 @@ void ContentEditorTab::setSpinnerValue(std::string windowname, double value)
 	}
 }
 
-double ContentEditorTab::getSpinnerValue(std::string windowname, double value)
+double ContentEditorTab::getSpinnerValue(std::string windowname, double def)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Spinner* spinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow(windowname));
@@ -53,6 +54,7 @@ double ContentEditorTab::getSpinnerValue(std::string windowname, double value)
 	{
 		return spinner->getCurrentValue();
 	}
+	return def;
 }
 
 void ContentEditorTab::setCheckboxSelected(std::string windowname, bool state)
@@ -95,6 +97,23 @@ std::string ContentEditorTab::getComboboxSelection(std::string windowname, std::
 		}
 	}
 	return def;
+}
+
+void ContentEditorTab::setComboboxSelection(std::string windowname, std::string selection)
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Combobox* box = static_cast<CEGUI::Combobox*>(win_mgr.getWindow(windowname));
+	
+	if (box != 0)
+	{
+		box->setText(selection.c_str());
+		CEGUI::ListboxItem* sel = box->findItemWithText(CEGUI::String(selection.c_str()),0);
+		if (sel != 0)
+		{
+			int id = sel->getID();
+			box->setSelection(id,id);
+		}
+	}
 }
 
 void ContentEditorTab::setMultiLineEditboxCursor(std::string windowname, int row, int col)

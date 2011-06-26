@@ -94,13 +94,13 @@ public:
 	static int createMagicMods(Item* item, float* modchance, float magic_power, float min_enchant, float max_enchant, float enchant_multiplier=1.0, bool duplicate_enchant = false, int max_enchant_number = 4);
 
 	/**
-	 * \fn static void registerItem(Item::Type type, Item::Subtype subtype, ItemBasicData* data)
 	 * \brief Registriert ein Item
 	 * \param type Typ des Items
 	 * \param subtype Subtype des items
 	 * \param data Daten die zum Erzeugen des Items noetig sind
+	 * \param silent_replace if set to true, existing data will be replaced without warning
 	 */
-	static void registerItem(Item::Type type, Item::Subtype subtype, ItemBasicData* data);
+	static void registerItem(Item::Type type, Item::Subtype subtype, ItemBasicData* data, bool silent_replace=false);
 	
 	/**
 	 * \fn static void registerItemDrop(Item::Subtype subtype, DropChance chance)
@@ -150,6 +150,13 @@ public:
 	 */
 	static ItemBasicData* getItemBasicData(Item::Subtype subtype);
 
+	/**
+	 * \brief returns the data structure with all item data
+	 */
+	static const std::map<Item::Subtype,ItemBasicData*>& getAllItemData()
+	{
+		return m_item_data;
+	}
 
 	private:
 		/**

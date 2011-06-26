@@ -14,6 +14,7 @@
 
 #include "renderinfoeditor.h"
 #include "fixedobjecteditor.h"
+#include "itemeditor.h"
 
 using namespace CEGUI;
 
@@ -102,6 +103,7 @@ void ContentEditor::init(bool visible)
 	
 	m_components["FOEditor"] = new FixedObjectEditor();
 	m_components["RIEditor"] = new RenderInfoEditor();
+	m_components["ItemEditor"] = new ItemEditor();
 	
 	std::map<std::string, ContentEditorTab*>::iterator it;
 	for (it = m_components.begin(); it != m_components.end(); ++it)

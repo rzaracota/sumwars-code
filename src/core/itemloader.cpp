@@ -39,7 +39,7 @@ void ItemLoader::loadItems(TiXmlNode* node)
 	}
 }
 
-void ItemLoader::loadItem(TiXmlNode* node)
+std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 {
 	ItemBasicData* item_data = new ItemBasicData;
 	
@@ -187,6 +187,8 @@ void ItemLoader::loadItem(TiXmlNode* node)
 				float prob;
 				attr.getInt("level",level,0);
 				attr.getFloat("probability",prob,0);
+				item_data->m_drop_level = level;
+				item_data->m_drop_probability = prob;
 				ItemFactory::registerItemDrop(item_data->m_subtype, DropChance(level,prob,item_data->m_size));
 			}
 			else if (!strcmp(child->Value(), "UseupEffect"))
@@ -352,6 +354,8 @@ void ItemLoader::loadItem(TiXmlNode* node)
 	}
 	
 	DEBUGX("registered Item %s",item_data->m_subtype.c_str());
-	ItemFactory::registerItem(item_data->m_type, item_data->m_subtype, item_data);
+	ItemFactory::registerItem(item_data->m_type, item_data->m_subtype, item_data, silent_replace);
+	
+	return item_data->m_subtype;
 }
 

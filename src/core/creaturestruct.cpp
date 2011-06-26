@@ -1,7 +1,7 @@
 #include "creaturestruct.h"
 #include "damage.h"
 #include "eventsystem.h"
-
+#include "xmlutil.h"
 
 void CreatureBaseAttr::init()
 {
@@ -345,6 +345,37 @@ void CreatureBaseAttrMod::operator=(CreatureBaseAttrMod other)
 	m_time =other.m_time;
 	m_xabilities = other.m_xabilities;
 	m_ximmunity =other.m_ximmunity;
+}
+
+void CreatureBaseAttrMod::writeToXML(TiXmlNode* node)
+{
+	TiXmlElement* elem = node->ToElement();
+	if (elem == 0) 
+		return;
+	
+	XMLUtil::setAttribute(elem, "darmor",m_darmor,0);
+	XMLUtil::setAttribute(elem, "dblock",m_dblock,0);
+	XMLUtil::setDoubleAttribute(elem, "dmax_health",m_dmax_health,0);
+	XMLUtil::setAttribute(elem, "dattack",m_dattack,0);
+	XMLUtil::setAttribute(elem, "dpower",m_dpower,0);
+	XMLUtil::setAttribute(elem, "dstrength",m_dstrength,0);
+	XMLUtil::setAttribute(elem, "ddexterity",m_ddexterity,0);
+	XMLUtil::setAttribute(elem, "dwillpower",m_dwillpower,0);
+	XMLUtil::setAttribute(elem, "dmagic_power",m_dmagic_power,0);
+	XMLUtil::setAttribute(elem, "flag",m_flag);
+	
+	XMLUtil::setAttribute(elem, "dwalk_speed",m_dwalk_speed,0);
+	XMLUtil::setAttribute(elem, "dattack_speed",m_dattack_speed,0);
+	
+	XMLUtil::setAttribute(elem, "dresistances_physical",m_dresistances[Damage::PHYSICAL],0);
+	XMLUtil::setAttribute(elem, "dresistances_fire",m_dresistances[Damage::FIRE],0);
+	XMLUtil::setAttribute(elem, "dresistances_ice",m_dresistances[Damage::ICE],0);
+	XMLUtil::setAttribute(elem, "dresistances_air",m_dresistances[Damage::AIR],0);
+	
+	XMLUtil::setAttribute(elem, "dresistances_cap_physical",m_dresistances_cap[Damage::PHYSICAL],0);
+	XMLUtil::setAttribute(elem, "dresistances_cap_fire",m_dresistances_cap[Damage::FIRE],0);
+	XMLUtil::setAttribute(elem, "dresistances_cap_ice",m_dresistances_cap[Damage::ICE],0);
+	XMLUtil::setAttribute(elem, "dresistances_cap_air",m_dresistances_cap[Damage::AIR],0);
 }
 
 int CreatureBaseAttrMod::getValue(std::string valname)
@@ -741,6 +772,23 @@ void CreatureDynAttrMod::operator=(CreatureDynAttrMod other)
 	{
 		m_dstatus_mod_immune_time[i] = other.m_dstatus_mod_immune_time[i];
 	}
+}
+
+void CreatureDynAttrMod::writeToXML(TiXmlNode* node)
+{
+	TiXmlElement* elem = node->ToElement();
+	if (elem == 0) 
+		return;
+	
+	XMLUtil::setDoubleAttribute(elem, "dhealth",m_dhealth,0);
+	XMLUtil::setDoubleAttribute(elem, "dstatus_blind_immune_time",m_dstatus_mod_immune_time[Damage::BLIND],0);
+	XMLUtil::setDoubleAttribute(elem, "dstatus_poison_immune_time",m_dstatus_mod_immune_time[Damage::POISONED],0);
+	XMLUtil::setDoubleAttribute(elem, "dstatus_berserk_immune_time",m_dstatus_mod_immune_time[Damage::BERSERK],0);
+	XMLUtil::setDoubleAttribute(elem, "dstatus_confuse_immune_time",m_dstatus_mod_immune_time[Damage::CONFUSED],0);
+	XMLUtil::setDoubleAttribute(elem, "dstatus_mute_immune_time",m_dstatus_mod_immune_time[Damage::MUTE],0);
+	XMLUtil::setDoubleAttribute(elem, "dstatus_paralyze_immune_time",m_dstatus_mod_immune_time[Damage::PARALYZED],0);
+	XMLUtil::setDoubleAttribute(elem, "dstatus_frozen_immune_time",m_dstatus_mod_immune_time[Damage::FROZEN],0);
+	XMLUtil::setDoubleAttribute(elem, "dstatus_burning_immune_time",m_dstatus_mod_immune_time[Damage::BURNING],0);
 }
 
 int CreatureDynAttrMod::getValue(std::string valname)

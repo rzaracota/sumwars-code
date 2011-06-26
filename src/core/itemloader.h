@@ -28,7 +28,14 @@ class ItemLoader
 		*/
 		static bool loadItemData(const char* pFilename);
 		
-	
+		/**
+		 * \fn static void loadQuest(TiXmlNode* node)
+		 * \brief Laedt die Daten zu einem Item
+		 * \param node Knoten, der die Daten enthaelt
+		 * \param silent_replace if set to true, existing data is replaced without error message
+		 * \return subtype of the created Item
+		 */
+		static std::string loadItem(TiXmlNode* node, bool silent_replace= false);
 	
 	private:
 	
@@ -39,12 +46,7 @@ class ItemLoader
 		 */
 		static void loadItems(TiXmlNode* node);
 	
-		/**
-		 * \fn static void loadQuest(TiXmlNode* node)
-		 * \brief Laedt die Daten zu einem Item
-		 * \param node Knoten, der die Daten enthaelt
-		 */
-		static void loadItem(TiXmlNode* node);
+
 
 	
 	
