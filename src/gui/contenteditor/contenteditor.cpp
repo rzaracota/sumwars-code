@@ -184,6 +184,8 @@ bool ContentEditor::onPreviewWindowMouseDown(const CEGUI::EventArgs& evt)
 		m_leftMouseDown = true;
 	if(args->button == CEGUI::RightButton)
 		m_rightMouseDown = true;
+
+	return true;
 }
 
 bool ContentEditor::onPreviewWindowMouseUp(const CEGUI::EventArgs& evt)
@@ -196,6 +198,8 @@ bool ContentEditor::onPreviewWindowMouseUp(const CEGUI::EventArgs& evt)
 		m_leftMouseDown = false;
 	if(args->button == CEGUI::RightButton)
 		m_rightMouseDown = false;
+
+	return true;
 }
 
 bool ContentEditor::onPreviewWindowScrollWheel(const CEGUI::EventArgs& evt)
@@ -209,6 +213,8 @@ bool ContentEditor::onPreviewWindowScrollWheel(const CEGUI::EventArgs& evt)
 	cam->moveRelative(vec);
 	Ogre::TexturePtr tex = Ogre::TextureManager::getSingleton().getByName("editor_tex");
 	tex.getPointer()->getBuffer()->getRenderTarget()->update();
+
+	return true;
 }
 
 
