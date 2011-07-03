@@ -4,227 +4,376 @@
     <Window Type="TaharezLook/StaticImage" Name="Inventory" >
         <Property Name="Image" Value="set:Inventory image:InvBackground" />
         <Property Name="FrameEnabled" Value="False" />
-        <Property Name="InheritsAlpha" Value="False" />
-        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{0.48,0},{0.85,0}}" />
+        <Property Name="UnifiedAreaRect" Value="{{0.172656,0},{0.0554687,0},{0.635546,0},{0.957813,0}}" />
         <Property Name="BackgroundEnabled" Value="False" />
         <Window Type="TaharezLook/StaticText" Name="InvLabel" >
-            <Property Name="Font" Value="Commonwealth-10" />
             <Property Name="Text" Value="Inventory" />
+            <Property Name="HorzExtent" Value="73" />
+            <Property Name="VertExtent" Value="23.7453" />
             <Property Name="FrameEnabled" Value="False" />
-            <Property Name="HorzFormatting" Value="HorzCentred" />
-            <Property Name="UnifiedAreaRect" Value="{{0.333774,0},{0.0230392,0},{0.673348,0},{0.0647058,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.413924,0},{-0.453246,0},{0.587975,0},{-0.413925,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
-            <AutoWindow NameSuffix="__auto_hscrollbar__" >
-                <AutoWindow NameSuffix="__auto_incbtn__" />
-            </AutoWindow>
-            <AutoWindow NameSuffix="__auto_vscrollbar__" >
-                <AutoWindow NameSuffix="__auto_incbtn__" />
-            </AutoWindow>
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="HelmetItemLabel" >
-            <Property Name="UnifiedAreaRect" Value="{{0.0822645,0},{0.141634,0},{0.156053,0},{0.199232,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="WeaponItemLabel" >
-            <Property Name="UnifiedAreaRect" Value="{{0.0499589,0},{0.216545,0},{0.156053,0},{0.301103,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="RingRightItemLabel" >
-            <Property Name="UnifiedAreaRect" Value="{{0.0822644,0},{0.310316,0},{0.156053,0},{0.367913,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="ArmorItemLabel" >
-            <Property Name="UnifiedAreaRect" Value="{{0.0528952,0},{0.387231,0},{0.156053,0},{0.473015,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="AmuletItemLabel" >
-            <Property Name="UnifiedAreaRect" Value="{{0.848288,0},{0.140113,0},{0.922077,0},{0.197711,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="ShieldItemLabel" >
-            <Property Name="UnifiedAreaRect" Value="{{0.848288,0},{0.217601,0},{0.951446,0},{0.303385,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="RingLeftItemLabel" >
-            <Property Name="UnifiedAreaRect" Value="{{0.848288,0},{0.310269,0},{0.922077,0},{0.367867,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="GlovesItemLabel" >
-            <Property Name="UnifiedAreaRect" Value="{{0.848288,0},{0.387231,0},{0.951446,0},{0.473015,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="BigItem0Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.0860095,-2},{0.481149,1},{0.220578,0},{0.581292,2}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="BigItem1Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.268885,-2},{0.481212,1},{0.403454,0},{0.581354,2}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="BigItem2Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.451515,-2},{0.481149,1},{0.586085,0},{0.581291,2}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="BigItem3Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.634652,-2},{0.480125,1},{0.769221,0},{0.580267,2}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="BigItem4Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.817221,-2},{0.481118,1},{0.951791,0},{0.58126,2}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="MediumItem0Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.108011,-2},{0.59362,-5},{0.216468,-10},{0.664139,-6}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="MediumItem3Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.474038,-2},{0.5939,-5},{0.582495,-10},{0.664419,-6}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="MediumItem4Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.595655,-2},{0.5939,-5},{0.704112,-10},{0.664419,-6}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="MediumItem5Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.717575,-2},{0.5939,-5},{0.826032,-10},{0.664419,-6}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="MediumItem6Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.839613,-2},{0.5939,-5},{0.948071,-10},{0.664419,-6}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="MediumItem1Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.229828,-2},{0.5939,-5},{0.338285,-10},{0.664419,-6}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="MediumItem2Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.352503,-2},{0.5939,-5},{0.46096,-10},{0.664419,-6}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="MediumItem7Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.108092,-2},{0.663814,-5},{0.216549,-10},{0.734333,-6}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="MediumItem8Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.230153,-2},{0.663153,-5},{0.33861,-10},{0.733672,-6}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="MediumItem9Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.352584,-2},{0.663029,-5},{0.461041,-10},{0.733548,-6}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="MediumItem10Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.47412,-2},{0.663742,-5},{0.582577,-10},{0.734261,-6}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="MediumItem11Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.595655,-2},{0.663184,-5},{0.704112,-10},{0.733703,-6}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="MediumItem12Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.7179,-2},{0.664022,-5},{0.826357,-10},{0.734541,-6}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="MediumItem13Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.840183,-2},{0.663556,-5},{0.948641,-10},{0.734075,-6}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem0Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.116748,0},{0.728827,0},{0.19261,0},{0.784472,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem1Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.197753,0},{0.728402,0},{0.273615,0},{0.784047,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem2Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.278596,0},{0.728349,0},{0.354458,0},{0.783994,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem3Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.360579,0},{0.729164,0},{0.436441,0},{0.784809,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem4Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.441259,0},{0.72874,0},{0.517121,0},{0.784385,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem5Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.52324,0},{0.728904,0},{0.599102,0},{0.784549,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem6Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.604001,0},{0.728541,0},{0.679863,0},{0.784186,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem7Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.685576,0},{0.72945,0},{0.761438,0},{0.785095,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem8Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.766826,0},{0.728806,0},{0.842688,0},{0.784451,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem9Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.847995,0},{0.729437,0},{0.923857,0},{0.785082,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem28Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.766778,0},{0.852816,0},{0.84264,0},{0.908461,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem27Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.685853,0},{0.853023,0},{0.761715,0},{0.908668,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem26Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.603871,0},{0.852643,0},{0.679733,0},{0.908288,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem25Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.522947,0},{0.853038,0},{0.598809,0},{0.908683,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem24Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.441779,0},{0.853401,0},{0.517641,0},{0.909046,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem23Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.359797,0},{0.852677,0},{0.435659,0},{0.908322,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem22Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.279117,0},{0.85332,0},{0.354979,0},{0.908965,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem21Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.197542,0},{0.85269,0},{0.273404,0},{0.908335,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem20Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.115885,0},{0.853333,0},{0.191747,0},{0.908978,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem10Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.116179,0},{0.790765,0},{0.192041,0},{0.84641,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem11Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.198079,0},{0.791084,0},{0.273941,0},{0.846729,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem12Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.278922,0},{0.790906,0},{0.354784,0},{0.846551,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem13Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.360253,0},{0.790823,0},{0.436115,0},{0.846468,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem14Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.441177,0},{0.791173,0},{0.517039,0},{0.846818,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem15Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.52324,0},{0.791307,0},{0.599102,0},{0.846952,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem16Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.603838,0},{0.791223,0},{0.6797,0},{0.846868,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem17Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.685577,0},{0.791138,0},{0.761439,0},{0.846783,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem18Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.766989,0},{0.790216,0},{0.842851,0},{0.845861,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem19Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.847832,0},{0.790505,0},{0.923694,0},{0.84615,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticImage" Name="SmallItem29Label" >
-            <Property Name="UnifiedAreaRect" Value="{{0.847898,0},{0.852897,0},{0.92376,0},{0.908542,0}}" />
+            <Property Name="VerticalAlignment" Value="Centre" />
         </Window>
         <Window Type="TaharezLook/StaticImage" Name="GoldStaticImage" >
-            <Property Name="Image" Value="set:Inventory image:InvMoneyPile" />
+            <Property Name="Image" Value="set:Inventory image:GoldPile" />
             <Property Name="FrameEnabled" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.583104,0},{0.919767,0},{0.652035,0},{0.952551,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.734178,0},{0.704907,0},{0.787975,0},{0.726912,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
+            <Window Type="TaharezLook/Button" Name="GoldDropButton" >
+                <Property Name="Alpha" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+            </Window>
         </Window>
         <Window Type="TaharezLook/StaticText" Name="GoldValueLabel" >
             <Property Name="Text" Value="0" />
+            <Property Name="HorzExtent" Value="8" />
+            <Property Name="VertExtent" Value="23.7453" />
             <Property Name="FrameEnabled" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.677,0},{0.906505,0},{0.94938,0},{0.97032,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.794937,0},{0.702164,0},{0.95633,0},{0.731385,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
-            <AutoWindow NameSuffix="__auto_hscrollbar__" >
-                <AutoWindow NameSuffix="__auto_incbtn__" />
-            </AutoWindow>
-            <AutoWindow NameSuffix="__auto_vscrollbar__" >
-                <AutoWindow NameSuffix="__auto_incbtn__" />
-            </AutoWindow>
         </Window>
-        <Window Type="TaharezLook/Button" Name="GoldDropButton" >
-            <Property Name="Text" Value="Drop" />
-            <Property Name="UnifiedAreaRect" Value="{{0.126758,0},{0.916813,0},{0.266896,0},{0.958906,0}}" />
+        <Window Type="TaharezLook/ImageButton" Name="SwapEquipButton" >
+            <Property Name="HoverImage" Value="set:Inventory image:WeaponSwitchState1" />
+            <Property Name="NormalImage" Value="set:Inventory image:WeaponSwitchState1" />
+            <Property Name="PushedImage" Value="set:Inventory image:WeaponSwitchState2" />
+            <Property Name="UnifiedAreaRect" Value="{{0.43924,0},{0.582828,0},{0.575316,0},{0.613492,0}}" />
+        </Window>
+        <Window Type="TaharezLook/StaticImage" Name="CharacterImage" >
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.277637,0},{0.164791,0},{0.736498,0},{0.569192,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
         </Window>
         <Window Type="TaharezLook/Editbox" Name="GoldDropValueBox" >
             <Property Name="MaxTextLength" Value="1073741823" />
-            <Property Name="UnifiedAreaRect" Value="{{0.277621,0},{0.912859,0},{0.491,0},{0.96271,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.755275,0},{0.670274,0},{0.908228,0},{0.698051,0}}" />
             <Property Name="TextParsingEnabled" Value="False" />
         </Window>
-        <Window Type="TaharezLook/StaticImage" Name="CharacterImage" >
-            <Property Name="UnifiedAreaRect" Value="{{0.198097,0},{0.1399,0},{0.718684,0},{0.462822,0}}" />
+        <Window Type="TaharezLook/StaticImage" Name="SmallTabMain" >
+            <Property Name="Image" Value="set:Inventory image:SmallSlotBack" />
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0502108,0},{0.758442,0},{0.960549,0},{0.947836,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem0Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.0103128,0},{0.0257146,0},{0.0795478,0},{0.275714,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem1Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.110313,0},{0.0266671,0},{0.179548,0},{0.276667,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem2Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.211298,0},{0.00809576,0},{0.280533,0},{0.258096,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem3Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.312283,0},{0.00476249,0},{0.381518,0},{0.254763,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem4Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.41489,0},{0.0147623,0},{0.484125,0},{0.264762,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem5Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.515875,0},{0.011429,0},{0.58511,0},{0.261429,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem6Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.62613,0},{0.000476723,0},{0.695365,0},{0.250477,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem7Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.717845,0},{0.00476246,0},{0.78708,0},{0.254762,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem8Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.823465,0},{0.0166673,0},{0.8927,0},{0.266667,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem9Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.920452,0},{0.00809576,0},{0.989687,0},{0.258096,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem10Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.00932784,0},{0.365238,0},{0.0785629,0},{0.615238,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem11Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.107995,0},{0.361905,0},{0.177231,0},{0.611905,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem12Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.215933,0},{0.366191,0},{0.285168,0},{0.616191,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem13Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.307648,0},{0.370476,0},{0.376883,0},{0.620476,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem14Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.417207,0},{0.365238,0},{0.486443,0},{0.615238,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem15Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.52051,0},{0.377143,0},{0.589745,0},{0.627143,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem16Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.621495,0},{0.358572,0},{0.69073,0},{0.608572,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem17Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.72248,0},{0.362857,0},{0.791715,0},{0.612857,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem18Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.821148,0},{0.374762,0},{0.890383,0},{0.624762,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem19Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.920452,0},{0.358572,0},{0.989687,0},{0.608572,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem20Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.00637324,0},{0.720952,0},{0.0756084,0},{0.970952,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem21Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.118946,0},{0.71,0},{0.188181,0},{0.96,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem22Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.214948,0},{0.728571,0},{0.284183,0},{0.978571,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem23Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.315585,0},{0.709047,0},{0.38482,0},{0.959048,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem24Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.416223,0},{0.727619,0},{0.485458,0},{0.977619,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem25Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.51686,0},{0.715714,0},{0.586095,0},{0.965714,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem26Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.62051,0},{0.728571,0},{0.689745,0},{0.978571,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem27Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.714195,0},{0.716666,0},{0.78343,0},{0.966666,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem28Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.819467,0},{0.742857,0},{0.888702,0},{0.969999,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="SmallItem29Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.921089,0},{0.719047,0},{0.990324,0},{0.969047,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
         </Window>
-        <Window Type="TaharezLook/Button" Name="SwapEquipButton" >
-            <Property Name="Text" Value="1" />
-            <Property Name="UnifiedAreaRect" Value="{{0.746499,0},{0.139329,0},{0.81543,0},{0.184524,0}}" />
+        <Window Type="TaharezLook/StaticImage" Name="MediumTabMain" >
+            <Property Name="Image" Value="set:Inventory image:MediumSlotBack" />
+            <Property Name="Visible" Value="False" />
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0447255,0},{0.757432,0},{0.952954,0},{0.945383,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+            <Window Type="TaharezLook/StaticImage" Name="MediumItem0Label" >
+                <Property Name="UnifiedAreaRect" Value="{{0.00963983,0},{0.0389638,0},{0.110975,0},{0.411804,0}}" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="MediumItem1Label" >
+                <Property Name="UnifiedAreaRect" Value="{{0.145586,0},{0.0428986,0},{0.246922,0},{0.41574,0}}" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="MediumItem2Label" >
+                <Property Name="UnifiedAreaRect" Value="{{0.276887,0},{0.0468334,0},{0.378223,0},{0.419675,0}}" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="MediumItem3Label" >
+                <Property Name="UnifiedAreaRect" Value="{{0.401219,0},{0.0507682,0},{0.502555,0},{0.42361,0}}" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="MediumItem4Label" >
+                <Property Name="UnifiedAreaRect" Value="{{0.534843,0},{0.0470255,0},{0.64547,0},{0.435222,0}}" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="MediumItem5Label" >
+                <Property Name="UnifiedAreaRect" Value="{{0.698664,0},{0.0279277,0},{0.825551,0},{0.462189,0}}" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="MediumItem6Label" >
+                <Property Name="UnifiedAreaRect" Value="{{0.864807,0},{0.0318625,0},{0.989371,0},{0.450768,0}}" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="MediumItem7Label" >
+                <Property Name="UnifiedAreaRect" Value="{{0.0228206,0},{0.565547,0},{0.124156,0},{0.923033,0}}" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="MediumItem8Label" >
+                <Property Name="UnifiedAreaRect" Value="{{0.158767,0},{0.584837,0},{0.260103,0},{0.942323,0}}" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="MediumItem9Label" >
+                <Property Name="UnifiedAreaRect" Value="{{0.285422,0},{0.581094,0},{0.386758,0},{0.93858,0}}" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="MediumItem10Label" >
+                <Property Name="UnifiedAreaRect" Value="{{0.409754,0},{0.585029,0},{0.51109,0},{0.942515,0}}" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="MediumItem11Label" >
+                <Property Name="UnifiedAreaRect" Value="{{0.550346,0},{0.581286,0},{0.651682,0},{0.938772,0}}" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="MediumItem12Label" >
+                <Property Name="UnifiedAreaRect" Value="{{0.704876,0},{0.577544,0},{0.806212,0},{0.93503,0}}" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="MediumItem13Label" >
+                <Property Name="UnifiedAreaRect" Value="{{0.889603,0},{0.589156,0},{0.990939,0},{0.946642,0}}" />
+            </Window>
+        </Window>
+        <Window Type="TaharezLook/StaticImage" Name="BigTabMain" >
+            <Property Name="Image" Value="set:Inventory image:BigSlotBack" />
+            <Property Name="Visible" Value="False" />
+            <Property Name="AlwaysOnTop" Value="True" />
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0518981,0},{0.74632,0},{0.955907,0},{0.955916,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+            <Window Type="TaharezLook/StaticImage" Name="BigItem0Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.00361701,0},{0.0039589,0},{0.188273,0},{0.97685,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="BigItem1Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.207643,0},{0.0126508,0},{0.392299,0},{0.985542,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="BigItem2Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.409335,0},{0.0075734,0},{0.593991,0},{0.980465,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="BigItem3Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.611027,0},{0.00938065,0},{0.795683,0},{0.982271,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+            <Window Type="TaharezLook/StaticImage" Name="BigItem4Label" >
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.810385,0},{-0.0025814,0},{0.995041,0},{0.97031,0}}" />
+                <Property Name="BackgroundEnabled" Value="False" />
+            </Window>
+        </Window>
+        <Window Type="TaharezLook/StaticImage" Name="HelmetItemLabel" >
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0654001,0},{0.162338,0},{0.222573,0},{0.266595,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/StaticImage" Name="ArmorItemLabel" >
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.062869,0},{0.283694,0},{0.220042,0},{0.383622,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/StaticImage" Name="WeaponItemLabel" >
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0630797,0},{0.401948,0},{0.218143,0},{0.565368,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/StaticImage" Name="RingRightItemLabel" >
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.155274,0},{0.587591,0},{0.2154,0},{0.625469,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/StaticImage" Name="RingLeftItemLabel" >
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.789663,0},{0.582756,0},{0.851899,0},{0.626407,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/StaticImage" Name="ShieldItemLabel" >
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.78692,0},{0.404762,0},{0.946203,0},{0.563852,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/StaticImage" Name="AmuletItemLabel" >
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.79114,0},{0.224387,0},{0.853376,0},{0.268037,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/StaticImage" Name="GlovesItemLabel" >
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.779747,0},{0.283117,0},{0.943249,0},{0.38593,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/StaticImage" Name="BorderHorzS" >
+            <Property Name="Image" Value="set:Inventory image:BorderHorz" />
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.03789,0},{0.736443,0},{0.265189,0},{0.738165,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/StaticImage" Name="BorderHorzM" >
+            <Property Name="Image" Value="set:Inventory image:BorderHorz" />
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.265105,0},{0.736443,0},{0.492404,0},{0.738165,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/StaticImage" Name="BorderHorzB" >
+            <Property Name="Image" Value="set:Inventory image:BorderHorz" />
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.49232,0},{0.736443,0},{0.719619,0},{0.738165,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/StaticText" Name="SmallTabButton" >
+            <Property Name="Text" >Small
+</Property>
+            <Property Name="HorzExtent" Value="42" />
+            <Property Name="VertExtent" Value="23.7453" />
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="HorzFormatting" Value="WordWrapCentred" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0545076,0},{0.701132,0},{0.253806,0},{0.732978,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/StaticText" Name="MediumTabButton" >
+            <Property Name="Text" >Medium
+</Property>
+            <Property Name="HorzExtent" Value="54" />
+            <Property Name="VertExtent" Value="23.7453" />
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="HorzFormatting" Value="WordWrapCentred" />
+            <Property Name="UnifiedAreaRect" Value="{{0.278658,0},{0.701269,0},{0.477957,0},{0.733114,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/StaticText" Name="BigTabButton" >
+            <Property Name="Text" >Big
+</Property>
+            <Property Name="HorzExtent" Value="20" />
+            <Property Name="VertExtent" Value="23.7453" />
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="HorzFormatting" Value="WordWrapCentred" />
+            <Property Name="UnifiedAreaRect" Value="{{0.507217,0},{0.700159,0},{0.706516,0},{0.732004,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
         </Window>
     </Window>
 </GUILayout>

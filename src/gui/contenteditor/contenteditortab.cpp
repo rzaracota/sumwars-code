@@ -77,10 +77,10 @@ bool ContentEditorTab::getCheckboxSelected(std::string windowname)
 	CEGUI::Checkbox* box = static_cast<CEGUI::Checkbox*>(win_mgr.getWindow(windowname));
 	
 	if (box != 0)
-	{
-		
+	{	
 		return  box->isSelected();
 	}
+	return false;
 }
 
 std::string ContentEditorTab::getComboboxSelection(std::string windowname, std::string def)

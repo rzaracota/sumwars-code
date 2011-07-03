@@ -72,25 +72,8 @@ Inventory::Inventory (Document* doc)
 			label->setWantsMultiClickEvents(false);
 		}
 	}
-	
-	/*
-	for (i=0;i<10;i++)
-	{
-		outStream.str("");
-		outStream << "BeltShortcutLabel" << i;
-		label = win_mgr.createWindow("TaharezLook/StaticText", outStream.str());
-		inventory->addChildWindow(label);
-		label->setPosition(CEGUI::UVector2(cegui_reldim(0.125f+i*0.0815f), cegui_reldim( 0.74f)));
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.086f), cegui_reldim( 0.056f)));
-		label->setProperty("FrameEnabled", "false");
-		label->setProperty("BackgroundEnabled", "false");
-		std::stringstream stream;
-		stream << (i+1)%10;
-		label->setText(stream.str());
-		label->setAlwaysOnTop(true);
-		label->setMousePassThroughEnabled(true);
-	}
-	*/
+
+
 
 	// Label Ruestung
 	label = win_mgr.getWindow("ArmorItemLabel");
@@ -172,40 +155,20 @@ Inventory::Inventory (Document* doc)
 	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("GoldDropValueBox"));
 	box->subscribeEvent(CEGUI::Editbox::EventTextAccepted, CEGUI::Event::Subscriber(&Inventory::onDropGoldClicked,  this));
 	
+	
+	// Tab Labels
+	setState(Inventory::StateSmall);
+
+	label = win_mgr.getWindow("SmallTabButton");
+	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onSwitchTabClicked, this));
+	label = win_mgr.getWindow("MediumTabButton");
+	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onSwitchTabClicked, this));
+	label = win_mgr.getWindow("BigTabButton");
+	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onSwitchTabClicked, this));
+	
+	createAnimations();
+
 	updateTranslation();
-
-/*
-	CEGUI::AnimationManager *amgr = CEGUI::AnimationManager::getSingletonPtr();
-	CEGUI::Animation *anim = amgr->createAnimation("InventoryAnimation");
-	anim->setDuration(0.5f);
-    anim->setReplayMode(CEGUI::Animation::RM_Once);
-    // now we define affector inside our Testing animation
-    {
-        // this affector changes YRotation and interpolates keyframes with float interpolator
-        CEGUI::Affector* affector = anim->createAffector("YRotation", "float");
-        // at 0.0 seconds, the animation should set YRotation to 10.0 degrees
-        affector->createKeyFrame(0.0f, "90.0");
-        // at 0.3 seconds, YRotation should be 0 degrees and animation should progress towards this in an accelerating manner
-        affector->createKeyFrame(0.5f, "0.0", CEGUI::KeyFrame::P_QuadraticAccelerating);
-    }
-
-    // animation can have more than one affectors! lets define another affector that changes Alpha
-    {
-        // this affector will again use float interpolator
-        CEGUI::Affector* affector = anim->createAffector("Alpha", "float");
-        affector->createKeyFrame(0.0f, "0.0"); // at 0.0 seconds, set alpha to 0.5
-        affector->createKeyFrame(0.5f, "0.9", CEGUI::KeyFrame::P_QuadraticDecelerating); // at 1.0 seconds, set alpha to 1.0, now decelerating!
-    }
-    
-    CEGUI::AnimationInstance* instance = CEGUI::AnimationManager::getSingleton().instantiateAnimation(anim);
-	// after we instantiate the animation, we have to set it's target window
-    instance->setTargetWindow(inventory);
-
-	// at this point, you can start this instance and see the results
-    instance->start();
-
-	inventory->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&CEGUI::AnimationInstance::handleStart, instance));
-*/
 }
 
 void Inventory::update()
@@ -342,6 +305,58 @@ void Inventory::update()
 	
 }
 
+void Inventory::setState(State s)
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+
+	if(s == Inventory::StateSmall)
+	{
+		label = win_mgr.getWindow("SmallTabMain");
+		label->setVisible(true);
+		label = win_mgr.getWindow("BorderHorzS");
+		label->setVisible(false);
+		label = win_mgr.getWindow("MediumTabMain");
+		label->setVisible(false);
+		label = win_mgr.getWindow("BorderHorzM");
+		label->setVisible(true);
+		label = win_mgr.getWindow("BigTabMain");
+		label->setVisible(false);
+		label = win_mgr.getWindow("BorderHorzB");
+		label->setVisible(true);
+	}
+	else if(s == Inventory::StateMedium)
+	{
+		label = win_mgr.getWindow("SmallTabMain");
+		label->setVisible(false);
+		label = win_mgr.getWindow("BorderHorzS");
+		label->setVisible(true);
+		label = win_mgr.getWindow("MediumTabMain");
+		label->setVisible(true);
+		label = win_mgr.getWindow("BorderHorzM");
+		label->setVisible(false);
+		label = win_mgr.getWindow("BigTabMain");
+		label->setVisible(false);
+		label = win_mgr.getWindow("BorderHorzB");
+		label->setVisible(true);
+	}
+	else if(s == Inventory::StateBig)
+	{
+		label = win_mgr.getWindow("SmallTabMain");
+		label->setVisible(false);
+		label = win_mgr.getWindow("BorderHorzS");
+		label->setVisible(true);
+		label = win_mgr.getWindow("MediumTabMain");
+		label->setVisible(false);
+		label = win_mgr.getWindow("BorderHorzM");
+		label->setVisible(true);
+		label = win_mgr.getWindow("BigTabMain");
+		label->setVisible(true);
+		label = win_mgr.getWindow("BorderHorzB");
+		label->setVisible(false);
+	}
+}
+
 void Inventory::updateTranslation()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -380,3 +395,52 @@ bool Inventory::onDropGoldClicked(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+bool Inventory::onSwitchTabClicked(const CEGUI::EventArgs& evt)
+{
+	const CEGUI::WindowEventArgs* args = static_cast<const CEGUI::WindowEventArgs*>(&evt);
+	std::string name = args->window->getName().c_str();
+
+	if(name == "SmallTabButton")
+	{
+		setState(Inventory::StateSmall);
+	}
+	else if(name == "MediumTabButton")
+	{
+		setState(Inventory::StateMedium);
+	}
+	else if(name == "BigTabButton")
+	{
+		setState(Inventory::StateBig);
+	}
+
+	return true;
+}
+
+void Inventory::createAnimations()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+
+	CEGUI::AnimationManager::getSingleton().loadAnimationsFromXML("InventoryAnimations.xml");
+	
+	// Small tab animations
+	label = win_mgr.getWindow("SmallTabMain");
+	CEGUI::AnimationInstance* instance = CEGUI::AnimationManager::getSingleton().instantiateAnimation("SlotFadeIn");
+	instance->setTargetWindow(label);
+    instance->start();
+	label->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&CEGUI::AnimationInstance::handleStart, instance));
+
+	// Medium tab animations
+	label = win_mgr.getWindow("MediumTabMain");
+	instance = CEGUI::AnimationManager::getSingleton().instantiateAnimation("SlotFadeIn");
+	instance->setTargetWindow(label);
+    instance->start();
+	label->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&CEGUI::AnimationInstance::handleStart, instance));
+
+	// Big tab animations
+	label = win_mgr.getWindow("BigTabMain");
+	instance = CEGUI::AnimationManager::getSingleton().instantiateAnimation("SlotFadeIn");
+	instance->setTargetWindow(label);
+    instance->start();
+	label->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&CEGUI::AnimationInstance::handleStart, instance));
+}

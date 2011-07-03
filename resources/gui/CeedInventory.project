@@ -1,0 +1,1 @@
+<Project baseDirectory="./" fontsPath="./fonts" imagesetsPath="./imagesets" layoutsPath="./layouts" looknfeelsPath="./looknfeel" name="Inventory" schemesPath="./schemes" version="CEED Project 1"><Items><Item path="imagesets/Inventory.imageset" type="file" /><Item path="layouts/inventory.layout" type="file" /></Items></Project>

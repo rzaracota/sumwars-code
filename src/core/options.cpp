@@ -455,4 +455,6 @@ bool Options::setValue(std::string valname)
 		std::string value = lua_tostring(EventSystem::getLuaState() ,-1);
 		m_debug_options[valname] = value;
 	}
+
+	return false;
 }

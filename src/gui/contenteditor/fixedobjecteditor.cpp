@@ -210,6 +210,8 @@ bool FixedObjectEditor::onFixedObjectModified(const CEGUI::EventArgs& evt)
 		m_edited_fixed_object.m_layer = WorldObject::LAYER_BASE | WorldObject::LAYER_AIR;
 	
 	m_modified_fixed_object = true;
+
+	return false;
 }
 
 bool FixedObjectEditor::onFixedObjectAutodetectSize(const CEGUI::EventArgs& evt)
@@ -342,6 +344,8 @@ bool FixedObjectEditor::onFixedObjectCreate(const CEGUI::EventArgs& evt)
 	// create the object
 	int id = region->createObject("EditorFixedObject", pos,angle, height,WorldObject::STATE_ACTIVE);
 	m_created_objects.push_back(std::make_pair(region->getId(), id));
+
+	return false;
 }
 
 bool FixedObjectEditor::onCopyData(const CEGUI::EventArgs& evt)
