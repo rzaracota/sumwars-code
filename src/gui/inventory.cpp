@@ -45,12 +45,12 @@ Inventory::Inventory (Document* doc)
 	// Label fuer mittlere Items
 	for (j=0;j<2;j++)
 	{
-		for (i=0;i<7;i++)
+		for (i=0;i<6;i++)
 		{
 			outStream.str("");
-			outStream << "MediumItem" << j*7+i<< "Label";
+			outStream << "MediumItem" << j*6+i<< "Label";
 			label = win_mgr.getWindow(outStream.str());
-			label->setID(Equipement::MEDIUM_ITEMS+j*7+i);
+			label->setID(Equipement::MEDIUM_ITEMS+j*6+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
 			label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
@@ -272,7 +272,7 @@ void Inventory::update()
 	}
 
 	// Inventar: mittlere Items
-	for (i=0;i<14;i++)
+	for (i=0;i<12;i++)
 	{
 		out_stream.str("");
 		out_stream << "MediumItem" << i<< "Label";
