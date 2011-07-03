@@ -2,14 +2,14 @@
 # Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# FULL NAME <EMAIL@ADDRESS>, 2010.
+# FULL NAME <EMAIL@ADDRESS>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-09-11 23:13+0400\n"
+"PO-Revision-Date: 2011-06-27 21:49+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -26,6 +26,8 @@ msgid ""
 "The good news: No one will come through that tunnel anymore. The bad news: "
 "The way back has caved in, too. Hopefully there is another exit."
 msgstr ""
+"Хорошая новость: больше никто не пройдет через этот туннель. Плохая новость: "
+"проход обратно также завалило. Надеюсь, здесь есть другой выход."
 
 #: theFissure.xml
 msgid ""
@@ -41,7 +43,7 @@ msgstr ""
 
 #: theFissure.xml
 msgid "*urgh*"
-msgstr ""
+msgstr "*эмм*"
 
 #: theFissure.xml
 msgid "Wow, she's gorgeous."
@@ -50,10 +52,11 @@ msgstr ""
 #: theFissure.xml
 msgid "You can stare at her later, we have to erase some undead."
 msgstr ""
+"Ты можешь пялиться на неё попозже, а сейчас мы должны убить несколько зомби."
 
 #: theFissure.xml
 msgid "Please help us, the mage is badly injured!"
-msgstr ""
+msgstr "Пожалуйста, помоги нам, наш маг серьезно ранен!"
 
 #: theFissure.xml
 msgid "He he. Harvest!"
@@ -61,7 +64,7 @@ msgstr ""
 
 #: theFissure.xml
 msgid "I have never seen someone fight like you before."
-msgstr ""
+msgstr "Я никогда не видел, чтобы кто-нибудь дрался так же, как ты."
 
 #: theFissure.xml
 msgid "You don't get out very often, do you."
@@ -70,22 +73,24 @@ msgstr ""
 #: theFissure.xml
 msgid "You developed splendid since the last time we met, didn't you. ##solo"
 msgstr ""
+"Ты хорошо развился с тех пор, как мы последний раз виделись, не так ли?"
 
 #: theFissure.xml
 msgid "You developed splendid since the last time we met, didn't you."
 msgstr ""
+"Вы хорошо развился с тех пор, как мы последний раз виделись, не так ли?"
 
 #: theFissure.xml
 msgid "How is the archmage?"
-msgstr ""
+msgstr "Как архимаг?"
 
 #: theFissure.xml
 msgid "Very bad, I'm afraid."
-msgstr ""
+msgstr "Боюсь, очень плох."
 
 #: theFissure.xml
 msgid "Let me see."
-msgstr ""
+msgstr "Дай мне взглянуть."
 
 #: theFissure.xml
 msgid "Thank you. That was a close call for a rescue."
@@ -97,7 +102,7 @@ msgstr ""
 
 #: theFissure.xml
 msgid "It's very dangerous to travel so far from the roads."
-msgstr ""
+msgstr "Очень опасно путешествовать так далеко от дороги."
 
 #: theFissure.xml
 msgid "Come off it!"
@@ -127,7 +132,7 @@ msgstr ""
 
 #: theFissure.xml
 msgid "No, Dwarfenwall hasn't fallen yet."
-msgstr ""
+msgstr "Нет, Дворфенфолл ещё не пал."
 
 #: theFissure.xml
 msgid ""
@@ -136,11 +141,11 @@ msgstr ""
 
 #: theFissure.xml
 msgid "But I fear they must have found a way around the citywalls."
-msgstr ""
+msgstr "Но я боюсь, что они нашли обходной путь мимо городских стен."
 
 #: theFissure.xml
 msgid "We mustn't allow this."
-msgstr ""
+msgstr "Мы не должны позволить им это."
 
 #: theFissure.xml
 msgid ""
@@ -154,7 +159,7 @@ msgstr ""
 
 #: theFissure.xml
 msgid "The city needs every man it can get!"
-msgstr ""
+msgstr "В городе каждый человек на счету!"
 
 #: theFissure.xml
 msgid "I have a feeling what's going to come in a moment..."
@@ -166,7 +171,7 @@ msgstr ""
 
 #: theFissure.xml
 msgid "What?!?"
-msgstr ""
+msgstr "Что?!?"
 
 #: theFissure.xml
 msgid "That's a Branded One?"
@@ -178,11 +183,11 @@ msgstr ""
 
 #: theFissure.xml
 msgid "She is on our side."
-msgstr ""
+msgstr "Она на нашей стороне."
 
 #: theFissure.xml
 msgid "He is on our side."
-msgstr ""
+msgstr "Он на нашей стороне."
 
 #: theFissure.xml
 msgid "Listen, Branded Ones!"
@@ -194,7 +199,7 @@ msgstr ""
 
 #: theFissure.xml
 msgid "They are on our side."
-msgstr ""
+msgstr "Они на нашей стороне."
 
 #: theFissure.xml
 msgid "Find the way the undead came here and render it useless."
@@ -226,23 +231,23 @@ msgstr ""
 
 #: theFissure.xml
 msgid "Mages have to be naturally patient."
-msgstr ""
+msgstr "Маги по природе должны быть терпеливыми."
 
 #: theFissure.xml
 msgid "I'm sure the undead found a hidden cave."
-msgstr ""
+msgstr "Я уверен, зомби нашли скрытую пещеру."
 
 #: theFissure.xml
 msgid "Please take this explosion spell."
-msgstr ""
+msgstr "Пожалуйста, возьми это заклинание взрыва."
 
 #: theFissure.xml
 msgid "It surely will be useful."
-msgstr ""
+msgstr "Оно будет крайне полезным."
 
 #: theFissure.xml
 msgid "I know of a cave system north of here."
-msgstr ""
+msgstr "Я знаю о каскаде пещер к северу отсюда."
 
 #: theFissure.xml
 msgid "They say it's cursed."
@@ -258,7 +263,7 @@ msgstr ""
 
 #: theFissure.xml
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: theFissure.xml
 msgid "probably not."
@@ -266,15 +271,15 @@ msgstr ""
 
 #: theFissure.xml
 msgid "Thanks for your help."
-msgstr ""
+msgstr "Спасибо за помощь."
 
 #: theFissure.xml
 msgid "Good luck!"
-msgstr ""
+msgstr "Удачи!"
 
 #: theFissure.xml
 msgid "I hope we meet again soon."
-msgstr ""
+msgstr "Надеюсь, скоро мы встретимся вновь."
 
 #: theFissure.xml
 msgid "greyCurseCaveFis"
@@ -312,11 +317,11 @@ msgstr ""
 
 #: theFissure.xml
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: theFissure.xml
 msgid "No"
-msgstr ""
+msgstr "Нет"
 
 #: theFissure.xml
 msgid "Let's go then!"
@@ -324,11 +329,11 @@ msgstr ""
 
 #: theFissure.xml
 msgid "Wait, we may learn something useful."
-msgstr ""
+msgstr "Погоди, мы может узнать что-нибудь полезное."
 
 #: theFissure.xml
 msgid "Let them rest from time to time."
-msgstr ""
+msgstr "Позволь им отдыхать время от времени."
 
 #: theFissure.xml
 msgid "They should be able to fight, too."
@@ -336,11 +341,11 @@ msgstr ""
 
 #: theFissure.xml
 msgid "Isn't the tunnel supposed to be ready for the attack?"
-msgstr ""
+msgstr "Разве этот туннель не предполагается для атаки?"
 
 #: theFissure.xml
 msgid "No, the city is unimportant in the big picture."
-msgstr ""
+msgstr "Нет, город не так важен в конечном счете."
 
 #: theFissure.xml
 msgid "Let those aisen dogs burn their backup troops there."
@@ -357,19 +362,19 @@ msgstr ""
 
 #: theFissure.xml
 msgid "I don't understand."
-msgstr ""
+msgstr "Я не понимаю."
 
 #: theFissure.xml
 msgid "And that is for your own good."
-msgstr ""
+msgstr "Это лишь для твоего блага."
 
 #: theFissure.xml
 msgid "Now back to work."
-msgstr ""
+msgstr "А теперь возвращайся к работе."
 
 #: theFissure.xml
 msgid "Your wish is my action."
-msgstr ""
+msgstr "Ваше желание для меня закон."
 
 #: theFissure.xml
 msgid "That has to be the lich attacking Dwarfenwall."
@@ -427,15 +432,15 @@ msgstr ""
 
 #: theFissure.xml
 msgid "You fool! Get yourself out of this mountain!"
-msgstr ""
+msgstr "Ты болван! Выбирайся из этой горы!"
 
 #: theFissure.xml
 msgid "You are needed in Dwarfenwall!"
-msgstr ""
+msgstr "Ты необходим в Дворфенфолле!"
 
 #: theFissure.xml
 msgid "You fools! Get yourselves out of this mountain!"
-msgstr ""
+msgstr "Вы болваны! Выбирайтесь из этой горы!"
 
 #: theFissure.xml
 msgid ""

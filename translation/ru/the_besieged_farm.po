@@ -2,14 +2,14 @@
 # Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# FULL NAME <EMAIL@ADDRESS>, 2010.
+# FULL NAME <EMAIL@ADDRESS>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-09-11 23:13+0400\n"
+"PO-Revision-Date: 2011-06-26 23:34+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -48,11 +48,11 @@ msgstr ""
 
 #: besieged_farm.xml
 msgid "Sergeant Lutterer"
-msgstr ""
+msgstr "Сержант Люттерер"
 
 #: besieged_farm.xml
 msgid "The farm"
-msgstr ""
+msgstr "Ферма"
 
 #: besieged_farm.xml
 msgid "Ah! Are you feeling like earning the money after all?"
@@ -92,11 +92,11 @@ msgstr ""
 
 #: besieged_farm.xml
 msgid "When you're done, come back to me."
-msgstr ""
+msgstr "Когда управишься, приходи ко мне."
 
 #: besieged_farm.xml
 msgid "I'm on my way."
-msgstr ""
+msgstr "Я уже в пути."
 
 #: besieged_farm.xml
 msgid "aisNorthMeadow"
@@ -113,23 +113,23 @@ msgstr ""
 
 #: besieged_farm.xml
 msgid "Thank you very much."
-msgstr ""
+msgstr "Большое спасибо тебе."
 
 #: besieged_farm.xml
 msgid "Sadly I cannot ask you in."
-msgstr ""
+msgstr "К сожалению, не могу пригласить тебя внутрь."
 
 #: besieged_farm.xml
 msgid "Our barricade is quite heavy."
-msgstr ""
+msgstr "Наша баррикада очень тяжелая."
 
 #: besieged_farm.xml
 msgid "But I will give word to my husband that we are alive and well."
-msgstr ""
+msgstr "Но я передам своему мужу, что мы живы и с нами все в порядке."
 
 #: besieged_farm.xml
 msgid "How so?"
-msgstr ""
+msgstr "Каким образом?"
 
 #: besieged_farm.xml
 msgid ""
@@ -157,11 +157,11 @@ msgstr ""
 
 #: besieged_farm.xml
 msgid "It's done."
-msgstr ""
+msgstr "Задание выполнено."
 
 #: besieged_farm.xml
 msgid "I've already heard of it."
-msgstr ""
+msgstr "Я уже слышал об этом."
 
 #: besieged_farm.xml
 msgid ""
@@ -175,4 +175,4 @@ msgstr ""
 
 #: besieged_farm.xml
 msgid "Here's the money."
-msgstr ""
+msgstr "Вот твои деньги."

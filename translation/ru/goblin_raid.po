@@ -2,14 +2,14 @@
 # Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# FULL NAME <EMAIL@ADDRESS>, 2010.
+# FULL NAME <EMAIL@ADDRESS>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-09-11 23:13+0400\n"
+"PO-Revision-Date: 2011-06-28 22:53+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -18,21 +18,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: goblin_raid.xml
-#, fuzzy
 msgid "goblin_raid"
-msgstr "слепой"
+msgstr "набег_гоблинов"
 
 #: goblin_raid.xml
 msgid ""
 "Well, I got a little money for killing some goblins I would have wasted "
 "anyway. Not a bad day."
 msgstr ""
+"Хм, я получил немного денег за убийство гоблинов, которых в любом случае "
+"убил бы. Неплохой сегодня день."
 
 #: goblin_raid.xml
 msgid ""
 "It seems the sergeant from Joringsbridge is willing to pay, but he wants me "
 "to help those peasants first. There's no trust in this world anymore."
 msgstr ""
+"Кажется, сержант из Joringsbridge готов заплатить, но сначала он хочет, "
+"чтобы я потом тем крестьянам. Нет больше доверия в этом мире."
 
 #: goblin_raid.xml
 msgid ""
@@ -48,19 +51,21 @@ msgstr ""
 
 #: goblin_raid.xml
 msgid "Sergeant Lutterer"
-msgstr ""
+msgstr "Сержант Люттерер"
 
 #: goblin_raid.xml
 msgid "Crude battle plans"
-msgstr ""
+msgstr "Жестокие планы битвы"
 
 #: goblin_raid.xml
 msgid "Hey, sergeant, I found these in the woods with some goblins."
-msgstr ""
+msgstr "Эй, сержант, я нашел это в лесах у некоторых гоблинов."
 
 #: goblin_raid.xml
 msgid "This looks like it could be Joringsbridge. Are you sure it's reliable?"
 msgstr ""
+"Кажется, это действительно мог бы быть Joringsbridge. Ты уверен, что на эти "
+"данные стоит полагаться?"
 
 #: goblin_raid.xml
 msgid "Some kind of head honcho shaman had them, so I figure they mean it."
@@ -84,11 +89,11 @@ msgstr ""
 
 #: goblin_raid.xml
 msgid "It's always a pleasure when a good deed goes rewarded."
-msgstr ""
+msgstr "Всегда приятно, когда награждают за хорошее дело."
 
 #: goblin_raid.xml
 msgid "Sorry, but I don't know you."
-msgstr ""
+msgstr "Извини, но я не знаю тебя."
 
 #: goblin_raid.xml
 msgid "Maybe I will show some gratitude after you help Michel's family."
@@ -100,27 +105,27 @@ msgstr ""
 
 #: goblin_raid.xml
 msgid "Do you want to help the peasant?"
-msgstr ""
+msgstr "Ты хочешь помочь крестьянам?"
 
 #: goblin_raid.xml
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: goblin_raid.xml
 msgid "No"
-msgstr ""
+msgstr "Нет"
 
 #: goblin_raid.xml
 msgid "Then I better get back to saving helpless peasants, no?"
-msgstr ""
+msgstr "Тогда мне лучше пойти спасать этих беспомощных крестьян, не так ли?"
 
 #: goblin_raid.xml
 msgid "Fine, I'll wipe out those goblins for you."
-msgstr ""
+msgstr "Отлично, я сотру этих гоблинов с лица земли для тебя."
 
 #: goblin_raid.xml
 msgid "You do realise there's plenty more where they came from?"
-msgstr ""
+msgstr "Ты понимаешь, что их гораздо больше там, откуда они пришли?"
 
 #: goblin_raid.xml
 msgid "Just go already."
@@ -133,4 +138,3 @@ msgstr ""
 #: goblin_raid.xml
 msgid "And I could care less what happens to some peasant family."
 msgstr ""
-

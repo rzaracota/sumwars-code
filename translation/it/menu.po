@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-19 11:43+0200\n"
+"POT-Creation-Date: 2011-07-03 14:01+0200\n"
 "PO-Revision-Date: 2010-07-25 09:49\n"
 "Last-Translator: Francesco Miglietta (fra9000) <miglietta.francesco@gmail."
 "com>\n"
@@ -108,101 +108,102 @@ msgstr "Potere"
 msgid "Chance for critical hit"
 msgstr "Probabilita' colpo critico"
 
-#: ../src/core/document.cpp:1200 ../src/core/item.cpp:685
-#: ../src/core/item.cpp:687 ../src/core/item.cpp:915 ../src/core/item.cpp:921
+#: ../src/core/document.cpp:1205 ../src/core/item.cpp:953
+#: ../src/core/item.cpp:955 ../src/core/item.cpp:1183
+#: ../src/core/item.cpp:1189
 msgid "Required level"
 msgstr "Livello richiesto"
 
-#: ../src/core/document.cpp:1210
+#: ../src/core/document.cpp:1215
 msgid "Timer"
 msgstr "Timer"
 
-#: ../src/core/document.cpp:1211
+#: ../src/core/document.cpp:1216
 msgid "Cast delay"
 msgstr "Tempo di lancio"
 
-#: ../src/core/item.cpp:677 ../src/core/item.cpp:901
+#: ../src/core/item.cpp:945 ../src/core/item.cpp:1169
 msgid "Value"
 msgstr "Valore"
 
-#: ../src/core/item.cpp:680 ../src/core/item.cpp:907
+#: ../src/core/item.cpp:948 ../src/core/item.cpp:1175
 msgid "Selling Value"
 msgstr "Prezzo"
 
-#: ../src/core/item.cpp:696 ../src/core/item.cpp:936
+#: ../src/core/item.cpp:964 ../src/core/item.cpp:1204
 msgid "Required class"
 msgstr "Classe richiesta"
 
-#: ../src/core/item.cpp:754 ../src/core/item.cpp:762 ../src/core/item.cpp:996
-#: ../src/core/item.cpp:1006
+#: ../src/core/item.cpp:1022 ../src/core/item.cpp:1030
+#: ../src/core/item.cpp:1264 ../src/core/item.cpp:1274
 msgid "Heals "
 msgstr "Guarisce "
 
-#: ../src/core/item.cpp:754 ../src/core/item.cpp:996
+#: ../src/core/item.cpp:1022 ../src/core/item.cpp:1264
 msgid " hitpoints"
 msgstr " Punti Vita"
 
-#: ../src/core/item.cpp:765 ../src/core/item.cpp:1012
+#: ../src/core/item.cpp:1033 ../src/core/item.cpp:1280
 msgid "immune for "
 msgstr "immune a "
 
-#: ../src/core/item.cpp:777 ../src/core/item.cpp:1026
+#: ../src/core/item.cpp:1045 ../src/core/item.cpp:1294
 msgid "Two-handed weapon"
 msgstr "Arma a due mani"
 
-#: ../src/core/item.cpp:782 ../src/core/item.cpp:1033
+#: ../src/core/item.cpp:1050 ../src/core/item.cpp:1301
 #: ../src/gui/charinfo.cpp:911
 msgid "Range"
 msgstr "Distanza"
 
-#: ../src/core/item.cpp:793 ../src/core/item.cpp:1046
+#: ../src/core/item.cpp:1061 ../src/core/item.cpp:1314
 msgid "Damage"
 msgstr "Danno"
 
-#: ../src/core/item.cpp:805 ../src/core/item.cpp:1074
+#: ../src/core/item.cpp:1073 ../src/core/item.cpp:1342
 #: ../src/gui/charinfo.cpp:921
 msgid "Armor"
 msgstr "Armatura"
 
-#: ../src/core/item.cpp:810 ../src/core/item.cpp:1086
+#: ../src/core/item.cpp:1078 ../src/core/item.cpp:1354
 #: ../src/gui/charinfo.cpp:600
 msgid "Block"
 msgstr "Difesa"
 
-#: ../src/core/item.cpp:815 ../src/core/item.cpp:1098
+#: ../src/core/item.cpp:1083 ../src/core/item.cpp:1366
 msgid "max hitpoints"
 msgstr "Punti Vita massimi"
 
-#: ../src/core/item.cpp:820 ../src/core/item.cpp:1110
+#: ../src/core/item.cpp:1088 ../src/core/item.cpp:1378
 #: ../src/gui/charinfo.cpp:871
 msgid "Strength"
 msgstr "Forza"
 
-#: ../src/core/item.cpp:825 ../src/core/item.cpp:1122
+#: ../src/core/item.cpp:1093 ../src/core/item.cpp:1390
 #: ../src/gui/charinfo.cpp:875
 msgid "Dexterity"
 msgstr "Destrezza"
 
-#: ../src/core/item.cpp:830 ../src/core/item.cpp:1134
+#: ../src/core/item.cpp:1098 ../src/core/item.cpp:1402
 msgid "Magic Power"
 msgstr "Potere Magico"
 
-#: ../src/core/item.cpp:835 ../src/core/item.cpp:1146
+#: ../src/core/item.cpp:1103 ../src/core/item.cpp:1414
 #: ../src/gui/charinfo.cpp:879
 msgid "Willpower"
 msgstr "Volonta'"
 
-#: ../src/core/item.cpp:850 ../src/core/item.cpp:1177
+#: ../src/core/item.cpp:1118 ../src/core/item.cpp:1445
 msgid " max. "
 msgstr " max. "
 
 #: ../src/gui/charcreate.cpp:120 ../src/gui/charinfo.cpp:864
-#: ../src/gui/partyinfo.cpp:450 ../src/gui/savegamelist.cpp:179
+#: ../src/gui/partyinfo.cpp:450 ../src/gui/savegamelist.cpp:186
 msgid "Name"
 msgstr "Nome"
 
 #: ../src/gui/charcreate.cpp:123 ../src/gui/charinfo.cpp:867
-#: ../src/gui/savegamelist.cpp:180
+#: ../src/gui/savegamelist.cpp:187
 msgid "Class"
 msgstr "Classe"
 
@@ -210,7 +211,7 @@ msgstr "Classe"
 msgid "Cancel"
 msgstr "Cancella"
 
-#: ../src/gui/charcreate.cpp:129
+#: ../src/gui/charcreate.cpp:129 ../src/gui/savegamelist.cpp:180
 msgid "Create"
 msgstr "Crea"
 
@@ -331,7 +332,7 @@ msgstr ""
 msgid "Chat"
 msgstr "Chat"
 
-#: ../src/gui/controlpanel.cpp:387 ../src/gui/mainmenu.cpp:98
+#: ../src/gui/controlpanel.cpp:387 ../src/gui/mainmenu.cpp:138
 msgid "Options"
 msgstr "Opzioni"
 
@@ -339,7 +340,7 @@ msgstr "Opzioni"
 msgid "Save & Exit"
 msgstr "Salva ed Esci"
 
-#: ../src/gui/controlpanel.cpp:393 ../src/gui/optionswindow.cpp:307
+#: ../src/gui/controlpanel.cpp:393 ../src/gui/optionswindow.cpp:318
 msgid "Inventory"
 msgstr "Inventario"
 
@@ -347,7 +348,7 @@ msgstr "Inventario"
 msgid "Character"
 msgstr "Personaggio"
 
-#: ../src/gui/controlpanel.cpp:399 ../src/gui/optionswindow.cpp:313
+#: ../src/gui/controlpanel.cpp:399 ../src/gui/optionswindow.cpp:324
 msgid "Skilltree"
 msgstr "Abilita'"
 
@@ -355,7 +356,7 @@ msgstr "Abilita'"
 msgid "Party"
 msgstr "Party"
 
-#: ../src/gui/controlpanel.cpp:405 ../src/gui/optionswindow.cpp:322
+#: ../src/gui/controlpanel.cpp:405 ../src/gui/optionswindow.cpp:333
 msgid "Quests"
 msgstr "Quests"
 
@@ -363,30 +364,29 @@ msgstr "Quests"
 msgid "Drop:"
 msgstr "Lascia:"
 
-#: ../src/gui/mainmenu.cpp:86
+#: ../src/gui/mainmenu.cpp:126
 msgid "Single player"
 msgstr "Giocatore Singolo"
 
-#: ../src/gui/mainmenu.cpp:89
+#: ../src/gui/mainmenu.cpp:129
 msgid "Join game"
 msgstr "Partecipa ad una partita"
 
-#: ../src/gui/mainmenu.cpp:92
+#: ../src/gui/mainmenu.cpp:132
 msgid "Host game"
 msgstr "Ospita partita"
 
-#: ../src/gui/mainmenu.cpp:95
+#: ../src/gui/mainmenu.cpp:135
 msgid "Credits"
 msgstr "Crediti"
 
-#: ../src/gui/mainmenu.cpp:101
+#: ../src/gui/mainmenu.cpp:141
 msgid "Quit"
 msgstr "Chiudi"
 
 #: ../src/gui/messageboxes.cpp:52 ../src/gui/messageboxes.cpp:198
 #: ../src/gui/networkwindows.cpp:95 ../src/gui/networkwindows.cpp:223
-#: ../src/gui/optionswindow.cpp:352 ../src/gui/savegamelist.cpp:170
-#: ../src/gui/tradewindow.cpp:265
+#: ../src/gui/optionswindow.cpp:366 ../src/gui/tradewindow.cpp:265
 msgid "Ok"
 msgstr "Ok"
 
@@ -410,69 +410,73 @@ msgstr "Porta"
 msgid "Host"
 msgstr "Ospita"
 
-#: ../src/gui/optionswindow.cpp:296
+#: ../src/gui/optionswindow.cpp:307
 msgid "Shortkeys"
 msgstr "Tasti rapidi"
 
-#: ../src/gui/optionswindow.cpp:298
+#: ../src/gui/optionswindow.cpp:309
 msgid "Gameplay"
 msgstr "Gameplay"
 
-#: ../src/gui/optionswindow.cpp:300
+#: ../src/gui/optionswindow.cpp:311
 msgid "Audio"
 msgstr "Audio"
 
-#: ../src/gui/optionswindow.cpp:302
+#: ../src/gui/optionswindow.cpp:313
 msgid "Graphic"
 msgstr "Grafica"
 
-#: ../src/gui/optionswindow.cpp:304 ../src/gui/optionswindow.cpp:349
+#: ../src/gui/optionswindow.cpp:315 ../src/gui/optionswindow.cpp:360
 msgid "Language"
 msgstr "Lingua"
 
-#: ../src/gui/optionswindow.cpp:310
+#: ../src/gui/optionswindow.cpp:321
 msgid "Character screen"
 msgstr "Personaggio"
 
-#: ../src/gui/optionswindow.cpp:316
+#: ../src/gui/optionswindow.cpp:327
 msgid "Party screen"
 msgstr "Party"
 
-#: ../src/gui/optionswindow.cpp:319
+#: ../src/gui/optionswindow.cpp:330
 msgid "Chatbox"
 msgstr "Chat"
 
-#: ../src/gui/optionswindow.cpp:325
+#: ../src/gui/optionswindow.cpp:336
 msgid "Minimap"
 msgstr "Mini Mappa"
 
-#: ../src/gui/optionswindow.cpp:328
+#: ../src/gui/optionswindow.cpp:339
 msgid "Swap equipement"
 msgstr "Equipaggiamenti"
 
-#: ../src/gui/optionswindow.cpp:331
+#: ../src/gui/optionswindow.cpp:342
 msgid "Item Labels"
 msgstr "Tooltips oggetti"
 
-#: ../src/gui/optionswindow.cpp:334
+#: ../src/gui/optionswindow.cpp:345
 msgid "Difficulty"
 msgstr "Difficolta'"
 
-#: ../src/gui/optionswindow.cpp:337
+#: ../src/gui/optionswindow.cpp:348
 msgid "Text Speed"
 msgstr "Velocita' dei dialoghi"
 
-#: ../src/gui/optionswindow.cpp:340
+#: ../src/gui/optionswindow.cpp:351
 msgid "Sound"
 msgstr "Suono"
 
-#: ../src/gui/optionswindow.cpp:343
+#: ../src/gui/optionswindow.cpp:354
 msgid "Music"
 msgstr "Musica"
 
-#: ../src/gui/optionswindow.cpp:346
+#: ../src/gui/optionswindow.cpp:357
 msgid "Enemy Highlight Color"
 msgstr "Colore di evidenziazione (nemici)"
+
+#: ../src/gui/optionswindow.cpp:363
+msgid "Grab mouse in windowed mode (needs restart)"
+msgstr ""
 
 #: ../src/gui/questinfo.cpp:160
 msgid "open"
@@ -486,19 +490,16 @@ msgstr "concluse"
 msgid "failed"
 msgstr "fallite"
 
-#: ../src/gui/savegamelist.cpp:167
-msgid "Savegame"
-msgstr "Salvataggio partita"
+#: ../src/gui/savegamelist.cpp:174
+#, fuzzy
+msgid "Characters"
+msgstr "Personaggio"
 
-#: ../src/gui/savegamelist.cpp:173
-msgid "Create Character"
-msgstr "Crea Personaggio"
+#: ../src/gui/savegamelist.cpp:183
+msgid "Delete"
+msgstr ""
 
-#: ../src/gui/savegamelist.cpp:176
-msgid "Delete Character"
-msgstr "Elimina Personaggio"
-
-#: ../src/gui/savegamelist.cpp:181
+#: ../src/gui/savegamelist.cpp:188
 msgid "Level"
 msgstr "Livello"
 
@@ -514,6 +515,15 @@ msgstr ""
 #: ../src/gui/worldmap.cpp:141
 msgid "Town Portal"
 msgstr "Portale Magico"
+
+#~ msgid "Savegame"
+#~ msgstr "Salvataggio partita"
+
+#~ msgid "Create Character"
+#~ msgstr "Crea Personaggio"
+
+#~ msgid "Delete Character"
+#~ msgstr "Elimina Personaggio"
 
 #~ msgid "Gold"
 #~ msgstr "Oro"

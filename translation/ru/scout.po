@@ -2,14 +2,14 @@
 # Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# FULL NAME <EMAIL@ADDRESS>, 2010.
+# FULL NAME <EMAIL@ADDRESS>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-09-11 23:13+0400\n"
+"PO-Revision-Date: 2011-06-27 23:15+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: scout.xml
 msgid "The wounded scout"
-msgstr ""
+msgstr "Раненый скаут"
 
 #: scout.xml
 msgid ""
@@ -42,15 +42,15 @@ msgstr ""
 
 #: scout.xml
 msgid "Wounded Scout"
-msgstr ""
+msgstr "Раненый скаут"
 
 #: scout.xml
 msgid "Are you alive?"
-msgstr ""
+msgstr "Ты живой?"
 
 #: scout.xml
 msgid "Hey, are you alright?"
-msgstr ""
+msgstr "Эй, с тобой все в порядке?"
 
 #: scout.xml
 msgid "Does it look... 'alright' to you?"
@@ -62,12 +62,12 @@ msgstr ""
 
 #: scout.xml
 msgid "You can still talk, right?"
-msgstr ""
+msgstr "Ты все ещё можешь говорить, верно?"
 
 #: scout.xml
 msgid ""
 "Yeah, right... now, when you're done laughing... maybe you could help me?"
-msgstr ""
+msgstr "Да, верно... теперь, когда ты уже отсмеялся... может, ты поможешь мне?"
 
 #: scout.xml
 msgid "I guess I could patch you up, but I can't carry you out of here."
@@ -77,6 +77,8 @@ msgstr ""
 msgid ""
 "Where I'm headed you will most certainly die a quick and meaningless death."
 msgstr ""
+"Там, куда я направляюсь, ты с большой долей вероятности умрешь быстро и "
+"бессмысленно."
 
 #: scout.xml
 msgid "I can... watch my own back..."
@@ -84,7 +86,7 @@ msgstr ""
 
 #: scout.xml
 msgid "Most of the time... at least."
-msgstr ""
+msgstr "Большую часть времени... как минимум."
 
 #: scout.xml
 msgid "But spying on the undead... evading... those blasted goblins..."
@@ -92,7 +94,7 @@ msgstr ""
 
 #: scout.xml
 msgid "I got a little... careless."
-msgstr ""
+msgstr "Я стал немного... невнимательным."
 
 #: scout.xml
 msgid "West of here... there's a cave... pretty deep inside..."
@@ -137,15 +139,15 @@ msgstr ""
 
 #: scout.xml
 msgid "You already... found it?"
-msgstr ""
+msgstr "Ты уже... нашел её?"
 
 #: scout.xml
 msgid "Thanks..."
-msgstr ""
+msgstr "Спасибо..."
 
 #: scout.xml
 msgid "Still alive?"
-msgstr ""
+msgstr "Всё ещё живой?"
 
 #: scout.xml
 msgid "Do you... have my gear?"
@@ -153,7 +155,7 @@ msgstr ""
 
 #: scout.xml
 msgid "Not yet, no."
-msgstr ""
+msgstr "Ещё нет."
 
 #: scout.xml
 msgid ""
@@ -172,7 +174,7 @@ msgstr ""
 
 #: scout.xml
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: scout.xml
 msgid "Here it is."
@@ -202,7 +204,7 @@ msgstr ""
 
 #: scout.xml
 msgid "That's... it"
-msgstr ""
+msgstr "Это... оно"
 
 #: scout.xml
 msgid "Finally!"
@@ -239,8 +241,9 @@ msgid ""
 "I will rest a little more and then be on my way too, but in the other "
 "direction."
 msgstr ""
+"Я отдохну ещё немного, а потом пойду по своим делам, только в другом "
+"направлении."
 
 #: scout.xml
 msgid "greyWolfcave"
 msgstr ""
-

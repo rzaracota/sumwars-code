@@ -2,14 +2,14 @@
 # Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# FULL NAME <EMAIL@ADDRESS>, 2010.
+# FULL NAME <EMAIL@ADDRESS>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-09-11 23:13+0400\n"
+"PO-Revision-Date: 2011-06-27 23:24+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -43,11 +43,11 @@ msgstr ""
 
 #: rob_the_robber.xml
 msgid "Sergeant Lutterer"
-msgstr ""
+msgstr "Сержант Люттерер"
 
 #: rob_the_robber.xml
 msgid "Wanted poster"
-msgstr ""
+msgstr "Объявление о розыске"
 
 #: rob_the_robber.xml
 msgid ""
@@ -60,7 +60,7 @@ msgstr ""
 
 #: rob_the_robber.xml
 msgid "Excuse me, sergeant, but I noticed this wanted poster."
-msgstr ""
+msgstr "Простите меня, сержант, но я заметил это объявление о розыске."
 
 #: rob_the_robber.xml
 msgid ""
@@ -69,17 +69,19 @@ msgstr ""
 
 #: rob_the_robber.xml
 msgid "Oh, him."
-msgstr ""
+msgstr "А, этот."
 
 #: rob_the_robber.xml
 msgid "The bounty hunters keep their fingers off him."
-msgstr ""
+msgstr "Охотники за головами сторонятся его."
 
 #: rob_the_robber.xml
 msgid ""
 "Every time someone wants to have killed him, he winds up dead a short time "
 "later himself."
 msgstr ""
+"Каждый раз, когда кто-то хочет убить разбойника, его самого находят убитым "
+"через некоторое время."
 
 #: rob_the_robber.xml
 msgid "And Rob is plundering and murdering on."
@@ -91,23 +93,23 @@ msgstr ""
 
 #: rob_the_robber.xml
 msgid "Are you interested?"
-msgstr ""
+msgstr "Ты заинтересован?"
 
 #: rob_the_robber.xml
 msgid "Accept the quest?"
-msgstr ""
+msgstr "Принять задание?"
 
 #: rob_the_robber.xml
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: rob_the_robber.xml
 msgid "No"
-msgstr ""
+msgstr "Нет"
 
 #: rob_the_robber.xml
 msgid "Indeed."
-msgstr ""
+msgstr "Верно."
 
 #: rob_the_robber.xml
 msgid "10000 gold pieces are quite interesting for the traveling fund."
@@ -115,11 +117,11 @@ msgstr ""
 
 #: rob_the_robber.xml
 msgid "And I'm pretty lucky myself."
-msgstr ""
+msgstr "Кроме того, я тоже довольно удачлив."
 
 #: rob_the_robber.xml
 msgid "Then take his necklace."
-msgstr ""
+msgstr "Тогда сними с него его ожерелье."
 
 #: rob_the_robber.xml
 msgid "Word is, he treasures it quite a lot."
@@ -130,6 +132,8 @@ msgid ""
 "If you can take it to sergeant Wober in Dwarfenwall he will believe you that "
 "Rob is dead."
 msgstr ""
+"Если ты принесешь ожерелье сержанту Воберу в Дворфенфолл, то он поверит, что "
+"Роб мертв."
 
 #: rob_the_robber.xml
 msgid ""
@@ -155,7 +159,7 @@ msgstr ""
 
 #: rob_the_robber.xml
 msgid "You really got him?"
-msgstr ""
+msgstr "Ты действительно убил его?"
 
 #: rob_the_robber.xml
 msgid ""
@@ -165,7 +169,7 @@ msgstr ""
 
 #: rob_the_robber.xml
 msgid "What about my reward?"
-msgstr ""
+msgstr "Что насчет моей награды?"
 
 #: rob_the_robber.xml
 msgid "Sergeant Wober in Dwarfenwall has it."
@@ -173,11 +177,11 @@ msgstr ""
 
 #: rob_the_robber.xml
 msgid "Sergeant Wober"
-msgstr ""
+msgstr "Сержант Вобер"
 
 #: rob_the_robber.xml
 msgid "Bring me his necklace and I give you the 10000 gold pieces."
-msgstr ""
+msgstr "Принеси мне его ожерелье и я дам тебе 10000 золота."
 
 #: rob_the_robber.xml
 msgid "Not a second earlier!"
@@ -185,7 +189,7 @@ msgstr ""
 
 #: rob_the_robber.xml
 msgid "If you can bring it to me I will believe you that Rob is dead."
-msgstr ""
+msgstr "Если ты принесешь мне ожерелье, то я поверю, что Роб мертв."
 
 #: rob_the_robber.xml
 msgid ""
@@ -207,7 +211,7 @@ msgstr ""
 
 #: rob_the_robber.xml
 msgid "Well, I wish you luck."
-msgstr ""
+msgstr "Хм, желаю удачи."
 
 #: rob_the_robber.xml
 msgid "His vengeful spirit will supposedly hunt all those who hurt him."
@@ -219,7 +223,7 @@ msgstr ""
 
 #: rob_the_robber.xml
 msgid "Here are the 10000 gold pieces."
-msgstr ""
+msgstr "Вот 10000 золота."
 
 #: rob_the_robber.xml
 msgid "aisDarkFairyforest"
@@ -240,7 +244,7 @@ msgstr ""
 
 #: rob_the_robber.xml
 msgid "You will die! I will destroy you!!"
-msgstr ""
+msgstr "Ты умрешь! Я уничтожу тебя!!"
 
 #: rob_the_robber.xml
 msgid ""

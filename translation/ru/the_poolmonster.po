@@ -2,14 +2,14 @@
 # Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# FULL NAME <EMAIL@ADDRESS>, 2010.
+# FULL NAME <EMAIL@ADDRESS>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-09-11 23:13+0400\n"
+"PO-Revision-Date: 2011-06-26 18:00+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -22,17 +22,16 @@ msgid "The Poolmonster"
 msgstr ""
 
 #: scene7.xml
-#, fuzzy
 msgid "Quest finished"
-msgstr "завершенные"
+msgstr "Задание завершено"
 
 #: scene7.xml
 msgid "Quest description"
-msgstr ""
+msgstr "Описание задание"
 
 #: scene7.xml
 msgid "Soren Windclaw"
-msgstr ""
+msgstr "Сорен Виндклоу"
 
 #: scene7.xml
 msgid "Wow, thats beautiful."
@@ -68,7 +67,7 @@ msgstr ""
 
 #: scene7.xml
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: scene7.xml
 msgid "Do you really think that it"
@@ -88,23 +87,23 @@ msgstr ""
 
 #: scene7.xml
 msgid "We have to go now."
-msgstr ""
+msgstr "Нам пора идти."
 
 #: scene7.xml
 msgid "Just a moment please."
-msgstr ""
+msgstr "Один момент, пожалуйста."
 
 #: scene7.xml
 msgid "Whats that on the water over there?"
-msgstr ""
+msgstr "Что находится в воде вон там?"
 
 #: scene7.xml
 msgid "Looks like a..."
-msgstr ""
+msgstr "Выглядит как..."
 
 #: scene7.xml
 msgid "*Roar!*"
-msgstr ""
+msgstr "*Аррр!*"
 
 #: scene7.xml
 msgid "greyCurseLake"

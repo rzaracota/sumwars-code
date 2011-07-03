@@ -2,14 +2,14 @@
 # Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# FULL NAME <EMAIL@ADDRESS>, 2010.
+# FULL NAME <EMAIL@ADDRESS>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-09-11 23:13+0400\n"
+"PO-Revision-Date: 2011-06-28 20:09+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -39,6 +39,8 @@ msgid ""
 "A long search and quite a lot of dead goblins later Willard has finally "
 "shown himself. I should give him the stone and be done with it."
 msgstr ""
+"После долгих поисков и довольно большого количества убитых гоблинов Виллард "
+"наконец-то нашелся. Мне надо отдать ему камень и дело сделано."
 
 #: rescue_willard.xml
 msgid "medMercCamp"
@@ -53,9 +55,8 @@ msgid "Fenor Marken"
 msgstr ""
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "Willard"
-msgstr "Сила воли"
+msgstr "Виллард"
 
 #: rescue_willard.xml
 msgid "I hope you are making a good time searching for Willard. ##solo"
@@ -67,19 +68,19 @@ msgstr ""
 
 #: rescue_willard.xml
 msgid "Have you changed your mind?"
-msgstr ""
+msgstr "Ты изменил свое мнение?"
 
 #: rescue_willard.xml
 msgid "Search for Willard?"
-msgstr ""
+msgstr "Искать Вилларда?"
 
 #: rescue_willard.xml
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: rescue_willard.xml
 msgid "No"
-msgstr ""
+msgstr "Нет"
 
 #: rescue_willard.xml
 msgid "If I'm not mistaken you are a Branded One."
@@ -91,7 +92,7 @@ msgstr ""
 
 #: rescue_willard.xml
 msgid "What the..."
-msgstr ""
+msgstr "Что за..."
 
 #: rescue_willard.xml
 msgid "Do I have a sign somewere saying: Caution, dangerous monster??"
@@ -342,4 +343,3 @@ msgstr ""
 #: rescue_willard.xml
 msgid "So here is this Willard."
 msgstr ""
-

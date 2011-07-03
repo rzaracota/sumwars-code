@@ -2,14 +2,14 @@
 # Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# FULL NAME <EMAIL@ADDRESS>, 2010.
+# FULL NAME <EMAIL@ADDRESS>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-19 11:43+0200\n"
-"PO-Revision-Date: 2010-09-11 23:13+0400\n"
+"POT-Creation-Date: 2011-07-01 21:55+0400\n"
+"PO-Revision-Date: 2011-06-20 21:03+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -105,101 +105,102 @@ msgstr "Сила"
 msgid "Chance for critical hit"
 msgstr "Шанс критического удара"
 
-#: ../src/core/document.cpp:1200 ../src/core/item.cpp:685
-#: ../src/core/item.cpp:687 ../src/core/item.cpp:915 ../src/core/item.cpp:921
+#: ../src/core/document.cpp:1205 ../src/core/item.cpp:953
+#: ../src/core/item.cpp:955 ../src/core/item.cpp:1183
+#: ../src/core/item.cpp:1189
 msgid "Required level"
 msgstr "Требуемый уровень"
 
-#: ../src/core/document.cpp:1210
+#: ../src/core/document.cpp:1215
 msgid "Timer"
 msgstr "Таймер"
 
-#: ../src/core/document.cpp:1211
+#: ../src/core/document.cpp:1216
 msgid "Cast delay"
 msgstr "Задержка каста"
 
-#: ../src/core/item.cpp:677 ../src/core/item.cpp:901
+#: ../src/core/item.cpp:945 ../src/core/item.cpp:1169
 msgid "Value"
 msgstr "Стоимость"
 
-#: ../src/core/item.cpp:680 ../src/core/item.cpp:907
+#: ../src/core/item.cpp:948 ../src/core/item.cpp:1175
 msgid "Selling Value"
 msgstr "Цена на продажу"
 
-#: ../src/core/item.cpp:696 ../src/core/item.cpp:936
+#: ../src/core/item.cpp:964 ../src/core/item.cpp:1204
 msgid "Required class"
 msgstr "Требуемый класс"
 
-#: ../src/core/item.cpp:754 ../src/core/item.cpp:762 ../src/core/item.cpp:996
-#: ../src/core/item.cpp:1006
+#: ../src/core/item.cpp:1022 ../src/core/item.cpp:1030
+#: ../src/core/item.cpp:1264 ../src/core/item.cpp:1274
 msgid "Heals "
-msgstr "Лечит"
+msgstr "Восстанавливает "
 
-#: ../src/core/item.cpp:754 ../src/core/item.cpp:996
+#: ../src/core/item.cpp:1022 ../src/core/item.cpp:1264
 msgid " hitpoints"
-msgstr "здоровья"
+msgstr " здоровья"
 
-#: ../src/core/item.cpp:765 ../src/core/item.cpp:1012
+#: ../src/core/item.cpp:1033 ../src/core/item.cpp:1280
 msgid "immune for "
 msgstr "устойчивость к"
 
-#: ../src/core/item.cpp:777 ../src/core/item.cpp:1026
+#: ../src/core/item.cpp:1045 ../src/core/item.cpp:1294
 msgid "Two-handed weapon"
 msgstr "Двуручное оружие"
 
-#: ../src/core/item.cpp:782 ../src/core/item.cpp:1033
+#: ../src/core/item.cpp:1050 ../src/core/item.cpp:1301
 #: ../src/gui/charinfo.cpp:911
 msgid "Range"
 msgstr "Дальность"
 
-#: ../src/core/item.cpp:793 ../src/core/item.cpp:1046
+#: ../src/core/item.cpp:1061 ../src/core/item.cpp:1314
 msgid "Damage"
 msgstr "Урон"
 
-#: ../src/core/item.cpp:805 ../src/core/item.cpp:1074
+#: ../src/core/item.cpp:1073 ../src/core/item.cpp:1342
 #: ../src/gui/charinfo.cpp:921
 msgid "Armor"
 msgstr "Защита"
 
-#: ../src/core/item.cpp:810 ../src/core/item.cpp:1086
+#: ../src/core/item.cpp:1078 ../src/core/item.cpp:1354
 #: ../src/gui/charinfo.cpp:600
 msgid "Block"
 msgstr "Блок"
 
-#: ../src/core/item.cpp:815 ../src/core/item.cpp:1098
+#: ../src/core/item.cpp:1083 ../src/core/item.cpp:1366
 msgid "max hitpoints"
 msgstr "максимальное здоровье"
 
-#: ../src/core/item.cpp:820 ../src/core/item.cpp:1110
+#: ../src/core/item.cpp:1088 ../src/core/item.cpp:1378
 #: ../src/gui/charinfo.cpp:871
 msgid "Strength"
 msgstr "Сила"
 
-#: ../src/core/item.cpp:825 ../src/core/item.cpp:1122
+#: ../src/core/item.cpp:1093 ../src/core/item.cpp:1390
 #: ../src/gui/charinfo.cpp:875
 msgid "Dexterity"
 msgstr "Ловкость"
 
-#: ../src/core/item.cpp:830 ../src/core/item.cpp:1134
+#: ../src/core/item.cpp:1098 ../src/core/item.cpp:1402
 msgid "Magic Power"
 msgstr "Магич. сила"
 
-#: ../src/core/item.cpp:835 ../src/core/item.cpp:1146
+#: ../src/core/item.cpp:1103 ../src/core/item.cpp:1414
 #: ../src/gui/charinfo.cpp:879
 msgid "Willpower"
 msgstr "Сила воли"
 
-#: ../src/core/item.cpp:850 ../src/core/item.cpp:1177
+#: ../src/core/item.cpp:1118 ../src/core/item.cpp:1445
 msgid " max. "
-msgstr "макс."
+msgstr " макс. "
 
 #: ../src/gui/charcreate.cpp:120 ../src/gui/charinfo.cpp:864
-#: ../src/gui/partyinfo.cpp:450 ../src/gui/savegamelist.cpp:179
+#: ../src/gui/partyinfo.cpp:450 ../src/gui/savegamelist.cpp:186
 msgid "Name"
 msgstr "Имя"
 
 #: ../src/gui/charcreate.cpp:123 ../src/gui/charinfo.cpp:867
-#: ../src/gui/savegamelist.cpp:180
+#: ../src/gui/savegamelist.cpp:187
 msgid "Class"
 msgstr "Класс"
 
@@ -207,7 +208,7 @@ msgstr "Класс"
 msgid "Cancel"
 msgstr "Отменить"
 
-#: ../src/gui/charcreate.cpp:129
+#: ../src/gui/charcreate.cpp:129 ../src/gui/savegamelist.cpp:180
 msgid "Create"
 msgstr "Создать"
 
@@ -217,7 +218,7 @@ msgstr "Основной урон"
 
 #: ../src/gui/charinfo.cpp:569
 msgid "Damage dealt by "
-msgstr ""
+msgstr "Урон, нанесенный "
 
 #: ../src/gui/charinfo.cpp:588
 #, fuzzy
@@ -226,7 +227,7 @@ msgstr "Шанс критического удара"
 
 #: ../src/gui/charinfo.cpp:604
 msgid "Evade"
-msgstr ""
+msgstr "Уклонение"
 
 #: ../src/gui/charinfo.cpp:622
 #, fuzzy
@@ -235,7 +236,7 @@ msgstr "Шанс критического удара"
 
 #: ../src/gui/charinfo.cpp:713
 msgid "Damage dealt to  "
-msgstr ""
+msgstr "Урон, нанесенный  "
 
 #: ../src/gui/charinfo.cpp:872
 msgid "Strength increases hitpoints, melee damage and attack power."
@@ -255,7 +256,7 @@ msgstr ""
 
 #: ../src/gui/charinfo.cpp:884
 msgid "Magic power"
-msgstr "Магическая сила"
+msgstr "Магич. сила"
 
 #: ../src/gui/charinfo.cpp:885
 msgid "Magic power increases the damage of magical attacks."
@@ -315,13 +316,13 @@ msgstr "Доспехи снижают урон физических атак"
 #: ../src/gui/charinfo.cpp:926
 msgid ""
 "Block value determines the chance to avoid damage from physical attacks."
-msgstr "Значение блока означает шанс избежать урона от физических атак"
+msgstr "Значение уклонения означает шанс избежать урона от физических атак"
 
 #: ../src/gui/controlpanel.cpp:73
 msgid "Chat"
 msgstr "Чат"
 
-#: ../src/gui/controlpanel.cpp:387 ../src/gui/mainmenu.cpp:98
+#: ../src/gui/controlpanel.cpp:387 ../src/gui/mainmenu.cpp:138
 msgid "Options"
 msgstr "Опции"
 
@@ -329,7 +330,7 @@ msgstr "Опции"
 msgid "Save & Exit"
 msgstr "Сохранить и выйти"
 
-#: ../src/gui/controlpanel.cpp:393 ../src/gui/optionswindow.cpp:307
+#: ../src/gui/controlpanel.cpp:393 ../src/gui/optionswindow.cpp:318
 msgid "Inventory"
 msgstr "Инвентарь"
 
@@ -337,7 +338,7 @@ msgstr "Инвентарь"
 msgid "Character"
 msgstr "Персонаж"
 
-#: ../src/gui/controlpanel.cpp:399 ../src/gui/optionswindow.cpp:313
+#: ../src/gui/controlpanel.cpp:399 ../src/gui/optionswindow.cpp:324
 msgid "Skilltree"
 msgstr "Дерево умений"
 
@@ -345,7 +346,7 @@ msgstr "Дерево умений"
 msgid "Party"
 msgstr "Группа"
 
-#: ../src/gui/controlpanel.cpp:405 ../src/gui/optionswindow.cpp:322
+#: ../src/gui/controlpanel.cpp:405 ../src/gui/optionswindow.cpp:333
 msgid "Quests"
 msgstr "Квесты"
 
@@ -353,30 +354,29 @@ msgstr "Квесты"
 msgid "Drop:"
 msgstr "Выбросить"
 
-#: ../src/gui/mainmenu.cpp:86
+#: ../src/gui/mainmenu.cpp:126
 msgid "Single player"
 msgstr "Одиночная игра"
 
-#: ../src/gui/mainmenu.cpp:89
+#: ../src/gui/mainmenu.cpp:129
 msgid "Join game"
 msgstr "Присоединиться к игре"
 
-#: ../src/gui/mainmenu.cpp:92
+#: ../src/gui/mainmenu.cpp:132
 msgid "Host game"
 msgstr "Мультиплеер"
 
-#: ../src/gui/mainmenu.cpp:95
+#: ../src/gui/mainmenu.cpp:135
 msgid "Credits"
 msgstr "Об игре"
 
-#: ../src/gui/mainmenu.cpp:101
+#: ../src/gui/mainmenu.cpp:141
 msgid "Quit"
 msgstr "Выход"
 
 #: ../src/gui/messageboxes.cpp:52 ../src/gui/messageboxes.cpp:198
 #: ../src/gui/networkwindows.cpp:95 ../src/gui/networkwindows.cpp:223
-#: ../src/gui/optionswindow.cpp:352 ../src/gui/savegamelist.cpp:170
-#: ../src/gui/tradewindow.cpp:265
+#: ../src/gui/optionswindow.cpp:366 ../src/gui/tradewindow.cpp:265
 msgid "Ok"
 msgstr "Ок"
 
@@ -400,69 +400,73 @@ msgstr "Порт"
 msgid "Host"
 msgstr "Адрес"
 
-#: ../src/gui/optionswindow.cpp:296
+#: ../src/gui/optionswindow.cpp:307
 msgid "Shortkeys"
 msgstr "Горячие клавиши"
 
-#: ../src/gui/optionswindow.cpp:298
+#: ../src/gui/optionswindow.cpp:309
 msgid "Gameplay"
 msgstr "Геймплей"
 
-#: ../src/gui/optionswindow.cpp:300
+#: ../src/gui/optionswindow.cpp:311
 msgid "Audio"
 msgstr "Аудио"
 
-#: ../src/gui/optionswindow.cpp:302
+#: ../src/gui/optionswindow.cpp:313
 msgid "Graphic"
 msgstr "Графика"
 
-#: ../src/gui/optionswindow.cpp:304 ../src/gui/optionswindow.cpp:349
+#: ../src/gui/optionswindow.cpp:315 ../src/gui/optionswindow.cpp:360
 msgid "Language"
 msgstr "Язык"
 
-#: ../src/gui/optionswindow.cpp:310
+#: ../src/gui/optionswindow.cpp:321
 msgid "Character screen"
 msgstr "Информация о персонаже"
 
-#: ../src/gui/optionswindow.cpp:316
+#: ../src/gui/optionswindow.cpp:327
 msgid "Party screen"
 msgstr "Окно группы"
 
-#: ../src/gui/optionswindow.cpp:319
+#: ../src/gui/optionswindow.cpp:330
 msgid "Chatbox"
 msgstr "Строка чата"
 
-#: ../src/gui/optionswindow.cpp:325
+#: ../src/gui/optionswindow.cpp:336
 msgid "Minimap"
 msgstr "Мини-карта"
 
-#: ../src/gui/optionswindow.cpp:328
+#: ../src/gui/optionswindow.cpp:339
 msgid "Swap equipement"
 msgstr "Сменить экипировку"
 
-#: ../src/gui/optionswindow.cpp:331
+#: ../src/gui/optionswindow.cpp:342
 msgid "Item Labels"
-msgstr "Показать названия вещей"
+msgstr "Названия вещей"
 
-#: ../src/gui/optionswindow.cpp:334
+#: ../src/gui/optionswindow.cpp:345
 msgid "Difficulty"
 msgstr "Сложность"
 
-#: ../src/gui/optionswindow.cpp:337
+#: ../src/gui/optionswindow.cpp:348
 msgid "Text Speed"
 msgstr "Скорость отображения текста"
 
-#: ../src/gui/optionswindow.cpp:340
+#: ../src/gui/optionswindow.cpp:351
 msgid "Sound"
 msgstr "Звук"
 
-#: ../src/gui/optionswindow.cpp:343
+#: ../src/gui/optionswindow.cpp:354
 msgid "Music"
 msgstr "Музыка"
 
-#: ../src/gui/optionswindow.cpp:346
+#: ../src/gui/optionswindow.cpp:357
 msgid "Enemy Highlight Color"
-msgstr ""
+msgstr "Цвет подсветки врагов"
+
+#: ../src/gui/optionswindow.cpp:363
+msgid "Grab mouse in windowed mode (needs restart)"
+msgstr "Захват мыши в оконном режиме (необходим перезапуск)"
 
 #: ../src/gui/questinfo.cpp:160
 msgid "open"
@@ -476,34 +480,38 @@ msgstr "завершенные"
 msgid "failed"
 msgstr "проваленные"
 
-#: ../src/gui/savegamelist.cpp:167
-msgid "Savegame"
-msgstr "Сохраненные игры"
+#: ../src/gui/savegamelist.cpp:174
+msgid "Characters"
+msgstr "Персонажи"
 
-#: ../src/gui/savegamelist.cpp:173
-msgid "Create Character"
-msgstr "Создать персонажа"
+#: ../src/gui/savegamelist.cpp:183
+msgid "Delete"
+msgstr "Удалить"
 
-#: ../src/gui/savegamelist.cpp:176
-msgid "Delete Character"
-msgstr "Удалить персонажа"
-
-#: ../src/gui/savegamelist.cpp:181
+#: ../src/gui/savegamelist.cpp:188
 msgid "Level"
 msgstr "Уровень"
 
 #: ../src/gui/skilltree.cpp:537
-#, fuzzy
 msgid "Skillpoints"
-msgstr "Здоровье"
+msgstr "Очки скилла"
 
 #: ../src/gui/skilltree.cpp:542
 msgid "Next Skillpoint at Level"
-msgstr ""
+msgstr "Следующее очко скилла на уровне"
 
 #: ../src/gui/worldmap.cpp:141
 msgid "Town Portal"
 msgstr "Городской портал"
+
+#~ msgid "Savegame"
+#~ msgstr "Сохраненные игры"
+
+#~ msgid "Create Character"
+#~ msgstr "Создать персонажа"
+
+#~ msgid "Delete Character"
+#~ msgstr "Удалить персонажа"
 
 #~ msgid "Gold"
 #~ msgstr "Золото"

@@ -2,14 +2,14 @@
 # Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# FULL NAME <EMAIL@ADDRESS>, 2010.
+# FULL NAME <EMAIL@ADDRESS>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-09-11 23:13+0400\n"
+"PO-Revision-Date: 2011-06-26 20:49+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -22,34 +22,32 @@ msgid "The goblinslayer"
 msgstr ""
 
 #: goblins.xml
-#, fuzzy
 msgid "Quest finished"
-msgstr "завершенные"
+msgstr "Задание завершено"
 
 #: goblins.xml
 msgid "you killed enough goblins"
-msgstr ""
+msgstr "ты убил достаточно гоблинов"
 
 #: goblins.xml
 msgid "peasant"
-msgstr ""
+msgstr "крестьянин"
 
 #: goblins.xml
-#, fuzzy
 msgid "Goblins"
-msgstr "слепой"
+msgstr "Гоблины"
 
 #: goblins.xml
 msgid "I have killed them all."
-msgstr ""
+msgstr "Я убил их всех."
 
 #: goblins.xml
 msgid "Wow... you're a real hero, aren't ya?"
-msgstr ""
+msgstr "Ух ты... да ты настоящий герой, не так ли?"
 
 #: goblins.xml
 msgid "Leave me alone and kill some more goblins."
-msgstr ""
+msgstr "Оставь меня одного и убей ещё больше гоблинов."
 
 #: goblins.xml
 msgid "There are some stupid goblins pissing me off."
@@ -61,31 +59,31 @@ msgstr ""
 
 #: goblins.xml
 msgid "Interested?"
-msgstr ""
+msgstr "Заинтересован?"
 
 #: goblins.xml
 msgid "Accept the quest?"
-msgstr ""
+msgstr "Принять задание?"
 
 #: goblins.xml
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: goblins.xml
 msgid "No"
-msgstr ""
+msgstr "Нет"
 
 #: goblins.xml
 msgid "Goblins (reward)"
-msgstr ""
+msgstr "Гоблины (награда)"
 
 #: goblins.xml
 msgid "You want a second reward?"
-msgstr ""
+msgstr "Хочешь вторую награду?"
 
 #: goblins.xml
 msgid "Of course!"
-msgstr ""
+msgstr "Конечно!"
 
 #: goblins.xml
 msgid "Then I'll give you this goblin club. Be happy."
@@ -101,4 +99,4 @@ msgstr ""
 
 #: goblins.xml
 msgid "region1"
-msgstr ""
+msgstr "регион 1"

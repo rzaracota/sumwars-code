@@ -2,14 +2,14 @@
 # Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# FULL NAME <EMAIL@ADDRESS>, 2010.
+# FULL NAME <EMAIL@ADDRESS>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-09-11 23:13+0400\n"
+"PO-Revision-Date: 2011-06-26 17:54+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -22,13 +22,12 @@ msgid "The Trader"
 msgstr ""
 
 #: theTrader.xml
-#, fuzzy
 msgid "Quest finished"
-msgstr "завершенные"
+msgstr "Задание выполнено"
 
 #: theTrader.xml
 msgid "A strange trader offered me to sell Empty Scrolls."
-msgstr ""
+msgstr "Странный торговец предложил мне продать пустые свитки."
 
 #: theTrader.xml
 msgid "elCnlLobby"
@@ -40,23 +39,23 @@ msgstr ""
 
 #: theTrader.xml
 msgid "A moment, dear madam."
-msgstr ""
+msgstr "Один момент, мадам."
 
 #: theTrader.xml
 msgid "A moment, dear mister."
-msgstr ""
+msgstr "Один момент, мистер."
 
 #: theTrader.xml
 msgid "A moment, dear ladies."
-msgstr ""
+msgstr "Один момент, леди."
 
 #: theTrader.xml
 msgid "A moment, dear sirs."
-msgstr ""
+msgstr "Один момент, джентльмены."
 
 #: theTrader.xml
 msgid "A moment, ladies and gentleman."
-msgstr ""
+msgstr "Один момент, леди и джентльмены."
 
 #: theTrader.xml
 msgid "What is it now?"
@@ -68,19 +67,19 @@ msgstr ""
 
 #: theTrader.xml
 msgid "What are you trying to say?"
-msgstr ""
+msgstr "Что ты пытаешься сказать?"
 
 #: theTrader.xml
 msgid "Well, I want to say I'd like to lend you my services."
-msgstr ""
+msgstr "Ну, я пытаюсь сказать, что хотел бы предложить тебе свои услуги."
 
 #: theTrader.xml
 msgid "You are a trader?"
-msgstr ""
+msgstr "Ты торговец?"
 
 #: theTrader.xml
 msgid "Indeed."
-msgstr ""
+msgstr "Верно."
 
 #: theTrader.xml
 msgid ""
@@ -132,11 +131,11 @@ msgstr ""
 
 #: theTrader.xml
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: theTrader.xml
 msgid "No"
-msgstr ""
+msgstr "Нет"
 
 #: theTrader.xml
 msgid ""
@@ -147,7 +146,7 @@ msgstr ""
 #: theTrader.xml
 msgid ""
 "But do not fear, they don't have the power to harm you in any way, really."
-msgstr ""
+msgstr "Но не бойся, они не могут навредить тебе никоим образом."
 
 #: theTrader.xml
 msgid ""
@@ -385,11 +384,11 @@ msgstr ""
 
 #: theTrader.xml
 msgid "I see you have reached dwarfenwall safely."
-msgstr ""
+msgstr "Смотрю, ты благополучно добрался до Дворфенфолла."
 
 #: theTrader.xml
 msgid "How nice to see you have escaped from the caves."
-msgstr ""
+msgstr "Приятно видеть, что ты выбрался из пещер."
 
 #: theTrader.xml
 msgid "No thanks to you. May I continue to offer you my services?"
