@@ -18,7 +18,7 @@ class BenchmarkTab : public CEGUI::Window, public DebugTab, public Ogre::LogList
 public:
 	BenchmarkTab(const CEGUI::String& type, const CEGUI::String& name);
 	
-	virtual void update();
+	virtual void update(OIS::Keyboard *keyboard, OIS::Mouse *mouse);
 
 	virtual void messageLogged (const Ogre::String &message, Ogre::LogMessageLevel lml, bool maskDebug, const Ogre::String &logName);
 

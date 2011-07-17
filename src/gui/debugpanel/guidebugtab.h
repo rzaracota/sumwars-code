@@ -9,7 +9,7 @@ class GuiDebugTab : public CEGUI::Window, public DebugTab
 
 public:
     GuiDebugTab(const CEGUI::String& type, const CEGUI::String& name);
-	virtual void update();
+	virtual void update(OIS::Keyboard *keyboard, OIS::Mouse *mouse);
 	
 	virtual void initialiseComponents(void );
 

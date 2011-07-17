@@ -186,8 +186,10 @@ bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 bool MainMenu::onHidden( const CEGUI::EventArgs& evt )
 {
     if (m_sceneCreated)
-        m_mainNode->getParentSceneNode()->removeChild(m_mainNode);
-
+		m_mainNode->getParentSceneNode()->removeAllChildren();
+        //m_mainNode->getParentSceneNode()->removeChild(m_mainNode);
+	
+	
     CEGUI::WindowManager::getSingleton().getWindow("MainMenu")->setAlpha(1);
 	
 	Ogre::Root *root = Ogre::Root::getSingletonPtr();

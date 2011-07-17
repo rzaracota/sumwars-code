@@ -228,7 +228,7 @@ void MainWindow::update(float time)
 	TooltipManager::getSingleton().update(time);
 
 #ifdef BUILD_TOOLS
-	DebugPanel::getSingleton().update(m_keyboard);
+	DebugPanel::getSingleton().update(m_keyboard, m_mouse);
 	ContentEditor::getSingleton().update(m_keyboard, m_mouse);
 #endif
 

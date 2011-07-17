@@ -78,6 +78,6 @@ void BenchmarkTab::messageLogged(const Ogre::String& message, Ogre::LogMessageLe
 }
 
 
-void BenchmarkTab::update()
+void BenchmarkTab::update(OIS::Keyboard *keyboard, OIS::Mouse *mouse)
 {
 }

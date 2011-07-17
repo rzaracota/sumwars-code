@@ -4,7 +4,12 @@
 #include <OgreSingleton.h>
 #include "CEGUI/CEGUI.h"
 #include "debugtab.h"
-#include "OISKeyboard.h"
+
+namespace OIS
+{
+	class Keyboard;
+	class Mouse;
+}
 
 #include <map>
 
@@ -30,7 +35,7 @@ public:
 	* \fn void update();
 	* \brief Updates all registered tabs
 	*/
-	void update(OIS::Keyboard *keyboard);
+	void update(OIS::Keyboard *keyboard, OIS::Mouse *mouse);
 
 	/**
 	* \fn void addTabWindow(CEGUI::Window *tab);

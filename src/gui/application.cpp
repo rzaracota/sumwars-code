@@ -10,6 +10,7 @@
 #include "debugpanel.h"
 #include "iconeditortab.h"
 #include "guidebugtab.h"
+#include "debugcameratab.h"
 #include "luascripttab.h"
 #include "textfileeditwindow.h"
 //#include "reloadtab.h"
@@ -544,7 +545,7 @@ bool Application::initCEGUI()
     CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("SumwarsTooltip", "DefaultWindow", "TaharezLook/CustomTooltip", "Falagard/Default");
 
 #ifdef BUILD_TOOLS
-	
+	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<DebugCameraTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<GuiDebugTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<IconEditorTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<BenchmarkTab> >();

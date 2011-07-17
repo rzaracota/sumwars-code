@@ -30,7 +30,7 @@ LuaScriptTab::LuaScriptTab(const CEGUI::String& type, const CEGUI::String& name)
 	
 }
 
-void LuaScriptTab::update()
+void LuaScriptTab::update(OIS::Keyboard *keyboard, OIS::Mouse *mouse)
 {
 
 }

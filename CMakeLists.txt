@@ -214,6 +214,7 @@ SET(SRCS
   ./src/gui/sound.cpp
   ./src/gui/tooltip.cpp
   ./src/gui/optionswindow.cpp
+  ./src/gui/meshviewer3d.cpp
   ./src/enet/callbacks.c
   ./src/enet/compress.c
   ./src/enet/host.c
@@ -230,6 +231,7 @@ SET(SRCS
 	${SRCS}
 	./src/gui/debugpanel/benchmarktab.cpp
 	./src/gui/debugpanel/debugpanel.cpp
+	./src/gui/debugpanel/debugcameratab.cpp
 	./src/gui/debugpanel/iconeditortab.cpp
 	./src/gui/debugpanel/guidebugtab.cpp
 	./src/gui/debugpanel/luascripttab.cpp

@@ -15,7 +15,7 @@ IconEditorTab::IconEditorTab(const CEGUI::String& type, const CEGUI::String& nam
 }
 
 
-void IconEditorTab::update()
+void IconEditorTab::update(OIS::Keyboard *keyboard, OIS::Mouse *mouse)
 {
 
 }

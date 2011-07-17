@@ -23,7 +23,7 @@ void GuiDebugTab::initialiseComponents(void )
 	CEGUI::Window::initialiseComponents();
 }
 
-void GuiDebugTab::update()
+void GuiDebugTab::update(OIS::Keyboard *keyboard, OIS::Mouse *mouse)
 {
 	CEGUI::Window *win = CEGUI::System::getSingleton().getWindowContainingMouse();
 	m_tabLayout->getChild("windowUnderMouseStaticText")->setText(win->getName());

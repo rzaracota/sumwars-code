@@ -1,5 +1,6 @@
 #include "debugpanel.h"
 #include "guidebugtab.h"
+#include "debugcameratab.h"
 #include "luascripttab.h"
 #include "iconeditortab.h"
 #include "benchmarktab.h"
@@ -64,6 +65,11 @@ void DebugPanel::createPanel(bool visible)
 	benchTab->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
 	benchTab->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	addTabWindow("BenchmarkTab", benchTab);
+	
+	DebugCameraTab *camTab = static_cast<DebugCameraTab*>(m_winManager->createWindow("DebugCamera", "DebugCamera"));
+	camTab->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
+	camTab->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
+	addTabWindow("DebugCamera", camTab);
 	/* not yet implemented
 	ReloadTab *reloadTab = static_cast<ReloadTab*>(m_winManager->createWindow("ReloadTab", "ReloadTab"));
 	reloadTab->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
@@ -92,7 +98,7 @@ bool DebugPanel::tabExists(std::string tabName)
 }
 
 
-void DebugPanel::update(OIS::Keyboard *keyboard)
+void DebugPanel::update(OIS::Keyboard *keyboard, OIS::Mouse *mouse)
 {
 	if(m_tabs.size() < 1)
 		return;
@@ -104,7 +110,7 @@ void DebugPanel::update(OIS::Keyboard *keyboard)
 	for (iter = m_tabs.begin(); iter != m_tabs.end(); iter++)
 	{
 		DebugTab *dt = iter->second;
-		dt->update();
+		dt->update(keyboard, mouse);
 	}
 }
 
