@@ -214,7 +214,6 @@ SET(SRCS
   ./src/gui/sound.cpp
   ./src/gui/tooltip.cpp
   ./src/gui/optionswindow.cpp
-  ./src/gui/meshviewer3d.cpp
   ./src/enet/callbacks.c
   ./src/enet/compress.c
   ./src/enet/host.c
