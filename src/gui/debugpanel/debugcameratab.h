@@ -3,17 +3,14 @@
 
 #include "debugtab.h"
 #include "CEGUI/CEGUIWindow.h"
-
-namespace Ogre
-{
-	class SceneNode;
-}
+#include "OgreSceneNode.h"
 
 class DebugCameraTab : public CEGUI::Window, public DebugTab
 {
 
 public:
     DebugCameraTab(const CEGUI::String& type, const CEGUI::String& name);
+	
 	virtual void update(OIS::Keyboard *keyboard, OIS::Mouse *mouse);
 	
 	virtual void initialiseComponents(void );
@@ -50,26 +47,6 @@ private:
 	 * \brief While true, the user zooms the camera in the preview window
 	 */
 	bool m_rightMouseDown;
-	
-	/**
-	 * \brief Main camera node
-	 */
-	Ogre::SceneNode *cameraNode;
-	
-	/**
-	 * \brief Camera Yaw node
-	 */
-	Ogre::SceneNode *cameraYawNode;
-	
-	/**
-	 * \brief Camera Pitch node
-	 */
-	Ogre::SceneNode *cameraPitchNode;
-		
-	/**
-	 * \brief Camera Roll node
-	 */
-	Ogre::SceneNode *cameraRollNode;
 	
 public:
 	static CEGUI::String WidgetTypeName;

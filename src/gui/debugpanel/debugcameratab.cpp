@@ -17,7 +17,7 @@ DebugCameraTab::DebugCameraTab ( const CEGUI::String& type, const CEGUI::String&
 	CEGUI::TabControl* camtabs = ( CEGUI::TabControl* ) WindowManager::getSingleton().createWindow ( "TaharezLook/TabControl", "DebugCameraTabTabs" );
 	camtabs->setPosition ( UVector2 ( UDim ( 0.0f, 0.0f ), UDim ( 0.0f, 0.0f ) ) );
 	camtabs->setSize ( UVector2 ( UDim ( 1.0f, 0.0f ), UDim ( 1.0f, 0.0f ) ) );
-	this->addChildWindow ( camtabs );
+	addChildWindow ( camtabs );
 
 	CEGUI::Window* playerCamTab = ( CEGUI::DefaultWindow* ) WindowManager::getSingleton().createWindow ( "TaharezLook/TabContentPane", "DebugCameraTab/PlayerCamOptions" );
 	playerCamTab->setText ( "PlayerCam Options" );
@@ -102,19 +102,6 @@ void DebugCameraTab::setupCamera()
 	debugCam->setNearClipDistance ( 0.1f );
 	debugCam->setFarClipDistance ( 5000.0f );
 
-	// Create the camera's top node (which will only handle position).
-	this->cameraNode = s_mgr->getRootSceneNode()->createChildSceneNode();
-	//this->cameraNode->setPosition(40, 5, 80);
-	// Create the camera's yaw node as a child of camera's top node.
-	this->cameraYawNode = this->cameraNode->createChildSceneNode();
-	// Create the camera's pitch node as a child of camera's yaw node.
-	this->cameraPitchNode = this->cameraYawNode->createChildSceneNode();
-	// Create the camera's roll node as a child of camera's pitch node
-	// and attach the camera to it.
-	this->cameraRollNode = this->cameraPitchNode->createChildSceneNode();
-	this->cameraRollNode->attachObject ( debugCam );
-
-
 	// texture that is creates from the camera image
 	Ogre::TexturePtr debug_texture = Ogre::TextureManager::getSingleton().createManual ( "debug_tex",
 	                                 Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, Ogre::TEX_TYPE_2D,
@@ -151,46 +138,19 @@ void DebugCameraTab::update ( OIS::Keyboard *keyboard, OIS::Mouse *mouse )
 
 	if ( m_leftMouseDown )
 	{
-		rotX = Ogre::Radian ( mouse->getMouseState().X.rel * 0.05f );
-		rotY = Ogre::Radian ( mouse->getMouseState().Y.rel * 0.05f );
+		rotX = Ogre::Radian ( mouse->getMouseState().X.rel * 0.005f );
+		rotY = Ogre::Radian ( mouse->getMouseState().Y.rel * 0.005f );
 	}
 	else if ( m_rightMouseDown )
 		vec = Ogre::Vector3 ( 0.0f, 0.0f, mouse->getMouseState().Y.rel * 5 );
 
 	if ( m_leftMouseDown || m_rightMouseDown )
 	{
-		Ogre::Real pitchAngle;
-		Ogre::Real pitchAngleSign;
-		// Yaws the camera according to the mouse relative movement.
-		this->cameraYawNode->yaw ( rotX );
-		// Pitches the camera according to the mouse relative movement.
-		this->cameraPitchNode->pitch ( rotY );
-		// Translates the camera according to the translate vector which is
-		// controlled by the keyboard arrows.
-		//
-		// NOTE: We multiply the mTranslateVector by the cameraPitchNode's
-		// orientation quaternion and the cameraYawNode's orientation
-		// quaternion to translate the camera accoding to the camera's
-		// orientation around the Y-axis and the X-axis.
-		Ogre::Vector3 trvec = this->cameraYawNode->getOrientation() * this->cameraPitchNode->getOrientation() * vec;
-		this->cameraNode->translate ( trvec, Ogre::SceneNode::TS_LOCAL );
-		// Angle of rotation around the X-axis.
-		pitchAngle = ( 2 * Ogre::Degree ( Ogre::Math::ACos ( this->cameraPitchNode->getOrientation().w ) ).valueDegrees() );
-		// Just to determine the sign of the angle we pick up above, the
-		// value itself does not interest us.
-		pitchAngleSign = this->cameraPitchNode->getOrientation().x;
-		// Limit the pitch between -90 degress and +90 degrees, Quake3-style.
-		if ( pitchAngle > 90.0f )
-		{
-			if ( pitchAngleSign > 0 )
-				// Set orientation to 90 degrees on X-axis.
-				this->cameraPitchNode->setOrientation ( Ogre::Quaternion ( Ogre::Math::Sqrt ( 0.5f ),
-				                                        Ogre::Math::Sqrt ( 0.5f ), 0, 0 ) );
-			else if ( pitchAngleSign < 0 )
-				// Sets orientation to -90 degrees on X-axis.
-				this->cameraPitchNode->setOrientation ( Ogre::Quaternion ( Ogre::Math::Sqrt ( 0.5f ),
-				                                        -Ogre::Math::Sqrt ( 0.5f ), 0, 0 ) );
-		}
+		debugCam->yaw(rotX);
+		debugCam->pitch(rotY);
+
+		Ogre::Vector3 trvec = debugCam->getOrientation() * vec;
+		debugCam->move(trvec);
 	}
 
 	Ogre::TexturePtr tex = Ogre::TextureManager::getSingleton().getByName ( "debug_tex" );

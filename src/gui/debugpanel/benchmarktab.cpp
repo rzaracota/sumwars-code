@@ -6,8 +6,8 @@
 
 #include "Poco/Environment.h"
 
-#include "CEGUIWindowManager.h"
-#include "CEGUI.h"
+#include "CEGUI/CEGUIWindowManager.h"
+#include "CEGUI/CEGUI.h"
 
 #include <eventsystem.h>
 #include <debugpanel.h>
