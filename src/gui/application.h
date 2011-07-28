@@ -203,12 +203,7 @@ class Application
 		 */
 		bool m_shutdown;
 
- 		/**
-		 * \var Ogre::TerrainGlobalOptions *m_terrainOptions
-		 * \brief Global terrain options
-		 */
-		Ogre::TerrainGlobalOptions *m_terrainOptions;
-		
+
 	protected:
 		/**
 		 * \var Document* m_document
