@@ -38,7 +38,7 @@
 #include "stdstreamconv.h"
 
 
-#include "CEGUI.h"
+#include "CEGUI/CEGUI.h"
 
 #include <physfs.h>
 

@@ -26,6 +26,13 @@
 #include "graphicobject.h"
 #include "scriptobject.h"
 
+// use forward declarations to save some includes
+namespace Ogre 
+{
+	class Terrain;
+	class TerrainGlobalOptions;
+	class TerrainGroup;
+}
 /**
  * \class Scene
  * \brief Beschreibt die darzustellende Szene
@@ -185,9 +192,29 @@ class Scene
 	 */
 	std::map<int,GraphicObject*> m_graphic_objects;
 	
+	/**
+	 * \var void configureTerrainDefaults(Ogre::Light *light);
+	 * \brief Configures all terrain defaults for the scene
+	 */
+	void configureTerrainDefaults(Ogre::Light *light);
 	
-	
+	/**
+	 * \var void defineTerrain(long x, long y)
+	 * \brief Defines the terrain
+	 */
+	void defineTerrain(long x, long y);
 
+	/**
+	 * \var void getTerrainImage(bool flipX, bool flipY, Ogre::Image& img)
+	 * \brief receives the terrain image to img
+	 */
+	void getTerrainImage(bool flipX, bool flipY, Ogre::Image& img);
+
+	/**
+	 * \var void initBlendMaps(Ogre::Terrain* terrain);
+	 * \brief Generates all blend maps for the terrain
+	 */
+	void initBlendMaps(Ogre::Terrain* terrain);
 
 	/**
 	 * \var Document* m_document
@@ -238,6 +265,15 @@ class Scene
 	 * \brief GraphikObjekt fuer den temporaeren Spieler
 	 */
 	GraphicObject* m_temp_player_object;
+
+	Ogre::TerrainGlobalOptions *m_terrainOptions;
+	Ogre::TerrainGroup *m_terrainGroup;
+
+	/**
+	 * \var bool m_terrainsImported;
+	 * \brief Stored if terrains are imported
+	 */
+	bool m_terrainsImported;
 	
 };
 

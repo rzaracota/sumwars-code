@@ -1,0 +1,5 @@
+<Imageset AutoScaled="true" Imagefile="CharWindow.png" Name="CharWindow" NativeHorzRes="800" NativeVertRes="600">
+    <Image Height="826" Name="CharBackground" Width="538" XPos="0" YPos="0" />
+    <Image Height="66" Name="ButtonDefault" Width="89" XPos="559" YPos="0" />
+    <Image Height="66" Name="ButtonPressed" Width="89" XPos="648" YPos="0" />
+</Imageset>
