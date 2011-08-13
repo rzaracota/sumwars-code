@@ -10,6 +10,9 @@
 #include "graphicmanager.h"
 #include "scene.h"
 
+#include <iostream>
+
+
 MainMenu::MainMenu (Document* doc)
         :Window(doc)
 {
@@ -102,8 +105,12 @@ MainMenu::MainMenu (Document* doc)
     btn->setAlpha(0.7f);
 
     
-	m_sceneMgr = 0;
-	
+	Ogre::Root *root = Ogre::Root::getSingletonPtr();
+	m_sceneMgr = root->createSceneManager(Ogre::ST_GENERIC, "MainMenuSceneManager");
+	m_mainMenuCamera = m_sceneMgr->createCamera("MainMenuCamera");
+	m_mainMenuCamera->setNearClipDistance(0.1f);
+	m_mainMenuCamera->setFarClipDistance(10000);
+
     m_sceneCreated = false;
 
     createSavegameList();
@@ -113,7 +120,6 @@ MainMenu::MainMenu (Document* doc)
 
 void MainMenu::update()
 {
-	
 }
 
 void MainMenu::updateTranslation()
@@ -169,15 +175,18 @@ bool MainMenu::onShowCredits(const CEGUI::EventArgs& evt)
 
 bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 {
+	Ogre::Root *root = Ogre::Root::getSingletonPtr();
     if (!m_sceneCreated)
+	{
         createScene();
-    else
-        m_sceneMgr->getRootSceneNode()->addChild(m_mainNode);
-
+		m_gameCamera = root->getAutoCreatedWindow()->getViewport(0)->getCamera();
+	}
 	m_saveGameList->update();
 
-	Ogre::Root *root = Ogre::Root::getSingletonPtr();
+	root->getAutoCreatedWindow()->getViewport(0)->setCamera(m_mainMenuCamera);
+	m_mainMenuCamera->lookAt(m_mainNode->getPosition());
     root->addFrameListener(this);
+	m_mainMenuCamera->lookAt(Ogre::Vector3(-3.0643, -0.00965214, -45.8015));
 	
     CEGUI::WindowManager::getSingleton().getWindow("MainMenu")->setAlpha(0);
     return true;
@@ -185,14 +194,13 @@ bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 
 bool MainMenu::onHidden( const CEGUI::EventArgs& evt )
 {
-    if (m_sceneCreated)
-		m_mainNode->getParentSceneNode()->removeAllChildren();
-        //m_mainNode->getParentSceneNode()->removeChild(m_mainNode);
-	
-	
-    CEGUI::WindowManager::getSingleton().getWindow("MainMenu")->setAlpha(1);
-	
 	Ogre::Root *root = Ogre::Root::getSingletonPtr();
+    if (m_sceneCreated)
+	{
+		root->getAutoCreatedWindow()->getViewport(0)->setCamera(m_gameCamera);
+	}
+    CEGUI::WindowManager::getSingleton().getWindow("MainMenu")->setAlpha(1);
+
     root->removeFrameListener(this);
 	
     return true;
@@ -214,7 +222,13 @@ bool MainMenu::onQuitGameHost(const CEGUI::EventArgs& evt)
 
 bool MainMenu::frameStarted(const Ogre::FrameEvent& evt)
 {
-    return Ogre::FrameListener::frameStarted(evt);
+    
+	/*m_mainMenuCamera->setPosition(Ogre::Vector3(0,0,-0.6)+m_mainMenuCamera->getPosition());
+	std::stringstream ss;
+    ss << "V3: " << m_mainMenuCamera->getPosition().x << " " << m_mainMenuCamera->getPosition().y << " " << m_mainMenuCamera->getPosition().z << " " << std::endl;
+	Ogre::LogManager::getSingleton().logMessage(Ogre::LML_NORMAL, ss.str().c_str());
+	*/
+	return Ogre::FrameListener::frameStarted(evt);
 }
 
 
@@ -230,25 +244,19 @@ void MainMenu::createScene()
 {
     if (!m_sceneCreated)
     {
-        Ogre::Root *root = Ogre::Root::getSingletonPtr();
-        Ogre::RenderWindow *win = root->getAutoCreatedWindow();
-        Ogre::Camera *cam = win->getViewport(0)->getCamera();
-        //<OPTION id="0" position="-12.0899 1.03773 -17.4865" orientation="-0.990043 -0.10782 0.0900156 -0.00929773"></OPTION>
-        //<OPTION id="1" position="-22.2126 11.497 -11.1" orientation="0.967044 -0.00100842 -0.254607 -0.000271657"></OPTION>
-        //cam->setPosition(Ogre::Vector3(-8.0899, 1.03773, -10.4865));
-		//cam->setPosition(Ogre::Vector3(-15.2126, 0.597, -14.1));
-		cam->setPosition(Ogre::Vector3(-17.2126, 0.597, -14.1));
-        cam->setOrientation(Ogre::Quaternion(0.967044, -0.00100842, -0.254607, -0.000271657));
-		cam->pitch(Ogre::Radian(Ogre::Degree(15)));
-		cam->yaw(Ogre::Radian(Ogre::Degree(5)));
-        //cam->rotate(Ogre::Vector3::UNIT_Y, Ogre::Radian(20));
+        //m_mainMenuCamera->setPosition(Ogre::Vector3(-8.0899, 1.03773, -10.4865));
+		//m_mainMenuCamera->setPosition(Ogre::Vector3(-15.2126, 0.597, -14.1));
+		m_mainMenuCamera->setPosition(Ogre::Vector3(-17.2126, 0.597, -14.1));
+        //m_mainMenuCamera->setOrientation(Ogre::Quaternion(0.967044, -0.00100842, -0.254607, -0.000271657));
+		m_mainMenuCamera->pitch(Ogre::Radian(Ogre::Degree(15)));
+		m_mainMenuCamera->yaw(Ogre::Radian(Ogre::Degree(5)));
+       
         //	cam->moveRelative(Ogre::Vector3(0,-5,-20));
 		//	cam->lookAt(Ogre::Vector3::ZERO);
-
-        m_sceneMgr = cam->getSceneManager();
+		
         m_mainNode = m_sceneMgr->getRootSceneNode()->createChildSceneNode("MainMenuMainNode");
         m_mainNode->setPosition(Ogre::Vector3::ZERO);
-
+		
 		Ogre::SceneNode *n = m_mainNode->createChildSceneNode();
 		Ogre::Entity *e;
 		Ogre::MeshPtr *m;

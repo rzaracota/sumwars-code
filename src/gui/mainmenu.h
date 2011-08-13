@@ -36,13 +36,13 @@ public:
      * \fn virtual bool frameStarted (const FrameEvent &evt)
      * \brief Called when a frame is about to begin rendering.
      */
-    virtual bool frameStarted ( const Ogre::FrameEvent &evt );
+    bool frameStarted ( const Ogre::FrameEvent &evt );
 
     /**
      * \fn virtual bool frameStarted (const FrameEvent &evt)
      * \brief Called just after a frame has been rendered.
      */
-    virtual bool frameEnded ( const Ogre::FrameEvent &evt );
+    bool frameEnded ( const Ogre::FrameEvent &evt );
 
 
 private:
@@ -132,6 +132,18 @@ private:
      *\brief Sets to true if the scene was successfully created
      */
     bool m_sceneCreated;
+
+	/**
+     *\var bool *m_mainMenuCamera;
+     *\brief The main Menu camera
+     */
+    Ogre::Camera *m_mainMenuCamera;
+	
+	/**
+     *\var bool *m_gameCamera;
+     *\brief Saves the game camera while the main menu is displayed
+     */
+    Ogre::Camera *m_gameCamera;
 
     /**
      * \var SaveGameList m_saveGameList;

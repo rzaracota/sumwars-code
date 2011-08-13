@@ -406,7 +406,6 @@ bool Application::initOgre()
 	m_scene_manager->setShadowFarDistance(2000);
 */
 	Ogre::LogManager::getSingleton().createLog(SumwarsHelper::userPath() + "/BenchLog.log");
-	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW);
 	return true;
 
 }
@@ -415,7 +414,7 @@ bool Application::configureOgre()
 {
 	DEBUG("configure ogre");
 	// Logging nur fuer Fehlermeldungen verwenden
-	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW );
+	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_NORMAL);
 	
 	// Restore config if ogre.cfg is show, otherwise show the config dialog
 	if(!(m_ogre_root->restoreConfig() || m_ogre_root->showConfigDialog()))
