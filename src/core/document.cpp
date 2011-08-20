@@ -1817,7 +1817,7 @@ void Document::saveSettings()
 
 void Document::loadSettings()
 {
-    Options::getInstance()->readFromFile(SumwarsHelper::userPath() + "options.xml");
+    Options::getInstance()->readFromFile(SumwarsHelper::userPath() + "/options.xml");
 }
 
 Player*  Document::getLocalPlayer()

@@ -107,7 +107,6 @@ void Options::setToDefaultOptions()
 
 bool Options::readFromFile(const std::string& filename)
 {
-
 	TiXmlDocument doc(filename.c_str());
 	bool loadOkay = doc.LoadFile();
 
