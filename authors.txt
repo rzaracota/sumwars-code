@@ -15,7 +15,8 @@
 =Steffen Schönefeldt (Kalimgard)
 =Christian Wittmann (psycho)
 =Francesco Miglietta (hal9000)
-	
+=Adam Preisler (Alfisko)
+
 [E Scripting]
 =Steffen Schönefeldt (Kalimgard)
 =Hans Wulf (Lastmerlin)
