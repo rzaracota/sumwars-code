@@ -60,6 +60,76 @@ void ItemEditor::init(CEGUI::Window* parent)
 	CEGUI::PushButton* copyfoButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ItemTab/Properties/CopyDataButton"));
 	copyfoButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ItemEditor::onCopyData, this));
 	
+	// wire weaponattr tab
+	CEGUI::Editbox* wtype = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("ItemTab/Weapon/TypeBox"));
+	wtype->subscribeEvent(CEGUI::Editbox::EventTextChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+	
+	CEGUI::Spinner* physMin =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/PhysMinSpinner"));
+	physMin->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+
+	CEGUI::Spinner* physMax =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/PhysMaxSpinner"));
+	physMax->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+	
+	CEGUI::Spinner* physMult =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/PhysMultSpinner"));
+	physMult->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+
+	CEGUI::Spinner* fireMin =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/FireMinSpinner"));
+	fireMin->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+
+	CEGUI::Spinner* fireMax =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/FireMaxSpinner"));
+	fireMax->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
+	
+	CEGUI::Spinner* fireMult =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/FireMultSpinner"));
+	fireMult->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+
+	CEGUI::Spinner* iceMin =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/IceMinSpinner"));
+	iceMin->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+
+	CEGUI::Spinner* iceMax =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/IceMaxSpinner"));
+	iceMax->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+	
+	CEGUI::Spinner* iceMult =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/IceMultSpinner"));
+	iceMult->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+
+	CEGUI::Spinner* airMin =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/AirMinSpinner"));
+	airMin->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+
+	CEGUI::Spinner* airMax =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/AirMaxSpinner"));
+	airMax->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+	
+	CEGUI::Spinner* airMult =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/AirMultSpinner"));
+	airMult->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+	
+	CEGUI::Spinner* precision =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/PrecisionSpinner"));
+	precision->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+	
+	CEGUI::Spinner* power =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/PowerSpinner"));
+	power->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+	
+	CEGUI::Spinner* range =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/RangeSpinner"));
+	range->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+	
+	CEGUI::Spinner* speed =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/SpeedSpinner"));
+	speed->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+	
+	CEGUI::Spinner* critperc =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/CritPercentSpinner"));
+	critperc->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+	
+	CEGUI::Checkbox* twohanded = static_cast<CEGUI::Checkbox*>(win_mgr.getWindow("ItemTab/Weapon/TwohandedCheckbox"));
+	twohanded->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+	
+	
+	// Wire the consume tab
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/HealthSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/BlindSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/PoisonedSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/BerserkSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/ConfusedSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/MuteSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/ParalyzedSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/FrozenSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/BurningSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	
 	// init the internal data
 	TiXmlElement * item_root = new TiXmlElement("Item");  
 	m_item_xml.LinkEndChild( item_root );  
@@ -161,6 +231,100 @@ bool ItemEditor::onItemModified(const CEGUI::EventArgs& evt)
 	else if (size == "Medium") m_edited_item.m_size = Item::MEDIUM;
 	else if (size == "Small") m_edited_item.m_size = Item::SMALL;
 
+	m_no_cegui_events = false;
+	m_modified_item = true;
+	
+	return true;
+}
+
+bool ItemEditor::onWeaponModified(const CEGUI::EventArgs& evt)
+{
+	if (m_no_cegui_events)
+		return true;
+	m_no_cegui_events = true;
+	
+	if (m_edited_item.m_weapon_attr == 0)
+	{
+		m_edited_item.m_weapon_attr = new WeaponAttr;
+	}
+	
+	m_edited_item.m_weapon_attr->m_weapon_type = getWindowText("ItemTab/Weapon/TypeLabel","sword");
+	
+	Damage& dmg = m_edited_item.m_weapon_attr->m_damage;
+	
+	dmg.m_min_damage[Damage::PHYSICAL] = getSpinnerValue("ItemTab/Weapon/PhysMinSpinner",1);
+	dmg.m_max_damage[Damage::PHYSICAL] = getSpinnerValue("ItemTab/Weapon/PhysMaxSpinner",1);
+	if (dmg.m_max_damage[Damage::PHYSICAL] < dmg.m_min_damage[Damage::PHYSICAL])
+	{
+		dmg.m_max_damage[Damage::PHYSICAL] =  dmg.m_min_damage[Damage::PHYSICAL];
+		setSpinnerValue("ItemTab/Weapon/PhysMaxSpinner",dmg.m_max_damage[Damage::PHYSICAL]);
+	}
+	dmg.m_multiplier[Damage::PHYSICAL] = getSpinnerValue("ItemTab/Weapon/PhysMultSpinner",1);
+	
+	dmg.m_min_damage[Damage::FIRE] = getSpinnerValue("ItemTab/Weapon/FireMinSpinner",1);
+	dmg.m_max_damage[Damage::FIRE] = getSpinnerValue("ItemTab/Weapon/FireMaxSpinner",1);
+	if (dmg.m_max_damage[Damage::FIRE] < dmg.m_min_damage[Damage::FIRE])
+	{
+		dmg.m_max_damage[Damage::FIRE] =  dmg.m_min_damage[Damage::FIRE];
+		setSpinnerValue("ItemTab/Weapon/FireMaxSpinner",dmg.m_max_damage[Damage::FIRE]);
+	}
+	dmg.m_multiplier[Damage::FIRE] = getSpinnerValue("ItemTab/Weapon/FireMultSpinner",1);
+	
+	dmg.m_min_damage[Damage::ICE] = getSpinnerValue("ItemTab/Weapon/IceMinSpinner",1);
+	dmg.m_max_damage[Damage::ICE] = getSpinnerValue("ItemTab/Weapon/IceMaxSpinner",1);
+	if (dmg.m_max_damage[Damage::ICE] < dmg.m_min_damage[Damage::ICE])
+	{
+		dmg.m_max_damage[Damage::ICE] =  dmg.m_min_damage[Damage::ICE];
+		setSpinnerValue("ItemTab/Weapon/IceMaxSpinner",dmg.m_max_damage[Damage::ICE]);
+	}
+	dmg.m_multiplier[Damage::ICE] = getSpinnerValue("ItemTab/Weapon/IceMultSpinner",1);
+	
+	dmg.m_min_damage[Damage::AIR] = getSpinnerValue("ItemTab/Weapon/AirMinSpinner",1);
+	dmg.m_max_damage[Damage::AIR] = getSpinnerValue("ItemTab/Weapon/AirMaxSpinner",1);
+	if (dmg.m_max_damage[Damage::AIR] < dmg.m_min_damage[Damage::AIR])
+	{
+		dmg.m_max_damage[Damage::AIR] =  dmg.m_min_damage[Damage::AIR];
+		setSpinnerValue("ItemTab/Weapon/AirMaxSpinner",dmg.m_max_damage[Damage::AIR]);
+	}
+	dmg.m_multiplier[Damage::AIR] = getSpinnerValue("ItemTab/Weapon/AirMultSpinner",1);
+	
+	dmg.m_attack = getSpinnerValue("ItemTab/Weapon/PrecisionSpinner",1);
+	dmg.m_power = getSpinnerValue("ItemTab/Weapon/PowerSpinner",1);
+	dmg.m_crit_perc = 0.01* getSpinnerValue("ItemTab/Weapon/CritPercentSpinner",1);
+	
+	m_edited_item.m_weapon_attr->m_attack_range = getSpinnerValue("ItemTab/Weapon/RangeSpinner");
+	m_edited_item.m_weapon_attr->m_dattack_speed = (int) getSpinnerValue("ItemTab/Weapon/SpeedSpinner");
+	m_edited_item.m_weapon_attr->m_two_handed = getCheckboxSelected("ItemTab/Weapon/TwohandedCheckbox");
+	
+	m_no_cegui_events = false;
+	m_modified_item = true;
+	
+	return true;
+}
+
+bool ItemEditor::onConsumeEffectsModified(const CEGUI::EventArgs& evt)
+{
+	if (m_no_cegui_events)
+		return true;
+	m_no_cegui_events = true;
+	
+	if (m_edited_item.m_useup_effect == 0)
+	{
+		m_edited_item.m_useup_effect = new CreatureDynAttrMod;
+	}
+	
+	CreatureDynAttrMod* dynmod = m_edited_item.m_useup_effect;
+	
+	dynmod->m_dhealth = getSpinnerValue("ItemTab/Consume/HealthSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::BLIND] = getSpinnerValue("ItemTab/Consume/BlindSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::POISONED] = getSpinnerValue("ItemTab/Consume/PoisonedSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::BERSERK] = getSpinnerValue("ItemTab/Consume/BerserkSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::CONFUSED] = getSpinnerValue("ItemTab/Consume/ConfusedSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::MUTE] = getSpinnerValue("ItemTab/Consume/MuteSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::PARALYZED] = getSpinnerValue("ItemTab/Consume/ParalyzedSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::FROZEN] = getSpinnerValue("ItemTab/Consume/FrozenSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::BURNING] = getSpinnerValue("ItemTab/Consume/BurningSpinner");
+	
 	m_no_cegui_events = false;
 	m_modified_item = true;
 	
@@ -418,6 +582,55 @@ void ItemEditor::updateItemEditor()
 	if (size == Item::BIG) setComboboxSelection("ItemTab/Properties/SizeBox","Big");
 	else if (size == Item::MEDIUM) setComboboxSelection("ItemTab/Properties/SizeBox","Medium");
 	else if (size == Item::SMALL) setComboboxSelection("ItemTab/Properties/SizeBox","Small");
+	
+	// update weapon properties
+	if (m_edited_item.m_weapon_attr != 0)
+	{
+		Damage& dmg = m_edited_item.m_weapon_attr->m_damage;
+		
+		setWindowText("ItemTab/Weapon/TypeBox",m_edited_item.m_weapon_attr->m_weapon_type);
+
+		setSpinnerValue("ItemTab/Weapon/PhysMinSpinner",dmg.m_min_damage[Damage::PHYSICAL]);
+		setSpinnerValue("ItemTab/Weapon/PhysMaxSpinner",dmg.m_max_damage[Damage::PHYSICAL]);
+		setSpinnerValue("ItemTab/Weapon/PhysMultSpinner",dmg.m_multiplier[Damage::PHYSICAL]);
+		
+		setSpinnerValue("ItemTab/Weapon/FireMinSpinner",dmg.m_min_damage[Damage::FIRE]);
+		setSpinnerValue("ItemTab/Weapon/FireMaxSpinner",dmg.m_max_damage[Damage::FIRE]);
+		setSpinnerValue("ItemTab/Weapon/FireMultSpinner",dmg.m_multiplier[Damage::FIRE]);
+		
+		setSpinnerValue("ItemTab/Weapon/IceMinSpinner",dmg.m_min_damage[Damage::ICE]);
+		setSpinnerValue("ItemTab/Weapon/IceMaxSpinner",dmg.m_max_damage[Damage::ICE]);
+		setSpinnerValue("ItemTab/Weapon/IceMultSpinner",dmg.m_multiplier[Damage::ICE]);
+		
+		setSpinnerValue("ItemTab/Weapon/AirMinSpinner",dmg.m_min_damage[Damage::AIR]);
+		setSpinnerValue("ItemTab/Weapon/AirMaxSpinner",dmg.m_max_damage[Damage::AIR]);
+		setSpinnerValue("ItemTab/Weapon/AirMultSpinner",dmg.m_multiplier[Damage::AIR]);
+		
+		setSpinnerValue("ItemTab/Weapon/PrecisionSpinner",dmg.m_attack);
+		setSpinnerValue("ItemTab/Weapon/PowerSpinner",dmg.m_power);
+		setSpinnerValue("ItemTab/Weapon/CritPercentSpinner",dmg.m_crit_perc*100);
+		
+		setSpinnerValue("ItemTab/Weapon/RangeSpinner",m_edited_item.m_weapon_attr->m_attack_range);
+		setSpinnerValue("ItemTab/Weapon/SpeedSpinner",m_edited_item.m_weapon_attr->m_dattack_speed );
+		
+		setCheckboxSelected("ItemTab/Weapon/TwohandedCheckbox", m_edited_item.m_weapon_attr->m_two_handed);
+	}
+
+
+	if (m_edited_item.m_useup_effect != 0)
+	{
+		CreatureDynAttrMod* dynmod = m_edited_item.m_useup_effect;
+		
+		setSpinnerValue("ItemTab/Consume/HealthSpinner", dynmod->m_dhealth);
+		setSpinnerValue("ItemTab/Consume/BlindSpinner",dynmod->m_dstatus_mod_immune_time[Damage::BLIND] );
+		setSpinnerValue("ItemTab/Consume/PoisonedSpinner",dynmod->m_dstatus_mod_immune_time[Damage::POISONED] );
+		setSpinnerValue("ItemTab/Consume/BerserkSpinner",dynmod->m_dstatus_mod_immune_time[Damage::BERSERK] );
+		setSpinnerValue("ItemTab/Consume/ConfusedSpinner",dynmod->m_dstatus_mod_immune_time[Damage::CONFUSED] );
+		setSpinnerValue("ItemTab/Consume/MuteSpinner",dynmod->m_dstatus_mod_immune_time[Damage::MUTE] );
+		setSpinnerValue("ItemTab/Consume/ParalyzedSpinner",dynmod->m_dstatus_mod_immune_time[Damage::PARALYZED] );
+		setSpinnerValue("ItemTab/Consume/FrozenSpinner",dynmod->m_dstatus_mod_immune_time[Damage::FROZEN] );
+		setSpinnerValue("ItemTab/Consume/BurningSpinner",dynmod->m_dstatus_mod_immune_time[Damage::BURNING] );
+	}
 
 	m_no_cegui_events = false;
 }

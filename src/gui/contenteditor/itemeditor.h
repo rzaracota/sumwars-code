@@ -39,6 +39,18 @@ class ItemEditor : public ContentEditorTab
 		
 		/**
 		 * \param evt CEGUI event arguments
+		 * \brief Called upon changing any element in the Weapon tab
+		 */
+		bool onWeaponModified(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \param evt CEGUI event arguments
+		 * \brief Called upon changing any element in the Consume tab
+		 */
+		bool onConsumeEffectsModified(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \param evt CEGUI event arguments
 		 * \brief Called upon submitting XML for Item
 		 */
 		bool onItemXMLModified(const CEGUI::EventArgs& evt);
