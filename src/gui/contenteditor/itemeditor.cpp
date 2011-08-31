@@ -130,6 +130,22 @@ void ItemEditor::init(CEGUI::Window* parent)
 	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/FrozenSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
 	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/BurningSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
 	
+	// wire the equip tab
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/HealthSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/StrengthSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/DexteritySpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/MagicPowerSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/WillpowerSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/PhysResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/FireResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/IceResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/AirResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/ArmorSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/BlockSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/AttackSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/PowerSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	
+	
 	// init the internal data
 	TiXmlElement * item_root = new TiXmlElement("Item");  
 	m_item_xml.LinkEndChild( item_root );  
@@ -324,6 +340,43 @@ bool ItemEditor::onConsumeEffectsModified(const CEGUI::EventArgs& evt)
 	dynmod->m_dstatus_mod_immune_time[Damage::PARALYZED] = getSpinnerValue("ItemTab/Consume/ParalyzedSpinner");
 	dynmod->m_dstatus_mod_immune_time[Damage::FROZEN] = getSpinnerValue("ItemTab/Consume/FrozenSpinner");
 	dynmod->m_dstatus_mod_immune_time[Damage::BURNING] = getSpinnerValue("ItemTab/Consume/BurningSpinner");
+	
+	m_no_cegui_events = false;
+	m_modified_item = true;
+	
+	return true;
+}
+
+bool ItemEditor::onEquipEffectsModified(const CEGUI::EventArgs& evt)
+{
+	if (m_no_cegui_events)
+		return true;
+	m_no_cegui_events = true;
+	
+	if (m_edited_item.m_equip_effect == 0)
+	{
+		m_edited_item.m_equip_effect = new CreatureBaseAttrMod;
+	}
+	
+	CreatureBaseAttrMod* basemod = m_edited_item.m_equip_effect;
+	
+	basemod->m_dmax_health = getSpinnerValue("ItemTab/Equip/HealthSpinner");
+	
+	basemod->m_dstrength = (int) getSpinnerValue("ItemTab/Equip/StrengthSpinner");
+	basemod->m_ddexterity = (int) getSpinnerValue("ItemTab/Equip/DexteritySpinner");
+	basemod->m_dmagic_power = (int) getSpinnerValue("ItemTab/Equip/MagicPowerSpinner");
+	basemod->m_dwillpower = (int) getSpinnerValue("ItemTab/Equip/WillpowerSpinner");
+	
+	basemod->m_dresistances[Damage::PHYSICAL] = (int) getSpinnerValue("ItemTab/Equip/PhysResSpinner");
+	basemod->m_dresistances[Damage::FIRE] = (int) getSpinnerValue("ItemTab/Equip/FireResSpinner");
+	basemod->m_dresistances[Damage::ICE] = (int) getSpinnerValue("ItemTab/Equip/IceResSpinner");
+	basemod->m_dresistances[Damage::AIR] = (int) getSpinnerValue("ItemTab/Equip/AirResSpinner");
+	
+	basemod->m_darmor = (int) getSpinnerValue("ItemTab/Equip/ArmorSpinner");
+	basemod->m_dblock = (int) getSpinnerValue("ItemTab/Equip/BlockSpinner");
+	basemod->m_dattack = (int) getSpinnerValue("ItemTab/Equip/AttackSpinner");
+	basemod->m_dpower = (int) getSpinnerValue("ItemTab/Equip/PowerSpinner");
+	
 	
 	m_no_cegui_events = false;
 	m_modified_item = true;
@@ -630,6 +683,29 @@ void ItemEditor::updateItemEditor()
 		setSpinnerValue("ItemTab/Consume/ParalyzedSpinner",dynmod->m_dstatus_mod_immune_time[Damage::PARALYZED] );
 		setSpinnerValue("ItemTab/Consume/FrozenSpinner",dynmod->m_dstatus_mod_immune_time[Damage::FROZEN] );
 		setSpinnerValue("ItemTab/Consume/BurningSpinner",dynmod->m_dstatus_mod_immune_time[Damage::BURNING] );
+	}
+
+	if (m_edited_item.m_equip_effect != 0)
+	{
+		CreatureBaseAttrMod* basemod = m_edited_item.m_equip_effect;
+		
+		setSpinnerValue("ItemTab/Equip/HealthSpinner",basemod->m_dmax_health );
+	
+		setSpinnerValue("ItemTab/Equip/StrengthSpinner",basemod->m_dstrength );
+		setSpinnerValue("ItemTab/Equip/DexteritySpinner",basemod->m_ddexterity );
+		setSpinnerValue("ItemTab/Equip/MagicPowerSpinner",basemod->m_dmagic_power );
+		setSpinnerValue("ItemTab/Equip/WillpowerSpinner",basemod->m_dwillpower );
+		
+		setSpinnerValue("ItemTab/Equip/PhysResSpinner",basemod->m_dresistances[Damage::PHYSICAL] );
+		setSpinnerValue("ItemTab/Equip/FireResSpinner",basemod->m_dresistances[Damage::FIRE] );
+		setSpinnerValue("ItemTab/Equip/IceResSpinner",basemod->m_dresistances[Damage::ICE] );
+		setSpinnerValue("ItemTab/Equip/AirResSpinner",basemod->m_dresistances[Damage::AIR] );
+		
+		setSpinnerValue("ItemTab/Equip/ArmorSpinner",basemod->m_darmor );
+		setSpinnerValue("ItemTab/Equip/BlockSpinner",basemod->m_dblock );
+		setSpinnerValue("ItemTab/Equip/AttackSpinner",basemod->m_dattack );
+		setSpinnerValue("ItemTab/Equip/PowerSpinner",basemod->m_dpower );
+		
 	}
 
 	m_no_cegui_events = false;
