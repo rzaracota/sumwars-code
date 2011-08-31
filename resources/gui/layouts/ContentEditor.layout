@@ -511,6 +511,242 @@
 </Property>
                         <Property Name="Visible" Value="False" />
                         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+						
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/HealthLabel" >
+                            <Property Name="Text" Value="Health:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.03,0},{0.2,0},{0.08,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/Spinner" Name="ItemTab/Equip/HealthSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="10000" />
+                            <Property Name="MinimumValue" Value="0" />
+                           <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.03,0},{0.40,0},{0.08,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/AttrLabel" >
+                            <Property Name="Text" Value="Attribute:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.10,0},{0.2,0},{0.16,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/StrengthLabel" >
+                            <Property Name="Text" Value="Strength:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.17,0},{0.2,0},{0.23,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/Spinner" Name="ItemTab/Equip/StrengthSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="1000" />
+                            <Property Name="MinimumValue" Value="0" />
+                           <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.17,0},{0.40,0},{0.23,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/DexterityLabel" >
+                            <Property Name="Text" Value="Dexterity:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.52,0},{0.17,0},{0.7,0},{0.23,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/Spinner" Name="ItemTab/Equip/DexteritySpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="1000" />
+                            <Property Name="MinimumValue" Value="0" />
+                           <Property Name="UnifiedAreaRect" Value="{{0.7,0},{0.17,0},{0.90,0},{0.23,0}}" />
+                        </Window>
+						
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/MagicPowerLabel" >
+                            <Property Name="Text" Value="Magic Power:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.24,0},{0.2,0},{0.30,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/Spinner" Name="ItemTab/Equip/MagicPowerSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="1000" />
+                            <Property Name="MinimumValue" Value="0" />
+                           <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.24,0},{0.40,0},{0.30,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/WillpowerLabel" >
+                            <Property Name="Text" Value="Willpower:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.52,0},{0.24,0},{0.7,0},{0.30,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/Spinner" Name="ItemTab/Equip/WillpowerSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="1000" />
+                            <Property Name="MinimumValue" Value="0" />
+                           <Property Name="UnifiedAreaRect" Value="{{0.7,0},{0.24,0},{0.90,0},{0.30,0}}" />
+                        </Window>
+						
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/ResistancesLabel" >
+                            <Property Name="Text" Value="Resistances:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.32,0},{0.4,0},{0.38,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/PhysResLabel" >
+                            <Property Name="Text" Value="Physical:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.39,0},{0.2,0},{0.45,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/Spinner" Name="ItemTab/Equip/PhysResSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="100" />
+                            <Property Name="MinimumValue" Value="0" />
+                           <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.39,0},{0.40,0},{0.45,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/FireResLabel" >
+                            <Property Name="Text" Value="Fire:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.52,0},{0.39,0},{0.7,0},{0.45,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/Spinner" Name="ItemTab/Equip/FireResSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="100" />
+                            <Property Name="MinimumValue" Value="0" />
+                           <Property Name="UnifiedAreaRect" Value="{{0.7,0},{0.39,0},{0.90,0},{0.45,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/IceResLabel" >
+                            <Property Name="Text" Value="Ice:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.46,0},{0.2,0},{0.52,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/Spinner" Name="ItemTab/Equip/IceResSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="100" />
+                            <Property Name="MinimumValue" Value="0" />
+                           <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.46,0},{0.40,0},{0.52,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/AirResLabel" >
+                            <Property Name="Text" Value="Air:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.52,0},{0.46,0},{0.7,0},{0.52,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/Spinner" Name="ItemTab/Equip/AirResSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="100" />
+                            <Property Name="MinimumValue" Value="0" />
+                           <Property Name="UnifiedAreaRect" Value="{{0.7,0},{0.46,0},{0.90,0},{0.52,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/OtherLabel" >
+                            <Property Name="Text" Value="Other:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.54,0},{0.2,0},{0.60,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/ArmorLabel" >
+                            <Property Name="Text" Value="Armor:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.61,0},{0.2,0},{0.67,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/Spinner" Name="ItemTab/Equip/ArmorSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="1000" />
+                            <Property Name="MinimumValue" Value="0" />
+                           <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.61,0},{0.40,0},{0.67,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/BlockLabel" >
+                            <Property Name="Text" Value="Block:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.52,0},{0.61,0},{0.7,0},{0.67,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/Spinner" Name="ItemTab/Equip/BlockSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="1000" />
+                            <Property Name="MinimumValue" Value="0" />
+                           <Property Name="UnifiedAreaRect" Value="{{0.7,0},{0.61,0},{0.90,0},{0.67,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/AttackLabel" >
+                            <Property Name="Text" Value="Precision:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.68,0},{0.2,0},{0.74,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/Spinner" Name="ItemTab/Equip/AttackSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="1000" />
+                            <Property Name="MinimumValue" Value="0" />
+                           <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.68,0},{0.40,0},{0.74,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/StaticText" Name="ItemTab/Equip/PowerLabel" >
+                            <Property Name="Text" Value="Power:" />
+                            <Property Name="HorzExtent" Value="36" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.52,0},{0.68,0},{0.7,0},{0.74,0}}" />
+                        </Window>
+						
+						<Window Type="TaharezLook/Spinner" Name="ItemTab/Equip/PowerSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="1000" />
+                            <Property Name="MinimumValue" Value="0" />
+                           <Property Name="UnifiedAreaRect" Value="{{0.7,0},{0.68,0},{0.90,0},{0.74,0}}" />
+                        </Window>
+						
                     </Window>
                     <Window Type="DefaultWindow" Name="ItemTab/Weapon" >
                         <Property Name="Text" >Weapon
