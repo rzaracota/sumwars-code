@@ -1,0 +1,196 @@
+# Ukrainian translations for sumwars package
+# Copyright (C) 2009
+# This file is distributed under the same license as the sumwars package.
+# Igor Paliychuk <mansonigor@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
+"Language-Team: \n"
+"Language: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Ukrainian\n"
+"X-Poedit-Country: UKRAINE\n"
+
+#: herbalist.xml
+msgid "Herb collector"
+msgstr "Херб колектор"
+
+#: herbalist.xml
+msgid "And another good deed done. I could get used to this."
+msgstr "І ще одну добру справу зробили. Я міг звикнути до цього."
+
+#: herbalist.xml
+msgid "The herbalist of Joringsbridge wants to have the berries of 10 bushes. \"..(10 - herbalist.bushes)..\" berries have been collected."
+msgstr "Травник з Joringsbridge хоче мати ягоди з 10 кущів. \".. (10 - herbalist.bushes)..\" ягоди були зібрані."
+
+#: herbalist.xml
+msgid "joringsbridge"
+msgstr "joringsbridge"
+
+#: herbalist.xml
+msgid "Gertlinde Kampfer"
+msgstr "Gertlinde Кампфер"
+
+#: herbalist.xml
+msgid "Herb gathering"
+msgstr "Херб збору"
+
+#: herbalist.xml
+msgid "Here, old women. Your berries."
+msgstr "Тут, стара. Ваші ягоди."
+
+#: herbalist.xml
+msgid "Ah, well done, young one."
+msgstr "Ах, молодець, юнак."
+
+#: herbalist.xml
+msgid "Here, let me give you something in return."
+msgstr "Тут, дозвольте мені дати вам щось натомість."
+
+#: herbalist.xml
+msgid "I need more berries, if I am to do something useful with them."
+msgstr "Мені потрібно більше ягід, якщо я буду робити щось корисне з ними."
+
+#: herbalist.xml
+msgid "Do you want to collect some berries after all?"
+msgstr "Ви хочете, щоб зібрати ягоди в кінці кінців?"
+
+#: herbalist.xml
+msgid "Accept Quest?"
+msgstr "Прийняти Квест?"
+
+#: herbalist.xml
+msgid "Yes"
+msgstr "Так"
+
+#: herbalist.xml
+msgid "No"
+msgstr "Ні"
+
+#: herbalist.xml
+msgid "Hey there, young one!"
+msgstr "Ей, молодче!"
+
+#: herbalist.xml
+msgid "I see you are going to the Northern Meadow."
+msgstr "Я бачу, ви збираєтеся Північний Луг."
+
+#: herbalist.xml
+msgid "That's right."
+msgstr "Це вірно."
+
+#: herbalist.xml
+msgid "Quite a trick."
+msgstr "Досить трюк."
+
+#: herbalist.xml
+msgid "We were only walking through the gate."
+msgstr "Ми були тільки пішки через ворота."
+
+#: herbalist.xml
+msgid "Peace."
+msgstr "Мир."
+
+#: herbalist.xml
+msgid "If you are roaming around there anyway, why don't you collect some berries for me?"
+msgstr "Якщо ви бродили там в будь-якому разі, чому б вам не зібрати ягоди для мене?"
+
+#: herbalist.xml
+msgid "With all those goblins about an old woman can't even set a foot out of the village."
+msgstr "З усіма цими гоблінами про старій не може навіть встановити ногу з села."
+
+#: herbalist.xml
+msgid "Plants are not really my forte..."
+msgstr "Рослини насправді не моя сильна сторона ..."
+
+#: herbalist.xml
+msgid "Fiddlesticks!"
+msgstr "Дурниці!"
+
+#: herbalist.xml
+msgid "It's not like I want you to collect something exotic, you know."
+msgstr "Це не походить, я хочу, щоб збирати щось екзотичне, ви знаєте."
+
+#: herbalist.xml
+msgid "Just rilfberries."
+msgstr "Просто rilfberries."
+
+#: herbalist.xml
+msgid "Look for big bushes with fancy red fruits."
+msgstr "Подивіться для великих кущів з химерними червоними фруктами."
+
+#: herbalist.xml
+msgid "You will find them for sure."
+msgstr "Ви знайдете їх напевно."
+
+#: herbalist.xml
+msgid "I need the berries of at least ten bushes."
+msgstr "Мені потрібно ягід, принаймні десять кущів."
+
+#: herbalist.xml
+msgid "But only the red berries."
+msgstr "Але тільки червоні ягоди."
+
+#: herbalist.xml
+msgid "The rest is of no use at all."
+msgstr "Останнє не має сенсу взагалі."
+
+#: herbalist.xml
+msgid "Very well, if I find some, I'll bring them."
+msgstr "Дуже добре, якщо я знаходжу, я принесу їх."
+
+#: herbalist.xml
+msgid "Very well, if we find some, we'll bring them."
+msgstr "Дуже добре, якщо ми знаходимо деякі, ми привеземо їх."
+
+#: herbalist.xml
+msgid "Thanks, sweety."
+msgstr "Спасибі, солодкий."
+
+#: herbalist.xml
+msgid "Forget it, herb woman."
+msgstr "Забудьте про це, трава жінки."
+
+#: herbalist.xml
+msgid "I'm not going to crawl through the meadows just to search for some stupid bushes."
+msgstr "Я не буду повзати через луки тільки для пошуку якоїсь дурний чагарників."
+
+#: herbalist.xml
+msgid "Have it your way."
+msgstr "У нього свій шлях."
+
+#: herbalist.xml
+msgid "But if you change your mind, I'm not running away from here."
+msgstr "Але якщо ви зміните свою думку, я не тікав звідси."
+
+#: herbalist.xml
+msgid "Very well, if I find some, I'll bring them along."
+msgstr "Дуже добре, якщо я знаходжу, я привезу їх з собою."
+
+#: herbalist.xml
+msgid "Still no."
+msgstr "Проте немає."
+
+#: herbalist.xml
+msgid "Tell me when you're not too mighty for simple work anymore, sweety."
+msgstr "Скажіть, коли ви не занадто могутні для простої роботи більше, мила."
+
+#: herbalist.xml
+msgid "Watch your tongue, hag!"
+msgstr "Слідкуйте за мовою, відьма!"
+
+#: herbalist.xml
+msgid "aisNorthMeadow"
+msgstr ""
+
+#: herbalist.xml
+msgid "Collect\"..bushes_left..\" more herbs."
+msgstr "Зберіть ще \".. bushes_left..\" трав."
+

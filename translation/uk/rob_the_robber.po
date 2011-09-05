@@ -1,0 +1,209 @@
+# Ukrainian translations for sumwars package
+# Copyright (C) 2009
+# This file is distributed under the same license as the sumwars package.
+# Igor Paliychuk <mansonigor@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
+"Language-Team: \n"
+"Language: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Ukrainian\n"
+"X-Poedit-Country: UKRAINE\n"
+
+#: rob_the_robber.xml
+msgid "Rob the robber"
+msgstr "Роб грабіжник"
+
+#: rob_the_robber.xml
+msgid "Rob the robber breathed his last and provided a downright windfall while he was on it."
+msgstr "Роб розбійник випустив останній подих і за умови, абсолютно непередбачену, коли він був на ньому."
+
+#: rob_the_robber.xml
+msgid "Rob the robber is dead and will soon be forgotten. I have his neckband and I'm on my way to Dwarfenwall to show it to this sergeant Wober. I have no idea why everyone was so afraid of this guy."
+msgstr "Роб грабіжник помер, і незабаром буде забуто. У мене є його комір, і я на моєму шляху до Dwarfenwall, щоб показати його на цей Wober сержант. Я поняття не маю, чому все так боявся цього хлопця."
+
+#: rob_the_robber.xml
+msgid "Rob the robber supposedly hides in the depth of the Fairywoods. Find him, dispose of him and take his neckband. At least it spares me the unsavory task of carrying a head around."
+msgstr "Роб грабіжник нібито ховається в глибині Fairywoods. Знайди його, позбавитися від нього і зайняти його комір. Принаймні, запчастин мені сумнівним завдання проведення голову навколо."
+
+#: rob_the_robber.xml
+msgid "Sergeant Lutterer"
+msgstr "Сержант Lutterer"
+
+#: rob_the_robber.xml
+msgid "Wanted poster"
+msgstr "Потрібні плакат"
+
+#: rob_the_robber.xml
+msgid "I really should pay this guy a visit. 10000 gold pieces are not chickenfeed."
+msgstr "Я дійсно повинен платити цьому хлопцеві в гості. 10000 золотих, не chickenfeed."
+
+#: rob_the_robber.xml
+msgid "Watch your back."
+msgstr "Годинники спину."
+
+#: rob_the_robber.xml
+msgid "Excuse me, sergeant, but I noticed this wanted poster."
+msgstr "Вибачте, сержант, але я помітив це хотів плакат."
+
+#: rob_the_robber.xml
+msgid "Isn't a bounty of 10000 gold pieces a little bit over the top for one man?"
+msgstr "Хіба це не щедрість 10000 золотих трохи зверху для однієї людини?"
+
+#: rob_the_robber.xml
+msgid "Oh, him."
+msgstr "О, його."
+
+#: rob_the_robber.xml
+msgid "The bounty hunters keep their fingers off him."
+msgstr "Мисливці за головами тримати руку від нього."
+
+#: rob_the_robber.xml
+msgid "Every time someone wants to have killed him, he winds up dead a short time later himself."
+msgstr "Кожен раз, коли хтось хоче його вбити, він завершує мертвий якийсь час сам."
+
+#: rob_the_robber.xml
+msgid "And Rob is plundering and murdering on."
+msgstr "І Роб грабежу і вбивства далі."
+
+#: rob_the_robber.xml
+msgid "It seems he has oodles of luck, that villain."
+msgstr "Здається, у нього купа удача, що лиходій."
+
+#: rob_the_robber.xml
+msgid "Are you interested?"
+msgstr "Чи зацікавлені ви?"
+
+#: rob_the_robber.xml
+msgid "Accept the quest?"
+msgstr "Прийміть квест?"
+
+#: rob_the_robber.xml
+msgid "Yes"
+msgstr "Так"
+
+#: rob_the_robber.xml
+msgid "No"
+msgstr "Ні"
+
+#: rob_the_robber.xml
+msgid "Indeed."
+msgstr "У самому справі."
+
+#: rob_the_robber.xml
+msgid "10000 gold pieces are quite interesting for the traveling fund."
+msgstr "10000 золотих вельми цікаві для фонду подорожей."
+
+#: rob_the_robber.xml
+msgid "And I'm pretty lucky myself."
+msgstr "І я досить спритним себе."
+
+#: rob_the_robber.xml
+msgid "Then take his necklace."
+msgstr "Потім візьміть його намисто."
+
+#: rob_the_robber.xml
+msgid "Word is, he treasures it quite a lot."
+msgstr "Слово є, він скарби його досить багато."
+
+#: rob_the_robber.xml
+msgid "If you can take it to sergeant Wober in Dwarfenwall he will believe you that Rob is dead."
+msgstr "Якщо ви можете прийняти його на сержанта Wober в Dwarfenwall він не повірить вам, що Роб мертвий."
+
+#: rob_the_robber.xml
+msgid "Right now we suspect him to be in the Fairywoods between here and Dwarvenwall."
+msgstr "Прямо зараз ми підозрюємо, щоб він був у Fairywoods між тут і Dwarvenwall."
+
+#: rob_the_robber.xml
+msgid "Just curious."
+msgstr "Просто цікаво."
+
+#: rob_the_robber.xml
+msgid "Sergeant Wober"
+msgstr "Сержант Wober"
+
+#: rob_the_robber.xml
+msgid "Bring me his necklace and I give you the 10000 gold pieces."
+msgstr "Принеси мені його намисто і я даю вам 10000 золотих."
+
+#: rob_the_robber.xml
+msgid "Not a second earlier!"
+msgstr "Ні секунди раніше!"
+
+#: rob_the_robber.xml
+msgid "If you can bring it to me I will believe you that Rob is dead."
+msgstr "Якщо ви можете довести його до мене, я повірю вам, що Роб мертвий."
+
+#: rob_the_robber.xml
+msgid "Right now we suspect him to be in the Fairywoods between here and Joringsbridge."
+msgstr "Прямо зараз ми підозрюємо, щоб він був у Fairywoods між тут і Joringsbridge."
+
+#: rob_the_robber.xml
+msgid "Rob the Robber (Reward)"
+msgstr "Роб Розбійник (Нагорода)"
+
+#: rob_the_robber.xml
+msgid "Here is the necklace of Rob the robber."
+msgstr "Ось намисто Роб розбійник."
+
+#: rob_the_robber.xml
+msgid "By all devils!"
+msgstr "За три чорти!"
+
+#: rob_the_robber.xml
+msgid "Someone really got him?"
+msgstr "Хтось дійсно отримав його?"
+
+#: rob_the_robber.xml
+msgid "Well, I wish you luck."
+msgstr "Що ж, я бажаю вам успіху."
+
+#: rob_the_robber.xml
+msgid "His vengeful spirit will supposedly hunt all those who hurt him."
+msgstr "Його мстивий дух нібито полюють всі ті, хто йому боляче."
+
+#: rob_the_robber.xml
+msgid "But that shall not be my problem."
+msgstr "Але це не повинна бути моя проблема."
+
+#: rob_the_robber.xml
+msgid "Here are the 10000 gold pieces."
+msgstr "Ось 10000 золотих."
+
+#: rob_the_robber.xml
+msgid "aisDarkFairyforest"
+msgstr "aisDarkFairyforest"
+
+#: rob_the_robber.xml
+msgid "I will quarter and skin you, before I throw you to the wolves!"
+msgstr "Я буду квартал і шкіри ви, перш ніж я кинути вас на розтерзання!"
+
+#: rob_the_robber.xml
+msgid "You talk too much!"
+msgstr "Ти занадто багато говориш!"
+
+#: rob_the_robber.xml
+msgid "I will quarter and skin everyone of you, before I throw you to the wolves!"
+msgstr "Я буду квартал і шкіри кожного з вас, перш ніж я кинути вас на розтерзання!"
+
+#: rob_the_robber.xml
+msgid "You will die! I will destroy you!!"
+msgstr "Ти помреш! Я знищу тебе!"
+
+#: rob_the_robber.xml
+msgid "My soul will crawl out of it's grave and hunt you to the ends of the world!"
+msgstr "Моя душа буде виповзати з його могили і полювати тобою на край світу!"
+
+#: rob_the_robber.xml
+msgid "Have fun with that. If you escape hell, that is."
+msgstr "Удачі з цим. Якщо уникнути пекла, то є."
+

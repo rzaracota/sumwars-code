@@ -43,6 +43,7 @@
 =axander
 =Simeon Dear (Trilby)
 =Patrick McMunn (PaddyMac)
+=Igor Paliychuk (ig0rk0)
 
 [J Build system]
 =Stefan Stammberger (fusion44)

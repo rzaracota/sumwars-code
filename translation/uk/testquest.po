@@ -1,0 +1,137 @@
+# Ukrainian translations for sumwars package
+# Copyright (C) 2009
+# This file is distributed under the same license as the sumwars package.
+# Igor Paliychuk <mansonigor@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
+"Language-Team: \n"
+"Language: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Ukrainian\n"
+"X-Poedit-Country: UKRAINE\n"
+
+#: testquest.xml
+msgid "testquest"
+msgstr ""
+
+#: testquest.xml
+msgid "Fenor Marken"
+msgstr ""
+
+#: testquest.xml
+msgid "Test"
+msgstr "Тест"
+
+#: testquest.xml
+msgid "This is a Test"
+msgstr "Це тест"
+
+#: testquest.xml
+msgid "surprised"
+msgstr "здивований"
+
+#: testquest.xml
+msgid "thoughtful"
+msgstr "вдумливий"
+
+#: testquest.xml
+msgid "happy"
+msgstr "щасливий"
+
+#: testquest.xml
+msgid "amused"
+msgstr "потішило"
+
+#: testquest.xml
+msgid "excited"
+msgstr "збуджений"
+
+#: testquest.xml
+msgid "in love"
+msgstr "закоханий"
+
+#: testquest.xml
+msgid "bored"
+msgstr "нудьгуючий"
+
+#: testquest.xml
+msgid "unhappy"
+msgstr "нещасний"
+
+#: testquest.xml
+msgid "sad"
+msgstr "сумний"
+
+#: testquest.xml
+msgid "pain"
+msgstr "біль"
+
+#: testquest.xml
+msgid "sneer"
+msgstr "глумитися"
+
+#: testquest.xml
+msgid "grin"
+msgstr "оскал"
+
+#: testquest.xml
+msgid "offended"
+msgstr "образив"
+
+#: testquest.xml
+msgid "threatening"
+msgstr "загрозливий"
+
+#: testquest.xml
+msgid "angry"
+msgstr "сердитий"
+
+#: testquest.xml
+msgid "shouting a warcry"
+msgstr ""
+
+#: testquest.xml
+msgid "exhausted"
+msgstr "вичерпаний"
+
+#: testquest.xml
+msgid "injured"
+msgstr "поранений"
+
+#: testquest.xml
+msgid "deadly injured"
+msgstr "смертельні поранення"
+
+#: testquest.xml
+msgid "afraid"
+msgstr "боїться"
+
+#: testquest.xml
+msgid "in panic"
+msgstr "в паніці"
+
+#: testquest.xml
+msgid "putting up a distance"
+msgstr "розклеюванні відстані"
+
+#: testquest.xml
+msgid "being disgusted"
+msgstr "будучи відраза"
+
+#: testquest.xml
+msgid "and yet another Test"
+msgstr "і ще одна перевірка"
+
+#: testquest.xml
+msgid "again a test"
+msgstr "знову тест"
+
