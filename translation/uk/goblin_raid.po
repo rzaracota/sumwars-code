@@ -12,7 +12,7 @@ msgstr ""
 "Language-Team: \n"
 "Language: Ukrainian\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Basepath: .\n"
@@ -24,16 +24,32 @@ msgid "goblin_raid"
 msgstr ""
 
 #: goblin_raid.xml
-msgid "Well, I got a little money for killing some goblins I would have wasted anyway. Not a bad day."
-msgstr "Ну, у мене мало грошей за вбивство деяких гоблінів я став би витрачати так чи інакше. Не поганий день."
+msgid ""
+"Well, I got a little money for killing some goblins I would have wasted "
+"anyway. Not a bad day."
+msgstr ""
+"Ну, у мене мало грошей за вбивство деяких гоблінів я став би витрачати так "
+"чи інакше. Не поганий день."
 
 #: goblin_raid.xml
-msgid "It seems the sergeant from Joringsbridge is willing to pay, but he wants me to help those peasants first. There's no trust in this world anymore."
-msgstr "Здається, сержант з Joringsbridge готовий платити, але він хоче, щоб я допоміг тих селян, в першу чергу. Там немає довіри в цьому світі більше."
+msgid ""
+"It seems the sergeant from Joringsbridge is willing to pay, but he wants me "
+"to help those peasants first. There's no trust in this world anymore."
+msgstr ""
+"Здається, сержант з Joringsbridge готовий платити, але він хоче, щоб я "
+"допоміг тих селян, в першу чергу. Там немає довіри в цьому світі більше."
 
 #: goblin_raid.xml
-msgid "I discovered plans of a goblin raid set for a village called Joringsbridge. They were found amongst the remains of some goblin tribe. Guess I busted that party prematurely. Maybe someone official will appreciate not having hordes of goblins kicking in their doors."
-msgstr "Я виявив, плани набору гоблін рейд по селу під назвою Joringsbridge. Вони були знайдені серед останків деяких племені гоблінів. Вгадайте, я вилетів цієї партії передчасно. Може бути, хтось офіційні оцінять не маючи орди гоблінів ногами в їх двері."
+msgid ""
+"I discovered plans of a goblin raid set for a village called Joringsbridge. "
+"They were found amongst the remains of some goblin tribe. Guess I busted "
+"that party prematurely. Maybe someone official will appreciate not having "
+"hordes of goblins kicking in their doors."
+msgstr ""
+"Я виявив, плани набору гоблін рейд по селу під назвою Joringsbridge. Вони "
+"були знайдені серед останків деяких племені гоблінів. Вгадайте, я вилетів "
+"цієї партії передчасно. Може бути, хтось офіційні оцінять не маючи орди "
+"гоблінів ногами в їх двері."
 
 #: goblin_raid.xml
 msgid "aisDarkClearing"
@@ -57,7 +73,8 @@ msgstr "Це схоже, що це може бути Joringsbridge. Ви впе�
 
 #: goblin_raid.xml
 msgid "Some kind of head honcho shaman had them, so I figure they mean it."
-msgstr "Якийсь головний шаман мав їх бос, тому я вважаю, вони мають на увазі це."
+msgstr ""
+"Якийсь головний шаман мав їх бос, тому я вважаю, вони мають на увазі це."
 
 #: goblin_raid.xml
 msgid "Meant it. Whatever."
@@ -126,4 +143,3 @@ msgstr "Яка різниця. Це не те, мені потрібні гро�
 #: goblin_raid.xml
 msgid "And I could care less what happens to some peasant family."
 msgstr "І я абсолютно байдуже, що відбувається з деякими селянській родині."
-

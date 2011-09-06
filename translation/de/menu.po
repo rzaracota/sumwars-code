@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-03 14:01+0200\n"
+"POT-Creation-Date: 2011-09-06 19:27+0200\n"
 "PO-Revision-Date: 2011-05-19 12:02+0200\n"
 "Last-Translator: kalimgard <kalimgard@users.sourceforge.net>\n"
 "Language-Team: german <de@sumwars>\n"
@@ -324,7 +324,7 @@ msgstr ""
 msgid "Chat"
 msgstr "Chat Fenster"
 
-#: ../src/gui/controlpanel.cpp:387 ../src/gui/mainmenu.cpp:138
+#: ../src/gui/controlpanel.cpp:387 ../src/gui/mainmenu.cpp:144
 msgid "Options"
 msgstr "Optionen"
 
@@ -332,7 +332,7 @@ msgstr "Optionen"
 msgid "Save & Exit"
 msgstr "Speichern & Ende"
 
-#: ../src/gui/controlpanel.cpp:393 ../src/gui/optionswindow.cpp:318
+#: ../src/gui/controlpanel.cpp:393 ../src/gui/optionswindow.cpp:319
 msgid "Inventory"
 msgstr "Inventar"
 
@@ -340,7 +340,7 @@ msgstr "Inventar"
 msgid "Character"
 msgstr "Charakter Bildschirm"
 
-#: ../src/gui/controlpanel.cpp:399 ../src/gui/optionswindow.cpp:324
+#: ../src/gui/controlpanel.cpp:399 ../src/gui/optionswindow.cpp:325
 msgid "Skilltree"
 msgstr "Fähigkeiten"
 
@@ -348,37 +348,37 @@ msgstr "Fähigkeiten"
 msgid "Party"
 msgstr "Partei"
 
-#: ../src/gui/controlpanel.cpp:405 ../src/gui/optionswindow.cpp:333
+#: ../src/gui/controlpanel.cpp:405 ../src/gui/optionswindow.cpp:334
 msgid "Quests"
 msgstr "Quests"
 
-#: ../src/gui/inventory.cpp:351
+#: ../src/gui/inventory.cpp:366
 msgid "Drop:"
 msgstr "Drop:"
 
-#: ../src/gui/mainmenu.cpp:126
+#: ../src/gui/mainmenu.cpp:132
 msgid "Single player"
 msgstr "Einzelspieler"
 
-#: ../src/gui/mainmenu.cpp:129
+#: ../src/gui/mainmenu.cpp:135
 msgid "Join game"
 msgstr "Spiel beitreten"
 
-#: ../src/gui/mainmenu.cpp:132
+#: ../src/gui/mainmenu.cpp:138
 msgid "Host game"
 msgstr "Spiel erstellen"
 
-#: ../src/gui/mainmenu.cpp:135
+#: ../src/gui/mainmenu.cpp:141
 msgid "Credits"
 msgstr "Credits"
 
-#: ../src/gui/mainmenu.cpp:141
+#: ../src/gui/mainmenu.cpp:147
 msgid "Quit"
 msgstr "Beenden"
 
 #: ../src/gui/messageboxes.cpp:52 ../src/gui/messageboxes.cpp:198
 #: ../src/gui/networkwindows.cpp:95 ../src/gui/networkwindows.cpp:223
-#: ../src/gui/optionswindow.cpp:366 ../src/gui/tradewindow.cpp:265
+#: ../src/gui/optionswindow.cpp:367 ../src/gui/tradewindow.cpp:265
 msgid "Ok"
 msgstr "Ok"
 
@@ -402,71 +402,71 @@ msgstr "Port"
 msgid "Host"
 msgstr "Host"
 
-#: ../src/gui/optionswindow.cpp:307
+#: ../src/gui/optionswindow.cpp:308
 msgid "Shortkeys"
 msgstr "Shortkeys"
 
-#: ../src/gui/optionswindow.cpp:309
+#: ../src/gui/optionswindow.cpp:310
 msgid "Gameplay"
 msgstr "Gameplay"
 
-#: ../src/gui/optionswindow.cpp:311
+#: ../src/gui/optionswindow.cpp:312
 msgid "Audio"
 msgstr "Audio"
 
-#: ../src/gui/optionswindow.cpp:313
+#: ../src/gui/optionswindow.cpp:314
 msgid "Graphic"
 msgstr "Grafik"
 
-#: ../src/gui/optionswindow.cpp:315 ../src/gui/optionswindow.cpp:360
+#: ../src/gui/optionswindow.cpp:316 ../src/gui/optionswindow.cpp:361
 msgid "Language"
 msgstr "Sprache"
 
-#: ../src/gui/optionswindow.cpp:321
+#: ../src/gui/optionswindow.cpp:322
 msgid "Character screen"
 msgstr "Charakter Bildschirm"
 
-#: ../src/gui/optionswindow.cpp:327
+#: ../src/gui/optionswindow.cpp:328
 msgid "Party screen"
 msgstr "Party Bildschirm"
 
-#: ../src/gui/optionswindow.cpp:330
+#: ../src/gui/optionswindow.cpp:331
 msgid "Chatbox"
 msgstr "Chat Fenster"
 
-#: ../src/gui/optionswindow.cpp:336
+#: ../src/gui/optionswindow.cpp:337
 msgid "Minimap"
 msgstr "Minikarte"
 
-#: ../src/gui/optionswindow.cpp:339
+#: ../src/gui/optionswindow.cpp:340
 msgid "Swap equipement"
 msgstr "Ausrüstung wechseln"
 
-#: ../src/gui/optionswindow.cpp:342
+#: ../src/gui/optionswindow.cpp:343
 msgid "Item Labels"
 msgstr "Gegenstandsbeschreibungen"
 
-#: ../src/gui/optionswindow.cpp:345
+#: ../src/gui/optionswindow.cpp:346
 msgid "Difficulty"
 msgstr "Schwierigkeit"
 
-#: ../src/gui/optionswindow.cpp:348
+#: ../src/gui/optionswindow.cpp:349
 msgid "Text Speed"
 msgstr "Textgeschwindigkeit"
 
-#: ../src/gui/optionswindow.cpp:351
+#: ../src/gui/optionswindow.cpp:352
 msgid "Sound"
 msgstr "Sound"
 
-#: ../src/gui/optionswindow.cpp:354
+#: ../src/gui/optionswindow.cpp:355
 msgid "Music"
 msgstr "Musik"
 
-#: ../src/gui/optionswindow.cpp:357
+#: ../src/gui/optionswindow.cpp:358
 msgid "Enemy Highlight Color"
 msgstr "Hervorhebungsfarbe für Gegner"
 
-#: ../src/gui/optionswindow.cpp:363
+#: ../src/gui/optionswindow.cpp:364
 msgid "Grab mouse in windowed mode (needs restart)"
 msgstr ""
 

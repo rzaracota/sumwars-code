@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2009-03-09 15:15+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
@@ -24,16 +24,32 @@ msgid "Rob the robber"
 msgstr "Роб грабіжник"
 
 #: rob_the_robber.xml
-msgid "Rob the robber breathed his last and provided a downright windfall while he was on it."
-msgstr "Роб розбійник випустив останній подих і за умови, абсолютно непередбачену, коли він був на ньому."
+msgid ""
+"Rob the robber breathed his last and provided a downright windfall while he "
+"was on it."
+msgstr ""
+"Роб розбійник випустив останній подих і за умови, абсолютно непередбачену, "
+"коли він був на ньому."
 
 #: rob_the_robber.xml
-msgid "Rob the robber is dead and will soon be forgotten. I have his neckband and I'm on my way to Dwarfenwall to show it to this sergeant Wober. I have no idea why everyone was so afraid of this guy."
-msgstr "Роб грабіжник помер, і незабаром буде забуто. У мене є його комір, і я на моєму шляху до Dwarfenwall, щоб показати його на цей Wober сержант. Я поняття не маю, чому все так боявся цього хлопця."
+msgid ""
+"Rob the robber is dead and will soon be forgotten. I have his neckband and "
+"I'm on my way to Dwarfenwall to show it to this sergeant Wober. I have no "
+"idea why everyone was so afraid of this guy."
+msgstr ""
+"Роб грабіжник помер, і незабаром буде забуто. У мене є його комір, і я на "
+"моєму шляху до Dwarfenwall, щоб показати його на цей Wober сержант. Я "
+"поняття не маю, чому все так боявся цього хлопця."
 
 #: rob_the_robber.xml
-msgid "Rob the robber supposedly hides in the depth of the Fairywoods. Find him, dispose of him and take his neckband. At least it spares me the unsavory task of carrying a head around."
-msgstr "Роб грабіжник нібито ховається в глибині Fairywoods. Знайди його, позбавитися від нього і зайняти його комір. Принаймні, запчастин мені сумнівним завдання проведення голову навколо."
+msgid ""
+"Rob the robber supposedly hides in the depth of the Fairywoods. Find him, "
+"dispose of him and take his neckband. At least it spares me the unsavory "
+"task of carrying a head around."
+msgstr ""
+"Роб грабіжник нібито ховається в глибині Fairywoods. Знайди його, "
+"позбавитися від нього і зайняти його комір. Принаймні, запчастин мені "
+"сумнівним завдання проведення голову навколо."
 
 #: rob_the_robber.xml
 msgid "Sergeant Lutterer"
@@ -44,8 +60,11 @@ msgid "Wanted poster"
 msgstr "Потрібні плакат"
 
 #: rob_the_robber.xml
-msgid "I really should pay this guy a visit. 10000 gold pieces are not chickenfeed."
-msgstr "Я дійсно повинен платити цьому хлопцеві в гості. 10000 золотих, не chickenfeed."
+msgid ""
+"I really should pay this guy a visit. 10000 gold pieces are not chickenfeed."
+msgstr ""
+"Я дійсно повинен платити цьому хлопцеві в гості. 10000 золотих, не "
+"chickenfeed."
 
 #: rob_the_robber.xml
 msgid "Watch your back."
@@ -56,7 +75,8 @@ msgid "Excuse me, sergeant, but I noticed this wanted poster."
 msgstr "Вибачте, сержант, але я помітив це хотів плакат."
 
 #: rob_the_robber.xml
-msgid "Isn't a bounty of 10000 gold pieces a little bit over the top for one man?"
+msgid ""
+"Isn't a bounty of 10000 gold pieces a little bit over the top for one man?"
 msgstr "Хіба це не щедрість 10000 золотих трохи зверху для однієї людини?"
 
 #: rob_the_robber.xml
@@ -68,8 +88,11 @@ msgid "The bounty hunters keep their fingers off him."
 msgstr "Мисливці за головами тримати руку від нього."
 
 #: rob_the_robber.xml
-msgid "Every time someone wants to have killed him, he winds up dead a short time later himself."
-msgstr "Кожен раз, коли хтось хоче його вбити, він завершує мертвий якийсь час сам."
+msgid ""
+"Every time someone wants to have killed him, he winds up dead a short time "
+"later himself."
+msgstr ""
+"Кожен раз, коли хтось хоче його вбити, він завершує мертвий якийсь час сам."
 
 #: rob_the_robber.xml
 msgid "And Rob is plundering and murdering on."
@@ -116,16 +139,55 @@ msgid "Word is, he treasures it quite a lot."
 msgstr "Слово є, він скарби його досить багато."
 
 #: rob_the_robber.xml
-msgid "If you can take it to sergeant Wober in Dwarfenwall he will believe you that Rob is dead."
-msgstr "Якщо ви можете прийняти його на сержанта Wober в Dwarfenwall він не повірить вам, що Роб мертвий."
+msgid ""
+"If you can take it to sergeant Wober in Dwarfenwall he will believe you that "
+"Rob is dead."
+msgstr ""
+"Якщо ви можете прийняти його на сержанта Wober в Dwarfenwall він не повірить "
+"вам, що Роб мертвий."
 
 #: rob_the_robber.xml
-msgid "Right now we suspect him to be in the Fairywoods between here and Dwarvenwall."
-msgstr "Прямо зараз ми підозрюємо, щоб він був у Fairywoods між тут і Dwarvenwall."
+msgid ""
+"Right now we suspect him to be in the Fairywoods between here and "
+"Dwarvenwall."
+msgstr ""
+"Прямо зараз ми підозрюємо, щоб він був у Fairywoods між тут і Dwarvenwall."
 
 #: rob_the_robber.xml
 msgid "Just curious."
 msgstr "Просто цікаво."
+
+#: rob_the_robber.xml
+#, fuzzy
+msgid "Rob the Robber killed"
+msgstr "Роб Розбійник (Нагорода)"
+
+#: rob_the_robber.xml
+msgid "Here is the necklace of Rob the robber."
+msgstr "Ось намисто Роб розбійник."
+
+#: rob_the_robber.xml
+msgid "I'll be damned!"
+msgstr ""
+
+#: rob_the_robber.xml
+#, fuzzy
+msgid "You really got him?"
+msgstr "Хтось дійсно отримав його?"
+
+#: rob_the_robber.xml
+msgid ""
+"Better hope that the stories about him rising from his grave are just "
+"fairytales."
+msgstr ""
+
+#: rob_the_robber.xml
+msgid "What about my reward?"
+msgstr ""
+
+#: rob_the_robber.xml
+msgid "Sergeant Wober in Dwarfenwall has it."
+msgstr ""
 
 #: rob_the_robber.xml
 msgid "Sergeant Wober"
@@ -144,16 +206,15 @@ msgid "If you can bring it to me I will believe you that Rob is dead."
 msgstr "Якщо ви можете довести його до мене, я повірю вам, що Роб мертвий."
 
 #: rob_the_robber.xml
-msgid "Right now we suspect him to be in the Fairywoods between here and Joringsbridge."
-msgstr "Прямо зараз ми підозрюємо, щоб він був у Fairywoods між тут і Joringsbridge."
+msgid ""
+"Right now we suspect him to be in the Fairywoods between here and "
+"Joringsbridge."
+msgstr ""
+"Прямо зараз ми підозрюємо, щоб він був у Fairywoods між тут і Joringsbridge."
 
 #: rob_the_robber.xml
 msgid "Rob the Robber (Reward)"
 msgstr "Роб Розбійник (Нагорода)"
-
-#: rob_the_robber.xml
-msgid "Here is the necklace of Rob the robber."
-msgstr "Ось намисто Роб розбійник."
 
 #: rob_the_robber.xml
 msgid "By all devils!"
@@ -192,18 +253,20 @@ msgid "You talk too much!"
 msgstr "Ти занадто багато говориш!"
 
 #: rob_the_robber.xml
-msgid "I will quarter and skin everyone of you, before I throw you to the wolves!"
-msgstr "Я буду квартал і шкіри кожного з вас, перш ніж я кинути вас на розтерзання!"
+msgid ""
+"I will quarter and skin everyone of you, before I throw you to the wolves!"
+msgstr ""
+"Я буду квартал і шкіри кожного з вас, перш ніж я кинути вас на розтерзання!"
 
 #: rob_the_robber.xml
 msgid "You will die! I will destroy you!!"
 msgstr "Ти помреш! Я знищу тебе!"
 
 #: rob_the_robber.xml
-msgid "My soul will crawl out of it's grave and hunt you to the ends of the world!"
+msgid ""
+"My soul will crawl out of it's grave and hunt you to the ends of the world!"
 msgstr "Моя душа буде виповзати з його могили і полювати тобою на край світу!"
 
 #: rob_the_robber.xml
 msgid "Have fun with that. If you escape hell, that is."
 msgstr "Удачі з цим. Якщо уникнути пекла, то є."
-

@@ -25,6 +25,11 @@ while read LINE; do
 	echo "+++ "$LINE" - PORTUGUESE +++"
 	echo "[ MO ]"
 	msgfmt -c -v -o $LANGUAGE/LC_MESSAGES/$LINE.mo $LANGUAGE/$LINE.po
+
+	LANGUAGE="uk"
+	echo "+++ "$LINE" - UKRAINIAN +++"
+	echo "[ MO ]"
+	msgfmt -c -v -o $LANGUAGE/LC_MESSAGES/$LINE.mo $LANGUAGE/$LINE.po
 done < domains
 
 

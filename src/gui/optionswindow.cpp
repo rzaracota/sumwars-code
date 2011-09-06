@@ -214,6 +214,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	cbo->addItem(new StrListItem("English US","en_US",0));
 	cbo->addItem(new StrListItem("Italian IT","it_IT",0));
 	cbo->addItem(new StrListItem("Russian RU","ru_RU",0));
+	cbo->addItem(new StrListItem("Ukrainian UK","uk_UA",0));
 
 	cbo->setReadOnly(true);
 
