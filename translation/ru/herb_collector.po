@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-06-28 22:51+0400\n"
+"PO-Revision-Date: 2011-08-18 04:03+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -30,10 +30,12 @@ msgid ""
 "The herbalist of Joringsbridge wants to have the berries of 10 bushes. \".."
 "(10 - herbalist.bushes)..\" berries have been collected."
 msgstr ""
+"Травница Джорингсбриджа хочешь получить ягоды с 10 кустов. \"10 - herbalist."
+"bushes)..\" ягод собрано."
 
 #: herbalist.xml
 msgid "joringsbridge"
-msgstr ""
+msgstr "Джорингсбридж"
 
 #: herbalist.xml
 msgid "Gertlinde Kampfer"
@@ -41,7 +43,7 @@ msgstr ""
 
 #: herbalist.xml
 msgid "Herb gathering"
-msgstr ""
+msgstr "Сбор трав"
 
 #: herbalist.xml
 msgid "Here, old women. Your berries."
@@ -81,7 +83,7 @@ msgstr "Эй, молодой человек!"
 
 #: herbalist.xml
 msgid "I see you are going to the Northern Meadow."
-msgstr ""
+msgstr "Как я поняла, ты направляешься в Северные Низины."
 
 #: herbalist.xml
 msgid "That's right."
@@ -104,6 +106,8 @@ msgid ""
 "If you are roaming around there anyway, why don't you collect some berries "
 "for me?"
 msgstr ""
+"Раз уж ты скитаешься здесь, почему бы тебе не собрать несколько трав для "
+"меня?"
 
 #: herbalist.xml
 msgid ""
@@ -113,7 +117,7 @@ msgstr "Из-за этих гоблинов старуха не может да�
 
 #: herbalist.xml
 msgid "Plants are not really my forte..."
-msgstr ""
+msgstr "Я не силен в травах..."
 
 #: herbalist.xml
 msgid "Fiddlesticks!"
@@ -141,7 +145,7 @@ msgstr "Мне нужны ягоды как минимум с десяти ку�
 
 #: herbalist.xml
 msgid "But only the red berries."
-msgstr ""
+msgstr "Только красные ягоды."
 
 #: herbalist.xml
 msgid "The rest is of no use at all."
@@ -157,17 +161,17 @@ msgstr "Хорошо, если мы их найдем, то принесем т�
 
 #: herbalist.xml
 msgid "Thanks, sweety."
-msgstr ""
+msgstr "Спасибо, дорогуша."
 
 #: herbalist.xml
 msgid "Forget it, herb woman."
-msgstr ""
+msgstr "Забудь, травница."
 
 #: herbalist.xml
 msgid ""
 "I'm not going to crawl through the meadows just to search for some stupid "
 "bushes."
-msgstr ""
+msgstr "Я не собираюсь ползать по низинам в поисках каких-то дурацких кустов."
 
 #: herbalist.xml
 msgid "Have it your way."
@@ -179,11 +183,11 @@ msgstr "Но если ты изменишь свое решение, я буду
 
 #: herbalist.xml
 msgid "Very well, if I find some, I'll bring them along."
-msgstr ""
+msgstr "Хорошо, если я что-нибудь и найду, то принесу."
 
 #: herbalist.xml
 msgid "Still no."
-msgstr ""
+msgstr "Все ещё нет."
 
 #: herbalist.xml
 msgid "Tell me when you're not too mighty for simple work anymore, sweety."
@@ -191,11 +195,11 @@ msgstr ""
 
 #: herbalist.xml
 msgid "Watch your tongue, hag!"
-msgstr ""
+msgstr "Следи за словами, карга!"
 
 #: herbalist.xml
 msgid "aisNorthMeadow"
-msgstr ""
+msgstr "Северные Низины"
 
 #: herbalist.xml
 msgid "Collect\"..bushes_left..\" more herbs."

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-06-28 22:53+0400\n"
+"PO-Revision-Date: 2011-08-18 03:46+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -44,6 +44,10 @@ msgid ""
 "that party prematurely. Maybe someone official will appreciate not having "
 "hordes of goblins kicking in their doors."
 msgstr ""
+"Я нашел планы по набегу гоблинов на деревушку по названию Джорингсбридж. Они "
+"были найдены среди остатков какого-то гоблинского племени. Полагаю, я "
+"прервал их жизни преждевременно. Может быть, какой-нибудь официальный "
+"представитель будет признателен за то, что орды гоблинов не ломятся к ним."
 
 #: goblin_raid.xml
 msgid "aisDarkClearing"
@@ -81,11 +85,11 @@ msgstr ""
 
 #: goblin_raid.xml
 msgid "I guess you can be trusted."
-msgstr ""
+msgstr "Полагаю, тебе можно доверять."
 
 #: goblin_raid.xml
 msgid "Let me thank you on behalf of the whole village."
-msgstr ""
+msgstr "Позволь мне поблагодарить тебя за защиту целой деревни."
 
 #: goblin_raid.xml
 msgid "It's always a pleasure when a good deed goes rewarded."
@@ -98,6 +102,8 @@ msgstr "Извини, но я не знаю тебя."
 #: goblin_raid.xml
 msgid "Maybe I will show some gratitude after you help Michel's family."
 msgstr ""
+"Может быть, я выражу признательность после того, как ты поможешь семье "
+"Мишеля."
 
 #: goblin_raid.xml
 msgid "As they say: One hand washes the other."
@@ -134,7 +140,8 @@ msgstr ""
 #: goblin_raid.xml
 msgid "Whatever. It's not like I need the money or anything."
 msgstr ""
+"Как бы то ни было, непохоже, что я нуждаюсь в деньгах или чем-либо ещё."
 
 #: goblin_raid.xml
 msgid "And I could care less what happens to some peasant family."
-msgstr ""
+msgstr "И я могу не заботиться о том, что же там с какой-то семьей крестьян."

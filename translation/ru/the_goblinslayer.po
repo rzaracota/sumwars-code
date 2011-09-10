@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-06-26 20:49+0400\n"
+"PO-Revision-Date: 2011-08-18 04:07+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: goblins.xml
 msgid "The goblinslayer"
-msgstr ""
+msgstr "Убийца гоблинов"
 
 #: goblins.xml
 msgid "Quest finished"
@@ -51,11 +51,11 @@ msgstr "Оставь меня одного и убей ещё больше го�
 
 #: goblins.xml
 msgid "There are some stupid goblins pissing me off."
-msgstr ""
+msgstr "Есть несколько гоблинов, которые меня раздражают."
 
 #: goblins.xml
 msgid "If you kill 10 of 'em, I'll give you a precious reward."
-msgstr ""
+msgstr "Если ты убьешь 10 гоблинов, я тебя щедро награжу."
 
 #: goblins.xml
 msgid "Interested?"
@@ -87,15 +87,15 @@ msgstr "Конечно!"
 
 #: goblins.xml
 msgid "Then I'll give you this goblin club. Be happy."
-msgstr ""
+msgstr "Тогда я дам тебе эту гоблинскую дубинку. Будь счастлив."
 
 #: goblins.xml
 msgid "Nearly done."
-msgstr ""
+msgstr "Почти."
 
 #: goblins.xml
 msgid "Have fun then."
-msgstr ""
+msgstr "Тогда удачно позабавиться."
 
 #: goblins.xml
 msgid "region1"

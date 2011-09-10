@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-06-26 17:54+0400\n"
+"PO-Revision-Date: 2011-08-18 16:18+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: theTrader.xml
 msgid "The Trader"
-msgstr ""
+msgstr "Торговец"
 
 #: theTrader.xml
 msgid "Quest finished"
@@ -59,7 +59,7 @@ msgstr "Один момент, леди и джентльмены."
 
 #: theTrader.xml
 msgid "What is it now?"
-msgstr ""
+msgstr "Что такое?"
 
 #: theTrader.xml
 msgid "It seems, you are stuck in Harad's black claws."
@@ -101,7 +101,7 @@ msgstr ""
 
 #: theTrader.xml
 msgid "I see you are a man of reason!"
-msgstr ""
+msgstr "Вижу, ты дельный человек!"
 
 #: theTrader.xml
 msgid "I see you are a woman of reason!"
@@ -184,7 +184,7 @@ msgstr ""
 
 #: theTrader.xml
 msgid "Goblins and other beasts have stolen quite a lot recently."
-msgstr ""
+msgstr "Гоблины и другие твари украли довольно много всего за последнее время."
 
 #: theTrader.xml
 msgid "It may be convenient to make a short detour to a well-assorted trader."
@@ -219,7 +219,7 @@ msgstr ""
 
 #: theTrader.xml
 msgid "They are everywhere."
-msgstr ""
+msgstr "Они везде."
 
 #: theTrader.xml
 msgid "with all due respect: That is a blessing."
@@ -227,11 +227,11 @@ msgstr ""
 
 #: theTrader.xml
 msgid "Not many Branded Ones would have listened to me as you did."
-msgstr ""
+msgstr "Не так уж много Избранных слушали бы меня, как слушал ты."
 
 #: theTrader.xml
 msgid "Allow me to give you an Empty Scroll as a freebie."
-msgstr ""
+msgstr "Позволь мне дать тебе Пустой Свиток бесплатно."
 
 #: theTrader.xml
 msgid "Grace me with your presence again, if you please."
@@ -243,7 +243,7 @@ msgstr ""
 
 #: theTrader.xml
 msgid "Why not town portal or something like that?"
-msgstr ""
+msgstr "Почему не городской портал или что-нибудь в этом роде?"
 
 #: theTrader.xml
 msgid ""
@@ -283,15 +283,15 @@ msgstr ""
 
 #: theTrader.xml
 msgid "Explain the belt?"
-msgstr ""
+msgstr "Объяснить, как пользоваться поясом?"
 
 #: theTrader.xml
 msgid "Well, you now about your inventory, right?"
-msgstr ""
+msgstr "Ну, ты знаешь о своем инвентаре, верно?"
 
 #: theTrader.xml
 msgid "I thought so."
-msgstr ""
+msgstr "Думаю, да."
 
 #: theTrader.xml
 msgid "At the bottom you have the small items, which take three rows of space."
@@ -358,7 +358,7 @@ msgstr ""
 
 #: theTrader.xml
 msgid "joringsbridge"
-msgstr ""
+msgstr "Джорингсбридж"
 
 #: theTrader.xml
 msgid "What are you doing here?"
