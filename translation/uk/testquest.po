@@ -21,11 +21,11 @@ msgstr ""
 
 #: testquest.xml
 msgid "testquest"
-msgstr ""
+msgstr "Тестовий Квест"
 
 #: testquest.xml
 msgid "Fenor Marken"
-msgstr ""
+msgstr "Фенор Маркен"
 
 #: testquest.xml
 msgid "Test"
@@ -33,7 +33,7 @@ msgstr "Тест"
 
 #: testquest.xml
 msgid "This is a Test"
-msgstr "Це тест"
+msgstr "Це Тест"
 
 #: testquest.xml
 msgid "surprised"
@@ -49,7 +49,7 @@ msgstr "щасливий"
 
 #: testquest.xml
 msgid "amused"
-msgstr "потішило"
+msgstr "потішений"
 
 #: testquest.xml
 msgid "excited"
@@ -77,7 +77,7 @@ msgstr "біль"
 
 #: testquest.xml
 msgid "sneer"
-msgstr "глумитися"
+msgstr "глумиться"
 
 #: testquest.xml
 msgid "grin"
@@ -85,7 +85,7 @@ msgstr "оскал"
 
 #: testquest.xml
 msgid "offended"
-msgstr "образив"
+msgstr "ображений"
 
 #: testquest.xml
 msgid "threatening"
@@ -97,11 +97,11 @@ msgstr "сердитий"
 
 #: testquest.xml
 msgid "shouting a warcry"
-msgstr ""
+msgstr "вигукує бойовий клич"
 
 #: testquest.xml
 msgid "exhausted"
-msgstr "вичерпаний"
+msgstr "змучений"
 
 #: testquest.xml
 msgid "injured"
@@ -109,7 +109,7 @@ msgstr "поранений"
 
 #: testquest.xml
 msgid "deadly injured"
-msgstr "смертельні поранення"
+msgstr "смертельно поранений"
 
 #: testquest.xml
 msgid "afraid"
@@ -121,15 +121,15 @@ msgstr "в паніці"
 
 #: testquest.xml
 msgid "putting up a distance"
-msgstr "розклеюванні відстані"
+msgstr "виставляє відстань"
 
 #: testquest.xml
 msgid "being disgusted"
-msgstr "будучи відраза"
+msgstr "відчуває огиду"
 
 #: testquest.xml
 msgid "and yet another Test"
-msgstr "і ще одна перевірка"
+msgstr "і ще одна Перевірка"
 
 #: testquest.xml
 msgid "again a test"

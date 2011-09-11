@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-09-05 20:11+0200\n"
+"PO-Revision-Date: 2011-09-07 20:58+0200\n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
 "Language: Ukrainian\n"
@@ -25,19 +25,19 @@ msgstr "Засідка"
 
 #: theAmbush.xml
 msgid "Ireana survived and, as a token of her gratitude, provided our next job. I always knew the councilmen only wanted an exterminator."
-msgstr "Ireana вижив і, на знак подяки їй, за умови, наша наступна робота. Я завжди знав, радники тільки хотів винищувач."
+msgstr "Іреана вижила і на знак своєї вдячності дала нам іншу роботу. Я завжди знав, що члену ради був потрібен лише винищувач."
 
 #: theAmbush.xml
 msgid "A female council-mage by the name of Ireana of Northborough seems to be in trouble west of Dwarfenwall. Nothing a Branded One couldn't solve. If she survives long enough..."
-msgstr "Жінрада-мага на ім'я Ireana з Нортборо, здається, в біді захід від Dwarfenwall. Ніщо не відомих не можна було вирішити. Якщо вона збереглася досить довго ..."
+msgstr "Жінка член ради, маг, на ім'я Іреана з Нортборо, здається, в біді на захід від Дорфенваля. Нічого такого, що не міг би вирішити Відмічений. Якщо вона досить довго протягне..."
 
 #: theAmbush.xml
 msgid "aisWolfstones"
-msgstr ""
+msgstr "Вовчі камені"
 
 #: theAmbush.xml
 msgid "Dwarfenwall is in that direction. I shouldn't go this way yet."
-msgstr "Dwarfenwall в цьому напрямку. Я не повинен йти цим шляхом ще."
+msgstr "Дорфенваль в тому напрямку. Я ще не повинен йти цим шляхом."
 
 #: theAmbush.xml
 msgid "Wait!"
@@ -45,7 +45,7 @@ msgstr "Зачекайте!"
 
 #: theAmbush.xml
 msgid "I am making haste, alright?"
-msgstr "Я роблю поспіхом, в порядку?"
+msgstr "Я спішу, гаразд?"
 
 #: theAmbush.xml
 msgid "You have to go into the western woods right now."
@@ -53,11 +53,11 @@ msgstr "Ви повинні увійти в західний ліс прямо �
 
 #: theAmbush.xml
 msgid "We are making haste, alright?"
-msgstr "Ми робимо поспіху, в порядку?"
+msgstr "Ми спішимо, гаразд?"
 
 #: theAmbush.xml
 msgid "The prince's fiancé is in danger."
-msgstr "Наречений князя в небезпеці."
+msgstr "Наречена принца в небезпеці."
 
 #: theAmbush.xml
 msgid "Who?"
@@ -65,11 +65,11 @@ msgstr "Хто?"
 
 #: theAmbush.xml
 msgid "The archmage Ireana of Northborough"
-msgstr "Архимаг Ireana з Нортборо"
+msgstr "Архимаг Іреана з Нортборо"
 
 #: theAmbush.xml
 msgid "Will that be payed extra?"
-msgstr "Чи буде це заплатили більше?"
+msgstr "Чи заплатите ви більше?"
 
 #: theAmbush.xml
 msgid "What?"
@@ -77,15 +77,15 @@ msgstr "Що?"
 
 #: theAmbush.xml
 msgid "I thought she was one of your fancy elementalist amazones. Can't she look after herself?"
-msgstr "Я думав, вона була однією з вашої фантазії Amazones елементаліста. Не може вона піклуватися про себе?"
+msgstr "Я думав, вона була однією з ваших уявних елементалістичних амазонок. Хіба вона не може попіклуватися про себе?"
 
 #: theAmbush.xml
 msgid "Don't start to argue and help her! She needs your help!"
-msgstr "Не починайте сперечатися і допомогти їй! Вона потребує вашої допомоги!"
+msgstr "Не починайте сперечатися і допоможіть їй! Їй потрібна ваша допомога!"
 
 #: theAmbush.xml
 msgid "What do you think? Shall we bail someone out?"
-msgstr "Що ви думаєте? Чи будемо ми когось під заставу?"
+msgstr "Як ви думаєте? Будемо виручати з біди?"
 
 #: theAmbush.xml
 msgid "I'm not sure..."
@@ -93,11 +93,11 @@ msgstr "Я не впевнений ..."
 
 #: theAmbush.xml
 msgid "Well, it couldn't really hurt..."
-msgstr "Ну, це не могло дуже боляче ..."
+msgstr "Ну, не зашкодило б..."
 
 #: theAmbush.xml
 msgid "Will that be payed extra??"
-msgstr "Чи буде це бути заплачена, додаткові?"
+msgstr "Чи заплатите ви більше??"
 
 #: theAmbush.xml
 msgid "Argh! Do I have to-"
@@ -105,13 +105,13 @@ msgstr "Ох! Чи потрібно-"
 
 #: theAmbush.xml
 msgid "Alright already, safe your breath!"
-msgstr "Добре вже, безпечне дихання твій!"
+msgstr "Добре вже, дихай спокійно!"
 
 #: theAmbush.xml
 msgid "What do you think, friends, do we want to bail someone out?"
-msgstr "Як ви думаєте, друзі, ми хочемо, щоб врятувати когось?"
+msgstr "Як ви думаєте, друзі, ми хочемо виручити когось із біди?"
 
 #: theAmbush.xml
 msgid "The firefighters are on the way."
-msgstr "Пожежні в дорозі."
+msgstr "Пожежні вже в дорозі."
 

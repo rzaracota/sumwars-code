@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-09-05 20:13+0200\n"
+"PO-Revision-Date: 2011-09-07 20:58+0200\n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
 "Language: Ukrainian\n"
@@ -21,11 +21,11 @@ msgstr ""
 
 #: goblins.xml
 msgid "The goblinslayer"
-msgstr ""
+msgstr "Вбивця Гоблінів"
 
 #: goblins.xml
 msgid "Quest finished"
-msgstr "Квест закінчено"
+msgstr "Квест завершено"
 
 #: goblins.xml
 msgid "you killed enough goblins"
@@ -45,19 +45,19 @@ msgstr "Я вбив їх усіх."
 
 #: goblins.xml
 msgid "Wow... you're a real hero, aren't ya?"
-msgstr "Нічого собі ... Ви справжній герой, не я?"
+msgstr "Нічого собі ... Ви справжній герой, хіба ні?"
 
 #: goblins.xml
 msgid "Leave me alone and kill some more goblins."
-msgstr "Залиште мене у спокої і вбити ще кілька гоблінів."
+msgstr "Залиш мене у спокої і вбий ще кілька гоблінів."
 
 #: goblins.xml
 msgid "There are some stupid goblins pissing me off."
-msgstr "Є деякі дурні гобліни пісяє мене."
+msgstr "Є деякі дурні гобліни які мене достають."
 
 #: goblins.xml
 msgid "If you kill 10 of 'em, I'll give you a precious reward."
-msgstr "Якщо ви вб'єте 10 из їх, я дам вам дорогоцінні нагороди."
+msgstr "Якщо ви вб'єте 10 із них, я дам вам дорогоцінну винагороду."
 
 #: goblins.xml
 msgid "Interested?"
@@ -65,7 +65,7 @@ msgstr "Зацікавлені?"
 
 #: goblins.xml
 msgid "Accept the quest?"
-msgstr "Прийміть квест?"
+msgstr "Прийняти квест?"
 
 #: goblins.xml
 msgid "Yes"
@@ -77,11 +77,11 @@ msgstr "Ні"
 
 #: goblins.xml
 msgid "Goblins (reward)"
-msgstr "Гобліни (винагороду)"
+msgstr "Гобліни (винагорода)"
 
 #: goblins.xml
 msgid "You want a second reward?"
-msgstr "Ви хочете, щоб друга нагорода?"
+msgstr "Ви хочете другу винагороду?"
 
 #: goblins.xml
 msgid "Of course!"
@@ -89,7 +89,7 @@ msgstr "Звичайно!"
 
 #: goblins.xml
 msgid "Then I'll give you this goblin club. Be happy."
-msgstr "Тоді я дам вам цей клуб гоблінів. Будьте щасливі."
+msgstr "Тоді я дам вам цю палицю гоблінів. Будьте щасливі."
 
 #: goblins.xml
 msgid "Nearly done."
@@ -101,5 +101,5 @@ msgstr "Тоді повеселися."
 
 #: goblins.xml
 msgid "region1"
-msgstr ""
+msgstr "регіон1"
 

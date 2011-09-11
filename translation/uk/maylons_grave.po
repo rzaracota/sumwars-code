@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-09-05 20:03+0200\n"
+"PO-Revision-Date: 2011-09-10 17:54+0300\n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
 "Language: Ukrainian\n"
@@ -21,31 +21,39 @@ msgstr ""
 
 #: maylons_grave.xml
 msgid "Maylons Grave"
-msgstr ""
+msgstr "Могила Мейлона"
 
 #: maylons_grave.xml
 msgid "Some necromancer really resurrected an old council mage. Probably to cause confusion behind the lines. At least one problem that is solved."
-msgstr "Деякі некромант дійсно воскрес старий маг ради. Напевно, щоб привести до плутанини в тилу. Принаймні, одна проблема, яка вирішується."
+msgstr ""
+"Декотрий некромант дійсно воскресив старого мага Ради. Напевно щоб викликати "
+"плутанину в тилу. Принаймні одна проблема, що вирішена."
 
 #: maylons_grave.xml
 msgid "I came across some goblins in Maylon's Grave who babbled some nonsense and were chased by a zombie. Something is going on in this grave. Maybe I should have a look at it."
-msgstr "Я стикався з деякими гоблінів в могилі Maylon, який белькотів якісь дурниці і були переслідували зомбі. Щось відбувається в цій могилі. Може бути, я повинен був дивитися на це."
+msgstr ""
+"Я стикався з гоблінами в могилі Мейлона, які белькотіли якісь дурниці і їх "
+"переслідував зомбі. Щось відбувається в тій могилі. Треба поглянути."
 
 #: maylons_grave.xml
 msgid "I came across some goblins in Maylon's Grave. According to their shaman a necromancer animated some undead down in the crypt. I should take a look at it."
-msgstr "Я стикався з деякими гоблінів в могилі Maylon в. За їх шамана некромант анімовані деякі нежиті вниз в склеп. Я повинен поглянути на нього."
+msgstr ""
+"Я стикався з гоблінами в могилі Мейлона. Як сказав їх шаман, некромант "
+"підняв якусь нежить внизу в склепі. Треба поглянути."
 
 #: maylons_grave.xml
 msgid "I came across some goblins in Maylon's Grave who were chased by a zombie. Something is going on in this grave. Maybe I should take a look at it."
-msgstr "Я стикався з деякими гоблінів в могилі Maylon, які повинні були переслідувати зомбі. Щось відбувається в цій могилі. Може бути, я повинна дивитися на це."
+msgstr ""
+"Я стикався з гоблінами в могилі Мейлона, яких переслідував зомбі. Щось "
+"відбувається в цій могилі. Треба буде поглянуть."
 
 #: maylons_grave.xml
 msgid "aisMaylonsGraveEntry"
-msgstr ""
+msgstr "Могила Мейлона"
 
 #: maylons_grave.xml
 msgid "Talk with the goblins?"
-msgstr "Поговоріть з гоблінами?"
+msgstr "Поговорити з гоблінами?"
 
 #: maylons_grave.xml
 msgid "Yes"
@@ -57,7 +65,7 @@ msgstr "Ні"
 
 #: maylons_grave.xml
 msgid "Gab Resh"
-msgstr ""
+msgstr "Габ Реш"
 
 #: maylons_grave.xml
 msgid "A goblin who wants to talk?"
@@ -65,11 +73,11 @@ msgstr "Гоблін, який хоче поговорити?"
 
 #: maylons_grave.xml
 msgid "Yes. No hurt, no kill."
-msgstr "Так. Не боляче, не вбивати."
+msgstr "Так. Не бий, не вбивай."
 
 #: maylons_grave.xml
 msgid "Gab'Resh and his only harmless rustlers. No bandits."
-msgstr "Gab'Resh і його тільки нешкідливі викрадачів. Ні бандитів."
+msgstr "Габ'Реш і його невинні викрадачі. Не бандити."
 
 #: maylons_grave.xml
 msgid "You listen, yes?"
@@ -77,63 +85,73 @@ msgstr "Ти слухаєш, так?"
 
 #: maylons_grave.xml
 msgid "What will you do?"
-msgstr "Що ви будете робити?"
+msgstr "Що ти будеш робити?"
 
 #: maylons_grave.xml
 msgid "Listen to the goblins"
-msgstr "Слухайте гоблінів"
+msgstr "Слухати гобліна"
 
 #: maylons_grave.xml
 msgid "Chase the goblins away"
-msgstr "Чейз гобліни далеко"
+msgstr "Прогнати гоблінів"
 
 #: maylons_grave.xml
 msgid "Slay the goblins"
-msgstr "Вбийте гоблінів"
+msgstr "Вбити гоблінів"
 
 #: maylons_grave.xml
 msgid "What could a goblin possibly have to say?"
-msgstr "Що може гоблін можливо, доведеться сказати?"
+msgstr "І що ж може сказати гоблін?"
 
 #: maylons_grave.xml
 msgid "We often hide here."
-msgstr "Ми часто ховаються тут."
+msgstr "Ми часто тут ховаємось."
 
 #: maylons_grave.xml
 msgid "No humans coming, and if do, they never return from depth of cave."
-msgstr "Жодна людина не йде, і якщо роблять, вони ніколи не повернуться з глибини печери."
+msgstr ""
+"Сюди не приходять люди, і якщо приходять, вони ніколи не повертаються з "
+"глибини печери."
 
 #: maylons_grave.xml
 msgid "But last moon black human came."
-msgstr "Але минулого місяця чорного людини прийшли."
+msgstr "Але минулого місяця прийшов чорний чоловік."
 
 #: maylons_grave.xml
 msgid "Now horror of the depth wandering to surface, too and being after poor goblins who never not wants to steal anything."
-msgstr "Тепер жах глибина блукаючих на поверхню, і будучи занадто бідними після гоблінів, які ніколи не хоче, щоб вкрасти що-небудь."
+msgstr ""
+"Тепер жах глибини блукає на поверхні і страшить бідних гоблінів, які не "
+"хочуть нічого красти."
 
 #: maylons_grave.xml
 msgid "That almost sounds as if a necromancer came by."
-msgstr "Це звучить майже як якби некромант прийшов."
+msgstr "Це звучить так, ніби прийшов некромант."
 
 #: maylons_grave.xml
 msgid "I cannot leave such a problem amidst this under-guarded region."
-msgstr "Я не можу залишити такою проблемою серед цього недостатньо охороняють регіоні."
+msgstr ""
+"Я не можу залишити таку проблему в цьому регіоні з недостатньою охороною."
 
 #: maylons_grave.xml
 msgid "We cannot leave such a problem amidst this under-guarded region."
-msgstr "Ми не можемо залишити такою проблемою серед цього недостатньо охороняють регіоні."
+msgstr ""
+"Ми не можемо залишити таку проблему в цьому регіоні з недостатньою охороною."
 
 #: maylons_grave.xml
 msgid "Who knows what could happen?"
-msgstr "Хто знає, що могло статися?"
+msgstr "Хтозна, що може статися?"
 
 #: maylons_grave.xml
 msgid "Really, I should free those poor bound souls and send them off to a short brake in Harad's Hell."
-msgstr "Дійсно, я повинен звільнити цих бідних пов'язані душі і відіслати їх на короткий гальмівний в пеклі Харада в."
+msgstr ""
+"Дійсно, я повинен звільнити ці бідні прив'язані душі і відіслати їх на "
+"короткий відпочинок в Харадове пекло."
 
 #: maylons_grave.xml
 msgid "Really, we should free those poor bound souls and send them off to a short brake in Harad's Hell."
-msgstr "Дійсно, ми повинні звільнити цих бідних пов'язані душі і відіслати їх на короткий гальмівний в пеклі Харада в."
+msgstr ""
+"Дійсно, ми повинні звільнити ці бідні прив'язані душі і відіслати їх на "
+"короткий відпочинок в Харадове пекло."
 
 #: maylons_grave.xml
 msgid "Better them than us."
@@ -141,15 +159,17 @@ msgstr "Краще їх, ніж нас."
 
 #: maylons_grave.xml
 msgid "Good warning, yes? Mighty warrior-humans let us live, no?"
-msgstr "Добре попередження, так? Могутні воїни-люди давайте жити, ні?"
+msgstr "Гарне зауваження, так? Могутні людські воїни залиште нам життя, ні?"
 
 #: maylons_grave.xml
 msgid "Get lost. I have better things to do than killing a band of pathetic goblins."
-msgstr "Заблукати. У мене є справи важливіші, ніж вбивство смугу жалюгідні гоблінів."
+msgstr ""
+"Згинь. У мене є важливіші справи, ніж вбивство банди жалюгідних гоблінів."
 
 #: maylons_grave.xml
 msgid "Get lost. we have better things to do than killing a band of pathetic goblins."
-msgstr "Заблукати. у нас більш важливі справи, ніж вбивство смугу жалюгідні гоблінів."
+msgstr ""
+"Згинь. У нас є важливіші справи, ніж вбивство банди жалюгідних гоблінів."
 
 #: maylons_grave.xml
 msgid "Miserable brood! Die!"
@@ -161,45 +181,48 @@ msgstr "Нещасний виводок! Убий їх усіх!"
 
 #: maylons_grave.xml
 msgid "Get lost, before I change my mind!"
-msgstr "Провалюй, поки я не передумав!"
+msgstr "Згинь, поки я не передумав!"
 
 #: maylons_grave.xml
 msgid "aisMaylonsGraveL1"
-msgstr ""
+msgstr "Могила Майлона, рівень 1"
 
 #: maylons_grave.xml
 msgid "aisMaylonsGraveL2"
-msgstr ""
+msgstr "Могила Майлона, склеп"
 
 #: maylons_grave.xml
 msgid "Thank you very much for liberating my soul."
-msgstr "Велике спасибі за звільнення душі моєї."
+msgstr "Велике спасибі за звільнення моєї душі."
 
 #: maylons_grave.xml
 msgid "May you do many other great deeds."
-msgstr "Бажаю вам і багато інших великі справи."
+msgstr "Бажаю вам зробити багато інших великих справ."
 
 #: maylons_grave.xml
 msgid "Akerans blessing to you."
-msgstr "Akerans благословенням для вас."
+msgstr "Акеран благосляє вас."
 
 #: maylons_grave.xml
 msgid "My sarcophagus contains many remains of my mortal life."
-msgstr "Мій саркофаг містить багато залишилося в мого земного життя."
+msgstr "Мій саркофаг містить багато того, що залишилося від мого земного життя."
 
 #: maylons_grave.xml
 msgid "For a long time now I have no use for it anymore. Choose yourself a weapon you like."
-msgstr "Довгий час мені це абсолютно не потрібно більше. Виберіть собі зброю вам подобається."
+msgstr ""
+"Воно мені більше не потрібне вже довгий час. Виберіть собі зброю, яка вам "
+"подобається."
 
 #: maylons_grave.xml
 msgid "The same holds true for your friends."
-msgstr "Те ж саме вірно і для ваших друзів."
+msgstr "Те ж саме має силу і для ваших друзів."
 
 #: maylons_grave.xml
 msgid "But now I have to return into the bliss of Akerans eternal oasis."
-msgstr "Але тепер я повинен повернутися в оазис блаженства Akerans вічною."
+msgstr "Але тепер я повинен повернутися в вічний оазис блаженства Акерана."
 
 #: maylons_grave.xml
 msgid "I wander if he would have said that if he had known that he will make a detour to Harad's Hell first?"
-msgstr "Я блукаю, якби він сказав, що якби він знав, що він буде робити гак у пекло Харада перший?"
-
+msgstr ""
+"Цікаво, що б він сказав якби знав, що спочатку він зробить гак через "
+"Харадове пекло?"

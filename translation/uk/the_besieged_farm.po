@@ -21,46 +21,43 @@ msgstr ""
 
 #: besieged_farm.xml
 msgid "The besieged farm"
-msgstr "Обложеної фермі"
+msgstr "Осаджена ферма"
 
 #: besieged_farm.xml
 msgid ""
 "The peasants are rescued, the goblins slain, and the service paid. What more "
 "can you ask for?"
 msgstr ""
-"Селяни були врятовані, гобліни убитий, і послуга оплачується. Чого ще можна "
-"бажати?"
+"Селяни були врятовані, гобліни убиті, а робота оплачена. Чого ще можна бажати?"
 
 #: besieged_farm.xml
-#, fuzzy
 msgid ""
 "The peasants are rescued and the goblins slain. It's time to collect the "
 "reward for the trouble in Joringsbridge."
 msgstr ""
-"Селяни були врятовані і гобліни убитий. Час збирати винагороду за "
-"неприємностей в Joringsbridge."
+"Селяни були врятовані а гобліни убиті. Час забрати винагороду за "
+"неприємності в Джорінгсбріджі."
 
 #: besieged_farm.xml
-#, fuzzy
 msgid ""
 "The goblins around Bron's farm are not among the living anymore. I should "
 "knock at the door and make sure everything is all right. No peasants, no "
 "money."
 msgstr ""
-"Гоблінів близько ферми Брона не було в живих більше. Я повинен постукати у "
-"двері і переконайтеся, що все в порядку. Ні селян, немає грошей."
+"Гобліни біля ферми Брона вже небіжчики. Я повинен постукати у двері і "
+"переконатися, що все в порядку. Нема селян, нема грошей."
 
 #: besieged_farm.xml
 msgid ""
 "The farm of a peasant named Michel Bron is besieged by goblins. His family "
 "needs help - fast."
 msgstr ""
-"Ферми селянського імені Мішель Брон осаджують гоблінів. Його сім'я потребує "
+"Ферма селянина Мішеля Брона осаджена гоблінами. Його сім'я потребує "
 "допомоги - швидко."
 
 #: besieged_farm.xml
 msgid "Sergeant Lutterer"
-msgstr "Сержант Lutterer"
+msgstr "Сержант Люттерер"
 
 #: besieged_farm.xml
 msgid "The farm"
@@ -68,24 +65,21 @@ msgstr "Ферма"
 
 #: besieged_farm.xml
 msgid "Ah! Are you feeling like earning the money after all?"
-msgstr "Ах! Чи відчуваєте ви себе, як заробляти гроші в кінці кінців?"
+msgstr "Ах! Вам здається що ви заробили грошенят?"
 
 #: besieged_farm.xml
-#, fuzzy
 msgid "Don't think I haven't seen you hanging around back there."
-msgstr "Не думайте, я не бачила тебе стирчати туди."
+msgstr "Не подумайте, я не бачив вас там."
 
 #: besieged_farm.xml
-#, fuzzy
 msgid ""
 "Don't think I haven't seen you and your friend hanging around back there."
-msgstr "Не подумайте, я не бачив вас і вашого друга стирчати туди."
+msgstr "Не подумайте, я не бачив там ні вас ні вашого друга."
 
 #: besieged_farm.xml
-#, fuzzy
 msgid ""
 "Don't think I haven't seen you and your friends hanging around back there."
-msgstr "Не подумайте, я не бачив вас і ваших друзів стирчати туди."
+msgstr "Не подумайте, я не бачив там ні вас ні ваших друзів."
 
 #: besieged_farm.xml
 msgid "But I don't want to complain."
@@ -96,37 +90,33 @@ msgid ""
 "You know the drill: Get to the Northern Meadow and drive away the goblins "
 "around Bron's farm."
 msgstr ""
-"Ви знаєте тренування: Добратися до Північного Лугові і відігнати гоблінів "
-"близько ферми Брона."
+"Ви в курсі: Добратися до Північного Лугу і відігнати гоблінів від ферми Брона."
 
 #: besieged_farm.xml
-#, fuzzy
 msgid "I don't care how you do it, even if you gobble them raw."
-msgstr "Мені все одно, як ви це робите, навіть якщо ви з'їсти їх сирими."
+msgstr "Мені все одно, як ви це робите, навіть якщо ви їсте їх сирими."
 
 #: besieged_farm.xml
 msgid "Just kidding."
 msgstr "Жартую."
 
 #: besieged_farm.xml
-#, fuzzy
 msgid "When you're done, come back to me."
-msgstr "Коли ви закінчите повертаються до мене."
+msgstr "Коли ви закінчите, повертайтеся до мене."
 
 #: besieged_farm.xml
-#, fuzzy
 msgid "I'm on my way."
-msgstr "На моєму шляху."
+msgstr "Я вже в дорозі."
 
 #: besieged_farm.xml
 msgid "aisNorthMeadow"
-msgstr ""
+msgstr "Північний луг"
 
 #: besieged_farm.xml
 msgid ""
 "That should have been enough goblins. I better look after Bron's family."
 msgstr ""
-"Це повинно було бути досить гоблінів. Я краще піклуватися про сім'ю Брона."
+"Повинно бути досить. Я краще пригляну за сім'єю Брона."
 
 #: besieged_farm.xml
 msgid "The goblins are gone. Are you alright?"
@@ -138,15 +128,15 @@ msgstr "Велике спасибі."
 
 #: besieged_farm.xml
 msgid "Sadly I cannot ask you in."
-msgstr "На жаль я не можу просити вас сюди"
+msgstr "На жаль я не можу попросити вас ввійти."
 
 #: besieged_farm.xml
 msgid "Our barricade is quite heavy."
-msgstr "Наша барикада досить важкий."
+msgstr "Наша барикада досить страшна."
 
 #: besieged_farm.xml
 msgid "But I will give word to my husband that we are alive and well."
-msgstr "Але я дам слово моєму чоловікові, що ми живі і здорові."
+msgstr "Але я скажу моєму чоловікові, що ми живі і здорові."
 
 #: besieged_farm.xml
 msgid "How so?"
@@ -157,8 +147,8 @@ msgid ""
 "With a crytal of Avearea, of course. It's been handed down in my family for "
 "generations."
 msgstr ""
-"З crytal з Avearea, звичайно. Це був винесений в моїй родині протягом "
-"поколінь."
+"З допомогою кристалу Авеареа, звичайно. Він передається з рук в руки в моїй "
+"родині протягом поколінь."
 
 #: besieged_farm.xml
 msgid "Of course. Silly of me."
@@ -169,12 +159,12 @@ msgid ""
 "Really now, \"..name..\". Did you think she'd use carrier pigeons in this "
 "day and age?"
 msgstr ""
-"Невже тепер, \".. назва .. \". Невже ви думаєте, вона б використовувати "
-"поштових голубів в цей день і віку?"
+"Тепер точно, \"..name..\". Невже ви думаєте, що вона б використовувала "
+"поштових голубів в наші дні?"
 
 #: besieged_farm.xml
 msgid "Let's just go collect the money."
-msgstr "Давайте просто піти збирати гроші."
+msgstr "Давайте просто йдем заберемо гроші."
 
 #: besieged_farm.xml
 msgid "Brons Farm"
@@ -186,21 +176,21 @@ msgstr "Справу зроблено."
 
 #: besieged_farm.xml
 msgid "I've already heard of it."
-msgstr "Я вже чув про неї."
+msgstr "Я вже чув про це."
 
 #: besieged_farm.xml
-#, fuzzy
 msgid ""
 "Michel is in the tavern getting plastered - all in honor of your bravery, of "
 "course."
 msgstr ""
-"Мішель знаходиться в таверні та отримання оштукатурені. Все в честь вашої "
-"хоробрості, звичайно."
+"Мішель знаходиться в таверні та п'яничить - все, звісно, на честь вашої "
+"хоробрості."
 
 #: besieged_farm.xml
 msgid "But that shall be of no concern to you."
-msgstr "Але це повинно бути ніякого відношення до вас."
+msgstr "Але це не повинно мати до вас ніякого відношення."
 
 #: besieged_farm.xml
 msgid "Here's the money."
 msgstr "Ось гроші."
+

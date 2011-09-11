@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-06 19:27+0200\n"
+"POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
@@ -21,11 +21,11 @@ msgstr ""
 
 #: ../src/core/damage.cpp:143 ../src/gui/charinfo.cpp:930
 msgid "Physical"
-msgstr "Фізичний"
+msgstr "Фізичне"
 
 #: ../src/core/damage.cpp:145 ../src/gui/charinfo.cpp:939
 msgid "Fire"
-msgstr "Пожежа"
+msgstr "Вогонь"
 
 #: ../src/core/damage.cpp:147 ../src/gui/charinfo.cpp:936
 msgid "Ice"
@@ -45,11 +45,11 @@ msgstr "Вогнестійкість"
 
 #: ../src/core/damage.cpp:163
 msgid "Ice resistance"
-msgstr "Лід опору"
+msgstr "Стійкість до льоду"
 
 #: ../src/core/damage.cpp:165
 msgid "Air resistance"
-msgstr "Опір повітря"
+msgstr "Стійкість до вітру"
 
 #: ../src/core/damage.cpp:175
 msgid "blind"
@@ -89,7 +89,7 @@ msgstr "пошкодження"
 
 #: ../src/core/damage.cpp:286
 msgid "can not be blocked"
-msgstr "не можуть бути заблоковані"
+msgstr "не може бути заблоковано"
 
 #: ../src/core/damage.cpp:293 ../src/gui/charinfo.cpp:901
 msgid "Attack"
@@ -101,7 +101,7 @@ msgstr "ігнорує броню"
 
 #: ../src/core/damage.cpp:316 ../src/gui/charinfo.cpp:916
 msgid "Power"
-msgstr "Влада"
+msgstr "Енергія"
 
 #: ../src/core/damage.cpp:328
 msgid "Chance for critical hit"
@@ -119,41 +119,41 @@ msgstr "Таймер"
 
 #: ../src/core/document.cpp:1216
 msgid "Cast delay"
-msgstr "У ролях затримки"
+msgstr "Затримка метання"
 
 #: ../src/core/item.cpp:945 ../src/core/item.cpp:1169
 msgid "Value"
-msgstr "Значення"
+msgstr "Ціна"
 
 #: ../src/core/item.cpp:948 ../src/core/item.cpp:1175
 msgid "Selling Value"
-msgstr "Продаж Значення"
+msgstr "Ціна на продаж"
 
 #: ../src/core/item.cpp:964 ../src/core/item.cpp:1204
 msgid "Required class"
-msgstr "Обов'язкові класу"
+msgstr "Необхідний клас"
 
 #: ../src/core/item.cpp:1022 ../src/core/item.cpp:1030
 #: ../src/core/item.cpp:1264 ../src/core/item.cpp:1274
 msgid "Heals "
-msgstr "Лікує"
+msgstr "Лікує "
 
 #: ../src/core/item.cpp:1022 ../src/core/item.cpp:1264
 msgid " hitpoints"
-msgstr "хітпойнтов"
+msgstr " очків здоров'я"
 
 #: ../src/core/item.cpp:1033 ../src/core/item.cpp:1280
 msgid "immune for "
-msgstr "імунні для"
+msgstr "імунітет до "
 
 #: ../src/core/item.cpp:1045 ../src/core/item.cpp:1294
 msgid "Two-handed weapon"
-msgstr "Дворучне зброю"
+msgstr "Дворучна зброя"
 
 #: ../src/core/item.cpp:1050 ../src/core/item.cpp:1301
 #: ../src/gui/charinfo.cpp:911
 msgid "Range"
-msgstr "Діапазон"
+msgstr "Дальність"
 
 #: ../src/core/item.cpp:1061 ../src/core/item.cpp:1314
 msgid "Damage"
@@ -162,7 +162,7 @@ msgstr "Пошкодження"
 #: ../src/core/item.cpp:1073 ../src/core/item.cpp:1342
 #: ../src/gui/charinfo.cpp:921
 msgid "Armor"
-msgstr "Збруя"
+msgstr "Лати"
 
 #: ../src/core/item.cpp:1078 ../src/core/item.cpp:1354
 #: ../src/gui/charinfo.cpp:600
@@ -171,12 +171,12 @@ msgstr "Блок"
 
 #: ../src/core/item.cpp:1083 ../src/core/item.cpp:1366
 msgid "max hitpoints"
-msgstr "макс хітпойнтов"
+msgstr "макс очків здоров'я"
 
 #: ../src/core/item.cpp:1088 ../src/core/item.cpp:1378
 #: ../src/gui/charinfo.cpp:871
 msgid "Strength"
-msgstr "Міцність"
+msgstr "Сила"
 
 #: ../src/core/item.cpp:1093 ../src/core/item.cpp:1390
 #: ../src/gui/charinfo.cpp:875
@@ -185,7 +185,7 @@ msgstr "Спритність"
 
 #: ../src/core/item.cpp:1098 ../src/core/item.cpp:1402
 msgid "Magic Power"
-msgstr "Чарівна сила"
+msgstr "Маг. Сила"
 
 #: ../src/core/item.cpp:1103 ../src/core/item.cpp:1414
 #: ../src/gui/charinfo.cpp:879
@@ -194,7 +194,7 @@ msgstr "Сила волі"
 
 #: ../src/core/item.cpp:1118 ../src/core/item.cpp:1445
 msgid " max. "
-msgstr "максимум"
+msgstr " макс. "
 
 #: ../src/gui/charcreate.cpp:120 ../src/gui/charinfo.cpp:864
 #: ../src/gui/partyinfo.cpp:450 ../src/gui/savegamelist.cpp:186
@@ -216,59 +216,59 @@ msgstr "Створити"
 
 #: ../src/gui/charinfo.cpp:323
 msgid "Base damage"
-msgstr "Базовий шкоди"
+msgstr "Базова шкода"
 
 #: ../src/gui/charinfo.cpp:569
 msgid "Damage dealt by "
-msgstr "Пошкодження, що наносяться на"
+msgstr "Пошкодження, що наносяться від "
 
 #: ../src/gui/charinfo.cpp:588
 msgid "Chance to hit "
-msgstr "Ймовірність попадання"
+msgstr "Ймовірність попадання "
 
 #: ../src/gui/charinfo.cpp:604
 msgid "Evade"
-msgstr ""
+msgstr "Ухилитись"
 
 #: ../src/gui/charinfo.cpp:622
 msgid "Chance to get hit by "
-msgstr "Шанс потрапити під"
+msgstr "Шанс постраждати від "
 
 #: ../src/gui/charinfo.cpp:713
 msgid "Damage dealt to  "
-msgstr "Пошкодження, що наносяться на"
+msgstr "Пошкодження, що наносяться до  "
 
 #: ../src/gui/charinfo.cpp:872
 msgid "Strength increases hitpoints, melee damage and attack power."
-msgstr "Сила збільшує хітпоінтов, пошкодження в ближньому бою і сили атаки."
+msgstr "Сила збільшує очки здоров'я, пошкодження в ближньому бою і силу атаки."
 
 #: ../src/gui/charinfo.cpp:876
 msgid "Dexterity increases ranged damage, attack accuracy and attack speed"
-msgstr "Спритність збільшує дальньому бою, точності атаки та швидкість атаки"
+msgstr "Спритність збільшує дальність нанесення шкоди, точність та швидкість атаки"
 
 #: ../src/gui/charinfo.cpp:880
 msgid ""
 "Willpower decreases the duration and the impact of status changes and "
 "increases magical melee damage."
 msgstr ""
-"Сила волі зменшується тривалість і вплив змін стану і збільшує магічний "
-"шкоди в ближньому бою."
+"Сила волі зменшує тривалість і вплив змін стану і збільшує магічну "
+"шкоду в ближньому бою."
 
 #: ../src/gui/charinfo.cpp:884
 msgid "Magic power"
-msgstr "Магічна Сила"
+msgstr "Маг. сила"
 
 #: ../src/gui/charinfo.cpp:885
 msgid "Magic power increases the damage of magical attacks."
-msgstr ""
+msgstr "Магічна сила збільшує шкоду від магічних атак."
 
 #: ../src/gui/charinfo.cpp:888
 msgid "Attr points"
-msgstr ""
+msgstr "Очки атриб"
 
 #: ../src/gui/charinfo.cpp:889
 msgid "Attribute points remaining to distribute"
-msgstr ""
+msgstr "Не витрачені очки атрибутів"
 
 #: ../src/gui/charinfo.cpp:892 ../src/gui/controlpanel.cpp:245
 msgid "Experience"
@@ -276,15 +276,15 @@ msgstr "Досвід"
 
 #: ../src/gui/charinfo.cpp:893
 msgid "Current experience and experience necessary for next level-up."
-msgstr ""
+msgstr "Поточний досвід і досвід, необхідний для переходу на рівень вверх."
 
 #: ../src/gui/charinfo.cpp:896 ../src/gui/controlpanel.cpp:229
 msgid "Hitpoints"
-msgstr "Міцність"
+msgstr "Здоров'я"
 
 #: ../src/gui/charinfo.cpp:897
 msgid "Current and maximal hitpoints."
-msgstr "Поточне та максимальне хітпоінтов."
+msgstr "Поточні та максимальні очки здоров'я."
 
 #: ../src/gui/charinfo.cpp:902
 msgid ""
@@ -295,7 +295,7 @@ msgstr ""
 
 #: ../src/gui/charinfo.cpp:906
 msgid "Attacks/s"
-msgstr "Атаки / с"
+msgstr "Атак/с"
 
 #: ../src/gui/charinfo.cpp:907
 msgid "Number of attacks per second."
@@ -303,11 +303,11 @@ msgstr "Кількість нападів в секунду."
 
 #: ../src/gui/charinfo.cpp:912
 msgid "Weapon Range in meters."
-msgstr "Зброя діапазон в метрах."
+msgstr "Радіус дії Зброї в метрах."
 
 #: ../src/gui/charinfo.cpp:917
 msgid "Attack power influences the damage dealt to armored enemies."
-msgstr "Сила атаки впливає на утрату, що наноситься броньованих ворогів."
+msgstr "Сила атаки впливає на пошкодження, що завдаються ворогам в обладунках."
 
 #: ../src/gui/charinfo.cpp:922
 msgid "Armor reduces the damage of physical attacks."
@@ -316,7 +316,7 @@ msgstr "Броня зменшує пошкодження від фізичних
 #: ../src/gui/charinfo.cpp:926
 msgid ""
 "Block value determines the chance to avoid damage from physical attacks."
-msgstr "Блок значення визначає шанс уникнути шкоди від фізичних атак."
+msgstr "Значення Блоку визначає шанс уникнути шкоди від фізичних атак."
 
 #: ../src/gui/controlpanel.cpp:73
 msgid "Chat"
@@ -340,11 +340,11 @@ msgstr "Персонаж"
 
 #: ../src/gui/controlpanel.cpp:399 ../src/gui/optionswindow.cpp:325
 msgid "Skilltree"
-msgstr ""
+msgstr "Дерево навичок"
 
 #: ../src/gui/controlpanel.cpp:402
 msgid "Party"
-msgstr "Партія"
+msgstr "Команда"
 
 #: ../src/gui/controlpanel.cpp:405 ../src/gui/optionswindow.cpp:334
 msgid "Quests"
@@ -352,7 +352,7 @@ msgstr "Квести"
 
 #: ../src/gui/inventory.cpp:366
 msgid "Drop:"
-msgstr ""
+msgstr "Кинути:"
 
 #: ../src/gui/mainmenu.cpp:132
 msgid "Single player"
@@ -378,11 +378,11 @@ msgstr "Вихід"
 #: ../src/gui/networkwindows.cpp:95 ../src/gui/networkwindows.cpp:223
 #: ../src/gui/optionswindow.cpp:367 ../src/gui/tradewindow.cpp:265
 msgid "Ok"
-msgstr "Гаразд"
+msgstr "Ok"
 
 #: ../src/gui/messageboxes.cpp:55
 msgid "Abort"
-msgstr "Закінчити"
+msgstr "Відхилити"
 
 #: ../src/gui/messageboxes.cpp:58
 msgid "Save and Exit?"
@@ -390,7 +390,7 @@ msgstr "Зберегти і вийти?"
 
 #: ../src/gui/networkwindows.cpp:98
 msgid "Max. number of players"
-msgstr "Максимум Кількість гравців"
+msgstr "Макс. кількість гравців"
 
 #: ../src/gui/networkwindows.cpp:101 ../src/gui/networkwindows.cpp:229
 msgid "Port"
@@ -426,7 +426,7 @@ msgstr "Екран Персонажа"
 
 #: ../src/gui/optionswindow.cpp:328
 msgid "Party screen"
-msgstr "Партія екрану"
+msgstr "Екран Команди"
 
 #: ../src/gui/optionswindow.cpp:331
 msgid "Chatbox"
@@ -438,11 +438,11 @@ msgstr "Мінімапа"
 
 #: ../src/gui/optionswindow.cpp:340
 msgid "Swap equipement"
-msgstr ""
+msgstr "Зміна спорядження"
 
 #: ../src/gui/optionswindow.cpp:343
 msgid "Item Labels"
-msgstr "Пункт етикетки"
+msgstr "Мітки об'єктів"
 
 #: ../src/gui/optionswindow.cpp:346
 msgid "Difficulty"
@@ -462,45 +462,43 @@ msgstr "Музика"
 
 #: ../src/gui/optionswindow.cpp:358
 msgid "Enemy Highlight Color"
-msgstr "Колір Ворог Виділіть"
+msgstr "Колір підсвітки ворога"
 
 #: ../src/gui/optionswindow.cpp:364
 msgid "Grab mouse in windowed mode (needs restart)"
-msgstr ""
+msgstr "Захоплювати мишку в віконному режимі (потрібен перезапуск)"
 
 #: ../src/gui/questinfo.cpp:160
 msgid "open"
-msgstr "відкрити"
+msgstr "відкриті"
 
 #: ../src/gui/questinfo.cpp:163
 msgid "finished"
-msgstr "завершений"
+msgstr "завершені"
 
 #: ../src/gui/questinfo.cpp:166
 msgid "failed"
-msgstr "не вдалося"
+msgstr "провалені"
 
 #: ../src/gui/savegamelist.cpp:174
-#, fuzzy
 msgid "Characters"
-msgstr "Персонаж"
+msgstr "Персонажі"
 
 #: ../src/gui/savegamelist.cpp:183
 msgid "Delete"
-msgstr ""
+msgstr "Видалити"
 
 #: ../src/gui/savegamelist.cpp:188
 msgid "Level"
 msgstr "Рівень"
 
 #: ../src/gui/skilltree.cpp:537
-#, fuzzy
 msgid "Skillpoints"
-msgstr "Міцність"
+msgstr "Очки умінь"
 
 #: ../src/gui/skilltree.cpp:542
 msgid "Next Skillpoint at Level"
-msgstr ""
+msgstr "Нові Очки умінь на Рівні"
 
 #: ../src/gui/worldmap.cpp:141
 msgid "Town Portal"

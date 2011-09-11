@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-09-05 20:13+0200\n"
+"PO-Revision-Date: 2011-09-07 20:58+0200\n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
 "Language: Ukrainian\n"
@@ -21,35 +21,35 @@ msgstr ""
 
 #: scene7.xml
 msgid "The Poolmonster"
-msgstr ""
+msgstr "Ставковий монстр"
 
 #: scene7.xml
 msgid "Quest finished"
-msgstr "Квест закінчено"
+msgstr "Квест завершено"
 
 #: scene7.xml
 msgid "Quest description"
-msgstr "Квест опис"
+msgstr "Опис квесту"
 
 #: scene7.xml
 msgid "Soren Windclaw"
-msgstr ""
+msgstr "Сорен Віндклав"
 
 #: scene7.xml
 msgid "Wow, thats beautiful."
-msgstr "Нічого собі, Thats красиво."
+msgstr "Нічого собі, як красиво."
 
 #: scene7.xml
 msgid "Are you getting sentimental now?"
-msgstr "Чи отримуєте ви сентиментальні зараз?"
+msgstr "В тебе напад сентиментальності?"
 
 #: scene7.xml
 msgid "... Der Anblick hat mich nur an mein Leben"
-msgstr ""
+msgstr "... Лише спогади про давнє життя"
 
 #: scene7.xml
 msgid "Du kannst dich an dein Leben vor der"
-msgstr ""
+msgstr "Ти можеш згадати своє життя"
 
 #: scene7.xml
 msgid "... only dimly"
@@ -85,7 +85,7 @@ msgstr "Я сподіваюся, у вас є"
 
 #: scene7.xml
 msgid "Why has it really"
-msgstr "Чому насправді"
+msgstr "Чому це насправді"
 
 #: scene7.xml
 msgid "We have to go now."
@@ -97,11 +97,11 @@ msgstr "Хвилиночку, будь ласка."
 
 #: scene7.xml
 msgid "Whats that on the water over there?"
-msgstr "Що про те, що вода там?"
+msgstr "Що це там, на воді?"
 
 #: scene7.xml
 msgid "Looks like a..."
-msgstr "Схоже, a. .."
+msgstr "Схоже на..."
 
 #: scene7.xml
 msgid "*Roar!*"
@@ -109,5 +109,5 @@ msgstr "* Рев! *"
 
 #: scene7.xml
 msgid "greyCurseLake"
-msgstr ""
+msgstr "Приховане Озеро"
 

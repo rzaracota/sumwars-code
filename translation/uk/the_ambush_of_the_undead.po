@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2011-09-11 00:05+0300\n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
 "Language: Ukrainian\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: theFissure.xml
 msgid "The ambush of the undead"
-msgstr "Засідки нежиті"
+msgstr "Засідка нежиті"
 
 #: theFissure.xml
 msgid ""
 "The good news: No one will come through that tunnel anymore. The bad news: "
 "The way back has caved in, too. Hopefully there is another exit."
 msgstr ""
-"Хороша новина: Ніхто не прийде через цей тунель більше. Погана новина: шляху "
-"назад вже прогнувся, теж. Сподіваюся, є й інший вихід."
+"Хороша новина: Більше ніхто не прийде через цей тунель. Погана новина: Шлях "
+"назад теж обвалився. Сподіваюся є інший вихід."
 
 #: theFissure.xml
 msgid ""
@@ -38,18 +38,18 @@ msgid ""
 "be shut as fast as possible. The passage in the Cursed Caves has to be found "
 "and the destroyed with the explosion spell of Ireana of Northborough."
 msgstr ""
-"Нежити знайшли спосіб під Сірий Skyladder що дозволяє їм обходити "
-"Dwarfenwall. Тому що це загрожує царство Айсен безпосередньо вона повинна "
-"бути закрита якомога швидше. Прохід в проклятий печери повинен бути "
-"знайдений і знищений під час вибуху заклинання Ireana з Нортборо."
+"Нежить знайшла прохід попід Сірим Небесним трапом що дозволяє їм обходити "
+"Доріенваль. Оскільки це безпосередньо загрожує королівству Айзен, він "
+"повинен бути закритий якнайшвидше. Прохід в Проклятій Печері повинен бути "
+"знайдений і знищений вибухом від заклинання Іреани з Нортборо."
 
 #: theFissure.xml
 msgid "aisMounPath"
-msgstr ""
+msgstr "Гірська стежка"
 
 #: theFissure.xml
 msgid "*urgh*"
-msgstr "*urgh*"
+msgstr "*блін*"
 
 #: theFissure.xml
 msgid "Wow, she's gorgeous."
@@ -57,7 +57,7 @@ msgstr "Нічого собі, вона чудова."
 
 #: theFissure.xml
 msgid "You can stare at her later, we have to erase some undead."
-msgstr "Ви можете дивитися на неї пізно, ми повинні видалити деякі нежиті."
+msgstr "Ви можете подивитися на неї пізніше, ми повинні прибрати трохи нежиті."
 
 #: theFissure.xml
 msgid "Please help us, the mage is badly injured!"
@@ -65,53 +65,51 @@ msgstr "Будь ласка, допоможіть нам, маг важко по
 
 #: theFissure.xml
 msgid "He he. Harvest!"
-msgstr "Він він. Урожай!"
+msgstr "Хехе. Урожай!"
 
 #: theFissure.xml
 msgid "I have never seen someone fight like you before."
-msgstr "Я ніколи не бачив кого-то боротися, як ви раніше."
+msgstr "Я ніколи раніше не бачив когось, хто б так бився."
 
 #: theFissure.xml
 msgid "You don't get out very often, do you."
-msgstr "Ви не виходять дуже часто, чи не так."
+msgstr "Ви не часто виходите назовні, чи не так."
 
 #: theFissure.xml
 msgid "You developed splendid since the last time we met, didn't you. ##solo"
-msgstr ""
-"Ви розробили чудовий оскільки останній раз ми зустрічалися, чи не так. # # "
-"Соло"
+msgstr "А ви похорошіли з часу нашої останньої зустрічі, чи не так. ##solo"
 
 #: theFissure.xml
 msgid "You developed splendid since the last time we met, didn't you."
-msgstr "Ви розробили чудовий оскільки останній раз ми зустрічалися, чи не так."
+msgstr "А ви похорошіли з часу нашої останньої зустрічі, чи не так."
 
 #: theFissure.xml
 msgid "How is the archmage?"
-msgstr "Як архимаг?"
+msgstr "Як справи в архимага?"
 
 #: theFissure.xml
 msgid "Very bad, I'm afraid."
-msgstr "Дуже погано, я боюся."
+msgstr "Боюсь дуже погано."
 
 #: theFissure.xml
 msgid "Let me see."
-msgstr "Дозвольте мені бачити."
+msgstr "Давайте гляну."
 
 #: theFissure.xml
 msgid "Thank you. That was a close call for a rescue."
-msgstr "Дякуємо. Це було близько заклик до порятунку."
+msgstr "Дякуємо. Це був близький заклик про порятунок."
 
 #: theFissure.xml
 msgid "How could it even come to this?"
-msgstr "Як могло навіть прийти до цього?"
+msgstr "Як могло до такого дійти?"
 
 #: theFissure.xml
 msgid "It's very dangerous to travel so far from the roads."
-msgstr "Це дуже небезпечно подорожувати так далеко від дороги."
+msgstr "Дуже небезпечно подорожувати так далеко від доріг."
 
 #: theFissure.xml
 msgid "Come off it!"
-msgstr "Киньте!"
+msgstr "Залиште!"
 
 #: theFissure.xml
 msgid "No, no, it's the truth."
@@ -122,12 +120,12 @@ msgid ""
 "It was not the best idea, but the streets are not safe these days and thus "
 "we wanted to travel concealed."
 msgstr ""
-"Це була не найкраща ідея, але на вулицях не є безпечними в ці дні і, таким "
-"чином ми хотіли поїхати ховається."
+"Це була не найкраща ідея, але на дорогах в ці дні небезпечно, і таким чином "
+"ми хотіли подорожувати приховано."
 
 #: theFissure.xml
 msgid "These undead layed an ambush for us here."
-msgstr "Ці нежиті засідку для нас тут."
+msgstr "Ця нежить влаштували там на нас засідку."
 
 #: theFissure.xml
 msgid "Surprise!"
@@ -135,20 +133,20 @@ msgstr "Сюрприз!"
 
 #: theFissure.xml
 msgid "No wonder, this is a combat area."
-msgstr "Не дивно, що це район бойових дій."
+msgstr "Не дивно, це район бойових дій."
 
 #: theFissure.xml
 msgid "No, Dwarfenwall hasn't fallen yet."
-msgstr "Ні, Dwarfenwall не впав ще."
+msgstr "Ні, Дорфенваль ще не впав."
 
 #: theFissure.xml
 msgid ""
 "As long as that city stands, the entry to the lands of the undead is blocked."
-msgstr "Поки що місто стоїть, вхід в землях нежиті блокується."
+msgstr "Поки це місто стоїть, вхід до земель нежиті закритий."
 
 #: theFissure.xml
 msgid "But I fear they must have found a way around the citywalls."
-msgstr "Але я боюся, вони повинні знайти спосіб обійти citywalls."
+msgstr "Але я боюся, що вони знайшли шлях в обхід міських стін."
 
 #: theFissure.xml
 msgid "We mustn't allow this."
@@ -159,24 +157,23 @@ msgid ""
 "If those monsters could avoid Dwarfenwall they would advance into Aisen "
 "before one week is gone."
 msgstr ""
-"Якщо ці монстри могли б уникнути Dwarfenwall вони просуватимуться в Айсен до "
-"одного тижня пішло."
+"Якщо ці чудовиська минуть Дорфенваль вони за тиждень доберуться до Айзена."
 
 #: theFissure.xml
 msgid "It was exceedingly careless of you to leave with so few men."
-msgstr "Він був надзвичайно недбале з вас піти з так мало чоловіків."
+msgstr "Було надзвичайно леговажно піти з такою малою кількістю людей."
 
 #: theFissure.xml
 msgid "The city needs every man it can get!"
-msgstr "Місто потребує кожна людина може отримати!"
+msgstr "Місту потрібна кожна людина!"
 
 #: theFissure.xml
 msgid "I have a feeling what's going to come in a moment..."
-msgstr "У мене таке відчуття, що збирається прийти в момент ..."
+msgstr "У мене таке відчуття, що зараз щосб буде..."
 
 #: theFissure.xml
 msgid "Listen, Branded One!"
-msgstr "Слухай, відомих Одне!"
+msgstr "Слухай, Відмічений!"
 
 #: theFissure.xml
 msgid "What?!?"
@@ -184,27 +181,27 @@ msgstr "Що?!?"
 
 #: theFissure.xml
 msgid "That's a Branded One?"
-msgstr "Ось відомих Один?"
+msgstr "Це Відмічений?"
 
 #: theFissure.xml
 msgid "Let it go."
-msgstr "Нехай це піти."
+msgstr "Нехай йде."
 
 #: theFissure.xml
 msgid "She is on our side."
-msgstr "Вона знаходиться на нашій стороні."
+msgstr "Вона на нашому боці."
 
 #: theFissure.xml
 msgid "He is on our side."
-msgstr "Він на нашій стороні."
+msgstr "Він на нашому боці."
 
 #: theFissure.xml
 msgid "Listen, Branded Ones!"
-msgstr "Слухай, фірмові!"
+msgstr "Слухайте, Відмічені!"
 
 #: theFissure.xml
 msgid "Those are Branded Ones?"
-msgstr "Це фірмові?"
+msgstr "Це Відмічені?"
 
 #: theFissure.xml
 msgid "They are on our side."
@@ -212,63 +209,63 @@ msgstr "Вони на нашому боці."
 
 #: theFissure.xml
 msgid "Find the way the undead came here and render it useless."
-msgstr "Знайти шляхи нежиті прийшли сюди і зробити її марною."
+msgstr "Знайди шлях, яким нежить сюди прийшла і перекрий його."
 
 #: theFissure.xml
 msgid "Will that be payed extra?"
-msgstr "Чи буде це заплатили більше?"
+msgstr "А як це буде оплачено?"
 
 #: theFissure.xml
 msgid "Don't you want to give them some backup?"
-msgstr "Хіба ви не хочете, щоб дати їм деякий резервного копіювання?"
+msgstr "Хіба ви не хочете надати їм підкріплення?"
 
 #: theFissure.xml
 msgid "I can do what I want!"
-msgstr "Я можу робити те, що я хочу!"
+msgstr "Я роблю те що я схочу!"
 
 #: theFissure.xml
 msgid "Of course..."
-msgstr "Звичайно ..."
+msgstr "Звичайно..."
 
 #: theFissure.xml
 msgid "Slowly he's getting to me..."
-msgstr "Поступово він стає для мене ..."
+msgstr "Він мене повільно дістає..."
 
 #: theFissure.xml
 msgid "Only now?"
-msgstr "Тільки зараз?"
+msgstr "Лише зараз?"
 
 #: theFissure.xml
 msgid "Mages have to be naturally patient."
-msgstr "Маги повинні бути природно пацієнта."
+msgstr "Маги повинні бути природньо терпеливі."
 
 #: theFissure.xml
 msgid "I'm sure the undead found a hidden cave."
-msgstr "Я впевнений, що нежить виявили приховану печеру."
+msgstr "Я впевнений, що нежить знайшла приховану печеру."
 
 #: theFissure.xml
 msgid "Please take this explosion spell."
-msgstr "Будь ласка, прийміть це вибух заклинання."
+msgstr "Будь ласка, візьміть це заклинання вибуху."
 
 #: theFissure.xml
 msgid "It surely will be useful."
-msgstr "Це, безумовно, буде корисно."
+msgstr "Воно бузумовно пригодиться."
 
 #: theFissure.xml
 msgid "I know of a cave system north of here."
-msgstr "Я не знаю півночі печерної системи звідси."
+msgstr "Я знаю про систему печер на північ звідси."
 
 #: theFissure.xml
 msgid "They say it's cursed."
-msgstr "Вони кажуть, що це прокляте."
+msgstr "Кажуть що вона проклята."
 
 #: theFissure.xml
 msgid "Should that frighten me?"
-msgstr "Якщо це лякає мене?"
+msgstr "Це має мене налякати?"
 
 #: theFissure.xml
 msgid "Should that frighten us?"
-msgstr "Якщо це лякати нас?"
+msgstr "Це має нас налякати?"
 
 #: theFissure.xml
 msgid "..."
@@ -276,7 +273,7 @@ msgstr "..."
 
 #: theFissure.xml
 msgid "probably not."
-msgstr "ймовірно, немає."
+msgstr "Напевне ні."
 
 #: theFissure.xml
 msgid "Thanks for your help."
@@ -284,35 +281,35 @@ msgstr "Дякуємо за вашу допомогу."
 
 #: theFissure.xml
 msgid "Good luck!"
-msgstr "Удачи!"
+msgstr "Щасливо!"
 
 #: theFissure.xml
 msgid "I hope we meet again soon."
-msgstr "Я сподіваюся, ми зустрінемося знову найближчим часом."
+msgstr "Я сподіваюся що скоро ми зустрінемося знову."
 
 #: theFissure.xml
 msgid "greyCurseCaveFis"
-msgstr "greyCurseCaveFis"
+msgstr "Ущелина"
 
 #: theFissure.xml
 msgid "Unknown Lich"
-msgstr "Невідомі Ліча"
+msgstr "Невідомий Ліч"
 
 #: theFissure.xml
 msgid "How is the work proceeding?"
-msgstr "Як іде робота виходячи?"
+msgstr "Як йде робота?"
 
 #: theFissure.xml
 msgid "Nar'Asoroth, my lord."
-msgstr "Nar'Asoroth, мій пан."
+msgstr "Нар'Асорос, мій пане."
 
 #: theFissure.xml
 msgid ""
 "The stone is solid,but if I let the skeletons work any faster they will "
 "break apart!"
 msgstr ""
-"Камінь твердий, але якщо я дозволю скелети працювати швидше, вони "
-"розбиваються на частини!"
+"Камінь твердий, але якщо я скажу скелетам працювати швидше, вони розіб'ють "
+"його на частини!"
 
 #: theFissure.xml
 msgid "((Such an opportunity may never occur again.))"
@@ -320,11 +317,11 @@ msgstr "((Така можливість може ніколи не повтор�
 
 #: theFissure.xml
 msgid "Come on, this is our chance!"
-msgstr "Ну, це наш шанс!"
+msgstr "Давай це наш шанс!"
 
 #: theFissure.xml
 msgid "Attack the lich immediately?"
-msgstr "Атака Ліча негайно?"
+msgstr "Атакувати Ліча негайно?"
 
 #: theFissure.xml
 msgid "Yes"
@@ -344,33 +341,34 @@ msgstr "Зачекайте, ми можемо дізнатися щось кор
 
 #: theFissure.xml
 msgid "Let them rest from time to time."
-msgstr "Нехай вони решту часу від часу."
+msgstr "Нехай вони відпочивають часу від часу."
 
 #: theFissure.xml
 msgid "They should be able to fight, too."
-msgstr "Вони повинні бути в змозі боротися, теж."
+msgstr "Вони повинні могти також і битись."
 
 #: theFissure.xml
 msgid "Isn't the tunnel supposed to be ready for the attack?"
-msgstr "Хіба це не тунель повинен бути готовий до атаки?"
+msgstr "Хіба тунель не повинен бути готовий до атаки?"
 
 #: theFissure.xml
 msgid "No, the city is unimportant in the big picture."
-msgstr "Ні, місто не має значення в загальну картину."
+msgstr "Ні, місто не має значення в загальній картині."
 
 #: theFissure.xml
 msgid "Let those aisen dogs burn their backup troops there."
-msgstr "Нехай ті, Айсен собак спалюють свої резервні війська."
+msgstr "Нехай ті айзенові собаки втрачають свої резервні війська."
 
 #: theFissure.xml
 msgid ""
 "The army passing through this tunnel has nothing to do with Dwarfenwall."
 msgstr ""
-"Армії, що проходять через цей тунель має нічого спільного з Dwarfenwall."
+"Армія, що проходить через цей тунель не має ніякого відношення до "
+"Дорфенвалю."
 
 #: theFissure.xml
 msgid "Only the crystal counts."
-msgstr "Тільки кристал має значення."
+msgstr "Лише кристал має значення."
 
 #: theFissure.xml
 msgid "I don't understand."
@@ -382,27 +380,27 @@ msgstr "І це для вашого ж блага."
 
 #: theFissure.xml
 msgid "Now back to work."
-msgstr "Тепер повернемося до роботи."
+msgstr "Повернемося до роботи."
 
 #: theFissure.xml
 msgid "Your wish is my action."
-msgstr "Ваше бажання моє дію."
+msgstr "Ваше слово - моє діло."
 
 #: theFissure.xml
 msgid "That has to be the lich attacking Dwarfenwall."
-msgstr "Це має бути лич атакуючих Dwarfenwall."
+msgstr "Схоже це ліч, що атакував Дорфенваль."
 
 #: theFissure.xml
 msgid "If I kill him now his army will fall to dust."
-msgstr "Якщо я вб'ю його зараз його армія впаде в пил."
+msgstr "Якщо я вб'ю його зараз, його армія перетворится на порох."
 
 #: theFissure.xml
 msgid "That's a lich."
-msgstr "Ось Ліча."
+msgstr "Це Ліч."
 
 #: theFissure.xml
 msgid "If we destroy him now his army will fall apart with him!"
-msgstr "Якщо ми знищимо його зараз його армія розвалиться разом з ним!"
+msgstr "Якщо ми вб'ємо його зараз, його армія перетворится на порох!"
 
 #: theFissure.xml
 msgid "Harvest!"
@@ -412,19 +410,19 @@ msgstr "Урожай!"
 msgid ""
 "What do you know. There are rats everywhere. Kill them and bring me their "
 "bones!"
-msgstr "Що ви знаєте. Є пацюки скрізь. Убийте їх і принеси мені їх кістки!"
+msgstr "Що ви знаєте. Скрізь пацюки. Убийте їх і принесіть мені їх кістки!"
 
 #: theFissure.xml
 msgid "Then I shall blow this crevice to smithereens."
-msgstr "Тоді я буду удар цієї ущелині вщент."
+msgstr "Тоді я рознесу цю ущелину вщент."
 
 #: theFissure.xml
 msgid "Alright, go!"
-msgstr "Гаразд, пішли!"
+msgstr "Гаразд, вперед!"
 
 #: theFissure.xml
 msgid "Blow this passage to smithereens!"
-msgstr "Удар цей уривок в пух і прах!"
+msgstr "Рознесіть це прохід в пух і прах!"
 
 #: theFissure.xml
 msgid "Get out, quick!"
@@ -432,77 +430,77 @@ msgstr "Забирайся, швидше!"
 
 #: theFissure.xml
 msgid "Alright, Windclaw, I'm done here."
-msgstr "Добре, Windclaw, я зробив тут."
+msgstr "Добре, Віндклав, тут я завершив."
 
 #: theFissure.xml
 msgid "Alright, Windclaw, We are done here."
-msgstr "Добре, Windclaw, ми зробили тут."
+msgstr "Добре, Віндклав, тут ми завершили."
 
 #: theFissure.xml
 msgid "What now?"
-msgstr "Що ж тепер?"
+msgstr "Що тепер?"
 
 #: theFissure.xml
 msgid "You fool! Get yourself out of this mountain!"
-msgstr "Дурень! Отримати собі з цієї гори!"
+msgstr "Дурень! Забирайся геть з цієї гори!"
 
 #: theFissure.xml
 msgid "You are needed in Dwarfenwall!"
-msgstr "Ви потрібні в Dwarfenwall!"
+msgstr "Ти потрібен в Дорфенвалі!"
 
 #: theFissure.xml
 msgid "You fools! Get yourselves out of this mountain!"
-msgstr "Ви дурні! Отримати себе з цієї гори!"
+msgstr "Ви дурні! Забирайтесь геть з цієї гори!"
 
 #: theFissure.xml
 msgid ""
 "Let's go. If we are lucky the passage is blocked too and we can all take a "
 "break."
 msgstr ""
-"Підемо. Якщо нам пощастить прохід заблокований теж, і ми всі можемо зробити "
-"перерву."
+"Підемо. Якщо нам пощастило то прохід теж заблокований, і ми всі можемо "
+"відпочити."
 
 #: theFissure.xml
 msgid "In that case you can always tear yourselves apart. That would work."
-msgstr ""
-"У цьому випадку ви завжди можете рвати себе на частини. Це було б працювати."
+msgstr "У такому випадку ви завжди можете себе розірвати. Це б спрацювало."
 
 #: theFissure.xml
 msgid "Does he have any idea how painful this always is?"
-msgstr "Чи є у нього якісь ідеї, як боляче це завжди?"
+msgstr "Він знає, як це боляче кожен раз?"
 
 #: theFissure.xml
 msgid "That's impossible. Otherwise he wouldn't give such a stupid suggestion."
 msgstr ""
-"Це неможливо. В іншому випадку він не став би давати такі дурні пропозиції."
+"Це неможливо. В протилежному випадку він би не давав таких дурних "
+"пропозицій."
 
 #: theFissure.xml
 msgid "There really are better employers."
-msgstr "Там дійсно краще роботодавців."
+msgstr "Точно існують кращі роботодавці."
 
 #: theFissure.xml
 msgid "Stop bickering and get moving!"
-msgstr "Стоп суперечки і починайте!"
+msgstr "Досить сперечатись і давайте йти!"
 
 #: theFissure.xml
 msgid "Hopefully there is an exit in this direction."
-msgstr "Сподіваюся, є вихід в цьому напрямку."
+msgstr "Сподіваюся в цьому напрямку є вихід."
 
 #: theFissure.xml
 msgid "Who goes there?"
-msgstr "Хто йде?"
+msgstr "Хто там?"
 
 #: theFissure.xml
 msgid ""
 "Oh by the gods, if some of them have their eyes on this unpleasent piece of "
 "land right now."
 msgstr ""
-"Про боги, якщо деякі з них мають свої очі на цьому неприємні ділянку землі "
-"прямо зараз."
+"Ох боги, якщо якісь з них бачать нас зараз на цьому неприємному шматку "
+"землі."
 
 #: theFissure.xml
 msgid "How nice to see a familiar face."
-msgstr "Як приємно бачити знайомі обличчя."
+msgstr "Як приємно бачити знайоме обличчя."
 
 #: theFissure.xml
 msgid "How nice to see familiar faces."
@@ -510,30 +508,29 @@ msgstr "Як приємно бачити знайомі обличчя."
 
 #: theFissure.xml
 msgid "Not so fast, peddler!"
-msgstr "Не так швидко, торговець!"
+msgstr "Не так швидко, пліткар!"
 
 #: theFissure.xml
 msgid "How by Harad's eyes did you get here?"
-msgstr "Як очима Харада це ти сюди потрапив?"
+msgstr "Як же, Харадові очі, вас сюди занесло?"
 
 #: theFissure.xml
 msgid "Oh! Well, you see..."
-msgstr "О! Ну, бачиш ..."
+msgstr "Ох! Ну бачиш..."
 
 #: theFissure.xml
 msgid ""
 "I wanted to take a short cut through the mountains when suddenly the ground "
 "was caving in."
-msgstr ""
-"Я хотів взяти короткий шлях через гори, як раптом земля була обвалення дюйма"
+msgstr "Я хотів скоротити шлях через гори, як раптом земля обвалилася."
 
 #: theFissure.xml
 msgid ""
 "And after I took a careful look around I sadly had to notice the way south "
 "was blocked."
 msgstr ""
-"І після того як я взяв уважно подивитися навколо, я сумно було помітити, "
-"шлях на південь був заблокований."
+"І після того як поглянув навколо то сумно констатував, що шлях на південь "
+"був заблокований."
 
 #: theFissure.xml
 msgid "That's why I'm here."
@@ -541,75 +538,72 @@ msgstr "Ось чому я тут."
 
 #: theFissure.xml
 msgid "There is a cave in the east, too, but that was a bit fishy."
-msgstr "Існує печері на сході, занадто, але це було трохи рибний."
+msgstr "Також є печера на сході, але вона трохи сумнівна."
 
 #: theFissure.xml
 msgid "But since you are here there is still hope."
-msgstr "Але так як ви тут все ще є надія."
+msgstr "Але оскільки ви тут то надія ще є."
 
 #: theFissure.xml
 msgid "I will just wait until the road is clear."
-msgstr "Я буду просто чекати, поки дорога ясна."
+msgstr "Я просто почекаю поки шлях очиститься."
 
 #: theFissure.xml
 msgid ""
 "Your distress aside, what makes you so sure I'll not simply vanish with a "
 "town portal?"
-msgstr ""
-"Ваше горе в сторону, що змушує вас так, що я не буду просто зникають з "
-"Портал міста?"
+msgstr "Чому ти думаєш, що я просто не зникну, скориставшись міським порталом?"
 
 #: theFissure.xml
 msgid "But since you are here, appreciated friends, there is still hope."
-msgstr "Але так як ви знаходитесь тут, оцінили друзі, ще є надія."
+msgstr "Але осільки ви тут, дорогі друзі, надія ще є."
 
 #: theFissure.xml
 msgid ""
 "Your distress aside, what makes you so sure we'll not simply vanish with a "
 "town portal?"
 msgstr ""
-"Ваше горе в сторону, що змушує вас так, що ми не будемо просто зникають з "
-"Портал міста?"
+"Чому ти думаєш, що ми просто не зникнемо, скориставшись міським порталом?"
 
 #: theFissure.xml
 msgid ""
 "Well, that would work normally and I would gladly offer you a grand price "
 "for the help."
 msgstr ""
-"Ну, це було б нормально працювати і я б із задоволенням пропонуємо вам "
-"великою ціною за допомогу."
+"Ну, це б спрацювало але я з задоволенням запропоную вам велику ціну за "
+"допомогу."
 
 #: theFissure.xml
 msgid "But short ago, there was a notable magical explosion in this place."
-msgstr "Але коротка тому, не було помітних магічні вибуху в цьому місці."
+msgstr "Але недавно в цьому місці стався помітний магічний вибух."
 
 #: theFissure.xml
 msgid "You will discover that the scrolls take you right here again. ##solo"
-msgstr "Ви виявите, що сувої Вас прямо тут. # # Соло"
+msgstr "Ви побачите, що згортки повернуть вас прямо сюди знов. ##solo"
 
 #: theFissure.xml
 msgid "You will discover that the scrolls take you right here again."
-msgstr "Ви виявите, що сувої Вас прямо тут."
+msgstr "Ви побачите, що згортки повернуть вас прямо сюди знов."
 
 #: theFissure.xml
 msgid "Verflucht sei Windclaw!"
-msgstr "Verflucht сеї Windclaw!"
+msgstr "Проклятий Віндклав!"
 
 #: theFissure.xml
 msgid "Fine. Then we do it the hard way."
-msgstr "Прекрасно. Потім ми робимо це на своїй шкурі."
+msgstr "Прекрасно. Тоді ми зробимо це складним шляхом."
 
 #: theFissure.xml
 msgid ""
 "If you need something let me know. I discovered some potions back there, and "
 "I would part with them for a small amount of gold."
 msgstr ""
-"Якщо вам потрібно щось дайте мені знати. Я виявив деякі зілля туди, і я "
-"хотів би розлучитися з ними за невелику кількість золота."
+"Якщо вам щось потрібно дайте мені знати. Я знайшов тут якісь зілля, і я "
+"поділюсь ними за невелику плату."
 
 #: theFissure.xml
 msgid "You really ask money for it."
-msgstr "Ви дійсно просять за це гроші."
+msgstr "Ви дійсно просите за них гроші."
 
 #: theFissure.xml
 msgid "But business is business."
@@ -617,4 +611,4 @@ msgstr "Але бізнес є бізнес."
 
 #: theFissure.xml
 msgid "greyCurseCaveDep"
-msgstr ""
+msgstr "Проклята печера, глибина"

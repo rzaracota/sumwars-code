@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2011-09-10 19:20+0300\n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
 "Language: Ukrainian\n"
@@ -25,19 +25,26 @@ msgstr "Поранений розвідник"
 
 #: scout.xml
 msgid "I rescued a scout and hopefully gained some goodwill from the local militia. Whatever good that will do."
-msgstr "Я врятував розвідник і, сподіваюся, отримали деякі доброї волі з боку місцевої міліції. Що б не гарна, що буде робити."
+msgstr ""
+"Я врятував розвідника і, сподіваюся, отримав трохи прихильності з боку "
+"місцевої міліції. Це може пригодитись."
 
 #: scout.xml
 msgid "I really stumbled across a scout in the goblin infested caves west of Dwarfenwall. He is wounded, lost his gear to some spiders and asked me to fix it for him. I really wonder if I should do this... then again it would be an excuse to venture deeper into the caves that are obviously not under control by the undead."
-msgstr "Я дійсно наткнулися на розвідників в печерах гоблінів заражених захід від Dwarfenwall. Він поранений, втратив спорядження для деяких павуків і попросив мене, щоб виправити це для нього. Мені дуже цікаво, якщо я повинен зробити це ... з іншого боку це було б виправданням Просуваючись вглиб печери, які, очевидно, не під контролем нежиті."
+msgstr ""
+"Я дійсно наткнувся на розвідника в заражених печерах гоблінів на захід від "
+"Дорфенваля. Він поранений, загубив спорядження через якихось павуків і "
+"попросив мене, щоб я допоміг. Мені було дійсно цікаво, як я мав це "
+"зробити... з іншого боку це було причиною щоб насмілитись піти вглиб печер, "
+"які, очевидно, не під контролем нежиті."
 
 #: scout.xml
 msgid "greyCurseCave"
-msgstr "greyCurseCave"
+msgstr "Проклята печера"
 
 #: scout.xml
 msgid "Wounded Scout"
-msgstr "Поранений Scout"
+msgstr "Поранений Розвідник"
 
 #: scout.xml
 msgid "Are you alive?"
@@ -49,7 +56,7 @@ msgstr "Гей, ти в порядку?"
 
 #: scout.xml
 msgid "Does it look... 'alright' to you?"
-msgstr "Чи має це виглядати... 'Добре' для вас?"
+msgstr "Це схоже на... 'в порядку'?"
 
 #: scout.xml
 msgid "Pretty much, yes."
@@ -57,103 +64,116 @@ msgstr "Значною мірою, так."
 
 #: scout.xml
 msgid "You can still talk, right?"
-msgstr "Ви все ще можете говорити, чи не так?"
+msgstr "Ти все ще можеш говорити, так?"
 
 #: scout.xml
 msgid "Yeah, right... now, when you're done laughing... maybe you could help me?"
-msgstr "Так, вірно ... Тепер, коли ви закінчите сміятися ... може бути, ви могли б мені допомогти?"
+msgstr ""
+"Так, вірно... тепер, коли ти закінчив сміятися... може ти б мені допоміг?"
 
 #: scout.xml
 msgid "I guess I could patch you up, but I can't carry you out of here."
-msgstr "Я думаю, я міг патч вас, але я не можу нести тебе звідси."
+msgstr "Я думаю я міг тебе залатати, але я не можу тебе звідси винести."
 
 #: scout.xml
 msgid "Where I'm headed you will most certainly die a quick and meaningless death."
-msgstr "Де я очолював ви напевно вмирають швидко і безглуздої смерті."
+msgstr "Зі мною ти швидше за все вмреш швидкою і безглуздою смертю."
 
 #: scout.xml
 msgid "I can... watch my own back..."
-msgstr "Я можу ... дивитися, як мій власний назад ..."
+msgstr "Я можу... за собою приглянути..."
 
 #: scout.xml
 msgid "Most of the time... at least."
-msgstr "Велику частину часу ... принаймні."
+msgstr "Більшу частину часу... принаймні."
 
 #: scout.xml
 msgid "But spying on the undead... evading... those blasted goblins..."
-msgstr "Але шпигує за нежить ... ухилення від ... ці кляті гобліни ..."
+msgstr "Але шпигування за нежитю... ухиляння від... цих клятих гоблінів..."
 
 #: scout.xml
 msgid "I got a little... careless."
-msgstr "Я трохи ... недбало."
+msgstr "Я був трохи... недбалий."
 
 #: scout.xml
 msgid "West of here... there's a cave... pretty deep inside..."
-msgstr "Захід тут ... є печера ... досить глибоко всередині ..."
+msgstr "На захід звідси... є печера... досить глибока..."
 
 #: scout.xml
 msgid "Lot's of wolves... but a nest of spiders, too... thought I had... it under control"
-msgstr "Лота вовків ... але гніздо павуків, теж ... думав, що я ... його під контролем"
+msgstr ""
+"Багато вовків... але також гніздо павуків... думав, що я... контролюю "
+"ситуацію"
 
 #: scout.xml
 msgid "really big one... there. Spider, I mean... got me good... lost my gear... but got away... somehow"
-msgstr "дуже великий ... там. Павук, я маю на увазі ... мене хороша ... втратив передач ... але пішов ... якось"
+msgstr ""
+"дуже великий... там. Павук, я маю на увазі... гарно мені дав... загубив "
+"спорядження... але вибрався... якось"
 
 #: scout.xml
 msgid "The venom... can't move at all... anymore... I had an antidote in my pack..."
-msgstr "Яд ... не може рухатися у всьому ... більше ... Я протиотруту в рюкзак ..."
+msgstr ""
+"Отрута... не може рухатися взагалі... більше... В мене є протиотрута в "
+"рюкзаку..."
 
 #: scout.xml
 msgid "So... if you could get... me my gear, I... would be good to go again..."
-msgstr "Так що ... якби ви могли отримати ... Мені моє спорядження, І. .. було б добре, щоб піти знову ..."
+msgstr ""
+"Так що... якби ти повернув мені спорядження, я... було б добре, піти "
+"знову..."
 
 #: scout.xml
 msgid "If you're... not afraid... that is."
-msgstr "Якщо ви ... не боїться ... що є."
+msgstr "Якщо ти... не боїться ... звичайно."
 
 #: scout.xml
 msgid "You have a strange manner of asking for favors."
-msgstr "Ви дивним чином просити про милість."
+msgstr "Ти дуже дивним чином просиш про послугу."
 
 #: scout.xml
 msgid "But since I don't have to carry you to safety, I guess it is allright."
-msgstr "Але так як я не повинні нести вас у безпечне місце, я припускаю, що чи все гаразд."
+msgstr ""
+"Але оскільки я не повинен нести тебе у безпечне місце, я думаю все гаразд."
 
 #: scout.xml
 msgid "This wouldn't happen to be your stuff, would it?"
-msgstr "Це не трапляється, ваші речі, чи не так?"
+msgstr "Це не ваші річі, чи не так?"
 
 #: scout.xml
 msgid "You already... found it?"
-msgstr "Ви вже ... знайшов його?"
+msgstr "Ти вже... знайшов його?"
 
 #: scout.xml
 msgid "Thanks..."
-msgstr "Спасибі ..."
+msgstr "Спасибі..."
 
 #: scout.xml
 msgid "Still alive?"
-msgstr "Ще живі?"
+msgstr "Ще живий?"
 
 #: scout.xml
 msgid "Do you... have my gear?"
-msgstr "Ви ... є моє спорядження?"
+msgstr "Маєш... моє спорядження?"
 
 #: scout.xml
 msgid "Not yet, no."
-msgstr "Поки ні, ні."
+msgstr "Все ще, ні."
 
 #: scout.xml
 msgid "Shame. It seems I'm already capable of... being paralyzed... without your help."
-msgstr "Ганьба. Здається, що я вже здатний ... будучи паралізованим ... без вашої допомоги."
+msgstr ""
+"Ганьба. Здається що я вже здатний... будучи паралізованим... без твоєї "
+"допомоги."
 
 #: scout.xml
 msgid "Thanks for... checking back on me though. I'll be here... if you need me."
-msgstr "Спасибі за ... Перевірка до мене спиною, хоча. Я буду тут ... якщо вам потрібно мені."
+msgstr ""
+"Хоча спасибі за... перевірку, чи я ще тут. Я буду тут... якщо буду потрібен."
 
 #: scout.xml
 msgid "You are kind of messed up, you know that?"
-msgstr "Ви все змішалося, ви знаєте, що?"
+msgstr "Ти трохи запутаний, ти це знаєш?"
 
 #: scout.xml
 msgid "..."
@@ -161,31 +181,33 @@ msgstr "..."
 
 #: scout.xml
 msgid "Here it is."
-msgstr "Ось він."
+msgstr "Ось воно."
 
 #: scout.xml
 msgid "good... now, blue potion"
-msgstr "добре ... Тепер, сині зілля"
+msgstr "добре... тепер, синє зілля"
 
 #: scout.xml
 msgid "A blue potion?"
-msgstr "Сині зілля?"
+msgstr "Синє зілля?"
 
 #: scout.xml
 msgid "You do realize there is at least a score of 'blue' potions here?"
-msgstr "Ви розумієте, є принаймні оцінка «блакитного» зілля тут?"
+msgstr "Ти розумієш, що 'синє' зілля це сказано занадто туманно?"
 
 #: scout.xml
 msgid "They just... turn out that... way everytime... it's the one... with the light shade of turquoise."
-msgstr "Вони просто ... виявитися, що ... спосіб кожен раз ... це один ... з легким відтінком бірюзи."
+msgstr ""
+"Вони просто... опиняються... кожного разу... це те... з легким відтінком "
+"бірюзи."
 
 #: scout.xml
 msgid "No... too... light blue"
-msgstr "Немає. .. теж ... блакитний"
+msgstr "Немає... теж... блакитне"
 
 #: scout.xml
 msgid "That's... it"
-msgstr "Це ... воно"
+msgstr "Це... воно"
 
 #: scout.xml
 msgid "Finally!"
@@ -193,33 +215,35 @@ msgstr "Нарешті!"
 
 #: scout.xml
 msgid "Remember me not to kill you after all the trouble I went through."
-msgstr "Запам'ятати мене не вбити тебе після всіх невдач я пройшов."
+msgstr ""
+"Нагадай мені щоб я тебе не вбив після всіх неприємностей, які я пройшов."
 
 #: scout.xml
 msgid "Gladly. Really, thank you for saving my hide."
-msgstr "Охоче. Дійсно, дякую за порятунок моєї приховувати."
+msgstr "Охоче. Дійсно, дякую що врятував мою задницю."
 
 #: scout.xml
 msgid "You best stay out of trouble."
-msgstr "Ви найкраще триматися подалі від неприємностей."
+msgstr "Краще тримайся подалі від неприємностей."
 
 #: scout.xml
 msgid "Because I seriously do NOT want to rummage through your happy collection of identical looking special-purpose-potions."
-msgstr "Тому що я серйозно не хочете ритися в ваших щасливих сукупність ідентичних дивлячись спеціального призначення-зілля."
+msgstr ""
+"Тому що я серйозно НЕ хочу ритися в твоїй веселій колекції одинакового на "
+"вигляд зілля спеціального призначення."
 
 #: scout.xml
 msgid "Sorry about that. Normally I'm the only one who has to keep them apart."
-msgstr "Шкода про це нам. Зазвичай я єдиний, хто повинен тримати їх на частини."
+msgstr "Вибач за це. Зазвичай я єдиний хто їх тримає при собі."
 
 #: scout.xml
 msgid "Allright. Now that this is done, I will be on my way."
-msgstr "Allright. Тепер, коли це буде зроблено, я буду на моєму шляху."
+msgstr "Добре. Тепер коли це зроблено, я вирушаю в дорогу."
 
 #: scout.xml
 msgid "I will rest a little more and then be on my way too, but in the other direction."
-msgstr "Я відпочину трохи більше, і тоді на моєму шляху теж, але в іншому напрямку."
+msgstr "Я відпочину трохи і теж вирушу, але в іншому напрямку."
 
 #: scout.xml
 msgid "greyWolfcave"
-msgstr ""
-
+msgstr "Вовча печера"
