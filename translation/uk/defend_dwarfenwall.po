@@ -615,10 +615,9 @@ msgid "That explaines a lot."
 msgstr "Це багато пояснює."
 
 #: siegeOfDwarfenwall.xml
-msgid ""
-"But even they will not be able to hold the city once the wretched humans are "
+msgid "But even they will not be able to hold the city once the wretched humans are "
 "gone."
-"Але навіть вони не зможуть утримати місто після того, як помруть жалюгідні люди."
+msgstr "Але навіть вони не зможуть утримати місто після того, як помруть жалюгідні люди."
 
 #: siegeOfDwarfenwall.xml
 msgid "Overrun them. Send out your order."

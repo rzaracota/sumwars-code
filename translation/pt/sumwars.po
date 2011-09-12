@@ -3032,6 +3032,22 @@ msgstr ""
 msgid "Ronny the Rat"
 msgstr ""
 
+#: playerclasses.xml
+msgid "Warrior"
+msgstr ""
+
+#: playerclasses.xml
+msgid "Magician"
+msgstr ""
+
+#: playerclasses.xml
+msgid "Archer"
+msgstr ""
+
+#: playerclasses.xml
+msgid "Priest"
+msgstr ""
+
 #: joringsbridge_npc.xml
 msgid "Gertlinde Kampfer"
 msgstr ""

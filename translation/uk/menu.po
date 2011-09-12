@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2011-09-12 21:30+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
@@ -244,15 +244,16 @@ msgstr "Сила збільшує очки здоров'я, пошкодженн
 
 #: ../src/gui/charinfo.cpp:876
 msgid "Dexterity increases ranged damage, attack accuracy and attack speed"
-msgstr "Спритність збільшує дальність нанесення шкоди, точність та швидкість атаки"
+msgstr ""
+"Спритність збільшує дальність нанесення шкоди, точність та швидкість атаки"
 
 #: ../src/gui/charinfo.cpp:880
 msgid ""
 "Willpower decreases the duration and the impact of status changes and "
 "increases magical melee damage."
 msgstr ""
-"Сила волі зменшує тривалість і вплив змін стану і збільшує магічну "
-"шкоду в ближньому бою."
+"Сила волі зменшує тривалість і вплив змін стану і збільшує магічну шкоду в "
+"ближньому бою."
 
 #: ../src/gui/charinfo.cpp:884
 msgid "Magic power"

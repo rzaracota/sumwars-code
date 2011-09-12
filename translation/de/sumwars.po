@@ -3234,6 +3234,24 @@ msgstr "Rob der Räuber"
 msgid "Ronny the Rat"
 msgstr "Ronny die Ratte"
 
+#: playerclasses.xml
+msgid "Warrior"
+msgstr ""
+
+#: playerclasses.xml
+#, fuzzy
+msgid "Magician"
+msgstr "Magieangriff"
+
+#: playerclasses.xml
+#, fuzzy
+msgid "Archer"
+msgstr "Wilderer"
+
+#: playerclasses.xml
+msgid "Priest"
+msgstr ""
+
 #: joringsbridge_npc.xml
 msgid "Gertlinde Kampfer"
 msgstr "Gertlinde Kampfer"

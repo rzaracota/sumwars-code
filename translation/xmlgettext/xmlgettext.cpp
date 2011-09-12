@@ -176,7 +176,8 @@ void parseXML( TiXmlNode* node, char* filename, std::map<std::string, std::strin
 		if (!strcmp(node->Value(), "Item") ||
 					!strcmp(node->Value(), "Monster") ||
 					!strcmp(node->Value(), "Quest") ||
-					!strcmp(node->Value(), "Region"))
+					!strcmp(node->Value(), "Region") ||
+					!strcmp(node->Value(), "PlayerClass"))
 		{
 			attrib.parseElement(elem, elem_strings);
 			attrib.getString("name",str_tmp);
