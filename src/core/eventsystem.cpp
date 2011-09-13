@@ -94,6 +94,7 @@ void EventSystem::init()
 	
 	lua_register(m_lua, "getLocation", getLocation);
 	lua_register(m_lua, "addLocation", addLocation);
+	lua_register(m_lua, "setLocation", setLocation);
 	lua_register(m_lua, "addArea", addArea);
 	
 	lua_register(m_lua, "startTimer",startTimer);
@@ -2043,6 +2044,27 @@ int EventSystem::addLocation(lua_State *L)
 	else
 	{
 		ERRORMSG("Syntax: addLocation(string locname, {x, y})");
+	}
+	return 0;
+}
+
+int EventSystem::setLocation(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=2 && (lua_istable(L,2) || lua_isstring(L,2)) && lua_isstring(L,1))
+	{
+		LocationName loc = lua_tostring(L, 1);
+		Vector v = getVector(L,2);
+
+
+		if (m_region !=0)
+		{
+			m_region->setLocation(loc,v);
+		}
+	}
+	else
+	{
+		ERRORMSG("Syntax: setLocation(string locname, {x, y})");
 	}
 	return 0;
 }

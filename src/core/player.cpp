@@ -670,7 +670,7 @@ bool Player::onItemClick(ClientCommand* command)
 				{
 					std::stringstream stream;
 					stream << "#townportal" << getId();
-					getRegion()->addLocation(stream.str(), getShape()->m_center);
+					getRegion()->setLocation(stream.str(), getShape()->m_center);
 
 					RegionLocation regloc;
 					regloc.first = getRegion()->getIdString();

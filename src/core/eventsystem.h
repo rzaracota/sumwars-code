@@ -481,6 +481,12 @@ class EventSystem
 		static int addLocation(lua_State *L);
 		
 		/**
+		 * \brief Sets the Position of a location
+		 * \param L Lua Status
+		 */
+		static int setLocation(lua_State *L);
+		
+		/**
 		 * \fn static int getLocation(lua_State *L)
 		 * \brief einen Ort aus
 		 * \param L Lua Status

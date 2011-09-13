@@ -1142,6 +1142,18 @@ class Region
 		}
 		
 		/**
+		 * \fn void setLocation(LocationName name, Vector pos)
+		 * \brief set the Position of a location
+		 * \param name name of the location
+		 * \param pos coordinates of the location
+		 * In contrast to \a addLocation this function overwrites existing locations
+		 */
+		void setLocation(LocationName name, Vector pos)
+		{
+			m_locations[name] = pos ;
+		}
+		
+		/**
 		 * \fn bool hasLocation(LocationName loc)
 		 * \brief Gibt an, ob die Region einen Ort mit dem angegebenen Namen hat
 		 * \param loc Ort
