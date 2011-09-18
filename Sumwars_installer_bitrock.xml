@@ -7,37 +7,6 @@
     <logoImage>resources/gui/imagesets/startscreen.png</logoImage>
     <splashImage>resources/gui/imagesets/startscreen.png</splashImage>
     <allowLanguageSelection>1</allowLanguageSelection>
-    <readyToInstallActionList>
-        <componentSelection>
-            <deselect>oalruntime</deselect>
-            <select></select>
-            <ruleList>
-                <fileExists path="${windows_folder_system}/OpenAL*.dll"/>
-            </ruleList>
-        </componentSelection>
-        <componentSelection>
-            <deselect>vcruntime</deselect>
-            <select></select>
-            <ruleList>
-                <fileExists path="${windows_folder_system}/msvcp100.dll"/>
-            </ruleList>
-        </componentSelection>
-    </readyToInstallActionList>
-    <preUninstallationActionList>
-        <showQuestion text="Do you want the uninstallation to also remove your saved games?" variable="remove_mysql">
-            <default>yes</default>
-        </showQuestion>
-        <deleteFile>
-            <path>${env(USERPROFILE)}/.sumwars</path>
-            <ruleList>
-                <compareText logic="equals" text="${remove_mysql}" value="yes"/>
-            </ruleList>
-        </deleteFile>
-    </preUninstallationActionList>
-    <enableRollback>1</enableRollback>
-    <enableTimestamp>1</enableTimestamp>
-    <saveRelativePaths>1</saveRelativePaths>
-    <vendor>Summoning Wars developement team</vendor>
     <componentList>
         <component>
             <name>vcruntime</name>
@@ -158,25 +127,43 @@
                             <origin>translation</origin>
                         </distributionDirectory>
                         <distributionFile>
+                            <origin>build/Release/sumwars.exe</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>resources.cfg</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>authors.txt</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>README</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>AUTHORS</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>COPYING</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>gpl-3.0.txt</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>INSTALL</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>build/Release/sumwars.exe</origin>
+                        </distributionFile>
+                        <distributionFile>
                             <origin>build/Release/alut.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>build/Release/CEGUIBase.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/CEGUICoronaImageCodec.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/CEGUIDevILImageCodec.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
                             <origin>build/Release/CEGUIExpatParser.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>build/Release/CEGUIFalagardWRBase.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/CEGUIFreeImageImageCodec.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>build/Release/CEGUILuaScriptModule.dll</origin>
@@ -186,18 +173,6 @@
                         </distributionFile>
                         <distributionFile>
                             <origin>build/Release/CEGUISILLYImageCodec.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/CEGUISTBImageCodec.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/CEGUITGAImageCodec.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/CEGUITinyXMLParser.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/CEGUIXercesParser.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>build/Release/cg.dll</origin>
@@ -218,25 +193,13 @@
                             <origin>build/Release/libintl3.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/libogg.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/libvorbis.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/libvorbisfile.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/lua.dll</origin>
+                            <origin>build/Release/lua51.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>build/Release/OgreMain.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>build/Release/OgrePaging.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/OgreProperty.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>build/Release/OgreRTShaderSystem.dll</origin>
@@ -249,9 +212,6 @@
                         </distributionFile>
                         <distributionFile>
                             <origin>build/Release/physfs.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/Plugin_BSPSceneManager.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>build/Release/Plugin_CgProgramManager.dll</origin>
@@ -281,28 +241,7 @@
                             <origin>build/Release/RenderSystem_GL.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/sumwars.exe</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>resources.cfg</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>authors.txt</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>README</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>AUTHORS</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>COPYING</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>gpl-3.0.txt</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>INSTALL</origin>
+                            <origin>build/Release/alut.dll</origin>
                         </distributionFile>
                     </distributionFileList>
                 </folder>
@@ -351,6 +290,37 @@
             </startMenuShortcutList>
         </component>
     </componentList>
+    <readyToInstallActionList>
+        <componentSelection>
+            <deselect>oalruntime</deselect>
+            <select></select>
+            <ruleList>
+                <fileExists path="${windows_folder_system}/OpenAL*.dll"/>
+            </ruleList>
+        </componentSelection>
+        <componentSelection>
+            <deselect>vcruntime</deselect>
+            <select></select>
+            <ruleList>
+                <fileExists path="${windows_folder_system}/msvcp100.dll"/>
+            </ruleList>
+        </componentSelection>
+    </readyToInstallActionList>
+    <preUninstallationActionList>
+        <showQuestion text="Do you want the uninstallation to also remove your saved games?" variable="remove_mysql">
+            <default>yes</default>
+        </showQuestion>
+        <deleteFile>
+            <path>${env(USERPROFILE)}/.sumwars</path>
+            <ruleList>
+                <compareText logic="equals" text="${remove_mysql}" value="yes"/>
+            </ruleList>
+        </deleteFile>
+    </preUninstallationActionList>
+    <enableRollback>1</enableRollback>
+    <enableTimestamp>1</enableTimestamp>
+    <saveRelativePaths>1</saveRelativePaths>
+    <vendor>Summoning Wars developement team</vendor>
     <parameterList>
         <directoryParameter>
             <name>installdir</name>
