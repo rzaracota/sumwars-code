@@ -229,9 +229,9 @@ void ControlPanel::update()
 	out_stream << gettext("Hitpoints");
 	out_stream << ": ";
 	out_stream << (int) player->getDynAttr()->m_health<<"/"<< (int) player->getBaseAttrMod()->m_max_health;
-	if (bar->getTooltipText() != out_stream.str())
+	if (bar->getTooltipText() != (CEGUI::utf8*) out_stream.str().c_str())
 	{
-		bar->setTooltipText(out_stream.str());
+		bar->setTooltipText((CEGUI::utf8*) out_stream.str().c_str());
 	}
 	
 	// Balken fuer Experience
@@ -245,9 +245,9 @@ void ControlPanel::update()
 	out_stream << gettext("Experience");
 	out_stream << ": ";
 	out_stream << (int) player->getDynAttr()->m_experience<<"/"<<(int) player->getBaseAttr()->m_max_experience;
-	if (bar->getTooltipText() != out_stream.str())
+	if (bar->getTooltipText() != (CEGUI::utf8*) out_stream.str().c_str())
 	{
-		bar->setTooltipText(out_stream.str());
+		bar->setTooltipText((CEGUI::utf8*) out_stream.str().c_str());
 	}
 	
 	std::map<int,LearnableAbility>::iterator iter;
