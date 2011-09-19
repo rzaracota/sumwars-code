@@ -23,9 +23,9 @@ FIND_PATH(VORBIS_INCLUDE_DIR vorbis/codec.h
 
 IF(WIN32)
 FIND_LIBRARY(VORBIS_LIBRARY_OPTIMIZED
-  NAMES libvorbis libvorbis-static-mt
+  NAMES libvorbis libvorbis_static libvorbis-static-mt
   PATHS $ENV{VORBISDIR}
-  PATH_SUFFIXES Release
+  PATH_SUFFIXES Release Win32/Release
 )
 ELSE()
 FIND_LIBRARY(VORBIS_LIBRARY_OPTIMIZED
@@ -36,9 +36,9 @@ ENDIF(WIN32)
 
 IF(WIN32)
 FIND_LIBRARY(VORBIS_LIBRARY_DEBUG
-  NAMES libvorbis vorbis_d vorbisD vorbis_D libvorbis-static-mt-debug
+  NAMES libvorbis libvorbis_static vorbis_d vorbisD vorbis_D libvorbis-static-mt-debug
   PATHS $ENV{VORBISDIR}
-  PATH_SUFFIXES Debug
+  PATH_SUFFIXES Debug Win32/Debug
 )
 ELSE()
 FIND_LIBRARY(VORBIS_LIBRARY_DEBUG

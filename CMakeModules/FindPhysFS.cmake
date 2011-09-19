@@ -16,6 +16,7 @@
 # PHYSFS_LIBRARY to override this selection.
 FIND_PATH(PHYSFS_INCLUDE_DIR physfs.h
   $ENV{PHYSFSDIR}/include
+  $ENV{PHYSFSDIR}
   ~/Library/Frameworks/PhysFS.framework/Headers
   /Library/Frameworks/PhysFS.framework/Headers
   /usr/local/include/physfs
@@ -57,6 +58,7 @@ ELSE(${PHYSFS_INCLUDE_DIR} MATCHES ".framework")
   FIND_LIBRARY(PHYSFS_LIBRARY 
     NAMES physfs PhysFS
     PATHS
+    $ENV{PHYSFSDIR}/Release
     $ENV{PHYSFSDIR}/lib
     /usr/local/lib
     /usr/lib
@@ -64,6 +66,7 @@ ELSE(${PHYSFS_INCLUDE_DIR} MATCHES ".framework")
     /opt/local/lib
     /opt/csw/lib
     /opt/lib
+    $ENV{PHYSFSDIR}/Debug
     )
 ENDIF(${PHYSFS_INCLUDE_DIR} MATCHES ".framework")
 

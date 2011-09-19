@@ -81,7 +81,7 @@ FIND_LIBRARY(OPENAL_LIBRARY
   NAMES OpenAL al openal OpenAL32
   HINTS
   $ENV{OPENALDIR}
-  PATH_SUFFIXES lib64 lib libs64 libs libs/Win32 libs/Win64
+  PATH_SUFFIXES lib64 lib libs64 libs libs/Win32 libs/Win64 Release Debug
   PATHS
   ~/Library/Frameworks
   /Library/Frameworks
