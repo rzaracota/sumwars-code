@@ -626,7 +626,7 @@ msgstr ""
 
 #: tutorial.xml
 msgid "Slowly you're getting to me."
-msgstr "Повільно підійдіть до мене."
+msgstr "Ти мене починаєш діставати."
 
 #: tutorial.xml
 msgid "What didn't he take into consideration? He is clearly paranoid."
@@ -648,7 +648,7 @@ msgstr "Пояснити інвентар?"
 
 #: tutorial.xml
 msgid "Explain inventory"
-msgstr "Пояснити інвентар"
+msgstr "Поясни інвентар"
 
 #: tutorial.xml
 msgid ""
@@ -754,9 +754,8 @@ msgid "Forget it! I'm not going in while those beasts are on the loose."
 msgstr "Забудь про це! Я не піду поки ті звірі на волі."
 
 #: tutorial.xml
-#, fuzzy
 msgid "Yuck! Those things are really disgusting."
-msgstr "Тьху, ці істоти дійсно огидні."
+msgstr "Тьху! Ці істоти дійсно огидні."
 
 #: tutorial.xml
 msgid "What kind of sissy are you?"
@@ -799,8 +798,12 @@ msgstr ""
 "як перетворити цю енергію у здібності?"
 
 #: tutorial.xml
+msgid "Explain level up?"
+msgstr "Пояснити зміну рівня?"
+
+#: tutorial.xml
 msgid "Explain level up"
-msgstr "Поясніть рівень вгору"
+msgstr "Поясни зміну рівня"
 
 #: tutorial.xml
 msgid ""

@@ -840,6 +840,10 @@ msgstr ""
 "ihr auch, wie ihr diese Kraft in vernünftige Fähigkeiten umwandelt?"
 
 #: tutorial.xml
+msgid "Explain level up?"
+msgstr "Levelup erklären?"
+
+#: tutorial.xml
 msgid "Explain level up"
 msgstr "Levelup erklären"
 

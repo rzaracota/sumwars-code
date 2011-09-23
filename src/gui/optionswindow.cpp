@@ -88,10 +88,10 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	gameplay->addChildWindow(diffcbo);
 	diffcbo->setPosition(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim( 0.2f)));
 	diffcbo->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.3f)));
-	diffcbo->addItem(new ListItem("Easy",Options::EASY));
-	diffcbo->addItem(new ListItem("Normal",Options::NORMAL));
-	diffcbo->addItem(new ListItem("Hard",Options::HARD));
-	diffcbo->addItem(new ListItem("Insane",Options::INSANE));
+	diffcbo->addItem(new ListItem((CEGUI::utf8*) gettext("Easy"),Options::EASY));
+	diffcbo->addItem(new ListItem((CEGUI::utf8*) gettext("Normal"),Options::NORMAL));
+	diffcbo->addItem(new ListItem((CEGUI::utf8*) gettext("Hard"),Options::HARD));
+	diffcbo->addItem(new ListItem((CEGUI::utf8*) gettext("Insane"),Options::INSANE));
 	diffcbo->setReadOnly(true);
 	diffcbo->setItemSelectState((size_t) 0,true);
 	diffcbo->handleUpdatedListItemData();
@@ -161,18 +161,18 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	ehlcbo->setPosition(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim( 0.2f)));
 	ehlcbo->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.3f)));
 
-	ehlcbo->addItem(new StrListItem("White", "white", 0));
-	ehlcbo->addItem(new StrListItem("Black", "black", 0));
-	ehlcbo->addItem(new StrListItem("Red", "red", 0));
-	ehlcbo->addItem(new StrListItem("Green", "green", 0));
-	ehlcbo->addItem(new StrListItem("Blue", "blue", 0));
-	ehlcbo->addItem(new StrListItem("Yellow", "yellow", 0));
-	ehlcbo->addItem(new StrListItem("Magenta", "magenta", 0));
-	ehlcbo->addItem(new StrListItem("Cyan", "cyan", 0));
-	ehlcbo->addItem(new StrListItem("Orange", "orange", 0));
-	ehlcbo->addItem(new StrListItem("Pink", "pink", 0));
-	ehlcbo->addItem(new StrListItem("Purple", "purple", 0));
-	ehlcbo->addItem(new StrListItem("Cornflower Blue", "cornflower_blue", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("White"), "white", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Black"), "black", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Red"), "red", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Green"), "green", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Blue"), "blue", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Yellow"), "yellow", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Magenta"), "magenta", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Cyan"), "cyan", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Orange"), "orange", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Pink"), "pink", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Purple"), "purple", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Cornflower Blue"), "cornflower_blue", 0));
 
 	ehlcbo->setReadOnly(true);
 	ehlcbo->setItemSelectState((size_t) getColorSelectionIndex("red"), true);
@@ -208,7 +208,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	cbo->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim( 0.3f)));
 	cbo->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.5f)));
 
-	cbo->addItem(new StrListItem("System default","",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) gettext("System default"),"",0));
 	cbo->addItem(new StrListItem("German","de_DE",0));
 	cbo->addItem(new StrListItem("English GB","en_GB",0));
 	cbo->addItem(new StrListItem("English US","en_US",0));

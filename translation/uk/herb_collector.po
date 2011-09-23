@@ -36,7 +36,7 @@ msgstr "джорінгсбрідж"
 
 #: herbalist.xml
 msgid "Gertlinde Kampfer"
-msgstr "Воїн Герлінде"
+msgstr "Гертлінде Полуничка"
 
 #: herbalist.xml
 msgid "Herb gathering"
@@ -80,7 +80,7 @@ msgstr "Ей, молодче!"
 
 #: herbalist.xml
 msgid "I see you are going to the Northern Meadow."
-msgstr "Я бачу, ви збираєтеся Північний луг."
+msgstr "Я бачу, ви збираєтеся на Північний луг."
 
 #: herbalist.xml
 msgid "That's right."

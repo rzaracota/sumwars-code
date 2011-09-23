@@ -49,7 +49,7 @@ msgstr "Рівнина"
 
 #: aisen.xml
 msgid "aisMaylonsGraveEntry"
-msgstr "Могила Майлона"
+msgstr "Могила Мейлона"
 
 #: aisen.xml
 msgid "aisMaylonsGraveL1"
@@ -993,7 +993,7 @@ msgstr "бронзовий молот"
 
 #: hammer2h.xml
 msgid "longshaft"
-msgstr "довга стріла"
+msgstr "довгий стовбур"
 
 #: hammer2h.xml
 msgid "guard hammer"
@@ -2896,7 +2896,7 @@ msgstr "Мейлон"
 
 #: undeadStats.xml
 msgid "Maylons Ghost"
-msgstr "Душа Майлона"
+msgstr "Душа Мейлона"
 
 #: undeadStats.xml
 msgid "Skeleton"
@@ -3180,25 +3180,103 @@ msgstr "Ронні Щур"
 
 #: playerclasses.xml
 msgid "Warrior"
-msgstr ""
+msgstr "Воїн"
 
 #: playerclasses.xml
-#, fuzzy
 msgid "Magician"
-msgstr "Магічна атака"
+msgstr "Маг"
 
 #: playerclasses.xml
-#, fuzzy
 msgid "Archer"
-msgstr "Браконьєр"
+msgstr "Лучник"
 
 #: playerclasses.xml
 msgid "Priest"
-msgstr ""
+msgstr "Священник"
+
+#: playerclasses.xml
+msgid "ranger"
+msgstr "ренжер"
+
+#: playerclasses.xml
+msgid "archer"
+msgstr "лучник"
+
+#: playerclasses.xml
+msgid "wizard"
+msgstr "чародій"
+
+#: playerclasses.xml
+msgid "sorceress"
+msgstr "чаклунка"
+
+#: playerclasses.xml
+msgid "mage"
+msgstr "маг"
+
+#: playerclasses.xml
+msgid "priest"
+msgstr "жрець"
+
+#: playerclasses.xml
+msgid "priestess"
+msgstr "жриця"
+
+#: playerclasses.xml
+msgid "warrior"
+msgstr "воїн"
+
+#: playerclasses.xml
+msgid "fencer"
+msgstr "фехтувальник"
+
+#: playerclasses.xml
+msgid "Fire magic"
+msgstr "Магія вогню"
+
+#: playerclasses.xml
+msgid "Ice magic"
+msgstr "Магія льоду"
+
+#: playerclasses.xml
+msgid "Air magic"
+msgstr "Магія повітря"
+
+#: playerclasses.xml
+msgid "Light Magic"
+msgstr "Магія світла"
+
+#: playerclasses.xml
+msgid "Water Magic"
+msgstr "Магія води"
+
+#: playerclasses.xml
+msgid "Wind Magic"
+msgstr "Магія вітру"
+
+#: playerclasses.xml
+msgid "Marksmanship"
+msgstr "Влучна стрільба"
+
+#: playerclasses.xml
+msgid "Fighting skills"
+msgstr "Бойові вміння"
+
+#: playerclasses.xml
+msgid "Passive skills"
+msgstr "Пасивні вміння"
+
+#: playerclasses.xml
+msgid "Fighting spirit"
+msgstr "Бойовий дух"
+
+#: playerclasses.xml
+msgid "Hunter magic"
+msgstr "Мисливська магія"
 
 #: joringsbridge_npc.xml
 msgid "Gertlinde Kampfer"
-msgstr "Воїн Герлінде"
+msgstr "Гертлінде Полуничка"
 
 #: joringsbridge_npc.xml
 msgid "Potions"
@@ -3434,6 +3512,10 @@ msgstr ""
 #: joringsbridge_npc.xml
 msgid "The price is $1"
 msgstr "Ціна рівна $1"
+
+#: joringsbridge_npc.xml
+msgid "Better not."
+msgstr "Ні, не треба."
 
 #: joringsbridge_npc.xml
 msgid "As I always say: No enchantment should be applied a second time."

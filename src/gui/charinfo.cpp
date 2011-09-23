@@ -485,7 +485,7 @@ CharInfo::CharInfo (Document* doc)
 	// Label Level
 	label =  win_mgr.getWindow("LevelLabel");
 	out_stream.str("");
-	out_stream << "Level "<<(int) player->getBaseAttr()->m_level;
+	out_stream << gettext("Level") << " " << (int) player->getBaseAttr()->m_level;
 	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
 	{
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());

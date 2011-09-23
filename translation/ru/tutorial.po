@@ -802,6 +802,10 @@ msgstr ""
 "как преобразовать эту силу в определенные способности?"
 
 #: tutorial.xml
+msgid "Explain level up?"
+msgstr ""
+
+#: tutorial.xml
 msgid "Explain level up"
 msgstr "Объяснить поднятие уровня"
 

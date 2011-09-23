@@ -735,6 +735,10 @@ msgid ""
 msgstr ""
 
 #: tutorial.xml
+msgid "Explain level up?"
+msgstr ""
+
+#: tutorial.xml
 msgid "Explain level up"
 msgstr ""
 

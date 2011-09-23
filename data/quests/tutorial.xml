@@ -963,7 +963,7 @@
 				tutorial.phasenr = 3;
 				
 				setTopicBase("Tolec");
-				addQuestion("Levelup erklären?");
+				addQuestion("Explain level up?");
 				addAnswer(_("Yes"),"explain_levelup");
 				addAnswer(_("No"),"explain_levelup_continue");
 				

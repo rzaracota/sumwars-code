@@ -185,11 +185,11 @@ msgstr "Згинь, поки я не передумав!"
 
 #: maylons_grave.xml
 msgid "aisMaylonsGraveL1"
-msgstr "Могила Майлона, рівень 1"
+msgstr "Могила Мейлона, рівень 1"
 
 #: maylons_grave.xml
 msgid "aisMaylonsGraveL2"
-msgstr "Могила Майлона, склеп"
+msgstr "Могила Мейлона, склеп"
 
 #: maylons_grave.xml
 msgid "Thank you very much for liberating my soul."

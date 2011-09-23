@@ -3252,6 +3252,86 @@ msgstr "Wilderer"
 msgid "Priest"
 msgstr ""
 
+#: playerclasses.xml
+msgid "ranger"
+msgstr ""
+
+#: playerclasses.xml
+msgid "archer"
+msgstr ""
+
+#: playerclasses.xml
+msgid "wizard"
+msgstr ""
+
+#: playerclasses.xml
+msgid "sorceress"
+msgstr ""
+
+#: playerclasses.xml
+msgid "mage"
+msgstr ""
+
+#: playerclasses.xml
+msgid "priest"
+msgstr ""
+
+#: playerclasses.xml
+msgid "priestess"
+msgstr ""
+
+#: playerclasses.xml
+msgid "warrior"
+msgstr ""
+
+#: playerclasses.xml
+msgid "fencer"
+msgstr ""
+
+#: playerclasses.xml
+msgid "Fire magic"
+msgstr ""
+
+#: playerclasses.xml
+msgid "Ice magic"
+msgstr ""
+
+#: playerclasses.xml
+msgid "Air magic"
+msgstr ""
+
+#: playerclasses.xml
+msgid "Light Magic"
+msgstr ""
+
+#: playerclasses.xml
+msgid "Water Magic"
+msgstr ""
+
+#: playerclasses.xml
+msgid "Wind Magic"
+msgstr ""
+
+#: playerclasses.xml
+msgid "Marksmanship"
+msgstr ""
+
+#: playerclasses.xml
+msgid "Fighting skills"
+msgstr ""
+
+#: playerclasses.xml
+msgid "Passive skills"
+msgstr ""
+
+#: playerclasses.xml
+msgid "Fighting spirit"
+msgstr ""
+
+#: playerclasses.xml
+msgid "Hunter magic"
+msgstr ""
+
 #: joringsbridge_npc.xml
 msgid "Gertlinde Kampfer"
 msgstr "Gertlinde Kampfer"
@@ -3500,6 +3580,10 @@ msgstr ""
 #: joringsbridge_npc.xml
 msgid "The price is $1"
 msgstr "Der Preis ist $1"
+
+#: joringsbridge_npc.xml
+msgid "Better not."
+msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "As I always say: No enchantment should be applied a second time."

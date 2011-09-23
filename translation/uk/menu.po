@@ -196,6 +196,31 @@ msgstr "Сила волі"
 msgid " max. "
 msgstr " макс. "
 
+#: ../src/gui/itemwindow.cpp:168
+#: ../src/gui/itemwindow.cpp:169
+msgid "Equipped:\n"
+msgstr "Споряджений:\n"
+
+#: ../src/gui/itemwindow.cpp:191
+msgid "Equipped (secondary):\n"
+msgstr "Споряджений (вторинний):\n"
+
+#: ../src/gui/itemwindow.cpp:216
+msgid "Equipped (left):\n"
+msgstr "Споряджений (зліва):\n"
+
+#: ../src/gui/itemwindow.cpp:217
+msgid "Equipped (right):\n"
+msgstr "Споряджений (справа):\n"
+
+#: ../src/gui/itemwindow.cpp:256
+msgid "Hovered:\n"
+msgstr "Очікує:\n"
+
+#: ../src/gui/itemwindow.cpp:265
+msgid "Attached:\n"
+msgstr "Прив'язаний:\n"
+
 #: ../src/gui/charcreate.cpp:120 ../src/gui/charinfo.cpp:864
 #: ../src/gui/partyinfo.cpp:450 ../src/gui/savegamelist.cpp:186
 msgid "Name"
@@ -331,7 +356,7 @@ msgstr "Опції"
 msgid "Save & Exit"
 msgstr "Зберегти & Вийти"
 
-#: ../src/gui/controlpanel.cpp:393 ../src/gui/optionswindow.cpp:319
+#: ../src/gui/controlpanel.cpp:393 ../src/gui/optionswindow.cpp:319 ../src/gui/inventory.cpp:369
 msgid "Inventory"
 msgstr "Інвентар"
 
@@ -354,6 +379,18 @@ msgstr "Квести"
 #: ../src/gui/inventory.cpp:366
 msgid "Drop:"
 msgstr "Кинути:"
+
+#: ../src/gui/inventory.cpp:372
+msgid "Small"
+msgstr "Малі"
+
+#: ../src/gui/inventory.cpp:375
+msgid "Medium"
+msgstr "Середні"
+
+#: ../src/gui/inventory.cpp:378
+msgid "Big"
+msgstr "Великі"
 
 #: ../src/gui/mainmenu.cpp:132
 msgid "Single player"
@@ -400,6 +437,74 @@ msgstr "Порт"
 #: ../src/gui/networkwindows.cpp:226
 msgid "Host"
 msgstr "Хост"
+
+#: ../src/gui/optionswindow.cpp:91
+msgid "Easy"
+msgstr "Проста"
+
+#: ../src/gui/optionswindow.cpp:92
+msgid "Normal"
+msgstr "Нормальна"
+
+#: ../src/gui/optionswindow.cpp:93
+msgid "Hard"
+msgstr "Складна"
+
+#: ../src/gui/optionswindow.cpp:94
+msgid "Insane"
+msgstr "Навіжена"
+
+#: ../src/gui/optionswindow.cpp:164
+msgid "White"
+msgstr "Білий"
+
+#: ../src/gui/optionswindow.cpp:165
+msgid "Black"
+msgstr "Чорний"
+
+#: ../src/gui/optionswindow.cpp:166
+msgid "Red"
+msgstr "Червноний"
+
+#: ../src/gui/optionswindow.cpp:167
+msgid "Green"
+msgstr "Зелений"
+
+#: ../src/gui/optionswindow.cpp:168
+msgid "Blue"
+msgstr "Синій"
+
+#: ../src/gui/optionswindow.cpp:169
+msgid "Yellow"
+msgstr "Жовтий"
+
+#: ../src/gui/optionswindow.cpp:170
+msgid "Magenta"
+msgstr "Пурпуровий"
+
+#: ../src/gui/optionswindow.cpp:171
+msgid "Cyan"
+msgstr "Блакитний"
+
+#: ../src/gui/optionswindow.cpp:172
+msgid "Orange"
+msgstr "Оранжевий"
+
+#: ../src/gui/optionswindow.cpp:173
+msgid "Pink"
+msgstr "Рожевий"
+
+#: ../src/gui/optionswindow.cpp:174
+msgid "Purple"
+msgstr "Фіалковий"
+
+#: ../src/gui/optionswindow.cpp:175
+msgid "Cornflower Blue"
+msgstr "Волошковий"
+
+#: ../src/gui/optionswindow.cpp:211
+msgid "System default"
+msgstr "Системна"
 
 #: ../src/gui/optionswindow.cpp:308
 msgid "Shortkeys"
@@ -467,7 +572,7 @@ msgstr "Колір підсвітки ворога"
 
 #: ../src/gui/optionswindow.cpp:364
 msgid "Grab mouse in windowed mode (needs restart)"
-msgstr "Захоплювати мишку в віконному режимі (потрібен перезапуск)"
+msgstr "Захопл. мишку в вікон. режимі (потр. рестарт)"
 
 #: ../src/gui/questinfo.cpp:160
 msgid "open"
@@ -490,6 +595,7 @@ msgid "Delete"
 msgstr "Видалити"
 
 #: ../src/gui/savegamelist.cpp:188
+#: ../src/gui/charinfo.cpp:488
 msgid "Level"
 msgstr "Рівень"
 

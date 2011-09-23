@@ -32,7 +32,7 @@ msgstr ""
 #: rescue_willard.xml
 msgid "Willard is in hiding somewhere around the Aisen Meadow. Due to his injury he will show himself only if there are no goblins around."
 msgstr ""
-"Віллард ховається десь поблизу Лугу Айзена. Через травми він покажеться лише "
+"Віллард ховається десь в лузі Айзена. Через травми він покажеться лише "
 "якщо поруч не буде гоблінів."
 
 #: rescue_willard.xml

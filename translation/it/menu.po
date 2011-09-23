@@ -197,6 +197,31 @@ msgstr "Volonta'"
 msgid " max. "
 msgstr " max. "
 
+#: ../src/gui/itemwindow.cpp:168
+#: ../src/gui/itemwindow.cpp:169
+msgid "Equipped:\n"
+msgstr ""
+
+#: ../src/gui/itemwindow.cpp:191
+msgid "Equipped (secondary):\n"
+msgstr ""
+
+#: ../src/gui/itemwindow.cpp:216
+msgid "Equipped (left):\n"
+msgstr ""
+
+#: ../src/gui/itemwindow.cpp:217
+msgid "Equipped (right):\n"
+msgstr ""
+
+#: ../src/gui/itemwindow.cpp:256
+msgid "Hovered:\n"
+msgstr ""
+
+#: ../src/gui/itemwindow.cpp:265
+msgid "Attached:\n"
+msgstr ""
+
 #: ../src/gui/charcreate.cpp:120 ../src/gui/charinfo.cpp:864
 #: ../src/gui/partyinfo.cpp:450 ../src/gui/savegamelist.cpp:186
 msgid "Name"
@@ -410,6 +435,74 @@ msgstr "Porta"
 msgid "Host"
 msgstr "Ospita"
 
+#: ../src/gui/optionswindow.cpp:91
+msgid "Easy"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:92
+msgid "Normal"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:93
+msgid "Hard"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:94
+msgid "Insane"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:164
+msgid "White"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:165
+msgid "Black"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:166
+msgid "Red"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:167
+msgid "Green"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:168
+msgid "Blue"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:169
+msgid "Yellow"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:170
+msgid "Magenta"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:171
+msgid "Cyan"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:172
+msgid "Orange"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:173
+msgid "Pink"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:174
+msgid "Purple"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:175
+msgid "Cornflower Blue"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:211
+msgid "System default"
+msgstr ""
+
 #: ../src/gui/optionswindow.cpp:308
 msgid "Shortkeys"
 msgstr "Tasti rapidi"
@@ -500,6 +593,7 @@ msgid "Delete"
 msgstr ""
 
 #: ../src/gui/savegamelist.cpp:188
+#: ../src/gui/charinfo.cpp:488
 msgid "Level"
 msgstr "Livello"
 

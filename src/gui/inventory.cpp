@@ -365,6 +365,18 @@ void Inventory::updateTranslation()
 	label = win_mgr.getWindow("GoldDropButton");
 	label->setText((CEGUI::utf8*) gettext("Drop:"));
 	
+	label = win_mgr.getWindow("InvLabel");
+	label->setText((CEGUI::utf8*) gettext("Inventory"));
+	
+	label = win_mgr.getWindow("SmallTabButton");
+	label->setText((CEGUI::utf8*) gettext("Small"));
+	
+	label = win_mgr.getWindow("MediumTabButton");
+	label->setText((CEGUI::utf8*) gettext("Medium"));
+	
+	label = win_mgr.getWindow("BigTabButton");
+	label->setText((CEGUI::utf8*) gettext("Big"));
+
 }
 
 

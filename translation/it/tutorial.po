@@ -883,6 +883,10 @@ msgstr ""
 "Sai come convertire questo potere in vere e proprie abilita'?"
 
 #: tutorial.xml
+msgid "Explain level up?"
+msgstr ""
+
+#: tutorial.xml
 msgid "Explain level up"
 msgstr "Tutorial passaggio di livello"
 

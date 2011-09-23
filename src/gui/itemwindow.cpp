@@ -165,8 +165,8 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	Item *currentEqItemOffhand = 0;
 	Item *attachedItem = player->getEquipement()->getItem (Equipement::CURSOR_ITEM);
 
-	std::string primary_eq_head = "Equipped:\n";
-	std::string secondary_eq_head = "Equipped:\n";
+	std::string primary_eq_head = gettext("Equipped:\n");
+	std::string secondary_eq_head = gettext("Equipped:\n");
 	
 	switch ( item->m_type )
 	{
@@ -188,7 +188,7 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 		case Item::WEAPON:
 			currentEqItem = player->getEquipement()->getItem ( Equipement::WEAPON );
 			currentEqItemOffhand = player->getEquipement()->getItem ( Equipement::WEAPON2 );
-			secondary_eq_head = "Equipped (secondary):\n";
+			secondary_eq_head = gettext("Equipped (secondary):\n");
 			
 			// swap pointers if secondary equip is activated
 			if (player->isUsingSecondaryEquip())
@@ -213,8 +213,8 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 		case Item::RING:
 			currentEqItem = player->getEquipement()->getItem ( Equipement::RING_LEFT );
 			currentEqItemOffhand = player->getEquipement()->getItem ( Equipement::RING_RIGHT );
-			primary_eq_head = "Equipped (left):\n";
-			secondary_eq_head = "Equipped (right):\n";
+			primary_eq_head = gettext("Equipped (left):\n");
+			secondary_eq_head = gettext("Equipped (right):\n");
 			break;
 
 		case Item::AMULET:
@@ -253,7 +253,7 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	{
 		l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, secondary_eq_head, CEGUIUtility::Black ));
 	}
-	l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, "Hovered:\n", CEGUIUtility::Black ));
+	l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, gettext("Hovered:\n"), CEGUIUtility::Black ));
 	std::ostringstream out_stream;
 
 	tMgr->createTooltip ( img, l, 0, font, Tooltip::Main );
@@ -262,7 +262,7 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	if (attachedItem != 0)
 	{
 		l = attachedItem->getDescriptionAsStringList ( price_factor );
-		l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, "Attached:\n", CEGUIUtility::Black ));
+		l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, gettext("Attached:\n"), CEGUIUtility::Black ));
 		tMgr->createTooltip ( img, l, 0, font, Tooltip::Comparision );
 	}
 	else
