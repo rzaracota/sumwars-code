@@ -351,6 +351,7 @@ msgid "Save & Exit"
 msgstr ""
 
 #: ../src/gui/controlpanel.cpp:393 ../src/gui/optionswindow.cpp:319
+#: ../src/gui/inventory.cpp:369
 msgid "Inventory"
 msgstr ""
 
