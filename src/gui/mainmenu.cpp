@@ -629,7 +629,7 @@ void MainMenu::createSavegameList()
     sgl->update();
     sgl->updateTranslation();
 
-    MessageQuestionWindow * delchar = new MessageQuestionWindow(m_document,"DeleteChar","Really delete savegame?", "Yes",CEGUI::Event::Subscriber(&SavegameList:: onDeleteCharConfirmClicked, sgl),"No",CEGUI::Event::Subscriber(&SavegameList::onDeleteCharAbortClicked, sgl));
+    MessageQuestionWindow * delchar = new MessageQuestionWindow(m_document,"DeleteChar",gettext("Really delete savegame?"), gettext("Yes"),CEGUI::Event::Subscriber(&SavegameList:: onDeleteCharConfirmClicked, sgl),gettext("No"),CEGUI::Event::Subscriber(&SavegameList::onDeleteCharAbortClicked, sgl));
     m_window->addChildWindow(delchar->getCEGUIWindow());
 
 }

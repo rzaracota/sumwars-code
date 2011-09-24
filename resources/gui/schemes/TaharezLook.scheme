@@ -1,6 +1,8 @@
 <?xml version="1.0" ?>
 <GUIScheme Name="TaharezLook">
 	<Imageset Name="Inventory" Filename="Inventory.imageset" />
+	<Imageset Name="CharScreen" Filename="CharacterScreen.imageset" />
+	<Imageset Name="Portrait" Filename="portrait.imageset" />
 	<Imageset Name="TaharezLook" Filename="TaharezLook.imageset" />
 	<LookNFeel Filename="TaharezLook.looknfeel" />
 	<WindowRendererSet Filename="CEGUIFalagardWRBase" />
@@ -44,6 +46,6 @@
 	<FalagardMapping WindowType="TaharezLook/Tooltip" TargetType="CEGUI/Tooltip" Renderer="Falagard/Tooltip" LookNFeel="TaharezLook/Tooltip" />
 	<FalagardMapping WindowType="TaharezLook/StaticImage" TargetType="DefaultWindow" Renderer="Falagard/StaticImage" LookNFeel="TaharezLook/StaticImage" />
 	<FalagardMapping WindowType="TaharezLook/StaticText"  TargetType="DefaultWindow" Renderer="Falagard/StaticText"  LookNFeel="TaharezLook/StaticText" />
-    <FalagardMapping WindowType="TaharezLook/ItemListbox" TargetType="CEGUI/ItemListbox" Renderer="Falagard/ItemListbox" LookNFeel="TaharezLook/ItemListbox" />
-    <FalagardMapping WindowType="TaharezLook/ListboxItem" TargetType="CEGUI/ItemEntry"   Renderer="Falagard/ItemEntry"   LookNFeel="TaharezLook/ListboxItem" />
+	<FalagardMapping WindowType="TaharezLook/ItemListbox" TargetType="CEGUI/ItemListbox" Renderer="Falagard/ItemListbox" LookNFeel="TaharezLook/ItemListbox" />
+	<FalagardMapping WindowType="TaharezLook/ListboxItem" TargetType="CEGUI/ItemEntry"   Renderer="Falagard/ItemEntry"   LookNFeel="TaharezLook/ListboxItem" />
 </GUIScheme>

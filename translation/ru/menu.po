@@ -241,6 +241,14 @@ msgstr "Создать"
 msgid "Base damage"
 msgstr "Основной урон"
 
+#: ../src/gui/charinfo.cpp:325
+msgid "You have"
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:325
+msgid "attribute points to spend"
+msgstr ""
+
 #: ../src/gui/charinfo.cpp:569
 msgid "Damage dealt by "
 msgstr "Урон, нанесенный "
@@ -258,6 +266,22 @@ msgstr "Уклонение"
 #, fuzzy
 msgid "Chance to get hit by "
 msgstr "Шанс критического удара"
+
+#: ../src/gui/charinfo.cpp:642
+msgid "Player info"
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:645
+msgid "Attributes"
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:648
+msgid "Offense"
+msgstr ""
+
+#: ../src/gui/charinfo.cpp:651
+msgid "Defense"
+msgstr ""
 
 #: ../src/gui/charinfo.cpp:713
 msgid "Damage dealt to  "
@@ -411,6 +435,18 @@ msgstr "Об игре"
 #: ../src/gui/mainmenu.cpp:147
 msgid "Quit"
 msgstr "Выход"
+
+#: ../src/gui/mainmenu.cpp:632
+msgid "Really delete savegame?"
+msgstr ""
+
+#: ../src/gui/mainmenu.cpp:632
+msgid "Yes"
+msgstr ""
+
+#: ../src/gui/mainmenu.cpp:632
+msgid "No"
+msgstr ""
 
 #: ../src/gui/messageboxes.cpp:52 ../src/gui/messageboxes.cpp:198
 #: ../src/gui/networkwindows.cpp:95 ../src/gui/networkwindows.cpp:223
