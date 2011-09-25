@@ -113,6 +113,8 @@ void ContentEditor::init(bool visible)
 	
 	if(!visible)
 		m_rootWindow->setVisible(visible);
+
+	updateTranslation();
 }
 
 void ContentEditor::toggleVisibility()
@@ -173,7 +175,324 @@ bool ContentEditor::handleCloseWindow(const CEGUI::EventArgs& e)
 
 void ContentEditor::updateTranslation()
 {
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+
+	textdomain("tools");
+
+	label = win_mgr.getWindow("RenderInfoTab");
+	label->setText((CEGUI::utf8*) gettext("Render Info"));
 	
+	label = win_mgr.getWindow("RITab/BasicMesh");
+	label->setText((CEGUI::utf8*) gettext("Mesh"));
+	
+	label = win_mgr.getWindow("RITab/BM/MainMeshLabel");
+	label->setText((CEGUI::utf8*) gettext("Select main mesh:"));
+	
+	label = win_mgr.getWindow("RITab/SubMesh");
+	label->setText((CEGUI::utf8*) gettext("Submeshes"));
+	
+	label = win_mgr.getWindow("RITab/SubMesh/AddSubMeshButton");
+	label->setText((CEGUI::utf8*) gettext("Add Submesh"));
+	
+	label = win_mgr.getWindow("RITab/SM/NewSubmeshLabel");
+	label->setText((CEGUI::utf8*) gettext("New submesh:"));
+	
+	label = win_mgr.getWindow("RITab/SM/NewSMNameLabel");
+	label->setText((CEGUI::utf8*) gettext("submesh name:"));
+	
+	label = win_mgr.getWindow("RITab/SM/EditSMLabel");
+	label->setText((CEGUI::utf8*) gettext("Edit submesh:"));
+	
+	label = win_mgr.getWindow("RITab/SM/AttachMeshLabel");
+	label->setText((CEGUI::utf8*) gettext("Attach to:"));
+	
+	label = win_mgr.getWindow("RITab/SM/BoneLabel");
+	label->setText((CEGUI::utf8*) gettext("at bone:"));
+	
+	label = win_mgr.getWindow("RITab/SM/RotateLabel");
+	label->setText((CEGUI::utf8*) gettext("Rotate(x,y,z):"));
+	
+	label = win_mgr.getWindow("RITab/SM/ScaleLabel");
+	label->setText((CEGUI::utf8*) gettext("Scale:"));
+	
+	label = win_mgr.getWindow("RITab/SM/OffsetLabel");
+	label->setText((CEGUI::utf8*) gettext("Offset (x,y,z):"));
+	
+	label = win_mgr.getWindow("RITab/SubMesh/DelSubMeshButton");
+	label->setText((CEGUI::utf8*) gettext("Delete Submesh"));
+	
+	label = win_mgr.getWindow("RITab/Animations");
+	label->setText((CEGUI::utf8*) gettext("Animations"));
+	
+	label = win_mgr.getWindow("RITab/XML");
+	label->setText((CEGUI::utf8*) gettext("XML"));
+	
+	label = win_mgr.getWindow("RITab/XML/SubmitButton");
+	label->setText((CEGUI::utf8*) gettext("Submit XML"));
+	
+	label = win_mgr.getWindow("FixedObjectTab");
+	label->setText((CEGUI::utf8*) gettext("FixedObject"));
+	
+	label = win_mgr.getWindow("FOTab/Properties");
+	label->setText((CEGUI::utf8*) gettext("Properties"));
+	
+	label = win_mgr.getWindow("FOTab/Prop/ShapeLabel");
+	label->setText((CEGUI::utf8*) gettext("Shape:"));
+	
+	label = win_mgr.getWindow("FOTab/Prop/CircleLabel");
+	label->setText((CEGUI::utf8*) gettext("Circle"));
+	
+	label = win_mgr.getWindow("FOTab/Prop/RadiusLabel");
+	label->setText((CEGUI::utf8*) gettext("Radius:"));
+	
+	label = win_mgr.getWindow("FOTab/Prop/DetectCircleButton");
+	label->setText((CEGUI::utf8*) gettext("Autodetect"));
+	
+	label = win_mgr.getWindow("FOTab/Prop/RectangleLabel");
+	label->setText((CEGUI::utf8*) gettext("Rectangle"));
+	
+	label = win_mgr.getWindow("FOTab/Prop/WidthLabel");
+	label->setText((CEGUI::utf8*) gettext("Width:"));
+	
+	label = win_mgr.getWindow("FOTab/Prop/DepthLabel");
+	label->setText((CEGUI::utf8*) gettext("Depth:"));
+	
+	label = win_mgr.getWindow("FOTab/Prop/DetectRectButton");
+	label->setText((CEGUI::utf8*) gettext("Autodetect"));
+	
+	label = win_mgr.getWindow("FOTab/Prop/CollisionLabel");
+	label->setText((CEGUI::utf8*) gettext("Collision type"));
+	
+	label = win_mgr.getWindow("FOTab/Properties/CopyDataLabel");
+	label->setText((CEGUI::utf8*) gettext("Copy data from:"));
+	
+	label = win_mgr.getWindow("FOTab/Properties/CopyDataButton");
+	label->setText((CEGUI::utf8*) gettext("Copy"));
+	
+	label = win_mgr.getWindow("FOTab/Create");
+	label->setText((CEGUI::utf8*) gettext("Create Object"));
+	
+	label = win_mgr.getWindow("FOTab/XML/CreateButton");
+	label->setText((CEGUI::utf8*) gettext("Create Object"));
+	
+	label = win_mgr.getWindow("FOTab/Create/PosLabel");
+	label->setText((CEGUI::utf8*) gettext("Position:"));
+	
+	label = win_mgr.getWindow("FOTab/Create/GetPlPosButton");
+	label->setText((CEGUI::utf8*) gettext("Get Player Position"));
+	
+	label = win_mgr.getWindow("FOTab/Create/AngleLabel");
+	label->setText((CEGUI::utf8*) gettext("Angle:"));
+	
+	label = win_mgr.getWindow("FOTab/Create/DelAllButton");
+	label->setText((CEGUI::utf8*) gettext("Delete all objects"));
+	
+	label = win_mgr.getWindow("FOTab/XML");
+	label->setText((CEGUI::utf8*) gettext("XML"));
+	
+	label = win_mgr.getWindow("FOTab/XML/SubmitButton");
+	label->setText((CEGUI::utf8*) gettext("Submit XML"));
+	
+	label = win_mgr.getWindow("ItemTab");
+	label->setText((CEGUI::utf8*) gettext("Item"));
+	
+	label = win_mgr.getWindow("ItemTab/General");
+	label->setText((CEGUI::utf8*) gettext("General"));
+	
+	label = win_mgr.getWindow("ItemTab/Properties/TypeLabel");
+	label->setText((CEGUI::utf8*) gettext("Type:"));
+	
+	label = win_mgr.getWindow("ItemTab/Properties/SizeLabel");
+	label->setText((CEGUI::utf8*) gettext("Size:"));
+	
+	label = win_mgr.getWindow("ItemTab/Properties/CopyDataLabel");
+	label->setText((CEGUI::utf8*) gettext("Copy data from:"));
+	
+	label = win_mgr.getWindow("ItemTab/Properties/CopyDataButton");
+	label->setText((CEGUI::utf8*) gettext("Copy"));
+	
+	label = win_mgr.getWindow("ItemTab/General/NameLabel");
+	label->setText((CEGUI::utf8*) gettext("Name:"));
+	
+	label = win_mgr.getWindow("ItemTab/General/PriceLabel");
+	label->setText((CEGUI::utf8*) gettext("Value:"));
+	
+	label = win_mgr.getWindow("ItemTab/General/EnchantRangeLabel");
+	label->setText((CEGUI::utf8*) gettext("Enchant min:"));
+	
+	label = win_mgr.getWindow("ItemTab/General/EnchantMaxLabel");
+	label->setText((CEGUI::utf8*) gettext("max:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip");
+	label->setText((CEGUI::utf8*) gettext("Equip"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/HealthLabel");
+	label->setText((CEGUI::utf8*) gettext("Health:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/AttrLabel");
+	label->setText((CEGUI::utf8*) gettext("Attribute:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/StrengthLabel");
+	label->setText((CEGUI::utf8*) gettext("Strength:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/DexterityLabel");
+	label->setText((CEGUI::utf8*) gettext("Dexterity:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/MagicPowerLabel");
+	label->setText((CEGUI::utf8*) gettext("Magic Power:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/WillpowerLabel");
+	label->setText((CEGUI::utf8*) gettext("Willpower:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/ResistancesLabel");
+	label->setText((CEGUI::utf8*) gettext("Resistances:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/PhysResLabel");
+	label->setText((CEGUI::utf8*) gettext("Physical:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/FireResLabel");
+	label->setText((CEGUI::utf8*) gettext("Fire:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/IceResLabel");
+	label->setText((CEGUI::utf8*) gettext("Ice:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/AirResLabel");
+	label->setText((CEGUI::utf8*) gettext("Air:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/OtherLabel");
+	label->setText((CEGUI::utf8*) gettext("Other:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/ArmorLabel");
+	label->setText((CEGUI::utf8*) gettext("Armor:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/BlockLabel");
+	label->setText((CEGUI::utf8*) gettext("Block:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/AttackLabel");
+	label->setText((CEGUI::utf8*) gettext("Precision:"));
+	
+	label = win_mgr.getWindow("ItemTab/Equip/PowerLabel");
+	label->setText((CEGUI::utf8*) gettext("Power:"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon");
+	label->setText((CEGUI::utf8*) gettext("Weapon"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/TypeLabel");
+	label->setText((CEGUI::utf8*) gettext("Type:"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/DamageLabel");
+	label->setText((CEGUI::utf8*) gettext("Damage:"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/PhysLabel");
+	label->setText((CEGUI::utf8*) gettext("Physical:"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/PhysToLabel");
+	label->setText((CEGUI::utf8*) gettext("-"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/PhysMultLabel");
+	label->setText((CEGUI::utf8*) gettext("x"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/FireLabel");
+	label->setText((CEGUI::utf8*) gettext("Fire:"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/FireToLabel");
+	label->setText((CEGUI::utf8*) gettext("-"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/FireMultLabel");
+	label->setText((CEGUI::utf8*) gettext("x"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/IceLabel");
+	label->setText((CEGUI::utf8*) gettext("Ice:"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/IceToLabel");
+	label->setText((CEGUI::utf8*) gettext("-"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/IceMultLabel");
+	label->setText((CEGUI::utf8*) gettext("x"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/AirLabel");
+	label->setText((CEGUI::utf8*) gettext("Air:"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/AirToLabel");
+	label->setText((CEGUI::utf8*) gettext("-"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/AirMultLabel");
+	label->setText((CEGUI::utf8*) gettext("x"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/PrecisionLabel");
+	label->setText((CEGUI::utf8*) gettext("Precision:"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/PowerLabel");
+	label->setText((CEGUI::utf8*) gettext("Power:"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/RangeLabel");
+	label->setText((CEGUI::utf8*) gettext("Range:"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/SpeedLabel");
+	label->setText((CEGUI::utf8*) gettext("Speed:"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/TwohandedLabel");
+	label->setText((CEGUI::utf8*) gettext("Twohanded weapon"));
+	
+	label = win_mgr.getWindow("ItemTab/Weapon/CritPercentLabel");
+	label->setText((CEGUI::utf8*) gettext("Crit. Hits:"));
+	
+	label = win_mgr.getWindow("ItemTab/Consume");
+	label->setText((CEGUI::utf8*) gettext("Consume"));
+	
+	label = win_mgr.getWindow("ItemTab/Consume/TypeLabel");
+	label->setText((CEGUI::utf8*) gettext("Health:"));
+	
+	label = win_mgr.getWindow("ItemTab/Consume/CureLabel");
+	label->setText((CEGUI::utf8*) gettext("Status heal and immunity time:"));
+	
+	label = win_mgr.getWindow("ItemTab/Consume/BlindLabel");
+	label->setText((CEGUI::utf8*) gettext("Blind:"));
+	
+	label = win_mgr.getWindow("ItemTab/Consume/PoisonedLabel");
+	label->setText((CEGUI::utf8*) gettext("Poisoned:"));
+	
+	label = win_mgr.getWindow("ItemTab/Consume/BerserkLabel");
+	label->setText((CEGUI::utf8*) gettext("Berserk:"));
+	
+	label = win_mgr.getWindow("ItemTab/Consume/ConfusedLabel");
+	label->setText((CEGUI::utf8*) gettext("Confused:"));
+	
+	label = win_mgr.getWindow("ItemTab/Consume/MuteLabel");
+	label->setText((CEGUI::utf8*) gettext("Mute:"));
+	
+	label = win_mgr.getWindow("ItemTab/Consume/ParalyzedLabel");
+	label->setText((CEGUI::utf8*) gettext("Paralyzed:"));
+	
+	label = win_mgr.getWindow("ItemTab/Consume/FrozenLabel");
+	label->setText((CEGUI::utf8*) gettext("Frozen:"));
+	
+	label = win_mgr.getWindow("ItemTab/Consume/BurningLabel");
+	label->setText((CEGUI::utf8*) gettext("Burning:"));
+	
+	label = win_mgr.getWindow("ItemTab/Create");
+	label->setText((CEGUI::utf8*) gettext("Create Item"));
+	
+	label = win_mgr.getWindow("ItemTab/Create/EnchantLabel");
+	label->setText((CEGUI::utf8*) gettext("Enchant:"));
+	
+	label = win_mgr.getWindow("ItemTab/Create/CreateInventoryButton");
+	label->setText((CEGUI::utf8*) gettext("Create in inventory"));
+	
+	label = win_mgr.getWindow("ItemTab/Create/CreateDropButton");
+	label->setText((CEGUI::utf8*) gettext("Create an drop"));
+	
+	label = win_mgr.getWindow("ItemTab/XML");
+	label->setText((CEGUI::utf8*) gettext("XML"));
+	
+	label = win_mgr.getWindow("ItemTab/XML/SubmitButton");
+	label->setText((CEGUI::utf8*) gettext("Submit XML"));
+	
+	label = win_mgr.getWindow("CloseButton");
+	label->setText((CEGUI::utf8*) gettext("Close"));
+	
+	textdomain("menu");
 }
 
 bool ContentEditor::onPreviewWindowMouseDown(const CEGUI::EventArgs& evt)

@@ -60,6 +60,9 @@ void Gettext::init(const char* locale, std::string pathToTranslationFiles)
 	bindtextdomain ("the_trader",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("the_trader","UTF-8");
 
+	bindtextdomain ("tools",pathToTranslationFiles.c_str());
+	bind_textdomain_codeset ("tools","UTF-8");
+
 	bindtextdomain ("tutorial",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("tutorial","UTF-8");
 

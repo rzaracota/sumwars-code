@@ -22,27 +22,12 @@ CharInfo::CharInfo (Document* doc)
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
 
-	// Label Name
-	label = win_mgr.getWindow("NameLabel");
-	
-	//Section names
-	label = win_mgr.getWindow("Playerinfo");
-	label = win_mgr.getWindow("Attributes");
-	label = win_mgr.getWindow("Offense");
-	label = win_mgr.getWindow("Defense");
 
-	// Label Klasse
-	label = win_mgr.getWindow("ClassLabel");
-	label = win_mgr.getWindow("ClassValueLabel");
 	
 	// Label Level
-	label = win_mgr.getWindow("LevelLabel");
 	label = win_mgr.getWindow("LevelValueLabel");
-	label->setText("Level 1");
+	label->setText("1");
 
-	// Label Staerke
-	label = win_mgr.getWindow("StrengthLabel");
-	
 	// Label Staerke (Wert)
 	label = win_mgr.getWindow("StrengthValueLabel");
 	label->setText("20");
@@ -52,9 +37,6 @@ CharInfo::CharInfo (Document* doc)
 	btn->setID(CreatureBaseAttr::STRENGTH);
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&CharInfo::onIncreaseAttributeButtonClicked, this));
-
-	// Label Geschick
-	label = win_mgr.getWindow("DexterityLabel");
 	
 	// Label Geschick (Wert)
 	label = win_mgr.getWindow("DexterityValueLabel");
@@ -65,9 +47,6 @@ CharInfo::CharInfo (Document* doc)
 	btn->setID(CreatureBaseAttr::DEXTERITY);
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&CharInfo::onIncreaseAttributeButtonClicked, this));
-
-	// Label Willenskraft
-	label = win_mgr.getWindow("WillpowerLabel");
 	
 	// Label Willenskraft (Wert)
 	label = win_mgr.getWindow("WillpowerValueLabel");
@@ -79,9 +58,6 @@ CharInfo::CharInfo (Document* doc)
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&CharInfo::onIncreaseAttributeButtonClicked, this));
 
-	// Label Zauberkraft
-	label = win_mgr.getWindow("MagicpowerLabel");
-	
 	// Label Zauberkraft (Wert)
 	label = win_mgr.getWindow("MagicpowerValueLabel");
 	label->setText("20");
@@ -96,58 +72,34 @@ CharInfo::CharInfo (Document* doc)
 	label = win_mgr.getWindow("AttrPointsValueLabel");
 	label->setText("5");
 
-	// Label Exp
-	label = win_mgr.getWindow("ExperienceLabel");
-	
 	// Label Exp (Wert)
 	label = win_mgr.getWindow("ExperienceValueLabel");
 	label->setText("0/100");
 
-	// Label HP
-	label = win_mgr.getWindow("HitpointsLabel");
-	
 	// Label HP (Wert)
 	label = win_mgr.getWindow("HitpointsValueLabel");
 	label->setText("0/100");
 
-	// Label Attacke
-	label = win_mgr.getWindow("AttackLabel");
-	
 	// Label Attacke (Wert)
 	label = win_mgr.getWindow("AttackValueLabel");
 	label->setText("20");
 
-	// Label Attackegeschwindigkeit
-	label = win_mgr.getWindow("AttackSpeedLabel");
-	
 	// Label Attacke (Wert)
 	label = win_mgr.getWindow("AttackSpeedValueLabel");
 	label->setText("20");
 
-	// Label Reichweite
-	label = win_mgr.getWindow("RangeLabel");
-	
 	// Label Reichweite (Wert)
 	label = win_mgr.getWindow("RangeValueLabel");
 	label->setText("2");
 
 	// Label Durchschlagskraft
-	label = win_mgr.getWindow("PowerLabel");
-	
-	// Label Durchschlagskraft
 	label = win_mgr.getWindow("PowerValueLabel");
 	label->setText("30");
 
 	// Label Ruestung
-	label = win_mgr.getWindow("ArmorLabel");
-	
-	// Label Ruestung
 	label = win_mgr.getWindow("ArmorValueLabel");
 	label->setText("40");
 
-	// Label Block
-	label = win_mgr.getWindow("BlockLabel");
-	
 	// Label Block
 	label = win_mgr.getWindow("BlockValueLabel");
 	label->setText("20");
@@ -176,30 +128,18 @@ CharInfo::CharInfo (Document* doc)
 	label = win_mgr.getWindow("Skill2DmgValueLabel");
 	label->setText("20-30");
 
-	// Label physisches Resistenz
-	label = win_mgr.getWindow("ResistPhysLabel");
-	
 	// Label physische Resistenz (Wert)
 	label = win_mgr.getWindow("ResistPhysValueLabel");
 	label->setText("0");
 
-	// Label Feuerresistenz
-	label = win_mgr.getWindow("ResistFireLabel");
-	
 	// Label Feuerresistenz (Wert)
 	label = win_mgr.getWindow("ResistFireValueLabel");
 	label->setText("0");
 
-	// Label Luftresistenz
-	label = win_mgr.getWindow("ResistAirLabel");
-	
 	// Label Feuerresistenz (Wert)
 	label = win_mgr.getWindow("ResistAirValueLabel");
 	label->setText("0");
 
-	// Label Eisresistenz
-	label = win_mgr.getWindow("ResistIceLabel");
-	
 	// Label Eisresistenz (Wert)
 	label = win_mgr.getWindow("ResistIceValueLabel");
 	label->setText("0");
