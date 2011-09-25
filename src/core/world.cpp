@@ -506,7 +506,9 @@ World::~World()
 void World::cleanup()
 {
 	// this makes sure, that cleanup deletes all data
-	m_data_reload_requests = DATA_ALL;	
+	// do not delete abilities because they are needed to display the preview image on the title screen
+	// lua environment is needed for those
+	m_data_reload_requests = DATA_ALL & (~DATA_ABILITIES) & (~DATA_LUAENVIRONMENT);	
 	deleteGameData();
 }
 

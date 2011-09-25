@@ -430,6 +430,8 @@ bool Inventory::onSwitchTabClicked(const CEGUI::EventArgs& evt)
 
 void Inventory::createAnimations()
 {
+#if ((CEGUI_VERSION_MAJOR << 16) + (CEGUI_VERSION_MINOR << 8) + CEGUI_VERSION_PATCH >= (0 << 16)+(7 << 8)+5)
+
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 
@@ -455,4 +457,5 @@ void Inventory::createAnimations()
 	instance->setTargetWindow(label);
     instance->start();
 	label->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&CEGUI::AnimationInstance::handleStart, instance));
+#endif
 }

@@ -3,6 +3,7 @@
 
 #include "OgreRoot.h"
 #include "window.h"
+#include "graphicobject.h"
 
 class SavegameList;
 
@@ -107,6 +108,11 @@ private:
      * \brief Creates the background scene
      */
     void createScene();
+	
+	/**
+	 * \brief Updates the preview of the savegame character
+	 */
+	void updateCharacterView();
 
     /**
      * \fn void createCharacterMenu()
@@ -150,6 +156,21 @@ private:
      * \brief A pointer to the savegame list window
      */
     SavegameList *m_saveGameList;
+	
+	/**
+	 * \brief Name of the previewed savegame player 
+	 */
+	std::string m_savegame_player;
+	
+	/**
+	 * \brief GraphicObjekt for the previewed savegame player 
+	 */
+	GraphicObject* m_savegame_player_object;
+	
+	/**
+	 * \brief Random action that is executed by the savegame player
+	 */
+	Action m_savegame_player_action;
 };
 
 #endif

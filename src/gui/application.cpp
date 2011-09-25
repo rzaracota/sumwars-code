@@ -724,6 +724,31 @@ bool Application::loadResources(int datagroups)
 		Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("GUI");
 	}
 
+	// only load abilities if world is not present
+	// normally, loading abilities is job of the World
+	// this is needed to display the correct animation on the preview screen
+	if (World::getWorld() == 0)
+	{
+		if (datagroups & World::DATA_ABILITIES)
+		{
+			EventSystem::init();
+			DEBUG("Loading ability data.");
+			Action::init();
+
+			files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("abilities","*.xml");
+			for (it = files->begin(); it != files->end(); ++it)
+			{
+				file = it->archive->getName();
+				file += "/";
+				file += it->filename;
+
+				Action::loadAbilityData(file.c_str());
+
+			}
+		}
+	}
+
+
 	// Spielerklassen initialisieren
 	if (datagroups & World::DATA_PLAYERCLASSES)
 	{
@@ -884,9 +909,14 @@ void Application::cleanup(int datagroups)
 		GraphicManager::clearRenderInfos();
 	}
 	
-	if (datagroups & World::DATA_RENDERINFO)
+	if (datagroups & World::DATA_ABILITIES)
 	{
-		GraphicManager::clearRenderInfos();
+		Action::cleanup();
+	}
+	
+	if (datagroups & World::DATA_LUAENVIRONMENT)
+	{
+		EventSystem::cleanup();
 	}
 	
 	if (datagroups & World::DATA_SOUND)

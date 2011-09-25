@@ -18,7 +18,6 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	m_document = doc;
 	m_window = window;
 	m_scene_manager = Ogre::Root::getSingleton().getSceneManager("DefaultSceneManager");
-	GraphicManager::init();
 	GraphicManager::setSceneManager(m_scene_manager);
 	
 	// Kamera anlegen

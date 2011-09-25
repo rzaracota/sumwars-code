@@ -16,6 +16,14 @@
 MainMenu::MainMenu (Document* doc)
         :Window(doc)
 {
+	m_savegame_player ="";
+	m_savegame_player_object =0;
+	
+	m_savegame_player_action.m_type = "noaction";
+	m_savegame_player_action.m_time = 2000;
+	m_savegame_player_action.m_elapsed_time = 0;
+	
+	
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
     CEGUI::PushButton* btn;
 
@@ -120,6 +128,7 @@ MainMenu::MainMenu (Document* doc)
 
 void MainMenu::update()
 {
+	updateCharacterView();
 }
 
 void MainMenu::updateTranslation()
@@ -234,9 +243,10 @@ bool MainMenu::frameStarted(const Ogre::FrameEvent& evt)
 
 bool MainMenu::frameEnded(const Ogre::FrameEvent& evt)
 {
+	/*
 	if(m_sceneMgr)
 		m_sceneMgr->getEntity("MainMenuZombie")->getAnimationState("zombieWalk")->addTime(evt.timeSinceLastFrame);
-	
+	*/
     return Ogre::FrameListener::frameEnded(evt);
 }
 
@@ -286,6 +296,7 @@ void MainMenu::createScene()
 		l->setSpecularColour(Ogre::ColourValue(0.407843, 0.176471, 0.0588235, 1));
 		l->setPowerScale(3);
 
+		
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("long_sw.mesh");
 		e->getSubEntity(0)->setMaterialName("Item");
@@ -562,16 +573,6 @@ void MainMenu::createScene()
 		n->setScale(Ogre::Vector3(1, 1, 1));
 		n->setOrientation(Ogre::Quaternion(1, 0, 0, 0));
 
-		n = m_mainNode->createChildSceneNode();
-		e = m_sceneMgr->createEntity("MainMenuZombie", "zombie_norm.mesh");
-		e->getAnimationState("zombieWalk")->setEnabled(true);
-		e->getAnimationState("zombieWalk")->setLoop(true);
-		e->getSubEntity(0)->setMaterialName("undead");
-		n->attachObject(e);
-		n->setPosition(Ogre::Vector3(-9.27905, -0.0096519, -22.9244));
-		n->setScale(Ogre::Vector3(1, 1, 1));
-		n->setOrientation(Ogre::Quaternion(-0.190809, 0, 0.981627, 0));
-
 		p = m_sceneMgr->createParticleSystem("mainMen_Particle#0","CampFire");
 		n = m_mainNode->createChildSceneNode();
 		n->attachObject(p);
@@ -603,6 +604,136 @@ void MainMenu::createScene()
 		
 	}
     
+}
+
+void MainMenu::updateCharacterView()
+{
+	bool update = false;
+	
+	Ogre::SceneManager* scene_mgr = Ogre::Root::getSingleton().getSceneManager("MainMenuSceneManager");
+	GraphicManager::setSceneManager(scene_mgr);
+	
+	Player* pl = m_document->getLocalPlayer();
+
+	static Ogre::Timer actiontimer;
+	
+	if ((pl ==0 && m_savegame_player!=""))
+	{
+		DEBUGX("deleting inv player");
+		m_savegame_player="";
+		GraphicManager::destroyGraphicObject(m_savegame_player_object);
+		m_savegame_player_object =0;
+		update = true;
+	}
+
+	if (pl !=0)
+	{
+		std::string correctname = pl->getNameId();
+		correctname += pl->getPlayerLook().m_render_info;
+		
+		if ((correctname != m_savegame_player))
+		{
+			DEBUGX("updating inv player %s to %s",m_savegame_player.c_str(), correctname.c_str());
+			GraphicManager::destroyGraphicObject(m_savegame_player_object);
+			m_savegame_player_object =0;
+			update = true;
+		}
+		
+		m_savegame_player = correctname;
+		
+		if (m_savegame_player_object ==0)
+		{
+			update = true;
+			
+			GraphicObject::Type type = pl->getPlayerLook().m_render_info;
+			m_savegame_player_object = GraphicManager::createGraphicObject(type,pl->getNameId(), pl->getId());
+			
+			m_savegame_player_object->getTopNode()->setPosition(Ogre::Vector3(-9.27905, -0.0096519, -22.9244));
+			m_savegame_player_object->getTopNode()->setOrientation(Ogre::Quaternion(-0.190809, 0, 0.981627, 0));
+			m_savegame_player_object->setExactAnimations(true);
+		}
+		
+		update |= Scene::updatePlayerGraphicObject(m_savegame_player_object,pl);
+	}	
+	
+	if (m_savegame_player_object !=0)
+	{
+		// set action for the renderer call
+		Action actsave = *(pl->getAction());
+		
+		float frametime = actiontimer.getMicroseconds ()/1000.0;
+		m_savegame_player_action.m_elapsed_time += frametime;
+		if (m_savegame_player_action.m_elapsed_time > m_savegame_player_action.m_time)
+		{
+			// determine new action
+			if (m_savegame_player_action.m_type != "noaction")
+			{
+				// never play to actions directly after each other
+				m_savegame_player_action.m_type = "noaction";
+				m_savegame_player_action.m_time = pl->getActionTime(m_savegame_player_action.m_type);
+			}
+			else
+			{
+				m_savegame_player_action.m_type = "noaction";
+				
+				// get a random action
+				if (Random::random() < 0.5)
+				{
+					std::map<std::string, AbilityInfo>::iterator it;
+					std::map<std::string, AbilityInfo>& abl = pl->getBaseAttrMod()->m_abilities;
+					int abl_found = 0;
+					for (it = abl.begin(); it != abl.end(); ++it)
+					{
+						if (it->first == "noaction" || it->first == "die" || it->first == "walk" || it->first == "dead" 
+							|| it->first == "take_item" || it->first == "use" || it->first == "speak" || it->first == "trade")
+							continue;
+						
+						Action::ActionInfo* aci2 = Action::getActionInfo(it->first);
+						if (aci2->m_target_type == Action::PASSIVE)
+							continue;
+							
+						abl_found++;
+						
+						if (Random::randi(abl_found) == 0)
+						{
+							m_savegame_player_action.m_type = it->first;
+						}
+					}
+				}
+				
+				// determine time of the action
+				m_savegame_player_action.m_time = pl->getActionTime(m_savegame_player_action.m_type);
+				
+				// apply attack speed
+				Action::ActionType baseact = "noaction";
+				Action::ActionInfo* ainfo = Action::getActionInfo(m_savegame_player_action.m_type);
+				if (ainfo != 0)
+				{
+					baseact = ainfo->m_base_action;
+				}
+				
+				if (baseact == "attack" || baseact == "range_attack" || baseact == "holy_attack" || m_savegame_player_action.m_type == "magic_attack")
+				{
+					float atksp = MathHelper::Min((short) 5000,pl->getBaseAttrMod()->m_attack_speed);
+					m_savegame_player_action.m_time *= 1000000/atksp;
+				}
+				
+				// reduce speed (just looks better :P )
+				m_savegame_player_action.m_time *= 1.3;
+			}
+			m_savegame_player_action.m_elapsed_time = 0;
+		}
+		
+		pl->setAction(m_savegame_player_action);
+		std::string act = pl->getActionString();
+		float perc = m_savegame_player_action.m_elapsed_time / m_savegame_player_action.m_time;
+		
+		m_savegame_player_object->updateAction(act,perc);
+		m_savegame_player_object->update(0);
+		
+		pl->setAction(actsave);
+	}
+	actiontimer.reset();
 }
 
 void MainMenu::createSavegameList()

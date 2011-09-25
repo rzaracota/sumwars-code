@@ -108,6 +108,16 @@ class Scene
 
 	static void getMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, Ogre::Vector3* &vertices,  size_t &index_count,
 						unsigned long* &indices,  const Ogre::Vector3 &position,  const Ogre::Quaternion &orient,  const Ogre::Vector3 &scale);
+						
+						
+	/**
+	 * \fn bool updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
+	 * \brief aktualisiert das GraphikObjekt eines Spielers
+	 * \param obj GraphikObjekt
+	 * \param pl Spielerobjekt
+	 */
+	static bool updatePlayerGraphicObject(GraphicObject* obj, Player* pl);
+						
 	
 	private:
 
@@ -129,13 +139,6 @@ class Scene
 	 */
 	void updateGraphicObject(GraphicObject* obj, GameObject* gobj,float time);
 	
-	/**
-	 * \fn bool updatePlayerGraphicObject(GraphicObject* obj, Player* pl)
-	 * \brief aktualisiert das GraphikObjekt eines Spielers
-	 * \param obj GraphikObjekt
-	 * \param pl Spielerobjekt
-	 */
-	bool updatePlayerGraphicObject(GraphicObject* obj, Player* pl);
 	
 	
 	/**

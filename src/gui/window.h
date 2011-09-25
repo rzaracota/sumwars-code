@@ -63,6 +63,13 @@ class Window
 			return m_window;
 		}
 		
+		/**
+		 * \brief Returns the main document
+		 */
+		Document* getDocument()
+		{
+			return m_document;
+		}
 		
 		
 	protected:

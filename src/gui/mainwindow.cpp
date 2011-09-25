@@ -61,6 +61,7 @@ bool MainWindow::init()
 	// Eingabegeraete initialisieren
 	result &= initInputs();
 
+	GraphicManager::init();
 
 	// Hauptmenue erzeugen
 	result &= setupMainMenu();
@@ -320,10 +321,6 @@ void MainWindow::update(float time)
 	// Testen ob Anzeige der Subfenster geaendert werden muss
 	if (m_document->getModified() & Document::WINDOWS_MODIFIED)
 	{
-		if (m_document->getGUIState()->m_sheet ==  Document::MAIN_MENU)
-		{
-			updateMainMenu();
-		}
 		DEBUGX("new shown windows %x",wflags);
 
 		/*// Auswahlliste Savegames  anzeigen wenn entsprechendes Flag gesetzt
@@ -567,6 +564,11 @@ void MainWindow::update(float time)
 		m_document->setModified(m_document->getModified() & ~Document::WINDOWS_MODIFIED);
 	}
 	
+	if (m_document->getGUIState()->m_sheet ==  Document::MAIN_MENU)
+	{
+		updateMainMenu();
+	}
+	
 	m_sub_windows["CreditsWindow"]->update();
 	
 	if (wflags & Document::OPTIONS)
@@ -578,6 +580,8 @@ void MainWindow::update(float time)
 	// Musik aktualisieren
 	updateSound();
 	updateMusic();
+	
+	
 
 	// Objekte aus dem Dokument darstellen
 	if (m_document->getLocalPlayer()!=0 && m_document->getLocalPlayer()->getRegion()!=0)
@@ -1134,6 +1138,8 @@ void  MainWindow::updateMainMenu()
 		label->setVisible(false);
 		label2->setVisible(false);
 	}
+	
+	m_sub_windows["MainMenu"]->update();
 }
 
 void  MainWindow::updateCharCreate()

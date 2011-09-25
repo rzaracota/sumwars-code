@@ -514,6 +514,14 @@ public:
 	 * Emotion images are displayed in dialogues. Refer to the scripting documentation for valid emotion names.
 	 */
 	std::string getEmotionImage(std::string emotion);
+	
+	
+	/**
+	 * \brief Calculates the time requires to perform an action
+	 * \param action action name
+	 * \return action execution time in milliseconds
+	 */
+	float getActionTime(Action::ActionType action);
 
 protected:
 
@@ -678,12 +686,6 @@ protected:
 	 */
 	float getTimer(Action::ActionType action);
 
-	/**
-	 * \brief Calculates the time requires to perform an action
-	 * \param action action name
-	 * \return action execution time in milliseconds
-	 */
-	float getActionTime(Action::ActionType action);
 
 
 
