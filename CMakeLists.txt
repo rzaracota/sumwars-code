@@ -18,9 +18,9 @@ cmake_minimum_required(VERSION 2.6)
 
 OPTION(NO_TINYXML "Avoid use of TinyXML Lib" OFF)
 OPTION(BUILD_TOOLS "Builds editor tools" ON)
+OPTION(UPDATE_SUBVERSION_REVISION "Option to turn off automatic revision checking" ON)
 SET(BUILD_TOOLS ON)
 
-SET(BUILD_TOOLS ON)
 
 IF( NOT CMAKE_BUILD_TYPE )
 SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
@@ -28,7 +28,12 @@ ENDIF()
 
 PROJECT(SUMWARS)
 
-FIND_PACKAGE(Subversion)
+
+IF(UPDATE_SUBVERSION_REVISION)
+    FIND_PROGRAM(Subversion_SVN_EXECUTABLE svn)
+
+SET(Project_WC_REVISION "unknown")
+
 IF(Subversion_SVN_EXECUTABLE)
     EXECUTE_PROCESS(WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
                     COMMAND ${Subversion_SVN_EXECUTABLE} info
@@ -37,9 +42,9 @@ IF(Subversion_SVN_EXECUTABLE)
     )
     STRING(REGEX REPLACE "^(.*\n)?Revision: ([^\n]+).*"
         "\\2" Project_WC_REVISION "${output_var}")
-ELSE(Subversion_SVN_EXECUTABLE)
-   SET(Project_WC_REVISION "unknown")
 ENDIF(Subversion_SVN_EXECUTABLE)
+
+ENDIF(UPDATE_SUBVERSION_REVISION)
 
 SET(${PROJECT_NAME}_VERSION_MAJOR "0")
 SET(${PROJECT_NAME}_VERSION_MINOR "5")
