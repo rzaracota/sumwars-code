@@ -648,6 +648,102 @@ msgstr "Нові Очки умінь на Рівні"
 msgid "Town Portal"
 msgstr "Міський Портал"
 
+#: playerclasses.xml
+msgid "Warrior"
+msgstr "Воїн"
+
+#: playerclasses.xml
+msgid "Magician"
+msgstr "Маг"
+
+#: playerclasses.xml
+msgid "Archer"
+msgstr "Лучник"
+
+#: playerclasses.xml
+msgid "Priest"
+msgstr "Священник"
+
+#: playerclasses.xml
+msgid "ranger"
+msgstr "ренжер"
+
+#: playerclasses.xml
+msgid "archer"
+msgstr "лучник"
+
+#: playerclasses.xml
+msgid "wizard"
+msgstr "чародій"
+
+#: playerclasses.xml
+msgid "sorceress"
+msgstr "чаклунка"
+
+#: playerclasses.xml
+msgid "mage"
+msgstr "маг"
+
+#: playerclasses.xml
+msgid "priest"
+msgstr "жрець"
+
+#: playerclasses.xml
+msgid "priestess"
+msgstr "жриця"
+
+#: playerclasses.xml
+msgid "warrior"
+msgstr "воїн"
+
+#: playerclasses.xml
+msgid "fencer"
+msgstr "фехтувальник"
+
+#: playerclasses.xml
+msgid "Fire magic"
+msgstr "Магія вогню"
+
+#: playerclasses.xml
+msgid "Ice magic"
+msgstr "Магія льоду"
+
+#: playerclasses.xml
+msgid "Air magic"
+msgstr "Магія повітря"
+
+#: playerclasses.xml
+msgid "Light Magic"
+msgstr "Магія світла"
+
+#: playerclasses.xml
+msgid "Water Magic"
+msgstr "Магія води"
+
+#: playerclasses.xml
+msgid "Wind Magic"
+msgstr "Магія вітру"
+
+#: playerclasses.xml
+msgid "Marksmanship"
+msgstr "Влучна стрільба"
+
+#: playerclasses.xml
+msgid "Fighting skills"
+msgstr "Бойові вміння"
+
+#: playerclasses.xml
+msgid "Passive skills"
+msgstr "Пасивні вміння"
+
+#: playerclasses.xml
+msgid "Fighting spirit"
+msgstr "Бойовий дух"
+
+#: playerclasses.xml
+msgid "Hunter magic"
+msgstr "Мисливська магія"
+
 #~ msgid "Gold"
 #~ msgstr "Золото"
 

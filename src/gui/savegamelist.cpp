@@ -145,7 +145,7 @@ void SavegameList::update()
 			stream.str("");
 			stream << (int) lev;
 			StrListItem* li1 = new StrListItem(stream.str(),filename);
-			StrListItem* li2 = new StrListItem(classname,filename);
+			StrListItem* li2 = new StrListItem((CEGUI::utf8*) gettext(classname.c_str()),filename);
 			StrListItem* li3 = new StrListItem(name,filename);
 			
 			savelist->setItem(li1,2,n);

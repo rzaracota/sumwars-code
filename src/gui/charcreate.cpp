@@ -105,7 +105,7 @@ void CharCreate::update()
 		
 		for (it = looks.begin(); it !=	looks.end(); ++it)
 		{
-			looklist->addItem(new StrListItem(it->m_name,it->m_name));
+			looklist->addItem(new StrListItem((CEGUI::utf8*) gettext(it->m_name.c_str()),it->m_name));
 		}
 	}
 }
