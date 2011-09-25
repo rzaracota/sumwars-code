@@ -9,6 +9,7 @@
 #include "messageboxes.h"
 #include "graphicmanager.h"
 #include "scene.h"
+#include "version.h"
 
 #include <iostream>
 
@@ -103,16 +104,28 @@ MainMenu::MainMenu (Document* doc)
     btn->setAlpha(0.7f);
 
     // Button beenden
-    btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "EndGameButton"));
-    start_menu->addChildWindow(btn);
-    btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.85f)));
-    btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.10f)));
-    btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onQuitGameHost, this));
-    btn->setWantsMultiClickEvents(false);
-    btn->setInheritsAlpha(false);
-    btn->setAlpha(0.7f);
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "EndGameButton"));
+	start_menu->addChildWindow(btn);
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.85f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.10f)));
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onQuitGameHost, this));
+	btn->setWantsMultiClickEvents(false);
+	btn->setInheritsAlpha(false);
+	btn->setAlpha(0.7f);
 
-    
+	CEGUI::Window* label;
+
+
+	label = win_mgr.createWindow("TaharezLook/StaticText", "SumwarsVersionLabel");
+	start_menu_root->addChildWindow(label);
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.9f )));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.05f)));
+	label->setText(CEGUI::String("Version: ").append(VERSION));
+	label->setInheritsAlpha(false);
+	label->setAlpha(0.7f);
+
 	Ogre::Root *root = Ogre::Root::getSingletonPtr();
 	m_sceneMgr = root->createSceneManager(Ogre::ST_GENERIC, "MainMenuSceneManager");
 	m_mainMenuCamera = m_sceneMgr->createCamera("MainMenuCamera");
