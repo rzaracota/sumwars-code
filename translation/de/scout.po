@@ -276,4 +276,3 @@ msgstr ""
 #: scout.xml
 msgid "greyWolfcave"
 msgstr "Wolfshöhle"
-

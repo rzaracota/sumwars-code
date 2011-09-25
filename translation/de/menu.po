@@ -197,7 +197,7 @@ msgstr "max. "
 #: ../src/gui/itemwindow.cpp:168
 #: ../src/gui/itemwindow.cpp:169
 msgid "Equipped:\n"
-msgstr ""
+msgstr "Angelegt:"
 
 #: ../src/gui/itemwindow.cpp:191
 msgid "Equipped (secondary):\n"
