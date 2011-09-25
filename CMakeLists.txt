@@ -28,17 +28,18 @@ ENDIF()
 
 PROJECT(SUMWARS)
 
-project(sumwars)
-
 FIND_PACKAGE(Subversion)
-IF(Subversion_FOUND)
-    #Use the FindSubversion.cmake module to get the svn rev and appendthat to the patch version.
-    Subversion_WC_INFO(${PROJECT_SOURCE_DIR} Project)
-    MESSAGE("Current revision is ${Project_WC_REVISION}")
-    Subversion_WC_LOG(${PROJECT_SOURCE_DIR} Project)
-ELSE(Subversion_FOUND)
-    SET(Project_WC_REVISION "unknown")
-ENDIF(Subversion_FOUND)
+IF(Subversion_SVN_EXECUTABLE)
+    EXECUTE_PROCESS(WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+                    COMMAND ${Subversion_SVN_EXECUTABLE} info
+                    RESULT_VARIABLE ret_var
+                    OUTPUT_VARIABLE output_var
+    )
+    STRING(REGEX REPLACE "^(.*\n)?Revision: ([^\n]+).*"
+        "\\2" Project_WC_REVISION "${output_var}")
+ELSE(Subversion_SVN_EXECUTABLE)
+   SET(Project_WC_REVISION "unknown")
+ENDIF(Subversion_SVN_EXECUTABLE)
 
 SET(${PROJECT_NAME}_VERSION_MAJOR "0")
 SET(${PROJECT_NAME}_VERSION_MINOR "5")
