@@ -201,7 +201,7 @@ msgstr "Angelegt:"
 
 #: ../src/gui/itemwindow.cpp:191
 msgid "Equipped (secondary):\n"
-msgstr ""
+msgstr "Angelegt (Offhand):\n"
 
 #: ../src/gui/itemwindow.cpp:216
 msgid "Equipped (left):\n"
