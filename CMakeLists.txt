@@ -34,15 +34,15 @@ IF(UPDATE_SUBVERSION_REVISION)
 
 SET(Project_WC_REVISION "unknown")
 
-IF(Subversion_SVN_EXECUTABLE)
-    EXECUTE_PROCESS(WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-                    COMMAND ${Subversion_SVN_EXECUTABLE} info
-                    RESULT_VARIABLE ret_var
-                    OUTPUT_VARIABLE output_var
-    )
-    STRING(REGEX REPLACE "^(.*\n)?Revision: ([^\n]+).*"
-        "\\2" Project_WC_REVISION "${output_var}")
-ENDIF(Subversion_SVN_EXECUTABLE)
+#IF(Subversion_SVN_EXECUTABLE)
+#    EXECUTE_PROCESS(WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+#                    COMMAND ${Subversion_SVN_EXECUTABLE} info
+#                    RESULT_VARIABLE ret_var
+#                    OUTPUT_VARIABLE output_var
+#    )
+#    STRING(REGEX REPLACE "^(.*\n)?Revision: ([^\n]+).*"
+#        "\\2" Project_WC_REVISION "${output_var}")
+#ENDIF(Subversion_SVN_EXECUTABLE)
 
 ENDIF(UPDATE_SUBVERSION_REVISION)
 
