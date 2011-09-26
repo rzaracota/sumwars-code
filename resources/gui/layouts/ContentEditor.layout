@@ -404,6 +404,120 @@
                     </Window>
                 </Window>
             </Window>
+           <Window Type="DefaultWindow" Name="MonsterTab" >
+                <Property Name="Text" Value="Monster" />
+                <Property Name="Visible" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Window Type="TaharezLook/TabControl" Name="MonsterTabControl" >
+                    <Property Name="TabHeight" Value="{0,31.1724}" />
+                    <Property Name="TabPanePosition" Value="Top" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.00391872,0},{0.00348824,0},{0.527266,0},{1.00058,0}}" />
+                    <Window Type="DefaultWindow" Name="MonsterTab/Properties" >
+                        <Property Name="Text" Value="Properties" />
+                        <Property Name="Visible" Value="False" />
+                        <Property Name="UnifiedAreaRect" Value="{{-0.00215884,0},{0,0},{0.997841,0},{1,0}}" />
+                        <Window Type="TaharezLook/StaticText" Name="MonsterTab/Prop/RadiusLabel" >
+                            <Property Name="Text" Value="Radius:" />
+                            <Property Name="HorzExtent" Value="42" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.3,0},{0.1,0},{0.4,0},{0.15,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Spinner" Name="MonsterTab/Prop/RadiusSpinner" >
+                            <Property Name="StepSize" Value="0.1" />
+                            <Property Name="CurrentValue" Value="1" />
+                            <Property Name="MaximumValue" Value="20" />
+                            <Property Name="MinimumValue" Value="0" />
+                            <Property Name="TextInputMode" Value="FloatingPoint" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.42,0},{0.1,0},{0.62,0},{0.15,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
+                        </Window>
+
+                        <Window Type="TaharezLook/StaticText" Name="MonsterTab/Properties/CopyDataLabel" >
+                            <Property Name="Text" Value="Copy data from:" />
+                            <Property Name="HorzExtent" Value="100" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.6,0},{0.3,0},{0.65,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Combobox" Name="MonsterTab/Properties/CopyDataBox" >
+                            <Property Name="UnifiedAreaRect" Value="{{0.28,0},{0.6,0},{0.65,0},{0.95,0}}" />
+                            <Property Name="MaxEditTextLength" Value="1073741823" />
+                        </Window>
+                        <Window Type="TaharezLook/Button" Name="MonsterTab/Properties/CopyDataButton" >
+                            <Property Name="Text" Value="Copy" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.7,0},{0.6,0},{0.85,0},{0.65,0}}" />
+                        </Window>
+                    </Window>
+                    <Window Type="DefaultWindow" Name="MonsterTab/Create" >
+                        <Property Name="Text" Value="Create Object" />
+                        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+                        <Window Type="TaharezLook/Button" Name="MonsterTab/XML/CreateButton" >
+                            <Property Name="Text" Value="Create Object" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.0452567,0},{0.320993,0},{0.401039,0},{0.378432,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="MonsterTab/Create/PosLabel" >
+                            <Property Name="Text" Value="Position:" />
+                            <Property Name="HorzExtent" Value="53" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.05,0},{0.03,0},{0.22,0},{0.1,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Spinner" Name="MonsterTab/Create/PosXSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="32767" />
+                            <Property Name="MinimumValue" Value="0" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.28,0},{0.03,0},{0.54,0},{0.1,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Spinner" Name="MonsterTab/Create/PosYSpinner" >
+                            <Property Name="StepSize" Value="1" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="32767" />
+                            <Property Name="MinimumValue" Value="0" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.61,0},{0.03,0},{0.88,0},{0.1,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Button" Name="MonsterTab/Create/GetPlPosButton" >
+                            <Property Name="Text" Value="Get Player Position" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.495761,0},{0.123872,0},{0.858021,0},{0.184297,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/StaticText" Name="MonsterTab/Create/AngleLabel" >
+                            <Property Name="Text" Value="Angle:" />
+                            <Property Name="HorzExtent" Value="39" />
+                            <Property Name="VertExtent" Value="15.5148" />
+                            <Property Name="FrameEnabled" Value="False" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.2,0},{0.2,0},{0.28,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Spinner" Name="MonsterTab/Create/AngleSpinner" >
+                            <Property Name="StepSize" Value="5" />
+                            <Property Name="CurrentValue" Value="0" />
+                            <Property Name="MaximumValue" Value="3600" />
+                            <Property Name="MinimumValue" Value="-3600" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.28,0},{0.2,0},{0.54,0},{0.27,0}}" />
+                        </Window>
+                        <Window Type="TaharezLook/Button" Name="MonsterTab/Create/DelAllButton" >
+                            <Property Name="Text" Value="Delete all objects" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.0552785,0},{0.871688,0},{0.436968,0},{0.94256,0}}" />
+                        </Window>
+                    </Window>
+                    <Window Type="DefaultWindow" Name="MonsterTab/XML" >
+                        <Property Name="Text" Value="XML" />
+                        <Property Name="Visible" Value="False" />
+                        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+                        <Window Type="TaharezLook/MultiLineEditbox" Name="MonsterTab/XML/MonsterXMLEditbox" >
+                            <Property Name="Text" >
+</Property>
+                            <Property Name="MaxTextLength" Value="1073741823" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.0229259,0},{0.0172008,0},{0.986204,0},{0.901313,0}}" />
+                            <Property Name="TextParsingEnabled" Value="False" />
+                        </Window>
+                        <Window Type="TaharezLook/Button" Name="MonsterTab/XML/SubmitButton" >
+                            <Property Name="Text" Value="Submit XML" />
+                            <Property Name="UnifiedAreaRect" Value="{{0.0344625,0},{0.919477,0},{0.390245,0},{0.976916,0}}" />
+                        </Window>
+                    </Window>
+                </Window>
+            </Window>			
             <Window Type="DefaultWindow" Name="ItemTab" >
                 <Property Name="Text" Value="Item" />
                 <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />

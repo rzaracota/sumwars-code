@@ -247,6 +247,7 @@ SET(SRCS
   ./src/core/region.cpp
   ./src/core/objectloader.cpp
   ./src/core/player.cpp
+  ./src/core/monsterbase.cpp
   ./src/core/monster.cpp
   ./src/core/itemfactory.cpp
   ./src/core/translatablestring.cpp
@@ -356,6 +357,7 @@ SET(HEADER_FILES
 	./src/gui/contenteditor/fixedobjecteditor.h
 	./src/gui/contenteditor/renderinfoeditor.h
 	./src/gui/contenteditor/itemeditor.h
+	./src/gui/contenteditor/monstereditor.h
 	)
 
 
@@ -376,6 +378,7 @@ SET(SRCS
 	./src/gui/contenteditor/fixedobjecteditor.cpp
 	./src/gui/contenteditor/renderinfoeditor.cpp
 	./src/gui/contenteditor/itemeditor.cpp
+	./src/gui/contenteditor/monstereditor.cpp
 	)
 ENDIF()
 

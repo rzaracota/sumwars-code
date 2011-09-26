@@ -30,7 +30,7 @@ bool ObjectLoader::loadMonsterData(const char* pFilename)
 	}
 }
 
-bool  ObjectLoader::loadMonster(TiXmlNode* node)
+bool  ObjectLoader::loadMonster(TiXmlNode* node, bool silent_replace)
 {
 	TiXmlNode* child;
 	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Monster"))
@@ -83,7 +83,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 					attr.getString("file",mesh);
 					
 					DEBUGX("mesh %s %s",subtype.c_str(), mesh.c_str());
-					GraphicManager::registerGraphicMapping(subtype, mesh);
+					GraphicManager::registerGraphicMapping(subtype, mesh,silent_replace);
 				}
 				else if (!strcmp(child->Value(), "RenderInfo"))
 				{
@@ -91,7 +91,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 					attr.getString("name",mesh);
 					
 					DEBUGX("mesh %s %s",subtype.c_str(), mesh.c_str());
-					GraphicManager::registerGraphicMapping(subtype, mesh);
+					GraphicManager::registerGraphicMapping(subtype, mesh,silent_replace);
 				}
 				else if (!strcmp(child->Value(), "EmotionSet"))
 				{
@@ -151,7 +151,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node)
 			}
 		}
 		
-		ObjectFactory::registerMonster(subtype,data);
+		ObjectFactory::registerMonster(subtype,data,silent_replace);
 		
 	}
 	else if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "MonsterGroup"))

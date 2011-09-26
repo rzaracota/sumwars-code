@@ -46,6 +46,13 @@ struct MonsterAIVars
 	 * \brief Radius in dem Verbuendete gewarnt werden, wenn eines der Monster angegriffen wird
 	 */
 	float m_warn_radius;
+	
+	/**
+	 * \brief Writes the DataStructure to the XML node
+	 * \param node XML node
+	 * This function also deals with XML trees that are already written. In this case, only the difference is written.
+	 */
+	void writeToXML(TiXmlNode* node);
 };
 
 /**
@@ -119,6 +126,19 @@ struct MonsterBasicData
 	 * \brief Name des Satzes der Emotionsbilder
 	 */
 	std::string m_emotion_set;
+	
+	/**
+	 * \brief assignment operator
+	 * \param other assigned value
+	 */
+	void operator=(MonsterBasicData& other);
+	
+	/**
+	 * \brief Writes the DataStructure to the XML node
+	 * \param node XML node
+	 * This function also deals with XML trees that are already written. In this case, only the difference is written.
+	 */
+	void writeToXML(TiXmlNode* node);
 };
 
 /**

@@ -488,8 +488,9 @@ class ObjectFactory
 	 * \brief Registriert die Daten fuer ein bestimmten Monstertyp
 	 * \param subtype Subtyp des Monsters
 	 * \param data Daten des Monsters
+	 * \param silent_replace if set to true, the data is replaced without error message.
 	 */
-	static void registerMonster(GameObject::Subtype subtype, MonsterBasicData* data);
+	static void registerMonster(GameObject::Subtype subtype, MonsterBasicData* data,  bool silent_replace = false);
 	
 	/**
 	 * \fn static registerPlayer(GameObject::Subtype subtype, PlayerBasicData* data)
@@ -641,6 +642,20 @@ class ObjectFactory
 	static const std::map<GameObject::Subtype, FixedObjectData*>& getAllFixedObjectData()
 	{
 		return m_fixed_object_data;
+	}
+	
+	/**
+	 * \brief returns the base data for a FixedObject
+	 * \param subtype type of the object
+	 */
+	static MonsterBasicData* getMonsterData(GameObject::Subtype subtype);
+	
+	/**
+	 * \brief returns the data structure with all registered fixedObjects
+	 */
+	static const std::map<GameObject::Subtype, MonsterBasicData*>& getAllMonsterData()
+	{
+		return m_monster_data;
 	}
 	
 	private:	

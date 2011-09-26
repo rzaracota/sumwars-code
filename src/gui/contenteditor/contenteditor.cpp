@@ -15,6 +15,7 @@
 #include "renderinfoeditor.h"
 #include "fixedobjecteditor.h"
 #include "itemeditor.h"
+#include "monstereditor.h"
 
 using namespace CEGUI;
 
@@ -45,6 +46,7 @@ void ContentEditor::init(bool visible)
 	static_cast<CEGUI::TabControl*>(win_mgr.getWindow("ObjectInfoTabControl"))->setSelectedTab("RenderInfoTab");
 	static_cast<CEGUI::TabControl*>(win_mgr.getWindow("RenderInfoTabControl"))->setSelectedTab("RITab/BasicMesh");
 	static_cast<CEGUI::TabControl*>(win_mgr.getWindow("FixedObjectTabControl"))->setSelectedTab("FOTab/Properties");
+	static_cast<CEGUI::TabControl*>(win_mgr.getWindow("MonsterTabControl"))->setSelectedTab("MonsterTab/Properties");
 
 	// create SceneManager for renderering images for the content editor
 	Ogre::SceneManager* editor_scene_mng = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC,"EditorSceneManager");
@@ -104,6 +106,7 @@ void ContentEditor::init(bool visible)
 	m_components["FOEditor"] = new FixedObjectEditor();
 	m_components["RIEditor"] = new RenderInfoEditor();
 	m_components["ItemEditor"] = new ItemEditor();
+	m_components["MonsterEditor"] = new MonsterEditor();
 	
 	std::map<std::string, ContentEditorTab*>::iterator it;
 	for (it = m_components.begin(); it != m_components.end(); ++it)

@@ -40,9 +40,10 @@ class ObjectLoader
 	/**
 	 * \fn bool loadMonsterTiXmlNode* node)
 	 * \brief Liest die Daten zu einem Monster aus dem Knoten
+	 * \param silent_replace if set to true, the data is replaced without error message.
 	 * \param node XML Knoten
 	 */
-	static bool loadMonster(TiXmlNode* node);
+	static bool loadMonster(TiXmlNode* node, bool silent_replace = false);
 	
 	/**
 	 * \fn static bool loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& attr)

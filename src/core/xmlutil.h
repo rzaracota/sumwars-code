@@ -57,7 +57,7 @@ class XMLUtil
 		 */
 		static void setDoubleAttribute(TiXmlElement* elem, std::string name, double value, double def=0)
 		{
-			if (value != def)
+			if (fabs(value - def) > 1e-9*def && fabs(value - def) > 1e-9)
 			{
 				elem->SetDoubleAttribute(name.c_str(), value);
 			}

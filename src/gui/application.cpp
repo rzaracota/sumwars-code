@@ -840,6 +840,7 @@ bool Application::loadResources(int datagroups)
 		
 #ifdef BUILD_TOOLS
 		ContentEditor::getSingleton().fullUpdateComponent("ItemEditor");
+		
 #endif
 	}
 

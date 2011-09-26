@@ -428,11 +428,14 @@ ProjectileBasicData* ObjectFactory::getProjectileData(GameObject::Subtype subtyp
 	return it->second;
 }
 		
-void ObjectFactory::registerMonster(GameObject::Subtype subtype, MonsterBasicData* data)
+void ObjectFactory::registerMonster(GameObject::Subtype subtype, MonsterBasicData* data, bool silent_replace)
 {
 	if (m_monster_data.count(subtype) != 0)
 	{
-		WARNING("Duplicate Monster type %s. Replacing data.",subtype.c_str());
+		if (!silent_replace)
+		{
+			WARNING("Duplicate Monster type %s. Replacing data.",subtype.c_str());
+		}
 		m_object_types.erase(subtype);
 		delete m_monster_data[subtype];
 		m_monster_data.erase(subtype);
@@ -628,6 +631,20 @@ FixedObjectData* ObjectFactory::getFixedObjectData(GameObject::Subtype subtype)
 	
 	i = m_fixed_object_data.find(subtype);
 	if (i== m_fixed_object_data.end())
+	{
+		ERRORMSG("subtype not found: %s",subtype.c_str());
+		return 0;
+	}
+	return i->second;
+}
+
+MonsterBasicData* ObjectFactory::getMonsterData(GameObject::Subtype subtype)
+{
+	MonsterBasicData* data;
+	std::map<GameObject::Subtype, MonsterBasicData*>::iterator i;
+	
+	i = m_monster_data.find(subtype);
+	if (i== m_monster_data.end())
 	{
 		ERRORMSG("subtype not found: %s",subtype.c_str());
 		return 0;

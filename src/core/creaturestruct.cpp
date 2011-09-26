@@ -59,6 +59,154 @@ void CreatureBaseAttr::operator=(CreatureBaseAttr other)
 	m_attack_range = other.m_attack_range;
 }
 
+void CreatureBaseAttr::writeToXML(TiXmlNode* node)
+{
+	TiXmlElement* elem = node->ToElement();
+	if (elem == 0) 
+		return;
+	
+	XMLUtil::setAttribute(elem, "armor",m_armor,0);
+	XMLUtil::setAttribute(elem, "block",m_block,0);
+	XMLUtil::setDoubleAttribute(elem, "max_health",m_max_health,1);
+	XMLUtil::setAttribute(elem, "attack",m_attack,0);
+	XMLUtil::setAttribute(elem, "power",m_power,0);
+	XMLUtil::setAttribute(elem, "strength",m_strength,0);
+	XMLUtil::setAttribute(elem, "dexterity",m_dexterity,0);
+	XMLUtil::setAttribute(elem, "willpower",m_willpower,0);
+	XMLUtil::setAttribute(elem, "magic_power",m_magic_power,0);
+	
+	XMLUtil::setAttribute(elem, "walk_speed",m_walk_speed,2000);
+	XMLUtil::setAttribute(elem, "attack_speed",m_attack_speed,1500);
+	
+	XMLUtil::setDoubleAttribute(elem, "step_length",m_step_length,1);
+	XMLUtil::setDoubleAttribute(elem, "attack_range",m_attack_range,1);
+	XMLUtil::setDoubleAttribute(elem, "experience",m_max_experience,0);
+	
+	XMLUtil::setAttribute(elem, "level",m_level,1500);
+	
+	XMLUtil::setAttribute(elem, "resistances_physical",m_resistances[Damage::PHYSICAL],0);
+	XMLUtil::setAttribute(elem, "resistances_fire",m_resistances[Damage::FIRE],0);
+	XMLUtil::setAttribute(elem, "resistances_ice",m_resistances[Damage::ICE],0);
+	XMLUtil::setAttribute(elem, "resistances_air",m_resistances[Damage::AIR],0);
+	
+	XMLUtil::setAttribute(elem, "resistances_cap_physical",m_resistances_cap[Damage::PHYSICAL],50);
+	XMLUtil::setAttribute(elem, "resistances_cap_fire",m_resistances_cap[Damage::FIRE],50);
+	XMLUtil::setAttribute(elem, "resistances_cap_ice",m_resistances_cap[Damage::ICE],50);
+	XMLUtil::setAttribute(elem, "resistances_cap_air",m_resistances_cap[Damage::AIR],50);
+	
+	// write abilities
+	std::map<std::string, AbilityInfo>::iterator ait;
+	
+	// point where to insert additional subobjects
+	TiXmlElement* insert_point = 0;
+	TiXmlElement inserter("dummy");	// dummy node just for being compied by tinyxml x(
+		
+	// insert new abilities after the last one
+	for (TiXmlElement* subelem = node->FirstChildElement("Ability"); subelem != 0; subelem = subelem->NextSiblingElement("Ability"))
+	{
+		insert_point = subelem;
+	}
+	
+	// set of ability XML elements which were found
+	std::set<TiXmlElement*> ablt_found;
+	for (ait = m_abilities.begin(); ait != m_abilities.end(); ++ait)
+	{
+		// search for the ability with the correct type
+		TiXmlElement* ablt_node = 0;
+		for (TiXmlElement* subelem = node->FirstChildElement("Ability"); subelem != 0; subelem = subelem->NextSiblingElement("Ability"))
+		{
+			if (subelem->Attribute("type") != 0 && ait->first == subelem->Attribute("type"))
+			{
+				ablt_node = subelem;
+				break;
+			}
+		}
+		
+		if (ablt_node == 0)
+		{
+			// none found, create the node
+			ablt_node = XMLUtil::insertNodeAfter(elem, insert_point, &inserter);
+			ablt_node->SetValue("Ability");
+			insert_point = ablt_node;
+		}
+		
+		// write Data
+		AbilityInfo& ablt = ait->second;
+		
+		XMLUtil::setAttribute(ablt_node, "type",ait->first);
+		XMLUtil::setDoubleAttribute(ablt_node, "time",ablt.m_time,0);
+		XMLUtil::setAttribute(ablt_node, "timer_nr",ablt.m_timer_nr,-1);
+		XMLUtil::setDoubleAttribute(ablt_node, "timer_value",ablt.m_timer,-1);
+		XMLUtil::setDoubleAttribute(ablt_node, "rating",ablt.m_rating,-1);
+		XMLUtil::setDoubleAttribute(ablt_node, "all_target_rating",ablt.m_all_target_rating,0);
+		XMLUtil::setDoubleAttribute(ablt_node, "all_target_rating_radius",ablt.m_all_target_rating_range,-1);
+		XMLUtil::setDoubleAttribute(ablt_node, "random_rating",ablt.m_random_rating,0.01);
+		
+		ablt_found.insert(ablt_node);
+	}
+	
+	// delete all remaining ability elements
+	for (TiXmlElement* subelem = node->FirstChildElement("Ability"); subelem != 0;  )
+	{
+		TiXmlElement* todel = subelem;
+		subelem = subelem->NextSiblingElement("Ability");
+		if (ablt_found.count(todel) == 0)
+		{
+			elem->RemoveChild(todel);
+		}
+	}
+	
+	// write the Immunities
+	std::set<std::string> immunities;
+	if (m_immunity & (1<<Damage::BLIND)) immunities.insert("blind");
+	if (m_immunity & (1<<Damage::POISONED)) immunities.insert("poisoned");
+	if (m_immunity & (1<<Damage::BERSERK)) immunities.insert("berserk");
+	if (m_immunity & (1<<Damage::CONFUSED)) immunities.insert("confused");
+	if (m_immunity & (1<<Damage::MUTE)) immunities.insert("mute");
+	if (m_immunity & (1<<Damage::PARALYZED)) immunities.insert("paralyzed");
+	if (m_immunity & (1<<Damage::FROZEN)) immunities.insert("frozen");
+	if (m_immunity & (1<<Damage::BURNING)) immunities.insert("burning");
+
+	std::set<TiXmlElement*> imm_found;
+	for (std::set<std::string>::iterator it = immunities.begin(); it != immunities.end(); ++it)
+	{
+		// find the right immunity element
+		TiXmlElement* imm_node = 0;
+		for (TiXmlElement* subelem = node->FirstChildElement("Immunity"); subelem != 0; subelem = subelem->NextSiblingElement("Immunity"))
+		{
+			if (subelem->Attribute("type") != 0 && (*it) == subelem->Attribute("type"))
+			{
+				imm_node = subelem;
+				break;
+			}
+		}
+		
+		if (imm_node == 0)
+		{
+			// none found, create the node
+			imm_node = XMLUtil::insertNodeAfter(elem, insert_point, &inserter);
+			imm_node->SetValue("Immunity");
+			insert_point = imm_node;
+		}
+		
+		XMLUtil::setAttribute(imm_node, "type",*it);
+		
+		imm_found.insert(imm_node);
+	}
+	
+	// delete all remaining Immunity elements
+	for (TiXmlElement* subelem = node->FirstChildElement("Immunity"); subelem != 0;  )
+	{
+		TiXmlElement* todel = subelem;
+		subelem = subelem->NextSiblingElement("Immunity");
+		if (imm_found.count(todel) == 0)
+		{
+			elem->RemoveChild(todel);
+		}
+	}
+	
+}
+
 int CreatureBaseAttr::getValue(std::string valname)
 {
 	if (valname =="level")

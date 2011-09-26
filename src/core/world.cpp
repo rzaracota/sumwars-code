@@ -190,6 +190,9 @@ bool World::loadGameData()
 			ObjectLoader::loadMonsterData(file.c_str());
 
 		}
+#ifdef BUILD_TOOLS
+		ContentEditor::getSingleton().fullUpdateComponent("MonsterEditor");
+#endif
 	}
 
 	if (m_data_reload_requests & DATA_PROJECTILES)
@@ -219,6 +222,9 @@ bool World::loadGameData()
 			file += it->filename;
 			ObjectLoader::loadObjectData(file.c_str());
 		}
+#ifdef BUILD_TOOLS
+		ContentEditor::getSingleton().fullUpdateComponent("FixedObjectEditor");
+#endif
 	}
 	EventSystem::popGettextDomain();
 	

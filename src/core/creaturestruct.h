@@ -263,6 +263,13 @@ struct CreatureBaseAttr
 	 */
 	void operator=(CreatureBaseAttr other);
 	
+	/**
+	 * \brief Writes the DataStructure to the XML node
+	 * \param node XML node
+	 * This function also deals with XML trees that are already written. In this case, only the difference is written.
+	 */
+	void writeToXML(TiXmlNode* node);
+	
 };
 
 /**
