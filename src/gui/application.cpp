@@ -82,7 +82,62 @@ bool Application::init(char *argv)
             return false;
         }
     }
-#else
+#elif _WIN32
+	if (!PHYSFS_exists(".sumwars"))
+	{
+		if (PHYSFS_mkdir(".sumwars") == 0)
+		{
+			printf("mkdir failed: %s\n", PHYSFS_getLastError());
+			return false;
+		}
+		if (PHYSFS_mkdir(".sumwars/save") == 0)
+		{
+			printf("mkdir failed: %s\n", PHYSFS_getLastError());
+			return false;
+		}
+
+		if(!PHYSFS_exists("plugins.cfg"))
+		{
+			TCHAR szPath[MAX_PATH];
+
+			if( !GetModuleFileName( NULL, szPath, MAX_PATH ) )
+			{
+				printf("Cannot retrieve module path (%d)\n", GetLastError());
+				return false;
+			}
+
+			std::string path(szPath);
+			path.erase(path.size() - 11, path.size());
+
+			PHYSFS_file* pluginsFile = PHYSFS_openWrite(".sumwars/plugins.cfg");
+			std::string str = "# Defines plugins to load\n"
+							  "# Define plugin folder\n"
+							  "PluginFolder=";
+			str.append(path).append("\n\n");
+			str.append(		  "# Define plugins\n"
+							  "Plugin=RenderSystem_Direct3D9\n"
+							  "Plugin=RenderSystem_GL\n"
+							  "Plugin=Plugin_ParticleFX\n"
+							  "Plugin=Plugin_OctreeSceneManager\n"
+							  "Plugin=Plugin_CgProgramManager\n");
+
+
+		
+
+			PHYSFS_write(pluginsFile, str.c_str(), sizeof(char), str.size());
+			PHYSFS_close(pluginsFile);
+		}
+	}
+
+	if (!PHYSFS_exists(".sumwars/save"))
+	{
+		if (PHYSFS_mkdir(".sumwars/save") == 0)
+		{
+			printf("mkdir failed: %s\n", PHYSFS_getLastError());
+			return false;
+		}
+	}
+#else // Unixes
     if (!PHYSFS_exists(".sumwars"))
     {
         if (PHYSFS_mkdir(".sumwars") == 0)
@@ -117,8 +172,8 @@ bool Application::init(char *argv)
 	// Ogre Root erzeugen
 	// pluginfile: plugins.cfg
 	// configfile: keines
-#ifdef WIN32
-	m_ogre_root = new Ogre::Root("plugins_win.cfg", SumwarsHelper::userPath() + "/ogre.cfg", SumwarsHelper::userPath() + "/ogre.log");
+#ifdef _WIN32
+	m_ogre_root = new Ogre::Root(SumwarsHelper::userPath() + "/plugins.cfg", SumwarsHelper::userPath() + "/ogre.cfg", SumwarsHelper::userPath() + "/ogre.log");
 #elif defined __APPLE__
     Ogre::String plugins = macPath();
     m_ogre_root = new Ogre::Root(plugins + "/plugins_mac.cfg", plugins + "/ogre.cfg", SumwarsHelper::userPath() + "/ogre.log");
