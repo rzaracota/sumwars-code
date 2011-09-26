@@ -344,7 +344,7 @@
 <!-- Haendlerin, Zwergentrutz -->
 <Monster type="NPC" subtype="aisen_traderess" name="Trader" fraction="human" race="human" layer="NORMAL">
 	<RenderInfo name="peasant_f" />
-	<EmotionSet name="human_standard" />
+	<EmotionSet name="gertlinde_emotion" />
 	<BasicAttributes
 					experience="0"
 					level="16"
