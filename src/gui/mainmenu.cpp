@@ -26,7 +26,9 @@ MainMenu::MainMenu (Document* doc)
 	
 	
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-    CEGUI::PushButton* btn;
+	CEGUI::PushButton* btn;
+	CEGUI::Window* label;
+
 
     CEGUI::FrameWindow* start_menu_root = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "StartMenuRoot");
     m_window = start_menu_root;
@@ -38,6 +40,7 @@ MainMenu::MainMenu (Document* doc)
     m_window->setProperty("CloseButtonEnabled","false");
     m_window->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&MainMenu::onShown, this));
     m_window->subscribeEvent(CEGUI::Window::EventHidden, CEGUI::Event::Subscriber(&MainMenu::onHidden, this));
+
 
     CEGUI::FrameWindow* start_menu = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "StartMenu");
     //m_window = start_menu;
@@ -53,18 +56,34 @@ MainMenu::MainMenu (Document* doc)
     start_menu->setProperty("TitlebarEnabled","false");
     start_menu->setProperty("CloseButtonEnabled","false");
 
+	CEGUI::String btnType("TaharezLook/ImageButton");
+
     // Button Einzelspieler
-    btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SinglePlayerButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow(btnType, "SinglePlayerButton"));
     start_menu->addChildWindow(btn);
     btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.05f)));
     btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.10f)));
     btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartSinglePlayer, this));
     btn->setWantsMultiClickEvents(false);
     btn->setInheritsAlpha(false);
-    btn->setAlpha(0.7f);
+	btn->setAlpha(0.7f);
+	btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
+	btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal");
+	btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
+	btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+	label = win_mgr.createWindow("TaharezLook/StaticText", "SinglePlayerLabel");
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05f )));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.95f), cegui_reldim( 0.95f)));
+	label->setProperty("HorzFormatting", "HorzCentred");
+	label->setMousePassThroughEnabled(true);
+	btn->addChildWindow(label);
 
-    // Button Server beitreten
-    btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "ServerJoinButton"));
+
+
+	// Button Server beitreten
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow(btnType, "ServerJoinButton"));
     start_menu->addChildWindow(btn);
     btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.20f)));
     btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.10f)));
@@ -72,9 +91,22 @@ MainMenu::MainMenu (Document* doc)
     btn->setWantsMultiClickEvents(false);
     btn->setInheritsAlpha(false);
     btn->setAlpha(0.7f);
+	btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
+	btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal");
+	btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
+	btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+	label = win_mgr.createWindow("TaharezLook/StaticText", "ServerJoinLabel");
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05f )));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.95f), cegui_reldim( 0.95f)));
+	label->setProperty("HorzFormatting", "HorzCentred");
+	label->setMousePassThroughEnabled(true);
+	btn->addChildWindow(label);
+
 
     // Button Server aufsetzen
-    btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "ServerHostButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow(btnType, "ServerHostButton"));
     start_menu->addChildWindow(btn);
     btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.35f)));
     btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.10f)));
@@ -82,9 +114,21 @@ MainMenu::MainMenu (Document* doc)
     btn->setWantsMultiClickEvents(false);
     btn->setInheritsAlpha(false);
     btn->setAlpha(0.7f);
+	btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
+	btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal");
+	btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
+	btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+	label = win_mgr.createWindow("TaharezLook/StaticText", "ServerHostLabel");
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05f )));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.95f), cegui_reldim( 0.95f)));
+	label->setProperty("HorzFormatting", "HorzCentred");
+	label->setMousePassThroughEnabled(true);
+	btn->addChildWindow(label);
 
     // Button Credits
-    btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "CreditsButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow(btnType, "CreditsButton"));
     start_menu->addChildWindow(btn);
     btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.50f)));
     btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.10f)));
@@ -92,9 +136,21 @@ MainMenu::MainMenu (Document* doc)
     btn->setWantsMultiClickEvents(false);
     btn->setInheritsAlpha(false);
     btn->setAlpha(0.7f);
+	btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
+	btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal");
+	btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
+	btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+	label = win_mgr.createWindow("TaharezLook/StaticText", "CreditsLabel");
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05f )));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.95f), cegui_reldim( 0.95f)));
+	label->setProperty("HorzFormatting", "HorzCentred");
+	label->setMousePassThroughEnabled(true);
+	btn->addChildWindow(label);
 
     // Button Optionen
-    btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "MainOptionsButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow(btnType, "MainOptionsButton"));
     start_menu->addChildWindow(btn);
     btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.65f)));
     btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.10f)));
@@ -102,9 +158,22 @@ MainMenu::MainMenu (Document* doc)
     btn->setWantsMultiClickEvents(false);
     btn->setInheritsAlpha(false);
     btn->setAlpha(0.7f);
+	btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
+	btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal");
+	btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
+	btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+	label = win_mgr.createWindow("TaharezLook/StaticText", "MainOptionsLabel");
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05f )));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.95f), cegui_reldim( 0.95f)));
+	label->setProperty("HorzFormatting", "HorzCentred");
+	label->setMousePassThroughEnabled(true);
+	btn->addChildWindow(label);
+
 
     // Button beenden
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "EndGameButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow(btnType, "EndGameButton"));
 	start_menu->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.85f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.10f)));
@@ -112,8 +181,18 @@ MainMenu::MainMenu (Document* doc)
 	btn->setWantsMultiClickEvents(false);
 	btn->setInheritsAlpha(false);
 	btn->setAlpha(0.7f);
-
-	CEGUI::Window* label;
+	btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
+	btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal");
+	btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
+	btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+	label = win_mgr.createWindow("TaharezLook/StaticText", "EndGameLabel");
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05f )));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.95f), cegui_reldim( 0.95f)));
+	label->setProperty("HorzFormatting", "HorzCentred");
+	label->setMousePassThroughEnabled(true);
+	btn->addChildWindow(label);
 
 
 	label = win_mgr.createWindow("TaharezLook/StaticText", "SumwarsVersionLabel");
@@ -150,22 +229,22 @@ void MainMenu::updateTranslation()
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
     CEGUI::PushButton* btn;
 
-    btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SinglePlayerButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SinglePlayerLabel"));
     btn->setText((CEGUI::utf8*) gettext("Single player"));
 
-    btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerJoinButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerJoinLabel"));
     btn->setText((CEGUI::utf8*) gettext("Join game"));
 
-    btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerHostButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerHostLabel"));
     btn->setText((CEGUI::utf8*) gettext("Host game"));
 
-    btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CreditsButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CreditsLabel"));
     btn->setText((CEGUI::utf8*) gettext("Credits"));
 
-    btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("MainOptionsButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("MainOptionsLabel"));
     btn->setText((CEGUI::utf8*) gettext("Options"));
 
-    btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("EndGameButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("EndGameLabel"));
     btn->setText((CEGUI::utf8*) gettext("Quit"));
 
 

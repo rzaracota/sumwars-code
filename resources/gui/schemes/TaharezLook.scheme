@@ -4,6 +4,7 @@
 	<Imageset Name="CharScreen" Filename="CharacterScreen.imageset" />
 	<Imageset Name="Portrait" Filename="portrait.imageset" />
 	<Imageset Name="TaharezLook" Filename="TaharezLook.imageset" />
+	<Imageset Name="MainMenu" Filename="MainMenu.imageset" />
 	<LookNFeel Filename="TaharezLook.looknfeel" />
 	<WindowRendererSet Filename="CEGUIFalagardWRBase" />
 	<FalagardMapping WindowType="TaharezLook/Button"      TargetType="CEGUI/PushButton"  Renderer="Falagard/Button"       LookNFeel="TaharezLook/Button" />

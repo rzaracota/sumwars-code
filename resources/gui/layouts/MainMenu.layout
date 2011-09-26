@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout >
+    <Window Type="TaharezLook/StaticImage" Name="BtnContainer" >
+        <Property Name="FrameEnabled" Value="False" />
+        <Property Name="InheritsAlpha" Value="False" />
+        <Property Name="UnifiedAreaRect" Value="{{0.366992,0},{0.345833,0},{0.614063,0},{0.810677,0}}" />
+        <Property Name="BackgroundEnabled" Value="False" />
+        <Window Type="TaharezLook/ImageButton" Name="BtnContainer/SPBtn" >
+            <Property Name="HoverImage" Value="set:MainMenu image:SPBtnHover" />
+            <Property Name="NormalImage" Value="set:MainMenu image:SPBtnNormal" />
+            <Property Name="PushedImage" Value="set:MainMenu image:SPBtnPushed" />
+            <Property Name="DisabledImage" Value="set:MainMenu image:SPBtnNormal" />
+            <Property Name="UnifiedAreaRect" Value="{{0.011539,0},{0.05,0},{0.739102,0},{0.160294,0}}" />
+        </Window>
+    </Window>
+</GUILayout>
