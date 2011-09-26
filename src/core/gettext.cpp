@@ -18,6 +18,9 @@ void Gettext::init(const char* locale, std::string pathToTranslationFiles)
 	bindtextdomain ("fortify_dwarfenwall",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("fortify_dwarfenwall","UTF-8");
 
+	bindtextdomain ("goblin_raid",pathToTranslationFiles.c_str());	
+	bind_textdomain_codeset ("goblin_raid","UTF-8");
+
 	bindtextdomain ("herb_collector",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("herb_collector","UTF-8");
 
@@ -35,6 +38,9 @@ void Gettext::init(const char* locale, std::string pathToTranslationFiles)
 
 	bindtextdomain ("rob_the_robber",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("rob_the_robber","UTF-8");
+
+	bindtextdomain ("scout",pathToTranslationFiles.c_str());
+	bind_textdomain_codeset ("scout","UTF-8");
 
 	bindtextdomain ("sumwars",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("sumwars","UTF-8");
