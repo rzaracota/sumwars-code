@@ -52,6 +52,18 @@ msgid "aisMaylonsGraveEntry"
 msgstr "Могила Мейлона"
 
 #: maylons_grave.xml
+msgid "Rakthr mootrick!"
+msgstr "Ракхт муутрік!"
+
+#: maylons_grave.xml
+msgid "Mar! Nom Togubri!"
+msgstr "Мар! Ном Тогубрі!"
+
+#: maylons_grave.xml
+msgid "Wait, great human warriors. Do not kill!"
+msgstr "Зачекайте, великі людські воїни. Не вбивайте!"
+
+#: maylons_grave.xml
 msgid "Talk with the goblins?"
 msgstr "Поговорити з гоблінами?"
 
@@ -130,12 +142,12 @@ msgstr "Це звучить так, ніби прийшов некромант."
 #: maylons_grave.xml
 msgid "I cannot leave such a problem amidst this under-guarded region."
 msgstr ""
-"Я не можу залишити таку проблему в цьому регіоні з недостатньою охороною."
+"Я не можу залишити таку проблему без уваги."
 
 #: maylons_grave.xml
 msgid "We cannot leave such a problem amidst this under-guarded region."
 msgstr ""
-"Ми не можемо залишити таку проблему в цьому регіоні з недостатньою охороною."
+"Ми не можемо залишити таку проблему без уваги."
 
 #: maylons_grave.xml
 msgid "Who knows what could happen?"

@@ -155,7 +155,7 @@
 				addSpeaker(maylons_grave_tmp.player,"player");
 				setTopicBase("Gab Resh");
 				lookAt(maylons_grave_tmp.GabResh,"locParty");
-				speak("GabResh","Wartet, grosse Kriegermenschens. Nich toeten!","fear", 3000);
+				speak("GabResh","Wait, great human warriors. Do not kill!","fear", 3000);
 				addQuestion(_("Talk with the goblins?"));
 				addAnswer(_("Yes"),'talk_with_goblins');
 				addAnswer(_("No"),'kill_goblins_immediately');

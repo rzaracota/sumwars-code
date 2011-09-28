@@ -48,7 +48,7 @@ msgstr "..."
 
 #: joringsbridge.xml
 msgid "The safety of the country has absolute priority."
-msgstr "Безпеки країни має абсолютний пріоритет."
+msgstr "Безпека країни має найвищий пріоритет."
 
 #: joringsbridge.xml
 msgid "Surely you can handle a hand full of lousy goblins."
@@ -60,7 +60,7 @@ msgstr "Не кажучи вже про те, що на вашому боці є
 
 #: joringsbridge.xml
 msgid "That's more than enough."
-msgstr "Цього більше, ніж достить."
+msgstr "Цього більше, ніж досить."
 
 #: joringsbridge.xml
 msgid "But the honourable mage has other duties!"
@@ -176,7 +176,7 @@ msgstr "Прости мене, мій принце, але моя дружина
 
 #: joringsbridge.xml
 msgid "I don't know how long the house will withstand them."
-msgstr "Я не знаю, як довго будинок їх втримає."
+msgstr "Я не знаю, як довго їх хатина ще витримає."
 
 #: joringsbridge.xml
 msgid "I beg of you: help me!"
@@ -204,7 +204,7 @@ msgstr "Я знаю!"
 
 #: joringsbridge.xml
 msgid "2000 gold pieces for everyone who is willing to help this humble man!"
-msgstr "2000 золотих для всіх, хто бажає допомогти цьому скромному чоловікові!"
+msgstr "2000 золотих тому, хто бажає допомогти цьому скромному чоловікові!"
 
 #: joringsbridge.xml
 msgid "ts"
@@ -257,7 +257,7 @@ msgstr "Люди, ви мене нервуєте."
 #: joringsbridge.xml
 msgid "Who cares what you think? Let the peasant be a peasant and get moving!"
 msgstr ""
-"Кого хвилює, що ти думаєш? Нехай селянин бути селянином і хай рухається!"
+"Кого хвилює, що ти думаєш? Нехай селянин буде селянином і хай йде геть!"
 
 #: joringsbridge.xml
 msgid "Well..."
@@ -346,10 +346,6 @@ msgstr "Принц, ми беремось за цю роботу!"
 #: joringsbridge.xml
 msgid "By Marek!"
 msgstr "За Марека!"
-
-#: joringsbridge.xml
-msgid "Who is that?"
-msgstr "Хто це?"
 
 #: joringsbridge.xml
 msgid "Aren't you the... auxiliary forces of the council? ##solo"

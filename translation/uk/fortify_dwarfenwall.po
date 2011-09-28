@@ -85,7 +85,7 @@ msgstr "Тихо!"
 
 #: fortify_dwarfenwall.xml
 msgid "My Lord! The... Branded Ones are here now."
-msgstr "Мій Лорде!... Відмічені зараз тут."
+msgstr "Мій Лорде!... Відмічені вже тут."
 
 #: fortify_dwarfenwall.xml
 msgid "Very well."
@@ -305,7 +305,7 @@ msgstr "Патетичний йолоп!"
 
 #: fortify_dwarfenwall.xml
 msgid "The first thing you have to learn are obviously manners. ##solo"
-msgstr "Перше, чому ти повинен навчитися, очевидні манери. ##solo"
+msgstr "Перше, чому ти повинен навчитися, найпростіші манери. ##solo"
 
 #: fortify_dwarfenwall.xml
 msgid "Pathetic fools!"
@@ -313,7 +313,7 @@ msgstr "Патетичні йолопи!"
 
 #: fortify_dwarfenwall.xml
 msgid "The first thing you have to learn are obviously manners."
-msgstr "Перше, чому ви повинні навчитися, очевидно, манери."
+msgstr "Перше, чому ви повинні навчитися, найпростіші манери."
 
 #: fortify_dwarfenwall.xml
 msgid "Consider it as a small bonus:"
@@ -541,7 +541,7 @@ msgstr "Не дуже гарна у вас звичка, Повітряна Ла
 
 #: fortify_dwarfenwall.xml
 msgid "Windclaw!"
-msgstr "Віндклав!"
+msgstr "Вітряний Пазур!"
 
 #: fortify_dwarfenwall.xml
 msgid "And you better accustom yourself to be monitored."
@@ -598,14 +598,6 @@ msgid "It's not as if I had a bunch of you Cursed Ones here for experimental pur
 msgstr "У мене немає тут купи Проклятих для експериментальних цілей."
 
 #: fortify_dwarfenwall.xml
-msgid "Reverse this at once or every guard of Aisen will be on your trail, Cursed One! ##female"
-msgstr "Зразу ж поверни це або кожен страж Айзена стане на твоєму шляху, Проклята! ##female"
-
-#: fortify_dwarfenwall.xml
-msgid "Reverse this at once or every guard of Aisen will be on your trail, Cursed One! ##male"
-msgstr "Зразу ж поверни це або кожен страж Айзена стане на твоєму шляху, Проклятий!  ##male"
-
-#: fortify_dwarfenwall.xml
 msgid "Right, right."
 msgstr "Так, так."
 
@@ -616,10 +608,6 @@ msgstr "Ваші люди були б вельми здивовані, звід�
 #: fortify_dwarfenwall.xml
 msgid "And it's Branded One."
 msgstr "І правильно буде Відмічений."
-
-#: fortify_dwarfenwall.xml
-msgid "You are better prepared to suffer the consequences, wretched creature."
-msgstr "Краще підготуйся страждати від наслідків, нещасна істота."
 
 #: fortify_dwarfenwall.xml
 msgid "Blind and deaf, but not mute, eh?"

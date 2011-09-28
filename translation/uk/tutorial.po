@@ -277,7 +277,7 @@ msgstr ""
 
 #: tutorial.xml
 msgid "Kindly ask."
-msgstr "Будь ласка, запитуйте."
+msgstr "Гарно попросіть."
 
 #: tutorial.xml
 msgid "We cannot take any risks, and inside the council you are safe. ##solo"
@@ -600,7 +600,7 @@ msgstr ""
 
 #: tutorial.xml
 msgid "What is this supposed to be?"
-msgstr "Що це має бути?"
+msgstr "Що відбувається?"
 
 #: tutorial.xml
 msgid "Where is my weapon?"
@@ -759,7 +759,7 @@ msgstr "Тьху! Ці істоти дійсно огидні."
 
 #: tutorial.xml
 msgid "What kind of sissy are you?"
-msgstr "Ну ти і пестунчик?"
+msgstr "Не бійся, татко з тобою"
 
 #: tutorial.xml
 msgid "Are you looking for trouble, weakling?!"
@@ -863,7 +863,7 @@ msgstr "Залежно від виду... вашого персонажа."
 
 #: tutorial.xml
 msgid "Character class."
-msgstr "Клас персонажу."
+msgstr "Класу персонажу."
 
 #: tutorial.xml
 msgid "Oh, right!"
@@ -895,7 +895,7 @@ msgstr "Швидко вкладай нові очки і давай забира
 
 #: tutorial.xml
 msgid "Open hatch"
-msgstr "Відкрити люк"
+msgstr "Відкривай люк"
 
 #: tutorial.xml
 msgid "Please distribute your attribute points first."
@@ -910,7 +910,7 @@ msgid ""
 "Urk! They seem to have broken out somehow. I hope they don't breed in the "
 "crevices."
 msgstr ""
-"Урк! Здається вони якось прорвались. Я сподіваюся, що вони не розмножуються "
+"Чорт! Здається вони якось прорвались. Я сподіваюся, що вони не розмножуються "
 "в щілинах."
 
 #: tutorial.xml
@@ -934,7 +934,7 @@ msgid ""
 "That's correct, Branded One. You wouldn't want to be called `harvest' now, "
 "would you?"
 msgstr ""
-"Правильно буде Відмічений. Ви не хотіли б щоб вас називали `Довбед`, чи не "
+"Правильно буде Відмічений. Ви не хотіли б щоб вас називали `здобич`, чи не "
 "так?"
 
 #: tutorial.xml

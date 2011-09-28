@@ -65,7 +65,7 @@ msgstr "Будь ласка, допоможіть нам, маг важко по
 
 #: theFissure.xml
 msgid "He he. Harvest!"
-msgstr "Хехе. Урожай!"
+msgstr "Хехе. Здобич!"
 
 #: theFissure.xml
 msgid "I have never seen someone fight like you before."
@@ -76,12 +76,12 @@ msgid "You don't get out very often, do you."
 msgstr "Ви не часто виходите назовні, чи не так."
 
 #: theFissure.xml
-msgid "You developed splendid since the last time we met, didn't you. ##solo"
-msgstr "А ви похорошіли з часу нашої останньої зустрічі, чи не так. ##solo"
+msgid "You developed splendid since the last time we met, didn't you? ##solo"
+msgstr "А ви похорошіли з часу нашої останньої зустрічі, чи не так? ##solo"
 
 #: theFissure.xml
-msgid "You developed splendid since the last time we met, didn't you."
-msgstr "А ви похорошіли з часу нашої останньої зустрічі, чи не так."
+msgid "You developed splendid since the last time we met, didn't you?"
+msgstr "А ви похорошіли з часу нашої останньої зустрічі, чи не так?"
 
 #: theFissure.xml
 msgid "How is the archmage?"
@@ -169,7 +169,7 @@ msgstr "Місту потрібна кожна людина!"
 
 #: theFissure.xml
 msgid "I have a feeling what's going to come in a moment..."
-msgstr "У мене таке відчуття, що зараз щосб буде..."
+msgstr "У мене таке відчуття, що зараз щось буде..."
 
 #: theFissure.xml
 msgid "Listen, Branded One!"
@@ -404,13 +404,17 @@ msgstr "Якщо ми вб'ємо його зараз, його армія пе�
 
 #: theFissure.xml
 msgid "Harvest!"
-msgstr "Урожай!"
+msgstr "Жнива!"
 
 #: theFissure.xml
 msgid ""
 "What do you know. There are rats everywhere. Kill them and bring me their "
 "bones!"
 msgstr "Що ви знаєте. Скрізь пацюки. Убийте їх і принесіть мені їх кістки!"
+
+#: theFissure.xml
+msgid "Here is a good place for the spell!"
+msgstr "Ось гарне місце для заклинання!"
 
 #: theFissure.xml
 msgid "Then I shall blow this crevice to smithereens."

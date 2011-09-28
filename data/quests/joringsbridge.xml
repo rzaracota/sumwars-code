@@ -330,9 +330,9 @@
 				
 				
 				if(solo())then
-					speak("prince",_("Aren't you the... auxiliary  forces of the council? ##solo"),"surprised");
+					speak("prince",_("Aren't you the... auxiliary forces of the council? ##solo"),"surprised");
 				else
-					speak("prince",_("Aren't you the... auxiliary  forces of the council?"),"surprised");
+					speak("prince",_("Aren't you the... auxiliary forces of the council?"),"surprised");
 					speak("scoffSoren",_("... under the heel of a certain Soren Airpaw, at your service."),"amused");
 					speak("soren",_("Windclaw, you fool!"),"angry");
 					speak("scoffSoren",_("Oops..."),"thoughtful");

@@ -161,7 +161,7 @@ msgstr "У мене є друг, лісник."
 
 #: rescue_willard.xml
 msgid "He was in the meadows with two collegues, when they were attacked by goblins."
-msgstr "Він був в луках з двома колегами, коли їх атакували гобліни."
+msgstr "Він був в лузі з двома колегами, коли їх атакували гобліни."
 
 #: rescue_willard.xml
 msgid "And those cowards left him behind injured!"
@@ -214,8 +214,8 @@ msgstr "Але ви Відмічені маєте інші шляхи і зас�
 #: rescue_willard.xml
 msgid "And you cannot use a phasestone since it is dedicated to Avaera, right?"
 msgstr ""
-"І ви не можете використовувати фазовий камінь оскільки він присвячений "
-"Аваері, вірно?"
+"І ви не можете використовувати фазовий камінь оскільки він освячений "
+"Аваерою, вірно?"
 
 #: rescue_willard.xml
 msgid "That is why I called you when you were passing."
@@ -227,7 +227,7 @@ msgstr "Ви досить багато знаєте."
 
 #: rescue_willard.xml
 msgid "Your friend is as good as safe."
-msgstr "Ваш друг такий же добрий, як безпечний."
+msgstr "Ваш друг буде в безпеці."
 
 #: rescue_willard.xml
 msgid "And doesn't even ask what the rest of us is thinking."

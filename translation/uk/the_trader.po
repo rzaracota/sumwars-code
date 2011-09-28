@@ -164,7 +164,7 @@ msgstr ""
 #: theTrader.xml
 msgid "Before your inner eye there will be a map with all the places, you have already visited."
 msgstr ""
-"Перед внутрішнім поглядом ви побачите карту з усіма місцями, які ви же "
+"Перед внутрішнім поглядом ви побачите карту з усіма місцями, які ви вже "
 "відвідали."
 
 #: theTrader.xml
@@ -204,7 +204,7 @@ msgstr "Насправді ні, на жаль."
 #: theTrader.xml
 msgid "As reported, I misinvested in the Empty Scrolls and have no available capital."
 msgstr ""
-"Як я вже казав, я невірно інвестував все майно у Порожні Сувої і не мають "
+"Як я вже казав, я невірно інвестував все майно у Порожні Згортки і не маю "
 "доступного капіталу."
 
 #: theTrader.xml
@@ -215,7 +215,7 @@ msgstr ""
 
 #: theTrader.xml
 msgid "But I can supply you for a really long time. It's a promise."
-msgstr "Але я можу поставляти вас товаром на дуже довгий час. Ця обіцянка."
+msgstr "Але я можу поставляти вас товаром на дуже довгий час. Це обіцянка."
 
 #: theTrader.xml
 msgid "One reason being customers are really rare in these parts."

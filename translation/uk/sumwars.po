@@ -161,15 +161,15 @@ msgstr "Вхід в шахту"
 
 #: dwarfenwall.xml
 msgid "dwarfenwall"
-msgstr "укріплення гномів"
+msgstr "Дорфенваль"
 
 #: dwarfenwall.xml
 msgid "dwarfenwallCommand"
-msgstr "командний центр"
+msgstr "Командний центр"
 
 #: dwarfenwall.xml
 msgid "dwarfenwallRampart"
-msgstr "стіна замку"
+msgstr "Оборонний вал Дорфенваля"
 
 #: cursedCaves.xml
 msgid "greyCurseCave"
@@ -3178,6 +3178,10 @@ msgstr "Роб Розбійник"
 msgid "Ronny the Rat"
 msgstr "Ронні Щур"
 
+#: rescue_willard.xml
+msgid "Willard"
+msgstr "Віллард"
+
 #: joringsbridge_npc.xml
 msgid "Gertlinde Kampfer"
 msgstr "Гертлінде Полуничка"
@@ -3425,6 +3429,10 @@ msgstr "Ні, не треба."
 msgid "As I always say: No enchantment should be applied a second time."
 msgstr "Як я завжди кажу: зачаровування не слід застосовувати двічі."
 
+#: joringsbridge.xml
+msgid "Who is that?"
+msgstr "Хто це?"
+
 #: dwarfcastle.xml
 msgid "Haffgar"
 msgstr "Гаффгар"
@@ -3525,6 +3533,10 @@ msgstr "Ви не маєте достатньо золота, щоб запла�
 msgid "It seems that this item already has such an enchantment."
 msgstr "Здається що цей об'єкт вже має такі чари."
 
+#: dwarfcastle.xml
+msgid "Nah to expensive"
+msgstr "Ні, це надто дорого"
+
 # Bron's door
 #: npc.xml
 msgid "Brons Tuer"
@@ -3547,7 +3559,7 @@ msgid "Erzmaga Ireana von Nordenburg"
 msgstr "Мага землі Іреана з Нортборо"
 
 #: npc.xml
-msgid "Hauptmann der Wache"
+msgid "Guardcaptain"
 msgstr "Капітан Охорони"
 
 #: npc.xml
@@ -3555,12 +3567,20 @@ msgid "Elementaristenwaechter"
 msgstr "Зберігач Стихій"
 
 #: npc.xml
-msgid "Vorarbeiter Nekromant"
+msgid "Overlooker Necromancer"
 msgstr "Прораб Некромант"
+
+#: dwarfenwall.lua
+msgid "Skinny Necromancer"
+msgstr "Худющий Некромант"
+
+#: dwarfenwall.lua
+msgid "Scarfaced Necromancer"
+msgstr "Некромант зі шрамом на лиці"
 
 #: npc.xml
 msgid "Buy empty scrolls"
-msgstr "Купити порожні сувої"
+msgstr "Купити порожні згортки"
 
 #: npc.xml
 msgid "Access stash"
@@ -3602,18 +3622,18 @@ msgstr "Каїн"
 msgid "Fenor Marken"
 msgstr "Ферон Маркен"
 
-#~ msgid "goblin_raid"
-#~ msgstr "goblin_raid"
+#: theFissure.xml
+msgid "Unknown Lich"
+msgstr "Невідомий Ліч"
 
-#~ msgid "Yes"
-#~ msgstr "Так"
+#: fortify_dwarfenwall.xml
+msgid "Reverse this at once or every guard of Aisen will be on your trail, Cursed One! ##female"
+msgstr "Зразу ж поверни це або кожен страж Айзена стане на твоєму шляху, Проклята!"
 
-#~ msgid "No"
-#~ msgstr "Ні"
+#: fortify_dwarfenwall.xml
+msgid "Reverse this at once or every guard of Aisen will be on your trail, Cursed One! ##male"
+msgstr "Зразу ж поверни це або кожен страж Айзена стане на твоєму шляху, Проклятий!"
 
-#~ msgid "Fundgegenstaende"
-#~ msgstr "Fundgegenstaende"
-
-#, fuzzy
-#~ msgid "A blue potion?"
-#~ msgstr "A blue potion?"
+#: fortify_dwarfenwall.xml
+msgid "You are better prepared to suffer the consequences, wretched creature."
+msgstr "Краще підготуйся страждати    від наслідків, нещасна істота."

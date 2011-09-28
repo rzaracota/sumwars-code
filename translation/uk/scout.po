@@ -114,7 +114,7 @@ msgstr ""
 #: scout.xml
 msgid "The venom... can't move at all... anymore... I had an antidote in my pack..."
 msgstr ""
-"Отрута... не може рухатися взагалі... більше... В мене є протиотрута в "
+"Отрута... не можу рухатися взагалі... більше... В мене є протиотрута в "
 "рюкзаку..."
 
 #: scout.xml
@@ -125,7 +125,7 @@ msgstr ""
 
 #: scout.xml
 msgid "If you're... not afraid... that is."
-msgstr "Якщо ти... не боїться ... звичайно."
+msgstr "Якщо ви... звісно... не боїтеся."
 
 #: scout.xml
 msgid "You have a strange manner of asking for favors."
@@ -247,3 +247,7 @@ msgstr "Я відпочину трохи і теж вирушу, але в ін�
 #: scout.xml
 msgid "greyWolfcave"
 msgstr "Вовча печера"
+
+#: scout.xml
+msgid "After killing the spider you safely pick up a backpack in good shape."
+msgstr "Після вбивства павука ви благополучно забираєте рюкзак в гарному стані."

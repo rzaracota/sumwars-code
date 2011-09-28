@@ -308,9 +308,9 @@
 				speak("HW",_("I have never seen someone fight like you before."), "surprised");
 				speak("mage",_("You don't get out very often, do you."),"sneer");
 				if(solo())then
-					speak("TO",_("You developed splendid since the last time we met, didn't you. ##solo"),"grin");
+					speak("TO",_("You developed splendid since the last time we met, didn't you? ##solo"),"grin");
 				else
-					speak("TO",_("You developed splendid since the last time we met, didn't you."),"grin");
+					speak("TO",_("You developed splendid since the last time we met, didn't you?"),"grin");
 				end;
 				setSpeakerEmotion("TO", "normal");
 				speak("PL",_("How is the archmage?"),"thoughtful");
@@ -460,7 +460,7 @@
 					getObjectOutOfWay(fissure_tmp.stone5);
 					
 					fissure_tmp.necromancer = createObject("necromancer","locNecromancer",190);
-					setRefName(fissure_tmp.necromancer, "Aufsichtfuerender Nekromant");
+					setRefName(fissure_tmp.necromancer, "Overlooker Necromancer");
 					
 					fissure_tmp.worker1 = createObject("worker_skel","locSkeleton1",-90);
 					timedExecute('fissure_tmp.worker2 = createObject("worker_skel","locSkeleton2",-90)',300);
@@ -703,7 +703,7 @@
 					moveObject(fissure_tmp.mage,"locSkeleton2")
 				end;
 				
-				speak("magopt","Hier ist eine gute Stelle fuer den Zauber!","normal");
+				speak("magopt","Here is a good place for the spell!","normal");
 				if (solo())then
 					speak("PL",_("Then I shall blow this crevice to smithereens."),"grin");
 				else
