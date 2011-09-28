@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2011-09-11 00:05+0300\n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
-"Language: Ukrainian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: Ukrainian\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -363,8 +363,7 @@ msgstr "Нехай ті айзенові собаки втрачають сво�
 msgid ""
 "The army passing through this tunnel has nothing to do with Dwarfenwall."
 msgstr ""
-"Армія, що проходить через цей тунель не має ніякого відношення до "
-"Дорфенвалю."
+"Армія, що проходить через цей тунель не має ніякого відношення до Дорфенвалю."
 
 #: theFissure.xml
 msgid "Only the crystal counts."
@@ -475,8 +474,7 @@ msgstr "Він знає, як це боляче кожен раз?"
 #: theFissure.xml
 msgid "That's impossible. Otherwise he wouldn't give such a stupid suggestion."
 msgstr ""
-"Це неможливо. В протилежному випадку він би не давав таких дурних "
-"пропозицій."
+"Це неможливо. В протилежному випадку він би не давав таких дурних пропозицій."
 
 #: theFissure.xml
 msgid "There really are better employers."
@@ -499,8 +497,7 @@ msgid ""
 "Oh by the gods, if some of them have their eyes on this unpleasent piece of "
 "land right now."
 msgstr ""
-"Ох боги, якщо якісь з них бачать нас зараз на цьому неприємному шматку "
-"землі."
+"Ох боги, якщо якісь з них бачать нас зараз на цьому неприємному шматку землі."
 
 #: theFissure.xml
 msgid "How nice to see a familiar face."

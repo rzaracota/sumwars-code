@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2009-03-09 15:15+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -67,11 +67,11 @@ msgid "You don't get out very often, do you."
 msgstr ""
 
 #: theFissure.xml
-msgid "You developed splendid since the last time we met, didn't you. ##solo"
+msgid "You developed splendid since the last time we met, didn't you? ##solo"
 msgstr ""
 
 #: theFissure.xml
-msgid "You developed splendid since the last time we met, didn't you."
+msgid "You developed splendid since the last time we met, didn't you?"
 msgstr ""
 
 #: theFissure.xml
@@ -394,6 +394,10 @@ msgstr ""
 msgid ""
 "What do you know. There are rats everywhere. Kill them and bring me their "
 "bones!"
+msgstr ""
+
+#: theFissure.xml
+msgid "Here is a good place for the spell!"
 msgstr ""
 
 #: theFissure.xml

@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2009-03-09 15:15+0100\n"
 "PO-Revision-Date: 2011-09-10 22:51+0300\n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
-"Language: Ukrainian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: Ukrainian\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-Country: UKRAINE\n"
@@ -23,20 +23,27 @@ msgid "A friend in need"
 msgstr "Друг в біді"
 
 #: rescue_willard.xml
-msgid "Willard is back in Medair and he even forked out some money. Who said it wouldn't pay to let people live? At least as long there are enough goblins around."
+msgid ""
+"Willard is back in Medair and he even forked out some money. Who said it "
+"wouldn't pay to let people live? At least as long there are enough goblins "
+"around."
 msgstr ""
 "Віллард повернувся в Медайр і навіть розщедрився на трохи грошей. Хто "
 "сказав, що він не буде платити, щоб дозволити людям жити? Принаймні до тих "
 "пір, поки навколо є досить гоблінів."
 
 #: rescue_willard.xml
-msgid "Willard is in hiding somewhere around the Aisen Meadow. Due to his injury he will show himself only if there are no goblins around."
+msgid ""
+"Willard is in hiding somewhere around the Aisen Meadow. Due to his injury he "
+"will show himself only if there are no goblins around."
 msgstr ""
-"Віллард ховається десь в лузі Айзена. Через травми він покажеться лише "
-"якщо поруч не буде гоблінів."
+"Віллард ховається десь в лузі Айзена. Через травми він покажеться лише якщо "
+"поруч не буде гоблінів."
 
 #: rescue_willard.xml
-msgid "A long search and quite a lot of dead goblins later Willard has finally shown himself. I should give him the stone and be done with it."
+msgid ""
+"A long search and quite a lot of dead goblins later Willard has finally "
+"shown himself. I should give him the stone and be done with it."
 msgstr ""
 "Після довгих пошуків і великої кількості мертвих гоблінів Віллард нарешті "
 "проявив себе. Я повинен дати йому камінь і завершити з цим."
@@ -106,7 +113,9 @@ msgid "I could always feel if someone was a Branded One."
 msgstr "Я завжди відчуваю, якщо хтось Відмічений."
 
 #: rescue_willard.xml
-msgid "But don't worry, I will give noone away, as long as they are behaving correctly."
+msgid ""
+"But don't worry, I will give noone away, as long as they are behaving "
+"correctly."
 msgstr "Але не хвилюйтеся, я нікого не видаю, поки вони поводяться правильно."
 
 #: rescue_willard.xml
@@ -138,7 +147,9 @@ msgid "What? I could have hired a professional assassin for that."
 msgstr "Що? Я міг би найняти для цього професійного вбивцю."
 
 #: rescue_willard.xml
-msgid "I thought you were the kind of Branded Ones that doesn't kill every human crossing their way."
+msgid ""
+"I thought you were the kind of Branded Ones that doesn't kill every human "
+"crossing their way."
 msgstr ""
 "Я думав, ви ті Відмічені, що не вбивають кожної людини, яка переходить їм "
 "дорогу."
@@ -160,7 +171,8 @@ msgid "I have a friend with the gamekeepers."
 msgstr "У мене є друг, лісник."
 
 #: rescue_willard.xml
-msgid "He was in the meadows with two collegues, when they were attacked by goblins."
+msgid ""
+"He was in the meadows with two collegues, when they were attacked by goblins."
 msgstr "Він був в лузі з двома колегами, коли їх атакували гобліни."
 
 #: rescue_willard.xml
@@ -189,7 +201,8 @@ msgstr "Я впевнений, що ви дуже зайняті."
 
 #: rescue_willard.xml
 msgid "That is why I only ask you to bring him this phasestone. ##solo"
-msgstr "Саме тому я лише прошу, щоб ви принесли йому цей фазовий камінь. ##solo"
+msgstr ""
+"Саме тому я лише прошу, щоб ви принесли йому цей фазовий камінь. ##solo"
 
 #: rescue_willard.xml
 msgid "That is why I only ask you to bring him this phasestone."
@@ -242,7 +255,8 @@ msgid "Thank you."
 msgstr "Дякую."
 
 #: rescue_willard.xml
-msgid "I'm sorry, but I don't want to waste my time searching for any gamekeepers."
+msgid ""
+"I'm sorry, but I don't want to waste my time searching for any gamekeepers."
 msgstr "Мені дуже шкода, але я не хочу тратити свій час на пошук лісника."
 
 #: rescue_willard.xml
@@ -327,7 +341,8 @@ msgstr "Старий добрий Фенор. Ось, на знак моєї в�
 
 #: rescue_willard.xml
 msgid "Surely someone of your trade can always use a little money?"
-msgstr "Звісно ж хтось із вашою професією завжди може використати трохи грошей?"
+msgstr ""
+"Звісно ж хтось із вашою професією завжди може використати трохи грошей?"
 
 #: rescue_willard.xml
 msgid "Thank you very much."

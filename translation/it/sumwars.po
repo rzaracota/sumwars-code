@@ -13,10 +13,10 @@ msgstr ""
 "Last-Translator: Francesco Miglietta (fra9000) <miglietta.francesco@gmail."
 "com>\n"
 "Language-Team: Italian <http://gamesopensource.altervista.org>\n"
-"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: necrotia.xml
@@ -3079,6 +3079,10 @@ msgstr "Rob il Ladrone"
 msgid "Ronny the Rat"
 msgstr "Ronny il Ratto"
 
+#: rescue_willard.xml
+msgid "Willard"
+msgstr ""
+
 #: joringsbridge_npc.xml
 msgid "Gertlinde Kampfer"
 msgstr "Gertlinde Kampfer"
@@ -3330,6 +3334,11 @@ msgstr ""
 msgid "As I always say: No enchantment should be applied a second time."
 msgstr ""
 
+#: joringsbridge.xml
+#, fuzzy
+msgid "Who is that?"
+msgstr "Cos'e' tutto questo casino?"
+
 #: dwarfcastle.xml
 msgid "Haffgar"
 msgstr "Haffgar"
@@ -3433,6 +3442,10 @@ msgstr ""
 msgid "It seems that this item already has such an enchantment."
 msgstr ""
 
+#: dwarfcastle.xml
+msgid "Nah to expensive"
+msgstr ""
+
 # Bron's door
 #: npc.xml
 msgid "Brons Tuer"
@@ -3455,16 +3468,28 @@ msgid "Erzmaga Ireana von Nordenburg"
 msgstr "Arcimaga Ireana di Nordburg"
 
 #: npc.xml
-msgid "Hauptmann der Wache"
-msgstr "Capitano delle Guardie"
+#, fuzzy
+msgid "Guardcaptain"
+msgstr "Capitano della Guardia del Consiglio"
 
 #: npc.xml
 msgid "Elementaristenwaechter"
 msgstr "La Guardia del Consiglio"
 
 #: npc.xml
-msgid "Vorarbeiter Nekromant"
-msgstr "Sorveglianza del Necromante"
+#, fuzzy
+msgid "Overlooker Necromancer"
+msgstr "Necromante"
+
+#: dwarfenwall.lua
+#, fuzzy
+msgid "Skinny Necromancer"
+msgstr "Necromante"
+
+#: dwarfenwall.lua
+#, fuzzy
+msgid "Scarfaced Necromancer"
+msgstr "Necromante"
 
 #: npc.xml
 msgid "Buy empty scrolls"
@@ -3510,6 +3535,28 @@ msgstr "Cain"
 #: medairnpc.xml
 msgid "Fenor Marken"
 msgstr "Fenor Marken"
+
+#: fortify_dwarfenwall.xml
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##female"
+msgstr ""
+
+#: fortify_dwarfenwall.xml
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##male"
+msgstr ""
+
+#: fortify_dwarfenwall.xml
+msgid "You are better prepared to suffer the consequences, wretched creature."
+msgstr ""
+
+#~ msgid "Hauptmann der Wache"
+#~ msgstr "Capitano delle Guardie"
+
+#~ msgid "Vorarbeiter Nekromant"
+#~ msgstr "Sorveglianza del Necromante"
 
 #, fuzzy
 #~ msgid "goblin_raid"

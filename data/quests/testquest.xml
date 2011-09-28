@@ -53,9 +53,9 @@
 				speak('Fenor Marken',_("being disgusted"),"disgust");
 				speak('player',_("and yet another Test"));
 				speak('Fenor Marken',_("again a test"));
-				speak('guard1',"i am the first guard")
-				speak('guard2',"i am the second guard")
-				speak('Fenor Marken',"i am Fenor Marken")
+				speak('guard1',"I am the first guard")
+				speak('guard2',"I am the second guard")
+				speak('Fenor Marken',"I am Fenor Marken")
 			</Effect>
 		</Topic>
 	</NPC>

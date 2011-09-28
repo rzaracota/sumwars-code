@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2011-09-07 20:58+0200\n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
-"Language: Ukrainian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: Ukrainian\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -24,12 +24,22 @@ msgid "The Ambush"
 msgstr "Засідка"
 
 #: theAmbush.xml
-msgid "Ireana survived and, as a token of her gratitude, provided our next job. I always knew the councilmen only wanted an exterminator."
-msgstr "Іреана вижила і на знак своєї вдячності дала нам іншу роботу. Я завжди знав, що члену ради був потрібен лише винищувач."
+msgid ""
+"Ireana survived and, as a token of her gratitude, provided our next job. I "
+"always knew the councilmen only wanted an exterminator."
+msgstr ""
+"Іреана вижила і на знак своєї вдячності дала нам іншу роботу. Я завжди знав, "
+"що члену ради був потрібен лише винищувач."
 
 #: theAmbush.xml
-msgid "A female council-mage by the name of Ireana of Northborough seems to be in trouble west of Dwarfenwall. Nothing a Branded One couldn't solve. If she survives long enough..."
-msgstr "Жінка член ради, маг, на ім'я Іреана з Нортборо, здається, в біді на захід від Дорфенваля. Нічого такого, що не міг би вирішити Відмічений. Якщо вона досить довго протягне..."
+msgid ""
+"A female council-mage by the name of Ireana of Northborough seems to be in "
+"trouble west of Dwarfenwall. Nothing a Branded One couldn't solve. If she "
+"survives long enough..."
+msgstr ""
+"Жінка член ради, маг, на ім'я Іреана з Нортборо, здається, в біді на захід "
+"від Дорфенваля. Нічого такого, що не міг би вирішити Відмічений. Якщо вона "
+"досить довго протягне..."
 
 #: theAmbush.xml
 msgid "aisWolfstones"
@@ -76,8 +86,12 @@ msgid "What?"
 msgstr "Що?"
 
 #: theAmbush.xml
-msgid "I thought she was one of your fancy elementalist amazones. Can't she look after herself?"
-msgstr "Я думав, вона була однією з ваших уявних елементалістичних амазонок. Хіба вона не може попіклуватися про себе?"
+msgid ""
+"I thought she was one of your fancy elementalist amazones. Can't she look "
+"after herself?"
+msgstr ""
+"Я думав, вона була однією з ваших уявних елементалістичних амазонок. Хіба "
+"вона не може попіклуватися про себе?"
 
 #: theAmbush.xml
 msgid "Don't start to argue and help her! She needs your help!"
@@ -114,4 +128,3 @@ msgstr "Як ви думаєте, друзі, ми хочемо виручити
 #: theAmbush.xml
 msgid "The firefighters are on the way."
 msgstr "Пожежні вже в дорозі."
-

@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2009-03-09 15:15+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
-"Language: Ukrainian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: Ukrainian\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-Country: UKRAINE\n"
@@ -27,8 +27,12 @@ msgid "And another good deed done. I could get used to this."
 msgstr "І ще одну добру справу зроблено. Я починаю звикати до цього."
 
 #: herbalist.xml
-msgid "The herbalist of Joringsbridge wants to have the berries of 10 bushes. \"..(10 - herbalist.bushes)..\" berries have been collected."
-msgstr "Травник з Джорінгсбріджа хоче мати ягоди з 10 кущів. \"..(10 - herbalist.bushes)..\" ягід були зібрані."
+msgid ""
+"The herbalist of Joringsbridge wants to have the berries of 10 bushes. \".."
+"(10 - herbalist.bushes)..\" berries have been collected."
+msgstr ""
+"Травник з Джорінгсбріджа хоче мати ягоди з 10 кущів. \"..(10 - herbalist."
+"bushes)..\" ягід були зібрані."
 
 #: herbalist.xml
 msgid "joringsbridge"
@@ -99,11 +103,16 @@ msgid "Peace."
 msgstr "Мир."
 
 #: herbalist.xml
-msgid "If you are roaming around there anyway, why don't you collect some berries for me?"
-msgstr "Якщо ти все одно будеш там бродити, чому б тобі не зібрати для мене ягід?"
+msgid ""
+"If you are roaming around there anyway, why don't you collect some berries "
+"for me?"
+msgstr ""
+"Якщо ти все одно будеш там бродити, чому б тобі не зібрати для мене ягід?"
 
 #: herbalist.xml
-msgid "With all those goblins about an old woman can't even set a foot out of the village."
+msgid ""
+"With all those goblins about an old woman can't even set a foot out of the "
+"village."
 msgstr "З усіма цими гоблінами стара навіть не може висунути ніс з села."
 
 #: herbalist.xml
@@ -159,7 +168,9 @@ msgid "Forget it, herb woman."
 msgstr "Забудьте про це, травнице."
 
 #: herbalist.xml
-msgid "I'm not going to crawl through the meadows just to search for some stupid bushes."
+msgid ""
+"I'm not going to crawl through the meadows just to search for some stupid "
+"bushes."
 msgstr "Я не буду лазити по луках лише щоб знайти якісь дурні чагарники."
 
 #: herbalist.xml
@@ -180,7 +191,8 @@ msgstr "Все ще ні."
 
 #: herbalist.xml
 msgid "Tell me when you're not too mighty for simple work anymore, sweety."
-msgstr "Скажи мені, коли ти будеш не занадто величний для простої роботи, солодце."
+msgstr ""
+"Скажи мені, коли ти будеш не занадто величний для простої роботи, солодце."
 
 #: herbalist.xml
 msgid "Watch your tongue, hag!"
@@ -193,4 +205,3 @@ msgstr "Північний луг"
 #: herbalist.xml
 msgid "Collect\"..bushes_left..\" more herbs."
 msgstr "Зберіть ще\"..bushes_left..\" рослин."
-

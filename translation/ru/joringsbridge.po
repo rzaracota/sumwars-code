@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-06-28 21:53+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
 
 #: joringsbridge.xml
 msgid "Joringsbridge"
@@ -348,10 +348,6 @@ msgid "By Marek!"
 msgstr ""
 
 #: joringsbridge.xml
-msgid "Who is that?"
-msgstr "Кто это?"
-
-#: joringsbridge.xml
 msgid "Aren't you the... auxiliary forces of the council? ##solo"
 msgstr ""
 
@@ -437,3 +433,6 @@ msgstr ""
 #: joringsbridge.xml
 msgid "I will pray that your family is safe long enough."
 msgstr ""
+
+#~ msgid "Who is that?"
+#~ msgstr "Кто это?"

@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-07 21:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: theFissure.xml
@@ -69,11 +69,11 @@ msgid "You don't get out very often, do you."
 msgstr ""
 
 #: theFissure.xml
-msgid "You developed splendid since the last time we met, didn't you. ##solo"
+msgid "You developed splendid since the last time we met, didn't you? ##solo"
 msgstr ""
 
 #: theFissure.xml
-msgid "You developed splendid since the last time we met, didn't you."
+msgid "You developed splendid since the last time we met, didn't you?"
 msgstr ""
 
 #: theFissure.xml
@@ -396,6 +396,10 @@ msgstr ""
 msgid ""
 "What do you know. There are rats everywhere. Kill them and bring me their "
 "bones!"
+msgstr ""
+
+#: theFissure.xml
+msgid "Here is a good place for the spell!"
 msgstr ""
 
 #: theFissure.xml

@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2010-09-11 23:13+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
 
 #: testquest.xml
 msgid "testquest"
@@ -133,3 +133,14 @@ msgstr ""
 msgid "again a test"
 msgstr ""
 
+#: testquest.xml
+msgid "I am the first guard"
+msgstr ""
+
+#: testquest.xml
+msgid "I am the second guard"
+msgstr ""
+
+#: testquest.xml
+msgid "I am Fenor Marken"
+msgstr ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2009-03-09 15:15+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,101 +16,125 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+# Camp of the Undeads
 #: necrotia.xml
 msgid "necFieldcamp"
 msgstr ""
 
+# Snow Nose
 #: greySkyladder.xml
 msgid "greySnowNose"
-msgstr "Snow Nose"
+msgstr ""
 
+# Old Mine
 #: greySkyladder.xml
 msgid "greyOldMine"
-msgstr "Old Mine"
+msgstr ""
 
+# Old Mine, Level 2
 #: greySkyladder.xml
 msgid "greyOldMineL2"
-msgstr "Old Mine, Level 2"
+msgstr ""
 
+# Old Mine, Depth
 #: greySkyladder.xml
 msgid "greyOldMineDeep"
-msgstr "Old Mine, Depth"
+msgstr ""
 
+# Aisen Meadow
 #: aisen.xml
 msgid "aisMeadow"
-msgstr "Aisen Meadow"
+msgstr ""
 
+# Plains
 #: aisen.xml
 msgid "aisPlains"
-msgstr "Plains"
+msgstr ""
 
+# Maylons Grave
 #: aisen.xml
 msgid "aisMaylonsGraveEntry"
-msgstr "Maylons Grave"
+msgstr ""
 
+# Maylons Grave, Level 1
 #: aisen.xml
 msgid "aisMaylonsGraveL1"
-msgstr "Maylons Grave, Level 1"
+msgstr ""
 
+# Maylons Grave, Crypt
 #: aisen.xml
 msgid "aisMaylonsGraveL2"
-msgstr "Maylons Grave, Crypt"
+msgstr ""
 
+# Aisen Heath
 #: aisen.xml
 msgid "aisHeath"
-msgstr "Aisen Heath"
+msgstr ""
 
+# Stony Plains
 #: aisen.xml
 msgid "aisStonePlains"
-msgstr "Stony Plains"
+msgstr ""
 
+# Dark Glade
 #: aisen.xml
 msgid "aisDarkClearing"
-msgstr "Dark Glade"
+msgstr ""
 
+# Wide Heath
 #: aisen.xml
 msgid "aisWideHeath"
-msgstr "Wide Heath"
+msgstr ""
 
+# Joringsbridge
 #: aisen.xml
 msgid "joringsbridge"
-msgstr "Joringsbridge"
+msgstr ""
 
+# North Meadow
 #: aisen.xml
 msgid "aisNorthMeadow"
-msgstr "North Meadow"
+msgstr ""
 
+# Joringsforst
 #: aisen.xml
 msgid "aisJoringsforest"
-msgstr "Joringsforst"
+msgstr ""
 
+# Fairy Forest
 #: aisen.xml
 msgid "aisFairyforest"
-msgstr "Fairy Forest"
+msgstr ""
 
+# Dark Fairy Forest
 #: aisen.xml
 msgid "aisDarkFairyforest"
-msgstr "Dark Fairy Forest"
+msgstr ""
 
+# Wolf stones
 #: aisen.xml
 msgid "aisWolfstones"
-msgstr "Wolf stones"
+msgstr ""
 
+# West wood
 #: aisen.xml
 msgid "aisWestwoods"
-msgstr "West wood"
+msgstr ""
 
+# Mountain Path
 #: aisen.xml
 msgid "aisMounPath"
-msgstr "Mountain Path"
+msgstr ""
 
+# Misty slope
 #: aisen.xml
 msgid "aisMistslope"
-msgstr "Misty slope"
+msgstr ""
 
+# East slope
 #: aisen.xml
 msgid "aisEastslope"
-msgstr "East slope"
+msgstr ""
 
 #: aisen.xml
 msgid "Watch out! Monsters from the mine! Help me!"
@@ -120,101 +144,125 @@ msgstr ""
 msgid "Let me tell you I'm no monster. I'm worse."
 msgstr ""
 
+# Boulder Grounds
 #: aisen.xml
 msgid "aisBoulderGrounds"
-msgstr "Boulder Grounds"
+msgstr ""
 
+# Mountain Meadows
 #: aisen.xml
 msgid "aisMounMeadows"
-msgstr "Mountain Meadows"
+msgstr ""
 
+# Old Dwarven Ruins
 #: aisen.xml
 msgid "aisOldDwarfRuins"
-msgstr "Old Dwarven Ruins"
+msgstr ""
 
+# Old Cellar
 #: aisen.xml
 msgid "aisOldCellar"
-msgstr "Old Cellar"
+msgstr ""
 
+# Baelens Rift
 #: aisen.xml
 msgid "aisBaelensRift"
-msgstr "Baelens Rift"
+msgstr ""
 
+# Hill Road
 #: aisen.xml
 msgid "aisHillRoad"
-msgstr "Hill Road"
+msgstr ""
 
+# Copper Rock
 #: aisen.xml
 msgid "copperRock"
-msgstr "Copper Rock"
+msgstr ""
 
+# Copper Fields
 #: aisen.xml
 msgid "aisCopperFields"
-msgstr "Copper Fields"
+msgstr ""
 
+# Mine Entrance
 #: aisen.xml
 msgid "aisMineEntry"
-msgstr "Mine Entrance"
+msgstr ""
 
+# Dwarfenwall
 #: dwarfenwall.xml
 msgid "dwarfenwall"
-msgstr "Dwarfenwall"
+msgstr ""
 
+# Command Center
 #: dwarfenwall.xml
 msgid "dwarfenwallCommand"
-msgstr "Command Center"
+msgstr ""
 
+# Defense Wall
 #: dwarfenwall.xml
 msgid "dwarfenwallRampart"
-msgstr "Defense Wall"
+msgstr ""
 
+# Cursed Cave
 #: cursedCaves.xml
 msgid "greyCurseCave"
-msgstr "Cursed Cave"
+msgstr ""
 
+# Cursed Grotto
 #: cursedCaves.xml
 msgid "greyCurseGrotto"
-msgstr "Cursed Grotto"
+msgstr ""
 
+# Wolf Cave
 #: cursedCaves.xml
 msgid "greyWolfcave"
-msgstr "Wolf Cave"
+msgstr ""
 
+# Cursed Grotto, Depth
 #: cursedCaves.xml
 msgid "greyCurseGrotDep"
-msgstr "Cursed Grotto, Depth"
+msgstr ""
 
+# Cursed Cavern
 #: cursedCaves.xml
 msgid "greyCursedCavern"
-msgstr "Cursed Cavern"
+msgstr ""
 
+# Cursed Cave, Depth
 #: cursedCaves.xml
 msgid "greyCurseCaveDep"
-msgstr "Cursed Cave, Depth"
+msgstr ""
 
+# The Fissure
 #: cursedCaves.xml
 msgid "greyCurseCaveFis"
-msgstr "The Fissure"
+msgstr ""
 
+# Cursed East Cave
 #: cursedCaves.xml
 msgid "greyCurseCaveEast"
-msgstr "Cursed East Cave"
+msgstr ""
 
+# Cursed Lake
 #: cursedCaves.xml
 msgid "greyCurseLake"
-msgstr "Cursed Lake"
+msgstr ""
 
+# Council of the elements, Underground
 #: medair.xml
 msgid "elCnlLobby"
-msgstr "Council of the elements, Underground"
+msgstr ""
 
+# Back alley
 #: medair.xml
 msgid "medBackalley"
-msgstr "Back alley"
+msgstr ""
 
+# Medair Mercenaries Camp
 #: medair.xml
 msgid "medMercCamp"
-msgstr "Medair Mercenaries Camp"
+msgstr ""
 
 #: testregions.xml
 msgid "maptest"

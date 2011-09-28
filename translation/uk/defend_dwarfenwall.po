@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2011-09-08 22:09+0200\n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
-"Language: Ukrainian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: Ukrainian\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -77,7 +77,7 @@ msgid ""
 "First they send away the mage of Northborough and than they send in backup "
 "again?"
 msgstr ""
-"Спочатку вони проганяють мага з Нортборо а потім знову посилають пдкріплення?"
+"Спочатку вони проганяють мага з Нортборо а потім знову посилають підкріплення?"
 
 #: siegeOfDwarfenwall.xml
 msgid "What kind of game is this?"
@@ -104,7 +104,8 @@ msgid ""
 "Excuse me for interrupting like that, but small groups travel considerably "
 "faster then armies."
 msgstr ""
-"Вибачте, що перебиваю, але невеликі туристичні групи значно швидші, ніж армія."
+"Вибачте, що перебиваю, але невеликі туристичні групи значно швидші, ніж "
+"армія."
 
 #: siegeOfDwarfenwall.xml
 msgid "And who are you? ##solo"
@@ -155,7 +156,8 @@ msgid ""
 "You will realize the worth of our assistance, when they fall for you again "
 "and again."
 msgstr ""
-"Ви зрозумієте ціну нашої допомоги, коли вони будуть за вас падати на полі бою."
+"Ви зрозумієте ціну нашої допомоги, коли вони будуть за вас падати на полі "
+"бою."
 
 #: siegeOfDwarfenwall.xml
 msgid "What do you say?"
@@ -178,8 +180,8 @@ msgid ""
 "If the price is right I let myself be torn apart as often as need be to "
 "protect the town."
 msgstr ""
-"Якщо ціна вірна, я дозволю розірвати себе стільки разів, скільки треба "
-"для захисту міста."
+"Якщо ціна вірна, я дозволю розірвати себе стільки разів, скільки треба для "
+"захисту міста."
 
 #: siegeOfDwarfenwall.xml
 msgid ""
@@ -287,8 +289,7 @@ msgstr "Надіюсь ви праві..."
 
 #: siegeOfDwarfenwall.xml
 msgid "I'm sorry, but only members of the aisen army are allowed beyond here."
-msgstr ""
-"Мені дуже шкода, але лише членам армії Айзена можна тут бути."
+msgstr "Мені дуже шкода, але лише членам армії Айзена можна тут бути."
 
 #: siegeOfDwarfenwall.xml
 msgid "I don't want to go there. I only see boring walls."
@@ -366,7 +367,8 @@ msgstr "Прокляті елементалісти!"
 msgid ""
 "It will be a great pleasure to reanimate the body of that witch only to burn "
 "her!"
-msgstr "Буде дуже приємно реанімувати тіло тієї відьми для того, щоб її спалити!"
+msgstr ""
+"Буде дуже приємно реанімувати тіло тієї відьми для того, щоб її спалити!"
 
 #: siegeOfDwarfenwall.xml
 msgid "It will be done, my lord."
@@ -374,7 +376,8 @@ msgstr "Це буде зроблено, пане."
 
 #: siegeOfDwarfenwall.xml
 msgid "But how will we attack the city now? She blocked the path for our army."
-msgstr "Але як ми тепер будем атакувати місто? Вона заблокувала шлях для нашої армії."
+msgstr ""
+"Але як ми тепер будем атакувати місто? Вона заблокувала шлях для нашої армії."
 
 #: siegeOfDwarfenwall.xml
 msgid "Silence!"
@@ -548,7 +551,8 @@ msgid ""
 "The road from the Grey Skyladder into this desolate and sear plain was long, "
 "you know."
 msgstr ""
-"Шлях від Сірого Небесного Трапу до цієї занедбаної і сухої рівнини був довгим."
+"Шлях від Сірого Небесного Трапу до цієї занедбаної і сухої рівнини був "
+"довгим."
 
 #: siegeOfDwarfenwall.xml
 msgid "And your mountain tops are more lively?"
@@ -562,8 +566,7 @@ msgstr "Ми тут для того, щоб рахувати тараканів 
 msgid ""
 "You are right. Could you move those really unnerving people over there out "
 "of the way?"
-msgstr ""
-"Ви маєте рацію. Не могли б прибрати з дороги тих дратівливих людей?"
+msgstr "Ви маєте рацію. Не могли б прибрати з дороги тих дратівливих людей?"
 
 #: siegeOfDwarfenwall.xml
 msgid "That's what I'm here for."
@@ -575,8 +578,7 @@ msgstr "І не забувайте, що після цього ви мені в�
 
 #: siegeOfDwarfenwall.xml
 msgid "Do you think I'm going to miss two villages after I got Dwarfenwall?"
-msgstr ""
-"Ви думаєте я пожалію два села після повернення Дорфенваля?"
+msgstr "Ви думаєте я пожалію два села після повернення Дорфенваля?"
 
 #: siegeOfDwarfenwall.xml
 msgid "Me and my frostmages will arrange for that."
@@ -615,9 +617,12 @@ msgid "That explaines a lot."
 msgstr "Це багато пояснює."
 
 #: siegeOfDwarfenwall.xml
-msgid "But even they will not be able to hold the city once the wretched humans are "
+msgid ""
+"But even they will not be able to hold the city once the wretched humans are "
 "gone."
-msgstr "Але навіть вони не зможуть утримати місто після того, як помруть жалюгідні люди."
+msgstr ""
+"Але навіть вони не зможуть утримати місто після того, як помруть жалюгідні "
+"люди."
 
 #: siegeOfDwarfenwall.xml
 msgid "Overrun them. Send out your order."
@@ -692,8 +697,7 @@ msgstr "Це добре, що вони знаходяться на нашому 
 
 #: siegeOfDwarfenwall.xml
 msgid "If both sides have souls to offer, you take the one paying, of course."
-msgstr ""
-"Якщо обидві сторони мають душі, ти вибираєш ту, яка платить."
+msgstr "Якщо обидві сторони мають душі, ти вибираєш ту, яка платить."
 
 #: siegeOfDwarfenwall.xml
 msgid "Thank you for reminding me, why I cannot stand your kind."
@@ -717,8 +721,7 @@ msgstr "Годі про це. Давайте поговоримо в коман�
 msgid ""
 "It wouldn't be wise to hit the soldiers over the head who their saviours "
 "were."
-msgstr ""
-"Було б нерозумно казати солдатам, хто насправді їх рятівники."
+msgstr "Було б нерозумно казати солдатам, хто насправді їх рятівники."
 
 #: siegeOfDwarfenwall.xml
 msgid "I've never seen anyone who could fight like this."
@@ -864,7 +867,9 @@ msgstr "Ніякого фальшивого співчуття."
 
 #: siegeOfDwarfenwall.xml
 msgid "No matter how often I die, the lich will be destroyed in the end."
-msgstr "Незалежно від того, скільки разів я помру, але ліч в кінці кінців буде вбитий."
+msgstr ""
+"Незалежно від того, скільки разів я помру, але ліч в кінці кінців буде "
+"вбитий."
 
 #: siegeOfDwarfenwall.xml
 msgid "Apart from yourself you are not taking care of anyone!"
@@ -909,8 +914,7 @@ msgstr "Як хочете..."
 #: siegeOfDwarfenwall.xml
 msgid ""
 "One of these arrows could have come from anywhere in the heat of battle..."
-msgstr ""
-"Одна з цих стріл могла прилетіти будь-звідки в розпалі битви..."
+msgstr "Одна з цих стріл могла прилетіти будь-звідки в розпалі битви..."
 
 #: siegeOfDwarfenwall.xml
 msgid "Don't even think about it."
@@ -930,7 +934,8 @@ msgstr "А ось корінь моєї маленької проблеми."
 
 #: siegeOfDwarfenwall.xml
 msgid "It's hard to believe someone was crazy enough to storm out here."
-msgstr "Важко повірити, що є хтось настільки божевільний, щоб здійснити тут штурм."
+msgstr ""
+"Важко повірити, що є хтось настільки божевільний, щоб здійснити тут штурм."
 
 #: siegeOfDwarfenwall.xml
 msgid "Prepare to pass off forever!"
@@ -941,15 +946,16 @@ msgid ""
 "I can't believe that a single Branded One would be sufficient to cause so "
 "much chaos."
 msgstr ""
-"Я не можу повірити, що досить одного Відміченого, щоб викликати стільки хаосу."
+"Я не можу повірити, що досить одного Відміченого, щоб викликати стільки "
+"хаосу."
 
 #: siegeOfDwarfenwall.xml
 msgid ""
 "Of course, if some Branded Ones are in the vicinity everything is a bit "
 "different."
 msgstr ""
-"Звичайно, якщо якісь Відмічені знаходяться в безпосередній близькості, "
-"все трохи інакше."
+"Звичайно, якщо якісь Відмічені знаходяться в безпосередній близькості, все "
+"трохи інакше."
 
 #: siegeOfDwarfenwall.xml
 msgid "Harvest!"
@@ -1087,4 +1093,3 @@ msgstr "Але боги запам'ятають тебе на віки вічн�
 #: siegeOfDwarfenwall.xml
 msgid "With this, the demo is officially over."
 msgstr "На цьому демо офіційно закінчується."
-

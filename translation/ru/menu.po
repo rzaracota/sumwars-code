@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-06-20 21:03+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
 
 #: ../src/core/damage.cpp:143 ../src/gui/charinfo.cpp:930
 msgid "Physical"
@@ -194,8 +194,7 @@ msgstr "Сила воли"
 msgid " max. "
 msgstr " макс. "
 
-#: ../src/gui/itemwindow.cpp:168
-#: ../src/gui/itemwindow.cpp:169
+#: ../src/gui/itemwindow.cpp:168 ../src/gui/itemwindow.cpp:169
 msgid "Equipped:\n"
 msgstr ""
 
@@ -630,8 +629,7 @@ msgstr "Персонажи"
 msgid "Delete"
 msgstr "Удалить"
 
-#: ../src/gui/savegamelist.cpp:188
-#: ../src/gui/charinfo.cpp:488
+#: ../src/gui/savegamelist.cpp:188 ../src/gui/charinfo.cpp:488
 msgid "Level"
 msgstr "Уровень"
 

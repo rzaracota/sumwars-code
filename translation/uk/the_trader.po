@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2011-09-11 00:50+0300\n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
-"Language: Ukrainian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: Ukrainian\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -84,7 +84,9 @@ msgid "Indeed."
 msgstr "Напевно."
 
 #: theTrader.xml
-msgid "Unfortunatly I bet on the wrong branch and now I'm stuck with a large contingent of Empty Scrolls."
+msgid ""
+"Unfortunatly I bet on the wrong branch and now I'm stuck with a large "
+"contingent of Empty Scrolls."
 msgstr ""
 "На жаль я поставив не на ту сторону, і тепер я застряг тут з великою "
 "кількістю Порожніх Згортків."
@@ -118,7 +120,9 @@ msgid "Establish a way through Harads Black Abyss."
 msgstr "Створення шляху через Чорну Безодню Харада."
 
 #: theTrader.xml
-msgid "And to make it worse only to spots of great magical concentration like the big road shrine over there."
+msgid ""
+"And to make it worse only to spots of great magical concentration like the "
+"big road shrine over there."
 msgstr ""
 "І ще гірше, лише на місцях великої магічної концентрації, як наприклад "
 "святиня на великій дорозі онтам."
@@ -140,29 +144,38 @@ msgid "No"
 msgstr "Ні"
 
 #: theTrader.xml
-msgid "If you are getting close to a waypoint, your aura will bring the familiar spirits of this place to ignite warning flames."
+msgid ""
+"If you are getting close to a waypoint, your aura will bring the familiar "
+"spirits of this place to ignite warning flames."
 msgstr ""
 "Коли ви наблизитесь до точки, ваша аура змусить духів цього місця запалити "
 "полум'я попередження."
 
 #: theTrader.xml
-msgid "But do not fear, they don't have the power to harm you in any way, really."
+msgid ""
+"But do not fear, they don't have the power to harm you in any way, really."
 msgstr "Але не бійтеся, вони не в силах нашкодити вам будь-яким чином."
 
 #: theTrader.xml
-msgid "Counterwise you can be sure that you are able to use the road shrine if you see the flames."
+msgid ""
+"Counterwise you can be sure that you are able to use the road shrine if you "
+"see the flames."
 msgstr ""
 "Тоді ви можете бути впевнені, що ви можете використати дорожню святиню якщо "
 "ви бачите полум'я."
 
 #: theTrader.xml
-msgid "If you click on a road shrine, your body will volatilize into Harad's Black Abyss."
+msgid ""
+"If you click on a road shrine, your body will volatilize into Harad's Black "
+"Abyss."
 msgstr ""
 "Якщо ви натиснете на дорожній святині, ваше тіло випарується в Чорну Безодню "
 "Харада."
 
 #: theTrader.xml
-msgid "Before your inner eye there will be a map with all the places, you have already visited."
+msgid ""
+"Before your inner eye there will be a map with all the places, you have "
+"already visited."
 msgstr ""
 "Перед внутрішнім поглядом ви побачите карту з усіма місцями, які ви вже "
 "відвідали."
@@ -172,13 +185,17 @@ msgid "They are shown as a circle."
 msgstr "Вони відображаються у вигляді кола."
 
 #: theTrader.xml
-msgid "If you have an open portal in the world, it will be shown too, but by a red dot."
+msgid ""
+"If you have an open portal in the world, it will be shown too, but by a red "
+"dot."
 msgstr ""
 "Якщо у вас є відкритий портал в світі, він буде показаний теж, але червоною "
 "точкою."
 
 #: theTrader.xml
-msgid "Click on one of these symbols, and your body will reassemble itself fast as the wind at your destination."
+msgid ""
+"Click on one of these symbols, and your body will reassemble itself fast as "
+"the wind at your destination."
 msgstr ""
 "Натисніть на один з цих символів, і ваше тіло буде зібране у пункті "
 "призначення швидко як вітер."
@@ -190,8 +207,7 @@ msgstr "Гобліни та інші звірі вкрали їх досить �
 #: theTrader.xml
 msgid "It may be convenient to make a short detour to a well-assorted trader."
 msgstr ""
-"Може бути дуже зручним зробити невеликий гак до добре забезпеченого "
-"торговця."
+"Може бути дуже зручним зробити невеликий гак до добре забезпеченого торговця."
 
 #: theTrader.xml
 msgid "Speaking of you?"
@@ -202,13 +218,16 @@ msgid "Actually not, regrettably."
 msgstr "Насправді ні, на жаль."
 
 #: theTrader.xml
-msgid "As reported, I misinvested in the Empty Scrolls and have no available capital."
+msgid ""
+"As reported, I misinvested in the Empty Scrolls and have no available "
+"capital."
 msgstr ""
 "Як я вже казав, я невірно інвестував все майно у Порожні Згортки і не маю "
 "доступного капіталу."
 
 #: theTrader.xml
-msgid "I'm afraid all I can give you for your wares in gold would be insufficient."
+msgid ""
+"I'm afraid all I can give you for your wares in gold would be insufficient."
 msgstr ""
 "Боюся, всього, що я можу запропонувати вам за ваші вироби в золоті буде "
 "недостатньо."
@@ -250,7 +269,9 @@ msgid "Why not town portal or something like that?"
 msgstr "Чому не міський портал або щось подібне?"
 
 #: theTrader.xml
-msgid "Well, they were sold to me as Empty Scrolls, but how you call them is entirely up to you."
+msgid ""
+"Well, they were sold to me as Empty Scrolls, but how you call them is "
+"entirely up to you."
 msgstr ""
 "Ну, вони були продані мені як Порожні Згортки, але як ви їх назвете, "
 "залежить повністю від вас."
@@ -272,7 +293,9 @@ msgid "Now, now, honorable customers!"
 msgstr "Ну, ну, почесні клієнти!"
 
 #: theTrader.xml
-msgid "They were sold to me as Empty Scrolls, but how you call them is entirely up to you!"
+msgid ""
+"They were sold to me as Empty Scrolls, but how you call them is entirely up "
+"to you!"
 msgstr ""
 "Вони були продані мені як Порожні Згортки, але як ви їх назвете, залежить "
 "повністю від вас."
@@ -314,7 +337,9 @@ msgid "I'm sure you noticed, right?"
 msgstr "Я впевнений ви помітили, вірно?"
 
 #: theTrader.xml
-msgid "And long years on the battlefield caused me to change potions for similar potions immediately once I used one."
+msgid ""
+"And long years on the battlefield caused me to change potions for similar "
+"potions immediately once I used one."
 msgstr ""
 "І довгі роки на полі бою змушували мене змінювати одні зілля на інші такі ж, "
 "як тільки я їх використовував."
@@ -332,7 +357,9 @@ msgid "Well, whatever."
 msgstr "Ну, байдуже."
 
 #: theTrader.xml
-msgid "If you want to use a potion you can do so by clicking on it with the right mouse button in the inventory or the belt."
+msgid ""
+"If you want to use a potion you can do so by clicking on it with the right "
+"mouse button in the inventory or the belt."
 msgstr ""
 "Якщо ви хочете використати зілля ви можете клацнути по ньому правою кнопкою "
 "миші в інвентарі або на поясі."
@@ -342,11 +369,14 @@ msgid "Alternativly you can choose the number of the belt slot it is in."
 msgstr "Або ви можете вибрати номер слота на поясі, це знаходиться зілля."
 
 #: theTrader.xml
-msgid "That is, 1 for the potion on the left, 2 for the second from the left and so on."
+msgid ""
+"That is, 1 for the potion on the left, 2 for the second from the left and so "
+"on."
 msgstr "Тобто 1 для зілля ліворуч, 2 для другого зліва і так далі."
 
 #: theTrader.xml
-msgid "This works for all usable items alike, so naturally for the scrolls, too."
+msgid ""
+"This works for all usable items alike, so naturally for the scrolls, too."
 msgstr ""
 "Це працює для всіх предметів, які можна якось використати, тому і для "
 "згортків теж."
@@ -368,7 +398,9 @@ msgid "What are you doing here?"
 msgstr "Що ви тут робите?"
 
 #: theTrader.xml
-msgid "Well, I noticed you were headed north, and I thought it would be convenient for you to know I'm nearby."
+msgid ""
+"Well, I noticed you were headed north, and I thought it would be convenient "
+"for you to know I'm nearby."
 msgstr ""
 "Ну, я помітив, що ви йдете на північ, і я думав, що вам буде корисно знати, "
 "що мені по сусідству."

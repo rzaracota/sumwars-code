@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-07 21:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: necrotia.xml
@@ -3032,6 +3032,10 @@ msgstr ""
 msgid "Ronny the Rat"
 msgstr ""
 
+#: rescue_willard.xml
+msgid "Willard"
+msgstr ""
+
 #: joringsbridge_npc.xml
 msgid "Gertlinde Kampfer"
 msgstr ""
@@ -3264,6 +3268,10 @@ msgstr ""
 msgid "As I always say: No enchantment should be applied a second time."
 msgstr ""
 
+#: joringsbridge.xml
+msgid "Who is that?"
+msgstr ""
+
 #: dwarfcastle.xml
 msgid "Haffgar"
 msgstr ""
@@ -3364,6 +3372,10 @@ msgstr ""
 msgid "It seems that this item already has such an enchantment."
 msgstr ""
 
+#: dwarfcastle.xml
+msgid "Nah to expensive"
+msgstr ""
+
 #: npc.xml
 msgid "Brons Tuer"
 msgstr ""
@@ -3385,7 +3397,7 @@ msgid "Erzmaga Ireana von Nordenburg"
 msgstr ""
 
 #: npc.xml
-msgid "Hauptmann der Wache"
+msgid "Guardcaptain"
 msgstr ""
 
 #: npc.xml
@@ -3393,7 +3405,15 @@ msgid "Elementaristenwaechter"
 msgstr ""
 
 #: npc.xml
-msgid "Vorarbeiter Nekromant"
+msgid "Overlooker Necromancer"
+msgstr ""
+
+#: dwarfenwall.lua
+msgid "Skinny Necromancer"
+msgstr ""
+
+#: dwarfenwall.lua
+msgid "Scarfaced Necromancer"
 msgstr ""
 
 #: npc.xml
@@ -3438,4 +3458,20 @@ msgstr ""
 
 #: medairnpc.xml
 msgid "Fenor Marken"
+msgstr ""
+
+#: fortify_dwarfenwall.xml
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##female"
+msgstr ""
+
+#: fortify_dwarfenwall.xml
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##male"
+msgstr ""
+
+#: fortify_dwarfenwall.xml
+msgid "You are better prepared to suffer the consequences, wretched creature."
 msgstr ""
