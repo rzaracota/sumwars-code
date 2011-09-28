@@ -3536,6 +3536,10 @@ msgstr "Cain"
 msgid "Fenor Marken"
 msgstr "Fenor Marken"
 
+#: theFissure.xml
+msgid "Unknown Lich"
+msgstr ""
+
 #: fortify_dwarfenwall.xml
 msgid ""
 "Reverse this at once or every guard of Aisen will be on your trail, Cursed "

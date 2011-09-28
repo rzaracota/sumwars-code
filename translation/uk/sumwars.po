@@ -3622,6 +3622,10 @@ msgstr "Каїн"
 msgid "Fenor Marken"
 msgstr "Ферон Маркен"
 
+#: theFissure.xml
+msgid "Unknown Lich"
+msgstr "Невідомий Ліч"
+
 #: fortify_dwarfenwall.xml
 msgid ""
 "Reverse this at once or every guard of Aisen will be on your trail, Cursed "
@@ -3639,6 +3643,3 @@ msgstr ""
 #: fortify_dwarfenwall.xml
 msgid "You are better prepared to suffer the consequences, wretched creature."
 msgstr "Краще підготуйся страждати    від наслідків, нещасна істота."
-
-#~ msgid "Unknown Lich"
-#~ msgstr "Невідомий Ліч"
