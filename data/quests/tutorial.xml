@@ -1768,6 +1768,7 @@
 					speak("Derred",_("The Lord Master thought that you could do considerably more than dully beat your enemies."),"thoughtful")
 				end
 				speak("PL",_("Really?"))
+				executeInDialog('tutorial.phase = "findSecretDoor"')
 				
 				tutorial_tmp.skill_continue = true
 				
@@ -1826,7 +1827,6 @@
 					local door = getObjectByNameRef("doorSecretLibrary");
 					scriptobjectvar[door]["locked"] = false;
 					executeInDialog("setCutsceneMode(false)");
-					executeInDialog('tutorial.phase = "findSecretDoor"')
 			   </Effect>
 		</Topic>
 	
