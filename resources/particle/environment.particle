@@ -1,4 +1,4 @@
-//blockade of fire
+﻿//blockade of fire
 FirewallBlock
 {
     material        Flare
@@ -367,3 +367,5 @@ EarthGush
 }
 
 }
+
+//machinery

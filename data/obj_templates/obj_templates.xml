@@ -7,20 +7,89 @@ MONSTER
 TRADER
 FIXED_OBJECT
 -->
-<!--
-<ObjectTemplate name="$tree" type="FIXED_OBJECT">
-        <Environment name="meadow" default="true">
-                <Object name="tree1" />
-                <Object name="tree2" />
-                <Object name="tree3" />
-        </Environment>
-        <Environment name="hills">
-                <Object name="tree4" />
-        </Environment>
-		<Environment name="cave">
+
+<ObjectTemplate name="$construction_crane" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="crane" />
         </Environment>
 </ObjectTemplate>
--->
+<ObjectTemplate name="$corpse_slugs_dissect" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="fireSlugExp1" />
+				<Object name="mutantSlugExp1" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$corpse_slugs_overhaul" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+				<Object name="fireSlugExp2" />
+				<Object name="mutantSlugExp2" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$corpse_slugs_dead" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="fireSlugExp3" />
+				<Object name="mutantSlugExp3" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$corpse_louses_dead" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="fireLouseExp1" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$corpse_councilGuard" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+				<Object name="councilGuardCorpse1" />
+				<Object name="councilGuardCorpse2" />
+                <Object name="councilGuardCorpse3" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$corpse_councilSlave" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+				<Object name="councilSlaveCorpse1" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$script_berry_bush" type="SCRIPTOBJECT">
+        <Environment name="hills" default="true">
+                <Object name="berryBush" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$script_cogLean" type="SCRIPTOBJECT">
+        <Environment name="council" >
+                <Object name="cogScript_lean" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$script_crane" type="SCRIPTOBJECT">
+        <Environment name="council" >
+                <Object name="councilCrane" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$script_councilExperiment" type="SCRIPTOBJECT">
+        <Environment name="council" >
+                <Object name="councilExperiment" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$script_energySource" type="SCRIPTOBJECT">
+        <Environment name="council" >
+                <Object name="energySource" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$script_mechanism" type="SCRIPTOBJECT">
+        <Environment name="council" >
+                <Object name="mechanismCouncilCrane" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$script_sarkophagus" type="SCRIPTOBJECT">
+        <Environment name="cave" default="true">
+                <Object name="sarkophagusMaylon" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$script_teleporter" type="SCRIPTOBJECT">
+        <Environment name="council" >
+                <Object name="hole" />
+        </Environment>
+</ObjectTemplate>
+
 <ObjectTemplate name="$flower" type="FIXED_OBJECT">
         <Environment name="hills" default="true">
                 <Object name="flower1" />
@@ -37,22 +106,6 @@ FIXED_OBJECT
                 <Object name="bush" />
         </Environment>
 		<Environment name="cave"/>
-</ObjectTemplate>
-
-<ObjectTemplate name="$script_berry_bush" type="SCRIPTOBJECT">
-        <Environment name="hills" default="true">
-                <Object name="berryBush" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$script_sarkophagus" type="SCRIPTOBJECT">
-        <Environment name="cave" default="true">
-                <Object name="sarkophagusMaylon" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$script_teleporter" type="SCRIPTOBJECT">
-        <Environment name="council" >
-                <Object name="hole" />
-        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$border" type="FIXED_OBJECT">
@@ -650,30 +703,6 @@ FIXED_OBJECT
                 <Object name="ground_squ_s" />
         </Environment>
 		<Environment name="meadow" default = "true" />
-</ObjectTemplate>
-
-<ObjectTemplate name="$corpse_slugs_dissect" type="FIXED_OBJECT">
-        <Environment name="council" default = "true">
-                <Object name="fireSlugExp1" />
-				<Object name="mutantSlugExp1" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$corpse_slugs_overhaul" type="FIXED_OBJECT">
-        <Environment name="council" default = "true">
-				<Object name="fireSlugExp2" />
-				<Object name="mutantSlugExp2" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$corpse_slugs_dead" type="FIXED_OBJECT">
-        <Environment name="council" default = "true">
-                <Object name="fireSlugExp3" />
-				<Object name="mutantSlugExp3" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$corpse_louses_dead" type="FIXED_OBJECT">
-        <Environment name="council" default = "true">
-                <Object name="fireLouseExp1" />
-        </Environment>
 </ObjectTemplate>
 
 <ObjectTemplate name="$scaffolding" type="FIXED_OBJECT">

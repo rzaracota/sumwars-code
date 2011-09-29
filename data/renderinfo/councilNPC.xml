@@ -98,6 +98,11 @@
 		<Animation name = "attackTwoHands"/>
 	</Action>
 </RenderInfo>
+<RenderInfo name = "slave_overseer" parent="playerbase">
+	<Entity source="slave_m.mesh"/>
+	<Entity objectname="head" bone="crown" source="head_m1.mesh" />
+	<Entity objectname="helm" bone="crown" source="capRed.mesh" />
+</RenderInfo>
 
 <RenderInfo name = "councilMage" parent="guardPoleBase">
 	<Entity source="soren.mesh"/>

@@ -251,6 +251,8 @@
 				addAnswer("400 fixed objects","fixed1");
 				addAnswer("1600 fixed objects","fixed2");
 				addAnswer("6400 fixed objects","fixed3");
+				addAnswer("1024 alfisko objects","alfisko1");
+				addAnswer("10000 alfisko objects","alfisko2");
 				addAnswer("25 animated objects","animated1");
 				addAnswer("100 animated objects","animated2");
 				addAnswer("400 animated objects","animated3");
@@ -294,6 +296,27 @@
 				objectinfo["neardist"] = 120;
 				objectinfo["type"]="signpost";
 				objectinfo["num"] = 80;
+				
+				insertTrigger("init_benchmark");
+			</Effect>
+		</Event>
+		
+		<Event trigger ="alfisko1" >
+			<Effect>
+				objectinfo["fardist"] = 160;
+				objectinfo["neardist"] = 120;
+				objectinfo["type"]="alfiskoSmall";
+				objectinfo["num"] = 32;
+				
+				insertTrigger("init_benchmark");
+			</Effect>
+		</Event>
+		<Event trigger ="alfisko2" >
+			<Effect>
+				objectinfo["fardist"] = 160;
+				objectinfo["neardist"] = 120;
+				objectinfo["type"]="alfiskoSmall";
+				objectinfo["num"] = 100;
 				
 				insertTrigger("init_benchmark");
 			</Effect>
@@ -399,7 +422,9 @@
 		
 		<Event trigger ="end_benchmark" >
 			<Effect>
+				print("trying to delete objects")
 				for index,id in pairs(created_objects) do
+					print("deleting object "..id)
 					deleteObject(id);
 				end
 				setCutsceneMode(false);

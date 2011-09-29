@@ -3,6 +3,7 @@
 	<Init>
 		tutorial.phase="intro"
 		tutorial.phasenr =0;
+		tutorial.craneRepair=0;
 	</Init>
 	
 	<Description>
@@ -28,6 +29,13 @@
 		<Event trigger="create_region" once="true">
 			<Effect>
 				if (tutorial.finished == false) then
+					local ice = getObjectByNameRef("experimentIce")
+					local fire =  getObjectByNameRef("experimentFire")
+					local air =  getObjectByNameRef("experimentAir")
+					scriptobjectvar[ice]["color"] = 0;
+					scriptobjectvar[fire]["color"] = 0;
+					scriptobjectvar[air]["color"] = 0;
+				
 					addArea("entryPlayerArea",{"circle","locEntryPlayer",5});
 					addArea("dangerArea",{"circle","locBackroute2",4});
 					addArea("mutantSlugsArea",{"rect","locBackroute3",{5,5}});
@@ -45,17 +53,40 @@
 					if (tutorial.phase == "fightslugs") then
 						groupObjectsArc({tutorial_tmp.tolec,tutorial_tmp.derred} ,"locWay2","locBehemothView",nil,30);
 					end;
-					if (tutorial.phase == "findSecretDoor") then
+					if (tutorial.phase == "earthquake") then
 						groupObjectsArc({tutorial_tmp.tolec,tutorial_tmp.derred} ,"locSlugView","locSlugs",nil,30);
+					end;
+					if (tutorial.phase == "escapeCaves") then
+						groupObjectsArc({tutorial_tmp.tolec,tutorial_tmp.derred} ,"locBackroute3","locPartySkills",nil,30);
+					end;
+					if (tutorial.phase == "findSecretDoor") then
+						groupObjectsArc({tutorial_tmp.tolec,tutorial_tmp.derred} ,"locBackroute2","locPartySkills",nil,30);
 					end;
 					if (tutorial.phase == "killlouses") then
 						groupObjectsArc({tutorial_tmp.tolec,tutorial_tmp.derred} ,"locBackroute5","locPartyLib",nil,30);
 					end;
 					
-					-- nur bei den Phasen intro, learnwalk, fightslugs
+					-- only for phases intro, learnwalk, fightslugs
 					if (2 >= tutorial.phasenr) then
 						createMonsterGroup("tutorialSlugs","locSlugs",8);
 						tutorial_tmp.slugs =0;
+					end;
+					
+					if(3 >= tutorial.phasenr)then
+						local objectName = "slugHole"
+						local object = getObjectByNameRef(objectName)
+						getObjectOutOfWay(object)
+						set(object,"usable",false)
+						setObjectFlag(object,"usable",false);
+						for i = 1, 5 do
+							objectName = "slugDebris"..i
+							object = getObjectByNameRef(objectName)
+							getObjectOutOfWay(object)
+						end;
+					end;
+					
+					if(tutorial.energy==true)then
+						deleteObject(getObjectByNameRef("energySource")) --TODO: doesn't work at all
 					end;
 					
 					tutorial_tmp.bguard1 = createObject("council_guard","locDoorGuardNorth");
@@ -66,7 +97,7 @@
 					setRefName(tutorial_tmp.bguard2, "Wache");
 					lookAt(tutorial_tmp.bguard2,getLocation("locBehemoth"));
 					
-					-- ab Phase fightslugs
+					-- since phase fightslugs
 					
 				
 				
@@ -150,6 +181,11 @@
 				if (tutorial.phasenr > 3) then
 					deleteObject(getObjectByNameRef("doorBehemothNorth"));
 				end;
+				
+				if(tutorial.energy==true)then
+					deleteObject(getObjectByNameRef("energySource"))
+				end;
+					
 			</Effect>
 		</Event>
 		
@@ -338,6 +374,25 @@
 		</Event>
 	</Region>
 
+	<Region name="elCnlLowerCaves">
+		<Event trigger="create_region">
+			<Effect>
+				local mechanism = getObjectByNameRef("mechanism")
+				setObjectAnimation(mechanism,"deleteCog", 0)
+				setObjectAnimation(mechanism,"deleteEnergy", 0)
+				if(1 > tutorial.craneRepair )then
+					-- nothing done yet
+					setObjectAnimation(mechanism,"deleteCog", 0)
+					setObjectAnimation(mechanism,"deleteEnergy", 0)
+				end
+				if(2 > tutorial.craneRepair)then
+					--no cog yet
+					setObjectAnimation(mechanism,"deleteCog", 0)
+				end
+					
+			</Effect>
+		</Event>
+	</Region>
 	<NPC refname="Derred">
 		<Topic name="give_weapons" start_option="Surrender weapons">
 			<Condition>
@@ -924,6 +979,7 @@
 				tutorial_tmp.assemble = "fightslugs";
 			</Effect>
 		</Event>
+		<!-- begin of needed changes-->
 		<Event trigger="party_complete" once="true">
 			<Condition>
 				return (tutorial_tmp.assemble == "fightslugs");
@@ -959,9 +1015,11 @@
 				speak("Tolec",_("Hm, right. The Lord Master said that something like this could happen. Do you know how to convert this power into proper abilities?"),"thoughtful");
 				
 				tutorial_tmp.behemoth_show = true;
-				tutorial.phase = "findSecretDoor";
-				tutorial.phasenr = 3;
 				
+				--tutorial.phasenr = 3;
+				tutorial.phase = "earthquake";
+				tutorial.phasenr = 3;
+				--WORKINPROGRESS
 				setTopicBase("Tolec");
 				addQuestion("Explain level up?");
 				addAnswer(_("Yes"),"explain_levelup");
@@ -974,7 +1032,8 @@
 	<NPC refname="Tolec">
 		<Topic name="explain_levelup" start_option="Explain level up">
 			<Condition>
-				return (tutorial.phase == "findSecretDoor" and tutorial_tmp.fooddoor_open ~= true)
+				--return (tutorial.phase == "findSecretDoor" and tutorial_tmp.fooddoor_open ~= true)
+				return (tutorial.phase == "earthquake" and tutorial_tmp.fooddoor_open ~= true)
 			</Condition>
 			<Effect>
 				addSpeaker(tutorial_tmp.derred,"Derred",true);
@@ -1049,7 +1108,7 @@
 	<NPC refname="Derred">
 		<Topic name="open_fooddoor" start_option="Open hatch">
 			<Condition>
-				return (tutorial.phase == "findSecretDoor" and tutorial_tmp.fooddoor_open ~= true)
+				return (tutorial.phase == "earthquake" and tutorial_tmp.fooddoor_open ~= true)
 			</Condition>
 			<Effect>
 				local players = getPlayers();
@@ -1067,7 +1126,7 @@
 					speak("Derred",_("Please distribute your attribute points first."));
 					return;
 				end;
-				
+
 				local door = getObjectByNameRef("slugFarmFoodDoor");
 				addUnitCommand(tutorial_tmp.derred,"walk",door,2);
 				tutorial_tmp.backroute =1;
@@ -1078,7 +1137,7 @@
 	<NPC refname="Tolec">
 		<Topic name="open_fooddoor" start_option="Open hatch">
 			<Condition>
-				return (tutorial.phase == "findSecretDoor" and tutorial_tmp.fooddoor_open ~= true)
+				return (tutorial.phase == "earthquake" and tutorial_tmp.fooddoor_open ~= true)
 			</Condition>
 			<Effect>
 				addSpeaker(tutorial_tmp.derred,"Derred",true);
@@ -1094,6 +1153,8 @@
 				return (trigger.unit == tutorial_tmp.derred and tutorial_tmp.backroute ==1 and tutorial_tmp.fooddoor_open ~= true)
 			</Condition>
 			<Effect>
+				setCutsceneMode(true)
+				addCameraPosition(0,"locBackroute2" , -120,40, 20);
 				tutorial_tmp.slugs = createMonsterGroup("tutorialMutantSlugs","locBackroute3",3);
 				tutorial_tmp.slugnr = table.getn(tutorial_tmp.slugs);
 				
@@ -1108,22 +1169,14 @@
 				addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute1");
 				addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute2",1);
 				tutorial_tmp.see_louse = false;
+				startTimer("slugs2_scene_intro",2000)
 			</Effect>
 		</Event>
-		<Event trigger="player_moved" once="true">
-			<Condition>
-				if (tutorial_tmp.see_louse == false) then
-					return (unitIsInArea(trigger.player,"dangerArea"));
-				else
-					return false;
-				end;
-			</Condition>
+		<Event trigger="slugs2_scene_intro" once="true">
 			<Effect>
-				setCutsceneMode(true);				
-				addCameraPosition(0,"locBackroute2" , -90,40, 20);
+				addCameraPosition(0,"locBackroute2" , -120,40, 20);
 				addCameraPosition(1000,"locBackroute3" , -90,40, 20);
 				startTimer("slugs2_scene",4000);
-				
 			</Effect>
 		</Event>
 		<Event trigger="slugs2_scene" once="true">
@@ -1161,7 +1214,7 @@
 				end;
 			</Effect>
 		</Event>
-		<Event trigger="slugs2_dialog" >
+		<Event trigger="slugs2_dialog" once="true">
 			<Effect>
 				addCameraPosition(0,"locBackroute2",-90,45,13);
 				
@@ -1187,61 +1240,478 @@
 			</Effect>
 		</Event>
 		
-		<Event trigger="walk_backroute3" >
+		<Event trigger="walk_backroute3" once="true">
 			<Effect>
-				setCutsceneMode(false);
+				--setCutsceneMode(false);
 				addUnitCommand(tutorial_tmp.derred,"walk","locBackroute3",1);
 				addUnitCommand(tutorial_tmp.tolec,"walk","locBackroute3",1);
+				
+				startTimer("ceiling_crumbling",2500);
+
+				local pos = getLocation("locBehemoth");
+				addCameraPosition(0,"locBehemoth" , 90,20, 20);
+				addCameraPosition(1000,"locBehemoth" , 90,20, 20);
+				
+				moveObject(tutorial_tmp.behemoth, "locBehemoth");
+				lookAtObject(tutorial_tmp.behemoth, tutorial_tmp.bguard1);
+				
+				quake("locBehemoth", "locQuake2",{90,20,20},10)
+				addUnitCommand(tutorial_tmp.behemoth,"tutorial_behemoth_fire_storm",tutorial_tmp.bguard1);
+			</Effect>
+		</Event>
+		<Event trigger="ceiling_crumbling" once="true">
+			<Effect>
+				startTimer("party_break_down",2000)
+				unitSpeak(getPartyleader(),_("Just great!"),"angry",1500)
+				quake("locSlugs", "locSlugQuake",{-90,40,20},15)
+				pos1 = get(getObjectByNameRef("slugDebris1"),"position")
+				pos2 = get(getObjectByNameRef("slugDebris2"),"position")
+				pos3 = get(getObjectByNameRef("slugDebris3"),"position")
+				pos4 = get(getObjectByNameRef("slugDebris4"),"position")
+				pos5 = get(getObjectByNameRef("slugDebris5"),"position")
+				tutorial_tmp.emitter1 = createObject("smokeEmitter", pos1)
+				tutorial_tmp.emitter2 = createObject("smokeEmitter", pos2)
+				tutorial_tmp.emitter3 = createObject("smokeEmitter", pos3)
+				tutorial_tmp.emitter4 = createObject("smokeEmitter", pos4)
+				tutorial_tmp.emitter5 = createObject("smokeEmitter", pos5)
+				timedExecute("fadeOut(1000)",1000)
+			</Effect>
+		</Event>
+		<Event trigger="party_break_down" once="true">
+			<Effect>
+				assembleParty("elCnlLowerCaves","construction:locFallDown");
+				tutorial_tmp.assemble = "crash";
+				startTimer("breakDownCleanup",1000)
+			</Effect>
+		</Event>
+		<Event trigger="breakDownCleanup" once="true">
+			<Effect>
+				deleteObject(tutorial_tmp.emitter1)
+				deleteObject(tutorial_tmp.emitter2)
+				deleteObject(tutorial_tmp.emitter3)
+				deleteObject(tutorial_tmp.emitter4)
+				deleteObject(tutorial_tmp.emitter5)
+				
+				local objectName = "slugHole"
+				local object = getObjectByNameRef(objectName)
+				getObjectOnFloor(object)
+				set(object,"usable",true)
+				for i = 1, 5 do
+					objectName = "slugDebris"..i
+					object = getObjectByNameRef(objectName)
+					getObjectOnFloor(object)
+				end;
+
+				fadeIn(0,{0.4,0.4,0.4},{1.0,1.0,1.0},{0.3,0.3,0.3})
+				setCutsceneMode(false)
+			</Effect>
+		</Event>
+
+		<!-- end of obsolete events -->
+	</Region>
+	
+	<Region name="elCnlLowerCaves">
+		<Event trigger= "party_complete" once = "true">
+			<Condition>
+				return (tutorial_tmp.assemble == "crash");
+			</Condition>
+			<Effect>
+				fadeOut(0)
+				insertTrigger("party_down")
+			</Effect>
+		</Event>
+		<Event trigger="party_down" once="true">
+			<Effect>
+				groupObjectsArc(getPlayers(),"construction:locFallDownArc","construction:locFallDown",nil,45);
+				fadeIn(1000, {0.0,0.0,0.0},{1.0,1.0,1.0},{0.0,0.0,0.0})
+				setCutsceneMode(true)
+				addCameraPosition(0,"construction:locFallDown" , -90,70, 20);
+				
+				tutorial_tmp.tolec_d = createObject("tolec", "labCon:entry_lab");
+				setRefName(tutorial_tmp.tolec_d, "Tolec");
+				
+				tutorial_tmp.derred_d = createObject("derred", "labCon:entry_lab");
+				setRefName(tutorial_tmp.derred_d, "Derred");
+				
+				initDialog()
+				addSpeaker(tutorial_tmp.tolec_d,"Tolec",true);
+				addSpeaker(tutorial_tmp.derred_d,"Derred",true);
+				local priest = getSpeaker("priopt")
+				local warrior = getSpeaker("waropt")
+				local leader = getSpeaker("PL")
+				
+				speak("PL",_("Damn this place!"),"injured1")
+				if(solo())then
+					speak("PL",_("If it goes to pieces completely I will be trapped down here because of what they've done to me."),"injured1")
+					speak("Derred",_("Are you all right down there? ##solo"),"warcry")
+				else
+					speak("PL",_("If it goes to pieces completely we will be trapped down here because of what they've done to us."),"injured1")
+					if(leader==priest)then
+						speak("priopt",_("No matter."), "aloof")
+					end
+						speak("priopt", _("If there is a way out of here, we'll find it."),"aloof")
+						if(warrior ~=priest)then
+							speak("waropt", _("Yeah, even if we have to use our teeth."),"grin")
+						end;
+						setSpeakerEmotion("priopt","normal")
+						setSpeakerEmotion("priopt","normal")
+						speak("Derred",_("Are you all right down there?"),"warcry")
+				end
+				setSpeakerEmotion("Derred","normal")
+				if(solo())then
+					speak("waropt",_("Like hell I am! How do I get out of here?"),"warcry")
+				else
+					speak("waropt",_("Like hell we are! How do we get out of here?"),"warcry")
+				end;
+				setSpeakerEmotion("waropt","normal")
+				speak("Tolec",_("The path is blocked from our side and we can't get to you."),"warcry")
+				speak("Tolec",_("You'll have to find another way out."),"warcry")
+				speak("Derred",_("There should be workers down there."),"warcry")
+				speak("Derred",_("Maybe they can help. We will wait here."),"warcry")
+				setSpeakerEmotion("Derred","normal")
+				speak("magopt",_("Damn them! Not exactly what I would call 'customer service'."),"angry")
+				speak("archer",_("They better have some serious coin for all this trouble."),"angry")
+				changeTopic("breakDownComplete")
+			</Effect>
+		</Event>
+		<Event trigger="breakDownComplete">
+			<Effect>
+				setCutsceneMode(false)
+				tutorial.phase="escapeCaves"
+				tutorial.phasenr = 4;
+				deleteObject(tutorial_tmp.tolec_d)
+				deleteObject(tutorial_tmp.derred_d)
 			</Effect>
 		</Event>
 		
 		<Event trigger="player_moved" once="true">
 			<Condition>
-				if (tutorial.phase == "findSecretDoor") then
-					return (unitIsInArea(trigger.player,"areaDanger"));
+				return (tutorial.phase == "escapeCaves" and (unitIsInArea(trigger.player,"construction:areaFirstContact")) and (tutorial.metSlaves ~= true))
+			</Condition>	
+			<Effect>
+				setCutsceneMode(true)
+				addCameraPosition(0,get(trigger.player,"position") , -90,70, 20);
+				
+				fadeOut(1000)
+				startTimer("firstContact",1200)
+			</Effect>
+		</Event>
+		<Event trigger="firstContact" once="true">
+			<Effect>
+				fadeIn(1000, {0.0,0.0,0.0},{1.0,1.0,1.0},{0.0,0.0,0.0})
+				addCameraPosition(0,"construction:locOverseerStart" , -90,70, 20);
+				
+				moveObject(tutorial_tmp.overseer,"construction:locOverseerStart")
+				
+				groupObjectsArc(getPlayers(),"construction:locParty","construction:locOverseerStart",nil,45);
+				moveObject(getPartyleader(),"construction:locPartyLeader")
+				
+				initDialog()
+				addSpeaker(tutorial_tmp.overseer,"overseer")
+				addSpeaker(tutorial_tmp.slave5,"slave")
+				
+				speak("overseer",_("Move it you lazy maggots! This place is not building itself."),"angry")
+				changeTopic("cameraRotation")
+			</Effect>
+		</Event>
+		<Event trigger="cameraRotation" once="true">
+			<Effect>
+				addCameraPosition(2000,"construction:locOverseerStart" , 90,60, 20);
+				lookAtEachOther(getPartyleader(),tutorial_tmp.overseer)
+				
+				speak("overseer",_("Finally you guards return..."),"happy")
+				speak("overseer",_("Wait, who are you?"),"surprised")
+				if(solo())then
+					speak("PL",_("I'm someone who is stuck down here, that's who."),"normal")
 				else
-					return false;
+					speak("PL",_("We are people who are stuck down here, that's who."),"normal")
+				end;
+				speak("PL",_("Do you know how to get out of here?"),"normal")
+				speak("overseer",_("Sorry, no. The stairway collapsed earlier."),"sad")
+				speak("arcopt",_("There's only one way down here?!"),"unhappy")
+				speak("arcopt",_("Have you not thought about what could happen with your pet monsters up there?"),"unhappy")
+				speak("overseer",_("This is not for me to decide."),"offended")
+				speak("overseer",_("It is through the Council's will and Akeran's wisdom."),"happy")
+				speak("priopt",_("And if you die here?"),"thoughtful")
+				speak("overseer",_("If that's how it is decided, we will work here until our time comes."),"happy")
+				speak("overseer",_("We all think alike here."),"happy")
+				speak("slave",_("..."),"injured2",2000)
+				speak("PL",_("Be that as it may, but is there another way to get out of here?"),"unhappy")
+				if(not solo())then
+					speak("arcopt",_("Preferably today."),"aloof")
+				end
+				speak("overseer",_("Well, there might be."),"normal")
+				speak("overseer",_("You see that crane over there?"),"normal")
+				changeTopic("showCrane")
+			</Effect>
+		</Event>
+		<Event trigger="showCrane">
+			<Effect>
+				--TODO camera
+				speak("overseer",_("It was damaged by falling rocks earlier."),"normal")
+				speak("overseer",_("You could use it to get to the sewer tunnels that connect the different levels of this most magnificent construction."),"normal")
+				speak("PL",_("I suppose as you suggested this plan, you have a way of repairing it?"),"aloof")
+				speak("overseer",_("Of course I have a plan."),"amused")
+				speak("overseer",_("I sent one of my workers to get a cog earlier."),"amused")
+				speak("overseer",_("If he hasn't been eaten by the slugs out there, he should be back any minute now."),"amused")
+				speak("overseer",_("Why don't you get an energy crystal in the meantime?"),"amused")
+				speak("overseer",_("Without it the whole crane is useless."),"amused")
+				speak("any",_("And where would one get an energy crystal in these forsaken caves?"),aloof)
+				speak("overseer",_("These halls are not forsaken!"),"offended")
+				speak("overseer",_("They are filled with the unfathomable wisdom of Akeran and will soon be one of the greatest works in his name."),"offended")
+				speak("arcopt",_("Of course. So, where?"),unhappy)
+				speak("overseer",_("Akeran protects, Akeran guides."),"happy")
+				speak("overseer",_("Look for a connection to a laboratory on the upper level."),"happy")
+				speak("overseer",_("You can go there and... borrow one, if you're lucky."),"happy")
+				speak("overseer",_("Just ask the master of the laboratory and he will surely give you one, if you're found worthy of Akeran's blessing."),"happy")
+				speak("magopt",_("This man is beginning to test my patience."),unhappy)
+				if(not solo())then
+					local mage = getSpeaker("magopt")
+					local other = getSpeaker("arcopt")
+					--makes sure the mage talks to another person
+					if(mage == other)then
+						other = getSpeaker("waropt")
+						if(mage == other)then
+							other = getSpeaker("priopt")
+						end
+					end
+					addSpeaker(other,"other")
+					speak("other",_("Let's just get the crystal. I'm sure we will get Akeran's blessing."),grin)
+					speak("magopt",_(""),grin,1000)
+				end
+				changeTopic("firstContactEnd")
+			</Effect>
+		</Event>
+		<Event trigger="firstContactEnd">
+			<Effect>
+				tutorial.metSlaves = true
+				setCutsceneMode(false)
+				tutorial_tmp.assemble = "talkedToOverseer"
+				addUnitCommand(tutorial_tmp.overseer,"walk","construction:locOverseer")
+			</Effect>
+		</Event>
+		<!-- Scene 2 - the party meets the workers
+		 
+		camera movement over the overseer and his three sla... underlings, who are working, two guards and three slaves are lying dead on the ground
+		-->
+		<Event trigger="command_complete">
+			<Condition>
+				return(trigger.unit== tutorial_tmp.overseer and tutorial_tmp.assemble == "talkedToOverseer")
+			</Condition>
+			<Effect>
+				set(tutorial_tmp.overseer,"angle",180)
+			</Effect>
+		</Event>
+		<!-- enter the lab connection -->
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				return((tutorial_tmp.enteredConnection ~= true) and (unitIsInArea(trigger.player,"labCon:areaSewerLabConnection")))
+			</Condition>
+			<Effect>
+				print("entered sewer connection")
+				--createFloatingText("entered the first event",get(trigger.player,"position"))
+				unitSpeak(trigger.player,_("This looks like it could be a way up."))
+				tutorial_tmp.enteredConnection = true
+				if(solo())then
+					tutorial_tmp.secondConnection = true
+				end
+				tutorial_tmp.connectionTalker = trigger.player
+				tutorial_tmp.labTalk = true
+			</Effect>
+		</Event>
+		<Event trigger="player_moved" once="true">
+			<Condition>
+				return ((tutorial_tmp.enteredConnection == true) and (tutorial_tmp.secondConnection ~= true) and (trigger.player ~= tutorial_tmp.connectionTalker) and (unitIsInArea(trigger.player,"labCon:areaSewerLabConnection")))
+			</Condition>
+			<Effect>
+				unitSpeak(trigger.player,_("Let's just try it out."))
+				tutorial_tmp.secondConnection = true
+			</Effect>
+		</Event>
+		
+		<Event trigger="cogLeanClicked" once="true">
+			<Effect>
+				tutorial.cog=true;
+				deleteObject(getObjectByNameRef("repairCog"));
+			</Effect>
+		</Event>
+	</Region>
+	<!-- Lab -->
+	<Region name="elCnlLobby">
+		<!-- Party enters the lab -->
+		<Event trigger="enter_region" once="true">
+			<Condition>
+				--TODO: replace with a safer check by area
+				return tutorial_tmp.labTalk==true
+			</Condition>
+			<Effect>
+				fadeOut(0)
+				fadeIn(2000, {0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3})
+				setCutsceneMode(true)
+				addCameraPosition(0,"entry_lab" , -90,70, 20);
+				assembleParty("elCnlLobby","entry_lab")
+				tutorial_tmp.assemble="lab"
+			</Effect>
+		</Event>
+		<Event trigger="party_complete" once="true">
+			<Condition>
+				return tutorial_tmp.assemble=="lab"
+			</Condition>
+			<Effect>
+				initDialog()
+
+				speak("magopt",_("So, this really is the lab, and that should be the crystal"),"thoughtful")
+				--TODO camera movement
+				speak("magopt",_("but there is no oh-so-blessed master here."),"thoughtful")
+				speak("arcopt",_("Then he can't have any objections, can he?"),"grin")
+				if(solo())then
+					speak("magopt",_("I'd better be careful, though."),"thoughtful")
+					speak("magopt",_("This doesn't look like I can simply take it."),"thoughtful")
+					speak("magopt",_("I guess I would first have to stop whatever is using the crystal right now."),"thoughtful")
+				else
+					local leader = getSpeaker("PL")
+					local archer = getSpeaker("arcopt")
+					
+					if(leader ~=archer)then
+						speak("PL",_("I guess not."),"grin")
+					end;
+					speak("PL",_("Let's just take it."),"grin")
+					speak("magopt",_("Better be careful, though."),"thoughtful")
+					speak("magopt",_("This doesn't look like you can simply take it."),"thoughtful")
+					speak("magopt",_("I guess we would first have to stop whatever is using the crystal right now."),"thoughtful")
+				end;
+				changeTopic("endLabTalk")
+				
+			</Effect>
+		</Event>
+		<Event trigger="endLabTalk">
+			<Effect>
+				setCutsceneMode(false)
+			</Effect>
+		</Event>
+
+		<!-- The Party gets the energy source-->		
+		<Event trigger="energySourceUsed">
+			<Effect>
+				local esrc = getObjectByNameRef("energySource")
+				local stat = experimentStatus();
+				
+				if(stat==3)then
+					--print("the source was aquired")
+					tutorial.energy = true
+					deleteObject(esrc) --TODO: doesn't work at all
+				else
+					print("wrong combination")
+					if(stat==0)then
+						--print("you were frozen")
+					elseif(stat==1)then
+						--print("you were electrocuted")
+					elseif(stat==2)then
+						--print("you were burnt")
+					else
+						--print("nothing really happens")
+					end;
+					timedExecute('scriptobjectvar['..esrc..']["lockdown"] = nil',500);
+				end;
+			</Effect>
+		</Event>
+	</Region>
+	<!-- party repairs the crane -->
+	<Region name="elCnlLowerCaves">
+		<Event trigger="mechanismClicked" once="true">
+			<Condition>
+			-- tutorial.craneRepair(1=energy, 2=cog, 3 = all done)
+			--TODO repair the mechanism
+				--if(energy==true and 1 > tutorial.craneRepair)then
+				--	setObjectAnimation(trigger.used_object,"addEnergy", 0)
+				--	tutorial.craneRepair=1
+				--elseif(tutorial.cog==true and 2 > tutorial.craneRepair) then
+				--	setObjectAnimation(trigger.used_object,"addCog", 0)
+				--	tutorial.craneRepair=2
+				--elseif(tutorial.craneRepair==2)then
+					-- everything in place
+				--	setObjectAnimation(trigger.used_object,"rotateCogs", 8000)
+				--	return true;
+				--end		
+				--return false;
+				if(tutorial.energy==true and tutorial.cog==true)then
+					setObjectAnimation(trigger.used_object,"rotateCogs", 8000)
+					return (true)
 				end;
 			</Condition>
 			<Effect>
 				setCutsceneMode(true);
-				addCameraPosition(0,"locDanger2" , -90,70, 25);
-				startTimer("mutant_slug_attack",1000);
-				timedExecute("setCutsceneMode(false);",5000);
+				addCameraPosition(0,get(trigger.user,"position") , -90,70, 20);
+				tutorial.craneFunctional=true;
+				local crane = getObjectByNameRef("crane")
+				startTimer("rotateCrane",1600)
+				addTriggerVariable("crane",crane)
+				
+				initDialog()
+				addSpeaker(trigger.user,"User")
+				speak("User",_("Finally. Now, lets get out of here."),"normal")
+				executeInDialog("lookAtObject("..trigger.user..","..crane..")")
+				speak("User",_("And all it takes to get out of here is a walk through the sewers."),"unhappy")
+				executeInDialog("fadeOut(2000)")
+				speak("User",_("Again."),"unhappy")
+				changeTopic("useCrane")
 			</Effect>
 		</Event>
 		
-		<Event trigger="mutant_slug_attack" >
-			<Effect>
-				tutorial_tmp.mutslug_timer = { 0,1300,2400,11000,13000,16000,17000, 20000};
-				tutorial_tmp.mutslug_locs = {"locDanger1","locDanger4","locDanger3", "locDanger2", "locDanger5", "locDanger3", "locDanger2", "locDanger4"};
-				tutorial_tmp.mutslug_type = {"mutantSlug","fireSlug","mutantSlug","fireSlug", "mutantSlug","fireSlug","mutantSlug","mutantSlug"};
-				tutorial_tmp.mutslug_number = 8;
-				tutorial_tmp.mutslug_killed = 0;
-				tutorial_tmp.mutslug_attack = true;
-				
-				local i;
-				for i=1,tutorial_tmp.mutslug_number do
-				
-					timedExecute("local slug = createObject('"..tutorial_tmp.mutslug_type[i].."','"..tutorial_tmp.mutslug_locs[i].."'); set(slug,'angle',180); set(slug,'layer','air');", tutorial_tmp.mutslug_timer[i]);
-				end;
-			</Effect>
-		</Event>
-		
-		<Event trigger="unit_dead">
+		<Event trigger="mechanismClicked">
 			<Condition>
-				return (tutorial_tmp.mutslug_attack and (get(trigger.unit,"subtype") == "fireSlug" or get(trigger.unit,"subtype") == "mutantSlug"))
+				return tutorial.craneRepair==3
 			</Condition>
 			<Effect>
-				tutorial_tmp.mutslug_killed = tutorial_tmp.mutslug_killed+1;
-				
-				if (tutorial_tmp.mutslug_killed == tutorial_tmp.mutslug_number) then
-					tutorial_tmp.mutslugs_dead = true;
-					insertTrigger("explain_skills");
-				end;
-			</Effect>	
+				teleportPlayer(trigger.user,"elCnlLobby","locBackroute3")
+			</Effect>
 		</Event>
 		
+		<Event trigger="rotateCrane" once="true">
+			<Effect>
+				rotate(trigger.crane,90,1,50)
+			</Effect>
+		</Event>
+		<!-- teleport Party in front of the library-->
+		<Event trigger="useCrane" once="true">
+			<Effect>
+				assembleParty("elCnlLobby","locBackroute3");
+				setCutsceneMode(false);
+				fadeIn(0, {0,0,0},{1,1,1},{0,0,0});
+				tutorial.assemble="backToTD"
+				tutorial.craneRepair=3
+			</Effect>
+		</Event>
+	</Region>
+	<!-- party is back upstairs-->
+	<Region name="elCnlLobby">
+		<Event trigger="party_complete" once="true">
+			<Condition>
+				return tutorial.assemble=="backToTD"
+			</Condition>
+			<Effect>
+				
+				setCutsceneMode(true);
+				fadeOut(0)
+				moveObject(tutorial_tmp.tolec,"locBackroute2")
+				moveObject(tutorial_tmp.derred,"locDerredAfterCave")
+				
+				addCameraPosition(0,"locBackroute2" , -90,70, 20);
+				lookAtEachOther(tutorial_tmp.derred,tutorial_tmp.tolec)
+				
+				fadeIn(2000,{0.4,0.4,0.4},{1,1,1},{0.3,0.3,0.3})
+				
+				initDialog();
+				addSpeaker(tutorial_tmp.tolec,"Tolec",true)
+				addSpeaker(tutorial_tmp.derred,"Derred",true)
+				
+				speak("Derred",_("And then she says..."),"amused")
+				executeInDialog("lookAt(tutorial_tmp.tolec,'locBackroute3')")
+				speak("Tolec",_("Akerans Flaming Eyes, look over there!"),"surprised")
+				changeTopic("reemergence")
+			</Effect>
+		</Event>
+		<!--
 		<Event trigger="explain_skills" once="true">
 			<Effect>
 				createDialogue();
@@ -1267,12 +1737,53 @@
 				addAnswer(_("No"),"explain_skills_no");
 			</Effect>	
 		</Event>
+		-->
+		<Event trigger="reemergence">
+			<Effect>
+				playersLookAt("locBackroute2")
+				lookAt(tutorial_tmp.derred,"locBackroute3")
+				addCameraPosition(1000,"locBackroute3" , -90,70, 20);
+				addUnitCommand(tutorial_tmp.derred,"walk","locDerredSkills")
+				addUnitCommand(tutorial_tmp.tolec,"walk","locTolecSkills")
+				
+				if(solo())then
+					speak("PL",_("I am NOT doing that again."),"unhappy");
+					speak("archer",_("At least not until I got paid. Seriously paid."), "unhappy")
+					speak("Tolec",_("You made it!"),"happy")
+				else
+					speak("arcopt",_("We are NOT doing that again."),"unhappy");
+					speak("archer",_("At least not until we got paid. Seriously paid."), "unhappy")
+					speak("Tolec",_("They made it!"),"happy")
+				end
+				speak("waropt",_("No thanks to you guys."),"angry")
+				speak("priopt",_("Did you even know just how many escaped slugs you have in the basement?"),"unhappy")
+				speak("Tolec",_("It's not like they could kill you."),"grin")
+				speak("magopt",_("It still hurts being hurt, you know?"),"unhappy")
+				speak("Tolec",_("While we are on the topic..."),"normal");
+				if(solo())then
+					speak("Tolec",_("In fact, have you thought of using your powerful skills?##solo"), "normal")
+					speak("Derred",_("The Lord Master thought that you could do considerably more than dully beat your enemies.##solo"),"thoughtful")
+				else
+					speak("Tolec",_("In fact, have you thought of using your powerful skills?"), "normal")
+					speak("Derred",_("The Lord Master thought that you could do considerably more than dully beat your enemies."),"thoughtful")
+				end
+				speak("PL",_("Really?"))
+				
+				tutorial_tmp.skill_continue = true
+				
+				setTopicBase("Derred");
+				addQuestion(_("Explain skills?"),"all");
+				addAnswer(_("Yes"),"explain_skills");
+				addAnswer(_("No"),"explain_skills_no");
+				tutorial.assemble=""
+			</Effect>
+		</Event>
 	</Region>
 	
 	<NPC refname="Derred">
 		<Topic name="explain_skills" start_option="Explain skills">
 			<Condition>
-				return (tutorial.phase == "killlouses" or (tutorial.phase == "findSecretDoor" and tutorial_tmp.mutslugs_dead))
+				return (tutorial.phase == "killlouses" or (tutorial.phase == "findSecretDoor" and tutorial.craneRepair==3))
 			</Condition>
 			<Effect>
 				speak("Derred",_("With the 't'-key you open the skill window. Here you can choose a skill."));
@@ -1301,25 +1812,27 @@
 					speak("Tolec",_("Very well. The secret door is here."),"happy");
 					speak("Derred",_("Wait a second. What if the old geezer has attached a trap to it?"),"thoughtful");
 					if (solo() and femaleOnly()) then
-						speak("Tolec",_("You're right. It's best if you do it, Branded One. At least nothing lasting can happen that way."),"surprised") ;
+						speak("Tolec",_("You're right. It's best if you do it, Branded One. At least nothing lasting can happen that way.##female"),"surprised") ;
 					elseif(solo() and maleOnly())then
-						speak("Tolec",_("You're right. It's best if you do it, Branded One. At least nothing lasting can happen that way."),"surprised") ;
+						speak("Tolec",_("You're right. It's best if you do it, Branded One. At least nothing lasting can happen that way.##male"),"surprised") ;
 					else
-						speak("Tolec",_("You're right. It's best if you do it, Branded One. At least nothing lasting can happen that way."),"thoughtful");
+						speak("Tolec",_("You're right. It's best if you do it, Branded Ones. At least nothing lasting can happen that way."),"thoughtful");
 					end;
 					if(femaleOnly())then
-						speak("arcopt",_("'course. Send the Branded One first."),"unhappy");
+						speak("arcopt",_("'course. Send the Branded One first.##female"),"unhappy");
 					else
-						speak("arcopt",_("'course. Send the Branded One first."),"unhappy");
+						speak("arcopt",_("'course. Send the Branded One first.##male"),"unhappy");
 					end;
 					local door = getObjectByNameRef("doorSecretLibrary");
 					scriptobjectvar[door]["locked"] = false;
+					executeInDialog("setCutsceneMode(false)");
+					executeInDialog('tutorial.phase = "findSecretDoor"')
 			   </Effect>
 		</Topic>
 	
 		<Topic name="secret_door"  start_option="Open secret door">
 			<Condition>
-				return (tutorial_tmp.mutslugs_dead==true and tutorial_tmp.phase == "findSecretDoor");
+				return (tutorial.craneRepair==3 and tutorial_tmp.phase == "findSecretDoor");
 			</Condition>
 			<Effect>
 				addAllPlayersToDialog();
@@ -1335,7 +1848,7 @@
 	<NPC refname="Tolec">
 		<Topic name="secret_door" start_option="Open secret door">
 			<Condition>
-				return (tutorial_tmp.mutslugs_dead==true);
+				return (tutorial.craneRepair==3);
 			</Condition>
 			<Effect>
 				addAllPlayersToDialog();

@@ -748,6 +748,7 @@
 				set(fissure_tmp.mage,"walk_speed",3500);
 			
 				setObjectAnimation(fissure_tmp.bomb,"detonate",2000);
+				--TODO: insert quake function to replace the camerapositions
 				timedExecute('deleteObject('..fissure_tmp.bomb..');',2200);
 				addCameraPosition(100,"locSkeleton1",-90,45,10);
 				addCameraPosition(100,"locSkeleton2",-90,45,10);

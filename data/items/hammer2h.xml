@@ -155,7 +155,7 @@
 </Item>
 
 <!-- Silberschrecken -->
-<Item type="weapon" subtype="silver_hmr" name="silverterror" size="big">
+<Item type="weapon" subtype="silverTerror_hmr" name="silverterror" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
 	<RenderInfo name= "sledgeHammer" />
 	<Attribute
@@ -273,7 +273,7 @@
 </Item>
 
 <!-- Truemmerkopf -->
-<Item type="weapon" subtype="smash_hmr" name="smashhead" size="big">
+<Item type="weapon" subtype="crash_hmr" name="crashhead" size="big">
 	<Image image="set:sledgehammer.png image:full_image" />
 	<RenderInfo name= "sledgeHammer" />
 	<Attribute

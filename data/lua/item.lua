@@ -15,10 +15,10 @@ function findAndRemoveItem(owner,item)
 	end;
 end;
 
---prueft, ob ein Spieler ein Item besitzt
---owner: der Spieler
---item: Subtyp des gesuchten Items
---return: true, wenn der Spieler das Item besitzt ansonsten false
+--checks whether a player owns an item
+--owner: the player
+--item: subtype of the item to be checked
+--return: true, if player has item, false otherwise
 function hasItem(owner,item)
 	local itempos = searchPlayerItem(owner,item);
 	if(itempos~=0)then

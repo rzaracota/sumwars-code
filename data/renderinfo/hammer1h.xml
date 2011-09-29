@@ -56,10 +56,6 @@
 	<Entity source = "cermon_hmr.mesh"/>
 </RenderInfo>
 
-<RenderInfo name = "ceremonialHammer" parent= "oneHandHammerBase">
-	<Entity source = "cermon_hmr.mesh"/>
-</RenderInfo>
-
 <RenderInfo name = "ironHammer" parent= "oneHandHammerBase">
 	<Entity source = "iron_hmr.mesh"/>
 </RenderInfo>
