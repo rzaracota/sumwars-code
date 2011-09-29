@@ -1,8 +1,7 @@
 # German translations for sumwars package
 # Copyright (C) 2009
 # This file is distributed under the same license as the sumwars package.
-# kalimgard <kalimgard@users.sourceforge.net>, 2010., 2011.
-#
+# kalimgard <kalimgard@users.sourceforge.net>, 2010-2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
@@ -478,6 +477,7 @@ msgid "phenix wand"
 msgstr "Phönixzauberstab"
 
 #: wands.xml
+
 msgid "frost wand"
 msgstr "Frostzauberstab"
 

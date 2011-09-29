@@ -195,7 +195,8 @@ msgstr ""
 msgid " max. "
 msgstr ""
 
-#: ../src/gui/itemwindow.cpp:168 ../src/gui/itemwindow.cpp:169
+#: ../src/gui/itemwindow.cpp:168
+#: ../src/gui/itemwindow.cpp:169
 msgid "Equipped:\n"
 msgstr ""
 
@@ -624,7 +625,8 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: ../src/gui/savegamelist.cpp:188 ../src/gui/charinfo.cpp:488
+#: ../src/gui/savegamelist.cpp:188
+#: ../src/gui/charinfo.cpp:488
 msgid "Level"
 msgstr ""
 

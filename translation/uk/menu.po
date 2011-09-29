@@ -196,7 +196,8 @@ msgstr "Сила волі"
 msgid " max. "
 msgstr " макс. "
 
-#: ../src/gui/itemwindow.cpp:168 ../src/gui/itemwindow.cpp:169
+#: ../src/gui/itemwindow.cpp:168
+#: ../src/gui/itemwindow.cpp:169
 msgid "Equipped:\n"
 msgstr "Споряджений:\n"
 
@@ -630,7 +631,8 @@ msgstr "Персонажі"
 msgid "Delete"
 msgstr "Видалити"
 
-#: ../src/gui/savegamelist.cpp:188 ../src/gui/charinfo.cpp:488
+#: ../src/gui/savegamelist.cpp:188
+#: ../src/gui/charinfo.cpp:488
 msgid "Level"
 msgstr "Рівень"
 

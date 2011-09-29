@@ -1,8 +1,7 @@
 # German translations for sumwars package
 # Copyright (C) 2009
 # This file is distributed under the same license as the sumwars package.
-# kalimgard <kalimgard@users.sourceforge.net>, 2010., 2011.
-#
+# kalimgard <kalimgard@users.sourceforge.net>, 2010-2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
@@ -195,7 +194,8 @@ msgstr "Willenskraft"
 msgid " max. "
 msgstr "max. "
 
-#: ../src/gui/itemwindow.cpp:168 ../src/gui/itemwindow.cpp:169
+#: ../src/gui/itemwindow.cpp:168
+#: ../src/gui/itemwindow.cpp:169
 msgid "Equipped:\n"
 msgstr "Angelegt:\n"
 
@@ -633,7 +633,8 @@ msgstr "Charakter Bildschirm"
 msgid "Delete"
 msgstr ""
 
-#: ../src/gui/savegamelist.cpp:188 ../src/gui/charinfo.cpp:488
+#: ../src/gui/savegamelist.cpp:188
+#: ../src/gui/charinfo.cpp:488
 msgid "Level"
 msgstr "Level"
 
