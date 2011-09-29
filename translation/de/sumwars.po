@@ -477,7 +477,6 @@ msgid "phenix wand"
 msgstr "Phönixzauberstab"
 
 #: wands.xml
-
 msgid "frost wand"
 msgstr "Frostzauberstab"
 

@@ -2,8 +2,6 @@
 # Copyright (C) 2011
 # This file is distributed under the same license as the PACKAGE package
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR
-#
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
@@ -402,6 +400,7 @@ msgid "As you wish, my Prinz."
 msgstr ""
 
 #: joringsbridge.xml
+
 msgid "That much distrust is really unnecessary during a war. "
 msgstr ""
 
