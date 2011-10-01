@@ -1,11 +1,9 @@
 #ifndef SAVEGAMELIST_H
 #define SAVEGAMELIST_H
 
-
 #include "window.h"
 
 #include "listitem.h"
-
 
 /**
  * \class SavegameList
@@ -80,6 +78,11 @@ class SavegameList : public Window
 		 * \brief Behandelt Auswahl eines Savegames
 		 */
 		bool onSavegameSelected(const CEGUI::EventArgs& evt);
+
+		/**
+		  *\brief Holds SaveItemRoot window belonging to currently selected savefile
+		  */
+		CEGUI::Window *m_currentSelected;
 
 };
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout >
+    <Window Type="TaharezLook/ImageButton" Name="SaveItemRoot" >
+        <Property Name="Alpha" Value="0.5" />
+        <Property Name="HoverImage" Value="set:MainMenu image:SPBtnHover" />
+        <Property Name="NormalImage" Value="set:MainMenu image:SPBtnNormal" />
+        <Property Name="PushedImage" Value="set:MainMenu image:SPBtnNormal" />
+        <Property Name="InheritsAlpha" Value="False" />
+        <Property Name="UnifiedAreaRect" Value="{{0,0},{-0.00130208,0},{1,0},{0.198698,0}}" />
+        <Window Type="TaharezLook/StaticText" Name="SaveItemRoot/Name" >
+            <Property Name="Font" Value="DejaVuSerif-12" />
+            <Property Name="Text" Value="CharacterName" />
+            <Property Name="HorzExtent" Value="165" />
+            <Property Name="VertExtent" Value="23.8451" />
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="InheritsAlpha" Value="False" />
+            <Property Name="HorzFormatting" Value="HorzCentred" />
+            <Property Name="UnifiedAreaRect" Value="{{0.293234,0},{0.0861111,0},{0.970189,0},{0.544444,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/StaticText" Name="SaveItemRoot/DecriptionLabel" >
+            <Property Name="Font" Value="Iconified-12" />
+            <Property Name="Text" Value="Level 5 Fencer" />
+            <Property Name="HorzExtent" Value="140" />
+            <Property Name="VertExtent" Value="24.0283" />
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="InheritsAlpha" Value="False" />
+            <Property Name="HorzFormatting" Value="HorzCentred" />
+            <Property Name="UnifiedAreaRect" Value="{{0.2809,0},{0.552778,0},{0.96419,0},{0.858334,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/StaticImage" Name="SaveItemRoot/Avatar" >
+            <Property Name="Image" Value="set:MainMenu image:Logo" />
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="InheritsAlpha" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.041435,0},{0.102552,0},{0.239047,0},{0.924156,0}}" />
+        </Window>
+    </Window>
+</GUILayout>

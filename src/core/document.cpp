@@ -117,12 +117,15 @@ void Document::startGame(bool server)
 
 void Document::setSaveFile(std::string s)
 {
-	std::fstream file(s.c_str(),std::ios::in| std::ios::binary);
+	std::string userPath = SumwarsHelper::userPath();
+	userPath.append("/save/").append(s);
+
+	std::fstream file(userPath.c_str(),std::ios::in| std::ios::binary);
 	if (file.is_open())
 	{
 		char bin;
 		unsigned char* data=0;
-		m_save_file =s;
+		m_save_file = userPath;
 
 		file.get(bin);
 

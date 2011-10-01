@@ -1,4 +1,6 @@
 #include "OgreResourceGroupManager.h"
+#include "OgreTextureManager.h"
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 #include "savegamelist.h"
 #include "stdstreamconv.h"
 
@@ -10,11 +12,10 @@ SavegameList::SavegameList (Document* doc)
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
+	m_currentSelected = 0;
 
 	// Rahmen fuer das Menue Savegame auswaehlen
 	CEGUI::FrameWindow* save_menu = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "SavegameMenu");
-	m_window = save_menu;
-	
 	save_menu->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f))); //0.0/0.8
 	save_menu->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 1.0f))); //1.0/0.2
 	save_menu->setProperty("FrameEnabled","false");
@@ -23,46 +24,17 @@ SavegameList::SavegameList (Document* doc)
 	save_menu->setAlpha(0.0f);
 	save_menu->setInheritsAlpha(false);
 	
+	m_window = save_menu;
+
 	// Bestandteile der Kontrollleiste hinzufuegen
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
 
-	// Label Savegame waehlen
-	label = win_mgr.createWindow("TaharezLook/StaticText", "SavegameChooseLabel");
-	save_menu->addChildWindow(label);
-	label->setProperty("FrameEnabled", "false");
-	label->setProperty("BackgroundEnabled", "false");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.1f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim( 0.1f)));
-	label->setInheritsAlpha(false);
-		
-	CEGUI::MultiColumnList* savelist = (CEGUI::MultiColumnList*) win_mgr.createWindow("TaharezLook/MultiColumnList", "SavegameList");
-	save_menu->addChildWindow(savelist);
-	savelist->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.2f)));
-	savelist->setSize(CEGUI::UVector2(cegui_reldim(0.8f), cegui_reldim(0.7f)));
-	
-	savelist->setSelectionMode(CEGUI::MultiColumnList::RowSingle);
-	savelist->subscribeEvent(CEGUI::MultiColumnList::EventSelectionChanged, CEGUI::Event::Subscriber(&SavegameList::onSavegameChosen, this));
-	savelist->subscribeEvent(CEGUI::MultiColumnList::EventMouseDoubleClick, CEGUI::Event::Subscriber(&SavegameList::onSavegameDoubleClick, this));
-
-	savelist->addColumn("Name",0,CEGUI::UDim(0.5,0));
-	savelist->addColumn("Klasse",1,CEGUI::UDim(0.3,0));
-	savelist->addColumn("Level",2,CEGUI::UDim(0.2,0));
-	savelist->setInheritsAlpha(false);
-	savelist->setAlpha(0.7f);
-	
-	/*// Button Savegame akzeptieren
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SelectSavegameButton"));
-	save_menu->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.92f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.05f)));
-	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onSavegameSelected, this));
-	btn->setWantsMultiClickEvents(false);*/
 	
 	// Button neu
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "NewCharButton"));
 	save_menu->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.92f)));
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.85f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.05f)));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onNewCharClicked, this));
 	btn->setWantsMultiClickEvents(false);
@@ -70,7 +42,7 @@ SavegameList::SavegameList (Document* doc)
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "DeleteCharButton"));
 	save_menu->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.50f), cegui_reldim( 0.92f)));
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.50f), cegui_reldim( 0.85f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.05f)));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onDeleteCharClicked, this));
 	btn->setWantsMultiClickEvents(false);
@@ -83,10 +55,6 @@ void SavegameList::update()
 {	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
-	CEGUI::MultiColumnList* savelist = (CEGUI::MultiColumnList*) win_mgr.getWindow("SavegameList");
-	savelist->resetList();
-	savelist->setSortDirection( CEGUI::ListHeaderSegment::None);
-	
 	// Liste aller Files im Save Ordner der Form *.sav
 	Ogre::FileInfoListPtr files;
 	Ogre::FileInfoList::iterator it;
@@ -94,9 +62,8 @@ void SavegameList::update()
 	
 	std::fstream file;
 	char bin;
-	int n=0;
+	int n = 0;
 	char lev;
-	std::string cl;
 	
 	std::string name;
 	std::string classname;
@@ -106,6 +73,7 @@ void SavegameList::update()
 	int version;
 	// iterieren ueber die Files
 	unsigned char* data;
+
 	for (it = files->begin(); it!= files->end();++it)
 	{
 		filename = it->archive->getName();
@@ -117,7 +85,56 @@ void SavegameList::update()
 		file.open(filename.c_str(),std::ios::in| std::ios::binary);
 		if (file.is_open())
 		{
-			savelist->addRow();
+			std::ostringstream s;
+			s << n;
+
+			CEGUI::Window* saveItem = 0;
+			try
+			{
+				saveItem = win_mgr.getWindow(s.str().append("SaveItemRoot"));
+				m_currentSelected = saveItem;
+			}
+			catch(CEGUI::UnknownObjectException &e)
+			{
+				saveItem = (CEGUI::Window*) win_mgr.loadWindowLayout("SaveItem.layout", s.str());
+				m_currentSelected = saveItem;
+				saveItem->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onSavegameChosen, this));
+				m_window->addChildWindow(saveItem);
+				
+				// make buttons resolution independant
+				float height = m_window->getPixelSize().d_width / 4.0f;
+				saveItem->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_absdim((height + 2.0f)*n)));
+				saveItem->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_absdim(height)));
+				saveItem->getChild(s.str().append("SaveItemRoot/Name"))->setMousePassThroughEnabled(true);
+				saveItem->getChild(s.str().append("SaveItemRoot/DecriptionLabel"))->setMousePassThroughEnabled(true);
+				saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setMousePassThroughEnabled(true);
+
+				// create CEGUI texture for the character thumbnail
+				std::string texName = filename.erase(filename.length() - 4, filename.length());
+				Ogre::TextureManager *tmgr = Ogre::TextureManager::getSingletonPtr();
+
+				int pos = texName.find_last_of("\\");
+				if(texName.find_last_of("/") > pos)
+					pos = texName.find_last_of("/");
+
+				std::string nameNoPath = texName.erase(0, pos+1).append(".png");
+				if(Ogre::ResourceGroupManager::getSingleton().resourceExists("Savegame", nameNoPath))
+				{
+					Ogre::TexturePtr tex = tmgr->load(texName, "Savegame");
+
+					CEGUI::Texture &ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(tex);
+
+					std::string imagesetName = s.str().append("SaveItemRootAvatarImageset");
+					CEGUI::Imageset& textureImageSet = CEGUI::ImagesetManager::getSingleton().create(imagesetName, ceguiTex);
+					textureImageSet.defineImage( s.str().append("MainMenuAvatarImg"),
+								CEGUI::Point( 0.0f, 0.0f ),
+								CEGUI::Size( ceguiTex.getSize().d_width, ceguiTex.getSize().d_height ),
+								CEGUI::Point( 0.0f, 0.0f ) );
+					std::stringstream tempStream;
+					tempStream << "set:" << imagesetName << " " << "image:" << s.str().append("MainMenuAvatarImg");
+					saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setProperty("Image", tempStream.str());
+				}
+			}
 
 			file.get(bin);
 			
@@ -144,13 +161,13 @@ void SavegameList::update()
 			
 			stream.str("");
 			stream << (int) lev;
-			StrListItem* li1 = new StrListItem(stream.str(),filename);
-			StrListItem* li2 = new StrListItem((CEGUI::utf8*) gettext(classname.c_str()),filename);
-			StrListItem* li3 = new StrListItem(name,filename);
-			
-			savelist->setItem(li1,2,n);
-			savelist->setItem(li2,1,n);
-			savelist->setItem(li3,0,n);
+
+
+			CEGUI::String temp;
+			temp.append("Level ").append(stream.str()).append(" ").append(classname);
+			saveItem->getChild(s.str().append("SaveItemRoot/Name"))->setText(name);
+			saveItem->getChild(s.str().append("SaveItemRoot/DecriptionLabel"))->setText(temp);
+
 			n++;
 
 			file.close();
@@ -170,8 +187,8 @@ void SavegameList::updateTranslation()
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
 
-	label = win_mgr.getWindow("SavegameChooseLabel");
-	label->setText((CEGUI::utf8*) gettext("Characters"));
+	/*label = win_mgr.getWindow("SavegameChooseLabel");
+	label->setText((CEGUI::utf8*) gettext("Characters"));*/
 	
 	/*btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SelectSavegameButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));*/
@@ -182,28 +199,20 @@ void SavegameList::updateTranslation()
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("DeleteCharButton"));
 	btn->setText((CEGUI::utf8*) gettext("Delete"));
 	
-	CEGUI::MultiColumnList* savelist = (CEGUI::MultiColumnList*) win_mgr.getWindow("SavegameList");
-	savelist->getHeaderSegmentForColumn(0).setText((CEGUI::utf8*) gettext("Name"));
-	savelist->getHeaderSegmentForColumn(1).setText((CEGUI::utf8*) gettext("Class"));
-	savelist->getHeaderSegmentForColumn(2).setText((CEGUI::utf8*) gettext("Level"));
-	
 }
 
 bool SavegameList::onSavegameChosen(const CEGUI::EventArgs& evt)
 {
+	const CEGUI::WindowEventArgs& we = static_cast<const CEGUI::WindowEventArgs&>(evt);
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	std::string prefix = we.window->getName().c_str();
+	prefix.erase(prefix.length()-12, prefix.length());
 
-	CEGUI::MultiColumnList* savelist = (CEGUI::MultiColumnList*) win_mgr.getWindow("SavegameList");
+	std::string name = we.window->getChild(prefix.append("SaveItemRoot/Name"))->getText().c_str();
+	name.append(".sav");
 
-	CEGUI::ListboxItem * itm = savelist->getFirstSelectedItem();
-
-
-	if (itm !=0)
-	{
-		StrListItem * sitm = (StrListItem *) itm;
-		m_document->setSaveFile(sitm->m_data);
-		DEBUGX("selected Savegame %s", sitm->m_data.c_str());
-	}
+	m_document->setSaveFile(name.c_str());
+	DEBUGX("selected Savegame %s", sitm->m_data.c_str());
 
 	return true;
 }
@@ -229,24 +238,12 @@ bool SavegameList::onNewCharClicked(const CEGUI::EventArgs& evt)
 bool SavegameList::onDeleteCharClicked(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
-	CEGUI::MultiColumnList* savelist = (CEGUI::MultiColumnList*) win_mgr.getWindow("SavegameList");
-
-	CEGUI::ListboxItem * itm = savelist->getFirstSelectedItem();
-
-
-	if (itm !=0)
-	{
-		StrListItem * sitm = (StrListItem *) itm;
-		DEBUG("delete Savegame %s", sitm->m_data.c_str());
 		
-		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("DeleteChar");
-		message->setInheritsAlpha(false);
+	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("DeleteChar");
+	message->setInheritsAlpha(false);
 		
-		message->setVisible(true);
-		message->setModalState(true);
-	}
+	message->setVisible(true);
+	message->setModalState(true);
 
 	return true;
 }
@@ -260,6 +257,12 @@ bool SavegameList::onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
 	message->setModalState(false);
 	
 	remove(m_document->getSaveFile().c_str());
+
+	if(m_currentSelected != 0)
+	{
+		CEGUI::WindowManager::getSingleton().destroyWindow(m_currentSelected);
+		m_currentSelected = 0;
+	}
 	m_document->setSaveFile("");
 	
 	update();

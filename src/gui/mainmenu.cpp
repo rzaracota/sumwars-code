@@ -839,7 +839,7 @@ void MainMenu::createSavegameList()
 
     savegameList->setInheritsAlpha(false);
     savegameList->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05f))); //0.0/0.8
-    savegameList->setSize(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.4f))); //1.0/0.2
+	savegameList->setSize(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 1.0f))); //1.0/0.2
     savegameList->setProperty("FrameEnabled","false");
     savegameList->setProperty("TitlebarEnabled","false");
     savegameList->setProperty("CloseButtonEnabled","false");

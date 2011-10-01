@@ -93,14 +93,15 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	Ogre::RenderTarget* char_rt = char_texture->getBuffer()->getRenderTarget();
 	char_rt ->setAutoUpdated(false);
 
+
 	Ogre::Viewport *char_view = char_rt->addViewport(char_camera );
 	char_view->setClearEveryFrame( true );
 	char_view->setOverlaysEnabled (false);
 	char_view->setBackgroundColour(Ogre::ColourValue(0,0,0,1.0) );
 	char_rt->update();
 
-    CEGUI::Texture& char_ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(char_texture);
-    
+	CEGUI::Texture& char_ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(char_texture);
+
 	CEGUI::Imageset& char_textureImageSet = CEGUI::ImagesetManager::getSingleton().create("character", char_ceguiTex);
 
 	char_textureImageSet.defineImage( "character_img",
@@ -664,6 +665,20 @@ void Scene::updateCharacterView()
 	
 	
 		target->update();
+		
+		// update character icon
+		if (pl !=0)
+		{
+			Ogre::Image img;
+			texture->convertToImage(img);
+			std::string saveFile =  this->m_document->getSaveFile();
+			if(saveFile != "")
+			{
+				saveFile.erase(saveFile.length()-4, saveFile.length());
+				img.resize(256, 256);
+				img.save(saveFile.append(".png"));
+			}
+		}
 		DEBUGX("player image is now %s",m_temp_player.c_str());
 	}
 	

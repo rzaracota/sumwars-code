@@ -18,7 +18,7 @@ public:
 #ifdef __APPLE__
 		path.append("/Library/Application Support/Sumwars");
 #else
-		path.append("/.sumwars");
+		path.append(".sumwars");
 #endif
 		return path;
 	}
