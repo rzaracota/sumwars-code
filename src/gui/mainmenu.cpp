@@ -59,6 +59,27 @@ MainMenu::MainMenu (Document* doc)
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("EndGameButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onQuitGameHost, this));
 
+	CEGUI::FrameWindow* lbl;
+
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton/Label"));
+	lbl->setMousePassThroughEnabled(true);
+
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerJoinButton/Label"));
+	lbl->setMousePassThroughEnabled(true);
+
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerHostButton/Label"));
+	lbl->setMousePassThroughEnabled(true);
+
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("CreditsButton/Label"));
+	lbl->setMousePassThroughEnabled(true);
+
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton/Label"));
+	lbl->setMousePassThroughEnabled(true);
+
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
+	lbl->setMousePassThroughEnabled(true);
+
+
 	Ogre::Root *root = Ogre::Root::getSingletonPtr();
 	m_sceneMgr = root->createSceneManager(Ogre::ST_GENERIC, "MainMenuSceneManager");
 	m_mainMenuCamera = m_sceneMgr->createCamera("MainMenuCamera");
@@ -81,25 +102,25 @@ void MainMenu::updateTranslation()
 {
     //updating translations for the Menu
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-    CEGUI::PushButton* btn;
+	CEGUI::FrameWindow* lbl;
 
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SinglePlayerButton/Label"));
-    btn->setText((CEGUI::utf8*) gettext("Single player"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton/Label"));
+	lbl->setText((CEGUI::utf8*) gettext("Single player"));
 
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerJoinButton/Label"));
-    btn->setText((CEGUI::utf8*) gettext("Join game"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerJoinButton/Label"));
+	lbl->setText((CEGUI::utf8*) gettext("Join game"));
 
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerHostButton/Label"));
-    btn->setText((CEGUI::utf8*) gettext("Host game"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerHostButton/Label"));
+	lbl->setText((CEGUI::utf8*) gettext("Host game"));
 
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CreditsButton/Label"));
-    btn->setText((CEGUI::utf8*) gettext("Credits"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("CreditsButton/Label"));
+	lbl->setText((CEGUI::utf8*) gettext("Credits"));
 
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("MainOptionsButton/Label"));
-    btn->setText((CEGUI::utf8*) gettext("Options"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton/Label"));
+	lbl->setText((CEGUI::utf8*) gettext("Options"));
 
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("EndGameButton/Label"));
-    btn->setText((CEGUI::utf8*) gettext("Quit"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
+	lbl->setText((CEGUI::utf8*) gettext("Quit"));
 
 
 }
