@@ -66,6 +66,8 @@ void SavegameList::update()
 	// iterieren ueber die Files
 	unsigned char* data;
 
+	float height = m_window->getPixelSize().d_width / 4.0f;
+
 	for (it = files->begin(); it!= files->end();++it)
 	{
 		filename = it->archive->getName();
@@ -94,7 +96,6 @@ void SavegameList::update()
 				m_window->addChildWindow(saveItem);
 				
 				// make buttons resolution independant
-				float height = m_window->getPixelSize().d_width / 4.0f;
 				saveItem->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_absdim((height + 2.0f)*n)));
 				saveItem->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_absdim(height)));
 				saveItem->getChild(s.str().append("SaveItemRoot/Name"))->setMousePassThroughEnabled(true);
@@ -171,7 +172,9 @@ void SavegameList::update()
 		}
 	}
 	
-	
+	CEGUI::PushButton *btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("NewCharButton"));
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_absdim((height + 2.0f)*n+1)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_absdim(height)));
 }
 
 void SavegameList::updateTranslation()
