@@ -158,7 +158,7 @@ void SavegameList::update()
 
 
 			CEGUI::String temp;
-			temp.append("Level ").append(stream.str()).append(" ").append(classname);
+			temp.append((CEGUI::utf8*) gettext("Level")).append(" ").append(stream.str()).append(" ").append((CEGUI::utf8*) gettext(classname.c_str()));
 			saveItem->getChild(s.str().append("SaveItemRoot/Name"))->setText(name);
 			saveItem->getChild(s.str().append("SaveItemRoot/DecriptionLabel"))->setText(temp);
 

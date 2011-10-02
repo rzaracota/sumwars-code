@@ -59,6 +59,11 @@ MainMenu::MainMenu (Document* doc)
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("EndGameButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onQuitGameHost, this));
 
+	CEGUI::Window* verlbl;
+
+	verlbl = win_mgr.getWindow("SumwarsVersionLabel");
+	verlbl->setText(CEGUI::String("Version: ").append(VERSION));
+
 	CEGUI::FrameWindow* lbl;
 
 	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton/Label"));

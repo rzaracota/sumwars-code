@@ -19,7 +19,7 @@
                 <Property Name="VertExtent" Value="23.1724" />
                 <Property Name="FrameEnabled" Value="False" />
                 <Property Name="HorzFormatting" Value="HorzCentred" />
-                <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0,0},{0.8,0},{1,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0,0},{0.9,0},{1,0}}" />
                 <Property Name="BackgroundEnabled" Value="False" />
             </Window>
         </Window>
@@ -36,7 +36,7 @@
                 <Property Name="VertExtent" Value="23.1724" />
                 <Property Name="FrameEnabled" Value="False" />
                 <Property Name="HorzFormatting" Value="HorzCentred" />
-                <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0,0},{0.8,0},{1,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0,0},{0.9,0},{1,0}}" />
                 <Property Name="BackgroundEnabled" Value="False" />
             </Window>
         </Window>
@@ -53,7 +53,7 @@
                 <Property Name="VertExtent" Value="23.1724" />
                 <Property Name="FrameEnabled" Value="False" />
                 <Property Name="HorzFormatting" Value="HorzCentred" />
-                <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0,0},{0.8,0},{1,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0,0},{0.9,0},{1,0}}" />
                 <Property Name="BackgroundEnabled" Value="False" />
             </Window>
         </Window>
@@ -71,7 +71,7 @@
                 <Property Name="VertExtent" Value="23.1724" />
                 <Property Name="FrameEnabled" Value="False" />
                 <Property Name="HorzFormatting" Value="HorzCentred" />
-                <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0,0},{0.8,0},{1,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0,0},{0.9,0},{1,0}}" />
                 <Property Name="BackgroundEnabled" Value="False" />
             </Window>
         </Window>
@@ -88,7 +88,7 @@
                 <Property Name="VertExtent" Value="23.1724" />
                 <Property Name="FrameEnabled" Value="False" />
                 <Property Name="HorzFormatting" Value="HorzCentred" />
-                <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0,0},{0.8,0},{1,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0,0},{0.9,0},{1,0}}" />
                 <Property Name="BackgroundEnabled" Value="False" />
             </Window>
         </Window>
@@ -106,7 +106,7 @@
                 <Property Name="VertExtent" Value="23.1724" />
                 <Property Name="FrameEnabled" Value="False" />
                 <Property Name="HorzFormatting" Value="HorzCentred" />
-                <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0,0},{0.8,0},{1,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0,0},{0.9,0},{1,0}}" />
                 <Property Name="BackgroundEnabled" Value="False" />
             </Window>
         </Window>

@@ -27,7 +27,7 @@
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="InheritsAlpha" Value="False" />
             <Property Name="HorzFormatting" Value="HorzCentred" />
-            <Property Name="UnifiedAreaRect" Value="{{0.2809,0},{0.559288,0},{0.812823,0},{0.864844,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.26,0},{0.559288,0},{0.83,0},{0.864844,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
         </Window>
         <Window Type="TaharezLook/StaticImage" Name="SaveItemRoot/Avatar" >

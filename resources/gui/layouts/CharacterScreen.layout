@@ -138,7 +138,7 @@
 		</Window>
 		<Window Type="TaharezLook/StaticText" Name="AttrPointsValueLabel" >
 			<Property Name="FrameEnabled" Value="False" />
-			<Property Name="UnifiedAreaRect" Value="{{0.210,0},{0.550,0},{0.810,0},{0.595,0}}" />
+			<Property Name="UnifiedAreaRect" Value="{{0.210,0},{0.550,0},{0.850,0},{0.595,0}}" />
 			<Property Name="BackgroundEnabled" Value="False" />
 		</Window>
 		<Window Type="TaharezLook/StaticText" Name="ExperienceLabel" >
