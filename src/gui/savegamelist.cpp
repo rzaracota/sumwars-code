@@ -40,14 +40,6 @@ SavegameList::SavegameList (Document* doc)
 	btn->setWantsMultiClickEvents(false);
 	btn->setInheritsAlpha(false);
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "DeleteCharButton"));
-	save_menu->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.50f), cegui_reldim( 0.85f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.05f)));
-	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onDeleteCharClicked, this));
-	btn->setWantsMultiClickEvents(false);
-	btn->setInheritsAlpha(false);
-	
 	updateTranslation();
 }
 
@@ -108,6 +100,7 @@ void SavegameList::update()
 				saveItem->getChild(s.str().append("SaveItemRoot/Name"))->setMousePassThroughEnabled(true);
 				saveItem->getChild(s.str().append("SaveItemRoot/DecriptionLabel"))->setMousePassThroughEnabled(true);
 				saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setMousePassThroughEnabled(true);
+				saveItem->getChild(s.str().append("SaveItemRoot/DelChar"))->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onDeleteCharClicked, this));
 
 				// create CEGUI texture for the character thumbnail
 				std::string texName = filename.erase(filename.length() - 4, filename.length());
@@ -195,10 +188,6 @@ void SavegameList::updateTranslation()
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("NewCharButton"));
 	btn->setText((CEGUI::utf8*) gettext("Create"));
-	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("DeleteCharButton"));
-	btn->setText((CEGUI::utf8*) gettext("Delete"));
-	
 }
 
 bool SavegameList::onSavegameChosen(const CEGUI::EventArgs& evt)
@@ -238,7 +227,9 @@ bool SavegameList::onNewCharClicked(const CEGUI::EventArgs& evt)
 bool SavegameList::onDeleteCharClicked(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-		
+	const CEGUI::WindowEventArgs& we = static_cast<const CEGUI::WindowEventArgs&>(evt);
+	onSavegameChosen(CEGUI::WindowEventArgs(we.window->getParent()));
+
 	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("DeleteChar");
 	message->setInheritsAlpha(false);
 		
