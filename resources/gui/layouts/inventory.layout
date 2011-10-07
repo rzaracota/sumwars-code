@@ -36,7 +36,7 @@
         <Window Type="TaharezLook/ImageButton" Name="SwapEquipButton" >
             <Property Name="HoverImage" Value="set:Inventory image:WeaponSwitchState1" />
             <Property Name="NormalImage" Value="set:Inventory image:WeaponSwitchState1" />
-            <Property Name="PushedImage" Value="set:Inventory image:WeaponSwitchState2" />
+            <Property Name="PushedImage" Value="set:Inventory image:WeaponSwitchState1" />
             <Property Name="UnifiedAreaRect" Value="{{0.43924,0},{0.582828,0},{0.575316,0},{0.613492,0}}" />
         </Window>
         <Window Type="TaharezLook/StaticImage" Name="CharacterImage" >

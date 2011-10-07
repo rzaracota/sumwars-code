@@ -2131,7 +2131,12 @@ void Player::toSavegame(CharConv* cv)
 	writeEquipement(cv);
 	cv->printNewline();
 	
-	if (cv->getVersion() >=15)
+	if (World::getVersion()>=19)
+	{
+		cv->toBuffer(m_secondary_equip);
+	}
+	
+	if (World::getVersion() >=15)
 	{
 		getStash()->toStringComplete(cv);
 	}
@@ -2250,6 +2255,10 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	cv->fromBuffer(m_revive_position.second);
 	// Items
 	loadEquipement(cv);
+	if (cv->getVersion()>=19)
+	{
+		cv->fromBuffer(m_secondary_equip);
+	}
 	if (cv->getVersion() >=15)
 	{
 		getStash()->fromStringComplete(cv);

@@ -42,7 +42,7 @@
 
 
 World* World::m_world=0;
-int World::m_version = 18;
+int World::m_version = 19;
 
 void  World::createWorld(bool server, int port, bool cooperative, int max_players)
 {

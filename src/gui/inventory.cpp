@@ -264,15 +264,17 @@ void Inventory::update()
 	updateItemWindow(img,it,player);
 	
 	// Button fuer Zweitausruestung
-	std::string text = "1";
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SwapEquipButton"));
+	std::string text = "set:Inventory image:WeaponSwitchState1";
 	if (player->isUsingSecondaryEquip())
 	{
-		text="2";
+		text="set:Inventory image:WeaponSwitchState2";
 	}
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SwapEquipButton"));
-	if (btn->getText() != text)
+	if (btn->getProperty("NormalImage") != text)
 	{
-		btn->setText(text);
+		btn->setProperty("NormalImage",text);
+		btn->setProperty("HoverImage",text);
+		btn->setProperty("PushedImage",text);		
 	}
 	
 	int i;
