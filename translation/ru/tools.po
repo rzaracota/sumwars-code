@@ -1,13 +1,14 @@
 # Russian translations for sumwars package
-# Copyright (C) 2011
-# This file is distributed under the same license as the sumwars package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR
+# Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# FULL NAME <EMAIL@ADDRESS>, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-12 21:30+0200\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2011-10-01 00:49+0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -94,19 +95,19 @@ msgstr ""
 
 #: ../src/gui/contenteditor/contenteditor.cpp:238
 msgid "Properties"
-msgstr ""
+msgstr "Свойства"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:241
 msgid "Shape:"
-msgstr ""
+msgstr "Форма:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:244
 msgid "Circle"
-msgstr ""
+msgstr "Окружность"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:247
 msgid "Radius:"
-msgstr ""
+msgstr "Радиус:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:250
 #: ../src/gui/contenteditor/contenteditor.cpp:262
@@ -119,7 +120,7 @@ msgstr ""
 
 #: ../src/gui/contenteditor/contenteditor.cpp:256
 msgid "Width:"
-msgstr ""
+msgstr "Ширина:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:259
 msgid "Depth:"
@@ -137,20 +138,20 @@ msgstr ""
 #: ../src/gui/contenteditor/contenteditor.cpp:271
 #: ../src/gui/contenteditor/contenteditor.cpp:310
 msgid "Copy"
-msgstr ""
+msgstr "Копировать"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:274
 #: ../src/gui/contenteditor/contenteditor.cpp:277
 msgid "Create Object"
-msgstr ""
+msgstr "Создать объект"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:280
 msgid "Position:"
-msgstr ""
+msgstr "Положение:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:283
 msgid "Get Player Position"
-msgstr "Позиція гравця"
+msgstr "Координаты игрока"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:286
 msgid "Angle:"
@@ -171,19 +172,19 @@ msgstr ""
 #: ../src/gui/contenteditor/contenteditor.cpp:304
 #: ../src/gui/contenteditor/contenteditor.cpp:376
 msgid "Type:"
-msgstr ""
+msgstr "Тип"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:307
 msgid "Size:"
-msgstr ""
+msgstr "Размер:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:316
 msgid "Name:"
-msgstr ""
+msgstr "Имя:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:319
 msgid "Value:"
-msgstr ""
+msgstr "Значение:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:322
 msgid "Enchant min:"
@@ -191,7 +192,7 @@ msgstr ""
 
 #: ../src/gui/contenteditor/contenteditor.cpp:325
 msgid "max:"
-msgstr ""
+msgstr "макс:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:328
 msgid "Equip"

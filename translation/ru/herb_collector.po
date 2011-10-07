@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+# Russian translations for sumwars package
 # Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-08-18 04:03+0400\n"
+"PO-Revision-Date: 2011-10-01 00:16+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -90,15 +90,15 @@ msgstr "Все верно."
 
 #: herbalist.xml
 msgid "Quite a trick."
-msgstr ""
+msgstr "Довольно хитрó."
 
 #: herbalist.xml
 msgid "We were only walking through the gate."
-msgstr ""
+msgstr "Мы лишь проходили через ворота."
 
 #: herbalist.xml
 msgid "Peace."
-msgstr ""
+msgstr "Мир."
 
 #: herbalist.xml
 msgid ""
@@ -120,7 +120,7 @@ msgstr "Я не силен в травах..."
 
 #: herbalist.xml
 msgid "Fiddlesticks!"
-msgstr ""
+msgstr "Балда!"
 
 #: herbalist.xml
 msgid "It's not like I want you to collect something exotic, you know."
@@ -174,7 +174,7 @@ msgstr "Я не собираюсь ползать по низинам в пои�
 
 #: herbalist.xml
 msgid "Have it your way."
-msgstr ""
+msgstr "Делай как знаешь."
 
 #: herbalist.xml
 msgid "But if you change your mind, I'm not running away from here."
@@ -190,7 +190,7 @@ msgstr "Все ещё нет."
 
 #: herbalist.xml
 msgid "Tell me when you're not too mighty for simple work anymore, sweety."
-msgstr ""
+msgstr "Скажи мне, когда будешь готов снизойти для простой работы, дорогуша."
 
 #: herbalist.xml
 msgid "Watch your tongue, hag!"
@@ -202,4 +202,4 @@ msgstr "Северные Низины"
 
 #: herbalist.xml
 msgid "Collect\"..bushes_left..\" more herbs."
-msgstr ""
+msgstr "Собери ещё \"..bushes_left..\" ягод."

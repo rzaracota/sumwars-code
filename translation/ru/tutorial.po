@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+# Russian translations for sumwars package
 # Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-08-21 00:42+0400\n"
+"PO-Revision-Date: 2011-10-07 23:22+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -130,6 +130,8 @@ msgid ""
 "Whoever the head honcho is here: He'd better know what he's gotten himself "
 "into."
 msgstr ""
+"Кем бы ни был этот засранец, ему бы следовало знать, во что он серьезно "
+"вляпался."
 
 #: tutorial.xml
 msgid "Lots of money could appease me again."
@@ -284,9 +286,8 @@ msgid "We cannot take any risks, and inside the council you are safe."
 msgstr "Мы не можем рисковать, а внутри Совета вы в безопасности."
 
 #: tutorial.xml
-#, fuzzy
 msgid "Council? The Council of Summoners?! Is this Aisen?"
-msgstr "Совет? Совет Вызывателей?! Это Аизен?"
+msgstr "Совет? Совет Заклинателей?! Это Аизен?"
 
 #: tutorial.xml
 msgid "Yes, but that's neither here nor there!"
@@ -571,8 +572,8 @@ msgid ""
 "I don't know... I don't feel like being bedridden for three weeks just "
 "because of some slimy fire breath."
 msgstr ""
-"Я даже не не знаю... не хотелось бы проваляться в постели три недели только "
-"из-за того, что какой-то слизняк дыхнул на меня огнем."
+"Я даже не знаю... не хотелось бы проваляться в постели три недели только из-"
+"за того, что какой-то слизняк дыхнул на меня огнем."
 
 #: tutorial.xml
 msgid ""
@@ -615,6 +616,8 @@ msgid ""
 "Er... Lord Master Windclaw feared that there could be a situation in which "
 "you had to fall back to, er, force of arms."
 msgstr ""
+"Эм... Лорд мастер Виндклоу боялся, что наступит такая ситуация, в которой "
+"тебе придется прибегнуть к помощи оружия."
 
 #: tutorial.xml
 msgid "That's why he gave us these."
@@ -629,7 +632,7 @@ msgstr ""
 
 #: tutorial.xml
 msgid "Slowly you're getting to me."
-msgstr ""
+msgstr "Ты начинаешь доставать меня, медленно, но верно."
 
 #: tutorial.xml
 msgid "What didn't he take into consideration? He is clearly paranoid."
@@ -732,11 +735,11 @@ msgstr "Без понятия, но Лорд Мастер сказал, они �
 
 #: tutorial.xml
 msgid "Then I shall put the fear of Harad into these experiments!"
-msgstr ""
+msgstr "Тогда я должен вложить страх Харада в эти эксперименты!"
 
 #: tutorial.xml
 msgid "Let's put the fear of Harad into these experiments!"
-msgstr ""
+msgstr "Тогда мы должны вложить страх Харада в эти эксперименты!"
 
 #: tutorial.xml
 msgid "I just hope they have a soul."
@@ -762,7 +765,7 @@ msgstr "Ух! Эти твари и вправду отвратительны."
 
 #: tutorial.xml
 msgid "What kind of sissy are you?"
-msgstr ""
+msgstr "Ты что, трусишка?"
 
 #: tutorial.xml
 msgid "Are you looking for trouble, weakling?!"
@@ -802,7 +805,7 @@ msgstr ""
 
 #: tutorial.xml
 msgid "Explain level up?"
-msgstr ""
+msgstr "Объяснить поднятие уровня?"
 
 #: tutorial.xml
 msgid "Explain level up"
@@ -890,7 +893,7 @@ msgstr "Лучше быть странным, чем..."
 
 #: tutorial.xml
 msgid "That blasted thing! I hope the walls hold out."
-msgstr ""
+msgstr "Проклятая тварь! Надеюсь, стены выдержат."
 
 #: tutorial.xml
 msgid "Quickly distribute your new points, and then let's get out of here!"
@@ -913,6 +916,8 @@ msgid ""
 "Urk! They seem to have broken out somehow. I hope they don't breed in the "
 "crevices."
 msgstr ""
+"Ух! Кажется, они как-то вырвались на свободу. Надеюсь, они не будут "
+"плодиться во всяких закоулках."
 
 #: tutorial.xml
 msgid "Have you ever heard of safety measures?"
@@ -940,7 +945,7 @@ msgstr ""
 
 #: tutorial.xml
 msgid "All right allready!"
-msgstr ""
+msgstr "Всё уже нормально!"
 
 #: tutorial.xml
 msgid "That should have been the last one."
@@ -948,11 +953,11 @@ msgstr "Этот, должно быть, последний."
 
 #: tutorial.xml
 msgid "What a massacre."
-msgstr ""
+msgstr "Что за бойня."
 
 #: tutorial.xml
 msgid "Really, somehow lacking in style."
-msgstr ""
+msgstr "И вправду, как-то без стиля."
 
 #: tutorial.xml
 msgid "Are you looking for trouble?!"
@@ -1018,11 +1023,11 @@ msgstr "Смотри на изображение на панели чтобы з
 
 #: tutorial.xml
 msgid "Don't worry, I'm almost feeling fit again."
-msgstr ""
+msgstr "Не беспокойся, я снова почти что в норме."
 
 #: tutorial.xml
 msgid "Don't worry, we're almost feeling fit again."
-msgstr ""
+msgstr "Не беспокойся, мы снова почти что в норме."
 
 #: tutorial.xml
 msgid "Very well. The secret door is here."
@@ -1067,7 +1072,7 @@ msgstr "Надеюсь, ничего не взорвется."
 
 #: tutorial.xml
 msgid "Good, Firewhirl is not here."
-msgstr ""
+msgstr "Отлично, Огненный Вихрь не тут."
 
 #: tutorial.xml
 msgid ""
@@ -1082,14 +1087,16 @@ msgid ""
 "I'm sure there's more to it than meets the eye. An apple elemental for "
 "example."
 msgstr ""
+"Я уверен, здесь есть много чего, скрытого от глаз. Яблочного элементаля, "
+"например."
 
 #: tutorial.xml
 msgid "I wouldn't put it past him."
-msgstr ""
+msgstr "Я бы не оставлял его за собой."
 
 #: tutorial.xml
 msgid "Joking aside! We must go on."
-msgstr ""
+msgstr "Шутки в сторону! Мы должны идти."
 
 #: tutorial.xml
 msgid ""
@@ -1122,7 +1129,7 @@ msgstr "Лорд Мастер не говорил ничего насчет эт
 
 #: tutorial.xml
 msgid "Something unwritten in the book of the omniscient airpaw?"
-msgstr ""
+msgstr "Что-то не было написано в книге всезнающей Ветряной Лапки?"
 
 #: tutorial.xml
 msgid "Windclaw, heretic!"
@@ -1141,11 +1148,11 @@ msgstr "Я Избранный! А это ещё хуже, чем быть про
 
 #: tutorial.xml
 msgid "The mighty Akeran truly punished you dearly."
-msgstr ""
+msgstr "Могущественный Акеран и вправду покарал тебя с любовью."
 
 #: tutorial.xml
 msgid "Spare me your elementalist drivel and get out of my way!"
-msgstr ""
+msgstr "Перестань нести бред и убирайся с моего пути!"
 
 #: tutorial.xml
 msgid "I truly am the exterminator here."
@@ -1164,11 +1171,11 @@ msgstr "Мы Избранные! А это ещё хуже, чем быть пр
 
 #: tutorial.xml
 msgid "The mighty Akeran truly punished them dearly."
-msgstr ""
+msgstr "Могущественный Акеран и вправду покарал их с любовью."
 
 #: tutorial.xml
 msgid "Spare us your elementalist drivel and get out of our way!"
-msgstr ""
+msgstr "Перестань нести бред и убирайся с нашего пути!"
 
 #: tutorial.xml
 msgid "We truly are the exterminators here."
@@ -1177,29 +1184,34 @@ msgstr "Мы и вправду здесь в качестве чистильщи
 #: tutorial.xml
 msgid "Wow! They really believe in orderly and thorough research."
 msgstr ""
+"Ух ты! Они действительно верят во всесторонние и исчерпывающие исследования."
 
 #: tutorial.xml
 msgid "How many slugs do you have to cut to believe they are slimy?"
 msgstr ""
+"Как много слизней вам пришлось разрезать, чтобы поверить, что они "
+"отвратительны?"
 
 #: tutorial.xml
 msgid "Take a look around. That stuff has to be worth a fortune!"
-msgstr ""
+msgstr "Оглянись вокруг. Это же стоит целое состояние!"
 
 #: tutorial.xml
 msgid "That stuff must be worth a fortune!"
-msgstr ""
+msgstr "Этот мусор должен стоить целое состояние!"
 
 #: tutorial.xml
 msgid "This junk?"
-msgstr ""
+msgstr "Этот мусор?"
 
 #: tutorial.xml
 msgid "Philistine."
-msgstr ""
+msgstr "Ханжа."
 
 #: tutorial.xml
 msgid ""
 "If they hadn't all those needless balustrades into the void, they wouldn't "
 "have to mop escaped sluglings from the floor."
 msgstr ""
+"Если бы они не сделали все эти ненужные балюстрады в пустоту, им бы не "
+"пришлось убирать выбравшихся слизней с пола."

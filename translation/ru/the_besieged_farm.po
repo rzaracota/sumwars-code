@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+# Russian translations for sumwars package
 # Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-08-18 04:18+0400\n"
+"PO-Revision-Date: 2011-10-01 00:45+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -39,6 +39,8 @@ msgid ""
 "knock at the door and make sure everything is all right. No peasants, no "
 "money."
 msgstr ""
+"Гоблинов вокруг фермы Брона больше нет в живых. Мне следует постучать в "
+"дверь и убедиться, что все нормально. Нет крестьян - нет денег."
 
 #: besieged_farm.xml
 msgid ""
@@ -58,31 +60,37 @@ msgstr "Ферма"
 
 #: besieged_farm.xml
 msgid "Ah! Are you feeling like earning the money after all?"
-msgstr ""
+msgstr "А! Есть желание подзаработать деньжат?"
 
 #: besieged_farm.xml
 msgid "Don't think I haven't seen you hanging around back there."
-msgstr ""
+msgstr "Не думай, что я не видел тебя шатающимся вокруг последнее время."
 
 #: besieged_farm.xml
 msgid ""
 "Don't think I haven't seen you and your friend hanging around back there."
 msgstr ""
+"Не думай, что я не видел тебя и твоего друга шатающимися вокруг последнее "
+"время."
 
 #: besieged_farm.xml
 msgid ""
 "Don't think I haven't seen you and your friends hanging around back there."
 msgstr ""
+"Не думай, что я не видел тебя и твоих друзей шатающимися вокруг последнее "
+"время."
 
 #: besieged_farm.xml
 msgid "But I don't want to complain."
-msgstr ""
+msgstr "Но я не собираюсь жаловаться."
 
 #: besieged_farm.xml
 msgid ""
 "You know the drill: Get to the Northern Meadow and drive away the goblins "
 "around Bron's farm."
 msgstr ""
+"Ты знаешь схему: иди в Северные Низины и отгони гоблинов, собравшихся вокруг "
+"фермы Брона."
 
 #: besieged_farm.xml
 msgid "I don't care how you do it, even if you gobble them raw."
@@ -107,7 +115,7 @@ msgstr "Северные Низины"
 #: besieged_farm.xml
 msgid ""
 "That should have been enough goblins. I better look after Bron's family."
-msgstr ""
+msgstr "Этих гоблинов достаточно. Мне лучше следует глянуть на семью Брона."
 
 #: besieged_farm.xml
 msgid "The goblins are gone. Are you alright?"
@@ -138,6 +146,8 @@ msgid ""
 "With a crytal of Avearea, of course. It's been handed down in my family for "
 "generations."
 msgstr ""
+"С помощью кристалла Авеареа, естественно. Он передается в нашей семье из "
+"поколения в поколение."
 
 #: besieged_farm.xml
 msgid "Of course. Silly of me."
@@ -148,10 +158,12 @@ msgid ""
 "Really now, \"..name..\". Did you think she'd use carrier pigeons in this "
 "day and age?"
 msgstr ""
+"В самом деле, \"..name..\". Ты что, думал, она будет использовать почтовых "
+"голубей в наши дни?"
 
 #: besieged_farm.xml
 msgid "Let's just go collect the money."
-msgstr ""
+msgstr "Давай просто пойдем и заберем деньги."
 
 #: besieged_farm.xml
 msgid "Brons Farm"

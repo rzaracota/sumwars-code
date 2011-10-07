@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+# Russian translations for sumwars package
 # Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-06-20 20:57+0400\n"
+"PO-Revision-Date: 2011-10-04 03:45+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -170,7 +170,7 @@ msgstr ""
 
 #: cursedCaves.xml
 msgid "greyCurseCave"
-msgstr ""
+msgstr "Проклятая Пещера"
 
 #: cursedCaves.xml
 msgid "greyCurseGrotto"
@@ -178,7 +178,7 @@ msgstr ""
 
 #: cursedCaves.xml
 msgid "greyWolfcave"
-msgstr ""
+msgstr "Волчья Пещера"
 
 #: cursedCaves.xml
 msgid "greyCurseGrotDep"
@@ -206,7 +206,7 @@ msgstr ""
 
 #: medair.xml
 msgid "elCnlLobby"
-msgstr ""
+msgstr "Совет Элементов, Подземелье"
 
 #: medair.xml
 msgid "medBackalley"
@@ -214,11 +214,11 @@ msgstr ""
 
 #: medair.xml
 msgid "medMercCamp"
-msgstr ""
+msgstr "Лагерь наемников Медаир"
 
 #: testregions.xml
 msgid "maptest"
-msgstr ""
+msgstr "тестовая карта"
 
 #: testregions.xml
 msgid "sandbox"
@@ -234,15 +234,15 @@ msgstr ""
 
 #: testregions.xml
 msgid "region0"
-msgstr ""
+msgstr "регион0"
 
 #: testregions.xml
 msgid "testregion"
-msgstr ""
+msgstr "тестовый регион"
 
 #: testregions.xml
 msgid "region1"
-msgstr ""
+msgstr "регион 1"
 
 #: swords1h.xml
 msgid "dagger"
@@ -366,7 +366,7 @@ msgstr ""
 
 #: axes1h.xml
 msgid "bronze axe"
-msgstr ""
+msgstr "бронзовый топор"
 
 #: axes1h.xml
 msgid "iron hatchet"
@@ -378,7 +378,7 @@ msgstr ""
 
 #: axes1h.xml
 msgid "iron axe"
-msgstr ""
+msgstr "железный топор"
 
 #: axes1h.xml
 msgid "mercenary axe"
@@ -386,11 +386,11 @@ msgstr ""
 
 #: axes1h.xml
 msgid "steel axe"
-msgstr ""
+msgstr "стальной топор"
 
 #: axes1h.xml
 msgid "battle axe"
-msgstr ""
+msgstr "боевой топор"
 
 #: axes1h.xml
 msgid "guard axe"
@@ -398,7 +398,7 @@ msgstr ""
 
 #: axes1h.xml
 msgid "minotaur axe"
-msgstr ""
+msgstr "топор минотавра"
 
 #: axes1h.xml
 msgid "thunder axe"
@@ -406,7 +406,7 @@ msgstr ""
 
 #: axes1h.xml
 msgid "demon axe"
-msgstr ""
+msgstr "топор демона"
 
 #: axes1h.xml
 msgid "obsidian axe"
@@ -418,7 +418,7 @@ msgstr ""
 
 #: axes1h.xml
 msgid "berserker axe"
-msgstr ""
+msgstr "топор берсерка"
 
 #: axes1h.xml
 msgid "diamont axe"
@@ -426,7 +426,7 @@ msgstr ""
 
 #: axes1h.xml
 msgid "dwarfen axe"
-msgstr ""
+msgstr "топор дворфа"
 
 #: axes1h.xml
 msgid "hell axe"
@@ -438,11 +438,11 @@ msgstr ""
 
 #: wands.xml
 msgid "apprentice wand"
-msgstr ""
+msgstr "палочка подмастерья"
 
 #: wands.xml
 msgid "novice wand"
-msgstr ""
+msgstr "палочка новичка"
 
 #: wands.xml
 msgid "hermit wand"
@@ -466,7 +466,7 @@ msgstr ""
 
 #: wands.xml
 msgid "silver wand"
-msgstr ""
+msgstr "серебряная палочка"
 
 #: wands.xml
 msgid "oak wand"
@@ -494,27 +494,27 @@ msgstr ""
 
 #: wands.xml
 msgid "master wand"
-msgstr ""
+msgstr "палочка мастера"
 
 #: wands.xml
 msgid "necromancer wand"
-msgstr ""
+msgstr "палочка некромансера"
 
 #: wands.xml
 msgid "demon wand"
-msgstr ""
+msgstr "палочка демона"
 
 #: wands.xml
 msgid "fairy wand"
-msgstr ""
+msgstr "палочка феи"
 
 #: wands.xml
 msgid "archmage wand"
-msgstr ""
+msgstr "палочка архимага"
 
 #: axes2h.xml
 msgid "lumberjack axe"
-msgstr ""
+msgstr "топор дровосека"
 
 #: axes2h.xml
 msgid "great axe"
@@ -542,7 +542,7 @@ msgstr ""
 
 #: axes2h.xml
 msgid "barbarian axe"
-msgstr ""
+msgstr "топор варвара"
 
 #: axes2h.xml
 msgid "bonebreaker axe"
@@ -550,7 +550,7 @@ msgstr ""
 
 #: axes2h.xml
 msgid "giant axe"
-msgstr ""
+msgstr "гигантский топор"
 
 #: axes2h.xml
 msgid "slaughter axe"
@@ -570,7 +570,7 @@ msgstr ""
 
 #: axes2h.xml
 msgid "kings axe"
-msgstr ""
+msgstr "королевский топор"
 
 #: axes2h.xml
 msgid "torture axe"
@@ -582,7 +582,7 @@ msgstr ""
 
 #: axes2h.xml
 msgid "death axe"
-msgstr ""
+msgstr "топор смерти"
 
 #: shields.xml
 msgid "targe"
@@ -594,19 +594,19 @@ msgstr ""
 
 #: shields.xml
 msgid "wood shield"
-msgstr ""
+msgstr "деревянный щит"
 
 #: shields.xml
 msgid "bronze shield"
-msgstr ""
+msgstr "бронзовый щит"
 
 #: shields.xml
 msgid "iron shield"
-msgstr ""
+msgstr "железный щит"
 
 #: shields.xml
 msgid "steel shield"
-msgstr ""
+msgstr "стальной щит"
 
 #: hat.xml
 msgid "vagabond hat"
@@ -770,7 +770,7 @@ msgstr ""
 
 #: hammer1h.xml
 msgid "silver hammer"
-msgstr ""
+msgstr "серебряный молот"
 
 #: hammer1h.xml
 msgid "diamont hammer"
@@ -798,11 +798,11 @@ msgstr ""
 
 #: potion.xml
 msgid "small potion"
-msgstr ""
+msgstr "маленькое зелье"
 
 #: potion.xml
 msgid "medium potion"
-msgstr ""
+msgstr "среднее зелье"
 
 #: potion.xml
 msgid "eyedrops"
@@ -810,7 +810,7 @@ msgstr ""
 
 #: potion.xml
 msgid "antidot"
-msgstr ""
+msgstr "антидот"
 
 #: potion.xml
 msgid "calming salve"
@@ -842,7 +842,7 @@ msgstr ""
 
 #: shortbow.xml
 msgid "practice bow"
-msgstr ""
+msgstr "тренировочный лук"
 
 #: shortbow.xml
 msgid "yew shortbow"
@@ -850,11 +850,11 @@ msgstr ""
 
 #: shortbow.xml
 msgid "shortbow"
-msgstr ""
+msgstr "короткий лук"
 
 #: shortbow.xml
 msgid "hunting bow"
-msgstr ""
+msgstr "охотничий лук"
 
 #: shortbow.xml
 msgid "rattan bow"
@@ -862,7 +862,7 @@ msgstr ""
 
 #: shortbow.xml
 msgid "bandit bow"
-msgstr ""
+msgstr "бандитский лук"
 
 #: shortbow.xml
 msgid "northeye"
@@ -870,7 +870,7 @@ msgstr ""
 
 #: shortbow.xml
 msgid "battle shortbow"
-msgstr ""
+msgstr "короткий боевой лук"
 
 #: shortbow.xml
 msgid "composite shortbow"
@@ -962,11 +962,11 @@ msgstr ""
 
 #: robes.xml
 msgid "novice robe"
-msgstr ""
+msgstr "мантия новичка"
 
 #: robes.xml
 msgid "alchemist robe"
-msgstr ""
+msgstr "мантия алхимика"
 
 #: robes.xml
 msgid "scholar robe"
@@ -974,11 +974,11 @@ msgstr ""
 
 #: robes.xml
 msgid "magus robe"
-msgstr ""
+msgstr "мантия мага"
 
 #: robes.xml
 msgid "council robe"
-msgstr ""
+msgstr "мантия консула"
 
 #: hammer2h.xml
 msgid "sledgehammer"
@@ -1014,7 +1014,7 @@ msgstr ""
 
 #: hammer2h.xml
 msgid "judgement hammer"
-msgstr ""
+msgstr "молот правосудия"
 
 #: hammer2h.xml
 msgid "priest hammer"
@@ -1054,19 +1054,19 @@ msgstr ""
 
 #: amulet.xml
 msgid "amber amulet"
-msgstr ""
+msgstr "янтарный амулет"
 
 #: amulet.xml
 msgid "silver amulet"
-msgstr ""
+msgstr "серебряный амулет"
 
 #: amulet.xml
 msgid "coral amulet"
-msgstr ""
+msgstr "коралловый амулет"
 
 #: amulet.xml
 msgid "gold amulet"
-msgstr ""
+msgstr "золотой амулет"
 
 #: goblinEqu.xml
 msgid "goblin armor"
@@ -1138,15 +1138,15 @@ msgstr ""
 
 #: ring.xml
 msgid "bronze ring"
-msgstr ""
+msgstr "бронзовое кольцо"
 
 #: ring.xml
 msgid "amber ring"
-msgstr ""
+msgstr "янтарное кольцо"
 
 #: ring.xml
 msgid "silver ring"
-msgstr ""
+msgstr "серебряное кольцо"
 
 #: ring.xml
 msgid "jet ring"
@@ -1154,7 +1154,7 @@ msgstr ""
 
 #: ring.xml
 msgid "gold ring"
-msgstr ""
+msgstr "золотое кольцо"
 
 #: longbow.xml
 msgid "tourney bow"
@@ -2219,11 +2219,11 @@ msgstr ""
 
 #: monster_ice_ablt.xml
 msgid "Ice arrow"
-msgstr ""
+msgstr "Ледяная стрела"
 
 #: monster_ice_ablt.xml
 msgid "Ice Arrow"
-msgstr ""
+msgstr "Ледяная стрела"
 
 #: monster_ice_ablt.xml
 msgid "an arrow of ice that will hunt it's prey"
@@ -2624,7 +2624,7 @@ msgstr "Крестьянин"
 
 #: npcStats.xml
 msgid "The Trader"
-msgstr ""
+msgstr "Торговец"
 
 #: monsters.xml
 msgid "small mandragora"
@@ -2640,11 +2640,11 @@ msgstr ""
 
 #: aisenMonsterStats.xml
 msgid "Giant wolf"
-msgstr ""
+msgstr "Гигантский волк"
 
 #: aisenMonsterStats.xml
 msgid "wolf"
-msgstr ""
+msgstr "Волк"
 
 #: aisenMonsterStats.xml
 msgid "Psychotic Spider"
@@ -2652,15 +2652,15 @@ msgstr ""
 
 #: aisenMonsterStats.xml
 msgid "Cave Spider"
-msgstr ""
+msgstr "Пещерный Паук"
 
 #: aisenMonsterStats.xml
 msgid "Spider"
-msgstr ""
+msgstr "Паук"
 
 #: aisenMonsterStats.xml
 msgid "Giant Bat"
-msgstr ""
+msgstr "Гигантская летучая мышь"
 
 #: aisenNPCStats.xml
 msgid "Guard"
@@ -2676,11 +2676,11 @@ msgstr ""
 
 #: aisenNPCStats.xml
 msgid "Leonard von Robenforst"
-msgstr ""
+msgstr "Леонард фон Робенфорст"
 
 #: aisenNPCStats.xml
 msgid "Scout"
-msgstr ""
+msgstr "Скаут"
 
 #: aisenNPCStats.xml
 msgid "Trader"
@@ -2700,15 +2700,15 @@ msgstr ""
 
 #: councilNPCStats.xml
 msgid "Tolec"
-msgstr ""
+msgstr "Толек"
 
 #: councilNPCStats.xml
 msgid "Derred"
-msgstr ""
+msgstr "Дерред"
 
 #: councilNPCStats.xml
 msgid "Soren Windclaw"
-msgstr ""
+msgstr "Сорен Виндклоу"
 
 #: councilNPCStats.xml
 msgid "Worker"
@@ -2916,7 +2916,7 @@ msgstr ""
 
 #: goblinStats.xml
 msgid "Marblak"
-msgstr ""
+msgstr "Марблак"
 
 #: goblinStats.xml
 msgid "goblin youngling"
@@ -2924,7 +2924,7 @@ msgstr ""
 
 #: goblinStats.xml
 msgid "Gab'Resh"
-msgstr ""
+msgstr "Габ Реш"
 
 #: goblinStats.xml
 msgid "Gab Clan Goblin"
@@ -2996,7 +2996,7 @@ msgstr ""
 
 #: humans.xml
 msgid "Thief"
-msgstr ""
+msgstr "Вор"
 
 #: humans.xml
 msgid "Raider"
@@ -3012,7 +3012,7 @@ msgstr ""
 
 #: humans.xml
 msgid "Deserter"
-msgstr ""
+msgstr "Дезертир"
 
 #: humans.xml
 msgid "Saboteur"
@@ -3032,7 +3032,7 @@ msgstr ""
 
 #: rescue_willard.xml
 msgid "Willard"
-msgstr ""
+msgstr "Виллард"
 
 #: joringsbridge_npc.xml
 msgid "Gertlinde Kampfer"
@@ -3040,7 +3040,7 @@ msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "Potions"
-msgstr ""
+msgstr "Зелья"
 
 #: joringsbridge_npc.xml
 msgid "Sybill"
@@ -3052,7 +3052,7 @@ msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "Halgor"
-msgstr ""
+msgstr "Халгор"
 
 #: joringsbridge_npc.xml
 #, fuzzy
@@ -3089,11 +3089,11 @@ msgstr ""
 
 #: joringsbridge_npc.xml
 msgid "Sergeant Lutterer"
-msgstr ""
+msgstr "Сержант Люттерер"
 
 #: joringsbridge_npc.xml
 msgid "Joringsbridge"
-msgstr ""
+msgstr "Джорингсбридж"
 
 #: joringsbridge_npc.xml
 msgid ""
@@ -3144,7 +3144,7 @@ msgstr "Спасибо за предупреждение, сержант."
 
 #: joringsbridge_npc.xml
 msgid "Michel Bron"
-msgstr ""
+msgstr "Мишель Брон"
 
 #: joringsbridge_npc.xml
 msgid "Magus Convocatis Relau Fireweaver"
@@ -3275,7 +3275,7 @@ msgstr ""
 
 #: dwarfcastle.xml
 msgid "Haffgar"
-msgstr ""
+msgstr "Хаффгар"
 
 #: dwarfcastle.xml
 msgid "Trade"
@@ -3283,15 +3283,15 @@ msgstr ""
 
 #: dwarfcastle.xml
 msgid "Amelia"
-msgstr ""
+msgstr "Амелия"
 
 #: dwarfcastle.xml
 msgid "Drago"
-msgstr ""
+msgstr "Драго"
 
 #: dwarfcastle.xml
 msgid "Flynn"
-msgstr ""
+msgstr "Флинн"
 
 #: dwarfcastle.xml
 msgid "What is all this?"
@@ -3335,7 +3335,7 @@ msgstr "Магич. сила"
 
 #: dwarfcastle.xml
 msgid "Willpower"
-msgstr ""
+msgstr "Сила воли"
 
 #: dwarfcastle.xml
 msgid "Attack speed"
@@ -3387,7 +3387,7 @@ msgstr ""
 
 #: npc.xml
 msgid "Gab Resh"
-msgstr ""
+msgstr "Габ Реш"
 
 #: npc.xml
 msgid "Maga Convocatis Darna Eistaucher"
@@ -3427,7 +3427,7 @@ msgstr "Открыть хранилище"
 
 #: npc.xml
 msgid "The Lost Trader"
-msgstr ""
+msgstr "Потерянный торговец"
 
 #: npc.xml
 msgid "Leere Schriftrollen kaufen"
@@ -3435,7 +3435,7 @@ msgstr ""
 
 #: npc.xml
 msgid "Wounded Scout"
-msgstr ""
+msgstr "Раненый скаут"
 
 #: npc.xml
 msgid "Enchanter"
@@ -3459,7 +3459,7 @@ msgstr "Каин"
 
 #: medairnpc.xml
 msgid "Fenor Marken"
-msgstr ""
+msgstr "Фенор Маркен"
 
 #: theFissure.xml
 msgid "Unknown Lich"

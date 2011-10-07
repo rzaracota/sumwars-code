@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+# Russian translations for sumwars package
 # Copyright (C) 2010 THE sumwars'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-12 21:30+0200\n"
-"PO-Revision-Date: 2011-06-20 21:03+0400\n"
+"PO-Revision-Date: 2011-10-01 00:20+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -246,7 +246,7 @@ msgstr ""
 
 #: ../src/gui/charinfo.cpp:325
 msgid "attribute points to spend"
-msgstr ""
+msgstr "Оставшиеся очки умений"
 
 #: ../src/gui/charinfo.cpp:569
 msgid "Damage dealt by "
@@ -276,11 +276,11 @@ msgstr ""
 
 #: ../src/gui/charinfo.cpp:648
 msgid "Offense"
-msgstr ""
+msgstr "Нападение"
 
 #: ../src/gui/charinfo.cpp:651
 msgid "Defense"
-msgstr ""
+msgstr "Защита"
 
 #: ../src/gui/charinfo.cpp:713
 msgid "Damage dealt to  "
@@ -437,15 +437,15 @@ msgstr "Выход"
 
 #: ../src/gui/mainmenu.cpp:632
 msgid "Really delete savegame?"
-msgstr ""
+msgstr "Действительно удалить сохраненную игру?"
 
 #: ../src/gui/mainmenu.cpp:632
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: ../src/gui/mainmenu.cpp:632
 msgid "No"
-msgstr ""
+msgstr "Нет"
 
 #: ../src/gui/messageboxes.cpp:52 ../src/gui/messageboxes.cpp:198
 #: ../src/gui/networkwindows.cpp:95 ../src/gui/networkwindows.cpp:223
@@ -491,27 +491,27 @@ msgstr ""
 
 #: ../src/gui/optionswindow.cpp:164
 msgid "White"
-msgstr ""
+msgstr "Белый"
 
 #: ../src/gui/optionswindow.cpp:165
 msgid "Black"
-msgstr ""
+msgstr "Черный"
 
 #: ../src/gui/optionswindow.cpp:166
 msgid "Red"
-msgstr ""
+msgstr "Красный"
 
 #: ../src/gui/optionswindow.cpp:167
 msgid "Green"
-msgstr ""
+msgstr "Зеленый"
 
 #: ../src/gui/optionswindow.cpp:168
 msgid "Blue"
-msgstr ""
+msgstr "Синий"
 
 #: ../src/gui/optionswindow.cpp:169
 msgid "Yellow"
-msgstr ""
+msgstr "Желтый"
 
 #: ../src/gui/optionswindow.cpp:170
 msgid "Magenta"
@@ -523,15 +523,15 @@ msgstr ""
 
 #: ../src/gui/optionswindow.cpp:172
 msgid "Orange"
-msgstr ""
+msgstr "Оранжевый"
 
 #: ../src/gui/optionswindow.cpp:173
 msgid "Pink"
-msgstr ""
+msgstr "Розовый"
 
 #: ../src/gui/optionswindow.cpp:174
 msgid "Purple"
-msgstr ""
+msgstr "Фиолетовый"
 
 #: ../src/gui/optionswindow.cpp:175
 msgid "Cornflower Blue"
@@ -539,7 +539,7 @@ msgstr ""
 
 #: ../src/gui/optionswindow.cpp:211
 msgid "System default"
-msgstr ""
+msgstr "По умолчанию"
 
 #: ../src/gui/optionswindow.cpp:308
 msgid "Shortkeys"
@@ -652,11 +652,11 @@ msgstr ""
 
 #: playerclasses.xml
 msgid "Magician"
-msgstr ""
+msgstr "Маг"
 
 #: playerclasses.xml
 msgid "Archer"
-msgstr ""
+msgstr "Лучник"
 
 #: playerclasses.xml
 msgid "Priest"
