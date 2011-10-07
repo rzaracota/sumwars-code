@@ -55,7 +55,7 @@
             <Property Name="TabHeight" Value="{0,31.1724}" />
             <Property Name="TabButtonType" Value="TaharezLook/brownTabButton" />
             <Property Name="TabPanePosition" Value="Top" />
-            <Property Name="UnifiedAreaRect" Value="{{0.0376348,0},{0.170444,0},{0.970961,0},{0.879806,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0376348,0},{0.118169,0},{0.970961,0},{0.879806,0}}" />
         </Window>
         <Window Type="TaharezLook/StaticText" Name="SkilltreeLabel" >
             <Property Name="Text" Value="SkillTree" />
