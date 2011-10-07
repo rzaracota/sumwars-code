@@ -15,8 +15,9 @@
 		<Window Type="TaharezLook/StaticText" Name="NameLabel" >
 			<Property Name="Text" Value="Name" />
 			<Property Name="FrameEnabled" Value="False" />
-			<Property Name="UnifiedAreaRect" Value="{{0.45,0},{0.035,0},{0.63,0},{0.060,0}}" />
-			<Property Name="BackgroundEnabled" Value="False" />
+		<Property Name="HorzFormatting" Value="HorzCentred" />
+		<Property Name="UnifiedAreaRect" Value="{{0.376,0},{0.035,0},{0.624,0},{0.06,0}}" />
+		<Property Name="BackgroundEnabled" Value="False" />
 		</Window>
 		<Window Type="TaharezLook/StaticText" Name="Playerinfo" >
 			<Property Name="Text" Value="Player info" />

@@ -810,23 +810,29 @@ void MainWindow::setupControlPanel()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "CharInfoUpgradeButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/ImageButton", "CharInfoUpgradeButton"));
 	m_game_screen->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.02f), cegui_reldim( 0.65f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.07f)));
-	btn->setText("+");
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonCharInfoClicked, static_cast<ControlPanel*>(wnd)));
 	btn->setVisible(false);
+	btn->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased");
+	btn->setProperty("DisabledImage", "set:CharScreen image:PlusBtnReleased");
+	btn->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased");
+	btn->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SkillUpgradeButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/ImageButton", "SkillUpgradeButton"));
 	m_game_screen->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.92f), cegui_reldim( 0.65f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.07f)));
-	btn->setText("+");
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, static_cast<ControlPanel*>(wnd)));
 	btn->setVisible(false);
+	btn->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased");
+	btn->setProperty("DisabledImage", "set:CharScreen image:PlusBtnReleased");
+	btn->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased");
+	btn->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
 }
 
 void MainWindow::setupCharInfo()

@@ -39,13 +39,12 @@ SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard)
 	
 	m_player_id =0;
 	
-	CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.createWindow("TaharezLook/TabControl", "Skilltree");
+	CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.loadWindowLayout( "SkillTree.layout" );
 	m_window = skilltree;
-	skilltree->setPosition(CEGUI::UVector2(cegui_reldim(0.52f), cegui_reldim( 0.0f)));
-	skilltree->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.77f)));
 	skilltree->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent,  (Window*) this));
 	skilltree->setWantsMultiClickEvents(false);
-	skilltree->setAlpha(0.7);
+	skilltree->setPosition(CEGUI::UVector2(cegui_reldim(0.52f), cegui_reldim( 0.0f)));
+	skilltree->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.85f)));
 	
 	m_nr_tabs =0;
 	m_nr_skills =0;
@@ -57,11 +56,12 @@ void SkillTree::update()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	Player* player = m_document->getLocalPlayer();
-	CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.getWindow("Skilltree");
+	CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreeTabs");
 	
 	CEGUI::Window* wnd;
 	std::vector<CEGUI::DefaultWindow*> tabs(3);
 	CEGUI::Window* label;
+	CEGUI::Window* bg;
 	CEGUI::PushButton* button;
 	std::stringstream stream;
 	
@@ -136,47 +136,24 @@ void SkillTree::update()
 			tabs[i] = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", stream.str());
 			skilltree->addTab(tabs[i]);
 			
-			// labels for skillpoints and next skillpoint
 			stream.str("");
-			stream << "SkillpointsLabel" << i;
-			label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
-			tabs[i]->addChildWindow(label);
-			label->setProperty("FrameEnabled", "true");
-			label->setProperty("BackgroundEnabled", "true");
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.02f), cegui_reldim( 0.92f)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.22f), cegui_reldim( 0.06f)));
-			
-			stream.str("");
-			stream << "SkillpointsValueLabel" << i;
-			label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
-			tabs[i]->addChildWindow(label);
-			label->setProperty("FrameEnabled", "true");
-			label->setProperty("BackgroundEnabled", "true");
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.26f), cegui_reldim( 0.92f)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.06f)));
-			label->setText("0");
-			
-			stream.str("");
-			stream << "NextSkillpointsLabel" << i;
-			label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
-			tabs[i]->addChildWindow(label);
-			label->setProperty("FrameEnabled", "true");
-			label->setProperty("BackgroundEnabled", "true");
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.41f), cegui_reldim( 0.92f)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim( 0.06f)));
-			
-			stream.str("");
-			stream << "NextSkillpointsValueLabel" << i;
-			label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
-			tabs[i]->addChildWindow(label);
-			label->setProperty("FrameEnabled", "true");
-			label->setProperty("BackgroundEnabled", "true");
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.88f), cegui_reldim( 0.92f)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.06f)));
-			label->setText("0");
+			stream << "SkilltreeTabs__auto_TabPane__Buttons__auto_btnSkilltreeTab" << i;
+			label =  win_mgr.getWindow(stream.str());
+			label->setInheritsAlpha(false);
 		}
 		
+		// labels for skillpoints and next skillpoint
+		
+		label = win_mgr.getWindow("SkillpointsValueLabel");
+		label->setText("0");
+		
+		
+		label = win_mgr.getWindow("NextSkillpointsValueLabel");
+		label->setText("0");
+		
+		
 		CEGUI::UVector2 pos;
+		CEGUI::UVector2 bgpos;
 		std::string name,lname,bname;
 		Vector spos;
 		
@@ -189,12 +166,25 @@ void SkillTree::update()
 			// Label mit dem Bild
 			DEBUGX("ability %s nr %i",it->second.m_type.c_str(),cnt);
 			stream.str("");
+			stream << "ImageBg"<<cnt;
+			bg = win_mgr.createWindow("TaharezLook/StaticImage", stream.str());
+			bg->setProperty("Image", "set:SkillTree image:SkillBg");
+			bg->setInheritsAlpha(false);
+			stream.str("");
 			stream << "SkillImage"<<cnt;
 			label = win_mgr.createWindow("TaharezLook/StaticImage", stream.str());
+			
+			tabs[it->second.m_skilltree_tab-1]->addChildWindow(bg);
 			tabs[it->second.m_skilltree_tab-1]->addChildWindow(label);
 			
 			spos = it->second.m_skilltree_position;
 			pos = CEGUI::UVector2(cegui_reldim(spos.m_x), cegui_reldim( spos.m_y));
+			bgpos = CEGUI::UVector2(cegui_reldim(spos.m_x -0.02), cegui_reldim( spos.m_y -0.02));
+			bg->setPosition(bgpos);
+			bg->setSize(CEGUI::UVector2(cegui_reldim(0.165f), cegui_reldim( 0.145f)));
+			bg->setProperty("FrameEnabled", "false");
+			bg->setProperty("BackgroundEnabled", "false");
+
 			label->setPosition(pos);
 			label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
 		
@@ -203,13 +193,15 @@ void SkillTree::update()
 			stream.str("");
 			stream << "SkillButton"<<cnt;
 			button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", stream.str()));
+			button->setInheritsAlpha(false);
 			tabs[it->second.m_skilltree_tab-1]->addChildWindow(button);
 			button->setPosition(pos);
 			button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 			
 			// beschriften und verknuepfen
-			label->setProperty("FrameEnabled", "true");
-			label->setProperty("BackgroundEnabled", "true");
+			label->setProperty("FrameEnabled", "false");
+			label->setInheritsAlpha(false);
+			label->setProperty("BackgroundEnabled", "false");
 			label->setID(it->first);
 			std::string imagename = it->second.m_image;
 			if (imagename == "")
@@ -243,6 +235,7 @@ void SkillTree::update()
 						label = win_mgr.createWindow("TaharezLook/StaticImage", stream.str());
 						tabs[it->second.m_skilltree_tab-1]->addChildWindow(label);
 						label->setMousePassThroughEnabled(true);
+						label->setInheritsAlpha(false);
 						label->setProperty("FrameEnabled", "false");
 						label->setProperty("BackgroundEnabled", "false");
 			
@@ -383,24 +376,17 @@ void SkillTree::update()
 	spstream << player->getSkillPoints();
 	
 	// there is one label on _each_ tab
-	for (int i=0; i<3; i++)
-	{
-		stream.str("");
-		stream << "SkillpointsValueLabel" << i;
-		label =  win_mgr.getWindow(stream.str());
+	label =  win_mgr.getWindow("SkillpointsValueLabel");
 		if (label->getText() != spstream.str())
 		{
 			label->setText(spstream.str());
 		}
 		
-		stream.str("");
-		stream << "NextSkillpointsValueLabel" << i;
-		label =  win_mgr.getWindow(stream.str());
+	label =  win_mgr.getWindow("NextSkillpointsValueLabel");
 		if (label->getText() != lvlstr)
 		{
 			label->setText(lvlstr);
 		}
-	}
 	
 	
 	// Markierer fuer Shortkeys einbauen
@@ -448,6 +434,7 @@ void SkillTree::update()
 		{
 			m_shortkey_labels ++;
 			label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
+			label->setInheritsAlpha(false);
 			label->setProperty("FrameEnabled", "false");
 			label->setProperty("BackgroundEnabled", "false");
 			label->setProperty("HorzFormatting", "Centred");
@@ -546,18 +533,13 @@ void SkillTree::updateTranslation()
 	for (int i=0; i<3; i++)
 	{
 		tabs[i]->setText((CEGUI::utf8*) gettext(pdata->m_tabnames[i].c_str()));
-		
-		stream.str("");
-		stream << "SkillpointsLabel" << i;
-		label =  win_mgr.getWindow(stream.str());
+	}
+
+		label =  win_mgr.getWindow("SkillpointsLabel");
 		label->setText((CEGUI::utf8*) gettext("Skillpoints"));
 		
-		stream.str("");
-		stream << "NextSkillpointsLabel" << i;
-		label =  win_mgr.getWindow(stream.str());
+		label =  win_mgr.getWindow("NextSkillpointsLabel");
 		label->setText((CEGUI::utf8*) gettext("Next Skillpoint at Level"));
-	}
-	
 }
 
 void SkillTree::updateAbilityTooltip(unsigned int pos)
