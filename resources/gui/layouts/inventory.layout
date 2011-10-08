@@ -6,6 +6,13 @@
         <Property Name="FrameEnabled" Value="False" />
         <Property Name="UnifiedAreaRect" Value="{{0.172656,0},{0.0567393,0},{0.635546,0},{0.959084,0}}" />
         <Property Name="BackgroundEnabled" Value="False" />
+        <Window Type="TaharezLook/ImageButton" Name="InvCloseButton" >
+            <Property Name="HoverImage" Value="set:Misc image:CloseBtnHovered" />
+            <Property Name="NormalImage" Value="set:Misc image:CloseBtnReleased" />
+            <Property Name="DisabledImage" Value="set:Misc image:CloseBtnReleased" />
+            <Property Name="PushedImage" Value="set:Misc image:CloseBtnPressed" />
+            <Property Name="UnifiedAreaRect" Value="{{0.00843835,0},{0.0621991,0},{0.10021,0},{0.104407,0}}" />
+        </Window>
         <Window Type="TaharezLook/StaticText" Name="InvLabel" >
             <Property Name="Text" Value="Inventory" />
             <Property Name="HorzExtent" Value="73" />

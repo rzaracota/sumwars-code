@@ -182,6 +182,9 @@ Inventory::Inventory (Document* doc)
 	label = win_mgr.getWindow("BigTabButton");
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onSwitchTabClicked, this));
 	
+	label = win_mgr.getWindow("InvCloseButton");
+	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onCloseButtonClicked, this));
+	
 	createAnimations();
 
 	updateTranslation();
@@ -443,6 +446,12 @@ bool Inventory::onSwitchTabClicked(const CEGUI::EventArgs& evt)
 		setState(Inventory::StateBig);
 	}
 
+	return true;
+}
+
+bool Inventory::onCloseButtonClicked(const CEGUI::EventArgs& evt)
+{
+	m_document->onButtonInventoryClicked();
 	return true;
 }
 

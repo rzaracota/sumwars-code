@@ -76,6 +76,11 @@ class Inventory : public ItemWindow
 		 * \brief Handles clicks to the switch tab button
 		 */
 		bool onSwitchTabClicked(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \brief Handles clicks to the close button
+		 */
+		bool onCloseButtonClicked(const CEGUI::EventArgs& evt);
 
 		/**
 		 * \fn bool createAnimations()

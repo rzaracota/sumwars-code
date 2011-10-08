@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
 <GUIScheme Name="TaharezLook">
+    <Imageset Name="Misc" Filename="misc.imageset" />
 	<Imageset Name="Inventory" Filename="Inventory.imageset" />
 	<Imageset Name="CharScreen" Filename="CharacterScreen.imageset" />
 	<Imageset Name="Portrait" Filename="portrait.imageset" />
