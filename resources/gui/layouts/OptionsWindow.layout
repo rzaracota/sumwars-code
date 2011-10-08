@@ -308,6 +308,25 @@
                     <Property Name="UnifiedSize" Value="{{0.4,0},{0.5,0}}" />
                     <Property Name="MaxEditTextLength" Value="1073741823" />
                 </Window>
+				
+				<Window Type="TaharezLook/Button" Name="ResetGraphicsButton" >
+                    <Property Name="Text" Value="Reset graphic options" />
+					<Property Name="HoverImage" Value="set:MainMenu image:SPBtnHover" />
+                    <Property Name="NormalImage" Value="set:MainMenu image:SPBtnNormal" />
+                    <Property Name="PushedImage" Value="set:MainMenu image:SPBtnPushed" />
+                    <Property Name="DisabledImage" Value="set:MainMenu image:SPBtnNormal" />
+					<Property Name="InheritsAlpha" Value="False" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.018,0},{0.45,0},{0.35,0},{0.53,0}}" />
+                </Window>
+				<Window Type="TaharezLook/StaticText" Name="ResetGraphicsLabel" >
+                    <Property Name="Text" Value="Restart required for setting new options" />
+                    <Property Name="HorzExtent" Value="168" />
+                    <Property Name="VertExtent" Value="25.5702" />
+                    <Property Name="FrameEnabled" Value="False" />
+                    <Property Name="InheritsAlpha" Value="False" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.4,0},{0.45,0},{0.9,0},{0.53,0}}" />
+                    <Property Name="BackgroundEnabled" Value="False" />
+                </Window>
             </Window>
             <Window Type="TaharezLook/TabContentPane" Name="OptionsMisc" >
                 <Property Name="Text" Value="Misc" />
