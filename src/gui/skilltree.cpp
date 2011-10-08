@@ -36,6 +36,7 @@ SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard)
 	std::string name;
 	std::string lname,bname;
 	CEGUI::UVector2 pos;
+	CEGUI::Window* label;
 	
 	m_player_id =0;
 	
@@ -45,6 +46,9 @@ SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard)
 	skilltree->setWantsMultiClickEvents(false);
 	skilltree->setPosition(CEGUI::UVector2(cegui_reldim(0.52f), cegui_reldim( 0.0f)));
 	skilltree->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.85f)));
+	
+	label = win_mgr.getWindow("SkillTreeCloseButton");
+	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onCloseButtonClicked, this));
 	
 	m_nr_tabs =0;
 	m_nr_skills =0;
@@ -601,6 +605,12 @@ bool SkillTree::onSkillLearnMouseClicked(const CEGUI::EventArgs& evt)
 	// versuche Faehigkeit zu lernen
 	m_document->learnAbility(ablts[id].m_type);
 	
+	return true;
+}
+
+bool SkillTree::onCloseButtonClicked(const CEGUI::EventArgs& evt)
+{
+	m_document->onButtonSkilltreeClicked();
 	return true;
 }
 

@@ -51,6 +51,11 @@ class CharInfo : public Window
 		 * \brief Behandelt Klick auf Button Attribut erhoehen
 		 */
 		bool onIncreaseAttributeButtonClicked(const CEGUI::EventArgs& evt);
+	
+		/**
+		 * \brief Handles clicks to the close button
+		 */
+		bool onCloseButtonClicked(const CEGUI::EventArgs& evt);
 };
 
 #endif

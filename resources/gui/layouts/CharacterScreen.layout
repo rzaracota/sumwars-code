@@ -12,6 +12,13 @@
 			<Property Name="UnifiedAreaRect" Value="{{0.104,0},{0.195,0},{0.275,0},{0.334,0}}" />
 			<Property Name="BackgroundEnabled" Value="False" />
 		</Window>
+		<Window Type="TaharezLook/ImageButton" Name="CharInfoCloseButton" >
+			<Property Name="HoverImage" Value="set:Misc image:CloseBtnHovered" />
+			<Property Name="NormalImage" Value="set:Misc image:CloseBtnReleased" />
+			<Property Name="DisabledImage" Value="set:Misc image:CloseBtnReleased" />
+			<Property Name="PushedImage" Value="set:Misc image:CloseBtnPressed" />
+			<Property Name="UnifiedAreaRect" Value="{{0.89979,0},{0.0621991,0},{0.99156165,0},{0.104407,0}}" />
+		</Window>
 		<Window Type="TaharezLook/StaticText" Name="NameLabel" >
 			<Property Name="Text" Value="Name" />
 			<Property Name="FrameEnabled" Value="False" />

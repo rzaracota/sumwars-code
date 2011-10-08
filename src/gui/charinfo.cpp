@@ -160,6 +160,9 @@ CharInfo::CharInfo (Document* doc)
 	label = win_mgr.getWindow("ResistIceValueLabel");
 	label->setText("0");
 	
+	label = win_mgr.getWindow("CharInfoCloseButton");
+	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&CharInfo::onCloseButtonClicked, this));
+
 	updateTranslation();
 }
 
@@ -688,6 +691,11 @@ bool CharInfo::onIncreaseAttributeButtonClicked(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+bool CharInfo::onCloseButtonClicked(const CEGUI::EventArgs& evt)
+{
+	m_document->onButtonCharInfoClicked();
+	return true;
+}
 
 
 

@@ -79,6 +79,11 @@ class SkillTree : public Window
 		
 		
 		/**
+		 * \brief Handles clicks to the close button
+		 */
+		bool onCloseButtonClicked(const CEGUI::EventArgs& evt);
+		
+		/**
 		 * \var OIS::Keyboard *m_keyboard
 		 * \brief Repraesentation der Tastatur
 		 */
