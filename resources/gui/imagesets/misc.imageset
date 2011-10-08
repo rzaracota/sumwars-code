@@ -1,0 +1,10 @@
+<Imageset AutoScaled="false" Imagefile="misc.png" Name="Misc" NativeHorzRes="800" NativeVertRes="600">
+    <Image Height="32" Name="QuestionDialog" Width="538" XPos="0" YPos="0" />
+    <Image Height="41" Name="ProgressBarLeft" Width="82" XPos="33" YPos="117" />
+    <Image Height="41" Name="ProgressBarRight" Width="83" XPos="215" YPos="117" />
+    <Image Height="41" Name="ProgressBarMiddle" Width="128" XPos="134" YPos="117" />
+    <Image Height="41" Name="ProgressBarLitSegment" Width="120" XPos="248" YPos="54" />
+    <Image Height="30" Name="CloseBtnReleased" Width="40" XPos="90" YPos="55" />
+    <Image Height="30" Name="CloseBtnPressed" Width="40" XPos="196" YPos="55" />
+    <Image Height="30" Name="CloseBtnHovered" Width="40" XPos="143" YPos="55" />
+</Imageset>
