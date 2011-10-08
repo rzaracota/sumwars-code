@@ -869,12 +869,12 @@
     <WidgetLook name="TaharezLook/ProgressBar">
         <NamedArea name="ProgressArea">
             <Area>
-                <Dim type="LeftEdge" ><ImageDim imageset="TaharezLook" image="ProgressBarLeft" dimension="Width" /></Dim>
+                <Dim type="LeftEdge" ><ImageDim imageset="Misc" image="ProgressBarLeft" dimension="Width" /></Dim>
                 <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
                 <Dim type="RightEdge" >
                     <UnifiedDim scale="1" type="RightEdge">
                         <DimOperator op="Subtract">
-                            <ImageDim imageset="TaharezLook" image="ProgressBarRight" dimension="Width" />
+                            <ImageDim imageset="Misc" image="ProgressBarRight" dimension="Width" />
                         </DimOperator>
                     </UnifiedDim>
                 </Dim>
@@ -889,9 +889,9 @@
                     <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
                     <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
                 </Area>
-                <Image type="LeftEdge" imageset="TaharezLook" image="ProgressBarLeft" />
-                <Image type="RightEdge" imageset="TaharezLook" image="ProgressBarRight" />
-                <Image type="Background" imageset="TaharezLook" image="ProgressBarMiddle" />
+                <Image type="LeftEdge" imageset="Misc" image="ProgressBarLeft" />
+                <Image type="RightEdge" imageset="Misc" image="ProgressBarRight" />
+                <Image type="Background" imageset="Misc" image="ProgressBarMiddle" />
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="progress_lights" >
@@ -902,7 +902,7 @@
                     <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
                     <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
                 </Area>
-                <Image imageset="TaharezLook" image="ProgressBarLitSegment" />
+                <Image imageset="Misc" image="ProgressBarDimSegment" />
                 <VertFormat type="Stretched" />
                 <HorzFormat type="Tiled" />
             </ImageryComponent>

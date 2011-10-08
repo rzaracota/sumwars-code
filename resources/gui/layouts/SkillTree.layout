@@ -11,7 +11,7 @@
             <Property Name="NormalImage" Value="set:Misc image:CloseBtnReleased" />
             <Property Name="DisabledImage" Value="set:Misc image:CloseBtnReleased" />
             <Property Name="PushedImage" Value="set:Misc image:CloseBtnPressed" />
-            <Property Name="UnifiedAreaRect" Value="{{0.00843835,0},{0.0621991,0},{0.10021,0},{0.104407,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0274257,0},{0.0674266,0},{0.10232,0},{0.108328,0}}" />
         </Window>
         <Window Type="TaharezLook/StaticText" Name="SkillpointsLabel" >
             <Property Name="Text" Value="Inventory" />

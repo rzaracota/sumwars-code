@@ -17,7 +17,7 @@
 			<Property Name="NormalImage" Value="set:Misc image:CloseBtnReleased" />
 			<Property Name="DisabledImage" Value="set:Misc image:CloseBtnReleased" />
 			<Property Name="PushedImage" Value="set:Misc image:CloseBtnPressed" />
-			<Property Name="UnifiedAreaRect" Value="{{0.89979,0},{0.0621991,0},{0.99156165,0},{0.104407,0}}" />
+			<Property Name="UnifiedAreaRect" Value="{{0.903207,0},{0.0674265,0},{0.977863,0},{0.105715,0}}" />
 		</Window>
 		<Window Type="TaharezLook/StaticText" Name="NameLabel" >
 			<Property Name="Text" Value="Name" />
