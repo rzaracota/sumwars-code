@@ -141,8 +141,11 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	chkbox->setSelected(Options::getInstance()->getGrabMouseInWindowedMode());
 	chkbox->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&OptionsWindow::onGrabMouseChanged, this));
 	
+	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ResetGraphicsButton"));
+	btn->setID(5);
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&OptionsWindow::onResetGraphics, this));
 	
-	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsCloseButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsCloseButton"));
 	btn->setID(5);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&OptionsWindow::onButtonOkClicked, this));
 
@@ -298,12 +301,17 @@ void OptionsWindow::updateTranslation()
 
 	label = win_mgr.getWindow("LanguageLabel");
 	label->setText((CEGUI::utf8*) gettext("Language"));
+	
+	label = win_mgr.getWindow("ResetGraphicsLabel");
+	label->setText((CEGUI::utf8*) gettext("Restart required for setting new options"));
 
 	box = static_cast<CEGUI::Checkbox*>(win_mgr.getWindow("GrabMouseInWindowedModeBox"));
 	box->setText((CEGUI::utf8*) gettext("Grab mouse in windowed mode (needs restart)"));
 	
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "OptionsCloseButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "ResetGraphicsButton"));
+	btn->setText((CEGUI::utf8*) gettext("Reset graphic options"));
 }
 
 
@@ -420,6 +428,12 @@ bool OptionsWindow::onEnemyHighlightChanged(const CEGUI::EventArgs& evt)
 		Options::getInstance()->setEnemyHighlightColor(sitem->m_data.c_str());
 	}
 
+	return true;
+}
+
+bool OptionsWindow::onResetGraphics(const CEGUI::EventArgs& evt)
+{
+	remove("ogre.cfg");
 	return true;
 }
 
