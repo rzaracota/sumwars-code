@@ -29,7 +29,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
-	CEGUI::FrameWindow* options = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "OptionsWindow");
+	CEGUI::FrameWindow* options = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("OptionsWindow.layout");
 	m_window = options;
 	/*options->setProperty("FrameEnabled","false");
 	options->setProperty("TitlebarEnabled","false");
@@ -41,26 +41,27 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	options->setInheritsAlpha(false);
 	
 	// Rahmen fuer das Menue Savegame auswaehlen
-	CEGUI::TabControl* optionstab = (CEGUI::TabControl*) win_mgr.createWindow("TaharezLook/TabControl", "OptionsWindowTab");
-	optionstab->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.00f)));
-	optionstab->setSize(CEGUI::UVector2(cegui_reldim(0.9f), cegui_reldim( 0.9f)));
+	CEGUI::TabControl* optionstab = (CEGUI::TabControl*) win_mgr.getWindow("OptionsWindowTab");
 	optionstab->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&OptionsWindow::onAreaMouseButtonPressed, this));
-	options->addChildWindow(optionstab);
-
-
-	CEGUI::DefaultWindow* keys = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "OptionsShortkeys");
-	optionstab->addTab(keys);
-	CEGUI::DefaultWindow* gameplay = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "OptionsGameplay");
-	optionstab->addTab(gameplay);
-	CEGUI::DefaultWindow* sound = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "OptionsSound");
-	optionstab->addTab(sound);
-	CEGUI::DefaultWindow* graphic = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "OptionsGraphic");
-	optionstab->addTab(graphic);
-	CEGUI::DefaultWindow* misc = (CEGUI::DefaultWindow*) win_mgr.createWindow("TaharezLook/TabContentPane", "OptionsMisc");
-	optionstab->addTab(misc);
-
 	CEGUI::Window* label;
 	CEGUI::Scrollbar* slider;
+
+	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsShortkeys");
+	label->setInheritsAlpha(false);
+	
+	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsGameplay");
+	label->setInheritsAlpha(false);
+	
+	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsSound");
+	label->setInheritsAlpha(false);
+	
+	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsGraphic");
+	label->setInheritsAlpha(false);
+	
+	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsMisc");
+	label->setInheritsAlpha(false);
+	
+
 
 	int targets[9] = {SHOW_INVENTORY, SHOW_CHARINFO, SHOW_SKILLTREE, SHOW_PARTYMENU, SHOW_CHATBOX, SHOW_QUESTINFO, SHOW_MINIMAP, SWAP_EQUIP, SHOW_ITEMLABELS};
 
@@ -70,40 +71,20 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 		stream.str("");
 		stream << "ShortkeyLabel"<<i;
 
-		label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
-		keys->addChildWindow(label);
-		label->setProperty("FrameEnabled", "true");
-		label->setProperty("BackgroundEnabled", "true");
-		label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( i*0.08+0.02f)));
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
+		label = win_mgr.getWindow(stream.str());
 		label->setID(targets[i]);
 		label->setWantsMultiClickEvents(false);
 
 		stream.str("");
 		stream << "ShortkeyValueLabel"<<i;
 
-		label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
-		keys->addChildWindow(label);
-		label->setProperty("FrameEnabled", "true");
-		label->setProperty("BackgroundEnabled", "true");
-		label->setPosition(CEGUI::UVector2(cegui_reldim(0.38f), cegui_reldim( i*0.08+0.02f)));
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.06f)));
+		label = win_mgr.getWindow(stream.str());
 		label->setID(targets[i]);
 		label->setWantsMultiClickEvents(false);
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&OptionsWindow::onShortkeyLabelClicked,  this));
 	}
 	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "GameplayDifficultyLabel");
-	gameplay->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.2)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
-	
-	CEGUI::Combobox* diffcbo = static_cast<CEGUI::Combobox*>(win_mgr.createWindow("TaharezLook/Combobox","DifficultyBox"));
-	gameplay->addChildWindow(diffcbo);
-	diffcbo->setPosition(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim( 0.2f)));
-	diffcbo->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.3f)));
+	CEGUI::Combobox* diffcbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("DifficultyBox"));
 	diffcbo->addItem(new ListItem((CEGUI::utf8*) gettext("Easy"),Options::EASY));
 	diffcbo->addItem(new ListItem((CEGUI::utf8*) gettext("Normal"),Options::NORMAL));
 	diffcbo->addItem(new ListItem((CEGUI::utf8*) gettext("Hard"),Options::HARD));
@@ -114,69 +95,28 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	diffcbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onDifficultyChanged, this));
 	diffcbo->setItemSelectState( (size_t) (Options::getInstance()->getDifficulty()-1),true);
 	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "TextSpeedLabel");
-	gameplay->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.4)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
-	
-	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.createWindow("TaharezLook/HorizontalScrollbar", "TextSpeedSlider"));
-	gameplay->addChildWindow(slider);
+	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.getWindow("TextSpeedSlider"));
 	slider->setPageSize (0.01f);
 	slider->setDocumentSize(1.0f);
 	slider->setStepSize(0.01f);
-	slider->setPosition(CEGUI::UVector2(cegui_reldim(0.42f), cegui_reldim( 0.4)));
-	slider->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.02f)));
 	slider->setWantsMultiClickEvents(false);
 	slider->subscribeEvent(CEGUI::Scrollbar::EventScrollPositionChanged, CEGUI::Event::Subscriber(&OptionsWindow::onTextSpeedChanged,  this));
 	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "MusicVolumeLabel");
-	sound->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.5)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
-
-	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.createWindow("TaharezLook/HorizontalScrollbar", "MusicVolumeSlider"));
-	sound->addChildWindow(slider);
+	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.getWindow("MusicVolumeSlider"));
 	slider->setPageSize (0.01f);
 	slider->setDocumentSize(1.0f);
 	slider->setStepSize(0.01f);
-	slider->setPosition(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim( 0.52)));
-	slider->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.02f)));
 	slider->setWantsMultiClickEvents(false);
 	slider->subscribeEvent(CEGUI::Scrollbar::EventScrollPositionChanged, CEGUI::Event::Subscriber(&OptionsWindow::onMusicVolumeChanged,  this));
 
-	label = win_mgr.createWindow("TaharezLook/StaticText", "SoundVolumeLabel");
-	sound->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.7)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
-
-	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.createWindow("TaharezLook/HorizontalScrollbar", "SoundVolumeSlider"));
-	sound->addChildWindow(slider);
+	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.getWindow("SoundVolumeSlider"));
 	slider->setPageSize (0.01f);
 	slider->setDocumentSize(1.0f);
 	slider->setStepSize(0.01f);
-	slider->setPosition(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim( 0.72)));
-	slider->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.02f)));
 	slider->setWantsMultiClickEvents(false);
 	slider->subscribeEvent(CEGUI::Scrollbar::EventScrollPositionChanged, CEGUI::Event::Subscriber(&OptionsWindow::onSoundVolumeChanged,  this));
 
-	label = win_mgr.createWindow("TaharezLook/StaticText", "EnemyHighlightLabel");
-	graphic->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.2f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
-
-	CEGUI::Combobox* ehlcbo = static_cast<CEGUI::Combobox*>(win_mgr.createWindow("TaharezLook/Combobox","EHColorBox"));
-	graphic->addChildWindow(ehlcbo);
-	ehlcbo->setPosition(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim( 0.2f)));
-	ehlcbo->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.3f)));
-
+	CEGUI::Combobox* ehlcbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("EHColorBox"));
 	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("White"), "white", 0));
 	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Black"), "black", 0));
 	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Red"), "red", 0));
@@ -197,33 +137,16 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	ehlcbo->setItemSelectState((size_t) (getColorSelectionIndex(Options::getInstance()->getEnemyHighlightColor())), true);
 
 
-	CEGUI::Checkbox *chkbox = (CEGUI::Checkbox *) win_mgr.createWindow("TaharezLook/Checkbox", "GrabMouseInWindowedModeBox");
-	chkbox->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.1f)));
-	chkbox->setSize(CEGUI::UVector2(cegui_reldim(0.6f), cegui_reldim( 0.06f)));
-	graphic->addChildWindow(chkbox);
+	CEGUI::Checkbox *chkbox = (CEGUI::Checkbox *) win_mgr.getWindow("GrabMouseInWindowedModeBox");
 	chkbox->setSelected(Options::getInstance()->getGrabMouseInWindowedMode());
 	chkbox->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&OptionsWindow::onGrabMouseChanged, this));
 	
 	
-	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "OptionsCloseButton"));
-	options->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim( 0.94f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.05f)));
+	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsCloseButton"));
 	btn->setID(5);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&OptionsWindow::onButtonOkClicked, this));
 
-	label = win_mgr.createWindow("TaharezLook/StaticText", "LanguageLabel");
-	misc->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.3)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.06f)));
-
-	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(win_mgr.createWindow("TaharezLook/Combobox","LanguageBox"));
-	misc->addChildWindow(cbo);
-	cbo->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim( 0.3f)));
-	cbo->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.5f)));
-
+	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("LanguageBox"));
 	cbo->addItem(new StrListItem((CEGUI::utf8*) gettext("System default"),"",0));
 	cbo->addItem(new StrListItem("German","de_DE",0));
 	cbo->addItem(new StrListItem("English GB","en_GB",0));

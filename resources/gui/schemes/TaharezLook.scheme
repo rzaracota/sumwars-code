@@ -6,6 +6,7 @@
 	<Imageset Name="TaharezLook" Filename="TaharezLook.imageset" />
 	<Imageset Name="MainMenu" Filename="MainMenu.imageset" />
 	<Imageset Name="SkillTree" Filename="SkillTree.imageset" />
+	<Imageset Name="OptionsWindow" Filename="OptionsWindow.imageset" />
 	<LookNFeel Filename="TaharezLook.looknfeel" />
 	<WindowRendererSet Filename="CEGUIFalagardWRBase" />
 	<FalagardMapping WindowType="TaharezLook/Button"      TargetType="CEGUI/PushButton"  Renderer="Falagard/Button"       LookNFeel="TaharezLook/Button" />
