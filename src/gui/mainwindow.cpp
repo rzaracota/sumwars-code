@@ -500,6 +500,7 @@ void MainWindow::update(float time)
 				{
 					CEGUI::Editbox* chatline;
 					chatline = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("Chatline"));
+					chat_window->setVisible(true);
 					chatline->activate();
 				}
 				
