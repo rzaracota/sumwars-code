@@ -168,6 +168,71 @@ void MessageQuestionWindow::setQuestion(std::string question)
 	updateTranslation();
 }
 
+
+WarningDialogWindow::WarningDialogWindow (Document* doc)
+:Window(doc)
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::PushButton* btn;
+	CEGUI::Window* label;
+	
+	CEGUI::FrameWindow* warning_dialog = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "WarningDialogWindow");
+	m_window = warning_dialog;
+	m_warning = "";
+	
+	warning_dialog->setPosition(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.25f))); //0.0/0.8
+	warning_dialog->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.2f))); //1.0/0.2
+	warning_dialog->setProperty("FrameEnabled","false");
+	warning_dialog->setProperty("TitlebarEnabled","false");
+	warning_dialog->setProperty("CloseButtonEnabled","false");
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "WarningDialogConfirmButton"));
+	warning_dialog->addChildWindow(btn);
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.6f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.3f)));
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&WarningDialogWindow ::onConfirmed, this));
+	
+	label = win_mgr.createWindow("TaharezLook/StaticText", "WarningDialogLabel");
+	warning_dialog->addChildWindow(label);
+	label->setProperty("FrameEnabled", "true");
+	label->setProperty("BackgroundEnabled", "true");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim(0.1f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.75f), cegui_reldim( 0.3f)));
+	
+	updateTranslation();
+}
+
+void WarningDialogWindow::update()
+{
+}
+
+void WarningDialogWindow::updateTranslation()
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+	
+	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "WarningDialogConfirmButton"));
+	btn->setText((CEGUI::utf8*) gettext("Ok"));
+	
+	label = win_mgr.getWindow("WarningDialogLabel");
+	label->setText((CEGUI::utf8*) gettext(m_warning.c_str()));
+}
+
+
+bool WarningDialogWindow::onConfirmed(const CEGUI::EventArgs& evt)
+{
+	m_window->hide();
+	m_window->setModalState(false);
+	return true;
+}
+
+void WarningDialogWindow::setWarning(std::string warning)
+{
+	m_warning = warning;
+	updateTranslation();
+}
+
+
 ErrorDialogWindow::ErrorDialogWindow (Document* doc)
 :Window(doc)
 {

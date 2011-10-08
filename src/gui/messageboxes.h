@@ -123,6 +123,45 @@ class MessageQuestionWindow : public Window
 };
 
 /**
+ * \class WarningDialogWindow
+ * \brief Dialog for Warnings
+ */
+class WarningDialogWindow : public Window
+{
+public:
+	/**
+	 * \brief Konstruktor
+	 */
+    WarningDialogWindow (Document* doc);
+	
+    /**
+     * \brief aktualisiert den Inhalt des Fensters
+     */
+    virtual void update();
+    
+    /**
+     * \brief aktualisiert die Uebersetzungen
+     */
+    virtual void updateTranslation();
+    
+    /**
+     * \brief Set the warning text
+     */
+    void setWarning(std::string warning);
+	
+private:
+    /**
+     * \brief User clicked OK
+     */
+    bool onConfirmed(const CEGUI::EventArgs& evt);
+    
+    /**
+     * \brief The warning text
+     */
+    std::string m_warning;
+};
+
+/**
  * \class ErrorDialogWindow
  * \brief Dialog for Errors
  */

@@ -743,11 +743,10 @@ class Document
 	void setNewCharacter(GameObject::Subtype subtype, PlayerLook look);
 
 	/**
-	 * \fn void createNewCharacter()
 	 * \brief erzeugt einen neuen Spieler
 	 * \param name Name des Spielers
 	 */
-	void createNewCharacter(std::string name);
+	bool createNewCharacter(std::string name);
 
 	/**
 	 * \fn void onCreateNewCharButton()

@@ -285,7 +285,7 @@ void Document::setNewCharacter(WorldObject::Subtype subtype, PlayerLook look)
 	m_modified |= SAVEGAME_MODIFIED;
 }
 
-void Document::createNewCharacter(std::string name)
+bool Document::createNewCharacter(std::string name)
 {
 	if (m_temp_player)
 	{
@@ -307,8 +307,8 @@ void Document::createNewCharacter(std::string name)
 		std::ifstream file(m_save_file.c_str());
 		if (file.is_open())
 		{
-			ERRORMSG("file exists: %s",m_save_file.c_str());
-			return;
+			//ERRORMSG("file exists: %s",m_save_file.c_str());
+			return false;
 		}
 
 		writeSavegame(false);
@@ -316,6 +316,7 @@ void Document::createNewCharacter(std::string name)
 		getGUIState()->m_shown_windows = Document::START_MENU;
 		setModified(Document::WINDOWS_MODIFIED);
 	}
+	return true;
 }
 
 void Document::sendCommand(ClientCommand* comm)

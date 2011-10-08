@@ -118,6 +118,11 @@ class OptionsWindow : public Window
 		 * \brief Handles change of enemy highlight color setting
 		 */
 		bool onEnemyHighlightChanged(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \brief Handles click on the reset graphics button
+		 */
+		bool onResetGraphics(const CEGUI::EventArgs& evt);
 
 		/**
 		 * \fn bool onLanguageSelected(const CEGUI::EventArgs& evt)

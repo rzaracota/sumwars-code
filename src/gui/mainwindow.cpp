@@ -167,46 +167,10 @@ bool MainWindow::setupMainMenu()
 		bar->setWantsMultiClickEvents(false);
 		bar->setProgress(0.0);
 		
-		/*
-		CEGUI::Window* credits;
-		credits = win_mgr.createWindow("TaharezLook/StaticText", "CreditWindow");
-		m_main_menu->addChildWindow(credits);
-		credits->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.20f)));
-		credits->setSize(CEGUI::UVector2(cegui_reldim(0.50f), cegui_reldim( 0.6f)));
-		credits->setProperty("FrameEnabled", "false");
-		credits->setProperty("BackgroundEnabled", "true");
-		credits->setProperty("HorzFormatting", "HorzCentred");
-		std::string content = "Programming: \
-				\n Hans Wulf (Lastmerlin) \
-				\n\nGraphics: \
-				\n Andreas Schönefeldt \
-				\n Steffen Schönefeldt (Nori) \
-				\n\n Scripting: \
-				\n Steffen Schönefeldt (Nori) \
-				\n Hans Wulf (Lastmerlin) \
-				\n\nStory: \
-				\n Steffen Schönefeldt (Nori) \
-				\n Andreas Schönefeldt \
-				\n\nWebsite: \
-				\n Andreas Schönefeldt \
-				\n Michael Kempf (Hangman)";
-		credits->setText((CEGUI::utf8*) content.c_str());
-		credits->setProperty("BackgroundColours", "tl:99000000 tr:99000000 bl:99000000 br:99000000");
-		credits->setAlpha(0.9);
-		credits->setFont("DejaVuSerif-12");
-		*/
 		CreditsWindow* crd = new CreditsWindow(m_document);
 		m_sub_windows["CreditsWindow"] = crd;
 		m_main_menu->addChildWindow(crd->getCEGUIWindow());
 
-		/*SavegameList* sgl = new SavegameList(m_document);
-		m_sub_windows["SavegameList"] = sgl;
-		m_main_menu->addChildWindow(sgl->getCEGUIWindow());
-		
-		MessageQuestionWindow * delchar = new MessageQuestionWindow(m_document,"DeleteChar","Really delete savegame?", "Yes",CEGUI::Event::Subscriber(&SavegameList:: onDeleteCharConfirmClicked, sgl),"No",CEGUI::Event::Subscriber(&SavegameList:: onDeleteCharAbortClicked, sgl));
-		m_sub_windows["DeleteChar"] = delchar;
-		m_main_menu->addChildWindow(delchar->getCEGUIWindow());
-		*/
 		Window * wnd = new MainMenu(m_document);
 		m_sub_windows["MainMenu"] = wnd;
 		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
@@ -810,29 +774,23 @@ void MainWindow::setupControlPanel()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/ImageButton", "CharInfoUpgradeButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "CharInfoUpgradeButton"));
 	m_game_screen->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.02f), cegui_reldim( 0.65f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.07f)));
+	btn->setText("+");
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonCharInfoClicked, static_cast<ControlPanel*>(wnd)));
 	btn->setVisible(false);
-	btn->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased");
-	btn->setProperty("DisabledImage", "set:CharScreen image:PlusBtnReleased");
-	btn->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased");
-	btn->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/ImageButton", "SkillUpgradeButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SkillUpgradeButton"));
 	m_game_screen->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.92f), cegui_reldim( 0.65f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.07f)));
+	btn->setText("+");
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, static_cast<ControlPanel*>(wnd)));
 	btn->setVisible(false);
-	btn->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased");
-	btn->setProperty("DisabledImage", "set:CharScreen image:PlusBtnReleased");
-	btn->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased");
-	btn->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
 }
 
 void MainWindow::setupCharInfo()
@@ -1100,6 +1058,9 @@ void MainWindow::setupErrorDialogWindow()
 {
 	Window* wnd = new ErrorDialogWindow(m_document);
 	m_sub_windows["errorDialog"] = wnd;
+	
+	wnd = new WarningDialogWindow(m_document);
+	m_sub_windows["warningDialog"] = wnd;
 	
 	
 	// Inventar anfangs ausblenden

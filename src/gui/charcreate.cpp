@@ -226,7 +226,7 @@ bool CharCreate::onLookSelected(const CEGUI::EventArgs& evt)
 
 bool CharCreate::onButtonAbort(const CEGUI::EventArgs& evt)
 {
-	m_document->getGUIState()->m_shown_windows = Document::SAVEGAME_LIST;
+	m_document->getGUIState()->m_shown_windows = Document::START_MENU;
 	m_document->setModified(Document::WINDOWS_MODIFIED);
 	return true;
 }
@@ -238,13 +238,35 @@ bool CharCreate::onButtonCharCreate(const CEGUI::EventArgs& evt)
 	namebox = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("NameBox"));
 	std::string name = namebox->getText().c_str();
 	
+	// check if name is empty
 	if (name == "")
 	{
 		namebox ->activate();
+		
+		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("WarningDialogWindow");
+		message->setInheritsAlpha(false);
+		message->setVisible(true);
+		message->setModalState(true);
+		win_mgr.getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("You must enter a hero name!"));
+		
 		return true;
 	}
 	
-	m_document->createNewCharacter(name);
+	// check if name is valid
+	bool valid = m_document->createNewCharacter(name);
+	
+	if (!valid)
+	{
+		namebox ->activate();
+		
+		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("WarningDialogWindow");
+		message->setInheritsAlpha(false);
+		message->setVisible(true);
+		message->setModalState(true);
+		win_mgr.getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("A character with that name already exists!"));
+		
+		return true;
+	}
 	namebox ->setText("");
 	return true;
 }
