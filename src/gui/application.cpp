@@ -42,6 +42,8 @@
 
 Application::Application(char *argv)
 {
+	m_main_window = 0;
+	m_document = 0;
 	// Anwendung initialisieren
 	bool ret = false;
 	m_running = false;
@@ -284,10 +286,26 @@ Application::~Application()
 	// dynamisch angelegte Objekte in umgekehrter Reihenfolge freigeben
 
 	printf("deleting application\n");
-	delete m_main_window;
-	delete m_document;
-    CEGUI::OgreRenderer::destroySystem(); // deletes everything
-	delete m_ogre_root;
+	if (m_main_window)
+	{
+		delete m_main_window;
+	}
+	if (m_document)
+	{
+		delete m_document;
+	}
+	try
+	{
+		CEGUI::OgreRenderer::destroySystem(); // deletes everything
+	}
+	catch(std::exception& e)
+	{
+			// this happens, if the program dies before the renderer was initialized
+	}
+	if (m_ogre_root)
+	{
+		delete m_ogre_root;
+	}
 	
 	
 	ObjectFactory::cleanup();
@@ -300,6 +318,12 @@ Application::~Application()
 
 void Application::run()
 {
+	// this happens, if initialization failed
+	if (m_shutdown)
+	{
+		return;
+	}
+	
 	m_running = true;
 	
 	Ogre::Timer timer;
@@ -491,6 +515,7 @@ bool Application::configureOgre()
 	if(!(m_ogre_root->restoreConfig() || m_ogre_root->showConfigDialog()))
 	{
 		delete m_ogre_root;
+		m_ogre_root = 0;
 		return false;
 	}
 

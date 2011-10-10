@@ -18,6 +18,7 @@
 #include "sound.h"
 #include "listitem.h"
 #include "music.h"
+#include "sumwarshelper.h"
 
 OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	:Window(doc)
@@ -433,7 +434,15 @@ bool OptionsWindow::onEnemyHighlightChanged(const CEGUI::EventArgs& evt)
 
 bool OptionsWindow::onResetGraphics(const CEGUI::EventArgs& evt)
 {
-	remove("ogre.cfg");
+	std::string configpath;
+#ifdef _WIN32
+	configpath =  SumwarsHelper::userPath() + "/ogre.cfg";
+#elif defined __APPLE__
+	configpath = macPath() + "/ogre.cfg";
+#else
+	configpath =  SumwarsHelper::userPath() + "/ogre.cfg";
+#endif
+	remove(configpath.c_str());
 	return true;
 }
 
