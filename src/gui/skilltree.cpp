@@ -44,8 +44,6 @@ SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard)
 	m_window = skilltree;
 	skilltree->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent,  (Window*) this));
 	skilltree->setWantsMultiClickEvents(false);
-	skilltree->setPosition(CEGUI::UVector2(cegui_reldim(0.52f), cegui_reldim( 0.0f)));
-	skilltree->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.85f)));
 	
 	label = win_mgr.getWindow("SkillTreeCloseButton");
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onCloseButtonClicked, this));

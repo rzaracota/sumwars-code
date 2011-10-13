@@ -31,8 +31,6 @@ CharInfo::CharInfo (Document* doc)
 	
 	char_info->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
 	char_info->setWantsMultiClickEvents(false);
-	char_info->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f)));
-	char_info->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.85f)));
 
 	// Bestandteile des Charakterfensters hinzufuegen
 	CEGUI::PushButton* btn;

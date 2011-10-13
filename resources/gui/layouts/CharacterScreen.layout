@@ -4,7 +4,7 @@
 	<Window Type="TaharezLook/StaticImage" Name="CharInfo" >
 		<Property Name="Image" Value="set:CharScreen image:Background" />
 		<Property Name="FrameEnabled" Value="False" />
-		<Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{0.462890,0},{0.9023447,0}}" />
+        <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{0.435,0},{0.84,0}}" />
 		<Property Name="BackgroundEnabled" Value="False" />
 		<Window Type="TaharezLook/StaticImage" Name="Portrait" >
 			<Property Name="Image" Value="set:Portrait image:Portrait" />

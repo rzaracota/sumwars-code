@@ -28,8 +28,6 @@ Inventory::Inventory (Document* doc)
 	m_window = inventory;
 	inventory->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
 	inventory->setWantsMultiClickEvents(false);
-	inventory->setPosition(CEGUI::UVector2(cegui_reldim(0.52f), cegui_reldim( 0.0f)));
-	inventory->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.85f)));
 
 
 	// Bestandteile des Charakterfensters hinzufuegen
