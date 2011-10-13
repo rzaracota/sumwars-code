@@ -33,6 +33,11 @@ CharCreate::CharCreate (Document* doc)
 	// Rahmen fuer das Menue Savegame auswaehlen
 	CEGUI::FrameWindow* char_create = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("CharCreate.layout");
 	m_window = char_create;
+	m_window->setMousePassThroughEnabled(true);
+	
+	// pin the the window below the StartMenuRoot to allow display along with MainMenu Elements
+	CEGUI::FrameWindow* start_menu = (CEGUI::FrameWindow*) win_mgr.getWindow("StartMenuRoot");
+	start_menu->addChildWindow(char_create);
 	
 	// Bestandteile der Kontrollleiste hinzufuegen
 	CEGUI::PushButton* btn;

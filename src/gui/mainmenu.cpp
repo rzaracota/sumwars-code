@@ -46,6 +46,7 @@ MainMenu::MainMenu (Document* doc)
 
 	CEGUI::FrameWindow* start_menu_root = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "MainMenu.layout" );
     m_window = start_menu_root;
+	m_window->setMousePassThroughEnabled(true);
     m_window->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&MainMenu::onShown, this));
     m_window->subscribeEvent(CEGUI::Window::EventHidden, CEGUI::Event::Subscriber(&MainMenu::onHidden, this));
 
@@ -201,6 +202,30 @@ bool MainMenu::onHidden( const CEGUI::EventArgs& evt )
     root->removeFrameListener(this);
 	
     return true;
+}
+
+void MainMenu::updateSaveGameList()
+{
+	m_saveGameList->update();
+}
+
+void MainMenu::setSavegameListVisible(bool show)
+{
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::FrameWindow* savegameList = (CEGUI::FrameWindow*) win_mgr.getWindow("SaveGameSelectionFrame");
+	if (savegameList->isVisible() != show)
+	{
+		savegameList->setVisible(show);
+		// hide/show some buttons along with savegamelist
+		win_mgr.getWindow("SinglePlayerButton")->setVisible(show);
+		win_mgr.getWindow("ServerJoinButton")->setVisible(show);
+		win_mgr.getWindow("ServerHostButton")->setVisible(show);
+		
+		if (show == true)
+		{
+			m_saveGameList->update();
+		}
+	}
 }
 
 

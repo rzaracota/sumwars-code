@@ -121,32 +121,46 @@ void SavegameList::update()
 				saveItem->getChild(s.str().append("SaveItemRoot/Name"))->setMousePassThroughEnabled(true);
 				saveItem->getChild(s.str().append("SaveItemRoot/DecriptionLabel"))->setMousePassThroughEnabled(true);
 				saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setMousePassThroughEnabled(true);
-				saveItem->getChild(s.str().append("SaveItemRoot/DelChar"))->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onDeleteCharClicked, this));
+				saveItem->getChild(s.str().append("SaveItemRoot/DelChar"))->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onDeleteCharClicked, this));	
+			}
+			
+			// set the proper Image
+			std::string texName = filename.erase(filename.length() - 4, filename.length());
+			Ogre::TextureManager *tmgr = Ogre::TextureManager::getSingletonPtr();
 
+			int pos = texName.find_last_of("\\");
+			if(texName.find_last_of("/") > pos)
+				pos = texName.find_last_of("/");
+
+			std::string nameNoPath = texName.erase(0, pos+1).append(".png");
+			std::string imagesetName = texName + "SaveItemRootAvatarImageset";
+			std::stringstream tempStream;
+			tempStream << "set:" << imagesetName << " " << "image:MainMenuAvatarImg";
+					
+			if (CEGUI::ImagesetManager::getSingleton().isDefined(imagesetName))
+			{
+				saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setProperty("Image", tempStream.str());
+			}
+			else
+			{
 				// create CEGUI texture for the character thumbnail
-				std::string texName = filename.erase(filename.length() - 4, filename.length());
-				Ogre::TextureManager *tmgr = Ogre::TextureManager::getSingletonPtr();
-
-				int pos = texName.find_last_of("\\");
-				if(texName.find_last_of("/") > pos)
-					pos = texName.find_last_of("/");
-
-				std::string nameNoPath = texName.erase(0, pos+1).append(".png");
 				if(Ogre::ResourceGroupManager::getSingleton().resourceExists("Savegame", nameNoPath))
 				{
 					Ogre::TexturePtr tex = tmgr->load(texName, "Savegame");
 
 					CEGUI::Texture &ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(tex);
 
-					std::string imagesetName = s.str().append("SaveItemRootAvatarImageset");
 					CEGUI::Imageset& textureImageSet = CEGUI::ImagesetManager::getSingleton().create(imagesetName, ceguiTex);
-					textureImageSet.defineImage( s.str().append("MainMenuAvatarImg"),
+					textureImageSet.defineImage( "MainMenuAvatarImg",
 								CEGUI::Point( 0.0f, 0.0f ),
 								CEGUI::Size( ceguiTex.getSize().d_width, ceguiTex.getSize().d_height ),
 								CEGUI::Point( 0.0f, 0.0f ) );
-					std::stringstream tempStream;
-					tempStream << "set:" << imagesetName << " " << "image:" << s.str().append("MainMenuAvatarImg");
+					
 					saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setProperty("Image", tempStream.str());
+				}
+				else
+				{
+					saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setProperty("Image","set:MainMenu image:Logo");
 				}
 			}
 

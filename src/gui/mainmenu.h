@@ -61,6 +61,16 @@ public:
      */
     bool frameEnded ( const Ogre::FrameEvent &evt );
 
+	/**
+	 * \brief Sets the visibiliy state of the SaveGameList
+	 * \param show new visibility status
+	 */
+	void setSavegameListVisible(bool show);
+	
+	/**
+	 * \brief updates the Savegamelist
+	 */
+	void updateSaveGameList();
 
 private:
 
@@ -105,7 +115,6 @@ private:
      * \brief Handles events when window is hidden
      */
     bool onHidden ( const CEGUI::EventArgs& evt );
-
 
     /**
      * \fn bool onShowOptions(const CEGUI::EventArgs& evt)

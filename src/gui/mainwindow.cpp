@@ -318,13 +318,23 @@ void MainWindow::update(float time)
 
 		// Menu Spielstart anzeigen wenn entsprechendes Flag gesetzt
 		CEGUI::FrameWindow* start_menu = (CEGUI::FrameWindow*) win_mgr.getWindow("StartMenuRoot");
+		MainMenu* main_menu = static_cast<MainMenu*>(m_sub_windows["MainMenu"]);
 		if (wflags & Document::START_MENU)
 		{
 			start_menu->setVisible(true);
+			main_menu->setSavegameListVisible(true);
 		}
 		else
 		{
-			start_menu->setVisible(false);
+			if (wflags & Document::CHAR_CREATE)
+			{
+				start_menu->setVisible(true);
+				main_menu->setSavegameListVisible(false);
+			}
+			else
+			{
+				start_menu->setVisible(false);
+			}
 		}
 		
 		CEGUI::FrameWindow* credits = (CEGUI::FrameWindow*) win_mgr.getWindow("CreditsWindow");
@@ -379,6 +389,7 @@ void MainWindow::update(float time)
 				static_cast<CharCreate*>(m_sub_windows["CharCreate"])->updateClassList();
 			}
 			char_create->setVisible(true);
+			char_create->activate();
 		}
 		else
 		{
@@ -743,6 +754,7 @@ bool MainWindow::setupGameScreen()
 		label->setMousePassThroughEnabled(true);
 		label->setInheritsAlpha(false);
 		label->setProperty("Image", "set:character image:character_img"); 
+		label->setVisible(false);
 		
 		label = win_mgr.createWindow("TaharezLook/StaticText", "CharacterPreviewBackground");
 		m_main_menu->addChildWindow(label);
@@ -751,6 +763,7 @@ bool MainWindow::setupGameScreen()
 		label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.0)));
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 1.0f)));
 		label->setMousePassThroughEnabled(true);
+		label->setVisible(false);
 		label->moveToBack();
 	}
 	catch (CEGUI::Exception e)
@@ -1119,14 +1132,14 @@ void  MainWindow::updateMainMenu()
 	if (wflags & (Document::SAVEGAME_LIST | Document::CHAR_CREATE))
 	{
 		img->setVisible(false);
-		label->setVisible(true);
-		label2->setVisible(true);
+		//label->setVisible(true);
+		//label2->setVisible(true);
 	}
 	else
 	{
 		img->setVisible(true);
-		label->setVisible(false);
-		label2->setVisible(false);
+		//label->setVisible(false);
+		//label2->setVisible(false);
 	}
 	
 	m_sub_windows["MainMenu"]->update();
@@ -2498,6 +2511,13 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
     {
         ret = true; // set ret to false if the events where processed by the invisible window
         m_cegui_system->injectMouseButtonDown(button);
+		/*
+		CEGUI::Window * win = 	m_cegui_system->getWindowContainingMouse();
+		if (win != 0)
+		{
+			DEBUG("clicked window %s",win->getName().c_str());
+		}
+		*/
     }
     
 	if (m_document->getGUIState()->m_sheet ==  Document::MAIN_MENU && m_ready_to_start)
