@@ -80,41 +80,50 @@ MessageQuestionWindow::MessageQuestionWindow (Document* doc, std::string name,st
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
 	
-	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", wname);
+	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/StaticImage", wname);
 	m_window = message;
 	
 	
 	message->setPosition(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.25f))); //0.0/0.8
-	message->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.2f))); //1.0/0.2
+	message->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.3f))); //1.0/0.2
+	message->setProperty("Image","set:Misc image:QuestionDialog");
 	message->setProperty("FrameEnabled","false");
-	message->setProperty("TitlebarEnabled","false");
-	message->setProperty("CloseButtonEnabled","false");
+	message->setProperty("BackgroundEnabled","false");
 	message->setVisible(false);
 	
 	wname = name;
 	wname += "Button1";
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", wname));
 	message->addChildWindow(btn);
+	btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal"); 	 
+	btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal"); 	 
+	btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover"); 	 
+	btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.20f), cegui_reldim( 0.6f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.3f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.15f)));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, subscriber1);
 	
 	wname = name;
 	wname += "Button2";
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", wname));
 	message->addChildWindow(btn);
+	btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal"); 	 
+	btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal"); 	 
+	btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover"); 	 
+	btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.60f), cegui_reldim( 0.6f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.3f)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.15f)));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, subscriber2);
 	
 	wname = name;
 	wname += "Label";
 	label = win_mgr.createWindow("TaharezLook/StaticText", wname);
 	message->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim(0.1f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.3f)));	
+	label->setProperty("FrameEnabled", "false");
+	label->setProperty("BackgroundEnabled", "false");
+	label->setProperty("HorzFormatting", "HorzCentred");
+	label->setPosition(CEGUI::UVector2(cegui_reldim(0.120732f), cegui_reldim(0.327987f)));
+	label->setSize(CEGUI::UVector2(cegui_reldim(0.768301f), cegui_reldim( 0.111321f)));	
 	
 	m_name = name;
 	updateTranslation();
@@ -204,28 +213,12 @@ ErrorDialogWindow::ErrorDialogWindow (Document* doc)
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
 	
-	CEGUI::FrameWindow* error_dialog = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "ErrorDialogWindow");
+	CEGUI::FrameWindow* error_dialog = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("ErrorDialogWindow.layout");
 	m_window = error_dialog;
 	m_error = "Network connection timed out";
 	
-	error_dialog->setPosition(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.25f))); //0.0/0.8
-	error_dialog->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.2f))); //1.0/0.2
-	error_dialog->setProperty("FrameEnabled","false");
-	error_dialog->setProperty("TitlebarEnabled","false");
-	error_dialog->setProperty("CloseButtonEnabled","false");
-	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "ErrorDialogConfirmButton"));
-	error_dialog->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.6f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.3f)));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ErrorDialogConfirmButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ErrorDialogWindow ::onConfirmed, this));
-	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "ErrorDialogLabel");
-	error_dialog->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim(0.1f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.75f), cegui_reldim( 0.3f)));
 	
 	updateTranslation();
 }

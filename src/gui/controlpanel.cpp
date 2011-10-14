@@ -26,14 +26,9 @@ ControlPanel::ControlPanel (Document* doc)
 	std::string name;
 
 	// Rahmen fuer die untere Kontrollleiste
-	CEGUI::FrameWindow* ctrl_panel = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "ControlPanel");
+	CEGUI::FrameWindow* ctrl_panel = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("ControlPanel.layout");
 	m_window = ctrl_panel;
 	
-	ctrl_panel->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.88f))); //0.0/0.8
-	ctrl_panel->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 0.12f))); //1.0/0.2
-	ctrl_panel->setProperty("FrameEnabled","false");
-	ctrl_panel->setProperty("TitlebarEnabled","false");
-	ctrl_panel->setProperty("CloseButtonEnabled","false");
 	ctrl_panel->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
 	ctrl_panel->setWantsMultiClickEvents(false);
 
@@ -43,131 +38,82 @@ ControlPanel::ControlPanel (Document* doc)
 	CEGUI::Window* label;
 
 	// Balken fuer HP
-	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", "HealthProgressBar"));
-	ctrl_panel->addChildWindow(bar);
-	bar->setPosition(CEGUI::UVector2(cegui_reldim(0.01f), cegui_reldim( 0.05f)));
-	bar->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.30f)));
+	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow("HealthProgressBar"));
 	bar->setWantsMultiClickEvents(false);
 	bar->setProgress(0.0);
 	
 	// Balken fuer Experience
-	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", "ExperienceProgressBar"));
-	ctrl_panel->addChildWindow(bar);
-	bar->setPosition(CEGUI::UVector2(cegui_reldim(0.01f), cegui_reldim( 0.50f)));
-	bar->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.30f)));
+	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow("ExperienceProgressBar"));
 	bar->setWantsMultiClickEvents(false);
 	bar->setProgress(0.0);
 
 
 	// Button Inventar
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "InventoryButton"));
-	ctrl_panel->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.495f), cegui_reldim( 0.65f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.30f)));
-	btn->setText("I");
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("InventoryButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonInventoryClicked, this));
 	btn->setWantsMultiClickEvents(false);
 
 	// Button Charakterinfo
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "CharInfoButton"));
-	ctrl_panel->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.415f), cegui_reldim( 0.65f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.30f)));
-	btn->setText("C");
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CharInfoButton"));
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonCharInfoClicked, this));
 	
 
 	// Button Chat oeffnen
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "ChatOpenButton"));
-	ctrl_panel->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.655f), cegui_reldim( 0.65f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.30f)));
-	btn->setText("M");
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ChatOpenButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonOpenChatClicked, this));
 	btn->setWantsMultiClickEvents(false);
 	btn->setTooltipText((CEGUI::utf8*) gettext("Chat"));
 
 	// Button SkillTree
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SkillTreeButton"));
-	ctrl_panel->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.575f), cegui_reldim( 0.65f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.30f)));
-	btn->setText("T");
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SkillTreeButton"));
 	btn->setID(0);
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, this));
 	
 
 	// Button Party
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "PartyButton"));
-	ctrl_panel->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.255f), cegui_reldim( 0.65f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.30f)));
-	btn->setText("P");
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("PartyButton"));
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonPartyClicked, this));
 	
 	// Button Party
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "QuestInfoButton"));
-	ctrl_panel->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.335f), cegui_reldim( 0.65f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.30f)));
-	btn->setText("Q");
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("QuestInfoButton"));
+	//btn->setText("Q");
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonQuestInfoClicked, this));
 	
 	// Button Speichern und Beenden
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SaveExitButton"));
-	ctrl_panel->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.835f), cegui_reldim( 0.30f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.155f), cegui_reldim( 0.30f)));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SaveExitButton"));
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonSaveExitClicked, this));
+	btn->setTooltipText((CEGUI::utf8*) gettext("Save & Exit"));
 
 	// Button Optionen
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "OptionsButton"));
-	ctrl_panel->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.835f), cegui_reldim( 0.65f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.155f), cegui_reldim( 0.30f)));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsButton"));
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonOptionsClicked, this));
+	btn->setTooltipText((CEGUI::utf8*) gettext("Options"));
 	
 	// Anzeige linke Maustaste Faehigkeit
-	label = win_mgr.createWindow("TaharezLook/StaticImage", "LeftClickAbilityImage");
-	ctrl_panel->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.90f)));
+	label = win_mgr.getWindow("LeftClickAbilityImage");
 	label->setID(1);
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, this));
 
 	// Balken fuer linke Maustaste Faehigkeit
-	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", "LeftClickAbilityProgressBar"));
-	ctrl_panel->addChildWindow(bar);
-	bar->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.75f)));
-	bar->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.20f)));
+	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow("LeftClickAbilityProgressBar"));
 	bar->setWantsMultiClickEvents(false);
 	bar->setProgress(0.0);
 	bar->setAlpha(0.5);
 	bar->setAlwaysOnTop(true);
 
 	// Anzeige rechte Maustaste Faehigkeit
-	label = win_mgr.createWindow("TaharezLook/StaticImage", "RightClickAbilityImage");
-	ctrl_panel->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.725f), cegui_reldim( 0.05f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.90f)));
+	label = win_mgr.getWindow("RightClickAbilityImage");
 	label->setID(2);
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, this));
 
 	// Balken fuer rechte Maustaste Faehigkeit
-	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", "RightClickAbilityProgressBar"));
-	ctrl_panel->addChildWindow(bar);
-	bar->setPosition(CEGUI::UVector2(cegui_reldim(0.725f), cegui_reldim( 0.75f)));
-	bar->setSize(CEGUI::UVector2(cegui_reldim(0.10f), cegui_reldim( 0.20f)));
+	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow("RightClickAbilityProgressBar"));
 	bar->setWantsMultiClickEvents(false);
 	bar->setProgress(0.0);
 	bar->setAlpha(0.5);
@@ -180,12 +126,7 @@ ControlPanel::ControlPanel (Document* doc)
 	{
 		outStream.str("");
 		outStream << "InventoryItem" << i;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", outStream.str());
-		ctrl_panel->addChildWindow(label);
-		label->setProperty("FrameEnabled", "true");
-		label->setProperty("BackgroundEnabled", "true");
-		label->setPosition(CEGUI::UVector2(cegui_reldim(0.225f+i*0.05f), cegui_reldim( 0.05f)));
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.045f), cegui_reldim( 0.5f)));
+		label = win_mgr.getWindow(outStream.str());
 		label->setID(Equipement::BELT_ITEMS+i);
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&ControlPanel::onItemMouseButtonPressed, (ItemWindow*) this));
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&ControlPanel::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -194,12 +135,7 @@ ControlPanel::ControlPanel (Document* doc)
 		
 		outStream.str("");
 		outStream << "InventoryShortcutLabel" << i;
-		label = win_mgr.createWindow("TaharezLook/StaticText", outStream.str());
-		ctrl_panel->addChildWindow(label);
-		label->setPosition(CEGUI::UVector2(cegui_reldim(0.228f+i*0.05f), cegui_reldim( 0.16f)));
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.045f), cegui_reldim( 0.5f)));
-		label->setProperty("FrameEnabled", "false");
-		label->setProperty("BackgroundEnabled", "false");
+		label = win_mgr.getWindow(outStream.str());
 		std::stringstream stream;
 		stream << (i+1)%10;
 		label->setText(stream.str());
@@ -208,12 +144,7 @@ ControlPanel::ControlPanel (Document* doc)
 		
 		outStream.str("");
 		outStream << "BeltPotionCounter" << i;
-		label = win_mgr.createWindow("TaharezLook/StaticText", outStream.str());
-		ctrl_panel->addChildWindow(label);
-		label->setPosition(CEGUI::UVector2(cegui_reldim(0.247f+i*0.05f), cegui_reldim( 0.05f)));
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.045f), cegui_reldim( 0.25f)));
-		label->setProperty("FrameEnabled", "false");
-		label->setProperty("BackgroundEnabled", "false");
+		label = win_mgr.getWindow(outStream.str());
 		label->setAlwaysOnTop(true);
 		label->setMousePassThroughEnabled(true);
 	}
@@ -399,11 +330,11 @@ void ControlPanel::updateTranslation()
 	CEGUI::PushButton* btn;
 	//CEGUI::Window* label;
 
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsButton"));
+	/*btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsButton"));
 	btn->setText((CEGUI::utf8*) gettext("Options"));
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SaveExitButton"));
-	btn->setText((CEGUI::utf8*) gettext("Save & Exit"));
+	btn->setText((CEGUI::utf8*) gettext("Save & Exit"));*/
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("InventoryButton"));
 	btn->setTooltipText((CEGUI::utf8*) gettext("Inventory"));

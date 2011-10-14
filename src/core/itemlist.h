@@ -223,7 +223,9 @@ class Equipement
 		MEDIUM_ITEMS=2000,
 		SMALL_ITEMS = 3000,
 		BELT_ITEMS = 3500,
-		BELT_ITEMS_END = 3510,
+		//HACK: Belt should be separated from Inventory
+		//BELT_ITEMS_END = 3510,
+		BELT_ITEMS_END = 3505,
 		GOLD = 4000
 	};
 

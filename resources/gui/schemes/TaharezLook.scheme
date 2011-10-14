@@ -2,6 +2,7 @@
 <GUIScheme Name="TaharezLook">
     <Imageset Name="Misc" Filename="misc.imageset" />
 	<Imageset Name="Inventory" Filename="Inventory.imageset" />
+	<Imageset Name="ControlPanel" Filename="ControlPanel.imageset" />
 	<Imageset Name="CharScreen" Filename="CharacterScreen.imageset" />
 	<Imageset Name="Portrait" Filename="portrait.imageset" />
 	<Imageset Name="TaharezLook" Filename="TaharezLook.imageset" />
@@ -24,6 +25,8 @@
 	<FalagardMapping WindowType="TaharezLook/MenuItem"  TargetType="CEGUI/MenuItem"  Renderer="Falagard/MenuItem"  LookNFeel="TaharezLook/MenuItem" />
 	<FalagardMapping WindowType="TaharezLook/AlternateProgressBar" TargetType="CEGUI/ProgressBar" Renderer="Falagard/ProgressBar" LookNFeel="TaharezLook/AltProgressBar" />
 	<FalagardMapping WindowType="TaharezLook/ProgressBar"          TargetType="CEGUI/ProgressBar" Renderer="Falagard/ProgressBar" LookNFeel="TaharezLook/ProgressBar" />
+	<FalagardMapping WindowType="TaharezLook/XPProgressBar"          TargetType="CEGUI/ProgressBar" Renderer="Falagard/ProgressBar" LookNFeel="TaharezLook/XPProgressBar" />
+	<FalagardMapping WindowType="TaharezLook/HPProgressBar"          TargetType="CEGUI/ProgressBar" Renderer="Falagard/ProgressBar" LookNFeel="TaharezLook/HPProgressBar" />
 	<FalagardMapping WindowType="TaharezLook/VUMeter"              TargetType="CEGUI/ProgressBar" Renderer="Falagard/ProgressBar" LookNFeel="TaharezLook/VUMeter" />
 	<FalagardMapping WindowType="TaharezLook/VerticalScrollbar"   TargetType="CEGUI/Scrollbar" Renderer="Falagard/Scrollbar" LookNFeel="TaharezLook/VerticalScrollbar" />
 	<FalagardMapping WindowType="TaharezLook/HorizontalScrollbar" TargetType="CEGUI/Scrollbar" Renderer="Falagard/Scrollbar" LookNFeel="TaharezLook/HorizontalScrollbar" />
