@@ -47,6 +47,7 @@ Application::Application(char *argv)
 	// Anwendung initialisieren
 	bool ret = false;
 	m_running = false;
+	m_shutdown = false;
 	try
 	{
 		ret = init(argv);
