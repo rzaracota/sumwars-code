@@ -193,6 +193,11 @@ bool CharCreate::onLookSelected(const CEGUI::EventArgs& evt)
 
 bool CharCreate::onButtonAbort(const CEGUI::EventArgs& evt)
 {
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Editbox* namebox;
+	namebox = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("NameBox"));
+	namebox->setText("");
+	
 	m_document->getGUIState()->m_shown_windows = Document::START_MENU;
 	m_document->setModified(Document::WINDOWS_MODIFIED);
 	return true;
