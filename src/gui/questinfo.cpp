@@ -28,81 +28,42 @@ QuestInfo::QuestInfo (Document* doc)
 	
 
 	// Rahmen fuer das Menue Savegame auswaehlen
-	CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "QuestInfo");
+	CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("QuestInfo.layout");
 	m_window = quest_info;
 	
-	quest_info->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f))); //0.0/0.8
-	quest_info->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.8f))); //1.0/0.2
-	quest_info->setProperty("FrameEnabled","false");
-	quest_info->setProperty("TitlebarEnabled","false");
-	quest_info->setProperty("CloseButtonEnabled","false");
 	quest_info->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
 	
 	// Bestandteile der Kontrollleiste hinzufuegen
 	CEGUI::Window* label;
 
 	
-	CEGUI::Listbox* questlist = (CEGUI::Listbox*) win_mgr.createWindow("TaharezLook/Listbox", "QuestList");
-	quest_info->addChildWindow(questlist);
-	questlist->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05f)));
-	questlist->setSize(CEGUI::UVector2(cegui_reldim(0.9f), cegui_reldim( 0.2f)));
+	CEGUI::Listbox* questlist = (CEGUI::Listbox*) win_mgr.getWindow("QuestList");
 	questlist->subscribeEvent(CEGUI::Listbox::EventSelectionChanged, CEGUI::Event::Subscriber(&QuestInfo::onQuestSelected, this));
-
 	
 	CEGUI::Checkbox * box;
 	
-	
-	box = (CEGUI::Checkbox *) win_mgr.createWindow("TaharezLook/Checkbox", "QuestOpenBox");
-	quest_info->addChildWindow(box);
-	box->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.28f)));
-	box->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05f)));
+	box = (CEGUI::Checkbox *) win_mgr.getWindow("QuestOpenBox");
 	box->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&QuestInfo::onFilterSelected, this));
 	box->setSelected(true);
 	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "QuestOpenLabel");
-	quest_info->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.28f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.05f)));
-	
-	box = (CEGUI::Checkbox *) win_mgr.createWindow("TaharezLook/Checkbox", "QuestDoneBox");
-	quest_info->addChildWindow(box);
-	box->setPosition(CEGUI::UVector2(cegui_reldim(0.35f), cegui_reldim( 0.28f)));
-	box->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05f)));
+	box = (CEGUI::Checkbox *) win_mgr.getWindow("QuestDoneBox");
 	box->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&QuestInfo::onFilterSelected, this));
 	box->setSelected(false);
 	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "QuestDoneLabel");
-	quest_info->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.28f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.05f)));
-	
-	box = (CEGUI::Checkbox *) win_mgr.createWindow("TaharezLook/Checkbox", "QuestFailedBox");
-	quest_info->addChildWindow(box);
-	box->setPosition(CEGUI::UVector2(cegui_reldim(0.65f), cegui_reldim( 0.28f)));
-	box->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05f)));
+	box = (CEGUI::Checkbox *) win_mgr.getWindow("QuestFailedBox");
 	box->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&QuestInfo::onFilterSelected, this));
 	box->setSelected(false);
-	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "QuestFailedLabel");
-	quest_info->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim( 0.28f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.05f)));
 	
 	CEGUI::MultiLineEditbox* quest_descr;
-	quest_descr = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.createWindow("TaharezLook/MultiLineEditbox", "QuestDescription"));
-	quest_info->addChildWindow(quest_descr);
-	quest_descr->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.35f)));
-	quest_descr->setSize(CEGUI::UVector2(cegui_reldim(0.9f), cegui_reldim( 0.6f)));
+	quest_descr = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.getWindow("QuestDescription"));
 	quest_descr->setWantsMultiClickEvents(false);
 	quest_descr->setReadOnly(true);
 	quest_descr->setText("");
 	
+
+	label = win_mgr.getWindow("QuestInfoCloseButton");
+	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&QuestInfo::onCloseButtonClicked, this));
+
 	updateTranslation();
 }
 
@@ -194,6 +155,12 @@ bool QuestInfo::onQuestSelected(const CEGUI::EventArgs& evt)
 bool QuestInfo::onFilterSelected(const CEGUI::EventArgs& evt)
 {
 	update();
+	return true;
+}
+
+bool QuestInfo::onCloseButtonClicked(const CEGUI::EventArgs& evt)
+{
+	m_document->onButtonQuestInfoClicked();
 	return true;
 }
 

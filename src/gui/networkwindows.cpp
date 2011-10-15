@@ -24,47 +24,17 @@ HostGameWindow::HostGameWindow (Document* doc)
 	CEGUI::Window* label;
 	CEGUI::Editbox* box;
 	
-	CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "HostGameWindow");
+	CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("HostGameWindow.layout");
 	m_window = host_game;
 	
-	
-	host_game->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.25f))); //0.0/0.8
-	host_game->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.5f))); //1.0/0.2
-	host_game->setProperty("FrameEnabled","false");
-	host_game->setProperty("TitlebarEnabled","false");
-	host_game->setProperty("CloseButtonEnabled","false");
-	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "HostGameStartButton"));
-	host_game->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim( 0.88f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.1f)));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("HostGameStartButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&HostGameWindow ::onStartHostGame, this));
-	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "PlayerNumberLabel");
-	host_game->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim(0.02f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.1f)));	
-	
-	box = static_cast<CEGUI::Editbox*>(win_mgr.createWindow("TaharezLook/Editbox", "PlayerNumberBox"));
-	host_game->addChildWindow(box);
-	box->setPosition(CEGUI::UVector2(cegui_reldim(0.60f), cegui_reldim(0.02f)));
-	box->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.1f)));	
+		
+	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("PlayerNumberBox"));
 	box->setWantsMultiClickEvents(false);
 	box->setMaxTextLength(31);
 	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "HostPortLabel");
-	host_game->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim(0.12f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.1f)));	
-	
-	box = static_cast<CEGUI::Editbox*>(win_mgr.createWindow("TaharezLook/Editbox", "HostPortBox"));
-	host_game->addChildWindow(box);
-	box->setPosition(CEGUI::UVector2(cegui_reldim(0.60f), cegui_reldim(0.12f)));
-	box->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.1f)));	
+	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("HostPortBox"));
 	box->setWantsMultiClickEvents(false);
 	box->setMaxTextLength(31);
 	
@@ -155,47 +125,17 @@ JoinGameWindow::JoinGameWindow (Document* doc)
 	CEGUI::Window* label;
 	CEGUI::Editbox* box;
 	
-	CEGUI::FrameWindow* join_game = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "JoinGameWindow");
+	CEGUI::FrameWindow* join_game = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("JoinGameWindow.layout");
 	m_window = join_game;
-	
-	
-	join_game->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.25f))); //0.0/0.8
-	join_game->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.5f))); //1.0/0.2
-	join_game->setProperty("FrameEnabled","false");
-	join_game->setProperty("TitlebarEnabled","false");
-	join_game->setProperty("CloseButtonEnabled","false");
-	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "JoinGameStartButton"));
-	join_game->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim( 0.88f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.1f)));
+		
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("JoinGameStartButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&JoinGameWindow ::onStartJoinGame, this));
 	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "HostnameLabel");
-	join_game->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim(0.02f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.1f)));	
-	
-	box = static_cast<CEGUI::Editbox*>(win_mgr.createWindow("TaharezLook/Editbox", "HostnameBox"));
-	join_game->addChildWindow(box);
-	box->setPosition(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim(0.02f)));
-	box->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.1f)));	
+	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("HostnameBox"));
 	box->setWantsMultiClickEvents(false);
 	box->setMaxTextLength(31);
 	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "PortLabel");
-	join_game->addChildWindow(label);
-	label->setProperty("FrameEnabled", "true");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim(0.12f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.1f)));	
-	
-	box = static_cast<CEGUI::Editbox*>(win_mgr.createWindow("TaharezLook/Editbox", "PortBox"));
-	join_game->addChildWindow(box);
-	box->setPosition(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim(0.12f)));
-	box->setSize(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.1f)));	
+	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("PortBox"));
 	box->setWantsMultiClickEvents(false);
 	box->setMaxTextLength(31);
 	

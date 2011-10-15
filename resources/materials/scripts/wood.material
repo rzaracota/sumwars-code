@@ -11,7 +11,7 @@ material wood
 
 			texture_unit
 			{
-				texture wood_ground.png
+				texture grass_wood_verydark.png
 				tex_coord_set 0
 				colour_op modulate
 				scale 1 1

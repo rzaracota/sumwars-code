@@ -68,6 +68,11 @@ class QuestInfo : public Window
 	void updateDescription();
 	
 	/**
+	* \brief Handles clicks to the close button
+	*/
+	bool onCloseButtonClicked(const CEGUI::EventArgs& evt);
+
+	/**
 	 * \fn std::string m_questname
 	 * \brief Name des aktuell angezeigten Quests
 	 */

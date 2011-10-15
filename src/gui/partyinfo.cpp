@@ -30,9 +30,10 @@ PartyInfo::PartyInfo (Document* doc)
 	party_info->setProperty("FrameEnabled","false");
 	party_info->setProperty("TitlebarEnabled","false");
 	party_info->setProperty("CloseButtonEnabled","false");
+	party_info->setProperty("MousePassThroughEnabled","true");
 	party_info->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
 	party_info->setWantsMultiClickEvents(false);
-	party_info->setAlpha(0.7);
+	party_info->setAlpha(0.0);
 
 	
 	CEGUI::PushButton* btn;
@@ -46,8 +47,9 @@ PartyInfo::PartyInfo (Document* doc)
 		
 		img = win_mgr.createWindow("TaharezLook/StaticImage",stream.str());
 		party_info->addChildWindow(img);
-		img->setProperty("FrameEnabled", "true");
-		img->setProperty("BackgroundEnabled", "true");
+		img->setProperty("InheritsAlpha", "false");
+		img->setProperty("FrameEnabled", "false");
+		img->setProperty("BackgroundEnabled", "false");
 		img->setPosition(CEGUI::UVector2(cegui_reldim(0.01f), cegui_reldim( 0.01f + 0.12f *i)));
 		img->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
 		img->setID(i);
@@ -58,10 +60,11 @@ PartyInfo::PartyInfo (Document* doc)
 		
 		label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
 		party_info->addChildWindow(label);
-		label->setProperty("FrameEnabled", "true");
-		label->setProperty("BackgroundEnabled", "true");
-		label->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.03f+ 0.12f *i)));
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.06f), cegui_reldim( 0.05f)));
+		label->setProperty("InheritsAlpha", "false");
+		label->setProperty("FrameEnabled", "false");
+		label->setProperty("BackgroundEnabled", "false");
+		label->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.01f+ 0.12f *i)));
+		label->setSize(CEGUI::UVector2(cegui_reldim(0.06f), cegui_reldim( 0.1f)));
 		label->setText("0");
 		
 		stream.str("");
@@ -70,8 +73,9 @@ PartyInfo::PartyInfo (Document* doc)
 		
 		label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
 		party_info->addChildWindow(label);
-		label->setProperty("FrameEnabled", "true");
-		label->setProperty("BackgroundEnabled", "true");
+		label->setProperty("InheritsAlpha", "false");
+		label->setProperty("FrameEnabled", "false");
+		label->setProperty("BackgroundEnabled", "false");
 		label->setPosition(CEGUI::UVector2(cegui_reldim(0.21f), cegui_reldim( 0.01f+ 0.12f *i)));
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.30f), cegui_reldim( 0.1f)));
 		label->setText("Name");
@@ -82,8 +86,9 @@ PartyInfo::PartyInfo (Document* doc)
 		
 		label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
 		party_info->addChildWindow(label);
-		label->setProperty("FrameEnabled", "true");
-		label->setProperty("BackgroundEnabled", "true");
+		label->setProperty("InheritsAlpha", "false");
+		label->setProperty("FrameEnabled", "false");
+		label->setProperty("BackgroundEnabled", "false");
 		label->setPosition(CEGUI::UVector2(cegui_reldim(0.53f), cegui_reldim( 0.01f + 0.12f *i)));
 		label->setSize(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.1f)));
 		label->setText("Klasse");
@@ -94,6 +99,11 @@ PartyInfo::PartyInfo (Document* doc)
 		
 		btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button",stream.str() ));
 		party_info->addChildWindow(btn);
+		btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
+		btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
+		btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+		btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal");
+		btn->setProperty("InheritsAlpha", "false");
 		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.7), cegui_reldim( 0.02f + 0.12f *i)));
 		btn->setSize(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.08f)));
 		btn->setText("A");
@@ -107,6 +117,11 @@ PartyInfo::PartyInfo (Document* doc)
 		
 		btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button",stream.str() ));
 		party_info->addChildWindow(btn);
+		btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
+		btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
+		btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+		btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal");
+		btn->setProperty("InheritsAlpha", "false");
 		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.85), cegui_reldim( 0.02f + 0.12f *i)));
 		btn->setSize(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.08f)));
 		btn->setText("R");
@@ -122,6 +137,11 @@ PartyInfo::PartyInfo (Document* doc)
 		
 		btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button",stream.str() ));
 		party_info->addChildWindow(btn);
+		btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
+		btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
+		btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+		btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal");
+		btn->setProperty("InheritsAlpha", "false");
 		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.7), cegui_reldim( 0.02f + 0.12f *i)));
 		btn->setSize(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.08f)));
 		btn->setText("C");
@@ -135,6 +155,11 @@ PartyInfo::PartyInfo (Document* doc)
 		
 		btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button",stream.str() ));
 		party_info->addChildWindow(btn);
+		btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
+		btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
+		btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+		btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal");
+		btn->setProperty("InheritsAlpha", "false");
 		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.85), cegui_reldim( 0.02f + 0.12f *i)));
 		btn->setSize(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.08f)));
 		btn->setText("K");
@@ -148,6 +173,11 @@ PartyInfo::PartyInfo (Document* doc)
 		
 		btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button",stream.str() ));
 		party_info->addChildWindow(btn);
+		btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
+		btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
+		btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+		btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal");
+		btn->setProperty("InheritsAlpha", "false");
 		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.85), cegui_reldim( 0.02f + 0.12f *i)));
 		btn->setSize(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.08f)));
 		btn->setText("L");
@@ -163,6 +193,11 @@ PartyInfo::PartyInfo (Document* doc)
 		
 		btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button",stream.str() ));
 		party_info->addChildWindow(btn);
+		btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
+		btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
+		btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+		btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal");
+		btn->setProperty("InheritsAlpha", "false");
 		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.7), cegui_reldim( 0.02f + 0.12f *i)));
 		btn->setSize(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.08f)));
 		btn->setText("P");
@@ -176,6 +211,11 @@ PartyInfo::PartyInfo (Document* doc)
 		
 		btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button",stream.str() ));
 		party_info->addChildWindow(btn);
+		btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
+		btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
+		btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+		btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal");
+		btn->setProperty("InheritsAlpha", "false");
 		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.85), cegui_reldim( 0.02f + 0.12f *i)));
 		btn->setSize(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.08f)));
 		btn->setText("W");
