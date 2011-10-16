@@ -1426,6 +1426,11 @@ bool Document::onKeyPress(KeyCode key)
 				// Versuch, aktuelles Gespraech abzubrechen
 				onAnswerClick(-1);
 			}
+			else if (m_gui_state.m_shown_windows & (HOST_GAME | JOIN_GAME | CHAR_CREATE ))
+			{
+				m_gui_state.m_shown_windows = Document::START_MENU;
+				m_modified |= WINDOWS_MODIFIED;
+			}
 			else
 			{
 				m_gui_state.m_shown_windows =  NO_WINDOWS;
