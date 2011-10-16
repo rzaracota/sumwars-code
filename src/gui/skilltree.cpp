@@ -144,6 +144,37 @@ void SkillTree::update()
 			label->setInheritsAlpha(false);
 		}
 		
+		//Set tab name colors 
+		stream.str("");
+		stream << "FFD43D1A";
+
+		label = win_mgr.getWindow("SkilltreeTabs__auto_TabPane__Buttons__auto_btnSkilltreeTab0");
+		label->setProperty("NormalTextColour", stream.str());
+		label->setProperty("HoverTextColour", stream.str());
+		label->setProperty("SelectedTextColour", stream.str());
+		label->setProperty("PushedTextColour", stream.str());
+		label->setProperty("DisabledTextColour", stream.str());
+
+		stream.str("");
+		stream << "FF5CACEE";
+
+		label = win_mgr.getWindow("SkilltreeTabs__auto_TabPane__Buttons__auto_btnSkilltreeTab1");
+		label->setProperty("NormalTextColour", stream.str());
+		label->setProperty("HoverTextColour", stream.str());
+		label->setProperty("SelectedTextColour", stream.str());
+		label->setProperty("PushedTextColour", stream.str());
+		label->setProperty("DisabledTextColour", stream.str());
+
+		stream.str("");
+		stream << "FFD15FEE";
+
+		label = win_mgr.getWindow("SkilltreeTabs__auto_TabPane__Buttons__auto_btnSkilltreeTab2");
+		label->setProperty("NormalTextColour", stream.str());
+		label->setProperty("HoverTextColour", stream.str());
+		label->setProperty("SelectedTextColour", stream.str());
+		label->setProperty("PushedTextColour", stream.str());
+		label->setProperty("DisabledTextColour", stream.str());
+
 		// labels for skillpoints and next skillpoint
 		
 		label = win_mgr.getWindow("SkillpointsValueLabel");

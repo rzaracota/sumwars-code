@@ -9,6 +9,14 @@
 	<Imageset Name="MainMenu" Filename="MainMenu.imageset" />
 	<Imageset Name="SkillTree" Filename="SkillTree.imageset" />
 	<Imageset Name="OptionsWindow" Filename="OptionsWindow.imageset" />
+	<Font Name="FairChar-30" Filename="FairChar-30.font" />
+	<Font Name="DejaVuSans-10" Filename="DejaVuSans-10.font" />
+	<Font Name="DejaVuSerif-8" Filename="DejaVuSerif-8.font" />
+	<Font Name="DejaVuSerif-10" Filename="DejaVuSerif-10.font" />
+	<Font Name="DejaVuSerif-12" Filename="DejaVuSerif-12.font" />
+	<Font Name="DejaVuSerif-16" Filename="DejaVuSerif-16.font" />
+	<Font Name="fkp-16" Filename="fkp-16.font" />
+	<Font Name="Iconified-12" Filename="Iconified-12.font" />
 	<LookNFeel Filename="TaharezLook.looknfeel" />
 	<WindowRendererSet Filename="CEGUIFalagardWRBase" />
 	<FalagardMapping WindowType="TaharezLook/Button"      TargetType="CEGUI/PushButton"  Renderer="Falagard/Button"       LookNFeel="TaharezLook/Button" />

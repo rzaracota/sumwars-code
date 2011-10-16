@@ -2,7 +2,9 @@
 
 <GUILayout >
     <Window Type="TaharezLook/FrameWindow" Name="FileChooser" >
+        <!--
         <Property Name="TitlebarFont" Value="FairChar-30" />
+        -->
         <Property Name="TitlebarEnabled" Value="True" />
         <Property Name="UnifiedAreaRect" Value="{{0.107227,0},{0.0713526,0},{0.597461,0},{0.797478,0}}" />
         <Window Type="TaharezLook/Listbox" Name="FrameWindow/FileListBox" >

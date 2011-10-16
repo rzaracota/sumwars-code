@@ -9,7 +9,9 @@
         <Property Name="InheritsAlpha" Value="False" />
         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{0.2,0}}" />
         <Window Type="TaharezLook/StaticText" Name="SaveItemRoot/Name" >
+            <!--
             <Property Name="Font" Value="DejaVuSerif-12" />
+            -->
             <Property Name="Text" Value="CharacterName" />
             <Property Name="HorzExtent" Value="165" />
             <Property Name="VertExtent" Value="23.8451" />
@@ -20,7 +22,9 @@
             <Property Name="BackgroundEnabled" Value="False" />
         </Window>
         <Window Type="TaharezLook/StaticText" Name="SaveItemRoot/DecriptionLabel" >
+            <!--
             <Property Name="Font" Value="Iconified-12" />
+            -->
             <Property Name="Text" Value="Level 5 Fencer" />
             <Property Name="HorzExtent" Value="140" />
             <Property Name="VertExtent" Value="24.0283" />

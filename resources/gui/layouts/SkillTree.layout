@@ -15,6 +15,7 @@
         </Window>
         <Window Type="TaharezLook/StaticText" Name="SkillpointsLabel" >
             <Property Name="Text" Value="Inventory" />
+            <Property Name="TextColours" Value="tl:FFA2CD5A tr:FFA2CD5A bl:FFA2CD5A br:FFA2CD5A" />
             <Property Name="HorzExtent" Value="77" />
             <Property Name="VertExtent" Value="25.5702" />
             <Property Name="FrameEnabled" Value="False" />
@@ -37,6 +38,7 @@
         </Window>
         <Window Type="TaharezLook/StaticText" Name="NextSkillpointsLabel" >
             <Property Name="Text" Value="Inventory" />
+            <Property Name="TextColours" Value="tl:FF458B00 tr:FF458B00 bl:FF458B00 br:FF458B00" />
             <Property Name="HorzExtent" Value="77" />
             <Property Name="VertExtent" Value="25.5702" />
             <Property Name="FrameEnabled" Value="False" />

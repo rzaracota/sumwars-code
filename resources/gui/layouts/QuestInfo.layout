@@ -30,6 +30,7 @@
         </Window>
         <Window Type="TaharezLook/StaticText" Name="QuestOpenLabel" >
             <Property Name="FrameEnabled" Value="False" />
+            <Property Name="TextColours" Value="tl:FFE3CF57 tr:FFE3CF57 bl:FFE3CF57 br:FFE3CF57" />
             <Property Name="UnifiedAreaRect" Value="{{0.119699,0},{0.502446,0},{0.331069,0},{0.545983,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
         </Window>
@@ -38,6 +39,7 @@
         </Window>
         <Window Type="TaharezLook/StaticText" Name="QuestDoneLabel" >
             <Property Name="FrameEnabled" Value="False" />
+            <Property Name="TextColours" Value="tl:FF61B329 tr:FF61B329 bl:FF61B329 br:FF61B329" />
             <Property Name="UnifiedAreaRect" Value="{{0.391076,0},{0.506658,0},{0.602446,0},{0.543176,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
         </Window>
@@ -46,6 +48,7 @@
         </Window>
         <Window Type="TaharezLook/StaticText" Name="QuestFailedLabel" >
             <Property Name="FrameEnabled" Value="False" />
+            <Property Name="TextColours" Value="tl:FFEE3B3B tr:FFEE3B3B bl:FFEE3B3B br:FFEE3B3B" />
             <Property Name="UnifiedAreaRect" Value="{{0.682637,0},{0.508062,0},{0.929892,0},{0.54458,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
         </Window>
