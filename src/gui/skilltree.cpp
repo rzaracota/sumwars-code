@@ -197,6 +197,9 @@ void SkillTree::update()
 			button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", stream.str()));
 			button->setInheritsAlpha(false);
 			tabs[it->second.m_skilltree_tab-1]->addChildWindow(button);
+			button->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased");
+			button->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased");
+			button->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
 			button->setPosition(pos);
 			button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 			
@@ -215,7 +218,6 @@ void SkillTree::update()
 			label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
 
-			button->setText("+");
 			button->setID(it->first);
 			button->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillLearnMouseClicked, this));
 			
