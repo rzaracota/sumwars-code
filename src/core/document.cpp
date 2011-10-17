@@ -247,8 +247,19 @@ void Document::loadSavegame()
 	}
 	else
 	{
-		ERRORMSG("konnte Savegame nicht oeffnen: %s",fname.c_str());
-		m_state =SHUTDOWN;
+		if (m_save_file == "")
+		{
+			// no save file chosen, go to character creation
+			getGUIState()->m_shown_windows =CHAR_CREATE;
+			m_modified = WINDOWS_MODIFIED | GUISHEET_MODIFIED ; 
+			m_gui_state.m_sheet = MAIN_MENU;
+			m_state = INACTIVE;
+		}
+		else
+		{
+			ERRORMSG("konnte Savegame nicht oeffnen: %s",fname.c_str());
+			m_state =SHUTDOWN;
+		}
 	}
 	DEBUGX("done");
 }
