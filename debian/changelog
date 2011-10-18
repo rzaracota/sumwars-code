@@ -1,5 +1,5 @@
-sumwars (0.5.3-1) unstable; urgency=low
+sumwars (0.5.4-1) unstable; urgency=low
 
   * Initial release (Closes: #597857).
 
- -- Manuel A. Fernandez Montecelo <manuel.montezelo@gmail.com>  Thu, 24 Sep 2010 02:07:08 +0200
+ -- Manuel A. Fernandez Montecelo <manuel.montezelo@gmail.com>  Wed, 19 Oct 2011 02:07:08 +0200
