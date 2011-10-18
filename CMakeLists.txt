@@ -19,7 +19,6 @@ cmake_minimum_required(VERSION 2.6)
 OPTION(NO_TINYXML "Avoid use of TinyXML Lib" OFF)
 OPTION(BUILD_TOOLS "Builds editor tools" ON)
 OPTION(UPDATE_SUBVERSION_REVISION "Option to turn off automatic revision checking" ON)
-SET(BUILD_TOOLS ON)
 
 
 IF( NOT CMAKE_BUILD_TYPE )
