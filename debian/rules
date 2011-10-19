@@ -26,6 +26,7 @@ build-stamp:
 	mkdir build && \
 	cd build && \
 	cmake   -D CMAKE_INSTALL_PREFIX:PATH=/usr \
+		-D CMAKE_BUILD_TYPE:STRING="Release" \
 		-D CMAKE_CXX_FLAGS=$(CXXFLAGS) \
 		-D NO_TINYXML:BOOL=ON \
 		-D BUILD_TOOLS:BOOL=OFF \
