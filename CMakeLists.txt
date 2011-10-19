@@ -1,20 +1,6 @@
-#/*
-#-----------------------------------------------------------------------------
-#Filename:    CMakeLists.txt
-#-----------------------------------------------------------------------------
-#
-#This source file is part of the
-#   ___                 __    __ _ _    _ 
-#  /___\__ _ _ __ ___  / / /\ \ (_) | _(_)
-# //  // _` | '__/ _ \ \ \/  \/ / | |/ / |
-#/ \_// (_| | | |  __/  \  /\  /| |   <| |
-#\___/ \__, |_|  \___|   \/  \/ |_|_|\_\_|
-#      |___/                              
-#	  Tutorial Framework
-#	  http://www.ogre3d.org/tikiwiki/
-#-----------------------------------------------------------------------------
-#*/
 cmake_minimum_required(VERSION 2.6)
+project(SUMWARS)
+
 
 OPTION(NO_TINYXML "Avoid use of TinyXML Lib" OFF)
 OPTION(BUILD_TOOLS "Builds editor tools" ON)
@@ -22,16 +8,15 @@ OPTION(UPDATE_SUBVERSION_REVISION "Option to turn off automatic revision checkin
 
 
 IF( NOT CMAKE_BUILD_TYPE )
-SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
+  SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
 ENDIF()
-
-PROJECT(SUMWARS)
+MESSAGE("CMAKE_BUILD_TYPE: " ${CMAKE_BUILD_TYPE})
 
 
 IF(UPDATE_SUBVERSION_REVISION)
     FIND_PROGRAM(Subversion_SVN_EXECUTABLE svn)
 
-SET(Project_WC_REVISION "unknown")
+    SET(Project_WC_REVISION "unknown")
 
 #IF(Subversion_SVN_EXECUTABLE)
 #    EXECUTE_PROCESS(WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
@@ -58,18 +43,18 @@ CONFIGURE_FILE( "${PROJECT_SOURCE_DIR}/src/gui/version.h.in"
 SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules/;${CMAKE_MODULE_PATH}")
 
 IF(WIN32)
-	set(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
+  SET(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
 ENDIF(WIN32)
 
 IF(UNIX)
-	SET(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
+  SET(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
 ENDIF(UNIX)
 
 IF (CMAKE_BUILD_TYPE STREQUAL "")
   # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
   # differentiation between debug and release builds.
   SET(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose the type of build, options are: None (CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel." FORCE)
-ENDIF ()
+ENDIF()
 
 SET(CMAKE_DEBUG_POSTFIX "_d")
 
@@ -98,11 +83,6 @@ ENDIF()
 
 
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/enet/include)
-IF(NO_TINYXML)
-  INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
-ELSE()
-  INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml)
-ENDIF()
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/core)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/contenteditor)
@@ -116,40 +96,27 @@ INCLUDE_DIRECTORIES(${ALUT_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${OGG_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${VORBIS_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${PHYSFS_INCLUDE_DIR})
-
-IF(BUILD_TOOLS)
-	INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
-	INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel/filebrowser)
-	INCLUDE_DIRECTORIES(${POCO_INCLUDE_DIR})
-	MESSAGE("Activated ingame build tools.")
-ENDIF()
-
-
-IF(!WIN32)
-INCLUDE_DIRECTORIES(${PTHREADS_INCLUDE_DIR})
-ENDIF()
-
-IF(WIN32)
-	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/dirent)
-	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost)
-	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/include/)
-	ADD_DEFINITIONS( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4800 /wd4244 /wd4305 /nologo" )
-	MESSAGE("WARNING: Compiler warnings 4800, 4244 and 4305 disabled!")
-ENDIF()
-
-
-MESSAGE(${CMAKE_BUILD_TYPE})
-
 IF(NO_TINYXML)
-  SET(SRCS_TINYXML "")
+  INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
 ELSE()
-  SET(SRCS_TINYXML
-    ./src/tinyxml/tinystr.cpp
-    ./src/tinyxml/tinyxmlerror.cpp
-    ./src/tinyxml/tinyxml.cpp
-    ./src/tinyxml/tinyxmlparser.cpp)
+  INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml)
 ENDIF()
-
+IF(BUILD_TOOLS)
+  INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
+  INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel/filebrowser)
+  INCLUDE_DIRECTORIES(${POCO_INCLUDE_DIR})
+  MESSAGE("Activated ingame build tools.")
+ENDIF()
+IF(!WIN32)
+  INCLUDE_DIRECTORIES(${PTHREADS_INCLUDE_DIR})
+ENDIF()
+IF(WIN32)
+  INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/dirent)
+  INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost)
+  INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/include/)
+  ADD_DEFINITIONS( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4800 /wd4244 /wd4305 /nologo" )
+  MESSAGE("WARNING: Compiler warnings 4800, 4244 and 4305 disabled!")
+ENDIF()
 
 
 SET(HEADER_FILES
@@ -241,6 +208,16 @@ SET(HEADER_FILES
   ./src/gui/tooltip.h
   ./src/gui/optionswindow.h
 )
+
+IF(NO_TINYXML)
+  SET(SRCS_TINYXML "")
+ELSE()
+  SET(SRCS_TINYXML
+    ./src/tinyxml/tinystr.cpp
+    ./src/tinyxml/tinyxmlerror.cpp
+    ./src/tinyxml/tinyxml.cpp
+    ./src/tinyxml/tinyxmlparser.cpp)
+ENDIF()
 
 SET(SRCS
   ${SRCS_TINYXML}
@@ -346,45 +323,45 @@ SET(SRCS
 )
  
 IF(BUILD_TOOLS)
-SET(HEADER_FILES
-	${HEADER_FILES}
-	./src/gui/debugpanel/benchmarktab.h
-	./src/gui/debugpanel/debugpanel.h
-	./src/gui/debugpanel/debugcameratab.h
-	./src/gui/debugpanel/iconeditortab.h
-	./src/gui/debugpanel/guidebugtab.h
-	./src/gui/debugpanel/luascripttab.h
-	./src/gui/debugpanel/textfileeditwindow.h
-	./src/gui/debugpanel/filebrowser/filebrowser.h
-	#./src/gui/debugpanel/reloadtab.h
-	./src/gui/contenteditor/contenteditor.h
-	./src/gui/contenteditor/contenteditortab.h
-	./src/gui/contenteditor/fixedobjecteditor.h
-	./src/gui/contenteditor/renderinfoeditor.h
-	./src/gui/contenteditor/itemeditor.h
-	./src/gui/contenteditor/monstereditor.h
-	)
+  SET(HEADER_FILES
+    ${HEADER_FILES}
+    ./src/gui/debugpanel/benchmarktab.h
+    ./src/gui/debugpanel/debugpanel.h
+    ./src/gui/debugpanel/debugcameratab.h
+    ./src/gui/debugpanel/iconeditortab.h
+    ./src/gui/debugpanel/guidebugtab.h
+    ./src/gui/debugpanel/luascripttab.h
+    ./src/gui/debugpanel/textfileeditwindow.h
+    ./src/gui/debugpanel/filebrowser/filebrowser.h
+    #./src/gui/debugpanel/reloadtab.h
+    ./src/gui/contenteditor/contenteditor.h
+    ./src/gui/contenteditor/contenteditortab.h
+    ./src/gui/contenteditor/fixedobjecteditor.h
+    ./src/gui/contenteditor/renderinfoeditor.h
+    ./src/gui/contenteditor/itemeditor.h
+    ./src/gui/contenteditor/monstereditor.h
+    )
 
 
-SET(SRCS
-	${SRCS}
-	${HEADER_FILES}
-	./src/gui/debugpanel/benchmarktab.cpp
-	./src/gui/debugpanel/debugpanel.cpp
-	./src/gui/debugpanel/debugcameratab.cpp
-	./src/gui/debugpanel/iconeditortab.cpp
-	./src/gui/debugpanel/guidebugtab.cpp
-	./src/gui/debugpanel/luascripttab.cpp
-	./src/gui/debugpanel/textfileeditwindow.cpp
-	./src/gui/debugpanel/filebrowser/filebrowser.cpp
-	#./src/gui/debugpanel/reloadtab.cpp
-	./src/gui/contenteditor/contenteditor.cpp
-	./src/gui/contenteditor/contenteditortab.cpp
-	./src/gui/contenteditor/fixedobjecteditor.cpp
-	./src/gui/contenteditor/renderinfoeditor.cpp
-	./src/gui/contenteditor/itemeditor.cpp
-	./src/gui/contenteditor/monstereditor.cpp
-	)
+  SET(SRCS
+    ${SRCS}
+    ${HEADER_FILES}
+    ./src/gui/debugpanel/benchmarktab.cpp
+    ./src/gui/debugpanel/debugpanel.cpp
+    ./src/gui/debugpanel/debugcameratab.cpp
+    ./src/gui/debugpanel/iconeditortab.cpp
+    ./src/gui/debugpanel/guidebugtab.cpp
+    ./src/gui/debugpanel/luascripttab.cpp
+    ./src/gui/debugpanel/textfileeditwindow.cpp
+    ./src/gui/debugpanel/filebrowser/filebrowser.cpp
+    #./src/gui/debugpanel/reloadtab.cpp
+    ./src/gui/contenteditor/contenteditor.cpp
+    ./src/gui/contenteditor/contenteditortab.cpp
+    ./src/gui/contenteditor/fixedobjecteditor.cpp
+    ./src/gui/contenteditor/renderinfoeditor.cpp
+    ./src/gui/contenteditor/itemeditor.cpp
+    ./src/gui/contenteditor/monstereditor.cpp
+    )
 ENDIF()
 
 ADD_EXECUTABLE(sumwars ${SRCS})
@@ -393,44 +370,40 @@ ADD_EXECUTABLE(sumwars ${SRCS})
 
 
 SET(LINK_LIBS
-	${OGRE_LIBRARIES}
-	${OGRE_Terrain_LIBRARY}
-	${OIS_LIBRARIES} 
-	${CEGUI_LIBRARY} 
-	${CEGUIOGRE_LIBRARY}
-	${LUA_LIBRARIES} 
-	${OPENAL_LIBRARY} 
-	${ALUT_LIBRARY} 
-	${OGG_LIBRARY_DEBUG}
-	${VORBIS_LIBRARIES} 
-	${PHYSFS_LIBRARY}
-)
-
+  ${OGRE_LIBRARIES}
+  ${OGRE_Terrain_LIBRARY}
+  ${OIS_LIBRARIES} 
+  ${CEGUI_LIBRARY} 
+  ${CEGUIOGRE_LIBRARY}
+  ${LUA_LIBRARIES} 
+  ${OPENAL_LIBRARY} 
+  ${ALUT_LIBRARY} 
+  ${OGG_LIBRARY_DEBUG}
+  ${VORBIS_LIBRARIES} 
+  ${PHYSFS_LIBRARY}
+  )
 IF(NO_TINYXML)
   SET(LINK_LIBS ${LINK_LIBS} ${TINYXML_LIBRARIES})
 ENDIF()
-
 IF(BUILD_TOOLS)
-SET(LINK_LIBS
-	${LINK_LIBS}
-	${POCO_LIBRARIES}
-	)
-
-ADD_DEFINITIONS(-DBUILD_TOOLS)
+  SET(LINK_LIBS
+    ${LINK_LIBS}
+    ${POCO_LIBRARIES}
+    )
+  ADD_DEFINITIONS(-DBUILD_TOOLS)
 ENDIF()
-
 IF(WIN32)
-	SET(LINK_LIBS
-		ws2_32.lib
-		winmm.lib
-		${LINK_LIBS}	
-		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/lib/libgettextlib.lib
-		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/lib/libintl.lib
-		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_thread-vc100-mt-gd-1_44.lib
-		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_date_time-vc100-mt-gd-1_44.lib
-		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_thread-vc100-mt-1_44.lib
-		${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_date_time-vc100-mt-1_44.lib
-		)
+  SET(LINK_LIBS
+    ws2_32.lib
+    winmm.lib
+    ${LINK_LIBS}	
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/lib/libgettextlib.lib
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/lib/libintl.lib
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_thread-vc100-mt-gd-1_44.lib
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_date_time-vc100-mt-gd-1_44.lib
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_thread-vc100-mt-1_44.lib
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_date_time-vc100-mt-1_44.lib
+    )
 ENDIF()
 
 TARGET_LINK_LIBRARIES(sumwars ${LINK_LIBS})
