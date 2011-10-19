@@ -28,7 +28,7 @@
 #define NR_STATUS_MODS 8
 
 #define NR_EFFECTS 1
-#include "../tinyxml/tinyxml.h"
+#include <tinyxml.h>
 
 enum NrTimers
 {

@@ -17,7 +17,7 @@
 #ifndef ELEMENTATTRIB_H
 #define ELEMENTATTRIB_H
 
-#include "../tinyxml/tinyxml.h"
+#include <tinyxml.h>
 #include <string>
 #include <map>
 

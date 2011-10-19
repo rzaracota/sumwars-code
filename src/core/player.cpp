@@ -19,7 +19,7 @@
 #include "eventsystem.h"
 #include "itemfactory.h"
 #include "options.h"
-#include "../tinyxml/tinyxml.h"
+#include <tinyxml.h>
 
 PlayerCamera::PlayerCamera()
 {

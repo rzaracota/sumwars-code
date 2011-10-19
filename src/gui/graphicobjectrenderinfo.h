@@ -23,7 +23,7 @@
 #include <list>
 #include <map>
 
-#include "../tinyxml/tinyxml.h"
+#include <tinyxml.h>
 
 
 

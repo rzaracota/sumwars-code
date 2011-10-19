@@ -22,7 +22,7 @@
 
 #include "OISKeyboard.h"
 
-#include "../tinyxml/tinyxml.h"
+#include <tinyxml.h>
 #include "elementattrib.h"
 
 extern "C"

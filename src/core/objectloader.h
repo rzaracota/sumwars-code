@@ -28,7 +28,7 @@
 #include "projectilebase.h"
 #include "treasurebase.h"
 
-#include "../tinyxml/tinyxml.h"
+#include <tinyxml.h>
 #include <string>
 #include <cstring>
 

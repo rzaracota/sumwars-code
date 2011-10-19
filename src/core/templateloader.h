@@ -23,7 +23,7 @@
 #include "region.h"
 #include "objectfactory.h"
 
-#include "../tinyxml/tinyxml.h"
+#include <tinyxml.h>
 #include <string>
 #include <cstring>
 

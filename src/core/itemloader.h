@@ -23,7 +23,7 @@
 #include "dropslot.h"
 #include <list>
 
-#include "../tinyxml/tinyxml.h"
+#include <tinyxml.h>
 #include <string>
 #include <cstring>
 

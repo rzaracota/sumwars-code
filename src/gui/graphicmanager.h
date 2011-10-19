@@ -27,7 +27,7 @@
 #include "graphicobject.h"
 #include "graphicobjectrenderinfo.h"
 
-#include "../tinyxml/tinyxml.h"
+#include <tinyxml.h>
 #include <string>
 #include <list>
 #include <map>

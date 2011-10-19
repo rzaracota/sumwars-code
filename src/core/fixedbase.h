@@ -18,7 +18,7 @@
 #define FIXEDBASE_H
 
 #include "geometry.h"
-#include "../tinyxml/tinyxml.h"
+#include <tinyxml.h>
 
 /**
  * \struct FixedObjectData

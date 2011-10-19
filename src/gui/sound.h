@@ -35,7 +35,7 @@
 #include <set>
 
 #include "geometry.h"
-#include "../tinyxml/tinyxml.h"
+#include <tinyxml.h>
 
 /**
  * \brief Name eines Sounds

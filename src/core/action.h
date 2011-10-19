@@ -25,7 +25,7 @@
 #include <map>
 #include <vector>
 #include <list>
-#include "../tinyxml/tinyxml.h"
+#include <tinyxml.h>
 #include "hybridimplementation.h"
 
 

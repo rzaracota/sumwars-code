@@ -25,7 +25,7 @@
 #include "playerbase.h"
 #include "projectilebase.h"
 #include "treasurebase.h"
-#include "../tinyxml/tinyxml.h"
+#include <tinyxml.h>
 #include <string>
 #include <list>
 #include "event.h"

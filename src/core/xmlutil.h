@@ -17,7 +17,7 @@
 #ifndef XMLUTIL_H
 #define XMLUTIL_H
 
-#include "../tinyxml/tinyxml.h"
+#include <tinyxml.h>
 #include <string>
 
 /**

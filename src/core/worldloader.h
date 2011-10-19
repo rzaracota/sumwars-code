@@ -26,7 +26,7 @@
 #include "dialogue.h"
 #include "quest.h"
 
-#include "../tinyxml/tinyxml.h"
+#include <tinyxml.h>
 #include <string>
 #include <cstring>
 #include "elementattrib.h"
