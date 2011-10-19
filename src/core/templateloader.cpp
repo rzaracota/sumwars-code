@@ -53,7 +53,7 @@ bool TemplateLoader::loadObjectTemplateData(const char* pFilename)
 bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 {
 	TiXmlNode* child, *child2;
-	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "ObjectTemplate"))
+	if (node->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(node->Value(), "ObjectTemplate"))
 	{
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
@@ -66,7 +66,7 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 		
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
-			if (child->Type()==TiXmlNode::ELEMENT)
+			if (child->Type()==TiXmlNode::TINYXML_ELEMENT)
 			{
 				attr.parseElement(child->ToElement());
 				std::string env,defstr,objname;
@@ -84,7 +84,7 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 					
 					for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
 					{
-						if (child2->Type()==TiXmlNode::ELEMENT)
+						if (child2->Type()==TiXmlNode::TINYXML_ELEMENT)
 						{
 							if (!strcmp(child2->Value(), "Object"))
 							{
@@ -95,14 +95,14 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 								DEBUGX("added object %s to generic object %s for environment %s",objname.c_str(), name.c_str(), env.c_str());
 								
 							}
-							else if (child2->Type()!=TiXmlNode::COMMENT)
+							else if (child2->Type()!=TiXmlNode::TINYXML_COMMENT)
 							{
 								WARNING("%s : unexpected element of <Environment>: %s",child->Value());
 							}
 						}
 					}
 				}
-				else if (child->Type()!=TiXmlNode::COMMENT)
+				else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 				{
 					WARNING("%s : unexpected element of <ObjectTemplate>: %s",m_filename.c_str(),child->Value());
 				}
@@ -113,7 +113,7 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 		
 		ObjectFactory::registerObjectTemplate(name,templ);
 	}
-	else if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "ObjectGroupTemplate"))
+	else if (node->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(node->Value(), "ObjectGroupTemplate"))
 	{
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
@@ -125,7 +125,7 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 		
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
-			if (child->Type()==TiXmlNode::ELEMENT)
+			if (child->Type()==TiXmlNode::TINYXML_ELEMENT)
 			{
 				attr.parseElement(child->ToElement());
 				std::string env,defstr,objname;
@@ -143,7 +143,7 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 					
 					for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
 					{
-						if (child2->Type()==TiXmlNode::ELEMENT)
+						if (child2->Type()==TiXmlNode::TINYXML_ELEMENT)
 						{
 							if (!strcmp(child2->Value(), "ObjectGroup"))
 							{
@@ -154,7 +154,7 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 								DEBUGX("added object group %s to generic object group %s for environment %s",objname.c_str(), name.c_str(), env.c_str());
 								
 							}
-							else if (child2->Type()!=TiXmlNode::COMMENT)
+							else if (child2->Type()!=TiXmlNode::TINYXML_COMMENT)
 							{
 								WARNING("%s : unexpected element of <Environment>: %s",m_filename.c_str(),child->Value());
 							}
@@ -180,7 +180,7 @@ bool TemplateLoader::loadObjectTemplate(TiXmlNode* node)
 					attr.getFloat("angle",angle,0);
 					templ->m_shape.m_angle = angle*3.14159/180;
 				}
-				else if (child->Type()!=TiXmlNode::COMMENT)
+				else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 				{
 					DEBUGX("unexpected element of <ObjectTemplate>: %s",m_filename.c_str(),child->Value());
 				}
@@ -226,7 +226,7 @@ bool TemplateLoader::loadObjectGroupData(const char* pFilename)
 bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 {
 	TiXmlNode* child, *child2;
-	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "ObjectGroup"))
+	if (node->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(node->Value(), "ObjectGroup"))
 	{
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
@@ -238,7 +238,7 @@ bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 		
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
-			if (child->Type()==TiXmlNode::ELEMENT)
+			if (child->Type()==TiXmlNode::TINYXML_ELEMENT)
 			{
 				attr.parseElement(child->ToElement());
 				std::string env,defstr,objname;
@@ -274,7 +274,7 @@ bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 				{
 					for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
 					{
-						if (child2->Type()==TiXmlNode::ELEMENT)
+						if (child2->Type()==TiXmlNode::TINYXML_ELEMENT)
 						{
 							if (!strcmp(child2->Value(), "Object"))
 							{
@@ -303,7 +303,7 @@ bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 								
 								templ->addObject (obj);
 							}
-							else if (child2->Type()!=TiXmlNode::COMMENT)
+							else if (child2->Type()!=TiXmlNode::TINYXML_COMMENT)
 							{
 								WARNING("%s : unexpected element of <ObjectContent>: %s",m_filename.c_str(),child->Value());
 							}
@@ -315,7 +315,7 @@ bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 				{
 					for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
 					{
-						if (child2->Type()==TiXmlNode::ELEMENT)
+						if (child2->Type()==TiXmlNode::TINYXML_ELEMENT)
 						{
 							if (!strcmp(child2->Value(), "Location"))
 							{
@@ -331,7 +331,7 @@ bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 								templ->addLocation(lname,pos);
 								DEBUGX("location for %s: %s at %f %f",name.c_str(),lname.c_str(), pos.m_x, pos.m_y);
 							}
-							else if (child2->Type()!=TiXmlNode::COMMENT)
+							else if (child2->Type()!=TiXmlNode::TINYXML_COMMENT)
 							{
 								WARNING("%s : unexpected element of <Locations>: %s",m_filename.c_str(),child->Value());
 							}
@@ -342,7 +342,7 @@ bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 				{
 					for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
 					{
-						if (child2->Type()==TiXmlNode::ELEMENT)
+						if (child2->Type()==TiXmlNode::TINYXML_ELEMENT)
 						{
 							if (!strcmp(child2->Value(), "Area"))
 							{
@@ -374,14 +374,14 @@ bool TemplateLoader::loadObjectGroup(TiXmlNode* node)
 								
 								DEBUGX("area for %s: %s",name.c_str(),lname.c_str());
 							}
-							else if (child2->Type()!=TiXmlNode::COMMENT)
+							else if (child2->Type()!=TiXmlNode::TINYXML_COMMENT)
 							{
 								WARNING("%s : unexpected element of <Areas>: %s",m_filename.c_str(),child->Value());
 							}
 						}
 					}
 				}
-				else if (child->Type()!=TiXmlNode::COMMENT)
+				else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 				{
 					WARNING("%s : unexpected element of <ObjectGroup>: %s",m_filename.c_str(),child->Value());
 				}

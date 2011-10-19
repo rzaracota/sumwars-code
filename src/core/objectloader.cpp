@@ -49,7 +49,7 @@ bool ObjectLoader::loadMonsterData(const char* pFilename)
 bool  ObjectLoader::loadMonster(TiXmlNode* node, bool silent_replace)
 {
 	TiXmlNode* child;
-	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Monster"))
+	if (node->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(node->Value(), "Monster"))
 	{
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
@@ -89,7 +89,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node, bool silent_replace)
 		// Schleife ueber die Elemente von Monster
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
-			if (child->Type()==TiXmlNode::ELEMENT)
+			if (child->Type()==TiXmlNode::TINYXML_ELEMENT)
 			{
 				attr.parseElement(child->ToElement());
 				
@@ -159,7 +159,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node, bool silent_replace)
 					attr.getFloat("ai_warn_range",data-> m_ai_vars.m_warn_radius,4);
 					
 				}
-				else if (child->Type()!=TiXmlNode::COMMENT)
+				else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 				{
 					WARNING("%s : unexpected element of <Monster>: %s",m_filename.c_str(),child->Value());
 				}
@@ -170,7 +170,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node, bool silent_replace)
 		ObjectFactory::registerMonster(subtype,data,silent_replace);
 		
 	}
-	else if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "MonsterGroup"))
+	else if (node->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(node->Value(), "MonsterGroup"))
 	{
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
@@ -193,7 +193,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node, bool silent_replace)
 				
 				data-> addMonsters(subtype,number,prob);
 			}
-			else if (child->Type()!=TiXmlNode::COMMENT)
+			else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 			{
 				WARNING("%s : unexpected element of <MonsterGroup>: %s",m_filename.c_str(),child->Value());
 			}
@@ -340,7 +340,7 @@ bool  ObjectLoader::loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& basa
 				basattr.m_special_flags |= Damage::EXTRA_SUMMONED_DMG;
 			*/
 		}
-		else if (child2->Type()!=TiXmlNode::COMMENT)
+		else if (child2->Type()!=TiXmlNode::TINYXML_COMMENT)
 		{
 			WARNING("%s : unexpected element of <BasicAttributes>: %s",m_filename.c_str(),child2->Value());
 		}
@@ -370,7 +370,7 @@ bool ObjectLoader::loadPlayerData(const char* pFilename)
 bool ObjectLoader::loadPlayer(TiXmlNode* node)
 {
 	TiXmlNode* child;
-	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "PlayerClass"))
+	if (node->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(node->Value(), "PlayerClass"))
 	{
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
@@ -443,14 +443,14 @@ bool ObjectLoader::loadPlayer(TiXmlNode* node)
 						attr.getString("type",atype);
 						ablt.m_req_abilities.push_back(atype);
 					}
-					else if (child2->Type()!=TiXmlNode::COMMENT)
+					else if (child2->Type()!=TiXmlNode::TINYXML_COMMENT)
 					{
 						WARNING("%s : unexpected element of <LearnableAbility>: %s",m_filename.c_str(),child2->Value());
 					}
 					
 				}
 			}
-			else if (child->Type()!=TiXmlNode::COMMENT)
+			else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 			{
 				WARNING("%s : unexpected element of <PlayerClass>: %s",child->Value());
 			}
@@ -493,7 +493,7 @@ bool ObjectLoader::loadObject(TiXmlNode* node, bool silent_replace)
 {
 	
 	TiXmlNode* child;
-	if (node->Type()==TiXmlNode::ELEMENT && (!strcmp(node->Value(), "Object") 
+	if (node->Type()==TiXmlNode::TINYXML_ELEMENT && (!strcmp(node->Value(), "Object") 
 		   || !strcmp(node->Value(), "ScriptObject")
 		   || !strcmp(node->Value(), "Treasure")))
 	{
@@ -537,7 +537,7 @@ bool ObjectLoader::loadObject(TiXmlNode* node, bool silent_replace)
 		// Schleife ueber die Elemente von Object
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
-			if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Mesh"))
+			if (child->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(child->Value(), "Mesh"))
 			{
 				attr.parseElement(child->ToElement());
 				std::string mesh;
@@ -549,7 +549,7 @@ bool ObjectLoader::loadObject(TiXmlNode* node, bool silent_replace)
 					sdata->m_render_info = mesh;
 				}
 			}
-			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "RenderInfo"))
+			else if (child->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(child->Value(), "RenderInfo"))
 			{
 				
 				std::string mesh;
@@ -561,7 +561,7 @@ bool ObjectLoader::loadObject(TiXmlNode* node, bool silent_replace)
 					sdata->m_render_info = mesh;
 				}
 			}
-			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Geometry"))
+			else if (child->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(child->Value(), "Geometry"))
 			{
 				attr.parseElement(child->ToElement());
 				std::string shape;
@@ -578,14 +578,14 @@ bool ObjectLoader::loadObject(TiXmlNode* node, bool silent_replace)
 					attr.getFloat("radius",data->m_shape.m_radius,0);
 				}
 			}
-			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Event") && sdata != 0)
+			else if (child->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(child->Value(), "Event") && sdata != 0)
 			{
 				TriggerType type;
 				Event* ev = new Event();
 				WorldLoader::loadEvent(child, ev,type);
 				sdata->m_events.insert(std::make_pair(type,ev));
 			}
-			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Flags") && sdata != 0)
+			else if (child->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(child->Value(), "Flags") && sdata != 0)
 			{
 				std::string flag;
 				attr.parseElement(child->ToElement());
@@ -608,7 +608,7 @@ bool ObjectLoader::loadObject(TiXmlNode* node, bool silent_replace)
 					sdata->m_interaction_flags &= ~WorldObject::COLLISION_DETECTION;
 				
 			}
-			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Dropslots") && tdata != 0)
+			else if (child->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(child->Value(), "Dropslots") && tdata != 0)
 			{
 				int nr =0;
 				for (TiXmlNode* child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
@@ -634,7 +634,7 @@ bool ObjectLoader::loadObject(TiXmlNode* node, bool silent_replace)
 				}
 					
 			}
-			else if (child->Type()!=TiXmlNode::COMMENT)
+			else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 			{
 				WARNING("%s : unexpected element of <Object>: %s",m_filename.c_str(),child->Value());
 			}
@@ -689,7 +689,7 @@ bool ObjectLoader::loadProjectileData(const char* pFilename)
 bool ObjectLoader::loadProjectile(TiXmlNode* node)
 {
 	TiXmlNode* child;
-	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Projectile"))
+	if (node->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(node->Value(), "Projectile"))
 	{
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
@@ -710,7 +710,7 @@ bool ObjectLoader::loadProjectile(TiXmlNode* node)
 		// Schleife ueber die Elemente von Object
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
-			if (child->Type()==TiXmlNode::ELEMENT)
+			if (child->Type()==TiXmlNode::TINYXML_ELEMENT)
 			{
 				attr.parseElement(child->ToElement());
 				if (!strcmp(child->Value(), "Mesh"))
@@ -790,7 +790,7 @@ bool ObjectLoader::loadEmotionSet(TiXmlNode* node)
 	
 	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 	{
-		if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Emotion"))
+		if (child->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(child->Value(), "Emotion"))
 		{
 			ElementAttrib attr;
 			attr.parseElement(child->ToElement());

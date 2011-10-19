@@ -136,11 +136,11 @@ bool Options::readFromFile(const std::string& filename)
 
 		root = doc.FirstChild();
 		root = root->NextSibling();
-		if (root->Type() == TiXmlNode::ELEMENT && !strcmp(root->Value(), "Options"))
+		if (root->Type() == TiXmlNode::TINYXML_ELEMENT && !strcmp(root->Value(), "Options"))
 		{
 			for ( child = root->FirstChild(); child != 0; child = child->NextSibling())
 			{
-				if (child->Type()==TiXmlNode::ELEMENT)
+				if (child->Type()==TiXmlNode::TINYXML_ELEMENT)
 				{
 					attr.parseElement(child->ToElement());
 					std::string env,defstr,objname;
@@ -148,7 +148,7 @@ bool Options::readFromFile(const std::string& filename)
 					{
 						for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
 						{
-							if (child2->Type()==TiXmlNode::ELEMENT && !strcmp(child2->Value(), "Shortkey"))
+							if (child2->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(child2->Value(), "Shortkey"))
 							{
 								attr.parseElement(child2->ToElement());
 
@@ -219,7 +219,7 @@ bool Options::readFromFile(const std::string& filename)
 							m_debug_options[attr->Name()] = attr->Value();
 						}
 					}
-					else if (child->Type()!=TiXmlNode::COMMENT)
+					else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 					{
 						WARNING("unexpected element in options.xml: %s",child->Value());
 					}

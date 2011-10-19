@@ -106,7 +106,7 @@ void SoundSystem::loadSoundData(const char* pFilename)
 void SoundSystem::loadSoundInfos(TiXmlNode* node)
 {
 	TiXmlNode* child;
-	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Sound"))
+	if (node->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(node->Value(), "Sound"))
 	{
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
@@ -118,7 +118,7 @@ void SoundSystem::loadSoundInfos(TiXmlNode* node)
 		
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
-			if (child->Type()==TiXmlNode::ELEMENT)
+			if (child->Type()==TiXmlNode::TINYXML_ELEMENT)
 			{
 				attr.parseElement(child->ToElement());
 				if (!strcmp(child->Value(), "Soundfile"))

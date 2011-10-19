@@ -42,7 +42,7 @@ bool ItemLoader::loadItemData(const char* pFilename)
 void ItemLoader::loadItems(TiXmlNode* node)
 {
 	TiXmlNode* child;
-	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Item"))
+	if (node->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(node->Value(), "Item"))
 	{
 		loadItem(node);
 	}
@@ -118,7 +118,7 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 	TiXmlNode* child;
 	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 	{
-		if (child->Type()==TiXmlNode::ELEMENT) 
+		if (child->Type()==TiXmlNode::TINYXML_ELEMENT) 
 		{
 			attr.parseElement(child->ToElement());
 			
@@ -362,7 +362,7 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 				attr.getFloat("attack_range", item_data->m_weapon_attr->m_attack_range);
 					
 			}
-			else if (child->Type()!=TiXmlNode::COMMENT)
+			else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 			{
 				DEBUG("unexpected element of <Item>: %s",child->Value());
 			}

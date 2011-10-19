@@ -71,7 +71,7 @@ bool Action::loadAbilityData(const char* pFilename)
 void Action::loadAbilities(TiXmlNode* node)
 {
 	TiXmlNode* child;
-	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Ability"))
+	if (node->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(node->Value(), "Ability"))
 	{
 		loadAbility(node);
 	}
@@ -141,7 +141,7 @@ void Action::loadAbility(TiXmlNode* node)
 	a->m_flags =0;
 	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 	{
-		if (child->Type()==TiXmlNode::ELEMENT) 
+		if (child->Type()==TiXmlNode::TINYXML_ELEMENT) 
 		{
 			attr.parseElement(child->ToElement());
 			
@@ -182,7 +182,7 @@ void Action::loadAbility(TiXmlNode* node)
 				a->m_projectile_flags =0;
 				for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
 				{
-					if (child2->Type()==TiXmlNode::ELEMENT) 
+					if (child2->Type()==TiXmlNode::TINYXML_ELEMENT) 
 					{
 						attr.parseElement(child2->ToElement());
 						if (!strcmp(child2->Value(), "Flag"))
@@ -215,7 +215,7 @@ void Action::loadAbility(TiXmlNode* node)
 					}
 				}
 			}
-			else if (child->Type()!=TiXmlNode::COMMENT)
+			else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 			{
 				DEBUG("unexpected element of <Ability>: %s",child->Value());
 			}
@@ -287,7 +287,7 @@ bool Action::loadHybridImplementation(TiXmlNode* node, HybridImplementation& imp
 	ElementAttrib attr;
 	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 	{
-		if (child->Type()==TiXmlNode::ELEMENT) 
+		if (child->Type()==TiXmlNode::TINYXML_ELEMENT) 
 		{
 			attr.parseElement(child->ToElement());
 			

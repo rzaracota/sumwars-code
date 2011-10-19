@@ -529,7 +529,7 @@ void GraphicManager::loadRenderInfos(TiXmlNode* node, bool silent_replace)
 {
 	TiXmlNode* child;
 	GraphicRenderInfo* info;
-	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "RenderInfo"))
+	if (node->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(node->Value(), "RenderInfo"))
 	{
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
@@ -586,7 +586,7 @@ void GraphicManager::loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info)
 	ElementAttrib attr;
 	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 	{
-		if (child->Type()==TiXmlNode::ELEMENT)
+		if (child->Type()==TiXmlNode::TINYXML_ELEMENT)
 		{
 			
 			attr.parseElement(child->ToElement());
@@ -628,7 +628,7 @@ void GraphicManager::loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info)
 				TiXmlNode* child2;
 				for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
 				{
-					if (child2->Type()==TiXmlNode::ELEMENT)
+					if (child2->Type()==TiXmlNode::TINYXML_ELEMENT)
 					{
 						if (!strcmp(child2->Value(), "Activation") || !strcmp(child2->Value(), "Active") || !strcmp(child2->Value(), "Deactivation"))
 						{
@@ -667,7 +667,7 @@ void GraphicManager::loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info)
 					}
 				}
 			}
-			else if (child->Type()!=TiXmlNode::COMMENT)
+			else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 			{
 				WARNING("%s : unexpected element of <RenderInfo>: %s",m_filename.c_str(),child->Value());
 			}

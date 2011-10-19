@@ -57,7 +57,7 @@ void WorldLoader::loadEvent( TiXmlNode* node, Event *ev, TriggerType &type)
 				ev->setEffect(text->Value());
 			}
 		}
-		else if (child->Type()!=TiXmlNode::COMMENT)
+		else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 		{
 			WARNING("%s : unexpected element of <Event>: %s",m_filename.c_str(),child->Value());
 		}
@@ -88,7 +88,7 @@ bool WorldLoader::loadRegions(TiXmlNode* node)
 {
 	TiXmlNode* child;
 	RegionData* rdata=0;
-	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Region"))
+	if (node->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(node->Value(), "Region"))
 	{
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
@@ -110,7 +110,7 @@ bool WorldLoader::loadRegions(TiXmlNode* node)
 	}
 	else
 	{
-		if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "World"))
+		if (node->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(node->Value(), "World"))
 		{
 			ElementAttrib attr;
 			attr.parseElement(node->ToElement());
@@ -136,7 +136,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 	TiXmlNode* child2;
 	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 	{
-		if (child->Type()==TiXmlNode::ELEMENT)
+		if (child->Type()==TiXmlNode::TINYXML_ELEMENT)
 		{
 			ElementAttrib attr;
 			attr.parseElement(child->ToElement());
@@ -171,7 +171,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 							rdata->m_music_tracks.push_back(music);
 						}
 					}
-					else if (child2->Type()!=TiXmlNode::COMMENT)
+					else if (child2->Type()!=TiXmlNode::TINYXML_COMMENT)
 					{
 						WARNING("%s : unexpected element of <Music>: %s",m_filename.c_str(),child2->Value());
 					}
@@ -224,14 +224,14 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 									attr.getFloat("radius",exit.m_shape.m_radius,0);
 								}
 							}
-							else if (child3->Type()!=TiXmlNode::COMMENT)
+							else if (child3->Type()!=TiXmlNode::TINYXML_COMMENT)
 							{
 								WARNING("%s : unexpected element of <Exit>: %s",m_filename.c_str(),child3->Value());
 							}
 						}
 						rdata->addExit(exit);
 					}
-					else if (child2->Type()!=TiXmlNode::COMMENT)
+					else if (child2->Type()!=TiXmlNode::TINYXML_COMMENT)
 					{
 						WARNING("%s : unexpected element of <Exits>: %s",m_filename.c_str(),child2->Value());
 					}
@@ -250,7 +250,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						attr.getFloat("height",height);
 						rdata->addEnvironment(height,envname);
 					}
-					else if (child2->Type()!=TiXmlNode::COMMENT)
+					else if (child2->Type()!=TiXmlNode::TINYXML_COMMENT)
 					{
 						WARNING("%s : unexpected element of <Environments>: %s",m_filename.c_str(),child2->Value());
 					}
@@ -312,7 +312,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						
 						rdata->addNamedObjectGroup(group_name,name,angle, prio);
 					}
-					else if (child2->Type()!=TiXmlNode::COMMENT)
+					else if (child2->Type()!=TiXmlNode::TINYXML_COMMENT)
 					{
 						WARNING("%s : unexpected element of <NamedObjectGroups>: %s",m_filename.c_str(),child2->Value());
 					}
@@ -339,7 +339,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						
 						rdata->addObjectGroup(group_name,prio, number, prob,(deco=="true"));
 					}
-					else if (child2->Type()!=TiXmlNode::COMMENT)
+					else if (child2->Type()!=TiXmlNode::TINYXML_COMMENT)
 					{
 						WARNING("%s : unexpected element of <ObjectGroups>: %s",m_filename.c_str(),child2->Value());
 					}
@@ -359,7 +359,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						
 						rdata->addSpawnGroup(group_name,number);
 					}
-					else if (child2->Type()!=TiXmlNode::COMMENT)
+					else if (child2->Type()!=TiXmlNode::TINYXML_COMMENT)
 					{
 						WARNING("%s : unexpected element of <SpawnGroup>: %s",m_filename.c_str(),child2->Value());
 					}
@@ -383,7 +383,7 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 				attr.getFloat("green",rdata->m_directional_light[1],0.3f);
 				attr.getFloat("blue",rdata->m_directional_light[2],0.3f);
 			}
-			else if (child->Type()!=TiXmlNode::COMMENT)
+			else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 			{
 				WARNING("%s : unexpected element of <Region>: %s",m_filename.c_str(),child->Value());
 			}
@@ -415,7 +415,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 {
 	TiXmlNode* child;
 	
-	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "NPC"))
+	if (node->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(node->Value(), "NPC"))
 	{
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
@@ -436,7 +436,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 		
 		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 		{
-			if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Topic"))
+			if (child->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(child->Value(), "Topic"))
 			{
 				attr.parseElement(child->ToElement());
 				attr.getString("name",topic,"topic");
@@ -456,7 +456,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 					Dialogue::getTopicList(refname).addStartTopic(TranslatableString(start_op,EventSystem::GetGettextDomain()), topic);
 				}
 			}
-			else if (child->Type()==TiXmlNode::ELEMENT && !strcmp(child->Value(), "Trade"))
+			else if (child->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(child->Value(), "Trade"))
 			{
 				attr.parseElement(child->ToElement());
 				float refreshtime,price_factor, buy_factor;
@@ -487,7 +487,7 @@ void  WorldLoader::loadNPC( TiXmlNode* node)
 					DEBUGX("new trade Object for %s : %s %i %i %f %f",refname.c_str(),tradeobj.m_subtype.c_str(), tradeobj.m_number, tradeobj.m_number_magical, tradeobj.m_min_enchant, tradeobj.m_max_enchant);
 				}
 			}
-			else if (child->Type()!=TiXmlNode::COMMENT)
+			else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 			{
 				WARNING("%s : unexpected element of <NPC>: %s",m_filename.c_str(),child->Value());
 			}
@@ -526,7 +526,7 @@ void WorldLoader::loadQuests(TiXmlNode* node)
 {
 	TiXmlNode* child;
 	Quest* qu;
-	if (node->Type()==TiXmlNode::ELEMENT && !strcmp(node->Value(), "Quest"))
+	if (node->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(node->Value(), "Quest"))
 	{
 		ElementAttrib attr;
 		attr.parseElement(node->ToElement());
@@ -568,7 +568,7 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 	TiXmlText* text;
 	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 	{
-		if (child->Type()==TiXmlNode::ELEMENT)
+		if (child->Type()==TiXmlNode::TINYXML_ELEMENT)
 		{
 			if ((!strcmp(child->Value(), "Init")))
 			{
@@ -602,7 +602,7 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 				
 				for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
 				{
-					if (child2->Type()==TiXmlNode::ELEMENT && !strcmp(child2->Value(), "Event"))
+					if (child2->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(child2->Value(), "Event"))
 					{
 						ev = new Event;
 						ev->setGettextDomain(EventSystem::GetGettextDomain());
@@ -614,7 +614,7 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 						
 						World::getWorld()->addEvent(rname,type,ev);
 					}
-					else if (child2->Type()!=TiXmlNode::COMMENT)
+					else if (child2->Type()!=TiXmlNode::TINYXML_COMMENT)
 					{
 						WARNING("%s : unexpected element of <Region>: %s",m_filename.c_str(),child2->Value());
 					}
@@ -625,7 +625,7 @@ void WorldLoader::loadQuest(TiXmlNode* node, Quest* quest)
 			{
 				loadFraction(child);
 			}
-			else if (child->Type()!=TiXmlNode::COMMENT)
+			else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 			{
 				WARNING("%s : unexpected element of <Quest>: %s",m_filename.c_str(),child->Value());
 			}
@@ -648,7 +648,7 @@ void WorldLoader::loadFraction( TiXmlNode* node)
 	TiXmlNode* child;
 	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 	{
-		if (child->Type()==TiXmlNode::ELEMENT)
+		if (child->Type()==TiXmlNode::TINYXML_ELEMENT)
 		{
 			if ((!strcmp(child->Value(), "Relation")))
 			{
