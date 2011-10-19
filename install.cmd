@@ -96,7 +96,7 @@ goto end
 echo Copy Lua
 
 if EXIST "%LUA_DEV%\." (
-copy "%LUA_DEV%\lua51.dll" lua51.dll
+copy "%LUA_DEV%\lua5.1.dll" lua51.dll
 ) ELSE (
 echo Can't find LUA folder, enshure that environmant variable is set correctly
 COLOR 0C
