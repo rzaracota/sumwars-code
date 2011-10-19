@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 2.6)
 project(SUMWARS)
 
 
-OPTION(NO_TINYXML "Avoid use of TinyXML Lib" OFF)
+OPTION(NO_TINYXML "Do not use in-source TinyXML Lib" OFF)
+OPTION(NO_ENET "Do not use in-source ENET Lib" OFF)
 OPTION(BUILD_TOOLS "Builds editor tools" ON)
 OPTION(UPDATE_SUBVERSION_REVISION "Option to turn off automatic revision checking" ON)
 
@@ -80,9 +81,11 @@ ENDIF()
 IF(NO_TINYXML)
   FIND_PACKAGE(TinyXML REQUIRED)
 ENDIF()
+IF(NO_ENET)
+  FIND_PACKAGE(Enet REQUIRED)
+ENDIF()
 
 
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/enet/include)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/core)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/contenteditor)
@@ -100,6 +103,11 @@ IF(NO_TINYXML)
   INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
 ELSE()
   INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml)
+ENDIF()
+IF(NO_ENET)
+  INCLUDE_DIRECTORIES(${ENET_INCLUDE_DIR})
+ELSE()
+  INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/enet/include)
 ENDIF()
 IF(BUILD_TOOLS)
   INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
@@ -219,8 +227,25 @@ ELSE()
     ./src/tinyxml/tinyxmlparser.cpp)
 ENDIF()
 
+IF(NO_ENET)
+  SET(SRCS_ENET "")
+ELSE()
+  SET(SRCS_ENET
+    ./src/enet/callbacks.c
+    ./src/enet/compress.c
+    ./src/enet/host.c
+    ./src/enet/list.c
+    ./src/enet/packet.c
+    ./src/enet/peer.c
+    ./src/enet/protocol.c
+    ./src/enet/unix.c
+    ./src/enet/win32.c
+    )
+ENDIF()
+
 SET(SRCS
   ${SRCS_TINYXML}
+  ${SRCS_ENET}
   ${HEADER_FILES}
   ./src/core/nlfg.cpp
   ./src/core/worldobject.cpp
@@ -311,15 +336,6 @@ SET(SRCS
   ./src/gui/sound.cpp
   ./src/gui/tooltip.cpp
   ./src/gui/optionswindow.cpp
-  ./src/enet/callbacks.c
-  ./src/enet/compress.c
-  ./src/enet/host.c
-  ./src/enet/list.c
-  ./src/enet/packet.c
-  ./src/enet/peer.c
-  ./src/enet/protocol.c
-  ./src/enet/unix.c
-  ./src/enet/win32.c
 )
  
 IF(BUILD_TOOLS)
@@ -341,7 +357,6 @@ IF(BUILD_TOOLS)
     ./src/gui/contenteditor/itemeditor.h
     ./src/gui/contenteditor/monstereditor.h
     )
-
 
   SET(SRCS
     ${SRCS}
@@ -384,6 +399,9 @@ SET(LINK_LIBS
   )
 IF(NO_TINYXML)
   SET(LINK_LIBS ${LINK_LIBS} ${TINYXML_LIBRARIES})
+ENDIF()
+IF(NO_ENET)
+  SET(LINK_LIBS ${LINK_LIBS} ${Enet_LIBRARY})
 ENDIF()
 IF(BUILD_TOOLS)
   SET(LINK_LIBS
