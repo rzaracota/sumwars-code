@@ -1,6 +1,0 @@
-*** GUI license file ***
-
-All content in this directory is taken from Crazy Eddies's GUI (CEGUI). 
-Visit http://www.cegui.org.uk for more information. The license is MIT.
-
-The only exception is subdirectory imageset which contains a separate license file.
