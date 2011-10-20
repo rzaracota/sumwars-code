@@ -1,5 +1,8 @@
-All source code (content of subdirectory src) is under GPL V3. A copy of the license file is delivered with this package.
+All source code (content of subdirectory src) is under GPL v3, or
+later versions.  A copy of the license file is provided along with
+this package.
 
 
-All ressources and data (content of subdirectories ressources and data) is under CC-BY-SA. You can see the exact license text at:
+All resources and data (content of subdirectories resources and data)
+is under CC-BY-SA. You can see the exact license text at:
 http://creativecommons.org/licenses/
