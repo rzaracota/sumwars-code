@@ -590,7 +590,7 @@ bool Player::onItemClick(ClientCommand* command)
 				}
 				else if (pos>=Equipement::BELT_ITEMS && pos < Equipement::BELT_ITEMS_END)
 				{
-					if (it->m_useup_effect == 0)
+					if (it->m_useup_effect == 0 && it->m_subtype != "town_portal")
 					{
 						// non-consumable items must not placed in belt
 						Item* itm =0;
