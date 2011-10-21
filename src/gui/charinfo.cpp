@@ -578,6 +578,14 @@ CharInfo::CharInfo (Document* doc)
 		if (label->getTooltipText()!="")
 			label->setTooltipText("");
 	}
+	
+	label = win_mgr.getWindow("Portrait");
+	std::string portraitname = player->getEmotionImage("normal");
+	if (label->getProperty("Image") != portraitname)
+	{
+		label->setProperty("Image",portraitname);
+	}
+	
 }
 
 void CharInfo::updateTranslation()

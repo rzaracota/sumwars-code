@@ -293,7 +293,7 @@ void PartyInfo::update()
 			img->setVisible(true);
 		}
 		
-		std::string imagestr = pl->getEmotionImage(pl->getSpeakText().m_emotion);
+		std::string imagestr = pl->getEmotionImage("normal");
 		if (img->getProperty("Image") != imagestr)
 		{
 			img->setProperty("Image",imagestr);
