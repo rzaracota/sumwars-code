@@ -1186,7 +1186,6 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 				{
 					// rotate speaker towards each other
 					Vector dir = getShape()->m_center - cr->getShape()->m_center;
-					cr->setAngle(dir.angle());
 					setAngle(dir.angle() + PI);
 					
 					// set up the dialogue
@@ -1207,6 +1206,7 @@ void Creature::performActionCritPart(Vector goal, WorldObject* goalobj)
 					else
 					{
 						getRegion()->insertDialogue(dia);
+						cr->setAngle(dir.angle());
 						EventSystem::setDialogue(0);
 					}
 				}
