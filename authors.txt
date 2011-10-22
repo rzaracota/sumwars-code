@@ -44,6 +44,7 @@
 =Simeon Dear (Trilby)
 =Patrick McMunn (PaddyMac)
 =Igor Paliychuk (igorko)
+=Eugenio Fagioli (NoobAtThis)
 
 [J Build system]
 =Stefan Stammberger (fusion44)
