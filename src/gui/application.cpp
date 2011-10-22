@@ -38,6 +38,9 @@
 #include "OgreConfigFile.h"
 #include <OgreParticleSystemManager.h>
 
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+#include "../winicon/resource.h"
+#endif
 
 Application::Application(char *argv)
 {
@@ -283,7 +286,7 @@ bool Application::init(char *argv)
 
 Application::~Application()
 {
-	// dynamisch angelegte Objekte in umgekehrter Reihenfolge freigeben
+	// Release (deallocate) dynamically allocated objects in reverse order. (reverse to their creation)
 
 	printf("deleting application\n");
 	if (m_main_window)
@@ -300,7 +303,8 @@ Application::~Application()
 	}
 	catch(std::exception& e)
 	{
-			// this happens, if the program dies before the renderer was initialized
+		// this happens, if the program dies before the renderer was initialized
+		ERRORMSG ("Caught exception: [%s]", e.what ());
 	}
 	if (m_ogre_root)
 	{
@@ -484,15 +488,46 @@ void Application::run()
 
 }
 
+
+/**
+	Handle Ogre specific initializations.
+
+*/
 bool Application::initOgre()
 {
 	DEBUG("init ogre");
-	// Fenster anlegen, Ogre initialisieren
-	m_window = m_ogre_root->initialise(true,"Summoning Wars");
 
-	// Szenemanager anlegen
+	// Create window.
+	// Here, we have 2 options:
+	// 1. Let OGRE create the window automatically, but have less control over it
+	// 2. Create the window ourselves, longer code, but have more control
+
+	// Initialize Ogre with the automatic creation of a window.
+	m_window = m_ogre_root->initialise (true, "Summoning Wars"); // TODO: define constant for name of obtain from config file.
+
+	//
+	// Platform specific code - set the application icon.
+	// On Windows, it's required to set the icon of the application. This will be visible in the taskbar + alt-tab operations.
+	// Also, if the application is started in windowed mode, the icon is set to the titlebar.
+	//
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	{
+		HWND hwnd;
+		m_window->getCustomAttribute ("WINDOW", &hwnd);
+		HINSTANCE hinstance;
+		hinstance = GetModuleHandle (0); 
+		// If you get an error similar to [error C2065: 'IDI_SUMWARS_APP_ICON' : undeclared identifier]
+		// Make sure you add the resource files [Sumwars.rc] and [resource.h] to the project.
+		HICON icon = LoadIcon (hinstance, MAKEINTRESOURCE (IDI_SUMWARS_APP_ICON));
+		SendMessage (hwnd, WM_SETICON, ICON_BIG, LPARAM (icon));
+		SendMessage (hwnd, WM_SETICON, ICON_SMALL, LPARAM (icon)); 
+	}
+#endif
+
+	// Create the scene manager
 	m_scene_manager = m_ogre_root->createSceneManager(Ogre::ST_GENERIC,"DefaultSceneManager");
 
+#if 0
     /*// set Shadows enabled before any mesh is loaded
 	m_scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
 	m_scene_manager->setShadowTextureSelfShadow(false);
@@ -500,6 +535,22 @@ bool Application::initOgre()
 	m_scene_manager->setShadowColour( Ogre::ColourValue(0.4, 0.4, 0.4) );
 	m_scene_manager->setShadowFarDistance(2000);
 */
+
+	// If we can use texture sizes BIGGER than the window size, specify the settings...
+	// This difference may come up most often due to the D3D/OpenGL support.
+	if (m_ogre_root->getRenderSystem()->getCapabilities()->hasCapability(Ogre::RSC_HWRENDER_TO_TEXTURE))
+    {
+        // In D3D, use a 1024x1024 shadow texture
+		m_scene_manager->setShadowTextureSettings(1024, 2);
+    }
+    else
+    {
+        // Use 256x256 texture in GL since we can't go higher than the window res
+		// Make sure you use a resolution higher than this!
+        m_scene_manager->setShadowTextureSettings(256, 2);
+    }
+#endif
+
 	Ogre::LogManager::getSingleton().createLog(SumwarsHelper::userPath() + "/BenchLog.log");
 	return true;
 
