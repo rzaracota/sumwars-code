@@ -303,8 +303,12 @@ void RegionLight::fromString(CharConv* cv)
 	m_directional_light.fromString(cv);	
 }
 
+// Note: 
+// This is not recommended normally: sending a partially constructed object (this)
+// to an instantiated item (m_light). In this instance it works, since m_light only
+// stores the pointer. If any other operations would be attempted, it could spell disaster.
 Region::Region(short dimx, short dimy, short id, std::string name, RegionData* data)
-	: m_light(this)
+	: m_light(this) 
 {
 	DEBUGX("creating region");
 	m_data_grid = new Matrix2d<Gridunit>(dimx,dimy);
@@ -315,7 +319,7 @@ Region::Region(short dimx, short dimy, short id, std::string name, RegionData* d
 	m_height = new Matrix2d<float>(dimx,dimy);
 	m_height->clear();
 
-	// Binärbaum fuer WorldObjects anlegen
+	// Create the binary tree for WorldObjects
 	m_objects = new WorldObjectMap;
 	m_static_objects = new WorldObjectMap;
 
@@ -1891,7 +1895,9 @@ void Region::update(float time)
 			bool ret = EventSystem::executeEvent(jt->second);
 			
 			if (ret)
+			{
 				DEBUGX("event on trigger: %s",type.c_str());
+			}
 			
 			// einmalige Ereignisse loeschen, wenn erfolgreich ausgefuehrt
 			if (jt->second->getOnce() &&  ret)
