@@ -26,7 +26,7 @@
 				insertPlayerItem(player,false);
 			end;
 			local name = get(trigger.user,"name");
-			printQuestMessage(name.." hat einen Gegenstand aus Maylons Grab erhalten.");
+			printQuestMessage(name.." received an item from Maylons Grave.");
 			setPlayerPrivateVar(player,"maylonsReward",true)
 		</Effect>
 	</Event>

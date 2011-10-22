@@ -897,7 +897,7 @@
 					speak("Trader", _("You will discover that the scrolls take you right here again."),"normal");
 				end;
 				
-				speak("magopt", _("Verflucht sei Windclaw!"), "angry");
+				speak("magopt", _("Curse you, Windclaw!"), "angry");
 				speak("PL", _("Fine. Then we do it the hard way."), "unhappy");
 				speak("Trader", _("If you need something let me know. I discovered some potions back there, and I would part with them for a small amount of gold."),"amused");
 				speak("PL", _("You really ask money for it."), "surprised");

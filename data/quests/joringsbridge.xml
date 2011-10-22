@@ -349,7 +349,7 @@
 				
 				speak("prince",_("Sergeant!"),"normal");
 				speak("prince",_("Only hand over the gold if the goblins are driven off and the peasants are alive in the end."),"normal");
-				speak("prince",_("Otherwise, do your work diligent."),"normal")
+				speak("prince",_("Otherwise, do your work diligently."),"normal")
 				
 				setSpeakerPosition("sergeant","right");
 				speak("sergeant",_("As you wish, my Prinz."),"normal");
