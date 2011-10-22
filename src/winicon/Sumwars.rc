@@ -1,0 +1,17 @@
+// Microsoft Visual C++ generated resource script.
+// Note: Manually edited.
+//
+#include "resource.h"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_SUMWARS_APP_ICON        ICON                    "..\\..\\resources\\icon\\SumWars.ico"
+#define FILE_VERSION 0,5,5,0
+#define USER_COMMENT "Summoning Wars\0"
+#define USER_COMPONENT "Game\0"
