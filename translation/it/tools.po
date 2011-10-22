@@ -2,366 +2,368 @@
 # Copyright (C) 2011
 # This file is distributed under the same license as the sumwars package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR
+# Eugenio Fagioli <eugenio.fagioli@gmail.com>, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-12 21:30+0200\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2011-10-21 00:08+0200\n"
+"Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
+"Language-Team: Italiano <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bits\n"
 "Language: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:184
 msgid "Render Info"
-msgstr ""
+msgstr "Informazioni Renderizzatore"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:187
 msgid "Mesh"
-msgstr ""
+msgstr "Mesh poligonale"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:190
 msgid "Select main mesh:"
-msgstr ""
+msgstr "Selezionare la Mesh principale"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:193
 msgid "Submeshes"
-msgstr ""
+msgstr "Mesh secondarie"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:196
 msgid "Add Submesh"
-msgstr ""
+msgstr "Aggiungere Mesh secondaria"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:199
 msgid "New submesh:"
-msgstr ""
+msgstr "Nuova Mesh secondaria"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:202
 msgid "submesh name:"
-msgstr ""
+msgstr "Nome Mesh secondaria:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:205
 msgid "Edit submesh:"
-msgstr ""
+msgstr "Modifica Mesh secondaria:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:208
 msgid "Attach to:"
-msgstr ""
+msgstr "Appendi a:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:211
 msgid "at bone:"
-msgstr ""
+msgstr "alla struttura:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:214
 msgid "Rotate(x,y,z):"
-msgstr ""
+msgstr "Ruota(x,y,z):"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:217
 msgid "Scale:"
-msgstr ""
+msgstr "Riscala:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:220
 msgid "Offset (x,y,z):"
-msgstr ""
+msgstr "Slittamento(x,y,z):"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:223
 msgid "Delete Submesh"
-msgstr ""
+msgstr "Cancella Mesh secondaria"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:226
 msgid "Animations"
-msgstr ""
+msgstr "Animazioni"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:229
 #: ../src/gui/contenteditor/contenteditor.cpp:289
 #: ../src/gui/contenteditor/contenteditor.cpp:475
 msgid "XML"
-msgstr ""
+msgstr "XML"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:232
 #: ../src/gui/contenteditor/contenteditor.cpp:292
 #: ../src/gui/contenteditor/contenteditor.cpp:478
 msgid "Submit XML"
-msgstr ""
+msgstr "Inoltra XML"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:235
 msgid "FixedObject"
-msgstr ""
+msgstr "OggettoModificato"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:238
 msgid "Properties"
-msgstr ""
+msgstr "Proprietà"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:241
 msgid "Shape:"
-msgstr ""
+msgstr "Forma:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:244
 msgid "Circle"
-msgstr ""
+msgstr "Cerchio"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:247
 msgid "Radius:"
-msgstr ""
+msgstr "Raggio:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:250
 #: ../src/gui/contenteditor/contenteditor.cpp:262
 msgid "Autodetect"
-msgstr ""
+msgstr "Auto-determina"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:253
 msgid "Rectangle"
-msgstr ""
+msgstr "Rettangolo"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:256
 msgid "Width:"
-msgstr ""
+msgstr "Larghezza:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:259
 msgid "Depth:"
-msgstr ""
+msgstr "Profondità:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:265
 msgid "Collision type"
-msgstr ""
+msgstr "Tipo di collisione"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:268
 #: ../src/gui/contenteditor/contenteditor.cpp:307
 msgid "Copy data from:"
-msgstr ""
+msgstr "Copia dati da:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:271
 #: ../src/gui/contenteditor/contenteditor.cpp:310
 msgid "Copy"
-msgstr ""
+msgstr "Copia"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:274
 #: ../src/gui/contenteditor/contenteditor.cpp:277
 msgid "Create Object"
-msgstr ""
+msgstr "Crea Oggetto"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:280
 msgid "Position:"
-msgstr ""
+msgstr "Posizione:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:283
 msgid "Get Player Position"
-msgstr "Позиція гравця"
+msgstr "Ottieni Posizione Giocatore"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:286
 msgid "Angle:"
-msgstr ""
+msgstr "Angolo:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:289
 msgid "Delete all objects"
-msgstr ""
+msgstr "Cancella tutti gli oggetti"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:298
 msgid "Item"
-msgstr ""
+msgstr "Strumento"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:301
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:304
 #: ../src/gui/contenteditor/contenteditor.cpp:376
 msgid "Type:"
-msgstr ""
+msgstr "Tipo:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:307
 msgid "Size:"
-msgstr ""
+msgstr "Dimensione:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:316
 msgid "Name:"
-msgstr ""
+msgstr "Nome:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:319
 msgid "Value:"
-msgstr ""
+msgstr "Valore:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:322
 msgid "Enchant min:"
-msgstr ""
+msgstr "Incantesimo min:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:325
 msgid "max:"
-msgstr ""
+msgstr "massimo:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:328
 msgid "Equip"
-msgstr ""
+msgstr "Equipaggia"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:331
 #: ../src/gui/contenteditor/contenteditor.cpp:436
 msgid "Health:"
-msgstr ""
+msgstr "Vita:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:334
 msgid "Attribute:"
-msgstr ""
+msgstr "Caratteristica:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:337
 msgid "Strength:"
-msgstr ""
+msgstr "Forza:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:340
 msgid "Dexterity:"
-msgstr ""
+msgstr "Destrezza:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:343
 msgid "Magic Power:"
-msgstr ""
+msgstr "Potenza Magica:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:346
 msgid "Willpower:"
-msgstr ""
+msgstr "Forza di volontà:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:349
 msgid "Resistances:"
-msgstr ""
+msgstr "Resistenze:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:352
 #: ../src/gui/contenteditor/contenteditor.cpp:388
 msgid "Physical:"
-msgstr ""
+msgstr "Fisico:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:355
 #: ../src/gui/contenteditor/contenteditor.cpp:394
 msgid "Fire:"
-msgstr ""
+msgstr "Fuoco:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:358
 #: ../src/gui/contenteditor/contenteditor.cpp:403
 msgid "Ice:"
-msgstr ""
+msgstr "Ghiaccio:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:361
 #: ../src/gui/contenteditor/contenteditor.cpp:412
 msgid "Air:"
-msgstr ""
+msgstr "Aria:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:364
 msgid "Other:"
-msgstr ""
+msgstr "Altro:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:367
 msgid "Armor:"
-msgstr ""
+msgstr "Armatura:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:370
 msgid "Block:"
-msgstr ""
+msgstr "Blocco:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:373
 #: ../src/gui/contenteditor/contenteditor.cpp:421
 msgid "Precision:"
-msgstr ""
+msgstr "Precisione:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:376
 #: ../src/gui/contenteditor/contenteditor.cpp:424
 msgid "Power:"
-msgstr ""
+msgstr "Potere:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:379
 msgid "Weapon"
-msgstr ""
+msgstr "Arma"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:385
 msgid "Damage:"
-msgstr ""
+msgstr "Danno:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:391
 #: ../src/gui/contenteditor/contenteditor.cpp:400
 #: ../src/gui/contenteditor/contenteditor.cpp:409
 #: ../src/gui/contenteditor/contenteditor.cpp:418
 msgid "-"
-msgstr ""
+msgstr "-"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:394
 #: ../src/gui/contenteditor/contenteditor.cpp:403
 #: ../src/gui/contenteditor/contenteditor.cpp:412
 #: ../src/gui/contenteditor/contenteditor.cpp:421
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:430
 msgid "Range:"
-msgstr ""
+msgstr "Gittata:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:433
 msgid "Speed:"
-msgstr ""
+msgstr "Velocità:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:436
 msgid "Twohanded weapon"
-msgstr ""
+msgstr "Arma a due mani"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:439
 msgid "Crit. Hits:"
-msgstr ""
+msgstr "Colpi Critici"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:442
 msgid "Consume"
-msgstr ""
+msgstr "Consuma"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:448
 msgid "Status heal and immunity time:"
-msgstr ""
+msgstr "Vita e Invincibilità:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:451
 msgid "Blind:"
-msgstr ""
+msgstr "Accecato:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:454
 msgid "Poisoned:"
-msgstr ""
+msgstr "Avvelenato:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:457
 msgid "Berserk:"
-msgstr ""
+msgstr "Furia:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:460
 msgid "Confused:"
-msgstr ""
+msgstr "Stordito:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:463
 msgid "Mute:"
-msgstr ""
+msgstr "Muto:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:466
 msgid "Paralyzed:"
-msgstr ""
+msgstr "Paralizzato:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:469
 msgid "Frozen:"
-msgstr ""
+msgstr "Congelato:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:472
 msgid "Burning:"
-msgstr ""
+msgstr "Incendiato:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:475
 msgid "Create Item"
-msgstr ""
+msgstr "Crea Strumento"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:478
 msgid "Enchant:"
-msgstr ""
+msgstr "Incantesimo:"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:481
 msgid "Create in inventory"
-msgstr ""
+msgstr "Crea nell' inventario"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:484
 msgid "Create an drop"
-msgstr ""
+msgstr "Crea e lascia"
 
 #: ../src/gui/contenteditor/contenteditor.cpp:493
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"

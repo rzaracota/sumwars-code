@@ -4,20 +4,21 @@
 # 
 # Francesco Miglietta (fra9000) <miglietta.francesco@gmail.com>, 2010
 # 
+# Eugenio Fagioli <eugenio.fagioli@gmail.com>, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-07-25 09:49\n"
-"Last-Translator: Francesco Miglietta (fra9000) <miglietta.francesco@gmail."
-"com>\n"
-"Language-Team: Italian <http://gamesopensource.altervista.org>\n"
+"PO-Revision-Date: 2011-10-22 15:21+0200\n"
+"Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
+"Language-Team: Italiano <>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bits\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: theTrader.xml
 msgid "The Trader"
@@ -29,7 +30,8 @@ msgstr "Quest completata"
 
 #: theTrader.xml
 msgid "A strange trader offered me to sell Empty Scrolls."
-msgstr "Uno strano commerciante ha offerto di vendermi delle pergamene vuote."
+msgstr ""
+"Uno strano commerciante si è offerto di vendermi delle pergamene vuote."
 
 #: theTrader.xml
 msgid "elCnlLobby"
@@ -41,19 +43,19 @@ msgstr "Campo dei Mercenari di Medair"
 
 #: theTrader.xml
 msgid "A moment, dear madam."
-msgstr "Un momento, mia cara signora."
+msgstr "Un momento, cara signora."
 
 #: theTrader.xml
 msgid "A moment, dear mister."
-msgstr "Un momento, mio caro signore."
+msgstr "Un momento, caro signore."
 
 #: theTrader.xml
 msgid "A moment, dear ladies."
-msgstr "Un momento, mie care signore."
+msgstr "Un momento, care signore."
 
 #: theTrader.xml
 msgid "A moment, dear sirs."
-msgstr "Un momento, miei cari signori."
+msgstr "Un momento, cari signori."
 
 #: theTrader.xml
 msgid "A moment, ladies and gentleman."

@@ -4,20 +4,21 @@
 # 
 # Francesco Miglietta (fra9000) <miglietta.francesco@gmail.com>, 2010
 # 
+# Eugenio Fagioli <eugenio.fagioli@gmail.com>, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-07-25 09:49\n"
-"Last-Translator: Francesco Miglietta (fra9000) <miglietta.francesco@gmail."
-"com>\n"
-"Language-Team: Italian <http://gamesopensource.altervista.org>\n"
+"PO-Revision-Date: 2011-10-21 22:07+0200\n"
+"Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
+"Language-Team: Italiano <>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bits\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: maylons_grave.xml
 msgid "Maylons Grave"
@@ -25,15 +26,15 @@ msgstr "La Tomba di Maylons"
 
 #: maylons_grave.xml
 msgid "Rakthr mootrick!"
-msgstr ""
+msgstr "Rakthr mootrick!"
 
 #: maylons_grave.xml
 msgid "Mar! Nom Togubri!"
-msgstr ""
+msgstr "Mar! Nom Togubri!"
 
 #: maylons_grave.xml
 msgid "Wait, great human warriors. Do not kill!"
-msgstr ""
+msgstr "Aspettare, grossi guerrieri umani. No uccidere!"
 
 #: maylons_grave.xml
 msgid ""

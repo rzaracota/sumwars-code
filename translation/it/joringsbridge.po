@@ -4,20 +4,21 @@
 # 
 # Francesco Miglietta (fra9000) <miglietta.francesco@gmail.com>, 2010
 # 
+# Eugenio Fagioli <eugenio.fagioli@gmail.com>, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-07-25 09:49\n"
-"Last-Translator: Francesco Miglietta (fra9000) <miglietta.francesco@gmail."
-"com>\n"
-"Language-Team: Italian <http://gamesopensource.altervista.org>\n"
+"PO-Revision-Date: 2011-10-22 15:23+0200\n"
+"Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
+"Language-Team: Italiano <>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bits\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: joringsbridge.xml
 msgid "Joringsbridge"
@@ -221,7 +222,7 @@ msgstr "2000 monete d'oro per chiunque vorra' aiutare quest'uomo disperato!"
 
 #: joringsbridge.xml
 msgid "ts"
-msgstr ""
+msgstr "ts"
 
 #: joringsbridge.xml
 msgid "2000 gold pieces."
@@ -306,11 +307,11 @@ msgstr "Aiutando il contadino?"
 
 #: joringsbridge.xml
 msgid "Yes"
-msgstr ""
+msgstr "Si"
 
 #: joringsbridge.xml
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: joringsbridge.xml
 msgid "Only a stone would watch deedless."
@@ -362,17 +363,15 @@ msgstr "Principe ce ne occuperemo noi!"
 
 #: joringsbridge.xml
 msgid "By Marek!"
-msgstr ""
+msgstr "Per Marek!"
 
 #: joringsbridge.xml
-#, fuzzy
 msgid "Aren't you the... auxiliary forces of the council? ##solo"
-msgstr "Quindi sei tu... il rinforzo inviatoci dal Consiglio.. ##solo"
+msgstr "Quindi sei tu... l'aiuto inviatoci dal Consiglio.. ##solo"
 
 #: joringsbridge.xml
-#, fuzzy
 msgid "Aren't you the... auxiliary forces of the council?"
-msgstr "Quindi siete voi... i rinforzi inviati dal Consiglio.."
+msgstr "Quindi siete voi... gli aiuti inviati dal Consiglio.."
 
 #: joringsbridge.xml
 msgid "... under the heel of a certain Soren Airpaw, at your service."

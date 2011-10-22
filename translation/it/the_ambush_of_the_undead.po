@@ -4,20 +4,21 @@
 # 
 # Francesco Miglietta (fra9000) <miglietta.francesco@gmail.com>, 2010
 # 
+# Eugenio Fagioli <eugenio.fagioli@gmail.com>, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-07-25 09:49\n"
-"Last-Translator: Francesco Miglietta (fra9000) <miglietta.francesco@gmail."
-"com>\n"
-"Language-Team: Italian <http://gamesopensource.altervista.org>\n"
+"PO-Revision-Date: 2011-10-21 22:04+0200\n"
+"Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
+"Language-Team: Italiano <>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bits\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: theFissure.xml
 msgid "The ambush of the undead"
@@ -76,14 +77,12 @@ msgid "You don't get out very often, do you."
 msgstr "Tu non esci molto spesso, vero?"
 
 #: theFissure.xml
-#, fuzzy
 msgid "You developed splendid since the last time we met, didn't you? ##solo"
-msgstr "Sei migliorato molto dall'ultima volta che ci siamo incontrati. ##solo"
+msgstr "Stai alla grande dall'ultima volta che ci siamo visti. ##solo"
 
 #: theFissure.xml
-#, fuzzy
 msgid "You developed splendid since the last time we met, didn't you?"
-msgstr "Siete migliorati molto dall'ultima volta che ci siamo incontrati?"
+msgstr "State alla grande dall'ultima volta che ci siamo visti."
 
 #: theFissure.xml
 msgid "How is the archmage?"
@@ -422,7 +421,7 @@ msgstr "Uccideteli tutti e portatemi indietro le loro ossa!"
 
 #: theFissure.xml
 msgid "Here is a good place for the spell!"
-msgstr ""
+msgstr "Ecco un buon posto per praticare la magia!"
 
 #: theFissure.xml
 msgid "Then I shall blow this crevice to smithereens."
