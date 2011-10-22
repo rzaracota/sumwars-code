@@ -468,8 +468,10 @@ void Document::onRightMouseButtonClick(Vector pos)
 
 	command.m_number=0;
 
-	if (command.m_id!=0)
-		DEBUGX("angeklicktes Objekt %i",command.m_id);
+	if (command.m_id != 0)
+	{
+		DEBUGX ("angeklicktes Objekt %i", command.m_id);
+	}
 
 
 	// Paket an den Server senden
@@ -780,9 +782,22 @@ bool Document::checkSubwindowsAllowed()
 	ok &= (getState() == RUNNING || getState() == SHUTDOWN_REQUEST);
 	ok &= (getGUIState()->m_shown_windows & SAVE_EXIT) == 0;
 	ok &= (getGUIState()->m_shown_windows & (QUESTIONBOX | TRADE)) == 0;
-	if (getLocalPlayer() != 0 && getLocalPlayer()->getRegion() !=0)
+
+	// Also check to see if the current player is involved in anything that doesn't allow 
+	if (getLocalPlayer() != 0)
 	{
-		ok &= ~getLocalPlayer()->getRegion()->getCutsceneMode();
+		// Check if the region is currently in a cutscene mode. 
+		// (The player shouldn't be allowed to open subwindows (E.g. the inventory) during a cutscene.
+		if (getLocalPlayer()->getRegion() !=0)
+		{
+			ok &= !getLocalPlayer()->getRegion()->getCutsceneMode();
+		}
+
+		// Also check if the current player is involved in a dialogue.
+		if (getLocalPlayer ()->getDialogue () != 0)
+		{
+			ok = false;
+		}
 	}
 	return ok;
 }
@@ -921,7 +936,7 @@ void Document::onButtonSkilltreeClicked(bool skill_right)
 	if (!checkSubwindowsAllowed())
 		return;
 
-	// Skilltree oeffnen wenn er gerade geschlossen ist und schliessen, wenn er geoeffnet ist
+	// Toggle the skill tree window. If the skill tree is closed, open it. If it's opened, close it.
 	if (getGUIState()->m_shown_windows & SKILLTREE)
 	{
 		getGUIState()->m_prefer_right_skill = false;
@@ -929,7 +944,7 @@ void Document::onButtonSkilltreeClicked(bool skill_right)
 	}
 	else
 	{
-		// wenn Skilltree geoeffnet wird, dann Inventar schliessen
+		// If the skill tree is requested for opening and we have an opened inventory, close the inventory
 		getGUIState()->m_shown_windows &= ~INVENTORY;
 
 		getGUIState()->m_shown_windows |= SKILLTREE;
