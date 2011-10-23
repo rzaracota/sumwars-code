@@ -20,7 +20,7 @@ SaveExitWindow::SaveExitWindow (Document* doc)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
-	CEGUI::Window* label;
+	//CEGUI::Window* label; // 2011.10.23: found as unused.
 	
 	CEGUI::FrameWindow* save_exit = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("SaveExitWindow.layout");
 	m_window = save_exit;
@@ -162,7 +162,7 @@ WarningDialogWindow::WarningDialogWindow (Document* doc)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
-	CEGUI::Window* label;
+	//CEGUI::Window* label; // 2011.10.23: found as unused.
 	
 	CEGUI::FrameWindow* warning_dialog = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("WarningDialogWindow.layout");
 	m_window = warning_dialog;
@@ -210,7 +210,7 @@ ErrorDialogWindow::ErrorDialogWindow (Document* doc)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
-	CEGUI::Window* label;
+	//CEGUI::Window* label; // 2011.10.23: found as unused.
 	
 	CEGUI::FrameWindow* error_dialog = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("ErrorDialogWindow.layout");
 	m_window = error_dialog;
