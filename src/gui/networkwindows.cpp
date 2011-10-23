@@ -20,7 +20,7 @@ HostGameWindow::HostGameWindow (Document* doc)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
-	CEGUI::Window* label;
+	//CEGUI::Window* label; // 2011.10.23: found as unused.
 	CEGUI::Editbox* box;
 	
 	CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("HostGameWindow.layout");
@@ -124,7 +124,7 @@ JoinGameWindow::JoinGameWindow (Document* doc)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
-	CEGUI::Window* label;
+	//CEGUI::Window* label; // 2011.10.23: found as unused.
 	CEGUI::Editbox* box;
 	
 	CEGUI::FrameWindow* join_game = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("JoinGameWindow.layout");
