@@ -281,7 +281,7 @@ void MainMenu::createScene()
 		
 		Ogre::SceneNode *n = m_mainNode->createChildSceneNode();
 		Ogre::Entity *e;
-		Ogre::MeshPtr *m;
+		//Ogre::MeshPtr *m; // 2011.10.23: found as unused.
 		Ogre::ParticleSystem *p;
 		Ogre::Light *l;
 
