@@ -795,15 +795,14 @@ bool Document::checkSubwindowsAllowed()
 		if (getLocalPlayer()->getRegion() !=0)
 		{
 			ok &= !getLocalPlayer()->getRegion()->getCutsceneMode();
-		}
 
-		// Also check if the current player is involved in a dialogue.
-		//if (getLocalPlayer ()->getDialogue () != 0)
-		//{
-		//	DEBUG ("*** can't show subwindow. there is a dialogue");
-		//	DEBUG (": %d", getLocalPlayer ()->getDialogue ()->getId());
-		//	ok = false;
-		//}
+			// Also check if the current player is involved in a dialogue.
+			// Add the check here, because the dialog is obtained from the region.
+			if (getLocalPlayer ()->getDialogue () != 0)
+			{
+				ok = false;
+			}
+		}
 	}
 	return ok;
 }
