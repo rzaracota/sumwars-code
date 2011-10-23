@@ -127,6 +127,8 @@ void Document::setSaveFile(std::string s)
 		unsigned char* data=0;
 		m_save_file = userPath;
 
+		DEBUG ("Loaded save file %s", s.c_str());
+
 		file.get(bin);
 
 		CharConv* save;
@@ -171,7 +173,7 @@ void Document::loadSavegame()
 {
 	// read savegame
 	std::string fname = m_save_file;
-	DEBUGX("savegame is %s",fname.c_str());
+	DEBUG("savegame is %s",fname.c_str());
 
 	std::fstream file(fname.c_str(),std::ios::in| std::ios::binary);
 	if (file.is_open())
@@ -284,6 +286,7 @@ void Document::onCreateNewCharButton()
 	m_modified |= WINDOWS_MODIFIED;
 
 }
+
 
 void Document::setNewCharacter(WorldObject::Subtype subtype, PlayerLook look)
 {
@@ -807,19 +810,36 @@ bool Document::checkSubwindowsAllowed()
 	return ok;
 }
 
-void Document::onButtonStartSinglePlayer()
+
+
+void Document::onButtonStartSinglePlayer ()
 {
-	// Spieler ist selbst der Host
-	setServer(true);
+	// The player is a host himself (or herself)
+	setServer (true);
 	m_single_player = true;
 
-	// Verbindung aufbauen
-	setState(Document::START_GAME);
+	// Set the state and allow the connection to be established.
+	setState (Document::START_GAME);
 }
+
+
 
 void Document::onButtonHostGame()
 {
 	DEBUG("Host Game");
+	if (m_save_file == "")
+	{
+		// Show a notification.
+		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("WarningDialogWindow");
+		message->setInheritsAlpha(false);
+		message->setVisible(true);
+		message->setModalState(true);
+		win_mgr.getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("Please select a character first!"));
+
+		DEBUG ("Warning: Tried to host a game without a selected char!");
+		return;
+	}
 	getGUIState()->m_shown_windows |= HOST_GAME;
 	getGUIState()->m_shown_windows &= ~START_MENU;
 
@@ -828,6 +848,19 @@ void Document::onButtonHostGame()
 
 void Document::onButtonJoinGame()
 {
+	if (m_save_file == "")
+	{
+		// Show a notification.
+		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("WarningDialogWindow");
+		message->setInheritsAlpha(false);
+		message->setVisible(true);
+		message->setModalState(true);
+		win_mgr.getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("Please select a character first!"));
+
+		DEBUG ("Warning: Tried to join a game without a selected char!");
+		return;
+	}
 	getGUIState()->m_shown_windows |= JOIN_GAME;
 	getGUIState()->m_shown_windows &= ~START_MENU;
 	m_modified |= WINDOWS_MODIFIED;
@@ -843,6 +876,8 @@ void Document::onButtonStartHostGame()
 	// Verbindung aufbauen
 	setState(Document::START_GAME);
 }
+
+
 
 void Document::onButtonStartJoinGame()
 {
