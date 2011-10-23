@@ -79,8 +79,8 @@ void HostGameWindow::updateTranslation()
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "HostGameStartButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));
 	
-	label = win_mgr.getWindow("JoinWindowTitle");
-	label->setText((CEGUI::utf8*) gettext("Join_game"));
+	label = win_mgr.getWindow("HostWindowTitle");
+	label->setText((CEGUI::utf8*) gettext("Host_game"));
 	
 	label = win_mgr.getWindow("PlayerNumberLabel");
 	label->setText((CEGUI::utf8*) gettext("Max. number of players"));
@@ -180,8 +180,8 @@ void JoinGameWindow::updateTranslation()
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "JoinGameStartButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));
 	
-	label = win_mgr.getWindow("HostWindowTitle");
-	label->setText((CEGUI::utf8*) gettext("Host_game"));
+	label = win_mgr.getWindow("JoinWindowTitle");
+	label->setText((CEGUI::utf8*) gettext("Join_game"));
 	
 	label = win_mgr.getWindow("HostnameLabel");
 	label->setText((CEGUI::utf8*) gettext("Host"));
