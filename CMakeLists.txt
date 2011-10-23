@@ -379,6 +379,19 @@ IF(BUILD_TOOLS)
     )
 ENDIF()
 
+# If building for windows based systems, the resource file (containing 
+# the manifest, icon and other resources) should also be included
+IF (WIN32)
+  SET(SRCS 
+    ${SRCS}
+    ./src/winicon/Sumwars.rc
+    )
+  SET(HEADER_FILES
+    ${HEADER_FILES}
+    ./src/winicon/resource.h
+    )
+ENDIF (WIN32)
+
 ADD_EXECUTABLE(sumwars ${SRCS})
 
 #${CEGUILUA_LIBRARY}
