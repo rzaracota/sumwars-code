@@ -118,6 +118,18 @@ ControlPanel::ControlPanel (Document* doc)
 	bar->setAlpha(0.5);
 	bar->setAlwaysOnTop(true);
 
+	// alternate right mouse skill
+	label = win_mgr.getWindow("AlternateRightClickAbilityImage");
+	label->setID(3);
+	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, this));
+
+	// progress bar for alternate right mouse skill
+	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow("AlternateRightClickAbilityProgressBar"));
+	bar->setWantsMultiClickEvents(false);
+	bar->setProgress(0.0);
+	bar->setAlpha(0.5);
+	bar->setAlwaysOnTop(true);
+	
 	// Inventar Guertel
 	int i;
 	std::ostringstream outStream;
@@ -277,6 +289,44 @@ void ControlPanel::update()
 	{
 		bar->setProgress(perc);
 	}
+	
+	
+	// image for alternate right skill
+	label =  win_mgr.getWindow( "AlternateRightClickAbilityImage");
+	name = player->getRightAlternateAction();
+	for (iter = ablt.begin(); iter != ablt.end(); ++iter)
+	{
+		if (iter->second.m_type == name)
+		{
+			imagename = iter->second.m_image;
+		}
+	}
+	
+	tooltip= m_document->getAbilityDescription(name);
+	if (label->getTooltipText() != (CEGUI::utf8*) tooltip.c_str())
+	{
+		label->setTooltipText((CEGUI::utf8*) tooltip.c_str());
+	}
+	
+	if (imagename == "")
+	{
+		imagename = "set:skills image:";
+		imagename += name;
+	}
+	if (imagename != label->getProperty("Image"))
+	{
+		label->setProperty("Image",imagename);
+	}
+
+	// Balken fuer Schaden Attacke rechts
+	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "AlternateRightClickAbilityProgressBar"));
+	timernr =  Action::getActionInfo(player->getRightAlternateAction())->m_timer_nr;
+	perc = player->getTimerPercent(timernr);
+
+	if (bar->getProgress() != perc)
+	{
+		bar->setProgress(perc);
+	}
 
 	Item* it;
 	Equipement* equ = player->getEquipement();
@@ -377,9 +427,11 @@ bool ControlPanel::onButtonSkilltreeClicked(const CEGUI::EventArgs& evt)
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
 	
-	bool right = (id ==2);
+	//ID 2 is right mouse button skill, ID 3 is right mouse button alternate skill
+	bool right = (id ==2 || id == 3);
+	bool alternate = (id == 3);
 	
-	m_document->onButtonSkilltreeClicked(right);
+	m_document->onButtonSkilltreeClicked(right, alternate);
 	return true;
 }
 

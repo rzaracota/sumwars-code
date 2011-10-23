@@ -50,7 +50,7 @@ void Options::init()
 	// Fixed shortkeys
 	m_shortkey_map[OIS::KC_ESCAPE] =  CLOSE_ALL;
 	m_shortkey_map[OIS::KC_RETURN] =  SHOW_CHATBOX_NO_TOGGLE;
-	m_shortkey_map[OIS::KC_TAB] =  SHOW_MINIMAP;
+	m_shortkey_map[OIS::KC_TAB] =  SWAP_RIGHT_ACTION;
 	m_shortkey_map[OIS::KC_F10] =  SHOW_OPTIONS;
 
 	m_shortkey_map[OIS::KC_1] =  USE_POTION;
@@ -106,7 +106,8 @@ void Options::setToDefaultOptions()
 	m_shortkey_map[OIS::KC_C] =  SHOW_CHARINFO;
 	m_shortkey_map[OIS::KC_T] =  SHOW_SKILLTREE;
 	m_shortkey_map[OIS::KC_P] =  SHOW_PARTYMENU;
-	m_shortkey_map[OIS::KC_M] =  SHOW_CHATBOX;
+	m_shortkey_map[OIS::KC_M] =  SHOW_MINIMAP;
+	m_shortkey_map[OIS::KC_B] =  SHOW_CHATBOX;
 	m_shortkey_map[OIS::KC_Q] =  SHOW_QUESTINFO;
 	m_shortkey_map[OIS::KC_W] =  SWAP_EQUIP;
 	m_shortkey_map[OIS::KC_LMENU] =  SHOW_ITEMLABELS;

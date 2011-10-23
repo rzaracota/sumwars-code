@@ -367,6 +367,14 @@ public:
 	{
 		return m_right_action;
 	}
+	
+	/**
+	 * \brief Returns the alternate action for the right mouse skill
+	 */
+	Action::ActionType getRightAlternateAction()
+	{
+		return m_right_alternate_action;
+	}
 
 	/**
 	 * \fn Action::ActionType getLeftAction()
@@ -742,6 +750,11 @@ protected:
 	 * \brief Aktion die auf mit rechten Maustaste ausgeloest wird
 	 */
 	Action::ActionType m_right_action;
+	
+	/**
+	 * \brief alternative action for the right mouse button
+	 */
+	Action::ActionType m_right_alternate_action;
 
 	/**
 	 * \var std::string m_messages

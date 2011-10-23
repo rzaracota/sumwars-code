@@ -242,6 +242,11 @@ class Document
 		 * \brief wenn true, werden Kurztasten auf die rechte Maustaste gelegt, auch wenn sie fuer die linke geeignet waeren
 		 */
 		bool m_prefer_right_skill;
+		
+		/**
+		 * \brief Set to true, if the right mouse button skill should be set as alternate skill
+		 */
+		bool m_set_right_skill_alternate;
 
 		/**
 		 * \var std::string m_cursor_object
@@ -391,6 +396,10 @@ class Document
 	 */
 	void setRightAction(Action::ActionType a);
 
+	/**
+	 * \brief Swaps current and alternate right action
+	 */
+	void onSwapRightAction();
 
 
 	/**
@@ -508,11 +517,11 @@ class Document
 
 
 	/**
-	 * \fn void onButtonSkilltreeClicked(bool skill_right=false)
-	 * \brief Behandelt Klick auf Skilltree Button
-	 * \param skill_right Ist dann true, wenn das Fenster per Klick auf die Faehigkeit auf rechts geoeffnet wurde
+	 * \brief Called on click on Skilltree button and skill icons
+	 * \param skill_right is set to true, if the the window was opened by a click on the right mouse button skill
+	 * \param use_alternate is set to true, if the the window was opened by a click on the right mouse button alternate skill
 	 */
-	void onButtonSkilltreeClicked(bool skill_right=false);
+	void onButtonSkilltreeClicked(bool skill_right=false, bool use_alternate = false);
 
 	/**
 	 * \fn void onButtonOpenChatClicked()

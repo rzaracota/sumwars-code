@@ -471,10 +471,8 @@ void Document::onRightMouseButtonClick(Vector pos)
 
 	command.m_number=0;
 
-	if (command.m_id != 0)
-	{
-		DEBUGX ("angeklicktes Objekt %i", command.m_id);
-	}
+	if (command.m_id!=0)
+		DEBUGX("angeklicktes Objekt %i",command.m_id);
 
 
 	// Paket an den Server senden
@@ -579,14 +577,12 @@ void Document::onStartScreenClicked()
 		//getGUIState()->m_shown_windows = SAVEGAME_LIST;
 		getGUIState()->m_shown_windows = START_MENU;
 		m_modified =WINDOWS_MODIFIED;
-		DEBUG("Start screen clicked (Previously: no windows)");
 	}
 
 	if (getGUIState()->m_shown_windows == CREDITS)
 	{
 		getGUIState()->m_shown_windows = START_MENU;
 		m_modified =WINDOWS_MODIFIED;
-		DEBUG("Start screen clicked (Previously: CREDITS windows)");
 	}
 }
 
@@ -781,31 +777,15 @@ void Document::emitDebugSignal(int i)
 	sendCommand(&command);
 }
 
-
-
 bool Document::checkSubwindowsAllowed()
 {
 	bool ok = true;
 	ok &= (getState() == RUNNING || getState() == SHUTDOWN_REQUEST);
 	ok &= (getGUIState()->m_shown_windows & SAVE_EXIT) == 0;
 	ok &= (getGUIState()->m_shown_windows & (QUESTIONBOX | TRADE)) == 0;
-
-	// Also check to see if the current player is involved in anything that doesn't allow 
-	if (getLocalPlayer() != 0)
+	if (getLocalPlayer() != 0 && getLocalPlayer()->getRegion() !=0)
 	{
-		// Check if the region is currently in a cutscene mode. 
-		// (The player shouldn't be allowed to open subwindows (E.g. the inventory) during a cutscene.
-		if (getLocalPlayer()->getRegion() !=0)
-		{
-			ok &= !getLocalPlayer()->getRegion()->getCutsceneMode();
-
-			// Also check if the current player is involved in a dialogue.
-			// Add the check here, because the dialog is obtained from the region.
-			if (getLocalPlayer ()->getDialogue () != 0)
-			{
-				ok = false;
-			}
-		}
+		ok &= ~getLocalPlayer()->getRegion()->getCutsceneMode();
 	}
 	return ok;
 }
@@ -971,23 +951,25 @@ void Document::onButtonPartyInfoClicked()
 	m_modified |= WINDOWS_MODIFIED;
 }
 
-void Document::onButtonSkilltreeClicked(bool skill_right)
+void Document::onButtonSkilltreeClicked(bool skill_right, bool use_alternate)
 {
 	if (!checkSubwindowsAllowed())
 		return;
 
-	// Toggle the skill tree window. If the skill tree is closed, open it. If it's opened, close it.
+	// Skilltree oeffnen wenn er gerade geschlossen ist und schliessen, wenn er geoeffnet ist
 	if (getGUIState()->m_shown_windows & SKILLTREE)
 	{
 		getGUIState()->m_prefer_right_skill = false;
+		getGUIState()->m_set_right_skill_alternate = false;
 		getGUIState()->m_shown_windows &= ~SKILLTREE;
 	}
 	else
 	{
-		// If the skill tree is requested for opening and we have an opened inventory, close the inventory
+		// wenn Skilltree geoeffnet wird, dann Inventar schliessen
 		getGUIState()->m_shown_windows &= ~INVENTORY;
 
 		getGUIState()->m_shown_windows |= SKILLTREE;
+		getGUIState()->m_set_right_skill_alternate = use_alternate;
 		getGUIState()->m_prefer_right_skill =skill_right;
 	}
 
@@ -1229,7 +1211,18 @@ void Document::setRightAction(Action::ActionType act)
 
 	ClientCommand command;
 	command.m_button = BUTTON_SET_RIGHT_ACTION;
+	if (getGUIState()->m_set_right_skill_alternate == true)
+	{
+		command.m_button = BUTTON_SET_ALTERNATE_RIGHT_ACTION;
+	}
 	command.m_action = act;
+	sendCommand(&command);
+}
+
+void Document::onSwapRightAction()
+{
+	ClientCommand command;
+	command.m_button = BUTTON_SWAP_RIGHT_ACTION;
 	sendCommand(&command);
 }
 
@@ -1403,6 +1396,10 @@ bool Document::onKeyPress(KeyCode key)
 		else if (dest == SWAP_EQUIP)
 		{
 			onSwapEquip();
+		}
+		else if (dest == SWAP_RIGHT_ACTION)
+		{
+			onSwapRightAction();
 		}
 		else if (dest == SHOW_ITEMLABELS)
 		{

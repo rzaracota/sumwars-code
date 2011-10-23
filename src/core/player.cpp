@@ -167,6 +167,7 @@ bool Player::init()
 	m_base_action = pdata->m_base_ability;
 	m_left_action = pdata->m_base_ability;
 	m_right_action = pdata->m_base_ability;
+	m_right_alternate_action = pdata->m_base_ability;
 	bas->m_abilities[pdata->m_base_ability].m_timer_nr = -1;
 	m_learnable_abilities = pdata->m_learnable_abilities;
 
@@ -1176,8 +1177,17 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 			m_right_action = (Action::ActionType) command->m_action;
 			recalcDamage();
 			break;
+			
+		case BUTTON_SET_ALTERNATE_RIGHT_ACTION:
+			m_right_alternate_action = (Action::ActionType) command->m_action;
+			break;
+			
+		case BUTTON_SWAP_RIGHT_ACTION:
+			std::swap(m_right_action, m_right_alternate_action);
+			recalcDamage();
+			break ;
 
-		case BUTTON_ITEM_LEFT:
+			case BUTTON_ITEM_LEFT:
 		case BUTTON_ITEM_RIGHT:
 			onItemClick(command);
 			break;
@@ -2119,6 +2129,10 @@ void Player::toSavegame(CharConv* cv)
 	cv->toBuffer( m_base_action);
 	cv->toBuffer(m_left_action);
 	cv->toBuffer( m_right_action);
+	if (World::getVersion()>=20)
+	{
+		cv->toBuffer( m_right_alternate_action);
+	}
 	cv->printNewline();
 
 	cv->toBuffer(m_revive_position.first);
@@ -2248,6 +2262,14 @@ void Player::fromSavegame(CharConv* cv, bool local)
 	cv->fromBuffer( m_base_action);
 	cv->fromBuffer(m_left_action);
 	cv->fromBuffer( m_right_action);
+	if (cv->getVersion()>=20)
+	{
+		cv->fromBuffer( m_right_alternate_action);
+	}
+	else
+	{
+		m_right_alternate_action = m_right_action;
+	}
 
 	cv->fromBuffer(m_revive_position.first);
 	cv->fromBuffer(m_revive_position.second);
