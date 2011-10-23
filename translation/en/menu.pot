@@ -104,6 +104,10 @@ msgstr ""
 msgid "Chance for critical hit"
 msgstr ""
 
+#: ../src/core/document.cpp:838
+msgid "Please select a character first!"
+msgstr ""
+
 #: ../src/core/document.cpp:1205 ../src/core/item.cpp:953
 #: ../src/core/item.cpp:955 ../src/core/item.cpp:1183
 #: ../src/core/item.cpp:1189
@@ -480,7 +484,7 @@ msgstr ""
 
 # Window Title
 #: ../src/gui/networkwindows.cpp:184
-msgid Host_game"
+msgid "Host_game"
 msgstr ""
 
 #: ../src/gui/networkwindows.cpp:226
