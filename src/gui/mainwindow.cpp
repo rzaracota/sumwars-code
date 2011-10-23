@@ -1312,7 +1312,7 @@ void MainWindow::updateObjectInfo()
 			{
 				id = Ogre::any_cast<int>(it->movable->getUserAny());
 			}
-			catch (Ogre::Exception& e)
+			catch (Ogre::Exception&)
 			{
 				WARNING("Object %s has no ID",it->movable->getName().c_str());
 				continue;
@@ -1372,7 +1372,7 @@ void MainWindow::updateObjectInfo()
 					volatile int index2 = indices[i+1];
 					volatile int index3 = indices[i+2];
 					if (index1 >=0 && index2>=0 && index3>=0
-						&& index1 < vertex_count && index2 < vertex_count &&  index3 < vertex_count)
+						&& index1 < (int)vertex_count && index2 < (int)vertex_count &&  index3 < (int)vertex_count)
 					{
 					
 						std::pair<bool, Ogre::Real> hit = Ogre::Math::intersects(ray, vertices[index1],
