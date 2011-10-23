@@ -576,12 +576,14 @@ void Document::onStartScreenClicked()
 		//getGUIState()->m_shown_windows = SAVEGAME_LIST;
 		getGUIState()->m_shown_windows = START_MENU;
 		m_modified =WINDOWS_MODIFIED;
+		DEBUG("Start screen clicked (Previously: no windows)");
 	}
 
 	if (getGUIState()->m_shown_windows == CREDITS)
 	{
 		getGUIState()->m_shown_windows = START_MENU;
 		m_modified =WINDOWS_MODIFIED;
+		DEBUG("Start screen clicked (Previously: CREDITS windows)");
 	}
 }
 
@@ -776,6 +778,8 @@ void Document::emitDebugSignal(int i)
 	sendCommand(&command);
 }
 
+
+
 bool Document::checkSubwindowsAllowed()
 {
 	bool ok = true;
@@ -794,10 +798,12 @@ bool Document::checkSubwindowsAllowed()
 		}
 
 		// Also check if the current player is involved in a dialogue.
-		if (getLocalPlayer ()->getDialogue () != 0)
-		{
-			ok = false;
-		}
+		//if (getLocalPlayer ()->getDialogue () != 0)
+		//{
+		//	DEBUG ("*** can't show subwindow. there is a dialogue");
+		//	DEBUG (": %d", getLocalPlayer ()->getDialogue ()->getId());
+		//	ok = false;
+		//}
 	}
 	return ok;
 }
