@@ -42,14 +42,23 @@
 #include "../winicon/resource.h"
 #endif
 
+// Add the material manager to allow setting shadow techniques
+#include <OgreMaterialManager.h>
+
+
+/**
+	Application constructor. Will call the init function.
+*/
 Application::Application(char *argv)
 {
+	// Initialize application variables
 	m_main_window = 0;
 	m_document = 0;
-	// Anwendung initialisieren
 	bool ret = false;
 	m_running = false;
 	m_shutdown = false;
+
+	// Call the specialized initialization function.
 	try
 	{
 		ret = init(argv);
@@ -64,8 +73,9 @@ Application::Application(char *argv)
 		// ERRORMSG("Initialisation failed, stop");
 		m_shutdown = true;
 	}
-
 }
+
+
 
 bool Application::init(char *argv)
 {
@@ -434,7 +444,7 @@ void Application::run()
 		{
 			timer2.reset();
 
-			// View aktualisieren
+			// Update the view
 			DEBUGX("main window update");
 			m_main_window->update(frametime);
 
@@ -489,22 +499,9 @@ void Application::run()
 }
 
 
-/**
-	Handle Ogre specific initializations.
 
-*/
-bool Application::initOgre()
+void Application::setApplicationIcon ()
 {
-	DEBUG("init ogre");
-
-	// Create window.
-	// Here, we have 2 options:
-	// 1. Let OGRE create the window automatically, but have less control over it
-	// 2. Create the window ourselves, longer code, but have more control
-
-	// Initialize Ogre with the automatic creation of a window.
-	m_window = m_ogre_root->initialise (true, "Summoning Wars"); // TODO: define constant for name of obtain from config file.
-
 	//
 	// Platform specific code - set the application icon.
 	// On Windows, it's required to set the icon of the application. This will be visible in the taskbar + alt-tab operations.
@@ -522,10 +519,136 @@ bool Application::initOgre()
 		SendMessage (hwnd, WM_SETICON, ICON_BIG, LPARAM (icon));
 		SendMessage (hwnd, WM_SETICON, ICON_SMALL, LPARAM (icon)); 
 	}
+#elif OGRE_PLATFORM == OGRE_PLATFORM_LINUX
+	// TODO: add platform specific code.
+#elif OGRE_PLATFORM == OGRE_PLATFORM_APPLE
+	// TODO: add platform specific code.
 #endif
+}
+
+
+/**
+	Retrieves (via output parameters) the settings requested by the user for the video mode size
+*/
+void Application::retrieveRenderSystemWindowSize (int& videoModeWidth, int& videoModeHeight)
+{
+	// If the user selected a Windowed mode, but with the size of the entire screen, do additional preparations.
+	Ogre::RenderSystem* myRenderSys = m_ogre_root->getRenderSystem();
+	if (myRenderSys != 0)
+	{
+		Ogre::ConfigOptionMap myCfgMap = myRenderSys->getConfigOptions();
+		for (Ogre::ConfigOptionMap::iterator it = myCfgMap.begin ();
+				it != myCfgMap.end (); 
+				++ it)
+		{
+			DEBUG ("option name=[%s], val=[%s]", it->second.name.c_str (), it->second.currentValue.c_str ());
+		}
+		Ogre::ConfigOptionMap::iterator opt_it = myCfgMap.find ("Video Mode");
+		if (opt_it != myCfgMap.end ())
+		{
+			DEBUG ("Currently selected video mode: %s",  opt_it->second.currentValue.c_str ());
+			std::string sFullEntry = opt_it->second.currentValue;
+			std::string sLeft, sRight;
+			int nPos = sFullEntry.find(" ");
+			if( nPos == std::string::npos )
+			{
+				// some error...
+				ERRORMSG ("Unable to find space in [%s]", sFullEntry.c_str ());
+				return;
+			}
+			sLeft = sFullEntry.substr(0, nPos);
+			sRight= sFullEntry.substr(nPos+3);// + 3 for " x "
+			nPos = sRight.find(" ");
+			std::string sAux;
+			if( nPos == std::string::npos )
+			{
+				// we don't have a colour depth.
+				sAux = sRight;
+			}
+			else
+			{
+				sAux = sRight.substr(0, nPos);
+			}
+			videoModeWidth = atoi( sLeft.c_str() );
+			videoModeHeight = atoi( sAux.c_str() );
+		}
+	}
+}
+
+
+/**
+	Handle Ogre specific initializations.
+
+*/
+bool Application::initOgre()
+{
+	DEBUG("init ogre");
+
+	// Create window.
+	// Here, we have 2 options:
+	// 1. Let OGRE create the window automatically, but have less control over it
+	// 2. Create the window ourselves, longer code, but have more control
+
+	// Initialize Ogre with the automatic creation of a window.
+	m_window = m_ogre_root->initialise (true, "Summoning Wars"); // TODO: define constant for name of obtain from config file.
+
+	setApplicationIcon ();
+	
+	//
+	// Platform specific code: 
+	// On Windows, if the user specifies Windowed mode and a Width and Height equal to the screen size, 
+	// remove the window borders.
+	//
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	if (! m_window->isFullScreen ())
+	{
+		int videoModeWidth = 0;
+		int videoModeHeight = 0;
+
+		retrieveRenderSystemWindowSize (videoModeWidth, videoModeHeight);
+
+		int desktopWidth = (int)GetSystemMetrics (SM_CXSCREEN);
+		int desktopHeight = (int)GetSystemMetrics (SM_CYSCREEN);
+
+		if (desktopWidth == videoModeWidth && desktopHeight == videoModeHeight)
+		{
+			DEBUG ("Windowed (Fullscreen) mode selected; desktop at %d x %d.", desktopWidth, desktopHeight);
+			DEBUG ("Correcting settings.");
+
+			// -------------------------------- beginning of platform dependent code --------------------------
+			// Retrieve the window handle
+			HWND hwnd; // handle of window
+			m_window->getCustomAttribute ("WINDOW", &hwnd);
+
+			// Also hide the cursor. This may make the debugging sometimes more difficult.
+			ShowCursor(false); // TODO: if you hide the cursor, make sure you react to the focus lost events, to show the cursor for other apps.
+
+			SetWindowLong (hwnd, GWL_STYLE, WS_VISIBLE);
+			//SetWindowLong (hwnd, GWL_EXSTYLE, WS_EX_APPWINDOW);
+			SetWindowPos (hwnd, HWND_TOP, 0, 0, desktopWidth, desktopHeight, SWP_SHOWWINDOW);
+
+			SendMessage (hwnd, WM_STYLECHANGING, 0, WS_OVERLAPPED);
+			UpdateWindow (hwnd);
+			// ----------------------------------- end of platform dependent code -----------------------------
+		}
+	}
+#endif //OGRE_PLATFORM_WIN32
+
+
+	// Set the texture filtering.
+	// Possible values:
+	// 0 - TFO_NONE
+	// 1 - TFO_BILINEAR
+	// 2 - TFO_TRILINEAR
+	// 3 - TFO_ANISOTROPIC : http://en.wikipedia.org/wiki/Anisotropic_filtering
+	
+	int textureFilteringMode = 3; // TODO: remove hardcoding; add to XML options.
+	// Change the default texture filtering mode.
+	Ogre::MaterialManager::getSingleton ().setDefaultTextureFiltering 
+		(static_cast<Ogre::TextureFilterOptions> (textureFilteringMode));
 
 	// Create the scene manager
-	m_scene_manager = m_ogre_root->createSceneManager(Ogre::ST_GENERIC,"DefaultSceneManager");
+	m_scene_manager = m_ogre_root->createSceneManager (Ogre::ST_GENERIC, "DefaultSceneManager");
 
 #if 0
     /*// set Shadows enabled before any mesh is loaded
@@ -553,13 +676,19 @@ bool Application::initOgre()
 
 	Ogre::LogManager::getSingleton().createLog(SumwarsHelper::userPath() + "/BenchLog.log");
 	return true;
-
 }
+
+
 
 bool Application::configureOgre()
 {
 	DEBUG("configure ogre");
-	// Logging nur fuer Fehlermeldungen verwenden
+
+	// Use the default logging level.
+	// Possible options:
+	// LL_LOW - errors
+	// LL_NORMAL - general initializations and errors
+	// LL_BOREME - high debug information - NOT recommended.
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_NORMAL);
 	
 	// Restore config if ogre.cfg is show, otherwise show the config dialog
@@ -572,6 +701,8 @@ bool Application::configureOgre()
 
 	return true;
 }
+
+
 
 bool Application::setupResources()
 {

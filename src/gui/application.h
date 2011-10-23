@@ -162,6 +162,20 @@ class Application
 		 */
 		void updateStartScreen(float percent);
         
+		/**
+		* \brief Sets (or updates) the icon to use for the application. The code inside the function is OS dependant.
+		*/
+		void setApplicationIcon ();
+
+		/**
+		* \brief Retrieves (via output parameters) the settings requested by the user for the video mode size
+		* \param[out] videoModeWidth The horizontal screen resolution of the video mode.
+		* \param[out] videoModeHeight The vertical screen resolution of the video mode.
+		* \return Nothing.
+		* \author Augustin Preda (if anything doesn't work, he's the one to bash).
+		*/
+		void retrieveRenderSystemWindowSize (int& videoModeWidth, int& videoModeHeight);
+
 #ifdef __APPLE__
         /**
          * \fn Ogre::String macPath()
