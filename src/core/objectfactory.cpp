@@ -641,7 +641,7 @@ PlayerLook* ObjectFactory::getPlayerLook(GameObject::Subtype subtype, std::strin
 
 FixedObjectData* ObjectFactory::getFixedObjectData(GameObject::Subtype subtype)
 {
-	FixedObjectData* data;
+	//FixedObjectData* data; // 2011.10.23: found as unused.
 	std::map<GameObject::Subtype, FixedObjectData*>::iterator i;
 	
 	i = m_fixed_object_data.find(subtype);
@@ -655,7 +655,7 @@ FixedObjectData* ObjectFactory::getFixedObjectData(GameObject::Subtype subtype)
 
 MonsterBasicData* ObjectFactory::getMonsterData(GameObject::Subtype subtype)
 {
-	MonsterBasicData* data;
+	//MonsterBasicData* data; // 2011.10.23: found as unused.
 	std::map<GameObject::Subtype, MonsterBasicData*>::iterator i;
 	
 	i = m_monster_data.find(subtype);

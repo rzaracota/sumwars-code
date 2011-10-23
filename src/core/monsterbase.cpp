@@ -85,7 +85,7 @@ void MonsterBasicData::writeToXML(TiXmlNode* node)
 	if (insert_point == 0)
 		insert_point = node->FirstChildElement("RenderInfo");
 	
-	TiXmlElement* insert_point_tmp;
+	//TiXmlElement* insert_point_tmp; // 2011.10.23: found as unused.
 	TiXmlElement inserter("dummy");	// dummy node just for being compied by tinyxml x(
 		
 	// detect attribute element
