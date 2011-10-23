@@ -465,8 +465,9 @@ msgstr ""
 msgid "Save and Exit?"
 msgstr ""
 
+# Window Title
 #: ../src/gui/networkwindows.cpp:83
-msgid "Join game"
+msgid "Join_game"
 msgstr ""
 
 #: ../src/gui/networkwindows.cpp:98
@@ -477,8 +478,9 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
+# Window Title
 #: ../src/gui/networkwindows.cpp:184
-msgid "Host game"
+msgid Host_game"
 msgstr ""
 
 #: ../src/gui/networkwindows.cpp:226

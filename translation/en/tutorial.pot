@@ -1082,10 +1082,6 @@ msgid "Let's just get the crystal. I'm sure we will get Akeran's blessing."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-msgstr ""
-
-#: tutorial.xml
 msgid "This looks like it could be a way up."
 msgstr ""
 
@@ -1208,10 +1204,6 @@ msgstr ""
 #: tutorial.xml
 msgid "The Lord Master thought that you could do considerably more than dully beat "
 "your enemies.##solo"
-msgstr ""
-
-#: tutorial.xml
-msgid "In fact, have you thought of using your powerful skills?"
 msgstr ""
 
 #: tutorial.xml
