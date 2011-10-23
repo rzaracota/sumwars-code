@@ -98,7 +98,7 @@ msgstr ""
 
 #: tutorial.xml
 msgid "Excuse me..."
-msgstr "."
+msgstr ""
 
 #: tutorial.xml
 msgid "No, Tolec. You must say that with much more authority."
@@ -861,6 +861,360 @@ msgid "All right allready!"
 msgstr ""
 
 #: tutorial.xml
+msgid "Just great!"
+msgstr ""
+
+#: tutorial.xml
+msgid "Damn this place!"
+msgstr ""
+
+#: tutorial.xml
+msgid "If it goes to pieces completely I will be trapped down here because of "
+"what they've done to me."
+msgstr ""
+
+#: tutorial.xml
+msgid "Are you all right down there? ##solo"
+msgstr ""
+
+#: tutorial.xml
+msgid "If it goes to pieces completely we will be trapped down here because of "
+"what they've done to us."
+msgstr ""
+
+#: tutorial.xml
+msgid "No matter."
+msgstr ""
+
+#: tutorial.xml
+msgid "If there is a way out of here, we'll find it."
+msgstr ""
+
+#: tutorial.xml
+msgid "Yeah, even if we have to use our teeth."
+msgstr ""
+
+#: tutorial.xml
+msgid "Are you all right down there?"
+msgstr ""
+
+#: tutorial.xml
+msgid "Like hell I am! How do I get out of here?"
+msgstr ""
+
+#: tutorial.xml
+msgid "Like hell we are! How do we get out of here?"
+msgstr ""
+
+#: tutorial.xml
+msgid "The path is blocked from our side and we can't get to you."
+msgstr ""
+
+#: tutorial.xml
+msgid "You'll have to find another way out."
+msgstr ""
+
+#: tutorial.xml
+msgid "There should be workers down there."
+msgstr ""
+
+#: tutorial.xml
+msgid "Maybe they can help. We will wait here."
+msgstr ""
+
+#: tutorial.xml
+msgid "Damn them! Not exactly what I would call 'customer service'."
+msgstr ""
+
+#: tutorial.xml
+msgid "They better have some serious coin for all this trouble."
+msgstr ""
+
+#: tutorial.xml
+msgid "Move it you lazy maggots! This place is not building itself."
+msgstr ""
+
+#: tutorial.xml
+msgid "Finally you guards return..."
+msgstr ""
+
+#: tutorial.xml
+msgid "Wait, who are you?"
+msgstr ""
+
+#: tutorial.xml
+msgid "I'm someone who is stuck down here, that's who."
+msgstr ""
+
+#: tutorial.xml
+msgid "We are people who are stuck down here, that's who."
+msgstr ""
+
+#: tutorial.xml
+msgid "Do you know how to get out of here?"
+msgstr ""
+
+#: tutorial.xml
+msgid "Sorry, no. The stairway collapsed earlier."
+msgstr ""
+
+#: tutorial.xml
+msgid "There's only one way down here?!"
+msgstr ""
+
+#: tutorial.xml
+msgid "Have you not thought about what could happen with your pet monsters up there?"
+msgstr ""
+
+#: tutorial.xml
+msgid "This is not for me to decide."
+msgstr ""
+
+#: tutorial.xml
+msgid "It is through the Council's will and Akeran's wisdom."
+msgstr ""
+
+#: tutorial.xml
+msgid "And if you die here?"
+msgstr ""
+
+#: tutorial.xml
+msgid "If that's how it is decided, we will work here until our time comes."
+msgstr ""
+
+#: tutorial.xml
+msgid "We all think alike here."
+msgstr ""
+
+#: tutorial.xml
+msgid "..."
+msgstr ""
+
+#: tutorial.xml
+msgid "Be that as it may, but is there another way to get out of here?"
+msgstr ""
+
+#: tutorial.xml
+msgid "Preferably today."
+msgstr ""
+
+#: tutorial.xml
+msgid "Well, there might be."
+msgstr ""
+
+#: tutorial.xml
+msgid "You see that crane over there?"
+msgstr ""
+
+#: tutorial.xml
+msgid "It was damaged by falling rocks earlier."
+msgstr ""
+
+#: tutorial.xml
+msgid "You could use it to get to the sewer tunnels that connect the different "
+"levels of this most magnificent construction."
+msgstr ""
+
+#: tutorial.xml
+msgid "I suppose as you suggested this plan, you have a way of repairing it?"
+msgstr ""
+
+#: tutorial.xml
+msgid "Of course I have a plan."
+msgstr ""
+
+#: tutorial.xml
+msgid "I sent one of my workers to get a cog earlier."
+msgstr ""
+
+#: tutorial.xml
+msgid "If he hasn't been eaten by the slugs out there, he should be back any minute now."
+msgstr ""
+
+#: tutorial.xml
+msgid "Why don't you get an energy crystal in the meantime?"
+msgstr ""
+
+#: tutorial.xml
+msgid "Without it the whole crane is useless."
+msgstr ""
+
+#: tutorial.xml
+msgid "And where would one get an energy crystal in these forsaken caves?"
+msgstr ""
+
+#: tutorial.xml
+msgid "These halls are not forsaken!"
+msgstr ""
+
+#: tutorial.xml
+msgid "They are filled with the unfathomable wisdom of Akeran and will soon be one of "
+"the greatest works in his name."
+msgstr ""
+
+#: tutorial.xml
+msgid "Of course. So, where?"
+msgstr ""
+
+#: tutorial.xml
+msgid "Akeran protects, Akeran guides."
+msgstr ""
+
+#: tutorial.xml
+msgid "Look for a connection to a laboratory on the upper level."
+msgstr ""
+
+#: tutorial.xml
+msgid "You can go there and... borrow one, if you're lucky."
+msgstr ""
+
+#: tutorial.xml
+msgid "Just ask the master of the laboratory and he will surely give you one, if you're "
+"found worthy of Akeran's blessing."
+msgstr ""
+
+#: tutorial.xml
+msgid "This man is beginning to test my patience."
+msgstr ""
+
+#: tutorial.xml
+msgid "Let's just get the crystal. I'm sure we will get Akeran's blessing."
+msgstr ""
+
+#: tutorial.xml
+msgid ""
+msgstr ""
+
+#: tutorial.xml
+msgid "This looks like it could be a way up."
+msgstr ""
+
+#: tutorial.xml
+msgid "Let's just try it out."
+msgstr ""
+
+#: tutorial.xml
+msgid "So, this really is the lab, and that should be the crystal"
+msgstr ""
+
+#: tutorial.xml
+msgid "but there is no oh-so-blessed master here."
+msgstr ""
+
+#: tutorial.xml
+msgid "Then he can't have any objections, can he?"
+msgstr ""
+
+#: tutorial.xml
+msgid "I'd better be careful, though."
+msgstr ""
+
+#: tutorial.xml
+msgid "This doesn't look like I can simply take it."
+msgstr ""
+
+#: tutorial.xml
+msgid "I guess I would first have to stop whatever is using the crystal right now."
+msgstr ""
+
+#: tutorial.xml
+msgid "I guess not."
+msgstr ""
+
+#: tutorial.xml
+msgid "Let's just take it."
+msgstr ""
+
+#: tutorial.xml
+msgid "Better be careful, though."
+msgstr ""
+
+#: tutorial.xml
+msgid "This doesn't look like you can simply take it."
+msgstr ""
+
+#: tutorial.xml
+msgid "I guess we would first have to stop whatever is using the crystal right now."
+msgstr ""
+
+#: tutorial.xml
+msgid "Finally. Now, lets get out of here."
+msgstr ""
+
+#: tutorial.xml
+msgid "And all it takes to get out of here is a walk through the sewers."
+msgstr ""
+
+#: tutorial.xml
+msgid "Again."
+msgstr ""
+
+#: tutorial.xml
+msgid "And then she says..."
+msgstr ""
+
+#: tutorial.xml
+msgid "Akerans Flaming Eyes, look over there!"
+msgstr ""
+
+#: tutorial.xml
+msgid "I am NOT doing that again."
+msgstr ""
+
+#: tutorial.xml
+msgid "At least not until I got paid. Seriously paid."
+msgstr ""
+
+#: tutorial.xml
+msgid "You made it!"
+msgstr ""
+
+#: tutorial.xml
+msgid "We are NOT doing that again."
+msgstr ""
+
+#: tutorial.xml
+msgid "At least not until we got paid. Seriously paid."
+msgstr ""
+
+#: tutorial.xml
+msgid "They made it!"
+msgstr ""
+
+#: tutorial.xml
+msgid "No thanks to you guys."
+msgstr ""
+
+#: tutorial.xml
+msgid "Did you even know just how many escaped slugs you have in the basement?"
+msgstr ""
+
+#: tutorial.xml
+msgid "It's not like they could kill you."
+msgstr ""
+
+#: tutorial.xml
+msgid "It still hurts being hurt, you know?"
+msgstr ""
+
+#: tutorial.xml
+msgid "While we are on the topic..."
+msgstr ""
+
+#: tutorial.xml
+msgid "In fact, have you thought of using your powerful skills?##solo"
+msgstr ""
+
+#: tutorial.xml
+msgid "The Lord Master thought that you could do considerably more than dully beat "
+"your enemies.##solo"
+msgstr ""
+
+#: tutorial.xml
+msgid "In fact, have you thought of using your powerful skills?"
+msgstr ""
+
+#: tutorial.xml
 msgid "That should have been the last one."
 msgstr ""
 
@@ -943,11 +1297,27 @@ msgstr ""
 #: tutorial.xml
 msgid ""
 "You're right. It's best if you do it, Branded One. At least nothing lasting "
+"can happen that way.##female"
+msgstr ""
+
+#: tutorial.xml
+msgid ""
+"You're right. It's best if you do it, Branded One. At least nothing lasting "
+"can happen that way.##male"
+msgstr ""
+
+#: tutorial.xml
+msgid ""
+"You're right. It's best if you do it, Branded One. At least nothing lasting "
 "can happen that way."
 msgstr ""
 
 #: tutorial.xml
-msgid "'course. Send the Branded One first."
+msgid "'course. Send the Branded One first.##female"
+msgstr ""
+
+#: tutorial.xml
+msgid "'course. Send the Branded One first.##male"
 msgstr ""
 
 #: tutorial.xml

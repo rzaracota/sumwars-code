@@ -574,6 +574,9 @@ void SkillTree::updateTranslation()
 		
 		label =  win_mgr.getWindow("NextSkillpointsLabel");
 		label->setText((CEGUI::utf8*) gettext("Next Skillpoint at Level"));
+		
+		label =  win_mgr.getWindow("SkilltreeLabel");
+		label->setText((CEGUI::utf8*) gettext("Skilltree"));
 }
 
 void SkillTree::updateAbilityTooltip(unsigned int pos)

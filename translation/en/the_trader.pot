@@ -41,7 +41,7 @@ msgid "A moment, dear madam."
 msgstr ""
 
 #: theTrader.xml
-msgid "A moment, dear mister."
+msgid "A moment, dear sir."
 msgstr ""
 
 #: theTrader.xml
@@ -53,7 +53,7 @@ msgid "A moment, dear sirs."
 msgstr ""
 
 #: theTrader.xml
-msgid "A moment, ladies and gentleman."
+msgid "A moment, ladies and gentlemen."
 msgstr ""
 
 #: theTrader.xml
@@ -107,21 +107,21 @@ msgid "I see you are a woman of reason!"
 msgstr ""
 
 #: theTrader.xml
-msgid "An Empty Scroll is much to my regret only capable of one thing:"
+msgid "Much to my regret, an Empty Scroll is only capable of one thing:"
 msgstr ""
 
 #: theTrader.xml
-msgid "Establish a way through Harads Black Abyss."
+msgid "To establish a way through Harad's black abyss."
 msgstr ""
 
 #: theTrader.xml
 msgid ""
-"And to make it worse only to spots of great magical concentration like the "
+"And to make it worse only to spots of great magical concentration like that "
 "big road shrine over there."
 msgstr ""
 
 #: theTrader.xml
-msgid "It's power is furthermore depleted quickly and limited to one person."
+msgid "Furthermore, a scroll's power is depleted quickly and limited only to one person."
 msgstr ""
 
 #: theTrader.xml
@@ -138,13 +138,13 @@ msgstr ""
 
 #: theTrader.xml
 msgid ""
-"If you are getting close to a waypoint, your aura will bring the familiar "
-"spirits of this place to ignite warning flames."
+"When you get close to a waypoint, your aura will summon the familiar "
+"spirits to ignite the shrine's warning flames."
 msgstr ""
 
 #: theTrader.xml
 msgid ""
-"But do not fear, they don't have the power to harm you in any way, really."
+"Fear not, they will not harm you in any way, honest."
 msgstr ""
 
 #: theTrader.xml
@@ -155,30 +155,52 @@ msgstr ""
 
 #: theTrader.xml
 msgid ""
-"If you click on a road shrine, your body will volatilize into Harad's Black "
-"Abyss."
+"If you click on a road shrine, your body will be transported through Harad's "
+"domain."
 msgstr ""
 
 #: theTrader.xml
 msgid ""
-"Before your inner eye there will be a map with all the places, you have "
+"In your mind's eye you will see a map with all the waypoints, you have "
 "already visited."
 msgstr ""
 
 #: theTrader.xml
-msgid "They are shown as a circle."
+msgid "These are shown as small yellow points."
 msgstr ""
 
 #: theTrader.xml
 msgid ""
-"If you have an open portal in the world, it will be shown too, but by a red "
+"If you have an open portal in the world, that will be shown too, with a red "
 "dot."
 msgstr ""
 
 #: theTrader.xml
 msgid ""
-"Click on one of these symbols, and your body will reassemble itself fast as "
-"the wind at your destination."
+"Click on one of these symbols, and your body will rematerialize at your "
+"destination, as fast as the wind."
+msgstr ""
+
+#: theTrader.xml
+msgid "Hmm. You seem to know a great deal about this, for a trader."
+msgstr ""
+
+#: theTrader.xml
+msgid "You pick these things up in your travels, except for business "
+"acumen, apparently."
+msgstr ""
+
+#: theTrader.xml
+msgid "Clearly you are in the wrong line of work."
+msgstr ""
+
+#: theTrader.xml
+msgid "Be wary, it is not as safe around Medair as it used to be."
+msgstr ""
+
+#: theTrader.xml
+msgid "Even travelling the roads may prove to be dangerous. Particularly "
+"if you are heading north."
 msgstr ""
 
 #: theTrader.xml
@@ -186,11 +208,12 @@ msgid "Goblins and other beasts have stolen quite a lot recently."
 msgstr ""
 
 #: theTrader.xml
-msgid "It may be convenient to make a short detour to a well-assorted trader."
+msgid "You may find it convenient to make a short detour to a well-stocked "
+"trader."
 msgstr ""
 
 #: theTrader.xml
-msgid "Speaking of you?"
+msgid "Meaning yourself?"
 msgstr ""
 
 #: theTrader.xml
@@ -199,21 +222,22 @@ msgstr ""
 
 #: theTrader.xml
 msgid ""
-"As reported, I misinvested in the Empty Scrolls and have no available "
+"As reported, I invested badly in the Empty Scrolls and have no available "
 "capital."
 msgstr ""
 
 #: theTrader.xml
 msgid ""
-"I'm afraid all I can give you for your wares in gold would be insufficient."
+"I'm afraid I have insufficient gold to buy assorted wares from treasure "
+"hunters and scavengers."
 msgstr ""
 
 #: theTrader.xml
-msgid "But I can supply you for a really long time. It's a promise."
+msgid "But I can supply you with scrolls for a long time. That's a promise."
 msgstr ""
 
 #: theTrader.xml
-msgid "One reason being customers are really rare in these parts."
+msgid "One reason being; customers are really rare in these parts."
 msgstr ""
 
 #: theTrader.xml
@@ -221,19 +245,19 @@ msgid "They are everywhere."
 msgstr ""
 
 #: theTrader.xml
-msgid "with all due respect: That is a blessing."
+msgid "With all due respect, nobody wanting to buy scrolls from poor traders."
 msgstr ""
 
 #: theTrader.xml
-msgid "Not many Branded Ones would have listened to me as you did."
+msgid "Not many Branded Ones would have listened to me as you have."
 msgstr ""
 
 #: theTrader.xml
-msgid "Allow me to give you an Empty Scroll as a freebie."
+msgid "Allow me to give you an Empty Scroll as a gift."
 msgstr ""
 
 #: theTrader.xml
-msgid "Grace me with your presence again, if you please."
+msgid "Grace me with your presence again soon, if you please."
 msgstr ""
 
 #: theTrader.xml
@@ -246,20 +270,20 @@ msgstr ""
 
 #: theTrader.xml
 msgid ""
-"Well, they were sold to me as Empty Scrolls, but how you call them is "
+"Well, they were sold to me as Empty Scrolls, but what you call them is "
 "entirely up to you."
 msgstr ""
 
 #: theTrader.xml
-msgid "Why not \"Way to the town\" or something like that?"
+msgid "Why not \"way to the town\" or something like that?"
 msgstr ""
 
 #: theTrader.xml
-msgid "What kind of name is this supposed to be??"
+msgid "What kind of name is that supposed to be!?"
 msgstr ""
 
 #: theTrader.xml
-msgid "More like town portal."
+msgid "How about: \"town portal\"?"
 msgstr ""
 
 #: theTrader.xml
@@ -268,7 +292,7 @@ msgstr ""
 
 #: theTrader.xml
 msgid ""
-"They were sold to me as Empty Scrolls, but how you call them is entirely up "
+"They were sold to me as Empty Scrolls, but what you call them is entirely up "
 "to you!"
 msgstr ""
 
@@ -285,7 +309,7 @@ msgid "Explain the belt?"
 msgstr ""
 
 #: theTrader.xml
-msgid "Well, you now about your inventory, right?"
+msgid "Well, you know about your inventory, right?"
 msgstr ""
 
 #: theTrader.xml
@@ -293,7 +317,8 @@ msgid "I thought so."
 msgstr ""
 
 #: theTrader.xml
-msgid "At the bottom you have the small items, which take three rows of space."
+msgid "At the bottom you have the small items tab, click on it to access the three rows "
+"of your small items inventory."
 msgstr ""
 
 #: theTrader.xml
@@ -310,8 +335,8 @@ msgstr ""
 
 #: theTrader.xml
 msgid ""
-"And long years on the battlefield caused me to change potions for similar "
-"potions immediately once I used one."
+"Long years on the battlefield have honed my ability to change potions for similar "
+"potions immediately once I have used one."
 msgstr ""
 
 #: theTrader.xml
@@ -319,7 +344,8 @@ msgid "A useful skill."
 msgstr ""
 
 #: theTrader.xml
-msgid "Doesn't everyone learn it who wants to avoid death?"
+msgid " A common skill. Any sell-sword that wants to avoid a quick and "
+"meaningless death knows of it."
 msgstr ""
 
 #: theTrader.xml
@@ -333,7 +359,7 @@ msgid ""
 msgstr ""
 
 #: theTrader.xml
-msgid "Alternativly you can choose the number of the belt slot it is in."
+msgid "Alternatively you can select the number of the belt slot it is in."
 msgstr ""
 
 #: theTrader.xml

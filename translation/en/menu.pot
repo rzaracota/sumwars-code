@@ -236,6 +236,14 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
+#: ../src/gui/charcreate.cpp:221
+msgid "You must enter a hero name!"
+msgstr ""
+
+#: ../src/gui/charcreate.cpp:237
+msgid "A character with that name already exists!"
+msgstr ""
+
 #: ../src/gui/charinfo.cpp:323
 msgid "Base damage"
 msgstr ""
@@ -365,6 +373,7 @@ msgid "Chat"
 msgstr ""
 
 #: ../src/gui/controlpanel.cpp:387 ../src/gui/mainmenu.cpp:144
+#: ../src/gui/optionswindow.cpp:254
 msgid "Options"
 msgstr ""
 
@@ -382,6 +391,7 @@ msgid "Character"
 msgstr ""
 
 #: ../src/gui/controlpanel.cpp:399 ../src/gui/optionswindow.cpp:325
+#: ../src/gui/skilltree.cpp:579
 msgid "Skilltree"
 msgstr ""
 
@@ -455,12 +465,20 @@ msgstr ""
 msgid "Save and Exit?"
 msgstr ""
 
+#: ../src/gui/networkwindows.cpp:83
+msgid "Join game"
+msgstr ""
+
 #: ../src/gui/networkwindows.cpp:98
 msgid "Max. number of players"
 msgstr ""
 
 #: ../src/gui/networkwindows.cpp:101 ../src/gui/networkwindows.cpp:229
 msgid "Port"
+msgstr ""
+
+#: ../src/gui/networkwindows.cpp:184
+msgid "Host game"
 msgstr ""
 
 #: ../src/gui/networkwindows.cpp:226
@@ -553,6 +571,14 @@ msgstr ""
 
 #: ../src/gui/optionswindow.cpp:316 ../src/gui/optionswindow.cpp:361
 msgid "Language"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:299
+msgid "Restart required for setting new options"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:307
+msgid "Reset graphic options"
 msgstr ""
 
 #: ../src/gui/optionswindow.cpp:322
