@@ -43,7 +43,7 @@ SavegameList::SavegameList (Document* doc)
 
 	// Bestandteile der Kontrollleiste hinzufuegen
 	CEGUI::PushButton* btn;
-	CEGUI::Window* label;
+	//CEGUI::Window* label;// detected as unused, 2011.10.23.
 
 	
 	// Button neu
@@ -107,7 +107,7 @@ void SavegameList::update()
 				saveItem = win_mgr.getWindow(s.str().append("SaveItemRoot"));
 				m_currentSelected = saveItem;
 			}
-			catch(CEGUI::UnknownObjectException &e)
+			catch(CEGUI::UnknownObjectException&)
 			{
 				saveItem = (CEGUI::Window*) win_mgr.loadWindowLayout("SaveItem.layout", s.str());
 				m_currentSelected = saveItem;
@@ -128,8 +128,10 @@ void SavegameList::update()
 			Ogre::TextureManager *tmgr = Ogre::TextureManager::getSingletonPtr();
 
 			int pos = texName.find_last_of("\\");
-			if(texName.find_last_of("/") > pos)
+			if (texName.find_last_of("/") > (size_t)pos)
+			{
 				pos = texName.find_last_of("/");
+			}
 
 			std::string nameNoPath = texName.erase(0, pos+1).append(".png");
 			std::string imagesetName = texName + "SaveItemRootAvatarImageset";
@@ -214,9 +216,9 @@ void SavegameList::updateTranslation()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
+	/*
 	CEGUI::Window* label;
-
-	/*label = win_mgr.getWindow("SavegameChooseLabel");
+	label = win_mgr.getWindow("SavegameChooseLabel");
 	label->setText((CEGUI::utf8*) gettext("Characters"));*/
 	
 	/*btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SelectSavegameButton"));
