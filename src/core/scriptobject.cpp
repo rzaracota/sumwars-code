@@ -146,7 +146,9 @@ void ScriptObject::activateTrigger(Trigger* trigger)
 		bool ret = EventSystem::executeEvent(jt->second);
 			
 		if (ret)
+		{
 			DEBUGX("event on trigger: %s",type.c_str());
+		}
 			
 		// einmalige Ereignisse loeschen, wenn erfolgreich ausgefuehrt
 		if (jt->second->getOnce() &&  ret)
