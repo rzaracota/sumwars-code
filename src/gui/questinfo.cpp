@@ -132,6 +132,9 @@ void QuestInfo::updateTranslation()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 
+	label = win_mgr.getWindow("Quests");
+	label->setText((CEGUI::utf8*) gettext("Quests"));
+
 	label = win_mgr.getWindow("QuestOpenLabel");
 	label->setText((CEGUI::utf8*) gettext("open"));
 	

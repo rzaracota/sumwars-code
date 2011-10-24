@@ -404,6 +404,7 @@ msgid "Party"
 msgstr ""
 
 #: ../src/gui/controlpanel.cpp:405 ../src/gui/optionswindow.cpp:334
+#: ../src/gui/questinfo.cpp:136
 msgid "Quests"
 msgstr ""
 
@@ -453,6 +454,10 @@ msgstr ""
 
 #: ../src/gui/mainmenu.cpp:632
 msgid "No"
+msgstr ""
+
+#: ../src/gui/tradewindow.cpp:248
+msgid "Chest"
 msgstr ""
 
 #: ../src/gui/messageboxes.cpp:52 ../src/gui/messageboxes.cpp:198

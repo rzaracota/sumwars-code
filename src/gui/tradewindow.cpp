@@ -28,17 +28,11 @@ TradeWindow::TradeWindow (Document* doc)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
 	// Rahmen fuer Inventar Fenster
-	CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "TradeWindow");
+	CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("TradeWindow.layout");
 	m_window = trade;
 	
-	trade->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f)));
-	trade->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.85f)));
-	trade->setProperty("FrameEnabled","false");
-	trade->setProperty("TitlebarEnabled","false");
-	trade->setProperty("CloseButtonEnabled","false");
 	trade->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeAreaMouseButtonPressed, this));
 	trade->setWantsMultiClickEvents(false);
-	trade->setAlpha(0.7);
 
 	// Bestandteile des Charakterfensters hinzufuegen
 	CEGUI::PushButton* btn;
@@ -57,10 +51,10 @@ TradeWindow::TradeWindow (Document* doc)
 			outStream << "TraderBigItem" << j*5+i<< "Label";
 			label = win_mgr.createWindow("TaharezLook/StaticImage", outStream.str());
 			trade->addChildWindow(label);
-			label->setProperty("FrameEnabled", "true");
-			label->setProperty("BackgroundEnabled", "true");
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f+i*0.18f), cegui_reldim( 0.02f +j*0.1f)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.09f)));
+			label->setProperty("FrameEnabled", "false");
+			label->setProperty("BackgroundEnabled", "false");
+			label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f+i*0.166f), cegui_reldim( 0.17f +j*0.1f)));
+			label->setSize(CEGUI::UVector2(cegui_reldim(0.148f), cegui_reldim( 0.09f)));
 			label->setID(Equipement::BIG_ITEMS+j*5+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonPressed, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonReleased,  this));
@@ -69,20 +63,12 @@ TradeWindow::TradeWindow (Document* doc)
 		}
 	}
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "TradeBigPrevButton"));
-	trade->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.32f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.05f)));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("TradeBigPrevButton"));
 	btn->setID(0);
-	btn->setText("<<");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&TradeWindow::onTradeNextItems, this));
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "TradeBigNextButton"));
-	trade->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.85f), cegui_reldim( 0.32f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.05f)));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("TradeBigNextButton"));
 	btn->setID(1);
-	btn->setText(">>");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&TradeWindow::onTradeNextItems, this));
 
 	
@@ -94,10 +80,10 @@ TradeWindow::TradeWindow (Document* doc)
 			outStream << "TraderMediumItem" << j*7+i<< "Label";
 			label = win_mgr.createWindow("TaharezLook/StaticImage", outStream.str());
 			trade->addChildWindow(label);
-			label->setProperty("FrameEnabled", "true");
-			label->setProperty("BackgroundEnabled", "true");
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f+i*0.13f), cegui_reldim( 0.40f+0.085*j)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.115f), cegui_reldim( 0.075f)));
+			label->setProperty("FrameEnabled", "false");
+			label->setProperty("BackgroundEnabled", "false");
+			label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f+i*0.119f), cegui_reldim( 0.487f+0.088*j)));
+			label->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.067f)));
 			label->setID(Equipement::MEDIUM_ITEMS+j*7+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonPressed, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonReleased,  this));
@@ -106,20 +92,12 @@ TradeWindow::TradeWindow (Document* doc)
 		}
 	}
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "TradeMediumPrevButton"));
-	trade->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.65f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.05f)));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("TradeMediumPrevButton"));
 	btn->setID(2);
-	btn->setText("<<");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&TradeWindow::onTradeNextItems, this));
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "TradeMediumNextButton"));
-	trade->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.85f), cegui_reldim( 0.65f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.05f)));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("TradeMediumNextButton"));
 	btn->setID(3);
-	btn->setText(">>");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&TradeWindow::onTradeNextItems, this));
 	
 	for (j=0;j<3;j++)
@@ -130,10 +108,10 @@ TradeWindow::TradeWindow (Document* doc)
 			outStream << "TraderSmallItem" << j*10+i<< "Label";
 			label = win_mgr.createWindow("TaharezLook/StaticImage", outStream.str());
 			trade->addChildWindow(label);
-			label->setProperty("FrameEnabled", "true");
-			label->setProperty("BackgroundEnabled", "true");
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.02f+i*0.096f), cegui_reldim( 0.72f+0.065*j)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.086f), cegui_reldim( 0.056f)));
+			label->setProperty("FrameEnabled", "false");
+			label->setProperty("BackgroundEnabled", "false");
+			label->setPosition(CEGUI::UVector2(cegui_reldim(0.048f+i*0.0835f), cegui_reldim( 0.755f+0.065*j)));
+			label->setSize(CEGUI::UVector2(cegui_reldim(0.06f), cegui_reldim( 0.04f)));
 			label->setID(Equipement::SMALL_ITEMS+j*10+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonPressed, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonReleased,  this));
@@ -142,27 +120,16 @@ TradeWindow::TradeWindow (Document* doc)
 		}
 	}
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "TradeSmallPrevButton"));
-	trade->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.92f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.05f)));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("TradeSmallPrevButton"));
 	btn->setID(4);
-	btn->setText("<<");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&TradeWindow::onTradeNextItems, this));
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "TradeSmallNextButton"));
-	trade->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.85f), cegui_reldim( 0.92f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.05f)));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("TradeSmallNextButton"));
 	btn->setID(5);
-	btn->setText(">>");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&TradeWindow::onTradeNextItems, this));
 	
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "TradeCloseButton"));
-	trade->addChildWindow(btn);
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.45f), cegui_reldim( 0.94f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.05f)));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("TradeCloseButton"));
 	btn->setID(5);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&TradeWindow::onCloseTrade, this));
 	
@@ -275,6 +242,10 @@ void TradeWindow::updateTranslation()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
+	CEGUI::Window* label;
+	
+	label = win_mgr.getWindow("TradeLabel");
+	label->setText((CEGUI::utf8*) gettext("Chest"));
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("TradeCloseButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));

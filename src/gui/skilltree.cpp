@@ -202,6 +202,7 @@ void SkillTree::update()
 			bg = win_mgr.createWindow("TaharezLook/StaticImage", stream.str());
 			bg->setProperty("Image", "set:SkillTree image:SkillBg");
 			bg->setInheritsAlpha(false);
+			bg->setProperty("RiseOnClick", "false");
 			stream.str("");
 			stream << "SkillImage"<<cnt;
 			label = win_mgr.createWindow("TaharezLook/StaticImage", stream.str());
