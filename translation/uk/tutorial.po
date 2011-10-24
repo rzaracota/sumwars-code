@@ -942,20 +942,375 @@ msgid "All right allready!"
 msgstr "Вже все добре!"
 
 #: tutorial.xml
-msgid "That should have been the last one."
-msgstr "Це мав бути останній."
+msgid "Just great!"
+msgstr "Просто чудово!"
 
 #: tutorial.xml
-msgid "What a massacre."
-msgstr "Що за різанина."
+msgid "Damn this place!"
+msgstr "Чортова місцина!"
 
 #: tutorial.xml
-msgid "Really, somehow lacking in style."
-msgstr "Дійсно, якось не вистачає стилю."
+msgid ""
+"If it goes to pieces completely I will be trapped down here because of what "
+"they've done to me."
+msgstr "Якщо вона повністю завалиться я опинюсь в пастці, і все завдячуючи їм."
 
 #: tutorial.xml
-msgid "Are you looking for trouble?!"
-msgstr "Ви шукаєте неприємностей?"
+msgid "Are you all right down there? ##solo"
+msgstr "Ей там внизу, все добре? ##solo"
+
+#: tutorial.xml
+msgid ""
+"If it goes to pieces completely we will be trapped down here because of what "
+"they've done to us."
+msgstr ""
+"Якщо вона повністю завалиться ми опинимось в пастці, і все завдячуючи їм."
+
+#: tutorial.xml
+msgid "No matter."
+msgstr "Байдуже."
+
+#: tutorial.xml
+msgid "If there is a way out of here, we'll find it."
+msgstr "Якщо звідси є вихід, ми знайдемо його."
+
+#: tutorial.xml
+msgid "Yeah, even if we have to use our teeth."
+msgstr "Так, навіть якщо нам доведеться використати наші зуби."
+
+#: tutorial.xml
+msgid "Are you all right down there?"
+msgstr "З вами все добре?"
+
+#: tutorial.xml
+msgid "Like hell I am! How do I get out of here?"
+msgstr "Що за чорт! Як мені вибратися звідси?"
+
+#: tutorial.xml
+msgid "Like hell we are! How do we get out of here?"
+msgstr "Що за чорт! Як нам вибратися звідси?"
+
+#: tutorial.xml
+msgid "The path is blocked from our side and we can't get to you."
+msgstr "Шлях заблокований з нашого боку і ми не можемо дістатися до вас."
+
+#: tutorial.xml
+msgid "You'll have to find another way out."
+msgstr "Вам доведеться знайти інший вихід."
+
+#: tutorial.xml
+msgid "There should be workers down there."
+msgstr "Там внизу повинні бути робітники."
+
+#: tutorial.xml
+msgid "Maybe they can help. We will wait here."
+msgstr "Можливо вони зможуть допомогти. Ми будемо чекати тут."
+
+#: tutorial.xml
+msgid "Damn them! Not exactly what I would call 'customer service'."
+msgstr "Чорт їх забери! Не зовсім те, що я назвав би 'обслуговування клієнтів'."
+
+#: tutorial.xml
+msgid "They better have some serious coin for all this trouble."
+msgstr "Було б добре якщо вони компенсують всі ці неприємності золотом."
+
+#: tutorial.xml
+msgid "Move it you lazy maggots! This place is not building itself."
+msgstr "Рухайтесь ви, ліниві хробаки! Це місце не збудується саме по собі."
+
+#: tutorial.xml
+msgid "Finally you guards return..."
+msgstr "Нарешті ви повернулись..."
+
+#: tutorial.xml
+msgid "Wait, who are you?"
+msgstr "Ти хто такий?"
+
+#: tutorial.xml
+msgid "I'm someone who is stuck down here, that's who."
+msgstr "Я той, хто застряг тут, внизу, ось хто."
+
+#: tutorial.xml
+msgid "We are people who are stuck down here, that's who."
+msgstr "Ми люди, які застрягли тут, внизу, ось хто."
+
+#: tutorial.xml
+msgid "Do you know how to get out of here?"
+msgstr "Ви знаєте, як вибратися звідси?"
+
+#: tutorial.xml
+msgid "Sorry, no. The stairway collapsed earlier."
+msgstr "На жаль ні. Сходи завалилися раніше."
+
+#: tutorial.xml
+msgid "There's only one way down here?!"
+msgstr "Сюди вниз є дише один шлях?!"
+
+#: tutorial.xml
+msgid ""
+"Have you not thought about what could happen with your pet monsters up there?"
+msgstr ""
+"Ви не думали про те, що може трапитися з вашими домашніми улюбленцями онтам?"
+
+#: tutorial.xml
+msgid "This is not for me to decide."
+msgstr "Це вирішую не я."
+
+#: tutorial.xml
+msgid "It is through the Council's will and Akeran's wisdom."
+msgstr "На все воля Ради і мудрість Акерана."
+
+#: tutorial.xml
+msgid "And if you die here?"
+msgstr "І якщо ти тут помреш?"
+
+#: tutorial.xml
+msgid "If that's how it is decided, we will work here until our time comes."
+msgstr "Якщо так вирішено, ми будемо працювати тут до кінця."
+
+#: tutorial.xml
+msgid "We all think alike here."
+msgstr "Ми всі тут так вважаємо."
+
+#: tutorial.xml
+msgid "..."
+msgstr "..."
+
+#: tutorial.xml
+msgid "Be that as it may, but is there another way to get out of here?"
+msgstr "Як би там не було, чи є інший спосіб вибратися звідси?"
+
+#: tutorial.xml
+msgid "Preferably today."
+msgstr "Бажано сьогодні."
+
+#: tutorial.xml
+msgid "Well, there might be."
+msgstr "Ну, можливо."
+
+#: tutorial.xml
+msgid "You see that crane over there?"
+msgstr "Ви бачите той кран?"
+
+#: tutorial.xml
+msgid "It was damaged by falling rocks earlier."
+msgstr "Він був зламаний падаючими каменями."
+
+#: tutorial.xml
+msgid "You could use it to get to the sewer tunnels that connect the different "
+"levels of this most magnificent construction."
+msgstr ""
+"Ви можете використати його, щоб дістатися до каналізаційних каналів, які "
+"з'єднують різні рівні цієї дивовижної споруди."
+
+#: tutorial.xml
+msgid "I suppose as you suggested this plan, you have a way of repairing it?"
+msgstr "І оскільки ви запропонували цей план, ви знаєте як відремонтувати його?"
+
+#: tutorial.xml
+msgid "Of course I have a plan."
+msgstr "Звичайно, у мене є план."
+
+#: tutorial.xml
+msgid "I sent one of my workers to get a cog earlier."
+msgstr "Раніше я послав одного з моїх робітників, щоб він приніс зубець."
+
+#: tutorial.xml
+msgid ""
+"If he hasn't been eaten by the slugs out there, he should be back any minute "
+"now."
+msgstr ""
+"Якщо його ще не з'їли онті слимаки, то він повернеться з хвилини на хвилину."
+
+#: tutorial.xml
+msgid "Why don't you get an energy crystal in the meantime?"
+msgstr "Чому б вам не знайти енергетичний кристал?"
+
+#: tutorial.xml
+msgid "Without it the whole crane is useless."
+msgstr "Без нього кран не працюватиме."
+
+#: tutorial.xml
+msgid "And where would one get an energy crystal in these forsaken caves?"
+msgstr "Цікаво де можна взяти енергетичний кристал в цих забутих печерах?"
+
+#: tutorial.xml
+msgid "These halls are not forsaken!"
+msgstr "Ці зали не забуті!"
+
+#: tutorial.xml
+msgid ""
+"They are filled with the unfathomable wisdom of Akeran and will soon be one of "
+"the greatest works in his name."
+msgstr ""
+"Вони наповнені незбагненною мудрістю Акерана і скоро будуть одним з "
+"найбільших творінь на його честь."
+
+#: tutorial.xml
+msgid "Of course. So, where?"
+msgstr "Звичайно. Отже де?"
+
+#: tutorial.xml
+msgid "Akeran protects, Akeran guides."
+msgstr "Акеран захищає, Акеран веде."
+
+#: tutorial.xml
+msgid "Look for a connection to a laboratory on the upper level."
+msgstr "Шукайте вихід до лабораторії на верхньому рівні."
+
+#: tutorial.xml
+msgid "You can go there and... borrow one, if you're lucky."
+msgstr "Ви можете піти туди і... позичити один, якщо вам пощастить."
+
+#: tutorial.xml
+msgid ""
+"Just ask the master of the laboratory and he will surely give you one, if "
+"you're found worthy of Akeran's blessing."
+msgstr ""
+"Просто попросіть магістра лабораторії, і він, безумовно, дасть вам один, "
+"якщо ви заслужили благословення Акерана."
+
+#: tutorial.xml
+msgid "This man is beginning to test my patience."
+msgstr "Він починає випробовувати моє терпіння."
+
+#: tutorial.xml
+msgid "Let's just get the crystal. I'm sure we will get Akeran's blessing."
+msgstr ""
+"Давайте просто знайдемо кристал. Я впевнений, що ми отримаємо благословення "
+"Акерана."
+
+#: tutorial.xml
+msgid "This looks like it could be a way up."
+msgstr "Це схоже на шлях нагору."
+
+#: tutorial.xml
+msgid "Let's just try it out."
+msgstr "Давайте спробуємо."
+
+#: tutorial.xml
+msgid "So, this really is the lab, and that should be the crystal"
+msgstr "Це дійсно лабораторія, і це напевне кристал"
+
+#: tutorial.xml
+msgid "but there is no oh-so-blessed master here."
+msgstr "але тут немає так-сильно-благословенного господаря."
+
+#: tutorial.xml
+msgid "Then he can't have any objections, can he?"
+msgstr "Тоді він не має ніяких заперечень, чи не так?"
+
+#: tutorial.xml
+msgid "I'd better be careful, though."
+msgstr "Проте мені краще бути обережним."
+
+#: tutorial.xml
+msgid "This doesn't look like I can simply take it."
+msgstr "Мені здається що я не зможу просто так його взяти."
+
+#: tutorial.xml
+msgid ""
+"I guess I would first have to stop whatever is using the crystal right now."
+msgstr ""
+"Схоже спочатку я повинен зупинити те, що використовує кристал прямо зараз."
+
+#: tutorial.xml
+msgid "I guess not."
+msgstr "Схоже ні."
+
+#: tutorial.xml
+msgid "Let's just take it."
+msgstr "Давайте просто візьмемо його."
+
+#: tutorial.xml
+msgid "Better be careful, though."
+msgstr "Проте краще будь обережним."
+
+#: tutorial.xml
+msgid "This doesn't look like you can simply take it."
+msgstr "Мені здається що ти не зможеш просто так його взяти."
+
+#: tutorial.xml
+msgid ""
+"I guess we would first have to stop whatever is using the crystal right now."
+msgstr ""
+"Схоже спочатку нам треба зупинити те, що використовує кристал прямо зараз."
+
+#: tutorial.xml
+msgid "Finally. Now, lets get out of here."
+msgstr "Нарешті. Давайте забиратися звідси."
+
+#: tutorial.xml
+msgid "And all it takes to get out of here is a walk through the sewers."
+msgstr "І все, що потрібно, щоб вийти звідси, це прогулянка каналізацію."
+
+#: tutorial.xml
+msgid "Again."
+msgstr "Знову."
+
+#: tutorial.xml
+msgid "And then she says..."
+msgstr "А потім вона каже..."
+
+#: tutorial.xml
+msgid "Akerans Flaming Eyes, look over there!"
+msgstr "Палаючі Очі Акерана, дивись туди!"
+
+#: tutorial.xml
+msgid "I am NOT doing that again."
+msgstr "Я НЕ зроблю це знову."
+
+#: tutorial.xml
+msgid "At least not until I got paid. Seriously paid."
+msgstr "Принаймні, поки мені не заплятять. Серйозно заплатять."
+
+#: tutorial.xml
+msgid "You made it!"
+msgstr "Ти зробив це!"
+
+#: tutorial.xml
+msgid "We are NOT doing that again."
+msgstr "Ми НЕ зробимо це знову."
+
+#: tutorial.xml
+msgid "At least not until we got paid. Seriously paid."
+msgstr "Принаймні, поки нам не заплятять. Серйозно заплатять."
+
+#: tutorial.xml
+msgid "They made it!"
+msgstr "Вони це зробили!"
+
+#: tutorial.xml
+msgid "No thanks to you guys."
+msgstr "І не завдяки вам, хлопці."
+
+#: tutorial.xml
+msgid "Did you even know just how many escaped slugs you have in the basement?"
+msgstr "Ви хоча б знаєте, скільки слимаків втекло в підвал?"
+
+#: tutorial.xml
+msgid "It's not like they could kill you."
+msgstr "Вони не можуть вбити тебе."
+
+#: tutorial.xml
+msgid "It still hurts being hurt, you know?"
+msgstr "Але я все ще не позбавлений болю."
+
+#: tutorial.xml
+msgid "While we are on the topic..."
+msgstr "Доречі..."
+
+#: tutorial.xml
+msgid "In fact, have you thought of using your powerful skills?##solo"
+msgstr "Насправді, ви подумали про використання ваших потужних навичок?##solo"
+
+#: tutorial.xml
+msgid ""
+"The Lord Master thought that you could do considerably more than dully beat "
+"your enemies.##solo"
+msgstr ""
+"Лорд Магістр думав, ви могли б зробити значно більше, ніж тупо бити ворогів."
+"##solo"
 
 #: tutorial.xml
 msgid "In fact, have you thought of using your powerful skills?"
@@ -1031,13 +1386,33 @@ msgstr "Зачекайте секунду. А якщо старий дивак �
 #: tutorial.xml
 msgid ""
 "You're right. It's best if you do it, Branded One. At least nothing lasting "
+"can happen that way.##female"
+msgstr ""
+"Ви маєте рацію. Краще всього, якщо ти це зробиш, Відмічена. Принаймні тоді "
+"не станется нічого трагічного.##female"
+
+#: tutorial.xml
+msgid ""
+"You're right. It's best if you do it, Branded One. At least nothing lasting "
+"can happen that way.##male"
+msgstr ""
+"Ви маєте рацію. Краще всього, якщо ти це зробиш, Відмічений. Принаймні тоді "
+"не станется нічого трагічного.##male"
+
+#: tutorial.xml
+msgid ""
+"You're right. It's best if you do it, Branded One. At least nothing lasting "
 "can happen that way."
 msgstr ""
 "Ви маєте рацію. Краще всього, якщо ти це зробиш, Відмічений. Принаймні тоді "
 "не станется нічого трагічного."
 
 #: tutorial.xml
-msgid "'course. Send the Branded One first."
+msgid "'course. Send the Branded One first.##female"
+msgstr "Звичайно. Хай Відмічена йде першою.##female"
+
+#: tutorial.xml
+msgid "'course. Send the Branded One first.##male"
 msgstr "Звичайно. Хай Відмічений йде першим."
 
 #: tutorial.xml

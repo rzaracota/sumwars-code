@@ -116,12 +116,14 @@ msgstr ""
 
 #: theTrader.xml
 msgid ""
-"And to make it worse only to spots of great magical concentration like that "
+"To make it worse only to spots of great magical concentration like that "
 "big road shrine over there."
 msgstr ""
 
 #: theTrader.xml
-msgid "Furthermore, a scroll's power is depleted quickly and limited only to one person."
+msgid ""
+"Furthermore, a scroll's power is depleted quickly and limited only to one "
+"person."
 msgstr ""
 
 #: theTrader.xml
@@ -138,18 +140,17 @@ msgstr ""
 
 #: theTrader.xml
 msgid ""
-"When you get close to a waypoint, your aura will summon the familiar "
-"spirits to ignite the shrine's warning flames."
+"When you get close to a waypoint, your aura will summon the familiar spirits "
+"to ignite the shrine's warning flames."
+msgstr ""
+
+#: theTrader.xml
+msgid "Fear not, they will not harm you in any way, honest."
 msgstr ""
 
 #: theTrader.xml
 msgid ""
-"Fear not, they will not harm you in any way, honest."
-msgstr ""
-
-#: theTrader.xml
-msgid ""
-"Counterwise you can be sure that you are able to use the road shrine if you "
+"You can be sure that you are able to use the road shrine if you "
 "see the flames."
 msgstr ""
 
@@ -161,7 +162,7 @@ msgstr ""
 
 #: theTrader.xml
 msgid ""
-"In your mind's eye you will see a map with all the waypoints, you have "
+"In your mind's eye you will see a map with all the waypoints you have "
 "already visited."
 msgstr ""
 
@@ -186,8 +187,9 @@ msgid "Hmm. You seem to know a great deal about this, for a trader."
 msgstr ""
 
 #: theTrader.xml
-msgid "You pick these things up in your travels, except for business "
-"acumen, apparently."
+msgid ""
+"You pick these things up in your travels, except for business acumen, "
+"apparently."
 msgstr ""
 
 #: theTrader.xml
@@ -199,8 +201,9 @@ msgid "Be wary, it is not as safe around Medair as it used to be."
 msgstr ""
 
 #: theTrader.xml
-msgid "Even travelling the roads may prove to be dangerous. Particularly "
-"if you are heading north."
+msgid ""
+"Even travelling the roads may prove to be dangerous. Particularly if you are "
+"heading north."
 msgstr ""
 
 #: theTrader.xml
@@ -208,8 +211,8 @@ msgid "Goblins and other beasts have stolen quite a lot recently."
 msgstr ""
 
 #: theTrader.xml
-msgid "You may find it convenient to make a short detour to a well-stocked "
-"trader."
+msgid ""
+"You may find it convenient to make a short detour to a well-stocked trader."
 msgstr ""
 
 #: theTrader.xml
@@ -237,11 +240,12 @@ msgid "But I can supply you with scrolls for a long time. That's a promise."
 msgstr ""
 
 #: theTrader.xml
-msgid "One reason being; customers are really rare in these parts."
+msgid "One reason being; customers are rare in these parts."
 msgstr ""
 
 #: theTrader.xml
-msgid "They are everywhere."
+msgid ""
+"Surely they can be found anywhere, especially in a place like this."
 msgstr ""
 
 #: theTrader.xml
@@ -249,7 +253,7 @@ msgid "With all due respect, nobody wanting to buy scrolls from poor traders."
 msgstr ""
 
 #: theTrader.xml
-msgid "Not many Branded Ones would have listened to me as you have."
+msgid "Regardless, not many Branded Ones would have listened to me as you have."
 msgstr ""
 
 #: theTrader.xml
@@ -261,7 +265,7 @@ msgid "Grace me with your presence again soon, if you please."
 msgstr ""
 
 #: theTrader.xml
-msgid "Wait! Does this thing have to be called \"Empty Scroll\"?"
+msgid "Wait! Does this thing have to be called Empty Scroll?"
 msgstr ""
 
 #: theTrader.xml
@@ -317,8 +321,9 @@ msgid "I thought so."
 msgstr ""
 
 #: theTrader.xml
-msgid "At the bottom you have the small items tab, click on it to access the three rows "
-"of your small items inventory."
+msgid ""
+"At the bottom you have the small items tab, click on it to access the three "
+"rows of your small items inventory."
 msgstr ""
 
 #: theTrader.xml
@@ -335,8 +340,8 @@ msgstr ""
 
 #: theTrader.xml
 msgid ""
-"Long years on the battlefield have honed my ability to change potions for similar "
-"potions immediately once I have used one."
+"Long years on the battlefield have honed my ability to change potions for "
+"similar potions immediately once I have used one."
 msgstr ""
 
 #: theTrader.xml
@@ -344,8 +349,9 @@ msgid "A useful skill."
 msgstr ""
 
 #: theTrader.xml
-msgid " A common skill. Any sell-sword that wants to avoid a quick and "
-"meaningless death knows of it."
+msgid ""
+" A common skill. Any sell-sword that wants to avoid a quick and meaningless "
+"death knows of it."
 msgstr ""
 
 #: theTrader.xml

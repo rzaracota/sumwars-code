@@ -107,6 +107,10 @@ msgstr "Енергія"
 msgid "Chance for critical hit"
 msgstr "Шанс на критичний удар"
 
+#: ../src/core/document.cpp:838
+msgid "Please select a character first!"
+msgstr "Спочатку виберіть персонажа!"
+
 #: ../src/core/document.cpp:1205 ../src/core/item.cpp:953
 #: ../src/core/item.cpp:955 ../src/core/item.cpp:1183
 #: ../src/core/item.cpp:1189
@@ -238,6 +242,14 @@ msgstr "Скасувати"
 #: ../src/gui/charcreate.cpp:129 ../src/gui/savegamelist.cpp:180
 msgid "Create"
 msgstr "Створити"
+
+#: ../src/gui/charcreate.cpp:221
+msgid "You must enter a hero name!"
+msgstr "Ви повинні ввести ім'я персонажу!"
+
+#: ../src/gui/charcreate.cpp:237
+msgid "A character with that name already exists!"
+msgstr "Персонаж з таким іменем вже існує!"
 
 #: ../src/gui/charinfo.cpp:323
 msgid "Base damage"
@@ -373,6 +385,7 @@ msgid "Chat"
 msgstr "Чат"
 
 #: ../src/gui/controlpanel.cpp:387 ../src/gui/mainmenu.cpp:144
+#: ../src/gui/optionswindow.cpp:254
 msgid "Options"
 msgstr "Опції"
 
@@ -390,6 +403,7 @@ msgid "Character"
 msgstr "Персонаж"
 
 #: ../src/gui/controlpanel.cpp:399 ../src/gui/optionswindow.cpp:325
+#: ../src/gui/skilltree.cpp:579
 msgid "Skilltree"
 msgstr "Дерево навичок"
 
@@ -398,6 +412,7 @@ msgid "Party"
 msgstr "Команда"
 
 #: ../src/gui/controlpanel.cpp:405 ../src/gui/optionswindow.cpp:334
+#: ../src/gui/questinfo.cpp:136
 msgid "Quests"
 msgstr "Квести"
 
@@ -449,6 +464,10 @@ msgstr "Так"
 msgid "No"
 msgstr "Ні"
 
+#: ../src/gui/tradewindow.cpp:248
+msgid "Chest"
+msgstr "Скриня"
+
 #: ../src/gui/messageboxes.cpp:52 ../src/gui/messageboxes.cpp:198
 #: ../src/gui/networkwindows.cpp:95 ../src/gui/networkwindows.cpp:223
 #: ../src/gui/optionswindow.cpp:367 ../src/gui/tradewindow.cpp:265
@@ -463,6 +482,11 @@ msgstr "Відхилити"
 msgid "Save and Exit?"
 msgstr "Зберегти і вийти?"
 
+# WIndow Title
+#: ../src/gui/networkwindows.cpp:83
+msgid "Join_game"
+msgstr "Приєднатись"
+
 #: ../src/gui/networkwindows.cpp:98
 msgid "Max. number of players"
 msgstr "Макс. кількість гравців"
@@ -470,6 +494,11 @@ msgstr "Макс. кількість гравців"
 #: ../src/gui/networkwindows.cpp:101 ../src/gui/networkwindows.cpp:229
 msgid "Port"
 msgstr "Порт"
+
+# WIndow Title
+#: ../src/gui/networkwindows.cpp:184
+msgid "Host_game"
+msgstr "Створити гру"
 
 #: ../src/gui/networkwindows.cpp:226
 msgid "Host"
@@ -562,6 +591,14 @@ msgstr "Графіка"
 #: ../src/gui/optionswindow.cpp:316 ../src/gui/optionswindow.cpp:361
 msgid "Language"
 msgstr "Мова"
+
+#: ../src/gui/optionswindow.cpp:299
+msgid "Restart required for setting new options"
+msgstr "Для застосування змін перезапустіть гру"
+
+#: ../src/gui/optionswindow.cpp:307
+msgid "Reset graphic options"
+msgstr "Скинути граф. параметри"
 
 #: ../src/gui/optionswindow.cpp:322
 msgid "Character screen"

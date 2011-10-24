@@ -211,6 +211,10 @@ msgstr "Прокляте озеро"
 msgid "elCnlLobby"
 msgstr "Рада Елементів, Підземелля"
 
+#: tutorial.xml
+msgid "elCnlLowerCaves"
+msgstr "Печери Ради"
+
 #: medair.xml
 msgid "medBackalley"
 msgstr "Закутки"
@@ -3625,6 +3629,10 @@ msgstr "Ферон Маркен"
 #: theFissure.xml
 msgid "Unknown Lich"
 msgstr "Невідомий Ліч"
+
+#: tutorial.xml
+msgid "Overseer"
+msgstr "Наглядач"
 
 #: fortify_dwarfenwall.xml
 msgid ""
