@@ -560,6 +560,22 @@ msgstr ""
 msgid "Cornflower Blue"
 msgstr ""
 
+#: ../src/gui/optionswindow.cpp:184
+msgid "Fullscreen (Exclusive Mode)"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:185
+msgid "Window (With Borders)"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:190
+"Window (Fullscreen)"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:191
+" - recommended"
+msgstr ""
+
 #: ../src/gui/optionswindow.cpp:211
 msgid "System default"
 msgstr ""
@@ -638,6 +654,10 @@ msgstr ""
 
 #: ../src/gui/optionswindow.cpp:364
 msgid "Grab mouse in windowed mode (needs restart)"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:391
+msgid "Display Mode"
 msgstr ""
 
 #: ../src/gui/questinfo.cpp:160
