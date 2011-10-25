@@ -1838,7 +1838,7 @@
 	
 		<Topic name="secret_door"  start_option="Open secret door">
 			<Condition>
-				return (tutorial.craneRepair==3 and tutorial_tmp.phase == "findSecretDoor");
+				return (tutorial.craneRepair==3 and tutorial_tmp.phase == "findSecretDoor" and tutorial.finished~=true);
 			</Condition>
 			<Effect>
 				addAllPlayersToDialog();
