@@ -102,19 +102,19 @@
 				dwarfenwall.city[10]["respawn"] = {"locPeasant1"};
 				dwarfenwall.city[10]["important"] = false;
 				dwarfenwall.city[10]["moving"] = false;
-				dwarfenwall.city[10]["refname"] = "Peasant 4";
+				dwarfenwall.city[10]["refname"] = "Peasant";
 				dwarfenwall.city[11] = {};
 				dwarfenwall.city[11]["location"] = "locPeasant4";
 				dwarfenwall.city[11]["respawn"] = {"locPeasant7","locWay1"};
 				dwarfenwall.city[11]["important"] = false;
 				dwarfenwall.city[11]["moving"] = false;
-				dwarfenwall.city[11]["refname"] = "Peasant 5";
+				dwarfenwall.city[11]["refname"] = "Peasant";
 				dwarfenwall.city[12] = {};
 				dwarfenwall.city[12]["location"] = "locPeasant6";
 				dwarfenwall.city[12]["respawn"] = {"locHealerIn","locPeasant9"};
 				dwarfenwall.city[12]["important"] = false;
 				dwarfenwall.city[12]["moving"] = false;
-				dwarfenwall.city[12]["refname"] = "Peasant 6";
+				dwarfenwall.city[12]["refname"] = "Peasant";
 				
 				dwarfenwallPeasant1();
 				dwarfenwallPeasant2();
