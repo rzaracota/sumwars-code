@@ -208,55 +208,78 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	cbo->handleUpdatedListItemData();
 	cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onDisplayModeSelected, this));
 
-	// TODO: add comments.
-	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("VideoDriverBox"));
+	//
+	// Add the list of video drivers. --------------------------------------------------------------
+	//
+
+	// Get the list of available drivers to populate the list.
 	std::vector <std::string> videoDrivers = Options::getInstance ()->getEditableAvailableVideoDrivers ();
+
+	// Get the driver that is currently in use; this will be the selected entry in the list
 	std::string selectedVideoDriver = Options::getInstance ()->getUsedVideoDriver ();
+
+	// Start adding the driver items to the list
+	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow ("VideoDriverBox"));
 	for (std::vector <std::string>::const_iterator it = videoDrivers.begin (); it != videoDrivers.end (); ++ it)
 	{
 		std::string myName = *it;
-		cbo->addItem(new StrListItem((CEGUI::utf8*) myName.c_str (),"",0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) myName.c_str (), "", 0));
 		if (myName == selectedVideoDriver)
 		{
 			cbo->setItemSelectState (cbo->getItemCount () - 1, true);
 		}
 	}
+	// Set the list to read-only, so that the user can't type in entries.
 	cbo->setReadOnly (true);
+	
+	// Temporary: Disable the control. This is because there may be issues with OpenGL on Windows. (E.g. On some ATI cards, the CEGUI menu is not visible).
 	cbo->setEnabled (false);
 
-	cbo->handleUpdatedListItemData();
-//	cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onDisplayModeSelected, this));
+	// Since we may update the selected item, it's necessary to also call the internal update.
+	cbo->handleUpdatedListItemData ();
 
-	// TODO: add comments.
+	// Temporary: Disable the callback.
+	//	cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onVideoDriverSelected, this));
+
+	//
+	// Add the resolution list. Also select the currently used resolution.  ------------------------
+	//
+
+	// Get the resolution in the current options set.
 	std::string usedResolution = Options::getInstance ()->getUsedResolution ();
 	DEBUG ("Used resolution is: [%s]", usedResolution.c_str ());
-	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("ResolutionBox"));
+
+	// Get the list of available resolutions for the selected video driver.
 	std::vector <std::string> resolutions = Options::getInstance ()->getEditableResolutionsMapping ()[selectedVideoDriver];
+
+	// Start adding the resolutions as items to the combo-box, one by one.
+	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow ("ResolutionBox"));
 	for (std::vector <std::string>::const_iterator it = resolutions.begin (); it != resolutions.end (); ++ it)
 	{
-		std::string myName = *it;
-		cbo->addItem(new StrListItem((CEGUI::utf8*) myName.c_str (),"",0));
-		if (myName == usedResolution)
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) it->c_str (), "", 0));
+		if (*it == usedResolution)
 		{
 			cbo->setItemSelectState (cbo->getItemCount () - 1, true);
 		}
 	}
+	// Set the list to read-only, so that the user can't type in entries.
 	cbo->setReadOnly (true);
 
-	// For windowed (fullscreen) mode, make sure the resolution can't be edited.
+	// For windowed (fullscreen) mode, make sure the resolution can't be modified. Why? Because it's the desktop size.
+	// What happens when you change your desktop size? That's another story...
 	if (myDisplayMode == WINDOWED_FULLSCREEN)
 	{
 		cbo->setEnabled (false);
-		// Clear the selection flag.
-		if (cbo->getSelectedItem () != 0)
-		{
-			cbo->getSelectedItem ()->setSelected (false);
-		}
-		cbo->setText ("");
+
+		// Clear the selection flag?
+		//if (cbo->getSelectedItem () != 0)
+		//{
+		//	cbo->getSelectedItem ()->setSelected (false);
+		//}
+		//cbo->setText ("");
 	}
 
 	cbo->handleUpdatedListItemData();
-//	cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onResolutionChanged, this));
 
 	reset();
 	updateTranslation();
@@ -447,7 +470,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 	// TODO: move towards integrated settings file (single file for most settings).
 	{
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-		CEGUI::Combobox* cbo = cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("DisplayModeBox"));
+		CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("DisplayModeBox"));
 
 		if (cbo == 0)
 		{
@@ -755,18 +778,20 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 
 	// For windowed (fullscreen) mode, make sure the resolution can't be edited.
 
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("ResolutionBox"));
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton ();
+	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow ("ResolutionBox"));
 	if (myDisplayMode == WINDOWED_FULLSCREEN)
 	{
 		cbo->setEnabled (false);
-		// Clear the selection flag.
-		if (cbo->getSelectedItem () != 0)
-		{
-			cbo->getSelectedItem ()->setSelected (false);
-		}
-		cbo->setText ("");
-		cbo->handleUpdatedListItemData();
+
+		// Clear the selection flag?
+		//if (cbo->getSelectedItem () != 0)
+		//{
+		//	cbo->getSelectedItem ()->setSelected (false);
+		//}
+		//cbo->setText ("");
+
+		cbo->handleUpdatedListItemData ();
 	}
 	else
 	{
