@@ -357,7 +357,7 @@
 	<AI ai_sight_range="8" />
 </Monster>
 
-<Monster type="NPC" subtype="peasant_f" name="Peasant" fraction="human" race="human" layer="NORMAL">
+<Monster type="NPC" subtype="peasant_f" name="Peasant Woman" fraction="human" race="human" layer="NORMAL">
 	<Mesh file="peasant_f" />
 	<EmotionSet name="gertlinde_emotion" />
 	<BasicAttributes
