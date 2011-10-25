@@ -39,7 +39,7 @@ function dwarfenwallPeasant1()
 	dwarfenwall.city[13]["location"] = "locPeasant1";
 	dwarfenwall.city[13]["important"] = false;
 	dwarfenwall.city[13]["moving"] = true;
-	dwarfenwall.city[13]["refname"] = "Peasant 1";
+	dwarfenwall.city[13]["refname"] = "Peasant";
 	dwarfenwall.city[13]["phase"] = 1;
 	dwarfenwall.city[13]["phaseCount"] = 4;
 	-- commands for phase 1
@@ -75,7 +75,7 @@ function dwarfenwallPeasant2()
 	dwarfenwall.city[14]["location"] = "locPeasant5";
 	dwarfenwall.city[14]["important"] = false;
 	dwarfenwall.city[14]["moving"] = true;
-	dwarfenwall.city[14]["refname"] = "Peasant 2";
+	dwarfenwall.city[14]["refname"] = "Peasant";
 	dwarfenwall.city[14]["phase"] = 1;
 	dwarfenwall.city[14]["phaseCount"] = 6;
 	-- commands for phase 1
@@ -134,7 +134,7 @@ function dwarfenwallPeasant3()
 	dwarfenwall.city[15]["location"] = "locPeasant7";
 	dwarfenwall.city[15]["important"] = false;
 	dwarfenwall.city[15]["moving"] = true;
-	dwarfenwall.city[15]["refname"] = "Peasant 3";
+	dwarfenwall.city[15]["refname"] = "Peasant";
 	dwarfenwall.city[15]["phase"] = 1;
 	dwarfenwall.city[15]["phaseCount"] = 6;
 	-- commands for phase 1
