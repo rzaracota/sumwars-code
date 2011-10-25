@@ -288,11 +288,56 @@
                 <Property Name="Alpha" Value="0" />
                 <Property Name="Visible" Value="False" />
                 <Property Name="InheritsAlpha" Value="False" />
-                <Property Name="UnifiedAreaRect" Value="{{0.0376348,0},{0.0812315,0},{0.970961,0},{0.881281,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.01,0},{0.08,0},{0.99,0},{0.89,0}}" />
                 <Window Type="TaharezLook/Checkbox" Name="GrabMouseInWindowedModeBox" >
                     <Property Name="Text" Value="Grab mouse in windowed mode (needs restart)" />
                     <Property Name="InheritsAlpha" Value="False" />
-                    <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.0241282,0},{0.98,0},{0.124128,0}}" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.02,0},{0.98,0},{0.125,0}}" />
+                </Window>
+                <Window Type="TaharezLook/StaticText" Name="VideoDriver" >
+                    <Property Name="Text" Value="Video Driver" />
+                    <Property Name="HorzExtent" Value="168" />
+                    <Property Name="VertExtent" Value="25.5702" />
+                    <Property Name="FrameEnabled" Value="False" />
+                    <Property Name="InheritsAlpha" Value="False" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.15,0},{0.34,0},{0.25,0}}" />
+                    <Property Name="BackgroundEnabled" Value="False" />
+                </Window>
+                <Window Type="TaharezLook/Combobox" Name="VideoDriverBox" >
+                    <Property Name="InheritsAlpha" Value="False" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.35,0},{0.15,0},{0.98,0},{0.25,0}}" />
+                    <Property Name="UnifiedSize" Value="{{0.4,0},{0.5,0}}" />
+                    <Property Name="MaxEditTextLength" Value="1073741823" />
+                </Window>
+                <Window Type="TaharezLook/StaticText" Name="DisplayMode" >
+                    <Property Name="Text" Value="Display Mode" />
+                    <Property Name="HorzExtent" Value="168" />
+                    <Property Name="VertExtent" Value="25.5702" />
+                    <Property Name="FrameEnabled" Value="False" />
+                    <Property Name="InheritsAlpha" Value="False" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.26,0},{0.34,0},{0.36,0}}" />
+                    <Property Name="BackgroundEnabled" Value="False" />
+                </Window>
+                <Window Type="TaharezLook/Combobox" Name="DisplayModeBox" >
+                    <Property Name="InheritsAlpha" Value="False" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.35,0},{0.26,0},{0.98,0},{0.36,0}}" />
+                    <Property Name="UnifiedSize" Value="{{0.4,0},{0.5,0}}" />
+                    <Property Name="MaxEditTextLength" Value="1073741823" />
+                </Window>
+                <Window Type="TaharezLook/StaticText" Name="Resolution" >
+                    <Property Name="Text" Value="Resolution" />
+                    <Property Name="HorzExtent" Value="168" />
+                    <Property Name="VertExtent" Value="25.5702" />
+                    <Property Name="FrameEnabled" Value="False" />
+                    <Property Name="InheritsAlpha" Value="False" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.37,0},{0.34,0},{0.47,0}}" />
+                    <Property Name="BackgroundEnabled" Value="False" />
+                </Window>
+                <Window Type="TaharezLook/Combobox" Name="ResolutionBox" >
+                    <Property Name="InheritsAlpha" Value="False" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.35,0},{0.37,0},{0.98,0},{0.47,0}}" />
+                    <Property Name="UnifiedSize" Value="{{0.4,0},{0.5,0}}" />
+                    <Property Name="MaxEditTextLength" Value="1073741823" />
                 </Window>
                 <Window Type="TaharezLook/StaticText" Name="EnemyHighlightLabel" >
                     <Property Name="Text" Value="Enemy Highlight Color" />
@@ -300,32 +345,32 @@
                     <Property Name="VertExtent" Value="25.5702" />
                     <Property Name="FrameEnabled" Value="False" />
                     <Property Name="InheritsAlpha" Value="False" />
-                    <Property Name="UnifiedAreaRect" Value="{{0.018,0},{0.25,0},{0.35,0},{0.35,0}}" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.55,0},{0.34,0},{0.65,0}}" />
                     <Property Name="BackgroundEnabled" Value="False" />
                 </Window>
                 <Window Type="TaharezLook/Combobox" Name="EHColorBox" >
                     <Property Name="InheritsAlpha" Value="False" />
-                    <Property Name="UnifiedAreaRect" Value="{{0.4,0},{0.276731,0},{0.8,0},{0.376731,0}}" />
-                    <Property Name="UnifiedSize" Value="{{0.4,0},{0.5,0}}" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.35,0},{0.55,0},{0.98,0},{0.65,0}}" />
+                    <Property Name="UnifiedSize" Value="{{0.5,0},{0.42,0}}" />
                     <Property Name="MaxEditTextLength" Value="1073741823" />
                 </Window>
-				
-				<Window Type="TaharezLook/Button" Name="ResetGraphicsButton" >
+
+                <Window Type="TaharezLook/Button" Name="ResetGraphicsButton" >
                     <Property Name="Text" Value="Reset graphic options" />
-					<Property Name="HoverImage" Value="set:MainMenu image:SPBtnHover" />
+                    <Property Name="HoverImage" Value="set:MainMenu image:SPBtnHover" />
                     <Property Name="NormalImage" Value="set:MainMenu image:SPBtnNormal" />
                     <Property Name="PushedImage" Value="set:MainMenu image:SPBtnPushed" />
                     <Property Name="DisabledImage" Value="set:MainMenu image:SPBtnNormal" />
-					<Property Name="InheritsAlpha" Value="False" />
-                    <Property Name="UnifiedAreaRect" Value="{{0.018,0},{0.45,0},{0.35,0},{0.53,0}}" />
+                    <Property Name="InheritsAlpha" Value="False" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.018,0},{0.85,0},{0.35,0},{0.93,0}}" />
                 </Window>
-				<Window Type="TaharezLook/StaticText" Name="ResetGraphicsLabel" >
+                <Window Type="TaharezLook/StaticText" Name="ResetGraphicsLabel" >
                     <Property Name="Text" Value="Restart required for setting new options" />
                     <Property Name="HorzExtent" Value="168" />
                     <Property Name="VertExtent" Value="25.5702" />
                     <Property Name="FrameEnabled" Value="False" />
                     <Property Name="InheritsAlpha" Value="False" />
-                    <Property Name="UnifiedAreaRect" Value="{{0.4,0},{0.45,0},{0.9,0},{0.53,0}}" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.4,0},{0.85,0},{0.9,0},{0.93,0}}" />
                     <Property Name="BackgroundEnabled" Value="False" />
                 </Window>
             </Window>
