@@ -8,7 +8,7 @@
 		if (herbalist.finished) then
 			return _("And another good deed done. I could get used to this.")
 		else
-			return _("The herbalist of Joringsbridge wants to have the berries of 10 bushes. "..(herbalist.bushes).." berries have been collected.")
+			return _("The herbalist of Joringsbridge wants to have the berries of 10 bushes. Berries from "..(herbalist.bushes).." bushes have been collected.")
 		end
 	</Description>
 	
