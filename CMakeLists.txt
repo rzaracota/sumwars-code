@@ -184,6 +184,7 @@ SET(HEADER_FILES
   ./src/core/command.h
   ./src/core/mapgenerator.h
   ./src/core/options.h
+  ./src/core/sumwarshelper.h
   ./src/gui/minimapwindow.h
   ./src/gui/worldmap.h
   ./src/gui/mainmenu.h
@@ -304,6 +305,7 @@ SET(SRCS
   ./src/core/command.cpp
   ./src/core/mapgenerator.cpp
   ./src/core/options.cpp
+  ./src/core/sumwarshelper.cpp
   ./src/gui/minimapwindow.cpp
   ./src/gui/worldmap.cpp
   ./src/gui/mainmenu.cpp
