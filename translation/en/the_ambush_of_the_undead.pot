@@ -563,7 +563,7 @@ msgid "You will discover that the scrolls take you right here again."
 msgstr ""
 
 #: theFissure.xml
-msgid "Verflucht sei Windclaw!"
+msgid "Curse you, Windclaw!"
 msgstr ""
 
 #: theFissure.xml

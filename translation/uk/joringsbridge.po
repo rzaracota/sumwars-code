@@ -403,7 +403,7 @@ msgid ""
 msgstr "Видасьте золото, лише якщо виженуть гоблів і селяни лишуться живі."
 
 #: joringsbridge.xml
-msgid "Otherwise, do your work diligent."
+msgid "Otherwise, do your work diligently."
 msgstr "Інакше, робіть свою сумлінну роботу."
 
 #: joringsbridge.xml

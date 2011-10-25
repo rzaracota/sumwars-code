@@ -587,8 +587,8 @@ msgid "You will discover that the scrolls take you right here again."
 msgstr "Ви побачите, що згортки повернуть вас прямо сюди знов."
 
 #: theFissure.xml
-msgid "Verflucht sei Windclaw!"
-msgstr "Проклятий Віндклав!"
+msgid "Curse you, Windclaw!"
+msgstr "Чорти б тебе вхопили, Віндклав!"
 
 #: theFissure.xml
 msgid "Fine. Then we do it the hard way."
