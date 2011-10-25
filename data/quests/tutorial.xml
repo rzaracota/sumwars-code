@@ -1634,9 +1634,12 @@
 				--	return true;
 				--end		
 				--return false;
-				if(tutorial.energy==true and tutorial.cog==true)then
+				if((tutorial.energy==true) and (tutorial.cog==true))then
 					setObjectAnimation(trigger.used_object,"rotateCogs", 8000)
 					return (true)
+				else
+					unitSpeak(trigger.user,_("I have to find an energy source and a cog before that thing will work again."),"thoughtful")
+					return false
 				end;
 			</Condition>
 			<Effect>
