@@ -384,7 +384,7 @@ class Options
 		/**
 		 * \brief Obtain access to a mapping of lists of resolutions.
 		 */
-		std::map <std::string, std::vector <std::string>>& getEditableResolutionsMapping ()
+		std::map <std::string, std::vector <std::string> >& getEditableResolutionsMapping ()
 		{
 			return m_available_resolutions;
 		}
@@ -528,5 +528,5 @@ class Options
 		/**
 		 * \brief The available display resolutions.
 		 */
-		std::map <std::string, std::vector <std::string>> m_available_resolutions;
+		std::map <std::string, std::vector <std::string> > m_available_resolutions;
 };
