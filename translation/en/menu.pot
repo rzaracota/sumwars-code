@@ -656,8 +656,16 @@ msgstr ""
 msgid "Grab mouse in windowed mode (needs restart)"
 msgstr ""
 
-#: ../src/gui/optionswindow.cpp:391
+#: ../src/gui/optionswindow.cpp:414
+msgid "Video Driver"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:417
 msgid "Display Mode"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:420
+msgid "Resolution"
 msgstr ""
 
 #: ../src/gui/optionswindow.cpp:616

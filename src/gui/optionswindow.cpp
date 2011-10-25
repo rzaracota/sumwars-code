@@ -191,7 +191,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 		std::string recommended = gettext (" - recommended");
 		std::string sum = modeName + recommended;
 
-		cbo->addItem(new StrListItem(sum,"",0));
+		cbo->addItem(new StrListItem((CEGUI::utf8*) sum.c_str(),"",0));
 	}
 	else
 	{
@@ -410,8 +410,14 @@ void OptionsWindow::updateTranslation()
 	box = static_cast<CEGUI::Checkbox*>(win_mgr.getWindow("GrabMouseInWindowedModeBox"));
 	box->setText((CEGUI::utf8*) gettext("Grab mouse in windowed mode (needs restart)"));
 	
+	label = win_mgr.getWindow("VideoDriver");
+	label->setText((CEGUI::utf8*) gettext("Video Driver"));
+	
 	label = win_mgr.getWindow("DisplayMode");
 	label->setText((CEGUI::utf8*) gettext("Display Mode"));
+	
+	label = win_mgr.getWindow("Resolution");
+	label->setText((CEGUI::utf8*) gettext("Resolution"));
 	
 	// Set the close button to "ok"
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow ("OptionsCloseButton"));
