@@ -10,9 +10,7 @@ License: MIT
 Visit http://www.cegui.org.uk for more information
 Files:
 	FairChar.tga
-	WindowsLook.tga
 	TaharezLook.tga  (Original)
-	vanilla.tga
 
 Artwork provided by: Michael Kempf (kemic)
 Default License: CC-BY-SA
