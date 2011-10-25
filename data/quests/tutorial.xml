@@ -1589,7 +1589,6 @@
 				setCutsceneMode(false)
 			</Effect>
 		</Event>
-
 		<!-- The Party gets the energy source-->		
 		<Event trigger="energySourceUsed">
 			<Effect>
@@ -1604,12 +1603,16 @@
 					print("wrong combination")
 					if(stat==0)then
 						--print("you were frozen")
+						unitSpeak(trigger.user,_("Yikes, it's freezing!"),"unhappy")
 					elseif(stat==1)then
+						unitSpeak(trigger.user,_("That felt like standing on a single mountaintop during a thunderstorm... and the energy source still won't come of."),"unhappy")
 						--print("you were electrocuted")
 					elseif(stat==2)then
+						unitSpeak(trigger.user,_("Ouch, I burnt my hands!"),"unhappy")
 						--print("you were burnt")
 					else
 						--print("nothing really happens")
+						unitSpeak(trigger.user,_("Hm... it's stuck. I think I may have to temper around with this setup a bit more."),"thoughtful")
 					end;
 					timedExecute('scriptobjectvar['..esrc..']["lockdown"] = nil',500);
 				end;

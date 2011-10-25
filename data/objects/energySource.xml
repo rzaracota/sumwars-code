@@ -8,6 +8,7 @@
 			if(scriptobjectvar[trigger.used_object]["lockdown"] ~= true)then
 				insertTrigger("energySourceUsed")
 				addTriggerVariable("used_object",trigger.used_object)
+				addTriggerVariable("user",trigger.user)
 				
 				scriptobjectvar[trigger.used_object]["lockdown"] = true;
 				--timedExecute('scriptobjectvar['..trigger.used_object..']["lockdown"] = nil',500);
