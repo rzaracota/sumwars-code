@@ -2488,6 +2488,12 @@ bool MainWindow::mouseMoved(const OIS::MouseEvent &evt) {
 	return m_cegui_system->injectMousePosition(evt.state.X.abs,evt.state.Y.abs);
 }
 
+
+
+/**
+	React to a mouse button being pressed.
+	@note: Input is only supported for the first 3 mouse buttons (left, right, middle) for the time being.
+*/
 bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn)
 {
 	m_gui_hit = false;
@@ -2495,13 +2501,22 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 	CEGUI::MouseButton button = CEGUI::NoButton;
 
 	if (btn == OIS::MB_Left)
+	{
 		button = CEGUI::LeftButton;
+	}
 	else if (btn == OIS::MB_Middle)
+	{
 		button = CEGUI::MiddleButton;
+	}
 	else if (btn == OIS::MB_Right)
+	{
 		button = CEGUI::RightButton;
+	}
 	else
-		return true;
+	{
+		// For the time being no input from more than 3 buttons is allowed.
+		return false;
+	}
 
     bool ret = false; // CEGUI 0.7 changed its default behaviour a little bit and creates a invisible root window that always processes events
 
@@ -2528,7 +2543,7 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 	// Koordinaten an denen der Mausklick stattfand
 	int x =evt.state.X.abs;
 	int y =evt.state.Y.abs;
-	DEBUGX("maus %i %i",x,y);
+	DEBUGX("mouse coords %i %i",x,y);
 
 	Player* player = m_document->getLocalPlayer();
 	if (player!=0)
@@ -2562,9 +2577,6 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 					m_document->getGUIState()->m_right_mouse_pressed=true;
 					m_document->onRightMouseButtonClick(pos);
 				}
-
-
-				
 			}
 		}
 
@@ -2573,39 +2585,55 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 	return ret;
 }
 
-bool MainWindow::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID btn) {
+
+/**
+	React to the mouse button being released.
+	@note: Input is only supported for the first 3 mouse buttons (left, right, middle) for the time being.
+*/
+bool MainWindow::mouseReleased (const OIS::MouseEvent &evt, OIS::MouseButtonID btn)
+{
 	CEGUI::MouseButton button = CEGUI::NoButton;
 
-	if (btn==OIS::MB_Left)
+	// TODO: There are 2 separate if-else blocks; check if it makes sense to unite them,
+	// or the sequence of events is really necessary.
+	if (btn == OIS::MB_Left)
 	{
 		DEBUGX("Button release");
-		m_document->getGUIState()->m_left_mouse_pressed=false;
-		m_document->getGUIState()->m_clicked_object_id=0;
+		m_document->getGUIState ()->m_left_mouse_pressed=false;
+		m_document->getGUIState ()->m_clicked_object_id=0;
 	}
-
-	if (btn==OIS::MB_Right)
+	else if (btn == OIS::MB_Right)
 	{
 		DEBUGX("Right Button release");
-		m_document->getGUIState()->m_right_mouse_pressed=false;
-		m_document->getGUIState()->m_clicked_object_id=0;
+		m_document->getGUIState ()->m_right_mouse_pressed=false;
+		m_document->getGUIState ()->m_clicked_object_id=0;
 	}
-	
-	if (btn == OIS::MB_Middle)
+	else if (btn == OIS::MB_Middle)
 	{
-		m_document->getGUIState()->m_middle_mouse_pressed=false;
+		m_document->getGUIState ()->m_middle_mouse_pressed=false;
+	}
+	else
+	{
+		// For the time being no input from more than 3 buttons is allowed.
+		return false;
 	}
 
 	if (btn == OIS::MB_Left)
+	{
 		button = CEGUI::LeftButton;
-
-	if (btn == OIS::MB_Middle)
+	}
+	else if (btn == OIS::MB_Middle)
+	{
 		button = CEGUI::MiddleButton;
-
-	if (btn == OIS::MB_Right)
+	}
+	else if (btn == OIS::MB_Right)
+	{
 		button = CEGUI::RightButton;
+	}
 
-	return m_cegui_system->injectMouseButtonUp(button);
+	return m_cegui_system->injectMouseButtonUp (button);
 }
+
 
 
 bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
