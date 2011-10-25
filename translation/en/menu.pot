@@ -660,6 +660,10 @@ msgstr ""
 msgid "Display Mode"
 msgstr ""
 
+#: ../src/gui/optionswindow.cpp:616
+msgid "Please restart the game\n for the changes to take effect!"
+msgstr ""
+
 #: ../src/gui/questinfo.cpp:160
 msgid "open"
 msgstr ""
