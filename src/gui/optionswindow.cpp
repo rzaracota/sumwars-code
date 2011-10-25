@@ -536,11 +536,11 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 
 			std::string configpath;
 #ifdef _WIN32
-			configpath =  SumwarsHelper::userPath() + "/ogre.cfg";
+			configpath = SumwarsHelper::userPath() + "/ogre.cfg";
 #elif defined __APPLE__
 			configpath = SumwarsHelper::macPath() + "/ogre.cfg";
 #else
-			configpath =  SumwarsHelper::userPath() + "/ogre.cfg";
+			configpath = SumwarsHelper::userPath() + "/ogre.cfg";
 #endif
 
 			// TODO: move handling to specialized function.
@@ -610,7 +610,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 			// Write the Ogre.cfg file
 			std::ofstream of (configpath);
 
-	        if (!of)
+			if (!of)
 			{
 				ERRORMSG ("Cannot write config");
 			}
@@ -633,9 +633,9 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 				of << std::endl;
 			}
 
-	        of.close();
+			of.close();
 			// ----------------------------------------------------------------
-	
+
 			// Show a notification.
 			CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton ();
 			CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow ("WarningDialogWindow");
