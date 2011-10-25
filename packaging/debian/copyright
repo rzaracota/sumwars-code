@@ -1,5 +1,5 @@
 This package was debianized by Manuel A. Fernandez Montecelo
-<manuel.montezelo@gmail.com> on 2011-10-21 10:12:35 UTC
+<manuel.montezelo@gmail.com> on 2011-10-26 10:12:35 UTC
 
 It was downloaded from http://sourceforge.net/projects/sumwars/
 
@@ -8,10 +8,21 @@ Upstream Authors: See AUTHORS file.
 Copyright: 2007-2011 The Summoning Wars Team
 	   See AUTHORS file for more information.
 
-License:
+License.txt file:
+--------------------------------------------------------------------------------
+All source code (content of subdirectory src) is under GPL v3, or
+later versions.  A copy of the license file is provided along with
+this package.
+
+
+All resources and data (content of subdirectories resources and data)
+is under CC-BY-SA. You can see the exact license text at:
+http://creativecommons.org/licenses/
+--------------------------------------------------------------------------------
+
 
 The code in 'src' is licensed under:
-
+--------------------------------------------------------------------------------
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -24,14 +35,14 @@ The code in 'src' is licensed under:
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+--------------------------------------------------------------------------------
 
 On Debian GNU/Linux systems, the complete text of the GNU General
 Public License (v3) can be found in '/usr/share/common-licenses/GPL-3'.
 
 
 The code in 'Dependencies/nlfg' is licensed under:
-
+--------------------------------------------------------------------------------
     Copyright (c) 2010 David Athay
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -51,7 +62,9 @@ The code in 'Dependencies/nlfg' is licensed under:
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
     IN THE SOFTWARE.
+--------------------------------------------------------------------------------
 
 
 The artwork and files in 'resources' are licensed under a mix of CC-BY-SA and
-CC-BY, please see License.txt file in each directory for details.
+CC-BY, please see 'resources/gui/imagesets/License.txt' file in each directory
+for details.
