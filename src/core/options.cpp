@@ -281,6 +281,7 @@ bool Options::writeToFile(const std::string& filename)
 	root->LinkEndChild(element);
 	element->SetAttribute("ehl_color", getEnemyHighlightColor().c_str());
 	element->SetAttribute("grabMouseWhenWindowed", getGrabMouseInWindowedMode());
+	element->SetAttribute("display_mode", getUsedDisplayMode());
 	
 	element = new TiXmlElement( "Language" );
 	root->LinkEndChild(element);

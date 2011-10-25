@@ -128,7 +128,13 @@ class OptionsWindow : public Window
 		 * \brief Behandelt Auswahl einer neuen Sprache
 		 */
 		bool onLanguageSelected(const CEGUI::EventArgs& evt);
-		
+
+		/**
+		 * \fn bool onDisplayModeSelected(const CEGUI::EventArgs& evt)
+		 * \brief React to the display mode being changed.
+		 */
+		bool onDisplayModeSelected (const CEGUI::EventArgs& evt);
+
 		/**
 		 * \fn bool onGrabMouseChanged(const CEGUI::EventArgs& evt)
 		 * \brief Handles changes to wheter the mouse will be grabbed or not in window mode

@@ -16,6 +16,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include <map>
 #include <set>
 
@@ -49,6 +50,19 @@ enum ShortkeyDestination
 	USE_SKILL_RIGHT=300,
 	CHEAT = 1000,
 };
+
+
+/**
+ * \enum DisplayModes
+ *
+ */
+enum DisplayModes
+{
+	FULLSCREEN_EX = 0,
+	WINDOWED_WITH_BORDER = 1,
+	WINDOWED_FULLSCREEN = 2
+};
+
 
 /**
  * Maps Keycodes to the Actions that are triggered by the keycode
@@ -322,6 +336,93 @@ class Options
 			m_grab_mouse = grabMouse;
 		}
 		
+
+		/**
+		 * \brief Returns the windowed fullscreen mode support.
+		 */
+		bool isWindowedFullscreenModeSupported ()
+		{
+			return m_windowed_fullscreen_mode_supported;
+		}
+
+
+		/**
+		 * \brief Sets the windowed fullscreen mode support.
+		 * \param supported Specify whether the setting is supported or not.
+		 */
+		void setWindowedFullscreenModeSupported (bool supported)
+		{
+			m_windowed_fullscreen_mode_supported = supported;
+		}
+
+
+		/**
+		 * \brief Returns the used display mode.
+		 */
+		DisplayModes getUsedDisplayMode ()
+		{
+			return m_used_display_mode;
+		}
+
+		/**
+		 * \brief Sets the display mode to use.
+		 */
+		void setUsedDisplayMode (DisplayModes newMode)
+		{
+			m_used_display_mode = newMode;
+		}
+
+
+		/**
+		 * \brief Get the list of video drivers that can be used. Note: you can edit the list (the ref is retrieved).
+		 */
+		std::vector <std::string>& getEditableAvailableVideoDrivers ()
+		{
+			return m_available_video_drivers;
+		}
+
+		/**
+		 * \brief Obtain access to a mapping of lists of resolutions.
+		 */
+		std::map <std::string, std::vector <std::string>>& getEditableResolutionsMapping ()
+		{
+			return m_available_resolutions;
+		}
+
+		/**
+		 * \brief Obtain the used screen resolution.
+		 */
+		const std::string& getUsedResolution () const
+		{
+			return m_used_resolution;
+		}
+
+
+		/**
+		 * \brief Set the resolution to use.
+		 */
+		void setUsedResolution (const std::string& newResolution)
+		{
+			m_used_resolution = newResolution;
+		}
+
+		/**
+		 * \brief Get the used video driver.
+		 */
+		const std::string& getUsedVideoDriver () const
+		{
+			return m_used_video_driver;
+		}
+
+
+		/**
+		 * \brief Set the used video driver.
+		 */
+		void setUsedVideoDriver (const std::string& newDriverName)
+		{
+			m_used_video_driver = newDriverName;
+		}
+
 		
 		/**
 		 * \brief Pushes the named value on the lua stack
@@ -330,6 +431,7 @@ class Options
 		 */
 		int getValue(std::string valname);
 		
+
 		/**
 		 * \brief Set the named member, value is taken from lua stack
 		 * \param valname of the value
@@ -398,4 +500,33 @@ class Options
 		 */
 		bool m_grab_mouse;
 
+		/**
+		 * \brief Is the windowed fullscreen mode supported?
+		 */
+		bool m_windowed_fullscreen_mode_supported;
+
+		/**
+		 * \brief The currently selected display mode.
+		 */
+		DisplayModes m_used_display_mode;
+
+		/**
+		 * \brief The currently loaded video driver.
+		 */
+		std::string m_used_video_driver;
+
+		/**
+		 * \brief The used screen/window displat resolution.
+		 */
+		std::string m_used_resolution;
+
+		/**
+		 * \brief The available video drivers.
+		 */
+		std::vector <std::string> m_available_video_drivers;
+
+		/**
+		 * \brief The available display resolutions.
+		 */
+		std::map <std::string, std::vector <std::string>> m_available_resolutions;
 };

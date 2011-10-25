@@ -163,18 +163,20 @@ class Application
 		void updateStartScreen(float percent);
         
 		/**
-		* \brief Sets (or updates) the icon to use for the application. The code inside the function is OS dependant.
-		*/
+		 * \brief Sets (or updates) the icon to use for the application. The code inside the function is OS dependant.
+		 */
 		void setApplicationIcon ();
 
+		// TODO: move to sumwarshelper?
 		/**
-		* \brief Retrieves (via output parameters) the settings requested by the user for the video mode size
-		* \param[out] videoModeWidth The horizontal screen resolution of the video mode.
-		* \param[out] videoModeHeight The vertical screen resolution of the video mode.
-		* \return Nothing.
-		* \author Augustin Preda (if anything doesn't work, he's the one to bash).
-		*/
-		void retrieveRenderSystemWindowSize (int& videoModeWidth, int& videoModeHeight);
+		 * \brief Retrieves (via output parameters) the settings requested by the user for the video mode size
+		 * \param[out] videoModeWidth The horizontal screen resolution of the video mode.
+		 * \param[out] videoModeHeight The vertical screen resolution of the video mode.
+		 * \return The full name of the entry for the resolution.
+		 * \author Augustin Preda (if anything doesn't work, he's the one to bash).
+		 */
+		std::string retrieveRenderSystemWindowSize (int& videoModeWidth, int& videoModeHeight);
+
 
 #ifdef __APPLE__
         /**

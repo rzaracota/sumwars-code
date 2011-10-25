@@ -194,7 +194,7 @@ bool Application::init(char *argv)
     
 	// Logger initialisieren
 	LogManager::instance().addLog("stdout",new StdOutLog(Log::LOGLEVEL_DEBUG));
-    LogManager::instance().addLog("logfile",new FileLog(path + "/sumwars.log",Log::LOGLEVEL_INFO));
+    LogManager::instance().addLog("logfile",new FileLog(path + "/sumwars.log",Log::LOGLEVEL_DEBUG));
 
 	Timer tm;
 	m_timer.start();
@@ -529,38 +529,46 @@ void Application::setApplicationIcon ()
 
 /**
 	Retrieves (via output parameters) the settings requested by the user for the video mode size
+	\param videoModeWidth The width specified in the video mode.
+	\param videoModeHeight The height specified in the video mode.
+	\return The full string containing the video mode specification, from the driver. It may include color depth.
 */
-void Application::retrieveRenderSystemWindowSize (int& videoModeWidth, int& videoModeHeight)
+std::string Application::retrieveRenderSystemWindowSize (int& videoModeWidth, int& videoModeHeight)
 {
+	std::string returnValue ("");
+
 	// If the user selected a Windowed mode, but with the size of the entire screen, do additional preparations.
-	Ogre::RenderSystem* myRenderSys = m_ogre_root->getRenderSystem();
+	Ogre::RenderSystem* myRenderSys = m_ogre_root->getRenderSystem ();
 	if (myRenderSys != 0)
 	{
-		Ogre::ConfigOptionMap myCfgMap = myRenderSys->getConfigOptions();
+		Ogre::ConfigOptionMap myCfgMap = myRenderSys->getConfigOptions ();
 		for (Ogre::ConfigOptionMap::iterator it = myCfgMap.begin ();
 				it != myCfgMap.end (); 
 				++ it)
 		{
 			DEBUG ("option name=[%s], val=[%s]", it->second.name.c_str (), it->second.currentValue.c_str ());
 		}
+
 		Ogre::ConfigOptionMap::iterator opt_it = myCfgMap.find ("Video Mode");
 		if (opt_it != myCfgMap.end ())
 		{
 			DEBUG ("Currently selected video mode: %s",  opt_it->second.currentValue.c_str ());
-			std::string sFullEntry = opt_it->second.currentValue;
+			returnValue = opt_it->second.currentValue;
 			std::string sLeft, sRight;
-			int nPos = sFullEntry.find(" ");
-			if( nPos == std::string::npos )
+			int nPos = returnValue.find (" ");
+			if (nPos == std::string::npos)
 			{
 				// some error...
-				ERRORMSG ("Unable to find space in [%s]", sFullEntry.c_str ());
-				return;
+				ERRORMSG ("Unable to find space in [%s]", returnValue.c_str ());
+				return "";
 			}
-			sLeft = sFullEntry.substr(0, nPos);
-			sRight= sFullEntry.substr(nPos+3);// + 3 for " x "
-			nPos = sRight.find(" ");
+
+			sLeft = returnValue.substr (0, nPos);
+			sRight= returnValue.substr (nPos + 3);// + 3 for " x "
+			nPos = sRight.find (" ");
 			std::string sAux;
-			if( nPos == std::string::npos )
+
+			if (nPos == std::string::npos)
 			{
 				// we don't have a colour depth.
 				sAux = sRight;
@@ -569,11 +577,19 @@ void Application::retrieveRenderSystemWindowSize (int& videoModeWidth, int& vide
 			{
 				sAux = sRight.substr(0, nPos);
 			}
-			videoModeWidth = atoi( sLeft.c_str() );
-			videoModeHeight = atoi( sAux.c_str() );
+
+			videoModeWidth = atoi (sLeft.c_str ());
+			videoModeHeight = atoi (sAux.c_str ());
 		}
 	}
+	else
+	{
+		ERRORMSG ("Called retrieveRenderSystemWindowSize, but no render system is available!");
+	}
+
+	return returnValue;
 }
+
 
 
 /**
@@ -592,21 +608,62 @@ bool Application::initOgre()
 	// Initialize Ogre with the automatic creation of a window.
 	m_window = m_ogre_root->initialise (true, "Summoning Wars"); // TODO: define constant for name of obtain from config file.
 
+	if (m_window->isFullScreen ())
+	{
+		Options::getInstance()->setUsedDisplayMode (FULLSCREEN_EX);
+	}
+	else
+	{
+		Options::getInstance()->setUsedDisplayMode (WINDOWED_WITH_BORDER);
+	}
+
+	const Ogre::RenderSystemList rsList = m_ogre_root->getAvailableRenderers ();
+	for (Ogre::RenderSystemList::const_iterator it = rsList.begin (); it != rsList.end (); ++ it)
+	{
+		Ogre::String rsName = (*it)->getName ();
+		Options::getInstance ()->getEditableAvailableVideoDrivers ().push_back (rsName);
+		Ogre::ConfigOptionMap optionsMap = (*it)->getConfigOptions ();
+
+		for (Ogre::ConfigOptionMap::iterator optit = optionsMap.begin(); optit != optionsMap.end(); ++ optit)
+		{
+			if (optit->second.name == "Video Mode")
+			{
+				Ogre::StringVector possibleValues = optit->second.possibleValues;
+				Options::getInstance ()->getEditableResolutionsMapping()[rsName].clear ();
+				
+				for (Ogre::StringVector::const_iterator subit = possibleValues.begin ();
+					subit != possibleValues.end (); ++ subit)
+				{
+					Options::getInstance ()->getEditableResolutionsMapping()[rsName].push_back (*subit);
+				}
+			}
+		}
+	}
+
+	Options::getInstance ()->setUsedVideoDriver (m_ogre_root->getRenderSystem()->getName ());
+
 	setApplicationIcon ();
-	
+
+	int videoModeWidth = 0;
+	int videoModeHeight = 0;
+	std::string usedResolution ("");
+	usedResolution = retrieveRenderSystemWindowSize (videoModeWidth, videoModeHeight);
+
+	Options::getInstance ()->setUsedResolution (usedResolution);
+	DEBUG ("Stored used resolution into global options [%s]", usedResolution.c_str ());
+	DEBUG ("Size should be %d x %d", videoModeWidth, videoModeHeight);
+
 	//
 	// Platform specific code: 
 	// On Windows, if the user specifies Windowed mode and a Width and Height equal to the screen size, 
 	// remove the window borders.
 	//
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	Options::getInstance()->setWindowedFullscreenModeSupported (true);
+
 	if (! m_window->isFullScreen ())
 	{
-		int videoModeWidth = 0;
-		int videoModeHeight = 0;
-
-		retrieveRenderSystemWindowSize (videoModeWidth, videoModeHeight);
-
+		// -------------------------------- beginning of platform dependent code --------------------------
 		int desktopWidth = (int)GetSystemMetrics (SM_CXSCREEN);
 		int desktopHeight = (int)GetSystemMetrics (SM_CYSCREEN);
 
@@ -615,7 +672,6 @@ bool Application::initOgre()
 			DEBUG ("Windowed (Fullscreen) mode selected; desktop at %d x %d.", desktopWidth, desktopHeight);
 			DEBUG ("Correcting settings.");
 
-			// -------------------------------- beginning of platform dependent code --------------------------
 			// Retrieve the window handle
 			HWND hwnd; // handle of window
 			m_window->getCustomAttribute ("WINDOW", &hwnd);
@@ -629,8 +685,10 @@ bool Application::initOgre()
 
 			SendMessage (hwnd, WM_STYLECHANGING, 0, WS_OVERLAPPED);
 			UpdateWindow (hwnd);
-			// ----------------------------------- end of platform dependent code -----------------------------
+
+			Options::getInstance()->setUsedDisplayMode (WINDOWED_FULLSCREEN);
 		}
+		// ----------------------------------- end of platform dependent code -----------------------------
 	}
 #endif //OGRE_PLATFORM_WIN32
 

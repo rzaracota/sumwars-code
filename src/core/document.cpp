@@ -471,8 +471,10 @@ void Document::onRightMouseButtonClick(Vector pos)
 
 	command.m_number=0;
 
-	if (command.m_id!=0)
-		DEBUGX("angeklicktes Objekt %i",command.m_id);
+	if (command.m_id != 0)
+	{
+		DEBUGX ("Clicked object %i",command.m_id);
+	}
 
 
 	// Paket an den Server senden
@@ -783,9 +785,23 @@ bool Document::checkSubwindowsAllowed()
 	ok &= (getState() == RUNNING || getState() == SHUTDOWN_REQUEST);
 	ok &= (getGUIState()->m_shown_windows & SAVE_EXIT) == 0;
 	ok &= (getGUIState()->m_shown_windows & (QUESTIONBOX | TRADE)) == 0;
-	if (getLocalPlayer() != 0 && getLocalPlayer()->getRegion() !=0)
+
+	// Also check to see if the current player is involved in anything that doesn't allow 
+	if (getLocalPlayer() != 0)
 	{
-		ok &= ~getLocalPlayer()->getRegion()->getCutsceneMode();
+		// Check if the region is currently in a cutscene mode. 
+		// (The player shouldn't be allowed to open subwindows (E.g. the inventory) during a cutscene.
+		if (getLocalPlayer()->getRegion() !=0)
+		{
+			ok &= !getLocalPlayer()->getRegion()->getCutsceneMode();
+
+			// Also check if the current player is involved in a dialogue.
+			// Add the check here, because the dialog is obtained from the region.
+			if (getLocalPlayer ()->getDialogue () != 0)
+			{
+				ok = false;
+			}
+		}
 	}
 	return ok;
 }
@@ -1040,6 +1056,7 @@ void Document::onButtonMinimapClicked()
 	m_modified |= WINDOWS_MODIFIED;
 }
 
+
 void Document::onButtonOptionsClicked()
 {
 	if (!checkSubwindowsAllowed() && getGUIState()->m_sheet ==  Document::GAME_SCREEN)
@@ -1051,13 +1068,13 @@ void Document::onButtonOptionsClicked()
 	}
 	else
 	{
-
 		getGUIState()->m_shown_windows |= OPTIONS;
 	}
 
-	// Geoeffnete Fenster haben sich geaendert
+	// Opened windows have changed.
 	m_modified |= WINDOWS_MODIFIED;
 }
+
 
 void Document::onButtonCloseTrade()
 {

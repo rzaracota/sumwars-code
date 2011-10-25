@@ -19,6 +19,10 @@
 #include "music.h"
 #include "sumwarshelper.h"
 
+// The following includes are added to support video mode changes in the options window.
+#include <OGRE/OgreConfigFile.h>
+#include <OGRE/OgreException.h>
+
 OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	:Window(doc)
 {
@@ -162,7 +166,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	}
 	DEBUG("%s",locale.c_str());
 	
-	for (int i=0; i<cbo->getItemCount(); i++)
+	for (int i=0; i < (int)cbo->getItemCount(); i++)
 	{
 		StrListItem* item = static_cast<StrListItem*>(cbo->getListboxItemFromIndex(i));
 		if (locale == item->m_data)
@@ -174,6 +178,85 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	cbo->handleUpdatedListItemData();
 
 	cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onLanguageSelected, this));
+
+	// TODO: add comments.
+	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("DisplayModeBox"));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Fullscreen (Exclusive Mode)"),"",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Window (With Borders)"),"",0));
+
+	if (Options::getInstance ()->isWindowedFullscreenModeSupported ())
+	{
+		DEBUG ("Windowed fullscreen mode supported! Adding combobox item.");
+		std::string modeName = gettext("Window (Fullscreen)");
+		std::string recommended = gettext (" - recommended");
+		std::string sum = modeName + recommended;
+
+		cbo->addItem(new StrListItem(sum,"",0));
+	}
+	else
+	{
+		DEBUG ("Windowed fullscreen mode NOT supported!");
+	}
+
+	cbo->setReadOnly(true);
+	DisplayModes myDisplayMode = Options::getInstance ()->getUsedDisplayMode ();
+	if (myDisplayMode == WINDOWED_FULLSCREEN && !Options::getInstance ()->isWindowedFullscreenModeSupported ())
+	{
+		myDisplayMode = WINDOWED_WITH_BORDER;
+	}
+	cbo->setItemSelectState((size_t) myDisplayMode, true);
+	cbo->handleUpdatedListItemData();
+	cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onDisplayModeSelected, this));
+
+	// TODO: add comments.
+	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("VideoDriverBox"));
+	std::vector <std::string> videoDrivers = Options::getInstance ()->getEditableAvailableVideoDrivers ();
+	std::string selectedVideoDriver = Options::getInstance ()->getUsedVideoDriver ();
+	for (std::vector <std::string>::const_iterator it = videoDrivers.begin (); it != videoDrivers.end (); ++ it)
+	{
+		std::string myName = *it;
+		cbo->addItem(new StrListItem((CEGUI::utf8*) myName.c_str (),"",0));
+		if (myName == selectedVideoDriver)
+		{
+			cbo->setItemSelectState (cbo->getItemCount () - 1, true);
+		}
+	}
+	cbo->setReadOnly (true);
+	cbo->setEnabled (false);
+
+	cbo->handleUpdatedListItemData();
+//	cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onDisplayModeSelected, this));
+
+	// TODO: add comments.
+	std::string usedResolution = Options::getInstance ()->getUsedResolution ();
+	DEBUG ("Used resolution is: [%s]", usedResolution.c_str ());
+	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("ResolutionBox"));
+	std::vector <std::string> resolutions = Options::getInstance ()->getEditableResolutionsMapping ()[selectedVideoDriver];
+	for (std::vector <std::string>::const_iterator it = resolutions.begin (); it != resolutions.end (); ++ it)
+	{
+		std::string myName = *it;
+		cbo->addItem(new StrListItem((CEGUI::utf8*) myName.c_str (),"",0));
+		if (myName == usedResolution)
+		{
+			cbo->setItemSelectState (cbo->getItemCount () - 1, true);
+		}
+	}
+	cbo->setReadOnly (true);
+
+	// For windowed (fullscreen) mode, make sure the resolution can't be edited.
+	if (myDisplayMode == WINDOWED_FULLSCREEN)
+	{
+		cbo->setEnabled (false);
+		// Clear the selection flag.
+		if (cbo->getSelectedItem () != 0)
+		{
+			cbo->getSelectedItem ()->setSelected (false);
+		}
+		cbo->setText ("");
+	}
+
+	cbo->handleUpdatedListItemData();
+//	cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onResolutionChanged, this));
 
 	reset();
 	updateTranslation();
@@ -304,8 +387,13 @@ void OptionsWindow::updateTranslation()
 	box = static_cast<CEGUI::Checkbox*>(win_mgr.getWindow("GrabMouseInWindowedModeBox"));
 	box->setText((CEGUI::utf8*) gettext("Grab mouse in windowed mode (needs restart)"));
 	
-	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "OptionsCloseButton"));
+	label = win_mgr.getWindow("DisplayMode");
+	label->setText((CEGUI::utf8*) gettext("Display Mode"));
+	
+	// Set the close button to "ok"
+	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow ("OptionsCloseButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));
+
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "ResetGraphicsButton"));
 	btn->setText((CEGUI::utf8*) gettext("Reset graphic options"));
 }
@@ -351,8 +439,185 @@ bool OptionsWindow::onAreaMouseButtonPressed(const CEGUI::EventArgs& evt)
 	return true;
 }
 
-bool OptionsWindow::onButtonOkClicked(const CEGUI::EventArgs& evt)
+bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 {
+	// TODO: move video mode checks to separate function? or just wait for the full integration with the rest of the options?
+
+	// Check to see if the display mode was updated. The display mode is stored in a different file at the moment.
+	// TODO: move towards integrated settings file (single file for most settings).
+	{
+		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+		CEGUI::Combobox* cbo = cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("DisplayModeBox"));
+
+		if (cbo == 0)
+		{
+			return false;
+		}
+
+		CEGUI::ListboxItem* item = cbo->getSelectedItem();
+
+		if (item == 0)
+		{
+			return false;
+		}
+
+		size_t selectionIndex = (int)cbo->getItemIndex (item);
+
+		DEBUG ("selected display mode %s",item->getText().c_str());
+		DEBUG ("idx of selection is: %d", selectionIndex);
+
+		bool someVideoSettingsWereChanged (false);
+		DisplayModes userMode = (DisplayModes)selectionIndex;
+		someVideoSettingsWereChanged |= (userMode != Options::getInstance ()->getUsedDisplayMode ());
+
+		std::string userResolution;
+		cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("ResolutionBox"));
+
+		if (cbo == 0)
+		{
+			return false;
+		}
+
+		userResolution = string (cbo->getText ().c_str ());
+		if (userResolution.length () == 0)
+		{
+			userResolution = Options::getInstance ()->getUsedResolution ();
+		}
+		DEBUG ("selected userResolution %s", userResolution.c_str());
+
+		if (userMode == WINDOWED_FULLSCREEN)
+		{
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+			int desktopWidth = (int)GetSystemMetrics (SM_CXSCREEN);
+			int desktopHeight = (int)GetSystemMetrics (SM_CYSCREEN);
+			userResolution = SumwarsHelper::getUpdatedResolutionString (userResolution, desktopWidth, desktopHeight);
+#endif
+			DEBUG ("Updated selected userResolution to [%s]", userResolution.c_str());
+		}
+
+		someVideoSettingsWereChanged |= (userResolution != Options::getInstance ()->getUsedResolution ());
+
+		if (someVideoSettingsWereChanged)
+		{
+			// Store it into the options; for the time being it is only saved there, not read from there!
+			// The read is performed from the actual settings!
+			// TODO: initialize the graphics subsystem with the settings in the options.xml file instead of the default ogre file.
+			Options::getInstance ()->setUsedDisplayMode (userMode);
+			Options::getInstance ()->setUsedResolution (userResolution);
+
+			std::string configpath;
+#ifdef _WIN32
+			configpath =  SumwarsHelper::userPath() + "/ogre.cfg";
+#elif defined __APPLE__
+			configpath = SumwarsHelper::macPath() + "/ogre.cfg";
+#else
+			configpath =  SumwarsHelper::userPath() + "/ogre.cfg";
+#endif
+
+			// TODO: move handling to specialized function.
+#if OGRE_PLATFORM == OGRE_PLATFORM_IPHONE
+#pragma message("Iphone support not added for saving video mode!")
+#endif
+	        Ogre::ConfigFile cfg;
+			try
+			{
+				// Don't trim whitespace
+				cfg.load (configpath, "\t:=", false);
+			}
+			catch (Ogre::Exception& e)
+			{
+				if (e.getNumber () == Ogre::Exception::ERR_FILE_NOT_FOUND)
+				{
+					return false;
+				}
+				else
+				{
+					throw;
+				}
+	        }
+
+			// Prepare the list of values to write.
+
+			Ogre::String fullScreenValueToSet ("No");
+			if (Options::getInstance ()->getUsedDisplayMode () == FULLSCREEN_EX)
+			{
+				fullScreenValueToSet = "Yes";
+			}
+
+			Ogre::String resolutionValueToSet ("");
+			resolutionValueToSet = Options::getInstance ()->getUsedResolution ();
+			DEBUG ("Saving options; will set resolution to : [%s]", resolutionValueToSet);
+
+			// Update the settings; 
+			Ogre::ConfigFile::SectionIterator iSection = cfg.getSectionIterator ();
+			while (iSection.hasMoreElements ())
+			{
+				const Ogre::String& renderSystemName = iSection.peekNextKey ();
+				Ogre::ConfigFile::SettingsMultiMap& settings = *iSection.getNext();
+
+				Ogre::ConfigFile::SettingsMultiMap::iterator it;
+
+				// Note: this will update for ALL render systems.
+				it = settings.find ("Full Screen");
+				if (it != settings.end ())
+				{
+					it->second = fullScreenValueToSet;
+				}
+
+				// Note: this will update only for the selected render systems.
+				if (renderSystemName == Options::getInstance ()->getUsedVideoDriver ())
+				{
+					DEBUG ("*** checking video mode setting");
+					it = settings.find ("Video Mode");
+					if (it != settings.end ())
+					{
+						it->second = resolutionValueToSet;
+						DEBUG ("*** Set res entry");
+					}
+				}
+			}
+
+			// ----------------------------------------------------------------
+			// Write the Ogre.cfg file
+			std::ofstream of (configpath);
+
+	        if (!of)
+			{
+				ERRORMSG ("Cannot write config");
+			}
+	
+			iSection = cfg.getSectionIterator ();
+			while (iSection.hasMoreElements ())
+			{
+				const Ogre::String& renderSystemName = iSection.peekNextKey ();
+				if (renderSystemName.length () > 0)
+				{
+					of << "[" << renderSystemName << "]" << std::endl;
+				}
+				Ogre::ConfigFile::SettingsMultiMap& settings = *iSection.getNext ();
+
+				Ogre::ConfigFile::SettingsMultiMap::const_iterator it;
+				for (it = settings.begin (); it != settings.end (); ++ it)
+				{
+					of << it->first << "=" << it->second << std::endl;
+				}
+				of << std::endl;
+			}
+
+	        of.close();
+			// ----------------------------------------------------------------
+	
+			// Show a notification.
+			CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton ();
+			CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow ("WarningDialogWindow");
+			message->setInheritsAlpha (false);
+			message->setVisible (true);
+			message->setModalState (true);
+			win_mgr.getWindow ("WarningDialogLabel")->setText ((CEGUI::utf8*) gettext ("Please restart the game\n for the changes to take effect!"));
+
+		} // user display mode changed.
+	}
+
 	m_document->onButtonOptionsClicked();
 	return true;
 }
@@ -456,6 +721,74 @@ bool OptionsWindow::onLanguageSelected(const CEGUI::EventArgs& evt)
 		DEBUGX("selected Language %s",item->getText().c_str());
 		StrListItem* sitem = static_cast<StrListItem*>(item);
 		Gettext::setLocale(sitem->m_data.c_str());
+	}
+
+	return true;
+}
+
+bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
+{
+	const CEGUI::MouseEventArgs& we =
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
+
+	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(we.window);
+
+	if (cbo == 0)
+	{
+		return false;
+	}
+
+	CEGUI::ListboxItem* item = cbo->getSelectedItem();
+
+	if (item == 0)
+	{
+		return false;
+	}
+
+	size_t selectionIndex = (int)cbo->getItemIndex (item);
+
+	//DEBUG ("selected display mode %s",item->getText().c_str());
+	//DEBUG ("idx of selection is: %d", selectionIndex);
+	//Options::getInstance ()->setUsedDisplayMode ((DisplayModes)selectionIndex);
+
+	DisplayModes myDisplayMode = (DisplayModes)selectionIndex;
+
+	// For windowed (fullscreen) mode, make sure the resolution can't be edited.
+
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("ResolutionBox"));
+	if (myDisplayMode == WINDOWED_FULLSCREEN)
+	{
+		cbo->setEnabled (false);
+		// Clear the selection flag.
+		if (cbo->getSelectedItem () != 0)
+		{
+			cbo->getSelectedItem ()->setSelected (false);
+		}
+		cbo->setText ("");
+		cbo->handleUpdatedListItemData();
+	}
+	else
+	{
+		cbo->setEnabled (true);
+
+		std::string usedResolution = Options::getInstance ()->getUsedResolution ();
+		
+		DEBUG ("Will try to show that the used resolution is [%s]", usedResolution.c_str ());
+
+		for (size_t i = 0; i < cbo->getItemCount (); ++ i)
+		{
+			CEGUI::ListboxItem* item = cbo->getListboxItemFromIndex (i);
+			CEGUI::String itemText = item->getText ();
+			if (usedResolution == itemText)
+			{
+				cbo->setItemSelectState(i, true);
+				
+				DEBUG ("Located item [%s] at [%d]", itemText.c_str (), i);
+			}
+			DEBUG ("Compared with [%s]", itemText.c_str ());
+		}
+		cbo->handleUpdatedListItemData();
 	}
 
 	return true;
