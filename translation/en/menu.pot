@@ -569,11 +569,11 @@ msgid "Window (With Borders)"
 msgstr ""
 
 #: ../src/gui/optionswindow.cpp:190
-"Window (Fullscreen)"
+msgid "Window (Fullscreen)"
 msgstr ""
 
 #: ../src/gui/optionswindow.cpp:191
-" - recommended"
+msgid " - recommended"
 msgstr ""
 
 #: ../src/gui/optionswindow.cpp:211
