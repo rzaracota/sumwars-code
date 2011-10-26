@@ -387,7 +387,7 @@ void SkillTree::update()
 	// update labels for skillpoints and nextskillpoint at
 	// value for next skillpoint level calculation is hacky!
 	int skilllvls[20] = {2,3,5,7,10,15,20,25,30,35,40,45,50,60,70,80,90,100,1000};
-	int nextlvl;
+	//int nextlvl; // 2011.10.26: found as unused
 	int lvlid;
 	for (lvlid=0; lvlid<20; lvlid++)
 	{
