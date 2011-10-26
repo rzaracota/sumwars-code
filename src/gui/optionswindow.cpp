@@ -575,7 +575,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 
 			Ogre::String resolutionValueToSet ("");
 			resolutionValueToSet = Options::getInstance ()->getUsedResolution ();
-			DEBUG ("Saving options; will set resolution to : [%s]", resolutionValueToSet);
+			DEBUG ("Saving options; will set resolution to : [%s]", resolutionValueToSet.c_str());
 
 			// Update the settings; 
 			Ogre::ConfigFile::SectionIterator iSection = cfg.getSectionIterator ();
@@ -608,7 +608,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 
 			// ----------------------------------------------------------------
 			// Write the Ogre.cfg file
-			std::ofstream of (configpath);
+			std::ofstream of (configpath.c_str());
 
 			if (!of)
 			{
