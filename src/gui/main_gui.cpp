@@ -35,7 +35,7 @@ int main (int argc, char *argv[]) {
 	#ifndef WIN32
 	if (argc>=2)
 	{
-		save = "./save/";
+		save = "~/.sumwars/save/";
 		save += argv[1];
 	}
 	else

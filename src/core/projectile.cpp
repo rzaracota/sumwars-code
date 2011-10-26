@@ -457,12 +457,15 @@ void Projectile::handleFlying(float dtime)
 
 				DEBUGX("dir %f %f",dir.m_x,dir.m_y);
 				m_timer =0;
-
-				// Schaden pro Sprung um 20% reduzieren
-				if (m_flags & BOUNCING)
+				
+				if (World::getWorld()->isServer())
 				{
-					for (int i=0; i<4; i++)
-						m_damage->m_multiplier[i] *= 0.7;
+					// Schaden pro Sprung um 20% reduzieren
+					if (m_flags & BOUNCING)
+					{
+						for (int i=0; i<4; i++)
+							m_damage->m_multiplier[i] *= 0.7;
+					}
 				}
 
 			}
@@ -778,23 +781,24 @@ void Projectile::destroy()
 	}
 	else if (m_flags & MULTI_EXPLODES)
 	{
-							// Flag mehrfach explodierend gesetzt
+		// Flag mehrfach explodierend gesetzt
 		DEBUGX("multiexploding");
 		Vector dir = getSpeed();
 		dir.normalize();
 		dir *= getShape()->m_radius;
 							
-							// Schaden halbieren
-		Damage dmg;
-		dmg = (*m_damage);
-		for (int i=0;i<4;i++)
-		{
-			dmg.m_multiplier[i] *= 0.5;
-		}
+		// Schaden halbieren
 
 		// vier neue Projektile erzeugen
 		if (World::getWorld()->isServer())
 		{
+			Damage dmg;
+			dmg = (*m_damage);
+			for (int i=0;i<4;i++)
+			{
+				dmg.m_multiplier[i] *= 0.5;
+			}
+			
 			dir.rotate(PI / 4);
 			Projectile* pr;
 			pr = ObjectFactory::createProjectile(getSubtype());

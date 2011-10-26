@@ -878,7 +878,8 @@ void Document::onButtonStartHostGame()
 void Document::onButtonStartJoinGame()
 {
 	setServer(false);
-
+	m_single_player = false;
+	
 	// starten
 	setState(Document::START_GAME);
 }
