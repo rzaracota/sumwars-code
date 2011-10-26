@@ -232,14 +232,10 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	// Set the list to read-only, so that the user can't type in entries.
 	cbo->setReadOnly (true);
 	
-	// Temporary: Disable the control. This is because there may be issues with OpenGL on Windows. (E.g. On some ATI cards, the CEGUI menu is not visible).
-	cbo->setEnabled (false);
-
 	// Since we may update the selected item, it's necessary to also call the internal update.
 	cbo->handleUpdatedListItemData ();
 
-	// Temporary: Disable the callback.
-	//	cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onVideoDriverSelected, this));
+	cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onVideoDriverSelected, this));
 
 	//
 	// Add the resolution list. Also select the currently used resolution.  ------------------------
@@ -476,15 +472,33 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 	// TODO: move towards integrated settings file (single file for most settings).
 	{
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-		CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("DisplayModeBox"));
 
+		// Flag to keep track of whether we need updating of the settings.
+		bool someVideoSettingsWereChanged (false);
+
+		// Check the driver for changes. ---------------
+		CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("VideoDriverBox"));
 		if (cbo == 0)
 		{
 			return false;
 		}
 
 		CEGUI::ListboxItem* item = cbo->getSelectedItem();
+		if (item == 0)
+		{
+			return false;
+		}
+		std::string selectedDriverName = item->getText ().c_str ();
+		someVideoSettingsWereChanged  |= (selectedDriverName != Options::getInstance ()->getUsedVideoDriver ());
 
+		// Check the display mode for changes. ---------------
+		cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("DisplayModeBox"));
+		if (cbo == 0)
+		{
+			return false;
+		}
+
+		item = cbo->getSelectedItem();
 		if (item == 0)
 		{
 			return false;
@@ -494,11 +508,11 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 
 		DEBUG ("selected display mode %s",item->getText().c_str());
 		DEBUG ("idx of selection is: %d", selectionIndex);
-
-		bool someVideoSettingsWereChanged (false);
+		
 		DisplayModes userMode = (DisplayModes)selectionIndex;
 		someVideoSettingsWereChanged |= (userMode != Options::getInstance ()->getUsedDisplayMode ());
 
+		// Check the resolution for changes ---------------------.
 		std::string userResolution;
 		cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("ResolutionBox"));
 
@@ -533,6 +547,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 			// TODO: initialize the graphics subsystem with the settings in the options.xml file instead of the default ogre file.
 			Options::getInstance ()->setUsedDisplayMode (userMode);
 			Options::getInstance ()->setUsedResolution (userResolution);
+			Options::getInstance ()->setUsedVideoDriver (selectedDriverName);
 
 			std::string configpath;
 #ifdef _WIN32
@@ -586,6 +601,13 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 
 				Ogre::ConfigFile::SettingsMultiMap::iterator it;
 
+				// Check the main selected item.
+				it = settings.find ("Render System");
+				if (it != settings.end ())
+				{
+					it->second = Options::getInstance ()->getUsedVideoDriver ();
+				}
+
 				// Note: this will update for ALL render systems.
 				it = settings.find ("Full Screen");
 				if (it != settings.end ())
@@ -593,15 +615,15 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 					it->second = fullScreenValueToSet;
 				}
 
+
 				// Note: this will update only for the selected render systems.
 				if (renderSystemName == Options::getInstance ()->getUsedVideoDriver ())
 				{
-					DEBUG ("*** checking video mode setting");
 					it = settings.find ("Video Mode");
 					if (it != settings.end ())
 					{
 						it->second = resolutionValueToSet;
-						DEBUG ("*** Set res entry");
+						DEBUGX ("Set resolution entry");
 					}
 				}
 			}
@@ -835,6 +857,69 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 
 	return true;
 }
+
+
+
+bool OptionsWindow::onVideoDriverSelected (const CEGUI::EventArgs& evt)
+{
+	const CEGUI::MouseEventArgs& we =
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
+
+	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(we.window);
+
+	if (cbo == 0)
+	{
+		return false;
+	}
+
+	CEGUI::ListboxItem* item = cbo->getSelectedItem();
+
+	if (item == 0)
+	{
+		return false;
+	}
+
+	std::string videoDriver = std::string (cbo->getText ().c_str ()); // it's safe to get the text, they are read-only.
+	std::string usedResolution ("");
+
+	// Get the current width and height. This is to attempt to keep the resolution (E.g. if we have 800x600 in Direct3D, let's keep it for OpenGL as well).
+	int currentWidth (0), currentHeight (0);
+	SumwarsHelper::getSizesFromResolutionString (Options::getInstance ()->getUsedResolution (), currentWidth, currentHeight);
+
+	DEBUG ("Selected video driver: %s", videoDriver.c_str ());
+
+	// Get the list of available resolutions for the selected video driver.
+	std::vector <std::string> resolutions = Options::getInstance ()->getEditableResolutionsMapping ()[videoDriver];
+	
+	// Use the last item as basis...
+	if (resolutions.size () > 0)
+	{
+		usedResolution = resolutions[resolutions.size () - 1];
+		usedResolution = SumwarsHelper::getUpdatedResolutionString (usedResolution, currentWidth, currentHeight);
+	}
+
+	// Start adding the resolutions as items to the combo-box, one by one.
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton ();
+	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow ("ResolutionBox"));
+	cbo->resetList ();
+
+
+	for (std::vector <std::string>::const_iterator it = resolutions.begin (); it != resolutions.end (); ++ it)
+	{
+		DEBUG ("New mode: %s", it->c_str ());
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) it->c_str (), "", 0));
+		if (*it == usedResolution)
+		{
+			cbo->setItemSelectState (cbo->getItemCount () - 1, true);
+		}
+	}
+
+	cbo->handleUpdatedListItemData ();
+
+	return true;
+}
+
+
 
 bool OptionsWindow::onGrabMouseChanged(const CEGUI::EventArgs& evt)
 {

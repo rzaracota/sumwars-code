@@ -130,6 +130,12 @@ class OptionsWindow : public Window
 		bool onLanguageSelected(const CEGUI::EventArgs& evt);
 
 		/**
+		 * \fn bool onVideoDriverSelected(const CEGUI::EventArgs& evt)
+		 * \brief React to the used renderer being changed.
+		 */
+		bool onVideoDriverSelected (const CEGUI::EventArgs& evt);
+		
+		/**
 		 * \fn bool onDisplayModeSelected(const CEGUI::EventArgs& evt)
 		 * \brief React to the display mode being changed.
 		 */
