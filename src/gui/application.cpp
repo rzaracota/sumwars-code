@@ -80,18 +80,33 @@ Application::Application(char *argv)
 
 bool Application::init(char *argv)
 {
-    // Initialise PHYSFS for later on
-    if (PHYSFS_init(argv) == 0)
+	//
+	// Initialise the PHYSFS library
+	//
+    if (PHYSFS_init (argv) == 0)
     {
-        printf("init failed: %s\n", PHYSFS_getLastError());
+        printf("init failed: %s\n", PHYSFS_getLastError ());
         return false;
     }
-	Ogre::String path = SumwarsHelper::userPath();
-    if (PHYSFS_setWriteDir(PHYSFS_getUserDir()) == 0)
+
+	// Get the path to use for storing data.
+	// This will be relative to the user directory on the user OS.
+	Ogre::String operationalPath = SumwarsHelper::userPath ();
+
+	// Add the user directory
+	if (PHYSFS_mount (PHYSFS_getUserDir (), 0, 1) == 0)
+	{
+		printf("PHYSFS_mount failed: %s\n", PHYSFS_getLastError ());
+        return false;
+	}
+
+	// Set the user directory as the default location to write to.
+    if (PHYSFS_setWriteDir (PHYSFS_getUserDir ()) == 0)
     {
-        printf("setWriteDir failed: %s\n", PHYSFS_getLastError());
+        printf("PHYSFS_setWriteDir failed: %s\n", PHYSFS_getLastError ());
         return false;
     }
+
 #ifdef __APPLE__
     if (!PHYSFS_exists("Library/Application Support/Sumwars"))
     {
@@ -193,9 +208,9 @@ bool Application::init(char *argv)
     }
 #endif
     
-	// Logger initialisieren
-	LogManager::instance().addLog("stdout",new StdOutLog(Log::LOGLEVEL_DEBUG));
-    LogManager::instance().addLog("logfile",new FileLog(path + "/sumwars.log",Log::LOGLEVEL_DEBUG));
+	// Initialize the loggers.
+	LogManager::instance ().addLog ("stdout",new StdOutLog (Log::LOGLEVEL_DEBUG));
+    LogManager::instance ().addLog ("logfile",new FileLog (operationalPath + "/sumwars.log", Log::LOGLEVEL_DEBUG));
 
 	Timer tm;
 	m_timer.start();
@@ -205,12 +220,12 @@ bool Application::init(char *argv)
 	// pluginfile: plugins.cfg
 	// configfile: keines
 #ifdef _WIN32
-	m_ogre_root = new Ogre::Root(SumwarsHelper::userPath() + "/plugins.cfg", SumwarsHelper::userPath() + "/ogre.cfg", SumwarsHelper::userPath() + "/ogre.log");
+	m_ogre_root = new Ogre::Root (operationalPath + "/plugins.cfg", operationalPath + "/ogre.cfg", operationalPath + "/ogre.log");
 #elif defined __APPLE__
     Ogre::String plugins = macPath();
-    m_ogre_root = new Ogre::Root(plugins + "/plugins_mac.cfg", plugins + "/ogre.cfg", SumwarsHelper::userPath() + "/ogre.log");
+	m_ogre_root = new Ogre::Root(plugins + "/plugins_mac.cfg", plugins + "/ogre.cfg", operationalPath + "/ogre.log");
 #else
-	m_ogre_root = new Ogre::Root(CFG_FILES_DIR "/plugins.cfg", CFG_FILES_DIR "/ogre.cfg", SumwarsHelper::userPath() + "/Ogre.log");
+	m_ogre_root = new Ogre::Root(CFG_FILES_DIR "/plugins.cfg", CFG_FILES_DIR "/ogre.cfg", operationalPath + "/Ogre.log");
 #endif
 
 	if (m_ogre_root ==0)
