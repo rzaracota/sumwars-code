@@ -306,7 +306,7 @@
                 <Window Type="TaharezLook/Combobox" Name="VideoDriverBox" >
                     <Property Name="InheritsAlpha" Value="False" />
                     <Property Name="UnifiedAreaRect" Value="{{0.35,0},{0.15,0},{0.98,0},{0.25,0}}" />
-                    <Property Name="UnifiedSize" Value="{{0.5,0},{0.5,0}}" />
+                    <Property Name="UnifiedSize" Value="{{0.5,0},{0.25,0}}" />
                     <Property Name="MaxEditTextLength" Value="1073741823" />
                 </Window>
                 <Window Type="TaharezLook/StaticText" Name="DisplayMode" >
