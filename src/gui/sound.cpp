@@ -30,7 +30,7 @@ std::list<SoundObject*> SoundSystem::m_ambient_sounds;
 
 Sound SoundSystem::getSound(SoundName sname)
 {
-	// Iteratoren auf den ersten und letzten Sound mit dem gewuenschten Name
+	// Iterators for the first and last Sounds with the desired name.
 	std::map<SoundName, SoundSet>::iterator it;
     it = m_sounds.find(sname);
     if ( it == m_sounds.end())
@@ -74,6 +74,8 @@ void SoundSystem::loadSoundFile(std::string file, SoundName sname, float weight)
 		
 		int buffernr;
 		buffernr = alutCreateBufferFromFile(filename.c_str());
+
+		// Check for errors. We may get an error if the sound format is not supported.
 		if (buffernr !=  AL_NONE)
 		{
 			m_sounds[sname].m_weights.push_back(weight);
@@ -81,7 +83,7 @@ void SoundSystem::loadSoundFile(std::string file, SoundName sname, float weight)
 		}
 		else
 		{
-			ERRORMSG( "Could not load %s",filename.c_str());
+			ERRORMSG ("Could not load [%s]", filename.c_str ());
 		}
 	}
 	checkErrors();
@@ -272,7 +274,7 @@ void SoundSystem::setSoundVolume(float vol)
 {
 	m_sound_volume = vol;
 	
-	// neue Lautstarke fuer existierende Soundobjekte
+	// Apply new sound volume for existing sound objects.
 	std::map<std::string, SoundObject*>::iterator it;
 	for (it = m_sound_objects.begin(); it != m_sound_objects.end(); ++it)
 	{
