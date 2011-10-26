@@ -755,6 +755,8 @@ bool OptionsWindow::onLanguageSelected(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+
+
 bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 {
 	const CEGUI::MouseEventArgs& we =
@@ -789,13 +791,22 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 	if (myDisplayMode == WINDOWED_FULLSCREEN)
 	{
 		cbo->setEnabled (false);
+		
+		// Set the selection to the desktop size resolution.
 
-		// Clear the selection flag?
-		//if (cbo->getSelectedItem () != 0)
-		//{
-		//	cbo->getSelectedItem ()->setSelected (false);
-		//}
-		//cbo->setText ("");
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+		int desktopWidth = (int)GetSystemMetrics (SM_CXSCREEN);
+		int desktopHeight = (int)GetSystemMetrics (SM_CYSCREEN);
+
+		string userResolution = string (cbo->getText ().c_str ());
+		if (userResolution.length () == 0)
+		{
+			userResolution = Options::getInstance ()->getUsedResolution ();
+		}
+
+		userResolution = SumwarsHelper::getUpdatedResolutionString (userResolution, desktopWidth, desktopHeight);
+		cbo->setText (userResolution);
+#endif
 
 		cbo->handleUpdatedListItemData ();
 	}
