@@ -54,6 +54,17 @@ public:
 	 */
 	static std::string getUpdatedResolutionString (const std::string& initialString, int newWidth, int newHeight);
 
+	/**
+	 * \brief Parse a basic resolution string and get the width and height.
+	 * Purpose: manage differences between Direct3D and OpenGL resolution strings.
+	 * 
+	 * \param initialString The source resolution string.
+	 * \param[out] newWidth The width to read.
+	 * \param[out] newHeight The height to read.
+	 * \return Nothing.
+	 * \author Augustin Preda (if anything doesn't work, he's the one to bash).
+	 */
+	static void getSizesFromResolutionString (const std::string& initialString, int& videoModeWidth, int& videoModeHeight);
 
 #ifdef __APPLE__
 	// TODO: copied function here from application.h; Investigate integration with userPath function.

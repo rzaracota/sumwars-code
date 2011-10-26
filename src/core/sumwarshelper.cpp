@@ -54,3 +54,39 @@ std::string SumwarsHelper::getUpdatedResolutionString (const std::string& initia
 
 	return returnValue;
 }
+
+
+void SumwarsHelper::getSizesFromResolutionString (const std::string& initialString, int& videoModeWidth, int& videoModeHeight)
+{
+	std::string tempString;
+	tempString = initialString;
+
+	std::string sLeft, sRight;
+	int nPos = tempString.find (" ");
+	if (nPos == std::string::npos)
+	{
+		// some error...
+		return;
+	}
+
+	sLeft = tempString.substr (0, nPos);
+	sRight= tempString.substr (nPos + 3); // + 3 chars for " x "
+	nPos = sRight.find (" ");
+	std::string sAux;
+
+	if (nPos == std::string::npos)
+	{
+		// we don't have a colour depth.
+		sAux = sRight;
+		sRight = "";
+	}
+	else
+	{
+		sAux = sRight.substr(0, nPos);
+		sRight = sRight.substr(nPos);
+	}
+
+	videoModeWidth = atoi (sLeft.c_str ());
+	videoModeHeight = atoi (sAux.c_str ());
+
+}
