@@ -19,14 +19,15 @@
 #include "OgreRoot.h"
 #include "window.h"
 #include "graphicobject.h"
-
 class SavegameList;
 
 /**
  * \class MainMenu
  * \brief Fenster Charakter Info
  */
-class MainMenu : public Window , public Ogre::FrameListener
+class MainMenu
+	: public Window
+	, public Ogre::FrameListener
 {
 public:
     /**
@@ -34,6 +35,23 @@ public:
     * \brief Constructor
      */
     MainMenu ( Document* doc );
+
+	// ------------------------- Frame Listener functions ----------------------
+
+    /**
+     * \fn virtual bool frameStarted (const FrameEvent &evt)
+     * \brief Called when a frame is about to begin rendering.
+     */
+    bool frameStarted ( const Ogre::FrameEvent &evt );
+
+    /**
+     * \fn virtual bool frameStarted (const FrameEvent &evt)
+     * \brief Called just after a frame has been rendered.
+     */
+    bool frameEnded ( const Ogre::FrameEvent &evt );
+
+
+	// ------------------------- Other functions ----------------------
 
     /**
      * \fn virtual void update()
@@ -47,18 +65,6 @@ public:
      */
     virtual void updateTranslation();
 
-
-    /**
-     * \fn virtual bool frameStarted (const FrameEvent &evt)
-     * \brief Called when a frame is about to begin rendering.
-     */
-    bool frameStarted ( const Ogre::FrameEvent &evt );
-
-    /**
-     * \fn virtual bool frameStarted (const FrameEvent &evt)
-     * \brief Called just after a frame has been rendered.
-     */
-    bool frameEnded ( const Ogre::FrameEvent &evt );
 
 	/**
 	 * \brief Sets the visibiliy state of the SaveGameList

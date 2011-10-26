@@ -52,6 +52,8 @@
  */
 
 class Application
+	: public Ogre::WindowEventListener
+
 {
 
 	public:
@@ -83,7 +85,27 @@ class Application
 		}
 
 	private:
-		// Funktionen
+		// ------------------------- Window Listener functions ----------------------
+
+		/**
+		 * \brief Resize the window. Adjust mouse clipping area for GUI?
+		 */
+		virtual void windowResized (Ogre::RenderWindow *rw);
+
+		/**
+		 * \brief The window received the command to close.
+		 * It's recommended to return false in this function if there is a complex shutdown procedure to run (resource unload, etc.)
+		 */
+		virtual bool windowClosing (Ogre::RenderWindow *rw);
+
+		/**
+		 * \brief React to the window losing the focus.
+		 * (You could trigger non-rendering functions here, such as pausing or resuming the music. Keep in mind synchronization issues for multithreading!)
+		 */
+		virtual void windowFocusChange (Ogre::RenderWindow* rw);
+
+		// ------------------------- Other functions ----------------------
+
 		/**
 		* \fn init()
 		* \brief Initialisiert die Anwendung

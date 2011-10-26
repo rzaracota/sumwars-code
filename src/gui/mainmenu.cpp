@@ -241,6 +241,8 @@ bool MainMenu::onQuitGameHost(const CEGUI::EventArgs& evt)
     return true;
 }
 
+
+
 bool MainMenu::frameStarted(const Ogre::FrameEvent& evt)
 {
     

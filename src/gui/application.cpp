@@ -363,11 +363,10 @@ void Application::run()
 	Ogre::Timer timer2;
 
 	int nr = 100;
-	timer.reset();
+	timer.reset ();
+
 	while (m_document->getState() != Document::END_GAME)
 	{
-
-		
 		frametime =timer.getMicroseconds ()/1000.0;
 		// set cap_fps to no to disable fps reduction
 		if (Options::getInstance()->getDebugOption("cap_fps","true") == "true")
@@ -510,6 +509,7 @@ void Application::run()
 		MusicManager::instance().update();
 	}
 
+	DEBUG ("Application: run function has run its course");
 
 
 }
@@ -748,7 +748,10 @@ bool Application::initOgre()
     }
 #endif
 
-	Ogre::LogManager::getSingleton().createLog(SumwarsHelper::userPath() + "/BenchLog.log");
+	// Register as a Window listener
+	Ogre::WindowEventUtilities::addWindowEventListener (m_window, this);
+
+	Ogre::LogManager::getSingleton ().createLog (SumwarsHelper::userPath () + "/BenchLog.log");
 	return true;
 }
 
@@ -1328,4 +1331,48 @@ void Application::updateStartScreen(float percent)
 	m_ogre_root->renderOneFrame();
 	//MusicManager::instance().update();
 	m_timer.start();
+}
+
+
+
+void Application::windowResized (Ogre::RenderWindow* rw)
+{
+	// Only act for own renderwindow. Can it happen that we receive something else here? I don't know... doesn't hurt to check.
+	if (rw && rw == m_window)
+	{
+		// Currently this is a placeholder function.
+	}
+
+}
+
+
+bool Application::windowClosing (Ogre::RenderWindow* rw)
+{
+	// Only close for own renderwindow. Can it happen that we receive something else here? I don't know... doesn't hurt to check.
+
+	if (rw && rw == m_window)
+	{
+		DEBUG ("Application got a window closing event.");
+
+		if (m_document != 0)
+		{
+			m_document->setState (Document::END_GAME);
+		}
+	}
+
+	// The state was set internally, so the game will know it needs to shutdown. But it needs time to do this.
+	// Return false so that we don't allow the closing to take place yet!
+	return false;
+}
+
+
+void Application::windowFocusChange (Ogre::RenderWindow* rw)
+{
+	// Only act for own renderwindow. Can it happen that we receive something else here? I don't know... doesn't hurt to check.
+	if (rw && rw == m_window)
+	{
+		// Currently this is a placeholder function.
+		// There is already a function reacting to the application losing focus. Maybe it should be moved here.
+		// Still under investigation. (Augustin Preda, 2011.10.26).
+	}
 }
