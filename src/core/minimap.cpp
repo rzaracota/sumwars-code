@@ -93,7 +93,7 @@ void Minimap::fromString(CharConv* cv)
 	cv->fromBuffer(size);
 	m_data.resize(size);
 	char tmp;
-	for (unsigned int i=0; i<size; ++i)
+	for (unsigned int i=0; i < (unsigned int) size; ++ i)
 	{
 		cv->fromBuffer(tmp);
 		m_data[i] = tmp;
