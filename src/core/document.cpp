@@ -1650,7 +1650,8 @@ void Document::update(float time)
 			World::deleteWorld();
 
 			getGUIState()->m_sheet= MAIN_MENU;
-			getGUIState()->m_shown_windows = NO_WINDOWS;
+			getGUIState()->m_shown_windows = START_MENU;
+			m_modified =WINDOWS_MODIFIED;
 
 			m_state = INACTIVE;
 
