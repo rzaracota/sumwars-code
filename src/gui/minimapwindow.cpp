@@ -29,14 +29,14 @@ MinimapWindow::MinimapWindow (Document* doc)
 	m_region_id = -1;
 		
 	DEBUGX("setup main menu");
-	// GUI Elemente erzeugen
+
+	// Create GUI Items.
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 
-	// Rahmen fuer das Menue Savegame auswaehlen
-	
-	
+	// Set the properties for the minimap window.
+
 	CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "MinimapWindow");
 	m_window = minimap;
 	
@@ -112,7 +112,8 @@ void MinimapWindow::update()
 	WorldObjectMap * players = region->getPlayers();
 	WorldObjectMap::iterator it;
 	WorldObject* pl;
-	// Anzahl Fenster
+
+	// Window counter
 	static int ncount =0;
 	
 	CEGUI::Window* label;
@@ -177,7 +178,7 @@ void MinimapWindow::update()
 		cnt++;
 	}
 	
-	// restliche Label verstecken
+	// Hide the rest of the labels.
 	for (; cnt <ncount; cnt++)
 	{
 		stream.str("");
@@ -188,12 +189,15 @@ void MinimapWindow::update()
 		label->setVisible(false);
 	}
 	
+	// Check to see whether the label displaying the region name needs to be updated.
 	label = win_mgr.getWindow("RegionNameLabel");
 	
-	CEGUI::utf8* ctext = (CEGUI::utf8*) dgettext("sumwars",region->getName().c_str());
-	if (label->getText() != ctext)
+	CEGUI::String actualRegionName = (CEGUI::utf8*) dgettext("sumwars",region->getName().c_str());
+
+	if (actualRegionName != label->getText())
 	{
-		label->setText( ctext );
+		DEBUGX ("Region name update; old vs new [%s] - [%s]", label->getText().c_str (), actualRegionName.c_str ());
+		label->setText (actualRegionName);
 	}
 	
 }
