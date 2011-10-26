@@ -16,6 +16,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: ../src/core/creature.cpp:3165
+msgid "Miss"
+msgstr ""
+
 #: ../src/core/damage.cpp:143 ../src/gui/charinfo.cpp:930
 msgid "Physical"
 msgstr ""

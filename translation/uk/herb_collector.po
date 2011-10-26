@@ -28,11 +28,11 @@ msgstr "І ще одну добру справу зроблено. Я почин
 
 #: herbalist.xml
 msgid ""
-"The herbalist of Joringsbridge wants to have the berries of 10 bushes. \".."
-"(10 - herbalist.bushes)..\" berries have been collected."
+"The herbalist of Joringsbridge wants to have the berries of 10 bushes. "
+"Berries from \"..(herbalist.bushes)..\" bushes have been collected."
 msgstr ""
-"Травник з Джорінгсбріджа хоче мати ягоди з 10 кущів. \"..(10 - herbalist."
-"bushes)..\" ягід були зібрані."
+"Травник з Джорінгсбріджа хоче мати ягоди з 10 кущів. Ягоди з"
+" \"..(herbalist.bushes)..\" кущів були зібрані."
 
 #: herbalist.xml
 msgid "joringsbridge"

@@ -234,3 +234,7 @@ msgid ""
 "I wander if he would have said that if he had known that he will make a "
 "detour to Harad's Hell first?"
 msgstr ""
+
+#: maylons_grave.xml
+msgid "name..\" received an item from Maylons Grave."
+msgstr ""

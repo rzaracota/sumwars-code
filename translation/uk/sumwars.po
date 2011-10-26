@@ -2775,6 +2775,10 @@ msgid "Peasant"
 msgstr "Селянин"
 
 #: npcStats.xml
+msgid "Peasant Woman"
+msgstr "Селянка"
+
+#: npcStats.xml
 msgid "The Trader"
 msgstr "Торговець"
 
@@ -3633,6 +3637,11 @@ msgstr "Невідомий Ліч"
 #: tutorial.xml
 msgid "Overseer"
 msgstr "Наглядач"
+
+#: tutorial.xml
+msgid ""
+"I have to find an energy source and a cog before that thing will work again."
+msgstr "Ця штука не запрацює без джерела енергії та шестерні."
 
 #: fortify_dwarfenwall.xml
 msgid ""

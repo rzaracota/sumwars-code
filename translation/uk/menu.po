@@ -19,6 +19,10 @@ msgstr ""
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-Country: UKRAINE\n"
 
+#: ../src/core/creature.cpp:3165
+msgid "Miss"
+msgstr "Промах"
+
 #: ../src/core/damage.cpp:143 ../src/gui/charinfo.cpp:930
 msgid "Physical"
 msgstr "Фізичне"
@@ -568,6 +572,22 @@ msgstr "Фіалковий"
 msgid "Cornflower Blue"
 msgstr "Волошковий"
 
+#: ../src/gui/optionswindow.cpp:184
+msgid "Fullscreen (Exclusive Mode)"
+msgstr "Повний екран"
+
+#: ../src/gui/optionswindow.cpp:185
+msgid "Window (With Borders)"
+msgstr "Вікно"
+
+#: ../src/gui/optionswindow.cpp:190
+msgid "Window (Fullscreen)"
+msgstr "Вікно на весь екран"
+
+#: ../src/gui/optionswindow.cpp:191
+msgid " - recommended"
+msgstr " - рекомендовано"
+
 #: ../src/gui/optionswindow.cpp:211
 msgid "System default"
 msgstr "Системна"
@@ -647,6 +667,26 @@ msgstr "Колір підсвітки ворога"
 #: ../src/gui/optionswindow.cpp:364
 msgid "Grab mouse in windowed mode (needs restart)"
 msgstr "Захопл. мишку в вікон. режимі (потр. рестарт)"
+
+#: ../src/gui/optionswindow.cpp:414
+msgid "Video Driver"
+msgstr "Драйвер відео"
+
+#: ../src/gui/optionswindow.cpp:417
+msgid "Display Mode"
+msgstr "Режим"
+
+#: ../src/gui/optionswindow.cpp:420
+msgid "Resolution"
+msgstr "Розширення"
+
+#: ../src/gui/optionswindow.cpp:616
+msgid ""
+"Please restart the game\n"
+" for the changes to take effect!"
+msgstr ""
+"Перезапустіть гру\n"
+" для застосування змін"
 
 #: ../src/gui/questinfo.cpp:160
 msgid "open"

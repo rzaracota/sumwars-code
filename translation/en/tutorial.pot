@@ -1143,6 +1143,26 @@ msgid ""
 msgstr ""
 
 #: tutorial.xml
+msgid "Yikes, it's freezing!"
+msgstr ""
+
+#: tutorial.xml
+msgid ""
+"That felt like standing on a single mountaintop during a thunderstorm... "
+"and the energy source still won't come of."
+msgstr ""
+
+#: tutorial.xml
+msgid "Ouch, I burnt my hands!"
+msgstr ""
+
+#: tutorial.xml
+msgid ""
+"Hm... it's stuck. I think I may have to temper around with this setup "
+"a bit more."
+msgstr ""
+
+#: tutorial.xml
 msgid "Finally. Now, lets get out of here."
 msgstr ""
 

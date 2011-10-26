@@ -1113,7 +1113,7 @@ msgstr "Звичайно, у мене є план."
 
 #: tutorial.xml
 msgid "I sent one of my workers to get a cog earlier."
-msgstr "Раніше я послав одного з моїх робітників, щоб він приніс зубець."
+msgstr "Раніше я послав одного з моїх робітників, щоб він приніс шестерню."
 
 #: tutorial.xml
 msgid ""
@@ -1235,6 +1235,29 @@ msgid ""
 "I guess we would first have to stop whatever is using the crystal right now."
 msgstr ""
 "Схоже спочатку нам треба зупинити те, що використовує кристал прямо зараз."
+
+#: tutorial.xml
+msgid "Yikes, it's freezing!"
+msgstr "Ой, воно холоднезне!"
+
+#: tutorial.xml
+msgid ""
+"That felt like standing on a single mountaintop during a thunderstorm... and "
+"the energy source still won't come of."
+msgstr ""
+"Таке відчуття що стоїш на вершині гори під час грози ... а "
+"енергетичний кристал ніяк не вилазить."
+
+#: tutorial.xml
+msgid "Ouch, I burnt my hands!"
+msgstr "Ой, воно обпекло мені долоні!"
+
+#: tutorial.xml
+msgid ""
+"Hm... it's stuck. I think I may have to temper around with this setup a bit "
+"more."
+msgstr ""
+"Хм... він застряг. Доведеться трохи повозитися з цією установкою."
 
 #: tutorial.xml
 msgid "Finally. Now, lets get out of here."

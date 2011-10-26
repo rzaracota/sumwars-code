@@ -260,3 +260,7 @@ msgid ""
 msgstr ""
 "Цікаво, що б він сказав якби знав, що спочатку він зробить гак через "
 "Харадове пекло?"
+
+#: maylons_grave.xml
+msgid "name..\" received an item from Maylons Grave."
+msgstr "name..\" взяв предмет з Могили Мейлона."

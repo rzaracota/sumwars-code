@@ -2675,6 +2675,10 @@ msgid "Peasant"
 msgstr ""
 
 #: npcStats.xml
+msgid "Peasant Woman"
+msgstr ""
+
+#: npcStats.xml
 msgid "The Trader"
 msgstr ""
 
@@ -3517,6 +3521,10 @@ msgstr ""
 
 #: tutorial.xml
 msgid "Overseer"
+msgstr ""
+
+#: tutorial.xml
+msgid "I have to find an energy source and a cog before that thing will work again."
 msgstr ""
 
 #: fortify_dwarfenwall.xml

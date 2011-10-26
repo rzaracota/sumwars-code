@@ -90,11 +90,11 @@
 					end;
 					
 					tutorial_tmp.bguard1 = createObject("council_guard","locDoorGuardNorth");
-					setRefName(tutorial_tmp.bguard1, "Wache");
+					setRefName(tutorial_tmp.bguard1, "Guard");
 					lookAt(tutorial_tmp.bguard1,getLocation("locBehemoth"));
 				
 					tutorial_tmp.bguard2 = createObject("council_guard","locDoorGuardWest");
-					setRefName(tutorial_tmp.bguard2, "Wache");
+					setRefName(tutorial_tmp.bguard2, "Guard");
 					lookAt(tutorial_tmp.bguard2,getLocation("locBehemoth"));
 					
 					-- since phase fightslugs
