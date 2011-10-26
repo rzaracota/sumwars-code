@@ -163,13 +163,34 @@ class Options
 		 * \brief Returns the locale for internationalization
 		 */
 		std::string getLocale();
-		
+
+	
 		/**
 		 * \brief Sets the locale for internationalization
 		 * \param locale locale string, en_US for instance
 		 */
 		void setLocale(const std::string& locale);
-		
+
+
+		/**
+		 * \brief Retrieve the preferred locale to use for internationalization
+		 */
+		const std::string& getPreferredLocale () const
+		{
+			return m_preferred_locale;
+		}
+
+
+		/**
+		 * \brief Set the preferred locale to use for internationalization
+		 * \param newLocale The new locale to use.
+		 */
+		void setPreferredLocale (const std::string& newLocale) 
+		{
+			m_preferred_locale = newLocale;
+		}
+
+
 		/**
 		 * \fn bool installShortkey(KeyCode key,ShortkeyDestination dest, bool check_special=true)
 		 * \brief Binds keycode \a key to the action specified by \a dest
@@ -529,4 +550,9 @@ class Options
 		 * \brief The available display resolutions.
 		 */
 		std::map <std::string, std::vector <std::string> > m_available_resolutions;
+
+		/**
+		 * \brief The preferred language locale
+		 */
+		std::string m_preferred_locale;
 };
