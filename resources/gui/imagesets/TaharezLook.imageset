@@ -108,6 +108,7 @@
 	<Image Name="ComboboxEditMiddle" XPos="148" YPos="2" Width="8" Height="16" />
 	<Image Name="ComboboxListButtonNormal" XPos="158" YPos="2" Width="16" Height="16" />
 	<Image Name="ComboboxListButtonHover" XPos="158" YPos="20" Width="16" Height="16" />
+	<Image Name="ComboboxListButtonDisabled" XPos="139" YPos="20" Width="16" Height="16" />
 	<Image Name="ComboboxListLeft" XPos="138" YPos="48" Width="8" Height="8" />
 	<Image Name="ComboboxListRight" XPos="158" YPos="48" Width="8" Height="8" />
 	<Image Name="ComboboxListTop" XPos="148" YPos="48" Width="8" Height="8" />
