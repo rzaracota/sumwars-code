@@ -414,7 +414,8 @@ msgstr ""
 "rimangono vivi."
 
 #: joringsbridge.xml
-msgid "Otherwise, do your work diligent."
+#, fuzzy
+msgid "Otherwise, do your work diligently."
 msgstr "Quindi ti conviene compiere il tuo lavoro diligentemente."
 
 #: joringsbridge.xml

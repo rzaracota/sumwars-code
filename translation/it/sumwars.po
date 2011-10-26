@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-10-21 11:34+0200\n"
+"PO-Revision-Date: 2011-10-26 15:34+0200\n"
 "Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
 "Language-Team: Italiano <>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bits\n"
-"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: necrotia.xml
@@ -30,91 +30,91 @@ msgstr ""
 
 #: greySkyladder.xml
 msgid "greyOldMine"
-msgstr ""
+msgstr "Vecchia Miniera"
 
 #: greySkyladder.xml
 msgid "greyOldMineL2"
-msgstr ""
+msgstr "Sotterranei Vecchia Miniera"
 
 #: greySkyladder.xml
 msgid "greyOldMineDeep"
-msgstr ""
+msgstr "Profondità Vecchia Miniera"
 
 #: aisen.xml
 msgid "aisMeadow"
-msgstr "Meadow"
+msgstr "Campagne di Aisen"
 
 #: aisen.xml
 msgid "aisPlains"
-msgstr "Aperta pianura"
+msgstr "Pianura di Aisen"
 
 #: aisen.xml
 msgid "aisMaylonsGraveEntry"
-msgstr "La Tomba di Maylons - L'ingresso"
+msgstr "Ingresso della Tomba di Maylons, Aisen"
 
 #: aisen.xml
 msgid "aisMaylonsGraveL1"
-msgstr "La Tomba di Maylons - Primo livello"
+msgstr "Primo livello della tomba di Maylons, Aisen"
 
 #: aisen.xml
 msgid "aisMaylonsGraveL2"
-msgstr "La Tomba di Maylons - La cripta"
+msgstr "Cripta della tomba di Maylons, Aisen"
 
 #: aisen.xml
 msgid "aisHeath"
-msgstr "Brughiere silenziose"
+msgstr "Brughiere Silenziose, Aisen"
 
 #: aisen.xml
 msgid "aisStonePlains"
-msgstr "Pianure rocciose"
+msgstr "Pianure Rocciose, Aisen"
 
 #: aisen.xml
 msgid "aisDarkClearing"
-msgstr "La tetra radura"
+msgstr "La Tetra Radura, Aisen"
 
 #: aisen.xml
 msgid "aisWideHeath"
-msgstr "La vasta spianata"
+msgstr "La Vasta Spianata, Aisen"
 
 #: aisen.xml
 msgid "joringsbridge"
-msgstr "Joringsbridge"
+msgstr "Ponte Joring, Aisen"
 
 #: aisen.xml
 msgid "aisNorthMeadow"
-msgstr "Nord Meadow"
+msgstr "Campi a Nord di Aisen"
 
 #: aisen.xml
 msgid "aisJoringsforest"
-msgstr "Foresta di Jorings"
+msgstr "Foresta di Joring, Aisen"
 
 #: aisen.xml
 msgid "aisFairyforest"
-msgstr "Foresta incantata"
+msgstr "Foresta Fatata, Aisen"
 
 #: aisen.xml
 msgid "aisDarkFairyforest"
-msgstr "La tetra foresta incantata"
+msgstr "Tetra Foresta Fatata, Aisen"
 
 #: aisen.xml
 msgid "aisWolfstones"
-msgstr "Le pietre dei lupi"
+msgstr "Pietre Dei Lupi, Aisen"
 
 #: aisen.xml
 msgid "aisWestwoods"
-msgstr "Boschi dell'ovest"
+msgstr "Boschi Occidentali, Aisen"
 
 #: aisen.xml
 msgid "aisMounPath"
-msgstr "Sentiero di montagna"
+msgstr "Sentiero Di Montagna, Aisen"
 
 #: aisen.xml
 msgid "aisMistslope"
-msgstr "Pendii nebbiosi"
+msgstr "Pendii Nebbiosi, Aisen"
 
 #: aisen.xml
 msgid "aisEastslope"
-msgstr "Pendio orientale"
+msgstr "Pendio Orientale, Aisen"
 
 #: aisen.xml
 msgid "Watch out! Monsters from the mine! Help me!"
@@ -122,20 +122,19 @@ msgstr "Attenzione! Mostri dalla miniera! Aiutatemi!"
 
 #: aisen.xml
 msgid "Let me tell you I'm no monster. I'm worse."
-msgstr "Lasciatelo dire...non sono un mostro. Sono peggio."
+msgstr "Lasciatelo dire, non sono un mostro. Sono peggio."
 
 #: aisen.xml
 msgid "aisBoulderGrounds"
-msgstr ""
+msgstr "Terreni Pietrosi di Aisen"
 
 #: aisen.xml
-#, fuzzy
 msgid "aisMounMeadows"
-msgstr "Meadow"
+msgstr "Altipiani, Aisen"
 
 #: aisen.xml
 msgid "aisOldDwarfRuins"
-msgstr ""
+msgstr "Antiche Rovine dei Nani, Aisen"
 
 #: aisen.xml
 msgid "aisOldCellar"
@@ -158,7 +157,6 @@ msgid "aisCopperFields"
 msgstr ""
 
 #: aisen.xml
-#, fuzzy
 msgid "aisMineEntry"
 msgstr "La Tomba di Maylons - L'ingresso"
 
@@ -213,6 +211,10 @@ msgstr "La grotta sotterranea - Il lago nascosto"
 #: medair.xml
 msgid "elCnlLobby"
 msgstr "Consiglio degli Elementalisti, Dungeon sotterraneo"
+
+#: tutorial.xml
+msgid "elCnlLowerCaves"
+msgstr ""
 
 #: medair.xml
 msgid "medBackalley"
@@ -296,7 +298,7 @@ msgstr "Lama delle terre del nord"
 
 #: swords1h.xml
 msgid "steel sword"
-msgstr "Spada di acciao"
+msgstr "Spada in acciao"
 
 #: swords1h.xml
 msgid "assassins blade"
@@ -316,7 +318,7 @@ msgstr "Lama demoniaca"
 
 #: swords1h.xml
 msgid "hero blade"
-msgstr "Lama degli eroi"
+msgstr "Lama dell' eroe"
 
 #: swords1h.xml
 msgid "angel blade"
@@ -1355,8 +1357,8 @@ msgid ""
 "The warrior sets himself in the state of berserk, attacking his enemies with "
 "vicious blows, while completely neglecting his defence."
 msgstr ""
-"Il guerriero entra in frenesia, attaccando i suoi nemici con colpi letali, "
-"ed evitando di difendersi."
+"Il guerriero entra in frenesia attaccando i suoi nemici con colpi letali ed "
+"evitando di difendersi."
 
 #: warrior_ablt.xml
 msgid "Sweeping blow"
@@ -1372,7 +1374,7 @@ msgstr "Mazzata"
 
 #: warrior_ablt.xml
 msgid "Attacks one enemy for serious damage."
-msgstr "Attacca un nemico infliggendo un danno ingente."
+msgstr "Attacca un nemico infliggendo ingenti danni."
 
 #: warrior_ablt.xml
 msgid "Battlecry"
@@ -1388,7 +1390,7 @@ msgstr ""
 
 #: warrior_ablt.xml
 msgid "Block"
-msgstr "Difesa"
+msgstr "Parata migliorata"
 
 #: warrior_ablt.xml
 msgid ""
@@ -1417,8 +1419,8 @@ msgstr "Sbeffeggiare"
 #: warrior_ablt.xml
 msgid "Causes surrounding monsters to attack the warrior more likely."
 msgstr ""
-"Provoca i nemici, rendendo il guerriero il loro bersaglio e distogliendoli "
-"da altri."
+"Provoca i nemici facendo si che preferiscano attaccare lui anzichè i "
+"compagni."
 
 #: warrior_ablt.xml
 msgid "Warmaster"
@@ -1429,8 +1431,8 @@ msgid ""
 "The warrior has become used to the ways of the battlefield to a point, where "
 "he can regenerate his abilities faster than normal."
 msgstr ""
-"Il guerriero è diventato così abituato ai campi di battaglia, che rigenera "
-"le abilità più velocemente."
+"Il guerriero è così abituato ai campi di battaglia che rigenera le abilità "
+"più velocemente."
 
 #: warrior_ablt.xml
 msgid "Fire and sword"
@@ -1441,8 +1443,8 @@ msgid ""
 "The warrior calls the spirits of fire upon his weapon, causing it to deal "
 "firedamage. The damage depends on the warriors spellpower."
 msgstr ""
-"Il guerriero evoca gli spiriti del fuoco sulla sua arma, facendole fare "
-"danno fiammeggiante. Il danno dipende dal potere magico del guerriero"
+"Il guerriero evoca gli spiriti del fuoco sulla sua arma facendole fare danno "
+"fiammeggiante. Il danno dipende dal potere magico del guerriero."
 
 #: warrior_ablt.xml
 msgid "Flame armor"
@@ -1453,7 +1455,7 @@ msgid ""
 "The warrior surrounds himself with angry spirits of fire, who will burn his "
 "enemies to ashes, if they dare to come to close."
 msgstr ""
-"Il guerriero viene circondato da spiriti del fuoco adirati. Chi osa "
+"Il guerriero viene circondato da spiriti del fuoco adirati. Chi oserà "
 "avvicinarsi verrà ridotto in cenere."
 
 #: warrior_ablt.xml
@@ -1479,8 +1481,8 @@ msgid ""
 "increased attackspeed and damage in a berserk state. Even while neglecting "
 "his defence, the impact is not as big as with the barbarian anger."
 msgstr ""
-"Il guerriero diventa ancor più assetato di sangue, scagliandosi sui suoi "
-"nemici con velocità di attacchi e danni aumentati, in uno stato di frenesia."
+"Il guerriero diventa ancor più assetato di sangue. Si scaglia sui suoi "
+"nemici percorso da ira barbarica, con velocità di attacco e danni aumentati."
 
 #: warrior_ablt.xml
 msgid "Hammer blow"
@@ -1490,7 +1492,7 @@ msgstr "La Martellata"
 msgid ""
 "Attacks one enemy with a brutal blow and damages nearby enemies as well."
 msgstr ""
-"Attacca un nemico con un colo brutale, e infligge danni ai nemici nell'area."
+"Attacca un nemico con un colo brutale e infligge danni ai nemici nell'area."
 
 #: warrior_ablt.xml
 msgid "Silencer"
@@ -1498,7 +1500,7 @@ msgstr "Tagliare le corde vocali"
 
 #: warrior_ablt.xml
 msgid "Attacks an enemy with a chance to inflict silence."
-msgstr "Attacca un nemico, con la possibilità di renderlo muto."
+msgstr "Attacca un nemico con la possibilità di renderlo muto."
 
 #: warrior_ablt.xml
 msgid "Monster hunter"
@@ -1509,8 +1511,8 @@ msgid ""
 "For each monster the warrior kills, his strength increases for a short "
 "amount of time."
 msgstr ""
-"Per ogni mostro che il guerriero uccide, la sua forza incrementa per un "
-"breve lasso di tempo."
+"Per ogni mostro che il guerriero uccide la sua forza incrementa per un breve "
+"lasso di tempo."
 
 #: warrior_ablt.xml
 msgid "Monster slayer"
@@ -1523,8 +1525,8 @@ msgid ""
 "amount of time."
 msgstr ""
 "Il guerriero è diventato il peggiore incubo dei mostri. Ogni volta che uno "
-"di loro cade sotto i suoi colpi, la sua forza si alza e la velocità di "
-"attacco aumentano."
+"di loro cade sotto i suoi colpi, la sua forza e la velocità di attacco "
+"aumentano."
 
 #: warrior_ablt.xml
 msgid "Regeneration"
@@ -1578,7 +1580,7 @@ msgstr "Falciata"
 
 #: warrior_ablt.xml
 msgid "Launches an even stronger charge attack, that may inflict stun."
-msgstr "Lancia un attacco ancora più poten"
+msgstr "Lancia un attacco ancora più potente che potrebbe stordire."
 
 #: warrior_ablt.xml
 msgid "Warcry"
@@ -1589,7 +1591,7 @@ msgid ""
 "The battle hardened warrior's scream slows down his opponents, sometimes "
 "confusing them as well."
 msgstr ""
-"Grido di battaglia migliorato, che rallenta i nemici e a volte li confonde."
+"Grido di battaglia migliorato, rallenta i nemici e a volte li confonde."
 
 #: warrior_ablt.xml
 msgid "Weaponmaster"
@@ -1620,7 +1622,8 @@ msgstr "Acido"
 msgid "The priest turns normal water into deadly acid, poisoning one enemy."
 msgstr ""
 "Per quanto possa sembrare allettante, questa abilità non fa altro che "
-"trasformare l'acqua in acido, avvelenando un nemico."
+"trasformare l'acqua in acido, sciogliendo lentamente un nemico, i danni "
+"inflitti sono considerati da veleno."
 
 #: priest_ablt.xml
 msgid "Bladestorm"
@@ -1692,7 +1695,7 @@ msgid ""
 "will also be healed."
 msgstr ""
 "Il gruppo diviene immune da mutismo e cecità per un breve lasso di tempo. "
-"Fornisce anche una lieve cura."
+"Viene anche curato lievemente."
 
 #: priest_ablt.xml
 msgid "Restore Concentration"
@@ -1703,8 +1706,7 @@ msgid ""
 "The priest heals one friend from confusion and berserk. Those ailments will "
 "also be healed."
 msgstr ""
-"Il chierico cura un amico dalla confusione e dalla frenesia, fornendogli "
-"anche una piccola cura."
+"Il chierico rimuove a un amico confusione e frenesia e lo cura lievemente."
 
 #: priest_ablt.xml
 msgid "Spirit Shield"
@@ -1715,8 +1717,8 @@ msgid ""
 "The priest grants immunity to berserk and confuse to all his partymembers "
 "for a small amount of time. Those ailments will also be healed."
 msgstr ""
-"Il chierico fornisce cure, immunità alla frenesia, alla confusione, a tutti "
-"i compagni di squadra. L'effetto dura per un piccolo lasso di tempo."
+"Il chierico fornisce a tutti i compagni di squadra: cure, immunità alla "
+"frenesia, alla confusione. L'effetto persiste per un breve lasso di tempo."
 
 #: priest_ablt.xml
 msgid "Magic Shield"
@@ -1727,8 +1729,8 @@ msgid ""
 "The priest conjures a magic shield for all partymembers thats reduces the "
 "damage dealt by elemental attacks."
 msgstr ""
-"Il chierico piazza uno scudo magico su tutti i membri della squadra, "
-"riducendo i danni inflitti dagli attacchi elementali."
+"Il chierico piazza uno scudo magico su tutti i membri della squadra in "
+"questo modo riduce i danni inflitti dagli attacchi elementali."
 
 #: priest_ablt.xml
 msgid "Ease Pain"
@@ -1739,7 +1741,7 @@ msgid ""
 "The priest treats a partymemener with healing water that washes away every "
 "poison and stops burns."
 msgstr ""
-"Il chierico cosparge un membro della squadra con acqua guaritrice, che lava "
+"Il chierico cosparge un membro della squadra con acqua guaritrice che lava "
 "via ogni veleno e ferma la bruciatura."
 
 #: priest_ablt.xml
@@ -1901,8 +1903,7 @@ msgid ""
 "Damage from undead beings is reduced by one third."
 msgstr ""
 "Il chierico viene circondato da una luce abbagliante che respinge gli "
-"attacchi dei non morti. Il danno di questi si riduce ad ogni modo di un "
-"terzo."
+"attacchi dei non morti. Il danno fatto da questi si riduce di un terzo."
 
 #: priest_ablt.xml
 msgid "Banishing Aura"
@@ -1929,7 +1930,8 @@ msgid ""
 "third of incoming damage from elemental beings."
 msgstr ""
 "Il chierico può creare inconsciamente un vortice di elementali attorno a "
-"lui. Questi subiranno un terzo dei danni al suo posto."
+"lui. Questi subiranno un terzo dei danni al suo posto se provenienti da "
+"creature elementali."
 
 #: base_abilities.xml
 msgid "dead"
@@ -2091,7 +2093,7 @@ msgid ""
 "The archer attacks the enemies eyes, causing him to go berserk, but be "
 "blinded at the same time."
 msgstr ""
-"L'arciere attacca i gli occhi dei nemici, causandogli frenesia e cecità "
+"L'arcere attacca i gli occhi dei nemici, causandogli frenesia e cecità "
 "contemporaneamente."
 
 #: archer_ablt.xml
@@ -2104,7 +2106,7 @@ msgid ""
 "time. Additionally his critical strike chance is increased. This effect "
 "stacks with Elfeyes."
 msgstr ""
-"L'arciere diviene un tutt'uno con la sua arma, infligge più danni per un "
+"L'arcere diviene un tutt'uno con la sua arma, infligge più danni per un "
 "lungo periodo, in più la probabilità di infliggere critici aumenta. Questo "
 "effetto è cumulativo all'abilità Occhi da Elfo"
 
@@ -2114,7 +2116,7 @@ msgstr "Concentrazione"
 
 #: archer_ablt.xml
 msgid "The archers steady mind can no longer be confused."
-msgstr "La mente salda dell'arciere non può più essere confusa."
+msgstr "La mente salda dell'arcere non può più essere confusa."
 
 #: archer_ablt.xml
 msgid "Elfeyes"
@@ -2125,7 +2127,7 @@ msgid ""
 "The archer shoots with deadly precision, leading to an increased critical "
 "hit rate."
 msgstr ""
-"L'arciere spara con precisione mortale, con un risultante aumento della "
+"L'arcere spara con precisione mortale, con un risultante aumento della "
 "frequenza di colpi critici."
 
 #: archer_ablt.xml
@@ -2139,8 +2141,8 @@ msgid ""
 "not between friend and foe."
 msgstr ""
 "Il colpo mortale ha la metà delle possibilità di colpire un'altro bersaglio. "
-"State attenti a non piazzarvi davanti al bersaglio iniziale, non fa "
-"distinzione tra amici e nemici."
+"I compagni faranno meglio a non piazzarsi davanti al bersaglio iniziale, "
+"questo colpo micidiale non fa distinzione tra amici e nemici."
 
 #: archer_ablt.xml
 msgid "Catlike Reflexes"
@@ -2149,7 +2151,7 @@ msgstr "Riflessi Felini"
 #: archer_ablt.xml
 msgid "The archers nimble mind allows him to avoid damage better."
 msgstr ""
-"L'agilità dell'arciere gli permette di evitare il danno più efficacemente."
+"L'agilità dell'arcere gli permette di evitare il danno più efficacemente."
 
 #: archer_ablt.xml
 msgid "Explosion Arrow"
@@ -2186,9 +2188,9 @@ msgid ""
 "deal icedamage over a greater amount of time. There is a chance that his "
 "enemies will be frozen solid if they are hit."
 msgstr ""
-"L'arciere evoca uno spirito del ghiaccio nella sua arma. I suoi colpi "
-"faranno danno da ghiaccio per un lungo periodo. C'è la possibilità di "
-"rendere i nemici colpiti cubetti di ghiaccio."
+"L'arcere evoca uno spirito del ghiaccio nella sua arma. I suoi colpi faranno "
+"danno da ghiaccio per un lungo periodo. C'è la possibilità di rendere i "
+"nemici colpiti cubetti di ghiaccio."
 
 #: archer_ablt.xml
 msgid "Deadly Swarm"
@@ -2199,7 +2201,7 @@ msgid ""
 "The archer shoots four consecutive projectiles that are imbued with vengeful "
 "spirits. They will pursue the enemy, even if he tries to run."
 msgstr ""
-"L'arciere lancia quattro freccie una dopo l'altra imbevute dell'energia di "
+"L'arcere lancia quattro freccie una dopo l'altra imbevute dell'energia di "
 "uno spirito vendicativo. Inseguiranno il nemico anche se cerca di scappare."
 
 #: archer_ablt.xml
@@ -2210,8 +2212,7 @@ msgstr "Frecce di Ghiaccio"
 msgid ""
 "The archer calls upon the spirits of ice to imbue his projectiles with "
 "icedamage."
-msgstr ""
-"L'arciere evoca gli spiriti di ghiaccio per infliggere danno da freddo."
+msgstr "L'arcere evoca gli spiriti di ghiaccio per infliggere danno da freddo."
 
 #: archer_ablt.xml
 msgid "Mind Wall"
@@ -2220,7 +2221,7 @@ msgstr "Muro Mentale"
 #: archer_ablt.xml
 msgid "The archer has become immune to anger. He will never go berserk again."
 msgstr ""
-"L'arciere ha raggiunto la pace dello spirito, non potrà più andare in "
+"L'arcere ha raggiunto la pace dello spirito, non potrà più andare in "
 "frenesia."
 
 #: archer_ablt.xml
@@ -2232,9 +2233,9 @@ msgid ""
 "The archer shoots five projectiles at a time, aimed at enemies in front of "
 "him. The damage dealt by each projectile suffers a little."
 msgstr ""
-"l'arciere lancia cinque proiettili alla volta, mirati ai nemici davanti a "
+"l'arcere lancia cinque proiettili alla volta, mirati ai nemici davanti a "
 "lui. Il danno inflitto da ogni proiettile ne risente un po'. Utile contro "
-"molti nemici."
+"molti nemici o contro un nemico molto vicino."
 
 #: archer_ablt.xml
 msgid "Elfwanderer"
@@ -2245,7 +2246,7 @@ msgid ""
 "The archer unleashes a mighty shot that pierces right through an enemy and "
 "might hit another enemy behind him."
 msgstr ""
-"L'arciere scocca una freccia potentissima che trapassa un nemico e potrebbe "
+"L'arcere scocca una freccia potentissima che trapassa un nemico e potrebbe "
 "colpire e trapassare anche quelli dietro."
 
 #: archer_ablt.xml
@@ -2258,7 +2259,7 @@ msgid ""
 "caused his resistence and his maximum resistance of these elements to rise "
 "by 10 percent."
 msgstr ""
-"Le relazioni positive dell'arciere con gli spiriti di vento e ghiaccio gli "
+"Le relazioni positive dell'arcere con gli spiriti di vento e ghiaccio gli "
 "hanno conferito una resistenza bonus del 10% da quegli elementi."
 
 #: archer_ablt.xml
@@ -2270,7 +2271,7 @@ msgid ""
 "The archer has made a pact with the spirits of wind and ice. His resistance "
 "against wind- and icedamage is increased by 20 percent."
 msgstr ""
-"L'arciere ha fatto un patto con gli spiriti di vento e ghiaccio. La sua "
+"L'arcere ha fatto un patto con gli spiriti di vento e ghiaccio. La sua "
 "resistenza contro il danno da vento e da ghiaccio aumenta di un 20%"
 
 #: archer_ablt.xml
@@ -2283,7 +2284,7 @@ msgid ""
 "projectiles with their power, causing them to deal more winddamage for a "
 "longer time."
 msgstr ""
-"I potenti spiriti del vento aiutano l'arciere imbevendo le sue frecce con i "
+"I potenti spiriti del vento aiutano l'arcere imbevendo le sue frecce con i "
 "loro poteri. I danni da vento vengono aumentati per un lungo lasso di tempo."
 
 #: archer_ablt.xml
@@ -2295,7 +2296,7 @@ msgid ""
 "The archers mastery of ranged weapons allows him to shoot three projectiles "
 "in a short amount of time."
 msgstr ""
-"La maestria degli arcieri, nell'uso delle armi a distanza, gli permette di "
+"La maestria dell' arcere nell'uso delle armi a distanza, permette di "
 "lanciare tre proiettili molto rapidamente."
 
 #: archer_ablt.xml
@@ -2307,7 +2308,7 @@ msgid ""
 "The archer attacks with an arrow imbued with a weaker windspirit, that "
 "causes an enemy hit by it to be stunned."
 msgstr ""
-"L'arciere attacca con una freccia intinta in uno spirito del vento, causando "
+"L'arcere attacca con una freccia intinta in uno spirito del vento, causando "
 "stordimento nei nemici colpiti."
 
 #: archer_ablt.xml
@@ -2319,7 +2320,7 @@ msgid ""
 "The archer handles his weapons with elflike precision, attacking up to seven "
 "enemys in front of him. The damage dealt by each projectile suffers a little."
 msgstr ""
-"L'arciere maneggia la sua arma con una precisione da elfo, attaccando fino a "
+"L'arcere maneggia la sua arma con una precisione da elfo, attaccando fino a "
 "sette nemici davanti a lui. Il danno inflitto da ogni proiettile ne risente "
 "un po'."
 
@@ -2332,7 +2333,8 @@ msgid ""
 "The archer attacks a weak point of his enemy, causing the victim to go "
 "berserk."
 msgstr ""
-"L'arciere attacca il nemico in un punto molto doloroso, causandogli frenesia."
+"L'arcere attacca il nemico in un punto molto doloroso, solitamente "
+"l'apparato riproduttivo, causandogli frenesia."
 
 #: archer_ablt.xml
 msgid "Wind Arrows"
@@ -2343,7 +2345,7 @@ msgid ""
 "The archer has been grantet the power to imbue his projectiles with "
 "winddamage by the spirits of wind."
 msgstr ""
-"Gli spiriti del vento hanno concesso all'arciere di infondere nei suoi "
+"Gli spiriti del vento hanno concesso all'arcere di infondere nei suoi "
 "proiettili il loro tipo di danno."
 
 #: archer_ablt.xml
@@ -2355,7 +2357,7 @@ msgid ""
 "The spirits of wind help the archer to move faster than normal and avoid "
 "damage."
 msgstr ""
-"Gli spiriti del vento sospingono l'arciere rendendolo più veloce e più "
+"Gli spiriti del vento sospingono l'arcere rendendolo più veloce e più "
 "incline a evitare i danni."
 
 #: monster_ice_ablt.xml
@@ -2368,7 +2370,7 @@ msgstr "Attacco in mischia che infligge danno da freddo."
 
 #: monster_ice_ablt.xml
 msgid "basic ranged attack with ice damage"
-msgstr "attacco a distanza che infligge danno da ghiaccio"
+msgstr "Attacco a distanza che infligge danno da ghiaccio"
 
 #: monster_ice_ablt.xml
 msgid "Ice arrow"
@@ -2581,7 +2583,7 @@ msgstr "Sfera Infernale"
 
 #: mage_ablt.xml
 msgid "The mage casts an even more powerful fireball."
-msgstr "Una versione migliorate dei precedenti proiettili di fuoco."
+msgstr "Una versione migliorata dei precedenti proiettili di fuoco."
 
 #: mage_ablt.xml
 msgid "Ignite"
@@ -2662,7 +2664,7 @@ msgstr "Tempesta"
 msgid ""
 "The mage summons a ferocious tempest that bombards enemies in its wake with "
 "lightnings."
-msgstr "Il maco tempesta i nemici di fulmini"
+msgstr "Il mago evoca una feroce tempesta che bombarda i nemici di fulmini"
 
 #: monster_ablt.xml
 msgid "steal"
@@ -2678,7 +2680,7 @@ msgstr "Palla di fuoco alternativa"
 
 #: monster_ablt.xml
 msgid "Booster"
-msgstr "Manigoldo ##slang di cyberpunk 2020"
+msgstr "Manigoldo"
 
 #: monster_ablt.xml
 msgid "completely overpowered Booster"
@@ -2690,7 +2692,7 @@ msgstr "Guaritore"
 
 #: monster_ablt.xml
 msgid "Heilt alles"
-msgstr ""
+msgstr "Cura tutti"
 
 #: monster_ablt.xml
 msgid "Firestorm with increased range."
@@ -2805,6 +2807,10 @@ msgid "Peasant"
 msgstr "Contadino"
 
 #: npcStats.xml
+msgid "Peasant Woman"
+msgstr "Contadina"
+
+#: npcStats.xml
 msgid "The Trader"
 msgstr "Il Mercante"
 
@@ -2890,7 +2896,7 @@ msgstr "Derred"
 
 #: councilNPCStats.xml
 msgid "Soren Windclaw"
-msgstr "Soren ArtiglioDiGhiaccio"
+msgstr "Soren Artigliodivento"
 
 #: councilNPCStats.xml
 msgid "Worker"
@@ -2942,11 +2948,11 @@ msgstr "Scheletro gigante"
 
 #: undeadStats.xml
 msgid "Skeleton Archer"
-msgstr "Scheletro arciere"
+msgstr "Scheletro arcere"
 
 #: undeadStats.xml
 msgid "Skeleton Shadow Archer"
-msgstr "Scheletro arciere oscuro"
+msgstr "Scheletro arcere oscuro"
 
 #: undeadStats.xml
 msgid "Frostbone"
@@ -2982,7 +2988,7 @@ msgstr "Scheletro del gelo"
 
 #: undeadStats.xml
 msgid "Frost Skeleton Archer"
-msgstr "Scheletro del gelo arciere"
+msgstr "Scheletro del gelo arcere"
 
 #: undeadStats.xml
 msgid "Chilling Death"
@@ -3258,7 +3264,7 @@ msgstr "Hei, sai qualcosa dei miei oggetti smarriti?"
 
 #: joringsbridge_npc.xml
 msgid "Everything I find in and around Joringsbridge is stored here."
-msgstr "Tutto quello che ho trovato a Joringsbridge e nei dintorni ora e' qui."
+msgstr "Tutto quello che ho trovato a Ponte Joring e nei dintorni ora e' qui."
 
 #: joringsbridge_npc.xml
 msgid ""
@@ -3273,14 +3279,14 @@ msgstr "Sergente Lutterer"
 
 #: joringsbridge_npc.xml
 msgid "Joringsbridge"
-msgstr "Joringsbridge"
+msgstr "Ponte Joring"
 
 #: joringsbridge_npc.xml
 msgid ""
 "Having the responsibility for Joringsbridge is never easy, not even when I "
 "had enough soldiers."
 msgstr ""
-"Avere la responsabilita' di tutta Joringsbridge non e' mai stato facile, "
+"Avere la responsabilita' di tutta Ponte Joring non e' mai stato facile, "
 "nemmeno quando avevo abbastanza soldati."
 
 #: joringsbridge_npc.xml
@@ -3303,12 +3309,12 @@ msgid ""
 "((A guard is diverting items? Surely not for hard times. I should take a "
 "look around.))"
 msgstr ""
-"(Una guardia sta spostando gli oggetti? Non lo fara' ancora per molto. "
-"Andro' a dare un'occhiata in giro.)"
+"(Una guardia sta spostando gli oggetti? Non penso faccia scorte per periodi "
+"difficili. Andro' a dare un'occhiata in giro.)"
 
 #: joringsbridge_npc.xml
 msgid "The surroundings of Joringsbridge"
-msgstr "I dintorni di Joringsbridge"
+msgstr "I dintorni di Ponte Joring"
 
 #: joringsbridge_npc.xml
 msgid "You better be careful when leaving the village."
@@ -3327,8 +3333,8 @@ msgid ""
 "And everyone not drafted for the army seems to have discovered the happy "
 "bandit life for themselves."
 msgstr ""
-"Inoltre sembra che tutti quelli che non si sono arruolati nell'esercito "
-"abbiano scoperto le gioie di una vita da briganti."
+"Inoltre sembra che tutti i non arruolati abbiano scoperto le gioie del "
+"brigantaggio."
 
 #: joringsbridge_npc.xml
 msgid "Thanks for the warning, sergeant."
@@ -3344,7 +3350,7 @@ msgstr "Magus Convocatis Relau Fireweaver"
 
 #: joringsbridge_npc.xml
 msgid "You are the backup sent by Lord Master Windclaw, arn't you?"
-msgstr "Sei tu il rimpiazzo inviato da Lord Magister Windclaw?"
+msgstr "Sei tu il rimpiazzo inviato dal Signore e Maestro Artigliodivento?"
 
 #: joringsbridge_npc.xml
 msgid ""
@@ -3361,8 +3367,7 @@ msgstr "Chissa' se il tuo fisico ti aiutera' anche con quello?"
 #: joringsbridge_npc.xml
 msgid "Welcome to the humble... village, they call it... of Joringsbridge."
 msgstr ""
-"Benvenuto nel nostro umile... villaggio, viene chiamato... Del ponte di "
-"Joring"
+"Benvenuto nel nostro umile... villaggio, viene chiamato... Ponte Joring"
 
 #: joringsbridge_npc.xml
 msgid ""
@@ -3670,6 +3675,17 @@ msgstr "Fenor Marken"
 #: theFissure.xml
 msgid "Unknown Lich"
 msgstr "Lich Sconosciuto"
+
+#: tutorial.xml
+msgid "Overseer"
+msgstr "Supervisore"
+
+#: tutorial.xml
+msgid ""
+"I have to find an energy source and a cog before that thing will work again."
+msgstr ""
+"Devo trovare una fonte di energia e un ingranaggio per far funzionare di "
+"nuovo quell'affare"
 
 #: fortify_dwarfenwall.xml
 msgid ""

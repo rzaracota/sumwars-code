@@ -29,9 +29,10 @@ msgid "And another good deed done. I could get used to this."
 msgstr "E un'altra buona azione e' stata fatta. Ormai potrei abituarmici."
 
 #: herbalist.xml
+#, fuzzy
 msgid ""
-"The herbalist of Joringsbridge wants to have the berries of 10 bushes. \".."
-"(10 - herbalist.bushes)..\" berries have been collected."
+"The herbalist of Joringsbridge wants to have the berries of 10 bushes. "
+"Berries from \"..(herbalist.bushes)..\" bushes have been collected."
 msgstr ""
 "L'erborista di Joringsbridge vuole le bacche di 10 arbusti. \"..(10 - "
 "herbalist.bushes)..\" sono state collezionate"

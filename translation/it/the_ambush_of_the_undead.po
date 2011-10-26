@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-10-21 22:04+0200\n"
+"PO-Revision-Date: 2011-10-26 18:07+0200\n"
 "Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
 "Language-Team: Italiano <>\n"
 "Language: it\n"
@@ -441,11 +441,11 @@ msgstr "Andate via, veloci!"
 
 #: theFissure.xml
 msgid "Alright, Windclaw, I'm done here."
-msgstr "Esatto, Windclaw, qui ho finito."
+msgstr "Esatto, Artigliodivento, qui ho finito."
 
 #: theFissure.xml
 msgid "Alright, Windclaw, We are done here."
-msgstr "Esatto, Windclaw, qui abbiamo finito."
+msgstr "Esatto, Artigliodivento, qui abbiamo finito."
 
 #: theFissure.xml
 msgid "What now?"
@@ -600,8 +600,8 @@ msgid "You will discover that the scrolls take you right here again."
 msgstr "Scoprireste che la pergamena vi riporterebbe qui, di nuovo."
 
 #: theFissure.xml
-msgid "Verflucht sei Windclaw!"
-msgstr "Maledetto Windclaw!"
+msgid "Curse you, Windclaw!"
+msgstr "Maledetto Artigliodivento!"
 
 #: theFissure.xml
 msgid "Fine. Then we do it the hard way."

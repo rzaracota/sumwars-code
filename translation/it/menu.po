@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-12 21:30+0200\n"
-"PO-Revision-Date: 2011-10-21 21:44+0200\n"
+"PO-Revision-Date: 2011-10-26 16:32+0200\n"
 "Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
 "Language-Team: Italiano <>\n"
 "Language: it\n"
@@ -20,6 +20,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bits\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: ../src/core/creature.cpp:3165
+msgid "Miss"
+msgstr "Mancato"
 
 #: ../src/core/damage.cpp:143 ../src/gui/charinfo.cpp:930
 msgid "Physical"
@@ -108,6 +112,10 @@ msgstr "Potere"
 #: ../src/core/damage.cpp:328
 msgid "Chance for critical hit"
 msgstr "Probabilita' colpo critico"
+
+#: ../src/core/document.cpp:838
+msgid "Please select a character first!"
+msgstr "Prima scegli un personaggio!"
 
 #: ../src/core/document.cpp:1205 ../src/core/item.cpp:953
 #: ../src/core/item.cpp:955 ../src/core/item.cpp:1183
@@ -198,7 +206,7 @@ msgstr "Volonta'"
 msgid " max. "
 msgstr " max. "
 
-#: ../src/gui/itemwindow.cpp:168 ../src/gui/itemwindow.cpp:169
+#: ../src/gui/itemwindow.cpp:168 ../src/gui/itemwindow.cpp:169
 msgid "Equipped:\n"
 msgstr "Equpaggiato:\n"
 
@@ -216,7 +224,7 @@ msgstr "Equipaggiato (destra):\n"
 
 #: ../src/gui/itemwindow.cpp:256
 msgid "Hovered:\n"
-msgstr "Sollevato:\n"
+msgstr "Selezionato:\n"
 
 #: ../src/gui/itemwindow.cpp:265
 msgid "Attached:\n"
@@ -239,6 +247,14 @@ msgstr "Cancella"
 #: ../src/gui/charcreate.cpp:129 ../src/gui/savegamelist.cpp:180
 msgid "Create"
 msgstr "Crea"
+
+#: ../src/gui/charcreate.cpp:221
+msgid "You must enter a hero name!"
+msgstr "C'è bisogno di un nome per l'eroe!"
+
+#: ../src/gui/charcreate.cpp:237
+msgid "A character with that name already exists!"
+msgstr "Un personaggio con quel nome esiste già!"
 
 #: ../src/gui/charinfo.cpp:323
 msgid "Base damage"
@@ -380,6 +396,7 @@ msgid "Chat"
 msgstr "Chat"
 
 #: ../src/gui/controlpanel.cpp:387 ../src/gui/mainmenu.cpp:144
+#: ../src/gui/optionswindow.cpp:254
 msgid "Options"
 msgstr "Opzioni"
 
@@ -397,6 +414,7 @@ msgid "Character"
 msgstr "Personaggio"
 
 #: ../src/gui/controlpanel.cpp:399 ../src/gui/optionswindow.cpp:325
+#: ../src/gui/skilltree.cpp:579
 msgid "Skilltree"
 msgstr "Abilita'"
 
@@ -405,6 +423,7 @@ msgid "Party"
 msgstr "Party"
 
 #: ../src/gui/controlpanel.cpp:405 ../src/gui/optionswindow.cpp:334
+#: ../src/gui/questinfo.cpp:136
 msgid "Quests"
 msgstr "Quests"
 
@@ -456,6 +475,10 @@ msgstr "Si"
 msgid "No"
 msgstr "No"
 
+#: ../src/gui/tradewindow.cpp:248
+msgid "Chest"
+msgstr "Scrigno"
+
 #: ../src/gui/messageboxes.cpp:52 ../src/gui/messageboxes.cpp:198
 #: ../src/gui/networkwindows.cpp:95 ../src/gui/networkwindows.cpp:223
 #: ../src/gui/optionswindow.cpp:367 ../src/gui/tradewindow.cpp:265
@@ -470,6 +493,10 @@ msgstr "Annulla"
 msgid "Save and Exit?"
 msgstr "Salvare ed uscire?"
 
+#: ../src/gui/networkwindows.cpp:83
+msgid "Join_game"
+msgstr "Entra_In_Partita"
+
 #: ../src/gui/networkwindows.cpp:98
 msgid "Max. number of players"
 msgstr "Numero massimo di giocatori"
@@ -477,6 +504,10 @@ msgstr "Numero massimo di giocatori"
 #: ../src/gui/networkwindows.cpp:101 ../src/gui/networkwindows.cpp:229
 msgid "Port"
 msgstr "Porta"
+
+#: ../src/gui/networkwindows.cpp:184
+msgid "Host_game"
+msgstr "Ospita_Partita"
 
 #: ../src/gui/networkwindows.cpp:226
 msgid "Host"
@@ -546,6 +577,22 @@ msgstr "Viola"
 msgid "Cornflower Blue"
 msgstr "Lillà"
 
+#: ../src/gui/optionswindow.cpp:184
+msgid "Fullscreen (Exclusive Mode)"
+msgstr "Schermo intero (Modalità esclusiva)"
+
+#: ../src/gui/optionswindow.cpp:185
+msgid "Window (With Borders)"
+msgstr "Finestra (Con Bordi)"
+
+#: ../src/gui/optionswindow.cpp:190
+msgid "Window (Fullscreen)"
+msgstr "Finestra (Schermo Intero)"
+
+#: ../src/gui/optionswindow.cpp:191
+msgid " - recommended"
+msgstr "- raccomandata"
+
 #: ../src/gui/optionswindow.cpp:211
 msgid "System default"
 msgstr "Impostazioni di base"
@@ -570,13 +617,22 @@ msgstr "Grafica"
 msgid "Language"
 msgstr "Lingua"
 
+#: ../src/gui/optionswindow.cpp:299
+msgid "Restart required for setting new options"
+msgstr ""
+"E' necessario il riavvio del gioco per applicare le nuove impostazioni."
+
+#: ../src/gui/optionswindow.cpp:307
+msgid "Reset graphic options"
+msgstr "Ripristina le impostazioni grafiche."
+
 #: ../src/gui/optionswindow.cpp:322
 msgid "Character screen"
 msgstr "Personaggio"
 
 #: ../src/gui/optionswindow.cpp:328
 msgid "Party screen"
-msgstr "Party"
+msgstr "Squadra"
 
 #: ../src/gui/optionswindow.cpp:331
 msgid "Chatbox"
@@ -618,6 +674,26 @@ msgstr "Colore di evidenziazione (nemici)"
 msgid "Grab mouse in windowed mode (needs restart)"
 msgstr "Cattura il mouse nella modalità finestra (needs restart)"
 
+#: ../src/gui/optionswindow.cpp:414
+msgid "Video Driver"
+msgstr "Driver Video"
+
+#: ../src/gui/optionswindow.cpp:417
+msgid "Display Mode"
+msgstr "Modalità di visualizzazione"
+
+#: ../src/gui/optionswindow.cpp:420
+msgid "Resolution"
+msgstr "Risoluzione"
+
+#: ../src/gui/optionswindow.cpp:616
+msgid ""
+"Please restart the game\n"
+" for the changes to take effect!"
+msgstr ""
+"Siete pregati di riavviare il gioco\n"
+"per applicare i cambiamenti!"
+
 #: ../src/gui/questinfo.cpp:160
 msgid "open"
 msgstr "attive"
@@ -638,7 +714,7 @@ msgstr "Personaggi"
 msgid "Delete"
 msgstr "Cancella"
 
-#: ../src/gui/savegamelist.cpp:188 ../src/gui/charinfo.cpp:488
+#: ../src/gui/savegamelist.cpp:188 ../src/gui/charinfo.cpp:488
 msgid "Level"
 msgstr "Livello"
 
@@ -664,7 +740,7 @@ msgstr "Mago"
 
 #: playerclasses.xml
 msgid "Archer"
-msgstr "Arciere"
+msgstr "Arcere"
 
 #: playerclasses.xml
 msgid "Priest"
@@ -672,11 +748,11 @@ msgstr "Chierico"
 
 #: playerclasses.xml
 msgid "ranger"
-msgstr "Guardaboschi"
+msgstr "guardaboschi"
 
 #: playerclasses.xml
 msgid "archer"
-msgstr "arciere"
+msgstr "cacciatrice"
 
 #: playerclasses.xml
 msgid "wizard"
