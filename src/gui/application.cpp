@@ -301,7 +301,7 @@ bool Application::init(char *argv)
 		ERRORMSG("could not load ressources");
 	}
 
-	DEBUG("application initialized \n\n");
+	DEBUG ("Application initialized. Storing data in folder [%s]\n\n", operationalPath.c_str ());
 	// debugging
 	//MyFrameListener* mfl = new MyFrameListener(m_main_window,m_document);
 	//m_ogre_root->addFrameListener(mfl);
