@@ -14,6 +14,7 @@
  */
 
 #include "application.h"
+#include "config.h"
 #include "tooltipmanager.h"
 #include "itemwindow.h"
 #include "templateloader.h"
@@ -209,7 +210,7 @@ bool Application::init(char *argv)
     Ogre::String plugins = macPath();
     m_ogre_root = new Ogre::Root(plugins + "/plugins_mac.cfg", plugins + "/ogre.cfg", SumwarsHelper::userPath() + "/ogre.log");
 #else
-	m_ogre_root = new Ogre::Root("plugins.cfg", SumwarsHelper::userPath() + "/ogre.cfg", SumwarsHelper::userPath() + "/Ogre.log");
+	m_ogre_root = new Ogre::Root(CFG_FILES_DIR "/plugins.cfg", CFG_FILES_DIR "/ogre.cfg", SumwarsHelper::userPath() + "/Ogre.log");
 #endif
 
 	if (m_ogre_root ==0)
@@ -775,7 +776,11 @@ bool Application::setupResources()
 #endif
 	
 	Ogre::ConfigFile cf;
+#ifdef UNIX
+	cf.load(CFG_FILES_DIR + "/resources.cfg");
+#else
 	cf.load(path + "resources.cfg");
+#endif
 
 	// Go through all sections & settings in the file
 	Ogre::ConfigFile::SectionIterator seci = cf.getSectionIterator();

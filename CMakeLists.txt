@@ -36,10 +36,9 @@ SET(${PROJECT_NAME}_VERSION_MINOR "5")
 SET(${PROJECT_NAME}_VERSION_PATCH "5")
 SET(${PROJECT_NAME}_VERSION_REVISION ${Project_WC_REVISION})
 SET(${PROJECT_NAME}_VERSION "${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH}.${${PROJECT_NAME}_VERSION_REVISION}")
-MESSAGE(${${PROJECT_NAME}_VERSION})
+MESSAGE("${PROJECT_NAME}_VERSION: " ${${PROJECT_NAME}_VERSION})
 
-CONFIGURE_FILE( "${PROJECT_SOURCE_DIR}/src/gui/version.h.in"
-"${PROJECT_SOURCE_DIR}/src/gui/version.h" )
+CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/src/gui/version.h.in" "${PROJECT_SOURCE_DIR}/src/gui/version.h")
 
 SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules/;${CMAKE_MODULE_PATH}")
 
@@ -59,7 +58,9 @@ ENDIF()
 
 SET(CMAKE_DEBUG_POSTFIX "_d")
 
-SET(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
+if(NOT CMAKE_INSTALL_PREFIX)
+  set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
+endif()
 
 
 FIND_PACKAGE(OGRE REQUIRED)
@@ -126,8 +127,16 @@ IF(WIN32)
   MESSAGE("WARNING: Compiler warnings 4800, 4244 and 4305 disabled!")
 ENDIF()
 
+if(UNIX)
+  set(CFG_FILES_DIR "\"${CMAKE_INSTALL_PREFIX}/share/games/sumwars/\"")
+else()
+  set(CFG_FILES_DIR "./")
+endif()
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/gui/config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/src/gui/config.h)
 
 SET(HEADER_FILES
+  ./src/gui/config.h
   ./src/core/nlfg.h
   ./src/core/worldobject.h
   ./src/core/itemloader.h
@@ -440,3 +449,18 @@ IF(WIN32)
 ENDIF()
 
 TARGET_LINK_LIBRARIES(sumwars ${LINK_LIBS})
+
+
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/sumwars
+  DESTINATION games)
+install(FILES packaging/sumwars.desktop
+  DESTINATION share/applications)
+install(FILES resources.cfg ogre.cfg plugins.cfg
+  DESTINATION share/games/sumwars)
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/data" "${CMAKE_CURRENT_SOURCE_DIR}/resources"
+  DESTINATION share/games/sumwars
+  PATTERN .svn EXCLUDE)
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/translation"
+  DESTINATION share/games/sumwars
+  FILES_MATCHING PATTERN "*.mo"
+  PATTERN .svn EXCLUDE)
