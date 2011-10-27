@@ -310,8 +310,7 @@ msgstr ""
 
 #: ../src/gui/charinfo.cpp:880
 msgid ""
-"Willpower decreases the duration and the impact of status changes and "
-"increases magical melee damage."
+"Willpower decreases the duration and the impact of status changes \n and increases magical melee damage."
 msgstr ""
 
 #: ../src/gui/charinfo.cpp:884

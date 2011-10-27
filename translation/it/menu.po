@@ -317,11 +317,9 @@ msgstr ""
 
 #: ../src/gui/charinfo.cpp:880
 msgid ""
-"Willpower decreases the duration and the impact of status changes and "
-"increases magical melee damage."
+"Willpower decreases the duration and the impact of status changes \n and increases magical melee damage."
 msgstr ""
-"La Volonta' diminuisce durata ed efficacia degli effetti negativi ed "
-"incrementa il Danno Magico in Mischia."
+"La Volonta' diminuisce durata ed efficacia degli effetti negativi \n ed incrementa il Danno Magico in Mischia."
 
 #: ../src/gui/charinfo.cpp:884
 msgid "Magic power"

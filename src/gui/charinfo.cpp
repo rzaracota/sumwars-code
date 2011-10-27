@@ -625,8 +625,7 @@ void CharInfo::updateTranslation()
 	
 	label = win_mgr.getWindow("WillpowerLabel");
 	label->setText((CEGUI::utf8*) gettext("Willpower"));
-	label->setTooltipText((CEGUI::utf8*) gettext("Willpower decreases the duration and the impact of status changes and increases magical melee damage."));
-	
+	label->setTooltipText((CEGUI::utf8*) gettext("Willpower decreases the duration and the impact of status changes \n and increases magical melee damage."));
 	
 	label = win_mgr.getWindow("MagicpowerLabel");
 	label->setText((CEGUI::utf8*) gettext("Magic power"));

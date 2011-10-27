@@ -296,11 +296,9 @@ msgstr "Ловкость увеличивает дальний урон, точ�
 
 #: ../src/gui/charinfo.cpp:880
 msgid ""
-"Willpower decreases the duration and the impact of status changes and "
-"increases magical melee damage."
+"Willpower decreases the duration and the impact of status changes \n and increases magical melee damage."
 msgstr ""
-"Сила воли уменьшает действие и длительность отравления  и увеличивает "
-"магический урон в ближнем бою."
+"Сила воли уменьшает действие и длительность отравления  и увеличивает \n магический урон в ближнем бою."
 
 #: ../src/gui/charinfo.cpp:884
 msgid "Magic power"

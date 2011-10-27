@@ -298,11 +298,9 @@ msgstr ""
 
 #: ../src/gui/charinfo.cpp:880
 msgid ""
-"Willpower decreases the duration and the impact of status changes and "
-"increases magical melee damage."
+"Willpower decreases the duration and the impact of status changes \n and increases magical melee damage."
 msgstr ""
-"Willenskraft senkt die Dauer und die Stärke von Statusveränderungen und "
-"erhöht magischen Nahkampfschaden."
+"Willenskraft senkt die Dauer und die Stärke von Statusveränderungen \n und erhöht magischen Nahkampfschaden."
 
 #: ../src/gui/charinfo.cpp:884
 msgid "Magic power"
