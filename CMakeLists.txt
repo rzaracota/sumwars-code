@@ -451,15 +451,39 @@ ENDIF()
 TARGET_LINK_LIBRARIES(sumwars ${LINK_LIBS})
 
 
+# install the application
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/sumwars
   DESTINATION games)
+
 install(FILES packaging/sumwars.desktop
   DESTINATION share/applications)
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_16x16.png"
+  DESTINATION share/icons/hicolor/16x16/
+  RENAME sumwars.png)
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_24x24.png"
+  DESTINATION share/icons/hicolor/24x24/
+  RENAME sumwars.png)
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_32x32.png"
+  DESTINATION share/icons/hicolor/32x32/
+  RENAME sumwars.png)
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_48x48.png"
+  DESTINATION share/icons/hicolor/48x48/
+  RENAME sumwars.png)
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_64x64.png"
+  DESTINATION share/icons/hicolor/64x64/
+  RENAME sumwars.png)
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_128x128.png"
+  DESTINATION share/icons/hicolor/128x128/
+  RENAME sumwars.png)
+
+install(FILES authors.txt
+  DESTINATION share/games/sumwars)
 install(FILES resources.cfg ogre.cfg plugins.cfg
   DESTINATION share/games/sumwars)
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/data" "${CMAKE_CURRENT_SOURCE_DIR}/resources"
   DESTINATION share/games/sumwars
-  PATTERN .svn EXCLUDE)
+  PATTERN .svn EXCLUDE
+  PATTERN icon EXCLUDE)
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/translation"
   DESTINATION share/games/sumwars
   FILES_MATCHING PATTERN "*.mo"
