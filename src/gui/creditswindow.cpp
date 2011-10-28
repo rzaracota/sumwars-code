@@ -17,6 +17,8 @@
 #include "ceguiutility.h"
 #include "OgreConfigFile.h"
 
+#include "config.h"
+
 CreditsWindow::CreditsWindow(Document* doc)
 	:Window(doc)
 {
@@ -50,8 +52,10 @@ CreditsWindow::CreditsWindow(Document* doc)
 	credits->setProperty("HorzFormatting", "HorzCentred");
 
 	Ogre::ConfigFile cf;
-#ifndef __APPLE__
+#if defined (__APPLE__)
 	cf.load("authors.txt");
+#elif defined (__unix__)
+	cf.load(std::string(CFG_FILES_DIR) + "authors.txt");
 #else
     Ogre::String path;
     CFBundleRef mainBundle = CFBundleGetMainBundle();

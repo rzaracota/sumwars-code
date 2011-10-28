@@ -794,8 +794,8 @@ bool Application::setupResources()
 #endif
 	
 	Ogre::ConfigFile cf;
-#ifdef UNIX
-	cf.load(CFG_FILES_DIR + "/resources.cfg");
+#if defined(__unix__)
+	cf.load(std::string(CFG_FILES_DIR) + "/resources.cfg");
 #else
 	cf.load(path + "resources.cfg");
 #endif
