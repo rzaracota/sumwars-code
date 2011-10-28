@@ -1,5 +1,8 @@
 @Echo off
 
+Setlocal EnableDelayedExpansion
+Setlocal EnableExtensions
+
 Color 0B
 
 Rem Clear the screen and write a header.
@@ -12,7 +15,7 @@ Echo *            It doesn't support DEBUG version of the game                  
 Echo *****************************************************************************
 
 Rem Get the confirmation to copy the data.
-Set /p install= Do you really want to install SumWars in current directory (Y/N)? 
+Set /p install= Do you really want to install SumWars in current directory? [ Y / N ] 
 If /i not "%install%" == "Y" (
   Echo Ok, I will not do this.
   GoTo end
@@ -57,20 +60,52 @@ If Exist "%CEGUIDIR%\." (
 
 Echo OGRE libraries
 
-If Exist "%OGRE_HOME%\." (
-  Copy "%OGRE_HOME%\bin\release\cg.dll" cg.dll"
-  Copy "%OGRE_HOME%\bin\release\OgreMain.dll" OgreMain.dll
-  Copy "%OGRE_HOME%\bin\release\OgrePaging.dll" OgrePaging.dll
-  Copy "%OGRE_HOME%\bin\release\OgreRTShaderSystem.dll" OgreRTShaderSystem.dll
-  Copy "%OGRE_HOME%\bin\release\OgreTerrain.dll" OgreTerrain.dll
-  Copy "%OGRE_HOME%\bin\release\OIS.dll" OIS.dll"
-  Copy "%OGRE_HOME%\bin\release\Plugin_CgProgramManager.dll" Plugin_CgProgramManager.dll
-  Copy "%OGRE_HOME%\bin\release\Plugin_OctreeSceneManager.dll" Plugin_OctreeSceneManager.dll
-  Copy "%OGRE_HOME%\bin\release\Plugin_OctreeZone.dll" Plugin_OctreeZone.dll
-  Copy "%OGRE_HOME%\bin\release\Plugin_ParticleFX.dll" Plugin_ParticleFX.dll
-  Copy "%OGRE_HOME%\bin\release\Plugin_PCZSceneManager.dll" Plugin_PCZSceneManager.dll
-  Copy "%OGRE_HOME%\bin\release\RenderSystem_Direct3D9.dll" RenderSystem_Direct3D9.dll
-  Copy "%OGRE_HOME%\bin\release\RenderSystem_GL.dll" RenderSystem_GL.dll
+If Exist "%OGRE_HOME%" (
+  Rem Trim trailing backslash from the name
+  If "%OGRE_HOME:~-1%"=="\" (
+    Set OGRE_HOME=%OGRE_HOME:~0,-1%
+  )
+
+  Copy "!OGRE_HOME!\bin\release\cg.dll" cg.dll
+  Copy "!OGRE_HOME!\bin\release\OgreMain.dll" OgreMain.dll
+  Copy "!OGRE_HOME!\bin\release\OgrePaging.dll" OgrePaging.dll
+  Copy "!OGRE_HOME!\bin\release\OgreRTShaderSystem.dll" OgreRTShaderSystem.dll
+  Copy "!OGRE_HOME!\bin\release\OgreTerrain.dll" OgreTerrain.dll
+  Copy "!OGRE_HOME!\bin\release\OIS.dll" OIS.dll
+  Copy "!OGRE_HOME!\bin\release\Plugin_CgProgramManager.dll" Plugin_CgProgramManager.dll
+  Copy "!OGRE_HOME!\bin\release\Plugin_OctreeSceneManager.dll" Plugin_OctreeSceneManager.dll
+  Copy "!OGRE_HOME!\bin\release\Plugin_OctreeZone.dll" Plugin_OctreeZone.dll
+  Copy "!OGRE_HOME!\bin\release\Plugin_ParticleFX.dll" Plugin_ParticleFX.dll
+  Copy "!OGRE_HOME!\bin\release\Plugin_PCZSceneManager.dll" Plugin_PCZSceneManager.dll
+  Copy "!OGRE_HOME!\bin\release\RenderSystem_Direct3D9.dll" RenderSystem_Direct3D9.dll
+  Copy "!OGRE_HOME!\bin\release\RenderSystem_GL.dll" RenderSystem_GL.dll
+  
+  Rem Ogre also comes bundled with boost. Copy that to the dependencies...
+  Set _boostlibsdir=!OGRE_HOME!\boost_1_44\lib
+  Set _boostlibfile=libboost_thread-vc100-mt-gd-1_44.lib
+  If Not Exist "Dependencies\boost" (
+    MkDir "Dependencies\boost"
+  )
+  
+  If Exist "!_boostlibsdir!\!_boostlibfile!" (
+    Copy "!_boostlibsdir!\!_boostlibfile!" "Dependencies\boost\!_boostlibfile!"
+  )
+
+  Set _boostlibfile=libboost_date_time-vc100-mt-gd-1_44.lib
+  If Exist "!_boostlibsdir!\!_boostlibfile!" (
+    Copy "!_boostlibsdir!\!_boostlibfile!" "Dependencies\boost\!_boostlibfile!"
+  )
+
+  Set _boostlibfile=libboost_thread-vc100-mt-1_44.lib
+  If Exist "!_boostlibsdir!\!_boostlibfile!" (
+    Copy "!_boostlibsdir!\!_boostlibfile!" "Dependencies\boost\!_boostlibfile!"
+  )
+
+  Set _boostlibfile=libboost_date_time-vc100-mt-1_44.lib
+  If Exist "!_boostlibsdir!\!_boostlibfile!" (
+    Copy "!_boostlibsdir!\!_boostlibfile!" "Dependencies\boost\!_boostlibfile!"
+  )
+  
 ) Else (
   Echo Can't find OGRE folder, please ensure that the environment variable [OGRE_HOME] is set correctly ^!
   Echo Please define it so that the file "[OGRE_HOME]\bin\release\OgreMain.dll" can be found. 
@@ -179,24 +214,38 @@ GoTo end
 
 Echo Copy GetText libraries
 
-If Exist "%GNUWINDIR%" (
-  If Exist "%GNUWINDIR%\bin\." (
-    Copy "%GNUWINDIR%\bin\libgettextlib.dll" libgettextlib.dll
-    Copy "%GNUWINDIR%\bin\libgettextpo.dll" libgettextpo.dll
-    Copy "%GNUWINDIR%\bin\libgettextsrc.dll" libgettextsrc.dll
-    Copy "%GNUWINDIR%\bin\libiconv2.dll" libiconv2.dll
-    Copy "%GNUWINDIR%\bin\libintl3.dll" libintl3.dll
-  ) Else (
-    Echo Cannot find [bin] subfolder: ["%GNUWINDIR%\bin\]. Corrupt installation?
-  )  
+If Exist "%GNUWINDIR%\." (
+  Set _myFile=libgettextlib.dll
+  If Exist "%GNUWINDIR%\bin\!_myFile!" Copy "%GNUWINDIR%\bin\!_myFile!" !_myFile!
+  Set _myFile=libgettextpo.dll
+  If Exist "%GNUWINDIR%\bin\!_myFile!" Copy "%GNUWINDIR%\bin\!_myFile!" !_myFile!
+  Set _myFile=libgettextsrc.dll
+  If Exist "%GNUWINDIR%\bin\!_myFile!" Copy "%GNUWINDIR%\bin\!_myFile!" !_myFile!
+  Set _myFile=libiconv2.dll
+  If Exist "%GNUWINDIR%\bin\!_myFile!" Copy "%GNUWINDIR%\bin\!_myFile!" !_myFile!
+  Set _myFile=libintl3.dll
+  If Exist "%GNUWINDIR%\bin\!_myFile!" Copy "%GNUWINDIR%\bin\!_myFile!" !_myFile!
+
+  Rem Also copy the lib to the dependency folder.
+  If Not Exist "Dependencies\gettext" (
+    MkDir "Dependencies\gettext"
+  )
+  If Exist "!prefGnuDir!\lib\libintl.lib" (
+    Copy "!prefGnuDir!\lib\libintl.lib" "Dependencies\gettext\libintl.lib"
+  )
 ) Else (
-  Echo Cannot find env var for [GNUWINDIR]. Checking default path. [%programfiles%\GnuWin32]
+  Echo Cannot find env var for [GNUWINDIR]. Checking default path. ["%programfiles%\GnuWin32"]
   If Exist "%programfiles%\GnuWin32\bin\." (
-    Copy "%programfiles%\GnuWin32\bin\libgettextlib.dll" libgettextlib.dll
-    Copy "%programfiles%\GnuWin32\bin\libgettextpo.dll" libgettextpo.dll
-    Copy "%programfiles%\GnuWin32\bin\libgettextsrc.dll" libgettextsrc.dll
-    Copy "%programfiles%\GnuWin32\bin\libiconv2.dll" libiconv2.dll
-    Copy "%programfiles%\GnuWin32\bin\libintl3.dll" libintl3.dll
+    Set _myFile=libgettextlib.dll
+    If Exist "%programfiles%\GnuWin32\bin\!_myFile!" Copy "%programfiles%\GnuWin32\bin\!_myFile!" !_myFile!
+    Set _myFile=libgettextpo.dll
+    If Exist "%programfiles%\GnuWin32\bin\!_myFile!" Copy "%programfiles%\GnuWin32\bin\!_myFile!" !_myFile!
+    Set _myFile=libgettextsrc.dll
+    If Exist "%programfiles%\GnuWin32\bin\!_myFile!" Copy "%programfiles%\GnuWin32\bin\!_myFile!" !_myFile!
+    Set _myFile=libiconv2.dll
+    If Exist "%programfiles%\GnuWin32\bin\!_myFile!" Copy "%programfiles%\GnuWin32\bin\!_myFile!" !_myFile!
+    Set _myFile=libintl3.dll
+    If Exist "%programfiles%\GnuWin32\bin\!_myFile!" Copy "%programfiles%\GnuWin32\bin\!_myFile!" !_myFile!
   ) Else (
     Echo Can't find GetText folder, enshure that environmant variable is set correctly
     Color 0C
@@ -204,7 +253,6 @@ If Exist "%GNUWINDIR%" (
     GoTo end
   )
 )
-
 
 If ERRORLEVEL==1 (
   Color 0C
@@ -217,19 +265,20 @@ If ERRORLEVEL==1 (
 GoTo end
 
 :check
-Echo Is this your SumWars source folder /Yes
-Set /p stry_svn= or maybe you are just installing the game second time /No
+Echo Is this your SumWars source folder?
+Echo ^(Answer [No] if you are just installing the game to a second location^)
+Set /p stry_svn=Your answer: [ Y / N ] 
    
 If /i "%stry_svn%" == "Y" (
   Echo Copy sumwars.exe
 
   If Exist "Release\sumwars.exe" ( Copy "Release\sumwars.exe" sumwars.exe
-  ) Else ( Echo Looks like you didn't compile sumwars.exe
-         GoTo end
-         )
-		 
-   ) Else (
-   Call :AskSVN
+  ) Else (
+    Echo Looks like you didn't build sumwars.exe ^(Release^)
+    GoTo end
+  )
+) Else (
+  Call :AskSVN
 )
 GoTo :eof
 
