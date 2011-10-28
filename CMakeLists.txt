@@ -225,6 +225,7 @@ SET(HEADER_FILES
   ./src/gui/sound.h
   ./src/gui/tooltip.h
   ./src/gui/optionswindow.h
+  ./src/gui/clipboard.h
 )
 
 IF(NO_TINYXML)
@@ -347,6 +348,7 @@ SET(SRCS
   ./src/gui/sound.cpp
   ./src/gui/tooltip.cpp
   ./src/gui/optionswindow.cpp
+  ./src/gui/clipboard.cpp
 )
  
 IF(BUILD_TOOLS)
