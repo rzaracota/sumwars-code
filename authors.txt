@@ -2,6 +2,7 @@
 =Hans Wulf (Lastmerlin)
 =Stefan Stammberger (fusion44)
 =Nicholas Cosens (gnemo)
+=Augustin Preda (dezGusty)
 
 [B Network Library For Games (NLFG)]
 =David Athay (trapdoor)
@@ -52,3 +53,4 @@
 [K Website]
 =Andreas Schönefeldt 
 =Michael Kempf (Hangman)
+=Michael Kunz 
