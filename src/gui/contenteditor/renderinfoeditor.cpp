@@ -284,7 +284,7 @@ void RenderInfoEditor::updateSubmeshEditor(std::string objectname, bool updateLi
 		
 		std::list<MovableObjectInfo>& objects = m_edited_renderinfo.getObjects();
 		CEGUI::ListboxTextItem* listitem;
-		CEGUI::ListboxTextItem* selecteditem;
+		//CEGUI::ListboxTextItem* selecteditem; // 2011.10.28: found as unused
 		for (std::list<MovableObjectInfo>::iterator it = objects.begin(); it != objects.end(); ++it)
 		{
 			if (it->m_type != MovableObjectInfo::ENTITY)
@@ -385,7 +385,7 @@ void RenderInfoEditor::updateSubmeshEditor(std::string objectname, bool updateLi
 		boneobjSelector->setText("");
 		boneSelector->setText("");
 		
-		for (int i=0; i<boneobjSelector->getItemCount(); i++)
+		for (size_t i=0; i<boneobjSelector->getItemCount(); i++)
 		{
 			if (boneobjSelector->getListboxItemFromIndex(i)->getText() == boneobj)
 			{
@@ -393,7 +393,7 @@ void RenderInfoEditor::updateSubmeshEditor(std::string objectname, bool updateLi
 				boneobjSelector->setText(boneobj);
 			}
 		}
-		for (int i=0; i<boneSelector->getItemCount(); i++)
+		for (size_t i=0; i<boneSelector->getItemCount(); i++)
 		{
 			if (boneSelector->getListboxItemFromIndex(i)->getText() == bone)
 			{
@@ -787,7 +787,7 @@ bool RenderInfoEditor::onRenderinfoXMLModified(const CEGUI::EventArgs& evt)
 		int err_col = ri_temp_xml.ErrorCol();
 		
 		int row =1, col = 1;	
-		int pos = 0;	// cursor position found
+		size_t pos = 0;	// cursor position found
 		const CEGUI::String& text = editor->getText();
 		while (pos < text.size())
 		{
