@@ -46,6 +46,9 @@
 // Add the material manager to allow setting shadow techniques
 #include <OgreMaterialManager.h>
 
+// Clipboard singleton created here.
+#include "clipboard.h"
+
 
 /**
 	Application constructor. Will call the init function.
@@ -992,7 +995,10 @@ bool Application::createView()
 	mgr->setFadeInTime(200.0f);
 	mgr->setFadeOutTime(200.0f);
 	mgr->setVisibleTime(0.0f);
-	
+
+	// Create the clipboard singleton
+	new SWUtil::Clipboard ();
+
 	return true;
 }
 

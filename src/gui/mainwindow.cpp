@@ -44,10 +44,14 @@
 #include "tooltipmanager.h"
 #include "ceguiutility.h"
 
+// Access the OS clipboard.
+#include "clipboard.h"
+
 #ifdef BUILD_TOOLS
 #include "debugpanel.h"
 #include "contenteditor.h"
 #endif
+
 
 MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc)
 {
@@ -2676,6 +2680,32 @@ bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 	if (evt.key == OIS::KC_RSHIFT || evt.key == OIS::KC_LSHIFT)
 	{
 		m_document->getGUIState()->m_shift_hold = true;
+	}
+
+	// Test for copy paste operations.
+	if (evt.key == OIS::KC_C)
+	{
+		if (m_keyboard->isModifierDown (OIS::Keyboard::Ctrl))
+		{
+			DEBUG ("MainWindow:: ctrl + c pressed!");
+			SWUtil::Clipboard::getSingletonPtr ()->copy ();
+		}
+	}
+	else if (evt.key == OIS::KC_X)
+	{
+		if (m_keyboard->isModifierDown (OIS::Keyboard::Ctrl))
+		{
+			DEBUG ("MainWindow:: ctrl + X pressed!");
+			SWUtil::Clipboard::getSingletonPtr ()->cut ();
+		}
+	}
+	else if (evt.key == OIS::KC_V)
+	{
+		if (m_keyboard->isModifierDown (OIS::Keyboard::Ctrl))
+		{
+			DEBUG ("MainWindow:: ctrl + V pressed!");
+			SWUtil::Clipboard::getSingletonPtr ()->paste ();
+		}
 	}
 	
 	if (!ret)
