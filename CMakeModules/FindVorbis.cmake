@@ -25,7 +25,7 @@ IF(WIN32)
 FIND_LIBRARY(VORBIS_LIBRARY_OPTIMIZED
   NAMES libvorbis libvorbis_static libvorbis-static-mt
   PATHS $ENV{VORBISDIR}
-  PATH_SUFFIXES Release Win32/Release
+  PATH_SUFFIXES Release Win32/Release VS2010/Win32/Release Win32/VS2010/Win32/Release
 )
 ELSE()
 FIND_LIBRARY(VORBIS_LIBRARY_OPTIMIZED
@@ -38,7 +38,7 @@ IF(WIN32)
 FIND_LIBRARY(VORBIS_LIBRARY_DEBUG
   NAMES libvorbis libvorbis_static vorbis_d vorbisD vorbis_D libvorbis-static-mt-debug
   PATHS $ENV{VORBISDIR}
-  PATH_SUFFIXES Debug Win32/Debug
+  PATH_SUFFIXES Debug Win32/Debug VS2010/Win32/Debug Win32/VS2010/Win32/Debug
 )
 ELSE()
 FIND_LIBRARY(VORBIS_LIBRARY_DEBUG
