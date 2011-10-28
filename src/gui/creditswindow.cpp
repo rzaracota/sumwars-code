@@ -53,10 +53,6 @@ CreditsWindow::CreditsWindow(Document* doc)
 
 	Ogre::ConfigFile cf;
 #if defined (__APPLE__)
-	cf.load("authors.txt");
-#elif defined (__unix__)
-	cf.load(std::string(CFG_FILES_DIR) + "authors.txt");
-#else
     Ogre::String path;
     CFBundleRef mainBundle = CFBundleGetMainBundle();
     CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
@@ -65,6 +61,10 @@ CreditsWindow::CreditsWindow(Document* doc)
     CFRelease(resourcesURL);
     path = resPath;
     cf.load(path + "/authors.txt");
+#elif defined (__unix__)
+	cf.load(std::string(CFG_FILES_DIR) + "authors.txt");
+#else // WINDOWS
+	cf.load("authors.txt");
 #endif
 
 	// Go through all sections & settings in the file
