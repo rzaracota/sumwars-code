@@ -27,6 +27,7 @@
 FIND_PATH(LUA_INCLUDE_DIR lua.h
   HINTS
   $ENV{LUA_DIR}
+  $ENV{LUA_DEV}
   PATH_SUFFIXES include/lua51 include/lua5.1 include/lua include
   PATHS
   ${PROJECT_SOURCE_DIR}/Dependencies/lua5.1/include
@@ -44,6 +45,7 @@ FIND_LIBRARY(LUA_LIBRARY
   NAMES lua51 lua5.1 lua-5.1 lua
   HINTS
   $ENV{LUA_DIR}
+  $ENV{LUA_DEV}
   PATH_SUFFIXES lib64 lib
   PATHS
   ${PROJECT_SOURCE_DIR}/Dependencies/lua5.1/lib/static
