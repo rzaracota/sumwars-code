@@ -89,12 +89,12 @@ int main (int argc, char *argv[]) {
 	/*
 	catch (std::exception& e)
 	{
-		DEBUG("Programm died with exception %s",e.what());
+		DEBUG("Program died with exception %s",e.what());
 	}
 	*/
 	catch (CEGUI::Exception& e)
 	{
-		DEBUG("Programm died with exception %s",e.getMessage().c_str());
+		DEBUG("Program died with exception %s", e.getMessage().c_str());
 	}
 	// Ende
 	return 0;
