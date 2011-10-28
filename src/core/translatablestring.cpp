@@ -116,7 +116,7 @@ void TranslatableString::fromString(CharConv* cv)
 	int size;
 	cv->fromBuffer(size);
 	m_substrings.resize(size);
-	for (int i=0; i<m_substrings.size(); i++)
+	for (size_t i=0; i<m_substrings.size(); i++)
 	{
 		cv->fromBuffer(m_substrings[i]);
 	}

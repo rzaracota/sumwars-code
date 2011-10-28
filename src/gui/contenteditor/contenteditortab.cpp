@@ -139,7 +139,7 @@ void ContentEditorTab::setMultiLineEditboxCursor(std::string windowname, int row
 	if (editor != 0)
 	{
 		int r =1, c = 1;	
-		int pos = 0;	// cursor position found
+		size_t pos = 0;	// cursor position found
 		const CEGUI::String& text = editor->getText();
 		while (pos < text.size())
 		{

@@ -876,7 +876,7 @@ void Scene::getMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, O
     // Allocate space for the vertices and indices
 	vertices = new Ogre::Vector3[vertex_count];
 	indices = new unsigned long[index_count];
-	for (int i=0; i<index_count; i++)
+	for (size_t i=0; i<index_count; i++)
 	{
 		indices[i] = 0;
 	}
