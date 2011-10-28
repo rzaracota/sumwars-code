@@ -24,7 +24,7 @@ IF (WIN32)
 FIND_LIBRARY(OGG_LIBRARY_OPTIMIZED
   NAMES libogg libogg_static libogg-static-mt
   PATHS $ENV{OGGDIR}
-  PATH_SUFFIXES Release Win32/Release
+  PATH_SUFFIXES Release Win32/Release VS2010/Win32/Release Win32/VS2010/Win32/Release
 )
 ELSE()
 FIND_LIBRARY(OGG_LIBRARY_OPTIMIZED
@@ -38,7 +38,7 @@ IF(WIN32)
 FIND_LIBRARY(OGG_LIBRARY_DEBUG
   NAMES liboggd libogg_static libogg_d liboggD libogg_D libogg-static-mt-debug
   PATHS $ENV{OGGDIR}
-  PATH_SUFFIXES Debug Win32/Debug
+  PATH_SUFFIXES Debug Win32/Debug VS2010/Win32/Debug Win32/VS2010/Win32/Debug
 )
 ELSE()
 FIND_LIBRARY(OGG_LIBRARY_DEBUG
