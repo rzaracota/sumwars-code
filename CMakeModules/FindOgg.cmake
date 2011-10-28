@@ -20,11 +20,19 @@ FIND_PATH(OGG_INCLUDE_DIR ogg/ogg.h
   PATHS $ENV{OGGDIR}
   PATH_SUFFIXES include
 )
+
+
 IF (WIN32)
+#Make a special selection for the scenario of using visual studio 2010, since this will
+#be the most frequent at this stage.
+SET (TMP_SUFF Win32/Release)
+IF (MSVC10)
+SET (TMP_SUFF ${TMP_SUFF} VS2010/Win32/Release Win32/VS2010/Win32/Release )
+ENDIF (MSVC10)
 FIND_LIBRARY(OGG_LIBRARY_OPTIMIZED
   NAMES libogg libogg_static libogg-static-mt
   PATHS $ENV{OGGDIR}
-  PATH_SUFFIXES Release Win32/Release VS2010/Win32/Release Win32/VS2010/Win32/Release
+  PATH_SUFFIXES Release ${TMP_SUFF}
 )
 ELSE()
 FIND_LIBRARY(OGG_LIBRARY_OPTIMIZED
@@ -35,10 +43,16 @@ ENDIF(WIN32)
 
 
 IF(WIN32)
+#Make a special selection for the scenario of using visual studio 2010, since this will
+#be the most frequent at this stage.
+SET (TMP_SUFF Win32/Debug)
+IF (MSVC10)
+SET (TMP_SUFF ${TMP_SUFF} VS2010/Win32/Debug Win32/VS2010/Win32/Debug )
+ENDIF (MSVC10)
 FIND_LIBRARY(OGG_LIBRARY_DEBUG
   NAMES liboggd libogg_static libogg_d liboggD libogg_D libogg-static-mt-debug
   PATHS $ENV{OGGDIR}
-  PATH_SUFFIXES Debug Win32/Debug VS2010/Win32/Debug Win32/VS2010/Win32/Debug
+  PATH_SUFFIXES Debug ${TMP_SUFF}
 )
 ELSE()
 FIND_LIBRARY(OGG_LIBRARY_DEBUG
