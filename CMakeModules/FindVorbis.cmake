@@ -29,7 +29,7 @@ IF (MSVC10)
 SET (TMP_SUFF ${TMP_SUFF} VS2010/Win32/Release Win32/VS2010/Win32/Release )
 ENDIF (MSVC10)
 FIND_LIBRARY(VORBIS_LIBRARY_OPTIMIZED
-  NAMES libvorbis libvorbis_static libvorbis-static-mt
+  NAMES libvorbis_static libvorbis libvorbis-static-mt
   PATHS $ENV{VORBISDIR}
   PATH_SUFFIXES Release ${TMP_SUFF}
 )
