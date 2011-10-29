@@ -6,6 +6,7 @@ OPTION(NO_TINYXML "Do not use in-source TinyXML Lib" OFF)
 OPTION(NO_ENET "Do not use in-source ENET Lib" OFF)
 OPTION(BUILD_TOOLS "Builds editor tools" ON)
 OPTION(UPDATE_SUBVERSION_REVISION "Option to turn off automatic revision checking" ON)
+OPTION(POST_BUILD_COPY "After a build, copy the executable (Win32)" OFF)
 
 
 IF( NOT CMAKE_BUILD_TYPE )
@@ -38,6 +39,7 @@ SET(${PROJECT_NAME}_VERSION_REVISION ${Project_WC_REVISION})
 SET(${PROJECT_NAME}_VERSION "${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH}.${${PROJECT_NAME}_VERSION_REVISION}")
 MESSAGE("${PROJECT_NAME}_VERSION: " ${${PROJECT_NAME}_VERSION})
 
+
 CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/src/gui/version.h.in" "${PROJECT_SOURCE_DIR}/src/gui/version.h")
 
 SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules/;${CMAKE_MODULE_PATH}")
@@ -67,6 +69,11 @@ FIND_PACKAGE(OGRE REQUIRED)
 IF(NOT "${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
   MESSAGE(SEND_ERROR "You need Ogre 1.7 Cthugha to build this.")
 ENDIF()
+
+IF (WIN32)
+  FIND_PACKAGE(BOOST REQUIRED)
+  FIND_PACKAGE(GNUWIN REQUIRED)
+ENDIF (WIN32)
 FIND_PACKAGE(OIS REQUIRED)
 FIND_PACKAGE(Lua51 REQUIRED)
 FIND_PACKAGE(CEGUI REQUIRED)
@@ -91,6 +98,9 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/core)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/contenteditor)
 INCLUDE_DIRECTORIES(${OGRE_INCLUDE_DIRS})
+IF (WIN32)
+  INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
+ENDIF (WIN32)
 INCLUDE_DIRECTORIES(${OIS_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${CEGUI_INCLUDE_DIR})
@@ -407,6 +417,15 @@ ENDIF (WIN32)
 
 ADD_EXECUTABLE(sumwars ${SRCS})
 
+# Only after adding the executable can a link be made to boost
+IF (WIN32)
+  include_directories(${Boost_INCLUDE_DIRS})
+  link_directories(${Boost_LIBRARY_DIRS})
+  include_directories(${GNUWIN_INCLUDE_DIR})
+
+  message("Adding boost include: ${Boost_INCLUDE_DIRS}")
+ENDIF (WIN32)
+
 #${CEGUILUA_LIBRARY}
 
 
@@ -419,7 +438,7 @@ SET(LINK_LIBS
   ${LUA_LIBRARIES} 
   ${OPENAL_LIBRARY} 
   ${ALUT_LIBRARY} 
-  ${OGG_LIBRARY_DEBUG}
+  ${OGG_LIBRARY}
   ${VORBIS_LIBRARIES} 
   ${PHYSFS_LIBRARY}
   )
@@ -440,8 +459,8 @@ IF(WIN32)
   SET(LINK_LIBS
     ws2_32.lib
     winmm.lib
-    ${LINK_LIBS}	
-    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/lib/libgettextlib.lib
+    ${LINK_LIBS}
+#    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/lib/libgettextlib.lib
     ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/lib/libintl.lib
     ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_thread-vc100-mt-gd-1_44.lib
     ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_date_time-vc100-mt-gd-1_44.lib
@@ -451,6 +470,13 @@ IF(WIN32)
 ENDIF()
 
 TARGET_LINK_LIBRARIES(sumwars ${LINK_LIBS})
+
+IF(POST_BUILD_COPY)
+  ADD_CUSTOM_COMMAND(TARGET sumwars
+    POST_BUILD
+    COMMAND copy $(OutDir)$(TargetFileName) $(ProjectDir)$(TargetFileName)
+  )
+ENDIF(POST_BUILD_COPY)
 
 
 # install the application
