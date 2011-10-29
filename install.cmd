@@ -14,10 +14,12 @@ Echo *It suggests that you have already built sumwars.exe Release executable fil
 Echo *            It doesn't support DEBUG version of the game                   *
 Echo *****************************************************************************
 
-Rem Get the confirmation to copy the data.
+Rem Get the confirmation to copy the data to current folder.
 Set /p install= Do you really want to install SumWars in current directory? [ Y / N ] 
 If /i not "%install%" == "Y" (
   Echo Ok, I will not do this.
+  Echo If you want to install the game into another folder,
+  Echo copy this script where you want and run it again from there.
   GoTo end
 ) Else (
   Echo Let's do it
@@ -47,10 +49,6 @@ If Exist "%CEGUIDIR%\." (
   Copy "%CEGUIDIR%\bin\CEGUILuaScriptModule.dll" CEGUILuaScriptModule.dll
   Copy "%CEGUIDIR%\bin\CEGUIOgreRenderer.dll" CEGUIOgreRenderer.dll
   Copy "%CEGUIDIR%\bin\CEGUISILLYImageCodec.dll" CEGUISILLYImageCodec.dll
-  Rem also add the xml parser
-  If Exist "%CEGUIDIR%\bin\CEGUITinyXMLParser.dll" (
-    Copy "%CEGUIDIR%\bin\CEGUITinyXMLParser.dll" CEGUITinyXMLParser.dll
-  )
 ) Else (
   Echo Can't find CEGUI folder, ensure that environmant variable is set correctly
   Color 0C
@@ -79,33 +77,6 @@ If Exist "%OGRE_HOME%" (
   Copy "!OGRE_HOME!\bin\release\Plugin_PCZSceneManager.dll" Plugin_PCZSceneManager.dll
   Copy "!OGRE_HOME!\bin\release\RenderSystem_Direct3D9.dll" RenderSystem_Direct3D9.dll
   Copy "!OGRE_HOME!\bin\release\RenderSystem_GL.dll" RenderSystem_GL.dll
-  
-  Rem Ogre also comes bundled with boost. Copy that to the dependencies...
-  Set _boostlibsdir=!OGRE_HOME!\boost_1_44\lib
-  Set _boostlibfile=libboost_thread-vc100-mt-gd-1_44.lib
-  If Not Exist "Dependencies\boost" (
-    MkDir "Dependencies\boost"
-  )
-  
-  If Exist "!_boostlibsdir!\!_boostlibfile!" (
-    Copy "!_boostlibsdir!\!_boostlibfile!" "Dependencies\boost\!_boostlibfile!"
-  )
-
-  Set _boostlibfile=libboost_date_time-vc100-mt-gd-1_44.lib
-  If Exist "!_boostlibsdir!\!_boostlibfile!" (
-    Copy "!_boostlibsdir!\!_boostlibfile!" "Dependencies\boost\!_boostlibfile!"
-  )
-
-  Set _boostlibfile=libboost_thread-vc100-mt-1_44.lib
-  If Exist "!_boostlibsdir!\!_boostlibfile!" (
-    Copy "!_boostlibsdir!\!_boostlibfile!" "Dependencies\boost\!_boostlibfile!"
-  )
-
-  Set _boostlibfile=libboost_date_time-vc100-mt-1_44.lib
-  If Exist "!_boostlibsdir!\!_boostlibfile!" (
-    Copy "!_boostlibsdir!\!_boostlibfile!" "Dependencies\boost\!_boostlibfile!"
-  )
-  
 ) Else (
   Echo Can't find OGRE folder, please ensure that the environment variable [OGRE_HOME] is set correctly ^!
   Echo Please define it so that the file "[OGRE_HOME]\bin\release\OgreMain.dll" can be found. 
@@ -148,19 +119,16 @@ If Exist "%POCO_HOME%\." (
 ) Else (
   Echo Can't find POCO folder, please ensure that the environment variable [POCO_HOME] is set correctly
   Echo Please define it so that the file "[POCO_HOME]\bin\PocoFoundation.dll" can be found.
-  Echo Otherwise YOU CANNOT MAKE [DEBUG] MODE BUILDS
-REM   Color 0C
-REM   Call :fail
-REM   GoTo end
+  Color 0C
+  Call :fail
+  GoTo end
 )
 
 Echo Copy Lua
 
 If Exist "%LUA_DEV%\." (
-  Rem Allow binding with and without the point. Should only use the latter though.
-  Rem Only the first one was used initially... no idea why.
+  Rem Copy lua5.1.dll to lua51.dll because lua51.dll is only wrapper and we need full dll.
   Copy "%LUA_DEV%\lua5.1.dll" lua51.dll
-  Copy "%LUA_DEV%\lua5.1.dll" lua5.1.dll
 ) Else (
   Echo Can't find LUA folder, please ensure that the environment variable [LUA_DEV] is set correctly
   Echo Please define it so that the file "[LUA_DEV]\lua5.1.dll" can be found.
@@ -171,17 +139,16 @@ If Exist "%LUA_DEV%\." (
 
 Echo Copy Ogg
 
-If Exist "%OGGDIR%\." (
-  If Exist "%OGGDIR%\Win32\Release\libogg.dll" (
-    Copy "%OGGDIR%\Win32\Release\libogg.dll" libogg.dll
-  )
-  If Exist "%OGGDIR%\Release\libogg.dll" (
-    Copy "%OGGDIR%\Release\libogg.dll" libogg.dll
-  )
-  If Exist "%OGGDIR%\libogg.dll" (
-    Copy "%OGGDIR%\libogg.dll" libogg.dll
-  )
-) Else (
+if EXIST "%OGGDIR%\Win32\Release\libogg.dll" (
+  copy "%OGGDIR%\Win32\Release\libogg.dll" libogg.dll
+)
+if EXIST "%OGGDIR%\Release\libogg.dll" (
+  copy "%OGGDIR%\Release\libogg.dll" libogg.dll
+)
+if EXIST "%OGGDIR%\libogg.dll" (
+  copy "%OGGDIR%\libogg.dll" libogg.dll
+)
+if not EXIST "%OGGDIR%\." (
   Echo Can't find OGG folder, please ensure that the environment variable [OGGDIR] is set correctly
   Echo Please define it so that the file "[OGGDIR]\Win32\Release\libogg.dll" can be found.
   Echo OR "[OGGDIR]\Release\libogg.dll" can be found.
@@ -225,32 +192,24 @@ If Exist "%GNUWINDIR%\." (
   If Exist "%GNUWINDIR%\bin\!_myFile!" Copy "%GNUWINDIR%\bin\!_myFile!" !_myFile!
   Set _myFile=libintl3.dll
   If Exist "%GNUWINDIR%\bin\!_myFile!" Copy "%GNUWINDIR%\bin\!_myFile!" !_myFile!
-
-  Rem Also copy the lib to the dependency folder.
-  If Not Exist "Dependencies\gettext" (
-    MkDir "Dependencies\gettext"
-  )
-  If Exist "!prefGnuDir!\lib\libintl.lib" (
-    Copy "!prefGnuDir!\lib\libintl.lib" "Dependencies\gettext\libintl.lib"
-  )
-) Else (
-  Echo Cannot find env var for [GNUWINDIR]. Checking default path. ["%programfiles%\GnuWin32"]
-  If Exist "%programfiles%\GnuWin32\bin\." (
-    Set _myFile=libgettextlib.dll
-    If Exist "%programfiles%\GnuWin32\bin\!_myFile!" Copy "%programfiles%\GnuWin32\bin\!_myFile!" !_myFile!
-    Set _myFile=libgettextpo.dll
-    If Exist "%programfiles%\GnuWin32\bin\!_myFile!" Copy "%programfiles%\GnuWin32\bin\!_myFile!" !_myFile!
-    Set _myFile=libgettextsrc.dll
-    If Exist "%programfiles%\GnuWin32\bin\!_myFile!" Copy "%programfiles%\GnuWin32\bin\!_myFile!" !_myFile!
-    Set _myFile=libiconv2.dll
-    If Exist "%programfiles%\GnuWin32\bin\!_myFile!" Copy "%programfiles%\GnuWin32\bin\!_myFile!" !_myFile!
-    Set _myFile=libintl3.dll
-    If Exist "%programfiles%\GnuWin32\bin\!_myFile!" Copy "%programfiles%\GnuWin32\bin\!_myFile!" !_myFile!
-  ) Else (
-    Echo Can't find GetText folder, enshure that environmant variable is set correctly
-    Color 0C
-    Call :fail
-    GoTo end
+)
+If Exist "%programfiles%\GnuWin32\bin\." (
+  Set _myFile=libgettextlib.dll
+  If Exist "%programfiles%\GnuWin32\bin\!_myFile!" Copy "%programfiles%\GnuWin32\bin\!_myFile!" !_myFile!
+  Set _myFile=libgettextpo.dll
+  If Exist "%programfiles%\GnuWin32\bin\!_myFile!" Copy "%programfiles%\GnuWin32\bin\!_myFile!" !_myFile!
+  Set _myFile=libgettextsrc.dll
+  If Exist "%programfiles%\GnuWin32\bin\!_myFile!" Copy "%programfiles%\GnuWin32\bin\!_myFile!" !_myFile!
+  Set _myFile=libiconv2.dll
+  If Exist "%programfiles%\GnuWin32\bin\!_myFile!" Copy "%programfiles%\GnuWin32\bin\!_myFile!" !_myFile!
+  Set _myFile=libintl3.dll
+  If Exist "%programfiles%\GnuWin32\bin\!_myFile!" Copy "%programfiles%\GnuWin32\bin\!_myFile!" !_myFile!
+)
+If not Exist libgettextlib.dll (
+  Echo Can't find GetText folder, enshure that environmant variable is set correctly
+  Color 0C
+  Call :fail
+  GoTo end
   )
 )
 
@@ -297,7 +256,7 @@ GoTo :eof
 
 
 :AskDiff
- Set /p buildsame= Is your build folder the same as source folder 
+ Set /p buildsame= Is your build folder the same as source folder? [ Y / N ]
  
      If /i not "%buildsame%" == "Y" ( Call :AskBuild
      ) Else (
@@ -342,15 +301,10 @@ If Exist "%build%\Release\sumwars.exe" (
   Echo Copy sumwars.exe
   Copy "%build%\Release\sumwars.exe" sumwars.exe
 ) Else (
-  Echo Current dir is [%CD%]
-  If Exist "build\Release\sumwars.exe" (
-    Copy "build\Release\sumwars.exe" sumwars.exe
-  ) Else (
     Echo Looks like you didn't compile sumwars.exe
     Color 0C
     Call :fail
     GoTo end
-  )
 )
 GoTo :eof
 
