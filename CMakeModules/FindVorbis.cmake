@@ -48,7 +48,7 @@ IF (MSVC10)
 SET (TMP_SUFF ${TMP_SUFF} VS2010/Win32/Debug Win32/VS2010/Win32/Debug )
 ENDIF (MSVC10)
 FIND_LIBRARY(VORBIS_LIBRARY_DEBUG
-  NAMES libvorbis libvorbis_static vorbis_d vorbisD vorbis_D libvorbis-static-mt-debug
+  NAMES libvorbis_static libvorbis vorbis_d vorbisD vorbis_D libvorbis-static-mt-debug
   PATHS $ENV{VORBISDIR}
   PATH_SUFFIXES Debug ${TMP_SUFF}
 )
@@ -107,8 +107,8 @@ FIND_PACKAGE_HANDLE_STANDARD_ARGS(Vorbis DEFAULT_MSG
 ELSE()
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(Vorbis DEFAULT_MSG
   VORBIS_LIBRARY_OPTIMIZED
-  #Temporary: also add for WIN32
-  VORBISFILE_LIBRARY_OPTIMIZED
+#   #Temporary: also add for WIN32
+#   VORBISFILE_LIBRARY_OPTIMIZED
   VORBIS_INCLUDE_DIR
 )
 ENDIF(NOT WIN32)
@@ -119,10 +119,10 @@ IF(NOT WIN32)
   HANDLE_LIBRARY_TYPES(VORBISFILE) 
   SET(VORBIS_LIBRARIES ${VORBIS_LIBRARY} ${VORBISFILE_LIBRARY}) #WIN32 includes VORBISFILE as a static lib
 ELSE()
-  # Why would the fact that WIN32 includes the vorbisfile as static mean that we don't need to pass it here? 
-  #SET(VORBIS_LIBRARIES ${VORBIS_LIBRARY} )
-  HANDLE_LIBRARY_TYPES(VORBISFILE) 
-  SET(VORBIS_LIBRARIES ${VORBIS_LIBRARY} ${VORBISFILE_LIBRARY})
+  SET(VORBIS_LIBRARIES ${VORBIS_LIBRARY} )
+#   # Why would the fact that WIN32 includes the vorbisfile as static mean that we don't need to pass it here? 
+#   HANDLE_LIBRARY_TYPES(VORBISFILE) 
+#   SET(VORBIS_LIBRARIES ${VORBIS_LIBRARY} ${VORBISFILE_LIBRARY})
 ENDIF(NOT WIN32)
 
 MARK_AS_ADVANCED(
@@ -132,9 +132,9 @@ MARK_AS_ADVANCED(
   IF(NOT WIN32)
     VORBISFILE_LIBRARY_OPTIMIZED
     VORBISFILE_LIBRARY_DEBUG
-  ELSE()
-    # Temporary: add libs here as well
-    VORBISFILE_LIBRARY_OPTIMIZED
-    VORBISFILE_LIBRARY_DEBUG
+#   ELSE()
+#     # Temporary: add libs here as well
+#     VORBISFILE_LIBRARY_OPTIMIZED
+#     VORBISFILE_LIBRARY_DEBUG
   ENDIF(NOT WIN32)
 )
