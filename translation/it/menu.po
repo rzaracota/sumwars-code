@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-12 21:30+0200\n"
-"PO-Revision-Date: 2011-10-26 16:32+0200\n"
+"PO-Revision-Date: 2011-10-28 12:07+0200\n"
 "Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
 "Language-Team: Italiano <>\n"
 "Language: it\n"
@@ -224,7 +224,7 @@ msgstr "Equipaggiato (destra):\n"
 
 #: ../src/gui/itemwindow.cpp:256
 msgid "Hovered:\n"
-msgstr "Selezionato:\n"
+msgstr "Selezionato\n"
 
 #: ../src/gui/itemwindow.cpp:265
 msgid "Attached:\n"
@@ -317,9 +317,11 @@ msgstr ""
 
 #: ../src/gui/charinfo.cpp:880
 msgid ""
-"Willpower decreases the duration and the impact of status changes \n and increases magical melee damage."
+"Willpower decreases the duration and the impact of status changes and "
+"increases magical melee damage."
 msgstr ""
-"La Volonta' diminuisce durata ed efficacia degli effetti negativi \n ed incrementa il Danno Magico in Mischia."
+"La Volonta' diminuisce durata ed efficacia degli effetti negativi ed "
+"incrementa il Danno Magico in Mischia."
 
 #: ../src/gui/charinfo.cpp:884
 msgid "Magic power"
@@ -343,7 +345,7 @@ msgstr "Esperienza"
 
 #: ../src/gui/charinfo.cpp:893
 msgid "Current experience and experience necessary for next level-up."
-msgstr "Esperienza Attuale ed Esperienza Necessaria al prossimo livello."
+msgstr "Esperienza Attuale ed Esperienza Necessaria."
 
 #: ../src/gui/charinfo.cpp:896 ../src/gui/controlpanel.cpp:229
 msgid "Hitpoints"
@@ -617,12 +619,11 @@ msgstr "Lingua"
 
 #: ../src/gui/optionswindow.cpp:299
 msgid "Restart required for setting new options"
-msgstr ""
-"E' necessario il riavvio del gioco per applicare le nuove impostazioni."
+msgstr "Necessario il riavvio del gioco."
 
 #: ../src/gui/optionswindow.cpp:307
 msgid "Reset graphic options"
-msgstr "Ripristina le impostazioni grafiche."
+msgstr "Reset grafica"
 
 #: ../src/gui/optionswindow.cpp:322
 msgid "Character screen"
@@ -646,7 +647,7 @@ msgstr "Equipaggiamenti"
 
 #: ../src/gui/optionswindow.cpp:343
 msgid "Item Labels"
-msgstr "Tooltips oggetti"
+msgstr "Descrizione Oggetti"
 
 #: ../src/gui/optionswindow.cpp:346
 msgid "Difficulty"
@@ -666,7 +667,7 @@ msgstr "Musica"
 
 #: ../src/gui/optionswindow.cpp:358
 msgid "Enemy Highlight Color"
-msgstr "Colore di evidenziazione (nemici)"
+msgstr "Colore nemici puntati"
 
 #: ../src/gui/optionswindow.cpp:364
 msgid "Grab mouse in windowed mode (needs restart)"
@@ -678,7 +679,7 @@ msgstr "Driver Video"
 
 #: ../src/gui/optionswindow.cpp:417
 msgid "Display Mode"
-msgstr "Modalità di visualizzazione"
+msgstr "Tipo finestra"
 
 #: ../src/gui/optionswindow.cpp:420
 msgid "Resolution"
@@ -722,7 +723,7 @@ msgstr "Punti Abilità"
 
 #: ../src/gui/skilltree.cpp:542
 msgid "Next Skillpoint at Level"
-msgstr "I prossimi punti Abilità al Livello"
+msgstr "Prossima Abilità al Livello"
 
 #: ../src/gui/worldmap.cpp:141
 msgid "Town Portal"
@@ -798,7 +799,7 @@ msgstr "Magia della Luce"
 
 #: playerclasses.xml
 msgid "Water Magic"
-msgstr "MAgia dell'Acqua"
+msgstr "Magia dell'Acqua"
 
 #: playerclasses.xml
 msgid "Wind Magic"

@@ -4,20 +4,21 @@
 # 
 # Francesco Miglietta (fra9000) <miglietta.francesco@gmail.com>, 2010
 # 
+# Eugenio Fagioli <eugenio.fagioli@gmail.com>, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-07-25 09:49\n"
-"Last-Translator: Francesco Miglietta (fra9000) <miglietta.francesco@gmail."
-"com>\n"
-"Language-Team: Italian <http://gamesopensource.altervista.org>\n"
+"PO-Revision-Date: 2011-10-28 16:55+0200\n"
+"Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
+"Language-Team: Italiano <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bits\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: rescue_willard.xml
 msgid "A friend in need"
@@ -67,11 +68,11 @@ msgstr "Willard"
 
 #: rescue_willard.xml
 msgid "I sincerely hope you find Willard in time. ##solo"
-msgstr ""
+msgstr "Spero tantissimo che troverai Willard in tempo."
 
 #: rescue_willard.xml
 msgid "I sincerely hope you find Willard in time."
-msgstr ""
+msgstr "Spero tantissimo che troverete Willard in tempo."
 
 #: rescue_willard.xml
 msgid "Have you changed your mind?"
@@ -102,26 +103,22 @@ msgid "What the..."
 msgstr "Ma che cosa..."
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "Do I have a sign somewere saying: Caution, dangerous monster?!"
-msgstr ""
-"Ho da qualche parte una scritta che dice: 'Attenzione, mostro pericoloso'??"
+msgstr "Ho per caso scritto in fronte: Attenzione, mostro pericoloso??"
 
 #: rescue_willard.xml
 msgid "That is the second time today!"
 msgstr "Questa e' la seconda volta oggi!"
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "I could always tell if someone was a Branded One."
-msgstr "Posso sempre percepire se qualcuno e' un Marchiato."
+msgstr "Riesco sempre a riconoscere i Marchiati."
 
 #: rescue_willard.xml
-#, fuzzy
 msgid ""
 "But don't worry, I will give no one away, as long as they behave themselves."
 msgstr ""
-"Ma non preoccuparti, non faro' la spia, a patto che vi comportiate bene."
+"Ma non c'è da preoccuparsi, non faccio la spia, finchè si comportano bene."
 
 #: rescue_willard.xml
 msgid "There is something I'd like to ask of you. ##solo"
@@ -144,10 +141,9 @@ msgid "Who would have thought that?"
 msgstr "Chi l'avrebbe mai detto?"
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "Does an honorable member of the city guard want someone's throat cut?"
 msgstr ""
-"Qualche membro onorabile della guardia cittadina vuole tagliare la gola a "
+"Qualche membro onorabile della guardia cittadina vuole si tagli la gola a "
 "qualcuno?"
 
 #: rescue_willard.xml
@@ -161,43 +157,39 @@ msgid ""
 "Perhaps I was mistaken and the stories are true. I had believed that a few "
 "Branded Ones might be capable of restraint..."
 msgstr ""
+"Può essere che mi sbagliassi e le storie fossero vere. Pensavo che alcuni "
+"Marchiati fossero in grado di contenersi..."
 
 #: rescue_willard.xml
 msgid "And not wish to butcher every living thing that crossed their path."
-msgstr ""
+msgstr "E non tendessero a squartare tutto quello che incontrano."
 
 #: rescue_willard.xml
 msgid "My apologies. It was a slip of the tongue."
-msgstr ""
+msgstr "Mi scuso. Mi è scappato di bocca."
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "So, what is it that you want?"
-msgstr "Comunque cosa vuoi veramente?"
+msgstr "Quindi, cosa vuoi veramente?"
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "Thank you. My name is Fenor Marken."
-msgstr "Grazie, mi chiamo Fenor Marken."
+msgstr "Grazie. Mi chiamo Fenor Marken."
 
 #: rescue_willard.xml
 msgid "I have a friend with the gamekeepers."
-msgstr "Ho un amico fra i gurdiacaccia."
+msgstr "Ho un amico fra i guardiacaccia."
 
 #: rescue_willard.xml
-#, fuzzy
 msgid ""
 "He was out in the far meadows with two collegues, when they were attacked by "
 "goblins."
 msgstr ""
-"Si trovava a Meadow con due colleghi, quando dei goblin gli tesero "
-"un'imboscata."
+"Si trovava nei campi con due colleghi, quando sono stati attaccati da goblin."
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "The cowards left him behind!"
-msgstr ""
-"Quei due vigliacchi se sono scappati, lasciandolo indietro sanguinante!"
+msgstr "Quei due vigliacchi sono scappati lasciandolo indietro!"
 
 #: rescue_willard.xml
 msgid "Surely you don't want me to bring back his corpse, do you?"
@@ -208,20 +200,21 @@ msgid "Surely you don't want us to bring back his corpse, do you?"
 msgstr "Sicuramente non vorrai riportato indietro il suo cadavere, no?"
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "No, Willard isn't someone likely to be caught by a few lousy goblins."
-msgstr "No. Willard non e' uno che si lascerebbe uccidere da dei sudici goblin"
+msgstr ""
+"No. Willard non e' uno che si lascerebbe catturare da degli stupidi goblin."
 
 #: rescue_willard.xml
 msgid ""
 "But he is cut off and those creatures are everywhere. I'm sure he is laying "
 "low, waiting for help."
 msgstr ""
+"Ma è tagliato fuori e quelle creature sono ovunque. Sono certo che si stà "
+"nascondendo, aspettando i rinforzi."
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "You seem very busy."
-msgstr "Sono sicuro che sei molto impegnato."
+msgstr "Pari molto impegnato."
 
 #: rescue_willard.xml
 msgid "That is why I only ask you to bring him this phasestone. ##solo"
@@ -233,9 +226,8 @@ msgid "That is why I only ask you to bring him this phasestone."
 msgstr "Percio' vi chiedo solo di portagli questa Pietra del Teletrasporto."
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "I wouldn't entrust this to anyone else normally."
-msgstr "Normalmente non la affiderei a nessuno."
+msgstr "Normalmente non la affiderei a nessun'altro."
 
 #: rescue_willard.xml
 msgid "Much less someone totally unknown."
@@ -246,36 +238,33 @@ msgid "Who wouldn't take off with it?"
 msgstr "Chi non vorrebbe volatilizzarsi con una di queste?"
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "But you Branded Ones have other ways and means to travel, haven't you?"
-msgstr ""
-"Ma immagino che un Marchiato come te ha certamente altri modi ed altri mezzi "
-"per viaggiare, vero?"
+msgstr "Ma immagino che i Marchiati abbiano altri modi per viaggiare."
 
 #: rescue_willard.xml
-#, fuzzy
 msgid ""
 "And you cannot use a phasestone since it is dedicated to the goddess Avaera."
 msgstr ""
-"E non puoi certo usare questa Pietra dal momento che e' dedicata ad Avaera "
-"in persona, giusto?"
+"Di certo non puoi usare una Pietra del Teletrasporto dal momento che e' "
+"consacrata alla dea Avaera."
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "That is why I would trust you to help."
-msgstr "Percio' vi chiedo solo di portagli questa Pietra del Teletrasporto."
+msgstr "Per questo mi fido di voi."
 
 #: rescue_willard.xml
 msgid "Somebody else who appears to know quite a lot."
-msgstr ""
+msgstr "Ed ecco un altro che pare saperne parecchio."
 
 #: rescue_willard.xml
 msgid "Medair, the seat of learning! Where even the city guard are scholars"
 msgstr ""
+"Medair, la culla per l'apprendimento! Dove anche le guardie cittadine sono "
+"professori."
 
 #: rescue_willard.xml
 msgid "Your friend is as good as safe."
-msgstr "Il tuo amico verra' tratto in salvo."
+msgstr "Considera il tuo amico già salvo."
 
 #: rescue_willard.xml
 msgid "And doesn't even ask what the rest of us is thinking."
@@ -292,34 +281,28 @@ msgid "Thank you."
 msgstr "Vi ringrazio."
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "I'm sorry, but I don't want to waste my time searching for gamekeepers."
-msgstr ""
-"Scusami ma non ho voglia di perdere tempo alla ricerca di un guardiacaccia."
+msgstr "Mi spiace, ma non voglio sprecare tempo a cercare guardiacaccia"
 
 #: rescue_willard.xml
 msgid "You are as cold-hearted as they say. ##solo"
 msgstr "Hai proprio il cuore di ghiaccio come dicono. ##solo"
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "I'm sorry, but we cannot waste our time searching for gamekeepers."
-msgstr ""
-"Siamo spiacenti ma non abbiamo voglia di perdere tempo alla ricerca di un "
-"guardiacaccia."
+msgstr "Ci spiace, ma non vogliamo sprecare tempo a cercare guardiacaccia."
 
 #: rescue_willard.xml
 msgid "You are as cold-hearted as they say."
 msgstr "Avete proprio il cuore di ghiaccio come dicono."
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "If only I could leave my post."
-msgstr "Se solo potessi andarmene da qui."
+msgstr "Se solo potessi abbandonare il mio posto di guardia."
 
 #: rescue_willard.xml
 msgid "I would search for him myself."
-msgstr "Lo cercherei io personalmente."
+msgstr "Lo cercherei io."
 
 #: rescue_willard.xml
 msgid "Then what do you want of me? ##solo"
@@ -327,24 +310,23 @@ msgstr "Allora cosa vuoi da me? ##solo"
 
 #: rescue_willard.xml
 msgid "Leave, before I tell someone about you! ##solo"
-msgstr "Vattene, prima che parli di te a qualcuno! ##solo"
+msgstr "Vattene, prima che spifferi in giro riguardo a chi sei! ##solo"
 
 #: rescue_willard.xml
 msgid "Then what do you want from me?"
-msgstr "Allora, cosa vuoi da noi?"
+msgstr "Allora, cosa vuoi da me?"
 
 #: rescue_willard.xml
 msgid "Leave, before I tell someone about you!"
-msgstr "Andatevene, prima che parli a qualcuno di voi!"
+msgstr "Vattene, prima che spifferi in giro riguardo a chi siete!"
 
 #: rescue_willard.xml
 msgid "Give Willard the stone (Reward)"
 msgstr "Consegna la pietra a Willard (ricompensa)"
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "Thanks for your help."
-msgstr "Grazie per il tuo aiuto."
+msgstr "Grazie dell'aiuto."
 
 #: rescue_willard.xml
 msgid "Can I ask you for another favor?"
@@ -359,12 +341,10 @@ msgid "You are Willard, I suppose."
 msgstr "Tu sei Willard suppongo."
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "That's me. How do you know my name?"
 msgstr "Sono io, come sai il mio nome?"
 
 #: rescue_willard.xml
-#, fuzzy
 msgid ""
 "Your friend Fenor Marken sent us and told us to give you this phasestone."
 msgstr ""
@@ -372,14 +352,12 @@ msgstr ""
 "Teletrasporto."
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "By Avaera's blessed and arcane...! He still has that thing?"
-msgstr "Oh mio dio! Allora ce l'ha ancora!"
+msgstr "Per tutte le magie di Avaera! Ha ancora quell'affare?"
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "This was the cause of a few youthful follies."
-msgstr "Questa fu una delle nostre follie giovanili."
+msgstr "Questa pietra fu la causa di parecchie scorribande giovanili."
 
 #: rescue_willard.xml
 msgid "Mine is long used up."
@@ -387,7 +365,7 @@ msgstr "La mia si e' esaurita da tempo."
 
 #: rescue_willard.xml
 msgid "Good old Fenor. Here, a token of my appreciation."
-msgstr "Buon vecchio Fenor. Ecco, un segno della mia gratitudine."
+msgstr "Buon vecchio Fenor. Eccovi, un segno della mia gratitudine."
 
 #: rescue_willard.xml
 msgid "Surely someone of your trade can always use a little money?"

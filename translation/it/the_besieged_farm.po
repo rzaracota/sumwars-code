@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-10-21 22:00+0200\n"
+"PO-Revision-Date: 2011-10-28 17:02+0200\n"
 "Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
 "Language-Team: Italiano <>\n"
 "Language: it\n"
@@ -187,12 +187,12 @@ msgid "I've already heard of it."
 msgstr "Ne ho gia' sentito parlare."
 
 #: besieged_farm.xml
-#, fuzzy
 msgid ""
 "Michel is in the tavern getting plastered - all in honor of your bravery, of "
 "course."
 msgstr ""
-"Michel e' alla taverna a sbronzarsi. Ovviamente in onore del tuo coraggio."
+"Michel e' alla taverna a sbronzarsi - tutto in onore del vostro coraggio, "
+"ovviamente."
 
 #: besieged_farm.xml
 msgid "But that shall be of no concern to you."

@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-10-26 15:34+0200\n"
+"PO-Revision-Date: 2011-10-28 16:59+0200\n"
 "Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
 "Language-Team: Italiano <>\n"
 "Language: it\n"
@@ -26,7 +26,7 @@ msgstr "Il Campo base dei non-morti"
 
 #: greySkyladder.xml
 msgid "greySnowNose"
-msgstr ""
+msgstr "greySnowNose"
 
 #: greySkyladder.xml
 msgid "greyOldMine"
@@ -138,23 +138,23 @@ msgstr "Antiche Rovine dei Nani, Aisen"
 
 #: aisen.xml
 msgid "aisOldCellar"
-msgstr ""
+msgstr "aisOldCellar"
 
 #: aisen.xml
 msgid "aisBaelensRift"
-msgstr ""
+msgstr "aisBaelensRift"
 
 #: aisen.xml
 msgid "aisHillRoad"
-msgstr ""
+msgstr "aisHillRoad"
 
 #: aisen.xml
 msgid "copperRock"
-msgstr ""
+msgstr "copperRock"
 
 #: aisen.xml
 msgid "aisCopperFields"
-msgstr ""
+msgstr "aisCopperFields"
 
 #: aisen.xml
 msgid "aisMineEntry"
@@ -214,7 +214,7 @@ msgstr "Consiglio degli Elementalisti, Dungeon sotterraneo"
 
 #: tutorial.xml
 msgid "elCnlLowerCaves"
-msgstr ""
+msgstr "elCnlLowerCaves"
 
 #: medair.xml
 msgid "medBackalley"
@@ -238,7 +238,7 @@ msgstr "spawnAbyss"
 
 #: testregions.xml
 msgid "benchmarkBox"
-msgstr ""
+msgstr "benchmarkBox"
 
 #: testregions.xml
 msgid "region0"
@@ -1158,7 +1158,7 @@ msgstr "Anello d'argento"
 
 #: ring.xml
 msgid "jet ring"
-msgstr "Anello lucido"
+msgstr "Anello in lignite"
 
 #: ring.xml
 msgid "gold ring"
@@ -1350,7 +1350,7 @@ msgstr "attacco magico base"
 
 #: warrior_ablt.xml
 msgid "Barbarian anger"
-msgstr "Ira del Barbaro"
+msgstr "Ira Del Barbaro"
 
 #: warrior_ablt.xml
 msgid ""
@@ -1362,7 +1362,7 @@ msgstr ""
 
 #: warrior_ablt.xml
 msgid "Sweeping blow"
-msgstr "Colpo turbinante"
+msgstr "Colpo Turbinante"
 
 #: warrior_ablt.xml
 msgid "Attacks every enemy in weapon range."
@@ -1378,7 +1378,7 @@ msgstr "Attacca un nemico infliggendo ingenti danni."
 
 #: warrior_ablt.xml
 msgid "Battlecry"
-msgstr "Grido di battaglia"
+msgstr "Grido Di Battaglia"
 
 #: warrior_ablt.xml
 msgid ""
@@ -1390,15 +1390,14 @@ msgstr ""
 
 #: warrior_ablt.xml
 msgid "Block"
-msgstr "Parata migliorata"
+msgstr "Parata Migliorata"
 
 #: warrior_ablt.xml
 msgid ""
 "The warriors mastery of shields and weapons allows him to block damage at an "
 "increased rate."
 msgstr ""
-"Il guerriero migliora la sua maestria negli scudi e nelle armi, "
-"permettendogli di bloccare i danni più frequentemente."
+"Il guerriero migliora le sue tecniche difensive, bloccherà spesso i danni."
 
 #: warrior_ablt.xml
 msgid "Charge"
@@ -1424,7 +1423,7 @@ msgstr ""
 
 #: warrior_ablt.xml
 msgid "Warmaster"
-msgstr "Mastro guerrafondaio"
+msgstr "Mastro Guerrafondaio"
 
 #: warrior_ablt.xml
 msgid ""
@@ -1448,7 +1447,7 @@ msgstr ""
 
 #: warrior_ablt.xml
 msgid "Flame armor"
-msgstr "Armatura di fiamme"
+msgstr "Armatura Di Fiamme"
 
 #: warrior_ablt.xml
 msgid ""
@@ -1460,7 +1459,7 @@ msgstr ""
 
 #: warrior_ablt.xml
 msgid "Pact of flames"
-msgstr "Patto delle fiamme"
+msgstr "Patto Delle Fiamme"
 
 #: warrior_ablt.xml
 msgid ""
@@ -1473,7 +1472,7 @@ msgstr ""
 
 #: warrior_ablt.xml
 msgid "barbarian power"
-msgstr "Potere barbarico"
+msgstr "Potere Barbarico"
 
 #: warrior_ablt.xml
 msgid ""
@@ -1496,7 +1495,7 @@ msgstr ""
 
 #: warrior_ablt.xml
 msgid "Silencer"
-msgstr "Tagliare le corde vocali"
+msgstr "Tagliare Le Corde Vocali"
 
 #: warrior_ablt.xml
 msgid "Attacks an enemy with a chance to inflict silence."
@@ -1504,7 +1503,7 @@ msgstr "Attacca un nemico con la possibilità di renderlo muto."
 
 #: warrior_ablt.xml
 msgid "Monster hunter"
-msgstr "Cacciatore di mostri"
+msgstr "Cacciatore Di Mostri"
 
 #: warrior_ablt.xml
 msgid ""
@@ -1516,7 +1515,7 @@ msgstr ""
 
 #: warrior_ablt.xml
 msgid "Monster slayer"
-msgstr "Sventratore di mostri"
+msgstr "Sventratore Di Mostri"
 
 #: warrior_ablt.xml
 msgid ""
@@ -1542,7 +1541,7 @@ msgstr ""
 
 #: warrior_ablt.xml
 msgid "Defiances"
-msgstr "Aura mefitica"
+msgstr "Aura Mefitica"
 
 #: warrior_ablt.xml
 msgid ""
@@ -1571,8 +1570,7 @@ msgid ""
 "kill."
 msgstr ""
 "La difesa del guerriero incrementa proporzionalmente ai tagli e alle ferite "
-"che si fa in battaglia. Più aggravate sono le ferite, più è difficile da "
-"uccidere."
+"che ha. Peggio sta più è difficile da uccidere."
 
 #: warrior_ablt.xml
 msgid "Charge scythe"
@@ -1584,7 +1582,7 @@ msgstr "Lancia un attacco ancora più potente che potrebbe stordire."
 
 #: warrior_ablt.xml
 msgid "Warcry"
-msgstr "All'assalto!"
+msgstr "All'Assalto!"
 
 #: warrior_ablt.xml
 msgid ""
@@ -1595,7 +1593,7 @@ msgstr ""
 
 #: warrior_ablt.xml
 msgid "Weaponmaster"
-msgstr "Mastro armigero"
+msgstr "Mastro Armigero"
 
 #: warrior_ablt.xml
 msgid ""
@@ -1606,7 +1604,7 @@ msgstr ""
 
 #: warrior_ablt.xml
 msgid "Whirl blow"
-msgstr "Colpo a trottola"
+msgstr "Colpo Trottola"
 
 #: warrior_ablt.xml
 msgid "Attacks every enemy in weapon range with a triple sweeping strike."
@@ -1627,7 +1625,7 @@ msgstr ""
 
 #: priest_ablt.xml
 msgid "Bladestorm"
-msgstr "Tempesta di lame"
+msgstr "Tempesta Di Lame"
 
 #: priest_ablt.xml
 msgid ""
@@ -1651,7 +1649,7 @@ msgstr ""
 
 #: priest_ablt.xml
 msgid "Breaking Blow"
-msgstr "Colpo spezza legami"
+msgstr "Colpo Spezza Legami"
 
 #: priest_ablt.xml
 msgid ""
@@ -1675,7 +1673,7 @@ msgstr ""
 
 #: priest_ablt.xml
 msgid "Gentle Glow"
-msgstr "Gentile brillio"
+msgstr "Gentile Brillio"
 
 #: priest_ablt.xml
 msgid ""
@@ -1687,7 +1685,7 @@ msgstr ""
 
 #: priest_ablt.xml
 msgid "Omniscent Eye"
-msgstr "L'occhio che tutto sa"
+msgstr "Onniscenza"
 
 #: priest_ablt.xml
 msgid ""
@@ -1699,7 +1697,7 @@ msgstr ""
 
 #: priest_ablt.xml
 msgid "Restore Concentration"
-msgstr "Riottenere la concentrazione"
+msgstr "Riottenere Concentrazione"
 
 #: priest_ablt.xml
 msgid ""
@@ -1734,7 +1732,7 @@ msgstr ""
 
 #: priest_ablt.xml
 msgid "Ease Pain"
-msgstr "Alleviare la sofferenza"
+msgstr "Alleviare Sofferenza"
 
 #: priest_ablt.xml
 msgid ""
@@ -1746,7 +1744,7 @@ msgstr ""
 
 #: priest_ablt.xml
 msgid "Remedial Water"
-msgstr "Acqua del rimedio"
+msgstr "Acqua Medicatrice"
 
 #: priest_ablt.xml
 msgid ""
@@ -1783,15 +1781,15 @@ msgstr ""
 
 #: priest_ablt.xml
 msgid "Windstrike"
-msgstr "Lancio dei mulinelli"
+msgstr "Colpo Vortice"
 
 #: priest_ablt.xml
 msgid ""
 "The priest creates a vortex with his attack, that can suck a demonic "
 "creature right back to hell."
 msgstr ""
-"Gli attacchi del chierico generano dei vortici che risucchiano le creature "
-"demoniache direttamente all'inferno."
+"L'attaccho del chierico genera un vortice che risucchia una creatura "
+"demoniacha direttamente all'inferno."
 
 #: priest_ablt.xml
 msgid "Cure"
@@ -1871,7 +1869,7 @@ msgstr ""
 
 #: priest_ablt.xml
 msgid "Glistening Glare"
-msgstr "Occhiataccia abbagliante"
+msgstr "Occhiataccia Abbagliante"
 
 #: priest_ablt.xml
 msgid ""
@@ -2559,14 +2557,14 @@ msgstr "Il mago lancia un pezzo di puro ghiaccio che danneggia i nemici"
 
 #: mage_ablt.xml
 msgid "Ice ring"
-msgstr "Anello di Ghiaccio"
+msgstr "Anello di Gelo"
 
 #: mage_ablt.xml
 msgid ""
 "The mage casts a ring of ice around himself that will damage enemies in "
 "range."
 msgstr ""
-"Il mago lancia un anello di ghiaccio attorno a lui che danneggia i nemici "
+"Il mago sprigiona un anello di ghiaccio attorno a lui che danneggia i nemici "
 "nell'area."
 
 #: mage_ablt.xml
@@ -2643,8 +2641,8 @@ msgid ""
 "The mage surrounds himself with an armor of lightning, that will stun and "
 "damage enemies who are bold enough to attack in close combat."
 msgstr ""
-"Il mago si circonda di scariche elettriche che potranno stordire e "
-"danneggiare i folli che gli andranno addosso."
+"Il mago si circonda di scariche elettriche che potrebbero stordire e "
+"danneggiare i folli che gli si avvicinano."
 
 #: mage_ablt.xml
 msgid "Thunderstorm"

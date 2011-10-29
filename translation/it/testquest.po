@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-10-22 08:05+0200\n"
+"PO-Revision-Date: 2011-10-28 17:02+0200\n"
 "Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
 "Language-Team: Italiano <>\n"
 "Language: it\n"
@@ -74,15 +74,15 @@ msgstr "triste"
 
 #: testquest.xml
 msgid "pain"
-msgstr "dolore"
+msgstr "sofferente"
 
 #: testquest.xml
 msgid "sneer"
-msgstr ""
+msgstr "disgustato"
 
 #: testquest.xml
 msgid "grin"
-msgstr ""
+msgstr "sghignazzante"
 
 #: testquest.xml
 msgid "offended"
