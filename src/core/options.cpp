@@ -373,14 +373,7 @@ float Options::getMusicVolume()
 
 std::string Options::getLocale()
 {
-#ifdef WIN32
-	char locale[100];
-	GetLocaleInfo(LOCALE_USER_DEFAULT,
-						  LOCALE_SISO639LANGNAME,
-						  locale, sizeof(locale));
-#else
 	const char* locale = Gettext::getLocale();
-#endif
 
 	std::string locstr = "";
 	if (locale != 0)
