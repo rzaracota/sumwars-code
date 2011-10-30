@@ -22,23 +22,26 @@ FIND_PATH(VORBIS_INCLUDE_DIR vorbis/codec.h
 )
 
 IF(WIN32)
-#Make a special selection for the scenario of using visual studio 2010, since this will
-#be the most frequent at this stage.
-SET (TMP_SUFF Win32/Release)
-IF (MSVC10)
-SET (TMP_SUFF ${TMP_SUFF} VS2010/Win32/Release Win32/VS2010/Win32/Release )
-ENDIF (MSVC10)
-FIND_LIBRARY(VORBIS_LIBRARY_OPTIMIZED
-  NAMES libvorbis_static libvorbis libvorbis-static-mt
-  PATHS $ENV{VORBISDIR}
-  PATH_SUFFIXES Release ${TMP_SUFF}
-)
+  #Make a special selection for the scenario of using visual studio 2010, since this will
+  #be the most frequent at this stage.
+  SET (TMP_SUFF Win32/Release)
+  IF (MSVC10)
+    SET (TMP_SUFF ${TMP_SUFF} VS2010/Win32/Release Win32/VS2010/Win32/Release )
+  ENDIF (MSVC10)
+  # Using static link in as preferred option
+  # TODO: add option to allow selecting static or release as pre 
+  FIND_LIBRARY(VORBIS_LIBRARY_OPTIMIZED
+    NAMES libvorbis_static libvorbis-static-mt libvorbis
+    PATHS $ENV{VORBISDIR}
+    PATH_SUFFIXES Release ${TMP_SUFF}
+  )
 ELSE()
-FIND_LIBRARY(VORBIS_LIBRARY_OPTIMIZED
-  NAMES vorbis
-  PATH_SUFFIXES lib
-)
+  FIND_LIBRARY(VORBIS_LIBRARY_OPTIMIZED
+    NAMES vorbis
+    PATH_SUFFIXES lib
+  )
 ENDIF(WIN32)
+Message (STATUS "Got release vorbis: ${VORBIS_LIBRARY_OPTIMIZED}")
 
 IF(WIN32)
 #Make a special selection for the scenario of using visual studio 2010, since this will
@@ -107,8 +110,6 @@ FIND_PACKAGE_HANDLE_STANDARD_ARGS(Vorbis DEFAULT_MSG
 ELSE()
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(Vorbis DEFAULT_MSG
   VORBIS_LIBRARY_OPTIMIZED
-#   #Temporary: also add for WIN32
-#   VORBISFILE_LIBRARY_OPTIMIZED
   VORBIS_INCLUDE_DIR
 )
 ENDIF(NOT WIN32)
@@ -120,9 +121,6 @@ IF(NOT WIN32)
   SET(VORBIS_LIBRARIES ${VORBIS_LIBRARY} ${VORBISFILE_LIBRARY}) #WIN32 includes VORBISFILE as a static lib
 ELSE()
   SET(VORBIS_LIBRARIES ${VORBIS_LIBRARY} )
-#   # Why would the fact that WIN32 includes the vorbisfile as static mean that we don't need to pass it here? 
-#   HANDLE_LIBRARY_TYPES(VORBISFILE) 
-#   SET(VORBIS_LIBRARIES ${VORBIS_LIBRARY} ${VORBISFILE_LIBRARY})
 ENDIF(NOT WIN32)
 
 MARK_AS_ADVANCED(

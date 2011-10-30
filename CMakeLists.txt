@@ -6,8 +6,7 @@ OPTION(NO_TINYXML "Do not use in-source TinyXML Lib" OFF)
 OPTION(NO_ENET "Do not use in-source ENET Lib" OFF)
 OPTION(BUILD_TOOLS "Builds editor tools" ON)
 OPTION(UPDATE_SUBVERSION_REVISION "Option to turn off automatic revision checking" ON)
-OPTION(POST_BUILD_COPY "After a build, copy the executable (Win32)" OFF)
-
+OPTION(POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" OFF)
 
 IF( NOT CMAKE_BUILD_TYPE )
   SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
@@ -70,10 +69,10 @@ IF(NOT "${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
   MESSAGE(SEND_ERROR "You need Ogre 1.7 Cthugha to build this.")
 ENDIF()
 
-#IF (WIN32)
-#  FIND_PACKAGE(BOOST REQUIRED)
-#  FIND_PACKAGE(GNUWIN REQUIRED)
-#ENDIF (WIN32)
+IF (WIN32)
+ FIND_PACKAGE(BoostOGRE REQUIRED)
+ FIND_PACKAGE(GNUWIN REQUIRED)
+ENDIF (WIN32)
 FIND_PACKAGE(OIS REQUIRED)
 FIND_PACKAGE(Lua51 REQUIRED)
 FIND_PACKAGE(CEGUI REQUIRED)
@@ -98,9 +97,12 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/core)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/contenteditor)
 INCLUDE_DIRECTORIES(${OGRE_INCLUDE_DIRS})
-#IF (WIN32)
-#  INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
-#ENDIF (WIN32)
+IF (WIN32)
+  Message(STATUS "Adding boost include: ${BoostOGRE_INCLUDE_DIR}")
+  INCLUDE_DIRECTORIES(${BoostOGRE_INCLUDE_DIR})
+  Message(STATUS "Adding gnu include: ${GNUWIN_INCLUDE_DIR}")
+  INCLUDE_DIRECTORIES(${GNUWIN_INCLUDE_DIR})
+ENDIF (WIN32)
 INCLUDE_DIRECTORIES(${OIS_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${CEGUI_INCLUDE_DIR})
@@ -417,14 +419,6 @@ ENDIF (WIN32)
 
 ADD_EXECUTABLE(sumwars ${SRCS})
 
-# Only after adding the executable can a link be made to boost
-#IF (WIN32)
-#  include_directories(${Boost_INCLUDE_DIRS})
-#  link_directories(${Boost_LIBRARY_DIRS})
-#  include_directories(${GNUWIN_INCLUDE_DIR})
-#
-#  message("Adding boost include: ${Boost_INCLUDE_DIRS}")
-#ENDIF (WIN32)
 
 #${CEGUILUA_LIBRARY}
 
@@ -438,8 +432,7 @@ SET(LINK_LIBS
   ${LUA_LIBRARIES} 
   ${OPENAL_LIBRARY} 
   ${ALUT_LIBRARY} 
-  ${OGG_LIBRARY_DEBUG}
-#  ${OGG_LIBRARY}
+  ${OGG_LIBRARY}
   ${VORBIS_LIBRARIES} 
   ${PHYSFS_LIBRARY}
   )
@@ -461,12 +454,8 @@ IF(WIN32)
     ws2_32.lib
     winmm.lib
     ${LINK_LIBS}
-#    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/lib/libgettextlib.lib
-    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/lib/libintl.lib
-    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_thread-vc100-mt-gd-1_44.lib
-    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_date_time-vc100-mt-gd-1_44.lib
-    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_thread-vc100-mt-1_44.lib
-    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost/lib/libboost_date_time-vc100-mt-1_44.lib
+    ${GNUWIN_LIBRARY}
+    ${BoostOGRE_LIBRARIES}
     )
 ENDIF()
 
