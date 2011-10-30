@@ -90,10 +90,6 @@ bool Application::init(char *argv)
 		return false;
 	}
 
-	// Get the path to use for storing data.
-	// This will be relative to the user directory on the user OS.
-	Ogre::String operationalPath = SumwarsHelper::userPath ();
-
 	// Add the user directory
 	if (PHYSFS_mount (PHYSFS_getUserDir (), 0, 1) == 0)
 	{
@@ -195,28 +191,35 @@ bool Application::init(char *argv)
 	}
 #endif
     
+	// Get the path to use for storing data.
+	// This will be relative to the user directory on the user OS.
+	Ogre::String operationalPath = SumwarsHelper::userPath ();
+
 	// Initialize the loggers.
 	LogManager::instance ().addLog ("stdout",new StdOutLog (Log::LOGLEVEL_DEBUG));
-    LogManager::instance ().addLog ("logfile",new FileLog (operationalPath + "/sumwars.log", Log::LOGLEVEL_DEBUG));
+	LogManager::instance ().addLog ("logfile",new FileLog (operationalPath + "/sumwars.log", Log::LOGLEVEL_DEBUG));
 
 	Timer tm;
 	m_timer.start();
-	bool ret = true;
 
 	// Ogre Root erzeugen
 	// pluginfile: plugins.cfg
 	// configfile: keines
-#ifdef _WIN32
+#if defined (_WIN32)
 	m_ogre_root = new Ogre::Root (operationalPath + "/plugins.cfg", operationalPath + "/ogre.cfg", operationalPath + "/ogre.log");
-#elif defined __APPLE__
-    Ogre::String plugins = macPath();
+#elif defined (__APPLE__)
+	Ogre::String plugins = macPath();
 	m_ogre_root = new Ogre::Root(plugins + "/plugins_mac.cfg", plugins + "/ogre.cfg", operationalPath + "/ogre.log");
 #else
-	m_ogre_root = new Ogre::Root(CFG_FILES_DIR "/plugins.cfg", CFG_FILES_DIR "/ogre.cfg", operationalPath + "/Ogre.log");
+	m_ogre_root = new Ogre::Root(SumwarsHelper::gameDataPath() + "/plugins.cfg",
+				     SumwarsHelper::gameDataPath() + "/ogre.cfg",
+				     SumwarsHelper::userPath() + "/Ogre.log");
 #endif
 
-	if (m_ogre_root ==0)
+	if (m_ogre_root == 0)
 		return false;
+
+	bool ret = true;
 
 	// Ogre configurieren
 	ret = configureOgre();
