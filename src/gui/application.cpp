@@ -178,14 +178,67 @@ bool Application::init(char *argv)
 			return false;
 		}
 	}
-#else // Unixes
-	std::string saveDir = SumwarsHelper::userPath() + "/.sumwars/save";
+#elif defined (__unix__)
+	// creating 'save' directory
+	std::string saveDir = SumwarsHelper::userPath() + "/save";
 	if (! PHYSFS_exists(saveDir.c_str()))
 	{
 		int result = PHYSFS_mkdir(saveDir.c_str());
 		if (result == 0)
 		{
 			printf("mkdir failed: %s\n", PHYSFS_getLastError());
+			return false;
+		}
+	}
+
+	// creating local {ogre,plugins}.cfg files, if system-wide ones not
+	// found
+	const char* ogreCfgSystem = (SumwarsHelper::gameDataPath() + "/ogre.cfg").c_str();
+	const char* ogreCfgUser = (SumwarsHelper::userPath() + "/ogre.cfg").c_str();
+	const char* pluginsCfgSystem = (SumwarsHelper::gameDataPath() + "/plugins.cfg").c_str();
+	const char* pluginsCfgUser = (SumwarsHelper::userPath() + "/plugins.cfg").c_str();
+
+	if (! PHYSFS_exists(ogreCfgSystem)) {
+		std::string str = "Render System=OpenGL Rendering Subsystem\
+\
+[OpenGL Rendering Subsystem]\
+FSAA=0\
+Full Screen=No\
+RTT Preferred Mode=PBuffer\
+Video Mode=940 x 705\
+";
+		int count = PHYSFS_write(PHYSFS_openWrite(ogreCfgUser),
+					 str.c_str(), sizeof(char), str.size());
+
+		if (count < str.size()) {
+			ERRORMSG("A global '%s' file could not be found, and attempting to write a local one failed: PHYSFS_write('%s') failed: %s\n",
+				 ogreCfgSystem,
+				 ogreCfgUser,
+				 PHYSFS_getLastError());
+			return false;
+		}
+	}
+
+	if (! PHYSFS_exists(pluginsCfgSystem)) {
+		std::string str = "# Defines plugins to load\
+\
+# Define plugin folder\
+PluginFolder=/usr/lib/OGRE\
+\
+# Define OpenGL rendering implementation plugin\
+Plugin=RenderSystem_GL.so\
+Plugin=Plugin_ParticleFX.so\
+Plugin=Plugin_BSPSceneManager.so\
+Plugin=Plugin_OctreeSceneManager.so\
+";
+		int count = PHYSFS_write(PHYSFS_openWrite(pluginsCfgUser),
+					 str.c_str(), sizeof(char), str.size());
+
+		if (count < str.size()) {
+			ERRORMSG("A global '%s' file could not be found, and attempting to write a local one failed: PHYSFS_write('%s') failed: %s\n",
+				 pluginsCfgSystem,
+				 pluginsCfgUser,
+				 PHYSFS_getLastError());
 			return false;
 		}
 	}
@@ -208,12 +261,22 @@ bool Application::init(char *argv)
 #if defined (_WIN32)
 	m_ogre_root = new Ogre::Root (operationalPath + "/plugins.cfg", operationalPath + "/ogre.cfg", operationalPath + "/ogre.log");
 #elif defined (__APPLE__)
-	Ogre::String plugins = macPath();
-	m_ogre_root = new Ogre::Root(plugins + "/plugins_mac.cfg", plugins + "/ogre.cfg", operationalPath + "/ogre.log");
-#else
-	m_ogre_root = new Ogre::Root(SumwarsHelper::gameDataPath() + "/plugins.cfg",
-				     SumwarsHelper::gameDataPath() + "/ogre.cfg",
-				     SumwarsHelper::userPath() + "/Ogre.log");
+	Ogre::String plugins = 
+	m_ogre_root = new Ogre::Root(SumwarsHelper::macPath() + "/plugins_mac.cfg",
+				     SumwarsHelper::macPath() + "/ogre.cfg",
+				     operationalPath + "/ogre.log");
+#elif defined (__unix__)
+	// ogreCfgSystem, ogreCfgUser, pluginsCfgSystem and pluginsCfgUser
+	// declared above
+	if (PHYSFS_exists(pluginsCfgSystem) && PHYSFS_exists(pluginsCfgSystem)) {
+		m_ogre_root = new Ogre::Root(pluginsCfgSystem,
+					     ogreCfgSystem,
+					     SumwarsHelper::userPath() + "/Ogre.log");
+	} else {
+		m_ogre_root = new Ogre::Root(pluginsCfgUser,
+					     ogreCfgUser,
+					     SumwarsHelper::userPath() + "/Ogre.log");
+	}
 #endif
 
 	if (m_ogre_root == 0)
@@ -777,16 +840,26 @@ bool Application::setupResources()
 #ifdef NOMIPMAPS
 	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(0);
 #endif
-    Ogre::String path = "";
-#ifdef __APPLE__
-    path = macPath();
-    path.append("/");
-#endif
-	
+
+	Ogre::String path;
 	Ogre::ConfigFile cf;
-#if defined(__unix__)
-	cf.load(std::string(CFG_FILES_DIR) + "/resources.cfg");
-#else
+#if defined (__unix__)
+	Ogre::String resourcesCfgUser = SumwarsHelper::userPath() + "/resources.cfg";
+	Ogre::String resourcesCfgSystem = SumwarsHelper::gameDataPath() + "/resources.cfg";
+	if (PHYSFS_exists(resourcesCfgUser.c_str())) {
+		cf.load(resourcesCfgUser);
+	} else if (PHYSFS_exists(resourcesCfgSystem.c_str())) {
+		cf.load(resourcesCfgSystem);
+	} else {
+		ERRORMSG("Error message: resource.cfg file not found, searched in '%s' and '%s'",
+			 resourcesCfgUser.c_str(),
+			 resourcesCfgSystem.c_str());
+		return false;
+	}
+#elif defined (__APPLE__)
+	path = SumwarsHelper::macPath() + "/";
+	cf.load(path + "/resources.cfg");
+#elif defined (_WIN32)
 	cf.load(path + "resources.cfg");
 #endif
 
@@ -807,8 +880,8 @@ bool Application::setupResources()
 		}
 	}
 	
-    Ogre::String savePath = SumwarsHelper::userPath() + "/save";
-    Ogre::ResourceGroupManager::getSingleton().addResourceLocation(savePath, "FileSystem", "Savegame");
+	Ogre::String savePath = SumwarsHelper::userPath() + "/save";
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(savePath, "FileSystem", "Savegame");
 
 #if defined(WIN32)
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("c:\\windows\\fonts", "FileSystem", "GUI");
@@ -830,8 +903,6 @@ bool Application::setupResources()
 
 	Ogre::MeshManager::getSingleton().createPlane("rect81", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane,400,50,1,1,true,1,1,1,Ogre::Vector3::UNIT_X);
 
-
-
 	return true;
 }
 
@@ -850,7 +921,7 @@ bool Application::initCEGUI()
 	// Log level
 	new CEGUI::DefaultLogger();	
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
-    CEGUI::DefaultLogger::getSingleton().setLogFilename(SumwarsHelper::userPath() + "/CEGUI.log");
+	CEGUI::DefaultLogger::getSingleton().setLogFilename(SumwarsHelper::userPath() + "/CEGUI.log");
 	
 	// Bootstrap the CEGUI System
 	CEGUI::OgreRenderer::bootstrapSystem();
@@ -861,7 +932,7 @@ bool Application::initCEGUI()
 	// Imagesets laden
 	CEGUI::ImagesetManager::getSingleton().create("skills.imageset");
 
-    CEGUI::Texture &startScreenTex = CEGUI::System::getSingleton().getRenderer()->createTexture("startscreen.png", (CEGUI::utf8*)"GUI");
+	CEGUI::Texture &startScreenTex = CEGUI::System::getSingleton().getRenderer()->createTexture("startscreen.png", (CEGUI::utf8*)"GUI");
     
 	try
 	{
