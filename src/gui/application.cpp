@@ -193,12 +193,12 @@ bool Application::init(char *argv)
 
 	// creating local {ogre,plugins}.cfg files, if system-wide ones not
 	// found
-	const char* ogreCfgSystem = (SumwarsHelper::gameDataPath() + "/ogre.cfg").c_str();
-	const char* ogreCfgUser = (SumwarsHelper::userPath() + "/ogre.cfg").c_str();
-	const char* pluginsCfgSystem = (SumwarsHelper::gameDataPath() + "/plugins.cfg").c_str();
-	const char* pluginsCfgUser = (SumwarsHelper::userPath() + "/plugins.cfg").c_str();
+	std::string ogreCfgSystem = (SumwarsHelper::gameDataPath() + "/ogre.cfg").c_str();
+	std::string ogreCfgUser = (SumwarsHelper::userPath() + "/ogre.cfg").c_str();
+	std::string pluginsCfgSystem = (SumwarsHelper::gameDataPath() + "/plugins.cfg").c_str();
+	std::string pluginsCfgUser = (SumwarsHelper::userPath() + "/plugins.cfg").c_str();
 
-	if (! PHYSFS_exists(ogreCfgSystem)) {
+	if (! PHYSFS_exists(ogreCfgSystem.c_str())) {
 		std::string str = "Render System=OpenGL Rendering Subsystem\
 \
 [OpenGL Rendering Subsystem]\
@@ -207,19 +207,20 @@ Full Screen=No\
 RTT Preferred Mode=PBuffer\
 Video Mode=940 x 705\
 ";
-		int count = PHYSFS_write(PHYSFS_openWrite(ogreCfgUser),
+		PHYSFS_file* ogreFile = PHYSFS_openWrite(ogreCfgUser.c_str());
+		int count = PHYSFS_write(ogreFile,
 					 str.c_str(), sizeof(char), str.size());
 
 		if (count < str.size()) {
 			ERRORMSG("A global '%s' file could not be found, and attempting to write a local one failed: PHYSFS_write('%s') failed: %s\n",
-				 ogreCfgSystem,
-				 ogreCfgUser,
+				 ogreCfgSystem.c_str(),
+				 ogreCfgUser.c_str(),
 				 PHYSFS_getLastError());
 			return false;
 		}
 	}
 
-	if (! PHYSFS_exists(pluginsCfgSystem)) {
+	if (! PHYSFS_exists(pluginsCfgSystem.c_str())) {
 		std::string str = "# Defines plugins to load\
 \
 # Define plugin folder\
@@ -231,13 +232,14 @@ Plugin=Plugin_ParticleFX.so\
 Plugin=Plugin_BSPSceneManager.so\
 Plugin=Plugin_OctreeSceneManager.so\
 ";
-		int count = PHYSFS_write(PHYSFS_openWrite(pluginsCfgUser),
+		PHYSFS_file* pluginsFile = PHYSFS_openWrite(pluginsCfgUser.c_str());
+		int count = PHYSFS_write(pluginsFile,
 					 str.c_str(), sizeof(char), str.size());
 
 		if (count < str.size()) {
 			ERRORMSG("A global '%s' file could not be found, and attempting to write a local one failed: PHYSFS_write('%s') failed: %s\n",
-				 pluginsCfgSystem,
-				 pluginsCfgUser,
+				 pluginsCfgSystem.c_str(),
+				 pluginsCfgUser.c_str(),
 				 PHYSFS_getLastError());
 			return false;
 		}
@@ -268,7 +270,7 @@ Plugin=Plugin_OctreeSceneManager.so\
 #elif defined (__unix__)
 	// ogreCfgSystem, ogreCfgUser, pluginsCfgSystem and pluginsCfgUser
 	// declared above
-	if (PHYSFS_exists(pluginsCfgSystem) && PHYSFS_exists(pluginsCfgSystem)) {
+	if (PHYSFS_exists(pluginsCfgSystem.c_str()) && PHYSFS_exists(pluginsCfgSystem.c_str())) {
 		m_ogre_root = new Ogre::Root(pluginsCfgSystem,
 					     ogreCfgSystem,
 					     SumwarsHelper::userPath() + "/Ogre.log");
