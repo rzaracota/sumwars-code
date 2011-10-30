@@ -42,10 +42,6 @@
 #include "timer.h"
 #include "graphicmanager.h"
 
-#ifdef __APPLE__
-#include <CoreFoundation/CFBundle.h>
-#endif
-
 /**
  * \class Application
  * \brief Basisklasse der Anwendung
@@ -199,24 +195,6 @@ class Application
 		 */
 		std::string retrieveRenderSystemWindowSize (int& videoModeWidth, int& videoModeHeight);
 
-
-#ifdef __APPLE__
-        /**
-         * \fn Ogre::String macPath()
-         * \brief Returns the path to the Resources directory on mac
-         */
-        Ogre::String macPath()
-        {
-            Ogre::String path;
-            CFBundleRef mainBundle = CFBundleGetMainBundle();
-            CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
-            char resPath[PATH_MAX];
-            CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)resPath, PATH_MAX);
-            CFRelease(resourcesURL);
-            path = resPath;
-            return path;
-        }
-#endif
 
 		// Member
 		/**
