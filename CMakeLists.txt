@@ -140,7 +140,7 @@ IF(WIN32)
 ENDIF()
 
 if(UNIX)
-  set(CFG_FILES_DIR "\"${CMAKE_INSTALL_PREFIX}/share/games/sumwars/\"")
+  set(CFG_FILES_DIR "${CMAKE_INSTALL_PREFIX}/share/games/sumwars/")
 else()
   set(CFG_FILES_DIR "./")
 endif()
