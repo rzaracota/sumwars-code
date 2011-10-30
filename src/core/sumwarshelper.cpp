@@ -16,7 +16,6 @@
 #include "sumwarshelper.h"
 
 
-
 std::string SumwarsHelper::getUpdatedResolutionString (const std::string& initialString, int newWidth, int newHeight)
 {
 	std::string returnValue;
@@ -88,5 +87,4 @@ void SumwarsHelper::getSizesFromResolutionString (const std::string& initialStri
 
 	videoModeWidth = atoi (sLeft.c_str ());
 	videoModeHeight = atoi (sAux.c_str ());
-
 }
