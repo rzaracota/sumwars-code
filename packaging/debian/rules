@@ -47,6 +47,10 @@ install-stamp: build-stamp
 
 	cd build && $(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
 
+	rm -fv debian/tmp/usr/share/games/sumwars/resources/gui/fonts/DejaVu*.ttf
+	rm -fv debian/tmp/usr/share/games/sumwars/resources/particles/scale_particles
+	rm -fv debian/tmp/usr/share/games/sumwars/resources/particles/create_ogre_1_6_particles
+
 # Build architecture-independent files here.
 binary-indep: build install
 	dh_testdir
