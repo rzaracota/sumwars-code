@@ -83,14 +83,12 @@ Application::Application(char *argv)
 
 bool Application::init(char *argv)
 {
-	//
 	// Initialise the PHYSFS library
-	//
-    if (PHYSFS_init (argv) == 0)
-    {
-        printf("init failed: %s\n", PHYSFS_getLastError ());
-        return false;
-    }
+	if (PHYSFS_init (argv) == 0)
+	{
+		printf("init failed: %s\n", PHYSFS_getLastError ());
+		return false;
+	}
 
 	// Get the path to use for storing data.
 	// This will be relative to the user directory on the user OS.
@@ -100,15 +98,15 @@ bool Application::init(char *argv)
 	if (PHYSFS_mount (PHYSFS_getUserDir (), 0, 1) == 0)
 	{
 		printf("PHYSFS_mount failed: %s\n", PHYSFS_getLastError ());
-        return false;
+		return false;
 	}
 
 	// Set the user directory as the default location to write to.
-    if (PHYSFS_setWriteDir (PHYSFS_getUserDir ()) == 0)
-    {
-        printf("PHYSFS_setWriteDir failed: %s\n", PHYSFS_getLastError ());
-        return false;
-    }
+	if (PHYSFS_setWriteDir (PHYSFS_getUserDir ()) == 0)
+	{
+		printf("PHYSFS_setWriteDir failed: %s\n", PHYSFS_getLastError ());
+		return false;
+	}
 
 #ifdef __APPLE__
     if (!PHYSFS_exists("Library/Application Support/Sumwars"))
@@ -171,9 +169,6 @@ bool Application::init(char *argv)
 							  "Plugin=Plugin_OctreeSceneManager\n"
 							  "Plugin=Plugin_CgProgramManager\n");
 
-
-		
-
 			PHYSFS_write(pluginsFile, str.c_str(), sizeof(char), str.size());
 			PHYSFS_close(pluginsFile);
 		}
@@ -188,27 +183,16 @@ bool Application::init(char *argv)
 		}
 	}
 #else // Unixes
-    if (!PHYSFS_exists(".sumwars"))
-    {
-        if (PHYSFS_mkdir(".sumwars") == 0)
-        {
-            printf("mkdir failed: %s\n", PHYSFS_getLastError());
-            return false;
-        }
-        if (PHYSFS_mkdir(".sumwars/save") == 0)
-        {
-            printf("mkdir failed: %s\n", PHYSFS_getLastError());
-            return false;
-        }
-    }
-    if (!PHYSFS_exists(".sumwars/save"))
-    {
-        if (PHYSFS_mkdir(".sumwars/save") == 0)
-        {
-            printf("mkdir failed: %s\n", PHYSFS_getLastError());
-            return false;
-        }
-    }
+	std::string saveDir = SumwarsHelper::userPath() + "/.sumwars/save";
+	if (! PHYSFS_exists(saveDir.c_str()))
+	{
+		int result = PHYSFS_mkdir(saveDir.c_str());
+		if (result == 0)
+		{
+			printf("mkdir failed: %s\n", PHYSFS_getLastError());
+			return false;
+		}
+	}
 #endif
     
 	// Initialize the loggers.
