@@ -17,7 +17,7 @@
 #define OPTIONSWINDOW_H
 
 #include "window.h"
-#include "OISKeyboard.h"
+#include <OISKeyboard.h>
 
 /**
  * \class OptionsWindow

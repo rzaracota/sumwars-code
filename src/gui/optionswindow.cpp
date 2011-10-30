@@ -550,19 +550,16 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 			Options::getInstance ()->setUsedVideoDriver (selectedDriverName);
 
 			std::string configpath;
-#ifdef _WIN32
+#if defined (_WIN32)
 			configpath = SumwarsHelper::userPath() + "/ogre.cfg";
-#elif defined __APPLE__
+#elif defined (__APPLE__)
 			configpath = SumwarsHelper::macPath() + "/ogre.cfg";
-#else
+#elif defined (__unix__)
 			configpath = SumwarsHelper::userPath() + "/ogre.cfg";
 #endif
 
 			// TODO: move handling to specialized function.
-#if OGRE_PLATFORM == OGRE_PLATFORM_IPHONE
-#pragma message("Iphone support not added for saving video mode!")
-#endif
-	        Ogre::ConfigFile cfg;
+			Ogre::ConfigFile cfg;
 			try
 			{
 				// Don't trim whitespace
@@ -578,7 +575,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 				{
 					throw;
 				}
-	        }
+			}
 
 			// Prepare the list of values to write.
 
@@ -746,13 +743,14 @@ bool OptionsWindow::onEnemyHighlightChanged(const CEGUI::EventArgs& evt)
 bool OptionsWindow::onResetGraphics(const CEGUI::EventArgs& evt)
 {
 	std::string configpath;
-#ifdef _WIN32
-	configpath =  SumwarsHelper::userPath() + "/ogre.cfg";
-#elif defined __APPLE__
-	configpath = macPath() + "/ogre.cfg";
-#else
-	configpath =  SumwarsHelper::userPath() + "/ogre.cfg";
+#if defined (_WIN32)
+	configpath = SumwarsHelper::userPath() + "/ogre.cfg";
+#elif defined (__APPLE__)
+	configpath = SumwarsHelper::macPath() + "/ogre.cfg";
+#elif defined (__unix__)
+	configpath = SumwarsHelper::userPath() + "/ogre.cfg";
 #endif
+
 	remove(configpath.c_str());
 	return true;
 }
