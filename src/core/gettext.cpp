@@ -95,13 +95,7 @@ void Gettext::init(const char* locale, std::string pathToTranslationFiles)
 
 	textdomain ("menu");
 
-#ifdef WIN32
-	char loc[100];
-	GetLocaleInfo(LOCALE_USER_DEFAULT,
-						  LOCALE_SISO639LANGNAME,
-						  loc, sizeof(loc));
-	Gettext::setLocale(loc);
-#else
+#ifndef WIN32
 	Gettext::setLocale(locale);
 #endif
 
