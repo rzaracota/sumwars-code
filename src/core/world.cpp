@@ -1247,9 +1247,9 @@ void World::handleMessage(TranslatableString msg, int slot)
             getNetwork()->pushSlotMessage(cv);
 			m_network->deallocatePacket(cv);
 
-            smsg = "[";
+            smsg = "<";
 			smsg += m_local_player->getName().getRawText();
-            smsg += "] ";
+            smsg += "> ";
             smsg += msg.getTranslation();
 			
 			trsmsg = TranslatableString(smsg);

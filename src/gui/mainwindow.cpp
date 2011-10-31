@@ -2299,7 +2299,7 @@ void MainWindow::updateChatContent()
 
 		float width = vec.asRelative(area).d_x;
 		float maxwidth = area.d_width * 0.43;
-		width += 3;
+		width += 10;
 		if (width > maxwidth)
 		{
 			width = maxwidth;
