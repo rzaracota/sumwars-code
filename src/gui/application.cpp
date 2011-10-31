@@ -86,7 +86,7 @@ bool Application::init(char *argv)
 	// Initialise the PHYSFS library
 	if (PHYSFS_init (argv) == 0)
 	{
-		printf("init failed: %s\n", PHYSFS_getLastError ());
+		printf("PHYSFS_init failed: %s\n", PHYSFS_getLastError ());
 		return false;
 	}
 
@@ -180,68 +180,73 @@ bool Application::init(char *argv)
 	}
 #elif defined (__unix__)
 	// creating 'save' directory
-	std::string saveDir = SumwarsHelper::userPath() + "/save";
+	std::string saveDir = "/.sumwars/save";
 	if (! PHYSFS_exists(saveDir.c_str()))
 	{
+		printf("Save dir doesn't exist, making it: %s%s\n", PHYSFS_getWriteDir(), saveDir.c_str());
 		int result = PHYSFS_mkdir(saveDir.c_str());
 		if (result == 0)
 		{
-			printf("mkdir failed: %s\n", PHYSFS_getLastError());
+			printf("PHYSFS_mkdir failed: %s\n", PHYSFS_getLastError());
 			return false;
 		}
 	}
 
 	// creating local {ogre,plugins}.cfg files, if system-wide ones not
-	// found
+	// found, the local ones relative to PHYSFS_writeDir
 	std::string ogreCfgSystem = (SumwarsHelper::gameDataPath() + "/ogre.cfg").c_str();
-	std::string ogreCfgUser = (SumwarsHelper::userPath() + "/ogre.cfg").c_str();
+	std::string ogreCfgUser = "/.sumwars/ogre.cfg";
 	std::string pluginsCfgSystem = (SumwarsHelper::gameDataPath() + "/plugins.cfg").c_str();
-	std::string pluginsCfgUser = (SumwarsHelper::userPath() + "/plugins.cfg").c_str();
+	std::string pluginsCfgUser = "/.sumwars/plugins.cfg";
 
 	if (! PHYSFS_exists(ogreCfgSystem.c_str())) {
-		std::string str = "Render System=OpenGL Rendering Subsystem\
-\
-[OpenGL Rendering Subsystem]\
-FSAA=0\
-Full Screen=No\
-RTT Preferred Mode=PBuffer\
-Video Mode=940 x 705\
-";
+		std::string str =
+			"Render System=OpenGL Rendering Subsystem\n"
+			"\n"
+			"[OpenGL Rendering Subsystem]\n"
+			"FSAA=0\n"
+			"Full Screen=No\n"
+			"RTT Preferred Mode=PBuffer\n"
+			"Video Mode=940 x 705\n";
 		PHYSFS_file* ogreFile = PHYSFS_openWrite(ogreCfgUser.c_str());
 		int count = PHYSFS_write(ogreFile,
 					 str.c_str(), sizeof(char), str.size());
 
 		if (count < str.size()) {
-			ERRORMSG("A global '%s' file could not be found, and attempting to write a local one failed: PHYSFS_write('%s') failed: %s\n",
+			printf("A global '%s' file could not be found, and attempting to write a local one failed: PHYSFS_write('%s') failed: %s\n",
 				 ogreCfgSystem.c_str(),
 				 ogreCfgUser.c_str(),
 				 PHYSFS_getLastError());
 			return false;
+		} else {
+			printf("Created '%s%s'\n", PHYSFS_getWriteDir(), ogreCfgUser.c_str());
 		}
 	}
 
 	if (! PHYSFS_exists(pluginsCfgSystem.c_str())) {
-		std::string str = "# Defines plugins to load\
-\
-# Define plugin folder\
-PluginFolder=/usr/lib/OGRE\
-\
-# Define OpenGL rendering implementation plugin\
-Plugin=RenderSystem_GL.so\
-Plugin=Plugin_ParticleFX.so\
-Plugin=Plugin_BSPSceneManager.so\
-Plugin=Plugin_OctreeSceneManager.so\
-";
+		std::string str =
+			"# Defines plugins to load\n"
+			"\n"
+			"# Define plugin folder\n"
+			"PluginFolder=/usr/lib/OGRE\n"
+			"\n"
+			"# Define OpenGL rendering implementation plugin\n"
+			"Plugin=RenderSystem_GL.so\n"
+			"Plugin=Plugin_ParticleFX.so\n"
+			"Plugin=Plugin_BSPSceneManager.so\n"
+			"Plugin=Plugin_OctreeSceneManager.so\n";
 		PHYSFS_file* pluginsFile = PHYSFS_openWrite(pluginsCfgUser.c_str());
 		int count = PHYSFS_write(pluginsFile,
 					 str.c_str(), sizeof(char), str.size());
 
 		if (count < str.size()) {
-			ERRORMSG("A global '%s' file could not be found, and attempting to write a local one failed: PHYSFS_write('%s') failed: %s\n",
+			printf("A global '%s' file could not be found, and attempting to write a local one failed: PHYSFS_write('%s') failed: %s\n",
 				 pluginsCfgSystem.c_str(),
 				 pluginsCfgUser.c_str(),
 				 PHYSFS_getLastError());
 			return false;
+		} else {
+			printf("Created '%s%s'\n", PHYSFS_getWriteDir(), pluginsCfgUser.c_str());
 		}
 	}
 #endif
@@ -275,8 +280,8 @@ Plugin=Plugin_OctreeSceneManager.so\
 					     ogreCfgSystem,
 					     SumwarsHelper::userPath() + "/Ogre.log");
 	} else {
-		m_ogre_root = new Ogre::Root(pluginsCfgUser,
-					     ogreCfgUser,
+		m_ogre_root = new Ogre::Root(PHYSFS_getWriteDir() + pluginsCfgUser,
+					     PHYSFS_getWriteDir() + ogreCfgUser,
 					     SumwarsHelper::userPath() + "/Ogre.log");
 	}
 #endif
@@ -846,17 +851,18 @@ bool Application::setupResources()
 	Ogre::String path;
 	Ogre::ConfigFile cf;
 #if defined (__unix__)
-	Ogre::String resourcesCfgUser = SumwarsHelper::userPath() + "/resources.cfg";
+	Ogre::String resourcesCfgUser = "/.sumwars/resources.cfg";
 	Ogre::String resourcesCfgSystem = SumwarsHelper::gameDataPath() + "/resources.cfg";
 	if (PHYSFS_exists(resourcesCfgUser.c_str())) {
-		cf.load(resourcesCfgUser);
-	} else if (PHYSFS_exists(resourcesCfgSystem.c_str())) {
-		cf.load(resourcesCfgSystem);
+		cf.load(std::string(PHYSFS_getWriteDir()) + resourcesCfgUser);
 	} else {
-		ERRORMSG("Error message: resource.cfg file not found, searched in '%s' and '%s'",
-			 resourcesCfgUser.c_str(),
-			 resourcesCfgSystem.c_str());
-		return false;
+		cf.load(resourcesCfgSystem);
+		if (cf.getSetting("FileSystem", "monsters", "notfound") == "notfound") {
+			ERRORMSG("Error message: resource.cfg file not found, searched in '%s%s' and '%s'",
+				 PHYSFS_getWriteDir(), resourcesCfgUser.c_str(),
+				 resourcesCfgSystem.c_str());
+			return false;
+		}
 	}
 #elif defined (__APPLE__)
 	path = SumwarsHelper::macPath() + "/";
