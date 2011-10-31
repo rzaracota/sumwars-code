@@ -770,7 +770,9 @@ bool OptionsWindow::onLanguageSelected(const CEGUI::EventArgs& evt)
 	{
 		DEBUGX("selected Language %s",item->getText().c_str());
 		StrListItem* sitem = static_cast<StrListItem*>(item);
-		Gettext::setLocale(sitem->m_data.c_str());
+
+		// Call the options set locale; this will call in turn the Gettext set locale
+		Options::getInstance ()->setLocale (sitem->m_data.c_str());
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		// A re-init seems to be needed on Windows.

@@ -147,7 +147,16 @@ void Gettext::setLocale(const char* loc)
 	if (locale != m_locale)
 	{
 #ifdef WIN32
-		if (locale != "")
+		if (locale.length () == 0)
+		{
+			char loc[100];
+			GetLocaleInfo(LOCALE_USER_DEFAULT,
+						  LOCALE_SISO639LANGNAME,
+						  loc, sizeof(loc));
+			locale = loc;
+		}
+
+		if (locale.length () > 0)
 		{
 			std::string win_locale(locale, 0, 2);
 			std::string env = "LANGUAGE=" + win_locale;
@@ -170,6 +179,7 @@ void Gettext::setLocale(const char* loc)
 			m_changed = true;
 			return;
 		}
+
 #endif
         std::string extensions[3] = {".utf-8",".UTF-8",""};
 
