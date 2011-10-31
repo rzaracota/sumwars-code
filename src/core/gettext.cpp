@@ -23,10 +23,16 @@
 
 std::string Gettext::m_locale;
 
+#ifdef WIN32
+std::map <std::string, int> Gettext::winLanguageMappings_;
+#endif
+
 bool Gettext::m_changed;
 
 void Gettext::init(const char* locale, std::string pathToTranslationFiles)
 {
+	preInit ();
+
 	bindtextdomain ("defend_dwarfenwall",pathToTranslationFiles.c_str());
 	bind_textdomain_codeset ("defend_dwarfenwall","UTF-8");
 
@@ -102,6 +108,23 @@ void Gettext::init(const char* locale, std::string pathToTranslationFiles)
 
 }
 
+
+void Gettext::preInit ()
+{
+#if WIN32
+	// Prepare the mappings.
+	// -1 for an entry means it's unsupported!
+	winLanguageMappings_["en"] = 0x0409; // en-US
+	winLanguageMappings_["de"] = 0x0407; // de-DE
+	winLanguageMappings_["it"] = 0x0410; // it-IT
+	winLanguageMappings_["pl"] = 0x0415;
+	winLanguageMappings_["pt"] = 0x0816; // pt-PT
+	winLanguageMappings_["ru"] = 0x0419;
+	winLanguageMappings_["uk"] = 1058;
+#endif
+}
+
+
 const char* Gettext::getLocale()
 {
 	return m_locale.c_str();
@@ -123,26 +146,31 @@ void Gettext::setLocale(const char* loc)
 
 	if (locale != m_locale)
 	{
-	    #ifdef WIN32
-            if (locale != "")
-            {
-                std::string win_locale(locale, 0, 2);
-                std::string env = "LANGUAGE=" + win_locale;
+#ifdef WIN32
+		if (locale != "")
+		{
+			std::string win_locale(locale, 0, 2);
+			std::string env = "LANGUAGE=" + win_locale;
 
-                _putenv(env.c_str());
-                SetEnvironmentVariable("LANGUAGE", win_locale.c_str());
+			_putenv(env.c_str());
+			SetEnvironmentVariable("LANGUAGE", win_locale.c_str());
 
-                char lang[50];
-                GetEnvironmentVariable("LANGUAGE",lang,50);
-                DEBUGX("current language (GetEnvironmentVariable) %s",lang);
-                DEBUGX("current language (getenv) %s",getenv("LANGUAGE"));
+			char lang[50];
+			GetEnvironmentVariable("LANGUAGE",lang,50);
+			DEBUGX("current language (GetEnvironmentVariable) %s",lang);
+			DEBUGX("current language (getenv) %s",getenv("LANGUAGE"));
 
-               m_locale = locale;
-               m_changed = true;
-               return;
-            }
+			if (setWinThreadLocale (win_locale) == 0)
+			{
+				DEBUG ("Could not change locale to %s", win_locale.c_str ());
+				return;
+			}
 
-        #endif
+			m_locale = locale;
+			m_changed = true;
+			return;
+		}
+#endif
         std::string extensions[3] = {".utf-8",".UTF-8",""};
 
         // try all possible extensions
@@ -184,3 +212,29 @@ bool Gettext::getLocaleChanged()
 }
 
 
+#if WIN32
+bool Gettext::setWinThreadLocale (const std::string& newLocale)
+{
+	bool result (false);
+
+	int newCode = getLanguageCodeFromString (newLocale);
+	if (newCode == -1)
+		return false;
+	
+	DEBUG ("Setting locale to : %s", newLocale.c_str ());
+	result = SetThreadLocale (newCode);
+
+	return result;
+}
+
+int Gettext::getLanguageCodeFromString (const std::string& languageString)
+{
+	// Search for the language in the mapping.
+	std::map <std::string, int>::iterator it = winLanguageMappings_.find  (languageString);
+	if (it != winLanguageMappings_.end ())
+	{
+		return it->second;
+	}
+	return -1;
+}
+#endif // WIN32

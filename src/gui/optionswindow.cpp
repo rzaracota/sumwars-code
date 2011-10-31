@@ -22,6 +22,7 @@
 // The following includes are added to support video mode changes in the options window.
 #include <OGRE/OgreConfigFile.h>
 #include <OGRE/OgreException.h>
+#include <OGRE/OgreResourceGroupManager.h>
 
 OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	:Window(doc)
@@ -770,6 +771,13 @@ bool OptionsWindow::onLanguageSelected(const CEGUI::EventArgs& evt)
 		DEBUGX("selected Language %s",item->getText().c_str());
 		StrListItem* sitem = static_cast<StrListItem*>(item);
 		Gettext::setLocale(sitem->m_data.c_str());
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+		// A re-init seems to be needed on Windows.
+		// TODO:XXX: investigate - Augustin Preda, 2011.10.31
+		Ogre::StringVectorPtr path = Ogre::ResourceGroupManager::getSingleton().findResourceLocation("translation", "*");
+		Gettext::init(sitem->m_data.c_str(), path.get()->at(0));
+#endif
 	}
 
 	return true;

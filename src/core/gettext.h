@@ -25,6 +25,7 @@
 
 #include <locale.h>
 #include <string>
+#include <map>
 
 /**
  * \class Gettext
@@ -60,7 +61,29 @@ class Gettext
 		 */
 		static bool getLocaleChanged();
 
+#ifdef WIN32
+		/**
+		 * \brief Specifig Windows locale setting function.
+		 */
+		static bool setWinThreadLocale (const std::string& newLocale);
+
+		/**
+		 * \brief Windows specific language code retrieval.
+		 * \param languageString the short language description, without locale (e.g. "de", "en", "it")
+		 * \note Make sure that the function preInit is called before this function, so the proper mappings are set up.
+		 * \return The language codes, like 0x0407 (German)
+		 */
+		static int getLanguageCodeFromString (const std::string& languageString);
+
+#endif
+
 	private:
+
+		/**
+		 * \brief Perform any OS specific pre-initialization steps.
+		 */
+		static void preInit ();
+
 		/**
 		 * \var std::string m_locale
 		 * \brief aktuelle Sprache
@@ -72,6 +95,10 @@ class Gettext
 		 * \brief Auf true gesetzt, wenn die Sprache gerade geaendert wurde (bis zum ersten Aufruf von getLocalChanged)
 		 */
 		static bool m_changed;
+
+#ifdef WIN32
+		static std::map <std::string, int> winLanguageMappings_;
+#endif
 };
 #endif
 
