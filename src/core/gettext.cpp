@@ -120,7 +120,7 @@ void Gettext::preInit ()
 	winLanguageMappings_["pl"] = 0x0415;
 	winLanguageMappings_["pt"] = 0x0816; // pt-PT
 	winLanguageMappings_["ru"] = 0x0419;
-	winLanguageMappings_["uk"] = 1058;
+	winLanguageMappings_["uk"] = 0x0422;
 #endif
 }
 
