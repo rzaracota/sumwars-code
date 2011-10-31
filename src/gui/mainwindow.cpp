@@ -404,6 +404,7 @@ void MainWindow::update(float time)
         {
             m_sub_windows["errorDialog"]->update();
             error_dialog->setVisible(true);
+			error_dialog->activate();
             //error_dialog->setModalState(true);
         }
         else
@@ -1082,11 +1083,12 @@ void MainWindow::setupErrorDialogWindow()
 	Window* wnd = new ErrorDialogWindow(m_document);
 	m_sub_windows["errorDialog"] = wnd;
 	
+	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
+	wnd->getCEGUIWindow()->setVisible(false);
+	
 	wnd = new WarningDialogWindow(m_document);
 	m_sub_windows["warningDialog"] = wnd;
 	
-	
-	// Inventar anfangs ausblenden
 	m_main_menu->addChildWindow(wnd->getCEGUIWindow());
 	wnd->getCEGUIWindow()->setVisible(false);
 }
