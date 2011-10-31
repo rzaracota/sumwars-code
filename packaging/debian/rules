@@ -3,89 +3,18 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-# DEB_BUILD_OPTIONS
-ifneq (,$(findstring parallel,$(DEB_BUILD_OPTIONS)))
-    PARALLEL_JOBS = $(shell echo $(DEB_BUILD_OPTIONS) | \
-        sed -e 's/.*parallel=\([0-9]\+\).*/\1/')
-    PARALLEL_OPTIONS = -j$(PARALLEL_JOBS)
-endif
-# DEB_BUILD_OPTIONS
+%:
+	dh $@ --buildsystem=cmake --parallel
 
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		-DCMAKE_BUILD_TYPE:STRING="Release" \
+		-DNO_TINYXML:BOOL=ON \
+		-DNO_ENET:BOOL=ON \
+		-DBUILD_TOOLS:BOOL=OFF
 
-build: build-stamp
-
-build-stamp:
-	dh_testdir
-
-	mkdir build && \
-	cd build && \
-	cmake   -D CMAKE_INSTALL_PREFIX:PATH=/usr \
-		-D CMAKE_BUILD_TYPE:STRING="Release" \
-		-D NO_TINYXML:BOOL=ON \
-		-D NO_ENET:BOOL=ON \
-		-D BUILD_TOOLS:BOOL=OFF \
-		.. && \
-	$(MAKE) $(PARALLEL_OPTIONS)
-
-	touch build-stamp
-
-clean:
-	dh_testdir
-	dh_testroot
-
-	rm -rf build
-
-	dh_clean
-
-install: install-stamp
-
-install-stamp: build-stamp
-	dh_testdir
-	dh_testroot
-	dh_prep
-	dh_installdirs 
-
-	cd build && $(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
+override_dh_auto_install:
+	dh_auto_install
 
 	rm -fv debian/tmp/usr/share/games/sumwars/resources/gui/fonts/DejaVu*.ttf
-	rm -fv debian/tmp/usr/share/games/sumwars/resources/particles/scale_particles
-	rm -fv debian/tmp/usr/share/games/sumwars/resources/particles/create_ogre_1_6_particles
-
-# Build architecture-independent files here.
-binary-indep: build install
-	dh_testdir
-	dh_testroot
-	dh_install -i --list-missing
-	dh_installdocs -i
-	dh_installchangelogs -i
-	dh_installman -i
-	dh_lintian -i
-	dh_icons -i
-	dh_compress -i
-	dh_fixperms -i
-	dh_installdeb -i
-	dh_gencontrol -i
-	dh_md5sums -i
-	dh_builddeb -i
-
-# Build architecture-dependent files here.
-binary-arch: build install
-	dh_testdir
-	dh_testroot
-	dh_install -a --list-missing
-	dh_installdocs -a
-	dh_installchangelogs -a
-	dh_installman -a
-	dh_lintian -a
-	dh_strip -a
-	dh_compress -a
-	dh_fixperms -a
-	dh_makeshlibs -a
-	dh_installdeb -a
-	dh_shlibdeps -a
-	dh_gencontrol -a
-	dh_md5sums -a
-	dh_builddeb -a
-
-binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install 
+	rm -fv debian/tmp/usr/share/games/sumwars/resources/particles/{scale_particles,create_ogre_1_6_particles}
