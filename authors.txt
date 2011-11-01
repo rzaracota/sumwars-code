@@ -17,6 +17,7 @@
 =Christian Wittmann (psycho)
 =Francesco Miglietta (hal9000)
 =Adam Preisler (Alfisko)
+=Simeon Dear (Trilby)
 
 [E Scripting]
 =Steffen Schönefeldt (Kalimgard)

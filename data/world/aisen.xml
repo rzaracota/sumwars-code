@@ -123,7 +123,7 @@
 		</Exits>
 		
 		<Environments>
-			<Environment height="1.0" name="cave" />
+			<Environment height="1.0" name="vault" />
 		</Environments>
 	</Region>
 
@@ -162,7 +162,7 @@
 		</Exits>
 	
 		<Environments>
-			<Environment height="1.0" name="cave" />
+			<Environment height="1.0" name="vault" />
 		</Environments>
 	</Region>
 	
@@ -191,7 +191,7 @@
 		</Exits>
 		
 		<Environments>
-			<Environment height="1.0" name="cave" />
+			<Environment height="1.0" name="vault" />
 		</Environments>
 		
 		<ObjectGroups>

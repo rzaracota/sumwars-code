@@ -124,7 +124,10 @@ FIXED_OBJECT
                 <Object name="fence4" />
                 <Object name="fence5" />
         </Environment>
-        <Environment name="cave">
+        <Environment name="vault">
+                <Object name="buttress_wall1" />
+        </Environment>
+		<Environment name="cave">
                 <Object name="cave_wall1" />
         </Environment>
 		<Environment name="none">
@@ -140,6 +143,9 @@ FIXED_OBJECT
         </Environment>
         <Environment name="meadow">
                 <Object name="fence_m1" />
+        </Environment>
+        <Environment name="vault">
+                <Object name="buttress_wall_m1" />
         </Environment>
         <Environment name="cave">
                 <Object name="cave_wall_m1" />
@@ -158,6 +164,10 @@ FIXED_OBJECT
         <Environment name="meadow">
                 <Object name="fence_s1" />
         </Environment>
+        <Environment name="vault">
+                <Object name="buttress_wall_s1" />
+				<Object name="buttress_wall_s2" />
+        </Environment>
         <Environment name="cave">
                 <Object name="cave_wall_s1" />
         </Environment>
@@ -175,7 +185,10 @@ FIXED_OBJECT
         <Environment name="meadow">
                 <Object name="fence_t1" />
         </Environment>
-        <Environment name="cave">
+        <Environment name="vault">
+                <Object name="buttress_wall_t1" />
+        </Environment>
+		<Environment name="cave">
                 <Object name="cave_wall_t1" />
         </Environment>
 		<Environment name="none">
@@ -191,6 +204,9 @@ FIXED_OBJECT
         </Environment>
         <Environment name="meadow">
                 <Object name="fence_cIn1" />
+        </Environment>
+        <Environment name="vault">
+                <Object name="buttress_wall_cIn1" />
         </Environment>
         <Environment name="cave">
                 <Object name="cave_wall_cIn1" />
@@ -208,6 +224,9 @@ FIXED_OBJECT
         </Environment>
         <Environment name="meadow">
                 <Object name="fence_cOut1" />
+        </Environment>
+        <Environment name="vault">
+                <Object name="buttress_wall_cOut1" />
         </Environment>
         <Environment name="cave">
                 <Object name="cave_wall_cOut1" />
