@@ -1,17 +1,17 @@
 # German translations for sumwars package
 # Copyright (C) 2009
 # This file is distributed under the same license as the sumwars package.
-# kalimgard <kalimgard@users.sourceforge.net>, 2010-2011.
+# kalimgard <kalimgard@users.sourceforge.net>, 2010-2011, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-05-19 12:06+0200\n"
+"PO-Revision-Date: 2011-11-01 \n"
 "Last-Translator: kalimgard <kalimgard@users.sourceforge.net>\n"
 "Language-Team: german <translation-team-de@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -1367,19 +1367,18 @@ msgstr "Harter Schlag"
 
 #: warrior_ablt.xml
 msgid "Attacks one enemy for serious damage."
-msgstr ""
+msgstr "Schlägt einen Gegner mit großer Wucht."
 
 #: warrior_ablt.xml
 msgid "Battlecry"
 msgstr "Kriegsschrei"
 
 #: warrior_ablt.xml
-#, fuzzy
 msgid ""
 "The warrior releases a mighty cry that causes his enemies to lose "
 "concentration, ultimatly reducing their defence and slowing them down."
 msgstr ""
-"Der Krieger entlässt einen mächtigen Schrei, der seine Gegner ihre "
+"Der Krieger lässt einen mächtigen Schrei los, der seine Gegner ihre "
 "Konzentration verlieren lässt, wodurch ihre Verteidigung sinkt."
 
 #: warrior_ablt.xml
@@ -1541,13 +1540,12 @@ msgid "Defiances"
 msgstr "Herausforderung"
 
 #: warrior_ablt.xml
-#, fuzzy
 msgid ""
 "Nearby monsters will attack the warrior, if they are able to. Some will run "
 "away in fear. The warriors defence is increased. "
 msgstr ""
-"Nahe Monster werden den Krieger angreifen, wenn sie können. Die Verteidigung "
-"des Kriegers ist erhöht."
+"Nahe Monster werden den Krieger angreifen, wenn sie können. Einige werden "
+"ängstlich davon laufen. Die Verteidigung des Kriegers ist erhöht."
 
 #: warrior_ablt.xml
 msgid "Smash blow"
@@ -1586,7 +1584,6 @@ msgid "Warcry"
 msgstr "Kriegsschrei"
 
 #: warrior_ablt.xml
-#, fuzzy
 msgid ""
 "The battle hardened warrior's scream slows down his opponents, sometimes "
 "confusing them as well."
@@ -1611,9 +1608,9 @@ msgid "Whirl blow"
 msgstr "Wirbelschlag"
 
 #: warrior_ablt.xml
-#, fuzzy
 msgid "Attacks every enemy in weapon range with a triple sweeping strike."
-msgstr "Greift jeden Gegner in Reichweite mit etwas reduziertem Schaden an."
+msgstr ""
+"Greift jeden Gegner in Reichweite mit einem dreifachen Rundumschlag an."
 
 #: priest_ablt.xml
 msgid "Acid"
@@ -1630,21 +1627,18 @@ msgid "Bladestorm"
 msgstr "Klingensturm"
 
 #: priest_ablt.xml
-#, fuzzy
 msgid ""
 "The priest strengthens the weaponarms of his comrades, leading to increased "
 "attackspeed for everyone."
 msgstr ""
 "Der Priester stärkt die Waffenarme seiner Kameraden, was zu einer höheren "
-"Angriffsgeschwindigkeit von allen führt. Mit steigender Willenskraft kann "
-"der Priester diesen Effekt länger halten."
+"Angriffsgeschwindigkeit von allen führt."
 
 #: priest_ablt.xml
 msgid "Blazing Shield"
 msgstr "Lodernder Schild"
 
 #: priest_ablt.xml
-#, fuzzy
 msgid ""
 "The party is surrounded by holy energy. Everyones defense is increased. With "
 "increasing willpower the effect improves."
@@ -1670,7 +1664,6 @@ msgid "Glaring Sun"
 msgstr "Blendende Sonne"
 
 #: priest_ablt.xml
-#, fuzzy
 msgid ""
 "The priest calls forth a mighty explosion of light that can blind every "
 "enemy in an area."
@@ -1695,38 +1688,36 @@ msgid "Omniscent Eye"
 msgstr "Allessehendes Auge"
 
 #: priest_ablt.xml
-#, fuzzy
 msgid ""
 "The party will be immune to blind and mute for some time. Those ailments "
 "will also be healed."
 msgstr ""
-"Die Gruppe wird eine zeitlang immun gegen Blind- und Stummheit. Mit "
-"steigender Willenskraft kann der Priester diesen Effekt länger halten."
+"Die Gruppe wird eine zeitlang immun gegen Blind- und Stummheit. Diese "
+"Statusveränderungen werden gleichzeitig geheilt."
 
 #: priest_ablt.xml
 msgid "Restore Concentration"
 msgstr "Konzentration wiederherstellen"
 
 #: priest_ablt.xml
-#, fuzzy
 msgid ""
 "The priest heals one friend from confusion and berserk. Those ailments will "
 "also be healed."
-msgstr "Der Priester heilt einen Freund von Verwirrung und Berserkerwut."
+msgstr ""
+"Der Priester heilt einen Freund von Verwirrung und Berserkerwut. Diese "
+"Leiden werden zusätzlich geheilt."
 
 #: priest_ablt.xml
 msgid "Spirit Shield"
 msgstr "Geistiger Schild"
 
 #: priest_ablt.xml
-#, fuzzy
 msgid ""
 "The priest grants immunity to berserk and confuse to all his partymembers "
 "for a small amount of time. Those ailments will also be healed."
 msgstr ""
 "Der Priester gewährt allen Gruppenmitgliedern für kurze Zeit Immunität gegen "
-"Berserker und Verwirrung. Mit steigender Willenskraft kann der Priester "
-"diesen Effekt länger halten."
+"Berserker und Verwirrung. Diese Statusveränderungen werden auch geheilt."
 
 #: priest_ablt.xml
 msgid "Magic Shield"
@@ -1757,14 +1748,12 @@ msgid "Remedial Water"
 msgstr "Heilendes Wasser"
 
 #: priest_ablt.xml
-#, fuzzy
 msgid ""
 "The priests grants every partymember immunity to poison and burn for a small "
 "amount of time while healing these effects."
 msgstr ""
 "Der Priester gewährt jedem Gruppenmitglied für kurze Zeit Immunität gegen "
-"Gifte und Verbrennungen, während er diese Effekte gleichzeitig heilt. Mit "
-"steigender Willenskraft kann der Priester diesen Effekt länger halten."
+"Gifte und Verbrennungen, während er diese Effekte gleichzeitig heilt."
 
 #: priest_ablt.xml
 msgid "Dismissing Strike"
@@ -1869,7 +1858,6 @@ msgid "Keen Mind"
 msgstr "Messerscharfer Geist"
 
 #: priest_ablt.xml
-#, fuzzy
 msgid ""
 "The priest increases everyones spellpower for a short time making spells "
 "more effective. The effect becomes stronger with increasing willpower of the "
@@ -1896,31 +1884,30 @@ msgid "Divine Will"
 msgstr "Heiliger Wille"
 
 #: priest_ablt.xml
-#, fuzzy
 msgid ""
 "The priests protecting influence raises the willpower of all partymembers "
 "temporarily. The effect becomes stronger with increasing willpower of the "
 "priest."
 msgstr ""
 "Der schützende Einfluss des Priesters hebt zeitweilig die Willenskraft aller "
-"Gruppenmitglieder. Mit steigender Willenskraft kann der Priester diesen "
-"Effekt länger halten."
+"Gruppenmitglieder. Mit steigender Willenskraft des Priesters wird dieser "
+"Effekt stärker."
 
 #: priest_ablt.xml
-#, fuzzy
 msgid "Holy Shield"
-msgstr "Lodernder Schild"
+msgstr "Heiliger Schild"
 
 #: priest_ablt.xml
 msgid ""
 "The priest is surrounded by a shimmering light that repells undead attacks. "
 "Damage from undead beings is reduced by one third."
 msgstr ""
+"Der Prister wird von einem schimmernden Licht umhüllt, das Untote abstößt. "
+"Schaden von Untoten wird um ein Drittel reduziert."
 
 #: priest_ablt.xml
-#, fuzzy
 msgid "Banishing Aura"
-msgstr "Schmetteraxt"
+msgstr "Aura der Vertreibung"
 
 #: priest_ablt.xml
 msgid ""
@@ -1928,16 +1915,21 @@ msgid ""
 "a banishment. While it holds no real power over demons, demonic beings will "
 "be frightened, thus leading to their damage being reduced by one third."
 msgstr ""
+"Der Priester umgibt sich mit einer Aura, die einen Exorzismus immitiert. "
+"Obwohl es keine echte Macht über Dämonen hat, werden dämonische Wesenheiten "
+"ängstlich, so dass ihr Schaden um ein Drittel reduziert wird."
 
 #: priest_ablt.xml
 msgid "Elemental Vortex"
-msgstr ""
+msgstr "Elementarer Strudel"
 
 #: priest_ablt.xml
 msgid ""
 "The priest can unconsciously create an elemental vortex that will drain one "
 "third of incoming damage from elemental beings."
 msgstr ""
+"Der Prister kann unbewusst einen elementaren Strudel erzeugen, der ein "
+"Drittel des Schadens von elementaren Wesen absorbiert."
 
 #: base_abilities.xml
 msgid "dead"
@@ -2614,13 +2606,12 @@ msgid "Ionisation"
 msgstr "Ionisierung"
 
 #: mage_ablt.xml
-#, fuzzy
 msgid ""
 "The mage has become one with the storm and can cast lightning spells 25% "
 "faster."
 msgstr ""
-"Der Magier ist eins mit dem Sturm geworden, was dazu führt, dass seine "
-"Luftzauber Gegner lähmen können."
+"Der Magier ist eins mit dem Sturm geworden, was dazu führt, dass er seine "
+"Luftzauber 25% schneller sprechen kann."
 
 #: mage_ablt.xml
 msgid "Lightning"
@@ -3234,9 +3225,8 @@ msgid "Ronny the Rat"
 msgstr "Ronny die Ratte"
 
 #: rescue_willard.xml
-#, fuzzy
 msgid "Willard"
-msgstr "Willenskraft"
+msgstr "Willard"
 
 #: joringsbridge_npc.xml
 msgid "Gertlinde Kampfer"
@@ -3268,7 +3258,7 @@ msgstr "Marco"
 
 #: joringsbridge_npc.xml
 msgid "Objects found"
-msgstr ""
+msgstr "Fundgegenstände"
 
 #: joringsbridge_npc.xml
 msgid "What are these Items?"
@@ -3489,7 +3479,7 @@ msgstr "Der Preis ist $1"
 
 #: joringsbridge_npc.xml
 msgid "Better not."
-msgstr ""
+msgstr "Besser nicht"
 
 #: joringsbridge_npc.xml
 msgid "As I always say: No enchantment should be applied a second time."
@@ -3560,7 +3550,7 @@ msgstr "Rüstungsklasse"
 
 #: dwarfcastle.xml
 msgid "Magic power"
-msgstr ""
+msgstr "Zauberkraft"
 
 #: dwarfcastle.xml
 msgid "Willpower"
@@ -3604,7 +3594,7 @@ msgstr "Es scheint, als hätte der Gegenstand bereits eine solche Verzauberung."
 
 #: dwarfcastle.xml
 msgid "Nah to expensive"
-msgstr ""
+msgstr "Nee, zu teuer."
 
 # Bron's door
 #: npc.xml
@@ -3640,14 +3630,12 @@ msgid "Overlooker Necromancer"
 msgstr "Vorarbeiter Nekromant"
 
 #: dwarfenwall.lua
-#, fuzzy
 msgid "Skinny Necromancer"
-msgstr "Nekromant"
+msgstr "Magerer Nekromant"
 
 #: dwarfenwall.lua
-#, fuzzy
 msgid "Scarfaced Necromancer"
-msgstr "Nekromant"
+msgstr "Narbengesichtiger Nekromant"
 
 #: npc.xml
 msgid "Buy empty scrolls"
@@ -3695,7 +3683,7 @@ msgstr "Fenor Marken"
 
 #: theFissure.xml
 msgid "Unknown Lich"
-msgstr ""
+msgstr "Unbekannter Lich"
 
 #: fortify_dwarfenwall.xml
 msgid ""
