@@ -121,10 +121,10 @@ void MainMenu::update()
 
 void MainMenu::updateTranslation()
 {
-    //updating translations for the Menu
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::FrameWindow* lbl;
 
+	// Update the button labels.
 	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton/Label"));
 	lbl->setText((CEGUI::utf8*) gettext("Single player"));
 
@@ -143,7 +143,18 @@ void MainMenu::updateTranslation()
 	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
 	lbl->setText((CEGUI::utf8*) gettext("Quit"));
 
+	// Update message windows
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("DeleteCharLabel")); // note: this has no in-between slash!
+	if (lbl) lbl->setText (gettext ("Really delete savegame?"));
 
+	// Propagation onto sub-windows
+	if (m_saveGameList != 0)
+	{
+		m_saveGameList->updateTranslation ();
+
+		// The save game list doesn't forward all item changes, so also call the full update.
+		m_saveGameList->update ();
+	}
 }
 
 bool MainMenu::onStartSinglePlayer(const CEGUI::EventArgs& evt)
