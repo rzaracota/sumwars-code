@@ -279,14 +279,37 @@ bool SavegameList::onDeleteCharClicked(const CEGUI::EventArgs& evt)
 
 bool SavegameList::onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
 {
+	// Get the save file to remove.
+	std::string saveFile =  m_document->getSaveFile ();
+	if (saveFile.length () <= 0)
+	{
+		return false;
+	}
+
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("DeleteChar");
 	
 	message->setVisible(false);
 	message->setModalState(false);
 	
-	remove(m_document->getSaveFile().c_str());
+	// Get rid of the save file
+	remove (saveFile.c_str ());
 
+	// Also get rif od the preview image.
+	// The preview image should have the same name as the save file, but with a different extension.
+	// Using the standard 3 char extension (4 if the "." is included).
+	if (saveFile.length () > 4)
+	{
+		// Parse the name.
+		std::string previewPicture (saveFile);
+		previewPicture.erase (saveFile.length () - 4, saveFile.length());
+		previewPicture.append (".png");
+
+		// Get rid of the file
+		remove (previewPicture.c_str ());
+	}
+
+	// Clear the selection in the menu.
 	if(m_currentSelected != 0)
 	{
 		CEGUI::WindowManager::getSingleton().destroyWindow(m_currentSelected);
