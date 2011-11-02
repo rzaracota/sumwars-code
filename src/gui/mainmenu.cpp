@@ -145,7 +145,7 @@ void MainMenu::updateTranslation()
 
 	// Update message windows
 	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("DeleteCharLabel")); // note: this has no in-between slash!
-	if (lbl) lbl->setText (gettext ("Really delete savegame?"));
+	if (lbl) lbl->setText((CEGUI::utf8*) gettext("Really delete savegame?"));
 
 	// Propagation onto sub-windows
 	if (m_saveGameList != 0)
