@@ -96,4 +96,5 @@
         </Environment>
 		<Environment name="cave">
         </Environment>
+		<Environment name="vault"/>
 </ObjectTemplate>

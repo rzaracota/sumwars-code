@@ -8,106 +8,6 @@ TRADER
 FIXED_OBJECT
 -->
 
-<ObjectTemplate name="$construction_crane" type="FIXED_OBJECT">
-        <Environment name="council" default = "true">
-                <Object name="crane" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$corpse_slugs_dissect" type="FIXED_OBJECT">
-        <Environment name="council" default = "true">
-                <Object name="fireSlugExp1" />
-				<Object name="mutantSlugExp1" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$corpse_slugs_overhaul" type="FIXED_OBJECT">
-        <Environment name="council" default = "true">
-				<Object name="fireSlugExp2" />
-				<Object name="mutantSlugExp2" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$corpse_slugs_dead" type="FIXED_OBJECT">
-        <Environment name="council" default = "true">
-                <Object name="fireSlugExp3" />
-				<Object name="mutantSlugExp3" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$corpse_louses_dead" type="FIXED_OBJECT">
-        <Environment name="council" default = "true">
-                <Object name="fireLouseExp1" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$corpse_councilGuard" type="FIXED_OBJECT">
-        <Environment name="council" default = "true">
-				<Object name="councilGuardCorpse1" />
-				<Object name="councilGuardCorpse2" />
-                <Object name="councilGuardCorpse3" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$corpse_councilSlave" type="FIXED_OBJECT">
-        <Environment name="council" default = "true">
-				<Object name="councilSlaveCorpse1" />
-        </Environment>
-</ObjectTemplate>
-
-<ObjectTemplate name="$script_berry_bush" type="SCRIPTOBJECT">
-        <Environment name="hills" default="true">
-                <Object name="berryBush" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$script_cogLean" type="SCRIPTOBJECT">
-        <Environment name="council" >
-                <Object name="cogScript_lean" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$script_crane" type="SCRIPTOBJECT">
-        <Environment name="council" >
-                <Object name="councilCrane" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$script_councilExperiment" type="SCRIPTOBJECT">
-        <Environment name="council" >
-                <Object name="councilExperiment" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$script_energySource" type="SCRIPTOBJECT">
-        <Environment name="council" >
-                <Object name="energySource" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$script_mechanism" type="SCRIPTOBJECT">
-        <Environment name="council" >
-                <Object name="mechanismCouncilCrane" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$script_sarkophagus" type="SCRIPTOBJECT">
-        <Environment name="cave" default="true">
-                <Object name="sarkophagusMaylon" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$script_teleporter" type="SCRIPTOBJECT">
-        <Environment name="council" >
-                <Object name="hole" />
-        </Environment>
-</ObjectTemplate>
-
-<ObjectTemplate name="$flower" type="FIXED_OBJECT">
-        <Environment name="hills" default="true">
-                <Object name="flower1" />
-                <Object name="flower2" />
-                <Object name="flower3" />
-                <Object name="flower4" />
-                <Object name="flower5" />
-                <Object name="flower6" />
-        </Environment>
-</ObjectTemplate>
-
-<ObjectTemplate name="$plant_bushes" type="FIXED_OBJECT">
-        <Environment name="hills" default="true">
-                <Object name="bush" />
-        </Environment>
-		<Environment name="cave"/>
-</ObjectTemplate>
-
 <ObjectTemplate name="$border" type="FIXED_OBJECT">
 		<Environment name="council">
                 <Object name="konz_wall1" />
@@ -236,6 +136,197 @@ FIXED_OBJECT
         </Environment>
 </ObjectTemplate>
 
+<ObjectTemplate name="$construction_crane" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="crane" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$corpse_slugs_dissect" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="fireSlugExp1" />
+				<Object name="mutantSlugExp1" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$corpse_slugs_overhaul" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+				<Object name="fireSlugExp2" />
+				<Object name="mutantSlugExp2" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$corpse_slugs_dead" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="fireSlugExp3" />
+				<Object name="mutantSlugExp3" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$corpse_louses_dead" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+                <Object name="fireLouseExp1" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$corpse_councilGuard" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+				<Object name="councilGuardCorpse1" />
+				<Object name="councilGuardCorpse2" />
+                <Object name="councilGuardCorpse3" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$corpse_councilSlave" type="FIXED_OBJECT">
+        <Environment name="council" default = "true">
+				<Object name="councilSlaveCorpse1" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$ground" type="FIXED_OBJECT">
+        <Environment name="cave" default="true">
+                <Object name="ground" />
+				<Object name="ground_m" />
+				<Object name="ground_s" />
+				<Object name="ground_t" />
+				<Object name="ground_c" />
+				<Object name="ground_squ_l" />
+				<Object name="ground_squ_m" />
+				<Object name="ground_squ_s" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$ground_long" type="FIXED_OBJECT">
+        <Environment name="cave"default="true">
+                <Object name="ground" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$ground_medium" type="FIXED_OBJECT">
+        <Environment name="cave" default="true">
+                <Object name="ground_m" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$ground_small" type="FIXED_OBJECT">
+        <Environment name="cave" default="true">
+                <Object name="ground_s" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$ground_tiny" type="FIXED_OBJECT">
+        <Environment name="cave" default="true">
+                <Object name="ground_t" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$ground_corner" type="FIXED_OBJECT">
+        <Environment name="cave" default="true">
+                <Object name="ground_c" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$ground_square" type="FIXED_OBJECT">
+        <Environment name="cave"default = "true">
+                <Object name="ground_squ_l" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$ground_square_m" type="FIXED_OBJECT">
+        <Environment name="cave" default = "true">
+                <Object name="ground_squ_m" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$ground_square_s" type="FIXED_OBJECT">
+        <Environment name="cave" default = "true">
+                <Object name="ground_squ_s" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$script_berry_bush" type="SCRIPTOBJECT">
+        <Environment name="hills" default="true">
+                <Object name="berryBush" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$script_cogLean" type="SCRIPTOBJECT">
+        <Environment name="council" >
+                <Object name="cogScript_lean" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$script_crane" type="SCRIPTOBJECT">
+        <Environment name="council" >
+                <Object name="councilCrane" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$script_councilExperiment" type="SCRIPTOBJECT">
+        <Environment name="council" >
+                <Object name="councilExperiment" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$script_energySource" type="SCRIPTOBJECT">
+        <Environment name="council" >
+                <Object name="energySource" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$script_mechanism" type="SCRIPTOBJECT">
+        <Environment name="council" >
+                <Object name="mechanismCouncilCrane" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$script_sarkophagus" type="SCRIPTOBJECT">
+        <Environment name="cave" default="true">
+                <Object name="sarkophagusMaylon" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$script_teleporter" type="SCRIPTOBJECT">
+        <Environment name="council" >
+                <Object name="hole" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$single_block" type="FIXED_OBJECT">
+        <Environment name="meadow">
+                <Object name="tree1" />
+                <Object name="tree2" />
+        </Environment>
+        <Environment name="hills">
+                <Object name="tree3" />
+                <Object name="tree4" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$single_debris" type="FIXED_OBJECT">
+        <Environment name="meadow">
+                <Object name="stone1" />
+        </Environment>
+        <Environment name="hills">
+			<Object name="stone1" />
+            <Object name="stone2" />
+        </Environment>
+		<Environment name="cave">
+			<Object name="stone1" />
+            <Object name="stone2" />
+        </Environment>
+		<Environment name="vault">
+			<Object name="stone1" />
+            <Object name="stone2" />
+        </Environment>
+</ObjectTemplate>
+<ObjectTemplate name="$single_deb_l" type="FIXED_OBJECT">
+        <Environment name="meadow">
+                <Object name="stone_l1" />
+        </Environment>
+        <Environment name="hills">
+                <Object name="stone_l1" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$flower" type="FIXED_OBJECT">
+        <Environment name="hills" default="true">
+                <Object name="flower1" />
+                <Object name="flower2" />
+                <Object name="flower3" />
+                <Object name="flower4" />
+                <Object name="flower5" />
+                <Object name="flower6" />
+        </Environment>
+</ObjectTemplate>
+
+<ObjectTemplate name="$plant_bushes" type="FIXED_OBJECT">
+        <Environment name="hills" default="true">
+                <Object name="bush" />
+        </Environment>
+		<Environment name="cave"/>
+		<Environment name="vault"/>
+</ObjectTemplate>
+
 <ObjectTemplate name="$border_balustrade" type="FIXED_OBJECT">
         <Environment name="council" default = "true">
                 <Object name="konz_balustrade1" />
@@ -274,6 +365,10 @@ FIXED_OBJECT
 </ObjectTemplate>
 <ObjectTemplate name="$column_big" type="FIXED_OBJECT">
         <Environment name="cave">
+                <Object name="cave_column1" />
+				<Object name="cave_column2" />
+        </Environment>
+		<Environment name="vault">
                 <Object name="cave_column1" />
 				<Object name="cave_column2" />
         </Environment>
@@ -365,38 +460,6 @@ FIXED_OBJECT
                 <Object name="houseAisen2" />
                 <Object name="houseAisen3" />
                 <Object name="houseAisen4" />
-        </Environment>
-</ObjectTemplate>
-
-<ObjectTemplate name="$single_block" type="FIXED_OBJECT">
-        <Environment name="meadow">
-                <Object name="tree1" />
-                <Object name="tree2" />
-        </Environment>
-        <Environment name="hills">
-                <Object name="tree3" />
-                <Object name="tree4" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$single_debris" type="FIXED_OBJECT">
-        <Environment name="meadow">
-                <Object name="stone1" />
-        </Environment>
-        <Environment name="hills">
-			<Object name="stone1" />
-            <Object name="stone2" />
-        </Environment>
-		<Environment name="cave">
-			<Object name="stone1" />
-            <Object name="stone2" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$single_deb_l" type="FIXED_OBJECT">
-        <Environment name="meadow">
-                <Object name="stone_l1" />
-        </Environment>
-        <Environment name="hills">
-                <Object name="stone_l1" />
         </Environment>
 </ObjectTemplate>
 
@@ -663,67 +726,6 @@ FIXED_OBJECT
         </Environment>
 </ObjectTemplate>
 
-<ObjectTemplate name="$ground" type="FIXED_OBJECT">
-        <Environment name="cave">
-                <Object name="ground" />
-				<Object name="ground_m" />
-				<Object name="ground_s" />
-				<Object name="ground_t" />
-				<Object name="ground_c" />
-				<Object name="ground_squ_l" />
-				<Object name="ground_squ_m" />
-				<Object name="ground_squ_s" />
-        </Environment>
-</ObjectTemplate>
-<ObjectTemplate name="$ground_long" type="FIXED_OBJECT">
-        <Environment name="cave">
-                <Object name="ground" />
-        </Environment>
-		<Environment name="meadow" default = "true" />
-</ObjectTemplate>
-<ObjectTemplate name="$ground_medium" type="FIXED_OBJECT">
-        <Environment name="cave">
-                <Object name="ground_m" />
-        </Environment>
-		<Environment name="meadow" default = "true" />
-</ObjectTemplate>
-<ObjectTemplate name="$ground_small" type="FIXED_OBJECT">
-        <Environment name="cave">
-                <Object name="ground_s" />
-        </Environment>
-		<Environment name="meadow" default = "true" />
-</ObjectTemplate>
-<ObjectTemplate name="$ground_tiny" type="FIXED_OBJECT">
-        <Environment name="cave">
-                <Object name="ground_t" />
-        </Environment>
-		<Environment name="meadow" default = "true" />
-</ObjectTemplate>
-<ObjectTemplate name="$ground_corner" type="FIXED_OBJECT">
-        <Environment name="cave">
-                <Object name="ground_c" />
-        </Environment>
-		<Environment name="meadow" default = "true" />
-</ObjectTemplate>
-<ObjectTemplate name="$ground_square" type="FIXED_OBJECT">
-        <Environment name="cave">
-                <Object name="ground_squ_l" />
-        </Environment>
-		<Environment name="meadow" default = "true" />
-</ObjectTemplate>
-<ObjectTemplate name="$ground_square_m" type="FIXED_OBJECT">
-        <Environment name="cave">
-                <Object name="ground_squ_m" />
-        </Environment>
-		<Environment name="meadow" default = "true" />
-</ObjectTemplate>
-<ObjectTemplate name="$ground_square_s" type="FIXED_OBJECT">
-        <Environment name="cave">
-                <Object name="ground_squ_s" />
-        </Environment>
-		<Environment name="meadow" default = "true" />
-</ObjectTemplate>
-
 <ObjectTemplate name="$scaffolding" type="FIXED_OBJECT">
         <Environment name="meadow" default = "true">
                 <Object name="scaffolding" />
@@ -802,6 +804,11 @@ FIXED_OBJECT
 </ObjectTemplate>
 <ObjectTemplate name="$misc_urn" type="FIXED_OBJECT">
         <Environment name="cave" default = "true">
+			<Object name="urn1" />
+			<Object name="urn2" />
+			<Object name="urn3" />
+        </Environment>
+		<Environment name="vault" default = "true">
 			<Object name="urn1" />
 			<Object name="urn2" />
 			<Object name="urn3" />

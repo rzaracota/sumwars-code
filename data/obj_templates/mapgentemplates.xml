@@ -11,6 +11,9 @@
 	<Environment name="cave">
 		<ObjectGroup name="border(side)cave" />
 	</Environment>
+	<Environment name="vault">
+		<ObjectGroup name="border(side)cave" />
+	</Environment>
 </ObjectGroupTemplate>
 
 <ObjectGroupTemplate name="$border(corner)">
@@ -24,6 +27,9 @@
 		<ObjectGroup name="border(corner)" />
 	</Environment>
 	<Environment name="cave">
+		<ObjectGroup name="border(corner)cave" />
+	</Environment>
+	<Environment name="vault">
 		<ObjectGroup name="border(corner)cave" />
 	</Environment>
 </ObjectGroupTemplate>
@@ -41,6 +47,10 @@
 	<Environment name="cave">
 		<ObjectGroup name="border(corner)(one_smallcorner)cave" />
 	</Environment>
+	<Environment name="vault">
+		<ObjectGroup name="border(corner)(one_smallcorner)cave" />
+	</Environment>
+	
 </ObjectGroupTemplate>
 
 <ObjectGroupTemplate name="$border(diag_smallcorner)">
@@ -56,6 +66,10 @@
 	<Environment name="cave">
 		<ObjectGroup name="border(diag_smallcorner)cave" />
 	</Environment>
+	<Environment name="vault">
+		<ObjectGroup name="border(diag_smallcorner)cave" />
+	</Environment>
+
 </ObjectGroupTemplate>
 
 <ObjectGroupTemplate name="$border(filled)">
@@ -69,6 +83,9 @@
 		<ObjectGroup name="border(filled)" />
 	</Environment>
 	<Environment name="cave">
+		<ObjectGroup name="border(filled)cave" />
+	</Environment>
+	<Environment name="vault">
 		<ObjectGroup name="border(filled)cave" />
 	</Environment>
 </ObjectGroupTemplate>
@@ -86,6 +103,9 @@
 	<Environment name="cave">
 		<ObjectGroup name="border(four_smallcorner)cave" />
 	</Environment>
+	<Environment name="vault">
+		<ObjectGroup name="border(four_smallcorner)cave" />
+	</Environment>
 </ObjectGroupTemplate>
 
 <ObjectGroupTemplate name="$border(one_smallcorner)">
@@ -99,6 +119,9 @@
 		<ObjectGroup name="border(one_smallcorner)" />
 	</Environment>
 	<Environment name="cave">
+		<ObjectGroup name="border(one_smallcorner)cave" />
+	</Environment>
+	<Environment name="vault">
 		<ObjectGroup name="border(one_smallcorner)cave" />
 	</Environment>
 </ObjectGroupTemplate>
@@ -116,6 +139,9 @@
 	<Environment name="cave">
 		<ObjectGroup name="border(side)(left_smallcorner)cave" />
 	</Environment>
+	<Environment name="vault">
+		<ObjectGroup name="border(side)(left_smallcorner)cave" />
+	</Environment>
 </ObjectGroupTemplate>
 
 <ObjectGroupTemplate name="$border(side)(right_smallcorner)">
@@ -129,6 +155,9 @@
 		<ObjectGroup name="border(side)(right_smallcorner)" />
 	</Environment>
 	<Environment name="cave">
+		<ObjectGroup name="border(side)(right_smallcorner)cave" />
+	</Environment>
+	<Environment name="vault">
 		<ObjectGroup name="border(side)(right_smallcorner)cave" />
 	</Environment>
 </ObjectGroupTemplate>
@@ -146,6 +175,9 @@
 	<Environment name="cave">
 		<ObjectGroup name="border(side)(two_smallcorner)cave" />
 	</Environment>
+	<Environment name="vault">
+		<ObjectGroup name="border(side)(two_smallcorner)cave" />
+	</Environment>
 </ObjectGroupTemplate>
 
 <ObjectGroupTemplate name="$border(three_smallcorner)">
@@ -159,6 +191,9 @@
 		<ObjectGroup name="border(three_smallcorner)" />
 	</Environment>
 	<Environment name="cave">
+		<ObjectGroup name="border(three_smallcorner)cave" />
+	</Environment>
+	<Environment name="vault">
 		<ObjectGroup name="border(three_smallcorner)cave" />
 	</Environment>
 </ObjectGroupTemplate>
@@ -176,6 +211,9 @@
 	<Environment name="cave">
 		<ObjectGroup name="border(two_smallcorner)cave" />
 	</Environment>
+	<Environment name="vault">
+		<ObjectGroup name="border(two_smallcorner)cave" />
+	</Environment>
 </ObjectGroupTemplate>
 
 <ObjectGroupTemplate name="$border(twocorner)">
@@ -191,6 +229,9 @@
 	<Environment name="cave">
 		<ObjectGroup name="border(twocorner)cave" />
 	</Environment>
+	<Environment name="vault">
+		<ObjectGroup name="border(twocorner)cave" />
+	</Environment>
 </ObjectGroupTemplate>
 
 <ObjectGroupTemplate name="$border(twoside)">
@@ -204,6 +245,9 @@
 		<ObjectGroup name="border(twoside)" />
 	</Environment>
 	<Environment name="cave">
+		<ObjectGroup name="border(twoside)cave" />
+	</Environment>
+	<Environment name="vault">
 		<ObjectGroup name="border(twoside)cave" />
 	</Environment>
 </ObjectGroupTemplate>
