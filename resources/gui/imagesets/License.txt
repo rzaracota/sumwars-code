@@ -9,7 +9,6 @@ Artwork provided by: CrazyEddie's GUI (CEGUI) library
 License: MIT
 Visit http://www.cegui.org.uk for more information
 Files:
-	FairChar.tga
 	TaharezLook.tga  (Original)
 
 Artwork provided by: Michael Kempf (kemic)

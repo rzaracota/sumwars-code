@@ -4,16 +4,12 @@
     <Window Type="TaharezLook/FrameWindow" Name="luaScriptTab" >
         <Property Name="Alpha" Value="0.1" />
         <Property Name="FrameEnabled" Value="False" />
-        <Property Name="TitlebarFont" Value="FairChar-30" />
         <Property Name="InheritsAlpha" Value="False" />
         <Property Name="SizingEnabled" Value="False" />
         <Property Name="TitlebarEnabled" Value="False" />
         <Property Name="UnifiedAreaRect" Value="{{0.0725001,0},{0.0133335,0},{0.928755,0},{0.936666,0}}" />
         <Property Name="CloseButtonEnabled" Value="False" />
         <Window Type="TaharezLook/Button" Name="luaScriptTab/ExecuteScriptButton" >
-            <!--
-            <Property Name="Font" Value="FairChar-30" />
-            -->
             <Property Name="Text" Value="Execute" />
             <Property Name="InheritsAlpha" Value="False" />
             <Property Name="UnifiedAreaRect" Value="{{0.00365257,0},{0.900724,0},{0.270077,0},{0.988268,0}}" />

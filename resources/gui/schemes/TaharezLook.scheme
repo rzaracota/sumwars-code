@@ -10,7 +10,6 @@
 	<Imageset Name="SkillTree" Filename="SkillTree.imageset" />
 	<Imageset Name="OptionsWindow" Filename="OptionsWindow.imageset" />
 	<Imageset Name="TradeWindow" Filename="TradeWindow.imageset" />
-	<Font Name="FairChar-30" Filename="FairChar-30.font" />
 	<Font Name="DejaVuSans-10" Filename="DejaVuSans-10.font" />
 	<Font Name="DejaVuSerif-8" Filename="DejaVuSerif-8.font" />
 	<Font Name="DejaVuSerif-10" Filename="DejaVuSerif-10.font" />

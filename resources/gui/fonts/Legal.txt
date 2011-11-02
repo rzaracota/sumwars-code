@@ -21,9 +21,3 @@ original look and feel.
 DejaVu fonts are based on Bitstream Vera fonts version 1.10.
 
 ================================================================================
-
-FairChar.font is a image-based font from the good old days of the demo scene,
-when 320x240 and 320x480 were the best resolutions invented ever ;-) I don't
-know who is the original author of these nice glyphs, everything but the .GIF
-file was lost in the long road from early 90s, when I got it from some BBS
-to nowadays... -- Andrew Zabolotny.
