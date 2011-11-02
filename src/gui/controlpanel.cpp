@@ -62,7 +62,6 @@ ControlPanel::ControlPanel (Document* doc)
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ChatOpenButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonOpenChatClicked, this));
 	btn->setWantsMultiClickEvents(false);
-	btn->setTooltipText((CEGUI::utf8*) gettext("Chat"));
 
 	// Button SkillTree
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SkillTreeButton"));
@@ -86,13 +85,11 @@ ControlPanel::ControlPanel (Document* doc)
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SaveExitButton"));
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonSaveExitClicked, this));
-	btn->setTooltipText((CEGUI::utf8*) gettext("Save & Exit"));
 
 	// Button Optionen
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsButton"));
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonOptionsClicked, this));
-	btn->setTooltipText((CEGUI::utf8*) gettext("Options"));
 	
 	// Anzeige linke Maustaste Faehigkeit
 	label = win_mgr.getWindow("LeftClickAbilityImage");
@@ -377,13 +374,15 @@ void ControlPanel::updateTranslation()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
-	//CEGUI::Window* label;
 
-	/*btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsButton"));
-	btn->setText((CEGUI::utf8*) gettext("Options"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsButton"));
+	btn->setTooltipText((CEGUI::utf8*) gettext("Options"));
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SaveExitButton"));
-	btn->setText((CEGUI::utf8*) gettext("Save & Exit"));*/
+	btn->setTooltipText((CEGUI::utf8*) gettext("Save & Exit"));
+	
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ChatOpenButton"));
+	btn->setTooltipText((CEGUI::utf8*) gettext("Chat"));
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("InventoryButton"));
 	btn->setTooltipText((CEGUI::utf8*) gettext("Inventory"));
