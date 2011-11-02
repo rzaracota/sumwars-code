@@ -1,3 +1,0 @@
-The images in this directory were obtained from various sources...
-
-GPN-2000-001437.tga		- From GRIN (http://grin.hq.nasa.gov/)
