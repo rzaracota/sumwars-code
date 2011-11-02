@@ -2,9 +2,9 @@
 
 Following libraries are required to build Summoning Wars:
 
-OGRE >= 1.7.0
+OGRE >= 1.7.3
 OIS
-CEGUI >= 0.7
+CEGUI >= 0.7.5
 freealut, openal
 lua5.1
 ogg, vorbis, vorbisfile
@@ -15,8 +15,9 @@ If you are lucky, all libs may be installed via package manager (apt-get, yum, e
 Have a look at the "OS dependant install" section below.
 
 After installing all required libraries type:
-cmake .
+cmake -DCMAKE_INSTALL_PREFIX=/usr
 make
+sudo make install
 
 Currently, there is no make install, so you have to start the game in the directory where you compiled it.
 Please visit our Website www.sumwars.org to give some feedback or report bugs.
