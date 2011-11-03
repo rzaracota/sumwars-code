@@ -402,7 +402,7 @@
             <Property Name="PushedImage" Value="set:MainMenu image:SPBtnPushed" />
             <Property Name="DisabledImage" Value="set:MainMenu image:SPBtnNormal" />
             <Property Name="InheritsAlpha" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.4,0},{0.860097,0},{0.6,0},{0.917389,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.4,0},{0.882,0},{0.6,0},{0.937389,0}}" />
         </Window>
     </Window>
 </GUILayout>
