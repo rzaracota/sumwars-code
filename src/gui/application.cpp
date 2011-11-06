@@ -91,9 +91,9 @@ bool Application::init(char *argv)
 	}
 
 	// Add the user directory
-	if (PHYSFS_mount (PHYSFS_getUserDir (), 0, 1) == 0)
+	if (PHYSFS_addToSearchPath 	 (PHYSFS_getUserDir (), 1) == 0)
 	{
-		printf("PHYSFS_mount failed: %s\n", PHYSFS_getLastError ());
+		printf("PHYSFS_addToSearchPath 	 failed: %s\n", PHYSFS_getLastError ());
 		return false;
 	}
 
