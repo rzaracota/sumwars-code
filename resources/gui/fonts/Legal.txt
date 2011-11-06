@@ -1,9 +1,3 @@
-The file fkp.de.pcf is a X11 bitmap font, taken from the artwiz font collection:
-http://artwizaleczapka.sourceforge.net
-
-artwiz-aleczapka is released under the terms of GNU General Public License
-(GPL) version 2. Read file 'COPYING' from the artwiz package for detailed info.
-
 ================================================================================
 
 DejaVuSans.ttf is a international TrueType font from the excellent DejaVu font

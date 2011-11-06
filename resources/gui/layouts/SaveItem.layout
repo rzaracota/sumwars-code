@@ -22,9 +22,6 @@
             <Property Name="BackgroundEnabled" Value="False" />
         </Window>
         <Window Type="TaharezLook/StaticText" Name="SaveItemRoot/DecriptionLabel" >
-            <!--
-            <Property Name="Font" Value="Iconified-12" />
-            -->
             <Property Name="Text" Value="Level 5 Fencer" />
             <Property Name="HorzExtent" Value="140" />
             <Property Name="VertExtent" Value="24.0283" />

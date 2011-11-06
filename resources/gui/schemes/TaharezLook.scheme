@@ -15,8 +15,6 @@
 	<Font Name="DejaVuSerif-10" Filename="DejaVuSerif-10.font" />
 	<Font Name="DejaVuSerif-12" Filename="DejaVuSerif-12.font" />
 	<Font Name="DejaVuSerif-16" Filename="DejaVuSerif-16.font" />
-	<Font Name="fkp-16" Filename="fkp-16.font" />
-	<Font Name="Iconified-12" Filename="Iconified-12.font" />
 	<LookNFeel Filename="TaharezLook.looknfeel" />
 	<WindowRendererSet Filename="CEGUIFalagardWRBase" />
 	<FalagardMapping WindowType="TaharezLook/Button"      TargetType="CEGUI/PushButton"  Renderer="Falagard/Button"       LookNFeel="TaharezLook/Button" />
