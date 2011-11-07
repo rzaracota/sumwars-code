@@ -21,6 +21,14 @@
 #include <set>
 
 /**
+ * TODO: should rewrite class to allow easier extensions (maybe using mapping?) Because in the current form, as soon
+ * as an option is added, the entire project is recompiled.
+ * Also, an important piece of information needs to be added for each option:
+ * Does changing it take effect immediately? Or is a game restart required? Because if it is, the user will need to be
+ * informed.
+ */
+
+/**
  * Code fuer eine Taste
  */
 typedef int KeyCode;
@@ -64,6 +72,8 @@ enum DisplayModes
 };
 
 
+
+
 /**
  * Maps Keycodes to the Actions that are triggered by the keycode
  */
@@ -76,6 +86,17 @@ typedef std::map<KeyCode,ShortkeyDestination> ShortkeyMap;
 class Options
 {
 	public:
+
+		/**
+		 * \brief Enumeration of shadow options
+		 */
+		enum ShadowMode
+		{
+			SM_NONE = 0,
+			SM_SIMPLE = 1,
+			SM_COUNT // The count of shadow modes (2); must always use a value smaller than this one!
+		};
+
 		/**
 		 * \brief Enumeration of Difficulty settings
 		 */
@@ -170,25 +191,6 @@ class Options
 		 * \param locale locale string, en_US for instance
 		 */
 		void setLocale(const std::string& locale);
-
-
-		/**
-		 * \brief Retrieve the preferred locale to use for internationalization
-		 */
-		const std::string& getPreferredLocale () const
-		{
-			return m_preferred_locale;
-		}
-
-
-		/**
-		 * \brief Set the preferred locale to use for internationalization
-		 * \param newLocale The new locale to use.
-		 */
-		void setPreferredLocale (const std::string& newLocale) 
-		{
-			m_preferred_locale = newLocale;
-		}
 
 
 		/**
@@ -444,6 +446,45 @@ class Options
 			m_used_video_driver = newDriverName;
 		}
 
+
+		/**
+		 * \brief Find out if the user chose to show or hide the console window.
+		 * (Windows specific).
+		 * \return true if the console window is to be shown, false otherwise.
+		 */
+		bool getShowConsoleWindow () const
+		{
+			return m_show_console_window;
+		}
+
+
+		/**
+		 * \brief Set the user's preferrnce to show or hide the console window.
+		 * \param newValue The new value to set.
+		 */
+		void setShowConsoleWindow (bool newValue)
+		{
+			m_show_console_window = newValue;
+		}
+
+
+		/**
+		 * \brief Get the shadow mode to use.
+		 */
+		ShadowMode getShadowMode () const
+		{
+			return m_shadow_mode;
+		}
+
+
+		/**
+		 * Set the shadow mode to use.
+		 */
+		void setShadowMode (ShadowMode newMode)
+		{
+			m_shadow_mode = newMode;
+		}
+
 		
 		/**
 		 * \brief Pushes the named value on the lua stack
@@ -527,6 +568,16 @@ class Options
 		bool m_windowed_fullscreen_mode_supported;
 
 		/**
+		 * \brief User preferrence to show or hide the console window.
+		 */
+		bool m_show_console_window;
+
+		/**
+		 * \brief The preferred shadow mode.
+		 */
+		ShadowMode m_shadow_mode;
+
+		/**
 		 * \brief The currently selected display mode.
 		 */
 		DisplayModes m_used_display_mode;
@@ -551,8 +602,4 @@ class Options
 		 */
 		std::map <std::string, std::vector <std::string> > m_available_resolutions;
 
-		/**
-		 * \brief The preferred language locale
-		 */
-		std::string m_preferred_locale;
 };

@@ -89,6 +89,8 @@ void Options::init()
 	m_difficulty = NORMAL;
 	m_text_speed = 1.0;
 	m_enemy_highlight_color = "red";
+	m_show_console_window = true;
+	m_shadow_mode = SM_NONE;
 }
 
 Options* Options::getInstance()
@@ -188,6 +190,10 @@ bool Options::readFromFile(const std::string& filename)
 						float text_speed;
 						attr.getFloat("text_speed",text_speed);
 						setTextSpeed( text_speed);
+
+						int showConsoleWindow;
+						attr.getInt ("showConsoleWindow", showConsoleWindow, 1);
+						setShowConsoleWindow (showConsoleWindow);
 					}
 					else if (!strcmp(child->Value(), "Network"))
 					{
@@ -211,6 +217,17 @@ bool Options::readFromFile(const std::string& filename)
 						int grabMouse;
 						attr.getInt("grabMouseWhenWindowed", grabMouse);
 						setGrabMouseInWindowedMode(grabMouse);
+
+						int shadowMode;
+						attr.getInt ("shadowMode", shadowMode);
+						if (shadowMode > SM_NONE && shadowMode < SM_COUNT)
+						{
+							setShadowMode (static_cast<ShadowMode>(shadowMode));
+						}
+						// otherwise it's an invalid value.
+
+						// Other graphic options read from different files (E.g. ogre.cfg)
+
 					}
 					else if (!strcmp(child->Value(), "Debug"))
 					{
@@ -268,6 +285,7 @@ bool Options::writeToFile(const std::string& filename)
 	root->LinkEndChild(element);
 	element->SetAttribute("difficulty",getDifficulty());
 	element->SetDoubleAttribute("text_speed",getTextSpeed());
+	element->SetAttribute ("showConsoleWindow", getShowConsoleWindow ());
 
 	element = new TiXmlElement( "Music" );
 	root->LinkEndChild(element);
@@ -282,6 +300,7 @@ bool Options::writeToFile(const std::string& filename)
 	element->SetAttribute("ehl_color", getEnemyHighlightColor().c_str());
 	element->SetAttribute("grabMouseWhenWindowed", getGrabMouseInWindowedMode());
 	element->SetAttribute("display_mode", getUsedDisplayMode());
+	element->SetAttribute ("shadowMode", getShadowMode ());
 	
 	element = new TiXmlElement( "Language" );
 	root->LinkEndChild(element);

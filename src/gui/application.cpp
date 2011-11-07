@@ -959,6 +959,17 @@ bool Application::initCEGUI()
 	// Mauscursor setzen (evtl eher in View auslagern ? )
 	m_cegui_system->setDefaultMouseCursor((CEGUI::utf8*)"TaharezLook", (CEGUI::utf8*)"MouseArrow");
     m_cegui_system->setDefaultTooltip((CEGUI::utf8*)"TaharezLook/Tooltip");
+
+	// Update the fade delay?
+	if (m_cegui_system->getDefaultTooltip ())
+	{
+		float myFadeTime = m_cegui_system->getDefaultTooltip ()->getFadeTime ();
+		// TODO: add option to specify tool-tip delay.
+		//DEBUG ("Tooltip fade time was %f", myFadeTime);
+		//myFadeTime /= 4;
+		m_cegui_system->getDefaultTooltip ()->setFadeTime (myFadeTime);
+		//DEBUG ("New tooltip fade time set to %f", myFadeTime);
+	}
     
 	// Font setzen
 	CEGUI::FontManager::getSingleton().create("DejaVuSerif-8.font", (CEGUI::utf8*)"GUI");
@@ -1040,7 +1051,15 @@ bool Application::createDocument()
 	m_document->installShortkey(OIS::KC_L,(ShortkeyDestination) (CHEAT+0));
 */
 	m_document->loadSettings();
-	
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	if (! Options::getInstance ()->getShowConsoleWindow ())
+	{
+		// should hide the console window
+		HWND hWnd = GetConsoleWindow();
+		ShowWindow( hWnd, SW_HIDE );
+	}
+#endif //OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 
 	return true;
 }
