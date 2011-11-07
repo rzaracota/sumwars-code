@@ -470,13 +470,6 @@
             probability="1" 
             prob_angle="false" 
     />
-    <Object subtype="invisible_wall_s" 
-            center_x="-0.6972947535" 
-            center_y="0.4833187501" 
-            angle="44.6574362" 
-            probability="1" 
-            prob_angle="false" 
-    />
   </ObjectContent>
 
   <Locations>
