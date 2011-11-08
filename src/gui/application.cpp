@@ -140,7 +140,7 @@ bool Application::init(char *argv)
 			return false;
 		}
 
-		if(!PHYSFS_exists("plugins.cfg"))
+		if(!PHYSFS_exists(".sumwars/plugins.cfg"))
 		{
 			TCHAR szPath[MAX_PATH];
 
