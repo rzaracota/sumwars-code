@@ -127,46 +127,13 @@ bool Application::init(char *argv)
         }
     }
 #elif _WIN32
+
 	if (!PHYSFS_exists(".sumwars"))
 	{
 		if (PHYSFS_mkdir(".sumwars") == 0)
 		{
 			printf("mkdir failed: %s\n", PHYSFS_getLastError());
 			return false;
-		}
-		if (PHYSFS_mkdir(".sumwars/save") == 0)
-		{
-			printf("mkdir failed: %s\n", PHYSFS_getLastError());
-			return false;
-		}
-
-		if(!PHYSFS_exists(".sumwars/plugins.cfg"))
-		{
-			TCHAR szPath[MAX_PATH];
-
-			if( !GetModuleFileName( NULL, szPath, MAX_PATH ) )
-			{
-				printf("Cannot retrieve module path (%d)\n", GetLastError());
-				return false;
-			}
-
-			std::string path(szPath);
-			path.erase(path.size() - 11, path.size());
-
-			PHYSFS_file* pluginsFile = PHYSFS_openWrite(".sumwars/plugins.cfg");
-			std::string str = "# Defines plugins to load\n"
-							  "# Define plugin folder\n"
-							  "PluginFolder=";
-			str.append(path).append("\n\n");
-			str.append(		  "# Define plugins\n"
-							  "Plugin=RenderSystem_Direct3D9\n"
-							  "Plugin=RenderSystem_GL\n"
-							  "Plugin=Plugin_ParticleFX\n"
-							  "Plugin=Plugin_OctreeSceneManager\n"
-							  "Plugin=Plugin_CgProgramManager\n");
-
-			PHYSFS_write(pluginsFile, str.c_str(), sizeof(char), str.size());
-			PHYSFS_close(pluginsFile);
 		}
 	}
 
@@ -178,6 +145,47 @@ bool Application::init(char *argv)
 			return false;
 		}
 	}
+
+	if(!PHYSFS_exists(".sumwars/plugins.cfg"))
+	{
+		TCHAR szPath[MAX_PATH];
+
+		if( !GetModuleFileName( NULL, szPath, MAX_PATH ) )
+		{
+			printf("Cannot retrieve module path (%d)\n", GetLastError());
+			return false;
+		}
+
+		std::string path(szPath);
+		path.erase(path.size() - 11, path.size());
+
+		std::string pluginFile (".sumwars/plugins.cfg");
+
+		PHYSFS_file* pluginsFile = PHYSFS_openWrite(pluginFile.c_str ());
+		if (0 != pluginsFile)
+		{
+			std::string str = "# Defines plugins to load\n"
+								"# Define plugin folder\n"
+								"PluginFolder=";
+			str.append(path).append("\n\n");
+			str.append(		  "# Define plugins\n"
+								"Plugin=RenderSystem_Direct3D9\n"
+								"Plugin=RenderSystem_GL\n"
+								"Plugin=Plugin_ParticleFX\n"
+								"Plugin=Plugin_OctreeSceneManager\n"
+								"Plugin=Plugin_CgProgramManager\n");
+
+			PHYSFS_write(pluginsFile, str.c_str(), sizeof(char), str.size());
+			PHYSFS_close(pluginsFile);
+		}
+		else
+		{
+			printf("Could not write file %s; error : %s\n", pluginFile.c_str (), PHYSFS_getLastError());
+		}
+	}
+
+
+
 #elif defined (__unix__)
 	// creating 'save' directory
 	std::string saveDir = "/.sumwars/save";
