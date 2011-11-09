@@ -90,15 +90,49 @@ bool Application::init(char *argv)
 		return false;
 	}
 
+	// Create the sumwars helper singleton
+	new SumwarsHelper ();
+
+	// Before adding the user directory to the path, keep in mind that for portable installs, the exe folder should
+	// be added to the path, NOT the user folder.
+
+	if (SumwarsHelper::getSingletonPtr ()->hasFeature ("allows-preload"))
+	{
+		Ogre::ConfigFile cf;
+		std::string preloadFileName (SumwarsHelper::getSingletonPtr ()->getPreloadFileName ());
+		try
+		{
+			cf.load (preloadFileName.c_str ());
+
+			if (SumwarsHelper::getSingletonPtr ()->hasFeature ("portable-mode"))
+			{
+				Ogre::String portableOption = cf.getSetting ("portable", "", "");
+				bool isPortable = false;
+				if (portableOption == "true" || portableOption == "True" || portableOption == "TRUE" || portableOption == "1")
+				{
+					isPortable = true;
+				}
+
+				SumwarsHelper::getSingletonPtr ()->setPortable (isPortable);
+			}
+		}
+		catch (std::exception&)
+		{
+			// Leave it untreated. It's because we're missing the OPTIONAL file for pre-load.
+		}
+	}
+
+	std::string storagePath (SumwarsHelper::getSingletonPtr ()->getStorageBasePath ());
+
 	// Add the user directory
-	if (PHYSFS_addToSearchPath 	 (PHYSFS_getUserDir (), 1) == 0)
+	if (PHYSFS_addToSearchPath 	 (storagePath.c_str (), 1) == 0)
 	{
 		printf("PHYSFS_addToSearchPath 	 failed: %s\n", PHYSFS_getLastError ());
 		return false;
 	}
 
 	// Set the user directory as the default location to write to.
-	if (PHYSFS_setWriteDir (PHYSFS_getUserDir ()) == 0)
+	if (PHYSFS_setWriteDir (storagePath.c_str ()) == 0)
 	{
 		printf("PHYSFS_setWriteDir failed: %s\n", PHYSFS_getLastError ());
 		return false;
@@ -267,6 +301,7 @@ bool Application::init(char *argv)
 	LogManager::instance ().addLog ("stdout",new StdOutLog (Log::LOGLEVEL_DEBUG));
 	LogManager::instance ().addLog ("logfile",new FileLog (operationalPath + "/sumwars.log", Log::LOGLEVEL_DEBUG));
 
+	DEBUG ("Initialized logging. Level: %d", Log::LOGLEVEL_DEBUG);
 	Timer tm;
 	m_timer.start();
 
@@ -412,6 +447,10 @@ Application::~Application()
 	LogManager::cleanup();
     
     PHYSFS_deinit();
+
+	// Free the singletons? - Should be cleaned up automatically along with the rest of the application memory space.
+	// delete SumwarsHelper::getSingletonPtr ();
+	// delete SWUtil::Clipboard::getSingletonPtr ();
 }
 
 void Application::run()

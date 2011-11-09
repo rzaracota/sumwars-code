@@ -21,6 +21,13 @@
 #include <physfs.h>
 #include <OgreString.h>
 
+// The standard string
+#include <string>
+// The standard container for stl.
+#include <vector>
+// The used singleton manager.
+#include "OgreSingleton.h"
+
 #if defined (__APPLE__)
 #include <CoreFoundation/CFBundle.h>
 #endif
@@ -28,10 +35,65 @@
 
 /**
  * \brief Helper class. Used as a namespace to store utility static functions.
+ * Functions provided here relate to parsing of the resolution string found in
+ * various OGRE drivers and the OS specific path parsing to avoid adding #if/#ifdef clauses
+ * all over the code.
  */
 class SumwarsHelper
+		: public Ogre::Singleton <SumwarsHelper>
 {
+protected:
+	// A list of supported features.
+	std::vector <std::string> supportedFeatures_;
+
+	// TODO: for now, we only have the portable flag as a preload option.
+	// If more options are added, make a mapping to all pre-load options (including portable)
+	// and use it in a consistent manner.
+
+	// Specify whether the folders to use for storing data are used in a portable manner.
+	bool portable_;
+
 public:
+	/**
+	 * Constructor; will call the init function.
+	 */
+	SumwarsHelper ();
+
+	/**
+	 * \brief Initialize the helper; this will also reload the list of supported features.
+	 */
+	void init ();
+
+
+	/**
+	 * \brief Search in the list of stored features for a specific one.
+	 * \param featureName The name of the feature to look for.
+	 */
+	bool hasFeature (const std::string& featureName) const;
+
+
+	/**
+	 * \brief Retrieve the preload file name. Should not be used if the preload feature is not available.
+	 */
+	std::string getPreloadFileName () const;
+
+
+	/**
+	 * \brief Getter for the portable option.
+	 */
+	bool isPortable () const { return portable_; }
+
+	/**
+	 * \brief Setter for the portable option.
+	 */
+	void setPortable (bool newValue) { portable_ = newValue; }
+
+	/**
+	 * \brief Get the path to use for storage.
+	 */
+	std::string getStorageBasePath () const;
+
+
 	/**
 	 * \fn static Ogre::String gameDataPath()
 	 *
@@ -59,16 +121,7 @@ public:
 	 * \fn static Ogre::String userPath()
 	 * \brief Returns the writable sumwars directory in the users directory
 	 */
-	static Ogre::String userPath()
-	{
-		Ogre::String path = PHYSFS_getUserDir();
-#ifdef __APPLE__
-		path.append("/Library/Application Support/Sumwars");
-#else
-		path.append(".sumwars");
-#endif
-		return path;
-	}
+	static Ogre::String userPath();
 
 
 	/**
