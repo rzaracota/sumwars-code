@@ -494,7 +494,7 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_128x128.pn
   DESTINATION share/icons/hicolor/128x128/
   RENAME sumwars.png)
 
-execute_process(COMMAND sed "s|INSTALL_PATH|${CFG_FILES_DIR}|g" "${CMAKE_CURRENT_SOURCE_DIR}/resources.cfg.in" > "${CMAKE_CURRENT_SOURCE_DIR}/resources.cfg")
+execute_process(COMMAND sed "s|INSTALL_PATH|${CFG_FILES_DIR}|g" "${CMAKE_CURRENT_SOURCE_DIR}/resources.cfg.in" OUTPUT_FILE "${CMAKE_CURRENT_SOURCE_DIR}/resources.cfg")
 install(FILES authors.txt
   DESTINATION share/games/sumwars)
 install(FILES resources.cfg ogre.cfg plugins.cfg
