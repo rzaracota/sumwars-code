@@ -1,4 +1,7 @@
 <RenderInfo name="playerbase" parent="creaturebase">
+  <!-- add the player skill sound object; use for all skill sounds (E.g. <Sound objectname="pl_skillsnd" name="mySound"/>)-->
+  
+	<Soundobject objectname="pl_skillsnd" />
 	
 	<Action name="noaction">
 		<Animation name="idle" />
@@ -601,6 +604,7 @@
 		<Animation name="priestMagicSmall" />
 		<ParticleSystem time = "0.3" objectname="healing" bone="mainmesh:itemRightHand" source="CastHeal" position="0.0 0.0 -1.5" />
 		<Detach time="0.65" objectname="healing" />
+    <Sound objectname="pl_skillsnd" name="priest_cure"/>
 	</Action>
 	
 	<Action name="heal_party" >
@@ -1043,6 +1047,12 @@
 	</Action>
 	
 	<Action name="heal">
+    <Sound objectname="pl_skillsnd" name="priest_cure"/>
+    <!-- TODO: check if it would be better to add the code to play sound to the abilities in priest_ablt.xml 
+    (this would allow other players in multiplayer to hear the sound)
+		<LuaImplementation>
+      playSound("priest_cure", 1.0);
+		</LuaImplementation>-->
 		<Animation name="priestMagicSmall" />
 		<ParticleSystem time = "0.2" objectname="healing" bone="mainmesh:itemRightHand" source="CastHeal" position="0.0 0.0 -1.5" />
 		<Detach time="0.9" objectname="healing" />
