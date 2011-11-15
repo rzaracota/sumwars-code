@@ -675,6 +675,30 @@ msgstr ""
 msgid "Please restart the game\n for the changes to take effect!"
 msgstr ""
 
+#: ../src/gui/optionswindow.cpp:292
+msgid "Off"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:292
+msgid "Simple (Higher quality)"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:293
+msgid "Simple (Lower quality)"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:294
+msgid "Simulated (Experimental 1)"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:295
+msgid "Simulated (Experimental 2)"
+msgstr ""
+
+#: ../src/gui/optionswindow.cpp:456
+msgid "Shadows"
+msgstr ""
+
 #: ../src/gui/questinfo.cpp:160
 msgid "open"
 msgstr ""
