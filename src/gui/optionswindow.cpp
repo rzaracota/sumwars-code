@@ -290,8 +290,8 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	if (cbo)
 	{
 		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Off"), "", 0));
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simple (High-performance)"), "", 0));
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simple (Low-performance)"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simple (Higher quality)"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simple (Lower quality)"), "", 0));
 		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simulated (Experimental 1)"), "", 0));
 		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simulated (Experimental 2)"), "", 0));
 
@@ -722,7 +722,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 			of.close();
 			// ----------------------------------------------------------------
 
-			// Show a notification.
+			// Show a notification
 			CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton ();
 			CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow ("WarningDialogWindow");
 			message->setInheritsAlpha (false);
