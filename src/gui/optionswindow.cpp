@@ -722,14 +722,16 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 			of.close();
 			// ----------------------------------------------------------------
 
-			// Show a notification
-			CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton ();
-			CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow ("WarningDialogWindow");
-			message->setInheritsAlpha (false);
-			message->setVisible (true);
-			message->setModalState (true);
-			win_mgr.getWindow ("WarningDialogLabel")->setText ((CEGUI::utf8*) gettext ("Please restart the game\n for the changes to take effect!"));
-
+			// Show a notification, but not for a running game. We should basically have only 2 cases here:
+			if (m_document->getState () != Document::RUNNING)
+			{
+				CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton ();
+				CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow ("WarningDialogWindow");
+				message->setInheritsAlpha (false);
+				message->setVisible (true);
+				message->setModalState (true);
+				win_mgr.getWindow ("WarningDialogLabel")->setText ((CEGUI::utf8*) gettext ("Please restart the game\n for the changes to take effect!"));
+			}
 		} // user display mode changed.
 	}
 
