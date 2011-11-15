@@ -121,7 +121,13 @@ class OptionsWindow : public Window
 		/**
 		 * \brief Handles click on the reset graphics button
 		 */
-		bool onResetGraphics(const CEGUI::EventArgs& evt);
+		//bool onResetGraphics(const CEGUI::EventArgs& evt);
+		// TODO: get rid of obsolete code.
+
+		/**
+		 * \brief Handles the change of shadow mode
+		 */
+		bool onShadowModeSelected(const CEGUI::EventArgs& evt);
 
 		/**
 		 * \fn bool onLanguageSelected(const CEGUI::EventArgs& evt)

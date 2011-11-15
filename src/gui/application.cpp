@@ -332,6 +332,10 @@ bool Application::init(char *argv)
 	if (m_ogre_root == 0)
 		return false;
 
+	// Augustin Preda, 2011.11.15: trial code: load the options.xml file; it's required
+	// TODO: don't load it again later. Currently it's done via m_document->loadSettings();
+	Options::getInstance()->readFromFile(SumwarsHelper::userPath() + "/options.xml");
+
 	bool ret = true;
 
 	// Ogre configurieren
@@ -831,13 +835,42 @@ bool Application::initOgre()
 	// Create the scene manager
 	m_scene_manager = m_ogre_root->createSceneManager (Ogre::ST_GENERIC, "DefaultSceneManager");
 
-#if 0
+#ifndef DONT_USE_SHADOWS
+	// TODO: the order in which the settings are loaded is wrong. Fix it! The options file is loaded after OGRE is initialized, 
+	// but data is needed NOW, when we're doing the initialization.
+
+	int shadowMode = Options::getInstance ()->getShadowMode ();
+
+	if (shadowMode > 0)
+	{
+		switch (shadowMode)
+		{
+		case 2:
+			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+			break;
+		case 3:
+			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
+			break;
+		case 4:
+			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);
+			break;
+		case 1:
+		default:
+			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
+			break;
+		}
+	}
+	else
+	{
+		m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_NONE);
+	}
+
+	m_scene_manager->setShadowFarDistance (45);
+	m_scene_manager->setShadowColour( Ogre::ColourValue(0.4, 0.4, 0.4) );
+
     /*// set Shadows enabled before any mesh is loaded
-	m_scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
 	m_scene_manager->setShadowTextureSelfShadow(false);
 	m_scene_manager->setShadowTextureConfig(0,2048,2048,Ogre::PF_X8R8G8B8);
-	m_scene_manager->setShadowColour( Ogre::ColourValue(0.4, 0.4, 0.4) );
-	m_scene_manager->setShadowFarDistance(2000);
 */
 
 	// If we can use texture sizes BIGGER than the window size, specify the settings...
@@ -853,7 +886,7 @@ bool Application::initOgre()
 		// Make sure you use a resolution higher than this!
         m_scene_manager->setShadowTextureSettings(256, 2);
     }
-#endif
+#endif // DONT_USE_SHADOWS
 
 	// Register as a Window listener
 	Ogre::WindowEventUtilities::addWindowEventListener (m_window, this);

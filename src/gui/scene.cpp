@@ -748,7 +748,11 @@ void Scene::createScene()
 	light->setSpecularColour(0.0, 0.0, 0.0);
 	light->setAttenuation(20*GraphicManager::g_global_scale,0.5,0.000,
 						  0.025/(GraphicManager::g_global_scale*GraphicManager::g_global_scale));
-	//light->setCastShadows(true);
+#ifndef DONT_USE_SHADOWS
+	light->setCastShadows (false);
+	// Augustin Preda, 2011.11.15: set to disabled.
+#endif // DONT_USE_SHADOWS
+
 	DEBUGX("hero light %f %f %f",colour[0], colour[1], colour[2]);
     
 	colour= region->getLight().getDirectionalLight();
@@ -757,7 +761,11 @@ void Scene::createScene()
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(colour[0], colour[1], colour[2]);
 	light->setDirection(Ogre::Vector3(-1,-1,-1));
-    //light->setCastShadows(true);
+
+#ifndef DONT_USE_SHADOWS
+    light->setCastShadows (true);
+#endif // DONT_USE_SHADOWS
+
 	DEBUGX("directional light %f %f %f",colour[0], colour[1], colour[2]);
 
 	if (region !=0)

@@ -345,16 +345,34 @@
                     <Property Name="VertExtent" Value="25.5702" />
                     <Property Name="FrameEnabled" Value="False" />
                     <Property Name="InheritsAlpha" Value="False" />
-                    <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.55,0},{0.34,0},{0.65,0}}" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.50,0},{0.34,0},{0.60,0}}" />
                     <Property Name="BackgroundEnabled" Value="False" />
                 </Window>
                 <Window Type="TaharezLook/Combobox" Name="EHColorBox" >
                     <Property Name="InheritsAlpha" Value="False" />
-                    <Property Name="UnifiedAreaRect" Value="{{0.35,0},{0.55,0},{0.98,0},{0.65,0}}" />
-                    <Property Name="UnifiedSize" Value="{{0.5,0},{0.42,0}}" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.35,0},{0.50,0},{0.98,0},{0.60,0}}" />
+                    <Property Name="UnifiedSize" Value="{{0.5,0},{0.39,0}}" />
                     <Property Name="MaxEditTextLength" Value="1073741823" />
                 </Window>
 
+                <Window Type="TaharezLook/StaticText" Name="ShadowsLabel" >
+                    <Property Name="Text" Value="Shadows" />
+                    <Property Name="HorzExtent" Value="168" />
+                    <Property Name="VertExtent" Value="25.5702" />
+                    <Property Name="FrameEnabled" Value="False" />
+                    <Property Name="InheritsAlpha" Value="False" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.62,0},{0.34,0},{0.72,0}}" />
+                    <Property Name="BackgroundEnabled" Value="False" />
+                </Window>
+                <Window Type="TaharezLook/Combobox" Name="ShadowsDropDownList" >
+                    <Property Name="InheritsAlpha" Value="False" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.35,0},{0.62,0},{0.98,0},{0.72,0}}" />
+                    <Property Name="UnifiedSize" Value="{{0.5,0},{0.35,0}}" />
+                    <Property Name="MaxEditTextLength" Value="1073741823" />
+                </Window>
+
+                <!-- Resetting graphics is no longer needed, since the changes can be applied from within the game -->
+                <!-- 
                 <Window Type="TaharezLook/Button" Name="ResetGraphicsButton" >
                     <Property Name="Text" Value="Reset graphic options" />
                     <Property Name="HoverImage" Value="set:MainMenu image:SPBtnHover" />
@@ -373,6 +391,7 @@
                     <Property Name="UnifiedAreaRect" Value="{{0.4,0},{0.85,0},{0.9,0},{0.93,0}}" />
                     <Property Name="BackgroundEnabled" Value="False" />
                 </Window>
+                -->
             </Window>
             <Window Type="TaharezLook/TabContentPane" Name="OptionsMisc" >
                 <Property Name="Text" Value="Misc" />

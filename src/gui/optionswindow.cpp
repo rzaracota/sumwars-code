@@ -139,9 +139,11 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	chkbox->setSelected(Options::getInstance()->getGrabMouseInWindowedMode());
 	chkbox->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&OptionsWindow::onGrabMouseChanged, this));
 	
-	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ResetGraphicsButton"));
-	btn->setID(5);
-	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&OptionsWindow::onResetGraphics, this));
+	CEGUI::PushButton* btn;
+	//btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ResetGraphicsButton"));
+	//btn->setID(5);
+	//btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&OptionsWindow::onResetGraphics, this));
+	// TODO: get rid of obsolete code.
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsCloseButton"));
 	btn->setID(5);
@@ -278,6 +280,40 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 
 	cbo->handleUpdatedListItemData();
 
+	//
+	// Add the shadow options into the list. Also select the currently used shadow mode ---------------------------------------------
+	//
+	Options::ShadowMode usedShadowMode = Options::getInstance ()->getShadowMode ();
+
+	// Start adding the shadow options as items to the combo-box, one by one.
+	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow ("ShadowsDropDownList"));
+	if (cbo)
+	{
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Off"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simple (High-performance)"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simple (Low-performance)"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simulated (Experimental 1)"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simulated (Experimental 2)"), "", 0));
+
+		if (usedShadowMode >= Options::SM_NONE && usedShadowMode < Options::SM_COUNT)
+		{
+			if (cbo->getItemCount () > (size_t)usedShadowMode)
+			{
+				// Select the currently used option.
+				cbo->setItemSelectState ((int) usedShadowMode, true);
+			}
+		}
+
+		// Set the list to read-only, so that the user can't type in entries.
+		cbo->setReadOnly (true);
+
+		// refresh the object.
+		cbo->handleUpdatedListItemData();
+
+		cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onShadowModeSelected, this));
+	}
+
+
 	reset();
 	updateTranslation();
 }
@@ -401,8 +437,8 @@ void OptionsWindow::updateTranslation()
 	label = win_mgr.getWindow("LanguageLabel");
 	label->setText((CEGUI::utf8*) gettext("Language"));
 	
-	label = win_mgr.getWindow("ResetGraphicsLabel");
-	label->setText((CEGUI::utf8*) gettext("Restart required for setting new options"));
+	//label = win_mgr.getWindow("ResetGraphicsLabel");
+	//label->setText((CEGUI::utf8*) gettext("Restart required for setting new options")); // TODO: clean-up code.
 
 	box = static_cast<CEGUI::Checkbox*>(win_mgr.getWindow("GrabMouseInWindowedModeBox"));
 	box->setText((CEGUI::utf8*) gettext("Grab mouse in windowed mode (needs restart)"));
@@ -415,13 +451,16 @@ void OptionsWindow::updateTranslation()
 	
 	label = win_mgr.getWindow("Resolution");
 	label->setText((CEGUI::utf8*) gettext("Resolution"));
+
+	label = win_mgr.getWindow ("ShadowsLabel");
+	if (label) label->setText ((CEGUI::utf8*) gettext("Shadows"));
 	
 	// Set the close button to "ok"
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow ("OptionsCloseButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));
 
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "ResetGraphicsButton"));
-	btn->setText((CEGUI::utf8*) gettext("Reset graphic options"));
+	//btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "ResetGraphicsButton"));
+	//btn->setText((CEGUI::utf8*) gettext("Reset graphic options")); // TODO: clean-up code.
 }
 
 
@@ -513,7 +552,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 		DisplayModes userMode = (DisplayModes)selectionIndex;
 		someVideoSettingsWereChanged |= (userMode != Options::getInstance ()->getUsedDisplayMode ());
 
-		// Check the resolution for changes ---------------------.
+		// Check the resolution for changes -----------------------
 		std::string userResolution;
 		cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("ResolutionBox"));
 
@@ -541,6 +580,32 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 
 		someVideoSettingsWereChanged |= (userResolution != Options::getInstance ()->getUsedResolution ());
 
+		// Check the shadow mode for changes -----------------------------------
+		
+		cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("ShadowsDropDownList"));
+		if (cbo == 0)
+		{
+			return false;
+		}
+
+		item = cbo->getSelectedItem();
+		if (item == 0)
+		{
+			return false;
+		}
+		selectionIndex = (int)cbo->getItemIndex (item);
+
+		// Limit the values to the available options.
+		if (selectionIndex >= Options::SM_COUNT) selectionIndex = Options::SM_COUNT - 1;
+		if (selectionIndex < Options::SM_NONE) selectionIndex = Options::SM_NONE;
+		Options::ShadowMode newShadowSettings = static_cast<Options::ShadowMode> (selectionIndex);
+
+		DEBUG ("Used shadow mode (old - new) : %d - %d", Options::getInstance ()->getShadowMode (), newShadowSettings);
+	
+		someVideoSettingsWereChanged |= (newShadowSettings != Options::getInstance ()->getShadowMode ());
+
+		// Perform the actual settings save operation. ----------------------------
+
 		if (someVideoSettingsWereChanged)
 		{
 			// Store it into the options; for the time being it is only saved there, not read from there!
@@ -549,6 +614,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 			Options::getInstance ()->setUsedDisplayMode (userMode);
 			Options::getInstance ()->setUsedResolution (userResolution);
 			Options::getInstance ()->setUsedVideoDriver (selectedDriverName);
+			Options::getInstance ()->setShadowMode (newShadowSettings);
 
 			std::string configpath;
 #if defined (_WIN32)
@@ -741,6 +807,31 @@ bool OptionsWindow::onEnemyHighlightChanged(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+
+bool OptionsWindow::onShadowModeSelected(const CEGUI::EventArgs& evt)
+{
+	//const CEGUI::MouseEventArgs& we =
+	//		static_cast<const CEGUI::MouseEventArgs&>(evt);
+
+	//CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(we.window);
+	//CEGUI::ListboxItem* item = cbo->getSelectedItem();
+
+	//if (item != 0)
+	//{
+	//	DEBUG ("shadow mode to %s", item->getText().c_str());
+
+	//	size_t itemIndex = cbo->getSelectionStartIndex ();
+	//	Options::ShadowMode modeToUse = static_cast<Options::ShadowMode> (itemIndex);
+	//	Options::getInstance()->setShadowMode (modeToUse);
+	//	
+	//	return true;
+	//}
+	return true;
+}
+
+
+/*
+	// TODO: get rid of obsolete code.
 bool OptionsWindow::onResetGraphics(const CEGUI::EventArgs& evt)
 {
 	std::string configpath;
@@ -755,6 +846,7 @@ bool OptionsWindow::onResetGraphics(const CEGUI::EventArgs& evt)
 	remove(configpath.c_str());
 	return true;
 }
+*/
 
 bool OptionsWindow::onLanguageSelected(const CEGUI::EventArgs& evt)
 {

@@ -93,7 +93,10 @@ class Options
 		enum ShadowMode
 		{
 			SM_NONE = 0,
-			SM_SIMPLE = 1,
+			SM_SM_SIMPLE = 1, // SHADOWTYPE_STENCIL_MODULATIVE
+			SM_SA_SIMPLE = 2, // SHADOWTYPE_STENCIL_ADDITIVE
+			SM_TA_SIMPLE = 3, // SHADOWTYPE_TEXTURE_ADDITIVE
+			SM_TM_SIMPLE = 4, // SHADOWTYPE_TEXTURE_MODULATIVE
 			SM_COUNT // The count of shadow modes (2); must always use a value smaller than this one!
 		};
 
