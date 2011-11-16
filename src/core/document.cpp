@@ -303,11 +303,15 @@ bool Document::createNewCharacter(std::string name)
 {
 	if (m_temp_player)
 	{
+		std::string storagePath (SumwarsHelper::getSingletonPtr ()->userPath ());
+		storagePath.append ("/save/");
+        std::string path;
 
-        std::string path = PHYSFS_getUserDir();
 #ifndef __APPLE__
-		path.append("/.sumwars/save/");
+		// Windows & Linux
+		path = storagePath;
 #else
+		path = PHYSFS_getUserDir();
         path.append("/Library/Application Support/Sumwars/save/");
 #endif
         m_save_file = path;
