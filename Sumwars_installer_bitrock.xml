@@ -133,13 +133,10 @@
                             <origin>resources.cfg</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>authors.txt</origin>
+                            <origin>AUTHORS</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>README</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>AUTHORS</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>COPYING</origin>

@@ -284,7 +284,7 @@ GoTo :eof
 Echo Copy misc files
 
 Copy "%svn_repo%\Authors" Authors
-Copy "%svn_repo%\authors.txt" authors.txt
+Copy "%svn_repo%\AUTHORS" AUTHORS
 Copy "%svn_repo%\gpl-3.0.txt" gpl-3.0.txt
 Copy "%svn_repo%\Copying" Copying
 Copy "%svn_repo%\Install" Install

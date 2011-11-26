@@ -60,11 +60,11 @@ CreditsWindow::CreditsWindow(Document* doc)
     CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)resPath, PATH_MAX);
     CFRelease(resourcesURL);
     path = resPath;
-    cf.load(path + "/authors.txt");
+    cf.load(path + "/AUTHORS");
 #elif defined (__unix__)
-	cf.load(std::string(CFG_FILES_DIR) + "authors.txt");
+	cf.load(std::string(CFG_FILES_DIR) + "AUTHORS");
 #else // WINDOWS
-	cf.load("authors.txt");
+	cf.load("AUTHORS");
 #endif
 
 	// Go through all sections & settings in the file
