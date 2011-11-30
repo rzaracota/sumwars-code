@@ -5,4 +5,13 @@
 
 #define CFG_FILES_DIR "@CFG_FILES_DIR@"
 
+// If the following macro definitions turn out to be "NOTFOUND", the FindOGRE.cmake
+// has failed to locate the appropriate paths. In that case, please supply them
+// manually via cmake -D or cmake-gui
+#ifdef _DEBUG
+#   define SUMWARS_OGRE_PLUGIN_DIR "@OGRE_PLUGIN_DIR_DBG@"
+#else
+#   define SUMWARS_OGRE_PLUGIN_DIR "@OGRE_PLUGIN_DIR_REL@"
+#endif
+
 #endif

@@ -270,7 +270,7 @@ bool Application::init(char *argv)
 			"# Defines plugins to load\n"
 			"\n"
 			"# Define plugin folder\n"
-			"PluginFolder=/usr/lib/OGRE\n"
+			"PluginFolder=" SUMWARS_OGRE_PLUGIN_DIR "\n"
 			"\n"
 			"# Define OpenGL rendering implementation plugin\n"
 			"Plugin=RenderSystem_GL.so\n"
