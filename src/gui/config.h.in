@@ -4,8 +4,8 @@
 // Generated file, do not edit!  Make changes to config.h.in instead.
 
 #define SUMWARS_INSTALL_PREFIX "@CMAKE_INSTALL_PREFIX@"
-#define SUMWARS_RESOURCES_DIR "@SUMWARS_RESOURCES_DIR@"
-#define SUMWARS_DOCS_DIR "@SUMWARS_DOCS_DIR@"
+#define SUMWARS_SHARE_DIR "@SUMWARS_SHARE_DIR@"
+#define SUMWARS_DOC_DIR "@SUMWARS_DOC_DIR@"
 
 // If the following macro definitions turn out to be "NOTFOUND", the FindOGRE.cmake
 // has failed to locate the appropriate paths. In that case, please supply them

@@ -43,20 +43,20 @@ endif()
 SET(SUMWARS_EXECUTABLE_DIR "${SUMWARS_EXECUTABLE_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars executable, CMAKE_INSTALL_PREFIX gets prepended!")
 
 if(UNIX)
-  set(SUMWARS_RESOURCES_DEFAULT_DIR "share/sumwars")
+  set(SUMWARS_SHARE_DEFAULT_DIR "share/sumwars")
 else()
-  set(SUMWARS_RESOURCES_DEFAULT_DIR "resources")
+  set(SUMWARS_SHARE_DEFAULT_DIR "share")
 endif()
 
-SET(SUMWARS_RESOURCES_DIR "${SUMWARS_RESOURCES_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars resources, CMAKE_INSTALL_PREFIX gets prepended!")
+SET(SUMWARS_SHARE_DIR "${SUMWARS_SHARE_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars data, CMAKE_INSTALL_PREFIX gets prepended!")
 
 if(UNIX)
-  set(SUMWARS_DOCS_DEFAULT_DIR "share/doc/sumwars-${${PROJECT_NAME}_RELEASED_VERSION}")
+  set(SUMWARS_DOC_DEFAULT_DIR "share/doc/sumwars-${${PROJECT_NAME}_RELEASED_VERSION}")
 else()
-  set(SUMWARS_DOCS_DEFAULT_DIR "doc")
+  set(SUMWARS_DOC_DEFAULT_DIR "doc")
 endif()
 
-SET(SUMWARS_DOCS_DIR "${SUMWARS_DOCS_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars documentation, CMAKE_INSTALL_PREFIX gets prepended!")
+SET(SUMWARS_DOC_DIR "${SUMWARS_DOC_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars documentation, CMAKE_INSTALL_PREFIX gets prepended!")
 
 IF( NOT CMAKE_BUILD_TYPE )
   SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
@@ -161,14 +161,8 @@ IF(WIN32)
   MESSAGE("WARNING: Compiler warnings 4800, 4244 and 4305 disabled!")
 ENDIF()
 
-if(UNIX)
-  set(CFG_FILES_DIR "${CMAKE_INSTALL_PREFIX}/share/games/sumwars")
-else()
-  set(CFG_FILES_DIR ".")
-endif()
-
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/gui/config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/src/gui/config.h)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/resources.cfg.in ${CMAKE_CURRENT_SOURCE_DIR}/resources.cfg)
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/src/gui/config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/src/gui/config.h)
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/share/resources.cfg.in ${CMAKE_CURRENT_SOURCE_DIR}/share/resources.cfg)
 
 SET(HEADER_FILES
   ./src/gui/config.h
@@ -498,33 +492,36 @@ install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/sumwars"
 
 install(FILES "packaging/sumwars.desktop"
   DESTINATION "share/applications")
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_16x16.png"
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_16x16.png"
   DESTINATION "share/icons/hicolor/16x16/"
   RENAME "sumwars.png")
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_24x24.png"
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_24x24.png"
   DESTINATION "share/icons/hicolor/24x24/"
   RENAME "sumwars.png")
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_32x32.png"
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_32x32.png"
   DESTINATION "share/icons/hicolor/32x32/"
   RENAME "sumwars.png")
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_48x48.png"
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_48x48.png"
   DESTINATION "share/icons/hicolor/48x48/"
   RENAME "sumwars.png")
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_64x64.png"
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_64x64.png"
   DESTINATION "share/icons/hicolor/64x64/"
   RENAME "sumwars.png")
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_128x128.png"
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_128x128.png"
   DESTINATION "share/icons/hicolor/128x128/"
   RENAME "sumwars.png")
 install(FILES "AUTHORS" "COPYING" "INSTALL" "README"
   DESTINATION "${SUMWARS_DOCS_DIR}")
-install(FILES "resources.cfg"
-  DESTINATION "${SUMWARS_RESOURCES_DIR}")
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/data" "${CMAKE_CURRENT_SOURCE_DIR}/resources"
-  DESTINATION "${SUMWARS_RESOURCES_DIR}"
+  
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/resources.cfg"
+  DESTINATION "${SUMWARS_SHARE_DIR}")
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/data"
+  DESTINATION "${SUMWARS_SHARE_DIR}"
+  PATTERN ".hg" EXCLUDE)
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/resources"
+  DESTINATION "${SUMWARS_SHARE_DIR}"
   PATTERN ".hg" EXCLUDE
   PATTERN "icon" EXCLUDE)
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/translation"
-  DESTINATION "${SUMWARS_RESOURCES_DIR}"
-  FILES_MATCHING PATTERN "*.mo"
+  install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/translation"
+  DESTINATION "${SUMWARS_SHARE_DIR}"
   PATTERN ".hg" EXCLUDE)

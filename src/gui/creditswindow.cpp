@@ -63,7 +63,7 @@ CreditsWindow::CreditsWindow(Document* doc)
     path = resPath;
     cf.load(path + "/AUTHORS");
 #elif defined (__unix__)
-	cf.load(SumwarsHelper::gameDocsPath() + "/AUTHORS");
+	cf.load(SumwarsHelper::gameDocPath() + "/AUTHORS");
 #else // WINDOWS
 	cf.load("AUTHORS");
 #endif

@@ -106,7 +106,7 @@ public:
 
 #if defined (__unix__)
 		// redefine if necessary
-		path = SUMWARS_INSTALL_PREFIX "/" SUMWARS_RESOURCES_DIR;
+		path = SUMWARS_INSTALL_PREFIX "/" SUMWARS_SHARE_DIR;
 #elif defined (__APPLE__)
 		// redefine if necessary
 #elif defined (_WIN32)
@@ -122,13 +122,13 @@ public:
 	 * \brief Returns the path where the game documentation is stored (e.g.,
 	 * /usr/share/doc/sumwars in Unix)
 	 */
-	static Ogre::String gameDocsPath()
+	static Ogre::String gameDocPath()
 	{
 		Ogre::String path = userPath();
 
 #if defined (__unix__)
 		// redefine if necessary
-		path = SUMWARS_INSTALL_PREFIX "/" SUMWARS_DOCS_DIR;
+		path = SUMWARS_INSTALL_PREFIX "/" SUMWARS_DOC_DIR;
 #elif defined (__APPLE__)
 		// redefine if necessary
 #elif defined (_WIN32)
