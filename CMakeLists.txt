@@ -146,6 +146,7 @@ else()
 endif()
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/gui/config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/src/gui/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/resources.cfg.in ${CMAKE_CURRENT_SOURCE_DIR}/resources.cfg)
 
 SET(HEADER_FILES
   ./src/gui/config.h
@@ -493,8 +494,6 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_64x64.png"
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_128x128.png"
   DESTINATION share/icons/hicolor/128x128/
   RENAME sumwars.png)
-
-execute_process(COMMAND sed "s|INSTALL_PATH|${CFG_FILES_DIR}|g" "${CMAKE_CURRENT_SOURCE_DIR}/resources.cfg.in" OUTPUT_FILE "${CMAKE_CURRENT_SOURCE_DIR}/resources.cfg")
 install(FILES AUTHORS
   DESTINATION share/games/sumwars)
 install(FILES resources.cfg ogre.cfg plugins.cfg

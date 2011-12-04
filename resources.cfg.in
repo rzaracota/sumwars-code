@@ -1,77 +1,77 @@
 [General]
-FileSystem=INSTALL_PATH/resources/models/
-FileSystem=INSTALL_PATH/resources/models/mine
-FileSystem=INSTALL_PATH/resources/models/veg
-FileSystem=INSTALL_PATH/resources/materials/scripts
-FileSystem=INSTALL_PATH/resources/materials/programs
-FileSystem=INSTALL_PATH/resources/materials/textures
+FileSystem=@CFG_FILES_DIR@/resources/models/
+FileSystem=@CFG_FILES_DIR@/resources/models/mine
+FileSystem=@CFG_FILES_DIR@/resources/models/veg
+FileSystem=@CFG_FILES_DIR@/resources/materials/scripts
+FileSystem=@CFG_FILES_DIR@/resources/materials/programs
+FileSystem=@CFG_FILES_DIR@/resources/materials/textures
 
 [Particles]
-FileSystem=INSTALL_PATH/resources/particle/ogre_1_6
+FileSystem=@CFG_FILES_DIR@/resources/particle/ogre_1_6
 
 [GUI]
-FileSystem=INSTALL_PATH/resources/gui/configs
-FileSystem=INSTALL_PATH/resources/gui/fonts
-FileSystem=INSTALL_PATH/resources/gui/imagesets
-FileSystem=INSTALL_PATH/resources/gui/layouts
-FileSystem=INSTALL_PATH/resources/gui/looknfeel
-FileSystem=INSTALL_PATH/resources/gui/schemes
-FileSystem=INSTALL_PATH/resources/gui/animations
+FileSystem=@CFG_FILES_DIR@/resources/gui/configs
+FileSystem=@CFG_FILES_DIR@/resources/gui/fonts
+FileSystem=@CFG_FILES_DIR@/resources/gui/imagesets
+FileSystem=@CFG_FILES_DIR@/resources/gui/layouts
+FileSystem=@CFG_FILES_DIR@/resources/gui/looknfeel
+FileSystem=@CFG_FILES_DIR@/resources/gui/schemes
+FileSystem=@CFG_FILES_DIR@/resources/gui/animations
 
 [emotionsets]
-FileSystem=INSTALL_PATH/resources/emotionsets
+FileSystem=@CFG_FILES_DIR@/resources/emotionsets
 
 
 [itempictures]
-FileSystem=INSTALL_PATH/resources/itempictures
+FileSystem=@CFG_FILES_DIR@/resources/itempictures
 
 [sound]
-FileSystem=INSTALL_PATH/resources/sound
+FileSystem=@CFG_FILES_DIR@/resources/sound
 
 [music]
-FileSystem=INSTALL_PATH/resources/music
+FileSystem=@CFG_FILES_DIR@/resources/music
 
 [world]
-FileSystem=INSTALL_PATH/data/world
+FileSystem=@CFG_FILES_DIR@/data/world
 
 [npc]
-FileSystem=INSTALL_PATH/data/npc
+FileSystem=@CFG_FILES_DIR@/data/npc
 
 [quests]
-FileSystem=INSTALL_PATH/data/quests
+FileSystem=@CFG_FILES_DIR@/data/quests
 
 [items]
-FileSystem=INSTALL_PATH/data/items
+FileSystem=@CFG_FILES_DIR@/data/items
 
 [abilities]
-FileSystem=INSTALL_PATH/data/abilities
+FileSystem=@CFG_FILES_DIR@/data/abilities
 
 [monsters]
-FileSystem=INSTALL_PATH/data/monsters
+FileSystem=@CFG_FILES_DIR@/data/monsters
 
 [playerclasses]
-FileSystem=INSTALL_PATH/data/playerclasses
+FileSystem=@CFG_FILES_DIR@/data/playerclasses
 
 [projectiles]
-FileSystem=INSTALL_PATH/data/projectiles
+FileSystem=@CFG_FILES_DIR@/data/projectiles
 
 [objects]
-FileSystem=INSTALL_PATH/data/objects
+FileSystem=@CFG_FILES_DIR@/data/objects
 
 [object_groups]
-FileSystem=INSTALL_PATH/data/object_groups
+FileSystem=@CFG_FILES_DIR@/data/object_groups
 
 [obj_templates]
-FileSystem=INSTALL_PATH/data/obj_templates
+FileSystem=@CFG_FILES_DIR@/data/obj_templates
 
 [renderinfo]
-FileSystem=INSTALL_PATH/data/renderinfo
+FileSystem=@CFG_FILES_DIR@/data/renderinfo
 
 [lua]
-FileSystem=INSTALL_PATH/data/lua
+FileSystem=@CFG_FILES_DIR@/data/lua
 
 [sounddata]
-FileSystem=INSTALL_PATH/data/sound
+FileSystem=@CFG_FILES_DIR@/data/sound
 
 [translation]
-FileSystem=INSTALL_PATH/translation
+FileSystem=@CFG_FILES_DIR@/translation
