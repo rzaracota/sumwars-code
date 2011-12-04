@@ -35,6 +35,14 @@ OPTION(UPDATE_SUBVERSION_REVISION "Option to turn off automatic revision checkin
 OPTION(POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" OFF)
 
 if(UNIX)
+  set(SUMWARS_EXECUTABLE_DEFAULT_DIR "bin")
+else()
+  set(SUMWARS_EXECUTABLE_DEFAULT_DIR "")
+endif()
+
+SET(SUMWARS_EXECUTABLE_DIR "${SUMWARS_EXECUTABLE_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars executable, CMAKE_INSTALL_PREFIX gets prepended!")
+
+if(UNIX)
   set(SUMWARS_RESOURCES_DEFAULT_DIR "share/sumwars")
 else()
   set(SUMWARS_RESOURCES_DEFAULT_DIR "resources")
@@ -485,38 +493,38 @@ ENDIF(POST_BUILD_COPY)
 
 
 # install the application
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/sumwars
-  DESTINATION games)
+install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/sumwars"
+  DESTINATION "${SUMWARS_EXECUTABLE_DIR}")
 
-install(FILES packaging/sumwars.desktop
-  DESTINATION share/applications)
+install(FILES "packaging/sumwars.desktop"
+  DESTINATION "share/applications")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_16x16.png"
-  DESTINATION share/icons/hicolor/16x16/
-  RENAME sumwars.png)
+  DESTINATION "share/icons/hicolor/16x16/"
+  RENAME "sumwars.png")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_24x24.png"
-  DESTINATION share/icons/hicolor/24x24/
-  RENAME sumwars.png)
+  DESTINATION "share/icons/hicolor/24x24/"
+  RENAME "sumwars.png")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_32x32.png"
-  DESTINATION share/icons/hicolor/32x32/
-  RENAME sumwars.png)
+  DESTINATION "share/icons/hicolor/32x32/"
+  RENAME "sumwars.png")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_48x48.png"
-  DESTINATION share/icons/hicolor/48x48/
-  RENAME sumwars.png)
+  DESTINATION "share/icons/hicolor/48x48/"
+  RENAME "sumwars.png")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_64x64.png"
-  DESTINATION share/icons/hicolor/64x64/
-  RENAME sumwars.png)
+  DESTINATION "share/icons/hicolor/64x64/"
+  RENAME "sumwars.png")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_128x128.png"
-  DESTINATION share/icons/hicolor/128x128/
-  RENAME sumwars.png)
-install(FILES AUTHORS COPYING INSTALL README
+  DESTINATION "share/icons/hicolor/128x128/"
+  RENAME "sumwars.png")
+install(FILES "AUTHORS" "COPYING" "INSTALL" "README"
   DESTINATION "${SUMWARS_DOCS_DIR}")
-install(FILES resources.cfg
+install(FILES "resources.cfg"
   DESTINATION "${SUMWARS_RESOURCES_DIR}")
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/data" "${CMAKE_CURRENT_SOURCE_DIR}/resources"
   DESTINATION "${SUMWARS_RESOURCES_DIR}"
-  PATTERN .svn EXCLUDE
-  PATTERN icon EXCLUDE)
+  PATTERN ".hg" EXCLUDE
+  PATTERN "icon" EXCLUDE)
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/translation"
   DESTINATION "${SUMWARS_RESOURCES_DIR}"
   FILES_MATCHING PATTERN "*.mo"
-  PATTERN .svn EXCLUDE)
+  PATTERN ".hg" EXCLUDE)
