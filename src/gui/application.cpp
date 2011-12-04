@@ -278,7 +278,7 @@ bool Application::init(char *argv)
 			"# Define plugin folder\n"
 			"PluginFolder=/\n"
 			"\n"
-			"Plugin=" SUMWARS_OGRE_PLUGIN_RENDERSYSTEMGL_LIB "\n"
+			"Plugin=" SUMWARS_OGRE_PLUGIN_RENDERSYSTEM_GL_LIB "\n"
 			"Plugin=" SUMWARS_OGRE_PLUGIN_PARTICLEFX_LIB "\n"
 			"Plugin=" SUMWARS_OGRE_PLUGIN_OCTREESCENEMANAGER_LIB "\n";
 		PHYSFS_file* pluginsFile = PHYSFS_openWrite(pluginsCfgUser.c_str());
