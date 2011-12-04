@@ -16,6 +16,7 @@
 #include "creditswindow.h"
 #include "ceguiutility.h"
 #include "OgreConfigFile.h"
+#include "sumwarshelper.h"
 
 #include "config.h"
 
@@ -62,7 +63,7 @@ CreditsWindow::CreditsWindow(Document* doc)
     path = resPath;
     cf.load(path + "/AUTHORS");
 #elif defined (__unix__)
-	cf.load(std::string(CFG_FILES_DIR) + "/AUTHORS");
+	cf.load(SumwarsHelper::gameDataPath() + "/AUTHORS");
 #else // WINDOWS
 	cf.load("AUTHORS");
 #endif

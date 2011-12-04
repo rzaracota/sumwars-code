@@ -106,7 +106,7 @@ public:
 
 #if defined (__unix__)
 		// redefine if necessary
-		path = CFG_FILES_DIR;
+		path = SUMWARS_INSTALL_PREFIX "/" SUMWARS_RESOURCES_DIR;
 #elif defined (__APPLE__)
 		// redefine if necessary
 #elif defined (_WIN32)

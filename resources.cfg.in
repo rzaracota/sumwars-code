@@ -1,77 +1,77 @@
 [General]
-FileSystem=@CFG_FILES_DIR@/resources/models/
-FileSystem=@CFG_FILES_DIR@/resources/models/mine
-FileSystem=@CFG_FILES_DIR@/resources/models/veg
-FileSystem=@CFG_FILES_DIR@/resources/materials/scripts
-FileSystem=@CFG_FILES_DIR@/resources/materials/programs
-FileSystem=@CFG_FILES_DIR@/resources/materials/textures
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/models/
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/models/mine
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/models/veg
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/materials/scripts
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/materials/programs
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/materials/textures
 
 [Particles]
-FileSystem=@CFG_FILES_DIR@/resources/particle/ogre_1_6
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/particle/ogre_1_6
 
 [GUI]
-FileSystem=@CFG_FILES_DIR@/resources/gui/configs
-FileSystem=@CFG_FILES_DIR@/resources/gui/fonts
-FileSystem=@CFG_FILES_DIR@/resources/gui/imagesets
-FileSystem=@CFG_FILES_DIR@/resources/gui/layouts
-FileSystem=@CFG_FILES_DIR@/resources/gui/looknfeel
-FileSystem=@CFG_FILES_DIR@/resources/gui/schemes
-FileSystem=@CFG_FILES_DIR@/resources/gui/animations
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/gui/configs
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/gui/fonts
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/gui/imagesets
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/gui/layouts
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/gui/looknfeel
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/gui/schemes
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/gui/animations
 
 [emotionsets]
-FileSystem=@CFG_FILES_DIR@/resources/emotionsets
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/emotionsets
 
 
 [itempictures]
-FileSystem=@CFG_FILES_DIR@/resources/itempictures
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/itempictures
 
 [sound]
-FileSystem=@CFG_FILES_DIR@/resources/sound
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/sound
 
 [music]
-FileSystem=@CFG_FILES_DIR@/resources/music
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/resources/music
 
 [world]
-FileSystem=@CFG_FILES_DIR@/data/world
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/data/world
 
 [npc]
-FileSystem=@CFG_FILES_DIR@/data/npc
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/data/npc
 
 [quests]
-FileSystem=@CFG_FILES_DIR@/data/quests
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/data/quests
 
 [items]
-FileSystem=@CFG_FILES_DIR@/data/items
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/data/items
 
 [abilities]
-FileSystem=@CFG_FILES_DIR@/data/abilities
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/data/abilities
 
 [monsters]
-FileSystem=@CFG_FILES_DIR@/data/monsters
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/data/monsters
 
 [playerclasses]
-FileSystem=@CFG_FILES_DIR@/data/playerclasses
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/data/playerclasses
 
 [projectiles]
-FileSystem=@CFG_FILES_DIR@/data/projectiles
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/data/projectiles
 
 [objects]
-FileSystem=@CFG_FILES_DIR@/data/objects
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/data/objects
 
 [object_groups]
-FileSystem=@CFG_FILES_DIR@/data/object_groups
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/data/object_groups
 
 [obj_templates]
-FileSystem=@CFG_FILES_DIR@/data/obj_templates
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/data/obj_templates
 
 [renderinfo]
-FileSystem=@CFG_FILES_DIR@/data/renderinfo
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/data/renderinfo
 
 [lua]
-FileSystem=@CFG_FILES_DIR@/data/lua
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/data/lua
 
 [sounddata]
-FileSystem=@CFG_FILES_DIR@/data/sound
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/data/sound
 
 [translation]
-FileSystem=@CFG_FILES_DIR@/translation
+FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_RESOURCES_DIR@/translation

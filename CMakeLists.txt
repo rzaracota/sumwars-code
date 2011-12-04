@@ -8,6 +8,14 @@ OPTION(BUILD_TOOLS "Builds editor tools" ON)
 OPTION(UPDATE_SUBVERSION_REVISION "Option to turn off automatic revision checking" ON)
 OPTION(POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" OFF)
 
+if(UNIX)
+  set(SUMWARS_RESOURCES_DEFAULT_DIR "share/sumwars")
+else()
+  set(SUMWARS_RESOURCES_DEFAULT_DIR "resources")
+endif()
+
+SET(SUMWARS_RESOURCES_DIR "${SUMWARS_RESOURCES_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars resources, CMAKE_INSTALL_PREFIX gets prepended!")
+
 IF( NOT CMAKE_BUILD_TYPE )
   SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
 ENDIF()
@@ -495,14 +503,14 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_128x128.pn
   DESTINATION share/icons/hicolor/128x128/
   RENAME sumwars.png)
 install(FILES AUTHORS
-  DESTINATION share/games/sumwars)
+  DESTINATION "${SUMWARS_RESOURCES_DIR}")
 install(FILES resources.cfg ogre.cfg plugins.cfg
   DESTINATION share/games/sumwars)
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/data" "${CMAKE_CURRENT_SOURCE_DIR}/resources"
-  DESTINATION share/games/sumwars
+  DESTINATION "${SUMWARS_RESOURCES_DIR}"
   PATTERN .svn EXCLUDE
   PATTERN icon EXCLUDE)
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/translation"
-  DESTINATION share/games/sumwars
+  DESTINATION "${SUMWARS_RESOURCES_DIR}"
   FILES_MATCHING PATTERN "*.mo"
   PATTERN .svn EXCLUDE)
