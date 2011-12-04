@@ -10,3 +10,7 @@ src/gui/config.h
 src/gui/version.h
 resources.cfg
 
+# eclipse project files
+.project
+.cproject
+
