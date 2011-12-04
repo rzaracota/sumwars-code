@@ -1,27 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 project(SUMWARS)
 
-
-OPTION(NO_TINYXML "Do not use in-source TinyXML Lib" OFF)
-OPTION(NO_ENET "Do not use in-source ENET Lib" OFF)
-OPTION(BUILD_TOOLS "Builds editor tools" ON)
-OPTION(UPDATE_SUBVERSION_REVISION "Option to turn off automatic revision checking" ON)
-OPTION(POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" OFF)
-
-if(UNIX)
-  set(SUMWARS_RESOURCES_DEFAULT_DIR "share/sumwars")
-else()
-  set(SUMWARS_RESOURCES_DEFAULT_DIR "resources")
-endif()
-
-SET(SUMWARS_RESOURCES_DIR "${SUMWARS_RESOURCES_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars resources, CMAKE_INSTALL_PREFIX gets prepended!")
-
-IF( NOT CMAKE_BUILD_TYPE )
-  SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
-ENDIF()
-MESSAGE("CMAKE_BUILD_TYPE: " ${CMAKE_BUILD_TYPE})
-
-
 IF(UPDATE_SUBVERSION_REVISION)
     FIND_PROGRAM(Subversion_SVN_EXECUTABLE svn)
 
@@ -43,11 +22,38 @@ SET(${PROJECT_NAME}_VERSION_MAJOR "0")
 SET(${PROJECT_NAME}_VERSION_MINOR "5")
 SET(${PROJECT_NAME}_VERSION_PATCH "5")
 SET(${PROJECT_NAME}_VERSION_REVISION ${Project_WC_REVISION})
+SET(${PROJECT_NAME}_RELEASED_VERSION "${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH}")
 SET(${PROJECT_NAME}_VERSION "${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH}.${${PROJECT_NAME}_VERSION_REVISION}")
 MESSAGE("${PROJECT_NAME}_VERSION: " ${${PROJECT_NAME}_VERSION})
 
-
 CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/src/gui/version.h.in" "${PROJECT_SOURCE_DIR}/src/gui/version.h")
+
+OPTION(NO_TINYXML "Do not use in-source TinyXML Lib" OFF)
+OPTION(NO_ENET "Do not use in-source ENET Lib" OFF)
+OPTION(BUILD_TOOLS "Builds editor tools" ON)
+OPTION(UPDATE_SUBVERSION_REVISION "Option to turn off automatic revision checking" ON)
+OPTION(POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" OFF)
+
+if(UNIX)
+  set(SUMWARS_RESOURCES_DEFAULT_DIR "share/sumwars")
+else()
+  set(SUMWARS_RESOURCES_DEFAULT_DIR "resources")
+endif()
+
+SET(SUMWARS_RESOURCES_DIR "${SUMWARS_RESOURCES_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars resources, CMAKE_INSTALL_PREFIX gets prepended!")
+
+if(UNIX)
+  set(SUMWARS_DOCS_DEFAULT_DIR "share/doc/sumwars-${${PROJECT_NAME}_RELEASED_VERSION}")
+else()
+  set(SUMWARS_DOCS_DEFAULT_DIR "doc")
+endif()
+
+SET(SUMWARS_DOCS_DIR "${SUMWARS_DOCS_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars documentation, CMAKE_INSTALL_PREFIX gets prepended!")
+
+IF( NOT CMAKE_BUILD_TYPE )
+  SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
+ENDIF()
+MESSAGE("CMAKE_BUILD_TYPE: " ${CMAKE_BUILD_TYPE})
 
 SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules/;${CMAKE_MODULE_PATH}")
 
@@ -502,10 +508,10 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_64x64.png"
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_128x128.png"
   DESTINATION share/icons/hicolor/128x128/
   RENAME sumwars.png)
-install(FILES AUTHORS
+install(FILES AUTHORS COPYING INSTALL README
+  DESTINATION "${SUMWARS_DOCS_DIR}")
+install(FILES resources.cfg
   DESTINATION "${SUMWARS_RESOURCES_DIR}")
-install(FILES resources.cfg ogre.cfg plugins.cfg
-  DESTINATION share/games/sumwars)
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/data" "${CMAKE_CURRENT_SOURCE_DIR}/resources"
   DESTINATION "${SUMWARS_RESOURCES_DIR}"
   PATTERN .svn EXCLUDE

@@ -5,6 +5,7 @@
 
 #define SUMWARS_INSTALL_PREFIX "@CMAKE_INSTALL_PREFIX@"
 #define SUMWARS_RESOURCES_DIR "@SUMWARS_RESOURCES_DIR@"
+#define SUMWARS_DOCS_DIR "@SUMWARS_DOCS_DIR@"
 
 // If the following macro definitions turn out to be "NOTFOUND", the FindOGRE.cmake
 // has failed to locate the appropriate paths. In that case, please supply them
