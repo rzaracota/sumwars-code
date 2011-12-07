@@ -78,6 +78,17 @@ protected:
 private:
 
 	/**
+	 * Set m_shadow_camera_setup_type to:
+	 * 0 = Default
+	 * 1 = LiSPSMShadowCameraSetup
+	 * 2 = FocusedShadowCameraSetup
+	 * 3 = PlaneOptimalShadowCameraSetup
+	 * 4 = PSSM
+	 * This is kept as an integer value only temporary. It should be turned into an enum and read from a config file.
+	 */
+	int m_shadow_camera_setup_type;
+
+	/**
 	 * @brief Sets the shadow texture size.
 	 * @param textureSize
 	 */

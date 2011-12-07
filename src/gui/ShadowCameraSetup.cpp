@@ -30,14 +30,25 @@
 #include <OgreShadowCameraSetupPSSM.h>
 
 
-ShadowCameraSetup::ShadowCameraSetup(Ogre::SceneManager& sceneMgr) : mSceneMgr(sceneMgr)
+ShadowCameraSetup::ShadowCameraSetup(Ogre::SceneManager& sceneMgr)
+	: mSceneMgr(sceneMgr)
+	, m_shadow_camera_setup_type (2)
 {
+	// Set m_shadow_camera_setup_type to:
+	// 0 = Default
+	// 1 = LiSPSMShadowCameraSetup
+	// 2 = FocusedShadowCameraSetup
+	// 3 = PlaneOptimalShadowCameraSetup
+	// 4 = PSSM
 	setup();
 	Config_ShadowTextureSize(1024);
-	Config_ShadowSplitPoints(1, 15, 50, 200);
-	Config_ShadowSplitPadding(10.0);
-	Config_ShadowOptimalAdjustFactors(1, 1, 1);
-	Config_ShadowUseAggressiveFocusRegion(true);
+	if (m_shadow_camera_setup_type == 4)
+	{
+		Config_ShadowSplitPoints(1, 15, 50, 200);
+		Config_ShadowSplitPadding(10.0);
+		Config_ShadowOptimalAdjustFactors(1, 1, 1);
+		Config_ShadowUseAggressiveFocusRegion(true);
+	}
 	Config_ShadowFarDistance(200.0);
 	Config_ShadowRenderBackfaces(true);
 }
@@ -78,8 +89,29 @@ bool ShadowCameraSetup::setup()
 
 	mSceneMgr.setShadowTextureCasterMaterial("Ogre/DepthShadowmap/Caster/Float/NoAlpha");
 
-	mPssmSetup = OGRE_NEW Ogre::PSSMShadowCameraSetup();
-	mSharedCameraPtr = Ogre::ShadowCameraSetupPtr(mPssmSetup);
+	switch (m_shadow_camera_setup_type)
+	{
+	case 1:
+		mSharedCameraPtr = Ogre::ShadowCameraSetupPtr(OGRE_NEW Ogre::LiSPSMShadowCameraSetup ());
+		break;
+	case 2:
+		mSharedCameraPtr = Ogre::ShadowCameraSetupPtr(OGRE_NEW Ogre::FocusedShadowCameraSetup ());
+		break;
+	case 3:
+		// A plane is needed to initialize the camera by.
+		//Ogre::ShadowCameraSetupPtr(OGRE_NEW Ogre::PlaneOptimalShadowCameraSetup (mPlane));
+		break;
+	case 4:
+		mPssmSetup = OGRE_NEW Ogre::PSSMShadowCameraSetup();
+		mSharedCameraPtr = Ogre::ShadowCameraSetupPtr(mPssmSetup);
+		break;
+	case 0:
+	default:
+		mSharedCameraPtr = Ogre::ShadowCameraSetupPtr(OGRE_NEW Ogre::DefaultShadowCameraSetup ());
+		break;
+	}
+	
+	
 	mSceneMgr.setShadowCameraSetup(mSharedCameraPtr);
 
 	return true;
