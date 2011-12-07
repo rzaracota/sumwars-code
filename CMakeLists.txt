@@ -511,7 +511,7 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_128x128.png"
   DESTINATION "share/icons/hicolor/128x128/"
   RENAME "sumwars.png")
 install(FILES "AUTHORS" "COPYING" "INSTALL" "README"
-  DESTINATION "${SUMWARS_DOCS_DIR}")
+  DESTINATION "${SUMWARS_DOC_DIR}")
   
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/resources.cfg"
   DESTINATION "${SUMWARS_SHARE_DIR}")
