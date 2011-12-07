@@ -1,0 +1,374 @@
+// Basic hardware skinning using four indexed weights per vertex 
+ //vertex_program HardwareSkinningFourWeightsFullHANIM cg 
+ //{ 
+ //   source Animation.cg 
+ //   entry_point hardwareSkinningFourWeightsFullHANIM_vp 
+ //   profiles vs_2_0 arbvp1 
+ //   includes_skeletal_animation true 
+ //} 
+ 
+ 
+ vertex_program Field/GrassWaverVp cg
+{
+	source Grass.cg
+	entry_point grass_vp
+	profiles vs_1_1 arbvp1
+}
+
+vertex_program Field/GrassFaderVp cg
+{
+	source Grass.cg
+	entry_point grassfader_vp
+	profiles vs_1_1 arbvp1
+}
+
+
+
+
+
+// Lighting
+
+// We have to list all preprocessor defines here because of bug in Ogre 1.6.0 GLSL preprocessor
+
+// Simple lighting
+vertex_program Lighting/SimpleVp glsl
+{
+	source LightingVp.glsl
+	preprocessor_defines FOG_EXP2=1,SHADOW=0,NORMAL_MAP=0,PARALLAX_STEPS=0
+	default_params
+	{
+		param_named_auto numberOfActiveLights light_count
+	}
+}
+
+vertex_program Lighting/Wave/SimpleVp glsl
+{
+	source LightingVp.glsl
+	preprocessor_defines FOG_EXP2=1,SHADOW=0,NORMAL_MAP=0,PARALLAX_STEPS=0,WAVE=1
+	default_params
+	{
+		param_named_auto numberOfActiveLights light_count
+		param_named time float 1
+		param_named frequency float 1
+		param_named direction float4 0.0 0.0 0.0 0.0
+	}
+}
+
+vertex_program Lighting/ShadowVp glsl
+{
+	source LightingVp.glsl
+	preprocessor_defines FOG_EXP2=1,SHADOW=1,NORMAL_MAP=0,PARALLAX_STEPS=0
+	default_params
+	{
+		param_named_auto shadowWorldViewProjectionMatrix0 texture_worldviewproj_matrix 0
+		param_named_auto shadowWorldViewProjectionMatrix1 texture_worldviewproj_matrix 1
+		param_named_auto shadowWorldViewProjectionMatrix2 texture_worldviewproj_matrix 2
+		param_named_auto shadowWorldViewProjectionMatrix3 texture_worldviewproj_matrix 3
+		param_named_auto shadowWorldViewProjectionMatrix4 texture_worldviewproj_matrix 4
+		param_named_auto numberOfActiveLights light_count
+		//param_named_auto shadowDepthRange0 shadow_scene_depth_range 0
+		//param_named_auto shadowDepthRange1 shadow_scene_depth_range 1
+		//param_named_auto shadowDepthRange2 shadow_scene_depth_range 2
+		//param_named_auto shadowDepthRange3 shadow_scene_depth_range 3
+		//param_named_auto shadowDepthRange4 shadow_scene_depth_range 4
+	}
+}
+
+vertex_program Lighting/Wave/ShadowVp glsl
+{
+	source LightingVp.glsl
+	preprocessor_defines FOG_EXP2=1,SHADOW=1,NORMAL_MAP=0,PARALLAX_STEPS=0,WAVE=1
+	default_params
+	{
+		param_named_auto shadowWorldViewProjectionMatrix0 texture_worldviewproj_matrix 0
+		param_named_auto shadowWorldViewProjectionMatrix1 texture_worldviewproj_matrix 1
+		param_named_auto shadowWorldViewProjectionMatrix2 texture_worldviewproj_matrix 2
+		param_named_auto shadowWorldViewProjectionMatrix3 texture_worldviewproj_matrix 3
+		param_named_auto shadowWorldViewProjectionMatrix4 texture_worldviewproj_matrix 4
+		param_named_auto numberOfActiveLights light_count
+		//param_named_auto shadowDepthRange0 shadow_scene_depth_range 0
+		//param_named_auto shadowDepthRange1 shadow_scene_depth_range 1
+		//param_named_auto shadowDepthRange2 shadow_scene_depth_range 2
+		//param_named_auto shadowDepthRange3 shadow_scene_depth_range 3
+		//param_named_auto shadowDepthRange4 shadow_scene_depth_range 4
+		param_named time float 1
+		param_named frequency float 1
+		param_named direction float4 0.0 0.0 0.0 0.0
+	}
+}
+
+// Offset mapping
+vertex_program Lighting/OffsetMappingVp glsl
+{
+	source LightingVp.glsl
+	preprocessor_defines FOG_EXP2=1,SHADOW=0,NORMAL_MAP=1,PARALLAX_STEPS=7
+	default_params
+	{
+		param_named_auto numberOfActiveLights light_count
+	}
+}
+
+vertex_program Lighting/Wave/OffsetMappingVp glsl
+{
+	source LightingVp.glsl
+	preprocessor_defines FOG_EXP2=1,SHADOW=0,NORMAL_MAP=1,PARALLAX_STEPS=7,WAVE=1
+	default_params
+	{
+		param_named_auto numberOfActiveLights light_count
+		param_named time float 1
+		param_named frequency float 1
+		param_named direction float4 0.0 0.0 0.0 0.0
+	}
+}
+
+
+vertex_program Lighting/OffsetMapping/ShadowVp glsl
+{
+	source LightingVp.glsl
+	preprocessor_defines FOG_EXP2=1,SHADOW=1,NORMAL_MAP=1,PARALLAX_STEPS=7
+	default_params
+	{
+		param_named_auto shadowWorldViewProjectionMatrix0 texture_worldviewproj_matrix 0
+		param_named_auto shadowWorldViewProjectionMatrix1 texture_worldviewproj_matrix 1
+		param_named_auto shadowWorldViewProjectionMatrix2 texture_worldviewproj_matrix 2
+		param_named_auto shadowWorldViewProjectionMatrix3 texture_worldviewproj_matrix 3
+		param_named_auto shadowWorldViewProjectionMatrix4 texture_worldviewproj_matrix 4
+		param_named_auto numberOfActiveLights light_count
+		//param_named_auto shadowDepthRange0 shadow_scene_depth_range 0
+		//param_named_auto shadowDepthRange1 shadow_scene_depth_range 1
+		//param_named_auto shadowDepthRange2 shadow_scene_depth_range 2
+		//param_named_auto shadowDepthRange3 shadow_scene_depth_range 3
+		//param_named_auto shadowDepthRange4 shadow_scene_depth_range 4
+	}
+}
+
+vertex_program Lighting/OffsetMapping/Wave/ShadowVp glsl
+{
+	source LightingVp.glsl
+	preprocessor_defines FOG_EXP2=1,SHADOW=1,NORMAL_MAP=1,PARALLAX_STEPS=7,WAVE=1
+	default_params
+	{
+		param_named_auto shadowWorldViewProjectionMatrix0 texture_worldviewproj_matrix 0
+		param_named_auto shadowWorldViewProjectionMatrix1 texture_worldviewproj_matrix 1
+		param_named_auto shadowWorldViewProjectionMatrix2 texture_worldviewproj_matrix 2
+		param_named_auto shadowWorldViewProjectionMatrix3 texture_worldviewproj_matrix 3
+		param_named_auto shadowWorldViewProjectionMatrix4 texture_worldviewproj_matrix 4
+		param_named_auto numberOfActiveLights light_count
+		//param_named_auto shadowDepthRange0 shadow_scene_depth_range 0
+		//param_named_auto shadowDepthRange1 shadow_scene_depth_range 1
+		//param_named_auto shadowDepthRange2 shadow_scene_depth_range 2
+		//param_named_auto shadowDepthRange3 shadow_scene_depth_range 3
+		//param_named_auto shadowDepthRange4 shadow_scene_depth_range 4
+		param_named time float 1
+		param_named frequency float 1
+		param_named direction float4 0.0 0.0 0.0 0.0
+	}
+}
+
+
+// Simple lighting
+fragment_program Lighting/SimpleFp glsl
+{
+	source LightingFp.glsl
+	preprocessor_defines SHADOW=0,NORMAL_MAP=0,PARALLAX_STEPS=0,SPECULAR=0
+	default_params
+	{
+		param_named_auto numberOfActiveLights light_count
+		param_named diffuseMap int 0
+	}
+}
+
+// Simple lighting with shadows
+fragment_program Lighting/ShadowFp glsl
+{
+	source LightingFp.glsl
+	preprocessor_defines SHADOW=1,NORMAL_MAP=0,PARALLAX_STEPS=0,SPECULAR=0
+	default_params
+	{
+		param_named_auto numberOfActiveLights light_count
+		param_named diffuseMap int 0
+
+		param_named_auto inverseShadowMapSize0 inverse_texture_size 0
+		param_named_auto inverseShadowMapSize1 inverse_texture_size 1
+		param_named_auto inverseShadowMapSize2 inverse_texture_size 2
+		param_named_auto inverseShadowMapSize3 inverse_texture_size 3
+		param_named_auto inverseShadowMapSize4 inverse_texture_size 4
+
+		param_named fixedDepthBias float -0.001
+		param_named gradientClamp float 0.0098
+		param_named gradientScaleBias float 0.0
+
+		param_named shadowMap0				int 1
+		param_named shadowMap1				int 2
+		param_named shadowMap2				int 3
+		param_named shadowMap3				int 4
+		param_named shadowMap4				int 5
+	}
+}
+
+// Lighting with specular
+fragment_program Lighting/SpecularFp glsl
+{
+	source LightingFp.glsl
+	preprocessor_defines SHADOW=0,NORMAL_MAP=0,PARALLAX_STEPS=0,SPECULAR=1
+	default_params
+	{
+		param_named_auto numberOfActiveLights light_count
+		param_named diffuseMap int 0
+		param_named specularMap int 1
+	}
+}
+
+// Lighting with specular and shadows
+fragment_program Lighting/Specular/ShadowFp glsl
+{
+	source LightingFp.glsl
+	preprocessor_defines SHADOW=1,NORMAL_MAP=0,PARALLAX_STEPS=0,SPECULAR=1
+	default_params
+	{
+		param_named_auto numberOfActiveLights light_count
+		param_named diffuseMap int 0
+		param_named specularMap int 1
+
+		param_named_auto inverseShadowMapSize0 inverse_texture_size 0
+		param_named_auto inverseShadowMapSize1 inverse_texture_size 1
+		param_named_auto inverseShadowMapSize2 inverse_texture_size 2
+		param_named_auto inverseShadowMapSize3 inverse_texture_size 3
+		param_named_auto inverseShadowMapSize4 inverse_texture_size 4
+
+		param_named fixedDepthBias float -0.001
+		param_named gradientClamp float 0.0098
+		param_named gradientScaleBias float 0.0
+
+		param_named shadowMap0				int 2
+		param_named shadowMap1				int 3
+		param_named shadowMap2				int 4
+		param_named shadowMap3				int 5
+		param_named shadowMap4				int 6
+	}
+}
+
+// Light version of offset mapping
+fragment_program Lighting/OffsetMapping/SimpleFp glsl
+{
+	source LightingFp.glsl
+	preprocessor_defines SHADOW=0,NORMAL_MAP=1,PARALLAX_STEPS=3,SPECULAR=0
+	default_params
+	{
+		param_named_auto numberOfActiveLights light_count
+		param_named scaleBias float2 0.0 0.0
+		param_named diffuseMap int 0
+		param_named normalHeightMap int 1
+	}
+}
+
+// Offset mapping
+fragment_program Lighting/OffsetMappingFp glsl
+{
+	source LightingFp.glsl
+	preprocessor_defines SHADOW=0,NORMAL_MAP=1,PARALLAX_STEPS=7,SPECULAR=0
+	default_params
+	{
+		param_named_auto numberOfActiveLights light_count
+		param_named scaleBias float2 0.0 0.0
+		param_named diffuseMap int 0
+		param_named normalHeightMap int 1
+	}
+}
+
+// Offset mapping with shadows
+fragment_program Lighting/OffsetMapping/ShadowFp glsl
+{
+	source LightingFp.glsl
+	preprocessor_defines SHADOW=1,NORMAL_MAP=1,PARALLAX_STEPS=7,SPECULAR=0
+	default_params
+	{
+		param_named_auto numberOfActiveLights light_count
+		param_named scaleBias float2 0.0 0.0
+		param_named diffuseMap int 0
+		param_named normalHeightMap int 1
+
+		param_named_auto inverseShadowMapSize0 inverse_texture_size 0
+		param_named_auto inverseShadowMapSize1 inverse_texture_size 1
+		param_named_auto inverseShadowMapSize2 inverse_texture_size 2
+		param_named_auto inverseShadowMapSize3 inverse_texture_size 3
+		param_named_auto inverseShadowMapSize4 inverse_texture_size 4
+
+		param_named fixedDepthBias float -0.001
+		param_named gradientClamp float 0.0098
+		param_named gradientScaleBias float 0.0
+
+		param_named shadowMap0				int 2
+		param_named shadowMap1				int 3
+		param_named shadowMap2				int 4
+		param_named shadowMap3				int 5
+		param_named shadowMap4				int 6
+	}
+}
+
+// Offset mapping with specular
+fragment_program Lighting/OffsetMapping/SpecularFp glsl
+{
+	source LightingFp.glsl
+	preprocessor_defines SHADOW=0,NORMAL_MAP=1,PARALLAX_STEPS=7,SPECULAR=1
+	default_params
+	{
+		param_named_auto numberOfActiveLights light_count
+		param_named scaleBias float2 0.0 0.0
+		param_named diffuseMap int 0
+		param_named specularMap int 1
+		param_named normalHeightMap int 2
+	}
+}
+
+// Offset mapping with specular and shadows
+fragment_program Lighting/OffsetMapping/Specular/ShadowFp glsl
+{
+	source LightingFp.glsl
+	preprocessor_defines SHADOW=1,NORMAL_MAP=1,PARALLAX_STEPS=7,SPECULAR=1
+	default_params
+	{
+		param_named_auto numberOfActiveLights light_count
+		param_named scaleBias float2 0.0 0.0
+		param_named diffuseMap int 0
+		param_named specularMap int 1
+		param_named normalHeightMap int 2
+
+		param_named_auto inverseShadowMapSize0 inverse_texture_size 0
+		param_named_auto inverseShadowMapSize1 inverse_texture_size 1
+		param_named_auto inverseShadowMapSize2 inverse_texture_size 2
+		param_named_auto inverseShadowMapSize3 inverse_texture_size 3
+		param_named_auto inverseShadowMapSize4 inverse_texture_size 4
+
+		param_named fixedDepthBias float -0.001
+		param_named gradientClamp float 0.0098
+		param_named gradientScaleBias float 0.0
+
+		param_named shadowMap0				int 3
+		param_named shadowMap1				int 4
+		param_named shadowMap2				int 5
+		param_named shadowMap3				int 6
+		param_named shadowMap4				int 7
+	}
+}
+
+
+vertex_program Water/SimpleVp glsl
+{
+	source LightingVp.glsl
+	preprocessor_defines FOG_NONE=1,SHADOW=0,NORMAL_MAP=0,PARALLAX_STEPS=0
+	default_params
+	{
+		param_named_auto numberOfActiveLights light_count
+	}
+}
+
+fragment_program Water/SimpleFp glsl
+{
+	source WaterFp.glsl
+	preprocessor_defines FOG_EXP2=1,SHADOW=0,NORMAL_MAP=0,PARALLAX_STEPS=0,SPECULAR=0
+	default_params
+	{
+		param_named diffuseMap int 0
+	}
+}

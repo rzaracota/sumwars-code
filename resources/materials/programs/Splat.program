@@ -1,0 +1,336 @@
+// Splatting
+
+// We have to list all preprocessor defines here because of bug in Ogre 1.6.0 GLSL preprocessor
+
+abstract fragment_program SplattingFp glsl
+{
+	source SplatFp.glsl
+	default_params
+	{
+		param_named_auto inverseShadowMapSize0 inverse_texture_size 0
+		param_named_auto inverseShadowMapSize1 inverse_texture_size 1
+		param_named_auto inverseShadowMapSize2 inverse_texture_size 2
+		param_named_auto inverseShadowMapSize3 inverse_texture_size 3
+		param_named_auto inverseShadowMapSize4 inverse_texture_size 4
+
+		param_named fixedDepthBias float -0.0001
+		param_named gradientClamp float 0.0098
+		param_named gradientScaleBias float 0.0
+
+		param_named shadowMap0				int 0
+		param_named shadowMap1				int 1
+		param_named shadowMap2				int 2
+		param_named shadowMap3				int 3
+		param_named shadowMap4				int 4
+
+		param_named_auto numberOfActiveLights light_count
+	}
+}
+
+abstract fragment_program SplattingFp/NoShadows glsl
+{
+	source SplatFp.glsl
+	default_params
+	{
+		param_named_auto numberOfActiveLights light_count
+	}
+}
+
+
+fragment_program SplattingFp/1 glsl : SplattingFp
+{
+	preprocessor_defines NUM_LAYERS=1,SHADOW=1,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named baseTextureDiffuse		int 5
+	}
+
+}
+
+fragment_program SplattingFp/1/NoShadows glsl : SplattingFp/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=1,SHADOW=0,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named baseTextureDiffuse		int 0
+	}
+}
+
+fragment_program SplattingFp/1/Simple glsl : SplattingFp/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=1,SHADOW=0,NUM_LIGHTS=1,FOG=0
+	default_params {
+		param_named baseTextureDiffuse		int 0
+	}
+}
+
+fragment_program SplattingFp/2 glsl : SplattingFp/1
+{
+	preprocessor_defines NUM_LAYERS=2,SHADOW=1,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named coverageTexture1		int 6
+		param_named splat1TextureDiffuse	int 7
+	}
+}
+
+fragment_program SplattingFp/2/NoShadows glsl : SplattingFp/1/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=2,SHADOW=0,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named coverageTexture1		int 1
+		param_named splat1TextureDiffuse	int 2
+	}
+}
+
+fragment_program SplattingFp/2/Simple glsl : SplattingFp/1/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=2,SHADOW=0,NUM_LIGHTS=1,FOG=0
+	default_params {
+		param_named coverageTexture1		int 1
+		param_named splat1TextureDiffuse	int 2
+	}
+}
+
+fragment_program SplattingFp/3 glsl : SplattingFp/2
+{
+	preprocessor_defines NUM_LAYERS=3,SHADOW=1,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat2TextureDiffuse	int 8
+	}
+}
+
+fragment_program SplattingFp/3/NoShadows glsl : SplattingFp/2/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=3,SHADOW=0,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat2TextureDiffuse	int 3
+	}
+}
+
+fragment_program SplattingFp/3/Simple glsl : SplattingFp/2/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=3,SHADOW=0,NUM_LIGHTS=1,FOG=0
+	default_params {
+		param_named splat2TextureDiffuse	int 3
+	}
+}
+
+fragment_program SplattingFp/4 glsl : SplattingFp/3
+{
+	preprocessor_defines NUM_LAYERS=4,SHADOW=1,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat3TextureDiffuse	int 9
+	}
+}
+
+fragment_program SplattingFp/4/NoShadows glsl : SplattingFp/3/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=4,SHADOW=0,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat3TextureDiffuse	int 4
+	}
+}
+
+fragment_program SplattingFp/4/Simple glsl : SplattingFp/3/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=4,SHADOW=0,NUM_LIGHTS=1,FOG=0
+	default_params {
+		param_named splat3TextureDiffuse	int 4
+	}
+}
+
+fragment_program SplattingFp/5 glsl : SplattingFp/4
+{
+	preprocessor_defines NUM_LAYERS=5,SHADOW=1,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat4TextureDiffuse	int 10
+	}
+}
+
+fragment_program SplattingFp/5/NoShadows glsl : SplattingFp/4/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=5,SHADOW=0,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat4TextureDiffuse	int 5
+	}
+}
+
+fragment_program SplattingFp/5/Simple glsl : SplattingFp/4/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=5,SHADOW=0,NUM_LIGHTS=1,FOG=0
+	default_params {
+		param_named splat4TextureDiffuse	int 5
+	}
+}
+
+fragment_program SplattingFp/6 glsl : SplattingFp/5
+{
+	preprocessor_defines NUM_LAYERS=6,SHADOW=1,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named coverageTexture2		int 11
+		param_named splat5TextureDiffuse	int 12
+	}
+}
+
+fragment_program SplattingFp/6/NoShadows glsl : SplattingFp/5/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=6,SHADOW=0,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named coverageTexture2		int 6
+		param_named splat5TextureDiffuse	int 7
+	}
+}
+
+fragment_program SplattingFp/6/Simple glsl : SplattingFp/5/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=6,SHADOW=0,NUM_LIGHTS=1,FOG=0
+	default_params {
+		param_named coverageTexture2		int 6
+		param_named splat5TextureDiffuse	int 7
+	}
+}
+
+fragment_program SplattingFp/7 glsl : SplattingFp/6
+{
+	preprocessor_defines NUM_LAYERS=7,SHADOW=1,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat6TextureDiffuse	int 13
+	}
+}
+
+fragment_program SplattingFp/7/NoShadows glsl : SplattingFp/6/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=7,SHADOW=0,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat6TextureDiffuse	int 8
+	}
+}
+
+fragment_program SplattingFp/7/Simple glsl : SplattingFp/6/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=7,SHADOW=0,NUM_LIGHTS=1,FOG=0
+	default_params {
+		param_named splat6TextureDiffuse	int 8
+	}
+}
+
+fragment_program SplattingFp/8 glsl : SplattingFp/7
+{
+	preprocessor_defines NUM_LAYERS=8,SHADOW=1,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat7TextureDiffuse	int 14
+	}
+}
+
+fragment_program SplattingFp/8/NoShadows glsl : SplattingFp/7/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=8,SHADOW=0,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat7TextureDiffuse	int 9
+	}
+}
+
+fragment_program SplattingFp/8/Simple glsl : SplattingFp/7/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=8,SHADOW=0,NUM_LIGHTS=1,FOG=0
+	default_params {
+		param_named splat7TextureDiffuse	int 9
+	}
+}
+
+fragment_program SplattingFp/9 glsl : SplattingFp/8
+{
+	preprocessor_defines NUM_LAYERS=9,SHADOW=1,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat8TextureDiffuse	int 15
+	}
+}
+
+fragment_program SplattingFp/9/NoShadows glsl : SplattingFp/8/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=9,SHADOW=0,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat8TextureDiffuse	int 10
+	}
+}
+
+fragment_program SplattingFp/9/Simple glsl : SplattingFp/8/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=9,SHADOW=0,NUM_LIGHTS=1,FOG=0
+	default_params {
+		param_named splat8TextureDiffuse	int 10
+	}
+}
+
+fragment_program SplattingFp/10 glsl : SplattingFp/9
+{
+	preprocessor_defines NUM_LAYERS=10,SHADOW=1,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named coverageTexture3		int 16
+		param_named splat9TextureDiffuse	int 17
+	}
+}
+
+fragment_program SplattingFp/10/NoShadows glsl : SplattingFp/9/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=10,SHADOW=0,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named coverageTexture3		int 11
+		param_named splat9TextureDiffuse	int 12
+	}
+}
+
+fragment_program SplattingFp/10/Simple glsl : SplattingFp/9/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=10,SHADOW=0,NUM_LIGHTS=1,FOG=0
+	default_params {
+		param_named coverageTexture3		int 11
+		param_named splat9TextureDiffuse	int 12
+	}
+}
+
+fragment_program SplattingFp/11 glsl : SplattingFp/10
+{
+	preprocessor_defines NUM_LAYERS=11,SHADOW=1,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat10TextureDiffuse	int 18
+	}
+}
+
+fragment_program SplattingFp/11/NoShadows glsl : SplattingFp/10/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=11,SHADOW=0,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat10TextureDiffuse	int 13
+	}
+}
+
+fragment_program SplattingFp/11/Simple glsl : SplattingFp/10/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=11,SHADOW=0,NUM_LIGHTS=1,FOG=0
+	default_params {
+		param_named splat10TextureDiffuse	int 13
+	}
+}
+
+fragment_program SplattingFp/12 glsl : SplattingFp/11
+{
+	preprocessor_defines NUM_LAYERS=12,SHADOW=1,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat11TextureDiffuse	int 19
+	}
+}
+
+fragment_program SplattingFp/12/NoShadows glsl : SplattingFp/11/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=12,SHADOW=0,NUM_LIGHTS=3,FOG=1
+	default_params {
+		param_named splat11TextureDiffuse	int 14
+	}
+}
+
+fragment_program SplattingFp/12/Simple glsl : SplattingFp/11/NoShadows
+{
+	preprocessor_defines NUM_LAYERS=12,SHADOW=0,NUM_LIGHTS=1,FOG=0
+	default_params {
+		param_named splat11TextureDiffuse	int 14
+	}
+}

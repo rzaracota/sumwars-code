@@ -1,0 +1,32 @@
+material Ogre/DepthShadowmap/Caster/Float
+{
+	technique
+	{
+		pass
+		{
+			vertex_program_ref Ogre/DepthShadowmap/CasterVP
+			{
+			}
+			fragment_program_ref Ogre/DepthShadowmap/CasterFP
+			{
+			}
+		}
+	}
+}
+
+material Ogre/DepthShadowmap/Caster/Float/NoAlpha
+{
+	technique
+	{
+		pass
+		{
+			vertex_program_ref Ogre/DepthShadowmap/CasterVP/NoAlpha
+			{
+			}
+			fragment_program_ref Ogre/DepthShadowmap/CasterFP/NoAlpha
+			{
+			}
+		}
+	}
+}
+
