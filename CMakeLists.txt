@@ -481,10 +481,9 @@ TARGET_LINK_LIBRARIES(sumwars ${LINK_LIBS})
 IF(POST_BUILD_COPY)
   ADD_CUSTOM_COMMAND(TARGET sumwars
     POST_BUILD
-    COMMAND copy $(OutDir)$(TargetFileName) $(ProjectDir)$(TargetFileName)
+    COMMAND COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/sumwars ${CMAKE_SOURCE_DIR}
   )
 ENDIF(POST_BUILD_COPY)
-
 
 # install the application
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/sumwars"
