@@ -405,6 +405,11 @@ bool Application::init(char *argv)
 		return false;
 	}
 
+	ShaderManager *smanager = new ShaderManager();
+	smanager->setGraphicsLevel(ShaderManager::LEVEL_HIGH);
+	smanager->registerSceneManager(m_scene_manager);
+
+
 	//Gettext initialisieren
 	ret = initGettext();
 	if (ret==false)
@@ -878,9 +883,6 @@ bool Application::initOgre()
 	// Create the scene manager
 	m_scene_manager = m_ogre_root->createSceneManager (Ogre::ST_GENERIC, "DefaultSceneManager");
 
-	ShaderManager *smanager = new ShaderManager();
-	smanager->setGraphicsLevel(ShaderManager::LEVEL_HIGH);
-	smanager->registerSceneManager(m_scene_manager);
 
 	// Register as a Window listener
 	Ogre::WindowEventUtilities::addWindowEventListener (m_window, this);
