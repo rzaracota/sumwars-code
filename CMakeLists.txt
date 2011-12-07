@@ -32,7 +32,7 @@ OPTION(SUMWARS_NO_TINYXML "Do not use bundled, in-source TinyXML Lib" OFF)
 OPTION(SUMWARS_NO_ENET "Do not use bundled, in-source ENET Lib" OFF)
 OPTION(SUMWARS_BUILD_TOOLS "Builds editor tools (not needed for gameplay, only useful for content authors)" ON)
 OPTION(UPDATE_SUBVERSION_REVISION "Option to turn off automatic revision checking" ON)
-OPTION(POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" OFF)
+OPTION(SUMWARS_POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" OFF)
 
 if(UNIX)
   set(SUMWARS_EXECUTABLE_DEFAULT_DIR "bin")
@@ -478,12 +478,12 @@ ENDIF()
 
 TARGET_LINK_LIBRARIES(sumwars ${LINK_LIBS})
 
-IF(POST_BUILD_COPY)
+IF(SUMWARS_POST_BUILD_COPY)
   ADD_CUSTOM_COMMAND(TARGET sumwars
     POST_BUILD
     COMMAND COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/sumwars ${CMAKE_SOURCE_DIR}
   )
-ENDIF(POST_BUILD_COPY)
+ENDIF()
 
 # install the application
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/sumwars"
