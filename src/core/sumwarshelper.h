@@ -145,6 +145,12 @@ public:
 	 */
 	static Ogre::String userPath();
 
+	/**
+	 * \fn static Ogre::String savePath()
+	 * \brief Returns the directory with sumwars save files
+	 */
+	static Ogre::String savePath();
+
 
 	/**
 	 * \brief Gets the updated resolution string from a base resolution string.

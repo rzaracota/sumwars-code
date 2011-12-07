@@ -97,12 +97,6 @@ std::string SumwarsHelper::getStorageBasePath () const
 	return pathToUse;
 }
 
-
-
-/**
- * \fn static Ogre::String userPath()
- * \brief Returns the writable sumwars directory in the users directory
- */
 Ogre::String SumwarsHelper::userPath ()
 {
 	//Ogre::String path = PHYSFS_getUserDir ();
@@ -119,8 +113,10 @@ Ogre::String SumwarsHelper::userPath ()
 	return path;
 }
 
-
-
+Ogre::String SumwarsHelper::savePath ()
+{
+	return userPath() + "/save";
+}
 
 std::string SumwarsHelper::getUpdatedResolutionString (const std::string& initialString, int newWidth, int newHeight)
 {
