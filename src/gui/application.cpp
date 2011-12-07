@@ -21,7 +21,7 @@
 #include "music.h"
 #include "sumwarshelper.h"
 
-#ifdef BUILD_TOOLS
+#ifdef SUMWARS_BUILD_TOOLS
 #include "benchmarktab.h"
 #include "debugpanel.h"
 #include "iconeditortab.h"
@@ -1069,7 +1069,7 @@ bool Application::initCEGUI()
 	// eigene Factorys einfuegen
     CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("SumwarsTooltip", "DefaultWindow", "TaharezLook/CustomTooltip", "Falagard/Default");
 
-#ifdef BUILD_TOOLS
+#ifdef SUMWARS_BUILD_TOOLS
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<DebugCameraTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<GuiDebugTab> >();
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<IconEditorTab> >();
@@ -1156,7 +1156,7 @@ bool Application::createView()
 	DEBUG("create view\n");
 	m_main_window = new MainWindow(m_ogre_root, m_cegui_system,m_window,m_document);
 
-#ifdef BUILD_TOOLS
+#ifdef SUMWARS_BUILD_TOOLS
 	new DebugPanel();
 	DebugPanel::getSingleton().init(false);
 	new ContentEditor();
@@ -1320,9 +1320,8 @@ bool Application::loadResources(int datagroups)
 			updateStartScreen(0.6);
 		}
 		
-#ifdef BUILD_TOOLS
+#ifdef SUMWARS_BUILD_TOOLS
 		ContentEditor::getSingleton().fullUpdateComponent("ItemEditor");
-		
 #endif
 	}
 

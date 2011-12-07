@@ -11,7 +11,7 @@ override_dh_auto_configure:
 		-DCMAKE_BUILD_TYPE:STRING="Release" \
 		-DSUMWARS_NO_TINYXML:BOOL=ON \
 		-DSUMWARS_NO_ENET:BOOL=ON \
-		-DBUILD_TOOLS:BOOL=OFF
+		-DSUMWARS_BUILD_TOOLS:BOOL=OFF
 
 override_dh_auto_install:
 	dh_auto_install
