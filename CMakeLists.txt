@@ -238,6 +238,8 @@ SET(HEADER_FILES
   ./src/gui/tooltip.h
   ./src/gui/optionswindow.h
   ./src/gui/clipboard.h
+  ./src/gui/ShaderManager.h
+  ./src/gui/ShadowCameraSetup.h
 )
 
 IF(NO_TINYXML)
@@ -361,6 +363,8 @@ SET(SRCS
   ./src/gui/tooltip.cpp
   ./src/gui/optionswindow.cpp
   ./src/gui/clipboard.cpp
+  ./src/gui/ShaderManager.cpp
+  ./src/gui/ShadowCameraSetup.cpp
 )
  
 IF(BUILD_TOOLS)

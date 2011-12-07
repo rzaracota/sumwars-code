@@ -1,26 +1,10 @@
-material Lich
-{
-	technique
-	{
-		pass
-		{
-			ambient 0.8 0.8 0.8 1
-			diffuse 1 1 1 1
-			specular 0 0 0 6.05034
-			emissive 0 0 0
+import * from "base.material"
 
-			texture_unit
-			{
-				texture undead_color.png
-				tex_coord_set 0
-				colour_op modulate
-				scale 1 1
-				scroll 0 0
-				rotate 0
-			}
-		}
-	}
+material Lich : /base/simple
+{
+    set_texture_alias DiffuseMap undead_color.png
 }
+
 material blinn2
 {
 	technique

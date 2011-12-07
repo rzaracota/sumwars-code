@@ -1,17 +1,7 @@
-material shield
-{
-	technique
-	{
-		pass
-		{
-			lighting off
-			scene_blend add
-			depth_write off
+import * from "base.material"
 
-			texture_unit
-			{
-				texture shield.png
-			}
-		}
-	}
+material env_waldland : /base/simple
+{
+	set $scene_blend "add"
+    set_texture_alias DiffuseMap shield.png
 }

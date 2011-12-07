@@ -1,17 +1,6 @@
-material eye
-{
-	technique
-	{
-		pass
-		{
-			lighting off
-			scene_blend add
-			depth_write off
+import * from "base.material"
 
-			texture_unit
-			{
-				texture eye.png
-			}
-		}
-	}
+material eye : /base/simple/nonculled/alpharejected
+{
+    set_texture_alias DiffuseMap eye.png
 }

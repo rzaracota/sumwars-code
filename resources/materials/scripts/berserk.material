@@ -1,17 +1,6 @@
-material berserk
-{
-	technique
-	{
-		pass
-		{
-			lighting off
-			scene_blend alpha_blend
-			depth_write off
+import * from "base.material"
 
-			texture_unit
-			{
-				texture berserk.png
-			}
-		}
-	}
+material berserk : /base/simple/nonculled/alphablended
+{
+    set_texture_alias DiffuseMap berserk.png
 }

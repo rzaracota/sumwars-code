@@ -1,3 +1,5 @@
+import * from "base.material"
+
 material env_nightsky
 {
 	technique
@@ -14,26 +16,8 @@ material env_nightsky
 	}
 }
 
-material env_waldland
+material TestCubeThing : /base/normalmap
 {
-	technique
-	{
-		pass
-		{
-			ambient 0.5 0.5 0.5 1
-			diffuse 1 1 1 1
-			specular 0 0 0 1
-			emissive 0 0 0
-
-			texture_unit
-			{
-				texture env_grassland.png
-				tex_coord_set 0
-				colour_op modulate
-				scale 1 1
-				scroll 0 0
-				rotate 0
-			}
-		}
-	}
+    set_texture_alias DiffuseMap env_grassland.png
+	set_texture_alias NormalHeightMap waveNM.png
 }

@@ -1,23 +1,6 @@
-material circle
-{
-	technique
-	{
-		pass
-		{
-			ambient 1 1 1 1
-			diffuse 1 1 1 1
-			specular 0 0 0 1
-			emissive 0 0 0
+import * from "base.material"
 
-			texture_unit
-			{
-				texture leinen_weinrot.jpg
-				tex_coord_set 0
-				colour_op modulate
-				scale 1 1
-				scroll 0 0
-				rotate 0
-			}
-		}
-	}
+material circle : /base/simple/nonculled/alpharejected
+{
+    set_texture_alias DiffuseMap Pfeil_0005.gif
 }

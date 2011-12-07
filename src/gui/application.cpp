@@ -20,6 +20,7 @@
 #include "templateloader.h"
 #include "music.h"
 #include "sumwarshelper.h"
+#include "ShaderManager.h"
 
 #ifdef BUILD_TOOLS
 #include "benchmarktab.h"
@@ -180,7 +181,8 @@ bool Application::init(char *argv)
 		}
 	}
 
-	if(!PHYSFS_exists(".sumwars/plugins.cfg"))
+#ifndef _DEBUG
+    if(!PHYSFS_exists(".sumwars/plugins.cfg"))
 	{
 		TCHAR szPath[MAX_PATH];
 
@@ -217,6 +219,45 @@ bool Application::init(char *argv)
 			printf("Could not write file %s; error : %s\n", pluginFile.c_str (), PHYSFS_getLastError());
 		}
 	}
+#else
+    if(!PHYSFS_exists(".sumwars/plugins_d.cfg"))
+    {
+        TCHAR szPath[MAX_PATH];
+
+        if( !GetModuleFileName( NULL, szPath, MAX_PATH ) )
+        {
+            printf("Cannot retrieve module path (%d)\n", GetLastError());
+            return false;
+        }
+
+        std::string path(szPath);
+        path.erase(path.size() - 11, path.size());
+
+        std::string pluginFile (".sumwars/plugins_d.cfg");
+
+        PHYSFS_file* pluginsFile = PHYSFS_openWrite(pluginFile.c_str ());
+        if (0 != pluginsFile)
+        {
+            std::string str = "# Defines plugins to load\n"
+                                "# Define plugin folder\n"
+                                "PluginFolder=";
+            str.append(path).append("\n\n");
+            str.append(		  "# Define plugins\n"
+                                "Plugin=RenderSystem_Direct3D9_d\n"
+                                "Plugin=RenderSystem_GL_d\n"
+                                "Plugin=Plugin_ParticleFX_d\n"
+                                "Plugin=Plugin_OctreeSceneManager_d\n"
+                                "Plugin=Plugin_CgProgramManager_d\n");
+
+            PHYSFS_write(pluginsFile, str.c_str(), sizeof(char), str.size());
+            PHYSFS_close(pluginsFile);
+        }
+        else
+        {
+            printf("Could not write file %s; error : %s\n", pluginFile.c_str (), PHYSFS_getLastError());
+        }
+    }
+#endif
 
 
 
@@ -308,7 +349,9 @@ bool Application::init(char *argv)
 	// Ogre Root erzeugen
 	// pluginfile: plugins.cfg
 	// configfile: keines
-#if defined (_WIN32)
+#if defined (_WIN32) && (_DEBUG)
+	m_ogre_root = new Ogre::Root (operationalPath + "/plugins_d.cfg", operationalPath + "/ogre.cfg", operationalPath + "/ogre.log");
+#elif (WIN32)
 	m_ogre_root = new Ogre::Root (operationalPath + "/plugins.cfg", operationalPath + "/ogre.cfg", operationalPath + "/ogre.log");
 #elif defined (__APPLE__)
 	Ogre::String plugins = 
@@ -835,58 +878,9 @@ bool Application::initOgre()
 	// Create the scene manager
 	m_scene_manager = m_ogre_root->createSceneManager (Ogre::ST_GENERIC, "DefaultSceneManager");
 
-#ifndef DONT_USE_SHADOWS
-	// TODO: the order in which the settings are loaded is wrong. Fix it! The options file is loaded after OGRE is initialized, 
-	// but data is needed NOW, when we're doing the initialization.
-
-	int shadowMode = Options::getInstance ()->getShadowMode ();
-
-	if (shadowMode > 0)
-	{
-		switch (shadowMode)
-		{
-		case 2:
-			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-			break;
-		case 3:
-			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
-			break;
-		case 4:
-			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);
-			break;
-		case 1:
-		default:
-			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
-			break;
-		}
-	}
-	else
-	{
-		m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_NONE);
-	}
-
-	m_scene_manager->setShadowFarDistance (45);
-	m_scene_manager->setShadowColour( Ogre::ColourValue(0.4, 0.4, 0.4) );
-
-    /*// set Shadows enabled before any mesh is loaded
-	m_scene_manager->setShadowTextureSelfShadow(false);
-	m_scene_manager->setShadowTextureConfig(0,2048,2048,Ogre::PF_X8R8G8B8);
-*/
-
-	// If we can use texture sizes BIGGER than the window size, specify the settings...
-	// This difference may come up most often due to the D3D/OpenGL support.
-	if (m_ogre_root->getRenderSystem()->getCapabilities()->hasCapability(Ogre::RSC_HWRENDER_TO_TEXTURE))
-    {
-        // In D3D, use a 1024x1024 shadow texture
-		m_scene_manager->setShadowTextureSettings(1024, 2);
-    }
-    else
-    {
-        // Use 256x256 texture in GL since we can't go higher than the window res
-		// Make sure you use a resolution higher than this!
-        m_scene_manager->setShadowTextureSettings(256, 2);
-    }
-#endif // DONT_USE_SHADOWS
+	ShaderManager *smanager = new ShaderManager();
+	smanager->setGraphicsLevel(ShaderManager::LEVEL_HIGH);
+	smanager->registerSceneManager(m_scene_manager);
 
 	// Register as a Window listener
 	Ogre::WindowEventUtilities::addWindowEventListener (m_window, this);

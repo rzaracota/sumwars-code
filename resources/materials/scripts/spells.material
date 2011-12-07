@@ -1,3 +1,5 @@
+import * from "base.material"
+
 material Flare
 {
 	technique
