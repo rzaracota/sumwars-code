@@ -1,0 +1,823 @@
+//This file contains base material from which other materials can inherit. While optional, it's very, very much encouraged that all materials inherit from these.
+//By inheriting any of these materials the material will automatically get support for shadows, LOD, minimap etc.
+//Also note that these material represents the most common combinations (for example "/base/simple/nonculled/alphablended" which is a simple material, non culled and with alpha blending).
+//However, it's very much possible to extend the base materials in the final material, for example adding alpha rejection to the aforementioned one.
+
+
+//A simple material containing a simple diffuse map.
+material /base/simple
+{
+	// Ogre defaults
+	set $culling_hw "clockwise"
+	set $culling_sw "back"
+	set $alpha_reject "always_pass"
+	set $scene_blend "one zero"
+	set $alpha_to_coverage "off"
+	set $shadow_caster_material "Ogre/DepthShadowmap/Caster/Float/NoAlpha"
+	set $specular "0.0 0.0 0.0 0"
+	set $tex_address_mode "wrap"
+
+	technique GeneralHigh
+	{
+		scheme High
+		shadow_caster_material $shadow_caster_material
+		pass Main
+		{
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			specular $specular
+			vertex_program_ref Lighting/ShadowVp
+			{
+			}
+			fragment_program_ref Lighting/ShadowFp
+			{
+			}
+			texture_unit DiffuseMap
+			{
+				texture_alias DiffuseMap
+				tex_address_mode $tex_address_mode
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+		}
+	}
+
+	technique GeneralMedium
+	{
+		scheme Medium
+		shadow_caster_material $shadow_caster_material
+		pass Main
+		{
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			specular $specular
+			vertex_program_ref Lighting/SimpleVp
+			{
+			}
+			fragment_program_ref Lighting/SimpleFp
+			{
+			}
+			texture_unit DiffuseMap
+			{
+				texture_alias DiffuseMap
+				tex_address_mode $tex_address_mode
+			}
+		}
+	}
+
+	technique GeneralLow
+	{
+		scheme Low
+		shadow_caster_material ""
+		pass Main
+		{
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			specular $specular
+			texture_unit DiffuseMap
+			{
+				texture_alias DiffuseMap
+				tex_address_mode $tex_address_mode
+			}
+		}
+	}
+
+	technique GeneralFallback
+	{
+		scheme Fallback
+		shadow_caster_material ""
+		pass Main
+		{
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			specular $specular
+			texture_unit DiffuseMap
+			{
+				texture_alias DiffuseMap
+				tex_address_mode $tex_address_mode
+			}
+		}
+	}
+}
+
+//Just like the /base/simple material, but without culling.
+material /base/simple/nonculled : /base/simple
+{
+	set $culling_sw "none"
+	set $culling_hw "none"
+}
+
+//Just like the /base/simple material, but without culling and with alpha blending.
+//Useful for semi transparent materials.
+
+material /base/simple/nonculled/alphablended : /base/simple/nonculled
+{
+	set $scene_blend "alpha_blend"
+	set $shadow_caster_material "Ogre/DepthShadowmap/Caster/Float"
+}
+
+//Just like the /base/simple material, but without culling and with alpha rejection.
+//Useful for clothes and leaves.
+material /base/simple/nonculled/alpharejected : /base/simple/nonculled
+{
+	set $alpha_reject "greater_equal 64"
+	set $shadow_caster_material "Ogre/DepthShadowmap/Caster/Float"
+}
+
+
+//A standard normal mapped material. The "NormalHeightMap" texture should contain the normal in the RBG components and the height in the alpha-component.
+material /base/normalmap
+{
+	// Use the normal mapped techniques for things that are closer than 30 meters, then use a basic one
+	lod_distances 30
+
+	set $scaleBias "0.1 -0.05"
+
+	// Ogre defaults
+	set $culling_hw "clockwise"
+	set $culling_sw "back"
+	set $alpha_reject "always_pass"
+	set $scene_blend "one zero"
+	set $alpha_to_coverage "off"
+	set $shadow_caster_material "Ogre/DepthShadowmap/Caster/Float/NoAlpha"
+	set $tex_address_mode "wrap"
+
+	// Offset mapping
+	technique NormalMapped
+	{
+		scheme High
+		lod_index 0
+		shadow_caster_material $shadow_caster_material
+		pass Main
+		{
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			vertex_program_ref Lighting/OffsetMapping/ShadowVp
+			{
+			}
+			fragment_program_ref Lighting/OffsetMapping/ShadowFp
+			{
+				param_named scaleBias float2 $scaleBias
+			}
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+			texture_unit NormalHeightMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+		}
+	}
+
+	// Light version of offset mapping
+	technique NormalMappedSimple
+	{
+		scheme Medium
+		shadow_caster_material $shadow_caster_material
+		lod_index 0
+		pass Main
+		{
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			vertex_program_ref Lighting/OffsetMappingVp
+			{
+			}
+			fragment_program_ref Lighting/OffsetMapping/SimpleFp
+			{
+				param_named scaleBias float2 $scaleBias
+			}
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+			texture_unit NormalHeightMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+		}
+	}
+
+	// No shader fallback
+	technique NormalMappedFallback
+	{
+		scheme Low
+		shadow_caster_material ""
+		lod_index 0
+		pass Main
+		{
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+		}
+	}
+
+	// No shader fallback
+	technique NormalMappedFallback
+	{
+		scheme Fallback
+		shadow_caster_material ""
+		lod_index 0
+		pass Main
+		{
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+		}
+	}
+
+	// Non-normal mapped technique in distance
+	technique GeneralDistance
+	{
+		scheme High
+		shadow_caster_material $shadow_caster_material
+		lod_index 1
+		pass Main
+		{
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			vertex_program_ref Lighting/ShadowVp
+			{
+			}
+			fragment_program_ref Lighting/ShadowFp
+			{
+			}
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+		}
+	}
+
+	// Non-normal mapped technique in distance
+	technique GeneralDistance
+	{
+		scheme Medium
+		shadow_caster_material $shadow_caster_material
+		lod_index 1
+		pass Main
+		{
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			vertex_program_ref Lighting/SimpleVp
+			{
+			}
+			fragment_program_ref Lighting/SimpleFp
+			{
+			}
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+		}
+	}
+
+	// No shader fallback
+	technique Fallback
+	{
+		scheme Low
+		shadow_caster_material ""
+		lod_index 1
+		pass Main
+		{
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+		}
+	}
+
+	// No shader fallback
+	technique Fallback
+	{
+		scheme Fallback
+		shadow_caster_material ""
+		lod_index 1
+		pass Main
+		{
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+		}
+	}
+}
+
+//A normal mapped material with an added specular texture.
+material /base/normalmap/specular
+{
+	// Use the normal mapped techniques for things that are closer than 30 meters, then use a basic one
+	lod_distances 30
+
+	set $scaleBias "0.1 -0.05"
+	set $specular "0.0 0.0 0.0 32"
+
+	// Ogre defaults
+	set $culling_hw "clockwise"
+	set $culling_sw "back"
+	set $alpha_reject "always_pass"
+	set $scene_blend "one zero"
+	set $alpha_to_coverage "off"
+	set $shadow_caster_material "Ogre/DepthShadowmap/Caster/Float/NoAlpha"
+	set $tex_address_mode "wrap"
+
+	// Offset mapping
+	technique NormalMapped
+	{
+		scheme High
+		shadow_caster_material $shadow_caster_material
+		lod_index 0
+		pass Main
+		{
+			specular $specular
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			vertex_program_ref Lighting/OffsetMapping/ShadowVp
+			{
+			}
+			fragment_program_ref Lighting/OffsetMapping/Specular/ShadowFp
+			{
+				param_named scaleBias float2 $scaleBias
+			}
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+			texture_unit SpecularMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+			texture_unit NormalHeightMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+		}
+	}
+
+	// Light version of offset mapping
+	technique NormalMappedSimple
+	{
+		scheme Medium
+		shadow_caster_material $shadow_caster_material
+		lod_index 0
+		pass Main
+		{
+			specular $specular
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			vertex_program_ref Lighting/OffsetMappingVp
+			{
+			}
+			fragment_program_ref Lighting/OffsetMapping/SimpleFp
+			{
+				param_named scaleBias float2 $scaleBias
+			}
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+			texture_unit NormalHeightMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+		}
+	}
+
+	// No shader fallback
+	technique NormalMappedFallback
+	{
+		scheme Low
+		shadow_caster_material ""
+		lod_index 0
+		pass Main
+		{
+			specular $specular
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+		}
+	}
+
+	// No shader fallback
+	technique NormalMappedFallback
+	{
+		scheme Fallback
+		shadow_caster_material ""
+		lod_index 0
+		pass Main
+		{
+			specular $specular
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+		}
+	}
+
+	// Non-normal mapped technique in distance
+	technique GeneralDistance
+	{
+		scheme High
+		shadow_caster_material $shadow_caster_material
+		lod_index 1
+		pass Main
+		{
+			specular $specular
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			alpha_to_coverage $alpha_to_coverage
+			vertex_program_ref Lighting/ShadowVp
+			{
+			}
+			fragment_program_ref Lighting/Specular/ShadowFp
+			{
+			}
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+			texture_unit SpecularMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+			texture_unit
+			{
+				tex_address_mode border
+				tex_border_colour 1 1 1 1
+				content_type shadow
+			}
+		}
+	}
+
+	// Light version of non-normal mapped technique
+	technique GeneralDistanceSimple
+	{
+		scheme Medium
+		shadow_caster_material $shadow_caster_material
+		lod_index 1
+		pass Main
+		{
+			specular $specular
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			vertex_program_ref Lighting/SimpleVp
+			{
+			}
+			fragment_program_ref Lighting/SimpleFp
+			{
+			}
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+		}
+	}
+
+	// No shader fallback
+	technique Fallback
+	{
+		scheme Low
+		shadow_caster_material ""
+		lod_index 1
+		pass Main
+		{
+			specular $specular
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+		}
+	}
+
+	// No shader fallback
+	technique Fallback
+	{
+		scheme Fallback
+		shadow_caster_material ""
+		lod_index 1
+		pass Main
+		{
+			specular $specular
+			cull_hardware $culling_hw
+			cull_software $culling_sw
+			alpha_rejection $alpha_reject
+			scene_blend $scene_blend
+			alpha_to_coverage $alpha_to_coverage
+			texture_unit DiffuseMap
+			{
+				tex_address_mode $tex_address_mode
+			}
+		}
+	}
+}
+
+//A normalmapped material which isn't culled.
+material /base/normalmap/nonculled : /base/normalmap
+{
+	set $culling_sw "none"
+	set $culling_hw "none"
+}
+
+//A normalmapped material which isn't culled and has alpha rejection.
+//Useful for foliage or any other material which has holes in it and is two-sided.
+material /base/normalmap/nonculled/alpharejected : /base/normalmap/nonculled
+{
+	set $alpha_reject "greater_equal 128"
+	set $shadow_caster_material "Ogre/DepthShadowmap/Caster/Float"
+}
+
+//A normalmapped material with a specular texture which isn't culled.
+material /base/normalmap/specular/nonculled : /base/normalmap/specular
+{
+	set $culling_sw "none"
+	set $culling_hw "none"
+}
+
+//A normalmapped material with a specular texture which isn't culled and has alpha rejection.
+//Useful for foliage or any other material which has holes in it and is two-sided.
+material /base/normalmap/specular/nonculled/alpharejected : /base/normalmap/specular/nonculled
+{
+	set $alpha_reject "greater_equal 128"
+	set $shadow_caster_material "Ogre/DepthShadowmap/Caster/Float"
+}
+
+//A normalmapped material with a specular texture which has alpha rejection.
+//Useful for any material which has holes in it, but isn't two sided.
+material /base/normalmap/specular/alpharejected : /base/normalmap/specular
+{
+	set $alpha_reject "greater_equal 128"
+	set $shadow_caster_material "Ogre/DepthShadowmap/Caster/Float"
+}
+
+//A normalmapped material with a specular texture which isn't culled and has alpha blending.
+//Useful for any material which is two-sided and semi-transparent.
+material /base/normalmap/specular/nonculled/alphablended : /base/normalmap/specular/nonculled
+{
+	set $scene_blend "alpha_blend"
+	set $shadow_caster_material "Ogre/DepthShadowmap/Caster/Float"
+}
+
+
+//Base material for waving grass
+material /base/wavinggrass
+{
+
+	// Vertex program waving grass
+	technique
+	{
+		pass Main
+		{
+			vertex_program_ref Field/GrassFaderVp
+			{
+				param_named_auto worldViewProj worldviewproj_matrix
+				param_named_auto ambient ambient_light_colour
+				param_named_auto objSpaceLight light_position_object_space 0
+				param_named_auto lightColour light_diffuse_colour 0
+				param_named_auto offset custom 999
+			}
+			alpha_rejection greater_equal 64
+			scene_blend alpha_blend
+			cull_hardware none
+			cull_software none
+
+			// Base diffuse texture map
+			texture_unit DiffuseMap
+			{
+				texture_alias DiffuseMap
+			}
+		}
+	}
+
+	//receive_shadows off
+	technique
+	{
+		pass Main
+		{
+			scene_blend alpha_blend
+			cull_hardware none
+			cull_software none
+			alpha_rejection greater_equal 64
+			// Base diffuse texture map
+			texture_unit DiffuseMap
+			{
+				texture_alias DiffuseMap
+			}
+		}
+	}
+
+}
+
