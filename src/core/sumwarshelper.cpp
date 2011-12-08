@@ -21,8 +21,7 @@ template<> SumwarsHelper* Ogre::Singleton<SumwarsHelper>::ms_Singleton = 0;
 /**
  * Constructor; will call the init function.
  */
-SumwarsHelper::SumwarsHelper ()
-	: portable_ (false)
+SumwarsHelper::SumwarsHelper()
 {
 	init ();
 }
@@ -41,12 +40,6 @@ void SumwarsHelper::init ()
 	// Feature to allow some settings to be pre-loaded from a different config file:
 	// see getPreloadConfigFile.
 	supportedFeatures_.push_back ("allows-preload");
-
-	// Feature that allows the game to run in a portable mode (E.g. just like on a USB drive)
-	// This requires that no data is stored anywhere outside the portable folder.
-	// This will typically be the same folder from where the exe is running.
-	supportedFeatures_.push_back ("portable-mode");
-
 #elif defined (__unix__)
 #elif defined (__APPLE__)
 #endif
@@ -84,23 +77,21 @@ std::string SumwarsHelper::getPreloadFileName () const
 /**
  * \brief Get the path to use for storage.
  */
-std::string SumwarsHelper::getStorageBasePath () const
+const std::string& SumwarsHelper::getStorageBasePath () const
 {
-	std::string pathToUse (PHYSFS_getUserDir ());
+#ifdef SUMWARS_PORTABLE_MODE
+	static std::string ret(PHYSFS_getBaseDir());
+#else
+	static std::string ret(PHYSFS_getUserDir());
+#endif
 
-	// For portable applications, the default folder is the exe folder.
-	if (portable_)
-	{
-		pathToUse = PHYSFS_getBaseDir ();
-	}
-
-	return pathToUse;
+	return ret;
 }
 
 Ogre::String SumwarsHelper::userPath ()
 {
 	//Ogre::String path = PHYSFS_getUserDir ();
-	Ogre::String path = SumwarsHelper::getSingletonPtr ()->getStorageBasePath ();
+	Ogre::String path = "";
 	
 #if defined (_WIN32)
 	path.append(".sumwars");

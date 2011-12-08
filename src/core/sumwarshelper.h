@@ -46,13 +46,6 @@ protected:
 	// A list of supported features.
 	std::vector <std::string> supportedFeatures_;
 
-	// TODO: for now, we only have the portable flag as a preload option.
-	// If more options are added, make a mapping to all pre-load options (including portable)
-	// and use it in a consistent manner.
-
-	// Specify whether the folders to use for storing data are used in a portable manner.
-	bool portable_;
-
 public:
 	/**
 	 * Constructor; will call the init function.
@@ -77,21 +70,10 @@ public:
 	 */
 	std::string getPreloadFileName () const;
 
-
-	/**
-	 * \brief Getter for the portable option.
-	 */
-	bool isPortable () const { return portable_; }
-
-	/**
-	 * \brief Setter for the portable option.
-	 */
-	void setPortable (bool newValue) { portable_ = newValue; }
-
 	/**
 	 * \brief Get the path to use for storage.
 	 */
-	std::string getStorageBasePath () const;
+	const std::string& getStorageBasePath () const;
 
 
 	/**

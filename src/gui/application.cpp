@@ -104,17 +104,7 @@ bool Application::init(char *argv)
 		{
 			cf.load (preloadFileName.c_str ());
 
-			if (SumwarsHelper::getSingletonPtr ()->hasFeature ("portable-mode"))
-			{
-				Ogre::String portableOption = cf.getSetting ("portable", "", "");
-				bool isPortable = false;
-				if (portableOption == "true" || portableOption == "True" || portableOption == "TRUE" || portableOption == "1")
-				{
-					isPortable = true;
-				}
-
-				SumwarsHelper::getSingletonPtr ()->setPortable (isPortable);
-			}
+			// NB: portable mode was here, moved to configure step
 		}
 		catch (std::exception&)
 		{
