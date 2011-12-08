@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 project(SUMWARS)
 
+MESSAGE(STATUS "")
 MESSAGE(STATUS "### Welcome to Summoning Wars build system ###")
 MESSAGE(STATUS "**********************************************")
 MESSAGE(STATUS "  http://sumwars.org/wiki/Build_instructions  ")
@@ -11,6 +12,7 @@ OPTION(SUMWARS_NO_ENET "Do not use bundled, in-source ENET Lib" OFF)
 OPTION(SUMWARS_BUILD_TOOLS "Builds editor tools (not needed for gameplay, only useful for content authors)" ON)
 OPTION(SUMWARS_UPDATE_HG_REVISION "Option to enable or disable automatic revision checking" ON)
 OPTION(SUMWARS_POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" OFF)
+OPTION(SUMWARS_STANDALONE_MODE "(Highly recommended for deployment on Windows and MacOSX) In case this is enabled, all paths (share, doc, bin) are set to be relative." OFF)
 
 IF(SUMWARS_UPDATE_HG_REVISION)
     FIND_PROGRAM(Mercurial_EXECUTABLE hg)
@@ -42,7 +44,7 @@ else()
   set(SUMWARS_EXECUTABLE_DEFAULT_DIR "")
 endif()
 
-SET(SUMWARS_EXECUTABLE_DIR "${SUMWARS_EXECUTABLE_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars executable, CMAKE_INSTALL_PREFIX gets prepended!")
+SET(SUMWARS_EXECUTABLE_DIR "${SUMWARS_EXECUTABLE_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars executable, CMAKE_INSTALL_PREFIX gets prepended! (Only applies when SUMWARS_STANDALONE_MODE is OFF)")
 
 if(UNIX)
   set(SUMWARS_SHARE_DEFAULT_DIR "share/sumwars")
@@ -50,7 +52,7 @@ else()
   set(SUMWARS_SHARE_DEFAULT_DIR "share")
 endif()
 
-SET(SUMWARS_SHARE_DIR "${SUMWARS_SHARE_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars data, CMAKE_INSTALL_PREFIX gets prepended!")
+SET(SUMWARS_SHARE_DIR "${SUMWARS_SHARE_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars data, CMAKE_INSTALL_PREFIX gets prepended! (Only applies when SUMWARS_STANDALONE_MODE is OFF)")
 
 if(UNIX)
   set(SUMWARS_DOC_DEFAULT_DIR "share/doc/sumwars-${SUMWARS_SHORT_VERSION}")
@@ -58,7 +60,7 @@ else()
   set(SUMWARS_DOC_DEFAULT_DIR "doc")
 endif()
 
-SET(SUMWARS_DOC_DIR "${SUMWARS_DOC_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars documentation, CMAKE_INSTALL_PREFIX gets prepended!")
+SET(SUMWARS_DOC_DIR "${SUMWARS_DOC_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars documentation, CMAKE_INSTALL_PREFIX gets prepended! (Only applies when SUMWARS_STANDALONE_MODE is OFF)")
 
 IF( NOT CMAKE_BUILD_TYPE )
   # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
@@ -70,6 +72,26 @@ ENDIF()
 MESSAGE(STATUS "Build type: " ${CMAKE_BUILD_TYPE})
 # separating newline before configuration really happens
 MESSAGE(STATUS "")
+
+IF( SUMWARS_STANDALONE_MODE )
+  MESSAGE("Standalone mode enabled, I am overriding all paths!")
+  
+  # In case of a standalone mode, we override all paths to our hardcoded, arbitrarily chosen values.
+  # There is no point in making these customisable, I think.
+  
+  SET(CMAKE_INSTALL_PREFIX "./")
+  
+  SET(SUMWARS_EXECUTABLE_DIR "./")
+  SET(SUMWARS_SHARE_DIR "./share")
+  SET(SUMWARS_DOC_DIR "./")
+  
+  # We recommend enable post build copy since that will make it run immediately after building
+  IF ( NOT SUMWARS_POST_BUILD_COPY )
+    MESSAGE(STATUS "You might be interested in turning SUMWARS_POST_BUILD_COPY ON to make sumwars run immediately after building from the source folder.")
+  ENDIF()
+  
+  MESSAGE(STATUS "")
+ENDIF()
 
 SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules/;${CMAKE_MODULE_PATH}")
 
