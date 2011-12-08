@@ -1,22 +1,24 @@
 cmake_minimum_required(VERSION 2.6)
 project(SUMWARS)
 
-IF(UPDATE_SUBVERSION_REVISION)
-    FIND_PROGRAM(Subversion_SVN_EXECUTABLE svn)
+OPTION(SUMWARS_NO_TINYXML "Do not use bundled, in-source TinyXML Lib" OFF)
+OPTION(SUMWARS_NO_ENET "Do not use bundled, in-source ENET Lib" OFF)
+OPTION(SUMWARS_BUILD_TOOLS "Builds editor tools (not needed for gameplay, only useful for content authors)" ON)
+OPTION(SUMWARS_UPDATE_HG_REVISION "Option to enable or disable automatic revision checking" ON)
+OPTION(SUMWARS_POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" OFF)
+
+IF(SUMWARS_UPDATE_HG_REVISION)
+    FIND_PROGRAM(Mercurial_EXECUTABLE hg)
 
     SET(Project_WC_REVISION "unknown")
 
-#IF(Subversion_SVN_EXECUTABLE)
-#    EXECUTE_PROCESS(WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-#                    COMMAND ${Subversion_SVN_EXECUTABLE} info
-#                    RESULT_VARIABLE ret_var
-#                    OUTPUT_VARIABLE output_var
-#    )
-#    STRING(REGEX REPLACE "^(.*\n)?Revision: ([^\n]+).*"
-#        "\\2" Project_WC_REVISION "${output_var}")
-#ENDIF(Subversion_SVN_EXECUTABLE)
-
-ENDIF(UPDATE_SUBVERSION_REVISION)
+    IF(Mercurial_EXECUTABLE)
+        EXECUTE_PROCESS(WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+                        COMMAND ${Mercurial_EXECUTABLE} log -l 1 --template "{node|short}"
+                        OUTPUT_VARIABLE Project_WC_REVISION
+        )
+    ENDIF()
+ENDIF()
 
 SET(SUMWARS_VERSION_MAJOR "0")
 SET(SUMWARS_VERSION_MINOR "5")
@@ -27,12 +29,6 @@ SET(SUMWARS_VERSION "${SUMWARS_VERSION_MAJOR}.${SUMWARS_VERSION_MINOR}.${SUMWARS
 MESSAGE("SUMWARS_VERSION: " ${SUMWARS_VERSION})
 
 CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/src/gui/version.h.in" "${PROJECT_SOURCE_DIR}/src/gui/version.h")
-
-OPTION(SUMWARS_NO_TINYXML "Do not use bundled, in-source TinyXML Lib" OFF)
-OPTION(SUMWARS_NO_ENET "Do not use bundled, in-source ENET Lib" OFF)
-OPTION(SUMWARS_BUILD_TOOLS "Builds editor tools (not needed for gameplay, only useful for content authors)" ON)
-OPTION(UPDATE_SUBVERSION_REVISION "Option to turn off automatic revision checking" ON)
-OPTION(SUMWARS_POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" OFF)
 
 if(UNIX)
   set(SUMWARS_EXECUTABLE_DEFAULT_DIR "bin")
