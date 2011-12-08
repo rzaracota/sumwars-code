@@ -24,4 +24,6 @@
 #   define SUMWARS_OGRE_PLUGIN_OCTREESCENEMANAGER_LIB "@OGRE_Plugin_OctreeSceneManager_LIBRARY_REL@"
 #endif
 
+#cmakedefine SUMWARS_PORTABLE_MODE
+
 #endif
