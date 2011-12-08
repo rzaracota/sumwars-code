@@ -61,8 +61,12 @@ endif()
 SET(SUMWARS_DOC_DIR "${SUMWARS_DOC_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars documentation, CMAKE_INSTALL_PREFIX gets prepended!")
 
 IF( NOT CMAKE_BUILD_TYPE )
+  # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
+  # differentiation between debug and release builds.
+
   SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
 ENDIF()
+
 MESSAGE(STATUS "Build type: " ${CMAKE_BUILD_TYPE})
 # separating newline before configuration really happens
 MESSAGE(STATUS "")
@@ -77,18 +81,11 @@ IF(UNIX)
   SET(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
 ENDIF(UNIX)
 
-IF (CMAKE_BUILD_TYPE STREQUAL "")
-  # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
-  # differentiation between debug and release builds.
-  SET(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose the type of build, options are: None (CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel." FORCE)
-ENDIF()
-
 SET(CMAKE_DEBUG_POSTFIX "_d")
 
 if(NOT CMAKE_INSTALL_PREFIX)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
 endif()
-
 
 FIND_PACKAGE(OGRE REQUIRED)
 IF(NOT "${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
