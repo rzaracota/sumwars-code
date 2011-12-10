@@ -125,7 +125,7 @@ void ShadowCameraSetup::Config_ShadowTextureSize(int textureSize)
 	}
 	catch (const std::exception& ex) 
 	{
-				ERRORMSG ("Caught exception when setting shadow texture size: [%s]", ex);
+		ERRORMSG ("Caught exception when setting shadow texture size: [%s]", ex.what());
 	}
 }
 
@@ -143,7 +143,7 @@ void ShadowCameraSetup::Config_ShadowSplitPoints(int a, int b, int c, int d)
 	} 
 	catch (const std::exception& ex) 
 	{
-		ERRORMSG ("Caught exception when setting shadow split points: [%s]", ex);
+		ERRORMSG ("Caught exception when setting shadow split points: [%s]", ex.what());
 	}
 }
 
@@ -155,7 +155,7 @@ void ShadowCameraSetup::Config_ShadowSplitPadding(float padding)
 	}
 	catch (const std::exception& ex) 
 	{
-		ERRORMSG("Caught exception when setting shadow split padding: [%s]", ex);
+		ERRORMSG("Caught exception when setting shadow split padding: [%s]", ex.what());
 	}
 }
 
@@ -169,7 +169,7 @@ void ShadowCameraSetup::Config_ShadowOptimalAdjustFactors(float a, float b, floa
 	} 
 	catch (const std::exception& ex) 
 	{
-		ERRORMSG("Caught exception when setting optimal shadow adjust factors: [%s]", ex);
+		ERRORMSG("Caught exception when setting optimal shadow adjust factors: [%s]", ex.what());
 	}
 }
 
@@ -181,7 +181,7 @@ void ShadowCameraSetup::Config_ShadowUseAggressiveFocusRegion(bool useAggressive
 	} 
 	catch (const std::exception& ex)
 	{
-		ERRORMSG("Caught exception when shadow use aggressive focus region: [%s]", ex);
+		ERRORMSG("Caught exception when shadow use aggressive focus region: [%s]", ex.what());
 	}
 }
 
@@ -193,7 +193,7 @@ void ShadowCameraSetup::Config_ShadowFarDistance(float dist)
 	} 
 	catch (const std::exception& ex)
 	{
-		ERRORMSG("Caught exception when setting shadow far distance: [%s]", ex);
+		ERRORMSG("Caught exception when setting shadow far distance: [%s]", ex.what());
 	}
 }
 
@@ -205,6 +205,6 @@ void ShadowCameraSetup::Config_ShadowRenderBackfaces(bool renderBackfaces)
 	} 
 	catch (const std::exception& ex) 
 	{
-		ERRORMSG("Caught exception when setting shadow render back faces: [%s]", ex);
+		ERRORMSG("Caught exception when setting shadow render back faces: [%s]", ex.what());
 	}
 }
