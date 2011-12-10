@@ -53,7 +53,7 @@
 /**
 	Application constructor. Will call the init function.
 */
-Application::Application(char *argv)
+Application::Application()
 {
 	// Initialize application variables
 	m_main_window = 0;
@@ -65,7 +65,7 @@ Application::Application(char *argv)
 	// Call the specialized initialization function.
 	try
 	{
-		ret = init(argv);
+		ret = init();
 	}
 	catch (std::exception &e)
 	{
@@ -79,17 +79,8 @@ Application::Application(char *argv)
 	}
 }
 
-
-
-bool Application::init(char *argv)
+bool Application::init()
 {
-	// Initialise the PHYSFS library
-	if (PHYSFS_init (argv) == 0)
-	{
-		printf("PHYSFS_init failed: %s\n", PHYSFS_getLastError ());
-		return false;
-	}
-
 	// Create the sumwars helper singleton
 	new SumwarsHelper ();
 
