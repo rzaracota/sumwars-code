@@ -151,15 +151,8 @@ bool Application::init(char *argv)
         }
     }
 #else
-#	ifdef __unix__
-	std::string ogreCfgUser = "/.sumwars/ogre.cfg";
-	std::string pluginsCfgUser = "/.sumwars/plugins.cfg";
-
-#	elif defined (_WIN32)
-	std::string ogreCfgUser = ".sumwars/ogre.cfg";
+    std::string ogreCfgUser = ".sumwars/ogre.cfg";
 	std::string pluginsCfgUser = ".sumwars/plugins.cfg";
-
-#	endif
 
 	/*
 	We have to have something in the default ogre.cfg file, otherwise the options window will
