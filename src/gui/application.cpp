@@ -174,12 +174,12 @@ bool Application::init(char *argv)
 		"# Define plugin folder\n"
 		"PluginFolder=" SUMWARS_OGRE_PLUGIN_DIR "/\n"
 		"\n"
-		"Plugin=" SUMWARS_OGRE_PLUGIN_RENDERSYSTEM_GL_LIB "\n"
+		"Plugin=RenderSystem_GL\n"
 #ifdef _WIN32
-		"Plugin=" SUMWARS_OGRE_PLUGIN_RENDERSYSTEM_DIRECT3D9_LIB "\n"
+		"Plugin=RenderSystem_DirectX9\n"
 #endif
-		"Plugin=" SUMWARS_OGRE_PLUGIN_PARTICLEFX_LIB "\n"
-		"Plugin=" SUMWARS_OGRE_PLUGIN_OCTREESCENEMANAGER_LIB "\n";
+		"Plugin=Plugin_ParticleFX\n"
+		"Plugin=Plugin_OctreeSceneManager\n";
 
 	// creating 'user' directory
 	if (!PHYSFS_exists(SumwarsHelper::userPath().c_str()))
@@ -246,7 +246,7 @@ bool Application::init(char *argv)
 
 	// Get the path to use for storing data.
 	// This will be relative to the user directory on the user OS.
-	Ogre::String operationalPath = SumwarsHelper::userPath();
+	Ogre::String operationalPath = SumwarsHelper::getSingleton().getStorageBasePath() + "/" + SumwarsHelper::userPath();
 
 	// Initialize the loggers.
 	LogManager::instance ().addLog ("stdout", new StdOutLog(Log::LOGLEVEL_DEBUG));
@@ -948,7 +948,7 @@ bool Application::initCEGUI()
 	// Log level
 	new CEGUI::DefaultLogger();	
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
-	CEGUI::DefaultLogger::getSingleton().setLogFilename(SumwarsHelper::userPath() + "/CEGUI.log");
+	CEGUI::DefaultLogger::getSingleton().setLogFilename(SumwarsHelper::getSingleton().getStorageBasePath() + "/" + SumwarsHelper::userPath() + "/CEGUI.log");
 	
 	// Bootstrap the CEGUI System
 	CEGUI::OgreRenderer::bootstrapSystem();
