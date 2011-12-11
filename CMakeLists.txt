@@ -525,8 +525,8 @@ IF(SUMWARS_POST_BUILD_COPY)
 ENDIF()
 
 # install the application
-install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/sumwars"
-  DESTINATION "${SUMWARS_EXECUTABLE_DIR}")
+install(TARGETS sumwars
+  RUNTIME DESTINATION "${SUMWARS_EXECUTABLE_DIR}")
 
 # freedesktop.org icons and desktop files
 # TODO: How do we do this on Windows? Installing start menu items.
