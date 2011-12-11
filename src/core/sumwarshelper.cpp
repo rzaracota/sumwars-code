@@ -15,6 +15,16 @@
 
 #include "sumwarshelper.h"
 
+#if defined (_WIN32)
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#elif (__APPLE__)
+#include <CoreFoundation/CFBundle.h>
+#elif (__unix__)
+#include <X11/Xlib.h>
+#include <X11/extensions/Xrandr.h>
+#endif
+
 // Instance of the singleton.
 template<> SumwarsHelper* Ogre::Singleton<SumwarsHelper>::ms_Singleton = 0;
 
@@ -151,27 +161,34 @@ std::string SumwarsHelper::getNativeResolutionString()
 {
 	int winWidth  = 800;
 	int winHeight = 600;
-	int xPos, yPos;
+	int xRes, yRes;
 
 
 #if defined (_WIN32)
-	xPos = GetSystemMetrics(SM_CXSCREEN);// - winWidth) / 2;
-	yPos = GetSystemMetrics(SM_CYSCREEN);// - winHeight) / 2;
+	xRes = GetSystemMetrics(SM_CXSCREEN);
+	yRes = GetSystemMetrics(SM_CYSCREEN);
 #elif defined (__unix__)
 	int num_sizes;
+	Rotation original_rotation;
+
 	Display *dpy = XOpenDisplay(NULL);
 	Window root = RootWindow(dpy, 0);
 	XRRScreenSize *xrrs = XRRSizes(dpy, 0, &num_sizes);
-	xPos = (xrrs[original_size_id].width - winWidth) / 2;
-	yPos = (xrrs[original_size_id].height - winHeight) / 2;
+
+	XRRScreenConfiguration *conf = XRRGetScreenInfo(dpy, root);
+	short original_rate          = XRRConfigCurrentRate(conf);
+	SizeID original_size_id      = XRRConfigCurrentConfiguration(conf, &original_rotation);
+
+	xRes = xrrs[original_size_id].width;
+	yRes = xrrs[original_size_id].height;
 	XCloseDisplay(dpy);
 #elif defined (__APPLE__)
-	xPos = (CGDisplayPixelsWide - winWidth) / 2;
-	yPos = (CGDisplayPixelsHigh - winHeight) / 2;
+	xRes = CGDisplayPixelsWide;
+	yRes = CGDisplayPixelsHigh;
 #endif
 
 	std::stringstream ss;
-	ss << xPos << " x " << yPos;
+	ss << xRes << " x " << yRes;
 	return ss.str ();
 }
 
@@ -208,3 +225,17 @@ void SumwarsHelper::getSizesFromResolutionString (const std::string& initialStri
 	videoModeWidth = atoi (sLeft.c_str ());
 	videoModeHeight = atoi (sAux.c_str ());
 }
+
+#if defined (__APPLE__)
+Ogre::String SumwarsHelper::macPath()
+{
+	Ogre::String path;
+	CFBundleRef mainBundle = CFBundleGetMainBundle();
+	CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+	char resPath[PATH_MAX];
+	CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)resPath, PATH_MAX);
+	CFRelease(resourcesURL);
+	path = resPath;
+	return path;
+}
+#endif

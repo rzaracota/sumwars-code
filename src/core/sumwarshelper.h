@@ -28,17 +28,6 @@
 // The used singleton manager.
 #include "OgreSingleton.h"
 
-#if defined (_WIN32)
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#elif (__APPLE__)
-#include <CoreFoundation/CFBundle.h>
-#elif (__unix__)
-#include <X11/Xlib.h>
-#include <X11/extensions/Xrandr.h>
-#endif
-
-
 /**
  * \brief Helper class. Used as a namespace to store utility static functions.
  * Functions provided here relate to parsing of the resolution string found in
@@ -181,17 +170,7 @@ public:
 	 * \fn Ogre::String macPath()
 	 * \brief Returns the path to the Resources directory on mac.
 	 */
-	Ogre::String macPath()
-	{
-		Ogre::String path;
-		CFBundleRef mainBundle = CFBundleGetMainBundle();
-		CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
-		char resPath[PATH_MAX];
-		CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)resPath, PATH_MAX);
-		CFRelease(resourcesURL);
-		path = resPath;
-		return path;
-	}
+	Ogre::String macPath();
 #endif
 
 };
