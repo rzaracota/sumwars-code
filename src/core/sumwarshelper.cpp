@@ -147,6 +147,33 @@ std::string SumwarsHelper::getUpdatedResolutionString (const std::string& initia
 	return returnValue;
 }
 
+std::string SumwarsHelper::getNativeResolutionString()
+{
+	int winWidth  = 800;
+	int winHeight = 600;
+	int xPos, yPos;
+
+
+#if defined (_WIN32)
+	xPos = GetSystemMetrics(SM_CXSCREEN);// - winWidth) / 2;
+	yPos = GetSystemMetrics(SM_CYSCREEN);// - winHeight) / 2;
+#elif defined (__unix__)
+	int num_sizes;
+	Display *dpy = XOpenDisplay(NULL);
+	Window root = RootWindow(dpy, 0);
+	XRRScreenSize *xrrs = XRRSizes(dpy, 0, &num_sizes);
+	xPos = (xrrs[original_size_id].width - winWidth) / 2;
+	yPos = (xrrs[original_size_id].height - winHeight) / 2;
+	XCloseDisplay(dpy);
+#elif defined (__APPLE__)
+	xPos = (CGDisplayPixelsWide - winWidth) / 2;
+	yPos = (CGDisplayPixelsHigh - winHeight) / 2;
+#endif
+
+	std::stringstream ss;
+	ss << xPos << " x " << yPos;
+	return ss.str ();
+}
 
 void SumwarsHelper::getSizesFromResolutionString (const std::string& initialString, int& videoModeWidth, int& videoModeHeight)
 {

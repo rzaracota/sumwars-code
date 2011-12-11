@@ -12,8 +12,10 @@
 // manually via cmake -D or cmake-gui
 #ifdef _DEBUG
 #   define SUMWARS_OGRE_PLUGIN_DIR "@OGRE_PLUGIN_DIR_DBG@"
+#	define SUMWARS_DEBUG_POSTFIX "@CMAKE_DEBUG_POSTFIX@"
 #else
 #   define SUMWARS_OGRE_PLUGIN_DIR "@OGRE_PLUGIN_DIR_REL@"
+#	define SUMWARS_DEBUG_POSTFIX ""
 #endif
 
 #cmakedefine SUMWARS_PORTABLE_MODE

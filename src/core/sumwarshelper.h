@@ -28,8 +28,14 @@
 // The used singleton manager.
 #include "OgreSingleton.h"
 
-#if defined (__APPLE__)
+#if defined (_WIN32)
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#elif (__APPLE__)
 #include <CoreFoundation/CFBundle.h>
+#elif (__unix__)
+#include <X11/Xlib.h>
+#include <X11/extensions/Xrandr.h>
 #endif
 
 
@@ -145,6 +151,15 @@ public:
 	 * \author Augustin Preda (if anything doesn't work, he's the one to bash).
 	 */
 	static std::string getUpdatedResolutionString (const std::string& initialString, int newWidth, int newHeight);
+
+	/**
+	 * \brief Gets the native resolution on the desktop.
+	 * Purpose: Setting resolution on initial startup
+	 *
+	 * \return Full native desktop resolution
+	 * \author Stefan Stammberger (if anything doesn't work, he's the one to bash).
+	 */
+	static std::string getNativeResolutionString ();
 
 	/**
 	 * \brief Parse a basic resolution string and get the width and height.
