@@ -1,77 +1,77 @@
 [General]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/models/
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/models/mine
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/models/veg
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/materials/scripts
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/materials/programs
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/materials/textures
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/models/
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/models/mine
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/models/veg
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/materials/scripts
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/materials/programs
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/materials/textures
 
 [Particles]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/particle/ogre_1_6
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/particle/ogre_1_6
 
 [GUI]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/configs
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/fonts
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/imagesets
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/layouts
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/looknfeel
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/schemes
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/animations
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/configs
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/fonts
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/imagesets
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/layouts
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/looknfeel
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/schemes
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/animations
 
 [emotionsets]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/emotionsets
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/emotionsets
 
 
 [itempictures]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/itempictures
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/itempictures
 
 [sound]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/sound
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/sound
 
 [music]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/resources/music
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/music
 
 [world]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/data/world
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/data/world
 
 [npc]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/data/npc
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/data/npc
 
 [quests]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/data/quests
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/data/quests
 
 [items]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/data/items
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/data/items
 
 [abilities]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/data/abilities
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/data/abilities
 
 [monsters]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/data/monsters
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/data/monsters
 
 [playerclasses]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/data/playerclasses
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/data/playerclasses
 
 [projectiles]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/data/projectiles
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/data/projectiles
 
 [objects]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/data/objects
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/data/objects
 
 [object_groups]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/data/object_groups
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/data/object_groups
 
 [obj_templates]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/data/obj_templates
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/data/obj_templates
 
 [renderinfo]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/data/renderinfo
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/data/renderinfo
 
 [lua]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/data/lua
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/data/lua
 
 [sounddata]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/data/sound
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/data/sound
 
 [translation]
-FileSystem=@CMAKE_INSTALL_PREFIX@/@SUMWARS_SHARE_DIR@/translation
+FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/translation

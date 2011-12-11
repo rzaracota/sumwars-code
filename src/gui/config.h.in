@@ -3,7 +3,7 @@
 
 // Generated file, do not edit!  Make changes to config.h.in instead.
 
-#define SUMWARS_INSTALL_PREFIX "@CMAKE_INSTALL_PREFIX@"
+#define SUMWARS_PREFIX "@SUMWARS_PREFIX@"
 #define SUMWARS_SHARE_DIR "@SUMWARS_SHARE_DIR@"
 #define SUMWARS_DOC_DIR "@SUMWARS_DOC_DIR@"
 

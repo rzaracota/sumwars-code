@@ -88,7 +88,7 @@ public:
 
 #if defined (__unix__)
 		// redefine if necessary
-		path = SUMWARS_INSTALL_PREFIX "/" SUMWARS_SHARE_DIR;
+		path = SUMWARS_PREFIX "/" SUMWARS_SHARE_DIR;
 #elif defined (__APPLE__)
 		// redefine if necessary
 #elif defined (_WIN32)
@@ -110,7 +110,7 @@ public:
 
 #if defined (__unix__)
 		// redefine if necessary
-		path = SUMWARS_INSTALL_PREFIX "/" SUMWARS_DOC_DIR;
+		path = SUMWARS_PREFIX "/" SUMWARS_DOC_DIR;
 #elif defined (__APPLE__)
 		// redefine if necessary
 #elif defined (_WIN32)

@@ -93,7 +93,8 @@ IF( SUMWARS_STANDALONE_MODE )
   # In case of a standalone mode, we override all paths to our hardcoded, arbitrarily chosen values.
   # There is no point in making these customisable, I think.
   
-  SET(CMAKE_INSTALL_PREFIX "./")
+  #SET(CMAKE_INSTALL_PREFIX "./")
+  SET(SUMWARS_PREFIX "./")
   
   SET(SUMWARS_EXECUTABLE_DIR "./")
   SET(SUMWARS_SHARE_DIR "./share")
@@ -105,6 +106,8 @@ IF( SUMWARS_STANDALONE_MODE )
   ENDIF()
   
   MESSAGE(STATUS "")
+ELSE()
+  SET(SUMWARS_PREFIX ${CMAKE_INSTALL_PREFIX})
 ENDIF()
 
 SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules/;${CMAKE_MODULE_PATH}")
