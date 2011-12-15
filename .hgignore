@@ -9,6 +9,7 @@ build/
 src/gui/config.h
 src/gui/version.h
 resources.cfg
+src/gui/creditswindow_content.inc
 
 # eclipse project files
 .project
