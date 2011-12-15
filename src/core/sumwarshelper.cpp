@@ -83,11 +83,10 @@ std::string SumwarsHelper::getPreloadFileName () const
 	return std::string ("swpreload.cfg");
 }
 
-
 /**
  * \brief Get the path to use for storage.
  */
-const std::string& SumwarsHelper::getStorageBasePath () const
+const std::string& SumwarsHelper::getStorageBasePath()
 {
 #ifdef SUMWARS_PORTABLE_MODE
 	static std::string ret(PHYSFS_getBaseDir());

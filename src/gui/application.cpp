@@ -244,7 +244,7 @@ bool Application::init()
 
 	// Get the path to use for storing data.
 	// This will be relative to the user directory on the user OS.
-	Ogre::String operationalPath = SumwarsHelper::getSingleton().getStorageBasePath() + "/" + SumwarsHelper::userPath();
+	Ogre::String operationalPath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::userPath();
 
 	// Initialize the loggers.
 	LogManager::instance ().addLog ("stdout", new StdOutLog(Log::LOGLEVEL_DEBUG));
@@ -905,7 +905,7 @@ bool Application::setupResources()
 		}
 	}
 	
-	Ogre::String savePath = SumwarsHelper::userPath() + "/save";
+	Ogre::String savePath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::savePath();
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(savePath, "FileSystem", "Savegame");
 
 #if defined(WIN32)
@@ -946,7 +946,7 @@ bool Application::initCEGUI()
 	// Log level
 	new CEGUI::DefaultLogger();	
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
-	CEGUI::DefaultLogger::getSingleton().setLogFilename(SumwarsHelper::getSingleton().getStorageBasePath() + "/" + SumwarsHelper::userPath() + "/CEGUI.log");
+	CEGUI::DefaultLogger::getSingleton().setLogFilename(SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::userPath() + "/CEGUI.log");
 	
 	// Bootstrap the CEGUI System
 	CEGUI::OgreRenderer::bootstrapSystem();

@@ -23,8 +23,6 @@
 
 #include "creditswindow_content.inc"
 
-#include <iostream>
-
 CreditsWindow::CreditsWindow(Document* doc)
 	:Window(doc)
 {
@@ -72,7 +70,6 @@ CreditsWindow::CreditsWindow(Document* doc)
 	while (seci.hasMoreElements())
 	{
 		secName = seci.peekNextKey();
-		std::cout << "section: " << secName << std::endl;
 		secName = secName.erase(0,2) + LINE_ENDING;
 		content.push_back(CEGUIUtility::getColourizedString(CEGUIUtility::Red, secName, CEGUIUtility::White).c_str());
 		Ogre::ConfigFile::SettingsMultiMap *settings = seci.getNext();

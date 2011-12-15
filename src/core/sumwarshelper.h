@@ -68,7 +68,7 @@ public:
 	/**
 	 * \brief Get the path to use for storage.
 	 */
-	const std::string& getStorageBasePath () const;
+	static const std::string& getStorageBasePath();
 
 
 	/**

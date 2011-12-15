@@ -620,7 +620,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 #if defined (__APPLE__)
 			configpath = SumwarsHelper::macPath() + "/ogre.cfg";
 #else
-			configpath = SumwarsHelper::getSingleton().getStorageBasePath() + "/" + SumwarsHelper::userPath() + "/ogre.cfg";
+			configpath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::userPath() + "/ogre.cfg";
 #endif
 
 			// TODO: move handling to specialized function.
