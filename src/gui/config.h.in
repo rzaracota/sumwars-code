@@ -5,7 +5,8 @@
 
 #define SUMWARS_PREFIX "@SUMWARS_PREFIX@"
 #define SUMWARS_SHARE_DIR "@SUMWARS_SHARE_DIR@"
-#define SUMWARS_DOC_DIR "@SUMWARS_DOC_DIR@"
+// commented out because we should not rely on it being available, docs might be optional!
+//#define SUMWARS_DOC_DIR "@SUMWARS_DOC_DIR@"
 
 // If the following macro definitions turn out to be "NOTFOUND", the FindOGRE.cmake
 // has failed to locate the appropriate paths. In that case, please supply them

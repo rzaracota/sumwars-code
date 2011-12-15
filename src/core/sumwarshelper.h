@@ -94,29 +94,6 @@ public:
 	}
 
 	/**
-	 * \fn static Ogre::String gameDocPath()
-	 *
-	 * \brief Returns the path where the game documentation is stored (e.g.,
-	 * /usr/share/doc/sumwars in Unix)
-	 */
-	static Ogre::String gameDocPath()
-	{
-		Ogre::String path = userPath();
-
-#if defined (__unix__)
-		// redefine if necessary
-		path = SUMWARS_PREFIX "/" SUMWARS_DOC_DIR;
-#elif defined (__APPLE__)
-		// redefine if necessary
-#elif defined (_WIN32)
-		// redefine if necessary
-#endif
-
-		return path;
-	}
-
-
-	/**
 	 * \fn static Ogre::String userPath()
 	 * \brief Returns the writable sumwars directory in the users directory
 	 */
