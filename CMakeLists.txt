@@ -47,7 +47,7 @@ SET(SUMWARS_VERSION_PATCH "6")
 SET(SUMWARS_VERSION_REVISION ${Project_WC_REVISION})
 SET(SUMWARS_SHORT_VERSION "${SUMWARS_VERSION_MAJOR}.${SUMWARS_VERSION_MINOR}.${SUMWARS_VERSION_PATCH}")
 SET(SUMWARS_VERSION "${SUMWARS_SHORT_VERSION}.hg-${SUMWARS_VERSION_REVISION}")
-CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/src/gui/version.h.in" "${PROJECT_SOURCE_DIR}/src/gui/version.h")
+CONFIGURE_FILE("src/version.h.in" "src/version.h")
 
 MESSAGE(STATUS "Version: ${SUMWARS_VERSION}")
 MESSAGE(STATUS "Short Version: ${SUMWARS_SHORT_VERSION}")
@@ -209,12 +209,20 @@ ENDIF()
 FILE(READ ${CMAKE_CURRENT_SOURCE_DIR}/AUTHORS SUMWARS_AUTHORS_CONTENT)
 STRING(REPLACE \n \\n SUMWARS_AUTHORS_CONTENT "${SUMWARS_AUTHORS_CONTENT}")
 
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/src/gui/config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/src/gui/config.h)
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/share/resources.cfg.in ${CMAKE_CURRENT_SOURCE_DIR}/share/resources.cfg)
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/src/gui/creditswindow_content.inc.in ${CMAKE_CURRENT_SOURCE_DIR}/src/gui/creditswindow_content.inc)
+CONFIGURE_FILE("src/config.h.in" "src/config.h")
+# FIXME: This is altering the source dir, even for out of source builds!
+#        However dealing with this is impractical, I am leaving it as it is for now.
+#        It is blacklisted from installation and source package
+CONFIGURE_FILE("share/resources.cfg.in" "${CMAKE_CURRENT_SOURCE_DIR}/share/resources.cfg")
+CONFIGURE_FILE("src/gui/creditswindow_content.inc.in" "src/gui/creditswindow_content.inc")
+
+# add our build include directory
+include_directories(
+    "${CMAKE_CURRENT_BINARY_DIR}/src"
+    "${CMAKE_CURRENT_BINARY_DIR}/src/gui"
+)
 
 SET(HEADER_FILES
-  ./src/gui/config.h
   ./src/core/nlfg.h
   ./src/core/worldobject.h
   ./src/core/itemloader.h
@@ -612,10 +620,7 @@ set(CPACK_SOURCE_IGNORE_FILES
 "build/"
 "~$"
 
-"src/gui/config.h"
-"src/gui/version.h"
 "share/resources.cfg"
-"src/gui/creditswindow_content.inc"
 
 "\\\\.project"
 "\\\\.cproject"
