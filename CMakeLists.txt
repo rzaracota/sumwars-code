@@ -583,6 +583,9 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/resources"
   DESTINATION "${SUMWARS_SHARE_DIR}"
   PATTERN ".hg" EXCLUDE
   PATTERN "icon" EXCLUDE)
-  install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/translation"
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/translation"
   DESTINATION "${SUMWARS_SHARE_DIR}"
-  PATTERN ".hg" EXCLUDE)
+  FILES_MATCHING PATTERN "*.mo"
+  PATTERN ".hg" EXCLUDE
+  PATTERN "xmlgettext" EXCLUDE) # both pattern excludes are there to prevent the directories from being created
+  
