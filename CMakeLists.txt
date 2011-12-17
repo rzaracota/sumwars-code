@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 cmake_minimum_required(VERSION 2.6)
-project(SUMWARS)
+project(sumwars)
 
 MESSAGE(STATUS "")
 MESSAGE(STATUS "### Welcome to Summoning Wars build system ###")
@@ -43,7 +43,7 @@ ENDIF()
 
 SET(SUMWARS_VERSION_MAJOR "0")
 SET(SUMWARS_VERSION_MINOR "5")
-SET(SUMWARS_VERSION_PATCH "5")
+SET(SUMWARS_VERSION_PATCH "6")
 SET(SUMWARS_VERSION_REVISION ${Project_WC_REVISION})
 SET(SUMWARS_SHORT_VERSION "${SUMWARS_VERSION_MAJOR}.${SUMWARS_VERSION_MINOR}.${SUMWARS_VERSION_PATCH}")
 SET(SUMWARS_VERSION "${SUMWARS_SHORT_VERSION}.hg-${SUMWARS_VERSION_REVISION}")
@@ -589,3 +589,42 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/translation"
   PATTERN ".hg" EXCLUDE
   PATTERN "xmlgettext" EXCLUDE) # both pattern excludes are there to prevent the directories from being created
   
+# only CPack code below this line
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Summoning Wars Role-Playing Game")
+SET(CPACK_PACKAGE_VENDOR "Sumwars team")
+SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
+SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
+SET(CPACK_PACKAGE_VERSION_MAJOR "${SUMWARS_VERSION_MAJOR}")
+SET(CPACK_PACKAGE_VERSION_MINOR "${SUMWARS_VERSION_MINOR}")
+SET(CPACK_PACKAGE_VERSION_PATCH "${SUMWARS_VERSION_PATCH}")
+SET(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}")
+
+SET(CPACK_SOURCE_GENERATOR TBZ2 ZIP)
+SET(CPACK_GENERATOR NSIS)
+
+set(CPACK_SOURCE_PACKAGE_FILE_NAME "sumwars-${SUMWARS_SHORT_VERSION}" CACHE INTERNAL "tarball basename")
+
+set(CPACK_SOURCE_IGNORE_FILES
+ # repository history should not be in source tarballs
+"\\\\.hg.*"
+
+# the rest is modelled after .hgignore
+"build/"
+"~$"
+
+"src/gui/config.h"
+"src/gui/version.h"
+"share/resources.cfg"
+"src/gui/creditswindow_content.inc"
+
+"\\\\.project"
+"\\\\.cproject"
+"\\\\.pydevproject"
+
+"sumwars$"
+"sumwars.exe$"
+
+"\\\\.sumwars"
+)
+
+INCLUDE(CPack)
