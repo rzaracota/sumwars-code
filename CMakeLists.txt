@@ -210,10 +210,7 @@ FILE(READ ${CMAKE_CURRENT_SOURCE_DIR}/AUTHORS SUMWARS_AUTHORS_CONTENT)
 STRING(REPLACE \n \\n SUMWARS_AUTHORS_CONTENT "${SUMWARS_AUTHORS_CONTENT}")
 
 CONFIGURE_FILE("src/config.h.in" "src/config.h")
-# FIXME: This is altering the source dir, even for out of source builds!
-#        However dealing with this is impractical, I am leaving it as it is for now.
-#        It is blacklisted from installation and source package
-CONFIGURE_FILE("share/resources.cfg.in" "${CMAKE_CURRENT_SOURCE_DIR}/share/resources.cfg")
+CONFIGURE_FILE("src/gui/default_resources.cfg.inc.in" "src/gui/default_resources.cfg.inc")
 CONFIGURE_FILE("src/gui/creditswindow_content.inc.in" "src/gui/creditswindow_content.inc")
 
 # add our build include directory
@@ -619,8 +616,6 @@ set(CPACK_SOURCE_IGNORE_FILES
 # the rest is modelled after .hgignore
 "build/"
 "~$"
-
-"share/resources.cfg"
 
 "\\\\.project"
 "\\\\.cproject"
