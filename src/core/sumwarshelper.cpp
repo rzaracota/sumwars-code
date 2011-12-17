@@ -27,7 +27,7 @@
 #endif
 
 // Instance of the singleton.
-SumwarsHelper* Ogre::Singleton<SumwarsHelper>::SUMWARS_OGRE_SINGLETON = 0;
+template<> SumwarsHelper* Ogre::Singleton<SumwarsHelper>::SUMWARS_OGRE_SINGLETON = 0;
 
 /**
  * Constructor; will call the init function.
