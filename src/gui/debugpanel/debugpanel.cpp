@@ -22,10 +22,11 @@
 #include "contenttab.h"
 //#include "reloadtab.h"
 #include "OgreRoot.h"
+#include "config.h"
 
 using namespace CEGUI;
 
-template<> DebugPanel* Ogre::Singleton<DebugPanel>::ms_Singleton = 0;
+template<> DebugPanel* Ogre::Singleton<DebugPanel>::SUMWARS_OGRE_SINGLETON = 0;
 
 void DebugPanel::init(bool visible)
 {
@@ -139,13 +140,13 @@ bool DebugPanel::handleCloseWindow(const CEGUI::EventArgs& e)
 
 DebugPanel* DebugPanel::getSingletonPtr(void)
 {
-	return ms_Singleton;
+	return SUMWARS_OGRE_SINGLETON;
 }
 
 DebugPanel& DebugPanel::getSingleton(void)
 {
-	assert( ms_Singleton );
-	return ( *ms_Singleton );
+	assert( SUMWARS_OGRE_SINGLETON );
+	return ( *SUMWARS_OGRE_SINGLETON );
 }
 
 

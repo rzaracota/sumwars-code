@@ -35,7 +35,7 @@ public:
 	
 	virtual void update(OIS::Keyboard *keyboard, OIS::Mouse *mouse);
 
-	virtual void messageLogged (const Ogre::String &message, Ogre::LogMessageLevel lml, bool maskDebug, const Ogre::String &logName);
+	virtual void BenchmarkTab::messageLogged(const Ogre::String& message, Ogre::LogMessageLevel lml, bool maskDebug, const Ogre::String& logName, bool& skipThisMessage);
 
 	virtual bool handleStartBenchmark(const CEGUI::EventArgs& e);
 private:

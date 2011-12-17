@@ -14,6 +14,7 @@
  */
 
 #include "sumwarshelper.h"
+#include "config.h"
 
 #if defined (_WIN32)
 #define WIN32_LEAN_AND_MEAN
@@ -26,7 +27,7 @@
 #endif
 
 // Instance of the singleton.
-template<> SumwarsHelper* Ogre::Singleton<SumwarsHelper>::ms_Singleton = 0;
+SumwarsHelper* Ogre::Singleton<SumwarsHelper>::SUMWARS_OGRE_SINGLETON = 0;
 
 /**
  * Constructor; will call the init function.

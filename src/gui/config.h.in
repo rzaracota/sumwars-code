@@ -5,6 +5,8 @@
 
 #define SUMWARS_PREFIX "@SUMWARS_PREFIX@"
 #define SUMWARS_SHARE_DIR "@SUMWARS_SHARE_DIR@"
+#define SUMWARS_OGRE_SINGLETON @SUMWARS_OGRE_SINGLETON@
+
 // commented out because we should not rely on it being available, docs might be optional!
 //#define SUMWARS_DOC_DIR "@SUMWARS_DOC_DIR@"
 

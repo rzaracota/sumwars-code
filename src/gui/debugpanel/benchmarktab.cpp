@@ -87,9 +87,12 @@ bool BenchmarkTab::handleStartBenchmark(const CEGUI::EventArgs& e)
 	return true;
 }
 
-void BenchmarkTab::messageLogged(const Ogre::String& message, Ogre::LogMessageLevel lml, bool maskDebug, const Ogre::String& logName)
+void BenchmarkTab::messageLogged(const Ogre::String& message, Ogre::LogMessageLevel lml, bool maskDebug, const Ogre::String& logName, bool& skipThisMessage)
 {
-	m_CapsBox->appendText(message.c_str());
+	if (!skipThisMessage)
+    {
+        m_CapsBox->appendText(message.c_str());
+    }
 }
 
 
