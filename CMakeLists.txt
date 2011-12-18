@@ -136,6 +136,11 @@ ELSE()
   MESSAGE(SEND_ERROR "You need Ogre 1.7 Cthugha to build this.")
 ENDIF()
 
+# add our build include directory
+include_directories(
+    "${CMAKE_CURRENT_BINARY_DIR}/src"
+    "${CMAKE_CURRENT_BINARY_DIR}/src/gui"
+)
 
 IF (WIN32)
  FIND_PACKAGE(BoostOGRE REQUIRED)
@@ -212,12 +217,6 @@ STRING(REPLACE \n \\n SUMWARS_AUTHORS_CONTENT "${SUMWARS_AUTHORS_CONTENT}")
 CONFIGURE_FILE("src/config.h.in" "src/config.h")
 CONFIGURE_FILE("src/gui/default_resources.cfg.inc.in" "src/gui/default_resources.cfg.inc")
 CONFIGURE_FILE("src/gui/creditswindow_content.inc.in" "src/gui/creditswindow_content.inc")
-
-# add our build include directory
-include_directories(
-    "${CMAKE_CURRENT_BINARY_DIR}/src"
-    "${CMAKE_CURRENT_BINARY_DIR}/src/gui"
-)
 
 SET(HEADER_FILES
   ./src/core/nlfg.h
