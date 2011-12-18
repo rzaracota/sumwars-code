@@ -1,5 +1,3 @@
-import * from "base.material"
-
 material mute
 {
 	technique
@@ -14,6 +12,12 @@ material mute
 			{
 				texture mute.png
 			}
+			// RT Shader system section.
+ 			rtshader_system
+ 			{	 	
+ 				// Override lighting stage with per pixel lighting. 			
+ 				lighting_stage per_pixel
+ 			}			
 		}
 	}
 }

@@ -1,5 +1,3 @@
-import * from "base.material"
-
 material white_highlight_alpha_nodepth
 {
 	technique

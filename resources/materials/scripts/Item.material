@@ -1,58 +1,249 @@
-import * from "base.material"
-
-material Item : /base/simple
+material Item
 {
-    set_texture_alias DiffuseMap item.png
+	technique
+	{
+		pass
+		{
+			ambient 0.8 0.8 0.8 1
+			diffuse 1 1 1 1
+			specular 0 0 0 1
+			emissive 0 0 0
+
+			texture_unit
+			{
+				texture item.png
+				tex_coord_set 0
+				colour_op modulate
+				scale 1 1
+				scroll 0 0
+				rotate 0
+			}
+			// RT Shader system section.
+ 			rtshader_system
+ 			{	 	
+ 				// Override lighting stage with per pixel lighting. 			
+ 				lighting_stage per_pixel
+ 			}			
+		}
+	}
 }
 
-material Amulet_Atlastex : /base/simple
+material Amulet_Atlastex
 {
-    set_texture_alias DiffuseMap amu_atlas.png
+	technique
+	{
+		pass
+		{
+			diffuse 0.800000 0.800000 0.800000
+			specular 0.500000 0.500000 0.500000 12.500000
+			texture_unit
+			{
+				texture amu_atlas.png
+			}
+			// RT Shader system section.
+ 			rtshader_system
+ 			{	 	
+ 				// Override lighting stage with per pixel lighting. 			
+ 				lighting_stage per_pixel
+ 			}			
+		}
+	}
 }
 
-material banner_holder : /base/simple
+material banner_holder
 {
-    set_texture_alias DiffuseMap banner_holder.png
+	technique
+	{
+		pass
+		{
+			diffuse 0.800000 0.800000 0.800000
+			specular 0.500000 0.500000 0.500000 12.500000
+			texture_unit
+			{
+				texture banner_holder.png
+			}
+			// RT Shader system section.
+ 			rtshader_system
+ 			{	 	
+ 				// Override lighting stage with per pixel lighting. 			
+ 				lighting_stage per_pixel
+ 			}			
+		}
+	}
 }
 
-material Sack_01 : /base/simple
+material Sack_01
 {
-    set_texture_alias DiffuseMap Sack_01.png
+	technique
+	{
+		pass
+		{
+			diffuse 0.800000 0.800000 0.800000
+			specular 0.500000 0.500000 0.500000 12.500000
+			texture_unit
+			{
+				texture Sack_01.png
+			}
+			// RT Shader system section.
+ 			rtshader_system
+ 			{	 	
+ 				// Override lighting stage with per pixel lighting. 			
+ 				lighting_stage per_pixel
+ 			}			
+		}
+	}
 }
 
-material Sack_02 : /base/simple
+material Sack_02
 {
-    set_texture_alias DiffuseMap Sack_02.png
+	technique
+	{
+		pass
+		{
+			diffuse 0.800000 0.800000 0.800000
+			specular 0.500000 0.500000 0.500000 12.500000
+			texture_unit
+			{
+				texture Sack_02.png
+			}
+			// RT Shader system section.
+ 			rtshader_system
+ 			{	 	
+ 				// Override lighting stage with per pixel lighting. 			
+ 				lighting_stage per_pixel
+ 			}			
+		}
+	}
 }
 
-material Sack_03 : /base/simple
+material Sack_03
 {
-    set_texture_alias DiffuseMap Sack_03.png
+	technique
+	{
+		pass
+		{
+			diffuse 0.800000 0.800000 0.800000
+			specular 0.500000 0.500000 0.500000 12.500000
+			texture_unit
+			{
+				texture Sack_03.png
+			}
+			// RT Shader system section.
+ 			rtshader_system
+ 			{	 	
+ 				// Override lighting stage with per pixel lighting. 			
+ 				lighting_stage per_pixel
+ 			}			
+		}
+	}
 }
 
-material barrel_02 : /base/simple
+material barrel_03
 {
-    set_texture_alias DiffuseMap barrel_02.png
+	technique
+	{
+		pass
+		{
+			diffuse 0.800000 0.800000 0.800000
+			specular 0.500000 0.500000 0.500000 12.500000
+			texture_unit
+			{
+				texture barrel_03.png
+			}
+			// RT Shader system section.
+ 			rtshader_system
+ 			{	 	
+ 				// Override lighting stage with per pixel lighting. 			
+ 				lighting_stage per_pixel
+ 			}			
+		}
+	}
 }
 
-
-material barrel_03 : /base/simple
+material barrel_02
 {
-    set_texture_alias DiffuseMap barrel_03.png
+	technique
+	{
+		pass
+		{
+			diffuse 0.800000 0.800000 0.800000
+			specular 0.500000 0.500000 0.500000 12.500000
+			texture_unit
+			{
+				texture barrel_02.png
+			}
+			// RT Shader system section.
+ 			rtshader_system
+ 			{	 	
+ 				// Override lighting stage with per pixel lighting. 			
+ 				lighting_stage per_pixel
+ 			}			
+		}
+	}
 }
 
-material chest_02 : /base/simple
+material chest_02
 {
-    set_texture_alias DiffuseMap chest_02.png
+	technique
+	{
+		pass
+		{
+			diffuse 0.800000 0.800000 0.800000
+			specular 0.500000 0.500000 0.500000 12.500000
+			texture_unit
+			{
+				texture chest_02.png
+			}
+			// RT Shader system section.
+ 			rtshader_system
+ 			{	 	
+ 				// Override lighting stage with per pixel lighting. 			
+ 				lighting_stage per_pixel
+ 			}			
+		}
+	}
 }
 
-material bucket : /base/simple
+material bucket
 {
-    set_texture_alias DiffuseMap bucket.png
+	technique
+	{
+		pass
+		{
+			diffuse 0.800000 0.800000 0.800000
+			specular 0.500000 0.500000 0.500000 12.500000
+			texture_unit
+			{
+				texture bucket.png
+			}
+			// RT Shader system section.
+ 			rtshader_system
+ 			{	 	
+ 				// Override lighting stage with per pixel lighting. 			
+ 				lighting_stage per_pixel
+ 			}			
+		}
+	}
 }
 
-
-material Box_02 : /base/simple
+material Box_02
 {
-    set_texture_alias DiffuseMap Box_02.png
+	technique
+	{
+		pass
+		{
+			diffuse 0.800000 0.800000 0.800000
+			specular 0.500000 0.500000 0.500000 12.500000
+			texture_unit
+			{
+				texture Box_02.png
+			}
+			// RT Shader system section.
+ 			rtshader_system
+ 			{	 	
+ 				// Override lighting stage with per pixel lighting. 			
+ 				lighting_stage per_pixel
+ 			}			
+		}
+	}
 }

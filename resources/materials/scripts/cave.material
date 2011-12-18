@@ -1,12 +1,52 @@
-import * from "base.material"
-
-material cave_ambient : /base/simple
+material cave_ambient
 {
-    set_texture_alias DiffuseMap cave_ambient.png
+	technique
+	{
+		pass
+		{
+			ambient 0.5 0.5 0.5 1
+			diffuse 1 1 1 1
+			specular 0 0 0 1
+			emissive 0 0 0
+
+			texture_unit
+			{
+				texture cave_ambient.png
+				tex_coord_set 0
+				colour_op modulate
+				scale 1 1
+				scroll 0 0
+				rotate 0
+			}
+			// RT Shader system section.
+ 			rtshader_system
+ 			{	 	
+ 				// Override lighting stage with per pixel lighting. 			
+ 				lighting_stage per_pixel
+ 			}			
+		}
+	}
 }
 
-material Atlastex_mine_cave : /base/simple
+material Atlastex_mine_cave
 {
-    set_texture_alias DiffuseMap Atlastex_mine_cave.png
+	technique
+	{
+		pass
+		{
+			diffuse 0.800000 0.800000 0.800000
+			specular 0.500000 0.500000 0.500000 12.500000
+			texture_unit
+			{
+				texture Atlastex_mine_cave.png
+			}
+			// RT Shader system section.
+ 			rtshader_system
+ 			{	 	
+ 				// Override lighting stage with per pixel lighting. 			
+ 				lighting_stage per_pixel
+ 			}			
+		}
+	}
 }
 
