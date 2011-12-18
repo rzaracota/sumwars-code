@@ -13,7 +13,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef BUILD_TOOLS
+#ifdef SUMWARS_BUILD_TOOLS
 #include "contenteditor.h"
 #endif
 
@@ -189,7 +189,7 @@ bool World::loadGameData()
 			ObjectLoader::loadMonsterData(file.c_str());
 
 		}
-#ifdef BUILD_TOOLS
+#ifdef SUMWARS_BUILD_TOOLS
 		ContentEditor::getSingleton().fullUpdateComponent("MonsterEditor");
 #endif
 	}
@@ -221,7 +221,7 @@ bool World::loadGameData()
 			file += it->filename;
 			ObjectLoader::loadObjectData(file.c_str());
 		}
-#ifdef BUILD_TOOLS
+#ifdef SUMWARS_BUILD_TOOLS
 		ContentEditor::getSingleton().fullUpdateComponent("FixedObjectEditor");
 #endif
 	}
@@ -291,7 +291,7 @@ bool World::loadGameData()
 		}
 	}
 	
-#ifdef BUILD_TOOLS
+#ifdef SUMWARS_BUILD_TOOLS
 	ContentEditor::getSingleton().fullUpdateComponent("FOEditor");
 #endif
 	

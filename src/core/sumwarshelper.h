@@ -28,11 +28,6 @@
 // The used singleton manager.
 #include "OgreSingleton.h"
 
-#if defined (__APPLE__)
-#include <CoreFoundation/CFBundle.h>
-#endif
-
-
 /**
  * \brief Helper class. Used as a namespace to store utility static functions.
  * Functions provided here relate to parsing of the resolution string found in
@@ -45,13 +40,6 @@ class SumwarsHelper
 protected:
 	// A list of supported features.
 	std::vector <std::string> supportedFeatures_;
-
-	// TODO: for now, we only have the portable flag as a preload option.
-	// If more options are added, make a mapping to all pre-load options (including portable)
-	// and use it in a consistent manner.
-
-	// Specify whether the folders to use for storing data are used in a portable manner.
-	bool portable_;
 
 public:
 	/**
@@ -77,28 +65,17 @@ public:
 	 */
 	std::string getPreloadFileName () const;
 
-
-	/**
-	 * \brief Getter for the portable option.
-	 */
-	bool isPortable () const { return portable_; }
-
-	/**
-	 * \brief Setter for the portable option.
-	 */
-	void setPortable (bool newValue) { portable_ = newValue; }
-
 	/**
 	 * \brief Get the path to use for storage.
 	 */
-	std::string getStorageBasePath () const;
+	static const std::string& getStorageBasePath();
 
 
 	/**
 	 * \fn static Ogre::String gameDataPath()
 	 *
 	 * \brief Returns the path where the game data is stored (e.g.,
-	 * /usr/share/games/sumwars in Unix)
+	 * /usr/share/sumwars in Unix)
 	 */
 	static Ogre::String gameDataPath()
 	{
@@ -106,7 +83,7 @@ public:
 
 #if defined (__unix__)
 		// redefine if necessary
-		path = CFG_FILES_DIR;
+		path = SUMWARS_PREFIX "/" SUMWARS_SHARE_DIR;
 #elif defined (__APPLE__)
 		// redefine if necessary
 #elif defined (_WIN32)
@@ -116,12 +93,17 @@ public:
 		return path;
 	}
 
-
 	/**
 	 * \fn static Ogre::String userPath()
 	 * \brief Returns the writable sumwars directory in the users directory
 	 */
 	static Ogre::String userPath();
+
+	/**
+	 * \fn static Ogre::String savePath()
+	 * \brief Returns the directory with sumwars save files
+	 */
+	static Ogre::String savePath();
 
 
 	/**
@@ -135,6 +117,15 @@ public:
 	 * \author Augustin Preda (if anything doesn't work, he's the one to bash).
 	 */
 	static std::string getUpdatedResolutionString (const std::string& initialString, int newWidth, int newHeight);
+
+	/**
+	 * \brief Gets the native resolution on the desktop.
+	 * Purpose: Setting resolution on initial startup
+	 *
+	 * \return Full native desktop resolution
+	 * \author Stefan Stammberger (if anything doesn't work, he's the one to bash).
+	 */
+	static std::string getNativeResolutionString ();
 
 	/**
 	 * \brief Parse a basic resolution string and get the width and height.
@@ -156,17 +147,7 @@ public:
 	 * \fn Ogre::String macPath()
 	 * \brief Returns the path to the Resources directory on mac.
 	 */
-	Ogre::String macPath()
-	{
-		Ogre::String path;
-		CFBundleRef mainBundle = CFBundleGetMainBundle();
-		CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
-		char resPath[PATH_MAX];
-		CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)resPath, PATH_MAX);
-		CFRelease(resourcesURL);
-		path = resPath;
-		return path;
-	}
+	Ogre::String macPath();
 #endif
 
 };

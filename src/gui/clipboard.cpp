@@ -1,4 +1,5 @@
 #include "clipboard.h"
+#include "config.h"
 
 #include "debug.h"
 
@@ -6,7 +7,7 @@
 #include "tchar.h"
 #endif
 
-template<> SWUtil::Clipboard* Ogre::Singleton<SWUtil::Clipboard>::ms_Singleton = 0;
+template<> SWUtil::Clipboard* Ogre::Singleton<SWUtil::Clipboard>::SUMWARS_OGRE_SINGLETON = 0;
 
 namespace SWUtil
 {

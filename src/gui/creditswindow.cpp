@@ -16,8 +16,12 @@
 #include "creditswindow.h"
 #include "ceguiutility.h"
 #include "OgreConfigFile.h"
+#include "OgreDataStream.h"
+#include "sumwarshelper.h"
 
 #include "config.h"
+
+#include "creditswindow_content.inc"
 
 CreditsWindow::CreditsWindow(Document* doc)
 	:Window(doc)
@@ -51,21 +55,11 @@ CreditsWindow::CreditsWindow(Document* doc)
 	credits->setProperty("BackgroundEnabled", "true");
 	credits->setProperty("HorzFormatting", "HorzCentred");
 
+	Ogre::DataStreamPtr mem_stream(OGRE_NEW Ogre::MemoryDataStream((void*)authors_content.c_str(), authors_content.length(), false, true));
+	mem_stream->seek(0);
+
 	Ogre::ConfigFile cf;
-#if defined (__APPLE__)
-    Ogre::String path;
-    CFBundleRef mainBundle = CFBundleGetMainBundle();
-    CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
-    char resPath[PATH_MAX];
-    CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)resPath, PATH_MAX);
-    CFRelease(resourcesURL);
-    path = resPath;
-    cf.load(path + "/AUTHORS");
-#elif defined (__unix__)
-	cf.load(std::string(CFG_FILES_DIR) + "/AUTHORS");
-#else // WINDOWS
-	cf.load("AUTHORS");
-#endif
+	cf.load(mem_stream, "=", false);
 
 	// Go through all sections & settings in the file
 	Ogre::ConfigFile::SectionIterator seci = cf.getSectionIterator();

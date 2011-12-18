@@ -117,15 +117,15 @@ void Document::startGame(bool server)
 
 void Document::setSaveFile(std::string s)
 {
-	std::string userPath = SumwarsHelper::userPath();
-	userPath.append("/save/").append(s);
+	// we are using std::streams here, not PHYSFS, therefore we also have to use absolute paths
+	std::string savePath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::savePath() + "/" + s;
 
-	std::fstream file(userPath.c_str(),std::ios::in| std::ios::binary);
+	std::fstream file(savePath.c_str(),std::ios::in| std::ios::binary);
 	if (file.is_open())
 	{
 		char bin;
 		unsigned char* data=0;
-		m_save_file = userPath;
+		m_save_file = savePath;
 
 		DEBUG ("Loaded save file %s", s.c_str());
 
@@ -303,22 +303,11 @@ bool Document::createNewCharacter(std::string name)
 {
 	if (m_temp_player)
 	{
-		std::string storagePath (SumwarsHelper::getSingletonPtr ()->userPath ());
-		storagePath.append ("/save/");
-        std::string path;
-
-#ifndef __APPLE__
-		// Windows & Linux
-		path = storagePath;
-#else
-		path = PHYSFS_getUserDir();
-        path.append("/Library/Application Support/Sumwars/save/");
-#endif
-        m_save_file = path;
+        m_save_file = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::savePath() + "/";
 		m_save_file += name;
 		m_save_file += ".sav";
 
-		m_temp_player ->setName(TranslatableString(name,""));
+		m_temp_player->setName(TranslatableString(name,""));
 
 		DEBUGX("savefile %s",m_save_file.c_str());
 

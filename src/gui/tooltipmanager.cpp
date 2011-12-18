@@ -15,8 +15,9 @@
 
 #include "tooltipmanager.h"
 #include "ceguiutility.h"
+#include "config.h"
 
-template<> TooltipManager* Ogre::Singleton<TooltipManager>::ms_Singleton = 0;
+template<> TooltipManager* Ogre::Singleton<TooltipManager>::SUMWARS_OGRE_SINGLETON = 0;
 
 TooltipManager::TooltipManager ()
 {
@@ -174,11 +175,11 @@ void TooltipManager::update ( float timeSinceLastUpdate )
 
 TooltipManager* TooltipManager::getSingletonPtr ( void )
 {
-    return ms_Singleton;
+    return SUMWARS_OGRE_SINGLETON;
 }
 
 TooltipManager& TooltipManager::getSingleton ( void )
 {
-    assert ( ms_Singleton );
-    return ( *ms_Singleton );
+    assert ( SUMWARS_OGRE_SINGLETON );
+    return ( *SUMWARS_OGRE_SINGLETON );
 }
