@@ -218,97 +218,7 @@ CONFIGURE_FILE("src/config.h.in" "src/config.h")
 CONFIGURE_FILE("src/gui/default_resources.cfg.inc.in" "src/gui/default_resources.cfg.inc")
 CONFIGURE_FILE("src/gui/creditswindow_content.inc.in" "src/gui/creditswindow_content.inc")
 
-SET(HEADER_FILES
-  ./src/core/nlfg.h
-  ./src/core/worldobject.h
-  ./src/core/itemloader.h
-  ./src/core/itemlist.h
-  ./src/core/region.h
-  ./src/core/objectloader.h
-  ./src/core/player.h
-  ./src/core/monster.h
-  ./src/core/itemfactory.h
-  ./src/core/translatablestring.h
-  ./src/core/event.h
-  ./src/core/charconv.h
-  ./src/core/stdstreamconv.h
-  ./src/core/gameobject.h
-  ./src/core/projectile.h
-  ./src/core/treasure.h
-  ./src/core/dialogue.h
-  ./src/core/playerbase.h
-  ./src/core/objectfactory.h
-  ./src/core/gettext.h
-  ./src/core/dropitem.h
-  ./src/core/party.h
-  ./src/core/minimap.h
-  ./src/core/logger.h
-  ./src/core/item.h
-  ./src/core/networkstruct.h
-  ./src/core/gridunit.h
-  ./src/core/quest.h
-  ./src/core/eventsystem.h
-  ./src/core/creature.h
-  ./src/core/random.h
-  ./src/core/action.h
-  ./src/core/creaturestruct.h
-  ./src/core/servernetwork.h
-  ./src/core/nlfgservernetwork.h
-  ./src/core/nlfgclientnetwork.h
-  ./src/core/nlfgnetworkpacket.h
-  ./src/core/pathfind.h
-  ./src/core/damage.h
-  ./src/core/waypoint.h
-  ./src/core/document.h
-  ./src/core/debug.h
-  ./src/core/unionfindtree.h
-  ./src/core/world.h
-  ./src/core/fixedbase.h
-  ./src/core/fixedobject.h
-  ./src/core/templateloader.h
-  ./src/core/elementattrib.h
-  ./src/core/worldloader.h
-  ./src/core/geometry.h
-  ./src/core/scriptobject.h
-  ./src/core/spawnpoint.h
-  ./src/core/fraction.h
-  ./src/core/command.h
-  ./src/core/mapgenerator.h
-  ./src/core/options.h
-  ./src/core/sumwarshelper.h
-  ./src/gui/minimapwindow.h
-  ./src/gui/worldmap.h
-  ./src/gui/mainmenu.h
-  ./src/gui/ogg.h
-  ./src/gui/charcreate.h
-  ./src/gui/ceguiutility.h
-  ./src/gui/tooltipmanager.h
-  ./src/gui/music.h
-  ./src/gui/controlpanel.h
-  ./src/gui/inventory.h
-  ./src/gui/tradewindow.h
-  ./src/gui/dialoguewindow.h
-  ./src/gui/partyinfo.h
-  ./src/gui/networkwindows.h
-  ./src/gui/creditswindow.h
-  ./src/gui/mainwindow.h
-  ./src/gui/application.h
-  ./src/gui/skilltree.h
-  ./src/gui/chatline.h
-  ./src/gui/charinfo.h
-  ./src/gui/itemwindow.h
-  ./src/gui/savegamelist.h
-  ./src/gui/scene.h
-  ./src/gui/graphicmanager.h
-  ./src/gui/messageboxes.h
-  ./src/gui/graphicobjectrenderinfo.h
-  ./src/gui/graphicobject.h
-  ./src/gui/questinfo.h
-  ./src/gui/sound.h
-  ./src/gui/tooltip.h
-  ./src/gui/optionswindow.h
-  ./src/gui/clipboard.h
-)
+FILE(GLOB_RECURSE HEADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
 
 IF(SUMWARS_NO_TINYXML)
   SET(SRCS_TINYXML "")
@@ -434,25 +344,6 @@ SET(SRCS
 )
  
 IF(SUMWARS_BUILD_TOOLS)
-  SET(HEADER_FILES
-    ${HEADER_FILES}
-    ./src/gui/debugpanel/benchmarktab.h
-    ./src/gui/debugpanel/debugpanel.h
-    ./src/gui/debugpanel/debugcameratab.h
-    ./src/gui/debugpanel/iconeditortab.h
-    ./src/gui/debugpanel/guidebugtab.h
-    ./src/gui/debugpanel/luascripttab.h
-    ./src/gui/debugpanel/textfileeditwindow.h
-    ./src/gui/debugpanel/filebrowser/filebrowser.h
-    #./src/gui/debugpanel/reloadtab.h
-    ./src/gui/contenteditor/contenteditor.h
-    ./src/gui/contenteditor/contenteditortab.h
-    ./src/gui/contenteditor/fixedobjecteditor.h
-    ./src/gui/contenteditor/renderinfoeditor.h
-    ./src/gui/contenteditor/itemeditor.h
-    ./src/gui/contenteditor/monstereditor.h
-    )
-
   SET(SRCS
     ${SRCS}
     ${HEADER_FILES}
