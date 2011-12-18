@@ -78,7 +78,7 @@ MainMenu::MainMenu (Document* doc)
 	CEGUI::Window* verlbl;
 
 	verlbl = win_mgr.getWindow("SumwarsVersionLabel");
-	verlbl->setText(CEGUI::String("Version: ").append(SUMWARS_VERSION));
+	verlbl->setText(CEGUI::String("Version: ").append(VERSION));
 
 	CEGUI::FrameWindow* lbl;
 
