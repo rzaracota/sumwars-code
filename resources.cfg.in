@@ -5,6 +5,8 @@ FileSystem=INSTALL_PATH/resources/models/veg
 FileSystem=INSTALL_PATH/resources/materials/scripts
 FileSystem=INSTALL_PATH/resources/materials/programs
 FileSystem=INSTALL_PATH/resources/materials/textures
+FileSystem=INSTALL_PATH/resources/RTShaderLib
+FileSystem=INSTALL_PATH/resources/RTShaderLib/materials
 
 [Particles]
 FileSystem=INSTALL_PATH/resources/particle/ogre_1_6
