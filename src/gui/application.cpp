@@ -902,6 +902,44 @@ bool Application::initOgre()
 	// Create the scene manager
 	m_scene_manager = m_ogre_root->createSceneManager (Ogre::ST_GENERIC, "DefaultSceneManager");
 
+	int shadowMode = Options::getInstance ()->getShadowMode ();
+
+	if (shadowMode > 0)
+	{
+		switch (shadowMode)
+		{
+		case 2:
+			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+			DEBUG ("Using shadow technique: SHADOWTYPE_STENCIL_ADDITIVE");
+			break;
+		case 3:
+			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
+			DEBUG ("Using shadow technique: SHADOWTYPE_TEXTURE_ADDITIVE");
+			break;
+		case 4:
+			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);
+			DEBUG ("Using shadow technique: SHADOWTYPE_TEXTURE_MODULATIVE");
+			break;
+		case 5:
+			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_TEXTURE_ADDITIVE_INTEGRATED);
+			DEBUG ("Using shadow technique: SHADOWTYPE_TEXTURE_ADDITIVE_INTEGRATED");
+			break;
+		case 6:
+			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_TEXTURE_MODULATIVE_INTEGRATED);
+			DEBUG ("Using shadow technique: SHADOWTYPE_TEXTURE_MODULATIVE_INTEGRATED");
+			break;
+		case 1:
+		default:
+			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
+			DEBUG ("Using shadow technique: SHADOWTYPE_STENCIL_MODULATIVE");
+			break;
+		}
+	}
+	else
+	{
+		m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_NONE);
+		DEBUG ("Using shadow technique: SHADOWTYPE_NONE");
+	}
 
 	// Register as a Window listener
 	Ogre::WindowEventUtilities::addWindowEventListener (m_window, this);
@@ -1264,8 +1302,11 @@ bool Application::createView()
 #ifdef BUILD_TOOLS
 	new DebugPanel();
 	DebugPanel::getSingleton().init(false);
+	DEBUG ("Created debug panel");
+
 	new ContentEditor();
 	ContentEditor::getSingleton().init(false);
+	DEBUG ("Created content editor");
 #endif
 
 	TooltipManager *mgr = new TooltipManager();
