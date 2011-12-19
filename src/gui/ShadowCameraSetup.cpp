@@ -107,12 +107,12 @@ bool ShadowCameraSetup::setup()
 
 	mSceneMgr.setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE_INTEGRATED);
 
-	mSceneMgr.setShadowTextureCount(5);
+	mSceneMgr.setShadowTextureCount(3);
 	mSceneMgr.setShadowTextureSelfShadow(true);
 
 	mSceneMgr.setShadowTextureCountPerLightType(Ogre::Light::LT_DIRECTIONAL, 3);
-	mSceneMgr.setShadowTextureCountPerLightType(Ogre::Light::LT_POINT, 1);
-	mSceneMgr.setShadowTextureCountPerLightType(Ogre::Light::LT_SPOTLIGHT, 1);
+	//mSceneMgr.setShadowTextureCountPerLightType(Ogre::Light::LT_POINT, 1);
+	//mSceneMgr.setShadowTextureCountPerLightType(Ogre::Light::LT_SPOTLIGHT, 1);
 
 	if (isOpenGL)
 	{

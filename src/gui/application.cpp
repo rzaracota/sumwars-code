@@ -410,6 +410,14 @@ bool Application::init(char *argv)
 	}
 
 
+	// Ressourcen festlegen
+	ret = setupResources();
+	if (ret==false)
+	{
+		ERRORMSG("Setting up Resources failed");
+		return false;
+	}
+
 	// also initialize the RTSS.
 	initializeRTShaderSystem (m_scene_manager);
 
@@ -417,12 +425,10 @@ bool Application::init(char *argv)
 	m_shader_mgr_ptr = new ShaderManager ();
 	m_shader_mgr_ptr->registerSceneManager (m_scene_manager, Ogre::RTShader::ShaderGenerator::getSingletonPtr ());
 
-
-	// Ressourcen festlegen
-	ret = setupResources();
-	if (ret==false)
+	ret = initializeResourceGroups ();
+	if (false == ret)
 	{
-		ERRORMSG("Setting up Resources failed");
+		ERRORMSG ("Initializing resource groups failed");
 		return false;
 	}
 
@@ -929,6 +935,26 @@ bool Application::configureOgre()
 }
 
 
+bool Application::initializeResourceGroups ()
+{
+	// Gruppen initialisieren
+	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("General");
+	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Particles");
+	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Savegame");
+	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("GUI");
+
+
+	// Debugging: Meshes direkt anlegen
+
+	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
+
+	Ogre::MeshManager::getSingleton().createPlane("square44", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane,200,200,1,1,true,1,1,1,Ogre::Vector3::UNIT_X);
+
+
+	Ogre::MeshManager::getSingleton().createPlane("rect81", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane,400,50,1,1,true,1,1,1,Ogre::Vector3::UNIT_X);
+	return true;
+}
+
 
 bool Application::setupResources()
 {
@@ -983,22 +1009,6 @@ bool Application::setupResources()
 #if defined(WIN32)
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("c:\\windows\\fonts", "FileSystem", "GUI");
 #endif
-
-	// Gruppen initialisieren
-	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("General");
-	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Particles");
-	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Savegame");
-	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("GUI");
-
-
-	// Debugging: Meshes direkt anlegen
-
-	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
-
-	Ogre::MeshManager::getSingleton().createPlane("square44", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane,200,200,1,1,true,1,1,1,Ogre::Vector3::UNIT_X);
-
-
-	Ogre::MeshManager::getSingleton().createPlane("rect81", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane,400,50,1,1,true,1,1,1,Ogre::Vector3::UNIT_X);
 
 	return true;
 }
@@ -1209,23 +1219,32 @@ bool Application::initializeRTShaderSystem (Ogre::SceneManager * sceneMgr)
 				}
 			}
 			// Core libs path found in the current group.
-			if (coreLibsFound) 
-				break; 
+			if (coreLibsFound)
+			{
+				break;
+			}
 		}
 
 		if (storeShaderCacheInMemory)
 		{
 			// empty path => generate directly from memory.
 			shaderGeneratorPtr->setShaderCachePath (Ogre::StringUtil::BLANK);
+
+			DEBUG ("Set shader cache path for RTShaders to memory");
 		}
 		else
 		{
 			shaderGeneratorPtr->setShaderCachePath (shaderCachePath);
+			DEBUG ("Set shader cache path for RTShaders to [%s]", shaderCachePath.c_str ());
 		}
 		
 		// Core shader libs not found -> shader generating will fail.
-		if (shaderCoreLibsPath.empty())			
-			return false;			
+		if (shaderCoreLibsPath.empty())
+		{
+			ERRORMSG ("ERROR initializing the RTSS! (empty core libs path)");
+			return false;
+		}
+		
 
 	}
 	else

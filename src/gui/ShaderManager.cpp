@@ -91,7 +91,9 @@ public:
 	}
 };
 
-ShaderManager::ShaderManager() : mGraphicsLevel(LEVEL_DEFAULT), mBestGraphicsLevel(LEVEL_DEFAULT)
+ShaderManager::ShaderManager () 
+	: mGraphicsLevel (LEVEL_DEFAULT)
+	, mBestGraphicsLevel (LEVEL_DEFAULT)
 {
 	mGraphicSchemes[LEVEL_DEFAULT]		= std::string("Default");
 	mGraphicSchemes[LEVEL_LOW]			= std::string("Low");
@@ -104,6 +106,7 @@ ShaderManager::ShaderManager() : mGraphicsLevel(LEVEL_DEFAULT), mBestGraphicsLev
 
 void ShaderManager::init()
 {
+	DEBUG ("Shader Manager is initializing...");
 #if 0
 	// We normally want to check base materials
 	std::list<std::string> materialsToCheck;
@@ -155,6 +158,10 @@ void ShaderManager::init()
 
 	setGraphicsLevel(mGraphicsLevel);*/
 #endif
+	// Force currently to the "high" quality settings.
+	mBestGraphicsLevel = LEVEL_HIGH;
+	mGraphicsLevel = LEVEL_HIGH;
+	setGraphicsLevel (mGraphicsLevel);
 }
 
 bool ShaderManager::checkMaterial(const std::string& materialName, const std::string& schemeName)
@@ -288,14 +295,16 @@ ShaderManager::GraphicsLevel ShaderManager::setGraphicsLevel(ShaderManager::Grap
 
 void ShaderManager::setPSSMShadows()
 {
-	for (ShaderSetupStore::const_iterator I = mShaderSetups.begin(); I != mShaderSetups.end(); ++I) {
+	for (ShaderSetupStore::const_iterator I = mShaderSetups.begin(); I != mShaderSetups.end(); ++I)
+	{
 		I->second->setPSSMShadows();
 	}
 }
 
 void ShaderManager::setNoShadows()
 {
-	for (ShaderSetupStore::const_iterator I = mShaderSetups.begin(); I != mShaderSetups.end(); ++I) {
+	for (ShaderSetupStore::const_iterator I = mShaderSetups.begin(); I != mShaderSetups.end(); ++I)
+	{
 		I->second->setNoShadows();
 	}
 }

@@ -124,9 +124,16 @@ class Application
 
 		/**
 		 * \fn setupResources()
-		 * \brief Stellt die Ressourcen fuer Ogre und CEGUI ein
+		 * \brief Adds the folder structures for the Ogre and CEGUI resources. 
+		 * Note: this function does not actually load the resources. Call the initializeResourceGroups function after this one to actually load the resources.
 		 */
 		bool setupResources();
+
+		/**
+		 * \fn initializeResourceGroups()
+		 * \brief Loads the resources in the memory. The resource locations are added to groups prior to this.
+		 */
+		bool initializeResourceGroups ();
 
 		/**
 		 * \fn initGettext()
