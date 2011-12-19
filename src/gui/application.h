@@ -41,6 +41,8 @@
 #include "mainwindow.h"
 #include "timer.h"
 #include "graphicmanager.h"
+#include "ShaderManager.h"
+
 
 /**
  * \class Application
@@ -144,6 +146,11 @@ class Application
 		bool initOpenAL();
 
 		/**
+		 * \brief Initialize the run-time shader system (Ogre core component)
+		 */
+		bool initializeRTShaderSystem (Ogre::SceneManager * sceneMgr);
+
+		/**
 		 * \fn bool createView()
 		 * \brief Erzeugt die Ansichten
 		 */
@@ -227,7 +234,6 @@ class Application
 		 */
  		Ogre::SceneManager *m_scene_manager;
         
-
  		/**
 		 * \var bool m_shutdown
 		 * \brief true, wenn die Anwendung beendet werden soll
@@ -247,6 +253,8 @@ class Application
 		 * \brief Hauptfenster der Applikation
 		 */
 		MainWindow* m_main_window;
+
+		ShaderManager* m_shader_mgr_ptr;
 
 		/**
 		 * \var Timer m_timer

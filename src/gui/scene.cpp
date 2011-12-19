@@ -24,7 +24,8 @@
 
 #include "graphicmanager.h"
 
-
+// Allo RTSS initialization in the scene (such as viewport manipulation).
+#include <RTShaderSystem/OgreRTShaderSystem.h>
 
 
 
@@ -35,16 +36,20 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	m_scene_manager = Ogre::Root::getSingleton().getSceneManager("DefaultSceneManager");
 	GraphicManager::setSceneManager(m_scene_manager);
 	
-	// Kamera anlegen
+	// Create the camera
 	m_camera = m_scene_manager->createCamera("camera");
 	m_camera->setPosition(Ogre::Vector3(0, 30 * GraphicManager::g_global_scale, 30 * GraphicManager::g_global_scale));
 	m_camera->lookAt(Ogre::Vector3(0,0,0));
 	m_camera->setNearClipDistance(0.1*GraphicManager::g_global_scale);
 
 
-	// Viewport anlegen, Hintergrundfarbe schwarz
+	// Create the viewport; background colour: black.
 	m_viewport = m_window->addViewport(m_camera);
 	m_viewport->setBackgroundColour(Ogre::ColourValue(0,0,0));
+
+	// In case RTSS is used, add the material scheme.
+	m_viewport->setMaterialScheme(Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+
 	m_camera->setAspectRatio(Ogre::Real(m_viewport->getActualWidth()) / Ogre::Real(m_viewport->getActualHeight()));
 
 	registerMeshes();

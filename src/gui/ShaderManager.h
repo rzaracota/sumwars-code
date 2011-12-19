@@ -25,6 +25,7 @@
 
 #include <string>
 #include <map>
+#include <RTShaderSystem/OgreRTShaderSystem.h>
 
 class ShadowCameraSetup;
 class ShaderSetupInstance;
@@ -34,6 +35,7 @@ namespace Ogre
 	class RenderWindow;
 	class SceneManager;
 }
+
 /**
  * @brief Utility class for setup shaders
  *
@@ -106,6 +108,15 @@ public:
 	void registerSceneManager(Ogre::SceneManager* sceneManager);
 
 	/**
+	 * @brief Registers a scene manager with the shader manager, while also providing the associated RTSS shader generator.
+	 *
+	 * This allows the shader manager to handle the shadow and shader setup for the scene manager.
+	 * @param sceneManager The scene manager to register.
+	 * @param shaderGeneratorPtr The shader generator, connected to the scene.
+	 */
+	void registerSceneManager(Ogre::SceneManager* sceneManager, Ogre::RTShader::ShaderGenerator* shaderGeneratorPtr);
+
+	/**
 	 * @brief Deregisters a scene manager with the shader manager.
 	 *
 	 * @param sceneManager The scene manager to deregister.
@@ -113,8 +124,13 @@ public:
 	void deregisterSceneManager(Ogre::SceneManager* sceneManager);
 
 private:
+	/**
+	 * @brief The Shader generator instance.
+	 */
+	Ogre::RTShader::ShaderGenerator* mShaderGeneratorPtr;
 
 	typedef std::map<Ogre::SceneManager*, ShaderSetupInstance*> ShaderSetupStore;
+
 	/**
 	 * Current graphics level
 	 */

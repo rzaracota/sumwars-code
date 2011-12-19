@@ -54,10 +54,18 @@ private:
 	 */
 	ShadowCameraSetup* mShadowCameraSetup;
 
+	/**
+	 * @brief The shader generator
+	 */
+	Ogre::RTShader::ShaderGenerator* mShaderGeneratorPtr;
+
 public:
 
-	ShaderSetupInstance(Ogre::SceneManager& sceneManager)
-	: mSceneManager(sceneManager), mShadowCameraSetup(0)
+	ShaderSetupInstance (Ogre::SceneManager& sceneManager,
+						Ogre::RTShader::ShaderGenerator* generatorPtr)
+		: mSceneManager(sceneManager)
+		, mShadowCameraSetup(0)
+		, mShaderGeneratorPtr (generatorPtr)
 	{
 
 	}
@@ -70,7 +78,7 @@ public:
 	void setPSSMShadows()
 	{
 		delete mShadowCameraSetup;
-		mShadowCameraSetup = new ShadowCameraSetup(mSceneManager);
+		mShadowCameraSetup = new ShadowCameraSetup(mSceneManager, mShaderGeneratorPtr);
 	}
 
 	void setNoShadows()
@@ -96,6 +104,7 @@ ShaderManager::ShaderManager() : mGraphicsLevel(LEVEL_DEFAULT), mBestGraphicsLev
 
 void ShaderManager::init()
 {
+#if 0
 	// We normally want to check base materials
 	std::list<std::string> materialsToCheck;
 	materialsToCheck.push_back("/base/simple");
@@ -145,10 +154,13 @@ void ShaderManager::init()
 	}
 
 	setGraphicsLevel(mGraphicsLevel);*/
+#endif
 }
 
 bool ShaderManager::checkMaterial(const std::string& materialName, const std::string& schemeName)
 {
+	return true;
+#if 0
 	// OGRE scheme is switched in caller
 	Ogre::MaterialPtr material = static_cast<Ogre::MaterialPtr>(Ogre::MaterialManager::getSingleton().load(materialName, "General"));
 	if (material->getNumSupportedTechniques() == 0) 
@@ -177,11 +189,13 @@ bool ShaderManager::checkMaterial(const std::string& materialName, const std::st
 	LOGGER(Log::LOGLEVEL_INFO, str.str().c_str());
 	str.str("");
 	return true;
+#endif
 }
 
 ShaderManager::~ShaderManager()
 {
-	for (ShaderSetupStore::const_iterator I = mShaderSetups.begin(); I != mShaderSetups.end(); ++I) {
+	for (ShaderSetupStore::const_iterator I = mShaderSetups.begin(); I != mShaderSetups.end(); ++I)
+	{
 		delete I->second;
 	}
 }
@@ -210,9 +224,17 @@ ShaderManager::GraphicsLevel ShaderManager::getLevelByName(const std::string &le
 
 void ShaderManager::registerSceneManager(Ogre::SceneManager* sceneManager)
 {
-	ShaderSetupInstance* instance = new ShaderSetupInstance(*sceneManager);
+	ShaderSetupInstance* instance = new ShaderSetupInstance(*sceneManager, 0);
 	mShaderSetups.insert(ShaderSetupStore::value_type(sceneManager, instance));
-	setGraphicsLevel(mGraphicsLevel); //TODO: set it per new scene manager instead
+	//setGraphicsLevel(mGraphicsLevel); 
+}
+
+
+void ShaderManager::registerSceneManager(Ogre::SceneManager* sceneManager, Ogre::RTShader::ShaderGenerator* shaderGeneratorPtr)
+{
+	ShaderSetupInstance* instance = new ShaderSetupInstance(*sceneManager, shaderGeneratorPtr);
+	mShaderSetups.insert(ShaderSetupStore::value_type(sceneManager, instance));
+	//setGraphicsLevel(mGraphicsLevel); 
 }
 
 void ShaderManager::deregisterSceneManager(Ogre::SceneManager* sceneManager)

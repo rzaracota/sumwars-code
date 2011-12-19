@@ -20,7 +20,6 @@
 #include "templateloader.h"
 #include "music.h"
 #include "sumwarshelper.h"
-#include "ShaderManager.h"
 
 #ifdef BUILD_TOOLS
 #include "benchmarktab.h"
@@ -46,6 +45,9 @@
 
 // Add the material manager to allow setting shadow techniques
 #include <OgreMaterialManager.h>
+
+// Allo RTSS initialization in the scene (such as viewport manipulation).
+#include <RTShaderSystem/OgreRTShaderSystem.h>
 
 // Clipboard singleton created here.
 #include "clipboard.h"
@@ -397,6 +399,25 @@ bool Application::init(char *argv)
 		return false;
 	}
 
+	DEBUG ("Initializing the RTSS...");
+
+	// Document anlegen
+	ret = createDocument();
+	if (ret==false)
+	{
+		ERRORMSG("cant create document");
+		return false;
+	}
+
+
+	// also initialize the RTSS.
+	initializeRTShaderSystem (m_scene_manager);
+
+	DEBUG ("Creating and registering the shader manager...");
+	m_shader_mgr_ptr = new ShaderManager ();
+	m_shader_mgr_ptr->registerSceneManager (m_scene_manager, Ogre::RTShader::ShaderGenerator::getSingletonPtr ());
+
+
 	// Ressourcen festlegen
 	ret = setupResources();
 	if (ret==false)
@@ -404,11 +425,6 @@ bool Application::init(char *argv)
 		ERRORMSG("Setting up Resources failed");
 		return false;
 	}
-
-	ShaderManager *smanager = new ShaderManager();
-	smanager->setGraphicsLevel(ShaderManager::LEVEL_HIGH);
-	smanager->registerSceneManager(m_scene_manager);
-
 
 	//Gettext initialisieren
 	ret = initGettext();
@@ -427,13 +443,6 @@ bool Application::init(char *argv)
 		return false;
 	}
 
-	// Document anlegen
-	ret = createDocument();
-	if (ret==false)
-	{
-		ERRORMSG("cant create document");
-		return false;
-	}
 	// View anlegen
 	ret = createView();
 	if (ret==false)
@@ -441,6 +450,10 @@ bool Application::init(char *argv)
 		ERRORMSG("cant create view");
 		return false;
 	}
+
+
+
+
 
 	ret = initOpenAL();
 	if (ret == false)
@@ -1140,11 +1153,95 @@ bool Application::createDocument()
 	return true;
 }
 
+bool Application::initializeRTShaderSystem (Ogre::SceneManager * sceneMgr)
+{
+	DEBUG ("Application initializing RTSS");
+	if (Ogre::RTShader::ShaderGenerator::initialize())
+	{
+		Ogre::RTShader::ShaderGenerator * shaderGeneratorPtr;
+		shaderGeneratorPtr = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
+
+		shaderGeneratorPtr->addSceneManager (sceneMgr);
+
+		std::string prefferredShadingLanguage ("cg");
+		if (Ogre::Root::getSingleton().getRenderSystem()->getName().find("GL") != Ogre::String::npos)
+		{
+			prefferredShadingLanguage = "glsl";
+		}
+		else
+		{
+			// use cg for d3d.
+		}
+		// Set the preffered language...
+		shaderGeneratorPtr->setTargetLanguage(prefferredShadingLanguage);
+		DEBUG ("Using the shading language: [%s]", shaderGeneratorPtr->getTargetLanguage ().c_str ());
+
+		// Invalidate the scheme in order to re-generate all shaders based technique related to this scheme.
+		shaderGeneratorPtr->invalidateScheme (Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+
+		// TODO: make non-hard-coded
+		bool storeShaderCacheInMemory = false;
+
+		// Setup core libraries and shader cache path.
+		Ogre::StringVector groupVector = Ogre::ResourceGroupManager::getSingleton().getResourceGroups();
+		Ogre::StringVector::iterator itGroup = groupVector.begin();
+		Ogre::StringVector::iterator itGroupEnd = groupVector.end();
+		Ogre::String shaderCoreLibsPath;
+		Ogre::String shaderCachePath;
+		bool coreLibsFound = false;
+		for ( ; itGroup != itGroupEnd; ++itGroup)
+		{
+			Ogre::ResourceGroupManager::LocationList resLocationsList = Ogre::ResourceGroupManager::getSingleton().getResourceLocationList(*itGroup);
+			Ogre::ResourceGroupManager::LocationList::iterator it = resLocationsList.begin();
+			Ogre::ResourceGroupManager::LocationList::iterator itEnd = resLocationsList.end();
+
+			// Try to find the location of the core shader lib functions and use it
+			// as shader cache path as well - this will reduce the number of generated files
+			// when running from different directories.
+			for (; it != itEnd; ++it)
+			{
+				if ((*it)->archive->getName().find("RTShaderLib") != Ogre::String::npos)
+				{
+					shaderCoreLibsPath = (*it)->archive->getName() + "/cache/";
+					shaderCachePath = shaderCoreLibsPath;
+					coreLibsFound = true;
+					break;
+				}
+			}
+			// Core libs path found in the current group.
+			if (coreLibsFound) 
+				break; 
+		}
+
+		if (storeShaderCacheInMemory)
+		{
+			// empty path => generate directly from memory.
+			shaderGeneratorPtr->setShaderCachePath (Ogre::StringUtil::BLANK);
+		}
+		else
+		{
+			shaderGeneratorPtr->setShaderCachePath (shaderCachePath);
+		}
+		
+		// Core shader libs not found -> shader generating will fail.
+		if (shaderCoreLibsPath.empty())			
+			return false;			
+
+	}
+	else
+	{
+		ERRORMSG ("ERROR initializing the RTSS!!!");
+		return false;
+	}
+	return false;
+}
+
+
 bool Application::createView()
 {
 	DEBUG("create view\n");
 	m_main_window = new MainWindow(m_ogre_root, m_cegui_system,m_window,m_document);
-
+	DEBUG ("created main indow");
 #ifdef BUILD_TOOLS
 	new DebugPanel();
 	DebugPanel::getSingleton().init(false);

@@ -1,40 +1,43 @@
-//
-// C++ Interface: ShadowCameraSetup
-//
-// Description:
-//
-//
-// Author: Erik Hjortsberg <erik.hjortsberg@gmail.com>, (C) 2009
-//
-// This program is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.//
-//
-#ifndef EMBEROGRESHADOWCAMERASETUP_H
-#define EMBEROGRESHADOWCAMERASETUP_H
+/*
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * File info: 
+ *      the file was started from the Worldforge Ember client similarly named file. It was adapted and greatly changed.
+ * 
+ * List of contributors:
+ * @author Erik Hjortsberg (original Ember client file).
+ * @author Augustin Preda.
+ */
+#ifndef SHADOWCAMERASETUP_H
+#define SHADOWCAMERASETUP_H
 
 #include <OgreShadowCameraSetup.h>
 
+#include <RTShaderSystem/OgreRTShaderSystem.h>
+
+// Forward declarations.
 namespace Ogre
 {
 	class PSSMShadowCameraSetup;
 }
 
+
 /**
- *
  * @brief This takes care of the setup of the pssm shadow camera.
- *
- * Apart from setting up the camera it also listens for changes to the varconf settings dealing with the shadows and update the shadow settings accordingly.
+ * The PSSM is difficult to set up due to the large amount of parameters that need tinkering with.
  *
  * @author Erik Hjortsberg <erik.hjortsberg@gmail.com>
  */
@@ -45,7 +48,7 @@ public:
      * @brief Ctor.
      * @param sceneMgr The scene manager to which we want to apply our shadow camera.
      */
-    ShadowCameraSetup(Ogre::SceneManager& sceneMgr);
+    ShadowCameraSetup(Ogre::SceneManager& sceneMgr, Ogre::RTShader::ShaderGenerator* rtssPtr = 0);
 
     /**
      * @brief Dtor.
@@ -75,6 +78,12 @@ protected:
      * @brief A reference to the shared pointer, which guarantees that the mPssmSetup field isn't deleted inside Ogre.
      */
     Ogre::ShadowCameraSetupPtr mSharedCameraPtr;
+
+	/**
+	 * @brief The Shader generator instance.
+	 */
+	Ogre::RTShader::ShaderGenerator* mShaderGenerator;
+
 private:
 
 	/**
@@ -87,6 +96,15 @@ private:
 	 * This is kept as an integer value only temporary. It should be turned into an enum and read from a config file.
 	 */
 	int m_shadow_camera_setup_type;
+
+	/**
+	 * Configure function:
+	 * calculate the split points for the PSSM
+	 * @param splitCount The amount of split points to use. Recommended value : 3
+	 * @param nearDistance The closest distance to calculate from. Recommended value : the camera near clip distance.
+	 * @param farDistance The furthest point to calculate to. Recommended value: larger than the shadow far distance.
+	 */
+	void configAndCalculateSplitPoints (size_t splitCount, Ogre::Real nearDistance, Ogre::Real farDistance);
 
 	/**
 	 * @brief Sets the shadow texture size.
@@ -138,4 +156,4 @@ private:
 	void Config_ShadowRenderBackfaces(bool renderBackfaces);
 
 };
-#endif
+#endif // SHADOWCAMERASETUP_H

@@ -30,27 +30,60 @@
 #include <OgreShadowCameraSetupPSSM.h>
 
 
-ShadowCameraSetup::ShadowCameraSetup(Ogre::SceneManager& sceneMgr)
-	: mSceneMgr(sceneMgr)
-	, m_shadow_camera_setup_type (2)
+ShadowCameraSetup::ShadowCameraSetup (Ogre::SceneManager& sceneMgr, Ogre::RTShader::ShaderGenerator* rtssPtr)
+	: mSceneMgr (sceneMgr)
+	, m_shadow_camera_setup_type (4)
+	, mShaderGenerator (rtssPtr)
 {
+	DEBUG ("Shadow camera setup ctor - entered");
 	// Set m_shadow_camera_setup_type to:
 	// 0 = Default
 	// 1 = LiSPSMShadowCameraSetup
 	// 2 = FocusedShadowCameraSetup
 	// 3 = PlaneOptimalShadowCameraSetup
 	// 4 = PSSM
-	setup();
-	Config_ShadowTextureSize(1024);
+	setup ();
+
+	//Config_ShadowTextureSize(1024);
 	if (m_shadow_camera_setup_type == 4)
 	{
-		Config_ShadowSplitPoints(1, 15, 50, 200);
-		Config_ShadowSplitPadding(10.0);
-		Config_ShadowOptimalAdjustFactors(1, 1, 1);
-		Config_ShadowUseAggressiveFocusRegion(true);
+		DEBUG ("Applying custom PSSM settings...");
+		Config_ShadowSplitPadding (10.0f);
+		//Config_ShadowSplitPoints(1, 15, 50, 200);
+		Config_ShadowOptimalAdjustFactors (2.0f, 1.0f, 0.5f);
+
+		configAndCalculateSplitPoints (3, 1, 1000);
+
+		//Config_ShadowUseAggressiveFocusRegion(true);
+
+		// Make the RTTS aware of the PSSM setup.
+		if (mPssmSetup && mShaderGenerator)
+		{
+			// Grab the scheme render state.												
+			Ogre::RTShader::RenderState* schemRenderState = mShaderGenerator->getRenderState (Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+			// Assume a lighting model of SSLM_PerVertexLighting
+			Ogre::RTShader::SubRenderState* perPerVertexLightModel = mShaderGenerator->createSubRenderState (Ogre::RTShader::FFPLighting::Type);
+			schemRenderState->addTemplateSubRenderState (perPerVertexLightModel);	
+
+			Ogre::RTShader::SubRenderState* subRenderState = mShaderGenerator->createSubRenderState (Ogre::RTShader::IntegratedPSSM3::Type);	
+			Ogre::RTShader::IntegratedPSSM3* pssm3SubRenderState = static_cast<Ogre::RTShader::IntegratedPSSM3*>(subRenderState);
+
+			const Ogre::PSSMShadowCameraSetup::SplitPointList& srcSplitPoints = mPssmSetup->getSplitPoints ();
+			Ogre::RTShader::IntegratedPSSM3::SplitPointList dstSplitPoints;
+
+			for (unsigned int i = 0; i < srcSplitPoints.size (); ++ i)
+			{
+				dstSplitPoints.push_back (srcSplitPoints[i]);
+			}
+
+			pssm3SubRenderState->setSplitPoints (dstSplitPoints);
+			schemRenderState->addTemplateSubRenderState (subRenderState);
+		}
 	}
-	Config_ShadowFarDistance(200.0);
-	Config_ShadowRenderBackfaces(true);
+
+	Config_ShadowFarDistance (600.0);
+	Config_ShadowRenderBackfaces (true);
+	DEBUG ("Shadow Camera Setup ctor - exit");
 }
 
 
@@ -60,11 +93,15 @@ ShadowCameraSetup::~ShadowCameraSetup()
 
 bool ShadowCameraSetup::setup()
 {
-	// Need to detect D3D or GL for best depth shadowmapping
+	DEBUG ("Setting up the shadow camera...");
+	// Need to detect D3D or GL for best depth shadowmapping.
 	bool isOpenGL;
-	if (Ogre::Root::getSingleton().getRenderSystem()->getName().find("GL") != Ogre::String::npos) {
+	if (Ogre::Root::getSingleton().getRenderSystem()->getName().find("GL") != Ogre::String::npos)
+	{
 		isOpenGL = true;
-	} else {
+	}
+	else
+	{
 		isOpenGL = false;
 	}
 
@@ -77,17 +114,21 @@ bool ShadowCameraSetup::setup()
 	mSceneMgr.setShadowTextureCountPerLightType(Ogre::Light::LT_POINT, 1);
 	mSceneMgr.setShadowTextureCountPerLightType(Ogre::Light::LT_SPOTLIGHT, 1);
 
-	//if (isOpenGL) {
-	//	// GL performs much better if you pick half-float format
-	//	mSceneMgr.setShadowTexturePixelFormat(Ogre::PF_FLOAT16_R);
-	//} else {
-	//	// D3D is the opposite - if you ask for PF_FLOAT16_R you
-	//	// get an integer format instead! You can ask for PF_FLOAT16_GR
-	//	// but the precision doesn't work well
-		mSceneMgr.setShadowTexturePixelFormat(Ogre::PF_FLOAT32_R);
-	//}
+	if (isOpenGL)
+	{
+		// GL performs much better if you pick half-float format
+		mSceneMgr.setShadowTexturePixelFormat (Ogre::PF_FLOAT16_R);
+	}
+	else
+	{
+		// D3D is the opposite - if you ask for PF_FLOAT16_R you
+		// get an integer format instead! You can ask for PF_FLOAT16_GR
+		// but the precision doesn't work well
+		mSceneMgr.setShadowTexturePixelFormat (Ogre::PF_FLOAT32_R);
+	}
 
-	mSceneMgr.setShadowTextureCasterMaterial("Ogre/DepthShadowmap/Caster/Float/NoAlpha");
+	// TODO: make configurable.
+	mSceneMgr.setShadowTextureCasterMaterial("PSSM/shadow_caster");
 
 	switch (m_shadow_camera_setup_type)
 	{
@@ -114,22 +155,36 @@ bool ShadowCameraSetup::setup()
 	
 	mSceneMgr.setShadowCameraSetup(mSharedCameraPtr);
 
+	DEBUG ("Successfully set up the shadow camera.");
 	return true;
 }
 
-void ShadowCameraSetup::Config_ShadowTextureSize(int textureSize)
-{	
+void ShadowCameraSetup::configAndCalculateSplitPoints (size_t splitCount, Ogre::Real nearDistance, Ogre::Real farDistance)
+{
 	try 
 	{
-		mSceneMgr.setShadowTextureSize(textureSize);
+		mPssmSetup->calculateSplitPoints (splitCount, nearDistance, farDistance);
 	}
 	catch (const std::exception& ex) 
 	{
-		ERRORMSG ("Caught exception when setting shadow texture size: [%s]", ex.what());
+		ERRORMSG ("Caught exception when setting shadow texture size: [%s]", ex.what ());
 	}
 }
 
-void ShadowCameraSetup::Config_ShadowSplitPoints(int a, int b, int c, int d)
+
+void ShadowCameraSetup::Config_ShadowTextureSize (int textureSize)
+{	
+	try 
+	{
+		mSceneMgr.setShadowTextureSize (textureSize);
+	}
+	catch (const std::exception& ex) 
+	{
+		ERRORMSG ("Caught exception when setting shadow texture size: [%s]", ex.what ());
+	}
+}
+
+void ShadowCameraSetup::Config_ShadowSplitPoints (int a, int b, int c, int d)
 {
 	try 
 	{
@@ -147,7 +202,7 @@ void ShadowCameraSetup::Config_ShadowSplitPoints(int a, int b, int c, int d)
 	}
 }
 
-void ShadowCameraSetup::Config_ShadowSplitPadding(float padding)
+void ShadowCameraSetup::Config_ShadowSplitPadding (float padding)
 {
 	try 
 	{
@@ -159,13 +214,15 @@ void ShadowCameraSetup::Config_ShadowSplitPadding(float padding)
 	}
 }
 
-void ShadowCameraSetup::Config_ShadowOptimalAdjustFactors(float a, float b, float c)
+void ShadowCameraSetup::Config_ShadowOptimalAdjustFactors (float a, float b, float c)
 {
 	try 
 	{
 		mPssmSetup->setOptimalAdjustFactor(0, a);
 		mPssmSetup->setOptimalAdjustFactor(1, b);
 		mPssmSetup->setOptimalAdjustFactor(2, c);
+
+		mPssmSetup->setUseSimpleOptimalAdjust (false);
 	} 
 	catch (const std::exception& ex) 
 	{
@@ -173,7 +230,7 @@ void ShadowCameraSetup::Config_ShadowOptimalAdjustFactors(float a, float b, floa
 	}
 }
 
-void ShadowCameraSetup::Config_ShadowUseAggressiveFocusRegion(bool useAggressiveFocusRegion)
+void ShadowCameraSetup::Config_ShadowUseAggressiveFocusRegion (bool useAggressiveFocusRegion)
 {
 	try 
 	{
@@ -185,7 +242,7 @@ void ShadowCameraSetup::Config_ShadowUseAggressiveFocusRegion(bool useAggressive
 	}
 }
 
-void ShadowCameraSetup::Config_ShadowFarDistance(float dist)
+void ShadowCameraSetup::Config_ShadowFarDistance (float dist)
 {
 	try 
 	{
@@ -197,7 +254,7 @@ void ShadowCameraSetup::Config_ShadowFarDistance(float dist)
 	}
 }
 
-void ShadowCameraSetup::Config_ShadowRenderBackfaces(bool renderBackfaces)
+void ShadowCameraSetup::Config_ShadowRenderBackfaces (bool renderBackfaces)
 {
 	try
 	{
