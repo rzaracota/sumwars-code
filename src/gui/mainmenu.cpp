@@ -359,10 +359,12 @@ void MainMenu::createScene()
 		Ogre::Entity *e;
 		//Ogre::MeshPtr *m; // 2011.10.23: found as unused.
 		Ogre::ParticleSystem *p;
+		bool itemsCastShadows = true;
 		
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("long_sw.mesh");
 		e->getSubEntity(0)->setMaterialName("Item");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-13.7902, 0.0892202, -24.5334));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -371,6 +373,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("gold.mesh");
 		e->getSubEntity(0)->setMaterialName("Item");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-10.4538, 0.990349, -26.0507));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -379,6 +382,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("leathArm.mesh");
 		e->getSubEntity(0)->setMaterialName("Item");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-12.9917, -0.00965142, -23.8061));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -387,6 +391,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("heal_2.mesh");
 		e->getSubEntity(0)->setMaterialName("Item");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-11.8726, 0.990349, -25.4361));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -395,6 +400,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("heal_1.mesh");
 		e->getSubEntity(0)->setMaterialName("Item");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-12.286, 0.990349, -25.537));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -403,6 +409,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("box_m3.mesh");
 		e->getSubEntity(0)->setMaterialName("gimcrack");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-12.0797, -0.00965118, -25.5948));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -411,6 +418,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("box_m2.mesh");
 		e->getSubEntity(0)->setMaterialName("gimcrack");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-12.3237, -0.00965214, -28.5043));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -419,6 +427,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("box_m2.mesh");
 		e->getSubEntity(0)->setMaterialName("gimcrack");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-10.4654, -0.00965118, -26.1655));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -427,6 +436,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("buckler.mesh");
 		e->getSubEntity(0)->setMaterialName("Item");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-13.3333, 0.356877, -25.1495));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -435,6 +445,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("campFire.mesh");
 		e->getSubEntity(0)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-10.4943, -0.00965166, -21.3849));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -444,6 +455,7 @@ void MainMenu::createScene()
 		e = m_sceneMgr->createEntity("tree4.mesh");
 		e->getSubEntity(0)->setMaterialName("env_blaetter");
 		e->getSubEntity(1)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-1.38935, -0.00965309, -32.0907));
 		n->setScale(Ogre::Vector3(2.55586, 2.41194, 2.55586));
@@ -452,6 +464,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("chestBox.mesh");
 		e->getSubEntity(0)->setMaterialName("gimcrack");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-15.4144, -0.00964898, -22.8803));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -460,6 +473,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("stool_konz.mesh");
 		e->getSubEntity(0)->setMaterialName("gimcrack");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-8.98199, -0.00965166, -21.4096));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -468,6 +482,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("stool_konz.mesh");
 		e->getSubEntity(0)->setMaterialName("gimcrack");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-8.39954, -0.00965166, -26.3683));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -476,6 +491,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("chestLid.mesh");
 		e->getSubEntity(0)->setMaterialName("gimcrack");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-15.5435, 0.746074, -23.2522));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -484,6 +500,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("stones3.mesh");
 		e->getSubEntity(0)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-10.5055, -0.00965118, -27.8262));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -493,6 +510,7 @@ void MainMenu::createScene()
 		e = m_sceneMgr->createEntity("tree3.mesh");
 		e->getSubEntity(0)->setMaterialName("env_blaetter");
 		e->getSubEntity(1)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-23.2304, -0.00965118, -34.9225));
 		n->setScale(Ogre::Vector3(1.62948, 1.5, 1.62948));
@@ -501,6 +519,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("gobDog.mesh");
 		e->getSubEntity(0)->setMaterialName("Monster_Aisen");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-9.9569, -0.00965178, -24.6495));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -509,6 +528,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("gold_rng.mesh");
 		e->getSubEntity(0)->setMaterialName("Item");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-10.1393, 0.990349, -25.7856));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -517,6 +537,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("steel_arm.mesh");
 		e->getSubEntity(0)->setMaterialName("Item");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-11.4281, 0, -23.1021));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -525,6 +546,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("stone2.mesh");
 		e->getSubEntity(0)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-5.92453, -0.00965118, -29.1621));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -533,6 +555,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("stone2.mesh");
 		e->getSubEntity(0)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-7.36273, -0.00965309, -28.5372));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -541,6 +564,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("stone2.mesh");
 		e->getSubEntity(0)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-3.0643, -0.00965214, -45.8015));
 		n->setScale(Ogre::Vector3(5, 5, 5));
@@ -549,6 +573,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("stone2.mesh");
 		e->getSubEntity(0)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-6.39304, -0.00965166, -27.8417));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -557,6 +582,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("stone_l1.mesh");
 		e->getSubEntity(0)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-16.307, -0.385546, -31.6074));
 		n->setScale(Ogre::Vector3(1, 1, 1.57439));
@@ -565,6 +591,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("stone_l1.mesh");
 		e->getSubEntity(0)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-4.65489, -0.00965118, -26.1386));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -573,6 +600,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("stones1.mesh");
 		e->getSubEntity(0)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-14.9308, 0, -31.1942));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -581,6 +609,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("stones2.mesh");
 		e->getSubEntity(0)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-20.6536, 0, -23.9446));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -589,6 +618,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("stones3.mesh");
 		e->getSubEntity(0)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-19.3292, 0, -24.7372));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -597,6 +627,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("stones3.mesh");
 		e->getSubEntity(0)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-10.1034, -0.00965118, -31.4112));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -605,6 +636,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("stones3.mesh");
 		e->getSubEntity(0)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-6.93122, -0.00965214, -42.3686));
 		n->setScale(Ogre::Vector3(6, 6, 6));
@@ -614,6 +646,7 @@ void MainMenu::createScene()
 		e = m_sceneMgr->createEntity("tree2.mesh");
 		e->getSubEntity(0)->setMaterialName("env_blaetter");
 		e->getSubEntity(1)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-17.1033, -0.00965214, -38.6637));
 		n->setScale(Ogre::Vector3(1.30359, 1.2, 1.30359));
@@ -623,6 +656,7 @@ void MainMenu::createScene()
 		e = m_sceneMgr->createEntity("tree4.mesh");
 		e->getSubEntity(0)->setMaterialName("env_blaetter");
 		e->getSubEntity(1)->setMaterialName("env_waldland");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-7.77576, -0.00965118, -37.878));
 		n->setScale(Ogre::Vector3(1.41222, 1.3, 1.41222));
@@ -631,6 +665,7 @@ void MainMenu::createScene()
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("vase2.mesh");
 		e->getSubEntity(0)->setMaterialName("env_konzil");
+		e->setCastShadows (itemsCastShadows);
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-14.3816, -0.00965166, -23.7364));
 		n->setScale(Ogre::Vector3(1, 1, 1));
@@ -647,6 +682,7 @@ void MainMenu::createScene()
 		Ogre::MeshManager::getSingletonPtr()->createPlane("mainMen_Plane#0", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane0, 10, 10, 6, 6 ,true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
 		e = m_sceneMgr->createEntity("mainMen_Plane#0");
 		e->setMaterialName("grass1");
+		e->setCastShadows (false);
 		n = m_mainNode->createChildSceneNode();
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-12.0042, -0.00965166, -29.7625));
@@ -657,6 +693,7 @@ void MainMenu::createScene()
 		Ogre::MeshManager::getSingletonPtr()->createPlane("mainMen_Plane#1", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane1, 10, 10, 6, 6 ,true, 1, 1, 1, Ogre::Vector3::UNIT_Z);
 		e = m_sceneMgr->createEntity("mainMen_Plane#1");
 		e->setMaterialName("env_nightsky");
+		e->setCastShadows (false);
 		n = m_mainNode->createChildSceneNode();
 		n->attachObject(e);
 		n->setPosition(Ogre::Vector3(-2.64068, 14.1513, -57.029));
