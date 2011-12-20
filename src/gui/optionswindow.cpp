@@ -832,24 +832,6 @@ bool OptionsWindow::onShadowModeSelected(const CEGUI::EventArgs& evt)
 }
 
 
-/*
-	// TODO: get rid of obsolete code.
-bool OptionsWindow::onResetGraphics(const CEGUI::EventArgs& evt)
-{
-	std::string configpath;
-#if defined (_WIN32)
-	configpath = SumwarsHelper::userPath() + "/ogre.cfg";
-#elif defined (__APPLE__)
-	configpath = SumwarsHelper::macPath() + "/ogre.cfg";
-#elif defined (__unix__)
-	configpath = SumwarsHelper::userPath() + "/ogre.cfg";
-#endif
-
-	remove(configpath.c_str());
-	return true;
-}
-*/
-
 bool OptionsWindow::onLanguageSelected(const CEGUI::EventArgs& evt)
 {
 
