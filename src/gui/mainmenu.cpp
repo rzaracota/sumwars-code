@@ -300,7 +300,16 @@ void MainMenu::createSceneLights ()
 	m_sceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.3, 2));
 	m_sceneMgr->setShadowColour (Ogre::ColourValue (0.5f, 0.5f, 0.5f));
 
-	l = m_sceneMgr->createLight("mainMen_MoonLight");
+	std::string lightName = "mainMen_MoonLight";
+	if (m_sceneMgr->hasLight (lightName))
+	{
+		l = m_sceneMgr->getLight (lightName);
+	}
+	else
+	{
+		l = m_sceneMgr->createLight (lightName);
+	}
+	
 	l->setType(Ogre::Light::LT_DIRECTIONAL); /// XXX originally set to lt_point
 	//l->setPosition(Ogre::Vector3(0.929331, 16.9939, -29.9981)); // position does not matter for directional light.
 	l->setDirection(-1, -1, -1); /// XXX originally set to 0, 0, 1
@@ -310,7 +319,15 @@ void MainMenu::createSceneLights ()
 	l->setSpecularColour(Ogre::ColourValue(0.45098, 0.45098, 0.47451, 1));
 	//l->setPowerScale(1);
 
-	l = m_sceneMgr->createLight("mainMen_FireLight1");
+	lightName = "mainMen_FireLight1";
+	if (m_sceneMgr->hasLight (lightName))
+	{
+		l = m_sceneMgr->getLight (lightName);
+	}
+	else
+	{
+		l = m_sceneMgr->createLight (lightName);
+	}
 	l->setType(Ogre::Light::LT_POINT);
 	l->setPosition(Ogre::Vector3(-10.5044, 0.121838, -21.5031));
 	//l->setDirection(0, 0, 1);
