@@ -902,11 +902,11 @@ void Scene::createScene()
 		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
 		target->update();
 
-		if (Ogre::RTShader::ShaderGenerator::getSingletonPtr ())
-		{
-			DEBUG ("Invalidating RTSS scheme");
-			Ogre::RTShader::ShaderGenerator::getSingletonPtr ()->invalidateScheme (Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
-		}
+		//if (Ogre::RTShader::ShaderGenerator::getSingletonPtr ())
+		//{
+		//	DEBUG ("Invalidating RTSS scheme");
+		//	Ogre::RTShader::ShaderGenerator::getSingletonPtr ()->invalidateScheme (Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+		//}
 
 		//colour= region->getLight().getAmbientLight();
 		//m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
