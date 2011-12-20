@@ -1228,7 +1228,7 @@ bool Application::initializeRTShaderSystem (Ogre::SceneManager * sceneMgr)
 		shaderGeneratorPtr->invalidateScheme (Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
 
 		// TODO: make non-hard-coded
-		bool storeShaderCacheInMemory = false;
+		bool storeShaderCacheInMemory = true;
 
 		// Setup core libraries and shader cache path.
 		Ogre::StringVector groupVector = Ogre::ResourceGroupManager::getSingleton().getResourceGroups();
