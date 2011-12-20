@@ -323,8 +323,6 @@ bool Application::init()
 	// pluginfile: plugins.cfg
 	// configfile: keines
 #ifdef __APPLE__
-	m_ogre_root = new Ogre::Root (operationalPath + "/plugins_d.cfg", operationalPath + "/ogre.cfg", operationalPath + "/ogre.log");
-#elif (WIN32)
 	Ogre::String plugins = 
 	m_ogre_root = new Ogre::Root(SumwarsHelper::macPath() + "/plugins_mac.cfg",
 				     SumwarsHelper::macPath() + "/ogre.cfg",
