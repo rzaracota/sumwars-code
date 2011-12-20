@@ -96,6 +96,22 @@ ShadowCameraSetup::ShadowCameraSetup (Ogre::SceneManager& sceneMgr, Ogre::RTShad
 
 ShadowCameraSetup::~ShadowCameraSetup()
 {
+	if (m_shadow_camera_setup_type == 4)
+	{
+		// Make the RTTS aware of the PSSM setup.
+		if (mPssmSetup && mShaderGenerator)
+		{
+			// Grab the scheme render state.												
+			Ogre::RTShader::RenderState* schemRenderState = mShaderGenerator->getRenderState (Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+
+			Ogre::RTShader::SubRenderStateList myList = schemRenderState->getTemplateSubRenderStateList();
+			for (Ogre::RTShader::SubRenderStateList::iterator it = myList.begin (); it != myList.end (); ++ it)
+			{
+				schemRenderState->removeTemplateSubRenderState (*it);
+			}
+		}
+	}
+	DEBUG ("Shadow Camera Setup dtor");
 }
 
 bool ShadowCameraSetup::setup()
