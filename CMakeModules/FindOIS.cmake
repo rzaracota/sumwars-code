@@ -20,6 +20,7 @@ findpkg_begin(OIS)
 # Get path, convert backslashes as ${ENV_${var}}
 getenv_path(OIS_HOME)
 getenv_path(OGRE_BYATIS)
+getenv_path(OGRE_HOME)
 
 # construct search paths
 set(OIS_PREFIX_PATH ${OIS_HOME} ${ENV_OIS_HOME} 
@@ -40,9 +41,21 @@ use_pkgconfig(OIS_PKGC OIS)
 
 findpkg_framework(OIS)
 
-find_path(OIS_INCLUDE_DIR NAMES OIS.h HINTS ${OIS_INC_SEARCH_PATH} ${OIS_PKGC_INCLUDE_DIRS} PATH_SUFFIXES OIS)
-find_library(OIS_LIBRARY_REL NAMES ${OIS_LIBRARY_NAMES} HINTS ${OIS_LIB_SEARCH_PATH} ${OIS_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" release relwithdebinfo minsizerel)
-find_library(OIS_LIBRARY_DBG NAMES ${OIS_LIBRARY_NAMES_DBG} HINTS ${OIS_LIB_SEARCH_PATH} ${OIS_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" debug)
+find_path(OIS_INCLUDE_DIR 
+  NAMES OIS.h 
+  HINTS ${OIS_INC_SEARCH_PATH} ${OIS_PKGC_INCLUDE_DIRS} ${ENV_OGRE_HOME}/Dependencies/include 
+  PATH_SUFFIXES OIS
+)
+find_library(OIS_LIBRARY_REL 
+  NAMES ${OIS_LIBRARY_NAMES} 
+  HINTS ${OIS_LIB_SEARCH_PATH} ${OIS_PKGC_LIBRARY_DIRS} ${ENV_OGRE_HOME}/Dependencies/lib/Release 
+  PATH_SUFFIXES "" release relwithdebinfo minsizerel
+)
+find_library(OIS_LIBRARY_DBG 
+  NAMES ${OIS_LIBRARY_NAMES_DBG} 
+  HINTS ${OIS_LIB_SEARCH_PATH} ${OIS_PKGC_LIBRARY_DIRS} ${ENV_OGRE_HOME}/Dependencies/lib/Release 
+  PATH_SUFFIXES "" debug
+)
 make_library_set(OIS_LIBRARY)
 
 findpkg_finish(OIS)
