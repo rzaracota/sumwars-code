@@ -20,9 +20,9 @@
 #include "sumwarshelper.h"
 
 // The following includes are added to support video mode changes in the options window.
-#include <OGRE/OgreConfigFile.h>
-#include <OGRE/OgreException.h>
-#include <OGRE/OgreResourceGroupManager.h>
+#include <OgreConfigFile.h>
+#include <OgreException.h>
+#include <OgreResourceGroupManager.h>
 
 OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	:Window(doc)
