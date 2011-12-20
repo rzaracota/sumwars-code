@@ -25,7 +25,7 @@
 
 #include <string>
 #include <map>
-#include <RTShaderSystem/OgreRTShaderSystem.h>
+#include <OgreRTShaderSystem.h>
 
 class ShadowCameraSetup;
 class ShaderSetupInstance;

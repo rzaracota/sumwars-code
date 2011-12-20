@@ -47,7 +47,7 @@
 #include <OgreMaterialManager.h>
 
 // Allo RTSS initialization in the scene (such as viewport manipulation).
-#include <RTShaderSystem/OgreRTShaderSystem.h>
+#include <OgreRTShaderSystem.h>
 
 // Clipboard singleton created here.
 #include "clipboard.h"

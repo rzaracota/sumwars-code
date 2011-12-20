@@ -53,7 +53,7 @@
 #endif
 
 // RTSS 
-#include <RTShaderSystem/OgreRTShaderSystem.h>
+#include <OgreRTShaderSystem.h>
 
 
 MainWindow::MainWindow (Ogre::Root* ogreroot, CEGUI::System* ceguisystem, Ogre::RenderWindow* window, Document* doc, ShaderManager* shaderMgr)

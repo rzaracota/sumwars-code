@@ -26,7 +26,7 @@
 
 #include <OgreShadowCameraSetup.h>
 
-#include <RTShaderSystem/OgreRTShaderSystem.h>
+#include <OgreRTShaderSystem.h>
 
 // Forward declarations.
 namespace Ogre
