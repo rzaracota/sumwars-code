@@ -219,8 +219,6 @@ CONFIGURE_FILE("src/gui/default_resources.cfg.inc.in" "src/gui/default_resources
 CONFIGURE_FILE("src/gui/creditswindow_content.inc.in" "src/gui/creditswindow_content.inc")
 
 FILE(GLOB_RECURSE HEADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
-  ./src/gui/ShaderManager.h
-  ./src/gui/ShadowCameraSetup.h
 
 IF(SUMWARS_NO_TINYXML)
   SET(SRCS_TINYXML "")
