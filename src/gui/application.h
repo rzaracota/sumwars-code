@@ -261,6 +261,9 @@ class Application
 		 */
 		MainWindow* m_main_window;
 
+		/**
+		 * \brief The manager handling shader based operations.
+		 */
 		ShaderManager* m_shader_mgr_ptr;
 
 		/**
