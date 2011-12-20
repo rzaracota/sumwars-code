@@ -299,10 +299,11 @@ void Scene::update(float ms)
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(colour[0], colour[1], colour[2]);
 
-	DEBUGX ("Region uses colour diffuse [%.2f %.2f %.2f] and specular  [%.2f %.2f %.2f]", colour[0], colour[1], colour[2], colour[0], colour[1], colour[2]);
+	DEBUGX ("Region light uses colour diffuse [%.2f %.2f %.2f] and specular  [%.2f %.2f %.2f]", colour[0], colour[1], colour[2], colour[0], colour[1], colour[2]);
 	
 	//colour= region->getLight().getAmbientLight();
-	//m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2])); // TODO: XXX: re-add this.
+	//m_scene_manager->setAmbientLight (Ogre::ColourValue(colour[0], colour[1], colour[2])); // TODO: XXX: re-add this.
+	//DEBUG ("Scene manager setting ambient [%.2f %.2f %.2f]", colour[0], colour[1], colour[2]);
 	
 	updateGraphicObjects(ms);
 }
@@ -756,6 +757,10 @@ void Scene::createSceneLights ()
 
     light->setCastShadows (true);
 
+	colour= region->getLight().getAmbientLight();
+	m_scene_manager->setAmbientLight (Ogre::ColourValue(colour[0], colour[1], colour[2])); // TODO: XXX: re-add this.
+	DEBUG ("Scene manager setting ambient [%.2f %.2f %.2f]", colour[0], colour[1], colour[2]);
+
 	DEBUGX("directional light %f %f %f",colour[0], colour[1], colour[2]);
 
 	if (m_shader_mgr_ptr)
@@ -778,13 +783,14 @@ void Scene::destroySceneLights ()
 {
 	try
 	{
-		DEBUG ("Scene: destroying lights");
 		if (m_scene_manager->hasLight ("HeroLight"))
 		{
+			DEBUG ("Scene: destroying hero light");
 			m_scene_manager->destroyLight ("HeroLight");
 		}
 		if (m_scene_manager->hasLight ("RegionLight"))
 		{
+			DEBUG ("Scene: destroying region light");
 			m_scene_manager->destroyLight ("RegionLight");
 		}
 	}
@@ -898,6 +904,7 @@ void Scene::createScene()
 
 		if (Ogre::RTShader::ShaderGenerator::getSingletonPtr ())
 		{
+			DEBUG ("Invalidating RTSS scheme");
 			Ogre::RTShader::ShaderGenerator::getSingletonPtr ()->invalidateScheme (Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
 		}
 
