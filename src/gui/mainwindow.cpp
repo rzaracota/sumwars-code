@@ -47,7 +47,7 @@
 // Access the OS clipboard.
 #include "clipboard.h"
 
-#ifdef BUILD_TOOLS
+#ifdef SUMWARS_BUILD_TOOLS
 #include "debugpanel.h"
 #include "contenteditor.h"
 #endif
@@ -216,7 +216,7 @@ void MainWindow::update(float time)
 
 	TooltipManager::getSingleton().update(time);
 
-#ifdef BUILD_TOOLS
+#ifdef SUMWARS_BUILD_TOOLS
 	DebugPanel::getSingleton().update(m_keyboard, m_mouse);
 	ContentEditor::getSingleton().update(m_keyboard, m_mouse);
 #endif

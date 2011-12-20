@@ -14,15 +14,25 @@
  */
 
 #include "sumwarshelper.h"
+#include "config.h"
+
+#if defined (_WIN32)
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#elif (__APPLE__)
+#include <CoreFoundation/CFBundle.h>
+#elif (__unix__)
+#include <X11/Xlib.h>
+#include <X11/extensions/Xrandr.h>
+#endif
 
 // Instance of the singleton.
-template<> SumwarsHelper* Ogre::Singleton<SumwarsHelper>::ms_Singleton = 0;
+template<> SumwarsHelper* Ogre::Singleton<SumwarsHelper>::SUMWARS_OGRE_SINGLETON = 0;
 
 /**
  * Constructor; will call the init function.
  */
-SumwarsHelper::SumwarsHelper ()
-	: portable_ (false)
+SumwarsHelper::SumwarsHelper()
 {
 	init ();
 }
@@ -41,12 +51,6 @@ void SumwarsHelper::init ()
 	// Feature to allow some settings to be pre-loaded from a different config file:
 	// see getPreloadConfigFile.
 	supportedFeatures_.push_back ("allows-preload");
-
-	// Feature that allows the game to run in a portable mode (E.g. just like on a USB drive)
-	// This requires that no data is stored anywhere outside the portable folder.
-	// This will typically be the same folder from where the exe is running.
-	supportedFeatures_.push_back ("portable-mode");
-
 #elif defined (__unix__)
 #elif defined (__APPLE__)
 #endif
@@ -80,33 +84,24 @@ std::string SumwarsHelper::getPreloadFileName () const
 	return std::string ("swpreload.cfg");
 }
 
-
 /**
  * \brief Get the path to use for storage.
  */
-std::string SumwarsHelper::getStorageBasePath () const
+const std::string& SumwarsHelper::getStorageBasePath()
 {
-	std::string pathToUse (PHYSFS_getUserDir ());
+#ifdef SUMWARS_PORTABLE_MODE
+	static std::string ret(PHYSFS_getBaseDir());
+#else
+	static std::string ret(PHYSFS_getUserDir());
+#endif
 
-	// For portable applications, the default folder is the exe folder.
-	if (portable_)
-	{
-		pathToUse = PHYSFS_getBaseDir ();
-	}
-
-	return pathToUse;
+	return ret;
 }
 
-
-
-/**
- * \fn static Ogre::String userPath()
- * \brief Returns the writable sumwars directory in the users directory
- */
 Ogre::String SumwarsHelper::userPath ()
 {
 	//Ogre::String path = PHYSFS_getUserDir ();
-	Ogre::String path = SumwarsHelper::getSingletonPtr ()->getStorageBasePath ();
+	Ogre::String path = "";
 	
 #if defined (_WIN32)
 	path.append(".sumwars");
@@ -119,8 +114,10 @@ Ogre::String SumwarsHelper::userPath ()
 	return path;
 }
 
-
-
+Ogre::String SumwarsHelper::savePath ()
+{
+	return userPath() + "/save";
+}
 
 std::string SumwarsHelper::getUpdatedResolutionString (const std::string& initialString, int newWidth, int newHeight)
 {
@@ -160,6 +157,40 @@ std::string SumwarsHelper::getUpdatedResolutionString (const std::string& initia
 	return returnValue;
 }
 
+std::string SumwarsHelper::getNativeResolutionString()
+{
+	int winWidth  = 800;
+	int winHeight = 600;
+	int xRes, yRes;
+
+
+#if defined (_WIN32)
+	xRes = GetSystemMetrics(SM_CXSCREEN);
+	yRes = GetSystemMetrics(SM_CYSCREEN);
+#elif defined (__unix__)
+	int num_sizes;
+	Rotation original_rotation;
+
+	Display *dpy = XOpenDisplay(NULL);
+	Window root = RootWindow(dpy, 0);
+	XRRScreenSize *xrrs = XRRSizes(dpy, 0, &num_sizes);
+
+	XRRScreenConfiguration *conf = XRRGetScreenInfo(dpy, root);
+	short original_rate          = XRRConfigCurrentRate(conf);
+	SizeID original_size_id      = XRRConfigCurrentConfiguration(conf, &original_rotation);
+
+	xRes = xrrs[original_size_id].width;
+	yRes = xrrs[original_size_id].height;
+	XCloseDisplay(dpy);
+#elif defined (__APPLE__)
+	xRes = CGDisplayPixelsWide;
+	yRes = CGDisplayPixelsHigh;
+#endif
+
+	std::stringstream ss;
+	ss << xRes << " x " << yRes;
+	return ss.str ();
+}
 
 void SumwarsHelper::getSizesFromResolutionString (const std::string& initialString, int& videoModeWidth, int& videoModeHeight)
 {
@@ -194,3 +225,17 @@ void SumwarsHelper::getSizesFromResolutionString (const std::string& initialStri
 	videoModeWidth = atoi (sLeft.c_str ());
 	videoModeHeight = atoi (sAux.c_str ());
 }
+
+#if defined (__APPLE__)
+Ogre::String SumwarsHelper::macPath()
+{
+	Ogre::String path;
+	CFBundleRef mainBundle = CFBundleGetMainBundle();
+	CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+	char resPath[PATH_MAX];
+	CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)resPath, PATH_MAX);
+	CFRelease(resourcesURL);
+	path = resPath;
+	return path;
+}
+#endif

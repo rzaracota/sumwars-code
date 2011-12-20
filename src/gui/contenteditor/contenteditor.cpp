@@ -16,6 +16,7 @@
 #include "contenteditor.h"
 #include "OgreRoot.h"
 #include "debug.h"
+#include "config.h"
 
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 #include <OgreHardwarePixelBuffer.h>
@@ -34,7 +35,7 @@
 
 using namespace CEGUI;
 
-template<> ContentEditor* Ogre::Singleton<ContentEditor>::ms_Singleton = 0;
+template<> ContentEditor* Ogre::Singleton<ContentEditor>::SUMWARS_OGRE_SINGLETON = 0;
 
 void ContentEditor::init(bool visible)
 {
@@ -559,13 +560,13 @@ bool ContentEditor::onPreviewWindowScrollWheel(const CEGUI::EventArgs& evt)
 
 ContentEditor* ContentEditor::getSingletonPtr(void)
 {
-	return ms_Singleton;
+	return SUMWARS_OGRE_SINGLETON;
 }
 
 ContentEditor& ContentEditor::getSingleton(void)
 {
-	assert( ms_Singleton );
-	return ( *ms_Singleton );
+	assert( SUMWARS_OGRE_SINGLETON );
+	return ( *SUMWARS_OGRE_SINGLETON );
 }
 
 ContentEditorTab* ContentEditor::getComponent(std::string name)

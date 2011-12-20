@@ -59,7 +59,7 @@ class Application
 		 * \fn Application()
 		 * \brief Konstruktor
 		 */
-		Application(char *argv);
+		Application();
 
 		/**
 		 * \fn ~Application()
@@ -108,7 +108,7 @@ class Application
 		* \fn init()
 		* \brief Initialisiert die Anwendung
 		 */
-		bool init(char *argv);
+		bool init();
 
 		/**
 		 * \fn initOgre()
@@ -278,24 +278,4 @@ class Application
 		bool m_running;
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif
-

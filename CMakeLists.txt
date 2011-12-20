@@ -1,45 +1,114 @@
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 cmake_minimum_required(VERSION 2.6)
-project(SUMWARS)
+project(sumwars)
 
+MESSAGE(STATUS "")
+MESSAGE(STATUS "### Welcome to Summoning Wars build system ###")
+MESSAGE(STATUS "**********************************************")
+MESSAGE(STATUS "  http://sumwars.org/wiki/Build_instructions  ")
+MESSAGE(STATUS "")
 
-OPTION(NO_TINYXML "Do not use in-source TinyXML Lib" OFF)
-OPTION(NO_ENET "Do not use in-source ENET Lib" OFF)
-OPTION(BUILD_TOOLS "Builds editor tools" ON)
-OPTION(UPDATE_SUBVERSION_REVISION "Option to turn off automatic revision checking" ON)
-OPTION(POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" OFF)
+OPTION(SUMWARS_NO_TINYXML "Do not use bundled, in-source TinyXML Lib" OFF)
+OPTION(SUMWARS_NO_ENET "Do not use bundled, in-source ENET Lib" OFF)
+OPTION(SUMWARS_BUILD_TOOLS "Builds editor tools (not needed for gameplay, only useful for content authors)" ON)
+OPTION(SUMWARS_UPDATE_HG_REVISION "Option to enable or disable automatic revision checking" ON)
+OPTION(SUMWARS_POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" OFF)
+OPTION(SUMWARS_STANDALONE_MODE "(Highly recommended for deployment on Windows and MacOSX) In case this is enabled, all paths (share, doc, bin) are set to be relative" OFF)
+OPTION(SUMWARS_PORTABLE_MODE "In case this is enabled, save files and config files are kept in application directory instead of home folders / user folders" OFF)
 
-IF( NOT CMAKE_BUILD_TYPE )
-  SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
-ENDIF()
-MESSAGE("CMAKE_BUILD_TYPE: " ${CMAKE_BUILD_TYPE})
-
-
-IF(UPDATE_SUBVERSION_REVISION)
-    FIND_PROGRAM(Subversion_SVN_EXECUTABLE svn)
+IF(SUMWARS_UPDATE_HG_REVISION)
+    FIND_PROGRAM(Mercurial_EXECUTABLE hg)
 
     SET(Project_WC_REVISION "unknown")
 
-#IF(Subversion_SVN_EXECUTABLE)
-#    EXECUTE_PROCESS(WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-#                    COMMAND ${Subversion_SVN_EXECUTABLE} info
-#                    RESULT_VARIABLE ret_var
-#                    OUTPUT_VARIABLE output_var
-#    )
-#    STRING(REGEX REPLACE "^(.*\n)?Revision: ([^\n]+).*"
-#        "\\2" Project_WC_REVISION "${output_var}")
-#ENDIF(Subversion_SVN_EXECUTABLE)
+    IF(Mercurial_EXECUTABLE)
+        EXECUTE_PROCESS(WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+                        COMMAND ${Mercurial_EXECUTABLE} log -l 1 --template "{node|short}"
+                        OUTPUT_VARIABLE Project_WC_REVISION
+        )
+    ENDIF()
+ENDIF()
 
-ENDIF(UPDATE_SUBVERSION_REVISION)
+SET(SUMWARS_VERSION_MAJOR "0")
+SET(SUMWARS_VERSION_MINOR "5")
+SET(SUMWARS_VERSION_PATCH "6")
+SET(SUMWARS_VERSION_REVISION ${Project_WC_REVISION})
+SET(SUMWARS_SHORT_VERSION "${SUMWARS_VERSION_MAJOR}.${SUMWARS_VERSION_MINOR}.${SUMWARS_VERSION_PATCH}")
+SET(SUMWARS_VERSION "${SUMWARS_SHORT_VERSION}.hg-${SUMWARS_VERSION_REVISION}")
+CONFIGURE_FILE("src/version.h.in" "src/version.h")
 
-SET(${PROJECT_NAME}_VERSION_MAJOR "0")
-SET(${PROJECT_NAME}_VERSION_MINOR "5")
-SET(${PROJECT_NAME}_VERSION_PATCH "5")
-SET(${PROJECT_NAME}_VERSION_REVISION ${Project_WC_REVISION})
-SET(${PROJECT_NAME}_VERSION "${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH}.${${PROJECT_NAME}_VERSION_REVISION}")
-MESSAGE("${PROJECT_NAME}_VERSION: " ${${PROJECT_NAME}_VERSION})
+MESSAGE(STATUS "Version: ${SUMWARS_VERSION}")
+MESSAGE(STATUS "Short Version: ${SUMWARS_SHORT_VERSION}")
 
+if(UNIX)
+  set(SUMWARS_EXECUTABLE_DEFAULT_DIR "bin")
+else()
+  set(SUMWARS_EXECUTABLE_DEFAULT_DIR "")
+endif()
 
-CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/src/gui/version.h.in" "${PROJECT_SOURCE_DIR}/src/gui/version.h")
+SET(SUMWARS_EXECUTABLE_DIR "${SUMWARS_EXECUTABLE_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars executable, CMAKE_INSTALL_PREFIX gets prepended! (Only applies when SUMWARS_STANDALONE_MODE is OFF)")
+
+if(UNIX)
+  set(SUMWARS_SHARE_DEFAULT_DIR "share/sumwars")
+else()
+  set(SUMWARS_SHARE_DEFAULT_DIR "share")
+endif()
+
+SET(SUMWARS_SHARE_DIR "${SUMWARS_SHARE_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars data, CMAKE_INSTALL_PREFIX gets prepended! (Only applies when SUMWARS_STANDALONE_MODE is OFF)")
+
+if(UNIX)
+  set(SUMWARS_DOC_DEFAULT_DIR "share/doc/sumwars-${SUMWARS_SHORT_VERSION}")
+else()
+  set(SUMWARS_DOC_DEFAULT_DIR "doc")
+endif()
+
+SET(SUMWARS_DOC_DIR "${SUMWARS_DOC_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars documentation, CMAKE_INSTALL_PREFIX gets prepended! (Only applies when SUMWARS_STANDALONE_MODE is OFF)")
+
+IF( NOT CMAKE_BUILD_TYPE )
+  # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
+  # differentiation between debug and release builds.
+
+  SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
+ENDIF()
+
+MESSAGE(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+# separating newline before configuration really happens
+MESSAGE(STATUS "")
+
+IF( SUMWARS_STANDALONE_MODE )
+  MESSAGE("Standalone mode enabled, I am overriding all paths!")
+  
+  # In case of a standalone mode, we override all paths to our hardcoded, arbitrarily chosen values.
+  # There is no point in making these customisable, I think.
+  
+  #SET(CMAKE_INSTALL_PREFIX "./")
+  SET(SUMWARS_PREFIX "./")
+  
+  SET(SUMWARS_EXECUTABLE_DIR "./")
+  SET(SUMWARS_SHARE_DIR "./share")
+  SET(SUMWARS_DOC_DIR "./")
+  
+  # We recommend enable post build copy since that will make it run immediately after building
+  IF ( NOT SUMWARS_POST_BUILD_COPY )
+    MESSAGE(STATUS "You might be interested in turning SUMWARS_POST_BUILD_COPY ON to make sumwars run immediately after building from the source folder.")
+  ENDIF()
+  
+  MESSAGE(STATUS "")
+ELSE()
+  SET(SUMWARS_PREFIX ${CMAKE_INSTALL_PREFIX})
+ENDIF()
 
 SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules/;${CMAKE_MODULE_PATH}")
 
@@ -51,23 +120,27 @@ IF(UNIX)
   SET(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
 ENDIF(UNIX)
 
-IF (CMAKE_BUILD_TYPE STREQUAL "")
-  # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
-  # differentiation between debug and release builds.
-  SET(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose the type of build, options are: None (CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel." FORCE)
-ENDIF()
-
 SET(CMAKE_DEBUG_POSTFIX "_d")
 
 if(NOT CMAKE_INSTALL_PREFIX)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
 endif()
 
-
 FIND_PACKAGE(OGRE REQUIRED)
-IF(NOT "${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
+
+IF("${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
+  set(SUMWARS_OGRE_SINGLETON "ms_Singleton")
+ELSEIF("${OGRE_VERSION_NAME}" STREQUAL "Byatis")
+  set(SUMWARS_OGRE_SINGLETON "msSingleton")
+ELSE()
   MESSAGE(SEND_ERROR "You need Ogre 1.7 Cthugha to build this.")
 ENDIF()
+
+# add our build include directory
+include_directories(
+    "${CMAKE_CURRENT_BINARY_DIR}/src"
+    "${CMAKE_CURRENT_BINARY_DIR}/src/gui"
+)
 
 IF (WIN32)
  FIND_PACKAGE(BoostOGRE REQUIRED)
@@ -82,13 +155,13 @@ FIND_PACKAGE(ALUT REQUIRED)
 FIND_PACKAGE(Ogg REQUIRED)
 FIND_PACKAGE(Vorbis REQUIRED)
 FIND_PACKAGE(PhysFS REQUIRED)
-IF(BUILD_TOOLS)
+IF(SUMWARS_BUILD_TOOLS)
   FIND_PACKAGE(POCO REQUIRED)
 ENDIF()
-IF(NO_TINYXML)
+IF(SUMWARS_NO_TINYXML)
   FIND_PACKAGE(TinyXML REQUIRED)
 ENDIF()
-IF(NO_ENET)
+IF(SUMWARS_NO_ENET)
   FIND_PACKAGE(Enet REQUIRED)
 ENDIF()
 
@@ -112,137 +185,44 @@ INCLUDE_DIRECTORIES(${ALUT_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${OGG_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${VORBIS_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${PHYSFS_INCLUDE_DIR})
-IF(NO_TINYXML)
+IF(SUMWARS_NO_TINYXML)
   INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
 ELSE()
   INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/tinyxml)
 ENDIF()
-IF(NO_ENET)
+IF(SUMWARS_NO_ENET)
   INCLUDE_DIRECTORIES(${ENET_INCLUDE_DIR})
 ELSE()
   INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/enet/include)
 ENDIF()
-IF(BUILD_TOOLS)
+IF(SUMWARS_BUILD_TOOLS)
   INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
   INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel/filebrowser)
   INCLUDE_DIRECTORIES(${POCO_INCLUDE_DIR})
-  MESSAGE("Activated ingame build tools.")
 ENDIF()
-IF(!WIN32)
-  INCLUDE_DIRECTORIES(${PTHREADS_INCLUDE_DIR})
-ENDIF()
+
 IF(WIN32)
   INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/dirent)
   INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost)
   INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/gettext/include/)
   ADD_DEFINITIONS( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4800 /wd4244 /wd4305 /nologo" )
   MESSAGE("WARNING: Compiler warnings 4800, 4244 and 4305 disabled!")
+ELSE()
+  INCLUDE_DIRECTORIES(${PTHREADS_INCLUDE_DIR})
 ENDIF()
 
-if(UNIX)
-  set(CFG_FILES_DIR "${CMAKE_INSTALL_PREFIX}/share/games/sumwars")
-else()
-  set(CFG_FILES_DIR ".")
-endif()
+FILE(READ ${CMAKE_CURRENT_SOURCE_DIR}/AUTHORS SUMWARS_AUTHORS_CONTENT)
+STRING(REPLACE \n \\n SUMWARS_AUTHORS_CONTENT "${SUMWARS_AUTHORS_CONTENT}")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/gui/config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/src/gui/config.h)
+CONFIGURE_FILE("src/config.h.in" "src/config.h")
+CONFIGURE_FILE("src/gui/default_resources.cfg.inc.in" "src/gui/default_resources.cfg.inc")
+CONFIGURE_FILE("src/gui/creditswindow_content.inc.in" "src/gui/creditswindow_content.inc")
 
-SET(HEADER_FILES
-  ./src/gui/config.h
-  ./src/core/nlfg.h
-  ./src/core/worldobject.h
-  ./src/core/itemloader.h
-  ./src/core/itemlist.h
-  ./src/core/region.h
-  ./src/core/objectloader.h
-  ./src/core/player.h
-  ./src/core/monster.h
-  ./src/core/itemfactory.h
-  ./src/core/translatablestring.h
-  ./src/core/event.h
-  ./src/core/charconv.h
-  ./src/core/stdstreamconv.h
-  ./src/core/gameobject.h
-  ./src/core/projectile.h
-  ./src/core/treasure.h
-  ./src/core/dialogue.h
-  ./src/core/playerbase.h
-  ./src/core/objectfactory.h
-  ./src/core/gettext.h
-  ./src/core/dropitem.h
-  ./src/core/party.h
-  ./src/core/minimap.h
-  ./src/core/logger.h
-  ./src/core/item.h
-  ./src/core/networkstruct.h
-  ./src/core/gridunit.h
-  ./src/core/quest.h
-  ./src/core/eventsystem.h
-  ./src/core/creature.h
-  ./src/core/random.h
-  ./src/core/action.h
-  ./src/core/creaturestruct.h
-  ./src/core/servernetwork.h
-  ./src/core/nlfgservernetwork.h
-  ./src/core/nlfgclientnetwork.h
-  ./src/core/nlfgnetworkpacket.h
-  ./src/core/pathfind.h
-  ./src/core/damage.h
-  ./src/core/waypoint.h
-  ./src/core/document.h
-  ./src/core/debug.h
-  ./src/core/unionfindtree.h
-  ./src/core/world.h
-  ./src/core/fixedbase.h
-  ./src/core/fixedobject.h
-  ./src/core/templateloader.h
-  ./src/core/elementattrib.h
-  ./src/core/worldloader.h
-  ./src/core/geometry.h
-  ./src/core/scriptobject.h
-  ./src/core/spawnpoint.h
-  ./src/core/fraction.h
-  ./src/core/command.h
-  ./src/core/mapgenerator.h
-  ./src/core/options.h
-  ./src/core/sumwarshelper.h
-  ./src/gui/minimapwindow.h
-  ./src/gui/worldmap.h
-  ./src/gui/mainmenu.h
-  ./src/gui/ogg.h
-  ./src/gui/charcreate.h
-  ./src/gui/ceguiutility.h
-  ./src/gui/tooltipmanager.h
-  ./src/gui/music.h
-  ./src/gui/controlpanel.h
-  ./src/gui/inventory.h
-  ./src/gui/tradewindow.h
-  ./src/gui/dialoguewindow.h
-  ./src/gui/partyinfo.h
-  ./src/gui/networkwindows.h
-  ./src/gui/creditswindow.h
-  ./src/gui/mainwindow.h
-  ./src/gui/application.h
-  ./src/gui/skilltree.h
-  ./src/gui/chatline.h
-  ./src/gui/charinfo.h
-  ./src/gui/itemwindow.h
-  ./src/gui/savegamelist.h
-  ./src/gui/scene.h
-  ./src/gui/graphicmanager.h
-  ./src/gui/messageboxes.h
-  ./src/gui/graphicobjectrenderinfo.h
-  ./src/gui/graphicobject.h
-  ./src/gui/questinfo.h
-  ./src/gui/sound.h
-  ./src/gui/tooltip.h
-  ./src/gui/optionswindow.h
-  ./src/gui/clipboard.h
+FILE(GLOB_RECURSE HEADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
   ./src/gui/ShaderManager.h
   ./src/gui/ShadowCameraSetup.h
-)
 
-IF(NO_TINYXML)
+IF(SUMWARS_NO_TINYXML)
   SET(SRCS_TINYXML "")
 ELSE()
   SET(SRCS_TINYXML
@@ -252,7 +232,7 @@ ELSE()
     ./src/tinyxml/tinyxmlparser.cpp)
 ENDIF()
 
-IF(NO_ENET)
+IF(SUMWARS_NO_ENET)
   SET(SRCS_ENET "")
 ELSE()
   SET(SRCS_ENET
@@ -367,26 +347,7 @@ SET(SRCS
   ./src/gui/ShadowCameraSetup.cpp
 )
  
-IF(BUILD_TOOLS)
-  SET(HEADER_FILES
-    ${HEADER_FILES}
-    ./src/gui/debugpanel/benchmarktab.h
-    ./src/gui/debugpanel/debugpanel.h
-    ./src/gui/debugpanel/debugcameratab.h
-    ./src/gui/debugpanel/iconeditortab.h
-    ./src/gui/debugpanel/guidebugtab.h
-    ./src/gui/debugpanel/luascripttab.h
-    ./src/gui/debugpanel/textfileeditwindow.h
-    ./src/gui/debugpanel/filebrowser/filebrowser.h
-    #./src/gui/debugpanel/reloadtab.h
-    ./src/gui/contenteditor/contenteditor.h
-    ./src/gui/contenteditor/contenteditortab.h
-    ./src/gui/contenteditor/fixedobjecteditor.h
-    ./src/gui/contenteditor/renderinfoeditor.h
-    ./src/gui/contenteditor/itemeditor.h
-    ./src/gui/contenteditor/monstereditor.h
-    )
-
+IF(SUMWARS_BUILD_TOOLS)
   SET(SRCS
     ${SRCS}
     ${HEADER_FILES}
@@ -440,19 +401,20 @@ SET(LINK_LIBS
   ${VORBIS_LIBRARIES} 
   ${PHYSFS_LIBRARY}
   )
-IF(NO_TINYXML)
+IF(SUMWARS_NO_TINYXML)
   SET(LINK_LIBS ${LINK_LIBS} ${TINYXML_LIBRARIES})
 ENDIF()
-IF(NO_ENET)
+IF(SUMWARS_NO_ENET)
   SET(LINK_LIBS ${LINK_LIBS} ${Enet_LIBRARY})
 ENDIF()
-IF(BUILD_TOOLS)
+IF(SUMWARS_BUILD_TOOLS)
   SET(LINK_LIBS
     ${LINK_LIBS}
     ${POCO_LIBRARIES}
     )
-  ADD_DEFINITIONS(-DBUILD_TOOLS)
+  ADD_DEFINITIONS(-DSUMWARS_BUILD_TOOLS)
 ENDIF()
+
 IF(WIN32)
   SET(LINK_LIBS
     ws2_32.lib
@@ -461,53 +423,99 @@ IF(WIN32)
     ${GNUWIN_LIBRARY}
     ${BoostOGRE_LIBRARIES}
     )
+ELSEIF(UNIX AND NOT APPLE)
+  SET(LINK_LIBS
+    X11
+    Xrandr
+    ${LINK_LIBS}
+    )
 ENDIF()
 
 TARGET_LINK_LIBRARIES(sumwars ${LINK_LIBS})
 
-IF(POST_BUILD_COPY)
+IF(SUMWARS_POST_BUILD_COPY)
   ADD_CUSTOM_COMMAND(TARGET sumwars
     POST_BUILD
-    COMMAND copy $(OutDir)$(TargetFileName) $(ProjectDir)$(TargetFileName)
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/sumwars${CMAKE_EXECUTABLE_SUFFIX} ${CMAKE_SOURCE_DIR}
   )
-ENDIF(POST_BUILD_COPY)
-
+ENDIF()
 
 # install the application
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/sumwars
-  DESTINATION games)
+install(TARGETS sumwars
+  RUNTIME DESTINATION "${SUMWARS_EXECUTABLE_DIR}")
 
-install(FILES packaging/sumwars.desktop
-  DESTINATION share/applications)
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_16x16.png"
-  DESTINATION share/icons/hicolor/16x16/
-  RENAME sumwars.png)
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_24x24.png"
-  DESTINATION share/icons/hicolor/24x24/
-  RENAME sumwars.png)
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_32x32.png"
-  DESTINATION share/icons/hicolor/32x32/
-  RENAME sumwars.png)
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_48x48.png"
-  DESTINATION share/icons/hicolor/48x48/
-  RENAME sumwars.png)
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_64x64.png"
-  DESTINATION share/icons/hicolor/64x64/
-  RENAME sumwars.png)
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon/SumWarsIcon_128x128.png"
-  DESTINATION share/icons/hicolor/128x128/
-  RENAME sumwars.png)
+# freedesktop.org icons and desktop files
+# TODO: How do we do this on Windows? Installing start menu items.
+if (UNIX)
+  install(FILES "packaging/sumwars.desktop"
+    DESTINATION "share/applications")
+    
+  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_16x16.png"
+    DESTINATION "share/icons/hicolor/16x16/"
+    RENAME "sumwars.png")
+  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_24x24.png"
+    DESTINATION "share/icons/hicolor/24x24/"
+    RENAME "sumwars.png")
+  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_32x32.png"
+    DESTINATION "share/icons/hicolor/32x32/"
+    RENAME "sumwars.png")
+  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_48x48.png"
+    DESTINATION "share/icons/hicolor/48x48/"
+    RENAME "sumwars.png")
+  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_64x64.png"
+    DESTINATION "share/icons/hicolor/64x64/"
+    RENAME "sumwars.png")
+  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_128x128.png"
+    DESTINATION "share/icons/hicolor/128x128/"
+    RENAME "sumwars.png")
+endif()
 
-execute_process(COMMAND sed "s|INSTALL_PATH|${CFG_FILES_DIR}|g" "${CMAKE_CURRENT_SOURCE_DIR}/resources.cfg.in" OUTPUT_FILE "${CMAKE_CURRENT_SOURCE_DIR}/resources.cfg")
-install(FILES AUTHORS
-  DESTINATION share/games/sumwars)
-install(FILES resources.cfg ogre.cfg plugins.cfg
-  DESTINATION share/games/sumwars)
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/data" "${CMAKE_CURRENT_SOURCE_DIR}/resources"
-  DESTINATION share/games/sumwars
-  PATTERN .svn EXCLUDE
-  PATTERN icon EXCLUDE)
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/translation"
-  DESTINATION share/games/sumwars
+install(FILES "AUTHORS" "COPYING" "INSTALL" "README"
+  DESTINATION "${SUMWARS_DOC_DIR}")
+  
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/data"
+  DESTINATION "${SUMWARS_SHARE_DIR}"
+  PATTERN ".hg" EXCLUDE)
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/resources"
+  DESTINATION "${SUMWARS_SHARE_DIR}"
+  PATTERN ".hg" EXCLUDE
+  PATTERN "icon" EXCLUDE)
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/translation"
+  DESTINATION "${SUMWARS_SHARE_DIR}"
   FILES_MATCHING PATTERN "*.mo"
-  PATTERN .svn EXCLUDE)
+  PATTERN ".hg" EXCLUDE
+  PATTERN "xmlgettext" EXCLUDE) # both pattern excludes are there to prevent the directories from being created
+  
+# only CPack code below this line
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Summoning Wars Role-Playing Game")
+SET(CPACK_PACKAGE_VENDOR "Sumwars team")
+SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
+SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
+SET(CPACK_PACKAGE_VERSION_MAJOR "${SUMWARS_VERSION_MAJOR}")
+SET(CPACK_PACKAGE_VERSION_MINOR "${SUMWARS_VERSION_MINOR}")
+SET(CPACK_PACKAGE_VERSION_PATCH "${SUMWARS_VERSION_PATCH}")
+
+SET(CPACK_SOURCE_GENERATOR TBZ2 ZIP)
+SET(CPACK_GENERATOR NSIS)
+
+set(CPACK_SOURCE_PACKAGE_FILE_NAME "sumwars-${SUMWARS_SHORT_VERSION}" CACHE INTERNAL "tarball basename")
+
+set(CPACK_SOURCE_IGNORE_FILES
+ # repository history should not be in source tarballs
+"\\\\.hg.*"
+
+# the rest is modelled after .hgignore
+"build/"
+"~$"
+
+"\\\\.project"
+"\\\\.cproject"
+"\\\\.pydevproject"
+
+"sumwars$"
+"sumwars.exe$"
+
+"\\\\.sumwars"
+)
+
+INCLUDE(CPack)

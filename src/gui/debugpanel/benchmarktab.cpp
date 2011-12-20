@@ -87,11 +87,24 @@ bool BenchmarkTab::handleStartBenchmark(const CEGUI::EventArgs& e)
 	return true;
 }
 
+	
+#if OGRE_VERSION_MAJOR == 1
+#if OGRE_VERSION_MINOR == 7
 void BenchmarkTab::messageLogged(const Ogre::String& message, Ogre::LogMessageLevel lml, bool maskDebug, const Ogre::String& logName)
 {
-	m_CapsBox->appendText(message.c_str());
+        m_CapsBox->appendText(message.c_str());
 }
-
+#endif
+#if OGRE_VERSION_MINOR >= 8
+void BenchmarkTab::messageLogged(const Ogre::String& message, Ogre::LogMessageLevel lml, bool maskDebug, const Ogre::String& logName, bool& skipThisMessage)
+{
+	if (!skipThisMessage)
+    {
+        m_CapsBox->appendText(message.c_str());
+    }
+}
+#endif
+#endif
 
 void BenchmarkTab::update(OIS::Keyboard *keyboard, OIS::Mouse *mouse)
 {

@@ -619,12 +619,10 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 			Options::getInstance ()->setShadowMode (newShadowSettings);
 
 			std::string configpath;
-#if defined (_WIN32)
-			configpath = SumwarsHelper::userPath() + "/ogre.cfg";
-#elif defined (__APPLE__)
+#if defined (__APPLE__)
 			configpath = SumwarsHelper::macPath() + "/ogre.cfg";
-#elif defined (__unix__)
-			configpath = SumwarsHelper::userPath() + "/ogre.cfg";
+#else
+			configpath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::userPath() + "/ogre.cfg";
 #endif
 
 			// TODO: move handling to specialized function.
