@@ -28,10 +28,15 @@
 
 #include <iostream>
 
+// Allo RTSS initialization in the scene (such as viewport manipulation).
+#include <RTShaderSystem/OgreRTShaderSystem.h>
+
 
 MainMenu::MainMenu (Document* doc)
         :Window(doc)
 {
+	DEBUG ("Done creating main menu scene.");
+
 	m_savegame_player ="";
 	m_savegame_player_object =0;
 	
@@ -107,11 +112,18 @@ MainMenu::MainMenu (Document* doc)
 	m_mainMenuCamera->setNearClipDistance(0.1f);
 	m_mainMenuCamera->setFarClipDistance(10000);
 
+	Ogre::Viewport* mainVP = m_mainMenuCamera->getViewport();
+	if (mainVP)
+	{
+		mainVP->setMaterialScheme(Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+	}
+
     m_sceneCreated = false;
 
     createSavegameList();
 
     updateTranslation();
+	DEBUG ("Done creating main menu scene.");
 }
 
 void MainMenu::update()
@@ -183,12 +195,14 @@ bool MainMenu::onShowCredits(const CEGUI::EventArgs& evt)
 
 bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 {
+	DEBUG ("Main menu showing");
 	Ogre::Root *root = Ogre::Root::getSingletonPtr();
     if (!m_sceneCreated)
 	{
         createScene();
 		m_gameCamera = root->getAutoCreatedWindow()->getViewport(0)->getCamera();
 	}
+	createSceneLights ();
 	m_saveGameList->update();
 
 	root->getAutoCreatedWindow()->getViewport(0)->setCamera(m_mainMenuCamera);
@@ -202,11 +216,13 @@ bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 
 bool MainMenu::onHidden( const CEGUI::EventArgs& evt )
 {
+	DEBUG ("Main menu hiding");
 	Ogre::Root *root = Ogre::Root::getSingletonPtr();
     if (m_sceneCreated)
 	{
 		root->getAutoCreatedWindow()->getViewport(0)->setCamera(m_gameCamera);
 	}
+	destroySceneLights ();
     CEGUI::WindowManager::getSingleton().getWindow("MainMenu")->setAlpha(1);
 
     root->removeFrameListener(this);
@@ -275,6 +291,53 @@ bool MainMenu::frameEnded(const Ogre::FrameEvent& evt)
     return Ogre::FrameListener::frameEnded(evt);
 }
 
+void MainMenu::createSceneLights ()
+{
+	Ogre::Light *l;
+
+	m_sceneMgr->setAmbientLight(Ogre::ColourValue(0.1, 0.1, 0.3, 2));
+
+
+	l = m_sceneMgr->createLight("mainMen_MoonLight");
+	l->setType(Ogre::Light::LT_DIRECTIONAL); /// XXX originally set to lt_point
+	l->setPosition(Ogre::Vector3(0.929331, 16.9939, -29.9981));
+	l->setDirection(-1, -1, -1); /// XXX originally set to 0, 0, 1
+	l->setAttenuation(100, 0.2, 0.8, 0);
+	l->setCastShadows(true); /// XXX originally set to true
+	l->setDiffuseColour(Ogre::ColourValue(0.5f, 0.5f, 0.5f, 1));
+	l->setSpecularColour(Ogre::ColourValue(0.45098, 0.45098, 0.47451, 1));
+	//l->setPowerScale(1);
+
+	l = m_sceneMgr->createLight("mainMen_FireLight1");
+	l->setType(Ogre::Light::LT_POINT);
+	l->setPosition(Ogre::Vector3(-10.5044, 0.121838, -21.5031));
+	//l->setDirection(0, 0, 1);
+	l->setAttenuation(100, 0.5, 0.02, 0.008);
+	l->setCastShadows(false);
+	l->setDiffuseColour(Ogre::ColourValue(0.443137, 0.215686, 0.145098, 1));
+	l->setSpecularColour(Ogre::ColourValue(0.407843, 0.176471, 0.0588235, 1));
+	//l->setPowerScale(3);
+
+	DEBUG ("Created menu scene lights");
+}
+
+
+void MainMenu::destroySceneLights ()
+{
+	try
+	{
+		m_sceneMgr->destroyLight ("mainMen_MoonLight");
+		m_sceneMgr->destroyLight ("mainMen_FireLight1");
+
+		DEBUG ("Destroyed menu scene lights");
+	}
+	catch (Ogre::Exception & e)
+	{
+		DEBUG ("Caught exception %s", e.what ());
+	}
+}
+
+
 void MainMenu::createScene()
 {
     if (!m_sceneCreated)
@@ -296,31 +359,6 @@ void MainMenu::createScene()
 		Ogre::Entity *e;
 		//Ogre::MeshPtr *m; // 2011.10.23: found as unused.
 		Ogre::ParticleSystem *p;
-		Ogre::Light *l;
-
-		m_sceneMgr->setAmbientLight(Ogre::ColourValue(0.1, 0.1, 0.3, 2));
-
-
-		l = m_sceneMgr->createLight("mainMen_MoonLight");
-		l->setType(Ogre::Light::LT_POINT);
-		l->setPosition(Ogre::Vector3(0.929331, 16.9939, -29.9981));
-		l->setDirection(0, 0, 1);
-		l->setAttenuation(100, 0.2, 0.8, 0);
-		l->setCastShadows(true);
-		l->setDiffuseColour(Ogre::ColourValue(1, 1, 1, 1));
-		l->setSpecularColour(Ogre::ColourValue(0.45098, 0.45098, 0.47451, 1));
-		l->setPowerScale(1);
-
-		l = m_sceneMgr->createLight("mainMen_FireLight1");
-		l->setType(Ogre::Light::LT_POINT);
-		l->setPosition(Ogre::Vector3(-10.5044, 0.121838, -21.5031));
-		l->setDirection(0, 0, 1);
-		l->setAttenuation(100, 0.5, 0.02, 0.008);
-		l->setCastShadows(false);
-		l->setDiffuseColour(Ogre::ColourValue(0.443137, 0.215686, 0.145098, 1));
-		l->setSpecularColour(Ogre::ColourValue(0.407843, 0.176471, 0.0588235, 1));
-		l->setPowerScale(3);
-
 		
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("long_sw.mesh");
@@ -626,7 +664,7 @@ void MainMenu::createScene()
 		n->setOrientation(Ogre::Quaternion(0.248194, -0.15685, 0.597531, 0.74616));
 
 		m_sceneCreated = true;
-		
+		DEBUG ("Created scene");
 	}
     
 }

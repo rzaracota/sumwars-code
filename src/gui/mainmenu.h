@@ -133,6 +133,16 @@ private:
      */
     bool onQuitGameHost ( const CEGUI::EventArgs& evt );
 
+	/**
+	 * \brief Create the lights to be used together with the scene.
+	 */
+	void createSceneLights ();
+
+	/**
+	 * \brief Destroy the lights to be used together with the scene.
+	 */
+	void destroySceneLights ();
+
     /**
      * \fn void createScene()
      * \brief Creates the background scene
