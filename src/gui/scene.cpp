@@ -25,7 +25,7 @@
 #include "graphicmanager.h"
 
 // RTSS 
-#include <RTShaderSystem/OgreRTShaderSystem.h>
+#include <OgreRTShaderSystem.h>
 
 
 

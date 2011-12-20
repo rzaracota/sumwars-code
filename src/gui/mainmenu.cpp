@@ -29,7 +29,7 @@
 #include <iostream>
 
 // Allo RTSS initialization in the scene (such as viewport manipulation).
-#include <RTShaderSystem/OgreRTShaderSystem.h>
+#include <OgreRTShaderSystem.h>
 
 
 MainMenu::MainMenu (Document* doc)
