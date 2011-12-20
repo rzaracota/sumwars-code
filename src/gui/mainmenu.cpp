@@ -112,11 +112,19 @@ MainMenu::MainMenu (Document* doc)
 	m_mainMenuCamera->setNearClipDistance(0.1f);
 	m_mainMenuCamera->setFarClipDistance(10000);
 
+
+	//Ogre::RTShader::ShaderGenerator * shaderGeneratorPtr = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
+	//if (shaderGeneratorPtr)
+	//{
+	//	shaderGeneratorPtr->addSceneManager (m_sceneMgr);
+	//}
+
 	Ogre::Viewport* mainVP = m_mainMenuCamera->getViewport();
 	if (mainVP)
 	{
 		mainVP->setMaterialScheme(Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
 	}
+
 
     m_sceneCreated = false;
 
@@ -313,10 +321,10 @@ void MainMenu::createSceneLights ()
 	l->setType(Ogre::Light::LT_DIRECTIONAL); /// XXX originally set to lt_point
 	//l->setPosition(Ogre::Vector3(0.929331, 16.9939, -29.9981)); // position does not matter for directional light.
 	l->setDirection(-1, -1, -1); /// XXX originally set to 0, 0, 1
-	l->setAttenuation(100, 0.2, 0.8, 0);
+	//l->setAttenuation(100, 0.2, 0.8, 0);
 	l->setCastShadows(true); /// XXX originally set to true
-	l->setDiffuseColour(Ogre::ColourValue(0.5f, 0.5f, 0.5f, 1));
-	l->setSpecularColour(Ogre::ColourValue(0.45098, 0.45098, 0.47451, 1));
+	l->setDiffuseColour(Ogre::ColourValue(0.1f, 0.1f, 0.23f, 1));
+	l->setSpecularColour(Ogre::ColourValue(0.25098, 0.25098, 0.27451, 1));
 	//l->setPowerScale(1);
 
 	lightName = "mainMen_FireLight1";
@@ -331,11 +339,17 @@ void MainMenu::createSceneLights ()
 	l->setType(Ogre::Light::LT_POINT);
 	l->setPosition(Ogre::Vector3(-10.5044, 0.121838, -21.5031));
 	//l->setDirection(0, 0, 1);
-	l->setAttenuation(100, 0.5, 0.02, 0.008);
+	l->setAttenuation(10, 0.5, 0.02, 0.008);
 	l->setCastShadows(false);
-	l->setDiffuseColour(Ogre::ColourValue(0.443137, 0.215686, 0.145098, 1));
+	l->setDiffuseColour(Ogre::ColourValue(0.243137, 0.155686, 0.105098, 1));
 	l->setSpecularColour(Ogre::ColourValue(0.407843, 0.176471, 0.0588235, 1));
 	//l->setPowerScale(3);
+
+	//Ogre::RTShader::ShaderGenerator * shaderGeneratorPtr = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
+	//if (shaderGeneratorPtr)
+	//{
+	//	shaderGeneratorPtr->invalidateScheme (Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+	//}
 
 	DEBUG ("Created menu scene lights");
 }
@@ -718,6 +732,8 @@ void MainMenu::createScene()
 		n->setPosition(Ogre::Vector3(-2.64068, 14.1513, -57.029));
 		n->setScale(Ogre::Vector3(5.8, 1, 4.83));
 		n->setOrientation(Ogre::Quaternion(0.248194, -0.15685, 0.597531, 0.74616));
+
+		//createSceneLights ();
 
 		m_sceneCreated = true;
 		DEBUG ("Created scene");
