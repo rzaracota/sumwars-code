@@ -434,10 +434,19 @@ ENDIF()
 TARGET_LINK_LIBRARIES(sumwars ${LINK_LIBS})
 
 IF(SUMWARS_POST_BUILD_COPY)
-  ADD_CUSTOM_COMMAND(TARGET sumwars
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/sumwars${CMAKE_EXECUTABLE_SUFFIX} ${CMAKE_SOURCE_DIR}
-  )
+  # Due to the fact that CMake can't yet target properly subconfigurations in multi-configuration environments
+  # (such as Visual Studio), make a special case using Visual Studio macros.
+  IF (MSVC)
+    ADD_CUSTOM_COMMAND(TARGET sumwars
+      POST_BUILD
+      COMMAND copy $(OutDir)$(TargetFileName) $(ProjectDir)$(TargetFileName)
+    )
+  ELSE ()
+    ADD_CUSTOM_COMMAND(TARGET sumwars
+      POST_BUILD
+      COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/sumwars${CMAKE_EXECUTABLE_SUFFIX} ${CMAKE_SOURCE_DIR}
+    )
+  ENDIF (MSVC)
 ENDIF()
 
 # install the application
