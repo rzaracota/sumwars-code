@@ -36,9 +36,12 @@
 #include "OISKeyboard.h"
 #include "OISJoyStick.h"
 
+// Sumwars
 #include "document.h"
 #include "window.h"
 #include "scene.h"
+#include "ShaderManager.h"
+
 
 /**
  * \class MainWindow
@@ -49,7 +52,7 @@ class MainWindow :
 	public OIS::KeyListener
 {
 
-	public:
+public:
 
 
 	/**
@@ -58,8 +61,9 @@ class MainWindow :
 	 * \param ceguisystem Zeiger auf das Basisobjekt von CEGUI
 	 * \param window Fenster in die Applikation gestartet wird
 	 * \param doc Zeiger auf das Dokument
+	 * \param shaderMgr Pointer to the scene's shader manager.
 	 */
-	MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc);
+	MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc, ShaderManager* shaderMgr);
 
 	/**
 	 * \fn ~MainWindow()
@@ -357,7 +361,7 @@ class MainWindow :
 	 */
 	void setRessourceLoadingBar(float percent);
 	
-	private:
+private:
 
 	/**
 	 * \var Ogre::Root *m_ogre_root
@@ -383,6 +387,10 @@ class MainWindow :
 	 */
 	Ogre::SceneManager* m_scene_manager;
 
+	/**
+	 * \brief The manager handling shader based operations.
+	 */
+	ShaderManager* m_shader_mgr_ptr;
 
 	/**
 	 * \var OIS::InputManager *m_ois

@@ -52,8 +52,12 @@
 #include "contenteditor.h"
 #endif
 
+// RTSS 
+#include <RTShaderSystem/OgreRTShaderSystem.h>
 
-MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc)
+
+MainWindow::MainWindow (Ogre::Root* ogreroot, CEGUI::System* ceguisystem, Ogre::RenderWindow* window, Document* doc, ShaderManager* shaderMgr)
+	: m_shader_mgr_ptr (shaderMgr)
 {
 	m_ogre_root = ogreroot;
 	m_cegui_system = ceguisystem;
@@ -99,6 +103,7 @@ bool MainWindow::init()
 
 MainWindow::~MainWindow()
 {
+	DEBUG ("Destroying main window...");
 	m_ois->destroyInputObject(m_mouse);
 	m_ois->destroyInputObject(m_keyboard);
 	OIS::InputManager::destroyInputSystem(m_ois);
@@ -700,7 +705,7 @@ bool MainWindow::setupGameScreen()
 	try
 	{
 		// Szene erzeugen
-		m_scene = new Scene(m_document,m_window);
+		m_scene = new Scene (m_document, m_window, m_shader_mgr_ptr); // TODO: add shader mgr!
 
 		// GUI Elemente erzeugen
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
