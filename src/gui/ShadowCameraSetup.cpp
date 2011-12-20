@@ -56,10 +56,10 @@ ShadowCameraSetup::ShadowCameraSetup (Ogre::SceneManager& sceneMgr, Ogre::RTShad
 	{
 		DEBUG ("Applying custom PSSM settings...");
 		Config_ShadowSplitPadding (2.0f);
-		//Config_ShadowSplitPoints(1, 15, 50, 200);
 		Config_ShadowOptimalAdjustFactors (1.0f, 1.0f, 1.0f);
 
 		configAndCalculateSplitPoints (3, 1.0f, 120);
+		//Config_ShadowSplitPoints(1, 15, 50, 180);
 
 		//Config_ShadowUseAggressiveFocusRegion(true);
 
@@ -204,6 +204,7 @@ void ShadowCameraSetup::configAndCalculateSplitPoints (size_t splitCount, Ogre::
 		ERRORMSG ("Caught exception when setting shadow texture size: [%s]", ex.what ());
 	}
 }
+
 
 
 void ShadowCameraSetup::Config_ShadowTextureSize (int textureSize)
