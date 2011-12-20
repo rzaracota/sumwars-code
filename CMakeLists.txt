@@ -133,7 +133,7 @@ IF("${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
 ELSEIF("${OGRE_VERSION_NAME}" STREQUAL "Byatis")
   set(SUMWARS_OGRE_SINGLETON "msSingleton")
 ELSE()
-  MESSAGE(SEND_ERROR "You need Ogre 1.7 Cthugha to build this.")
+  MESSAGE(SEND_ERROR "You need Ogre 1.7 Cthugha or 1.8 Byatis to build this.")
 ENDIF()
 
 # add our build include directory
@@ -170,6 +170,7 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/core)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/contenteditor)
 INCLUDE_DIRECTORIES(${OGRE_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${OGRE_RTShaderSystem_INCLUDE_DIR})
 IF (WIN32)
   Message(STATUS "Adding boost include: ${BoostOGRE_INCLUDE_DIR}")
   INCLUDE_DIRECTORIES(${BoostOGRE_INCLUDE_DIR})
@@ -341,6 +342,8 @@ SET(SRCS
   ./src/gui/tooltip.cpp
   ./src/gui/optionswindow.cpp
   ./src/gui/clipboard.cpp
+  ./src/gui/ShaderManager.cpp
+  ./src/gui/ShadowCameraSetup.cpp
 )
  
 IF(SUMWARS_BUILD_TOOLS)
@@ -387,6 +390,7 @@ ADD_EXECUTABLE(sumwars ${SRCS})
 SET(LINK_LIBS
   ${OGRE_LIBRARIES}
   ${OGRE_Terrain_LIBRARY}
+  ${OGRE_RTShaderSystem_LIBRARY}
   ${OIS_LIBRARIES} 
   ${CEGUI_LIBRARY} 
   ${CEGUIOGRE_LIBRARY}
