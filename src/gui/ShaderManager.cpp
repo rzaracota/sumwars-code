@@ -85,7 +85,7 @@ public:
 	{
 		delete mShadowCameraSetup;
 		mShadowCameraSetup = 0;
-		mSceneManager.setShadowTechnique(Ogre::SHADOWTYPE_NONE);
+		//mSceneManager.setShadowTechnique(Ogre::SHADOWTYPE_NONE); // TODO: move setting from main menu.
 		//This will make any other camera setup delete itself (unless held by another shared pointer).
 		mSceneManager.setShadowCameraSetup(Ogre::ShadowCameraSetupPtr());
 	}
@@ -267,12 +267,13 @@ ShaderManager::GraphicsLevel ShaderManager::setGraphicsLevel(ShaderManager::Grap
 	str << "Using graphics level " << mGraphicSchemes[newLevel];
 	LOGGER(Log::LOGLEVEL_INFO, str.str().c_str());
 	
-	Ogre::MaterialManager::getSingleton().setActiveScheme(mGraphicSchemes[newLevel]);
-		
-	Ogre::RenderWindow* window = Ogre::Root::getSingleton().getAutoCreatedWindow();
-	for (int i = 0; i < window->getNumViewports(); ++i) 
-		window->getViewport(i)->setMaterialScheme("High");
-		//window->getViewport(i)->setMaterialScheme(mGraphicSchemes[newLevel]);
+	//Ogre::MaterialManager::getSingleton().setActiveScheme(mGraphicSchemes[newLevel]);
+	
+	// Let the already set RTSS material scheme to be used. TODO: merge logic into this class only (remove from all other places)
+	//Ogre::RenderWindow* window = Ogre::Root::getSingleton().getAutoCreatedWindow();
+	//for (int i = 0; i < window->getNumViewports(); ++i) 
+	//	window->getViewport(i)->setMaterialScheme("High");
+	//	//window->getViewport(i)->setMaterialScheme(mGraphicSchemes[newLevel]);
 
 
 	switch (newLevel) 
