@@ -293,7 +293,7 @@ bool Application::init()
 
 	// Augustin Preda, 2011.11.15: trial code: load the options.xml file; it's required
 	// TODO: don't load it again later. Currently it's done via m_document->loadSettings();
-	Options::getInstance()->readFromFile(SumwarsHelper::userPath() + "/options.xml");
+	Options::getInstance()->readFromFile(operationalPath + "/options.xml");
 
 	bool ret = true;
 
