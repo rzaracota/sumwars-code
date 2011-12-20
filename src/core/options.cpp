@@ -251,6 +251,7 @@ bool Options::readFromFile(const std::string& filename)
 	}  // if (loadOkay)
 	else
 	{
+		ERRORMSG ("Could not successfully load file [%s]", filename.c_str ());
 		setToDefaultOptions();
 		return false;
 	}
