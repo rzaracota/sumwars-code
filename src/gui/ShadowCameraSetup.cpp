@@ -42,17 +42,24 @@ ShadowCameraSetup::ShadowCameraSetup (Ogre::SceneManager& sceneMgr, Ogre::RTShad
 	// 2 = FocusedShadowCameraSetup
 	// 3 = PlaneOptimalShadowCameraSetup
 	// 4 = PSSM
-	setup ();
+	try
+	{
+		setup ();
+	}
+	catch (Ogre::Exception & e)
+	{
+		ERRORMSG ("Exception caught while setting up the camera shadow: %s", e.what ());
+	}
 
 	//Config_ShadowTextureSize(1024);
 	if (m_shadow_camera_setup_type == 4)
 	{
 		DEBUG ("Applying custom PSSM settings...");
-		Config_ShadowSplitPadding (10.0f);
+		Config_ShadowSplitPadding (3.0f);
 		//Config_ShadowSplitPoints(1, 15, 50, 200);
 		Config_ShadowOptimalAdjustFactors (2.0f, 1.0f, 0.5f);
 
-		configAndCalculateSplitPoints (3, 1, 1000);
+		configAndCalculateSplitPoints (3, 1, 100);
 
 		//Config_ShadowUseAggressiveFocusRegion(true);
 
@@ -81,7 +88,7 @@ ShadowCameraSetup::ShadowCameraSetup (Ogre::SceneManager& sceneMgr, Ogre::RTShad
 		}
 	}
 
-	Config_ShadowFarDistance (600.0);
+	Config_ShadowFarDistance (70.0f);
 	Config_ShadowRenderBackfaces (true);
 	DEBUG ("Shadow Camera Setup ctor - exit");
 }
@@ -105,12 +112,22 @@ bool ShadowCameraSetup::setup()
 		isOpenGL = false;
 	}
 
-	mSceneMgr.setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE_INTEGRATED);
+	//mSceneMgr.setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE_INTEGRATED); // TODO: move setting from main menu.
 
-	mSceneMgr.setShadowTextureCount(3);
-	mSceneMgr.setShadowTextureSelfShadow(true);
+	mSceneMgr.setShadowTextureCount (3);
+	mSceneMgr.setShadowTextureSelfShadow (true);
+	// If we can use texture sizes BIGGER than the window size, specify the settings...
+	// This difference may come up most often due to the D3D/OpenGL support.
+	if (Ogre::Root::getSingletonPtr ()->getRenderSystem()->getCapabilities()->hasCapability(Ogre::RSC_HWRENDER_TO_TEXTURE))
+	{
+		mSceneMgr.setShadowTextureSettings (1024, 2);
+	}
+	else
+	{
+		mSceneMgr.setShadowTextureSettings (256, 2);
+	}
 
-	mSceneMgr.setShadowTextureCountPerLightType(Ogre::Light::LT_DIRECTIONAL, 3);
+	mSceneMgr.setShadowTextureCountPerLightType (Ogre::Light::LT_DIRECTIONAL, 3);
 	//mSceneMgr.setShadowTextureCountPerLightType(Ogre::Light::LT_POINT, 1);
 	//mSceneMgr.setShadowTextureCountPerLightType(Ogre::Light::LT_SPOTLIGHT, 1);
 
