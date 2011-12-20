@@ -55,11 +55,11 @@ ShadowCameraSetup::ShadowCameraSetup (Ogre::SceneManager& sceneMgr, Ogre::RTShad
 	if (m_shadow_camera_setup_type == 4)
 	{
 		DEBUG ("Applying custom PSSM settings...");
-		Config_ShadowSplitPadding (3.0f);
+		Config_ShadowSplitPadding (5.0f);
 		//Config_ShadowSplitPoints(1, 15, 50, 200);
-		Config_ShadowOptimalAdjustFactors (2.0f, 1.0f, 0.5f);
+		Config_ShadowOptimalAdjustFactors (1.0f, 1.0f, 1.0f);
 
-		configAndCalculateSplitPoints (3, 1, 100);
+		configAndCalculateSplitPoints (3, 1.0f, 100);
 
 		//Config_ShadowUseAggressiveFocusRegion(true);
 
@@ -88,7 +88,7 @@ ShadowCameraSetup::ShadowCameraSetup (Ogre::SceneManager& sceneMgr, Ogre::RTShad
 		}
 	}
 
-	Config_ShadowFarDistance (70.0f);
+	Config_ShadowFarDistance (60.0f);
 	Config_ShadowRenderBackfaces (true);
 	DEBUG ("Shadow Camera Setup ctor - exit");
 }
@@ -180,6 +180,7 @@ void ShadowCameraSetup::configAndCalculateSplitPoints (size_t splitCount, Ogre::
 {
 	try 
 	{
+		DEBUG ("Calculating shadow camera PSSM splitpoints for count=%d, near-far dist = %.2f, %.2f", splitCount, nearDistance, farDistance);
 		mPssmSetup->calculateSplitPoints (splitCount, nearDistance, farDistance);
 	}
 	catch (const std::exception& ex) 
