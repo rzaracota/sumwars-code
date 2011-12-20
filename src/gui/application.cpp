@@ -46,6 +46,9 @@
 // Add the material manager to allow setting shadow techniques
 #include <OgreMaterialManager.h>
 
+// Allo RTSS initialization in the scene (such as viewport manipulation).
+#include <OgreRTShaderSystem.h>
+
 // Clipboard singleton created here.
 #include "clipboard.h"
 
@@ -145,6 +148,7 @@ bool Application::init()
     std::string ogreCfgUser = ".sumwars/ogre.cfg";
 	std::string pluginsCfgUser = ".sumwars/plugins.cfg";
 	std::string resourcesCfgUser = ".sumwars/resources.cfg";
+#ifndef _DEBUG
 
 	/*
 	We have to have something in the default ogre.cfg file, otherwise the options window will
@@ -193,6 +197,45 @@ bool Application::init()
 			return false;
 		}
 	}
+#else
+    if(!PHYSFS_exists(".sumwars/plugins_d.cfg"))
+    {
+        TCHAR szPath[MAX_PATH];
+
+        if( !GetModuleFileName( NULL, szPath, MAX_PATH ) )
+        {
+            printf("Cannot retrieve module path (%d)\n", GetLastError());
+            return false;
+        }
+
+        std::string path(szPath);
+        path.erase(path.size() - 11, path.size());
+
+        std::string pluginFile (".sumwars/plugins_d.cfg");
+
+        PHYSFS_file* pluginsFile = PHYSFS_openWrite(pluginFile.c_str ());
+        if (0 != pluginsFile)
+        {
+            std::string str = "# Defines plugins to load\n"
+                                "# Define plugin folder\n"
+                                "PluginFolder=";
+            str.append(path).append("\n\n");
+            str.append(		  "# Define plugins\n"
+                                "Plugin=RenderSystem_Direct3D9_d\n"
+                                "Plugin=RenderSystem_GL_d\n"
+                                "Plugin=Plugin_ParticleFX_d\n"
+                                "Plugin=Plugin_OctreeSceneManager_d\n"
+                                "Plugin=Plugin_CgProgramManager_d\n");
+
+            PHYSFS_write(pluginsFile, str.c_str(), sizeof(char), str.size());
+            PHYSFS_close(pluginsFile);
+        }
+        else
+        {
+            printf("Could not write file %s; error : %s\n", pluginFile.c_str (), PHYSFS_getLastError());
+        }
+    }
+#endif
 
 	// creating 'save' directory
 	if (!PHYSFS_exists(SumwarsHelper::savePath().c_str()))
@@ -313,11 +356,36 @@ bool Application::init()
 		return false;
 	}
 
+	DEBUG ("Initializing the RTSS...");
+
+	// Document anlegen
+	ret = createDocument();
+	if (ret==false)
+	{
+		ERRORMSG("cant create document");
+		return false;
+	}
+
+
 	// Ressourcen festlegen
 	ret = setupResources();
 	if (ret==false)
 	{
 		ERRORMSG("Setting up Resources failed");
+		return false;
+	}
+
+	// also initialize the RTSS.
+	initializeRTShaderSystem (m_scene_manager);
+
+	DEBUG ("Creating and registering the shader manager...");
+	m_shader_mgr_ptr = new ShaderManager ();
+	m_shader_mgr_ptr->registerSceneManager (m_scene_manager, Ogre::RTShader::ShaderGenerator::getSingletonPtr ());
+
+	ret = initializeResourceGroups ();
+	if (false == ret)
+	{
+		ERRORMSG ("Initializing resource groups failed");
 		return false;
 	}
 
@@ -338,13 +406,6 @@ bool Application::init()
 		return false;
 	}
 
-	// Document anlegen
-	ret = createDocument();
-	if (ret==false)
-	{
-		ERRORMSG("cant create document");
-		return false;
-	}
 	// View anlegen
 	ret = createView();
 	if (ret==false)
@@ -352,6 +413,10 @@ bool Application::init()
 		ERRORMSG("cant create view");
 		return false;
 	}
+
+
+
+
 
 	ret = initOpenAL();
 	if (ret == false)
@@ -794,10 +859,6 @@ bool Application::initOgre()
 	// Create the scene manager
 	m_scene_manager = m_ogre_root->createSceneManager (Ogre::ST_GENERIC, "DefaultSceneManager");
 
-#ifndef DONT_USE_SHADOWS
-	// TODO: the order in which the settings are loaded is wrong. Fix it! The options file is loaded after OGRE is initialized, 
-	// but data is needed NOW, when we're doing the initialization.
-
 	int shadowMode = Options::getInstance ()->getShadowMode ();
 
 	if (shadowMode > 0)
@@ -806,46 +867,36 @@ bool Application::initOgre()
 		{
 		case 2:
 			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+			DEBUG ("Using shadow technique: SHADOWTYPE_STENCIL_ADDITIVE");
 			break;
 		case 3:
 			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
+			DEBUG ("Using shadow technique: SHADOWTYPE_TEXTURE_ADDITIVE");
 			break;
 		case 4:
 			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);
+			DEBUG ("Using shadow technique: SHADOWTYPE_TEXTURE_MODULATIVE");
+			break;
+		case 5:
+			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_TEXTURE_ADDITIVE_INTEGRATED);
+			DEBUG ("Using shadow technique: SHADOWTYPE_TEXTURE_ADDITIVE_INTEGRATED");
+			break;
+		case 6:
+			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_TEXTURE_MODULATIVE_INTEGRATED);
+			DEBUG ("Using shadow technique: SHADOWTYPE_TEXTURE_MODULATIVE_INTEGRATED");
 			break;
 		case 1:
 		default:
 			m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
+			DEBUG ("Using shadow technique: SHADOWTYPE_STENCIL_MODULATIVE");
 			break;
 		}
 	}
 	else
 	{
 		m_scene_manager->setShadowTechnique (Ogre::SHADOWTYPE_NONE);
+		DEBUG ("Using shadow technique: SHADOWTYPE_NONE");
 	}
-
-	m_scene_manager->setShadowFarDistance (45);
-	m_scene_manager->setShadowColour( Ogre::ColourValue(0.4, 0.4, 0.4) );
-
-    /*// set Shadows enabled before any mesh is loaded
-	m_scene_manager->setShadowTextureSelfShadow(false);
-	m_scene_manager->setShadowTextureConfig(0,2048,2048,Ogre::PF_X8R8G8B8);
-*/
-
-	// If we can use texture sizes BIGGER than the window size, specify the settings...
-	// This difference may come up most often due to the D3D/OpenGL support.
-	if (m_ogre_root->getRenderSystem()->getCapabilities()->hasCapability(Ogre::RSC_HWRENDER_TO_TEXTURE))
-    {
-        // In D3D, use a 1024x1024 shadow texture
-		m_scene_manager->setShadowTextureSettings(1024, 2);
-    }
-    else
-    {
-        // Use 256x256 texture in GL since we can't go higher than the window res
-		// Make sure you use a resolution higher than this!
-        m_scene_manager->setShadowTextureSettings(256, 2);
-    }
-#endif // DONT_USE_SHADOWS
 
 	// Register as a Window listener
 	Ogre::WindowEventUtilities::addWindowEventListener (m_window, this);
@@ -878,6 +929,26 @@ bool Application::configureOgre()
 	return true;
 }
 
+
+bool Application::initializeResourceGroups ()
+{
+	// Gruppen initialisieren
+	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("General");
+	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Particles");
+	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Savegame");
+	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("GUI");
+
+
+	// Debugging: Meshes direkt anlegen
+
+	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
+
+	Ogre::MeshManager::getSingleton().createPlane("square44", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane,200,200,1,1,true,1,1,1,Ogre::Vector3::UNIT_X);
+
+
+	Ogre::MeshManager::getSingleton().createPlane("rect81", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane,400,50,1,1,true,1,1,1,Ogre::Vector3::UNIT_X);
+	return true;
+}
 
 
 bool Application::setupResources()
@@ -919,22 +990,6 @@ bool Application::setupResources()
 #if defined(WIN32)
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("c:\\windows\\fonts", "FileSystem", "GUI");
 #endif
-
-	// Gruppen initialisieren
-	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("General");
-	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Particles");
-	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Savegame");
-	Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("GUI");
-
-
-	// Debugging: Meshes direkt anlegen
-
-	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
-
-	Ogre::MeshManager::getSingleton().createPlane("square44", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane,200,200,1,1,true,1,1,1,Ogre::Vector3::UNIT_X);
-
-
-	Ogre::MeshManager::getSingleton().createPlane("rect81", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane,400,50,1,1,true,1,1,1,Ogre::Vector3::UNIT_X);
 
 	return true;
 }
@@ -1089,16 +1144,112 @@ bool Application::createDocument()
 	return true;
 }
 
+bool Application::initializeRTShaderSystem (Ogre::SceneManager * sceneMgr)
+{
+	DEBUG ("Application initializing RTSS");
+	if (Ogre::RTShader::ShaderGenerator::initialize())
+	{
+		Ogre::RTShader::ShaderGenerator * shaderGeneratorPtr;
+		shaderGeneratorPtr = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
+
+		shaderGeneratorPtr->addSceneManager (sceneMgr);
+
+		std::string prefferredShadingLanguage ("cg");
+		if (Ogre::Root::getSingleton().getRenderSystem()->getName().find("GL") != Ogre::String::npos)
+		{
+			prefferredShadingLanguage = "glsl";
+		}
+		else
+		{
+			// use cg for d3d.
+		}
+		// Set the preffered language...
+		shaderGeneratorPtr->setTargetLanguage(prefferredShadingLanguage);
+		DEBUG ("Using the shading language: [%s]", shaderGeneratorPtr->getTargetLanguage ().c_str ());
+
+		// Invalidate the scheme in order to re-generate all shaders based technique related to this scheme.
+		shaderGeneratorPtr->invalidateScheme (Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+
+		// TODO: make non-hard-coded
+		bool storeShaderCacheInMemory = true;
+
+		// Setup core libraries and shader cache path.
+		Ogre::StringVector groupVector = Ogre::ResourceGroupManager::getSingleton().getResourceGroups();
+		Ogre::StringVector::iterator itGroup = groupVector.begin();
+		Ogre::StringVector::iterator itGroupEnd = groupVector.end();
+		Ogre::String shaderCoreLibsPath;
+		Ogre::String shaderCachePath;
+		bool coreLibsFound = false;
+		for ( ; itGroup != itGroupEnd; ++itGroup)
+		{
+			Ogre::ResourceGroupManager::LocationList resLocationsList = Ogre::ResourceGroupManager::getSingleton().getResourceLocationList(*itGroup);
+			Ogre::ResourceGroupManager::LocationList::iterator it = resLocationsList.begin();
+			Ogre::ResourceGroupManager::LocationList::iterator itEnd = resLocationsList.end();
+
+			// Try to find the location of the core shader lib functions and use it
+			// as shader cache path as well - this will reduce the number of generated files
+			// when running from different directories.
+			for (; it != itEnd; ++it)
+			{
+				if ((*it)->archive->getName().find("RTShaderLib") != Ogre::String::npos)
+				{
+					shaderCoreLibsPath = (*it)->archive->getName() + "/cache/";
+					shaderCachePath = shaderCoreLibsPath;
+					coreLibsFound = true;
+					break;
+				}
+			}
+			// Core libs path found in the current group.
+			if (coreLibsFound)
+			{
+				break;
+			}
+		}
+
+		if (storeShaderCacheInMemory)
+		{
+			// empty path => generate directly from memory.
+			shaderGeneratorPtr->setShaderCachePath (Ogre::StringUtil::BLANK);
+
+			DEBUG ("Set shader cache path for RTShaders to memory");
+		}
+		else
+		{
+			shaderGeneratorPtr->setShaderCachePath (shaderCachePath);
+			DEBUG ("Set shader cache path for RTShaders to [%s]", shaderCachePath.c_str ());
+		}
+		
+		// Core shader libs not found -> shader generating will fail.
+		if (shaderCoreLibsPath.empty())
+		{
+			ERRORMSG ("ERROR initializing the RTSS! (empty core libs path)");
+			return false;
+		}
+		
+
+	}
+	else
+	{
+		ERRORMSG ("ERROR initializing the RTSS!!!");
+		return false;
+	}
+	return false;
+}
+
+
 bool Application::createView()
 {
 	DEBUG("create view\n");
-	m_main_window = new MainWindow(m_ogre_root, m_cegui_system,m_window,m_document);
-
+	m_main_window = new MainWindow (m_ogre_root, m_cegui_system, m_window, m_document, m_shader_mgr_ptr);
+	DEBUG ("created main indow");
 #ifdef SUMWARS_BUILD_TOOLS
 	new DebugPanel();
 	DebugPanel::getSingleton().init(false);
+	DEBUG ("Created debug panel");
+
 	new ContentEditor();
 	ContentEditor::getSingleton().init(false);
+	DEBUG ("Created content editor");
 #endif
 
 	TooltipManager *mgr = new TooltipManager();
