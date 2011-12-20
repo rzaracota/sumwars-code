@@ -41,14 +41,15 @@
 #include "graphicobject.h"
 #include "scriptobject.h"
 
+#include "ShaderManager.h"
+
 /**
  * \class Scene
  * \brief Beschreibt die darzustellende Szene
  */
 class Scene
 {
-	public:
-		
+public:
 
 	enum ObjectMask
 	{
@@ -61,8 +62,9 @@ class Scene
 	 * \brief Konstruktor
 	 * \param doc Dokument dessen Daten dargestellt werden sollen
 	 * \param window Fenster in das gerendert wird
+	 * \param shaderMgr The shader manager instance.
 	 */
-	Scene(Document* doc,Ogre::RenderWindow* window);
+	Scene (Document* doc, Ogre::RenderWindow* window, ShaderManager* shaderMgr);
 
 	/**
 	 * \fn ~Scene()
@@ -134,7 +136,7 @@ class Scene
 	static bool updatePlayerGraphicObject(GraphicObject* obj, Player* pl);
 						
 	
-	private:
+private:
 
 		
 	/**
@@ -190,6 +192,16 @@ class Scene
 	 */
 	void createScene();
 
+	/**
+	 * \brief Handle the creation of lights for the scene.
+	 */
+	void createSceneLights ();
+
+	/**
+	 * \brief Handle the destruction of lights for the scene.
+	 */
+	void destroySceneLights ();
+
 
 	/**
 	 * \fn void registerMeshes()
@@ -205,7 +217,10 @@ class Scene
 	
 	
 	
-
+	/**
+	 * \brief The manager handling shader based operations.
+	 */
+	ShaderManager* m_shader_mgr_ptr;
 
 	/**
 	 * \var Document* m_document

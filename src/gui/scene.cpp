@@ -24,15 +24,16 @@
 
 #include "graphicmanager.h"
 
-// Allo RTSS initialization in the scene (such as viewport manipulation).
+// RTSS 
 #include <RTShaderSystem/OgreRTShaderSystem.h>
 
 
 
-Scene::Scene(Document* doc,Ogre::RenderWindow* window)
+Scene::Scene (Document* doc, Ogre::RenderWindow* window, ShaderManager* shaderMgr)
+	: m_window (window)
+	, m_document (doc)
+	, m_shader_mgr_ptr (shaderMgr)
 {
-	m_document = doc;
-	m_window = window;
 	m_scene_manager = Ogre::Root::getSingleton().getSceneManager("DefaultSceneManager");
 	GraphicManager::setSceneManager(m_scene_manager);
 	
@@ -297,9 +298,11 @@ void Scene::update(float ms)
 	light = m_scene_manager->getLight("RegionLight");
 	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(colour[0], colour[1], colour[2]);
+
+	DEBUGX ("Region uses colour diffuse [%.2f %.2f %.2f] and specular  [%.2f %.2f %.2f]", colour[0], colour[1], colour[2], colour[0], colour[1], colour[2]);
 	
-	colour= region->getLight().getAmbientLight();
-	m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
+	//colour= region->getLight().getAmbientLight();
+	//m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2])); // TODO: XXX: re-add this.
 	
 	updateGraphicObjects(ms);
 }
@@ -709,6 +712,7 @@ void Scene::updateCharacterView()
 
 void Scene::clearObjects()
 {
+	DEBUG ("Scene: clearing (existing) objects");
 	std::map<int,GraphicObject*>::iterator it;
 	
 	for (it = m_graphic_objects.begin(); it != m_graphic_objects.end(); ++it)
@@ -718,12 +722,86 @@ void Scene::clearObjects()
 	m_graphic_objects.clear();
 }
 
+
+void Scene::createSceneLights ()
+{
+	DEBUG ("Scene: creating lights");
+
+	Region* region = m_document->getLocalPlayer()->getRegion();
+
+	float *colour;
+    m_scene_manager->setAmbientLight(Ogre::ColourValue(0.3f,0.3f,0.3f)); // TODO: Augustin Preda, 2011.12.19: Make the initialization map dependent.
+
+	m_scene_manager->setShadowColour (Ogre::ColourValue (0.5f, 0.5f, 0.5f)); // TODO: Augustin Preda, 2011.12.19: Make the initialization map dependent.
+
+
+	colour= region->getLight().getHeroLight();
+	Ogre::Light *light = m_scene_manager->createLight("HeroLight");
+	light->setType(Ogre::Light::LT_POINT);
+	light->setDiffuseColour(colour[0], colour[1], colour[2]);
+	light->setSpecularColour(0.0, 0.0, 0.0);
+	light->setAttenuation(20*GraphicManager::g_global_scale,0.5,0.000,
+						  0.025/(GraphicManager::g_global_scale*GraphicManager::g_global_scale));
+	light->setCastShadows (false);
+	// Augustin Preda, 2011.11.15: set to disabled.
+
+	DEBUGX("hero light %f %f %f",colour[0], colour[1], colour[2]);
+    
+	colour= region->getLight().getDirectionalLight();
+    light = m_scene_manager->createLight("RegionLight");
+	light->setType(Ogre::Light::LT_DIRECTIONAL);
+	light->setDiffuseColour(colour[0], colour[1], colour[2]);
+	light->setSpecularColour(colour[0], colour[1], colour[2]);
+	light->setDirection(Ogre::Vector3(-1,-1,-1));
+
+    light->setCastShadows (true);
+
+	DEBUGX("directional light %f %f %f",colour[0], colour[1], colour[2]);
+
+	if (m_shader_mgr_ptr)
+	{
+		m_shader_mgr_ptr->setGraphicsLevel (ShaderManager::LEVEL_HIGH);
+	}
+	//#if GUS_USE_RTSS
+	//		// Grab the scheme render state.												
+	//		Ogre::RTShader::RenderState* schemRenderState = enginePtr_->getShaderGenerator ()->getRenderState(Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+	//		// Assume a lighting model of SSLM_PerVertexLighting
+	//		Ogre::RTShader::SubRenderState* perPerVertexLightModel = enginePtr_->getShaderGenerator ()->createSubRenderState(Ogre::RTShader::FFPLighting::Type);
+	//		schemRenderState->addTemplateSubRenderState (perPerVertexLightModel);	
+	//#endif
+
+
+}
+
+
+void Scene::destroySceneLights ()
+{
+	try
+	{
+		DEBUG ("Scene: destroying lights");
+		if (m_scene_manager->hasLight ("HeroLight"))
+		{
+			m_scene_manager->destroyLight ("HeroLight");
+		}
+		if (m_scene_manager->hasLight ("RegionLight"))
+		{
+			m_scene_manager->destroyLight ("RegionLight");
+		}
+	}
+	catch (Ogre::Exception & e)
+	{
+		ERRORMSG ("Exception caught: %s", e.what ());
+	}
+}
+
+
 void Scene::createScene()
 {
-	DEBUGX("create Scene");
+	DEBUG ("Scene: creating scene");
 
 	// alle bisherigen Objekte aus der Szene loeschen
 	clearObjects();
+	destroySceneLights ();
 	
 	GraphicManager::destroyGraphicObject(m_temp_player_object);
 	m_temp_player_object =0;
@@ -744,34 +822,7 @@ void Scene::createScene()
 
 	Region* region = m_document->getLocalPlayer()->getRegion();
 
-	float *colour;
-
-	colour= region->getLight().getHeroLight();
-	Ogre::Light *light = m_scene_manager->createLight("HeroLight");
-	light->setType(Ogre::Light::LT_POINT);
-	light->setDiffuseColour(colour[0], colour[1], colour[2]);
-	light->setSpecularColour(0.0, 0.0, 0.0);
-	light->setAttenuation(20*GraphicManager::g_global_scale,0.5,0.000,
-						  0.025/(GraphicManager::g_global_scale*GraphicManager::g_global_scale));
-#ifndef DONT_USE_SHADOWS
-	light->setCastShadows (false);
-	// Augustin Preda, 2011.11.15: set to disabled.
-#endif // DONT_USE_SHADOWS
-
-	DEBUGX("hero light %f %f %f",colour[0], colour[1], colour[2]);
-    
-	colour= region->getLight().getDirectionalLight();
-    light = m_scene_manager->createLight("RegionLight");
-	light->setType(Ogre::Light::LT_DIRECTIONAL);
-	light->setDiffuseColour(colour[0], colour[1], colour[2]);
-	light->setSpecularColour(colour[0], colour[1], colour[2]);
-	light->setDirection(Ogre::Vector3(-1,-1,-1));
-
-#ifndef DONT_USE_SHADOWS
-    light->setCastShadows (true);
-#endif // DONT_USE_SHADOWS
-
-	DEBUGX("directional light %f %f %f",colour[0], colour[1], colour[2]);
+	createSceneLights ();
 
 	if (region !=0)
 	{
@@ -812,9 +863,10 @@ void Scene::createScene()
 		//m_minimap_camera->setFrustumExtents (0,dimx*200,0,dimy*200);
 		//DEBUG("camera up %f %f %f",up.x, up.y, up.z);
 
-        m_scene_manager->setAmbientLight(Ogre::ColourValue(1.0f,1.0f,1.0f));
+        //m_scene_manager->setAmbientLight(Ogre::ColourValue(1.0f,1.0f,1.0f));
         
-        std::cout << colour[0] << " + " << colour[1] << " + " << colour[2] << std::endl;
+        //std::cout << colour[0] << " + " << colour[1] << " + " << colour[2] << std::endl;
+
 		// Boden erstellen
 		if (region->getGroundMaterial() != "")
 		{
@@ -841,14 +893,20 @@ void Scene::createScene()
 		}
 		static_geom->build();
 		
-		m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
+		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
 		target->update();
 
-		colour= region->getLight().getAmbientLight();
-		m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
-		DEBUGX("ambient light %f %f %f",colour[0], colour[1], colour[2]);
+		if (Ogre::RTShader::ShaderGenerator::getSingletonPtr ())
+		{
+			Ogre::RTShader::ShaderGenerator::getSingletonPtr ()->invalidateScheme (Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+		}
+
+		//colour= region->getLight().getAmbientLight();
+		//m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
+		//DEBUG ("ambient light for region is [%.3f %.3f %.3f]",colour[0], colour[1], colour[2]);
 		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
 	}
+	DEBUG ("Scene: created scene");
 }
 
 void Scene::getMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, Ogre::Vector3* &vertices,  size_t &index_count,
