@@ -1297,7 +1297,7 @@ bool Application::initializeRTShaderSystem (Ogre::SceneManager * sceneMgr)
 bool Application::createView()
 {
 	DEBUG("create view\n");
-	m_main_window = new MainWindow(m_ogre_root, m_cegui_system,m_window,m_document);
+	m_main_window = new MainWindow (m_ogre_root, m_cegui_system, m_window, m_document, m_shader_mgr_ptr);
 	DEBUG ("created main indow");
 #ifdef BUILD_TOOLS
 	new DebugPanel();
