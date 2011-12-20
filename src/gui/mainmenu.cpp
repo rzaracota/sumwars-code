@@ -196,6 +196,7 @@ bool MainMenu::onShowCredits(const CEGUI::EventArgs& evt)
 bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 {
 	DEBUG ("Main menu showing");
+
 	Ogre::Root *root = Ogre::Root::getSingletonPtr();
     if (!m_sceneCreated)
 	{
@@ -217,6 +218,7 @@ bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 bool MainMenu::onHidden( const CEGUI::EventArgs& evt )
 {
 	DEBUG ("Main menu hiding");
+
 	Ogre::Root *root = Ogre::Root::getSingletonPtr();
     if (m_sceneCreated)
 	{
@@ -295,12 +297,12 @@ void MainMenu::createSceneLights ()
 {
 	Ogre::Light *l;
 
-	m_sceneMgr->setAmbientLight(Ogre::ColourValue(0.1, 0.1, 0.3, 2));
-
+	m_sceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.3, 2));
+	m_sceneMgr->setShadowColour (Ogre::ColourValue (0.5f, 0.5f, 0.5f));
 
 	l = m_sceneMgr->createLight("mainMen_MoonLight");
 	l->setType(Ogre::Light::LT_DIRECTIONAL); /// XXX originally set to lt_point
-	l->setPosition(Ogre::Vector3(0.929331, 16.9939, -29.9981));
+	//l->setPosition(Ogre::Vector3(0.929331, 16.9939, -29.9981)); // position does not matter for directional light.
 	l->setDirection(-1, -1, -1); /// XXX originally set to 0, 0, 1
 	l->setAttenuation(100, 0.2, 0.8, 0);
 	l->setCastShadows(true); /// XXX originally set to true
