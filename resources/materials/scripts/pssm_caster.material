@@ -1,0 +1,93 @@
+// declare the vertex shader (CG for the language)
+vertex_program PSSM/shadow_caster_vsCg cg
+{
+	// source file
+	source pssm.cg
+	// will run on vertex shader 1.1+
+	profiles vs_1_1 arbvp1
+	// entry function
+	entry_point shadow_caster_vs
+
+	default_params
+	{
+		param_named_auto wvpMat worldviewproj_matrix
+		// this is the scene's depth range
+		//param_named_auto depthRange			scene_depth_range
+		//param_named_auto optimalAdustFactor	custom 0
+	}
+}
+
+// declare the fragment shader (CG for the language)
+fragment_program PSSM/shadow_caster_psCg cg
+{
+	// source file
+	source pssm.cg
+	// will run on pixel shader 2.0+
+	profiles ps_2_0 arbfp1
+	// entry function
+	entry_point shadow_caster_ps
+
+	default_params
+	{
+	}
+}
+
+// declare the vertex shader (GLSL ES for the language)
+vertex_program PSSM/shadow_caster_vsGLSLES glsles
+{
+	// source file
+	source pssmCasterVp.glsles
+	// will run on GLSL ES
+	profiles glsles
+
+	default_params
+	{
+		param_named_auto worldViewProjMatrix worldviewproj_matrix
+		// this is the scene's depth range
+		//param_named_auto depthRange			scene_depth_range
+		//param_named_auto optimalAdustFactor	custom 0
+	}
+}
+
+// declare the fragment shader (GLSL ES for the language)
+fragment_program PSSM/shadow_caster_psGLSLES glsles
+{
+	// source file
+	source pssmCasterFp.glsles
+	// will run on GLSL ES
+	profiles glsles
+
+	default_params
+	{
+	}
+}
+
+vertex_program PSSM/shadow_caster_vs unified
+{
+	delegate PSSM/shadow_caster_vsGLSLES
+	delegate PSSM/shadow_caster_vsCg
+}
+
+fragment_program PSSM/shadow_caster_ps unified
+{
+	delegate PSSM/shadow_caster_psGLSLES
+	delegate PSSM/shadow_caster_psCg
+}
+
+material PSSM/shadow_caster
+{
+	technique
+	{
+		// all this will do is write depth and depth² to red and green
+		pass
+		{
+			vertex_program_ref PSSM/shadow_caster_vs
+			{
+			}
+
+			fragment_program_ref PSSM/shadow_caster_ps
+			{
+			}
+		}
+	}
+}
