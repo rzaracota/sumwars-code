@@ -1896,7 +1896,10 @@ void Document::writeSavegame(bool writeShortkeys)
 
 void Document::saveSettings()
 {
-	Options::getInstance()->writeToFile(SumwarsHelper::userPath() + "/options.xml");
+	// Get the path to use for storing data.
+	// This will be relative to the user directory on the user OS.
+	Ogre::String operationalPath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::userPath();
+	Options::getInstance()->writeToFile (operationalPath + "/options.xml");
 }
 
 void Document::loadSettings()
