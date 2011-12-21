@@ -20,10 +20,10 @@
 GraphicObject::GraphicObject(Type type, GraphicRenderInfo* render_info, std::string name, int id)
 	: m_attached_objects(), m_subobjects(), m_dependencies()
 {
-	DEBUG ("Creating graphics object [%s] type [%s]", name.c_str (), type.c_str ());
+	DEBUGX ("Creating graphics object [%s] type [%s]", name.c_str (), type.c_str ());
 	if (render_info)
 	{
-		DEBUG ("render info for obj name is [%s]", render_info->getName ().c_str ());
+		DEBUGX ("render info for obj name is [%s]", render_info->getName ().c_str ());
 	}
 	m_id = id;
 	m_type = type;
@@ -50,7 +50,7 @@ void GraphicObject::initContent()
 	}
 	else
 	{
-		DEBUG ("Gfobj single mesh %s", m_type.c_str ());
+		DEBUGX ("Gfobj single mesh %s", m_type.c_str ());
 		// special case: No Renderinfo, GraphicObject is a single mesh
 		MovableObjectInfo mainmesh;
 		mainmesh.m_source = m_type;
@@ -370,10 +370,10 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		
 		if (object.m_bone == "")
 		{
-			DEBUG ("object info has no bone; attaching to top node");
+			DEBUGX ("object info has no bone; attaching to top node");
 			obj->setCastShadows (true);
-			DEBUG ("current ogre mov. object cast shadows: %d", obj->getCastShadows ());
-			DEBUG ("current ogre mov. object name: %d", obj->getName ().c_str ());
+			DEBUGX ("current ogre mov. object cast shadows: %d", obj->getCastShadows ());
+			DEBUGX ("current ogre mov. object name: %d", obj->getName ().c_str ());
 
 			// attach to Topnode
 			getTopNode()->addChild(node);
@@ -382,7 +382,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		}
 		else
 		{
-			DEBUG ("object info has bone; attaching to bone");
+			DEBUGX ("object info has bone; attaching to bone");
 
 			// attach to Bone
 			ent = getEntity(mesh);
