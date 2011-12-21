@@ -479,7 +479,7 @@ if (UNIX)
     RENAME "sumwars.png")
 endif()
 
-install(FILES "AUTHORS" "COPYING" "INSTALL" "README"
+install(FILES "AUTHORS" "COPYING" "README" # we intentionally avoid installing "INSTALL" here
   DESTINATION "${SUMWARS_DOC_DIR}")
   
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/data"
