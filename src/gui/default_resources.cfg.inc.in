@@ -25,6 +25,7 @@ const std::string defaultResourcesCfg =
 "FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/materials/scripts\n"
 "FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/materials/programs\n"
 "FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/materials/textures\n"
+"FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/RTShaderLib\n"
 "\n"
 "[Particles]\n"
 "FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/particle/ogre_1_6\n"
