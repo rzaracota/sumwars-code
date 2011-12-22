@@ -1197,7 +1197,7 @@ bool Application::initializeRTShaderSystem (Ogre::SceneManager * sceneMgr)
 				}
 			}
 
-			const std::string shaderCachePath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::shaderCachePath();
+			const std::string shaderCachePath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::shaderCachePath() + "/";
 			shaderGeneratorPtr->setShaderCachePath(shaderCachePath);
 			DEBUG ("Set shader cache path for RTShaders to [%s]", shaderCachePath.c_str ());
 		}
