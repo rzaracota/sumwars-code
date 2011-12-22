@@ -105,6 +105,11 @@ public:
 	 */
 	static Ogre::String savePath();
 
+	/**
+	 * \fn static Ogre::String shaderCachePath()
+	 * \brief Returns the directory with shader cache (RTSS)
+	 */
+	static Ogre::String shaderCachePath();
 
 	/**
 	 * \brief Gets the updated resolution string from a base resolution string.

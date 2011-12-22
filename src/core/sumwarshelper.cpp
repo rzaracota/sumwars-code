@@ -119,6 +119,11 @@ Ogre::String SumwarsHelper::savePath ()
 	return userPath() + "/save";
 }
 
+Ogre::String SumwarsHelper::shaderCachePath()
+{
+	return userPath() + "/shader_cache";
+}
+
 std::string SumwarsHelper::getUpdatedResolutionString (const std::string& initialString, int newWidth, int newHeight)
 {
 	std::string returnValue;

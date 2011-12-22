@@ -1183,12 +1183,42 @@ bool Application::initializeRTShaderSystem (Ogre::SceneManager * sceneMgr)
 		// TODO: make non-hard-coded
 		bool storeShaderCacheInMemory = false;
 
-		// Setup core libraries and shader cache path.
+		if (!storeShaderCacheInMemory)
+		{
+			// creating 'shader_cache' directory
+			if (!PHYSFS_exists(SumwarsHelper::shaderCachePath().c_str()))
+			{
+				printf("Shader cache dir doesn't exist, making it: %s%s\n", PHYSFS_getWriteDir(), SumwarsHelper::shaderCachePath().c_str());
+				int result = PHYSFS_mkdir(SumwarsHelper::shaderCachePath().c_str());
+				if (result == 0)
+				{
+					printf("PHYSFS_mkdir failed: %s\n", PHYSFS_getLastError());
+					return false;
+				}
+			}
+
+			const std::string shaderCachePath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::shaderCachePath();
+			shaderGeneratorPtr->setShaderCachePath(shaderCachePath);
+			DEBUG ("Set shader cache path for RTShaders to [%s]", shaderCachePath.c_str ());
+		}
+		else
+		{
+			// empty path => generate directly from memory.
+			shaderGeneratorPtr->setShaderCachePath (Ogre::StringUtil::BLANK);
+			DEBUG ("Set shader cache path for RTShaders to memory");
+		}
+
+		/*
+		The following section is left just for error checking, maybe even that can be removed?
+		It used to deduce shader cache path but since that ends up being in system directories that are
+		often not writable for the user who starts the game, I have moved them to user directory,
+		which is a cleaner solution IMO.
+		*/
+
+		// Try to find shader core libraries
 		Ogre::StringVector groupVector = Ogre::ResourceGroupManager::getSingleton().getResourceGroups();
 		Ogre::StringVector::iterator itGroup = groupVector.begin();
 		Ogre::StringVector::iterator itGroupEnd = groupVector.end();
-		Ogre::String shaderCoreLibsPath;
-		Ogre::String shaderCachePath;
 		bool coreLibsFound = false;
 		for ( ; itGroup != itGroupEnd; ++itGroup)
 		{
@@ -1203,8 +1233,6 @@ bool Application::initializeRTShaderSystem (Ogre::SceneManager * sceneMgr)
 			{
 				if ((*it)->archive->getName().find("RTShaderLib") != Ogre::String::npos)
 				{
-					shaderCoreLibsPath = (*it)->archive->getName() + "/cache/";
-					shaderCachePath = shaderCoreLibsPath;
 					coreLibsFound = true;
 					break;
 				}
@@ -1215,28 +1243,13 @@ bool Application::initializeRTShaderSystem (Ogre::SceneManager * sceneMgr)
 				break;
 			}
 		}
-
-		if (storeShaderCacheInMemory)
-		{
-			// empty path => generate directly from memory.
-			shaderGeneratorPtr->setShaderCachePath (Ogre::StringUtil::BLANK);
-
-			DEBUG ("Set shader cache path for RTShaders to memory");
-		}
-		else
-		{
-			shaderGeneratorPtr->setShaderCachePath (shaderCachePath);
-			DEBUG ("Set shader cache path for RTShaders to [%s]", shaderCachePath.c_str ());
-		}
 		
 		// Core shader libs not found -> shader generating will fail.
-		if (shaderCoreLibsPath.empty())
+		if (!coreLibsFound)
 		{
 			ERRORMSG ("ERROR initializing the RTSS! (empty core libs path)");
 			return false;
 		}
-		
-
 	}
 	else
 	{
