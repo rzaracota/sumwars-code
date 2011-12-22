@@ -91,7 +91,7 @@ void Options::init()
 	m_enemy_highlight_color = "red";
 	m_show_console_window = true;
 	m_shadow_mode = SM_NONE;
-	m_use_rtss = false;
+	m_use_rtss = true;
 }
 
 Options* Options::getInstance()
