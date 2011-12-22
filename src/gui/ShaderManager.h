@@ -71,7 +71,7 @@ public:
 	/**
 	 * Constructor.
 	 */
-	ShaderManager();
+	ShaderManager(Ogre::RTShader::ShaderGenerator* shaderMgrPtr = 0);
 
 	/**
 	 * Destructor.
@@ -103,6 +103,7 @@ public:
 	 * @brief Registers a scene manager with the shader manager.
 	 *
 	 * This allows the shader manager to handle the shadow and shader setup for the scene manager.
+	 * If a non-null shader generator was added to the shader manager when it was constructed; it will be forwarded to the registration function.
 	 * @param sceneManager The scene manager to register.
 	 */
 	void registerSceneManager(Ogre::SceneManager* sceneManager);
@@ -123,11 +124,16 @@ public:
 	 */
 	void deregisterSceneManager(Ogre::SceneManager* sceneManager);
 
+	/**
+	 * Getter for the shader generator.
+	 */
+	Ogre::RTShader::ShaderGenerator* getShaderGeneratorPtr ();
+
 private:
 	/**
 	 * @brief The Shader generator instance.
 	 */
-	Ogre::RTShader::ShaderGenerator* mShaderGeneratorPtr;
+	Ogre::RTShader::ShaderGenerator* m_shader_generator_ptr;
 
 	typedef std::map<Ogre::SceneManager*, ShaderSetupInstance*> ShaderSetupStore;
 

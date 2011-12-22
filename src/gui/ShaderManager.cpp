@@ -57,7 +57,7 @@ private:
 	/**
 	 * @brief The shader generator
 	 */
-	Ogre::RTShader::ShaderGenerator* mShaderGeneratorPtr;
+	Ogre::RTShader::ShaderGenerator* m_shader_generator_ptr;
 
 public:
 
@@ -65,9 +65,12 @@ public:
 						Ogre::RTShader::ShaderGenerator* generatorPtr)
 		: mSceneManager(sceneManager)
 		, mShadowCameraSetup(0)
-		, mShaderGeneratorPtr (generatorPtr)
+		, m_shader_generator_ptr (generatorPtr)
 	{
-
+		if (m_shader_generator_ptr)
+		{
+			m_shader_generator_ptr->invalidateScheme (Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+		}
 	}
 
 	~ShaderSetupInstance()
@@ -78,7 +81,7 @@ public:
 	void setPSSMShadows()
 	{
 		delete mShadowCameraSetup;
-		mShadowCameraSetup = new ShadowCameraSetup(mSceneManager, mShaderGeneratorPtr);
+		mShadowCameraSetup = new ShadowCameraSetup(mSceneManager, m_shader_generator_ptr);
 	}
 
 	void setNoShadows()
@@ -91,9 +94,10 @@ public:
 	}
 };
 
-ShaderManager::ShaderManager () 
+ShaderManager::ShaderManager (Ogre::RTShader::ShaderGenerator* shaderMgrPtr) 
 	: mGraphicsLevel (LEVEL_DEFAULT)
 	, mBestGraphicsLevel (LEVEL_DEFAULT)
+	, m_shader_generator_ptr (shaderMgrPtr)
 {
 	mGraphicSchemes[LEVEL_DEFAULT]		= std::string("Default");
 	mGraphicSchemes[LEVEL_LOW]			= std::string("Low");
@@ -231,7 +235,7 @@ ShaderManager::GraphicsLevel ShaderManager::getLevelByName(const std::string &le
 
 void ShaderManager::registerSceneManager(Ogre::SceneManager* sceneManager)
 {
-	ShaderSetupInstance* instance = new ShaderSetupInstance(*sceneManager, 0);
+	ShaderSetupInstance* instance = new ShaderSetupInstance(*sceneManager, m_shader_generator_ptr);
 	mShaderSetups.insert(ShaderSetupStore::value_type(sceneManager, instance));
 	//setGraphicsLevel(mGraphicsLevel); 
 }
@@ -252,6 +256,13 @@ void ShaderManager::deregisterSceneManager(Ogre::SceneManager* sceneManager)
 		mShaderSetups.erase(I);
 	}
 }
+
+
+Ogre::RTShader::ShaderGenerator* ShaderManager::getShaderGeneratorPtr ()
+{
+	return m_shader_generator_ptr;
+}
+
 
 ShaderManager::GraphicsLevel ShaderManager::setGraphicsLevel(ShaderManager::GraphicsLevel newLevel)
 {

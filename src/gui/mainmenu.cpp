@@ -112,13 +112,6 @@ MainMenu::MainMenu (Document* doc)
 	m_mainMenuCamera->setNearClipDistance(0.1f);
 	m_mainMenuCamera->setFarClipDistance(10000);
 
-
-	//Ogre::RTShader::ShaderGenerator * shaderGeneratorPtr = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
-	//if (shaderGeneratorPtr)
-	//{
-	//	shaderGeneratorPtr->addSceneManager (m_sceneMgr);
-	//}
-
 	Ogre::Viewport* mainVP = m_mainMenuCamera->getViewport();
 	if (mainVP)
 	{
@@ -345,12 +338,6 @@ void MainMenu::createSceneLights ()
 	l->setSpecularColour(Ogre::ColourValue(0.407843, 0.176471, 0.0588235, 1));
 	//l->setPowerScale(3);
 
-	//Ogre::RTShader::ShaderGenerator * shaderGeneratorPtr = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
-	//if (shaderGeneratorPtr)
-	//{
-	//	shaderGeneratorPtr->invalidateScheme (Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
-	//}
-
 	DEBUG ("Created menu scene lights");
 }
 
@@ -359,10 +346,26 @@ void MainMenu::destroySceneLights ()
 {
 	try
 	{
-		m_sceneMgr->destroyLight ("mainMen_MoonLight");
-		m_sceneMgr->destroyLight ("mainMen_FireLight1");
+		bool someLightsWereDestroyed = false;
+		if (m_sceneMgr->hasLight ("mainMen_MoonLight"))
+		{
+			m_sceneMgr->destroyLight ("mainMen_MoonLight");
+			someLightsWereDestroyed = true;
+		}
+		if (m_sceneMgr->hasLight ("mainMen_FireLight1"))
+		{
+			m_sceneMgr->destroyLight ("mainMen_FireLight1");
+			someLightsWereDestroyed = true;
+		}
 
-		DEBUG ("Destroyed menu scene lights");
+		if (someLightsWereDestroyed)
+		{
+			DEBUG ("Destroyed menu scene lights");
+		}
+		else
+		{
+			DEBUG ("Tried to destroy lights; but none were found");
+		}
 	}
 	catch (Ogre::Exception & e)
 	{

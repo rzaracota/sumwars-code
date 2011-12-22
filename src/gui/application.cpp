@@ -375,13 +375,23 @@ bool Application::init()
 		return false;
 	}
 
-	// also initialize the RTSS.
-	initializeRTShaderSystem (m_scene_manager);
+	if (Options::getInstance ()->getUseRTSS ())
+	{
+		// also initialize the RTSS.
+		initializeRTShaderSystem (m_scene_manager);
+		DEBUG ("Creating the shader manager with RTSS...");
+		m_shader_mgr_ptr = new ShaderManager (Ogre::RTShader::ShaderGenerator::getSingletonPtr ());
+	}
+	else
+	{
+		DEBUG ("Creating the shader manager (without RTSS)...");
+		m_shader_mgr_ptr = new ShaderManager (0);
+	}
 
-	DEBUG ("Creating and registering the shader manager...");
-	m_shader_mgr_ptr = new ShaderManager ();
-	m_shader_mgr_ptr->registerSceneManager (m_scene_manager, Ogre::RTShader::ShaderGenerator::getSingletonPtr ());
+	DEBUG ("Registering the shader manager...");
+	m_shader_mgr_ptr->registerSceneManager (m_scene_manager);
 
+	DEBUG ("Initializing resource groups...");
 	ret = initializeResourceGroups ();
 	if (false == ret)
 	{
@@ -414,10 +424,7 @@ bool Application::init()
 		return false;
 	}
 
-
-
-
-
+	DEBUG ("Initializing sound via OpenAL...");
 	ret = initOpenAL();
 	if (ret == false)
 	{
@@ -425,6 +432,7 @@ bool Application::init()
 	}
 
 	DEBUG("time to start %f",tm.getTime());
+
 	// Ressourcen laden
 	ret = loadResources();
 	if (ret == false)
@@ -1157,11 +1165,13 @@ bool Application::initializeRTShaderSystem (Ogre::SceneManager * sceneMgr)
 		std::string prefferredShadingLanguage ("cg");
 		if (Ogre::Root::getSingleton().getRenderSystem()->getName().find("GL") != Ogre::String::npos)
 		{
+			// use glsl shading for opengl
 			prefferredShadingLanguage = "glsl";
 		}
 		else
 		{
 			// use cg for d3d.
+			//prefferredShadingLanguage = "hlsl";
 		}
 		// Set the preffered language...
 		shaderGeneratorPtr->setTargetLanguage(prefferredShadingLanguage);
@@ -1265,6 +1275,7 @@ bool Application::createView()
 
 bool Application::loadResources(int datagroups)
 {
+	DEBUG ("Application is loading resources; datagroups mask: %ld", datagroups);
 	TiXmlBase::SetCondenseWhiteSpace(false);
 
 	Ogre::FileInfoListPtr files;
