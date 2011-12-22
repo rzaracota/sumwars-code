@@ -493,6 +493,24 @@ class Options
 			m_shadow_mode = newMode;
 		}
 
+
+		/**
+		 * \brief Get the RTSS usage.
+		 */
+		bool getUseRTSS () const
+		{
+			return m_use_rtss;
+		}
+
+		/**
+		 * \brief Set the RTSS usage.
+		 */
+		void setUseRTSS (bool newValue)
+		{
+			m_use_rtss = newValue;
+		}
+
+
 		
 		/**
 		 * \brief Pushes the named value on the lua stack
@@ -579,6 +597,11 @@ class Options
 		 * \brief User preferrence to show or hide the console window.
 		 */
 		bool m_show_console_window;
+
+		/**
+		 * \brief Specifies whether the RTSS (RTShader - RunTimeShader System is used)
+		 */
+		bool m_use_rtss;
 
 		/**
 		 * \brief The preferred shadow mode.

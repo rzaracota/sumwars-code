@@ -91,6 +91,7 @@ void Options::init()
 	m_enemy_highlight_color = "red";
 	m_show_console_window = true;
 	m_shadow_mode = SM_NONE;
+	m_use_rtss = false;
 }
 
 Options* Options::getInstance()
@@ -224,6 +225,11 @@ bool Options::readFromFile(const std::string& filename)
 						{
 							setShadowMode (static_cast<ShadowMode>(shadowMode));
 						}
+
+						bool useRtss;
+						attr.getBool ("useRtss", useRtss, true);
+						setUseRTSS (useRtss);
+
 						// otherwise it's an invalid value.
 
 						// Other graphic options read from different files (E.g. ogre.cfg)
@@ -302,6 +308,7 @@ bool Options::writeToFile(const std::string& filename)
 	element->SetAttribute("grabMouseWhenWindowed", getGrabMouseInWindowedMode());
 	element->SetAttribute("display_mode", getUsedDisplayMode());
 	element->SetAttribute ("shadowMode", getShadowMode ());
+	element->SetAttribute ("useRtss", getUseRTSS () ? "true" : "false");
 	
 	element = new TiXmlElement( "Language" );
 	root->LinkEndChild(element);
