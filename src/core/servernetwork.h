@@ -13,9 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef SERVERNETWORK_H
-#else
-#define SERVERNETWORK_H
+#ifndef __SUMWARS_CORE_SERVERNETWORK_H__
+#define __SUMWARS_CORE_SERVERNETWORK_H__
 
 #include "network.h"
 #include <queue>
@@ -241,6 +240,4 @@ class ServerNetwork: public Network
 		
 };
 
-
-#endif
-
+#endif // __SUMWARS_CORE_SERVERNETWORK_H__

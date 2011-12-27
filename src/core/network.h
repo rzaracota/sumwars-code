@@ -13,9 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef NETWORK_H
-#else
-#define NETWORK_H
+#ifndef __SUMWARS_CORE_NETWORK_H__
+#define __SUMWARS_CORE_NETWORK_H__
 
 #define ID_USER_PACKET_ENUM  100
 
@@ -185,5 +184,4 @@ class Network
  */
 typedef std::queue<NetworkPacket*> PacketQueue;
 
-#endif
-
+#endif // __SUMWARS_CORE_NETWORK_H__

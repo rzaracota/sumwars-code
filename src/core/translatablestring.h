@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TRANSLATABLE_STRING
-#define TRANSLATABLE_STRING
+#ifndef __SUMWARS_CORE_TRANSLATABLESTRING_H__
+#define __SUMWARS_CORE_TRANSLATABLESTRING_H__
 
 #include <string>
 #include <vector>
@@ -188,4 +188,4 @@ class TranslatableString
 		std::string m_locale;
 };
 
-#endif
+#endif // __SUMWARS_CORE_TRANSLATABLESTRING_H__

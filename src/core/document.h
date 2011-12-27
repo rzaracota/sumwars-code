@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DOCUMENT_H
-#define DOCUMENT_H
+#ifndef __SUMWARS_CORE_DOCUMENT_H__
+#define __SUMWARS_CORE_DOCUMENT_H__
 
 
 #include <string>
@@ -915,7 +915,7 @@ class Document
 };
 
 
-#endif //DOCUMENT_H
+#endif // __SUMWARS_CORE_DOCUMENT_H__
 
 
 

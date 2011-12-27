@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DIALOGUE_H
-#define DIALOGUE_H
+#ifndef __SUMWARS_CORE_DIALOGUE_H__
+#define __SUMWARS_CORE_DIALOGUE_H__
 
 #include "debug.h"
 #include "event.h"
@@ -663,5 +663,5 @@ class Dialogue
 		
 };
 
-#endif
+#endif // __SUMWARS_CORE_DIALOGUE_H__
 

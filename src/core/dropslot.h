@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DROPSLOT_H
-#define DROPSLOT_H
+#ifndef __SUMWARS_CORE_DROPSLOT_H__
+#define __SUMWARS_CORE_DROPSLOT_H__
 
 #include "item.h"
 
@@ -167,6 +167,6 @@ struct DropChance
 	}
 };
 
-#endif
+#endif // __SUMWARS_CORE_DROPSLOT_H__
 
 

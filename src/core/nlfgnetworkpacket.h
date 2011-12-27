@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NLFGNETWORKPACKET_H
-#define NLFGNETWORKPACKET_H
+#ifndef __SUMWARS_CORE_NLFGNETWORKPACKET_H__
+#define __SUMWARS_CORE_NLFGNETWORKPACKET_H__
 
 #define ID_TIMESTAMP                    23
 
@@ -262,4 +262,4 @@ class NLFGNetworkPacket : public NetworkPacket
 		NLFG_Message* m_packet;
 };
 
-#endif
+#endif // __SUMWARS_CORE_NLFGNETWORKPACKET_H__

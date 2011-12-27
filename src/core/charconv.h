@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CHARCONV_H
-#define CHARCONV_H
+#ifndef __SUMWARS_CORE_CHARCONV_H__
+#define __SUMWARS_CORE_CHARCONV_H__
 
 #include <algorithm>
 #include <string>
@@ -249,4 +249,4 @@ class CharConv
 
 
 
-#endif // CHARCONV_H
+#endif // __SUMWARS_CORE_CHARCONV_H__

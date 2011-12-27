@@ -13,9 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef CLIENTNETWORK_H
-#else
-#define CLIENTNETWORK_H
+#ifndef __SUMWARS_CORE_CLIENTNETWORK_H__
+#define __SUMWARS_CORE_CLIENTNETWORK_H__
 
 #include "network.h"
 #include <queue>
@@ -149,5 +148,5 @@ class ClientNetwork : public Network
 		NetStatus m_status;
 };
 
-#endif
+#endif // __SUMWARS_CORE_CLIENTNETWORK_H__
 

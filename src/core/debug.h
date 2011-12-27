@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DEBUG_H
-#define DEBUG_H
+#ifndef __SUMWARS_CORE_DEBUG_H__
+#define __SUMWARS_CORE_DEBUG_H__
 
 
 #include <stdio.h>
@@ -84,7 +84,7 @@ extern "C"
 }
 
 
-#endif
+#endif // __SUMWARS_CORE_DEBUG_H__
 
 
 
