@@ -2796,6 +2796,9 @@ void MainWindow::setReadyToStart(bool ready)
 	
 	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "LoadRessourcesProgressBar"));
 	bar->setVisible(!ready);
+
+	// we have finished loading so we will simulate the click to get straight in to the main menu
+	m_document->onStartScreenClicked();
 }
 
 void MainWindow::setRessourceLoadingBar(float percent)
