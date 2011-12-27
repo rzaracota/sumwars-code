@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SUMWARSHELPER_H
-#define SUMWARSHELPER_H
+#ifndef __SUMWARS_CORE_SUMWARSHELPER_H__
+#define __SUMWARS_CORE_SUMWARSHELPER_H__
 
 #include "config.h"
 
@@ -156,4 +156,4 @@ public:
 #endif
 
 };
-#endif // SUMWARSHELPER_H
+#endif // __SUMWARS_CORE_SUMWARSHELPER_H__

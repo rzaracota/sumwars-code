@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CEGUIUTILITY_H
-#define CEGUIUTILITY_H
+#ifndef __SUMWARS_GUI_CEGUIUTILITY_H__
+#define __SUMWARS_GUI_CEGUIUTILITY_H__
 
 #include "CEGUI/CEGUIUDim.h"
 #include "CEGUI/CEGUIFont.h"
@@ -149,4 +149,4 @@ private:
 		
 };
 
-#endif // CEGUIUTILITY_H
+#endif // __SUMWARS_GUI_CEGUIUTILITY_H__

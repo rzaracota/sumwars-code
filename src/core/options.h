@@ -13,7 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#ifndef __SUMWARS_CORE_OPTIONS_H__
+#define __SUMWARS_CORE_OPTIONS_H__
 
 #include <string>
 #include <vector>
@@ -634,3 +635,5 @@ class Options
 		std::map <std::string, std::vector <std::string> > m_available_resolutions;
 
 };
+
+#endif // __SUMWARS_CORE_OPTIONS_H__

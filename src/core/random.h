@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef RANDOM_H
-#define RANDOM_H
+#ifndef __SUMWARS_CORE_RANDOM_H__
+#define __SUMWARS_CORE_RANDOM_H__
 
 #include <math.h>
 #include <stdlib.h>
@@ -106,5 +106,5 @@ class Random
 
 //float Random::rez_rand_max = 1.0 / RAND_MAX;
 
-#endif
+#endif // __SUMWARS_CORE_RANDOM_H__
 

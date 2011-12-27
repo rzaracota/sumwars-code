@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef WORLD_H
-#define WORLD_H
+#ifndef __SUMWARS_CORE_WORLD_H__
+#define __SUMWARS_CORE_WORLD_H__
 
 
 #include <string>
@@ -770,4 +770,4 @@ private:
 	 */
 	int m_data_reload_requests;
 };
-#endif //WORLD_H
+#endif // __SUMWARS_CORE_WORLD_H__

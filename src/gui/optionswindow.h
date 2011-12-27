@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef OPTIONSWINDOW_H
-#define OPTIONSWINDOW_H
+#ifndef __SUMWARS_GUI_OPTIONSWINDOW_H__
+#define __SUMWARS_GUI_OPTIONSWINDOW_H__
 
 #include "window.h"
 #include <OISKeyboard.h>
@@ -167,5 +167,5 @@ class OptionsWindow : public Window
 	
 };
 
-#endif
+#endif // __SUMWARS_GUI_OPTIONSWINDOW_H__
 

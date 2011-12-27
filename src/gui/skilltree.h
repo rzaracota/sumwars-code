@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SKILLTREE_H
-#define SKILLTREE_H
+#ifndef __SUMWARS_GUI_SKILLTREE_H__
+#define __SUMWARS_GUI_SKILLTREE_H__
 
 #include "window.h"
 #include "OISKeyboard.h"
@@ -115,4 +115,4 @@ class SkillTree : public Window
 		int m_shortkey_labels;
 };
 
-#endif
+#endif // __SUMWARS_GUI_SKILLTREE_H__

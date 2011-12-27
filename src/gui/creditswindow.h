@@ -13,11 +13,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
-
+#ifndef __SUMWARS_GUI_CREDITSWINDOW_H__
+#define __SUMWARS_GUI_CREDITSWINDOW_H__
 
 #include "window.h"
-
 
 /**
  * \class CreditsWindow
@@ -51,3 +50,4 @@ class CreditsWindow : public Window
 		Timer m_shown_timer;
 };
 
+#endif // __SUMWARS_GUI_CREDITSWINDOW_H__

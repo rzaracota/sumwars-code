@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ACTION_H
-#define ACTION_H
+#ifndef __SUMWARS_CORE_ACTION_H__
+#define __SUMWARS_CORE_ACTION_H__
 
 #include <string>
 #include "gettext.h"
@@ -373,4 +373,4 @@ public:
 
 
 
-#endif //ACTION_H
+#endif // __SUMWARS_CORE_ACTION_H__

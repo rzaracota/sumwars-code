@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef OBJECTFACTORY_H
-#define OBJECTFACTORY_H
+#ifndef __SUMWARS_CORE_OBJECTFACTORY_H__
+#define __SUMWARS_CORE_OBJECTFACTORY_H__
 
 
 
@@ -757,5 +757,5 @@ class ObjectFactory
 
 
 
-#endif
+#endif // __SUMWARS_CORE_OBJECTFACTORY_H__
 

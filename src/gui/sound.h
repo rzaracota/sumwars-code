@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SOUND_H
-#define SOUND_H
+#ifndef __SUMWARS_GUI_SOUND_H__
+#define __SUMWARS_GUI_SOUND_H__
 
 #ifdef WIN32
 	#include <al.h>
@@ -408,5 +408,5 @@ class SoundObject
 		Vector m_position;
 };
 
-#endif
+#endif // __SUMWARS_GUI_SOUND_H__
 

@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PLAYER_BASE_H
-#define PLAYER_BASE_H
+#ifndef __SUMWARS_CORE_PLAYERBASE_H__
+#define __SUMWARS_CORE_PLAYERBASE_H__
 
 #include "worldobject.h"
 #include "creaturestruct.h"
@@ -214,5 +214,5 @@ struct PlayerBasicData
 };
 
 
-#endif
+#endif // __SUMWARS_CORE_PLAYERBASE_H__
 

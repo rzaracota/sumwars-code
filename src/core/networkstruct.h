@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NETWORKSTRUCT_H
-#define NETWORKSTRUCT_H
+#ifndef __SUMWARS_CORE_NETWORKSTRUCT_H__
+#define __SUMWARS_CORE_NETWORKSTRUCT_H__
 
 #include "network.h"
 #include "action.h"
@@ -555,4 +555,4 @@ struct NetEvent
 typedef std::list<NetEvent> NetEventList;
 
 
-#endif //NETWORKSTRUCT_H
+#endif // __SUMWARS_CORE_NETWORKSTRUCT_H__

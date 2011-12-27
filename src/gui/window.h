@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef WINDOW_H
-#define WINDOW_H
+#ifndef __SUMWARS_GUI_WINDOW_H__
+#define __SUMWARS_GUI_WINDOW_H__
 
 
 #include "document.h"
@@ -105,6 +105,6 @@ class Window
 };
 
 
-#endif
+#endif // __SUMWARS_GUI_WINDOW_H__
 
 

@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LISTITEM_H
-#define LISTITEM_H
+#ifndef __SUMWARS_GUI_LISTITEM_H__
+#define __SUMWARS_GUI_LISTITEM_H__
 
 #include "CEGUI/CEGUI.h"
 
@@ -49,4 +49,4 @@ class StrListItem : public ListItem
 		std::string m_data;
 };
 
-#endif
+#endif // __SUMWARS_GUI_LISTITEM_H__

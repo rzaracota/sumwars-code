@@ -13,7 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#ifndef __SUMWARS_GUI_MUSIC_H__
+#define __SUMWARS_GUI_MUSIC_H__
 
 #include <string>
 
@@ -122,3 +123,4 @@ class MusicManager
 	
 };
 
+#endif // __SUMWARS_GUI_MUSIC_H__

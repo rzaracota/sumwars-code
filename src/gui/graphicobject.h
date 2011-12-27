@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GRAPHIC_OBJECT_H
-#define GRAPHIC_OBJECT_H
+#ifndef __SUMWARS_GUI_GRAPHICOBJECT_H__
+#define __SUMWARS_GUI_GRAPHICOBJECT_H__
 
 #include "OgreMovableObject.h"
 #include "OgreSceneNode.h"
@@ -518,4 +518,4 @@ class GraphicObject
 };
 
 
-#endif
+#endif // __SUMWARS_GUI_GRAPHICOBJECT_H__

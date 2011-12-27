@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ITEM_H
-#define ITEM_H
+#ifndef __SUMWARS_CORE_ITEM_H__
+#define __SUMWARS_CORE_ITEM_H__
 
 
 #include <string>
@@ -551,5 +551,5 @@ struct ItemBasicData
 
 
 
-#endif //ITEM_H
+#endif // __SUMWARS_CORE_ITEM_H__
 

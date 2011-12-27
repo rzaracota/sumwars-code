@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CHATLINE_H
-#define CHATLINE_H
+#ifndef __SUMWARS_GUI_CHATLINE_H__
+#define __SUMWARS_GUI_CHATLINE_H__
 
 #include "window.h"
 
@@ -76,4 +76,4 @@ class ChatLine : public Window
 		std::list<std::string> m_history;
 };
 
-#endif
+#endif // __SUMWARS_GUI_CHATLINE_H__

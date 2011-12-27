@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef COMMAND_H
-#define COMMAND_H
+#ifndef __SUMWARS_CORE_COMMAND_H__
+#define __SUMWARS_CORE_COMMAND_H__
 
 
 
@@ -148,4 +148,4 @@ public:
 	 * Operations
 	 */
 };
-#endif //COMMAND_H
+#endif // __SUMWARS_CORE_COMMAND_H__

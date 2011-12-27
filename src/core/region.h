@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef REGION_H
-#define REGION_H
+#ifndef __SUMWARS_CORE_REGION_H__
+#define __SUMWARS_CORE_REGION_H__
 
 #include "event.h"
 #include "matrix2d.h"
@@ -1707,4 +1707,4 @@ class Region
 
 #include "gridunit.h"
 
-#endif
+#endif // __SUMWARS_CORE_REGION_H__

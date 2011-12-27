@@ -13,9 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-#ifndef CREATURESTRUCT_H
-#define CREATURESTRUCT_H
+#ifndef __SUMWARS_CORE_CREATURESTRUCT_H__
+#define __SUMWARS_CORE_CREATURESTRUCT_H__
 
 #include <list>
 #include <string>
@@ -781,4 +780,4 @@ struct EmotionSet
 	std::string m_default_image;
 };
 
-#endif
+#endif // __SUMWARS_CORE_CREATURESTRUCT_H__

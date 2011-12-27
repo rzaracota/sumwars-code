@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DIALOGUEWINDOW_H
-#define DIALOGUEWINDOW_H
+#ifndef __SUMWARS_GUI_DIALOGUEWINDOW_H__
+#define __SUMWARS_GUI_DIALOGUEWINDOW_H__
 
 #include "scene.h"
 
@@ -82,5 +82,5 @@ class DialogueWindow : public Window
 		Scene* m_scene;
 };
 
-#endif
+#endif // __SUMWARS_GUI_DIALOGUEWINDOW_H__
 

@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __ogg_h__
-#define __ogg_h__
+#ifndef __SUMWARS_GUI_OGG_H__
+#define __SUMWARS_GUI_OGG_H__
 
 #include <string>
 #include <iostream>
@@ -91,4 +91,4 @@ class ogg_stream
 };
 
 
-#endif // __ogg_h__
+#endif // __SUMWARS_GUI_OGG_H__

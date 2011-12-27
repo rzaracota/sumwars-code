@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MINIMAPWINDOW_H
-#define MINIMAPWINDOW_H
+#ifndef __SUMWARS_GUI_MINIMAPWINDOW_H__
+#define __SUMWARS_GUI_MINIMAPWINDOW_H__
 
 #include "window.h"
 
@@ -62,5 +62,5 @@ class MinimapWindow : public Window
 	
 };
 
-#endif
+#endif // __SUMWARS_GUI_MINIMAPWINDOW_H__
 

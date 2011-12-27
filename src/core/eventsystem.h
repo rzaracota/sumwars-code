@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef EVENTSYSTEM_H
-#define EVENTSYSTEM_H
+#ifndef __SUMWARS_CORE_EVENTSYSTEM_H__
+#define __SUMWARS_CORE_EVENTSYSTEM_H__
 
 #include <string>
 #include "translatablestring.h"
@@ -972,4 +972,4 @@ class EventSystem
 };
 
 
-#endif
+#endif // __SUMWARS_CORE_EVENTSYSTEM_H__

@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef XMLUTIL_H
-#define XMLUTIL_H
+#ifndef __SUMWARS_CORE_XMLUTIL_H__
+#define __SUMWARS_CORE_XMLUTIL_H__
 
 #include <tinyxml.h>
 #include <string>
@@ -118,4 +118,4 @@ class XMLUtil
 };
 
 
-#endif
+#endif // __SUMWARS_CORE_XMLUTIL_H__

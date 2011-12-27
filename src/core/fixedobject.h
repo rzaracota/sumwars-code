@@ -14,8 +14,8 @@
  */
 
 
-#ifndef FIXEDOBJECT_H
-#define FIXEDOBJECT_H
+#ifndef __SUMWARS_CORE_FIXEDOBJECT_H__
+#define __SUMWARS_CORE_FIXEDOBJECT_H__
 #include <string>
 
 #include "worldobject.h"
@@ -61,5 +61,5 @@ public:
 
 
 };
-#endif //FIXEDOBJECT_H
+#endif // __SUMWARS_CORE_FIXEDOBJECT_H__
 
