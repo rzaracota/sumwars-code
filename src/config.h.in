@@ -1,5 +1,5 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#ifndef __SUMWARS_CONFIG_H__
+#define __SUMWARS_CONFIG_H__
 
 // Generated file, do not edit!  Make changes to config.h.in instead.
 
@@ -23,4 +23,4 @@
 
 #cmakedefine SUMWARS_PORTABLE_MODE
 
-#endif
+#endif // __SUMWARS_CONFIG_H__
