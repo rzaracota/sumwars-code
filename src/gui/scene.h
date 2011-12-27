@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCENE_H
-#define SCENE_H
+#ifndef __SUMWARS_GUI_SCENE_H__
+#define __SUMWARS_GUI_SCENE_H__
 
 #include "OgreSceneManager.h"
 #include "OgreEntity.h"
@@ -259,5 +259,5 @@ class Scene
 	
 };
 
-#endif
+#endif // __SUMWARS_GUI_SCENE_H__
 

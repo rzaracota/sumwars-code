@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GRAPHIC_OBJECT_RENDER_INFO_H
-#define GRAPHIC_OBJECT_RENDER_INFO_H
+#ifndef __SUMWARS_GUI_GRAPHICOBJECTRENDERINFO_H__
+#define __SUMWARS_GUI_GRAPHICOBJECTRENDERINFO_H__
 #include <OgreVector3.h>
 
 #include "geometry.h"
@@ -289,4 +289,4 @@ class GraphicRenderInfo
 		std::string m_name;
 };
 
-#endif
+#endif // __SUMWARS_GUI_GRAPHICOBJECTRENDERINFO_H__

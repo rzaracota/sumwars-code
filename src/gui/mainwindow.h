@@ -14,8 +14,8 @@
  */
 
 
-#ifndef MAIN_WINDOW_H
-#define MAIN_WINDOW_H
+#ifndef __SUMWARS_GUI_MAINWINDOW_H__
+#define __SUMWARS_GUI_MAINWINDOW_H__
 
 
 
@@ -470,4 +470,4 @@ class MainWindow :
 
 };
 
-#endif
+#endif // __SUMWARS_GUI_MAINWINDOW_H__

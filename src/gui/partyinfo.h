@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PARTYINFO_H
-#define PARTYINFO_H
+#ifndef __SUMWARS_GUI_PARTYINFO_H__
+#define __SUMWARS_GUI_PARTYINFO_H__
 
 #include "window.h"
 
@@ -94,5 +94,5 @@ class PartyInfo : public Window
 		int m_player_ids[8];
 };
 
-#endif
+#endif // __SUMWARS_GUI_PARTYINFO_H__
 

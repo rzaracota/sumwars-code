@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TOOLTIPMANAGER_H
-#define TOOLTIPMANAGER_H
+#ifndef __SUMWARS_GUI_TOOLTIPMANAGER_H__
+#define __SUMWARS_GUI_TOOLTIPMANAGER_H__
 
 #include <list>
 #include <map>
@@ -163,5 +163,5 @@ private:
     CEGUI::Font* m_DefaultFont;
 };
 
-#endif
+#endif // __SUMWARS_GUI_TOOLTIPMANAGER_H__
 

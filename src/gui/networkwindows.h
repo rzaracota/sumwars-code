@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NETWORKWINDOW_H
-#define NETWORKWINDOW_H
+#ifndef __SUMWARS_GUI_NETWORKWINDOWS_H__
+#define __SUMWARS_GUI_NETWORKWINDOWS_H__
 
 
 #include "window.h"
@@ -86,5 +86,5 @@ class JoinGameWindow : public Window
 		 */
 		bool onStartJoinGame(const CEGUI::EventArgs& evt);
 };
-#endif
+#endif // __SUMWARS_GUI_NETWORKWINDOWS_H__
 

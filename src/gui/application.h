@@ -13,11 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-#ifndef APPLICATION_H
-#define APPLICATION_H
-
-
+#ifndef __SUMWARS_GUI_APPLICATION_H__
+#define __SUMWARS_GUI_APPLICATION_H__
 
 #include "OgreTimer.h"
 #include "OgreWindowEventUtilities.h"
@@ -260,4 +257,4 @@ class Application
 		bool m_running;
 };
 
-#endif
+#endif // __SUMWARS_GUI_APPLICATION_H__

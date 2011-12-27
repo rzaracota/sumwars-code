@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MESSAGEBOXES_H
-#define MESSAGEBOXES_H
+#ifndef __SUMWARS_GUI_MESSAGEBOXES_H__
+#define __SUMWARS_GUI_MESSAGEBOXES_H__
 
 
 #include "window.h"
@@ -206,5 +206,5 @@ private:
 };
 
 
-#endif
+#endif // __SUMWARS_GUI_MESSAGEBOXES_H__
 

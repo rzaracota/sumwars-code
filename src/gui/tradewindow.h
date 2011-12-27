@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TRADEWINDOW_H
-#define TRADEWINDOW_H
+#ifndef __SUMWARS_GUI_TRADEWINDOW_H__
+#define __SUMWARS_GUI_TRADEWINDOW_H__
 
 #include "itemwindow.h"
 
@@ -107,5 +107,5 @@ class TradeWindow : public ItemWindow
 		
 };
 
-#endif
+#endif // __SUMWARS_GUI_TRADEWINDOW_H__
 

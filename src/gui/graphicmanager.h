@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GRAPHIC_MANAGER_H
-#define GRAPHIC_MANAGER_H
+#ifndef __SUMWARS_GUI_GRAPHICMANAGER_H__
+#define __SUMWARS_GUI_GRAPHICMANAGER_H__
 
 
 #include "OgreSceneManager.h"
@@ -327,5 +327,5 @@ class GraphicManager
 		static double g_global_scale;
 };
 
-#endif
+#endif // __SUMWARS_GUI_GRAPHICMANAGER_H__
 

@@ -14,8 +14,8 @@
  */
 
 
-#ifndef CONTROLPANEL_H
-#define CONTROLPANEL_H
+#ifndef __SUMWARS_GUI_CONTROLPANEL_H__
+#define __SUMWARS_GUI_CONTROLPANEL_H__
 
 #include "itemwindow.h"
 
@@ -98,5 +98,5 @@ class ControlPanel : public ItemWindow
 		
 };
 
-#endif
+#endif // __SUMWARS_GUI_CONTROLPANEL_H__
 

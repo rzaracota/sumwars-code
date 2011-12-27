@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SAVEGAMELIST_H
-#define SAVEGAMELIST_H
+#ifndef __SUMWARS_GUI_SAVEGAMELIST_H__
+#define __SUMWARS_GUI_SAVEGAMELIST_H__
 
 #include "window.h"
 
@@ -101,4 +101,4 @@ class SavegameList : public Window
 
 };
 
-#endif
+#endif // __SUMWARS_GUI_SAVEGAMELIST_H__

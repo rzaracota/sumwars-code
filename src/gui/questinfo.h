@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef QUESTINFO_H
-#define QUESTINFO_H
+#ifndef __SUMWARS_GUI_QUESTINFO_H__
+#define __SUMWARS_GUI_QUESTINFO_H__
 
 
 #include "window.h"
@@ -80,4 +80,4 @@ class QuestInfo : public Window
 	
 };
 
-#endif
+#endif // __SUMWARS_GUI_QUESTINFO_H__
