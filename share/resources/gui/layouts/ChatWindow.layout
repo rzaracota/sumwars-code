@@ -2,7 +2,7 @@
 
 <GUILayout >
     <Window Type="TaharezLook/FrameWindow" Name="ChatRootWindow" >
-        <Property Name="TitlebarFont" Value="Commonwealth-10" />
+        <Property Name="TitlebarFont" Value="DejaVuSans-10" />
         <Property Name="TitlebarEnabled" Value="False" />
         <Property Name="UnifiedAreaRect" Value="{{0.126758,0},{0.00859365,0},{0.67168,0},{0.521614,0}}" />
         <Property Name="DragMovingEnabled" Value="False" />
