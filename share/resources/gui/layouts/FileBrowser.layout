@@ -2,7 +2,7 @@
 
 <GUILayout >
     <Window Type="TaharezLook/FrameWindow" Name="FileBrowserMain" >
-        <Property Name="TitlebarFont" Value="Commonwealth-10" />
+        <Property Name="TitlebarFont" Value="DejaVuSans-10" />
         <Property Name="TitlebarEnabled" Value="True" />
         <Property Name="UnifiedAreaRect" Value="{{0.0398442,0},{0.0320312,0},{0.803516,0},{0.92526,0}}" />
         <Window Type="TaharezLook/Button" Name="Ok" >

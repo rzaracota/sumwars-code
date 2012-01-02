@@ -122,7 +122,7 @@
         </Window>
         <Window Type="TaharezLook/FrameWindow" Name="SaveGameSelectionFrame" >
             <Property Name="FrameEnabled" Value="False" />
-            <Property Name="TitlebarFont" Value="Commonwealth-10" />
+            <Property Name="TitlebarFont" Value="DejaVuSans-10" />
             <Property Name="InheritsAlpha" Value="False" />
             <Property Name="SizingEnabled" Value="False" />
             <Property Name="TitlebarEnabled" Value="False" />
