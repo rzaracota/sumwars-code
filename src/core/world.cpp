@@ -86,8 +86,23 @@ void  World::createWorld(bool server, int port, bool cooperative, int max_player
 
 	m_local_player =0;
 
-	m_events = new NetEventList;
+	m_events = new NetEventList();
 
+	m_data_reload_requests = 0;
+
+	m_timer[0] = 0;
+	m_timer[1] = 0;
+	m_timer[2] = 0;
+	m_timer[3] = 0;
+	m_timer[4] = 0;
+	m_timer[5] = 0;
+
+	m_timer_limit[0] = false;
+	m_timer_limit[1] = false;
+	m_timer_limit[2] = false;
+	m_timer_limit[3] = false;
+	m_timer_limit[4] = false;
+	m_timer_limit[5] = false;
 }
 
 
@@ -116,9 +131,19 @@ bool World::init(int port)
 		m_network->setPacketVersion(m_version);
 	}
 
-	m_timer[0] =0;
-	m_timer[1] =0;
-	m_timer[2] =0;
+	m_timer[0] = 0;
+	m_timer[1] = 0;
+	m_timer[2] = 0;
+	m_timer[3] = 0;
+	m_timer[4] = 0;
+	m_timer[5] = 0;
+
+	m_timer_limit[0] = false;
+	m_timer_limit[1] = false;
+	m_timer_limit[2] = false;
+	m_timer_limit[3] = false;
+	m_timer_limit[4] = false;
+	m_timer_limit[5] = false;
 
 	// Regionen aus XML Laden
 
