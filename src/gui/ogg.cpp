@@ -14,9 +14,9 @@
  */
 
 #include "ogg.h"
-
 #include "debug.h"
 
+using namespace std;
 
 void ogg_stream::open(string path)
 {
