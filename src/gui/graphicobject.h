@@ -122,10 +122,12 @@ struct AttachedAction
 	/**
 	 * \brief Constructor
 	 */
-	AttachedAction()
-	{
-		m_arinfo =0;
-	}
+	AttachedAction():
+		m_arinfo(0),
+		m_current_percent(0),
+		m_time(0),
+		m_inherited(false)
+	{}
 	
 	/**
 	 * \brief Pointer to data structure that contains information how to visualize this action
