@@ -209,24 +209,13 @@ public:
 	 * \brief Legt ein neues Action Objekt an
 	 * \param type initialisiert den Typ der Aktion
 	 */
-	Action(ActionType type)
-	{
-		m_type = type;
-		m_time =0;
-		m_elapsed_time =0;
-	}
-
-
-	/**
-	 * \fn Action()
-	 * \brief Legt eine leere Aktion an
-	 */
-	Action()
-	{
-		m_type = "noaction";
-		m_time =0;
-		m_elapsed_time =0;
-	}
+	Action(ActionType type = "noaction"):
+		m_elapsed_time(0),
+		m_time(0),
+		m_action_equip(NO_WEAPON),
+		m_goal(0, 0),
+		m_goal_object_id(0)
+	{}
 
 	/**
 	 * \fn static void init()
