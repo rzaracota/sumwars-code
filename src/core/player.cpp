@@ -1532,9 +1532,9 @@ void Player::initAction()
 	// automatically take up all gold in 2 meter radius
 	if (getAction()->m_type != "noaction")
 	{
-		DropItemMap* itms = getRegion()->getDropItems();
-		DropItemMap::iterator it, next;
-		for ( it = itms->begin();it != itms->end();it = next)
+		DropItemMap& itms = getRegion()->getDropItems();
+		DropItemMap::const_iterator it, next;
+		for ( it = itms.begin();it != itms.end();it = next)
 		{
 			next = it;
 			++next;

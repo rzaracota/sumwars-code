@@ -774,9 +774,8 @@ void Scene::createScene()
 
 	if (region)
 	{
-		WorldObjectMap* stat_objs = region->getStaticObjects();
-		WorldObjectMap::iterator it;
-		for (it = stat_objs->begin(); it !=stat_objs->end();++it)
+		const WorldObjectMap& stat_objs = region->getStaticObjects();
+		for (WorldObjectMap::const_iterator it = stat_objs.begin(); it !=stat_objs.end(); ++it)
 		{
 			// Objekt in der Szene erzeugen
 			insertObject(it->second,true);

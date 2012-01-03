@@ -1613,7 +1613,7 @@ void MainWindow::updateItemInfo()
 	Player* player = m_document->getLocalPlayer();
 	Vector plpos = player->getShape()->m_center;
 	
-	DropItemMap* itms = player->getRegion()->getDropItems();
+	DropItemMap& itms = player->getRegion()->getDropItems();
 	DropItemMap::iterator it;
 	
 	if (m_document->getGUIState()->m_item_labels)
@@ -1704,7 +1704,7 @@ void MainWindow::updateItemInfo()
 		std::string propnew, propold;
 		
 		Vector tpos,pos;
-		for (it = itms->begin();it != itms->end();++it)
+		for (it = itms.begin(); it != itms.end(); ++it)
 		{
 			
 			di = it->second;

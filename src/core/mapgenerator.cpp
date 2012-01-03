@@ -331,7 +331,7 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 		}
 		
 		// Umgebungskarte generieren
-		createPerlinNoise(mdata.m_region->getHeight(), rdata->m_dimx, rdata->m_dimy,MathHelper::Min(rdata->m_dimx,rdata->m_dimy)/4 , 0.4,false);
+		createPerlinNoise(&mdata.m_region->getHeight(), rdata->m_dimx, rdata->m_dimy,MathHelper::Min(rdata->m_dimx,rdata->m_dimy)/4 , 0.4,false);
 
 		if (rdata->m_region_template =="")
 		{

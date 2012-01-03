@@ -1058,7 +1058,7 @@ class Region
 		 * \fn WorldObjectMap* getPlayers()
 		 * \brief Gibt alle Spieler in der Region aus
 		 */
-		WorldObjectMap* getPlayers()
+		WorldObjectMap& getPlayers()
 		{
 			return m_players;
 		}
@@ -1068,7 +1068,7 @@ class Region
 		 * \fn DropItemMap* getDropItems()
 		 * \brief Gibt alle auf dem Boden liegenden Items aus
 		 */
-		DropItemMap* getDropItems()
+		DropItemMap& getDropItems()
 		{
 			return m_drop_items;
 		}
@@ -1077,7 +1077,7 @@ class Region
 		 * \fn ProjectileMap* getProjectiles()
 		 * \return Gibt alle Projektile in der Region aus
 		 */
-		ProjectileMap* getProjectiles()
+		ProjectileMap& getProjectiles()
 		{
 			return m_projectiles;
 		}
@@ -1095,7 +1095,7 @@ class Region
 		 * \fn WorldObjectMap* getStaticObjects()
 		 * \brief Gibt die statischen Objekte aus
 		 */
-		WorldObjectMap* getStaticObjects()
+		WorldObjectMap& getStaticObjects()
 		{
 			return m_static_objects;
 		}
@@ -1106,7 +1106,7 @@ class Region
 		 */
 		void insertNetEvent(NetEvent &event)
 		{
-			m_netevents->push_back(event);
+			m_netevents.push_back(event);
 		}
 		
 		/**
@@ -1124,7 +1124,7 @@ class Region
 		 * \fn NetEventList* getNetEvents()
 		 * \brief Gibt die Liste der NetEvents aus
 		 */
-		NetEventList* getNetEvents()
+		NetEventList& getNetEvents()
 		{
 			return m_netevents;
 		}
@@ -1133,7 +1133,7 @@ class Region
 		 * \fn Matrix2d<float>* getHeight()
 		 * \brief Gibt die Hoehenkarte aus
 		 */
-		Matrix2d<float>* getHeight()
+		Matrix2d<float>& getHeight()
 		{
 			return m_height;
 		}
@@ -1204,7 +1204,7 @@ class Region
 		 * \fn std::string getName()
 		 * \brief Gibt den Name der Region aus
 		 */
-		std::string getName()
+		const std::string& getName()
 		{
 			return m_name;
 		}
@@ -1375,7 +1375,7 @@ class Region
 		 * \fn std::string getGroundMaterial()
 		 * \brief Gibt das Material fuer den Boden aus
 		 */
-		std::string getGroundMaterial()
+		const std::string& getGroundMaterial()
 		{
 			return m_ground_material;
 		}
@@ -1491,10 +1491,11 @@ class Region
 		 * \fn std::string getIdString()
 		 * \brief Gibt den ID String aus
 		 */
-		std::string getIdString()
+		const std::string& getIdString()
 		{
 			return m_name;
 		}
+
 	private:
 		/**
 		* \var m_dimx
@@ -1512,14 +1513,14 @@ class Region
 			* \var m_data_grid
 			* \brief Das Array, welches die Daten der Region enthaelt. Jeder Eintrag im Array entspricht einem 4*4 Quadrat
 			*/
-		Matrix2d<Gridunit>* m_data_grid;
+		Matrix2d<Gridunit> m_data_grid;
 	
 		
 		/**
 		 * \var Matrix2d<float>* m_height
 		 * \brief Hoehenkarte in 4x4 Kaestchen
 		 */
-		Matrix2d<float>* m_height;
+		Matrix2d<float> m_height;
 		
 		/**
 		 * \var std::map<float, EnvironmentName> m_environments
@@ -1531,25 +1532,25 @@ class Region
 		* \var m_players
 		* Liste der Spieler in der Region
 		*/
-		WorldObjectMap* m_players;
+		WorldObjectMap m_players;
 	
 		/**
 		* \var ProjectileMap* m_projectiles
 		* \brief Liste aller Projektile in der Region
 		*/
-		ProjectileMap* m_projectiles;
+		ProjectileMap m_projectiles;
 	
 		/**
 		* \var WorldObjectMap* m_objects
 		* \brief organisiert alle nicht statischen Objekte in einem Bin&auml;rbaum
 		*/
-		WorldObjectMap* m_objects;
+		WorldObjectMap m_objects;
 	
 		/**
 		 * \var WorldObjectMap* m_static_objects;
 		 * \brief organisiert statische Objekte in einem Bin&auml;rbaum
 		 */
-		WorldObjectMap* m_static_objects;
+		WorldObjectMap m_static_objects;
 		
 		/**
 		 * \var WorldObjectMap m_large_objects
@@ -1561,13 +1562,13 @@ class Region
 		* \var DropItemMap* m_drop_items
 		* \brief Liste der Gegenstaende, die auf dem Boden liegen
 		*/
-		DropItemMap* m_drop_items;
+		DropItemMap m_drop_items;
 	
 		/**
 		* \var DropItemMap* m_drop_item_locations
 		* \brief Orte der Gegenstaende, die auf dem Boden liegen
 		*/
-		DropItemMap* m_drop_item_locations;
+		DropItemMap m_drop_item_locations;
 	
 		/**
 		 * \var GameObjectMap m_game_objects
@@ -1597,7 +1598,7 @@ class Region
 		* \var NetEventList* m_netevents
 		* \brief Liste der lokalen NetEvents beim aktuellen update
 		*/
-		NetEventList* m_netevents;
+		NetEventList m_netevents;
 		
 		/**
 		 * \var std::map<LocationName, Vector> m_locations

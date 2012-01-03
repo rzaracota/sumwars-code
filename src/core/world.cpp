@@ -1458,7 +1458,7 @@ void World::update(float time)
 	std::map<int,Region*>::iterator rrit;
 	for (rrit = m_regions.begin(); rrit != m_regions.end(); rrit++)
 	{
-		rrit->second->getNetEvents()->clear();
+		rrit->second->getNetEvents().clear();
 	}
 
 	if (m_network != 0)
@@ -1919,7 +1919,7 @@ void World::updatePlayers()
 				bool ret;
 				if (reg !=0)
 				{
-					for (lt = reg->getNetEvents()->begin(); lt != reg->getNetEvents()->end(); ++lt)
+					for (lt = reg->getNetEvents().begin(); lt != reg->getNetEvents().end(); ++lt)
 					{
 						msg = m_network->createPacket();
 						DEBUGX(" send local event %i id %i data %i",lt->m_type,lt->m_id, lt->m_data);
