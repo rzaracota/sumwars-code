@@ -599,11 +599,12 @@ bool ItemEditor::onCopyData(const CEGUI::EventArgs& evt)
 		return true;
 	
 	ItemBasicData* data = ItemFactory::getItemBasicData(objname);
-	data->m_subtype = "EditorItem";
-	
+
 	if (data == 0)
 		return true;
 	
+	data->m_subtype = "EditorItem";
+
 	m_edited_item = *data;
 	
 	m_modified_item = true;
