@@ -31,10 +31,11 @@ GraphicObject::GraphicObject(Type type, GraphicRenderInfo* render_info, std::str
 	m_top_node = GraphicManager::getSceneManager()->getRootSceneNode()->createChildSceneNode();
 	
 	m_render_info_valid = true;
-	initContent();
 	
 	m_highlight = false;
 	m_exact_animations = false; // as default ?
+
+	initContent();
 }
 
 void GraphicObject::initContent()
