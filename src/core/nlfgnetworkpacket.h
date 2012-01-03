@@ -85,7 +85,7 @@ class NLFGNetworkPacket : public NetworkPacket
 			char * data = new char[len];
 			fromBuffer(data,len);
 			s.assign(data,len);
-			delete data;
+			delete [] data;
 		}
 
 		/**
