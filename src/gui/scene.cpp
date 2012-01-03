@@ -739,28 +739,32 @@ void Scene::createScene()
 
 	Region* region = m_document->getLocalPlayer()->getRegion();
 
-	float *colour;
-
-	colour= region->getLight().getHeroLight();
 	Ogre::Light *light = m_scene_manager->createLight("HeroLight");
 	light->setType(Ogre::Light::LT_POINT);
-	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(0.0, 0.0, 0.0);
 	light->setAttenuation(20*GraphicManager::g_global_scale,0.5,0.000,
 						  0.025/(GraphicManager::g_global_scale*GraphicManager::g_global_scale));
+	if (region)
+	{
+		const float* colour = region->getLight().getHeroLight();
+		light->setDiffuseColour(colour[0], colour[1], colour[2]);
+		DEBUGX("hero light %f %f %f",colour[0], colour[1], colour[2]);
+	}
+
 #ifndef DONT_USE_SHADOWS
 	light->setCastShadows (false);
 	// Augustin Preda, 2011.11.15: set to disabled.
 #endif // DONT_USE_SHADOWS
-
-	DEBUGX("hero light %f %f %f",colour[0], colour[1], colour[2]);
     
-	colour= region->getLight().getDirectionalLight();
     light = m_scene_manager->createLight("RegionLight");
 	light->setType(Ogre::Light::LT_DIRECTIONAL);
-	light->setDiffuseColour(colour[0], colour[1], colour[2]);
-	light->setSpecularColour(colour[0], colour[1], colour[2]);
 	light->setDirection(Ogre::Vector3(-1,-1,-1));
+	if (region)
+	{
+		const float* colour = region->getLight().getDirectionalLight();
+		light->setDiffuseColour(colour[0], colour[1], colour[2]);
+		light->setSpecularColour(colour[0], colour[1], colour[2]);
+	}
 
 #ifndef DONT_USE_SHADOWS
     light->setCastShadows (true);
@@ -768,7 +772,7 @@ void Scene::createScene()
 
 	DEBUGX("directional light %f %f %f",colour[0], colour[1], colour[2]);
 
-	if (region !=0)
+	if (region)
 	{
 		WorldObjectMap* stat_objs = region->getStaticObjects();
 		WorldObjectMap::iterator it;
@@ -809,7 +813,6 @@ void Scene::createScene()
 
         m_scene_manager->setAmbientLight(Ogre::ColourValue(1.0f,1.0f,1.0f));
         
-        std::cout << colour[0] << " + " << colour[1] << " + " << colour[2] << std::endl;
 		// Boden erstellen
 		if (region->getGroundMaterial() != "")
 		{
@@ -839,7 +842,7 @@ void Scene::createScene()
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
 		target->update();
 
-		colour= region->getLight().getAmbientLight();
+		const float* colour = region->getLight().getAmbientLight();
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
 		DEBUGX("ambient light %f %f %f",colour[0], colour[1], colour[2]);
 		//m_scene_manager->setAmbientLight(Ogre::ColourValue(0.0,0.0,0.0));
