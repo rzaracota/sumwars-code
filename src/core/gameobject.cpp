@@ -18,15 +18,17 @@
 #include "region.h"
 
 GameObject::GameObject( int id)
-:	m_base_type(WORLDOBJECT),
-	m_layer(LAYER_BASE),
-	m_state(STATE_ACTIVE),
-	m_event_mask(0),
+:	m_id(0),
 	m_region_id(-1),
-	m_destroyed(false),
+	m_state(STATE_ACTIVE),
+	m_base_type(WORLDOBJECT),
+	m_type(),
+	m_subtype(),
+	m_event_mask(0),
 	m_height(0),
+	m_layer(LAYER_BASE),
 	m_speed(0,0),
-	m_id(0)
+	m_destroyed(false)
 {
 	if (id !=0)
 	{

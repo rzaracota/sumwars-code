@@ -137,11 +137,12 @@ ItemBasicData::ItemBasicData()
 	m_weapon_attr(0),
 	m_level_req(0),
 	m_char_req("all"),
-	m_min_enchant(0),
-	m_max_enchant(0),
+	m_subtype(0),
 	m_type(Item::NOITEM),
 	m_size(Item::SIZE_NONE),
 	m_price(0),
+	m_min_enchant(0),
+	m_max_enchant(0),
 	m_enchant_multiplier(0),
 	m_drop_level(0),
 	m_drop_probability(0.0)
@@ -391,16 +392,18 @@ void ItemBasicData::writeToXML(TiXmlNode* node)
 }
 
 Item::Item(int id)
-:	m_useup_effect(0),
+:	m_subtype(),
+	m_id(0),
+	m_type(NOITEM),
+	m_size(SMALL),
+	m_price(0),
+	m_useup_effect(0),
 	m_equip_effect(0),
 	m_weapon_attr(0),
 	m_level_req(0),
-	m_magic_power(0),
-	m_rarity(NORMAL),
 	m_char_req("all"),
-	m_size(SMALL),
-	m_type(NOITEM),
-	m_price(0)
+	m_magic_power(0),
+	m_rarity(NORMAL)
 {
 	if (id!=0)
 	{

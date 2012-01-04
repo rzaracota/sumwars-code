@@ -52,8 +52,8 @@ class TranslatableString
 		 * Marked as explicit to avoid unexpected type construction
 		 */
 		explicit TranslatableString(std::string text, std::string domain = "")
-		:	m_text(text),
-			m_domain(domain),
+		:	m_domain(domain),
+			m_text(text),
 			m_is_translated(false)
 		
 		{

@@ -21,15 +21,16 @@
 
 Projectile::Projectile(Subtype subtype,  int id)
 :	GameObject(id),
-	m_max_radius(0),
-	m_fraction(0),
 	m_damage(0),
-	m_timer(0),
 	m_flags(0),
-	m_timer_limit(1500),
-	m_counter(0),
+	m_max_radius(0),
 	m_goal_object(0),
-	m_crit_percent(0)
+	m_timer(0),
+	m_timer_limit(1500),
+	m_crit_percent(0),
+	m_counter(0),
+	m_fraction(0),
+	m_implementation()
 {
 	setSubtype(subtype);
 	setLayer(WorldObject::LAYER_AIR);

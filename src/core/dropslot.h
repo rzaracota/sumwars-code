@@ -75,10 +75,10 @@ struct DropSlot
 	DropSlot()
 	:	m_min_level(-1),
 		m_max_level(-1),
-		m_magic_probability(0),
-		m_magic_power(1),
 		m_min_gold(-1),
-		m_max_gold(-1)
+		m_max_gold(-1),
+		m_magic_probability(0),
+		m_magic_power(1)
 	{
 		for (int i=0;i<5;i++)
 		{
