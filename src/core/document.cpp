@@ -803,6 +803,20 @@ bool Document::checkSubwindowsAllowed()
 
 void Document::onButtonStartSinglePlayer ()
 {
+	if (m_temp_player == 0)
+	{
+		// Show a notification.
+		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("WarningDialogWindow");
+		message->setInheritsAlpha(false);
+		message->setVisible(true);
+		message->setModalState(true);
+		win_mgr.getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("Please select a character first!"));
+
+		DEBUG ("Warning: Tried to start a game without a selected char!");
+		return;
+	}
+	
 	// The player is a host himself (or herself)
 	setServer (true);
 	m_single_player = true;
@@ -816,7 +830,7 @@ void Document::onButtonStartSinglePlayer ()
 void Document::onButtonHostGame()
 {
 	DEBUG("Host Game");
-	if (m_temp_player != 0)
+	if (m_temp_player == 0)
 	{
 		// Show a notification.
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -837,7 +851,7 @@ void Document::onButtonHostGame()
 
 void Document::onButtonJoinGame()
 {
-	if (m_temp_player != 0)
+	if (m_temp_player == 0)
 	{
 		// Show a notification.
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
