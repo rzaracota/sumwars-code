@@ -99,7 +99,8 @@ int nlfg_init_client()
                     14400 / 8 /* 56K modem with 14 Kbps upstream bandwidth */);
 #endif
     nlfgQueue.head = 0;
-    return 1;
+    // enet returns NULL on failure
+    return host != 0;
 }
 
 int nlfg_init_server(unsigned int port)
@@ -124,7 +125,9 @@ int nlfg_init_server(unsigned int port)
 #endif
 
     nlfgQueue.head = 0;
-    return 1;
+
+    // enet returns NULL on failure
+    return host != 0;
 }
 
 void nlfg_init_packet(NLFG_Message *msg)

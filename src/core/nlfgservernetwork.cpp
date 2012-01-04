@@ -28,9 +28,12 @@ NLFGServerNetwork::NLFGServerNetwork(int max_slots)
 
 NetStatus NLFGServerNetwork::init( int auth_port )
 {
-    nlfg_init_server(auth_port);
+    if (nlfg_init_server(auth_port) == 1)
+    {
+    	return NET_OK;
+    }
 
-	return NET_OK;
+	return NET_ERROR;
 }
 
 NLFGServerNetwork::~NLFGServerNetwork()
