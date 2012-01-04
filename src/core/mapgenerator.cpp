@@ -630,7 +630,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 	Shape s;
 	Vector pos;
 	bool succ;
-	LocationName locname, areaname;
+	
 	for (it = rdata->m_named_object_groups.rbegin(); it != rdata->m_named_object_groups.rend(); ++it)
 	{
 		// Objektgruppe anhand des Namens suchen
@@ -781,8 +781,6 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 	{
 		for (int j=0; j< hdimy;j++)
 		{
-
-			int rnd;
 			if (*(mdata->m_base_map->ind(i,j)) >=1 )
 			{
 				// Testen ob das Feld als Ausgang in Frage kommt
@@ -798,7 +796,7 @@ void MapGenerator::createBorder(MapData* mdata, RegionData* rdata)
 					
 					if (exit[k][0]*nb[k][0] + exit[k][1]*nb[k][1] == i*nb[k][0] + j*nb[k][1])
 					{
-						rnd = Random::randi(exitcount[k]);
+						int rnd = Random::randi(exitcount[k]);
 						if (rnd ==0)
 						{
 							exit[k][0] =i;
@@ -1052,7 +1050,7 @@ void MapGenerator::insertSpawnpoints(MapData* mdata, RegionData* rdata)
 			
 			points[r] = points.back();
 			points.resize(points.size() -1);
-			if (points.size() ==0)
+			if (points.empty())
 			{
 				stop = true;
 				break;

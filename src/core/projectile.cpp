@@ -20,21 +20,23 @@
 
 
 Projectile::Projectile(Subtype subtype,  int id)
-	: GameObject(id)
+:	GameObject(id),
+	m_max_radius(0),
+	m_fraction(0),
+	m_damage(0),
+	m_timer(0),
+	m_flags(0),
+	m_timer_limit(1500),
+	m_counter(0),
+	m_goal_object(0),
+	m_crit_percent(0)
 {
-	m_damage =0;
 	setSubtype(subtype);
-	m_timer =0;
 	setLayer(WorldObject::LAYER_AIR);
 	setType("PROJECTILE");
 	setBaseType(PROJECTILE);
 	
-	m_flags =0;
 	setState(STATE_FLYING,false);
-	m_timer_limit = 1500;
-	m_counter =0;
-	m_goal_object =0;
-	m_crit_percent = 0;
 
 	float r=0.1;
 	// Radius, Timerlaufzeit und Status je nach Typ setzen
@@ -43,12 +45,12 @@ Projectile::Projectile(Subtype subtype,  int id)
 	getShape()->m_radius =r;
 	setAngle(0);
 	
-
 	clearNetEventMask();
 }
 
 Projectile::Projectile(ProjectileBasicData &data,int id)
-	: GameObject(id)
+:	GameObject(id),
+	m_fraction(0)
 {
 	m_damage =0;
 	setSubtype(data.m_subtype);
@@ -105,8 +107,6 @@ bool Projectile::update(float time)
 {
 	// Zeit die beim aktuellen Durchlauf der Schleife verbraucht wird
 	float dtime;
-	// true, wenn Timer die Grenze erreicht
-	bool lim = false;
 	// Liste der getroffenen Objekte
 	WorldObjectList hitobj;
 	WorldObjectList::iterator i;
@@ -120,7 +120,6 @@ bool Projectile::update(float time)
 		if (dtime > m_timer_limit-m_timer)
 		{
 			// Grenze erreicht
-			lim = true;
 			dtime =m_timer_limit-m_timer;
 			m_timer = m_timer_limit;
 		}
@@ -500,18 +499,13 @@ void Projectile::handleGrowing(float dtime)
 	WorldObjectList hitobj;
 	WorldObjectList::iterator i;
 	WorldObject* hit;
-	float rnew,rmin;
-	float rold;
 
-	rold = getShape()->m_radius;
 	// Radius erhoehen
 	getShape()->m_radius += m_max_radius* dtime/(m_timer_limit);
 
 	if (World::getWorld()->isServer())
 	{
 		// Schaden an die neu getroffenen Lebewesen austeilen
-		rnew = getShape()->m_radius;
-		
 		Shape s;
 		s.m_center = getShape()->m_center;
 		s.m_type = Shape::CIRCLE;
@@ -520,8 +514,7 @@ void Projectile::handleGrowing(float dtime)
 		// Alle Objekte suchen die sich in dem Kreis befinden
 		getRegion()->getObjectsInShape(getShape(),&hitobj,getLayer(),WorldObject::CREATURE,0);
 		DEBUGX("last hit id = %i",lid);
-		rmin =0;
-
+		
 		// Schaden austeilen
 		for (i=hitobj.begin();i!=hitobj.end();++i)
 		{

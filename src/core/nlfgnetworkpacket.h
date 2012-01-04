@@ -66,7 +66,7 @@ class NLFGNetworkPacket : public NetworkPacket
 		* \brief writes a string to the buffer
 		* \param s String
 		*/
-		virtual void toBuffer(const std::string s)
+		virtual void toBuffer(const std::string& s)
 		{
 			toBuffer(static_cast<int>(s.size()));
 			toBuffer(s.data(),s.size());

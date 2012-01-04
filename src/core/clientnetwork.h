@@ -37,7 +37,8 @@ class ClientNetwork : public Network
 		* \brief Constructor
 		*/
 		ClientNetwork()
-			: Network()
+		:	Network(),
+			m_status(NET_OK)
 		{
 		}
 	

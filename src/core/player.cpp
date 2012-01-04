@@ -309,7 +309,6 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	int dist;
 	bool meleedir = false;
 	WorldObject* wo;
-	Fraction::Relation rel;
 
 	// Actionen auf self brauchen kein Zielobjekt
 	Action::ActionInfo* ainfo = Action::getActionInfo(command->m_action);
@@ -337,7 +336,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 		// Unterscheidung Zielobject vs kein Zielobject
 		if (wo !=0)
 		{
-			rel = World::getWorld()->getRelation(m_fraction,wo);
+			Fraction::Relation rel = World::getWorld()->getRelation(m_fraction,wo);
 
 			if (command->m_button == LEFT_MOUSE_BUTTON)
 			{

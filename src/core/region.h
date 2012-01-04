@@ -580,8 +580,15 @@ class RegionLight
 			 * \brief Konstruktor
 			 */
 			Light()
+			:	m_timer(0)
 			{
-				m_timer =0;
+				m_value[0] = 0.0;
+				m_value[1] = 0.0;
+				m_value[2] = 0.0;
+				
+				m_goal_value[0] = 0.0;
+				m_goal_value[1] = 0.0;
+				m_goal_value[2] = 0.0;
 			}
 			
 			/**

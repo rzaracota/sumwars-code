@@ -30,7 +30,11 @@ class TranslatableString
 		/**
 		 * \brief Default constructor
 		 */
-		TranslatableString();
+		TranslatableString()
+		:	m_is_translated(false)
+		{
+			
+		}
 		
 		/**
 		 * \brief Copy constructor
@@ -48,9 +52,12 @@ class TranslatableString
 		 * Marked as explicit to avoid unexpected type construction
 		 */
 		explicit TranslatableString(std::string text, std::string domain = "")
+		:	m_text(text),
+			m_domain(domain),
+			m_is_translated(false)
+		
 		{
-			m_text = text;
-			m_domain = domain;
+			
 		}
 		
 		/**

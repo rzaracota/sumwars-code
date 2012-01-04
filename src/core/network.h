@@ -77,6 +77,7 @@ class Network
 		 * \brief Constructor
 		 */
 		Network()
+		:	m_packet_version(0)
 		{
 			
 		}

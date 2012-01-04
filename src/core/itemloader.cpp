@@ -159,7 +159,6 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 				attr.getShort("level_requirement", levelreq,0);
 				item_data ->m_level_req = levelreq;
 				
-				std::string charreq;
 				attr.getString("character_requirement",item_data->m_char_req ,"all");
 						
 				attr.getFloat("min_enchant",item_data->m_min_enchant,0);
@@ -323,7 +322,6 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 				if (item_data->m_weapon_attr == 0)
 					item_data->m_weapon_attr = new WeaponAttr;
 				
-				std::string type;
 				attr.getString("weapon_type",item_data->m_weapon_attr->m_weapon_type,"notype");
 				
 				Damage& dmg = item_data->m_weapon_attr->m_damage;

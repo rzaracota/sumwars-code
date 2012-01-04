@@ -75,10 +75,11 @@ void NPCTrade::TradeObject::operator=(TradeObject& other)
 }
 
 NPCTrade::NPCTrade()
-	:	m_trade_objects()
+	:	m_trade_objects(),
+		m_cost_multiplier(1.0),
+		m_refresh_time(36000000), // 10 min
+		m_pay_multiplier(1.0)
 {
-	m_cost_multiplier= 1.0;
-	m_refresh_time = 36000000; // 10 min
 	m_refresh_timer.start();
 }
 
@@ -168,6 +169,7 @@ Dialogue::Dialogue(Region* region, std::string topic_base,int id)
 	m_started = true;
 	m_trade = false;
 	m_nr_players =0;
+	m_event_mask = 0;
 	
 	for (int i=0; i<4; i++)
 	{

@@ -32,6 +32,7 @@ class CharConv
 		* \brief Standard Constructor, creates an empty object
 		*/
 		CharConv()
+		:	m_version(0)
 		{
 			
 		}
@@ -65,7 +66,7 @@ class CharConv
 		* \brief writes a string to the buffer
 		* \param s String
 		*/
-		virtual void toBuffer(const std::string s)=0;
+		virtual void toBuffer(const std::string & s)=0;
 		
 		
 		/**

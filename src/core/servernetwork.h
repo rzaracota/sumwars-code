@@ -37,8 +37,10 @@ class NetworkSlot
 		 * \param server_network pointer to the parent ServerNetwork object
 		 */
 		NetworkSlot(ServerNetwork* server_network)
+		:	m_server_network(server_network),
+			m_status(NET_OK)
 		{
-			m_server_network = server_network;
+			
 		}
 
 		/**

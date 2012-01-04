@@ -277,10 +277,9 @@ bool EventSystem::executeCodeReference(int coderef)
 int EventSystem::createCodeReference(const char* code)
 {
 	int err = luaL_loadstring(EventSystem::getLuaState(),code);
-	int ref;
 	if (err ==0)
 	{
-		ref = luaL_ref(EventSystem::getLuaState(),LUA_REGISTRYINDEX);
+		int ref = luaL_ref(EventSystem::getLuaState(),LUA_REGISTRYINDEX);
 #ifdef DEBUG_DATABASE
 		m_code_fragments[ref] = code;
 #endif
@@ -377,8 +376,8 @@ int EventSystem::timedExecute(lua_State *L)
 		}
 		if (reg ==0)
 		{
-			return 0;
 			DEBUG("region for timedExecute does not exist");
+			return 0;
 		}
 		
 		m_event = new Event();
@@ -600,7 +599,6 @@ int EventSystem::getObjectValue(lua_State *L)
 
 int EventSystem::setObjectValue(lua_State *L)
 {
-
 	int ret =0;
 	int argc = lua_gettop(L);
 	if (argc>=2 && lua_isnumber(L,1) && lua_isstring(L,2))
@@ -634,7 +632,7 @@ int EventSystem::setObjectValue(lua_State *L)
 		ERRORMSG("Syntax: setObjectValue( int id, string valname, value)");
 	}
 
-	return 0;
+	return ret;
 }
 
 int EventSystem::moveObject(lua_State *L)
@@ -827,8 +825,6 @@ int EventSystem::createProjectile(lua_State *L)
 			std::string tname = lua_tostring(L, 1);
 			Vector pos = getVector(L,2);
 
-			float speed = 0.0;
-			
 			// Schaden
 			// Projektil erzeugen
 			Projectile* pr = ObjectFactory::createProjectile(tname);
@@ -847,7 +843,7 @@ int EventSystem::createProjectile(lua_State *L)
 			// Richtung, Geschwindigkeit ermitteln
 			if (argc>=3 && (lua_istable(L,3) || lua_isstring(L,3)))
 			{
-				speed = 10000.0;
+				float speed = 10000.0;
 				Vector goal = getVector(L,3);
 				Vector dir = goal - pos;
 				dir.normalize();
@@ -1838,7 +1834,6 @@ int EventSystem::getPlayerItem(lua_State *L)
 	if (argc>=2  && lua_isnumber(L,1) && (lua_isnumber(L,2) || lua_isstring(L,2)))
 	{
 		int id = lua_tointeger(L, 1);
-		std::string subtype = lua_tostring(L, 2);
 		Player* pl = dynamic_cast<Player*>(World::getWorld()->getPlayer(id));
 		if (pl != 0)
 		{
@@ -1886,7 +1881,6 @@ int EventSystem::removePlayerItem(lua_State *L)
 	if (argc>=2  && lua_isnumber(L,1) && (lua_isnumber(L,2) || lua_isstring(L,2)))
 	{
 		int id = lua_tointeger(L, 1);
-		std::string subtype = lua_tostring(L, 2);
 		Player* pl = dynamic_cast<Player*>(World::getWorld()->getPlayer(id));
 		if (pl != 0)
 		{
@@ -2901,8 +2895,8 @@ int EventSystem::createEvent(lua_State *L)
 		}
 		if (reg ==0)
 		{
-			return 0;
 			DEBUG("region for createEvent does not exist");
+			return 0;
 		}
 		
 		m_event = new Event();
