@@ -279,18 +279,18 @@ bool SavegameList::onDeleteCharClicked(const CEGUI::EventArgs& evt)
 
 bool SavegameList::onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
 {
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("DeleteChar");
+		
+	message->setVisible(false);
+	message->setModalState(false);
+	
 	// Get the save file to remove.
-	std::string saveFile =  m_document->getSaveFile ();
+	std::string saveFile =  m_document->getSaveFile();
 	if (saveFile.length () <= 0)
 	{
 		return false;
 	}
-
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("DeleteChar");
-	
-	message->setVisible(false);
-	message->setModalState(false);
 	
 	// Get rid of the save file
 	remove (saveFile.c_str ());
