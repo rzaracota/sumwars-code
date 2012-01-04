@@ -512,9 +512,9 @@ void World::deleteWorld()
 
 World::~World()
 {
-
 	if (m_network != 0)
 	{
+		m_network->kill();
 		delete m_network;
 	}
 

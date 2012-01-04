@@ -160,7 +160,16 @@ unsigned int nlfg_connect(const char *hostname, unsigned int port)
 void nlfg_disconnect()
 {
     if (peer)
+    {
         enet_peer_disconnect(peer, 0);
+        peer = 0;
+    }
+
+    if (host)
+    {
+    	enet_host_destroy(host);
+    	host = 0;
+    }
 }
 
 int nlfg_isConnected()

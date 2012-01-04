@@ -43,10 +43,7 @@ NLFGServerNetwork::~NLFGServerNetwork()
 
 void NLFGServerNetwork::kill()
 {
-	if (nlfg_isConnected())
-	{
-		nlfg_disconnect();
-	}
+	nlfg_disconnect();
 	ServerNetwork::kill();
 }
 
