@@ -126,7 +126,7 @@ struct PlayedSound
 
 /**
  * \enum ExitDirection
- * \brief Verschiedene Richtungen in denen man die Region verlassen kann
+ * \brief Possible leave directions for this region
  */
 enum ExitDirection
 {
@@ -138,38 +138,38 @@ enum ExitDirection
 
 /**
  * \struct RegionExit
- * \brief Struktur die einen Ausgang aus der Region beschreibt
+ * \brief Structure that describes an exit for this region
  */
 struct RegionExit
 {
 	/**
 	 * \var Shape m_shape
-	 * \brief Form der Flaeche, in der der Spieler stehen muss um die Region zu verlassen
+	 * \brief Shape of the surface on wich the player has to stand in order to leave
 	 */
 	Shape m_shape;
 	
 	/**
 	 * \var LocationName m_exit_name
-	 * \brief Name des Ortes, an dem sich der Ausgang befindet
+	 * \brief Name of the exit
 	 */
 	LocationName m_exit_name;
 	
 	/**
 	 * \var std::string m_destination_region
-	 * \brief Name der Zielregion
+	 * \brief Name of the target region
 	 */
 	std::string m_destination_region;
 	
 	/**
 	 * \var LocationName m_destination_location
-	 * \brief Name des Zielpunktes in der Zielregion
+	 * \brief Name of the target destination in the target region
 	 */
 	LocationName m_destination_location;
 };
 
 /**
  * \class RegionData
- * \brief enthaelt alle Daten die noetig sind um die Region zu erstellen
+ * \brief Contains all data needed for creating the region
  */
 class RegionData
 {
@@ -177,76 +177,77 @@ class RegionData
 		
 		/**
 		 * \struct ObjectGroupSet
-		 * \brief Struktur fuer eine Gruppe von Objekten die mehrmals in die Region eingefuegt werden soll
+		 * \brief Structure for a group of objects that will be inserted multiple times into the region
 		 */
 		struct ObjectGroupSet
 		{
 			/**
 			 * \var ObjectGroupName m_group_name
-			 * \brief Name der Gruppe
+			 * \brief Name of the group
 			 */
 			ObjectGroupName m_group_name;
 			
 			/**
 			 * \var int m_number
-			 * \brief Anzahl wie oft man versuchen soll, eine Gruppe eingefuegen
+			 * \brief Number of times how often to try to add a group
 			 */
 			int m_number;
 			
 			/**
 			 * \var float m_probability
-			 * \brief Wahrscheinlichkeit mit der eine Gruppe eingefuegt wird
-			 * es werden m_number viele Orte ausgewaehlt, aber fuer jeden nur mit dieser Warscheinlichkeit wirklich die Gruppe eingefuegt
+			 * \brief propability that a group will be added
+			 * it will always be m_number many places choosen, but for each one only with the m_probability chance to be added
 			 */
 			float m_probability;
 			
 			/**
 			 * \var bool m_decoration
-			 * \brief Gibt an, ob es sich um ein rein dekoratives Template handelt. Auf diesen Templates koennen auch Monstergruppen platziert werden
+			 * \brief Holds whether this is a purely decorative template
+			 * \brief Monster groups can be placed on this template
 			 */
 			bool m_decoration;
 		};
 		
 		/**
 		 * \fn struct NamedObjectGroup
-		 * \brief Struktur fuer eine Objektgruppe deren Instanz mit einem Namen versehen werden soll
+		 * \brief Structure for an object group whose instance will be named
 		 */
 		struct NamedObjectGroup
 		{
 			/**
 			 * \var ObjectGroupName m_group_name
-			 * \brief Name der Gruppe
+			 * \brief Name of the group
 			 */
 			ObjectGroupName m_group_name;
 			
 			/**
 			 * \var std::string m_name
-			 * \brief Name der Gruppe
+			 * \brief Name of the group
 			 */
 			std::string m_name;
 			
 			/**
 			 * \var float m_angle
-			 * \brief Winkel mit dem das Template eingefuegt wird
+			 * \brief Angle at wich the template will be placed
 			 */
 			float m_angle;
 		};
 		
 		/**
 		 * \fn struct SpawnGroup
-		 * \brief Gruppe von Monstern die in der Region auftaucht
+		 * \brief Group of Monsters that will appear in this region
 		 */
 		struct SpawnGroup
 		{
 			/**
 			 * \var MonsterGroupName m_monsters
-			 * \brief Name der Monstergruppe
+			 * \brief Name of the MonsterGroup
 			 */
 			MonsterGroupName m_monsters;
 			
 			/**
 			 * \var int m_number
-			 * \brief Anzahl wie oft die Gruppe auftaucht
+			 * \brief Number of times this group will be added
 			 */
 			int m_number;
 			
@@ -254,34 +255,34 @@ class RegionData
 		
 		/**
 		 * \fn RegionData()
-		 * \brief Konstruktor
+		 * \brief Constructor
 		 */
 		RegionData();
 		
 		/**
 		 * \fn ~RegionData()
-		 * \brief Destruktor
+		 * \brief Destructor
 		 */
 		~RegionData();
 		
 		/**
 		 * \fn void addObjectGroup(ObjectGroupName m_group_name, int prio, int number =1, float probability=1.0, bool decoration=false)
-		 * \brief Fuegt eine neue Objektgruppe ein
-		 * \param group_name Name der Gruppe
-		 * \param prio Prioritaet der Gruppe
-		 * \param number Anzahl wie oft die Gruppe eingefuegt wird
-		 * \param probability Wahrscheinlichkeit mit der die Gruppe eingefuegt wird
-		 * \param decoration Gibt an, ob es sich um ein rein dekoratives Template handelt
+		 * \brief Adds a new object group
+		 * \param group_name Name of the group
+		 * \param prio Priority of the group
+		 * \param number Number of time the group will be added
+		 * \param probability Propability that the group will be added
+		 * \param decoration Hold wheter its a purely decorative group
 		 */
 		void addObjectGroup(ObjectGroupName group_name, int prio=0, int number =1, float probability=1.0, bool decoration=false);
 		
 		/**
 		 * \fn void  addNamedObjectGroup(ObjectGroupName group_name, std::string name,float angle=0, int prio=0)
 		 * \brief Fuegt eine neue Objektgruppe ein
-		 * \param group_name Name der Gruppe
-		 * \param name Name unter dem die Gruppe eingefuegt wird
-		 * \param angle Winkel unter dem das Template eingefuegt wird
-		 * \param prio Prioritaet der Gruppe
+		 * \param group_name Name of the group
+		 * \param name Group will be added with this name
+		 * \param angle Rotation Angle for this group
+		 * \param prio Priority of the group
 		 */
 		void addNamedObjectGroup(ObjectGroupName group_name, std::string name, float angle=0, int prio=0)
 		{
