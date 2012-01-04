@@ -24,6 +24,17 @@
 
 RegionData::RegionData()
 {
+	m_id = -1;
+	m_dimx= 0;
+	m_dimy = 0;
+	m_area_percent = 0.0f;
+	m_complexity = 0.0f;
+	m_granularity = 0;
+	m_exit_directions[0] = false;
+	m_exit_directions[1] = false;
+	m_exit_directions[2] = false;
+	m_exit_directions[3] = false;
+  
 	for (int i=0; i<3; i++)
 	{
 		m_ambient_light[i] = 0.2;
@@ -342,25 +353,25 @@ Region::Region(short dimx, short dimy, short id, std::string name, RegionData* d
 Region::~Region()
 {
 	WorldObjectMap::iterator i;
-	for (i=m_objects.begin(); i!=m_objects.end();i++)
+	for (i=m_objects.begin(); i!=m_objects.end();++i)
 	{
 		delete i->second;
 	}
 
-	for (i=m_static_objects.begin(); i!=m_static_objects.end();i++)
+	for (i=m_static_objects.begin(); i!=m_static_objects.end();++i)
 	{
 		delete i->second;
 	}
 
 	ProjectileMap::iterator j;
-	for (j =  m_projectiles.begin(); j != m_projectiles.end(); j++)
+	for (j =  m_projectiles.begin(); j != m_projectiles.end(); ++j)
 	{
 		delete (j->second);
 	}
 
 
 	DropItemMap::iterator k;
-	for (k =  m_drop_items.begin(); k != m_drop_items.end(); k++)
+	for (k =  m_drop_items.begin(); k != m_drop_items.end(); ++k)
 	{
 		if (k->second->getItem() !=0)
 			delete k->second->getItem();
@@ -719,7 +730,7 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 		int xmax = (int) floor(0.25*(d1.m_x+4));
 		int ymax = (int) floor(0.25*(d1.m_y+4));
 		// Pruefen ob die Suchanfrage nicht aus der Region herauslaeuft
-		bool ret = false;
+
 		int is = MathHelper::Max (xmin,0);
 		int ie = MathHelper::Min(xmax,m_dimx-1);
 		int js = MathHelper::Max(ymin,0);
@@ -742,7 +753,7 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 				{
 					DEBUGX("searching dead layer");
 
-					ret =  addObjectsInShapeFromGridunit(shape, gu, result, layer,group & WorldObject::DEAD, omit, empty_test);
+					addObjectsInShapeFromGridunit(shape, gu, result, layer,group & WorldObject::DEAD, omit, empty_test);
 					if (!result->empty() && empty_test)
 						return true;
 
@@ -753,7 +764,7 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 				{
 					DEBUGX("searching fixed layer");
 
-					ret =  addObjectsInShapeFromGridunit(shape, gu, result, layer,group & WorldObject::FIXED, omit, empty_test);
+					addObjectsInShapeFromGridunit(shape, gu, result, layer,group & WorldObject::FIXED, omit, empty_test);
 					if (!result->empty() && empty_test)
 						return true;
 
@@ -763,7 +774,7 @@ bool Region::getObjectsInShape( Shape* shape,  WorldObjectList* result,short lay
 				if (group & WorldObject::CREATURE)
 				{
 
-					ret =  addObjectsInShapeFromGridunit(shape, gu, result, layer,group & WorldObject::CREATURE, omit, empty_test);
+					addObjectsInShapeFromGridunit(shape, gu, result, layer,group & WorldObject::CREATURE, omit, empty_test);
 					if (!result->empty() && empty_test)
 						return true;
 
@@ -1745,7 +1756,7 @@ void Region::update(float time)
 				int id = World::getWorld()->getRegionId(eit->m_destination_region);
 
 				WorldObjectMap::iterator iter2 = iter;
-				iter ++;
+				++iter;
 				del = true;
 
 				// Spieler aus der Region entfernen
@@ -1789,7 +1800,7 @@ void Region::update(float time)
 
 					// Spieler verlaesst die Region
 					WorldObjectMap::iterator iter2 = iter;
-					iter ++;
+					++iter;
 					del = true;
 
 					// Spieler aus der Region entfernen
@@ -2182,10 +2193,10 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 
 	// alle bisherigen statischen Objekte entfernen
 	WorldObjectMap::iterator it, itnext;
-	for (it = m_static_objects.begin();it!=m_static_objects.end();it++)
+	for (it = m_static_objects.begin();it!=m_static_objects.end();++it)
 	{
 		itnext = it;
-		itnext ++;
+		++itnext;
 		
 		it->second->destroy();
 		deleteObject(it->second);
@@ -2201,7 +2212,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	for (jt = m_objects.begin();jt!=m_objects.end();)
 	{
 		jtnext = jt;
-		jtnext++;
+		++jtnext;
 		if (jt->second->getType() != "PLAYER")
 		{
 			jt->second->destroy();
@@ -2215,7 +2226,7 @@ void Region::setRegionData(CharConv* cv,WorldObjectMap* players)
 	
 	// DropItems loeschen
 	DropItemMap::iterator k;
-	for (k =  m_drop_items.begin(); k != m_drop_items.end(); k++)
+	for (k =  m_drop_items.begin(); k != m_drop_items.end(); ++k)
 	{
 		if (k->second->getItem() !=0)
 		{
