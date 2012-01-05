@@ -137,13 +137,14 @@ ItemBasicData::ItemBasicData()
 	m_weapon_attr(0),
 	m_level_req(0),
 	m_char_req("all"),
-	m_subtype(0),
+	m_subtype(),
 	m_type(Item::NOITEM),
 	m_size(Item::SIZE_NONE),
 	m_price(0),
 	m_min_enchant(0),
 	m_max_enchant(0),
 	m_enchant_multiplier(0),
+	m_name(),
 	m_drop_level(0),
 	m_drop_probability(0.0)
 {
