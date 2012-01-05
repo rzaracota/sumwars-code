@@ -313,7 +313,7 @@ bool MonsterEditor::onGetPlayerPosition(const CEGUI::EventArgs& evt)
 	WorldObject* player = world->getLocalPlayer();
 	if (player == 0)
 		return true;
-	Region* region = player->getRegion();
+	//Region* region = player->getRegion();
 	
 	Vector pos = player->getShape()->m_center;
 	

@@ -198,8 +198,8 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 			// get next word of the string...
 			currpos += getNextWord(sourceLine, currpos, thisWord);
 			
-			float davor = (font->getTextExtent(thisLine, x_scale));
-			float danach = (font->getTextExtent(thisLine, x_scale) + font->getTextExtent(thisWord, x_scale));
+			//float davor = (font->getTextExtent(thisLine, x_scale));
+			//float danach = (font->getTextExtent(thisLine, x_scale) + font->getTextExtent(thisWord, x_scale));
 			
 			// if the new word would make the string too long
 			if ((font->getTextExtent(thisLine, x_scale) + font->getTextExtent(thisWord, x_scale)) > maxWidth)
@@ -211,7 +211,6 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 				// remove whitespace from next word - it will form start of next line
 				thisWord = thisWord.substr(thisWord.find_first_not_of(whitespace));
 				
-				int sz = thisWord.size();
 				newText.insert(fullPosCtr+1, LINE_ENDING);
 				fullPosCtr += 2;
 				

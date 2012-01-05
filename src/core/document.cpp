@@ -1777,7 +1777,7 @@ void Document::writeSavegame(bool writeShortkeys)
 	}
 
 	// Savegame schreiben (ansynchron)
-	std::pair<Document*, CharConv*>* param = new std::pair<Document*, CharConv*>(this,save);
+	// std::pair<Document*, CharConv*>* param = new std::pair<Document*, CharConv*>(this,save);
 	
 	// Savegame schreiben
 	std::stringstream* stream = dynamic_cast<std::stringstream*> (static_cast<StdStreamConv*>(save)->getStream());

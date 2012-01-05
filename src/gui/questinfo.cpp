@@ -100,7 +100,9 @@ void QuestInfo::update()
 	{
 		Quest* quest = it->second;
 		state = it->second->getState();
-		if (state == Quest::STARTED && open || state == Quest::FINISHED && done || state == Quest::FAILED && failed)
+		if ((state == Quest::STARTED && open) || 
+		    (state == Quest::FINISHED && done) || 
+		    (state == Quest::FAILED && failed))
 		{
 			std::string name = quest->getName().getTranslation().c_str();
 			newitem = new StrListItem((CEGUI::utf8*) name.c_str(),it->first);

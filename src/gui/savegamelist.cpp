@@ -231,7 +231,7 @@ void SavegameList::updateTranslation()
 bool SavegameList::onSavegameChosen(const CEGUI::EventArgs& evt)
 {
 	const CEGUI::WindowEventArgs& we = static_cast<const CEGUI::WindowEventArgs&>(evt);
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
 	std::string prefix = we.window->getName().c_str();
 	prefix.erase(prefix.length()-12, prefix.length());
 

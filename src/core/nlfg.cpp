@@ -229,6 +229,10 @@ int nlfg_process()
                 nlfg_addMessage(msg);
                 ++packets;
             } break;
+        default:
+			{ // don't know what to do
+			
+			}
         }
     }
 

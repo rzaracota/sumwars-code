@@ -86,9 +86,8 @@ bool ItemWindow::onItemMouseButtonPressed(const CEGUI::EventArgs& evt)
 
 bool ItemWindow::onItemMouseButtonReleased(const CEGUI::EventArgs& evt)
 {
-	const CEGUI::MouseEventArgs& we =
-			static_cast<const CEGUI::MouseEventArgs&>(evt);
-	unsigned int id = we.window->getID();
+	const CEGUI::MouseEventArgs& we = static_cast<const CEGUI::MouseEventArgs&>(evt);
+	
 	if (we.button == CEGUI::LeftButton)
 	{
 		DEBUGX("left button released on Item %i",id);

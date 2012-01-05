@@ -41,7 +41,7 @@ void ContentEditor::init(bool visible)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::System* guiSystem = System::getSingletonPtr();
+	//CEGUI::System* guiSystem = System::getSingletonPtr();
 	CEGUI::WindowManager* winManager = WindowManager::getSingletonPtr();
 	CEGUI::Window* gameScreen = winManager->getWindow("GameScreen");
 	m_lastVisibilitySwitch = 0;

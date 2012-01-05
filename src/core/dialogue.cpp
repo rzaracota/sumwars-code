@@ -765,7 +765,7 @@ void Dialogue::update(float time)
 
 		// Fragen bleiben generell stehen
 		// Handel ebenso
-		if (!m_started && m_question != 0 && m_question->m_active || m_trade)
+		if ((!m_started && m_question != 0 && m_question->m_active) || m_trade)
 		{
 			stime =0;
 			break;
@@ -808,7 +808,7 @@ void Dialogue::update(float time)
 
 			// Naechsten zulaessigen Text suchen
 			cst =0;
-			int id;
+			int id = 0;
 			Position pos=UNKNOWN;
 			while (cst==0 && !m_speech.empty())
 			{
@@ -1183,7 +1183,7 @@ void Dialogue::skipText(int id)
 		{
 			cst = &(m_speech.front().second);
 			// Fragen und Handel kann nicht so uebersprungen werden
-			if (m_question !=0 && m_question->m_active || m_trade)
+			if ((m_question !=0 && m_question->m_active) || m_trade)
 				return;
 			
 			cst->m_time =0;

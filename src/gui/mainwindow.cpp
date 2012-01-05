@@ -1665,7 +1665,7 @@ void MainWindow::updateItemInfo()
 		float oxl = ox.getLength();
 		float oyl = oy.getLength();
 		
-		float xscal = oxl;
+		//float xscal = oxl;
 		float yscal = oyl*height/0.9;
 		
 		ox.normalize();
@@ -2307,10 +2307,10 @@ void MainWindow::updateChatContent()
 		
 		CEGUI::Size larea = area;
 		larea.d_width = width;
-		float height =  vec.asRelative(larea).d_y; 
+		//float height =  vec.asRelative(larea).d_y; 
 
-		float relwidth = width / area.d_width;
-		float relheight = (height+6) / area.d_height;
+		//float relwidth = width / area.d_width;
+		//float relheight = (height+6) / area.d_height;
 		
 		if ( fabs(label->getArea().getWidth().d_scale - vec.d_x.d_scale) > 0.0001
 			|| fabs(label->getArea().getHeight().d_scale - vec.d_y.d_scale) > 0.0001)
