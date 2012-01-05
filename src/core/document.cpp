@@ -165,7 +165,7 @@ void Document::setSaveFile(std::string s)
 			delete m_temp_player;
 			m_temp_player =0;
 		}
-		m_save_file ="";
+		WARNING("Could not load file %s", s.c_str());
 	}
 	m_modified |= SAVEGAME_MODIFIED;
 	file.close();
@@ -805,6 +805,20 @@ bool Document::checkSubwindowsAllowed()
 
 void Document::onButtonStartSinglePlayer ()
 {
+	if (m_temp_player == 0)
+	{
+		// Show a notification.
+		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("WarningDialogWindow");
+		message->setInheritsAlpha(false);
+		message->setVisible(true);
+		message->setModalState(true);
+		win_mgr.getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("Please select a character first!"));
+
+		DEBUG ("Warning: Tried to start a game without a selected char!");
+		return;
+	}
+	
 	// The player is a host himself (or herself)
 	setServer (true);
 	m_single_player = true;
@@ -818,7 +832,7 @@ void Document::onButtonStartSinglePlayer ()
 void Document::onButtonHostGame()
 {
 	DEBUG("Host Game");
-	if (m_save_file == "")
+	if (m_temp_player == 0)
 	{
 		// Show a notification.
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -839,7 +853,7 @@ void Document::onButtonHostGame()
 
 void Document::onButtonJoinGame()
 {
-	if (m_save_file == "")
+	if (m_temp_player == 0)
 	{
 		// Show a notification.
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -1817,6 +1831,7 @@ void Document::writeSavegame(bool writeShortkeys)
 	else
 	{
 		ERRORMSG("cannot open save file: %s",m_save_file.c_str());
+		m_save_file = "";
 	}
 	if (stream != 0)
 	{
