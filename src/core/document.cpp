@@ -1418,6 +1418,7 @@ bool Document::onKeyPress(KeyCode key)
 		{
 			if (m_gui_state.m_shown_windows == NO_WINDOWS 
 				|| m_gui_state.m_shown_windows == CONTROL_PANEL
+				|| m_gui_state.m_shown_windows == START_MENU
 			)
 			{
 				onButtonSaveExitClicked();
