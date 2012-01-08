@@ -540,7 +540,7 @@ void Application::run()
 				DEBUGX("view update time was %f",t);
 			}
 		}
-		catch (CEGUI::Exception e)
+		catch (CEGUI::Exception & e)
 		{
 			ERRORMSG("Error message: %s",e.getMessage().c_str());
 			return;
