@@ -239,7 +239,7 @@ void Document::loadSavegame()
 		// update state to running
 		// show main game screen
 		m_state =RUNNING;
-		m_gui_state.m_shown_windows = NO_WINDOWS;
+		m_gui_state.m_shown_windows = CONTROL_PANEL;
 		m_gui_state.m_sheet = GAME_SCREEN;
 		m_modified = WINDOWS_MODIFIED | GUISHEET_MODIFIED;
 		m_save_timer.start();
@@ -413,13 +413,13 @@ void Document::onButtonSaveExitConfirm()
 	// Paket an den Server senden
 	sendCommand(&command);
 
-	getGUIState()->m_shown_windows = NO_WINDOWS;
+	getGUIState()->m_shown_windows = CONTROL_PANEL;
 	m_modified |= WINDOWS_MODIFIED;
 }
 
 void Document::onButtonSaveExitAbort()
 {
-	getGUIState()->m_shown_windows = NO_WINDOWS;
+	getGUIState()->m_shown_windows = CONTROL_PANEL;
 	m_modified |= WINDOWS_MODIFIED;
 }
 
@@ -1416,7 +1416,9 @@ bool Document::onKeyPress(KeyCode key)
 		}
 		else if (dest == CLOSE_ALL)
 		{
-			if (m_gui_state.m_shown_windows == NO_WINDOWS)
+			if (m_gui_state.m_shown_windows == NO_WINDOWS 
+				|| m_gui_state.m_shown_windows == CONTROL_PANEL
+			)
 			{
 				onButtonSaveExitClicked();
 			}
@@ -1440,7 +1442,7 @@ bool Document::onKeyPress(KeyCode key)
 			}
 			else
 			{
-				m_gui_state.m_shown_windows =  NO_WINDOWS;
+				m_gui_state.m_shown_windows =  CONTROL_PANEL;
 			// Geoeffnete Fenster haben sich geaendert
 				m_modified |= WINDOWS_MODIFIED;
 			}
@@ -1613,13 +1615,23 @@ void Document::updateContent(float time)
 			m_modified |= WINDOWS_MODIFIED;
 		}
 	}
-	else if (player->getDialogueId() != 0
+	
+	if (player->getDialogueId() != 0
 				|| (player->getRegion() !=0 && player->getRegion()->getCutsceneMode () == true))
 	{
 		// Chat ist fuer Debugging zugeschaltet
 		if ((getGUIState()->m_shown_windows & (~(QUESTIONBOX | SAVE_EXIT | CHAT))) != 0)
 		{
 			getGUIState()->m_shown_windows &= (QUESTIONBOX  | SAVE_EXIT | CHAT);
+			m_modified |= WINDOWS_MODIFIED;
+		}
+	}
+	else
+	{
+		// always open control panel except in cutscene mode
+		if ((getGUIState()->m_shown_windows & CONTROL_PANEL) == 0)
+		{
+			getGUIState()->m_shown_windows |= CONTROL_PANEL;
 			m_modified |= WINDOWS_MODIFIED;
 		}
 	}
