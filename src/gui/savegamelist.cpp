@@ -212,6 +212,15 @@ void SavegameList::update()
 	btn->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_absdim(height)));
 }
 
+void SavegameList::selectDefaultSavegame()
+{
+	std::string savegame = Options::getInstance()->getDefaultSavegame();
+	if (savegame != "")
+	{
+		m_document->setSaveFile(savegame.c_str());
+	}
+}
+
 void SavegameList::updateTranslation()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -279,18 +288,18 @@ bool SavegameList::onDeleteCharClicked(const CEGUI::EventArgs& evt)
 
 bool SavegameList::onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
 {
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("DeleteChar");
+		
+	message->setVisible(false);
+	message->setModalState(false);
+	
 	// Get the save file to remove.
-	std::string saveFile =  m_document->getSaveFile ();
+	std::string saveFile =  m_document->getSaveFile();
 	if (saveFile.length () <= 0)
 	{
 		return false;
 	}
-
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("DeleteChar");
-	
-	message->setVisible(false);
-	message->setModalState(false);
 	
 	// Get rid of the save file
 	remove (saveFile.c_str ());

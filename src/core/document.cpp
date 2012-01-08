@@ -155,8 +155,8 @@ void Document::setSaveFile(std::string s)
 		delete save;
 		if (data)
 			delete[] data;
-
-
+		
+		Options::getInstance()->setDefaultSavegame(s);
 	}
 	else
 	{
