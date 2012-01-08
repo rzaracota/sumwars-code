@@ -155,13 +155,13 @@ void TradeWindow::update()
 		return;
 	}
 	
-	int gold = player->getEquipement()->getGold();
-	bool stashtrade = false;
+	//int gold = player->getEquipement()->getGold();
+	//bool stashtrade = false;
 	if (player->getId() == npc->getId())
 	{
 		equ = player->getStash();
-		stashtrade = true;
-		gold = -1;
+		//stashtrade = true;
+		//gold = -1;
 	}
 	
 	std::ostringstream out_stream;
@@ -291,11 +291,11 @@ bool TradeWindow::onTradeItemHover(const CEGUI::EventArgs& evt)
 	}
 	
 	int gold = player->getEquipement()->getGold();
-	bool stashtrade = false;
+	//bool stashtrade = false;
 	if (player->getId() == npc->getId())
 	{
 		equ = player->getStash();
-		stashtrade = true;
+		//stashtrade = true;
 		gold = -1;
 	}
 	

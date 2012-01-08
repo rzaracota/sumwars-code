@@ -17,7 +17,8 @@
 #include "nlfgnetworkpacket.h"
 
 NLFGNetworkPacket::NLFGNetworkPacket()
-	: m_data(NULL)
+:	m_data(NULL),
+	m_length(0)
 {
 	m_timestamp = time(NULL);
     m_packet = new NLFG_Message;

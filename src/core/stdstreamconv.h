@@ -69,7 +69,7 @@ class StdStreamConv : public CharConv
 		 * \brief writes a string to the buffer
 		 * \param s String
 		 */
-		virtual void toBuffer(const std::string s);
+		virtual void toBuffer(const std::string& s);
 		
 		
 		/**

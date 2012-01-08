@@ -605,9 +605,6 @@ void Monster::evalCommand(Action::ActionType act)
 	WorldObjectValueList self;
 	self.push_back(std::make_pair(this,0) );
 
-	float dist;
-	float value;
-
 	// true, wenn sich Monster bewegen muss um Fernangriff auszufuehren
 	bool ranged_move = false;
 
@@ -670,8 +667,8 @@ void Monster::evalCommand(Action::ActionType act)
 		for (it = goal_list->begin(); it !=goal_list->end(); ++it)
 		{
 			// moegliches Ziel
-			cgoal = (Creature*) it->first;
-			dist = it->second;
+			cgoal = static_cast<Creature*>(it->first);
+			float dist = it->second;
 
 			// bei Befehl guard nur, wenn nicht zu weit vom zu beschuetzenden Ort
 			if (m_ai.m_guard && (aci->m_target_type == Action::MELEE || aci->m_target_type == Action::CIRCLE || ranged_move) &&  m_ai.m_guard_pos.distanceTo(cgoal->getShape()->m_center) > m_ai.m_guard_range)
@@ -685,7 +682,7 @@ void Monster::evalCommand(Action::ActionType act)
 			*/
 
 			// Bewertung:
-			value = abltinfo.m_rating;
+			float value = abltinfo.m_rating;
 			value += Random::randf(abltinfo.m_random_rating);
 
 			// all_target_rating
@@ -865,7 +862,7 @@ void Monster::die()
 					std::set<int>& members = party->getMembers();
 					std::set<int>::iterator i;
 
-					for (i=members.begin();i!=members.end();i++)
+					for (i=members.begin();i!=members.end();++i)
 					{
 						pl2 = dynamic_cast<Player*>(getRegion()->getObject(*i));
 

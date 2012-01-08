@@ -75,10 +75,11 @@ void NPCTrade::TradeObject::operator=(TradeObject& other)
 }
 
 NPCTrade::NPCTrade()
-	:	m_trade_objects()
+	:	m_trade_objects(),
+		m_cost_multiplier(1.0),
+		m_pay_multiplier(1.0),
+		m_refresh_time(36000000) // 10 min
 {
-	m_cost_multiplier= 1.0;
-	m_refresh_time = 36000000; // 10 min
 	m_refresh_timer.start();
 }
 
@@ -168,6 +169,7 @@ Dialogue::Dialogue(Region* region, std::string topic_base,int id)
 	m_started = true;
 	m_trade = false;
 	m_nr_players =0;
+	m_event_mask = 0;
 	
 	for (int i=0; i<4; i++)
 	{
@@ -763,7 +765,7 @@ void Dialogue::update(float time)
 
 		// Fragen bleiben generell stehen
 		// Handel ebenso
-		if (!m_started && m_question != 0 && m_question->m_active || m_trade)
+		if ((!m_started && m_question != 0 && m_question->m_active) || m_trade)
 		{
 			stime =0;
 			break;
@@ -806,7 +808,7 @@ void Dialogue::update(float time)
 
 			// Naechsten zulaessigen Text suchen
 			cst =0;
-			int id;
+			int id = 0;
 			Position pos=UNKNOWN;
 			while (cst==0 && !m_speech.empty())
 			{
@@ -1181,7 +1183,7 @@ void Dialogue::skipText(int id)
 		{
 			cst = &(m_speech.front().second);
 			// Fragen und Handel kann nicht so uebersprungen werden
-			if (m_question !=0 && m_question->m_active || m_trade)
+			if ((m_question !=0 && m_question->m_active) || m_trade)
 				return;
 			
 			cst->m_time =0;

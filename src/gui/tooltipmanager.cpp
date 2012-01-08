@@ -19,13 +19,16 @@
 
 template<> TooltipManager* Ogre::Singleton<TooltipManager>::SUMWARS_OGRE_SINGLETON = 0;
 
-TooltipManager::TooltipManager ()
-{
-    m_toolTipsCreatedCount = 0;
-    m_CEGUIWinMgr = CEGUI::WindowManager::getSingletonPtr();
-    m_CEGUISystem = CEGUI::System::getSingletonPtr();
-    m_DefaultFont = m_CEGUISystem->getDefaultFont();
-}
+TooltipManager::TooltipManager():
+	m_CEGUIWinMgr(CEGUI::WindowManager::getSingletonPtr()),
+	m_CEGUISystem(CEGUI::System::getSingletonPtr()),
+	m_CurrentMain(0),
+	m_timeVisible(0),
+	m_fadeInTime(0),
+	m_fadeOutTime(0),
+	m_toolTipsCreatedCount(0),
+	m_DefaultFont(CEGUI::System::getSingleton().getDefaultFont())
+{}
 
 void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string > list, float timeVisible, CEGUI::Font* font, Tooltip::TooltipType type )
 {
@@ -105,8 +108,9 @@ void TooltipManager::createTooltip(CEGUI::Window* win, std::string text, float t
 
 void TooltipManager::fadeAllOut()
 {
-    std::map<std::string, Tooltip*>::iterator iter;
-    for ( iter = m_Tooltips.begin(); iter != m_Tooltips.end(); iter++ )
+    for (std::map<std::string, Tooltip*>::const_iterator iter = m_Tooltips.begin();
+    	 iter != m_Tooltips.end();
+    	 ++iter)
     {
         Tooltip *tt = iter->second;
 

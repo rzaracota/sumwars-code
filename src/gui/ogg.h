@@ -18,7 +18,6 @@
 
 #include <string>
 #include <iostream>
-using namespace std;
 
 #ifdef WIN32
 	#include <al.h>
@@ -37,12 +36,17 @@ using namespace std;
 
 class ogg_stream
 {
-    public:
-	ogg_stream()
-	{
-		m_volume = 1;
-		m_initialized = false;
-	}
+public:
+	ogg_stream():
+		oggFile(0),
+		vorbisInfo(0),
+		vorbisComment(0),
+
+		source(0),
+
+		m_volume(1.0f),
+		m_initialized(false)
+	{}
 	
 	~ogg_stream()
 	{ 
@@ -53,7 +57,7 @@ class ogg_stream
 		}
 	}
     
-        void open(string path);
+        void open(std::string path);
         void release();
         void display();
         bool playback();
@@ -74,7 +78,7 @@ class ogg_stream
         bool stream(ALuint buffer);
         void empty();
         void oggcheck();
-        string errorString(int code);
+        std::string errorString(int code);
 
     private:
 

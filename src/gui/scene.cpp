@@ -730,35 +730,39 @@ void Scene::createSceneLights ()
 
 	Region* region = m_document->getLocalPlayer()->getRegion();
 
-	float *colour;
     m_scene_manager->setAmbientLight(Ogre::ColourValue(0.3f,0.3f,0.3f)); // TODO: Augustin Preda, 2011.12.19: Make the initialization map dependent.
 
 	m_scene_manager->setShadowColour (Ogre::ColourValue (0.5f, 0.5f, 0.5f)); // TODO: Augustin Preda, 2011.12.19: Make the initialization map dependent.
 
-
-	colour= region->getLight().getHeroLight();
 	Ogre::Light *light = m_scene_manager->createLight("HeroLight");
 	light->setType(Ogre::Light::LT_POINT);
-	light->setDiffuseColour(colour[0], colour[1], colour[2]);
 	light->setSpecularColour(0.0, 0.0, 0.0);
 	light->setAttenuation(20*GraphicManager::g_global_scale,0.5,0.000,
 						  0.025/(GraphicManager::g_global_scale*GraphicManager::g_global_scale));
+	if (region)
+	{
+		const float* colour = region->getLight().getHeroLight();
+		light->setDiffuseColour(colour[0], colour[1], colour[2]);
+		DEBUGX("hero light %f %f %f",colour[0], colour[1], colour[2]);
+	}
+
 	light->setCastShadows (false);
 	// Augustin Preda, 2011.11.15: set to disabled.
-
-	DEBUGX("hero light %f %f %f",colour[0], colour[1], colour[2]);
     
-	colour= region->getLight().getDirectionalLight();
     light = m_scene_manager->createLight("RegionLight");
 	light->setType(Ogre::Light::LT_DIRECTIONAL);
-	light->setDiffuseColour(colour[0], colour[1], colour[2]);
-	light->setSpecularColour(colour[0], colour[1], colour[2]);
 	light->setDirection(Ogre::Vector3(-1,-1,-1));
+	if (region)
+	{
+		const float* colour = region->getLight().getDirectionalLight();
+		light->setDiffuseColour(colour[0], colour[1], colour[2]);
+		light->setSpecularColour(colour[0], colour[1], colour[2]);
+	}
 
     light->setCastShadows (true);
 
-	colour= region->getLight().getAmbientLight();
-	m_scene_manager->setAmbientLight (Ogre::ColourValue(colour[0], colour[1], colour[2])); // TODO: XXX: re-add this.
+	const float* colour= region->getLight().getAmbientLight();
+	m_scene_manager->setAmbientLight (Ogre::ColourValue(colour[0], colour[1], colour[2]));
 	DEBUG ("Scene manager setting ambient [%.2f %.2f %.2f]", colour[0], colour[1], colour[2]);
 
 	DEBUGX("directional light %f %f %f",colour[0], colour[1], colour[2]);
@@ -830,11 +834,9 @@ void Scene::createScene()
 
 	createSceneLights ();
 
-	if (region !=0)
 	{
-		WorldObjectMap* stat_objs = region->getStaticObjects();
-		WorldObjectMap::iterator it;
-		for (it = stat_objs->begin(); it !=stat_objs->end();++it)
+		const WorldObjectMap& stat_objs = region->getStaticObjects();
+		for (WorldObjectMap::const_iterator it = stat_objs.begin(); it !=stat_objs.end(); ++it)
 		{
 			// Objekt in der Szene erzeugen
 			insertObject(it->second,true);

@@ -34,19 +34,17 @@ class Window
 		* \fn Window(Document* doc)
 		* \brief Konstruktor
 		*/
-		Window(Document* doc)
-		{
-			m_document = doc;
-		}
+		Window(Document* doc):
+			m_window(0),
+			m_document(doc)
+		{}
 		
 		/**
 		* \fn virtual ~Window()
 		* \brief Destruktur
 		*/
 		virtual ~Window()
-		{
-			
-		}
+		{}
 		
 		/**
 		 * \fn virtual void update() =0

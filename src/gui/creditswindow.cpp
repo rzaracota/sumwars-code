@@ -140,7 +140,7 @@ void CreditsWindow::update()
 			pos = 0.0;
 		
 		// credits scrolling
-		CEGUI::Window* wtext = win_mgr.getWindow("CreditWindow");
+		//CEGUI::Window* wtext = win_mgr.getWindow("CreditWindow");
 		CEGUI::ScrollablePane* pane  = static_cast<CEGUI::ScrollablePane*>(win_mgr.getWindow("CreditsPane"));
 
 		pane->setVerticalScrollPosition(pos);

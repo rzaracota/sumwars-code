@@ -151,6 +151,7 @@ struct LearnableAbility
 		m_skilltree_tab = other.m_skilltree_tab;
 		m_req_level = other.m_req_level;
 		m_req_abilities = other.m_req_abilities;
+		m_image = other.m_image;
 		
 		return *this;
 	}

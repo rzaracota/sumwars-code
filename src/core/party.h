@@ -38,7 +38,12 @@ class Party
 	 * \fn Party()
 	 * \brief Konstruktor
 	 */
-	Party(){};
+	Party()
+	:	m_id(0),
+		m_leader_id(0)
+	{
+		
+	};
 
 
 	/**

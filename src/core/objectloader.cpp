@@ -56,7 +56,7 @@ bool  ObjectLoader::loadMonster(TiXmlNode* node, bool silent_replace)
 		MonsterBasicData* data = new MonsterBasicData;
 		
 		// Typinformationen auslesen
-		std::string type,subtype, race, fraction,layer;
+		std::string subtype, race, fraction,layer;
 		data->m_type = "MONSTER";
 		attr.getString("subtype",subtype);
 		attr.getString("race",race);
@@ -270,8 +270,7 @@ bool  ObjectLoader::loadCreatureBaseAttr(TiXmlNode* node, CreatureBaseAttr& basa
 						
 		if (!strcmp(child2->Value(), "Ability"))
 		{
-			std::string anim,act;
-			Action::ActionType action;
+			std::string act;
 			attr.getString("type",act);
 			basattr.m_abilities[act].m_timer = 0;
 			attr.getFloat("time",basattr.m_abilities[act].m_time);

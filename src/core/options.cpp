@@ -146,7 +146,7 @@ bool Options::readFromFile(const std::string& filename)
 				if (child->Type()==TiXmlNode::TINYXML_ELEMENT)
 				{
 					attr.parseElement(child->ToElement());
-					std::string env,defstr,objname;
+					
 					if (!strcmp(child->Value(), "Shortkeys"))
 					{
 						for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())

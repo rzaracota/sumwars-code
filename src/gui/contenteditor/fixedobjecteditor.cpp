@@ -194,7 +194,7 @@ bool FixedObjectEditor::onFixedObjectModified(const CEGUI::EventArgs& evt)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	CEGUI::RadioButton* CircleButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/CircleCheckbox"));
-	CEGUI::RadioButton* RectButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/RectangleCheckbox"));
+	//CEGUI::RadioButton* RectButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/RectangleCheckbox"));
 	
 	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/RadiusSpinner"));
 	CEGUI::Spinner* widthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/WidthSpinner"));
@@ -237,7 +237,7 @@ bool FixedObjectEditor::onFixedObjectAutodetectSize(const CEGUI::EventArgs& evt)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	CEGUI::PushButton* detectCircleButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Prop/DetectCircleButton"));
-	CEGUI::PushButton* detectRectButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Prop/DetectRectButton"));
+	//CEGUI::PushButton* detectRectButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Prop/DetectRectButton"));
 	
 	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/RadiusSpinner"));
 	CEGUI::Spinner* widthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/WidthSpinner"));
@@ -390,7 +390,7 @@ bool FixedObjectEditor::onGetPlayerPosition(const CEGUI::EventArgs& evt)
 	WorldObject* player = world->getLocalPlayer();
 	if (player == 0)
 		return true;
-	Region* region = player->getRegion();
+	//Region* region = player->getRegion();
 	
 	Vector pos = player->getShape()->m_center;
 	

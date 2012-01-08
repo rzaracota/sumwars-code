@@ -613,7 +613,7 @@ void Application::run()
 				DEBUGX("view update time was %f",t);
 			}
 		}
-		catch (CEGUI::Exception e)
+		catch (CEGUI::Exception & e)
 		{
 			ERRORMSG("Error message: %s",e.getMessage().c_str());
 			return;
@@ -1028,7 +1028,7 @@ bool Application::initCEGUI()
 	// Imagesets laden
 	CEGUI::ImagesetManager::getSingleton().create("skills.imageset");
 
-	CEGUI::Texture &startScreenTex = CEGUI::System::getSingleton().getRenderer()->createTexture("startscreen.png", (CEGUI::utf8*)"GUI");
+	//CEGUI::Texture &startScreenTex = CEGUI::System::getSingleton().getRenderer()->createTexture("startscreen.png", (CEGUI::utf8*)"GUI");
     
 	try
 	{

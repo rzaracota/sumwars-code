@@ -213,7 +213,7 @@ void RenderInfoEditor::updatePreviewImage()
 	topnode->_update(true,true);
 	topnode->_updateBounds();
 	topnode->showBoundingBox(true);
-	const Ogre::AxisAlignedBox& boundingbox = topnode->_getWorldAABB();
+	//const Ogre::AxisAlignedBox& boundingbox = topnode->_getWorldAABB();
 	
 	Ogre::Vector3 bbox_min(1000,1000,1000);
 	Ogre::Vector3 bbox_max(-1000,-1000,-1000);
@@ -577,7 +577,7 @@ bool RenderInfoEditor::onSubObjectSelected(const CEGUI::EventArgs& evt)
 
 bool RenderInfoEditor::onSubMeshSelected(const CEGUI::EventArgs& evt)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	//CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Combobox* subSelector = static_cast<CEGUI::Combobox*>(CEGUI::WindowManager::getSingleton().getWindow("RITab/SubMesh/Selector"));
 	CEGUI::Editbox* subMeshNameBox = static_cast<CEGUI::Editbox*>(CEGUI::WindowManager::getSingleton().getWindow("RITab/SM/SMNameEditbox"));
 	
@@ -599,7 +599,7 @@ bool RenderInfoEditor::onSubMeshSelected(const CEGUI::EventArgs& evt)
 
 bool RenderInfoEditor::onSubMeshAdded(const CEGUI::EventArgs& evt)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	//CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Combobox* subSelector = static_cast<CEGUI::Combobox*>(CEGUI::WindowManager::getSingleton().getWindow("RITab/SubMesh/Selector"));
 	CEGUI::Editbox* subMeshNameBox = static_cast<CEGUI::Editbox*>(CEGUI::WindowManager::getSingleton().getWindow("RITab/SM/SMNameEditbox"));
 	

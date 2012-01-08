@@ -77,6 +77,8 @@ Document::Document()
 
 	// Status setzen
 	m_state = INACTIVE;
+	m_server = false;
+	m_shutdown_timer = 0;
 
 	m_modified =GUISHEET_MODIFIED | WINDOWS_MODIFIED;
 
@@ -163,7 +165,7 @@ void Document::setSaveFile(std::string s)
 			delete m_temp_player;
 			m_temp_player =0;
 		}
-		m_save_file ="";
+		WARNING("Could not load file %s", s.c_str());
 	}
 	m_modified |= SAVEGAME_MODIFIED;
 	file.close();
@@ -803,6 +805,20 @@ bool Document::checkSubwindowsAllowed()
 
 void Document::onButtonStartSinglePlayer ()
 {
+	if (m_temp_player == 0)
+	{
+		// Show a notification.
+		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("WarningDialogWindow");
+		message->setInheritsAlpha(false);
+		message->setVisible(true);
+		message->setModalState(true);
+		win_mgr.getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("Please select a character first!"));
+
+		DEBUG ("Warning: Tried to start a game without a selected char!");
+		return;
+	}
+	
 	// The player is a host himself (or herself)
 	setServer (true);
 	m_single_player = true;
@@ -816,7 +832,7 @@ void Document::onButtonStartSinglePlayer ()
 void Document::onButtonHostGame()
 {
 	DEBUG("Host Game");
-	if (m_save_file == "")
+	if (m_temp_player == 0)
 	{
 		// Show a notification.
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -837,7 +853,7 @@ void Document::onButtonHostGame()
 
 void Document::onButtonJoinGame()
 {
-	if (m_save_file == "")
+	if (m_temp_player == 0)
 	{
 		// Show a notification.
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -882,12 +898,16 @@ void Document::onButtonInventoryClicked()
 	if (!checkSubwindowsAllowed())
 		return;
 
-	// Inventar oeffnen wenn es gerade geschlossen ist und schliessen, wenn es geoeffnet ist
+	
+	getGUIState()->m_shown_windows ^= INVENTORY;
 	if (getGUIState()->m_shown_windows & INVENTORY)
 	{
-
-		getGUIState()->m_shown_windows &= ~INVENTORY;
-
+	// wenn Inventar geoeffnet wird, dann Skilltree schliessen
+		getGUIState()->m_shown_windows &= ~SKILLTREE;
+		m_gui_state.m_pressed_key = 0;
+	}
+	else
+	{
 		// der lokale Spieler
 		Player* pl = static_cast<Player*>( World::getWorld()->getLocalPlayer());
 		if (pl==0)
@@ -899,21 +919,9 @@ void Document::onButtonInventoryClicked()
 			dropCursorItem();
 		}
 	}
-	else
-	{
-		// wenn Inventar geoeffnet wird, dann Skilltree schliessen
-		getGUIState()->m_shown_windows &= ~SKILLTREE;
-		m_gui_state.m_pressed_key = 0;
-
-		getGUIState()->m_shown_windows |= INVENTORY;
-
-
-
-	}
 
 	// Geoeffnete Fenster haben sich geaendert
 	m_modified |= WINDOWS_MODIFIED;
-
 }
 
 void Document::onButtonCharInfoClicked()
@@ -921,16 +929,11 @@ void Document::onButtonCharInfoClicked()
 	if (!checkSubwindowsAllowed())
 		return;
 
-	// Charakterinfo oeffnen wenn es gerade geschlossen ist und schliessen, wenn es geoeffnet ist
+	
+	getGUIState()->m_shown_windows ^= CHARINFO;
 	if (getGUIState()->m_shown_windows & CHARINFO)
 	{
-		getGUIState()->m_shown_windows &= ~CHARINFO;
-	}
-	else
-	{
 		getGUIState()->m_shown_windows &= ~(PARTY | QUEST_INFO);
-
-		getGUIState()->m_shown_windows |= CHARINFO;
 	}
 
 	// Geoeffnete Fenster haben sich geaendert
@@ -942,17 +945,12 @@ void Document::onButtonPartyInfoClicked()
 	if (!checkSubwindowsAllowed())
 		return;
 
+	getGUIState()->m_shown_windows ^= PARTY;
 	// PartyInfo oeffnen wenn es gerade geschlossen ist und schliessen, wenn er geoeffnet ist
 	if (getGUIState()->m_shown_windows & PARTY)
 	{
-		getGUIState()->m_shown_windows &= ~PARTY;
-	}
-	else
-	{
 		// wenn PartyInfo geoeffnet wird, dann CharInfo schliessen
 		getGUIState()->m_shown_windows &= ~(CHARINFO | QUEST_INFO);
-
-		getGUIState()->m_shown_windows |= PARTY;
 	}
 
 	m_gui_state.m_pressed_key = 0;
@@ -966,21 +964,19 @@ void Document::onButtonSkilltreeClicked(bool skill_right, bool use_alternate)
 	if (!checkSubwindowsAllowed())
 		return;
 
-	// Skilltree oeffnen wenn er gerade geschlossen ist und schliessen, wenn er geoeffnet ist
+	getGUIState()->m_shown_windows ^= SKILLTREE;
 	if (getGUIState()->m_shown_windows & SKILLTREE)
-	{
-		getGUIState()->m_prefer_right_skill = false;
-		getGUIState()->m_set_right_skill_alternate = false;
-		getGUIState()->m_shown_windows &= ~SKILLTREE;
-	}
-	else
 	{
 		// wenn Skilltree geoeffnet wird, dann Inventar schliessen
 		getGUIState()->m_shown_windows &= ~INVENTORY;
 
-		getGUIState()->m_shown_windows |= SKILLTREE;
 		getGUIState()->m_set_right_skill_alternate = use_alternate;
 		getGUIState()->m_prefer_right_skill =skill_right;
+	}
+	else
+	{
+		getGUIState()->m_prefer_right_skill = false;
+		getGUIState()->m_set_right_skill_alternate = false;
 	}
 
 	m_gui_state.m_pressed_key = 0;
@@ -995,15 +991,7 @@ void Document::onButtonOpenChatClicked()
 	//if (!checkSubwindowsAllowed())
 	//		return;
 
-	// Cchatfenster oeffnen wenn es gerade geschlossen ist und schliessen, wenn es geoeffnet ist
-	if (getGUIState()->m_shown_windows & CHAT)
-	{
-		getGUIState()->m_shown_windows &= ~CHAT;
-	}
-	else
-	{
-		getGUIState()->m_shown_windows |= CHAT;
-	}
+	getGUIState()->m_shown_windows ^= CHAT;
 
 	// Geoeffnete Fenster haben sich geaendert
 	m_modified |= WINDOWS_MODIFIED;
@@ -1014,16 +1002,11 @@ void Document::onButtonQuestInfoClicked()
 	if (!checkSubwindowsAllowed())
 		return;
 
+	getGUIState()->m_shown_windows ^= QUEST_INFO;
 	// Charakterinfo oeffnen wenn es gerade geschlossen ist und schliessen, wenn es geoeffnet ist
 	if (getGUIState()->m_shown_windows & QUEST_INFO)
 	{
-		getGUIState()->m_shown_windows &= ~QUEST_INFO;
-	}
-	else
-	{
 		getGUIState()->m_shown_windows &= ~(PARTY | CHARINFO);
-
-		getGUIState()->m_shown_windows |= QUEST_INFO;
 	}
 
 	// Geoeffnete Fenster haben sich geaendert
@@ -1035,16 +1018,7 @@ void Document::onButtonMinimapClicked()
 	if (!checkSubwindowsAllowed())
 		return;
 
-	if (getGUIState()->m_shown_windows & MINIMAP)
-	{
-		getGUIState()->m_shown_windows &= ~MINIMAP;
-	}
-	else
-	{
-		//getGUIState()->m_shown_windows &= ~(PARTY | CHARINFO);
-
-		getGUIState()->m_shown_windows |= MINIMAP;
-	}
+	getGUIState()->m_shown_windows ^= MINIMAP;
 
 	// Geoeffnete Fenster haben sich geaendert
 	m_modified |= WINDOWS_MODIFIED;
@@ -1056,15 +1030,7 @@ void Document::onButtonOptionsClicked()
 	if (!checkSubwindowsAllowed() && getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		return;
 
-	if (getGUIState()->m_shown_windows & OPTIONS)
-	{
-		getGUIState()->m_shown_windows &= ~OPTIONS;
-	}
-	else
-	{
-		getGUIState()->m_shown_windows |= OPTIONS;
-	}
-
+	getGUIState()->m_shown_windows ^= OPTIONS;
 	// Opened windows have changed.
 	m_modified |= WINDOWS_MODIFIED;
 }
@@ -1261,13 +1227,8 @@ std::string Document::getAbilityDescription(Action::ActionType ability)
 		// Beschreibung
 		out_stream << "\n" << Action::getDescription(ability);
 
-		// Gibt an, ob der Spieler die Faehigkeit besitzt
-		bool avlb = true;
 		if (!player->checkAbility(ability))
 		{
-			// Spieler besitzt Faehigkeit nicht
-			avlb = false;
-
 			PlayerBasicData* pdata = ObjectFactory::getPlayerData(player->getSubtype());
 			if (pdata !=0)
 			{
@@ -1453,20 +1414,6 @@ bool Document::onKeyPress(KeyCode key)
 		{
 			onButtonOpenChatClicked();
 
-		}
-		else if (dest == SHOW_MINIMAP)
-		{
-			if (getGUIState()->m_shown_windows & MINIMAP)
-			{
-				getGUIState()->m_shown_windows &= ~MINIMAP;
-			}
-			else
-			{
-				//getGUIState()->m_shown_windows &= ~(PARTY | QUEST_INFO);
-
-				getGUIState()->m_shown_windows |= MINIMAP;
-			}
-			m_modified |= WINDOWS_MODIFIED;
 		}
 		else if(dest == SHOW_CHATBOX_NO_TOGGLE)
 		{
@@ -1844,7 +1791,7 @@ void Document::writeSavegame(bool writeShortkeys)
 	}
 
 	// Savegame schreiben (ansynchron)
-	std::pair<Document*, CharConv*>* param = new std::pair<Document*, CharConv*>(this,save);
+	// std::pair<Document*, CharConv*>* param = new std::pair<Document*, CharConv*>(this,save);
 	
 	// Savegame schreiben
 	std::stringstream* stream = dynamic_cast<std::stringstream*> (static_cast<StdStreamConv*>(save)->getStream());
@@ -1884,6 +1831,7 @@ void Document::writeSavegame(bool writeShortkeys)
 	else
 	{
 		ERRORMSG("cannot open save file: %s",m_save_file.c_str());
+		m_save_file = "";
 	}
 	if (stream != 0)
 	{

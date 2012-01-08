@@ -109,8 +109,8 @@ void MinimapWindow::update()
 	if (region ==0)
 		return;
 	
-	WorldObjectMap * players = region->getPlayers();
-	WorldObjectMap::iterator it;
+	const WorldObjectMap& players = region->getPlayers();
+	WorldObjectMap::const_iterator it;
 	WorldObject* pl;
 
 	// Window counter
@@ -122,7 +122,7 @@ void MinimapWindow::update()
 	int cnt =0;
 	float relx, rely;
 	float alpha;
-	for (it = players->begin(); it != players->end(); ++it)
+	for (it = players.begin(); it != players.end(); ++it)
 	{
 		pl = it->second;
 		stream.str("");

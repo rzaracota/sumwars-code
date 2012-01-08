@@ -86,8 +86,23 @@ void  World::createWorld(bool server, int port, bool cooperative, int max_player
 
 	m_local_player =0;
 
-	m_events = new NetEventList;
+	m_events = new NetEventList();
 
+	m_data_reload_requests = 0;
+
+	m_timer[0] = 0;
+	m_timer[1] = 0;
+	m_timer[2] = 0;
+	m_timer[3] = 0;
+	m_timer[4] = 0;
+	m_timer[5] = 0;
+
+	m_timer_limit[0] = false;
+	m_timer_limit[1] = false;
+	m_timer_limit[2] = false;
+	m_timer_limit[3] = false;
+	m_timer_limit[4] = false;
+	m_timer_limit[5] = false;
 }
 
 
@@ -116,9 +131,19 @@ bool World::init(int port)
 		m_network->setPacketVersion(m_version);
 	}
 
-	m_timer[0] =0;
-	m_timer[1] =0;
-	m_timer[2] =0;
+	m_timer[0] = 0;
+	m_timer[1] = 0;
+	m_timer[2] = 0;
+	m_timer[3] = 0;
+	m_timer[4] = 0;
+	m_timer[5] = 0;
+
+	m_timer_limit[0] = false;
+	m_timer_limit[1] = false;
+	m_timer_limit[2] = false;
+	m_timer_limit[3] = false;
+	m_timer_limit[4] = false;
+	m_timer_limit[5] = false;
 
 	// Regionen aus XML Laden
 
@@ -487,9 +512,9 @@ void World::deleteWorld()
 
 World::~World()
 {
-
 	if (m_network != 0)
 	{
+		m_network->kill();
 		delete m_network;
 	}
 
@@ -1433,7 +1458,7 @@ void World::update(float time)
 	std::map<int,Region*>::iterator rrit;
 	for (rrit = m_regions.begin(); rrit != m_regions.end(); rrit++)
 	{
-		rrit->second->getNetEvents()->clear();
+		rrit->second->getNetEvents().clear();
 	}
 
 	if (m_network != 0)
@@ -1891,17 +1916,15 @@ void World::updatePlayers()
 				}
 
 				// NetEvents der Region in der der Spieler ist
-				bool ret;
 				if (reg !=0)
 				{
-					for (lt = reg->getNetEvents()->begin(); lt != reg->getNetEvents()->end(); ++lt)
+					for (lt = reg->getNetEvents().begin(); lt != reg->getNetEvents().end(); ++lt)
 					{
 						msg = m_network->createPacket();
 						DEBUGX(" send local event %i id %i data %i",lt->m_type,lt->m_id, lt->m_data);
 
 						header.toString(msg);
-						ret = writeNetEvent(reg,&(*lt),msg);
-
+						bool ret = writeNetEvent(reg,&(*lt),msg);
 						if (ret)
 						{
 							m_network->pushSlotMessage(msg,slot);

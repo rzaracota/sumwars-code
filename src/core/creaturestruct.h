@@ -617,6 +617,9 @@ struct CreatureSpeakText
 	 * \brief Default constructor
 	 */
 	CreatureSpeakText()
+	:	m_time(0.0),
+		m_displayed_time(0.0),
+		m_in_dialogue(false)
 	{
 		
 	}

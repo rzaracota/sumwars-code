@@ -24,6 +24,8 @@
 #include <OgreException.h>
 #include <OgreResourceGroupManager.h>
 
+using namespace std;
+
 OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	:Window(doc)
 {

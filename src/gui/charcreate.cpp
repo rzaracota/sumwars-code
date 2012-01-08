@@ -141,8 +141,7 @@ bool CharCreate::onClassSelected(const CEGUI::EventArgs& evt)
 
 	if (itm !=0)
 	{
-		StrListItem * sitm = (StrListItem *) itm;
-		DEBUGX("selected class %s", sitm->m_data.c_str());
+		DEBUGX("selected class %s", static_cast<StrListItem*>(sitm)->m_data.c_str());
 	}
 	
 	update();

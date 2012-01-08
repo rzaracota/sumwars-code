@@ -28,9 +28,11 @@ PathfindInfo::~PathfindInfo()
 }
 
 SearchField::SearchField(int dim)
+:	m_dim(dim),
+	m_pot(0),
+	m_block(0),
+	m_grad(0)
 {
-
-	m_dim = dim;
 	// Heap ist zum Beginn leer
 	m_heap_dimension=0;
 

@@ -129,7 +129,8 @@ std::string SumwarsHelper::getUpdatedResolutionString (const std::string& initia
 	std::string returnValue;
 	returnValue = initialString;
 
-	std::string sLeft, sRight;
+	//std::string sLeft; 
+	std::string sRight;
 	int nPos = returnValue.find (" ");
 	if (nPos == std::string::npos)
 	{
@@ -137,20 +138,20 @@ std::string SumwarsHelper::getUpdatedResolutionString (const std::string& initia
 		return "";
 	}
 
-	sLeft = returnValue.substr (0, nPos);
+	//sLeft = returnValue.substr (0, nPos);
 	sRight= returnValue.substr (nPos + 3); // + 3 chars for " x "
 	nPos = sRight.find (" ");
-	std::string sAux;
+	//std::string sAux;
 
 	if (nPos == std::string::npos)
 	{
 		// we don't have a colour depth.
-		sAux = sRight;
+		//sAux = sRight;
 		sRight = "";
 	}
 	else
 	{
-		sAux = sRight.substr(0, nPos);
+		//sAux = sRight.substr(0, nPos);
 		sRight = sRight.substr(nPos);
 	}
 
@@ -164,9 +165,8 @@ std::string SumwarsHelper::getUpdatedResolutionString (const std::string& initia
 
 std::string SumwarsHelper::getNativeResolutionString()
 {
-	int winWidth  = 800;
-	int winHeight = 600;
-	int xRes, yRes;
+	int xRes = 800;
+	int yRes = 600;
 
 
 #if defined (_WIN32)
@@ -181,7 +181,7 @@ std::string SumwarsHelper::getNativeResolutionString()
 	XRRScreenSize *xrrs = XRRSizes(dpy, 0, &num_sizes);
 
 	XRRScreenConfiguration *conf = XRRGetScreenInfo(dpy, root);
-	short original_rate          = XRRConfigCurrentRate(conf);
+	//short original_rate          = XRRConfigCurrentRate(conf);
 	SizeID original_size_id      = XRRConfigCurrentConfiguration(conf, &original_rotation);
 
 	xRes = xrrs[original_size_id].width;

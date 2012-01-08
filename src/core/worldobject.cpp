@@ -22,21 +22,19 @@
 
 
 WorldObject::WorldObject( int id)
-	: GameObject(id)
+:	GameObject(id),
+	m_race(),
+	m_fraction(Fraction::NOFRACTION),
+	m_interaction_flags(0),
+	m_name(),
+	m_grid_location(),
+	m_animation(),
+	m_animation_time(1.0),
+	m_animation_elapsed_time(0.0),
+	m_animation_repeat(false)
 {
 	setBaseType(WORLDOBJECT);
 	init();
-	
-	m_fraction = Fraction::NOFRACTION;
-	m_race = "";
-	m_interaction_flags =0;
-	
-	m_animation ="";
-	m_animation_time =1;
-	m_animation_elapsed_time = 0;
-	m_animation_repeat =false;
-	
-	m_name = "";
 }
 
 bool WorldObject::isCreature()

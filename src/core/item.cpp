@@ -132,20 +132,26 @@ bool WeaponAttr::setValue(std::string valname)
 }
 
 ItemBasicData::ItemBasicData()
+:	m_useup_effect(0),
+	m_equip_effect(0),
+	m_weapon_attr(0),
+	m_level_req(0),
+	m_char_req("all"),
+	m_subtype(),
+	m_type(Item::NOITEM),
+	m_size(Item::SIZE_NONE),
+	m_price(0),
+	m_min_enchant(0),
+	m_max_enchant(0),
+	m_enchant_multiplier(0),
+	m_name(),
+	m_drop_level(0),
+	m_drop_probability(0.0)
 {
-	m_useup_effect=0;
-	m_equip_effect=0;
-	m_weapon_attr=0;
-	m_level_req = 0;
-	m_char_req = "all";
-
 	for (int i=0;i<NUM_MAGIC_MODS;i++)
 	{
 		m_modchance[i] =0;
 	}
-	m_min_enchant =0;
-	m_max_enchant =0;
-
 }
 
 ItemBasicData::~ItemBasicData()
@@ -387,30 +393,27 @@ void ItemBasicData::writeToXML(TiXmlNode* node)
 }
 
 Item::Item(int id)
+:	m_subtype(),
+	m_id(0),
+	m_type(NOITEM),
+	m_size(SMALL),
+	m_price(0),
+	m_useup_effect(0),
+	m_equip_effect(0),
+	m_weapon_attr(0),
+	m_level_req(0),
+	m_char_req("all"),
+	m_magic_power(0),
+	m_rarity(NORMAL)
 {
-	if (id ==0)
-	{
-		if (World::getWorld() !=0)
-		{
-			m_id = World::getWorld()->getValidId();
-		}
-		else
-		{
-			m_id =0;
-		}
-	}
-	else
+	if (id!=0)
 	{
 		m_id = id;
 	}
-	m_useup_effect=0;
-	m_equip_effect=0;
-	m_weapon_attr=0;
-	m_level_req = 0;
-	m_magic_power =0;
-	m_rarity = NORMAL;
-	m_char_req = "all";
-	m_size = SMALL;
+	else if (World::getWorld() !=0)
+	{
+		m_id = World::getWorld()->getValidId();
+	}
 	
 	m_magic_mods.reset();
 }

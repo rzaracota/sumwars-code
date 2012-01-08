@@ -112,7 +112,7 @@ struct MovableObjectInfo
 struct ActionRenderInfo
 {
 	ActionRenderInfo()
-	: m_renderparts(), m_new_objects()
+	: m_renderparts(), m_new_objects(), m_time(0.0)
 	{
 
 	}
