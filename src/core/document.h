@@ -133,6 +133,7 @@ class Document
  		MESSAGE = 0x20000,
 		SAVE_EXIT = 0x40000,
 		CREDITS = 0x80000,
+		CONTROL_PANEL = 0x100000
 	};
 
 	

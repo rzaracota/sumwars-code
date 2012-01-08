@@ -212,6 +212,15 @@ void SavegameList::update()
 	btn->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_absdim(height)));
 }
 
+void SavegameList::selectDefaultSavegame()
+{
+	std::string savegame = Options::getInstance()->getDefaultSavegame();
+	if (savegame != "")
+	{
+		m_document->setSaveFile(savegame.c_str());
+	}
+}
+
 void SavegameList::updateTranslation()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
