@@ -13,8 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __SUMWARS_GUI_SAVEGAMELIST_H__
-#define __SUMWARS_GUI_SAVEGAMELIST_H__
+#ifndef SAVEGAMELIST_H
+#define SAVEGAMELIST_H
 
 #include "window.h"
 
@@ -39,6 +39,11 @@ class SavegameList : public Window
 		 * \brief aktualisiert den Inhalt des Fensters
 		 */
 		virtual void update();
+		
+		/**
+		 * \brief selects the default savegame stored in the options
+		 */
+		void selectDefaultSavegame();
 		
 		/**
 		 * \fn virtual void updateTranslation
@@ -101,4 +106,4 @@ class SavegameList : public Window
 
 };
 
-#endif // __SUMWARS_GUI_SAVEGAMELIST_H__
+#endif

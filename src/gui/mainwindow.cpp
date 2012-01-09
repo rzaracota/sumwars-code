@@ -450,6 +450,17 @@ void MainWindow::update(float time)
 				static_cast<ItemWindow*>(m_sub_windows["ControlPanel"])->setSilent(false);
 			}
 			
+			// show/hide control panel
+			CEGUI::FrameWindow* control_panel = (CEGUI::FrameWindow*) win_mgr.getWindow("ControlPanel");
+			if (wflags & Document::CONTROL_PANEL)
+			{
+				control_panel->setVisible(true);
+			}
+			else
+			{
+				control_panel->setVisible(false);
+			}
+			
 			// QuestInfo anzeigen wenn entsprechendes Flag gesetzt
 			CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) win_mgr.getWindow("QuestInfo");
 			if (wflags & Document::QUEST_INFO)
@@ -1709,7 +1720,7 @@ void MainWindow::updateItemInfo()
 		std::string propnew, propold;
 		
 		Vector tpos,pos;
-		for (it = itms.begin(); it != itms.end(); ++it)
+		for (it = itms.begin(); it != itms.end();++it)
 		{
 			
 			di = it->second;
@@ -2801,9 +2812,11 @@ void MainWindow::setReadyToStart(bool ready)
 	
 	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "LoadRessourcesProgressBar"));
 	bar->setVisible(!ready);
-
+	
 	// we have finished loading so we will simulate the click to get straight in to the main menu
 	m_document->onStartScreenClicked();
+
+	
 }
 
 void MainWindow::setRessourceLoadingBar(float percent)

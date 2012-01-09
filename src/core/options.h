@@ -13,8 +13,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __SUMWARS_CORE_OPTIONS_H__
-#define __SUMWARS_CORE_OPTIONS_H__
+#pragma once
 
 #include <string>
 #include <vector>
@@ -493,7 +492,22 @@ class Options
 		{
 			m_shadow_mode = newMode;
 		}
-
+		
+		/**
+		 * \brief Get the savegame chosen at startup
+		 */
+		std::string getDefaultSavegame() const
+		{
+			return m_default_savegame;
+		}
+		
+		/**
+		 * \brief Set the savegame chosen at startup
+		 */
+		void setDefaultSavegame(std::string savegame)
+		{
+			m_default_savegame = savegame;
+		}
 
 		/**
 		 * \brief Get the RTSS usage.
@@ -633,7 +647,10 @@ class Options
 		 * \brief The available display resolutions.
 		 */
 		std::map <std::string, std::vector <std::string> > m_available_resolutions;
+		
+		/**
+		 * \brief default savegame chosen at the start
+		 */
+		std::string m_default_savegame;
 
 };
-
-#endif // __SUMWARS_CORE_OPTIONS_H__

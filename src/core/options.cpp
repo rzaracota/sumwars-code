@@ -92,6 +92,7 @@ void Options::init()
 	m_show_console_window = true;
 	m_shadow_mode = SM_NONE;
 	m_use_rtss = true;
+	m_default_savegame = "";
 }
 
 Options* Options::getInstance()
@@ -242,6 +243,12 @@ bool Options::readFromFile(const std::string& filename)
 							m_debug_options[attr->Name()] = attr->Value();
 						}
 					}
+					else if (!strcmp(child->Value(), "Savegame"))
+					{
+						std::string savegame="";
+						attr.getString("file", savegame);
+						setDefaultSavegame(savegame);
+					}
 					else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 					{
 						WARNING("unexpected element in options.xml: %s",child->Value());
@@ -319,6 +326,10 @@ bool Options::writeToFile(const std::string& filename)
 	element->SetAttribute("host",getServerHost().c_str());
 	element->SetAttribute("port",getPort());
 	element->SetAttribute("max_players",getMaxNumberPlayers());
+	
+	element = new TiXmlElement( "Savegame" );
+	root->LinkEndChild(element);
+	element->SetAttribute("file",getDefaultSavegame().c_str());
 	
 	if (!m_debug_options.empty())
 	{

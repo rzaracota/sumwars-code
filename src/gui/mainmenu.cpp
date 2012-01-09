@@ -203,6 +203,9 @@ bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 	{
         createScene();
 		m_gameCamera = root->getAutoCreatedWindow()->getViewport(0)->getCamera();
+		
+		// we need a scene to display the character, so set the savegame now
+		m_saveGameList->selectDefaultSavegame();
 	}
 	createSceneLights ();
 	m_saveGameList->update();
