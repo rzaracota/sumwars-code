@@ -32,7 +32,7 @@ void MusicManager::play(std::string file)
 		m_musicfile = file;
 		m_is_playing = true;
 	}
-	catch (std::string error)
+	catch (std::string & error)
 	{
 		ERRORMSG("Ogg errormessage: %s",error.c_str());
 	}
@@ -79,7 +79,7 @@ void MusicManager::stop()
 		m_is_playing = false;
 		m_ogg_stream.release();
 	}
-	catch (std::string msg)
+	catch (std::string & msg)
 	{
 		
 	}

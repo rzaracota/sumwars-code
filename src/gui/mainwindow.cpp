@@ -196,7 +196,7 @@ bool MainWindow::setupMainMenu()
 		
 	// Verbinden mit dem Document
 	}
-	catch (CEGUI::Exception e)
+	catch (CEGUI::Exception & e)
 	{
 		ERRORMSG("Error message: %s",e.getMessage().c_str());
 	}
@@ -781,7 +781,7 @@ bool MainWindow::setupGameScreen()
 		label->setVisible(false);
 		label->moveToBack();
 	}
-	catch (CEGUI::Exception e)
+	catch (CEGUI::Exception & e)
 	{
 		ERRORMSG("Error message: %s",e.getMessage().c_str());
 		return false;
