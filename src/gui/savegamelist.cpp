@@ -296,7 +296,7 @@ bool SavegameList::onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
 	
 	// Get the save file to remove.
 	std::string saveFile =  m_document->getSaveFile();
-	if (saveFile.length () <= 0)
+	if (saveFile.empty())
 	{
 		return false;
 	}

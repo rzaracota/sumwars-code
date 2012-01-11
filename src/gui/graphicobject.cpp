@@ -684,7 +684,7 @@ void GraphicObject::updateAttachedAction(AttachedAction& attchaction, std::strin
 			{
 				relpercent = (percent - (*jt)->m_start_time) / ( (*jt)->m_end_time -(*jt)->m_start_time);
 				updateRenderPart(*jt, relpercent);
-				jt++;
+				++jt;
 			}
 		}
 		

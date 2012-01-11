@@ -297,7 +297,7 @@ bool World::loadGameData()
 			// If regions are already present, reload the events, 
 			// that are copied from RegionData structures
 			std::map<int,Region*>::iterator rit;
-			for (rit = m_regions.begin(); rit != m_regions.end(); rit++)
+			for (rit = m_regions.begin(); rit != m_regions.end(); ++rit)
 			{
 				Region* region = rit->second;
 				
@@ -331,7 +331,7 @@ void World::deleteGameData()
 		// Clear copied events from Regions
 		// as these events lua code pointers point into the RegionData deleted now
 		std::map<int,Region*>::iterator rit;
-		for (rit = m_regions.begin(); rit != m_regions.end(); rit++)
+		for (rit = m_regions.begin(); rit != m_regions.end(); ++rit)
 		{
 			rit->second->deleteCopiedEvents();
 		}
@@ -496,7 +496,7 @@ void World::updateLogins()
 		}
 		else
 		{
-			i++;
+			++i;
 		}
 
 	}
@@ -519,7 +519,7 @@ World::~World()
 	}
 
 	std::map<int,Region*>::iterator rit;
-	for (rit = m_regions.begin(); rit != m_regions.end(); rit++)
+	for (rit = m_regions.begin(); rit != m_regions.end(); ++rit)
 	{
 		delete rit->second;
 	}
@@ -826,7 +826,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 					header.toString(msg);
 
 					WorldObjectMap::iterator it;
-					for (it = m_player_slots->begin(); it != m_player_slots->end(); it++)
+					for (it = m_player_slots->begin(); it != m_player_slots->end(); ++it)
 					{
 						if (it->second == player)
 						{
@@ -1409,7 +1409,7 @@ void World::update(float time)
 
 	DEBUGX("update %f",time);
 	std::map<int,Region*>::iterator rit;
-	for (rit = m_regions.begin(); rit != m_regions.end(); rit++)
+	for (rit = m_regions.begin(); rit != m_regions.end(); ++rit)
 	{
 		rit->second->update(time);
 	}
@@ -1456,7 +1456,7 @@ void World::update(float time)
 	m_events->clear();
 
 	std::map<int,Region*>::iterator rrit;
-	for (rrit = m_regions.begin(); rrit != m_regions.end(); rrit++)
+	for (rrit = m_regions.begin(); rrit != m_regions.end(); ++rrit)
 	{
 		rrit->second->getNetEvents().clear();
 	}
