@@ -135,6 +135,17 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene)
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.99f), cegui_reldim( 0.99f)));
 	label->setWantsMultiClickEvents(false);
+	
+	CEGUI::PushButton* btn;
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button","DialogueSkipAllButton"));
+	lower_bar->addChildWindow(btn);
+	btn->setProperty("InheritsAlpha", "false");
+	btn->setAlwaysOnTop(true);
+	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.82), cegui_reldim( 0.82)));
+	btn->setSize(CEGUI::UVector2(cegui_reldim(0.06f), cegui_reldim( 0.18f)));
+	btn->setText("Skip");
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DialogueWindow ::onTextClicked, this));
+	
 }
 
 void DialogueWindow::update()
@@ -166,6 +177,8 @@ void DialogueWindow::update()
 	
 	if (bar_vis)
 	{
+		CEGUI::Window* skipButton = win_mgr.getWindow("DialogueSkipAllButton");
+		
 		CEGUI::Window* wimage;
 		CEGUI::Window* wname;
 		CEGUI::Window* wtext;
@@ -173,6 +186,7 @@ void DialogueWindow::update()
 		
 		if (dia != 0)
 		{
+			skipButton->setVisible(true);
 			// Schleife fuer die moeglichen Sprecher eines Dialogs
 			std::string image, name, text;
 			
@@ -331,6 +345,7 @@ void DialogueWindow::update()
 				wname->setVisible(false);
 				wtext->setVisible(false);
 			}
+			skipButton->setVisible(false);
 		}
 	}
 
@@ -755,7 +770,17 @@ bool DialogueWindow::onAnswerClicked(const CEGUI::EventArgs& evt)
 
 bool DialogueWindow::onTextClicked(const CEGUI::EventArgs& evt)
 {
-	m_document->onSkipDialogueTextClicked();
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	const CEGUI::MouseEventArgs& we =
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
+	CEGUI::Window* btn = win_mgr.getWindow("DialogueSkipAllButton");
+	bool skipAll = false;
+	if (we.window == btn)
+	{
+		skipAll = true;
+	}
+	
+	m_document->onSkipDialogueTextClicked(skipAll);
 	return true;
 }
 

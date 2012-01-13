@@ -1477,7 +1477,9 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 				dia = getDialogue();
 				if (dia !=0)
 				{
-					dia->skipText(getId());
+					// id == -1 is skipAll
+					bool skipAll = (command->m_id == -1);
+					dia->skipText(getId(), skipAll);
 				}
 			}
 			break;

@@ -783,19 +783,22 @@ void Dialogue::update(float time)
 			if (!m_active)
 				return;
 			
-			m_player_skips.clear();
+			// initialize with IDs of players who want to skip all
+			m_player_skips = m_player_all_skips;
 			
 			// Aenderung eingetreten
 			WorldObject* wo=0;
 			Creature* cr=0;
+			
 			if (!m_started)
 			{
+				// Clear the last spoken text
 				stime -= cst->m_time;
 
-				// aktuellen Sprecher ermitteln
+				// get the speaker
 				wo = m_region->getObject( getSpeaker(m_speech.front().first));
 
-				// fuer diesen Specher aktuellen Text zuruecksetzen
+				// clear the text
 				if (wo !=0 && wo->isCreature())
 				{
 					cr = static_cast<Creature*>(wo);
@@ -806,7 +809,7 @@ void Dialogue::update(float time)
 			}
 			m_started = false;
 
-			// Naechsten zulaessigen Text suchen
+			// search for the next valid text
 			cst =0;
 			int id = 0;
 			Position pos=UNKNOWN;
@@ -930,8 +933,13 @@ void Dialogue::update(float time)
 					continue;
 				}
 				
-				
-
+				// skip the current text, if required
+				if (checkSkipCurrentText())
+				{
+					m_speech.pop_front();
+					cst =0;
+					continue;
+				}
 				
 				// Falls die Position des Spielers im Dialog noch unbekannt: Position berechnen
 				pos = m_speaker_state[id].m_position;
@@ -944,12 +952,13 @@ void Dialogue::update(float time)
 				{
 					continue;
 				}
-				
-				
 			}
 
 			if (cst ==0 || m_speech.empty())
 			{
+				// no further text found
+				// if there is a question remaining, activate it, 
+				// else, end dialogue
 				if (m_question != 0)
 				{
 					if (m_question->m_active == false)
@@ -1171,23 +1180,40 @@ void Dialogue::fromString(CharConv* cv)
 	}
 }
 
-void Dialogue::skipText(int id)
+void Dialogue::skipText(int id, bool skipAll)
 {
 	m_player_skips.insert(id);
+	if (skipAll)
+	{
+		m_player_all_skips.insert(id);
+	}
+	
+	checkSkipCurrentText();
+}
+
+
+bool Dialogue::checkSkipCurrentText()
+{
 	DEBUGX("players %i skips %i",m_nr_players, m_player_skips.size());
 	if ((int) m_player_skips.size() == m_nr_players)
 	{
-		// aktuellen Text ueberspringen
+		// skip current text
 		CreatureSpeakText* cst;
 		if (!m_speech.empty())
 		{
 			cst = &(m_speech.front().second);
-			// Fragen und Handel kann nicht so uebersprungen werden
+			// do not skip questions or trade
 			if ((m_question !=0 && m_question->m_active) || m_trade)
-				return;
+			{
+				// also reset the skiplist
+				m_player_all_skips.clear();
+				m_player_skips.clear();
+				return false;
+			}
 			
 			cst->m_time =0;
+			return true;
 		}
 	}
+	return false;
 }
-
