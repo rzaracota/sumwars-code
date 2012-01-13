@@ -32,10 +32,7 @@
 
 #include <list>
 #include <exception>
-#include <algorithm>
-#include <cctype>
 
-#include <OgreMaterialManager.h>
 #include <OgreMaterial.h>
 #include <OgreSceneManager.h>
 #include <OgreRenderWindow.h>
@@ -111,57 +108,7 @@ ShaderManager::ShaderManager (Ogre::RTShader::ShaderGenerator* shaderMgrPtr)
 void ShaderManager::init()
 {
 	DEBUG ("Shader Manager is initializing...");
-#if 0
-	// We normally want to check base materials
-	std::list<std::string> materialsToCheck;
-	materialsToCheck.push_back("/base/simple");
-	materialsToCheck.push_back("/base/normalmap");
-	materialsToCheck.push_back("/base/normalmap/specular");
 
-	bool supported;
-
-	// Iterate schemes from best to worst
-	for (std::map<GraphicsLevel, std::string>::reverse_iterator I = mGraphicSchemes.rbegin(); I != mGraphicSchemes.rend(); ++I) 
-	{
-		Ogre::MaterialManager::getSingleton().setActiveScheme(I->second);
-
-		supported = true;
-		for (std::list<std::string>::iterator J = materialsToCheck.begin(); J != materialsToCheck.end(); ++J) 
-		{
-			supported &= checkMaterial(*J, I->second);
-			// Break when found first unsupported material, no need to check others
-			if (!supported) 
-			{
-				break;
-			}
-		}
-
-		// Found some supported sheme, ok
-		if (supported) 
-		{
-			mBestGraphicsLevel = I->first;
-			break;
-		}
-	}
-
-	// No scheme is supported, something wrong with graphics
-	if (!supported) 
-	{
-		LOGGER(Log::LOGLEVEL_INFO, "No schemes are supported");
-		throw "No schemes is supported, something wrong with graphics";
-	}
-
-	// Don't start in experimental level
-	mGraphicsLevel = (mBestGraphicsLevel < LEVEL_EXPERIMENTAL) ? mBestGraphicsLevel : LEVEL_HIGH;
-
-	// TODO adapt to sumwars
-	/*GraphicsLevel configLevel = getLevelByName(std::string(EmberServices::getSingleton().getConfigService().getValue("graphics", "level")));
-	if (configLevel <= mBestGraphicsLevel) {
-		mGraphicsLevel = configLevel;
-	}
-
-	setGraphicsLevel(mGraphicsLevel);*/
-#endif
 	// Force currently to the "high" quality settings.
 	mBestGraphicsLevel = LEVEL_HIGH;
 	mGraphicsLevel = LEVEL_HIGH;
@@ -171,36 +118,6 @@ void ShaderManager::init()
 bool ShaderManager::checkMaterial(const std::string& materialName, const std::string& schemeName)
 {
 	return true;
-#if 0
-	// OGRE scheme is switched in caller
-	Ogre::MaterialPtr material = static_cast<Ogre::MaterialPtr>(Ogre::MaterialManager::getSingleton().load(materialName, "General"));
-	if (material->getNumSupportedTechniques() == 0) 
-	{
-		std::stringstream str;
-		str << "The material '" << material->getName() << "' has no supported techniques with scheme " << schemeName << ". The reason for this is: \n" << material->getUnsupportedTechniquesExplanation();
-		LOGGER(Log::LOGLEVEL_INFO, str.str().c_str());
-		str.str("");
-		return false;
-	}
-
-	std::stringstream str;
-	str << "The material '" << material->getName() << "' has " << material->getNumSupportedTechniques() << " supported techniques out of " << material->getNumTechniques();
-	LOGGER(Log::LOGLEVEL_INFO, str.str().c_str());
-	str.str("");
-
-	// Check that we use desired scheme, but not fallbacked to default
-	if (material->getBestTechnique()->getSchemeName() != schemeName) {
-		str << "The material '" << material->getName() << "' has best supported scheme " << material->getBestTechnique()->getSchemeName() << ". Was looking for " << schemeName;
-		LOGGER(Log::LOGLEVEL_INFO, str.str().c_str());
-		str.str("");
-		return false;
-	}
-
-	str << "The material '" << material->getName() << "' supported with scheme " << schemeName;
-	LOGGER(Log::LOGLEVEL_INFO, str.str().c_str());
-	str.str("");
-	return true;
-#endif
 }
 
 ShaderManager::~ShaderManager()
@@ -277,8 +194,6 @@ ShaderManager::GraphicsLevel ShaderManager::setGraphicsLevel(ShaderManager::Grap
 	std::stringstream str;
 	str << "Using graphics level " << mGraphicSchemes[newLevel];
 	LOGGER(Log::LOGLEVEL_INFO, str.str().c_str());
-	
-	//Ogre::MaterialManager::getSingleton().setActiveScheme(mGraphicSchemes[newLevel]);
 	
 	// Let the already set RTSS material scheme to be used. TODO: merge logic into this class only (remove from all other places)
 	//Ogre::RenderWindow* window = Ogre::Root::getSingleton().getAutoCreatedWindow();

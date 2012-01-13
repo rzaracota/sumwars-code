@@ -389,8 +389,9 @@ void GraphicManager::buildStaticGeometry()
 		
 		
 		Ogre::StaticGeometry* static_geom = m_scene_manager->getStaticGeometry("StaticObjects");
+		// Activate shadow cast for static geometry. This needs to be called before the build command otherwise, STENCIL shadows (CPU based) would ignore it.
+		static_geom->setCastShadows (true);
 		static_geom->build();
-		static_geom->setCastShadows (true);// Augustin Preda, 2012.01.08: activated shadow cast for static geometry by default.
 	}
 	
 }

@@ -680,27 +680,11 @@ msgid "Off"
 msgstr ""
 
 #: ../src/gui/optionswindow.cpp:292
-msgid "CPU based (method 1)"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:293
-msgid "CPU based (method 2)"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:294
-msgid "GPU based (simple method 1)"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:295
-msgid "GPU based (simple method 2)"
+msgid "CPU based"
 msgstr ""
 
 #: ../src/gui/optionswindow.cpp:296
-msgid "GPU shader based (method 1)"
-msgstr ""
-
-#: ../src/gui/optionswindow.cpp:297
-msgid "GPU shader based (method 2)"
+msgid "GPU (shader) based"
 msgstr ""
 
 #: ../src/gui/optionswindow.cpp:456
