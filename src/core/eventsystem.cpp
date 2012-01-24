@@ -1963,7 +1963,7 @@ int EventSystem::insertPlayerItem(lua_State *L)
 			{
 				equip = lua_toboolean(L,2);
 			}
-			pl->insertItem(m_item,true,equip);
+			pl->insertItem(m_item,equip,true);
 			m_item_in_game = true;
 		}
 	}
