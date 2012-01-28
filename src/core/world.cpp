@@ -17,6 +17,8 @@
 #include "contenteditor.h"
 #endif
 
+#include "config.h"
+
 #include "world.h"
 #include "player.h"
 #include "mapgenerator.h"
@@ -934,6 +936,14 @@ void World::handleSavegame(CharConv *cv, int slot)
 	// Spieler ist lokal
 	if (slot == LOCAL_SLOT)
 	{
+		// perhaps set the random seed based on player information ??
+		m_base_random_seed = 1000;
+#ifdef  SUMWARS_RANDOM_REGIONS 
+		m_base_random_seed = time(NULL);
+		DEBUGX("random region seed %i",m_base_random_seed);
+#endif
+		Random::setRandomSeed();
+		
 		m_local_player = pl;
 
 		if (!m_server)

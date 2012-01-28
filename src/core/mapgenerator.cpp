@@ -302,6 +302,12 @@ void TemplateMap::print()
 
 Region* MapGenerator::createRegion(RegionData* rdata)
 {
+	// set Random seed based on the region information
+	// surely, we need a better hash funcion
+	unsigned int seed = World::getWorld()->getBaseRandomSeed() + rdata->m_id*84859;
+	unsigned int oldseed = Random::randi(INT_MAX);
+	Random::setRandomSeed(seed);
+	
 	// temporaere Daten fuer die Erzeugung der Region
 	MapGenerator::MapData mdata;
 
@@ -389,6 +395,10 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 
 	// Speicher freigeben
 	delete mdata.m_base_map;
+	
+	// Zufallszahlengenerator zuruecksetzen
+	Random::setRandomSeed(oldseed);
+	
 	return mdata.m_region;
 }
 
