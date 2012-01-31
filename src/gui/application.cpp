@@ -958,6 +958,10 @@ bool Application::initCEGUI()
 	
 	// Bootstrap the CEGUI System
 	CEGUI::OgreRenderer::bootstrapSystem();
+
+	CEGUI::XMLParser* parser = CEGUI::System::getSingleton().getXMLParser();
+	if (parser->isPropertyPresent("SchemaDefaultResourceGroup"))
+		parser->setProperty("SchemaDefaultResourceGroup", "GUI_XML_schemas");
     
 	// Scheme laden
 	CEGUI::SchemeManager::getSingleton().create((CEGUI::utf8*)"TaharezLook.scheme", (CEGUI::utf8*)"GUI");
