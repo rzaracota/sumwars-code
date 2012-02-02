@@ -201,7 +201,7 @@ bool MainWindow::setupMainMenu()
 		
 	// Verbinden mit dem Document
 	}
-	catch (CEGUI::Exception e)
+	catch (CEGUI::Exception & e)
 	{
 		ERRORMSG("Error message: %s",e.getMessage().c_str());
 	}
@@ -786,7 +786,7 @@ bool MainWindow::setupGameScreen()
 		label->setVisible(false);
 		label->moveToBack();
 	}
-	catch (CEGUI::Exception e)
+	catch (CEGUI::Exception & e)
 	{
 		ERRORMSG("Error message: %s",e.getMessage().c_str());
 		return false;
@@ -1807,7 +1807,7 @@ void MainWindow::updateItemInfo()
 				
 				// iterieren ueber die Liste der Gegenstaende, die bisher in der Zeile liegen
 				// (genauer: die Luecken zwischen den Labels)
-				for (jt = itempos[row].begin(); jt != itempos[row].end(); jt++)
+				for (jt = itempos[row].begin(); jt != itempos[row].end(); ++jt)
 				{
 					rbound = jt->first;
 					
@@ -2012,7 +2012,7 @@ void MainWindow::updatePartyInfo()
 		
 		std::set<int>::iterator it;
 		// Schleife ueber die Mitglieder der Party des Spielers
-		for (it =  party->getMembers().begin(); it!= party->getMembers().end(); it++)
+		for (it =  party->getMembers().begin(); it!= party->getMembers().end(); ++it)
 		{
 			// eigenen Spieler ueberspringen
 			if (*it == player->getId())
@@ -2390,11 +2390,11 @@ void MainWindow::updateMusic()
 		
 		// zufaellig einen Track der Region auswaehlen
 		Region* reg = m_document->getLocalPlayer()->getRegion();
-		source = "";
+		
 		if (reg != 0)
 		{
-			std::list<MusicTrack> tracks = reg->getMusicTracks();
-			std::list<MusicTrack>::iterator it;
+			const std::list<MusicTrack> & tracks = reg->getMusicTracks();
+			std::list<MusicTrack>::const_iterator it;
 			
 			if (!tracks.empty())
 			{
@@ -2403,8 +2403,8 @@ void MainWindow::updateMusic()
 				it = tracks.begin();
 				while (nr > 0 )
 				{
-					it++;
-					nr --;
+					++it;
+					--nr;
 				}
 				
 				source = *it;
@@ -2412,7 +2412,7 @@ void MainWindow::updateMusic()
 		}
 	}
 	
-	if (source == "")
+	if (source.empty())
 		return;
 	
 	// Titelmusik laden

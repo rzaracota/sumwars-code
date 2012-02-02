@@ -27,6 +27,7 @@ OPTION(SUMWARS_UPDATE_HG_REVISION "Option to enable or disable automatic revisio
 OPTION(SUMWARS_POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" OFF)
 OPTION(SUMWARS_STANDALONE_MODE "(Highly recommended for deployment on Windows and MacOSX) In case this is enabled, all paths (share, doc, bin) are set to be relative" OFF)
 OPTION(SUMWARS_PORTABLE_MODE "In case this is enabled, save files and config files are kept in application directory instead of home folders / user folders" OFF)
+OPTION(SUMWARS_RANDOM_REGIONS "Regions are randomized if enabled. All regions are always the same if you leave this disabled (useful for developers)." ON)
 
 IF(SUMWARS_UPDATE_HG_REVISION)
     FIND_PROGRAM(Mercurial_EXECUTABLE hg)

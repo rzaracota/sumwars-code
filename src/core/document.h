@@ -555,10 +555,10 @@ class Document
 	void onSwapEquip();
 
 	/**
-	 * \fn void onSkipDialogueTextClicked()
-	 * \brief Behandelt Click auf Dialogtext
+	 * \brief Called on click during Dialogue/Cutscene
+	 * \param skipAll if true, all text parts till the next question will be skipped
 	 */
-	void onSkipDialogueTextClicked();
+	void onSkipDialogueTextClicked(bool skipAll=false);
 
 	/**
 	 * \fn void onLeftMouseButtonClick (Vector pos)

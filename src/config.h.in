@@ -22,5 +22,6 @@
 #endif
 
 #cmakedefine SUMWARS_PORTABLE_MODE
+#cmakedefine SUMWARS_RANDOM_REGIONS
 
 #endif // __SUMWARS_CONFIG_H__

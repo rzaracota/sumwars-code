@@ -762,9 +762,10 @@ bool Monster::takeDamage(Damage* damage)
 
 	if (atk)
 	{
+		// exception: monsters chasing a player due to taunt wont alarm others
 		if (m_ai.m_mod_time[TAUNT]<=0 || m_ai.m_chase_player_id==0)
 		{
-			// umliegende Monster alarmieren
+			// alarm surrounding monsters
 			if (m_ai.m_chase_player_id ==0)
 			{
 				Shape shape = *(getShape());

@@ -72,46 +72,41 @@ CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> list, 
     float textHeight = 0.0f;
     CEGUI::Size screenSize = CEGUI::System::getSingleton().getRenderer()->getDisplaySize();
 
-    added = "";
+    added.clear();
 	size_t count = 0;
 	
-    std::list<std::string>::iterator iter = list.begin();
-    while (iter != list.end())
+    for (std::list<std::string>::iterator iter = list.begin();
+		iter != list.end();
+		++iter)
     {
-		std::string s = *iter;
+		std::string & s = *iter;
 		
-		if(s.size() == 0)
+		if (!s.empty())
 		{
-			iter++;
-			continue;
-		}
-		std::string::size_type word_pos = 0;
-		while ( word_pos!=std::string::npos )
-		{
-			word_pos = s.find ( LINE_ENDING, word_pos );
-			if ( word_pos != std::string::npos )
+			std::string::size_type word_pos = 0;
+			while ( word_pos!=std::string::npos )
 			{
-				++count;
+				word_pos = s.find ( LINE_ENDING, word_pos );
+				if ( word_pos != std::string::npos )
+				{
+					++count;
 
-				// start next search after this word
-				word_pos += 2;
+					// start next search after this word
+					word_pos += 2;
+				}
 			}
-		 }
-		
-		
-		added += s + "\n";
+			
+			added += s + '\n';
 
-        float tempwidth = font->getTextExtent(stripColours(s).c_str()) ;
-        if (tempwidth > textWidth)
-            textWidth = tempwidth;
-
-        iter++;
+			float tempwidth = font->getTextExtent(stripColours(s).c_str()) ;
+			if (tempwidth > textWidth)
+				textWidth = tempwidth;
+		}
     }
-	size_t size = list.size();
 
 	// increase the counter intil we have at least one line break more than we have text
-	while(count <= size)  
-		count++;
+	if (count <= list.size())  
+		count = list.size() + 1;
 
 	textHeight = count * (font->getLineSpacing());
 

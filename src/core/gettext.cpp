@@ -127,13 +127,9 @@ const char* Gettext::getLocale()
 void Gettext::setLocale(const char* loc)
 {
     std::string locale;
-    if (loc != 0)
+    if (loc)
     {
          locale = loc;
-    }
-    else
-    {
-        locale = "";
     }
 
     DEBUGX("set new language %s",locale.c_str());
@@ -141,16 +137,16 @@ void Gettext::setLocale(const char* loc)
 	if (locale != m_locale)
 	{
 #ifdef WIN32
-		if (locale.length () == 0)
+		if (locale.empty())
 		{
-			char loc[100];
+			char tmp[100];
 			GetLocaleInfo(LOCALE_USER_DEFAULT,
 						  LOCALE_SISO639LANGNAME,
-						  loc, sizeof(loc));
-			locale = loc;
+						  tmp, sizeof(tmp));
+			locale = tmp;
 		}
 
-		if (locale.length () > 0)
+		if (!locale.empty())
 		{
 			std::string win_locale(locale, 0, 2);
 			std::string env = "LANGUAGE=" + win_locale;

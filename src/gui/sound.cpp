@@ -46,7 +46,7 @@ Sound SoundSystem::getSound(SoundName sname)
     }
     
     // check that there are sounds in the list
-    if (sset.m_weights.size() == 0)
+    if (sset.m_weights.empty())
     {
         return AL_NONE;
     }

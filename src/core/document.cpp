@@ -1081,10 +1081,16 @@ void Document::onButtonErrorDialogConfirm()
     setState(SHUTDOWN_REQUEST);
 }
 
-void Document::onSkipDialogueTextClicked()
+void Document::onSkipDialogueTextClicked(bool skipAll)
 {
 	ClientCommand command;
 	command.m_button = BUTTON_SKIP_DIALOGUE_TEXT;
+	command.m_id = 0;
+	// send id == -1 for skip all
+	if (skipAll)
+	{
+		command.m_id = -1;
+	}
 	sendCommand(&command);
 }
 

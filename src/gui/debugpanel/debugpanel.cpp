@@ -123,7 +123,7 @@ void DebugPanel::update(OIS::Keyboard *keyboard, OIS::Mouse *mouse)
 		toogleVisibility();
 	
 	std::map<std::string, DebugTab*>::iterator iter;
-	for (iter = m_tabs.begin(); iter != m_tabs.end(); iter++)
+	for (iter = m_tabs.begin(); iter != m_tabs.end(); ++iter)
 	{
 		DebugTab *dt = iter->second;
 		dt->update(keyboard, mouse);

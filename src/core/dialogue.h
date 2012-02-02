@@ -520,10 +520,12 @@ class Dialogue
 		}
 		
 		/**
-		 * \fn void skipText(int id)
-		 * \brief Spieler signalisiert, dass er den aktuellen Text ueberspringen moechte
+		 * \brief Player has asked to skip the current text
+		 * \param id ID of the player
+		 * \param skipAll if true, the player wants to skip all text till the next question
+		 * The current text will be skipped, if all players agree on skipping it.
 		 */
-		void skipText(int id);
+		void skipText(int id, bool skipAll=false);
 		
 		/**
 		 * \fn void setActive(bool active)
@@ -542,6 +544,12 @@ class Dialogue
 		{
 			return m_question;
 		}
+		
+		/**
+		 * \brief Checks, whether the current text should be skipped and doesso if required
+		 * \return if the current text should be skipped
+		 */
+		bool checkSkipCurrentText();
 		
 	private:
 		
@@ -639,24 +647,26 @@ class Dialogue
 		
 		
 		/**
-		 * \var int m_nr_players
-		 * \brief Anzahl Spieler die an dem Dialog beteiligt sind
+		 * \brief Number of players participating in the dialogue
 		 */
 		int m_nr_players;
 		
 		/**
-		 * \var int m_skip_counter
-		 * \brief Die Spieler, die den aktuellen Text ueberspringen wollen
+		 * \brief IDs of players, who want to skip the current text
 		 */
 		std::set<int> m_player_skips;
 		
 		/**
-		 * \brief Frage, die an die Spieler gestellt wird
+		 * \brief IDs of player, who want to skip all the text till the next Question or end of dialogue
+		 */
+		std::set<int> m_player_all_skips;
+		
+		/**
+		 * \brief Question currently asked
 		 */
 		Question* m_question;
 		
 		/**
-		 * \var bool m_active
 		 * \brief auf true gesetzt, wenn der Dialog aktiv ist
 		 */
 		bool m_active;

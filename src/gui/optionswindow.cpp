@@ -569,8 +569,8 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 			return false;
 		}
 
-		userResolution = string (cbo->getText ().c_str ());
-		if (userResolution.length () == 0)
+		userResolution = cbo->getText().c_str();
+		if (userResolution.empty())
 		{
 			userResolution = Options::getInstance ()->getUsedResolution ();
 		}
@@ -715,7 +715,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 			while (iSection.hasMoreElements ())
 			{
 				const Ogre::String& renderSystemName = iSection.peekNextKey ();
-				if (renderSystemName.length () > 0)
+				if (!renderSystemName.empty())
 				{
 					of << "[" << renderSystemName << "]" << std::endl;
 				}
@@ -892,8 +892,8 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 		int desktopWidth = (int)GetSystemMetrics (SM_CXSCREEN);
 		int desktopHeight = (int)GetSystemMetrics (SM_CYSCREEN);
 
-		string userResolution = string (cbo->getText ().c_str ());
-		if (userResolution.length () == 0)
+		string userResolution = cbo->getText().c_str();
+		if (userResolution.empty())
 		{
 			userResolution = Options::getInstance ()->getUsedResolution ();
 		}
@@ -951,8 +951,8 @@ bool OptionsWindow::onVideoDriverSelected (const CEGUI::EventArgs& evt)
 		return false;
 	}
 
-	std::string videoDriver = std::string (cbo->getText ().c_str ()); // it's safe to get the text, they are read-only.
-	std::string usedResolution ("");
+	std::string videoDriver = cbo->getText().c_str(); // it's safe to get the text, they are read-only.
+	std::string usedResolution;
 
 	// Get the current width and height. This is to attempt to keep the resolution (E.g. if we have 800x600 in Direct3D, let's keep it for OpenGL as well).
 	int currentWidth (0), currentHeight (0);
@@ -964,7 +964,7 @@ bool OptionsWindow::onVideoDriverSelected (const CEGUI::EventArgs& evt)
 	std::vector <std::string> resolutions = Options::getInstance ()->getEditableResolutionsMapping ()[videoDriver];
 	
 	// Use the last item as basis...
-	if (resolutions.size () > 0)
+	if (!resolutions.empty())
 	{
 		usedResolution = resolutions[resolutions.size () - 1];
 		usedResolution = SumwarsHelper::getUpdatedResolutionString (usedResolution, currentWidth, currentHeight);

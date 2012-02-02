@@ -101,7 +101,21 @@ class Random
 	 */
 	static int randDiscrete(std::vector<float> distribution);
 	
-
+	/**
+	 * \brief sets the random seed
+	 * \param seed random seed
+	 */
+	static void setRandomSeed(unsigned int seed = 0)
+	{
+		if (seed == 0)
+		{
+			srand ( time(NULL) );
+		}
+		else
+		{
+			srand ( seed );
+		}
+	}
 };
 
 //float Random::rez_rand_max = 1.0 / RAND_MAX;

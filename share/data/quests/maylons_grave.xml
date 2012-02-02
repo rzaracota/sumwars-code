@@ -400,7 +400,8 @@
 				maylons_grave.freed = true;
 				local monsters = getMonstersInArea("areaGathering");
 				for i,monster in ipairs(monsters) do
-					set(monster, "health",0);
+					local timeout = math.random(1000,15000);
+					timedExecute('set('..monster..', "health",0)',timeout);
 				end;
 				local position = get(trigger.unit,"position");
 				setCutsceneMode(true);
