@@ -88,7 +88,7 @@ ShadowCameraSetup::ShadowCameraSetup (Ogre::SceneManager& sceneMgr, Ogre::RTShad
 		}
 	}
 
-	Config_ShadowFarDistance (70.0f);
+	Config_ShadowFarDistance (27.0f); // previously 70.0f
 	Config_ShadowRenderBackfaces (true);
 	DEBUG ("Shadow Camera Setup ctor - exit");
 }
@@ -172,7 +172,7 @@ bool ShadowCameraSetup::setup()
 		mSharedCameraPtr = Ogre::ShadowCameraSetupPtr(OGRE_NEW Ogre::FocusedShadowCameraSetup ());
 		break;
 	case 3:
-		// A plane is needed to initialize the camera by.
+		// A plane is needed to initialize the camera by. As we don't have the plane available in this class, we can't initialize... yet/
 		//Ogre::ShadowCameraSetupPtr(OGRE_NEW Ogre::PlaneOptimalShadowCameraSetup (mPlane));
 		break;
 	case 4:
