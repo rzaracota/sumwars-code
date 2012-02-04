@@ -123,6 +123,8 @@ bool World::init(int port)
 			if (snet->init(port) !=NET_OK )
 			{
 				ERRORMSG( "Error occured in network" );
+				ERRORMSG( "Switching to single player..." );
+				m_network = 0;
 				return false;
 			}
 		}
