@@ -244,7 +244,10 @@ void Dialogue::addSpeaker(int id, std::string refname, bool force)
 			}
 			else
 			{
-				cr->getDialogue()->removeSpeaker(cr->getId());
+				if (cr->getDialogue() != 0)
+				{
+					cr->getDialogue()->removeSpeaker(cr->getId());
+				}
 				cr->setDialogue(m_id);
 			}
 		}
