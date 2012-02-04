@@ -123,6 +123,17 @@ class ClientNetwork : public Network
 		}
 		
 		/**
+		 * \brief Sets the status of a NetworkSlot
+		 * \param slot ID of a slot
+		 * \param status status of a slot
+		 *
+		 */
+		virtual void setSlotStatus(NetStatus status, int slot=0 )
+		{
+			m_status = status;
+		}
+		
+		/**
 		 * \brief deallocates all message in the receive queue and clears the queue
 		 */
 		void clearMessageQueue()

@@ -203,6 +203,20 @@ class ServerNetwork: public Network
 		}
 		
 		/**
+		 * \brief Sets the status of a NetworkSlot
+		 * \param slot ID of a slot
+		 * \param status status of a slot
+		 *
+		 */
+		virtual void setSlotStatus(NetStatus status, int slot=0 )
+		{
+			if (isConnectedSlot(slot))
+			{
+				m_slots[slot]->setStatus(status);
+			}
+		}
+		
+		/**
 		 * \brief Returns the first element from the new login slot queue
 		 */
 		int popNewLoginSlot();

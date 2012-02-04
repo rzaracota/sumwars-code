@@ -138,8 +138,8 @@ void SavegameList::update()
 			
 			CEGUI::String imageName = CEGUI::String("set:") + imagesetName + "  " + "image:MainMenuAvatarImg";
 			
-			DEBUG("imagename %s",imageName.c_str() );
-			DEBUG("imagesetName %s", imagesetName.c_str());
+			DEBUGX("imagename %s",imageName.c_str() );
+			DEBUGX("imagesetName %s", imagesetName.c_str());
 			
 			
 			if (CEGUI::ImagesetManager::getSingleton().isDefined(imagesetName))
