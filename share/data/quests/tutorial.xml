@@ -70,6 +70,8 @@
 					if (2 >= tutorial.phasenr) then
 						createMonsterGroup("tutorialSlugs","locSlugs",8);
 						tutorial_tmp.slugs =0;
+						groupObjectsArc(getPlayers(),"locSlugs" ,"locSlugView",nil,30);
+						--print("something happened in the night")
 					end;
 					
 					if(3 >= tutorial.phasenr)then
@@ -393,6 +395,7 @@
 			</Effect>
 		</Event>
 	</Region>
+
 	<NPC refname="Derred">
 		<Topic name="give_weapons" start_option="Surrender weapons">
 			<Condition>
@@ -1378,7 +1381,7 @@
 			<Effect>
 				setCutsceneMode(false)
 				tutorial.phase="escapeCaves"
-				tutorial.phasenr = 4;
+				tutorial.phasenr = 3.5;
 				deleteObject(tutorial_tmp.tolec_d)
 				deleteObject(tutorial_tmp.derred_d)
 			</Effect>
@@ -1641,7 +1644,13 @@
 					setObjectAnimation(trigger.used_object,"rotateCogs", 8000)
 					return (true)
 				else
-					unitSpeak(trigger.user,_("I have to find an energy source and a cog before that thing will work again."),"thoughtful")
+					if(tutorial.energy==true)then
+						unitSpeak(trigger.user,_("I am still missing a cog."),"thoughtful")
+					elseif(tutorial.cog == true)then
+						unitSpeak(trigger.user,_("Now all I need is the energy source."),"thoughtful")
+					else
+						unitSpeak(trigger.user,_("I have to find an energy source and a cog before that thing will work again."),"thoughtful")
+					end
 					return false
 				end;
 			</Condition>
@@ -1669,7 +1678,14 @@
 				return tutorial.craneRepair==3
 			</Condition>
 			<Effect>
+				if((tutorial.phase == "escapeCaves")or(tutorial.phasenr == 3))then
+					--print("should show the cutscene")
+					tutorial.phasenr = 4
+					tutorial.phase = "findsecretdoor"
+					tutorial_tmp.assemble="backToTD"
+				end
 				teleportPlayer(trigger.user,"elCnlLobby","locBackroute3")
+				
 			</Effect>
 		</Event>
 		
@@ -1684,7 +1700,7 @@
 				assembleParty("elCnlLobby","locBackroute3");
 				setCutsceneMode(false);
 				fadeIn(0, {0,0,0},{1,1,1},{0,0,0});
-				tutorial.assemble="backToTD"
+				tutorial_tmp.assemble="backToTD"
 				tutorial.craneRepair=3
 			</Effect>
 		</Event>
@@ -1693,7 +1709,7 @@
 	<Region name="elCnlLobby">
 		<Event trigger="party_complete" once="true">
 			<Condition>
-				return tutorial.assemble=="backToTD"
+				return tutorial_tmp.assemble=="backToTD"
 			</Condition>
 			<Effect>
 				
@@ -1782,7 +1798,7 @@
 				addQuestion(_("Explain skills?"),"all");
 				addAnswer(_("Yes"),"explain_skills");
 				addAnswer(_("No"),"explain_skills_no");
-				tutorial.assemble=""
+				tutorial_tmp.assemble=""
 			</Effect>
 		</Event>
 	</Region>
@@ -1854,7 +1870,7 @@
 	<NPC refname="Tolec">
 		<Topic name="secret_door" start_option="Open secret door">
 			<Condition>
-				return (tutorial.craneRepair==3);
+				return (tutorial.craneRepair==3 and tutorial_tmp.phase == "findSecretDoor" and tutorial.finished~=true);
 			</Condition>
 			<Effect>
 				addAllPlayersToDialog();
