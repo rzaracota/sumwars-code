@@ -77,6 +77,14 @@ endif()
 
 SET(SUMWARS_DOC_DIR "${SUMWARS_DOC_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars documentation, CMAKE_INSTALL_PREFIX gets prepended! (Only applies when SUMWARS_STANDALONE_MODE is OFF)")
 
+set(SUMWARS_LANGUAGES_DEFAULT "*")
+SET(SUMWARS_LANGUAGES "${SUMWARS_LANGUAGES_DEFAULT}" CACHE STRING "Language codes of the translations which will be copied upon 
+install ('*' matches all available translations).")
+
+IF( NOT SUMWARS_LANGUAGES )
+  set(SUMWARS_LANGUAGES ${SUMWARS_LANGUAGES_DEFAULT})
+ENDIF()
+
 IF( NOT CMAKE_BUILD_TYPE )
   # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
   # differentiation between debug and release builds.
@@ -498,12 +506,24 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/resources"
   DESTINATION "${SUMWARS_SHARE_DIR}"
   PATTERN ".hg" EXCLUDE
   PATTERN "icon" EXCLUDE)
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/translation"
-  DESTINATION "${SUMWARS_SHARE_DIR}"
-  FILES_MATCHING PATTERN "*.mo"
-  PATTERN ".hg" EXCLUDE
-  PATTERN "xmlgettext" EXCLUDE) # both pattern excludes are there to prevent the directories from being created
-  
+
+if ("${SUMWARS_LANGUAGES}" STREQUAL "*")
+  install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/translation"
+    DESTINATION "${SUMWARS_SHARE_DIR}"
+    FILES_MATCHING PATTERN "*.mo"
+    PATTERN ".hg" EXCLUDE
+    PATTERN "xmlgettext" EXCLUDE) # both pattern excludes are there to prevent the directories from being created
+else()
+  SEPARATE_ARGUMENTS(SUMWARS_LANGUAGES)
+  foreach(i ${SUMWARS_LANGUAGES})
+    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/translation/${i}"
+      DESTINATION "${SUMWARS_SHARE_DIR}"
+      FILES_MATCHING PATTERN "*.mo"
+      PATTERN ".hg" EXCLUDE
+      PATTERN "xmlgettext" EXCLUDE) # both pattern excludes are there to prevent the directories from being created
+  endforeach()
+endif()
+
 # only CPack code below this line
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Summoning Wars Role-Playing Game")
 SET(CPACK_PACKAGE_VENDOR "Sumwars team")

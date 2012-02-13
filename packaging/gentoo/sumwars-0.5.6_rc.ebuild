@@ -24,10 +24,16 @@ inherit games cmake-utils flag-o-matic eutils ${SCM}
 DESCRIPTION="a multi-player, 3D action role-playing game"
 HOMEPAGE="http://sumwars.org"
 
+LANGS="de en it pl pt ru uk"
+
 LICENSE="GPLv3 CC-BY-SA-v3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="stl +contenteditor"
+
+for L in ${LANGS} ; do
+	IUSE="${IUSE} linguas_${L}"
+done
 
 DEPEND="=dev-games/ogre-1.7*
 =dev-games/cegui-0.7*[ogre]
@@ -45,9 +51,10 @@ RDEPEND="${DEPEND}"
 S=${WORKDIR}/${MY_P}
 
 src_configure() {
+	strip-linguas ${LANGS}
 	use stl && append-flags -DTIXML_USE_STL
 	mycmakeargs=(
-		-DCMAKE_INSTALL_PREFIX=""
+		-DSUMWARS_LANGUAGES=${LINGUAS}
 		-DSUMWARS_NO_TINYXML=ON
 		-DSUMWARS_NO_ENET=ON
 		-DSUMWARS_DOC_DIR=${GAMES_DATADIR}/${PN}/doc
