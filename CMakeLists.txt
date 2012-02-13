@@ -506,7 +506,6 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/resources"
   DESTINATION "${SUMWARS_SHARE_DIR}"
   PATTERN ".hg" EXCLUDE
   PATTERN "icon" EXCLUDE)
-
 if ("${SUMWARS_LANGUAGES}" STREQUAL "*")
   install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/translation"
     DESTINATION "${SUMWARS_SHARE_DIR}"
@@ -523,7 +522,31 @@ else()
       PATTERN "xmlgettext" EXCLUDE) # both pattern excludes are there to prevent the directories from being created
   endforeach()
 endif()
-
+  
+if(WIN32)
+	STRING(REGEX REPLACE "cegui/include" "bin" CEGUI_BIN_DIR ${CEGUI_INCLUDE_DIR})
+	STRING(REGEX REPLACE ".lib" ".dll" LUA_BIN_DIR ${LUA_LIBRARY})
+	STRING(REGEX REPLACE "alut.lib" "alut.dll" ALUT_BIN_DIR ${ALUT_LIBRARY_OPTIMIZED})
+	STRING(REGEX REPLACE "lib/physfs.lib" "bin/physfs.dll" PHYSFS_BIN_DIR ${PHYSFS_LIBRARY})
+	STRING(REGEX REPLACE "lib/PocoFoundation.lib" "bin/PocoFoundation.dll" POCO_BIN_DIR ${POCO_LIBRARY_REL})
+	MESSAGE(${POCO_BIN_DIR})
+	
+install(DIRECTORY "${OGRE_PLUGIN_DIR_REL}/"
+  DESTINATION "."
+  FILES_MATCHING PATTERN "*.dll")
+  
+  install(FILES 
+  "${CEGUI_BIN_DIR}/CEGUIBase.dll"
+  "${CEGUI_BIN_DIR}/CEGUIOgreRenderer.dll"
+  "${CEGUI_BIN_DIR}/CEGUIExpatParser.dll"
+  "${CEGUI_BIN_DIR}/CEGUIFalagardWRBase.dll"
+  "${LUA_BIN_DIR}"
+  "${ALUT_BIN_DIR}"
+  "${PHYSFS_BIN_DIR}"
+  "${POCO_BIN_DIR}"
+  DESTINATION ".")
+endif()
+  
 # only CPack code below this line
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Summoning Wars Role-Playing Game")
 SET(CPACK_PACKAGE_VENDOR "Sumwars team")
