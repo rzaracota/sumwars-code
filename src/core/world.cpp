@@ -47,6 +47,18 @@ int World::m_version = 20;
 
 void  World::createWorld(bool server, int port, bool cooperative, int max_players)
 {
+	if (max_players > 8)
+	{
+		ERRORMSG("Maximum Number of players is 8, setting player number to this value");
+		max_players = 8;
+	}
+	if (max_players < 1)
+	{
+		ERRORMSG("Got maximum player number less than 1, switching to singleplayer");
+		max_players = 1;
+	}
+	
+	
 	if (m_world != 0)
 		delete m_world;
 
@@ -123,6 +135,8 @@ bool World::init(int port)
 			if (snet->init(port) !=NET_OK )
 			{
 				ERRORMSG( "Error occured in network" );
+				ERRORMSG( "Switching to single player..." );
+				m_network = 0;
 				return false;
 			}
 		}
@@ -486,7 +500,26 @@ void World::updateLogins()
 			if (header.m_content == PTYPE_C2S_SAVEGAME)
 			{
 				DEBUG("got savegame from slot %i",(*i));
-				handleSavegame(data,*i);
+				
+				if (m_player_slots->size() < m_max_nr_players)
+				{
+					handleSavegame(data,*i);
+				}
+				else
+				{
+					// reject the player, if the server is full
+					// send a reject notification
+					DEBUG("Rejected Savegame from Slot %i", (*i));
+					PackageHeader header;
+					header.m_content = PTYPE_S2C_REJECT;
+					header.m_number =1;
+
+					NetworkPacket* msg = m_network->createPacket();
+					header.toString(msg);
+
+					m_network->pushSlotMessage(msg,(*i));
+					m_network->deallocatePacket(msg);
+				}
 				i = m_logins.erase(i);
 
 			}
@@ -1746,6 +1779,14 @@ void World::updatePlayers()
 					DEBUG("fraction %i",frac);
 
 					insertPlayer(m_local_player, LOCAL_SLOT);
+				}
+				else if (headerp.m_content == PTYPE_S2C_REJECT)
+				{
+					DEBUG("Got notification that the server rejected the Savegame");
+					if (m_network != 0)
+					{
+						m_network->setSlotStatus(NET_SLOTS_FULL);
+					}
 				}
 				else if (headerp.m_content == PTYPE_S2C_WAYPOINTS)
 				{

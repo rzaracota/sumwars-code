@@ -73,3 +73,8 @@
 		<Visibility objectname="questCog" visible="true" time="0"/>
 	</Action>
 </RenderInfo>
+
+<RenderInfo name="cogLean">
+	<Entity source="cogScript_lean.mesh" rotation = "0 168 0"/>
+	<ParticleSystem objectname="particle" source="ItemFlare" position="0 1 0"/>
+</RenderInfo>

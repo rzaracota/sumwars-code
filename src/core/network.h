@@ -155,6 +155,14 @@ class Network
 		 */
 		virtual NetStatus getSlotStatus( int slot=0 ) =0;
 		
+		/**
+		 * \brief Sets the status of a NetworkSlot
+		 * \param slot ID of a slot
+		 * \param status status of a slot
+		 *
+		 */
+		virtual void setSlotStatus(NetStatus status, int slot=0 )=0;
+		
 			
 		/**
 		 * \brief Sets the version number, that is written to the packets

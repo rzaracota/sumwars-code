@@ -134,13 +134,17 @@ void SavegameList::update()
 			}
 
 			std::string nameNoPath = texName.erase(0, pos+1).append(".png");
-			std::string imagesetName = texName + "SaveItemRootAvatarImageset";
-			std::stringstream tempStream;
-			tempStream << "set:" << imagesetName << " " << "image:MainMenuAvatarImg";
-					
+			CEGUI::String imagesetName = (CEGUI::utf8*) (texName + "SaveItemRootAvatarImageset").c_str();
+			
+			CEGUI::String imageName = CEGUI::String("set:") + imagesetName + "  " + "image:MainMenuAvatarImg";
+			
+			DEBUGX("imagename %s",imageName.c_str() );
+			DEBUGX("imagesetName %s", imagesetName.c_str());
+			
+			
 			if (CEGUI::ImagesetManager::getSingleton().isDefined(imagesetName))
 			{
-				saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setProperty("Image", tempStream.str());
+				saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setProperty("Image", imageName);
 			}
 			else
 			{
@@ -157,7 +161,7 @@ void SavegameList::update()
 								CEGUI::Size( ceguiTex.getSize().d_width, ceguiTex.getSize().d_height ),
 								CEGUI::Point( 0.0f, 0.0f ) );
 					
-					saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setProperty("Image", tempStream.str());
+					saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setProperty("Image", imageName);
 				}
 				else
 				{
@@ -194,7 +198,7 @@ void SavegameList::update()
 
 			CEGUI::String temp;
 			temp.append((CEGUI::utf8*) gettext("Level")).append(" ").append(stream.str()).append(" ").append((CEGUI::utf8*) gettext(classname.c_str()));
-			saveItem->getChild(s.str().append("SaveItemRoot/Name"))->setText(name);
+			saveItem->getChild(s.str().append("SaveItemRoot/Name"))->setText((CEGUI::utf8*) name.c_str());
 			saveItem->getChild(s.str().append("SaveItemRoot/DecriptionLabel"))->setText(temp);
 
 			n++;

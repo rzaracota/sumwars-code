@@ -124,6 +124,11 @@ enum PackageType
 	* \brief Daten der Fraktionen
 	 */
    PTYPE_S2C_FRACTION,
+   
+   /**
+	* \brief Reject notification
+	*/
+   PTYPE_S2C_REJECT,
 };
 
 /**

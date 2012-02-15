@@ -1564,8 +1564,10 @@ void Document::update(float time)
 
 			if (!m_server)
 			{
-				if (World::getWorld()->getNetwork()->getSlotStatus() == NET_TIMEOUT)
+				if (World::getWorld()->getNetwork()->getSlotStatus() == NET_TIMEOUT
+					|| World::getWorld()->getNetwork()->getSlotStatus() == NET_SLOTS_FULL)
 				{
+					// TODO: Display a different message for rejected Savegames
 					setState(INACTIVE);
                     getGUIState()->m_shown_windows = MESSAGE;
                     m_modified |= WINDOWS_MODIFIED;
