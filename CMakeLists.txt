@@ -77,6 +77,14 @@ endif()
 
 SET(SUMWARS_DOC_DIR "${SUMWARS_DOC_DEFAULT_DIR}" CACHE STRING "Path that represents the directory with sumwars documentation, CMAKE_INSTALL_PREFIX gets prepended! (Only applies when SUMWARS_STANDALONE_MODE is OFF)")
 
+set(SUMWARS_LANGUAGES_DEFAULT "*")
+SET(SUMWARS_LANGUAGES "${SUMWARS_LANGUAGES_DEFAULT}" CACHE STRING "Language codes of the translations which will be copied upon 
+install ('*' matches all available translations).")
+
+IF( NOT SUMWARS_LANGUAGES )
+  set(SUMWARS_LANGUAGES ${SUMWARS_LANGUAGES_DEFAULT})
+ENDIF()
+
 IF( NOT CMAKE_BUILD_TYPE )
   # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
   # differentiation between debug and release builds.
@@ -498,11 +506,46 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/resources"
   DESTINATION "${SUMWARS_SHARE_DIR}"
   PATTERN ".hg" EXCLUDE
   PATTERN "icon" EXCLUDE)
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/translation"
-  DESTINATION "${SUMWARS_SHARE_DIR}"
-  FILES_MATCHING PATTERN "*.mo"
-  PATTERN ".hg" EXCLUDE
-  PATTERN "xmlgettext" EXCLUDE) # both pattern excludes are there to prevent the directories from being created
+if ("${SUMWARS_LANGUAGES}" STREQUAL "*")
+  install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/translation"
+    DESTINATION "${SUMWARS_SHARE_DIR}"
+    FILES_MATCHING PATTERN "*.mo"
+    PATTERN ".hg" EXCLUDE
+    PATTERN "xmlgettext" EXCLUDE) # both pattern excludes are there to prevent the directories from being created
+else()
+  SEPARATE_ARGUMENTS(SUMWARS_LANGUAGES)
+  foreach(i ${SUMWARS_LANGUAGES})
+    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/translation/${i}"
+      DESTINATION "${SUMWARS_SHARE_DIR}"
+      FILES_MATCHING PATTERN "*.mo"
+      PATTERN ".hg" EXCLUDE
+      PATTERN "xmlgettext" EXCLUDE) # both pattern excludes are there to prevent the directories from being created
+  endforeach()
+endif()
+  
+if(WIN32)
+	STRING(REGEX REPLACE "cegui/include" "bin" CEGUI_BIN_DIR ${CEGUI_INCLUDE_DIR})
+	STRING(REGEX REPLACE ".lib" ".dll" LUA_BIN_DIR ${LUA_LIBRARY})
+	STRING(REGEX REPLACE "alut.lib" "alut.dll" ALUT_BIN_DIR ${ALUT_LIBRARY_OPTIMIZED})
+	STRING(REGEX REPLACE "lib/physfs.lib" "bin/physfs.dll" PHYSFS_BIN_DIR ${PHYSFS_LIBRARY})
+	STRING(REGEX REPLACE "lib/PocoFoundation.lib" "bin/PocoFoundation.dll" POCO_BIN_DIR ${POCO_LIBRARY_REL})
+	MESSAGE(${POCO_BIN_DIR})
+	
+install(DIRECTORY "${OGRE_PLUGIN_DIR_REL}/"
+  DESTINATION "."
+  FILES_MATCHING PATTERN "*.dll")
+  
+  install(FILES 
+  "${CEGUI_BIN_DIR}/CEGUIBase.dll"
+  "${CEGUI_BIN_DIR}/CEGUIOgreRenderer.dll"
+  "${CEGUI_BIN_DIR}/CEGUIExpatParser.dll"
+  "${CEGUI_BIN_DIR}/CEGUIFalagardWRBase.dll"
+  "${LUA_BIN_DIR}"
+  "${ALUT_BIN_DIR}"
+  "${PHYSFS_BIN_DIR}"
+  "${POCO_BIN_DIR}"
+  DESTINATION ".")
+endif()
   
 # only CPack code below this line
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Summoning Wars Role-Playing Game")
