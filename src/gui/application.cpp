@@ -178,7 +178,8 @@ bool Application::init()
 		"Plugin=RenderSystem_Direct3D9" SUMWARS_DEBUG_POSTFIX "\n"
 #endif
 		"Plugin=Plugin_ParticleFX" SUMWARS_DEBUG_POSTFIX "\n"
-		"Plugin=Plugin_OctreeSceneManager" SUMWARS_DEBUG_POSTFIX "\n";
+		"Plugin=Plugin_OctreeSceneManager" SUMWARS_DEBUG_POSTFIX "\n"
+		"Plugin=Plugin_CgProgramManager" SUMWARS_DEBUG_POSTFIX "\n";
 
 #include "default_resources.cfg.inc"
 
