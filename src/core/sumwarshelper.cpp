@@ -46,13 +46,22 @@ void SumwarsHelper::init ()
 	supportedFeatures_.clear ();
 
 #if defined (_WIN32)
+	// Feature to allow a non-exclusive fullscreen mode. It's basically a borderless window covering the entire
+	// desktop area; on top of other windows. (It's still not "always-on-top").
 	supportedFeatures_.push_back ("non-exclusive-fullscreen"); // aka windowed (fullscreen) mode.
 
 	// Feature to allow some settings to be pre-loaded from a different config file:
 	// see getPreloadConfigFile.
 	supportedFeatures_.push_back ("allows-preload");
+
+	// Windows specifically requires that the ogre.cfg is created by the ogre application.
+	// This ensures compatibility with Direct3D, where the vendor name is required.
+	// NOT-SUPPORTED: "auto-create-ogre.cfg");
+
 #elif defined (__unix__)
+	supportedFeatures_.push_back ("auto-create-ogre.cfg");
 #elif defined (__APPLE__)
+	supportedFeatures_.push_back ("auto-create-ogre.cfg");
 #endif
 }
 

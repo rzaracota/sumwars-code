@@ -251,26 +251,24 @@ bool Application::init()
 
 	if (!PHYSFS_exists(ogreCfgUser.c_str()))
 	{
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		// On Windows it's important to let the default Ogre config to appear. Otherwise, config file will not be written properly
-		// and Direct3D support will not be available.
-#else
-		PHYSFS_file* ogreFile = PHYSFS_openWrite(ogreCfgUser.c_str());
-		int count = PHYSFS_write(ogreFile,
-					 defaultOgreCfg.c_str(), sizeof(char), defaultOgreCfg.size());
+		if (SumwarsHelper::getSingletonPtr ()->hasFeature ("auto-create-ogre.cfg"))
+		{
+			PHYSFS_file* ogreFile = PHYSFS_openWrite(ogreCfgUser.c_str());
+			int count = PHYSFS_write(ogreFile,
+						 defaultOgreCfg.c_str(), sizeof(char), defaultOgreCfg.size());
 
-		if (count < defaultOgreCfg.size())
-		{
-			printf("Attempting to write a local Ogre configuration file failed: PHYSFS_write('%s') failed: %s\n",
-				 ogreCfgUser.c_str(),
-				 PHYSFS_getLastError());
-			return false;
+			if (count < defaultOgreCfg.size())
+			{
+				printf("Attempting to write a local Ogre configuration file failed: PHYSFS_write('%s') failed: %s\n",
+					 ogreCfgUser.c_str(),
+					 PHYSFS_getLastError());
+				return false;
+			}
+			else
+			{
+				printf("Created '%s%s'\n", PHYSFS_getWriteDir(), ogreCfgUser.c_str());
+			}
 		}
-		else
-		{
-			printf("Created '%s%s'\n", PHYSFS_getWriteDir(), ogreCfgUser.c_str());
-		}
-#endif //OGRE_PLATFORM
 	}
 
 	if (!PHYSFS_exists(pluginsCfgUser.c_str()))
