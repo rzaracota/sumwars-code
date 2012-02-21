@@ -440,9 +440,7 @@ void MainWindow::update(float time)
 				static_cast<ItemWindow*>(m_sub_windows["Inventory"])->setSilent(true);
 				m_sub_windows["Inventory"]->update();
 				static_cast<ItemWindow*>(m_sub_windows["Inventory"])->setSilent(false);
-				
-				// set control panel to silent to avoid duplicate item sounds
-				static_cast<ItemWindow*>(m_sub_windows["ControlPanel"])->setSilent(true);
+
 			}
 			else
 			{
@@ -486,13 +484,17 @@ void MainWindow::update(float time)
 			CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) win_mgr.getWindow("TradeWindow");
 			if (wflags & Document::TRADE)
 			{
-				static_cast<TradeWindow*>(m_sub_windows["Trade"])->reset();
-				trade->setVisible(true);
-				
-				// make one silent update to avoid that new inventory items play sounds
-				static_cast<ItemWindow*>(m_sub_windows["Trade"])->setSilent(true);
-				m_sub_windows["Trade"]->update();
-				static_cast<ItemWindow*>(m_sub_windows["Trade"])->setSilent(false);
+								
+				if (!trade->isVisible())
+				{
+					static_cast<TradeWindow*>(m_sub_windows["Trade"])->reset();
+					trade->setVisible(true);
+					
+					// make one silent update to avoid that new inventory items play sounds
+					static_cast<ItemWindow*>(m_sub_windows["Trade"])->setSilent(true);
+					m_sub_windows["Trade"]->update();
+					static_cast<ItemWindow*>(m_sub_windows["Trade"])->setSilent(false);
+				}
 			}
 			else
 			{

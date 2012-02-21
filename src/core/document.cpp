@@ -1639,8 +1639,8 @@ void Document::updateContent(float time)
 		}
 	}
 	
-	if (player->getDialogueId() != 0
-				|| (player->getRegion() !=0 && player->getRegion()->getCutsceneMode () == true))
+	if ((player->getDialogueId() != 0 && player->getTradeInfo().m_trade_partner == 0)
+		|| (player->getRegion() !=0 && player->getRegion()->getCutsceneMode () == true))
 	{
 		// Chat ist fuer Debugging zugeschaltet
 		if ((getGUIState()->m_shown_windows & (~(QUESTIONBOX | SAVE_EXIT | CHAT))) != 0)
