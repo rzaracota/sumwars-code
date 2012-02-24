@@ -118,6 +118,11 @@ class ItemWindow : public Window
 		 * \brief if set, this window may not play sounds
 		 */
 		bool m_silent;
+		
+		/**
+		 * \brief if set, this window may not play sounds during current update
+		 */
+		bool m_silent_current_update;
 };
 
 #endif // __SUMWARS_GUI_ITEMWINDOW_H__

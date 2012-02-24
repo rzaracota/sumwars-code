@@ -195,6 +195,7 @@ void Inventory::update()
 	Item* it,*weapon;
 	CEGUI::PushButton* btn;
 	
+	m_silent_current_update = m_silent;
 	
 	std::ostringstream out_stream;
 
