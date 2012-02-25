@@ -10,10 +10,10 @@ IF(WIN32)
   INCLUDE(BoostOGREGetVersion)
 
   # Set the boost search path. Prioritize the Dependencies folder.
-  SET (BST_SRCPATH ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost $ENV{OGRE_HOME}/boost_1_44 $ENV{OGRE_HOME}/boost_1_47)
+  SET (BST_SRCPATH ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/boost $ENV{OGRE_HOME}/boost_1_44)
   FIND_PATH(BoostOGRE_INCLUDE_DIR /boost/version.hpp
     PATHS ${BST_SRCPATH}
-    PATH_SUFFIXES /boost /boost_1_44 /boost_1_47
+    PATH_SUFFIXES /boost /boost_1_44
   )
   
   Message (STATUS "Found BoostOGRE_INCLUDE_DIR as: ${BoostOGRE_INCLUDE_DIR}")
