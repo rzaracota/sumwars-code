@@ -172,6 +172,7 @@ void ControlPanel::update()
 	std::string name;
 
 	Player* player = m_document->getLocalPlayer();
+	m_silent_current_update = m_silent;
 
 	// Balken fuer HP
 	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "HealthProgressBar"));

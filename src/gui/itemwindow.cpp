@@ -80,13 +80,14 @@ bool ItemWindow::onItemMouseButtonPressed(const CEGUI::EventArgs& evt)
 		m_document->onItemRightClick((short) id);
 	}
 
-
+	DEBUGX("left button pressed on Item %i",id);
 	return true;
 }
 
 bool ItemWindow::onItemMouseButtonReleased(const CEGUI::EventArgs& evt)
 {
 	const CEGUI::MouseEventArgs& we = static_cast<const CEGUI::MouseEventArgs&>(evt);
+	unsigned int id = we.window->getID();
 	
 	if (we.button == CEGUI::LeftButton)
 	{
@@ -113,18 +114,35 @@ std::string ItemWindow::getItemImage(Item::Subtype type)
 void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player, int gold)
 {
 	std::string imgname="";
+	std::string idstr = "";
+	bool playsound = false;
 	if (item != 0)
 	{
-		imgname= getItemImage(item->m_subtype); 
-	}
-	
-	bool playsound = false;
-	if (img->getProperty("Image")!=imgname)
-	{
-		img->setProperty("Image", imgname);
-		if (item != 0)
+		std::stringstream stream;
+		stream << item->m_subtype << ":" << item->m_id;
+		idstr = stream.str();
+		
+		imgname= getItemImage(item->m_subtype);
+		if (img->getProperty("Image")!=imgname)
 		{
-			playsound = true;
+			img->setProperty("Image", imgname);
+		}
+		
+		if (!img->isUserStringDefined("idstr") || img->getUserString("idstr") != idstr)
+		{
+			if (item != 0)
+			{
+				playsound = true;
+			}
+			img->setUserString("idstr",idstr);
+		}
+	}
+	else
+	{
+		if (img->getProperty("Image")!=imgname)
+		{
+			img->setProperty("Image", imgname);
+			img->setUserString("idstr",idstr);
 		}
 	}
 	
@@ -153,12 +171,15 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 		img->setProperty("BackgroundColours", propnew); 
 	}
 	
-	if (playsound && !m_silent)
+	if (playsound && !m_silent_current_update)
 	{
 		SoundName sname = GraphicManager::getDropSound(item->m_subtype);
 		if (sname != "")
 		{
 			SoundSystem::playAmbientSound(sname);
+			
+			// play only one sound per update...
+			m_silent_current_update = true;
 		}
 		DEBUGX("drop sound %s",sname.c_str());
 	}

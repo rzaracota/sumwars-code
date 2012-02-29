@@ -172,13 +172,13 @@ void MainMenu::updateTranslation()
 
 bool MainMenu::onStartSinglePlayer(const CEGUI::EventArgs& evt)
 {
-    m_document->onButtonStartSinglePlayer();
+	m_document->onButtonStartSinglePlayer();
     return true;
 }
 
 bool MainMenu::onStartMultiPlayer(const CEGUI::EventArgs& evt)
 {
-    m_document->onButtonJoinGame();
+	m_document->onButtonJoinGame();
     return true;
 }
 
@@ -211,9 +211,7 @@ bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 	m_saveGameList->update();
 
 	root->getAutoCreatedWindow()->getViewport(0)->setCamera(m_mainMenuCamera);
-	m_mainMenuCamera->lookAt(m_mainNode->getPosition());
     root->addFrameListener(this);
-	m_mainMenuCamera->lookAt(Ogre::Vector3(-3.0643, -0.00965214, -45.8015));
 	
     CEGUI::WindowManager::getSingleton().getWindow("MainMenu")->setAlpha(0);
     return true;
@@ -381,19 +379,15 @@ void MainMenu::createScene()
 {
     if (!m_sceneCreated)
     {
-        //m_mainMenuCamera->setPosition(Ogre::Vector3(-8.0899, 1.03773, -10.4865));
-		//m_mainMenuCamera->setPosition(Ogre::Vector3(-15.2126, 0.597, -14.1));
-		m_mainMenuCamera->setPosition(Ogre::Vector3(-17.2126, 0.597, -14.1));
-        //m_mainMenuCamera->setOrientation(Ogre::Quaternion(0.967044, -0.00100842, -0.254607, -0.000271657));
-		m_mainMenuCamera->pitch(Ogre::Radian(Ogre::Degree(15)));
-		m_mainMenuCamera->yaw(Ogre::Radian(Ogre::Degree(5)));
-       
-        //	cam->moveRelative(Ogre::Vector3(0,-5,-20));
-		//	cam->lookAt(Ogre::Vector3::ZERO);
+
 		
         m_mainNode = m_sceneMgr->getRootSceneNode()->createChildSceneNode("MainMenuMainNode");
         m_mainNode->setPosition(Ogre::Vector3::ZERO);
-		
+
+		m_mainMenuCamera->setPosition(Ogre::Vector3(-12.2126, 0.597, -14.1));
+		m_mainMenuCamera->lookAt(Ogre::Vector3::ZERO);
+		m_mainMenuCamera->setOrientation(Ogre::Quaternion(0.986127f, 0.120615f, -0.1132f, 0.0138457f));
+
 		Ogre::SceneNode *n = m_mainNode->createChildSceneNode();
 		Ogre::Entity *e;
 		//Ogre::MeshPtr *m; // 2011.10.23: found as unused.
@@ -426,7 +420,7 @@ void MainMenu::createScene()
 		n->setPosition(Ogre::Vector3(-12.9917, -0.00965142, -23.8061));
 		n->setScale(Ogre::Vector3(1, 1, 1));
 		n->setOrientation(Ogre::Quaternion(0.985556, 0, 0.16935, 0));
-
+		
 		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("heal_2.mesh");
 		e->getSubEntity(0)->setMaterialName("Item");
@@ -574,15 +568,7 @@ void MainMenu::createScene()
 		n->setOrientation(Ogre::Quaternion(1, 0, 0, 0));
 
 		n = m_mainNode->createChildSceneNode();
-		e = m_sceneMgr->createEntity("steel_arm.mesh");
-		e->getSubEntity(0)->setMaterialName("Item");
 		e->setCastShadows (itemsCastShadows);
-		n->attachObject(e);
-		n->setPosition(Ogre::Vector3(-11.4281, 0, -23.1021));
-		n->setScale(Ogre::Vector3(1, 1, 1));
-		n->setOrientation(Ogre::Quaternion(0.975342, 0, -0.220697, 0));
-
-		n = m_mainNode->createChildSceneNode();
 		e = m_sceneMgr->createEntity("stone2.mesh");
 		e->getSubEntity(0)->setMaterialName("env_waldland");
 		e->setCastShadows (itemsCastShadows);
@@ -750,7 +736,6 @@ void MainMenu::createScene()
 void MainMenu::updateCharacterView()
 {
 	bool update = false;
-	
 	Ogre::SceneManager* scene_mgr = Ogre::Root::getSingleton().getSceneManager("MainMenuSceneManager");
 	GraphicManager::setSceneManager(scene_mgr);
 	

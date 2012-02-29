@@ -435,12 +435,14 @@ void MainWindow::update(float time)
 			CEGUI::FrameWindow* inventory = (CEGUI::FrameWindow*) win_mgr.getWindow("Inventory");
 			if (wflags & Document::INVENTORY)
 			{
-				inventory->setVisible(true);
-				// make one silent update to avoid that new inventory items play sounds
-				static_cast<ItemWindow*>(m_sub_windows["Inventory"])->setSilent(true);
-				m_sub_windows["Inventory"]->update();
-				static_cast<ItemWindow*>(m_sub_windows["Inventory"])->setSilent(false);
-
+				if (!inventory->isVisible())
+				{
+					inventory->setVisible(true);
+					// make one silent update to avoid that new inventory items play sounds
+					static_cast<ItemWindow*>(m_sub_windows["Inventory"])->setSilent(true);
+					m_sub_windows["Inventory"]->update();
+					static_cast<ItemWindow*>(m_sub_windows["Inventory"])->setSilent(false);
+				}
 			}
 			else
 			{
@@ -452,7 +454,16 @@ void MainWindow::update(float time)
 			CEGUI::FrameWindow* control_panel = (CEGUI::FrameWindow*) win_mgr.getWindow("ControlPanel");
 			if (wflags & Document::CONTROL_PANEL)
 			{
-				control_panel->setVisible(true);
+				if (!control_panel->isVisible())
+				{
+					control_panel->setVisible(true);
+					
+					// one silent update of the belt
+					// to avoid silly sounds on startup
+					static_cast<ItemWindow*>(m_sub_windows["ControlPanel"])->setSilent(true);
+					m_sub_windows["ControlPanel"]->update();
+					static_cast<ItemWindow*>(m_sub_windows["ControlPanel"])->setSilent(false);
+				}
 			}
 			else
 			{

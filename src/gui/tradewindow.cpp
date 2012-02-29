@@ -138,6 +138,8 @@ TradeWindow::TradeWindow (Document* doc)
 
 void TradeWindow::update()
 {
+	m_silent_current_update = m_silent;
+	
 	Player* player = m_document->getLocalPlayer();
 	if (player ==0)
 		return;

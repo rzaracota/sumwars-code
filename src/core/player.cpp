@@ -677,11 +677,6 @@ bool Player::onItemClick(ClientCommand* command)
 
 					getRegion()->insertPlayerTeleport(getId(), m_revive_position);
 					clearCommand(true,true);
-					
-					// delete item
-					Item* swap=0;
-					m_equipement->swapItem(swap,pos);
-					delete it;
 				}
 				else
 				{
@@ -697,8 +692,8 @@ bool Player::onItemClick(ClientCommand* command)
 						}
 						
 					}
+					return true;
 				}
-				return true;
 			}
 			else
 			{
