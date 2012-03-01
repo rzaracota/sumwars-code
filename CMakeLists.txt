@@ -472,29 +472,29 @@ install(TARGETS sumwars
 
 # freedesktop.org icons and desktop files
 # TODO: How do we do this on Windows? Installing start menu items.
-if (UNIX)
-  install(FILES "packaging/sumwars.desktop"
-    DESTINATION "share/applications")
-    
-  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_16x16.png"
-    DESTINATION "share/icons/hicolor/16x16/"
-    RENAME "sumwars.png")
-  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_24x24.png"
-    DESTINATION "share/icons/hicolor/24x24/"
-    RENAME "sumwars.png")
-  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_32x32.png"
-    DESTINATION "share/icons/hicolor/32x32/"
-    RENAME "sumwars.png")
-  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_48x48.png"
-    DESTINATION "share/icons/hicolor/48x48/"
-    RENAME "sumwars.png")
-  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_64x64.png"
-    DESTINATION "share/icons/hicolor/64x64/"
-    RENAME "sumwars.png")
-  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_128x128.png"
-    DESTINATION "share/icons/hicolor/128x128/"
-    RENAME "sumwars.png")
-endif()
+#if (UNIX)
+#  install(FILES "packaging/sumwars.desktop"
+#    DESTINATION "share/applications")
+#    
+#  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_16x16.png"
+#    DESTINATION "share/icons/hicolor/16x16/"
+#    RENAME "sumwars.png")
+#  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_24x24.png"
+#    DESTINATION "share/icons/hicolor/24x24/"
+#    RENAME "sumwars.png")
+#  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_32x32.png"
+#    DESTINATION "share/icons/hicolor/32x32/"
+#    RENAME "sumwars.png")
+#  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_48x48.png"
+#    DESTINATION "share/icons/hicolor/48x48/"
+#    RENAME "sumwars.png")
+#  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_64x64.png"
+#    DESTINATION "share/icons/hicolor/64x64/"
+#    RENAME "sumwars.png")
+#  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_128x128.png"
+#    DESTINATION "share/icons/hicolor/128x128/"
+#    RENAME "sumwars.png")
+#endif()
 
 install(FILES "AUTHORS" "COPYING" "README" # we intentionally avoid installing "INSTALL" here
   DESTINATION "${SUMWARS_DOC_DIR}")
