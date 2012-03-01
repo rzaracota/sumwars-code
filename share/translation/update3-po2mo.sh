@@ -13,7 +13,7 @@ do
 	# get all po files from the directory and strip directory prefix
 	pos=$(ls $l/*.po)
 	pos=${pos//$l\//}
-	
+	[ -d "$l/LC_MESSAGES" ] || mkdir "$l/LC_MESSAGES"
 	for p in $pos
 	do
 		echo -n "$l$p "
