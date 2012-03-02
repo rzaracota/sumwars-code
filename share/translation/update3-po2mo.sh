@@ -16,8 +16,9 @@ do
 	[ -d "$l/LC_MESSAGES" ] || mkdir "$l/LC_MESSAGES"
 	for p in $pos
 	do
-		echo -n "$l$p "
+		echo -ne "\E[1;31m$l$p \E[0m"
 		msgfmt -c -v -o "$l/LC_MESSAGES/${p/%po/mo}" "$l/$p"
 	done
+	echo
 done
 echo "Complete."

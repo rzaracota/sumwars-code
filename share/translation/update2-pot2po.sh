@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 
 skipdirectories="potfiles xmlgettext"
 langs=$(ls -d */)
@@ -16,10 +16,14 @@ do
 	do
 		po=$l${p%t}
 		# create the file if it doesn't exist
-		#[ ! -f $po ] && touch "$po"
-		echo -n "$po "
-		msgmerge --color=auto --force-po --lang=$l -v -F -U "$po" "potfiles/$p"
+		echo -ne "\E[1;31m$po \E[0m"
+		if [ -f "$po" ] ; then
+			msgmerge --color=auto --force-po --lang="$l" -F -U "$po" "potfiles/$p"
+		else
+			msginit --color=auto -l "${l%/}" -i "potfiles/$p" -o "$po"
+		fi
 		#unix2dos $po
 	done
+	echo
 done
 echo "Complete."
