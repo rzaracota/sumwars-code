@@ -10,26 +10,14 @@ msgstr ""
 "PO-Revision-Date: 2011-04-07 21:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
+"Language: pt/\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: goblins.xml
-msgid "The goblinslayer"
-msgstr ""
-
-#: goblins.xml
-msgid "Quest finished"
-msgstr ""
-
-#: goblins.xml
-msgid "you killed enough goblins"
-msgstr ""
-
-#: goblins.xml
-msgid "peasant"
+msgid "Accept the quest?"
 msgstr ""
 
 #: goblins.xml
@@ -37,19 +25,15 @@ msgid "Goblins"
 msgstr ""
 
 #: goblins.xml
+msgid "Goblins (reward)"
+msgstr ""
+
+#: goblins.xml
+msgid "Have fun then."
+msgstr ""
+
+#: goblins.xml
 msgid "I have killed them all."
-msgstr ""
-
-#: goblins.xml
-msgid "Wow... you're a real hero, aren't ya?"
-msgstr ""
-
-#: goblins.xml
-msgid "Leave me alone and kill some more goblins."
-msgstr ""
-
-#: goblins.xml
-msgid "There are some stupid goblins pissing me off."
 msgstr ""
 
 #: goblins.xml
@@ -61,31 +45,7 @@ msgid "Interested?"
 msgstr ""
 
 #: goblins.xml
-msgid "Accept the quest?"
-msgstr ""
-
-#: goblins.xml
-msgid "Yes"
-msgstr ""
-
-#: goblins.xml
-msgid "No"
-msgstr ""
-
-#: goblins.xml
-msgid "Goblins (reward)"
-msgstr ""
-
-#: goblins.xml
-msgid "You want a second reward?"
-msgstr ""
-
-#: goblins.xml
-msgid "Of course!"
-msgstr ""
-
-#: goblins.xml
-msgid "Then I'll give you this goblin club. Be happy."
+msgid "Leave me alone and kill some more goblins."
 msgstr ""
 
 #: goblins.xml
@@ -93,9 +53,49 @@ msgid "Nearly done."
 msgstr ""
 
 #: goblins.xml
-msgid "Have fun then."
+msgid "No"
+msgstr ""
+
+#: goblins.xml
+msgid "Of course!"
+msgstr ""
+
+#: goblins.xml
+msgid "Quest finished"
+msgstr ""
+
+#: goblins.xml
+msgid "The goblinslayer"
+msgstr ""
+
+#: goblins.xml
+msgid "Then I'll give you this goblin club. Be happy."
+msgstr ""
+
+#: goblins.xml
+msgid "There are some stupid goblins pissing me off."
+msgstr ""
+
+#: goblins.xml
+msgid "Wow... you're a real hero, aren't ya?"
+msgstr ""
+
+#: goblins.xml
+msgid "Yes"
+msgstr ""
+
+#: goblins.xml
+msgid "You want a second reward?"
+msgstr ""
+
+#: goblins.xml
+msgid "peasant"
 msgstr ""
 
 #: goblins.xml
 msgid "region1"
+msgstr ""
+
+#: goblins.xml
+msgid "you killed enough goblins"
 msgstr ""

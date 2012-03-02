@@ -11,126 +11,41 @@ msgstr ""
 "PO-Revision-Date: 2011-10-01 00:17+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ru/\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
-
-#: joringsbridge.xml
-msgid "Joringsbridge"
-msgstr "Джорингсбридж"
-
-#: joringsbridge.xml
-msgid "joringsbridge"
-msgstr "Джорингсбридж"
-
-#: joringsbridge.xml
-msgid "I'm begging you, my prince!"
-msgstr ""
-
-#: joringsbridge.xml
-msgid "Leave at least a handful of soldiers here."
-msgstr ""
-
-#: joringsbridge.xml
-msgid "I can barly guard the village, let alone the surrounding farms!"
-msgstr ""
-
-#: joringsbridge.xml
-msgid "Silence!"
-msgstr "Молчать!"
-
-#: joringsbridge.xml
-msgid "..."
-msgstr "..."
-
-#: joringsbridge.xml
-msgid "The safety of the country has absolute priority."
-msgstr "Безопасность страны имеет бОльший приоритет."
-
-#: joringsbridge.xml
-msgid "Surely you can handle a hand full of lousy goblins."
-msgstr ""
-
-#: joringsbridge.xml
-msgid "Not to mention you have a mighty summoner at your side."
-msgstr ""
-
-#: joringsbridge.xml
-msgid "That's more than enough."
-msgstr "Этого более чем достаточно."
-
-#: joringsbridge.xml
-msgid "But the honourable mage has other duties!"
-msgstr "Но у уважаемого мага есть и другие обязанности."
-
-#: joringsbridge.xml
-#, fuzzy
-msgid "Quite so!"
-msgstr "Выход"
-
-#: joringsbridge.xml
-msgid ""
-"The pursuit of pathetic goblins is neither my duty nor do I see the point of "
-"such absurd amusement."
-msgstr ""
-
-#: joringsbridge.xml
-msgid ""
-"What would you do were the village to be attacked while I was on a fruitless "
-"hunt for goblins?"
-msgstr ""
-
-#: joringsbridge.xml
-msgid "And you really have no time to help out a bit?"
-msgstr ""
-
-#: joringsbridge.xml
-msgid "My humble apologies, but the council has given me very important tasks."
-msgstr "Мои извинение, но консул дал мне чрезвычайно важные задания."
-
-#: joringsbridge.xml
-msgid "As much as I'd like to help, I don't have any room for such a thing."
-msgstr "Как бы я ни хотел помочь, у меня нет полномочий на это."
-
-#: joringsbridge.xml
-msgid ""
-"But may I use this unique opportunity to congratulate you on your upcoming "
-"wedding with the archmage Ireana of"
-msgstr ""
-
-#: joringsbridge.xml
-msgid "Thanks, that is enough."
-msgstr "Спасибо, этого достаточно."
-
-#: joringsbridge.xml
-msgid "Sergeant Lutterer"
-msgstr "Сержант Люттерер"
-
-#: joringsbridge.xml
-msgid "Self-satisfied parasite, that mage!"
-msgstr ""
-
-#: joringsbridge.xml
-msgid ""
-"I just hope the kingdom has big granaries, if the greenskins torch the "
-"fields."
-msgstr ""
-
-#: joringsbridge.xml
-msgid "The presence of the mage alone will drive out every goblin!"
-msgstr ""
-
-#: joringsbridge.xml
-msgid "Stop bugging the prince with your incompetence."
-msgstr ""
 
 #: joringsbridge.xml
 msgid "!"
 msgstr "!"
 
 #: joringsbridge.xml
-msgid "Don't you have something better to do?"
+msgid "..."
+msgstr "..."
+
+#: joringsbridge.xml
+msgid "... probably not. Alright, even if I don't like it."
+msgstr ""
+
+#: joringsbridge.xml
+msgid "... under the heel of a certain Soren Airpaw, at your service."
+msgstr ""
+
+#: joringsbridge.xml
+msgid "2000 for every one."
+msgstr "Для любого из вас."
+
+#: joringsbridge.xml
+msgid "2000 gold pieces for everyone who is willing to help this humble man!"
+msgstr "2000 золота тому, кто желает помочь этому человеку!"
+
+#: joringsbridge.xml
+msgid "2000 gold pieces."
+msgstr "2000 золота."
+
+#: joringsbridge.xml
+msgid "Ah!"
 msgstr ""
 
 #: joringsbridge.xml
@@ -142,83 +57,49 @@ msgid "And they say, our kind is cold-hearted..."
 msgstr ""
 
 #: joringsbridge.xml
-msgid "Guards! Guards!"
-msgstr "Охрана! Охрана!"
-
-#: joringsbridge.xml
-msgid "Help! My farm is being raided by goblins!"
-msgstr "Помогите! На мою ферму напали гоблины!"
-
-#: joringsbridge.xml
-msgid "My family..."
-msgstr "Моя семья..."
-
-#: joringsbridge.xml
-msgid "Take the fool away!"
-msgstr "Уберите отсюда этого идиота!"
-
-#: joringsbridge.xml
-msgid "The prince has more important matters to tend to."
+msgid "And we get money. Two birds with one stone."
 msgstr ""
 
 #: joringsbridge.xml
-msgid "Wait!"
-msgstr "Стоять!"
-
-#: joringsbridge.xml
-msgid "What happened?"
-msgstr "Что случилось?"
-
-#: joringsbridge.xml
-msgid "Forgive me, my prince, but my wife and my children are still there."
-msgstr "Простите меня, мой принц, но моя жена и дети все ещё там."
-
-#: joringsbridge.xml
-msgid "I don't know how long the house will withstand them."
-msgstr "Я не знаю, как долго они смогут держать оборону в доме."
-
-#: joringsbridge.xml
-msgid "I beg of you: help me!"
-msgstr "Умоляю вас, помогите мне!"
-
-#: joringsbridge.xml
-msgid "We..."
-msgstr "Мы..."
-
-#: joringsbridge.xml
-msgid "My prince!"
-msgstr "Мой принц!"
-
-#: joringsbridge.xml
-msgid "We don't have time!"
-msgstr "У нас нет на это времени!"
-
-#: joringsbridge.xml
-msgid "The demons are at the northern border!"
-msgstr "Демоны находятся на северной границе!"
-
-#: joringsbridge.xml
-msgid "I know!"
-msgstr "Я знаю!"
-
-#: joringsbridge.xml
-msgid "2000 gold pieces for everyone who is willing to help this humble man!"
-msgstr "2000 золота тому, кто желает помочь этому человеку!"
-
-#: joringsbridge.xml
-msgid "ts"
+msgid "And you really have no time to help out a bit?"
 msgstr ""
 
 #: joringsbridge.xml
-msgid "2000 gold pieces."
-msgstr "2000 золота."
+msgid "Are you sure?"
+msgstr ""
 
 #: joringsbridge.xml
-msgid "2000 for every one."
-msgstr "Для любого из вас."
+msgid "Aren't you the... auxiliary forces of the council?"
+msgstr ""
 
 #: joringsbridge.xml
-msgid "That could almost be worth the trouble."
+msgid "Aren't you the... auxiliary forces of the council? ##solo"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "As much as I'd like to help, I don't have any room for such a thing."
+msgstr "Как бы я ни хотел помочь, у меня нет полномочий на это."
+
+#: joringsbridge.xml
+msgid "As you wish, my Prinz."
+msgstr "Как хотите, мой принц."
+
+#: joringsbridge.xml
+msgid "As you wish, my prince."
+msgstr ""
+
+#: joringsbridge.xml
+msgid ""
+"But may I use this unique opportunity to congratulate you on your upcoming "
+"wedding with the archmage Ireana of"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "But the honourable mage has other duties!"
+msgstr "Но у уважаемого мага есть и другие обязанности."
+
+#: joringsbridge.xml
+msgid "By Marek!"
 msgstr ""
 
 #: joringsbridge.xml
@@ -226,60 +107,19 @@ msgid "Don't even think about it!"
 msgstr "Даже не думай об этом!"
 
 #: joringsbridge.xml
-msgid "You are to go to Dwarfenwall immediately!"
-msgstr "Тебе следует немедленно идти в Дворфенфолл!"
-
-#: joringsbridge.xml
-msgid "Where do you come from? Didn't I exclude you?"
+msgid "Don't you have something better to do?"
 msgstr ""
 
 #: joringsbridge.xml
-msgid "Your trifles cannot stop me."
-msgstr ""
+msgid "Forgive me, my prince, but my wife and my children are still there."
+msgstr "Простите меня, мой принц, но моя жена и дети все ещё там."
 
 #: joringsbridge.xml
-msgid "The blood always works..."
-msgstr ""
+msgid "Guards! Guards!"
+msgstr "Охрана! Охрана!"
 
 #: joringsbridge.xml
-msgid "Ah!"
-msgstr ""
-
-#: joringsbridge.xml
-msgid ""
-"The mage over there has another of those crystals on his staff, hasn't he?"
-msgstr ""
-
-#: joringsbridge.xml
-msgid "You people are really unnerving somehow."
-msgstr ""
-
-#: joringsbridge.xml
-msgid "Who cares what you think? Let the peasant be a peasant and get moving!"
-msgstr ""
-
-#: joringsbridge.xml
-msgid "Well..."
-msgstr "Что ж..."
-
-#: joringsbridge.xml
-msgid "You have to go to Dwarfenwall immediately!"
-msgstr "Вам следует немедленно идти в Дворфенфолл!"
-
-#: joringsbridge.xml
-msgid "Where did you pop out from? Didn't we exclude you?"
-msgstr ""
-
-#: joringsbridge.xml
-msgid "Rubbish! Take a look at the crystal on the mege's staff."
-msgstr ""
-
-#: joringsbridge.xml
-msgid "Looks like our model, doesn't it?"
-msgstr ""
-
-#: joringsbridge.xml
-msgid "Whatever. Get moving!"
+msgid "Hand over the gold, if you find someone who helps you after all."
 msgstr ""
 
 #: joringsbridge.xml
@@ -287,31 +127,45 @@ msgid "Help the peasant?"
 msgstr "Помочь крестьянину?"
 
 #: joringsbridge.xml
-msgid "Yes"
-msgstr "Да"
+msgid "Help! My farm is being raided by goblins!"
+msgstr "Помогите! На мою ферму напали гоблины!"
 
 #: joringsbridge.xml
-msgid "No"
-msgstr "Нет"
-
-#: joringsbridge.xml
-msgid "Only a stone would watch deedless."
+msgid "I am true to my word."
 msgstr ""
 
 #: joringsbridge.xml
-msgid "Who knows how many sou... goblins are walking around there!"
+msgid "I beg of you: help me!"
+msgstr "Умоляю вас, помогите мне!"
+
+#: joringsbridge.xml
+msgid "I can barly guard the village, let alone the surrounding farms!"
 msgstr ""
 
 #: joringsbridge.xml
-msgid "And we get money. Two birds with one stone."
+msgid "I don't know how long the house will withstand them."
+msgstr "Я не знаю, как долго они смогут держать оборону в доме."
+
+#: joringsbridge.xml
+msgid ""
+"I just hope the kingdom has big granaries, if the greenskins torch the "
+"fields."
 msgstr ""
 
 #: joringsbridge.xml
-msgid "What do you think you're doing? You are to go to Dwarfenwall!"
+msgid "I know!"
+msgstr "Я знаю!"
+
+#: joringsbridge.xml
+msgid "I will pray that your family is safe long enough."
 msgstr ""
 
 #: joringsbridge.xml
-msgid "When I get there was never part of the deal!"
+msgid "I'm begging you, my prince!"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "I'm sorry, good man."
 msgstr ""
 
 #: joringsbridge.xml
@@ -319,19 +173,70 @@ msgid "If the city is lost, I'll just conquer it back!"
 msgstr "Если мы потеряем город, то я просто захвачу его обратно!"
 
 #: joringsbridge.xml
-msgid "So it's decided."
-msgstr "Так что решено."
-
-#: joringsbridge.xml
-msgid "When we get there was never part of the deal!"
-msgstr ""
-
-#: joringsbridge.xml
 msgid "If the city is lost, we'll just conquer it back!"
 msgstr "Если мы потеряем город, то мы просто захватим его обратно!"
 
 #: joringsbridge.xml
-msgid "Yes, show him who's in charge!"
+msgid "Is that a problem for you?"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "Joringsbridge"
+msgstr "Джорингсбридж"
+
+#: joringsbridge.xml
+msgid "Leave at least a handful of soldiers here."
+msgstr ""
+
+#: joringsbridge.xml
+msgid "Looks like our model, doesn't it?"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "My family..."
+msgstr "Моя семья..."
+
+#: joringsbridge.xml
+msgid "My humble apologies, but the council has given me very important tasks."
+msgstr "Мои извинение, но консул дал мне чрезвычайно важные задания."
+
+#: joringsbridge.xml
+msgid "My prince!"
+msgstr "Мой принц!"
+
+#: joringsbridge.xml
+msgid "My prince?"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "No"
+msgstr "Нет"
+
+#: joringsbridge.xml
+msgid "Nobody?"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "Not to mention you have a mighty summoner at your side."
+msgstr ""
+
+#: joringsbridge.xml
+msgid "Only a stone would watch deedless."
+msgstr ""
+
+#: joringsbridge.xml
+msgid ""
+"Only hand over the gold if the goblins are driven off and the peasants are "
+"alive in the end."
+msgstr ""
+"Получите деньги только если гоблины исчезнут, а крестьяне останутся живы."
+
+#: joringsbridge.xml
+msgid "Oops..."
+msgstr "Упс..."
+
+#: joringsbridge.xml
+msgid "Otherwise, do your work diligently."
 msgstr ""
 
 #: joringsbridge.xml
@@ -343,19 +248,157 @@ msgid "Prince, we take the job!"
 msgstr "Принц, мы согласны на это задание!"
 
 #: joringsbridge.xml
-msgid "By Marek!"
+#, fuzzy
+msgid "Quite so!"
+msgstr "Выход"
+
+#: joringsbridge.xml
+msgid "Rubbish! Take a look at the crystal on the mege's staff."
 msgstr ""
 
 #: joringsbridge.xml
-msgid "Aren't you the... auxiliary forces of the council? ##solo"
+msgid "Self-satisfied parasite, that mage!"
 msgstr ""
 
 #: joringsbridge.xml
-msgid "Aren't you the... auxiliary forces of the council?"
+msgid "Sergeant Lutterer"
+msgstr "Сержант Люттерер"
+
+#: joringsbridge.xml
+msgid "Sergeant!"
+msgstr "Сержант!"
+
+#: joringsbridge.xml
+msgid "Silence!"
+msgstr "Молчать!"
+
+#: joringsbridge.xml
+msgid "So it's decided."
+msgstr "Так что решено."
+
+#: joringsbridge.xml
+msgid "Stop bugging the prince with your incompetence."
 msgstr ""
 
 #: joringsbridge.xml
-msgid "... under the heel of a certain Soren Airpaw, at your service."
+msgid "Surely you can handle a hand full of lousy goblins."
+msgstr ""
+
+#: joringsbridge.xml
+msgid "Take the fool away!"
+msgstr "Уберите отсюда этого идиота!"
+
+#: joringsbridge.xml
+msgid "Thanks, that is enough."
+msgstr "Спасибо, этого достаточно."
+
+#: joringsbridge.xml
+msgid "That could almost be worth the trouble."
+msgstr ""
+
+#: joringsbridge.xml
+msgid "That much distrust is really unnecessary during a war. "
+msgstr ""
+
+#: joringsbridge.xml
+msgid "That's more than enough."
+msgstr "Этого более чем достаточно."
+
+#: joringsbridge.xml
+msgid "The blood always works..."
+msgstr ""
+
+#: joringsbridge.xml
+msgid "The demons are at the northern border!"
+msgstr "Демоны находятся на северной границе!"
+
+#: joringsbridge.xml
+msgid ""
+"The mage over there has another of those crystals on his staff, hasn't he?"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "The presence of the mage alone will drive out every goblin!"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "The prince has more important matters to tend to."
+msgstr ""
+
+#: joringsbridge.xml
+msgid ""
+"The pursuit of pathetic goblins is neither my duty nor do I see the point of "
+"such absurd amusement."
+msgstr ""
+
+#: joringsbridge.xml
+msgid "The safety of the country has absolute priority."
+msgstr "Безопасность страны имеет бОльший приоритет."
+
+#: joringsbridge.xml
+msgid "Wait!"
+msgstr "Стоять!"
+
+#: joringsbridge.xml
+msgid "We don't have time!"
+msgstr "У нас нет на это времени!"
+
+#: joringsbridge.xml
+msgid "We..."
+msgstr "Мы..."
+
+#: joringsbridge.xml
+msgid "Well..."
+msgstr "Что ж..."
+
+#: joringsbridge.xml
+msgid "What do you think you're doing? You are to go to Dwarfenwall!"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "What happened?"
+msgstr "Что случилось?"
+
+#: joringsbridge.xml
+msgid "What if they kill the peasants along?"
+msgstr "Что если они сами убьют крестьян?"
+
+#: joringsbridge.xml
+msgid ""
+"What would you do were the village to be attacked while I was on a fruitless "
+"hunt for goblins?"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "Whatever. Get moving!"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "When I get there was never part of the deal!"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "When we get there was never part of the deal!"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "Where did you pop out from? Didn't we exclude you?"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "Where do you come from? Didn't I exclude you?"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "Who cares what you think? Let the peasant be a peasant and get moving!"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "Who is that?"
+msgstr "Кто это?"
+
+#: joringsbridge.xml
+msgid "Who knows how many sou... goblins are walking around there!"
 msgstr ""
 
 #: joringsbridge.xml
@@ -363,75 +406,33 @@ msgid "Windclaw, you fool!"
 msgstr ""
 
 #: joringsbridge.xml
-msgid "Oops..."
-msgstr "Упс..."
+msgid "Yes"
+msgstr "Да"
 
 #: joringsbridge.xml
-msgid "Is that a problem for you?"
+msgid "Yes, show him who's in charge!"
 msgstr ""
 
 #: joringsbridge.xml
-msgid "... probably not. Alright, even if I don't like it."
+msgid "You are to go to Dwarfenwall immediately!"
+msgstr "Тебе следует немедленно идти в Дворфенфолл!"
+
+#: joringsbridge.xml
+msgid "You have to go to Dwarfenwall immediately!"
+msgstr "Вам следует немедленно идти в Дворфенфолл!"
+
+#: joringsbridge.xml
+msgid "You people are really unnerving somehow."
 msgstr ""
 
 #: joringsbridge.xml
-msgid "Are you sure?"
+msgid "Your trifles cannot stop me."
 msgstr ""
 
 #: joringsbridge.xml
-msgid "What if they kill the peasants along?"
-msgstr "Что если они сами убьют крестьян?"
+msgid "joringsbridge"
+msgstr "Джорингсбридж"
 
 #: joringsbridge.xml
-msgid "Sergeant!"
-msgstr "Сержант!"
-
-#: joringsbridge.xml
-msgid ""
-"Only hand over the gold if the goblins are driven off and the peasants are "
-"alive in the end."
+msgid "ts"
 msgstr ""
-"Получите деньги только если гоблины исчезнут, а крестьяне останутся живы."
-
-#: joringsbridge.xml
-msgid "Otherwise, do your work diligent."
-msgstr ""
-
-#: joringsbridge.xml
-msgid "As you wish, my Prinz."
-msgstr "Как хотите, мой принц."
-
-#: joringsbridge.xml
-msgid "That much distrust is really unnecessary during a war. "
-msgstr ""
-
-#: joringsbridge.xml
-msgid "Nobody?"
-msgstr ""
-
-#: joringsbridge.xml
-msgid "My prince?"
-msgstr ""
-
-#: joringsbridge.xml
-msgid "I am true to my word."
-msgstr ""
-
-#: joringsbridge.xml
-msgid "Hand over the gold, if you find someone who helps you after all."
-msgstr ""
-
-#: joringsbridge.xml
-msgid "As you wish, my prince."
-msgstr ""
-
-#: joringsbridge.xml
-msgid "I'm sorry, good man."
-msgstr ""
-
-#: joringsbridge.xml
-msgid "I will pray that your family is safe long enough."
-msgstr ""
-
-#~ msgid "Who is that?"
-#~ msgstr "Кто это?"

@@ -1,20 +1,19 @@
-# SOME DESCRIPTIVE TITLE.
+# SOME DESCRIPTIVE TITLE
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# This file is distributed under the same license as the PACKAGE package
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.5\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: PACKAGE VERSION\n""Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: \n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: tutorial.xml
 msgid "Tutorial"
@@ -77,9 +76,7 @@ msgid "Are you looking for trouble? Who is responsible for this mess!?!"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"I almost had that damn ogre and suddenly someone's ripping out my guts who's "
-"not even near me!"
+msgid "I almost had that damn ogre and suddenly someone's ripping out my guts who's not even near me!"
 msgstr ""
 
 #: tutorial.xml
@@ -91,9 +88,7 @@ msgid "I'll show you the endurance capacities of magic squirters!"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"What a disgusting ambiance. I did not desire to be here... and I had just "
-"found a nice and safe place. "
+msgid "What a disgusting ambiance. I did not desire to be here... and I had just found a nice and safe place. "
 msgstr ""
 
 #: tutorial.xml
@@ -105,21 +100,15 @@ msgid "No, Tolec. You must say that with much more authority."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"It seems someone here has greater knowledge of how Harad is keeping me alive "
-"and moves me."
+msgid "It seems someone here has greater knowledge of how Harad is keeping me alive and moves me."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"It seems someone here has greater knowledge of how Harad is keeping us alive "
-"and moves us."
+msgid "It seems someone here has greater knowledge of how Harad is keeping us alive and moves us."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Whoever the head honcho is here: He'd better know what he's gotten himself "
-"into."
+msgid "Whoever the head honcho is here: He'd better know what he's gotten himself into."
 msgstr ""
 
 #: tutorial.xml
@@ -127,15 +116,11 @@ msgid "Lots of money could appease me again."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Please excuse your somewhat unpleasant arrival. Lord Master Soren Windclaw "
-"requests your presence. ##solo"
+msgid "Please excuse your somewhat unpleasant arrival. Lord Master Soren Windclaw requests your presence. ##solo"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Please excuse your somewhat unpleasant arrival. Lord Master Soren Windclaw "
-"requests your presence."
+msgid "Please excuse your somewhat unpleasant arrival. Lord Master Soren Windclaw requests your presence."
 msgstr ""
 
 #: tutorial.xml
@@ -171,9 +156,7 @@ msgid "Are you kidding me? Who the hell is this windpaw?"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"A splendid question! Short and precise. Maybe one can actually work with "
-"that one."
+msgid "A splendid question! Short and precise. Maybe one can actually work with that one."
 msgstr ""
 
 #: tutorial.xml
@@ -193,9 +176,7 @@ msgid "Spill it! Where are we, and who has the nerve to cross Branded Ones?!"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Well, the Lord Master has affirmed that he will explain everything in detail "
-"to you. ##solo"
+msgid "Well, the Lord Master has affirmed that he will explain everything in detail to you. ##solo"
 msgstr ""
 
 #: tutorial.xml
@@ -207,9 +188,7 @@ msgid "You shouldn't be able to pose a threat to us at the moment. ##solo"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Well, the Lord Master has affirmed that he will explain everything in detail "
-"to you."
+msgid "Well, the Lord Master has affirmed that he will explain everything in detail to you."
 msgstr ""
 
 #: tutorial.xml
@@ -241,15 +220,11 @@ msgid "This is not the right time to be impressed."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Fine. Now that that's clarified I'd like to ask you to surrender your "
-"weapons. ##solo"
+msgid "Fine. Now that that's clarified I'd like to ask you to surrender your weapons. ##solo"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Fine. Now that that's clarified I'd like to ask you all to surrender your "
-"weapons."
+msgid "Fine. Now that that's clarified I'd like to ask you all to surrender your weapons."
 msgstr ""
 
 #: tutorial.xml
@@ -277,9 +252,7 @@ msgid "What if we don't feel like surrendering our weapons?"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"I'm very sorry, but before that we cannot release any of you of the safety "
-"area."
+msgid "I'm very sorry, but before that we cannot release any of you of the safety area."
 msgstr ""
 
 #: tutorial.xml
@@ -287,9 +260,7 @@ msgid "What if I don't feel like surrendering my weapons?"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"I'm very sorry, but before that we cannot release you of the safety area. "
-"##solo"
+msgid "I'm very sorry, but before that we cannot release you of the safety area. ##solo"
 msgstr ""
 
 #: tutorial.xml
@@ -298,6 +269,10 @@ msgstr ""
 
 #: tutorial.xml
 msgid "The choice is yours."
+msgstr ""
+
+#: tutorial.xml
+msgid "elCnlLowerCaves"
 msgstr ""
 
 #: tutorial.xml
@@ -345,8 +320,7 @@ msgid "You will not leave it until you surrender your weapon. ##solo"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Just tell us by clicking on one of us, when you change your mind. ##solo"
+msgid "Just tell us by clicking on one of us, when you change your mind. ##solo"
 msgstr ""
 
 #: tutorial.xml
@@ -366,10 +340,7 @@ msgid "Follow me, please."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"What's keeping you? Has the transport afflicted you so much that you don't "
-"even know how to walk anymore? Just click with the left mouse button at a "
-"place on the ground. Then it will all come back to you on its own."
+msgid "What's keeping you? Has the transport afflicted you so much that you don't even know how to walk anymore? Just click with the left mouse button at a place on the ground. Then it will all come back to you on its own."
 msgstr ""
 
 #: tutorial.xml
@@ -429,9 +400,7 @@ msgid "Size isn't everything."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Looks like a departure ticket to me. It can't be more painful than the "
-"arrival."
+msgid "Looks like a departure ticket to me. It can't be more painful than the arrival."
 msgstr ""
 
 #: tutorial.xml
@@ -443,9 +412,7 @@ msgid "What?"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"The Lord Master Windclaw feared that you would kill yourself after your "
-"arrival in order to escape, so he took... measures."
+msgid "The Lord Master Windclaw feared that you would kill yourself after your arrival in order to escape, so he took... measures."
 msgstr ""
 
 #: tutorial.xml
@@ -473,9 +440,7 @@ msgid "So? I didn't wish for this ability."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Well, as you are now, you can only do that at places of great magical "
-"concentrations. In other words..."
+msgid "Well, as you are now, you can only do that at places of great magical concentrations. In other words..."
 msgstr ""
 
 #: tutorial.xml
@@ -503,9 +468,7 @@ msgid "It can't be all too healthy to be this smart."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Er, well, yes. Since the main way is currently blocked, we'll have to try to "
-"get through the enclosure with the new experiments."
+msgid "Er, well, yes. Since the main way is currently blocked, we'll have to try to get through the enclosure with the new experiments."
 msgstr ""
 
 #: tutorial.xml
@@ -513,9 +476,7 @@ msgid "There's a back door for feeding, and word is..."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"... that the old Firewhirl has a secret door for a direct connection to the "
-"kitchen. That could work! But the beasts are not exactly without danger."
+msgid "... that the old Firewhirl has a secret door for a direct connection to the kitchen. That could work! But the beasts are not exactly without danger."
 msgstr ""
 
 #: tutorial.xml
@@ -523,21 +484,15 @@ msgid "It's only those sluglings."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"I don't know... I don't feel like being bedridden for three weeks just "
-"because of some slimy fire breath."
+msgid "I don't know... I don't feel like being bedridden for three weeks just because of some slimy fire breath."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"To Harad! That's impossible to put up with. Give us our weapons and we'll "
-"take care of that."
+msgid "To Harad! That's impossible to put up with. Give us our weapons and we'll take care of that."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"To Harad! That's impossible to put up with. Give me my weapon and I'll take "
-"care of that."
+msgid "To Harad! That's impossible to put up with. Give me my weapon and I'll take care of that."
 msgstr ""
 
 #: tutorial.xml
@@ -545,9 +500,7 @@ msgid "Well, you're right about that..."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Yes. Considering the difficult circumstances we can do that, I guess. Here "
-"you go."
+msgid "Yes. Considering the difficult circumstances we can do that, I guess. Here you go."
 msgstr ""
 
 #: tutorial.xml
@@ -559,9 +512,7 @@ msgid "Where is my weapon?"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Er... Lord Master Windclaw feared that there could be a situation in which "
-"you had to fall back to, er, force of arms."
+msgid "Er... Lord Master Windclaw feared that there could be a situation in which you had to fall back to, er, force of arms."
 msgstr ""
 
 #: tutorial.xml
@@ -569,8 +520,7 @@ msgid "That's why he gave us these."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Surely you understand that you cannot run around here with unchecked weapons."
+msgid "Surely you understand that you cannot run around here with unchecked weapons."
 msgstr ""
 
 #: tutorial.xml
@@ -586,9 +536,7 @@ msgid "You... can still remember how to use a weapon, right?"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"We were told that the first minutes are like one taking a step for the first "
-"time."
+msgid "We were told that the first minutes are like one taking a step for the first time."
 msgstr ""
 
 #: tutorial.xml
@@ -600,13 +548,11 @@ msgid "Explain inventory"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"First you must open your inventory. By default, you do so with the 'i'-key."
+msgid "First you must open your inventory. By default, you do so with the 'i'-key."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Alternatively, you can click on the inventory button below in the status bar."
+msgid "Alternatively, you can click on the inventory button below in the status bar."
 msgstr ""
 
 #: tutorial.xml
@@ -614,15 +560,11 @@ msgid "In the inventory you'll see your items. They are ordered by their size."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"The weapon you just obtained is a mid-sized item and thus is found in the "
-"middle field."
+msgid "The weapon you just obtained is a mid-sized item and thus is found in the middle field."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Click on the weapon with the left mouse button. Next click on the weapon "
-"field in the equipment above your inventory, and it will be equipped."
+msgid "Click on the weapon with the left mouse button. Next click on the weapon field in the equipment above your inventory, and it will be equipped."
 msgstr ""
 
 #: tutorial.xml
@@ -682,8 +624,7 @@ msgid "I just hope they have a soul."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Don't worry. Even a golem has one. Those things will not be the exception."
+msgid "Don't worry. Even a golem has one. Those things will not be the exception."
 msgstr ""
 
 #: tutorial.xml
@@ -711,15 +652,11 @@ msgid "Wait a sec, Derred. They somehow seem stronger."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Your witch stuff may have weakened me, but I take some of the power from "
-"every being I kill and become stronger."
+msgid "Your witch stuff may have weakened me, but I take some of the power from every being I kill and become stronger."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Your witch stuff may have weakened us, but we take some of the power from "
-"every being we kill and become stronger."
+msgid "Your witch stuff may have weakened us, but we take some of the power from every being we kill and become stronger."
 msgstr ""
 
 #: tutorial.xml
@@ -727,13 +664,7 @@ msgid "You'd better think about who you're calling `weakling' here!"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Hm, right. The Lord Master said that something like this could happen. Do "
-"you know how to convert this power into proper abilities?"
-msgstr ""
-
-#: tutorial.xml
-msgid "Explain level up?"
+msgid "Hm, right. The Lord Master said that something like this could happen. Do you know how to convert this power into proper abilities?"
 msgstr ""
 
 #: tutorial.xml
@@ -741,21 +672,15 @@ msgid "Explain level up"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"You can upgrade your attributes every time, and sometimes you even have "
-"enough energy for a new skill. ##solo"
+msgid "You can upgrade your attributes every time, and sometimes you even have enough energy for a new skill. ##solo"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Yes. That was the thing with the big plus in the lower left corner. Just "
-"click on it and distribute your attribute points. ##solo"
+msgid "Yes. That was the thing with the big plus in the lower left corner. Just click on it and distribute your attribute points. ##solo"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Exactly. You can distribute the skill point in the skill window. The Lord "
-"Master said that you could choose from three categories. ##solo"
+msgid "Exactly. You can distribute the skill point in the skill window. The Lord Master said that you could choose from three categories. ##solo"
 msgstr ""
 
 #: tutorial.xml
@@ -763,21 +688,15 @@ msgid "Depending on your... character mass. ##solo"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"You can upgrade your attributes every time, and sometimes you even have "
-"enough energy for a new skill."
+msgid "You can upgrade your attributes every time, and sometimes you even have enough energy for a new skill."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Yes. That was the thing with the big plus in the lower left corner. Just "
-"click on it and distribute your attribute points."
+msgid "Yes. That was the thing with the big plus in the lower left corner. Just click on it and distribute your attribute points."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Exactly. You can distribute the skill point in the skill window. The Lord "
-"Master said that you could choose from three categories."
+msgid "Exactly. You can distribute the skill point in the skill window. The Lord Master said that you could choose from three categories."
 msgstr ""
 
 #: tutorial.xml
@@ -829,9 +748,7 @@ msgid "More of those beasts?"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Urk! They seem to have broken out somehow. I hope they don't breed in the "
-"crevices."
+msgid "Urk! They seem to have broken out somehow. I hope they don't breed in the crevices."
 msgstr ""
 
 #: tutorial.xml
@@ -851,9 +768,7 @@ msgid "I don't waste my time crawling through kitchen corridors, Cursed One."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"That's correct, Branded One. You wouldn't want to be called `harvest' now, "
-"would you?"
+msgid "That's correct, Branded One. You wouldn't want to be called `harvest' now, would you?"
 msgstr ""
 
 #: tutorial.xml
@@ -869,9 +784,7 @@ msgid "Damn this place!"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"If it goes to pieces completely I will be trapped down here because of what "
-"they've done to me."
+msgid "If it goes to pieces completely I will be trapped down here because of what they've done to me."
 msgstr ""
 
 #: tutorial.xml
@@ -879,9 +792,7 @@ msgid "Are you all right down there? ##solo"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"If it goes to pieces completely we will be trapped down here because of what "
-"they've done to us."
+msgid "If it goes to pieces completely we will be trapped down here because of what they've done to us."
 msgstr ""
 
 #: tutorial.xml
@@ -965,8 +876,7 @@ msgid "There's only one way down here?!"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Have you not thought about what could happen with your pet monsters up there?"
+msgid "Have you not thought about what could happen with your pet monsters up there?"
 msgstr ""
 
 #: tutorial.xml
@@ -1014,8 +924,7 @@ msgid "It was damaged by falling rocks earlier."
 msgstr ""
 
 #: tutorial.xml
-msgid "You could use it to get to the sewer tunnels that connect the different "
-"levels of this most magnificent construction."
+msgid "You could use it to get to the sewer tunnels that connect the different levels of this most magnificent construction."
 msgstr ""
 
 #: tutorial.xml
@@ -1031,9 +940,7 @@ msgid "I sent one of my workers to get a cog earlier."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"If he hasn't been eaten by the slugs out there, he should be back any minute "
-"now."
+msgid "If he hasn't been eaten by the slugs out there, he should be back any minute now."
 msgstr ""
 
 #: tutorial.xml
@@ -1053,9 +960,7 @@ msgid "These halls are not forsaken!"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"They are filled with the unfathomable wisdom of Akeran and will soon be one of "
-"the greatest works in his name."
+msgid "They are filled with the unfathomable wisdom of Akeran and will soon be one of the greatest works in his name."
 msgstr ""
 
 #: tutorial.xml
@@ -1075,9 +980,7 @@ msgid "You can go there and... borrow one, if you're lucky."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Just ask the master of the laboratory and he will surely give you one, if "
-"you're found worthy of Akeran's blessing."
+msgid "Just ask the master of the laboratory and he will surely give you one, if you're found worthy of Akeran's blessing."
 msgstr ""
 
 #: tutorial.xml
@@ -1117,8 +1020,7 @@ msgid "This doesn't look like I can simply take it."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"I guess I would first have to stop whatever is using the crystal right now."
+msgid "I guess I would first have to stop whatever is using the crystal right now."
 msgstr ""
 
 #: tutorial.xml
@@ -1138,8 +1040,7 @@ msgid "This doesn't look like you can simply take it."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"I guess we would first have to stop whatever is using the crystal right now."
+msgid "I guess we would first have to stop whatever is using the crystal right now."
 msgstr ""
 
 #: tutorial.xml
@@ -1147,9 +1048,7 @@ msgid "Yikes, it's freezing!"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"That felt like standing on a single mountaintop during a thunderstorm... "
-"and the energy source still won't come of."
+msgid "That felt like standing on a single mountaintop during a thunderstorm... and the energy source still won't come of."
 msgstr ""
 
 #: tutorial.xml
@@ -1157,9 +1056,7 @@ msgid "Ouch, I burnt my hands!"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Hm... it's stuck. I think I may have to temper around with this setup "
-"a bit more."
+msgid "Hm... it's stuck. I think I may have to temper around with this setup a bit more."
 msgstr ""
 
 #: tutorial.xml
@@ -1231,9 +1128,7 @@ msgid "In fact, have you thought of using your powerful skills?##solo"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"The Lord Master thought that you could do considerably more than dully beat "
-"your enemies.##solo"
+msgid "The Lord Master thought that you could do considerably more than dully beat your enemies.##solo"
 msgstr ""
 
 #: tutorial.xml
@@ -1241,9 +1136,7 @@ msgid "In fact, have you thought of using your powerful skills?"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"The Lord Master thought that you could do considerably more than dully beat "
-"your enemies."
+msgid "The Lord Master thought that you could do considerably more than dully beat your enemies."
 msgstr ""
 
 #: tutorial.xml
@@ -1259,14 +1152,11 @@ msgid "Explain skills"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"With the 't'-key you open the skill window. Here you can choose a skill."
+msgid "With the 't'-key you open the skill window. Here you can choose a skill."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Just click with the same mouse button you would like to use the skill with "
-"on the skill icon."
+msgid "Just click with the same mouse button you would like to use the skill with on the skill icon."
 msgstr ""
 
 #: tutorial.xml
@@ -1274,14 +1164,11 @@ msgid "Skills are distinguished into two groups."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"After you have used a skill, you cannot use a skill of that group for a "
-"while."
+msgid "After you have used a skill, you cannot use a skill of that group for a while."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Look at the picture in the status bar to know if a skill is ready for use."
+msgid "Look at the picture in the status bar to know if a skill is ready for use."
 msgstr ""
 
 #: tutorial.xml
@@ -1301,21 +1188,15 @@ msgid "Wait a second. What if the old geezer has attached a trap to it?"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"You're right. It's best if you do it, Branded One. At least nothing lasting "
-"can happen that way.##female"
+msgid "You're right. It's best if you do it, Branded One. At least nothing lasting can happen that way.##female"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"You're right. It's best if you do it, Branded One. At least nothing lasting "
-"can happen that way.##male"
+msgid "You're right. It's best if you do it, Branded One. At least nothing lasting can happen that way.##male"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"You're right. It's best if you do it, Branded One. At least nothing lasting "
-"can happen that way."
+msgid "You're right. It's best if you do it, Branded Ones. At least nothing lasting can happen that way."
 msgstr ""
 
 #: tutorial.xml
@@ -1331,9 +1212,7 @@ msgid "Open secret door"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Do you see the shelf in that passage? That is the door. Just move it by "
-"clicking on it."
+msgid "Do you see the shelf in that passage? That is the door. Just move it by clicking on it."
 msgstr ""
 
 #: tutorial.xml
@@ -1349,15 +1228,11 @@ msgid "Good, Firewhirl is not here."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"What is he researching here all the time? All those flowers can hardly be "
-"for the purpose of the Council and Akeran."
+msgid "What is he researching here all the time? All those flowers can hardly be for the purpose of the Council and Akeran."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"I'm sure there's more to it than meets the eye. An apple elemental for "
-"example."
+msgid "I'm sure there's more to it than meets the eye. An apple elemental for example."
 msgstr ""
 
 #: tutorial.xml
@@ -1369,15 +1244,11 @@ msgid "Joking aside! We must go on."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"With all the damn beasts roaming around here freely, I almost think they "
-"just want me as an exterminator."
+msgid "With all the damn beasts roaming around here freely, I almost think they just want me as an exterminator."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"With all the damn beasts roaming around here freely, I almost think they "
-"just want us as exterminators."
+msgid "With all the damn beasts roaming around here freely, I almost think they just want us as exterminators."
 msgstr ""
 
 #: tutorial.xml
@@ -1401,8 +1272,7 @@ msgid "Windclaw, heretic!"
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"A Cursed One has to be happy if he has something to kill all along, right?"
+msgid "A Cursed One has to be happy if he has something to kill all along, right?"
 msgstr ""
 
 #: tutorial.xml
@@ -1422,8 +1292,7 @@ msgid "I truly am the exterminator here."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"Cursed Ones have to be happy if they have something to kill all along, right?"
+msgid "Cursed Ones have to be happy if they have something to kill all along, right?"
 msgstr ""
 
 #: tutorial.xml
@@ -1467,7 +1336,6 @@ msgid "Philistine."
 msgstr ""
 
 #: tutorial.xml
-msgid ""
-"If they hadn't all those needless balustrades into the void, they wouldn't "
-"have to mop escaped sluglings from the floor."
+msgid "If they hadn't all those needless balustrades into the void, they wouldn't have to mop escaped sluglings from the floor."
 msgstr ""
+

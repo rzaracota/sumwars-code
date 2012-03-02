@@ -14,95 +14,94 @@ msgstr ""
 "PO-Revision-Date: 2011-10-28 16:35+0200\n"
 "Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
 "Language-Team: Italiano <>\n"
-"Language: it\n"
+"Language: it/\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bits\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: herbalist.xml
-msgid "Herb collector"
-msgstr "L'erborista"
-
-#: herbalist.xml
-msgid "And another good deed done. I could get used to this."
-msgstr "E un'altra buona azione e' stata fatta. Ormai potrei abituarmici."
-
-#: herbalist.xml
-msgid ""
-"The herbalist of Joringsbridge wants to have the berries of 10 bushes. "
-"Berries from \"..(herbalist.bushes)..\" bushes have been collected."
-msgstr ""
-"L'erborista di Ponte Joring vorrebbe le bacche di 10 arbusti. \"..(herbalist."
-"bushes)..\" sono state collezionate"
-
-#: herbalist.xml
-msgid "joringsbridge"
-msgstr "Ponte Joring"
-
-#: herbalist.xml
-msgid "Gertlinde Kampfer"
-msgstr "Gertlinde Kampfer"
-
-#: herbalist.xml
-msgid "Herb gathering"
-msgstr "Raccolta delle erbe"
-
-#: herbalist.xml
-msgid "Here, old women. Your berries."
-msgstr "Eccomi anziana signora..le tue bacche."
+msgid "Accept Quest?"
+msgstr "Accetti la missione?"
 
 #: herbalist.xml
 msgid "Ah, well done, young one."
 msgstr "Ah ben fatto...giovanotto."
 
 #: herbalist.xml
-msgid "Here, let me give you something in return."
-msgstr "Ora, permettimi di darti qualcosa in cambio."
+msgid "And another good deed done. I could get used to this."
+msgstr "E un'altra buona azione e' stata fatta. Ormai potrei abituarmici."
 
 #: herbalist.xml
-msgid "I need more berries, if I am to do something useful with them."
-msgstr "Se devo fare qualcosa di utile, ho bisogno di piu' bacche."
+msgid "But if you change your mind, I'm not running away from here."
+msgstr "Ma se cambi idea, mi troverai sempre qui."
+
+#: herbalist.xml
+msgid "But only the red berries."
+msgstr "Ma soltanto bacche rosse."
+
+#: herbalist.xml
+msgid "Collect\"..bushes_left..\" more herbs."
+msgstr "Colleziona altre \"..bushes_left..\" bacche dagli arbusti."
 
 #: herbalist.xml
 msgid "Do you want to collect some berries after all?"
 msgstr "Vuoi raccoglierne ancora?"
 
 #: herbalist.xml
-msgid "Accept Quest?"
-msgstr "Accetti la missione?"
+msgid "Fiddlesticks!"
+msgstr "Maledizione!"
 
 #: herbalist.xml
-msgid "Yes"
-msgstr "Si'"
+msgid "Forget it, herb woman."
+msgstr "Lascia stare, erborista."
 
 #: herbalist.xml
-msgid "No"
-msgstr "No"
+msgid "Gertlinde Kampfer"
+msgstr "Gertlinde Kampfer"
+
+#: herbalist.xml
+msgid "Have it your way."
+msgstr "Fai come vuoi."
+
+#: herbalist.xml
+msgid "Herb collector"
+msgstr "L'erborista"
+
+#: herbalist.xml
+msgid "Herb gathering"
+msgstr "Raccolta delle erbe"
+
+#: herbalist.xml
+msgid "Here, let me give you something in return."
+msgstr "Ora, permettimi di darti qualcosa in cambio."
+
+#: herbalist.xml
+msgid "Here, old women. Your berries."
+msgstr "Eccomi anziana signora..le tue bacche."
 
 #: herbalist.xml
 msgid "Hey there, young one!"
 msgstr "Hei la', giovanotto!"
 
 #: herbalist.xml
+msgid "I need more berries, if I am to do something useful with them."
+msgstr "Se devo fare qualcosa di utile, ho bisogno di piu' bacche."
+
+#: herbalist.xml
+msgid "I need the berries of at least ten bushes."
+msgstr "Ho bisogno delle bacche di almeno dieci cespugli."
+
+#: herbalist.xml
 msgid "I see you are going to the Northern Meadow."
 msgstr "Vedo che stai andando a nord di Meadow."
 
 #: herbalist.xml
-msgid "That's right."
-msgstr "Esatto."
-
-#: herbalist.xml
-msgid "Quite a trick."
-msgstr "E' uno scherzo."
-
-#: herbalist.xml
-msgid "We were only walking through the gate."
-msgstr "Stavamo soltanto passando il cancello."
-
-#: herbalist.xml
-msgid "Peace."
-msgstr "Pace."
+msgid ""
+"I'm not going to crawl through the meadows just to search for some stupid "
+"bushes."
+msgstr ""
+"Non voglio andare in giro per Meadows a cercare qualche stupido cespuglio."
 
 #: herbalist.xml
 msgid ""
@@ -110,22 +109,6 @@ msgid ""
 "for me?"
 msgstr ""
 "Se siete in giro comunque, perche' non raccogliete qualche bacca per me?"
-
-#: herbalist.xml
-msgid ""
-"With all those goblins about an old woman can't even set a foot out of the "
-"village."
-msgstr ""
-"Con tutti questi goblin in giro una donna anziana come me non puo' fare "
-"neanche un passo fuori dal villaggio."
-
-#: herbalist.xml
-msgid "Plants are not really my forte..."
-msgstr "Le piante non sono proprio il mio forte."
-
-#: herbalist.xml
-msgid "Fiddlesticks!"
-msgstr "Maledizione!"
 
 #: herbalist.xml
 msgid "It's not like I want you to collect something exotic, you know."
@@ -140,55 +123,20 @@ msgid "Look for big bushes with fancy red fruits."
 msgstr "Cerca nei grandi cespugli con frutti rosso vivo."
 
 #: herbalist.xml
-msgid "You will find them for sure."
-msgstr "Li troverai sicuramente."
+msgid "No"
+msgstr "No"
 
 #: herbalist.xml
-msgid "I need the berries of at least ten bushes."
-msgstr "Ho bisogno delle bacche di almeno dieci cespugli."
+msgid "Peace."
+msgstr "Pace."
 
 #: herbalist.xml
-msgid "But only the red berries."
-msgstr "Ma soltanto bacche rosse."
+msgid "Plants are not really my forte..."
+msgstr "Le piante non sono proprio il mio forte."
 
 #: herbalist.xml
-msgid "The rest is of no use at all."
-msgstr "Il resto non serve a niente."
-
-#: herbalist.xml
-msgid "Very well, if I find some, I'll bring them."
-msgstr "Bene, se ne trovo qualcuna, te la porto."
-
-#: herbalist.xml
-msgid "Very well, if we find some, we'll bring them."
-msgstr "Bene se ne troviamo qualcuna, te la portiamo."
-
-#: herbalist.xml
-msgid "Thanks, sweety."
-msgstr "Grazie tesoro."
-
-#: herbalist.xml
-msgid "Forget it, herb woman."
-msgstr "Lascia stare, erborista."
-
-#: herbalist.xml
-msgid ""
-"I'm not going to crawl through the meadows just to search for some stupid "
-"bushes."
-msgstr ""
-"Non voglio andare in giro per Meadows a cercare qualche stupido cespuglio."
-
-#: herbalist.xml
-msgid "Have it your way."
-msgstr "Fai come vuoi."
-
-#: herbalist.xml
-msgid "But if you change your mind, I'm not running away from here."
-msgstr "Ma se cambi idea, mi troverai sempre qui."
-
-#: herbalist.xml
-msgid "Very well, if I find some, I'll bring them along."
-msgstr "Bene, se trovo qualcosa, la portero' con me."
+msgid "Quite a trick."
+msgstr "E' uno scherzo."
 
 #: herbalist.xml
 msgid "Still no."
@@ -201,13 +149,65 @@ msgstr ""
 "semplice."
 
 #: herbalist.xml
+msgid "Thanks, sweety."
+msgstr "Grazie tesoro."
+
+#: herbalist.xml
+msgid "That's right."
+msgstr "Esatto."
+
+#: herbalist.xml
+msgid ""
+"The herbalist of Joringsbridge wants to have the berries of 10 bushes. "
+"Berries from \"..(herbalist.bushes)..\" bushes have been collected."
+msgstr ""
+"L'erborista di Ponte Joring vorrebbe le bacche di 10 arbusti. \"..(herbalist."
+"bushes)..\" sono state collezionate"
+
+#: herbalist.xml
+msgid "The rest is of no use at all."
+msgstr "Il resto non serve a niente."
+
+#: herbalist.xml
+msgid "Very well, if I find some, I'll bring them along."
+msgstr "Bene, se trovo qualcosa, la portero' con me."
+
+#: herbalist.xml
+msgid "Very well, if I find some, I'll bring them."
+msgstr "Bene, se ne trovo qualcuna, te la porto."
+
+#: herbalist.xml
+msgid "Very well, if we find some, we'll bring them."
+msgstr "Bene se ne troviamo qualcuna, te la portiamo."
+
+#: herbalist.xml
 msgid "Watch your tongue, hag!"
 msgstr "Frena la tua lingua vecchia!"
+
+#: herbalist.xml
+msgid "We were only walking through the gate."
+msgstr "Stavamo soltanto passando il cancello."
+
+#: herbalist.xml
+msgid ""
+"With all those goblins about an old woman can't even set a foot out of the "
+"village."
+msgstr ""
+"Con tutti questi goblin in giro una donna anziana come me non puo' fare "
+"neanche un passo fuori dal villaggio."
+
+#: herbalist.xml
+msgid "Yes"
+msgstr "Si'"
+
+#: herbalist.xml
+msgid "You will find them for sure."
+msgstr "Li troverai sicuramente."
 
 #: herbalist.xml
 msgid "aisNorthMeadow"
 msgstr "Nord Meadow"
 
 #: herbalist.xml
-msgid "Collect\"..bushes_left..\" more herbs."
-msgstr "Colleziona altre \"..bushes_left..\" bacche dagli arbusti."
+msgid "joringsbridge"
+msgstr "Ponte Joring"

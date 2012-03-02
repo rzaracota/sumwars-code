@@ -10,58 +10,14 @@ msgstr ""
 "PO-Revision-Date: 2011-04-07 21:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
+"Language: pt/\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: scene7.xml
-msgid "The Poolmonster"
-msgstr ""
-
-#: scene7.xml
-msgid "Quest finished"
-msgstr ""
-
-#: scene7.xml
-msgid "Quest description"
-msgstr ""
-
-#: scene7.xml
-msgid "Soren Windclaw"
-msgstr ""
-
-#: scene7.xml
-msgid "Wow, thats beautiful."
-msgstr ""
-
-#: scene7.xml
-msgid "Are you getting sentimental now?"
-msgstr ""
-
-#: scene7.xml
-msgid "... Der Anblick hat mich nur an mein Leben"
-msgstr ""
-
-#: scene7.xml
-msgid "Du kannst dich an dein Leben vor der"
-msgstr ""
-
-#: scene7.xml
-msgid "... only dimly"
-msgstr ""
-
-#: scene7.xml
-msgid "Sometimes I wish,"
-msgstr ""
-
-#: scene7.xml
-msgid "I know enough people,"
-msgstr ""
-
-#: scene7.xml
-msgid "... only externally."
+msgid "*Roar!*"
 msgstr ""
 
 #: scene7.xml
@@ -69,7 +25,27 @@ msgid "..."
 msgstr ""
 
 #: scene7.xml
+msgid "... Der Anblick hat mich nur an mein Leben"
+msgstr ""
+
+#: scene7.xml
+msgid "... only dimly"
+msgstr ""
+
+#: scene7.xml
+msgid "... only externally."
+msgstr ""
+
+#: scene7.xml
+msgid "Are you getting sentimental now?"
+msgstr ""
+
+#: scene7.xml
 msgid "Do you really think that it"
+msgstr ""
+
+#: scene7.xml
+msgid "Du kannst dich an dein Leben vor der"
 msgstr ""
 
 #: scene7.xml
@@ -81,11 +57,7 @@ msgid "I hope you have"
 msgstr ""
 
 #: scene7.xml
-msgid "Why has it really"
-msgstr ""
-
-#: scene7.xml
-msgid "We have to go now."
+msgid "I know enough people,"
 msgstr ""
 
 #: scene7.xml
@@ -93,15 +65,43 @@ msgid "Just a moment please."
 msgstr ""
 
 #: scene7.xml
-msgid "Whats that on the water over there?"
-msgstr ""
-
-#: scene7.xml
 msgid "Looks like a..."
 msgstr ""
 
 #: scene7.xml
-msgid "*Roar!*"
+msgid "Quest description"
+msgstr ""
+
+#: scene7.xml
+msgid "Quest finished"
+msgstr ""
+
+#: scene7.xml
+msgid "Sometimes I wish,"
+msgstr ""
+
+#: scene7.xml
+msgid "Soren Windclaw"
+msgstr ""
+
+#: scene7.xml
+msgid "The Poolmonster"
+msgstr ""
+
+#: scene7.xml
+msgid "We have to go now."
+msgstr ""
+
+#: scene7.xml
+msgid "Whats that on the water over there?"
+msgstr ""
+
+#: scene7.xml
+msgid "Why has it really"
+msgstr ""
+
+#: scene7.xml
+msgid "Wow, thats beautiful."
 msgstr ""
 
 #: scene7.xml

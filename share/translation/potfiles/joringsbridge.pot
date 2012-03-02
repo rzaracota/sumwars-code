@@ -1,20 +1,19 @@
-# SOME DESCRIPTIVE TITLE.
+# SOME DESCRIPTIVE TITLE
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# This file is distributed under the same license as the PACKAGE package
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.5\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: PACKAGE VERSION\n""Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: \n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: joringsbridge.xml
 msgid "Joringsbridge"
@@ -69,15 +68,11 @@ msgid "Quite so!"
 msgstr ""
 
 #: joringsbridge.xml
-msgid ""
-"The pursuit of pathetic goblins is neither my duty nor do I see the point of "
-"such absurd amusement."
+msgid "The pursuit of pathetic goblins is neither my duty nor do I see the point of such absurd amusement."
 msgstr ""
 
 #: joringsbridge.xml
-msgid ""
-"What would you do were the village to be attacked while I was on a fruitless "
-"hunt for goblins?"
+msgid "What would you do were the village to be attacked while I was on a fruitless hunt for goblins?"
 msgstr ""
 
 #: joringsbridge.xml
@@ -93,9 +88,7 @@ msgid "As much as I'd like to help, I don't have any room for such a thing."
 msgstr ""
 
 #: joringsbridge.xml
-msgid ""
-"But may I use this unique opportunity to congratulate you on your upcoming "
-"wedding with the archmage Ireana of"
+msgid "But may I use this unique opportunity to congratulate you on your upcoming wedding with the archmage Ireana of"
 msgstr ""
 
 #: joringsbridge.xml
@@ -111,9 +104,7 @@ msgid "Self-satisfied parasite, that mage!"
 msgstr ""
 
 #: joringsbridge.xml
-msgid ""
-"I just hope the kingdom has big granaries, if the greenskins torch the "
-"fields."
+msgid "I just hope the kingdom has big granaries, if the greenskins torch the fields."
 msgstr ""
 
 #: joringsbridge.xml
@@ -245,8 +236,7 @@ msgid "Ah!"
 msgstr ""
 
 #: joringsbridge.xml
-msgid ""
-"The mage over there has another of those crystals on his staff, hasn't he?"
+msgid "The mage over there has another of those crystals on his staff, hasn't he?"
 msgstr ""
 
 #: joringsbridge.xml
@@ -346,6 +336,10 @@ msgid "By Marek!"
 msgstr ""
 
 #: joringsbridge.xml
+msgid "Who is that?"
+msgstr ""
+
+#: joringsbridge.xml
 msgid "Aren't you the... auxiliary forces of the council? ##solo"
 msgstr ""
 
@@ -386,9 +380,7 @@ msgid "Sergeant!"
 msgstr ""
 
 #: joringsbridge.xml
-msgid ""
-"Only hand over the gold if the goblins are driven off and the peasants are "
-"alive in the end."
+msgid "Only hand over the gold if the goblins are driven off and the peasants are alive in the end."
 msgstr ""
 
 #: joringsbridge.xml
@@ -430,3 +422,4 @@ msgstr ""
 #: joringsbridge.xml
 msgid "I will pray that your family is safe long enough."
 msgstr ""
+
