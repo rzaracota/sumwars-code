@@ -1216,6 +1216,7 @@
 
   <Locations>
     <Location name="WaypointLoc" pos_x="-8.844269632" pos_y="23.65994716" />
+	<Location name="locHatGuy" pos_x="-6" pos_y="25" />
     <Location name="entry_command" pos_x="13.70129912" pos_y="16.61064468" />
     <Location name="entry_north" pos_x="36.5" pos_y="-36" />
     <Location name="entry_rampart" pos_x="-13" pos_y="-23.5" />

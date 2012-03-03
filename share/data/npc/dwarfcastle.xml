@@ -1,3 +1,8 @@
+<!-- second switch trader -->
+<NPC refname = "Eric">
+</NPC>
+
+<!-- traders -->
 <NPC refname="Haffgar">
 	<Trade refresh_time="600000" price_factor="1.5">
 		<TradeItem subtype="legion_sw"  number="1" number_magical="0"/>
@@ -145,7 +150,6 @@
 		</Effect>
 	</Topic>	
 </NPC>	
-
 
 <NPC refname="Enchanter Fazhir">
 	<Topic name="enchant_start" start_option="Enchant Items" >

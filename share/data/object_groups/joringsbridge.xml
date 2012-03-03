@@ -1307,6 +1307,7 @@
 
   <Locations>
     <Location name="WaypointLoc" pos_x="-16.30949325" pos_y="15.77427625" />
+	<Location name = "locFlowerGirl" pos_x = "-18" pos_y = "17"/>
     <Location name="entry_north" pos_x="6" pos_y="-23" />
     <Location name="entry_south" pos_x="1" pos_y="22" />
     <Location name="entry_west" pos_x="-23" pos_y="2" />
