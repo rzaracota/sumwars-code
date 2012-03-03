@@ -191,7 +191,7 @@ FIXED_OBJECT
         </Environment>
 </ObjectTemplate>
 <ObjectTemplate name="$ground_long" type="FIXED_OBJECT">
-        <Environment name="cave"default="true">
+        <Environment name="cave" default="true">
                 <Object name="ground" />
         </Environment>
 </ObjectTemplate>
@@ -216,7 +216,7 @@ FIXED_OBJECT
         </Environment>
 </ObjectTemplate>
 <ObjectTemplate name="$ground_square" type="FIXED_OBJECT">
-        <Environment name="cave"default = "true">
+        <Environment name="cave" default = "true">
                 <Object name="ground_squ_l" />
         </Environment>
 </ObjectTemplate>
