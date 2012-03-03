@@ -34,4 +34,6 @@ do
 	done
 	echo
 done
-echo "Complete."
+echo
+echo -e "\E[1;32mComplete.\E[0m"
+echo

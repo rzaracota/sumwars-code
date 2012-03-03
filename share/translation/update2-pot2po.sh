@@ -32,12 +32,14 @@ do
 		# create the file if it doesn't exist
 		echo -ne "\E[1;31m$po \E[0m"
 		if [ -f "$po" ] ; then
-			msgmerge --color=auto --force-po --lang="$l" -F -U "$po" "potfiles/$p"
+			msgmerge --force-po --lang="$l" -F -U "$po" "potfiles/$p"
 		else
-			msginit --color=auto -l "$l" -i "potfiles/$p" -o "$po"
+			msginit -l "$l" -i "potfiles/$p" -o "$po"
 		fi
 		#unix2dos $po
 	done
 	echo
 done
-echo "Complete."
+echo
+echo -e "\E[1;32mComplete.\E[0m"
+echo

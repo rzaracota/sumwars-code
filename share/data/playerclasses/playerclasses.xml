@@ -1,4 +1,4 @@
-<PlayerClass type="warrior" name="Warrior">
+<PlayerClass type="warrior" name="Warrior" domain="menu">
 	<BasicAttributes
 					max_health="200"
 					armor="20"
@@ -109,7 +109,7 @@
 	
 </PlayerClass>
 
-<PlayerClass type="mage" name="Magician">
+<PlayerClass type="mage" name="Magician" domain="menu">
 	<BasicAttributes
 					max_health="100"
 					armor="15"
@@ -224,7 +224,7 @@
 <LearnableAbility type="ionisation" skilltree_tab="3" skilltree_posx="0.700000" skilltree_posy="0.400000" required_level="15" />
 </PlayerClass>
 
-<PlayerClass type="archer" name="Archer">
+<PlayerClass type="archer" name="Archer" domain="menu">
 	<BasicAttributes
 					max_health="150"
 					armor="15"
@@ -329,7 +329,7 @@
 	
 </PlayerClass>
 
-<PlayerClass type="priest" name="Priest">
+<PlayerClass type="priest" name="Priest" domain="menu">
 	<BasicAttributes
 					max_health="200"
 					armor="20"
