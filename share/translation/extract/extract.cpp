@@ -79,8 +79,17 @@ void handleLua(const std::string & Dom, std::istream & Str, size_t Streamsize, c
 		{
 			if (state == outside && i == '_')
 				state = underscore;
-			else if (state == underscore && i == '(')
-				state = parenthesis;
+			else if (state == underscore)
+			{
+				if ( i == '(')
+				{
+					state = parenthesis;
+				}
+				else
+				{
+					state = outside;
+				}
+			}
 			else if (state == parenthesis && (i == '"' || i == '\''))
 			{
 				marks = i;
