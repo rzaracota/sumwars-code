@@ -1,6 +1,6 @@
 #!/bin/bash
 
-skipdirectories="potfiles xmlgettext"
+skipdirectories="potfiles xmlgettext extract"
 
 if [ -z "$*" ]; then
 	langs=$(ls -d */)
