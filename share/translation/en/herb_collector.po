@@ -11,97 +11,111 @@ msgstr ""
 "PO-Revision-Date: 2012-03-02 16:19+0100\n"
 "Last-Translator:  <kalimgard@users.sourceforge.net>\n"
 "Language-Team: English\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: herbalist.xml
+#: herbalist.xml:2
 msgid "Herb collector"
 msgstr "Herb collector"
 
-#: herbalist.xml
+#: herbalist.xml:9
 msgid "And another good deed done. I could get used to this."
 msgstr "And another good deed done. I could get used to this."
 
-#: herbalist.xml
+#: herbalist.xml:11
+#, fuzzy
 msgid ""
 "The herbalist of Joringsbridge wants to have the berries of 10 bushes. "
-"Berries from \"..(herbalist.bushes)..\" bushes have been collected."
+"Berries from "
 msgstr ""
 "The herbalist of Joringsbridge wants to have the berries of 10 bushes. "
 "Berries from \"..(herbalist.bushes)..\" bushes have been collected."
 
-#: herbalist.xml
+#: herbalist.xml:15 herbalist.xml:197
 msgid "joringsbridge"
 msgstr "joringsbridge"
 
-#: herbalist.xml
+#: herbalist.xml:19 herbalist.xml:21
+msgid "peasant_f"
+msgstr ""
+
+#: herbalist.xml:24 herbalist.xml:64 herbalist.xml:74 herbalist.xml:91
+#: herbalist.xml:100
 msgid "Gertlinde Kampfer"
 msgstr "Gertlinde Kampfer"
 
-#: herbalist.xml
+#: herbalist.xml:40
+msgid "player"
+msgstr ""
+
+#: herbalist.xml:45
+msgid "areaHerbQuest"
+msgstr ""
+
+#: herbalist.xml:75
 msgid "Herb gathering"
 msgstr "Herb gathering"
 
-#: herbalist.xml
+#: herbalist.xml:86
 msgid "Here, old women. Your berries."
 msgstr "Here, old women. Your berries."
 
-#: herbalist.xml
+#: herbalist.xml:87
 msgid "Ah, well done, young one."
 msgstr "Ah, well done, young one."
 
-#: herbalist.xml
+#: herbalist.xml:88
 msgid "Here, let me give you something in return."
 msgstr "Here, let me give you something in return."
 
-#: herbalist.xml
+#: herbalist.xml:91
 msgid "I need more berries, if I am to do something useful with them."
 msgstr "I need more berries, if I am to do something useful with them."
 
-#: herbalist.xml
+#: herbalist.xml:94
 msgid "Do you want to collect some berries after all?"
 msgstr "Do you want to collect some berries after all?"
 
-#: herbalist.xml
+#: herbalist.xml:95 herbalist.xml:121
 msgid "Accept Quest?"
 msgstr "Accept Quest?"
 
-#: herbalist.xml
+#: herbalist.xml:96 herbalist.xml:122
 msgid "Yes"
 msgstr "Yes"
 
-#: herbalist.xml
+#: herbalist.xml:97 herbalist.xml:123
 msgid "No"
 msgstr "No"
 
-#: herbalist.xml
+#: herbalist.xml:100
 msgid "Hey there, young one!"
 msgstr "Hey there, young one!"
 
-#: herbalist.xml
+#: herbalist.xml:101
 msgid "I see you are going to the Northern Meadow."
 msgstr "I see you are going to the Northern Meadow."
 
-#: herbalist.xml
+#: herbalist.xml:102
 msgid "That's right."
 msgstr "That's right."
 
-#: herbalist.xml
+#: herbalist.xml:104
 msgid "Quite a trick."
 msgstr "Quite a trick."
 
-#: herbalist.xml
+#: herbalist.xml:105
 msgid "We were only walking through the gate."
 msgstr "We were only walking through the gate."
 
-#: herbalist.xml
+#: herbalist.xml:106
 msgid "Peace."
 msgstr "Peace."
 
-#: herbalist.xml
+#: herbalist.xml:108
 msgid ""
 "If you are roaming around there anyway, why don't you collect some berries "
 "for me?"
@@ -109,7 +123,7 @@ msgstr ""
 "If you are roaming around there anyway, why don't you collect some berries "
 "for me?"
 
-#: herbalist.xml
+#: herbalist.xml:109
 msgid ""
 "With all those goblins about an old woman can't even set a foot out of the "
 "village."
@@ -117,59 +131,59 @@ msgstr ""
 "With all those goblins about an old woman can't even set a foot out of the "
 "village."
 
-#: herbalist.xml
+#: herbalist.xml:111
 msgid "Plants are not really my forte..."
 msgstr "Plants are not really my forte..."
 
-#: herbalist.xml
+#: herbalist.xml:112
 msgid "Fiddlesticks!"
 msgstr "Fiddlesticks!"
 
-#: herbalist.xml
+#: herbalist.xml:114
 msgid "It's not like I want you to collect something exotic, you know."
 msgstr "It's not like I want you to collect something exotic, you know."
 
-#: herbalist.xml
+#: herbalist.xml:115
 msgid "Just rilfberries."
 msgstr "Just rilfberries."
 
-#: herbalist.xml
+#: herbalist.xml:116
 msgid "Look for big bushes with fancy red fruits."
 msgstr "Look for big bushes with fancy red fruits."
 
-#: herbalist.xml
+#: herbalist.xml:117
 msgid "You will find them for sure."
 msgstr "You will find them for sure."
 
-#: herbalist.xml
+#: herbalist.xml:118
 msgid "I need the berries of at least ten bushes."
 msgstr "I need the berries of at least ten bushes."
 
-#: herbalist.xml
+#: herbalist.xml:119
 msgid "But only the red berries."
 msgstr "But only the red berries."
 
-#: herbalist.xml
+#: herbalist.xml:120
 msgid "The rest is of no use at all."
 msgstr "The rest is of no use at all."
 
-#: herbalist.xml
+#: herbalist.xml:131
 msgid "Very well, if I find some, I'll bring them."
 msgstr "Very well, if I find some, I'll bring them."
 
-#: herbalist.xml
+#: herbalist.xml:133 herbalist.xml:156
 msgid "Very well, if we find some, we'll bring them."
 msgstr "Very well, if we find some, we'll bring them."
 
-#: herbalist.xml
+#: herbalist.xml:135 herbalist.xml:158
 msgid "Thanks, sweety."
 msgstr "Thanks, sweety."
 
-#: herbalist.xml
+#: herbalist.xml:143
 msgid "Forget it, herb woman."
 msgstr "Forget it, herb woman."
 
-#: herbalist.xml
+#: herbalist.xml:144
 msgid ""
 "I'm not going to crawl through the meadows just to search for some stupid "
 "bushes."
@@ -177,34 +191,49 @@ msgstr ""
 "I'm not going to crawl through the meadows just to search for some stupid "
 "bushes."
 
-#: herbalist.xml
+#: herbalist.xml:145
 msgid "Have it your way."
 msgstr "Have it your way."
 
-#: herbalist.xml
+#: herbalist.xml:146
 msgid "But if you change your mind, I'm not running away from here."
 msgstr "But if you change your mind, I'm not running away from here."
 
-#: herbalist.xml
+#: herbalist.xml:154
 msgid "Very well, if I find some, I'll bring them along."
 msgstr "Very well, if I find some, I'll bring them along."
 
-#: herbalist.xml
+#: herbalist.xml:165
 msgid "Still no."
 msgstr "Still no."
 
-#: herbalist.xml
+#: herbalist.xml:166
 msgid "Tell me when you're not too mighty for simple work anymore, sweety."
 msgstr "Tell me when you're not too mighty for simple work anymore, sweety."
 
-#: herbalist.xml
+#: herbalist.xml:167
 msgid "Watch your tongue, hag!"
 msgstr "Watch your tongue, hag!"
 
-#: herbalist.xml
+#: herbalist.xml:185
+msgid "herbalist_reward"
+msgstr ""
+
+#: herbalist.xml:190
+msgid "heal_1"
+msgstr ""
+
+#: herbalist.xml:192
+msgid "heal_2"
+msgstr ""
+
+#: herbalist.xml:214
 msgid "aisNorthMeadow"
 msgstr "aisNorthMeadow"
 
-#: herbalist.xml
-msgid "Collect\"..bushes_left..\" more herbs."
-msgstr "Collect\"..bushes_left..\" more herbs."
+#: herbalist.xml:223
+msgid "Collect"
+msgstr ""
+
+#~ msgid "Collect\"..bushes_left..\" more herbs."
+#~ msgstr "Collect\"..bushes_left..\" more herbs."

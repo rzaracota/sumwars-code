@@ -18,7 +18,7 @@ fi
 
 for l in $skipdirectories
 do
-	langs=${langs//$l\//}
+	langs=${langs//$l/}
 done
 
 for l in $langs
