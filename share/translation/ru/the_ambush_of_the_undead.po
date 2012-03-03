@@ -40,94 +40,9 @@ msgstr ""
 msgid "aisMounPath"
 msgstr ""
 
-#: theFissure.xml:24 theFissure.xml:29 theFissure.xml:33 theFissure.xml:36
-#: theFissure.xml:40 theFissure.xml:44
-msgid "ireana_guard"
-msgstr ""
-
-#: theFissure.xml:26 theFissure.xml:51 theFissure.xml:58 theFissure.xml:286
-msgid "max_health"
-msgstr ""
-
-#: theFissure.xml:42 theFissure.xml:46 theFissure.xml:327
-msgid "health"
-msgstr ""
-
-#: theFissure.xml:49
-msgid "ireana"
-msgstr ""
-
-#: theFissure.xml:53
-msgid "ai_state"
-msgstr ""
-
-#: theFissure.xml:56
-msgid "ireana_captain"
-msgstr ""
-
-#: theFissure.xml:60 theFissure.xml:64 theFissure.xml:68
-msgid "guard"
-msgstr ""
-
-#: theFissure.xml:62
-msgid "tolec"
-msgstr ""
-
-#: theFissure.xml:66
-msgid "derred"
-msgstr ""
-
-#: theFissure.xml:92 theFissure.xml:224
-msgid "fire_skel"
-msgstr ""
-
-#: theFissure.xml:98
-msgid ""
-"addUnitCommand(fissure_tmp.skeletons[1], \"fire_shot\", fissure_tmp.guard2,0,"
-"\"repeat\")"
-msgstr ""
-
-#: theFissure.xml:100
-msgid ""
-"addUnitCommand(fissure_tmp.skeletons[3], \"fire_shot\", fissure_tmp.guard4,0,"
-"\"repeat\")"
-msgstr ""
-
-#: theFissure.xml:102
-msgid ""
-"addUnitCommand(fissure_tmp.skeletons[5], \"fire_shot\", fissure_tmp.ireana,0,"
-"\"repeat\")"
-msgstr ""
-
-#: theFissure.xml:104
-msgid ""
-"addUnitCommand(fissure_tmp.skeletons[7], \"fire_shot\", fissure_tmp.guard1,0,"
-"\"repeat\")"
-msgstr ""
-
-#: theFissure.xml:114 theFissure.xml:331 theFissure.xml:345
-msgid "position"
-msgstr ""
-
-#: theFissure.xml:116
-msgid "fissure_dialogue1"
-msgstr ""
-
 #: theFissure.xml:122
 msgid "*urgh*"
 msgstr "*эмм*"
-
-#: theFissure.xml:150
-msgid "W1"
-msgstr ""
-
-#: theFissure.xml:152 theFissure.xml:357 theFissure.xml:360
-msgid "IvN"
-msgstr ""
-
-#: theFissure.xml:154
-msgid "EW"
-msgstr ""
 
 #: theFissure.xml:158
 msgid "Wow, she's gorgeous."
@@ -144,64 +59,6 @@ msgstr "Пожалуйста, помоги нам, наш маг серьезн�
 
 #: theFissure.xml:170
 msgid "He he. Harvest!"
-msgstr ""
-
-#: theFissure.xml:170
-msgid "waropt"
-msgstr ""
-
-#: theFissure.xml:186
-msgid "undeadReinforcements"
-msgstr ""
-
-#: theFissure.xml:196 theFissure.xml:201 theFissure.xml:206 theFissure.xml:216
-msgid "attack"
-msgstr ""
-
-#: theFissure.xml:200
-msgid "axe_skel"
-msgstr ""
-
-#: theFissure.xml:205
-msgid "bow_skel"
-msgstr ""
-
-#: theFissure.xml:209
-msgid "undeadMonster"
-msgstr ""
-
-#: theFissure.xml:223 theFissure.xml:659
-msgid "subtype"
-msgstr ""
-
-#: theFissure.xml:224 theFissure.xml:649
-msgid "sword_skel"
-msgstr ""
-
-#: theFissure.xml:234 theFissure.xml:237 theFissure.xml:240 theFissure.xml:244
-#: theFissure.xml:650 theFissure.xml:691 theFissure.xml:915
-msgid "walk"
-msgstr ""
-
-#: theFissure.xml:284 theFissure.xml:817
-msgid "sorenCrystal"
-msgstr ""
-
-#: theFissure.xml:292
-msgid "SW"
-msgstr ""
-
-#: theFissure.xml:294
-msgid "HW"
-msgstr ""
-
-#: theFissure.xml:296
-msgid "DE"
-msgstr ""
-
-#: theFissure.xml:306 theFissure.xml:344 theFissure.xml:347 theFissure.xml:354
-#: theFissure.xml:358 theFissure.xml:828
-msgid "PL"
 msgstr ""
 
 #: theFissure.xml:308
@@ -235,18 +92,6 @@ msgstr "Боюсь, очень плох."
 #: theFissure.xml:325 theFissure.xml:330 theFissure.xml:344
 msgid "Let me see."
 msgstr "Дай мне взглянуть."
-
-#: theFissure.xml:328 theFissure.xml:335 theFissure.xml:349
-msgid "heal_2"
-msgstr ""
-
-#: theFissure.xml:333 theFissure.xml:340
-msgid "mage"
-msgstr ""
-
-#: theFissure.xml:339 theFissure.xml:353 theFissure.xml:622
-msgid "addUnitCommand("
-msgstr ""
 
 #: theFissure.xml:360
 msgid "Thank you. That was a close call for a rescue."
@@ -437,61 +282,12 @@ msgstr "Удачи!"
 msgid "I hope we meet again soon."
 msgstr "Надеюсь, скоро мы встретимся вновь."
 
-#: theFissure.xml:438
-msgid "setCutsceneMode(false);"
-msgstr ""
-
 #: theFissure.xml:446
 msgid "greyCurseCaveFis"
 msgstr ""
 
-#: theFissure.xml:450
-msgid "fissureBlock1"
-msgstr ""
-
-#: theFissure.xml:451
-msgid "fissureBlock2"
-msgstr ""
-
-#: theFissure.xml:452
-msgid "fissureBlock3"
-msgstr ""
-
-#: theFissure.xml:453
-msgid "fissureBlock4"
-msgstr ""
-
-#: theFissure.xml:454
-msgid "fissureBlock5"
-msgstr ""
-
-#: theFissure.xml:462 theFissure.xml:660
-msgid "necromancer"
-msgstr ""
-
-#: theFissure.xml:465 theFissure.xml:466 theFissure.xml:467 theFissure.xml:468
-#: theFissure.xml:469 theFissure.xml:470
-msgid "worker_skel"
-msgstr ""
-
-#: theFissure.xml:501
-msgid "asoroth"
-msgstr ""
-
 #: theFissure.xml:502
 msgid "Unknown Lich"
-msgstr ""
-
-#: theFissure.xml:510 theFissure.xml:728
-msgid "kneelDown"
-msgstr ""
-
-#: theFissure.xml:512
-msgid "lichTalk"
-msgstr ""
-
-#: theFissure.xml:523
-msgid "Lich"
 msgstr ""
 
 #: theFissure.xml:525
@@ -503,10 +299,6 @@ msgid "Nar'Asoroth, my lord."
 msgstr ""
 
 #: theFissure.xml:534
-msgid "Necro"
-msgstr ""
-
-#: theFissure.xml:534
 msgid ""
 "The stone is solid,but if I let the skeletons work any faster they will "
 "break apart!"
@@ -514,10 +306,6 @@ msgstr ""
 
 #: theFissure.xml:543
 msgid "((Such an opportunity may never occur again.))"
-msgstr ""
-
-#: theFissure.xml:546 theFissure.xml:551
-msgid "second"
 msgstr ""
 
 #: theFissure.xml:547 theFissure.xml:551 theFissure.xml:553
@@ -605,10 +393,6 @@ msgstr ""
 msgid "If we destroy him now his army will fall apart with him!"
 msgstr ""
 
-#: theFissure.xml:623
-msgid "battlecrys"
-msgstr ""
-
 #: theFissure.xml:630
 msgid "Harvest!"
 msgstr ""
@@ -617,22 +401,6 @@ msgstr ""
 msgid ""
 "What do you know. There are rats everywhere. Kill them and bring me their "
 "bones!"
-msgstr ""
-
-#: theFissure.xml:640
-msgid "areaFissure"
-msgstr ""
-
-#: theFissure.xml:669
-msgid "destroyFissure"
-msgstr ""
-
-#: theFissure.xml:678
-msgid "locSkeleton2"
-msgstr ""
-
-#: theFissure.xml:689 theFissure.xml:706
-msgid "magopt"
 msgstr ""
 
 #: theFissure.xml:708
@@ -647,41 +415,8 @@ msgstr ""
 msgid "Blow this passage to smithereens!"
 msgstr ""
 
-#: theFissure.xml:726
-msgid "council_bomb"
-msgstr ""
-
-#: theFissure.xml:731
-msgid "getObjectOnFloor("
-msgstr ""
-
-#: theFissure.xml:732 theFissure.xml:733
-msgid "setObjectAnimation("
-msgstr ""
-
-#: theFissure.xml:734
-msgid "walk_speed"
-msgstr ""
-
 #: theFissure.xml:741
 msgid "Get out, quick!"
-msgstr ""
-
-#: theFissure.xml:750
-msgid "detonate"
-msgstr ""
-
-#: theFissure.xml:753
-msgid "locSkeleton1"
-msgstr ""
-
-#: theFissure.xml:783 theFissure.xml:785 theFissure.xml:787 theFissure.xml:789
-#: theFissure.xml:791
-msgid "smokeEmitter"
-msgstr ""
-
-#: theFissure.xml:820 theFissure.xml:862
-msgid "locParty"
 msgstr ""
 
 #: theFissure.xml:828
@@ -734,20 +469,8 @@ msgstr ""
 msgid "Stop bickering and get moving!"
 msgstr ""
 
-#: theFissure.xml:858
-msgid "theTrader"
-msgstr ""
-
-#: theFissure.xml:859
-msgid "The Trader"
-msgstr ""
-
 #: theFissure.xml:865
 msgid "Hopefully there is an exit in this direction."
-msgstr ""
-
-#: theFissure.xml:865
-msgid "Trader"
 msgstr ""
 
 #: theFissure.xml:866
@@ -866,16 +589,4 @@ msgstr ""
 
 #: theFissure.xml:921
 msgid "greyCurseCaveDep"
-msgstr ""
-
-#: theFissure.xml:924 theFissure.xml:926
-msgid "blockExit"
-msgstr ""
-
-#: theFissure.xml:925
-msgid "exit_south"
-msgstr ""
-
-#: theFissure.xml:927
-msgid "exit_east"
 msgstr ""

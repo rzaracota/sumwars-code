@@ -37,20 +37,7 @@ msgstr "Obbiettivi della Quest"
 msgid "dwarfenwall"
 msgstr "Dwarfenwall"
 
-#: siegeOfDwarfenwall.xml:18
-msgid "entry_west"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:20
-msgid "locWay1"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:22
-msgid "exit_command"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:35 siegeOfDwarfenwall.xml:44
-#: siegeOfDwarfenwall.xml:2306 siegeOfDwarfenwall.xml:2314
+#: siegeOfDwarfenwall.xml:35 siegeOfDwarfenwall.xml:2306
 msgid "dwarfenwallCommand"
 msgstr "Al Centro di Comando di Dwarfenwall"
 
@@ -267,11 +254,6 @@ msgstr "Lui e' agli ordini del Consiglio, non stà a voi decidere."
 msgid "They are under orders of the council, it is not your decision."
 msgstr "Loro sono agli ordini del Consiglio, non stà a voi decidere."
 
-#: siegeOfDwarfenwall.xml:193 siegeOfDwarfenwall.xml:194
-#: siegeOfDwarfenwall.xml:856 siegeOfDwarfenwall.xml:1188
-msgid "guard"
-msgstr ""
-
 #: siegeOfDwarfenwall.xml:195
 msgid "They are coming! The attack begins!"
 msgstr "Stanno arrivando! Inizia l'assalto!"
@@ -280,12 +262,6 @@ msgstr "Stanno arrivando! Inizia l'assalto!"
 #: siegeOfDwarfenwall.xml:2538
 msgid "..."
 msgstr "..."
-
-#: siegeOfDwarfenwall.xml:217 siegeOfDwarfenwall.xml:232
-#: siegeOfDwarfenwall.xml:2340 siegeOfDwarfenwall.xml:2355
-#: siegeOfDwarfenwall.xml:2377
-msgid "general"
-msgstr ""
 
 #: siegeOfDwarfenwall.xml:218
 msgid "Get to the walls!"
@@ -319,184 +295,18 @@ msgstr "Non manderò tutto a rotoli, solo per questo."
 msgid "I pray that you're right..."
 msgstr "Prego tu abbia ragione..."
 
-#: siegeOfDwarfenwall.xml:246
-msgid "assembleParty(\"dwarfenwall\",\"locPartyLeave\")"
-msgstr ""
-
 #: siegeOfDwarfenwall.xml:267 siegeOfDwarfenwall.xml:296
 msgid "I'm sorry, but only members of the aisen army are allowed beyond here."
 msgstr ""
 "Mi spiace, ma sono autorizzati a procedere solo membri dell'armata di Aisen."
 
-#: siegeOfDwarfenwall.xml:277
-msgid "areaNoEntry3"
-msgstr ""
-
 #: siegeOfDwarfenwall.xml:283
 msgid "I don't want to go there. I only see boring walls."
 msgstr "Non voglio andare li', ci sono solo monotone mura che si susseguono."
 
-#: siegeOfDwarfenwall.xml:401 siegeOfDwarfenwall.xml:871
-#: siegeOfDwarfenwall.xml:877 siegeOfDwarfenwall.xml:1123
-#: siegeOfDwarfenwall.xml:1132 siegeOfDwarfenwall.xml:2222
-msgid "walk"
-msgstr ""
-
 #: siegeOfDwarfenwall.xml:418
 msgid "dwarfenwallRampart"
 msgstr "Il Bastione di Dwarfenwall"
-
-#: siegeOfDwarfenwall.xml:467
-msgid "locGuard1"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:469
-msgid "locGuard2"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:471
-msgid "locGuard3"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:473
-msgid "locGuard4"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:477
-msgid "locGuard5"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:479
-msgid "locGuard6"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:481
-msgid "locGuard9"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:483
-msgid "locGuard10"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:485
-msgid "locGuard11"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:487
-msgid "locGuard12"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:491
-msgid "locBowmen2"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:493
-msgid "locBowmen3"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:495
-msgid "locBowmen1"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:498
-msgid "locBowmen4"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:500
-msgid "locBowmen6"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:502
-msgid "locBowmen7"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:820
-msgid "respawnTrigger"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:821
-msgid "newUnit"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:824
-msgid "penalty-points: "
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:826
-msgid "index: "
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:837
-msgid "a very important unit just died"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:839
-msgid "resurrection_fire_storm"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:849
-msgid "subtype"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:851
-msgid "respawnroute"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:870
-msgid "elite_siege"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:876
-#, fuzzy
-msgid "dwarfenwall_councilguard"
-msgstr "Al Centro di Comando di Dwarfenwall"
-
-#: siegeOfDwarfenwall.xml:883 siegeOfDwarfenwall.xml:962
-#: siegeOfDwarfenwall.xml:1077 siegeOfDwarfenwall.xml:1191
-#: siegeOfDwarfenwall.xml:1211 siegeOfDwarfenwall.xml:1250
-#: siegeOfDwarfenwall.xml:1285 siegeOfDwarfenwall.xml:1323
-#: siegeOfDwarfenwall.xml:1453 siegeOfDwarfenwall.xml:1497
-#: siegeOfDwarfenwall.xml:1523 siegeOfDwarfenwall.xml:1535
-#: siegeOfDwarfenwall.xml:1579 siegeOfDwarfenwall.xml:1630
-#: siegeOfDwarfenwall.xml:1711 siegeOfDwarfenwall.xml:1758
-#: siegeOfDwarfenwall.xml:1804 siegeOfDwarfenwall.xml:1865
-#: siegeOfDwarfenwall.xml:1916 siegeOfDwarfenwall.xml:1972
-#: siegeOfDwarfenwall.xml:2018 siegeOfDwarfenwall.xml:2085
-#: siegeOfDwarfenwall.xml:2133
-msgid "dwall_siege"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:888
-msgid "councilEnters"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:895
-msgid "general_greif_battle"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:896
-msgid "General Greif"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:903
-#, fuzzy
-msgid "council_dwarfenwall"
-msgstr "Dwarfenwall"
-
-#: siegeOfDwarfenwall.xml:904
-msgid "Maga Convocatis Darna Eistaucher"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:920 siegeOfDwarfenwall.xml:934
-msgid "talkBeforeBattle"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:965 siegeOfDwarfenwall.xml:969
-#: siegeOfDwarfenwall.xml:2241 siegeOfDwarfenwall.xml:2245
-#: siegeOfDwarfenwall.xml:2264 siegeOfDwarfenwall.xml:2267
-#: siegeOfDwarfenwall.xml:2278 siegeOfDwarfenwall.xml:2286
-msgid "greif"
-msgstr ""
 
 #: siegeOfDwarfenwall.xml:969
 msgid "Here they come."
@@ -506,21 +316,9 @@ msgstr "Arrivano!"
 msgid "Get ready, soldiers!"
 msgstr "Tenetevi pronti, soldati!"
 
-#: siegeOfDwarfenwall.xml:982 siegeOfDwarfenwall.xml:1368
-#: siegeOfDwarfenwall.xml:1634 siegeOfDwarfenwall.xml:1888
-#: siegeOfDwarfenwall.xml:2040 siegeOfDwarfenwall.xml:2202
-msgid "locLich"
-msgstr ""
-
 #: siegeOfDwarfenwall.xml:1027
 msgid "Your time has come, pathetic humans!"
 msgstr "La vostra ora e' arrivata, patetici umani!"
-
-#: siegeOfDwarfenwall.xml:1027 siegeOfDwarfenwall.xml:1102
-#: siegeOfDwarfenwall.xml:1388 siegeOfDwarfenwall.xml:2498
-#: siegeOfDwarfenwall.xml:2565
-msgid "lich"
-msgstr ""
 
 #: siegeOfDwarfenwall.xml:1028
 msgid "Dwarfenwall will finally be yours, my lord."
@@ -533,10 +331,6 @@ msgstr "Con l'aiuto della capitale alla fine ci riusciremo."
 #: siegeOfDwarfenwall.xml:1030
 msgid "Let us begin with the last rush on this wretched stronghold."
 msgstr "Iniziamo con un ultimo assalto a questa roccaforte diroccata."
-
-#: siegeOfDwarfenwall.xml:1050 siegeOfDwarfenwall.xml:2228
-msgid "entry_south"
-msgstr ""
 
 #: siegeOfDwarfenwall.xml:1057
 msgid ""
@@ -653,10 +447,6 @@ msgstr "Di' 'per favore'."
 msgid "Just do it!"
 msgstr "Fallo e basta!"
 
-#: siegeOfDwarfenwall.xml:1156
-msgid "fire_wave"
-msgstr ""
-
 #: siegeOfDwarfenwall.xml:1170
 msgid "Watch out!"
 msgstr "Attento!"
@@ -664,20 +454,6 @@ msgstr "Attento!"
 #: siegeOfDwarfenwall.xml:1171
 msgid "Catapults!"
 msgstr "Catapulte!"
-
-#: siegeOfDwarfenwall.xml:1330
-msgid "firstBoss"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:1377
-msgid "fire"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:1384 siegeOfDwarfenwall.xml:1825
-#: siegeOfDwarfenwall.xml:1829 siegeOfDwarfenwall.xml:2055
-#: siegeOfDwarfenwall.xml:2058
-msgid "att1"
-msgstr ""
 
 #: siegeOfDwarfenwall.xml:1388
 msgid "They are struggling on."
@@ -711,27 +487,6 @@ msgstr "Preparate ogni cosa!"
 msgid "I understand, my lord."
 msgstr "Ho capito, mio signore."
 
-#: siegeOfDwarfenwall.xml:1407
-msgid "wave5"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:1412
-msgid "wave5b"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:1638
-msgid "wave9pre"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:1644
-msgid "boss3prep"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:1654 siegeOfDwarfenwall.xml:1658
-#: siegeOfDwarfenwall.xml:1893
-msgid "att2"
-msgstr ""
-
 #: siegeOfDwarfenwall.xml:1658
 msgid "Their defense still holds, my lord."
 msgstr "Le loro difese tengono ancora, mio signore."
@@ -762,26 +517,6 @@ msgstr ""
 msgid "Watch and learn."
 msgstr "Guarda e impara."
 
-#: siegeOfDwarfenwall.xml:1665
-msgid "insertTrigger(\"eyesOnBoss\")"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:1671
-msgid "locSpawn4"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:1700
-msgid "wave9"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:1811
-msgid "frostHasCome"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:1818
-msgid "the4thBoss"
-msgstr ""
-
 #: siegeOfDwarfenwall.xml:1829
 msgid "You called, my lord?"
 msgstr "Mi ha chiamato, mio signore?"
@@ -809,22 +544,6 @@ msgstr "Dovrebbe essere qui a momenti. Stiamo cercando di guadagnare tempo."
 #: siegeOfDwarfenwall.xml:1835
 msgid "As you wish, my lord."
 msgstr "Come desidera, mio signore."
-
-#: siegeOfDwarfenwall.xml:1847
-msgid "boss4"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:1871
-msgid "boss5_siege"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:1874
-msgid "wave11"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:1881
-msgid "frost"
-msgstr ""
 
 #: siegeOfDwarfenwall.xml:1893
 msgid "My lord."
@@ -881,14 +600,6 @@ msgstr ""
 #: siegeOfDwarfenwall.xml:1904
 msgid "Me and my frostmages will arrange for that."
 msgstr "Mi organizzero' personalmente coi miei Maghi del Gelo al riguardo."
-
-#: siegeOfDwarfenwall.xml:2032
-msgid "changeView"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2048
-msgid "blackMagic"
-msgstr ""
 
 #: siegeOfDwarfenwall.xml:2058
 msgid "The Frostbringer is dead, my lord."
@@ -950,10 +661,6 @@ msgstr "Conto su di te."
 #: siegeOfDwarfenwall.xml:2071
 msgid "Tear their defense into pieces."
 msgstr "Fai a pezzi la loro difesa."
-
-#: siegeOfDwarfenwall.xml:2184
-msgid "launchAttack(5063)"
-msgstr ""
 
 #: siegeOfDwarfenwall.xml:2208
 msgid "Curse on them!"
@@ -1093,14 +800,6 @@ msgstr "Non sopravviveremo ad un secondo attacco."
 #: siegeOfDwarfenwall.xml:2290
 msgid "I want to get away from all the blood."
 msgstr "Voglio tirarmi fuori da questa carneficina."
-
-#: siegeOfDwarfenwall.xml:2295
-msgid "cleanAfterSiege"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2326
-msgid "locCamera"
-msgstr ""
 
 #: siegeOfDwarfenwall.xml:2340
 msgid "hmpf"
@@ -1257,15 +956,6 @@ msgstr "Non ci pensare."
 msgid "necFieldcamp"
 msgstr "Il Campo base dei non-morti"
 
-#: siegeOfDwarfenwall.xml:2451 siegeOfDwarfenwall.xml:2469
-#: siegeOfDwarfenwall.xml:2686
-msgid "locParty"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2452
-msgid "asoroth"
-msgstr ""
-
 #: siegeOfDwarfenwall.xml:2498
 msgid "Well well."
 msgstr "Bene, bene."
@@ -1397,81 +1087,9 @@ msgstr "Sapevate che si cono parecchie anime tormentate nei paraggi?"
 msgid "And now I will find a way to kill Branded Ones."
 msgstr "E ora trovero' un modo per eliminarti, Marchiato."
 
-#: siegeOfDwarfenwall.xml:2577
-msgid "health"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2578
-msgid "/"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2581
-msgid "under85"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2584
-msgid "under75"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2587
-msgid "under60"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2590
-msgid "under50"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2593
-msgid "under40"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2596
-msgid "under25"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2599
-msgid "under15"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2607
-msgid "ai_ability_rating:asoroth_icicle"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2614
-msgid "ai_ability_rating:asoroth_ice_obelisk"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2621
-msgid "ai_ability_rating:asoroth_guided_iceball"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2628
-msgid "ai_ability_rating:asoroth_ice_attack"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2636 siegeOfDwarfenwall.xml:2650
-msgid "ai_ability_rating:asoroth_frost_wave"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2643
-msgid "ai_ability_rating:asoroth_meteor"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2663
-msgid "areaGathering"
-msgstr ""
-
 #: siegeOfDwarfenwall.xml:2674
 msgid "No! It cannot be! You baleful..."
 msgstr "No! Non puo' essere! Maledetto..."
-
-#: siegeOfDwarfenwall.xml:2693
-msgid "sorenCrystal"
-msgstr ""
-
-#: siegeOfDwarfenwall.xml:2704
-msgid "speakers distributed"
-msgstr ""
 
 #: siegeOfDwarfenwall.xml:2710
 msgid "It's a wrap."
@@ -1514,3 +1132,11 @@ msgstr "Ma sappi che gli dei ti ricorderanno per l'eternita'..."
 #: siegeOfDwarfenwall.xml:2718
 msgid "With this, the demo is officially over."
 msgstr "...e, con questo, la demo e' ufficialmente conclusa."
+
+#, fuzzy
+#~ msgid "council_dwarfenwall"
+#~ msgstr "Dwarfenwall"
+
+#, fuzzy
+#~ msgid "dwarfenwall_councilguard"
+#~ msgstr "Al Centro di Comando di Dwarfenwall"

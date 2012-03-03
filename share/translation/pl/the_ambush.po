@@ -41,30 +41,6 @@ msgstr ""
 msgid "Dwarfenwall is in that direction. I shouldn't go this way yet."
 msgstr ""
 
-#: theAmbush.xml:31
-msgid "cancelCommand"
-msgstr ""
-
-#: theAmbush.xml:67
-msgid "position"
-msgstr ""
-
-#: theAmbush.xml:69 theAmbush.xml:74 theAmbush.xml:76
-msgid "locCrystal"
-msgstr ""
-
-#: theAmbush.xml:90
-msgid "locParty"
-msgstr ""
-
-#: theAmbush.xml:96
-msgid "sorenCrystal"
-msgstr ""
-
-#: theAmbush.xml:101
-msgid "Soren Windclaw"
-msgstr ""
-
 #: theAmbush.xml:104
 msgid "Wait!"
 msgstr ""

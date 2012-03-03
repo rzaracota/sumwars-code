@@ -19,18 +19,6 @@ msgid ""
 "look around.))"
 msgstr ""
 
-#: dwarfenwall.lua:391
-msgid ", "
-msgstr ""
-
-#: dwarfenwall.lua:291
-msgid "..x.."
-msgstr ""
-
-#: testregions.xml:120
-msgid "/"
-msgstr ""
-
 #: npc.xml:56
 msgid "Access stash"
 msgstr ""
@@ -43,7 +31,7 @@ msgstr ""
 msgid "Ah, you noticed my lost and found?"
 msgstr ""
 
-#: npc.xml:102 dwarfcastle.xml:178 joringsbridge_npc.xml:247
+#: npc.xml:102 joringsbridge_npc.xml:247 dwarfcastle.xml:178
 msgid "Air damage"
 msgstr ""
 
@@ -59,7 +47,7 @@ msgstr ""
 msgid "Alwin"
 msgstr ""
 
-#: dwarfcastle.xml:41 dwarfenwall.xml:159
+#: dwarfcastle.xml:41
 msgid "Amelia"
 msgstr ""
 
@@ -78,8 +66,8 @@ msgid ""
 "bandit life for themselves."
 msgstr ""
 
-#: npc.xml:93 npc.xml:108 dwarfcastle.xml:168 dwarfcastle.xml:189
-#: joringsbridge_npc.xml:238
+#: npc.xml:93 npc.xml:108 joringsbridge_npc.xml:238 dwarfcastle.xml:168
+#: dwarfcastle.xml:189
 msgid "Armor"
 msgstr ""
 
@@ -99,7 +87,7 @@ msgstr ""
 msgid "As I always say: No enchantment should be applied a second time."
 msgstr ""
 
-#: base_abilities.xml:100 dwarfcastle.xml:178 dwarfcastle.xml:181
+#: dwarfcastle.xml:178 dwarfcastle.xml:181 base_abilities.xml:100
 msgid "Attack"
 msgstr ""
 
@@ -164,8 +152,8 @@ msgstr ""
 msgid "Basic holy melee attack"
 msgstr ""
 
-#: base_abilities.xml:137 monster_air_ablt.xml:49 monster_fire_ablt.xml:49
-#: monster_ice_ablt.xml:49 monster_shadow_ablt.xml:2
+#: monster_shadow_ablt.xml:2 monster_ice_ablt.xml:49 base_abilities.xml:137
+#: monster_air_ablt.xml:49 monster_fire_ablt.xml:49
 msgid "Basic magic attack"
 msgstr ""
 
@@ -173,9 +161,9 @@ msgstr ""
 msgid "Basic melee attack"
 msgstr ""
 
-#: base_abilities.xml:156 monster_ablt.xml:445 monster_ablt.xml:490
-#: monster_ablt.xml:670 monster_air_ablt.xml:25 monster_fire_ablt.xml:25
-#: monster_ice_ablt.xml:68
+#: monster_ablt.xml:445 monster_ablt.xml:490 monster_ablt.xml:670
+#: monster_ice_ablt.xml:68 base_abilities.xml:156 monster_air_ablt.xml:25
+#: monster_fire_ablt.xml:25
 msgid "Basic ranged attack"
 msgstr ""
 
@@ -185,10 +173,6 @@ msgstr ""
 
 #: joringsbridge_npc.xml:220
 msgid "Be grateful I am able to enchant two elements."
-msgstr ""
-
-#: joringsbridge_npc.xml:299
-msgid "Better not."
 msgstr ""
 
 #: undeadStats.xml:1963
@@ -219,11 +203,11 @@ msgstr ""
 msgid "Blind ranged attack"
 msgstr ""
 
-#: mage_ablt.xml:2 monster_ablt.xml:361
+#: monster_ablt.xml:361 mage_ablt.xml:2
 msgid "Blizzard"
 msgstr ""
 
-#: warrior_ablt.xml:85 npc.xml:108 dwarfcastle.xml:189
+#: npc.xml:108 dwarfcastle.xml:189 warrior_ablt.xml:85
 msgid "Block"
 msgstr ""
 
@@ -292,7 +276,7 @@ msgstr ""
 msgid "Cave Spider"
 msgstr ""
 
-#: mage_ablt.xml:28 monster_ablt.xml:293 npc_abilities.xml:102
+#: monster_ablt.xml:293 npc_abilities.xml:102 mage_ablt.xml:28
 msgid "Chainlightning"
 msgstr ""
 
@@ -336,8 +320,8 @@ msgstr ""
 msgid "Creates a obelisk of ice."
 msgstr ""
 
-#: undead_ablt.xml:2 undead_ablt.xml:20 undead_ablt.xml:39 undead_ablt.xml:58
-#: undead_ablt.xml:78 unique_ablt.xml:70
+#: unique_ablt.xml:70 undead_ablt.xml:2 undead_ablt.xml:20 undead_ablt.xml:39
+#: undead_ablt.xml:58 undead_ablt.xml:78
 msgid "Creates a skeleton."
 msgstr ""
 
@@ -385,7 +369,7 @@ msgstr ""
 msgid "Dobrusch"
 msgstr ""
 
-#: dwarfcastle.xml:61 dwarfenwall.xml:154
+#: dwarfcastle.xml:61
 msgid "Drago"
 msgstr ""
 
@@ -429,12 +413,11 @@ msgstr ""
 msgid "Enchant Items"
 msgstr ""
 
-#: npc.xml:79 npc.xml:129 npc.xml:153 npc.xml:174
+#: npc.xml:79
 msgid "Enchanter"
 msgstr ""
 
-#: dwarfcastle.xml:154 dwarfcastle.xml:215 dwarfcastle.xml:239
-#: dwarfcastle.xml:260 dwarfenwall.xml:287
+#: dwarfcastle.xml:154
 msgid "Enchanter Fazhir"
 msgstr ""
 
@@ -478,8 +461,8 @@ msgstr ""
 msgid "Fire arrow"
 msgstr ""
 
-#: npc.xml:102 dwarfcastle.xml:178 dwarfcastle.xml:181
-#: joringsbridge_npc.xml:247
+#: npc.xml:102 joringsbridge_npc.xml:247 dwarfcastle.xml:178
+#: dwarfcastle.xml:181
 msgid "Fire damage"
 msgstr ""
 
@@ -487,12 +470,12 @@ msgstr ""
 msgid "Fire resistance"
 msgstr ""
 
-#: mage_ablt.xml:90 monster_ablt.xml:19 monster_ablt.xml:146
-#: npc_abilities.xml:51
+#: monster_ablt.xml:19 monster_ablt.xml:146 npc_abilities.xml:51
+#: mage_ablt.xml:90
 msgid "Fireball"
 msgstr ""
 
-#: mage_ablt.xml:168 npc_abilities.xml:26
+#: npc_abilities.xml:26 mage_ablt.xml:168
 msgid "Fireblow"
 msgstr ""
 
@@ -500,7 +483,7 @@ msgstr ""
 msgid "Firebolt"
 msgstr ""
 
-#: mage_ablt.xml:194 monster_ablt.xml:172 npc_abilities.xml:76
+#: monster_ablt.xml:172 npc_abilities.xml:76 mage_ablt.xml:194
 msgid "Firecolumn"
 msgstr ""
 
@@ -512,8 +495,8 @@ msgstr ""
 msgid "Fireguardian"
 msgstr ""
 
-#: mage_ablt.xml:142 monster_ablt.xml:93 monster_ablt.xml:119
-#: npc_abilities.xml:238
+#: monster_ablt.xml:93 monster_ablt.xml:119 npc_abilities.xml:238
+#: mage_ablt.xml:142
 msgid "Firestorm"
 msgstr ""
 
@@ -537,7 +520,7 @@ msgstr ""
 msgid "Flee from enemy"
 msgstr ""
 
-#: dwarfcastle.xml:80 dwarfenwall.xml:169
+#: dwarfcastle.xml:80
 msgid "Flynn"
 msgstr ""
 
@@ -547,7 +530,7 @@ msgid ""
 "amount of time."
 msgstr ""
 
-#: mage_ablt.xml:246 monster_ice_ablt.xml:138
+#: monster_ice_ablt.xml:138 mage_ablt.xml:246
 msgid "Freeze"
 msgstr ""
 
@@ -595,7 +578,7 @@ msgstr ""
 msgid "Gab'Resh"
 msgstr ""
 
-#: aisenNPCStats.xml:46 aisenNPCStats.xml:88 npc.xml:25 dwarfenwall.xml:280
+#: aisenNPCStats.xml:46 aisenNPCStats.xml:88 npc.xml:25
 msgid "General Greif"
 msgstr ""
 
@@ -651,10 +634,6 @@ msgstr ""
 msgid "Guard"
 msgstr ""
 
-#: testregions.xml:86
-msgid "GuardLocation"
-msgstr ""
-
 #: npc.xml:38
 msgid "Guardcaptain"
 msgstr ""
@@ -663,7 +642,7 @@ msgstr ""
 msgid "Guardian Skeleton"
 msgstr ""
 
-#: dwarfcastle.xml:6 dwarfenwall.xml:164
+#: dwarfcastle.xml:6
 msgid "Haffgar"
 msgstr ""
 
@@ -681,7 +660,7 @@ msgid ""
 "had enough soldiers."
 msgstr ""
 
-#: monster_ablt.xml:70 aisenNPCStats.xml:257
+#: aisenNPCStats.xml:257 monster_ablt.xml:70
 msgid "Healer"
 msgstr ""
 
@@ -779,7 +758,7 @@ msgstr ""
 msgid "Icemage"
 msgstr ""
 
-#: mage_ablt.xml:298 monster_ablt.xml:247 monster_ablt.xml:270
+#: monster_ablt.xml:247 monster_ablt.xml:270 mage_ablt.xml:298
 msgid "Icicle"
 msgstr ""
 
@@ -873,10 +852,6 @@ msgstr ""
 msgid "Lich"
 msgstr ""
 
-#: testregions.xml:472
-msgid "LichLocation"
-msgstr ""
-
 #: mage_ablt.xml:421
 msgid "Lightning"
 msgstr ""
@@ -889,16 +864,16 @@ msgstr ""
 msgid "Lurdrak with the Hammer"
 msgstr ""
 
-#: npc.xml:28 dwarfenwall.xml:283
+#: npc.xml:28
 msgid "Maga Convocatis Darna Eistaucher"
 msgstr ""
 
-#: monster_ablt.xml:198 monster_shadow_ablt.xml:48 priest_ablt.xml:228
+#: monster_ablt.xml:198 priest_ablt.xml:228 monster_shadow_ablt.xml:48
 msgid "Magic Shield"
 msgstr ""
 
-#: base_abilities.xml:137 monster_air_ablt.xml:49 monster_fire_ablt.xml:49
-#: monster_ice_ablt.xml:49 monster_shadow_ablt.xml:2
+#: monster_shadow_ablt.xml:2 monster_ice_ablt.xml:49 base_abilities.xml:137
+#: monster_air_ablt.xml:49 monster_fire_ablt.xml:49
 msgid "Magic attack"
 msgstr ""
 
@@ -906,8 +881,7 @@ msgstr ""
 msgid "Magic power"
 msgstr ""
 
-#: joringsbridge_npc.xml:185 joringsbridge_npc.xml:268
-#: joringsbridge_npc.xml:295 joringsbridge_npc.xml:316 aisen.xml:431
+#: joringsbridge_npc.xml:185
 msgid "Magus Convocatis Relau Fireweaver"
 msgstr ""
 
@@ -949,10 +923,6 @@ msgstr ""
 
 #: dwarfcastle.xml:147
 msgid "My predecessor left me with that chaos."
-msgstr ""
-
-#: npc.xml:157 dwarfcastle.xml:243
-msgid "Nah to expensive"
 msgstr ""
 
 #: undeadStats.xml:2252 npc.xml:47
@@ -1003,10 +973,6 @@ msgstr ""
 
 #: goblinStats.xml:239
 msgid "Nubreck"
-msgstr ""
-
-#: npc.xml:156 dwarfcastle.xml:242 joringsbridge_npc.xml:298
-msgid "OK"
 msgstr ""
 
 #: joringsbridge_npc.xml:145
@@ -1063,7 +1029,7 @@ msgstr ""
 msgid "Poisonous ranged attack"
 msgstr ""
 
-#: dwarfcastle.xml:70 joringsbridge_npc.xml:7
+#: joringsbridge_npc.xml:7 dwarfcastle.xml:70
 msgid "Potions"
 msgstr ""
 
@@ -1221,8 +1187,8 @@ msgstr ""
 msgid "Summon Ice Obelisk"
 msgstr ""
 
-#: undead_ablt.xml:2 undead_ablt.xml:20 undead_ablt.xml:39 undead_ablt.xml:58
-#: undead_ablt.xml:78 unique_ablt.xml:70
+#: unique_ablt.xml:70 undead_ablt.xml:2 undead_ablt.xml:20 undead_ablt.xml:39
+#: undead_ablt.xml:58 undead_ablt.xml:78
 msgid "Summon Skeleton"
 msgstr ""
 
@@ -1234,7 +1200,7 @@ msgstr ""
 msgid "Sweeping blow"
 msgstr ""
 
-#: joringsbridge_npc.xml:21 aisen.xml:435
+#: joringsbridge_npc.xml:21
 msgid "Sybill"
 msgstr ""
 
@@ -1403,7 +1369,7 @@ msgstr ""
 msgid "The mage calls upon a snow storm to kill every enemy in a circle."
 msgstr ""
 
-#: mage_ablt.xml:90 monster_ablt.xml:146 npc_abilities.xml:51
+#: monster_ablt.xml:146 npc_abilities.xml:51 mage_ablt.xml:90
 msgid ""
 "The mage casts a bolt of fire, that explodes upon hitting an enemy. Other "
 "enemies nearby the victim are also caught in the explosion."
@@ -1421,11 +1387,11 @@ msgid ""
 "range."
 msgstr ""
 
-#: mage_ablt.xml:298 monster_ablt.xml:247 monster_ablt.xml:270
+#: monster_ablt.xml:247 monster_ablt.xml:270 mage_ablt.xml:298
 msgid "The mage casts a shard of pure ice, that damages his foes."
 msgstr ""
 
-#: mage_ablt.xml:168 npc_abilities.xml:26
+#: npc_abilities.xml:26 mage_ablt.xml:168
 msgid "The mage casts a strong bolt of fire, that damages one enemy."
 msgstr ""
 
@@ -1433,7 +1399,7 @@ msgstr ""
 msgid "The mage casts an even more powerful fireball."
 msgstr ""
 
-#: mage_ablt.xml:246 monster_ice_ablt.xml:138
+#: monster_ice_ablt.xml:138 mage_ablt.xml:246
 msgid ""
 "The mage catches an enemy in a block of pure ice, instantly sealing his "
 "movements."
@@ -1468,7 +1434,7 @@ msgid ""
 "The mage conjures a wave of ice, that damages enemies in a circle around him."
 msgstr ""
 
-#: mage_ablt.xml:194 npc_abilities.xml:76
+#: npc_abilities.xml:76 mage_ablt.xml:194
 msgid ""
 "The mage conjurs a column made of hellfire, that will stay for 5 seconds and "
 "turn every enemy stupid enough to stay in there to ashes."
@@ -1498,7 +1464,7 @@ msgid ""
 "lightnings."
 msgstr ""
 
-#: mage_ablt.xml:2 monster_ablt.xml:361
+#: monster_ablt.xml:361 mage_ablt.xml:2
 msgid ""
 "The mage summons a leathal cold blizzard that freezes every enemy caught in "
 "it to death."
@@ -1557,7 +1523,7 @@ msgid ""
 "will also be healed."
 msgstr ""
 
-#: npc.xml:155 dwarfcastle.xml:241 joringsbridge_npc.xml:297
+#: npc.xml:155 joringsbridge_npc.xml:297 dwarfcastle.xml:241
 msgid "The price is $1"
 msgstr ""
 
@@ -1845,8 +1811,8 @@ msgstr ""
 msgid "Tolec"
 msgstr ""
 
-#: medairnpc.xml:41 medairnpc.xml:64 medairnpc.xml:73 dwarfcastle.xml:38
-#: dwarfcastle.xml:58 dwarfcastle.xml:142
+#: dwarfcastle.xml:38 dwarfcastle.xml:58 dwarfcastle.xml:142 medairnpc.xml:41
+#: medairnpc.xml:64 medairnpc.xml:73
 msgid "Trade"
 msgstr ""
 
@@ -1882,7 +1848,7 @@ msgstr ""
 msgid "Weak Spot"
 msgstr ""
 
-#: npc.xml:99 dwarfcastle.xml:174 joringsbridge_npc.xml:244
+#: npc.xml:99 joringsbridge_npc.xml:244 dwarfcastle.xml:174
 msgid "Weapon"
 msgstr ""
 
@@ -1906,11 +1872,11 @@ msgstr ""
 msgid "What is all this?"
 msgstr ""
 
-#: npc.xml:132 dwarfcastle.xml:218 joringsbridge_npc.xml:271
+#: npc.xml:132 joringsbridge_npc.xml:271 dwarfcastle.xml:218
 msgid "Which Enchantment do you want?"
 msgstr ""
 
-#: npc.xml:111 dwarfcastle.xml:197 joringsbridge_npc.xml:250
+#: npc.xml:111 joringsbridge_npc.xml:250 dwarfcastle.xml:197
 msgid "Which part of your equipment should be enchanted?"
 msgstr ""
 
@@ -1970,51 +1936,12 @@ msgstr ""
 msgid "Zombie"
 msgstr ""
 
-#: door.xml:13
-msgid "_id"
-msgstr ""
-
 #: unique_ablt.xml:95
 msgid "a ball of ice that will hunt it's victim and explode"
 msgstr ""
 
-#: dwarfenwall.lua:313 dwarfenwall.lua:316
-msgid "addUnitCommand("
-msgstr ""
-
-#: testregions.xml:178 testregions.xml:192
-msgid "ai_ability_rating:asoroth_frost_wave"
-msgstr ""
-
-#: testregions.xml:163
-msgid "ai_ability_rating:asoroth_guided_iceball"
-msgstr ""
-
-#: testregions.xml:170
-msgid "ai_ability_rating:asoroth_ice_attack"
-msgstr ""
-
-#: testregions.xml:156
-msgid "ai_ability_rating:asoroth_ice_obelisk"
-msgstr ""
-
-#: testregions.xml:149
-msgid "ai_ability_rating:asoroth_icicle"
-msgstr ""
-
-#: testregions.xml:185
-msgid "ai_ability_rating:asoroth_meteor"
-msgstr ""
-
 #: monster_air_ablt.xml:2
 msgid "air attack"
-msgstr ""
-
-#: archer_ablt.xml:378 mage_ablt.xml:48 mage_ablt.xml:74 mage_ablt.xml:441
-#: mage_ablt.xml:466 mage_ablt.xml:546 mage_ablt.xml:578 monster_ablt.xml:241
-#: monster_ablt.xml:311 npc_abilities.xml:120 npc_abilities.xml:144
-#: priest_ablt.xml:95 priest_ablt.xml:327
-msgid "air_dmg"
 msgstr ""
 
 #: aisen.xml:1021
@@ -2165,10 +2092,6 @@ msgstr ""
 msgid "angel sword"
 msgstr ""
 
-#: unitfunc.lua:69
-msgid "angle"
-msgstr ""
-
 #: potion.xml:77
 msgid "antidot"
 msgstr ""
@@ -2195,10 +2118,6 @@ msgstr ""
 
 #: wands.xml:1101
 msgid "archmage wand"
-msgstr ""
-
-#: warrior_ablt.xml:236
-msgid "armor"
 msgstr ""
 
 #: shortbow.xml:403
@@ -2233,20 +2152,12 @@ msgstr ""
 msgid "assassins blade"
 msgstr ""
 
-#: dwarfenwall.lua:337
-msgid "att1"
-msgstr ""
-
 #: monster_fire_ablt.xml:2
 msgid "attack with fire damage"
 msgstr ""
 
 #: monster_air_ablt.xml:2
 msgid "attack with ice damage"
-msgstr ""
-
-#: testregions.xml:108
-msgid "axe_skel_siege"
 msgstr ""
 
 #: armor.xml:99
@@ -2305,20 +2216,12 @@ msgstr ""
 msgid "battle shortbow"
 msgstr ""
 
-#: benchmark.lua:19 testregions.xml:217
+#: testregions.xml:217
 msgid "benchmarkBox"
 msgstr ""
 
 #: hat.xml:137
 msgid "beret"
-msgstr ""
-
-#: berryBush.xml:11
-msgid "berryBushPicked"
-msgstr ""
-
-#: priest_ablt.xml:194 priest_ablt.xml:223
-msgid "berserk_immune_time"
 msgstr ""
 
 #: axes1h.xml:526
@@ -2327,22 +2230,6 @@ msgstr ""
 
 #: helmet.xml:252
 msgid "biretta"
-msgstr ""
-
-#: monster_ablt.xml:665 priest_ablt.xml:125 priest_ablt.xml:589
-msgid "blind"
-msgstr ""
-
-#: archer_ablt.xml:466
-msgid "block"
-msgstr ""
-
-#: archer_ablt.xml:145 priest_ablt.xml:356 priest_ablt.xml:384
-msgid "blockable"
-msgstr ""
-
-#: councilExperiment.xml:18
-msgid "blue"
 msgstr ""
 
 #: hammer2h.xml:238
@@ -2389,10 +2276,6 @@ msgstr ""
 msgid "buckskin gloves"
 msgstr ""
 
-#: priest_ablt.xml:272 priest_ablt.xml:301
-msgid "burning_immune_time"
-msgstr ""
-
 #: joringsbridge_npc.xml:219
 msgid ""
 "but, as you are no doubt unaware, casting and enchanting are two utterly "
@@ -2405,10 +2288,6 @@ msgstr ""
 
 #: helmet.xml:4
 msgid "cap"
-msgstr ""
-
-#: dwarfenwall.lua:274
-msgid "catapult_skeleton"
 msgstr ""
 
 #: hammer1h.xml:42
@@ -2425,10 +2304,6 @@ msgstr ""
 
 #: shortbow.xml:585
 msgid "chaos shortbow"
-msgstr ""
-
-#: npc.xml:135 dwarfcastle.xml:221 joringsbridge_npc.xml:274
-msgid "check_price"
 msgstr ""
 
 #: axes1h.xml:115
@@ -2455,10 +2330,6 @@ msgstr ""
 msgid "composite shortbow"
 msgstr ""
 
-#: priest_ablt.xml:514 priest_ablt.xml:540
-msgid "confused"
-msgstr ""
-
 #: aisen.xml:1100
 msgid "copperRock"
 msgstr ""
@@ -2483,16 +2354,8 @@ msgstr ""
 msgid "crashhead"
 msgstr ""
 
-#: dwarfenwall.lua:281
-msgid "createObject(\"catapult_skel\",{"
-msgstr ""
-
 #: hammer1h.xml:227
 msgid "crowhead"
-msgstr ""
-
-#: monster_ablt.xml:34 monster_ablt.xml:36
-msgid "current"
 msgstr ""
 
 #: hammer2h.xml:509
@@ -2507,10 +2370,6 @@ msgstr ""
 msgid "dark arrow"
 msgstr ""
 
-#: dwarfenwall.lua:339
-msgid "darna"
-msgstr ""
-
 #: base_abilities.xml:2
 msgid "dead"
 msgstr ""
@@ -2521,10 +2380,6 @@ msgstr ""
 
 #: swords2h.xml:538
 msgid "deathwind"
-msgstr ""
-
-#: testregions.xml:426
-msgid "deleting object "
 msgstr ""
 
 #: axes1h.xml:413
@@ -2571,10 +2426,6 @@ msgstr ""
 msgid "dread sword"
 msgstr ""
 
-#: dwarfenwall.lua:353
-msgid "dwall_siege"
-msgstr ""
-
 #: axes1h.xml:600
 msgid "dwarfen axe"
 msgstr ""
@@ -2589,10 +2440,6 @@ msgstr ""
 
 #: dwarfenwall.xml:6
 msgid "dwarfenwall"
-msgstr ""
-
-#: dwarfenwall.lua:260
-msgid "dwarfenwall monster group "
 msgstr ""
 
 #: dwarfenwall.xml:250
@@ -2627,10 +2474,6 @@ msgstr ""
 msgid "elf bow"
 msgstr ""
 
-#: energySource.xml:9
-msgid "energySourceUsed"
-msgstr ""
-
 #: axes2h.xml:118
 msgid "executioner axe"
 msgstr ""
@@ -2641,14 +2484,6 @@ msgstr ""
 
 #: hammer2h.xml:625
 msgid "exorcists hammer"
-msgstr ""
-
-#: party.lua:165
-msgid "experience"
-msgstr ""
-
-#: priest_ablt.xml:358 priest_ablt.xml:386
-msgid "extra_dmg_race"
 msgstr ""
 
 #: potion.xml:57
@@ -2679,36 +2514,12 @@ msgstr ""
 msgid "fire attack"
 msgstr ""
 
-#: archer_ablt.xml:143 archer_ablt.xml:173 mage_ablt.xml:22 mage_ablt.xml:109
-#: mage_ablt.xml:135 mage_ablt.xml:161 mage_ablt.xml:187 mage_ablt.xml:213
-#: mage_ablt.xml:239 mage_ablt.xml:292 mage_ablt.xml:319 mage_ablt.xml:345
-#: mage_ablt.xml:371 mage_ablt.xml:395 mage_ablt.xml:493 mage_ablt.xml:543
-#: mage_ablt.xml:575 monster_ablt.xml:112 monster_ablt.xml:138
-#: monster_ablt.xml:165 monster_ablt.xml:191 monster_ablt.xml:462
-#: monster_ablt.xml:507 monster_ablt.xml:642 monster_ice_ablt.xml:184
-#: npc_abilities.xml:44 npc_abilities.xml:69 npc_abilities.xml:95
-#: npc_abilities.xml:257 priest_ablt.xml:453 priest_ablt.xml:483
-#: unique_ablt.xml:139 dwarfenwall.lua:276
-msgid "fire_dmg"
-msgstr ""
-
 #: base_abilities.xml:19
 msgid "first action that is performed by a summoned monster"
 msgstr ""
 
-#: monster_ablt.xml:218 monster_shadow_ablt.xml:68 priest_ablt.xml:45
-msgid "flag"
-msgstr ""
-
 #: swords2h.xml:384
 msgid "flamberg"
-msgstr ""
-
-#: monster_ablt.xml:62 monster_ablt.xml:85 undead_ablt.xml:15
-#: undead_ablt.xml:34 undead_ablt.xml:53 undead_ablt.xml:72 undead_ablt.xml:92
-#: undead_ablt.xml:95 unique_ablt.xml:84 unique_ablt.xml:87 unique_ablt.xml:90
-#: unique_ablt.xml:158
-msgid "fraction"
 msgstr ""
 
 #: staff.xml:894
@@ -2717,10 +2528,6 @@ msgstr ""
 
 #: wands.xml:858
 msgid "frost wand"
-msgstr ""
-
-#: mage_ablt.xml:265 monster_ice_ablt.xml:157
-msgid "frozen"
 msgstr ""
 
 #: axes2h.xml:346
@@ -2819,22 +2626,8 @@ msgstr ""
 msgid "goblinkiller"
 msgstr ""
 
-#: aisen.xml:780 aisen.xml:781 aisen.xml:782 aisen.xml:783 aisen.xml:784
-#: aisen.xml:786
-msgid "goblins_l13_2"
-msgstr ""
-
-#: dwarfcastle.xml:176 dwarfcastle.xml:187
-msgid "godlike"
-msgstr ""
-
 #: swords1h.xml:658
 msgid "gods blade"
-msgstr ""
-
-#: debug.lua:18 party.lua:175 npc.xml:165 dwarfcastle.xml:251
-#: joringsbridge_npc.xml:307
-msgid "gold"
 msgstr ""
 
 #: amulet.xml:121
@@ -2905,7 +2698,7 @@ msgstr ""
 msgid "greyWolfcave"
 msgstr ""
 
-#: base_abilities.xml:89 dwarfenwall.lua:205
+#: base_abilities.xml:89
 msgid "guard"
 msgstr ""
 
@@ -2923,16 +2716,6 @@ msgstr ""
 
 #: axes1h.xml:4
 msgid "hatchet"
-msgstr ""
-
-#: dwarfenwall.lua:383 dwarfenwall.lua:384 dwarfenwall.lua:418
-#: medairnpc.xml:78 npc.xml:71 dwarfcastle.xml:75 joringsbridge_npc.xml:12
-#: testregions.xml:119
-msgid "health"
-msgstr ""
-
-#: medair.xml:81
-msgid "height"
 msgstr ""
 
 #: axes1h.xml:637
@@ -2975,22 +2758,6 @@ msgstr ""
 msgid "ice attack"
 msgstr ""
 
-#: mage_ablt.xml:20 mage_ablt.xml:111 mage_ablt.xml:137 mage_ablt.xml:163
-#: mage_ablt.xml:189 mage_ablt.xml:215 mage_ablt.xml:241 mage_ablt.xml:290
-#: mage_ablt.xml:317 mage_ablt.xml:343 mage_ablt.xml:369 mage_ablt.xml:397
-#: mage_ablt.xml:491 mage_ablt.xml:539 mage_ablt.xml:571 monster_ablt.xml:114
-#: monster_ablt.xml:140 monster_ablt.xml:167 monster_ablt.xml:193
-#: monster_ablt.xml:264 monster_ablt.xml:287 monster_ablt.xml:378
-#: monster_ablt.xml:589 monster_ablt.xml:687 monster_ice_ablt.xml:84
-#: monster_ice_ablt.xml:107 monster_ice_ablt.xml:132 monster_ice_ablt.xml:182
-#: monster_shadow_ablt.xml:39 npc_abilities.xml:20 npc_abilities.xml:46
-#: npc_abilities.xml:71 npc_abilities.xml:97 npc_abilities.xml:259
-#: priest_ablt.xml:93 priest_ablt.xml:325 priest_ablt.xml:455
-#: priest_ablt.xml:485 unique_ablt.xml:43 unique_ablt.xml:65
-#: unique_ablt.xml:111 unique_ablt.xml:136 unique_ablt.xml:223
-msgid "ice_dmg"
-msgstr ""
-
 #: axes2h.xml:612
 msgid "iceland axe"
 msgstr ""
@@ -3005,10 +2772,6 @@ msgstr ""
 
 #: staff.xml:798
 msgid "inferno staff"
-msgstr ""
-
-#: testregions.xml:331 testregions.xml:341 testregions.xml:351
-msgid "init_benchmark"
 msgstr ""
 
 #: axes1h.xml:152
@@ -3051,10 +2814,6 @@ msgstr ""
 msgid "kings axe"
 msgstr ""
 
-#: door.xml:33 door.xml:112
-msgid "layer"
-msgstr ""
-
 #: armor.xml:35
 msgid "leather armor"
 msgstr ""
@@ -3073,26 +2832,6 @@ msgstr ""
 
 #: swords1h.xml:150
 msgid "legion blade"
-msgstr ""
-
-#: dwarfenwall.lua:306
-msgid "lich_siege"
-msgstr ""
-
-#: aisen.xml:426
-msgid "locSergeant"
-msgstr ""
-
-#: dwarfenwall.lua:223 dwarfenwall.lua:249
-msgid "location"
-msgstr ""
-
-#: doorswitch.lua:7
-msgid "lock_override"
-msgstr ""
-
-#: door.xml:65 door.xml:95
-msgid "lockdown"
 msgstr ""
 
 #: swords1h.xml:186
@@ -3131,11 +2870,6 @@ msgstr ""
 msgid "magus wand"
 msgstr ""
 
-#: npc.xml:126 npc.xml:146 dwarfcastle.xml:212 dwarfcastle.xml:232
-#: joringsbridge_npc.xml:265 joringsbridge_npc.xml:285
-msgid "main_player"
-msgstr ""
-
 #: monsters.xml:289
 msgid "mandragora"
 msgstr ""
@@ -3162,18 +2896,6 @@ msgstr ""
 
 #: hammer1h.xml:153
 msgid "maul"
-msgstr ""
-
-#: priest_ablt.xml:250
-msgid "max_resist_air"
-msgstr ""
-
-#: priest_ablt.xml:248
-msgid "max_resist_ice"
-msgstr ""
-
-#: sarkophagusMaylon.xml:8
-msgid "maylonsReward"
 msgstr ""
 
 #: medair.xml:89
@@ -3236,16 +2958,8 @@ msgstr ""
 msgid "muscle salve"
 msgstr ""
 
-#: priest_ablt.xml:145 priest_ablt.xml:173
-msgid "mute_immune_time"
-msgstr ""
-
 #: goblinEqu.xml:207
 msgid "nail club"
-msgstr ""
-
-#: party.lua:96 sarkophagusMaylon.xml:28
-msgid "name"
 msgstr ""
 
 #: necrotia.xml:6
@@ -3258,10 +2972,6 @@ msgstr ""
 
 #: wands.xml:1008
 msgid "necromancer wand"
-msgstr ""
-
-#: dwarfenwall.lua:311 dwarfenwall.lua:314
-msgid "necromancer_siegeDefense"
 msgstr ""
 
 #: base_abilities.xml:28
@@ -3340,24 +3050,8 @@ msgstr ""
 msgid "old sword"
 msgstr ""
 
-#: door.xml:9
-msgid "on"
-msgstr ""
-
-#: door.xml:27 door.xml:50 door.xml:80 door.xml:110
-msgid "open"
-msgstr ""
-
 #: longbow.xml:42
 msgid "orc bow"
-msgstr ""
-
-#: monster_ablt.xml:334
-msgid "paralyzed"
-msgstr ""
-
-#: testregions.xml:482
-msgid "peasant"
 msgstr ""
 
 #: staff.xml:862
@@ -3368,44 +3062,12 @@ msgstr ""
 msgid "phenix wand"
 msgstr ""
 
-#: mage_ablt.xml:541 mage_ablt.xml:573 monster_air_ablt.xml:18
-#: monster_air_ablt.xml:20 monster_air_ablt.xml:42 monster_air_ablt.xml:44
-#: monster_fire_ablt.xml:18 monster_fire_ablt.xml:20 monster_fire_ablt.xml:42
-#: monster_fire_ablt.xml:44 monster_fire_ablt.xml:86 monster_fire_ablt.xml:111
-#: monster_ice_ablt.xml:18 monster_ice_ablt.xml:20 monster_ice_ablt.xml:42
-#: monster_ice_ablt.xml:44 unique_ablt.xml:20 unique_ablt.xml:22
-#: dwarfenwall.lua:30 monster_proj.xml:222
-msgid "phys_dmg"
-msgstr ""
-
-#: archer_ablt.xml:107 archer_ablt.xml:141 archer_ablt.xml:170
-#: archer_ablt.xml:268 archer_ablt.xml:292 monster_ablt.xml:399
-#: monster_ablt.xml:439 npc_abilities.xml:167 npc_abilities.xml:208
-#: priest_ablt.xml:18 priest_ablt.xml:510 priest_ablt.xml:585
-#: warrior_ablt.xml:63 warrior_ablt.xml:112 warrior_ablt.xml:258
-#: warrior_ablt.xml:372 warrior_ablt.xml:407
-msgid "phys_mult"
-msgstr ""
-
 #: polearms.xml:3
 msgid "pike"
 msgstr ""
 
-#: quests.lua:197
-msgid "playervars["
-msgstr ""
-
 #: monster_ablt.xml:404
 msgid "poison_attack"
-msgstr ""
-
-#: monster_ablt.xml:485 priest_ablt.xml:22
-msgid "poisoned"
-msgstr ""
-
-#: dwarfenwall.lua:4 councilExperiment.xml:27 door.xml:30 door.xml:53
-#: door.xml:83
-msgid "position"
 msgstr ""
 
 #: potion.xml:117
@@ -3414,10 +3076,6 @@ msgstr ""
 
 #: potion.xml:177
 msgid "potion of melting"
-msgstr ""
-
-#: priest_ablt.xml:458 priest_ablt.xml:488 unique_ablt.xml:179
-msgid "power"
 msgstr ""
 
 #: shortbow.xml:4
@@ -3430,10 +3088,6 @@ msgstr ""
 
 #: hammer1h.xml:634
 msgid "priest mace"
-msgstr ""
-
-#: quests.lua:219
-msgid "private_vars."
 msgstr ""
 
 #: robes.xml:5
@@ -3456,10 +3110,6 @@ msgstr ""
 msgid "rattan bow"
 msgstr ""
 
-#: councilExperiment.xml:22
-msgid "red"
-msgstr ""
-
 #: goblinStats.xml:707
 msgid "reg'resh"
 msgstr ""
@@ -3470,19 +3120,6 @@ msgstr ""
 
 #: testregions.xml:624
 msgid "region1"
-msgstr ""
-
-#: monster_ablt.xml:216 monster_shadow_ablt.xml:66 npc_abilities.xml:233
-#: priest_ablt.xml:246 warrior_ablt.xml:190
-msgid "resist_fire"
-msgstr ""
-
-#: dwarfenwall.lua:236
-msgid "respawnTrigger"
-msgstr ""
-
-#: dwarfenwall.lua:231
-msgid "respawnroute"
 msgstr ""
 
 #: shortbow.xml:331
@@ -3509,10 +3146,6 @@ msgstr ""
 msgid "rock wand"
 msgstr ""
 
-#: sarkophagusMaylon.xml:16
-msgid "rock_stf"
-msgstr ""
-
 #: goblinEqu.xml:138
 msgid "rusty dagger"
 msgstr ""
@@ -3523,10 +3156,6 @@ msgstr ""
 
 #: swords1h.xml:112
 msgid "sabre"
-msgstr ""
-
-#: sarkophagusMaylon.xml:22
-msgid "sabre_sw"
 msgstr ""
 
 #: testregions.xml:67
@@ -3541,10 +3170,6 @@ msgstr ""
 msgid "scimitar"
 msgstr ""
 
-#: councilExperiment.xml:30 door.xml:37 door.xml:118 energySource.xml:14
-msgid "scriptobjectvar["
-msgstr ""
-
 #: potion.xml:3
 msgid "scroll of town portal"
 msgstr ""
@@ -3555,10 +3180,6 @@ msgstr ""
 
 #: shortbow.xml:549
 msgid "seeker"
-msgstr ""
-
-#: dwarfcastle.xml:200 joringsbridge_npc.xml:253
-msgid "select_mod"
 msgstr ""
 
 #: goblinEqu.xml:68
@@ -3579,10 +3200,6 @@ msgstr ""
 
 #: swords1h.xml:40
 msgid "shortsword"
-msgstr ""
-
-#: dwarfenwall.lua:320
-msgid "siege_block"
 msgstr ""
 
 #: amulet.xml:63
@@ -3615,18 +3232,6 @@ msgstr ""
 
 #: axes2h.xml:384
 msgid "slaughter axe"
-msgstr ""
-
-#: medair.xml:78 medair.xml:83
-msgid "slave_miner"
-msgstr ""
-
-#: medair.xml:84
-msgid "slave_overseer"
-msgstr ""
-
-#: medair.xml:79
-msgid "slave_worker"
 msgstr ""
 
 #: hammer2h.xml:4
@@ -3665,7 +3270,7 @@ msgstr ""
 msgid "soldier bow"
 msgstr ""
 
-#: longbow.xml:527 shortbow.xml:513
+#: shortbow.xml:513 longbow.xml:527
 msgid "soul bow"
 msgstr ""
 
@@ -3701,10 +3306,6 @@ msgstr ""
 msgid "star axe"
 msgstr ""
 
-#: testregions.xml:406
-msgid "start_benchmark"
-msgstr ""
-
 #: monster_ablt.xml:2
 msgid "steal"
 msgstr ""
@@ -3737,16 +3338,8 @@ msgstr ""
 msgid "stormsinger"
 msgstr ""
 
-#: doorswitch.lua:1 doorswitch.lua:11
-msgid "string"
-msgstr ""
-
 #: monster_ablt.xml:709
 msgid "stun_attack"
-msgstr ""
-
-#: dwarfenwall.lua:204
-msgid "subtype"
 msgstr ""
 
 #: base_abilities.xml:19
@@ -3761,20 +3354,12 @@ msgstr ""
 msgid "summoner wand"
 msgstr ""
 
-#: testregions.xml:236
-msgid "switch"
-msgstr ""
-
 #: swords1h.xml:222
 msgid "sword of the coast"
 msgstr ""
 
 #: staff.xml:1218
 msgid "sylph staff"
-msgstr ""
-
-#: quests.lua:29 quests.lua:126
-msgid "table"
 msgstr ""
 
 #: base_abilities.xml:51
@@ -3841,10 +3426,6 @@ msgstr ""
 msgid "tourney bow"
 msgstr ""
 
-#: aisen.xml:788
-msgid "treasure_box_m1"
-msgstr ""
-
 #: hat.xml:204
 msgid "turban"
 msgstr ""
@@ -3857,48 +3438,8 @@ msgstr ""
 msgid "two handed steel sword"
 msgstr ""
 
-#: unitfunc.lua:17 testregions.xml:400
-msgid "type"
-msgstr ""
-
-#: testregions.xml:141
-msgid "under15"
-msgstr ""
-
-#: testregions.xml:138
-msgid "under25"
-msgstr ""
-
-#: testregions.xml:135
-msgid "under40"
-msgstr ""
-
-#: testregions.xml:132
-msgid "under50"
-msgstr ""
-
-#: testregions.xml:129
-msgid "under60"
-msgstr ""
-
-#: testregions.xml:126
-msgid "under75"
-msgstr ""
-
-#: testregions.xml:123
-msgid "under85"
-msgstr ""
-
 #: base_abilities.xml:65
 msgid "use"
-msgstr ""
-
-#: doorswitch.lua:5
-msgid "used_object"
-msgstr ""
-
-#: energySource.xml:11 mechanismCouncilCrane.xml:9
-msgid "user"
 msgstr ""
 
 #: hat.xml:5
@@ -3909,12 +3450,8 @@ msgstr ""
 msgid "vulcano axe"
 msgstr ""
 
-#: base_abilities.xml:79 dwarfenwall.lua:308
+#: base_abilities.xml:79
 msgid "walk"
-msgstr ""
-
-#: monster_shadow_ablt.xml:41 priest_ablt.xml:562 unique_ablt.xml:225
-msgid "willpower"
 msgstr ""
 
 #: aisenMonsterStats.xml:96
@@ -3935,8 +3472,4 @@ msgstr ""
 
 #: shortbow.xml:40
 msgid "yew shortbow"
-msgstr ""
-
-#: dwarfenwall.lua:380
-msgid "{"
 msgstr ""

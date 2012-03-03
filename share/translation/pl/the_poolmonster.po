@@ -28,7 +28,7 @@ msgstr ""
 msgid "Quest description"
 msgstr ""
 
-#: scene7.xml:15 scene7.xml:78
+#: scene7.xml:15
 msgid "Soren Windclaw"
 msgstr ""
 
@@ -100,18 +100,10 @@ msgstr ""
 msgid "Looks like a..."
 msgstr ""
 
-#: scene7.xml:52
-msgid "fireElemS"
-msgstr ""
-
 #: scene7.xml:53
 msgid "*Roar!*"
 msgstr ""
 
 #: scene7.xml:59
 msgid "greyCurseLake"
-msgstr ""
-
-#: scene7.xml:84
-msgid "end_cutscene7_fight"
 msgstr ""

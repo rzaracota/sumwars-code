@@ -31,7 +31,7 @@ msgstr "Quest completata"
 msgid "you killed enough goblins"
 msgstr "hai ucciso abbastanza goblin"
 
-#: goblins.xml:18 goblins.xml:30
+#: goblins.xml:18
 msgid "peasant"
 msgstr "Contadino"
 
@@ -98,10 +98,6 @@ msgstr "Quasi fatto."
 #: goblins.xml:61
 msgid "Have fun then."
 msgstr "Buon divertimento allora."
-
-#: goblins.xml:76
-msgid "attribute_points"
-msgstr ""
 
 #: goblins.xml:90
 msgid "region1"

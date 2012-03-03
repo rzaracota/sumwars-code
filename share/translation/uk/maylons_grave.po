@@ -61,66 +61,6 @@ msgstr ""
 msgid "aisMaylonsGraveEntry"
 msgstr "Могила Мейлона"
 
-#: maylons_grave.xml:26 maylons_grave.xml:27
-msgid "goblin_gabclan_sword"
-msgstr ""
-
-#: maylons_grave.xml:28 maylons_grave.xml:30 maylons_grave.xml:277
-msgid "goblin_gabclan_bow"
-msgstr ""
-
-#: maylons_grave.xml:29
-msgid "goblin_gabresh"
-msgstr ""
-
-#: maylons_grave.xml:38
-msgid "goblinArea"
-msgstr ""
-
-#: maylons_grave.xml:47 maylons_grave.xml:48
-msgid "areaCryptQuest"
-msgstr ""
-
-#: maylons_grave.xml:51
-msgid "zombie_crypt"
-msgstr ""
-
-#: maylons_grave.xml:53
-msgid "willpower"
-msgstr ""
-
-#: maylons_grave.xml:59
-msgid "entryDoor"
-msgstr ""
-
-#: maylons_grave.xml:61 maylons_grave.xml:63 maylons_grave.xml:65
-#: maylons_grave.xml:268 maylons_grave.xml:269 maylons_grave.xml:270
-#: maylons_grave.xml:271
-msgid "walk"
-msgstr ""
-
-#: maylons_grave.xml:67 maylons_grave.xml:68 maylons_grave.xml:86
-msgid "addUnitCommand("
-msgstr ""
-
-#: maylons_grave.xml:70
-msgid "addCameraPosition(4000,\"cryptGoblins\",-90,10,25)"
-msgstr ""
-
-#: maylons_grave.xml:78 maylons_grave.xml:93 maylons_grave.xml:105
-#: maylons_grave.xml:117 maylons_grave.xml:129 maylons_grave.xml:145
-msgid "goblinsFlee"
-msgstr ""
-
-#: maylons_grave.xml:154 maylons_grave.xml:158
-#, fuzzy
-msgid "GabResh"
-msgstr "Габ Реш"
-
-#: maylons_grave.xml:156 maylons_grave.xml:167
-msgid "Gab Resh"
-msgstr "Габ Реш"
-
 #: maylons_grave.xml:159
 msgid "Talk with the goblins?"
 msgstr "Поговорити з гоблінами?"
@@ -132,6 +72,10 @@ msgstr "Так"
 #: maylons_grave.xml:161
 msgid "No"
 msgstr "Ні"
+
+#: maylons_grave.xml:167
+msgid "Gab Resh"
+msgstr "Габ Реш"
 
 #: maylons_grave.xml:170
 msgid "A goblin who wants to talk?"
@@ -165,18 +109,9 @@ msgstr "Прогнати гоблінів"
 msgid "Slay the goblins"
 msgstr "Вбити гоблінів"
 
-#: maylons_grave.xml:184 maylons_grave.xml:186 maylons_grave.xml:244
-#: maylons_grave.xml:246
-msgid "fraction"
-msgstr ""
-
 #: maylons_grave.xml:188
 msgid "What could a goblin possibly have to say?"
 msgstr "І що ж може сказати гоблін?"
-
-#: maylons_grave.xml:188
-msgid "magopt"
-msgstr ""
 
 #: maylons_grave.xml:189
 msgid "We often hide here."
@@ -253,10 +188,6 @@ msgid ""
 msgstr ""
 "Згинь. У нас є важливіші справи, ніж вбивство банди жалюгідних гоблінів."
 
-#: maylons_grave.xml:220
-msgid "finishTalk"
-msgstr ""
-
 #: maylons_grave.xml:227
 msgid "Miserable brood! Die!"
 msgstr "Нещасний виводок! Помріть!"
@@ -269,57 +200,13 @@ msgstr "Нещасний виводок! Убий їх усіх!"
 msgid "Get lost, before I change my mind!"
 msgstr "Згинь, поки я не передумав!"
 
-#: maylons_grave.xml:250 maylons_grave.xml:440
-msgid "player"
-msgstr ""
-
-#: maylons_grave.xml:278
-msgid "areaGoblinsAway"
-msgstr ""
-
 #: maylons_grave.xml:297
 msgid "aisMaylonsGraveL1"
 msgstr "Могила Мейлона, рівень 1"
 
-#: maylons_grave.xml:310 maylons_grave.xml:379
-msgid "zombies_maylon"
-msgstr ""
-
 #: maylons_grave.xml:328
 msgid "aisMaylonsGraveL2"
 msgstr "Могила Мейлона, склеп"
-
-#: maylons_grave.xml:339
-msgid "doorGrave"
-msgstr ""
-
-#: maylons_grave.xml:348
-msgid "position"
-msgstr ""
-
-#: maylons_grave.xml:360
-msgid "maylonMummy"
-msgstr ""
-
-#: maylons_grave.xml:362
-msgid "createObject(\"skel_maylon\",\"graveChamber:locMaylonGuard2\",90)"
-msgstr ""
-
-#: maylons_grave.xml:401
-msgid "areaGathering"
-msgstr ""
-
-#: maylons_grave.xml:410
-msgid "maylons_grave_tmp.maylon=createObject(\"maylon\",{"
-msgstr ""
-
-#: maylons_grave.xml:428
-msgid "global"
-msgstr ""
-
-#: maylons_grave.xml:430
-msgid "maylon"
-msgstr ""
 
 #: maylons_grave.xml:431
 msgid "Thank you very much for liberating my soul."
@@ -362,18 +249,18 @@ msgstr ""
 "Цікаво, що б він сказав якби знав, що спочатку він зробить гак через "
 "Харадове пекло?"
 
-#: maylons_grave.xml:447
-msgid "rescued_maylon"
-msgstr ""
-
-#~ msgid "name..\" received an item from Maylons Grave."
-#~ msgstr "name..\" взяв предмет з Могили Мейлона."
-
-#~ msgid "Wait, great human warriors. Do not kill!"
-#~ msgstr "Зачекайте, великі людські воїни. Не вбивайте!"
+#~ msgid "Rakthr mootrick!"
+#~ msgstr "Ракхт муутрік!"
 
 #~ msgid "Mar! Nom Togubri!"
 #~ msgstr "Мар! Ном Тогубрі!"
 
-#~ msgid "Rakthr mootrick!"
-#~ msgstr "Ракхт муутрік!"
+#~ msgid "Wait, great human warriors. Do not kill!"
+#~ msgstr "Зачекайте, великі людські воїни. Не вбивайте!"
+
+#~ msgid "name..\" received an item from Maylons Grave."
+#~ msgstr "name..\" взяв предмет з Могили Мейлона."
+
+#, fuzzy
+#~ msgid "GabResh"
+#~ msgstr "Габ Реш"

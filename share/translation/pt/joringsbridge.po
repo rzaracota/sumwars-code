@@ -24,47 +24,6 @@ msgstr ""
 msgid "joringsbridge"
 msgstr ""
 
-#: joringsbridge.xml:9 joringsbridge.xml:371 joringsbridge.xml:383
-msgid "prince"
-msgstr ""
-
-#: joringsbridge.xml:11 joringsbridge.xml:15
-msgid "angle"
-msgstr ""
-
-#: joringsbridge.xml:13 joringsbridge.xml:96
-msgid "mentor"
-msgstr ""
-
-#: joringsbridge.xml:22 joringsbridge.xml:25
-msgid "graf_troop"
-msgstr ""
-
-#: joringsbridge.xml:29
-msgid "locTraderView3"
-msgstr ""
-
-#: joringsbridge.xml:31
-msgid "locTraderView1"
-msgstr ""
-
-#: joringsbridge.xml:36 joringsbridge.xml:42 joringsbridge.xml:45
-#: joringsbridge.xml:54 joringsbridge.xml:164
-msgid "peasant"
-msgstr ""
-
-#: joringsbridge.xml:39 joringsbridge.xml:48 joringsbridge.xml:51
-msgid "peasant_f"
-msgstr ""
-
-#: joringsbridge.xml:57
-msgid "locPrince"
-msgstr ""
-
-#: joringsbridge.xml:71
-msgid "get_party"
-msgstr ""
-
 #: joringsbridge.xml:105
 msgid "I'm begging you, my prince!"
 msgstr ""
@@ -181,25 +140,8 @@ msgstr ""
 msgid "And they say, our kind is cold-hearted..."
 msgstr ""
 
-#: joringsbridge.xml:157 joringsbridge.xml:160
-msgid "speed"
-msgstr ""
-
-#: joringsbridge.xml:165
-msgid "Michel Bron"
-msgstr ""
-
-#: joringsbridge.xml:167
-msgid "michel"
-msgstr ""
-
 #: joringsbridge.xml:169
 msgid "Guards! Guards!"
-msgstr ""
-
-#: joringsbridge.xml:172 joringsbridge.xml:173 joringsbridge.xml:327
-#: joringsbridge.xml:328 joringsbridge.xml:329
-msgid "lookAt("
 msgstr ""
 
 #: joringsbridge.xml:175
@@ -276,14 +218,6 @@ msgstr ""
 
 #: joringsbridge.xml:212
 msgid "That could almost be worth the trouble."
-msgstr ""
-
-#: joringsbridge.xml:222
-msgid "sorenCrystal"
-msgstr ""
-
-#: joringsbridge.xml:225
-msgid "waropt"
 msgstr ""
 
 #: joringsbridge.xml:240 joringsbridge.xml:251
@@ -399,12 +333,6 @@ msgstr ""
 msgid "Yes, show him who's in charge!"
 msgstr ""
 
-#: joringsbridge.xml:300 joringsbridge.xml:413 joringsbridge.xml:415
-#: joringsbridge.xml:420 joringsbridge.xml:422 joringsbridge.xml:424
-#: joringsbridge.xml:426
-msgid "walk"
-msgstr ""
-
 #: joringsbridge.xml:319
 msgid "Prince, I take the job!"
 msgstr ""
@@ -479,16 +407,8 @@ msgstr ""
 msgid "That much distrust is really unnecessary during a war. "
 msgstr ""
 
-#: joringsbridge.xml:360 joringsbridge.xml:387
-msgid "insertTrigger(\"clean_after_talking\")"
-msgstr ""
-
 #: joringsbridge.xml:368
 msgid "Nobody?"
-msgstr ""
-
-#: joringsbridge.xml:374
-msgid "sergeant"
 msgstr ""
 
 #: joringsbridge.xml:375
@@ -513,16 +433,4 @@ msgstr ""
 
 #: joringsbridge.xml:384
 msgid "I will pray that your family is safe long enough."
-msgstr ""
-
-#: joringsbridge.xml:410
-msgid "locParty"
-msgstr ""
-
-#: joringsbridge.xml:468
-msgid "subtype"
-msgstr ""
-
-#: joringsbridge.xml:483 joringsbridge.xml:496
-msgid "areaJBNorth"
 msgstr ""

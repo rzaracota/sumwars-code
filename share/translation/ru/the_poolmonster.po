@@ -28,7 +28,7 @@ msgstr "Задание завершено"
 msgid "Quest description"
 msgstr "Описание задание"
 
-#: scene7.xml:15 scene7.xml:78
+#: scene7.xml:15
 msgid "Soren Windclaw"
 msgstr "Сорен Виндклоу"
 
@@ -100,18 +100,10 @@ msgstr "Что находится в воде вон там?"
 msgid "Looks like a..."
 msgstr "Выглядит как..."
 
-#: scene7.xml:52
-msgid "fireElemS"
-msgstr ""
-
 #: scene7.xml:53
 msgid "*Roar!*"
 msgstr "*Аррр!*"
 
 #: scene7.xml:59
 msgid "greyCurseLake"
-msgstr ""
-
-#: scene7.xml:84
-msgid "end_cutscene7_fight"
 msgstr ""

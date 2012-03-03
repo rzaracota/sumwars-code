@@ -55,22 +55,6 @@ msgstr ""
 msgid "aisDarkClearing"
 msgstr "Темна Поляна"
 
-#: goblin_raid.xml:14
-#, fuzzy
-msgid "goblin_regresh"
-msgstr "Рейд Гоблінів"
-
-#: goblin_raid.xml:16
-#, fuzzy
-msgid "goblin_apprtc"
-msgstr "Рейд Гоблінів"
-
-#: goblin_raid.xml:28
-msgid ""
-"You found a leather skin containing what seems like the plans of a raid on a "
-"nearby village."
-msgstr ""
-
 #: goblin_raid.xml:35
 msgid "Sergeant Lutterer"
 msgstr "Сержант Люттерер"
@@ -94,10 +78,6 @@ msgstr "Їх мав якийсь главар шаман, тому я вважа
 #: goblin_raid.xml:46
 msgid "Meant it. Whatever."
 msgstr "Мали на увазі. Байдуже."
-
-#: goblin_raid.xml:49 goblin_raid.xml:64
-msgid "collect_reward_raid"
-msgstr ""
 
 #: goblin_raid.xml:62
 msgid "Hey, sergeant, ready to pay for the pre-emptive rescue of the village?"
@@ -143,10 +123,6 @@ msgstr "Ні"
 msgid "Then I better get back to saving helpless peasants, no?"
 msgstr "Тоді я краще повернуся до економії безпомічних селян, чи не так?"
 
-#: goblin_raid.xml:95
-msgid "player"
-msgstr ""
-
 #: goblin_raid.xml:101
 msgid "Fine, I'll wipe out those goblins for you."
 msgstr "Добре, я знищу цих гоблінів для вас."
@@ -166,3 +142,11 @@ msgstr "Яка різниця. Це не тому, що мені потрібн�
 #: goblin_raid.xml:110
 msgid "And I could care less what happens to some peasant family."
 msgstr "І мені абсолютно байдуже, що відбувається в якійсь селянській родині."
+
+#, fuzzy
+#~ msgid "goblin_apprtc"
+#~ msgstr "Рейд Гоблінів"
+
+#, fuzzy
+#~ msgid "goblin_regresh"
+#~ msgstr "Рейд Гоблінів"

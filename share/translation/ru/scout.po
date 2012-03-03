@@ -46,11 +46,6 @@ msgstr ""
 msgid "greyCurseCave"
 msgstr "Проклятая Пещера"
 
-#: scout.xml:17
-#, fuzzy
-msgid "questScout"
-msgstr "Раненый скаут"
-
 #: scout.xml:23
 msgid "Wounded Scout"
 msgstr "Раненый скаут"
@@ -280,12 +275,12 @@ msgstr ""
 msgid "greyWolfcave"
 msgstr "Волчья Пещера"
 
-#: scout.xml:124
-msgid "psychoticSpider"
-msgstr ""
-
 #~ msgid ""
 #~ "After killing the spider you safely pick up a backpack in good shape."
 #~ msgstr ""
 #~ "После убийства паука ты без опасений поднял рюкзак, который оказался в "
 #~ "хорошем состоянии."
+
+#, fuzzy
+#~ msgid "questScout"
+#~ msgstr "Раненый скаут"

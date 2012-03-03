@@ -230,14 +230,6 @@ msgstr ""
 msgid "greyWolfcave"
 msgstr ""
 
-#: scout.xml:124
-msgid "psychoticSpider"
-msgstr ""
-
-#: scout.xml:17
-msgid "questScout"
-msgstr ""
-
 #: scout.xml:44
 msgid ""
 "really big one... there. Spider, I mean... got me good... lost my gear... "

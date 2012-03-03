@@ -50,11 +50,7 @@ msgstr ""
 msgid "joringsbridge"
 msgstr "joringsbridge"
 
-#: greenOrchid.xml:20
-msgid "peasant_f2"
-msgstr "peasant_f2"
-
-#: greenOrchid.xml:25 greenOrchid.xml:36 greenOrchid.xml:43 greenOrchid.xml:46
+#: greenOrchid.xml:25
 msgid "Reba"
 msgstr "Reba"
 
@@ -194,10 +190,6 @@ msgstr "Thanks. I think I can handle it's ugliness."
 msgid "dwarfenwall"
 msgstr "dwarfenwall"
 
-#: greenOrchid.xml:110
-msgid "peasant2"
-msgstr "peasant2"
-
 #: greenOrchid.xml:115
 msgid "Eric"
 msgstr "Eric"
@@ -274,10 +266,6 @@ msgstr "Another stupid thing to carry around."
 msgid "copperRock"
 msgstr "copperRock"
 
-#: greenOrchid.xml:151
-msgid "mentor"
-msgstr "mentor"
-
 #: greenOrchid.xml:156
 msgid "Thomas"
 msgstr "Thomas"
@@ -329,3 +317,12 @@ msgstr ""
 #: greenOrchid.xml:175
 msgid "Wha... I really got something I want? Thank you man."
 msgstr "Wha... I really got something I want? Thank you man."
+
+#~ msgid "mentor"
+#~ msgstr "mentor"
+
+#~ msgid "peasant2"
+#~ msgstr "peasant2"
+
+#~ msgid "peasant_f2"
+#~ msgstr "peasant_f2"

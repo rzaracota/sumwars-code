@@ -112,31 +112,10 @@ msgstr "Я уже в пути."
 msgid "aisNorthMeadow"
 msgstr "Северные Низины"
 
-#: besieged_farm.xml:48
-msgid "peasant_f"
-msgstr ""
-
-#: besieged_farm.xml:50
-msgid "ignored_by_ai"
-msgstr ""
-
-#: besieged_farm.xml:53
-msgid "farm_goblins_shaman"
-msgstr ""
-
-#: besieged_farm.xml:57
-#, fuzzy
-msgid "bronsFarmDoor"
-msgstr "Ферма Брона"
-
 #: besieged_farm.xml:88
 msgid ""
 "That should have been enough goblins. I better look after Bron's family."
 msgstr "Этих гоблинов достаточно. Мне лучше следует глянуть на семью Брона."
-
-#: besieged_farm.xml:107
-msgid "PL"
-msgstr ""
 
 #: besieged_farm.xml:111
 msgid "The goblins are gone. Are you alright?"
@@ -214,3 +193,7 @@ msgstr "Вот твои деньги."
 #~ msgstr ""
 #~ "В самом деле, \"..name..\". Ты что, думал, она будет использовать "
 #~ "почтовых голубей в наши дни?"
+
+#, fuzzy
+#~ msgid "bronsFarmDoor"
+#~ msgstr "Ферма Брона"

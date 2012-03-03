@@ -53,10 +53,6 @@ msgid ""
 "I really should pay this guy a visit. 10000 gold pieces are not chickenfeed."
 msgstr ""
 
-#: rob_the_robber.xml:23 rob_the_robber.xml:72 rob_the_robber.xml:143
-msgid "player"
-msgstr ""
-
 #: rob_the_robber.xml:24
 msgid "Watch your back."
 msgstr ""
@@ -174,7 +170,7 @@ msgstr ""
 msgid "Sergeant Wober in Dwarfenwall has it."
 msgstr ""
 
-#: rob_the_robber.xml:83 rob_the_robber.xml:94
+#: rob_the_robber.xml:83
 msgid "Sergeant Wober"
 msgstr ""
 
@@ -224,32 +220,8 @@ msgstr ""
 msgid "Here are the 10000 gold pieces."
 msgstr ""
 
-#: rob_the_robber.xml:158
-msgid "rob_the_robber_reward"
-msgstr ""
-
 #: rob_the_robber.xml:167
 msgid "aisDarkFairyforest"
-msgstr ""
-
-#: rob_the_robber.xml:171
-msgid "human_rob_fairy"
-msgstr ""
-
-#: rob_the_robber.xml:172 rob_the_robber.xml:173
-msgid "human_deserter"
-msgstr ""
-
-#: rob_the_robber.xml:174
-msgid "human_saboteur"
-msgstr ""
-
-#: rob_the_robber.xml:175
-msgid "human_raider"
-msgstr ""
-
-#: rob_the_robber.xml:210 rob_the_robber.xml:237 rob_the_robber.xml:258
-msgid "health"
 msgstr ""
 
 #: rob_the_robber.xml:221

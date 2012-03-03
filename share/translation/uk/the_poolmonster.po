@@ -31,7 +31,7 @@ msgstr "Квест завершено"
 msgid "Quest description"
 msgstr "Опис квесту"
 
-#: scene7.xml:15 scene7.xml:78
+#: scene7.xml:15
 msgid "Soren Windclaw"
 msgstr "Сорен Віндклав"
 
@@ -103,10 +103,6 @@ msgstr "Що це там, на воді?"
 msgid "Looks like a..."
 msgstr "Схоже на..."
 
-#: scene7.xml:52
-msgid "fireElemS"
-msgstr ""
-
 #: scene7.xml:53
 msgid "*Roar!*"
 msgstr "* Рев! *"
@@ -114,7 +110,3 @@ msgstr "* Рев! *"
 #: scene7.xml:59
 msgid "greyCurseLake"
 msgstr "Приховане Озеро"
-
-#: scene7.xml:84
-msgid "end_cutscene7_fight"
-msgstr ""

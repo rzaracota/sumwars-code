@@ -38,22 +38,9 @@ msgstr ""
 msgid "joringsbridge"
 msgstr "joringsbridge"
 
-#: herbalist.xml:19 herbalist.xml:21
-msgid "peasant_f"
-msgstr ""
-
-#: herbalist.xml:24 herbalist.xml:64 herbalist.xml:74 herbalist.xml:91
-#: herbalist.xml:100
+#: herbalist.xml:74
 msgid "Gertlinde Kampfer"
 msgstr "Gertlinde Kampfer"
-
-#: herbalist.xml:40
-msgid "player"
-msgstr ""
-
-#: herbalist.xml:45
-msgid "areaHerbQuest"
-msgstr ""
 
 #: herbalist.xml:75
 msgid "Herb gathering"
@@ -214,18 +201,6 @@ msgstr "Tell me when you're not too mighty for simple work anymore, sweety."
 #: herbalist.xml:167
 msgid "Watch your tongue, hag!"
 msgstr "Watch your tongue, hag!"
-
-#: herbalist.xml:185
-msgid "herbalist_reward"
-msgstr ""
-
-#: herbalist.xml:190
-msgid "heal_1"
-msgstr ""
-
-#: herbalist.xml:192
-msgid "heal_2"
-msgstr ""
 
 #: herbalist.xml:214
 msgid "aisNorthMeadow"

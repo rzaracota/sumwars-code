@@ -33,20 +33,7 @@ msgstr "Quest description"
 msgid "dwarfenwall"
 msgstr "Zwergentrutz"
 
-#: siegeOfDwarfenwall.xml:18
-msgid "entry_west"
-msgstr "entry_west"
-
-#: siegeOfDwarfenwall.xml:20
-msgid "locWay1"
-msgstr "locWay1"
-
-#: siegeOfDwarfenwall.xml:22
-msgid "exit_command"
-msgstr "exit_command"
-
-#: siegeOfDwarfenwall.xml:35 siegeOfDwarfenwall.xml:44
-#: siegeOfDwarfenwall.xml:2306 siegeOfDwarfenwall.xml:2314
+#: siegeOfDwarfenwall.xml:35 siegeOfDwarfenwall.xml:2306
 msgid "dwarfenwallCommand"
 msgstr "Kommandozentrum"
 
@@ -266,11 +253,6 @@ msgid "They are under orders of the council, it is not your decision."
 msgstr ""
 "Sie stehen unter dem Befehls des Konzils, es ist nicht eure Entscheidung."
 
-#: siegeOfDwarfenwall.xml:193 siegeOfDwarfenwall.xml:194
-#: siegeOfDwarfenwall.xml:856 siegeOfDwarfenwall.xml:1188
-msgid "guard"
-msgstr "guard"
-
 #: siegeOfDwarfenwall.xml:195
 msgid "They are coming! The attack begins!"
 msgstr "Sie kommen! Der Angriff beginnt!"
@@ -279,12 +261,6 @@ msgstr "Sie kommen! Der Angriff beginnt!"
 #: siegeOfDwarfenwall.xml:2538
 msgid "..."
 msgstr "..."
-
-#: siegeOfDwarfenwall.xml:217 siegeOfDwarfenwall.xml:232
-#: siegeOfDwarfenwall.xml:2340 siegeOfDwarfenwall.xml:2355
-#: siegeOfDwarfenwall.xml:2377
-msgid "general"
-msgstr "general"
 
 #: siegeOfDwarfenwall.xml:218
 msgid "Get to the walls!"
@@ -319,185 +295,19 @@ msgstr "Daran wird es nicht scheitern."
 msgid "I pray that you're right..."
 msgstr "Ich bete, dass ihr Euch nicht irrt..."
 
-#: siegeOfDwarfenwall.xml:246
-msgid "assembleParty(\"dwarfenwall\",\"locPartyLeave\")"
-msgstr "assembleParty(\"dwarfenwall\",\"locPartyLeave\")"
-
 #: siegeOfDwarfenwall.xml:267 siegeOfDwarfenwall.xml:296
 msgid "I'm sorry, but only members of the aisen army are allowed beyond here."
 msgstr ""
 "Es tut mir Leid, aber hier ist nur Durchgang für Angehörige der aisener "
 "Armee."
 
-#: siegeOfDwarfenwall.xml:277
-msgid "areaNoEntry3"
-msgstr "areaNoEntry3"
-
 #: siegeOfDwarfenwall.xml:283
 msgid "I don't want to go there. I only see boring walls."
 msgstr "Da will ich jetzt nicht hin. Ich sehe nur eine langweilige Mauer."
 
-#: siegeOfDwarfenwall.xml:401 siegeOfDwarfenwall.xml:871
-#: siegeOfDwarfenwall.xml:877 siegeOfDwarfenwall.xml:1123
-#: siegeOfDwarfenwall.xml:1132 siegeOfDwarfenwall.xml:2222
-msgid "walk"
-msgstr "walk"
-
 #: siegeOfDwarfenwall.xml:418
 msgid "dwarfenwallRampart"
 msgstr "Burgwall"
-
-#: siegeOfDwarfenwall.xml:467
-msgid "locGuard1"
-msgstr "locGuard1"
-
-#: siegeOfDwarfenwall.xml:469
-msgid "locGuard2"
-msgstr "locGuard2"
-
-#: siegeOfDwarfenwall.xml:471
-msgid "locGuard3"
-msgstr "locGuard3"
-
-#: siegeOfDwarfenwall.xml:473
-msgid "locGuard4"
-msgstr "locGuard4"
-
-#: siegeOfDwarfenwall.xml:477
-msgid "locGuard5"
-msgstr "locGuard5"
-
-#: siegeOfDwarfenwall.xml:479
-msgid "locGuard6"
-msgstr "locGuard6"
-
-#: siegeOfDwarfenwall.xml:481
-msgid "locGuard9"
-msgstr "locGuard9"
-
-#: siegeOfDwarfenwall.xml:483
-msgid "locGuard10"
-msgstr "locGuard10"
-
-#: siegeOfDwarfenwall.xml:485
-msgid "locGuard11"
-msgstr "locGuard11"
-
-#: siegeOfDwarfenwall.xml:487
-msgid "locGuard12"
-msgstr "locGuard12"
-
-#: siegeOfDwarfenwall.xml:491
-msgid "locBowmen2"
-msgstr "locBowmen2"
-
-#: siegeOfDwarfenwall.xml:493
-msgid "locBowmen3"
-msgstr "locBowmen3"
-
-#: siegeOfDwarfenwall.xml:495
-msgid "locBowmen1"
-msgstr "locBowmen1"
-
-#: siegeOfDwarfenwall.xml:498
-msgid "locBowmen4"
-msgstr "locBowmen4"
-
-#: siegeOfDwarfenwall.xml:500
-msgid "locBowmen6"
-msgstr "locBowmen6"
-
-#: siegeOfDwarfenwall.xml:502
-msgid "locBowmen7"
-msgstr "locBowmen7"
-
-#: siegeOfDwarfenwall.xml:820
-msgid "respawnTrigger"
-msgstr "respawnTrigger"
-
-#: siegeOfDwarfenwall.xml:821
-msgid "newUnit"
-msgstr "newUnit"
-
-#: siegeOfDwarfenwall.xml:824
-msgid "penalty-points: "
-msgstr "penalty-points: "
-
-#: siegeOfDwarfenwall.xml:826
-msgid "index: "
-msgstr "index: "
-
-#: siegeOfDwarfenwall.xml:837
-msgid "a very important unit just died"
-msgstr "a very important unit just died"
-
-#: siegeOfDwarfenwall.xml:839
-msgid "resurrection_fire_storm"
-msgstr "resurrection_fire_storm"
-
-#: siegeOfDwarfenwall.xml:849
-msgid "subtype"
-msgstr "subtype"
-
-#: siegeOfDwarfenwall.xml:851
-msgid "respawnroute"
-msgstr "respawnroute"
-
-#: siegeOfDwarfenwall.xml:870
-msgid "elite_siege"
-msgstr "elite_siege"
-
-#: siegeOfDwarfenwall.xml:876
-#, fuzzy
-msgid "dwarfenwall_councilguard"
-msgstr "Kommandozentrum"
-
-#: siegeOfDwarfenwall.xml:883 siegeOfDwarfenwall.xml:962
-#: siegeOfDwarfenwall.xml:1077 siegeOfDwarfenwall.xml:1191
-#: siegeOfDwarfenwall.xml:1211 siegeOfDwarfenwall.xml:1250
-#: siegeOfDwarfenwall.xml:1285 siegeOfDwarfenwall.xml:1323
-#: siegeOfDwarfenwall.xml:1453 siegeOfDwarfenwall.xml:1497
-#: siegeOfDwarfenwall.xml:1523 siegeOfDwarfenwall.xml:1535
-#: siegeOfDwarfenwall.xml:1579 siegeOfDwarfenwall.xml:1630
-#: siegeOfDwarfenwall.xml:1711 siegeOfDwarfenwall.xml:1758
-#: siegeOfDwarfenwall.xml:1804 siegeOfDwarfenwall.xml:1865
-#: siegeOfDwarfenwall.xml:1916 siegeOfDwarfenwall.xml:1972
-#: siegeOfDwarfenwall.xml:2018 siegeOfDwarfenwall.xml:2085
-#: siegeOfDwarfenwall.xml:2133
-msgid "dwall_siege"
-msgstr "dwall_siege"
-
-#: siegeOfDwarfenwall.xml:888
-msgid "councilEnters"
-msgstr "councilEnters"
-
-#: siegeOfDwarfenwall.xml:895
-msgid "general_greif_battle"
-msgstr "general_greif_battle"
-
-#: siegeOfDwarfenwall.xml:896
-msgid "General Greif"
-msgstr "General Greif"
-
-#: siegeOfDwarfenwall.xml:903
-#, fuzzy
-msgid "council_dwarfenwall"
-msgstr "Zwergentrutz"
-
-#: siegeOfDwarfenwall.xml:904
-msgid "Maga Convocatis Darna Eistaucher"
-msgstr "Maga Convocatis Darna Eistaucher"
-
-#: siegeOfDwarfenwall.xml:920 siegeOfDwarfenwall.xml:934
-msgid "talkBeforeBattle"
-msgstr "talkBeforeBattle"
-
-#: siegeOfDwarfenwall.xml:965 siegeOfDwarfenwall.xml:969
-#: siegeOfDwarfenwall.xml:2241 siegeOfDwarfenwall.xml:2245
-#: siegeOfDwarfenwall.xml:2264 siegeOfDwarfenwall.xml:2267
-#: siegeOfDwarfenwall.xml:2278 siegeOfDwarfenwall.xml:2286
-msgid "greif"
-msgstr "greif"
 
 #: siegeOfDwarfenwall.xml:969
 msgid "Here they come."
@@ -507,21 +317,9 @@ msgstr "Da hinten kommen sie."
 msgid "Get ready, soldiers!"
 msgstr "Macht euch bereit Männer!"
 
-#: siegeOfDwarfenwall.xml:982 siegeOfDwarfenwall.xml:1368
-#: siegeOfDwarfenwall.xml:1634 siegeOfDwarfenwall.xml:1888
-#: siegeOfDwarfenwall.xml:2040 siegeOfDwarfenwall.xml:2202
-msgid "locLich"
-msgstr "locLich"
-
 #: siegeOfDwarfenwall.xml:1027
 msgid "Your time has come, pathetic humans!"
 msgstr "Eure Zeit ist gekommen, erbärmliche Menschen!"
-
-#: siegeOfDwarfenwall.xml:1027 siegeOfDwarfenwall.xml:1102
-#: siegeOfDwarfenwall.xml:1388 siegeOfDwarfenwall.xml:2498
-#: siegeOfDwarfenwall.xml:2565
-msgid "lich"
-msgstr "lich"
 
 #: siegeOfDwarfenwall.xml:1028
 msgid "Dwarfenwall will finally be yours, my lord."
@@ -534,10 +332,6 @@ msgstr "Mit der Unterstützung aus der Hauptstadt wird es endlich gelingen."
 #: siegeOfDwarfenwall.xml:1030
 msgid "Let us begin with the last rush on this wretched stronghold."
 msgstr "Beginnen wir also den letzten Sturm auf diese elende Festung."
-
-#: siegeOfDwarfenwall.xml:1050 siegeOfDwarfenwall.xml:2228
-msgid "entry_south"
-msgstr "entry_south"
 
 #: siegeOfDwarfenwall.xml:1057
 msgid ""
@@ -655,10 +449,6 @@ msgstr "Sag 'Bitte'."
 msgid "Just do it!"
 msgstr "Macht schon!"
 
-#: siegeOfDwarfenwall.xml:1156
-msgid "fire_wave"
-msgstr "fire_wave"
-
 #: siegeOfDwarfenwall.xml:1170
 msgid "Watch out!"
 msgstr "Gebt Acht!"
@@ -666,20 +456,6 @@ msgstr "Gebt Acht!"
 #: siegeOfDwarfenwall.xml:1171
 msgid "Catapults!"
 msgstr "Katapulte!"
-
-#: siegeOfDwarfenwall.xml:1330
-msgid "firstBoss"
-msgstr "firstBoss"
-
-#: siegeOfDwarfenwall.xml:1377
-msgid "fire"
-msgstr "fire"
-
-#: siegeOfDwarfenwall.xml:1384 siegeOfDwarfenwall.xml:1825
-#: siegeOfDwarfenwall.xml:1829 siegeOfDwarfenwall.xml:2055
-#: siegeOfDwarfenwall.xml:2058
-msgid "att1"
-msgstr "att1"
 
 #: siegeOfDwarfenwall.xml:1388
 msgid "They are struggling on."
@@ -713,27 +489,6 @@ msgstr "Bereite alles vor."
 msgid "I understand, my lord."
 msgstr "Ich habe verstanden, mein Gebieter."
 
-#: siegeOfDwarfenwall.xml:1407
-msgid "wave5"
-msgstr "wave5"
-
-#: siegeOfDwarfenwall.xml:1412
-msgid "wave5b"
-msgstr "wave5b"
-
-#: siegeOfDwarfenwall.xml:1638
-msgid "wave9pre"
-msgstr "wave9pre"
-
-#: siegeOfDwarfenwall.xml:1644
-msgid "boss3prep"
-msgstr "boss3prep"
-
-#: siegeOfDwarfenwall.xml:1654 siegeOfDwarfenwall.xml:1658
-#: siegeOfDwarfenwall.xml:1893
-msgid "att2"
-msgstr "att2"
-
 #: siegeOfDwarfenwall.xml:1658
 msgid "Their defense still holds, my lord."
 msgstr "Ihre Verteidigung hält noch immer stand, mein Gebieter"
@@ -763,26 +518,6 @@ msgstr ""
 msgid "Watch and learn."
 msgstr "Sieh zu und lerne."
 
-#: siegeOfDwarfenwall.xml:1665
-msgid "insertTrigger(\"eyesOnBoss\")"
-msgstr "insertTrigger(\"eyesOnBoss\")"
-
-#: siegeOfDwarfenwall.xml:1671
-msgid "locSpawn4"
-msgstr "locSpawn4"
-
-#: siegeOfDwarfenwall.xml:1700
-msgid "wave9"
-msgstr "wave9"
-
-#: siegeOfDwarfenwall.xml:1811
-msgid "frostHasCome"
-msgstr "frostHasCome"
-
-#: siegeOfDwarfenwall.xml:1818
-msgid "the4thBoss"
-msgstr "the4thBoss"
-
 #: siegeOfDwarfenwall.xml:1829
 msgid "You called, my lord?"
 msgstr "Ihr habt gerufen, mein Gebieter?"
@@ -811,22 +546,6 @@ msgstr "Er müsste bald hier sein. Im Moment schinden wir nur Zeit."
 #: siegeOfDwarfenwall.xml:1835
 msgid "As you wish, my lord."
 msgstr "Wie ihr Befehlt, mein Gebieter."
-
-#: siegeOfDwarfenwall.xml:1847
-msgid "boss4"
-msgstr "boss4"
-
-#: siegeOfDwarfenwall.xml:1871
-msgid "boss5_siege"
-msgstr "boss5_siege"
-
-#: siegeOfDwarfenwall.xml:1874
-msgid "wave11"
-msgstr "wave11"
-
-#: siegeOfDwarfenwall.xml:1881
-msgid "frost"
-msgstr "frost"
 
 #: siegeOfDwarfenwall.xml:1893
 msgid "My lord."
@@ -886,14 +605,6 @@ msgstr ""
 #: siegeOfDwarfenwall.xml:1904
 msgid "Me and my frostmages will arrange for that."
 msgstr "Ich und meine Frostmagier werden schon dafür sorgen."
-
-#: siegeOfDwarfenwall.xml:2032
-msgid "changeView"
-msgstr "changeView"
-
-#: siegeOfDwarfenwall.xml:2048
-msgid "blackMagic"
-msgstr "blackMagic"
 
 #: siegeOfDwarfenwall.xml:2058
 msgid "The Frostbringer is dead, my lord."
@@ -958,10 +669,6 @@ msgstr "Ich zähle auf dich."
 #: siegeOfDwarfenwall.xml:2071
 msgid "Tear their defense into pieces."
 msgstr "Reisst ihre Verteidigung in Stücke."
-
-#: siegeOfDwarfenwall.xml:2184
-msgid "launchAttack(5063)"
-msgstr "launchAttack(5063)"
 
 #: siegeOfDwarfenwall.xml:2208
 msgid "Curse on them!"
@@ -1105,14 +812,6 @@ msgstr "Einen zweiten Angriff werden wir niemals überleben."
 #: siegeOfDwarfenwall.xml:2290
 msgid "I want to get away from all the blood."
 msgstr "Ich will endlich von dem ganzen Blut weg."
-
-#: siegeOfDwarfenwall.xml:2295
-msgid "cleanAfterSiege"
-msgstr "cleanAfterSiege"
-
-#: siegeOfDwarfenwall.xml:2326
-msgid "locCamera"
-msgstr "locCamera"
 
 #: siegeOfDwarfenwall.xml:2340
 msgid "hmpf"
@@ -1268,15 +967,6 @@ msgstr "Denk nicht mal drüber nach."
 msgid "necFieldcamp"
 msgstr "Feldlager der Untoten"
 
-#: siegeOfDwarfenwall.xml:2451 siegeOfDwarfenwall.xml:2469
-#: siegeOfDwarfenwall.xml:2686
-msgid "locParty"
-msgstr "locParty"
-
-#: siegeOfDwarfenwall.xml:2452
-msgid "asoroth"
-msgstr "asoroth"
-
 #: siegeOfDwarfenwall.xml:2498
 msgid "Well well."
 msgstr "Sieh an."
@@ -1420,81 +1110,9 @@ msgstr ""
 "Und jetzt werde ich der erste sein, der einen Weg findet, wie Gezeichnete zu "
 "töten sind."
 
-#: siegeOfDwarfenwall.xml:2577
-msgid "health"
-msgstr "health"
-
-#: siegeOfDwarfenwall.xml:2578
-msgid "/"
-msgstr "/"
-
-#: siegeOfDwarfenwall.xml:2581
-msgid "under85"
-msgstr "under85"
-
-#: siegeOfDwarfenwall.xml:2584
-msgid "under75"
-msgstr "under75"
-
-#: siegeOfDwarfenwall.xml:2587
-msgid "under60"
-msgstr "under60"
-
-#: siegeOfDwarfenwall.xml:2590
-msgid "under50"
-msgstr "under50"
-
-#: siegeOfDwarfenwall.xml:2593
-msgid "under40"
-msgstr "under40"
-
-#: siegeOfDwarfenwall.xml:2596
-msgid "under25"
-msgstr "under25"
-
-#: siegeOfDwarfenwall.xml:2599
-msgid "under15"
-msgstr "under15"
-
-#: siegeOfDwarfenwall.xml:2607
-msgid "ai_ability_rating:asoroth_icicle"
-msgstr "ai_ability_rating:asoroth_icicle"
-
-#: siegeOfDwarfenwall.xml:2614
-msgid "ai_ability_rating:asoroth_ice_obelisk"
-msgstr "ai_ability_rating:asoroth_ice_obelisk"
-
-#: siegeOfDwarfenwall.xml:2621
-msgid "ai_ability_rating:asoroth_guided_iceball"
-msgstr "ai_ability_rating:asoroth_guided_iceball"
-
-#: siegeOfDwarfenwall.xml:2628
-msgid "ai_ability_rating:asoroth_ice_attack"
-msgstr "ai_ability_rating:asoroth_ice_attack"
-
-#: siegeOfDwarfenwall.xml:2636 siegeOfDwarfenwall.xml:2650
-msgid "ai_ability_rating:asoroth_frost_wave"
-msgstr "ai_ability_rating:asoroth_frost_wave"
-
-#: siegeOfDwarfenwall.xml:2643
-msgid "ai_ability_rating:asoroth_meteor"
-msgstr "ai_ability_rating:asoroth_meteor"
-
-#: siegeOfDwarfenwall.xml:2663
-msgid "areaGathering"
-msgstr "areaGathering"
-
 #: siegeOfDwarfenwall.xml:2674
 msgid "No! It cannot be! You baleful..."
 msgstr "Nein! Das kann nicht sein! Ihr elenden..."
-
-#: siegeOfDwarfenwall.xml:2693
-msgid "sorenCrystal"
-msgstr "sorenCrystal"
-
-#: siegeOfDwarfenwall.xml:2704
-msgid "speakers distributed"
-msgstr "speakers distributed"
 
 #: siegeOfDwarfenwall.xml:2710
 msgid "It's a wrap."
@@ -1536,3 +1154,269 @@ msgstr "Aber die Götter werden sich ewig deiner erinnern."
 #: siegeOfDwarfenwall.xml:2718
 msgid "With this, the demo is officially over."
 msgstr "Damit ist die Demo offiziell vorbei."
+
+#~ msgid "speakers distributed"
+#~ msgstr "speakers distributed"
+
+#~ msgid "sorenCrystal"
+#~ msgstr "sorenCrystal"
+
+#~ msgid "areaGathering"
+#~ msgstr "areaGathering"
+
+#~ msgid "ai_ability_rating:asoroth_meteor"
+#~ msgstr "ai_ability_rating:asoroth_meteor"
+
+#~ msgid "ai_ability_rating:asoroth_frost_wave"
+#~ msgstr "ai_ability_rating:asoroth_frost_wave"
+
+#~ msgid "ai_ability_rating:asoroth_ice_attack"
+#~ msgstr "ai_ability_rating:asoroth_ice_attack"
+
+#~ msgid "ai_ability_rating:asoroth_guided_iceball"
+#~ msgstr "ai_ability_rating:asoroth_guided_iceball"
+
+#~ msgid "ai_ability_rating:asoroth_ice_obelisk"
+#~ msgstr "ai_ability_rating:asoroth_ice_obelisk"
+
+#~ msgid "ai_ability_rating:asoroth_icicle"
+#~ msgstr "ai_ability_rating:asoroth_icicle"
+
+#~ msgid "under15"
+#~ msgstr "under15"
+
+#~ msgid "under25"
+#~ msgstr "under25"
+
+#~ msgid "under40"
+#~ msgstr "under40"
+
+#~ msgid "under50"
+#~ msgstr "under50"
+
+#~ msgid "under60"
+#~ msgstr "under60"
+
+#~ msgid "under75"
+#~ msgstr "under75"
+
+#~ msgid "under85"
+#~ msgstr "under85"
+
+#~ msgid "/"
+#~ msgstr "/"
+
+#~ msgid "health"
+#~ msgstr "health"
+
+#~ msgid "asoroth"
+#~ msgstr "asoroth"
+
+#~ msgid "locParty"
+#~ msgstr "locParty"
+
+#~ msgid "locCamera"
+#~ msgstr "locCamera"
+
+#~ msgid "cleanAfterSiege"
+#~ msgstr "cleanAfterSiege"
+
+#~ msgid "launchAttack(5063)"
+#~ msgstr "launchAttack(5063)"
+
+#~ msgid "blackMagic"
+#~ msgstr "blackMagic"
+
+#~ msgid "changeView"
+#~ msgstr "changeView"
+
+#~ msgid "frost"
+#~ msgstr "frost"
+
+#~ msgid "wave11"
+#~ msgstr "wave11"
+
+#~ msgid "boss5_siege"
+#~ msgstr "boss5_siege"
+
+#~ msgid "boss4"
+#~ msgstr "boss4"
+
+#~ msgid "the4thBoss"
+#~ msgstr "the4thBoss"
+
+#~ msgid "frostHasCome"
+#~ msgstr "frostHasCome"
+
+#~ msgid "wave9"
+#~ msgstr "wave9"
+
+#~ msgid "locSpawn4"
+#~ msgstr "locSpawn4"
+
+#~ msgid "insertTrigger(\"eyesOnBoss\")"
+#~ msgstr "insertTrigger(\"eyesOnBoss\")"
+
+#~ msgid "att2"
+#~ msgstr "att2"
+
+#~ msgid "boss3prep"
+#~ msgstr "boss3prep"
+
+#~ msgid "wave9pre"
+#~ msgstr "wave9pre"
+
+#~ msgid "wave5b"
+#~ msgstr "wave5b"
+
+#~ msgid "wave5"
+#~ msgstr "wave5"
+
+#~ msgid "att1"
+#~ msgstr "att1"
+
+#~ msgid "fire"
+#~ msgstr "fire"
+
+#~ msgid "firstBoss"
+#~ msgstr "firstBoss"
+
+#~ msgid "fire_wave"
+#~ msgstr "fire_wave"
+
+#~ msgid "entry_south"
+#~ msgstr "entry_south"
+
+#~ msgid "lich"
+#~ msgstr "lich"
+
+#~ msgid "locLich"
+#~ msgstr "locLich"
+
+#~ msgid "greif"
+#~ msgstr "greif"
+
+#~ msgid "talkBeforeBattle"
+#~ msgstr "talkBeforeBattle"
+
+#~ msgid "Maga Convocatis Darna Eistaucher"
+#~ msgstr "Maga Convocatis Darna Eistaucher"
+
+#, fuzzy
+#~ msgid "council_dwarfenwall"
+#~ msgstr "Zwergentrutz"
+
+#~ msgid "General Greif"
+#~ msgstr "General Greif"
+
+#~ msgid "general_greif_battle"
+#~ msgstr "general_greif_battle"
+
+#~ msgid "councilEnters"
+#~ msgstr "councilEnters"
+
+#~ msgid "dwall_siege"
+#~ msgstr "dwall_siege"
+
+#, fuzzy
+#~ msgid "dwarfenwall_councilguard"
+#~ msgstr "Kommandozentrum"
+
+#~ msgid "elite_siege"
+#~ msgstr "elite_siege"
+
+#~ msgid "respawnroute"
+#~ msgstr "respawnroute"
+
+#~ msgid "subtype"
+#~ msgstr "subtype"
+
+#~ msgid "resurrection_fire_storm"
+#~ msgstr "resurrection_fire_storm"
+
+#~ msgid "a very important unit just died"
+#~ msgstr "a very important unit just died"
+
+#~ msgid "index: "
+#~ msgstr "index: "
+
+#~ msgid "penalty-points: "
+#~ msgstr "penalty-points: "
+
+#~ msgid "newUnit"
+#~ msgstr "newUnit"
+
+#~ msgid "respawnTrigger"
+#~ msgstr "respawnTrigger"
+
+#~ msgid "locBowmen7"
+#~ msgstr "locBowmen7"
+
+#~ msgid "locBowmen6"
+#~ msgstr "locBowmen6"
+
+#~ msgid "locBowmen4"
+#~ msgstr "locBowmen4"
+
+#~ msgid "locBowmen1"
+#~ msgstr "locBowmen1"
+
+#~ msgid "locBowmen3"
+#~ msgstr "locBowmen3"
+
+#~ msgid "locBowmen2"
+#~ msgstr "locBowmen2"
+
+#~ msgid "locGuard12"
+#~ msgstr "locGuard12"
+
+#~ msgid "locGuard11"
+#~ msgstr "locGuard11"
+
+#~ msgid "locGuard10"
+#~ msgstr "locGuard10"
+
+#~ msgid "locGuard9"
+#~ msgstr "locGuard9"
+
+#~ msgid "locGuard6"
+#~ msgstr "locGuard6"
+
+#~ msgid "locGuard5"
+#~ msgstr "locGuard5"
+
+#~ msgid "locGuard4"
+#~ msgstr "locGuard4"
+
+#~ msgid "locGuard3"
+#~ msgstr "locGuard3"
+
+#~ msgid "locGuard2"
+#~ msgstr "locGuard2"
+
+#~ msgid "locGuard1"
+#~ msgstr "locGuard1"
+
+#~ msgid "walk"
+#~ msgstr "walk"
+
+#~ msgid "areaNoEntry3"
+#~ msgstr "areaNoEntry3"
+
+#~ msgid "assembleParty(\"dwarfenwall\",\"locPartyLeave\")"
+#~ msgstr "assembleParty(\"dwarfenwall\",\"locPartyLeave\")"
+
+#~ msgid "general"
+#~ msgstr "general"
+
+#~ msgid "guard"
+#~ msgstr "guard"
+
+#~ msgid "exit_command"
+#~ msgstr "exit_command"
+
+#~ msgid "locWay1"
+#~ msgstr "locWay1"
+
+#~ msgid "entry_west"
+#~ msgstr "entry_west"

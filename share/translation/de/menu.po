@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-03 17:16+0100\n"
+"POT-Creation-Date: 2012-03-03 19:07+0100\n"
 "PO-Revision-Date: 2011-11-01 \n"
 "Last-Translator: kalimgard <kalimgard@users.sourceforge.net>\n"
 "Language-Team: german <translation-team-de@lists.sourceforge.net>\n"
@@ -813,26 +813,26 @@ msgstr "Wassermagie"
 msgid "Wind Magic"
 msgstr "Windmagie"
 
-#~ msgid "Delete Character"
-#~ msgstr "Charakter löschen"
-
-#~ msgid "Create Character"
-#~ msgstr "Charakter erstellen"
-
-#~ msgid "Savegame"
-#~ msgstr "Gespeichertes Spiel"
-
-#~ msgid "mage"
-#~ msgstr "Magier"
-
-#~ msgid "Delete"
-#~ msgstr "Löschen"
-
-#~ msgid "Characters"
-#~ msgstr "Charakter Bildschirm"
+#~ msgid "Attr points"
+#~ msgstr "Punkte"
 
 #~ msgid "Attribute points remaining to distribute"
 #~ msgstr "Verbleibende Punkte"
 
-#~ msgid "Attr points"
-#~ msgstr "Punkte"
+#~ msgid "Characters"
+#~ msgstr "Charakter Bildschirm"
+
+#~ msgid "Delete"
+#~ msgstr "Löschen"
+
+#~ msgid "mage"
+#~ msgstr "Magier"
+
+#~ msgid "Savegame"
+#~ msgstr "Gespeichertes Spiel"
+
+#~ msgid "Create Character"
+#~ msgstr "Charakter erstellen"
+
+#~ msgid "Delete Character"
+#~ msgstr "Charakter löschen"

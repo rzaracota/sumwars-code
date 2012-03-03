@@ -215,7 +215,7 @@ msgstr ""
 msgid "Oh."
 msgstr ""
 
-#: greenOrchid.xml:25 greenOrchid.xml:36 greenOrchid.xml:43 greenOrchid.xml:46
+#: greenOrchid.xml:25
 msgid "Reba"
 msgstr ""
 
@@ -297,16 +297,4 @@ msgstr ""
 
 #: greenOrchid.xml:16
 msgid "joringsbridge"
-msgstr ""
-
-#: greenOrchid.xml:151
-msgid "mentor"
-msgstr ""
-
-#: greenOrchid.xml:110
-msgid "peasant2"
-msgstr ""
-
-#: greenOrchid.xml:20
-msgid "peasant_f2"
 msgstr ""

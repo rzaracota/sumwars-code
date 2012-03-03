@@ -55,10 +55,6 @@ msgstr ""
 "Мне действительно стоит навестить этого парня. 10000 золотых - это вам не "
 "копейки."
 
-#: rob_the_robber.xml:23 rob_the_robber.xml:72 rob_the_robber.xml:143
-msgid "player"
-msgstr ""
-
 #: rob_the_robber.xml:24
 msgid "Watch your back."
 msgstr ""
@@ -180,7 +176,7 @@ msgstr "Что насчет моей награды?"
 msgid "Sergeant Wober in Dwarfenwall has it."
 msgstr ""
 
-#: rob_the_robber.xml:83 rob_the_robber.xml:94
+#: rob_the_robber.xml:83
 msgid "Sergeant Wober"
 msgstr "Сержант Вобер"
 
@@ -230,33 +226,8 @@ msgstr ""
 msgid "Here are the 10000 gold pieces."
 msgstr "Вот 10000 золота."
 
-#: rob_the_robber.xml:158
-#, fuzzy
-msgid "rob_the_robber_reward"
-msgstr "Роб-разбойник"
-
 #: rob_the_robber.xml:167
 msgid "aisDarkFairyforest"
-msgstr ""
-
-#: rob_the_robber.xml:171
-msgid "human_rob_fairy"
-msgstr ""
-
-#: rob_the_robber.xml:172 rob_the_robber.xml:173
-msgid "human_deserter"
-msgstr ""
-
-#: rob_the_robber.xml:174
-msgid "human_saboteur"
-msgstr ""
-
-#: rob_the_robber.xml:175
-msgid "human_raider"
-msgstr ""
-
-#: rob_the_robber.xml:210 rob_the_robber.xml:237 rob_the_robber.xml:258
-msgid "health"
 msgstr ""
 
 #: rob_the_robber.xml:221
@@ -284,3 +255,7 @@ msgstr ""
 #: rob_the_robber.xml:281
 msgid "Have fun with that. If you escape hell, that is."
 msgstr ""
+
+#, fuzzy
+#~ msgid "rob_the_robber_reward"
+#~ msgstr "Роб-разбойник"

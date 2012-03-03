@@ -52,22 +52,6 @@ msgstr ""
 msgid "aisDarkClearing"
 msgstr "Темная Поляна"
 
-#: goblin_raid.xml:14
-#, fuzzy
-msgid "goblin_regresh"
-msgstr "набег_гоблинов"
-
-#: goblin_raid.xml:16
-#, fuzzy
-msgid "goblin_apprtc"
-msgstr "набег_гоблинов"
-
-#: goblin_raid.xml:28
-msgid ""
-"You found a leather skin containing what seems like the plans of a raid on a "
-"nearby village."
-msgstr ""
-
 #: goblin_raid.xml:35
 msgid "Sergeant Lutterer"
 msgstr "Сержант Люттерер"
@@ -95,10 +79,6 @@ msgstr ""
 #: goblin_raid.xml:46
 msgid "Meant it. Whatever."
 msgstr "Надо было."
-
-#: goblin_raid.xml:49 goblin_raid.xml:64
-msgid "collect_reward_raid"
-msgstr ""
 
 #: goblin_raid.xml:62
 msgid "Hey, sergeant, ready to pay for the pre-emptive rescue of the village?"
@@ -146,10 +126,6 @@ msgstr "Нет"
 msgid "Then I better get back to saving helpless peasants, no?"
 msgstr "Тогда мне лучше пойти спасать этих беспомощных крестьян, не так ли?"
 
-#: goblin_raid.xml:95
-msgid "player"
-msgstr ""
-
 #: goblin_raid.xml:101
 msgid "Fine, I'll wipe out those goblins for you."
 msgstr "Отлично, я сотру этих гоблинов с лица земли для тебя."
@@ -170,3 +146,11 @@ msgstr ""
 #: goblin_raid.xml:110
 msgid "And I could care less what happens to some peasant family."
 msgstr "И я могу не заботиться о том, что же там с какой-то семьей крестьян."
+
+#, fuzzy
+#~ msgid "goblin_apprtc"
+#~ msgstr "набег_гоблинов"
+
+#, fuzzy
+#~ msgid "goblin_regresh"
+#~ msgstr "набег_гоблинов"

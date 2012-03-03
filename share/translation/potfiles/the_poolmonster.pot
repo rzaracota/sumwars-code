@@ -73,7 +73,7 @@ msgstr ""
 msgid "Sometimes I wish,"
 msgstr ""
 
-#: scene7.xml:15 scene7.xml:78
+#: scene7.xml:15
 msgid "Soren Windclaw"
 msgstr ""
 
@@ -95,14 +95,6 @@ msgstr ""
 
 #: scene7.xml:21
 msgid "Wow, thats beautiful."
-msgstr ""
-
-#: scene7.xml:84
-msgid "end_cutscene7_fight"
-msgstr ""
-
-#: scene7.xml:52
-msgid "fireElemS"
 msgstr ""
 
 #: scene7.xml:59

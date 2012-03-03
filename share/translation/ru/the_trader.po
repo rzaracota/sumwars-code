@@ -16,8 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: theTrader.xml:2 theTrader.xml:68 theTrader.xml:124 theTrader.xml:262
-#: theTrader.xml:300
+#: theTrader.xml:2 theTrader.xml:124 theTrader.xml:262 theTrader.xml:300
 msgid "The Trader"
 msgstr "Торговец"
 
@@ -33,19 +32,9 @@ msgstr "Странный торговец предложил мне продат
 msgid "elCnlLobby"
 msgstr "Совет Элементов, Подземелье"
 
-#: theTrader.xml:22 theTrader.xml:53 theTrader.xml:237
+#: theTrader.xml:22 theTrader.xml:237
 msgid "medMercCamp"
 msgstr "Лагерь наемников Медаир"
-
-#: theTrader.xml:26 theTrader.xml:30 theTrader.xml:74 theTrader.xml:145
-#: theTrader.xml:256 theTrader.xml:282 theTrader.xml:294
-#, fuzzy
-msgid "theTrader"
-msgstr "Торговец"
-
-#: theTrader.xml:28 theTrader.xml:32
-msgid "angle"
-msgstr ""
 
 #: theTrader.xml:71
 msgid "A moment, dear madam."
@@ -463,10 +452,6 @@ msgstr "Ого! Все так просто?"
 msgid "Oddball."
 msgstr "Чудак."
 
-#: theTrader.xml:223
-msgid "arcopt"
-msgstr ""
-
 #: theTrader.xml:253
 msgid "joringsbridge"
 msgstr "Джорингсбридж"
@@ -512,17 +497,8 @@ msgid "Surely. Now that I finally have a sound anchor again."
 msgstr ""
 "Конечно. Особенно теперь, когда у меня снова есть место для сохранения."
 
-#~ msgid "Doesn't everyone learn it who wants to avoid death?"
-#~ msgstr "Разве не все, кто хочет избежать смерти, приучились к этому?"
-
-#~ msgid "More like town portal."
-#~ msgstr "Скорее городской портал."
-
-#~ msgid "with all due respect: That is a blessing."
-#~ msgstr "со всем уважением: это благословение."
-
-#~ msgid "They are everywhere."
-#~ msgstr "Они везде."
+#~ msgid "A moment, dear mister."
+#~ msgstr "Один момент, мистер."
 
 #~ msgid ""
 #~ "I'm afraid all I can give you for your wares in gold would be "
@@ -531,5 +507,18 @@ msgstr ""
 #~ "Я боюсь, всего, что я могу дать тебе за твои товары в виде золота, будет "
 #~ "недостаточно."
 
-#~ msgid "A moment, dear mister."
-#~ msgstr "Один момент, мистер."
+#~ msgid "They are everywhere."
+#~ msgstr "Они везде."
+
+#~ msgid "with all due respect: That is a blessing."
+#~ msgstr "со всем уважением: это благословение."
+
+#~ msgid "More like town portal."
+#~ msgstr "Скорее городской портал."
+
+#~ msgid "Doesn't everyone learn it who wants to avoid death?"
+#~ msgstr "Разве не все, кто хочет избежать смерти, приучились к этому?"
+
+#, fuzzy
+#~ msgid "theTrader"
+#~ msgstr "Торговец"

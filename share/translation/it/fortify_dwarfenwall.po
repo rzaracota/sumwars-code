@@ -33,38 +33,11 @@ msgid "Quest description"
 msgstr "Obbiettivi della Quest"
 
 #: fortify_dwarfenwall.xml:14 fortify_dwarfenwall.xml:63
-#: fortify_dwarfenwall.xml:211 fortify_dwarfenwall.xml:504
+#: fortify_dwarfenwall.xml:504
 msgid "elCnlLobby"
 msgstr "Consiglio degli Elementalisti, Dungeon sotterraneo"
 
-#: fortify_dwarfenwall.xml:18
-msgid "soren"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:20
-msgid "angle"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:24
-#, fuzzy
-msgid "tolec"
-msgstr "Tolec"
-
-#: fortify_dwarfenwall.xml:26 fortify_dwarfenwall.xml:51
-#: fortify_dwarfenwall.xml:58 fortify_dwarfenwall.xml:173
-#: fortify_dwarfenwall.xml:230 fortify_dwarfenwall.xml:329
-#: fortify_dwarfenwall.xml:529
-msgid "Tolec"
-msgstr "Tolec"
-
-#: fortify_dwarfenwall.xml:29
-#, fuzzy
-msgid "derred"
-msgstr "Derred"
-
-#: fortify_dwarfenwall.xml:31 fortify_dwarfenwall.xml:39
-#: fortify_dwarfenwall.xml:46 fortify_dwarfenwall.xml:222
-#: fortify_dwarfenwall.xml:225 fortify_dwarfenwall.xml:314
+#: fortify_dwarfenwall.xml:39
 msgid "Derred"
 msgstr "Derred"
 
@@ -76,39 +49,13 @@ msgstr "Parla con Windclaw"
 msgid "Follow us, please."
 msgstr "Seguici per favore."
 
-#: fortify_dwarfenwall.xml:70 fortify_dwarfenwall.xml:242
-#: fortify_dwarfenwall.xml:550
-msgid "position"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:75
-msgid "players_scene1_walk1"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:83 fortify_dwarfenwall.xml:198
-#: fortify_dwarfenwall.xml:273 fortify_dwarfenwall.xml:275
-msgid "walk"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:105 fortify_dwarfenwall.xml:614
-msgid "leader"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:108
-msgid "magopt"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:110
-msgid "waropt"
-msgstr ""
+#: fortify_dwarfenwall.xml:51
+msgid "Tolec"
+msgstr "Tolec"
 
 #: fortify_dwarfenwall.xml:117
 msgid "The Council is not all that impressive..."
 msgstr "Il Consiglio non e' poi cosi' impressionante..."
-
-#: fortify_dwarfenwall.xml:120
-msgid "continueNagging"
-msgstr ""
 
 #: fortify_dwarfenwall.xml:126
 msgid "Natch! Now you're having a big mouth again."
@@ -117,10 +64,6 @@ msgstr "Certo! Adesso vedo che sei di nuovo loquace."
 #: fortify_dwarfenwall.xml:132
 msgid "Why exactly was it that I put up with your company?"
 msgstr "Perche' esattamente ho dovuto mandarvi lui nella compagnia?"
-
-#: fortify_dwarfenwall.xml:134
-msgid "leaderIntervene"
-msgstr ""
 
 #: fortify_dwarfenwall.xml:140
 msgid "Hush! You can argue later."
@@ -134,10 +77,6 @@ msgstr "Finalmente siamo arrivati!"
 msgid "((That room doesn't feel good at all.))"
 msgstr "(Quella stanza non mi sembra proprio perfetta.)"
 
-#: fortify_dwarfenwall.xml:176
-msgid "any"
-msgstr ""
-
 #: fortify_dwarfenwall.xml:178
 msgid "Do you feel that?! It feels like..."
 msgstr "Lo senti? E' come se..."
@@ -145,14 +84,6 @@ msgstr "Lo senti? E' come se..."
 #: fortify_dwarfenwall.xml:180
 msgid "Quiet!"
 msgstr "Calmo!"
-
-#: fortify_dwarfenwall.xml:191
-msgid "guard_scene1_walk4"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:202 fortify_dwarfenwall.xml:307
-msgid "locParty"
-msgstr ""
 
 #: fortify_dwarfenwall.xml:225
 msgid "My Lord! The... Branded Ones are here now."
@@ -167,31 +98,6 @@ msgstr "Molto bene."
 msgid "He awaits you now."
 msgstr "Ti sta aspettando."
 
-#: fortify_dwarfenwall.xml:257
-#, fuzzy
-msgid "locSorenWindclaw"
-msgstr "Soren Windclaw"
-
-#: fortify_dwarfenwall.xml:279
-msgid "locked"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:285
-msgid "areaGuardAway"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:295
-msgid "set(fortify_dwall_tmp.soren,'angle',0)"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:297
-msgid "set(fortify_dwall_tmp.soren,'angle',90)"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:317
-msgid "locCamera"
-msgstr ""
-
 #: fortify_dwarfenwall.xml:321
 msgid "You're presence is no longer needed."
 msgstr "La tua presenza non e' piu' necessaria."
@@ -203,10 +109,6 @@ msgstr "Mio Signore, quelli sono-"
 #: fortify_dwarfenwall.xml:324
 msgid "..."
 msgstr "..."
-
-#: fortify_dwarfenwall.xml:324 fortify_dwarfenwall.xml:744
-msgid "Soren"
-msgstr ""
 
 #: fortify_dwarfenwall.xml:325
 msgid "As you wish. My apologies."
@@ -592,51 +494,6 @@ msgstr "Prendi questo cristallo e del denaro."
 msgid "I will send you orders with it when the time comes."
 msgstr "Quando arrivera' il momento, ti daro' gli ordini con questo."
 
-#: fortify_dwarfenwall.xml:492
-msgid "fortify_dwall_startpay"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:508
-msgid "fireElemS"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:513 fortify_dwarfenwall.xml:514
-msgid "blockFireWall"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:521
-#, fuzzy
-msgid "SorenWindclawArea"
-msgstr "Soren Windclaw"
-
-#: fortify_dwarfenwall.xml:532
-msgid "Player"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:542
-msgid "type"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:547
-msgid "health"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:551
-msgid "fireCage"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:555 fortify_dwarfenwall.xml:567
-msgid "remove_fire_walls"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:587
-msgid "state"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:594 fortify_dwarfenwall.xml:597
-msgid "elemental_end"
-msgstr ""
-
 #: fortify_dwarfenwall.xml:614
 msgid "There you go! That was rather tame."
 msgstr "E vai! Ormai e' praticamente domato."
@@ -698,14 +555,6 @@ msgstr "Vai adesso!"
 #: fortify_dwarfenwall.xml:648
 msgid "medBackalley"
 msgstr "Vicolo interno"
-
-#: fortify_dwarfenwall.xml:664
-msgid "sorenCrystal"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:673 fortify_dwarfenwall.xml:689
-msgid "PL"
-msgstr ""
 
 #: fortify_dwarfenwall.xml:689
 msgid "((That Windclaw is somehow weird.))"
@@ -974,10 +823,6 @@ msgstr "Noi siamo obbligati ad avvisare, se ha qualcosa da dirci."
 msgid "So, what are you thinking about this matter?"
 msgstr "Comunque, cosa ne pensi a riguardo?"
 
-#: fortify_dwarfenwall.xml:772
-msgid "any_hope"
-msgstr ""
-
 #: fortify_dwarfenwall.xml:773
 msgid "Did I get that right?"
 msgstr "Ho ottenuto tale diritto?"
@@ -1104,3 +949,19 @@ msgstr ""
 #: fortify_dwarfenwall.xml:827
 msgid "Let's gain their trust."
 msgstr "Andiamo a guadagnarci la loro fiducia."
+
+#, fuzzy
+#~ msgid "SorenWindclawArea"
+#~ msgstr "Soren Windclaw"
+
+#, fuzzy
+#~ msgid "locSorenWindclaw"
+#~ msgstr "Soren Windclaw"
+
+#, fuzzy
+#~ msgid "derred"
+#~ msgstr "Derred"
+
+#, fuzzy
+#~ msgid "tolec"
+#~ msgstr "Tolec"

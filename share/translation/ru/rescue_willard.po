@@ -50,24 +50,15 @@ msgstr ""
 msgid "medMercCamp"
 msgstr "Лагерь наемников Медаир"
 
-#: rescue_willard.xml:19
-msgid "areaFenor"
-msgstr ""
-
 #: rescue_willard.xml:25
 msgid "Hey there!"
 msgstr "Эй, там!"
 
-#: rescue_willard.xml:29 rescue_willard.xml:159
-msgid "player"
-msgstr ""
-
-#: rescue_willard.xml:32 rescue_willard.xml:45 rescue_willard.xml:55
-#: rescue_willard.xml:67 rescue_willard.xml:73 rescue_willard.xml:80
+#: rescue_willard.xml:55
 msgid "Fenor Marken"
 msgstr "Фенор Маркен"
 
-#: rescue_willard.xml:56 rescue_willard.xml:203 rescue_willard.xml:214
+#: rescue_willard.xml:56 rescue_willard.xml:203
 msgid "Willard"
 msgstr "Виллард"
 
@@ -284,10 +275,6 @@ msgstr "Спасибо тебе."
 msgid "Thank you."
 msgstr "Спасибо вам."
 
-#: rescue_willard.xml:151
-msgid "talk_done"
-msgstr ""
-
 #: rescue_willard.xml:159
 #, fuzzy
 msgid "I'm sorry, but I don't want to waste my time searching for gamekeepers."
@@ -392,47 +379,19 @@ msgstr ""
 msgid "Thank you very much."
 msgstr "Большое спасибо тебе."
 
-#: rescue_willard.xml:231
-msgid "rescue_willard_reward"
-msgstr ""
-
-#: rescue_willard.xml:236
-msgid "willard_vanishes"
-msgstr ""
-
 #: rescue_willard.xml:247
 msgid "aisMeadow"
 msgstr "Низина Аизена"
-
-#: rescue_willard.xml:254
-msgid "willard_goblins"
-msgstr ""
-
-#: rescue_willard.xml:256 rescue_willard.xml:312
-msgid "peasant"
-msgstr ""
-
-#: rescue_willard.xml:265 rescue_willard.xml:278
-#, fuzzy
-msgid "WillardArea"
-msgstr "Виллард"
 
 #: rescue_willard.xml:271
 msgid "So here is this Willard."
 msgstr "А вот и Виллард."
 
-#: rescue_willard.xml:315
-msgid "ignored_by_ai"
-msgstr ""
+#~ msgid "I hope you are making a good time searching for Willard. ##solo"
+#~ msgstr "Надеюсь, ты хорошо проводишь время в поисках Вилларда."
 
-#~ msgid "You know quite a lot."
-#~ msgstr "Ты знаешь довольно много."
-
-#~ msgid "I'm sure he waits somewhere for help."
-#~ msgstr "Я уверен, он где-то затаился и ожидает помощи."
-
-#~ msgid "I'm sorry. Maybe my mouth slipped."
-#~ msgstr "Прощу прощения, вырвалось."
+#~ msgid "I hope you are making a good time searching for Willard."
+#~ msgstr "Надеюсь, вы хорошо проводите время в поисках Вилларда."
 
 #~ msgid ""
 #~ "I thought you were the kind of Branded Ones that doesn't kill every human "
@@ -441,8 +400,15 @@ msgstr ""
 #~ "Я думал, ты такой Избранный, который не убивает всех людей, которые "
 #~ "переходят ему дорогу."
 
-#~ msgid "I hope you are making a good time searching for Willard."
-#~ msgstr "Надеюсь, вы хорошо проводите время в поисках Вилларда."
+#~ msgid "I'm sorry. Maybe my mouth slipped."
+#~ msgstr "Прощу прощения, вырвалось."
 
-#~ msgid "I hope you are making a good time searching for Willard. ##solo"
-#~ msgstr "Надеюсь, ты хорошо проводишь время в поисках Вилларда."
+#~ msgid "I'm sure he waits somewhere for help."
+#~ msgstr "Я уверен, он где-то затаился и ожидает помощи."
+
+#~ msgid "You know quite a lot."
+#~ msgstr "Ты знаешь довольно много."
+
+#, fuzzy
+#~ msgid "WillardArea"
+#~ msgstr "Виллард"

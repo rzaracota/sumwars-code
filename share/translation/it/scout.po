@@ -50,11 +50,6 @@ msgstr ""
 msgid "greyCurseCave"
 msgstr "La grotta sotterranea"
 
-#: scout.xml:17
-#, fuzzy
-msgid "questScout"
-msgstr "Esploratore Ferito"
-
 #: scout.xml:23
 msgid "Wounded Scout"
 msgstr "Esploratore Ferito"
@@ -283,10 +278,10 @@ msgstr ""
 msgid "greyWolfcave"
 msgstr "La cava del lupo"
 
-#: scout.xml:124
-msgid "psychoticSpider"
-msgstr ""
-
 #~ msgid ""
 #~ "After killing the spider you safely pick up a backpack in good shape."
 #~ msgstr "Dopo aver ucciso i ragni, raccogli uno zaino in buone condizioni."
+
+#, fuzzy
+#~ msgid "questScout"
+#~ msgstr "Esploratore Ferito"

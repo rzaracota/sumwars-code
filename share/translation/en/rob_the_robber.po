@@ -63,10 +63,6 @@ msgid ""
 msgstr ""
 "I really should pay this guy a visit. 10000 gold pieces are not chickenfeed."
 
-#: rob_the_robber.xml:23 rob_the_robber.xml:72 rob_the_robber.xml:143
-msgid "player"
-msgstr ""
-
 #: rob_the_robber.xml:24
 msgid "Watch your back."
 msgstr "Watch your back."
@@ -193,7 +189,7 @@ msgstr "What about my reward?"
 msgid "Sergeant Wober in Dwarfenwall has it."
 msgstr "Sergeant Wober in Dwarfenwall has it."
 
-#: rob_the_robber.xml:83 rob_the_robber.xml:94
+#: rob_the_robber.xml:83
 msgid "Sergeant Wober"
 msgstr "Sergeant Wober"
 
@@ -245,34 +241,9 @@ msgstr "But that shall not be my problem."
 msgid "Here are the 10000 gold pieces."
 msgstr "Here are the 10000 gold pieces."
 
-#: rob_the_robber.xml:158
-#, fuzzy
-msgid "rob_the_robber_reward"
-msgstr "Rob the Robber (Reward)"
-
 #: rob_the_robber.xml:167
 msgid "aisDarkFairyforest"
 msgstr "aisDarkFairyforest"
-
-#: rob_the_robber.xml:171
-msgid "human_rob_fairy"
-msgstr ""
-
-#: rob_the_robber.xml:172 rob_the_robber.xml:173
-msgid "human_deserter"
-msgstr ""
-
-#: rob_the_robber.xml:174
-msgid "human_saboteur"
-msgstr ""
-
-#: rob_the_robber.xml:175
-msgid "human_raider"
-msgstr ""
-
-#: rob_the_robber.xml:210 rob_the_robber.xml:237 rob_the_robber.xml:258
-msgid "health"
-msgstr ""
 
 #: rob_the_robber.xml:221
 msgid "I will quarter and skin you, before I throw you to the wolves!"
@@ -301,3 +272,7 @@ msgstr ""
 #: rob_the_robber.xml:281
 msgid "Have fun with that. If you escape hell, that is."
 msgstr "Have fun with that. If you escape hell, that is."
+
+#, fuzzy
+#~ msgid "rob_the_robber_reward"
+#~ msgstr "Rob the Robber (Reward)"

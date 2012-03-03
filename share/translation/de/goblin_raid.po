@@ -54,22 +54,6 @@ msgstr ""
 msgid "aisDarkClearing"
 msgstr "Dunkle Lichtung"
 
-#: goblin_raid.xml:14
-#, fuzzy
-msgid "goblin_regresh"
-msgstr "Goblinüberfall"
-
-#: goblin_raid.xml:16
-#, fuzzy
-msgid "goblin_apprtc"
-msgstr "Goblinüberfall"
-
-#: goblin_raid.xml:28
-msgid ""
-"You found a leather skin containing what seems like the plans of a raid on a "
-"nearby village."
-msgstr ""
-
 #: goblin_raid.xml:35
 msgid "Sergeant Lutterer"
 msgstr "Sergeant Lutterer"
@@ -98,10 +82,6 @@ msgstr ""
 #: goblin_raid.xml:46
 msgid "Meant it. Whatever."
 msgstr "Meinten es. Wie auch immer."
-
-#: goblin_raid.xml:49 goblin_raid.xml:64
-msgid "collect_reward_raid"
-msgstr ""
 
 #: goblin_raid.xml:62
 msgid "Hey, sergeant, ready to pay for the pre-emptive rescue of the village?"
@@ -150,10 +130,6 @@ msgstr "Nein"
 msgid "Then I better get back to saving helpless peasants, no?"
 msgstr "Dann mache ich mich besser wieder ans Bauernretten, nicht wahr?"
 
-#: goblin_raid.xml:95
-msgid "player"
-msgstr ""
-
 #: goblin_raid.xml:101
 msgid "Fine, I'll wipe out those goblins for you."
 msgstr "Schön, ich werde diese Goblins für Euch ausradieren."
@@ -174,3 +150,11 @@ msgstr "Wie auch immer. Es ist nicht so, als bräuchte ich das Geld oder so."
 msgid "And I could care less what happens to some peasant family."
 msgstr ""
 "Und es ist mir völlig egal, was mit irgendeiner Bauernfamilie passiert."
+
+#, fuzzy
+#~ msgid "goblin_apprtc"
+#~ msgstr "Goblinüberfall"
+
+#, fuzzy
+#~ msgid "goblin_regresh"
+#~ msgstr "Goblinüberfall"

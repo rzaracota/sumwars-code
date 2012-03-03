@@ -264,8 +264,7 @@ msgid ""
 "on."
 msgstr ""
 
-#: theTrader.xml:2 theTrader.xml:68 theTrader.xml:124 theTrader.xml:262
-#: theTrader.xml:300
+#: theTrader.xml:2 theTrader.xml:124 theTrader.xml:262 theTrader.xml:300
 msgid "The Trader"
 msgstr ""
 
@@ -403,14 +402,6 @@ msgid ""
 "apparently."
 msgstr ""
 
-#: theTrader.xml:28 theTrader.xml:32
-msgid "angle"
-msgstr ""
-
-#: theTrader.xml:223
-msgid "arcopt"
-msgstr ""
-
 #: theTrader.xml:288
 msgid "dwarfenwall"
 msgstr ""
@@ -427,11 +418,6 @@ msgstr ""
 msgid "joringsbridge"
 msgstr ""
 
-#: theTrader.xml:22 theTrader.xml:53 theTrader.xml:237
+#: theTrader.xml:22 theTrader.xml:237
 msgid "medMercCamp"
-msgstr ""
-
-#: theTrader.xml:26 theTrader.xml:30 theTrader.xml:74 theTrader.xml:145
-#: theTrader.xml:256 theTrader.xml:282 theTrader.xml:294
-msgid "theTrader"
 msgstr ""

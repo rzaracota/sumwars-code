@@ -63,10 +63,6 @@ msgstr ""
 "Ich sollte diesen Kerl wirklich mal besuchen. 10000 Goldstücke sind kein "
 "Pappenstiel."
 
-#: rob_the_robber.xml:23 rob_the_robber.xml:72 rob_the_robber.xml:143
-msgid "player"
-msgstr ""
-
 #: rob_the_robber.xml:24
 msgid "Watch your back."
 msgstr "Passt auf Euren Rücken auf."
@@ -192,7 +188,7 @@ msgstr "Was ist mit meiner Belohnung?"
 msgid "Sergeant Wober in Dwarfenwall has it."
 msgstr "Sergeant Wober in Zwergentrutz hat sie."
 
-#: rob_the_robber.xml:83 rob_the_robber.xml:94
+#: rob_the_robber.xml:83
 msgid "Sergeant Wober"
 msgstr "Sergeant Wober"
 
@@ -244,34 +240,9 @@ msgstr "Aber das soll nicht mein Problem sein."
 msgid "Here are the 10000 gold pieces."
 msgstr "Hier sind die 10000 Goldstücke."
 
-#: rob_the_robber.xml:158
-#, fuzzy
-msgid "rob_the_robber_reward"
-msgstr "Rob der Räuber (Belohnung)"
-
 #: rob_the_robber.xml:167
 msgid "aisDarkFairyforest"
 msgstr "Dunkler Feenwald"
-
-#: rob_the_robber.xml:171
-msgid "human_rob_fairy"
-msgstr ""
-
-#: rob_the_robber.xml:172 rob_the_robber.xml:173
-msgid "human_deserter"
-msgstr ""
-
-#: rob_the_robber.xml:174
-msgid "human_saboteur"
-msgstr ""
-
-#: rob_the_robber.xml:175
-msgid "human_raider"
-msgstr ""
-
-#: rob_the_robber.xml:210 rob_the_robber.xml:237 rob_the_robber.xml:258
-msgid "health"
-msgstr ""
 
 #: rob_the_robber.xml:221
 msgid "I will quarter and skin you, before I throw you to the wolves!"
@@ -304,3 +275,7 @@ msgstr ""
 #: rob_the_robber.xml:281
 msgid "Have fun with that. If you escape hell, that is."
 msgstr "Viel Spass dabei. Wenn du aus der Hölle entkommst."
+
+#, fuzzy
+#~ msgid "rob_the_robber_reward"
+#~ msgstr "Rob der Räuber (Belohnung)"

@@ -32,7 +32,7 @@ msgstr "Quest completata"
 msgid "Quest description"
 msgstr "Obbiettivi della Quest"
 
-#: scene7.xml:15 scene7.xml:78
+#: scene7.xml:15
 msgid "Soren Windclaw"
 msgstr "Soren Windclaw"
 
@@ -104,10 +104,6 @@ msgstr "Che è quella cosa nell'acqua laggiù?"
 msgid "Looks like a..."
 msgstr "Sembra un..."
 
-#: scene7.xml:52
-msgid "fireElemS"
-msgstr ""
-
 #: scene7.xml:53
 msgid "*Roar!*"
 msgstr "*ROAR!*"
@@ -115,7 +111,3 @@ msgstr "*ROAR!*"
 #: scene7.xml:59
 msgid "greyCurseLake"
 msgstr "La grotta sotterranea - Il lago nascosto"
-
-#: scene7.xml:84
-msgid "end_cutscene7_fight"
-msgstr ""

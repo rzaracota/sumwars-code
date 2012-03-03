@@ -89,10 +89,6 @@ msgstr ""
 msgid "Our barricade is quite heavy."
 msgstr ""
 
-#: besieged_farm.xml:107
-msgid "PL"
-msgstr ""
-
 #: besieged_farm.xml:120
 msgid "Really now, "
 msgstr ""
@@ -169,20 +165,4 @@ msgstr ""
 
 #: besieged_farm.xml:42
 msgid "aisNorthMeadow"
-msgstr ""
-
-#: besieged_farm.xml:57
-msgid "bronsFarmDoor"
-msgstr ""
-
-#: besieged_farm.xml:53
-msgid "farm_goblins_shaman"
-msgstr ""
-
-#: besieged_farm.xml:50
-msgid "ignored_by_ai"
-msgstr ""
-
-#: besieged_farm.xml:48
-msgid "peasant_f"
 msgstr ""

@@ -54,24 +54,15 @@ msgstr ""
 msgid "medMercCamp"
 msgstr "Campo dei Mercenari di Medair"
 
-#: rescue_willard.xml:19
-msgid "areaFenor"
-msgstr ""
-
 #: rescue_willard.xml:25
 msgid "Hey there!"
 msgstr "Hei!"
 
-#: rescue_willard.xml:29 rescue_willard.xml:159
-msgid "player"
-msgstr ""
-
-#: rescue_willard.xml:32 rescue_willard.xml:45 rescue_willard.xml:55
-#: rescue_willard.xml:67 rescue_willard.xml:73 rescue_willard.xml:80
+#: rescue_willard.xml:55
 msgid "Fenor Marken"
 msgstr "Fenor Marken"
 
-#: rescue_willard.xml:56 rescue_willard.xml:203 rescue_willard.xml:214
+#: rescue_willard.xml:56 rescue_willard.xml:203
 msgid "Willard"
 msgstr "Willard"
 
@@ -289,10 +280,6 @@ msgstr "Grazie ##solo"
 msgid "Thank you."
 msgstr "Vi ringrazio."
 
-#: rescue_willard.xml:151
-msgid "talk_done"
-msgstr ""
-
 #: rescue_willard.xml:159
 msgid "I'm sorry, but I don't want to waste my time searching for gamekeepers."
 msgstr "Mi spiace, ma non voglio sprecare tempo a cercare guardiacaccia"
@@ -388,44 +375,25 @@ msgstr "Avrete sicuramente bisogno di qualche moneta per i vostri acquisti."
 msgid "Thank you very much."
 msgstr "Grazie davvero."
 
-#: rescue_willard.xml:231
-msgid "rescue_willard_reward"
-msgstr ""
-
-#: rescue_willard.xml:236
-msgid "willard_vanishes"
-msgstr ""
-
 #: rescue_willard.xml:247
 msgid "aisMeadow"
 msgstr "Meadow"
-
-#: rescue_willard.xml:254
-msgid "willard_goblins"
-msgstr ""
-
-#: rescue_willard.xml:256 rescue_willard.xml:312
-msgid "peasant"
-msgstr ""
-
-#: rescue_willard.xml:265 rescue_willard.xml:278
-#, fuzzy
-msgid "WillardArea"
-msgstr "Willard"
 
 #: rescue_willard.xml:271
 msgid "So here is this Willard."
 msgstr "Eccoci arrivati, ti ho riportato Willard."
 
-#: rescue_willard.xml:315
-msgid "ignored_by_ai"
-msgstr ""
+#~ msgid "You know quite a lot."
+#~ msgstr "Sai tante cose vedo."
 
-#~ msgid "I hope you are making a good time searching for Willard. ##solo"
-#~ msgstr "Spero tu riesca velocemente a trovare Willard. ##solo"
+#~ msgid "That is why I called you when you were passing."
+#~ msgstr "Ecco perche' ti ho chiamato mentre passavi."
 
-#~ msgid "I hope you are making a good time searching for Willard."
-#~ msgstr "Spero riusciate velocemente a trovare Willard."
+#~ msgid "I'm sure he waits somewhere for help."
+#~ msgstr "Sono sicuro che e' da qualche parte in attesa di aiuto."
+
+#~ msgid "I'm sorry. Maybe my mouth slipped."
+#~ msgstr "Scusami, forse ho esagerato."
 
 #~ msgid ""
 #~ "I thought you were the kind of Branded Ones that doesn't kill every human "
@@ -434,14 +402,12 @@ msgstr ""
 #~ "Pensavo tu fossi quel genere di Marchiati che non va in giro ad uccidere "
 #~ "chiunque gli passi davanti."
 
-#~ msgid "I'm sorry. Maybe my mouth slipped."
-#~ msgstr "Scusami, forse ho esagerato."
+#~ msgid "I hope you are making a good time searching for Willard."
+#~ msgstr "Spero riusciate velocemente a trovare Willard."
 
-#~ msgid "I'm sure he waits somewhere for help."
-#~ msgstr "Sono sicuro che e' da qualche parte in attesa di aiuto."
+#~ msgid "I hope you are making a good time searching for Willard. ##solo"
+#~ msgstr "Spero tu riesca velocemente a trovare Willard. ##solo"
 
-#~ msgid "That is why I called you when you were passing."
-#~ msgstr "Ecco perche' ti ho chiamato mentre passavi."
-
-#~ msgid "You know quite a lot."
-#~ msgstr "Sai tante cose vedo."
+#, fuzzy
+#~ msgid "WillardArea"
+#~ msgstr "Willard"

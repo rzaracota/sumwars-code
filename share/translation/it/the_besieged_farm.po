@@ -119,33 +119,12 @@ msgstr "Considerami già li."
 msgid "aisNorthMeadow"
 msgstr "Nord Meadow"
 
-#: besieged_farm.xml:48
-msgid "peasant_f"
-msgstr ""
-
-#: besieged_farm.xml:50
-msgid "ignored_by_ai"
-msgstr ""
-
-#: besieged_farm.xml:53
-msgid "farm_goblins_shaman"
-msgstr ""
-
-#: besieged_farm.xml:57
-#, fuzzy
-msgid "bronsFarmDoor"
-msgstr "Fattoria Bron"
-
 #: besieged_farm.xml:88
 msgid ""
 "That should have been enough goblins. I better look after Bron's family."
 msgstr ""
 "Devono esserci stati parecchi goblin. Devo tener d'occhio la famiglia di "
 "Bron."
-
-#: besieged_farm.xml:107
-msgid "PL"
-msgstr ""
 
 #: besieged_farm.xml:111
 msgid "The goblins are gone. Are you alright?"
@@ -225,3 +204,7 @@ msgstr "Eccoti il denaro."
 #~ msgstr ""
 #~ " \"..nome..\". Sul serio pensi che userebbe dei piccioni viaggiatori con "
 #~ "i tempi che corrono?"
+
+#, fuzzy
+#~ msgid "bronsFarmDoor"
+#~ msgstr "Fattoria Bron"

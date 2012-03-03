@@ -204,12 +204,7 @@ msgstr ""
 msgid "Depending on your... character mass. ##solo"
 msgstr ""
 
-#: tutorial.xml:51 tutorial.xml:218 tutorial.xml:399 tutorial.xml:407
-#: tutorial.xml:427 tutorial.xml:739 tutorial.xml:841 tutorial.xml:880
-#: tutorial.xml:998 tutorial.xml:1102 tutorial.xml:1111 tutorial.xml:1147
-#: tutorial.xml:1229 tutorial.xml:1337 tutorial.xml:1341 tutorial.xml:1730
-#: tutorial.xml:1797 tutorial.xml:1806 tutorial.xml:1862 tutorial.xml:1878
-#: tutorial.xml:2079
+#: tutorial.xml:399 tutorial.xml:841 tutorial.xml:1111 tutorial.xml:1806
 msgid "Derred"
 msgstr ""
 
@@ -839,10 +834,6 @@ msgstr ""
 msgid "Ouch, I burnt my hands!"
 msgstr ""
 
-#: tutorial.xml:325 tutorial.xml:744
-msgid "PL"
-msgstr ""
-
 #: tutorial.xml:2170
 msgid "Philistine."
 msgstr ""
@@ -1110,10 +1101,8 @@ msgid ""
 "take care of that."
 msgstr ""
 
-#: tutorial.xml:47 tutorial.xml:451 tutorial.xml:867 tutorial.xml:873
-#: tutorial.xml:1026 tutorial.xml:1035 tutorial.xml:1140 tutorial.xml:1334
-#: tutorial.xml:1727 tutorial.xml:1732 tutorial.xml:1870 tutorial.xml:1922
-#: tutorial.xml:1927 tutorial.xml:2076
+#: tutorial.xml:451 tutorial.xml:873 tutorial.xml:1035 tutorial.xml:1140
+#: tutorial.xml:1870
 msgid "Tolec"
 msgstr ""
 
@@ -1479,331 +1468,16 @@ msgstr ""
 msgid "Yuck! Those things are really disgusting."
 msgstr ""
 
-#: tutorial.xml:2038
-msgid "addCameraPosition(1000,\"locBackroute5\" , -90,70, 20)"
-msgstr ""
-
-#: tutorial.xml:2015
-msgid "addCameraPosition(500,\"locDoorGuardNorth\" , 45,45, 25);"
-msgstr ""
-
-#: tutorial.xml:1635
-msgid "addCog"
-msgstr ""
-
-#: tutorial.xml:1962
-msgid "addUnitCommand(tutorial_tmp.tolec,\"walk\",\"locBackroute6\",1);"
-msgstr ""
-
-#: tutorial.xml:596
-msgid "angle"
-msgstr ""
-
-#: tutorial.xml:1829
-msgid "arcopt"
-msgstr ""
-
-#: tutorial.xml:1972
-msgid "attack"
-msgstr ""
-
-#: tutorial.xml:1122
-msgid "attribute_points"
-msgstr ""
-
-#: tutorial.xml:1287
-msgid "breakDownCleanup"
-msgstr ""
-
 #: tutorial.xml:1568
 msgid "but there is no oh-so-blessed master here."
 msgstr ""
 
-#: tutorial.xml:687
-msgid "closeBehemothDoor1"
-msgstr ""
-
-#: tutorial.xml:1409
-msgid "construction:locParty"
-msgstr ""
-
-#: tutorial.xml:94 tutorial.xml:98
-msgid "council_guard"
-msgstr ""
-
-#: tutorial.xml:49 tutorial.xml:1336
-msgid "derred"
-msgstr ""
-
-#: tutorial.xml:655
-msgid "destroy_bprison"
-msgstr ""
-
-#: tutorial.xml:120 tutorial.xml:704 tutorial.xml:1984
-msgid "doorBehemothNorth"
-msgstr ""
-
-#: tutorial.xml:121 tutorial.xml:696
-msgid "doorBehemothWest"
-msgstr ""
-
-#: tutorial.xml:2059 tutorial.xml:2109
-msgid "doorLibrary"
-msgstr ""
-
-#: tutorial.xml:500
-msgid "doorPrison"
-msgstr ""
-
-#: tutorial.xml:2114
-msgid "doorScene1"
-msgstr ""
-
-#: tutorial.xml:1889
-msgid "doorSecretLibrary"
-msgstr ""
-
-#: tutorial.xml:158
-msgid "doorSouth"
-msgstr ""
-
-#: tutorial.xml:1164
-msgid "door_toggle('slugFarmFoodDoor')"
-msgstr ""
-
-#: tutorial.xml:56 tutorial.xml:1039
-msgid "earthquake"
-msgstr ""
-
 #: tutorial.xml:28 tutorial.xml:463 tutorial.xml:952 tutorial.xml:1079
-#: tutorial.xml:1153 tutorial.xml:1543 tutorial.xml:1555 tutorial.xml:1687
-#: tutorial.xml:1709 tutorial.xml:1886 tutorial.xml:2136
+#: tutorial.xml:1153 tutorial.xml:1543 tutorial.xml:1709 tutorial.xml:1886
+#: tutorial.xml:2136
 msgid "elCnlLobby"
 msgstr ""
 
 #: tutorial.xml:379 tutorial.xml:1316 tutorial.xml:1626
 msgid "elCnlLowerCaves"
-msgstr ""
-
-#: tutorial.xml:487
-msgid "entryPlayerArea"
-msgstr ""
-
-#: tutorial.xml:59
-msgid "escapeCaves"
-msgstr ""
-
-#: tutorial.xml:1068
-msgid "explain_levelup_continue"
-msgstr ""
-
-#: tutorial.xml:1820
-msgid "explain_skills_no"
-msgstr ""
-
-#: tutorial.xml:62
-msgid "findSecretDoor"
-msgstr ""
-
-#: tutorial.xml:663
-msgid "fireCage"
-msgstr ""
-
-#: tutorial.xml:2033
-msgid "fireLouse"
-msgstr ""
-
-#: tutorial.xml:2022
-msgid "fleeingSlaves"
-msgstr ""
-
-#: tutorial.xml:2192
-msgid "health"
-msgstr ""
-
-#: tutorial.xml:154
-msgid "ignored_by_ai"
-msgstr ""
-
-#: tutorial.xml:65
-msgid "killlouses"
-msgstr ""
-
-#: tutorial.xml:1511 tutorial.xml:1527
-msgid "labCon:areaSewerLabConnection"
-msgstr ""
-
-#: tutorial.xml:1003 tutorial.xml:2155
-msgid "leader"
-msgstr ""
-
-#: tutorial.xml:1210 tutorial.xml:1767
-msgid "locBackroute3"
-msgstr ""
-
-#: tutorial.xml:1915
-msgid "locBackroute5"
-msgstr ""
-
-#: tutorial.xml:96 tutorial.xml:100 tutorial.xml:1084 tutorial.xml:1091
-#: tutorial.xml:1254 tutorial.xml:1261
-msgid "locBehemoth"
-msgstr ""
-
-#: tutorial.xml:606 tutorial.xml:614 tutorial.xml:638
-msgid "locBehemothStart"
-msgstr ""
-
-#: tutorial.xml:732
-msgid "locBehemothView"
-msgstr ""
-
-#: tutorial.xml:1719
-msgid "locDerredAfterCave"
-msgstr ""
-
-#: tutorial.xml:213
-msgid "locEntryPlayer"
-msgstr ""
-
-#: tutorial.xml:1917
-msgid "locPartyLib"
-msgstr ""
-
-#: tutorial.xml:994
-msgid "locSlugView"
-msgstr ""
-
-#: tutorial.xml:73 tutorial.xml:992
-msgid "locSlugs"
-msgstr ""
-
-#: tutorial.xml:590 tutorial.xml:734
-msgid "locWay2"
-msgstr ""
-
-#: tutorial.xml:598
-msgid "locWorker"
-msgstr ""
-
-#: tutorial.xml:2062
-msgid "louse_dialog"
-msgstr ""
-
-#: tutorial.xml:1425
-msgid "overseer"
-msgstr ""
-
-#: tutorial.xml:226 tutorial.xml:750 tutorial.xml:947 tutorial.xml:1006
-msgid "position"
-msgstr ""
-
-#: tutorial.xml:1043
-msgid "priopt"
-msgstr ""
-
-#: tutorial.xml:1644
-msgid "rotateCogs"
-msgstr ""
-
-#: tutorial.xml:617 tutorial.xml:642
-msgid "shake"
-msgstr ""
-
-#: tutorial.xml:1414
-msgid "slave"
-msgstr ""
-
-#: tutorial.xml:173 tutorial.xml:174 tutorial.xml:175
-msgid "slave_miner"
-msgstr ""
-
-#: tutorial.xml:594
-msgid "slave_scaffolding"
-msgstr ""
-
-#: tutorial.xml:600
-msgid "slave_worker"
-msgstr ""
-
-#: tutorial.xml:2002
-msgid "slaves_flee"
-msgstr ""
-
-#: tutorial.xml:1215
-msgid "slugEscape"
-msgstr ""
-
-#: tutorial.xml:945 tutorial.xml:955
-msgid "slugFarmBackdoor"
-msgstr ""
-
-#: tutorial.xml:1298
-msgid "slugHole"
-msgstr ""
-
-#: tutorial.xml:1175
-msgid "slugs2_scene_intro"
-msgstr ""
-
-#: tutorial.xml:1275 tutorial.xml:1276 tutorial.xml:1277 tutorial.xml:1278
-#: tutorial.xml:1279
-msgid "smokeEmitter"
-msgstr ""
-
-#: tutorial.xml:45 tutorial.xml:1333
-msgid "tolec"
-msgstr ""
-
-#: tutorial.xml:178 tutorial.xml:603
-msgid "tutorialBehemoth"
-msgstr ""
-
-#: tutorial.xml:1161
-msgid "tutorialMutantSlugs"
-msgstr ""
-
-#: tutorial.xml:71
-msgid "tutorialSlugs"
-msgstr ""
-
-#: tutorial.xml:1093
-msgid "tutorial_behemoth_fire_storm"
-msgstr ""
-
-#: tutorial.xml:898 tutorial.xml:2127
-msgid "tutorial_complete"
-msgstr ""
-
-#: tutorial.xml:2191
-msgid "tutorial_fire_ball"
-msgstr ""
-
-#: tutorial.xml:2194
-msgid "tutorial_fire_wall"
-msgstr ""
-
-#: tutorial.xml:474
-msgid "tutorial_gave_weapon"
-msgstr ""
-
-#: tutorial.xml:830 tutorial.xml:832
-msgid "tutorial_weapon"
-msgstr ""
-
-#: tutorial.xml:502 tutorial.xml:525 tutorial.xml:544 tutorial.xml:561
-#: tutorial.xml:564 tutorial.xml:592 tutorial.xml:628 tutorial.xml:677
-#: tutorial.xml:713 tutorial.xml:968 tutorial.xml:969 tutorial.xml:970
-#: tutorial.xml:1172 tutorial.xml:1190 tutorial.xml:1250 tutorial.xml:1493
-#: tutorial.xml:1769 tutorial.xml:1893 tutorial.xml:1895 tutorial.xml:2010
-#: tutorial.xml:2034 tutorial.xml:2112 tutorial.xml:2116
-msgid "walk"
-msgstr ""
-
-#: tutorial.xml:762 tutorial.xml:801
-msgid "waropt"
-msgstr ""
-
-#: tutorial.xml:471
-msgid "weapon"
 msgstr ""

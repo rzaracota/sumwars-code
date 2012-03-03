@@ -28,7 +28,7 @@ msgstr ""
 msgid "you killed enough goblins"
 msgstr ""
 
-#: goblins.xml:18 goblins.xml:30
+#: goblins.xml:18
 msgid "peasant"
 msgstr ""
 
@@ -94,10 +94,6 @@ msgstr ""
 
 #: goblins.xml:61
 msgid "Have fun then."
-msgstr ""
-
-#: goblins.xml:76
-msgid "attribute_points"
 msgstr ""
 
 #: goblins.xml:90

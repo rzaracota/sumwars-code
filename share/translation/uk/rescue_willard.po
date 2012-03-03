@@ -52,24 +52,15 @@ msgstr ""
 msgid "medMercCamp"
 msgstr "Табір найманців Медайру"
 
-#: rescue_willard.xml:19
-msgid "areaFenor"
-msgstr ""
-
 #: rescue_willard.xml:25
 msgid "Hey there!"
 msgstr "Гей, там!"
 
-#: rescue_willard.xml:29 rescue_willard.xml:159
-msgid "player"
-msgstr ""
-
-#: rescue_willard.xml:32 rescue_willard.xml:45 rescue_willard.xml:55
-#: rescue_willard.xml:67 rescue_willard.xml:73 rescue_willard.xml:80
+#: rescue_willard.xml:55
 msgid "Fenor Marken"
 msgstr "Фенор Маркен"
 
-#: rescue_willard.xml:56 rescue_willard.xml:203 rescue_willard.xml:214
+#: rescue_willard.xml:56 rescue_willard.xml:203
 msgid "Willard"
 msgstr "Віллард"
 
@@ -275,10 +266,6 @@ msgstr "Дякую. ##solo"
 msgid "Thank you."
 msgstr "Дякую."
 
-#: rescue_willard.xml:151
-msgid "talk_done"
-msgstr ""
-
 #: rescue_willard.xml:159
 msgid "I'm sorry, but I don't want to waste my time searching for gamekeepers."
 msgstr "Мені дуже шкода, але я не хочу тратити свій час на пошук лісника."
@@ -373,35 +360,14 @@ msgstr ""
 msgid "Thank you very much."
 msgstr "Велике спасибі."
 
-#: rescue_willard.xml:231
-msgid "rescue_willard_reward"
-msgstr ""
-
-#: rescue_willard.xml:236
-msgid "willard_vanishes"
-msgstr ""
-
 #: rescue_willard.xml:247
 msgid "aisMeadow"
 msgstr "Луг Айзена"
-
-#: rescue_willard.xml:254
-msgid "willard_goblins"
-msgstr ""
-
-#: rescue_willard.xml:256 rescue_willard.xml:312
-msgid "peasant"
-msgstr ""
-
-#: rescue_willard.xml:265 rescue_willard.xml:278
-#, fuzzy
-msgid "WillardArea"
-msgstr "Віллард"
 
 #: rescue_willard.xml:271
 msgid "So here is this Willard."
 msgstr "Так ось де Віллард."
 
-#: rescue_willard.xml:315
-msgid "ignored_by_ai"
-msgstr ""
+#, fuzzy
+#~ msgid "WillardArea"
+#~ msgstr "Віллард"

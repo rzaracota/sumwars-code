@@ -117,32 +117,10 @@ msgstr ""
 msgid "You do realise there's plenty more where they came from?"
 msgstr ""
 
-#: goblin_raid.xml:28
-msgid ""
-"You found a leather skin containing what seems like the plans of a raid on a "
-"nearby village."
-msgstr ""
-
 #: goblin_raid.xml:11
 msgid "aisDarkClearing"
 msgstr ""
 
-#: goblin_raid.xml:49 goblin_raid.xml:64
-msgid "collect_reward_raid"
-msgstr ""
-
-#: goblin_raid.xml:16
-msgid "goblin_apprtc"
-msgstr ""
-
 #: goblin_raid.xml:2
 msgid "goblin_raid"
-msgstr ""
-
-#: goblin_raid.xml:14
-msgid "goblin_regresh"
-msgstr ""
-
-#: goblin_raid.xml:95
-msgid "player"
 msgstr ""

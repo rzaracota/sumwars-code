@@ -16,8 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: theTrader.xml:2 theTrader.xml:68 theTrader.xml:124 theTrader.xml:262
-#: theTrader.xml:300
+#: theTrader.xml:2 theTrader.xml:124 theTrader.xml:262 theTrader.xml:300
 msgid "The Trader"
 msgstr ""
 
@@ -33,17 +32,8 @@ msgstr ""
 msgid "elCnlLobby"
 msgstr ""
 
-#: theTrader.xml:22 theTrader.xml:53 theTrader.xml:237
+#: theTrader.xml:22 theTrader.xml:237
 msgid "medMercCamp"
-msgstr ""
-
-#: theTrader.xml:26 theTrader.xml:30 theTrader.xml:74 theTrader.xml:145
-#: theTrader.xml:256 theTrader.xml:282 theTrader.xml:294
-msgid "theTrader"
-msgstr ""
-
-#: theTrader.xml:28 theTrader.xml:32
-msgid "angle"
 msgstr ""
 
 #: theTrader.xml:71
@@ -395,10 +385,6 @@ msgstr ""
 
 #: theTrader.xml:223
 msgid "Oddball."
-msgstr ""
-
-#: theTrader.xml:223
-msgid "arcopt"
 msgstr ""
 
 #: theTrader.xml:253

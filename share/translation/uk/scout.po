@@ -49,11 +49,6 @@ msgstr ""
 msgid "greyCurseCave"
 msgstr "Проклята печера"
 
-#: scout.xml:17
-#, fuzzy
-msgid "questScout"
-msgstr "Поранений Розвідник"
-
 #: scout.xml:23
 msgid "Wounded Scout"
 msgstr "Поранений Розвідник"
@@ -275,11 +270,11 @@ msgstr "Я відпочину трохи і теж вирушу, але в ін�
 msgid "greyWolfcave"
 msgstr "Вовча печера"
 
-#: scout.xml:124
-msgid "psychoticSpider"
-msgstr ""
-
 #~ msgid ""
 #~ "After killing the spider you safely pick up a backpack in good shape."
 #~ msgstr ""
 #~ "Після вбивства павука ви благополучно забираєте рюкзак в гарному стані."
+
+#, fuzzy
+#~ msgid "questScout"
+#~ msgstr "Поранений Розвідник"

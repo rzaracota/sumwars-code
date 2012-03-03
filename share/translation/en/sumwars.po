@@ -19,73 +19,59 @@ msgstr ""
 
 #: aisen.xml:6
 msgid "aisMeadow"
-msgstr "aisMeadow"
+msgstr "Aisen Meadow"
 
 #: aisen.xml:52
 msgid "aisPlains"
-msgstr "aisPlains"
+msgstr "Open Plains"
 
 #: aisen.xml:100
 msgid "aisMaylonsGraveEntry"
-msgstr "aisMaylonsGraveEntry"
+msgstr "Maylons Grave"
 
 #: aisen.xml:133
 msgid "aisMaylonsGraveL1"
-msgstr "aisMaylonsGraveL1"
+msgstr "Maylons Grave Level 1"
 
 #: aisen.xml:173
 msgid "aisMaylonsGraveL2"
-msgstr "aisMaylonsGraveL2"
+msgstr "Maylons Grave, Crypt"
 
 #: aisen.xml:213
 msgid "aisHeath"
-msgstr "aisHeath"
+msgstr "Calm Heath"
 
 #: aisen.xml:253
 msgid "aisStonePlains"
-msgstr "aisStonePlains"
+msgstr "Stone Plains"
 
 #: aisen.xml:300
 msgid "aisDarkClearing"
-msgstr "aisDarkClearing"
+msgstr "Dark Clearing"
 
 #: aisen.xml:341
 msgid "aisWideHeath"
-msgstr "aisWideHeath"
+msgstr "Wide Heath"
 
 #: aisen.xml:386
 msgid "joringsbridge"
-msgstr "joringsbridge"
-
-#: aisen.xml:426
-#, fuzzy
-msgid "locSergeant"
-msgstr "Sergeant Wober"
-
-#: aisen.xml:431 joringsbridge_npc.xml:185 joringsbridge_npc.xml:268
-#: joringsbridge_npc.xml:295 joringsbridge_npc.xml:316
-msgid "Magus Convocatis Relau Fireweaver"
-msgstr "Magus Convocatis Relau Fireweaver"
-
-#: aisen.xml:435 joringsbridge_npc.xml:21
-msgid "Sybill"
-msgstr "Sybill"
+msgstr "Joringsbridge"
 
 #: aisen.xml:453
 msgid "aisNorthMeadow"
-msgstr "aisNorthMeadow"
+msgstr "Northern Meadow"
 
 #: aisen.xml:502
 msgid "aisJoringsforest"
-msgstr "aisJoringsforest"
+msgstr "Joringsforest"
 
 #: aisen.xml:540
 msgid "aisFairyforest"
-msgstr "aisFairyforest"
+msgstr "Fairyforest"
 
 #: aisen.xml:586
 msgid "aisDarkFairyforest"
-msgstr "aisDarkFairyforest"
+msgstr "Dark Fairyforest"
 
 #: aisen.xml:629
 msgid "aisWolfstones"
@@ -93,29 +79,19 @@ msgstr "aisWolfstones"
 
 #: aisen.xml:677
 msgid "aisWestwoods"
-msgstr "aisWestwoods"
+msgstr "Westwoods"
 
 #: aisen.xml:720
 msgid "aisMounPath"
-msgstr "aisMounPath"
+msgstr "Mountain Path"
 
 #: aisen.xml:750
 msgid "aisMistslope"
-msgstr "aisMistslope"
-
-#: aisen.xml:780 aisen.xml:781 aisen.xml:782 aisen.xml:783 aisen.xml:784
-#: aisen.xml:786
-#, fuzzy
-msgid "goblins_l13_2"
-msgstr "goblin slayer"
-
-#: aisen.xml:788
-msgid "treasure_box_m1"
-msgstr ""
+msgstr "Mistslopes"
 
 #: aisen.xml:796
 msgid "aisEastslope"
-msgstr "aisEastslope"
+msgstr "Eastslope"
 
 #: aisen.xml:846
 msgid "Watch out! Monsters from the mine! Help me!"
@@ -193,7 +169,7 @@ msgstr "Giant Bat"
 msgid "Guard"
 msgstr "Guard"
 
-#: aisenNPCStats.xml:46 aisenNPCStats.xml:88 dwarfenwall.xml:280 npc.xml:25
+#: aisenNPCStats.xml:46 aisenNPCStats.xml:88 npc.xml:25
 msgid "General Greif"
 msgstr "General Greif"
 
@@ -321,15 +297,6 @@ msgstr ""
 "it hits someone. Be careful not to stand in its way, for it distinguishes "
 "not between friend and foe."
 
-#: archer_ablt.xml:107 archer_ablt.xml:141 archer_ablt.xml:170
-#: archer_ablt.xml:268 archer_ablt.xml:292 monster_ablt.xml:399
-#: monster_ablt.xml:439 npc_abilities.xml:167 npc_abilities.xml:208
-#: priest_ablt.xml:18 priest_ablt.xml:510 priest_ablt.xml:585
-#: warrior_ablt.xml:63 warrior_ablt.xml:112 warrior_ablt.xml:258
-#: warrior_ablt.xml:372 warrior_ablt.xml:407
-msgid "phys_mult"
-msgstr ""
-
 #: archer_ablt.xml:112
 msgid "Catlike Reflexes"
 msgstr "Catlike Reflexes"
@@ -349,23 +316,6 @@ msgid ""
 msgstr ""
 "The projectile is imbued with the power of a weak firespirit. It will deal "
 "damage in a small area, if it hits."
-
-#: archer_ablt.xml:143 archer_ablt.xml:173 dwarfenwall.lua:276
-#: mage_ablt.xml:22 mage_ablt.xml:109 mage_ablt.xml:135 mage_ablt.xml:161
-#: mage_ablt.xml:187 mage_ablt.xml:213 mage_ablt.xml:239 mage_ablt.xml:292
-#: mage_ablt.xml:319 mage_ablt.xml:345 mage_ablt.xml:371 mage_ablt.xml:395
-#: mage_ablt.xml:493 mage_ablt.xml:543 mage_ablt.xml:575 monster_ablt.xml:112
-#: monster_ablt.xml:138 monster_ablt.xml:165 monster_ablt.xml:191
-#: monster_ablt.xml:462 monster_ablt.xml:507 monster_ablt.xml:642
-#: monster_ice_ablt.xml:184 npc_abilities.xml:44 npc_abilities.xml:69
-#: npc_abilities.xml:95 npc_abilities.xml:257 priest_ablt.xml:453
-#: priest_ablt.xml:483 unique_ablt.xml:139
-msgid "fire_dmg"
-msgstr ""
-
-#: archer_ablt.xml:145 priest_ablt.xml:356 priest_ablt.xml:384
-msgid "blockable"
-msgstr ""
 
 #: archer_ablt.xml:150
 msgid "Blast Cascade"
@@ -515,13 +465,6 @@ msgstr ""
 msgid "Vacuum"
 msgstr "Vacuum"
 
-#: archer_ablt.xml:378 mage_ablt.xml:48 mage_ablt.xml:74 mage_ablt.xml:441
-#: mage_ablt.xml:466 mage_ablt.xml:546 mage_ablt.xml:578 monster_ablt.xml:241
-#: monster_ablt.xml:311 npc_abilities.xml:120 npc_abilities.xml:144
-#: priest_ablt.xml:95 priest_ablt.xml:327
-msgid "air_dmg"
-msgstr ""
-
 #: archer_ablt.xml:385
 msgid "Iron Hail"
 msgstr "Iron Hail"
@@ -569,11 +512,6 @@ msgstr ""
 #: archer_ablt.xml:448
 msgid "Windwalk"
 msgstr "Windwalk"
-
-#: archer_ablt.xml:466
-#, fuzzy
-msgid "block"
-msgstr "Block"
 
 #: armor.xml:3
 msgid "cloth armor"
@@ -799,11 +737,11 @@ msgstr "take up item"
 msgid "use"
 msgstr "use"
 
-#: base_abilities.xml:79 dwarfenwall.lua:308
+#: base_abilities.xml:79
 msgid "walk"
 msgstr "walk"
 
-#: base_abilities.xml:89 dwarfenwall.lua:205
+#: base_abilities.xml:89
 msgid "guard"
 msgstr "guard"
 
@@ -843,35 +781,8 @@ msgstr "Basic ranged attack"
 msgid "Ranged attack"
 msgstr "Ranged attack"
 
-#: benchmark.lua:19 testregions.xml:217
-msgid "benchmarkBox"
-msgstr "benchmarkBox"
-
-#: berryBush.xml:11
-msgid "berryBushPicked"
-msgstr ""
-
 #: copperrock.xml:2
 msgid "Thomas"
-msgstr ""
-
-#: councilExperiment.xml:18
-msgid "blue"
-msgstr ""
-
-#: councilExperiment.xml:22
-#, fuzzy
-msgid "red"
-msgstr "Derred"
-
-#: councilExperiment.xml:27 door.xml:30 door.xml:53 door.xml:83
-#: dwarfenwall.lua:4
-#, fuzzy
-msgid "position"
-msgstr "Ionisation"
-
-#: councilExperiment.xml:30 door.xml:37 door.xml:118 energySource.xml:14
-msgid "scriptobjectvar["
 msgstr ""
 
 #: councilNPCStats.xml:4
@@ -936,85 +847,45 @@ msgstr "Inferno Behemoth"
 
 #: cursedCaves.xml:5
 msgid "greyCurseCave"
-msgstr "greyCurseCave"
+msgstr "Cursed Cave"
 
 #: cursedCaves.xml:53
 msgid "greyCurseGrotto"
-msgstr "greyCurseGrotto"
+msgstr "Cursed Grotto"
 
 #: cursedCaves.xml:96
 msgid "greyWolfcave"
-msgstr "greyWolfcave"
+msgstr "Wolfcave"
 
 #: cursedCaves.xml:135
 msgid "greyCurseGrotDep"
-msgstr "greyCurseGrotDep"
+msgstr "Cursed Grotto, Depth"
 
 #: cursedCaves.xml:169
 msgid "greyCursedCavern"
-msgstr "greyCursedCavern"
+msgstr "Cursed Cavern"
 
 #: cursedCaves.xml:209
 msgid "greyCurseCaveDep"
-msgstr "greyCurseCaveDep"
+msgstr "Cursed Caves, Depth"
 
 #: cursedCaves.xml:251
 msgid "greyCurseCaveFis"
-msgstr "greyCurseCaveFis"
+msgstr "The Fissure"
 
 #: cursedCaves.xml:280
 msgid "greyCurseCaveEast"
-msgstr "greyCurseCaveEast"
+msgstr "Cursed East Cave"
 
 #: cursedCaves.xml:325
 msgid "greyCurseLake"
 msgstr "greyCurseLake"
 
-#: debug.lua:18 dwarfcastle.xml:251 joringsbridge_npc.xml:307 npc.xml:165
-#: party.lua:175
-#, fuzzy
-msgid "gold"
-msgstr "gold ring"
-
-#: door.xml:9
-msgid "on"
-msgstr ""
-
-#: door.xml:13
-msgid "_id"
-msgstr ""
-
-#: door.xml:27 door.xml:50 door.xml:80 door.xml:110
-msgid "open"
-msgstr ""
-
-#: door.xml:33 door.xml:112
-msgid "layer"
-msgstr ""
-
-#: door.xml:65 door.xml:95
-#, fuzzy
-msgid "lockdown"
-msgstr "Block"
-
-#: doorswitch.lua:1 doorswitch.lua:11
-#, fuzzy
-msgid "string"
-msgstr "Frost ring"
-
-#: doorswitch.lua:5
-msgid "used_object"
-msgstr ""
-
-#: doorswitch.lua:7
-msgid "lock_override"
-msgstr ""
-
 #: dwarfcastle.xml:2
 msgid "Eric"
 msgstr ""
 
-#: dwarfcastle.xml:6 dwarfenwall.xml:164
+#: dwarfcastle.xml:6
 msgid "Haffgar"
 msgstr "Haffgar"
 
@@ -1023,11 +894,11 @@ msgstr "Haffgar"
 msgid "Trade"
 msgstr "Trade"
 
-#: dwarfcastle.xml:41 dwarfenwall.xml:159
+#: dwarfcastle.xml:41
 msgid "Amelia"
 msgstr "Amelia"
 
-#: dwarfcastle.xml:61 dwarfenwall.xml:154
+#: dwarfcastle.xml:61
 msgid "Drago"
 msgstr "Drago"
 
@@ -1035,13 +906,7 @@ msgstr "Drago"
 msgid "Potions"
 msgstr "Potions"
 
-#: dwarfcastle.xml:75 dwarfenwall.lua:383 dwarfenwall.lua:384
-#: dwarfenwall.lua:418 joringsbridge_npc.xml:12 medairnpc.xml:78 npc.xml:71
-#: testregions.xml:119
-msgid "health"
-msgstr ""
-
-#: dwarfcastle.xml:80 dwarfenwall.xml:169
+#: dwarfcastle.xml:80
 msgid "Flynn"
 msgstr "Flynn"
 
@@ -1065,8 +930,7 @@ msgstr "These are all old army supplies."
 msgid "If you like something just point it out and I'll tell you a price."
 msgstr "If you like something just point it out and I'll tell you a price."
 
-#: dwarfcastle.xml:154 dwarfcastle.xml:215 dwarfcastle.xml:239
-#: dwarfcastle.xml:260 dwarfenwall.xml:287
+#: dwarfcastle.xml:154
 msgid "Enchanter Fazhir"
 msgstr "Enchanter Fazhir"
 
@@ -1098,10 +962,6 @@ msgstr "Willpower"
 #: dwarfcastle.xml:174 joringsbridge_npc.xml:244 npc.xml:99
 msgid "Weapon"
 msgstr "Weapon"
-
-#: dwarfcastle.xml:176 dwarfcastle.xml:187
-msgid "godlike"
-msgstr ""
 
 #: dwarfcastle.xml:178 joringsbridge_npc.xml:247 npc.xml:102
 msgid "Air damage"
@@ -1144,15 +1004,6 @@ msgstr "Strength"
 msgid "Which part of your equipment should be enchanted?"
 msgstr "Which part of your equipment should be enchanted?"
 
-#: dwarfcastle.xml:200 joringsbridge_npc.xml:253
-msgid "select_mod"
-msgstr ""
-
-#: dwarfcastle.xml:212 dwarfcastle.xml:232 joringsbridge_npc.xml:265
-#: joringsbridge_npc.xml:285 npc.xml:126 npc.xml:146
-msgid "main_player"
-msgstr ""
-
 #: dwarfcastle.xml:215 npc.xml:129
 msgid "Hey you have no item equiped there"
 msgstr "Hey you have no item equiped there"
@@ -1160,10 +1011,6 @@ msgstr "Hey you have no item equiped there"
 #: dwarfcastle.xml:218 joringsbridge_npc.xml:271 npc.xml:132
 msgid "Which Enchantment do you want?"
 msgstr "Which Enchantment do you want?"
-
-#: dwarfcastle.xml:221 joringsbridge_npc.xml:274 npc.xml:135
-msgid "check_price"
-msgstr ""
 
 #: dwarfcastle.xml:239 npc.xml:153
 msgid "You dont have enough gold to pay the price of $1"
@@ -1173,98 +1020,9 @@ msgstr "You dont have enough gold to pay the price of $1"
 msgid "The price is $1"
 msgstr "The price is $1"
 
-#: dwarfcastle.xml:242 joringsbridge_npc.xml:298 npc.xml:156
-msgid "OK"
-msgstr ""
-
-#: dwarfcastle.xml:243 npc.xml:157
-msgid "Nah to expensive"
-msgstr ""
-
 #: dwarfcastle.xml:260 npc.xml:174
 msgid "It seems that this item already has such an enchantment."
 msgstr "It seems that this item already has such an enchantment."
-
-#: dwarfenwall.lua:30 mage_ablt.xml:541 mage_ablt.xml:573
-#: monster_air_ablt.xml:18 monster_air_ablt.xml:20 monster_air_ablt.xml:42
-#: monster_air_ablt.xml:44 monster_fire_ablt.xml:18 monster_fire_ablt.xml:20
-#: monster_fire_ablt.xml:42 monster_fire_ablt.xml:44 monster_fire_ablt.xml:86
-#: monster_fire_ablt.xml:111 monster_ice_ablt.xml:18 monster_ice_ablt.xml:20
-#: monster_ice_ablt.xml:42 monster_ice_ablt.xml:44 monster_proj.xml:222
-#: unique_ablt.xml:20 unique_ablt.xml:22
-msgid "phys_dmg"
-msgstr ""
-
-#: dwarfenwall.lua:204
-msgid "subtype"
-msgstr ""
-
-#: dwarfenwall.lua:223 dwarfenwall.lua:249
-#, fuzzy
-msgid "location"
-msgstr "no action"
-
-#: dwarfenwall.lua:231
-msgid "respawnroute"
-msgstr ""
-
-#: dwarfenwall.lua:236
-msgid "respawnTrigger"
-msgstr ""
-
-#: dwarfenwall.lua:260
-msgid "dwarfenwall monster group "
-msgstr ""
-
-#: dwarfenwall.lua:274
-#, fuzzy
-msgid "catapult_skeleton"
-msgstr "Creates a skeleton."
-
-#: dwarfenwall.lua:281
-msgid "createObject(\"catapult_skel\",{"
-msgstr ""
-
-#: dwarfenwall.lua:291
-msgid "..x.."
-msgstr ""
-
-#: dwarfenwall.lua:306
-msgid "lich_siege"
-msgstr ""
-
-#: dwarfenwall.lua:311 dwarfenwall.lua:314
-#, fuzzy
-msgid "necromancer_siegeDefense"
-msgstr "necromancer staff"
-
-#: dwarfenwall.lua:313 dwarfenwall.lua:316
-msgid "addUnitCommand("
-msgstr ""
-
-#: dwarfenwall.lua:320
-msgid "siege_block"
-msgstr ""
-
-#: dwarfenwall.lua:337
-msgid "att1"
-msgstr ""
-
-#: dwarfenwall.lua:339
-msgid "darna"
-msgstr ""
-
-#: dwarfenwall.lua:353
-msgid "dwall_siege"
-msgstr ""
-
-#: dwarfenwall.lua:380
-msgid "{"
-msgstr ""
-
-#: dwarfenwall.lua:391
-msgid ", "
-msgstr ""
 
 #: dwarfenwall.xml:6
 msgid "dwarfenwall"
@@ -1274,21 +1032,9 @@ msgstr "dwarfenwall"
 msgid "dwarfenwallCommand"
 msgstr "dwarfenwallCommand"
 
-#: dwarfenwall.xml:283 npc.xml:28
-msgid "Maga Convocatis Darna Eistaucher"
-msgstr "Maga Convocatis Darna Eistaucher"
-
 #: dwarfenwall.xml:299
 msgid "dwarfenwallRampart"
-msgstr "dwarfenwallRampart"
-
-#: energySource.xml:9
-msgid "energySourceUsed"
-msgstr ""
-
-#: energySource.xml:11 mechanismCouncilCrane.xml:9
-msgid "user"
-msgstr ""
+msgstr "Rampart"
 
 #: glove.xml:4
 msgid "leather gloves"
@@ -1766,6 +1512,10 @@ msgstr "Gertlinde Kampfer"
 msgid "Reba"
 msgstr ""
 
+#: joringsbridge_npc.xml:21
+msgid "Sybill"
+msgstr "Sybill"
+
 #: joringsbridge_npc.xml:56
 msgid "Weapons"
 msgstr "Weapons"
@@ -1876,6 +1626,10 @@ msgstr "Thanks for the warning, sergeant."
 msgid "Michel Bron"
 msgstr "Michel Bron"
 
+#: joringsbridge_npc.xml:185
+msgid "Magus Convocatis Relau Fireweaver"
+msgstr "Magus Convocatis Relau Fireweaver"
+
 #: joringsbridge_npc.xml:189
 msgid "You are the backup sent by Lord Master Windclaw, arn't you?"
 msgstr "You are the backup sent by Lord Master Windclaw, arn't you?"
@@ -1967,10 +1721,6 @@ msgid "I may work for the Council, but I don't run a charity. The price is $1."
 msgstr ""
 "I may work for the Council, but I don't run a charity. The price is $1."
 
-#: joringsbridge_npc.xml:299
-msgid "Better not."
-msgstr ""
-
 #: joringsbridge_npc.xml:316
 msgid "As I always say: No enchantment should be applied a second time."
 msgstr "As I always say: No enchantment should be applied a second time."
@@ -2058,22 +1808,6 @@ msgid ""
 msgstr ""
 "The mage summons a leathal cold blizzard that freezes every enemy caught in "
 "it to death."
-
-#: mage_ablt.xml:20 mage_ablt.xml:111 mage_ablt.xml:137 mage_ablt.xml:163
-#: mage_ablt.xml:189 mage_ablt.xml:215 mage_ablt.xml:241 mage_ablt.xml:290
-#: mage_ablt.xml:317 mage_ablt.xml:343 mage_ablt.xml:369 mage_ablt.xml:397
-#: mage_ablt.xml:491 mage_ablt.xml:539 mage_ablt.xml:571 monster_ablt.xml:114
-#: monster_ablt.xml:140 monster_ablt.xml:167 monster_ablt.xml:193
-#: monster_ablt.xml:264 monster_ablt.xml:287 monster_ablt.xml:378
-#: monster_ablt.xml:589 monster_ablt.xml:687 monster_ice_ablt.xml:84
-#: monster_ice_ablt.xml:107 monster_ice_ablt.xml:132 monster_ice_ablt.xml:182
-#: monster_shadow_ablt.xml:39 npc_abilities.xml:20 npc_abilities.xml:46
-#: npc_abilities.xml:71 npc_abilities.xml:97 npc_abilities.xml:259
-#: priest_ablt.xml:93 priest_ablt.xml:325 priest_ablt.xml:455
-#: priest_ablt.xml:485 unique_ablt.xml:43 unique_ablt.xml:65
-#: unique_ablt.xml:111 unique_ablt.xml:136 unique_ablt.xml:223
-msgid "ice_dmg"
-msgstr ""
 
 #: mage_ablt.xml:28 monster_ablt.xml:293 npc_abilities.xml:102
 msgid "Chainlightning"
@@ -2192,10 +1926,6 @@ msgid ""
 msgstr ""
 "The mage catches an enemy in a block of pure ice, instantly sealing his "
 "movements."
-
-#: mage_ablt.xml:265 monster_ice_ablt.xml:157
-msgid "frozen"
-msgstr ""
 
 #: mage_ablt.xml:271
 msgid "Frost ring"
@@ -2331,32 +2061,15 @@ msgstr "elCnlLobby"
 
 #: medair.xml:37
 msgid "elCnlLowerCaves"
-msgstr "elCnlLowerCaves"
-
-#: medair.xml:78 medair.xml:83
-msgid "slave_miner"
-msgstr ""
-
-#: medair.xml:79
-msgid "slave_worker"
-msgstr ""
-
-#: medair.xml:81
-msgid "height"
-msgstr ""
-
-#: medair.xml:84
-#, fuzzy
-msgid "slave_overseer"
-msgstr "Overseer"
+msgstr "Council of Elements, Underground Dungeon"
 
 #: medair.xml:89
 msgid "medBackalley"
-msgstr "medBackalley"
+msgstr "Backalleys"
 
 #: medair.xml:119
 msgid "medMercCamp"
-msgstr "medMercCamp"
+msgstr "Mercenary Camp of Medair"
 
 #: medairnpc.xml:2
 msgid "Robert"
@@ -2386,10 +2099,6 @@ msgstr "steal"
 msgid "Alternativer Feuerball."
 msgstr "Alternativer Feuerball."
 
-#: monster_ablt.xml:34 monster_ablt.xml:36
-msgid "current"
-msgstr ""
-
 #: monster_ablt.xml:47
 msgid "Booster"
 msgstr "Booster"
@@ -2397,14 +2106,6 @@ msgstr "Booster"
 #: monster_ablt.xml:47
 msgid "completely overpowered Booster"
 msgstr "completely overpowered Booster"
-
-#: monster_ablt.xml:62 monster_ablt.xml:85 undead_ablt.xml:15
-#: undead_ablt.xml:34 undead_ablt.xml:53 undead_ablt.xml:72 undead_ablt.xml:92
-#: undead_ablt.xml:95 unique_ablt.xml:84 unique_ablt.xml:87 unique_ablt.xml:90
-#: unique_ablt.xml:158
-#, fuzzy
-msgid "fraction"
-msgstr "no action"
 
 #: monster_ablt.xml:70
 msgid "Heilt alles"
@@ -2418,15 +2119,6 @@ msgstr "Firestorm with increased range."
 msgid "Magic Shield"
 msgstr "Magic Shield"
 
-#: monster_ablt.xml:216 monster_shadow_ablt.xml:66 npc_abilities.xml:233
-#: priest_ablt.xml:246 warrior_ablt.xml:190
-msgid "resist_fire"
-msgstr ""
-
-#: monster_ablt.xml:218 monster_shadow_ablt.xml:68 priest_ablt.xml:45
-msgid "flag"
-msgstr ""
-
 #: monster_ablt.xml:223 npc_abilities.xml:126
 msgid "Goblin Lightning"
 msgstr "Goblin Lightning"
@@ -2434,10 +2126,6 @@ msgstr "Goblin Lightning"
 #: monster_ablt.xml:317
 msgid "goblin curse"
 msgstr "goblin curse"
-
-#: monster_ablt.xml:334
-msgid "paralyzed"
-msgstr ""
 
 #: monster_ablt.xml:341 priest_ablt.xml:412
 msgid "Grand Cure"
@@ -2474,11 +2162,6 @@ msgstr "Poison arrow"
 #: monster_ablt.xml:468
 msgid "Poisonous ranged attack"
 msgstr "Poisonous ranged attack"
-
-#: monster_ablt.xml:485 priest_ablt.xml:22
-#, fuzzy
-msgid "poisoned"
-msgstr "summoned"
 
 #: monster_ablt.xml:513
 msgid "Throw a dagger"
@@ -2531,11 +2214,6 @@ msgstr "Blind ranged attack"
 #: monster_ablt.xml:648
 msgid "dark arrow"
 msgstr "dark arrow"
-
-#: monster_ablt.xml:665 priest_ablt.xml:125 priest_ablt.xml:589
-#, fuzzy
-msgid "blind"
-msgstr "goblin dog"
 
 #: monster_ablt.xml:670 monster_ice_ablt.xml:68 unique_ablt.xml:27
 #: unique_ablt.xml:49 unique_ablt.xml:95
@@ -2624,11 +2302,6 @@ msgstr "Cloud of Despair"
 msgid "The mage calls forth a black cloud that stuns and blinds his foes."
 msgstr "The mage calls forth a black cloud that stuns and blinds his foes."
 
-#: monster_shadow_ablt.xml:41 priest_ablt.xml:562 unique_ablt.xml:225
-#, fuzzy
-msgid "willpower"
-msgstr "Willpower"
-
 #: monsters.xml:237
 msgid "small mandragora"
 msgstr "small mandragora"
@@ -2639,7 +2312,7 @@ msgstr "mandragora"
 
 #: necrotia.xml:6
 msgid "necFieldcamp"
-msgstr "necFieldcamp"
+msgstr "Fieldcamp"
 
 #: npc.xml:4
 msgid "Brons Tuer"
@@ -2656,6 +2329,10 @@ msgstr "Maylons Ghost"
 #: npc.xml:22
 msgid "Gab Resh"
 msgstr "Gab Resh"
+
+#: npc.xml:28
+msgid "Maga Convocatis Darna Eistaucher"
+msgstr "Maga Convocatis Darna Eistaucher"
 
 #: npc.xml:35
 msgid "Erzmaga Ireana von Nordenburg"
@@ -2701,7 +2378,7 @@ msgstr "Leere Schriftrollen kaufen"
 msgid "Wounded Scout"
 msgstr "Wounded Scout"
 
-#: npc.xml:79 npc.xml:129 npc.xml:153 npc.xml:174
+#: npc.xml:79
 msgid "Enchanter"
 msgstr "Enchanter"
 
@@ -2774,14 +2451,6 @@ msgid ""
 msgstr ""
 "The mage conjures a deadly wave of fire on the verge of death, that burns "
 "every enemy in a circle around him to a crisp."
-
-#: party.lua:96 sarkophagusMaylon.xml:28
-msgid "name"
-msgstr ""
-
-#: party.lua:165
-msgid "experience"
-msgstr ""
 
 #: polearms.xml:3
 msgid "pike"
@@ -2899,10 +2568,6 @@ msgstr ""
 "The priest bathes a partymember in a mild light, releaving him of blindness "
 "and silence."
 
-#: priest_ablt.xml:145 priest_ablt.xml:173
-msgid "mute_immune_time"
-msgstr ""
-
 #: priest_ablt.xml:150
 msgid "Omniscent Eye"
 msgstr "Omniscent Eye"
@@ -2927,10 +2592,6 @@ msgstr ""
 "The priest heals one friend from confusion and berserk. Those ailments will "
 "also be healed."
 
-#: priest_ablt.xml:194 priest_ablt.xml:223
-msgid "berserk_immune_time"
-msgstr ""
-
 #: priest_ablt.xml:199
 msgid "Spirit Shield"
 msgstr "Spirit Shield"
@@ -2951,14 +2612,6 @@ msgstr ""
 "The priest conjures a magic shield for all partymembers thats reduces the "
 "damage dealt by elemental attacks."
 
-#: priest_ablt.xml:248
-msgid "max_resist_ice"
-msgstr ""
-
-#: priest_ablt.xml:250
-msgid "max_resist_air"
-msgstr ""
-
 #: priest_ablt.xml:256
 msgid "Ease Pain"
 msgstr "Ease Pain"
@@ -2970,10 +2623,6 @@ msgid ""
 msgstr ""
 "The priest treats a partymemener with healing water that washes away every "
 "poison and stops burns."
-
-#: priest_ablt.xml:272 priest_ablt.xml:301
-msgid "burning_immune_time"
-msgstr ""
 
 #: priest_ablt.xml:277
 msgid "Remedial Water"
@@ -3011,10 +2660,6 @@ msgstr ""
 "Only strong and durable demons will be able to resist the priests sacred "
 "strike."
 
-#: priest_ablt.xml:358 priest_ablt.xml:386
-msgid "extra_dmg_race"
-msgstr ""
-
 #: priest_ablt.xml:364
 msgid ""
 "The priest creates a vortex with his attack, that can suck a demonic "
@@ -3051,11 +2696,6 @@ msgstr ""
 "The priest attacks with godly power, easily sending undead creatures back to "
 "their graves."
 
-#: priest_ablt.xml:458 priest_ablt.xml:488 unique_ablt.xml:179
-#, fuzzy
-msgid "power"
-msgstr "Power"
-
 #: priest_ablt.xml:463
 msgid "Bright Blow"
 msgstr "Bright Blow"
@@ -3075,10 +2715,6 @@ msgstr "Hypnosis"
 #: priest_ablt.xml:493
 msgid "The priest confuses a monster, causing it to attack at random."
 msgstr "The priest confuses a monster, causing it to attack at random."
-
-#: priest_ablt.xml:514 priest_ablt.xml:540
-msgid "confused"
-msgstr ""
 
 #: priest_ablt.xml:519
 msgid "Hypnotic Vortex"
@@ -3170,18 +2806,6 @@ msgstr ""
 "The priest can unconsciously create an elemental vortex that will drain one "
 "third of incoming damage from elemental beings."
 
-#: quests.lua:29 quests.lua:126
-msgid "table"
-msgstr ""
-
-#: quests.lua:197
-msgid "playervars["
-msgstr ""
-
-#: quests.lua:219
-msgid "private_vars."
-msgstr ""
-
 #: ring.xml:5
 msgid "bronze ring"
 msgstr "bronze ring"
@@ -3229,20 +2853,6 @@ msgstr "magus robe"
 #: robes.xml:209
 msgid "council robe"
 msgstr "council robe"
-
-#: sarkophagusMaylon.xml:8
-msgid "maylonsReward"
-msgstr ""
-
-#: sarkophagusMaylon.xml:16
-#, fuzzy
-msgid "rock_stf"
-msgstr "rock staff"
-
-#: sarkophagusMaylon.xml:22
-#, fuzzy
-msgid "sabre_sw"
-msgstr "sabre"
 
 #: sarkophagusMaylon.xml:29
 msgid " received an item from Maylons Grave."
@@ -3592,110 +3202,17 @@ msgstr "maptest"
 msgid "sandbox"
 msgstr "sandbox"
 
-#: testregions.xml:86
-#, fuzzy
-msgid "GuardLocation"
-msgstr "Guardcaptain"
-
-#: testregions.xml:108
-msgid "axe_skel_siege"
-msgstr ""
-
-#: testregions.xml:120
-msgid "/"
-msgstr ""
-
-#: testregions.xml:123
-msgid "under85"
-msgstr ""
-
-#: testregions.xml:126
-msgid "under75"
-msgstr ""
-
-#: testregions.xml:129
-msgid "under60"
-msgstr ""
-
-#: testregions.xml:132
-msgid "under50"
-msgstr ""
-
-#: testregions.xml:135
-msgid "under40"
-msgstr ""
-
-#: testregions.xml:138
-msgid "under25"
-msgstr ""
-
-#: testregions.xml:141
-msgid "under15"
-msgstr ""
-
-#: testregions.xml:149
-msgid "ai_ability_rating:asoroth_icicle"
-msgstr ""
-
-#: testregions.xml:156
-msgid "ai_ability_rating:asoroth_ice_obelisk"
-msgstr ""
-
-#: testregions.xml:163
-msgid "ai_ability_rating:asoroth_guided_iceball"
-msgstr ""
-
-#: testregions.xml:170
-msgid "ai_ability_rating:asoroth_ice_attack"
-msgstr ""
-
-#: testregions.xml:178 testregions.xml:192
-msgid "ai_ability_rating:asoroth_frost_wave"
-msgstr ""
-
-#: testregions.xml:185
-msgid "ai_ability_rating:asoroth_meteor"
-msgstr ""
-
 #: testregions.xml:199
 msgid "spawnAbyss"
 msgstr "spawnAbyss"
 
-#: testregions.xml:236
-msgid "switch"
-msgstr ""
-
-#: testregions.xml:331 testregions.xml:341 testregions.xml:351
-#, fuzzy
-msgid "init_benchmark"
+#: testregions.xml:217
+msgid "benchmarkBox"
 msgstr "benchmarkBox"
-
-#: testregions.xml:400 unitfunc.lua:17
-msgid "type"
-msgstr ""
-
-#: testregions.xml:406
-#, fuzzy
-msgid "start_benchmark"
-msgstr "benchmarkBox"
-
-#: testregions.xml:426
-msgid "deleting object "
-msgstr ""
 
 #: testregions.xml:435
 msgid "region0"
 msgstr "region0"
-
-#: testregions.xml:472
-#, fuzzy
-msgid "LichLocation"
-msgstr "echo potion"
-
-#: testregions.xml:482
-#, fuzzy
-msgid "peasant"
-msgstr "Peasant"
 
 #: testregions.xml:611
 msgid "testregion"
@@ -3865,10 +3382,6 @@ msgstr "Army of Darkness"
 #: unique_ablt.xml:185
 msgid "Nar'Asoroth raises a group of skeletons."
 msgstr "Nar'Asoroth raises a group of skeletons."
-
-#: unitfunc.lua:69
-msgid "angle"
-msgstr ""
 
 #: wands.xml:4 wands.xml:35 wands.xml:66
 msgid "spruce wand"
@@ -4056,11 +3569,6 @@ msgstr ""
 msgid "barbarian power"
 msgstr "barbarian power"
 
-#: warrior_ablt.xml:236
-#, fuzzy
-msgid "armor"
-msgstr "Armor"
-
 #: warrior_ablt.xml:264
 msgid "Attacks an enemy with a chance to inflict silence."
 msgstr "Attacks an enemy with a chance to inflict silence."
@@ -4169,14 +3677,114 @@ msgstr "Weaponmaster"
 msgid "Attacks every enemy in weapon range with a triple sweeping strike."
 msgstr "Attacks every enemy in weapon range with a triple sweeping strike."
 
-#~ msgid "Warrior"
-#~ msgstr "Warrior"
-
-#~ msgid "Magician"
-#~ msgstr "Magician"
+#~ msgid "Priest"
+#~ msgstr "Priest"
 
 #~ msgid "Archer"
 #~ msgstr "Archer"
 
-#~ msgid "Priest"
-#~ msgstr "Priest"
+#~ msgid "Magician"
+#~ msgstr "Magician"
+
+#~ msgid "Warrior"
+#~ msgstr "Warrior"
+
+#, fuzzy
+#~ msgid "armor"
+#~ msgstr "Armor"
+
+#, fuzzy
+#~ msgid "peasant"
+#~ msgstr "Peasant"
+
+#, fuzzy
+#~ msgid "LichLocation"
+#~ msgstr "echo potion"
+
+#, fuzzy
+#~ msgid "start_benchmark"
+#~ msgstr "benchmarkBox"
+
+#, fuzzy
+#~ msgid "init_benchmark"
+#~ msgstr "benchmarkBox"
+
+#, fuzzy
+#~ msgid "GuardLocation"
+#~ msgstr "Guardcaptain"
+
+#, fuzzy
+#~ msgid "sabre_sw"
+#~ msgstr "sabre"
+
+#, fuzzy
+#~ msgid "rock_stf"
+#~ msgstr "rock staff"
+
+#, fuzzy
+#~ msgid "power"
+#~ msgstr "Power"
+
+#, fuzzy
+#~ msgid "willpower"
+#~ msgstr "Willpower"
+
+#, fuzzy
+#~ msgid "blind"
+#~ msgstr "goblin dog"
+
+#, fuzzy
+#~ msgid "poisoned"
+#~ msgstr "summoned"
+
+#, fuzzy
+#~ msgid "fraction"
+#~ msgstr "no action"
+
+#, fuzzy
+#~ msgid "slave_overseer"
+#~ msgstr "Overseer"
+
+#, fuzzy
+#~ msgid "necromancer_siegeDefense"
+#~ msgstr "necromancer staff"
+
+#, fuzzy
+#~ msgid "catapult_skeleton"
+#~ msgstr "Creates a skeleton."
+
+#, fuzzy
+#~ msgid "location"
+#~ msgstr "no action"
+
+#, fuzzy
+#~ msgid "string"
+#~ msgstr "Frost ring"
+
+#, fuzzy
+#~ msgid "lockdown"
+#~ msgstr "Block"
+
+#, fuzzy
+#~ msgid "gold"
+#~ msgstr "gold ring"
+
+#, fuzzy
+#~ msgid "position"
+#~ msgstr "Ionisation"
+
+#, fuzzy
+#~ msgid "red"
+#~ msgstr "Derred"
+
+#, fuzzy
+#~ msgid "block"
+#~ msgstr "Block"
+
+#, fuzzy
+#~ msgid "goblins_l13_2"
+#~ msgstr "goblin slayer"
+
+#, fuzzy
+#~ msgid "locSergeant"
+#~ msgstr "Sergeant Wober"

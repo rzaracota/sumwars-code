@@ -117,33 +117,12 @@ msgstr "Schon unterwegs."
 msgid "aisNorthMeadow"
 msgstr "Nördliche Wiese"
 
-#: besieged_farm.xml:48
-msgid "peasant_f"
-msgstr ""
-
-#: besieged_farm.xml:50
-msgid "ignored_by_ai"
-msgstr ""
-
-#: besieged_farm.xml:53
-msgid "farm_goblins_shaman"
-msgstr ""
-
-#: besieged_farm.xml:57
-#, fuzzy
-msgid "bronsFarmDoor"
-msgstr "Brons Farm"
-
 #: besieged_farm.xml:88
 msgid ""
 "That should have been enough goblins. I better look after Bron's family."
 msgstr ""
 "Das sollten genug Goblins gewesen sein. Ich sehe besser mal nach Brons "
 "Familie."
-
-#: besieged_farm.xml:107
-msgid "PL"
-msgstr ""
 
 #: besieged_farm.xml:111
 msgid "The goblins are gone. Are you alright?"
@@ -221,3 +200,7 @@ msgstr "Hier habt ihr das Geld."
 #~ msgstr ""
 #~ "Also ehrlich, \"..name..\", dachtest du, sie würde in der heutigen Zeit "
 #~ "eine Brieftaube benutzen?"
+
+#, fuzzy
+#~ msgid "bronsFarmDoor"
+#~ msgstr "Brons Farm"

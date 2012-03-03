@@ -57,22 +57,6 @@ msgstr ""
 msgid "aisDarkClearing"
 msgstr "La tetra radura"
 
-#: goblin_raid.xml:14
-#, fuzzy
-msgid "goblin_regresh"
-msgstr "L'assalto dei Goblin"
-
-#: goblin_raid.xml:16
-#, fuzzy
-msgid "goblin_apprtc"
-msgstr "L'assalto dei Goblin"
-
-#: goblin_raid.xml:28
-msgid ""
-"You found a leather skin containing what seems like the plans of a raid on a "
-"nearby village."
-msgstr ""
-
 #: goblin_raid.xml:35
 msgid "Sergeant Lutterer"
 msgstr "Sergente Lutterer"
@@ -99,10 +83,6 @@ msgstr ""
 #: goblin_raid.xml:46
 msgid "Meant it. Whatever."
 msgstr "fossero ormai."
-
-#: goblin_raid.xml:49 goblin_raid.xml:64
-msgid "collect_reward_raid"
-msgstr ""
 
 #: goblin_raid.xml:62
 msgid "Hey, sergeant, ready to pay for the pre-emptive rescue of the village?"
@@ -150,10 +130,6 @@ msgstr "No"
 msgid "Then I better get back to saving helpless peasants, no?"
 msgstr "Allora è meglio che io vada a salvare un po' di paesani inermi no?"
 
-#: goblin_raid.xml:95
-msgid "player"
-msgstr ""
-
 #: goblin_raid.xml:101
 msgid "Fine, I'll wipe out those goblins for you."
 msgstr "Molto bene, spazzerò via quei goblin per voi."
@@ -173,3 +149,11 @@ msgstr "Come ti pare. Non è che mi servano i soldi."
 #: goblin_raid.xml:110
 msgid "And I could care less what happens to some peasant family."
 msgstr "E di una famiglia di contadini non potrebbe importarmi di meno."
+
+#, fuzzy
+#~ msgid "goblin_apprtc"
+#~ msgstr "L'assalto dei Goblin"
+
+#, fuzzy
+#~ msgid "goblin_regresh"
+#~ msgstr "L'assalto dei Goblin"

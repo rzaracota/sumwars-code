@@ -40,11 +40,7 @@ msgstr ""
 msgid "joringsbridge"
 msgstr ""
 
-#: greenOrchid.xml:20
-msgid "peasant_f2"
-msgstr ""
-
-#: greenOrchid.xml:25 greenOrchid.xml:36 greenOrchid.xml:43 greenOrchid.xml:46
+#: greenOrchid.xml:25
 msgid "Reba"
 msgstr ""
 
@@ -182,10 +178,6 @@ msgstr ""
 msgid "dwarfenwall"
 msgstr ""
 
-#: greenOrchid.xml:110
-msgid "peasant2"
-msgstr ""
-
 #: greenOrchid.xml:115
 msgid "Eric"
 msgstr ""
@@ -256,10 +248,6 @@ msgstr ""
 
 #: greenOrchid.xml:147
 msgid "copperRock"
-msgstr ""
-
-#: greenOrchid.xml:151
-msgid "mentor"
 msgstr ""
 
 #: greenOrchid.xml:156

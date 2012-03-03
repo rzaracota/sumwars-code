@@ -45,8 +45,7 @@ msgstr ""
 msgid "Forget it, herb woman."
 msgstr ""
 
-#: herbalist.xml:24 herbalist.xml:64 herbalist.xml:74 herbalist.xml:91
-#: herbalist.xml:100
+#: herbalist.xml:74
 msgid "Gertlinde Kampfer"
 msgstr ""
 
@@ -190,30 +189,6 @@ msgstr ""
 msgid "aisNorthMeadow"
 msgstr ""
 
-#: herbalist.xml:45
-msgid "areaHerbQuest"
-msgstr ""
-
-#: herbalist.xml:190
-msgid "heal_1"
-msgstr ""
-
-#: herbalist.xml:192
-msgid "heal_2"
-msgstr ""
-
-#: herbalist.xml:185
-msgid "herbalist_reward"
-msgstr ""
-
 #: herbalist.xml:15 herbalist.xml:197
 msgid "joringsbridge"
-msgstr ""
-
-#: herbalist.xml:19 herbalist.xml:21
-msgid "peasant_f"
-msgstr ""
-
-#: herbalist.xml:40
-msgid "player"
 msgstr ""

@@ -47,11 +47,6 @@ msgstr ""
 msgid "greyCurseCave"
 msgstr "Verfluchte Höhle"
 
-#: scout.xml:17
-#, fuzzy
-msgid "questScout"
-msgstr "Verletzter Späher"
-
 #: scout.xml:23
 msgid "Wounded Scout"
 msgstr "Verletzter Späher"
@@ -282,12 +277,12 @@ msgstr ""
 msgid "greyWolfcave"
 msgstr "Wolfshöhle"
 
-#: scout.xml:124
-msgid "psychoticSpider"
-msgstr ""
-
 #~ msgid ""
 #~ "After killing the spider you safely pick up a backpack in good shape."
 #~ msgstr ""
 #~ "Nachdem die Riesenspinne tot ist findest du einen Rucksack in gutem "
 #~ "Zustand."
+
+#, fuzzy
+#~ msgid "questScout"
+#~ msgstr "Verletzter Späher"

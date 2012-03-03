@@ -167,9 +167,7 @@ msgstr ""
 msgid "Continue to be snotty?"
 msgstr ""
 
-#: fortify_dwarfenwall.xml:31 fortify_dwarfenwall.xml:39
-#: fortify_dwarfenwall.xml:46 fortify_dwarfenwall.xml:222
-#: fortify_dwarfenwall.xml:225 fortify_dwarfenwall.xml:314
+#: fortify_dwarfenwall.xml:39
 msgid "Derred"
 msgstr ""
 
@@ -471,10 +469,6 @@ msgstr ""
 msgid "Only if we want to. Our blood works wonders on blessed items."
 msgstr ""
 
-#: fortify_dwarfenwall.xml:673 fortify_dwarfenwall.xml:689
-msgid "PL"
-msgstr ""
-
 #: fortify_dwarfenwall.xml:416
 msgid "Pathetic fool!"
 msgstr ""
@@ -485,10 +479,6 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:413
 msgid "Peace!"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:532
-msgid "Player"
 msgstr ""
 
 #: fortify_dwarfenwall.xml:11
@@ -543,16 +533,8 @@ msgstr ""
 msgid "So, what are you thinking about this matter?"
 msgstr ""
 
-#: fortify_dwarfenwall.xml:324 fortify_dwarfenwall.xml:744
-msgid "Soren"
-msgstr ""
-
 #: fortify_dwarfenwall.xml:451 fortify_dwarfenwall.xml:803
 msgid "Soren Windclaw"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:521
-msgid "SorenWindclawArea"
 msgstr ""
 
 #: fortify_dwarfenwall.xml:40 fortify_dwarfenwall.xml:52
@@ -680,10 +662,7 @@ msgstr ""
 msgid "Those ritual objects have seen better times, too."
 msgstr ""
 
-#: fortify_dwarfenwall.xml:26 fortify_dwarfenwall.xml:51
-#: fortify_dwarfenwall.xml:58 fortify_dwarfenwall.xml:173
-#: fortify_dwarfenwall.xml:230 fortify_dwarfenwall.xml:329
-#: fortify_dwarfenwall.xml:529
+#: fortify_dwarfenwall.xml:51
 msgid "Tolec"
 msgstr ""
 
@@ -875,145 +854,15 @@ msgstr ""
 msgid "Your people would be quite surprised were I came from."
 msgstr ""
 
-#: fortify_dwarfenwall.xml:20
-msgid "angle"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:176
-msgid "any"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:772
-msgid "any_hope"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:285
-msgid "areaGuardAway"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:513 fortify_dwarfenwall.xml:514
-msgid "blockFireWall"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:120
-msgid "continueNagging"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:29
-msgid "derred"
-msgstr ""
-
 #: fortify_dwarfenwall.xml:14 fortify_dwarfenwall.xml:63
-#: fortify_dwarfenwall.xml:211 fortify_dwarfenwall.xml:504
+#: fortify_dwarfenwall.xml:504
 msgid "elCnlLobby"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:594 fortify_dwarfenwall.xml:597
-msgid "elemental_end"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:551
-msgid "fireCage"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:508
-msgid "fireElemS"
 msgstr ""
 
 #: fortify_dwarfenwall.xml:429
 msgid "for who's chestnuts I pulled out of the fire."
 msgstr ""
 
-#: fortify_dwarfenwall.xml:492
-msgid "fortify_dwall_startpay"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:191
-msgid "guard_scene1_walk4"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:547
-msgid "health"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:105 fortify_dwarfenwall.xml:614
-msgid "leader"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:134
-msgid "leaderIntervene"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:317
-msgid "locCamera"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:202 fortify_dwarfenwall.xml:307
-msgid "locParty"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:257
-msgid "locSorenWindclaw"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:279
-msgid "locked"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:108
-msgid "magopt"
-msgstr ""
-
 #: fortify_dwarfenwall.xml:648
 msgid "medBackalley"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:75
-msgid "players_scene1_walk1"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:70 fortify_dwarfenwall.xml:242
-#: fortify_dwarfenwall.xml:550
-msgid "position"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:555 fortify_dwarfenwall.xml:567
-msgid "remove_fire_walls"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:295
-msgid "set(fortify_dwall_tmp.soren,'angle',0)"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:297
-msgid "set(fortify_dwall_tmp.soren,'angle',90)"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:18
-msgid "soren"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:664
-msgid "sorenCrystal"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:587
-msgid "state"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:24
-msgid "tolec"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:542
-msgid "type"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:83 fortify_dwarfenwall.xml:198
-#: fortify_dwarfenwall.xml:273 fortify_dwarfenwall.xml:275
-msgid "walk"
-msgstr ""
-
-#: fortify_dwarfenwall.xml:110
-msgid "waropt"
 msgstr ""

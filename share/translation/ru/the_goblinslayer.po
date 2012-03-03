@@ -28,7 +28,7 @@ msgstr "Задание завершено"
 msgid "you killed enough goblins"
 msgstr "ты убил достаточно гоблинов"
 
-#: goblins.xml:18 goblins.xml:30
+#: goblins.xml:18
 msgid "peasant"
 msgstr "крестьянин"
 
@@ -95,10 +95,6 @@ msgstr "Почти."
 #: goblins.xml:61
 msgid "Have fun then."
 msgstr "Тогда удачно позабавиться."
-
-#: goblins.xml:76
-msgid "attribute_points"
-msgstr ""
 
 #: goblins.xml:90
 msgid "region1"

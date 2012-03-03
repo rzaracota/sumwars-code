@@ -1,7 +1,8 @@
 # German translations for sumwars package
 # Copyright (C) 2009
 # This file is distributed under the same license as the sumwars package.
-# kalimgard <kalimgard@users.sourceforge.net>, 2010., 2011.
+# kalimgard <kalimgard@users.sourceforge.net>, 2010.
+, 2011.
 # 
 msgid ""
 msgstr ""
@@ -442,7 +443,7 @@ msgstr "Es ist eure Entscheidung"
 
 #: tutorial.xml:379 tutorial.xml:1316 tutorial.xml:1626
 msgid "elCnlLowerCaves"
-msgstr ""
+msgstr "Höhle unter dem Konzil"
 
 #: tutorial.xml:400 tutorial.xml:452
 msgid "Surrender weapons"

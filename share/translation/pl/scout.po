@@ -39,10 +39,6 @@ msgstr ""
 msgid "greyCurseCave"
 msgstr ""
 
-#: scout.xml:17
-msgid "questScout"
-msgstr ""
-
 #: scout.xml:23
 msgid "Wounded Scout"
 msgstr ""
@@ -245,8 +241,4 @@ msgstr ""
 
 #: scout.xml:118
 msgid "greyWolfcave"
-msgstr ""
-
-#: scout.xml:124
-msgid "psychoticSpider"
 msgstr ""

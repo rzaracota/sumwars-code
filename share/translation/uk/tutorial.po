@@ -52,103 +52,10 @@ msgid "Quest description"
 msgstr "Опис квесту"
 
 #: tutorial.xml:28 tutorial.xml:463 tutorial.xml:952 tutorial.xml:1079
-#: tutorial.xml:1153 tutorial.xml:1543 tutorial.xml:1555 tutorial.xml:1687
-#: tutorial.xml:1709 tutorial.xml:1886 tutorial.xml:2136
+#: tutorial.xml:1153 tutorial.xml:1543 tutorial.xml:1709 tutorial.xml:1886
+#: tutorial.xml:2136
 msgid "elCnlLobby"
 msgstr "Рада Елементів, підземелля"
-
-#: tutorial.xml:45 tutorial.xml:1333
-#, fuzzy
-msgid "tolec"
-msgstr "Толік"
-
-#: tutorial.xml:47 tutorial.xml:451 tutorial.xml:867 tutorial.xml:873
-#: tutorial.xml:1026 tutorial.xml:1035 tutorial.xml:1140 tutorial.xml:1334
-#: tutorial.xml:1727 tutorial.xml:1732 tutorial.xml:1870 tutorial.xml:1922
-#: tutorial.xml:1927 tutorial.xml:2076
-msgid "Tolec"
-msgstr "Толік"
-
-#: tutorial.xml:49 tutorial.xml:1336
-#, fuzzy
-msgid "derred"
-msgstr "Дерред"
-
-#: tutorial.xml:51 tutorial.xml:218 tutorial.xml:399 tutorial.xml:407
-#: tutorial.xml:427 tutorial.xml:739 tutorial.xml:841 tutorial.xml:880
-#: tutorial.xml:998 tutorial.xml:1102 tutorial.xml:1111 tutorial.xml:1147
-#: tutorial.xml:1229 tutorial.xml:1337 tutorial.xml:1341 tutorial.xml:1730
-#: tutorial.xml:1797 tutorial.xml:1806 tutorial.xml:1862 tutorial.xml:1878
-#: tutorial.xml:2079
-msgid "Derred"
-msgstr "Дерред"
-
-#: tutorial.xml:56 tutorial.xml:1039
-msgid "earthquake"
-msgstr ""
-
-#: tutorial.xml:59
-msgid "escapeCaves"
-msgstr ""
-
-#: tutorial.xml:62
-#, fuzzy
-msgid "findSecretDoor"
-msgstr "Відкрити секретні двері"
-
-#: tutorial.xml:65
-msgid "killlouses"
-msgstr ""
-
-#: tutorial.xml:71
-#, fuzzy
-msgid "tutorialSlugs"
-msgstr "Навчання"
-
-#: tutorial.xml:73 tutorial.xml:992
-msgid "locSlugs"
-msgstr ""
-
-#: tutorial.xml:94 tutorial.xml:98
-msgid "council_guard"
-msgstr ""
-
-#: tutorial.xml:96 tutorial.xml:100 tutorial.xml:1084 tutorial.xml:1091
-#: tutorial.xml:1254 tutorial.xml:1261
-msgid "locBehemoth"
-msgstr ""
-
-#: tutorial.xml:120 tutorial.xml:704 tutorial.xml:1984
-msgid "doorBehemothNorth"
-msgstr ""
-
-#: tutorial.xml:121 tutorial.xml:696
-msgid "doorBehemothWest"
-msgstr ""
-
-#: tutorial.xml:154
-msgid "ignored_by_ai"
-msgstr ""
-
-#: tutorial.xml:158
-msgid "doorSouth"
-msgstr ""
-
-#: tutorial.xml:173 tutorial.xml:174 tutorial.xml:175
-msgid "slave_miner"
-msgstr ""
-
-#: tutorial.xml:178 tutorial.xml:603
-msgid "tutorialBehemoth"
-msgstr ""
-
-#: tutorial.xml:213
-msgid "locEntryPlayer"
-msgstr ""
-
-#: tutorial.xml:226 tutorial.xml:750 tutorial.xml:947 tutorial.xml:1006
-msgid "position"
-msgstr ""
 
 #: tutorial.xml:229
 msgid "*urgh*"
@@ -299,10 +206,6 @@ msgstr "Не опускай голову, сину мій. Не поспішай
 msgid "It may well be your last."
 msgstr "Цілком можливо, останню."
 
-#: tutorial.xml:325 tutorial.xml:744
-msgid "PL"
-msgstr ""
-
 #: tutorial.xml:325
 msgid "Spill it! Where are we, and who has the nerve to cross Branded Ones?!"
 msgstr "Коліться. Де ми і хто мав нахабство перейти дорогу Відміченому?!"
@@ -430,6 +333,10 @@ msgstr "вибір за вами."
 msgid "elCnlLowerCaves"
 msgstr ""
 
+#: tutorial.xml:399 tutorial.xml:841 tutorial.xml:1111 tutorial.xml:1806
+msgid "Derred"
+msgstr "Дерред"
+
 #: tutorial.xml:400 tutorial.xml:452
 msgid "Surrender weapons"
 msgstr "Здати зброю"
@@ -486,34 +393,14 @@ msgid "Just tell us by clicking on one of us, when you change your minds."
 msgstr ""
 "Просто скажіть нам, натиснувши на одного з нас, коли ви зміните свою думку."
 
-#: tutorial.xml:471
-msgid "weapon"
-msgstr ""
-
-#: tutorial.xml:474
-msgid "tutorial_gave_weapon"
-msgstr ""
-
-#: tutorial.xml:487
-msgid "entryPlayerArea"
-msgstr ""
+#: tutorial.xml:451 tutorial.xml:873 tutorial.xml:1035 tutorial.xml:1140
+#: tutorial.xml:1870
+msgid "Tolec"
+msgstr "Толік"
 
 #: tutorial.xml:494
 msgid "Follow me, please."
 msgstr "Прошу за мною."
-
-#: tutorial.xml:500
-msgid "doorPrison"
-msgstr ""
-
-#: tutorial.xml:502 tutorial.xml:525 tutorial.xml:544 tutorial.xml:561
-#: tutorial.xml:564 tutorial.xml:592 tutorial.xml:628 tutorial.xml:677
-#: tutorial.xml:713 tutorial.xml:968 tutorial.xml:969 tutorial.xml:970
-#: tutorial.xml:1172 tutorial.xml:1190 tutorial.xml:1250 tutorial.xml:1493
-#: tutorial.xml:1769 tutorial.xml:1893 tutorial.xml:1895 tutorial.xml:2010
-#: tutorial.xml:2034 tutorial.xml:2112 tutorial.xml:2116
-msgid "walk"
-msgstr ""
 
 #: tutorial.xml:536
 msgid ""
@@ -524,34 +411,6 @@ msgstr ""
 "Що вам заважає? Ви настільки привикли до транспорту що вже й забули як "
 "ходити? Просто клацніть лівою кнопкою миші на місце на землі. Тоді все саме "
 "до вас повернеться."
-
-#: tutorial.xml:590 tutorial.xml:734
-msgid "locWay2"
-msgstr ""
-
-#: tutorial.xml:594
-msgid "slave_scaffolding"
-msgstr ""
-
-#: tutorial.xml:596
-msgid "angle"
-msgstr ""
-
-#: tutorial.xml:598
-msgid "locWorker"
-msgstr ""
-
-#: tutorial.xml:600
-msgid "slave_worker"
-msgstr ""
-
-#: tutorial.xml:606 tutorial.xml:614 tutorial.xml:638
-msgid "locBehemothStart"
-msgstr ""
-
-#: tutorial.xml:617 tutorial.xml:642
-msgid "shake"
-msgstr ""
 
 #: tutorial.xml:645
 msgid "Akeran!"
@@ -585,18 +444,6 @@ msgstr "Будь ласка!"
 msgid "Noo!"
 msgstr "Ніі!"
 
-#: tutorial.xml:655
-msgid "destroy_bprison"
-msgstr ""
-
-#: tutorial.xml:663
-msgid "fireCage"
-msgstr ""
-
-#: tutorial.xml:687
-msgid "closeBehemothDoor1"
-msgstr ""
-
 #: tutorial.xml:695
 msgid "Oh Akeran! Close the gates!"
 msgstr "О Акеран! Закрийте ворота!"
@@ -604,10 +451,6 @@ msgstr "О Акеран! Закрийте ворота!"
 #: tutorial.xml:714
 msgid "Akeran's Shield! That THING is free! Back everyone! Go, go, go!"
 msgstr "Щит Акерана! ШТУКА звільнилась! Назад всі! Рухом, рухом!"
-
-#: tutorial.xml:732
-msgid "locBehemothView"
-msgstr ""
 
 #: tutorial.xml:752
 msgid "We can't pass there. What do we do now?"
@@ -650,10 +493,6 @@ msgstr ""
 #: tutorial.xml:762
 msgid "Measures?"
 msgstr "Міри?"
-
-#: tutorial.xml:762 tutorial.xml:801
-msgid "waropt"
-msgstr ""
 
 #: tutorial.xml:763
 msgid "Well, we don't understand much, but it seems you don't die like us."
@@ -814,11 +653,6 @@ msgstr "Нам казали, що перші хвилини такі, ніби �
 msgid "Explain inventory?"
 msgstr "Пояснити інвентар?"
 
-#: tutorial.xml:830 tutorial.xml:832
-#, fuzzy
-msgid "tutorial_weapon"
-msgstr "Навчання"
-
 #: tutorial.xml:842 tutorial.xml:874
 msgid "Explain inventory"
 msgstr "Поясни інвентар"
@@ -862,10 +696,6 @@ msgstr "Дайте нам знати, коли ви будете готові."
 #: tutorial.xml:861 tutorial.xml:885
 msgid "Attack slugs"
 msgstr "Атакувати слимаків"
-
-#: tutorial.xml:898 tutorial.xml:2127
-msgid "tutorial_complete"
-msgstr ""
 
 #: tutorial.xml:908
 msgid "You should equip your weapon first."
@@ -930,18 +760,6 @@ msgstr ""
 msgid "Forget it! I'm not going in while those beasts are on the loose."
 msgstr "Забудь про це! Я не піду поки ті звірі на волі."
 
-#: tutorial.xml:945 tutorial.xml:955
-msgid "slugFarmBackdoor"
-msgstr ""
-
-#: tutorial.xml:994
-msgid "locSlugView"
-msgstr ""
-
-#: tutorial.xml:1003 tutorial.xml:2155
-msgid "leader"
-msgstr ""
-
 #: tutorial.xml:1008
 msgid "Yuck! Those things are really disgusting."
 msgstr "Тьху! Ці істоти дійсно огидні."
@@ -989,10 +807,6 @@ msgstr ""
 #: tutorial.xml:1036
 msgid "Explain level up"
 msgstr "Поясни зміну рівня"
-
-#: tutorial.xml:1043
-msgid "priopt"
-msgstr ""
 
 #: tutorial.xml:1047
 msgid ""
@@ -1074,15 +888,6 @@ msgstr "Маги надзвичайно дивні... Кожен з них."
 msgid "Better strange than..."
 msgstr "Краще дивний ніж..."
 
-#: tutorial.xml:1068
-#, fuzzy
-msgid "explain_levelup_continue"
-msgstr "Поясни зміну рівня"
-
-#: tutorial.xml:1093
-msgid "tutorial_behemoth_fire_storm"
-msgstr ""
-
 #: tutorial.xml:1104
 msgid "That blasted thing! I hope the walls hold out."
 msgstr "Проклята штука. Сподіваюся, що стіни витримають."
@@ -1095,33 +900,9 @@ msgstr "Швидко вкладай нові очки і давай забира
 msgid "Open hatch"
 msgstr "Відкривай люк"
 
-#: tutorial.xml:1122
-msgid "attribute_points"
-msgstr ""
-
 #: tutorial.xml:1129
 msgid "Please distribute your attribute points first."
 msgstr "Будь ласка, спочатку використай твої очки атрибутів."
-
-#: tutorial.xml:1161
-msgid "tutorialMutantSlugs"
-msgstr ""
-
-#: tutorial.xml:1164
-msgid "door_toggle('slugFarmFoodDoor')"
-msgstr ""
-
-#: tutorial.xml:1175
-msgid "slugs2_scene_intro"
-msgstr ""
-
-#: tutorial.xml:1210 tutorial.xml:1767
-msgid "locBackroute3"
-msgstr ""
-
-#: tutorial.xml:1215
-msgid "slugEscape"
-msgstr ""
 
 #: tutorial.xml:1231
 msgid "More of those beasts?"
@@ -1166,19 +947,6 @@ msgstr "Вже все добре!"
 #: tutorial.xml:1268
 msgid "Just great!"
 msgstr "Просто чудово!"
-
-#: tutorial.xml:1275 tutorial.xml:1276 tutorial.xml:1277 tutorial.xml:1278
-#: tutorial.xml:1279
-msgid "smokeEmitter"
-msgstr ""
-
-#: tutorial.xml:1287
-msgid "breakDownCleanup"
-msgstr ""
-
-#: tutorial.xml:1298
-msgid "slugHole"
-msgstr ""
 
 #: tutorial.xml:1346
 msgid "Damn this place!"
@@ -1250,14 +1018,6 @@ msgstr ""
 msgid "They better have some serious coin for all this trouble."
 msgstr "Було б добре якщо вони компенсують всі ці неприємності золотом."
 
-#: tutorial.xml:1409
-msgid "construction:locParty"
-msgstr ""
-
-#: tutorial.xml:1414
-msgid "slave"
-msgstr ""
-
 #: tutorial.xml:1416
 msgid "Move it you lazy maggots! This place is not building itself."
 msgstr "Рухайтесь ви, ліниві хробаки! Це місце не збудується саме по собі."
@@ -1265,10 +1025,6 @@ msgstr "Рухайтесь ви, ліниві хробаки! Це місце н
 #: tutorial.xml:1425
 msgid "Finally you guards return..."
 msgstr "Нарешті ви повернулись..."
-
-#: tutorial.xml:1425
-msgid "overseer"
-msgstr ""
 
 #: tutorial.xml:1426
 msgid "Wait, who are you?"
@@ -1430,10 +1186,6 @@ msgstr ""
 "Давайте просто знайдемо кристал. Я впевнений, що ми отримаємо благословення "
 "Акерана."
 
-#: tutorial.xml:1511 tutorial.xml:1527
-msgid "labCon:areaSewerLabConnection"
-msgstr ""
-
 #: tutorial.xml:1516
 msgid "This looks like it could be a way up."
 msgstr "Це схоже на шлях нагору."
@@ -1512,14 +1264,6 @@ msgid ""
 "more."
 msgstr "Хм... він застряг. Доведеться трохи повозитися з цією установкою."
 
-#: tutorial.xml:1635
-msgid "addCog"
-msgstr ""
-
-#: tutorial.xml:1644
-msgid "rotateCogs"
-msgstr ""
-
 #: tutorial.xml:1648
 msgid "I am still missing a cog."
 msgstr ""
@@ -1544,10 +1288,6 @@ msgstr "І все, що потрібно, щоб вийти звідси, це �
 #: tutorial.xml:1671
 msgid "Again."
 msgstr "Знову."
-
-#: tutorial.xml:1719
-msgid "locDerredAfterCave"
-msgstr ""
 
 #: tutorial.xml:1730
 msgid "And then she says..."
@@ -1668,18 +1408,9 @@ msgstr ""
 "Подивіться на картинку в рядку стану, щоб дізнатися, чи уміння готове до "
 "використання."
 
-#: tutorial.xml:1820
-#, fuzzy
-msgid "explain_skills_no"
-msgstr "Поясніть навички"
-
 #: tutorial.xml:1829
 msgid "Don't worry, I'm almost feeling fit again."
 msgstr "Не хвилюйтеся, я вже почуваюсь майже здоровим."
-
-#: tutorial.xml:1829
-msgid "arcopt"
-msgstr ""
 
 #: tutorial.xml:1831
 msgid "Don't worry, we're almost feeling fit again."
@@ -1745,18 +1476,6 @@ msgstr "І надійся, що пастки немає."
 msgid "I hope nothing explodes."
 msgstr "Сподіваюсь нічого не вибухне."
 
-#: tutorial.xml:1889
-msgid "doorSecretLibrary"
-msgstr ""
-
-#: tutorial.xml:1915
-msgid "locBackroute5"
-msgstr ""
-
-#: tutorial.xml:1917
-msgid "locPartyLib"
-msgstr ""
-
 #: tutorial.xml:1927
 msgid "Good, Firewhirl is not here."
 msgstr "Добре,  Вогняного Вихора тут немає."
@@ -1801,45 +1520,9 @@ msgstr ""
 "З усіма цими клятими звірями, що тут вільно бродять, я починаю думати, що ми "
 "їм потрібні в якості винищувачів."
 
-#: tutorial.xml:1962
-msgid "addUnitCommand(tutorial_tmp.tolec,\"walk\",\"locBackroute6\",1);"
-msgstr ""
-
-#: tutorial.xml:1972
-msgid "attack"
-msgstr ""
-
-#: tutorial.xml:2002
-msgid "slaves_flee"
-msgstr ""
-
-#: tutorial.xml:2015
-msgid "addCameraPosition(500,\"locDoorGuardNorth\" , 45,45, 25);"
-msgstr ""
-
-#: tutorial.xml:2022
-msgid "fleeingSlaves"
-msgstr ""
-
-#: tutorial.xml:2033
-msgid "fireLouse"
-msgstr ""
-
-#: tutorial.xml:2038
-msgid "addCameraPosition(1000,\"locBackroute5\" , -90,70, 20)"
-msgstr ""
-
 #: tutorial.xml:2046
 msgid "Oops"
 msgstr "Ой"
-
-#: tutorial.xml:2059 tutorial.xml:2109
-msgid "doorLibrary"
-msgstr ""
-
-#: tutorial.xml:2062
-msgid "louse_dialog"
-msgstr ""
 
 #: tutorial.xml:2079
 msgid "What a day. Did you know that thing could spit little monsters?"
@@ -1902,10 +1585,6 @@ msgstr "Поерестань нести стихійну беліберду і �
 msgid "We truly are the exterminators here."
 msgstr "Ми дійсно винищувачі тут."
 
-#: tutorial.xml:2114
-msgid "doorScene1"
-msgstr ""
-
 #: tutorial.xml:2159
 msgid "Wow! They really believe in orderly and thorough research."
 msgstr "Нічого собі. Вони дійсно вірять в упорядковані і ретельні дослідження."
@@ -1938,17 +1617,33 @@ msgstr ""
 "Якби вони не викинули всі ті непотрібні балюстради в пустоту, не треба було "
 "б витирати стимаків з підлоги."
 
-#: tutorial.xml:2191
-msgid "tutorial_fire_ball"
-msgstr ""
-
-#: tutorial.xml:2192
-msgid "health"
-msgstr ""
-
-#: tutorial.xml:2194
-msgid "tutorial_fire_wall"
-msgstr ""
-
 #~ msgid "Explain level up?"
 #~ msgstr "Пояснити зміну рівня?"
+
+#, fuzzy
+#~ msgid "explain_skills_no"
+#~ msgstr "Поясніть навички"
+
+#, fuzzy
+#~ msgid "explain_levelup_continue"
+#~ msgstr "Поясни зміну рівня"
+
+#, fuzzy
+#~ msgid "tutorial_weapon"
+#~ msgstr "Навчання"
+
+#, fuzzy
+#~ msgid "tutorialSlugs"
+#~ msgstr "Навчання"
+
+#, fuzzy
+#~ msgid "findSecretDoor"
+#~ msgstr "Відкрити секретні двері"
+
+#, fuzzy
+#~ msgid "derred"
+#~ msgstr "Дерред"
+
+#, fuzzy
+#~ msgid "tolec"
+#~ msgstr "Толік"

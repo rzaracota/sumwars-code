@@ -19,8 +19,7 @@ msgstr ""
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-Country: UKRAINE\n"
 
-#: theTrader.xml:2 theTrader.xml:68 theTrader.xml:124 theTrader.xml:262
-#: theTrader.xml:300
+#: theTrader.xml:2 theTrader.xml:124 theTrader.xml:262 theTrader.xml:300
 msgid "The Trader"
 msgstr "Торговець"
 
@@ -36,19 +35,9 @@ msgstr "Дивний торговць запропонував мені прод
 msgid "elCnlLobby"
 msgstr "Рада Елементів, підземелля"
 
-#: theTrader.xml:22 theTrader.xml:53 theTrader.xml:237
+#: theTrader.xml:22 theTrader.xml:237
 msgid "medMercCamp"
 msgstr "Табір найманців Медайру"
-
-#: theTrader.xml:26 theTrader.xml:30 theTrader.xml:74 theTrader.xml:145
-#: theTrader.xml:256 theTrader.xml:282 theTrader.xml:294
-#, fuzzy
-msgid "theTrader"
-msgstr "Торговець"
-
-#: theTrader.xml:28 theTrader.xml:32
-msgid "angle"
-msgstr ""
 
 #: theTrader.xml:71
 msgid "A moment, dear madam."
@@ -438,10 +427,6 @@ msgstr "О! Це так просто?"
 msgid "Oddball."
 msgstr "Дивак."
 
-#: theTrader.xml:223
-msgid "arcopt"
-msgstr ""
-
 #: theTrader.xml:253
 msgid "joringsbridge"
 msgstr "джорінгсбрідж"
@@ -485,3 +470,7 @@ msgstr "Ні, спасибі вам. Чи можу я знов запропон�
 #: theTrader.xml:309
 msgid "Surely. Now that I finally have a sound anchor again."
 msgstr "Звичайно. Тепер, коли я, нарешті, знову маю звуковий якір."
+
+#, fuzzy
+#~ msgid "theTrader"
+#~ msgstr "Торговець"

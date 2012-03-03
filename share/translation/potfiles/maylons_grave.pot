@@ -39,16 +39,12 @@ msgid ""
 "you like."
 msgstr ""
 
-#: maylons_grave.xml:156 maylons_grave.xml:167
+#: maylons_grave.xml:167
 msgid "Gab Resh"
 msgstr ""
 
 #: maylons_grave.xml:172
 msgid "Gab'Resh and his only harmless rustlers. No bandits."
-msgstr ""
-
-#: maylons_grave.xml:154 maylons_grave.xml:158
-msgid "GabResh"
 msgstr ""
 
 #: maylons_grave.xml:250
@@ -208,14 +204,6 @@ msgstr ""
 msgid "You listen, yes?"
 msgstr ""
 
-#: maylons_grave.xml:70
-msgid "addCameraPosition(4000,\"cryptGoblins\",-90,10,25)"
-msgstr ""
-
-#: maylons_grave.xml:67 maylons_grave.xml:68 maylons_grave.xml:86
-msgid "addUnitCommand("
-msgstr ""
-
 #: maylons_grave.xml:16 maylons_grave.xml:264
 msgid "aisMaylonsGraveEntry"
 msgstr ""
@@ -226,108 +214,4 @@ msgstr ""
 
 #: maylons_grave.xml:328
 msgid "aisMaylonsGraveL2"
-msgstr ""
-
-#: maylons_grave.xml:47 maylons_grave.xml:48
-msgid "areaCryptQuest"
-msgstr ""
-
-#: maylons_grave.xml:401
-msgid "areaGathering"
-msgstr ""
-
-#: maylons_grave.xml:278
-msgid "areaGoblinsAway"
-msgstr ""
-
-#: maylons_grave.xml:362
-msgid "createObject(\"skel_maylon\",\"graveChamber:locMaylonGuard2\",90)"
-msgstr ""
-
-#: maylons_grave.xml:339
-msgid "doorGrave"
-msgstr ""
-
-#: maylons_grave.xml:59
-msgid "entryDoor"
-msgstr ""
-
-#: maylons_grave.xml:220
-msgid "finishTalk"
-msgstr ""
-
-#: maylons_grave.xml:184 maylons_grave.xml:186 maylons_grave.xml:244
-#: maylons_grave.xml:246
-msgid "fraction"
-msgstr ""
-
-#: maylons_grave.xml:428
-msgid "global"
-msgstr ""
-
-#: maylons_grave.xml:38
-msgid "goblinArea"
-msgstr ""
-
-#: maylons_grave.xml:28 maylons_grave.xml:30 maylons_grave.xml:277
-msgid "goblin_gabclan_bow"
-msgstr ""
-
-#: maylons_grave.xml:26 maylons_grave.xml:27
-msgid "goblin_gabclan_sword"
-msgstr ""
-
-#: maylons_grave.xml:29
-msgid "goblin_gabresh"
-msgstr ""
-
-#: maylons_grave.xml:78 maylons_grave.xml:93 maylons_grave.xml:105
-#: maylons_grave.xml:117 maylons_grave.xml:129 maylons_grave.xml:145
-msgid "goblinsFlee"
-msgstr ""
-
-#: maylons_grave.xml:188
-msgid "magopt"
-msgstr ""
-
-#: maylons_grave.xml:430
-msgid "maylon"
-msgstr ""
-
-#: maylons_grave.xml:360
-msgid "maylonMummy"
-msgstr ""
-
-#: maylons_grave.xml:410
-msgid "maylons_grave_tmp.maylon=createObject(\"maylon\",{"
-msgstr ""
-
-#: maylons_grave.xml:250 maylons_grave.xml:440
-msgid "player"
-msgstr ""
-
-#: maylons_grave.xml:348
-msgid "position"
-msgstr ""
-
-#: maylons_grave.xml:447
-msgid "rescued_maylon"
-msgstr ""
-
-#: maylons_grave.xml:61 maylons_grave.xml:63 maylons_grave.xml:65
-#: maylons_grave.xml:268 maylons_grave.xml:269 maylons_grave.xml:270
-#: maylons_grave.xml:271
-msgid "walk"
-msgstr ""
-
-#: maylons_grave.xml:53
-msgid "willpower"
-msgstr ""
-
-#: maylons_grave.xml:51
-msgid "zombie_crypt"
-msgstr ""
-
-#: maylons_grave.xml:310 maylons_grave.xml:379
-msgid "zombies_maylon"
 msgstr ""
