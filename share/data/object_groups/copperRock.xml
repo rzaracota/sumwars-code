@@ -816,6 +816,7 @@
 
   <Locations>
     <Location name="WaypointLoc" pos_x="2.5" pos_y="6.5" />
+	<Location name="locThirdGuy" pos_x="0.5" pos_y="8.5" />
     <Location name="entry_east" pos_x="23.5" pos_y="7.5" />
     <Location name="entry_west" pos_x="-21" pos_y="15.5" />
     <Location name="exit_east" pos_x="33" pos_y="8" />
