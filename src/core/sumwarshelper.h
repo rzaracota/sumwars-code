@@ -128,6 +128,15 @@ public:
 	static std::string getNativeResolutionString ();
 
 	/**
+	 * \brief Gets the colour depth on the desktop.
+	 * Purpose: Setting colour depth on initial startup for the D3D Ogre driver
+	 *
+	 * \return Return the colour depth on windows
+	 * \author Stefan Stammberger (if anything doesn't work, he's the one to bash).
+	 */
+	static std::string getNativeColourDepthString ();
+
+	/**
 	 * \brief Parse a basic resolution string and get the width and height.
 	 * Purpose: manage differences between Direct3D and OpenGL resolution strings.
 	 *
