@@ -2,7 +2,7 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer>
-		<email>michael.kunz@s2005.tu-chemnitz.de</email>
+		<email>maintainer-wanted@gentoo.org</email>
 	</maintainer>
 	<use>
 		<flag name='stl'>Compile with TIXML_USE_STL support in TinyXML.</flag>
