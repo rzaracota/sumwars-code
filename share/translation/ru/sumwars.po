@@ -3485,8 +3485,8 @@ msgstr ""
 msgid "Attacks every enemy in weapon range with a triple sweeping strike."
 msgstr ""
 
-#~ msgid "Willard"
-#~ msgstr "Виллард"
+msgid "Willard"
+msgstr "Виллард"
 
 #, fuzzy
 #~ msgid "armor"

@@ -3690,57 +3690,57 @@ msgstr ""
 #~ msgid "A blue potion?"
 #~ msgstr "Pozione dell'eco"
 
-#~ msgid "Fundgegenstaende"
-#~ msgstr "Oggetti smarriti"
+msgid "Fundgegenstaende"
+msgstr "Oggetti smarriti"
 
 #, fuzzy
 #~ msgid "goblin_raid"
 #~ msgstr "Goblin bandito"
 
-#~ msgid "Vorarbeiter Nekromant"
-#~ msgstr "Sorveglianza del Necromante"
+msgid "Vorarbeiter Nekromant"
+msgstr "Sorveglianza del Necromante"
 
-#~ msgid "Hauptmann der Wache"
-#~ msgstr "Capitano delle Guardie"
+msgid "Hauptmann der Wache"
+msgstr "Capitano delle Guardie"
 
-#~ msgid ""
+msgid ""
 #~ "You are better prepared to suffer the consequences, wretched creature."
-#~ msgstr ""
+msgstr ""
 #~ "Misera creatura, sarà meglio che sia pronta ad affrontarne le conseguenze."
 
-#~ msgid ""
+msgid ""
 #~ "Reverse this at once or every guard of Aisen will be on your trail, "
 #~ "Cursed One! ##male"
-#~ msgstr ""
+msgstr ""
 #~ "Maledetto! Smettila subito o ogni guardia di Aisen ti starà alle costole!"
 
-#~ msgid ""
+msgid ""
 #~ "Reverse this at once or every guard of Aisen will be on your trail, "
 #~ "Cursed One! ##female"
-#~ msgstr ""
+msgstr ""
 #~ "Maledetta! Smettila subito o ogni guardia di Aisen ti starà alle costole!"
 
-#~ msgid ""
+msgid ""
 #~ "I have to find an energy source and a cog before that thing will work "
 #~ "again."
-#~ msgstr ""
+msgstr ""
 #~ "Devo trovare una fonte di energia e un ingranaggio per far funzionare di "
 #~ "nuovo quell'affare"
 
-#~ msgid "Unknown Lich"
-#~ msgstr "Lich Sconosciuto"
+msgid "Unknown Lich"
+msgstr "Lich Sconosciuto"
 
-#~ msgid "Scarfaced Necromancer"
-#~ msgstr "Necromante Sfigurato"
+msgid "Scarfaced Necromancer"
+msgstr "Necromante Sfigurato"
 
-#~ msgid "Skinny Necromancer"
-#~ msgstr "Necromante Magrolino"
+msgid "Skinny Necromancer"
+msgstr "Necromante Magrolino"
 
-#~ msgid "Who is that?"
-#~ msgstr "E chi è questo?"
+msgid "Who is that?"
+msgstr "E chi è questo?"
 
-#~ msgid "Willard"
-#~ msgstr "Willard"
+msgid "Willard"
+msgstr "Willard"
 
 #, fuzzy
 #~ msgid "Magician"
@@ -3806,8 +3806,8 @@ msgstr ""
 #~ msgid "slave_overseer"
 #~ msgstr "Supervisore"
 
-#~ msgid "Better not."
-#~ msgstr "Meglio di no."
+msgid "Better not."
+msgstr "Meglio di no."
 
 #, fuzzy
 #~ msgid "necromancer_siegeDefense"
