@@ -811,26 +811,26 @@ msgstr ""
 msgid "Wind Magic"
 msgstr ""
 
-#~ msgid "Attr points"
-#~ msgstr "Очки умений"
+msgid "Attr points"
+msgstr "Очки умений"
 
-#~ msgid "Attribute points remaining to distribute"
-#~ msgstr "Оставшиеся очки умений"
+msgid "Attribute points remaining to distribute"
+msgstr "Оставшиеся очки умений"
 
-#~ msgid "Characters"
-#~ msgstr "Персонажи"
+msgid "Characters"
+msgstr "Персонажи"
 
-#~ msgid "Delete"
-#~ msgstr "Удалить"
+msgid "Delete"
+msgstr "Удалить"
 
-#~ msgid "Savegame"
-#~ msgstr "Сохраненные игры"
+msgid "Savegame"
+msgstr "Сохраненные игры"
 
-#~ msgid "Create Character"
-#~ msgstr "Создать персонажа"
+msgid "Create Character"
+msgstr "Создать персонажа"
 
-#~ msgid "Delete Character"
-#~ msgstr "Удалить персонажа"
+msgid "Delete Character"
+msgstr "Удалить персонажа"
 
-#~ msgid "Gold"
-#~ msgstr "Золото"
+msgid "Gold"
+msgstr "Золото"
