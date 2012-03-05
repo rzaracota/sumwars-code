@@ -35,7 +35,7 @@ msgstr "Maylons Grave Level 1"
 
 #: aisen.xml:173
 msgid "aisMaylonsGraveL2"
-msgstr "Maylons Grave, Crypt"
+msgstr "Maylons Grave Crypt"
 
 #: aisen.xml:213
 msgid "aisHeath"
@@ -55,7 +55,7 @@ msgstr "Wide Heath"
 
 #: aisen.xml:386
 msgid "joringsbridge"
-msgstr "Joringsbridge"
+msgstr "Jorings Bridge"
 
 #: aisen.xml:453
 msgid "aisNorthMeadow"
@@ -63,23 +63,23 @@ msgstr "Northern Meadow"
 
 #: aisen.xml:502
 msgid "aisJoringsforest"
-msgstr "Joringsforest"
+msgstr "Jorings Forest"
 
 #: aisen.xml:540
 msgid "aisFairyforest"
-msgstr "Fairyforest"
+msgstr "Fairy Forest"
 
 #: aisen.xml:586
 msgid "aisDarkFairyforest"
-msgstr "Dark Fairyforest"
+msgstr "Dark Fairy Forest"
 
 #: aisen.xml:629
 msgid "aisWolfstones"
-msgstr "aisWolfstones"
+msgstr "Wolf Stones"
 
 #: aisen.xml:677
 msgid "aisWestwoods"
-msgstr "Westwoods"
+msgstr "West Woods"
 
 #: aisen.xml:720
 msgid "aisMounPath"
@@ -87,11 +87,11 @@ msgstr "Mountain Path"
 
 #: aisen.xml:750
 msgid "aisMistslope"
-msgstr "Mistslopes"
+msgstr "Misty Slope"
 
 #: aisen.xml:796
 msgid "aisEastslope"
-msgstr "Eastslope"
+msgstr "East Slope"
 
 #: aisen.xml:846
 msgid "Watch out! Monsters from the mine! Help me!"
@@ -103,39 +103,39 @@ msgstr "Let me tell you I'm no monster. I'm worse."
 
 #: aisen.xml:869
 msgid "aisBoulderGrounds"
-msgstr "aisBoulderGrounds"
+msgstr "Boulder Grounds"
 
 #: aisen.xml:908
 msgid "aisMounMeadows"
-msgstr "aisMounMeadows"
+msgstr "Mountain Meadows"
 
 #: aisen.xml:950
 msgid "aisOldDwarfRuins"
-msgstr "aisOldDwarfRuins"
+msgstr "Old Dwarven Ruins"
 
 #: aisen.xml:986
 msgid "aisOldCellar"
-msgstr "aisOldCellar"
+msgstr "Old Cellar"
 
 #: aisen.xml:1021
 msgid "aisBaelensRift"
-msgstr "aisBaelensRift"
+msgstr "Baelens Rift"
 
 #: aisen.xml:1059
 msgid "aisHillRoad"
-msgstr "aisHillRoad"
+msgstr "Hill Road"
 
 #: aisen.xml:1100
 msgid "copperRock"
-msgstr "copperRock"
+msgstr "Copper Rock"
 
 #: aisen.xml:1138
 msgid "aisCopperFields"
-msgstr "aisCopperFields"
+msgstr "Copper Field"
 
 #: aisen.xml:1176
 msgid "aisMineEntry"
-msgstr "aisMineEntry"
+msgstr "Mine Entry"
 
 #: aisenMonsterStats.xml:3
 msgid "Bloodbeak"
