@@ -58,6 +58,7 @@ void Worldmap::update()
 	CEGUI::FrameWindow* worldmap = (CEGUI::FrameWindow*) win_mgr.getWindow("WorldmapWindow");
 	
 	static int ncount =0;
+	static bool tpset = false;
 	
 	std::map<short,WaypointInfo>& winfos = World::getWorld()->getWaypointData();
 	std::map<short,WaypointInfo>::iterator it;
@@ -107,6 +108,17 @@ void Worldmap::update()
 		cnt++;
 	}
 	
+	
+	// restliche Label verstecken
+	for (; cnt <ncount; cnt++)
+	{
+		stream.str("");
+		stream << "WaypointImage";
+		stream << cnt;
+			
+		label = win_mgr.getWindow(stream.str());
+		label->setVisible(false);
+	}
 	RegionLocation& portal = player->getPortalPosition();
 	if (portal.first != "")
 	{
@@ -117,9 +129,9 @@ void Worldmap::update()
 		{
 		
 			stream.str("");
-			stream << "WaypointImage"<<cnt;
+			stream << "TownPortalImage";
 			
-			if (cnt >= ncount)
+			if (tpset==false)
 			{
 				label = win_mgr.createWindow("TaharezLook/StaticImage", stream.str());
 				worldmap->addChildWindow(label);
@@ -132,7 +144,7 @@ void Worldmap::update()
 				label->setAlwaysOnTop(true);
 				label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Worldmap::onWaypointClicked, this));
 				
-				ncount ++;
+				tpset = true;
 			}
 			else
 			{
@@ -156,24 +168,20 @@ void Worldmap::update()
 			stream << dgettext("sumwars","Town Portal") << "\n";
 			stream << dgettext("sumwars",it->second.m_name.c_str());
 			label->setTooltipText((CEGUI::utf8*) stream.str().c_str());
-			
-			cnt++;
 		}
 		else
 		{
 			ERRORMSG("region %s has no world position", portal.first.c_str());
 		}
 	}
-	
-	// restliche Label verstecken
-	for (; cnt <ncount; cnt++)
-	{
-		stream.str("");
-		stream << "WaypointImage";
-		stream << cnt;
-			
-		label = win_mgr.getWindow(stream.str());
-		label->setVisible(false);
+	else {
+		if(tpset == true) {
+			stream.str("");
+			stream << "TownPortalImage";
+			label = win_mgr.getWindow(stream.str());
+			label->setVisible(false);
+		}
+
 	}
 }
 
