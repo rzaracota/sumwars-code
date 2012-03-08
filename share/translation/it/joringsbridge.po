@@ -460,9 +460,9 @@ msgstr ""
 "Preghero' perche' la tua famiglia rimanga al sicuro per il tempo necessario."
 
 #, fuzzy
-#~ msgid "sergeant"
-#~ msgstr "Sergente!"
-
-#, fuzzy
 #~ msgid "prince"
 #~ msgstr "Mio principe!"
+
+#, fuzzy
+#~ msgid "sergeant"
+#~ msgstr "Sergente!"

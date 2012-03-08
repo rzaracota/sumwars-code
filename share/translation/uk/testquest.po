@@ -135,11 +135,11 @@ msgstr "і ще одна Перевірка"
 msgid "again a test"
 msgstr "знову тест"
 
-#~ msgid "I am the first guard"
-#~ msgstr "я перший охоронець"
+#~ msgid "I am Fenor Marken"
+#~ msgstr "а я Фенор Маркен"
 
 #~ msgid "I am the second guard"
 #~ msgstr "я другий охоронець"
 
-#~ msgid "I am Fenor Marken"
-#~ msgstr "а я Фенор Маркен"
+#~ msgid "I am the first guard"
+#~ msgstr "я перший охоронець"

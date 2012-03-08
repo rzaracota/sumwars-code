@@ -191,13 +191,13 @@ msgstr "Але це не повинно мати до вас ніякого ві
 msgid "Here's the money."
 msgstr "Ось гроші."
 
+#, fuzzy
+#~ msgid "bronsFarmDoor"
+#~ msgstr "Ферма Бронса"
+
 #~ msgid ""
 #~ "Really now, \"..name..\". Did you think she'd use carrier pigeons in this "
 #~ "day and age?"
 #~ msgstr ""
 #~ "Тепер точно, \"..name..\". Невже ви думаєте, що вона б використовувала "
 #~ "поштових голубів в наші дні?"
-
-#, fuzzy
-#~ msgid "bronsFarmDoor"
-#~ msgstr "Ферма Бронса"

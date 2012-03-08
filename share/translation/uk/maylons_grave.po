@@ -249,18 +249,18 @@ msgstr ""
 "Цікаво, що б він сказав якби знав, що спочатку він зробить гак через "
 "Харадове пекло?"
 
-#~ msgid "Rakthr mootrick!"
-#~ msgstr "Ракхт муутрік!"
-
-#~ msgid "Mar! Nom Togubri!"
-#~ msgstr "Мар! Ном Тогубрі!"
-
-#~ msgid "Wait, great human warriors. Do not kill!"
-#~ msgstr "Зачекайте, великі людські воїни. Не вбивайте!"
+#, fuzzy
+#~ msgid "GabResh"
+#~ msgstr "Габ Реш"
 
 #~ msgid "name..\" received an item from Maylons Grave."
 #~ msgstr "name..\" взяв предмет з Могили Мейлона."
 
-#, fuzzy
-#~ msgid "GabResh"
-#~ msgstr "Габ Реш"
+#~ msgid "Wait, great human warriors. Do not kill!"
+#~ msgstr "Зачекайте, великі людські воїни. Не вбивайте!"
+
+#~ msgid "Mar! Nom Togubri!"
+#~ msgstr "Мар! Ном Тогубрі!"
+
+#~ msgid "Rakthr mootrick!"
+#~ msgstr "Ракхт муутрік!"

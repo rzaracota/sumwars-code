@@ -3485,57 +3485,57 @@ msgstr ""
 msgid "Attacks every enemy in weapon range with a triple sweeping strike."
 msgstr ""
 
-msgid "Willard"
-msgstr "Виллард"
-
 #, fuzzy
-#~ msgid "armor"
-#~ msgstr "Защита"
-
-#, fuzzy
-#~ msgid "peasant"
-#~ msgstr "Крестьянин"
-
-#, fuzzy
-#~ msgid "power"
-#~ msgstr "Сила"
-
-#, fuzzy
-#~ msgid "willpower"
-#~ msgstr "Сила воли"
-
-#, fuzzy
-#~ msgid "blind"
-#~ msgstr "слепой"
-
-#, fuzzy
-#~ msgid "fraction"
-#~ msgstr "тренировочный лук"
-
-#, fuzzy
-#~ msgid "necromancer_siegeDefense"
-#~ msgstr "палочка некромансера"
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "Зелья"
-
-#, fuzzy
-#~ msgid "lockdown"
+#~ msgid "block"
 #~ msgstr "Блок"
-
-#, fuzzy
-#~ msgid "gold"
-#~ msgstr "золотое кольцо"
-
-#, fuzzy
-#~ msgid "position"
-#~ msgstr "Зелья"
 
 #, fuzzy
 #~ msgid "red"
 #~ msgstr "Дерред"
 
 #, fuzzy
-#~ msgid "block"
+#~ msgid "position"
+#~ msgstr "Зелья"
+
+#, fuzzy
+#~ msgid "gold"
+#~ msgstr "золотое кольцо"
+
+#, fuzzy
+#~ msgid "lockdown"
 #~ msgstr "Блок"
+
+#, fuzzy
+#~ msgid "location"
+#~ msgstr "Зелья"
+
+#, fuzzy
+#~ msgid "necromancer_siegeDefense"
+#~ msgstr "палочка некромансера"
+
+#, fuzzy
+#~ msgid "fraction"
+#~ msgstr "тренировочный лук"
+
+#, fuzzy
+#~ msgid "blind"
+#~ msgstr "слепой"
+
+#, fuzzy
+#~ msgid "willpower"
+#~ msgstr "Сила воли"
+
+#, fuzzy
+#~ msgid "power"
+#~ msgstr "Сила"
+
+#, fuzzy
+#~ msgid "peasant"
+#~ msgstr "Крестьянин"
+
+#, fuzzy
+#~ msgid "armor"
+#~ msgstr "Защита"
+
+#~ msgid "Willard"
+#~ msgstr "Виллард"

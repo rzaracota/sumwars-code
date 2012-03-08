@@ -1099,9 +1099,9 @@ msgid "With this, the demo is officially over."
 msgstr "На цьому демо офіційно закінчується."
 
 #, fuzzy
-#~ msgid "council_dwarfenwall"
-#~ msgstr "укріплення гномів"
-
-#, fuzzy
 #~ msgid "dwarfenwall_councilguard"
 #~ msgstr "командний центр"
+
+#, fuzzy
+#~ msgid "council_dwarfenwall"
+#~ msgstr "укріплення гномів"

@@ -820,38 +820,38 @@ msgstr "Magia dell'Acqua"
 msgid "Wind Magic"
 msgstr "Magia del Vento"
 
-#~ msgid "Gold"
-#~ msgstr "Oro"
-
-#~ msgid "Delete Character"
-#~ msgstr "Elimina Personaggio"
-
-#~ msgid "Create Character"
-#~ msgstr "Crea Personaggio"
-
-#~ msgid "Savegame"
-#~ msgstr "Salvataggio partita"
-
-#~ msgid "mage"
-#~ msgstr "mago"
-
-#~ msgid "Delete"
-#~ msgstr "Cancella"
-
-#~ msgid "Characters"
-#~ msgstr "Personaggi"
-
-#~ msgid "Reset graphic options"
-#~ msgstr "Reset grafica"
-
-#~ msgid "Restart required for setting new options"
-#~ msgstr "Necessario il riavvio del gioco."
-
-#~ msgid "Attribute points remaining to distribute"
-#~ msgstr "Punti Attributo"
+#~ msgid "Miss"
+#~ msgstr "Mancato"
 
 #~ msgid "Attr points"
 #~ msgstr "Punti Attributo"
 
-#~ msgid "Miss"
-#~ msgstr "Mancato"
+#~ msgid "Attribute points remaining to distribute"
+#~ msgstr "Punti Attributo"
+
+#~ msgid "Restart required for setting new options"
+#~ msgstr "Necessario il riavvio del gioco."
+
+#~ msgid "Reset graphic options"
+#~ msgstr "Reset grafica"
+
+#~ msgid "Characters"
+#~ msgstr "Personaggi"
+
+#~ msgid "Delete"
+#~ msgstr "Cancella"
+
+#~ msgid "mage"
+#~ msgstr "mago"
+
+#~ msgid "Savegame"
+#~ msgstr "Salvataggio partita"
+
+#~ msgid "Create Character"
+#~ msgstr "Crea Personaggio"
+
+#~ msgid "Delete Character"
+#~ msgstr "Elimina Personaggio"
+
+#~ msgid "Gold"
+#~ msgstr "Oro"

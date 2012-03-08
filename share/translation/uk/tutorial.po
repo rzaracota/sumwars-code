@@ -1617,33 +1617,33 @@ msgstr ""
 "Якби вони не викинули всі ті непотрібні балюстради в пустоту, не треба було "
 "б витирати стимаків з підлоги."
 
-#~ msgid "Explain level up?"
-#~ msgstr "Пояснити зміну рівня?"
-
 #, fuzzy
-#~ msgid "explain_skills_no"
-#~ msgstr "Поясніть навички"
-
-#, fuzzy
-#~ msgid "explain_levelup_continue"
-#~ msgstr "Поясни зміну рівня"
-
-#, fuzzy
-#~ msgid "tutorial_weapon"
-#~ msgstr "Навчання"
-
-#, fuzzy
-#~ msgid "tutorialSlugs"
-#~ msgstr "Навчання"
-
-#, fuzzy
-#~ msgid "findSecretDoor"
-#~ msgstr "Відкрити секретні двері"
+#~ msgid "tolec"
+#~ msgstr "Толік"
 
 #, fuzzy
 #~ msgid "derred"
 #~ msgstr "Дерред"
 
 #, fuzzy
-#~ msgid "tolec"
-#~ msgstr "Толік"
+#~ msgid "findSecretDoor"
+#~ msgstr "Відкрити секретні двері"
+
+#, fuzzy
+#~ msgid "tutorialSlugs"
+#~ msgstr "Навчання"
+
+#, fuzzy
+#~ msgid "tutorial_weapon"
+#~ msgstr "Навчання"
+
+#, fuzzy
+#~ msgid "explain_levelup_continue"
+#~ msgstr "Поясни зміну рівня"
+
+#, fuzzy
+#~ msgid "explain_skills_no"
+#~ msgstr "Поясніть навички"
+
+#~ msgid "Explain level up?"
+#~ msgstr "Пояснити зміну рівня?"

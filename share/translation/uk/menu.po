@@ -813,26 +813,26 @@ msgstr "Магія води"
 msgid "Wind Magic"
 msgstr "Магія вітру"
 
-msgid "Miss"
-msgstr "Промах"
+#~ msgid "mage"
+#~ msgstr "маг"
 
-msgid "Attr points"
-msgstr "Очки атриб"
+#~ msgid "Delete"
+#~ msgstr "Видалити"
 
-msgid "Attribute points remaining to distribute"
-msgstr "Не витрачені очки атрибутів"
+#~ msgid "Characters"
+#~ msgstr "Персонажі"
 
-msgid "Restart required for setting new options"
-msgstr "Для застосування змін перезапустіть гру"
+#~ msgid "Reset graphic options"
+#~ msgstr "Скинути граф. параметри"
 
-msgid "Reset graphic options"
-msgstr "Скинути граф. параметри"
+#~ msgid "Restart required for setting new options"
+#~ msgstr "Для застосування змін перезапустіть гру"
 
-msgid "Characters"
-msgstr "Персонажі"
+#~ msgid "Attribute points remaining to distribute"
+#~ msgstr "Не витрачені очки атрибутів"
 
-msgid "Delete"
-msgstr "Видалити"
+#~ msgid "Attr points"
+#~ msgstr "Очки атриб"
 
-msgid "mage"
-msgstr "маг"
+#~ msgid "Miss"
+#~ msgstr "Промах"

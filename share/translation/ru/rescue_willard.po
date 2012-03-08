@@ -387,11 +387,18 @@ msgstr "Низина Аизена"
 msgid "So here is this Willard."
 msgstr "А вот и Виллард."
 
-#~ msgid "I hope you are making a good time searching for Willard. ##solo"
-#~ msgstr "Надеюсь, ты хорошо проводишь время в поисках Вилларда."
+#, fuzzy
+#~ msgid "WillardArea"
+#~ msgstr "Виллард"
 
-#~ msgid "I hope you are making a good time searching for Willard."
-#~ msgstr "Надеюсь, вы хорошо проводите время в поисках Вилларда."
+#~ msgid "You know quite a lot."
+#~ msgstr "Ты знаешь довольно много."
+
+#~ msgid "I'm sure he waits somewhere for help."
+#~ msgstr "Я уверен, он где-то затаился и ожидает помощи."
+
+#~ msgid "I'm sorry. Maybe my mouth slipped."
+#~ msgstr "Прощу прощения, вырвалось."
 
 #~ msgid ""
 #~ "I thought you were the kind of Branded Ones that doesn't kill every human "
@@ -400,15 +407,8 @@ msgstr "А вот и Виллард."
 #~ "Я думал, ты такой Избранный, который не убивает всех людей, которые "
 #~ "переходят ему дорогу."
 
-#~ msgid "I'm sorry. Maybe my mouth slipped."
-#~ msgstr "Прощу прощения, вырвалось."
+#~ msgid "I hope you are making a good time searching for Willard."
+#~ msgstr "Надеюсь, вы хорошо проводите время в поисках Вилларда."
 
-#~ msgid "I'm sure he waits somewhere for help."
-#~ msgstr "Я уверен, он где-то затаился и ожидает помощи."
-
-#~ msgid "You know quite a lot."
-#~ msgstr "Ты знаешь довольно много."
-
-#, fuzzy
-#~ msgid "WillardArea"
-#~ msgstr "Виллард"
+#~ msgid "I hope you are making a good time searching for Willard. ##solo"
+#~ msgstr "Надеюсь, ты хорошо проводишь время в поисках Вилларда."

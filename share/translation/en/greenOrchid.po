@@ -318,11 +318,11 @@ msgstr ""
 msgid "Wha... I really got something I want? Thank you man."
 msgstr "Wha... I really got something I want? Thank you man."
 
-#~ msgid "mentor"
-#~ msgstr "mentor"
+#~ msgid "peasant_f2"
+#~ msgstr "peasant_f2"
 
 #~ msgid "peasant2"
 #~ msgstr "peasant2"
 
-#~ msgid "peasant_f2"
-#~ msgstr "peasant_f2"
+#~ msgid "mentor"
+#~ msgstr "mentor"

@@ -914,17 +914,17 @@ msgid "Let's gain their trust."
 msgstr "Давайте заробляти їхню довіру."
 
 #, fuzzy
-#~ msgid "SorenWindclawArea"
-#~ msgstr "Сорен Вінклав"
-
-#, fuzzy
-#~ msgid "locSorenWindclaw"
-#~ msgstr "Сорен Вінклав"
+#~ msgid "tolec"
+#~ msgstr "Толік"
 
 #, fuzzy
 #~ msgid "derred"
 #~ msgstr "Дерред"
 
 #, fuzzy
-#~ msgid "tolec"
-#~ msgstr "Толік"
+#~ msgid "locSorenWindclaw"
+#~ msgstr "Сорен Вінклав"
+
+#, fuzzy
+#~ msgid "SorenWindclawArea"
+#~ msgstr "Сорен Вінклав"

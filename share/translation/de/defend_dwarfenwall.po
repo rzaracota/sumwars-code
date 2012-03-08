@@ -1155,268 +1155,268 @@ msgstr "Aber die Götter werden sich ewig deiner erinnern."
 msgid "With this, the demo is officially over."
 msgstr "Damit ist die Demo offiziell vorbei."
 
-#~ msgid "speakers distributed"
-#~ msgstr "speakers distributed"
+#~ msgid "entry_west"
+#~ msgstr "entry_west"
 
-#~ msgid "sorenCrystal"
-#~ msgstr "sorenCrystal"
+#~ msgid "locWay1"
+#~ msgstr "locWay1"
 
-#~ msgid "areaGathering"
-#~ msgstr "areaGathering"
+#~ msgid "exit_command"
+#~ msgstr "exit_command"
 
-#~ msgid "ai_ability_rating:asoroth_meteor"
-#~ msgstr "ai_ability_rating:asoroth_meteor"
+#~ msgid "guard"
+#~ msgstr "guard"
 
-#~ msgid "ai_ability_rating:asoroth_frost_wave"
-#~ msgstr "ai_ability_rating:asoroth_frost_wave"
+#~ msgid "general"
+#~ msgstr "general"
 
-#~ msgid "ai_ability_rating:asoroth_ice_attack"
-#~ msgstr "ai_ability_rating:asoroth_ice_attack"
+#~ msgid "assembleParty(\"dwarfenwall\",\"locPartyLeave\")"
+#~ msgstr "assembleParty(\"dwarfenwall\",\"locPartyLeave\")"
 
-#~ msgid "ai_ability_rating:asoroth_guided_iceball"
-#~ msgstr "ai_ability_rating:asoroth_guided_iceball"
+#~ msgid "areaNoEntry3"
+#~ msgstr "areaNoEntry3"
 
-#~ msgid "ai_ability_rating:asoroth_ice_obelisk"
-#~ msgstr "ai_ability_rating:asoroth_ice_obelisk"
+#~ msgid "walk"
+#~ msgstr "walk"
 
-#~ msgid "ai_ability_rating:asoroth_icicle"
-#~ msgstr "ai_ability_rating:asoroth_icicle"
+#~ msgid "locGuard1"
+#~ msgstr "locGuard1"
 
-#~ msgid "under15"
-#~ msgstr "under15"
+#~ msgid "locGuard2"
+#~ msgstr "locGuard2"
 
-#~ msgid "under25"
-#~ msgstr "under25"
+#~ msgid "locGuard3"
+#~ msgstr "locGuard3"
 
-#~ msgid "under40"
-#~ msgstr "under40"
+#~ msgid "locGuard4"
+#~ msgstr "locGuard4"
 
-#~ msgid "under50"
-#~ msgstr "under50"
+#~ msgid "locGuard5"
+#~ msgstr "locGuard5"
 
-#~ msgid "under60"
-#~ msgstr "under60"
+#~ msgid "locGuard6"
+#~ msgstr "locGuard6"
 
-#~ msgid "under75"
-#~ msgstr "under75"
+#~ msgid "locGuard9"
+#~ msgstr "locGuard9"
 
-#~ msgid "under85"
-#~ msgstr "under85"
+#~ msgid "locGuard10"
+#~ msgstr "locGuard10"
 
-#~ msgid "/"
-#~ msgstr "/"
+#~ msgid "locGuard11"
+#~ msgstr "locGuard11"
 
-#~ msgid "health"
-#~ msgstr "health"
+#~ msgid "locGuard12"
+#~ msgstr "locGuard12"
 
-#~ msgid "asoroth"
-#~ msgstr "asoroth"
+#~ msgid "locBowmen2"
+#~ msgstr "locBowmen2"
 
-#~ msgid "locParty"
-#~ msgstr "locParty"
+#~ msgid "locBowmen3"
+#~ msgstr "locBowmen3"
 
-#~ msgid "locCamera"
-#~ msgstr "locCamera"
+#~ msgid "locBowmen1"
+#~ msgstr "locBowmen1"
 
-#~ msgid "cleanAfterSiege"
-#~ msgstr "cleanAfterSiege"
+#~ msgid "locBowmen4"
+#~ msgstr "locBowmen4"
 
-#~ msgid "launchAttack(5063)"
-#~ msgstr "launchAttack(5063)"
+#~ msgid "locBowmen6"
+#~ msgstr "locBowmen6"
 
-#~ msgid "blackMagic"
-#~ msgstr "blackMagic"
+#~ msgid "locBowmen7"
+#~ msgstr "locBowmen7"
 
-#~ msgid "changeView"
-#~ msgstr "changeView"
+#~ msgid "respawnTrigger"
+#~ msgstr "respawnTrigger"
 
-#~ msgid "frost"
-#~ msgstr "frost"
+#~ msgid "newUnit"
+#~ msgstr "newUnit"
 
-#~ msgid "wave11"
-#~ msgstr "wave11"
+#~ msgid "penalty-points: "
+#~ msgstr "penalty-points: "
 
-#~ msgid "boss5_siege"
-#~ msgstr "boss5_siege"
+#~ msgid "index: "
+#~ msgstr "index: "
 
-#~ msgid "boss4"
-#~ msgstr "boss4"
+#~ msgid "a very important unit just died"
+#~ msgstr "a very important unit just died"
 
-#~ msgid "the4thBoss"
-#~ msgstr "the4thBoss"
+#~ msgid "resurrection_fire_storm"
+#~ msgstr "resurrection_fire_storm"
 
-#~ msgid "frostHasCome"
-#~ msgstr "frostHasCome"
+#~ msgid "subtype"
+#~ msgstr "subtype"
 
-#~ msgid "wave9"
-#~ msgstr "wave9"
+#~ msgid "respawnroute"
+#~ msgstr "respawnroute"
 
-#~ msgid "locSpawn4"
-#~ msgstr "locSpawn4"
-
-#~ msgid "insertTrigger(\"eyesOnBoss\")"
-#~ msgstr "insertTrigger(\"eyesOnBoss\")"
-
-#~ msgid "att2"
-#~ msgstr "att2"
-
-#~ msgid "boss3prep"
-#~ msgstr "boss3prep"
-
-#~ msgid "wave9pre"
-#~ msgstr "wave9pre"
-
-#~ msgid "wave5b"
-#~ msgstr "wave5b"
-
-#~ msgid "wave5"
-#~ msgstr "wave5"
-
-#~ msgid "att1"
-#~ msgstr "att1"
-
-#~ msgid "fire"
-#~ msgstr "fire"
-
-#~ msgid "firstBoss"
-#~ msgstr "firstBoss"
-
-#~ msgid "fire_wave"
-#~ msgstr "fire_wave"
-
-#~ msgid "entry_south"
-#~ msgstr "entry_south"
-
-#~ msgid "lich"
-#~ msgstr "lich"
-
-#~ msgid "locLich"
-#~ msgstr "locLich"
-
-#~ msgid "greif"
-#~ msgstr "greif"
-
-#~ msgid "talkBeforeBattle"
-#~ msgstr "talkBeforeBattle"
-
-#~ msgid "Maga Convocatis Darna Eistaucher"
-#~ msgstr "Maga Convocatis Darna Eistaucher"
-
-#, fuzzy
-#~ msgid "council_dwarfenwall"
-#~ msgstr "Zwergentrutz"
-
-#~ msgid "General Greif"
-#~ msgstr "General Greif"
-
-#~ msgid "general_greif_battle"
-#~ msgstr "general_greif_battle"
-
-#~ msgid "councilEnters"
-#~ msgstr "councilEnters"
-
-#~ msgid "dwall_siege"
-#~ msgstr "dwall_siege"
+#~ msgid "elite_siege"
+#~ msgstr "elite_siege"
 
 #, fuzzy
 #~ msgid "dwarfenwall_councilguard"
 #~ msgstr "Kommandozentrum"
 
-#~ msgid "elite_siege"
-#~ msgstr "elite_siege"
+#~ msgid "dwall_siege"
+#~ msgstr "dwall_siege"
 
-#~ msgid "respawnroute"
-#~ msgstr "respawnroute"
+#~ msgid "councilEnters"
+#~ msgstr "councilEnters"
 
-#~ msgid "subtype"
-#~ msgstr "subtype"
+#~ msgid "general_greif_battle"
+#~ msgstr "general_greif_battle"
 
-#~ msgid "resurrection_fire_storm"
-#~ msgstr "resurrection_fire_storm"
+#~ msgid "General Greif"
+#~ msgstr "General Greif"
 
-#~ msgid "a very important unit just died"
-#~ msgstr "a very important unit just died"
+#, fuzzy
+#~ msgid "council_dwarfenwall"
+#~ msgstr "Zwergentrutz"
 
-#~ msgid "index: "
-#~ msgstr "index: "
+#~ msgid "Maga Convocatis Darna Eistaucher"
+#~ msgstr "Maga Convocatis Darna Eistaucher"
 
-#~ msgid "penalty-points: "
-#~ msgstr "penalty-points: "
+#~ msgid "talkBeforeBattle"
+#~ msgstr "talkBeforeBattle"
 
-#~ msgid "newUnit"
-#~ msgstr "newUnit"
+#~ msgid "greif"
+#~ msgstr "greif"
 
-#~ msgid "respawnTrigger"
-#~ msgstr "respawnTrigger"
+#~ msgid "locLich"
+#~ msgstr "locLich"
 
-#~ msgid "locBowmen7"
-#~ msgstr "locBowmen7"
+#~ msgid "lich"
+#~ msgstr "lich"
 
-#~ msgid "locBowmen6"
-#~ msgstr "locBowmen6"
+#~ msgid "entry_south"
+#~ msgstr "entry_south"
 
-#~ msgid "locBowmen4"
-#~ msgstr "locBowmen4"
+#~ msgid "fire_wave"
+#~ msgstr "fire_wave"
 
-#~ msgid "locBowmen1"
-#~ msgstr "locBowmen1"
+#~ msgid "firstBoss"
+#~ msgstr "firstBoss"
 
-#~ msgid "locBowmen3"
-#~ msgstr "locBowmen3"
+#~ msgid "fire"
+#~ msgstr "fire"
 
-#~ msgid "locBowmen2"
-#~ msgstr "locBowmen2"
+#~ msgid "att1"
+#~ msgstr "att1"
 
-#~ msgid "locGuard12"
-#~ msgstr "locGuard12"
+#~ msgid "wave5"
+#~ msgstr "wave5"
 
-#~ msgid "locGuard11"
-#~ msgstr "locGuard11"
+#~ msgid "wave5b"
+#~ msgstr "wave5b"
 
-#~ msgid "locGuard10"
-#~ msgstr "locGuard10"
+#~ msgid "wave9pre"
+#~ msgstr "wave9pre"
 
-#~ msgid "locGuard9"
-#~ msgstr "locGuard9"
+#~ msgid "boss3prep"
+#~ msgstr "boss3prep"
 
-#~ msgid "locGuard6"
-#~ msgstr "locGuard6"
+#~ msgid "att2"
+#~ msgstr "att2"
 
-#~ msgid "locGuard5"
-#~ msgstr "locGuard5"
+#~ msgid "insertTrigger(\"eyesOnBoss\")"
+#~ msgstr "insertTrigger(\"eyesOnBoss\")"
 
-#~ msgid "locGuard4"
-#~ msgstr "locGuard4"
+#~ msgid "locSpawn4"
+#~ msgstr "locSpawn4"
 
-#~ msgid "locGuard3"
-#~ msgstr "locGuard3"
+#~ msgid "wave9"
+#~ msgstr "wave9"
 
-#~ msgid "locGuard2"
-#~ msgstr "locGuard2"
+#~ msgid "frostHasCome"
+#~ msgstr "frostHasCome"
 
-#~ msgid "locGuard1"
-#~ msgstr "locGuard1"
+#~ msgid "the4thBoss"
+#~ msgstr "the4thBoss"
 
-#~ msgid "walk"
-#~ msgstr "walk"
+#~ msgid "boss4"
+#~ msgstr "boss4"
 
-#~ msgid "areaNoEntry3"
-#~ msgstr "areaNoEntry3"
+#~ msgid "boss5_siege"
+#~ msgstr "boss5_siege"
 
-#~ msgid "assembleParty(\"dwarfenwall\",\"locPartyLeave\")"
-#~ msgstr "assembleParty(\"dwarfenwall\",\"locPartyLeave\")"
+#~ msgid "wave11"
+#~ msgstr "wave11"
 
-#~ msgid "general"
-#~ msgstr "general"
+#~ msgid "frost"
+#~ msgstr "frost"
 
-#~ msgid "guard"
-#~ msgstr "guard"
+#~ msgid "changeView"
+#~ msgstr "changeView"
 
-#~ msgid "exit_command"
-#~ msgstr "exit_command"
+#~ msgid "blackMagic"
+#~ msgstr "blackMagic"
 
-#~ msgid "locWay1"
-#~ msgstr "locWay1"
+#~ msgid "launchAttack(5063)"
+#~ msgstr "launchAttack(5063)"
 
-#~ msgid "entry_west"
-#~ msgstr "entry_west"
+#~ msgid "cleanAfterSiege"
+#~ msgstr "cleanAfterSiege"
+
+#~ msgid "locCamera"
+#~ msgstr "locCamera"
+
+#~ msgid "locParty"
+#~ msgstr "locParty"
+
+#~ msgid "asoroth"
+#~ msgstr "asoroth"
+
+#~ msgid "health"
+#~ msgstr "health"
+
+#~ msgid "/"
+#~ msgstr "/"
+
+#~ msgid "under85"
+#~ msgstr "under85"
+
+#~ msgid "under75"
+#~ msgstr "under75"
+
+#~ msgid "under60"
+#~ msgstr "under60"
+
+#~ msgid "under50"
+#~ msgstr "under50"
+
+#~ msgid "under40"
+#~ msgstr "under40"
+
+#~ msgid "under25"
+#~ msgstr "under25"
+
+#~ msgid "under15"
+#~ msgstr "under15"
+
+#~ msgid "ai_ability_rating:asoroth_icicle"
+#~ msgstr "ai_ability_rating:asoroth_icicle"
+
+#~ msgid "ai_ability_rating:asoroth_ice_obelisk"
+#~ msgstr "ai_ability_rating:asoroth_ice_obelisk"
+
+#~ msgid "ai_ability_rating:asoroth_guided_iceball"
+#~ msgstr "ai_ability_rating:asoroth_guided_iceball"
+
+#~ msgid "ai_ability_rating:asoroth_ice_attack"
+#~ msgstr "ai_ability_rating:asoroth_ice_attack"
+
+#~ msgid "ai_ability_rating:asoroth_frost_wave"
+#~ msgstr "ai_ability_rating:asoroth_frost_wave"
+
+#~ msgid "ai_ability_rating:asoroth_meteor"
+#~ msgstr "ai_ability_rating:asoroth_meteor"
+
+#~ msgid "areaGathering"
+#~ msgstr "areaGathering"
+
+#~ msgid "sorenCrystal"
+#~ msgstr "sorenCrystal"
+
+#~ msgid "speakers distributed"
+#~ msgstr "speakers distributed"

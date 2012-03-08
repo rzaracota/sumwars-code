@@ -1630,42 +1630,42 @@ msgstr ""
 "Если бы они не сделали все эти ненужные балюстрады в пустоту, им бы не "
 "пришлось убирать выбравшихся слизней с пола."
 
-#~ msgid "Really, somehow lacking in style."
-#~ msgstr "И вправду, как-то без стиля."
-
-#~ msgid "What a massacre."
-#~ msgstr "Что за бойня."
-
-#~ msgid "That should have been the last one."
-#~ msgstr "Этот, должно быть, последний."
-
-#~ msgid "Explain level up?"
-#~ msgstr "Объяснить поднятие уровня?"
-
 #, fuzzy
-#~ msgid "explain_skills_no"
-#~ msgstr "Рассказать про заклинания"
-
-#, fuzzy
-#~ msgid "explain_levelup_continue"
-#~ msgstr "Объяснить поднятие уровня"
-
-#, fuzzy
-#~ msgid "tutorial_weapon"
-#~ msgstr "Обучение"
-
-#, fuzzy
-#~ msgid "tutorialSlugs"
-#~ msgstr "Обучение"
-
-#, fuzzy
-#~ msgid "findSecretDoor"
-#~ msgstr "Открыть секретную дверь"
+#~ msgid "tolec"
+#~ msgstr "Толек"
 
 #, fuzzy
 #~ msgid "derred"
 #~ msgstr "Дерред"
 
 #, fuzzy
-#~ msgid "tolec"
-#~ msgstr "Толек"
+#~ msgid "findSecretDoor"
+#~ msgstr "Открыть секретную дверь"
+
+#, fuzzy
+#~ msgid "tutorialSlugs"
+#~ msgstr "Обучение"
+
+#, fuzzy
+#~ msgid "tutorial_weapon"
+#~ msgstr "Обучение"
+
+#, fuzzy
+#~ msgid "explain_levelup_continue"
+#~ msgstr "Объяснить поднятие уровня"
+
+#, fuzzy
+#~ msgid "explain_skills_no"
+#~ msgstr "Рассказать про заклинания"
+
+#~ msgid "Explain level up?"
+#~ msgstr "Объяснить поднятие уровня?"
+
+#~ msgid "That should have been the last one."
+#~ msgstr "Этот, должно быть, последний."
+
+#~ msgid "What a massacre."
+#~ msgstr "Что за бойня."
+
+#~ msgid "Really, somehow lacking in style."
+#~ msgstr "И вправду, как-то без стиля."

@@ -3677,114 +3677,114 @@ msgstr "Weaponmaster"
 msgid "Attacks every enemy in weapon range with a triple sweeping strike."
 msgstr "Attacks every enemy in weapon range with a triple sweeping strike."
 
-#~ msgid "Priest"
-#~ msgstr "Priest"
-
-#~ msgid "Archer"
-#~ msgstr "Archer"
-
-#~ msgid "Magician"
-#~ msgstr "Magician"
-
-#~ msgid "Warrior"
-#~ msgstr "Warrior"
-
 #, fuzzy
-#~ msgid "armor"
-#~ msgstr "Armor"
-
-#, fuzzy
-#~ msgid "peasant"
-#~ msgstr "Peasant"
-
-#, fuzzy
-#~ msgid "LichLocation"
-#~ msgstr "echo potion"
-
-#, fuzzy
-#~ msgid "start_benchmark"
-#~ msgstr "benchmarkBox"
-
-#, fuzzy
-#~ msgid "init_benchmark"
-#~ msgstr "benchmarkBox"
-
-#, fuzzy
-#~ msgid "GuardLocation"
-#~ msgstr "Guardcaptain"
-
-#, fuzzy
-#~ msgid "sabre_sw"
-#~ msgstr "sabre"
-
-#, fuzzy
-#~ msgid "rock_stf"
-#~ msgstr "rock staff"
-
-#, fuzzy
-#~ msgid "power"
-#~ msgstr "Power"
-
-#, fuzzy
-#~ msgid "willpower"
-#~ msgstr "Willpower"
-
-#, fuzzy
-#~ msgid "blind"
-#~ msgstr "goblin dog"
-
-#, fuzzy
-#~ msgid "poisoned"
-#~ msgstr "summoned"
-
-#, fuzzy
-#~ msgid "fraction"
-#~ msgstr "no action"
-
-#, fuzzy
-#~ msgid "slave_overseer"
-#~ msgstr "Overseer"
-
-#, fuzzy
-#~ msgid "necromancer_siegeDefense"
-#~ msgstr "necromancer staff"
-
-#, fuzzy
-#~ msgid "catapult_skeleton"
-#~ msgstr "Creates a skeleton."
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "no action"
-
-#, fuzzy
-#~ msgid "string"
-#~ msgstr "Frost ring"
-
-#, fuzzy
-#~ msgid "lockdown"
-#~ msgstr "Block"
-
-#, fuzzy
-#~ msgid "gold"
-#~ msgstr "gold ring"
-
-#, fuzzy
-#~ msgid "position"
-#~ msgstr "Ionisation"
-
-#, fuzzy
-#~ msgid "red"
-#~ msgstr "Derred"
-
-#, fuzzy
-#~ msgid "block"
-#~ msgstr "Block"
+#~ msgid "locSergeant"
+#~ msgstr "Sergeant Wober"
 
 #, fuzzy
 #~ msgid "goblins_l13_2"
 #~ msgstr "goblin slayer"
 
 #, fuzzy
-#~ msgid "locSergeant"
-#~ msgstr "Sergeant Wober"
+#~ msgid "block"
+#~ msgstr "Block"
+
+#, fuzzy
+#~ msgid "red"
+#~ msgstr "Derred"
+
+#, fuzzy
+#~ msgid "position"
+#~ msgstr "Ionisation"
+
+#, fuzzy
+#~ msgid "gold"
+#~ msgstr "gold ring"
+
+#, fuzzy
+#~ msgid "lockdown"
+#~ msgstr "Block"
+
+#, fuzzy
+#~ msgid "string"
+#~ msgstr "Frost ring"
+
+#, fuzzy
+#~ msgid "location"
+#~ msgstr "no action"
+
+#, fuzzy
+#~ msgid "catapult_skeleton"
+#~ msgstr "Creates a skeleton."
+
+#, fuzzy
+#~ msgid "necromancer_siegeDefense"
+#~ msgstr "necromancer staff"
+
+#, fuzzy
+#~ msgid "slave_overseer"
+#~ msgstr "Overseer"
+
+#, fuzzy
+#~ msgid "fraction"
+#~ msgstr "no action"
+
+#, fuzzy
+#~ msgid "poisoned"
+#~ msgstr "summoned"
+
+#, fuzzy
+#~ msgid "blind"
+#~ msgstr "goblin dog"
+
+#, fuzzy
+#~ msgid "willpower"
+#~ msgstr "Willpower"
+
+#, fuzzy
+#~ msgid "power"
+#~ msgstr "Power"
+
+#, fuzzy
+#~ msgid "rock_stf"
+#~ msgstr "rock staff"
+
+#, fuzzy
+#~ msgid "sabre_sw"
+#~ msgstr "sabre"
+
+#, fuzzy
+#~ msgid "GuardLocation"
+#~ msgstr "Guardcaptain"
+
+#, fuzzy
+#~ msgid "init_benchmark"
+#~ msgstr "benchmarkBox"
+
+#, fuzzy
+#~ msgid "start_benchmark"
+#~ msgstr "benchmarkBox"
+
+#, fuzzy
+#~ msgid "LichLocation"
+#~ msgstr "echo potion"
+
+#, fuzzy
+#~ msgid "peasant"
+#~ msgstr "Peasant"
+
+#, fuzzy
+#~ msgid "armor"
+#~ msgstr "Armor"
+
+#~ msgid "Warrior"
+#~ msgstr "Warrior"
+
+#~ msgid "Magician"
+#~ msgstr "Magician"
+
+#~ msgid "Archer"
+#~ msgstr "Archer"
+
+#~ msgid "Priest"
+#~ msgstr "Priest"

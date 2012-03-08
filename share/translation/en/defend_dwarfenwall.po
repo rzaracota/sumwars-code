@@ -1110,9 +1110,9 @@ msgid "With this, the demo is officially over."
 msgstr "With this, the demo is officially over."
 
 #, fuzzy
-#~ msgid "council_dwarfenwall"
-#~ msgstr "dwarfenwall"
-
-#, fuzzy
 #~ msgid "dwarfenwall_councilguard"
 #~ msgstr "dwarfenwallCommand"
+
+#, fuzzy
+#~ msgid "council_dwarfenwall"
+#~ msgstr "dwarfenwall"

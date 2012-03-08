@@ -397,11 +397,23 @@ msgstr "Aisener Wiese"
 msgid "So here is this Willard."
 msgstr "Hier steckt also dieser Willard."
 
-#~ msgid "I hope you are making a good time searching for Willard. ##solo"
-#~ msgstr "Ich hoffe, Ihr kommt mit Eurer Suche nach Willard voran."
+#, fuzzy
+#~ msgid "WillardArea"
+#~ msgstr "Willard"
 
-#~ msgid "I hope you are making a good time searching for Willard."
-#~ msgstr "Ich hoffe, Ihr kommt mit Eurer Suche nach Willard voran."
+#~ msgid "You know quite a lot."
+#~ msgstr "Ihr wisst recht viel."
+
+#~ msgid "That is why I called you when you were passing."
+#~ msgstr ""
+#~ "Deswegen habe ich mich an Euch gewandt, als Ihr hier vorbei gekommen seid."
+
+#~ msgid "I'm sure he waits somewhere for help."
+#~ msgstr ""
+#~ "Ich bin sicher, er wartet irgendwo darauf, dass ihm jemand zu Hilfe eilt."
+
+#~ msgid "I'm sorry. Maybe my mouth slipped."
+#~ msgstr "Verzeiht. Vielleicht war mein Mund schneller als mein Kopf."
 
 #~ msgid ""
 #~ "I thought you were the kind of Branded Ones that doesn't kill every human "
@@ -410,20 +422,8 @@ msgstr "Hier steckt also dieser Willard."
 #~ "Ich dachte, Ihr wärt die Sorte Gezeichnete, die nicht wahllos alle "
 #~ "Menschen umbringen, die ihren Weg kreuzen."
 
-#~ msgid "I'm sorry. Maybe my mouth slipped."
-#~ msgstr "Verzeiht. Vielleicht war mein Mund schneller als mein Kopf."
+#~ msgid "I hope you are making a good time searching for Willard."
+#~ msgstr "Ich hoffe, Ihr kommt mit Eurer Suche nach Willard voran."
 
-#~ msgid "I'm sure he waits somewhere for help."
-#~ msgstr ""
-#~ "Ich bin sicher, er wartet irgendwo darauf, dass ihm jemand zu Hilfe eilt."
-
-#~ msgid "That is why I called you when you were passing."
-#~ msgstr ""
-#~ "Deswegen habe ich mich an Euch gewandt, als Ihr hier vorbei gekommen seid."
-
-#~ msgid "You know quite a lot."
-#~ msgstr "Ihr wisst recht viel."
-
-#, fuzzy
-#~ msgid "WillardArea"
-#~ msgstr "Willard"
+#~ msgid "I hope you are making a good time searching for Willard. ##solo"
+#~ msgstr "Ich hoffe, Ihr kommt mit Eurer Suche nach Willard voran."

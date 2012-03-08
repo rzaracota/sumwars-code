@@ -3707,141 +3707,141 @@ msgid "Attacks every enemy in weapon range with a triple sweeping strike."
 msgstr ""
 "Greift jeden Gegner in Reichweite mit einem dreifachen Rundumschlag an."
 
-msgid "Willard"
-msgstr "Willard"
-
-msgid "Who is that?"
-msgstr "Wer ist das?"
-
-msgid "Skinny Necromancer"
-msgstr "Magerer Nekromant"
-
-msgid "Scarfaced Necromancer"
-msgstr "Narbengesichtiger Nekromant"
-
-msgid "Unknown Lich"
-msgstr "Unbekannter Lich"
-
-msgid ""
-"Reverse this at once or every guard of Aisen will be on your trail, "
-"Cursed One! ##female"
-msgstr ""
-"Mach das sofort rückgängig oder jede Wache in Aisen wird hinter dir her "
-"sein, Verfluchte!"
-
-msgid ""
-"Reverse this at once or every guard of Aisen will be on your trail, "
-"Cursed One! ##male"
-msgstr ""
-"Mach das sofort rückgängig oder jede Wache in Aisen wird hinter dir her "
-"sein, Verfluchter!"
-
-msgid ""
-"You are better prepared to suffer the consequences, wretched creature."
-msgstr "Du bist besser bereit, die Konsequenzen zu tragen, elende Kreatur."
-
 #, fuzzy
-#~ msgid "Magician"
-#~ msgstr "Magieangriff"
-
-#, fuzzy
-#~ msgid "Archer"
-#~ msgstr "Wilderer"
-
-#, fuzzy
-#~ msgid "armor"
-#~ msgstr "Rüstung"
-
-#, fuzzy
-#~ msgid "peasant"
-#~ msgstr "Bauer"
-
-#, fuzzy
-#~ msgid "LichLocation"
-#~ msgstr "Echotrank"
-
-#, fuzzy
-#~ msgid "GuardLocation"
-#~ msgstr "Hauptmann der Wache"
-
-#, fuzzy
-#~ msgid "sabre_sw"
-#~ msgstr "Säbel"
-
-#, fuzzy
-#~ msgid "rock_stf"
-#~ msgstr "Felsenstab"
-
-#, fuzzy
-#~ msgid "power"
-#~ msgstr "Kraft"
-
-#, fuzzy
-#~ msgid "willpower"
-#~ msgstr "Willenskraft"
-
-#, fuzzy
-#~ msgid "blind"
-#~ msgstr "Goblinhund"
-
-#, fuzzy
-#~ msgid "poisoned"
-#~ msgstr "beschworen"
-
-#, fuzzy
-#~ msgid "fraction"
-#~ msgstr "Übungsbogen"
-
-#, fuzzy
-#~ msgid "slave_overseer"
-#~ msgstr "Ausdauer"
-
-msgid "Better not."
-msgstr "Besser nicht"
-
-#, fuzzy
-#~ msgid "necromancer_siegeDefense"
-#~ msgstr "Nekromantenstab"
-
-#, fuzzy
-#~ msgid "catapult_skeleton"
-#~ msgstr "Erschafft ein Skelett"
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "Konzentration"
-
-#~ msgid "Nah to expensive"
-#~ msgstr "Nee, zu teuer."
-
-#, fuzzy
-#~ msgid "string"
-#~ msgstr "Frostring"
-
-#, fuzzy
-#~ msgid "lockdown"
-#~ msgstr "Block"
-
-#, fuzzy
-#~ msgid "gold"
-#~ msgstr "Goldring"
-
-#, fuzzy
-#~ msgid "position"
-#~ msgstr "Tränke"
-
-#, fuzzy
-#~ msgid "red"
-#~ msgstr "Derred"
-
-#, fuzzy
-#~ msgid "block"
-#~ msgstr "Block"
+#~ msgid "locSergeant"
+#~ msgstr "Sergeant Wober"
 
 #, fuzzy
 #~ msgid "goblins_l13_2"
 #~ msgstr "Goblinschlächter"
 
 #, fuzzy
-#~ msgid "locSergeant"
-#~ msgstr "Sergeant Wober"
+#~ msgid "block"
+#~ msgstr "Block"
+
+#, fuzzy
+#~ msgid "red"
+#~ msgstr "Derred"
+
+#, fuzzy
+#~ msgid "position"
+#~ msgstr "Tränke"
+
+#, fuzzy
+#~ msgid "gold"
+#~ msgstr "Goldring"
+
+#, fuzzy
+#~ msgid "lockdown"
+#~ msgstr "Block"
+
+#, fuzzy
+#~ msgid "string"
+#~ msgstr "Frostring"
+
+#~ msgid "Nah to expensive"
+#~ msgstr "Nee, zu teuer."
+
+#, fuzzy
+#~ msgid "location"
+#~ msgstr "Konzentration"
+
+#, fuzzy
+#~ msgid "catapult_skeleton"
+#~ msgstr "Erschafft ein Skelett"
+
+#, fuzzy
+#~ msgid "necromancer_siegeDefense"
+#~ msgstr "Nekromantenstab"
+
+#~ msgid "Better not."
+#~ msgstr "Besser nicht"
+
+#, fuzzy
+#~ msgid "slave_overseer"
+#~ msgstr "Ausdauer"
+
+#, fuzzy
+#~ msgid "fraction"
+#~ msgstr "Übungsbogen"
+
+#, fuzzy
+#~ msgid "poisoned"
+#~ msgstr "beschworen"
+
+#, fuzzy
+#~ msgid "blind"
+#~ msgstr "Goblinhund"
+
+#, fuzzy
+#~ msgid "willpower"
+#~ msgstr "Willenskraft"
+
+#, fuzzy
+#~ msgid "power"
+#~ msgstr "Kraft"
+
+#, fuzzy
+#~ msgid "rock_stf"
+#~ msgstr "Felsenstab"
+
+#, fuzzy
+#~ msgid "sabre_sw"
+#~ msgstr "Säbel"
+
+#, fuzzy
+#~ msgid "GuardLocation"
+#~ msgstr "Hauptmann der Wache"
+
+#, fuzzy
+#~ msgid "LichLocation"
+#~ msgstr "Echotrank"
+
+#, fuzzy
+#~ msgid "peasant"
+#~ msgstr "Bauer"
+
+#, fuzzy
+#~ msgid "armor"
+#~ msgstr "Rüstung"
+
+#, fuzzy
+#~ msgid "Archer"
+#~ msgstr "Wilderer"
+
+#, fuzzy
+#~ msgid "Magician"
+#~ msgstr "Magieangriff"
+
+#~ msgid ""
+#~ "You are better prepared to suffer the consequences, wretched creature."
+#~ msgstr "Du bist besser bereit, die Konsequenzen zu tragen, elende Kreatur."
+
+#~ msgid ""
+#~ "Reverse this at once or every guard of Aisen will be on your trail, "
+#~ "Cursed One! ##male"
+#~ msgstr ""
+#~ "Mach das sofort rückgängig oder jede Wache in Aisen wird hinter dir her "
+#~ "sein, Verfluchter!"
+
+#~ msgid ""
+#~ "Reverse this at once or every guard of Aisen will be on your trail, "
+#~ "Cursed One! ##female"
+#~ msgstr ""
+#~ "Mach das sofort rückgängig oder jede Wache in Aisen wird hinter dir her "
+#~ "sein, Verfluchte!"
+
+#~ msgid "Unknown Lich"
+#~ msgstr "Unbekannter Lich"
+
+#~ msgid "Scarfaced Necromancer"
+#~ msgstr "Narbengesichtiger Nekromant"
+
+#~ msgid "Skinny Necromancer"
+#~ msgstr "Magerer Nekromant"
+
+#~ msgid "Who is that?"
+#~ msgstr "Wer ist das?"
+
+#~ msgid "Willard"
+#~ msgstr "Willard"

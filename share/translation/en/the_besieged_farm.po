@@ -193,13 +193,13 @@ msgstr "But that shall be of no concern to you."
 msgid "Here's the money."
 msgstr "Here's the money."
 
+#, fuzzy
+#~ msgid "bronsFarmDoor"
+#~ msgstr "Brons Farm"
+
 #~ msgid ""
 #~ "Really now, \"..name..\". Did you think she'd use carrier pigeons in this "
 #~ "day and age?"
 #~ msgstr ""
 #~ "Really now, \"..name..\". Did you think she'd use carrier pigeons in this "
 #~ "day and age?"
-
-#, fuzzy
-#~ msgid "bronsFarmDoor"
-#~ msgstr "Brons Farm"

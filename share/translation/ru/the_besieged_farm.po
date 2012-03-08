@@ -187,13 +187,13 @@ msgstr "Но это не твоя забота."
 msgid "Here's the money."
 msgstr "Вот твои деньги."
 
+#, fuzzy
+#~ msgid "bronsFarmDoor"
+#~ msgstr "Ферма Брона"
+
 #~ msgid ""
 #~ "Really now, \"..name..\". Did you think she'd use carrier pigeons in this "
 #~ "day and age?"
 #~ msgstr ""
 #~ "В самом деле, \"..name..\". Ты что, думал, она будет использовать "
 #~ "почтовых голубей в наши дни?"
-
-#, fuzzy
-#~ msgid "bronsFarmDoor"
-#~ msgstr "Ферма Брона"

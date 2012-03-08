@@ -813,26 +813,26 @@ msgstr "Wassermagie"
 msgid "Wind Magic"
 msgstr "Windmagie"
 
-msgid "Attr points"
-msgstr "Punkte"
+#~ msgid "Delete Character"
+#~ msgstr "Charakter löschen"
 
-msgid "Attribute points remaining to distribute"
-msgstr "Verbleibende Punkte"
+#~ msgid "Create Character"
+#~ msgstr "Charakter erstellen"
 
-msgid "Characters"
-msgstr "Charakter Bildschirm"
+#~ msgid "Savegame"
+#~ msgstr "Gespeichertes Spiel"
 
-msgid "Delete"
-msgstr "Löschen"
+#~ msgid "mage"
+#~ msgstr "Magier"
 
-msgid "mage"
-msgstr "Magier"
+#~ msgid "Delete"
+#~ msgstr "Löschen"
 
-msgid "Savegame"
-msgstr "Gespeichertes Spiel"
+#~ msgid "Characters"
+#~ msgstr "Charakter Bildschirm"
 
-msgid "Create Character"
-msgstr "Charakter erstellen"
+#~ msgid "Attribute points remaining to distribute"
+#~ msgstr "Verbleibende Punkte"
 
-msgid "Delete Character"
-msgstr "Charakter löschen"
+#~ msgid "Attr points"
+#~ msgstr "Punkte"

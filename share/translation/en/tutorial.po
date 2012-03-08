@@ -1626,29 +1626,29 @@ msgstr ""
 "have to mop escaped sluglings from the floor."
 
 #, fuzzy
-#~ msgid "explain_skills_no"
-#~ msgstr "Explain skills"
-
-#, fuzzy
-#~ msgid "explain_levelup_continue"
-#~ msgstr "Explain level up"
-
-#, fuzzy
-#~ msgid "tutorial_weapon"
-#~ msgstr "Tutorial"
-
-#, fuzzy
-#~ msgid "tutorialSlugs"
-#~ msgstr "Tutorial"
-
-#, fuzzy
-#~ msgid "findSecretDoor"
-#~ msgstr "Open secret door"
+#~ msgid "tolec"
+#~ msgstr "Tolec"
 
 #, fuzzy
 #~ msgid "derred"
 #~ msgstr "Derred"
 
 #, fuzzy
-#~ msgid "tolec"
-#~ msgstr "Tolec"
+#~ msgid "findSecretDoor"
+#~ msgstr "Open secret door"
+
+#, fuzzy
+#~ msgid "tutorialSlugs"
+#~ msgstr "Tutorial"
+
+#, fuzzy
+#~ msgid "tutorial_weapon"
+#~ msgstr "Tutorial"
+
+#, fuzzy
+#~ msgid "explain_levelup_continue"
+#~ msgstr "Explain level up"
+
+#, fuzzy
+#~ msgid "explain_skills_no"
+#~ msgstr "Explain skills"

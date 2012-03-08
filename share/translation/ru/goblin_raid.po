@@ -148,9 +148,9 @@ msgid "And I could care less what happens to some peasant family."
 msgstr "И я могу не заботиться о том, что же там с какой-то семьей крестьян."
 
 #, fuzzy
-#~ msgid "goblin_apprtc"
+#~ msgid "goblin_regresh"
 #~ msgstr "набег_гоблинов"
 
 #, fuzzy
-#~ msgid "goblin_regresh"
+#~ msgid "goblin_apprtc"
 #~ msgstr "набег_гоблинов"

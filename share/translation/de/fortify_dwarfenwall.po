@@ -955,17 +955,17 @@ msgid "Let's gain their trust."
 msgstr "Gewinnen wir ihr Vertrauen."
 
 #, fuzzy
-#~ msgid "SorenWindclawArea"
-#~ msgstr "Soren Windklaue"
-
-#, fuzzy
-#~ msgid "locSorenWindclaw"
-#~ msgstr "Soren Windklaue"
+#~ msgid "tolec"
+#~ msgstr "Tolec"
 
 #, fuzzy
 #~ msgid "derred"
 #~ msgstr "Derred"
 
 #, fuzzy
-#~ msgid "tolec"
-#~ msgstr "Tolec"
+#~ msgid "locSorenWindclaw"
+#~ msgstr "Soren Windklaue"
+
+#, fuzzy
+#~ msgid "SorenWindclawArea"
+#~ msgstr "Soren Windklaue"

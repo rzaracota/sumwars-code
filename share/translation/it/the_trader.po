@@ -483,19 +483,12 @@ msgstr "Non grazie a te. Posso continuare a offrirti i miei servigi?"
 msgid "Surely. Now that I finally have a sound anchor again."
 msgstr "Certamente."
 
-#~ msgid "Doesn't everyone learn it who wants to avoid death?"
-#~ msgstr ""
-#~ "Tutti coloro che vogliono evitare una morte certa farebbero bene a "
-#~ "tenerlo sempre in mente."
+#, fuzzy
+#~ msgid "theTrader"
+#~ msgstr "Il Mercante"
 
-#~ msgid "More like town portal."
-#~ msgstr "Del tipo \"Portale Magico\"."
-
-#~ msgid "with all due respect: That is a blessing."
-#~ msgstr "Con il dovuto rispetto: questa e' una benedizione."
-
-#~ msgid "They are everywhere."
-#~ msgstr "Sono dappertutto."
+#~ msgid "A moment, dear mister."
+#~ msgstr "Un momento, caro signore."
 
 #~ msgid ""
 #~ "I'm afraid all I can give you for your wares in gold would be "
@@ -504,9 +497,16 @@ msgstr "Certamente."
 #~ "Ho paura che tutto l'oro che posso darti per la tua merce non sara' "
 #~ "sufficiente."
 
-#~ msgid "A moment, dear mister."
-#~ msgstr "Un momento, caro signore."
+#~ msgid "They are everywhere."
+#~ msgstr "Sono dappertutto."
 
-#, fuzzy
-#~ msgid "theTrader"
-#~ msgstr "Il Mercante"
+#~ msgid "with all due respect: That is a blessing."
+#~ msgstr "Con il dovuto rispetto: questa e' una benedizione."
+
+#~ msgid "More like town portal."
+#~ msgstr "Del tipo \"Portale Magico\"."
+
+#~ msgid "Doesn't everyone learn it who wants to avoid death?"
+#~ msgstr ""
+#~ "Tutti coloro che vogliono evitare una morte certa farebbero bene a "
+#~ "tenerlo sempre in mente."

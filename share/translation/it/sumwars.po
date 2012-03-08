@@ -5,7 +5,7 @@
 # Francesco Miglietta (fra9000) <miglietta.francesco@gmail.com>, 2010
 # 
 # Eugenio Fagioli <eugenio.fagioli@gmail.com>, 2011.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
@@ -3687,171 +3687,171 @@ msgstr ""
 "turbinante"
 
 #, fuzzy
-#~ msgid "A blue potion?"
-#~ msgstr "Pozione dell'eco"
-
-msgid "Fundgegenstaende"
-msgstr "Oggetti smarriti"
-
-#, fuzzy
-#~ msgid "goblin_raid"
-#~ msgstr "Goblin bandito"
-
-msgid "Vorarbeiter Nekromant"
-msgstr "Sorveglianza del Necromante"
-
-msgid "Hauptmann der Wache"
-msgstr "Capitano delle Guardie"
-
-msgid ""
-#~ "You are better prepared to suffer the consequences, wretched creature."
-msgstr ""
-#~ "Misera creatura, sarà meglio che sia pronta ad affrontarne le conseguenze."
-
-msgid ""
-#~ "Reverse this at once or every guard of Aisen will be on your trail, "
-#~ "Cursed One! ##male"
-msgstr ""
-#~ "Maledetto! Smettila subito o ogni guardia di Aisen ti starà alle costole!"
-
-msgid ""
-#~ "Reverse this at once or every guard of Aisen will be on your trail, "
-#~ "Cursed One! ##female"
-msgstr ""
-#~ "Maledetta! Smettila subito o ogni guardia di Aisen ti starà alle costole!"
-
-msgid ""
-#~ "I have to find an energy source and a cog before that thing will work "
-#~ "again."
-msgstr ""
-#~ "Devo trovare una fonte di energia e un ingranaggio per far funzionare di "
-#~ "nuovo quell'affare"
-
-msgid "Unknown Lich"
-msgstr "Lich Sconosciuto"
-
-msgid "Scarfaced Necromancer"
-msgstr "Necromante Sfigurato"
-
-msgid "Skinny Necromancer"
-msgstr "Necromante Magrolino"
-
-msgid "Who is that?"
-msgstr "E chi è questo?"
-
-msgid "Willard"
-msgstr "Willard"
-
-#, fuzzy
-#~ msgid "Magician"
-#~ msgstr "attacco magico"
-
-#, fuzzy
-#~ msgid "Archer"
-#~ msgstr "Bracconiere"
-
-#, fuzzy
-#~ msgid "armor"
-#~ msgstr "Armatura"
-
-#, fuzzy
-#~ msgid "peasant"
-#~ msgstr "Contadino"
-
-#, fuzzy
-#~ msgid "LichLocation"
-#~ msgstr "Pozione dell'eco"
-
-#, fuzzy
-#~ msgid "start_benchmark"
-#~ msgstr "benchmarkBox"
-
-#, fuzzy
-#~ msgid "init_benchmark"
-#~ msgstr "benchmarkBox"
-
-#, fuzzy
-#~ msgid "GuardLocation"
-#~ msgstr "Capitano delle guardie"
-
-#, fuzzy
-#~ msgid "sabre_sw"
-#~ msgstr "Sciabola"
-
-#, fuzzy
-#~ msgid "rock_stf"
-#~ msgstr "Bastone di pietra"
-
-#, fuzzy
-#~ msgid "power"
-#~ msgstr "Potere"
-
-#, fuzzy
-#~ msgid "willpower"
-#~ msgstr "Forza Di Volontà"
-
-#, fuzzy
-#~ msgid "blind"
-#~ msgstr "Cane goblin"
-
-#, fuzzy
-#~ msgid "poisoned"
-#~ msgstr "evocato"
-
-#, fuzzy
-#~ msgid "fraction"
-#~ msgstr "nessuna azione"
-
-#, fuzzy
-#~ msgid "slave_overseer"
-#~ msgstr "Supervisore"
-
-msgid "Better not."
-msgstr "Meglio di no."
-
-#, fuzzy
-#~ msgid "necromancer_siegeDefense"
-#~ msgstr "Bastone del necromante"
-
-#, fuzzy
-#~ msgid "catapult_skeleton"
-#~ msgstr "Crea uno scheletro"
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "nessuna azione"
-
-#~ msgid "Nah to expensive"
-#~ msgstr "Meglio di no, troppo costoso."
-
-#, fuzzy
-#~ msgid "string"
-#~ msgstr "Anello Congelante"
-
-#, fuzzy
-#~ msgid "lockdown"
-#~ msgstr "Parata Migliorata"
-
-#, fuzzy
-#~ msgid "gold"
-#~ msgstr "Anello d'oro"
-
-#, fuzzy
-#~ msgid "position"
-#~ msgstr "Pozioni"
-
-#, fuzzy
-#~ msgid "red"
-#~ msgstr "Derred"
-
-#, fuzzy
-#~ msgid "block"
-#~ msgstr "Parata Migliorata"
+#~ msgid "locSergeant"
+#~ msgstr "Sergente Wober"
 
 #, fuzzy
 #~ msgid "goblins_l13_2"
 #~ msgstr "Goblin mietitore"
 
 #, fuzzy
-#~ msgid "locSergeant"
-#~ msgstr "Sergente Wober"
+#~ msgid "block"
+#~ msgstr "Parata Migliorata"
+
+#, fuzzy
+#~ msgid "red"
+#~ msgstr "Derred"
+
+#, fuzzy
+#~ msgid "position"
+#~ msgstr "Pozioni"
+
+#, fuzzy
+#~ msgid "gold"
+#~ msgstr "Anello d'oro"
+
+#, fuzzy
+#~ msgid "lockdown"
+#~ msgstr "Parata Migliorata"
+
+#, fuzzy
+#~ msgid "string"
+#~ msgstr "Anello Congelante"
+
+#~ msgid "Nah to expensive"
+#~ msgstr "Meglio di no, troppo costoso."
+
+#, fuzzy
+#~ msgid "location"
+#~ msgstr "nessuna azione"
+
+#, fuzzy
+#~ msgid "catapult_skeleton"
+#~ msgstr "Crea uno scheletro"
+
+#, fuzzy
+#~ msgid "necromancer_siegeDefense"
+#~ msgstr "Bastone del necromante"
+
+#~ msgid "Better not."
+#~ msgstr "Meglio di no."
+
+#, fuzzy
+#~ msgid "slave_overseer"
+#~ msgstr "Supervisore"
+
+#, fuzzy
+#~ msgid "fraction"
+#~ msgstr "nessuna azione"
+
+#, fuzzy
+#~ msgid "poisoned"
+#~ msgstr "evocato"
+
+#, fuzzy
+#~ msgid "blind"
+#~ msgstr "Cane goblin"
+
+#, fuzzy
+#~ msgid "willpower"
+#~ msgstr "Forza Di Volontà"
+
+#, fuzzy
+#~ msgid "power"
+#~ msgstr "Potere"
+
+#, fuzzy
+#~ msgid "rock_stf"
+#~ msgstr "Bastone di pietra"
+
+#, fuzzy
+#~ msgid "sabre_sw"
+#~ msgstr "Sciabola"
+
+#, fuzzy
+#~ msgid "GuardLocation"
+#~ msgstr "Capitano delle guardie"
+
+#, fuzzy
+#~ msgid "init_benchmark"
+#~ msgstr "benchmarkBox"
+
+#, fuzzy
+#~ msgid "start_benchmark"
+#~ msgstr "benchmarkBox"
+
+#, fuzzy
+#~ msgid "LichLocation"
+#~ msgstr "Pozione dell'eco"
+
+#, fuzzy
+#~ msgid "peasant"
+#~ msgstr "Contadino"
+
+#, fuzzy
+#~ msgid "armor"
+#~ msgstr "Armatura"
+
+#, fuzzy
+#~ msgid "Archer"
+#~ msgstr "Bracconiere"
+
+#, fuzzy
+#~ msgid "Magician"
+#~ msgstr "attacco magico"
+
+#~ msgid "Willard"
+#~ msgstr "Willard"
+
+#~ msgid "Who is that?"
+#~ msgstr "E chi è questo?"
+
+#~ msgid "Skinny Necromancer"
+#~ msgstr "Necromante Magrolino"
+
+#~ msgid "Scarfaced Necromancer"
+#~ msgstr "Necromante Sfigurato"
+
+#~ msgid "Unknown Lich"
+#~ msgstr "Lich Sconosciuto"
+
+#~ msgid ""
+#~ "I have to find an energy source and a cog before that thing will work "
+#~ "again."
+#~ msgstr ""
+#~ "Devo trovare una fonte di energia e un ingranaggio per far funzionare di "
+#~ "nuovo quell'affare"
+
+#~ msgid ""
+#~ "Reverse this at once or every guard of Aisen will be on your trail, "
+#~ "Cursed One! ##female"
+#~ msgstr ""
+#~ "Maledetta! Smettila subito o ogni guardia di Aisen ti starà alle costole!"
+
+#~ msgid ""
+#~ "Reverse this at once or every guard of Aisen will be on your trail, "
+#~ "Cursed One! ##male"
+#~ msgstr ""
+#~ "Maledetto! Smettila subito o ogni guardia di Aisen ti starà alle costole!"
+
+#~ msgid ""
+#~ "You are better prepared to suffer the consequences, wretched creature."
+#~ msgstr ""
+#~ "Misera creatura, sarà meglio che sia pronta ad affrontarne le conseguenze."
+
+#~ msgid "Hauptmann der Wache"
+#~ msgstr "Capitano delle Guardie"
+
+#~ msgid "Vorarbeiter Nekromant"
+#~ msgstr "Sorveglianza del Necromante"
+
+#, fuzzy
+#~ msgid "goblin_raid"
+#~ msgstr "Goblin bandito"
+
+#~ msgid "Fundgegenstaende"
+#~ msgstr "Oggetti smarriti"
+
+#, fuzzy
+#~ msgid "A blue potion?"
+#~ msgstr "Pozione dell'eco"

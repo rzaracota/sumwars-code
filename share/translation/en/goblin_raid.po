@@ -142,9 +142,9 @@ msgid "And I could care less what happens to some peasant family."
 msgstr "And I could care less what happens to some peasant family."
 
 #, fuzzy
-#~ msgid "goblin_apprtc"
+#~ msgid "goblin_regresh"
 #~ msgstr "goblin_raid"
 
 #, fuzzy
-#~ msgid "goblin_regresh"
+#~ msgid "goblin_apprtc"
 #~ msgstr "goblin_raid"

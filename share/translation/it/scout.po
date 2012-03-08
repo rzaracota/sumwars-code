@@ -278,10 +278,10 @@ msgstr ""
 msgid "greyWolfcave"
 msgstr "La cava del lupo"
 
-#~ msgid ""
-#~ "After killing the spider you safely pick up a backpack in good shape."
-#~ msgstr "Dopo aver ucciso i ragni, raccogli uno zaino in buone condizioni."
-
 #, fuzzy
 #~ msgid "questScout"
 #~ msgstr "Esploratore Ferito"
+
+#~ msgid ""
+#~ "After killing the spider you safely pick up a backpack in good shape."
+#~ msgstr "Dopo aver ucciso i ragni, raccogli uno zaino in buone condizioni."

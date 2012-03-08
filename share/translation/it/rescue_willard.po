@@ -383,17 +383,15 @@ msgstr "Meadow"
 msgid "So here is this Willard."
 msgstr "Eccoci arrivati, ti ho riportato Willard."
 
-#~ msgid "You know quite a lot."
-#~ msgstr "Sai tante cose vedo."
+#, fuzzy
+#~ msgid "WillardArea"
+#~ msgstr "Willard"
 
-#~ msgid "That is why I called you when you were passing."
-#~ msgstr "Ecco perche' ti ho chiamato mentre passavi."
+#~ msgid "I hope you are making a good time searching for Willard. ##solo"
+#~ msgstr "Spero tu riesca velocemente a trovare Willard. ##solo"
 
-#~ msgid "I'm sure he waits somewhere for help."
-#~ msgstr "Sono sicuro che e' da qualche parte in attesa di aiuto."
-
-#~ msgid "I'm sorry. Maybe my mouth slipped."
-#~ msgstr "Scusami, forse ho esagerato."
+#~ msgid "I hope you are making a good time searching for Willard."
+#~ msgstr "Spero riusciate velocemente a trovare Willard."
 
 #~ msgid ""
 #~ "I thought you were the kind of Branded Ones that doesn't kill every human "
@@ -402,12 +400,14 @@ msgstr "Eccoci arrivati, ti ho riportato Willard."
 #~ "Pensavo tu fossi quel genere di Marchiati che non va in giro ad uccidere "
 #~ "chiunque gli passi davanti."
 
-#~ msgid "I hope you are making a good time searching for Willard."
-#~ msgstr "Spero riusciate velocemente a trovare Willard."
+#~ msgid "I'm sorry. Maybe my mouth slipped."
+#~ msgstr "Scusami, forse ho esagerato."
 
-#~ msgid "I hope you are making a good time searching for Willard. ##solo"
-#~ msgstr "Spero tu riesca velocemente a trovare Willard. ##solo"
+#~ msgid "I'm sure he waits somewhere for help."
+#~ msgstr "Sono sicuro che e' da qualche parte in attesa di aiuto."
 
-#, fuzzy
-#~ msgid "WillardArea"
-#~ msgstr "Willard"
+#~ msgid "That is why I called you when you were passing."
+#~ msgstr "Ecco perche' ti ho chiamato mentre passavi."
+
+#~ msgid "You know quite a lot."
+#~ msgstr "Sai tante cose vedo."

@@ -497,8 +497,21 @@ msgid "Surely. Now that I finally have a sound anchor again."
 msgstr ""
 "Конечно. Особенно теперь, когда у меня снова есть место для сохранения."
 
-#~ msgid "A moment, dear mister."
-#~ msgstr "Один момент, мистер."
+#, fuzzy
+#~ msgid "theTrader"
+#~ msgstr "Торговец"
+
+#~ msgid "Doesn't everyone learn it who wants to avoid death?"
+#~ msgstr "Разве не все, кто хочет избежать смерти, приучились к этому?"
+
+#~ msgid "More like town portal."
+#~ msgstr "Скорее городской портал."
+
+#~ msgid "with all due respect: That is a blessing."
+#~ msgstr "со всем уважением: это благословение."
+
+#~ msgid "They are everywhere."
+#~ msgstr "Они везде."
 
 #~ msgid ""
 #~ "I'm afraid all I can give you for your wares in gold would be "
@@ -507,18 +520,5 @@ msgstr ""
 #~ "Я боюсь, всего, что я могу дать тебе за твои товары в виде золота, будет "
 #~ "недостаточно."
 
-#~ msgid "They are everywhere."
-#~ msgstr "Они везде."
-
-#~ msgid "with all due respect: That is a blessing."
-#~ msgstr "со всем уважением: это благословение."
-
-#~ msgid "More like town portal."
-#~ msgstr "Скорее городской портал."
-
-#~ msgid "Doesn't everyone learn it who wants to avoid death?"
-#~ msgstr "Разве не все, кто хочет избежать смерти, приучились к этому?"
-
-#, fuzzy
-#~ msgid "theTrader"
-#~ msgstr "Торговец"
+#~ msgid "A moment, dear mister."
+#~ msgstr "Один момент, мистер."

@@ -510,8 +510,21 @@ msgid "Surely. Now that I finally have a sound anchor again."
 msgstr ""
 "Aber sicher doch. Jetzt, wo ich endlich wieder einen vernünftigen Anker habe."
 
-#~ msgid "A moment, dear mister."
-#~ msgstr "Einen Augenblick, ehrenwerter Herr."
+#, fuzzy
+#~ msgid "theTrader"
+#~ msgstr "Der Händler"
+
+#~ msgid "Doesn't everyone learn it who wants to avoid death?"
+#~ msgstr "Lernt die nicht jeder, der den Tod vermeiden will?"
+
+#~ msgid "More like town portal."
+#~ msgstr "Wohl eher Stadtportal."
+
+#~ msgid "with all due respect: That is a blessing."
+#~ msgstr "Und ohne Euch zu nahe zu treten: Das ist auch gut so."
+
+#~ msgid "They are everywhere."
+#~ msgstr "Das ist sie überall."
 
 #~ msgid ""
 #~ "I'm afraid all I can give you for your wares in gold would be "
@@ -520,18 +533,5 @@ msgstr ""
 #~ "Ich fürchte, ich kann euch nur unzureichende Mengen an Gold für eure "
 #~ "Waren bieten."
 
-#~ msgid "They are everywhere."
-#~ msgstr "Das ist sie überall."
-
-#~ msgid "with all due respect: That is a blessing."
-#~ msgstr "Und ohne Euch zu nahe zu treten: Das ist auch gut so."
-
-#~ msgid "More like town portal."
-#~ msgstr "Wohl eher Stadtportal."
-
-#~ msgid "Doesn't everyone learn it who wants to avoid death?"
-#~ msgstr "Lernt die nicht jeder, der den Tod vermeiden will?"
-
-#, fuzzy
-#~ msgid "theTrader"
-#~ msgstr "Der Händler"
+#~ msgid "A moment, dear mister."
+#~ msgstr "Einen Augenblick, ehrenwerter Herr."

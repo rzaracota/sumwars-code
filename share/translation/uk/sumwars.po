@@ -3646,42 +3646,42 @@ msgstr "Магістр зброї"
 msgid "Attacks every enemy in weapon range with a triple sweeping strike."
 msgstr "Атакує кожного ворога в радіусі дії зброї потрійним змітальним ударом."
 
-msgid "Willard"
-msgstr "Віллард"
+#~ msgid "Willard"
+#~ msgstr "Віллард"
 
-msgid "Who is that?"
-msgstr "Хто це?"
+#~ msgid "Who is that?"
+#~ msgstr "Хто це?"
 
-msgid "Skinny Necromancer"
-msgstr "Худющий Некромант"
+#~ msgid "Skinny Necromancer"
+#~ msgstr "Худющий Некромант"
 
-msgid "Scarfaced Necromancer"
-msgstr "Некромант зі шрамом на лиці"
+#~ msgid "Scarfaced Necromancer"
+#~ msgstr "Некромант зі шрамом на лиці"
 
-msgid "Unknown Lich"
-msgstr "Невідомий Ліч"
+#~ msgid "Unknown Lich"
+#~ msgstr "Невідомий Ліч"
 
-msgid ""
+#~ msgid ""
 #~ "I have to find an energy source and a cog before that thing will work "
 #~ "again."
-msgstr "Ця штука не запрацює без джерела енергії та шестерні."
+#~ msgstr "Ця штука не запрацює без джерела енергії та шестерні."
 
-msgid ""
+#~ msgid ""
 #~ "Reverse this at once or every guard of Aisen will be on your trail, "
 #~ "Cursed One! ##female"
-msgstr ""
+#~ msgstr ""
 #~ "Зразу ж поверни це або кожен страж Айзена стане на твоєму шляху, Проклята!"
 
-msgid ""
+#~ msgid ""
 #~ "Reverse this at once or every guard of Aisen will be on your trail, "
 #~ "Cursed One! ##male"
-msgstr ""
+#~ msgstr ""
 #~ "Зразу ж поверни це або кожен страж Айзена стане на твоєму шляху, "
 #~ "Проклятий!"
 
-msgid ""
+#~ msgid ""
 #~ "You are better prepared to suffer the consequences, wretched creature."
-msgstr "Краще підготуйся страждати    від наслідків, нещасна істота."
+#~ msgstr "Краще підготуйся страждати    від наслідків, нещасна істота."
 
 #, fuzzy
 #~ msgid "Magician"
@@ -3747,8 +3747,8 @@ msgstr "Краще підготуйся страждати    від наслі�
 #~ msgid "slave_overseer"
 #~ msgstr "Наглядач"
 
-msgid "Better not."
-msgstr "Ні, не треба."
+#~ msgid "Better not."
+#~ msgstr "Ні, не треба."
 
 #, fuzzy
 #~ msgid "necromancer_siegeDefense"
@@ -3762,8 +3762,8 @@ msgstr "Ні, не треба."
 #~ msgid "location"
 #~ msgstr "ніяких дій"
 
-msgid "Nah to expensive"
-msgstr "Ні, це надто дорого"
+#~ msgid "Nah to expensive"
+#~ msgstr "Ні, це надто дорого"
 
 #, fuzzy
 #~ msgid "string"
