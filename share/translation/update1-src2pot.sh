@@ -23,11 +23,11 @@ epots=$(ls potfiles/*.poe)
 for e in $epots
 do
 	pot=${e/%e/t}
-	echo -ne "\E[1;31m$pot \E[0m"
+	echo -ne "\E[1;31m$pot \E[0m\n"
 	if [ -f "$pot" ]; then
 		msgcat -F -o "$pot" "$pot" "$e"
 	else
-		msginit --no-translator -i "$e" -o "$pot"
+    cat "$e" > "$pot"
 	fi
 done
 

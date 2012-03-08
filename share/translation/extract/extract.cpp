@@ -46,7 +46,12 @@ msgid \"\"\n\
 msgstr \"\"\n\
 \"MIME-Version: 1.0\\n\"\n\
 \"Content-Type: text/plain; charset=UTF-8\\n\"\n\
-\"Content-Transfer-Encoding: 8bit\\n\"\n\n\
+\"Content-Transfer-Encoding: 8bit\\n\"\n\
+\"Project-Id-Version: PACKAGE VERSION\\n\"\n\
+\"Last-Translator: Automatically generated\\n\"\n\
+\"Language-Team: none\\n\"\n\
+\"Language: \\n\"\n\
+\"Plural-Forms: nplurals=2; plural=(n != 1);\\n\"\n\n\n\
 ");
 
 typedef std::map<std::string, std::map<std::string, std::vector<std::string> > > TStrings; // domain -> strings -> locations
