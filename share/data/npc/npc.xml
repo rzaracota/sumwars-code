@@ -64,7 +64,7 @@
 		<TradeItem subtype="heal_2"  number="10" number_magical="0"/>
 	</Trade>
 	
-	<Topic name="trade" start_option="Leere Schriftrollen kaufen" />
+	<Topic name="trade" start_option="Buy empty scrolls" />
 
 	<Topic name="start_dialogue" >
 		<Effect>
