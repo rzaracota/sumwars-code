@@ -254,18 +254,18 @@ msgstr ""
 "Mi chiedo se sapesse che prima gli tocchera' una deviazione per l'inferno di "
 "Harad?"
 
-#, fuzzy
-#~ msgid "GabResh"
-#~ msgstr "Gab Resh"
-
-#~ msgid "Rakthr mootrick!"
-#~ msgstr "Rakthr mootrick!"
-
-#~ msgid "Mar! Nom Togubri!"
-#~ msgstr "Mar! Nom Togubri!"
+#~ msgid "name..\" received an item from Maylons Grave."
+#~ msgstr "name..\" ha ricevuto un'oggetto dalla tomba di Maylon."
 
 #~ msgid "Wait, great human warriors. Do not kill!"
 #~ msgstr "Aspettare, grossi guerrieri umani. No uccidere noi!"
 
-#~ msgid "name..\" received an item from Maylons Grave."
-#~ msgstr "name..\" ha ricevuto un'oggetto dalla tomba di Maylon."
+#~ msgid "Mar! Nom Togubri!"
+#~ msgstr "Mar! Nom Togubri!"
+
+#~ msgid "Rakthr mootrick!"
+#~ msgstr "Rakthr mootrick!"
+
+#, fuzzy
+#~ msgid "GabResh"
+#~ msgstr "Gab Resh"

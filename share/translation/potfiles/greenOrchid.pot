@@ -1,3 +1,4 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "MIME-Version: 1.0\n"
@@ -6,295 +7,282 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
-"Language: de\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+
 #: greenOrchid.xml:63
-msgid "(It's just a stupid hat. No harm done.)"
+msgid  "(It's just a stupid hat. No harm done.)"
 msgstr ""
 
 #: greenOrchid.xml:62
-msgid "(Not exactly what I meant, but oh well.)"
+msgid  "(Not exactly what I meant, but oh well.)"
 msgstr ""
 
 #: greenOrchid.xml:140
-msgid "Another stupid thing to carry around."
+msgid  "Another stupid thing to carry around."
 msgstr ""
 
 #: greenOrchid.xml:169
-msgid "Avaera's mercy! This is..."
+msgid  "Avaera's mercy! This is..."
 msgstr ""
 
 #: greenOrchid.xml:134
-msgid ""
-"Behold the great hat of Joringsbridge, the pinnacle of uselessness... wanne "
-"have it?"
+msgid  "Behold the great hat of Joringsbridge, the pinnacle of uselessness... wanne have it?"
 msgstr ""
 
 #: greenOrchid.xml:171
-msgid "But it is..."
+msgid  "But it is..."
 msgstr ""
 
 #: greenOrchid.xml:132
-msgid "But there is noone selling hats here."
+msgid  "But there is noone selling hats here."
 msgstr ""
 
 #: greenOrchid.xml:135
-msgid "Dear me! You'd give it to me just like that?"
+msgid  "Dear me! You'd give it to me just like that?"
 msgstr ""
 
 #: greenOrchid.xml:133
-msgid "Despair not for I have your salvation."
+msgid  "Despair not for I have your salvation."
 msgstr ""
 
 #: greenOrchid.xml:71
-msgid "Do I look like I care for flowers?"
+msgid  "Do I look like I care for flowers?"
 msgstr ""
 
 #: greenOrchid.xml:37
-msgid "Do you like my beautiful flowerbed?"
+msgid  "Do you like my beautiful flowerbed?"
 msgstr ""
 
 #: greenOrchid.xml:129
-msgid "Don't mock me, stranger!"
+msgid  "Don't mock me, stranger!"
 msgstr ""
 
 #: greenOrchid.xml:115
-msgid "Eric"
+msgid  "Eric"
 msgstr ""
 
 #: greenOrchid.xml:87
-msgid "Gee, thank you. Thank you thank you thank you."
+msgid  "Gee, thank you. Thank you thank you thank you."
 msgstr ""
 
 #: greenOrchid.xml:126
-msgid "Go away!"
+msgid  "Go away!"
 msgstr ""
 
 #: greenOrchid.xml:59
-msgid "Here take this hat as a compensation."
+msgid  "Here take this hat as a compensation."
 msgstr ""
 
 #: greenOrchid.xml:36
-msgid "Hey there, traveller."
+msgid  "Hey there, traveller."
 msgstr ""
 
 #: greenOrchid.xml:166
-msgid "Hey, you look like a scholar."
+msgid  "Hey, you look like a scholar."
 msgstr ""
 
 #: greenOrchid.xml:54
-msgid "Hm, I somehow like you."
+msgid  "Hm, I somehow like you."
 msgstr ""
 
 #: greenOrchid.xml:128
-msgid "I can put you out of your misery if you like."
+msgid  "I can put you out of your misery if you like."
 msgstr ""
 
 #: greenOrchid.xml:88
-msgid "I can't possibly show my gratitude... Oh, I know!"
+msgid  "I can't possibly show my gratitude... Oh, I know!"
 msgstr ""
 
 #: greenOrchid.xml:173
-msgid "I can? Thank you stranger!"
+msgid  "I can? Thank you stranger!"
 msgstr ""
 
 #: greenOrchid.xml:6
-msgid ""
-"I found the green orchid and gave it to the girl. She gave me a amulet "
-"instead. I'm still trying to recover from the shock that I actually got "
-"something useful out of this ordeal."
+msgid  "I found the green orchid and gave it to the girl. She gave me a amulet instead. I'm still trying to recover from the shock that I actually got something useful out of this ordeal."
 msgstr ""
 
 #: greenOrchid.xml:168
-msgid "I got this old scholar scroll here. Do you have a use for it?"
+msgid  "I got this old scholar scroll here. Do you have a use for it?"
 msgstr ""
 
 #: greenOrchid.xml:91
-msgid "I hope you don't take this the wrong way"
+msgid  "I hope you don't take this the wrong way"
 msgstr ""
 
 #: greenOrchid.xml:61
-msgid "I insist. I don't expect you to work for free."
+msgid  "I insist. I don't expect you to work for free."
 msgstr ""
 
 #: greenOrchid.xml:12
-msgid ""
-"I offered help to a young girl in Joringsbridge by looking for a green "
-"orchid. She gave me a useless hat for it. And by useless I mean useless. No "
-"way in hell I will ever wear that. Gee, thanks."
+msgid  "I offered help to a young girl in Joringsbridge by looking for a green orchid. She gave me a useless hat for it. And by useless I mean useless. No way in hell I will ever wear that. Gee, thanks."
 msgstr ""
 
 #: greenOrchid.xml:55
-msgid "I'll look around."
+msgid  "I'll look around."
 msgstr ""
 
 #: greenOrchid.xml:30
-msgid "I'm still looking for a green orchid to perfect my flowerbed."
+msgid  "I'm still looking for a green orchid to perfect my flowerbed."
 msgstr ""
 
 #: greenOrchid.xml:10
-msgid ""
-"I'm still looking for the green orchid. I had no luck in Dwarfenwall, but I "
-"got rid of the silly hat. Now I'm stuck with some scholar scroll. Which is "
-"astoundingly boring. I almost fell into a coma after the first three "
-"sentences."
+msgid  "I'm still looking for the green orchid. I had no luck in Dwarfenwall, but I got rid of the silly hat. Now I'm stuck with some scholar scroll. Which is astoundingly boring. I almost fell into a coma after the first three sentences."
 msgstr ""
 
 #: greenOrchid.xml:56
-msgid "If I find one, I'll give it to you."
+msgid  "If I find one, I'll give it to you."
 msgstr ""
 
 #: greenOrchid.xml:131
-msgid "If only I hadn't lost my hat. I can handle anything with a good hat."
+msgid  "If only I hadn't lost my hat. I can handle anything with a good hat."
 msgstr ""
 
 #: greenOrchid.xml:86
-msgid "In fact I did. Here, take it."
+msgid  "In fact I did. Here, take it."
 msgstr ""
 
 #: greenOrchid.xml:167
-msgid "Indeed I am."
+msgid  "Indeed I am."
 msgstr ""
 
 #: greenOrchid.xml:90
-msgid ""
-"It's supposed to be real powerful or something, but it's just plain ugly, "
-"don't you think?"
+msgid  "It's supposed to be real powerful or something, but it's just plain ugly, don't you think?"
 msgstr ""
 
 #: greenOrchid.xml:136
-msgid "Kindness is it's own reward, but I have this scholar scroll."
+msgid  "Kindness is it's own reward, but I have this scholar scroll."
 msgstr ""
 
 #: greenOrchid.xml:79
-msgid "Leave me alone."
+msgid  "Leave me alone."
 msgstr ""
 
 #: greenOrchid.xml:32
-msgid "Look for the green orchid?"
+msgid  "Look for the green orchid?"
 msgstr ""
 
 #: greenOrchid.xml:89
-msgid "My father once gave me this amulet."
+msgid  "My father once gave me this amulet."
 msgstr ""
 
 #: greenOrchid.xml:47
-msgid "Nah, I'm still searching, sorry."
+msgid  "Nah, I'm still searching, sorry."
 msgstr ""
 
 #: greenOrchid.xml:26
-msgid "Nice Flowers"
+msgid  "Nice Flowers"
 msgstr ""
 
-#: greenOrchid.xml:34 greenOrchid.xml:41
-msgid "No"
+#: greenOrchid.xml:34
+#: greenOrchid.xml:41
+msgid  "No"
 msgstr ""
 
 #: greenOrchid.xml:60
-msgid "No problem, girl, but this is really not necessary."
+msgid  "No problem, girl, but this is really not necessary."
 msgstr ""
 
 #: greenOrchid.xml:170
-msgid "No, this can't be real."
+msgid  "No, this can't be real."
 msgstr ""
 
 #: greenOrchid.xml:39
-msgid "Offer Help?"
+msgid  "Offer Help?"
 msgstr ""
 
-#: greenOrchid.xml:43 greenOrchid.xml:46
-msgid "Oh, I remember you. Did you find the green orchid?"
+#: greenOrchid.xml:43
+#: greenOrchid.xml:46
+msgid  "Oh, I remember you. Did you find the green orchid?"
 msgstr ""
 
 #: greenOrchid.xml:38
-msgid "Oh, how I'd love to have a marvelous green orchid in it..."
+msgid  "Oh, how I'd love to have a marvelous green orchid in it..."
 msgstr ""
 
 #: greenOrchid.xml:72
-msgid "Oh."
+msgid  "Oh."
 msgstr ""
 
 #: greenOrchid.xml:25
-msgid "Reba"
+msgid  "Reba"
 msgstr ""
 
 #: greenOrchid.xml:31
-msgid "Say, perhaps you can look for it on your travels?"
+msgid  "Say, perhaps you can look for it on your travels?"
 msgstr ""
 
 #: greenOrchid.xml:138
-msgid "Take it instead."
+msgid  "Take it instead."
 msgstr ""
 
 #: greenOrchid.xml:139
-msgid "Thank. You."
+msgid  "Thank. You."
 msgstr ""
 
 #: greenOrchid.xml:92
-msgid "Thanks. I think I can handle it's ugliness."
+msgid  "Thanks. I think I can handle it's ugliness."
 msgstr ""
 
 #: greenOrchid.xml:174
-msgid ""
-"That's a very important piece for my research. Take this flower. It's "
-"nothing special, but it has a strange colour"
+msgid  "That's a very important piece for my research. Take this flower. It's nothing special, but it has a strange colour"
 msgstr ""
 
 #: greenOrchid.xml:2
-msgid "The Green Orchid"
+msgid  "The Green Orchid"
 msgstr ""
 
 #: greenOrchid.xml:156
-msgid "Thomas"
+msgid  "Thomas"
 msgstr ""
 
 #: greenOrchid.xml:130
-msgid ""
-"Undead in front of the gates, rocks falling from the sky, annoying bypassers "
-"making creepy proposals..."
+msgid  "Undead in front of the gates, rocks falling from the sky, annoying bypassers making creepy proposals..."
 msgstr ""
 
 #: greenOrchid.xml:175
-msgid "Wha... I really got something I want? Thank you man."
+msgid  "Wha... I really got something I want? Thank you man."
 msgstr ""
 
 #: greenOrchid.xml:116
-msgid "Whats that look for?"
+msgid  "Whats that look for?"
 msgstr ""
 
 #: greenOrchid.xml:57
-msgid "Wow, thanks!"
+msgid  "Wow, thanks!"
 msgstr ""
 
-#: greenOrchid.xml:33 greenOrchid.xml:40
-msgid "Yes"
+#: greenOrchid.xml:33
+#: greenOrchid.xml:40
+msgid  "Yes"
 msgstr ""
 
 #: greenOrchid.xml:58
-msgid "You are so nice to me."
+msgid  "You are so nice to me."
 msgstr ""
 
 #: greenOrchid.xml:172
-msgid "You can have it. Just take it."
+msgid  "You can have it. Just take it."
 msgstr ""
 
 #: greenOrchid.xml:127
-msgid "You look especially depressed."
+msgid  "You look especially depressed."
 msgstr ""
 
 #: greenOrchid.xml:157
-msgid "You look like a scholar"
+msgid  "You look like a scholar"
 msgstr ""
 
 #: greenOrchid.xml:147
-msgid "copperRock"
+msgid  "copperRock"
 msgstr ""
 
 #: greenOrchid.xml:106
-msgid "dwarfenwall"
+msgid  "dwarfenwall"
 msgstr ""
 
 #: greenOrchid.xml:16
-msgid "joringsbridge"
+msgid  "joringsbridge"
 msgstr ""
+

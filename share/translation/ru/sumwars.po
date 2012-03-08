@@ -752,7 +752,7 @@ msgstr "Сорен Виндклоу"
 msgid "Worker"
 msgstr "Рабочий"
 
-#: councilNPCStats.xml:250
+#: councilNPCStats.xml:250 tutorial.xml
 msgid "Overseer"
 msgstr ""
 
@@ -975,6 +975,19 @@ msgstr "Цена $1"
 msgid "It seems that this item already has such an enchantment."
 msgstr ""
 
+#: dwarfenwall.lua:308 npc.xml:47 undeadStats.xml:2252
+msgid "Nar'Asoroth"
+msgstr ""
+
+#: dwarfenwall.lua:313
+#, fuzzy
+msgid "Skinny Necromancer"
+msgstr "палочка некромансера"
+
+#: dwarfenwall.lua:316
+msgid "Scarfaced Necromancer"
+msgstr ""
+
 #: dwarfenwall.xml:6
 msgid "dwarfenwall"
 msgstr ""
@@ -985,6 +998,22 @@ msgstr ""
 
 #: dwarfenwall.xml:299
 msgid "dwarfenwallRampart"
+msgstr ""
+
+#: fortify_dwarfenwall.xml
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##female"
+msgstr ""
+
+#: fortify_dwarfenwall.xml
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##male"
+msgstr ""
+
+#: fortify_dwarfenwall.xml
+msgid "You are better prepared to suffer the consequences, wretched creature."
 msgstr ""
 
 #: glove.xml:4
@@ -1453,6 +1482,10 @@ msgstr ""
 
 #: humans.xml:707
 msgid "Ronny the Rat"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "Who is that?"
 msgstr ""
 
 #: joringsbridge_npc.xml:2
@@ -1960,7 +1993,7 @@ msgstr ""
 msgid "elCnlLobby"
 msgstr "Совет Элементов, Подземелье"
 
-#: medair.xml:37
+#: medair.xml:37 tutorial.xml
 msgid "elCnlLowerCaves"
 msgstr ""
 
@@ -2248,15 +2281,11 @@ msgstr ""
 msgid "Overlooker Necromancer"
 msgstr ""
 
-#: npc.xml:47 undeadStats.xml:2252
-msgid "Nar'Asoroth"
-msgstr ""
-
 #: npc.xml:50 npcStats.xml:473
 msgid "The Trader"
 msgstr "Торговец"
 
-#: npc.xml:55
+#: npc.xml:55 npc.xml:66
 msgid "Buy empty scrolls"
 msgstr "Купить пустые свитки"
 
@@ -2267,10 +2296,6 @@ msgstr "Открыть хранилище"
 #: npc.xml:59
 msgid "The Lost Trader"
 msgstr "Потерянный торговец"
-
-#: npc.xml:66
-msgid "Leere Schriftrollen kaufen"
-msgstr ""
 
 #: npc.xml:76
 msgid "Wounded Scout"
@@ -2648,6 +2673,10 @@ msgid ""
 "The priest can unconsciously create an elemental vortex that will drain one "
 "third of incoming damage from elemental beings."
 msgstr ""
+
+#: rescue_willard.xml
+msgid "Willard"
+msgstr "Виллард"
 
 #: ring.xml:5
 msgid "bronze ring"
@@ -3064,6 +3093,15 @@ msgstr "тестовый регион"
 #: testregions.xml:624
 msgid "region1"
 msgstr "регион 1"
+
+#: theFissure.xml
+msgid "Unknown Lich"
+msgstr ""
+
+#: tutorial.xml
+msgid ""
+"I have to find an energy source and a cog before that thing will work again."
+msgstr ""
 
 #: undeadEqu.xml:3
 msgid "broken shield"
@@ -3486,56 +3524,53 @@ msgid "Attacks every enemy in weapon range with a triple sweeping strike."
 msgstr ""
 
 #, fuzzy
-#~ msgid "block"
-#~ msgstr "Блок"
-
-#, fuzzy
-#~ msgid "red"
-#~ msgstr "Дерред"
-
-#, fuzzy
-#~ msgid "position"
-#~ msgstr "Зелья"
-
-#, fuzzy
-#~ msgid "gold"
-#~ msgstr "золотое кольцо"
-
-#, fuzzy
-#~ msgid "lockdown"
-#~ msgstr "Блок"
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "Зелья"
-
-#, fuzzy
-#~ msgid "necromancer_siegeDefense"
-#~ msgstr "палочка некромансера"
-
-#, fuzzy
-#~ msgid "fraction"
-#~ msgstr "тренировочный лук"
-
-#, fuzzy
-#~ msgid "blind"
-#~ msgstr "слепой"
-
-#, fuzzy
-#~ msgid "willpower"
-#~ msgstr "Сила воли"
-
-#, fuzzy
-#~ msgid "power"
-#~ msgstr "Сила"
+#~ msgid "armor"
+#~ msgstr "Защита"
 
 #, fuzzy
 #~ msgid "peasant"
 #~ msgstr "Крестьянин"
 
 #, fuzzy
-#~ msgid "armor"
-#~ msgstr "Защита"
+#~ msgid "power"
+#~ msgstr "Сила"
 
-#~ msgid "Willard"
-#~ msgstr "Виллард"
+#, fuzzy
+#~ msgid "willpower"
+#~ msgstr "Сила воли"
+
+#, fuzzy
+#~ msgid "blind"
+#~ msgstr "слепой"
+
+#, fuzzy
+#~ msgid "fraction"
+#~ msgstr "тренировочный лук"
+
+#, fuzzy
+#~ msgid "necromancer_siegeDefense"
+#~ msgstr "палочка некромансера"
+
+#, fuzzy
+#~ msgid "location"
+#~ msgstr "Зелья"
+
+#, fuzzy
+#~ msgid "lockdown"
+#~ msgstr "Блок"
+
+#, fuzzy
+#~ msgid "gold"
+#~ msgstr "золотое кольцо"
+
+#, fuzzy
+#~ msgid "position"
+#~ msgstr "Зелья"
+
+#, fuzzy
+#~ msgid "red"
+#~ msgstr "Дерред"
+
+#, fuzzy
+#~ msgid "block"
+#~ msgstr "Блок"

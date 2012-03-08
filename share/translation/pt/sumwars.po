@@ -752,7 +752,7 @@ msgstr ""
 msgid "Worker"
 msgstr ""
 
-#: councilNPCStats.xml:250
+#: councilNPCStats.xml:250 tutorial.xml
 msgid "Overseer"
 msgstr ""
 
@@ -975,6 +975,18 @@ msgstr ""
 msgid "It seems that this item already has such an enchantment."
 msgstr ""
 
+#: dwarfenwall.lua:308 npc.xml:47 undeadStats.xml:2252
+msgid "Nar'Asoroth"
+msgstr ""
+
+#: dwarfenwall.lua:313
+msgid "Skinny Necromancer"
+msgstr ""
+
+#: dwarfenwall.lua:316
+msgid "Scarfaced Necromancer"
+msgstr ""
+
 #: dwarfenwall.xml:6
 msgid "dwarfenwall"
 msgstr ""
@@ -985,6 +997,22 @@ msgstr ""
 
 #: dwarfenwall.xml:299
 msgid "dwarfenwallRampart"
+msgstr ""
+
+#: fortify_dwarfenwall.xml
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##female"
+msgstr ""
+
+#: fortify_dwarfenwall.xml
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##male"
+msgstr ""
+
+#: fortify_dwarfenwall.xml
+msgid "You are better prepared to suffer the consequences, wretched creature."
 msgstr ""
 
 #: glove.xml:4
@@ -1453,6 +1481,10 @@ msgstr ""
 
 #: humans.xml:707
 msgid "Ronny the Rat"
+msgstr ""
+
+#: joringsbridge.xml
+msgid "Who is that?"
 msgstr ""
 
 #: joringsbridge_npc.xml:2
@@ -1957,7 +1989,7 @@ msgstr ""
 msgid "elCnlLobby"
 msgstr ""
 
-#: medair.xml:37
+#: medair.xml:37 tutorial.xml
 msgid "elCnlLowerCaves"
 msgstr ""
 
@@ -2245,15 +2277,11 @@ msgstr ""
 msgid "Overlooker Necromancer"
 msgstr ""
 
-#: npc.xml:47 undeadStats.xml:2252
-msgid "Nar'Asoroth"
-msgstr ""
-
 #: npc.xml:50 npcStats.xml:473
 msgid "The Trader"
 msgstr ""
 
-#: npc.xml:55
+#: npc.xml:55 npc.xml:66
 msgid "Buy empty scrolls"
 msgstr ""
 
@@ -2263,10 +2291,6 @@ msgstr ""
 
 #: npc.xml:59
 msgid "The Lost Trader"
-msgstr ""
-
-#: npc.xml:66
-msgid "Leere Schriftrollen kaufen"
 msgstr ""
 
 #: npc.xml:76
@@ -2643,6 +2667,10 @@ msgstr ""
 msgid ""
 "The priest can unconsciously create an elemental vortex that will drain one "
 "third of incoming damage from elemental beings."
+msgstr ""
+
+#: rescue_willard.xml
+msgid "Willard"
 msgstr ""
 
 #: ring.xml:5
@@ -3059,6 +3087,15 @@ msgstr ""
 
 #: testregions.xml:624
 msgid "region1"
+msgstr ""
+
+#: theFissure.xml
+msgid "Unknown Lich"
+msgstr ""
+
+#: tutorial.xml
+msgid ""
+"I have to find an energy source and a cog before that thing will work again."
 msgstr ""
 
 #: undeadEqu.xml:3

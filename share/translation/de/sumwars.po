@@ -806,7 +806,7 @@ msgstr "Soren Windklaue"
 msgid "Worker"
 msgstr "Arbeiter"
 
-#: councilNPCStats.xml:250
+#: councilNPCStats.xml:250 tutorial.xml
 #, fuzzy
 msgid "Overseer"
 msgstr "Ausdauer"
@@ -1031,6 +1031,18 @@ msgstr "Der Preis ist $1"
 msgid "It seems that this item already has such an enchantment."
 msgstr "Es scheint, als hätte der Gegenstand bereits eine solche Verzauberung."
 
+#: dwarfenwall.lua:308 npc.xml:47 undeadStats.xml:2252
+msgid "Nar'Asoroth"
+msgstr "Nar'Asoroth"
+
+#: dwarfenwall.lua:313
+msgid "Skinny Necromancer"
+msgstr "Magerer Nekromant"
+
+#: dwarfenwall.lua:316
+msgid "Scarfaced Necromancer"
+msgstr "Narbengesichtiger Nekromant"
+
 #: dwarfenwall.xml:6
 msgid "dwarfenwall"
 msgstr "Zwergentrutz"
@@ -1042,6 +1054,26 @@ msgstr "Kommandozentrum"
 #: dwarfenwall.xml:299
 msgid "dwarfenwallRampart"
 msgstr "Burgwall"
+
+#: fortify_dwarfenwall.xml
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##female"
+msgstr ""
+"Mach das sofort rückgängig oder jede Wache in Aisen wird hinter dir her "
+"sein, Verfluchte!"
+
+#: fortify_dwarfenwall.xml
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##male"
+msgstr ""
+"Mach das sofort rückgängig oder jede Wache in Aisen wird hinter dir her "
+"sein, Verfluchter!"
+
+#: fortify_dwarfenwall.xml
+msgid "You are better prepared to suffer the consequences, wretched creature."
+msgstr "Du bist besser bereit, die Konsequenzen zu tragen, elende Kreatur."
 
 #: glove.xml:4
 msgid "leather gloves"
@@ -1511,6 +1543,10 @@ msgstr "Rob der Räuber"
 #: humans.xml:707
 msgid "Ronny the Rat"
 msgstr "Ronny die Ratte"
+
+#: joringsbridge.xml
+msgid "Who is that?"
+msgstr "Wer ist das?"
 
 #: joringsbridge_npc.xml:2
 msgid "Gertlinde Kampfer"
@@ -2083,7 +2119,7 @@ msgstr ""
 msgid "elCnlLobby"
 msgstr "Konzil der Elemente, Untergrundverließ"
 
-#: medair.xml:37
+#: medair.xml:37 tutorial.xml
 msgid "elCnlLowerCaves"
 msgstr "Höhlen unter dem Konzil der Elemente"
 
@@ -2372,15 +2408,11 @@ msgstr "Elementaristenwächter"
 msgid "Overlooker Necromancer"
 msgstr "Vorarbeiter Nekromant"
 
-#: npc.xml:47 undeadStats.xml:2252
-msgid "Nar'Asoroth"
-msgstr "Nar'Asoroth"
-
 #: npc.xml:50 npcStats.xml:473
 msgid "The Trader"
 msgstr "Der Händler"
 
-#: npc.xml:55
+#: npc.xml:55 npc.xml:66
 msgid "Buy empty scrolls"
 msgstr "Leere Schriftrollen kaufen"
 
@@ -2391,10 +2423,6 @@ msgstr "Lager öffnen"
 #: npc.xml:59
 msgid "The Lost Trader"
 msgstr "Der verirrte Händler"
-
-#: npc.xml:66
-msgid "Leere Schriftrollen kaufen"
-msgstr "Leere Schriftrollen kaufen"
 
 #: npc.xml:76
 msgid "Wounded Scout"
@@ -2833,6 +2861,10 @@ msgstr ""
 "Der Prister kann unbewusst einen elementaren Strudel erzeugen, der ein "
 "Drittel des Schadens von elementaren Wesen absorbiert."
 
+#: rescue_willard.xml
+msgid "Willard"
+msgstr "Willard"
+
 #: ring.xml:5
 msgid "bronze ring"
 msgstr "Bronzering"
@@ -3248,6 +3280,15 @@ msgstr "testregion"
 #: testregions.xml:624
 msgid "region1"
 msgstr "region1"
+
+#: theFissure.xml
+msgid "Unknown Lich"
+msgstr "Unbekannter Lich"
+
+#: tutorial.xml
+msgid ""
+"I have to find an energy source and a cog before that thing will work again."
+msgstr ""
 
 #: undeadEqu.xml:3
 msgid "broken shield"
@@ -3708,140 +3749,110 @@ msgstr ""
 "Greift jeden Gegner in Reichweite mit einem dreifachen Rundumschlag an."
 
 #, fuzzy
-#~ msgid "locSergeant"
-#~ msgstr "Sergeant Wober"
-
-#, fuzzy
-#~ msgid "goblins_l13_2"
-#~ msgstr "Goblinschlächter"
-
-#, fuzzy
-#~ msgid "block"
-#~ msgstr "Block"
-
-#, fuzzy
-#~ msgid "red"
-#~ msgstr "Derred"
-
-#, fuzzy
-#~ msgid "position"
-#~ msgstr "Tränke"
-
-#, fuzzy
-#~ msgid "gold"
-#~ msgstr "Goldring"
-
-#, fuzzy
-#~ msgid "lockdown"
-#~ msgstr "Block"
-
-#, fuzzy
-#~ msgid "string"
-#~ msgstr "Frostring"
-
-#~ msgid "Nah to expensive"
-#~ msgstr "Nee, zu teuer."
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "Konzentration"
-
-#, fuzzy
-#~ msgid "catapult_skeleton"
-#~ msgstr "Erschafft ein Skelett"
-
-#, fuzzy
-#~ msgid "necromancer_siegeDefense"
-#~ msgstr "Nekromantenstab"
-
-#~ msgid "Better not."
-#~ msgstr "Besser nicht"
-
-#, fuzzy
-#~ msgid "slave_overseer"
-#~ msgstr "Ausdauer"
-
-#, fuzzy
-#~ msgid "fraction"
-#~ msgstr "Übungsbogen"
-
-#, fuzzy
-#~ msgid "poisoned"
-#~ msgstr "beschworen"
-
-#, fuzzy
-#~ msgid "blind"
-#~ msgstr "Goblinhund"
-
-#, fuzzy
-#~ msgid "willpower"
-#~ msgstr "Willenskraft"
-
-#, fuzzy
-#~ msgid "power"
-#~ msgstr "Kraft"
-
-#, fuzzy
-#~ msgid "rock_stf"
-#~ msgstr "Felsenstab"
-
-#, fuzzy
-#~ msgid "sabre_sw"
-#~ msgstr "Säbel"
-
-#, fuzzy
-#~ msgid "GuardLocation"
-#~ msgstr "Hauptmann der Wache"
-
-#, fuzzy
-#~ msgid "LichLocation"
-#~ msgstr "Echotrank"
-
-#, fuzzy
-#~ msgid "peasant"
-#~ msgstr "Bauer"
-
-#, fuzzy
-#~ msgid "armor"
-#~ msgstr "Rüstung"
+#~ msgid "Magician"
+#~ msgstr "Magieangriff"
 
 #, fuzzy
 #~ msgid "Archer"
 #~ msgstr "Wilderer"
 
 #, fuzzy
-#~ msgid "Magician"
-#~ msgstr "Magieangriff"
+#~ msgid "armor"
+#~ msgstr "Rüstung"
 
-#~ msgid ""
-#~ "You are better prepared to suffer the consequences, wretched creature."
-#~ msgstr "Du bist besser bereit, die Konsequenzen zu tragen, elende Kreatur."
+#, fuzzy
+#~ msgid "peasant"
+#~ msgstr "Bauer"
 
-#~ msgid ""
-#~ "Reverse this at once or every guard of Aisen will be on your trail, "
-#~ "Cursed One! ##male"
-#~ msgstr ""
-#~ "Mach das sofort rückgängig oder jede Wache in Aisen wird hinter dir her "
-#~ "sein, Verfluchter!"
+#, fuzzy
+#~ msgid "LichLocation"
+#~ msgstr "Echotrank"
 
-#~ msgid ""
-#~ "Reverse this at once or every guard of Aisen will be on your trail, "
-#~ "Cursed One! ##female"
-#~ msgstr ""
-#~ "Mach das sofort rückgängig oder jede Wache in Aisen wird hinter dir her "
-#~ "sein, Verfluchte!"
+#, fuzzy
+#~ msgid "GuardLocation"
+#~ msgstr "Hauptmann der Wache"
 
-#~ msgid "Unknown Lich"
-#~ msgstr "Unbekannter Lich"
+#, fuzzy
+#~ msgid "sabre_sw"
+#~ msgstr "Säbel"
 
-#~ msgid "Scarfaced Necromancer"
-#~ msgstr "Narbengesichtiger Nekromant"
+#, fuzzy
+#~ msgid "rock_stf"
+#~ msgstr "Felsenstab"
 
-#~ msgid "Skinny Necromancer"
-#~ msgstr "Magerer Nekromant"
+#, fuzzy
+#~ msgid "power"
+#~ msgstr "Kraft"
 
-#~ msgid "Who is that?"
-#~ msgstr "Wer ist das?"
+#, fuzzy
+#~ msgid "willpower"
+#~ msgstr "Willenskraft"
 
-#~ msgid "Willard"
-#~ msgstr "Willard"
+#, fuzzy
+#~ msgid "blind"
+#~ msgstr "Goblinhund"
+
+#, fuzzy
+#~ msgid "poisoned"
+#~ msgstr "beschworen"
+
+#, fuzzy
+#~ msgid "fraction"
+#~ msgstr "Übungsbogen"
+
+#, fuzzy
+#~ msgid "slave_overseer"
+#~ msgstr "Ausdauer"
+
+#~ msgid "Better not."
+#~ msgstr "Besser nicht"
+
+#, fuzzy
+#~ msgid "necromancer_siegeDefense"
+#~ msgstr "Nekromantenstab"
+
+#, fuzzy
+#~ msgid "catapult_skeleton"
+#~ msgstr "Erschafft ein Skelett"
+
+#, fuzzy
+#~ msgid "location"
+#~ msgstr "Konzentration"
+
+#~ msgid "Nah to expensive"
+#~ msgstr "Nee, zu teuer."
+
+#, fuzzy
+#~ msgid "string"
+#~ msgstr "Frostring"
+
+#, fuzzy
+#~ msgid "lockdown"
+#~ msgstr "Block"
+
+#, fuzzy
+#~ msgid "gold"
+#~ msgstr "Goldring"
+
+#, fuzzy
+#~ msgid "position"
+#~ msgstr "Tränke"
+
+#, fuzzy
+#~ msgid "red"
+#~ msgstr "Derred"
+
+#, fuzzy
+#~ msgid "block"
+#~ msgstr "Block"
+
+#, fuzzy
+#~ msgid "goblins_l13_2"
+#~ msgstr "Goblinschlächter"
+
+#, fuzzy
+#~ msgid "locSergeant"
+#~ msgstr "Sergeant Wober"
+
+#~ msgid "Leere Schriftrollen kaufen"
+#~ msgstr "Leere Schriftrollen kaufen"

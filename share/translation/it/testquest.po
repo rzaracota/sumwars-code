@@ -136,11 +136,11 @@ msgstr "e ora un'altro Test"
 msgid "again a test"
 msgstr "Ancora un test"
 
-#~ msgid "I am the first guard"
-#~ msgstr "Sono la prima guardia"
+#~ msgid "I am Fenor Marken"
+#~ msgstr "sono Fenor Marken"
 
 #~ msgid "I am the second guard"
 #~ msgstr "Sono la seconda guardia"
 
-#~ msgid "I am Fenor Marken"
-#~ msgstr "sono Fenor Marken"
+#~ msgid "I am the first guard"
+#~ msgstr "Sono la prima guardia"

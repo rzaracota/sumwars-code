@@ -275,12 +275,12 @@ msgstr ""
 msgid "greyWolfcave"
 msgstr "Волчья Пещера"
 
-#, fuzzy
-#~ msgid "questScout"
-#~ msgstr "Раненый скаут"
-
 #~ msgid ""
 #~ "After killing the spider you safely pick up a backpack in good shape."
 #~ msgstr ""
 #~ "После убийства паука ты без опасений поднял рюкзак, который оказался в "
 #~ "хорошем состоянии."
+
+#, fuzzy
+#~ msgid "questScout"
+#~ msgstr "Раненый скаут"

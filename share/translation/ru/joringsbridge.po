@@ -438,9 +438,9 @@ msgid "I will pray that your family is safe long enough."
 msgstr ""
 
 #, fuzzy
-#~ msgid "prince"
-#~ msgstr "Мой принц!"
-
-#, fuzzy
 #~ msgid "sergeant"
 #~ msgstr "Сержант!"
+
+#, fuzzy
+#~ msgid "prince"
+#~ msgstr "Мой принц!"

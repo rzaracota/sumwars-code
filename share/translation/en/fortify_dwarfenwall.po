@@ -932,17 +932,17 @@ msgid "Let's gain their trust."
 msgstr "Let's gain their trust."
 
 #, fuzzy
-#~ msgid "tolec"
-#~ msgstr "Tolec"
-
-#, fuzzy
-#~ msgid "derred"
-#~ msgstr "Derred"
+#~ msgid "SorenWindclawArea"
+#~ msgstr "Soren Windclaw"
 
 #, fuzzy
 #~ msgid "locSorenWindclaw"
 #~ msgstr "Soren Windclaw"
 
 #, fuzzy
-#~ msgid "SorenWindclawArea"
-#~ msgstr "Soren Windclaw"
+#~ msgid "derred"
+#~ msgstr "Derred"
+
+#, fuzzy
+#~ msgid "tolec"
+#~ msgstr "Tolec"

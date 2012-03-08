@@ -277,12 +277,12 @@ msgstr ""
 msgid "greyWolfcave"
 msgstr "Wolfshöhle"
 
-#, fuzzy
-#~ msgid "questScout"
-#~ msgstr "Verletzter Späher"
-
 #~ msgid ""
 #~ "After killing the spider you safely pick up a backpack in good shape."
 #~ msgstr ""
 #~ "Nachdem die Riesenspinne tot ist findest du einen Rucksack in gutem "
 #~ "Zustand."
+
+#, fuzzy
+#~ msgid "questScout"
+#~ msgstr "Verletzter Späher"

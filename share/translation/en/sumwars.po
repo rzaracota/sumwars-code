@@ -801,7 +801,7 @@ msgstr "Soren Windclaw"
 msgid "Worker"
 msgstr "Worker"
 
-#: councilNPCStats.xml:250
+#: councilNPCStats.xml:250 tutorial.xml
 msgid "Overseer"
 msgstr "Overseer"
 
@@ -1024,6 +1024,20 @@ msgstr "The price is $1"
 msgid "It seems that this item already has such an enchantment."
 msgstr "It seems that this item already has such an enchantment."
 
+#: dwarfenwall.lua:308 npc.xml:47 undeadStats.xml:2252
+msgid "Nar'Asoroth"
+msgstr "Nar'Asoroth"
+
+#: dwarfenwall.lua:313
+#, fuzzy
+msgid "Skinny Necromancer"
+msgstr "Necromancer"
+
+#: dwarfenwall.lua:316
+#, fuzzy
+msgid "Scarfaced Necromancer"
+msgstr "Necromancer"
+
 #: dwarfenwall.xml:6
 msgid "dwarfenwall"
 msgstr "dwarfenwall"
@@ -1035,6 +1049,22 @@ msgstr "dwarfenwallCommand"
 #: dwarfenwall.xml:299
 msgid "dwarfenwallRampart"
 msgstr "Rampart"
+
+#: fortify_dwarfenwall.xml
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##female"
+msgstr ""
+
+#: fortify_dwarfenwall.xml
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##male"
+msgstr ""
+
+#: fortify_dwarfenwall.xml
+msgid "You are better prepared to suffer the consequences, wretched creature."
+msgstr ""
 
 #: glove.xml:4
 msgid "leather gloves"
@@ -1503,6 +1533,11 @@ msgstr "Rob the Robber"
 #: humans.xml:707
 msgid "Ronny the Rat"
 msgstr "Ronny the Rat"
+
+#: joringsbridge.xml
+#, fuzzy
+msgid "Who is that?"
+msgstr "What is all this?"
 
 #: joringsbridge_npc.xml:2
 msgid "Gertlinde Kampfer"
@@ -2059,7 +2094,7 @@ msgstr ""
 msgid "elCnlLobby"
 msgstr "elCnlLobby"
 
-#: medair.xml:37
+#: medair.xml:37 tutorial.xml
 msgid "elCnlLowerCaves"
 msgstr "Council of Elements, Underground Dungeon"
 
@@ -2350,15 +2385,11 @@ msgstr "Elementaristenwaechter"
 msgid "Overlooker Necromancer"
 msgstr "Overlooker Necromancer"
 
-#: npc.xml:47 undeadStats.xml:2252
-msgid "Nar'Asoroth"
-msgstr "Nar'Asoroth"
-
 #: npc.xml:50 npcStats.xml:473
 msgid "The Trader"
 msgstr "The Trader"
 
-#: npc.xml:55
+#: npc.xml:55 npc.xml:66
 msgid "Buy empty scrolls"
 msgstr "Buy empty scrolls"
 
@@ -2369,10 +2400,6 @@ msgstr "Access stash"
 #: npc.xml:59
 msgid "The Lost Trader"
 msgstr "The Lost Trader"
-
-#: npc.xml:66
-msgid "Leere Schriftrollen kaufen"
-msgstr "Leere Schriftrollen kaufen"
 
 #: npc.xml:76
 msgid "Wounded Scout"
@@ -2806,6 +2833,11 @@ msgstr ""
 "The priest can unconsciously create an elemental vortex that will drain one "
 "third of incoming damage from elemental beings."
 
+#: rescue_willard.xml
+#, fuzzy
+msgid "Willard"
+msgstr "Willpower"
+
 #: ring.xml:5
 msgid "bronze ring"
 msgstr "bronze ring"
@@ -3221,6 +3253,15 @@ msgstr "testregion"
 #: testregions.xml:624
 msgid "region1"
 msgstr "region1"
+
+#: theFissure.xml
+msgid "Unknown Lich"
+msgstr ""
+
+#: tutorial.xml
+msgid ""
+"I have to find an energy source and a cog before that thing will work again."
+msgstr ""
 
 #: undeadEqu.xml:3
 msgid "broken shield"
@@ -3677,114 +3718,117 @@ msgstr "Weaponmaster"
 msgid "Attacks every enemy in weapon range with a triple sweeping strike."
 msgstr "Attacks every enemy in weapon range with a triple sweeping strike."
 
-#, fuzzy
-#~ msgid "locSergeant"
-#~ msgstr "Sergeant Wober"
+#~ msgid "Priest"
+#~ msgstr "Priest"
+
+#~ msgid "Archer"
+#~ msgstr "Archer"
+
+#~ msgid "Magician"
+#~ msgstr "Magician"
+
+#~ msgid "Warrior"
+#~ msgstr "Warrior"
 
 #, fuzzy
-#~ msgid "goblins_l13_2"
-#~ msgstr "goblin slayer"
-
-#, fuzzy
-#~ msgid "block"
-#~ msgstr "Block"
-
-#, fuzzy
-#~ msgid "red"
-#~ msgstr "Derred"
-
-#, fuzzy
-#~ msgid "position"
-#~ msgstr "Ionisation"
-
-#, fuzzy
-#~ msgid "gold"
-#~ msgstr "gold ring"
-
-#, fuzzy
-#~ msgid "lockdown"
-#~ msgstr "Block"
-
-#, fuzzy
-#~ msgid "string"
-#~ msgstr "Frost ring"
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "no action"
-
-#, fuzzy
-#~ msgid "catapult_skeleton"
-#~ msgstr "Creates a skeleton."
-
-#, fuzzy
-#~ msgid "necromancer_siegeDefense"
-#~ msgstr "necromancer staff"
-
-#, fuzzy
-#~ msgid "slave_overseer"
-#~ msgstr "Overseer"
-
-#, fuzzy
-#~ msgid "fraction"
-#~ msgstr "no action"
-
-#, fuzzy
-#~ msgid "poisoned"
-#~ msgstr "summoned"
-
-#, fuzzy
-#~ msgid "blind"
-#~ msgstr "goblin dog"
-
-#, fuzzy
-#~ msgid "willpower"
-#~ msgstr "Willpower"
-
-#, fuzzy
-#~ msgid "power"
-#~ msgstr "Power"
-
-#, fuzzy
-#~ msgid "rock_stf"
-#~ msgstr "rock staff"
-
-#, fuzzy
-#~ msgid "sabre_sw"
-#~ msgstr "sabre"
-
-#, fuzzy
-#~ msgid "GuardLocation"
-#~ msgstr "Guardcaptain"
-
-#, fuzzy
-#~ msgid "init_benchmark"
-#~ msgstr "benchmarkBox"
-
-#, fuzzy
-#~ msgid "start_benchmark"
-#~ msgstr "benchmarkBox"
-
-#, fuzzy
-#~ msgid "LichLocation"
-#~ msgstr "echo potion"
+#~ msgid "armor"
+#~ msgstr "Armor"
 
 #, fuzzy
 #~ msgid "peasant"
 #~ msgstr "Peasant"
 
 #, fuzzy
-#~ msgid "armor"
-#~ msgstr "Armor"
+#~ msgid "LichLocation"
+#~ msgstr "echo potion"
 
-#~ msgid "Warrior"
-#~ msgstr "Warrior"
+#, fuzzy
+#~ msgid "start_benchmark"
+#~ msgstr "benchmarkBox"
 
-#~ msgid "Magician"
-#~ msgstr "Magician"
+#, fuzzy
+#~ msgid "init_benchmark"
+#~ msgstr "benchmarkBox"
 
-#~ msgid "Archer"
-#~ msgstr "Archer"
+#, fuzzy
+#~ msgid "GuardLocation"
+#~ msgstr "Guardcaptain"
 
-#~ msgid "Priest"
-#~ msgstr "Priest"
+#, fuzzy
+#~ msgid "sabre_sw"
+#~ msgstr "sabre"
+
+#, fuzzy
+#~ msgid "rock_stf"
+#~ msgstr "rock staff"
+
+#, fuzzy
+#~ msgid "power"
+#~ msgstr "Power"
+
+#, fuzzy
+#~ msgid "willpower"
+#~ msgstr "Willpower"
+
+#, fuzzy
+#~ msgid "blind"
+#~ msgstr "goblin dog"
+
+#, fuzzy
+#~ msgid "poisoned"
+#~ msgstr "summoned"
+
+#, fuzzy
+#~ msgid "fraction"
+#~ msgstr "no action"
+
+#, fuzzy
+#~ msgid "slave_overseer"
+#~ msgstr "Overseer"
+
+#, fuzzy
+#~ msgid "necromancer_siegeDefense"
+#~ msgstr "necromancer staff"
+
+#, fuzzy
+#~ msgid "catapult_skeleton"
+#~ msgstr "Creates a skeleton."
+
+#, fuzzy
+#~ msgid "location"
+#~ msgstr "no action"
+
+#, fuzzy
+#~ msgid "string"
+#~ msgstr "Frost ring"
+
+#, fuzzy
+#~ msgid "lockdown"
+#~ msgstr "Block"
+
+#, fuzzy
+#~ msgid "gold"
+#~ msgstr "gold ring"
+
+#, fuzzy
+#~ msgid "position"
+#~ msgstr "Ionisation"
+
+#, fuzzy
+#~ msgid "red"
+#~ msgstr "Derred"
+
+#, fuzzy
+#~ msgid "block"
+#~ msgstr "Block"
+
+#, fuzzy
+#~ msgid "goblins_l13_2"
+#~ msgstr "goblin slayer"
+
+#, fuzzy
+#~ msgid "locSergeant"
+#~ msgstr "Sergeant Wober"
+
+#~ msgid "Leere Schriftrollen kaufen"
+#~ msgstr "Leere Schriftrollen kaufen"

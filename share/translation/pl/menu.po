@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-03 17:02+0100\n"
+"POT-Creation-Date: 2012-03-08 13:45-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -704,7 +704,7 @@ msgstr ""
 msgid "Chest"
 msgstr ""
 
-#: ../../src/gui/worldmap.cpp:156
+#: ../../src/gui/worldmap.cpp:168
 msgid "Town Portal"
 msgstr ""
 

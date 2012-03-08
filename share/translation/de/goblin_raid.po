@@ -152,9 +152,9 @@ msgstr ""
 "Und es ist mir völlig egal, was mit irgendeiner Bauernfamilie passiert."
 
 #, fuzzy
-#~ msgid "goblin_regresh"
+#~ msgid "goblin_apprtc"
 #~ msgstr "Goblinüberfall"
 
 #, fuzzy
-#~ msgid "goblin_apprtc"
+#~ msgid "goblin_regresh"
 #~ msgstr "Goblinüberfall"

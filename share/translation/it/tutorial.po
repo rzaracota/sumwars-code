@@ -1657,42 +1657,42 @@ msgstr ""
 "dovrebbero spazzare lumache dal pavimento. Una mente ignorante è una mente "
 "sana."
 
-#, fuzzy
-#~ msgid "tolec"
-#~ msgstr "Tolec"
+#~ msgid "Explain level up?"
+#~ msgstr "Spiega come si assegna l'esperienza ogni livello?"
+
+#~ msgid "That should have been the last one."
+#~ msgstr "Questo dovrebbe essere stato l'ultimo."
+
+#~ msgid "What a massacre."
+#~ msgstr "Che massacro."
+
+#~ msgid "Really, somehow lacking in style."
+#~ msgstr "Un massacro davvero privo di stile."
 
 #, fuzzy
-#~ msgid "derred"
-#~ msgstr "Derred"
-
-#, fuzzy
-#~ msgid "findSecretDoor"
-#~ msgstr "Apri la porta segreta"
-
-#, fuzzy
-#~ msgid "tutorialSlugs"
-#~ msgstr "Guida"
-
-#, fuzzy
-#~ msgid "tutorial_weapon"
-#~ msgstr "Guida"
+#~ msgid "explain_skills_no"
+#~ msgstr "Guida alle abilita'"
 
 #, fuzzy
 #~ msgid "explain_levelup_continue"
 #~ msgstr "Guida al passaggio di livello"
 
 #, fuzzy
-#~ msgid "explain_skills_no"
-#~ msgstr "Guida alle abilita'"
+#~ msgid "tutorial_weapon"
+#~ msgstr "Guida"
 
-#~ msgid "Really, somehow lacking in style."
-#~ msgstr "Un massacro davvero privo di stile."
+#, fuzzy
+#~ msgid "tutorialSlugs"
+#~ msgstr "Guida"
 
-#~ msgid "What a massacre."
-#~ msgstr "Che massacro."
+#, fuzzy
+#~ msgid "findSecretDoor"
+#~ msgstr "Apri la porta segreta"
 
-#~ msgid "That should have been the last one."
-#~ msgstr "Questo dovrebbe essere stato l'ultimo."
+#, fuzzy
+#~ msgid "derred"
+#~ msgstr "Derred"
 
-#~ msgid "Explain level up?"
-#~ msgstr "Spiega come si assegna l'esperienza ogni livello?"
+#, fuzzy
+#~ msgid "tolec"
+#~ msgstr "Tolec"

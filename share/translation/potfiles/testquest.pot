@@ -1,3 +1,4 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "MIME-Version: 1.0\n"
@@ -6,121 +7,123 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
-"Language: de\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+
 #: testquest.xml:2
-msgid "Fenor Marken"
+msgid  "Fenor Marken"
 msgstr ""
 
 #: testquest.xml:3
-msgid "Test"
+msgid  "Test"
 msgstr ""
 
 #: testquest.xml:9
-msgid "This is a Test"
+msgid  "This is a Test"
 msgstr ""
 
 #: testquest.xml:50
-msgid "afraid"
+msgid  "afraid"
 msgstr ""
 
 #: testquest.xml:55
-msgid "again a test"
+msgid  "again a test"
 msgstr ""
 
 #: testquest.xml:19
-msgid "amused"
+msgid  "amused"
 msgstr ""
 
 #: testquest.xml:54
-msgid "and yet another Test"
+msgid  "and yet another Test"
 msgstr ""
 
 #: testquest.xml:41
-msgid "angry"
+msgid  "angry"
 msgstr ""
 
 #: testquest.xml:53
-msgid "being disgusted"
+msgid  "being disgusted"
 msgstr ""
 
 #: testquest.xml:25
-msgid "bored"
+msgid  "bored"
 msgstr ""
 
 #: testquest.xml:49
-msgid "deadly injured"
+msgid  "deadly injured"
 msgstr ""
 
 #: testquest.xml:21
-msgid "excited"
+msgid  "excited"
 msgstr ""
 
 #: testquest.xml:45
-msgid "exhausted"
+msgid  "exhausted"
 msgstr ""
 
 #: testquest.xml:35
-msgid "grin"
+msgid  "grin"
 msgstr ""
 
 #: testquest.xml:16
-msgid "happy"
+msgid  "happy"
 msgstr ""
 
 #: testquest.xml:23
-msgid "in love"
+msgid  "in love"
 msgstr ""
 
 #: testquest.xml:51
-msgid "in panic"
+msgid  "in panic"
 msgstr ""
 
 #: testquest.xml:47
-msgid "injured"
+msgid  "injured"
 msgstr ""
 
 #: testquest.xml:37
-msgid "offended"
+msgid  "offended"
 msgstr ""
 
 #: testquest.xml:31
-msgid "pain"
+msgid  "pain"
 msgstr ""
 
 #: testquest.xml:52
-msgid "putting up a distance"
+msgid  "putting up a distance"
 msgstr ""
 
 #: testquest.xml:29
-msgid "sad"
+msgid  "sad"
 msgstr ""
 
 #: testquest.xml:43
-msgid "shouting a warcry"
+msgid  "shouting a warcry"
 msgstr ""
 
 #: testquest.xml:33
-msgid "sneer"
+msgid  "sneer"
 msgstr ""
 
 #: testquest.xml:11
-msgid "surprised"
+msgid  "surprised"
 msgstr ""
 
 #: testquest.xml:2
-msgid "testquest"
+msgid  "testquest"
 msgstr ""
 
 #: testquest.xml:13
-msgid "thoughtful"
+msgid  "thoughtful"
 msgstr ""
 
 #: testquest.xml:39
-msgid "threatening"
+msgid  "threatening"
 msgstr ""
 
 #: testquest.xml:27
-msgid "unhappy"
+msgid  "unhappy"
 msgstr ""
+

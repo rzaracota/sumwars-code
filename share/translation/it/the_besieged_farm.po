@@ -198,13 +198,13 @@ msgstr "Ma questo non ti dovrebbe interessare."
 msgid "Here's the money."
 msgstr "Eccoti il denaro."
 
-#, fuzzy
-#~ msgid "bronsFarmDoor"
-#~ msgstr "Fattoria Bron"
-
 #~ msgid ""
 #~ "Really now, \"..name..\". Did you think she'd use carrier pigeons in this "
 #~ "day and age?"
 #~ msgstr ""
 #~ " \"..nome..\". Sul serio pensi che userebbe dei piccioni viaggiatori con "
 #~ "i tempi che corrono?"
+
+#, fuzzy
+#~ msgid "bronsFarmDoor"
+#~ msgstr "Fattoria Bron"

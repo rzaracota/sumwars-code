@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-03 19:07+0100\n"
+"POT-Creation-Date: 2012-03-08 13:45-0500\n"
 "PO-Revision-Date: 2011-10-01 00:20+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -713,7 +713,7 @@ msgstr "Следующее очко скилла на уровне"
 msgid "Chest"
 msgstr ""
 
-#: ../../src/gui/worldmap.cpp:156
+#: ../../src/gui/worldmap.cpp:168
 msgid "Town Portal"
 msgstr "Городской портал"
 
@@ -811,26 +811,26 @@ msgstr ""
 msgid "Wind Magic"
 msgstr ""
 
-#~ msgid "Gold"
-#~ msgstr "Золото"
-
-#~ msgid "Delete Character"
-#~ msgstr "Удалить персонажа"
-
-#~ msgid "Create Character"
-#~ msgstr "Создать персонажа"
-
-#~ msgid "Savegame"
-#~ msgstr "Сохраненные игры"
-
-#~ msgid "Delete"
-#~ msgstr "Удалить"
-
-#~ msgid "Characters"
-#~ msgstr "Персонажи"
+#~ msgid "Attr points"
+#~ msgstr "Очки умений"
 
 #~ msgid "Attribute points remaining to distribute"
 #~ msgstr "Оставшиеся очки умений"
 
-#~ msgid "Attr points"
-#~ msgstr "Очки умений"
+#~ msgid "Characters"
+#~ msgstr "Персонажи"
+
+#~ msgid "Delete"
+#~ msgstr "Удалить"
+
+#~ msgid "Savegame"
+#~ msgstr "Сохраненные игры"
+
+#~ msgid "Create Character"
+#~ msgstr "Создать персонажа"
+
+#~ msgid "Delete Character"
+#~ msgstr "Удалить персонажа"
+
+#~ msgid "Gold"
+#~ msgstr "Золото"

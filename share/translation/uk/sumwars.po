@@ -795,7 +795,7 @@ msgstr "Сорен Віндклав"
 msgid "Worker"
 msgstr "Робітник"
 
-#: councilNPCStats.xml:250
+#: councilNPCStats.xml:250 tutorial.xml
 msgid "Overseer"
 msgstr "Наглядач"
 
@@ -1018,6 +1018,18 @@ msgstr "Ціна рівна $1"
 msgid "It seems that this item already has such an enchantment."
 msgstr "Здається що цей об'єкт вже має такі чари."
 
+#: dwarfenwall.lua:308 npc.xml:47 undeadStats.xml:2252
+msgid "Nar'Asoroth"
+msgstr "Нар'Асорос"
+
+#: dwarfenwall.lua:313
+msgid "Skinny Necromancer"
+msgstr "Худющий Некромант"
+
+#: dwarfenwall.lua:316
+msgid "Scarfaced Necromancer"
+msgstr "Некромант зі шрамом на лиці"
+
 #: dwarfenwall.xml:6
 msgid "dwarfenwall"
 msgstr "Дорфенваль"
@@ -1029,6 +1041,24 @@ msgstr "Командний центр"
 #: dwarfenwall.xml:299
 msgid "dwarfenwallRampart"
 msgstr "Оборонний вал Дорфенваля"
+
+#: fortify_dwarfenwall.xml
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##female"
+msgstr ""
+"Зразу ж поверни це або кожен страж Айзена стане на твоєму шляху, Проклята!"
+
+#: fortify_dwarfenwall.xml
+msgid ""
+"Reverse this at once or every guard of Aisen will be on your trail, Cursed "
+"One! ##male"
+msgstr ""
+"Зразу ж поверни це або кожен страж Айзена стане на твоєму шляху, Проклятий!"
+
+#: fortify_dwarfenwall.xml
+msgid "You are better prepared to suffer the consequences, wretched creature."
+msgstr "Краще підготуйся страждати    від наслідків, нещасна істота."
 
 #: glove.xml:4
 msgid "leather gloves"
@@ -1498,6 +1528,10 @@ msgstr "Роб Розбійник"
 #: humans.xml:707
 msgid "Ronny the Rat"
 msgstr "Ронні Щур"
+
+#: joringsbridge.xml
+msgid "Who is that?"
+msgstr "Хто це?"
 
 #: joringsbridge_npc.xml:2
 msgid "Gertlinde Kampfer"
@@ -2039,7 +2073,7 @@ msgstr ""
 msgid "elCnlLobby"
 msgstr "Рада Елементів, Підземелля"
 
-#: medair.xml:37
+#: medair.xml:37 tutorial.xml
 msgid "elCnlLowerCaves"
 msgstr "Печери Ради"
 
@@ -2330,15 +2364,11 @@ msgstr "Зберігач Стихій"
 msgid "Overlooker Necromancer"
 msgstr "Прораб Некромант"
 
-#: npc.xml:47 undeadStats.xml:2252
-msgid "Nar'Asoroth"
-msgstr "Нар'Асорос"
-
 #: npc.xml:50 npcStats.xml:473
 msgid "The Trader"
 msgstr "Торговець"
 
-#: npc.xml:55
+#: npc.xml:55 npc.xml:66
 msgid "Buy empty scrolls"
 msgstr "Купити порожні згортки"
 
@@ -2349,10 +2379,6 @@ msgstr "Зайти в тайник"
 #: npc.xml:59
 msgid "The Lost Trader"
 msgstr "Загублений Торговець"
-
-#: npc.xml:66
-msgid "Leere Schriftrollen kaufen"
-msgstr "Купити порожні згортки"
 
 #: npc.xml:76
 msgid "Wounded Scout"
@@ -2780,6 +2806,10 @@ msgstr ""
 "Священик може неусвідомлено створити стихійний вихор, який впитає в себе "
 "третину нанесеної стихійними істотами шкоди."
 
+#: rescue_willard.xml
+msgid "Willard"
+msgstr "Віллард"
+
 #: ring.xml:5
 msgid "bronze ring"
 msgstr "бронзове кільце"
@@ -3195,6 +3225,15 @@ msgstr "тестовий регіон"
 #: testregions.xml:624
 msgid "region1"
 msgstr "регіон1"
+
+#: theFissure.xml
+msgid "Unknown Lich"
+msgstr "Невідомий Ліч"
+
+#: tutorial.xml
+msgid ""
+"I have to find an energy source and a cog before that thing will work again."
+msgstr "Ця штука не запрацює без джерела енергії та шестерні."
 
 #: undeadEqu.xml:3
 msgid "broken shield"
@@ -3646,153 +3685,119 @@ msgstr "Магістр зброї"
 msgid "Attacks every enemy in weapon range with a triple sweeping strike."
 msgstr "Атакує кожного ворога в радіусі дії зброї потрійним змітальним ударом."
 
-#~ msgid "Willard"
-#~ msgstr "Віллард"
-
-#~ msgid "Who is that?"
-#~ msgstr "Хто це?"
-
-#~ msgid "Skinny Necromancer"
-#~ msgstr "Худющий Некромант"
-
-#~ msgid "Scarfaced Necromancer"
-#~ msgstr "Некромант зі шрамом на лиці"
-
-#~ msgid "Unknown Lich"
-#~ msgstr "Невідомий Ліч"
-
-#~ msgid ""
-#~ "I have to find an energy source and a cog before that thing will work "
-#~ "again."
-#~ msgstr "Ця штука не запрацює без джерела енергії та шестерні."
-
-#~ msgid ""
-#~ "Reverse this at once or every guard of Aisen will be on your trail, "
-#~ "Cursed One! ##female"
-#~ msgstr ""
-#~ "Зразу ж поверни це або кожен страж Айзена стане на твоєму шляху, Проклята!"
-
-#~ msgid ""
-#~ "Reverse this at once or every guard of Aisen will be on your trail, "
-#~ "Cursed One! ##male"
-#~ msgstr ""
-#~ "Зразу ж поверни це або кожен страж Айзена стане на твоєму шляху, "
-#~ "Проклятий!"
-
-#~ msgid ""
-#~ "You are better prepared to suffer the consequences, wretched creature."
-#~ msgstr "Краще підготуйся страждати    від наслідків, нещасна істота."
-
 #, fuzzy
-#~ msgid "Magician"
-#~ msgstr "Магічна атака"
-
-#, fuzzy
-#~ msgid "Archer"
-#~ msgstr "Браконьєр"
-
-#, fuzzy
-#~ msgid "armor"
-#~ msgstr "Збруя"
-
-#, fuzzy
-#~ msgid "peasant"
-#~ msgstr "Селянин"
-
-#, fuzzy
-#~ msgid "LichLocation"
-#~ msgstr "зілля відголосу"
-
-#, fuzzy
-#~ msgid "start_benchmark"
-#~ msgstr "Панель Бенчмарку"
-
-#, fuzzy
-#~ msgid "init_benchmark"
-#~ msgstr "Панель Бенчмарку"
-
-#, fuzzy
-#~ msgid "GuardLocation"
-#~ msgstr "Капітан Охорони"
-
-#, fuzzy
-#~ msgid "sabre_sw"
-#~ msgstr "шабля"
-
-#, fuzzy
-#~ msgid "rock_stf"
-#~ msgstr "кам'яний посох"
-
-#, fuzzy
-#~ msgid "power"
-#~ msgstr "Сила"
-
-#, fuzzy
-#~ msgid "willpower"
-#~ msgstr "Сила волі"
-
-#, fuzzy
-#~ msgid "blind"
-#~ msgstr "собака гобліна"
-
-#, fuzzy
-#~ msgid "poisoned"
-#~ msgstr "викликано"
-
-#, fuzzy
-#~ msgid "fraction"
-#~ msgstr "ніяких дій"
-
-#, fuzzy
-#~ msgid "slave_overseer"
-#~ msgstr "Наглядач"
-
-#~ msgid "Better not."
-#~ msgstr "Ні, не треба."
-
-#, fuzzy
-#~ msgid "necromancer_siegeDefense"
-#~ msgstr "посох некроманта"
-
-#, fuzzy
-#~ msgid "catapult_skeleton"
-#~ msgstr "Створює скелета."
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "ніяких дій"
-
-#~ msgid "Nah to expensive"
-#~ msgstr "Ні, це надто дорого"
-
-#, fuzzy
-#~ msgid "string"
-#~ msgstr "Морозне кільце"
-
-#, fuzzy
-#~ msgid "lockdown"
-#~ msgstr "Блок"
-
-#, fuzzy
-#~ msgid "gold"
-#~ msgstr "золоте кільце"
-
-#, fuzzy
-#~ msgid "position"
-#~ msgstr "Зілля"
-
-#, fuzzy
-#~ msgid "red"
-#~ msgstr "Дерред"
-
-#, fuzzy
-#~ msgid "block"
-#~ msgstr "Блок"
+#~ msgid "locSergeant"
+#~ msgstr "Сержант Вобер"
 
 #, fuzzy
 #~ msgid "goblins_l13_2"
 #~ msgstr "гоблін вбивця"
 
 #, fuzzy
-#~ msgid "locSergeant"
-#~ msgstr "Сержант Вобер"
+#~ msgid "block"
+#~ msgstr "Блок"
+
+#, fuzzy
+#~ msgid "red"
+#~ msgstr "Дерред"
+
+#, fuzzy
+#~ msgid "position"
+#~ msgstr "Зілля"
+
+#, fuzzy
+#~ msgid "gold"
+#~ msgstr "золоте кільце"
+
+#, fuzzy
+#~ msgid "lockdown"
+#~ msgstr "Блок"
+
+#, fuzzy
+#~ msgid "string"
+#~ msgstr "Морозне кільце"
+
+#~ msgid "Nah to expensive"
+#~ msgstr "Ні, це надто дорого"
+
+#, fuzzy
+#~ msgid "location"
+#~ msgstr "ніяких дій"
+
+#, fuzzy
+#~ msgid "catapult_skeleton"
+#~ msgstr "Створює скелета."
+
+#, fuzzy
+#~ msgid "necromancer_siegeDefense"
+#~ msgstr "посох некроманта"
+
+#~ msgid "Better not."
+#~ msgstr "Ні, не треба."
+
+#, fuzzy
+#~ msgid "slave_overseer"
+#~ msgstr "Наглядач"
+
+#, fuzzy
+#~ msgid "fraction"
+#~ msgstr "ніяких дій"
+
+#, fuzzy
+#~ msgid "poisoned"
+#~ msgstr "викликано"
+
+#, fuzzy
+#~ msgid "blind"
+#~ msgstr "собака гобліна"
+
+#, fuzzy
+#~ msgid "willpower"
+#~ msgstr "Сила волі"
+
+#, fuzzy
+#~ msgid "power"
+#~ msgstr "Сила"
+
+#, fuzzy
+#~ msgid "rock_stf"
+#~ msgstr "кам'яний посох"
+
+#, fuzzy
+#~ msgid "sabre_sw"
+#~ msgstr "шабля"
+
+#, fuzzy
+#~ msgid "GuardLocation"
+#~ msgstr "Капітан Охорони"
+
+#, fuzzy
+#~ msgid "init_benchmark"
+#~ msgstr "Панель Бенчмарку"
+
+#, fuzzy
+#~ msgid "start_benchmark"
+#~ msgstr "Панель Бенчмарку"
+
+#, fuzzy
+#~ msgid "LichLocation"
+#~ msgstr "зілля відголосу"
+
+#, fuzzy
+#~ msgid "peasant"
+#~ msgstr "Селянин"
+
+#, fuzzy
+#~ msgid "armor"
+#~ msgstr "Збруя"
+
+#, fuzzy
+#~ msgid "Archer"
+#~ msgstr "Браконьєр"
+
+#, fuzzy
+#~ msgid "Magician"
+#~ msgstr "Магічна атака"
+
+#~ msgid "Leere Schriftrollen kaufen"
+#~ msgstr "Купити порожні згортки"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-03 19:07+0100\n"
+"POT-Creation-Date: 2012-03-08 13:45-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Igor Paliychuk <mansonigor@gmail.com>\n"
 "Language-Team: \n"
@@ -717,7 +717,7 @@ msgstr "Нові Очки умінь на Рівні"
 msgid "Chest"
 msgstr "Скриня"
 
-#: ../../src/gui/worldmap.cpp:156
+#: ../../src/gui/worldmap.cpp:168
 msgid "Town Portal"
 msgstr "Міський Портал"
 
@@ -813,26 +813,26 @@ msgstr "Магія води"
 msgid "Wind Magic"
 msgstr "Магія вітру"
 
-#~ msgid "mage"
-#~ msgstr "маг"
-
-#~ msgid "Delete"
-#~ msgstr "Видалити"
-
-#~ msgid "Characters"
-#~ msgstr "Персонажі"
-
-#~ msgid "Reset graphic options"
-#~ msgstr "Скинути граф. параметри"
-
-#~ msgid "Restart required for setting new options"
-#~ msgstr "Для застосування змін перезапустіть гру"
-
-#~ msgid "Attribute points remaining to distribute"
-#~ msgstr "Не витрачені очки атрибутів"
+#~ msgid "Miss"
+#~ msgstr "Промах"
 
 #~ msgid "Attr points"
 #~ msgstr "Очки атриб"
 
-#~ msgid "Miss"
-#~ msgstr "Промах"
+#~ msgid "Attribute points remaining to distribute"
+#~ msgstr "Не витрачені очки атрибутів"
+
+#~ msgid "Restart required for setting new options"
+#~ msgstr "Для застосування змін перезапустіть гру"
+
+#~ msgid "Reset graphic options"
+#~ msgstr "Скинути граф. параметри"
+
+#~ msgid "Characters"
+#~ msgstr "Персонажі"
+
+#~ msgid "Delete"
+#~ msgstr "Видалити"
+
+#~ msgid "mage"
+#~ msgstr "маг"

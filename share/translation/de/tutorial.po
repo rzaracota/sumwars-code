@@ -1672,42 +1672,42 @@ msgstr ""
 "Wenn die nicht überall diese überflüssigen Ballustraden ins Nichts hätten, "
 "müssten sie jetzt auch keine entflohenen Schnecklinge vom Boden wischen."
 
-#~ msgid "Really, somehow lacking in style."
-#~ msgstr "Wirklich etwas stillos"
-
-#~ msgid "What a massacre."
-#~ msgstr "Was für ein Gemetzel"
-
-#~ msgid "That should have been the last one."
-#~ msgstr "Das sollte die letzte gewesen sein."
-
-#~ msgid "Explain level up?"
-#~ msgstr "Levelup erklären?"
-
 #, fuzzy
-#~ msgid "explain_skills_no"
-#~ msgstr "Fähigkeiten erklären"
-
-#, fuzzy
-#~ msgid "explain_levelup_continue"
-#~ msgstr "Levelup erklären"
-
-#, fuzzy
-#~ msgid "tutorial_weapon"
-#~ msgstr "Tutorial"
-
-#, fuzzy
-#~ msgid "tutorialSlugs"
-#~ msgstr "Tutorial"
-
-#, fuzzy
-#~ msgid "findSecretDoor"
-#~ msgstr "Geheimtuer oeffnen"
+#~ msgid "tolec"
+#~ msgstr "Tolec"
 
 #, fuzzy
 #~ msgid "derred"
 #~ msgstr "Derred"
 
 #, fuzzy
-#~ msgid "tolec"
-#~ msgstr "Tolec"
+#~ msgid "findSecretDoor"
+#~ msgstr "Geheimtuer oeffnen"
+
+#, fuzzy
+#~ msgid "tutorialSlugs"
+#~ msgstr "Tutorial"
+
+#, fuzzy
+#~ msgid "tutorial_weapon"
+#~ msgstr "Tutorial"
+
+#, fuzzy
+#~ msgid "explain_levelup_continue"
+#~ msgstr "Levelup erklären"
+
+#, fuzzy
+#~ msgid "explain_skills_no"
+#~ msgstr "Fähigkeiten erklären"
+
+#~ msgid "Explain level up?"
+#~ msgstr "Levelup erklären?"
+
+#~ msgid "That should have been the last one."
+#~ msgstr "Das sollte die letzte gewesen sein."
+
+#~ msgid "What a massacre."
+#~ msgstr "Was für ein Gemetzel"
+
+#~ msgid "Really, somehow lacking in style."
+#~ msgstr "Wirklich etwas stillos"

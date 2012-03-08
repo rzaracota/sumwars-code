@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-03 17:02+0100\n"
+"POT-Creation-Date: 2012-03-08 13:45-0500\n"
 "PO-Revision-Date: 2012-03-02 16:19+0100\n"
 "Last-Translator:  <kalimgard@users.sourceforge.net>\n"
 "Language-Team: English\n"
@@ -711,7 +711,7 @@ msgstr "Next Skillpoint at Level"
 msgid "Chest"
 msgstr "Chest"
 
-#: ../../src/gui/worldmap.cpp:156
+#: ../../src/gui/worldmap.cpp:168
 msgid "Town Portal"
 msgstr "Town Portal"
 

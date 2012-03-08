@@ -151,9 +151,9 @@ msgid "And I could care less what happens to some peasant family."
 msgstr "E di una famiglia di contadini non potrebbe importarmi di meno."
 
 #, fuzzy
-#~ msgid "goblin_regresh"
+#~ msgid "goblin_apprtc"
 #~ msgstr "L'assalto dei Goblin"
 
 #, fuzzy
-#~ msgid "goblin_apprtc"
+#~ msgid "goblin_regresh"
 #~ msgstr "L'assalto dei Goblin"

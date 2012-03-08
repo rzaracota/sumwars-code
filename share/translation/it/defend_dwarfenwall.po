@@ -1134,9 +1134,9 @@ msgid "With this, the demo is officially over."
 msgstr "...e, con questo, la demo e' ufficialmente conclusa."
 
 #, fuzzy
-#~ msgid "dwarfenwall_councilguard"
-#~ msgstr "Al Centro di Comando di Dwarfenwall"
-
-#, fuzzy
 #~ msgid "council_dwarfenwall"
 #~ msgstr "Dwarfenwall"
+
+#, fuzzy
+#~ msgid "dwarfenwall_councilguard"
+#~ msgstr "Al Centro di Comando di Dwarfenwall"

@@ -261,9 +261,9 @@ msgstr ""
 "Ob er das auch gesagt hätte, wenn er wüsste, dass er erst mal einen Umweg "
 "über Harads Hölle nehmen wird?"
 
+#~ msgid "Wait, great human warriors. Do not kill!"
+#~ msgstr "Warten, große Menschenkriegers. Nicht töten!"
+
 #, fuzzy
 #~ msgid "GabResh"
 #~ msgstr "Gab'Resh"
-
-#~ msgid "Wait, great human warriors. Do not kill!"
-#~ msgstr "Warten, große Menschenkriegers. Nicht töten!"

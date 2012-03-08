@@ -447,9 +447,9 @@ msgid "I will pray that your family is safe long enough."
 msgstr "Я буду молитися, що ваша сім'я була в безпеці якнайдовше."
 
 #, fuzzy
-#~ msgid "prince"
-#~ msgstr "Мій принце!"
-
-#, fuzzy
 #~ msgid "sergeant"
 #~ msgstr "Сержанте!"
+
+#, fuzzy
+#~ msgid "prince"
+#~ msgstr "Мій принце!"
