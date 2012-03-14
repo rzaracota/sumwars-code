@@ -91,20 +91,23 @@
             <Property Name="UnifiedAreaRect" Value="{{0.78,0},{0.49,0},{0.83,0},{0.719726,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
         </Window>
-        <Window Type="TaharezLook/ProgressBar" Name="LeftClickAbilityProgressBar" >
+        <Window Type="TaharezLook/TimerProgressBar" Name="LeftClickAbilityProgressBar" >
             <Property Name="StepSize" Value="0.01" />
             <Property Name="CurrentProgress" Value="0" />
-            <Property Name="UnifiedAreaRect" Value="{{0.58362,0},{0.760075,0},{0.668219,0},{0.818337,0}}" />
+			<Property Name="VerticalProgress" Value="True" />
+            <Property Name="UnifiedAreaRect" Value="{{0.5932,0},{0.472925,0},{0.65973,0},{0.743108,0}}" />
         </Window>
-        <Window Type="TaharezLook/ProgressBar" Name="RightClickAbilityProgressBar" >
+        <Window Type="TaharezLook/TimerProgressBar" Name="RightClickAbilityProgressBar" >
             <Property Name="StepSize" Value="0.01" />
             <Property Name="CurrentProgress" Value="0" />
-            <Property Name="UnifiedAreaRect" Value="{{0.67806,0},{0.744023,0},{0.758489,0},{0.822469,0}}" />
+			<Property Name="VerticalProgress" Value="True" />
+            <Property Name="UnifiedAreaRect" Value="{{0.68764,0},{0.45811,0},{0.75278,0},{0.719726,0}}" />
         </Window>
-        <Window Type="TaharezLook/ProgressBar" Name="AlternateRightClickAbilityProgressBar" >
+        <Window Type="TaharezLook/TimerProgressBar" Name="AlternateRightClickAbilityProgressBar" >
             <Property Name="StepSize" Value="0.01" />
             <Property Name="CurrentProgress" Value="0" />
-            <Property Name="UnifiedAreaRect" Value="{{0.77806,0},{0.744023,0},{0.83,0},{0.822469,0}}" />
+			<Property Name="VerticalProgress" Value="True" />
+            <Property Name="UnifiedAreaRect" Value="{{0.78,0},{0.49,0},{0.83,0},{0.719726,0}}" />
         </Window>
         <Window Type="TaharezLook/StaticImage" Name="InventoryItem0" >
             <Property Name="FrameEnabled" Value="False" />

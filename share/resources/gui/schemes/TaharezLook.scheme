@@ -33,6 +33,7 @@
 	<FalagardMapping WindowType="TaharezLook/ProgressBar"          TargetType="CEGUI/ProgressBar" Renderer="Falagard/ProgressBar" LookNFeel="TaharezLook/ProgressBar" />
 	<FalagardMapping WindowType="TaharezLook/XPProgressBar"          TargetType="CEGUI/ProgressBar" Renderer="Falagard/ProgressBar" LookNFeel="TaharezLook/XPProgressBar" />
 	<FalagardMapping WindowType="TaharezLook/HPProgressBar"          TargetType="CEGUI/ProgressBar" Renderer="Falagard/ProgressBar" LookNFeel="TaharezLook/HPProgressBar" />
+	<FalagardMapping WindowType="TaharezLook/TimerProgressBar"          TargetType="CEGUI/ProgressBar" Renderer="Falagard/ProgressBar" LookNFeel="TaharezLook/TimerProgressBar" />
 	<FalagardMapping WindowType="TaharezLook/VUMeter"              TargetType="CEGUI/ProgressBar" Renderer="Falagard/ProgressBar" LookNFeel="TaharezLook/VUMeter" />
 	<FalagardMapping WindowType="TaharezLook/VerticalScrollbar"   TargetType="CEGUI/Scrollbar" Renderer="Falagard/Scrollbar" LookNFeel="TaharezLook/VerticalScrollbar" />
 	<FalagardMapping WindowType="TaharezLook/HorizontalScrollbar" TargetType="CEGUI/Scrollbar" Renderer="Falagard/Scrollbar" LookNFeel="TaharezLook/HorizontalScrollbar" />

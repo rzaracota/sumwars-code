@@ -239,6 +239,8 @@ void ControlPanel::update()
 		label->setProperty("Image",imagename);
 	}
 
+	double alpha;
+
 	// Balken fuer Schaden Attacke links
 	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "LeftClickAbilityProgressBar"));
 	timernr =  Action::getActionInfo(player->getLeftAction())->m_timer_nr;
@@ -247,6 +249,16 @@ void ControlPanel::update()
 	if (bar->getProgress() != perc)
 	{
 		bar->setProgress(perc);
+	}
+	
+	alpha = 1;
+	if (perc > 0)
+	{
+		alpha = 0.5;
+	}
+	if (label->getAlpha() != alpha)
+	{
+		label->setAlpha(alpha);
 	}
 
 	perc =0;
@@ -288,6 +300,15 @@ void ControlPanel::update()
 		bar->setProgress(perc);
 	}
 	
+	alpha = 1;
+	if (perc > 0)
+	{
+		alpha = 0.5;
+	}
+	if (label->getAlpha() != alpha)
+	{
+		label->setAlpha(alpha);
+	}
 	
 	// image for alternate right skill
 	label =  win_mgr.getWindow( "AlternateRightClickAbilityImage");
@@ -324,6 +345,16 @@ void ControlPanel::update()
 	if (bar->getProgress() != perc)
 	{
 		bar->setProgress(perc);
+	}
+
+	alpha = 1;
+	if (perc > 0)
+	{
+		alpha = 0.5;
+	}
+	if (label->getAlpha() != alpha)
+	{
+		label->setAlpha(alpha);
 	}
 
 	Item* it;
