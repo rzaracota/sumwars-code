@@ -525,7 +525,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 
 bool Player::onItemClick(ClientCommand* command)
 {
-	// no actions for dead players
+	// avoid actions for inactive players
 	if (getState() != STATE_ACTIVE)
 	{
 		return false;
@@ -543,33 +543,33 @@ bool Player::onItemClick(ClientCommand* command)
 
 	}
 
-	// das Item welches, des Spieler aktuell *in der Hand* hat
+	// item that is currently attached to the cursor
 	Item* it = m_equipement->getItem(Equipement::CURSOR_ITEM);
 
 	DEBUGX("got Item %p",it);
 
 	if (command->m_button== BUTTON_ITEM_LEFT)
 	{
-		// Item soll verschoben werden
+		// item should be moved
 		if (it!=0)
 		{
 
-			// zeigt an, ob der Vorraussetzungen erfuellt sind
+			// true if requirements are met
 			bool req = true;
 
 			if (pos <Equipement::CURSOR_ITEM)
 			{
 
-				// Item soll als Ausruestungsgegenstand benutzt werden
+				// trying to use the items as equipement
 				req = checkItemRequirements(it).m_overall;
 				pos = m_equipement-> getItemEquipPosition(it, m_secondary_equip, (Equipement::Position) pos);
 			}
 			else
 			{
-			// Item soll im Inventar abgelegt werden
-			DEBUGX("swap in inventory");
+				// trying to place in inventory
+				DEBUGX("swap in inventory");
 
-			// Groesse die das Item haben muss
+				// size of the clicked position
 				Item::Size size = Item::BIG;
 
 				if (pos >= Equipement::MEDIUM_ITEMS)
@@ -579,24 +579,25 @@ bool Player::onItemClick(ClientCommand* command)
 
 				if (it->m_size != size)
 				{
-					// Groesse stimmt nicht
-					// Item vom Cursor nehmen
+					// size is not corrent
 					Item* itm =0;
 					m_equipement->swapItem(itm, Equipement::CURSOR_ITEM);
 
-					// ins Inventar einfuegen
+					// insert the item at an arbitrary position in the right size class
 					insertItem(itm,false);
 					req = false;
 				}
 				else if (pos>=Equipement::BELT_ITEMS && pos < Equipement::BELT_ITEMS_END)
 				{
-					if (it->m_useup_effect == 0 && it->m_subtype != "town_portal")
+					// size is correct, next check:
+					// non-consumable items must not placed in belt
+					if (!it->m_consumable)
 					{
-						// non-consumable items must not placed in belt
+						
 						Item* itm =0;
 						m_equipement->swapItem(itm, Equipement::CURSOR_ITEM);
 
-						// ins Inventar einfuegen
+						// insert into inventory
 						insertItem(itm,false);
 						req = false;
 					}
@@ -605,7 +606,7 @@ bool Player::onItemClick(ClientCommand* command)
 
 			if (req == false)
 			{
-			// Vorraussetzungen nicht erfuellt
+				// requirements not met or error
 				return true;
 			}
 		}
@@ -625,8 +626,7 @@ bool Player::onItemClick(ClientCommand* command)
 	}
 	else
 	{
-		// Item soll verbraucht werden
-		// oder verkauft
+		// Item should be consumed or sold
 		it = m_equipement->getItem(pos);
 		if (it!=0)
 		{
@@ -655,70 +655,100 @@ bool Player::onItemClick(ClientCommand* command)
 					}
 				}
 				
-				// wieder hinein getauscht, wenn Handel nicht erfolgreich
+				// swap back, if the trade failed (only then, the item is still attached to it pointer)
 				getEquipement()->swapItem(it,pos);
 				
 				return true;
 			}
 
-			if (it->m_useup_effect==0)
+			if (!it->m_consumable)
 			{
-				// Item kann nicht verbraucht werden
-				if (it->m_subtype =="town_portal" && getRegion() != 0 && getRegion()->getIdString() !=  m_revive_position.first)
+				// item is not consumable
+				// equip Item to Autoposition
+				if (pos >= Equipement::CURSOR_ITEM)
 				{
-					std::stringstream stream;
-					stream << "#townportal" << getId();
-					getRegion()->setLocation(stream.str(), getShape()->m_center);
-
-					RegionLocation regloc;
-					regloc.first = getRegion()->getIdString();
-					regloc.second = stream.str();
-					setPortalPosition(regloc);
-
-					getRegion()->insertPlayerTeleport(getId(), m_revive_position);
-					clearCommand(true,true);
-				}
-				else
-				{
-					// equip Item to Autoposition
-					if (pos >= Equipement::CURSOR_ITEM)
+					bool req = checkItemRequirements(it).m_overall;
+					Equipement::Position pos2 = m_equipement-> getItemEquipPosition(it, m_secondary_equip);
+					
+					if (req && pos2 <= Equipement::CURSOR_ITEM && pos2 != Equipement::NONE)
 					{
-						bool req = checkItemRequirements(it).m_overall;
-						Equipement::Position pos2 = m_equipement-> getItemEquipPosition(it, m_secondary_equip);
-						
-						if (req && pos2 <= Equipement::CURSOR_ITEM && pos2 != Equipement::NONE)
-						{
-							swapEquipItems((Equipement::Position) pos,pos2);
-						}
-						
+						swapEquipItems((Equipement::Position) pos,pos2);
 					}
-					return true;
+								
 				}
+				return true;
 			}
 			else
 			{
-				// Wirkung des Items
-				applyDynAttrMod(it->m_useup_effect);
-				
-				// play sound
-				getRegion()->playSound("use_potion", getShape()->m_center, 1.0, false);
+				if (it->m_subtype =="town_portal")
+				{
+					// special case town portal
+					if (getRegion() != 0 && getRegion()->getIdString() !=  m_revive_position.first)
+					{
+						std::stringstream stream;
+						stream << "#townportal" << getId();
+						getRegion()->setLocation(stream.str(), getShape()->m_center);
+
+						RegionLocation regloc;
+						regloc.first = getRegion()->getIdString();
+						regloc.second = stream.str();
+						setPortalPosition(regloc);
+
+						getRegion()->insertPlayerTeleport(getId(), m_revive_position);
+						clearCommand(true,true);
+					}
+				}
+				else
+				{
+					// get timer and cooldown for this action
+					float timerpct = getTimerPercent(it->m_consume_timer_nr);
+					if (timerpct <= 0)
+					{
+						// effect of the item
+						if (it->m_useup_effect != 0)
+						{
+							applyDynAttrMod(it->m_useup_effect);
+						}
+						// potential buffs
+						if (it->m_equip_effect != 0)
+						{
+							applyBaseAttrMod(it->m_equip_effect);
+						}
+						
+						// TODO: more flexible sound
+						getRegion()->playSound("use_potion", getShape()->m_center, 1.0, false);
+						
+						// Start Timer
+						if (it->m_consume_timer_nr != 0)
+						{
+							m_timers[it->m_consume_timer_nr-1] = it->m_consume_timer;
+							m_timers_max[it->m_consume_timer_nr-1] = it->m_consume_timer;
+							addToNetEventMask(NetEvent::DATA_TIMER);
+						}
+					}
+					else
+					{
+						// could not consume due to timer
+						return true;
+					}
+				}
 			}
 
-			// entfernen aus dem Inventar durch Tausch mit einem Nullpointer
+			// remove the item from inventory
 			Item* swap=0;
 			m_equipement->swapItem(swap,pos);
 
-			// Typ und Subtyp des Items
+			// type and subtype of the item
 			Item::Type type = it->m_type;
 			Item::Subtype stype = it->m_subtype;
 
-			// Item loeschen
+			// delete item object
 			delete it;
 			
 			if (pos>=Equipement::BELT_ITEMS && pos < Equipement::BELT_ITEMS_END)
 			{
-				// Item befand sich im Guertel
-				// suchen nach einem aehnlichen Item zum nachruecken
+				// if item was in Belt
+				// refill with a similar item from inventory
 				// TODO: magic number: # small items -1
 				for (int i=29; i>=0 ;i--)
 				{
@@ -729,12 +759,12 @@ bool Player::onItemClick(ClientCommand* command)
 
 					if (it->m_type == type && it->m_subtype == stype)
 					{
-						// Item zum tauschen gefunden
+						// find item for refill
 						swap=0;
 
-						// von der aktuellen Position wegnehmen
+						// remove from inventory
 						m_equipement->swapItem(swap,Equipement::SMALL_ITEMS+i);
-						// an der Position des verbrauchten Items einfuegen
+						// and insert into belt
 						m_equipement->swapItem(swap,pos);
 
 						break;

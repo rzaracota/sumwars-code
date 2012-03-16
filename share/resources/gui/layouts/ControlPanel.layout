@@ -93,18 +93,21 @@
         </Window>
         <Window Type="TaharezLook/TimerProgressBar" Name="LeftClickAbilityProgressBar" >
             <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
             <Property Name="CurrentProgress" Value="0" />
 			<Property Name="VerticalProgress" Value="True" />
             <Property Name="UnifiedAreaRect" Value="{{0.5932,0},{0.472925,0},{0.65973,0},{0.743108,0}}" />
         </Window>
         <Window Type="TaharezLook/TimerProgressBar" Name="RightClickAbilityProgressBar" >
             <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
             <Property Name="CurrentProgress" Value="0" />
 			<Property Name="VerticalProgress" Value="True" />
             <Property Name="UnifiedAreaRect" Value="{{0.68764,0},{0.45811,0},{0.75278,0},{0.719726,0}}" />
         </Window>
         <Window Type="TaharezLook/TimerProgressBar" Name="AlternateRightClickAbilityProgressBar" >
             <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
             <Property Name="CurrentProgress" Value="0" />
 			<Property Name="VerticalProgress" Value="True" />
             <Property Name="UnifiedAreaRect" Value="{{0.78,0},{0.49,0},{0.83,0},{0.719726,0}}" />
@@ -133,6 +136,42 @@
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="UnifiedAreaRect" Value="{{0.311044,0},{0.511006,0},{0.358115,0},{0.695411,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+		<Window Type="TaharezLook/TimerProgressBar" Name="InventoryItem0Timer" >
+            <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+			<Property Name="VerticalProgress" Value="True" />
+			<Property Name="UnifiedAreaRect" Value="{{0.0441785,0},{0.511006,0},{0.0912492,0},{0.695411,0}}" />
+        </Window>
+        <Window Type="TaharezLook/TimerProgressBar" Name="InventoryItem1Timer" >
+            <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+			<Property Name="VerticalProgress" Value="True" />
+            <Property Name="UnifiedAreaRect" Value="{{0.113675,0},{0.511006,0},{0.160745,0},{0.695411,0}}" />
+        </Window>
+        <Window Type="TaharezLook/TimerProgressBar" Name="InventoryItem2Timer" >
+            <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+			<Property Name="VerticalProgress" Value="True" />
+            <Property Name="UnifiedAreaRect" Value="{{0.176222,0},{0.511006,0},{0.223292,0},{0.695411,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+        <Window Type="TaharezLook/TimerProgressBar" Name="InventoryItem3Timer" >
+            <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+			<Property Name="VerticalProgress" Value="True" />
+            <Property Name="UnifiedAreaRect" Value="{{0.244328,0},{0.511006,0},{0.291399,0},{0.695411,0}}" />
+        </Window>
+        <Window Type="TaharezLook/TimerProgressBar" Name="InventoryItem4Timer" >
+            <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+			<Property Name="VerticalProgress" Value="True" />
+            <Property Name="UnifiedAreaRect" Value="{{0.311044,0},{0.511006,0},{0.358115,0},{0.695411,0}}" />
         </Window>
         <Window Type="TaharezLook/StaticImage" Name="SlotNumbers" >
             <Property Name="Image" Value="set:ControlPanel image:SlotNumbers" />
