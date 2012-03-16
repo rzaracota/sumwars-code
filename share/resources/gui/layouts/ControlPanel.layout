@@ -137,21 +137,21 @@
             <Property Name="UnifiedAreaRect" Value="{{0.311044,0},{0.511006,0},{0.358115,0},{0.695411,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
         </Window>
-		<Window Type="TaharezLook/TimerProgressBar" Name="InventoryItem0Timer" >
+		<Window Type="TaharezLook/TimerProgressBar" Name="InventoryItem0ProgressBar" >
             <Property Name="StepSize" Value="0.01" />
             <Property Name="MousePassThroughEnabled" Value="True" />
             <Property Name="CurrentProgress" Value="0" />
 			<Property Name="VerticalProgress" Value="True" />
 			<Property Name="UnifiedAreaRect" Value="{{0.0441785,0},{0.511006,0},{0.0912492,0},{0.695411,0}}" />
         </Window>
-        <Window Type="TaharezLook/TimerProgressBar" Name="InventoryItem1Timer" >
+        <Window Type="TaharezLook/TimerProgressBar" Name="InventoryItem1ProgressBar" >
             <Property Name="StepSize" Value="0.01" />
             <Property Name="MousePassThroughEnabled" Value="True" />
             <Property Name="CurrentProgress" Value="0" />
 			<Property Name="VerticalProgress" Value="True" />
             <Property Name="UnifiedAreaRect" Value="{{0.113675,0},{0.511006,0},{0.160745,0},{0.695411,0}}" />
         </Window>
-        <Window Type="TaharezLook/TimerProgressBar" Name="InventoryItem2Timer" >
+        <Window Type="TaharezLook/TimerProgressBar" Name="InventoryItem2ProgressBar" >
             <Property Name="StepSize" Value="0.01" />
             <Property Name="MousePassThroughEnabled" Value="True" />
             <Property Name="CurrentProgress" Value="0" />
@@ -159,14 +159,14 @@
             <Property Name="UnifiedAreaRect" Value="{{0.176222,0},{0.511006,0},{0.223292,0},{0.695411,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
         </Window>
-        <Window Type="TaharezLook/TimerProgressBar" Name="InventoryItem3Timer" >
+        <Window Type="TaharezLook/TimerProgressBar" Name="InventoryItem3ProgressBar" >
             <Property Name="StepSize" Value="0.01" />
             <Property Name="MousePassThroughEnabled" Value="True" />
             <Property Name="CurrentProgress" Value="0" />
 			<Property Name="VerticalProgress" Value="True" />
             <Property Name="UnifiedAreaRect" Value="{{0.244328,0},{0.511006,0},{0.291399,0},{0.695411,0}}" />
         </Window>
-        <Window Type="TaharezLook/TimerProgressBar" Name="InventoryItem4Timer" >
+        <Window Type="TaharezLook/TimerProgressBar" Name="InventoryItem4ProgressBar" >
             <Property Name="StepSize" Value="0.01" />
             <Property Name="MousePassThroughEnabled" Value="True" />
             <Property Name="CurrentProgress" Value="0" />

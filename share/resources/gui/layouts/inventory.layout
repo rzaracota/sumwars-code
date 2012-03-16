@@ -211,6 +211,217 @@
                 <Property Name="UnifiedAreaRect" Value="{{0.921089,0},{0.719047,0},{0.990324,0},{0.969047,0}}" />
                 <Property Name="BackgroundEnabled" Value="False" />
             </Window>
+			
+			<Window Type="TaharezLook/TimerProgressBar" Name="SmallItem0ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.0103128,0},{0.0257146,0},{0.0795478,0},{0.275714,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem1ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.110313,0},{0.0266671,0},{0.179548,0},{0.276667,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem2ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.216141,0},{0.0304011,0},{0.280533,0},{0.258096,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem3ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.317126,0},{0.0196327,0},{0.381518,0},{0.254763,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem4ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.419733,0},{0.0296325,0},{0.484125,0},{0.257327,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem5ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.515875,0},{0.011429,0},{0.58511,0},{0.261429,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem6ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.62613,0},{0.000476723,0},{0.695365,0},{0.250477,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem7ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.717845,0},{0.00476246,0},{0.78708,0},{0.254762,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem8ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.823465,0},{0.0166673,0},{0.8927,0},{0.266667,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem9ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.920452,0},{0.00809576,0},{0.989687,0},{0.258096,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem10ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.00932784,0},{0.365238,0},{0.0785629,0},{0.615238,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem11ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.107995,0},{0.361905,0},{0.177231,0},{0.611905,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem12ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.215933,0},{0.366191,0},{0.285168,0},{0.616191,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem13ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.307648,0},{0.370476,0},{0.376883,0},{0.620476,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem14ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.417207,0},{0.365238,0},{0.486443,0},{0.615238,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem15ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.52051,0},{0.377143,0},{0.589745,0},{0.627143,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem16ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.621495,0},{0.358572,0},{0.69073,0},{0.608572,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem17ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.72248,0},{0.362857,0},{0.791715,0},{0.612857,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem18ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.821148,0},{0.374762,0},{0.890383,0},{0.624762,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem19ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.920452,0},{0.358572,0},{0.989687,0},{0.608572,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem20ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.00637324,0},{0.720952,0},{0.0756084,0},{0.970952,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem21ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.118946,0},{0.71,0},{0.188181,0},{0.96,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem22ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.214948,0},{0.728571,0},{0.284183,0},{0.978571,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem23ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.315585,0},{0.709047,0},{0.38482,0},{0.959048,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem24ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.416223,0},{0.727619,0},{0.485458,0},{0.977619,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem25ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.51686,0},{0.715714,0},{0.586095,0},{0.965714,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem26ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.62051,0},{0.728571,0},{0.689745,0},{0.978571,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem27ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.714195,0},{0.716666,0},{0.78343,0},{0.966666,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem28ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.819467,0},{0.742857,0},{0.888702,0},{0.969999,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
+            <Window Type="TaharezLook/TimerProgressBar" Name="SmallItem29ProgressBar" >
+                <Property Name="StepSize" Value="0.01" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+            <Property Name="CurrentProgress" Value="0" />
+                <Property Name="UnifiedAreaRect" Value="{{0.921089,0},{0.719047,0},{0.990324,0},{0.969047,0}}" />
+                <Property Name="VerticalProgress" Value="True" />
+            </Window>
         </Window>
         <Window Type="TaharezLook/StaticImage" Name="MediumTabMain" >
             <Property Name="Image" Value="set:Inventory image:MediumSlotBack" />

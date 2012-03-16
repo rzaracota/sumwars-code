@@ -725,6 +725,7 @@ bool Player::onItemClick(ClientCommand* command)
 							m_timers_max[it->m_consume_timer_nr-1] = it->m_consume_timer;
 							addToNetEventMask(NetEvent::DATA_TIMER);
 						}
+						DEBUG("started timer %i for %f",it->m_consume_timer_nr, it->m_consume_timer);
 					}
 					else
 					{

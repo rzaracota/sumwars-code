@@ -53,7 +53,7 @@
 </Item>
 
 <!-- anti blind-->
-<Item type="potion" subtype="heal_bl" name="eyedrops" size="small" consumable="true" consume_timer_nr="8" consume_timer="5000" >
+<Item type="potion" subtype="heal_bl" name="eyedrops" size="small" consumable="true" consume_timer_nr="7" consume_timer="2000" >
 	<Image image="set:heal_bl.png image:full_image" />
 	<RenderInfo name="antiBlind" />
 	<Attribute
