@@ -516,7 +516,7 @@ else()
   SEPARATE_ARGUMENTS(SUMWARS_LANGUAGES)
   foreach(i ${SUMWARS_LANGUAGES})
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/translation/${i}"
-      DESTINATION "${SUMWARS_SHARE_DIR}"
+      DESTINATION "${SUMWARS_SHARE_DIR}/translation"
       FILES_MATCHING PATTERN "*.mo"
       PATTERN ".hg" EXCLUDE
       PATTERN "xmlgettext" EXCLUDE) # both pattern excludes are there to prevent the directories from being created
