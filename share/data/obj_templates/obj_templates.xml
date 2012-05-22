@@ -46,6 +46,7 @@ FIXED_OBJECT
         </Environment>
         <Environment name="vault">
                 <Object name="buttress_wall_m1" />
+		<Object name="buttress_wall_m2_r" />
         </Environment>
         <Environment name="cave">
                 <Object name="cave_wall_m1" />
@@ -66,7 +67,6 @@ FIXED_OBJECT
         </Environment>
         <Environment name="vault">
                 <Object name="buttress_wall_s1" />
-				<Object name="buttress_wall_s2" />
         </Environment>
         <Environment name="cave">
                 <Object name="cave_wall_s1" />
