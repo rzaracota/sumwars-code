@@ -36,6 +36,11 @@
 #endif
 //#include "CEGUI/ScriptingModules/LuaScriptModule/CEGUILua.h"
 
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+#include "onlineservicesmanager.h"
+#endif
+
+
 #include "OgreConfigFile.h"
 #include <OgreParticleSystemManager.h>
 
@@ -306,6 +311,10 @@ bool Application::init()
 	Options::getInstance()->readFromFile(operationalPath + "/options.xml");
 
 	bool ret = true;
+
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+    new OnlineServicesManager(operationalPath);
+#endif
 
 	// Ogre configurieren
 	ret = configureOgre();
@@ -860,7 +869,7 @@ bool Application::initOgre()
 	// Register as a Window listener
 	Ogre::WindowEventUtilities::addWindowEventListener (m_window, this);
 
-	Ogre::LogManager::getSingleton ().createLog (SumwarsHelper::userPath () + "/BenchLog.log");
+    Ogre::LogManager::getSingleton ().createLog (SumwarsHelper::userPath () + "/BenchLog.log");
 	return true;
 }
 

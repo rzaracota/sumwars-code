@@ -19,6 +19,10 @@
 #include "savegamelist.h"
 #include "stdstreamconv.h"
 
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+#include "onlineservicesmanager.h"
+#endif
+
 SavegameList::SavegameList (Document* doc)
 	:Window(doc)
 {
@@ -69,8 +73,20 @@ void SavegameList::update()
 	// Liste aller Files im Save Ordner der Form *.sav
 	Ogre::FileInfoListPtr files;
 	Ogre::FileInfoList::iterator it;
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("Savegame","*.sav");
-	
+
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+    if(!OnlineServicesManager::getSingleton().userLoggedIn())
+        files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("Savegame","*.sav");
+    else
+    {
+        std::string id = OnlineServicesManager::getSingleton().getUserDataResGroupId();
+        files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo(id,"*.sav");
+    }
+#else
+    files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("Savegame","*.sav");
+#endif
+
+
 	std::fstream file;
 	char bin;
 	int n = 0;

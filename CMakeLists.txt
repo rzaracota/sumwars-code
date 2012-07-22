@@ -23,6 +23,7 @@ MESSAGE(STATUS "")
 OPTION(SUMWARS_NO_TINYXML "Do not use bundled, in-source TinyXML Lib" OFF)
 OPTION(SUMWARS_NO_ENET "Do not use bundled, in-source ENET Lib" OFF)
 OPTION(SUMWARS_BUILD_TOOLS "Builds editor tools (not needed for gameplay, only useful for content authors)" ON)
+OPTION(SUMWARS_BUILD_WITH_ONLINE_SERVICE "Builds enables the online services)" ON)
 OPTION(SUMWARS_UPDATE_HG_REVISION "Option to enable or disable automatic revision checking" ON)
 OPTION(SUMWARS_POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" OFF)
 OPTION(SUMWARS_STANDALONE_MODE "(Highly recommended for deployment on Windows and MacOSX) In case this is enabled, all paths (share, doc, bin) are set to be relative" OFF)
@@ -164,7 +165,7 @@ FIND_PACKAGE(ALUT REQUIRED)
 FIND_PACKAGE(Ogg REQUIRED)
 FIND_PACKAGE(Vorbis REQUIRED)
 FIND_PACKAGE(PhysFS REQUIRED)
-IF(SUMWARS_BUILD_TOOLS)
+IF(SUMWARS_BUILD_TOOLS OR SUMWARS_BUILD_WITH_ONLINE_SERVICE)
   FIND_PACKAGE(POCO REQUIRED)
 ENDIF()
 IF(SUMWARS_NO_TINYXML)
@@ -208,10 +209,16 @@ IF(SUMWARS_NO_ENET)
 ELSE()
   INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/enet/include)
 ENDIF()
-IF(SUMWARS_BUILD_TOOLS)
-  INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
-  INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel/filebrowser)
+IF(SUMWARS_BUILD_TOOLS OR SUMWARS_BUILD_WITH_ONLINE_SERVICE)
+  IF(SUMWARS_BUILD_TOOLS)
+    INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
+    INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel/filebrowser)
+  ENDIF()
   INCLUDE_DIRECTORIES(${POCO_INCLUDE_DIR})
+  if(SUMWARS_BUILD_WITH_ONLINE_SERVICE)
+    INCLUDE_DIRECTORIES(${POCO_Net_INCLUDE_DIR})
+  ENDIF(SUMWARS_BUILD_WITH_ONLINE_SERVICE)
+
 ENDIF()
 
 IF(WIN32)
@@ -385,6 +392,14 @@ IF(SUMWARS_BUILD_TOOLS)
     )
 ENDIF()
 
+IF(SUMWARS_BUILD_WITH_ONLINE_SERVICE)
+  SET(SRCS
+    ${SRCS}
+    ${HEADER_FILES}
+    ./src/core/onlineservicesmanager.cpp
+    )
+ENDIF()
+
 # If building for windows based systems, the resource file (containing 
 # the manifest, icon and other resources) should also be included
 IF (WIN32)
@@ -424,12 +439,22 @@ ENDIF()
 IF(SUMWARS_NO_ENET)
   SET(LINK_LIBS ${LINK_LIBS} ${Enet_LIBRARY})
 ENDIF()
-IF(SUMWARS_BUILD_TOOLS)
+
+IF(SUMWARS_BUILD_TOOLS OR SUMWARS_BUILD_WITH_ONLINE_SERVICE)
   SET(LINK_LIBS
     ${LINK_LIBS}
     ${POCO_LIBRARIES}
     )
-  ADD_DEFINITIONS(-DSUMWARS_BUILD_TOOLS)
+  IF(SUMWARS_BUILD_TOOLS)
+    ADD_DEFINITIONS(-DSUMWARS_BUILD_TOOLS)
+  ENDIF()
+  IF(SUMWARS_BUILD_WITH_ONLINE_SERVICE)
+    ADD_DEFINITIONS(-DSUMWARS_BUILD_WITH_ONLINE_SERVICES)
+    SET(LINK_LIBS
+      ${LINK_LIBS}
+      ${POCO_Net_LIBRARY}
+      )
+  ENDIF()
 ENDIF()
 
 IF(WIN32)

@@ -28,7 +28,6 @@
 
 #include <iostream>
 
-
 MainMenu::MainMenu (Document* doc)
         :Window(doc)
 {
@@ -38,12 +37,12 @@ MainMenu::MainMenu (Document* doc)
 	m_savegame_player_action.m_type = "noaction";
 	m_savegame_player_action.m_time = 2000;
 	m_savegame_player_action.m_elapsed_time = 0;
-	
+
 	
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 
-	CEGUI::FrameWindow* start_menu_root = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "MainMenu.layout" );
+    CEGUI::FrameWindow* start_menu_root = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "MainMenu.layout" );
     m_window = start_menu_root;
 	m_window->setMousePassThroughEnabled(true);
     m_window->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&MainMenu::onShown, this));
@@ -97,9 +96,37 @@ MainMenu::MainMenu (Document* doc)
 	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton/Label"));
 	lbl->setMousePassThroughEnabled(true);
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
-	lbl->setMousePassThroughEnabled(true);
+    lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
+    lbl->setMousePassThroughEnabled(true);
 
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+    lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("LoginButton/Label"));
+    lbl->setMousePassThroughEnabled(true);
+
+    btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("LoginButton"));
+    btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onLoginToOnlineService, this));
+
+    CEGUI::FrameWindow* login_dialog = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "LoginDialog.layout" );
+    m_window->addChildWindow(login_dialog);
+	login_dialog->hide();
+
+    btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("LoginDialog/LoginButton"));
+    btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onLoginDialogLoginButton, this));
+
+    btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("LoginDialog/CancelButton"));
+    btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onLoginDialogCancelButton, this));
+
+    OnlineServicesManager::getSingleton().registerLoginStatusListener(this);
+#else
+    lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("LoginButton/Label"));
+    lbl->hide();
+
+    lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SumwarsOnlineIndicatorLabel"));
+    lbl->hide();
+
+    btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("LoginButton"));
+    btn->hide();
+#endif
 
 	Ogre::Root *root = Ogre::Root::getSingletonPtr();
 	m_sceneMgr = root->createSceneManager(Ogre::ST_GENERIC, "MainMenuSceneManager");
@@ -108,6 +135,7 @@ MainMenu::MainMenu (Document* doc)
 	m_mainMenuCamera->setFarClipDistance(10000);
 
     m_sceneCreated = false;
+    m_userLoggedIn = false;
 
     createSavegameList();
 
@@ -116,7 +144,7 @@ MainMenu::MainMenu (Document* doc)
 
 void MainMenu::update()
 {
-	updateCharacterView();
+    updateCharacterView();
 }
 
 void MainMenu::updateTranslation()
@@ -140,8 +168,13 @@ void MainMenu::updateTranslation()
 	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton/Label"));
 	lbl->setText((CEGUI::utf8*) gettext("Options"));
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
-	lbl->setText((CEGUI::utf8*) gettext("Quit"));
+    lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
+    lbl->setText((CEGUI::utf8*) gettext("Quit"));
+
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+    lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("LoginButton/Label"));
+    lbl->setText((CEGUI::utf8*) gettext("Login"));
+#endif
 
 	// Update message windows
 	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("DeleteCharLabel")); // note: this has no in-between slash!
@@ -156,6 +189,62 @@ void MainMenu::updateTranslation()
 		m_saveGameList->update ();
 	}
 }
+
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+bool MainMenu::onLoginToOnlineService ( const CEGUI::EventArgs& evt )
+{
+	if(!m_userLoggedIn)
+	    static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("LoginDialog"))->show();
+    else
+        OnlineServicesManager::getSingleton().logout();
+
+    return true;
+}
+
+bool MainMenu::onLoginDialogLoginButton ( const CEGUI::EventArgs& evt )
+{
+    if(!m_userLoggedIn)
+    {
+        static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("LoginDialog"))->show();
+        CEGUI::String username = static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("LoginDialog/UsernameEditbox"))->getText();
+        CEGUI::String pw = static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("LoginDialog/PasswordEditbox"))->getText();
+        OnlineServicesManager::getSingleton().login(username.c_str(), pw.c_str());
+    }
+
+	return true;
+}
+
+
+bool MainMenu::onLoginDialogCancelButton ( const CEGUI::EventArgs& evt )
+{
+    static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("LoginDialog"))->hide();
+	return true;
+}
+
+void MainMenu::onLoginFinished(std::vector<OnlineServicesManager::CharacterLight*> &characters)
+{
+    std::vector<OnlineServicesManager::CharacterLight*>::iterator iter;
+    for(iter = characters.begin(); iter != characters.end(); iter++)
+        std::cout << (*iter)->name << std::endl;
+
+    static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("LoginDialog"))->hide();
+    static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("LoginButton/Label"))->setText((CEGUI::utf8*) gettext("Logout"));
+    std::string username = static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("LoginDialog/UsernameEditbox"))->getText().c_str();
+    static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("SumwarsOnlineIndicatorLabel"))->setText((CEGUI::utf8*) (gettext("Logged in as: ") + username).c_str());
+    m_userLoggedIn = true;
+    m_saveGameList->update();
+
+}
+
+void MainMenu::onLogoutFinished()
+{
+    static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("LoginButton/Label"))->setText((CEGUI::utf8*) gettext("Login"));
+    static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("SumwarsOnlineIndicatorLabel"))
+            ->setText((CEGUI::utf8*) gettext("Not logged in."));
+
+}
+
+#endif
 
 bool MainMenu::onStartSinglePlayer(const CEGUI::EventArgs& evt)
 {
@@ -615,7 +704,6 @@ void MainMenu::createScene()
 		n->setOrientation(Ogre::Quaternion(0.248194, -0.15685, 0.597531, 0.74616));
 
 		m_sceneCreated = true;
-		
 	}
     
 }
