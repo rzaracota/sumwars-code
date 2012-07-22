@@ -1,11 +1,11 @@
 <project>
     <shortName>Sumwars</shortName>
     <fullName>Summoning Wars</fullName>
-    <version>0.5.5</version>
+    <version>0.5.6b</version>
     <readmeFile>README</readmeFile>
-    <licenseFile>gpl-3.0.txt</licenseFile>
-    <logoImage>resources/gui/imagesets/startscreen.png</logoImage>
-    <splashImage>resources/gui/imagesets/startscreen.png</splashImage>
+    <licenseFile>doc/formateUndRichtlinien/gpl-3.0.txt</licenseFile>
+    <logoImage>share/resources/gui/imagesets/startscreen.png</logoImage>
+    <splashImage>share/resources/gui/imagesets/startscreen.png</splashImage>
     <allowLanguageSelection>1</allowLanguageSelection>
     <componentList>
         <component>
@@ -118,127 +118,91 @@
                     <platforms>all</platforms>
                     <distributionFileList>
                         <distributionDirectory>
-                            <origin>resources</origin>
-                        </distributionDirectory>
-                        <distributionDirectory>
-                            <origin>data</origin>
-                        </distributionDirectory>
-                        <distributionDirectory>
-                            <origin>translation</origin>
+                            <origin>inst/share</origin>
                         </distributionDirectory>
                         <distributionFile>
-                            <origin>build/Release/sumwars.exe</origin>
+                            <origin>inst/sumwars.exe</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>resources.cfg</origin>
+                            <origin>inst/alut.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>AUTHORS</origin>
+                            <origin>inst/AUTHORS</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>README</origin>
+                            <origin>inst/CEGUIBase.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>COPYING</origin>
+                            <origin>inst/CEGUIExpatParser.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>gpl-3.0.txt</origin>
+                            <origin>inst/CEGUIFalagardWRBase.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>INSTALL</origin>
+                            <origin>inst/CEGUIOgreRenderer.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/sumwars.exe</origin>
+                            <origin>inst/cg.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/alut.dll</origin>
+                            <origin>inst/COPYING</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/CEGUIBase.dll</origin>
+                            <origin>inst/libiconv2.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/CEGUIExpatParser.dll</origin>
+                            <origin>inst/libintl3.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/CEGUIFalagardWRBase.dll</origin>
+                            <origin>inst/lua51.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/CEGUILuaScriptModule.dll</origin>
+                            <origin>inst/OgreMain.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/CEGUIOgreRenderer.dll</origin>
+                            <origin>inst/OgrePaging.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/CEGUISILLYImageCodec.dll</origin>
+                            <origin>inst/OgreProperty.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/cg.dll</origin>
+                            <origin>inst/OgreRTShaderSystem.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/libgettextlib.dll</origin>
+                            <origin>inst/OgreTerrain.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/libgettextpo.dll</origin>
+                            <origin>inst/OIS.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/libgettextsrc.dll</origin>
+                            <origin>inst/physfs.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/libiconv2.dll</origin>
+                            <origin>inst/Plugin_CgProgramManager.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/libintl3.dll</origin>
+                            <origin>inst/Plugin_OctreeSceneManager.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/lua51.dll</origin>
+                            <origin>inst/Plugin_OctreeZone.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/OgreMain.dll</origin>
+                            <origin>inst/Plugin_ParticleFX.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/OgrePaging.dll</origin>
+                            <origin>inst/Plugin_PCZSceneManager.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/OgreRTShaderSystem.dll</origin>
+                            <origin>inst/PocoFoundation.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/OgreTerrain.dll</origin>
+                            <origin>inst/README</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/OIS.dll</origin>
+                            <origin>inst/RenderSystem_Direct3D9.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>build/Release/physfs.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/Plugin_CgProgramManager.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/Plugin_OctreeSceneManager.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/Plugin_OctreeZone.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/Plugin_ParticleFX.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/Plugin_PCZSceneManager.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/plugins_win.cfg</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/PocoFoundation.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/RenderSystem_Direct3D9.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/RenderSystem_GL.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>build/Release/alut.dll</origin>
+                            <origin>inst/RenderSystem_GL.dll</origin>
                         </distributionFile>
                     </distributionFileList>
                 </folder>
@@ -259,6 +223,9 @@
                         </distributionFile>
                         <distributionFile>
                             <origin>oalinst.exe</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>dxwebsetup.exe</origin>
                         </distributionFile>
                     </distributionFileList>
                 </folder>
@@ -286,6 +253,13 @@
                 </startMenuShortcut>
             </startMenuShortcutList>
         </component>
+        <component>
+            <name>dxinst</name>
+            <description>DirectX Installer</description>
+            <canBeEdited>1</canBeEdited>
+            <selected>1</selected>
+            <show>1</show>
+        </component>
     </componentList>
     <readyToInstallActionList>
         <componentSelection>
@@ -300,6 +274,13 @@
             <select></select>
             <ruleList>
                 <fileExists path="${windows_folder_system}/msvcp100.dll"/>
+            </ruleList>
+        </componentSelection>
+        <componentSelection>
+            <deselect>dxinst</deselect>
+            <select></select>
+            <ruleList>
+                <fileExists path="${windows_folder_system}/D3DX9_42.DLL"/>
             </ruleList>
         </componentSelection>
     </readyToInstallActionList>
