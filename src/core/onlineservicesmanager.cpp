@@ -109,7 +109,7 @@ public:
                         elem->Attribute("level", &cl->level);
                         cl->subtype = elem->Attribute("subtype");
                         cl->name = elem->Attribute("name");
-                        cl->savegame = Poco::replace(std::string(elem->GetText()), "\n", "");
+                        cl->savegame = std::string(elem->GetText());
                         characters.push_back(cl);
 
                         Poco::Path p;
@@ -212,9 +212,10 @@ public:
             // send request
             Poco::Net::HTTPRequest req(Poco::Net::HTTPRequest::HTTP_POST, path, Poco::Net::HTTPMessage::HTTP_1_1);
 
-            std::string body = "<Character token='" + sw_token + "' charname='" + sw_charname +"' >";
+            std::string body = "<Post><Character charname='" + sw_charname +"' >";
             body += sw_chardata;
             body += "</Character>";
+            body += "<Token value='" + sw_token + "'/></Post>";
 
             req.setContentLength(body.length());
             req.setContentType("text/xml; charset=utf-8");

@@ -1855,7 +1855,8 @@ void Document::writeSavegame(bool writeShortkeys)
             if(OnlineServicesManager::getSingletonPtr() && OnlineServicesManager::getSingleton().userLoggedIn())
             {
                 std::string name = getLocalPlayer()->getName().getRawText();
-                OnlineServicesManager::getSingleton().syncCharacterData(name.c_str(), stream->str().c_str());
+				std::string strm = "0" + stream->str();
+                OnlineServicesManager::getSingleton().syncCharacterData(name, strm);
             }
 #endif
 
