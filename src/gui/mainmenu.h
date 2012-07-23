@@ -34,7 +34,7 @@ class SavegameList;
 class MainMenu
     : public Window
     , public Ogre::FrameListener
-    , public OnlineServicesManager::LoginStatusListener
+    , public OnlineServicesManager::StatusListener
 #else
 class MainMenu
 	: public Window
@@ -111,15 +111,22 @@ public:
 
     /**
      * \fn bool onLoginFinished ( const CEGUI::EventArgs& evt );
-     * \brief Handles when a Login task is finished
+     * \brief Handles when a Login task is finished from OnlineServicesManager::StatusListener
      */
     virtual void onLoginFinished(std::vector<OnlineServicesManager::CharacterLight*> &characters);
 
     /**
      * \fn bool onLogoutFinished ( const CEGUI::EventArgs& evt );
-     * \brief Handles when a Logout task is finished
+     * \brief Handles when a Logout task is finished from OnlineServicesManager::StatusListener
      */
     virtual void onLogoutFinished();
+
+    /**
+     * \fn bool onSyncCharFinished ( const CEGUI::EventArgs& evt );
+     * \brief Handles when a Sync task is finished from OnlineServicesManager::StatusListener
+     */
+    virtual void onSyncCharFinished();
+
 #endif
 
 private:

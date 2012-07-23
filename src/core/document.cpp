@@ -42,6 +42,10 @@
 
 #include <physfs.h>
 
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+#include "onlineservicesmanager.h"
+#endif
+
 // Constructors/Destructors
 // Initialisiert Document zu Testzwecken
 Document::Document()
@@ -1845,6 +1849,16 @@ void Document::writeSavegame(bool writeShortkeys)
 		{
 			file << stream->str();
 			DEBUGX("save: \n %s",stream->str().c_str());
+
+
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+            if(OnlineServicesManager::getSingletonPtr() && OnlineServicesManager::getSingleton().userLoggedIn())
+            {
+                std::string name = getLocalPlayer()->getName().getRawText();
+                OnlineServicesManager::getSingleton().syncCharacterData(name.c_str(), stream->str().c_str());
+            }
+#endif
+
 		}
 		
 		file.close();

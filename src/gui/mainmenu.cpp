@@ -244,6 +244,11 @@ void MainMenu::onLogoutFinished()
 
 }
 
+void MainMenu::onSyncCharFinished()
+{
+    DEBUGX("Character sync finished");
+}
+
 #endif
 
 bool MainMenu::onStartSinglePlayer(const CEGUI::EventArgs& evt)
@@ -734,7 +739,7 @@ void MainMenu::updateCharacterView()
 		
 		if ((correctname != m_savegame_player))
 		{
-			DEBUGX("updating inv player %s to %s",m_savegame_player.c_str(), correctname.c_str());
+            DEBUGX("updating inv player %s to %s",m_savegame_player.c_str(), correctname.c_str());
 			GraphicManager::destroyGraphicObject(m_savegame_player_object);
 			m_savegame_player_object =0;
 			update = true;

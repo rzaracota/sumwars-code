@@ -52,8 +52,8 @@ public:
         try
         {
             // prepare session
-            //Poco::URI uri("http://localhost:8081/api/remote_login?username=" + this->username + "&password=" + this->pw);
-			Poco::URI uri("http://sumwars-backend.appspot.com/api/remote_login?username=" + this->username + "&password=" + this->pw);
+            Poco::URI uri("http://localhost:8081/api/remote_login?username=" + this->username + "&password=" + this->pw);
+			//Poco::URI uri("http://sumwars-backend.appspot.com/api/remote_login?username=" + this->username + "&password=" + this->pw);
             Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
 
             // prepare path
@@ -182,6 +182,61 @@ public:
     }
 };
 
+class SyncCharTask: public Poco::Task
+{
+public:
+    std::string sw_token;
+    std::string sw_charname;
+    std::string sw_chardata;
+
+    SyncCharTask(const std::string& name, std::string token, std::string charname, std::string chardata): Task(name)
+    {
+        sw_token = token;
+        sw_charname = charname;
+        sw_chardata = chardata;
+    }
+
+    void runTask()
+    {
+
+        try
+        {
+            // prepare session
+            Poco::URI uri("http://localhost:8081/api/update_character_data");
+            Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
+
+            // prepare path
+            std::string path(uri.getPathAndQuery());
+            if (path.empty()) path = "/";
+
+            // send request
+            Poco::Net::HTTPRequest req(Poco::Net::HTTPRequest::HTTP_POST, path, Poco::Net::HTTPMessage::HTTP_1_1);
+
+            std::string body = "<Character token='" + sw_token + "' charname='" + sw_charname +"' >";
+            body += sw_chardata;
+            body += "</Character>";
+
+            req.setContentLength(body.length());
+            req.setContentType("text/xml; charset=utf-8");
+            std::ostream& send = session.sendRequest(req);
+            send << body << std::flush;
+
+            // get response
+            Poco::Net::HTTPResponse res;
+            std::cout << "CharSyncTask: " << res.getStatus() << " " << res.getReason() << std::endl;
+
+            // print response
+            std::istream &is = session.receiveResponse(res);
+            std::ostringstream stream;
+            Poco::StreamCopier::copyStream(is, stream);
+            std::cout << stream.str() << std::endl;
+        }
+        catch(Poco::Exception &ex)
+        {
+        }
+    }
+};
+
 template<> OnlineServicesManager* Ogre::Singleton<OnlineServicesManager>::SUMWARS_OGRE_SINGLETON = 0;
 
 OnlineServicesManager::OnlineServicesManager(std::string &dataPath)
@@ -216,19 +271,31 @@ void OnlineServicesManager::onFinished(Poco::TaskFinishedNotification *notificat
         mCurrentUsername = ((LoginTask*)notification->task())->username;
 		mUserLoggedIn = true;
 
-        std::vector<LoginStatusListener*>::iterator iter;
-        for(iter = mLoginStatusListener.begin(); iter != mLoginStatusListener.end(); iter++)
+        std::vector<StatusListener*>::iterator iter;
+        for(iter = mStatusListener.begin(); iter != mStatusListener.end(); iter++)
             (*iter)->onLoginFinished(((LoginTask*)notification->task())->characters);
 
     }
     else if(tName == "Logout Task")
     {
-        std::vector<LoginStatusListener*>::iterator iter;
-        for(iter = mLoginStatusListener.begin(); iter != mLoginStatusListener.end(); iter++)
+        std::vector<StatusListener*>::iterator iter;
+        for(iter = mStatusListener.begin(); iter != mStatusListener.end(); iter++)
             (*iter)->onLogoutFinished();
         mUserLoggedIn = false;
     }
+    else if(tName == "Sync Character Task")
+    {
+        std::vector<StatusListener*>::iterator iter;
+        for(iter = mStatusListener.begin(); iter != mStatusListener.end(); iter++)
+            (*iter)->onSyncCharFinished();
+    }
     notification->release();
+}
+
+bool OnlineServicesManager::syncCharacterData(std::string charname, std::string data)
+{
+    mTaskManager->start(new SyncCharTask("Sync Character Task", mToken, charname, data));
+    return true;
 }
 
 bool OnlineServicesManager::login(std::string userName, std::string password)
@@ -243,22 +310,22 @@ bool OnlineServicesManager::logout()
     return true;
 }
 
-void OnlineServicesManager::registerLoginStatusListener(LoginStatusListener* l)
+void OnlineServicesManager::registerLoginStatusListener(StatusListener* l)
 {
-    std::vector<LoginStatusListener*>::iterator iter;
-    for(iter = mLoginStatusListener.begin(); iter != mLoginStatusListener.end(); iter++)
+    std::vector<StatusListener*>::iterator iter;
+    for(iter = mStatusListener.begin(); iter != mStatusListener.end(); iter++)
         if(*iter == l)
             return;
 
-    mLoginStatusListener.push_back(l);
+    mStatusListener.push_back(l);
 }
 
-void OnlineServicesManager::unregisterLoginStatusListener(LoginStatusListener* l)
+void OnlineServicesManager::unregisterLoginStatusListener(StatusListener* l)
 {
-    std::vector<LoginStatusListener*>::iterator iter;
-    for(iter = mLoginStatusListener.begin(); iter != mLoginStatusListener.end(); iter++)
+    std::vector<StatusListener*>::iterator iter;
+    for(iter = mStatusListener.begin(); iter != mStatusListener.end(); iter++)
         if(*iter == l)
-            mLoginStatusListener.erase(iter);
+            mStatusListener.erase(iter);
 }
 
 OnlineServicesManager* OnlineServicesManager::getSingletonPtr(void)

@@ -21,11 +21,12 @@ public:
         std::string savegame;
     };
 
-    class LoginStatusListener
+    class StatusListener
     {
     public:
         virtual void onLoginFinished(std::vector<OnlineServicesManager::CharacterLight*> &characters) = 0;
         virtual void onLogoutFinished() = 0;
+        virtual void onSyncCharFinished() = 0;
     };
 
 public:
@@ -38,9 +39,10 @@ public:
     const std::string& getUserName() { return mCurrentUsername; }
     const std::string& getUserDataPath() { return mUserDataPath; }
     const std::string& getUserDataResGroupId() { return mUserDataResGroupId; }
+    bool syncCharacterData(std::string charname, std::string data);
 
-    void registerLoginStatusListener(LoginStatusListener* l);
-    void unregisterLoginStatusListener(LoginStatusListener* l);
+    void registerLoginStatusListener(StatusListener* l);
+    void unregisterLoginStatusListener(StatusListener* l);
 
     void onProgress(Poco::TaskProgressNotification* notification);
     void onFinished(Poco::TaskFinishedNotification* notification);
@@ -57,7 +59,7 @@ private:
 
     bool mUserLoggedIn;
 
-    std::vector<LoginStatusListener*> mLoginStatusListener;
+    std::vector<StatusListener*> mStatusListener;
 };
 
 #endif // ONLINESERVICESMANAGER_H
