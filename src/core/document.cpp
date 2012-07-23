@@ -44,6 +44,10 @@
 
 #ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
 #include "onlineservicesmanager.h"
+#include "OgreResourceGroupManager.h"
+#include "OgreTextureManager.h"
+#include "OgreTexture.h"
+#include "OgreImage.h"
 #endif
 
 // Constructors/Destructors
@@ -1855,11 +1859,27 @@ void Document::writeSavegame(bool writeShortkeys)
             if(OnlineServicesManager::getSingletonPtr() && OnlineServicesManager::getSingleton().userLoggedIn())
             {
                 std::string name = getLocalPlayer()->getName().getRawText();
+                std::string rsgrp = OnlineServicesManager::getSingleton().getUserDataResGroupId();
+                /*std::stringstream* imgStream;
+                if(Ogre::ResourceGroupManager::getSingleton().resourceExists(rsgrp, name + ".png"))
+                {
+                    Ogre::Image img;
+                    Ogre::TexturePtr tex = Ogre::TextureManager::getSingleton().load(name + ".png", rsgrp);
+                    tex.get()->convertToImage(img);
+					Ogre::DataStreamPtr dstr = img.encode("png");
+					std::string read_buffer_str = "";
+					while(dstr->isReadable())
+					{
+						char read_buffer[1024]; 
+						std::size_t len_read = dstr->read(read_buffer, 1024); 
+						read_buffer_str += len_read;
+					}
+                }*/
+
 				std::string strm = "0" + stream->str();
                 OnlineServicesManager::getSingleton().syncCharacterData(name, strm);
             }
 #endif
-
 		}
 		
 		file.close();
@@ -1890,7 +1910,7 @@ void Document::loadSettings()
 {
 	// Get the path to use for storing data.
 	// This will be relative to the user directory on the user OS.
-	Ogre::String operationalPath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::userPath();
+    Ogre::String operationalPath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::userPath();
 	Options::getInstance()->readFromFile (operationalPath + "/options.xml");
 }
 

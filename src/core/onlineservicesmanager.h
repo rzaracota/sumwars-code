@@ -56,7 +56,7 @@ private:
     std::string mDataPath;
     std::string mUserDataPath;
     std::string mUserDataResGroupId;
-
+    long mLastSync;
     bool mUserLoggedIn;
 
     std::vector<StatusListener*> mStatusListener;

@@ -2,6 +2,7 @@
 #include "config.h"
 #include "debug.h"
 #include "tinyxml.h"
+#include "OgreRoot.h"
 
 #include <Poco/Net/HTTPClientSession.h>
 #include <Poco/Net/HTTPRequest.h>
@@ -52,8 +53,8 @@ public:
         try
         {
             // prepare session
-            Poco::URI uri("http://localhost:8081/api/remote_login?username=" + this->username + "&password=" + this->pw);
-			//Poco::URI uri("http://sumwars-backend.appspot.com/api/remote_login?username=" + this->username + "&password=" + this->pw);
+            //Poco::URI uri("http://localhost:8081/api/remote_login?username=" + this->username + "&password=" + this->pw);
+			Poco::URI uri("http://sumwars-backend.appspot.com/api/remote_login?username=" + this->username + "&password=" + this->pw);
             Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
 
             // prepare path
@@ -75,6 +76,7 @@ public:
             Poco::StreamCopier::copyStream(is, stream);
 
             std::string temp = stream.str();
+			std::cout << temp << std::endl;
             if(temp == "401")
             {
                 std::cout << "Username or password is wrong" << std::endl;
@@ -82,9 +84,6 @@ public:
             }
             else
             {
-
-
-
                 TiXmlDocument doc;
                 if(!doc.Parse(temp.c_str()))
                 {
@@ -98,11 +97,21 @@ public:
                     doc.Clear();
                 }
 
+				Poco::Path p;
+                p.parse(dataPath);
+                p.append("save/" + username);
+                userDataPath = p.toString();
+
+                Poco::File pf(p.toString());
+                pf.createDirectories();
+
                 for(TiXmlElement* elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement())
                 {
                     std::string val = elem->Value();
                     if(val == "token")
+					{
                         sw_token = elem->Attribute("value");
+					}
                     else if(val == "Character")
                     {
                         OnlineServicesManager::CharacterLight *cl = new OnlineServicesManager::CharacterLight();
@@ -112,16 +121,8 @@ public:
                         cl->savegame = std::string(elem->GetText());
                         characters.push_back(cl);
 
-                        Poco::Path p;
-                        p.parse(dataPath);
-                        p.append("save/" + username);
-                        userDataPath = p.toString();
-
-                        Poco::File pf(p.toString());
-                        pf.createDirectories();
-
                         std::ofstream f;
-                        f.open(p.toString() + "/" + cl->name + ".sav");
+                        f.open((p.toString() + "/" + cl->name + ".sav").c_str());
                         f << cl->savegame;
                         f.close();
                     }
@@ -152,7 +153,8 @@ public:
         try
         {
             // prepare session
-            Poco::URI uri("http://localhost:8081/api/remote_logout?token=" + sw_token);
+            //Poco::URI uri("http://localhost:8081/api/remote_logout?token=" + sw_token);
+			Poco::URI uri("http://sumwars-backend.appspot.com/api/remote_logout?token=" + sw_token);
             Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
 
             // prepare path
@@ -202,7 +204,8 @@ public:
         try
         {
             // prepare session
-            Poco::URI uri("http://localhost:8081/api/update_character_data");
+            //Poco::URI uri("http://localhost:8081/api/update_character_data");
+            Poco::URI uri("http://sumwars-backend.appspot.com/api/update_character_data");
             Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
 
             // prepare path
@@ -295,7 +298,15 @@ void OnlineServicesManager::onFinished(Poco::TaskFinishedNotification *notificat
 
 bool OnlineServicesManager::syncCharacterData(std::string charname, std::string data)
 {
-    mTaskManager->start(new SyncCharTask("Sync Character Task", mToken, charname, data));
+    if(Ogre::Root::getSingletonPtr())
+    {
+        unsigned long timeSinceLastSync = Ogre::Root::getSingleton().getTimer()->getMilliseconds() - mLastSync;
+        if(timeSinceLastSync > 2000)
+        {
+            mTaskManager->start(new SyncCharTask("Sync Character Task", mToken, charname, data));
+            mLastSync = Ogre::Root::getSingleton().getTimer()->getMilliseconds();
+        }
+    }
     return true;
 }
 
