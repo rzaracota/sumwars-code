@@ -251,7 +251,7 @@ OnlineServicesManager::OnlineServicesManager(std::string &dataPath)
     mDataPath = dataPath;
     mUserLoggedIn = false;
     mUserDataPath = "";
-    mUserDataResGroupId = "";
+    mUserDataResGroupId = "Savegame";
     mCurrentUsername = "Default";
     mToken = "";
 }
@@ -282,10 +282,15 @@ void OnlineServicesManager::onFinished(Poco::TaskFinishedNotification *notificat
     }
     else if(tName == "Logout Task")
     {
+        mUserDataPath = "";
+        Ogre::ResourceGroupManager::getSingleton().destroyResourceGroup(mUserDataResGroupId);
+        mUserDataResGroupId = "Savegame";
+        mCurrentUsername = "Default";
+        mUserLoggedIn = false;
+
         std::vector<StatusListener*>::iterator iter;
         for(iter = mStatusListener.begin(); iter != mStatusListener.end(); iter++)
             (*iter)->onLogoutFinished();
-        mUserLoggedIn = false;
     }
     else if(tName == "Sync Character Task")
     {

@@ -208,6 +208,7 @@ bool MainMenu::onLoginDialogLoginButton ( const CEGUI::EventArgs& evt )
         static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("LoginDialog"))->show();
         CEGUI::String username = static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("LoginDialog/UsernameEditbox"))->getText();
         CEGUI::String pw = static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("LoginDialog/PasswordEditbox"))->getText();
+		static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("LoginDialog/PasswordEditbox"))->setText("");
         OnlineServicesManager::getSingleton().login(username.c_str(), pw.c_str());
     }
 
@@ -241,7 +242,8 @@ void MainMenu::onLogoutFinished()
     static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("LoginButton/Label"))->setText((CEGUI::utf8*) gettext("Login"));
     static_cast<CEGUI::FrameWindow*>(CEGUI::WindowManager::getSingleton().getWindow("SumwarsOnlineIndicatorLabel"))
             ->setText((CEGUI::utf8*) gettext("Not logged in."));
-
+	m_userLoggedIn = false;
+    m_saveGameList->update();
 }
 
 void MainMenu::onSyncCharFinished()
