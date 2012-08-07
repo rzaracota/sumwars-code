@@ -180,6 +180,8 @@ void EventSystem::init()
 	lua_register(m_lua, "printQuestMessage",printMessage);
 	lua_register(m_lua, "printMessage",printMessage);
 	
+	lua_register(m_lua, "translate",translate);
+	
 	lua_register(m_lua, "addMusic",addMusic);
 	lua_register(m_lua, "clearMusicList",clearMusicList);
 	lua_register(m_lua, "playSound",playSound);
@@ -3124,6 +3126,34 @@ int EventSystem::setOption(lua_State *L)
 	else
 	{
 		ERRORMSG("Syntax: setOption(string optionname, value)");		
+	}
+	return 0;
+}
+
+int EventSystem::translate(lua_State *L)
+{
+	int argc = lua_gettop(L);
+	if (argc>=1 && (lua_isstring(L,1) || lua_istable(L,1)))
+	{
+		TranslatableString msg;
+		getTranslatableString(L,msg,1);
+		
+		if (argc>=2)
+		{
+			std::string domain;
+			domain = lua_tostring(L,2);
+			msg.setTextDomain(domain);
+		}
+
+		std::string translation = msg.getTranslation();
+		
+		lua_pushstring(L,translation.c_str());
+		
+		return 1;
+	}
+	else
+	{
+		ERRORMSG("Syntax: translate(string message, [string domain])");		
 	}
 	return 0;
 }

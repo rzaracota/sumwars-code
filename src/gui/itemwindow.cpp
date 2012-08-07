@@ -171,6 +171,51 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 		img->setProperty("BackgroundColours", propnew); 
 	}
 	
+	// try to find a Progressbar with a matching name
+	// remove "Label" and add "ProgressBar"
+	CEGUI::String  windowname = img->getName();
+	std::size_t pos =	windowname.find ("Label");
+	if (pos != std::string::npos)
+	{
+		windowname.erase(pos,5);
+	}
+	windowname.append("ProgressBar");
+	// Fenstermanager
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	
+	if (win_mgr.isWindowPresent(windowname))
+	{
+		// update progress bar to reflect item timer
+		CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( windowname));
+		double progress = 0;
+		if (item != 0 && item->m_consumable && item->m_consume_timer_nr != 0)
+		{
+			// there is an item with potentially running timer
+			progress = player->getTimerPercent(item->m_consume_timer_nr);
+		}
+		
+		// update progress
+		if (bar->getProgress() != progress)
+		{
+			bar->setProgress(progress);
+		}
+		
+		// display image gray if the item is not available
+		double alpha = 1;
+		if (progress > 0)
+		{
+			alpha = 0.5;
+			if (bar->getAlpha() != 0.5)
+			{
+				bar->setAlpha(0.5);
+			}
+		}
+		if (img->getAlpha() != alpha)
+		{
+			img->setAlpha(alpha);
+		}
+	}
+	
 	if (playsound && !m_silent_current_update)
 	{
 		SoundName sname = GraphicManager::getDropSound(item->m_subtype);

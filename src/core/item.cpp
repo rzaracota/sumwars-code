@@ -146,7 +146,10 @@ ItemBasicData::ItemBasicData()
 	m_enchant_multiplier(0),
 	m_name(),
 	m_drop_level(0),
-	m_drop_probability(0.0)
+	m_drop_probability(0.0),
+	m_consumable(false),
+	m_consume_timer_nr(0),
+	m_consume_timer(0)
 {
 	for (int i=0;i<NUM_MAGIC_MODS;i++)
 	{
@@ -219,6 +222,9 @@ void ItemBasicData::operator=(const ItemBasicData& other)
 	m_drop_level = other.m_drop_level;
 	m_drop_probability = other.m_drop_probability;
 
+	m_consumable = other.m_consumable;
+	m_consume_timer_nr = other.m_consume_timer_nr;
+	m_consume_timer = other.m_consume_timer;
 }
 
 void ItemBasicData::writeToXML(TiXmlNode* node)
@@ -306,6 +312,10 @@ void ItemBasicData::writeToXML(TiXmlNode* node)
 	XMLUtil::setDoubleAttribute(attr, "modchance_attack_mod",m_modchance[ItemFactory::ATTACK_MOD],0);
 	XMLUtil::setDoubleAttribute(attr, "modchance_power_mod",m_modchance[ItemFactory::POWER_MOD],0);
 	insert_point = attr;
+	
+	XMLUtil::setBoolAttribute(attr, "consumable",m_consumable,false);
+	XMLUtil::setAttribute(attr, "consume_timer_nr",m_consume_timer_nr,0);
+	XMLUtil::setDoubleAttribute(attr, "consume_timer",m_consume_timer,0);
 	
 	// detect UseupEffect element
 	TiXmlElement* useup =  node->FirstChildElement("UseupEffect");
@@ -398,6 +408,9 @@ Item::Item(int id)
 	m_type(NOITEM),
 	m_size(SMALL),
 	m_price(0),
+	m_consumable(false),
+	m_consume_timer_nr(0),
+	m_consume_timer(0),
 	m_useup_effect(0),
 	m_equip_effect(0),
 	m_weapon_attr(0),
@@ -482,6 +495,10 @@ Item::Item(ItemBasicData& data, int id)
 
 	m_level_req = data.m_level_req;
 	m_char_req = data.m_char_req;
+	
+	m_consumable = data.m_consumable;
+	m_consume_timer_nr = data.m_consume_timer_nr;
+	m_consume_timer = data.m_consume_timer;
 	
 	m_magic_mods.reset();
 }
@@ -821,6 +838,13 @@ void Item::toStringComplete(CharConv* cv)
 	{
 		cv->toBuffer( m_magic_mods.to_string());
 	}
+	
+	if (cv->getVersion() >= 21)
+	{
+		cv->toBuffer(m_consumable);
+		cv->toBuffer(m_consume_timer_nr);
+		cv->toBuffer(m_consume_timer);
+	}
 }
 
 void Item::fromStringComplete(CharConv* cv)
@@ -930,6 +954,19 @@ void Item::fromStringComplete(CharConv* cv)
 		m_magic_mods = std::bitset<32>(magicmods);
 	}
 
+	if (cv->getVersion() >= 21)
+	{
+		cv->fromBuffer(m_consumable);
+		cv->fromBuffer(m_consume_timer_nr);
+		cv->fromBuffer(m_consume_timer);
+	}
+	else
+	{
+		// hack to fill missing data fields
+		m_consumable = ((m_useup_effect != 0) || m_subtype =="town_portal");
+		m_consume_timer_nr = 0;
+		m_consume_timer = 0;
+	}
 }
 
 std::string Item::getDescription(float price_factor, ItemRequirementsMet irm)

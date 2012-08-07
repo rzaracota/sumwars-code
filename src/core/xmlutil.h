@@ -64,6 +64,29 @@ class XMLUtil
 		}
 		
 		/**
+		 * \brief Sets an bool attribute for an XML Element
+		 * \param name name of the attribute
+		 * \param value value of the attribute
+		 * \param def default value
+		 * If the value is equal to the default value, the attribute is not written but deleted instead.
+		 */
+		static void setBoolAttribute(TiXmlElement* elem, std::string name, bool value, bool def=true)
+		{
+			std::string val = "true";
+			if (value == false)
+				val = "false";
+			
+			if (value != def)
+			{
+				elem->SetAttribute(name.c_str(), val.c_str());
+			}
+			else
+			{
+				elem->RemoveAttribute(name.c_str());
+			}
+		}
+		
+		/**
 		 * \brief Sets a double attribute for an XML Element
 		 * \param name name of the attribute
 		 * \param value value of the attribute

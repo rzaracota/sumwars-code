@@ -472,29 +472,29 @@ install(TARGETS sumwars
 
 # freedesktop.org icons and desktop files
 # TODO: How do we do this on Windows? Installing start menu items.
-if (UNIX)
-  install(FILES "packaging/sumwars.desktop"
-    DESTINATION "share/applications")
-    
-  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_16x16.png"
-    DESTINATION "share/icons/hicolor/16x16/"
-    RENAME "sumwars.png")
-  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_24x24.png"
-    DESTINATION "share/icons/hicolor/24x24/"
-    RENAME "sumwars.png")
-  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_32x32.png"
-    DESTINATION "share/icons/hicolor/32x32/"
-    RENAME "sumwars.png")
-  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_48x48.png"
-    DESTINATION "share/icons/hicolor/48x48/"
-    RENAME "sumwars.png")
-  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_64x64.png"
-    DESTINATION "share/icons/hicolor/64x64/"
-    RENAME "sumwars.png")
-  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_128x128.png"
-    DESTINATION "share/icons/hicolor/128x128/"
-    RENAME "sumwars.png")
-endif()
+#if (UNIX)
+#  install(FILES "packaging/sumwars.desktop"
+#    DESTINATION "share/applications")
+#    
+#  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_16x16.png"
+#    DESTINATION "share/icons/hicolor/16x16/"
+#    RENAME "sumwars.png")
+#  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_24x24.png"
+#    DESTINATION "share/icons/hicolor/24x24/"
+#    RENAME "sumwars.png")
+#  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_32x32.png"
+#    DESTINATION "share/icons/hicolor/32x32/"
+#    RENAME "sumwars.png")
+#  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_48x48.png"
+#    DESTINATION "share/icons/hicolor/48x48/"
+#    RENAME "sumwars.png")
+#  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_64x64.png"
+#    DESTINATION "share/icons/hicolor/64x64/"
+#    RENAME "sumwars.png")
+#  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/share/icon/SumWarsIcon_128x128.png"
+#    DESTINATION "share/icons/hicolor/128x128/"
+#    RENAME "sumwars.png")
+#endif()
 
 install(FILES "AUTHORS" "COPYING" "README" # we intentionally avoid installing "INSTALL" here
   DESTINATION "${SUMWARS_DOC_DIR}")
@@ -516,7 +516,7 @@ else()
   SEPARATE_ARGUMENTS(SUMWARS_LANGUAGES)
   foreach(i ${SUMWARS_LANGUAGES})
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/share/translation/${i}"
-      DESTINATION "${SUMWARS_SHARE_DIR}"
+      DESTINATION "${SUMWARS_SHARE_DIR}/translation"
       FILES_MATCHING PATTERN "*.mo"
       PATTERN ".hg" EXCLUDE
       PATTERN "xmlgettext" EXCLUDE) # both pattern excludes are there to prevent the directories from being created
@@ -548,6 +548,7 @@ install(DIRECTORY "${OGRE_PLUGIN_DIR_REL}/"
 endif()
   
 # only CPack code below this line
+SET(CPACK_PACKAGE_NAME "sumwars")
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Summoning Wars Role-Playing Game")
 SET(CPACK_PACKAGE_VENDOR "Sumwars team")
 SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
@@ -557,7 +558,14 @@ SET(CPACK_PACKAGE_VERSION_MINOR "${SUMWARS_VERSION_MINOR}")
 SET(CPACK_PACKAGE_VERSION_PATCH "${SUMWARS_VERSION_PATCH}")
 
 SET(CPACK_SOURCE_GENERATOR TBZ2 ZIP)
-SET(CPACK_GENERATOR NSIS)
+SET(CPACK_GENERATOR NSIS DEB)
+
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Sumwars team")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libogremain-1.7.3, libcegui, libois-1.3.0, libalut0, liblua5.1-0, libopenal1, libvorbis0a, libfreeimage3, libphysfs1, libxrandr2")
+SET(CPACK_DEBIAN_PACKAGE_SECTION "games")
+SET(CPACK_DEBIAN_ARCHITECTURE ${CMAKE_SYSTEM_PROCESSOR})
+set(CPACK_SET_DESTDIR "ON")
+
 
 set(CPACK_SOURCE_PACKAGE_FILE_NAME "sumwars-${SUMWARS_SHORT_VERSION}" CACHE INTERNAL "tarball basename")
 
@@ -578,5 +586,4 @@ set(CPACK_SOURCE_IGNORE_FILES
 
 "\\\\.sumwars"
 )
-
 INCLUDE(CPack)

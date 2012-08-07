@@ -19,11 +19,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: theAmbush.xml
+#: theAmbush.xml:2
 msgid "The Ambush"
 msgstr "L'agguato"
 
-#: theAmbush.xml
+#: theAmbush.xml:5
 msgid ""
 "Ireana survived and, as a token of her gratitude, provided our next job. I "
 "always knew the councilmen only wanted an exterminator."
@@ -32,7 +32,7 @@ msgstr ""
 "nostro prossimo compito. Ho sempre saputo che il Consiglio aveva bisogno "
 "solo di uno sterminatore."
 
-#: theAmbush.xml
+#: theAmbush.xml:7
 msgid ""
 "A female council-mage by the name of Ireana of Northborough seems to be in "
 "trouble west of Dwarfenwall. Nothing a Branded One couldn't solve. If she "
@@ -42,53 +42,53 @@ msgstr ""
 "in difficolta' a ovest di Dwarfenwall. Niente che un Marchiato non possa "
 "risolvere, sempre che lei sopravviva abbastanza a lungo..."
 
-#: theAmbush.xml
+#: theAmbush.xml:11
 msgid "aisWolfstones"
 msgstr "Le pietre dei lupi"
 
-#: theAmbush.xml
+#: theAmbush.xml:29
 msgid "Dwarfenwall is in that direction. I shouldn't go this way yet."
 msgstr ""
 "Dwarfenwall e' in quella direzione. Per il momento non prenderei questa "
 "strada."
 
-#: theAmbush.xml
+#: theAmbush.xml:104
 msgid "Wait!"
 msgstr "Aspetta!"
 
-#: theAmbush.xml
+#: theAmbush.xml:105
 msgid "I am making haste, alright?"
 msgstr "Sono troppo precipitoso?"
 
-#: theAmbush.xml
+#: theAmbush.xml:106 theAmbush.xml:109
 msgid "You have to go into the western woods right now."
 msgstr "Ora come ora devi addentrarti nei boschi verso occidente."
 
-#: theAmbush.xml
+#: theAmbush.xml:108
 msgid "We are making haste, alright?"
 msgstr "Siamo troppo precipitosi?"
 
-#: theAmbush.xml
+#: theAmbush.xml:111
 msgid "The prince's fiancé is in danger."
 msgstr "La fidanzata del principe e' in pericolo."
 
-#: theAmbush.xml
+#: theAmbush.xml:112
 msgid "Who?"
 msgstr "Chi?"
 
-#: theAmbush.xml
+#: theAmbush.xml:113
 msgid "The archmage Ireana of Northborough"
 msgstr "L'arcimaga Ireana di Nordburg."
 
-#: theAmbush.xml
+#: theAmbush.xml:114
 msgid "Will that be payed extra?"
 msgstr "Verra' pagato come extra?"
 
-#: theAmbush.xml
+#: theAmbush.xml:116
 msgid "What?"
 msgstr "Che cosa?!"
 
-#: theAmbush.xml
+#: theAmbush.xml:117
 msgid ""
 "I thought she was one of your fancy elementalist amazones. Can't she look "
 "after herself?"
@@ -96,38 +96,38 @@ msgstr ""
 "Pensavo fosse una delle vostre fantastiche elementaliste-amazzoni. Non "
 "riesce piu' a badare a se stessa?"
 
-#: theAmbush.xml
+#: theAmbush.xml:120 theAmbush.xml:123
 msgid "Don't start to argue and help her! She needs your help!"
 msgstr "Non iniziare a discutere e vai ad aiutarla! Ha bisogno del tuo aiuto!"
 
-#: theAmbush.xml
+#: theAmbush.xml:126
 msgid "What do you think? Shall we bail someone out?"
 msgstr "Cosa credi? Pensi davvero che l'abbandoneremmo la'?"
 
-#: theAmbush.xml
+#: theAmbush.xml:128 theAmbush.xml:140
 msgid "I'm not sure..."
 msgstr "Non ne sono sicuro..."
 
-#: theAmbush.xml
+#: theAmbush.xml:130 theAmbush.xml:143
 msgid "Well, it couldn't really hurt..."
 msgstr "Guarda, non e' che la cosa ci ferisca piu' di tanto..."
 
-#: theAmbush.xml
+#: theAmbush.xml:133 theAmbush.xml:145
 msgid "Will that be payed extra??"
 msgstr "Verra' pagato come extra?"
 
-#: theAmbush.xml
+#: theAmbush.xml:135 theAmbush.xml:146
 msgid "Argh! Do I have to-"
 msgstr "Argh! E io dovrei-"
 
-#: theAmbush.xml
+#: theAmbush.xml:136 theAmbush.xml:147
 msgid "Alright already, safe your breath!"
 msgstr "Stai tranquillo, risparmia il fiato!"
 
-#: theAmbush.xml
+#: theAmbush.xml:138
 msgid "What do you think, friends, do we want to bail someone out?"
 msgstr "Cosa ne pensate amici? Vogliamo aiutarla?"
 
-#: theAmbush.xml
+#: theAmbush.xml:149
 msgid "The firefighters are on the way."
 msgstr "Le squadre anti-incendio stanno gia' andando."

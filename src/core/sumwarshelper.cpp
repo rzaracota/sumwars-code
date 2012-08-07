@@ -177,7 +177,6 @@ std::string SumwarsHelper::getNativeResolutionString()
 	int xRes = 800;
 	int yRes = 600;
 
-
 #if defined (_WIN32)
 	xRes = GetSystemMetrics(SM_CXSCREEN);
 	yRes = GetSystemMetrics(SM_CYSCREEN);
@@ -204,6 +203,22 @@ std::string SumwarsHelper::getNativeResolutionString()
 	std::stringstream ss;
 	ss << xRes << " x " << yRes;
 	return ss.str ();
+}
+
+std::string SumwarsHelper::getNativeColourDepthString()
+{
+#if defined (_WIN32)
+	int bitsPerPixel = 32;
+	HDC dc = GetDC(NULL);
+	bitsPerPixel = GetDeviceCaps(dc, BITSPIXEL);
+	ReleaseDC(NULL, dc);
+
+	std::stringstream stream;
+	stream << " @ " << bitsPerPixel << "-bit colour";
+
+	return stream.str();
+#endif
+	return "";
 }
 
 void SumwarsHelper::getSizesFromResolutionString (const std::string& initialString, int& videoModeWidth, int& videoModeHeight)

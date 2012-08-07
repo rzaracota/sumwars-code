@@ -812,6 +812,11 @@ class EventSystem
 		 */
 		static int setOption(lua_State *L);
 		
+		/**
+		 * \brief Translates a string with gettext
+		 * \param L Lua Status
+		 */
+		static int translate(lua_State *L);
 		
 		/**
 		 * \fn static int writeString(lua_State *L)

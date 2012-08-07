@@ -113,7 +113,13 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 		}
 	}
 	
-	
+					
+	std::string consumable;
+	attr.getString("consumable",consumable ,"false");
+	item_data->m_consumable = (consumable == "true");
+	attr.getFloat("consume_timer",item_data->m_consume_timer,0);
+	attr.getInt("consume_timer_nr",item_data->m_consume_timer_nr,0);
+				
 	TiXmlNode* child;
 	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
 	{
@@ -192,7 +198,7 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 				attr.getFloat("modchance_attack_speed_mod",item_data->m_modchance[ItemFactory::ATTACK_SPEED_MOD],0);
 				attr.getFloat("modchance_attack_mod",item_data->m_modchance[ItemFactory::ATTACK_MOD],0);
 				attr.getFloat("modchance_power_mod",item_data->m_modchance[ItemFactory::POWER_MOD],0);
-					
+
 			}
 			else if (!strcmp(child->Value(), "DropChance"))
 			{
@@ -257,31 +263,7 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 				
 				std::string type;
 				attr.getString("type",type);
-				/*
-				short flags = item_data->m_weapon_attr->m_damage.m_special_flags;
-				if (type ==  "unblockable")
-					flags |= Damage::UNBLOCKABLE;
-				else if (type ==  "ignore_armor")
-					flags |= Damage::IGNORE_ARMOR;
-				else if (type ==   "extra_human_dmg")
-					flags |= Damage::EXTRA_HUMAN_DMG;
-				else if (type ==   "extra_demon_dmg")
-					flags |= Damage::EXTRA_DEMON_DMG;
-				else if (type ==   "extra_undead_dmg")
-					flags |= Damage::EXTRA_UNDEAD_DMG;
-				else if (type ==   "extra_dwarf_dmg")
-					flags |= Damage::EXTRA_DWARF_DMG;
-				else if (type ==   "extra_drake_dmg")
-					flags |= Damage::EXTRA_DRAKE_DMG;
-				else if (type ==   "extra_fairy_dmg")
-					flags |= Damage::EXTRA_FAIRY_DMG;
-				else if (type ==   "extra_goblin_dmg")
-					flags |= Damage::EXTRA_GOBLIN_DMG;
-				else if (type ==   "extra_animal_dmg")
-					flags |= Damage::EXTRA_ANIMAL_DMG;
-				else if (type ==   "extra_summoned_dmg")
-					flags |= Damage::EXTRA_SUMMONED_DMG;
-				*/
+
 			}
 			else if (!strcmp(child->Value(), "Immunity"))
 			{

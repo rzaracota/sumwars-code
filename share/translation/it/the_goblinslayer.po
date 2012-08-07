@@ -19,86 +19,86 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: goblins.xml
+#: goblins.xml:2
 msgid "The goblinslayer"
 msgstr "Il cacciatore di goblin"
 
-#: goblins.xml
+#: goblins.xml:9
 msgid "Quest finished"
 msgstr "Quest completata"
 
-#: goblins.xml
+#: goblins.xml:12
 msgid "you killed enough goblins"
 msgstr "hai ucciso abbastanza goblin"
 
-#: goblins.xml
+#: goblins.xml:18
 msgid "peasant"
 msgstr "Contadino"
 
-#: goblins.xml
+#: goblins.xml:19
 msgid "Goblins"
 msgstr "Goblins"
 
-#: goblins.xml
+#: goblins.xml:26
 msgid "I have killed them all."
 msgstr "Li ho uccisi tutti."
 
-#: goblins.xml
+#: goblins.xml:27
 msgid "Wow... you're a real hero, aren't ya?"
 msgstr "Wow... allora sei un vero eroe, giusto?"
 
-#: goblins.xml
+#: goblins.xml:30
 msgid "Leave me alone and kill some more goblins."
 msgstr "Lasciami stare e vai ad uccidere ancora qualche goblin."
 
-#: goblins.xml
+#: goblins.xml:33
 msgid "There are some stupid goblins pissing me off."
 msgstr "Ci sono alcuni stupidi goblin che mi stanno scocciando."
 
-#: goblins.xml
+#: goblins.xml:34
 msgid "If you kill 10 of 'em, I'll give you a precious reward."
 msgstr "Se ne uccidi 10 per me riceverai una lauta ricompensa."
 
-#: goblins.xml
+#: goblins.xml:35
 msgid "Interested?"
 msgstr "Interessato?"
 
-#: goblins.xml
+#: goblins.xml:36
 msgid "Accept the quest?"
 msgstr "Accetti la missione?"
 
-#: goblins.xml
+#: goblins.xml:37
 msgid "Yes"
 msgstr "Si'"
 
-#: goblins.xml
+#: goblins.xml:38
 msgid "No"
 msgstr "No"
 
-#: goblins.xml
+#: goblins.xml:43
 msgid "Goblins (reward)"
 msgstr "Goblins (ricompensa)"
 
-#: goblins.xml
+#: goblins.xml:49
 msgid "You want a second reward?"
 msgstr "Vuoi una seconda ricompensa?"
 
-#: goblins.xml
+#: goblins.xml:50
 msgid "Of course!"
 msgstr "Certamente!"
 
-#: goblins.xml
+#: goblins.xml:51
 msgid "Then I'll give you this goblin club. Be happy."
 msgstr "Bene, eccoti questa mazza goblin, buona fortuna."
 
-#: goblins.xml
+#: goblins.xml:60
 msgid "Nearly done."
 msgstr "Quasi fatto."
 
-#: goblins.xml
+#: goblins.xml:61
 msgid "Have fun then."
 msgstr "Buon divertimento allora."
 
-#: goblins.xml
+#: goblins.xml:90
 msgid "region1"
 msgstr "Regione 1"
