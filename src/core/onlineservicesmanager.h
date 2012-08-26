@@ -2,6 +2,7 @@
 #define ONLINESERVICESMANAGER_H
 
 #include <OgreSingleton.h>
+#include "OgreDataStream.h"
 
 namespace Poco
 {
@@ -39,7 +40,8 @@ public:
     const std::string& getUserName() { return mCurrentUsername; }
     const std::string& getUserDataPath() { return mUserDataPath; }
     const std::string& getUserDataResGroupId() { return mUserDataResGroupId; }
-    bool syncCharacterData(std::string charname, std::string data);
+    bool syncCharacterData(std::string charName, std::string data);
+    bool syncCharacterAvatar(std::string charName, std::string pathToImage, Ogre::DataStreamPtr ptr);
 
     void registerLoginStatusListener(StatusListener* l);
     void unregisterLoginStatusListener(StatusListener* l);

@@ -24,9 +24,9 @@
 
 #include "graphicmanager.h"
 
-
-
-
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+#include "onlineservicesmanager.h"
+#endif
 
 Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 {
@@ -692,6 +692,16 @@ void Scene::updateCharacterView()
 				saveFile.erase(saveFile.length()-4, saveFile.length());
 				img.resize(256, 256);
 				img.save(saveFile.append(".png"));
+
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+                if(OnlineServicesManager::getSingleton().userLoggedIn())
+                {
+                    Ogre::DataStreamPtr ptr = img.encode("png");
+                    OnlineServicesManager::getSingleton().syncCharacterAvatar(pl->getName().getRawText(), saveFile, ptr);
+                }
+#endif
+
+
 			}
 		}
 		DEBUGX("player image is now %s",m_temp_player.c_str());

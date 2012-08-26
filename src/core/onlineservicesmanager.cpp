@@ -7,9 +7,13 @@
 #include <Poco/Net/HTTPClientSession.h>
 #include <Poco/Net/HTTPRequest.h>
 #include <Poco/Net/HTTPResponse.h>
+#include <Poco/Net/HTMLForm.h>
+#include <Poco/Net/StringPartSource.h>
 #include <Poco/String.h>
 #include <Poco/StringTokenizer.h>
 #include <Poco/StreamCopier.h>
+#include <Poco/Base64Encoder.h>
+#include <Poco/Buffer.h>
 #include <Poco/Path.h>
 #include <Poco/File.h>
 #include <Poco/URI.h>
@@ -24,6 +28,9 @@
 #include <fstream>
 
 #include <OgreResourceGroupManager.h>
+
+//std::string backend_url = "http://localhost:8081";
+std::string backend_url = "http://sumwars-backend.appspot.com";
 
 class LoginTask: public Poco::Task
 {
@@ -53,8 +60,8 @@ public:
         try
         {
             // prepare session
-            //Poco::URI uri("http://localhost:8081/api/remote_login?username=" + this->username + "&password=" + this->pw);
-			Poco::URI uri("http://sumwars-backend.appspot.com/api/remote_login?username=" + this->username + "&password=" + this->pw);
+
+            Poco::URI uri(backend_url + "/api/remote_login?username=" + this->username + "&password=" + this->pw);
             Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
 
             // prepare path
@@ -69,14 +76,13 @@ public:
             Poco::Net::HTTPResponse res;
             std::cout << res.getStatus() << " " << res.getReason() << std::endl;
 
-
             // print response
             std::istream &is = session.receiveResponse(res);
             std::ostringstream stream;
             Poco::StreamCopier::copyStream(is, stream);
 
             std::string temp = stream.str();
-			std::cout << temp << std::endl;
+            //std::cout << temp << std::endl;
             if(temp == "401")
             {
                 std::cout << "Username or password is wrong" << std::endl;
@@ -97,7 +103,7 @@ public:
                     doc.Clear();
                 }
 
-				Poco::Path p;
+                Poco::Path p;
                 p.parse(dataPath);
                 p.append("save/" + username);
                 userDataPath = p.toString();
@@ -109,9 +115,9 @@ public:
                 {
                     std::string val = elem->Value();
                     if(val == "token")
-					{
+                    {
                         sw_token = elem->Attribute("value");
-					}
+                    }
                     else if(val == "Character")
                     {
                         OnlineServicesManager::CharacterLight *cl = new OnlineServicesManager::CharacterLight();
@@ -153,8 +159,7 @@ public:
         try
         {
             // prepare session
-            //Poco::URI uri("http://localhost:8081/api/remote_logout?token=" + sw_token);
-			Poco::URI uri("http://sumwars-backend.appspot.com/api/remote_logout?token=" + sw_token);
+            Poco::URI uri(backend_url + "/api/remote_logout?token=" + sw_token);
             Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
 
             // prepare path
@@ -203,9 +208,9 @@ public:
 
         try
         {
+
             // prepare session
-            //Poco::URI uri("http://localhost:8081/api/update_character_data");
-            Poco::URI uri("http://sumwars-backend.appspot.com/api/update_character_data");
+            Poco::URI uri(backend_url + "/api/update_character_data");
             Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
 
             // prepare path
@@ -241,6 +246,114 @@ public:
     }
 };
 
+class SyncCharAvatarTask: public Poco::Task
+{
+public:
+    std::string sw_token;
+    std::string sw_charname;
+    std::string sw_avatar_file;
+    Ogre::DataStreamPtr mImgPtr;
+
+    SyncCharAvatarTask(const std::string& name, std::string token, std::string charName, std::string charAvatarPath, Ogre::DataStreamPtr ptr): Task(name)
+    {
+        sw_token = token;
+        sw_charname = charName;
+        sw_avatar_file = charAvatarPath;
+        mImgPtr = ptr;
+    }
+
+    void runTask()
+    {
+
+        try
+        {
+            // prepare session
+            Poco::URI uri(backend_url + "/api/update_character_avatar");
+            Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
+
+            // prepare path
+            std::string path(uri.getPathAndQuery());
+            if (path.empty()) path = "/";
+
+            Poco::Net::HTTPRequest req(Poco::Net::HTTPRequest::HTTP_POST, path, Poco::Net::HTTPRequest::HTTP_1_1);
+            Poco::Net::HTMLForm form;
+            form.setEncoding(Poco::Net::HTMLForm::ENCODING_MULTIPART);
+            form.add("token", sw_token);
+            form.add("charname", sw_charname);
+
+            Poco::Buffer<char> imgBuffer(mImgPtr->size());
+            mImgPtr->read(imgBuffer.begin(), imgBuffer.end()-imgBuffer.begin());
+            std::string s(imgBuffer.begin(), mImgPtr->size());
+
+            std::ostringstream out;
+            Poco::Base64Encoder b64enc(out);
+            b64enc.write(imgBuffer.begin(), imgBuffer.end()-imgBuffer.begin());
+            b64enc.close();
+            Poco::Net::StringPartSource *prtsrc = new Poco::Net::StringPartSource(out.str());
+            form.addPart("imagedata", prtsrc);
+
+            std::ostringstream ostr;
+            form.write(ostr);
+            req.setContentLength(ostr.str().length());
+
+            std::ostream& send = session.sendRequest(req);
+            form.prepareSubmit(req);
+            form.write(send);
+
+            // get response
+            Poco::Net::HTTPResponse res;
+            std::cout << "SyncCharAvatarTask: " << res.getStatus() << " " << res.getReason() << std::endl;
+
+            // print response
+            std::istream &is = session.receiveResponse(res);
+            std::ostringstream stream;
+            Poco::StreamCopier::copyStream(is, stream);
+            std::cout << stream.str() << std::endl;
+
+/*            std::ostringstream out;
+            Poco::Base64Encoder b64enc(out);
+            b64enc << sw_token << sw_charname << imgBuffer;
+            b64enc.close();
+
+            // prepare session
+            Poco::URI uri(backend_url + "/api/update_character_avatar");
+            Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
+
+            // prepare path
+            std::string path(uri.getPathAndQuery());
+            if (path.empty()) path = "/";
+
+            // send request
+            Poco::Net::HTTPRequest req(Poco::Net::HTTPRequest::HTTP_POST, path, Poco::Net::HTTPMessage::HTTP_1_1);
+
+            //req.setContentLength(50+mImgPtr->size());
+            //req.setContentLength((4*mImgPtr->size()+200+2)/3);
+            req.setContentLength(out.str().size());
+            req.setContentType("application/octet-stream");
+            std::ostream& send = session.sendRequest(req);
+            send << out.str() << std::flush;
+
+            // get response
+            Poco::Net::HTTPResponse res;
+            std::cout << "SyncCharAvatarTask: " << res.getStatus() << " " << res.getReason() << std::endl;
+
+            // print response
+            std::istream &is = session.receiveResponse(res);
+            std::ostringstream stream;
+            Poco::StreamCopier::copyStream(is, stream);
+            std::cout << stream.str() << std::endl;
+			*/
+//            delete[] imgBuffer;
+        }
+		catch(Poco::Exception &ex)
+		{
+            std::cout << "Error syncing character avatar image: " << ex.className() << " " << ex.displayText() << std::endl;
+		}
+    }
+};
+
+
+
 template<> OnlineServicesManager* Ogre::Singleton<OnlineServicesManager>::SUMWARS_OGRE_SINGLETON = 0;
 
 OnlineServicesManager::OnlineServicesManager(std::string &dataPath)
@@ -273,7 +386,7 @@ void OnlineServicesManager::onFinished(Poco::TaskFinishedNotification *notificat
         Ogre::ResourceGroupManager::getSingleton().addResourceLocation(mUserDataPath, "FileSystem", mUserDataResGroupId);
         Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup(mUserDataResGroupId);
         mCurrentUsername = ((LoginTask*)notification->task())->username;
-		mUserLoggedIn = true;
+        mUserLoggedIn = true;
 
         std::vector<StatusListener*>::iterator iter;
         for(iter = mStatusListener.begin(); iter != mStatusListener.end(); iter++)
@@ -298,20 +411,32 @@ void OnlineServicesManager::onFinished(Poco::TaskFinishedNotification *notificat
         for(iter = mStatusListener.begin(); iter != mStatusListener.end(); iter++)
             (*iter)->onSyncCharFinished();
     }
+    else if(tName == "Sync Character Avatar Task")
+    {
+        // do nothing for now
+    }
+
     notification->release();
 }
 
-bool OnlineServicesManager::syncCharacterData(std::string charname, std::string data)
+bool OnlineServicesManager::syncCharacterData(std::string charName, std::string data)
 {
     if(Ogre::Root::getSingletonPtr())
     {
         unsigned long timeSinceLastSync = Ogre::Root::getSingleton().getTimer()->getMilliseconds() - mLastSync;
         if(timeSinceLastSync > 2000)
         {
-            mTaskManager->start(new SyncCharTask("Sync Character Task", mToken, charname, data));
+            mTaskManager->start(new SyncCharTask("Sync Character Task", mToken, charName, data));
             mLastSync = Ogre::Root::getSingleton().getTimer()->getMilliseconds();
         }
     }
+    return true;
+}
+
+bool OnlineServicesManager::syncCharacterAvatar(std::string charName, std::string pathToImage, Ogre::DataStreamPtr ptr)
+{
+    std::cout << "syncing avatar image" << std::endl;
+    mTaskManager->start(new SyncCharAvatarTask("Sync Character Avatar Task", mToken, charName, pathToImage, ptr));
     return true;
 }
 
