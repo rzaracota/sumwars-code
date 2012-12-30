@@ -25,8 +25,8 @@ OPTION(SUMWARS_NO_ENET "Do not use bundled, in-source ENET Lib" OFF)
 OPTION(SUMWARS_BUILD_TOOLS "Builds editor tools (not needed for gameplay, only useful for content authors)" ON)
 OPTION(SUMWARS_UPDATE_HG_REVISION "Option to enable or disable automatic revision checking" ON)
 OPTION(SUMWARS_POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" OFF)
-OPTION(SUMWARS_STANDALONE_MODE "(Highly recommended for deployment on Windows and MacOSX) In case this is enabled, all paths (share, doc, bin) are set to be relative" OFF)
-OPTION(SUMWARS_PORTABLE_MODE "In case this is enabled, save files and config files are kept in application directory instead of home folders / user folders" OFF)
+OPTION(SUMWARS_STANDALONE_MODE "(Highly recommended for deployment on Windows and MacOSX) In case this is enabled, all paths (share, doc, bin, plugins) are set to be relative" OFF)
+OPTION(SUMWARS_PORTABLE_MODE "In case this is enabled, save files and config files are kept in application directory instead of home folders / user folders. On Windows this also means that all dynamic libraries will be relative to the executable" OFF)
 OPTION(SUMWARS_RANDOM_REGIONS "Regions are randomized if enabled. All regions are always the same if you leave this disabled (useful for developers)." ON)
 
 IF(SUMWARS_UPDATE_HG_REVISION)
@@ -144,6 +144,18 @@ ELSEIF("${OGRE_VERSION_NAME}" STREQUAL "Byatis")
 ELSE()
   MESSAGE(SEND_ERROR "You need Ogre 1.7 Cthugha or 1.8 Byatis to build this.")
 ENDIF()
+
+SET(SUMWARS_OGRE_PLUGIN_DIR_REL ${OGRE_PLUGIN_DIR_REL}) 
+SET(SUMWARS_OGRE_PLUGIN_DIR_DBG ${OGRE_PLUGIN_DIR_DBG}) 
+
+IF( WIN32 )# On Windows the plugins are distributed with the executable.
+  IF( SUMWARS_PORTABLE_MODE OR SUMWARS_STANDALONE_MODE)
+    SET(SUMWARS_OGRE_PLUGIN_DIR_REL "./") 
+	SET(SUMWARS_OGRE_PLUGIN_DIR_DBG "./") 
+  ENDIF()
+ENDIF()
+
+
 
 # add our build include directory
 include_directories(

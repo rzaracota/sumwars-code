@@ -181,11 +181,7 @@ bool Application::init()
 		"# created again with default values."
 		"\n"
 		"# Define plugin folder\n"
-#ifdef SUMWARS_STANDALONE_MODE
-		"PluginFolder=.\n"
-#else
 		"PluginFolder=" SUMWARS_OGRE_PLUGIN_DIR "/\n"
-#endif
 		"\n"
 		"Plugin=RenderSystem_GL" SUMWARS_DEBUG_POSTFIX "\n"
 #ifdef _WIN32
