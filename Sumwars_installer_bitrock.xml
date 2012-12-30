@@ -1,9 +1,9 @@
 <project>
     <shortName>Sumwars</shortName>
     <fullName>Summoning Wars</fullName>
-    <version>0.5.6b</version>
+    <version>0.5.7</version>
     <readmeFile>README</readmeFile>
-    <licenseFile>doc/formateUndRichtlinien/gpl-3.0.txt</licenseFile>
+    <licenseFile>COPYING</licenseFile>
     <logoImage>share/resources/gui/imagesets/startscreen.png</logoImage>
     <splashImage>share/resources/gui/imagesets/startscreen.png</splashImage>
     <allowLanguageSelection>1</allowLanguageSelection>
@@ -88,34 +88,6 @@
                     <destination>${installdir}</destination>
                     <name>programfiles</name>
                     <platforms>all</platforms>
-                    <shortcutList>
-                        <shortcut>
-                            <comment>Uninstall</comment>
-                            <exec>${installdir}/${uninstallerName}</exec>
-                            <icon></icon>
-                            <name>Uninstall ${product_fullname}</name>
-                            <path>${installdir}</path>
-                            <platforms>all</platforms>
-                            <runAsAdmin>0</runAsAdmin>
-                            <runInTerminal>0</runInTerminal>
-                            <windowsExec>${installdir}/${uninstallerName}.exe</windowsExec>
-                            <windowsExecArgs></windowsExecArgs>
-                            <windowsIcon></windowsIcon>
-                            <windowsPath>${installdir}</windowsPath>
-                        </shortcut>
-                    </shortcutList>
-                </folder>
-                <folder>
-                    <description>Program Files</description>
-                    <destination>${installdir}</destination>
-                    <name>programfileslinux</name>
-                    <platforms>linux</platforms>
-                </folder>
-                <folder>
-                    <description>Program Files</description>
-                    <destination>${installdir}</destination>
-                    <name>programfileswindows</name>
-                    <platforms>all</platforms>
                     <distributionFileList>
                         <distributionDirectory>
                             <origin>inst/share</origin>
@@ -175,7 +147,13 @@
                             <origin>inst/OIS.dll</origin>
                         </distributionFile>
                         <distributionFile>
+                            <origin>inst/OIS_d.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
                             <origin>inst/physfs.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>inst/Plugin_BSPSceneManager.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/Plugin_CgProgramManager.dll</origin>
@@ -205,6 +183,34 @@
                             <origin>inst/RenderSystem_GL.dll</origin>
                         </distributionFile>
                     </distributionFileList>
+                    <shortcutList>
+                        <shortcut>
+                            <comment>Uninstall</comment>
+                            <exec>${installdir}/${uninstallerName}</exec>
+                            <icon></icon>
+                            <name>Uninstall ${product_fullname}</name>
+                            <path>${installdir}</path>
+                            <platforms>all</platforms>
+                            <runAsAdmin>0</runAsAdmin>
+                            <runInTerminal>0</runInTerminal>
+                            <windowsExec>${installdir}/${uninstallerName}.exe</windowsExec>
+                            <windowsExecArgs></windowsExecArgs>
+                            <windowsIcon></windowsIcon>
+                            <windowsPath>${installdir}</windowsPath>
+                        </shortcut>
+                    </shortcutList>
+                </folder>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfileslinux</name>
+                    <platforms>linux</platforms>
+                </folder>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfileswindows</name>
+                    <platforms>all</platforms>
                 </folder>
                 <folder>
                     <description>Program Files</description>
@@ -223,9 +229,6 @@
                         </distributionFile>
                         <distributionFile>
                             <origin>oalinst.exe</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>dxwebsetup.exe</origin>
                         </distributionFile>
                     </distributionFileList>
                 </folder>
@@ -253,13 +256,6 @@
                 </startMenuShortcut>
             </startMenuShortcutList>
         </component>
-        <component>
-            <name>dxinst</name>
-            <description>DirectX Installer</description>
-            <canBeEdited>1</canBeEdited>
-            <selected>1</selected>
-            <show>1</show>
-        </component>
     </componentList>
     <readyToInstallActionList>
         <componentSelection>
@@ -276,13 +272,6 @@
                 <fileExists path="${windows_folder_system}/msvcp100.dll"/>
             </ruleList>
         </componentSelection>
-        <componentSelection>
-            <deselect>dxinst</deselect>
-            <select></select>
-            <ruleList>
-                <fileExists path="${windows_folder_system}/D3DX9_42.DLL"/>
-            </ruleList>
-        </componentSelection>
     </readyToInstallActionList>
     <preUninstallationActionList>
         <showQuestion text="Do you want the uninstallation to also remove your saved games?" variable="remove_mysql">
@@ -295,6 +284,7 @@
             </ruleList>
         </deleteFile>
     </preUninstallationActionList>
+    <compressionAlgorithm>lzma</compressionAlgorithm>
     <enableRollback>1</enableRollback>
     <enableTimestamp>1</enableTimestamp>
     <saveRelativePaths>1</saveRelativePaths>

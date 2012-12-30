@@ -14,14 +14,15 @@
 // has failed to locate the appropriate paths. In that case, please supply them
 // manually via cmake -D or cmake-gui
 #ifdef _DEBUG
-#   define SUMWARS_OGRE_PLUGIN_DIR "@OGRE_PLUGIN_DIR_DBG@"
+#   define SUMWARS_OGRE_PLUGIN_DIR "@SUMWARS_OGRE_PLUGIN_DIR_DBG@"
 #	define SUMWARS_DEBUG_POSTFIX "@CMAKE_DEBUG_POSTFIX@"
 #else
-#   define SUMWARS_OGRE_PLUGIN_DIR "@OGRE_PLUGIN_DIR_REL@"
+#   define SUMWARS_OGRE_PLUGIN_DIR "@SUMWARS_OGRE_PLUGIN_DIR_REL@"
 #	define SUMWARS_DEBUG_POSTFIX ""
 #endif
 
 #cmakedefine SUMWARS_PORTABLE_MODE
+#cmakedefine SUMWARS_STANDALONE_MODE
 #cmakedefine SUMWARS_RANDOM_REGIONS
 
 #endif // __SUMWARS_CONFIG_H__
