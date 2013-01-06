@@ -62,16 +62,51 @@ fragment_program PSSM/shadow_caster_psGLSLES glsles
 	}
 }
 
+// declare the vertex shader (HLSL for the language)
+vertex_program PSSM/shadow_caster_vsHLSL hlsl
+{
+	// source file
+	source pssm.hlsl
+	// will run on HLSL, requires vertex shader 1.1
+	target vs_1_1
+
+	// entry function
+	entry_point shadow_caster_vs
+
+	default_params
+	{
+    param_named_auto wvpMat worldviewproj_matrix
+	}
+}
+
+
+// declare the fragment shader (HLSL for the language)
+fragment_program PSSM/shadow_caster_psHLSL hlsl
+{
+	// source file
+	source pssm.hlsl
+	// will run on HLSL, requires pixel shader 2.0
+	target ps_2_0
+	// entry function
+	entry_point shadow_caster_ps
+
+	default_params
+	{
+	}
+}
+
 vertex_program PSSM/shadow_caster_vs unified
 {
 	delegate PSSM/shadow_caster_vsGLSLES
 	delegate PSSM/shadow_caster_vsCg
+	delegate PSSM/shadow_caster_vsHLSL
 }
 
 fragment_program PSSM/shadow_caster_ps unified
 {
 	delegate PSSM/shadow_caster_psGLSLES
 	delegate PSSM/shadow_caster_psCg
+	delegate PSSM/shadow_caster_psHLSL
 }
 
 material PSSM/shadow_caster

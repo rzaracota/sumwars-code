@@ -1,7 +1,7 @@
 void shadow_caster_vs(
 	float4 position			: POSITION,
 
-	out float4 oPosition	: POSITION,
+	out float4 oPosition	: SV_POSITION,
 	out float2 oDepth		: TEXCOORD0,
 
 	uniform float4x4 wvpMat)
@@ -18,6 +18,7 @@ void shadow_caster_vs(
 }
 
 void shadow_caster_ps(
+  float4 Position	: SV_POSITION,
 	float2 depth		: TEXCOORD0,
 
 	out float4 oColour	: COLOR,
@@ -25,7 +26,8 @@ void shadow_caster_ps(
 	uniform float4 pssmSplitPoints)
 {
 	float finalDepth = depth.x / depth.y;
-	oColour = float4(finalDepth, finalDepth, finalDepth, 1);
+//	oColour = float4(finalDepth, finalDepth, finalDepth, 1);
+	oColour = float4(0, 0, 0, 1);
 }
 
 
@@ -35,7 +37,7 @@ void shadow_receiver_vs(
 	float3 normal				: NORMAL,
 	float2 uv					: TEXCOORD0,
 
-	out float4 oPosition		: POSITION,
+	out float4 oPosition		: SV_POSITION,
 	out float3 oUv				: TEXCOORD0,
 	out float3 oLightDir		: TEXCOORD1,
 	out float3 oHalfAngle		: TEXCOORD2,
@@ -81,10 +83,10 @@ float shadowPCF(sampler2D shadowMap, float4 shadowMapPos, float2 offset)
 	float3 o = float3(offset, -offset.x) * 0.3f;
 
 	// Note: We using 2x2 PCF. Good enough and is alot faster.
-	float c =	(shadowMapPos.z <= tex2D(shadowMap, uv.xy - o.xy).r) ? 1 : 0; // top left
-	c +=		(shadowMapPos.z <= tex2D(shadowMap, uv.xy + o.xy).r) ? 1 : 0; // bottom right
-	c +=		(shadowMapPos.z <= tex2D(shadowMap, uv.xy + o.zy).r) ? 1 : 0; // bottom left
-	c +=		(shadowMapPos.z <= tex2D(shadowMap, uv.xy - o.zy).r) ? 1 : 0; // top right
+	float c =	(shadowMapPos.z <= tex2D(shadowMap, uv.xy - o.xy).r)>0 ? 1 : 0; // top left
+	c +=		(shadowMapPos.z <= tex2D(shadowMap, uv.xy + o.xy).r)>0 ? 1 : 0; // bottom right
+	c +=		(shadowMapPos.z <= tex2D(shadowMap, uv.xy + o.zy).r)>0 ? 1 : 0; // bottom left
+	c +=		(shadowMapPos.z <= tex2D(shadowMap, uv.xy - o.zy).r)>0 ? 1 : 0; // top right
 	//float c =	(shadowMapPos.z <= tex2Dlod(shadowMap, uv.xyyy - o.xyyy).r) ? 1 : 0; // top left
 	//c +=		(shadowMapPos.z <= tex2Dlod(shadowMap, uv.xyyy + o.xyyy).r) ? 1 : 0; // bottom right
 	//c +=		(shadowMapPos.z <= tex2Dlod(shadowMap, uv.xyyy + o.zyyy).r) ? 1 : 0; // bottom left
@@ -94,6 +96,7 @@ float shadowPCF(sampler2D shadowMap, float4 shadowMapPos, float2 offset)
 
 // to put it simply, this does 100% per pixel diffuse lighting
 void shadow_receiver_ps(
+  float4 oPosition		: SV_POSITION,
 	float3 uv				: TEXCOORD0,
 	float3 OSlightDir			: TEXCOORD1,
 	float3 OShalfAngle		: TEXCOORD2,
@@ -108,12 +111,12 @@ void shadow_receiver_ps(
 	uniform float4 invShadowMapSize1,
 	uniform float4 invShadowMapSize2,
 	uniform float4 pssmSplitPoints,
-	uniform sampler2D diffuse,
-	uniform sampler2D specular,
-	uniform sampler2D normalMap,
-	uniform sampler2D shadowMap0,
-	uniform sampler2D shadowMap1,
-	uniform sampler2D shadowMap2,
+	uniform sampler2D diffuse:register(s3),
+	uniform sampler2D specular:register(s4),
+	uniform sampler2D normalMap:register(s5),
+	uniform sampler2D shadowMap0:register(s0),
+	uniform sampler2D shadowMap1:register(s1),
+	uniform sampler2D shadowMap2:register(s2),
 	uniform float4 lightDiffuse,
 	uniform float4 lightSpecular,
 	uniform float4 ambient
