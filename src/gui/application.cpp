@@ -1188,7 +1188,7 @@ bool Application::initializeRTShaderSystem (Ogre::SceneManager * sceneMgr)
 		else
 		{
 			// use cg for d3d.
-			//prefferredShadingLanguage = "hlsl";
+			prefferredShadingLanguage = "hlsl";
 		}
 		// Set the preffered language...
 		shaderGeneratorPtr->setTargetLanguage(prefferredShadingLanguage);
