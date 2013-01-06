@@ -23,5 +23,11 @@ sumwars.exe
 # Win32 folder
 Win32/
 
-# Visual Studio temporary folders
+# Visual Studio temporary files and folders
 ipch/
+*.obj
+*.sdf
+*.log
+*.tlog
+
+
