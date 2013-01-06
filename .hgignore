@@ -23,6 +23,7 @@ sumwars.exe
 sumwars.dir/
 Release/
 Debug/
+*.dll
 
 # Win32 folder
 Win32/
