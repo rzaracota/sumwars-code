@@ -18,4 +18,10 @@ sumwars.exe
 
 # SUMWARS_PORTABLE_MODE inside source dir
 .sumwars/
+.sumwars.dir/
 
+# Win32 folder
+Win32/
+
+# Visual Studio temporary folders
+ipch/
