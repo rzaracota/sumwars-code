@@ -18,10 +18,20 @@ sumwars.exe
 
 # SUMWARS_PORTABLE_MODE inside source dir
 .sumwars/
-.sumwars.dir/
+
+# default build folders
+sumwars.dir/
+Release/
+Debug/
 
 # Win32 folder
 Win32/
+
+# CMake temporary files and folders.
+CMakeFiles/
+
+# Local dependencies folder.
+Dependencies/
 
 # Visual Studio temporary files and folders
 ipch/
