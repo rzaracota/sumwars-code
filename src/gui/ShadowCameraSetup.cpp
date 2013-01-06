@@ -114,7 +114,7 @@ ShadowCameraSetup::~ShadowCameraSetup()
 	DEBUG ("Shadow Camera Setup dtor");
 }
 
-bool ShadowCameraSetup::setup()
+bool ShadowCameraSetup::setup ()
 {
 	DEBUG ("Setting up the shadow camera...");
 	// Need to detect D3D or GL for best depth shadowmapping.
@@ -163,32 +163,37 @@ bool ShadowCameraSetup::setup()
 	// TODO: make configurable.
 	mSceneMgr.setShadowTextureCasterMaterial("PSSM/shadow_caster");
 
+	std::string descriptionOfShadowCamera ("");
 	switch (m_shadow_camera_setup_type)
 	{
 	case 1:
-		mSharedCameraPtr = Ogre::ShadowCameraSetupPtr(OGRE_NEW Ogre::LiSPSMShadowCameraSetup ());
+		mSharedCameraPtr = Ogre::ShadowCameraSetupPtr (OGRE_NEW Ogre::LiSPSMShadowCameraSetup ());
+		descriptionOfShadowCamera = "LiSPSMShadowCameraSetup";
 		break;
 	case 2:
-		mSharedCameraPtr = Ogre::ShadowCameraSetupPtr(OGRE_NEW Ogre::FocusedShadowCameraSetup ());
+		mSharedCameraPtr = Ogre::ShadowCameraSetupPtr (OGRE_NEW Ogre::FocusedShadowCameraSetup ());
+		descriptionOfShadowCamera = "FocusedShadowCameraSetup";
 		break;
 	case 3:
 		// A plane is needed to initialize the camera by. As we don't have the plane available in this class, we can't initialize... yet/
 		//Ogre::ShadowCameraSetupPtr(OGRE_NEW Ogre::PlaneOptimalShadowCameraSetup (mPlane));
 		break;
 	case 4:
-		mPssmSetup = OGRE_NEW Ogre::PSSMShadowCameraSetup();
-		mSharedCameraPtr = Ogre::ShadowCameraSetupPtr(mPssmSetup);
+		mPssmSetup = OGRE_NEW Ogre::PSSMShadowCameraSetup ();
+		mSharedCameraPtr = Ogre::ShadowCameraSetupPtr (mPssmSetup);
+		descriptionOfShadowCamera = "PSSMShadowCameraSetup";
 		break;
 	case 0:
 	default:
-		mSharedCameraPtr = Ogre::ShadowCameraSetupPtr(OGRE_NEW Ogre::DefaultShadowCameraSetup ());
+		mSharedCameraPtr = Ogre::ShadowCameraSetupPtr (OGRE_NEW Ogre::DefaultShadowCameraSetup ());
+		descriptionOfShadowCamera = "DefaultShadowCameraSetup";
 		break;
 	}
 	
 	
-	mSceneMgr.setShadowCameraSetup(mSharedCameraPtr);
+	mSceneMgr.setShadowCameraSetup (mSharedCameraPtr);
 
-	DEBUG ("Successfully set up the shadow camera.");
+	DEBUG ("Successfully set up the shadow camera: [%s]", descriptionOfShadowCamera.c_str ());
 	return true;
 }
 
