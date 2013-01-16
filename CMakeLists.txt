@@ -28,6 +28,7 @@ OPTION(SUMWARS_POST_BUILD_COPY "After a build, copy the executable to the projec
 OPTION(SUMWARS_STANDALONE_MODE "(Highly recommended for deployment on Windows and MacOSX) In case this is enabled, all paths (share, doc, bin, plugins) are set to be relative" OFF)
 OPTION(SUMWARS_PORTABLE_MODE "In case this is enabled, save files and config files are kept in application directory instead of home folders / user folders. On Windows this also means that all dynamic libraries will be relative to the executable" OFF)
 OPTION(SUMWARS_RANDOM_REGIONS "Regions are randomized if enabled. All regions are always the same if you leave this disabled (useful for developers)." ON)
+OPTION(SUMWARS_USE_BREAKPAD "Use Google Breakpad for error reporting" OFF)
 
 IF(SUMWARS_UPDATE_HG_REVISION)
     FIND_PROGRAM(Mercurial_EXECUTABLE hg)
@@ -190,6 +191,10 @@ IF (UNIX AND NOT APPLE)
   FIND_PACKAGE(X11 REQUIRED)
 ENDIF()
 
+IF(SUMWARS_USE_BREAKPAD)
+  FIND_PACKAGE(GoogleBreakpad REQUIRED)
+ENDIF()
+
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/core)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/contenteditor)
@@ -224,6 +229,10 @@ IF(SUMWARS_BUILD_TOOLS)
   INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel)
   INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/debugpanel/filebrowser)
   INCLUDE_DIRECTORIES(${POCO_INCLUDE_DIR})
+ENDIF()
+
+IF(SUMWARS_USE_BREAKPAD)
+	INCLUDE_DIRECTORIES(${BREAKPAD_INCLUDE_DIR}/src)
 ENDIF()
 
 IF(WIN32)
@@ -412,10 +421,6 @@ ENDIF (WIN32)
 
 ADD_EXECUTABLE(sumwars ${SRCS})
 
-
-#${CEGUILUA_LIBRARY}
-
-
 SET(LINK_LIBS
   ${OGRE_LIBRARIES}
   ${OGRE_Terrain_LIBRARY}
@@ -442,6 +447,16 @@ IF(SUMWARS_BUILD_TOOLS)
     ${POCO_LIBRARIES}
     )
   ADD_DEFINITIONS(-DSUMWARS_BUILD_TOOLS)
+ENDIF()
+
+IF(SUMWARS_USE_BREAKPAD)
+  SET(LINK_LIBS
+    ${LINK_LIBS}
+	${BREAKPAD_COMMON_LIBRARY}
+	${BREAKPAD_EXCEPTION_HANDLER_LIBRARY}
+	${BREAKPAD_CRASH_GENERATION_CLIENT_LIBRARY}
+	#${BREAKPAD_CRASH_REPORT_SENDER_LIBRARY}
+	)
 ENDIF()
 
 IF(WIN32)
