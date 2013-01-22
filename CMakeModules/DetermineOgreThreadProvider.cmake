@@ -4,7 +4,7 @@
 # The contents of this file are placed in the public domain. Feel free to make use of it in any way you like.
 # ----------------------------------------------------------------------------------------------------------------------
 # 
-# Determine the library that is used to provide threading support in OGRE.
+# The purpose of this script is to determine the library that is used to provide threading support in OGRE.
 # This script provides a set of functions to access the configured OGRE installation and read the OgreBuildSettings file.
 # 
 # E.g.: To store the ogre thread provider into the variable "OGRE_THREAD_PROVIDER", use the function call:
