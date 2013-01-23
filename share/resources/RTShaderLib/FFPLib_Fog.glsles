@@ -1,4 +1,8 @@
-#version 120
+#version 100
+precision highp float;
+precision highp int;
+precision lowp sampler2D;
+precision lowp samplerCube;
 /*
 -----------------------------------------------------------------------------
 This source file is part of OGRE
@@ -30,7 +34,7 @@ THE SOFTWARE.
 // Program Name: FFPLib_Fog
 // Program Desc: Fog functions of the FFP.
 // Program Type: Vertex/Pixel shader
-// Language: GLSL
+// Language: GLSL ES
 // Notes: Implements core functions needed by FFPFog class.
 // Based on fog engine. 
 // See http://msdn.microsoft.com/en-us/library/bb173398.aspx
@@ -44,19 +48,17 @@ THE SOFTWARE.
 // the output color with the fog color.
 //-----------------------------------------------------------------------------
 
-
-
 //-----------------------------------------------------------------------------
 void FFP_VertexFog_Linear(in mat4 mWorldViewProj, 
 				  in vec4 pos, 				   
 				  in vec4 fogParams,				   
 				  out float oFogFactor)
 {
-	vec4 vOutPos  = mWorldViewProj * pos;
+	vec4 vOutPos    = mWorldViewProj * pos;
 	float distance  = abs(vOutPos.w);	
 	float fogFactor = (fogParams.z - distance) * fogParams.w;
 	
-	oFogFactor  = clamp(fogFactor, 0.0, 1.0);	
+	oFogFactor      = clamp(fogFactor, 0.0, 1.0);	
 }
 
 //-----------------------------------------------------------------------------
@@ -65,12 +67,12 @@ void FFP_VertexFog_Exp(in mat4 mWorldViewProj,
 			     in vec4 fogParams,				   
 			     out float oFogFactor)
 {
-	vec4 vOutPos  = mWorldViewProj * pos;
+	vec4 vOutPos    = mWorldViewProj * pos;
 	float distance  = abs(vOutPos.w);	
-	float exp       = distance*fogParams.x;
+	float exp       = distance * fogParams.x;
 	float fogFactor = 1.0 / pow(2.71828, exp);
 	
-	oFogFactor  = clamp(fogFactor, 0.0, 1.0);	
+	oFogFactor      = clamp(fogFactor, 0.0, 1.0);	
 }
 
 //-----------------------------------------------------------------------------
@@ -79,12 +81,12 @@ void FFP_VertexFog_Exp2(in mat4 mWorldViewProj,
 				   in vec4 fogParams,				   
 				   out float oFogFactor)
 {
-	vec4 vOutPos  = mWorldViewProj * pos;
+	vec4 vOutPos    = mWorldViewProj * pos;
 	float distance  = abs(vOutPos.w);	
-	float exp       = (distance*fogParams.x*distance*fogParams.x);
+	float exp       = (distance * fogParams.x * distance * fogParams.x);
 	float fogFactor = 1.0 / pow(2.71828, exp);
 	
-	oFogFactor  = clamp(fogFactor, 0.0, 1.0);	
+	oFogFactor      = clamp(fogFactor, 0.0, 1.0);	
 }
 
 
@@ -94,7 +96,7 @@ void FFP_PixelFog_Depth(in mat4 mWorldViewProj,
 				   out float oDepth)
 {
 	vec4 vOutPos  = mWorldViewProj * pos;
-	oDepth			= vOutPos.w;	
+	oDepth        = vOutPos.w;	
 }
 
 //-----------------------------------------------------------------------------
@@ -104,7 +106,7 @@ void FFP_PixelFog_Linear(in float depth,
 				   in vec4 baseColor,
 				   out vec4 oColor)
 {
-	float distance = abs(depth);
+	float distance  = abs(depth);
 	float fogFactor = clamp((fogParams.z - distance) * fogParams.w, 0.0, 1.0);
 	
 	oColor = mix(fogColor, baseColor, fogFactor);
@@ -118,7 +120,7 @@ void FFP_PixelFog_Exp(in float depth,
 				   out vec4 oColor)
 {
 	float distance  = abs(depth);	
-	float exp       = (distance*fogParams.x);
+	float exp       = (distance * fogParams.x);
 	float fogFactor = clamp(1.0 / pow(2.71828, exp), 0.0, 1.0);
 	
 	oColor = mix(fogColor, baseColor, fogFactor);
@@ -132,7 +134,7 @@ void FFP_PixelFog_Exp2(in float depth,
 				   out vec4 oColor)
 {
 	float distance  = abs(depth);	
-	float exp       = (distance*fogParams.x*distance*fogParams.x);
+	float exp       = (distance * fogParams.x * distance * fogParams.x);
 	float fogFactor = clamp(1.0 / pow(2.71828, exp), 0.0, 1.0);
 	
 	oColor = mix(fogColor, baseColor, fogFactor);		

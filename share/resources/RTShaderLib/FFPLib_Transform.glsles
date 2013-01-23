@@ -1,4 +1,8 @@
-#version 120
+#version 100
+precision highp float;
+precision highp int;
+precision lowp sampler2D;
+precision lowp samplerCube;
 /*
 -----------------------------------------------------------------------------
 This source file is part of OGRE
@@ -26,40 +30,36 @@ THE SOFTWARE.
 -----------------------------------------------------------------------------
 */
 
+//-----------------------------------------------------------------------------
+// Program Name: FFPLib_Transform
+// Program Desc: Transform functions of the FFP.
+// Program Type: Vertex shader
+// Language: GLSL ES
+// Notes: Implements core functions for FFPTransform class.
+// based on transform engine. 
+// See http://msdn.microsoft.com/en-us/library/bb206269.aspx
+//-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
-// Simple masked reflection map effect.
-//-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
-void SGX_ApplyReflectionMap(in sampler2D maskSampler, 
-						    in vec2 maskSamplerTexCoord,
-						    in sampler2D reflectionSampler, 
-						    in vec2 reflectionSamplerTexCoord,						    
-						    in vec3 baseColor,
-						    in float reflectionPower,
-						    out vec3 vOut)
+void FFP_Transform(in mat4 m, 
+			 	   in vec4 v, 
+			 	   out vec4 vOut)
 {
-	vec3 maskTexel	   = texture2D(maskSampler, maskSamplerTexCoord).xyz;
-	reflectionSamplerTexCoord.y = -reflectionSamplerTexCoord.y; // Hack for gl 
-	vec3 reflectionTexel = texture2D(reflectionSampler, reflectionSamplerTexCoord).xyz;
-	
-	vOut = baseColor + reflectionTexel.xyz*maskTexel.xyz*reflectionPower;
+	vOut = m * v;
 }
 
 //-----------------------------------------------------------------------------
-void SGX_ApplyReflectionMap(in sampler2D maskSampler, 
-						    in vec2 maskSamplerTexCoord,
-						    in samplerCube reflectionSampler, 
-						    in vec3 reflectionSamplerTexCoord,						   
-						    in vec3 baseColor,
-						    in float reflectionPower,
-						    out vec3 vOut)
+void FFP_Transform(in mat4 m, 
+				   in vec4 v, 
+				   out vec3 vOut)
 {
-	vec3 maskTexel	   = texture2D(maskSampler, maskSamplerTexCoord).xyz;
-	reflectionSamplerTexCoord.z = -reflectionSamplerTexCoord.z; // Hack for gl 
-	vec3 reflectionTexel = textureCube(reflectionSampler, reflectionSamplerTexCoord).xyz;
-	
-	vOut = baseColor + reflectionTexel.xyz*maskTexel.xyz*reflectionPower;
+	vOut = (m * v).xyz;
 }
-	
+
+//-----------------------------------------------------------------------------
+void FFP_Transform(in mat4 m, 
+				   in vec3 v, 
+				   out vec3 vOut)
+{
+	vOut = mat3(m) * v;
+}

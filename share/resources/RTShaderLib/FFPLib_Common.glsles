@@ -1,3 +1,8 @@
+#version 100
+precision highp float;
+precision highp int;
+precision lowp sampler2D;
+precision lowp samplerCube;
 /*
 -----------------------------------------------------------------------------
 This source file is part of OGRE
@@ -29,64 +34,74 @@ THE SOFTWARE.
 // Program Name: FFPLib_Common
 // Program Desc: Common functions of the FFP.
 // Program Type: Vertex/Pixel shader
-// Language: HLSL
+// Language: GLSL ES
 // Notes: Common functions needed by all FFP implementation classes.
 //-----------------------------------------------------------------------------
+
 //-----------------------------------------------------------------------------
 void FFP_Assign(in float vIn, out float vOut)
 {
 	vOut = vIn;
 }
 //-----------------------------------------------------------------------------
-void FFP_Assign(in float2 vIn, out float2 vOut)
+void FFP_Assign(in vec2 vIn, out vec2 vOut)
 {
 	vOut = vIn;
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Assign(in float3 vIn, out float3 vOut)
+void FFP_Assign(in vec3 vIn, out vec3 vOut)
 {
 	vOut = vIn;
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Assign(in float4 vIn, out float4 vOut)
+void FFP_Assign(in vec4 vIn, out vec4 vOut)
 {
 	vOut = vIn;
 }
-
+//-----------------------------------------------------------------------------
+void FFP_Assign(in vec4 vIn, out vec2 vOut)
+{
+	vOut = vIn.xy;
+}
+//-----------------------------------------------------------------------------
+void FFP_Assign(in vec4 vIn, out vec3 vOut)
+{
+	vOut = vIn.xyz;
+}
 //-----------------------------------------------------------------------------
 void FFP_Construct(in float r, 
-				   in float g,
-				   in float b,
-				   in float a,
-				   out float4 vOut)
+			 in float g,
+			 in float b,
+			 in float a,
+			 out vec4 vOut)
 {
-	vOut = float4(r,g,b,a);
+	vOut = vec4(r,g,b,a);
 }
 
 //-----------------------------------------------------------------------------
 void FFP_Construct(in float r, 
 			 in float g,
-			 out float2 vOut)
+			 in float b,
+			 out vec3 vOut)
 {
-	vOut = float2(r,g);
+	vOut = vec3(r,g,b);
 }
 
 //-----------------------------------------------------------------------------
 void FFP_Construct(in float r, 
-				   in float g,
-				   in float b,
-				   out float3 vOut)
+				   out vec4 vOut)
 {
-	vOut = float3(r,g,b);
+	vOut = vec4(r,r,r,r);
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Construct(in float r, 				   
-				   out float4 vOut)
+void FFP_Construct(in float r, 
+			 in float g,
+			 out vec2 vOut)
 {
-	vOut = float4(r,r,r,r);
+	vOut = vec2(r,g);
 }
 
 //-----------------------------------------------------------------------------
@@ -96,19 +111,19 @@ void FFP_Modulate(in float vIn0, in float vIn1, out float vOut)
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Modulate(in float2 vIn0, in float2 vIn1, out float2 vOut)
+void FFP_Modulate(in vec2 vIn0, in vec2 vIn1, out vec2 vOut)
 {
 	vOut = vIn0 * vIn1;
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Modulate(in float3 vIn0, in float3 vIn1, out float3 vOut)
+void FFP_Modulate(in vec3 vIn0, in vec3 vIn1, out vec3 vOut)
 {
 	vOut = vIn0 * vIn1;
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Modulate(in float4 vIn0, in float4 vIn1, out float4 vOut)
+void FFP_Modulate(in vec4 vIn0, in vec4 vIn1, out vec4 vOut)
 {
 	vOut = vIn0 * vIn1;
 }
@@ -120,19 +135,19 @@ void FFP_Add(in float vIn0, in float vIn1, out float vOut)
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Add(in float2 vIn0, in float2 vIn1, out float2 vOut)
+void FFP_Add(in vec2 vIn0, in vec2 vIn1, out vec2 vOut)
 {
 	vOut = vIn0 + vIn1;
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Add(in float3 vIn0, in float3 vIn1, out float3 vOut)
+void FFP_Add(in vec3 vIn0, in vec3 vIn1, out vec3 vOut)
 {
 	vOut = vIn0 + vIn1;
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Add(in float4 vIn0, in float4 vIn1, out float4 vOut)
+void FFP_Add(in vec4 vIn0, in vec4 vIn1, out vec4 vOut)
 {
 	vOut = vIn0 + vIn1;
 }
@@ -144,51 +159,51 @@ void FFP_Subtract(in float vIn0, in float vIn1, out float vOut)
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Subtract(in float2 vIn0, in float2 vIn1, out float2 vOut)
+void FFP_Subtract(in vec2 vIn0, in vec2 vIn1, out vec2 vOut)
 {
 	vOut = vIn0 - vIn1;
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Subtract(in float3 vIn0, in float3 vIn1, out float3 vOut)
+void FFP_Subtract(in vec3 vIn0, in vec3 vIn1, out vec3 vOut)
 {
 	vOut = vIn0 - vIn1;
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Subtract(in float4 vIn0, in float4 vIn1, out float4 vOut)
+void FFP_Subtract(in vec4 vIn0, in vec4 vIn1, out vec4 vOut)
 {
 	vOut = vIn0 - vIn1;
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Lerp(in float vIn0, in float vIn1, float T, out float vOut)
+void FFP_Lerp(in float vIn0, in float vIn1, in float T, out float vOut)
 {
-	vOut = lerp(vIn0, vIn1, T);
+	vOut = mix(vIn0, vIn1, T);
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Lerp(in float2 vIn0, in float2 vIn1, float T, out float2 vOut)
+void FFP_Lerp(in vec2 vIn0, in vec2 vIn1, in float T, out vec2 vOut)
 {
-	vOut = lerp(vIn0, vIn1, T);
+	vOut = mix(vIn0, vIn1, T);
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Lerp(in float3 vIn0, in float3 vIn1, float T, out float3 vOut)
+void FFP_Lerp(in vec3 vIn0, in vec3 vIn1, in float T, out vec3 vOut)
 {
-	vOut = lerp(vIn0, vIn1, T);
+	vOut = mix(vIn0, vIn1, T);
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Lerp(in float4 vIn0, in float4 vIn1, float T, out float4 vOut)
+void FFP_Lerp(in vec4 vIn0, in vec4 vIn1, in float T, out vec4 vOut)
 {
-	vOut = lerp(vIn0, vIn1, T);
+	vOut = mix(vIn0, vIn1, T);
 }
 
 //-----------------------------------------------------------------------------
-void FFP_Lerp(in float4 vIn0, in float4 vIn1, float4 T, out float4 vOut)
+void FFP_Lerp(in vec4 vIn0, in vec4 vIn1, in vec4 T, out vec4 vOut)
 {
-	vOut = lerp(vIn0, vIn1, T);
+	vOut = mix(vIn0, vIn1, T);
 }
 
 //-----------------------------------------------------------------------------
@@ -198,22 +213,19 @@ void FFP_DotProduct(in float vIn0, in float vIn1, out float vOut)
 }
 
 //-----------------------------------------------------------------------------
-void FFP_DotProduct(in float2 vIn0, in float2 vIn1, out float2 vOut)
+void FFP_DotProduct(in vec2 vIn0, in vec2 vIn1, out vec2 vOut)
 {
-	vOut = dot(vIn0, vIn1);
+	vOut = vec2(dot(vIn0, vIn1), 1.0);
 }
 
 //-----------------------------------------------------------------------------
-void FFP_DotProduct(in float3 vIn0, in float3 vIn1, out float3 vOut)
+void FFP_DotProduct(in vec3 vIn0, in vec3 vIn1, out vec3 vOut)
 {
-	vOut = dot(vIn0, vIn1);
+	vOut = vec3(dot(vIn0, vIn1), 1.0, 1.0);
 }
 
 //-----------------------------------------------------------------------------
-void FFP_DotProduct(in float4 vIn0, in float4 vIn1, out float4 vOut)
+void FFP_DotProduct(in vec4 vIn0, in vec4 vIn1, out vec4 vOut)
 {
-	vOut = dot(vIn0, vIn1);
+	vOut = vec4(dot(vIn0, vIn1), 1.0, 1.0, 1.0);
 }
-
-
-
