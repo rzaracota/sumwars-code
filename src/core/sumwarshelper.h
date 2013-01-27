@@ -50,7 +50,7 @@ public:
 	/**
 	 * \brief Initialize the helper; this will also reload the list of supported features.
 	 */
-	void init ();
+    bool init ();
 
 
 	/**

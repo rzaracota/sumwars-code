@@ -18,10 +18,40 @@
 #include "application.h"
 #include "config.h"
 #include <physfs.h>
+#include "sumwarshelper.h"
 
 #if defined(WIN32)
 #	include "windows.h"
+#endif // if defined(WIN32)
+
+
+#if defined(SUMWARS_USE_BREAKPAD)
+
+#if defined (WIN32)
+#   include "client/windows/handler/exception_handler.h"
+#   include "client/windows/sender/crash_report_sender.h"
 #endif
+
+static bool breakpad_callback(const wchar_t *dump_path,
+                              const wchar_t *id,
+                              void *context,
+                              EXCEPTION_POINTERS *exinfo,
+                              MDRawAssertionInfo *assertion,
+                              bool succeeded )
+{
+    if (succeeded)
+    {
+        printf("dump guid is %ws\n", id);
+    }
+    else
+    {
+        printf("dump failed\n");
+    }
+    fflush(stdout);
+
+    return succeeded;
+}
+#endif // if defined(SUMWARS_USE_BREAKPAD)
 
 void reset_cwd(int argc, char** argv)
 {
@@ -87,6 +117,27 @@ int main (int argc, char **argv)
 		printf("PHYSFS_init failed: %s\n", PHYSFS_getLastError ());
 		return 1;
 	}
+
+    // Create the sumwars helper singleton
+    SumwarsHelper *swh = new SumwarsHelper ();
+    if(!swh->init())
+    {
+        printf("PHYSFS_init failed: %s\n", PHYSFS_getLastError ());
+        return 1;
+    }
+
+#if defined SUMWARS_USE_BREAKPAD
+    std::string s;
+    s = swh->getStorageBasePath();
+    s.append(swh->userPath());
+    std::wstring path;
+    path.assign(s.begin(), s.end());
+    google_breakpad::ExceptionHandler eh(path,
+                                         NULL,
+                                         breakpad_callback,
+                                         NULL,
+                                         google_breakpad::ExceptionHandler::HANDLER_ALL);
+#endif //#if defined SUMWARS_USE_BREAKPAD
 
 #ifdef SUMWARS_PORTABLE_MODE
 	// Portable mode relies on CWD (current working directory) to be set to the place where
