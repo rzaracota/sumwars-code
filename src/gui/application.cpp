@@ -143,24 +143,6 @@ bool Application::init()
         }
     }
 #endif
-		if (SumwarsHelper::getSingletonPtr ()->hasFeature ("auto-create-ogre.cfg"))
-		{
-			PHYSFS_file* ogreFile = PHYSFS_openWrite(ogreCfgUser.c_str());
-			int count = PHYSFS_write(ogreFile,
-						 defaultOgreCfg.c_str(), sizeof(char), defaultOgreCfg.size());
-			if (count < defaultOgreCfg.size())
-			{
-				printf("Attempting to write a local Ogre configuration file failed: PHYSFS_write('%s') failed: %s\n",
-					 ogreCfgUser.c_str(),
-					 PHYSFS_getLastError());
-				return false;
-			}
-			else
-			{
-				printf("Created '%s%s'\n", PHYSFS_getWriteDir(), ogreCfgUser.c_str());
-			}
-		}
-	}
 	// Get the path to use for storing data.
 	// This will be relative to the user directory on the user OS.
 	Ogre::String operationalPath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::userPath();
