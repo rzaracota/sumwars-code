@@ -122,7 +122,7 @@ ENDIF(WIN32)
     VORBISFILE_LIBRARY_OPTIMIZED
     VORBIS_INCLUDE_DIR
   )
-Else()
+ELSE()
   # Starting with Libvorbis 1.3.2, vorbisfile needs to also be included in the windows build.
   IF(${LIBVORBIS_NUM_VERSION} GREATER 10301)
     FIND_PACKAGE_HANDLE_STANDARD_ARGS(Vorbis DEFAULT_MSG
