@@ -19,3 +19,4 @@ sumwars.exe
 # SUMWARS_PORTABLE_MODE inside source dir
 .sumwars/
 
+*.orig
