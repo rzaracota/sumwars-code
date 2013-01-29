@@ -24,5 +24,6 @@
 #cmakedefine SUMWARS_PORTABLE_MODE
 #cmakedefine SUMWARS_STANDALONE_MODE
 #cmakedefine SUMWARS_RANDOM_REGIONS
+#cmakedefine SUMWARS_USE_BREAKPAD
 
 #endif // __SUMWARS_CONFIG_H__
