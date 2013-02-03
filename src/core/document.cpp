@@ -13,6 +13,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifdef SUMWARS_BUILD_TOOLS
+#include "contenteditor.h"
+#include "gameinfotab.h"
+#endif
+
 #include "fstream"
 #include "document.h"
 
@@ -37,10 +42,12 @@
 #include "gettext.h"
 #include "stdstreamconv.h"
 
-
 #include "CEGUI/CEGUI.h"
 
 #include <physfs.h>
+
+
+
 
 // Constructors/Destructors
 // Initialisiert Document zu Testzwecken
@@ -522,6 +529,11 @@ void Document::onLeftMouseButtonClick(Vector pos)
 	if (getGUIState()->m_cursor_object_id != 0)
 	{
 		id = getGUIState()->m_cursor_object_id;
+
+#ifdef SUMWARS_BUILD_TOOLS
+		GameInfoTab *gitab = (GameInfoTab*)ContentEditor::getSingleton().getComponent("GameInfoTab");
+		gitab->setClickedObjectID(id);
+#endif
 	}
 
 	m_gui_state.m_clicked_object_id = id;

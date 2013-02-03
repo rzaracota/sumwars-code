@@ -409,6 +409,7 @@ IF(SUMWARS_BUILD_TOOLS)
     ./src/gui/contenteditor/renderinfoeditor.cpp
     ./src/gui/contenteditor/itemeditor.cpp
     ./src/gui/contenteditor/monstereditor.cpp
+    ./src/gui/contenteditor/gameinfotab.cpp
     )
 ENDIF()
 

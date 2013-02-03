@@ -404,7 +404,7 @@
                     </Window>
                 </Window>
             </Window>
-           <Window Type="DefaultWindow" Name="MonsterTab" >
+            <Window Type="DefaultWindow" Name="MonsterTab" >
                 <Property Name="Text" Value="Monster" />
                 <Property Name="Visible" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
@@ -1394,7 +1394,17 @@
                     <Property Name="UnifiedAreaRect" Value="{{0.535738,0},{0.0565595,0},{0.983904,0},{0.772162,0}}" />
                 </Window>
             </Window>
-        </Window>
+			<Window Type="DefaultWindow" Name="GameInfoTab" >
+				<Property Name="Text" Value="Info" />
+                <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+				<Window Type="TaharezLook/MultiLineEditbox" Name="GameInfoTab/TextBox" >
+                    <Property Name="Text" ></Property>
+                    <Property Name="MaxTextLength" Value="1073741823" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.0229259,0},{0.0172008,0},{0.986204,0},{0.901313,0}}" />
+                    <Property Name="TextParsingEnabled" Value="True" />
+                </Window>
+			</Window>
+		</Window>
         <Window Type="TaharezLook/Button" Name="CloseButton" >
             <Property Name="Text" Value="Close" />
             <Property Name="UnifiedAreaRect" Value="{{0.84668,0},{0.897134,0},{0.996094,0},{0.997395,0}}" />

@@ -16,6 +16,9 @@
 #ifndef __SUMWARS_CORE_DOCUMENT_H__
 #define __SUMWARS_CORE_DOCUMENT_H__
 
+#ifdef SUMWARS_BUILD_TOOLS
+#include "gameinfotab.h"
+#endif
 
 #include <string>
 #include <list>
