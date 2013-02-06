@@ -183,6 +183,10 @@ class CEGUIUtility
 
 
 		static void setDefaultFont (const CEGUI::String& fontName);
+
+		static void setDefaultMouseCursor (CEGUI::System* sys, const std::string& skinName, const std::string& cursorName);
+		static void setDefaultTooltip (CEGUI::System* sys, const std::string& skinName, const std::string& cursorName);
+
 private:
 		/**
 		* \fn static const size_t getNextWord(const CEGUI::String& in_string, size_t start_idx, CEGUI::String& out_string)

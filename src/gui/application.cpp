@@ -49,6 +49,8 @@
 // Clipboard singleton created here.
 #include "clipboard.h"
 
+// Utilities for handling CEGUI
+#include "ceguiutility.h"
 
 /**
 	Application constructor. Will call the init function.
@@ -821,10 +823,12 @@ bool Application::initCEGUI()
 	
 	/*CEGUI::LuaScriptModule &scriptm(CEGUI::LuaScriptModule::create());
 	m_cegui_system->setScriptingModule(&scriptm);*/
+	CEGUIUtility::setDefaultMouseCursor (m_cegui_system, Options::getInstance ()->getCeguiCursorSkin (), "MouseArrow");
+	CEGUIUtility::setDefaultTooltip (m_cegui_system, Options::getInstance ()->getCeguiSkin (), "Tooltip");
 
 	// Mauscursor setzen (evtl eher in View auslagern ? )
-	m_cegui_system->setDefaultMouseCursor((CEGUI::utf8*)"TaharezLook", (CEGUI::utf8*)"MouseArrow");
-    m_cegui_system->setDefaultTooltip((CEGUI::utf8*)"TaharezLook/Tooltip");
+	//m_cegui_system->setDefaultMouseCursor((CEGUI::utf8*)"TaharezLook", (CEGUI::utf8*)"MouseArrow");
+    //m_cegui_system->setDefaultTooltip((CEGUI::utf8*)"TaharezLook/Tooltip");
 
 	// Update the fade delay?
 	if (m_cegui_system->getDefaultTooltip ())

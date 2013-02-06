@@ -447,3 +447,16 @@ void CEGUIUtility::setDefaultFont (const CEGUI::String& fontName)
 #endif
 	}
 }
+
+
+void CEGUIUtility::setDefaultMouseCursor (CEGUI::System* sys, const std::string& skinName, const std::string& cursorName)
+{
+	sys->setDefaultMouseCursor ((CEGUI::utf8*)skinName.c_str (), (CEGUI::utf8*)cursorName.c_str ());
+}
+
+void CEGUIUtility::setDefaultTooltip (CEGUI::System* sys, const std::string& skinName, const std::string& cursorName)
+{
+	std::stringstream ss;
+	ss << skinName << "/" << cursorName;
+	sys->setDefaultTooltip (ss.str ().c_str ());
+}

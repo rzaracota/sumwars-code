@@ -538,6 +538,24 @@ class Options
 			m_cegui_skin = skinName;
 		}
 
+		/**
+		 * \brief Getter for the CEGUI skin to use for the UI.
+		 * \author Augustin Preda.
+		 */
+		const std::string& getCeguiCursorSkin () const
+		{
+			return m_cegui_cursor_skin;
+		}
+
+		/**
+		 * \brief Setter for the CEGUI skin to use for the UI.
+		 * \author Augustin Preda.
+		 */
+		void setCeguiCursorSkin (const std::string& skinName)
+		{
+			m_cegui_cursor_skin = skinName;
+		}
+
 
 	private:
 		/**
@@ -649,5 +667,10 @@ class Options
 		 * \brief Specify the CEGUI skin to use.
 		 */
 		std::string m_cegui_skin;
+
+		/**
+		 * \brief Specify the CEGUI cursor skin to use.
+		 */
+		std::string m_cegui_cursor_skin;
 
 };

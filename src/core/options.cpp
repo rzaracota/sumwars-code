@@ -249,6 +249,10 @@ bool Options::readFromFile(const std::string& filename)
 						std::string ceguiSkin ("");
 						attr.getString ("cegui_skin", ceguiSkin);
 						setCeguiSkin (ceguiSkin);
+
+						std::string ceguiCursorSkin ("");
+						attr.getString ("cegui_cursor_skin", ceguiCursorSkin);
+						setCeguiCursorSkin (ceguiCursorSkin);
 					}
 					else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 					{
@@ -329,7 +333,12 @@ bool Options::writeToFile(const std::string& filename)
 	element = new TiXmlElement( "Savegame" );
 	root->LinkEndChild(element);
 	element->SetAttribute("file",getDefaultSavegame().c_str());
-	
+
+	element = new TiXmlElement( "Internal" );
+	root->LinkEndChild(element);
+	element->SetAttribute("cegui_skin",getCeguiSkin().c_str());
+	element->SetAttribute("cegui_cursor_skin",getCeguiCursorSkin().c_str());
+
 	if (!m_debug_options.empty())
 	{
 		element = new TiXmlElement( "Debug" );
