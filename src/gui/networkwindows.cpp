@@ -18,6 +18,7 @@
 HostGameWindow::HostGameWindow (Document* doc)
 	:Window(doc)
 {
+	DEBUG ("HostGameWindow being created");
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	//CEGUI::Window* label; // 2011.10.23: found as unused.
@@ -122,6 +123,7 @@ bool HostGameWindow::onStartHostGame(const CEGUI::EventArgs& evt)
 JoinGameWindow::JoinGameWindow (Document* doc)
 	:Window(doc)
 {
+	DEBUG ("JoinGameWindow being created");
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	//CEGUI::Window* label; // 2011.10.23: found as unused.

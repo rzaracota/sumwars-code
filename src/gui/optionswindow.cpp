@@ -32,7 +32,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 {
 	m_keyboard = keyboard;
 
-	DEBUGX("setup main menu");
+	DEBUG ("OptionsWindow being created using cegui skin [%s]", m_ceguiSkinName.c_str ());
 	// GUI Elemente erzeugen
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -40,7 +40,9 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	CEGUI::FrameWindow* options = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("OptionsWindow.layout");
 	m_window = options;
 	options->setAlwaysOnTop(true);
-	
+
+	DEBUG ("OptionsWindow (ctor) loaded layout");
+
 	// Rahmen fuer das Menue Savegame auswaehlen
 	CEGUI::TabControl* optionstab = (CEGUI::TabControl*) win_mgr.getWindow("OptionsWindowTab");
 	optionstab->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&OptionsWindow::onAreaMouseButtonPressed, this));
@@ -62,7 +64,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsMisc");
 	label->setInheritsAlpha(false);
 	
-
+	DEBUG ("OptionsWindow (ctor) adding labels");
 
 	int targets[9] = {SHOW_INVENTORY, SHOW_CHARINFO, SHOW_SKILLTREE, SHOW_PARTYMENU, SHOW_CHATBOX, SHOW_QUESTINFO, SHOW_MINIMAP, SWAP_EQUIP, SHOW_ITEMLABELS};
 
@@ -85,6 +87,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&OptionsWindow::onShortkeyLabelClicked,  this));
 	}
 	
+	DEBUG ("Adding difficulty combo-box");
 	CEGUI::Combobox* diffcbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("DifficultyBox"));
 	diffcbo->addItem(new ListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Easy"),Options::EASY));
 	diffcbo->addItem(new ListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Normal"),Options::NORMAL));
@@ -96,6 +99,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	diffcbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onDifficultyChanged, this));
 	diffcbo->setItemSelectState( (size_t) (Options::getInstance()->getDifficulty()-1),true);
 	
+	DEBUG ("Adding sliders");
 	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.getWindow("TextSpeedSlider"));
 	slider->setPageSize (0.01f);
 	slider->setDocumentSize(1.0f);
@@ -118,18 +122,18 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	slider->subscribeEvent(CEGUI::Scrollbar::EventScrollPositionChanged, CEGUI::Event::Subscriber(&OptionsWindow::onSoundVolumeChanged,  this));
 
 	CEGUI::Combobox* ehlcbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("EHColorBox"));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("White"), "white", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Black"), "black", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Red"), "red", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Green"), "green", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Blue"), "blue", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Yellow"), "yellow", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Magenta"), "magenta", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Cyan"), "cyan", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Orange"), "orange", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Pink"), "pink", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Purple"), "purple", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Cornflower Blue"), "cornflower_blue", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("White"), "white", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Black"), "black", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Red"), "red", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Green"), "green", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Blue"), "blue", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Yellow"), "yellow", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Magenta"), "magenta", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Cyan"), "cyan", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Orange"), "orange", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Pink"), "pink", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Purple"), "purple", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Cornflower Blue"), "cornflower_blue", 0));
 
 	ehlcbo->setReadOnly(true);
 	ehlcbo->setItemSelectState((size_t) getColorSelectionIndex("red"), true);
@@ -153,13 +157,13 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&OptionsWindow::onButtonOkClicked, this));
 
 	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("LanguageBox"));
-	cbo->addItem(new StrListItem((CEGUI::utf8*) gettext("System default"),"",0));
-	cbo->addItem(new StrListItem("German","de_DE",0));
-	cbo->addItem(new StrListItem("English GB","en_GB",0));
-	cbo->addItem(new StrListItem("English US","en_US",0));
-	cbo->addItem(new StrListItem("Italian IT","it_IT",0));
-	cbo->addItem(new StrListItem("Russian RU","ru_RU",0));
-	cbo->addItem(new StrListItem("Ukrainian UK","uk_UA",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("System default"),"",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "German","de_DE",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "English GB","en_GB",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "English US","en_US",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Italian IT","it_IT",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Russian RU","ru_RU",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Ukrainian UK","uk_UA",0));
 
 	cbo->setReadOnly(true);
 
@@ -170,7 +174,8 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	{
 		locale = locale.substr(0,pos);
 	}
-	DEBUG("%s",locale.c_str());
+
+	DEBUG ("OptionsWindow (ctor) current locale is [%s]", locale.c_str ());
 	
 	for (int i=0; i < (int)cbo->getItemCount(); i++)
 	{
@@ -187,8 +192,8 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 
 	// TODO: add comments.
 	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("DisplayModeBox"));
-	cbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Fullscreen (Exclusive Mode)"),"",0));
-	cbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Window (With Borders)"),"",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Fullscreen (Exclusive Mode)"),"",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Window (With Borders)"),"",0));
 
 	if (Options::getInstance ()->isWindowedFullscreenModeSupported ())
 	{
@@ -197,7 +202,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 		std::string recommended = gettext (" - recommended");
 		std::string sum = modeName + recommended;
 
-		cbo->addItem(new StrListItem((CEGUI::utf8*) sum.c_str(),"",0));
+		cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) sum.c_str(),"",0));
 	}
 	else
 	{
@@ -229,7 +234,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	for (std::vector <std::string>::const_iterator it = videoDrivers.begin (); it != videoDrivers.end (); ++ it)
 	{
 		std::string myName = *it;
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) myName.c_str (), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) myName.c_str (), "", 0));
 		if (myName == selectedVideoDriver)
 		{
 			cbo->setItemSelectState (cbo->getItemCount () - 1, true);
@@ -258,7 +263,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow ("ResolutionBox"));
 	for (std::vector <std::string>::const_iterator it = resolutions.begin (); it != resolutions.end (); ++ it)
 	{
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) it->c_str (), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) it->c_str (), "", 0));
 		if (*it == usedResolution)
 		{
 			cbo->setItemSelectState (cbo->getItemCount () - 1, true);
@@ -292,11 +297,11 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow ("ShadowsDropDownList"));
 	if (cbo)
 	{
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Off"), "", 0));
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simple (Higher quality)"), "", 0));
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simple (Lower quality)"), "", 0));
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simulated (Experimental 1)"), "", 0));
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simulated (Experimental 2)"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Off"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Simple (Higher quality)"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Simple (Lower quality)"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Simulated (Experimental 1)"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Simulated (Experimental 2)"), "", 0));
 
 		if (usedShadowMode >= Options::SM_NONE && usedShadowMode < Options::SM_COUNT)
 		{
@@ -1010,7 +1015,7 @@ bool OptionsWindow::onVideoDriverSelected (const CEGUI::EventArgs& evt)
 	for (std::vector <std::string>::const_iterator it = resolutions.begin (); it != resolutions.end (); ++ it)
 	{
 		DEBUG ("New mode: %s", it->c_str ());
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) it->c_str (), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) it->c_str (), "", 0));
 		if (*it == usedResolution)
 		{
 			cbo->setItemSelectState (cbo->getItemCount () - 1, true);

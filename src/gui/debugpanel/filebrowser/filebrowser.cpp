@@ -127,16 +127,16 @@ void FileBrowser::fillBrowser()
 	for (sit=m_dirs.begin(); sit!=m_dirs.end(); ++sit)
 	{
 		int id = m_browserBox->addRow();
-		StrListItem* ite1 = new StrListItem (m_ceguiSkinName, *sit, "2");
-		StrListItem* ite2 = new StrListItem (m_ceguiSkinName, "Directory", "4");
+		StrListItem* ite1 = new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), *sit, "2");
+		StrListItem* ite2 = new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Directory", "4");
 		m_browserBox->setItem(ite1, 0, id);
 		m_browserBox->setItem(ite2, 1, id);
 	}
 	for (sit=m_files.begin(); sit!=m_files.end(); ++sit)
 	{
 		int id = m_browserBox->addRow();
-		StrListItem* ite1 = new StrListItem (m_ceguiSkinName, *sit, "f2");
-		StrListItem* ite2 = new StrListItem (m_ceguiSkinName, "File", "f4");
+		StrListItem* ite1 = new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), *sit, "f2");
+		StrListItem* ite2 = new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), "File", "f4");
 		m_browserBox->setItem(ite1, 0, id);
 		m_browserBox->setItem(ite2, 1, id);
 	}

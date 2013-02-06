@@ -78,7 +78,7 @@ bool MainWindow::init()
 	bool result = true;
 
 	m_ceguiSkinName = Options::getInstance ()->getCeguiSkin ();
-	DEBUG ("Main Window (init): Cegui skin name found in options as: %s", m_ceguiSkinName.c_str ());
+	DEBUG ("Main Window (init): Cegui skin name found in options as: [%s]", m_ceguiSkinName.c_str ());
 
 	// Eingabegeraete initialisieren
 	result &= initInputs();

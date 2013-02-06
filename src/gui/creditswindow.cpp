@@ -27,7 +27,7 @@ CreditsWindow::CreditsWindow(Document* doc, const std::string& ceguiSkinName)
 	: Window (doc)
 	, m_ceguiSkinName (ceguiSkinName)
 {
-	DEBUG ("Created CreditsWindow based on the cegui skin: %s", ceguiSkinName.c_str ());
+	DEBUG ("Creating CreditsWindow using the cegui skin: [%s]", ceguiSkinName.c_str ());
 
 	std::stringstream ss;
 	ss << ceguiSkinName << "/FrameWindow";

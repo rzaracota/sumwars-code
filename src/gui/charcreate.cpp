@@ -24,8 +24,8 @@ CharCreate::CharCreate (Document* doc, const std::string& ceguiSkinName)
 	: Window (doc)
 	, m_ceguiSkinName (ceguiSkinName)
 {
-	DEBUGX("setup main menu");
-	// GUI Elemente erzeugen
+	DEBUG ("CharCreate window created with cegui skin [%s]", m_ceguiSkinName.c_str ());
+	// Create GUI Elements
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	

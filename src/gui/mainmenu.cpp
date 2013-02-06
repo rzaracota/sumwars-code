@@ -33,6 +33,8 @@ MainMenu::MainMenu (Document* doc/*, const std::string& ceguiSkinName*/)
         : Window (doc)
 		//, m_ceguiSkinName (ceguiSkinName)
 {
+	DEBUG ("MainMenu created");
+
 	m_savegame_player ="";
 	m_savegame_player_object =0;
 	
