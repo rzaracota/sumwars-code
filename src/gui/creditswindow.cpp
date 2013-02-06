@@ -23,12 +23,17 @@
 
 #include "creditswindow_content.inc"
 
-CreditsWindow::CreditsWindow(Document* doc)
-	:Window(doc)
+CreditsWindow::CreditsWindow(Document* doc, const std::string& ceguiSkinName)
+	: Window (doc)
+	, m_ceguiSkinName (ceguiSkinName)
 {
+	DEBUG ("Created CreditsWindow based on the cegui skin: %s", ceguiSkinName.c_str ());
+
+	std::stringstream ss;
+	ss << ceguiSkinName << "/FrameWindow";
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::FrameWindow* creditsframe = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "CreditsWindow");
+	CEGUI::FrameWindow* creditsframe = (CEGUI::FrameWindow*) win_mgr.createWindow(ss.str ().c_str (), "CreditsWindow");
 	
 	creditsframe->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.1f))); //0.0/0.8
 	creditsframe->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.8f))); //1.0/0.2
@@ -39,15 +44,20 @@ CreditsWindow::CreditsWindow(Document* doc)
 	
 	m_window = creditsframe;
 	
-	CEGUI::ScrollablePane* pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow("TaharezLook/ScrollablePaneNoBar", "CreditsPane"));
+	ss.str ("");
+	ss << ceguiSkinName << "/ScrollablePaneNoBar";
+	CEGUI::ScrollablePane* pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow(ss.str ().c_str (), "CreditsPane"));
 	creditsframe->addChildWindow(pane);
 	pane->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
 	pane->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 1.0f)));
 	pane->setInheritsAlpha(false);
 	pane->setContentPaneAutoSized(true);
 	
+	ss.str ("");
+	ss << ceguiSkinName << "/StaticText";
+
 	CEGUI::Window* credits;
-	credits = win_mgr.createWindow("TaharezLook/StaticText", "CreditWindow");
+	credits = win_mgr.createWindow(ss.str ().c_str (), "CreditWindow");
 	pane->addChildWindow(credits);
 	credits->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f)));
 	credits->setSize(CEGUI::UVector2(cegui_reldim(1.00f), cegui_reldim( 1.0f)));

@@ -468,6 +468,11 @@ class MainWindow :
 	 */
 	bool m_ready_to_start;
 
+	/**
+	 * \brief The name of the CEGUI skin to use.
+	 */
+	std::string m_ceguiSkinName;
+
 };
 
 #endif // __SUMWARS_GUI_MAINWINDOW_H__

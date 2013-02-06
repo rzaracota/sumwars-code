@@ -45,8 +45,9 @@ public:
 	* \param dir The directory that will be opened when initialzing
 	* \param type The FileBrowser type
 	* \param visible Whether the panel is visible or not at the begining
+	* \param ceguiSkinName The name of the CEGUI skin to use for the file browser.
 	*/
-	void init(CEGUI::String defaultDir, FileBrowserType type, bool visible);
+	void init(CEGUI::String defaultDir, FileBrowserType type, bool visible, const std::string& ceguiSkinName);
 	
 	/**
 	* \fn void destroy();
@@ -185,6 +186,12 @@ private:
 	* \brief  Holds the path currently viewed
 	*/
 	Poco::Path m_currentPath;
+
+	/**
+	 * \brief The name of the CEGUI skin to use.
+	 */
+	std::string m_ceguiSkinName;
+
 };
 
 #endif // DEBUGPANEL_H

@@ -77,6 +77,9 @@ bool MainWindow::init()
 {
 	bool result = true;
 
+	m_ceguiSkinName = Options::getInstance ()->getCeguiSkin ();
+	DEBUG ("Main Window (init): Cegui skin name found in options as: %s", m_ceguiSkinName.c_str ());
+
 	// Eingabegeraete initialisieren
 	result &= initInputs();
 
@@ -145,12 +148,11 @@ bool MainWindow::initInputs()
 	return true;
 }
 
+
 bool MainWindow::setupMainMenu()
 {
 	try
 	{
-
-		
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
 		// Oberstes Fenster der Hauptmenue Schicht
@@ -170,7 +172,7 @@ bool MainWindow::setupMainMenu()
 		bar->setWantsMultiClickEvents(false);
 		bar->setProgress(0.0);
 		
-		CreditsWindow* crd = new CreditsWindow(m_document);
+		CreditsWindow* crd = new CreditsWindow (m_document, m_ceguiSkinName);
 		m_sub_windows["CreditsWindow"] = crd;
 		m_main_menu->addChildWindow(crd->getCEGUIWindow());
 
@@ -178,11 +180,11 @@ bool MainWindow::setupMainMenu()
 		m_sub_windows["MainMenu"] = wnd;
 		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
 		
-		wnd = new CharCreate(m_document);
+		wnd = new CharCreate (m_document, m_ceguiSkinName);
 		m_sub_windows["CharCreate"] = wnd;
 		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
 		
-		wnd = new OptionsWindow(m_document,m_keyboard);
+		wnd = new OptionsWindow(m_document,m_keyboard, m_ceguiSkinName);
 		m_sub_windows["Options"] = wnd;
 		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
 		
@@ -867,7 +869,7 @@ void MainWindow::setupInventory()
 
 void MainWindow::setupQuestInfo()
 {
-	Window* wnd = new QuestInfo(m_document);
+	Window* wnd = new QuestInfo (m_document, m_ceguiSkinName);
 	m_sub_windows["QuestInfo"] = wnd;
 	
 	// anfangs ausblenden

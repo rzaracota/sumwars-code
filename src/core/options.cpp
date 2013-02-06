@@ -244,6 +244,12 @@ bool Options::readFromFile(const std::string& filename)
 						attr.getString("file", savegame);
 						setDefaultSavegame(savegame);
 					}
+					else if (!strcmp(child->Value(), "Internal"))
+					{
+						std::string ceguiSkin ("");
+						attr.getString ("cegui_skin", ceguiSkin);
+						setCeguiSkin (ceguiSkin);
+					}
 					else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 					{
 						WARNING("unexpected element in options.xml: %s",child->Value());

@@ -47,6 +47,12 @@ public:
 	static CEGUI::String WidgetTypeName;
 private:
 	void getNewFileName();
+	
+	/**
+	 * \brief The name of the CEGUI skin to use.
+	 */
+	std::string m_ceguiSkinName;
+
 };
 
 #endif // TEXTFILEEDITWINDOW_H

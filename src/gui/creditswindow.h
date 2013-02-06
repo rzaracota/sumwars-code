@@ -29,7 +29,7 @@ class CreditsWindow : public Window
 		 * \fn  (Document* doc)
 		 * \brief Konstruktor
 		 */
-		CreditsWindow (Document* doc);
+		CreditsWindow (Document* doc, const std::string& ceguiSkinName);
 	
 		/**
 		 * \fn virtual void update()
@@ -48,6 +48,11 @@ class CreditsWindow : public Window
 		 * \brief Timer that counts the time, the Window is shown
 		 */
 		Timer m_shown_timer;
+
+		/**
+		 * \brief The name of the CEGUI skin to use.
+		 */
+		std::string m_ceguiSkinName;
 };
 
 #endif // __SUMWARS_GUI_CREDITSWINDOW_H__

@@ -31,7 +31,7 @@ class OptionsWindow : public Window
 	 * \param keyboard OIS keyboard
 	 * \brief Konstruktor
 	 */
-		OptionsWindow (Document* doc, OIS::Keyboard *keyboard);
+		OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std::string& ceguiSkinName);
 	
 		/**
 		 * \fn virtual void update()
@@ -164,7 +164,11 @@ class OptionsWindow : public Window
 		 * \brief Repraesentation der Tastatur
 		 */
 		OIS::Keyboard *m_keyboard;
-	
+
+		/**
+		 * \brief The name of the CEGUI skin to use.
+		 */
+		std::string m_ceguiSkinName;
 };
 
 #endif // __SUMWARS_GUI_OPTIONSWINDOW_H__

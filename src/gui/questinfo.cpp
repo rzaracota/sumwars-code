@@ -15,8 +15,9 @@
 
 #include "questinfo.h"
 
-QuestInfo::QuestInfo (Document* doc)
-	:Window(doc)
+QuestInfo::QuestInfo (Document* doc, const std::string& ceguiSkinName)
+	: Window (doc)
+	, m_ceguiSkinName (ceguiSkinName)
 {
 	m_questname = "";
 	
@@ -105,7 +106,7 @@ void QuestInfo::update()
 		    (state == Quest::FAILED && failed))
 		{
 			std::string name = quest->getName().getTranslation().c_str();
-			newitem = new StrListItem((CEGUI::utf8*) name.c_str(),it->first);
+			newitem = new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) name.c_str(),it->first);
 			questlist->addItem(newitem);
 			DEBUGX("add quest %s %s",quest->getName().getTranslation().c_str(),it->first.c_str());
 			

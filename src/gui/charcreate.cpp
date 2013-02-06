@@ -20,8 +20,9 @@
 #include "listitem.h"
 
 
-CharCreate::CharCreate (Document* doc)
-	:Window(doc)
+CharCreate::CharCreate (Document* doc, const std::string& ceguiSkinName)
+	: Window (doc)
+	, m_ceguiSkinName (ceguiSkinName)
 {
 	DEBUGX("setup main menu");
 	// GUI Elemente erzeugen
@@ -87,7 +88,7 @@ void CharCreate::update()
 		
 		for (it = looks.begin(); it !=	looks.end(); ++it)
 		{
-			looklist->addItem(new StrListItem((CEGUI::utf8*) gettext(it->m_name.c_str()),it->m_name));
+			looklist->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext(it->m_name.c_str()),it->m_name));
 		}
 	}
 }
@@ -121,7 +122,7 @@ void CharCreate::updateClassList()
 	std::map<GameObject::Subtype, PlayerBasicData*>::iterator it;
 	for (it = pcdata.begin(); it != pcdata.end(); ++it)
 	{
-		classlist->addItem(new StrListItem((CEGUI::utf8*) gettext(it->second->m_name.c_str()),it->first));
+		classlist->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext(it->second->m_name.c_str()),it->first));
 	}
 	
 	if (classlist->getItemCount() >0)

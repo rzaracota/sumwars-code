@@ -16,10 +16,20 @@
 #ifndef __SUMWARS_GUI_CEGUIUTILITY_H__
 #define __SUMWARS_GUI_CEGUIUTILITY_H__
 
+// Define the CEGUI version. TODO: move to a global definition.
+#define CEGUI_07
+
+#ifdef CEGUI_07
+#include "CEGUI.h"
+#else
+#include "cegui/CEGUI.h"
+#endif
+
 #include "CEGUI/CEGUIUDim.h"
 #include "CEGUI/CEGUIFont.h"
 #include <list>
 #include <string>
+#include <OIS/OIS.h>
 
 struct FormatedText
 {
@@ -31,12 +41,15 @@ public:
 #define LINE_ENDING "\n"
 #define ERASE_CNT 1
 
+/**
+	A class to be used as a namespace placeholder for most CEGUI functionality.
+	This is to alleviate some of the issues caused by a change in the API syntax between various versions of CEGUI.
+
+*/
+
 class CEGUIUtility
 {
-
 	public:
-
-
 
 		/*!
 		\brief
@@ -134,8 +147,42 @@ class CEGUIUtility
 		* \param x_scale Optional text scale
 		* \returns the formated text and the line count
 		*/
-                static FormatedText fitTextToWindow (const CEGUI::String& text, float maxWidth, TextFormatting fmt, CEGUI::Font *font, float x_scale = 1.0f);
+		static FormatedText fitTextToWindow (const CEGUI::String& text, float maxWidth, TextFormatting fmt, CEGUI::Font *font, float x_scale = 1.0f);
 		
+
+		static CEGUI::Window* getWindow (const CEGUI::String& name);
+		static CEGUI::Window* getWindowForSystem (CEGUI::System* sys, const CEGUI::String& name);
+
+		static void injectKeyDown (OIS::KeyCode myKey);
+		static void injectKeyDown (CEGUI::System* sys, OIS::KeyCode myKey);
+
+		static void injectKeyUp (OIS::KeyCode myKey);
+		static void injectKeyUp (CEGUI::System* sys, OIS::KeyCode myKey);
+
+		static void injectChar (int myKey);
+		static void injectChar (CEGUI::System* sys, int myKey);
+		
+		static void injectMousePosition (float x, float y);
+		static void injectMousePosition (CEGUI::System* sys, float x, float y);
+
+		static void injectMouseWheelChange (float pos);
+		static void injectMouseWheelChange (CEGUI::System* sys, float pos);
+
+		static void injectMouseButtonDown (OIS::MouseButtonID btn);
+		static void injectMouseButtonDown (CEGUI::System* sys, OIS::MouseButtonID btn);
+
+		static void injectMouseButtonUp (OIS::MouseButtonID btn);
+		static void injectMouseButtonUp (CEGUI::System* sys, OIS::MouseButtonID btn);
+
+		static CEGUI::MouseButton convertOISButtonToCegui (int buttonID);
+
+		// Make sure that the FULL widget name (including path) can be used easily in CEGUI_07 as well.
+		static std::string getNameForWidget (const std::string& name);
+
+		static void setScrollPositionForWidget (const CEGUI::String& widgetName, float newScrollPosition);
+
+
+		static void setDefaultFont (const CEGUI::String& fontName);
 private:
 		/**
 		* \fn static const size_t getNextWord(const CEGUI::String& in_string, size_t start_idx, CEGUI::String& out_string)

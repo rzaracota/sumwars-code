@@ -24,7 +24,10 @@ using namespace CEGUI;
 
 CEGUI::String LuaScriptTab::WidgetTypeName = "LuaScriptTab";
 
-LuaScriptTab::LuaScriptTab(const CEGUI::String& type, const CEGUI::String& name): CEGUI::Window(type, name), DebugTab()
+LuaScriptTab::LuaScriptTab (const CEGUI::String& type, const CEGUI::String& name)
+	: CEGUI::Window (type, name)
+	, DebugTab()
+	, m_ceguiSkinName ("TaharezLook")
 {
 	setText("Lua");
 	m_newFileCtr = 0;
@@ -124,7 +127,7 @@ bool LuaScriptTab::handleNew(const CEGUI::EventArgs& e)
 bool LuaScriptTab::handleOpen(const CEGUI::EventArgs& e)
 {
 	m_fb = new FileBrowser();
-	m_fb->init("/home/stefan/Dev/s07c/sumwars", FileBrowser::FB_TYPE_OPEN_FILE, true);
+	m_fb->init("/home/stefan/Dev/s07c/sumwars", FileBrowser::FB_TYPE_OPEN_FILE, true, m_ceguiSkinName);
 	m_fb->m_acceptBtn->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&LuaScriptTab::handleFileBrowserAcceptClicked, this));
 	m_fb->m_cancelBtn->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&LuaScriptTab::handleFileBrowserCancelClicked, this));
 	

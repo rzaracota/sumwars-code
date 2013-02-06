@@ -29,8 +29,9 @@
 #include <iostream>
 
 
-MainMenu::MainMenu (Document* doc)
-        :Window(doc)
+MainMenu::MainMenu (Document* doc/*, const std::string& ceguiSkinName*/)
+        : Window (doc)
+		//, m_ceguiSkinName (ceguiSkinName)
 {
 	m_savegame_player ="";
 	m_savegame_player_object =0;

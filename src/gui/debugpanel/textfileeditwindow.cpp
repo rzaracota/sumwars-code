@@ -27,9 +27,13 @@ using namespace CEGUI;
 
 CEGUI::String TextFileEditWindow::WidgetTypeName = "TextFileEditWindow";
 
-TextFileEditWindow::TextFileEditWindow(const CEGUI::String& type, const CEGUI::String& name): Window(type, name)
+TextFileEditWindow::TextFileEditWindow (const CEGUI::String& type, const CEGUI::String& name)
+	: Window (type, name)
+	, m_ceguiSkinName ("TaharezLook")
 {
-	m_textEditBox = static_cast<MultiLineEditbox*>(WindowManager::getSingleton().createWindow("TaharezLook/MultiLineEditbox", name + "EditBox"));
+	std::stringstream ss;
+	ss << m_ceguiSkinName << "/MultiLineEditbox";
+	m_textEditBox = static_cast<MultiLineEditbox*>(WindowManager::getSingleton().createWindow(ss.str ().c_str (), name + "EditBox"));
 	m_textEditBox->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
 	m_textEditBox->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	addChildWindow(m_textEditBox);
@@ -48,7 +52,7 @@ void TextFileEditWindow::close()
 void TextFileEditWindow::getNewFileName()
 {
 	m_fb = new FileBrowser();
-	m_fb->init("/home/stefan/Dev/s07c/sumwars", FileBrowser::FB_TYPE_SAVE_FILE, true);
+	m_fb->init ("/home/stefan/Dev/s07c/sumwars", FileBrowser::FB_TYPE_SAVE_FILE, true, m_ceguiSkinName);
 	m_fb->m_acceptBtn->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&TextFileEditWindow::handleFileBrowserSaveClicked, this));
 	m_fb->m_cancelBtn->subscribeEvent(PushButton::EventClicked, CEGUI::Event::Subscriber(&TextFileEditWindow::handleFileBrowserCancelClicked, this));
 
