@@ -16,6 +16,11 @@
 #include "sumwarshelper.h"
 #include "config.h"
 
+// Allow using debug
+#include "debug.h"
+
+#include <Ogre.h>
+
 #if defined (_WIN32)
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -224,6 +229,13 @@ bool SumwarsHelper::init()
         }
     }
 #endif
+
+	guiAspectRatios_[std::string ("004_003")] = (double)4  / (double)3;
+	guiAspectRatios_[std::string ("005_004")] = (double)5  / (double)4;
+	guiAspectRatios_[std::string ("016_010")] = (double)16 / (double)10;
+	guiAspectRatios_[std::string ("016_009")] = (double)16 / (double)9;
+
+	return true;
 }
 
 
@@ -410,6 +422,208 @@ void SumwarsHelper::getSizesFromResolutionString (const std::string& initialStri
 	videoModeWidth = atoi (sLeft.c_str ());
 	videoModeHeight = atoi (sAux.c_str ());
 }
+
+
+
+/**
+* Get the nearest aspect ratio compatible witht the current resolution.
+* This is very useful for windowed mode.
+* @param width The width of the display window.
+* @param height The height of the display window.
+* @return A string containing the nearest folder name corresponding to the given window size.
+* @author Augustin Preda.
+*/
+std::string SumwarsHelper::getNearestAspectRatioStringForWindowSize (int width, int height)
+{
+	double myAspectRatio = 0;
+	double smallestDiff = 999.0;
+	std::string returnValue ("");
+
+	if (height == 0)
+	{
+		// return the first entry in the map?
+		if (! guiAspectRatios_.empty ())
+		{
+			DEBUG ("WARNING (SumwarsHelper::getNearestAspectRatioStringForWindowSize): zero height specied; returning any available ratio!");
+			return guiAspectRatios_.begin ()->first;
+		}
+		else
+		{
+			// this should not occur!
+			DEBUG ("WARNING (SumwarsHelper::getNearestAspectRatioStringForWindowSize): getNearestAspectRatioStringForWindowSize has no access to guiAspectRatios_! (empty map)");
+			return returnValue;
+		}
+	}
+
+	myAspectRatio = (double)width / (double)height;
+
+	for (std::map <std::string, double>::iterator it = guiAspectRatios_.begin ();
+		it != guiAspectRatios_.end (); ++ it)
+	{
+		double currentDiff = myAspectRatio - it->second;
+		if (currentDiff < 0) currentDiff = - currentDiff;
+
+		if (smallestDiff > currentDiff)
+		{
+			smallestDiff = currentDiff;
+			returnValue = it->first;
+		}
+	}
+
+	return returnValue;
+}
+
+
+/**
+ * Add a list of locations to a specified resource group.
+ * @param locList The list (vector actually) of locations.
+ * @param groupToAddTo The name of the resource group to add the locations to.
+ * @author Augustin Preda
+ */
+void SumwarsHelper::addResourceLocationList (const std::vector<std::string> &locList, const std::string &groupToAddTo)
+{
+	DEBUG ("SumwarsHelper: Adding resource locations (%d items)...", locList.size ());
+	for (std::vector<std::string>::const_iterator it = locList.begin(); it!= locList.end(); ++it )
+	{
+		addResourceLocation (*it, groupToAddTo);
+	}
+}
+
+
+/**
+ * Add a location to a specified resource group.
+ * @param location The location.
+ * @param groupToAddTo The name of the resource group to add the locations to.
+ * @author Augustin Preda
+ */
+void SumwarsHelper::addResourceLocation (const std::string& loc, const std::string &groupToAddTo)
+{
+	addResourceLocation  (loc,  "FileSystem", groupToAddTo);
+}
+
+
+/**
+ * Add a location to a specified resource group.
+ * @param location The location.
+ * @param groupToAddTo The name of the resource group to add the locations to.
+ * @param resourceType The type of resource (E.g. "FileSystem")
+ * @author Augustin Preda
+ */
+void SumwarsHelper::addResourceLocation (const std::string& loc, const std::string& resourceType, const std::string &groupToAddTo)
+{
+	std::string location (loc);
+	std::string secName (groupToAddTo);
+	std::string typeName (resourceType);
+	bool bCanAddThis (true);
+
+	size_t locationOfVarStart = location.find ("${");
+	if (locationOfVarStart != std::string::npos)
+	{
+		// found a percentage char.
+		bCanAddThis = false;
+
+		size_t locationOfSecondChar = location.find ("}", locationOfVarStart + 2);
+		if (locationOfSecondChar != std::string::npos)
+		{
+			std::string variableName = location.substr (locationOfVarStart + 2, locationOfSecondChar - locationOfVarStart - 2);
+
+			std::string variableValue = getCustomVariableValue (variableName);
+			if (variableValue.length () > 0)
+			{
+				bCanAddThis = true;
+				location = location.substr (0, locationOfVarStart) 
+					+ variableValue 
+					+ location.substr (locationOfSecondChar + 1);
+			}
+			else
+			{
+				DEBUG ("SumwarsHelper: There is a variable in use that is not YET defined: %s", variableName.c_str ());
+			}
+		}
+	}
+
+	if (location.length () > 4)
+	{
+		if (location.substr (location.length () - 4) == ".zip")
+		{
+			typeName = "Zip";
+		}
+	}
+
+	if (bCanAddThis)
+	{
+		DEBUG ("SumwarsHelper: Adding location to resource list: [%s], group:[%s]", location.c_str (), secName.c_str ());
+		Ogre::ResourceGroupManager::getSingleton ().addResourceLocation (location, typeName, secName);
+	}
+	else
+	{
+		DEBUG ("SumwarsHelper: Adding location to incomplete resource group list: [%s], group:[%s]. Try calling [retryToAddIncompleteResourceDirs] later on.", location.c_str (), secName.c_str ());
+		incompleteResourceGroupDirs_ [secName] = location;
+	}
+}
+
+
+
+/**
+ * Set the preffered aspect ratio string. Uses getEditableApplicationVariablesMapping.
+ * @param aspectRatio The aspect ratio (as a string), in the same format retrieved by the function "getNearestAspectRatioStringForWindowSize".
+ * @author Augustin Preda.
+ */
+void SumwarsHelper::setPrefferedAspectRatioString (const std::string& aspectRatio)
+{
+	DEBUG ("SumwarsHelper: setting preffered aspect ratio string to: %s", aspectRatio.c_str ());
+	getEditableApplicationVariablesMapping ()["ASPECT_RATIO"] = aspectRatio;
+}
+
+
+
+/**
+ * Get the associated value for an special application environment variable.
+ * This could be an OS environment variable.
+ * @param varName The name of the variable.
+ * @return The value of the variable, given as a string. An empty string if nothing is found.
+ * @author Augustin Preda.
+ */
+std::string SumwarsHelper::getCustomVariableValue (const std::string& varName) const
+{
+	std::string out ("");
+		
+	std::map <std::string, std::string>::const_iterator it = applicationGlobalVars_.find (varName);
+	if (it != applicationGlobalVars_.end ())
+	{
+		return it->second;
+	}
+	return out;
+}
+
+
+
+
+/**
+ * Retry to add the directories/resource locations for all groups that failed so far.
+ * In order for this function to work, you must add resource locations using the functions defined in this class.
+ *  - addResourceLocation
+ *  - addResourceLocationList
+ * If you only add resource locations using the standard OGRE functions, this function will have no effect.
+ *
+ * This will be mainly used to load resource groups after the aspect ratio is calculated.
+ * The aspect ratio will be specified as a custom string in the resource paths. That custom string (E.g. "$(ASPECT_RATIO)") will need to be replaced by the string
+ * of the actual aspect ratio, corresponding to a folder name (E.g. "016_009");
+ * @author Augustin Preda
+ */
+void SumwarsHelper::retryToAddIncompleteResourceDirs ()
+{
+	std::map <std::string, std::string> localCopy = incompleteResourceGroupDirs_;
+	incompleteResourceGroupDirs_.clear ();
+
+	for (std::map <std::string, std::string>::iterator it = localCopy.begin ();
+		it != localCopy.end (); ++ it)
+	{
+		addResourceLocation (it->second, it->first);
+	}
+}
+
+
 
 #if defined (__APPLE__)
 Ogre::String SumwarsHelper::macPath()

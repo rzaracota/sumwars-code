@@ -616,6 +616,8 @@ bool Application::initOgre()
 	}
 #endif //OGRE_PLATFORM_WIN32
 
+	std::string aspectRatioString = SumwarsHelper::getSingletonPtr ()->getNearestAspectRatioStringForWindowSize (videoModeWidth, videoModeHeight);
+	SumwarsHelper::getSingletonPtr ()->setPrefferedAspectRatioString (aspectRatioString);
 
 	// Set the texture filtering.
 	// Possible values:
@@ -747,14 +749,17 @@ bool Application::setupResources()
 		{
 			typeName = i->first;
 			archName = i->second;
-			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(archName, typeName, secName);
+			//Ogre::ResourceGroupManager::getSingleton().addResourceLocation(archName, typeName, secName);
+			SumwarsHelper::getSingletonPtr ()->addResourceLocation (archName, typeName, secName);
 		}
 	}
 	
 	Ogre::String savePath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::savePath();
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(savePath, "FileSystem", "Savegame");
+	SumwarsHelper::getSingletonPtr ()->addResourceLocation (savePath, "FileSystem", "Savegame");
+	//Ogre::ResourceGroupManager::getSingleton().addResourceLocation(savePath, "FileSystem", "Savegame");
 
 #if defined(WIN32)
+	// TODO: FIX: Augustin Preda (2013.02.07): What if you don't install windows in C:\Windows ?
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("c:\\windows\\fonts", "FileSystem", "GUI");
 #endif
 
@@ -823,12 +828,10 @@ bool Application::initCEGUI()
 	
 	/*CEGUI::LuaScriptModule &scriptm(CEGUI::LuaScriptModule::create());
 	m_cegui_system->setScriptingModule(&scriptm);*/
+	
+	// Set the mousr cursor.
 	CEGUIUtility::setDefaultMouseCursor (m_cegui_system, Options::getInstance ()->getCeguiCursorSkin (), "MouseArrow");
 	CEGUIUtility::setDefaultTooltip (m_cegui_system, Options::getInstance ()->getCeguiSkin (), "Tooltip");
-
-	// Mauscursor setzen (evtl eher in View auslagern ? )
-	//m_cegui_system->setDefaultMouseCursor((CEGUI::utf8*)"TaharezLook", (CEGUI::utf8*)"MouseArrow");
-    //m_cegui_system->setDefaultTooltip((CEGUI::utf8*)"TaharezLook/Tooltip");
 
 	// Update the fade delay?
 	if (m_cegui_system->getDefaultTooltip ())
@@ -849,8 +852,10 @@ bool Application::initCEGUI()
 	CEGUI::FontManager::getSingleton().create("DejaVuSans-10.font", (CEGUI::utf8*)"GUI");
 	m_cegui_system->setDefaultFont((CEGUI::utf8*)"DejaVuSerif-8");
 
-	// eigene Factorys einfuegen
-    CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("SumwarsTooltip", "DefaultWindow", "TaharezLook/CustomTooltip", "Falagard/Default");
+	// Insert own factories. // TODO: check if this is really needed. Couldn't the custom tooltip just be added to the scheme?
+	std::stringstream ss;
+	ss << Options::getInstance ()->getCeguiSkin () << "/CustomTooltip";
+	CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("SumwarsTooltip", "DefaultWindow", ss.str ().c_str (), "Falagard/Default");
 
 #ifdef SUMWARS_BUILD_TOOLS
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<DebugCameraTab> >();
