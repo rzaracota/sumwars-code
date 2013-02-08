@@ -4525,11 +4525,12 @@ Brown/Orange:
 
     <!--
     ***************************************************
-        Resummoned/Tooltip
+        Resummoned/CustomTooltip
         (based on the Taharez Look)
     ***************************************************
     -->
     <WidgetLook name="Resummoned/CustomTooltip">
+        <PropertyDefinition name="CustomTooltipBackgroundTransparency" initialValue="E8FFFFFF" redrawOnWrite="true" />
         <NamedArea name="TextArea">
             <Area>
                 <Dim type="LeftEdge" ><ImageDim imageset="Resummoned" image="TooltipLeftEdge" dimension="Width" /></Dim>
@@ -4550,25 +4551,53 @@ Brown/Orange:
                 </Dim>
             </Area>
         </NamedArea>
-        <ImagerySection name="main">
+        
+        <ImagerySection name="border_section">
             <FrameComponent>
                 <Area>
-                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
-                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
-                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
-                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
+                    <Dim type="LeftEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="RightEdge"><UnifiedDim scale="1" type="RightEdge" /></Dim>
+                    <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
                 </Area>
                 <Image type="TopLeftCorner" imageset="Resummoned" image="TooltipTopLeft" />
-                <Image type="TopRightCorner" imageset="Resummoned" image="TooltipTopRight" />
-                <Image type="BottomLeftCorner" imageset="Resummoned" image="TooltipBottomLeft" />
-                <Image type="BottomRightCorner" imageset="Resummoned" image="TooltipBottomRight" />
                 <Image type="LeftEdge" imageset="Resummoned" image="TooltipLeftEdge" />
-                <Image type="RightEdge" imageset="Resummoned" image="TooltipRightEdge" />
+                <Image type="BottomLeftCorner" imageset="Resummoned" image="TooltipBottomLeft" />
                 <Image type="TopEdge" imageset="Resummoned" image="TooltipTopEdge" />
-                <Image type="BottomEdge" imageset="Resummoned" image="TooltipBottomEdge" />
                 <Image type="Background" imageset="Resummoned" image="TooltipMiddle" />
+                <Image type="BottomEdge" imageset="Resummoned" image="TooltipBottomEdge" />
+                <Image type="TopRightCorner" imageset="Resummoned" image="TooltipTopRight" />
+                <Image type="RightEdge" imageset="Resummoned" image="TooltipRightEdge" />
+                <Image type="BottomRightCorner" imageset="Resummoned" image="TooltipBottomRight" />
             </FrameComponent>
         </ImagerySection>
+
+        <ImagerySection name="background_section">
+            <ImageryComponent>
+                <Area>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="5" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="2" /></Dim>
+                    <Dim type="Width" >
+                        <UnifiedDim scale="1" type="Width">
+                            <DimOperator op="Subtract">
+                                <AbsoluteDim value="10" />
+                            </DimOperator>
+                        </UnifiedDim>
+                    </Dim>
+                    <Dim type="Height" >
+                        <UnifiedDim scale="1" type="Height">
+                            <DimOperator op="Subtract">
+                                <AbsoluteDim value="4" />
+                            </DimOperator>
+                        </UnifiedDim>
+                    </Dim>
+                </Area>
+                <Image type="Background" imageset="Resummoned" image="MiniButton_Background" />
+                <VertFormat type="Stretched" />
+                <HorzFormat type="Stretched" />
+            </ImageryComponent>
+        </ImagerySection>
+
         <ImagerySection name="label">
             <TextComponent>
                 <Area>
@@ -4589,25 +4618,29 @@ Brown/Orange:
                         </UnifiedDim>
                     </Dim>
                 </Area>
-<!--                <Colours topLeft="FFFF6666" topRight="FFFF6666" bottomLeft="FFFF1111" bottomRight="FFFF1111" />-->
-                <Colours topLeft="FFFFE6DA" topRight="FFFFE6DA" bottomLeft="FFFFFBFA" bottomRight="FFFFFBFA" />
+                <!--<Colours topLeft="FFFFE6DA" topRight="FFFFE6DA" bottomLeft="FFFFFBFA" bottomRight="FFFFFBFA" />-->
+                <Colours topLeft="FFFFFFFF" topRight="FFFFFFFF" bottomLeft="FFFFFFFF" bottomRight="FFFFFFFF" />-->
                 <VertFormat type="CentreAligned" />
                 <HorzFormat type="CentreAligned" />
             </TextComponent>
         </ImagerySection>
+
         <StateImagery name="Enabled">
             <Layer>
-                <Section section="main">
-                    <Colours topLeft="BFCDCDCD" topRight="BFCDCDCD" bottomLeft="BFCDCDCD" bottomRight="BFCDCDCD" />
+                <Section section="background_section">
+                    <ColourProperty name="CustomTooltipBackgroundTransparency" />
                 </Section>
+                <Section section="border_section" />
                 <Section section="label" />
             </Layer>
         </StateImagery>
+        
         <StateImagery name="Disabled">
             <Layer>
-                <Section section="main">
-                    <Colours topLeft="BFEAEAEA" topRight="BFEAEAEA" bottomLeft="BFEAEAEA" bottomRight="BFEAEAEA" />
+                <Section section="background_section">
+                    <ColourProperty name="CustomTooltipBackgroundTransparency" />
                 </Section>
+                <Section section="border_section" />
                 <Section section="label" />
             </Layer>
         </StateImagery>

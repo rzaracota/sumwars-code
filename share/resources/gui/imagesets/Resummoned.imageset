@@ -288,9 +288,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
 	<Image Name="TooltipTopEdge" XPos="15" YPos="680" Width="108" Height="10" />
 	<Image Name="TooltipMiddle" XPos="15" YPos="690" Width="108" Height="108" />
 	<Image Name="TooltipBottomEdge" XPos="15" YPos="798" Width="108" Height="10" />
-	<Image Name="TooltipTopRight" XPos="213" YPos="680" Width="10" Height="10" />
-	<Image Name="TooltipRightEdge" XPos="213" YPos="690" Width="10" Height="108" />
-	<Image Name="TooltipBottomRight" XPos="213" YPos="798" Width="10" Height="10" />
+	<Image Name="TooltipTopRight" XPos="123" YPos="680" Width="10" Height="10" />
+	<Image Name="TooltipRightEdge" XPos="123" YPos="690" Width="10" Height="108" />
+	<Image Name="TooltipBottomRight" XPos="123" YPos="798" Width="10" Height="10" />
 
   <!-- Multi-line edit-box content borders; same as static text borders -->
   <!-- TODO: bring to standardized suffix format --> <!-- TODO: check if removal is recommended (static duplicate) -->

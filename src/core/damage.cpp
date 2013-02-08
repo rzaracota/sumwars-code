@@ -17,6 +17,7 @@
 #include "eventsystem.h"
 #include "gettext.h"
 #include "itemfactory.h"
+#include "tooltipsettings.h"
 
 Damage::Damage()
 {
@@ -237,7 +238,7 @@ std::string Damage::getDamageString(Damage::Usage usage, std::string rarityColor
 {
 	// this mapping is necessary because order of element is differen in item and damage x(
 	int elemmap[4] = {0,3,2,1};
-	std::string defaultColor = "[colour='FF2F2F2F']";
+	std::string defaultColor = TooltipSettings::getDefaultHexColourCode ();
 	
 	std::ostringstream out_stream;
 	out_stream.str("");
