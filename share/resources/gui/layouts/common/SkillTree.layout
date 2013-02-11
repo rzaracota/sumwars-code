@@ -4,7 +4,7 @@
     <Window Type="TaharezLook/StaticImage" Name="Skilltree" >
         <Property Name="Image" Value="set:SkillTree image:SkillTreeBg" />
         <Property Name="FrameEnabled" Value="False" />
-        <Property Name="UnifiedAreaRect" Value="{{0.565,0},{0.0,0},{1.0,0},{0.84,0}}" />
+        <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
         <Property Name="BackgroundEnabled" Value="False" />
         <Window Type="TaharezLook/ImageButton" Name="SkillTreeCloseButton" >
             <Property Name="HoverImage" Value="set:Misc image:CloseBtnHovered" />

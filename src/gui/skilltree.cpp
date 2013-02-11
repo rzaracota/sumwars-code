@@ -40,7 +40,29 @@ SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard)
 	m_player_id =0;
 	
 	CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.loadWindowLayout( "SkillTree.layout" );
-	m_window = skilltree;
+	if (!skilltree)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "SkillTree.layout");
+	}
+	CEGUI::Window* skilltree_holder = win_mgr.loadWindowLayout( "skilltree_holder.layout" );
+	if (!skilltree_holder)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "questinfo_holder.layout");
+	}
+
+	CEGUI::Window* wndHolder = win_mgr.getWindow("Skilltree_Holder");
+	CEGUI::Window* wndSkilltree = win_mgr.getWindow("Skilltree");
+	if (wndHolder && wndSkilltree)
+	{
+		wndHolder->addChildWindow (wndSkilltree);
+	}
+	else
+	{
+		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for skills.");
+		if (!wndSkilltree) DEBUG ("ERROR: Unable to get the window for skills.");
+	}
+
+	m_window = skilltree_holder;
 	skilltree->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent,  (Window*) this));
 	skilltree->setWantsMultiClickEvents(false);
 	

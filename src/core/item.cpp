@@ -16,6 +16,7 @@
 // #include "item.h"
 #include "itemfactory.h"
 
+// Generic colour settings.
 #include "tooltipsettings.h"
 
 void WeaponAttr::operator=(WeaponAttr& other)

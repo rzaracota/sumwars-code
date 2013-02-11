@@ -29,7 +29,29 @@ QuestInfo::QuestInfo (Document* doc, const std::string& ceguiSkinName)
 
 	// Rahmen fuer das Menue Savegame auswaehlen
 	CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("QuestInfo.layout");
-	m_window = quest_info;
+	if (!quest_info)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "QuestInfo.layout");
+	}
+	CEGUI::Window* quest_info_holder = win_mgr.loadWindowLayout( "questinfo_holder.layout" );
+	if (!quest_info_holder)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "questinfo_holder.layout");
+	}
+
+	CEGUI::Window* wndHolder = win_mgr.getWindow("QuestInfo_Holder");
+	CEGUI::Window* wndQuest = win_mgr.getWindow("QuestInfo");
+	if (wndHolder && wndQuest)
+	{
+		wndHolder->addChildWindow (wndQuest);
+	}
+	else
+	{
+		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for quests.");
+		if (!wndQuest) DEBUG ("ERROR: Unable to get the window for quests.");
+	}
+
+	m_window = quest_info_holder;
 	
 	quest_info->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
 	

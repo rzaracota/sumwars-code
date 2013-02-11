@@ -18,15 +18,46 @@
 
 Inventory::Inventory (Document* doc)
 	: ItemWindow(doc)
+	, m_holder_ (0)
 {
 	DEBUGX("setup inventory");
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
-	CEGUI::FrameWindow* inventory = (CEGUI::FrameWindow*)win_mgr.loadWindowLayout( "inventory.layout" );
-	m_window = inventory;
+	CEGUI::Window* inventory = win_mgr.loadWindowLayout("inventory.layout");
+	if (!inventory)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "inventory.layout");
+	}
+
+	CEGUI::Window* inv_holder = win_mgr.loadWindowLayout( "inventory_holder.layout" );
+	if (!inv_holder)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "inventory_holder.layout");
+	}
+
+	DEBUG ("Placing layout into holder");
+	inventory->setVisible (true);
+	inv_holder->setVisible (true);
+	//inv_holder->addChildWindow (inventory);
+
+	CEGUI::Window* wndHolder = win_mgr.getWindow("Inventory_Holder");
+	CEGUI::Window* wndInventory = win_mgr.getWindow("Inventory");
+	if (wndHolder && wndInventory)
+	{
+		wndHolder->addChildWindow (wndInventory);
+	}
+	else
+	{
+		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for inventory.");
+		if (!wndInventory) DEBUG ("ERROR: Unable to get the window for inventory.");
+	}
+	m_window = inv_holder;
+//	m_holder_ = inv_holder;
+
 	inventory->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
 	inventory->setWantsMultiClickEvents(false);
+
 
 
 	// Bestandteile des Charakterfensters hinzufuegen

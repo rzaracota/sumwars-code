@@ -1,0 +1,8 @@
+<GUILayout >
+    <Window Type="TaharezLook/StaticImage" Name="TradeWindow_Holder" >
+        <Property Name="Image" Value="set:TradeWindow image:Background" />
+        <Property Name="FrameEnabled" Value="False" />
+        <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{0.435,0},{0.84,0}}" />
+        <Property Name="BackgroundEnabled" Value="False" />
+    </Window>
+</GUILayout>

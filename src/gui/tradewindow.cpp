@@ -29,7 +29,29 @@ TradeWindow::TradeWindow (Document* doc)
 
 	// Rahmen fuer Inventar Fenster
 	CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("TradeWindow.layout");
-	m_window = trade;
+	if (!trade)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "TradeWindow.layout");
+	}
+	CEGUI::Window* trade_holder = win_mgr.loadWindowLayout( "tradewindow_holder.layout" );
+	if (!trade_holder)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "tradewindow_holder.layout");
+	}
+
+	CEGUI::Window* wndHolder = win_mgr.getWindow("TradeWindow_Holder");
+	CEGUI::Window* wndTrade = win_mgr.getWindow("TradeWindow");
+	if (wndHolder && wndTrade)
+	{
+		wndHolder->addChildWindow (wndTrade);
+	}
+	else
+	{
+		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for trade.");
+		if (!wndTrade) DEBUG ("ERROR: Unable to get the window for trade.");
+	}
+
+	m_window = trade_holder;
 	
 	trade->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeAreaMouseButtonPressed, this));
 	trade->setWantsMultiClickEvents(false);

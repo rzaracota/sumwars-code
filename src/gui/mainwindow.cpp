@@ -418,7 +418,7 @@ void MainWindow::update(float time)
 		if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		{
 			// Charinfo anzeigen wenn entsprechendes Flag gesetzt
-			CEGUI::FrameWindow* char_info = (CEGUI::FrameWindow*) win_mgr.getWindow("CharInfo");
+			CEGUI::FrameWindow* char_info = (CEGUI::FrameWindow*) win_mgr.getWindow("CharInfo_Holder");
 			if (wflags & Document::CHARINFO)
 			{
 				char_info->setVisible(true);
@@ -429,7 +429,7 @@ void MainWindow::update(float time)
 			}
 	
 			// Inventar anzeigen wenn entsprechendes Flag gesetzt
-			CEGUI::FrameWindow* inventory = (CEGUI::FrameWindow*) win_mgr.getWindow("Inventory");
+			CEGUI::FrameWindow* inventory = (CEGUI::FrameWindow*) win_mgr.getWindow("Inventory_Holder");
 			if (wflags & Document::INVENTORY)
 			{
 				if (!inventory->isVisible())
@@ -468,7 +468,7 @@ void MainWindow::update(float time)
 			}
 			
 			// QuestInfo anzeigen wenn entsprechendes Flag gesetzt
-			CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) win_mgr.getWindow("QuestInfo");
+			CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) win_mgr.getWindow("QuestInfo_Holder");
 			if (wflags & Document::QUEST_INFO)
 			{
 				quest_info->setVisible(true);
@@ -489,7 +489,7 @@ void MainWindow::update(float time)
 				minimap->setVisible(false);
 			}
 			
-			CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) win_mgr.getWindow("TradeWindow");
+			CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) win_mgr.getWindow("TradeWindow_Holder");
 			if (wflags & Document::TRADE)
 			{
 								
@@ -570,7 +570,7 @@ void MainWindow::update(float time)
 			{
 				// Skilltree anzeigen wenn entsprechendes Flag gesetzt
 				
-				CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.getWindow("Skilltree");
+				CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.getWindow("Skilltree_Holder");
 				if (wflags & Document::SKILLTREE)
 				{
 					skilltree->setVisible(true);

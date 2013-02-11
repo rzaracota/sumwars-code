@@ -25,8 +25,30 @@ CharInfo::CharInfo (Document* doc)
 	
 	// Rahmen fuer CharInfo Fenster
 	CEGUI::FrameWindow* char_info = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "CharacterScreen.layout" );
-	m_window = char_info;
+	if (!char_info)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "CharacterScreen.layout");
+	}
+
+	CEGUI::Window* char_info_holder = win_mgr.loadWindowLayout( "characterscreen_holder.layout" );
+	if (!char_info_holder)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "characterscreen_holder.layout");
+	}
 	
+	CEGUI::Window* wndHolder = win_mgr.getWindow("CharInfo_Holder");
+	CEGUI::Window* wndCharInfo = win_mgr.getWindow("CharInfo");
+	if (wndHolder && wndCharInfo)
+	{
+		wndHolder->addChildWindow (wndCharInfo);
+	}
+	else
+	{
+		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for char screen.");
+		if (!wndCharInfo) DEBUG ("ERROR: Unable to get the window for char screen.");
+	}
+
+	m_window = char_info_holder;
 	
 	char_info->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
 	char_info->setWantsMultiClickEvents(false);

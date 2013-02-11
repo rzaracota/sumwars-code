@@ -38,7 +38,7 @@ class Inventory : public ItemWindow
 	 * \brief Konstruktor
 		 */
 		Inventory (Document* doc);
-	
+
 		/**
 		 * \fn virtual void update()
 		 * \brief Updates the window contents
@@ -86,6 +86,8 @@ class Inventory : public ItemWindow
 		 * \brief Creates All animations used by the Inventory GUI
 		 */
 		void createAnimations();
+
+		CEGUI::Window* m_holder_;
 };
 
 #endif // __SUMWARS_GUI_INVENTORY_H__
