@@ -5192,15 +5192,6 @@ Brown/Orange:
                     <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
                     <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
                     <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
-                    <!-- augustin preda: old code; doesn't seem to take enable top into account for some reason.
-                    <Dim type="BottomEdge" >
-                        <ImageDim imageset="Resummoned" image="TabContentPaneUpperLeft" dimension="Height">
-                            <DimOperator op="Multiply">
-                                <PropertyDim name="EnableTop" />
-                            </DimOperator>
-                        </ImageDim>
-                    </Dim>
-                    -->
                     <Dim type="Height" >
                         <ImageDim imageset="Resummoned" image="TabContentPaneUpperLeft" dimension="Height">
                             <DimOperator op="Add">
@@ -5224,15 +5215,6 @@ Brown/Orange:
                             </DimOperator>
                         </AbsoluteDim>
                     </Dim>
-                    <!-- augustin preda: old code; doesn't seem to take enable top into account for some reason.
-                    <Dim type="TopEdge" >
-                        <ImageDim imageset="Resummoned" image="TabContentPaneUpperLeft" dimension="Height">
-                            <DimOperator op="Multiply">
-                                <PropertyDim name="EnableTop" />
-                            </DimOperator>
-                        </ImageDim>
-                    </Dim>
-                    -->
                     <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
                     <Dim type="BottomEdge" >
                         <UnifiedDim scale="1" type="Height">
@@ -6438,6 +6420,71 @@ Brown/Orange:
             </Layer>
         </StateImagery>
     </WidgetLook>
-    
+
+
+    <!--
+    ***************************************************
+        Resummoned/TimerProgressBar
+    ***************************************************
+    -->
+    <WidgetLook name="Resummoned/TimerProgressBar">
+        <NamedArea name="ProgressArea">
+                <Area>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
+                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
+                </Area>
+        </NamedArea>
+        <ImagerySection name="frame">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
+                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
+                </Area>
+            </FrameComponent>
+        </ImagerySection>
+        <ImagerySection name="progress_lights" >
+            <ImageryComponent>
+                <Area>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
+                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
+                </Area>
+                <Image imageset="Misc" image="ProgressBarTimerSegment" />
+                <VertFormat type="Stretched" />
+                <HorzFormat type="Stretched" />
+            </ImageryComponent>
+        </ImagerySection>
+        <StateImagery name="Enabled">
+            <Layer>
+                <Section section="frame" />
+            </Layer>
+        </StateImagery>
+        <StateImagery name="Disabled">
+            <Layer>
+                <Section section="frame">
+                    <Colours topLeft="FF7F7F7F" topRight="FF7F7F7F" bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" />
+                </Section>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="EnabledProgress">
+            <Layer>
+                <Section section="progress_lights" />
+            </Layer>
+        </StateImagery>
+        <StateImagery name="DisabledProgress">
+            <Layer>
+                <Section section="progress_lights">
+                    <Colours topLeft="FF7F7F7F" topRight="FF7F7F7F" bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" />
+                </Section>
+            </Layer>
+        </StateImagery>
+    </WidgetLook>
+
+        
 </Falagard>
 

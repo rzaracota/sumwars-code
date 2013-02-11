@@ -179,6 +179,9 @@ class CEGUIUtility
 		// Make sure that the FULL widget name (including path) can be used easily in CEGUI_07 as well.
 		static std::string getNameForWidget (const std::string& name);
 
+		// Retrieve the widget with a given skin.
+		static std::string getWidgetWithSkin (const std::string& skin, const std::string& name);
+
 		static void setScrollPositionForWidget (const CEGUI::String& widgetName, float newScrollPosition);
 
 

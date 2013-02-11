@@ -420,6 +420,15 @@ std::string CEGUIUtility::getNameForWidget (const std::string& name)
 }
 
 
+// Retrieve the widget with a given skin.
+std::string CEGUIUtility::getWidgetWithSkin (const std::string& skin, const std::string& name)
+{
+	std::stringstream ss;
+	ss << skin << "/" << name;
+	return ss.str ();
+}
+
+
 void CEGUIUtility::setScrollPositionForWidget (const CEGUI::String& widgetName, float newScrollPosition)
 {
 	CEGUI::Scrollbar* scroller;

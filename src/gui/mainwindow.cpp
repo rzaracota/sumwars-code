@@ -159,13 +159,15 @@ bool MainWindow::setupMainMenu()
 		m_main_menu = win_mgr.createWindow("DefaultWindow", "MainMenu");
 				
 		CEGUI::Window* img;
-		img  = win_mgr.createWindow("TaharezLook/StaticImage", "StartScreenImage");
+		
+		
+		img  = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "StartScreenImage");
 		m_main_menu->addChildWindow(img);
         img->setProperty("Image", "set:startscreen.png image:full_image");
 		img->moveToBack ();
 		img->setMousePassThroughEnabled(true);
 		
-		CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", "LoadRessourcesProgressBar"));
+		CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow(CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ProgressBar"), "LoadRessourcesProgressBar"));
 		m_main_menu->addChildWindow(bar);
 		bar->setPosition(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.9f)));
 		bar->setSize(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim( 0.05f)));
@@ -775,7 +777,7 @@ bool MainWindow::setupGameScreen()
 		m_sub_windows["DialogueWindow"] = new DialogueWindow(m_document,m_scene);
 		
 		CEGUI::Window* label;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", "CharacterPreviewImage");
+		label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "CharacterPreviewImage");
 		m_main_menu->addChildWindow(label);
 		label->setProperty("FrameEnabled", "false");
 		label->setProperty("BackgroundEnabled", "false");
@@ -786,7 +788,7 @@ bool MainWindow::setupGameScreen()
 		label->setProperty("Image", "set:character image:character_img"); 
 		label->setVisible(false);
 		
-		label = win_mgr.createWindow("TaharezLook/StaticText", "CharacterPreviewBackground");
+		label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), "CharacterPreviewBackground");
 		m_main_menu->addChildWindow(label);
 		label->setProperty("FrameEnabled", "false");
 		label->setProperty("BackgroundEnabled", "true");
@@ -818,7 +820,7 @@ void MainWindow::setupControlPanel()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "CharInfoUpgradeButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "Button"), "CharInfoUpgradeButton"));
 	m_game_screen->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.02f), cegui_reldim( 0.65f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.07f)));
@@ -830,7 +832,7 @@ void MainWindow::setupControlPanel()
 	btn->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased"); 	 
 	btn->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SkillUpgradeButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "Button"), "SkillUpgradeButton"));
 	m_game_screen->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.92f), cegui_reldim( 0.65f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.07f)));
@@ -907,7 +909,7 @@ void MainWindow::setupCursorItemImage()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	CEGUI::Window* label;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", "CursorItemImage");
+	label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "CursorItemImage");
 	m_game_screen->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "false");
@@ -954,7 +956,7 @@ bool MainWindow::setupObjectInfo()
 
 	// Leiste fuer Informationen
 	
-	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", "MonsterHealthProgressBar"));
+	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ProgressBar"), "MonsterHealthProgressBar"));
 	m_game_screen->addChildWindow(bar);
 	bar->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
 	bar->setSize(CEGUI::UVector2(cegui_reldim(0.6f), cegui_reldim( 0.07f)));
@@ -963,7 +965,7 @@ bool MainWindow::setupObjectInfo()
 	bar->setProgress(1.0);
 	
 	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "ObjectInfoLabel");
+	label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), "ObjectInfoLabel");
 	m_game_screen->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "false");
@@ -987,7 +989,7 @@ bool MainWindow::setupItemInfo()
 	CEGUI::Window* label;
 
 	// Leiste fuer Informationen
-	label = win_mgr.createWindow("TaharezLook/StaticText", "ItemInfoLabel");
+	label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), "ItemInfoLabel");
 	m_game_screen->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
@@ -1026,7 +1028,7 @@ bool MainWindow::setupPartyInfo()
 		stream << "PartyMemberImage";
 		stream << i;
 		
-		img = win_mgr.createWindow("TaharezLook/StaticImage",stream.str());
+		img = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), stream.str());
 		m_game_screen->addChildWindow(img);
 		img->setProperty("FrameEnabled", "true");
 		img->setProperty("BackgroundEnabled", "true");
@@ -1040,7 +1042,7 @@ bool MainWindow::setupPartyInfo()
 		stream << "PartyMemberHealthBar";
 		stream << i;
 		
-		bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", stream.str()));
+		bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ProgressBar"), stream.str()));
 		m_game_screen->addChildWindow(bar);
 		m_game_screen->addChildWindow(bar);
 		bar->setPosition(CEGUI::UVector2(cegui_reldim(0.01f), cegui_reldim( 0.08f+ 0.1f *i)));
@@ -1080,7 +1082,7 @@ void MainWindow::setupRegionInfo()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	CEGUI::Window* label;
-	label = win_mgr.createWindow("TaharezLook/StaticText", "RegionInfoLabel");
+	label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), "RegionInfoLabel");
 	m_game_screen->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "false");
@@ -1124,7 +1126,7 @@ void MainWindow::setupChatContent()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	CEGUI::Window* label;
-	label = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.createWindow("TaharezLook/StaticText", "ChatContent"));
+	label = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), "ChatContent"));
 	m_game_screen->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	//label->setProperty("BackgroundEnabled", "false");
@@ -1919,7 +1921,7 @@ void MainWindow::updateItemInfo()
 			if (nr >= lcount)
 			{
 				lcount ++;
-				label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
+				label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), stream.str());
 				m_game_screen->addChildWindow(label);
 				label->setProperty("FrameEnabled", "false");
 				label->setProperty("BackgroundEnabled", "true");
@@ -2209,7 +2211,7 @@ void MainWindow::updateFloatingText()
 		if (nr >= lcount)
 		{
 			lcount ++;
-			label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
+			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), stream.str());
 			m_game_screen->addChildWindow(label);
 			label->setProperty("FrameEnabled", "false");
 			label->setProperty("BackgroundEnabled", "false");
