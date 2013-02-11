@@ -26,7 +26,30 @@ ControlPanel::ControlPanel (Document* doc)
 
 	// Rahmen fuer die untere Kontrollleiste
 	CEGUI::FrameWindow* ctrl_panel = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("ControlPanel.layout");
-	m_window = ctrl_panel;
+	if (!ctrl_panel)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "ControlPanel.layout");
+	}
+
+	CEGUI::Window* ctrl_panel_holder = win_mgr.loadWindowLayout( "controlpanel_holder.layout" );
+	if (!ctrl_panel_holder)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "characterscreen_holder.layout");
+	}
+	
+	CEGUI::Window* wndHolder = win_mgr.getWindow("ControlPanel_Holder");
+	CEGUI::Window* wndCharInfo = win_mgr.getWindow("ControlPanel");
+	if (wndHolder && wndCharInfo)
+	{
+		wndHolder->addChildWindow (wndCharInfo);
+	}
+	else
+	{
+		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for control panel.");
+		if (!wndCharInfo) DEBUG ("ERROR: Unable to get the window for control panel.");
+	}
+
+	m_window = ctrl_panel_holder;
 	
 	ctrl_panel->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
 	ctrl_panel->setWantsMultiClickEvents(false);

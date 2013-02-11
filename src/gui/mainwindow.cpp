@@ -448,7 +448,7 @@ void MainWindow::update(float time)
 			}
 			
 			// show/hide control panel
-			CEGUI::FrameWindow* control_panel = (CEGUI::FrameWindow*) win_mgr.getWindow("ControlPanel");
+			CEGUI::FrameWindow* control_panel = (CEGUI::FrameWindow*) win_mgr.getWindow("ControlPanel_Holder");
 			if (wflags & Document::CONTROL_PANEL)
 			{
 				if (!control_panel->isVisible())

@@ -1,0 +1,10 @@
+<GUILayout >
+    <Window Type="TaharezLook/StaticImage" Name="ControlPanel_Holder" >
+        <Property Name="Image" Value="set:ControlPanel image:Belt" />
+        <Property Name="FrameEnabled" Value="False" />
+        <Property Name="InheritsAlpha" Value="False" />
+        <Property Name="UnifiedAreaRect" Value="{{0.211,0},{0.798348,0},{0.789,0},{1,0}}" />
+        <Property Name="BackgroundEnabled" Value="False" />
+        <Property Name="MousePassThroughEnabled" Value="True" />
+    </Window>
+</GUILayout>
