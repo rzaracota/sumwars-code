@@ -251,6 +251,32 @@ void Inventory::update()
 	img =  win_mgr.getWindow("ArmorItemLabel");
 	it = equ->getItem(Equipement::ARMOR);
 	updateItemWindow(img,it,player);
+	if (img && it)
+	{
+		if (img->isPropertyPresent ("BackgroundHighlightColour"))
+		{
+			int localRarity = it->getValue ("rarity");
+			switch (localRarity)
+			{
+			case Item::MAGICAL:
+				img->setProperty ("BackgroundHighlightColour", "FF0000FF");
+				break;
+			case Item::RARE:
+				img->setProperty ("BackgroundHighlightColour", "FFFFFF00");
+				break;
+			case Item::UNIQUE:
+				img->setProperty ("BackgroundHighlightColour", "FFFFBB88");
+				break;
+			case Item::QUEST:
+				img->setProperty ("BackgroundHighlightColour", "FF888888");
+				break;
+			case Item::NORMAL:
+			default:
+				img->setProperty ("BackgroundHighlightColour", "FFFFFFFF");
+				break;
+			}
+		}
+	}
 
 	// Label Helm
 	img =  win_mgr.getWindow("HelmetItemLabel");

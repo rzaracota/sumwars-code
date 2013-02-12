@@ -163,16 +163,21 @@ bool MainWindow::setupMainMenu()
 		
 		img  = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "StartScreenImage");
 		m_main_menu->addChildWindow(img);
-        img->setProperty("Image", "set:startscreen.png image:full_image");
+        img->setProperty("Image", "set:SumWarsLogo.png image:full_image");
 		img->moveToBack ();
+		img->setProperty ("FrameEnabled", "False");
 		img->setMousePassThroughEnabled(true);
 		
 		CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow(CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ProgressBar"), "LoadRessourcesProgressBar"));
 		m_main_menu->addChildWindow(bar);
-		bar->setPosition(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.9f)));
-		bar->setSize(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim( 0.05f)));
+		bar->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.9f)));
+		bar->setSize(CEGUI::UVector2(cegui_reldim(0.70f), cegui_reldim( 0.04f)));
 		bar->setWantsMultiClickEvents(false);
 		bar->setProgress(0.0);
+		bar->setProperty ("GS_DarkerThemeColour", "FF005464");
+		bar->setProperty ("GS_LighterThemeColour", "FF13C6BC");
+		bar->setProperty ("GS_MainThemeColour", "FF13868B");
+		bar->setProperty ("GS_MainThemeGradientLeftToRight", "tl:00FFFFFF tr:FF13C6BC bl:00FFFFFF br:FF13C6BC");
 		
 		CreditsWindow* crd = new CreditsWindow (m_document, m_ceguiSkinName);
 		m_sub_windows["CreditsWindow"] = crd;

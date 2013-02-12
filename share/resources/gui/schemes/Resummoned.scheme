@@ -51,6 +51,7 @@ Last change:  $LastChangedDate: 2012-12-25 20:55:19 +0200 (Ma, 25 dec. 2012) $
   <FalagardMapping WindowType="Resummoned/Checkbox"    TargetType="CEGUI/Checkbox"    Renderer="Falagard/ToggleButton" LookNFeel="Resummoned/Checkbox" />
   <FalagardMapping WindowType="Resummoned/Checkbox32"    TargetType="CEGUI/Checkbox"    Renderer="Falagard/ToggleButton" LookNFeel="Resummoned/Checkbox" /> <!-- double mapping to checkbox -->
   <FalagardMapping WindowType="Resummoned/ImageButton" TargetType="CEGUI/PushButton"  Renderer="Falagard/Button"       LookNFeel="Resummoned/ImageButton" />
+  <FalagardMapping WindowType="Resummoned/BackgroundButton" TargetType="CEGUI/PushButton"  Renderer="Falagard/Button"       LookNFeel="Resummoned/BackgroundButton" />
   <FalagardMapping WindowType="Resummoned/RadioButton" TargetType="CEGUI/RadioButton" Renderer="Falagard/ToggleButton" LookNFeel="Resummoned/Checkbox" />
   <FalagardMapping WindowType="Resummoned/FrameWindow"  TargetType="CEGUI/FrameWindow" Renderer="Falagard/FrameWindow"  LookNFeel="Resummoned/FrameWindow" />
   <FalagardMapping WindowType="Resummoned/Titlebar"     TargetType="CEGUI/Titlebar"    Renderer="Falagard/Titlebar"     LookNFeel="Resummoned/Titlebar" />

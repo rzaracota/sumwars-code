@@ -6201,6 +6201,172 @@ Brown/Orange:
     </WidgetLook>
 
 
+
+    <!--
+    ***************************************************
+        Resummoned/BackgroundButton
+        (based on the Image button  Look)
+    ***************************************************
+    -->
+    <WidgetLook name="Resummoned/BackgroundButton">
+        <PropertyDefinition name="NormalImage" initialValue="" redrawOnWrite="true" />
+        <!--<PropertyDefinition name="HoverImage" initialValue="set:Resummoned image:Button_BackgroundOnly" redrawOnWrite="true" />-->
+        <PropertyDefinition name="Image" initialValue="set:Resummoned image:EmptyGlyph24" redrawOnWrite="true" />
+        <PropertyDefinition name="PushedImage" initialValue="" redrawOnWrite="true" />
+        <PropertyDefinition name="DisabledImage" initialValue="" redrawOnWrite="true" />
+        <PropertyDefinition name="VertImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
+        <PropertyDefinition name="HorzImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
+        <PropertyDefinition name="BackgroundColours" initialValue="tl:00FFFFFF tr:FFFF0101 bl:00FFFFFF br:FFFF0101" type="ColourRect" redrawOnWrite="true" />
+        <PropertyDefinition name="BackgroundHighlightColour" initialValue="FFFF0000" />
+
+        
+        <ImagerySection name="border_section">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="RightEdge"><UnifiedDim scale="1" type="RightEdge" /></Dim>
+                    <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
+                </Area>
+                <Image type="TopLeftCorner" imageset="Resummoned" image="Rounded_Square_Small_TL" />
+                <Image type="LeftEdge" imageset="Resummoned" image="Rounded_Square_Small_L" />
+                <Image type="BottomLeftCorner" imageset="Resummoned" image="Rounded_Square_Small_BL" />
+                <Image type="TopEdge" imageset="Resummoned" image="Rounded_Square_Small_T" />
+                <Image type="Background" imageset="Resummoned" image="Rounded_Square_Small_M" />
+                <Image type="BottomEdge" imageset="Resummoned" image="Rounded_Square_Small_B" />
+                <Image type="TopRightCorner" imageset="Resummoned" image="Rounded_Square_Small_TR" />
+                <Image type="RightEdge" imageset="Resummoned" image="Rounded_Square_Small_R" />
+                <Image type="BottomRightCorner" imageset="Resummoned" image="Rounded_Square_Small_BR" />
+            </FrameComponent>
+        </ImagerySection>
+        
+        <ImagerySection name="glyph">
+            <ImageryComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <ImageDim imageset="Resummoned" image="Rounded_Square_Small_Calc_L" dimension="Width" />
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <ImageDim imageset="Resummoned" image="Rounded_Square_Small_Calc_T" dimension="Height" />
+                    </Dim>
+                    <Dim type="Width" >
+                        <UnifiedDim scale="1" type="Width" >
+                            <DimOperator op="Subtract">
+                                <ImageDim imageset="Resummoned" image="Rounded_Square_Small_Calc_L" dimension="Width">
+                                    <DimOperator op="Multiply">
+                                        <AbsoluteDim value="2" />
+                                    </DimOperator>
+                                </ImageDim>
+                            </DimOperator>
+                        </UnifiedDim>
+                    </Dim>
+                    <Dim type="Height" >
+                        <UnifiedDim scale="1" type="Height">
+                            <DimOperator op="Subtract">
+                                <ImageDim imageset="Resummoned" image="Rounded_Square_Small_Calc_T" dimension="Height">
+                                    <DimOperator op="Multiply">
+                                        <AbsoluteDim value="2" />
+                                    </DimOperator>
+                                </ImageDim>
+                            </DimOperator>
+                        </UnifiedDim>
+                    </Dim>
+                </Area>
+                <ImageProperty name="Image" />
+                <VertFormatProperty name="VertImageFormatting" />
+                <HorzFormatProperty name="HorzImageFormatting" />
+            </ImageryComponent>
+        </ImagerySection>
+        
+        <ImagerySection name="hover">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <ImageDim imageset="Resummoned" image="Rounded_Square_Small_Calc_L" dimension="Width" />
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <ImageDim imageset="Resummoned" image="Rounded_Square_Small_Calc_T" dimension="Height" />
+                    </Dim>
+                    <Dim type="Width" >
+                        <UnifiedDim scale="1" type="Width" >
+                            <DimOperator op="Subtract">
+                                <ImageDim imageset="Resummoned" image="Rounded_Square_Small_Calc_L" dimension="Width">
+                                    <DimOperator op="Multiply">
+                                        <AbsoluteDim value="2" />
+                                    </DimOperator>
+                                </ImageDim>
+                            </DimOperator>
+                        </UnifiedDim>
+                    </Dim>
+                    <Dim type="Height" >
+                        <UnifiedDim scale="1" type="Height">
+                            <DimOperator op="Subtract">
+                                <ImageDim imageset="Resummoned" image="Rounded_Square_Small_Calc_T" dimension="Height">
+                                    <DimOperator op="Multiply">
+                                        <AbsoluteDim value="2" />
+                                    </DimOperator>
+                                </ImageDim>
+                            </DimOperator>
+                        </UnifiedDim>
+                    </Dim>
+                </Area>
+                <Image type="TopLeftCorner" imageset="Resummoned" image="Button_Background_TL" />
+                <Image type="LeftEdge" imageset="Resummoned" image="Button_Background_L" />
+                <Image type="BottomLeftCorner" imageset="Resummoned" image="Button_Background_BL" />
+                <Image type="TopEdge" imageset="Resummoned" image="Button_Background_T" />
+                <Image type="Background" imageset="Resummoned" image="Button_Background_M" />
+                <Image type="BottomEdge" imageset="Resummoned" image="Button_Background_B" />
+                <Image type="TopRightCorner" imageset="Resummoned" image="Button_Background_TR" />
+                <Image type="RightEdge" imageset="Resummoned" image="Button_Background_R" />
+                <Image type="BottomRightCorner" imageset="Resummoned" image="Button_Background_BR" />
+
+            </FrameComponent>
+        </ImagerySection>
+        
+        <StateImagery name="Normal">
+            <Layer>
+<!--                <Section section="hover">
+                    <ColourRectProperty name="BackgroundColours" />
+                </Section>-->
+                <Section section="border_section" />
+                <Section section="glyph" />
+            </Layer>
+        </StateImagery>
+        
+        <StateImagery name="Hover">
+            <Layer>
+                <Section section="hover">
+                    <ColourProperty name="BackgroundHighlightColour" />
+                </Section>
+                <Section section="border_section" />
+                <Section section="glyph" />
+            </Layer>
+        </StateImagery>
+
+        <StateImagery name="Pushed">
+            <Layer>
+                <Section section="glyph" />
+                <Section section="border_section" />
+            </Layer>
+        </StateImagery>
+
+        <StateImagery name="PushedOff">
+            <Layer>
+                <Section section="glyph" />
+                <Section section="border_section" />
+            </Layer>
+        </StateImagery>
+
+        <StateImagery name="Disabled">
+            <Layer>
+                <Section section="glyph" />
+                <Section section="border_section" />
+            </Layer>
+        </StateImagery>
+    </WidgetLook>
+
+
+
     <!--
     ***************************************************
         Resummoned/ProgressBar

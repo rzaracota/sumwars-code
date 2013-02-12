@@ -813,11 +813,9 @@ bool Application::initCEGUI()
 	// Imagesets laden
 	CEGUI::ImagesetManager::getSingleton().create("skills.imageset");
 
-	//CEGUI::Texture &startScreenTex = CEGUI::System::getSingleton().getRenderer()->createTexture("startscreen.png", (CEGUI::utf8*)"GUI");
-    
 	try
 	{
-		CEGUI::ImagesetManager::getSingleton().createFromImageFile("startscreen.png", "startscreen.png");
+		CEGUI::ImagesetManager::getSingleton().createFromImageFile("SumWarsLogo.png", "SumWarsLogo.png");
 		CEGUI::ImagesetManager::getSingleton().createFromImageFile("worldMap.png","worldMap.png",(CEGUI::utf8*)"GUI");
 	}
 	catch (CEGUI::Exception& e)
