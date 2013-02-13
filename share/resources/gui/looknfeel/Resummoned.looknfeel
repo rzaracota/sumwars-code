@@ -6209,15 +6209,13 @@ Brown/Orange:
     ***************************************************
     -->
     <WidgetLook name="Resummoned/BackgroundButton">
-        <PropertyDefinition name="NormalImage" initialValue="" redrawOnWrite="true" />
-        <!--<PropertyDefinition name="HoverImage" initialValue="set:Resummoned image:Button_BackgroundOnly" redrawOnWrite="true" />-->
         <PropertyDefinition name="Image" initialValue="set:Resummoned image:EmptyGlyph24" redrawOnWrite="true" />
-        <PropertyDefinition name="PushedImage" initialValue="" redrawOnWrite="true" />
-        <PropertyDefinition name="DisabledImage" initialValue="" redrawOnWrite="true" />
         <PropertyDefinition name="VertImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
         <PropertyDefinition name="HorzImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
-        <PropertyDefinition name="BackgroundColours" initialValue="tl:00FFFFFF tr:FFFF0101 bl:00FFFFFF br:FFFF0101" type="ColourRect" redrawOnWrite="true" />
-        <PropertyDefinition name="BackgroundHighlightColour" initialValue="FFFF0000" />
+        <PropertyDefinition name="BackgroundColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" type="ColourRect" redrawOnWrite="true" />
+        <PropertyDefinition name="BackgroundHighlightColour" initialValue="FFFFFFFF" />
+        <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
+        <PropertyDefinition name="BorderColourHover" initialValue="FFCCB078" />
 
         
         <ImagerySection name="border_section">
@@ -6325,10 +6323,9 @@ Brown/Orange:
         
         <StateImagery name="Normal">
             <Layer>
-<!--                <Section section="hover">
-                    <ColourRectProperty name="BackgroundColours" />
-                </Section>-->
-                <Section section="border_section" />
+                <Section section="border_section">
+                    <ColourProperty name="BorderColour" />
+                </Section>
                 <Section section="glyph" />
             </Layer>
         </StateImagery>
@@ -6338,7 +6335,9 @@ Brown/Orange:
                 <Section section="hover">
                     <ColourProperty name="BackgroundHighlightColour" />
                 </Section>
-                <Section section="border_section" />
+                <Section section="border_section">
+                    <ColourProperty name="BorderColourHover" />
+                </Section>
                 <Section section="glyph" />
             </Layer>
         </StateImagery>
@@ -6346,21 +6345,27 @@ Brown/Orange:
         <StateImagery name="Pushed">
             <Layer>
                 <Section section="glyph" />
-                <Section section="border_section" />
+                <Section section="border_section">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
 
         <StateImagery name="PushedOff">
             <Layer>
                 <Section section="glyph" />
-                <Section section="border_section" />
+                <Section section="border_section">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
 
         <StateImagery name="Disabled">
             <Layer>
                 <Section section="glyph" />
-                <Section section="border_section" />
+                <Section section="border_section">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
     </WidgetLook>

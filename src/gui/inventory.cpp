@@ -251,6 +251,8 @@ void Inventory::update()
 	img =  win_mgr.getWindow("ArmorItemLabel");
 	it = equ->getItem(Equipement::ARMOR);
 	updateItemWindow(img,it,player);
+	
+	// TODO: replicate the next code block for each item (move into own function obviously)
 	if (img && it)
 	{
 		if (img->isPropertyPresent ("BackgroundHighlightColour"))

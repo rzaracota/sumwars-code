@@ -1,0 +1,151 @@
+<!--
+SWB - SumWarsBase
+SWB is licensed under the terms of the LGPL license.
+-->
+<!--
+version:      0.1
+Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
+-->
+
+<Falagard>
+
+
+    <!--
+    ***************************************************
+        SWB/NamedPanelHeader
+    ***************************************************
+    -->
+    <WidgetLook name="SWB/NamedPanelHeader">
+        <PropertyDefinition name="CaptionColour" initialValue="FFFFFFFF" redrawOnWrite="true" />
+        <Property name="NonClient" value="True" />
+        <PropertyDefinition name="GlyphImage" initialValue="" redrawOnWrite="true" />
+        
+        <PropertyDefinition name="GS_DarkerThemeColour" initialValue="FF940000" redrawOnWrite="true" />
+        <PropertyDefinition name="GS_LighterThemeColour" initialValue="FFFF0101" redrawOnWrite="true" />
+        <PropertyDefinition name="GS_MainThemeColour" initialValue="FFDC5F5F" redrawOnWrite="true" />
+        <PropertyDefinition name="GS_ShineColour" initialValue="B0FFFFFF" redrawOnWrite="true" />
+        <PropertyDefinition name="GS_DesaturatedThemeColour" initialValue="FFAD6E6E" redrawOnWrite="true" />
+        
+        <ImagerySection name="main_section">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="RightEdge"><UnifiedDim scale="1" type="RightEdge" /></Dim>
+                    <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
+                </Area>
+                <Image type="LeftEdge" imageset="SWB" image="PanelHeader_L" />
+                <Image type="Background" imageset="SWB" image="PanelHeader_M" />
+                <Image type="RightEdge" imageset="SWB" image="PanelHeader_R" />
+            </FrameComponent>
+        </ImagerySection>
+
+        <ImagerySection name="caption">
+            <TextComponent>
+                <Area>
+                    <Dim type="LeftEdge" >
+                        <ImageDim imageset="Resummoned" image="TitlebarBorder_L" dimension="Width">
+                            <DimOperator op="Add">
+                                <ImageDim imageset="Resummoned" image="EmptyGlyph24" dimension="Width" />
+                            </DimOperator>
+                        </ImageDim>
+                    </Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="Width" >
+                        <UnifiedDim scale="1" offset="-10" type="Width">
+                            <DimOperator op="Subtract">
+                                <UnifiedDim scale="1" type="Height" />
+                            </DimOperator>
+                        </UnifiedDim>
+                    </Dim>
+                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
+                </Area>
+                <ColourProperty name="CaptionColour" />
+                <VertFormat type="CentreAligned" />
+            </TextComponent>
+        </ImagerySection>
+
+        
+        <StateImagery name="Active">
+            <Layer>
+                <Section section="main_section" />
+                <Section section="caption" ></Section>
+            </Layer>
+        </StateImagery>
+        
+        <StateImagery name="Inactive">
+            <Layer>
+                <Section section="main_section" />
+                <Section section="caption" ></Section>
+            </Layer>
+        </StateImagery>
+        
+        <StateImagery name="Disabled">
+            <Layer>
+                <Section section="main_section" />
+                <Section section="caption" ></Section>
+            </Layer>
+        </StateImagery>
+    </WidgetLook>
+
+    <!--
+    ***************************************************
+        SWB/NamedPanel
+    ***************************************************
+    -->
+    <WidgetLook name="SWB/NamedPanel">
+        <PropertyDefinition name="ClientAreaColour" initialValue="FFFFFFFF" redrawOnWrite="true" />
+        <PropertyDefinition name="TitlebarHeight" initialValue="32" redrawOnWrite="true" />
+        <PropertyLinkDefinition name="CaptionColour" widget="__auto_titlebar__" targetProperty="CaptionColour" initialValue="FFFFFFFF" />
+        <PropertyLinkDefinition name="TitlebarFont" widget="__auto_titlebar__" targetProperty="Font" />
+        <PropertyLinkDefinition name="GlyphImage" widget="__auto_titlebar__" targetProperty="GlyphImage" />
+        <Property name="UnifiedMinSize" value="{{0.01,0},{0.01,0}}" />
+        <Property name="AutoRenderingSurface" value="True" />
+        <PropertyDefinition name="BackgroundPictureColour" initialValue="DFFFFFFF" redrawOnWrite="true"/>
+        
+        <Child type="SWB/NamedPanelHeader" nameSuffix="__auto_titlebar__">
+            <Area>
+                <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
+                <Dim type="Height" ><ImageDim imageset="SWB" image="PanelHeader_L" dimension="Height" /></Dim>
+            </Area>
+            <Property name="AlwaysOnTop" value="False" />
+        </Child>
+                
+        <ImagerySection name="main_section">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
+                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
+                </Area>
+                <Image type="TopLeftCorner" imageset="SWB" image="PanelBody_TL" />
+                <Image type="LeftEdge" imageset="SWB" image="PanelBody_L" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="PanelBody_BL" />
+                <Image type="TopEdge" imageset="SWB" image="PanelBody_T" />
+                <Image type="Background" imageset="SWB" image="PanelBody_M" />
+                <Image type="BottomEdge" imageset="SWB" image="PanelBody_B" />
+                <Image type="TopRightCorner" imageset="SWB" image="PanelBody_TR" />
+                <Image type="RightEdge" imageset="SWB" image="PanelBody_R" />
+                <Image type="BottomRightCorner" imageset="Resummoned" image="PanelBody_BR" />
+            </FrameComponent>
+        </ImagerySection>
+        
+        <StateImagery name="gus_normal">
+            <Layer>
+                <Section section="main_section">
+                    <ColourProperty name="BackgroundPictureColour" />
+                </Section>
+            </Layer>
+            <Layer>
+                <Section section="withtitle_frame" />
+            </Layer>
+        </StateImagery>
+
+    </WidgetLook>
+
+        
+</Falagard>
+

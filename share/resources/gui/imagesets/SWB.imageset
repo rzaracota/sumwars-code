@@ -1,0 +1,33 @@
+<!--
+SWB - SumWarsBase
+SWB is licensed under the terms of the LGPL license.
+-->
+<!--
+version:      0.1
+Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
+-->
+<Imageset Name="SWB" Imagefile="SWB.png" NativeHorzRes="1920" NativeVertRes="1080" AutoScaled="true" >
+
+  <!-- Suffix Legend: 
+    TL = top left; L = left; BL = bottom left; 
+    T = top; M = middle; B = bottom; 
+    TR = top right; R = right; BR = bottom right
+  -->
+
+  <!-- Simple Panel border --> <!-- note: shared with WindowTopLeft -->
+  <Image Name="PanelHeader_L" XPos="0" YPos="0" Width="180" Height="95" />
+  <Image Name="PanelHeader_M" XPos="180" YPos="0" Width="177" Height="95" />
+  <Image Name="PanelHeader_R" XPos="357" YPos="0" Width="180" Height="95" />
+
+  <Image Name="PanelBody_TL" XPos="0" YPos="0" Width="25" Height="10" />
+  <Image Name="PanelBody_L" XPos="0" YPos="10" Width="25" Height="785" />
+  <Image Name="PanelBody_BL" XPos="0" YPos="795" Width="25" Height="30" />
+  <Image Name="PanelBody_T" XPos="25" YPos="0" Width="490" Height="10" />
+  <Image Name="PanelBody_M" XPos="25" YPos="10" Width="490" Height="790" />
+  <Image Name="PanelBody_B" XPos="25" YPos="795" Width="490" Height="30" />
+  <Image Name="PanelBody_TR" XPos="515" YPos="0" Width="25" Height="10" />
+  <Image Name="PanelBody_R" XPos="515" YPos="10" Width="25" Height="785" />
+  <Image Name="PanelBody_BR" XPos="515" YPos="795" Width="25" Height="30" />
+
+  
+</Imageset>
