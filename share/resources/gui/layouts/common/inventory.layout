@@ -1,5 +1,6 @@
 <GUILayout >
-    <Window Type="Resummoned/StaticImage" Name="Inventory" >
+    <Window Type="SWB/NamedPanel" Name="Inventory" >
+    <!--<Window Type="Resummoned/StaticImage" Name="Inventory" >-->
         <Property Name="Image" Value="set:Inventory image:InvBackground" />
         <Property Name="FrameEnabled" Value="False" />
         <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
@@ -510,7 +511,7 @@
         <!-- The gear items -->
         <Window Type="Resummoned/BackgroundButton" Name="HelmetItemLabel" >
             <Property Name="FrameEnabled" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.0554001,0},{0.157971,0},{0.22596,0},{0.272371,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0554001,0},{0.127971,0},{0.22596,0},{0.242371,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
         </Window>
         <Window Type="Resummoned/BackgroundButton" Name="ArmorItemLabel" >

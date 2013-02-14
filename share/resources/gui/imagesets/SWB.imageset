@@ -19,15 +19,15 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="PanelHeader_M" XPos="180" YPos="0" Width="177" Height="95" />
   <Image Name="PanelHeader_R" XPos="357" YPos="0" Width="180" Height="95" />
 
-  <Image Name="PanelBody_TL" XPos="0" YPos="0" Width="25" Height="10" />
-  <Image Name="PanelBody_L" XPos="0" YPos="10" Width="25" Height="785" />
-  <Image Name="PanelBody_BL" XPos="0" YPos="795" Width="25" Height="30" />
-  <Image Name="PanelBody_T" XPos="25" YPos="0" Width="490" Height="10" />
-  <Image Name="PanelBody_M" XPos="25" YPos="10" Width="490" Height="790" />
-  <Image Name="PanelBody_B" XPos="25" YPos="795" Width="490" Height="30" />
-  <Image Name="PanelBody_TR" XPos="515" YPos="0" Width="25" Height="10" />
-  <Image Name="PanelBody_R" XPos="515" YPos="10" Width="25" Height="785" />
-  <Image Name="PanelBody_BR" XPos="515" YPos="795" Width="25" Height="30" />
+  <Image Name="PanelBody_TL" XPos="0" YPos="95" Width="25" Height="20" />
+  <Image Name="PanelBody_L" XPos="0" YPos="115" Width="25" Height="170" />
+  <Image Name="PanelBody_BL" XPos="0" YPos="285" Width="25" Height="34" />
+  <Image Name="PanelBody_T" XPos="25" YPos="95" Width="490" Height="10" />
+  <Image Name="PanelBody_M" XPos="25" YPos="115" Width="490" Height="170" />
+  <Image Name="PanelBody_B" XPos="25" YPos="285" Width="490" Height="34" />
+  <Image Name="PanelBody_TR" XPos="515" YPos="95" Width="25" Height="10" />
+  <Image Name="PanelBody_R" XPos="515" YPos="115" Width="25" Height="170" />
+  <Image Name="PanelBody_BR" XPos="515" YPos="285" Width="25" Height="34" />
 
   
 </Imageset>
