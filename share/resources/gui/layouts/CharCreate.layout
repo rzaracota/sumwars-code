@@ -8,8 +8,8 @@
         <Property Name="BackgroundEnabled" Value="False" />
         <Window Type="TaharezLook/StaticText" Name="CharNameLabel" >
             <Property Name="Text" Value="Name" />
-            <Property Name="HorzExtent" Value="41" />
-            <Property Name="VertExtent" Value="25.5702" />
+            <!--<Property Name="HorzExtent" Value="41" />
+            <Property Name="VertExtent" Value="25.5702" />-->
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="HorzFormatting" Value="HorzCentred" />
             <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.04,0},{0.14,0},{0.096,0}}" />
@@ -21,8 +21,8 @@
         </Window>
         <Window Type="TaharezLook/StaticText" Name="CharClassLabel" >
             <Property Name="Text" Value="Class" />
-            <Property Name="HorzExtent" Value="42" />
-            <Property Name="VertExtent" Value="25.5702" />
+            <!--<Property Name="HorzExtent" Value="42" />
+            <Property Name="VertExtent" Value="25.5702" />-->
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="HorzFormatting" Value="HorzCentred" />
             <Property Name="UnifiedAreaRect" Value="{{0.111,0},{0.14,0},{0.25,0},{0.194,0}}" />

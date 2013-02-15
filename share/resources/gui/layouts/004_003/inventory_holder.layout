@@ -1,6 +1,5 @@
 <GUILayout >
     <Window Type="Resummoned/StaticImage" Name="Inventory_Holder" >
-        <Property Name="Image" Value="set:Inventory image:InvBackground" />
         <Property Name="FrameEnabled" Value="False" />
         <Property Name="UnifiedAreaRect" Value="{{0.565,0},{0.0,0},{1.0,0},{0.84,0}}" />
         <Property Name="BackgroundEnabled" Value="False" />

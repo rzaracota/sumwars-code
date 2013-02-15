@@ -18,6 +18,14 @@ Last change:  $LastChangedDate: 2012-12-25 20:55:19 +0200 (Ma, 25 dec. 2012) $
 
   <LookNFeel Filename="SWB.looknfeel" />
   <WindowRendererSet Filename="CEGUIFalagardWRBase" />
-  <FalagardMapping WindowType="SWB/NamedPanelHeader"      TargetType="DefaultWindow"  Renderer="Falagard/Button"       LookNFeel="SWB/NamedPanelHeader" />
-  <FalagardMapping WindowType="SWB/NamedPanel"      TargetType="DefaultWindow"  Renderer="Falagard/Button"       LookNFeel="SWB/NamedPanel" />
+  <FalagardMapping WindowType="SWB/NamedPanelHeader"      TargetType="DefaultWindow"  Renderer="Falagard/Default"       LookNFeel="SWB/NamedPanelHeader" />
+  <FalagardMapping WindowType="SWB/NamedPanel"      TargetType="DefaultWindow"  Renderer="Falagard/Default"       LookNFeel="SWB/NamedPanel" />
+  <FalagardMapping WindowType="SWB/ImageButton" TargetType="CEGUI/PushButton"  Renderer="Falagard/Button"       LookNFeel="SWB/ImageButton" />
+  <FalagardMapping WindowType="SWB/StaticText"  TargetType="DefaultWindow" Renderer="Falagard/StaticText"  LookNFeel="SWB/StaticText" />
+  <FalagardMapping WindowType="SWB/GlyphButton" TargetType="CEGUI/PushButton"  Renderer="Falagard/Button"       LookNFeel="SWB/GlyphButton" />
+  <FalagardMapping WindowType="SWB/VerticalScrollbar"   TargetType="CEGUI/Scrollbar" Renderer="Falagard/Scrollbar" LookNFeel="SWB/VerticalScrollbar" />
+  <FalagardMapping WindowType="SWB/HorizontalScrollbar" TargetType="CEGUI/Scrollbar" Renderer="Falagard/Scrollbar" LookNFeel="SWB/HorizontalScrollbar" />
+  <FalagardMapping WindowType="SWB/VerticalScrollbarThumb"   TargetType="CEGUI/Thumb" Renderer="Falagard/Button" LookNFeel="SWB/VerticalScrollbarThumb" />
+  <FalagardMapping WindowType="SWB/HorizontalScrollbarThumb" TargetType="CEGUI/Thumb" Renderer="Falagard/Button" LookNFeel="SWB/HorizontalScrollbarThumb" />
+  <FalagardMapping windowType="SWB/Label" targetType="DefaultWindow" renderer="Falagard/Default" lookNFeel="SWB/Label" />
 </GUIScheme>

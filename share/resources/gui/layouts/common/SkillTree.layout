@@ -16,8 +16,8 @@
         <Window Type="TaharezLook/StaticText" Name="SkillpointsLabel" >
             <Property Name="Text" Value="Inventory" />
             <Property Name="TextColours" Value="tl:FFA2CD5A tr:FFA2CD5A bl:FFA2CD5A br:FFA2CD5A" />
-            <Property Name="HorzExtent" Value="77" />
-            <Property Name="VertExtent" Value="25.5702" />
+            <!--<Property Name="HorzExtent" Value="77" />
+            <Property Name="VertExtent" Value="25.5702" />-->
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="InheritsAlpha" Value="False" />
             <Property Name="ClippedByParent" Value="False" />
@@ -27,8 +27,8 @@
         </Window>
         <Window Type="TaharezLook/StaticText" Name="SkillpointsValueLabel" >
             <Property Name="Text" Value="Inventory" />
-            <Property Name="HorzExtent" Value="77" />
-            <Property Name="VertExtent" Value="25.5702" />
+            <!--<Property Name="HorzExtent" Value="77" />
+            <Property Name="VertExtent" Value="25.5702" />-->
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="InheritsAlpha" Value="False" />
             <Property Name="ClippedByParent" Value="False" />
@@ -39,8 +39,8 @@
         <Window Type="TaharezLook/StaticText" Name="NextSkillpointsLabel" >
             <Property Name="Text" Value="Inventory" />
             <Property Name="TextColours" Value="tl:FF458B00 tr:FF458B00 bl:FF458B00 br:FF458B00" />
-            <Property Name="HorzExtent" Value="77" />
-            <Property Name="VertExtent" Value="25.5702" />
+            <!--<Property Name="HorzExtent" Value="77" />
+            <Property Name="VertExtent" Value="25.5702" />-->
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="InheritsAlpha" Value="False" />
             <Property Name="ClippedByParent" Value="False" />
@@ -50,8 +50,8 @@
         </Window>
         <Window Type="TaharezLook/StaticText" Name="NextSkillpointsValueLabel" >
             <Property Name="Text" Value="Inventory" />
-            <Property Name="HorzExtent" Value="77" />
-            <Property Name="VertExtent" Value="25.5702" />
+            <!--<Property Name="HorzExtent" Value="77" />
+            <Property Name="VertExtent" Value="25.5702" />-->
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="InheritsAlpha" Value="False" />
             <Property Name="ClippedByParent" Value="False" />
@@ -68,8 +68,8 @@
         </Window>
         <Window Type="TaharezLook/StaticText" Name="SkilltreeLabel" >
             <Property Name="Text" Value="SkillTree" />
-            <Property Name="HorzExtent" Value="68" />
-            <Property Name="VertExtent" Value="25.5702" />
+            <!--<Property Name="HorzExtent" Value="68" />
+            <Property Name="VertExtent" Value="25.5702" />-->
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="HorzFormatting" Value="HorzCentred" />
             <Property Name="UnifiedAreaRect" Value="{{0.351329,0},{0.035,0},{0.646428,0},{0.06,0}}" />

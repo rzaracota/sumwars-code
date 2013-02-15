@@ -1,31 +1,29 @@
 <GUILayout >
     <Window Type="SWB/NamedPanel" Name="Inventory" >
-    <!--<Window Type="Resummoned/StaticImage" Name="Inventory" >-->
-        <Property Name="Image" Value="set:Inventory image:InvBackground" />
-        <Property Name="FrameEnabled" Value="False" />
         <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
-        <Property Name="BackgroundEnabled" Value="False" />
         <Property Name="Alpha" Value="1" />
-        
+        <Property Name="Text" Value="Title of Frame Window" />
+        <Property Name="TitlebarFont" Value="DejaVuSerif-HD-12" />
+        <Property Name="CloseButtonAlignment" Value="0" />
         <!-- The button that closes the inventory -->
-        <Window Type="Resummoned/ImageButton" Name="InvCloseButton" >
-            <Property Name="HoverImage" Value="set:Misc image:CloseBtnHovered" />
-            <Property Name="NormalImage" Value="set:Misc image:CloseBtnReleased" />
-            <Property Name="DisabledImage" Value="set:Misc image:CloseBtnReleased" />
-            <Property Name="PushedImage" Value="set:Misc image:CloseBtnPressed" />
+        <!--
+        <Window Type="SWB/ImageButton" Name="InvCloseButton" >
+            <Property Name="HoverImage" Value="set:SWB image:PanelCloseButton_On" />
+            <Property Name="PushedImage" Value="set:SWB image:PanelCloseButton_On" />
+            <Property Name="NormalImage" Value="set:SWB image:PanelCloseButton_Off" />
+            <Property Name="DisabledImage" Value="set:SWB image:PanelCloseButton_Off" />
             <Property Name="UnifiedAreaRect" Value="{{0.0274257,0},{0.0674265,0},{0.10232,0},{0.108328,0}}" />
         </Window>
+        -->
         
         <!-- THe label of the inventory... Guess what it says -->
-        <Window Type="Resummoned/StaticText" Name="InvLabel" >
+<!--        <Window Type="Resummoned/StaticText" Name="InvLabel" >
             <Property Name="Text" Value="Inventory" />
-            <Property Name="HorzExtent" Value="73" />
-            <Property Name="VertExtent" Value="23.7453" />
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="HorzFormatting" Value="HorzCentred" />
             <Property Name="UnifiedAreaRect" Value="{{0.376,0},{0.035,0},{0.624,0},{0.06,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
-        </Window>
+        </Window>-->
         
         <!-- The gold coins icon -->
         <Window Type="Resummoned/StaticImage" Name="GoldStaticImage" >
@@ -42,8 +40,8 @@
         <!-- The amount of gold -->
         <Window Type="Resummoned/StaticText" Name="GoldValueLabel" >
             <Property Name="Text" Value="0" />
-            <Property Name="HorzExtent" Value="8" />
-            <Property Name="VertExtent" Value="23.7453" />
+            <!--<Property Name="HorzExtent" Value="8" />
+            <Property Name="VertExtent" Value="23.7453" />-->
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="UnifiedAreaRect" Value="{{0.794937,0},{0.702164,0},{0.95633,0},{0.731385,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
@@ -74,154 +72,94 @@
             <Property Name="BackgroundEnabled" Value="False" />
             
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem0Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{0.1,0},{0.33,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem1Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.0,0},{0.2,0},{0.33,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem2Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.0,0},{0.3,0},{0.33,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem3Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.3,0},{0.0,0},{0.4,0},{0.33,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem4Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.4,0},{0.0,0},{0.5,0},{0.33,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem5Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.5,0},{0.0,0},{0.6,0},{0.33,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem6Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.6,0},{0.0,0},{0.7,0},{0.33,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem7Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.7,0},{0.0,0},{0.8,0},{0.33,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem8Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.8,0},{0.0,0},{0.9,0},{0.33,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem9Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.9,0},{0.0,0},{1.0,0},{0.33,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem10Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.33,0},{0.1,0},{0.66,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem11Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.33,0},{0.2,0},{0.66,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem12Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.33,0},{0.3,0},{0.66,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem13Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.3,0},{0.33,0},{0.4,0},{0.66,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem14Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.4,0},{0.33,0},{0.5,0},{0.66,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem15Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.5,0},{0.33,0},{0.6,0},{0.66,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem16Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.6,0},{0.33,0},{0.7,0},{0.66,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem17Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.7,0},{0.33,0},{0.8,0},{0.66,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem18Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.8,0},{0.33,0},{0.9,0},{0.66,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem19Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.9,0},{0.33,0},{1.0,0},{0.66,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem20Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.66,0},{0.1,0},{1.0,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem21Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.66,0},{0.2,0},{1.0,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem22Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.66,0},{0.3,0},{1.0,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem23Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.3,0},{0.66,0},{0.4,0},{1.0,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem24Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.4,0},{0.66,0},{0.5,0},{1.0,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem25Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.5,0},{0.66,0},{0.6,0},{1.0,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem26Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.6,0},{0.66,0},{0.7,0},{1.0,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem27Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.7,0},{0.66,0},{0.8,0},{1.0,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem28Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.8,0},{0.66,0},{0.9,0},{1.0,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="SmallItem29Label" >
-                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.9,0},{0.66,0},{1.0,0},{1.0,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             
             <Window Type="Resummoned/TimerProgressBar" Name="SmallItem0ProgressBar" >
@@ -510,47 +448,31 @@
         
         <!-- The gear items -->
         <Window Type="Resummoned/BackgroundButton" Name="HelmetItemLabel" >
-            <Property Name="FrameEnabled" Value="False" />
             <Property Name="UnifiedAreaRect" Value="{{0.0554001,0},{0.127971,0},{0.22596,0},{0.242371,0}}" />
-            <Property Name="BackgroundEnabled" Value="False" />
         </Window>
         <Window Type="Resummoned/BackgroundButton" Name="ArmorItemLabel" >
-            <Property Name="FrameEnabled" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.0550734,0},{0.275102,0},{0.227838,0},{0.393622,0}}" />
-            <Property Name="BackgroundEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0550734,0},{0.245102,0},{0.227838,0},{0.363622,0}}" />
         </Window>
         <Window Type="Resummoned/BackgroundButton" Name="WeaponItemLabel" >
-            <Property Name="FrameEnabled" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.0552841,0},{0.396172,0},{0.225939,0},{0.57396,0}}" />
-            <Property Name="BackgroundEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0552841,0},{0.366172,0},{0.225939,0},{0.54396,0}}" />
         </Window>
         <Window Type="Resummoned/BackgroundButton" Name="RingRightItemLabel" >
-            <Property Name="FrameEnabled" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.145274,0},{0.577591,0},{0.2254,0},{0.635469,0}}" />
-            <Property Name="BackgroundEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.145274,0},{0.547591,0},{0.2254,0},{0.605469,0}}" />
         </Window>
         <Window Type="Resummoned/BackgroundButton" Name="RingLeftItemLabel" >
-            <Property Name="FrameEnabled" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.779663,0},{0.572756,0},{0.859695,0},{0.633591,0}}" />
-            <Property Name="BackgroundEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.779663,0},{0.542756,0},{0.859695,0},{0.603591,0}}" />
         </Window>
         <Window Type="Resummoned/BackgroundButton" Name="ShieldItemLabel" >
-            <Property Name="FrameEnabled" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.783533,0},{0.394762,0},{0.956203,0},{0.573852,0}}" />
-            <Property Name="BackgroundEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.783533,0},{0.364762,0},{0.956203,0},{0.543852,0}}" />
         </Window>
         <Window Type="Resummoned/BackgroundButton" Name="AmuletItemLabel" >
-            <Property Name="FrameEnabled" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.78114,0},{0.214387,0},{0.863376,0},{0.278037,0}}" />
-            <Property Name="BackgroundEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.78114,0},{0.184387,0},{0.863376,0},{0.248037,0}}" />
         </Window>
         <Window Type="Resummoned/BackgroundButton" Name="GlovesItemLabel" >
-            <Property Name="FrameEnabled" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.782974,0},{0.275933,0},{0.953249,0},{0.393114,0}}" />
-            <Property Name="BackgroundEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.782974,0},{0.245933,0},{0.953249,0},{0.363114,0}}" />
         </Window>
         <Window Type="Resummoned/StaticImage" Name="BorderHorzS" >
-            <Property Name="Image" Value="set:Inventory image:BorderHorz" />
+            <!--<Property Name="Image" Value="set:Inventory image:BorderHorz" />-->
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="UnifiedAreaRect" Value="{{0.03789,0},{0.736443,0},{0.265189,0},{0.738165,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
@@ -570,8 +492,8 @@
         <Window Type="Resummoned/StaticText" Name="SmallTabButton" >
             <Property Name="Text" >Small
 </Property>
-            <Property Name="HorzExtent" Value="42" />
-            <Property Name="VertExtent" Value="23.7453" />
+            <!--<Property Name="HorzExtent" Value="42" />
+            <Property Name="VertExtent" Value="23.7453" />-->
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="HorzFormatting" Value="WordWrapCentred" />
             <Property Name="UnifiedAreaRect" Value="{{0.0545076,0},{0.661132,0},{0.253806,0},{0.692978,0}}" />
@@ -580,8 +502,8 @@
         <Window Type="Resummoned/StaticText" Name="MediumTabButton" >
             <Property Name="Text" >Medium
 </Property>
-            <Property Name="HorzExtent" Value="54" />
-            <Property Name="VertExtent" Value="23.7453" />
+            <!--<Property Name="HorzExtent" Value="54" />
+            <Property Name="VertExtent" Value="23.7453" />-->
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="HorzFormatting" Value="WordWrapCentred" />
             <Property Name="UnifiedAreaRect" Value="{{0.278658,0},{0.661269,0},{0.477957,0},{0.693114,0}}" />
@@ -590,8 +512,8 @@
         <Window Type="Resummoned/StaticText" Name="BigTabButton" >
             <Property Name="Text" >Big
 </Property>
-            <Property Name="HorzExtent" Value="20" />
-            <Property Name="VertExtent" Value="23.7453" />
+            <!--<Property Name="HorzExtent" Value="20" />
+            <Property Name="VertExtent" Value="23.7453" />-->
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="HorzFormatting" Value="WordWrapCentred" />
             <Property Name="UnifiedAreaRect" Value="{{0.507217,0},{0.660159,0},{0.706516,0},{0.692004,0}}" />

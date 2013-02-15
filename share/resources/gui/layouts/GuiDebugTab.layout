@@ -32,7 +32,7 @@
         </Window>
         <Window Type="TaharezLook/StaticText" Name="xSizeLabel" >
             <Property Name="Text" Value="0" />
-            <Property Name="HorzExtent" Value="9" />
+            <!--<Property Name="HorzExtent" Value="9" />-->
             <Property Name="VertExtent" Value="23.1724" />
             <Property Name="InheritsAlpha" Value="False" />
             <Property Name="UnifiedAreaRect" Value="{{0.332627,0},{0.197399,0},{0.641949,0},{0.275522,0}}" />

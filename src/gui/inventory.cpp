@@ -210,8 +210,29 @@ Inventory::Inventory (Document* doc)
 	label = win_mgr.getWindow("BigTabButton");
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onSwitchTabClicked, this));
 	
-	label = win_mgr.getWindow("InvCloseButton");
-	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onCloseButtonClicked, this));
+	if (win_mgr.isWindowPresent ("InvCloseButton"))
+	{
+		label = win_mgr.getWindow("InvCloseButton");
+		if (label)
+		{
+			label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onCloseButtonClicked, this));
+		}
+	}
+	else
+	{
+		if (win_mgr.isWindowPresent ("Inventory__auto_close_panel_button__"))
+		{
+			label = win_mgr.getWindow ("Inventory__auto_close_panel_button__");
+			if (label)
+			{
+				label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onCloseButtonClicked, this));
+			}
+		}
+		else
+		{
+			DEBUG ("No close button INSIDE the inventory. Will only be closable via hotkeys and external buttons");
+		}
+	}
 	
 	createAnimations();
 
@@ -443,8 +464,19 @@ void Inventory::updateTranslation()
 	label = win_mgr.getWindow("GoldDropButton");
 	label->setText((CEGUI::utf8*) gettext("Drop:"));
 	
-	label = win_mgr.getWindow("InvLabel");
-	label->setText((CEGUI::utf8*) gettext("Inventory"));
+	if (win_mgr.isWindowPresent ("InvLabel"))
+	{
+		label = win_mgr.getWindow("InvLabel");
+		label->setText((CEGUI::utf8*) gettext("Inventory"));
+	}
+	else
+	{
+		label = win_mgr.getWindow ("Inventory__auto_title_text__");
+		if (label)
+		{
+			label->setText((CEGUI::utf8*) gettext("Inventory"));
+		}
+	}
 	
 	label = win_mgr.getWindow("SmallTabButton");
 	label->setText((CEGUI::utf8*) gettext("Small"));

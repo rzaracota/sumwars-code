@@ -8,8 +8,8 @@
         <Property Name="BackgroundEnabled" Value="False" />
         <Window Type="TaharezLook/StaticText" Name="Quests" >
             <Property Name="Text" Value="Quests" />
-            <Property Name="HorzExtent" Value="52" />
-            <Property Name="VertExtent" Value="25.5702" />
+            <!--<Property Name="HorzExtent" Value="52" />
+            <Property Name="VertExtent" Value="25.5702" />-->
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="HorzFormatting" Value="HorzCentred" />
             <Property Name="UnifiedAreaRect" Value="{{0.376,0},{0.035,0},{0.624,0},{0.06,0}}" />
