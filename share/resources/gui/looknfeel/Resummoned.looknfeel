@@ -804,15 +804,15 @@ Brown/Orange:
                     <Dim type="RightEdge"><UnifiedDim scale="1" type="RightEdge" /></Dim>
                     <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
                 </Area>
-                <Image type="TopLeftCorner" imageset="Resummoned" image="SimplePanelBck_TL" />
-                <Image type="LeftEdge" imageset="Resummoned" image="SimplePanelBck_L" />
-                <Image type="BottomLeftCorner" imageset="Resummoned" image="SimplePanelBck_BL" />
-                <Image type="TopEdge" imageset="Resummoned" image="SimplePanelBck_T" />
-                <Image type="Background" imageset="Resummoned" image="SimplePanelBck_M" />
-                <Image type="BottomEdge" imageset="Resummoned" image="SimplePanelBck_B" />
-                <Image type="TopRightCorner" imageset="Resummoned" image="SimplePanelBck_TR" />
-                <Image type="RightEdge" imageset="Resummoned" image="SimplePanelBck_R" />
-                <Image type="BottomRightCorner" imageset="Resummoned" image="SimplePanelBck_BR" />
+                <Image type="TopLeftCorner" imageset="Resummoned" image="Static_TL" />
+                <Image type="LeftEdge" imageset="Resummoned" image="Static_L" />
+                <Image type="BottomLeftCorner" imageset="Resummoned" image="Static_BL" />
+                <Image type="TopEdge" imageset="Resummoned" image="Static_T" />
+                <Image type="Background" imageset="Resummoned" image="Static_M" />
+                <Image type="BottomEdge" imageset="Resummoned" image="Static_B" />
+                <Image type="TopRightCorner" imageset="Resummoned" image="Static_TR" />
+                <Image type="RightEdge" imageset="Resummoned" image="Static_R" />
+                <Image type="BottomRightCorner" imageset="Resummoned" image="Static_BR" />
             </FrameComponent>
             <ImageryComponent>
                 <Area>

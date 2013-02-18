@@ -179,8 +179,24 @@ CharInfo::CharInfo (Document* doc)
 	label = win_mgr.getWindow("ResistIceValueLabel");
 	label->setText("0");
 	
-	label = win_mgr.getWindow("CharInfoCloseButton");
-	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&CharInfo::onCloseButtonClicked, this));
+	if (win_mgr.isWindowPresent ("CharInfoCloseButton"))
+	{
+		label = win_mgr.getWindow("CharInfoCloseButton");
+		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&CharInfo::onCloseButtonClicked, this));
+	}
+	else
+	{
+		// If the panel also has an auto-close button, connect it to the Cancel/Abort event.
+		if (win_mgr.isWindowPresent ("CharInfo__auto_close_panel_button__"))
+		{
+			label = win_mgr.getWindow ("CharInfo__auto_close_panel_button__");
+			if (label)
+			{
+				label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&CharInfo::onCloseButtonClicked, this));
+			}
+		}
+	}
+
 
 	updateTranslation();
 }
@@ -203,13 +219,26 @@ CharInfo::CharInfo (Document* doc)
 	std::ostringstream out_stream;
 
 	// Label Name
-	label =  win_mgr.getWindow("NameLabel");
+	// Prepare the name
 	out_stream.str("");
 	out_stream.str(player->getName().getRawText());
-	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
+	if (win_mgr.isWindowPresent ("NameLabel"))
 	{
-		label->setText((CEGUI::utf8*) out_stream.str().c_str());
+		label =  win_mgr.getWindow("NameLabel");
+		if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
+		{
+			label->setText((CEGUI::utf8*) out_stream.str().c_str());
+		}
 	}
+	else if (win_mgr.isWindowPresent ("CharInfo"))
+	{
+		label =  win_mgr.getWindow("CharInfo");
+		if (label->isPropertyPresent ("TitleText"))
+		{
+			label->setProperty ("TitleText", (CEGUI::utf8*) out_stream.str().c_str());
+		}
+	}
+
 
 	// Label Klasse
 	label =  win_mgr.getWindow("ClassValueLabel");
@@ -615,8 +644,19 @@ void CharInfo::updateTranslation()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 
-	label = win_mgr.getWindow("NameLabel");
-	label->setText((CEGUI::utf8*) gettext("Name"));
+	if (win_mgr.isWindowPresent ("NameLabel"))
+	{
+		label =  win_mgr.getWindow("NameLabel");
+		label->setText((CEGUI::utf8*) gettext("Name"));
+	}
+	else if (win_mgr.isWindowPresent ("CharInfo"))
+	{
+		label =  win_mgr.getWindow("CharInfo");
+		if (label->isPropertyPresent ("TitleText"))
+		{
+			label->setProperty ("TitleText", (CEGUI::utf8*) gettext("Name"));
+		}
+	}
 	
 	label = win_mgr.getWindow("Playerinfo");
 	label->setText((CEGUI::utf8*) gettext("Player info"));

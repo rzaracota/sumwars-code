@@ -28,4 +28,6 @@ Last change:  $LastChangedDate: 2012-12-25 20:55:19 +0200 (Ma, 25 dec. 2012) $
   <FalagardMapping WindowType="SWB/VerticalScrollbarThumb"   TargetType="CEGUI/Thumb" Renderer="Falagard/Button" LookNFeel="SWB/VerticalScrollbarThumb" />
   <FalagardMapping WindowType="SWB/HorizontalScrollbarThumb" TargetType="CEGUI/Thumb" Renderer="Falagard/Button" LookNFeel="SWB/HorizontalScrollbarThumb" />
   <FalagardMapping windowType="SWB/Label" targetType="DefaultWindow" renderer="Falagard/Default" lookNFeel="SWB/Label" />
+  <FalagardMapping WindowType="SWB/SimplePanelFrame"      TargetType="DefaultWindow"  Renderer="Falagard/Button"       LookNFeel="SWB/SimplePanelFrame" />
+  <FalagardMapping WindowType="SWB/RoundedPanelFrame"      TargetType="DefaultWindow"  Renderer="Falagard/Button"       LookNFeel="SWB/RoundedPanelFrame" />
 </GUIScheme>

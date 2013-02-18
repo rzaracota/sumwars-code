@@ -20,7 +20,6 @@ SaveExitWindow::SaveExitWindow (Document* doc)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
-	//CEGUI::Window* label; // 2011.10.23: found as unused.
 	
 	CEGUI::FrameWindow* save_exit = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("SaveExitWindow.layout");
 	m_window = save_exit;
@@ -30,6 +29,16 @@ SaveExitWindow::SaveExitWindow (Document* doc)
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("GameExitAbortButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SaveExitWindow ::onExitGameAborted, this));
+
+	// If the panel also has an auto-close button, connect it to the Cancel/Abort event.
+	if (win_mgr.isWindowPresent ("SaveExitWindow__auto_close_panel_button__"))
+	{
+		btn = static_cast<CEGUI::PushButton*>( win_mgr.getWindow ("SaveExitWindow__auto_close_panel_button__"));
+		if (btn)
+		{
+			btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SaveExitWindow::onExitGameAborted, this));
+		}
+	}
 	
 	updateTranslation();
 }
@@ -49,8 +58,20 @@ void SaveExitWindow::updateTranslation()
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "GameExitAbortButton"));
 	btn->setText((CEGUI::utf8*) gettext("Abort"));
 	
-	label = win_mgr.getWindow("SaveExitLabel");
-	label->setText((CEGUI::utf8*) gettext("Save and Exit?"));
+	if (win_mgr.isWindowPresent ("SaveExitLabel"))
+	{
+		label = win_mgr.getWindow("SaveExitLabel");
+		label->setText((CEGUI::utf8*) gettext("Save and Exit?"));
+	}
+	else if (win_mgr.isWindowPresent ("SaveExitWindow"))
+	{
+		label = win_mgr.getWindow ("SaveExitWindow");
+		if (label->isPropertyPresent ("TitleText"))
+		{
+			label->setProperty ("TitleText", (CEGUI::utf8*) gettext("Save and Exit?"));
+		}
+	}
+
 }
 
 

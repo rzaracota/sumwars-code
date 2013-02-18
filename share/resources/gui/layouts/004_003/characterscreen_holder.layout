@@ -1,8 +1,8 @@
 <GUILayout >
-    <Window Type="TaharezLook/StaticImage" Name="CharInfo_Holder" >
-        <Property Name="Image" Value="set:CharScreen image:Background" />
+    <Window Type="Resummoned/StaticImage" Name="CharInfo_Holder" >
         <Property Name="FrameEnabled" Value="False" />
-        <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{0.435,0},{0.84,0}}" />
+        <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{0.463,0},{0.86,0}}" />
         <Property Name="BackgroundEnabled" Value="False" />
+        <Property Name="Alpha" Value="1" />
     </Window>
 </GUILayout>

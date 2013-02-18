@@ -1,29 +1,19 @@
 <GUILayout >
-    <Window Type="TaharezLook/StaticImage" Name="CharInfo" >
-        <Property Name="Image" Value="set:CharScreen image:Background" />
+    <Window Type="SWB/NamedPanel" Name="CharInfo" >
         <Property Name="FrameEnabled" Value="False" />
         <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
         <Property Name="BackgroundEnabled" Value="False" />
+        <Property Name="TitleText" Value="Inventory" />
+        <Property Name="TitlebarFont" Value="DejaVuSerif-HD-12" />
+        <Property Name="CloseButtonAlignment" Value="1" />
+                
         <Window Type="TaharezLook/StaticImage" Name="Portrait" >
             <Property Name="Image" Value="set:Portrait image:Portrait" />
             <Property Name="FrameEnabled" Value="True" />
             <Property Name="UnifiedAreaRect" Value="{{0.104,0},{0.195,0},{0.275,0},{0.334,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
         </Window>
-        <Window Type="TaharezLook/ImageButton" Name="CharInfoCloseButton" >
-            <Property Name="HoverImage" Value="set:Misc image:CloseBtnHovered" />
-            <Property Name="NormalImage" Value="set:Misc image:CloseBtnReleased" />
-            <Property Name="DisabledImage" Value="set:Misc image:CloseBtnReleased" />
-            <Property Name="PushedImage" Value="set:Misc image:CloseBtnPressed" />
-            <Property Name="UnifiedAreaRect" Value="{{0.903207,0},{0.0674265,0},{0.977863,0},{0.105715,0}}" />
-        </Window>
-        <Window Type="TaharezLook/StaticText" Name="NameLabel" >
-            <Property Name="Text" Value="Name" />
-            <Property Name="FrameEnabled" Value="False" />
-            <Property Name="HorzFormatting" Value="HorzCentred" />
-            <Property Name="UnifiedAreaRect" Value="{{0.376,0},{0.035,0},{0.624,0},{0.06,0}}" />
-            <Property Name="BackgroundEnabled" Value="False" />
-        </Window>
+       
         <Window Type="TaharezLook/StaticText" Name="Playerinfo" >
             <Property Name="Text" Value="Player info" />
             <Property Name="TextColours" Value="tl:FFFF2400 tr:FFFF2400 bl:FFFF2400 br:FFFF2400" />

@@ -16,18 +16,18 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
 
   <!-- Simple Panel border --> <!-- note: shared with WindowTopLeft -->
   <Image Name="PanelHeader_L" XPos="0" YPos="0" Width="180" Height="95" />
-  <Image Name="PanelHeader_M" XPos="180" YPos="0" Width="177" Height="95" />
-  <Image Name="PanelHeader_R" XPos="357" YPos="0" Width="180" Height="95" />
+  <Image Name="PanelHeader_M" XPos="180" YPos="0" Width="178" Height="95" />
+  <Image Name="PanelHeader_R" XPos="358" YPos="0" Width="180" Height="95" />
 
   <Image Name="PanelBody_TL" XPos="0" YPos="95" Width="25" Height="20" />
   <Image Name="PanelBody_L" XPos="0" YPos="115" Width="25" Height="170" />
   <Image Name="PanelBody_BL" XPos="0" YPos="285" Width="25" Height="34" />
-  <Image Name="PanelBody_T" XPos="25" YPos="95" Width="490" Height="10" />
-  <Image Name="PanelBody_M" XPos="25" YPos="115" Width="490" Height="170" />
-  <Image Name="PanelBody_B" XPos="25" YPos="285" Width="490" Height="34" />
-  <Image Name="PanelBody_TR" XPos="515" YPos="95" Width="25" Height="10" />
-  <Image Name="PanelBody_R" XPos="515" YPos="115" Width="25" Height="170" />
-  <Image Name="PanelBody_BR" XPos="515" YPos="285" Width="25" Height="34" />
+  <Image Name="PanelBody_T" XPos="25" YPos="95" Width="488" Height="10" />
+  <Image Name="PanelBody_M" XPos="25" YPos="115" Width="488" Height="170" />
+  <Image Name="PanelBody_B" XPos="25" YPos="285" Width="488" Height="34" />
+  <Image Name="PanelBody_TR" XPos="513" YPos="95" Width="25" Height="10" />
+  <Image Name="PanelBody_R" XPos="513" YPos="115" Width="25" Height="170" />
+  <Image Name="PanelBody_BR" XPos="513" YPos="285" Width="25" Height="34" />
 
   <Image Name="PanelCloseButton_On" XPos="560" YPos="0" Width="31" Height="31" />
   <Image Name="PanelCloseButton_Off" XPos="560" YPos="31" Width="31" Height="31" />
@@ -43,6 +43,25 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="StaticRight" XPos="637" YPos="5" Width="5" Height="32" /> 
   <Image Name="StaticBottomRight" XPos="637" YPos="37" Width="5" Height="5" /> 
 
+  <Image Name="Static_TL" XPos="600" YPos="0" Width="5" Height="5" /> 
+  <Image Name="Static_L" XPos="600" YPos="5" Width="5" Height="32" /> 
+  <Image Name="Static_BL" XPos="600" YPos="37" Width="5" Height="5" /> 
+  <Image Name="Static_T" XPos="605" YPos="0" Width="32" Height="5" /> 
+  <Image Name="Static_M" XPos="605" YPos="5" Width="32" Height="32" />
+  <Image Name="Static_B" XPos="605" YPos="37" Width="32" Height="5" /> 
+  <Image Name="Static_TR" XPos="637" YPos="0" Width="5" Height="5" /> 
+  <Image Name="Static_R" XPos="637" YPos="5" Width="5" Height="32" /> 
+  <Image Name="Static_BR" XPos="637" YPos="37" Width="5" Height="5" /> 
+
+  <Image Name="Rounded_Small_Border_TL" XPos="600" YPos="84" Width="8" Height="8" /> 
+  <Image Name="Rounded_Small_Border_L" XPos="600" YPos="92" Width="8" Height="26" /> 
+  <Image Name="Rounded_Small_Border_BL" XPos="600" YPos="118" Width="8" Height="8" /> 
+  <Image Name="Rounded_Small_Border_T" XPos="608" YPos="84" Width="26" Height="8" /> 
+  <Image Name="Rounded_Small_Border_M" XPos="608" YPos="92" Width="26" Height="26" />
+  <Image Name="Rounded_Small_Border_B" XPos="608" YPos="118" Width="26" Height="8" /> 
+  <Image Name="Rounded_Small_Border_TR" XPos="634" YPos="84" Width="8" Height="8" /> 
+  <Image Name="Rounded_Small_Border_R" XPos="634" YPos="92" Width="8" Height="26" /> 
+  <Image Name="Rounded_Small_Border_BR" XPos="634" YPos="118" Width="8" Height="8" /> 
 
   <Image Name="HorzScrollThumbBorder_TL" XPos="1000" YPos="0" Width="5" Height="5" />
   <Image Name="HorzScrollThumbBorder_L" XPos="1000" YPos="0" Width="5" Height="5" />

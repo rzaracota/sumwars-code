@@ -166,10 +166,9 @@ bool MainWindow::setupMainMenu()
 		else
 		{
 			DEBUG ("WARNING: Failed to load [%s]", "characterscreen_holder.layout");
-
+			// TODO: remove code when no longer needed - begin
 			CEGUI::Window* img;
-		
-		
+
 			img  = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "StartScreenImage");
 			m_main_menu->addChildWindow(img);
 			img->setProperty("Image", "set:SumWarsLogo.png image:full_image");
@@ -187,6 +186,7 @@ bool MainWindow::setupMainMenu()
 			bar->setProperty ("GS_LighterThemeColour", "FF13C6BC");
 			bar->setProperty ("GS_MainThemeColour", "FF13868B");
 			bar->setProperty ("GS_MainThemeGradientLeftToRight", "tl:00FFFFFF tr:FF13C6BC bl:00FFFFFF br:FF13C6BC");
+			// TODO: remove code when no longer needed - end
 		}
 
 		CreditsWindow* crd = new CreditsWindow (m_document, m_ceguiSkinName);

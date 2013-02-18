@@ -1,23 +1,21 @@
 <GUILayout >
     <Window Type="SWB/NamedPanel" Name="SaveExitWindow" >
-        <Property Name="FrameEnabled" Value="False" />
         <Property Name="UnifiedAreaRect" Value="{{0.3,0},{0.25,0},{0.7,0},{0.55,0}}" />
-        <Property Name="BackgroundEnabled" Value="False" />
+        <Property Name="TitleText" Value="Save and Exit" />
+        <Property Name="TitlebarFont" Value="DejaVuSerif-HD-12" />
+        <Property Name="CloseButtonAlignment" Value="1" />
         
+        <!-- The OK button -->
         <Window Type="Resummoned/Button32_4C" Name="GameExitConfirmButton" >
             <Property Name="InheritsAlpha" Value="False" />
             <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.55,0},{0.4,0},{0.75,0}}" />
         </Window>
+        
+        <!-- The Cancel button -->
         <Window Type="Resummoned/Button32_4C" Name="GameExitAbortButton" >
             <Property Name="InheritsAlpha" Value="False" />
             <Property Name="UnifiedAreaRect" Value="{{0.6,0},{0.55,0},{0.9,0},{0.75,0}}" />
         </Window>
         
-        <Window Type="Resummoned/StaticText" Name="SaveExitLabel" >
-            <Property Name="FrameEnabled" Value="False" />
-            <Property Name="HorzFormatting" Value="HorzCentred" />
-            <Property Name="UnifiedAreaRect" Value="{{0.120732,0},{0.22,0},{0.889024,0},{0.4,0}}" />
-            <Property Name="BackgroundEnabled" Value="False" />
-        </Window>
     </Window>
 </GUILayout>

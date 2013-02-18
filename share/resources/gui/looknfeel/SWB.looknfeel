@@ -236,7 +236,13 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
                     <Dim type="TopEdge" ><WidgetDim widget="__auto_titlebar__" dimension="Height" /></Dim>
                     <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
-                    <Dim type="BottomEdge" ><WidgetDim dimension="BottomEdge" /></Dim>
+                    <Dim type="Height" >
+                        <WidgetDim dimension="Height">
+                            <DimOperator op="Subtract">
+                                <WidgetDim widget="__auto_titlebar__" dimension="Height" />
+                            </DimOperator>
+                        </WidgetDim>
+                    </Dim>
                 </Area>
                 <Image type="TopLeftCorner" imageset="SWB" image="PanelBody_TL" />
                 <Image type="LeftEdge" imageset="SWB" image="PanelBody_L" />
@@ -266,6 +272,121 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
             </Layer>
         </StateImagery>
 
+    </WidgetLook>
+
+
+
+    <!--
+    ***************************************************
+        SWB/SimplePanel
+        (based on the Taharez Look)
+    ***************************************************
+    -->
+    <WidgetLook name="SWB/SimplePanelFrame">
+        <PropertyDefinition name="NormalImage" initialValue="" redrawOnWrite="true" />
+        <PropertyDefinition name="HoverImage" initialValue="" redrawOnWrite="true" />
+        <PropertyDefinition name="PushedImage" initialValue="" redrawOnWrite="true" />
+        <PropertyDefinition name="DisabledImage" initialValue="" redrawOnWrite="true" />
+        <PropertyDefinition name="VertImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
+        <PropertyDefinition name="HorzImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
+        <PropertyDefinition name="BackgroundPictureColour" initialValue="DFFFFFFF" redrawOnWrite="true"/>
+        <PropertyDefinition name="BackgroundImage" initialValue="" redrawOnWrite="true" />
+
+        <ImagerySection name="normal">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="RightEdge"><UnifiedDim scale="1" type="RightEdge" /></Dim>
+                    <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
+                </Area>
+                <Image type="TopLeftCorner" imageset="SWB" image="Static_TL" />
+                <Image type="LeftEdge" imageset="SWB" image="Static_L" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="Static_BL" />
+                <Image type="TopEdge" imageset="SWB" image="Static_T" />
+                <Image type="Background" imageset="SWB" image="Static_M" />
+                <Image type="BottomEdge" imageset="SWB" image="Static_B" />
+                <Image type="TopRightCorner" imageset="SWB" image="Static_TR" />
+                <Image type="RightEdge" imageset="SWB" image="Static_R" />
+                <Image type="BottomRightCorner" imageset="SWB" image="Static_BR" />
+            </FrameComponent>
+            <ImageryComponent>
+                <Area>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
+                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
+                </Area>
+                <ImageProperty name="HoverImage" />
+                <VertFormatProperty name="VertImageFormatting" />
+                <HorzFormatProperty name="HorzImageFormatting" />
+            </ImageryComponent>
+        </ImagerySection>
+        
+        <StateImagery name="Normal">
+            <Layer>
+                <Section section="normal">
+                  <Colours topLeft="FFFFFFFF" topRight="FFFFFFFF" bottomLeft="FFFFFFFF" bottomRight="FFFFFFFF" />
+                </Section>
+            </Layer>
+        </StateImagery>
+    </WidgetLook>
+    
+    
+    
+    <!--
+    ***************************************************
+        SWB/SimplePanel
+        (based on the Taharez Look)
+    ***************************************************
+    -->
+    <WidgetLook name="SWB/RoundedPanelFrame">
+        <PropertyDefinition name="NormalImage" initialValue="" redrawOnWrite="true" />
+        <PropertyDefinition name="HoverImage" initialValue="" redrawOnWrite="true" />
+        <PropertyDefinition name="PushedImage" initialValue="" redrawOnWrite="true" />
+        <PropertyDefinition name="DisabledImage" initialValue="" redrawOnWrite="true" />
+        <PropertyDefinition name="VertImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
+        <PropertyDefinition name="HorzImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
+        <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
+
+        <ImagerySection name="normal">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="RightEdge"><UnifiedDim scale="1" type="RightEdge" /></Dim>
+                    <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
+                </Area>
+                <Image type="TopLeftCorner" imageset="SWB" image="Rounded_Small_Border_TL" />
+                <Image type="LeftEdge" imageset="SWB" image="Rounded_Small_Border_L" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="Rounded_Small_Border_BL" />
+                <Image type="TopEdge" imageset="SWB" image="Rounded_Small_Border_T" />
+                <Image type="Background" imageset="SWB" image="Rounded_Small_Border_M" />
+                <Image type="BottomEdge" imageset="SWB" image="Rounded_Small_Border_B" />
+                <Image type="TopRightCorner" imageset="SWB" image="Rounded_Small_Border_TR" />
+                <Image type="RightEdge" imageset="SWB" image="Rounded_Small_Border_R" />
+                <Image type="BottomRightCorner" imageset="SWB" image="Rounded_Small_Border_BR" />
+            </FrameComponent>
+            <ImageryComponent>
+                <Area>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
+                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
+                </Area>
+                <ImageProperty name="HoverImage" />
+                <VertFormatProperty name="VertImageFormatting" />
+                <HorzFormatProperty name="HorzImageFormatting" />
+            </ImageryComponent>
+        </ImagerySection>
+        
+        <StateImagery name="Normal">
+            <Layer>
+                <Section section="normal">
+                   <ColourProperty name="BorderColour" />
+                </Section>
+            </Layer>
+        </StateImagery>
     </WidgetLook>
 
 
