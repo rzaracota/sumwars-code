@@ -1,7 +1,7 @@
 <GUILayout >
     <Window Type="Resummoned/StaticImage" Name="Inventory_Holder" >
         <Property Name="FrameEnabled" Value="False" />
-        <Property Name="UnifiedAreaRect" Value="{{0.53,0},{0.0,0},{1.0,0},{0.84,0}}" />
+        <Property Name="UnifiedAreaRect" Value="{{0.50,0},{0.0,0},{1.0,0},{0.86,0}}" />
         <Property Name="BackgroundEnabled" Value="False" />
         <Property Name="Alpha" Value="1" />
     </Window>

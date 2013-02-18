@@ -1,0 +1,24 @@
+<GUILayout >
+    <Window Type="Resummoned/StaticImage" Name="StartScreenRoot" >
+        <Property Name="FrameEnabled" Value="False" />
+        <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
+        <Property Name="BackgroundEnabled" Value="False" />
+        
+        <Window Type="Resummoned/StaticImage" Name="StartScreenImage" >
+            <Property Name="InheritsAlpha" Value="True" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
+            <Property Name="Image" Value="set:SumWarsLogo.png image:full_image" />
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
+        </Window>
+        
+        <Window Type="Resummoned/ProgressBar" Name="LoadRessourcesProgressBar" >
+            <Property Name="InheritsAlpha" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.15,0},{0.87,0},{0.85,0},{0.92,0}}" />
+            <Property Name="GS_DarkerThemeColour" Value="FF005464" />
+            <Property Name="GS_LighterThemeColour" Value="FF13C6BC" />
+            <Property Name="GS_MainThemeColour" Value="FF13868B" />
+            <Property Name="GS_MainThemeGradientLeftToRight" Value="tl:00FFFFFF tr:FF13C6BC bl:00FFFFFF br:FF13C6BC" />
+        </Window>
+    </Window>
+</GUILayout>

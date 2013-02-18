@@ -157,28 +157,38 @@ bool MainWindow::setupMainMenu()
 
 		// Oberstes Fenster der Hauptmenue Schicht
 		m_main_menu = win_mgr.createWindow("DefaultWindow", "MainMenu");
-				
-		CEGUI::Window* img;
+
+		CEGUI::Window* start_screen_holder = win_mgr.loadWindowLayout ("startscreen.layout");
+		if (start_screen_holder)
+		{
+			m_main_menu->addChildWindow (start_screen_holder);
+		}
+		else
+		{
+			DEBUG ("WARNING: Failed to load [%s]", "characterscreen_holder.layout");
+
+			CEGUI::Window* img;
 		
 		
-		img  = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "StartScreenImage");
-		m_main_menu->addChildWindow(img);
-        img->setProperty("Image", "set:SumWarsLogo.png image:full_image");
-		img->moveToBack ();
-		img->setProperty ("FrameEnabled", "False");
-		img->setMousePassThroughEnabled(true);
+			img  = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "StartScreenImage");
+			m_main_menu->addChildWindow(img);
+			img->setProperty("Image", "set:SumWarsLogo.png image:full_image");
+			img->moveToBack ();
+			img->setProperty ("FrameEnabled", "False");
+			img->setMousePassThroughEnabled(true);
 		
-		CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow(CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ProgressBar"), "LoadRessourcesProgressBar"));
-		m_main_menu->addChildWindow(bar);
-		bar->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.9f)));
-		bar->setSize(CEGUI::UVector2(cegui_reldim(0.70f), cegui_reldim( 0.04f)));
-		bar->setWantsMultiClickEvents(false);
-		bar->setProgress(0.0);
-		bar->setProperty ("GS_DarkerThemeColour", "FF005464");
-		bar->setProperty ("GS_LighterThemeColour", "FF13C6BC");
-		bar->setProperty ("GS_MainThemeColour", "FF13868B");
-		bar->setProperty ("GS_MainThemeGradientLeftToRight", "tl:00FFFFFF tr:FF13C6BC bl:00FFFFFF br:FF13C6BC");
-		
+			CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow(CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ProgressBar"), "LoadRessourcesProgressBar"));
+			m_main_menu->addChildWindow(bar);
+			bar->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.9f)));
+			bar->setSize(CEGUI::UVector2(cegui_reldim(0.70f), cegui_reldim( 0.04f)));
+			bar->setWantsMultiClickEvents(false);
+			bar->setProgress(0.0);
+			bar->setProperty ("GS_DarkerThemeColour", "FF005464");
+			bar->setProperty ("GS_LighterThemeColour", "FF13C6BC");
+			bar->setProperty ("GS_MainThemeColour", "FF13868B");
+			bar->setProperty ("GS_MainThemeGradientLeftToRight", "tl:00FFFFFF tr:FF13C6BC bl:00FFFFFF br:FF13C6BC");
+		}
+
 		CreditsWindow* crd = new CreditsWindow (m_document, m_ceguiSkinName);
 		m_sub_windows["CreditsWindow"] = crd;
 		m_main_menu->addChildWindow(crd->getCEGUIWindow());
@@ -1158,7 +1168,7 @@ void  MainWindow::updateMainMenu()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* img;
-	img  = win_mgr.getWindow("StartScreenImage");
+	img  = win_mgr.getWindow("StartScreenRoot");
 	CEGUI::Window* label;
 	label = win_mgr.getWindow("CharacterPreviewImage");
 	CEGUI::Window* label2;
@@ -1176,6 +1186,7 @@ void  MainWindow::updateMainMenu()
 	else
 	{
 		img->setVisible(true);
+		img->moveToBack ();
 		//label->setVisible(false);
 		//label2->setVisible(false);
 	}
@@ -2829,6 +2840,11 @@ void MainWindow::setReadyToStart(bool ready)
 	
 	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "LoadRessourcesProgressBar"));
 	bar->setVisible(!ready);
+
+	// Also hide the background picture
+	CEGUI::Window* backgroundPicture = win_mgr.getWindow ("StartScreenRoot");
+	backgroundPicture->setVisible (false);
+	backgroundPicture->moveToBack ();
 	
 	// we have finished loading so we will simulate the click to get straight in to the main menu
 	m_document->onStartScreenClicked();

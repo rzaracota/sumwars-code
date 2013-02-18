@@ -93,6 +93,11 @@ void Options::init()
 	m_shadow_mode = SM_NONE;
 	
 	m_default_savegame = "";
+
+	// Also set this in the initialization. In case the options file is edited and no section with these settings is found, the defaults are loaded here.
+	setCeguiSkin ("Resummoned");
+	setCeguiCursorSkin ("ResummonedCursors");
+
 }
 
 Options* Options::getInstance()
@@ -123,6 +128,9 @@ void Options::setToDefaultOptions()
 	setMaxNumberPlayers(8);
 	setPort(5331);
 	setServerHost("127.0.0.1");
+
+	setCeguiSkin ("Resummoned");
+	setCeguiCursorSkin ("ResummonedCursors");
 }
 
 bool Options::readFromFile(const std::string& filename)
@@ -248,10 +256,18 @@ bool Options::readFromFile(const std::string& filename)
 					{
 						std::string ceguiSkin ("");
 						attr.getString ("cegui_skin", ceguiSkin);
+						if (ceguiSkin.length () == 0)
+						{
+							ceguiSkin = "Resummoned";
+						}
 						setCeguiSkin (ceguiSkin);
 
 						std::string ceguiCursorSkin ("");
 						attr.getString ("cegui_cursor_skin", ceguiCursorSkin);
+						if (ceguiCursorSkin.length () == 0)
+						{
+							ceguiCursorSkin = "ResummonedCursors";
+						}
 						setCeguiCursorSkin (ceguiCursorSkin);
 					}
 					else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)

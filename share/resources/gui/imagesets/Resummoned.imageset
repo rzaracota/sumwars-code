@@ -89,7 +89,9 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="Button_Background_TR" XPos="248" YPos="680" Width="15" Height="15" /> 
   <Image Name="Button_Background_R" XPos="248" YPos="695" Width="15" Height="98" /> 
   <Image Name="Button_Background_BR" XPos="248" YPos="793" Width="15" Height="15" /> 
-  
+
+  <!-- Thick -->
+  <!--  
   <Image Name="Rounded_Square_Small_TL" XPos="440" YPos="325" Width="16" Height="16" /> 
   <Image Name="Rounded_Square_Small_L" XPos="440" YPos="341" Width="16" Height="32" /> 
   <Image Name="Rounded_Square_Small_BL" XPos="440" YPos="373" Width="16" Height="16" /> 
@@ -102,6 +104,22 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   
   <Image Name="Rounded_Square_Small_Calc_L" XPos="440" YPos="325" Width="8" Height="8" />
   <Image Name="Rounded_Square_Small_Calc_T" XPos="456" YPos="325" Width="8" Height="8" /> 
+-->
+
+  <!-- Thin -->
+  <Image Name="Rounded_Square_Small_TL" XPos="505" YPos="325" Width="16" Height="16" /> 
+  <Image Name="Rounded_Square_Small_L" XPos="505" YPos="341" Width="16" Height="32" /> 
+  <Image Name="Rounded_Square_Small_BL" XPos="505" YPos="373" Width="16" Height="16" /> 
+  <Image Name="Rounded_Square_Small_T" XPos="521" YPos="325" Width="32" Height="16" /> 
+  <Image Name="Rounded_Square_Small_M" XPos="521" YPos="341" Width="32" Height="32" /> 
+  <Image Name="Rounded_Square_Small_B" XPos="521" YPos="373" Width="32" Height="16" /> 
+  <Image Name="Rounded_Square_Small_TR" XPos="553" YPos="325" Width="16" Height="16" /> 
+  <Image Name="Rounded_Square_Small_R" XPos="553" YPos="341" Width="16" Height="32" /> 
+  <Image Name="Rounded_Square_Small_BR" XPos="553" YPos="373" Width="16" Height="16" /> 
+  
+  <Image Name="Rounded_Square_Small_Calc_L" XPos="505" YPos="325" Width="6" Height="6" />
+  <Image Name="Rounded_Square_Small_Calc_T" XPos="521" YPos="325" Width="6" Height="6" /> 
+
   
   <!-- Mini button border -->
   <Image Name="MiniButton_TL" XPos="440" YPos="400" Width="4" Height="4" /> 
