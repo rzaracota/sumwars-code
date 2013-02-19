@@ -6212,7 +6212,7 @@ Brown/Orange:
         <PropertyDefinition name="Image" initialValue="set:Resummoned image:EmptyGlyph24" redrawOnWrite="true" />
         <PropertyDefinition name="VertImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
         <PropertyDefinition name="HorzImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
-        <PropertyDefinition name="BackgroundColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" type="ColourRect" redrawOnWrite="true" />
+        <PropertyDefinition name="BackgroundColour" initialValue="22FFFFFF" />
         <PropertyDefinition name="BackgroundHighlightColour" initialValue="FFFFFFFF" />
         <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
         <PropertyDefinition name="BorderColourHover" initialValue="FFCCB078" />
@@ -6323,6 +6323,9 @@ Brown/Orange:
         
         <StateImagery name="Normal">
             <Layer>
+                <Section section="hover">
+                    <ColourProperty name="BackgroundColour" />
+                </Section>
                 <Section section="border_section">
                     <ColourProperty name="BorderColour" />
                 </Section>

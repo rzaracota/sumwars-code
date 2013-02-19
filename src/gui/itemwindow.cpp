@@ -146,10 +146,11 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 		}
 	}
 	
-	std::string propold = img->getProperty("BackgroundColours").c_str();
-	std::string propnew = "tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000";
-	if (item !=0)
+	if (img->isPropertyPresent ("BackgroundColours") && item != 0)
 	{
+		std::string propold = img->getProperty("BackgroundColours").c_str();
+		std::string propnew = "tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000";
+
 		// rot wenn Spieler Item nicht verwenden kann
 		// oder es bezahlen muss und nicht genug Geld hat
 		if (!player->checkItemRequirements(item).m_overall)
@@ -164,11 +165,36 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 		{
 			propnew = "tl:FF5555AA tr:FF5555AA bl:FF5555AA br:FF5555AA";
 		}
-	}
 	
-	if (propold != propnew)
+		if (propold != propnew)
+		{
+			img->setProperty("BackgroundColours", propnew); 
+		}
+	}
+	else if (img->isPropertyPresent ("BackgroundColour") && item != 0)
 	{
-		img->setProperty("BackgroundColours", propnew); 
+		std::string propold = img->getProperty("BackgroundColour").c_str();
+		std::string propnew = "FF000000";
+
+		// rot wenn Spieler Item nicht verwenden kann
+		// oder es bezahlen muss und nicht genug Geld hat
+		if (!player->checkItemRequirements(item).m_overall)
+		{
+			propnew = "FFAA5555";
+		}
+		else if (gold>=0 && gold<item->m_price)
+		{
+			propnew = "FFAA5555";
+		}
+		else if (item->m_rarity == Item::MAGICAL)
+		{
+			propnew = "FF5555AA";
+		}
+	
+		if (propold != propnew)
+		{
+			img->setProperty("BackgroundColour", propnew); 
+		}
 	}
 	
 	// try to find a Progressbar with a matching name

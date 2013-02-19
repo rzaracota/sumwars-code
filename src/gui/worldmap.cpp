@@ -137,7 +137,15 @@ void Worldmap::update()
 				worldmap->addChildWindow(label);
 				label->setProperty("FrameEnabled", "false");
 				label->setProperty("BackgroundEnabled", "true");
-				label->setProperty("BackgroundColours", "tl:00000000 tr:00000000 bl:00000000 br:00000000"); 
+
+				if (label->isPropertyPresent ("BackgroundColours"))
+				{
+					label->setProperty("BackgroundColours", "tl:00000000 tr:00000000 bl:00000000 br:00000000"); 
+				}
+				else if (label->isPropertyPresent ("BackgroundColour"))
+				{
+					label->setProperty("BackgroundColour", "00000000");
+				}
 				label->setSize(CEGUI::UVector2(cegui_reldim(0.03f), cegui_reldim( 0.03f)));
 				label->setProperty("Image", "set:TaharezLook image:RadioButtonMark"); 
 				label->setInheritsAlpha (false);

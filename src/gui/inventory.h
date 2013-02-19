@@ -87,6 +87,7 @@ class Inventory : public ItemWindow
 		 */
 		void createAnimations();
 
+
 		CEGUI::Window* m_holder_;
 };
 

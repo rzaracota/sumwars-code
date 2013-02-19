@@ -255,8 +255,7 @@ void Inventory::update()
 	Equipement* equ = player->getEquipement();
 
 
-	// Label Waffe
-	// Label Schild
+	// Weapon - Label/Slot
 	img =  win_mgr.getWindow("WeaponItemLabel");
 	it = player->getWeapon();
 	updateItemWindow(img,it,player);
@@ -268,46 +267,20 @@ void Inventory::update()
 	}
 
 
-	// Label Ruestung
+	// Body armor - Label/Slot
 	img =  win_mgr.getWindow("ArmorItemLabel");
 	it = equ->getItem(Equipement::ARMOR);
 	updateItemWindow(img,it,player);
 	
-	// TODO: replicate the next code block for each item (move into own function obviously)
-	if (img && it)
-	{
-		if (img->isPropertyPresent ("BackgroundHighlightColour"))
-		{
-			int localRarity = it->getValue ("rarity");
-			switch (localRarity)
-			{
-			case Item::MAGICAL:
-				img->setProperty ("BackgroundHighlightColour", "FF0000FF");
-				break;
-			case Item::RARE:
-				img->setProperty ("BackgroundHighlightColour", "FFFFFF00");
-				break;
-			case Item::UNIQUE:
-				img->setProperty ("BackgroundHighlightColour", "FFFFBB88");
-				break;
-			case Item::QUEST:
-				img->setProperty ("BackgroundHighlightColour", "FF888888");
-				break;
-			case Item::NORMAL:
-			default:
-				img->setProperty ("BackgroundHighlightColour", "FFFFFFFF");
-				break;
-			}
-		}
-	}
 
-	// Label Helm
+
+	// Helm - Label/Slot
 	img =  win_mgr.getWindow("HelmetItemLabel");
 	it = equ->getItem(Equipement::HELMET);
 	updateItemWindow(img,it,player);
-
-	// Label Schild
-	// bei Zweihandwaffen wird die Waffe eingeblendet
+	
+	// Shield - Label/Slot
+	// for two handed weapons this will represent the weapon.
 	float alpha = 1.0;
 	img =  win_mgr.getWindow("ShieldItemLabel");
 	it = player->getShield();
@@ -317,34 +290,36 @@ void Inventory::update()
 		alpha = 0.7;
 	}
 	updateItemWindow(img,it,player);
+	
 	if (img->getAlpha() != alpha)
 	{
 		img->setAlpha(alpha);
 	}
 	
 
-	// Label Handschuhe
+	// Handgloves - Label/Slot
 	img =  win_mgr.getWindow("GlovesItemLabel");
 	it = equ->getItem(Equipement::GLOVES);
 	updateItemWindow(img,it,player);
-
-	// Label Ring links
+	
+	// Left hand ring - Label/Slot
 	img =  win_mgr.getWindow("RingLeftItemLabel");
 	it = equ->getItem(Equipement::RING_LEFT);
 	updateItemWindow(img,it,player);
-
-	// Label Ring rechts
+	
+	// Right hand ring - Label/Slot
 	img =  win_mgr.getWindow("RingRightItemLabel");
 	it = equ->getItem(Equipement::RING_RIGHT);
 	updateItemWindow(img,it,player);
 	
 
-	// Label Amulet
+	// Amulet - Label/Slot
 	img =  win_mgr.getWindow("AmuletItemLabel");
 	it = equ->getItem(Equipement::AMULET);
 	updateItemWindow(img,it,player);
 	
-	// Button fuer Zweitausruestung
+	
+	// Swap button - this will also display the state of the current weapon selection.
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SwapEquipButton"));
 	std::string text = "set:Inventory image:WeaponSwitchState1";
 	if (player->isUsingSecondaryEquip())
@@ -542,6 +517,8 @@ bool Inventory::onCloseButtonClicked(const CEGUI::EventArgs& evt)
 	m_document->onButtonInventoryClicked();
 	return true;
 }
+
+
 
 void Inventory::createAnimations()
 {

@@ -10,7 +10,7 @@
         <Window Type="Resummoned/StaticImage" Name="GoldStaticImage" >
             <Property Name="Image" Value="set:Inventory image:GoldPile" />
             <Property Name="FrameEnabled" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.05,0},{0.615,0},{0.104,0},{0.637,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.05,0},{0.635,0},{0.104,0},{0.657,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
             <Window Type="Resummoned/Button" Name="GoldDropButton" >
                 <Property Name="Alpha" Value="0" />
@@ -22,13 +22,13 @@
         <Window Type="Resummoned/StaticText" Name="GoldValueLabel" >
             <Property Name="Text" Value="0" />
             <Property Name="FrameEnabled" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.110,0},{0.615,0},{0.4,0},{0.637,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.110,0},{0.635,0},{0.4,0},{0.657,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
         </Window>
 
         <Window Type="Resummoned/Editbox" Name="GoldDropValueBox" >
             <Property Name="MaxTextLength" Value="1073741823" />
-            <Property Name="UnifiedAreaRect" Value="{{0.41,0},{0.605,0},{0.6,0},{0.647,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.41,0},{0.625,0},{0.6,0},{0.667,0}}" />
             <Property Name="TextParsingEnabled" Value="False" />
         </Window>
         
@@ -36,7 +36,7 @@
 
         <!-- Top area, containing the hero picture and his/her gear -->
         <Window Type="SWB/RoundedPanelFrame" Name="GearHolder">
-            <Property Name="UnifiedAreaRect" Value="{{0.035,0},{0.11,0},{0.97,0},{0.6,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.035,0},{0.11,0},{0.97,0},{0.62,0}}" />
 
             <Window Type="SWB/RoundedPanelFrame" Name="CharImageHolder">
                 <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.03,0},{0.75,0},{0.85,0}}" />
@@ -57,7 +57,7 @@
             
             <!-- The gear items -->
             <Window Type="Resummoned/BackgroundButton" Name="AmuletItemLabel" >
-                <Property Name="UnifiedAreaRect" Value="{{0.12,0},{0.03,0},{0.24,0},{0.15,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.12,0},{0.03,0},{0.24,0},{0.17,0}}" />
             </Window>
             <Window Type="Resummoned/BackgroundButton" Name="ArmorItemLabel" >
                 <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.19,0},{0.24,0},{0.55,0}}" />
@@ -85,7 +85,7 @@
         <!-- The lower side location containing the stash -->
         <Window Type="SWB/RoundedPanelFrame" Name="StashHolder">
             <Property Name="FrameEnabled" Value="True" />
-            <Property Name="UnifiedAreaRect" Value="{{0.035,0},{0.6540544,0},{0.965907,0},{0.97,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.035,0},{0.6740544,0},{0.965907,0},{0.97,0}}" />
         
             <Window Type="Resummoned/StaticImage" Name="BorderHorzS" >
                 <Property Name="Image" Value="set:Inventory image:BorderHorz" />

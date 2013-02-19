@@ -101,7 +101,14 @@ CreditsWindow::CreditsWindow(Document* doc, const std::string& ceguiSkinName)
 	credits->setSize(sz);
 	credits->setMaxSize(CEGUI::UVector2(CEGUI::UDim(5.0,5.0), CEGUI::UDim(5.0,5.0)));
 	credits->setText(added);
-	credits->setProperty("BackgroundColours", "tl:99000000 tr:99000000 bl:99000000 br:99000000");
+	if (credits->isPropertyPresent ("BackgroundColours"))
+	{
+		credits->setProperty("BackgroundColours", "tl:99000000 tr:99000000 bl:99000000 br:99000000");
+	}
+	else if (credits->isPropertyPresent ("BackgroundColour"))
+	{
+		credits->setProperty("BackgroundColour", "99000000");
+	}
 	credits->setAlpha(0.9);
 	
 	

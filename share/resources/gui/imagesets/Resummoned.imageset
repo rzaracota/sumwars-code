@@ -182,6 +182,16 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="StaticRight" XPos="123" YPos="410" Width="10" Height="108" />
   <Image Name="StaticBottomRight" XPos="123" YPos="518" Width="10" Height="10" />
 
+  <Image Name="Static_TL" XPos="5" YPos="400" Width="10" Height="10" />
+  <Image Name="Static_L" XPos="5" YPos="410" Width="10" Height="108" />
+  <Image Name="Static_BL" XPos="5" YPos="518" Width="10" Height="10" />
+  <Image Name="Static_T" XPos="15" YPos="400" Width="108" Height="10" />
+  <Image Name="Static_M" XPos="15" YPos="410" Width="108" Height="108" />
+  <Image Name="Static_B" XPos="15" YPos="518" Width="108" Height="10" />
+  <Image Name="Static_TR" XPos="123" YPos="400" Width="10" Height="10" />
+  <Image Name="Static_R" XPos="123" YPos="410" Width="10" Height="108" />
+  <Image Name="Static_BR" XPos="123" YPos="518" Width="10" Height="10" />
+
   <!-- Combobox/Drop-down list -->
   <Image Name="ComboboxEditLeft" XPos="300" YPos="10" Width="16" Height="64" />
   <Image Name="ComboboxEditMiddle" XPos="316" YPos="10" Width="52" Height="64" />

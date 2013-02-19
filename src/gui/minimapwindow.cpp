@@ -74,7 +74,16 @@ MinimapWindow::MinimapWindow (Document* doc)
 	label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 1.0f)));
 	label->setMousePassThroughEnabled(true);
 	label->setProperty("Image", "set:minimap image:minimap_img"); 
-	label->setProperty("BackgroundColours", "tl:44444444 tr:44444444 bl:44444444 br:44444444"); 
+	if (label->isPropertyPresent ("BackgroundColours"))
+	{
+		label->setProperty("BackgroundColours", "tl:44444444 tr:44444444 bl:44444444 br:44444444");
+	}
+	else if (label->isPropertyPresent ("BackgroundColour"))
+	{
+		label->setProperty("BackgroundColour", "44444444");
+	}
+
+
 	label->setInheritsAlpha (false);
 	label->setAlpha(1.0);
 	
@@ -134,7 +143,16 @@ void MinimapWindow::update()
 			minimap->addChildWindow(label);
 			label->setProperty("FrameEnabled", "false");
 			label->setProperty("BackgroundEnabled", "true");
-			label->setProperty("BackgroundColours", "tl:00000000 tr:00000000 bl:00000000 br:00000000"); 
+			
+			if (label->isPropertyPresent ("BackgroundColours"))
+			{
+				label->setProperty("BackgroundColours", "tl:00000000 tr:00000000 bl:00000000 br:00000000"); 
+			}
+			else if (label->isPropertyPresent ("BackgroundColour"))
+			{
+				label->setProperty("BackgroundColour", "00000000");
+			}
+
 			label->setSize(CEGUI::UVector2(cegui_reldim(0.03f), cegui_reldim( 0.03f)));
 			label->setMousePassThroughEnabled(true);
 			label->setProperty("Image", "set:TaharezLook image:CloseButtonNormal"); 

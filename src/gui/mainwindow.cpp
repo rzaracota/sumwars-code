@@ -1008,7 +1008,14 @@ bool MainWindow::setupItemInfo()
 	m_game_screen->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
-	label->setProperty("BackgroundColours", "tl:77000000 tr:77000000 bl:77000000 br:77000000"); 
+	if (label->isPropertyPresent ("BackgroundColours"))
+	{
+		label->setProperty("BackgroundColours", "tl:77000000 tr:77000000 bl:77000000 br:77000000"); 
+	}
+	else if (label->isPropertyPresent ("BackgroundColour"))
+	{
+		label->setProperty("BackgroundColour", "77000000"); 
+	}
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.08f), cegui_reldim( 0.03f)));
 	label->setText("");
@@ -1147,7 +1154,14 @@ void MainWindow::setupChatContent()
 	//label->setProperty("BackgroundEnabled", "false");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.63f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(.43f), cegui_reldim( 0.2f)));
-	label->setProperty("BackgroundColours", "tl:44000000 tr:44000000 bl:44000000 br:44000000");
+	if (label->isPropertyPresent ("BackgroundColours"))
+	{
+		label->setProperty("BackgroundColours", "tl:44000000 tr:44000000 bl:44000000 br:44000000");
+	}
+	else if (label->isPropertyPresent ("BackgroundColour"))
+	{
+		label->setProperty("BackgroundColour", "44000000");
+	}
 	label->setProperty("VertFormatting", "VertCentred");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setText("");
@@ -1941,7 +1955,15 @@ void MainWindow::updateItemInfo()
 				m_game_screen->addChildWindow(label);
 				label->setProperty("FrameEnabled", "false");
 				label->setProperty("BackgroundEnabled", "true");
-				label->setProperty("BackgroundColours", "tl:77000000 tr:77000000 bl:77000000 br:77000000"); label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
+				if (label->isPropertyPresent ("BackgroundColours"))
+				{
+					label->setProperty("BackgroundColours", "tl:77000000 tr:77000000 bl:77000000 br:77000000"); 
+				}
+				else if (label->isPropertyPresent ("BackgroundColour"))
+				{
+					label->setProperty("BackgroundColour", "77000000");
+				}
+				label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
 				label->setSize(CEGUI::UVector2(cegui_reldim(reallen), cegui_reldim( 0.03f)));
 				label->setText("");
 				label->setAlpha(0.9);
