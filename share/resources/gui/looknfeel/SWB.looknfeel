@@ -13,6 +13,184 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
 
     <!--
     ***************************************************
+        SWB/Button32
+        (based on the Taharez Look)
+    ***************************************************
+    -->
+    <WidgetLook name="SWB/Button">
+        <PropertyDefinition name="NormalTextColour" initialValue="FFFFFFFF" redrawOnWrite="true" />
+        <PropertyDefinition name="HoverTextColour" initialValue="FFFFFFFF" redrawOnWrite="true" />
+        <PropertyDefinition name="PushedTextColour" initialValue="FFFFFFFF" redrawOnWrite="true" />
+        <PropertyDefinition name="DisabledTextColour" initialValue="FF7F7F7F" redrawOnWrite="true" />
+        <PropertyDefinition name="VertLabelFormatting" initialValue="CentreAligned" />
+        <PropertyDefinition name="HorzLabelFormatting" initialValue="CentreAligned" />
+        <!--<PropertyDefinition name="BackgroundColour" initialValue="FFFFDA99" />-->
+        <PropertyDefinition name="BackgroundColour" initialValue="FFFFEAC9" />
+
+        <ImagerySection name="label">
+            <TextComponent>
+                <Area>
+                    <Dim type="LeftEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="RightEdge"><UnifiedDim scale="1" type="RightEdge" /></Dim>
+                    <Dim type="Height"><UnifiedDim scale="1" type="Height" /></Dim>
+                </Area>
+                <VertFormatProperty name="VertLabelFormatting" />
+                <HorzFormatProperty name="HorzLabelFormatting" />
+            </TextComponent>
+        </ImagerySection>
+
+<!-- TODO: investigate if a common border would help or not -->
+<!--        <ImagerySection name="border_section">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="RightEdge"><UnifiedDim scale="1" type="RightEdge" /></Dim>
+                    <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
+                </Area>
+                <Image type="TopLeftCorner" imageset="SWB" image="Button32_2C_TL" />
+                <Image type="TopRightCorner" imageset="SWB" image="Button32_2C_TR" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="Button32_2C_BL" />
+                <Image type="BottomRightCorner" imageset="SWB" image="Button32_2C_BR" />
+                <Image type="LeftEdge" imageset="SWB" image="Button32_2C_L" />
+                <Image type="TopEdge" imageset="SWB" image="Button32_2C_T" />
+                <Image type="RightEdge" imageset="SWB" image="Button32_2C_R" />
+                <Image type="BottomEdge" imageset="SWB" image="Button32_2C_B" />
+                <Image type="Background" imageset="SWB" image="Button32_2C_M" />
+            </FrameComponent>
+        </ImagerySection>-->
+
+        <ImagerySection name="normal_main_section">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="RightEdge"><UnifiedDim scale="1" type="RightEdge" /></Dim>
+                    <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
+                </Area>
+                <Image type="TopLeftCorner" imageset="SWB" image="BtnWideNormal_TL" />
+                <Image type="TopRightCorner" imageset="SWB" image="BtnWideNormal_TR" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="BtnWideNormal_BL" />
+                <Image type="BottomRightCorner" imageset="SWB" image="BtnWideNormal_BR" />
+                <Image type="LeftEdge" imageset="SWB" image="BtnWideNormal_L" />
+                <Image type="TopEdge" imageset="SWB" image="BtnWideNormal_T" />
+                <Image type="RightEdge" imageset="SWB" image="BtnWideNormal_R" />
+                <Image type="BottomEdge" imageset="SWB" image="BtnWideNormal_B" />
+                <Image type="Background" imageset="SWB" image="BtnWideNormal_M" />
+            </FrameComponent>
+        </ImagerySection>
+
+        <ImagerySection name="hover_main_section">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="RightEdge"><UnifiedDim scale="1" type="RightEdge" /></Dim>
+                    <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
+                </Area>
+                <Image type="TopLeftCorner" imageset="SWB" image="BtnWideHover_TL" />
+                <Image type="TopRightCorner" imageset="SWB" image="BtnWideHover_TR" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="BtnWideHover_BL" />
+                <Image type="BottomRightCorner" imageset="SWB" image="BtnWideHover_BR" />
+                <Image type="LeftEdge" imageset="SWB" image="BtnWideHover_L" />
+                <Image type="TopEdge" imageset="SWB" image="BtnWideHover_T" />
+                <Image type="RightEdge" imageset="SWB" image="BtnWideHover_R" />
+                <Image type="BottomEdge" imageset="SWB" image="BtnWideHover_B" />
+                <Image type="Background" imageset="SWB" image="BtnWideHover_M" />
+            </FrameComponent>
+        </ImagerySection>
+
+        <ImagerySection name="pushed_main_section">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge"><AbsoluteDim value="0" /></Dim>
+                    <Dim type="RightEdge"><UnifiedDim scale="1" type="RightEdge" /></Dim>
+                    <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
+                </Area>
+                <Image type="TopLeftCorner" imageset="SWB" image="BtnWidePushed_TL" />
+                <Image type="TopRightCorner" imageset="SWB" image="BtnWidePushed_TR" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="BtnWidePushed_BL" />
+                <Image type="BottomRightCorner" imageset="SWB" image="BtnWidePushed_BR" />
+                <Image type="LeftEdge" imageset="SWB" image="BtnWidePushed_L" />
+                <Image type="TopEdge" imageset="SWB" image="BtnWidePushed_T" />
+                <Image type="RightEdge" imageset="SWB" image="BtnWidePushed_R" />
+                <Image type="BottomEdge" imageset="SWB" image="BtnWidePushed_B" />
+                <Image type="Background" imageset="SWB" image="BtnWidePushed_M" />
+            </FrameComponent>
+        </ImagerySection>
+
+       
+        <!-- regular representation of the button -->
+        <StateImagery name="Normal">
+            <Layer>
+                <Section section="normal_main_section">
+                    <ColourProperty name="BackgroundColour" />
+                </Section>
+                <Section section="label">
+                    <ColourProperty name="NormalTextColour" />
+                </Section>
+            </Layer>
+        </StateImagery>
+        
+        <!-- the cursor is hovering over the button -->
+        <StateImagery name="Hover">
+            <Layer>
+                <Section section="hover_main_section">
+                    <ColourProperty name="BackgroundColour" />
+                </Section>
+                  
+                <Section section="label">
+                    <ColourProperty name="HoverTextColour" />
+                </Section>
+            </Layer>
+        </StateImagery>
+        
+        <!-- the cursor is pushing the button -->
+        <StateImagery name="Pushed">
+            <Layer>
+                <Section section="pushed_main_section">
+                    <ColourProperty name="BackgroundColour" />
+                </Section>
+                  
+                <Section section="label">
+                    <ColourProperty name="HoverTextColour" />
+                </Section>
+            </Layer>
+        </StateImagery>
+        
+        <!-- the cursor pushed the buton, but is moving away -->
+        <StateImagery name="PushedOff">
+            <Layer>
+                <Section section="hover_main_section">
+                    <ColourProperty name="BackgroundColour" />
+                </Section>
+                  
+                <Section section="label">
+                    <ColourProperty name="HoverTextColour" />
+                </Section>
+            </Layer>
+        </StateImagery>
+        
+        <!-- the button is simply disabled -->
+        <StateImagery name="Disabled">
+            <Layer>
+                <Section section="normal_main_section_main_section">
+                    <Colours topLeft="997F7F7F" topRight="997F7F7F" bottomLeft="997F7F7F" bottomRight="997F7F7F" />
+                </Section>
+                  
+                <Section section="label">
+                    <ColourProperty name="DisabledTextColour" />
+                </Section>
+            </Layer>
+        </StateImagery>
+    </WidgetLook>
+
+
+
+    <!--
+    ***************************************************
         SWB/ImageButton
     ***************************************************
     -->

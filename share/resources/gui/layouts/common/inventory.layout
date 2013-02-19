@@ -94,13 +94,13 @@
                 <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/StaticImage" Name="BorderHorzM" >
-                <Property Name="Image" Value="set:Inventory image:BorderHorz" /> <!-- TODO: remove widget completely-->
+                <Property Name="Image" Value="set:Inventory image:BorderHorz" />
                 <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.14,0},{0.49,0},{0.15,0}}" />
                 <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="Resummoned/StaticImage" Name="BorderHorzB" >
-                <Property Name="Image" Value="set:Inventory image:BorderHorz" /> <!-- TODO: remove widget completely-->
+                <Property Name="Image" Value="set:Inventory image:BorderHorz" />
                 <Property Name="FrameEnabled" Value="False" />
                 <Property Name="UnifiedAreaRect" Value="{{0.48,0},{0.14,0},{0.72,0},{0.15,0}}" />
                 <Property Name="BackgroundEnabled" Value="False" />

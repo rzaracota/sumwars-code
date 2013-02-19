@@ -6,13 +6,13 @@
         <Property Name="CloseButtonAlignment" Value="1" />
         
         <!-- The OK button -->
-        <Window Type="Resummoned/Button32_4C" Name="GameExitConfirmButton" >
+        <Window Type="SWB/Button" Name="GameExitConfirmButton" >
             <Property Name="InheritsAlpha" Value="False" />
             <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.55,0},{0.4,0},{0.75,0}}" />
         </Window>
         
         <!-- The Cancel button -->
-        <Window Type="Resummoned/Button32_4C" Name="GameExitAbortButton" >
+        <Window Type="SWB/Button" Name="GameExitAbortButton" >
             <Property Name="InheritsAlpha" Value="False" />
             <Property Name="UnifiedAreaRect" Value="{{0.6,0},{0.55,0},{0.9,0},{0.75,0}}" />
         </Window>

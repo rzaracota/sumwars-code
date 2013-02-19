@@ -115,7 +115,34 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
 
   <Image Name="PanelTitleArea_Calc" XPos="180" YPos="25" Width="181" Height="26" />
   
+  <Image Name="BtnWideNormal_TL" XPos="550" YPos="130" Width="8" Height="8" /> 
+  <Image Name="BtnWideNormal_L" XPos="550" YPos="138" Width="8" Height="31" /> 
+  <Image Name="BtnWideNormal_BL" XPos="550" YPos="169" Width="8" Height="8" /> 
+  <Image Name="BtnWideNormal_T" XPos="558" YPos="130" Width="237" Height="8" /> 
+  <Image Name="BtnWideNormal_M" XPos="558" YPos="138" Width="237" Height="31" />
+  <Image Name="BtnWideNormal_B" XPos="558" YPos="169" Width="237" Height="8" /> 
+  <Image Name="BtnWideNormal_TR" XPos="795" YPos="130" Width="8" Height="8" /> 
+  <Image Name="BtnWideNormal_R" XPos="795" YPos="138" Width="8" Height="31" /> 
+  <Image Name="BtnWideNormal_BR" XPos="795" YPos="169" Width="8" Height="8" /> 
 
+  <Image Name="BtnWideHover_TL" XPos="550" YPos="180" Width="8" Height="8" /> 
+  <Image Name="BtnWideHover_L" XPos="550" YPos="188" Width="8" Height="31" /> 
+  <Image Name="BtnWideHover_BL" XPos="550" YPos="219" Width="8" Height="8" /> 
+  <Image Name="BtnWideHover_T" XPos="558" YPos="180" Width="237" Height="8" /> 
+  <Image Name="BtnWideHover_M" XPos="558" YPos="188" Width="237" Height="31" />
+  <Image Name="BtnWideHover_B" XPos="558" YPos="219" Width="237" Height="8" /> 
+  <Image Name="BtnWideHover_TR" XPos="795" YPos="180" Width="8" Height="8" /> 
+  <Image Name="BtnWideHover_R" XPos="795" YPos="188" Width="8" Height="31" /> 
+  <Image Name="BtnWideHover_BR" XPos="795" YPos="219" Width="8" Height="8" /> 
   
+  <Image Name="BtnWidePushed_TL" XPos="550" YPos="230" Width="8" Height="8" /> 
+  <Image Name="BtnWidePushed_L" XPos="550" YPos="238" Width="8" Height="31" /> 
+  <Image Name="BtnWidePushed_BL" XPos="550" YPos="269" Width="8" Height="8" /> 
+  <Image Name="BtnWidePushed_T" XPos="558" YPos="230" Width="237" Height="8" /> 
+  <Image Name="BtnWidePushed_M" XPos="558" YPos="238" Width="237" Height="31" />
+  <Image Name="BtnWidePushed_B" XPos="558" YPos="269" Width="237" Height="8" /> 
+  <Image Name="BtnWidePushed_TR" XPos="795" YPos="230" Width="8" Height="8" /> 
+  <Image Name="BtnWidePushed_R" XPos="795" YPos="238" Width="8" Height="31" /> 
+  <Image Name="BtnWidePushed_BR" XPos="795" YPos="269" Width="8" Height="8" /> 
   
 </Imageset>
