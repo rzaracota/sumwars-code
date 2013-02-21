@@ -5805,7 +5805,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="Image" initialValue="set:SWB image:EmptyGlyph24" redrawOnWrite="true" />
         <PropertyDefinition name="VertImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
         <PropertyDefinition name="HorzImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
-        <PropertyDefinition name="BackgroundColour" initialValue="22FFFFFF" />
+        <PropertyDefinition name="BackgroundColour" initialValue="11FFFFFF" />
         <PropertyDefinition name="BackgroundHighlightColour" initialValue="FFFFFFFF" />
         <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
         <PropertyDefinition name="BorderColourHover" initialValue="FFCCB078" />
@@ -5977,7 +5977,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     <WidgetLook name="SWB/ProgressBar">
         <PropertyDefinition name="BarSegmentMode" initialValue="Stretched" redrawOnWrite="true" />
         
-        <PropertyDefinition name="GS_DarkerThemeColour" initialValue="FF940000" redrawOnWrite="true" />
+        <PropertyDefinition name="GS_DarkerThemeColour" initialValue="FFAC4F4F" redrawOnWrite="true" />
         <PropertyDefinition name="GS_LighterThemeColour" initialValue="FFFF0101" redrawOnWrite="true" />
         <PropertyDefinition name="GS_MainThemeColour" initialValue="FFDC5F5F" redrawOnWrite="true" />
         <PropertyDefinition name="GS_ShineColour" initialValue="B0FFFFFF" redrawOnWrite="true" />
@@ -5985,9 +5985,17 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         
         <NamedArea name="ProgressArea">
             <Area>
-                <Dim type="LeftEdge" ><AbsoluteDim value="6" /></Dim>
+                <Dim type="LeftEdge" >
+                    <ImageDim imageset="SWB" image="ProgressBar_Non_Fill_Calc" dimension="Width" />
+                </Dim>
                 <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
-                <Dim type="RightEdge" ><UnifiedDim scale="1" type="RightEdge" offset="-6"/></Dim>
+                <Dim type="RightEdge" >
+                    <UnifiedDim scale="1" type="RightEdge">
+                        <DimOperator op="Subtract">
+                            <ImageDim imageset="SWB" image="ProgressBar_Non_Fill_Calc" dimension="Width" />
+                        </DimOperator>
+                    </UnifiedDim>
+                </Dim>
                 <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
             </Area>
         </NamedArea>
@@ -6033,55 +6041,67 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </ImagerySection>
 
         <ImagerySection name="background_highlight">
-            <ImageryComponent>
+            <FrameComponent>
                 <Area>
-                    <Dim type="LeftEdge" ><AbsoluteDim value="10" /></Dim>
-                    <Dim type="TopEdge" ><AbsoluteDim value="8" /></Dim>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
                     <Dim type="Width" >
                         <UnifiedDim scale="1" type="Width">
                             <DimOperator op="Subtract">
-                                <AbsoluteDim value="20" />
+                                <AbsoluteDim value="0" />
                             </DimOperator>
                         </UnifiedDim>
                     </Dim>
                     <Dim type="Height" >
                         <UnifiedDim scale="1" type="Height">
                             <DimOperator op="Subtract">
-                                <AbsoluteDim value="16" />
+                                <AbsoluteDim value="0" />
                             </DimOperator>
                         </UnifiedDim>
                     </Dim>
                 </Area>
-                <Image type="Background" imageset="SWB" image="ProgressBar_BackgHighlight" />
-                <VertFormat type="Stretched" />
-                <HorzFormat type="Stretched" />
-            </ImageryComponent>
+                <Image type="TopLeftCorner" imageset="SWB" image="ProgressBar_Bck_TL" />
+                <Image type="LeftEdge" imageset="SWB" image="ProgressBar_Bck_L" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="ProgressBar_Bck_BL" />
+                <Image type="TopEdge" imageset="SWB" image="ProgressBar_Bck_T" />
+                <Image type="Background" imageset="SWB" image="ProgressBar_Bck_M" />
+                <Image type="BottomEdge" imageset="SWB" image="ProgressBar_Bck_B" />
+                <Image type="TopRightCorner" imageset="SWB" image="ProgressBar_Bck_TR" />
+                <Image type="RightEdge" imageset="SWB" image="ProgressBar_Bck_R" />
+                <Image type="BottomRightCorner" imageset="SWB" image="ProgressBar_Bck_BR" />
+            </FrameComponent>
         </ImagerySection>
 
         <ImagerySection name="background_highlight_redux">
-            <ImageryComponent>
+            <FrameComponent>
                 <Area>
-                    <Dim type="LeftEdge" ><AbsoluteDim value="4" /></Dim> <!-- 10 - 6 -->
-                    <Dim type="TopEdge" ><AbsoluteDim value="8" /></Dim>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim> <!-- 10 - 6 -->
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
                     <Dim type="Width" >
                         <UnifiedDim scale="1" type="Width">
                             <DimOperator op="Subtract">
-                                <AbsoluteDim value="8" />
+                                <AbsoluteDim value="0" />
                             </DimOperator>
                         </UnifiedDim>
                     </Dim>
                     <Dim type="Height" >
                         <UnifiedDim scale="1" type="Height">
                             <DimOperator op="Subtract">
-                                <AbsoluteDim value="16" />
+                                <AbsoluteDim value="0" />
                             </DimOperator>
                         </UnifiedDim>
                     </Dim>
                 </Area>
-                <Image type="Background" imageset="SWB" image="ProgressBar_BackgHighlight" />
-                <VertFormat type="Stretched" />
-                <HorzFormat type="Stretched" />
-            </ImageryComponent>
+                <Image type="TopLeftCorner" imageset="SWB" image="ProgressBar_Bck_TL_Redux" />
+                <Image type="LeftEdge" imageset="SWB" image="ProgressBar_Bck_L_Redux" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="ProgressBar_Bck_BL_Redux" />
+                <Image type="TopEdge" imageset="SWB" image="ProgressBar_Bck_T" />
+                <Image type="Background" imageset="SWB" image="ProgressBar_Bck_M" />
+                <Image type="BottomEdge" imageset="SWB" image="ProgressBar_Bck_B" />
+                <Image type="TopRightCorner" imageset="SWB" image="ProgressBar_Bck_TR_Redux" />
+                <Image type="RightEdge" imageset="SWB" image="ProgressBar_Bck_R_Redux" />
+                <Image type="BottomRightCorner" imageset="SWB" image="ProgressBar_Bck_BR_Redux" />
+            </FrameComponent>
         </ImagerySection>
         
         <ImagerySection name="progress_lights" >
@@ -6130,8 +6150,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <Section section="background_highlight">
                     <ColourProperty name="GS_ShineColour" />
                 </Section>
-            </Layer>
-            <Layer>
                 <Section section="border_section" />
             </Layer>
         </StateImagery>
@@ -6149,38 +6167,42 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
             </Layer>
         </StateImagery>
 
+
+
         <StateImagery name="EnabledProgress">
             <Layer>
                 <Section section="progress_lights" >
-                    <ColourProperty name="GS_MainThemeColour" />
-                </Section>
-                <Section section="progress_lights" >
                     <ColourRectProperty name="GS_MainThemeGradientLeftToRight" />
                 </Section>
-            </Layer>
-            <Layer>
+                <Section section="progress_lights" >
+                    <ColourProperty name="GS_MainThemeColour" />
+                </Section>
+                <Section section="background_highlight_redux">
+                    <ColourProperty name="GS_DarkerThemeColour" />
+                </Section>
                 <Section section="progress_lights_leading" >
                     <ColourProperty name="GS_LighterThemeColour" />
                 </Section>
-                <Section section="background_highlight_redux">
-                    <ColourProperty name="GS_ShineColour" />
-                </Section>
-            </Layer>
-            <Layer>
                 <Section section="border_section_redux" />
             </Layer>
         </StateImagery>
+
+
 
         <StateImagery name="DisabledProgress">
             <Layer>
                 <Section section="progress_lights">
                     <Colours topLeft="FF7F7F7F" topRight="FF7F7F7F" bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" />
                 </Section>
-                <Section section="background_highlight_redux">
-                    <ColourProperty name="GS_ShineColour" />
+                <Section section="progress_lights" >
+                    <Colours topLeft="FF7F7F7F" topRight="FF7F7F7F" bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" />
                 </Section>
-            </Layer>
-            <Layer>
+                <Section section="background_highlight_redux">
+                    <ColourProperty name="GS_MainThemeColour" />
+                </Section>
+                <Section section="progress_lights_leading" >
+                    <ColourProperty name="GS_LighterThemeColour" />
+                </Section>
                 <Section section="border_section_redux">
                     <Colours topLeft="FF7F7F7F" topRight="FF7F7F7F" bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" />
                 </Section>

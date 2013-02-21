@@ -33,17 +33,17 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="PanelCloseButton_Off" XPos="560" YPos="31" Width="31" Height="31" />
   
   <!-- A button with background content -->
-  <Image Name="Button_BackgroundOnly" XPos="135" YPos="680" Width="128" Height="128" />
+  <Image Name="Button_BackgroundOnly" XPos="550" YPos="305" Width="128" Height="128" />
    
-  <Image Name="Button_Background_TL" XPos="135" YPos="680" Width="15" Height="15" /> 
-  <Image Name="Button_Background_L" XPos="135" YPos="695" Width="15" Height="98" /> 
-  <Image Name="Button_Background_BL" XPos="135" YPos="793" Width="15" Height="15" /> 
-  <Image Name="Button_Background_T" XPos="150" YPos="680" Width="98" Height="15" /> 
-  <Image Name="Button_Background_M" XPos="150" YPos="695" Width="98" Height="98" /> 
-  <Image Name="Button_Background_B" XPos="150" YPos="793" Width="98" Height="15" /> 
-  <Image Name="Button_Background_TR" XPos="248" YPos="680" Width="15" Height="15" /> 
-  <Image Name="Button_Background_R" XPos="248" YPos="695" Width="15" Height="98" /> 
-  <Image Name="Button_Background_BR" XPos="248" YPos="793" Width="15" Height="15" /> 
+  <Image Name="Button_Background_TL" XPos="550" YPos="305" Width="15" Height="15" /> 
+  <Image Name="Button_Background_L" XPos="550" YPos="320" Width="15" Height="98" /> 
+  <Image Name="Button_Background_BL" XPos="550" YPos="418" Width="15" Height="15" /> 
+  <Image Name="Button_Background_T" XPos="565" YPos="305" Width="98" Height="15" /> 
+  <Image Name="Button_Background_M" XPos="565" YPos="320" Width="98" Height="98" /> 
+  <Image Name="Button_Background_B" XPos="565" YPos="418" Width="98" Height="15" /> 
+  <Image Name="Button_Background_TR" XPos="663" YPos="305" Width="15" Height="15" /> 
+  <Image Name="Button_Background_R" XPos="663" YPos="320" Width="15" Height="98" /> 
+  <Image Name="Button_Background_BR" XPos="663" YPos="418" Width="15" Height="15" /> 
 
   <Image Name="Rounded_Small_Border_TL" XPos="600" YPos="84" Width="8" Height="8" /> 
   <Image Name="Rounded_Small_Border_L" XPos="600" YPos="92" Width="8" Height="26" /> 
@@ -107,6 +107,23 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="GlyphArrowRight" XPos="1000" YPos="0" Width="5" Height="5" />
   <Image Name="GlyphArrowDown" XPos="1000" YPos="0" Width="5" Height="5" />
   <Image Name="GlyphArrowUp" XPos="1000" YPos="0" Width="5" Height="5" />
+
+  <Image Name="EmptyGlyph24" XPos="1000" YPos="0" Width="24" Height="24" />
+
+  <!-- Rounded square border with darker inner section-->
+  <Image Name="Rounded_Square_Small_TL" XPos="825" YPos="0" Width="16" Height="16" /> 
+  <Image Name="Rounded_Square_Small_L" XPos="825" YPos="16" Width="16" Height="32" /> 
+  <Image Name="Rounded_Square_Small_BL" XPos="825" YPos="48" Width="16" Height="16" /> 
+  <Image Name="Rounded_Square_Small_T" XPos="841" YPos="0" Width="32" Height="16" /> 
+  <Image Name="Rounded_Square_Small_M" XPos="841" YPos="16" Width="32" Height="32" /> 
+  <Image Name="Rounded_Square_Small_B" XPos="841" YPos="48" Width="32" Height="16" /> 
+  <Image Name="Rounded_Square_Small_TR" XPos="873" YPos="0" Width="16" Height="16" /> 
+  <Image Name="Rounded_Square_Small_R" XPos="873" YPos="16" Width="16" Height="32" /> 
+  <Image Name="Rounded_Square_Small_BR" XPos="873" YPos="48" Width="16" Height="16" /> 
+  
+  <Image Name="Rounded_Square_Small_Calc_L" XPos="825" YPos="0" Width="6" Height="6" />
+  <Image Name="Rounded_Square_Small_Calc_T" XPos="841" YPos="0" Width="6" Height="6" /> 
+
   
   <!-- scrolls - 16 pixels sized-->
   <Image Name="MiniHorzScrollLeftNormal" XPos="1000" YPos="0" Width="5" Height="5" />
@@ -204,4 +221,72 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="TabButton_Background" XPos="386" YPos="126" Width="52" Height="52" />
   <Image Name="TabButton_Backghighlight" XPos="466" YPos="126" Width="52" Height="52" />
 -->
+
+  <!-- Progress bar frame -->
+  <Image Name="ProgressBar_HD_TL" XPos="0" YPos="420" Width="33" Height="4" />
+  <Image Name="ProgressBar_HD_L" XPos="0" YPos="424" Width="33" Height="40" />
+  <Image Name="ProgressBar_HD_BL" XPos="0" YPos="464" Width="33" Height="4" />
+  <Image Name="ProgressBar_HD_T" XPos="33" YPos="420" Width="158" Height="4" />
+  <Image Name="ProgressBar_HD_M" XPos="33" YPos="424" Width="158" Height="40" />
+  <Image Name="ProgressBar_HD_B" XPos="33" YPos="464" Width="158" Height="4" />
+  <Image Name="ProgressBar_HD_TR" XPos="191" YPos="420" Width="33" Height="4" />
+  <Image Name="ProgressBar_HD_R" XPos="191" YPos="424" Width="33" Height="40" />
+  <Image Name="ProgressBar_HD_BR" XPos="191" YPos="464" Width="33" Height="4" />
+
+  <Image Name="ProgressBar_Non_Fill_Calc" XPos="0" YPos="420" Width="22" Height="4" />
+  
+  <!-- A progress bar with cut edges -->
+  <Image Name="ProgressBar_HD_TL_Redux" XPos="22" YPos="420" Width="11" Height="4" />
+  <Image Name="ProgressBar_HD_L_Redux" XPos="22" YPos="424" Width="11" Height="40" />
+  <Image Name="ProgressBar_HD_BL_Redux" XPos="22" YPos="464" Width="11" Height="4" />
+  
+  <Image Name="ProgressBar_HD_TR_Redux" XPos="191" YPos="420" Width="11" Height="4" />
+  <Image Name="ProgressBar_HD_R_Redux" XPos="191" YPos="424" Width="11" Height="40" />
+  <Image Name="ProgressBar_HD_BR_Redux" XPos="191" YPos="464" Width="11" Height="4" />
+
+  <!-- Progress bar - the sections for Dim and Lit filling. Only 1 used ATM -->
+  <Image Name="ProgressBarLitSegment" XPos="270" YPos="385" Width="128" Height="32" />
+  <Image Name="ProgressBarGraySegment" XPos="270" YPos="417" Width="128" Height="32" />
+
+
+  <!-- Progress bar background -->
+  <!-- Progress bar background with cut edges -->
+<!--
+  <Image Name="ProgressBar_Bck_TL" XPos="0" YPos="468" Width="33" Height="4" />
+  <Image Name="ProgressBar_Bck_L" XPos="0" YPos="472" Width="33" Height="40" />
+  <Image Name="ProgressBar_Bck_BL" XPos="0" YPos="512" Width="33" Height="4" />
+  <Image Name="ProgressBar_Bck_T" XPos="33" YPos="468" Width="158" Height="4" />
+  <Image Name="ProgressBar_Bck_M" XPos="33" YPos="472" Width="158" Height="40" />
+  <Image Name="ProgressBar_Bck_B" XPos="33" YPos="512" Width="158" Height="4" />
+  <Image Name="ProgressBar_Bck_TR" XPos="191" YPos="468" Width="33" Height="4" />
+  <Image Name="ProgressBar_Bck_R" XPos="191" YPos="472" Width="33" Height="40" />
+  <Image Name="ProgressBar_Bck_BR" XPos="191" YPos="512" Width="33" Height="4" />
+
+  <Image Name="ProgressBar_Bck_TL_Redux" XPos="22" YPos="468" Width="11" Height="4" />
+  <Image Name="ProgressBar_Bck_L_Redux" XPos="22" YPos="472" Width="11" Height="40" />
+  <Image Name="ProgressBar_Bck_BL_Redux" XPos="22" YPos="512" Width="11" Height="4" />
+  <Image Name="ProgressBar_Bck_TR_Redux" XPos="191" YPos="468" Width="11" Height="4" />
+  <Image Name="ProgressBar_Bck_R_Redux" XPos="191" YPos="472" Width="11" Height="40" />
+  <Image Name="ProgressBar_Bck_BR_Redux" XPos="191" YPos="512" Width="11" Height="4" />
+-->
+
+  <Image Name="ProgressBar_Bck_TL_Redux" XPos="22" YPos="516" Width="23" Height="4" />
+  <Image Name="ProgressBar_Bck_L_Redux" XPos="22" YPos="520" Width="23" Height="40" />
+  <Image Name="ProgressBar_Bck_BL_Redux" XPos="22" YPos="560" Width="23" Height="4" />
+  <Image Name="ProgressBar_Bck_TR_Redux" XPos="175" YPos="516" Width="23" Height="4" />
+  <Image Name="ProgressBar_Bck_R_Redux" XPos="175" YPos="520" Width="23" Height="40" />
+  <Image Name="ProgressBar_Bck_BR_Redux" XPos="175" YPos="560" Width="23" Height="4" />
+
+  <Image Name="ProgressBar_Bck_TL" XPos="0" YPos="516" Width="45" Height="4" />
+  <Image Name="ProgressBar_Bck_L" XPos="0" YPos="520" Width="45" Height="40" />
+  <Image Name="ProgressBar_Bck_BL" XPos="0" YPos="560" Width="45" Height="4" />
+  <Image Name="ProgressBar_Bck_T" XPos="45" YPos="516" Width="130" Height="4" />
+  <Image Name="ProgressBar_Bck_M" XPos="45" YPos="520" Width="130" Height="40" />
+  <Image Name="ProgressBar_Bck_B" XPos="45" YPos="560" Width="130" Height="4" />
+  <Image Name="ProgressBar_Bck_TR" XPos="175" YPos="516" Width="49" Height="4" />
+  <Image Name="ProgressBar_Bck_R" XPos="175" YPos="520" Width="49" Height="40" />
+  <Image Name="ProgressBar_Bck_BR" XPos="175" YPos="560" Width="49" Height="4" />
+
+
+
 </Imageset>

@@ -146,6 +146,7 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 		}
 	}
 	
+	// TODO:remove when no longer needed - end
 	if (img->isPropertyPresent ("BackgroundColours") && item != 0)
 	{
 		std::string propold = img->getProperty("BackgroundColours").c_str();
@@ -171,13 +172,14 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 			img->setProperty("BackgroundColours", propnew); 
 		}
 	}
+	// TODO:remove when no longer needed - begin
 	else if (img->isPropertyPresent ("BackgroundColour") && item != 0)
 	{
 		std::string propold = img->getProperty("BackgroundColour").c_str();
-		std::string propnew = "FF000000";
+		std::string propnew = "2AFFFFFF";
 
-		// rot wenn Spieler Item nicht verwenden kann
-		// oder es bezahlen muss und nicht genug Geld hat
+		// TODO: move colours to separate locations. Preferably make non-hard-coded.
+		// Red colour when the player cannot use the item or (shop scenario) not enough gold available for purchase
 		if (!player->checkItemRequirements(item).m_overall)
 		{
 			propnew = "FFAA5555";
@@ -194,6 +196,14 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 		if (propold != propnew)
 		{
 			img->setProperty("BackgroundColour", propnew); 
+		}
+	}
+
+	if (item == 0)
+	{
+		if (img->isPropertyPresent ("BackgroundColour"))
+		{
+			img->setProperty ("BackgroundColour", img->getPropertyDefault ("BackgroundColour"));
 		}
 	}
 	

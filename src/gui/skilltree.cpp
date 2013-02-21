@@ -66,9 +66,23 @@ SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard)
 	skilltree->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent,  (Window*) this));
 	skilltree->setWantsMultiClickEvents(false);
 	
-	label = win_mgr.getWindow("SkillTreeCloseButton");
-	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onCloseButtonClicked, this));
+	if (win_mgr.isWindowPresent ("SkillTreeCloseButton"))
+	{
+		label = win_mgr.getWindow("SkillTreeCloseButton");
+		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onCloseButtonClicked, this));
+	}
 	
+	// If the panel also has an auto-close button, connect it to the Cancel/Abort event.
+	if (win_mgr.isWindowPresent ("Skilltree__auto_close_panel_button__"))
+	{
+		label = win_mgr.getWindow ("Skilltree__auto_close_panel_button__");
+		if (label)
+		{
+			label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onCloseButtonClicked, this));
+		}
+	}
+
+
 	m_nr_tabs =0;
 	m_nr_skills =0;
 	m_nr_dependencies = 0;
@@ -592,14 +606,26 @@ void SkillTree::updateTranslation()
 		tabs[i]->setText((CEGUI::utf8*) gettext(pdata->m_tabnames[i].c_str()));
 	}
 
-		label =  win_mgr.getWindow("SkillpointsLabel");
-		label->setText((CEGUI::utf8*) gettext("Skillpoints"));
+	label =  win_mgr.getWindow("SkillpointsLabel");
+	label->setText((CEGUI::utf8*) gettext("Skillpoints"));
 		
-		label =  win_mgr.getWindow("NextSkillpointsLabel");
-		label->setText((CEGUI::utf8*) gettext("Next Skillpoint at Level"));
-		
+	label =  win_mgr.getWindow("NextSkillpointsLabel");
+	label->setText((CEGUI::utf8*) gettext("Next Skillpoint at Level"));
+
+	if (win_mgr.isWindowPresent ("SkilltreeLabel"))
+	{
 		label =  win_mgr.getWindow("SkilltreeLabel");
 		label->setText((CEGUI::utf8*) gettext("Skilltree"));
+	}
+	else if (win_mgr.isWindowPresent ("Skilltree"))
+	{
+		label =  win_mgr.getWindow("Skilltree");
+		if (label->isPropertyPresent ("TitleText"))
+		{
+			label->setProperty ("TitleText", (CEGUI::utf8*) gettext("Skilltree"));
+		}
+	}
+
 }
 
 void SkillTree::updateAbilityTooltip(unsigned int pos)
