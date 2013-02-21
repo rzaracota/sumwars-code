@@ -32,26 +32,18 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="PanelCloseButton_On" XPos="560" YPos="0" Width="31" Height="31" />
   <Image Name="PanelCloseButton_Off" XPos="560" YPos="31" Width="31" Height="31" />
   
-  <!-- Static text borders --> <!-- TODO: bring to standardized suffix format -->
-  <Image Name="StaticTopLeft" XPos="600" YPos="0" Width="5" Height="5" /> 
-  <Image Name="StaticLeft" XPos="600" YPos="5" Width="5" Height="32" /> 
-  <Image Name="StaticBottomLeft" XPos="600" YPos="37" Width="5" Height="5" /> 
-  <Image Name="StaticTop" XPos="605" YPos="0" Width="32" Height="5" /> 
-  <Image Name="StaticBackdrop" XPos="605" YPos="5" Width="32" Height="32" />
-  <Image Name="StaticBottom" XPos="605" YPos="37" Width="32" Height="5" /> 
-  <Image Name="StaticTopRight" XPos="637" YPos="0" Width="5" Height="5" /> 
-  <Image Name="StaticRight" XPos="637" YPos="5" Width="5" Height="32" /> 
-  <Image Name="StaticBottomRight" XPos="637" YPos="37" Width="5" Height="5" /> 
-
-  <Image Name="Static_TL" XPos="600" YPos="0" Width="5" Height="5" /> 
-  <Image Name="Static_L" XPos="600" YPos="5" Width="5" Height="32" /> 
-  <Image Name="Static_BL" XPos="600" YPos="37" Width="5" Height="5" /> 
-  <Image Name="Static_T" XPos="605" YPos="0" Width="32" Height="5" /> 
-  <Image Name="Static_M" XPos="605" YPos="5" Width="32" Height="32" />
-  <Image Name="Static_B" XPos="605" YPos="37" Width="32" Height="5" /> 
-  <Image Name="Static_TR" XPos="637" YPos="0" Width="5" Height="5" /> 
-  <Image Name="Static_R" XPos="637" YPos="5" Width="5" Height="32" /> 
-  <Image Name="Static_BR" XPos="637" YPos="37" Width="5" Height="5" /> 
+  <!-- A button with background content -->
+  <Image Name="Button_BackgroundOnly" XPos="135" YPos="680" Width="128" Height="128" />
+   
+  <Image Name="Button_Background_TL" XPos="135" YPos="680" Width="15" Height="15" /> 
+  <Image Name="Button_Background_L" XPos="135" YPos="695" Width="15" Height="98" /> 
+  <Image Name="Button_Background_BL" XPos="135" YPos="793" Width="15" Height="15" /> 
+  <Image Name="Button_Background_T" XPos="150" YPos="680" Width="98" Height="15" /> 
+  <Image Name="Button_Background_M" XPos="150" YPos="695" Width="98" Height="98" /> 
+  <Image Name="Button_Background_B" XPos="150" YPos="793" Width="98" Height="15" /> 
+  <Image Name="Button_Background_TR" XPos="248" YPos="680" Width="15" Height="15" /> 
+  <Image Name="Button_Background_R" XPos="248" YPos="695" Width="15" Height="98" /> 
+  <Image Name="Button_Background_BR" XPos="248" YPos="793" Width="15" Height="15" /> 
 
   <Image Name="Rounded_Small_Border_TL" XPos="600" YPos="84" Width="8" Height="8" /> 
   <Image Name="Rounded_Small_Border_L" XPos="600" YPos="92" Width="8" Height="26" /> 
@@ -63,6 +55,41 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="Rounded_Small_Border_R" XPos="634" YPos="92" Width="8" Height="26" /> 
   <Image Name="Rounded_Small_Border_BR" XPos="634" YPos="118" Width="8" Height="8" /> 
 
+  <!-- Static text borders --> <!-- TODO: bring to standardized suffix format -->
+  <Image Name="StaticTopLeft" XPos="600" YPos="0" Width="5" Height="5" /> 
+  <Image Name="StaticLeft" XPos="600" YPos="5" Width="5" Height="32" /> 
+  <Image Name="StaticBottomLeft" XPos="600" YPos="37" Width="5" Height="5" /> 
+  <Image Name="StaticTop" XPos="605" YPos="0" Width="32" Height="5" /> 
+  <Image Name="StaticBackdrop" XPos="605" YPos="5" Width="32" Height="32" />
+  <Image Name="StaticBottom" XPos="605" YPos="37" Width="32" Height="5" /> 
+  <Image Name="StaticTopRight" XPos="637" YPos="0" Width="5" Height="5" /> 
+  <Image Name="StaticRight" XPos="637" YPos="5" Width="5" Height="32" /> 
+  <Image Name="StaticBottomRight" XPos="637" YPos="37" Width="5" Height="5" /> 
+
+  <Image Name="Static_TL" XPos="600" YPos="84" Width="8" Height="8" /> 
+  <Image Name="Static_L" XPos="600" YPos="92" Width="8" Height="26" /> 
+  <Image Name="Static_BL" XPos="600" YPos="118" Width="8" Height="8" /> 
+  <Image Name="Static_T" XPos="608" YPos="84" Width="26" Height="8" /> 
+  <Image Name="Static_M" XPos="608" YPos="92" Width="26" Height="26" />
+  <Image Name="Static_B" XPos="608" YPos="118" Width="26" Height="8" /> 
+  <Image Name="Static_TR" XPos="634" YPos="84" Width="8" Height="8" /> 
+  <Image Name="Static_R" XPos="634" YPos="92" Width="8" Height="26" /> 
+  <Image Name="Static_BR" XPos="634" YPos="118" Width="8" Height="8" /> 
+
+  <!-- Edit Box --> <!-- same as combo-edit box-->
+  <Image Name="EditBox_TL" XPos="600" YPos="84" Width="8" Height="8" /> 
+  <Image Name="EditBox_L" XPos="600" YPos="92" Width="8" Height="26" /> 
+  <Image Name="EditBox_BL" XPos="600" YPos="118" Width="8" Height="8" /> 
+  <Image Name="EditBox_T" XPos="608" YPos="84" Width="26" Height="8" /> 
+  <Image Name="EditBox_M" XPos="608" YPos="92" Width="26" Height="26" />
+  <Image Name="EditBox_B" XPos="608" YPos="118" Width="26" Height="8" /> 
+  <Image Name="EditBox_TR" XPos="634" YPos="84" Width="8" Height="8" /> 
+  <Image Name="EditBox_R" XPos="634" YPos="92" Width="8" Height="26" /> 
+  <Image Name="EditBox_BR" XPos="634" YPos="118" Width="8" Height="8" /> 
+
+  <Image Name="EditBoxCarat" XPos="595" YPos="85" Width="3" Height="30" />
+
+  <!--Horizontal scrollbar thumb border -->
   <Image Name="HorzScrollThumbBorder_TL" XPos="1000" YPos="0" Width="5" Height="5" />
   <Image Name="HorzScrollThumbBorder_L" XPos="1000" YPos="0" Width="5" Height="5" />
   <Image Name="HorzScrollThumbBorder_BL" XPos="1000" YPos="0" Width="5" Height="5" />
@@ -81,11 +108,13 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="GlyphArrowDown" XPos="1000" YPos="0" Width="5" Height="5" />
   <Image Name="GlyphArrowUp" XPos="1000" YPos="0" Width="5" Height="5" />
   
+  <!-- scrolls - 16 pixels sized-->
   <Image Name="MiniHorzScrollLeftNormal" XPos="1000" YPos="0" Width="5" Height="5" />
   <Image Name="MiniHorzScrollRightNormal" XPos="1000" YPos="0" Width="5" Height="5" />
   <Image Name="MiniHorzScrollBarSegment" XPos="1000" YPos="0" Width="5" Height="5" />
   <Image Name="MiniVertScrollBarSegment" XPos="1000" YPos="0" Width="5" Height="5" />
   
+  <!-- Vertical scrollbar thumb border -->  
   <Image Name="VertScrollThumbBorder_TL" XPos="1000" YPos="0" Width="5" Height="5" />
   <Image Name="VertScrollThumbBorder_TR" XPos="1000" YPos="0" Width="5" Height="5" />
   <Image Name="VertScrollThumbBorder_BL" XPos="1000" YPos="0" Width="5" Height="5" />
@@ -145,4 +174,34 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="BtnWidePushed_R" XPos="795" YPos="238" Width="8" Height="31" /> 
   <Image Name="BtnWidePushed_BR" XPos="795" YPos="269" Width="8" Height="8" /> 
   
+  <Image Name="WeaponSwitchState1" XPos="550" YPos="280" Width="93" Height="24" /> 
+  <Image Name="WeaponSwitchState2" XPos="646" YPos="280" Width="93" Height="24" /> 
+
+  <!-- A generic simple rounded border -->
+  <Image Name="GenericRoundedBorder_TL" XPos="780" YPos="42" Width="8" Height="8" /> 
+  <Image Name="GenericRoundedBorder_L" XPos="780" YPos="50" Width="8" Height="26" /> 
+  <Image Name="GenericRoundedBorder_BL" XPos="780" YPos="76" Width="8" Height="8" /> 
+  <Image Name="GenericRoundedBorder_T" XPos="788" YPos="42" Width="26" Height="8" /> 
+  <Image Name="GenericRoundedBorder_M" XPos="788" YPos="50" Width="26" Height="26" />
+  <Image Name="GenericRoundedBorder_B" XPos="788" YPos="76" Width="26" Height="8" /> 
+  <Image Name="GenericRoundedBorder_TR" XPos="814" YPos="42" Width="8" Height="8" /> 
+  <Image Name="GenericRoundedBorder_R" XPos="814" YPos="50" Width="8" Height="26" /> 
+  <Image Name="GenericRoundedBorder_BR" XPos="814" YPos="76" Width="8" Height="8" /> 
+  
+  
+  <!-- A generic Tab button border -->
+  <Image Name="TabButtonBorder_TL" XPos="780" YPos="0" Width="8" Height="8" /> 
+  <Image Name="TabButtonBorder_L" XPos="780" YPos="8" Width="8" Height="26" /> 
+  <Image Name="TabButtonBorder_BL" XPos="780" YPos="34" Width="8" Height="8" /> 
+  <Image Name="TabButtonBorder_T" XPos="788" YPos="0" Width="26" Height="8" /> 
+  <Image Name="TabButtonBorder_M" XPos="788" YPos="8" Width="26" Height="26" />
+  <Image Name="TabButtonBorder_B" XPos="788" YPos="34" Width="26" Height="8" /> 
+  <Image Name="TabButtonBorder_TR" XPos="814" YPos="0" Width="8" Height="8" /> 
+  <Image Name="TabButtonBorder_R" XPos="814" YPos="8" Width="8" Height="26" /> 
+  <Image Name="TabButtonBorder_BR" XPos="814" YPos="34" Width="8" Height="8" /> 
+
+<!--  
+  <Image Name="TabButton_Background" XPos="386" YPos="126" Width="52" Height="52" />
+  <Image Name="TabButton_Backghighlight" XPos="466" YPos="126" Width="52" Height="52" />
+-->
 </Imageset>
