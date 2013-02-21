@@ -204,6 +204,16 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="GenericRoundedBorder_TR" XPos="814" YPos="42" Width="8" Height="8" /> 
   <Image Name="GenericRoundedBorder_R" XPos="814" YPos="50" Width="8" Height="26" /> 
   <Image Name="GenericRoundedBorder_BR" XPos="814" YPos="76" Width="8" Height="8" /> 
+
+  <Image Name="FilledRoundedBorder_TL" XPos="780" YPos="84" Width="8" Height="8" /> 
+  <Image Name="FilledRoundedBorder_L" XPos="780" YPos="92" Width="8" Height="26" /> 
+  <Image Name="FilledRoundedBorder_BL" XPos="780" YPos="118" Width="8" Height="8" /> 
+  <Image Name="FilledRoundedBorder_T" XPos="788" YPos="84" Width="26" Height="8" /> 
+  <Image Name="FilledRoundedBorder_M" XPos="788" YPos="92" Width="26" Height="26" />
+  <Image Name="FilledRoundedBorder_B" XPos="788" YPos="118" Width="26" Height="8" /> 
+  <Image Name="FilledRoundedBorder_TR" XPos="814" YPos="84" Width="8" Height="8" /> 
+  <Image Name="FilledRoundedBorder_R" XPos="814" YPos="92" Width="8" Height="26" /> 
+  <Image Name="FilledRoundedBorder_BR" XPos="814" YPos="118" Width="8" Height="8" /> 
   
   
   <!-- A generic Tab button border -->
@@ -288,5 +298,40 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="ProgressBar_Bck_BR" XPos="175" YPos="560" Width="49" Height="4" />
 
 
+  <!-- Tool-tip images -->
+	<Image Name="TooltipTopLeft" XPos="780" YPos="84" Width="8" Height="8" />
+	<Image Name="TooltipLeftEdge" XPos="780" YPos="92" Width="8" Height="26" />
+	<Image Name="TooltipBottomLeft" XPos="780" YPos="118" Width="8" Height="8" />
+	<Image Name="TooltipTopEdge" XPos="788" YPos="84" Width="26" Height="8" />
+	<Image Name="TooltipMiddle" XPos="788" YPos="92" Width="26" Height="26" />
+	<Image Name="TooltipBottomEdge" XPos="788" YPos="118" Width="26" Height="8" />
+	<Image Name="TooltipTopRight" XPos="814" YPos="84" Width="8" Height="8" />
+	<Image Name="TooltipRightEdge" XPos="814" YPos="92" Width="8" Height="26" />
+	<Image Name="TooltipBottomRight" XPos="814" YPos="118" Width="8" Height="8" />
+<!--	<Image Name="TooltipTopLeft" XPos="600" YPos="84" Width="8" Height="8" />
+	<Image Name="TooltipLeftEdge" XPos="600" YPos="92" Width="8" Height="26" />
+	<Image Name="TooltipBottomLeft" XPos="600" YPos="118" Width="8" Height="8" />
+	<Image Name="TooltipTopEdge" XPos="608" YPos="84" Width="26" Height="8" />
+	<Image Name="TooltipMiddle" XPos="608" YPos="92" Width="26" Height="26" />
+	<Image Name="TooltipBottomEdge" XPos="608" YPos="118" Width="26" Height="8" />
+	<Image Name="TooltipTopRight" XPos="634" YPos="84" Width="8" Height="8" />
+	<Image Name="TooltipRightEdge" XPos="634" YPos="92" Width="8" Height="26" />
+	<Image Name="TooltipBottomRight" XPos="634" YPos="118" Width="8" Height="8" />
+-->
+	<Image Name="WindowTopLeft" XPos="650" YPos="0" Width="16" Height="16" />
+	<Image Name="WindowLeftEdge" XPos="650" YPos="16" Width="16" Height="96" />
+	<Image Name="WindowBottomLeft" XPos="650" YPos="112" Width="16" Height="16" />
+	<Image Name="WindowTopEdge" XPos="666" YPos="0" Width="96" Height="16" />
+	<Image Name="WindowMid" XPos="666" YPos="16" Width="96" Height="96" />
+	<Image Name="WindowBottomEdge" XPos="666" YPos="112" Width="96" Height="16" />
+	<Image Name="WindowTopRight" XPos="762" YPos="0" Width="16" Height="16" />
+	<Image Name="WindowRightEdge" XPos="762" YPos="16" Width="16" Height="96" />
+	<Image Name="WindowBottomRight" XPos="762" YPos="112" Width="16" Height="16" />
+
+	<Image Name="ComboboxSelectionBrush" XPos="0" YPos="320" Width="192" Height="48" /> <!-- shared -->
+	<Image Name="MultiListSelectionBrush" XPos="0" YPos="320" Width="192" Height="48" /> <!-- shared -->
+	<Image Name="TextSelectionBrush" XPos="0" YPos="320" Width="192" Height="48" /> <!-- shared -->
+	<Image Name="ListboxSelectionBrush" XPos="0" YPos="320" Width="192" Height="48" /> <!-- shared -->
+	<Image Name="MultiLineEditboxSelectionBrush" XPos="0" YPos="320" Width="192" Height="48" /> <!-- shared -->
 
 </Imageset>

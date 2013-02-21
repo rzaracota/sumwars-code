@@ -54,10 +54,18 @@ SavegameList::SavegameList (Document* doc)
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onNewCharClicked, this));
 	btn->setWantsMultiClickEvents(false);
 	btn->setInheritsAlpha(false);
-	btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
-	btn->setProperty("DisabledImage", "set:MainMenu image:SPBtnNormal");
-	btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
-	btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+	if (btn->isPropertyPresent ("NormalImage"))
+	{
+		btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
+	}
+	if (btn->isPropertyPresent ("HoverImage"))
+	{
+		btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
+	}
+	if (btn->isPropertyPresent ("PushedImage"))
+	{
+		btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+	}
 	
 	updateTranslation();
 }

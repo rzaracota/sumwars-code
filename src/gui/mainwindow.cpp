@@ -842,10 +842,22 @@ void MainWindow::setupControlPanel()
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonCharInfoClicked, static_cast<ControlPanel*>(wnd)));
 	btn->setVisible(false);
-	btn->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased"); 	 
-	btn->setProperty("DisabledImage", "set:CharScreen image:PlusBtnReleased"); 	 
-	btn->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased"); 	 
-	btn->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
+	if (btn->isPropertyPresent ("NormalImage"))
+	{
+		btn->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased"); 	 
+	}
+	if (btn->isPropertyPresent ("DisabledImage"))
+	{
+		btn->setProperty("DisabledImage", "set:CharScreen image:PlusBtnReleased"); 	 
+	}
+	if (btn->isPropertyPresent ("HoverImage"))
+	{
+		btn->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased"); 	 
+	}
+	if (btn->isPropertyPresent ("PushedImage"))
+	{
+		btn->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
+	}
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "Button"), "SkillUpgradeButton"));
 	m_game_screen->addChildWindow(btn);
@@ -854,10 +866,25 @@ void MainWindow::setupControlPanel()
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, static_cast<ControlPanel*>(wnd)));
 	btn->setVisible(false);
-	btn->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased"); 	 
-	btn->setProperty("DisabledImage", "set:CharScreen image:PlusBtnReleased"); 	 
-	btn->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased"); 	 
-	btn->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
+	
+	
+	if (btn->isPropertyPresent ("NormalImage"))
+	{
+		btn->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased");
+	}
+	if (btn->isPropertyPresent ("DisabledImage"))
+	{
+		btn->setProperty("DisabledImage", "set:CharScreen image:PlusBtnReleased");
+	}
+	if (btn->isPropertyPresent ("HoverImage"))
+	{
+		btn->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased");
+	}
+	if (btn->isPropertyPresent ("PushedImage"))
+	{
+		btn->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
+	}
+
 }
 
 void MainWindow::setupCharInfo()
@@ -897,8 +924,7 @@ void MainWindow::setupQuestInfo()
 
 void MainWindow::setupSkilltree()
 {
-	
-	SkillTree* wnd = new SkillTree(m_document,m_keyboard);
+	SkillTree* wnd = new SkillTree (m_document ,m_keyboard, m_ceguiSkinName);
 	m_sub_windows["SkillTree"] = wnd;
 	
 	// Skilltree anfangs ausblenden

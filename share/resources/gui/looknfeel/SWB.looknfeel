@@ -855,7 +855,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 
                 <Image type="BottomEdge" imageset="SWB" image="Static_B" />
                 <Image type="TopRightCorner" imageset="SWB" image="Static_TR" />
-                <Image type="RightEdge" imageset="SWB" image="Static_T" />
+                <Image type="RightEdge" imageset="SWB" image="Static_R" />
                 <Image type="BottomRightCorner" imageset="SWB" image="Static_BR" />
                 <ColourRectProperty name="FrameColours" />
             </FrameComponent>
@@ -2318,6 +2318,8 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="SelectedTextColour" initialValue="FFFFDDDD" redrawOnWrite="true" />
         <PropertyDefinition name="ActiveSelectionColour" initialValue="FFFF8080" redrawOnWrite="true" />
         <PropertyDefinition name="InactiveSelectionColour" initialValue="FFB15050" redrawOnWrite="true" />
+        <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
+
         <!-- Use the default mouse cursor -->
         <!--<Property name="MouseCursorImage" value="set:SWBCursors image:MouseTextBar" />-->
         <NamedArea name="TextArea">
@@ -2375,12 +2377,16 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </ImagerySection>
         <StateImagery name="Enabled">
             <Layer>
-                <Section section="container_normal" />
+                <Section section="container_normal">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="ReadOnly">
             <Layer>
-                <Section section="container_normal" />
+                <Section section="container_normal">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="Disabled">
@@ -3389,6 +3395,8 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="SelectedTextColour" initialValue="FFFFDDDD" redrawOnWrite="true" />
         <PropertyDefinition name="ActiveSelectionColour" initialValue="FFFF8080" redrawOnWrite="true" />
         <PropertyDefinition name="InactiveSelectionColour" initialValue="FFB15050" redrawOnWrite="true" />
+        <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
+
         <!-- Use the default mouse cursor -->
         <!--<Property name="MouseCursorImage" value="set:SWBCursors image:MouseTextBar" />-->
         <NamedArea name="TextArea">
@@ -3446,12 +3454,16 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </ImagerySection>
         <StateImagery name="Enabled">
             <Layer>
-                <Section section="container_normal" />
+                <Section section="container_normal">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="ReadOnly">
             <Layer>
-                <Section section="container_normal" />
+                <Section section="container_normal">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="Disabled">
@@ -4124,6 +4136,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="SelectedBackgroundColour" initialValue="FF940000" redrawOnWrite="true" />
         <PropertyDefinition name="HoverBackgroundColour" initialValue="AAFF0101" redrawOnWrite="true" />
         <PropertyDefinition name="NonSelectedBackgroundColour" initialValue="25FFFFFF" redrawOnWrite="true" />
+        <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
 
         <ImagerySection name="label">
             <TextComponent>
@@ -4181,7 +4194,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="top_border_section" />
+                <Section section="top_border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="NormalTextColour" />
                 </Section>
@@ -4195,7 +4208,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="top_border_section" />
+                <Section section="top_border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="NormalTextColour" />
                 </Section>
@@ -4209,7 +4222,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="top_border_section" />
+                <Section section="top_border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="HoverTextColour" />
                 </Section>
@@ -4223,7 +4236,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="top_border_section" />
+                <Section section="top_border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="HoverTextColour" />
                 </Section>
@@ -4237,7 +4250,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="top_border_section" />
+                <Section section="top_border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="SelectedTextColour" />
                 </Section>
@@ -4251,7 +4264,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="top_border_section" />
+                <Section section="top_border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="SelectedTextColour" />
                 </Section>
@@ -4265,7 +4278,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="top_border_section" />
+                <Section section="top_border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="PushedTextColour" />
                 </Section>
@@ -4279,7 +4292,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="top_border_section" />
+                <Section section="top_border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="PushedTextColour" />
                 </Section>
@@ -4293,7 +4306,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="top_border_section" />
+                <Section section="top_border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="DisabledTextColour" />
                 </Section>
@@ -4306,7 +4319,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="top_border_section" />
+                <Section section="top_border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="DisabledTextColour" />
                 </Section>
@@ -4331,6 +4344,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="SelectedBackgroundColour" initialValue="FF940000" redrawOnWrite="true" />
         <PropertyDefinition name="HoverBackgroundColour" initialValue="AAFF0101" redrawOnWrite="true" />
         <PropertyDefinition name="NonSelectedBackgroundColour" initialValue="25FFFFFF" redrawOnWrite="true" />
+        <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
 
         <ImagerySection name="label">
             <TextComponent>
@@ -4389,7 +4403,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="bottom_border_section" />
+                <Section section="bottom_border_section" ><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="NormalTextColour" />
                 </Section>
@@ -4403,7 +4417,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="bottom_border_section" />
+                <Section section="bottom_border_section" ><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="NormalTextColour" />
                 </Section>
@@ -4417,7 +4431,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="bottom_border_section" />
+                <Section section="bottom_border_section" ><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="HoverTextColour" />
                 </Section>
@@ -4431,7 +4445,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="bottom_border_section" />
+                <Section section="bottom_border_section" ><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="HoverTextColour" />
                 </Section>
@@ -4445,7 +4459,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="bottom_border_section" />
+                <Section section="bottom_border_section" ><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="SelectedTextColour" />
                 </Section>
@@ -4459,7 +4473,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="bottom_border_section" />
+                <Section section="bottom_border_section" ><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="SelectedTextColour" />
                 </Section>
@@ -4473,7 +4487,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="bottom_border_section" />
+                <Section section="bottom_border_section" ><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="PushedTextColour" />
                 </Section>
@@ -4487,7 +4501,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="bottom_border_section" />
+                <Section section="bottom_border_section" ><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="PushedTextColour" />
                 </Section>
@@ -4501,7 +4515,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="bottom_border_section" />
+                <Section section="bottom_border_section" ><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="DisabledTextColour" />
                 </Section>
@@ -4515,7 +4529,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="bottom_border_section" />
+                <Section section="bottom_border_section" ><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="DisabledTextColour" />
                 </Section>
@@ -4541,6 +4555,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="SelectedBackgroundColour" initialValue="FF940000" redrawOnWrite="true" />
         <PropertyDefinition name="HoverBackgroundColour" initialValue="AAFF0101" redrawOnWrite="true" />
         <PropertyDefinition name="NonSelectedBackgroundColour" initialValue="25FFFFFF" redrawOnWrite="true" />
+        <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
 
         <ImagerySection name="label">
             <TextComponent>
@@ -4635,7 +4650,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="top_border_section" />
+                <Section section="top_border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="NormalTextColour" />
                 </Section>
@@ -4649,7 +4664,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="bottom_border_section" />
+                <Section section="bottom_border_section" ><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="NormalTextColour" />
                 </Section>
@@ -4663,7 +4678,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="top_border_section" />
+                <Section section="top_border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="HoverTextColour" />
                 </Section>
@@ -4677,7 +4692,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="bottom_border_section" />
+                <Section section="bottom_border_section" ><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="HoverTextColour" />
                 </Section>
@@ -4691,7 +4706,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="top_border_section" />
+                <Section section="top_border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="SelectedTextColour" />
                 </Section>
@@ -4705,7 +4720,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="bottom_border_section" />
+                <Section section="bottom_border_section" ><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="SelectedTextColour" />
                 </Section>
@@ -4719,7 +4734,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="top_border_section" />
+                <Section section="top_border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="PushedTextColour" />
                 </Section>
@@ -4733,7 +4748,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="bottom_border_section" />
+                <Section section="bottom_border_section" ><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="PushedTextColour" />
                 </Section>
@@ -4747,7 +4762,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="top_border_section" />
+                <Section section="top_border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="DisabledTextColour" />
                 </Section>
@@ -4761,7 +4776,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="bottom_border_section" />
+                <Section section="bottom_border_section" ><ColourProperty name="BorderColour" /></Section>
                 <Section section="label">
                     <ColourProperty name="DisabledTextColour" />
                 </Section>
@@ -4779,6 +4794,8 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     <WidgetLook name="SWB/TabContentPane">
         <PropertyDefinition name="EnableTop" initialValue="1" redrawOnWrite="true" layoutOnWrite="true" />
         <PropertyDefinition name="EnableBottom" initialValue="1" redrawOnWrite="true" layoutOnWrite="true" />
+        <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
+
         <ImagerySection name="normal">
             <FrameComponent>
                 <Area>
@@ -4786,7 +4803,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
                     <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
                     <Dim type="Height" >
-                        <ImageDim imageset="SWB" image="TabContentPaneUpperLeft" dimension="Height">
+                        <ImageDim imageset="SWB" image="Rounded_Square_Small_TL" dimension="Height">
                             <DimOperator op="Add">
                                 <AbsoluteDim value="3" />
                             </DimOperator>
@@ -4794,9 +4811,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     </Dim>
                     
                 </Area>
-                <Image type="TopLeftCorner" imageset="SWB" image="TabContentPaneUpperLeft" />
-                <Image type="TopEdge" imageset="SWB" image="TabContentPaneUpper" />
-                <Image type="TopRightCorner" imageset="SWB" image="TabContentPaneUpperRight" />
+                <Image type="TopLeftCorner" imageset="SWB" image="Rounded_Square_Small_TL" />
+                <Image type="TopEdge" imageset="SWB" image="Rounded_Square_Small_T" />
+                <Image type="TopRightCorner" imageset="SWB" image="Rounded_Square_Small_TR" />
             </FrameComponent>
             <FrameComponent>
                 <Area>
@@ -4804,7 +4821,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     <Dim type="TopEdge" >
                         <AbsoluteDim value="0" >
                             <DimOperator op="Add">
-                                <ImageDim imageset="SWB" image="TabContentPaneUpperLeft" dimension="Height"/>
+                                <ImageDim imageset="SWB" image="Rounded_Square_Small_TL" dimension="Height"/>
                             </DimOperator>
                         </AbsoluteDim>
                     </Dim>
@@ -4812,7 +4829,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     <Dim type="BottomEdge" >
                         <UnifiedDim scale="1" type="Height">
                             <DimOperator op="Subtract">
-                                <ImageDim imageset="SWB" image="TabContentPaneLowerLeft" dimension="Height">
+                                <ImageDim imageset="SWB" image="Rounded_Square_Small_BL" dimension="Height">
                                     <DimOperator op="Multiply">
                                         <PropertyDim name="EnableBottom" />
                                     </DimOperator>
@@ -4821,9 +4838,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                         </UnifiedDim>
                     </Dim>
                 </Area>
-                <Image type="LeftEdge" imageset="SWB" image="TabContentPaneLeft" />
-                <Image type="Background" imageset="SWB" image="TabContentPaneMiddle" />
-                <Image type="RightEdge" imageset="SWB" image="TabContentPaneRight" />
+                <Image type="LeftEdge" imageset="SWB" image="Rounded_Square_Small_L" />
+                <Image type="Background" imageset="SWB" image="Rounded_Square_Small_M" />
+                <Image type="RightEdge" imageset="SWB" image="Rounded_Square_Small_R" />
             </FrameComponent>
             <FrameComponent>
                 <Area>
@@ -4831,7 +4848,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     <Dim type="TopEdge" >
                         <UnifiedDim scale="1" type="Height">
                             <DimOperator op="Subtract">
-                                <ImageDim imageset="SWB" image="TabContentPaneLowerLeft" dimension="Height">
+                                <ImageDim imageset="SWB" image="Rounded_Square_Small_BL" dimension="Height">
                                     <DimOperator op="Multiply">
                                         <PropertyDim name="EnableBottom" />
                                     </DimOperator>
@@ -4842,11 +4859,12 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
                     <Dim type="BottomEdge" ><UnifiedDim scale="1" type="Height" /></Dim>
                 </Area>
-                <Image type="BottomLeftCorner" imageset="SWB" image="TabContentPaneLowerLeft" />
-                <Image type="BottomEdge" imageset="SWB" image="TabContentPaneLower" />
-                <Image type="BottomRightCorner" imageset="SWB" image="TabContentPaneLowerRight" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="Rounded_Square_Small_BL" />
+                <Image type="BottomEdge" imageset="SWB" image="Rounded_Square_Small_B" />
+                <Image type="BottomRightCorner" imageset="SWB" image="Rounded_Square_Small_BR" />
             </FrameComponent>
         </ImagerySection>
+        
         <StateImagery name="Enabled">
             <Layer>
                 <Section section="normal" />
@@ -4918,6 +4936,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Dim>
             </Area>
         </Child>
+        
         <Child  type="SWB/TabButtonPane" nameSuffix="__auto_TabPane__Buttons">
             <Area>
                 <Dim type="LeftEdge">
@@ -4956,6 +4975,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <Dim type="Height"><PropertyDim name="TabHeight" type="Height" /></Dim>
             </Area>
         </Child>
+        
         <Child type="SWB/GlyphButton" nameSuffix="__auto_TabPane__ScrollLeft">
             <Area>
                 <Dim type="LeftEdge"><AbsoluteDim value="0" /></Dim>
@@ -4976,6 +4996,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
             <Property name="AlwaysOnTop" value="True" />
             <Property name="GlyphImage" value="set:SWB image:GlyphArrowLeft" />
         </Child>
+        
         <Child type="SWB/GlyphButton" nameSuffix="__auto_TabPane__ScrollRight">
             <Area>
                 <Dim type="Width">
@@ -5004,6 +5025,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
             <Property name="AlwaysOnTop" value="True" />
             <Property name="GlyphImage" value="set:SWB image:GlyphArrowRight" />
         </Child>
+        
         <StateImagery name="Enabled" />
         <StateImagery name="Disabled" />
     </WidgetLook>
@@ -5649,6 +5671,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="NormalTextColour" initialValue="FFFFFFFF" redrawOnWrite="true" />
         <PropertyDefinition name="TextBackground" initialValue="FF888888" redrawOnWrite="true" />
         <PropertyDefinition name="CaptionOffset" initialValue="10" redrawOnWrite="true" />
+        <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
 
         <Child type="DefaultWindow" nameSuffix="__auto_contentpane__">
             <Area>
@@ -5700,6 +5723,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <HorzFormat type="LeftAligned" />
             </TextComponent>
         </ImagerySection>
+        
         <ImagerySection name="frame">
             <FrameComponent>
                 <Area>
@@ -5716,18 +5740,17 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                         <UnifiedDim scale="1" offset="0" type="BottomEdge" />
                     </Dim>
                 </Area>
-                <Image type="TopLeftCorner" imageset="SWB" image="StaticTopLeft" />
-                <Image type="TopRightCorner" imageset="SWB" image="StaticTopRight" />
-                <Image type="BottomLeftCorner" imageset="SWB" image="StaticBottomLeft" />
-                <Image type="BottomRightCorner" imageset="SWB" image="StaticBottomRight" />
-                <Image type="LeftEdge" imageset="SWB" image="StaticLeft" />
-                <Image type="TopEdge" imageset="SWB" image="StaticTop" />
-                <Image type="RightEdge" imageset="SWB" image="StaticRight" />
-                <Image type="BottomEdge" imageset="SWB" image="StaticBottom" />
-                <VertFormat type="Stretched" />
-                <HorzFormat type="Stretched" />
+                <Image type="TopLeftCorner" imageset="SWB" image="Static_TL" />
+                <Image type="LeftEdge" imageset="SWB" image="Static_L" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="Static_BL" />
+                <Image type="TopEdge" imageset="SWB" image="Static_T" />
+                <Image type="BottomEdge" imageset="SWB" image="Static_B" />
+                <Image type="TopRightCorner" imageset="SWB" image="Static_TR" />
+                <Image type="RightEdge" imageset="SWB" image="Static_R" />
+                <Image type="BottomRightCorner" imageset="SWB" image="Static_BR" />
             </FrameComponent>
         </ImagerySection>
+        
         <ImagerySection name="label_bg">
             <FrameComponent>
                 <Area>
@@ -5756,32 +5779,32 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                         </FontDim>
                     </Dim>
                 </Area>
-                <!--<Image imageset="SWB" image="StaticBackdrop" />-->
-                <Image type="TopLeftCorner" imageset="SWB" image="StaticTopLeft" />
-                <Image type="LeftEdge" imageset="SWB" image="StaticLeft" />
-                <Image type="BottomLeftCorner" imageset="SWB" image="StaticBottomLeft" />
-
-                <Image type="TopEdge" imageset="SWB" image="StaticTop" />
-                <Image type="BottomEdge" imageset="SWB" image="StaticBottom" />
-                <Image type="Background" imageset="SWB" image="StaticBackdrop" />
-                <Image type="TopRightCorner" imageset="SWB" image="StaticTopRight" />
-                <Image type="BottomRightCorner" imageset="SWB" image="StaticBottomRight" />
-                <Image type="RightEdge" imageset="SWB" image="StaticRight" />
-                
-                <!--<ColourRectProperty name="BackgroundTextColours" />-->
-                <VertFormat type="Stretched" />
-                <HorzFormat type="Stretched" />
+                <Image type="TopLeftCorner" imageset="SWB" image="FilledRoundedBorder_TL" />
+                <Image type="LeftEdge" imageset="SWB" image="FilledRoundedBorder_L" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="FilledRoundedBorder_BL" />
+                <Image type="TopEdge" imageset="SWB" image="FilledRoundedBorder_T" />
+                <Image type="Background" imageset="SWB" image="FilledRoundedBorder_M" />
+                <Image type="BottomEdge" imageset="SWB" image="FilledRoundedBorder_B" />
+                <Image type="TopRightCorner" imageset="SWB" image="FilledRoundedBorder_TR" />
+                <Image type="RightEdge" imageset="SWB" image="FilledRoundedBorder_R" />
+                <Image type="BottomRightCorner" imageset="SWB" image="FilledRoundedBorder_BR" />
             </FrameComponent>
         </ImagerySection>
+        
         <StateImagery name="Enabled">
             <Layer>
-                <Section section="frame" />
-                <Section section="label_bg" />
+                <Section section="frame">
+                    <ColourProperty name="BorderColour" />
+                </Section>
+                <Section section="label_bg">
+                    <ColourProperty name="BorderColour" />
+                </Section>
                 <Section section="label">
                     <ColourProperty name="NormalTextColour" />
                 </Section>
             </Layer>
         </StateImagery>
+        
         <StateImagery name="Disabled">
             <Layer>
                 <Section section="frame" />
