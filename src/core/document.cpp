@@ -1435,16 +1435,22 @@ bool Document::onKeyPress(KeyCode key)
 		}
 		else if(dest == SHOW_CHATBOX_NO_TOGGLE)
 		{
-			// Chatfenster oeffnen wenn es gerade geschlossen ist
-			if (!(getGUIState()->m_shown_windows & CHAT))
+			// If the enter key is pressed when the "Save & Exit" window is displayed, treat it as an 'accept'.
+			if (m_gui_state.m_shown_windows & SAVE_EXIT)
 			{
-				getGUIState()->m_shown_windows |= CHAT;
-
-				// Geoeffnete Fenster haben sich geaendert
-				m_modified |= WINDOWS_MODIFIED;
-
+				onButtonSaveExitConfirm ();
 			}
+			else
+			{
+				// Toggle the chat window open status.
+				if (!(getGUIState()->m_shown_windows & CHAT))
+				{
+					getGUIState()->m_shown_windows |= CHAT;
 
+					// Signal that the opened windows changed.
+					m_modified |= WINDOWS_MODIFIED;
+				}
+			}
 		}
 		else if (dest == CLOSE_ALL)
 		{

@@ -236,28 +236,35 @@ void SkillTree::update()
 			// Label mit dem Bild
 			DEBUGX("ability %s nr %i",it->second.m_type.c_str(),cnt);
 			stream.str("");
+#if 0
 			stream << "ImageBg"<<cnt;
 			bg = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), stream.str ());
 			bg->setProperty("Image", "set:SkillTree image:SkillBg");
 			bg->setInheritsAlpha(false);
 			bg->setProperty("RiseOnClick", "false");
+#endif
 			stream.str("");
 			stream << "SkillImage"<<cnt;
 			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), stream.str());
-			
+#if 0	
 			tabs[it->second.m_skilltree_tab-1]->addChildWindow(bg);
+#endif
 			tabs[it->second.m_skilltree_tab-1]->addChildWindow(label);
-			
 			spos = it->second.m_skilltree_position;
 			pos = CEGUI::UVector2(cegui_reldim(spos.m_x), cegui_reldim( spos.m_y));
 			bgpos = CEGUI::UVector2(cegui_reldim(spos.m_x -0.02), cegui_reldim( spos.m_y -0.02));
+#if 0	
 			bg->setPosition(bgpos);
 			bg->setSize(CEGUI::UVector2(cegui_reldim(0.165f), cegui_reldim( 0.145f)));
 			bg->setProperty("FrameEnabled", "false");
 			bg->setProperty("BackgroundEnabled", "false");
-
+#endif
+			if (label->isPropertyDefault ("FrameEnabled"))
+			{
+				label->setProperty ("FrameEnabled", "True");
+			}
 			label->setPosition(pos);
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+			label->setSize(CEGUI::UVector2(cegui_reldim(0.18f), cegui_reldim( 0.16f)));
 		
 			// Button zum Faehigkeit lernen
 			pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
@@ -282,7 +289,7 @@ void SkillTree::update()
 			button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
 			
 			// beschriften und verknuepfen
-			label->setProperty("FrameEnabled", "false");
+			label->setProperty("FrameEnabled", "True");
 			label->setInheritsAlpha(false);
 			label->setProperty("BackgroundEnabled", "false");
 			label->setID(it->first);

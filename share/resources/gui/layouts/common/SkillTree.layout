@@ -47,7 +47,7 @@
             <Property Name="VerticalAlignment" Value="Centre" />
         </Window>
         <Window Type="SWB/TabControl" Name="SkilltreeTabs" >
-            <Property Name="Alpha" Value="0" />
+            <Property Name="Alpha" Value="1.0" />
             <Property Name="TabHeight" Value="{0,56}" />
             <Property Name="TabButtonType" Value="SWB/TabButton" />
             <Property Name="TabPanePosition" Value="Top" />

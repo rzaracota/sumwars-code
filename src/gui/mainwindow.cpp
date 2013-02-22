@@ -993,30 +993,13 @@ bool MainWindow::setupObjectInfo()
 
 	// Fenstermanager
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Window* label;
 
 	// Leiste fuer Informationen
-	
-	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ProgressBar"), "MonsterHealthProgressBar"));
-	m_game_screen->addChildWindow(bar);
-	bar->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
-	bar->setSize(CEGUI::UVector2(cegui_reldim(0.6f), cegui_reldim( 0.07f)));
-	bar->setWantsMultiClickEvents(false);
-	bar->setProperty("MousePassThroughEnabled","true");
-	bar->setProgress(1.0);
-	
-	
-	label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), "ObjectInfoLabel");
-	m_game_screen->addChildWindow(label);
-	label->setProperty("FrameEnabled", "false");
-	label->setProperty("BackgroundEnabled", "false");
-	label->setProperty("HorzFormatting", "HorzCentred");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.6f), cegui_reldim( 0.07f)));
-	label->setAlpha(1.0);
-	label->setProperty("MousePassThroughEnabled","true");
-	
-	
+	CEGUI::Window* monster_health_holder = win_mgr.loadWindowLayout ("monsterhealthbar.layout");
+	if (monster_health_holder)
+	{
+		m_game_screen->addChildWindow (monster_health_holder);
+	}
 
 	return true;
 }

@@ -745,6 +745,8 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="BackgroundColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" />
         <PropertyDefinition name="VertFormatting" initialValue="Stretched" redrawOnWrite="true" />
         <PropertyDefinition name="HorzFormatting" initialValue="Stretched" redrawOnWrite="true" />
+        <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
+
         <Property name="BackgroundEnabled" value="True" />
         <Property name="FrameEnabled" value="True" />
         <ImagerySection name="image_withframe">
@@ -773,6 +775,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <HorzFormatProperty name="HorzFormatting" />
             </ImageryComponent>
         </ImagerySection>
+        
         <ImagerySection name="image_noframe">
             <ImageryComponent>
                 <Area>
@@ -787,26 +790,35 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <HorzFormatProperty name="HorzFormatting" />
             </ImageryComponent>
         </ImagerySection>
+        
         <StateImagery name="Enabled" />
         <StateImagery name="Disabled" />
         <StateImagery name="EnabledFrame">
             <Layer>
-                <Section look="SWB/StaticShared" section="frame" />
+                <Section look="SWB/StaticShared" section="frame">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="DisabledFrame">
             <Layer>
-                <Section look="SWB/StaticShared" section="frame" />
+                <Section look="SWB/StaticShared" section="frame">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="WithFrameEnabledBackground">
             <Layer>
-                <Section look="SWB/StaticShared" section="background" />
+                <Section look="SWB/StaticShared" section="background">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="WithFrameDisabledBackground">
             <Layer>
-                <Section look="SWB/StaticShared" section="background" />
+                <Section look="SWB/StaticShared" section="background">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="NoFrameEnabledBackground">
@@ -821,7 +833,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </StateImagery>
         <StateImagery name="WithFrameImage">
             <Layer>
-                <Section section="image_withframe" />
+                <Section section="image_withframe">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="NoFrameImage">
@@ -4867,7 +4881,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         
         <StateImagery name="Enabled">
             <Layer>
-                <Section section="normal" />
+                <Section section="normal">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="Disabled">
