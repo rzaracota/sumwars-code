@@ -95,8 +95,8 @@ void Options::init()
 	m_default_savegame = "";
 
 	// Also set this in the initialization. In case the options file is edited and no section with these settings is found, the defaults are loaded here.
-	setCeguiSkin ("Resummoned");
-	setCeguiCursorSkin ("ResummonedCursors");
+	setCeguiSkin ("SWB");
+	setCeguiCursorSkin ("SWBCursors");
 
 }
 
@@ -129,8 +129,8 @@ void Options::setToDefaultOptions()
 	setPort(5331);
 	setServerHost("127.0.0.1");
 
-	setCeguiSkin ("Resummoned");
-	setCeguiCursorSkin ("ResummonedCursors");
+	setCeguiSkin ("SWB");
+	setCeguiCursorSkin ("SWBCursors");
 }
 
 bool Options::readFromFile(const std::string& filename)
@@ -258,7 +258,7 @@ bool Options::readFromFile(const std::string& filename)
 						attr.getString ("cegui_skin", ceguiSkin);
 						if (ceguiSkin.length () == 0)
 						{
-							ceguiSkin = "Resummoned";
+							ceguiSkin = "SWB";
 						}
 						setCeguiSkin (ceguiSkin);
 
@@ -266,7 +266,7 @@ bool Options::readFromFile(const std::string& filename)
 						attr.getString ("cegui_cursor_skin", ceguiCursorSkin);
 						if (ceguiCursorSkin.length () == 0)
 						{
-							ceguiCursorSkin = "ResummonedCursors";
+							ceguiCursorSkin = "SWBCursors";
 						}
 						setCeguiCursorSkin (ceguiCursorSkin);
 					}

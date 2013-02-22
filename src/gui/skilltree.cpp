@@ -67,6 +67,7 @@ SkillTree::SkillTree (Document* doc, OIS::Keyboard *keyboard, const std::string&
 	skilltree->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent,  (Window*) this));
 	skilltree->setWantsMultiClickEvents(false);
 	
+	// TODO: remove this when no longer needed (layout updated).
 	if (win_mgr.isWindowPresent ("SkillTreeCloseButton"))
 	{
 		label = win_mgr.getWindow("SkillTreeCloseButton");
@@ -99,7 +100,6 @@ void SkillTree::update()
 	CEGUI::Window* wnd;
 	std::vector<CEGUI::DefaultWindow*> tabs(3);
 	CEGUI::Window* label;
-	CEGUI::Window* bg;
 	CEGUI::PushButton* button;
 	std::stringstream stream;
 	
@@ -236,29 +236,13 @@ void SkillTree::update()
 			// Label mit dem Bild
 			DEBUGX("ability %s nr %i",it->second.m_type.c_str(),cnt);
 			stream.str("");
-#if 0
-			stream << "ImageBg"<<cnt;
-			bg = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), stream.str ());
-			bg->setProperty("Image", "set:SkillTree image:SkillBg");
-			bg->setInheritsAlpha(false);
-			bg->setProperty("RiseOnClick", "false");
-#endif
-			stream.str("");
 			stream << "SkillImage"<<cnt;
 			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), stream.str());
-#if 0	
-			tabs[it->second.m_skilltree_tab-1]->addChildWindow(bg);
-#endif
+
 			tabs[it->second.m_skilltree_tab-1]->addChildWindow(label);
 			spos = it->second.m_skilltree_position;
 			pos = CEGUI::UVector2(cegui_reldim(spos.m_x), cegui_reldim( spos.m_y));
-			bgpos = CEGUI::UVector2(cegui_reldim(spos.m_x -0.02), cegui_reldim( spos.m_y -0.02));
-#if 0	
-			bg->setPosition(bgpos);
-			bg->setSize(CEGUI::UVector2(cegui_reldim(0.165f), cegui_reldim( 0.145f)));
-			bg->setProperty("FrameEnabled", "false");
-			bg->setProperty("BackgroundEnabled", "false");
-#endif
+
 			if (label->isPropertyDefault ("FrameEnabled"))
 			{
 				label->setProperty ("FrameEnabled", "True");
@@ -267,10 +251,10 @@ void SkillTree::update()
 			label->setSize(CEGUI::UVector2(cegui_reldim(0.18f), cegui_reldim( 0.16f)));
 		
 			// Button zum Faehigkeit lernen
-			pos += CEGUI::UVector2(cegui_reldim(0.14f), cegui_reldim( 0.05f));
+			pos += CEGUI::UVector2(cegui_reldim(0.17f), cegui_reldim( 0.11f));
 			stream.str("");
 			stream << "SkillButton"<<cnt;
-			button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "Button"), stream.str()));
+			button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ImageButton"), stream.str()));
 			button->setInheritsAlpha(false);
 			tabs[it->second.m_skilltree_tab-1]->addChildWindow(button);
 			if (button->isPropertyPresent ("HoverImage"))
@@ -327,6 +311,7 @@ void SkillTree::update()
 						label->setInheritsAlpha(false);
 						label->setProperty("FrameEnabled", "false");
 						label->setProperty("BackgroundEnabled", "false");
+						label->moveToBack ();
 			
 						CEGUI::UVector2 start= CEGUI::UVector2(cegui_reldim(deppos.m_x+0.06f), cegui_reldim( deppos.m_y+0.1f));
 						CEGUI::UVector2 end= CEGUI::UVector2(cegui_reldim(spos.m_x+0.07f), cegui_reldim( spos.m_y));
@@ -380,24 +365,31 @@ void SkillTree::update()
 		// Label welches das Skillicon zeigt
 		label = win_mgr.getWindow(out_stream.str());
 
-		// Alpha Wert des Labels
-		float alpha = 0.2;
+		// A gray semi-transparent layer is added on top of the items that are unavailable
+		std::string availAbility ("00FFFFFF");
+		std::string unavailAbility ("CC000000");
+		std::string usedColour (unavailAbility);
 		
 		act = ablts[j].m_type;
 
 		if (player->checkAbility(act))
 		{
-			// Faehigkeit steht zur Verfuegung
-			alpha = 1.0;
+			// Ability is available.
+			usedColour = availAbility;
 		}
 		else
 		{
-			alpha = 0.3;
+			// Ability is unavailable.
+			usedColour = unavailAbility;
 		}
 
-		if (label->getAlpha() != alpha)
+		if (label->isPropertyPresent ("OverlayColour"))
 		{
-			label->setAlpha(alpha);
+			label->setProperty ("OverlayColour", usedColour.c_str ());
+		}
+		else
+		{
+			DEBUG ("Property not found: OverlayColour");
 		}
 		
 		out_stream.str("");

@@ -746,9 +746,11 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="VertFormatting" initialValue="Stretched" redrawOnWrite="true" />
         <PropertyDefinition name="HorzFormatting" initialValue="Stretched" redrawOnWrite="true" />
         <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
-
+        <PropertyDefinition name="OverlayColour" initialValue="00FFFFFF" redrawOnWrite="true" />
+        
         <Property name="BackgroundEnabled" value="True" />
         <Property name="FrameEnabled" value="True" />
+        
         <ImagerySection name="image_withframe">
             <ImageryComponent>
                 <Area>
@@ -773,6 +775,33 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <ColourRectProperty name="ImageColours" />
                 <VertFormatProperty name="VertFormatting" />
                 <HorzFormatProperty name="HorzFormatting" />
+            </ImageryComponent>
+        </ImagerySection>
+        
+        <ImagerySection name="gray_section">
+            <ImageryComponent>
+                <Area>
+                    <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="Static_L" dimension="Width" /></Dim>
+                    <Dim type="TopEdge" ><ImageDim imageset="SWB" image="Static_T" dimension="Height" /></Dim>
+                    <Dim type="RightEdge" >
+                        <UnifiedDim scale="1" type="RightEdge">
+                            <DimOperator op="Subtract">
+                                <ImageDim imageset="SWB" image="Static_R" dimension="Width" />
+                            </DimOperator>
+                        </UnifiedDim>
+                    </Dim>
+                    <Dim type="BottomEdge" >
+                        <UnifiedDim scale="1" type="BottomEdge">
+                            <DimOperator op="Subtract">
+                                <ImageDim imageset="SWB" image="Static_B" dimension="Height" />
+                            </DimOperator>
+                        </UnifiedDim>
+                    </Dim>
+                </Area>
+                <Image type="Background" imageset="SWB" image="PlainGray" />
+                <ColourRectProperty name="ImageColours" />
+                <VertFormat type="Stretched" />
+                <HorzFormat type="Stretched" />
             </ImageryComponent>
         </ImagerySection>
         
@@ -835,6 +864,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
             <Layer>
                 <Section section="image_withframe">
                     <ColourProperty name="BorderColour" />
+                </Section>
+                <Section section="gray_section">
+                    <ColourProperty name="OverlayColour" />
                 </Section>
             </Layer>
         </StateImagery>

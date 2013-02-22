@@ -259,6 +259,8 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="ProgressBarGraySegment" XPos="270" YPos="417" Width="128" Height="32" />
 
 
+  <Image Name="PlainGray" XPos="555" YPos="90" Width="32" Height="32" />
+
   <!-- Progress bar background -->
   <!-- Progress bar background with cut edges -->
 <!--

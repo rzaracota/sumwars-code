@@ -8,7 +8,8 @@ Last change:  $LastChangedDate: 2012-12-25 20:55:19 +0200 (Ma, 25 dec. 2012) $
 -->
 <GUIScheme Name="SWB">
   <Imageset Name="SWB" Filename="SWB.imageset" />
-  
+  <Imageset Name="SWBCursors" Filename="SWBCursors.imageset" />
+
   <!-- redefine both DejaVuSans*, DejaVuSerif* to DejaVuSans-HD*, DejaVuSerif-HD* -->
   <Font Name="DejaVuSans-HD-10" Filename="DejaVuSans-HD-10.font" />
   <Font Name="DejaVuSerif-HD-8" Filename="DejaVuSerif-HD-8.font" />

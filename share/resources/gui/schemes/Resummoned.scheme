@@ -85,7 +85,7 @@ Last change:  $LastChangedDate: 2012-12-25 20:55:19 +0200 (Ma, 25 dec. 2012) $
   <FalagardMapping WindowType="Resummoned/Spinner" TargetType="CEGUI/Spinner" Renderer="Falagard/Default" LookNFeel="Resummoned/Spinner" />
   <FalagardMapping WindowType="Resummoned/Tooltip" TargetType="CEGUI/Tooltip" Renderer="Falagard/Tooltip" LookNFeel="Resummoned/Tooltip" />
   <FalagardMapping WindowType="Resummoned/CustomTooltip" TargetType="CEGUI/Tooltip" Renderer="Falagard/Tooltip" LookNFeel="Resummoned/CustomTooltip" />
-  <FalagardMapping WindowType="SumwarsTooltip" TargetType="CEGUI/Tooltip" Renderer="Falagard/Tooltip" LookNFeel="Resummoned/CustomTooltip" />
+  <FalagardMapping WindowType="Resummoned/SumwarsTooltip" TargetType="CEGUI/Tooltip" Renderer="Falagard/Tooltip" LookNFeel="Resummoned/CustomTooltip" />
   <FalagardMapping WindowType="Resummoned/StaticImage" TargetType="DefaultWindow" Renderer="Falagard/StaticImage" LookNFeel="Resummoned/StaticImage" />
   <FalagardMapping WindowType="Resummoned/StaticText"  TargetType="DefaultWindow" Renderer="Falagard/StaticText"  LookNFeel="Resummoned/StaticText" />
   <FalagardMapping WindowType="Resummoned/ScrollablePane" TargetType="CEGUI/ScrollablePane" Renderer="Falagard/ScrollablePane" LookNFeel="Resummoned/ScrollablePane" />
