@@ -87,24 +87,15 @@
             <Property Name="UnifiedAreaRect" Value="{{0.035,0},{0.6740544,0},{0.965907,0},{0.97,0}}" />
             <Window Type="SWB/TabButton" Name="SmallTabButton" >
                 <Property Name="Text" >Small</Property>
-                <Property Name="FrameEnabled" Value="False" />
-                <Property Name="HorzFormatting" Value="WordWrapCentred" />
                 <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.01,0},{0.33,0},{0.15,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="SWB/TabButton" Name="MediumTabButton" >
                 <Property Name="Text" >Medium</Property>
-                <Property Name="FrameEnabled" Value="False" />
-                <Property Name="HorzFormatting" Value="WordWrapCentred" />
                 <Property Name="UnifiedAreaRect" Value="{{0.35,0},{0.01,0},{0.65,0},{0.15,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
             <Window Type="SWB/TabButton" Name="BigTabButton" >
                 <Property Name="Text" >Big</Property>
-                <Property Name="FrameEnabled" Value="False" />
-                <Property Name="HorzFormatting" Value="WordWrapCentred" />
                 <Property Name="UnifiedAreaRect" Value="{{0.67,0},{0.01,0},{0.97,0},{0.15,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
             </Window>
         
             <!-- The lower side location containing the stash -->

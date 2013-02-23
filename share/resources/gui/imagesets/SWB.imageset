@@ -336,4 +336,88 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
 	<Image Name="ListboxSelectionBrush" XPos="0" YPos="320" Width="192" Height="48" /> <!-- shared -->
 	<Image Name="MultiLineEditboxSelectionBrush" XPos="0" YPos="320" Width="192" Height="48" /> <!-- shared -->
 
+
+  <!-- TODO: bring to standardized suffix format --> <!-- TODO: check if removal is recommended (static duplicate) -->
+  <Image Name="ComboboxListTopLeft" XPos="600" YPos="84" Width="8" Height="8" />
+  <Image Name="ComboboxListLeft" XPos="600" YPos="92" Width="8" Height="26" />
+  <Image Name="ComboboxListBottomLeft" XPos="600" YPos="118" Width="8" Height="8" />
+  <Image Name="ComboboxListTop" XPos="608" YPos="84" Width="26" Height="8" />
+  <Image Name="ComboboxListBackdrop" XPos="608" YPos="92" Width="26" Height="26" />
+  <Image Name="ComboboxListBottom" XPos="608" YPos="118" Width="26" Height="8" />
+  <Image Name="ComboboxListTopRight" XPos="634" YPos="84" Width="8" Height="8" />
+  <Image Name="ComboboxListRight" XPos="634" YPos="92" Width="8" Height="26" />
+  <Image Name="ComboboxListBottomRight" XPos="634" YPos="118" Width="8" Height="8" />
+
+  <!-- multilist borders - shared -->
+  <!-- TODO: bring to standardized suffix format --> <!-- TODO: check if removal is recommended (static duplicate) -->
+  <Image Name="MultiListTopLeft" XPos="600" YPos="84" Width="8" Height="8" />
+  <Image Name="MultiListLeft" XPos="600" YPos="92" Width="8" Height="26" />
+  <Image Name="MultiListBottomLeft" XPos="600" YPos="118" Width="8" Height="8" />
+  <Image Name="MultiListTop" XPos="608" YPos="84" Width="26" Height="8" />
+  <Image Name="MultiListBackdrop" XPos="608" YPos="92" Width="26" Height="26" />
+  <Image Name="MultiListBottom" XPos="608" YPos="118" Width="26" Height="8" />
+  <Image Name="MultiListTopRight" XPos="634" YPos="84" Width="8" Height="8" />
+  <Image Name="MultiListRight" XPos="634" YPos="92" Width="8" Height="26" />
+  <Image Name="MultiListBottomRight" XPos="634" YPos="118" Width="8" Height="8" />
+
+  <!-- Shared pictures at the moment -->
+  <!-- TODO: bring to standardized suffix format --> <!-- TODO: check if removal is recommended (static duplicate) -->
+  <Image Name="ListboxTopLeft" XPos="600" YPos="84" Width="8" Height="8" />
+  <Image Name="ListboxLeft" XPos="600" YPos="92" Width="8" Height="26" />
+  <Image Name="ListboxBottomLeft" XPos="600" YPos="118" Width="8" Height="8" />
+  <Image Name="ListboxTop" XPos="608" YPos="84" Width="26" Height="8" />
+  <Image Name="ListboxBackdrop" XPos="608" YPos="92" Width="26" Height="26" />
+  <Image Name="ListboxBottom" XPos="608" YPos="118" Width="26" Height="8" />
+  <Image Name="ListboxTopRight" XPos="634" YPos="84" Width="8" Height="8" />
+  <Image Name="ListboxRight" XPos="634" YPos="92" Width="8" Height="26" />
+  <Image Name="ListboxBottomRight" XPos="634" YPos="118" Width="8" Height="8" />
+
+  <!-- Multi-line edit-box content borders; same as static text borders -->
+  <!-- TODO: bring to standardized suffix format --> <!-- TODO: check if removal is recommended (static duplicate) -->
+  <Image Name="MultiLineEditboxTopLeft" XPos="600" YPos="84" Width="8" Height="8" />
+  <Image Name="MultiLineEditboxLeft" XPos="600" YPos="92" Width="8" Height="26" />
+  <Image Name="MultiLineEditboxBottomLeft" XPos="600" YPos="118" Width="8" Height="8" />
+  <Image Name="MultiLineEditboxTop" XPos="608" YPos="84" Width="26" Height="8" />
+  <Image Name="MultiLineEditboxBackdrop" XPos="608" YPos="92" Width="26" Height="26" />
+  <Image Name="MultiLineEditboxBottom" XPos="608" YPos="118" Width="26" Height="8" />
+  <Image Name="MultiLineEditboxTopRight" XPos="634" YPos="84" Width="8" Height="8" />
+  <Image Name="MultiLineEditboxRight" XPos="634" YPos="92" Width="8" Height="26" />
+  <Image Name="MultiLineEditboxBottomRight" XPos="634" YPos="118" Width="8" Height="8" />
+
+  <!-- Tab content borders; same as static text borders -->
+  <!-- TODO: bring to standardized suffix format --> <!-- TODO: check if removal is recommended (static duplicate) -->
+  <Image Name="TabContentPaneUpperLeft" XPos="600" YPos="84" Width="8" Height="8" />
+  <Image Name="TabContentPaneLeft" XPos="600" YPos="92" Width="8" Height="26" />
+  <Image Name="TabContentPaneLowerLeft" XPos="600" YPos="118" Width="8" Height="8" />
+  <Image Name="TabContentPaneUpper" XPos="608" YPos="84" Width="26" Height="8" />
+  <Image Name="TabContentPaneMiddle" XPos="608" YPos="92" Width="26" Height="26" />
+  <Image Name="TabContentPaneLower" XPos="608" YPos="118" Width="26" Height="8" />
+  <Image Name="TabContentPaneUpperRight" XPos="634" YPos="84" Width="8" Height="8" />
+  <Image Name="TabContentPaneRight" XPos="634" YPos="92" Width="8" Height="26" />
+  <Image Name="TabContentPaneLowerRight" XPos="634" YPos="118" Width="8" Height="8" />
+
+  <!-- Check Box -->
+  <Image Name="CheckboxMark" XPos="825" YPos="64" Width="64" Height="64" />
+
+  <!-- Shared images (also used in the tab button border-->
+  <Image Name="CheckboxBck_TL" XPos="780" YPos="0" Width="8" Height="8" /> 
+  <Image Name="CheckboxBck_L" XPos="780" YPos="8" Width="8" Height="26" /> 
+  <Image Name="CheckboxBck_BL" XPos="780" YPos="34" Width="8" Height="8" /> 
+  <Image Name="CheckboxBck_T" XPos="788" YPos="0" Width="26" Height="8" /> 
+  <Image Name="CheckboxBck_M" XPos="788" YPos="8" Width="26" Height="26" />
+  <Image Name="CheckboxBck_B" XPos="788" YPos="34" Width="26" Height="8" /> 
+  <Image Name="CheckboxBck_TR" XPos="814" YPos="0" Width="8" Height="8" /> 
+  <Image Name="CheckboxBck_R" XPos="814" YPos="8" Width="8" Height="26" /> 
+  <Image Name="CheckboxBck_BR" XPos="814" YPos="34" Width="8" Height="8" /> 
+
+  <Image Name="CheckboxBorder_TL" XPos="600" YPos="84" Width="8" Height="8" /> 
+  <Image Name="CheckboxBorder_L" XPos="600" YPos="92" Width="8" Height="26" /> 
+  <Image Name="CheckboxBorder_BL" XPos="600" YPos="118" Width="8" Height="8" /> 
+  <Image Name="CheckboxBorder_T" XPos="608" YPos="84" Width="26" Height="8" /> 
+  <Image Name="CheckboxBorder_M" XPos="608" YPos="92" Width="26" Height="26" />
+  <Image Name="CheckboxBorder_B" XPos="608" YPos="118" Width="26" Height="8" /> 
+  <Image Name="CheckboxBorder_TR" XPos="634" YPos="84" Width="8" Height="8" /> 
+  <Image Name="CheckboxBorder_R" XPos="634" YPos="92" Width="8" Height="26" /> 
+  <Image Name="CheckboxBorder_BR" XPos="634" YPos="118" Width="8" Height="8" /> 
+
 </Imageset>

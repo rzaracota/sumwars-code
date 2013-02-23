@@ -29,7 +29,7 @@ class TradeWindow : public ItemWindow
 	 * \fn TradeWindow (Document* doc)
 	 * \brief Konstruktor
 		 */
-		TradeWindow (Document* doc);
+		TradeWindow (Document* doc, const std::string& ceguiSkinName);
 	
 		/**
 		 * \fn virtual void update()
@@ -104,7 +104,12 @@ class TradeWindow : public ItemWindow
 		 * \brief Seite der kleinen Items die angezeigt wird
 		 */
 		int m_small_sheet;
-		
+
+		/**
+		 * \brief The name of the CEGUI skin to use.
+		 */
+		std::string m_ceguiSkinName;
+
 };
 
 #endif // __SUMWARS_GUI_TRADEWINDOW_H__

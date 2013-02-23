@@ -1912,6 +1912,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     <WidgetLook name="SWB/Listbox">
         <!-- The size of the scrollbar + buttons -->
         <PropertyDefinition name="ScrollBarPreferredSize" initialValue="24" redrawOnWrite="true" layoutOnWrite="false" />
+        <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
 
         <NamedArea name="ItemRenderingArea">
             <Area>
@@ -2056,7 +2057,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </ImagerySection>
         <StateImagery name="Enabled">
             <Layer>
-                <Section section="main" />
+                <Section section="main">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="Disabled">
@@ -2365,6 +2368,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="ActiveSelectionColour" initialValue="FFFF8080" redrawOnWrite="true" />
         <PropertyDefinition name="InactiveSelectionColour" initialValue="FFB15050" redrawOnWrite="true" />
         <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
+        <PropertyDefinition name="BackgroundColour" initialValue="77FFFFFF" />
 
         <!-- Use the default mouse cursor -->
         <!--<Property name="MouseCursorImage" value="set:SWBCursors image:MouseTextBar" />-->
@@ -2376,6 +2380,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <Dim type="BottomEdge" ><UnifiedDim scale="1.0" offset="-5" type="BottomEdge" /></Dim>
             </Area>
         </NamedArea>
+        
         <ImagerySection name="container_normal">
             <FrameComponent>
                 <Area>
@@ -2395,6 +2400,27 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <Image type="BottomRightCorner" imageset="SWB" image="EditBox_BR" />
             </FrameComponent>
         </ImagerySection>
+
+        <ImagerySection name="container_background">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="Width" ><UnifiedDim scale="1.0" type="Width" /></Dim>
+                    <Dim type="Height" ><UnifiedDim scale="1.0" type="Height" /></Dim>
+                </Area>
+                <Image type="TopLeftCorner" imageset="SWB" image="FilledRoundedBorder_TL" />
+                <Image type="LeftEdge" imageset="SWB" image="FilledRoundedBorder_L" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="FilledRoundedBorder_BL" />
+                <Image type="TopEdge" imageset="SWB" image="FilledRoundedBorder_T" />
+                <Image type="Background" imageset="SWB" image="FilledRoundedBorder_M" />
+                <Image type="BottomEdge" imageset="SWB" image="FilledRoundedBorder_B" />
+                <Image type="TopRightCorner" imageset="SWB" image="FilledRoundedBorder_TR" />
+                <Image type="RightEdge" imageset="SWB" image="FilledRoundedBorder_R" />
+                <Image type="BottomRightCorner" imageset="SWB" image="FilledRoundedBorder_BR" />
+            </FrameComponent>
+        </ImagerySection>
+        
         <ImagerySection name="selection">
             <ImageryComponent>
                 <Area>
@@ -2408,6 +2434,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
         </ImagerySection>
+        
         <ImagerySection name="Carat">
             <ImageryComponent>
                 <Area>
@@ -2421,8 +2448,10 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
         </ImagerySection>
+        
         <StateImagery name="Enabled">
             <Layer>
+                <Section section="container_background"><ColourProperty name="BackgroundColour" /></Section>
                 <Section section="container_normal">
                     <ColourProperty name="BorderColour" />
                 </Section>
@@ -2430,6 +2459,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </StateImagery>
         <StateImagery name="ReadOnly">
             <Layer>
+                <Section section="container_background"><ColourProperty name="BackgroundColour" /></Section>
                 <Section section="container_normal">
                     <ColourProperty name="BorderColour" />
                 </Section>
@@ -2437,6 +2467,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </StateImagery>
         <StateImagery name="Disabled">
             <Layer>
+                <Section section="container_background"><ColourProperty name="BackgroundColour" /></Section>
                 <Section section="container_normal">
                     <Colours topLeft="FF7F7F7F" topRight="FF7F7F7F" bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" />
                 </Section>
@@ -2444,6 +2475,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </StateImagery>
         <StateImagery name="ActiveSelection">
             <Layer>
+                <Section section="container_background"><ColourProperty name="BackgroundColour" /></Section>
                 <Section section="selection">
                     <ColourProperty name="ActiveSelectionColour" />
                 </Section>
@@ -2451,6 +2483,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </StateImagery>
         <StateImagery name="InactiveSelection">
             <Layer>
+                <Section section="container_background"><ColourProperty name="BackgroundColour" /></Section>
                 <Section section="selection">
                     <ColourProperty name="InactiveSelectionColour" />
                 </Section>
@@ -3031,12 +3064,13 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="HoverTextColour" initialValue="FFFFFFFF" redrawOnWrite="true" />
         <PropertyDefinition name="PushedTextColour" initialValue="FFFFFFFF" redrawOnWrite="true" />
         <PropertyDefinition name="DisabledTextColour" initialValue="FF7F7F7F" redrawOnWrite="true" />
-        <PropertyDefinition name="BorderSpacing" initialValue="3" redrawOnWrite="true" layoutOnWrite="true" />
+        <PropertyDefinition name="BorderSpacing" initialValue="5" redrawOnWrite="true" layoutOnWrite="true" />
         
         <PropertyDefinition name="GS_DarkerThemeColour" initialValue="FF940000" redrawOnWrite="true" />
         <PropertyDefinition name="GS_LighterThemeColour" initialValue="FFFF0101" redrawOnWrite="true" />
         <PropertyDefinition name="GS_MainThemeColour" initialValue="FFDC5F5F" redrawOnWrite="true" />
         <PropertyDefinition name="GS_ShineColour" initialValue="B0FFFFFF" redrawOnWrite="true" />
+        <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
 
         <ImagerySection name="label">
             <TextComponent>
@@ -3092,111 +3126,41 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </ImagerySection>
 
         <ImagerySection name="background_section">
-            <ImageryComponent>
+            <FrameComponent>
                 <Area>
-                    <Dim type="LeftEdge" >
-                        <AbsoluteDim value="2">
-                            <DimOperator op="Add">
-                                <PropertyDim name="BorderSpacing" >
-                                </PropertyDim>
-                            </DimOperator>
-                        </AbsoluteDim>
-                    </Dim>
-                    <Dim type="TopEdge" >
-                        <AbsoluteDim value="2">
-                            <DimOperator op="Add">
-                                <PropertyDim name="BorderSpacing" >
-                                </PropertyDim>
-                            </DimOperator>
-                        </AbsoluteDim>
-                    </Dim>
-                    
+                    <Dim type="LeftEdge" ><PropertyDim name="BorderSpacing" /></Dim>
+                    <Dim type="TopEdge" ><PropertyDim name="BorderSpacing" /></Dim>
                     <Dim type="RightEdge" >
                         <UnifiedDim scale="1" type="Height" >
                             <DimOperator op="Subtract">
-                                <AbsoluteDim value="2">
-                                    <DimOperator op="Add">
-                                        <PropertyDim name="BorderSpacing" >
-                                        </PropertyDim>
-                                    </DimOperator>
-                                </AbsoluteDim>
+                                <PropertyDim name="BorderSpacing" >
+                                </PropertyDim>
                             </DimOperator>
                         </UnifiedDim>
                     </Dim>
-                    
                     <Dim type="Height" >
                         <UnifiedDim scale="1" type="Height" >
                             <DimOperator op="Subtract">
-                                <AbsoluteDim value="4">
+                                <PropertyDim name="BorderSpacing" >
                                     <DimOperator op="Add">
-                                        <PropertyDim name="BorderSpacing" >
-                                            <DimOperator op="Add">
-                                                <PropertyDim name="BorderSpacing" />
-                                            </DimOperator>
-                                        </PropertyDim>
+                                        <PropertyDim name="BorderSpacing" />
                                     </DimOperator>
-                                </AbsoluteDim>
+                                </PropertyDim>
                             </DimOperator>
                         </UnifiedDim>
                     </Dim>
                 </Area>
-                <Image type="Background" imageset="SWB" image="CheckboxBackground" /> <!-- shared image from other item -->
-                <VertFormat type="Stretched" />
-                <HorzFormat type="Stretched" />
-            </ImageryComponent>
-        </ImagerySection>
-
-        <ImagerySection name="background_highlight">
-            <ImageryComponent>
-                <Area>
-                    <Dim type="LeftEdge" >
-                        <AbsoluteDim value="2">
-                            <DimOperator op="Add">
-                                <PropertyDim name="BorderSpacing" >
-                                </PropertyDim>
-                            </DimOperator>
-                        </AbsoluteDim>
-                    </Dim>
-                    <Dim type="TopEdge" >
-                        <AbsoluteDim value="2">
-                            <DimOperator op="Add">
-                                <PropertyDim name="BorderSpacing" >
-                                </PropertyDim>
-                            </DimOperator>
-                        </AbsoluteDim>
-                    </Dim>
-                    
-                    <Dim type="RightEdge" >
-                        <UnifiedDim scale="1" type="Height" >
-                            <DimOperator op="Subtract">
-                                <AbsoluteDim value="2">
-                                    <DimOperator op="Add">
-                                        <PropertyDim name="BorderSpacing" >
-                                        </PropertyDim>
-                                    </DimOperator>
-                                </AbsoluteDim>
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                    
-                    <Dim type="Height" >
-                        <UnifiedDim scale="1" type="Height" >
-                            <DimOperator op="Subtract">
-                                <AbsoluteDim value="4">
-                                    <DimOperator op="Add">
-                                        <PropertyDim name="BorderSpacing" >
-                                        
-                                        </PropertyDim>
-                                    </DimOperator>
-                                </AbsoluteDim>
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                </Area>
-                <Image type="Background" imageset="SWB" image="CheckboxBackgroundHighlight" /> <!-- shared image from other item -->
-                <VertFormat type="Stretched" />
-                <HorzFormat type="Stretched" />
-            </ImageryComponent>
+                
+                <Image type="TopLeftCorner" imageset="SWB" image="CheckboxBck_TL" />
+                <Image type="LeftEdge" imageset="SWB" image="CheckboxBck_L" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="CheckboxBck_BL" />
+                <Image type="TopEdge" imageset="SWB" image="CheckboxBck_T" />
+                <Image type="Background" imageset="SWB" image="CheckboxBck_M" />
+                <Image type="BottomEdge" imageset="SWB" image="CheckboxBck_B" />
+                <Image type="TopRightCorner" imageset="SWB" image="CheckboxBck_TR" />
+                <Image type="RightEdge" imageset="SWB" image="CheckboxBck_R" />
+                <Image type="BottomRightCorner" imageset="SWB" image="CheckboxBck_BR" />
+            </FrameComponent>
         </ImagerySection>
 
         <ImagerySection name="select_mark">
@@ -3229,17 +3193,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         
         <StateImagery name="Normal">
             <Layer>
-                <Section section="background_section">
-                    <ColourProperty name="GS_MainThemeColour" />
+                <Section section="border_section">
+                    <ColourProperty name="BorderColour" />
                 </Section>
-            </Layer>
-            <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="border_section" />
                 <Section section="label">
                     <ColourProperty name="NormalTextColour" />
                 </Section>
@@ -3253,12 +3209,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
+                <Section section="border_section">
+                    <ColourProperty name="BorderColour" />
                 </Section>
-            </Layer>
-            <Layer>
-                <Section section="border_section" />
                 <Section section="label">
                     <ColourProperty name="HoverTextColour" />
                 </Section>
@@ -3267,17 +3220,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         
         <StateImagery name="Disabled">
             <Layer>
-                <Section section="background_section">
-                    <Colours topLeft="FF7F7F7F" topRight="FF7F7F7F" bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" />
+                <Section section="border_section">
+                    <ColourProperty name="BorderColour" />
                 </Section>
-            </Layer>
-            <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="border_section" />
                 <Section section="label">
                     <ColourProperty name="DisabledTextColour" />
                 </Section>
@@ -3286,17 +3231,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         
         <StateImagery name="SelectedNormal">
             <Layer>
-                <Section section="background_section">
-                    <ColourProperty name="GS_MainThemeColour" />
+                <Section section="border_section">
+                    <ColourProperty name="BorderColour" />
                 </Section>
-            </Layer>
-            <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="border_section" />
                 <Section section="select_mark" />
                 <Section section="label">
                     <ColourProperty name="NormalTextColour" />
@@ -3311,12 +3248,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
+                <Section section="border_section">
+                    <ColourProperty name="BorderColour" />
                 </Section>
-            </Layer>
-            <Layer>
-                <Section section="border_section" />
                 <Section section="select_mark" />
                 <Section section="label">
                     <ColourProperty name="HoverTextColour" />
@@ -3326,17 +3260,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 
         <StateImagery name="SelectedDisabled">
             <Layer>
-                <Section section="background_section">
-                    <Colours topLeft="FF7F7F7F" topRight="FF7F7F7F" bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" />
+                <Section section="border_section">
+                    <ColourProperty name="BorderColour" />
                 </Section>
-            </Layer>
-            <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="border_section" />
                 <Section section="select_mark">
                     <Colours topLeft="FF7F7F7F" topRight="FF7F7F7F" bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" />
                 </Section>
@@ -3442,6 +3368,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="ActiveSelectionColour" initialValue="FFFF8080" redrawOnWrite="true" />
         <PropertyDefinition name="InactiveSelectionColour" initialValue="FFB15050" redrawOnWrite="true" />
         <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
+        <PropertyDefinition name="BackgroundColour" initialValue="77FFFFFF" />
 
         <!-- Use the default mouse cursor -->
         <!--<Property name="MouseCursorImage" value="set:SWBCursors image:MouseTextBar" />-->
@@ -3453,6 +3380,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <Dim type="BottomEdge" ><UnifiedDim scale="1.0" offset="-5" type="BottomEdge" /></Dim>
             </Area>
         </NamedArea>
+        
         <ImagerySection name="container_normal">
             <FrameComponent>
                 <Area>
@@ -3472,6 +3400,27 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <Image type="BottomRightCorner" imageset="SWB" image="EditBox_BR" />
             </FrameComponent>
         </ImagerySection>
+   
+        <ImagerySection name="container_background">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="Width" ><UnifiedDim scale="1.0" type="Width" /></Dim>
+                    <Dim type="Height" ><UnifiedDim scale="1.0" type="Height" /></Dim>
+                </Area>
+                <Image type="TopLeftCorner" imageset="SWB" image="FilledRoundedBorder_TL" />
+                <Image type="LeftEdge" imageset="SWB" image="FilledRoundedBorder_L" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="FilledRoundedBorder_BL" />
+                <Image type="TopEdge" imageset="SWB" image="FilledRoundedBorder_T" />
+                <Image type="Background" imageset="SWB" image="FilledRoundedBorder_M" />
+                <Image type="BottomEdge" imageset="SWB" image="FilledRoundedBorder_B" />
+                <Image type="TopRightCorner" imageset="SWB" image="FilledRoundedBorder_TR" />
+                <Image type="RightEdge" imageset="SWB" image="FilledRoundedBorder_R" />
+                <Image type="BottomRightCorner" imageset="SWB" image="FilledRoundedBorder_BR" />
+            </FrameComponent>
+        </ImagerySection>
+           
         <ImagerySection name="selection">
             <ImageryComponent>
                 <Area>
@@ -3485,6 +3434,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
         </ImagerySection>
+        
         <ImagerySection name="Carat">
             <ImageryComponent>
                 <Area>
@@ -3498,8 +3448,10 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
         </ImagerySection>
+        
         <StateImagery name="Enabled">
             <Layer>
+                <Section section="container_background"><ColourProperty name="BackgroundColour" /></Section>
                 <Section section="container_normal">
                     <ColourProperty name="BorderColour" />
                 </Section>
@@ -3507,6 +3459,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </StateImagery>
         <StateImagery name="ReadOnly">
             <Layer>
+                <Section section="container_background"><ColourProperty name="BackgroundColour" /></Section>
                 <Section section="container_normal">
                     <ColourProperty name="BorderColour" />
                 </Section>
@@ -3514,6 +3467,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </StateImagery>
         <StateImagery name="Disabled">
             <Layer>
+                <Section section="container_background"><ColourProperty name="BackgroundColour" /></Section>
                 <Section section="container_normal">
                     <Colours topLeft="FF7F7F7F" topRight="FF7F7F7F" bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" />
                 </Section>
@@ -3521,6 +3475,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </StateImagery>
         <StateImagery name="ActiveSelection">
             <Layer>
+                <Section section="container_background"><ColourProperty name="BackgroundColour" /></Section>
                 <Section section="selection">
                     <ColourProperty name="ActiveSelectionColour" />
                 </Section>
@@ -3528,6 +3483,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </StateImagery>
         <StateImagery name="InactiveSelection">
             <Layer>
+                <Section section="container_background"><ColourProperty name="BackgroundColour" /></Section>
                 <Section section="selection">
                     <ColourProperty name="InactiveSelectionColour" />
                 </Section>
@@ -3600,6 +3556,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="SelectedTextColour" initialValue="FFFFDDDD" redrawOnWrite="true" />
         <PropertyDefinition name="ActiveSelectionColour" initialValue="FFFF8080" redrawOnWrite="true" />
         <PropertyDefinition name="InactiveSelectionColour" initialValue="FFB15050" redrawOnWrite="true" />
+        <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
 
         <!-- The size of the scrollbar + buttons -->
         <PropertyDefinition name="ScrollBarPreferredSize" initialValue="24" redrawOnWrite="true" layoutOnWrite="false" />
@@ -3762,12 +3719,16 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </ImagerySection>
         <StateImagery name="Enabled">
             <Layer>
-                <Section section="main" />
+                <Section section="main">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="ReadOnly">
             <Layer>
-                <Section section="main" />
+                <Section section="main">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="Disabled">

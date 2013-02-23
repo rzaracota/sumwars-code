@@ -557,11 +557,11 @@ void SkillTree::update()
 			pos = label2->getPosition();
 			if (right)
 			{
-				pos += CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f));
+				pos += CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.01f));
 			}
 			else
 			{
-				pos += CEGUI::UVector2(cegui_reldim(0.01f), cegui_reldim( 0.05f));
+				pos += CEGUI::UVector2(cegui_reldim(0.01f), cegui_reldim( 0.01f));
 			}
 			label->setPosition(pos);
 		}

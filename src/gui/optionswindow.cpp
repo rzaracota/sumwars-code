@@ -156,6 +156,16 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	btn->setID(5);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&OptionsWindow::onButtonOkClicked, this));
 
+	if (win_mgr.isWindowPresent ("OptionsWindow__auto_close_panel_button__"))
+	{
+		label = win_mgr.getWindow ("OptionsWindow__auto_close_panel_button__");
+		if (label)
+		{
+			label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&OptionsWindow::onButtonCancelClicked, this));
+		}
+	}
+	
+
 	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("LanguageBox"));
 	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("System default"),"",0));
 	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "German","de_DE",0));
@@ -397,8 +407,19 @@ void OptionsWindow::updateTranslation()
 	CEGUI::DefaultWindow* misc = (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsMisc");
 	misc->setText((CEGUI::utf8*) gettext("Language"));
 
-	label = win_mgr.getWindow("OptionsLabel");
-	label->setText((CEGUI::utf8*) gettext("Options"));
+	if (win_mgr.isWindowPresent ("OptionsLabel"))
+	{
+		label = win_mgr.getWindow("OptionsLabel");
+		label->setText((CEGUI::utf8*) gettext("Options"));
+	}
+	else if (win_mgr.isWindowPresent ("OptionsWindow"))
+	{
+		label =  win_mgr.getWindow("OptionsWindow");
+		if (label->isPropertyPresent ("TitleText"))
+		{
+			label->setProperty ("TitleText", (CEGUI::utf8*) gettext("Options"));
+		}
+	}
 
 	label = win_mgr.getWindow("ShortkeyLabel0");
 	label->setText((CEGUI::utf8*) gettext("Inventory"));
@@ -509,6 +530,13 @@ void OptionsWindow::setKeyCode(KeyCode kc)
 bool OptionsWindow::onAreaMouseButtonPressed(const CEGUI::EventArgs& evt)
 {
 	m_key_destination = NO_KEY;
+	return true;
+}
+
+
+bool OptionsWindow::onButtonCancelClicked (const CEGUI::EventArgs& evt)
+{
+	m_document->onButtonOptionsClicked();
 	return true;
 }
 

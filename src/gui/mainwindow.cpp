@@ -936,7 +936,7 @@ void MainWindow::setupSkilltree()
 
 void MainWindow::setupChatWindow()
 {
-	Window* wnd = new ChatLine(m_document);
+	Window* wnd = new ChatLine(m_document, m_ceguiSkinName);
 	m_sub_windows["Chatline"] = wnd;
 	
 	
@@ -1087,7 +1087,7 @@ bool MainWindow::setupPartyInfo()
 
 void MainWindow::setupTrade()
 {
-	Window* wnd = new TradeWindow(m_document);
+	Window* wnd = new TradeWindow(m_document, m_ceguiSkinName);
 	m_sub_windows["Trade"] = wnd;
 	
 	

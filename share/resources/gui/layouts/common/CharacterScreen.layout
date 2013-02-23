@@ -17,34 +17,22 @@
         <Window Type="SWB/GroupBox" Name="Playerinfo" >
             <Property Name="Text" Value="Player info" />
             <Property Name="TextColours" Value="tl:FFFF2400 tr:FFFF2400 bl:FFFF2400 br:FFFF2400" />
-            <Property Name="FrameEnabled" Value="False" />
-            <!--<Property Name="UnifiedAreaRect" Value="{{0.080,0},{0.125,0},{0.285,0},{0.165,0}}" />-->
             <Property Name="UnifiedAreaRect" Value="{{0.040,0},{0.125,0},{0.960,0},{0.360,0}}" />
-            <Property Name="BackgroundEnabled" Value="False" />
         </Window>
          <Window Type="SWB/GroupBox" Name="Attributes" >
             <Property Name="Text" Value="Attributes" />
             <Property Name="TextColours" Value="tl:FFFF2400 tr:FFFF2400 bl:FFFF2400 br:FFFF2400" />
-            <Property Name="FrameEnabled" Value="False" />
-            <!--<Property Name="UnifiedAreaRect" Value="{{0.063,0},{0.400,0},{0.320,0},{0.440,0}}" />-->
             <Property Name="UnifiedAreaRect" Value="{{0.040,0},{0.380,0},{0.960,0},{0.620,0}}" />
-            <Property Name="BackgroundEnabled" Value="False" />
         </Window>
         <Window Type="SWB/GroupBox" Name="Offense" >
             <Property Name="Text" Value="Offense" />
             <Property Name="TextColours" Value="tl:FFFF2400 tr:FFFF2400 bl:FFFF2400 br:FFFF2400" />
-            <Property Name="FrameEnabled" Value="False" />
-            <!--<Property Name="UnifiedAreaRect" Value="{{0.070,0},{0.630,0},{0.260,0},{0.670,0}}" />-->
             <Property Name="UnifiedAreaRect" Value="{{0.040,0},{0.630,0},{0.510,0},{0.960,0}}" />
-            <Property Name="BackgroundEnabled" Value="False" />
         </Window>
         <Window Type="SWB/GroupBox" Name="Defense" >
             <Property Name="Text" Value="Defense" />
             <Property Name="TextColours" Value="tl:FFFF2400 tr:FFFF2400 bl:FFFF2400 br:FFFF2400" />
-            <Property Name="FrameEnabled" Value="False" />
-            <!--<Property Name="UnifiedAreaRect" Value="{{0.550,0},{0.630,0},{0.730,0},{0.670,0}}" />-->
             <Property Name="UnifiedAreaRect" Value="{{0.520,0},{0.630,0},{0.960,0},{0.960,0}}" />
-            <Property Name="BackgroundEnabled" Value="False" />
         </Window>
         <Window Type="SWB/StaticText" Name="ClassLabel" >
             <Property Name="Text" Value="Class" />

@@ -85,6 +85,12 @@ class OptionsWindow : public Window
 		 * \brief Behandelt Klick auf Button Ok
 		 */
 		bool onButtonOkClicked(const CEGUI::EventArgs& evt);
+
+		/**
+		 * \fn bool onButtonCancelClicked(const CEGUI::EventArgs& evt)
+		 * \brief Handle the click on the "cancel" button. Also for any atomatically createrd.
+		 */
+		bool onButtonCancelClicked(const CEGUI::EventArgs& evt);
 		
 		/**
 		 * \fn bool onAreaMouseButtonPressed(const CEGUI::EventArgs& evt);
