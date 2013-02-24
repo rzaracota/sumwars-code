@@ -1,6 +1,5 @@
 <GUILayout >
     <Window Type="SWB/NamedPanel" Name="TradeWindow" >
-        <Property Name="FrameEnabled" Value="False" />
         <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
         <Property Name="Alpha" Value="1" />
         <Property Name="TitleText" Value="Trade" />

@@ -83,7 +83,6 @@
 
         <!-- The lower side location containing the stash -->
         <Window Type="SWB/RoundedPanelFrame" Name="StashHolder">
-            <Property Name="FrameEnabled" Value="True" />
             <Property Name="UnifiedAreaRect" Value="{{0.035,0},{0.6740544,0},{0.965907,0},{0.97,0}}" />
             <Window Type="SWB/TabButton" Name="SmallTabButton" >
                 <Property Name="Text" >Small</Property>
