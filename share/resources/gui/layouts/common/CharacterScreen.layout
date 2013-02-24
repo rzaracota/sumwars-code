@@ -1,8 +1,6 @@
 <GUILayout >
     <Window Type="SWB/NamedPanel" Name="CharInfo" >
-        <Property Name="FrameEnabled" Value="False" />
         <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
-        <Property Name="BackgroundEnabled" Value="False" />
         <Property Name="TitleText" Value="Inventory" />
         <Property Name="TitlebarFont" Value="DejaVuSerif-HD-12" />
         <Property Name="CloseButtonAlignment" Value="1" />
@@ -16,22 +14,22 @@
        
         <Window Type="SWB/GroupBox" Name="Playerinfo" >
             <Property Name="Text" Value="Player info" />
-            <Property Name="TextColours" Value="tl:FFFF2400 tr:FFFF2400 bl:FFFF2400 br:FFFF2400" />
+            <!--<Property Name="TextColours" Value="tl:FFFF2400 tr:FFFF2400 bl:FFFF2400 br:FFFF2400" />-->
             <Property Name="UnifiedAreaRect" Value="{{0.040,0},{0.125,0},{0.960,0},{0.360,0}}" />
         </Window>
          <Window Type="SWB/GroupBox" Name="Attributes" >
             <Property Name="Text" Value="Attributes" />
-            <Property Name="TextColours" Value="tl:FFFF2400 tr:FFFF2400 bl:FFFF2400 br:FFFF2400" />
+            <!--<Property Name="TextColours" Value="tl:FFFF2400 tr:FFFF2400 bl:FFFF2400 br:FFFF2400" />-->
             <Property Name="UnifiedAreaRect" Value="{{0.040,0},{0.380,0},{0.960,0},{0.620,0}}" />
         </Window>
         <Window Type="SWB/GroupBox" Name="Offense" >
             <Property Name="Text" Value="Offense" />
-            <Property Name="TextColours" Value="tl:FFFF2400 tr:FFFF2400 bl:FFFF2400 br:FFFF2400" />
+            <!--<Property Name="TextColours" Value="tl:FFFF2400 tr:FFFF2400 bl:FFFF2400 br:FFFF2400" />-->
             <Property Name="UnifiedAreaRect" Value="{{0.040,0},{0.630,0},{0.510,0},{0.960,0}}" />
         </Window>
         <Window Type="SWB/GroupBox" Name="Defense" >
             <Property Name="Text" Value="Defense" />
-            <Property Name="TextColours" Value="tl:FFFF2400 tr:FFFF2400 bl:FFFF2400 br:FFFF2400" />
+            <!--<Property Name="TextColours" Value="tl:FFFF2400 tr:FFFF2400 bl:FFFF2400 br:FFFF2400" />-->
             <Property Name="UnifiedAreaRect" Value="{{0.520,0},{0.630,0},{0.960,0},{0.960,0}}" />
         </Window>
         <Window Type="SWB/StaticText" Name="ClassLabel" >
