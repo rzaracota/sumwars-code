@@ -6,7 +6,7 @@ SWB is licensed under the terms of the LGPL license.
 version:      0.1
 Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
 -->
-<Imageset Name="SWB" Imagefile="SWB.png" NativeHorzRes="1920" NativeVertRes="1080" AutoScaled="true" >
+<Imageset Name="SWB" Imagefile="SWB.png" NativeHorzRes="1920" NativeVertRes="1080" AutoScaled="false" >
 
   <!-- Suffix Legend: 
     TL = top left; L = left; BL = bottom left; 
@@ -337,16 +337,16 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
 	<Image Name="MultiLineEditboxSelectionBrush" XPos="0" YPos="320" Width="192" Height="48" /> <!-- shared -->
 
 
-  <!-- TODO: bring to standardized suffix format --> <!-- TODO: check if removal is recommended (static duplicate) -->
-  <Image Name="ComboboxListTopLeft" XPos="600" YPos="84" Width="8" Height="8" />
-  <Image Name="ComboboxListLeft" XPos="600" YPos="92" Width="8" Height="26" />
-  <Image Name="ComboboxListBottomLeft" XPos="600" YPos="118" Width="8" Height="8" />
-  <Image Name="ComboboxListTop" XPos="608" YPos="84" Width="26" Height="8" />
-  <Image Name="ComboboxListBackdrop" XPos="608" YPos="92" Width="26" Height="26" />
-  <Image Name="ComboboxListBottom" XPos="608" YPos="118" Width="26" Height="8" />
-  <Image Name="ComboboxListTopRight" XPos="634" YPos="84" Width="8" Height="8" />
-  <Image Name="ComboboxListRight" XPos="634" YPos="92" Width="8" Height="26" />
-  <Image Name="ComboboxListBottomRight" XPos="634" YPos="118" Width="8" Height="8" />
+  <!-- TODO: bring to standardized suffix format --> <!-- TODO: check if removal is recommended (tooltip duplicate) -->
+	<Image Name="ComboboxListTopLeft" XPos="780" YPos="84" Width="8" Height="8" />
+	<Image Name="ComboboxListLeft" XPos="780" YPos="92" Width="8" Height="26" />
+	<Image Name="ComboboxListBottomLeft" XPos="780" YPos="118" Width="8" Height="8" />
+	<Image Name="ComboboxListTop" XPos="788" YPos="84" Width="26" Height="8" />
+	<Image Name="ComboboxListBackdrop" XPos="788" YPos="92" Width="26" Height="26" />
+	<Image Name="ComboboxListBottom" XPos="788" YPos="118" Width="26" Height="8" />
+	<Image Name="ComboboxListTopRight" XPos="814" YPos="84" Width="8" Height="8" />
+	<Image Name="ComboboxListRight" XPos="814" YPos="92" Width="8" Height="26" />
+	<Image Name="ComboboxListBottomRight" XPos="814" YPos="118" Width="8" Height="8" />
 
   <!-- multilist borders - shared -->
   <!-- TODO: bring to standardized suffix format --> <!-- TODO: check if removal is recommended (static duplicate) -->
@@ -420,4 +420,45 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="CheckboxBorder_R" XPos="634" YPos="92" Width="8" Height="26" /> 
   <Image Name="CheckboxBorder_BR" XPos="634" YPos="118" Width="8" Height="8" /> 
 
+
+  <!-- Combo-box button borders -->
+  <Image Name="ComboboxButtonBorder_TL" XPos="780" YPos="0" Width="8" Height="8" /> 
+  <Image Name="ComboboxButtonBorder_L" XPos="780" YPos="8" Width="8" Height="26" /> 
+  <Image Name="ComboboxButtonBorder_BL" XPos="780" YPos="34" Width="8" Height="8" /> 
+  <Image Name="ComboboxButtonBorder_T" XPos="788" YPos="0" Width="26" Height="8" /> 
+  <Image Name="ComboboxButtonBorder_M" XPos="788" YPos="8" Width="26" Height="26" />
+  <Image Name="ComboboxButtonBorder_B" XPos="788" YPos="34" Width="26" Height="8" /> 
+  <Image Name="ComboboxButtonBorder_TR" XPos="814" YPos="0" Width="8" Height="8" /> 
+  <Image Name="ComboboxButtonBorder_R" XPos="814" YPos="8" Width="8" Height="26" /> 
+  <Image Name="ComboboxButtonBorder_BR" XPos="814" YPos="34" Width="8" Height="8" /> 
+
+  <Image Name="ComboboxButtonGlyph" XPos="835" YPos="128" Width="43" Height="33" />
+
+  <!-- Titlebar border -->
+  <Image Name="TitlebarBorder_TL" XPos="5" YPos="820" Width="8" Height="8" />
+  <Image Name="TitlebarBorder_L" XPos="5" YPos="828" Width="8" Height="48" />
+  <Image Name="TitlebarBorder_BL" XPos="5" YPos="876" Width="8" Height="8" />
+  <Image Name="TitlebarBorder_T" XPos="13" YPos="820" Width="240" Height="8" />
+  <Image Name="TitlebarBorder_M" XPos="13" YPos="828" Width="240" Height="48" />
+  <Image Name="TitlebarBorder_B" XPos="13" YPos="876" Width="240" Height="8" /> 
+  <Image Name="TitlebarBorder_TR" XPos="253" YPos="820" Width="8" Height="8" /> 
+  <Image Name="TitlebarBorder_R" XPos="253" YPos="828" Width="8" Height="48" /> 
+  <Image Name="TitlebarBorder_BR" XPos="253" YPos="876" Width="8" Height="8" /> 
+
+  <Image Name="TitlebarBackground" XPos="600" YPos="42" Width="42" Height="42" /> 
+
+  <Image Name="WindowBck_TL" XPos="600" YPos="0" Width="4" Height="4" /> 
+  <Image Name="WindowBck_L" XPos="600" YPos="4" Width="4" Height="34" /> 
+  <Image Name="WindowBck_BL" XPos="600" YPos="38" Width="4" Height="4" /> 
+  <Image Name="WindowBck_T" XPos="604" YPos="0" Width="34" Height="4" /> 
+  <Image Name="WindowBck_M" XPos="604" YPos="4" Width="34" Height="34" />
+  <Image Name="WindowBck_B" XPos="604" YPos="38" Width="34" Height="4" /> 
+  <Image Name="WindowBck_TR" XPos="638" YPos="0" Width="4" Height="4" /> 
+  <Image Name="WindowBck_R" XPos="638" YPos="4" Width="4" Height="34" /> 
+  <Image Name="WindowBck_BR" XPos="638" YPos="38" Width="4" Height="4" /> 
+  
+  <Image Name="MiniButton_Background" XPos="604" YPos="4" Width="34" Height="34" />
+
+
 </Imageset>
+
