@@ -214,8 +214,7 @@ void WarningDialogWindow::updateTranslation()
 
 bool WarningDialogWindow::onConfirmed(const CEGUI::EventArgs& evt)
 {
-	m_window->hide();
-	m_window->setModalState(false);
+	m_document->hideWarning ();
 	return true;
 }
 

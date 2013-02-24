@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <GUILayout >
     <Window Type="SWB/NamedPanel" Name="Skilltree" >
         <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
@@ -7,6 +5,7 @@
         <Property Name="TitleText" Value="Inventory" />
         <Property Name="TitlebarFont" Value="DejaVuSerif-HD-12" />
         <Property Name="CloseButtonAlignment" Value="0" />
+        <Property Name="MousePassThroughEnabled" Value="True" />
 
         
         <Window Type="SWB/TabControl" Name="SkilltreeTabs" >

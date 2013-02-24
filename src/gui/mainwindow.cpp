@@ -162,6 +162,22 @@ bool MainWindow::setupMainMenu()
 		if (start_screen_holder)
 		{
 			m_main_menu->addChildWindow (start_screen_holder);
+
+			if (win_mgr.isWindowPresent ("StartScreenImage"))
+			{
+				CEGUI::Window* temp = win_mgr.getWindow ("StartScreenImage");
+				temp->setMousePassThroughEnabled (true);
+			}
+			if (win_mgr.isWindowPresent ("StartScreenRoot"))
+			{
+				CEGUI::Window* temp = win_mgr.getWindow ("StartScreenRoot");
+				temp->setMousePassThroughEnabled (true);
+			}
+			if (win_mgr.isWindowPresent ("LoadRessourcesProgressBar"))
+			{
+				CEGUI::Window* temp = win_mgr.getWindow ("LoadRessourcesProgressBar");
+				temp->setMousePassThroughEnabled (true);
+			}
 		}
 		else
 		{
@@ -391,15 +407,25 @@ void MainWindow::update(float time)
 			join_game->setVisible(false);
 		}
 		
-		CEGUI::FrameWindow* options = (CEGUI::FrameWindow*) win_mgr.getWindow("OptionsWindow");
+		CEGUI::FrameWindow* options = (CEGUI::FrameWindow*) win_mgr.getWindow("OptionsWindow_Holder");
 		if (wflags & Document::OPTIONS)
 		{
 			static_cast<OptionsWindow*>(m_sub_windows["Options"])->reset();
+			DEBUG ("Making visible, activating and setting the options window to modal state");
 			options->setVisible(true);
+			options->activate ();
+			//options->setModalState (true);
+			//options->moveToFront ();
+			//options->setAlwaysOnTop (true);
 		}
 		else
 		{
+			DEBUG ("Making invisible, deactivating and un-setting the options window to modal state");
 			options->setVisible(false);
+			//options->setModalState (false);
+			//options->deactivate ();
+			//options->moveToBack ();
+//			options->setAlwaysOnTop (true);
 		}
 		
 		
@@ -1192,6 +1218,7 @@ void  MainWindow::updateMainMenu()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* img;
 	img  = win_mgr.getWindow("StartScreenRoot");
+	img->setMousePassThroughEnabled (true);
 	CEGUI::Window* label;
 	label = win_mgr.getWindow("CharacterPreviewImage");
 	CEGUI::Window* label2;
@@ -2876,6 +2903,7 @@ void MainWindow::setReadyToStart(bool ready)
 	CEGUI::Window* backgroundPicture = win_mgr.getWindow ("StartScreenRoot");
 	backgroundPicture->setVisible (false);
 	backgroundPicture->moveToBack ();
+	backgroundPicture->setMousePassThroughEnabled (true);
 	
 	// we have finished loading so we will simulate the click to get straight in to the main menu
 	m_document->onStartScreenClicked();

@@ -5,6 +5,7 @@
         <Property Name="TitleText" Value="Trade" />
         <Property Name="TitlebarFont" Value="DejaVuSerif-HD-12" />
         <Property Name="CloseButtonAlignment" Value="1" />
+        <Property Name="MousePassThroughEnabled" Value="True" />
         
         <Window Type="SWB/Listbox" Name="QuestList" >
             <Property Name="UnifiedAreaRect" Value="{{0.0389594,0},{0.192192,0},{0.970263,0},{0.484214,0}}" />

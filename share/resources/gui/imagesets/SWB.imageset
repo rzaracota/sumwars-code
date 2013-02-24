@@ -457,5 +457,7 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="WindowBck_R" XPos="638" YPos="4" Width="4" Height="34" /> 
   <Image Name="WindowBck_BR" XPos="638" YPos="38" Width="4" Height="4" /> 
 
+  <Image Name="ProgressBarTimerSegment" XPos="805" YPos="128" Width="22" Height="31" />
+
 </Imageset>
 

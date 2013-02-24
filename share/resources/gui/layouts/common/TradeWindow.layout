@@ -5,6 +5,7 @@
         <Property Name="TitleText" Value="Trade" />
         <Property Name="TitlebarFont" Value="DejaVuSerif-HD-12" />
         <Property Name="CloseButtonAlignment" Value="1" />
+        <Property Name="MousePassThroughEnabled" Value="True" />
         
         <Window Type="SWB/ImageButton" Name="TradeBigPrevButton" >
             <Property Name="HoverImage" Value="set:TradeWindow image:BtnUpHover" />

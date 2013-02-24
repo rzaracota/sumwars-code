@@ -5,6 +5,7 @@
         <Property Name="TitleText" Value="Inventory" />
         <Property Name="TitlebarFont" Value="DejaVuSerif-HD-12" />
         <Property Name="CloseButtonAlignment" Value="0" />
+        <Property Name="MousePassThroughEnabled" Value="True" />
         
         <!-- The gold coins icon -->
         <Window Type="SWB/StaticImage" Name="GoldStaticImage" >

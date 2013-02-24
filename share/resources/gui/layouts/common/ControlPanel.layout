@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <GUILayout >
     <Window Type="TaharezLook/StaticImage" Name="ControlPanel" >
         <Property Name="Image" Value="set:ControlPanel image:Belt" />
@@ -8,6 +6,7 @@
         <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
         <Property Name="BackgroundEnabled" Value="False" />
         <Property Name="MousePassThroughEnabled" Value="True" />
+
         <Window Type="TaharezLook/HPProgressBar" Name="HealthProgressBar" >
             <Property Name="StepSize" Value="0.01" />
             <Property Name="RiseOnClick" Value="False" />

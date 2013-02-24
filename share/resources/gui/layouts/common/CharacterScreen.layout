@@ -4,7 +4,8 @@
         <Property Name="TitleText" Value="Inventory" />
         <Property Name="TitlebarFont" Value="DejaVuSerif-HD-12" />
         <Property Name="CloseButtonAlignment" Value="1" />
-                
+        <Property Name="MousePassThroughEnabled" Value="True" />
+
         <Window Type="SWB/StaticImage" Name="Portrait" >
             <Property Name="Image" Value="set:Portrait image:Portrait" />
             <Property Name="FrameEnabled" Value="True" />

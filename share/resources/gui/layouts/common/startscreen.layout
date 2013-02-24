@@ -3,6 +3,7 @@
         <Property Name="FrameEnabled" Value="False" />
         <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
         <Property Name="BackgroundEnabled" Value="False" />
+        <Property Name="MousePassThroughEnabled" Value="True" />
         
         <Window Type="SWB/StaticImage" Name="StartScreenImage" >
             <Property Name="InheritsAlpha" Value="True" />
@@ -11,6 +12,7 @@
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="MousePassThroughEnabled" Value="True" />
             <Property Name="BackgroundColours" Value="tl:00000000 tr:00000000 bl:00000000 br:00000000" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
         </Window>
         
         <Window Type="SWB/ProgressBar" Name="LoadRessourcesProgressBar" >
@@ -22,6 +24,7 @@
             <Property Name="GS_MainThemeColour" Value="6013868B" />
             <Property Name="GS_ShineColour" Value="60FFFFFF" />
             <Property Name="GS_MainThemeGradientLeftToRight" Value="tl:00FFFFFF tr:AA13C6BC bl:00FFFFFF br:AA13C6BC" />
+            <Property Name="MousePassThroughEnabled" Value="True" />
         </Window>
     </Window>
 </GUILayout>
