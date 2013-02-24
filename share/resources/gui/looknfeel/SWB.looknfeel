@@ -443,7 +443,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     <WidgetLook name="SWB/NamedPanel">
         <!--<PropertyLinkDefinition name="CaptionColour" widget="__auto_title_text__" targetProperty="CaptionColour" initialValue="FFFFFFFF" />-->
         <PropertyLinkDefinition name="TitlebarFont" widget="__auto_title_text__" targetProperty="Font" />
-        <PropertyLinkDefinition name="TitleText" widget="__auto_title_text__"  targetProperty="Text" initialValue="Title..." />
+        <PropertyLinkDefinition name="TitleText" widget="__auto_title_text__"  targetProperty="Text" initialValue="TitleText..." />
         <PropertyDefinition name="ClientAreaColour" initialValue="FFFFFFFF" redrawOnWrite="true" />
         <PropertyDefinition name="TitlebarHeight" initialValue="32" redrawOnWrite="true" />
         <PropertyDefinition name="BackgroundPictureColour" initialValue="FFBBA075" redrawOnWrite="true"/>
@@ -2502,6 +2502,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyLinkDefinition name="SelectedEditTextColour" widget="__auto_editbox__" targetProperty="SelectedTextColour" initialValue="FFFFFFDD" /> <!-- GS_Selection-->
         <PropertyLinkDefinition name="ActiveEditSelectionColour" widget="__auto_editbox__" targetProperty="ActiveSelectionColour" initialValue="FFFFB080" />
         <PropertyLinkDefinition name="InactiveEditSelectionColour" widget="__auto_editbox__" targetProperty="InactiveSelectionColour" initialValue="FFB18A50" />
+        
         <Child  type="SWB/ComboEditbox" nameSuffix="__auto_editbox__">
             <Area>
                 <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
@@ -2574,32 +2575,45 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="GlyphImage" initialValue="" redrawOnWrite="true" />
         <PropertyDefinition name="VertImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
         <PropertyDefinition name="HorzImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
-        
+        <PropertyDefinition name="GlyphOffsetValueInPixels" initialValue="8" redrawOnWrite="true" />
         <PropertyDefinition name="GS_DarkerThemeColour" initialValue="FF940000" redrawOnWrite="true" />
         <PropertyDefinition name="GS_LighterThemeColour" initialValue="FFFF0101" redrawOnWrite="true" />
         <PropertyDefinition name="GS_MainThemeColour" initialValue="FFDC5F5F" redrawOnWrite="true" />
         <PropertyDefinition name="GS_ShineColour" initialValue="B0FFFFFF" redrawOnWrite="true" />
+        <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
 
         <ImagerySection name="glyph">
             <ImageryComponent>
                 <Area>
                     <Dim type="LeftEdge">
-                        <AbsoluteDim value="0" />
+                        <!--<AbsoluteDim value="5" />-->
+                        <PropertyDim name="GlyphOffsetValueInPixels" />
                     </Dim>
                     <Dim type="TopEdge">
-                        <AbsoluteDim value="0" />
+                        <!--<AbsoluteDim value="5" />-->
+                        <PropertyDim name="GlyphOffsetValueInPixels" />
                     </Dim>
                     <Dim type="Width">
                         <UnifiedDim scale="1" type="Width">
                             <DimOperator op="Subtract">
-                                <AbsoluteDim value="0" />
+                                <!--<AbsoluteDim value="5" />-->
+                                <PropertyDim name="GlyphOffsetValueInPixels">
+                                    <DimOperator op="Multiply">
+                                        <AbsoluteDim value="2" />
+                                    </DimOperator>
+                                </PropertyDim>
                             </DimOperator>
                         </UnifiedDim>
                     </Dim>
                     <Dim type="Height">
                         <UnifiedDim scale="1" type="Height">
                             <DimOperator op="Subtract">
-                                <AbsoluteDim value="0" />
+                                <!--<AbsoluteDim value="5" />-->
+                                <PropertyDim name="GlyphOffsetValueInPixels">
+                                    <DimOperator op="Multiply">
+                                        <AbsoluteDim value="2" />
+                                    </DimOperator>
+                                </PropertyDim>
                             </DimOperator>
                         </UnifiedDim>
                     </Dim>
@@ -2656,115 +2670,37 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
             </ImageryComponent>
         </ImagerySection>
 
-        <ImagerySection name="background_highlight">
-            <ImageryComponent>
-                <Area>
-                    <Dim type="LeftEdge" ><AbsoluteDim value="3" /></Dim>
-                    <Dim type="TopEdge" ><AbsoluteDim value="3" /></Dim>
-                    <Dim type="Width" >
-                        <UnifiedDim scale="1" type="Width">
-                            <DimOperator op="Subtract">
-                                <AbsoluteDim value="6" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                    <Dim type="Height" >
-                        <UnifiedDim scale="1" type="Height">
-                            <DimOperator op="Subtract">
-                                <AbsoluteDim value="6" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                </Area>
-                <Image type="Background" imageset="SWB" image="MiniButton_BackgHighlight" />  <!-- shared image from other item -->
-                <VertFormatProperty name="VertImageFormatting" />
-                <HorzFormatProperty name="HorzImageFormatting" />
-            </ImageryComponent>
-        </ImagerySection>
-
         <StateImagery name="Normal">
             <Layer>
-                <Section section="background_section">
-                    <ColourProperty name="GS_MainThemeColour" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="border_section" />
+                <Section section="border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="glyph" />
             </Layer>
         </StateImagery>
 
         <StateImagery name="Hover">
             <Layer>
-                <Section section="background_section">
-                    <ColourProperty name="GS_LighterThemeColour" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="border_section" />
+                <Section section="border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="glyph" />
             </Layer>
         </StateImagery>
 
         <StateImagery name="Pushed">
             <Layer>
-                <Section section="background_section">
-                    <ColourProperty name="GS_DarkerThemeColour" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="border_section" />
+                <Section section="border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="glyph" />
             </Layer>
         </StateImagery>
         
         <StateImagery name="PushedOff">
             <Layer>
-                <Section section="background_section">
-                    <ColourProperty name="GS_LighterThemeColour" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="border_section" />
+                <Section section="border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="glyph" />
             </Layer>
         </StateImagery>
         
         <StateImagery name="Disabled">
             <Layer>
-                <Section section="background_section">
-                    <ColourProperty name="GS_MainThemeColour" />
-                    <Colours topLeft="997F7F7F" topRight="997F7F7F" bottomLeft="997F7F7F" bottomRight="997F7F7F" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
-                    <Colours topLeft="997F7F7F" topRight="997F7F7F" bottomLeft="997F7F7F" bottomRight="997F7F7F" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="border_section" />
+                <Section section="border_section"><ColourProperty name="BorderColour" /></Section>
                 <Section section="glyph" />
             </Layer>
 
@@ -5102,33 +5038,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
         </ImagerySection>
-
-
-        <ImagerySection name="background_highlight">
-            <ImageryComponent>
-                <Area>
-                    <Dim type="LeftEdge" ><AbsoluteDim value="4" /></Dim>
-                    <Dim type="TopEdge" ><AbsoluteDim value="4" /></Dim>
-                    <Dim type="Width" >
-                        <UnifiedDim scale="1" type="Width">
-                            <DimOperator op="Subtract">
-                                <AbsoluteDim value="8" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                    <Dim type="Height" >
-                        <UnifiedDim scale="1" type="Height">
-                            <DimOperator op="Subtract">
-                                <AbsoluteDim value="8" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                </Area>
-                <Image type="Background" imageset="SWB" image="TitlebarBackghighlight" />
-                <VertFormat type="Stretched" />
-                <HorzFormat type="Stretched" />
-            </ImageryComponent>
-        </ImagerySection>
         
         <ImagerySection name="caption">
             <TextComponent>
@@ -5192,9 +5101,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <Section section="background_section">
                     <ColourProperty name="GS_MainThemeColour" />
                 </Section>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
-                </Section>
             </Layer>
             <Layer>
                 <Section section="border_section" />
@@ -5208,9 +5114,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
             <Layer>
                 <Section section="background_section">
                     <ColourProperty name="GS_DesaturatedThemeColour" />
-                </Section>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
                 </Section>
             </Layer>
             <Layer>
@@ -5226,9 +5129,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <Section section="background_section">
                     <ColourProperty name="GS_MainThemeColour" />
                     <Colours topLeft="997F7F7F" topRight="997F7F7F" bottomLeft="997F7F7F" bottomRight="997F7F7F" />
-                </Section>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
                 </Section>
             </Layer>
             <Layer>
