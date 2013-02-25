@@ -159,6 +159,7 @@ bool MainWindow::setupMainMenu()
 		m_main_menu = win_mgr.createWindow("DefaultWindow", "MainMenu");
 
 		CEGUI::Window* start_screen_holder = win_mgr.loadWindowLayout ("startscreen.layout");
+
 		if (start_screen_holder)
 		{
 			m_main_menu->addChildWindow (start_screen_holder);
@@ -204,7 +205,6 @@ bool MainWindow::setupMainMenu()
 			bar->setProperty ("GS_MainThemeGradientLeftToRight", "tl:00FFFFFF tr:FF13C6BC bl:00FFFFFF br:FF13C6BC");
 			// TODO: remove code when no longer needed - end
 		}
-
 		CreditsWindow* crd = new CreditsWindow (m_document, m_ceguiSkinName);
 		m_sub_windows["CreditsWindow"] = crd;
 		m_main_menu->addChildWindow(crd->getCEGUIWindow());
@@ -407,7 +407,15 @@ void MainWindow::update(float time)
 			join_game->setVisible(false);
 		}
 		
-		CEGUI::FrameWindow* options = (CEGUI::FrameWindow*) win_mgr.getWindow("OptionsWindow_Holder");
+		CEGUI::FrameWindow* options = 0;
+		if (win_mgr.isWindowPresent ("OptionsWindow_Holder"))
+		{
+			options = (CEGUI::FrameWindow*) win_mgr.getWindow("OptionsWindow_Holder");
+		}
+		else
+		{
+			options = (CEGUI::FrameWindow*) win_mgr.getWindow("OptionsWindow");
+		}
 		if (wflags & Document::OPTIONS)
 		{
 			static_cast<OptionsWindow*>(m_sub_windows["Options"])->reset();
@@ -1026,7 +1034,7 @@ bool MainWindow::setupObjectInfo()
 	{
 		m_game_screen->addChildWindow (monster_health_holder);
 	}
-
+	
 	return true;
 }
 
@@ -1217,8 +1225,16 @@ void  MainWindow::updateMainMenu()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* img;
-	img  = win_mgr.getWindow("StartScreenRoot");
-	img->setMousePassThroughEnabled (true);
+	if (win_mgr.isWindowPresent ("StartScreenRoot"))
+	{
+		img  = win_mgr.getWindow ("StartScreenRoot");
+		img->setMousePassThroughEnabled (true);
+	}
+	if (win_mgr.isWindowPresent ("StartScreenImage"))
+	{
+		img  = win_mgr.getWindow ("StartScreenImage");
+		img->setMousePassThroughEnabled (true);
+	}
 	CEGUI::Window* label;
 	label = win_mgr.getWindow("CharacterPreviewImage");
 	CEGUI::Window* label2;
@@ -1230,15 +1246,10 @@ void  MainWindow::updateMainMenu()
 	if (wflags & (Document::SAVEGAME_LIST | Document::CHAR_CREATE))
 	{
 		img->setVisible(false);
-		//label->setVisible(true);
-		//label2->setVisible(true);
 	}
 	else
 	{
 		img->setVisible(true);
-		img->moveToBack ();
-		//label->setVisible(false);
-		//label2->setVisible(false);
 	}
 	
 	m_sub_windows["MainMenu"]->update();
@@ -2900,10 +2911,18 @@ void MainWindow::setReadyToStart(bool ready)
 	bar->setVisible(!ready);
 
 	// Also hide the background picture
-	CEGUI::Window* backgroundPicture = win_mgr.getWindow ("StartScreenRoot");
-	backgroundPicture->setVisible (false);
-	backgroundPicture->moveToBack ();
-	backgroundPicture->setMousePassThroughEnabled (true);
+	if (win_mgr.isWindowPresent ("StartScreenImage"))
+	{
+		CEGUI::Window* backgroundPicture = win_mgr.getWindow ("StartScreenImage");
+		backgroundPicture->setVisible (false);
+		backgroundPicture->setMousePassThroughEnabled (true);
+	}
+	if (win_mgr.isWindowPresent ("StartScreenRoot"))
+	{
+		CEGUI::Window* backgroundPicture = win_mgr.getWindow ("StartScreenRoot");
+		backgroundPicture->setVisible (false);
+		backgroundPicture->setMousePassThroughEnabled (true);
+	}
 	
 	// we have finished loading so we will simulate the click to get straight in to the main menu
 	m_document->onStartScreenClicked();
