@@ -1213,41 +1213,10 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
             </ImageryComponent>
         </ImagerySection>
 
-        <ImagerySection name="background_highlight">
-            <ImageryComponent>
-                <Area>
-                    <Dim type="LeftEdge" ><AbsoluteDim value="3" /></Dim>
-                    <Dim type="TopEdge" ><AbsoluteDim value="3" /></Dim>
-                    <Dim type="Width" >
-                        <UnifiedDim scale="1" type="Width">
-                            <DimOperator op="Subtract">
-                                <AbsoluteDim value="6" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                    <Dim type="Height" >
-                        <UnifiedDim scale="1" type="Height">
-                            <DimOperator op="Subtract">
-                                <AbsoluteDim value="6" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                </Area>
-                <Image type="Background" imageset="SWB" image="HorzScrollThumb_BackgHighlight" />
-                <VertFormat type="Stretched" />
-                <HorzFormat type="Stretched" />
-            </ImageryComponent>
-        </ImagerySection>
-        
         <StateImagery name="Normal">
             <Layer>
                 <Section section="background_section">
                     <ColourProperty name="GS_MainThemeColour" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
                 </Section>
             </Layer>
             <Layer>
@@ -1261,11 +1230,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
-                </Section>
-            </Layer>
-            <Layer>
                 <Section section="border_section" />
             </Layer>
         </StateImagery>
@@ -1276,11 +1240,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
-                </Section>
-            </Layer>
-            <Layer>
                 <Section section="border_section" />
             </Layer>
         </StateImagery>
@@ -1288,12 +1247,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
             <Layer>
                 <Section section="background_section">
                     <ColourProperty name="GS_MainThemeColour" />
-                    <Colours topLeft="997F7F7F" topRight="997F7F7F" bottomLeft="997F7F7F" bottomRight="997F7F7F" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
                     <Colours topLeft="997F7F7F" topRight="997F7F7F" bottomLeft="997F7F7F" bottomRight="997F7F7F" />
                 </Section>
             </Layer>
@@ -1454,41 +1407,10 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
             </ImageryComponent>
         </ImagerySection>
 
-        <ImagerySection name="background_highlight">
-            <ImageryComponent>
-                <Area>
-                    <Dim type="LeftEdge" ><AbsoluteDim value="3" /></Dim>
-                    <Dim type="TopEdge" ><AbsoluteDim value="3" /></Dim>
-                    <Dim type="Width" >
-                        <UnifiedDim scale="1" type="Width">
-                            <DimOperator op="Subtract">
-                                <AbsoluteDim value="6" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                    <Dim type="Height" >
-                        <UnifiedDim scale="1" type="Height">
-                            <DimOperator op="Subtract">
-                                <AbsoluteDim value="6" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                </Area>
-                <Image type="Background" imageset="SWB" image="VertScrollThumb_BackgHighlight" />
-                <VertFormat type="Stretched" />
-                <HorzFormat type="Stretched" />
-            </ImageryComponent>
-        </ImagerySection>
-        
         <StateImagery name="Normal">
             <Layer>
                 <Section section="background_section">
                     <ColourProperty name="GS_MainThemeColour" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
                 </Section>
             </Layer>
             <Layer>
@@ -1503,11 +1425,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
-                </Section>
-            </Layer>
-            <Layer>
                 <Section section="border_section" />
             </Layer>
         </StateImagery>
@@ -1519,11 +1436,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
             <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
-                </Section>
-            </Layer>
-            <Layer>
                 <Section section="border_section" />
             </Layer>
         </StateImagery>
@@ -1532,11 +1444,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
             <Layer>
                 <Section section="background_section">
                     <Colours topLeft="997F7F7F" topRight="997F7F7F" bottomLeft="997F7F7F" bottomRight="997F7F7F" />
-                </Section>
-            </Layer>
-            <Layer>
-                <Section section="background_highlight">
-                    <ColourProperty name="GS_ShineColour" />
                 </Section>
             </Layer>
             <Layer>
@@ -1710,15 +1617,15 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     <Dim type="RightEdge"><UnifiedDim scale="1" type="RightEdge" /></Dim>
                     <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
                 </Area>
-                <Image type="TopLeftCorner" imageset="SWB" image="MiniButton_TL" />
-                <Image type="LeftEdge" imageset="SWB" image="MiniButton_L" />
-                <Image type="BottomLeftCorner" imageset="SWB" image="MiniButton_BL" />
-                <Image type="TopEdge" imageset="SWB" image="MiniButton_T" />
-                <Image type="Background" imageset="SWB" image="MiniButton_M" />
-                <Image type="BottomEdge" imageset="SWB" image="MiniButton_B" />
-                <Image type="TopRightCorner" imageset="SWB" image="MiniButton_TR" />
-                <Image type="RightEdge" imageset="SWB" image="MiniButton_R" />
-                <Image type="BottomRightCorner" imageset="SWB" image="MiniButton_BR" />
+                <Image type="TopLeftCorner" imageset="SWB" image="FilledRoundedBorder_TL" />
+                <Image type="LeftEdge" imageset="SWB" image="FilledRoundedBorder_L" />
+                <Image type="BottomLeftCorner" imageset="SWB" image="FilledRoundedBorder_BL" />
+                <Image type="TopEdge" imageset="SWB" image="FilledRoundedBorder_T" />
+                <Image type="Background" imageset="SWB" image="FilledRoundedBorder_M" />
+                <Image type="BottomEdge" imageset="SWB" image="FilledRoundedBorder_B" />
+                <Image type="TopRightCorner" imageset="SWB" image="FilledRoundedBorder_TR" />
+                <Image type="RightEdge" imageset="SWB" image="FilledRoundedBorder_R" />
+                <Image type="BottomRightCorner" imageset="SWB" image="FilledRoundedBorder_BR" />
             </FrameComponent>
         </ImagerySection>
 

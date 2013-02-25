@@ -90,23 +90,23 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="EditBoxCarat" XPos="595" YPos="85" Width="3" Height="30" />
 
   <!--Horizontal scrollbar thumb border -->
-  <Image Name="HorzScrollThumbBorder_TL" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="HorzScrollThumbBorder_L" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="HorzScrollThumbBorder_BL" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="HorzScrollThumbBorder_T" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="HorzScrollThumbBorder_M" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="HorzScrollThumbBorder_B" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="HorzScrollThumbBorder_TR" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="HorzScrollThumbBorder_R" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="HorzScrollThumbBorder_BR" XPos="1000" YPos="0" Width="5" Height="5" />
+  <Image Name="HorzScrollThumbBorder_TL" XPos="780" YPos="0" Width="8" Height="8" /> 
+  <Image Name="HorzScrollThumbBorder_L" XPos="780" YPos="8" Width="8" Height="26" /> 
+  <Image Name="HorzScrollThumbBorder_BL" XPos="780" YPos="34" Width="8" Height="8" /> 
+  <Image Name="HorzScrollThumbBorder_T" XPos="788" YPos="0" Width="26" Height="8" /> 
+  <Image Name="HorzScrollThumbBorder_M" XPos="788" YPos="8" Width="26" Height="26" />
+  <Image Name="HorzScrollThumbBorder_B" XPos="788" YPos="34" Width="26" Height="8" /> 
+  <Image Name="HorzScrollThumbBorder_TR" XPos="814" YPos="0" Width="8" Height="8" /> 
+  <Image Name="HorzScrollThumbBorder_R" XPos="814" YPos="8" Width="8" Height="26" /> 
+  <Image Name="HorzScrollThumbBorder_BR" XPos="814" YPos="34" Width="8" Height="8" /> 
 
   <Image Name="HorzScrollThumb_Background" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="HorzScrollThumb_BackgHighlight" XPos="1000" YPos="0" Width="5" Height="5" />
+
   
-  <Image Name="GlyphArrowLeft" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="GlyphArrowRight" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="GlyphArrowDown" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="GlyphArrowUp" XPos="1000" YPos="0" Width="5" Height="5" />
+  <Image Name="GlyphArrowLeft" XPos="803" YPos="179" Width="48" Height="48" />
+  <Image Name="GlyphArrowRight" XPos="851" YPos="179" Width="48" Height="48" />
+  <Image Name="GlyphArrowDown" XPos="851" YPos="227" Width="48" Height="48" />
+  <Image Name="GlyphArrowUp" XPos="803" YPos="227" Width="48" Height="48" />
 
   <Image Name="EmptyGlyph24" XPos="1000" YPos="0" Width="24" Height="24" />
 
@@ -128,22 +128,21 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <!-- scrolls - 16 pixels sized-->
   <Image Name="MiniHorzScrollLeftNormal" XPos="1000" YPos="0" Width="5" Height="5" />
   <Image Name="MiniHorzScrollRightNormal" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="MiniHorzScrollBarSegment" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="MiniVertScrollBarSegment" XPos="1000" YPos="0" Width="5" Height="5" />
+  <Image Name="MiniHorzScrollBarSegment" XPos="803" YPos="275" Width="60" Height="14" />
+  <Image Name="MiniVertScrollBarSegment" XPos="787" YPos="278" Width="14" Height="60" />
   
   <!-- Vertical scrollbar thumb border -->  
-  <Image Name="VertScrollThumbBorder_TL" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="VertScrollThumbBorder_TR" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="VertScrollThumbBorder_BL" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="VertScrollThumbBorder_BR" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="VertScrollThumbBorder_L" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="VertScrollThumbBorder_T" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="VertScrollThumbBorder_R" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="VertScrollThumbBorder_B" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="VertScrollThumbBorder_M" XPos="1000" YPos="0" Width="5" Height="5" />
+  <Image Name="VertScrollThumbBorder_TL" XPos="780" YPos="0" Width="8" Height="8" /> 
+  <Image Name="VertScrollThumbBorder_L" XPos="780" YPos="8" Width="8" Height="26" /> 
+  <Image Name="VertScrollThumbBorder_BL" XPos="780" YPos="34" Width="8" Height="8" /> 
+  <Image Name="VertScrollThumbBorder_T" XPos="788" YPos="0" Width="26" Height="8" /> 
+  <Image Name="VertScrollThumbBorder_M" XPos="788" YPos="8" Width="26" Height="26" />
+  <Image Name="VertScrollThumbBorder_B" XPos="788" YPos="34" Width="26" Height="8" /> 
+  <Image Name="VertScrollThumbBorder_TR" XPos="814" YPos="0" Width="8" Height="8" /> 
+  <Image Name="VertScrollThumbBorder_R" XPos="814" YPos="8" Width="8" Height="26" /> 
+  <Image Name="VertScrollThumbBorder_BR" XPos="814" YPos="34" Width="8" Height="8" /> 
 
   <Image Name="VertScrollThumb_Background" XPos="1000" YPos="0" Width="5" Height="5" />
-  <Image Name="VertScrollThumb_BackgHighlight" XPos="1000" YPos="0" Width="5" Height="5" />
   
   
   <Image Name="MiniButton_TL" XPos="600" YPos="0" Width="4" Height="4" /> 
