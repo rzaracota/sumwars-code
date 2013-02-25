@@ -14,7 +14,7 @@
             <Property Name="Alpha" Value="1.0" />
             <Property Name="TabHeight" Value="{0.13,0.0}" />
             <Property Name="TabPanePosition" Value="Top" />
-            <Property Name="UnifiedAreaRect" Value="{{0.0376348,0},{0.138806,0},{0.970961,0},{0.881281,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0376348,0},{0.0,105},{0.970961,0},{0.881281,0}}" />
             <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
             <Property Name="Tooltip" Value="Options for the game are set here" />
             <Property Name="InheritsAlpha" Value="False" />
@@ -257,7 +257,7 @@
                 <Window Type="SWB/Checkbox" Name="GrabMouseInWindowedModeBox" >
                     <Property Name="Text" Value="Grab mouse in windowed mode (needs restart)" />
                     <Property Name="InheritsAlpha" Value="False" />
-                    <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.02,0},{0.58,0},{0.125,0}}" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.02,0},{0.78,0},{0.125,0}}" />
                 </Window>
                 <Window Type="SWB/StaticText" Name="VideoDriver" >
                     <Property Name="Text" Value="Video Driver" />
