@@ -419,21 +419,12 @@ void MainWindow::update(float time)
 		if (wflags & Document::OPTIONS)
 		{
 			static_cast<OptionsWindow*>(m_sub_windows["Options"])->reset();
-			DEBUG ("Making visible, activating and setting the options window to modal state");
 			options->setVisible(true);
 			options->activate ();
-			//options->setModalState (true);
-			//options->moveToFront ();
-			//options->setAlwaysOnTop (true);
 		}
 		else
 		{
-			DEBUG ("Making invisible, deactivating and un-setting the options window to modal state");
 			options->setVisible(false);
-			//options->setModalState (false);
-			//options->deactivate ();
-			//options->moveToBack ();
-//			options->setAlwaysOnTop (true);
 		}
 		
 		

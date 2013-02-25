@@ -54,6 +54,16 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 	}
 
 	m_window = trade_holder;
+
+	CEGUI::Window* tradeContent = 0;
+	if (win_mgr.isWindowPresent ("tradewindow_aux"))
+	{
+		tradeContent = win_mgr.getWindow ("tradewindow_aux");
+	}
+	else
+	{
+		tradeContent = win_mgr.getWindow ("TradeWindow");
+	}
 	
 	trade->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeAreaMouseButtonPressed, this));
 	trade->setWantsMultiClickEvents(false);
@@ -74,9 +84,9 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 			outStream.str("");
 			outStream << "TraderBigItem" << j*5+i<< "Label";
 			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "BackgroundButton"), outStream.str());
-			trade->addChildWindow(label);
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.04f+i*0.17f), cegui_reldim( 0.11f +j*0.12f)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.17f), cegui_reldim( 0.12f)));
+			tradeContent->addChildWindow(label);
+			label->setPosition(CEGUI::UVector2(cegui_reldim(0.04f+i*0.17f), cegui_reldim( 0.01f +j*0.13f)));
+			label->setSize(CEGUI::UVector2(cegui_reldim(0.17f), cegui_reldim( 0.13f)));
 			label->setID(Equipement::BIG_ITEMS+j*5+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonPressed, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonReleased,  this));
@@ -101,9 +111,9 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 			outStream.str("");
 			outStream << "TraderMediumItem" << j*7+i<< "Label";
 			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "BackgroundButton"), outStream.str());
-			trade->addChildWindow(label);
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.04f+i*0.121f), cegui_reldim( 0.47f+0.088*j)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.121f), cegui_reldim( 0.088f)));
+			tradeContent->addChildWindow(label);
+			label->setPosition(CEGUI::UVector2(cegui_reldim(0.04f+i*0.121f), cegui_reldim( 0.40f+0.096*j)));
+			label->setSize(CEGUI::UVector2(cegui_reldim(0.121f), cegui_reldim( 0.096f)));
 			label->setID(Equipement::MEDIUM_ITEMS+j*7+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonPressed, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonReleased,  this));
@@ -127,8 +137,8 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 			outStream.str("");
 			outStream << "TraderSmallItem" << j*10+i<< "Label";
 			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "BackgroundButton"), outStream.str());
-			trade->addChildWindow(label);
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.04f+i*0.085f), cegui_reldim( 0.74f+0.065*j)));
+			tradeContent->addChildWindow(label);
+			label->setPosition(CEGUI::UVector2(cegui_reldim(0.04f+i*0.085f), cegui_reldim( 0.69f+0.075*j)));
 			label->setSize(CEGUI::UVector2(cegui_reldim(0.085f), cegui_reldim( 0.065f)));
 			label->setID(Equipement::SMALL_ITEMS+j*10+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonPressed, this));
