@@ -125,8 +125,6 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	diffcbo->setItemSelectState((size_t) 0,true);
 	diffcbo->handleUpdatedListItemData();
 	diffcbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onDifficultyChanged, this));
-	diffcbo->subscribeEvent(CEGUI::Combobox::EventMouseClick, CEGUI::Event::Subscriber (&OptionsWindow::onTempEffect, this));
-	diffcbo->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber (&OptionsWindow::onTempEffect, this));
 	diffcbo->setItemSelectState( (size_t) (Options::getInstance()->getDifficulty()-1),true);
 	
 	DEBUG ("Adding sliders");
@@ -673,9 +671,9 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 			size_t selectionIndex = (int)cbo->getItemIndex (item);
 
 			DEBUG ("selected display mode %s",item->getText().c_str());
-			DEBUG ("idx of selection is: %d", selectionIndex);
 		
-			DisplayModes userMode = (DisplayModes)selectionIndex;
+			userMode = (DisplayModes)selectionIndex;
+			DEBUG ("Index of combobox selection is: %d. New display mode set to %d", selectionIndex, userMode);
 			someVideoSettingsWereChanged |= (userMode != Options::getInstance ()->getUsedDisplayMode ());
 		}
 
@@ -1235,14 +1233,3 @@ unsigned int OptionsWindow::getColorSelectionIndex(std::string name)
 	return 0;
 }
 
-
-bool OptionsWindow::onTempEffect(const CEGUI::EventArgs& evt)
-{
-	DEBUG ("*** OptionsWindow::onTempEffect");
-	const CEGUI::MouseEventArgs& we =
-			static_cast<const CEGUI::MouseEventArgs&>(evt);
-
-	//CEGUI::Checkbox* cbo = static_cast<CEGUI::Checkbox*>(we.window);
-		
-	return true;
-}

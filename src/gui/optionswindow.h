@@ -159,10 +159,6 @@ class OptionsWindow : public Window
 		 */
 		bool onGrabMouseChanged(const CEGUI::EventArgs& evt);
 		
-		//TODO: DELETE
-		bool onTempEffect (const CEGUI::EventArgs& evt);
-		
-		
 		/**
 		 * \brief returns index of highlight color
 		 */
