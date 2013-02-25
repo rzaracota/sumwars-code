@@ -465,7 +465,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <Child type="SWB/StaticText" nameSuffix="__auto_title_text__">
             <Area>
                 <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="PanelTitleArea_Calc" dimension="XPosition" /></Dim>
-                <Dim type="TopEdge" ><AbsoluteDim value="25" /></Dim>
+                <Dim type="TopEdge" ><ImageDim imageset="SWB" image="PanelTitleArea_Calc" dimension="YPosition" /></Dim>
                 <Dim type="RightEdge">
                     <UnifiedDim scale="1" type="RightEdge">
                         <DimOperator op="Subtract">

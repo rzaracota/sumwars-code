@@ -159,7 +159,7 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="MiniButton_Background" XPos="604" YPos="4" Width="34" Height="34" />
   <Image Name="MiniButton_BackgHighlight" XPos="1000" YPos="0" Width="5" Height="5" />
 
-  <Image Name="PanelTitleArea_Calc" XPos="180" YPos="25" Width="181" Height="26" />
+  <Image Name="PanelTitleArea_Calc" XPos="180" YPos="27" Width="181" Height="28" />
   
   <Image Name="BtnWideNormal_TL" XPos="550" YPos="130" Width="8" Height="8" /> 
   <Image Name="BtnWideNormal_L" XPos="550" YPos="138" Width="8" Height="31" /> 
