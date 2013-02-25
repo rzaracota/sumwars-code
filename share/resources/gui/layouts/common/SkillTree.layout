@@ -7,52 +7,59 @@
         <Property Name="CloseButtonAlignment" Value="0" />
         <Property Name="MousePassThroughEnabled" Value="True" />
 
-        
-        <Window Type="SWB/TabControl" Name="SkilltreeTabs" >
-            <Property Name="Alpha" Value="1.0" />
-            <Property Name="TabHeight" Value="{0,56}" />
-            <Property Name="TabButtonType" Value="SWB/TabButton" />
-            <Property Name="TabPanePosition" Value="Top" />
-            <Property Name="UnifiedAreaRect" Value="{{0.0376348,0},{0.118169,0},{0.970961,0},{0.87,0}}" />
-        </Window>
-        
-        <Window Type="SWB/StaticImage" Name="SkillTreeAdditionalInfoHolder">
+        <!-- dummy holder to function as a work-around to the fact that the NamedPanel widget is a simple window and it
+        doesn't perform the calculation for a contained area -->
+        <Window Type="SWB/StaticImage" Name="skilltree_aux" >
             <Property Name="FrameEnabled" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.0376348,0},{0.87,0},{0.970961,0},{0.96,0}}" />
-            
-            <Window Type="SWB/StaticText" Name="SkillpointsLabel" >
-                <Property Name="Text" Value="Inventory" />
-                <Property Name="TextColours" Value="tl:FFA2CD5A tr:FFA2CD5A bl:FFA2CD5A br:FFA2CD5A" />
-                <Property Name="FrameEnabled" Value="False" />
-                <Property Name="InheritsAlpha" Value="False" />
-                <Property Name="UnifiedAreaRect" Value="{{0.05,0},{0.0,0},{0.84,0},{0.5,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
-                <Property Name="HorzFormatting" Value="RightAligned" />
-            </Window>
-            <Window Type="SWB/StaticText" Name="SkillpointsValueLabel" >
-                <Property Name="Text" Value="Inventory" />
-                <Property Name="FrameEnabled" Value="False" />
-                <Property Name="InheritsAlpha" Value="False" />
-                <Property Name="UnifiedAreaRect" Value="{{0.85,0},{0.0,0},{0.99,0},{0.5,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
-            </Window>
-            <Window Type="SWB/StaticText" Name="NextSkillpointsLabel" >
-                <Property Name="Text" Value="Inventory" />
-                <Property Name="TextColours" Value="tl:FF458B00 tr:FF458B00 bl:FF458B00 br:FF458B00" />
-                <Property Name="FrameEnabled" Value="False" />
-                <Property Name="InheritsAlpha" Value="False" />
-                <Property Name="UnifiedAreaRect" Value="{{0.05,0},{0.5,0},{0.84,0},{0.99,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
-                <Property Name="HorzFormatting" Value="RightAligned" />
-            </Window>
-            <Window Type="SWB/StaticText" Name="NextSkillpointsValueLabel" >
-                <Property Name="Text" Value="Inventory" />
-                <Property Name="FrameEnabled" Value="False" />
-                <Property Name="InheritsAlpha" Value="False" />
-                <Property Name="UnifiedAreaRect" Value="{{0.85,0},{0.5,0},{0.99,0},{0.99,0}}" />
-                <Property Name="BackgroundEnabled" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.015,0},{0.0,102},{0.985,0},{0.985,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        
+            <Window Type="SWB/TabControl" Name="SkilltreeTabs" >
+                <Property Name="Alpha" Value="1.0" />
+                <Property Name="TabHeight" Value="{0,56}" />
+                <Property Name="TabButtonType" Value="SWB/TabButton" />
+                <Property Name="TabPanePosition" Value="Top" />
+                <Property Name="UnifiedAreaRect" Value="{{0.035,0},{0.0,0},{0.965,0},{0.87,0}}" />
             </Window>
             
+            <Window Type="SWB/StaticImage" Name="SkillTreeAdditionalInfoHolder">
+                <Property Name="FrameEnabled" Value="False" />
+                <Property Name="UnifiedAreaRect" Value="{{0.0376348,0},{0.87,0},{0.970961,0},{0.96,0}}" />
+                
+                <Window Type="SWB/StaticText" Name="SkillpointsLabel" >
+                    <Property Name="Text" Value="Inventory" />
+                    <Property Name="TextColours" Value="tl:FFA2CD5A tr:FFA2CD5A bl:FFA2CD5A br:FFA2CD5A" />
+                    <Property Name="FrameEnabled" Value="False" />
+                    <Property Name="InheritsAlpha" Value="False" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.05,0},{0.0,0},{0.84,0},{0.5,0}}" />
+                    <Property Name="BackgroundEnabled" Value="False" />
+                    <Property Name="HorzFormatting" Value="RightAligned" />
+                </Window>
+                <Window Type="SWB/StaticText" Name="SkillpointsValueLabel" >
+                    <Property Name="Text" Value="Inventory" />
+                    <Property Name="FrameEnabled" Value="False" />
+                    <Property Name="InheritsAlpha" Value="False" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.85,0},{0.0,0},{0.99,0},{0.5,0}}" />
+                    <Property Name="BackgroundEnabled" Value="False" />
+                </Window>
+                <Window Type="SWB/StaticText" Name="NextSkillpointsLabel" >
+                    <Property Name="Text" Value="Inventory" />
+                    <Property Name="TextColours" Value="tl:FF458B00 tr:FF458B00 bl:FF458B00 br:FF458B00" />
+                    <Property Name="FrameEnabled" Value="False" />
+                    <Property Name="InheritsAlpha" Value="False" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.05,0},{0.5,0},{0.84,0},{0.99,0}}" />
+                    <Property Name="BackgroundEnabled" Value="False" />
+                    <Property Name="HorzFormatting" Value="RightAligned" />
+                </Window>
+                <Window Type="SWB/StaticText" Name="NextSkillpointsValueLabel" >
+                    <Property Name="Text" Value="Inventory" />
+                    <Property Name="FrameEnabled" Value="False" />
+                    <Property Name="InheritsAlpha" Value="False" />
+                    <Property Name="UnifiedAreaRect" Value="{{0.85,0},{0.5,0},{0.99,0},{0.99,0}}" />
+                    <Property Name="BackgroundEnabled" Value="False" />
+                </Window>
+                
+            </Window>
         </Window>
     </Window>
 </GUILayout>
