@@ -14,7 +14,7 @@
  */
 
 #include "tradewindow.h"
-#include "gui/ceguiutility.h"
+#include "ceguiutility.h"
 
 TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 	: ItemWindow(doc)
