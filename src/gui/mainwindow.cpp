@@ -814,7 +814,7 @@ bool MainWindow::setupGameScreen()
 		
 		setupWorldmap();
 		
-		m_sub_windows["DialogueWindow"] = new DialogueWindow(m_document,m_scene);
+		m_sub_windows["DialogueWindow"] = new DialogueWindow(m_document, m_scene, m_ceguiSkinName);
 		
 		CEGUI::Window* label;
 		label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "CharacterPreviewImage");

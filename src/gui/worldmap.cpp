@@ -148,7 +148,7 @@ void Worldmap::update()
 					label->setProperty("BackgroundColour", "00000000");
 				}
 				label->setSize(CEGUI::UVector2(cegui_reldim(0.03f), cegui_reldim( 0.03f)));
-				label->setProperty("Image", "set:SWB image:TownPortalSymbol"); 
+				label->setProperty("Image", "set:SWB image:TownPortalSymbol"); // TODO: remove hard-coding and make configurable.
 				label->setInheritsAlpha (false);
 				label->setAlwaysOnTop(true);
 				label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Worldmap::onWaypointClicked, this));
