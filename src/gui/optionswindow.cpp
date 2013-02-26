@@ -743,7 +743,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 			// Limit the values to the available options.
 			if (selectionIndex >= Options::SM_COUNT) selectionIndex = Options::SM_COUNT - 1;
 			if (selectionIndex < Options::SM_NONE) selectionIndex = Options::SM_NONE;
-			Options::ShadowMode newShadowSettings = static_cast<Options::ShadowMode> (selectionIndex);
+			newShadowSettings = static_cast<Options::ShadowMode> (selectionIndex);
 		}
 
 
