@@ -23,7 +23,7 @@ CharInfo::CharInfo (Document* doc)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	// Rahmen fuer CharInfo Fenster
+	// The CharInfo window and holder
 	CEGUI::FrameWindow* char_info = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "CharacterScreen.layout" );
 	if (!char_info)
 	{

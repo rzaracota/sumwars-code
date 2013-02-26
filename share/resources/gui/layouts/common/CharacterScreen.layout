@@ -2,7 +2,7 @@
     <Window Type="SWB/NamedPanel" Name="CharInfo" >
         <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
         <Property Name="TitleText" Value="Inventory" />
-        <Property Name="TitlebarFont" Value="DejaVuSerif-HD-12" />
+        <Property Name="TitlebarFont" Value="DejaVuSerif-12" />
         <Property Name="CloseButtonAlignment" Value="1" />
         <Property Name="MousePassThroughEnabled" Value="True" />
 

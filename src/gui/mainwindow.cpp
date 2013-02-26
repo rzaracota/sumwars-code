@@ -551,7 +551,7 @@ void MainWindow::update(float time)
 				trade->setVisible(false);
 			}
 			
-			CEGUI::FrameWindow* worldmap = (CEGUI::FrameWindow*) win_mgr.getWindow("WorldmapWindow");
+			CEGUI::FrameWindow* worldmap = (CEGUI::FrameWindow*) win_mgr.getWindow("WorldmapWindow_Holder");
 			if (wflags & Document::WORLDMAP)
 			{
 				m_sub_windows["Worldmap"]->update();

@@ -10,12 +10,11 @@ Last change:  $LastChangedDate: 2012-12-25 20:55:19 +0200 (Ma, 25 dec. 2012) $
   <Imageset Name="SWB" Filename="SWB.imageset" />
   <Imageset Name="SWBCursors" Filename="SWBCursors.imageset" />
 
-  <!-- redefine both DejaVuSans*, DejaVuSerif* to DejaVuSans-HD*, DejaVuSerif-HD* -->
-  <Font Name="DejaVuSans-HD-10" Filename="DejaVuSans-HD-10.font" />
-  <Font Name="DejaVuSerif-HD-8" Filename="DejaVuSerif-HD-8.font" />
-  <Font Name="DejaVuSerif-HD-10" Filename="DejaVuSerif-HD-10.font" />
-  <Font Name="DejaVuSerif-HD-12" Filename="DejaVuSerif-HD-12.font" />
-  <Font Name="DejaVuSerif-HD-16" Filename="DejaVuSerif-HD-16.font" />
+  <Font Name="DejaVuSans-10" Filename="DejaVuSans-10.font" />
+  <Font Name="DejaVuSerif-8" Filename="DejaVuSerif-8.font" />
+  <Font Name="DejaVuSerif-10" Filename="DejaVuSerif-10.font" />
+  <Font Name="DejaVuSerif-12" Filename="DejaVuSerif-12.font" />
+  <Font Name="DejaVuSerif-16" Filename="DejaVuSerif-16.font" />
 
   <LookNFeel Filename="SWB.looknfeel" />
   <WindowRendererSet Filename="CEGUIFalagardWRBase" />

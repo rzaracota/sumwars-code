@@ -178,7 +178,7 @@ bool SumwarsHelper::init()
         int count = PHYSFS_write(ogreFile,
                      defaultOgreCfg.c_str(), sizeof(char), defaultOgreCfg.size());
 
-        if (count < defaultOgreCfg.size())
+        if (count < (int) defaultOgreCfg.size())
         {
             printf("Attempting to write a local Ogre configuration file failed: PHYSFS_write('%s') failed: %s\n",
                  ogreCfgUser.c_str(),
@@ -197,7 +197,7 @@ bool SumwarsHelper::init()
         int count = PHYSFS_write(pluginsFile,
                      defaultPluginsCfg.c_str(), sizeof(char), defaultPluginsCfg.size());
 
-        if (count < defaultPluginsCfg.size())
+        if (count < (int) defaultPluginsCfg.size())
         {
             printf("Attempting to write local Ogre plugins file failed: PHYSFS_write('%s') failed: %s\n",
                  pluginsCfgUser.c_str(),
@@ -216,7 +216,7 @@ bool SumwarsHelper::init()
         int count = PHYSFS_write(resourcesFile,
                      defaultResourcesCfg.c_str(), sizeof(char), defaultResourcesCfg.size());
 
-        if (count < defaultResourcesCfg.size())
+        if (count < (int) defaultResourcesCfg.size())
         {
             printf("Attempting to write local resources config file failed: PHYSFS_write('%s') failed: %s\n",
                  resourcesCfgUser.c_str(),
@@ -234,6 +234,13 @@ bool SumwarsHelper::init()
 	guiAspectRatios_[std::string ("005_004")] = (double)5  / (double)4;
 	guiAspectRatios_[std::string ("016_010")] = (double)16 / (double)10;
 	guiAspectRatios_[std::string ("016_009")] = (double)16 / (double)9;
+
+	// Fill in the expected default fonts for each screen resolution (height).
+	guiDefaultFonts_[600] = std::string ("DejaVuSerif-8");
+	guiDefaultFonts_[768] = std::string ("DejaVuSerif-10");
+	guiDefaultFonts_[1024] = std::string ("DejaVuSerif-10");
+	guiDefaultFonts_[1050] = std::string ("DejaVuSerif-12");
+	guiDefaultFonts_[1080] = std::string ("DejaVuSerif-12");
 
 	return true;
 }
@@ -426,7 +433,7 @@ void SumwarsHelper::getSizesFromResolutionString (const std::string& initialStri
 
 
 /**
-* Get the nearest aspect ratio compatible witht the current resolution.
+* Get the nearest aspect ratio compatible with the current resolution.
 * This is very useful for windowed mode.
 * @param width The width of the display window.
 * @param height The height of the display window.
@@ -472,6 +479,55 @@ std::string SumwarsHelper::getNearestAspectRatioStringForWindowSize (int width, 
 
 	return returnValue;
 }
+
+
+/**
+ * Get the nearest font to be used as a default font for the current resolution.
+ * @param width The width of the display window.
+ * @param height The height of the display window.
+ * @return A string containing the name of the recommended font to be used.
+ * @author Augustin Preda.
+ */
+std::string SumwarsHelper::getRecommendedDefaultFontForWindowSize (int width, int height)
+{
+	int myHeight = 0;
+	int smallestDiff = 999;
+	std::string returnValue ("");
+
+	if (height == 0)
+	{
+		// return the first entry in the map?
+		if (! guiDefaultFonts_.empty ())
+		{
+			DEBUG ("WARNING (SumwarsHelper::getRecommendedDefaultFontForWindowSize): zero height specied; returning any available font!");
+			return guiDefaultFonts_.begin ()->second;
+		}
+		else
+		{
+			// this should not occur!
+			DEBUG ("WARNING (SumwarsHelper::getRecommendedDefaultFontForWindowSize): getNearestAspectRatioStringForWindowSize has no access to guiDefaultFonts_! (empty map)");
+			return returnValue;
+		}
+	}
+
+	myHeight = height;
+
+	for (std::map <int, std::string>::iterator it = guiDefaultFonts_.begin ();
+		it != guiDefaultFonts_.end (); ++ it)
+	{
+		int currentDiff = myHeight - it->first;
+		if (currentDiff < 0) currentDiff = - currentDiff;
+
+		if (smallestDiff > currentDiff)
+		{
+			smallestDiff = currentDiff;
+			returnValue = it->second;
+		}
+	}
+
+	return returnValue;
+}
+
 
 
 /**

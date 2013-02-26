@@ -619,6 +619,7 @@ bool Application::initOgre()
 	std::string aspectRatioString = SumwarsHelper::getSingletonPtr ()->getNearestAspectRatioStringForWindowSize (videoModeWidth, videoModeHeight);
 	SumwarsHelper::getSingletonPtr ()->setPrefferedAspectRatioString (aspectRatioString);
 
+
 	// Set the texture filtering.
 	// Possible values:
 	// 0 - TFO_NONE
@@ -848,13 +849,19 @@ bool Application::initCEGUI()
     
 	DEBUG ("Creating fonts");
 
-	// Font setzen
+	// Load the usable font list.
 	CEGUI::FontManager::getSingleton().create("DejaVuSerif-8.font", (CEGUI::utf8*)"GUI");
 	CEGUI::FontManager::getSingleton().create("DejaVuSerif-10.font", (CEGUI::utf8*)"GUI");
 	CEGUI::FontManager::getSingleton().create("DejaVuSerif-12.font", (CEGUI::utf8*)"GUI");
 	CEGUI::FontManager::getSingleton().create("DejaVuSerif-16.font", (CEGUI::utf8*)"GUI");
 	CEGUI::FontManager::getSingleton().create("DejaVuSans-10.font", (CEGUI::utf8*)"GUI");
-	m_cegui_system->setDefaultFont((CEGUI::utf8*)"DejaVuSerif-8");
+
+	// Set the default font to use based on the current display resolution.
+	int configuredWidth, configuredHeight;
+	SumwarsHelper::getSizesFromResolutionString (Options::getInstance ()->getUsedResolution (), configuredWidth, configuredHeight);
+	std::string defaultFontName = SumwarsHelper::getSingletonPtr ()->getRecommendedDefaultFontForWindowSize (configuredWidth, configuredHeight);
+	DEBUG ("For the current display resolution (%d x %d), the system has decreed that the recommended font is: %s", configuredWidth, configuredHeight, defaultFontName.c_str ());
+	m_cegui_system->setDefaultFont((CEGUI::utf8*)defaultFontName.c_str ());
 
 	DEBUG ("Creating own factory for tooltips");
 	// Insert own factories. // TODO: check if this is really needed. Couldn't the custom tooltip just be added to the scheme?

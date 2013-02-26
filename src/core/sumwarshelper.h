@@ -41,8 +41,11 @@ protected:
 	// A list of supported features.
 	std::vector <std::string> supportedFeatures_;
 
-	// The available aspect ratio folders.
+	// The available aspect ratio folders. Will store only the name of the folder that depicts a certain aspect ratio (not full path).
 	std::map <std::string, double> guiAspectRatios_;
+
+	// The default fonts to use for each particular screen size. Note: only the height is relevant for this calculation.
+	std::map <int, std::string> guiDefaultFonts_;
 
 	// The available application internal configurable global vars.
 	std::map <std::string, std::string> applicationGlobalVars_;
@@ -159,7 +162,7 @@ public:
 	static void getSizesFromResolutionString (const std::string& initialString, int& videoModeWidth, int& videoModeHeight);
 
 	/**
-	 * Get the nearest aspect ratio compatible witht the current resolution.
+	 * Get the nearest aspect ratio compatible with the current resolution.
 	 * This is very useful for windowed mode.
 	 * @param width The width of the display window.
 	 * @param height The height of the display window.
@@ -168,6 +171,14 @@ public:
 	 */
 	std::string getNearestAspectRatioStringForWindowSize (int width, int height);
 
+	/**
+	 * Get the nearest font to be used as a default font for the current resolution.
+	 * @param width The width of the display window.
+	 * @param height The height of the display window.
+	 * @return A string containing the name of the recommended font to be used.
+	 * @author Augustin Preda.
+	 */
+	std::string getRecommendedDefaultFontForWindowSize (int width, int height);
 
 	/**
 	 * Add a list of locations to a specified resource group.

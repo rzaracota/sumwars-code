@@ -32,6 +32,7 @@ const std::string defaultResourcesCfg =
 "[GUI]\n"
 "FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/configs\n"
 "FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/fonts\n"
+"FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/fonts/${ASPECT_RATIO}\n"
 "FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/imagesets\n"
 "FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/layouts\n"
 "FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui/layouts/common\n"

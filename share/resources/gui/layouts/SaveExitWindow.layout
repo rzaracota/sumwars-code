@@ -2,7 +2,7 @@
     <Window Type="SWB/NamedPanel" Name="SaveExitWindow" >
         <Property Name="UnifiedAreaRect" Value="{{0.3,0},{0.25,0},{0.7,0},{0.55,0}}" />
         <Property Name="TitleText" Value="Save and Exit" />
-        <Property Name="TitlebarFont" Value="DejaVuSerif-HD-12" />
+        <Property Name="TitlebarFont" Value="DejaVuSerif-12" />
         <Property Name="CloseButtonAlignment" Value="1" />
         
         <!-- The OK button -->
