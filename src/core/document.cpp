@@ -432,8 +432,8 @@ void Document::onButtonSaveExitAbort()
 
 void Document::onButtonCredits()
 {
-	getGUIState()->m_shown_windows =CREDITS;
-	m_modified =WINDOWS_MODIFIED;
+	getGUIState ()->m_shown_windows = CREDITS;
+	m_modified = WINDOWS_MODIFIED;
 }
 
 void Document::onRightMouseButtonClick(Vector pos)
@@ -1474,7 +1474,7 @@ bool Document::onKeyPress(KeyCode key)
 			}
 			else if (m_gui_state.m_shown_windows & QUESTIONBOX)
 			{
-				// Versuch, aktuelles Gespraech abzubrechen
+				// Try to break the current speech.
 				onAnswerClick(-1);
 			}
 			else if (m_gui_state.m_shown_windows & (HOST_GAME | JOIN_GAME | CHAR_CREATE ))
@@ -1486,10 +1486,19 @@ bool Document::onKeyPress(KeyCode key)
 			{
 				onButtonOptionsClicked ();
 			}
+			else if (m_gui_state.m_shown_windows & 	MESSAGE)
+			{
+				hideWarning ();
+			}
+			else if (m_gui_state.m_shown_windows & CREDITS)
+			{
+				// If the user presses [ESC] during the credits section, leave the credits.
+				onStartScreenClicked ();
+			}
 			else
 			{
 				m_gui_state.m_shown_windows =  CONTROL_PANEL;
-			// Geoeffnete Fenster haben sich geaendert
+				// Notify that the displayed windows changed.
 				m_modified |= WINDOWS_MODIFIED;
 			}
 		}
@@ -1528,7 +1537,7 @@ bool  Document::onKeyRelease(KeyCode key)
 
 void Document::update(float time)
 {
-	// Welt eine Zeitscheibe weiter laufen lassen
+	// Let the world run for another time unit.
 	if (World::getWorld() != 0)
 	{
 		// game is paused for single player if save and exit window is shown
@@ -1951,10 +1960,10 @@ void Document::hideWarning ()
 	message->setVisible(false);
 	message->setModalState(false);
 
-	// If a MESSAGE is displayed, remove the status from the shown windows.
+	// If a MESSAGE is displayed, remove the status from the shown windows. XOR it.
 	if (getGUIState()->m_shown_windows & MESSAGE)
 	{
-		getGUIState()->m_shown_windows |= MESSAGE;
+		getGUIState()->m_shown_windows ^= MESSAGE;
 		m_modified |= WINDOWS_MODIFIED;
 	}
 }
