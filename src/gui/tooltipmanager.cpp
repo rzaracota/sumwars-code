@@ -69,13 +69,15 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
         Tooltip *temp = m_CurrentMain->getChild();
         if ( temp )
         {
+			// We already have a child (a second tooltip). We need to display a third, fourth, etc tooltip. Should be used in comparison scenarios.
+			// E.g. you hovered over weapon A. You have equiped weapon B and weapon C.
             while ( temp )
             {
                 if ( !temp->getChild() )
                 {
 					Tooltip *tt = new Tooltip ( gamescreen, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.7f );
                     CEGUI::UVector2 pos = temp->getCEGUIWindow()->getPosition();
-                    pos.d_x += m_CurrentMain->getCEGUIWindow()->getWidth();
+					pos.d_x += temp->getCEGUIWindow()->getWidth();
                     tt->create ( msg, pos, size, tempFont );
                     temp->setChild ( tt );
                     m_Tooltips[windowName.str() ] = tt;
