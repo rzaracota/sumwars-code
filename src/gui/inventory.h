@@ -86,9 +86,6 @@ class Inventory : public ItemWindow
 		 * \brief Creates All animations used by the Inventory GUI
 		 */
 		void createAnimations();
-
-
-		CEGUI::Window* m_holder_;
 };
 
 #endif // __SUMWARS_GUI_INVENTORY_H__

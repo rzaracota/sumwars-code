@@ -18,7 +18,6 @@
 
 Inventory::Inventory (Document* doc)
 	: ItemWindow(doc)
-	, m_holder_ (0)
 {
 	DEBUGX("setup inventory");
 
@@ -53,7 +52,6 @@ Inventory::Inventory (Document* doc)
 		if (!wndInventory) DEBUG ("ERROR: Unable to get the window for inventory.");
 	}
 	m_window = inv_holder;
-//	m_holder_ = inv_holder;
 
 	inventory->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
 	inventory->setWantsMultiClickEvents(false);
