@@ -19,8 +19,11 @@
 #include "savegamelist.h"
 #include "stdstreamconv.h"
 
-SavegameList::SavegameList (Document* doc)
-	:Window(doc)
+#include "ceguiutility.h"
+
+SavegameList::SavegameList (Document* doc, const std::string& ceguiSkinName)
+	: Window(doc)
+	, m_ceguiSkinName (ceguiSkinName)
 {
 	DEBUGX("setup main menu");
 	// GUI Elemente erzeugen
@@ -30,7 +33,7 @@ SavegameList::SavegameList (Document* doc)
 	m_currentSelected = 0;
 
 	// Rahmen fuer das Menue Savegame auswaehlen
-	CEGUI::FrameWindow* save_menu = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "SavegameMenu");
+	CEGUI::FrameWindow* save_menu = (CEGUI::FrameWindow*) win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "FrameWindow"), "SavegameMenu");
 	save_menu->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f))); //0.0/0.8
 	save_menu->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 1.0f))); //1.0/0.2
 	save_menu->setProperty("FrameEnabled","false");
@@ -47,7 +50,7 @@ SavegameList::SavegameList (Document* doc)
 
 	
 	// Button neu
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "NewCharButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "Button"), "NewCharButton"));
 	save_menu->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.85f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.05f)));

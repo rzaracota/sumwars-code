@@ -31,10 +31,12 @@ class MainMenu
 {
 public:
     /**
-    * \fn MainMenu (Document* doc)
-    * \brief Constructor
+     * \fn MainMenu (Document* doc)
+     * \brief Constructor
+	 * \param doc Document object.
+	 * \param ceguiSkinName The name of the cegui skin to use for any widgets created internally.
      */
-    MainMenu (Document* doc/*, const std::string& ceguiSkinName*/);
+    MainMenu (Document* doc, const std::string& ceguiSkinName);
 
 	// ------------------------- Frame Listener functions ----------------------
 

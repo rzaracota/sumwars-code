@@ -29,9 +29,9 @@
 #include <iostream>
 
 
-MainMenu::MainMenu (Document* doc/*, const std::string& ceguiSkinName*/)
+MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
         : Window (doc)
-		//, m_ceguiSkinName (ceguiSkinName)
+		, m_ceguiSkinName (ceguiSkinName)
 {
 	DEBUG ("MainMenu created");
 
@@ -759,9 +759,9 @@ void MainMenu::createSavegameList()
     // Rahmen fuer das Menue Savegame auswaehlen
 	CEGUI::FrameWindow* savegameList = (CEGUI::FrameWindow*) win_mgr.getWindow("SaveGameSelectionFrame");
     savegameList->setInheritsAlpha(false);
-	savegameList->setAlpha(0.0f);
+	//savegameList->setAlpha(0.0f);
 
-    SavegameList* sgl = new SavegameList(m_document);
+	SavegameList* sgl = new SavegameList (m_document, m_ceguiSkinName);
     m_saveGameList = sgl;
     savegameList->addChildWindow(sgl->getCEGUIWindow());
     sgl->update();

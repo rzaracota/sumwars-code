@@ -209,7 +209,7 @@ bool MainWindow::setupMainMenu()
 		m_sub_windows["CreditsWindow"] = crd;
 		m_main_menu->addChildWindow(crd->getCEGUIWindow());
 
-		Window * wnd = new MainMenu(m_document);
+		Window * wnd = new MainMenu(m_document, m_ceguiSkinName);
 		m_sub_windows["MainMenu"] = wnd;
 		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
 		
