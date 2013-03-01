@@ -28,6 +28,14 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="PanelBody_TR" XPos="513" YPos="95" Width="25" Height="10" />
   <Image Name="PanelBody_R" XPos="513" YPos="115" Width="25" Height="170" />
   <Image Name="PanelBody_BR" XPos="513" YPos="285" Width="25" Height="34" />
+  
+  <!-- Image depicting the part of the panel titlebar drawn over the basic top part. This part will contain the colour information-->
+  <Image Name="PanelTitleOverlay_Calc" XPos="280" YPos="320" Width="256" Height="62" />
+  <Image Name="PanelTitleOverlay_L" XPos="280" YPos="320" Width="39" Height="62" />
+  <Image Name="PanelTitleOverlay_M" XPos="319" YPos="320" Width="178" Height="62" />
+  <Image Name="PanelTitleOverlay_R" XPos="497" YPos="320" Width="39" Height="62" />
+  <!-- Image depicting the part of the panel titlebar drawn behind the basic top part. Used in calculations mostly-->
+  <Image Name="PanelTitleUnderlay" XPos="141" YPos="8" Width="256" Height="62" />
 
   <Image Name="PanelCloseButton_On" XPos="560" YPos="0" Width="31" Height="31" />
   <Image Name="PanelCloseButton_Off" XPos="560" YPos="31" Width="31" Height="31" />
@@ -309,39 +317,29 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
 	<Image Name="TooltipTopRight" XPos="814" YPos="84" Width="8" Height="8" />
 	<Image Name="TooltipRightEdge" XPos="814" YPos="92" Width="8" Height="26" />
 	<Image Name="TooltipBottomRight" XPos="814" YPos="118" Width="8" Height="8" />
-<!--	<Image Name="TooltipTopLeft" XPos="600" YPos="84" Width="8" Height="8" />
-	<Image Name="TooltipLeftEdge" XPos="600" YPos="92" Width="8" Height="26" />
-	<Image Name="TooltipBottomLeft" XPos="600" YPos="118" Width="8" Height="8" />
-	<Image Name="TooltipTopEdge" XPos="608" YPos="84" Width="26" Height="8" />
-	<Image Name="TooltipMiddle" XPos="608" YPos="92" Width="26" Height="26" />
-	<Image Name="TooltipBottomEdge" XPos="608" YPos="118" Width="26" Height="8" />
-	<Image Name="TooltipTopRight" XPos="634" YPos="84" Width="8" Height="8" />
-	<Image Name="TooltipRightEdge" XPos="634" YPos="92" Width="8" Height="26" />
-	<Image Name="TooltipBottomRight" XPos="634" YPos="118" Width="8" Height="8" />
--->
 
-
-	<Image Name="WindowTopLeft" XPos="780" YPos="84" Width="8" Height="8" />
-	<Image Name="WindowLeftEdge" XPos="780" YPos="92" Width="8" Height="26" />
-	<Image Name="WindowBottomLeft" XPos="780" YPos="118" Width="8" Height="8" />
-	<Image Name="WindowTopEdge" XPos="788" YPos="84" Width="26" Height="8" />
-	<Image Name="WindowMid" XPos="788" YPos="92" Width="26" Height="26" />
-	<Image Name="WindowBottomEdge" XPos="788" YPos="118" Width="26" Height="8" />
-	<Image Name="WindowTopRight" XPos="814" YPos="84" Width="8" Height="8" />
-	<Image Name="WindowRightEdge" XPos="814" YPos="92" Width="8" Height="26" />
-	<Image Name="WindowBottomRight" XPos="814" YPos="118" Width="8" Height="8" />
 
 <!--
-	<Image Name="WindowTopLeft" XPos="650" YPos="0" Width="16" Height="16" />
-	<Image Name="WindowLeftEdge" XPos="650" YPos="16" Width="16" Height="96" />
-	<Image Name="WindowBottomLeft" XPos="650" YPos="112" Width="16" Height="16" />
-	<Image Name="WindowTopEdge" XPos="666" YPos="0" Width="96" Height="16" />
-	<Image Name="WindowMid" XPos="666" YPos="16" Width="96" Height="96" />
-	<Image Name="WindowBottomEdge" XPos="666" YPos="112" Width="96" Height="16" />
-	<Image Name="WindowTopRight" XPos="762" YPos="0" Width="16" Height="16" />
-	<Image Name="WindowRightEdge" XPos="762" YPos="16" Width="16" Height="96" />
-	<Image Name="WindowBottomRight" XPos="762" YPos="112" Width="16" Height="16" />
+  <Image Name="PanelBody_TL" XPos="0" YPos="95" Width="25" Height="20" />
+  <Image Name="PanelBody_L" XPos="0" YPos="115" Width="25" Height="170" />
+  <Image Name="PanelBody_BL" XPos="0" YPos="285" Width="25" Height="34" />
+  <Image Name="PanelBody_T" XPos="25" YPos="95" Width="488" Height="10" />
+  <Image Name="PanelBody_M" XPos="25" YPos="115" Width="488" Height="170" />
+  <Image Name="PanelBody_B" XPos="25" YPos="285" Width="488" Height="34" />
+  <Image Name="PanelBody_TR" XPos="513" YPos="95" Width="25" Height="10" />
+  <Image Name="PanelBody_R" XPos="513" YPos="115" Width="25" Height="170" />
+  <Image Name="PanelBody_BR" XPos="513" YPos="285" Width="25" Height="34" />
+
 -->
+	<Image Name="WindowTopLeft" XPos="0" YPos="95" Width="25" Height="20" />
+	<Image Name="WindowLeftEdge" XPos="0" YPos="115" Width="25" Height="170" />
+	<Image Name="WindowBottomLeft" XPos="0" YPos="285" Width="25" Height="34" />
+	<Image Name="WindowTopEdge" XPos="25" YPos="95" Width="488" Height="10" />
+	<Image Name="WindowMid" XPos="25" YPos="115" Width="488" Height="170" />
+	<Image Name="WindowBottomEdge" XPos="25" YPos="285" Width="488" Height="34" />
+	<Image Name="WindowTopRight" XPos="513" YPos="95" Width="25" Height="10" />
+	<Image Name="WindowRightEdge" XPos="513" YPos="115" Width="25" Height="170" />
+	<Image Name="WindowBottomRight" XPos="513" YPos="285" Width="25" Height="34" />
 
 
 	<Image Name="ComboboxSelectionBrush" XPos="0" YPos="320" Width="192" Height="48" /> <!-- shared -->

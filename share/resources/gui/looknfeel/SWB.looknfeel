@@ -4886,187 +4886,142 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     <!--
     ***************************************************
         SWB/Titlebar
-        (based on the Taharez Look)
     ***************************************************
     -->
     <WidgetLook name="SWB/Titlebar">
         <PropertyDefinition name="CaptionColour" initialValue="FFFFFFFF" redrawOnWrite="true" />
         <Property name="NonClient" value="True" />
-        <PropertyDefinition name="GlyphImage" initialValue="" redrawOnWrite="true" />
         
-        <PropertyDefinition name="GS_DarkerThemeColour" initialValue="FF940000" redrawOnWrite="true" />
-        <PropertyDefinition name="GS_LighterThemeColour" initialValue="FFFF0101" redrawOnWrite="true" />
-        <PropertyDefinition name="GS_MainThemeColour" initialValue="FFDC5F5F" redrawOnWrite="true" />
-        <PropertyDefinition name="GS_ShineColour" initialValue="B0FFFFFF" redrawOnWrite="true" />
-        <PropertyDefinition name="GS_DesaturatedThemeColour" initialValue="FFAD6E6E" redrawOnWrite="true" />
+        <PropertyDefinition name="ActiveColour" initialValue="FFFF0000" redrawOnWrite="true"/>
+        <PropertyDefinition name="InactiveColour" initialValue="FFAA3333" redrawOnWrite="true"/>
+        <PropertyDefinition name="BackgroundPictureColour" initialValue="FFBBA075" redrawOnWrite="true"/>
         
-        <ImagerySection name="border_section">
+        <ImagerySection name="overdrawn_section">
             <FrameComponent>
                 <Area>
-                    <Dim type="LeftEdge"><AbsoluteDim value="0" /></Dim>
-                    <Dim type="TopEdge"><AbsoluteDim value="0" /></Dim>
-                    <Dim type="RightEdge"><UnifiedDim scale="1" type="RightEdge" /></Dim>
-                    <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
-                </Area>
-                <Image type="TopLeftCorner" imageset="SWB" image="TitlebarBorder_TL" />
-                <Image type="LeftEdge" imageset="SWB" image="TitlebarBorder_L" />
-                <Image type="BottomLeftCorner" imageset="SWB" image="TitlebarBorder_BL" />
-                <Image type="TopEdge" imageset="SWB" image="TitlebarBorder_T" />
-                <Image type="Background" imageset="SWB" image="TitlebarBorder_M" />
-                <Image type="BottomEdge" imageset="SWB" image="TitlebarBorder_B" />
-                <Image type="TopRightCorner" imageset="SWB" image="TitlebarBorder_TR" />
-                <Image type="RightEdge" imageset="SWB" image="TitlebarBorder_R" />
-                <Image type="BottomRightCorner" imageset="SWB" image="TitlebarBorder_BR" />
-            </FrameComponent>
-        </ImagerySection>
-
-        <ImagerySection name="background_section">
-            <ImageryComponent>
-                <Area>
-                    <Dim type="LeftEdge" ><AbsoluteDim value="4" /></Dim>
-                    <Dim type="TopEdge" ><AbsoluteDim value="4" /></Dim>
-                    <Dim type="Width" >
+                    <Dim type="LeftEdge"><ImageDim imageset="SWB" image="PanelTitleUnderlay" dimension="LeftEdge" /></Dim>
+                    <Dim type="TopEdge"><ImageDim imageset="SWB" image="PanelTitleUnderlay" dimension="TopEdge" /></Dim>
+                    <Dim type="Width">
                         <UnifiedDim scale="1" type="Width">
                             <DimOperator op="Subtract">
-                                <AbsoluteDim value="8" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                    <Dim type="Height" >
-                        <UnifiedDim scale="1" type="Height">
-                            <DimOperator op="Subtract">
-                                <AbsoluteDim value="8" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                </Area>
-                <Image type="Background" imageset="SWB" image="TitlebarBackground" />
-                <VertFormat type="Stretched" />
-                <HorzFormat type="Stretched" />
-            </ImageryComponent>
-        </ImagerySection>
-        
-        <ImagerySection name="caption">
-            <TextComponent>
-                <Area>
-                    <Dim type="LeftEdge" >
-                        <ImageDim imageset="SWB" image="TitlebarBorder_L" dimension="Width">
-                            <DimOperator op="Add">
-                                <ImageDim imageset="SWB" image="EmptyGlyph24" dimension="Width" />
-                            </DimOperator>
-                        </ImageDim>
-                    </Dim>
-                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
-                    <Dim type="Width" >
-                        <UnifiedDim scale="1" offset="-10" type="Width">
-                            <DimOperator op="Subtract">
-                                <UnifiedDim scale="1" type="Height" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
-                </Area>
-                <ColourProperty name="CaptionColour" />
-                <VertFormat type="CentreAligned" />
-            </TextComponent>
-        </ImagerySection>
-
-
-        <ImagerySection name="glyph">
-            <ImageryComponent>
-                <Area>
-                    <Dim type="LeftEdge">
-                        <ImageDim imageset="SWB" image="TitlebarBorder_L" dimension="Width" />
-                    </Dim>
-                    <Dim type="TopEdge">
-                        <UnifiedDim scale="0.5" type="Height">
-                            <DimOperator op="Subtract">
-                                <ImageDim imageset="SWB" image="EmptyGlyph24" dimension="Height">
-                                    <DimOperator op="Divide">
+                                <ImageDim imageset="SWB" image="PanelTitleUnderlay" dimension="LeftEdge">
+                                    <DimOperator op="Multiply">
                                         <AbsoluteDim value="2" />
                                     </DimOperator>
                                 </ImageDim>
                             </DimOperator>
                         </UnifiedDim>
                     </Dim>
-                    <Dim type="Width">
-                        <ImageDim imageset="SWB" image="EmptyGlyph24" dimension="Width"/>
-                    </Dim>
-                    <Dim type="Height">
-                        <ImageDim imageset="SWB" image="EmptyGlyph24" dimension="Height" />
-                    </Dim>
+                    <Dim type="Height"><ImageDim imageset="SWB" image="PanelTitleUnderlay" dimension="Height" /></Dim>
                 </Area>
-                <ImageProperty name="GlyphImage" />
-                <VertFormat type="Stretched" />
-                <HorzFormat type="Stretched" />
-            </ImageryComponent>
+                <Image type="LeftEdge" imageset="SWB" image="PanelTitleOverlay_L" />
+                <Image type="Background" imageset="SWB" image="PanelTitleOverlay_M" />
+                <Image type="RightEdge" imageset="SWB" image="PanelTitleOverlay_R" />
+            </FrameComponent>
         </ImagerySection>
 
+        <ImagerySection name="background_section">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
+                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
+                </Area>
+                <Image type="LeftEdge" imageset="SWB" image="PanelHeader_L" />
+                <Image type="Background" imageset="SWB" image="PanelHeader_M" />
+                <Image type="RightEdge" imageset="SWB" image="PanelHeader_R" />
+            </FrameComponent>
+        </ImagerySection>
+        
+        <ImagerySection name="caption"> 
+            <TextComponent>
+                <Area>
+                    <Dim type="LeftEdge"><ImageDim imageset="SWB" image="PanelTitleArea_Calc" dimension="LeftEdge" /></Dim>
+                    <Dim type="TopEdge"><ImageDim imageset="SWB" image="PanelTitleArea_Calc" dimension="TopEdge" /></Dim>
+                    <Dim type="Width">
+                        <UnifiedDim scale="1" type="Width">
+                            <DimOperator op="Subtract">
+                                <ImageDim imageset="SWB" image="PanelTitleArea_Calc" dimension="LeftEdge">
+                                    <DimOperator op="Multiply">
+                                        <AbsoluteDim value="2" />
+                                    </DimOperator>
+                                </ImageDim>
+                            </DimOperator>
+                        </UnifiedDim>
+                    </Dim>
+                    <Dim type="Height"><ImageDim imageset="SWB" image="PanelTitleArea_Calc" dimension="Height" /></Dim>
+                </Area>
+                <ColourProperty name="CaptionColour" />
+                <VertFormat type="CentreAligned" />
+                <HorzFormat type="CentreAligned" />
+            </TextComponent>
+        </ImagerySection>
         
         <StateImagery name="Active">
             <Layer>
                 <Section section="background_section">
-                    <ColourProperty name="GS_MainThemeColour" />
+                    <ColourProperty name="BackgroundPictureColour" />
                 </Section>
             </Layer>
             <Layer>
-                <Section section="border_section" />
+                <Section section="overdrawn_section">
+                    <ColourProperty name="ActiveColour" />
+                </Section>
                 <Section section="caption" >
                 </Section>
-                <Section section="glyph" />
             </Layer>
         </StateImagery>
         
         <StateImagery name="Inactive">
             <Layer>
                 <Section section="background_section">
-                    <ColourProperty name="GS_DesaturatedThemeColour" />
+                    <ColourProperty name="BackgroundPictureColour" />
                 </Section>
             </Layer>
             <Layer>
-                <Section section="border_section" />
+                <Section section="overdrawn_section">
+                    <ColourProperty name="InactiveColour" />
+                </Section>
                 <Section section="caption" >
                 </Section>
-                <Section section="glyph" />
             </Layer>
         </StateImagery>
         
         <StateImagery name="Disabled">
             <Layer>
                 <Section section="background_section">
-                    <ColourProperty name="GS_MainThemeColour" />
-                    <Colours topLeft="997F7F7F" topRight="997F7F7F" bottomLeft="997F7F7F" bottomRight="997F7F7F" />
+                    <Colours topLeft="FF7F7F7F" topRight="FF7F7F7F" bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" />
                 </Section>
             </Layer>
             <Layer>
-                <Section section="border_section" />
-                <Section section="caption" >
-                </Section>
-                <Section section="glyph" />
+                <Section section="overdrawn_section" />
+                <Section section="caption" ></Section>
             </Layer>
         </StateImagery>
     </WidgetLook>
 
+
     <!--
     ***************************************************
         SWB/FrameWindow
-        (based on the Taharez Look)
     ***************************************************
     -->
     <WidgetLook name="SWB/FrameWindow">
         <PropertyDefinition name="ClientAreaColour" initialValue="FFFFFFFF" redrawOnWrite="true" />
-        <PropertyDefinition name="TitlebarHeight" initialValue="32" redrawOnWrite="true" />
+        <PropertyDefinition name="TitlebarHeight" initialValue="95" redrawOnWrite="true" />
         <PropertyLinkDefinition name="CaptionColour" widget="__auto_titlebar__" targetProperty="CaptionColour" initialValue="FFFFFFFF" />
         <PropertyLinkDefinition name="TitlebarFont" widget="__auto_titlebar__" targetProperty="Font" />
-        <PropertyLinkDefinition name="GlyphImage" widget="__auto_titlebar__" targetProperty="GlyphImage" />
         <Property name="NSSizingCursorImage" value="set:SWBCursors image:MouseNoSoCursor" />
         <Property name="EWSizingCursorImage" value="set:SWBCursors image:MouseEsWeCursor" />
         <Property name="NWSESizingCursorImage" value="set:SWBCursors image:MouseNwSeCursor" />
         <Property name="NESWSizingCursorImage" value="set:SWBCursors image:MouseNeSwCursor" />
         <Property name="UnifiedMinSize" value="{{0.01,0},{0.01,0}}" />
         <Property name="AutoRenderingSurface" value="True" />
-        <PropertyDefinition name="BackgroundPictureColour" initialValue="DFFFFFFF" redrawOnWrite="true"/>
-        
+        <!--<PropertyDefinition name="BackgroundPictureColour" initialValue="DFFFFFFF" redrawOnWrite="true"/>-->
+        <PropertyDefinition name="BackgroundPictureColour" initialValue="FFBBA075" redrawOnWrite="true"/>
+        <PropertyDefinition name="CloseButtonAlignment" initialValue="1" redrawOnWrite="true"/>
+
         <NamedArea name="ClientWithTitleWithFrame">
             <Area>
                 <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="WindowTopLeft" dimension="Width" /></Dim>
@@ -5087,6 +5042,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Dim>
             </Area>
         </NamedArea>
+        
         <NamedArea name="ClientWithTitleNoFrame">
             <Area>
                 <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
@@ -5095,6 +5051,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <Dim type="BottomEdge" ><WidgetDim dimension="BottomEdge" /></Dim>
             </Area>
         </NamedArea>
+        
         <NamedArea name="ClientNoTitleWithFrame">
             <Area>
                 <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="WindowTopLeft" dimension="Width" /></Dim>
@@ -5115,6 +5072,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Dim>
             </Area>
         </NamedArea>
+        
         <NamedArea name="ClientNoTitleNoFrame">
             <Area>
                 <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
@@ -5123,6 +5081,8 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
             </Area>
         </NamedArea>
+        
+        <!-- Child objects: Titlebar, close button -->
         <Child type="SWB/Titlebar" nameSuffix="__auto_titlebar__">
             <Area>
                 <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
@@ -5134,56 +5094,41 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
             </Area>
             <Property name="AlwaysOnTop" value="False" />
         </Child>
-        <Child type="SWB/GlyphButton" nameSuffix="__auto_closebutton__">
+        
+        <Child type="SWB/ImageButton" nameSuffix="__auto_closebutton__">
             <Area>
                 <Dim type="LeftEdge" >
-                    <UnifiedDim scale="1" type="LeftEdge">
-                        <DimOperator op="Subtract">
-                            <AbsoluteDim value="1.42" >
+                    <AbsoluteDim value="15">
+                        <DimOperator op="Add">
+                            <PropertyDim name="CloseButtonAlignment">
                                 <DimOperator op="Multiply">
-                                    <PropertyDim name="TitlebarHeight" >
+                                    <UnifiedDim scale="1" type="Width">
                                         <DimOperator op="Subtract">
-                                            <AbsoluteDim value="4" />
+                                            <AbsoluteDim value="30">
+                                                <DimOperator op="Add">
+                                                    <AbsoluteDim value="31" />
+                                                </DimOperator>
+                                            </AbsoluteDim>
                                         </DimOperator>
-                                    </PropertyDim>
-                                </DimOperator>
-                            </AbsoluteDim>
-                        </DimOperator>
-                    </UnifiedDim>
-                </Dim>
-                <Dim type="TopEdge" ><AbsoluteDim value="4" /></Dim>
-                <Dim type="Width" >
-                    <AbsoluteDim value="1.42">
-                        <DimOperator op="Multiply">
-                            <PropertyDim name="TitlebarHeight" >
-                                <DimOperator op="Subtract">
-                                    <AbsoluteDim value="4">
-                                        <DimOperator op="Multiply">
-                                            <AbsoluteDim value="2" />
-                                        </DimOperator>
-                                    </AbsoluteDim>
+                                    </UnifiedDim> 
                                 </DimOperator>
                             </PropertyDim>
                         </DimOperator>
                     </AbsoluteDim>
                 </Dim>
-                <Dim type="Height" >
-                    <PropertyDim name="TitlebarHeight" >
-                        <DimOperator op="Subtract">
-                            <AbsoluteDim value="4">
-                                <DimOperator op="Multiply">
-                                    <AbsoluteDim value="2" />
-                                </DimOperator>
-                            </AbsoluteDim>
-                        </DimOperator>
-                    </PropertyDim>
-                </Dim>
+                <Dim type="TopEdge" ><AbsoluteDim value="56" /></Dim>
+                <Dim type="Width" ><AbsoluteDim value="31" /></Dim>
+                <Dim type="Height" ><AbsoluteDim value="31" /></Dim>
             </Area>
             <Property name="AlwaysOnTop" value="True" />
-            <Property name="GlyphImage" value="set:SWB image:GlyphX" />
             <Property name="NonClient" value="True" />
+            <Property name="HoverImage" value="set:SWB image:PanelCloseButton_On" />
+            <Property name="PushedImage" value="set:SWB image:PanelCloseButton_On" />
+            <Property name="NormalImage" value="set:SWB image:PanelCloseButton_Off" />
+            <Property name="DisabledImage" value="set:SWB image:PanelCloseButton_Off" />
+            <Property name="Visible" value="True" />
         </Child>
-        
+
         <ImagerySection name="withtitle_frame">
             <FrameComponent>
                 <Area>
@@ -5192,6 +5137,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
                     <Dim type="BottomEdge" ><UnifiedDim scale="1" type="BottomEdge" /></Dim>
                 </Area>
+                <Image type="TopLeftCorner" imageset="SWB" image="WindowTopLeft" />
+                <Image type="TopEdgeCorner" imageset="SWB" image="WindowTopEdge" />
+                <Image type="TopRightCorner" imageset="SWB" image="WindowTopRight" />
                 <Image type="BottomLeftCorner" imageset="SWB" image="WindowBottomLeft" />
                 <Image type="BottomRightCorner" imageset="SWB" image="WindowBottomRight" />
                 <Image type="LeftEdge" imageset="SWB" image="WindowLeftEdge" />
@@ -5218,46 +5166,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     </Dim>
                 </Area>
                 <Image imageset="SWB" image="WindowMid" />
-                <ColourProperty name="ClientAreaColour" />
-                <VertFormat type="Stretched" />
-                <HorzFormat type="Stretched" />
-            </ImageryComponent>
-        </ImagerySection>
-        
-        <ImagerySection name="withtitle_frame_background">
-            <FrameComponent>
-                <Area>
-                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
-                    <Dim type="TopEdge" ><WidgetDim widget="__auto_titlebar__" dimension="BottomEdge" /></Dim>
-                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
-                    <Dim type="BottomEdge" ><UnifiedDim scale="1" type="BottomEdge" /></Dim>
-                </Area>
-                <Image type="BottomLeftCorner" imageset="SWB" image="WindowBck_BL" />
-                <Image type="BottomRightCorner" imageset="SWB" image="WindowBck_BR" />
-                <Image type="LeftEdge" imageset="SWB" image="WindowBck_L" />
-                <Image type="RightEdge" imageset="SWB" image="WindowBck_R" />
-                <Image type="BottomEdge" imageset="SWB" image="WindowBck_B" />
-            </FrameComponent>
-            <ImageryComponent>
-                <Area>
-                    <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="WindowTopLeft" dimension="Width" /></Dim>
-                    <Dim type="TopEdge" ><WidgetDim widget="__auto_titlebar__" dimension="BottomEdge" /></Dim>
-                    <Dim type="RightEdge" >
-                        <UnifiedDim scale="1" type="Width">
-                            <DimOperator op="Subtract">
-                                <ImageDim imageset="SWB" image="WindowTopRight" dimension="Width" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                    <Dim type="BottomEdge" >
-                        <UnifiedDim scale="1" type="Height">
-                            <DimOperator op="Subtract">
-                                <ImageDim imageset="SWB" image="WindowBottomEdge" dimension="Height" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                </Area>
-                <Image imageset="SWB" image="WindowBck_M" />
                 <ColourProperty name="ClientAreaColour" />
                 <VertFormat type="Stretched" />
                 <HorzFormat type="Stretched" />
@@ -5305,48 +5213,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
         </ImagerySection>
-
-        <ImagerySection name="notitle_frame_background">
-            <FrameComponent>
-                <Area>
-                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
-                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
-                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
-                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
-                </Area>
-                <Image type="TopLeftCorner" imageset="SWB" image="WindowBck_TL" />
-                <Image type="TopRightCorner" imageset="SWB" image="WindowBck_TR" />
-                <Image type="BottomLeftCorner" imageset="SWB" image="WindowBck_BL" />
-                <Image type="BottomRightCorner" imageset="SWB" image="WindowBck_BR" />
-                <Image type="LeftEdge" imageset="SWB" image="WindowBck_L" />
-                <Image type="RightEdge" imageset="SWB" image="WindowBck_R" />
-                <Image type="BottomEdge" imageset="SWB" image="WindowBck_B" />
-            </FrameComponent>
-            <ImageryComponent>
-                <Area>
-                    <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="WindowTopLeft" dimension="Width" /></Dim>
-                    <Dim type="TopEdge" ><ImageDim imageset="SWB" image="WindowTopEdge" dimension="Width" /></Dim>
-                    <Dim type="RightEdge" >
-                        <UnifiedDim scale="1" type="Width">
-                            <DimOperator op="Subtract">
-                                <ImageDim imageset="SWB" image="WindowTopRight" dimension="Width" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                    <Dim type="BottomEdge" >
-                        <UnifiedDim scale="1" type="Height">
-                            <DimOperator op="Subtract">
-                                <ImageDim imageset="SWB" image="WindowBottomEdge" dimension="Height" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                </Area>
-                <Image imageset="SWB" image="WindowBck_M" />
-                <ColourProperty name="ClientAreaColour" />
-                <VertFormat type="Stretched" />
-                <HorzFormat type="Stretched" />
-            </ImageryComponent>
-        </ImagerySection>
         
         <ImagerySection name="withtitle_noframe_client_area">
             <ImageryComponent>
@@ -5380,24 +5246,20 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         
         <StateImagery name="ActiveWithTitleWithFrame">
             <Layer>
-                <Section section="withtitle_frame_background">
+                <Section section="withtitle_frame">
                     <ColourProperty name="BackgroundPictureColour" />
                 </Section>
             </Layer>
-            <Layer>
-                <Section section="withtitle_frame" />
-            </Layer>
         </StateImagery>
+        
         <StateImagery name="InactiveWithTitleWithFrame">
             <Layer>
-                <Section section="withtitle_frame_background">
+                <Section section="withtitle_frame">
                     <ColourProperty name="BackgroundPictureColour" />
                 </Section>
             </Layer>
-            <Layer>
-                <Section section="withtitle_frame" />
-            </Layer>
         </StateImagery>
+        
         <StateImagery name="DisabledWithTitleWithFrame">
             <Layer>
                 <Section section="withtitle_frame">
@@ -5405,16 +5267,23 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
         </StateImagery>
+        
         <StateImagery name="ActiveWithTitleNoFrame">
             <Layer>
-                <Section section="withtitle_noframe_client_area" />
+                <Section section="withtitle_noframe_client_area">
+                    <ColourProperty name="BackgroundPictureColour" />
+                </Section>
             </Layer>
         </StateImagery>
+        
         <StateImagery name="InactiveWithTitleNoFrame">
             <Layer>
-                <Section section="withtitle_noframe_client_area" />
+                <Section section="withtitle_noframe_client_area">
+                    <ColourProperty name="BackgroundPictureColour" />
+                </Section>
             </Layer>
         </StateImagery>
+        
         <StateImagery name="DisabledWithTitleNoFrame">
             <Layer>
                 <Section section="withtitle_noframe_client_area">
@@ -5422,48 +5291,43 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Section>
             </Layer>
         </StateImagery>
+        
         <StateImagery name="ActiveNoTitleWithFrame">
             <Layer>
-                <Section section="notitle_frame_background">
+                <Section section="notitle_frame">
                     <ColourProperty name="BackgroundPictureColour" />
                 </Section>
             </Layer>
-            <Layer>
-                <Section section="notitle_frame" />
-            </Layer>
         </StateImagery>
+        
         <StateImagery name="InactiveNoTitleWithFrame">
             <Layer>
-                <Section section="notitle_frame_background">
+                <Section section="notitle_frame">
                     <ColourProperty name="BackgroundPictureColour" />
                 </Section>
-            </Layer>
-            <Layer>
-                <Section section="notitle_frame" />
             </Layer>
         </StateImagery>
+        
         <StateImagery name="DisabledNoTitleWithFrame">
-            <Layer>
-                <Section section="notitle_frame_background">
-                    <ColourProperty name="BackgroundPictureColour" />
-                </Section>
-            </Layer>
             <Layer>
                 <Section section="notitle_frame">
                     <Colours topLeft="FF7F7F7F" topRight="FF7F7F7F" bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" />
                 </Section>
             </Layer>
         </StateImagery>
+        
         <StateImagery name="ActiveNoTitleNoFrame">
             <Layer>
                 <Section section="notitle_noframe_client_area" />
             </Layer>
         </StateImagery>
+        
         <StateImagery name="InactiveNoTitleNoFrame">
             <Layer>
                 <Section section="notitle_noframe_client_area" />
             </Layer>
         </StateImagery>
+        
         <StateImagery name="DisabledNoTitleNoFrame">
             <Layer>
                 <Section section="notitle_noframe_client_area">
