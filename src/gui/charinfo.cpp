@@ -187,9 +187,9 @@ CharInfo::CharInfo (Document* doc)
 	else
 	{
 		// If the panel also has an auto-close button, connect it to the Cancel/Abort event.
-		if (win_mgr.isWindowPresent ("CharInfo__auto_close_panel_button__"))
+		if (win_mgr.isWindowPresent ("CharInfo__auto_closebutton__"))
 		{
-			label = win_mgr.getWindow ("CharInfo__auto_close_panel_button__");
+			label = win_mgr.getWindow ("CharInfo__auto_closebutton__");
 			if (label)
 			{
 				label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&CharInfo::onCloseButtonClicked, this));
@@ -233,9 +233,9 @@ CharInfo::CharInfo (Document* doc)
 	else if (win_mgr.isWindowPresent ("CharInfo"))
 	{
 		label =  win_mgr.getWindow("CharInfo");
-		if (label->isPropertyPresent ("TitleText"))
+		if (label->isPropertyPresent ("Text"))
 		{
-			label->setProperty ("TitleText", (CEGUI::utf8*) out_stream.str().c_str());
+			label->setProperty ("Text", (CEGUI::utf8*) out_stream.str().c_str());
 		}
 	}
 
@@ -652,9 +652,9 @@ void CharInfo::updateTranslation()
 	else if (win_mgr.isWindowPresent ("CharInfo"))
 	{
 		label =  win_mgr.getWindow("CharInfo");
-		if (label->isPropertyPresent ("TitleText"))
+		if (label->isPropertyPresent ("Text"))
 		{
-			label->setProperty ("TitleText", (CEGUI::utf8*) gettext("Name"));
+			label->setProperty ("Text", (CEGUI::utf8*) gettext("Name"));
 		}
 	}
 	

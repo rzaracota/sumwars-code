@@ -229,9 +229,9 @@ Inventory::Inventory (Document* doc)
 	}
 	else
 	{
-		if (win_mgr.isWindowPresent ("Inventory__auto_close_panel_button__"))
+		if (win_mgr.isWindowPresent ("Inventory__auto_closebutton__"))
 		{
-			label = win_mgr.getWindow ("Inventory__auto_close_panel_button__");
+			label = win_mgr.getWindow ("Inventory__auto_closebutton__");
 			if (label)
 			{
 				label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onCloseButtonClicked, this));
@@ -478,7 +478,7 @@ void Inventory::updateTranslation()
 	}
 	else
 	{
-		label = win_mgr.getWindow ("Inventory__auto_title_text__");
+		label = win_mgr.getWindow ("Inventory");
 		if (label)
 		{
 			label->setText((CEGUI::utf8*) gettext("Inventory"));

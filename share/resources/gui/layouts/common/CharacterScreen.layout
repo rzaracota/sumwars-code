@@ -1,20 +1,24 @@
 <GUILayout >
-    <Window Type="SWB/NamedPanel" Name="CharInfo" >
+    <Window Type="SWB/FrameWindow" Name="CharInfo" >
         <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
-        <Property Name="TitleText" Value="Inventory" />
+        <Property Name="Text" Value="Inventory" />
         <Property Name="TitlebarFont" Value="DejaVuSerif-12" />
         <Property Name="CloseButtonAlignment" Value="1" />
         <Property Name="MousePassThroughEnabled" Value="True" />
+        <Property Name="SizingEnabled" Value="False" />
+        <Property Name="DragMovingEnabled" Value="False" />
+        <Property Name="CloseButtonEnabled" Value="True" />
+        <Property Name="RollUpEnabled" Value="False" />
 
         <Window Type="SWB/StaticImage" Name="charinfo_aux" >
             <Property Name="FrameEnabled" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,105},{1.0,0},{1.0,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
 
             <!-- The top side where the player picture, and main information are displayed -->
             <Window Type="SWB/GroupBox" Name="Playerinfo" >
                 <Property Name="Text" Value="Player info" />
-                <Property Name="UnifiedAreaRect" Value="{{0.050,0},{0.01,0},{0.960,0},{0.32,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.01,0},{1.0,0},{0.32,0}}" />
                 
                 <Window Type="SWB/StaticImage" Name="Portrait" >
                     <Property Name="Image" Value="set:Portrait image:Portrait" />
@@ -76,7 +80,7 @@
             <!-- The area where the attributes (strength, dexterity, etc) are displayed -->
             <Window Type="SWB/GroupBox" Name="Attributes" >
                 <Property Name="Text" Value="Attributes" />
-                <Property Name="UnifiedAreaRect" Value="{{0.050,0},{0.340,0},{0.960,0},{0.560,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.340,0},{1.0,0},{0.560,0}}" />
                 
                 <!-- Strength -->
                 <Window Type="SWB/StaticText" Name="StrengthLabel" >
@@ -173,7 +177,7 @@
             
             <Window Type="SWB/GroupBox" Name="Offense" >
                 <Property Name="Text" Value="Offense" />
-                <Property Name="UnifiedAreaRect" Value="{{0.050,0},{0.570,0},{0.540,0},{0.960,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.570,0},{0.540,0},{1.0,0}}" />
                     
                 <Window Type="SWB/StaticText" Name="AttackLabel" >
                     <Property Name="Text" Value="Attack" />
@@ -264,7 +268,7 @@
             <!-- The defensive stats -->
             <Window Type="SWB/GroupBox" Name="Defense" >
                 <Property Name="Text" Value="Defense" />
-                <Property Name="UnifiedAreaRect" Value="{{0.550,0},{0.570,0},{0.960,0},{0.960,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.550,0},{0.570,0},{1.0,0},{1.0,0}}" />
 
                 <Window Type="SWB/StaticText" Name="ArmorLabel" >
                     <Property Name="Text" Value="Armor" />

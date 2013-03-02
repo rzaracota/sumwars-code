@@ -1,17 +1,21 @@
 <GUILayout >
-    <Window Type="SWB/NamedPanel" Name="Inventory" >
+    <Window Type="SWB/FrameWindow" Name="Inventory" >
         <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
         <Property Name="Alpha" Value="1" />
-        <Property Name="TitleText" Value="Inventory" />
+        <Property Name="Text" Value="Inventory" />
         <Property Name="TitlebarFont" Value="DejaVuSerif-12" />
         <Property Name="CloseButtonAlignment" Value="0" />
         <Property Name="MousePassThroughEnabled" Value="True" />
+        <Property Name="SizingEnabled" Value="False" />
+        <Property Name="DragMovingEnabled" Value="False" />
+        <Property Name="CloseButtonEnabled" Value="True" />
+        <Property Name="RollUpEnabled" Value="False" />
 
         <!-- dummy holder to function as a work-around to the fact that the NamedPanel widget is a simple window and it
         doesn't perform the calculation for a contained area -->
         <Window Type="SWB/StaticImage" Name="inventory_aux" >
             <Property Name="FrameEnabled" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.015,0},{0.0,102},{0.985,0},{0.985,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
         
             <!-- The gold coins icon -->
@@ -44,7 +48,7 @@
     
             <!-- Top area, containing the hero picture and his/her gear -->
             <Window Type="SWB/RoundedPanelFrame" Name="GearHolder">
-                <Property Name="UnifiedAreaRect" Value="{{0.035,0},{0.0,0},{0.97,0},{0.56,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{0.56,0}}" />
     
                 <Window Type="SWB/RoundedPanelFrame" Name="CharImageHolder">
                     <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.03,0},{0.75,0},{0.85,0}}" />
@@ -91,7 +95,7 @@
     
             <!-- The lower side location containing the stash -->
             <Window Type="SWB/RoundedPanelFrame" Name="StashHolder">
-                <Property Name="UnifiedAreaRect" Value="{{0.035,0},{0.6240544,0},{0.965907,0},{0.97,0}}" />
+                <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.6240544,0},{1.0,0},{1.0,0}}" />
                 <Window Type="SWB/TabButton" Name="SmallTabButton" >
                     <Property Name="Text" >Small</Property>
                     <Property Name="UnifiedAreaRect" Value="{{0.03,0},{0.01,0},{0.33,0},{0.15,0}}" />

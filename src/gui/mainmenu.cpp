@@ -759,7 +759,6 @@ void MainMenu::createSavegameList()
     // Rahmen fuer das Menue Savegame auswaehlen
 	CEGUI::FrameWindow* savegameList = (CEGUI::FrameWindow*) win_mgr.getWindow("SaveGameSelectionFrame");
     savegameList->setInheritsAlpha(false);
-	//savegameList->setAlpha(0.0f);
 
 	SavegameList* sgl = new SavegameList (m_document, m_ceguiSkinName);
     m_saveGameList = sgl;

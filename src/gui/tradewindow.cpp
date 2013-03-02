@@ -76,6 +76,12 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 
 	// Label fuer grosse Items
 	std::ostringstream outStream;
+
+	// Store the WIDTH specific dividers for the various items.
+	double ratioOfInventory = 0.95;
+	double dividerForBigItems = ratioOfInventory / 5;
+	double dividerForMedItems = ratioOfInventory / 7;
+	double dividerForSmallItems = ratioOfInventory / 10;
 	
 	for (j=0;j<3;j++)
 	{
@@ -85,8 +91,8 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 			outStream << "TraderBigItem" << j*5+i<< "Label";
 			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "BackgroundButton"), outStream.str());
 			tradeContent->addChildWindow(label);
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.04f+i*0.17f), cegui_reldim( 0.01f +j*0.13f)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.17f), cegui_reldim( 0.13f)));
+			label->setPosition (CEGUI::UVector2 (cegui_reldim (i * dividerForBigItems), cegui_reldim (j * 0.13f)));
+			label->setSize (CEGUI::UVector2 (cegui_reldim (dividerForBigItems), cegui_reldim (0.13f)));
 			label->setID(Equipement::BIG_ITEMS+j*5+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonPressed, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonReleased,  this));
@@ -112,8 +118,8 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 			outStream << "TraderMediumItem" << j*7+i<< "Label";
 			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "BackgroundButton"), outStream.str());
 			tradeContent->addChildWindow(label);
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.04f+i*0.121f), cegui_reldim( 0.40f+0.096*j)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.121f), cegui_reldim( 0.096f)));
+			label->setPosition(CEGUI::UVector2 (cegui_reldim (i * dividerForMedItems), cegui_reldim (0.39f + 0.096*j)));
+			label->setSize (CEGUI::UVector2 (cegui_reldim (dividerForMedItems), cegui_reldim (0.096f)));
 			label->setID(Equipement::MEDIUM_ITEMS+j*7+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonPressed, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonReleased,  this));
@@ -138,8 +144,8 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 			outStream << "TraderSmallItem" << j*10+i<< "Label";
 			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "BackgroundButton"), outStream.str());
 			tradeContent->addChildWindow(label);
-			label->setPosition(CEGUI::UVector2(cegui_reldim(0.04f+i*0.085f), cegui_reldim( 0.69f+0.075*j)));
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.085f), cegui_reldim( 0.065f)));
+			label->setPosition (CEGUI::UVector2 (cegui_reldim(i * dividerForSmallItems), cegui_reldim (0.68f + 0.075 * j)));
+			label->setSize (CEGUI::UVector2 (cegui_reldim (dividerForSmallItems), cegui_reldim (0.065f)));
 			label->setID(Equipement::SMALL_ITEMS+j*10+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonPressed, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&TradeWindow::onTradeItemMouseButtonReleased,  this));
@@ -162,10 +168,10 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 	btn->setID(5);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&TradeWindow::onCloseTrade, this));
 
-	if (win_mgr.isWindowPresent ("TradeWindow__auto_close_panel_button__"))
+	if (win_mgr.isWindowPresent ("TradeWindow__auto_closebutton__"))
 	{
 		CEGUI::Window* autoCloseButton;
-		autoCloseButton = win_mgr.getWindow ("TradeWindow__auto_close_panel_button__");
+		autoCloseButton = win_mgr.getWindow ("TradeWindow__auto_closebutton__");
 		if (autoCloseButton)
 		{
 			autoCloseButton->subscribeEvent (CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber (&TradeWindow::onCloseTrade, this));
@@ -294,9 +300,9 @@ void TradeWindow::updateTranslation()
 	else if (win_mgr.isWindowPresent ("TradeWindow"))
 	{
 		label =  win_mgr.getWindow("TradeWindow");
-		if (label->isPropertyPresent ("TitleText"))
+		if (label->isPropertyPresent ("Text"))
 		{
-			label->setProperty ("TitleText", (CEGUI::utf8*) gettext("Chest"));
+			label->setProperty ("Text", (CEGUI::utf8*) gettext("Chest"));
 		}
 	}
 

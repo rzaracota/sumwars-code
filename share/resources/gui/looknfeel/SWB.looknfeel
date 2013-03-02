@@ -3659,7 +3659,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <StateImagery name="Enabled">
             <Layer>
                 <Section section="main">
-                    <Colours topLeft="BFCDCDCD" topRight="BFCDCDCD" bottomLeft="BFCDCDCD" bottomRight="BFCDCDCD" />
+                    <Colours topLeft="CF8D8D8D" topRight="CF8D8D8D" bottomLeft="CF8D8D8D" bottomRight="CF8D8D8D" />
                 </Section>
                 <Section section="label" />
             </Layer>
@@ -3682,7 +3682,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     ***************************************************
     -->
     <WidgetLook name="SWB/CustomTooltip">
-        <PropertyDefinition name="CustomTooltipBackgroundTransparency" initialValue="E8FFFFFF" redrawOnWrite="true" />
+        <PropertyDefinition name="CustomTooltipBackgroundTransparency" initialValue="F0222222" redrawOnWrite="true" />
         <NamedArea name="TextArea">
             <Area>
                 <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="TooltipLeftEdge" dimension="Width" /></Dim>
@@ -3744,7 +3744,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                         </UnifiedDim>
                     </Dim>
                 </Area>
-                <Image type="Background" imageset="SWB" image="MiniButton_Background" />
+                <Image type="Background" imageset="SWB" image="TooltipMiddle" />
                 <VertFormat type="Stretched" />
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
@@ -4893,7 +4893,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <Property name="NonClient" value="True" />
         
         <PropertyDefinition name="ActiveColour" initialValue="FFFF0000" redrawOnWrite="true"/>
-        <PropertyDefinition name="InactiveColour" initialValue="FFAA3333" redrawOnWrite="true"/>
+        <PropertyDefinition name="InactiveColour" initialValue="FFEE1111" redrawOnWrite="true"/>
         <PropertyDefinition name="BackgroundPictureColour" initialValue="FFBBA075" redrawOnWrite="true"/>
         
         <ImagerySection name="overdrawn_section">
@@ -5024,19 +5024,37 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
 
         <NamedArea name="ClientWithTitleWithFrame">
             <Area>
-                <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="WindowTopLeft" dimension="Width" /></Dim>
-                <Dim type="TopEdge" ><WidgetDim widget="__auto_titlebar__" dimension="BottomEdge" /></Dim>
+                <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="WindowCenter_Calc" dimension="LeftEdge" /></Dim>
+                <Dim type="TopEdge" >
+                    <WidgetDim widget="__auto_titlebar__" dimension="BottomEdge">
+                        <DimOperator op="Add">
+                            <ImageDim imageset="SWB" image="WindowCenter_Calc" dimension="TopEdge">
+                                <DimOperator op="Subtract">
+                                    <ImageDim imageset="SWB" image="WindowTopEdge" dimension="TopEdge" />
+                                </DimOperator>
+                            </ImageDim>
+                        </DimOperator>
+                    </WidgetDim>
+                </Dim>
                 <Dim type="RightEdge" >
                     <UnifiedDim scale="1" type="RightEdge">
                         <DimOperator op="Subtract">
-                            <ImageDim imageset="SWB" image="WindowTopRight" dimension="Width" />
+                            <ImageDim imageset="SWB" image="WindowPanel_Calc" dimension="RightEdge">
+                                <DimOperator op="Subtract">
+                                    <ImageDim imageset="SWB" image="WindowCenter_Calc" dimension="RightEdge" />
+                                </DimOperator>
+                            </ImageDim>
                         </DimOperator>
                     </UnifiedDim>
                 </Dim>
                 <Dim type="BottomEdge" >
                     <UnifiedDim scale="1" type="BottomEdge">
                         <DimOperator op="Subtract">
-                            <ImageDim imageset="SWB" image="WindowBottomEdge" dimension="Height" />
+                            <ImageDim imageset="SWB" image="WindowPanel_Calc" dimension="BottomEdge">
+                                <DimOperator op="Subtract">
+                                    <ImageDim imageset="SWB" image="WindowCenter_Calc" dimension="BottomEdge" />
+                                </DimOperator>
+                            </ImageDim>
                         </DimOperator>
                     </UnifiedDim>
                 </Dim>
@@ -5054,19 +5072,33 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         
         <NamedArea name="ClientNoTitleWithFrame">
             <Area>
-                <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="WindowTopLeft" dimension="Width" /></Dim>
-                <Dim type="TopEdge" ><ImageDim imageset="SWB" image="WindowTopEdge" dimension="Height" /></Dim>
+                <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="WindowCenter_Calc" dimension="LeftEdge" /></Dim>
+                <Dim type="TopEdge" >
+                    <WidgetDim widget="__auto_titlebar__" dimension="BottomEdge">
+                        <DimOperator op="Add">
+                            <ImageDim imageset="SWB" image="WindowCenter_Calc" dimension="TopEdge">
+                                <DimOperator op="Subtract">
+                                    <ImageDim imageset="SWB" image="WindowTopEdge" dimension="TopEdge" />
+                                </DimOperator>
+                            </ImageDim>
+                        </DimOperator>
+                    </WidgetDim>
+                </Dim>
                 <Dim type="RightEdge" >
                     <UnifiedDim scale="1" type="RightEdge">
                         <DimOperator op="Subtract">
-                            <ImageDim imageset="SWB" image="WindowTopRight" dimension="Width" />
+                            <ImageDim imageset="SWB" image="WindowCenter_Calc" dimension="LeftEdge" />
                         </DimOperator>
                     </UnifiedDim>
                 </Dim>
                 <Dim type="BottomEdge" >
                     <UnifiedDim scale="1" type="BottomEdge">
                         <DimOperator op="Subtract">
-                            <ImageDim imageset="SWB" image="WindowBottomEdge" dimension="Height" />
+                            <ImageDim imageset="SWB" image="WindowPanel_Calc" dimension="BottomEdge">
+                                <DimOperator op="Subtract">
+                                    <ImageDim imageset="SWB" image="WindowCenter_Calc" dimension="BottomEdge" />
+                                </DimOperator>
+                            </ImageDim>
                         </DimOperator>
                     </UnifiedDim>
                 </Dim>
@@ -5129,6 +5161,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
             <Property name="Visible" value="True" />
         </Child>
 
+        <!-- Various imagery sections-->
         <ImagerySection name="withtitle_frame">
             <FrameComponent>
                 <Area>
@@ -5138,38 +5171,15 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     <Dim type="BottomEdge" ><UnifiedDim scale="1" type="BottomEdge" /></Dim>
                 </Area>
                 <Image type="TopLeftCorner" imageset="SWB" image="WindowTopLeft" />
-                <Image type="TopEdgeCorner" imageset="SWB" image="WindowTopEdge" />
+                <Image type="TopEdge" imageset="SWB" image="WindowTopEdge" />
                 <Image type="TopRightCorner" imageset="SWB" image="WindowTopRight" />
                 <Image type="BottomLeftCorner" imageset="SWB" image="WindowBottomLeft" />
+                <Image type="Background" imageset="SWB" image="WindowMid" />
                 <Image type="BottomRightCorner" imageset="SWB" image="WindowBottomRight" />
                 <Image type="LeftEdge" imageset="SWB" image="WindowLeftEdge" />
                 <Image type="RightEdge" imageset="SWB" image="WindowRightEdge" />
                 <Image type="BottomEdge" imageset="SWB" image="WindowBottomEdge" />
             </FrameComponent>
-            <ImageryComponent>
-                <Area>
-                    <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="WindowTopLeft" dimension="Width" /></Dim>
-                    <Dim type="TopEdge" ><WidgetDim widget="__auto_titlebar__" dimension="BottomEdge" /></Dim>
-                    <Dim type="RightEdge" >
-                        <UnifiedDim scale="1" type="Width">
-                            <DimOperator op="Subtract">
-                                <ImageDim imageset="SWB" image="WindowTopRight" dimension="Width" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                    <Dim type="BottomEdge" >
-                        <UnifiedDim scale="1" type="Height">
-                            <DimOperator op="Subtract">
-                                <ImageDim imageset="SWB" image="WindowBottomEdge" dimension="Height" />
-                            </DimOperator>
-                        </UnifiedDim>
-                    </Dim>
-                </Area>
-                <Image imageset="SWB" image="WindowMid" />
-                <ColourProperty name="ClientAreaColour" />
-                <VertFormat type="Stretched" />
-                <HorzFormat type="Stretched" />
-            </ImageryComponent>
         </ImagerySection>
         
         <ImagerySection name="notitle_frame">

@@ -87,10 +87,10 @@ QuestInfo::QuestInfo (Document* doc, const std::string& ceguiSkinName)
 		label = win_mgr.getWindow("QuestInfoCloseButton");
 		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&QuestInfo::onCloseButtonClicked, this));
 	}
-	else if (win_mgr.isWindowPresent ("QuestInfo__auto_close_panel_button__"))
+	else if (win_mgr.isWindowPresent ("QuestInfo__auto_closebutton__"))
 	{
 		CEGUI::Window* autoCloseButton;
-		autoCloseButton = win_mgr.getWindow ("QuestInfo__auto_close_panel_button__");
+		autoCloseButton = win_mgr.getWindow ("QuestInfo__auto_closebutton__");
 		if (autoCloseButton)
 		{
 			autoCloseButton->subscribeEvent (CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber (&QuestInfo::onCloseButtonClicked, this));
@@ -176,9 +176,9 @@ void QuestInfo::updateTranslation()
 	else if (win_mgr.isWindowPresent ("QuestInfo"))
 	{
 		label =  win_mgr.getWindow("QuestInfo");
-		if (label->isPropertyPresent ("TitleText"))
+		if (label->isPropertyPresent ("Text"))
 		{
-			label->setProperty ("TitleText", (CEGUI::utf8*) gettext("Quests"));
+			label->setProperty ("Text", (CEGUI::utf8*) gettext("Quests"));
 		}
 	}
 

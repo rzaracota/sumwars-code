@@ -75,9 +75,9 @@ SkillTree::SkillTree (Document* doc, OIS::Keyboard *keyboard, const std::string&
 	}
 	
 	// If the panel also has an auto-close button, connect it to the Cancel/Abort event.
-	if (win_mgr.isWindowPresent ("Skilltree__auto_close_panel_button__"))
+	if (win_mgr.isWindowPresent ("Skilltree__auto_closebutton__"))
 	{
-		label = win_mgr.getWindow ("Skilltree__auto_close_panel_button__");
+		label = win_mgr.getWindow ("Skilltree__auto_closebutton__");
 		if (label)
 		{
 			label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onCloseButtonClicked, this));
@@ -630,9 +630,9 @@ void SkillTree::updateTranslation()
 	else if (win_mgr.isWindowPresent ("Skilltree"))
 	{
 		label =  win_mgr.getWindow("Skilltree");
-		if (label->isPropertyPresent ("TitleText"))
+		if (label->isPropertyPresent ("Text"))
 		{
-			label->setProperty ("TitleText", (CEGUI::utf8*) gettext("Skilltree"));
+			label->setProperty ("Text", (CEGUI::utf8*) gettext("Skilltree"));
 		}
 	}
 

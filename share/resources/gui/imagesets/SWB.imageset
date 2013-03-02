@@ -331,7 +331,7 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <Image Name="PanelBody_BR" XPos="513" YPos="285" Width="25" Height="34" />
 
 -->
-	<Image Name="WindowTopLeft" XPos="0" YPos="95" Width="25" Height="20" />
+	<Image Name="WindowTopLeft" XPos="0" YPos="95" Width="25" Height="10" />
 	<Image Name="WindowLeftEdge" XPos="0" YPos="115" Width="25" Height="170" />
 	<Image Name="WindowBottomLeft" XPos="0" YPos="285" Width="25" Height="34" />
 	<Image Name="WindowTopEdge" XPos="25" YPos="95" Width="488" Height="10" />
@@ -340,6 +340,10 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
 	<Image Name="WindowTopRight" XPos="513" YPos="95" Width="25" Height="10" />
 	<Image Name="WindowRightEdge" XPos="513" YPos="115" Width="25" Height="170" />
 	<Image Name="WindowBottomRight" XPos="513" YPos="285" Width="25" Height="34" />
+
+	<Image Name="WindowCenter_Calc" XPos="23" YPos="103" Width="495" Height="189" />
+	<Image Name="WindowAll_Calc" XPos="0" YPos="0" Width="538" Height="320" />
+	<Image Name="WindowPanel_Calc" XPos="0" YPos="95" Width="538" Height="225" />
 
 
 	<Image Name="ComboboxSelectionBrush" XPos="0" YPos="320" Width="192" Height="48" /> <!-- shared -->

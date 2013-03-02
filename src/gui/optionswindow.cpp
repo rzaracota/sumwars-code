@@ -184,9 +184,9 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	btn->setID(5);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&OptionsWindow::onButtonOkClicked, this));
 
-	if (win_mgr.isWindowPresent ("OptionsWindow__auto_close_panel_button__"))
+	if (win_mgr.isWindowPresent ("OptionsWindow__auto_closebutton__"))
 	{
-		label = win_mgr.getWindow ("OptionsWindow__auto_close_panel_button__");
+		label = win_mgr.getWindow ("OptionsWindow__auto_closebutton__");
 		if (label)
 		{
 			label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&OptionsWindow::onButtonCancelClicked, this));
@@ -463,9 +463,9 @@ void OptionsWindow::updateTranslation()
 	else if (win_mgr.isWindowPresent ("OptionsWindow"))
 	{
 		label =  win_mgr.getWindow("OptionsWindow");
-		if (label->isPropertyPresent ("TitleText"))
+		if (label->isPropertyPresent ("Text"))
 		{
-			label->setProperty ("TitleText", (CEGUI::utf8*) gettext("Options"));
+			label->setProperty ("Text", (CEGUI::utf8*) gettext("Options"));
 		}
 	}
 

@@ -1,20 +1,26 @@
 <GUILayout >
-    <Window Type="SWB/NamedPanel" Name="OptionsWindow" >
+    <Window Type="SWB/FrameWindow" Name="OptionsWindow" >
 
         <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
         <Property Name="Alpha" Value="1.0" />
-        <Property Name="TitleText" Value="Options" />
+        <!--<Property Name="TitleText" Value="Options" />-->
+        <Property Name="Text" Value="Options" />
         <Property Name="TitlebarFont" Value="DejaVuSerif-12" />
         <Property Name="CloseButtonAlignment" Value="1" />
         <Property Name="Visible" Value="True" />
         <Property Name="InheritsAlpha" Value="False" />
+        <Property Name="TitlebarEnabled" Value="True" />
+        <Property Name="SizingEnabled" Value="False" />
+        <Property Name="DragMovingEnabled" Value="False" />
+        <Property Name="CloseButtonEnabled" Value="True" />
+        <Property Name="RollUpEnabled" Value="False" />
         <Property Name="MousePassThroughEnabled" Value="True" />
         
         <Window Type="SWB/TabControl" Name="OptionsWindowTab" >
             <Property Name="Alpha" Value="1.0" />
             <Property Name="TabHeight" Value="{0.13,0.0}" />
             <Property Name="TabPanePosition" Value="Top" />
-            <Property Name="UnifiedAreaRect" Value="{{0.0376348,0},{0.0,105},{0.970961,0},{0.881281,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
             <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
             <Property Name="Tooltip" Value="Options for the game are set here" />
             <Property Name="InheritsAlpha" Value="False" />
