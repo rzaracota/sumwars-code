@@ -61,6 +61,25 @@ HostGameWindow::HostGameWindow (Document* doc)
 	box->setWantsMultiClickEvents(false);
 	box->setMaxTextLength(31);
 	
+	// Connect the Cancel button to the cancel event.
+	if (win_mgr.isWindowPresent ("HostGameCancelButton"))
+	{
+		btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("HostGameCancelButton"));
+		btn->setID(5);
+		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&HostGameWindow::onCancelHostGame, this));
+	}
+
+	// Connect the window close button to the cancel event.
+	if (win_mgr.isWindowPresent ("HostGameWindow__auto_closebutton__"))
+	{
+		CEGUI::Window* autoCloseButton;
+		autoCloseButton = win_mgr.getWindow ("HostGameWindow__auto_closebutton__");
+		if (autoCloseButton)
+		{
+			autoCloseButton->subscribeEvent (CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber (&HostGameWindow::onCancelHostGame, this));
+		}
+	}
+
 	updateTranslation();
 }
 
@@ -102,6 +121,13 @@ void HostGameWindow::updateTranslation()
 	
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "HostGameStartButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));
+
+	if (win_mgr.isWindowPresent ("HostGameCancelButton"))
+	{
+		btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "HostGameCancelButton"));
+		btn->setText((CEGUI::utf8*) gettext("Cancel"));
+	}
+
 	if (win_mgr.isWindowPresent ("HostWindowTitle"))
 	{
 		// Old style host window title.
@@ -146,6 +172,15 @@ bool HostGameWindow::onStartHostGame(const CEGUI::EventArgs& evt)
 	options->setMaxNumberPlayers(max_nr);
 	
 	m_document->onButtonStartHostGame();
+	return true;
+}
+
+
+bool HostGameWindow::onCancelHostGame (const CEGUI::EventArgs& evt)
+{
+	m_document->getGUIState()->m_shown_windows = Document::START_MENU;
+	m_document->setModified(Document::WINDOWS_MODIFIED);
+
 	return true;
 }
 
@@ -196,6 +231,25 @@ JoinGameWindow::JoinGameWindow (Document* doc)
 	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("PortBox"));
 	box->setWantsMultiClickEvents(false);
 	box->setMaxTextLength(31);
+
+	// Connect the Cancel button to the cancel event.
+	if (win_mgr.isWindowPresent ("JoinGameCancelButton"))
+	{
+		btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("JoinGameCancelButton"));
+		btn->setID(5);
+		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&JoinGameWindow::onCancelJoinGame, this));
+	}
+
+	// Connect the window close button to the cancel event.
+	if (win_mgr.isWindowPresent ("JoinGameWindow__auto_closebutton__"))
+	{
+		CEGUI::Window* autoCloseButton;
+		autoCloseButton = win_mgr.getWindow ("JoinGameWindow__auto_closebutton__");
+		if (autoCloseButton)
+		{
+			autoCloseButton->subscribeEvent (CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber (&JoinGameWindow::onCancelJoinGame, this));
+		}
+	}
 	
 	updateTranslation();
 }
@@ -236,6 +290,12 @@ void JoinGameWindow::updateTranslation()
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "JoinGameStartButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));
 	
+	if (win_mgr.isWindowPresent ("JoinGameCancelButton"))
+	{
+		btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "JoinGameCancelButton"));
+		btn->setText((CEGUI::utf8*) gettext("Cancel"));
+	}
+
 	if (win_mgr.isWindowPresent ("JoinWindowTitle"))
 	{
 		label = win_mgr.getWindow("JoinWindowTitle");
@@ -278,6 +338,15 @@ bool JoinGameWindow::onStartJoinGame(const CEGUI::EventArgs& evt)
 	options->setServerHost(hostname);
 	
 	m_document->onButtonStartJoinGame();
+	return true;
+}
+
+
+bool JoinGameWindow::onCancelJoinGame (const CEGUI::EventArgs& evt)
+{
+	m_document->getGUIState()->m_shown_windows = Document::START_MENU;
+	m_document->setModified(Document::WINDOWS_MODIFIED);
+
 	return true;
 }
 

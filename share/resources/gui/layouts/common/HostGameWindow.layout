@@ -11,12 +11,15 @@
         <Property Name="RollUpEnabled" Value="False" />
 
         <Window Type="SWB/Button" Name="HostGameStartButton" >
-            <Property Name="HoverImage" Value="set:MainMenu image:SPBtnHover" />
-            <Property Name="NormalImage" Value="set:MainMenu image:SPBtnNormal" />
-            <Property Name="PushedImage" Value="set:MainMenu image:SPBtnPushed" />
-            <Property Name="DisabledImage" Value="set:MainMenu image:SPBtnNormal" />
-            <Property Name="UnifiedAreaRect" Value="{{0.4,0},{0.84,0},{0.6,0},{0.92,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.2,0},{0.84,0},{0.45,0},{0.95,0}}" />
+            <Property Name="Text" Value="Start" />
         </Window>
+
+        <Window Type="SWB/Button" Name="HostGameCancelButton" >
+            <Property Name="UnifiedAreaRect" Value="{{0.55,0},{0.84,0},{0.8,0},{0.95,0}}" />
+            <Property Name="Text" Value="Cancel" />
+        </Window>
+
         <Window Type="SWB/StaticText" Name="PlayerNumberLabel" >
             <Property Name="Text" Value="Armor" />
             <Property Name="HorzExtent" Value="50" />
