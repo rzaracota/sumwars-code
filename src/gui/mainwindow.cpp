@@ -385,7 +385,7 @@ void MainWindow::update(float time)
 			credits->setVisible(false);
 		}
 		
-		CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) win_mgr.getWindow("HostGameWindow");
+		CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) win_mgr.getWindow("HostGameWindow_Holder");
 		if (wflags & Document::HOST_GAME)
 		{
 			m_sub_windows["HostGame"]->update();
@@ -396,7 +396,7 @@ void MainWindow::update(float time)
 			host_game->setVisible(false);
 		}
 		
-		CEGUI::FrameWindow* join_game = (CEGUI::FrameWindow*) win_mgr.getWindow("JoinGameWindow");
+		CEGUI::FrameWindow* join_game = (CEGUI::FrameWindow*) win_mgr.getWindow("JoinGameWindow_Holder");
 		if (wflags & Document::JOIN_GAME)
 		{
 			m_sub_windows["JoinGame"]->update();
