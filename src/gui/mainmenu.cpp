@@ -147,8 +147,8 @@ void MainMenu::updateTranslation()
 	lbl->setText((CEGUI::utf8*) gettext("Quit"));
 
 	// Update message windows
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("DeleteCharLabel")); // note: this has no in-between slash!
-	if (lbl) lbl->setText((CEGUI::utf8*) gettext("Really delete savegame?"));
+	//lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("DeleteCharLabel")); // note: this has no in-between slash!
+	//if (lbl) lbl->setText((CEGUI::utf8*) gettext("Really delete savegame?"));
 
 	// Propagation onto sub-windows
 	if (m_saveGameList != 0)
@@ -756,7 +756,7 @@ void MainMenu::createSavegameList()
 {
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
-    // Rahmen fuer das Menue Savegame auswaehlen
+    // Select the frame for the saved games in the menu
 	CEGUI::FrameWindow* savegameList = (CEGUI::FrameWindow*) win_mgr.getWindow("SaveGameSelectionFrame");
     savegameList->setInheritsAlpha(false);
 
@@ -766,7 +766,16 @@ void MainMenu::createSavegameList()
     sgl->update();
     sgl->updateTranslation();
 
-    MessageQuestionWindow * delchar = new MessageQuestionWindow(m_document,"DeleteChar",gettext("Really delete savegame?"), gettext("Yes"),CEGUI::Event::Subscriber(&SavegameList:: onDeleteCharConfirmClicked, sgl),gettext("No"),CEGUI::Event::Subscriber(&SavegameList::onDeleteCharAbortClicked, sgl));
+	// TODO: this implementation is really wacky... not consistent with the rest.
+	// Will need to bring the entire implementation to a common base.
+    MessageQuestionWindow * delchar = new MessageQuestionWindow (m_document,
+		std::string ("messagequestionwindow.layout"), 
+		std::string (gettext("Really delete savegame?")),
+		std::string (gettext("Yes")),
+		CEGUI::Event::Subscriber(&SavegameList:: onDeleteCharConfirmClicked, sgl),
+		std::string (gettext("No")),
+		CEGUI::Event::Subscriber(&SavegameList::onDeleteCharAbortClicked, sgl));
+
     m_window->addChildWindow(delchar->getCEGUIWindow());
 
 }

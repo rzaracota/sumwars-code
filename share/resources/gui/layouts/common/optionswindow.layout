@@ -20,7 +20,7 @@
             <Property Name="Alpha" Value="1.0" />
             <Property Name="TabHeight" Value="{0.13,0.0}" />
             <Property Name="TabPanePosition" Value="Top" />
-            <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{0.92,0}}" />
             <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
             <Property Name="Tooltip" Value="Options for the game are set here" />
             <Property Name="InheritsAlpha" Value="False" />
@@ -359,7 +359,7 @@
 
         <Window Type="SWB/Button" Name="OptionsCloseButton" >
             <Property Name="InheritsAlpha" Value="False" />
-            <Property Name="UnifiedAreaRect" Value="{{0.4,0},{0.882,0},{0.6,0},{0.937389,0}}" />
+            <Property Name="UnifiedAreaRect" Value="{{0.4,0},{0.93,0},{0.6,0},{0.99,0}}" />
         </Window>
     </Window>
 </GUILayout>

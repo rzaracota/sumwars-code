@@ -291,12 +291,8 @@ bool SavegameList::onDeleteCharClicked(const CEGUI::EventArgs& evt)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	const CEGUI::WindowEventArgs& we = static_cast<const CEGUI::WindowEventArgs&>(evt);
 	onSavegameChosen(CEGUI::WindowEventArgs(we.window->getParent()));
-
-	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("DeleteChar");
-	message->setInheritsAlpha(false);
-		
-	message->setVisible(true);
-	message->setModalState(true);
+	
+	m_document->showQuestionDialog ();
 
 	return true;
 }
@@ -304,11 +300,8 @@ bool SavegameList::onDeleteCharClicked(const CEGUI::EventArgs& evt)
 bool SavegameList::onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("DeleteChar");
-		
-	message->setVisible(false);
-	message->setModalState(false);
-	
+	m_document->hideQuestionDialog ();
+
 	// Get the save file to remove.
 	std::string saveFile =  m_document->getSaveFile();
 	if (saveFile.empty())
@@ -348,10 +341,8 @@ bool SavegameList::onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
 bool SavegameList::onDeleteCharAbortClicked(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("DeleteChar");
-	
-	message->setVisible(false);
-	message->setModalState(false);
+	m_document->hideQuestionDialog ();
+
 	return true;
 }
 

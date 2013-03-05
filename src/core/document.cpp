@@ -1490,6 +1490,10 @@ bool Document::onKeyPress(KeyCode key)
 			{
 				hideWarning ();
 			}
+			else if (m_gui_state.m_shown_windows & 	QUESTION_DIALOG)
+			{
+				hideQuestionDialog ();
+			}
 			else if (m_gui_state.m_shown_windows & CREDITS)
 			{
 				// If the user presses [ESC] during the credits section, leave the credits.
@@ -1949,16 +1953,16 @@ void Document::hideWarning ()
 {
 	// Show a notification.
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	if (! win_mgr.isWindowPresent ("WarningDialogWindow"))
+
+	if (win_mgr.isWindowPresent ("WarningDialogWindow"))
 	{
-		DEBUG ("Could not show/hide the warning widget: [WarningDialogWindow]");
-		return;
+		CEGUI::Window* widget = win_mgr.getWindow("WarningDialogWindow");
+		if (widget->isVisible ())
+		{
+			widget->setVisible (false);
+			widget->setModalState (false);
+		}
 	}
-
-
-	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("WarningDialogWindow");
-	message->setVisible(false);
-	message->setModalState(false);
 
 	// If a MESSAGE is displayed, remove the status from the shown windows. XOR it.
 	if (getGUIState()->m_shown_windows & MESSAGE)
@@ -1968,3 +1972,46 @@ void Document::hideWarning ()
 	}
 }
 
+void Document::showQuestionDialog ()
+{
+	// Show a notification.
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	if (! win_mgr.isWindowPresent ("QuestionInfoRoot"))
+	{
+		DEBUG ("Could not display the warning widget: [QuestionInfoRoot]");
+		return;
+	}
+
+	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("QuestionInfoRoot");
+	message->setInheritsAlpha(false);
+	message->setVisible(true);
+	message->setModalState(true);
+
+	getGUIState()->m_shown_windows |= QUESTION_DIALOG;
+	m_modified |= WINDOWS_MODIFIED;
+
+}
+
+
+void Document::hideQuestionDialog ()
+{
+	// Show a notification.
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+
+	if (win_mgr.isWindowPresent ("QuestionInfoRoot"))
+	{
+		CEGUI::Window* widget = win_mgr.getWindow("QuestionInfoRoot");
+		if (widget && widget->isVisible ())
+		{
+			widget->setVisible (false);
+			widget->setModalState (false);
+		}
+	}
+
+	// If a MESSAGE is displayed, remove the status from the shown windows. XOR it.
+	if (getGUIState()->m_shown_windows & QUESTION_DIALOG)
+	{
+		getGUIState()->m_shown_windows ^= QUESTION_DIALOG;
+		m_modified |= WINDOWS_MODIFIED;
+	}
+}
