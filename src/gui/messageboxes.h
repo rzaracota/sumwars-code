@@ -88,6 +88,8 @@ class MessageQuestionWindow
 							, const std::string& button2Text
 							, CEGUI::Event::Subscriber subscriberButton2Callback);
 	
+		virtual ~MessageQuestionWindow ();
+
 		/**
 		 * \fn virtual void update()
 		 * \brief aktualisiert den Inhalt des Fensters

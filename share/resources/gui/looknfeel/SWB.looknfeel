@@ -391,178 +391,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
 
     <!--
     ***************************************************
-        SWB/NamedPanelHeader
-    ***************************************************
-    -->
-    <WidgetLook name="SWB/NamedPanelHeader">
-        <Property name="NonClient" value="True" />
-        
-        <PropertyDefinition name="GS_DarkerThemeColour" initialValue="FF940000" redrawOnWrite="true" />
-        <PropertyDefinition name="GS_LighterThemeColour" initialValue="FFFF0101" redrawOnWrite="true" />
-        <PropertyDefinition name="GS_MainThemeColour" initialValue="FFDC5F5F" redrawOnWrite="true" />
-        <PropertyDefinition name="GS_ShineColour" initialValue="B0FFFFFF" redrawOnWrite="true" />
-        <PropertyDefinition name="GS_DesaturatedThemeColour" initialValue="FFAD6E6E" redrawOnWrite="true" />
-        <PropertyDefinition name="BackgroundPictureColour" initialValue="FFBBA075" redrawOnWrite="true"/>
-        
-        <ImagerySection name="main_section">
-            <FrameComponent>
-                <Area>
-                    <Dim type="LeftEdge"><AbsoluteDim value="0" /></Dim>
-                    <Dim type="TopEdge"><AbsoluteDim value="0" /></Dim>
-                    <Dim type="RightEdge"><UnifiedDim scale="1" type="RightEdge" /></Dim>
-                    <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
-                </Area>
-                <Image type="LeftEdge" imageset="SWB" image="PanelHeader_L" />
-                <Image type="Background" imageset="SWB" image="PanelHeader_M" />
-                <Image type="RightEdge" imageset="SWB" image="PanelHeader_R" />
-            </FrameComponent>
-        </ImagerySection>
-
-        <StateImagery name="Enabled">
-            <Layer>
-                <Section section="main_section">
-                    <ColourProperty name="BackgroundPictureColour" />
-                </Section>
-            </Layer>
-        </StateImagery>
-        <StateImagery name="Disabled">
-            <Layer>
-                <Section section="main_section">
-                    <ColourProperty name="BackgroundPictureColour" />
-                </Section>
-            </Layer>
-        </StateImagery>
-    </WidgetLook>
-
-
-    <!--
-    ***************************************************
-        SWB/NamedPanel
-    ***************************************************
-    -->
-    <WidgetLook name="SWB/NamedPanel">
-        <!--<PropertyLinkDefinition name="CaptionColour" widget="__auto_title_text__" targetProperty="CaptionColour" initialValue="FFFFFFFF" />-->
-        <PropertyLinkDefinition name="TitlebarFont" widget="__auto_title_text__" targetProperty="Font" />
-        <PropertyLinkDefinition name="TitleText" widget="__auto_title_text__"  targetProperty="Text" initialValue="TitleText..." />
-        <PropertyDefinition name="ClientAreaColour" initialValue="FFFFFFFF" redrawOnWrite="true" />
-        <PropertyDefinition name="TitlebarHeight" initialValue="32" redrawOnWrite="true" />
-        <PropertyDefinition name="BackgroundPictureColour" initialValue="FFBBA075" redrawOnWrite="true"/>
-        <PropertyDefinition name="CloseButtonAlignment" initialValue="1" redrawOnWrite="true"/>
-        
-        <Property name="UnifiedMinSize" value="{{0.01,0},{0.01,0}}" />
-        <Property name="AutoRenderingSurface" value="True" />
-        
-        <Child type="SWB/NamedPanelHeader" nameSuffix="__auto_titlebar__">
-            <Area>
-                <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
-                <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
-                <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
-                <Dim type="Height" ><ImageDim imageset="SWB" image="PanelHeader_L" dimension="Height" /></Dim>
-            </Area>
-            <Property name="AlwaysOnTop" value="False" />
-        </Child>
-
-        <Child type="SWB/StaticText" nameSuffix="__auto_title_text__">
-            <Area>
-                <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="PanelTitleArea_Calc" dimension="XPosition" /></Dim>
-                <Dim type="TopEdge" ><ImageDim imageset="SWB" image="PanelTitleArea_Calc" dimension="YPosition" /></Dim>
-                <Dim type="RightEdge">
-                    <UnifiedDim scale="1" type="RightEdge">
-                        <DimOperator op="Subtract">
-                            <ImageDim imageset="SWB" image="PanelTitleArea_Calc" dimension="XPosition" />
-                        </DimOperator>
-                    </UnifiedDim>
-                </Dim>
-                <Dim type="Height" ><ImageDim imageset="SWB" image="PanelTitleArea_Calc" dimension="Height" /></Dim>
-            </Area>
-            <Property name="AlwaysOnTop" value="True" />
-            <Property name="HorzFormatting" value="HorzCentred" />
-            <Property name="VertFormatting" value="CentreAligned" />
-            <Property name="FrameEnabled" value="False" />
-        </Child>
-
-        <Child type="SWB/ImageButton" nameSuffix="__auto_close_panel_button__">
-            <Area>
-                <Dim type="LeftEdge" >
-                    <AbsoluteDim value="15">
-                        <DimOperator op="Add">
-                            <PropertyDim name="CloseButtonAlignment">
-                                <DimOperator op="Multiply">
-                                    <UnifiedDim scale="1" type="Width">
-                                        <DimOperator op="Subtract">
-                                            <AbsoluteDim value="30">
-                                                <DimOperator op="Add">
-                                                    <AbsoluteDim value="31" />
-                                                </DimOperator>
-                                            </AbsoluteDim>
-                                        </DimOperator>
-                                    </UnifiedDim> 
-                                </DimOperator>
-                            </PropertyDim>
-                        </DimOperator>
-                    </AbsoluteDim>
-                </Dim>
-                <Dim type="TopEdge" ><AbsoluteDim value="56" /></Dim>
-                <Dim type="Width" ><AbsoluteDim value="31" /></Dim>
-                <Dim type="Height" ><AbsoluteDim value="31" /></Dim>
-            </Area>
-            <Property name="AlwaysOnTop" value="True" />
-            <Property name="NonClient" value="True" />
-            <Property name="HoverImage" value="set:SWB image:PanelCloseButton_On" />
-            <Property name="PushedImage" value="set:SWB image:PanelCloseButton_On" />
-            <Property name="NormalImage" value="set:SWB image:PanelCloseButton_Off" />
-            <Property name="DisabledImage" value="set:SWB image:PanelCloseButton_Off" />
-            <Property name="Visible" value="True" />
-        </Child>
-
-        <ImagerySection name="main_section">
-            <FrameComponent>
-                <Area>
-                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
-                    <Dim type="TopEdge" ><WidgetDim widget="__auto_titlebar__" dimension="Height" /></Dim>
-                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
-                    <Dim type="Height" >
-                        <WidgetDim dimension="Height">
-                            <DimOperator op="Subtract">
-                                <WidgetDim widget="__auto_titlebar__" dimension="Height" />
-                            </DimOperator>
-                        </WidgetDim>
-                    </Dim>
-                </Area>
-                <Image type="TopLeftCorner" imageset="SWB" image="PanelBody_TL" />
-                <Image type="LeftEdge" imageset="SWB" image="PanelBody_L" />
-                <Image type="BottomLeftCorner" imageset="SWB" image="PanelBody_BL" />
-                <Image type="TopEdge" imageset="SWB" image="PanelBody_T" />
-                <Image type="Background" imageset="SWB" image="PanelBody_M" />
-                <Image type="BottomEdge" imageset="SWB" image="PanelBody_B" />
-                <Image type="TopRightCorner" imageset="SWB" image="PanelBody_TR" />
-                <Image type="RightEdge" imageset="SWB" image="PanelBody_R" />
-                <Image type="BottomRightCorner" imageset="SWB" image="PanelBody_BR" />
-            </FrameComponent>
-        </ImagerySection>
-        
-
-        <StateImagery name="Enabled">
-            <Layer>
-                <Section section="main_section">
-                    <ColourProperty name="BackgroundPictureColour" />
-                </Section>
-            </Layer>
-        </StateImagery>
-        <StateImagery name="Disabled">
-            <Layer>
-                <Section section="main_section">
-                    <ColourProperty name="BackgroundPictureColour" />
-                </Section>
-            </Layer>
-        </StateImagery>
-
-    </WidgetLook>
-
-
-
-    <!--
-    ***************************************************
         SWB/SimplePanel
         (based on the Taharez Look)
     ***************************************************
@@ -959,10 +787,11 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     ***************************************************
     -->
     <WidgetLook name="SWB/StaticText">
-    <PropertyDefinition name="FrameColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" />
-    <PropertyDefinition name="BackgroundColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" />
+        <PropertyDefinition name="FrameColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" />
+        <PropertyDefinition name="BackgroundColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" />
         <Property name="FrameEnabled" value="True" />
         <Property name="BackgroundEnabled" value="True" />
+        
         <NamedArea name="WithFrameTextRenderArea">
             <Area>
                 <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="StaticLeft" dimension="Width" /></Dim>
@@ -983,6 +812,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Dim>
             </Area>
         </NamedArea>
+        
         <NamedArea name="WithFrameTextRenderAreaHScroll">
             <Area>
                 <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="StaticLeft" dimension="Width" /></Dim>
@@ -1003,6 +833,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Dim>
             </Area>
         </NamedArea>
+        
         <NamedArea name="WithFrameTextRenderAreaVScroll">
             <Area>
                 <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="StaticLeft" dimension="Width" /></Dim>
@@ -1023,6 +854,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Dim>
             </Area>
         </NamedArea>
+        
         <NamedArea name="WithFrameTextRenderAreaHVScroll">
             <Area>
                 <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="StaticLeft" dimension="Width" /></Dim>
@@ -1099,6 +931,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 </Dim>
             </Area>
         </NamedArea>
+        
         <Child  type="SWB/HorizontalScrollbar" nameSuffix="__auto_hscrollbar__">
             <Area>
                 <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
@@ -1117,6 +950,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
             </Area>
             <HorzAlignment type="RightAligned" />
         </Child>
+        
         <StateImagery name="Enabled" />
         <StateImagery name="Disabled" />
         <StateImagery name="EnabledFrame">
@@ -5689,6 +5523,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     -->
     <WidgetLook name="SWB/ProgressBar">
         <PropertyDefinition name="BarSegmentMode" initialValue="Stretched" redrawOnWrite="true" />
+        <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
         
         <PropertyDefinition name="GS_DarkerThemeColour" initialValue="FFAC4F4F" redrawOnWrite="true" />
         <PropertyDefinition name="GS_LighterThemeColour" initialValue="FFFF0101" redrawOnWrite="true" />
@@ -5863,7 +5698,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <Section section="background_highlight">
                     <ColourProperty name="GS_ShineColour" />
                 </Section>
-                <Section section="border_section" />
+                <Section section="border_section">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
 
@@ -5896,7 +5733,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <Section section="progress_lights_leading" >
                     <ColourProperty name="GS_LighterThemeColour" />
                 </Section>
-                <Section section="border_section_redux" />
+                <Section section="border_section_redux">
+                    <ColourProperty name="BorderColour" />
+                </Section>
             </Layer>
         </StateImagery>
 

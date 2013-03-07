@@ -117,10 +117,12 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
     updateTranslation();
 }
 
+
 void MainMenu::update()
 {
 	updateCharacterView();
 }
+
 
 void MainMenu::updateTranslation()
 {
@@ -762,9 +764,10 @@ void MainMenu::createSavegameList()
 
 	SavegameList* sgl = new SavegameList (m_document, m_ceguiSkinName);
     m_saveGameList = sgl;
-    savegameList->addChildWindow(sgl->getCEGUIWindow());
-    sgl->update();
-    sgl->updateTranslation();
+
+    savegameList->addChildWindow(m_saveGameList->getCEGUIWindow());
+    m_saveGameList->update();
+    m_saveGameList->updateTranslation();
 
 	// TODO: this implementation is really wacky... not consistent with the rest.
 	// Will need to bring the entire implementation to a common base.
@@ -772,9 +775,9 @@ void MainMenu::createSavegameList()
 		std::string ("messagequestionwindow.layout"), 
 		std::string (gettext("Really delete savegame?")),
 		std::string (gettext("Yes")),
-		CEGUI::Event::Subscriber(&SavegameList:: onDeleteCharConfirmClicked, sgl),
+		CEGUI::Event::Subscriber(&SavegameList:: onDeleteCharConfirmClicked, m_saveGameList),
 		std::string (gettext("No")),
-		CEGUI::Event::Subscriber(&SavegameList::onDeleteCharAbortClicked, sgl));
+		CEGUI::Event::Subscriber(&SavegameList::onDeleteCharAbortClicked, m_saveGameList));
 
     m_window->addChildWindow(delchar->getCEGUIWindow());
 

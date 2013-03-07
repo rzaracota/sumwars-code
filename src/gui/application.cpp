@@ -856,6 +856,8 @@ bool Application::initCEGUI()
 	CEGUI::FontManager::getSingleton().create("DejaVuSerif-16.font", (CEGUI::utf8*)"GUI");
 	CEGUI::FontManager::getSingleton().create("DejaVuSans-10.font", (CEGUI::utf8*)"GUI");
 
+	CEGUI::FontManager::getSingleton().create("SWB_S.font", (CEGUI::utf8*)"GUI");
+
 	// Set the default font to use based on the current display resolution.
 	int configuredWidth, configuredHeight;
 	SumwarsHelper::getSizesFromResolutionString (Options::getInstance ()->getUsedResolution (), configuredWidth, configuredHeight);

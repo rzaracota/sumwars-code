@@ -125,17 +125,14 @@ MessageQuestionWindow::MessageQuestionWindow (Document* doc
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, subscriberButton2Callback);
 	}
 
-#if 0
-	if (win_mgr.isWindowPresent ("QuestionInfoRoot__auto_closebutton__"))
-	{
-		btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("QuestionInfoRoot__auto_closebutton__"));
-		btn->subscribeEvent(CEGUI::PushButton::EventClicked, subscriberButton2Callback);
-	}
-#endif
-
 	updateTranslation ();
-	
 }
+
+
+MessageQuestionWindow::~MessageQuestionWindow ()
+{
+}
+
 
 void MessageQuestionWindow::updateTranslation()
 {

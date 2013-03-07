@@ -38,6 +38,7 @@ public:
      */
     MainMenu (Document* doc, const std::string& ceguiSkinName);
 
+
 	// ------------------------- Frame Listener functions ----------------------
 
     /**

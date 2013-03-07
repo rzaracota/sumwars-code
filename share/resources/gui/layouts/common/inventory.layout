@@ -11,8 +11,7 @@
         <Property Name="CloseButtonEnabled" Value="True" />
         <Property Name="RollUpEnabled" Value="False" />
 
-        <!-- dummy holder to function as a work-around to the fact that the NamedPanel widget is a simple window and it
-        doesn't perform the calculation for a contained area -->
+        <!-- dummy holder to allow easier later updates -->
         <Window Type="SWB/StaticImage" Name="inventory_aux" >
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
