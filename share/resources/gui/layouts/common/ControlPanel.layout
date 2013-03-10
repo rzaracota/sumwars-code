@@ -260,6 +260,7 @@
                 <Property Name="UnifiedAreaRect" Value="{{0.37,0},{0,0},{0.6,0},{1.0,0}}" />
                 <Property Name="FrameEnabled" Value="False" />
                 <Property Name="AlwaysOnTop" Value="True" />
+                <Property Name="Alpha" Value="0" />
                 
                 <Window Type="TaharezLook/HPProgressBar" Name="HealthProgressBar" >
                     <Property Name="StepSize" Value="0.01" />
@@ -267,6 +268,7 @@
                     <Property Name="CurrentProgress" Value="0" />
                     <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0,0},{0.9,0},{0.99,0}}" />
                     <Property Name="VerticalProgress" Value="True" />
+                    <Property Name="InheritsAlpha" Value="False" />
                 </Window>
                 <Window Type="SWB/ImageButton" Name="SaveExitButton" >
                     <Property Name="HoverImage" Value="set:ControlPanel image:SaveExitButton_Hover" />
@@ -274,6 +276,7 @@
                     <Property Name="PushedImage" Value="set:ControlPanel image:SaveExitButton_Hover" />
                     <Property Name="DisabledImage" Value="set:ControlPanel image:SaveExitButton" />
                     <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.77,0},{0.19,0},{0.97,0}}" />
+                    <Property Name="InheritsAlpha" Value="False" />
                 </Window>
                 <Window Type="SWB/ImageButton" Name="OptionsButton" >
                     <Property Name="HoverImage" Value="set:ControlPanel image:OptionsButton_Hover" />
@@ -281,6 +284,7 @@
                     <Property Name="PushedImage" Value="set:ControlPanel image:OptionsButton_Hover" />
                     <Property Name="DisabledImage" Value="set:ControlPanel image:OptionsButton" />
                     <Property Name="UnifiedAreaRect" Value="{{0.81,0},{0.77,0},{1.0,0},{0.97,0}}" />
+                    <Property Name="InheritsAlpha" Value="False" />
                 </Window>
             </Window>
             
