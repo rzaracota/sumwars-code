@@ -1,0 +1,11 @@
+<!--
+Extra images for SumWars
+-->
+<!--
+version:      0.1
+Last change:  $LastChangedDate: 2012-12-25 20:55:19 +0200 (Ma, 25 dec. 2012) $
+-->
+<GUIScheme Name="SumWarsExtras">
+  <Imageset Name="SumWarsExtra" Filename="SumWarsExtra.imageset" />
+
+</GUIScheme>

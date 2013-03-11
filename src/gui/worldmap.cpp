@@ -14,10 +14,11 @@
  */
 
 #include "worldmap.h"
+#include "ceguiutility.h"
 
-
-Worldmap::Worldmap(Document* doc)
-	:Window(doc)
+Worldmap::Worldmap (Document* doc, const std::string& ceguiSkinName)
+	: Window (doc)
+	, m_ceguiSkinName (ceguiSkinName)
 {
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -82,13 +83,13 @@ void Worldmap::update()
 		
 		if (cnt >= ncount)
 		{
-			label = win_mgr.createWindow("TaharezLook/StaticImage", stream.str());
+			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), stream.str());
 			worldmap->addChildWindow(label);
 			label->setProperty("FrameEnabled", "false");
 			label->setProperty("BackgroundEnabled", "false");
 			//label->setProperty("BackgroundColours", "tl:00000000 tr:00000000 bl:00000000 br:00000000"); 
 			label->setSize(CEGUI::UVector2(cegui_reldim(0.02f), cegui_reldim( 0.02f)));
-			label->setProperty("Image", "set:TaharezLook image:WaypointMark"); 
+			label->setProperty("Image", "set:SumWarsExtra image:WaypointMark"); 
 			label->setInheritsAlpha (false);
 			label->setAlwaysOnTop(true);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Worldmap::onWaypointClicked, this));
@@ -134,7 +135,7 @@ void Worldmap::update()
 			
 			if (tpset==false)
 			{
-				label = win_mgr.createWindow("TaharezLook/StaticImage", stream.str());
+				label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), stream.str());
 				worldmap->addChildWindow(label);
 				label->setProperty("FrameEnabled", "false");
 				label->setProperty("BackgroundEnabled", "true");
@@ -147,8 +148,8 @@ void Worldmap::update()
 				{
 					label->setProperty("BackgroundColour", "00000000");
 				}
-				label->setSize(CEGUI::UVector2(cegui_reldim(0.03f), cegui_reldim( 0.03f)));
-				label->setProperty("Image", "set:SWB image:TownPortalSymbol"); // TODO: remove hard-coding and make configurable.
+				label->setSize(CEGUI::UVector2(cegui_reldim(0.023f), cegui_reldim( 0.023f)));
+				label->setProperty("Image", "set:SumWarsExtra image:TownPortalSymbol");
 				label->setInheritsAlpha (false);
 				label->setAlwaysOnTop(true);
 				label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Worldmap::onWaypointClicked, this));

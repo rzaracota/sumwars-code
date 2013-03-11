@@ -1064,7 +1064,7 @@ bool MainWindow::setupItemInfo()
 bool MainWindow::setupPartyInfo()
 {
 	
-	Window* wnd = new PartyInfo(m_document);
+	Window* wnd = new PartyInfo(m_document, m_ceguiSkinName);
 	m_sub_windows["PartyInfo"] = wnd;
 	
 	// PartyInfo anfangs ausblenden
@@ -1124,7 +1124,7 @@ void MainWindow::setupTrade()
 
 void MainWindow::setupWorldmap()
 {
-	Window* wnd = new Worldmap(m_document);
+	Window* wnd = new Worldmap (m_document, m_ceguiSkinName);
 	m_sub_windows["Worldmap"] = wnd;
 	
 	

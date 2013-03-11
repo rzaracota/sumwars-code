@@ -26,10 +26,12 @@ class PartyInfo : public Window
 {
 	public:
 		/**
-	 * \fn PartyInfo (Document* doc)
-	 * \brief Konstruktor
+		 * \fn PartyInfo (Document* doc, const std::string& ceguiSkinName)
+		 * \brief Constructor
+		 * \param doc The document object to be used for interacting with the system.
+		 * \param ceguiSkinName The name of the CEGUI skin to use when creating internal widgets.
 		 */
-		PartyInfo (Document* doc);
+		PartyInfo (Document* doc, const std::string& ceguiSkinName);
 	
 		/**
 		 * \fn virtual void update()
@@ -92,6 +94,11 @@ class PartyInfo : public Window
 		 * \brief IDs der Spieler die sich hinter den Buttons befinden
 		 */
 		int m_player_ids[8];
+
+		/**
+		 * \brief The name of the CEGUI skin to use.
+		 */
+		std::string m_ceguiSkinName;
 };
 
 #endif // __SUMWARS_GUI_PARTYINFO_H__

@@ -810,6 +810,7 @@ bool Application::initCEGUI()
 	// Load schemes
 	CEGUI::SchemeManager::getSingleton().create((CEGUI::utf8*)"SWB.scheme", (CEGUI::utf8*)"GUI");
 	CEGUI::SchemeManager::getSingleton().create((CEGUI::utf8*)"TaharezLook.scheme", (CEGUI::utf8*)"GUI");
+	CEGUI::SchemeManager::getSingleton().create((CEGUI::utf8*)"SumWarsExtras.scheme", (CEGUI::utf8*)"GUI");
 	
 	// Imagesets laden
 	CEGUI::ImagesetManager::getSingleton().create("skills.imageset");

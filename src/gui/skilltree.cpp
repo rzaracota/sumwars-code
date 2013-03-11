@@ -18,9 +18,14 @@
 #include "tooltipmanager.h"
 #include "ceguiutility.h"
 
+#define DEFAULT_SKILL_ITEM_WIDTH 0.18f
+#define DEFAULT_SKILL_ITEM_HEIGHT 0.16f
+#define DEFAULT_SKILL_BTN_WIDTH 0.07f
+#define DEFAULT_SKILL_BTN_HEIGHT 0.05f
+
 SkillTree::SkillTree (Document* doc, OIS::Keyboard *keyboard, const std::string& ceguiSkinName)
-	:Window(doc)
-	,m_ceguiSkinName (ceguiSkinName)
+	: Window (doc)
+	, m_ceguiSkinName (ceguiSkinName)
 {
 	DEBUGX("setup skilltree");
 	m_keyboard = keyboard;
@@ -233,7 +238,7 @@ void SkillTree::update()
 		int cnt =0;
 		for (it = player->getLearnableAbilities().begin(); it != player->getLearnableAbilities().end(); ++it)
 		{
-			// Label mit dem Bild
+			// Picture of skill
 			DEBUGX("ability %s nr %i",it->second.m_type.c_str(),cnt);
 			stream.str("");
 			stream << "SkillImage"<<cnt;
@@ -248,15 +253,18 @@ void SkillTree::update()
 				label->setProperty ("FrameEnabled", "True");
 			}
 			label->setPosition(pos);
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.18f), cegui_reldim( 0.16f)));
-		
-			// Button zum Faehigkeit lernen
-			pos += CEGUI::UVector2(cegui_reldim(0.17f), cegui_reldim( 0.11f));
-			stream.str("");
-			stream << "SkillButton"<<cnt;
-			button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ImageButton"), stream.str()));
-			button->setInheritsAlpha(false);
-			tabs[it->second.m_skilltree_tab-1]->addChildWindow(button);
+			label->setSize (CEGUI::UVector2 (cegui_reldim (DEFAULT_SKILL_ITEM_WIDTH), cegui_reldim (DEFAULT_SKILL_ITEM_HEIGHT)));
+
+			//
+			// Setup the button to be used to learn the corresponding skill.
+			// Also connect the callbacks to the button click events.
+			//
+			pos += CEGUI::UVector2 (cegui_reldim (DEFAULT_SKILL_ITEM_WIDTH - 0.01f), cegui_reldim (DEFAULT_SKILL_ITEM_HEIGHT - 0.05f));
+			stream.str ("");
+			stream << "SkillButton" << cnt;
+			button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ImageButton"), stream.str ()));
+			button->setInheritsAlpha (false);
+			tabs [it->second.m_skilltree_tab - 1]->addChildWindow (button);
 			if (button->isPropertyPresent ("HoverImage"))
 			{
 				button->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased");
@@ -269,11 +277,14 @@ void SkillTree::update()
 			{
 				button->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
 			}
-			button->setPosition(pos);
-			button->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
+			button->setPosition (pos);
+			button->setSize (CEGUI::UVector2 (cegui_reldim (DEFAULT_SKILL_BTN_WIDTH), cegui_reldim (DEFAULT_SKILL_BTN_HEIGHT)));
+			button->setID(it->first);
+			button->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillLearnMouseClicked, this));
 			
-			// beschriften und verknuepfen
-			label->setProperty("FrameEnabled", "True");
+			//
+			// Set the skill picture settings. This loads the picture and sets specific properties.
+			// 
 			label->setInheritsAlpha(false);
 			label->setProperty("BackgroundEnabled", "false");
 			label->setID(it->first);
@@ -286,11 +297,9 @@ void SkillTree::update()
 			label->setProperty("Image", imagename);
 			label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
 			label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
-
-			button->setID(it->first);
-			button->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillLearnMouseClicked, this));
 			
-			// create Connections for Dependencies
+			//
+			// Create Connections for Dependencies
 			// loop over dependencies
 			for (std::list< Action::ActionType >::iterator at = it->second.m_req_abilities.begin(); at != it->second.m_req_abilities.end(); ++at)
 			{
@@ -313,8 +322,8 @@ void SkillTree::update()
 						label->setProperty("BackgroundEnabled", "false");
 						label->moveToBack ();
 			
-						CEGUI::UVector2 start= CEGUI::UVector2(cegui_reldim(deppos.m_x+0.06f), cegui_reldim( deppos.m_y+0.1f));
-						CEGUI::UVector2 end= CEGUI::UVector2(cegui_reldim(spos.m_x+0.07f), cegui_reldim( spos.m_y));
+						CEGUI::UVector2 start = CEGUI::UVector2 (cegui_reldim (deppos.m_x + (DEFAULT_SKILL_ITEM_WIDTH / 2) - 0.02f), cegui_reldim (deppos.m_y + DEFAULT_SKILL_ITEM_HEIGHT));
+						CEGUI::UVector2 end   = CEGUI::UVector2 (cegui_reldim (spos.m_x + (DEFAULT_SKILL_ITEM_WIDTH / 2) + 0.02f), cegui_reldim (spos.m_y));
 						label->setPosition(start);
 						label->setSize(end - start);
 						label->setID(jt->first);
@@ -322,15 +331,15 @@ void SkillTree::update()
 						// distinguish vertical and diagonal connectors
 						if (deppos.m_x == spos.m_x)
 						{
-							label->setProperty("Image", "set:TaharezLook image:SkilltreeVertConnection"); 
+							label->setProperty("Image", "set:SumWarsExtra image:SkilltreeVertConnection"); 
 						}
 						else if (deppos.m_x <= spos.m_x)
 						{
-							label->setProperty("Image", "set:TaharezLook image:SkilltreeDiagConnection"); 
+							label->setProperty("Image", "set:SumWarsExtra image:SkilltreeDiagConnection"); 
 						}
 						else
 						{
-							label->setProperty("Image", "set:TaharezLook image:SkilltreeDiag2Connection");
+							label->setProperty("Image", "set:SumWarsExtra image:SkilltreeDiag2Connection");
 							start= CEGUI::UVector2(cegui_reldim(spos.m_x+0.07f), cegui_reldim( deppos.m_y+0.1f));
 							end= CEGUI::UVector2(cegui_reldim(deppos.m_x+0.06f), cegui_reldim( spos.m_y));
 							label->setPosition(start);

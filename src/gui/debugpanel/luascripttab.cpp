@@ -19,6 +19,7 @@
 #include "textfileeditwindow.h"
 
 #include "OgreString.h"
+#include "ceguiutility.h"
 
 using namespace CEGUI;
 
@@ -189,28 +190,28 @@ void LuaScriptTab::createMenu()
 {
 	m_menubar = static_cast<CEGUI::Menubar*>(m_tabLayout->getChild("luaScriptTab/MenuBar"));
 	
-	MenuItem *fileItem = static_cast<MenuItem*>(WindowManager::getSingleton().createWindow("TaharezLook/MenuItem", "luaScriptTab/MenuBar/FileItem"));
+	MenuItem *fileItem = static_cast<MenuItem*>(WindowManager::getSingleton().createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "MenuItem"), "luaScriptTab/MenuBar/FileItem"));
 	fileItem->setText("File");
 	m_menubar->addItem(fileItem);
 	
-	PopupMenu *filePopup = static_cast<PopupMenu*>(WindowManager::getSingleton().createWindow("TaharezLook/PopupMenu", "luaScriptTab/MenuBar/FilePopup"));
+	PopupMenu *filePopup = static_cast<PopupMenu*>(WindowManager::getSingleton().createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "PopupMenu"), "luaScriptTab/MenuBar/FilePopup"));
 	
-	MenuItem *it = static_cast<MenuItem*>(WindowManager::getSingleton().createWindow("TaharezLook/MenuItem", "luaScriptTab/MenuBar/FileItemNew"));
+	MenuItem *it = static_cast<MenuItem*>(WindowManager::getSingleton().createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "MenuItem"), "luaScriptTab/MenuBar/FileItemNew"));
 	it->setText("New");
 	filePopup->addItem(it);
 	it->subscribeEvent(MenuItem::EventClicked, CEGUI::Event::Subscriber(&LuaScriptTab::handleNew, this));
 	
-	it = static_cast<MenuItem*>(WindowManager::getSingleton().createWindow("TaharezLook/MenuItem", "luaScriptTab/MenuBar/FileItemOpen"));
+	it = static_cast<MenuItem*>(WindowManager::getSingleton().createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "MenuItem"), "luaScriptTab/MenuBar/FileItemOpen"));
 	it->setText("Open");
 	filePopup->addItem(it);
 	it->subscribeEvent(MenuItem::EventClicked, CEGUI::Event::Subscriber(&LuaScriptTab::handleOpen, this));
 	
-	it = static_cast<MenuItem*>(WindowManager::getSingleton().createWindow("TaharezLook/MenuItem", "luaScriptTab/MenuBar/FileItemSave"));
+	it = static_cast<MenuItem*>(WindowManager::getSingleton().createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "MenuItem"), "luaScriptTab/MenuBar/FileItemSave"));
 	it->setText("Save");
 	filePopup->addItem(it);
 	it->subscribeEvent(MenuItem::EventClicked, CEGUI::Event::Subscriber(&LuaScriptTab::handleSave, this));
 	
-	it = static_cast<MenuItem*>(WindowManager::getSingleton().createWindow("TaharezLook/MenuItem", "luaScriptTab/MenuBar/FileItemClose"));
+	it = static_cast<MenuItem*>(WindowManager::getSingleton().createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "MenuItem"), "luaScriptTab/MenuBar/FileItemClose"));
 	it->setText("Close");
 	filePopup->addItem(it);
 	it->subscribeEvent(MenuItem::EventClicked, CEGUI::Event::Subscriber(&LuaScriptTab::handleClose, this));

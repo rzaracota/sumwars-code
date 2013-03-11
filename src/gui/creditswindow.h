@@ -26,8 +26,10 @@ class CreditsWindow : public Window
 {
 	public:
 		/**
-		 * \fn  (Document* doc)
-		 * \brief Konstruktor
+		 * \fn CreditsWindow (Document* doc, const std::string& ceguiSkinName)
+		 * \brief Constructor
+		 * \param doc The document object to be used for interacting with the system.
+		 * \param ceguiSkinName The name of the CEGUI skin to use when creating internal widgets.
 		 */
 		CreditsWindow (Document* doc, const std::string& ceguiSkinName);
 	

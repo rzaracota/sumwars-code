@@ -27,10 +27,12 @@ class Worldmap : public Window
 {
 	public:
 		/**
-		* \fn Worldmap (Document* doc)
-		* \brief Konstruktor
-		*/
-		Worldmap (Document* doc);
+		 * \fn Worldmap (Document* doc, const std::string& ceguiSkinName)
+		 * \brief Constructor
+		 * \param doc The document object to be used for interacting with the system.
+		 * \param ceguiSkinName The name of the CEGUI skin to use when creating internal widgets.
+		 */
+		Worldmap (Document* doc, const std::string& ceguiSkinName);
 	
 		/**
 		 * \fn virtual void update()
@@ -51,7 +53,13 @@ class Worldmap : public Window
 		 * \brief Behandelt anklicken eines Wegpunktes
 		 */
 		bool onWaypointClicked(const CEGUI::EventArgs& evt);
-		
+
+
+		/**
+		 * \brief The name of the CEGUI skin to use.
+		 */
+		std::string m_ceguiSkinName;
+
 };
 
 

@@ -475,8 +475,5 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
 
   <Image Name="ProgressBarTimerSegment" XPos="805" YPos="128" Width="22" Height="31" />
 
-  <!-- The symbol to be used for a Town Portal -->
-  <Image Name="TownPortalSymbol" XPos="803" YPos="289" Width="48" Height="48" />
-
 </Imageset>
 
