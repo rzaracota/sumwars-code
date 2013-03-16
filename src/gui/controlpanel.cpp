@@ -180,6 +180,7 @@ ControlPanel::ControlPanel (Document* doc)
 		label->setMousePassThroughEnabled(true);
 	}
 
+	createAnimations ();
 	
 	updateTranslation();
 }
@@ -513,3 +514,22 @@ bool ControlPanel::onButtonOptionsClicked(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+
+void ControlPanel::createAnimations ()
+{
+#if ((CEGUI_VERSION_MAJOR << 16) + (CEGUI_VERSION_MINOR << 8) + CEGUI_VERSION_PATCH >= (0 << 16)+(7 << 8)+5)
+
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+
+	CEGUI::AnimationManager::getSingleton().loadAnimationsFromXML("ControlPanelAnimations.xml");
+	
+	// Small tab animations
+	label = win_mgr.getWindow("HealthProgressBar");
+	CEGUI::AnimationInstance* instance = CEGUI::AnimationManager::getSingleton().instantiateAnimation("HealthbarAnimation");
+	instance->setTargetWindow(label);
+    instance->start();
+	//label->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&CEGUI::AnimationInstance::handleStart, instance));
+
+#endif
+}

@@ -13,5 +13,6 @@ Last change:  $LastChangedDate: 2012-12-25 20:55:19 +0200 (Ma, 25 dec. 2012) $
 	<WindowRendererSet Filename="CEGUIFalagardWRBase" />
   
 	<FalagardMapping WindowType="SumWarsExtras/HPProgressBar" TargetType="CEGUI/ProgressBar" Renderer="Falagard/ProgressBar" LookNFeel="SumWarsExtras/HPProgressBar" />
+	<FalagardMapping WindowType="SumWarsExtras/HPProgressOrbHighlight" TargetType="CEGUI/PushButton" Renderer="Falagard/Button" LookNFeel="SumWarsExtras/HPProgressOrbHighlight" />
 
 </GUIScheme>

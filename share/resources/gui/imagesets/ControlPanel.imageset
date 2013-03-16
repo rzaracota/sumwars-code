@@ -21,6 +21,7 @@
 	<Image Name="InventoryButton" XPos="951" YPos="145" Width="37" Height="37" />
 	<Image Name="PartyButton" XPos="993" YPos="185" Width="37" Height="37" />
   
+	<Image Name="HPHighlight" XPos="164" YPos="146" Width="185" Height="184" />
 	<Image Name="HPBackground" XPos="608" YPos="149" Width="185" Height="184" />
 	<Image Name="HPForeground" XPos="397" YPos="227" Width="185" Height="184" />
   
