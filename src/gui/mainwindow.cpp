@@ -521,7 +521,7 @@ void MainWindow::update(float time)
 				quest_info->setVisible(false);
 			}
 			
-			CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) win_mgr.getWindow("MinimapWindow");
+			CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) win_mgr.getWindow("MinimapWindow_Holder");
 			if (wflags & Document::MINIMAP)
 			{
 				minimap->setVisible(true);
@@ -981,7 +981,11 @@ void MainWindow::setupCursorItemImage()
 	label->setProperty("BackgroundEnabled", "false");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.04f), cegui_reldim( 0.06f)));
-	label->setProperty("Image", "set:TaharezLook image:CloseButtonNormal"); 
+
+	// Just use a default image.
+	std::string portraitname ("set:Portrait image:Portrait");
+	label->setProperty ("Image", portraitname.c_str ());
+
 	label->setVisible(false);
 	label->setAlwaysOnTop(true);
 	label->setMousePassThroughEnabled(true);
@@ -990,26 +994,9 @@ void MainWindow::setupCursorItemImage()
 
 void MainWindow::setupMinimap()
 {
-	Window* wnd = new MinimapWindow(m_document);
+	Window* wnd = new MinimapWindow (m_document, m_ceguiSkinName);
 	m_sub_windows["Minimap"] = wnd;
-	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
-	/*
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
-	CEGUI::Window* label;
- 	label = win_mgr.createWindow("TaharezLook/StaticImage", "MinimapImage");
-	m_game_screen->addChildWindow(label);
-	label->setProperty("FrameEnabled", "false");
-	label->setProperty("BackgroundEnabled", "false");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.9f), cegui_reldim( 0.8f)));
-	label->setProperty("Image", "set:TaharezLook image:CloseButtonNormal"); 
-	label->setVisible(false);
-	label->setMousePassThroughEnabled(true);
-	label->setID(0);
-	*/
-	
-	
+	m_game_screen->addChildWindow(wnd->getCEGUIWindow());	
 }
 
 bool MainWindow::setupObjectInfo()
@@ -2196,7 +2183,7 @@ void MainWindow::updateRegionInfo()
 	Player* pl = m_document->getLocalPlayer();	
 	if (pl->getRegion() != 0)
 	{
-		// update, wenn neuer Spieler oder neue Region gesetzt
+		// update, when a new player is set or when a new region is set.
 		if (pl->getId() != id)
 		{
 			refresh = true;
@@ -2210,9 +2197,15 @@ void MainWindow::updateRegionInfo()
 			MusicManager::instance().stop();
 		}
 		
+		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+
 		if (refresh)
 		{
+			DEBUG ("*** main window expecting refresh for region");
 			timer.start();
+
+			MinimapWindow* myMinimap = static_cast<MinimapWindow*> (m_sub_windows["Minimap"]);
+			myMinimap->reloadIconsOnNextUpdate ();
 		}
 		
 		float time = timer.getTime();
@@ -2223,12 +2216,11 @@ void MainWindow::updateRegionInfo()
 			vis = true;
 		}
 		
-		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 		CEGUI::Window* label;
 		label = win_mgr.getWindow("RegionInfoLabel");
 		
-		// nur anzeigen, wenn minimap nicht geoeffnet
+		// Only show when the minimap is not opened.
 		int wflags = m_document->getGUIState()->m_shown_windows;
 		vis &= !(wflags & Document::MINIMAP);
 		

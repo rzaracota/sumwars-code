@@ -20,73 +20,49 @@
 #include "scene.h"
 
 #include "minimapwindow.h"
-
+#include "ceguiutility.h"
 #include "OgreResource.h"
 
-MinimapWindow::MinimapWindow (Document* doc)
-	:Window(doc)
+MinimapWindow::MinimapWindow (Document* doc, const std::string& ceguiSkinName)
+	: Window (doc)
+	, m_ceguiSkinName (ceguiSkinName)
+	, m_reloadIconsOnNextUpdate (true)
 {
 	m_region_id = -1;
-		
 	DEBUGX("setup main menu");
 
 	// Create GUI Items.
-
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-
-	// Set the properties for the minimap window.
-
-	CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) win_mgr.createWindow("TaharezLook/FrameWindow", "MinimapWindow");
-	m_window = minimap;
-	
-	minimap->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.05f))); //0.0/0.8
-	minimap->setSize(CEGUI::UVector2(cegui_reldim(0.7f), cegui_reldim( 0.8f))); //1.0/0.2
-	minimap->setProperty("FrameEnabled","false");
-	minimap->setProperty("TitlebarEnabled","false");
-	minimap->setProperty("CloseButtonEnabled","false");
- 	minimap->setAlpha (0.0);
-	minimap->setMousePassThroughEnabled(true);
-	
-	
-	CEGUI::Window* label;
-	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "RegionNameLabel");
-	minimap->addChildWindow(label);
-	label->setProperty("FrameEnabled", "false");
-	label->setProperty("BackgroundEnabled", "false");
-	label->setProperty("HorzFormatting", "HorzCentred");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.01)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.06f)));
-	label->setVisible(true);
-	label->setAlwaysOnTop(true);
-	label->setMousePassThroughEnabled(true);
-	label->setID(0);
-	label->setText( "test" );
-	label->setInheritsAlpha (false);
-	label->setAlpha(0.6);
-	
-	label = win_mgr.createWindow("TaharezLook/StaticImage", "MinimapImage");
-	minimap->addChildWindow(label);
-	label->setProperty("FrameEnabled", "false");
-	label->setProperty("BackgroundEnabled", "true");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.00f), cegui_reldim( 0.00)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 1.0f)));
-	label->setMousePassThroughEnabled(true);
-	label->setProperty("Image", "set:minimap image:minimap_img"); 
-	if (label->isPropertyPresent ("BackgroundColours"))
+	CEGUI::Window* minimapWnd = win_mgr.loadWindowLayout("minimapwindow.layout");
+	if (!minimapWnd)
 	{
-		label->setProperty("BackgroundColours", "tl:44444444 tr:44444444 bl:44444444 br:44444444");
-	}
-	else if (label->isPropertyPresent ("BackgroundColour"))
-	{
-		label->setProperty("BackgroundColour", "44444444");
+		DEBUG ("WARNING: Failed to load [%s]", "minimapwindow.layout");
 	}
 
+	CEGUI::Window* minimapWnd_holder = win_mgr.loadWindowLayout( "minimapwindow_holder.layout" );
+	if (!minimapWnd_holder)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "minimapwindow_holder.layout");
+	}
 
-	label->setInheritsAlpha (false);
-	label->setAlpha(1.0);
-	
+	DEBUG ("Placing layout into holder");
+	minimapWnd->setVisible (true);
+	minimapWnd_holder->setVisible (true);
+
+	CEGUI::Window* wndHolder = win_mgr.getWindow("MinimapWindow_Holder");
+	CEGUI::Window* wndHeld = win_mgr.getWindow("MinimapWindow");
+	if (wndHolder && wndHeld)
+	{
+		wndHolder->addChildWindow (wndHeld);
+	}
+	else
+	{
+		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for inventory.");
+		if (!wndHeld) DEBUG ("ERROR: Unable to get the window for inventory.");
+	}
+	m_window = minimapWnd_holder;
+
 	/*
 	Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().create("RttMat", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 	Ogre::Technique *technique = material->createTechnique();
@@ -105,11 +81,23 @@ MinimapWindow::MinimapWindow (Document* doc)
 	*/
 }
 
+
+/**
+ * \fn virtual void reloadIconsOnNextUpdate ()
+ * \brief Makes sure that at the next update, minimap icons are reloaded.
+ */
+void MinimapWindow::reloadIconsOnNextUpdate ()
+{
+	m_reloadIconsOnNextUpdate = true;
+}
+
+
+
 void MinimapWindow::update()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) win_mgr.getWindow("MinimapWindow");
-	
+
 	Player* player = m_document->getLocalPlayer();
 	if (player ==0)
 		return;
@@ -139,9 +127,8 @@ void MinimapWindow::update()
 		
 		if (cnt >= ncount)
 		{
-			label = win_mgr.createWindow("TaharezLook/StaticImage", stream.str());
+			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), stream.str());
 			minimap->addChildWindow(label);
-			label->setProperty("FrameEnabled", "false");
 			label->setProperty("BackgroundEnabled", "true");
 			
 			if (label->isPropertyPresent ("BackgroundColours"))
@@ -153,9 +140,23 @@ void MinimapWindow::update()
 				label->setProperty("BackgroundColour", "00000000");
 			}
 
+			// Not yet sure whether it looks nicer with a frame or without it...
+			// If a frame is used, a larger image size needs to be specified.
+#if 1
+			label->setProperty("FrameEnabled", "true");
+			label->setSize(CEGUI::UVector2(cegui_reldim(0.038f), cegui_reldim( 0.038f)));
+#else
+			label->setProperty("FrameEnabled", "false");
 			label->setSize(CEGUI::UVector2(cegui_reldim(0.03f), cegui_reldim( 0.03f)));
+#endif
 			label->setMousePassThroughEnabled(true);
-			label->setProperty("Image", "set:TaharezLook image:CloseButtonNormal"); 
+			Player* playerPtr = static_cast<Player*> (pl);
+			if (playerPtr)
+			{
+				std::string playerScreenImage = playerPtr->getEmotionImage("normal");
+				label->setProperty ("Image", playerScreenImage.c_str ()); 
+			}
+
 			label->setInheritsAlpha (false);
 			label->setAlwaysOnTop(true);
 			
@@ -167,7 +168,22 @@ void MinimapWindow::update()
 		{
 			label = win_mgr.getWindow(stream.str());
 		}
-		
+
+		if (m_reloadIconsOnNextUpdate)
+		{
+			if (win_mgr.isWindowPresent (stream.str ().c_str ()))
+			{
+				label = win_mgr.getWindow (stream.str ().c_str ());
+				Player* playerPtr = static_cast<Player*> (pl);
+				if (playerPtr)
+				{
+					std::string playerScreenImage = playerPtr->getEmotionImage ("normal");
+					label->setProperty ("Image", playerScreenImage.c_str ()); 
+				}
+			}
+			m_reloadIconsOnNextUpdate = false;
+		}
+
 		alpha = 0.5;
 		if (pl == player)
 		{

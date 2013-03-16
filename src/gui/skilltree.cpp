@@ -331,15 +331,15 @@ void SkillTree::update()
 						// distinguish vertical and diagonal connectors
 						if (deppos.m_x == spos.m_x)
 						{
-							label->setProperty("Image", "set:SumWarsExtra image:SkilltreeVertConnection"); 
+							label->setProperty("Image", "set:SumWarsExtras image:SkilltreeVertConnection"); 
 						}
 						else if (deppos.m_x <= spos.m_x)
 						{
-							label->setProperty("Image", "set:SumWarsExtra image:SkilltreeDiagConnection"); 
+							label->setProperty("Image", "set:SumWarsExtras image:SkilltreeDiagConnection"); 
 						}
 						else
 						{
-							label->setProperty("Image", "set:SumWarsExtra image:SkilltreeDiag2Connection");
+							label->setProperty("Image", "set:SumWarsExtras image:SkilltreeDiag2Connection");
 							start= CEGUI::UVector2(cegui_reldim(spos.m_x+0.07f), cegui_reldim( deppos.m_y+0.1f));
 							end= CEGUI::UVector2(cegui_reldim(deppos.m_x+0.06f), cegui_reldim( spos.m_y));
 							label->setPosition(start);

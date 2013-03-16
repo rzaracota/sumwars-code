@@ -89,7 +89,7 @@ void Worldmap::update()
 			label->setProperty("BackgroundEnabled", "false");
 			//label->setProperty("BackgroundColours", "tl:00000000 tr:00000000 bl:00000000 br:00000000"); 
 			label->setSize(CEGUI::UVector2(cegui_reldim(0.02f), cegui_reldim( 0.02f)));
-			label->setProperty("Image", "set:SumWarsExtra image:WaypointMark"); 
+			label->setProperty("Image", "set:SumWarsExtras image:WaypointMark"); 
 			label->setInheritsAlpha (false);
 			label->setAlwaysOnTop(true);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Worldmap::onWaypointClicked, this));
@@ -149,7 +149,7 @@ void Worldmap::update()
 					label->setProperty("BackgroundColour", "00000000");
 				}
 				label->setSize(CEGUI::UVector2(cegui_reldim(0.023f), cegui_reldim( 0.023f)));
-				label->setProperty("Image", "set:SumWarsExtra image:TownPortalSymbol");
+				label->setProperty("Image", "set:SumWarsExtras image:TownPortalSymbol");
 				label->setInheritsAlpha (false);
 				label->setAlwaysOnTop(true);
 				label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Worldmap::onWaypointClicked, this));

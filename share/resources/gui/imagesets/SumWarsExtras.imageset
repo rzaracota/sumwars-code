@@ -6,7 +6,7 @@ SWB is licensed under the terms of the LGPL license.
 version:      0.1
 Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
 -->
-<Imageset Name="SumWarsExtra" Imagefile="SumWarsExtra.png" NativeHorzRes="1920" NativeVertRes="1080" AutoScaled="false" >
+<Imageset Name="SumWarsExtras" Imagefile="SumWarsExtras.png" NativeHorzRes="1920" NativeVertRes="1080" AutoScaled="false" >
 
   <!-- Suffix Legend: 
     TL = top left; L = left; BL = bottom left; 

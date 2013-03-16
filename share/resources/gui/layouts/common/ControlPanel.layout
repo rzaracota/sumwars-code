@@ -262,7 +262,7 @@
                 <Property Name="AlwaysOnTop" Value="True" />
                 <Property Name="Alpha" Value="0" />
                 
-                <Window Type="TaharezLook/HPProgressBar" Name="HealthProgressBar" >
+                <Window Type="SumWarsExtras/HPProgressBar" Name="HealthProgressBar" >
                     <Property Name="StepSize" Value="0.01" />
                     <Property Name="RiseOnClick" Value="False" />
                     <Property Name="CurrentProgress" Value="0" />
