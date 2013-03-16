@@ -734,6 +734,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                 <ColourRectProperty name="FrameColours" />
             </FrameComponent>
         </ImagerySection>
+        
         <ImagerySection name="background">
             <ImageryComponent>
                 <Area>
@@ -755,12 +756,13 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     </Dim>
                 </Area>
                 <Image imageset="SWB" image="Static_M" />
-                <!--<ColourRectProperty name="BackgroundColours" />-->
+                <ColourRectProperty name="BackgroundColour" />
                 <Colours topLeft="FFFFFFFF" topRight="FFFFFFFF" bottomLeft="FFFFFFFF" bottomRight="FFFFFFFF" />
                 <VertFormat type="Stretched" />
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
         </ImagerySection>
+        
         <ImagerySection name="background_noframe">
             <ImageryComponent>
                 <Area>
@@ -770,7 +772,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
                 </Area>
                 <Image imageset="SWB" image="Static_M" />
-                <!--<ColourRectProperty name="BackgroundColours" />-->
+                <ColourRectProperty name="BackgroundColour" />
                 <Colours topLeft="FFFFFFFF" topRight="FFFFFFFF" bottomLeft="FFFFFFFF" bottomRight="FFFFFFFF" />
                 <VertFormat type="Stretched" />
                 <HorzFormat type="Stretched" />
@@ -788,7 +790,8 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     -->
     <WidgetLook name="SWB/StaticText">
         <PropertyDefinition name="FrameColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" />
-        <PropertyDefinition name="BackgroundColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" />
+        <!--<PropertyDefinition name="BackgroundColours" initialValue="tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000" redrawOnWrite="true" />-->
+        <PropertyDefinition name="BackgroundColour" initialValue="B2000000" />
         <Property name="FrameEnabled" value="True" />
         <Property name="BackgroundEnabled" value="True" />
         
@@ -965,22 +968,30 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         </StateImagery>
         <StateImagery name="WithFrameEnabledBackground">
             <Layer>
-                <Section look="SWB/StaticShared" section="background" />
+                <Section look="SWB/StaticShared" section="background">
+                    <ColourProperty name="BackgroundColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="WithFrameDisabledBackground">
             <Layer>
-                <Section look="SWB/StaticShared" section="background" />
+                <Section look="SWB/StaticShared" section="background">
+                    <ColourProperty name="BackgroundColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="NoFrameEnabledBackground">
             <Layer>
-                <Section look="SWB/StaticShared" section="background_noframe" />
+                <Section look="SWB/StaticShared" section="background_noframe">
+                    <ColourProperty name="BackgroundColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="NoFrameDisabledBackground">
             <Layer>
-                <Section look="SWB/StaticShared" section="background_noframe" />
+                <Section look="SWB/StaticShared" section="background_noframe">
+                    <ColourProperty name="BackgroundColour" />
+                </Section>
             </Layer>
         </StateImagery>
     </WidgetLook>
@@ -3516,7 +3527,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     ***************************************************
     -->
     <WidgetLook name="SWB/CustomTooltip">
+
         <PropertyDefinition name="CustomTooltipBackgroundTransparency" initialValue="F0222222" redrawOnWrite="true" />
+        
         <NamedArea name="TextArea">
             <Area>
                 <Dim type="LeftEdge" ><ImageDim imageset="SWB" image="TooltipLeftEdge" dimension="Width" /></Dim>

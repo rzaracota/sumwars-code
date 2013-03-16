@@ -61,6 +61,18 @@ public:
 		return ret;
 	}
 
+
+	/**
+		Get the magical colour to be used in a tooltip, for an item laying on the ground.
+		@author Augustin Preda.
+	*/
+	static std::string getGroundItemMagicalHexColourCode ()
+	{
+		std::string ret ("FFA0A0FF"); // previously "FF00C000"
+		return ret;
+	}
+
+
 	/**
 		Get the magical colour to be used in a tooltip, in the format that would be applied to a CEGUI text.
 		@author Augustin Preda.

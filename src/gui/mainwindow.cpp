@@ -52,6 +52,9 @@
 #include "contenteditor.h"
 #endif
 
+// Generic colour settings.
+#include "tooltipsettings.h"
+
 
 MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc)
 {
@@ -1035,7 +1038,7 @@ bool MainWindow::setupItemInfo()
 	}
 	else if (label->isPropertyPresent ("BackgroundColour"))
 	{
-		label->setProperty("BackgroundColour", "77000000"); 
+		label->setProperty("BackgroundColour", "B2000000"); 
 	}
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.08f), cegui_reldim( 0.03f)));
@@ -1181,7 +1184,7 @@ void MainWindow::setupChatContent()
 	}
 	else if (label->isPropertyPresent ("BackgroundColour"))
 	{
-		label->setProperty("BackgroundColour", "44000000");
+		label->setProperty("BackgroundColour", "B2000000");
 	}
 	label->setProperty("VertFormatting", "VertCentred");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
@@ -1630,7 +1633,11 @@ void MainWindow::updateObjectInfo()
 				std::string propnew = "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF";
 				if (itm->m_rarity == Item::MAGICAL)
 				{
-					propnew = "tl:FF8888FF tr:FF8888FF bl:FF8888FF br:FF8888FF";
+					std::string magicColour = TooltipSettings::getGroundItemMagicalHexColourCode ();
+					std::stringstream ssColour;
+					ssColour << "tl:" << magicColour << " tr:" << magicColour << " bl:" << magicColour << " br:" << magicColour;
+					propnew = ssColour.str ();
+					//propnew = "tl:FF8888FF tr:FF8888FF bl:FF8888FF br:FF8888FF";
 				}
 				if (propold != propnew)
 				{
@@ -1986,7 +1993,7 @@ void MainWindow::updateItemInfo()
 				}
 				else if (label->isPropertyPresent ("BackgroundColour"))
 				{
-					label->setProperty("BackgroundColour", "77000000");
+					label->setProperty("BackgroundColour", "B2000000");
 				}
 				label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
 				label->setSize(CEGUI::UVector2(cegui_reldim(reallen), cegui_reldim( 0.03f)));
@@ -2024,7 +2031,11 @@ void MainWindow::updateItemInfo()
 			propnew = "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF";
 			if (di->getItem()->m_rarity == Item::MAGICAL)
 			{
-				propnew = "tl:FF8888FF tr:FF8888FF bl:FF8888FF br:FF8888FF";
+				std::string magicColour = TooltipSettings::getGroundItemMagicalHexColourCode ();
+				std::stringstream ssColour;
+				ssColour << "tl:" << magicColour << " tr:" << magicColour << " bl:" << magicColour << " br:" << magicColour;
+				propnew = ssColour.str ();
+				//propnew = "tl:FF8888FF tr:FF8888FF bl:FF8888FF br:FF8888FF";
 			}
 			if (propold != propnew)
 			{
