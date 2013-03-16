@@ -14,7 +14,7 @@
  */
 
 #include "chatline.h"
-#include "gui/ceguiutility.h"
+#include "ceguiutility.h"
 
 ChatLine::ChatLine (Document* doc, const std::string& ceguiSkinName)
 	: Window(doc)
