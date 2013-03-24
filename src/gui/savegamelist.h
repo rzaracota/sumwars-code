@@ -107,6 +107,11 @@ class SavegameList : public Window
 		 * \brief The name of the CEGUI skin to use.
 		 */
 		std::string m_ceguiSkinName;
+
+		/**
+		 * \brief The mapping between the file names and the buttons used for the chars.
+		 */
+		std::map <std::string, std::string> m_fileSaveMapping;
 };
 
 #endif

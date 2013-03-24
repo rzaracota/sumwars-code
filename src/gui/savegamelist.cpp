@@ -117,6 +117,8 @@ void SavegameList::update()
 			{
 				saveItem = win_mgr.getWindow(s.str().append("SaveItemRoot"));
 				m_currentSelected = saveItem;
+				// Store the file name in a mapping, along with this widget name
+				m_fileSaveMapping [s.str().append("SaveItemRoot")] = it->filename;
 			}
 			catch(CEGUI::UnknownObjectException&)
 			{
@@ -124,6 +126,9 @@ void SavegameList::update()
 				m_currentSelected = saveItem;
 				saveItem->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onSavegameChosen, this));
 				m_window->addChildWindow(saveItem);
+
+				// Store the mapping entry;
+				m_fileSaveMapping [s.str().append("SaveItemRoot/DelChar")] = it->filename;
 				
 				// make buttons resolution independant
 				saveItem->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_absdim((height + 2.0f)*n)));
@@ -257,10 +262,23 @@ bool SavegameList::onSavegameChosen(const CEGUI::EventArgs& evt)
 	const CEGUI::WindowEventArgs& we = static_cast<const CEGUI::WindowEventArgs&>(evt);
 	
 	std::string prefix = we.window->getName().c_str();
+	std::string saveWidgetName = prefix;
+
 	prefix.erase(prefix.length()-12, prefix.length());
 
 	std::string name = we.window->getChild(prefix.append("SaveItemRoot/Name"))->getText().c_str();
-	name.append(".sav");
+
+	// Get the file mapped to this widget: if we have a mapping, use the mapped name, otherwise, just add an extension and try to use the same file name as the char name.
+	std::map <std::string, std::string>::const_iterator it = m_fileSaveMapping.find (saveWidgetName);
+	if (it != m_fileSaveMapping.end ())
+	{
+		name = m_fileSaveMapping [saveWidgetName];
+		DEBUG ("got mapping for [%s] as [%s]", saveWidgetName.c_str (), name.c_str ());
+	}
+	else
+	{
+		name.append(".sav");
+	}
 
 	m_document->setSaveFile(name.c_str());
 	DEBUGX("selected Savegame %s", sitm->m_data.c_str());
