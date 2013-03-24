@@ -665,9 +665,14 @@ void Scene::updateCharacterView()
 			// aktion temporaer fuer den Renderaufruf auf noaction setzen
 			Action actsave = *(pl->getAction());
 			Action tmpact("noaction");
-			pl->setAction(tmpact);
 			std::string act = pl->getActionString();
-			
+#if 0
+			// Commented out functionality to allow fix of Mantis ID:0000075 (http://sumwars.org/mantis/view.php?id=75)
+
+			pl->setAction(tmpact);
+			act = pl->getActionString();
+			DEBUG ("Current action string after is: %s", act.c_str ());
+#endif
 			m_temp_player_object->updateAction(act,0.5);
 			m_temp_player_object->update(0);
 			
