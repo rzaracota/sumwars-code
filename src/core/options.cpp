@@ -86,6 +86,9 @@ void Options::init()
 	m_special_keys.insert(OIS::KC_8);
 	m_special_keys.insert(OIS::KC_9);
 
+	// Note: the default keys for opening the Debug and Content Editor windows are CTRL + D and CTRL + K.
+	// They are hardcoded in debugpanel.cpp and contenteditor.cpp
+
 	m_difficulty = NORMAL;
 	m_text_speed = 1.0;
 	m_enemy_highlight_color = "red";
