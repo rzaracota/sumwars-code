@@ -45,7 +45,7 @@
  */
 
 class Application
-	: public Ogre::WindowEventListener
+    : public Ogre::WindowEventListener, public Ogre::RenderSystem::Listener
 
 {
 
@@ -96,6 +96,11 @@ class Application
 		 * (You could trigger non-rendering functions here, such as pausing or resuming the music. Keep in mind synchronization issues for multithreading!)
 		 */
 		virtual void windowFocusChange (Ogre::RenderWindow* rw);
+
+        /**
+         * \brief React to certain Render system events
+         */
+        virtual void eventOccurred(const Ogre::String &eventName, const Ogre::NameValuePairList *parameters);
 
 		// ------------------------- Other functions ----------------------
 
