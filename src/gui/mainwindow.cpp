@@ -778,6 +778,7 @@ bool MainWindow::setupGameScreen()
 
 		// Oberstes Fenster der Hauptmenue Schicht
 		m_game_screen =  win_mgr.createWindow("DefaultWindow", "GameScreen");
+        m_game_screen->setMousePassThroughEnabled(true);
 
 		// Kontrollleiste anlegen
 		setupControlPanel();
@@ -2575,13 +2576,13 @@ Vector MainWindow::getIngamePos(float screenx, float screeny, bool relative)
 }
 
 // MouseListener
-bool MainWindow::mouseMoved(const OIS::MouseEvent &evt) {
-	m_cegui_system->injectMouseWheelChange(evt.state.Z.rel);
-	
-	
-	//return m_cegui_system->injectMouseMove(evt.state.X.rel, evt.state.Y.rel);
-	//DEBUG("injection position %i %i",evt.state.X.abs,evt.state.Y.abs);
-	m_document->onMouseMove(evt.state.X.rel, evt.state.Y.rel,evt.state.Z.rel);
+bool MainWindow::mouseMoved(const OIS::MouseEvent &evt)
+{
+    //DEBUG("injection position %i %i",evt.state.X.abs,evt.state.Y.abs);
+    if(m_cegui_system->injectMouseWheelChange(evt.state.Z.rel))
+        m_document->onMouseMove(evt.state.X.rel, evt.state.Y.rel, 0);
+    else
+        m_document->onMouseMove(evt.state.X.rel, evt.state.Y.rel,evt.state.Z.rel);
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label = win_mgr.getWindow("CursorItemImage");
