@@ -376,7 +376,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 		}
 		else
 		{
-            DEBUG ("Options Window init: could not find item named %s", widgetName.c_str());
+			DEBUG ("Options Window init: could not find item named %s", widgetName.c_str());
 		}
 	}
 

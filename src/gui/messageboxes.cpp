@@ -174,7 +174,7 @@ WarningDialogWindow::WarningDialogWindow (Document* doc)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	
-	CEGUI::FrameWindow* warning_dialog = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("WarningDialogWindow.layout");
+	CEGUI::FrameWindow* warning_dialog = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("warningdialogwindow.layout");
 	m_window = warning_dialog;
 	m_warning = "";
 	
