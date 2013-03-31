@@ -788,7 +788,9 @@ bool Application::initGettext()
 {
 	DEBUG("initializing internationalisation");
 	Ogre::StringVectorPtr path = Ogre::ResourceGroupManager::getSingleton().findResourceLocation("translation", "*");
+	DEBUG("Application initializing Gettext lib with [%s]", path.get ()->at (0).c_str ());
 	Gettext::init("", path.get()->at(0));
+	DEBUG("Application initializing Gettext locale is [%s]", Gettext::getLocale ());
 	return true;
 }
 

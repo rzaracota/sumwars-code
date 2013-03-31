@@ -95,10 +95,9 @@ void Gettext::init(const char* locale, std::string pathToTranslationFiles)
 
 	textdomain ("menu");
 
-#ifndef WIN32
-	Gettext::setLocale(locale);
-#endif
-
+	// Augustin Preda, 2013.03.25: Made the code always call the setLocale, and added a special handling for Windows
+	// This is done to fix the mantis bug with ID: 46 ( http://sumwars.org/mantis/view.php?id=46 )
+	Gettext::setLocale (locale);
 
 }
 
@@ -132,19 +131,16 @@ void Gettext::setLocale(const char* loc)
          locale = loc;
     }
 
-    DEBUGX("set new language %s",locale.c_str());
+    DEBUG ("set new language [%s]",locale.c_str());
 
 	if (locale != m_locale)
 	{
 #ifdef WIN32
 		if (locale.empty())
 		{
-			char tmp[100];
-			GetLocaleInfo(LOCALE_USER_DEFAULT,
-						  LOCALE_SISO639LANGNAME,
-						  tmp, sizeof(tmp));
-			locale = tmp;
+			locale = getDefaultUsableLocale ();
 		}
+
 
 		if (!locale.empty())
 		{
@@ -202,6 +198,44 @@ void Gettext::setLocale(const char* loc)
 			DEBUGX("setting locale %s not succesful",locale);
 		}
 	}
+	else
+	{
+#ifdef WIN32
+		// old and new locale are identical.
+		// But what if the locales are both identical and empty? A special case for Windows environments.
+		if (locale.empty())
+		{
+			DEBUG ("Gettext received empty locale. Initializing with OS default");
+			locale = getDefaultUsableLocale ();
+			DEBUG ("Gettext received empty locale. Initialized with OS default: %s", locale.c_str ());
+		}
+
+
+		if (!locale.empty())
+		{
+			std::string win_locale(locale, 0, 2);
+			std::string env = "LANGUAGE=" + win_locale;
+
+			_putenv(env.c_str());
+			SetEnvironmentVariable("LANGUAGE", win_locale.c_str());
+
+			char lang[50];
+			GetEnvironmentVariable("LANGUAGE",lang,50);
+			DEBUGX("current language (GetEnvironmentVariable) %s",lang);
+			DEBUGX("current language (getenv) %s",getenv("LANGUAGE"));
+
+			if (setWinThreadLocale (win_locale) == 0)
+			{
+				DEBUG ("Could not change locale to %s", win_locale.c_str ());
+				return;
+			}
+
+			m_locale = locale;
+			m_changed = true;
+			return;
+		}
+#endif
+	}
 }
 
 bool Gettext::getLocaleChanged()
@@ -237,4 +271,29 @@ int Gettext::getLanguageCodeFromString (const std::string& languageString)
 	}
 	return -1;
 }
+
+
+
+std::string Gettext::getDefaultUsableLocale ()
+{
+	char tmp[100];
+	GetLocaleInfo(LOCALE_USER_DEFAULT,
+					LOCALE_SISO639LANGNAME,
+					tmp, sizeof(tmp));
+	std::string myLocale = tmp;
+
+	// Search for the language in the mapping.
+	for (std::map <std::string, int>::iterator it = winLanguageMappings_.begin ();
+		it != winLanguageMappings_.end (); ++ it)
+	{
+		if (it->first == myLocale)
+		{
+			return it->first;
+		}
+	}
+
+	return std::string ("en");
+}
+
+
 #endif // WIN32

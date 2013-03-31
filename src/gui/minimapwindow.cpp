@@ -226,7 +226,11 @@ void MinimapWindow::update()
 	// Check to see whether the label displaying the region name needs to be updated.
 	label = win_mgr.getWindow("RegionNameLabel");
 	
-	CEGUI::String actualRegionName = (CEGUI::utf8*) dgettext("sumwars",region->getName().c_str());
+	std::string regionName (region->getName ());
+	DEBUG ("Got region name as: [%s]", regionName.c_str ());
+
+	CEGUI::String actualRegionName = (CEGUI::utf8*) dgettext("sumwars",regionName.c_str());
+	DEBUG ("Got actual region name as: [%s]", actualRegionName.c_str ());
 
 	if (actualRegionName != label->getText())
 	{
