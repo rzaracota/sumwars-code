@@ -21,7 +21,7 @@ SaveExitWindow::SaveExitWindow (Document* doc)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	
-	CEGUI::FrameWindow* save_exit = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("SaveExitWindow.layout");
+	CEGUI::FrameWindow* save_exit = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("saveexitwindow.layout");
 	m_window = save_exit;
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("GameExitConfirmButton"));
@@ -226,7 +226,7 @@ ErrorDialogWindow::ErrorDialogWindow (Document* doc)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 
-	CEGUI::FrameWindow* error_dialog = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("ErrorDialogWindow.layout");
+	CEGUI::FrameWindow* error_dialog = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("errordialogwindow.layout");
 	m_window = error_dialog;
 	m_error = "Network connection timed out";
 	

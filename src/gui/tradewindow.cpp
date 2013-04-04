@@ -30,10 +30,10 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
 	// Rahmen fuer Inventar Fenster
-	CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("TradeWindow.layout");
+	CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("tradewindow.layout");
 	if (!trade)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "TradeWindow.layout");
+		DEBUG ("WARNING: Failed to load [%s]", "tradewindow.layout");
 	}
 	CEGUI::Window* trade_holder = win_mgr.loadWindowLayout( "tradewindow_holder.layout" );
 	if (!trade_holder)

@@ -45,10 +45,10 @@ SkillTree::SkillTree (Document* doc, OIS::Keyboard *keyboard, const std::string&
 	
 	m_player_id =0;
 	
-	CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.loadWindowLayout( "SkillTree.layout" );
+	CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.loadWindowLayout( "skilltree.layout" );
 	if (!skilltree)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "SkillTree.layout");
+		DEBUG ("WARNING: Failed to load [%s]", "skilltree.layout");
 	}
 	CEGUI::Window* skilltree_holder = win_mgr.loadWindowLayout( "skilltree_holder.layout" );
 	if (!skilltree_holder)

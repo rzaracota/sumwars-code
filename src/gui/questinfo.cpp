@@ -28,10 +28,10 @@ QuestInfo::QuestInfo (Document* doc, const std::string& ceguiSkinName)
 	
 
 	// Rahmen fuer das Menue Savegame auswaehlen
-	CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("QuestInfo.layout");
+	CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("questinfo.layout");
 	if (!quest_info)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "QuestInfo.layout");
+		DEBUG ("WARNING: Failed to load [%s]", "questinfo.layout");
 	}
 	CEGUI::Window* quest_info_holder = win_mgr.loadWindowLayout( "questinfo_holder.layout" );
 	if (!quest_info_holder)

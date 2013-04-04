@@ -33,7 +33,7 @@ LuaScriptTab::LuaScriptTab (const CEGUI::String& type, const CEGUI::String& name
 	setText("Lua");
 	m_newFileCtr = 0;
 	
-	m_tabLayout = WindowManager::getSingleton().loadWindowLayout("LuaScriptTab.layout");
+	m_tabLayout = WindowManager::getSingleton().loadWindowLayout("luascripttab.layout");
 	m_tabLayout->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
 	m_tabLayout->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 

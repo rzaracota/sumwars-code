@@ -54,7 +54,7 @@ void ContentEditor::init(bool visible)
 	gameScreen->addChildWindow(m_rootWindow);
 	
 	CEGUI::Window* rootWindow;
-	rootWindow = CEGUI::WindowManager::getSingleton().loadWindowLayout("ContentEditor.layout");
+	rootWindow = CEGUI::WindowManager::getSingleton().loadWindowLayout("contenteditor.layout");
 	rootWindow->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
 	rootWindow->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	m_rootWindow->addChildWindow(rootWindow);

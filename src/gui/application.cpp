@@ -32,7 +32,7 @@
 //#include "reloadtab.h"
 //content editor
 #include "contenteditor.h"
-#include "guiTabs.h"
+#include "guitabs.h"
 #endif
 //#include "CEGUI/ScriptingModules/LuaScriptModule/CEGUILua.h"
 

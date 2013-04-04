@@ -24,10 +24,10 @@ HostGameWindow::HostGameWindow (Document* doc)
 	CEGUI::Editbox* box;
 
 	// The host game window and holder
-	CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("HostGameWindow.layout");
+	CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("hostgamewindow.layout");
 	if (!host_game)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "HostGameWindow.layout");
+		DEBUG ("WARNING: Failed to load [%s]", "hostgamewindow.layout");
 	}
 
 	CEGUI::Window* host_game_holder = win_mgr.loadWindowLayout( "hostgamewindow_holder.layout" );
@@ -195,10 +195,10 @@ JoinGameWindow::JoinGameWindow (Document* doc)
 	CEGUI::Editbox* box;
 
 	// The join game window and holder.
-	CEGUI::FrameWindow* join_game = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("JoinGameWindow.layout");
+	CEGUI::FrameWindow* join_game = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("joingamewindow.layout");
 	if (!join_game)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "JoinGameWindow.layout");
+		DEBUG ("WARNING: Failed to load [%s]", "joingamewindow.layout");
 	}
 
 	CEGUI::Window* join_game_holder = win_mgr.loadWindowLayout( "joingamewindow_holder.layout" );
