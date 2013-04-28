@@ -24,10 +24,10 @@ CharInfo::CharInfo (Document* doc)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	// The CharInfo window and holder
-	CEGUI::FrameWindow* char_info = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "CharacterScreen.layout" );
+	CEGUI::FrameWindow* char_info = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "characterscreen.layout" );
 	if (!char_info)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "CharacterScreen.layout");
+		DEBUG ("WARNING: Failed to load [%s]", "characterscreen.layout");
 	}
 
 	CEGUI::Window* char_info_holder = win_mgr.loadWindowLayout( "characterscreen_holder.layout" );

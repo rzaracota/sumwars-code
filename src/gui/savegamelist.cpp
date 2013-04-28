@@ -122,7 +122,7 @@ void SavegameList::update()
 			}
 			catch(CEGUI::UnknownObjectException&)
 			{
-				saveItem = (CEGUI::Window*) win_mgr.loadWindowLayout("SaveItem.layout", s.str());
+				saveItem = (CEGUI::Window*) win_mgr.loadWindowLayout("saveitem.layout", s.str());
 				m_currentSelected = saveItem;
 				saveItem->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onSavegameChosen, this));
 				m_window->addChildWindow(saveItem);

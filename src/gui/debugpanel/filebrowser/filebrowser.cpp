@@ -40,7 +40,7 @@ void FileBrowser::init(CEGUI::String defaultDir, FileBrowserType type, bool visi
 	m_winManager = WindowManager::getSingletonPtr();
 	m_gameScreen = m_winManager->getWindow("GameScreen");
 
-	m_rootWindow = m_winManager->loadWindowLayout("FileBrowser.layout");
+	m_rootWindow = m_winManager->loadWindowLayout("filebrowser.layout");
 	m_gameScreen->addChildWindow(m_rootWindow);
 	m_rootWindow->setVisible(visible);
 

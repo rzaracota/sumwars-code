@@ -13,7 +13,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "guiTabs.h"
+#include "guitabs.h"
 
 #include "Ogre.h"
 #include "OgrePlatformInformation.h"
@@ -38,7 +38,7 @@ CEGUI::String GuiTabs::WidgetTypeName = "GuiTabs";
 GuiTabs::GuiTabs(const CEGUI::String& type, const CEGUI::String& name): CEGUI::Window(type, name), ContentTab(), Ogre::LogListener()
 {
 	//m_tabLayout->getChild("windowUnderMouseStaticText")->setText(win->getName());
-	m_tabLayout = CEGUI::WindowManager::getSingleton().loadWindowLayout("ContentEditor.layout");
+	m_tabLayout = CEGUI::WindowManager::getSingleton().loadWindowLayout("contenteditor.layout");
 	m_tabLayout->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
 	m_tabLayout->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	this->addChildWindow(m_tabLayout);

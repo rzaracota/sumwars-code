@@ -39,7 +39,7 @@ BenchmarkTab::BenchmarkTab(const CEGUI::String& type, const CEGUI::String& name)
 {
 	setText("Benchmark");
 
-	m_tabLayout = CEGUI::WindowManager::getSingleton().loadWindowLayout("BenchmarkTab.layout");
+	m_tabLayout = CEGUI::WindowManager::getSingleton().loadWindowLayout("benchmarktab.layout");
 	m_tabLayout->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
 	m_tabLayout->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	this->addChildWindow(m_tabLayout);

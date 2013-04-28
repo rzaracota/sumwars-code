@@ -25,10 +25,10 @@ ControlPanel::ControlPanel (Document* doc)
 	std::string name;
 
 	// Rahmen fuer die untere Kontrollleiste
-	CEGUI::FrameWindow* ctrl_panel = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("ControlPanel.layout");
+	CEGUI::FrameWindow* ctrl_panel = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("controlpanel.layout");
 	if (!ctrl_panel)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "ControlPanel.layout");
+		DEBUG ("WARNING: Failed to load [%s]", "controlpanel.layout");
 	}
 
 	CEGUI::Window* ctrl_panel_holder = win_mgr.loadWindowLayout( "controlpanel_holder.layout" );

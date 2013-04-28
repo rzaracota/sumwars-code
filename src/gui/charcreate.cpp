@@ -31,7 +31,7 @@ CharCreate::CharCreate (Document* doc, const std::string& ceguiSkinName)
 	
 
 	// Rahmen fuer das Menue Savegame auswaehlen
-	CEGUI::FrameWindow* char_create = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("CharCreate.layout");
+	CEGUI::FrameWindow* char_create = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("charcreate.layout");
 	m_window = char_create;
 	m_window->setMousePassThroughEnabled(true);
 	
