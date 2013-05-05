@@ -93,13 +93,16 @@
                             <origin>inst/share</origin>
                         </distributionDirectory>
                         <distributionFile>
-                            <origin>inst/sumwars.exe</origin>
+                            <origin>inst/AUTHORS</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>inst/COPYING</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>inst/README</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/alut.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>inst/AUTHORS</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/CEGUIBase.dll</origin>
@@ -117,16 +120,13 @@
                             <origin>inst/cg.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/COPYING</origin>
-                        </distributionFile>
-                        <distributionFile>
                             <origin>inst/libiconv2.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/libintl3.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/lua51.dll</origin>
+                            <origin>inst/lua.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/OgreMain.dll</origin>
@@ -147,13 +147,7 @@
                             <origin>inst/OIS.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/OIS_d.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
                             <origin>inst/physfs.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>inst/Plugin_BSPSceneManager.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/Plugin_CgProgramManager.dll</origin>
@@ -174,13 +168,13 @@
                             <origin>inst/PocoFoundation.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/README</origin>
-                        </distributionFile>
-                        <distributionFile>
                             <origin>inst/RenderSystem_Direct3D9.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/RenderSystem_GL.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>inst/sumwars.exe</origin>
                         </distributionFile>
                     </distributionFileList>
                     <shortcutList>

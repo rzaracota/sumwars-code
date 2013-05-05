@@ -85,23 +85,47 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 
 	CEGUI::FrameWindow* lbl;
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton/Label"));
-	lbl->setMousePassThroughEnabled(true);
+	if (win_mgr.isWindowPresent ("SinglePlayerButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton/Label"));
+		lbl->setMousePassThroughEnabled(true);
+	}
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerJoinButton/Label"));
-	lbl->setMousePassThroughEnabled(true);
+	if (win_mgr.isWindowPresent ("ServerJoinButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerJoinButton/Label"));
+		lbl->setMousePassThroughEnabled(true);
+	}
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerHostButton/Label"));
-	lbl->setMousePassThroughEnabled(true);
+	if (win_mgr.isWindowPresent ("ServerHostButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerHostButton/Label"));
+		lbl->setMousePassThroughEnabled(true);
+	}
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("CreditsButton/Label"));
-	lbl->setMousePassThroughEnabled(true);
+	if (win_mgr.isWindowPresent ("CreditsButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("CreditsButton/Label"));
+		lbl->setMousePassThroughEnabled(true);
+	}
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton/Label"));
-	lbl->setMousePassThroughEnabled(true);
+	if (win_mgr.isWindowPresent ("MainOptionsButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton/Label"));
+		lbl->setMousePassThroughEnabled(true);
+	}
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
-	lbl->setMousePassThroughEnabled(true);
+	if (win_mgr.isWindowPresent ("EndGameButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
+		lbl->setMousePassThroughEnabled(true);
+	}
 
 
 	Ogre::Root *root = Ogre::Root::getSingletonPtr();
@@ -130,23 +154,66 @@ void MainMenu::updateTranslation()
 	CEGUI::FrameWindow* lbl;
 
 	// Update the button labels.
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton/Label"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Single player"));
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerJoinButton/Label"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerJoinButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Join game"));
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerHostButton/Label"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerHostButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Host game"));
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("CreditsButton/Label"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("CreditsButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Credits"));
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton/Label"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Options"));
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Quit"));
+
+	if (win_mgr.isWindowPresent ("SinglePlayerButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton/Label"));
+		lbl->setText((CEGUI::utf8*) gettext("Single player"));
+	}
+
+	if (win_mgr.isWindowPresent ("ServerJoinButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerJoinButton/Label"));
+		lbl->setText((CEGUI::utf8*) gettext("Join game"));
+	}
+
+	if (win_mgr.isWindowPresent ("ServerHostButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerHostButton/Label"));
+		lbl->setText((CEGUI::utf8*) gettext("Host game"));
+	}
+
+	if (win_mgr.isWindowPresent ("CreditsButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("CreditsButton/Label"));
+		lbl->setText((CEGUI::utf8*) gettext("Credits"));
+	}
+
+	if (win_mgr.isWindowPresent ("MainOptionsButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton/Label"));
+		lbl->setText((CEGUI::utf8*) gettext("Options"));
+	}
+
+	if (win_mgr.isWindowPresent ("EndGameButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
+		lbl->setText((CEGUI::utf8*) gettext("Quit"));
+	}
+
 
 	// Update message windows
 	//lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("DeleteCharLabel")); // note: this has no in-between slash!
