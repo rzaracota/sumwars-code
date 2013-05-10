@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2013-05-10 16:33+0200\n"
+"PO-Revision-Date: 2013-05-10 20:17+0200\n"
 "Last-Translator: Stefan Stammberger <some.fusion@gmail.com>\n"
 "Language-Team: German "
 "<http://hosted.weblate.org/projects/sumwars/tutorial/de/>\n"
@@ -25,7 +25,7 @@ msgstr "Tutorial"
 
 #: tutorial.xml:11
 msgid "Tutorial finished"
-msgstr "Tutorial finished"
+msgstr "Tutorial beendet"
 
 #: tutorial.xml:14
 msgid "Hand your weapon over to Derred."
@@ -49,7 +49,7 @@ msgstr "Töte alle Abkömmlinge des Behemoth."
 
 #: tutorial.xml:24
 msgid "Quest description"
-msgstr "Quest description"
+msgstr "Quest Beschreibung"
 
 #: tutorial.xml:28 tutorial.xml:463 tutorial.xml:952 tutorial.xml:1079
 #: tutorial.xml:1153 tutorial.xml:1543 tutorial.xml:1709 tutorial.xml:1886
