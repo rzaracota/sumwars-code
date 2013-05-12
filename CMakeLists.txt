@@ -189,7 +189,7 @@ if(WIN32)
 endif(WIN32)
 #set(Boost_DEBUG 1) #uncomment this if you have problems finding boost!
 
-find_package(Boost COMPONENTS system date_time chrono thread REQUIRED)
+find_package(Boost COMPONENTS filesystem system date_time chrono thread REQUIRED)
 
 IF(SUMWARS_BUILD_TOOLS)
   FIND_PACKAGE(POCO REQUIRED)
