@@ -52,6 +52,9 @@
 #include "contenteditor.h"
 #endif
 
+// Generic colour settings.
+#include "tooltipsettings.h"
+
 
 MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc)
 {
@@ -76,6 +79,9 @@ MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::Re
 bool MainWindow::init()
 {
 	bool result = true;
+
+	m_ceguiSkinName = Options::getInstance ()->getCeguiSkin ();
+	DEBUG ("Main Window (init): Cegui skin name found in options as: [%s]", m_ceguiSkinName.c_str ());
 
 	// Eingabegeraete initialisieren
 	result &= initInputs();
@@ -145,44 +151,76 @@ bool MainWindow::initInputs()
 	return true;
 }
 
+
 bool MainWindow::setupMainMenu()
 {
 	try
 	{
-
-		
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
 		// Oberstes Fenster der Hauptmenue Schicht
 		m_main_menu = win_mgr.createWindow("DefaultWindow", "MainMenu");
-				
-		CEGUI::Window* img;
-		img  = win_mgr.createWindow("TaharezLook/StaticImage", "StartScreenImage");
-		m_main_menu->addChildWindow(img);
-        img->setProperty("Image", "set:startscreen.png image:full_image");
-		img->moveToBack ();
-		img->setMousePassThroughEnabled(true);
+
+		CEGUI::Window* start_screen_holder = win_mgr.loadWindowLayout ("startscreen.layout");
+
+		if (start_screen_holder)
+		{
+			m_main_menu->addChildWindow (start_screen_holder);
+
+			if (win_mgr.isWindowPresent ("StartScreenImage"))
+			{
+				CEGUI::Window* temp = win_mgr.getWindow ("StartScreenImage");
+				temp->setMousePassThroughEnabled (true);
+			}
+			if (win_mgr.isWindowPresent ("StartScreenRoot"))
+			{
+				CEGUI::Window* temp = win_mgr.getWindow ("StartScreenRoot");
+				temp->setMousePassThroughEnabled (true);
+			}
+			if (win_mgr.isWindowPresent ("LoadRessourcesProgressBar"))
+			{
+				CEGUI::Window* temp = win_mgr.getWindow ("LoadRessourcesProgressBar");
+				temp->setMousePassThroughEnabled (true);
+			}
+		}
+		else
+		{
+			DEBUG ("WARNING: Failed to load [%s]", "characterscreen_holder.layout");
+			// TODO: remove code when no longer needed - begin
+			CEGUI::Window* img;
+
+			img  = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "StartScreenImage");
+			m_main_menu->addChildWindow(img);
+			img->setProperty("Image", "set:SumWarsLogo.png image:full_image");
+			img->moveToBack ();
+			img->setProperty ("FrameEnabled", "False");
+			img->setMousePassThroughEnabled(true);
 		
-		CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", "LoadRessourcesProgressBar"));
-		m_main_menu->addChildWindow(bar);
-		bar->setPosition(CEGUI::UVector2(cegui_reldim(0.3f), cegui_reldim( 0.9f)));
-		bar->setSize(CEGUI::UVector2(cegui_reldim(0.40f), cegui_reldim( 0.05f)));
-		bar->setWantsMultiClickEvents(false);
-		bar->setProgress(0.0);
-		
-		CreditsWindow* crd = new CreditsWindow(m_document);
+			CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow(CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ProgressBar"), "LoadRessourcesProgressBar"));
+			m_main_menu->addChildWindow(bar);
+			bar->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.9f)));
+			bar->setSize(CEGUI::UVector2(cegui_reldim(0.70f), cegui_reldim( 0.04f)));
+			bar->setWantsMultiClickEvents(false);
+			bar->setProgress(0.0);
+			bar->setProperty ("GS_DarkerThemeColour", "FF005464");
+			bar->setProperty ("GS_LighterThemeColour", "FF13C6BC");
+			bar->setProperty ("GS_MainThemeColour", "FF13868B");
+			bar->setProperty ("GS_MainThemeGradientLeftToRight", "tl:00FFFFFF tr:FF13C6BC bl:00FFFFFF br:FF13C6BC");
+			// TODO: remove code when no longer needed - end
+		}
+		CreditsWindow* crd = new CreditsWindow (m_document, m_ceguiSkinName);
 		m_sub_windows["CreditsWindow"] = crd;
 		m_main_menu->addChildWindow(crd->getCEGUIWindow());
 
-		Window * wnd = new MainMenu(m_document);
+		Window * wnd = new MainMenu(m_document, m_ceguiSkinName);
 		m_sub_windows["MainMenu"] = wnd;
 		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
 		
-		wnd = new CharCreate(m_document);
+		wnd = new CharCreate (m_document, m_ceguiSkinName);
 		m_sub_windows["CharCreate"] = wnd;
 		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
 		
-		wnd = new OptionsWindow(m_document,m_keyboard);
+		wnd = new OptionsWindow(m_document,m_keyboard, m_ceguiSkinName);
 		m_sub_windows["Options"] = wnd;
 		m_main_menu->addChildWindow(wnd->getCEGUIWindow());
 		
@@ -350,7 +388,7 @@ void MainWindow::update(float time)
 			credits->setVisible(false);
 		}
 		
-		CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) win_mgr.getWindow("HostGameWindow");
+		CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) win_mgr.getWindow("HostGameWindow_Holder");
 		if (wflags & Document::HOST_GAME)
 		{
 			m_sub_windows["HostGame"]->update();
@@ -361,7 +399,7 @@ void MainWindow::update(float time)
 			host_game->setVisible(false);
 		}
 		
-		CEGUI::FrameWindow* join_game = (CEGUI::FrameWindow*) win_mgr.getWindow("JoinGameWindow");
+		CEGUI::FrameWindow* join_game = (CEGUI::FrameWindow*) win_mgr.getWindow("JoinGameWindow_Holder");
 		if (wflags & Document::JOIN_GAME)
 		{
 			m_sub_windows["JoinGame"]->update();
@@ -372,11 +410,20 @@ void MainWindow::update(float time)
 			join_game->setVisible(false);
 		}
 		
-		CEGUI::FrameWindow* options = (CEGUI::FrameWindow*) win_mgr.getWindow("OptionsWindow");
+		CEGUI::FrameWindow* options = 0;
+		if (win_mgr.isWindowPresent ("OptionsWindow_Holder"))
+		{
+			options = (CEGUI::FrameWindow*) win_mgr.getWindow("OptionsWindow_Holder");
+		}
+		else
+		{
+			options = (CEGUI::FrameWindow*) win_mgr.getWindow("OptionsWindow");
+		}
 		if (wflags & Document::OPTIONS)
 		{
 			static_cast<OptionsWindow*>(m_sub_windows["Options"])->reset();
 			options->setVisible(true);
+			options->activate ();
 		}
 		else
 		{
@@ -416,7 +463,7 @@ void MainWindow::update(float time)
 		if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		{
 			// Charinfo anzeigen wenn entsprechendes Flag gesetzt
-			CEGUI::FrameWindow* char_info = (CEGUI::FrameWindow*) win_mgr.getWindow("CharInfo");
+			CEGUI::FrameWindow* char_info = (CEGUI::FrameWindow*) win_mgr.getWindow("CharInfo_Holder");
 			if (wflags & Document::CHARINFO)
 			{
 				char_info->setVisible(true);
@@ -427,7 +474,7 @@ void MainWindow::update(float time)
 			}
 	
 			// Inventar anzeigen wenn entsprechendes Flag gesetzt
-			CEGUI::FrameWindow* inventory = (CEGUI::FrameWindow*) win_mgr.getWindow("Inventory");
+			CEGUI::FrameWindow* inventory = (CEGUI::FrameWindow*) win_mgr.getWindow("Inventory_Holder");
 			if (wflags & Document::INVENTORY)
 			{
 				if (!inventory->isVisible())
@@ -446,7 +493,7 @@ void MainWindow::update(float time)
 			}
 			
 			// show/hide control panel
-			CEGUI::FrameWindow* control_panel = (CEGUI::FrameWindow*) win_mgr.getWindow("ControlPanel");
+			CEGUI::FrameWindow* control_panel = (CEGUI::FrameWindow*) win_mgr.getWindow("ControlPanel_Holder");
 			if (wflags & Document::CONTROL_PANEL)
 			{
 				if (!control_panel->isVisible())
@@ -466,7 +513,7 @@ void MainWindow::update(float time)
 			}
 			
 			// QuestInfo anzeigen wenn entsprechendes Flag gesetzt
-			CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) win_mgr.getWindow("QuestInfo");
+			CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) win_mgr.getWindow("QuestInfo_Holder");
 			if (wflags & Document::QUEST_INFO)
 			{
 				quest_info->setVisible(true);
@@ -477,7 +524,7 @@ void MainWindow::update(float time)
 				quest_info->setVisible(false);
 			}
 			
-			CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) win_mgr.getWindow("MinimapWindow");
+			CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) win_mgr.getWindow("MinimapWindow_Holder");
 			if (wflags & Document::MINIMAP)
 			{
 				minimap->setVisible(true);
@@ -487,7 +534,7 @@ void MainWindow::update(float time)
 				minimap->setVisible(false);
 			}
 			
-			CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) win_mgr.getWindow("TradeWindow");
+			CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) win_mgr.getWindow("TradeWindow_Holder");
 			if (wflags & Document::TRADE)
 			{
 								
@@ -507,7 +554,7 @@ void MainWindow::update(float time)
 				trade->setVisible(false);
 			}
 			
-			CEGUI::FrameWindow* worldmap = (CEGUI::FrameWindow*) win_mgr.getWindow("WorldmapWindow");
+			CEGUI::FrameWindow* worldmap = (CEGUI::FrameWindow*) win_mgr.getWindow("WorldmapWindow_Holder");
 			if (wflags & Document::WORLDMAP)
 			{
 				m_sub_windows["Worldmap"]->update();
@@ -568,7 +615,7 @@ void MainWindow::update(float time)
 			{
 				// Skilltree anzeigen wenn entsprechendes Flag gesetzt
 				
-				CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.getWindow("Skilltree");
+				CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.getWindow("Skilltree_Holder");
 				if (wflags & Document::SKILLTREE)
 				{
 					skilltree->setVisible(true);
@@ -731,6 +778,7 @@ bool MainWindow::setupGameScreen()
 
 		// Oberstes Fenster der Hauptmenue Schicht
 		m_game_screen =  win_mgr.createWindow("DefaultWindow", "GameScreen");
+        m_game_screen->setMousePassThroughEnabled(true);
 
 		// Kontrollleiste anlegen
 		setupControlPanel();
@@ -770,10 +818,10 @@ bool MainWindow::setupGameScreen()
 		
 		setupWorldmap();
 		
-		m_sub_windows["DialogueWindow"] = new DialogueWindow(m_document,m_scene);
+		m_sub_windows["DialogueWindow"] = new DialogueWindow(m_document, m_scene, m_ceguiSkinName);
 		
 		CEGUI::Window* label;
-		label = win_mgr.createWindow("TaharezLook/StaticImage", "CharacterPreviewImage");
+		label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "CharacterPreviewImage");
 		m_main_menu->addChildWindow(label);
 		label->setProperty("FrameEnabled", "false");
 		label->setProperty("BackgroundEnabled", "false");
@@ -784,7 +832,7 @@ bool MainWindow::setupGameScreen()
 		label->setProperty("Image", "set:character image:character_img"); 
 		label->setVisible(false);
 		
-		label = win_mgr.createWindow("TaharezLook/StaticText", "CharacterPreviewBackground");
+		label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), "CharacterPreviewBackground");
 		m_main_menu->addChildWindow(label);
 		label->setProperty("FrameEnabled", "false");
 		label->setProperty("BackgroundEnabled", "true");
@@ -816,29 +864,56 @@ void MainWindow::setupControlPanel()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "CharInfoUpgradeButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ImageButton"), "CharInfoUpgradeButton"));
 	m_game_screen->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.02f), cegui_reldim( 0.65f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.07f)));
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonCharInfoClicked, static_cast<ControlPanel*>(wnd)));
 	btn->setVisible(false);
-	btn->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased"); 	 
-	btn->setProperty("DisabledImage", "set:CharScreen image:PlusBtnReleased"); 	 
-	btn->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased"); 	 
-	btn->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
+	if (btn->isPropertyPresent ("NormalImage"))
+	{
+		btn->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased"); 	 
+	}
+	if (btn->isPropertyPresent ("DisabledImage"))
+	{
+		btn->setProperty("DisabledImage", "set:CharScreen image:PlusBtnReleased"); 	 
+	}
+	if (btn->isPropertyPresent ("HoverImage"))
+	{
+		btn->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased"); 	 
+	}
+	if (btn->isPropertyPresent ("PushedImage"))
+	{
+		btn->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
+	}
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow("TaharezLook/Button", "SkillUpgradeButton"));
+	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ImageButton"), "SkillUpgradeButton"));
 	m_game_screen->addChildWindow(btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.92f), cegui_reldim( 0.65f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.07f)));
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, static_cast<ControlPanel*>(wnd)));
 	btn->setVisible(false);
-	btn->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased"); 	 
-	btn->setProperty("DisabledImage", "set:CharScreen image:PlusBtnReleased"); 	 
-	btn->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased"); 	 
-	btn->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
+	
+	
+	if (btn->isPropertyPresent ("NormalImage"))
+	{
+		btn->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased");
+	}
+	if (btn->isPropertyPresent ("DisabledImage"))
+	{
+		btn->setProperty("DisabledImage", "set:CharScreen image:PlusBtnReleased");
+	}
+	if (btn->isPropertyPresent ("HoverImage"))
+	{
+		btn->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased");
+	}
+	if (btn->isPropertyPresent ("PushedImage"))
+	{
+		btn->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
+	}
+
 }
 
 void MainWindow::setupCharInfo()
@@ -867,7 +942,7 @@ void MainWindow::setupInventory()
 
 void MainWindow::setupQuestInfo()
 {
-	Window* wnd = new QuestInfo(m_document);
+	Window* wnd = new QuestInfo (m_document, m_ceguiSkinName);
 	m_sub_windows["QuestInfo"] = wnd;
 	
 	// anfangs ausblenden
@@ -878,8 +953,7 @@ void MainWindow::setupQuestInfo()
 
 void MainWindow::setupSkilltree()
 {
-	
-	SkillTree* wnd = new SkillTree(m_document,m_keyboard);
+	SkillTree* wnd = new SkillTree (m_document ,m_keyboard, m_ceguiSkinName);
 	m_sub_windows["SkillTree"] = wnd;
 	
 	// Skilltree anfangs ausblenden
@@ -891,7 +965,7 @@ void MainWindow::setupSkilltree()
 
 void MainWindow::setupChatWindow()
 {
-	Window* wnd = new ChatLine(m_document);
+	Window* wnd = new ChatLine(m_document, m_ceguiSkinName);
 	m_sub_windows["Chatline"] = wnd;
 	
 	
@@ -905,13 +979,17 @@ void MainWindow::setupCursorItemImage()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	CEGUI::Window* label;
-	label = win_mgr.createWindow("TaharezLook/StaticImage", "CursorItemImage");
+	label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "CursorItemImage");
 	m_game_screen->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "false");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.04f), cegui_reldim( 0.06f)));
-	label->setProperty("Image", "set:TaharezLook image:CloseButtonNormal"); 
+
+	// Just use a default image.
+	std::string portraitname ("set:Portrait image:Portrait");
+	label->setProperty ("Image", portraitname.c_str ());
+
 	label->setVisible(false);
 	label->setAlwaysOnTop(true);
 	label->setMousePassThroughEnabled(true);
@@ -920,26 +998,9 @@ void MainWindow::setupCursorItemImage()
 
 void MainWindow::setupMinimap()
 {
-	Window* wnd = new MinimapWindow(m_document);
+	Window* wnd = new MinimapWindow (m_document, m_ceguiSkinName);
 	m_sub_windows["Minimap"] = wnd;
-	m_game_screen->addChildWindow(wnd->getCEGUIWindow());
-	/*
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
-	CEGUI::Window* label;
- 	label = win_mgr.createWindow("TaharezLook/StaticImage", "MinimapImage");
-	m_game_screen->addChildWindow(label);
-	label->setProperty("FrameEnabled", "false");
-	label->setProperty("BackgroundEnabled", "false");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.9f), cegui_reldim( 0.8f)));
-	label->setProperty("Image", "set:TaharezLook image:CloseButtonNormal"); 
-	label->setVisible(false);
-	label->setMousePassThroughEnabled(true);
-	label->setID(0);
-	*/
-	
-	
+	m_game_screen->addChildWindow(wnd->getCEGUIWindow());	
 }
 
 bool MainWindow::setupObjectInfo()
@@ -948,31 +1009,14 @@ bool MainWindow::setupObjectInfo()
 
 	// Fenstermanager
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Window* label;
 
 	// Leiste fuer Informationen
+	CEGUI::Window* monster_health_holder = win_mgr.loadWindowLayout ("monsterhealthbar.layout");
+	if (monster_health_holder)
+	{
+		m_game_screen->addChildWindow (monster_health_holder);
+	}
 	
-	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", "MonsterHealthProgressBar"));
-	m_game_screen->addChildWindow(bar);
-	bar->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
-	bar->setSize(CEGUI::UVector2(cegui_reldim(0.6f), cegui_reldim( 0.07f)));
-	bar->setWantsMultiClickEvents(false);
-	bar->setProperty("MousePassThroughEnabled","true");
-	bar->setProgress(1.0);
-	
-	
-	label = win_mgr.createWindow("TaharezLook/StaticText", "ObjectInfoLabel");
-	m_game_screen->addChildWindow(label);
-	label->setProperty("FrameEnabled", "false");
-	label->setProperty("BackgroundEnabled", "false");
-	label->setProperty("HorzFormatting", "HorzCentred");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
-	label->setSize(CEGUI::UVector2(cegui_reldim(0.6f), cegui_reldim( 0.07f)));
-	label->setAlpha(1.0);
-	label->setProperty("MousePassThroughEnabled","true");
-	
-	
-
 	return true;
 }
 
@@ -985,11 +1029,18 @@ bool MainWindow::setupItemInfo()
 	CEGUI::Window* label;
 
 	// Leiste fuer Informationen
-	label = win_mgr.createWindow("TaharezLook/StaticText", "ItemInfoLabel");
+	label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), "ItemInfoLabel");
 	m_game_screen->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "true");
-	label->setProperty("BackgroundColours", "tl:77000000 tr:77000000 bl:77000000 br:77000000"); 
+	if (label->isPropertyPresent ("BackgroundColours"))
+	{
+		label->setProperty("BackgroundColours", "tl:77000000 tr:77000000 bl:77000000 br:77000000"); 
+	}
+	else if (label->isPropertyPresent ("BackgroundColour"))
+	{
+		label->setProperty("BackgroundColour", "B2000000"); 
+	}
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(0.08f), cegui_reldim( 0.03f)));
 	label->setText("");
@@ -1004,7 +1055,7 @@ bool MainWindow::setupItemInfo()
 bool MainWindow::setupPartyInfo()
 {
 	
-	Window* wnd = new PartyInfo(m_document);
+	Window* wnd = new PartyInfo(m_document, m_ceguiSkinName);
 	m_sub_windows["PartyInfo"] = wnd;
 	
 	// PartyInfo anfangs ausblenden
@@ -1024,7 +1075,7 @@ bool MainWindow::setupPartyInfo()
 		stream << "PartyMemberImage";
 		stream << i;
 		
-		img = win_mgr.createWindow("TaharezLook/StaticImage",stream.str());
+		img = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), stream.str());
 		m_game_screen->addChildWindow(img);
 		img->setProperty("FrameEnabled", "true");
 		img->setProperty("BackgroundEnabled", "true");
@@ -1038,7 +1089,7 @@ bool MainWindow::setupPartyInfo()
 		stream << "PartyMemberHealthBar";
 		stream << i;
 		
-		bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow("TaharezLook/ProgressBar", stream.str()));
+		bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ProgressBar"), stream.str()));
 		m_game_screen->addChildWindow(bar);
 		m_game_screen->addChildWindow(bar);
 		bar->setPosition(CEGUI::UVector2(cegui_reldim(0.01f), cegui_reldim( 0.08f+ 0.1f *i)));
@@ -1052,7 +1103,7 @@ bool MainWindow::setupPartyInfo()
 
 void MainWindow::setupTrade()
 {
-	Window* wnd = new TradeWindow(m_document);
+	Window* wnd = new TradeWindow(m_document, m_ceguiSkinName);
 	m_sub_windows["Trade"] = wnd;
 	
 	
@@ -1064,7 +1115,7 @@ void MainWindow::setupTrade()
 
 void MainWindow::setupWorldmap()
 {
-	Window* wnd = new Worldmap(m_document);
+	Window* wnd = new Worldmap (m_document, m_ceguiSkinName);
 	m_sub_windows["Worldmap"] = wnd;
 	
 	
@@ -1078,7 +1129,7 @@ void MainWindow::setupRegionInfo()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	CEGUI::Window* label;
-	label = win_mgr.createWindow("TaharezLook/StaticText", "RegionInfoLabel");
+	label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), "RegionInfoLabel");
 	m_game_screen->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	label->setProperty("BackgroundEnabled", "false");
@@ -1122,13 +1173,20 @@ void MainWindow::setupChatContent()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	CEGUI::Window* label;
-	label = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.createWindow("TaharezLook/StaticText", "ChatContent"));
+	label = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), "ChatContent"));
 	m_game_screen->addChildWindow(label);
 	label->setProperty("FrameEnabled", "false");
 	//label->setProperty("BackgroundEnabled", "false");
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.63f)));
 	label->setSize(CEGUI::UVector2(cegui_reldim(.43f), cegui_reldim( 0.2f)));
-	label->setProperty("BackgroundColours", "tl:44000000 tr:44000000 bl:44000000 br:44000000");
+	if (label->isPropertyPresent ("BackgroundColours"))
+	{
+		label->setProperty("BackgroundColours", "tl:44000000 tr:44000000 bl:44000000 br:44000000");
+	}
+	else if (label->isPropertyPresent ("BackgroundColour"))
+	{
+		label->setProperty("BackgroundColour", "B2000000");
+	}
 	label->setProperty("VertFormatting", "VertCentred");
 	label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 	label->setText("");
@@ -1149,7 +1207,16 @@ void  MainWindow::updateMainMenu()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* img;
-	img  = win_mgr.getWindow("StartScreenImage");
+	if (win_mgr.isWindowPresent ("StartScreenRoot"))
+	{
+		img  = win_mgr.getWindow ("StartScreenRoot");
+		img->setMousePassThroughEnabled (true);
+	}
+	if (win_mgr.isWindowPresent ("StartScreenImage"))
+	{
+		img  = win_mgr.getWindow ("StartScreenImage");
+		img->setMousePassThroughEnabled (true);
+	}
 	CEGUI::Window* label;
 	label = win_mgr.getWindow("CharacterPreviewImage");
 	CEGUI::Window* label2;
@@ -1161,14 +1228,10 @@ void  MainWindow::updateMainMenu()
 	if (wflags & (Document::SAVEGAME_LIST | Document::CHAR_CREATE))
 	{
 		img->setVisible(false);
-		//label->setVisible(true);
-		//label2->setVisible(true);
 	}
 	else
 	{
 		img->setVisible(true);
-		//label->setVisible(false);
-		//label2->setVisible(false);
 	}
 	
 	m_sub_windows["MainMenu"]->update();
@@ -1571,7 +1634,11 @@ void MainWindow::updateObjectInfo()
 				std::string propnew = "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF";
 				if (itm->m_rarity == Item::MAGICAL)
 				{
-					propnew = "tl:FF8888FF tr:FF8888FF bl:FF8888FF br:FF8888FF";
+					std::string magicColour = TooltipSettings::getGroundItemMagicalHexColourCode ();
+					std::stringstream ssColour;
+					ssColour << "tl:" << magicColour << " tr:" << magicColour << " bl:" << magicColour << " br:" << magicColour;
+					propnew = ssColour.str ();
+					//propnew = "tl:FF8888FF tr:FF8888FF bl:FF8888FF br:FF8888FF";
 				}
 				if (propold != propnew)
 				{
@@ -1917,11 +1984,19 @@ void MainWindow::updateItemInfo()
 			if (nr >= lcount)
 			{
 				lcount ++;
-				label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
+				label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), stream.str());
 				m_game_screen->addChildWindow(label);
 				label->setProperty("FrameEnabled", "false");
 				label->setProperty("BackgroundEnabled", "true");
-				label->setProperty("BackgroundColours", "tl:77000000 tr:77000000 bl:77000000 br:77000000"); label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
+				if (label->isPropertyPresent ("BackgroundColours"))
+				{
+					label->setProperty("BackgroundColours", "tl:77000000 tr:77000000 bl:77000000 br:77000000"); 
+				}
+				else if (label->isPropertyPresent ("BackgroundColour"))
+				{
+					label->setProperty("BackgroundColour", "B2000000");
+				}
+				label->setPosition(CEGUI::UVector2(cegui_reldim(0.2f), cegui_reldim( 0.02f)));
 				label->setSize(CEGUI::UVector2(cegui_reldim(reallen), cegui_reldim( 0.03f)));
 				label->setText("");
 				label->setAlpha(0.9);
@@ -1957,7 +2032,11 @@ void MainWindow::updateItemInfo()
 			propnew = "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF";
 			if (di->getItem()->m_rarity == Item::MAGICAL)
 			{
-				propnew = "tl:FF8888FF tr:FF8888FF bl:FF8888FF br:FF8888FF";
+				std::string magicColour = TooltipSettings::getGroundItemMagicalHexColourCode ();
+				std::stringstream ssColour;
+				ssColour << "tl:" << magicColour << " tr:" << magicColour << " bl:" << magicColour << " br:" << magicColour;
+				propnew = ssColour.str ();
+				//propnew = "tl:FF8888FF tr:FF8888FF bl:FF8888FF br:FF8888FF";
 			}
 			if (propold != propnew)
 			{
@@ -2116,7 +2195,7 @@ void MainWindow::updateRegionInfo()
 	Player* pl = m_document->getLocalPlayer();	
 	if (pl->getRegion() != 0)
 	{
-		// update, wenn neuer Spieler oder neue Region gesetzt
+		// update, when a new player is set or when a new region is set.
 		if (pl->getId() != id)
 		{
 			refresh = true;
@@ -2130,9 +2209,15 @@ void MainWindow::updateRegionInfo()
 			MusicManager::instance().stop();
 		}
 		
+		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+
 		if (refresh)
 		{
+			DEBUG ("*** main window expecting refresh for region");
 			timer.start();
+
+			MinimapWindow* myMinimap = static_cast<MinimapWindow*> (m_sub_windows["Minimap"]);
+			myMinimap->reloadIconsOnNextUpdate ();
 		}
 		
 		float time = timer.getTime();
@@ -2143,12 +2228,11 @@ void MainWindow::updateRegionInfo()
 			vis = true;
 		}
 		
-		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 		CEGUI::Window* label;
 		label = win_mgr.getWindow("RegionInfoLabel");
 		
-		// nur anzeigen, wenn minimap nicht geoeffnet
+		// Only show when the minimap is not opened.
 		int wflags = m_document->getGUIState()->m_shown_windows;
 		vis &= !(wflags & Document::MINIMAP);
 		
@@ -2207,7 +2291,7 @@ void MainWindow::updateFloatingText()
 		if (nr >= lcount)
 		{
 			lcount ++;
-			label = win_mgr.createWindow("TaharezLook/StaticText", stream.str());
+			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), stream.str());
 			m_game_screen->addChildWindow(label);
 			label->setProperty("FrameEnabled", "false");
 			label->setProperty("BackgroundEnabled", "false");
@@ -2492,13 +2576,13 @@ Vector MainWindow::getIngamePos(float screenx, float screeny, bool relative)
 }
 
 // MouseListener
-bool MainWindow::mouseMoved(const OIS::MouseEvent &evt) {
-	m_cegui_system->injectMouseWheelChange(evt.state.Z.rel);
-	
-	
-	//return m_cegui_system->injectMouseMove(evt.state.X.rel, evt.state.Y.rel);
-	//DEBUG("injection position %i %i",evt.state.X.abs,evt.state.Y.abs);
-	m_document->onMouseMove(evt.state.X.rel, evt.state.Y.rel,evt.state.Z.rel);
+bool MainWindow::mouseMoved(const OIS::MouseEvent &evt)
+{
+    //DEBUG("injection position %i %i",evt.state.X.abs,evt.state.Y.abs);
+    if(m_cegui_system->injectMouseWheelChange(evt.state.Z.rel))
+        m_document->onMouseMove(evt.state.X.rel, evt.state.Y.rel, 0);
+    else
+        m_document->onMouseMove(evt.state.X.rel, evt.state.Y.rel,evt.state.Z.rel);
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label = win_mgr.getWindow("CursorItemImage");
@@ -2820,6 +2904,20 @@ void MainWindow::setReadyToStart(bool ready)
 	
 	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "LoadRessourcesProgressBar"));
 	bar->setVisible(!ready);
+
+	// Also hide the background picture
+	if (win_mgr.isWindowPresent ("StartScreenImage"))
+	{
+		CEGUI::Window* backgroundPicture = win_mgr.getWindow ("StartScreenImage");
+		backgroundPicture->setVisible (false);
+		backgroundPicture->setMousePassThroughEnabled (true);
+	}
+	if (win_mgr.isWindowPresent ("StartScreenRoot"))
+	{
+		CEGUI::Window* backgroundPicture = win_mgr.getWindow ("StartScreenRoot");
+		backgroundPicture->setVisible (false);
+		backgroundPicture->setMousePassThroughEnabled (true);
+	}
 	
 	// we have finished loading so we will simulate the click to get straight in to the main menu
 	m_document->onStartScreenClicked();

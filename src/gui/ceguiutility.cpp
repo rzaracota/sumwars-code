@@ -228,3 +228,244 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 }
 
 
+//
+//	Other utility static functions
+//
+
+CEGUI::Window* CEGUIUtility::getWindow (const CEGUI::String& name)
+{
+	CEGUI::System* ceguiSysPtr_ = CEGUI::System::getSingletonPtr ();
+	return getWindowForSystem (ceguiSysPtr_, name);
+}
+
+// static
+CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI::String& name)
+{
+#ifdef CEGUI_07
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton ();
+	if (win_mgr.isWindowPresent (name))
+	{
+		return win_mgr.getWindow (name);
+	}
+#else
+	CEGUI::Window* root = sys->getDefaultGUIContext().getRootWindow();
+	if (root->isChild (name))
+	{
+		return root->getChild (name);
+	}
+	else
+	{
+	}
+#endif
+	return 0;
+}
+
+
+void CEGUIUtility::injectKeyDown (OIS::KeyCode myKey)
+{
+	injectKeyDown (CEGUI::System::getSingletonPtr(), myKey);
+}
+
+void CEGUIUtility::injectKeyDown (CEGUI::System* sys, OIS::KeyCode myKey)
+{
+	if (!sys)
+	{
+		return;
+	}
+#ifdef CEGUI_07
+sys->injectKeyDown (myKey);
+#else
+sys->getDefaultGUIContext ().injectKeyDown (static_cast<CEGUI::Key::Scan> (myKey));
+#endif
+}
+
+void CEGUIUtility::injectKeyUp (OIS::KeyCode myKey)
+{
+	injectKeyUp (CEGUI::System::getSingletonPtr(), myKey);
+}
+
+
+void CEGUIUtility::injectKeyUp (CEGUI::System* sys, OIS::KeyCode myKey)
+{
+	if (!sys)
+	{
+		return;
+	}
+#ifdef CEGUI_07
+sys->injectKeyUp (myKey);
+#else
+sys->getDefaultGUIContext ().injectKeyUp (static_cast<CEGUI::Key::Scan> (myKey));
+#endif
+}
+
+
+void CEGUIUtility::injectChar (int myKey)
+{
+	injectChar (CEGUI::System::getSingletonPtr(), myKey);
+}
+
+
+void CEGUIUtility::injectChar (CEGUI::System* sys, int myKey)
+{
+	if (!sys)
+	{
+		return;
+	}
+#ifdef CEGUI_07
+sys->injectChar (myKey);
+#else
+sys->getDefaultGUIContext ().injectChar (static_cast<CEGUI::Key::Scan> (myKey));
+#endif
+}
+
+
+void CEGUIUtility::injectMousePosition (float x, float y)
+{
+	injectMousePosition (CEGUI::System::getSingletonPtr(), x, y);
+}
+
+void CEGUIUtility::injectMousePosition (CEGUI::System* sys, float x, float y)
+{
+	if (!sys)
+	{
+		return;
+	}
+#ifdef CEGUI_07
+sys->injectMousePosition (x, y);
+#else
+sys->getDefaultGUIContext ().injectMousePosition (x, y);
+#endif
+}
+
+void CEGUIUtility::injectMouseWheelChange (float pos)
+{
+	injectMouseWheelChange (CEGUI::System::getSingletonPtr(), pos);
+}
+
+void CEGUIUtility::injectMouseWheelChange (CEGUI::System* sys, float pos)
+{
+	if (!sys)
+	{
+		return;
+	}
+#ifdef CEGUI_07
+sys->injectMouseWheelChange (pos);
+#else
+sys->getDefaultGUIContext ().injectMouseWheelChange (pos);
+#endif
+}
+
+void CEGUIUtility::injectMouseButtonDown (OIS::MouseButtonID btn)
+{
+	injectMouseButtonDown (CEGUI::System::getSingletonPtr(), btn);
+}
+
+void CEGUIUtility::injectMouseButtonDown (CEGUI::System* sys, OIS::MouseButtonID btn)
+{
+	if (!sys)
+	{
+		return;
+	}
+#ifdef CEGUI_07
+sys->injectMouseButtonDown (convertOISButtonToCegui (btn));
+#else
+sys->getDefaultGUIContext ().injectMouseButtonDown (convertOISButtonToCegui (btn));
+#endif
+}
+
+void CEGUIUtility::injectMouseButtonUp (OIS::MouseButtonID btn)
+{
+	injectMouseButtonUp (CEGUI::System::getSingletonPtr(), btn);
+}
+
+void CEGUIUtility::injectMouseButtonUp (CEGUI::System* sys, OIS::MouseButtonID btn)
+{
+	if (!sys)
+	{
+		return;
+	}
+#ifdef CEGUI_07
+sys->injectMouseButtonUp (convertOISButtonToCegui (btn));
+#else
+sys->getDefaultGUIContext ().injectMouseButtonUp (convertOISButtonToCegui (btn));
+#endif
+}
+
+CEGUI::MouseButton CEGUIUtility::convertOISButtonToCegui (int buttonID)
+{
+	switch (buttonID)
+	{
+	case OIS::MB_Left:
+		return CEGUI::LeftButton;
+	case OIS::MB_Right:
+		return CEGUI::RightButton;
+	case OIS::MB_Middle:
+		return CEGUI::MiddleButton;
+	}
+	// default:
+	return CEGUI::LeftButton;
+}
+
+
+std::string CEGUIUtility::getNameForWidget (const std::string& name)
+{
+#ifdef CEGUI_07
+	int nPos = name.rfind('/');
+	if (nPos != CEGUI::String::npos)
+	{
+		return name.substr (nPos + 1);
+	}
+#endif
+	return name;
+}
+
+
+// Retrieve the widget with a given skin.
+std::string CEGUIUtility::getWidgetWithSkin (const std::string& skin, const std::string& name)
+{
+	std::stringstream ss;
+	ss << skin << "/" << name;
+	return ss.str ();
+}
+
+
+void CEGUIUtility::setScrollPositionForWidget (const CEGUI::String& widgetName, float newScrollPosition)
+{
+	CEGUI::Scrollbar* scroller;
+	scroller = static_cast<CEGUI::Scrollbar*> (CEGUIUtility::getWindow (widgetName));
+	if (scroller)
+	{
+#ifdef CEGUI_07
+		scroller->setScrollPosition (0.5f);
+#else
+		scroller->setUnitIntervalScrollPosition (0.5f);
+#endif
+	}
+}
+
+
+
+void CEGUIUtility::setDefaultFont (const CEGUI::String& fontName)
+{
+	if (CEGUI::FontManager::getSingleton ().isDefined (fontName))
+	{
+#ifdef CEGUI_07
+		CEGUI::System::getSingletonPtr ()->setDefaultFont ((CEGUI::utf8*)fontName.c_str ());
+#else
+		CEGUI::System::getSingletonPtr ()->getDefaultGUIContext ().setDefaultFont ((CEGUI::utf8*)fontName.c_str ());
+#endif
+	}
+}
+
+
+void CEGUIUtility::setDefaultMouseCursor (CEGUI::System* sys, const std::string& skinName, const std::string& cursorName)
+{
+	sys->setDefaultMouseCursor ((CEGUI::utf8*)skinName.c_str (), (CEGUI::utf8*)cursorName.c_str ());
+}
+
+void CEGUIUtility::setDefaultTooltip (CEGUI::System* sys, const std::string& skinName, const std::string& cursorName)
+{
+	std::stringstream ss;
+	ss << skinName << "/" << cursorName;
+	sys->setDefaultTooltip (ss.str ().c_str ());
+}

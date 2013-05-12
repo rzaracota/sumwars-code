@@ -29,7 +29,7 @@ class ChatLine : public Window
 	 * \fn ChatLine (Document* doc)
 	 * \brief Konstruktor
 		 */
-		ChatLine (Document* doc);
+		ChatLine (Document* doc, const std::string& ceguiSkinName);
 	
 		/**
 		 * \fn virtual void update()
@@ -74,6 +74,11 @@ class ChatLine : public Window
 		 * \brief Liste der früher abgesendeten Befehle
 		 */
 		std::list<std::string> m_history;
+
+		/**
+		 * \brief The name of the CEGUI skin to use.
+		 */
+		std::string m_ceguiSkinName;
 };
 
 #endif // __SUMWARS_GUI_CHATLINE_H__

@@ -29,10 +29,11 @@ class DialogueWindow : public Window
 		
 		/**
 		 * \fn Window(Document* doc)
-		 * \brief Konstruktor
-		 * \param doc Zeiger auf das Dokument
+		 * \brief Constructor.
+		 * \param doc Pointer to the document object.
+		 * \param ceguiSkinName The name of the CEGUI skin to use for this window
 		 */
-		DialogueWindow(Document* doc, Scene* scene);
+		DialogueWindow(Document* doc, Scene* scene, const std::string& ceguiSkinName);
 		
 		/**
 		 * \fn virtual ~DialogueWindow()
@@ -77,9 +78,15 @@ class DialogueWindow : public Window
 	private:
 		/**
 		 * \var Scene* m_scene
-		 * \brief  Zeiger auf die dargestellt Szene
+		 * \brief  Pointer to the currently presented scene
 		 */
 		Scene* m_scene;
+
+		/**
+		 * \brief The name of the CEGUI skin to use.
+		 */
+		std::string m_ceguiSkinName;
+
 };
 
 #endif // __SUMWARS_GUI_DIALOGUEWINDOW_H__

@@ -41,6 +41,19 @@ protected:
 	// A list of supported features.
 	std::vector <std::string> supportedFeatures_;
 
+	// The available aspect ratio folders. Will store only the name of the folder that depicts a certain aspect ratio (not full path).
+	std::map <std::string, double> guiAspectRatios_;
+
+	// The default fonts to use for each particular screen size. Note: only the height is relevant for this calculation.
+	std::map <int, std::string> guiDefaultFonts_;
+
+	// The available application internal configurable global vars.
+	std::map <std::string, std::string> applicationGlobalVars_;
+
+	// This is the set of resource group location that could not be loaded.
+	std::map <std::string, std::string> incompleteResourceGroupDirs_;
+
+
 public:
 	/**
 	 * Constructor; will call the init function.
@@ -147,6 +160,91 @@ public:
 	 * \author Augustin Preda (if anything doesn't work, he's the one to bash).
 	 */
 	static void getSizesFromResolutionString (const std::string& initialString, int& videoModeWidth, int& videoModeHeight);
+
+	/**
+	 * Get the nearest aspect ratio compatible with the current resolution.
+	 * This is very useful for windowed mode.
+	 * @param width The width of the display window.
+	 * @param height The height of the display window.
+	 * @return A string containing the nearest folder name corresponding to the given window size.
+	 * @author Augustin Preda.
+	 */
+	std::string getNearestAspectRatioStringForWindowSize (int width, int height);
+
+	/**
+	 * Get the nearest font to be used as a default font for the current resolution.
+	 * @param width The width of the display window.
+	 * @param height The height of the display window.
+	 * @return A string containing the name of the recommended font to be used.
+	 * @author Augustin Preda.
+	 */
+	std::string getRecommendedDefaultFontForWindowSize (int width, int height);
+
+	/**
+	 * Add a list of locations to a specified resource group.
+	 * @param locList The list (vector actually) of locations.
+	 * @param groupToAddTo The name of the resource group to add the locations to.
+	 * @author Augustin Preda
+	 */
+	void addResourceLocationList (const std::vector<std::string> &locList, const std::string &groupToAddTo);
+
+	/**
+	 * Add a location to a specified resource group.
+	 * @param location The location.
+	 * @param groupToAddTo The name of the resource group to add the locations to.
+	 * @author Augustin Preda
+	 */
+	void addResourceLocation (const std::string& location, const std::string& groupToAddTo);
+
+	/**
+	 * Add a location to a specified resource group.
+	 * @param location The location.
+	 * @param groupToAddTo The name of the resource group to add the locations to.
+	 * @param resourceType The type of resource (E.g. "FileSystem")
+	 * @author Augustin Preda
+	 */
+	void addResourceLocation (const std::string& location, const std::string& resourceType, const std::string& groupToAddTo);
+
+	/**
+	 * Get the associated value for an special application environment variable.
+	 * This could be an OS environment variable.
+	 * @param varName The name of the variable.
+	 * @return The value of the variable, given as a string.
+	 * @author Augustin Preda.
+	 */
+	std::string getCustomVariableValue (const std::string& varName) const;
+
+
+	/**
+	 * Obtain access to a mapping of lists of global variables.
+	 * @author Augustin Preda.
+	 */
+	std::map <std::string, std::string>& getEditableApplicationVariablesMapping ()
+	{
+		return applicationGlobalVars_;
+	}
+
+	/**
+	 * Set the preffered aspect ratio string. Uses getEditableApplicationVariablesMapping.
+	 * @param aspectRatio The aspect ratio (as a string), in the same format retrieved by the function "getNearestAspectRatioStringForWindowSize".
+	 * @author Augustin Preda.
+	 */
+	void setPrefferedAspectRatioString (const std::string& aspectRatio);
+
+	/**
+	 * Retry to add the directories/resource locations for all groups that failed so far.
+	 * In order for this function to work, you must add resource locations using the functions defined in this class.
+	 *  - addResourceLocation
+	 *  - addResourceLocationList
+	 * If you only add resource locations using the standard OGRE functions, this function will have no effect.
+	 *
+	 * This will be mainly used to load resource groups after the aspect ratio is calculated.
+	 * The aspect ratio will be specified as a custom string in the resource paths. That custom string (E.g. "$(ASPECT_RATIO)") will need to be replaced by the string
+	 * of the actual aspect ratio, corresponding to a folder name (E.g. "016_009");
+	 * @author Augustin Preda
+	 */
+	void retryToAddIncompleteResourceDirs ();
+
 
 #if defined (__APPLE__)
 	// TODO: copied function here from application.h; Investigate integration with userPath function.

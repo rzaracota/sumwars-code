@@ -30,7 +30,7 @@ class CharCreate : public Window
 	 * \fn CharCreate (Document* doc)
 	 * \brief Konstruktor
 		 */
-		CharCreate (Document* doc);
+		CharCreate (Document* doc, const std::string& ceguiSkinName);
 	
 		/**
 		 * \fn virtual void update()
@@ -74,7 +74,12 @@ class CharCreate : public Window
 	 * \brief Behandelt Druck auf Knopf Charakter erstellen
 	 */
 	bool onButtonCharCreate(const CEGUI::EventArgs& evt);
-	
+
+	/**
+	 * \brief The name of the CEGUI skin to use.
+	 */
+	std::string m_ceguiSkinName;
+
 };
 
 #endif // __SUMWARS_GUI_CHARCREATE_H__

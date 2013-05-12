@@ -25,8 +25,31 @@ ControlPanel::ControlPanel (Document* doc)
 	std::string name;
 
 	// Rahmen fuer die untere Kontrollleiste
-	CEGUI::FrameWindow* ctrl_panel = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("ControlPanel.layout");
-	m_window = ctrl_panel;
+	CEGUI::FrameWindow* ctrl_panel = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("controlpanel.layout");
+	if (!ctrl_panel)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "controlpanel.layout");
+	}
+
+	CEGUI::Window* ctrl_panel_holder = win_mgr.loadWindowLayout( "controlpanel_holder.layout" );
+	if (!ctrl_panel_holder)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "characterscreen_holder.layout");
+	}
+	
+	CEGUI::Window* wndHolder = win_mgr.getWindow("ControlPanel_Holder");
+	CEGUI::Window* wndCharInfo = win_mgr.getWindow("ControlPanel");
+	if (wndHolder && wndCharInfo)
+	{
+		wndHolder->addChildWindow (wndCharInfo);
+	}
+	else
+	{
+		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for control panel.");
+		if (!wndCharInfo) DEBUG ("ERROR: Unable to get the window for control panel.");
+	}
+
+	m_window = ctrl_panel_holder;
 	
 	ctrl_panel->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
 	ctrl_panel->setWantsMultiClickEvents(false);
@@ -157,6 +180,7 @@ ControlPanel::ControlPanel (Document* doc)
 		label->setMousePassThroughEnabled(true);
 	}
 
+	createAnimations ();
 	
 	updateTranslation();
 }
@@ -490,3 +514,22 @@ bool ControlPanel::onButtonOptionsClicked(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+
+void ControlPanel::createAnimations ()
+{
+#if ((CEGUI_VERSION_MAJOR << 16) + (CEGUI_VERSION_MINOR << 8) + CEGUI_VERSION_PATCH >= (0 << 16)+(7 << 8)+5)
+
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	CEGUI::Window* label;
+
+	CEGUI::AnimationManager::getSingleton().loadAnimationsFromXML("ControlPanelAnimations.xml");
+	
+	// Small tab animations
+	label = win_mgr.getWindow("HealthProgressBar");
+	CEGUI::AnimationInstance* instance = CEGUI::AnimationManager::getSingleton().instantiateAnimation("HealthbarAnimation");
+	instance->setTargetWindow(label);
+    instance->start();
+	//label->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&CEGUI::AnimationInstance::handleStart, instance));
+
+#endif
+}

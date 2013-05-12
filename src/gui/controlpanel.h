@@ -94,7 +94,11 @@ class ControlPanel : public ItemWindow
 		 */
 		bool onButtonQuestInfoClicked(const CEGUI::EventArgs& evt);
 		
-		
+		/**
+		 * \fn void createAnimations ();
+		 * \brief Create animations for the control panel.
+		 */
+		void createAnimations ();
 		
 };
 

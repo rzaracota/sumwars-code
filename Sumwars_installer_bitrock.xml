@@ -93,13 +93,16 @@
                             <origin>inst/share</origin>
                         </distributionDirectory>
                         <distributionFile>
-                            <origin>inst/sumwars.exe</origin>
+                            <origin>inst/AUTHORS</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>inst/COPYING</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>inst/README</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/alut.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>inst/AUTHORS</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/CEGUIBase.dll</origin>
@@ -117,16 +120,13 @@
                             <origin>inst/cg.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/COPYING</origin>
-                        </distributionFile>
-                        <distributionFile>
                             <origin>inst/libiconv2.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/libintl3.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/lua51.dll</origin>
+                            <origin>inst/lua.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/OgreMain.dll</origin>
@@ -147,13 +147,7 @@
                             <origin>inst/OIS.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/OIS_d.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
                             <origin>inst/physfs.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>inst/Plugin_BSPSceneManager.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/Plugin_CgProgramManager.dll</origin>
@@ -174,13 +168,13 @@
                             <origin>inst/PocoFoundation.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/README</origin>
-                        </distributionFile>
-                        <distributionFile>
                             <origin>inst/RenderSystem_Direct3D9.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/RenderSystem_GL.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>inst/sumwars.exe</origin>
                         </distributionFile>
                     </distributionFileList>
                     <shortcutList>
@@ -257,6 +251,22 @@
             </startMenuShortcutList>
         </component>
     </componentList>
+    <preInstallationActionList>
+        <renameFile>
+            <destination>${env(USERPROFILE)}/.sumwars/plugins.old</destination>
+            <origin>${env(USERPROFILE)}/.sumwars/plugins.cfg</origin>
+            <ruleList>
+                <fileExists path="${env(USERPROFILE)}/.sumwars/plugins.cfg"/>
+            </ruleList>
+        </renameFile>
+        <renameFile>
+            <destination>${env(USERPROFILE)}/.sumwars/resources.old</destination>
+            <origin>${env(USERPROFILE)}/.sumwars/resources.cfg</origin>
+            <ruleList>
+                <fileExists path="${env(USERPROFILE)}/.sumwars/resources.cfg"/>
+            </ruleList>
+        </renameFile>
+    </preInstallationActionList>
     <readyToInstallActionList>
         <componentSelection>
             <deselect>oalruntime</deselect>
@@ -275,7 +285,7 @@
     </readyToInstallActionList>
     <preUninstallationActionList>
         <showQuestion text="Do you want the uninstallation to also remove your saved games?" variable="remove_mysql">
-            <default>yes</default>
+            <default>no</default>
         </showQuestion>
         <deleteFile>
             <path>${env(USERPROFILE)}/.sumwars</path>

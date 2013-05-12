@@ -16,6 +16,9 @@
 // #include "item.h"
 #include "itemfactory.h"
 
+// Generic colour settings.
+#include "tooltipsettings.h"
+
 void WeaponAttr::operator=(WeaponAttr& other)
 {
 	m_weapon_type = other.m_weapon_type;
@@ -971,32 +974,34 @@ void Item::fromStringComplete(CharConv* cv)
 
 std::string Item::getDescription(float price_factor, ItemRequirementsMet irm)
 {
-    std::string defaultColor = "[colour='FF2F2F2F']";
+	
+	std::string defaultColor = TooltipSettings::getDefaultCeguiColour ();
     std::string rarityColor;
     switch (m_rarity)
     {
         case MAGICAL:
-            rarityColor = "[colour='FF00C000']";
+			rarityColor = TooltipSettings::getMagicalCeguiColour ();
             break;
         case RARE:
-            rarityColor = "[colour='FF2573D9']";
+			rarityColor = TooltipSettings::getRareCeguiColour ();
             break;
         case UNIQUE:
-            rarityColor = "[colour='FFFF0000']";
+			rarityColor = TooltipSettings::getUniqueCeguiColour ();
             break;
         case QUEST:
-            rarityColor = "[colour='FFC05600']";
+			rarityColor = TooltipSettings::getQuestCeguiColour ();
             break;
         default:
             rarityColor = defaultColor;
     }
 
-	// String fuer die Beschreibung
+	// String for the description die Beschreibung
 	std::ostringstream out_stream;
 	out_stream.str("");
     out_stream<<rarityColor<<getName()<<"\n" << defaultColor;
 	int i;
-	// Levelbeschraenkung
+
+	// Display the level limitations
 	out_stream <<gettext("Value")<<": "<<m_price;
 	if (price_factor != 0 && price_factor != 1)
 	{
@@ -1007,16 +1012,16 @@ std::string Item::getDescription(float price_factor, ItemRequirementsMet irm)
         if (irm.m_level)
             out_stream<<"\n" << gettext("Required level")<<": "<<(int) m_level_req;
         else
-            out_stream<<"\n" << "[colour='FFFF0000']" << gettext("Required level")<<": "<<(int) m_level_req << "[colour='FF2F2F2F']";
+            out_stream<<"\n" << TooltipSettings::getLevelRequirementCeguiColour () << gettext("Required level")<<": "<<(int) m_level_req << TooltipSettings::getDefaultCeguiColour ();
 	}
 	
 	if (m_char_req != "15" && m_char_req != "all")
 	{
         if (!irm.m_class)
-            out_stream<< "[colour='FFFF0000']";
+            out_stream << TooltipSettings::getLevelRequirementCeguiColour ();
         
 		size_t pos=0,pos2;
-		out_stream<<"\n" << gettext("Required class")<<": ";
+		out_stream << "\n" << gettext ("Required class") << ": ";
 		
 		std::string type;
 		bool end = false;
@@ -1192,21 +1197,21 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
 	int elemmap[4] = {0,3,2,1};
 	
     std::list<std::string> itemDescList;
-    std::string defaultColor = "[colour='FF2F2F2F']";
+    std::string defaultColor = TooltipSettings::getDefaultCeguiColour ();
     std::string rarityColor;
     switch (m_rarity)
     {
         case MAGICAL:
-            rarityColor = "[colour='FF00A000']";
+			rarityColor = TooltipSettings::getMagicalCeguiColour ();
             break;
         case RARE:
-            rarityColor = "[colour='FF2573D9']";
+            rarityColor = TooltipSettings::getRareCeguiColour ();
             break;
         case UNIQUE:
-            rarityColor = "[colour='FFFF0000']";
+			rarityColor =  TooltipSettings::getUniqueHexColourCode ();
             break;
         case QUEST:
-            rarityColor = "[colour='FFC05600']";
+			rarityColor =  TooltipSettings::getQuestCeguiColour ();
             break;
         default:
             rarityColor = defaultColor;
@@ -1241,7 +1246,7 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
         }
         else
         {
-            out_stream<< "[colour='FFFF0000']" << gettext("Required level")<<": "<<(int) m_level_req << "[colour='FF2F2F2F']" << "\n";
+			out_stream << TooltipSettings::getLevelRequirementCeguiColour () << gettext("Required level")<<": "<<(int) m_level_req << TooltipSettings::getDefaultCeguiColour () << "\n"; // Augustin Preda, 2013.02.08: replaced previous colour (FF2F2F2F)
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }
@@ -1251,7 +1256,7 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
     {
         if (!irm.m_class)
         {
-            out_stream<< "[colour='FFFF0000']" << "\n";
+            out_stream << TooltipSettings::getLevelRequirementCeguiColour () << "\n";
             itemDescList.push_back(out_stream.str());
             out_stream.str("");
         }

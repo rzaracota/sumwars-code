@@ -28,9 +28,12 @@
 
 #include <iostream>
 
-MainMenu::MainMenu (Document* doc)
-        :Window(doc)
+MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
+        : Window (doc)
+		, m_ceguiSkinName (ceguiSkinName)
 {
+	DEBUG ("MainMenu created");
+
 	m_savegame_player ="";
 	m_savegame_player_object =0;
 	
@@ -42,7 +45,7 @@ MainMenu::MainMenu (Document* doc)
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 
-    CEGUI::FrameWindow* start_menu_root = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "MainMenu.layout" );
+	CEGUI::FrameWindow* start_menu_root = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "mainmenu.layout" );
     m_window = start_menu_root;
 	m_window->setMousePassThroughEnabled(true);
     m_window->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&MainMenu::onShown, this));
@@ -81,23 +84,47 @@ MainMenu::MainMenu (Document* doc)
 
 	CEGUI::FrameWindow* lbl;
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton/Label"));
-	lbl->setMousePassThroughEnabled(true);
+	if (win_mgr.isWindowPresent ("SinglePlayerButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton/Label"));
+		lbl->setMousePassThroughEnabled(true);
+	}
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerJoinButton/Label"));
-	lbl->setMousePassThroughEnabled(true);
+	if (win_mgr.isWindowPresent ("ServerJoinButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerJoinButton/Label"));
+		lbl->setMousePassThroughEnabled(true);
+	}
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerHostButton/Label"));
-	lbl->setMousePassThroughEnabled(true);
+	if (win_mgr.isWindowPresent ("ServerHostButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerHostButton/Label"));
+		lbl->setMousePassThroughEnabled(true);
+	}
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("CreditsButton/Label"));
-	lbl->setMousePassThroughEnabled(true);
+	if (win_mgr.isWindowPresent ("CreditsButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("CreditsButton/Label"));
+		lbl->setMousePassThroughEnabled(true);
+	}
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton/Label"));
-	lbl->setMousePassThroughEnabled(true);
+	if (win_mgr.isWindowPresent ("MainOptionsButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton/Label"));
+		lbl->setMousePassThroughEnabled(true);
+	}
 
-    lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
-    lbl->setMousePassThroughEnabled(true);
+	if (win_mgr.isWindowPresent ("EndGameButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
+		lbl->setMousePassThroughEnabled(true);
+	}
 
 #ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
     lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("LoginButton/Label"));
@@ -142,10 +169,12 @@ MainMenu::MainMenu (Document* doc)
     updateTranslation();
 }
 
+
 void MainMenu::update()
 {
     updateCharacterView();
 }
+
 
 void MainMenu::updateTranslation()
 {
@@ -153,23 +182,66 @@ void MainMenu::updateTranslation()
 	CEGUI::FrameWindow* lbl;
 
 	// Update the button labels.
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton/Label"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Single player"));
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerJoinButton/Label"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerJoinButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Join game"));
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerHostButton/Label"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerHostButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Host game"));
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("CreditsButton/Label"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("CreditsButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Credits"));
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton/Label"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Options"));
 
-    lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
-    lbl->setText((CEGUI::utf8*) gettext("Quit"));
+	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton"));
+	lbl->setText((CEGUI::utf8*) gettext("Quit"));
+
+	if (win_mgr.isWindowPresent ("SinglePlayerButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton/Label"));
+		lbl->setText((CEGUI::utf8*) gettext("Single player"));
+	}
+
+	if (win_mgr.isWindowPresent ("ServerJoinButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerJoinButton/Label"));
+		lbl->setText((CEGUI::utf8*) gettext("Join game"));
+	}
+
+	if (win_mgr.isWindowPresent ("ServerHostButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerHostButton/Label"));
+		lbl->setText((CEGUI::utf8*) gettext("Host game"));
+	}
+
+	if (win_mgr.isWindowPresent ("CreditsButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("CreditsButton/Label"));
+		lbl->setText((CEGUI::utf8*) gettext("Credits"));
+	}
+
+	if (win_mgr.isWindowPresent ("MainOptionsButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton/Label"));
+		lbl->setText((CEGUI::utf8*) gettext("Options"));
+	}
+
+	if (win_mgr.isWindowPresent ("EndGameButton/Label"))
+	{
+		// TODO: remove when no longer needed.
+		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
+		lbl->setText((CEGUI::utf8*) gettext("Quit"));
+	}
+
 
 #ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
     lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("LoginButton/Label"));
@@ -177,8 +249,8 @@ void MainMenu::updateTranslation()
 #endif
 
 	// Update message windows
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("DeleteCharLabel")); // note: this has no in-between slash!
-	if (lbl) lbl->setText((CEGUI::utf8*) gettext("Really delete savegame?"));
+	//lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("DeleteCharLabel")); // note: this has no in-between slash!
+	//if (lbl) lbl->setText((CEGUI::utf8*) gettext("Really delete savegame?"));
 
 	// Propagation onto sub-windows
 	if (m_saveGameList != 0)
@@ -848,18 +920,27 @@ void MainMenu::createSavegameList()
 {
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
-    // Rahmen fuer das Menue Savegame auswaehlen
+    // Select the frame for the saved games in the menu
 	CEGUI::FrameWindow* savegameList = (CEGUI::FrameWindow*) win_mgr.getWindow("SaveGameSelectionFrame");
     savegameList->setInheritsAlpha(false);
-	savegameList->setAlpha(0.0f);
 
-    SavegameList* sgl = new SavegameList(m_document);
+	SavegameList* sgl = new SavegameList (m_document, m_ceguiSkinName);
     m_saveGameList = sgl;
-    savegameList->addChildWindow(sgl->getCEGUIWindow());
-    sgl->update();
-    sgl->updateTranslation();
 
-    MessageQuestionWindow * delchar = new MessageQuestionWindow(m_document,"DeleteChar",gettext("Really delete savegame?"), gettext("Yes"),CEGUI::Event::Subscriber(&SavegameList:: onDeleteCharConfirmClicked, sgl),gettext("No"),CEGUI::Event::Subscriber(&SavegameList::onDeleteCharAbortClicked, sgl));
+    savegameList->addChildWindow(m_saveGameList->getCEGUIWindow());
+    m_saveGameList->update();
+    m_saveGameList->updateTranslation();
+
+	// TODO: this implementation is really wacky... not consistent with the rest.
+	// Will need to bring the entire implementation to a common base.
+    MessageQuestionWindow * delchar = new MessageQuestionWindow (m_document,
+		std::string ("messagequestionwindow.layout"), 
+		std::string (gettext("Really delete savegame?")),
+		std::string (gettext("Yes")),
+		CEGUI::Event::Subscriber(&SavegameList:: onDeleteCharConfirmClicked, m_saveGameList),
+		std::string (gettext("No")),
+		CEGUI::Event::Subscriber(&SavegameList::onDeleteCharAbortClicked, m_saveGameList));
+
     m_window->addChildWindow(delchar->getCEGUIWindow());
 
 }

@@ -23,10 +23,32 @@ CharInfo::CharInfo (Document* doc)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	// Rahmen fuer CharInfo Fenster
-	CEGUI::FrameWindow* char_info = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "CharacterScreen.layout" );
-	m_window = char_info;
+	// The CharInfo window and holder
+	CEGUI::FrameWindow* char_info = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "characterscreen.layout" );
+	if (!char_info)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "characterscreen.layout");
+	}
+
+	CEGUI::Window* char_info_holder = win_mgr.loadWindowLayout( "characterscreen_holder.layout" );
+	if (!char_info_holder)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "characterscreen_holder.layout");
+	}
 	
+	CEGUI::Window* wndHolder = win_mgr.getWindow("CharInfo_Holder");
+	CEGUI::Window* wndCharInfo = win_mgr.getWindow("CharInfo");
+	if (wndHolder && wndCharInfo)
+	{
+		wndHolder->addChildWindow (wndCharInfo);
+	}
+	else
+	{
+		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for char screen.");
+		if (!wndCharInfo) DEBUG ("ERROR: Unable to get the window for char screen.");
+	}
+
+	m_window = char_info_holder;
 	
 	char_info->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
 	char_info->setWantsMultiClickEvents(false);
@@ -157,8 +179,24 @@ CharInfo::CharInfo (Document* doc)
 	label = win_mgr.getWindow("ResistIceValueLabel");
 	label->setText("0");
 	
-	label = win_mgr.getWindow("CharInfoCloseButton");
-	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&CharInfo::onCloseButtonClicked, this));
+	if (win_mgr.isWindowPresent ("CharInfoCloseButton"))
+	{
+		label = win_mgr.getWindow("CharInfoCloseButton");
+		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&CharInfo::onCloseButtonClicked, this));
+	}
+	else
+	{
+		// If the panel also has an auto-close button, connect it to the Cancel/Abort event.
+		if (win_mgr.isWindowPresent ("CharInfo__auto_closebutton__"))
+		{
+			label = win_mgr.getWindow ("CharInfo__auto_closebutton__");
+			if (label)
+			{
+				label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&CharInfo::onCloseButtonClicked, this));
+			}
+		}
+	}
+
 
 	updateTranslation();
 }
@@ -181,13 +219,26 @@ CharInfo::CharInfo (Document* doc)
 	std::ostringstream out_stream;
 
 	// Label Name
-	label =  win_mgr.getWindow("NameLabel");
+	// Prepare the name
 	out_stream.str("");
 	out_stream.str(player->getName().getRawText());
-	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
+	if (win_mgr.isWindowPresent ("NameLabel"))
 	{
-		label->setText((CEGUI::utf8*) out_stream.str().c_str());
+		label =  win_mgr.getWindow("NameLabel");
+		if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
+		{
+			label->setText((CEGUI::utf8*) out_stream.str().c_str());
+		}
 	}
+	else if (win_mgr.isWindowPresent ("CharInfo"))
+	{
+		label =  win_mgr.getWindow("CharInfo");
+		if (label->isPropertyPresent ("Text"))
+		{
+			label->setProperty ("Text", (CEGUI::utf8*) out_stream.str().c_str());
+		}
+	}
+
 
 	// Label Klasse
 	label =  win_mgr.getWindow("ClassValueLabel");
@@ -593,8 +644,19 @@ void CharInfo::updateTranslation()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 
-	label = win_mgr.getWindow("NameLabel");
-	label->setText((CEGUI::utf8*) gettext("Name"));
+	if (win_mgr.isWindowPresent ("NameLabel"))
+	{
+		label =  win_mgr.getWindow("NameLabel");
+		label->setText((CEGUI::utf8*) gettext("Name"));
+	}
+	else if (win_mgr.isWindowPresent ("CharInfo"))
+	{
+		label =  win_mgr.getWindow("CharInfo");
+		if (label->isPropertyPresent ("Text"))
+		{
+			label->setProperty ("Text", (CEGUI::utf8*) gettext("Name"));
+		}
+	}
 	
 	label = win_mgr.getWindow("Playerinfo");
 	label->setText((CEGUI::utf8*) gettext("Player info"));

@@ -23,7 +23,7 @@ IconEditorTab::IconEditorTab(const CEGUI::String& type, const CEGUI::String& nam
 {
 	setText("IconEd");
 
-	CEGUI::Window *m_tabLayout = WindowManager::getSingleton().loadWindowLayout("IconEditTab.layout");
+	CEGUI::Window *m_tabLayout = WindowManager::getSingleton().loadWindowLayout("iconedittab.layout");
 	m_tabLayout->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
 	m_tabLayout->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	this->addChildWindow(m_tabLayout);

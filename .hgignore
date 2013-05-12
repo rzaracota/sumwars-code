@@ -19,10 +19,4 @@ sumwars.exe
 # SUMWARS_PORTABLE_MODE inside source dir
 .sumwars/
 
-CMakeLists.txt.orig
-CMakeLists.txt.user
-Dependencies/*
-dxwebsetup.exe
-inst/*
-qtcreator-build/*
-oalinst.exe
+*.orig

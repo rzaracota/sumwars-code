@@ -75,6 +75,13 @@ class Gettext
 		 */
 		static int getLanguageCodeFromString (const std::string& languageString);
 
+		/**
+		 * Get the default user locale that can be used.
+		 * If the used language is not among the default supported ones, will default to en-US.
+		 * return The name of the locale
+		 */
+		static std::string getDefaultUsableLocale ();
+
 #endif
 
 	private:

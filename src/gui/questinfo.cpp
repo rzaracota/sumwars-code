@@ -15,8 +15,9 @@
 
 #include "questinfo.h"
 
-QuestInfo::QuestInfo (Document* doc)
-	:Window(doc)
+QuestInfo::QuestInfo (Document* doc, const std::string& ceguiSkinName)
+	: Window (doc)
+	, m_ceguiSkinName (ceguiSkinName)
 {
 	m_questname = "";
 	
@@ -27,8 +28,30 @@ QuestInfo::QuestInfo (Document* doc)
 	
 
 	// Rahmen fuer das Menue Savegame auswaehlen
-	CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("QuestInfo.layout");
-	m_window = quest_info;
+	CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("questinfo.layout");
+	if (!quest_info)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "questinfo.layout");
+	}
+	CEGUI::Window* quest_info_holder = win_mgr.loadWindowLayout( "questinfo_holder.layout" );
+	if (!quest_info_holder)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "questinfo_holder.layout");
+	}
+
+	CEGUI::Window* wndHolder = win_mgr.getWindow("QuestInfo_Holder");
+	CEGUI::Window* wndQuest = win_mgr.getWindow("QuestInfo");
+	if (wndHolder && wndQuest)
+	{
+		wndHolder->addChildWindow (wndQuest);
+	}
+	else
+	{
+		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for quests.");
+		if (!wndQuest) DEBUG ("ERROR: Unable to get the window for quests.");
+	}
+
+	m_window = quest_info_holder;
 	
 	quest_info->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
 	
@@ -59,9 +82,20 @@ QuestInfo::QuestInfo (Document* doc)
 	quest_descr->setReadOnly(true);
 	quest_descr->setText("");
 	
-
-	label = win_mgr.getWindow("QuestInfoCloseButton");
-	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&QuestInfo::onCloseButtonClicked, this));
+	if (win_mgr.isWindowPresent ("QuestInfoCloseButton"))
+	{
+		label = win_mgr.getWindow("QuestInfoCloseButton");
+		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&QuestInfo::onCloseButtonClicked, this));
+	}
+	else if (win_mgr.isWindowPresent ("QuestInfo__auto_closebutton__"))
+	{
+		CEGUI::Window* autoCloseButton;
+		autoCloseButton = win_mgr.getWindow ("QuestInfo__auto_closebutton__");
+		if (autoCloseButton)
+		{
+			autoCloseButton->subscribeEvent (CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber (&QuestInfo::onCloseButtonClicked, this));
+		}
+	}
 
 	updateTranslation();
 }
@@ -105,7 +139,7 @@ void QuestInfo::update()
 		    (state == Quest::FAILED && failed))
 		{
 			std::string name = quest->getName().getTranslation().c_str();
-			newitem = new StrListItem((CEGUI::utf8*) name.c_str(),it->first);
+			newitem = new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) name.c_str(),it->first);
 			questlist->addItem(newitem);
 			DEBUGX("add quest %s %s",quest->getName().getTranslation().c_str(),it->first.c_str());
 			
@@ -134,8 +168,19 @@ void QuestInfo::updateTranslation()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 
-	label = win_mgr.getWindow("Quests");
-	label->setText((CEGUI::utf8*) gettext("Quests"));
+	if (win_mgr.isWindowPresent ("Quests"))
+	{
+		label =  win_mgr.getWindow("Quests");
+		label->setText((CEGUI::utf8*) gettext("Quests"));
+	}
+	else if (win_mgr.isWindowPresent ("QuestInfo"))
+	{
+		label =  win_mgr.getWindow("QuestInfo");
+		if (label->isPropertyPresent ("Text"))
+		{
+			label->setProperty ("Text", (CEGUI::utf8*) gettext("Quests"));
+		}
+	}
 
 	label = win_mgr.getWindow("QuestOpenLabel");
 	label->setText((CEGUI::utf8*) gettext("open"));

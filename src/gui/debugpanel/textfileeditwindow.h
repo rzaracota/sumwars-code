@@ -20,7 +20,7 @@
 #include <CEGUI/CEGUIEvent.h>
 #include "filebrowser/filebrowser.h"
 
-#include "Poco/File.h"
+#include "boost/filesystem/path.hpp"
 
 class TextFileEditWindow : public CEGUI::Window
 {
@@ -29,7 +29,7 @@ public:
 	void close();
 	void save();
 	bool load(const CEGUI::String &m_file);
-	CEGUI::String getFilepath() { return m_file.path(); };
+    CEGUI::String getFilepath() { return m_file.string(); }
 	void setFilepath(CEGUI::String path);
 	
 	virtual bool handleTextChanged(const CEGUI::EventArgs& e);
@@ -39,7 +39,7 @@ public:
 	
 protected:
 	CEGUI::Event::Connection m_handleTextChangedConnection;
-	Poco::File m_file;
+    boost::filesystem::path m_file;
 	CEGUI::MultiLineEditbox *m_textEditBox;
 	bool m_isDirty;
 public:
@@ -47,6 +47,12 @@ public:
 	static CEGUI::String WidgetTypeName;
 private:
 	void getNewFileName();
+	
+	/**
+	 * \brief The name of the CEGUI skin to use.
+	 */
+	std::string m_ceguiSkinName;
+
 };
 
 #endif // TEXTFILEEDITWINDOW_H

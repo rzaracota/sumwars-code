@@ -13,6 +13,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifdef SUMWARS_BUILD_TOOLS
+#include "contenteditor.h"
+#include "gameinfotab.h"
+#endif
+
 #include "fstream"
 #include "document.h"
 
@@ -36,7 +41,6 @@
 
 #include "gettext.h"
 #include "stdstreamconv.h"
-
 
 #include "CEGUI/CEGUI.h"
 
@@ -433,8 +437,8 @@ void Document::onButtonSaveExitAbort()
 
 void Document::onButtonCredits()
 {
-	getGUIState()->m_shown_windows =CREDITS;
-	m_modified =WINDOWS_MODIFIED;
+	getGUIState ()->m_shown_windows = CREDITS;
+	m_modified = WINDOWS_MODIFIED;
 }
 
 void Document::onRightMouseButtonClick(Vector pos)
@@ -530,6 +534,11 @@ void Document::onLeftMouseButtonClick(Vector pos)
 	if (getGUIState()->m_cursor_object_id != 0)
 	{
 		id = getGUIState()->m_cursor_object_id;
+
+#ifdef SUMWARS_BUILD_TOOLS
+		GameInfoTab *gitab = (GameInfoTab*)ContentEditor::getSingleton().getComponent("GameInfoTab");
+		gitab->setClickedObjectID(id);
+#endif
 	}
 
 	m_gui_state.m_clicked_object_id = id;
@@ -815,14 +824,7 @@ void Document::onButtonStartSinglePlayer ()
 {
 	if (m_temp_player == 0)
 	{
-		// Show a notification.
-		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("WarningDialogWindow");
-		message->setInheritsAlpha(false);
-		message->setVisible(true);
-		message->setModalState(true);
-		win_mgr.getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("Please select a character first!"));
-
+		showWarning (gettext("Please select a character first!"));
 		DEBUG ("Warning: Tried to start a game without a selected char!");
 		return;
 	}
@@ -1036,11 +1038,16 @@ void Document::onButtonMinimapClicked()
 void Document::onButtonOptionsClicked()
 {
 	if (!checkSubwindowsAllowed() && getGUIState()->m_sheet ==  Document::GAME_SCREEN)
+	{
+		DEBUG ("Subwindows are allowed, and Current state: GAME_SCREEN; so you're not allowed to toggle this window... for some reason");
 		return;
+	}
 
 	getGUIState()->m_shown_windows ^= OPTIONS;
 	// Opened windows have changed.
 	m_modified |= WINDOWS_MODIFIED;
+
+	DEBUG ("Set internal state data for options button toggle");
 }
 
 
@@ -1431,16 +1438,27 @@ bool Document::onKeyPress(KeyCode key)
 		}
 		else if(dest == SHOW_CHATBOX_NO_TOGGLE)
 		{
-			// Chatfenster oeffnen wenn es gerade geschlossen ist
-			if (!(getGUIState()->m_shown_windows & CHAT))
+			// If the enter key is pressed when the "Save & Exit" window is displayed, treat it as an 'accept'.
+			if (m_gui_state.m_shown_windows & SAVE_EXIT)
 			{
-				getGUIState()->m_shown_windows |= CHAT;
-
-				// Geoeffnete Fenster haben sich geaendert
-				m_modified |= WINDOWS_MODIFIED;
-
+				onButtonSaveExitConfirm ();
 			}
+			else if (m_gui_state.m_shown_windows & MESSAGE)
+			{
+				// Close the message
+				hideWarning ();
+			}
+			else
+			{
+				// Toggle the chat window open status.
+				if (!(getGUIState()->m_shown_windows & CHAT))
+				{
+					getGUIState()->m_shown_windows |= CHAT;
 
+					// Signal that the opened windows changed.
+					m_modified |= WINDOWS_MODIFIED;
+				}
+			}
 		}
 		else if (dest == CLOSE_ALL)
 		{
@@ -1461,7 +1479,7 @@ bool Document::onKeyPress(KeyCode key)
 			}
 			else if (m_gui_state.m_shown_windows & QUESTIONBOX)
 			{
-				// Versuch, aktuelles Gespraech abzubrechen
+				// Try to break the current speech.
 				onAnswerClick(-1);
 			}
 			else if (m_gui_state.m_shown_windows & (HOST_GAME | JOIN_GAME | CHAR_CREATE ))
@@ -1469,10 +1487,27 @@ bool Document::onKeyPress(KeyCode key)
 				m_gui_state.m_shown_windows = Document::START_MENU;
 				m_modified |= WINDOWS_MODIFIED;
 			}
+			else if (m_gui_state.m_shown_windows & OPTIONS)
+			{
+				onButtonOptionsClicked ();
+			}
+			else if (m_gui_state.m_shown_windows & 	MESSAGE)
+			{
+				hideWarning ();
+			}
+			else if (m_gui_state.m_shown_windows & 	QUESTION_DIALOG)
+			{
+				hideQuestionDialog ();
+			}
+			else if (m_gui_state.m_shown_windows & CREDITS)
+			{
+				// If the user presses [ESC] during the credits section, leave the credits.
+				onStartScreenClicked ();
+			}
 			else
 			{
 				m_gui_state.m_shown_windows =  CONTROL_PANEL;
-			// Geoeffnete Fenster haben sich geaendert
+				// Notify that the displayed windows changed.
 				m_modified |= WINDOWS_MODIFIED;
 			}
 		}
@@ -1511,7 +1546,7 @@ bool  Document::onKeyRelease(KeyCode key)
 
 void Document::update(float time)
 {
-	// Welt eine Zeitscheibe weiter laufen lassen
+	// Let the world run for another time unit.
 	if (World::getWorld() != 0)
 	{
 		// game is paused for single player if save and exit window is shown
@@ -1920,4 +1955,95 @@ Player*  Document::getLocalPlayer()
 		return m_temp_player;
 
 	return static_cast<Player*>(World::getWorld()->getLocalPlayer());
+}
+
+
+
+void Document::showWarning (const std::string& textMessage)
+{
+	// Show a notification.
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	if (! win_mgr.isWindowPresent ("WarningDialogWindow"))
+	{
+		DEBUG ("Could not display the warning widget: [WarningDialogWindow]");
+		return;
+	}
+
+	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("WarningDialogWindow");
+	message->setInheritsAlpha(false);
+	message->setVisible(true);
+	message->setModalState(true);
+	win_mgr.getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) textMessage.c_str ());
+
+	getGUIState()->m_shown_windows |= MESSAGE;
+	m_modified |= WINDOWS_MODIFIED;
+
+}
+
+
+void Document::hideWarning ()
+{
+	// Show a notification.
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+
+	if (win_mgr.isWindowPresent ("WarningDialogWindow"))
+	{
+		CEGUI::Window* widget = win_mgr.getWindow("WarningDialogWindow");
+		if (widget->isVisible ())
+		{
+			widget->setVisible (false);
+			widget->setModalState (false);
+		}
+	}
+
+	// If a MESSAGE is displayed, remove the status from the shown windows. XOR it.
+	if (getGUIState()->m_shown_windows & MESSAGE)
+	{
+		getGUIState()->m_shown_windows ^= MESSAGE;
+		m_modified |= WINDOWS_MODIFIED;
+	}
+}
+
+void Document::showQuestionDialog ()
+{
+	// Show a notification.
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+	if (! win_mgr.isWindowPresent ("QuestionInfoRoot"))
+	{
+		DEBUG ("Could not display the warning widget: [QuestionInfoRoot]");
+		return;
+	}
+
+	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("QuestionInfoRoot");
+	message->setInheritsAlpha(false);
+	message->setVisible(true);
+	message->setModalState(true);
+
+	getGUIState()->m_shown_windows |= QUESTION_DIALOG;
+	m_modified |= WINDOWS_MODIFIED;
+
+}
+
+
+void Document::hideQuestionDialog ()
+{
+	// Show a notification.
+	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+
+	if (win_mgr.isWindowPresent ("QuestionInfoRoot"))
+	{
+		CEGUI::Window* widget = win_mgr.getWindow("QuestionInfoRoot");
+		if (widget && widget->isVisible ())
+		{
+			widget->setVisible (false);
+			widget->setModalState (false);
+		}
+	}
+
+	// If a MESSAGE is displayed, remove the status from the shown windows. XOR it.
+	if (getGUIState()->m_shown_windows & QUESTION_DIALOG)
+	{
+		getGUIState()->m_shown_windows ^= QUESTION_DIALOG;
+		m_modified |= WINDOWS_MODIFIED;
+	}
 }

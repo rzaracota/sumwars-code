@@ -28,39 +28,40 @@ class SavegameList : public Window
 {
 	public:
 		/**
-		 * \fn SavegameList (Document* doc)
-		 * \brief Konstruktor
-		 * \param doc Dokument
+		 * \fn SavegameList (Document* doc, const std::string& ceguiSkinName);)
+		 * \brief Constructor
+		 * \param doc Document
+		 * \param ceguiSkinName The name of the cegui skin to use for any widgets created internally.
 		 */
-		SavegameList (Document* doc);
+		SavegameList (Document* doc, const std::string& ceguiSkinName);
 	
 		/**
 		 * \fn virtual void update()
-		 * \brief aktualisiert den Inhalt des Fensters
+		 * \brief Update the current widget's (window) content.
 		 */
 		virtual void update();
 		
 		/**
-		 * \brief selects the default savegame stored in the options
+		 * \brief Selects the default savegame stored in the options
 		 */
 		void selectDefaultSavegame();
 		
 		/**
 		 * \fn virtual void updateTranslation
-		 * \brief aktualisiert die Uebersetzungen
+		 * \brief Updates the translations. Will reapply the texts to various items contained in this widget.
 		 */
 		virtual void updateTranslation();
 		
 		/**
 		 * \fn bool onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
-		 * \brief Behandelt Klick auf Button Charakter loeschen (yes)
+		 * \brief Handle the confirmation for a character deletion request (Equivalent to answering "yes")
 		 */
 		bool onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt);
 		
 		
 		/**
 		 * \fn bool onDeleteCharAbortClicked(const CEGUI::EventArgs& evt)
-		 * \brief Behandelt Klick auf Button Charakter loeschen (no)
+		 * \brief Handle the abort for a character deletion request (Equivalent to answering "no")
 		 */
 		bool onDeleteCharAbortClicked(const CEGUI::EventArgs& evt);
 		
@@ -69,33 +70,31 @@ class SavegameList : public Window
 	private:
 		/**
 		 * \fn bool onSavegameChosen(const CEGUI::EventArgs& evt)
-		 * \brief Behandelt Auswahl eines Savegames in der Liste
+		 * \brief Handle the selection of a saved game in the list.
 		 */
 		bool onSavegameChosen(const CEGUI::EventArgs& evt);
 		
 		/**
 		 * \fn bool onSavegameDoubleClick(const CEGUI::EventArgs& evt)
-		 * \brief Behandelt Auswahl eines Savegames in der Liste
+		 * \brief Handle the selection of a saved game in the list.
 		 */
 		bool onSavegameDoubleClick(const CEGUI::EventArgs& evt);
 		
 		/**
 		 * \fn bool onNewCharClicked(const CEGUI::EventArgs& evt)
-		 * \brief Behandelt Klick auf Button neuer Charakter
+		 * \brief Handle the click on the button to create a New character.
 		 */
 		bool onNewCharClicked(const CEGUI::EventArgs& evt);
 		
 		/**
 		 * \fn bool onDeleteCharClicked(const CEGUI::EventArgs& evt)
-		 * \brief Behandelt Klick auf Button Charakter loeschen
+		 * \brief Handle the click on a character's Delete button
 		 */
 		bool onDeleteCharClicked(const CEGUI::EventArgs& evt);
 		
-		
-
 		/**
 		 * \fn bool onSavegameSelected(const CEGUI::EventArgs& evt)
-		 * \brief Behandelt Auswahl eines Savegames
+		 * \brief Handle the selection of a saved game in the list.
 		 */
 		bool onSavegameSelected(const CEGUI::EventArgs& evt);
 
@@ -110,6 +109,15 @@ class SavegameList : public Window
           */
         int m_numCurrentCharacterButtons;
 
+		/**
+		 * \brief The name of the CEGUI skin to use.
+		 */
+		std::string m_ceguiSkinName;
+
+		/**
+		 * \brief The mapping between the file names and the buttons used for the chars.
+		 */
+		std::map <std::string, std::string> m_fileSaveMapping;
 };
 
 #endif

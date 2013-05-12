@@ -30,3 +30,35 @@ Artwork provided by: Psycho
 Default License: CC-BY-SA
 Files:
 	worldMap.png
+
+Artwork provided by: Jorge Avila
+Default License: LGLP 3.0 (also available under CC-BY)
+Files:
+	CharacterScreen.png
+  ControlPanel.png
+  Inventory.png
+  main_menu.png
+  misc.png
+  OptionsWindow.png
+  portrait.png
+  SkillTree.png
+  SumWarsLogo.png
+  TradeWindow.png
+
+Artwork provided by: Augustin Preda (dezGusty)
+Default License: LGPL 3.0 (also available under CC-BY)
+Files:
+  ControlPanel.png
+  Resummoned.png
+  ResummonedCursors.png
+  SumWarsExtras.png
+  SumWarsLogo.png
+	SWB.png
+  SWBCursors.png 
+
+Artwork provided by: J. W. Bjerk
+Default License: GPL 3.0
+For additional details, please visit http://opengameart.org/content/painterly-spell-icons-part-1
+Files:
+	skills.png
+

@@ -49,6 +49,7 @@ protected:
 	virtual bool handleFileBrowserCancelClicked(const CEGUI::EventArgs& e);
 	
 	void createMenu();
+
 protected:
 	FileBrowser *m_fb;
 	int m_newFileCtr;
@@ -56,6 +57,10 @@ protected:
 	CEGUI::Editbox *m_filePathEditBox;
 	CEGUI::Menubar *m_menubar;
 	CEGUI::TabControl *m_fileTabControl;
+	/**
+	 * \brief The name of the CEGUI skin to use.
+	 */
+	std::string m_ceguiSkinName;
 public:
 	static CEGUI::String WidgetTypeName;
 };

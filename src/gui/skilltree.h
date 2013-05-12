@@ -30,7 +30,7 @@ class SkillTree : public Window
 		 * \param keyboard OIS keyboard
 		 * \brief Konstruktor
 		 */
-		SkillTree (Document* doc, OIS::Keyboard *keyboard);
+		SkillTree (Document* doc, OIS::Keyboard *keyboard, const std::string& ceguiSkinName);
 	
 		/**
 		 * \fn virtual void update()
@@ -113,6 +113,12 @@ class SkillTree : public Window
 		 * \brief number of shortkey labels
 		 */
 		int m_shortkey_labels;
+
+		/**
+		 * \brief The name of the CEGUI skin to use.
+		 */
+		std::string m_ceguiSkinName;
+
 };
 
 #endif // __SUMWARS_GUI_SKILLTREE_H__

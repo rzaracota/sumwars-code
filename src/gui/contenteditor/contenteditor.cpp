@@ -32,6 +32,7 @@
 #include "fixedobjecteditor.h"
 #include "itemeditor.h"
 #include "monstereditor.h"
+#include "gameinfotab.h"
 
 using namespace CEGUI;
 
@@ -53,7 +54,7 @@ void ContentEditor::init(bool visible)
 	gameScreen->addChildWindow(m_rootWindow);
 	
 	CEGUI::Window* rootWindow;
-	rootWindow = CEGUI::WindowManager::getSingleton().loadWindowLayout("ContentEditor.layout");
+	rootWindow = CEGUI::WindowManager::getSingleton().loadWindowLayout("contenteditor.layout");
 	rootWindow->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
 	rootWindow->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	m_rootWindow->addChildWindow(rootWindow);
@@ -61,8 +62,8 @@ void ContentEditor::init(bool visible)
 	// initialisation of the selected tabs for more intuitive use
 	static_cast<CEGUI::TabControl*>(win_mgr.getWindow("ObjectInfoTabControl"))->setSelectedTab("RenderInfoTab");
 	static_cast<CEGUI::TabControl*>(win_mgr.getWindow("RenderInfoTabControl"))->setSelectedTab("RITab/BasicMesh");
-	static_cast<CEGUI::TabControl*>(win_mgr.getWindow("FixedObjectTabControl"))->setSelectedTab("FOTab/Properties");
-	static_cast<CEGUI::TabControl*>(win_mgr.getWindow("MonsterTabControl"))->setSelectedTab("MonsterTab/Properties");
+    static_cast<CEGUI::TabControl*>(win_mgr.getWindow("FixedObjectTabControl"))->setSelectedTab("FOTab/Properties");
+    static_cast<CEGUI::TabControl*>(win_mgr.getWindow("MonsterTabControl"))->setSelectedTab("MonsterTab/Properties");
 
 	// create SceneManager for renderering images for the content editor
 	Ogre::SceneManager* editor_scene_mng = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC,"EditorSceneManager");
@@ -81,7 +82,7 @@ void ContentEditor::init(bool visible)
 	editorCamPitchNode->setFixedYawAxis(true);
 	
 	
-	// texture that is creates from the camera image
+    // texture that is created from the camera image
 	Ogre::TexturePtr editor_texture = Ogre::TextureManager::getSingleton().createManual( "editor_tex",
 			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, Ogre::TEX_TYPE_2D,
    512, 512, 0, Ogre::PF_R8G8B8A8, Ogre::TU_RENDERTARGET );
@@ -123,6 +124,7 @@ void ContentEditor::init(bool visible)
 	m_components["RIEditor"] = new RenderInfoEditor();
 	m_components["ItemEditor"] = new ItemEditor();
 	m_components["MonsterEditor"] = new MonsterEditor();
+    m_components["GameInfoTab"] = new GameInfoTab();
 	
 	std::map<std::string, ContentEditorTab*>::iterator it;
 	for (it = m_components.begin(); it != m_components.end(); ++it)

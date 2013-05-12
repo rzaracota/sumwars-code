@@ -38,7 +38,7 @@ class Inventory : public ItemWindow
 	 * \brief Konstruktor
 		 */
 		Inventory (Document* doc);
-	
+
 		/**
 		 * \fn virtual void update()
 		 * \brief Updates the window contents

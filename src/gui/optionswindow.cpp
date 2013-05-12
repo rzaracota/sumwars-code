@@ -23,23 +23,54 @@
 #include <OgreConfigFile.h>
 #include <OgreException.h>
 #include <OgreResourceGroupManager.h>
+#include "ceguiutility.h"
 
 using namespace std;
 
-OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
-	:Window(doc)
+OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std::string& ceguiSkinName)
+	: Window (doc)
+	, m_ceguiSkinName (ceguiSkinName)
 {
 	m_keyboard = keyboard;
 
-	DEBUGX("setup main menu");
-	// GUI Elemente erzeugen
+	DEBUG ("OptionsWindow being created using cegui skin [%s]", m_ceguiSkinName.c_str ());
+	// Generate GUI Elements
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
-	CEGUI::FrameWindow* options = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("OptionsWindow.layout");
-	m_window = options;
+	// Load the base options window - containing the actual elements.
+	CEGUI::FrameWindow* options = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("optionswindow.layout");
+	if (!options)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "optionswindow.layout");
+	}
+
+	// Load the holder layout. This should be diffeent for each aspect ratio.
+	CEGUI::Window* options_holder = win_mgr.loadWindowLayout( "options_holder.layout" );
+	if (!options_holder)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "options_holder.layout");
+	}
+
+	CEGUI::Window* wndHolder = win_mgr.getWindow("OptionsWindow_Holder");
+	CEGUI::Window* wndHeldWindow = win_mgr.getWindow("OptionsWindow");
+	if (wndHolder && wndHeldWindow)
+	{
+		wndHolder->addChildWindow (wndHeldWindow);
+	}
+	else
+	{
+		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for options window.");
+		if (!wndHeldWindow) DEBUG ("ERROR: Unable to get the window for options window.");
+	}
+
+
 	options->setAlwaysOnTop(true);
-	
+	options_holder->setAlwaysOnTop (true);
+	m_window = options_holder;
+
+	DEBUG ("OptionsWindow (ctor) loaded layout");
+
 	// Rahmen fuer das Menue Savegame auswaehlen
 	CEGUI::TabControl* optionstab = (CEGUI::TabControl*) win_mgr.getWindow("OptionsWindowTab");
 	optionstab->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&OptionsWindow::onAreaMouseButtonPressed, this));
@@ -61,7 +92,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsMisc");
 	label->setInheritsAlpha(false);
 	
-
+	DEBUG ("OptionsWindow (ctor) adding labels");
 
 	int targets[9] = {SHOW_INVENTORY, SHOW_CHARINFO, SHOW_SKILLTREE, SHOW_PARTYMENU, SHOW_CHATBOX, SHOW_QUESTINFO, SHOW_MINIMAP, SWAP_EQUIP, SHOW_ITEMLABELS};
 
@@ -84,17 +115,19 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&OptionsWindow::onShortkeyLabelClicked,  this));
 	}
 	
+	DEBUG ("Adding difficulty combo-box");
 	CEGUI::Combobox* diffcbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("DifficultyBox"));
-	diffcbo->addItem(new ListItem((CEGUI::utf8*) gettext("Easy"),Options::EASY));
-	diffcbo->addItem(new ListItem((CEGUI::utf8*) gettext("Normal"),Options::NORMAL));
-	diffcbo->addItem(new ListItem((CEGUI::utf8*) gettext("Hard"),Options::HARD));
-	diffcbo->addItem(new ListItem((CEGUI::utf8*) gettext("Insane"),Options::INSANE));
+	diffcbo->addItem(new ListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Easy"),Options::EASY));
+	diffcbo->addItem(new ListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Normal"),Options::NORMAL));
+	diffcbo->addItem(new ListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Hard"),Options::HARD));
+	diffcbo->addItem(new ListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Insane"),Options::INSANE));
 	diffcbo->setReadOnly(true);
 	diffcbo->setItemSelectState((size_t) 0,true);
 	diffcbo->handleUpdatedListItemData();
 	diffcbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onDifficultyChanged, this));
 	diffcbo->setItemSelectState( (size_t) (Options::getInstance()->getDifficulty()-1),true);
 	
+	DEBUG ("Adding sliders");
 	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.getWindow("TextSpeedSlider"));
 	slider->setPageSize (0.01f);
 	slider->setDocumentSize(1.0f);
@@ -117,18 +150,18 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	slider->subscribeEvent(CEGUI::Scrollbar::EventScrollPositionChanged, CEGUI::Event::Subscriber(&OptionsWindow::onSoundVolumeChanged,  this));
 
 	CEGUI::Combobox* ehlcbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("EHColorBox"));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("White"), "white", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Black"), "black", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Red"), "red", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Green"), "green", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Blue"), "blue", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Yellow"), "yellow", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Magenta"), "magenta", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Cyan"), "cyan", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Orange"), "orange", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Pink"), "pink", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Purple"), "purple", 0));
-	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Cornflower Blue"), "cornflower_blue", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("White"), "white", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Black"), "black", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Red"), "red", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Green"), "green", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Blue"), "blue", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Yellow"), "yellow", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Magenta"), "magenta", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Cyan"), "cyan", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Orange"), "orange", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Pink"), "pink", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Purple"), "purple", 0));
+	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Cornflower Blue"), "cornflower_blue", 0));
 
 	ehlcbo->setReadOnly(true);
 	ehlcbo->setItemSelectState((size_t) getColorSelectionIndex("red"), true);
@@ -151,14 +184,24 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	btn->setID(5);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&OptionsWindow::onButtonOkClicked, this));
 
+	if (win_mgr.isWindowPresent ("OptionsWindow__auto_closebutton__"))
+	{
+		label = win_mgr.getWindow ("OptionsWindow__auto_closebutton__");
+		if (label)
+		{
+			label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&OptionsWindow::onButtonCancelClicked, this));
+		}
+	}
+	
+
 	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("LanguageBox"));
-	cbo->addItem(new StrListItem((CEGUI::utf8*) gettext("System default"),"",0));
-	cbo->addItem(new StrListItem("German","de_DE",0));
-	cbo->addItem(new StrListItem("English GB","en_GB",0));
-	cbo->addItem(new StrListItem("English US","en_US",0));
-	cbo->addItem(new StrListItem("Italian IT","it_IT",0));
-	cbo->addItem(new StrListItem("Russian RU","ru_RU",0));
-	cbo->addItem(new StrListItem("Ukrainian UK","uk_UA",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("System default"),"",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "German","de_DE",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "English GB","en_GB",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "English US","en_US",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Italian IT","it_IT",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Russian RU","ru_RU",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Ukrainian UK","uk_UA",0));
 
 	cbo->setReadOnly(true);
 
@@ -169,7 +212,8 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	{
 		locale = locale.substr(0,pos);
 	}
-	DEBUG("%s",locale.c_str());
+
+	DEBUG ("OptionsWindow (ctor) current locale is [%s]", locale.c_str ());
 	
 	for (int i=0; i < (int)cbo->getItemCount(); i++)
 	{
@@ -186,8 +230,8 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 
 	// TODO: add comments.
 	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("DisplayModeBox"));
-	cbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Fullscreen (Exclusive Mode)"),"",0));
-	cbo->addItem(new StrListItem((CEGUI::utf8*) gettext("Window (With Borders)"),"",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Fullscreen (Exclusive Mode)"),"",0));
+	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Window (With Borders)"),"",0));
 
 	if (Options::getInstance ()->isWindowedFullscreenModeSupported ())
 	{
@@ -196,7 +240,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 		std::string recommended = gettext (" - recommended");
 		std::string sum = modeName + recommended;
 
-		cbo->addItem(new StrListItem((CEGUI::utf8*) sum.c_str(),"",0));
+		cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) sum.c_str(),"",0));
 	}
 	else
 	{
@@ -228,7 +272,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	for (std::vector <std::string>::const_iterator it = videoDrivers.begin (); it != videoDrivers.end (); ++ it)
 	{
 		std::string myName = *it;
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) myName.c_str (), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) myName.c_str (), "", 0));
 		if (myName == selectedVideoDriver)
 		{
 			cbo->setItemSelectState (cbo->getItemCount () - 1, true);
@@ -257,7 +301,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow ("ResolutionBox"));
 	for (std::vector <std::string>::const_iterator it = resolutions.begin (); it != resolutions.end (); ++ it)
 	{
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) it->c_str (), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) it->c_str (), "", 0));
 		if (*it == usedResolution)
 		{
 			cbo->setItemSelectState (cbo->getItemCount () - 1, true);
@@ -291,11 +335,11 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow ("ShadowsDropDownList"));
 	if (cbo)
 	{
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Off"), "", 0));
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simple (Higher quality)"), "", 0));
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simple (Lower quality)"), "", 0));
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simulated (Experimental 1)"), "", 0));
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) gettext("Simulated (Experimental 2)"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Off"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Simple (Higher quality)"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Simple (Lower quality)"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Simulated (Experimental 1)"), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Simulated (Experimental 2)"), "", 0));
 
 		if (usedShadowMode >= Options::SM_NONE && usedShadowMode < Options::SM_COUNT)
 		{
@@ -315,6 +359,26 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard)
 		cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onShadowModeSelected, this));
 	}
 
+	// Select the 1st available tab.
+	// This is a pre-emptive work-around for CEGUI 0.8+ support (which uses hierarchical items)
+	std::string widgetName =  CEGUIUtility::getNameForWidget ("OptionsWindow_Holder/OptionsWindow/OptionsWindowTab");
+	if (win_mgr.isWindowPresent (widgetName))
+	{
+		CEGUI::TabControl* tc = static_cast <CEGUI::TabControl*> (CEGUIUtility::getWindow (widgetName));
+		if (tc)
+		{
+			if (tc->getTabCount () > 0)
+			{
+				tc->setSelectedTabAtIndex(0);
+				tc->invalidate (true);
+				tc->invalidateRenderingSurface ();
+			}
+		}
+		else
+		{
+			DEBUG ("Options Window init: could not find item named %s", widgetName.c_str());
+		}
+	}
 
 	reset();
 	updateTranslation();
@@ -391,8 +455,19 @@ void OptionsWindow::updateTranslation()
 	CEGUI::DefaultWindow* misc = (CEGUI::DefaultWindow*) win_mgr.getWindow("OptionsMisc");
 	misc->setText((CEGUI::utf8*) gettext("Language"));
 
-	label = win_mgr.getWindow("OptionsLabel");
-	label->setText((CEGUI::utf8*) gettext("Options"));
+	if (win_mgr.isWindowPresent ("OptionsLabel"))
+	{
+		label = win_mgr.getWindow("OptionsLabel");
+		label->setText((CEGUI::utf8*) gettext("Options"));
+	}
+	else if (win_mgr.isWindowPresent ("OptionsWindow"))
+	{
+		label =  win_mgr.getWindow("OptionsWindow");
+		if (label->isPropertyPresent ("Text"))
+		{
+			label->setProperty ("Text", (CEGUI::utf8*) gettext("Options"));
+		}
+	}
 
 	label = win_mgr.getWindow("ShortkeyLabel0");
 	label->setText((CEGUI::utf8*) gettext("Inventory"));
@@ -506,8 +581,16 @@ bool OptionsWindow::onAreaMouseButtonPressed(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+
+bool OptionsWindow::onButtonCancelClicked (const CEGUI::EventArgs& evt)
+{
+	m_document->onButtonOptionsClicked();
+	return true;
+}
+
 bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 {
+	DEBUG ("[Ok] button clicked in options. Attempting to save them");
 	// TODO: move video mode checks to separate function? or just wait for the full integration with the rest of the options?
 
 	// Check to see if the display mode was updated. The display mode is stored in a different file at the moment.
@@ -522,37 +605,77 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 		CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("VideoDriverBox"));
 		if (cbo == 0)
 		{
+			DEBUG ("Could not find widget [VideoDriverBox]");
 			return false;
 		}
 
 		CEGUI::ListboxItem* item = cbo->getSelectedItem();
 		if (item == 0)
 		{
-			return false;
+			DEBUG ("Could not find selected item in widget [VideoDriverBox]. Searching via text values. (slower)");
+			CEGUI::String currentText = cbo->getText();
+
+			for (unsigned i = 0; i < cbo->getItemCount (); i ++)
+			{
+				if (cbo->getListboxItemFromIndex (i)->getText () == currentText)
+				{
+					item = cbo->getListboxItemFromIndex (i);
+				}
+			}
 		}
-		std::string selectedDriverName = item->getText ().c_str ();
-		someVideoSettingsWereChanged  |= (selectedDriverName != Options::getInstance ()->getUsedVideoDriver ());
+
+		if (item == 0)
+		{
+			DEBUG ("Could not find selected item in widget [VideoDriverBox]. Unable to store any changes!!!");
+		}
+
+		std::string selectedDriverName (Options::getInstance ()->getUsedVideoDriver ());
+
+		if (item != 0)
+		{
+			selectedDriverName = item->getText ().c_str ();
+			someVideoSettingsWereChanged  |= (selectedDriverName != Options::getInstance ()->getUsedVideoDriver ());
+		}
 
 		// Check the display mode for changes. ---------------
 		cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("DisplayModeBox"));
 		if (cbo == 0)
 		{
+			DEBUG ("Could not find widget [DisplayModeBox]");
 			return false;
 		}
 
 		item = cbo->getSelectedItem();
 		if (item == 0)
 		{
-			return false;
+			DEBUG ("Could not find selected item in widget [DisplayModeBox]. Searching via text values. (slower)");
+			CEGUI::String currentText = cbo->getText();
+			
+			for (unsigned i = 0; i < cbo->getItemCount (); i ++)
+			{
+				if (cbo->getListboxItemFromIndex (i)->getText () == currentText)
+				{
+					item = cbo->getListboxItemFromIndex (i);
+				}
+			}
+		}
+		if (item == 0)
+		{
+			DEBUG ("Could not find selected item in widget [DisplayModeBox]. Unable to store any changes!!!");
 		}
 
-		size_t selectionIndex = (int)cbo->getItemIndex (item);
+		DisplayModes userMode = Options::getInstance ()->getUsedDisplayMode ();
 
-		DEBUG ("selected display mode %s",item->getText().c_str());
-		DEBUG ("idx of selection is: %d", selectionIndex);
+		if (item != 0)
+		{
+			size_t selectionIndex = (int)cbo->getItemIndex (item);
+
+			DEBUG ("selected display mode %s",item->getText().c_str());
 		
-		DisplayModes userMode = (DisplayModes)selectionIndex;
-		someVideoSettingsWereChanged |= (userMode != Options::getInstance ()->getUsedDisplayMode ());
+			userMode = (DisplayModes)selectionIndex;
+			DEBUG ("Index of combobox selection is: %d. New display mode set to %d", selectionIndex, userMode);
+			someVideoSettingsWereChanged |= (userMode != Options::getInstance ()->getUsedDisplayMode ());
+		}
 
 		// Check the resolution for changes -----------------------
 		std::string userResolution;
@@ -560,6 +683,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 
 		if (cbo == 0)
 		{
+			DEBUG ("Could not find widget [ResolutionBox]");
 			return false;
 		}
 
@@ -587,20 +711,41 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 		cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("ShadowsDropDownList"));
 		if (cbo == 0)
 		{
+			DEBUG ("Could not find widget [ShadowsDropDownList]");
 			return false;
 		}
 
 		item = cbo->getSelectedItem();
 		if (item == 0)
 		{
-			return false;
+			DEBUG ("Could not find selected item in widget [ShadowsDropDownList]. Searching via text values. (slower)");
+			CEGUI::String currentText = cbo->getText();
+			
+			for (unsigned i = 0; i < cbo->getItemCount (); i ++)
+			{
+				if (cbo->getListboxItemFromIndex (i)->getText () == currentText)
+				{
+					item = cbo->getListboxItemFromIndex (i);
+				}
+			}
 		}
-		selectionIndex = (int)cbo->getItemIndex (item);
 
-		// Limit the values to the available options.
-		if (selectionIndex >= Options::SM_COUNT) selectionIndex = Options::SM_COUNT - 1;
-		if (selectionIndex < Options::SM_NONE) selectionIndex = Options::SM_NONE;
-		Options::ShadowMode newShadowSettings = static_cast<Options::ShadowMode> (selectionIndex);
+		if (item == 0)
+		{
+			DEBUG ("Could not find selected item in widget [ShadowsDropDownList]. Unable to store any changes!!!");
+		}
+
+		Options::ShadowMode newShadowSettings = Options::getInstance ()->getShadowMode ();
+
+		if (item != 0)
+		{
+			size_t selectionIndex = (int)cbo->getItemIndex (item);
+			// Limit the values to the available options.
+			if (selectionIndex >= Options::SM_COUNT) selectionIndex = Options::SM_COUNT - 1;
+			if (selectionIndex < Options::SM_NONE) selectionIndex = Options::SM_NONE;
+			newShadowSettings = static_cast<Options::ShadowMode> (selectionIndex);
+		}
+
 
 		DEBUG ("Used shadow mode (old - new) : %d - %d", Options::getInstance ()->getShadowMode (), newShadowSettings);
 	
@@ -636,6 +781,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 			{
 				if (e.getNumber () == Ogre::Exception::ERR_FILE_NOT_FOUND)
 				{
+					DEBUG ("Could not find OGRE config file");
 					return false;
 				}
 				else
@@ -725,12 +871,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 			// Show a notification, but not for a running game. We should basically have only 2 cases here:
 			if (m_document->getState () != Document::RUNNING)
 			{
-				CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton ();
-				CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow ("WarningDialogWindow");
-				message->setInheritsAlpha (false);
-				message->setVisible (true);
-				message->setModalState (true);
-				win_mgr.getWindow ("WarningDialogLabel")->setText ((CEGUI::utf8*) gettext ("Please restart the game\n for the changes to take effect!"));
+				m_document->showWarning (gettext ("Please restart the game\n for the changes to take effect!"));
 			}
 		} // user display mode changed.
 	}
@@ -746,7 +887,7 @@ bool OptionsWindow::onSoundVolumeChanged(const CEGUI::EventArgs& evt)
 
 	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(we.window);
 	float vol = slider->getScrollPosition();
-	DEBUGX("sound volume change to %f",vol);
+	DEBUG("sound volume change to %f",vol);
 	SoundSystem::setSoundVolume(vol);
 	return true;
 }
@@ -762,6 +903,11 @@ bool OptionsWindow::onDifficultyChanged(const CEGUI::EventArgs& evt)
 	if (item != 0)
 	{
 		Options::getInstance()->setDifficulty(static_cast<Options::Difficulty>(item->getID()));
+		DEBUG ("Difficulty changed. %s", item->getText ().c_str ());
+	}
+	else
+	{
+		DEBUG ("Difficulty changed. Unknown!");
 	}
 	
 	return true;
@@ -883,6 +1029,7 @@ bool OptionsWindow::onLanguageSelected(const CEGUI::EventArgs& evt)
 
 bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 {
+	DEBUG ("Display mode selected");
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 
@@ -890,6 +1037,7 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 
 	if (cbo == 0)
 	{
+		DEBUG ("CEGUI ERROR: source widget is NULL");
 		return false;
 	}
 
@@ -897,6 +1045,7 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 
 	if (item == 0)
 	{
+		DEBUG ("CEGUI ERROR: No valid selection in source widget");
 		return false;
 	}
 
@@ -911,6 +1060,12 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 	// For windowed (fullscreen) mode, make sure the resolution can't be edited.
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton ();
+
+	if (! win_mgr.isWindowPresent ("ResolutionBox"))
+	{
+		DEBUG ("Layout ERROR: Could not find expected combo [ResolutionBox]");
+		return false;
+	}
 	cbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow ("ResolutionBox"));
 	if (myDisplayMode == WINDOWED_FULLSCREEN)
 	{
@@ -964,6 +1119,7 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 
 bool OptionsWindow::onVideoDriverSelected (const CEGUI::EventArgs& evt)
 {
+	DEBUG ("Video Driver selected");
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 
@@ -1009,7 +1165,7 @@ bool OptionsWindow::onVideoDriverSelected (const CEGUI::EventArgs& evt)
 	for (std::vector <std::string>::const_iterator it = resolutions.begin (); it != resolutions.end (); ++ it)
 	{
 		DEBUG ("New mode: %s", it->c_str ());
-		cbo->addItem (new StrListItem ((CEGUI::utf8*) it->c_str (), "", 0));
+		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) it->c_str (), "", 0));
 		if (*it == usedResolution)
 		{
 			cbo->setItemSelectState (cbo->getItemCount () - 1, true);
@@ -1017,6 +1173,19 @@ bool OptionsWindow::onVideoDriverSelected (const CEGUI::EventArgs& evt)
 	}
 
 	cbo->handleUpdatedListItemData ();
+
+	if (win_mgr.isWindowPresent ("OptionsWindowTab"))
+	{
+		CEGUI::TabControl* tc = static_cast <CEGUI::TabControl*> (CEGUIUtility::getWindow ("OptionsWindowTab"));
+		if (tc)
+		{
+			if (tc->getTabCount () > 0)
+			{
+				tc->invalidate (true);
+				tc->invalidateRenderingSurface ();
+			}
+		}
+	}
 
 	return true;
 }

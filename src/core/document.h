@@ -16,6 +16,9 @@
 #ifndef __SUMWARS_CORE_DOCUMENT_H__
 #define __SUMWARS_CORE_DOCUMENT_H__
 
+#ifdef SUMWARS_BUILD_TOOLS
+#include "gameinfotab.h"
+#endif
 
 #include <string>
 #include <list>
@@ -133,7 +136,8 @@ class Document
  		MESSAGE = 0x20000,
 		SAVE_EXIT = 0x40000,
 		CREDITS = 0x80000,
-		CONTROL_PANEL = 0x100000
+		CONTROL_PANEL = 0x100000,
+		QUESTION_DIALOG = 0x200000,
 	};
 
 	
@@ -807,6 +811,36 @@ class Document
 	{
 		return (World::getWorld() != 0 && m_single_player && m_state == RUNNING);
 	}
+
+	/**
+	 * \brief Displays a warning dialog, with a message and an "OK" button.
+	 * \param textMessage The message to display.
+	 * @author Augustin Preda.
+	 */
+	void showWarning (const std::string& textMessage);
+
+	/**
+	 * \brief Hides the warning dialog.
+	 * \see See also showWarning.
+	 * @author Augustin Preda.
+	 */
+	void hideWarning ();
+
+	/**
+	 * \brief Displays a question dialog, with a message and 2 buttons (typically yes/no).
+	 * \note This only shows the dialog. The text displayed in it as well as the callbacks must be manually set by the caller.
+	 * It's used only for helping out with the state logic of window displays.
+	 * \see MessageQuestionWindow.
+	 * @author Augustin Preda.
+	 */
+	void showQuestionDialog ();
+
+	/**
+	 * \brief Hides the question dialog.
+	 * \see See also showQuestionDialog.
+	 * @author Augustin Preda.
+	 */
+	void hideQuestionDialog ();
 
 	// Private stuff
 	private:

@@ -19,8 +19,6 @@
 #include "Ogre.h"
 #include "OgrePlatformInformation.h"
 
-#include "Poco/Environment.h"
-
 #include "CEGUI/CEGUIWindowManager.h"
 #include "CEGUI/CEGUI.h"
 
@@ -29,7 +27,6 @@
 
 
 using namespace CEGUI;
-using Poco::Environment;
 
 CEGUI::String BenchmarkTab::WidgetTypeName = "BenchmarkTab";
 
@@ -39,7 +36,7 @@ BenchmarkTab::BenchmarkTab(const CEGUI::String& type, const CEGUI::String& name)
 {
 	setText("Benchmark");
 
-	m_tabLayout = CEGUI::WindowManager::getSingleton().loadWindowLayout("BenchmarkTab.layout");
+	m_tabLayout = CEGUI::WindowManager::getSingleton().loadWindowLayout("benchmarktab.layout");
 	m_tabLayout->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
 	m_tabLayout->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	this->addChildWindow(m_tabLayout);
@@ -58,7 +55,8 @@ BenchmarkTab::BenchmarkTab(const CEGUI::String& type, const CEGUI::String& name)
 
 bool BenchmarkTab::handleStartBenchmark(const CEGUI::EventArgs& e)
 {
-	m_log->logMessage(Environment::osName() + " " + Environment::osVersion() + " " + Environment::osArchitecture());
+    // TODO: Retriev OS information here
+    //m_log->logMessage(Environment::osName() + " " + Environment::osVersion() + " " + Environment::osArchitecture());
 	m_log->logMessage("\n---------------------");
 
 
