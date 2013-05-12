@@ -18,11 +18,14 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <fstream>
 
-#include "Poco/String.h"
+#include <boost/filesystem.hpp>
+#include <boost/algorithm/string/replace.hpp>
 
 #define TAB "\267\267\267"
 
+using namespace boost;
 using namespace CEGUI;
 
 CEGUI::String TextFileEditWindow::WidgetTypeName = "TextFileEditWindow";
@@ -38,7 +41,6 @@ TextFileEditWindow::TextFileEditWindow (const CEGUI::String& type, const CEGUI::
 	m_textEditBox->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
 	addChildWindow(m_textEditBox);
 	m_isDirty = false;
-	m_file = Poco::File();
 	m_fb = 0;
 	
 	m_textEditBox->subscribeEvent(MultiLineEditbox::EventCharacterKey, Event::Subscriber(&TextFileEditWindow::handleCharacterKey, this));
@@ -66,7 +68,7 @@ bool TextFileEditWindow::load(const String &fileName)
 {
 	setFilepath(fileName.c_str());
 
-	if(m_file.exists())
+    if(boost::filesystem::is_regular_file(m_file))
 	{
 		std::string s;
 		std::string line;
@@ -115,7 +117,7 @@ bool TextFileEditWindow::load(const String &fileName)
 
 void TextFileEditWindow::save()
 {
-	if(m_file.path() == "")
+    if(m_file.string() == "")
 	{
 		getNewFileName();
 		return;
@@ -127,11 +129,8 @@ void TextFileEditWindow::save()
 	{
 		CEGUI::String s = m_textEditBox->getText();
 
-		if (!m_file.exists())
-			m_file.createFile();
-		
 		std::ofstream myfile;
-		myfile.open(m_file.path().c_str());
+        myfile.open(m_file.string().c_str());
 		myfile.clear();
 		int pos =  s.find(TAB);
 		while(pos != s.npos)
@@ -143,7 +142,8 @@ void TextFileEditWindow::save()
 		myfile << s.c_str();
 		myfile.close();
 		std::string temp = getText().c_str();
-		setText(Poco::replace(temp, " *", ""));
+        algorithm::replace_all_copy(temp, " *", "");
+        setText(temp);
 	}
 }
 
@@ -194,15 +194,15 @@ bool TextFileEditWindow::handleCharacterKey(const CEGUI::EventArgs& ee)
 
 void TextFileEditWindow::setFilepath(String path)
 {
-	m_file = Poco::File(path.c_str());
+    m_file = filesystem::path(path.c_str());
 
 #ifdef WIN32
-	String::size_type pos = m_file.path().find_last_of("\\");
+    String::size_type pos = m_file.string().find_last_of("\\");
 #else
-	String::size_type pos = m_file.path().find_last_of("/");
+    String::size_type pos = m_file.string().find_last_of("/");
 #endif
 
-	String name = m_file.path().substr(pos+1);
+    String name = m_file.string().substr(pos+1);
 	setText(name);
 }
 
