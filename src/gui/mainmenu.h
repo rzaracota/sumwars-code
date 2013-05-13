@@ -116,7 +116,7 @@ public:
      * \fn bool onLoginFinished ( const CEGUI::EventArgs& evt );
      * \brief Handles when a Login task is finished from OnlineServicesManager::StatusListener
      */
-    virtual void onLoginFinished(std::vector<OnlineServicesManager::CharacterLight*> &characters);
+    virtual void onLoginFinished(std::vector<OnlineServicesManager::CharacterLite*> &characters);
 
     /**
      * \fn bool onLogoutFinished ( const CEGUI::EventArgs& evt );
