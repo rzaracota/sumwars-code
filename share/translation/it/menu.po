@@ -12,14 +12,15 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-08 13:45-0500\n"
-"PO-Revision-Date: 2011-10-28 12:07+0200\n"
-"Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
-"Language-Team: Italiano <>\n"
+"PO-Revision-Date: 2013-05-22 10:10+0200\n"
+"Last-Translator: Michal Čihař <michal@cihar.com>\n"
+"Language-Team: Italian <http://hosted.weblate.org/projects/sumwars/menu/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bits\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 1.6-dev\n"
 
 #: ../../src/core/damage.cpp:158 ../../src/gui/charinfo.cpp:673
 msgid "Physical"
@@ -585,7 +586,7 @@ msgstr "Finestra (Schermo Intero)"
 
 #: ../../src/gui/optionswindow.cpp:196
 msgid " - recommended"
-msgstr "- raccomandata"
+msgstr " - raccomandata"
 
 #: ../../src/gui/optionswindow.cpp:294
 #, fuzzy
