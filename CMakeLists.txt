@@ -189,6 +189,7 @@ if(WIN32)
   set(Boost_USE_STATIC_LIBS ON)
 endif(WIN32)
 #set(Boost_DEBUG 1) #uncomment this if you have problems finding boost!
+
 find_package(Boost COMPONENTS filesystem system date_time chrono thread REQUIRED)
 
 IF(SUMWARS_NO_TINYXML)
