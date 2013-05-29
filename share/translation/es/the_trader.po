@@ -1,14 +1,16 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2013-05-29 11:11+0200\n"
+"Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
+"Language-Team: Spanish "
+"<http://hosted.weblate.org/projects/sumwars/the_trader/es/>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Last-Translator: stefan <some.fusion@gmail.com>\n"
-"Language-Team: Spanish\n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"PO-Revision-Date: 2013-05-25 18:40+0200\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 1.6-dev\n"
 
 #: theTrader.xml:199
 msgid ""
@@ -220,7 +222,7 @@ msgstr ""
 
 #: theTrader.xml:119 theTrader.xml:181
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: theTrader.xml:308
 msgid "No thanks to you. May I continue to offer you my services?"
@@ -380,7 +382,7 @@ msgstr ""
 
 #: theTrader.xml:118 theTrader.xml:180
 msgid "Yes"
-msgstr ""
+msgstr "Sí"
 
 #: theTrader.xml:94
 msgid "You are a trader?"
