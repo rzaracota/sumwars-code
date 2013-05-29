@@ -1,14 +1,16 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2013-05-29 11:11+0200\n"
+"Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
+"Language-Team: Spanish "
+"<http://hosted.weblate.org/projects/sumwars/maylons_grave/es/>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Last-Translator: stefan <some.fusion@gmail.com>\n"
-"Language-Team: Spanish\n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"PO-Revision-Date: 2013-05-25 18:40+0200\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 1.6-dev\n"
 
 #: maylons_grave.xml:170
 msgid "A goblin who wants to talk?"
@@ -123,7 +125,7 @@ msgstr ""
 
 #: maylons_grave.xml:161
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: maylons_grave.xml:190
 msgid "No humans coming, and if do, they never return from depth of cave."
@@ -195,7 +197,7 @@ msgstr ""
 
 #: maylons_grave.xml:160
 msgid "Yes"
-msgstr ""
+msgstr "Sí"
 
 #: maylons_grave.xml:171
 msgid "Yes. No hurt, no kill."
