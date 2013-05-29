@@ -1,14 +1,16 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2013-05-29 16:04+0200\n"
+"Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
+"Language-Team: Spanish "
+"<http://hosted.weblate.org/projects/sumwars/fortify_dwarfenwall/es/>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Last-Translator: stefan <some.fusion@gmail.com>\n"
-"Language-Team: Spanish\n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"PO-Revision-Date: 2013-05-25 18:39+0200\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 1.6-dev\n"
 
 #: fortify_dwarfenwall.xml:691
 msgid "((And that crystal, he palmed off on me...))"
@@ -32,7 +34,7 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:324
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: fortify_dwarfenwall.xml:701
 msgid "... said the spying Lord Master."
@@ -170,7 +172,7 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:39
 msgid "Derred"
-msgstr ""
+msgstr "Derred"
 
 #: fortify_dwarfenwall.xml:773
 msgid "Did I get that right?"
@@ -448,7 +450,7 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:443 fortify_dwarfenwall.xml:799
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: fortify_dwarfenwall.xml:702
 msgid "Not a pretty habit you have there, Airpaw..."
@@ -484,7 +486,7 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:11
 msgid "Quest description"
-msgstr ""
+msgstr "Descripción de la misión"
 
 #: fortify_dwarfenwall.xml:9
 msgid "Quest finished"
@@ -665,7 +667,7 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:51
 msgid "Tolec"
-msgstr ""
+msgstr "Tolec"
 
 #: fortify_dwarfenwall.xml:384
 msgid "Tsk tsk. How rude to use the name of the Cursed One in Akeran's halls."
@@ -784,7 +786,7 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:442 fortify_dwarfenwall.xml:798
 msgid "Yes"
-msgstr ""
+msgstr "Sí"
 
 #: fortify_dwarfenwall.xml:465
 msgid "Yes, they warned me about that, too."
