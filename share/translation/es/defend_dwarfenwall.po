@@ -1,19 +1,21 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2013-05-29 16:39+0200\n"
+"Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
+"Language-Team: Spanish "
+"<http://hosted.weblate.org/projects/sumwars/defend_dwarfenwall/es/>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Last-Translator: stefan <some.fusion@gmail.com>\n"
-"Language-Team: Spanish\n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"PO-Revision-Date: 2013-05-25 18:38+0200\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 1.6-dev\n"
 
 #: siegeOfDwarfenwall.xml:217 siegeOfDwarfenwall.xml:2211
 #: siegeOfDwarfenwall.xml:2538
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: siegeOfDwarfenwall.xml:135
 msgid "... are they Cursed Ones?"
@@ -670,7 +672,7 @@ msgstr ""
 
 #: siegeOfDwarfenwall.xml:6
 msgid "Quest description"
-msgstr ""
+msgstr "Descripción de la misión"
 
 #: siegeOfDwarfenwall.xml:4
 msgid "Quest finished"
@@ -952,7 +954,7 @@ msgstr ""
 
 #: siegeOfDwarfenwall.xml:115
 msgid "What?"
-msgstr ""
+msgstr "¿Qué?"
 
 #: siegeOfDwarfenwall.xml:2711
 msgid "What? Are you kidding?"
