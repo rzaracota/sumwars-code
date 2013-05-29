@@ -6,26 +6,18 @@
 #
 msgid ""
 msgstr ""
-"#-#-#-#-#  menu.pot (PACKAGE VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-25 18:38+0200\n"
-"PO-Revision-Date: 2013-05-25 18:40+0200\n"
-"Last-Translator: stefan <some.fusion@gmail.com>\n"
-"Language-Team: Spanish\n"
+"PO-Revision-Date: 2013-05-29 15:38+0200\n"
+"Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
+"Language-Team: Spanish <http://hosted.weblate.org/projects/sumwars/menu/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"#-#-#-#-#  menu.poe (PACKAGE VERSION)  #-#-#-#-#\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 1.6-dev\n"
 
 #: ../../src/core/damage.cpp:159 ../../src/gui/charinfo.cpp:735
 msgid "Physical"
@@ -33,149 +25,149 @@ msgstr ""
 
 #: ../../src/core/damage.cpp:161 ../../src/gui/charinfo.cpp:744
 msgid "Fire"
-msgstr ""
+msgstr "Fuego"
 
 #: ../../src/core/damage.cpp:163 ../../src/gui/charinfo.cpp:741
 msgid "Ice"
-msgstr ""
+msgstr "Hielo"
 
 #: ../../src/core/damage.cpp:165 ../../src/gui/charinfo.cpp:738
 msgid "Air"
-msgstr ""
+msgstr "Aire"
 
 #: ../../src/core/damage.cpp:175
 msgid "Physical resistance"
-msgstr ""
+msgstr "Resistencia física"
 
 #: ../../src/core/damage.cpp:177
 msgid "Fire resistance"
-msgstr ""
+msgstr "Resistencia al fuego"
 
 #: ../../src/core/damage.cpp:179
 msgid "Ice resistance"
-msgstr ""
+msgstr "Resistencia al hielo"
 
 #: ../../src/core/damage.cpp:181
 msgid "Air resistance"
-msgstr ""
+msgstr "Resistencia al aire"
 
 #: ../../src/core/damage.cpp:191
 msgid "blind"
-msgstr ""
+msgstr "ciego"
 
 #: ../../src/core/damage.cpp:193
 msgid "poisoned"
-msgstr ""
+msgstr "envenenado"
 
 #: ../../src/core/damage.cpp:195
 msgid "mute"
-msgstr ""
+msgstr "silenciar"
 
 #: ../../src/core/damage.cpp:197
 msgid "confused"
-msgstr ""
+msgstr "confuso"
 
 #: ../../src/core/damage.cpp:199
 msgid "berserk"
-msgstr ""
+msgstr "berserker"
 
 #: ../../src/core/damage.cpp:201
 msgid "paralyzed"
-msgstr ""
+msgstr "paralizado"
 
 #: ../../src/core/damage.cpp:203
 msgid "frozen"
-msgstr ""
+msgstr "congelado"
 
 #: ../../src/core/damage.cpp:205
 msgid "burning"
-msgstr ""
+msgstr "ardiente"
 
 #: ../../src/core/damage.cpp:280 ../../src/core/damage.cpp:284
 msgid "damage"
-msgstr ""
+msgstr "daño"
 
 #: ../../src/core/damage.cpp:302
 msgid "can not be blocked"
-msgstr ""
+msgstr "no puede ser bloqueado"
 
 #: ../../src/core/damage.cpp:309 ../../src/gui/charinfo.cpp:706
 msgid "Attack"
-msgstr ""
+msgstr "Ataque"
 
 #: ../../src/core/damage.cpp:325
 msgid "ignores armor"
-msgstr ""
+msgstr "ignora la armadura"
 
 #: ../../src/core/damage.cpp:332 ../../src/gui/charinfo.cpp:721
 msgid "Power"
-msgstr ""
+msgstr "Poder"
 
 #: ../../src/core/damage.cpp:344
 msgid "Chance for critical hit"
-msgstr ""
+msgstr "Posibilidad de golpe crítico"
 
 #: ../../src/core/document.cpp:822 ../../src/core/document.cpp:848
 #: ../../src/core/document.cpp:869
 msgid "Please select a character first!"
-msgstr ""
+msgstr "¡Por favor seleccione un personaje primero!"
 
 #: ../../src/core/document.cpp:1256 ../../src/core/item.cpp:1013
 #: ../../src/core/item.cpp:1015 ../../src/core/item.cpp:1243
 #: ../../src/core/item.cpp:1249
 msgid "Required level"
-msgstr ""
+msgstr "Nivel requerido"
 
 #: ../../src/core/document.cpp:1266
 msgid "Timer"
-msgstr ""
+msgstr "Temporizador"
 
 #: ../../src/core/document.cpp:1267
 msgid "Cast delay"
-msgstr ""
+msgstr "Retardo"
 
 #: ../../src/core/item.cpp:1005 ../../src/core/item.cpp:1229
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 #: ../../src/core/item.cpp:1008 ../../src/core/item.cpp:1235
 msgid "Selling Value"
-msgstr ""
+msgstr "Valor de venta"
 
 #: ../../src/core/item.cpp:1024 ../../src/core/item.cpp:1264
 msgid "Required class"
-msgstr ""
+msgstr "Clase requerida"
 
 #: ../../src/core/item.cpp:1082 ../../src/core/item.cpp:1324
 msgid " hitpoints"
-msgstr ""
+msgstr " puntos de ataque"
 
 #: ../../src/core/item.cpp:1082 ../../src/core/item.cpp:1090
 #: ../../src/core/item.cpp:1324 ../../src/core/item.cpp:1334
 msgid "Heals "
-msgstr ""
+msgstr "Cura "
 
 #: ../../src/core/item.cpp:1093 ../../src/core/item.cpp:1340
 msgid "immune for "
-msgstr ""
+msgstr "inmune a "
 
 #: ../../src/core/item.cpp:1105 ../../src/core/item.cpp:1354
 msgid "Two-handed weapon"
-msgstr ""
+msgstr "Arma a dos manos"
 
 #: ../../src/core/item.cpp:1110 ../../src/core/item.cpp:1361
 #: ../../src/gui/charinfo.cpp:716
 msgid "Range"
-msgstr ""
+msgstr "Alcance"
 
 #: ../../src/core/item.cpp:1121 ../../src/core/item.cpp:1374
 msgid "Damage"
-msgstr ""
+msgstr "Daño"
 
 #: ../../src/core/item.cpp:1133 ../../src/core/item.cpp:1402
 #: ../../src/gui/charinfo.cpp:726
 msgid "Armor"
-msgstr ""
+msgstr "Armadura"
 
 #: ../../src/core/item.cpp:1138 ../../src/core/item.cpp:1414
 #: ../../src/gui/charinfo.cpp:376
@@ -184,530 +176,544 @@ msgstr ""
 
 #: ../../src/core/item.cpp:1143 ../../src/core/item.cpp:1426
 msgid "max hitpoints"
-msgstr ""
+msgstr "puntos de ataque máximos"
 
 #: ../../src/core/item.cpp:1148 ../../src/core/item.cpp:1438
 #: ../../src/gui/charinfo.cpp:681
 msgid "Strength"
-msgstr ""
+msgstr "Fuerza"
 
 #: ../../src/core/item.cpp:1153 ../../src/core/item.cpp:1450
 #: ../../src/gui/charinfo.cpp:685
 msgid "Dexterity"
-msgstr ""
+msgstr "Destreza"
 
 #: ../../src/core/item.cpp:1158 ../../src/core/item.cpp:1462
 msgid "Magic Power"
-msgstr ""
+msgstr "Fuerza mágica"
 
 #: ../../src/core/item.cpp:1163 ../../src/core/item.cpp:1474
 #: ../../src/gui/charinfo.cpp:689
 msgid "Willpower"
-msgstr ""
+msgstr "Fuerza de voluntad"
 
 #: ../../src/core/item.cpp:1178 ../../src/core/item.cpp:1505
 msgid " max. "
-msgstr ""
+msgstr " máx. "
 
 #: ../../src/gui/charcreate.cpp:103 ../../src/gui/charinfo.cpp:650
 #: ../../src/gui/charinfo.cpp:657 ../../src/gui/partyinfo.cpp:479
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: ../../src/gui/charcreate.cpp:106 ../../src/gui/charinfo.cpp:677
 msgid "Class"
-msgstr ""
+msgstr "Clase"
 
 #: ../../src/gui/charcreate.cpp:109 ../../src/gui/networkwindows.cpp:128
 #: ../../src/gui/networkwindows.cpp:296
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: ../../src/gui/charcreate.cpp:112 ../../src/gui/savegamelist.cpp:257
 msgid "Create"
-msgstr ""
+msgstr "Crear"
 
 #: ../../src/gui/charcreate.cpp:221
 msgid "You must enter a hero name!"
-msgstr ""
+msgstr "¡Debes introducir un nombre para el heroe!"
 
 #: ../../src/gui/charcreate.cpp:237
 msgid "A character with that name already exists!"
-msgstr ""
+msgstr "¡Ya existe un personaje con ese nombre!"
 
 #: ../../src/gui/charinfo.cpp:144
 msgid "Base damage"
-msgstr ""
+msgstr "Daño base"
 
 #: ../../src/gui/charinfo.cpp:326
 msgid "You have"
-msgstr ""
+msgstr "Tienes"
 
 #: ../../src/gui/charinfo.cpp:326
 msgid "attribute points to spend"
-msgstr ""
+msgstr "puntos de atributo para gastar"
 
 #: ../../src/gui/charinfo.cpp:345
 msgid "Damage dealt by "
-msgstr ""
+msgstr "Daño hecho por "
 
 #: ../../src/gui/charinfo.cpp:364
 msgid "Chance to hit "
-msgstr ""
+msgstr "Posibilidad de acertar "
 
 #: ../../src/gui/charinfo.cpp:380
 msgid "Evade"
-msgstr ""
+msgstr "Huir"
 
 #: ../../src/gui/charinfo.cpp:398
 msgid "Chance to get hit by "
-msgstr ""
+msgstr "Posibilidad de ser acertado por "
 
 #: ../../src/gui/charinfo.cpp:489
 msgid "Damage dealt to  "
-msgstr ""
+msgstr "Daño hecho a  "
 
 #: ../../src/gui/charinfo.cpp:662
 msgid "Player info"
-msgstr ""
+msgstr "Info. del jugador"
 
 #: ../../src/gui/charinfo.cpp:665
 msgid "Attributes"
-msgstr ""
+msgstr "Atributos"
 
 #: ../../src/gui/charinfo.cpp:668
 msgid "Offense"
-msgstr ""
+msgstr "Ofensiva"
 
 #: ../../src/gui/charinfo.cpp:671
 msgid "Defense"
-msgstr ""
+msgstr "Defensa"
 
 #: ../../src/gui/charinfo.cpp:674 ../../src/gui/savegamelist.cpp:216
 msgid "Level"
-msgstr ""
+msgstr "Nivel"
 
 #: ../../src/gui/charinfo.cpp:682
 msgid "Strength increases hitpoints, melee damage and attack power."
 msgstr ""
+"La fuerza incrementa los puntos de daño, el daño cuerpo a cuerpo y la fuerza "
+"de ataque."
 
 #: ../../src/gui/charinfo.cpp:686
 msgid "Dexterity increases ranged damage, attack accuracy and attack speed"
 msgstr ""
+"La destreza incrementa el daño a distancia, la precisión y la velocidad de "
+"ataque"
 
 #: ../../src/gui/charinfo.cpp:690
 msgid ""
 "Willpower decreases the duration and the impact of status changes \n"
 " and increases magical melee damage."
 msgstr ""
+"La fuerza de voluntad reduce la duración y el impacto de cambios de estado ↵\n"
+" e incrementa el daño mágico cuerpo a cuerpo."
 
 #: ../../src/gui/charinfo.cpp:693
 msgid "Magic power"
-msgstr ""
+msgstr "Poder mágico"
 
 #: ../../src/gui/charinfo.cpp:694
 msgid "Magic power increases the damage of magical attacks."
-msgstr ""
+msgstr "El poder mágico incrementa el dato de ataques mágicos."
 
 #: ../../src/gui/charinfo.cpp:697 ../../src/gui/controlpanel.cpp:225
 msgid "Experience"
-msgstr ""
+msgstr "Experiencia"
 
 #: ../../src/gui/charinfo.cpp:698
 msgid "Current experience and experience necessary for next level-up."
 msgstr ""
+"La experiencia actual y la experiencia necesaria para alcanzar el siguiente "
+"nivel."
 
 #: ../../src/gui/charinfo.cpp:701 ../../src/gui/controlpanel.cpp:209
 msgid "Hitpoints"
-msgstr ""
+msgstr "Puntos de ataque"
 
 #: ../../src/gui/charinfo.cpp:702
 msgid "Current and maximal hitpoints."
-msgstr ""
+msgstr "Puntos de ataque actuales y máximos."
 
 #: ../../src/gui/charinfo.cpp:707
 msgid ""
 "Attack value determines the chance to hit enemies that can block or evade."
 msgstr ""
+"El valor de ataque determina la posibilidad de acertar a los oponentes que "
+"puedan bloquear o huir."
 
 #: ../../src/gui/charinfo.cpp:711
 msgid "Attacks/s"
-msgstr ""
+msgstr "Ataque/s"
 
 #: ../../src/gui/charinfo.cpp:712
 msgid "Number of attacks per second."
-msgstr ""
+msgstr "Número de ataques por segundo."
 
 #: ../../src/gui/charinfo.cpp:717
 msgid "Weapon Range in meters."
-msgstr ""
+msgstr "Alcance del arma en metros."
 
 #: ../../src/gui/charinfo.cpp:722
 msgid "Attack power influences the damage dealt to armored enemies."
-msgstr ""
+msgstr "El poder mágico influye sobre el daño realizado en armaduras enemigas."
 
 #: ../../src/gui/charinfo.cpp:727
 msgid "Armor reduces the damage of physical attacks."
-msgstr ""
+msgstr "La armadura reduce el daño de ataques físicos."
 
 #: ../../src/gui/charinfo.cpp:731
 msgid ""
 "Block value determines the chance to avoid damage from physical attacks."
 msgstr ""
+"El valor de bloqueo determina la posibilidad de evitar daño de ataques "
+"físicos."
 
 #: ../../src/gui/controlpanel.cpp:435 ../../src/gui/mainmenu.cpp:170
 #: ../../src/gui/mainmenu.cpp:207 ../../src/gui/optionswindow.cpp:461
 #: ../../src/gui/optionswindow.cpp:468
 msgid "Options"
-msgstr ""
+msgstr "Opciones"
 
 #: ../../src/gui/controlpanel.cpp:438
 msgid "Save & Exit"
-msgstr ""
+msgstr "Guardar y Salir"
 
 #: ../../src/gui/controlpanel.cpp:441
 msgid "Chat"
-msgstr ""
+msgstr "Chat"
 
 #: ../../src/gui/controlpanel.cpp:444 ../../src/gui/inventory.cpp:477
 #: ../../src/gui/inventory.cpp:484 ../../src/gui/optionswindow.cpp:473
 msgid "Inventory"
-msgstr ""
+msgstr "Inventario"
 
 #: ../../src/gui/controlpanel.cpp:447
 msgid "Character"
-msgstr ""
+msgstr "Personaje"
 
 #: ../../src/gui/controlpanel.cpp:450 ../../src/gui/optionswindow.cpp:479
 #: ../../src/gui/skilltree.cpp:637 ../../src/gui/skilltree.cpp:644
 msgid "Skilltree"
-msgstr ""
+msgstr "Arbol de habilidades"
 
 #: ../../src/gui/controlpanel.cpp:453
 msgid "Party"
-msgstr ""
+msgstr "Grupo"
 
 #: ../../src/gui/controlpanel.cpp:456 ../../src/gui/optionswindow.cpp:488
 #: ../../src/gui/questinfo.cpp:174 ../../src/gui/questinfo.cpp:181
 msgid "Quests"
-msgstr ""
+msgstr "Misiones"
 
 #: ../../src/gui/inventory.cpp:472
 msgid "Drop:"
-msgstr ""
+msgstr "Soltar:"
 
 #: ../../src/gui/inventory.cpp:489
 msgid "Small"
-msgstr ""
+msgstr "Pequeño"
 
 #: ../../src/gui/inventory.cpp:492
 msgid "Medium"
-msgstr ""
+msgstr "Mediano"
 
 #: ../../src/gui/inventory.cpp:495
 msgid "Big"
-msgstr ""
+msgstr "Grande"
 
 #: ../../src/gui/itemwindow.cpp:284 ../../src/gui/itemwindow.cpp:285
 msgid "Equipped:\n"
-msgstr ""
+msgstr "Equipado:\n"
 
 #: ../../src/gui/itemwindow.cpp:307
 msgid "Equipped (secondary):\n"
-msgstr ""
+msgstr "Equipado (secundario):\n"
 
 #: ../../src/gui/itemwindow.cpp:332
 msgid "Equipped (left):\n"
-msgstr ""
+msgstr "Equipado (izquierda):\n"
 
 #: ../../src/gui/itemwindow.cpp:333
 msgid "Equipped (right):\n"
-msgstr ""
+msgstr "Equipado (derecha):\n"
 
 #: ../../src/gui/itemwindow.cpp:372
 msgid "Hovered:\n"
-msgstr ""
+msgstr "Flotando:\n"
 
 #: ../../src/gui/itemwindow.cpp:381
 msgid "Attached:\n"
-msgstr ""
+msgstr "Unido:\n"
 
 #: ../../src/gui/mainmenu.cpp:158 ../../src/gui/mainmenu.cpp:179
 msgid "Single player"
-msgstr ""
+msgstr "Un jugador"
 
 #: ../../src/gui/mainmenu.cpp:161 ../../src/gui/mainmenu.cpp:186
 msgid "Join game"
-msgstr ""
+msgstr "Unirse a partida"
 
 #: ../../src/gui/mainmenu.cpp:164 ../../src/gui/mainmenu.cpp:193
 msgid "Host game"
-msgstr ""
+msgstr "Juego anfitrión"
 
 #: ../../src/gui/mainmenu.cpp:167 ../../src/gui/mainmenu.cpp:200
 msgid "Credits"
-msgstr ""
+msgstr "Créditos"
 
 #: ../../src/gui/mainmenu.cpp:173 ../../src/gui/mainmenu.cpp:214
 msgid "Quit"
-msgstr ""
+msgstr "Quitar"
 
 #: ../../src/gui/mainmenu.cpp:843
 msgid "Really delete savegame?"
-msgstr ""
+msgstr "¿Seguro que desea borrar la partida guardada?"
 
 #: ../../src/gui/mainmenu.cpp:844
 msgid "Yes"
-msgstr ""
+msgstr "Sí"
 
 #: ../../src/gui/mainmenu.cpp:846
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: ../../src/gui/messageboxes.cpp:56 ../../src/gui/messageboxes.cpp:197
 #: ../../src/gui/messageboxes.cpp:249 ../../src/gui/networkwindows.cpp:123
 #: ../../src/gui/networkwindows.cpp:291 ../../src/gui/optionswindow.cpp:537
 #: ../../src/gui/tradewindow.cpp:310
 msgid "Ok"
-msgstr ""
+msgstr "Bien"
 
 #: ../../src/gui/messageboxes.cpp:59
 msgid "Abort"
-msgstr ""
+msgstr "Abortar"
 
 #: ../../src/gui/messageboxes.cpp:64 ../../src/gui/messageboxes.cpp:71
 msgid "Save and Exit?"
-msgstr ""
+msgstr "¿Guardar y Salir?"
 
 #: ../../src/gui/networkwindows.cpp:135 ../../src/gui/networkwindows.cpp:140
 msgid "Host_game"
-msgstr ""
+msgstr "Juego_anfitrión"
 
 #: ../../src/gui/networkwindows.cpp:144
 msgid "Max. number of players"
-msgstr ""
+msgstr "Máx. número de jugadores"
 
 #: ../../src/gui/networkwindows.cpp:147 ../../src/gui/networkwindows.cpp:314
 msgid "Port"
-msgstr ""
+msgstr "Puerto"
 
 #: ../../src/gui/networkwindows.cpp:302 ../../src/gui/networkwindows.cpp:307
 msgid "Join_game"
-msgstr ""
+msgstr "Unirse_a_partida"
 
 #: ../../src/gui/networkwindows.cpp:311
 msgid "Host"
-msgstr ""
+msgstr "Anfitrión"
 
 #: ../../src/gui/optionswindow.cpp:120
 msgid "Easy"
-msgstr ""
+msgstr "Fácil"
 
 #: ../../src/gui/optionswindow.cpp:121
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: ../../src/gui/optionswindow.cpp:122
 msgid "Hard"
-msgstr ""
+msgstr "Difícil"
 
 #: ../../src/gui/optionswindow.cpp:123
 msgid "Insane"
-msgstr ""
+msgstr "Locura"
 
 #: ../../src/gui/optionswindow.cpp:153
 msgid "White"
-msgstr ""
+msgstr "Blanco"
 
 #: ../../src/gui/optionswindow.cpp:154
 msgid "Black"
-msgstr ""
+msgstr "Negro"
 
 #: ../../src/gui/optionswindow.cpp:155
 msgid "Red"
-msgstr ""
+msgstr "Rojo"
 
 #: ../../src/gui/optionswindow.cpp:156
 msgid "Green"
-msgstr ""
+msgstr "Verde"
 
 #: ../../src/gui/optionswindow.cpp:157
 msgid "Blue"
-msgstr ""
+msgstr "Azul"
 
 #: ../../src/gui/optionswindow.cpp:158
 msgid "Yellow"
-msgstr ""
+msgstr "Amarillo"
 
 #: ../../src/gui/optionswindow.cpp:159
 msgid "Magenta"
-msgstr ""
+msgstr "Magenta"
 
 #: ../../src/gui/optionswindow.cpp:160
 msgid "Cyan"
-msgstr ""
+msgstr "Cian"
 
 #: ../../src/gui/optionswindow.cpp:161
 msgid "Orange"
-msgstr ""
+msgstr "Naranja"
 
 #: ../../src/gui/optionswindow.cpp:162
 msgid "Pink"
-msgstr ""
+msgstr "Rosa"
 
 #: ../../src/gui/optionswindow.cpp:163
 msgid "Purple"
-msgstr ""
+msgstr "Morado"
 
 #: ../../src/gui/optionswindow.cpp:164
 msgid "Cornflower Blue"
-msgstr ""
+msgstr "Azul añíl"
 
 #: ../../src/gui/optionswindow.cpp:198
 msgid "System default"
-msgstr ""
+msgstr "Predeterminado por el sistema"
 
 #: ../../src/gui/optionswindow.cpp:233
 msgid "Fullscreen (Exclusive Mode)"
-msgstr ""
+msgstr "Pantalla completa (Modo exclusivo)"
 
 #: ../../src/gui/optionswindow.cpp:234
 msgid "Window (With Borders)"
-msgstr ""
+msgstr "Ventana (Con bordes)"
 
 #: ../../src/gui/optionswindow.cpp:239
 msgid "Window (Fullscreen)"
-msgstr ""
+msgstr "Ventana (Pantalla completa)"
 
 #: ../../src/gui/optionswindow.cpp:240
 msgid " - recommended"
-msgstr ""
+msgstr " - recomendado"
 
 #: ../../src/gui/optionswindow.cpp:338
 msgid "Off"
-msgstr ""
+msgstr "Apagado"
 
 #: ../../src/gui/optionswindow.cpp:339
 msgid "Simple (Higher quality)"
-msgstr ""
+msgstr "Simple (Mayor calidad)"
 
 #: ../../src/gui/optionswindow.cpp:340
 msgid "Simple (Lower quality)"
-msgstr ""
+msgstr "Simple (Menor calidad)"
 
 #: ../../src/gui/optionswindow.cpp:341
 msgid "Simulated (Experimental 1)"
-msgstr ""
+msgstr "Simulado (Experimental 1)"
 
 #: ../../src/gui/optionswindow.cpp:342
 msgid "Simulated (Experimental 2)"
-msgstr ""
+msgstr "Simulado (Experimental 2)"
 
 #: ../../src/gui/optionswindow.cpp:448
 msgid "Shortkeys"
-msgstr ""
+msgstr "Atajos de teclado"
 
 #: ../../src/gui/optionswindow.cpp:450
 msgid "Gameplay"
-msgstr ""
+msgstr "Jugabilidad"
 
 #: ../../src/gui/optionswindow.cpp:452
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 #: ../../src/gui/optionswindow.cpp:454
 msgid "Graphic"
-msgstr ""
+msgstr "Gráficos"
 
 #: ../../src/gui/optionswindow.cpp:456 ../../src/gui/optionswindow.cpp:515
 msgid "Language"
-msgstr ""
+msgstr "Idioma"
 
 #: ../../src/gui/optionswindow.cpp:476
 msgid "Character screen"
-msgstr ""
+msgstr "Pantalla de personaje"
 
 #: ../../src/gui/optionswindow.cpp:482
 msgid "Party screen"
-msgstr ""
+msgstr "Pantalla de Grupo"
 
 #: ../../src/gui/optionswindow.cpp:485
 msgid "Chatbox"
-msgstr ""
+msgstr "Casilla de chat"
 
 #: ../../src/gui/optionswindow.cpp:491
 msgid "Minimap"
-msgstr ""
+msgstr "Mini mapa"
 
 #: ../../src/gui/optionswindow.cpp:494
 msgid "Swap equipement"
-msgstr ""
+msgstr "Intercambiar equipamiento"
 
 #: ../../src/gui/optionswindow.cpp:497
 msgid "Item Labels"
-msgstr ""
+msgstr "Resaltar objetos"
 
 #: ../../src/gui/optionswindow.cpp:500
 msgid "Difficulty"
-msgstr ""
+msgstr "Dificultad"
 
 #: ../../src/gui/optionswindow.cpp:503
 msgid "Text Speed"
-msgstr ""
+msgstr "Velocidad de texto"
 
 #: ../../src/gui/optionswindow.cpp:506
 msgid "Sound"
-msgstr ""
+msgstr "Sonido"
 
 #: ../../src/gui/optionswindow.cpp:509
 msgid "Music"
-msgstr ""
+msgstr "Música"
 
 #: ../../src/gui/optionswindow.cpp:512
 msgid "Enemy Highlight Color"
-msgstr ""
+msgstr "Resaltar color del enemigo"
 
 #: ../../src/gui/optionswindow.cpp:521
 msgid "Grab mouse in windowed mode (needs restart)"
-msgstr ""
+msgstr "Atrapar ratón en modo ventana (necesita reiniciar)"
 
 #: ../../src/gui/optionswindow.cpp:524
 msgid "Video Driver"
-msgstr ""
+msgstr "Controladora de vídeo"
 
 #: ../../src/gui/optionswindow.cpp:527
 msgid "Display Mode"
-msgstr ""
+msgstr "Modo de visualización"
 
 #: ../../src/gui/optionswindow.cpp:530
 msgid "Resolution"
-msgstr ""
+msgstr "Resolución"
 
 #: ../../src/gui/optionswindow.cpp:533
 msgid "Shadows"
-msgstr ""
+msgstr "Sombras"
 
 #: ../../src/gui/optionswindow.cpp:874
 msgid ""
 "Please restart the game\n"
 " for the changes to take effect!"
 msgstr ""
+"¡Por favor reinicie el juego\n"
+" para que los cambios tengan efecto!"
 
 #: ../../src/gui/questinfo.cpp:186
 msgid "open"
-msgstr ""
+msgstr "abrir"
 
 #: ../../src/gui/questinfo.cpp:189
 msgid "finished"
-msgstr ""
+msgstr "finalizado"
 
 #: ../../src/gui/questinfo.cpp:192
 msgid "failed"
-msgstr ""
+msgstr "falló"
 
 #: ../../src/gui/skilltree.cpp:629
 msgid "Skillpoints"
-msgstr ""
+msgstr "Puntos de habilidad"
 
 #: ../../src/gui/skilltree.cpp:632
 msgid "Next Skillpoint at Level"
@@ -715,100 +721,100 @@ msgstr ""
 
 #: ../../src/gui/tradewindow.cpp:298 ../../src/gui/tradewindow.cpp:305
 msgid "Chest"
-msgstr ""
+msgstr "Cofre"
 
 #: ../../src/gui/worldmap.cpp:178
 msgid "Town Portal"
-msgstr ""
+msgstr "Portal a ciudad"
 
 #: playerclasses.xml:2
 msgid "Warrior"
-msgstr ""
+msgstr "Guerrero"
 
 #: playerclasses.xml:39
 msgid "warrior"
-msgstr ""
+msgstr "guerrero"
 
 #: playerclasses.xml:40
 msgid "fencer"
-msgstr ""
+msgstr "esgrimidor"
 
 #: playerclasses.xml:42
 msgid "Fighting skills"
-msgstr ""
+msgstr "Habilidades de lucha"
 
 #: playerclasses.xml:42
 msgid "Fighting spirit"
-msgstr ""
+msgstr "Espíritu luchador"
 
 #: playerclasses.xml:42 playerclasses.xml:270
 msgid "Passive skills"
-msgstr ""
+msgstr "Habilidades pasivas"
 
 #: playerclasses.xml:112
 msgid "Magician"
-msgstr ""
+msgstr "Mago"
 
 #: playerclasses.xml:152
 msgid "wizard"
-msgstr ""
+msgstr "mago"
 
 #: playerclasses.xml:153
 msgid "sorceress"
-msgstr ""
+msgstr "hechicera"
 
 #: playerclasses.xml:155
 msgid "Air magic"
-msgstr ""
+msgstr "Magia del aire"
 
 #: playerclasses.xml:155
 msgid "Fire magic"
-msgstr ""
+msgstr "Magia de fuego"
 
 #: playerclasses.xml:155
 msgid "Ice magic"
-msgstr ""
+msgstr "Magia de hielo"
 
 #: playerclasses.xml:227
 msgid "Archer"
-msgstr ""
+msgstr "Arquero"
 
 #: playerclasses.xml:267
 msgid "ranger"
-msgstr ""
+msgstr "guardabosques"
 
 #: playerclasses.xml:268
 msgid "archer"
-msgstr ""
+msgstr "arquero"
 
 #: playerclasses.xml:270
 msgid "Hunter magic"
-msgstr ""
+msgstr "Magia de caza"
 
 #: playerclasses.xml:270
 msgid "Marksmanship"
-msgstr ""
+msgstr "Puntería"
 
 #: playerclasses.xml:332
 msgid "Priest"
-msgstr ""
+msgstr "Sacerdote"
 
 #: playerclasses.xml:371
 msgid "priest"
-msgstr ""
+msgstr "sacerdote"
 
 #: playerclasses.xml:372
 msgid "priestess"
-msgstr ""
+msgstr "sacerdotisa"
 
 #: playerclasses.xml:374
 msgid "Light Magic"
-msgstr ""
+msgstr "Magia de luz"
 
 #: playerclasses.xml:374
 msgid "Water Magic"
-msgstr ""
+msgstr "Magia del agua"
 
 #: playerclasses.xml:374
 msgid "Wind Magic"
-msgstr ""
+msgstr "Magia del viento"
