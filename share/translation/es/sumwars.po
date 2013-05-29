@@ -1,14 +1,16 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2013-05-29 16:04+0200\n"
+"Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
+"Language-Team: Spanish "
+"<http://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Last-Translator: stefan <some.fusion@gmail.com>\n"
-"Language-Team: Spanish\n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"PO-Revision-Date: 2013-05-25 18:40+0200\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 1.6-dev\n"
 
 #: aisen.xml:6
 msgid "aisMeadow"
@@ -692,7 +694,7 @@ msgstr ""
 
 #: base_abilities.xml:100 dwarfcastle.xml:178 dwarfcastle.xml:181
 msgid "Attack"
-msgstr ""
+msgstr "Ataque"
 
 #: base_abilities.xml:100
 msgid "Basic melee attack"
@@ -732,11 +734,11 @@ msgstr ""
 
 #: councilNPCStats.xml:4
 msgid "Tolec"
-msgstr ""
+msgstr "Tolec"
 
 #: councilNPCStats.xml:47
 msgid "Derred"
-msgstr ""
+msgstr "Derred"
 
 #: councilNPCStats.xml:90 councilNPCStats.xml:290 npc.xml:16
 msgid "Soren Windclaw"
@@ -886,7 +888,7 @@ msgstr ""
 #: dwarfcastle.xml:168 dwarfcastle.xml:189 joringsbridge_npc.xml:238
 #: npc.xml:93 npc.xml:108
 msgid "Armor"
-msgstr ""
+msgstr "Armadura"
 
 #: dwarfcastle.xml:171 npc.xml:96
 msgid "Armor class"
@@ -898,11 +900,11 @@ msgstr ""
 
 #: dwarfcastle.xml:171
 msgid "Magic power"
-msgstr ""
+msgstr "Poder mágico"
 
 #: dwarfcastle.xml:171
 msgid "Willpower"
-msgstr ""
+msgstr "Fuerza de voluntad"
 
 #: dwarfcastle.xml:174 joringsbridge_npc.xml:244 npc.xml:99
 msgid "Weapon"
@@ -927,7 +929,7 @@ msgstr ""
 
 #: dwarfcastle.xml:178 dwarfcastle.xml:181
 msgid "Power"
-msgstr ""
+msgstr "Poder"
 
 #: dwarfcastle.xml:185 npc.xml:105
 msgid "Gloves"
@@ -939,11 +941,11 @@ msgstr ""
 
 #: dwarfcastle.xml:189 dwarfcastle.xml:192 npc.xml:108
 msgid "Dexterity"
-msgstr ""
+msgstr "Destreza"
 
 #: dwarfcastle.xml:189 dwarfcastle.xml:192
 msgid "Strength"
-msgstr ""
+msgstr "Fuerza"
 
 #: dwarfcastle.xml:197 joringsbridge_npc.xml:250 npc.xml:111
 msgid "Which part of your equipment should be enchanted?"
@@ -1659,11 +1661,11 @@ msgstr ""
 
 #: joringsbridge_npc.xml:241 npc.xml:96
 msgid "Air resistance"
-msgstr ""
+msgstr "Resistencia al aire"
 
 #: joringsbridge_npc.xml:241 npc.xml:96
 msgid "Fire resistance"
-msgstr ""
+msgstr "Resistencia al fuego"
 
 #: joringsbridge_npc.xml:247
 msgid "Increase Firemagic"
@@ -2009,7 +2011,7 @@ msgstr ""
 
 #: medairnpc.xml:83
 msgid "Fenor Marken"
-msgstr ""
+msgstr "Fenor Marken"
 
 #: monster_ablt.xml:2
 msgid "Steals gold"
@@ -2297,7 +2299,7 @@ msgstr ""
 
 #: npc.xml:96
 msgid "Ice resistance"
-msgstr ""
+msgstr "Resistencia al hielo"
 
 #: npcStats.xml:320 npcStats.xml:358
 msgid "Peasant"
@@ -3091,6 +3093,8 @@ msgstr ""
 msgid ""
 "I have to find an energy source and a cog before that thing will work again."
 msgstr ""
+"Tengo que encontrar una fuente de energía y una rueda dentada antes de que "
+"esa cosa vuelva a funcionar otra vez."
 
 #: undeadEqu.xml:3
 msgid "broken shield"
