@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-29 16:04+0200\n"
+"PO-Revision-Date: 2013-05-30 10:52+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
@@ -18,19 +18,19 @@ msgstr ""
 
 #: aisen.xml:52
 msgid "aisPlains"
-msgstr ""
+msgstr "Llanuras abiertas"
 
 #: aisen.xml:100
 msgid "aisMaylonsGraveEntry"
-msgstr ""
+msgstr "Tumba de Maylon"
 
 #: aisen.xml:133
 msgid "aisMaylonsGraveL1"
-msgstr ""
+msgstr "Tumba de Maylon Nivel 1"
 
 #: aisen.xml:173
 msgid "aisMaylonsGraveL2"
-msgstr ""
+msgstr "Cripta tumba de Maylon"
 
 #: aisen.xml:213
 msgid "aisHeath"
@@ -38,7 +38,7 @@ msgstr ""
 
 #: aisen.xml:253
 msgid "aisStonePlains"
-msgstr ""
+msgstr "Llanura de piedra"
 
 #: aisen.xml:300
 msgid "aisDarkClearing"
@@ -50,87 +50,87 @@ msgstr ""
 
 #: aisen.xml:386
 msgid "joringsbridge"
-msgstr ""
+msgstr "Puente de Joring"
 
 #: aisen.xml:453
 msgid "aisNorthMeadow"
-msgstr ""
+msgstr "Pradera Norte"
 
 #: aisen.xml:502
 msgid "aisJoringsforest"
-msgstr ""
+msgstr "Bosque de Joring"
 
 #: aisen.xml:540
 msgid "aisFairyforest"
-msgstr ""
+msgstr "Bosque de Hadas"
 
 #: aisen.xml:586
 msgid "aisDarkFairyforest"
-msgstr ""
+msgstr "Bosque Oscuro de Hadas"
 
 #: aisen.xml:629
 msgid "aisWolfstones"
-msgstr ""
+msgstr "Piedras de lobo"
 
 #: aisen.xml:677
 msgid "aisWestwoods"
-msgstr ""
+msgstr "Maderas del Oeste"
 
 #: aisen.xml:720
 msgid "aisMounPath"
-msgstr ""
+msgstr "Camino a la montaña"
 
 #: aisen.xml:750
 msgid "aisMistslope"
-msgstr ""
+msgstr "Pendiente Mística"
 
 #: aisen.xml:796
 msgid "aisEastslope"
-msgstr ""
+msgstr "Pendiente Este"
 
 #: aisen.xml:846
 msgid "Watch out! Monsters from the mine! Help me!"
-msgstr ""
+msgstr "¡Cuidado! ¡Los monstruos de la mina! ¡Ayúdame!"
 
 #: aisen.xml:862
 msgid "Let me tell you I'm no monster. I'm worse."
-msgstr ""
+msgstr "Permíteme decirte que no soy un monstruo. Soy algo peor."
 
 #: aisen.xml:869
 msgid "aisBoulderGrounds"
-msgstr ""
+msgstr "Terreno Rocoso"
 
 #: aisen.xml:908
 msgid "aisMounMeadows"
-msgstr ""
+msgstr "Praderas Montañosas"
 
 #: aisen.xml:950
 msgid "aisOldDwarfRuins"
-msgstr ""
+msgstr "Ruinas de los viejos enanos"
 
 #: aisen.xml:986
 msgid "aisOldCellar"
-msgstr ""
+msgstr "Vieja Bodega"
 
 #: aisen.xml:1021
 msgid "aisBaelensRift"
-msgstr ""
+msgstr "Grieta de Baelen"
 
 #: aisen.xml:1059
 msgid "aisHillRoad"
-msgstr ""
+msgstr "Camino a la Colina"
 
 #: aisen.xml:1100
 msgid "copperRock"
-msgstr ""
+msgstr "Roca de cobre"
 
 #: aisen.xml:1138
 msgid "aisCopperFields"
-msgstr ""
+msgstr "Campo de Cobre"
 
 #: aisen.xml:1176
 msgid "aisMineEntry"
-msgstr ""
+msgstr "Entrada a la Mina"
 
 #: aisenMonsterStats.xml:3
 msgid "Bloodbeak"
@@ -138,59 +138,59 @@ msgstr ""
 
 #: aisenMonsterStats.xml:52
 msgid "Giant wolf"
-msgstr ""
+msgstr "Lobo Gigante"
 
 #: aisenMonsterStats.xml:96
 msgid "wolf"
-msgstr ""
+msgstr "lobo"
 
 #: aisenMonsterStats.xml:151
 msgid "Psychotic Spider"
-msgstr ""
+msgstr "Araña Psicótica"
 
 #: aisenMonsterStats.xml:199
 msgid "Cave Spider"
-msgstr ""
+msgstr "Cueva de la Araña"
 
 #: aisenMonsterStats.xml:251
 msgid "Spider"
-msgstr ""
+msgstr "Araña"
 
 #: aisenMonsterStats.xml:293
 msgid "Giant Bat"
-msgstr ""
+msgstr "Murciélago Gigante"
 
 #: aisenNPCStats.xml:3 aisenNPCStats.xml:526 npc.xml:10
 msgid "Guard"
-msgstr ""
+msgstr "Guardia"
 
 #: aisenNPCStats.xml:46 aisenNPCStats.xml:88 npc.xml:25
 msgid "General Greif"
-msgstr ""
+msgstr "General Greif"
 
 #: aisenNPCStats.xml:133 npc.xml:31
 msgid "Prince Karlen"
-msgstr ""
+msgstr "Príncipe Karlen"
 
 #: aisenNPCStats.xml:176 npc.xml:19
 msgid "Leonard von Robenforst"
-msgstr ""
+msgstr "Leonard von Robenforst"
 
 #: aisenNPCStats.xml:219
 msgid "Scout"
-msgstr ""
+msgstr "Pendiente"
 
 #: aisenNPCStats.xml:257 monster_ablt.xml:70
 msgid "Healer"
-msgstr ""
+msgstr "Medicastro"
 
 #: aisenNPCStats.xml:301 aisenNPCStats.xml:345
 msgid "Trader"
-msgstr ""
+msgstr "Comerciante"
 
 #: aisenNPCStats.xml:391 aisenNPCStats.xml:569
 msgid "Bowman"
-msgstr ""
+msgstr "Arquero"
 
 #: aisenNPCStats.xml:430 aisenNPCStats.xml:479
 msgid "Avaeras Order, Firemage"
@@ -198,27 +198,27 @@ msgstr ""
 
 #: aisenNPCStats.xml:608
 msgid "Elite Swordsman"
-msgstr ""
+msgstr "Espadachín de élite"
 
 #: amulet.xml:5
 msgid "feather amulet"
-msgstr ""
+msgstr "amuleto de plumas"
 
 #: amulet.xml:34
 msgid "amber amulet"
-msgstr ""
+msgstr "amuleto de ámbar"
 
 #: amulet.xml:63
 msgid "silver amulet"
-msgstr ""
+msgstr "amuleto de plata"
 
 #: amulet.xml:92
 msgid "coral amulet"
-msgstr ""
+msgstr "amuleto de coral"
 
 #: amulet.xml:121
 msgid "gold amulet"
-msgstr ""
+msgstr "amuleto de oro"
 
 #: archer_ablt.xml:2
 msgid "Snipe"
@@ -908,7 +908,7 @@ msgstr "Fuerza de voluntad"
 
 #: dwarfcastle.xml:174 joringsbridge_npc.xml:244 npc.xml:99
 msgid "Weapon"
-msgstr ""
+msgstr "Arma"
 
 #: dwarfcastle.xml:178 joringsbridge_npc.xml:247 npc.xml:102
 msgid "Air damage"
@@ -937,7 +937,7 @@ msgstr ""
 
 #: dwarfcastle.xml:189 npc.xml:108 warrior_ablt.xml:85
 msgid "Block"
-msgstr ""
+msgstr "Bloqueo"
 
 #: dwarfcastle.xml:189 dwarfcastle.xml:192 npc.xml:108
 msgid "Dexterity"
