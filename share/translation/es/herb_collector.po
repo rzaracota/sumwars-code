@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-29 11:11+0200\n"
+"PO-Revision-Date: 2013-05-30 10:04+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/herb_collector/es/>\n"
@@ -190,8 +190,8 @@ msgstr ""
 
 #: herbalist.xml:214
 msgid "aisNorthMeadow"
-msgstr ""
+msgstr "Pradera Norte"
 
 #: herbalist.xml:15 herbalist.xml:197
 msgid "joringsbridge"
-msgstr ""
+msgstr "Puente de Joring"
