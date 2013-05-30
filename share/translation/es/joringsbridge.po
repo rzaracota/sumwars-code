@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-29 11:11+0200\n"
+"PO-Revision-Date: 2013-05-30 10:04+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/joringsbridge/es/>\n"
@@ -425,7 +425,7 @@ msgstr ""
 
 #: joringsbridge.xml:3 joringsbridge.xml:392
 msgid "joringsbridge"
-msgstr ""
+msgstr "Puente de Joring"
 
 #: joringsbridge.xml:205
 msgid "ts"
