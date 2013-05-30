@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-29 11:11+0200\n"
+"PO-Revision-Date: 2013-05-30 10:03+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/maylons_grave/es/>\n"
@@ -209,12 +209,12 @@ msgstr ""
 
 #: maylons_grave.xml:16 maylons_grave.xml:264
 msgid "aisMaylonsGraveEntry"
-msgstr ""
+msgstr "Tumba de Maylon"
 
 #: maylons_grave.xml:297
 msgid "aisMaylonsGraveL1"
-msgstr ""
+msgstr "Tumba de Maylon Nivel 1"
 
 #: maylons_grave.xml:328
 msgid "aisMaylonsGraveL2"
-msgstr ""
+msgstr "Cripta tumba de Maylon"
