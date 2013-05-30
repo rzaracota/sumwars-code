@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-29 11:11+0200\n"
+"PO-Revision-Date: 2013-05-30 10:04+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/the_trader/es/>\n"
@@ -419,7 +419,7 @@ msgstr ""
 
 #: theTrader.xml:253
 msgid "joringsbridge"
-msgstr ""
+msgstr "Puente de Joring"
 
 #: theTrader.xml:22 theTrader.xml:237
 msgid "medMercCamp"
