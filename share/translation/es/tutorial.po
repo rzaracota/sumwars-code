@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-29 16:57+0200\n"
+"PO-Revision-Date: 2013-05-30 08:28+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/tutorial/es/>\n"
@@ -1482,42 +1482,52 @@ msgid ""
 "Yes. Considering the difficult circumstances we can do that, I guess. Here "
 "you go."
 msgstr ""
+"Sí. Considerando las circunstancias difíciles podemos hacerlo, imagino. Aquí "
+"tienes."
 
 #: tutorial.xml:1053
 msgid ""
 "Yes. That was the thing with the big plus in the lower left corner. Just "
 "click on it and distribute your attribute points."
 msgstr ""
+"Sí. Eso era el icono con un gran '+' en la esquina inferior izquierda. Tan "
+"sólo hacedle clic y distribuid vuestros puntos de atributo."
 
 #: tutorial.xml:1048
 msgid ""
 "Yes. That was the thing with the big plus in the lower left corner. Just "
 "click on it and distribute your attribute points. ##solo"
 msgstr ""
+"Sí. Eso era el icono con un gran '+' en la esquina inferior izquierda. Tan "
+"sólo hazle clic y distribuye tus puntos de atributo. ##solo"
 
 #: tutorial.xml:1609
 msgid "Yikes, it's freezing!"
-msgstr ""
+msgstr "¡Uff, hace mucho frío!"
 
 #: tutorial.xml:918
 msgid "You all still know how to fight, don't you?"
-msgstr ""
+msgstr "Aun sabéis como luchar, ¿no?"
 
 #: tutorial.xml:1468
 msgid "You can go there and... borrow one, if you're lucky."
-msgstr ""
+msgstr "Puedes ir allí y.. pedir uno prestado, si tienes suerte."
 
 #: tutorial.xml:1052
 msgid ""
 "You can upgrade your attributes every time, and sometimes you even have "
 "enough energy for a new skill."
 msgstr ""
+"Podéis mejorar vuestros atributos con cada nuevo nivel, y a en ocasiones "
+"incluso tenéis energía suficiente para una nueva habilidad."
 
 #: tutorial.xml:1047
 msgid ""
 "You can upgrade your attributes every time, and sometimes you even have "
 "enough energy for a new skill. ##solo"
 msgstr ""
+"Puedes mejorar tus atributos con cada nuevo nivel, y a en ocasiones incluso "
+"tienes energía suficiente para una nueva habilidad. ##solo"
 
 #: tutorial.xml:1455
 msgid ""
