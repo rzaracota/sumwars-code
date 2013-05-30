@@ -7,14 +7,16 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-25 17:52+0200\n"
-"PO-Revision-Date: 2012-03-02 16:19+0100\n"
-"Last-Translator:  <kalimgard@users.sourceforge.netsourceforge.net>\n"
-"Language-Team: English\n"
+"PO-Revision-Date: 2013-05-30 09:58+0200\n"
+"Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
+"Language-Team: English "
+"<http://hosted.weblate.org/projects/sumwars/tools/en/>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 1.6-dev\n"
 
 #: ../../src/gui/contenteditor/contenteditor.cpp:205
 msgid "Render Info"
@@ -150,7 +152,7 @@ msgstr "Position:"
 
 #: ../../src/gui/contenteditor/contenteditor.cpp:304
 msgid "Get Player Position"
-msgstr "Позиція гравця"
+msgstr "Get Player Position"
 
 #: ../../src/gui/contenteditor/contenteditor.cpp:307
 msgid "Angle:"
