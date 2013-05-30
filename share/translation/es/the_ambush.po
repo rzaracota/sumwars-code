@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-29 16:39+0200\n"
+"PO-Revision-Date: 2013-05-30 10:07+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/the_ambush/es/>\n"
@@ -113,4 +113,4 @@ msgstr ""
 
 #: theAmbush.xml:11
 msgid "aisWolfstones"
-msgstr ""
+msgstr "Piedras de lobo"
