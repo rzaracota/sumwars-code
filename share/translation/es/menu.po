@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-25 18:38+0200\n"
-"PO-Revision-Date: 2013-05-29 15:38+0200\n"
+"PO-Revision-Date: 2013-05-30 10:01+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish <http://hosted.weblate.org/projects/sumwars/menu/es/>\n"
 "Language: es\n"
@@ -172,7 +172,7 @@ msgstr "Armadura"
 #: ../../src/core/item.cpp:1138 ../../src/core/item.cpp:1414
 #: ../../src/gui/charinfo.cpp:376
 msgid "Block"
-msgstr ""
+msgstr "Bloqueo"
 
 #: ../../src/core/item.cpp:1143 ../../src/core/item.cpp:1426
 msgid "max hitpoints"
