@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-30 10:06+0200\n"
+"PO-Revision-Date: 2013-06-01 13:37+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/rob_the_robber/es/>\n"
@@ -106,7 +106,7 @@ msgstr ""
 
 #: rob_the_robber.xml:44 rob_the_robber.xml:115
 msgid "Indeed."
-msgstr ""
+msgstr "En efecto."
 
 #: rob_the_robber.xml:27 rob_the_robber.xml:98
 msgid ""
