@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-28 16:32+0200\n"
+"PO-Revision-Date: 2013-06-01 13:46+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/the_poolmonster/es/>\n"
@@ -70,7 +70,7 @@ msgstr "Descripción de la misión"
 
 #: scene7.xml:9
 msgid "Quest finished"
-msgstr ""
+msgstr "Misión finalizada"
 
 #: scene7.xml:26
 msgid "Sometimes I wish,"
