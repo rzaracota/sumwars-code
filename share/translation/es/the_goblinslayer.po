@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-29 11:11+0200\n"
+"PO-Revision-Date: 2013-06-01 13:46+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/the_goblinslayer/es/>\n"
@@ -58,7 +58,7 @@ msgstr ""
 
 #: goblins.xml:9
 msgid "Quest finished"
-msgstr ""
+msgstr "Misión finalizada"
 
 #: goblins.xml:2
 msgid "The goblinslayer"
