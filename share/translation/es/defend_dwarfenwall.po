@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-29 16:39+0200\n"
+"PO-Revision-Date: 2013-06-01 13:46+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/defend_dwarfenwall/es/>\n"
@@ -406,7 +406,7 @@ msgstr ""
 
 #: siegeOfDwarfenwall.xml:2539
 msgid "I thought so."
-msgstr ""
+msgstr "Ya me lo imaginaba."
 
 #: siegeOfDwarfenwall.xml:1395
 msgid "I understand, my lord."
@@ -479,7 +479,7 @@ msgstr ""
 
 #: siegeOfDwarfenwall.xml:2267
 msgid "Indeed."
-msgstr ""
+msgstr "En efecto."
 
 #: siegeOfDwarfenwall.xml:2364
 msgid "It has nothing to do with you."
@@ -676,7 +676,7 @@ msgstr "Descripción de la misión"
 
 #: siegeOfDwarfenwall.xml:4
 msgid "Quest finished"
-msgstr ""
+msgstr "Misión finalizada"
 
 #: siegeOfDwarfenwall.xml:1111
 msgid "Ready, my lord."
