@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-29 16:04+0200\n"
+"PO-Revision-Date: 2013-06-01 13:46+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/fortify_dwarfenwall/es/>\n"
@@ -490,7 +490,7 @@ msgstr "Descripción de la misión"
 
 #: fortify_dwarfenwall.xml:9
 msgid "Quest finished"
-msgstr ""
+msgstr "Misión finalizada"
 
 #: fortify_dwarfenwall.xml:180
 msgid "Quiet!"
