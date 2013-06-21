@@ -300,9 +300,19 @@ ELSE()
     )
 ENDIF()
 
+SET(SRCS_GUSSOUND
+    ./src/gussound/goggstreamedsound.cpp
+    ./src/gussound/gopenal.cpp
+    ./src/gussound/gussound.cpp
+    ./src/gussound/gussoundutil/stringutil.cpp
+    ./src/gussound/gussoundutil/gussound.cpp
+    ./src/gussound/gussoundutil/timer.cpp
+    )
+
 SET(SRCS
   ${SRCS_TINYXML}
   ${SRCS_ENET}
+  ${SRCS_GUSSOUND}
   ${HEADER_FILES}
   ./src/core/nlfg.cpp
   ./src/core/worldobject.cpp
