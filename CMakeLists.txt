@@ -211,6 +211,8 @@ ENDIF()
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/core)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gui/contenteditor)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/gussound)
+ADD_DEFINITIONS(-DGUSSOUND_STANDALONE)
 INCLUDE_DIRECTORIES(${OGRE_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${OGRE_RTShaderSystem_INCLUDE_DIR})
 IF (WIN32)
@@ -305,7 +307,6 @@ SET(SRCS_GUSSOUND
     ./src/gussound/gopenal.cpp
     ./src/gussound/gussound.cpp
     ./src/gussound/gussoundutil/stringutil.cpp
-    ./src/gussound/gussoundutil/gussound.cpp
     ./src/gussound/gussoundutil/timer.cpp
     )
 
