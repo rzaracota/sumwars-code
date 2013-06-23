@@ -71,7 +71,7 @@ void FileBrowser::init(CEGUI::String defaultDir, FileBrowserType type, bool visi
 	}
 	
 	m_pathBox = static_cast<Editbox*>(m_rootWindow->getChild("CurrentPath"));
-    m_pathBox->setText(m_currentPath.c_str());
+    m_pathBox->setText(m_currentPath.string());
 
 	m_fileNameBox = static_cast<Editbox*>(m_rootWindow->getChild("FileName"));
 	
@@ -159,7 +159,7 @@ bool FileBrowser::handleBrowserDblClick(const CEGUI::EventArgs &e)
             m_currentPath = m_currentPath.root_path();
 		else
         {
-            m_pathBox->setText(m_currentPath.c_str());
+			m_pathBox->setText(m_currentPath.string());
 			fillBrowser();
         }
 	}
@@ -176,7 +176,7 @@ bool FileBrowser::handlePopDirectory(const CEGUI::EventArgs &e)
 	try
 	{
         m_currentPath = m_currentPath.parent_path();
-        m_pathBox->setText(m_currentPath.c_str());
+        m_pathBox->setText(m_currentPath.string());
 		fillBrowser();
 	}
     catch (const filesystem::filesystem_error& ex)

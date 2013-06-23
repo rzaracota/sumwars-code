@@ -23,7 +23,7 @@ MESSAGE(STATUS "")
 OPTION(SUMWARS_NO_TINYXML "Do not use bundled, in-source TinyXML Lib" OFF)
 OPTION(SUMWARS_NO_ENET "Do not use bundled, in-source ENET Lib" OFF)
 OPTION(SUMWARS_BUILD_TOOLS "Builds editor tools (not needed for gameplay, only useful for content authors)" ON)
-OPTION(SUMWARS_BUILD_WITH_ONLINE_SERVICE "Builds enables the online services)" ON)
+OPTION(SUMWARS_BUILD_WITH_ONLINE_SERVICE "Builds enables the online services)" OFF)
 OPTION(SUMWARS_UPDATE_HG_REVISION "Option to enable or disable automatic revision checking" ON)
 IF(WIN32)
   OPTION(SUMWARS_POST_BUILD_COPY "After a build, copy the executable to the project folder (Win32)" ON)
@@ -470,6 +470,13 @@ SET(LINK_LIBS
   ${CMAKE_THREAD_LIBS_INIT}
   ${CPPNETLIB_LIBS}
   )
+  
+IF(SUMWARS_BUILD_WITH_ONLINE_SERVICE)
+SET(LINK_LIBS
+  ${CPPNETLIB_LIBS}
+  )
+  
+ENDIF()
 IF(SUMWARS_NO_TINYXML)
   SET(LINK_LIBS ${LINK_LIBS} ${TINYXML_LIBRARIES})
 ENDIF()
