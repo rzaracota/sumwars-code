@@ -501,7 +501,7 @@ void World::updateLogins()
 			{
 				DEBUG("got savegame from slot %i",(*i));
 				
-				if (m_player_slots->size() < m_max_nr_players)
+				if (m_player_slots->size() < (unsigned)m_max_nr_players)
 				{
 					handleSavegame(data,*i);
 				}

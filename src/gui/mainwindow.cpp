@@ -40,12 +40,16 @@
 #include "messageboxes.h"
 #include "dialoguewindow.h"
 #include "creditswindow.h"
-#include "music.h"
+//#include "music.h"
 #include "tooltipmanager.h"
 #include "ceguiutility.h"
 
 // Access the OS clipboard.
 #include "clipboard.h"
+
+// Allow the use of the sound manager.
+#include "gussound.h"
+
 
 #ifdef SUMWARS_BUILD_TOOLS
 #include "debugpanel.h"
@@ -54,6 +58,11 @@
 
 // Generic colour settings.
 #include "tooltipsettings.h"
+
+// Helper for sound operations
+#include "soundhelper.h"
+
+using gussound::SoundManager;
 
 
 MainWindow::MainWindow(Ogre::Root* ogreroot, CEGUI::System* ceguisystem,Ogre::RenderWindow* window,Document* doc)
@@ -320,14 +329,16 @@ void MainWindow::update(float time)
 			updateMainMenu();
 			m_cegui_system->setGUISheet(m_main_menu);
 			m_main_menu->addChildWindow(m_sub_windows["Options"]->getCEGUIWindow());
-			MusicManager::instance().stop();
+			//MusicManager::instance().stop();
+			//SoundManager::getPtr ()->getMusicPlayer ()->stop ();
 		}
 
 		if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		{
 			m_cegui_system->setGUISheet(m_game_screen);
 			m_game_screen->addChildWindow(m_sub_windows["Options"]->getCEGUIWindow());
-			MusicManager::instance().stop();
+			//MusicManager::instance().stop();
+			//SoundManager::getPtr ()->getMusicPlayer ()->stop ();
 			
 			// one silent update of the belt
 			// to avoid silly sounds on startup
@@ -2206,18 +2217,22 @@ void MainWindow::updateRegionInfo()
 		{
 			refresh = true;
 			region = pl->getRegion()->getId();
-			MusicManager::instance().stop();
+			//MusicManager::instance().stop();
+			//SoundManager::getPtr ()->getMusicPlayer ()->stop ();
 		}
 		
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
 		if (refresh)
 		{
-			DEBUG ("*** main window expecting refresh for region");
+			DEBUG ("*** main window expecting refresh for region [%s]", pl->getRegion ()->getName ().c_str ());
 			timer.start();
 
 			MinimapWindow* myMinimap = static_cast<MinimapWindow*> (m_sub_windows["Minimap"]);
 			myMinimap->reloadIconsOnNextUpdate ();
+
+			// Also change the playlist to the one for the new region.
+			SoundManager::getPtr ()->getMusicPlayer ()->switchToPlaylist (pl->getRegion ()->getName ());
 		}
 		
 		float time = timer.getTime();
@@ -2454,17 +2469,42 @@ void MainWindow::updateSound()
 			const std::list<PlayedSound*> sounds = reg->getPlayedSounds();
 			for (std::list<PlayedSound*>::const_iterator it = sounds.begin(); it != sounds.end(); ++it)
 			{
-				SoundSystem::playAmbientSound((*it)->m_soundname, (*it)->m_volume, &((*it)->m_position));
+				//SoundSystem::playAmbientSound((*it)->m_soundname, (*it)->m_volume, &((*it)->m_position));
+
+				// TODO:XXX: verify how sounds come from the region.
+				float posX = (*it)->m_position.m_x;
+				float posY = (*it)->m_position.m_y;
+				float posZ = 0.0;
+				SoundHelper::playSoundGroupAtPosition ((*it)->m_soundname, posX, posY, posZ);
+
+				//try
+				//{
+				//	DEBUG ("Will try to play sound group [%s]",  (*it)->m_soundname.c_str ());
+
+				//	std::string soundToPlay;
+				//	DEBUG ("Checking if valid");
+				//	soundToPlay = SoundManager::getPtr ()->getSoundGroup ((*it)->m_soundname)->getRandomSound ();
+				//	DEBUG ("Chosen sound file from group [%s]",  soundToPlay.c_str ());
+
+				//	SoundManager::getPtr ()->getRepository ()->getSound (soundToPlay)->play3D (posX, posY, posZ);
+				//}
+				//catch (std::exception& e)
+				//{
+				//	DEBUG ("Caught exception while trying to play sound group [%s]: %s", (*it)->m_soundname.c_str (), e.what ());
+				//}
 			}
 		}
 	}
 	
-	SoundSystem::update();
+	//SoundSystem::update();
 }
 
 void MainWindow::updateMusic()
 {
+	// TODO: find out how to feed the initial playlist tracks into the player.
 
+	return;
+#if 0
 	// laufende Musik nicht unterbrechen
 	if (MusicManager::instance().isPlaying())
 		return;
@@ -2523,6 +2563,7 @@ void MainWindow::updateMusic()
 		MusicManager::instance().play(filename);
 		MusicManager::instance().update();
 	}
+#endif
 }
 
 Vector MainWindow::getIngamePos(float screenx, float screeny, bool relative)

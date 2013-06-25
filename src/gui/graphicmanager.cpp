@@ -484,7 +484,7 @@ void GraphicManager::destroyMovableObject(Ogre::MovableObject* obj)
 	}
 }
 
-SoundName GraphicManager::getDropSound(std::string objecttype)
+std::string GraphicManager::getDropSound(std::string objecttype)
 {
 	 // Get the renderinfo
 	 GraphicObject::Type gtype = getGraphicType(objecttype);

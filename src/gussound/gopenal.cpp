@@ -97,14 +97,14 @@ namespace GOpenAl
 		myErr = alGetError ();
 		if (myErr)
 		{
-			throw std::exception ("Unable to initialize alut!" );
+			throw std::exception ("Unable to initialize alut!");
 		}
 		alcDevice_ = alcOpenDevice (NULL);
 
 		myErr = alGetError ();
 		if (myErr)
 		{
-			throw std::exception ("Unable to open OpenAL device!" );
+			throw std::exception ("Unable to open OpenAL device!");
 		}
 
 		alcContext_ = alcCreateContext (alcDevice_, NULL);
@@ -112,16 +112,26 @@ namespace GOpenAl
 		if (myErr)
 		{
 			alcCloseDevice (alcDevice_);
-			throw std::exception ("Unable to create OpenAL context!" );
+			throw std::exception ("Unable to create OpenAL context!");
 		}
 
 		alcMakeContextCurrent (alcContext_);
+		myErr = alGetError ();
+		if (myErr)
+		{
+			throw std::exception ("Unable to make the current context current!");
+		}
 
 		GTRACE (2, "Using OpenAL, version: " << alGetString (AL_VERSION) 
 			<< "; vendor: " << alGetString (AL_VENDOR) 
 			<< "; renderer: " << alGetString (AL_RENDERER));
 
 		alDistanceModel (AL_LINEAR_DISTANCE_CLAMPED);
+		myErr = alGetError ();
+		if (myErr)
+		{
+			throw std::exception ("Unable to set the distance model to: AL_LINEAR_DISTANCE_CLAMPED");
+		}
 	}
 
 
@@ -230,16 +240,55 @@ namespace GOpenAl
 	SoundDuration GOpenAlSound::calculateAndRetrieveStreamLength ()
 	{
 		ALint bufferSize, frequency, bitsPerSample, channels;
+		ALenum myErr;
+
 		alGetBufferi (buffer_, AL_SIZE, &bufferSize);
+		myErr = alGetError ();
+		if (myErr)
+		{
+			GTRACE (2, "Warning: AL error encountered while trying to get buffer size: " << alGetString (myErr));
+			std::string errorMessage ("Failed to calculate stream data for: ");
+			errorMessage.append (getId ());
+			throw std::exception (errorMessage.c_str ());
+		}
+
 		alGetBufferi (buffer_, AL_FREQUENCY, &frequency);
+		myErr = alGetError ();
+		if (myErr)
+		{
+			GTRACE (2, "Warning: AL error encountered while trying to get frequency: " << alGetString (myErr));
+			std::string errorMessage ("Failed to calculate stream data for: ");
+			errorMessage.append (getId ());
+			throw std::exception (errorMessage.c_str ());
+		}
+
 		alGetBufferi (buffer_, AL_CHANNELS, &channels);    
+		myErr = alGetError ();
+		if (myErr)
+		{
+			GTRACE (2, "Warning: AL error encountered while trying to get channels: " << alGetString (myErr));
+			std::string errorMessage ("Failed to calculate stream data for: ");
+			errorMessage.append (getId ());
+			throw std::exception (errorMessage.c_str ());
+		}
+
 		alGetBufferi (buffer_, AL_BITS, &bitsPerSample); 
+		myErr = alGetError ();
+		if (myErr)
+		{
+			GTRACE (2, "Warning: AL error encountered while trying to get bits per sample: " << alGetString (myErr));
+			std::string errorMessage ("Failed to calculate stream data for: ");
+			errorMessage.append (getId ());
+			throw std::exception (errorMessage.c_str ());
+		}
+
 		SoundDuration duration = ((SoundDuration)bufferSize)/(frequency*channels*(bitsPerSample/8));
 		cachedBufferLength_ = duration;
 		sampleRate_ = bitsPerSample;
 
 		GTRACE (4, "Calculating stream/buffer information for sound [" << getId () << "]. Channels = [" << channels << "] frequency = ["
 			<< frequency << "] duration = [" << duration << "] samplerate = [" << sampleRate_ << "]");
+
 		return duration;
 	}
 
@@ -272,8 +321,16 @@ namespace GOpenAl
 		std::string extension = guslib::stringutil::getExtensionFromFileName (fileName);
 		GTRACE (3, "Extension: " << extension);
 
+		ALenum myErr;
+
 		streamed_ = !loadInMem;
 		buffer_ = alutCreateBufferFromFile (fileName.c_str ());
+
+		myErr = alGetError ();
+		if (myErr)
+		{
+			GTRACE (2, "Error encountered while trying to load AL sound from [" << fileName << "]: " << alGetString (myErr));
+		}
 
 		source_ = 0;
 

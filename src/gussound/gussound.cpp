@@ -53,7 +53,7 @@
 #endif // GUSSOUND_STANDALONE
 
 #define GUSSOUND_MAJOR_VERSION 1
-#define GUSSOUND_MINOR_VERSION 1
+#define GUSSOUND_MINOR_VERSION 2
 #define GUSSOUND_PATCH_VERSION 0
 
 namespace gussound
@@ -285,19 +285,33 @@ namespace gussound
 		ptrToSound_->setVolumeExtraModifier( newVol );
 	}
 
+
+	///
+	/// Define action to be taken when the effect ends (for instance, a fade-out would stop the sound at the end.
+	/// @param force If the force flag is set to true, the stop commands for the sound are suppressed.
+	/// This is performed in order to prevent fade-in and fade-out effects running for the same sound and performing
+	/// an unplanned stop operation when the fade-out is finished.
+	///
 	void FadeOutEffect::endEffect (bool force)
 	{
 		GTRACE (GUSSNDTLVL, "fadeout effect ending...");
 		ptrToSound_->setVolumeExtraModifier (1.0f);
 		if (stopOnEnd_)
 		{
-			GTRACE (GUSSNDTLVL, "fadeout effect stopping on end.");
-			ptrToSound_->stop();
+			if (! force)
+			{
+				GTRACE (GUSSNDTLVL, "fadeout effect stopping on end.");
+				ptrToSound_->stop ();
+			}
+			else
+			{
+				GTRACE (GUSSNDTLVL, "Force flag suppresses stop operation of effect.");
+			}
 		}
 		else
 		{
 			GTRACE (GUSSNDTLVL, "fadeout effect pausing on end.");
-			ptrToSound_->pause();
+			ptrToSound_->pause ();
 		}
 	}
 
@@ -337,15 +351,15 @@ namespace gussound
 	}
 
 
-	void EffectableSound::clearAllEffects()
+	void EffectableSound::clearAllEffects ()
 	{
-		GTRACE(6, "Clearing all effects... from " << id_);
-		for (SoundEffectList::iterator it = tempEffectList_.begin();
-			it != tempEffectList_.end(); ++it )
+		GTRACE (6, "Clearing all effects... from " << id_);
+		for (SoundEffectList::iterator it = tempEffectList_.begin ();
+			it != tempEffectList_.end (); ++it)
 		{
-			(*it)->endEffect(true);
+			(*it)->endEffect (true);
 		}
-		tempEffectList_.clear();
+		tempEffectList_.clear ();
 		effectVolume_ = max_volume;
 	}
 
@@ -435,7 +449,7 @@ namespace gussound
 
 	void EffectableSound::setVolumeCategoryModifier (const SoundVolume & volume)
 	{
-		GTRACE (6, id_ << " got volume for category " << getCategory() << " as " << volume);
+		GTRACE (6, id_ << " got volume for category " << getCategory () << " as " << volume);
 		categoryVolume_ = volume;
 		setOutputVolume (getCombinedVolumeModifiers ());
 	}
@@ -524,6 +538,12 @@ namespace gussound
 			if( ! found )
 				++iter;
 		}
+
+		if (! found)
+		{
+			return std::string ("");
+		}
+
 		return iter->first;
 	}
 
@@ -650,71 +670,75 @@ namespace gussound
 
 	void Playlist::play ()
 	{
-		GTRACE(4, " Playlist play: " << id_);
-		if( tracks_.empty() )
-			return;
-
-		if( currentTrackIdx_ < 0 || currentTrackIdx_ >= (int)tracks_.size())
+		GTRACE (GUSSNDTLVL, "[" << id_ << "] Playlist received play command");
+		if (tracks_.empty ())
 		{
-			throw std::exception("Playlist play with current track idx outside bounds!");
+			return;
+		}
+
+		if (currentTrackIdx_ < 0 || currentTrackIdx_ >= (int)tracks_.size ())
+		{
+			throw std::exception ("Playlist play with current track idx outside bounds!");
 			return;
 		}
 
 		// clear all the previous effects that may be still active on this sound.
 
-		ptrToRepository_->getSound(tracks_[currentTrackIdx_] )->clearAllEffects();
-		if( fadeInAtPlay_ )
+		ptrToRepository_->getSound (tracks_ [currentTrackIdx_])->clearAllEffects ();
+		if (fadeInAtPlay_)
 		{
-			if( state_ == GPLS_Stopped || state_ == GPLS_Playing)
+			if (state_ == GPLS_Stopped || state_ == GPLS_Playing)
 			{
-				GTRACE(GUSSNDTLVL, id_ << ": Playlist playing (starting from stop) with fade-in");
-				ptrToRepository_->getSound(tracks_[currentTrackIdx_] )->addEffect( 
+				GTRACE (GUSSNDTLVL, id_ << ": Playlist playing (starting from stop) with fade-in");
+				ptrToRepository_->getSound (tracks_ [currentTrackIdx_] )->addEffect (
 					GSmartPtr <SoundEffect>(
-						new FadeInEffect( ptrToRepository_->getSound(tracks_[currentTrackIdx_] )
-						, (guslib::TimeUnits)getFadeDuration() ) ) );
+						new FadeInEffect (ptrToRepository_->getSound (tracks_ [currentTrackIdx_])
+						, (guslib::TimeUnits)getFadeDuration ())));
 			}
 			else // paused
 			{
-				ptrToRepository_->getSound(tracks_[currentTrackIdx_] )->clearAllEffects();
-				GTRACE(GUSSNDTLVL, id_ << " Playlist playing (resuming from pause) with fade-in");
-				ptrToRepository_->getSound(tracks_[currentTrackIdx_] )->addEffect( 
+				//ptrToRepository_->getSound (tracks_ [currentTrackIdx_])->clearAllEffects (); // TODO: re-enable if needed.
+				GTRACE (GUSSNDTLVL, id_ << " Playlist playing (resuming from pause) with fade-in");
+				ptrToRepository_->getSound (tracks_ [currentTrackIdx_])->addEffect (
 					GSmartPtr<SoundEffect>(
-						new FadeInEffect (ptrToRepository_->getSound(tracks_[currentTrackIdx_] )
-										, (guslib::TimeUnits) ptrToRepository_->getSound(tracks_[currentTrackIdx_])->getSeekDuration()
-										, (guslib::TimeUnits) getFadeDuration()
-										, 0 ) ) );
+						new FadeInEffect (ptrToRepository_->getSound (tracks_ [currentTrackIdx_])
+										, (guslib::TimeUnits) ptrToRepository_->getSound (tracks_ [currentTrackIdx_])->getSeekDuration ()
+										, (guslib::TimeUnits) getFadeDuration ()
+										, 0)));
 			}
 		}
 
-		ptrToRepository_->getSound (tracks_[currentTrackIdx_])->play2D ();
-		if( state_ == GPLS_Stopped )
+		ptrToRepository_->getSound (tracks_ [currentTrackIdx_])->play2D ();
+		if (state_ == GPLS_Stopped)
 		{
-			ptrToRepository_->getSound(tracks_[currentTrackIdx_] )->setTracker(this
-				, ptrToRepository_->getSound(tracks_[currentTrackIdx_] )->getDuration() - 
-				ptrToRepository_->getSound(tracks_[currentTrackIdx_] )->getSeekDuration()-
-				getFadeDuration () );
+			ptrToRepository_->getSound (tracks_ [currentTrackIdx_])->setTracker (this
+				, ptrToRepository_->getSound (tracks_[currentTrackIdx_])->getDuration () - 
+					ptrToRepository_->getSound (tracks_[currentTrackIdx_])->getSeekDuration () -
+					getFadeDuration ());
 		}
 		else
 		{
-			ptrToRepository_->getSound(tracks_[currentTrackIdx_] )->setTracker(this
-				, ptrToRepository_->getSound(tracks_[currentTrackIdx_] )->getDuration() - getFadeDuration ());
+			ptrToRepository_->getSound (tracks_[currentTrackIdx_])->setTracker (this
+				, ptrToRepository_->getSound (tracks_[currentTrackIdx_])->getDuration () - getFadeDuration ());
 		}
-		playCount_[currentTrackIdx_]++;
+		playCount_ [currentTrackIdx_] ++;
 
-		if( playOrder_.empty() )
+		if (playOrder_.empty ())
 		{
-			playOrder_.push_back(currentTrackIdx_);
+			playOrder_.push_back (currentTrackIdx_);
 		}
 
 		state_ = GPLS_Playing;
 		currentTrack_ = tracks_[currentTrackIdx_];
 		if( ptrToListener_ )
 		{
-			ptrToListener_->OnTrackPlay( currentTrack_ );
+			ptrToListener_->OnTrackPlay (currentTrack_);
 		}
 	}
 
-	void Playlist::removeTrack(const std::string & trackName)
+
+
+	void Playlist::removeTrack (const std::string & trackName)
 	{
 		// if a track is removed from the list, but playing, the play cmd is kept.
 		int idx=-1;
@@ -735,7 +759,8 @@ namespace gussound
 	}
 
 
-	void Playlist::setFade(bool atPlay, bool atStop, bool atPause )
+
+	void Playlist::setFade (bool atPlay, bool atStop, bool atPause)
 	{
 		fadeInAtPlay_ = atPlay;
 		fadeOutAtStop_ = atStop;
@@ -929,24 +954,26 @@ namespace gussound
 	}
 
 
-	void Playlist::stop()
+	void Playlist::stop ()
 	{
-		GTRACE (GUSSNDTLVL, id_ << " Playlist received stop command");
-		if( tracks_.empty() )
+		GTRACE (GUSSNDTLVL, "[" << id_ << "] Playlist received stop command");
+		if (tracks_.empty ())
 		{
 			return;
 		}
 		
-		if( currentTrackIdx_ < 0 || currentTrackIdx_ >= (int)tracks_.size() )
-			return;
-
-		if( fadeOutAtStop_ )
+		if (currentTrackIdx_ < 0 || currentTrackIdx_ >= (int)tracks_.size ())
 		{
-			ptrToRepository_->getSound(tracks_[currentTrackIdx_] )->addEffect( 
-				GSmartPtr<SoundEffect>(
-					new FadeOutEffect ( ptrToRepository_->getSound(tracks_[currentTrackIdx_] )
-					, (guslib::TimeUnits) (ptrToRepository_->getSound(tracks_[currentTrackIdx_])->getSeekDuration())
-					, (guslib::TimeUnits) (ptrToRepository_->getSound(tracks_[currentTrackIdx_])->getSeekDuration() + getFadeDuration ())
+			return;
+		}
+
+		if (fadeOutAtStop_)
+		{
+			ptrToRepository_->getSound (tracks_ [currentTrackIdx_])->addEffect ( 
+				GSmartPtr<SoundEffect> (
+					new FadeOutEffect (ptrToRepository_->getSound(tracks_[currentTrackIdx_])
+					, (guslib::TimeUnits) (ptrToRepository_->getSound(tracks_ [currentTrackIdx_])->getSeekDuration ())
+					, (guslib::TimeUnits) (ptrToRepository_->getSound(tracks_ [currentTrackIdx_])->getSeekDuration () + getFadeDuration ())
 					, 0
 					, true) 
 					) 
@@ -955,7 +982,7 @@ namespace gussound
 		}
 		else
 		{
-			ptrToRepository_->getSound(tracks_[currentTrackIdx_] )->stop();
+			ptrToRepository_->getSound (tracks_[currentTrackIdx_])->stop ();
 		}
 		GTRACE (GUSSNDTLVL, id_ << " Playlist has stopped state.");
 		state_ = GPLS_Stopped;
@@ -971,7 +998,7 @@ namespace gussound
 		if (autoSkipToNextTrack_)
 		{
 			GTRACE(5, "Playlist::onSoundEvent() skip to next track");
-			skipToNextTrack();
+			skipToNextTrack ();
 		}
 	}
 
@@ -1034,19 +1061,23 @@ namespace gussound
 	}
 
 
-	EffectableSoundSmartPtr & SoundRepository::getSound( const std::string &soundName )
+	EffectableSoundSmartPtr & SoundRepository::getSound (const std::string &soundName)
 	{
-		SoundMap::iterator iter = sounds_.find( soundName );
-		if( iter == sounds_.end() )
+		SoundMap::iterator iter = sounds_.find (soundName);
+		if (iter == sounds_.end ())
 		{
-			GTRACE(2, "EXCEPTION! Tried to get an inexistent sound: ["<<soundName<<"]");
-			GTRACE(3, "Current list of sounds:");
-			for (SoundMap::iterator it2 = sounds_.begin(); 
-				it2 != sounds_.end(); ++it2 )
+			GTRACE (2, "EXCEPTION! Tried to get an inexistent sound: [" << soundName << "]");
+			// Also log the existing sounds. Might be useful for a comparison.
+			if (soundName.compare ("") != 0)
 			{
-				GTRACE(3, " -> [" << it2->first << "]");
+				GTRACE (3, "Current list of sounds:");
+				for (SoundMap::iterator it2 = sounds_.begin(); 
+					it2 != sounds_.end(); ++it2 )
+				{
+					GTRACE(3, " -> [" << it2->first << "]");
+				}
 			}
-			throw( std::exception( "Tried to get an inexistent sound!" ) );
+			throw std::exception ("Tried to get an inexistent sound!");
 		}
 		return iter->second;
 	}
@@ -1054,14 +1085,14 @@ namespace gussound
 
 	void SoundRepository::removeSound (const std::string &soundName)
 	{
-		SoundMap::iterator iter = sounds_.find( soundName );
-		if( iter == sounds_.end() )
+		SoundMap::iterator iter = sounds_.find (soundName);
+		if (iter == sounds_.end ())
 		{
-			GTRACE(2, "EXCEPTION! Tried to remove an inexistent sound: "<<soundName);
-			throw( std::exception( "Tried to remove an inexistent sound!" ) );
+			GTRACE (2, "EXCEPTION! Tried to remove an inexistent sound: " << soundName);
+			throw std::exception ("Tried to remove an inexistent sound!");
 		}
 
-		sounds_.erase( iter );
+		sounds_.erase (iter);
 	}
 
 
@@ -1074,7 +1105,10 @@ namespace gussound
 	void SoundRepository::setVolumeForCategory (SoundCategory categ, SoundVolume vol)
 	{
 		if (categ == GSC_None)
+		{
+			GTRACE (3, "WARNING: Trying to set volume for category [none]. Not allowed.");
 			return;
+		}
 
 		// store it.
 		categoryVolumes_[categ] = vol;
@@ -1117,25 +1151,25 @@ namespace gussound
 
 
 	MusicPlayer::MusicPlayer (const std::string & id)
-		: ptrToRepository_( NULL )
-		, playstate_(GPLS_Stopped)
-		, shuffle_( false )
-		, repeat_( true )
+		: ptrToRepository_ (NULL)
+		, playstate_ (GPLS_Stopped)
+		, shuffle_ (false)
+		, repeat_ (true)
 		, volume_ (max_volume)
-		, skipToNextTrackAutomatically_( true )
-		, fadeInAtPlay_(true)
-		, fadeOutAtStop_(true)
-		, fadeOutAtPause_(true)
-		, currentList_("")
-		, keepPlayingAtListChange(true)
-		, listenerPtr_(NULL)
+		, skipToNextTrackAutomatically_ (true)
+		, fadeInAtPlay_ (true)
+		, fadeOutAtStop_ (true)
+		, fadeOutAtPause_ (true)
+		, currentList_ ("")
+		, keepPlayingAtListChange (true)
+		, listenerPtr_ (NULL)
 		, id_ (id)
-		, fadeDuration_(standard_fade_duration)
+		, fadeDuration_ (standard_fade_duration)
 	{
 		GTRACE(6, "MusicPlayer ctor");
 	}
 
-	MusicPlayer::~MusicPlayer()
+	MusicPlayer::~MusicPlayer ()
 	{
 		// handle the destruction of all managed lists.
 		GTRACE (5, "MusicPlayer dtor");
@@ -1147,37 +1181,37 @@ namespace gussound
 	}
 
 
-	void MusicPlayer::registerPlaylist( const std::string & name )
+	void MusicPlayer::registerPlaylist (const std::string & name)
 	{
-		GTRACE(6, "MusicPlayer registerPlaylist "<<name);
+		GTRACE (5, "MusicPlayer registering playlist [" << name << "]");
 		if (!ptrToRepository_)
 		{
-			throw( std::exception("MusicPlayer: not initialized! (no repository registered). Attempting to register a playlist.") );
+			throw std::exception ("MusicPlayer: not initialized! (no repository registered). Attempting to register a playlist.");
 			return;
 		}
-		PlaylistMapping::iterator iter = playlists_.find( name );
-		if( iter != playlists_.end() )
+		PlaylistMapping::iterator iter = playlists_.find (name);
+		if (iter != playlists_.end ())
 		{
 			// There is a playlist already registered.
-			throw( std::exception("MusicPlayer: attempting to re-register a playlist!") );
+			throw std::exception ("MusicPlayer: attempting to re-register a playlist!");
 		}
 
-		GTRACE(6, "MusicPlayer registerPlaylist added [" << name << "]");
+		GTRACE (6, "MusicPlayer registerPlaylist added [" << name << "]");
 		// store a temporary pointer, so that we may assign some values to the playlist.
 		// these values are general and belong to the music player, so they need to be transferred to the playlist.
 		Playlist * myPlaylistPtr = new Playlist (ptrToRepository_, this, name);
-		myPlaylistPtr->setFadeDuration(fadeDuration_);
-		myPlaylistPtr->setRepeat(repeat_);
+		myPlaylistPtr->setFadeDuration (fadeDuration_);
+		myPlaylistPtr->setRepeat (repeat_);
 		playlists_.insert (std::make_pair (name, PlaylistSmartPtr (myPlaylistPtr)));
 		
 
 		// If this is the first list registered, make it the current list automatically
 
-		if( currentList_ == "" )
+		if (currentList_ == "")
 		{
 			currentList_ = name;
 		}
-		GTRACE(6, "MusicPlayer registerPlaylist currentList_ ["<<currentList_<<"]");
+		GTRACE (6, "MusicPlayer registerPlaylist currentList_ [" << currentList_ << "]");
 	}
 
 
@@ -1199,16 +1233,28 @@ namespace gussound
 	}
 
 
-	void MusicPlayer::addTrackToPlaylist( const std::string & playlistName, const std::string & trackName )
+	void MusicPlayer::addTrackToPlaylist (const std::string & playlistName, const std::string & trackName)
 	{
-		PlaylistMapping::iterator iter = playlists_.find( playlistName );
-		if( iter == playlists_.end() )
+		PlaylistMapping::iterator iter = playlists_.find (playlistName);
+		if (iter == playlists_.end ())
 		{
-			throw( std::exception("MusicPlayer: attempting to add a track to a non-existent playlist!") );
+			if (playlistName.compare ("") != 0)
+			{
+				// Also log the existing sounds. Might be useful for a comparison.
+				GTRACE (3, "Could not find playlist [" << playlistName << "]. Current list of playlists:");
+				for (PlaylistMapping::const_iterator it2 = playlists_.begin (); 
+					it2 != playlists_.end (); ++it2 )
+				{
+					GTRACE (3, " -> [" << it2->first << "]");
+				}
+			}
+			throw std::exception ("MusicPlayer: attempting to add a track to a non-existent playlist!");
 		}
 
-		playlists_[playlistName]->addTrack( trackName );
+		playlists_[playlistName]->addTrack (trackName);
 	}
+
+
 
 	void MusicPlayer::removeTrackFromPlaylist( const std::string & playlistName, const std::string & trackName )
 	{
@@ -1220,6 +1266,8 @@ namespace gussound
 
 		playlists_[playlistName]->removeTrack( trackName );
 	}
+
+
 
 	void MusicPlayer::nextTrack()
 	{
@@ -1277,6 +1325,14 @@ namespace gussound
 			playlists_[currentList_]->skipToPreviousTrack();
 		}
 	}
+
+	void MusicPlayer::setFadePreferrences (bool atPlay, bool atStop, bool atPause)
+	{
+		fadeInAtPlay_ = atPlay;
+		fadeOutAtStop_ = atStop;
+		fadeOutAtPause_ = atPause;
+	}
+
 
 	void MusicPlayer::setFadeDuration (SoundDuration dur)
 	{
@@ -1353,29 +1409,32 @@ namespace gussound
 		play ();
 	}
 
-	void MusicPlayer::OnTrackPlay(const std::string & newTrack )
+	void MusicPlayer::OnTrackPlay (const std::string & newTrack)
 	{
-		if( listenerPtr_ )
+		GTRACE (7, "MusicPlayer notifying listener of a new track being played: " << newTrack);
+
+		if (listenerPtr_)
 		{
-			listenerPtr_->OnTrackPlay(newTrack);
+			listenerPtr_->OnTrackPlay (newTrack);
 		}
 	}
 
-	void MusicPlayer::OnTrackChange(const std::string & newTrack )
+	void MusicPlayer::OnTrackChange (const std::string & newTrack)
 	{
-		if( listenerPtr_ )
+		GTRACE (7, "MusicPlayer notifying listener of a track change occuring: " << newTrack);
+		if (listenerPtr_)
 		{
-			listenerPtr_->OnTrackChange(newTrack);
+			listenerPtr_->OnTrackChange (newTrack);
 		}
 	}
 
 
-	void MusicPlayer::OnPlaylistEnd()
+	void MusicPlayer::OnPlaylistEnd ()
 	{
-		GTRACE(6, "MusicPlayer::OnPlaylistEnd()");
-		if( listenerPtr_ )
+		GTRACE (6, "MusicPlayer notifying listener of a playlist end");
+		if (listenerPtr_)
 		{
-			listenerPtr_->OnPlaylistEnd();
+			listenerPtr_->OnPlaylistEnd ();
 		}
 	}
 
@@ -1411,20 +1470,31 @@ namespace gussound
 
 	void SoundManagerUtil::addPlaylistTrack (const std::string & playlistName, const std::string & trackName)
 	{
-		std::string tempName = gussound::hidden::getAnonymousTrackName();
-		getRepository()->addSound(tempName, trackName, false, GSC_Music, true);
-		getMusicPlayer()->addTrackToPlaylist(playlistName, tempName);
+		GTRACE (4, "Adding anon. track [" << trackName << "] to playlist [" << playlistName << "]");
+		std::string tempName = gussound::hidden::getAnonymousTrackName ();
+		getRepository ()->addSound (tempName, trackName, false, GSC_Music, true);
+		getMusicPlayer ()->addTrackToPlaylist (playlistName, tempName);
 	}
+
+
 
 	SoundGroupSmartPtr & SoundManagerUtil::getSoundGroup (const std::string& groupName)
 	{
-		SoundGroupMapping::iterator iter = groups_.find( groupName );
-		if( iter == groups_.end() )
+		SoundGroupMapping::iterator iter = groups_.find (groupName);
+		if (iter == groups_.end ())
 		{
-			throw( std::exception( "Tried to access inexistent group!" ) );
+			GTRACE (3, "Current list of groups:");
+			for (SoundGroupMapping::const_iterator it2 = groups_.begin ();
+				it2 != groups_.end (); ++it2)
+			{
+				GTRACE (3, " -> [" << it2->first << "]");
+			}
+
+			throw std::exception ("Tried to access inexistent group!");
 		}
 		return iter->second;
 	}
+
 
 
 	/// Create and return a string containing the version of the sound library
@@ -1448,10 +1518,42 @@ namespace gussound
 
 
 
+	///
+	/// Process some time dependant internal logic.
+	/// React to some time units having passed from the last time the function was called.
+	/// This will generally be used to control the playlists.
+	/// The user of the audio engine will have to call this function on a regular basis
+	/// (i.e. in a loop in the main thread or in a separate thread).
+	///
 	void SoundManagerUtil::elapseTime ()
 	{
 		guslib::TimeUnits duration = timer_.renew ();
-		repository_->elapseTime (duration);
+		repository_->elapseTime (duration/1.0);
+	}
+
+
+
+	///
+	/// Process some time dependant internal logic.
+	/// React to some time units having passed from the last time the function was called.
+	/// This will generally be used to control the playlists.
+	/// The user of the audio engine will have to call this function on a regular basis
+	/// (i.e. in a loop in the main thread or in a separate thread).
+	/// @param timeUnits The amount of time units (milliseconds) elapsed since the last call.
+	///
+	void SoundManagerUtil::elapseTimeByMilliseconds (const guslib::TimeUnits& timeUnits)
+	{
+		repository_->elapseTime (timeUnits);
+	}
+
+
+
+	///
+	/// Set the log file to be used (part of the tracing library).
+	///
+	void SoundManagerLogger::setLoggerTarget (const std::string& fileName, int level)
+	{
+		GSTARTTRACING (fileName, level);
 	}
 
 

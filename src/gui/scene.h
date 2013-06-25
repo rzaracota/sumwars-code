@@ -36,7 +36,7 @@
 #include "objectloader.h"
 #include "document.h"
 #include "worldobject.h"
-#include "sound.h"
+//#include "sound.h"
 #include "player.h"
 #include "graphicobject.h"
 #include "scriptobject.h"

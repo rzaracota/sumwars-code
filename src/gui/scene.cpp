@@ -24,7 +24,11 @@
 
 #include "graphicmanager.h"
 
+// Sound and music management classes.
+#include "gussound.h"
+using gussound::SoundManager;
 
+#include "gopenal.h"
 
 
 
@@ -244,6 +248,9 @@ void Scene::update(float ms)
 
 			m_region_id = region_nr;
 
+			// TODO: create a listener class to remove the handling from here?
+			//SoundManager::getPtr ()->getMusicPlayer ()->switchToPlaylist (region->getName ());
+
 		}
 		else
 		{
@@ -275,7 +282,9 @@ void Scene::update(float ms)
 								   pos.m_y*GraphicManager::g_global_scale));
 	DEBUGX("cam position %f %f %f",pos.m_x*GraphicManager::g_global_scale + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*GraphicManager::g_global_scale - r*cos(theta)*sin(phi));
 
-	SoundSystem::setListenerPosition(pos);
+
+	// TODO:XXX: find some way to abstract the listener position, so that a cast to the implementation is not needed!!
+	((GOpenAl::OpenAlManagerUtil*)SoundManager::getPtr ())->setListenerPosition (pos.m_x, pos.m_y, 0.0);
 	
 	// Licht aktualisieren
 	float *colour;
@@ -728,7 +737,9 @@ void Scene::createScene()
 	GraphicManager::destroyGraphicObject(m_temp_player_object);
 	m_temp_player_object =0;
 	m_temp_player="";
-	SoundSystem::clearObjects();
+
+	// TODO: XXX: stop any ambient sounds that would be playing in the scene.
+	//SoundSystem::clearObjects();
 	
 	GraphicManager::clearStaticGeometry();
 	GraphicManager::clearParticlePool();

@@ -15,8 +15,12 @@
 
 #include "options.h"
 
-#include "sound.h"
-#include "music.h"
+//#include "sound.h"
+//#include "music.h"
+
+// Allow the use of the sound manager.
+#include "gussound.h"
+
 #include "gettext.h"
 
 #include "OISKeyboard.h"
@@ -39,6 +43,9 @@ extern "C"
 #define WIN32_LEAN_AND_MEAN
 #include "Windows.h"
 #endif
+
+using gussound::SoundManager;
+
 
 Options::Options()
 {
@@ -142,7 +149,7 @@ bool Options::readFromFile(const std::string& filename)
 	bool loadOkay = doc.LoadFile();
 
 	ElementAttrib attr;
-
+	DEBUG ("Reading user modifiable options from file [%s]", filename.c_str ());
 	if (loadOkay)
 	{
 		TiXmlNode* child;
@@ -282,12 +289,14 @@ bool Options::readFromFile(const std::string& filename)
 		}  // if root == <Options>
 		else
 		{
+			DEBUG ("The file [%s] does not look like an options file. Reverting to default options.", filename.c_str ());
 			setToDefaultOptions();
 			return false;
 		}
 	}  // if (loadOkay)
 	else
 	{
+		DEBUG ("Could not read data from file [%s]. Reverting to default options.", filename.c_str ());
 		setToDefaultOptions();
 		return false;
 	}
@@ -418,22 +427,30 @@ bool Options:: setShortkey(KeyCode key,ShortkeyDestination dest)
 
 void Options::setSoundVolume(float vol)
 {
-	SoundSystem::setSoundVolume(vol);
+	DEBUG ("Setting sound volume to: %.2f", vol);
+	SoundManager::getPtr ()->getRepository ()->setVolumeForCategory (gussound::GSC_Effect, vol);
+	SoundManager::getPtr ()->getRepository ()->setVolumeForCategory (gussound::GSC_Master, 1.0);
+	//SoundSystem::setSoundVolume(vol);
 }
 
 float Options::getSoundVolume()
 {
-	return SoundSystem::getSoundVolume();
+	return SoundManager::getPtr ()->getRepository ()->getVolumeForCategory (gussound::GSC_Effect);
+	//return SoundSystem::getSoundVolume();
 }
 
-void Options::setMusicVolume(float vol)
+void Options::setMusicVolume (float vol)
 {
-	MusicManager::instance().setMusicVolume(vol);
+	DEBUG ("Setting music volume to: %.2f", vol);
+	SoundManager::getPtr ()->getRepository ()->setVolumeForCategory (gussound::GSC_Music, vol);
+	SoundManager::getPtr ()->getRepository ()->setVolumeForCategory (gussound::GSC_Master, 1.0);
+	//MusicManager::instance().setMusicVolume(vol);
 }
 
 float Options::getMusicVolume()
 {
-	return MusicManager::instance().getMusicVolume();
+	return SoundManager::getPtr ()->getRepository ()->getVolumeForCategory (gussound::GSC_Music);
+	//return MusicManager::instance().getMusicVolume();
 }
 
 std::string Options::getLocale()

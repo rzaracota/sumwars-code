@@ -19,6 +19,7 @@
 
 #include <iostream>
 
+
 std::string WorldLoader::m_filename;
 
 void WorldLoader::loadEvent( TiXmlNode* node, Event *ev, TriggerType &type)
@@ -168,6 +169,8 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						if (music != "")
 						{
 							rdata->m_music_tracks.push_back(music);
+							//XXX
+							DEBUG ("Loading region [%s]. Adding music track to region data: %s", rdata->m_name.c_str (), music.c_str ());
 						}
 					}
 					else if (child2->Type()!=TiXmlNode::TINYXML_COMMENT)

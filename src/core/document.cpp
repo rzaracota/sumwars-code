@@ -21,8 +21,8 @@
 #include "fstream"
 #include "document.h"
 
-#include "sound.h"
-#include "music.h"
+//#include "sound.h"
+//#include "music.h"
 
 #include "networkstruct.h"
 #include "projectile.h"

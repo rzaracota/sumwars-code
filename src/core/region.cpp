@@ -20,7 +20,18 @@
 #include "itemfactory.h"
 #include "scriptobject.h"
 
-#include "music.h"
+//#include "music.h"
+
+// Allow using the list structure (used to store music tracks in region data).
+#include <list>
+
+// Sound operations helper.
+#include "soundhelper.h"
+
+// Allow the use of the sound manager.
+#include "gussound.h"
+
+using gussound::SoundManager;
 
 RegionData::RegionData()
 {
@@ -333,7 +344,7 @@ Region::Region(short dimx, short dimy, short id, std::string name, RegionData* d
 
 	m_light(this)
 {
-	DEBUGX("creating region");
+	DEBUG ("creating region [%s]", m_name.c_str ());
 
 	m_data_grid.clear();
 	m_height.clear();
@@ -348,6 +359,51 @@ Region::Region(short dimx, short dimy, short id, std::string name, RegionData* d
 	}
 	
 	m_camera.m_region = this;
+
+	// Also create a playlist for this region, bearing the same name.
+	SoundManager::getPtr ()->getMusicPlayer ()->registerPlaylist (m_name);
+	SoundManager::getPtr ()->getMusicPlayer ()->setRepeat (true);
+	SoundManager::getPtr ()->getMusicPlayer ()->setShuffle (true);
+	SoundManager::getPtr ()->getMusicPlayer ()->setFadePreferrences (false, false, false);
+
+	// The track names to be used are stored in rdata.
+	if (data)
+	{
+		for (std::list <std::string>::const_iterator it = data->m_music_tracks.begin ();
+			it != data->m_music_tracks.end (); ++ it)
+		{
+			try
+			{
+				// The region stores track names in the form:
+				// - tread_lightly.ogg
+				// - ambience_2.ogg
+				// The music player needs the files including their full path (absolute or relative), in the form:
+				// - .//./share/resources/music/tread_lightly.ogg
+				// - .//./share/resources/music/ambience_2.ogg
+
+				std::string fileName = SoundHelper::getNameWithPathForMusicTrack (*it);
+#if 1
+				// One could call the following function to add an "anonymous" track (with a name such as "track_01").
+				SoundManager::getPtr ()->addPlaylistTrack (m_name, fileName);
+#else
+				// Or one could opt for the manual 2 step solution:
+				SoundManager::getPtr ()->getRepository ()->addSound (*it	// sound name
+																	, fileName	// sound file path
+																	, false	// load into memory? don't do this for songs
+																	, gussound::GSC_Music // category: music.
+																	, true);	// allow only one instance of this sound to be played at one point.
+				SoundManager::getPtr ()->getMusicPlayer ()->addTrackToPlaylist (m_name, *it);
+#endif
+			}
+			catch (std::exception& e)
+			{
+				DEBUG ("Region creation caught exception: %s", e.what ());
+			}
+		}
+	}
+
+	//SoundManager::getPtr ()->getMusicPlayer ()->stop ();
+	//SoundManager::getPtr ()->getMusicPlayer ()->play ();
 }
 
 Region::~Region()
@@ -3076,7 +3132,13 @@ void Region::playSound(std::string soundname, Vector position, float volume , bo
 
 void Region::addMusicTrack(MusicTrack track)
 {
+	DEBUG ("Region: adding music track: %s", track.c_str ());
 	m_music_tracks.push_back(track);
+	
+	// Now also affect the music player. Add the track to the playlist with the name of this region.
+	SoundManager::getPtr ()->addPlaylistTrack (getName (), track);
+
+
 	
 	NetEvent event;
 	event.m_type = NetEvent::MUSIC_CHANGED;
@@ -3090,7 +3152,8 @@ void Region::clearMusicTracks()
 	if (World::getWorld()->getLocalPlayer() !=0
 		&& World::getWorld()->getLocalPlayer()->getRegion() == this)
 	{
-		MusicManager::instance().stop();
+		//MusicManager::instance().stop();
+		SoundManager::getPtr ()->getMusicPlayer ()->stop ();
 	}
 	
 	NetEvent event;

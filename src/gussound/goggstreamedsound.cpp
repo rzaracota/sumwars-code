@@ -64,26 +64,6 @@
 
 namespace GOpenAl
 {
-	std::string getErrorCodeDescription (int code)
-	{
-		switch (code)
-		{
-			case OV_EREAD:
-				return std::string("Read from media.");
-			case OV_ENOTVORBIS:
-				return std::string("Not Vorbis data.");
-			case OV_EVERSION:
-				return std::string("Vorbis version mismatch.");
-			case OV_EBADHEADER:
-				return std::string("Invalid Vorbis header.");
-			case OV_EFAULT:
-				return std::string("Internal logic fault (bug or heap/stack corruption.");
-			default:
-				return std::string("Unknown Ogg error.");
-		}
-		return std::string("Unknown Ogg error.");
-	}
-
 
 	
 	// ------------------------------------------ GOggStreamedSound -----------------------------------------
@@ -132,7 +112,7 @@ namespace GOpenAl
 		if (error != AL_NO_ERROR)
 		{
 			std::string errMessage ("Error on opening Ogg stream: ");
-			errMessage.append (makeErrorString (error));
+			errMessage.append (makeAlErrorString (error));
 			throw std::exception (errMessage.c_str ());
 		}
 
@@ -140,7 +120,9 @@ namespace GOpenAl
 		oggFilePtr_ = fopen (fileName.c_str (), "rb");
 		if (! oggFilePtr_)
 		{
-			throw std::exception ("Failed to load Ogg file");
+			std::string errMessage ("Failed to load Ogg file: ");
+			errMessage.append (fileName);
+			throw std::exception (errMessage.c_str ());
 		}
 
 		if((result = ov_open (oggFilePtr_, &oggStream_, NULL, 0)) < 0)
@@ -148,7 +130,7 @@ namespace GOpenAl
 			fclose (oggFilePtr_);
         
 			std::string errText ("Could not open Ogg stream. ");
-			errText.append (getErrorCodeDescription (result));
+			errText.append (makeOggErrorString (result));
 			throw std::exception (errText.c_str ());
 		}
 	
@@ -178,7 +160,7 @@ namespace GOpenAl
 		if (myBitRate)
 		{
 			estimatedDurationInSeconds_ = 8 * inFile.tellg () / myBitRate;
-			GTRACE (5, "Ogg content duration: " << estimatedDurationInSeconds_);
+			GTRACE (5, "Ogg content duration: " << estimatedDurationInSeconds_ << " (sec.)");
 		}
 
 		if (vorbisInfo_->channels == 1)
@@ -192,6 +174,8 @@ namespace GOpenAl
         
 		GTRACE (5, "GOggStreamedSound creating 2 buffers for [" << getId () << "]");
 		alGenBuffers (2, buffers_);
+
+		oggcheck ();
 	}
 
 
@@ -204,6 +188,7 @@ namespace GOpenAl
 		oggcheck ();
 
 		ov_clear (&oggStream_);
+		oggcheck ();
 	}
 
 
@@ -245,6 +230,7 @@ namespace GOpenAl
 				switch( actionIfPlaying )
 				{
 				case ActionRestart:
+					GTRACE (6, "Sound [" << getId () << "] already playing. Rewiding (close & reopen).");
 					rewind ();
 					doPlay (repeatContinuously);
 					state_ = GPLS_Playing;
@@ -270,6 +256,7 @@ namespace GOpenAl
 			return; // already playing.
 		case GPLS_Stopped:
 			{
+				GTRACE (6, "Sound [" << getId () << "] was stopped. Rewiding (close & reopen).");
 				rewind ();
 				doPlay( repeatContinuously );
 				state_ = GPLS_Playing;
@@ -305,11 +292,13 @@ namespace GOpenAl
     
 		alSourceQueueBuffers (source_, 2, buffers_);
 		alSourcePlay (source_);
+		oggcheck ();
 	}
 
 	void GOggStreamedSound::doResume (bool repeatContinuously)
 	{
 		alSourcePlay (source_);
+		oggcheck ();
 		/*
 		alSourcei (source_, AL_BUFFERS_PROCESSED, &processed);
 		*/
@@ -360,7 +349,7 @@ namespace GOpenAl
 				ALenum myErr = alGetError ();
 				if (myErr)
 				{
-					GTRACE (4, "ERROR while playing: " << getErrorCodeDescription (myErr));
+					GTRACE (4, "ERROR while playing: " << makeAlErrorString (myErr));
 				}
 			}
 		}
@@ -373,7 +362,7 @@ namespace GOpenAl
 			ALenum myErr = alGetError ();
 			if (myErr)
 			{
-				GTRACE (4, "ERROR while playing: " << getErrorCodeDescription (myErr));
+				GTRACE (4, "ERROR while playing: " << makeAlErrorString (myErr));
 			}
 		}
 #endif
@@ -385,8 +374,10 @@ namespace GOpenAl
 	bool GOggStreamedSound::stream (ALuint buffer)
 	{
 		static const int BUFFER_SIZE = 4096 * 16;
+		//static const int BUFFER_SIZE = 4096;
+		//TODO:XXX:investigate buffer sizes.
 
-		char pcm[BUFFER_SIZE];
+		char pcm [BUFFER_SIZE];
 		int  size = 0;
 		int  section;
 		int  result;
@@ -399,7 +390,7 @@ namespace GOpenAl
 				size += result;
 			else
 				if(result < 0)
-					throw makeErrorString (result);
+					throw makeOggErrorString (result);
 				else
 					break;
 		}
@@ -443,6 +434,7 @@ namespace GOpenAl
 		alSourceStop (source_);
 		state_ = GPLS_Stopped;
 		elapsedFromStart_ = 0;
+		oggcheck ();
 	}
 
 
@@ -584,19 +576,21 @@ namespace GOpenAl
 
 
 
-	void GOggStreamedSound::oggcheck()
+	void GOggStreamedSound::oggcheck ()
 	{
-		int error = alGetError();
+		int error = alGetError ();
 
-		if(error != AL_NO_ERROR)
+		if (error != AL_NO_ERROR)
 		{
 			// TODO: add error msg.
+			GTRACE (2, "oggcheck failed: " << makeAlErrorString (error));
 		}
 	}
 
 
-	std::string GOggStreamedSound::makeErrorString (int code)
+	std::string GOggStreamedSound::makeOggErrorString (int code)
 	{
+		// Show a bit more than alGetString.
 		switch(code)
 		{
 			case OV_EREAD:
@@ -609,10 +603,46 @@ namespace GOpenAl
 				return std::string ("Invalid Vorbis header.");
 			case OV_EFAULT:
 				return std::string ("Internal logic fault (bug or heap/stack corruption.");
+			case AL_INVALID_NAME:
+				return std::string ("Invalid name parameter.");
+			case AL_INVALID_ENUM:
+				return std::string ("Invalid enum parameter value.");
+			case AL_INVALID_VALUE:
+				return std::string ("Invalid parameter.");
+			case AL_INVALID_OPERATION:
+				return std::string ("Illegal call.");
+			case AL_OUT_OF_MEMORY:
+				return std::string ("Unable to allocate memory.");
 			default:
 				{
 					std::stringstream ss;
 					ss << "Unknown Ogg error (" << code << ")";
+					return ss.str ();
+				}
+		}
+	}
+
+
+
+	std::string GOggStreamedSound::makeAlErrorString (ALuint code)
+	{
+		// Show a bit more than alGetString.
+		switch(code)
+		{
+			case AL_INVALID_NAME:
+				return std::string ("Invalid name parameter.");
+			case AL_INVALID_ENUM:
+				return std::string ("Invalid enum parameter value.");
+			case AL_INVALID_VALUE:
+				return std::string ("Invalid parameter.");
+			case AL_INVALID_OPERATION:
+				return std::string ("Illegal call.");
+			case AL_OUT_OF_MEMORY:
+				return std::string ("Unable to allocate memory.");
+			default:
+				{
+					std::stringstream ss;
+					ss << "Unknown OpenAL error (" << code << ")";
 					return ss.str ();
 				}
 		}

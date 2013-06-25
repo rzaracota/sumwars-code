@@ -14,7 +14,10 @@
  */
 
 #include "inventory.h"
-#include "sound.h"
+//#include "sound.h"
+
+// Helper for sound operations
+#include "soundhelper.h"
 
 Inventory::Inventory (Document* doc)
 	: ItemWindow(doc)
@@ -399,7 +402,8 @@ void Inventory::update()
 		label->setText(out_stream.str());
 		if (!m_silent)
 		{
-			SoundSystem::playAmbientSound("sell_buy");
+			//SoundSystem::playAmbientSound("sell_buy");
+			SoundHelper::playAmbientSoundGroup ("sell_buy");
 		}
 	}
 	

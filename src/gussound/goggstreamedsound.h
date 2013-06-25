@@ -132,7 +132,8 @@ namespace GOpenAl
 		virtual void doPlay (bool repeatContinuously = false);
 		virtual void doResume (bool repeatContinuously = false);
 
-		std::string makeErrorString (int code);
+		std::string makeAlErrorString (ALuint code);
+		std::string makeOggErrorString (int code);
 
 		SoundDuration estimatedDurationInSeconds_;
 

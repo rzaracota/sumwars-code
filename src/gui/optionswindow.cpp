@@ -14,10 +14,13 @@
  */
 
 #include "optionswindow.h"
-#include "sound.h"
+//#include "sound.h"
 #include "listitem.h"
-#include "music.h"
+//#include "music.h"
 #include "sumwarshelper.h"
+
+// Allow the use of the sound manager.
+#include "gussound.h"
 
 // The following includes are added to support video mode changes in the options window.
 #include <OgreConfigFile.h>
@@ -26,6 +29,8 @@
 #include "ceguiutility.h"
 
 using namespace std;
+
+using gussound::SoundManager;
 
 OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std::string& ceguiSkinName)
 	: Window (doc)
@@ -418,15 +423,19 @@ void OptionsWindow::update()
 	}
 
 	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(win_mgr.getWindow( "SoundVolumeSlider"));
-	if ( fabs ( slider->getScrollPosition() - SoundSystem::getSoundVolume()) > 0.01f)
+	//if ( fabs ( slider->getScrollPosition() - SoundSystem::getSoundVolume()) > 0.01f)
+	if ( fabs ( slider->getScrollPosition() - SoundManager::getPtr ()->getRepository ()->getVolumeForCategory (gussound::GSC_Effect)) > 0.01f)
 	{
-		slider->setScrollPosition(SoundSystem::getSoundVolume());
+		//slider->setScrollPosition(SoundSystem::getSoundVolume());
+		slider->setScrollPosition (SoundManager::getPtr ()->getRepository ()->getVolumeForCategory (gussound::GSC_Effect));
 	}
 
 	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.getWindow( "MusicVolumeSlider"));
-	if ( fabs ( slider->getScrollPosition() - MusicManager::instance().getMusicVolume()) > 0.01f)
+	//if ( fabs ( slider->getScrollPosition() - MusicManager::instance().getMusicVolume()) > 0.01f)
+	if ( fabs ( slider->getScrollPosition() - SoundManager::getPtr ()->getRepository ()->getVolumeForCategory (gussound::GSC_Music)) > 0.01f)
 	{
-		slider->setScrollPosition(MusicManager::instance().getMusicVolume());
+		//slider->setScrollPosition(MusicManager::instance().getMusicVolume());
+		slider->setScrollPosition (SoundManager::getPtr ()->getRepository ()->getVolumeForCategory (gussound::GSC_Music));
 	}
 	
 	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.getWindow( "TextSpeedSlider"));
@@ -888,7 +897,9 @@ bool OptionsWindow::onSoundVolumeChanged(const CEGUI::EventArgs& evt)
 	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(we.window);
 	float vol = slider->getScrollPosition();
 	DEBUG("sound volume change to %f",vol);
-	SoundSystem::setSoundVolume(vol);
+	//SoundSystem::setSoundVolume(vol);
+	SoundManager::getPtr ()->getRepository ()->setVolumeForCategory (gussound::GSC_Effect, vol);
+	SoundManager::getPtr ()->getRepository ()->setVolumeForCategory (gussound::GSC_Master, 1.0);
 	return true;
 }
 
@@ -933,7 +944,9 @@ bool OptionsWindow::onMusicVolumeChanged(const CEGUI::EventArgs& evt)
 	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(we.window);
 	float vol = slider->getScrollPosition();
 	DEBUGX("music volume changed to %f",vol);
-	MusicManager::instance().setMusicVolume(vol);
+	//MusicManager::instance().setMusicVolume(vol);
+	SoundManager::getPtr ()->getRepository ()->setVolumeForCategory (gussound::GSC_Music, vol);
+	SoundManager::getPtr ()->getRepository ()->setVolumeForCategory (gussound::GSC_Master, 1.0);
 	return true;
 }
 

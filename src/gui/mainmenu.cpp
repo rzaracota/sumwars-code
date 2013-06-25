@@ -28,6 +28,14 @@
 
 #include <iostream>
 
+// Sound operations helper.
+#include "soundhelper.h"
+
+// Allow the use of the sound manager.
+#include "gussound.h"
+
+using gussound::SoundManager;
+
 
 MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
         : Window (doc)
@@ -255,6 +263,7 @@ bool MainMenu::onShowCredits(const CEGUI::EventArgs& evt)
 
 bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 {
+	DEBUG ("Main menu shown");
 	Ogre::Root *root = Ogre::Root::getSingletonPtr();
     if (!m_sceneCreated)
 	{
@@ -270,6 +279,16 @@ bool MainMenu::onShown( const CEGUI::EventArgs& evt )
     root->addFrameListener(this);
 	
     CEGUI::WindowManager::getSingleton().getWindow("MainMenu")->setAlpha(0);
+
+	// Also switch to the menu's playlist.
+	try
+	{
+		SoundManager::getPtr ()->getMusicPlayer ()->switchToPlaylist ("menu");
+	}
+	catch (std::exception& e)
+	{
+		DEBUG ("Encountered error while trying to switch to the menu playlist: %s", e.what ());
+	}
     return true;
 }
 
@@ -688,6 +707,30 @@ void MainMenu::createScene()
 
 		m_sceneCreated = true;
 		
+		// Perform an update to the sounds.
+		SoundManager::getPtr ()->elapseTime ();
+
+		DEBUG ("Playing dummy sound");
+		// TODO: XXX
+		// Start adding sounds to the sound repository.
+		//std::string fullPath = SoundHelper::getNameWithPathForMusicTrack ("tempvo3.wav");
+		std::string fullPath = SoundHelper::getNameWithPathForSoundFile ("tempogus.wav");
+		SoundManager::getPtr ()->getRepository ()->addSound ("tempogus.wav" // name
+														, fullPath // path
+														, true // load entire sound into memory? don't do it for songs! only for small sounds.
+														, gussound::GSC_Effect
+														, false); // a category for the sound; you can change the volume for all sounds in a category.
+		// Play this sound immediately.
+		SoundManager::getPtr ()->getRepository ()->getSound ("tempogus.wav")->play2D ();
+
+		//DEBUG ("registering menu playlist");
+		//SoundManager::getPtr ()->getMusicPlayer ()->registerPlaylist ("menu");
+		//
+		////SoundHelper::addPlaylistTrackByShortName ("menu", "Black Sabbath - Iron Man.wav");
+		//SoundHelper::addPlaylistTrackByShortName ("menu", "goblin_rituals.ogg");
+		//SoundHelper::addPlaylistTrackByShortName ("menu", "01 - Reluctant Hero (WIP).ogg");
+
+		//SoundManager::getPtr ()->getMusicPlayer ()->play ();
 	}
     
 }

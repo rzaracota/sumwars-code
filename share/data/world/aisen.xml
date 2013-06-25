@@ -10,7 +10,8 @@
 		<Settings dimx="46" dimy="46" area_percent="0.3" complexity="0.4" granularity="6"  ground="grass1"/>
 		
 		<Music>
-			<Track source="tread_lightly.ogg" />
+      <Track source="General Fuzz - Cliff Notes.ogg" />
+<!--			<Track source="tread_lightly.ogg" />-->
 		</Music>
 		
 		<WorldPosition world_x="0.61" world_y ="0.63"/>

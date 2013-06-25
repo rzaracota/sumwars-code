@@ -320,9 +320,10 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 			return;
 		}
 		
-		SoundObject* obj = SoundSystem::createSoundObject(name);
-		
-		m_soundobjects[object.m_objectname] = obj;
+		//SoundObject* obj = SoundSystem::createSoundObject(name);
+		//m_soundobjects[object.m_objectname] = obj;
+
+		m_soundobjects[object.m_objectname] = name;
 		DEBUGX("adding soundobject with name %s (%s)",object.m_objectname.c_str(),name.c_str());
 	}
 	else 
@@ -499,7 +500,7 @@ void GraphicObject::removeMovableObject(std::string name)
 	}
 	else if (m_soundobjects.find(name) != m_soundobjects.end())
 	{
-		SoundSystem::deleteSoundObject(m_soundobjects[name]);
+		//SoundSystem::deleteSoundObject(m_soundobjects[name]);
 		m_soundobjects.erase(name);
 		DEBUGX("removing Soundobject %s",name.c_str());
 	}
@@ -920,11 +921,16 @@ void GraphicObject::update(float time)
 	// update Soundobjects
 	Ogre::Vector3 opos = getTopNode()->_getDerivedPosition();
 	Vector pos(opos.x/GraphicManager::g_global_scale, opos.z / GraphicManager::g_global_scale);
-	std::map<std::string, SoundObject* >::iterator st;
-	for (st = m_soundobjects.begin(); st != m_soundobjects.end(); ++st)
+	
+	//std::map<std::string, SoundObject* >::iterator st;
+	for (std::map<std::string, std::string>::iterator st = m_soundobjects.begin(); st != m_soundobjects.end(); ++st)
 	{
-		st->second->setPosition(pos);
-		st->second->update();
+		// TODO: XXX: this is a location where it would make sense to update the position of a 3d sound.
+		// requires to connect a sound adapter instead of a sound name.
+
+		//st->second->setPosition(pos);
+		//st->second->update();
+
 		DEBUGX("setting sound %s position to %f %f",st->first.c_str(),pos.m_x, pos.m_y);
 	}
 }
@@ -973,11 +979,15 @@ void GraphicObject::addActiveRenderPart(ActionRenderpart* part)
 	}
 	else if (part->m_type == ActionRenderpart::SOUND)
 	{
-		std::map<std::string, SoundObject* >::iterator it;
+		//std::map<std::string, SoundObject* >::iterator it;
+
+		std::map<std::string, std::string>::iterator it;
 		it = m_soundobjects.find(part->m_objectname);
 		if (it != m_soundobjects.end())
 		{
-			it->second->setSound(part->m_animation);
+			//it->second->setSound(part->m_animation);
+			it->second = part->m_animation;
+
 			DEBUGX("setting sound object %s to sound %s",it->first.c_str(), part->m_animation.c_str());
 		}
 	}

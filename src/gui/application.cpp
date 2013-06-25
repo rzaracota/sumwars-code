@@ -18,7 +18,7 @@
 #include "tooltipmanager.h"
 #include "itemwindow.h"
 #include "templateloader.h"
-#include "music.h"
+//#include "music.h"
 #include "sumwarshelper.h"
 
 #ifdef SUMWARS_BUILD_TOOLS
@@ -52,6 +52,14 @@
 // Utilities for handling CEGUI
 #include "ceguiutility.h"
 
+// Sound and music management classes.
+#include "gussound.h"
+#include "gopenal.h"
+
+// Helper for sound operations
+#include "soundhelper.h"
+
+
 /**
 	Application constructor. Will call the init function.
 */
@@ -65,14 +73,14 @@ Application::Application()
 	m_shutdown = false;
 
 	// Call the specialized initialization function.
-	try
+	//try
 	{
 		ret = init();
 	}
-	catch (std::exception &e)
-	{
-		ERRORMSG("Error message: %s",e.what());
-	}
+	//catch (std::exception &e)
+	//{
+	//	ERRORMSG("Error message: %s",e.what());
+	//}
 
 	if (ret == false)
 	{
@@ -123,17 +131,39 @@ bool Application::init()
 				     SumwarsHelper::macPath() + "/ogre.cfg",
 				     operationalPath + "/ogre.log");
 #else
-	m_ogre_root = new Ogre::Root (operationalPath + "/plugins.cfg", operationalPath + "/ogre.cfg", operationalPath + "/ogre.log");
+
+	Ogre::String pluginsFileName;
+	Ogre::String configFileName;
+	Ogre::String logFileName;
+
+#ifdef _DEBUG
+	pluginsFileName = operationalPath + "/pluginsdbg.cfg";
+	configFileName = operationalPath + "/ogre.cfg";
+	logFileName = operationalPath + "/ogre.log";
+#else
+	pluginsFileName = operationalPath + "/plugins.cfg";
+	configFileName = operationalPath + "/ogre.cfg";
+	logFileName = operationalPath + "/ogre.log";
+#endif
+
+	m_ogre_root = new Ogre::Root (pluginsFileName, configFileName, logFileName);
 #endif
 
 	if (m_ogre_root == 0)
 		return false;
 
+	bool ret = true;
+
+	ret = initOpenAL();
+	if (ret == false)
+	{
+		ERRORMSG("Sound initialisation failed");
+	}
+
+	DEBUG ("Reading options file (options.xml)...");
 	// Augustin Preda, 2011.11.15: trial code: load the options.xml file; it's required
 	// TODO: don't load it again later. Currently it's done via m_document->loadSettings();
 	Options::getInstance()->readFromFile(operationalPath + "/options.xml");
-
-	bool ret = true;
 
 	// Ogre configurieren
 	ret = configureOgre();
@@ -158,6 +188,13 @@ bool Application::init()
 		ERRORMSG("Setting up Resources failed");
 		return false;
 	}
+
+	// Let's use shuffle and repeat by default.
+	SoundManager::getPtr ()->getMusicPlayer ()->setRepeat (true);
+	SoundManager::getPtr ()->getMusicPlayer ()->setShuffle (true);
+
+	// Commence the play.
+	SoundManager::getPtr ()->getMusicPlayer ()->play ();
 
 	//Gettext initialisieren
 	ret = initGettext();
@@ -241,12 +278,20 @@ Application::~Application()
 		delete m_ogre_root;
 	}
 	
+	//
+	// Destroy the singletons
+	//
 	
 	ObjectFactory::cleanup();
 	ItemFactory::cleanup();
-	SoundSystem::cleanup();
+	//SoundSystem::cleanup();
+
+	// Destroy the sound system
+    SoundManager::destroy ();
+
 	LogManager::cleanup();
-    
+
+
     PHYSFS_deinit();
 
 	// Free the singletons? - Should be cleaned up automatically along with the rest of the application memory space.
@@ -329,6 +374,7 @@ void Application::run()
 			DEBUG("update time was %f",t);
 		}
 
+		float musicUpdateTimer = frametime;
 
 		timer2.reset();
 		// run the message pump
@@ -414,7 +460,10 @@ void Application::run()
 		}
 
 		// Musik aktualisieren
-		MusicManager::instance().update();
+		//MusicManager::instance().update();
+
+		// Do the update for the sounds
+		SoundManager::getPtr ()->elapseTime ();
 	}
 
 	DEBUG ("Application: run function has run its course");
@@ -889,60 +938,49 @@ bool Application::initCEGUI()
 	return true;
 }
 
+//TODO: rename function. It doesn't have to point to openAL as a sound lib.
 bool Application::initOpenAL()
 {
-	SoundSystem::init();
-	bool err = SoundSystem::checkErrors();
-	return !err;
+	DEBUG ("initOpenAL");
+	//SoundSystem::init();
+	//bool err = SoundSystem::checkErrors();
+	//return !err;
+	try
+	{
+		// Get the path to use for storing data.
+		// This will be relative to the user directory on the user OS.
+		Ogre::String operationalPath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::userPath();
+
+		// Set the logging details
+		SoundManagerLogger::setLoggerTarget (operationalPath + "/gussoundlib.log", 9);
+
+		SoundManagerFactory::getPtr ()->Register ("openal", GOpenAl::OpenAlManagerUtil::createSoundManager);
+		SoundManager::setPtr (SoundManagerFactory::getPtr ()->CreateObject ("openal"));
+
+		// this is a temporary hack. Should be integrated into the class.
+		((GOpenAl::OpenAlManagerUtil*)SoundManager::getPtr ())->setListenerPosition (0, 0, 0);
+
+		SoundManager::getPtr ()->getMusicPlayer ()->setFadeDuration (2500);
+		SoundManager::getPtr ()->getMusicPlayer ()->setRepeat (true);
+
+		// make sure the first call to elapse time won't return many seconds. 
+		SoundManager::getPtr ()->elapseTime ();
+	}
+	catch (std::exception &e)
+	{
+		DEBUG ("Application::initOpenAL caught exception: %s", e.what ());
+		return false;
+	}
+
+	return true;
 }
+
+
 
 bool Application::createDocument()
 {
 	DEBUG("create document\n");
 	m_document = new Document();
-
-	/*
-	m_document->installShortkey(OIS::KC_ESCAPE,CLOSE_ALL);
-	m_document->installShortkey(OIS::KC_I,SHOW_INVENTORY);
-	m_document->installShortkey(OIS::KC_C,SHOW_CHARINFO);
-	m_document->installShortkey(OIS::KC_T,SHOW_SKILLTREE);
-	m_document->installShortkey(OIS::KC_P,SHOW_PARTYMENU);
-	m_document->installShortkey(OIS::KC_M,SHOW_CHATBOX);
-	m_document->installShortkey(OIS::KC_Q,SHOW_QUESTINFO);
-	m_document->installShortkey(OIS::KC_TAB,SHOW_MINIMAP);
-	m_document->installShortkey(OIS::KC_F10,SHOW_OPTIONS);
-	m_document->installShortkey(OIS::KC_W,SWAP_EQUIP);
-	m_document->installShortkey(OIS::KC_LMENU,SHOW_ITEMLABELS);
-
-	m_document->installShortkey(OIS::KC_RETURN,SHOW_CHATBOX_NO_TOGGLE,false);
-	m_document->installShortkey(OIS::KC_1,USE_POTION,false);
-	m_document->installShortkey(OIS::KC_2,(ShortkeyDestination) (USE_POTION+1),false);
-	m_document->installShortkey(OIS::KC_3,(ShortkeyDestination) (USE_POTION+2),false);
-	m_document->installShortkey(OIS::KC_4,(ShortkeyDestination) (USE_POTION+3),false);
-	m_document->installShortkey(OIS::KC_5,(ShortkeyDestination) (USE_POTION+4),false);
-	m_document->installShortkey(OIS::KC_6,(ShortkeyDestination) (USE_POTION+5),false);
-	m_document->installShortkey(OIS::KC_7,(ShortkeyDestination) (USE_POTION+6),false);
-	m_document->installShortkey(OIS::KC_8,(ShortkeyDestination) (USE_POTION+7),false);
-	m_document->installShortkey(OIS::KC_9,(ShortkeyDestination) (USE_POTION+8),false);
-	m_document->installShortkey(OIS::KC_0,(ShortkeyDestination) (USE_POTION+9),false);
-
-	m_document->installSpecialKey(OIS::KC_ESCAPE);
-	m_document->installSpecialKey(OIS::KC_LSHIFT);
-//	m_document->installSpecialKey(OIS::KC_LCONTROL);
-//	m_document->installSpecialKey(OIS::KC_RCONTROL);
-//	m_document->installSpecialKey(OIS::KC_RMENU);
-//	m_document->installSpecialKey(OIS::KC_LMENU);
-	m_document->installSpecialKey(OIS::KC_TAB);
-	m_document->installSpecialKey(OIS::KC_RETURN);
-	m_document->installSpecialKey(OIS::KC_BACK);
-	m_document->installSpecialKey(OIS::KC_UP);
-	m_document->installSpecialKey(OIS::KC_DOWN);
-	m_document->installSpecialKey(OIS::KC_LEFT);
-	m_document->installSpecialKey(OIS::KC_RIGHT);
-	m_document->installSpecialKey(OIS::KC_CAPITAL);
-	// CHEATS
-	m_document->installShortkey(OIS::KC_L,(ShortkeyDestination) (CHEAT+0));
-*/
 	m_document->loadSettings();
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -956,6 +994,8 @@ bool Application::createDocument()
 
 	return true;
 }
+
+
 
 bool Application::createView()
 {
@@ -974,11 +1014,16 @@ bool Application::createView()
 	mgr->setFadeOutTime(200.0f);
 	mgr->setVisibleTime(0.0f);
 
+	// TODO: Augustin Preda (2013.06.22): investigate whether the clipboard should not be moved from the createView function.
+	// It doesn't seem to make sense to have it here.
+
 	// Create the clipboard singleton
 	new SWUtil::Clipboard ();
 
 	return true;
 }
+
+
 
 bool Application::loadResources(int datagroups)
 {
@@ -1188,7 +1233,9 @@ bool Application::loadResources(int datagroups)
 			file += "/";
 			file += it->filename;
 
-			SoundSystem::loadSoundData(file.c_str());
+			//SoundSystem::loadSoundData(file.c_str());
+			DEBUG ("Loading sound file [%s]", file.c_str ());
+			SoundHelper::loadSoundGroupsFromFile (file);
 
 			updateStartScreen(0.9);
 		}
@@ -1264,13 +1311,16 @@ void Application::cleanup(int datagroups)
 	
 	if (datagroups & World::DATA_SOUND)
 	{
-		SoundSystem::cleanupBuffers();
+		//SoundSystem::cleanupBuffers();
+		//TODO: investigate if needed with new system.
 	}
 	
 	if (datagroups & World::DATA_MUSIC)
 	{
 		// just stop the music to release the buffers
-		MusicManager::instance().stop();
+		//MusicManager::instance().stop();
+
+		SoundManager::getPtr ()->getMusicPlayer ()->stop ();
 	}
 }
 
@@ -1343,7 +1393,7 @@ bool Application::windowClosing (Ogre::RenderWindow* rw)
 		}
 	}
 
-	// The state was set internally, so the game will know it needs to shutdown. But it needs time to do this.
+	// The state was set internally, so the game will know it needs to But it needs time to do this.
 	// Return false so that we don't allow the closing to take place yet!
 	return false;
 }

@@ -490,6 +490,10 @@ namespace gussound
 
 		virtual void applyEffect ();
 
+		/// Define action to be taken when the effect ends (for instance, a fade-out would stop the sound at the end.
+		/// @param force If the force flag is set to true, the stop commands for the sound are suppressed.
+		/// This is performed in order to prevent fade-in and fade-out effects running for the same sound and performing
+		/// an unplanned stop operation when the fade-out is finished.
 		virtual void endEffect (bool force = false);
 	};
 
@@ -652,7 +656,7 @@ namespace gussound
 	public:
 		virtual ~SoundRepository ();
 
-		virtual void addSound (const std::string &soundName, const std::string & fileName, bool loadIntoMemory = false, SoundCategory cat = GSC_None, bool onlyOneInstance = true);
+		virtual void addSound (const std::string &soundName, const std::string & fileName, bool loadIntoMemory = false, SoundCategory cat = GSC_None, bool onlyOneInstance = false);
 
 		virtual EffectableSound * createSound (const std::string& id = "", const std::string& fileExtension = "") = 0;
 
@@ -750,6 +754,7 @@ namespace gussound
 
 		virtual void setRepository (const SoundRepositorySmartPtr & repository) {ptrToRepository_ = repository;}
 
+		virtual void setFadePreferrences (bool atPlay = true, bool atStop = true, bool atPause = true);
 		virtual void setFadeDuration (SoundDuration dur);
 		virtual void setRepeat (bool value);
 		virtual void setShuffle (bool value);
@@ -805,6 +810,14 @@ namespace gussound
 		/// (i.e. in a loop in the main thread or in a separate thread).
 		virtual void elapseTime ();
 
+		/// Process some time dependant internal logic.
+		/// React to some time units having passed from the last time the function was called.
+		/// This will generally be used to control the playlists.
+		/// The user of the audio engine will have to call this function on a regular basis
+		/// (i.e. in a loop in the main thread or in a separate thread).
+		/// @param timeUnits The amount of time units (milliseconds) elapsed since the last call.
+		virtual void elapseTimeByMilliseconds (const guslib::TimeUnits& timeUnits);
+
 		/// Access the music player.
 		virtual MusicPlayerSmartPtr & getMusicPlayer () { return player_; }
 
@@ -848,6 +861,17 @@ namespace gussound
 	// define an abstract singleton holder, SoundManager
 
 	typedef guslib::SingletonHolder <SoundManagerUtil> SoundManager;
+
+	///
+	/// A class to help out with preparing logging
+	///
+	class SoundManagerLogger
+	{
+	public:
+		/// Set the log file to be used (part of the tracing library).
+		static void setLoggerTarget (const std::string& fileName, int level = 5);
+	};
+
 
 } // namespace gussound
 

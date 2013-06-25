@@ -18,8 +18,10 @@
 #include "itemwindow.h"
 #include "tooltipmanager.h"
 #include "ceguiutility.h"
-#include "sound.h"
+//#include "sound.h"
 
+// Helper for sound operations
+#include "soundhelper.h"
 
 std::map<Item::Subtype, std::string> ItemWindow::m_item_images;
 
@@ -254,10 +256,11 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 	
 	if (playsound && !m_silent_current_update)
 	{
-		SoundName sname = GraphicManager::getDropSound(item->m_subtype);
+		std::string sname = GraphicManager::getDropSound(item->m_subtype);
 		if (sname != "")
 		{
-			SoundSystem::playAmbientSound(sname);
+			//SoundSystem::playAmbientSound(sname);
+			SoundHelper::playAmbientSoundGroup (sname);
 			
 			// play only one sound per update...
 			m_silent_current_update = true;
