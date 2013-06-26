@@ -164,6 +164,13 @@ class Application
 		bool loadResources(int datagroups=0xfffffff);
 		
 		/**
+		 * \brief Loads the menu music and commences playing it.
+		 * Typically, this would be placed in the menu class, but that would not allow playing the music while the loading is performed
+		 * (as the menu is not yet created).
+		 */
+		void loadAndPlayMenuMusic ();
+
+		/**
 		 * \brief clears the Ressources specified by \a datagroups
 		 * \param datagroups bitmask consisting of members of \ref World::DataGroups
 		 */

@@ -169,7 +169,6 @@ bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 						if (music != "")
 						{
 							rdata->m_music_tracks.push_back(music);
-							//XXX
 							DEBUG ("Loading region [%s]. Adding music track to region data: %s", rdata->m_name.c_str (), music.c_str ());
 						}
 					}

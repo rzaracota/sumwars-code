@@ -763,6 +763,9 @@ namespace gussound
 		virtual void setRepeat (bool value);
 		virtual void setShuffle (bool value);
 
+		virtual void setPlaylistRepeat (const std::string& playlistName, bool value);
+		virtual void setPlaylistShuffle (const std::string& playlistName, bool value);
+
 		virtual void switchToPlaylist (const std::string & playlistName, bool pauseExisting = true);
 
 		// overrides from the playlist listener

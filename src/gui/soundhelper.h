@@ -54,12 +54,23 @@ public:
 	static void playSoundGroupAtPosition (const std::string& soundGroupID, double posX, double posY, double posZ);
 	
 	/// Add a track to a playlist by using only the file name (without the path).
-	static void addPlaylistTrackByShortName (const std::string& playlistName, const std::string& shortFileName);
+	/// @param playlistName The name of the playlist to add the music track to
+	/// @param shortFileName The name of the file containing the track. It doesn't need a path.
+	/// @return true of the track is added successfully, false otherwise.
+	static bool addPlaylistTrackByShortName (const std::string& playlistName, const std::string& shortFileName);
 
+	/// Load a playlist from an XML file.
+	/// @param fileName The name of the XML file containing the playlist tracks.
+	static bool loadPlaylistFromXMLFile (const std::string& fileName);
 
 protected:
 	/// Load content from an XML Node.
+	/// @param node The XML node to load from. Note: currently tied to the tinyxml implementation.
 	static void loadSoundInfos (TiXmlNode* node);
+
+	/// Load content from an XML Node.
+	/// @param node The XML node to load from. Note: currently tied to the tinyxml implementation.
+	static bool loadPlaylistFromXMLNode (TiXmlNode* node);
 
 };
 

@@ -1251,7 +1251,7 @@ namespace gussound
 		{
 			if (playlistName.compare ("") != 0)
 			{
-				// Also log the existing sounds. Might be useful for a comparison.
+				// Also log the existing playlists. Might be useful for a comparison.
 				GTRACE (3, "Could not find playlist [" << playlistName << "]. Current list of playlists:");
 				for (PlaylistMapping::const_iterator it2 = playlists_.begin (); 
 					it2 != playlists_.end (); ++it2 )
@@ -1375,6 +1375,55 @@ namespace gussound
 			iter->second->setShuffle( value );
 		}
 	}
+
+
+
+
+	void MusicPlayer::setPlaylistRepeat (const std::string& playlistName, bool value)
+	{
+		PlaylistMapping::iterator iter = playlists_.find (playlistName);
+		if (iter == playlists_.end ())
+		{
+			if (playlistName.compare ("") != 0)
+			{
+				// Also log the existing playlists. Might be useful for a comparison.
+				GTRACE (3, "Could not find playlist [" << playlistName << "]. Current list of playlists:");
+				for (PlaylistMapping::const_iterator it2 = playlists_.begin (); 
+					it2 != playlists_.end (); ++it2 )
+				{
+					GTRACE (3, " -> [" << it2->first << "]");
+				}
+			}
+			throw std::exception ("MusicPlayer: attempting set repeat property to a non-existent playlist!");
+		}
+
+		playlists_[playlistName]->setRepeat (value);
+	}
+	
+
+	
+	void MusicPlayer::setPlaylistShuffle (const std::string& playlistName, bool value)
+	{
+		PlaylistMapping::iterator iter = playlists_.find (playlistName);
+		if (iter == playlists_.end ())
+		{
+			if (playlistName.compare ("") != 0)
+			{
+				// Also log the existing playlists. Might be useful for a comparison.
+				GTRACE (3, "Could not find playlist [" << playlistName << "]. Current list of playlists:");
+				for (PlaylistMapping::const_iterator it2 = playlists_.begin (); 
+					it2 != playlists_.end (); ++it2 )
+				{
+					GTRACE (3, " -> [" << it2->first << "]");
+				}
+			}
+			throw std::exception ("MusicPlayer: attempting set shuffle property to a non-existent playlist!");
+		}
+
+		playlists_[playlistName]->setShuffle (value);
+	}
+
+
 
 
 	void MusicPlayer::setListener (MusicPlayerListener * listener)

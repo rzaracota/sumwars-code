@@ -159,8 +159,11 @@ std::string SoundHelper::getNameWithPathForMusicTrack (const std::string& trackN
 
 ///
 /// Add a track to a playlist by using only the file name (without the path).
+/// @param playlistName The name of the playlist to add the music track to
+/// @param shortFileName The name of the file containing the track. It doesn't need a path.
+/// @return true of the track is added successfully, false otherwise.
 ///
-void SoundHelper::addPlaylistTrackByShortName (const std::string& playlistName, const std::string& shortFileName)
+bool SoundHelper::addPlaylistTrackByShortName (const std::string& playlistName, const std::string& shortFileName)
 {
 	std::string fileName;
 	try
@@ -172,7 +175,9 @@ void SoundHelper::addPlaylistTrackByShortName (const std::string& playlistName, 
 	catch (std::exception& e)
 	{
 		DEBUG ("Caught exception while trying to add to playlist [%s] track file [%s]: %s", playlistName.c_str (), fileName.c_str (), e.what ());
+		return false;
 	}
+	return true;
 }
 
 
@@ -198,6 +203,91 @@ std::string SoundHelper::getNameWithPathForSoundFile (const std::string& soundFi
 		result += it->filename;
 	}
 
+	return result;
+}
+
+
+
+///
+/// Load a playlist from an XML file.
+/// @param fileName The name of the XML file containing the playlist tracks.
+///
+bool SoundHelper::loadPlaylistFromXMLFile (const std::string& fileName)
+{
+	// Load XML document.
+	TiXmlDocument doc (fileName.c_str ());
+	bool loadOkay = doc.LoadFile();
+
+	if (! loadOkay)
+	{
+		// Failed to load.
+		ERRORMSG ("Failed to load file %s", fileName.c_str ());
+		return false;
+	}
+
+	// Call the actual loading.
+	return loadPlaylistFromXMLNode (&doc);
+}
+
+
+
+///
+/// Load content from an XML Node.
+/// @param node The XML node to load from. Note: currently tied to the tinyxml implementation.
+///
+bool SoundHelper::loadPlaylistFromXMLNode (TiXmlNode* node)
+{
+	bool result = true;
+
+	// File was loaded... time to parse the contents.
+	TiXmlNode* child;
+	if (node->Type () == TiXmlNode::TINYXML_ELEMENT && !strcmp (node->Value (), "Playlist"))
+	{
+		ElementAttrib attr;
+		attr.parseElement (node->ToElement ());
+		
+		std::string playlistName;
+		bool repeatOption;
+		bool shuffleOption;
+		float probability;
+
+		attr.getString ("name", playlistName);
+		attr.getBool ("repeat", repeatOption, true);
+		attr.getBool ("shuffle", shuffleOption, false);
+
+		// Register the playlist
+		SoundManager::getPtr ()->getMusicPlayer ()->registerPlaylist (playlistName);
+		SoundManager::getPtr ()->getMusicPlayer ()->setPlaylistRepeat (playlistName, repeatOption);
+		SoundManager::getPtr ()->getMusicPlayer ()->setPlaylistShuffle (playlistName, shuffleOption);
+
+		DEBUG ("Got playlist: %s, repeat: %d, shuffle: %d", playlistName.c_str (), repeatOption, shuffleOption);
+
+		for (child = node->FirstChild (); child != 0; child = child->NextSibling ())
+		{
+			if (child->Type () == TiXmlNode::TINYXML_ELEMENT)
+			{
+				attr.parseElement (child->ToElement ());
+				if (! strcmp (child->Value (), "Track"))
+				{
+					std::string fileName;
+					//float volume;
+
+					attr.getString ("source", fileName);
+					//attr.getFloat ("volume", volume, 1.0);
+                    
+					result &= SoundHelper::addPlaylistTrackByShortName (playlistName, fileName);
+				}
+			}
+		}
+	}
+	else
+	{
+		// Run through the entire tree
+		for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
+		{
+			result &= loadPlaylistFromXMLNode(child);
+		}
+	}
 	return result;
 }
 

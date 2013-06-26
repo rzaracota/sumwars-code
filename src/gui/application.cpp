@@ -241,20 +241,7 @@ bool Application::init()
 	}
 
 	// Load menu playlist and start music play.
-
-	// Let's use shuffle and repeat by default.
-	SoundManager::getPtr ()->getMusicPlayer ()->setRepeat (true);
-	SoundManager::getPtr ()->getMusicPlayer ()->setShuffle (true);
-
-	// Make the sound manager elase time, so that it starts from 0.
-	SoundManager::getPtr ()->elapseTime ();
-
-	DEBUG ("registering menu playlist");
-	SoundManager::getPtr ()->getMusicPlayer ()->registerPlaylist ("menu");
-	SoundHelper::addPlaylistTrackByShortName ("menu", "reluctant_hero.ogg");
-
-	// Commence the play.
-	SoundManager::getPtr ()->getMusicPlayer ()->play ();
+	loadAndPlayMenuMusic ();
 
 	// Document anlegen
 	ret = createDocument();
@@ -997,8 +984,8 @@ bool Application::initOpenAL()
 		// this is a temporary hack. Should be integrated into the class.
 		((GOpenAl::OpenAlManagerUtil*)SoundManager::getPtr ())->setListenerPosition (0, 0, 0);
 
-		SoundManager::getPtr ()->getMusicPlayer ()->setFadeDuration (2500);
-		SoundManager::getPtr ()->getMusicPlayer ()->setRepeat (true);
+		SoundManager::getPtr ()->getMusicPlayer ()->setFadeDuration (3200);		// in milliseconds
+		SoundManager::getPtr ()->getMusicPlayer ()->setRepeat (true);			// only affects initial behavior. Playlists can override this.
 
 		// make sure the first call to elapse time won't return many seconds. 
 		SoundManager::getPtr ()->elapseTime ();
@@ -1299,6 +1286,47 @@ bool Application::loadResources(int datagroups)
 
 	return true;
 }
+
+
+
+/**
+ * \brief Loads the menu music and commences playing it.
+ * Typically, this would be placed in the menu class, but that would not allow playing the music while the loading is performed
+ * (as the menu is not yet created).
+ */
+void Application::loadAndPlayMenuMusic ()
+{
+	// Let's use shuffle and repeat by default.
+	SoundManager::getPtr ()->getMusicPlayer ()->setRepeat (true);
+	SoundManager::getPtr ()->getMusicPlayer ()->setShuffle (true);
+
+	Ogre::FileInfoListPtr files;
+	Ogre::FileInfoList::iterator it;
+	std::string xmlFileName;
+
+	files = Ogre::ResourceGroupManager::getSingleton ().findResourceFileInfo ("main_menu", "main_menu_playlist.xml");
+	for (it = files->begin (); it != files->end (); ++it)
+	{
+		xmlFileName = it->archive->getName ();
+		xmlFileName.append ("/");
+		xmlFileName.append (it->filename);
+
+		DEBUG ("Located resource file for menu music: %s", xmlFileName.c_str ());
+		if (! SoundHelper::loadPlaylistFromXMLFile (xmlFileName))
+		{
+			ERRORMSG ("Could not successfully load playlist from given file: %s", xmlFileName.c_str ());
+		}
+	}
+
+	// Make the sound manager elapse time, so that it starts from 0 at the next operations.
+	// This avoids skipping sounds when the manager is not called for a long time due to other time consuming operations.
+	SoundManager::getPtr ()->elapseTime ();
+
+	// Commence the play.
+	SoundManager::getPtr ()->getMusicPlayer ()->play ();
+}
+
+
 
 void Application::cleanup(int datagroups)
 {
