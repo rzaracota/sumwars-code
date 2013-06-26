@@ -323,8 +323,9 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		//SoundObject* obj = SoundSystem::createSoundObject(name);
 		//m_soundobjects[object.m_objectname] = obj;
 
-		m_soundobjects[object.m_objectname] = name;
-		DEBUGX("adding soundobject with name %s (%s)",object.m_objectname.c_str(),name.c_str());
+		m_soundobjects[object.m_objectname] = SoundObject (name);
+		//m_soundobjects[object.m_objectname] = name;
+		DEBUG ("setting soundobject with name [%s] to: (%s)", object.m_objectname.c_str (), name.c_str ());
 	}
 	else 
 	{
@@ -501,6 +502,7 @@ void GraphicObject::removeMovableObject(std::string name)
 	else if (m_soundobjects.find(name) != m_soundobjects.end())
 	{
 		//SoundSystem::deleteSoundObject(m_soundobjects[name]);
+		// should be deleted automatically by the sound manager
 		m_soundobjects.erase(name);
 		DEBUGX("removing Soundobject %s",name.c_str());
 	}
@@ -921,17 +923,23 @@ void GraphicObject::update(float time)
 	// update Soundobjects
 	Ogre::Vector3 opos = getTopNode()->_getDerivedPosition();
 	Vector pos(opos.x/GraphicManager::g_global_scale, opos.z / GraphicManager::g_global_scale);
-	
+
 	//std::map<std::string, SoundObject* >::iterator st;
-	for (std::map<std::string, std::string>::iterator st = m_soundobjects.begin(); st != m_soundobjects.end(); ++st)
+	for (std::map<std::string, SoundObject>::iterator st = m_soundobjects.begin(); st != m_soundobjects.end(); ++st)
+	//for (std::map<std::string, std::string>::iterator st = m_soundobjects.begin(); st != m_soundobjects.end(); ++st)
 	{
+		// Note: sounds should be updated automatically by the sound manager.
+		// But they need to be configured correctly as relative or absolute play in order to allow correct updating
+		// when the listener (player) moves and sounds are supposed to move with various actors.
+
 		// TODO: XXX: this is a location where it would make sense to update the position of a 3d sound.
 		// requires to connect a sound adapter instead of a sound name.
 
+		st->second.setPosition (pos);
 		//st->second->setPosition(pos);
 		//st->second->update();
 
-		DEBUGX("setting sound %s position to %f %f",st->first.c_str(),pos.m_x, pos.m_y);
+		DEBUGX ("setting sound [%s] position to: %f, %f", st->first.c_str (), pos.m_x, pos.m_y);
 	}
 }
 
@@ -980,15 +988,19 @@ void GraphicObject::addActiveRenderPart(ActionRenderpart* part)
 	else if (part->m_type == ActionRenderpart::SOUND)
 	{
 		//std::map<std::string, SoundObject* >::iterator it;
-
-		std::map<std::string, std::string>::iterator it;
+		std::map<std::string, SoundObject>::iterator it;
+		//std::map<std::string, std::string>::iterator it;
 		it = m_soundobjects.find(part->m_objectname);
 		if (it != m_soundobjects.end())
 		{
 			//it->second->setSound(part->m_animation);
-			it->second = part->m_animation;
+			it->second.setSoundData (part->m_animation);
+			//it->second = part->m_animation;
 
-			DEBUGX("setting sound object %s to sound %s",it->first.c_str(), part->m_animation.c_str());
+			// TODO:XXX: This is where a play command should be triggered.
+			it->second.play ();
+
+			DEBUG ("setting sound object [%s] to sound [%s]", it->first.c_str (), part->m_animation.c_str ());
 		}
 	}
 }

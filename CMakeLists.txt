@@ -376,11 +376,9 @@ SET(SRCS
   ./src/gui/minimapwindow.cpp
   ./src/gui/worldmap.cpp
   ./src/gui/mainmenu.cpp
-#  ./src/gui/ogg.cpp
   ./src/gui/charcreate.cpp
   ./src/gui/ceguiutility.cpp
   ./src/gui/tooltipmanager.cpp
-#   ./src/gui/music.cpp
   ./src/gui/controlpanel.cpp
   ./src/gui/inventory.cpp
   ./src/gui/tradewindow.cpp
@@ -402,8 +400,8 @@ SET(SRCS
   ./src/gui/graphicobjectrenderinfo.cpp
   ./src/gui/graphicobject.cpp
   ./src/gui/questinfo.cpp
-#   ./src/gui/sound.cpp
   ./src/gui/soundhelper.cpp
+  ./src/gui/soundobject.cpp
   ./src/gui/tooltip.cpp
   ./src/gui/optionswindow.cpp
   ./src/gui/clipboard.cpp

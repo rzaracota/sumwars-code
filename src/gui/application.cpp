@@ -976,7 +976,7 @@ bool Application::initOpenAL()
 		Ogre::String operationalPath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::userPath();
 
 		// Set the logging details
-		SoundManagerLogger::setLoggerTarget (operationalPath + "/gussoundlib.log", 9);
+		SoundManagerLogger::setLoggerTarget (operationalPath + "/gussoundlib.log", 4);
 
 		SoundManagerFactory::getPtr ()->Register ("openal", GOpenAl::OpenAlManagerUtil::createSoundManager);
 		SoundManager::setPtr (SoundManagerFactory::getPtr ()->CreateObject ("openal"));

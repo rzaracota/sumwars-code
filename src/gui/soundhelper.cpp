@@ -312,17 +312,13 @@ void SoundHelper::playSoundGroupAtPosition (const std::string& soundGroupID, dou
 {
 	try
 	{
-		DEBUG ("Will try to play sound group [%s]", soundGroupID.c_str ());
-
 		std::string soundToPlay;
-		DEBUG ("Checking if valid");
 		soundToPlay = SoundManager::getPtr ()->getSoundGroup (soundGroupID)->getRandomSound ();
-		DEBUG ("Chosen sound file from group [%s]",  soundToPlay.c_str ());
-
 		SoundManager::getPtr ()->getRepository ()->getSound (soundToPlay)->play3D (posX, posY, posZ);
 	}
 	catch (std::exception& e)
 	{
+		// This can happen if the group name is not valid. Or if the group has missing files. Or if the group is empty.
 		DEBUG ("Caught exception while trying to play sound group [%s]: %s", soundGroupID.c_str (), e.what ());
 	}
 }
