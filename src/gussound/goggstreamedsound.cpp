@@ -215,7 +215,8 @@ namespace GOpenAl
 			alSource3f (source_, AL_DIRECTION,       0.0, 0.0, 0.0);
 			alSourcef (source_, AL_ROLLOFF_FACTOR,  0.0          );
 			alSourcei (source_, AL_SOURCE_RELATIVE, AL_TRUE      );
-			alSourcef (source_, AL_GAIN, volume_);
+			SoundVolume myVol = getCombinedVolumeModifiers ();
+			alSourcef (source_, AL_GAIN, myVol);
 		}
 		catch (std::exception &e)
 		{
