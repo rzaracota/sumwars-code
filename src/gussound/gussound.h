@@ -462,6 +462,10 @@ namespace gussound
 
 		virtual ~FadeInEffect ();
 		virtual void applyEffect ();
+
+		/// Define action to be taken when the effect ends (for instance, a fade-in would make sure that the sound level is appropriate at the end.
+		/// @param force Ignored
+		virtual void endEffect (bool force = false);
 	};
 
 

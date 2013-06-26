@@ -60,6 +60,40 @@
 #include "soundhelper.h"
 
 
+//locally defined listener.
+class SWOgreResListener : public Ogre::ResourceGroupListener
+{
+protected:
+public:
+	SWOgreResListener () {}
+	void resourceGroupScriptingStarted (const Ogre::String& groupName, size_t scriptCount)
+	{
+		SoundManager::getPtr ()->elapseTime ();
+	}
+	void scriptParseStarted (const Ogre::String& scriptName, bool &skipThisScript)
+	{
+		SoundManager::getPtr ()->elapseTime ();
+	}
+	void scriptParseEnded (const Ogre::String& scriptName, bool skipped) {}
+	void resourceGroupScriptingEnded (const Ogre::String& groupName) {}
+	void resourceGroupLoadStarted (const Ogre::String& groupName, size_t resourceCount)
+	{
+		SoundManager::getPtr ()->elapseTime ();
+	}
+	void resourceLoadStarted (const Ogre::ResourcePtr& resource)
+	{
+		SoundManager::getPtr ()->elapseTime ();
+	}
+	void resourceLoadEnded (void) {}
+	void worldGeometryStageStarted (const Ogre::String& description)
+	{
+		SoundManager::getPtr ()->elapseTime ();
+	}
+	void worldGeometryStageEnded (void) {}
+	void resourceGroupLoadEnded (const Ogre::String& groupName) {}
+};
+
+
 /**
 	Application constructor. Will call the init function.
 */
@@ -189,13 +223,6 @@ bool Application::init()
 		return false;
 	}
 
-	// Let's use shuffle and repeat by default.
-	SoundManager::getPtr ()->getMusicPlayer ()->setRepeat (true);
-	SoundManager::getPtr ()->getMusicPlayer ()->setShuffle (true);
-
-	// Commence the play.
-	SoundManager::getPtr ()->getMusicPlayer ()->play ();
-
 	//Gettext initialisieren
 	ret = initGettext();
 	if (ret==false)
@@ -213,6 +240,22 @@ bool Application::init()
 		return false;
 	}
 
+	// Load menu playlist and start music play.
+
+	// Let's use shuffle and repeat by default.
+	SoundManager::getPtr ()->getMusicPlayer ()->setRepeat (true);
+	SoundManager::getPtr ()->getMusicPlayer ()->setShuffle (true);
+
+	// Make the sound manager elase time, so that it starts from 0.
+	SoundManager::getPtr ()->elapseTime ();
+
+	DEBUG ("registering menu playlist");
+	SoundManager::getPtr ()->getMusicPlayer ()->registerPlaylist ("menu");
+	SoundHelper::addPlaylistTrackByShortName ("menu", "reluctant_hero.ogg");
+
+	// Commence the play.
+	SoundManager::getPtr ()->getMusicPlayer ()->play ();
+
 	// Document anlegen
 	ret = createDocument();
 	if (ret==false)
@@ -226,12 +269,6 @@ bool Application::init()
 	{
 		ERRORMSG("cant create view");
 		return false;
-	}
-
-	ret = initOpenAL();
-	if (ret == false)
-	{
-		ERRORMSG("Sound initialisation failed");
 	}
 
 	DEBUG("time to start %f",tm.getTime());
@@ -1033,6 +1070,9 @@ bool Application::loadResources(int datagroups)
 	Ogre::FileInfoList::iterator it;
 	std::string file;
 
+	SWOgreResListener myListener;
+	Ogre::ResourceGroupManager::getSingleton().addResourceGroupListener (&myListener);
+
 	if (datagroups & World::DATA_IMAGES)
 	{
 		DEBUG("Loading images.");
@@ -1077,10 +1117,12 @@ bool Application::loadResources(int datagroups)
 	{
 		DEBUG("Loading models.");
 		Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("General");
+		updateStartScreen(0.35);
 	}
 	if (datagroups & World::DATA_PARTICLESYSTEMS)
 	{
 		DEBUG("Loading particlesystems.");
+		Ogre::ResourceGroupManager::getSingleton().addResourceGroupListener (&myListener);
 		
 		Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("Particles");
 		if (m_running)
@@ -1095,6 +1137,7 @@ bool Application::loadResources(int datagroups)
 					Ogre::DataStreamPtr filehandle;
 					filehandle = Ogre::ResourceGroupManager::getSingleton().openResource(file);
 					Ogre::ParticleSystemManager::getSingleton().parseScript(filehandle,"Particles" ); 
+					updateStartScreen(0.36);
 				}
 				catch (Ogre::Exception& e)
 				{
@@ -1102,7 +1145,6 @@ bool Application::loadResources(int datagroups)
 				}
 			}
 		}
-		
 	}
 	updateStartScreen(0.4);
 	Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("Savegame");
@@ -1253,6 +1295,8 @@ bool Application::loadResources(int datagroups)
 		m_main_window->setReadyToStart(true);
 	}
 
+	Ogre::ResourceGroupManager::getSingleton().removeResourceGroupListener (&myListener);
+
 	return true;
 }
 
@@ -1347,12 +1391,16 @@ void Application::updateStartScreen(float percent)
 {
 	// this occurs when ressources are loaded while running
 	if (m_running)
+	{
+		DEBUG ("Update start screen while running...");
 		return;
-	
+	}
+
 	if (m_timer.getTime() < 20)
 	{
 		return;
 	}
+	SoundManager::getPtr ()->elapseTime ();
 
 	DEBUGX("update time %f  perc: %f",m_timer.getTime(), percent);
 	m_main_window->update(m_timer.getTime()/1000);
@@ -1364,6 +1412,8 @@ void Application::updateStartScreen(float percent)
 	m_ogre_root->renderOneFrame();
 	//MusicManager::instance().update();
 	m_timer.start();
+
+
 }
 
 

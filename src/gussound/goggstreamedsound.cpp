@@ -264,7 +264,7 @@ namespace GOpenAl
 			}
 		case GPLS_Paused:
 			{
-				doResume();
+				doResume ();
 				state_ = GPLS_Playing;
 				return;
 			}
@@ -603,16 +603,6 @@ namespace GOpenAl
 				return std::string ("Invalid Vorbis header.");
 			case OV_EFAULT:
 				return std::string ("Internal logic fault (bug or heap/stack corruption.");
-			case AL_INVALID_NAME:
-				return std::string ("Invalid name parameter.");
-			case AL_INVALID_ENUM:
-				return std::string ("Invalid enum parameter value.");
-			case AL_INVALID_VALUE:
-				return std::string ("Invalid parameter.");
-			case AL_INVALID_OPERATION:
-				return std::string ("Illegal call.");
-			case AL_OUT_OF_MEMORY:
-				return std::string ("Unable to allocate memory.");
 			default:
 				{
 					std::stringstream ss;

@@ -236,6 +236,17 @@ namespace gussound
 		ptrToSound_->setVolumeExtraModifier (newVol);
 	}
 
+
+	/// Define action to be taken when the effect ends (for instance, a fade-in would make sure that the sound level is appropriate at the end.
+	/// @param force Ignored
+	void FadeInEffect::endEffect (bool)
+	{
+		GTRACE (7, "FadeInEffect endEffect; applying final volume")
+		SoundVolume newVol = (SoundVolume) (max_volume - minVolume_);
+		ptrToSound_->setVolumeExtraModifier (newVol);
+	}
+
+
 	//----------------
 	FadeOutEffect::FadeOutEffect (EffectableSoundSmartPtr & target
 		, const guslib::TimeUnits & duration
