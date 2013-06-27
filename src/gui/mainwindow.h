@@ -268,11 +268,6 @@ class MainWindow :
 	void updateChatContent();
 	
 	/**
-	 * \brief Aktualisiert die Musik
-	 */
-	void updateMusic();
-
-	/**
 	 * \brief Updates the sound system
 	 */
 	void updateSound();

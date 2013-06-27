@@ -16,6 +16,9 @@
 #include "mapgenerator.h"
 #include "world.h"
 
+// Helper for sound operations
+#include "soundhelper.h"
+
 
 bool operator<(WeightedLocation first, WeightedLocation second)
 {
@@ -278,6 +281,7 @@ bool TemplateMap::getTemplatePlace(Shape* shape, Vector & place)
 	return true;
 }
 
+
 void TemplateMap::print()
 {
 	for (int i=0; i< m_dimx; i++)
@@ -300,8 +304,13 @@ void TemplateMap::print()
 	}
 }
 
+
 Region* MapGenerator::createRegion(RegionData* rdata)
 {
+	// TODO: remove timer.
+	static Timer timer;
+	timer.start ();
+
 	// set Random seed based on the region information
 	// surely, we need a better hash funcion
 	unsigned int seed = World::getWorld()->getBaseRandomSeed() + rdata->m_id*84859;
@@ -321,7 +330,8 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 		
 		// Speicher anfordern
 		MapGenerator::createMapData(&mdata,rdata);
-		
+
+		SoundHelper::signalSoundManager ();
 
 		// grundlegende Karte anfertigen
 		if (rdata->m_region_template =="")
@@ -335,7 +345,7 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 		{
 			mdata.m_region->insertEnvironment(et->first,et->second);
 		}
-		
+
 		// Umgebungskarte generieren
 		createPerlinNoise(&mdata.m_region->getHeight(), rdata->m_dimx, rdata->m_dimy,MathHelper::Min(rdata->m_dimx,rdata->m_dimy)/4 , 0.4,false);
 
@@ -399,8 +409,11 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 	// Zufallszahlengenerator zuruecksetzen
 	Random::setRandomSeed(oldseed);
 	
+	float duration = timer.getTime ();
+	DEBUG ("Map generator created region in %.2f millis", duration);
 	return mdata.m_region;
 }
+
 
 void MapGenerator::createMapData(MapData* mdata, RegionData* rdata)
 {
@@ -410,11 +423,9 @@ void MapGenerator::createMapData(MapData* mdata, RegionData* rdata)
 	mdata->m_border.clear();
 }
 
+
 void MapGenerator::createBaseMap(MapData* mdata, RegionData* rdata)
 {
-
-	
-
 	float size = rdata->m_area_percent;
 
 	// Karte wird in 8x8 Felder erzeugt, Region rechnet aber in 4x4 Gridunits

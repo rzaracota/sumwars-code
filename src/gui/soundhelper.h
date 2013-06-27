@@ -63,6 +63,10 @@ public:
 	/// @param fileName The name of the XML file containing the playlist tracks.
 	static bool loadPlaylistFromXMLFile (const std::string& fileName);
 
+	/// Send a signal to the sound manager so that it knows that it needs to call elapseTime.
+	/// Calling this function will do nothing if the sound manager is controlled in a separate thread.
+	static void signalSoundManager ();
+
 protected:
 	/// Load content from an XML Node.
 	/// @param node The XML node to load from. Note: currently tied to the tinyxml implementation.
@@ -72,6 +76,14 @@ protected:
 	/// @param node The XML node to load from. Note: currently tied to the tinyxml implementation.
 	static bool loadPlaylistFromXMLNode (TiXmlNode* node);
 
+
+private:
+	/// Specify whether the sound manager is controlled and accessed in a single thread mode or not.
+	/// Possible values:
+	///	 - true: the sound manager is accessed in a single threaded way. All operations are called from the main thread.
+	///  - false: the sound manager receives play commands from the main thread, but also has a dedicated thread to elapse time. This 
+	///           allows it to also play while the game is loading data.
+	static bool singleThreadedSoundAccess_;
 };
 
 

@@ -36,6 +36,9 @@ using gussound::SoundManager;
 
 
 
+bool SoundHelper::singleThreadedSoundAccess_ = true;
+
+
 ///
 /// Load a file (E.g. an XML file) containing sound group definitions.
 ///
@@ -320,5 +323,16 @@ void SoundHelper::playSoundGroupAtPosition (const std::string& soundGroupID, dou
 	{
 		// This can happen if the group name is not valid. Or if the group has missing files. Or if the group is empty.
 		DEBUG ("Caught exception while trying to play sound group [%s]: %s", soundGroupID.c_str (), e.what ());
+	}
+}
+
+
+/// Send a signal to the sound manager so that it knows that it needs to call elapseTime.
+/// Calling this function will do nothing if the sound manager is controlled in a separate thread.
+void SoundHelper::signalSoundManager ()
+{
+	if (singleThreadedSoundAccess_)
+	{
+		SoundManager::getPtr ()->elapseTime ();
 	}
 }

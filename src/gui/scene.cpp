@@ -24,6 +24,8 @@
 
 #include "graphicmanager.h"
 
+#include "soundhelper.h"
+
 // Sound and music management classes.
 #include "gussound.h"
 using gussound::SoundManager;
@@ -221,6 +223,10 @@ void Scene::update(float ms)
 {
 	DEBUGX("update scene");
 
+	//TODO: remove the timer (only added for testing).
+	static Timer timer;
+	timer.start ();
+
 	// Spielerobjekt
 	Player* player = m_document->getLocalPlayer();
 
@@ -235,6 +241,7 @@ void Scene::update(float ms)
 	// Nummer der region in der sich der Spieler befindet
 	short region_nr = player->getRegionId();
 	Region* region = player->getRegion();
+
 
 	if (region_nr != m_region_id)
 	{
@@ -258,6 +265,7 @@ void Scene::update(float ms)
 			return;
 		}
 	}
+	float durationUpToCrScene = timer.getTime ();
 
 	// Koordinaten des Spielers
 	Vector pos = player->getShape()->m_center;
@@ -304,8 +312,17 @@ void Scene::update(float ms)
 	
 	colour= region->getLight().getAmbientLight();
 	m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
-	
+
+	float beforeUGO = timer.getTime ();
+
 	updateGraphicObjects(ms);
+	float duration = timer.getTime ();
+	if (duration >= 80)
+	{
+		DEBUG ("scene update update took: %.2f ms. Up to ugo: %.2f", duration, beforeUGO);
+		DEBUG ("Up to createscene: %.2f ms.", durationUpToCrScene);
+	}
+
 }
 
 void  Scene::insertObject(GameObject* gobj, bool is_static)
@@ -585,6 +602,8 @@ void Scene::updateGraphicObjects(float time)
 	GameObjectMap::iterator it = game_objs.begin();
 	std::map<int,GraphicObject*>::iterator jtold, jt = m_graphic_objects.begin();
 	
+	int numOps = 0;
+
 	while (it != game_objs.end() || jt != m_graphic_objects.end())
 	{
 		if (it == game_objs.end() || (jt != m_graphic_objects.end() && it->first > jt->first))
@@ -595,6 +614,7 @@ void Scene::updateGraphicObjects(float time)
 			++jt;
 			
 			deleteGraphicObject(jtold->first);
+			++ numOps;
 		}
 		else if (jt == m_graphic_objects.end() || (it != game_objs.end() && it->first < jt->first))
 		{
@@ -603,6 +623,7 @@ void Scene::updateGraphicObjects(float time)
 			if (it->second->getLayer() != GameObject::LAYER_SPECIAL)
 			{
 				insertObject(it->second,false);
+				++ numOps;
 			}
 			
 			++it;
@@ -614,10 +635,16 @@ void Scene::updateGraphicObjects(float time)
 			updateGraphicObject(jt->second, it->second,time);
 			++it;
 			++jt;
+			++ numOps;
 		}
 		else
 		{
 			ERRORMSG("Fehler beim Abgleich Graphik <-> ingame");
+		}
+		if (numOps > 10)
+		{
+			numOps = 10;
+			SoundHelper::signalSoundManager ();
 		}
 	}
 	
@@ -747,9 +774,13 @@ void Scene::createScene()
 	m_scene_manager->clearScene();
 	
 	updateCharacterView();
+
+	SoundHelper::signalSoundManager ();
 	
 	// Liste der statischen Objekte
 	Ogre::StaticGeometry* static_geom = m_scene_manager->createStaticGeometry ("StaticGeometry");
+
+	SoundHelper::signalSoundManager ();
 
 	std::list<WorldObject*> stat_objs;
 
@@ -796,7 +827,9 @@ void Scene::createScene()
 			// Objekt in der Szene erzeugen
 			insertObject(it->second,true);
 		}
+		SoundHelper::signalSoundManager ();
 		GraphicManager::buildStaticGeometry();
+		SoundHelper::signalSoundManager ();
 
 		short dimx = region->getDimX();
 		short dimy = region->getDimY();
@@ -852,10 +885,13 @@ void Scene::createScene()
 				}
 			}
 		}
+		SoundHelper::signalSoundManager ();
 		static_geom->build();
 		
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
+		SoundHelper::signalSoundManager ();
 		target->update();
+		SoundHelper::signalSoundManager ();
 
 		const float* colour = region->getLight().getAmbientLight();
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));

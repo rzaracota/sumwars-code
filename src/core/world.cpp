@@ -404,8 +404,6 @@ void World::registerRegionData(RegionData* data, int id)
 
 bool World::createRegion(short region)
 {
-
-
 	DEBUGX("creating region %i",region);
 	int type = 1;
 	if (type==1)

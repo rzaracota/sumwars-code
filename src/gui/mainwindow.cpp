@@ -657,20 +657,18 @@ void MainWindow::update(float time)
 
 	// Musik aktualisieren
 	updateSound();
-	updateMusic();
-	
-	
 
 	// Objekte aus dem Dokument darstellen
 	if (m_document->getLocalPlayer()!=0 && m_document->getLocalPlayer()->getRegion()!=0)
 	{
-
 		// ObjectInfo aktualisieren
 		updateObjectInfo();
 		
 		updateItemInfo();
+
 		updateRegionInfo();
 		updateChatContent();
+
 		updateFloatingText();
 		
 		// Szene aktualisieren
@@ -2499,72 +2497,6 @@ void MainWindow::updateSound()
 	//SoundSystem::update();
 }
 
-void MainWindow::updateMusic()
-{
-	// TODO: find out how to feed the initial playlist tracks into the player.
-
-	return;
-#if 0
-	// laufende Musik nicht unterbrechen
-	if (MusicManager::instance().isPlaying())
-		return;
-	
-	std::string source;
-	if (m_document->getGUIState()->m_sheet ==  Document::MAIN_MENU)
-	{
-		// Titlescreen
-		source ="main_title.ogg";
-	}
-	else if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
-	{
-		if (m_document->getLocalPlayer() == 0)
-			return;
-		
-		// zufaellig einen Track der Region auswaehlen
-		Region* reg = m_document->getLocalPlayer()->getRegion();
-		
-		if (reg != 0)
-		{
-			const std::list<MusicTrack> & tracks = reg->getMusicTracks();
-			std::list<MusicTrack>::const_iterator it;
-			
-			if (!tracks.empty())
-			{
-				// Auslosung
-				int nr = Random::randi(tracks.size());
-				it = tracks.begin();
-				while (nr > 0 )
-				{
-					++it;
-					--nr;
-				}
-				
-				source = *it;
-			}
-		}
-	}
-	
-	if (source.empty())
-		return;
-	
-	// Titelmusik laden
-	Ogre::FileInfoListPtr files;
-	Ogre::FileInfoList::iterator it;
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("music",source);
-	
-	it = files->begin();
-	if (it != files->end())
-	{
-		std::string filename;
-		filename = it->archive->getName();
-		filename += "/";
-		filename += it->filename;
-		
-		MusicManager::instance().play(filename);
-		MusicManager::instance().update();
-	}
-#endif
-}
 
 Vector MainWindow::getIngamePos(float screenx, float screeny, bool relative)
 {

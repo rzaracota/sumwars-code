@@ -314,6 +314,11 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		std::string name = sname.str();
 		counter++;
 		
+		std::map <std::string, SoundObject>::iterator it = m_soundobjects.find (object.m_objectname.c_str ());
+		if (it != m_soundobjects.end ())
+		{
+			DEBUG ("WARNING:  %s: subobject %s already exists", m_name.c_str(), object.m_objectname.c_str());
+		}
 		if (m_soundobjects.count(object.m_objectname) >0)
 		{
 			WARNING("soundobject %s: subobject %s already exists",m_name.c_str(), object.m_objectname.c_str());

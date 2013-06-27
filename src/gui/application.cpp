@@ -68,26 +68,26 @@ public:
 	SWOgreResListener () {}
 	void resourceGroupScriptingStarted (const Ogre::String& groupName, size_t scriptCount)
 	{
-		SoundManager::getPtr ()->elapseTime ();
+		SoundHelper::signalSoundManager ();
 	}
 	void scriptParseStarted (const Ogre::String& scriptName, bool &skipThisScript)
 	{
-		SoundManager::getPtr ()->elapseTime ();
+		SoundHelper::signalSoundManager ();
 	}
 	void scriptParseEnded (const Ogre::String& scriptName, bool skipped) {}
 	void resourceGroupScriptingEnded (const Ogre::String& groupName) {}
 	void resourceGroupLoadStarted (const Ogre::String& groupName, size_t resourceCount)
 	{
-		SoundManager::getPtr ()->elapseTime ();
+		SoundHelper::signalSoundManager ();
 	}
 	void resourceLoadStarted (const Ogre::ResourcePtr& resource)
 	{
-		SoundManager::getPtr ()->elapseTime ();
+		SoundHelper::signalSoundManager ();
 	}
 	void resourceLoadEnded (void) {}
 	void worldGeometryStageStarted (const Ogre::String& description)
 	{
-		SoundManager::getPtr ()->elapseTime ();
+		SoundHelper::signalSoundManager ();
 	}
 	void worldGeometryStageEnded (void) {}
 	void resourceGroupLoadEnded (const Ogre::String& groupName) {}
@@ -487,7 +487,7 @@ void Application::run()
 		//MusicManager::instance().update();
 
 		// Do the update for the sounds
-		SoundManager::getPtr ()->elapseTime ();
+		SoundHelper::signalSoundManager ();
 	}
 
 	DEBUG ("Application: run function has run its course");
@@ -988,7 +988,7 @@ bool Application::initOpenAL()
 		SoundManager::getPtr ()->getMusicPlayer ()->setRepeat (true);			// only affects initial behavior. Playlists can override this.
 
 		// make sure the first call to elapse time won't return many seconds. 
-		SoundManager::getPtr ()->elapseTime ();
+		SoundHelper::signalSoundManager ();
 	}
 	catch (std::exception &e)
 	{
@@ -1320,7 +1320,7 @@ void Application::loadAndPlayMenuMusic ()
 
 	// Make the sound manager elapse time, so that it starts from 0 at the next operations.
 	// This avoids skipping sounds when the manager is not called for a long time due to other time consuming operations.
-	SoundManager::getPtr ()->elapseTime ();
+	SoundHelper::signalSoundManager ();
 
 	// Commence the play.
 	SoundManager::getPtr ()->getMusicPlayer ()->play ();
@@ -1428,7 +1428,7 @@ void Application::updateStartScreen(float percent)
 	{
 		return;
 	}
-	SoundManager::getPtr ()->elapseTime ();
+	SoundHelper::signalSoundManager ();
 
 	DEBUGX("update time %f  perc: %f",m_timer.getTime(), percent);
 	m_main_window->update(m_timer.getTime()/1000);
