@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2013-07-21 19:25+0200\n"
+"PO-Revision-Date: 2013-07-21 19:26+0200\n"
 "Last-Translator: Kilian K. <kiliankoeppchen@googlemail.com>\n"
 "Language-Team: German "
 "<http://hosted.weblate.org/projects/sumwars/tutorial/de/>\n"
@@ -1056,7 +1056,7 @@ msgstr "Du musst einen anderen Weg nach draußen finden."
 
 #: tutorial.xml:1372
 msgid "There should be workers down there."
-msgstr ""
+msgstr "Es sollten Arbeiter dort unten sein."
 
 #: tutorial.xml:1373
 msgid "Maybe they can help. We will wait here."
