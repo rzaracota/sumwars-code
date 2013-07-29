@@ -1382,7 +1382,13 @@ void Application::eventOccurred(const Ogre::String &eventName, const Ogre::NameV
             // DeviceCreated is called when Device is dragged from one Display to another
             // DeviceRestored is called when RenderWindow is minimized with Alt+Tab or the Windows key
             m_ogre_root->clearEventTimes();
-            ((Ogre::TexturePtr)Ogre::TextureManager::getSingleton().getByName("minimap_tex", "General"))->getBuffer()->getRenderTarget()->getViewport(0)->update();
+
+            #if (OGRE_VERSION < ((1 << 16) | (9 << 8) | 0))
+                Ogre::TexturePtr tex = Ogre::TextureManager::getSingletonPtr()->getByName("minimap_tex", "General");
+            #else
+                Ogre::TexturePtr tex = Ogre::TextureManager::getSingletonPtr()->getByName("minimap_tex", "General").staticCast<Ogre::Texture>();
+            #endif
+            tex->getBuffer()->getRenderTarget()->getViewport(0)->update();
             CEGUI::System::getSingleton().invalidateAllCachedRendering();
         }
     }

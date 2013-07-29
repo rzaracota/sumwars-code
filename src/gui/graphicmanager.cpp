@@ -38,9 +38,16 @@ void StencilOpQueueListener::renderQueueStarted(Ogre::uint8 queueGroupId, const 
 
 		rendersys->clearFrameBuffer(Ogre::FBT_STENCIL); 
 		rendersys->setStencilCheckEnabled(true); 
-		rendersys->setStencilBufferParams(Ogre::CMPF_NOT_EQUAL,
-										  STENCIL_VALUE_FOR_OUTLINE_GLOW, STENCIL_FULL_MASK, 
-			Ogre::SOP_KEEP,Ogre::SOP_KEEP,Ogre::SOP_REPLACE,false);       
+
+#if (OGRE_VERSION < ((1 << 16) | (9 << 8) | 0))
+        rendersys->setStencilBufferParams(Ogre::CMPF_NOT_EQUAL,
+                                          STENCIL_VALUE_FOR_OUTLINE_GLOW, STENCIL_FULL_MASK,
+            Ogre::SOP_KEEP,Ogre::SOP_KEEP,Ogre::SOP_REPLACE,false);
+#else
+        rendersys->setStencilBufferParams(Ogre::CMPF_NOT_EQUAL,
+                                          STENCIL_VALUE_FOR_OUTLINE_GLOW, STENCIL_FULL_MASK, STENCIL_FULL_MASK,
+            Ogre::SOP_KEEP,Ogre::SOP_KEEP,Ogre::SOP_REPLACE,false);
+#endif
 	} 
 			/*
 	if (queueGroupId == RENDER_QUEUE_OUTLINE_GLOW_GLOWS)  // outline glow

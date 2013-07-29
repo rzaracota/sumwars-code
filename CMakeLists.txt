@@ -147,10 +147,8 @@ FIND_PACKAGE(OGRE REQUIRED)
 
 IF("${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
   set(SUMWARS_OGRE_SINGLETON "ms_Singleton")
-ELSEIF("${OGRE_VERSION_NAME}" STREQUAL "Byatis")
-  set(SUMWARS_OGRE_SINGLETON "msSingleton")
 ELSE()
-  MESSAGE(SEND_ERROR "You need Ogre 1.7 Cthugha or 1.8 Byatis to build this.")
+  set(SUMWARS_OGRE_SINGLETON "msSingleton")
 ENDIF()
 
 SET(SUMWARS_OGRE_PLUGIN_DIR_REL ${OGRE_PLUGIN_DIR_REL}) 
@@ -246,6 +244,7 @@ IF(SUMWARS_BUILD_TOOLS OR SUMWARS_BUILD_WITH_ONLINE_SERVICE)
   ENDIF()
   IF(SUMWARS_BUILD_WITH_ONLINE_SERVICE)
     #cpp-netlib for the http client
+    find_package( OpenSSL )
     add_subdirectory(src/cpp-netlib)
     INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/cpp-netlib/)
     set(CPPNETLIB_LIBS cppnetlib-client-connections cppnetlib-server-parsers cppnetlib-uri)
@@ -473,7 +472,10 @@ SET(LINK_LIBS
   
 IF(SUMWARS_BUILD_WITH_ONLINE_SERVICE)
 SET(LINK_LIBS
+  ${LINK_LIBS}
   ${CPPNETLIB_LIBS}
+  ${OPENSSL_CRYPTO_LIBRARY}
+  ${OPENSSL_SSL_LIBRARY}
   )
   
 ENDIF()

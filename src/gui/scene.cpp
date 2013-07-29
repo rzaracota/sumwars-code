@@ -18,7 +18,6 @@
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreTexture.h"
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreResourceProvider.h"
-#include <OgrePanelOverlayElement.h>
 
 #include "CEGUI/CEGUI.h"
 
