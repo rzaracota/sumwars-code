@@ -272,11 +272,9 @@ bool SoundHelper::loadPlaylistFromXMLNode (TiXmlNode* node)
 				attr.parseElement (child->ToElement ());
 				if (! strcmp (child->Value (), "Track"))
 				{
+					// We only need the file name for each playlist track.
 					std::string fileName;
-					//float volume;
-
 					attr.getString ("source", fileName);
-					//attr.getFloat ("volume", volume, 1.0);
                     
 					result &= SoundHelper::addPlaylistTrackByShortName (playlistName, fileName);
 				}

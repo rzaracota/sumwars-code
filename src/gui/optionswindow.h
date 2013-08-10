@@ -75,6 +75,12 @@ class OptionsWindow : public Window
 		ShortkeyDestination m_key_destination;
 		
 		/**
+		 * \fn bool onButtonItemHover(const CEGUI::EventArgs& evt)
+		 * \brief Handle the hovering of menu items.
+		 */
+		bool onButtonItemHover (const CEGUI::EventArgs& evt);
+		
+		/**
 		 * \fn bool onShortkeyLabelClicked(const CEGUI::EventArgs& evt)
 		 * \brief Behandelt Klick auf ein Shortkey Label
 		 */

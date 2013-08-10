@@ -28,6 +28,9 @@
 #include <OgreResourceGroupManager.h>
 #include "ceguiutility.h"
 
+// Sound operations helper.
+#include "soundhelper.h"
+
 using namespace std;
 
 using gussound::SoundManager;
@@ -83,18 +86,23 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	CEGUI::Scrollbar* slider;
 
 	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsShortkeys");
+	label->subscribeEvent (CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber (&OptionsWindow::onButtonItemHover, this));
 	label->setInheritsAlpha(false);
 	
 	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsGameplay");
+	label->subscribeEvent (CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber (&OptionsWindow::onButtonItemHover, this));
 	label->setInheritsAlpha(false);
 	
 	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsSound");
+	label->subscribeEvent (CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber (&OptionsWindow::onButtonItemHover, this));
 	label->setInheritsAlpha(false);
 	
 	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsGraphic");
+	label->subscribeEvent (CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber (&OptionsWindow::onButtonItemHover, this));
 	label->setInheritsAlpha(false);
 	
 	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsMisc");
+	label->subscribeEvent (CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber (&OptionsWindow::onButtonItemHover, this));
 	label->setInheritsAlpha(false);
 	
 	DEBUG ("OptionsWindow (ctor) adding labels");
@@ -118,6 +126,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 		label->setID(targets[i]);
 		label->setWantsMultiClickEvents(false);
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&OptionsWindow::onShortkeyLabelClicked,  this));
+		//label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&OptionsWindow::onButtonItemHover,  this));
 	}
 	
 	DEBUG ("Adding difficulty combo-box");
@@ -130,6 +139,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	diffcbo->setItemSelectState((size_t) 0,true);
 	diffcbo->handleUpdatedListItemData();
 	diffcbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onDifficultyChanged, this));
+	diffcbo->subscribeEvent(CEGUI::Combobox::EventMouseEnters, CEGUI::Event::Subscriber(&OptionsWindow::onButtonItemHover, this));
 	diffcbo->setItemSelectState( (size_t) (Options::getInstance()->getDifficulty()-1),true);
 	
 	DEBUG ("Adding sliders");
@@ -139,6 +149,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	slider->setStepSize(0.01f);
 	slider->setWantsMultiClickEvents(false);
 	slider->subscribeEvent(CEGUI::Scrollbar::EventScrollPositionChanged, CEGUI::Event::Subscriber(&OptionsWindow::onTextSpeedChanged,  this));
+	slider->subscribeEvent(CEGUI::Scrollbar::EventMouseEnters, CEGUI::Event::Subscriber(&OptionsWindow::onButtonItemHover, this));
 	
 	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.getWindow("MusicVolumeSlider"));
 	slider->setPageSize (0.01f);
@@ -146,6 +157,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	slider->setStepSize(0.01f);
 	slider->setWantsMultiClickEvents(false);
 	slider->subscribeEvent(CEGUI::Scrollbar::EventScrollPositionChanged, CEGUI::Event::Subscriber(&OptionsWindow::onMusicVolumeChanged,  this));
+	slider->subscribeEvent(CEGUI::Scrollbar::EventMouseEnters, CEGUI::Event::Subscriber(&OptionsWindow::onButtonItemHover, this));
 
 	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.getWindow("SoundVolumeSlider"));
 	slider->setPageSize (0.01f);
@@ -153,6 +165,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	slider->setStepSize(0.01f);
 	slider->setWantsMultiClickEvents(false);
 	slider->subscribeEvent(CEGUI::Scrollbar::EventScrollPositionChanged, CEGUI::Event::Subscriber(&OptionsWindow::onSoundVolumeChanged,  this));
+	slider->subscribeEvent(CEGUI::Scrollbar::EventMouseEnters, CEGUI::Event::Subscriber(&OptionsWindow::onButtonItemHover, this));
 
 	CEGUI::Combobox* ehlcbo = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("EHColorBox"));
 	ehlcbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("White"), "white", 0));
@@ -172,12 +185,14 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	ehlcbo->setItemSelectState((size_t) getColorSelectionIndex("red"), true);
 	ehlcbo->handleUpdatedListItemData();
 	ehlcbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onEnemyHighlightChanged, this));
+	ehlcbo->subscribeEvent(CEGUI::Combobox::EventMouseEnters, CEGUI::Event::Subscriber(&OptionsWindow::onButtonItemHover, this));
 	ehlcbo->setItemSelectState((size_t) (getColorSelectionIndex(Options::getInstance()->getEnemyHighlightColor())), true);
 
 
 	CEGUI::Checkbox *chkbox = (CEGUI::Checkbox *) win_mgr.getWindow("GrabMouseInWindowedModeBox");
 	chkbox->setSelected(Options::getInstance()->getGrabMouseInWindowedMode());
 	chkbox->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&OptionsWindow::onGrabMouseChanged, this));
+	chkbox->subscribeEvent(CEGUI::Checkbox::EventMouseEnters, CEGUI::Event::Subscriber(&OptionsWindow::onButtonItemHover, this));
 	
 	CEGUI::PushButton* btn;
 	//btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ResetGraphicsButton"));
@@ -188,6 +203,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsCloseButton"));
 	btn->setID(5);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&OptionsWindow::onButtonOkClicked, this));
+	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&OptionsWindow::onButtonItemHover, this));
 
 	if (win_mgr.isWindowPresent ("OptionsWindow__auto_closebutton__"))
 	{
@@ -195,6 +211,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 		if (label)
 		{
 			label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&OptionsWindow::onButtonCancelClicked, this));
+			label->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&OptionsWindow::onButtonItemHover, this));
 		}
 	}
 	
@@ -554,6 +571,19 @@ void OptionsWindow::reset()
 {
 	m_key_destination = NO_KEY;
 }
+
+
+/**
+ * \fn bool onButtonItemHover(const CEGUI::EventArgs& evt)
+ * \brief Handle the hovering of menu items.
+ */
+bool OptionsWindow::onButtonItemHover (const CEGUI::EventArgs& evt)
+{
+	SoundHelper::playAmbientSoundGroup ("main_menu_hover_item");
+	return true;
+}
+
+
 
 bool OptionsWindow::onShortkeyLabelClicked(const CEGUI::EventArgs& evt)
 {

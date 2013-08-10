@@ -69,6 +69,12 @@ class SavegameList : public Window
 		
 	private:
 		/**
+		 * \fn bool onItemButtonHover(const CEGUI::EventArgs& evt)
+		 * \brief Handle the hovering of a menu item
+		 */
+		bool onItemButtonHover(const CEGUI::EventArgs& evt);
+		
+		/**
 		 * \fn bool onSavegameChosen(const CEGUI::EventArgs& evt)
 		 * \brief Handle the selection of a saved game in the list.
 		 */

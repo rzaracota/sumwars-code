@@ -29,7 +29,7 @@
 #include "CEGUI/CEGUIFont.h"
 #include <list>
 #include <string>
-#include <OIS/OIS.h>
+#include <OIS.h>
 
 struct FormatedText
 {

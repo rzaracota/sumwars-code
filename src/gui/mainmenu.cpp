@@ -63,28 +63,34 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
     // Button Einzelspieler
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SinglePlayerButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartSinglePlayer, this));
+	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
 
 	// Button Server beitreten
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerJoinButton"));
     btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartMultiPlayer, this));
+	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
 
 
     // Button Server aufsetzen
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerHostButton"));
     btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartMultiPlayerHost, this));
+	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
 
     // Button Credits
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CreditsButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onShowCredits, this));
+	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
 
     // Button Optionen
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("MainOptionsButton"));
     btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onShowOptions, this));
+	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
 
 
     // Button beenden
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("EndGameButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onQuitGameHost, this));
+	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
 
 	CEGUI::Window* verlbl;
 
@@ -237,26 +243,42 @@ void MainMenu::updateTranslation()
 	}
 }
 
+
+/**
+ * \fn bool onMainMenuButtonHover(const CEGUI::EventArgs& evt)
+ * \brief Handle the hovering of a button in the main menu
+ */
+bool MainMenu::onMainMenuButtonHover (const CEGUI::EventArgs& evt)
+{
+	SoundHelper::playAmbientSoundGroup ("main_menu_hover_item");
+	return true;
+}
+
+
 bool MainMenu::onStartSinglePlayer(const CEGUI::EventArgs& evt)
 {
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
 	m_document->onButtonStartSinglePlayer();
     return true;
 }
 
 bool MainMenu::onStartMultiPlayer(const CEGUI::EventArgs& evt)
 {
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
 	m_document->onButtonJoinGame();
     return true;
 }
 
 bool MainMenu::onStartMultiPlayerHost(const CEGUI::EventArgs& evt)
 {
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
     m_document->onButtonHostGame();
     return true;
 }
 
 bool MainMenu::onShowCredits(const CEGUI::EventArgs& evt)
 {
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
     m_document->onButtonCredits();
     return true;
 }
@@ -333,6 +355,7 @@ void MainMenu::setSavegameListVisible(bool show)
 
 bool MainMenu::onShowOptions(const CEGUI::EventArgs& evt)
 {
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
     m_document->onButtonOptionsClicked();
     return true;
 }
@@ -340,6 +363,7 @@ bool MainMenu::onShowOptions(const CEGUI::EventArgs& evt)
 
 bool MainMenu::onQuitGameHost(const CEGUI::EventArgs& evt)
 {
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
     m_document->onButtonSaveExitClicked();
     return true;
 }
@@ -371,8 +395,6 @@ void MainMenu::createScene()
 {
     if (!m_sceneCreated)
     {
-
-		
         m_mainNode = m_sceneMgr->getRootSceneNode()->createChildSceneNode("MainMenuMainNode");
         m_mainNode->setPosition(Ogre::Vector3::ZERO);
 

@@ -21,6 +21,10 @@
 
 #include "ceguiutility.h"
 
+// Sound operations helper.
+#include "soundhelper.h"
+
+
 SavegameList::SavegameList (Document* doc, const std::string& ceguiSkinName)
 	: Window(doc)
 	, m_ceguiSkinName (ceguiSkinName)
@@ -55,6 +59,7 @@ SavegameList::SavegameList (Document* doc, const std::string& ceguiSkinName)
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.85f)));
 	btn->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.05f)));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onNewCharClicked, this));
+	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&SavegameList::onItemButtonHover, this));
 	btn->setWantsMultiClickEvents(false);
 	btn->setInheritsAlpha(false);
 	if (btn->isPropertyPresent ("NormalImage"))
@@ -125,6 +130,7 @@ void SavegameList::update()
 				saveItem = (CEGUI::Window*) win_mgr.loadWindowLayout("saveitem.layout", s.str());
 				m_currentSelected = saveItem;
 				saveItem->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onSavegameChosen, this));
+				saveItem->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&SavegameList::onItemButtonHover, this));
 				m_window->addChildWindow(saveItem);
 
 				// Store the mapping entry;
@@ -137,6 +143,7 @@ void SavegameList::update()
 				saveItem->getChild(s.str().append("SaveItemRoot/DecriptionLabel"))->setMousePassThroughEnabled(true);
 				saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setMousePassThroughEnabled(true);
 				saveItem->getChild(s.str().append("SaveItemRoot/DelChar"))->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onDeleteCharClicked, this));	
+				saveItem->getChild(s.str().append("SaveItemRoot/DelChar"))->subscribeEvent (CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&SavegameList::onItemButtonHover, this));
 			}
 			
 			// set the proper Image
@@ -256,6 +263,18 @@ void SavegameList::updateTranslation()
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("NewCharButton"));
 	btn->setText((CEGUI::utf8*) gettext("Create"));
 }
+
+
+/**
+* \fn bool onItemButtonHover(const CEGUI::EventArgs& evt)
+* \brief Handle the hovering of a menu item
+*/
+bool SavegameList::onItemButtonHover(const CEGUI::EventArgs& evt)
+{
+	SoundHelper::playAmbientSoundGroup ("main_menu_hover_item");
+	return true;
+}
+
 
 bool SavegameList::onSavegameChosen(const CEGUI::EventArgs& evt)
 {
