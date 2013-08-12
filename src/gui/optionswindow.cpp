@@ -39,6 +39,8 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	: Window (doc)
 	, m_ceguiSkinName (ceguiSkinName)
 {
+	CEGUI::PushButton* btn;
+
 	m_keyboard = keyboard;
 
 	DEBUG ("OptionsWindow being created using cegui skin [%s]", m_ceguiSkinName.c_str ());
@@ -87,22 +89,28 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 
 	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsShortkeys");
 	label->subscribeEvent (CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber (&OptionsWindow::onButtonItemHover, this));
+	label->subscribeEvent (CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber (&OptionsWindow::onGUIItemClicked, this));
+	
 	label->setInheritsAlpha(false);
 	
 	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsGameplay");
 	label->subscribeEvent (CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber (&OptionsWindow::onButtonItemHover, this));
+	label->subscribeEvent (CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber (&OptionsWindow::onGUIItemClicked, this));
 	label->setInheritsAlpha(false);
 	
 	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsSound");
 	label->subscribeEvent (CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber (&OptionsWindow::onButtonItemHover, this));
+	label->subscribeEvent (CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber (&OptionsWindow::onGUIItemClicked, this));
 	label->setInheritsAlpha(false);
 	
 	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsGraphic");
 	label->subscribeEvent (CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber (&OptionsWindow::onButtonItemHover, this));
+	label->subscribeEvent (CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber (&OptionsWindow::onGUIItemClicked, this));
 	label->setInheritsAlpha(false);
 	
 	label = win_mgr.getWindow("OptionsWindowTab__auto_TabPane__Buttons__auto_btnOptionsMisc");
 	label->subscribeEvent (CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber (&OptionsWindow::onButtonItemHover, this));
+	label->subscribeEvent (CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber (&OptionsWindow::onGUIItemClicked, this));
 	label->setInheritsAlpha(false);
 	
 	DEBUG ("OptionsWindow (ctor) adding labels");
@@ -139,8 +147,8 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	diffcbo->setItemSelectState((size_t) 0,true);
 	diffcbo->handleUpdatedListItemData();
 	diffcbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onDifficultyChanged, this));
-	diffcbo->subscribeEvent(CEGUI::Combobox::EventMouseEnters, CEGUI::Event::Subscriber(&OptionsWindow::onButtonItemHover, this));
 	diffcbo->setItemSelectState( (size_t) (Options::getInstance()->getDifficulty()-1),true);
+	connectWidgetSoundEvents ("DifficultyBox", "combobox");
 	
 	DEBUG ("Adding sliders");
 	slider = static_cast<CEGUI::Scrollbar*>(win_mgr.getWindow("TextSpeedSlider"));
@@ -188,17 +196,15 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	ehlcbo->subscribeEvent(CEGUI::Combobox::EventMouseEnters, CEGUI::Event::Subscriber(&OptionsWindow::onButtonItemHover, this));
 	ehlcbo->setItemSelectState((size_t) (getColorSelectionIndex(Options::getInstance()->getEnemyHighlightColor())), true);
 
+	connectWidgetSoundEvents ("EHColorBox", "combobox");
+
 
 	CEGUI::Checkbox *chkbox = (CEGUI::Checkbox *) win_mgr.getWindow("GrabMouseInWindowedModeBox");
 	chkbox->setSelected(Options::getInstance()->getGrabMouseInWindowedMode());
 	chkbox->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&OptionsWindow::onGrabMouseChanged, this));
+	chkbox->subscribeEvent(CEGUI::Checkbox::EventMouseClick, CEGUI::Event::Subscriber(&OptionsWindow::onGUIItemClicked, this));
 	chkbox->subscribeEvent(CEGUI::Checkbox::EventMouseEnters, CEGUI::Event::Subscriber(&OptionsWindow::onButtonItemHover, this));
 	
-	CEGUI::PushButton* btn;
-	//btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ResetGraphicsButton"));
-	//btn->setID(5);
-	//btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&OptionsWindow::onResetGraphics, this));
-	// TODO: get rid of obsolete code.
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsCloseButton"));
 	btn->setID(5);
@@ -226,6 +232,8 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Ukrainian UK","uk_UA",0));
 
 	cbo->setReadOnly(true);
+	connectWidgetSoundEvents ("LanguageBox", "combobox");
+
 
 	int selection = 0;
 	std::string locale = Options::getInstance()->getLocale();
@@ -279,6 +287,9 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	cbo->handleUpdatedListItemData();
 	cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onDisplayModeSelected, this));
 
+	connectWidgetSoundEvents ("DisplayModeBox", "combobox");
+
+
 	//
 	// Add the list of video drivers. --------------------------------------------------------------
 	//
@@ -307,6 +318,8 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	cbo->handleUpdatedListItemData ();
 
 	cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onVideoDriverSelected, this));
+	connectWidgetSoundEvents ("VideoDriverBox", "combobox");
+
 
 	//
 	// Add the resolution list. Also select the currently used resolution.  ------------------------
@@ -347,6 +360,8 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	}
 
 	cbo->handleUpdatedListItemData();
+	connectWidgetSoundEvents ("ResolutionBox", "combobox");
+
 
 	//
 	// Add the shadow options into the list. Also select the currently used shadow mode ---------------------------------------------
@@ -380,6 +395,8 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 
 		cbo->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&OptionsWindow::onShadowModeSelected, this));
 	}
+	connectWidgetSoundEvents ("ShadowsDropDownList", "combobox");
+
 
 	// Select the 1st available tab.
 	// This is a pre-emptive work-around for CEGUI 0.8+ support (which uses hierarchical items)
@@ -574,8 +591,67 @@ void OptionsWindow::reset()
 
 
 /**
+ * Connect specific sound events for the widget.
+ */
+void OptionsWindow::connectWidgetSoundEvents (const std::string& widgetName, const std::string& widgetType)
+{
+	try
+	{
+		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+		if (widgetType == "combobox")
+		{
+			if (win_mgr.isWindowPresent (widgetName))
+			{
+				CEGUI::PushButton* btn;
+				std::string subWidgetName (widgetName);
+				subWidgetName.append ("__auto_button__");
+				btn = static_cast<CEGUI::PushButton*> (win_mgr.getWindow (subWidgetName));
+				btn->subscribeEvent (CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber (&OptionsWindow::onGUIItemClicked, this));
+				btn->subscribeEvent (CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber (&OptionsWindow::onButtonItemHover, this));
+
+				CEGUI::ComboDropList* drop;
+				subWidgetName = widgetName;
+				subWidgetName.append ("__auto_droplist__");
+				drop = static_cast<CEGUI::ComboDropList*> (win_mgr.getWindow (subWidgetName));
+				drop->subscribeEvent (CEGUI::ComboDropList::EventMouseClick, CEGUI::Event::Subscriber (&OptionsWindow::onGUIItemClicked, this));
+				drop->subscribeEvent (CEGUI::ComboDropList::EventMouseEnters, CEGUI::Event::Subscriber (&OptionsWindow::onButtonItemHover, this));
+
+				CEGUI::Editbox* ebox;
+				subWidgetName = widgetName;
+				subWidgetName.append ("__auto_editbox__");
+				ebox = static_cast<CEGUI::Editbox*> (win_mgr.getWindow (subWidgetName));
+				ebox->subscribeEvent (CEGUI::Editbox::EventMouseClick, CEGUI::Event::Subscriber (&OptionsWindow::onGUIItemClicked, this));
+				ebox->subscribeEvent (CEGUI::Editbox::EventMouseEnters, CEGUI::Event::Subscriber (&OptionsWindow::onButtonItemHover, this));
+
+			}
+
+		}
+		else
+		{
+		}
+	}
+	catch (std::exception& e)
+	{
+		DEBUG ("Caught exception: %s", e.what ());
+	}
+}
+
+
+/**
+ * \fn bool onButtonItemClicked(const CEGUI::EventArgs& evt)
+ * \brief Handle the click of gui items.
+ */
+bool OptionsWindow::onGUIItemClicked (const CEGUI::EventArgs& evt)
+{
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
+	return true;
+}
+
+
+
+/**
  * \fn bool onButtonItemHover(const CEGUI::EventArgs& evt)
- * \brief Handle the hovering of menu items.
+ * \brief Handle the hovering of gui items.
  */
 bool OptionsWindow::onButtonItemHover (const CEGUI::EventArgs& evt)
 {
@@ -623,6 +699,9 @@ bool OptionsWindow::onAreaMouseButtonPressed(const CEGUI::EventArgs& evt)
 
 bool OptionsWindow::onButtonCancelClicked (const CEGUI::EventArgs& evt)
 {
+	// Play the sound
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
+
 	m_document->onButtonOptionsClicked();
 	return true;
 }
@@ -631,6 +710,9 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 {
 	DEBUG ("[Ok] button clicked in options. Attempting to save them");
 	// TODO: move video mode checks to separate function? or just wait for the full integration with the rest of the options?
+
+	// Play the sound
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
 
 	// Check to see if the display mode was updated. The display mode is stored in a different file at the moment.
 	// TODO: move towards integrated settings file (single file for most settings).
@@ -924,6 +1006,8 @@ bool OptionsWindow::onSoundVolumeChanged(const CEGUI::EventArgs& evt)
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
+
 	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(we.window);
 	float vol = slider->getScrollPosition();
 	DEBUG("sound volume change to %f",vol);
@@ -935,8 +1019,10 @@ bool OptionsWindow::onSoundVolumeChanged(const CEGUI::EventArgs& evt)
 
 bool OptionsWindow::onDifficultyChanged(const CEGUI::EventArgs& evt)
 {
-	const CEGUI::MouseEventArgs& we =
-	static_cast<const CEGUI::MouseEventArgs&>(evt);
+	const CEGUI::MouseEventArgs& we = 
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
+	
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
 	
 	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(we.window);
 	
@@ -957,8 +1043,10 @@ bool OptionsWindow::onDifficultyChanged(const CEGUI::EventArgs& evt)
 bool OptionsWindow::onTextSpeedChanged(const CEGUI::EventArgs& evt)
 {
 	const CEGUI::MouseEventArgs& we =
-	static_cast<const CEGUI::MouseEventArgs&>(evt);
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
+
 	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(we.window);
 	float speed = 2.0 - slider->getScrollPosition()*1.4;
 	DEBUGX("text speed changed to %f",speed);
@@ -970,6 +1058,8 @@ bool OptionsWindow::onMusicVolumeChanged(const CEGUI::EventArgs& evt)
 {
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
+
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
 
 	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(we.window);
 	float vol = slider->getScrollPosition();

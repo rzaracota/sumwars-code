@@ -47,6 +47,12 @@ class SaveExitWindow : public Window
 	
 	private:
 		/**
+		 * \fn bool onGUIItemHover(const CEGUI::EventArgs& evt)
+		 * \brief Handle the hovering of gui items.
+		 */
+		bool onGUIItemHover (const CEGUI::EventArgs& evt);
+
+		/**
 		 * \fn bool onExitGameConfirmed(const CEGUI::EventArgs& evt)
 		 * \brief Behandelt Klick auf Button Spiel beenden
 		 */

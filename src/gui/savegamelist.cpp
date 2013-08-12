@@ -302,6 +302,9 @@ bool SavegameList::onSavegameChosen(const CEGUI::EventArgs& evt)
 	m_document->setSaveFile(name.c_str());
 	DEBUGX("selected Savegame %s", sitm->m_data.c_str());
 
+	// Also play the click sound.
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
+
 	return true;
 }
 
@@ -318,6 +321,9 @@ bool SavegameList::onSavegameSelected(const CEGUI::EventArgs& evt)
 
 bool SavegameList::onNewCharClicked(const CEGUI::EventArgs& evt)
 {
+	// Also play the click sound.
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
+
 	m_document->onCreateNewCharButton();
 	return true;
 }
@@ -329,6 +335,9 @@ bool SavegameList::onDeleteCharClicked(const CEGUI::EventArgs& evt)
 	const CEGUI::WindowEventArgs& we = static_cast<const CEGUI::WindowEventArgs&>(evt);
 	onSavegameChosen(CEGUI::WindowEventArgs(we.window->getParent()));
 	
+	// Also play the notification sound.
+	SoundHelper::playAmbientSoundGroup ("main_menu_notification");
+
 	m_document->showQuestionDialog ();
 
 	return true;
@@ -336,6 +345,9 @@ bool SavegameList::onDeleteCharClicked(const CEGUI::EventArgs& evt)
 
 bool SavegameList::onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
 {
+	// Also play the click sound.
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
+
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	m_document->hideQuestionDialog ();
 
@@ -377,6 +389,9 @@ bool SavegameList::onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
 
 bool SavegameList::onDeleteCharAbortClicked(const CEGUI::EventArgs& evt)
 {
+	// Also play the click sound.
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
+
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	m_document->hideQuestionDialog ();
 
@@ -385,6 +400,9 @@ bool SavegameList::onDeleteCharAbortClicked(const CEGUI::EventArgs& evt)
 
 bool SavegameList::onSavegameDoubleClick(const CEGUI::EventArgs& evt)
 {
+	// Also play the click sound.
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
+
 	onSavegameSelected(evt);
 	return true;
 }

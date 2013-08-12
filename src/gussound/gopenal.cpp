@@ -415,7 +415,7 @@ namespace GOpenAl
 	void GOpenAlSound::play3D (double posX, double posY, double posZ, ActionIfPlayingEnum actionIfPlaying, bool repeatContinuously)
 	{
 		GTRACE(ATLVL, id_ << "; GOpenAlSound::play3D ... currentstate=" << getState ());
-		GTRACE(ATLVL, "one inst? " << onlyOneInstance_ << ", buf: " << buffer_ << ", state: " << getState ());
+		//GTRACE(ATLVL, "one inst? " << onlyOneInstance_ << ", buf: " << buffer_ << ", state: " << getState ());
 
 		if (onlyOneInstance_)
 		{

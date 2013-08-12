@@ -252,7 +252,7 @@ bool SoundHelper::loadPlaylistFromXMLNode (TiXmlNode* node)
 		std::string playlistName;
 		bool repeatOption;
 		bool shuffleOption;
-		float probability;
+		//float probability;
 
 		attr.getString ("name", playlistName);
 		attr.getBool ("repeat", repeatOption, true);
@@ -299,9 +299,16 @@ bool SoundHelper::loadPlaylistFromXMLNode (TiXmlNode* node)
 ///
 void SoundHelper::playAmbientSoundGroup (const std::string& soundGroupID)
 {
-	std::string soundToPlay;
-	soundToPlay = SoundManager::getPtr ()->getSoundGroup (soundGroupID)->getRandomSound ();
-	SoundManager::getPtr ()->getRepository ()->getSound (soundToPlay)->play2D ();
+	try
+	{
+		std::string soundToPlay;
+		soundToPlay = SoundManager::getPtr ()->getSoundGroup (soundGroupID)->getRandomSound ();
+		SoundManager::getPtr ()->getRepository ()->getSound (soundToPlay)->play2D ();
+	}
+	catch (std::exception& e)
+	{
+		DEBUG ("Encountered exception: %s", e.what ());
+	}
 }
 
 

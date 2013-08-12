@@ -15,6 +15,10 @@
 
 #include "messageboxes.h"
 
+// Sound operations helper.
+#include "soundhelper.h"
+
+
 SaveExitWindow::SaveExitWindow (Document* doc)
 	:Window(doc)
 {
@@ -26,9 +30,11 @@ SaveExitWindow::SaveExitWindow (Document* doc)
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("GameExitConfirmButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SaveExitWindow ::onExitGameConfirmed, this));
+	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&SaveExitWindow::onGUIItemHover, this));
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("GameExitAbortButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SaveExitWindow ::onExitGameAborted, this));
+	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&SaveExitWindow::onGUIItemHover, this));
 
 	// If the panel also has an auto-close button, connect it to the Cancel/Abort event.
 	if (win_mgr.isWindowPresent ("SaveExitWindow__auto_closebutton__"))
@@ -37,6 +43,7 @@ SaveExitWindow::SaveExitWindow (Document* doc)
 		if (btn)
 		{
 			btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SaveExitWindow::onExitGameAborted, this));
+			btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&SaveExitWindow::onGUIItemHover, this));
 		}
 	}
 	
@@ -84,6 +91,17 @@ bool SaveExitWindow::onExitGameConfirmed(const CEGUI::EventArgs& evt)
 bool SaveExitWindow::onExitGameAborted(const CEGUI::EventArgs& evt)
 {
 	m_document->onButtonSaveExitAbort();
+	return true;
+}
+
+
+/**
+ * \fn bool onGUIItemHover(const CEGUI::EventArgs& evt)
+ * \brief Handle the hovering of gui items.
+ */
+bool SaveExitWindow::onGUIItemHover (const CEGUI::EventArgs& evt)
+{
+	SoundHelper::playAmbientSoundGroup ("main_menu_hover_item");
 	return true;
 }
 

@@ -75,8 +75,19 @@ class OptionsWindow : public Window
 		ShortkeyDestination m_key_destination;
 		
 		/**
+		 * Connect specific sound events for the widget.
+		 */
+		void connectWidgetSoundEvents (const std::string& widgetName, const std::string& widgetType);
+
+		/**
+		 * \fn bool onButtonItemClicked (const CEGUI::EventArgs& evt)
+		 * \brief Handle the click of gui items.
+		 */
+		bool onGUIItemClicked (const CEGUI::EventArgs& evt);
+
+		/**
 		 * \fn bool onButtonItemHover(const CEGUI::EventArgs& evt)
-		 * \brief Handle the hovering of menu items.
+		 * \brief Handle the hovering of gui items.
 		 */
 		bool onButtonItemHover (const CEGUI::EventArgs& evt);
 		
