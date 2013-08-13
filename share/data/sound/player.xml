@@ -16,7 +16,7 @@
 
 
 <Sound name="teleport">
-<!--	<Soundfile source="inventory_sound_effects/sell_buy_item.wav"/> -->
+  <Soundfile source="inventory_sound_effects/teleport.wav"/>
 </Sound>
 
 <Sound name="use_potion">

@@ -19,6 +19,9 @@
 #include "options.h"
 #include <tinyxml.h>
 
+// Sound operations helper.
+#include "soundhelper.h"
+
 PlayerCamera::PlayerCamera()
 {
 	m_distance = 20;
@@ -696,6 +699,7 @@ bool Player::onItemClick(ClientCommand* command)
 
 						getRegion()->insertPlayerTeleport(getId(), m_revive_position);
 						clearCommand(true,true);
+						SoundHelper::playAmbientSoundGroup ("teleport");
 					}
 				}
 				else
@@ -1484,6 +1488,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					regloc.second="WaypointLoc";
 					getRegion()->insertPlayerTeleport(getId(), regloc);
 					clearCommand(true,true);
+					SoundHelper::playAmbientSoundGroup ("teleport");
 				}
 				else if (command->m_id == -999 && m_portal_position.first != "")
 				{
@@ -1493,6 +1498,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					regloc.second="";
 					setPortalPosition(regloc);
 					clearCommand(true,true);
+					SoundHelper::playAmbientSoundGroup ("teleport");
 				}
 			}
 			break;
