@@ -632,6 +632,8 @@ namespace gussound
 
 		virtual void stop ();
 
+		virtual void stop (bool fadeOut);
+
 		virtual void setListener (PlaylistListener * listener) {ptrToListener_ = listener;}
 
 		// override

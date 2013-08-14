@@ -121,7 +121,9 @@ namespace GOpenAl
 		/// Empty the currently loaded buffers.
 		void emptyBuffers ();
 
-		void oggcheck ();
+		/// Perform some check-ups for ogg stream commands.
+		void oggcheck (const std::string& comment);
+
 		virtual bool loadFrom (const gussound::AudioDeviceSmartPtr & devicePtr
 					, const std::string &fileName, bool loadInMemory, bool onlyOneInstance = true);
 		/// Utility function to retrieve the time that is currently elapsed from the stream.

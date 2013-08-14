@@ -96,7 +96,7 @@ namespace GOpenAl
 	{
 		if (m_initialized)
 		{
-			oggcheck ();
+			oggcheck ("dtor");
 		}
 		GTRACE (4, "GOggStreamedSound DTor");
 	}
@@ -175,20 +175,23 @@ namespace GOpenAl
 		GTRACE (5, "GOggStreamedSound creating 2 buffers for [" << getId () << "]");
 		alGenBuffers (2, buffers_);
 
-		oggcheck ();
+		oggcheck ("open");
 	}
 
 
 	void GOggStreamedSound::release ()
 	{
 		alSourceStop (source_);
+		oggcheck ("release");
+		
 		emptyBuffers ();
-		GTRACE (7, "GOggStreamedSound removing 2 buffers");
+		oggcheck ("release(1)");
+		
 		alDeleteBuffers (2, buffers_);
-		oggcheck ();
+		oggcheck ("release(2)");
 
 		ov_clear (&oggStream_);
-		oggcheck ();
+		oggcheck ("release(3)");
 	}
 
 
@@ -293,13 +296,13 @@ namespace GOpenAl
     
 		alSourceQueueBuffers (source_, 2, buffers_);
 		alSourcePlay (source_);
-		oggcheck ();
+		oggcheck ("doPlay");
 	}
 
 	void GOggStreamedSound::doResume (bool repeatContinuously)
 	{
 		alSourcePlay (source_);
-		oggcheck ();
+		oggcheck ("doResume");
 		/*
 		alSourcei (source_, AL_BUFFERS_PROCESSED, &processed);
 		*/
@@ -326,19 +329,19 @@ namespace GOpenAl
 
 		alGetSourcei (source_, AL_BUFFERS_PROCESSED, &processed);
 		GTRACE (8, "GOggStreamedSound::update [" << getId () << "], processed so far from source: "<< processed);
-		oggcheck ();
+		oggcheck ("update");
 		while (processed>0)
 		{
 			processed--;
 			ALuint buffer;
         
 			alSourceUnqueueBuffers (source_, 1, &buffer);
-			oggcheck ();
+			oggcheck ("update (2)");
 
 			active = stream (buffer);
 
 			alSourceQueueBuffers (source_, 1, &buffer);
-			oggcheck ();
+			oggcheck ("update (3)");
 		}
 
 		if (state_ == GPLS_Playing)
@@ -407,7 +410,7 @@ namespace GOpenAl
 			return false;
 		}
 		alBufferData (buffer, format_, pcm, size, vorbisInfo_->rate);
-		oggcheck ();
+		oggcheck ("stream");
     
 		return true;
 	}
@@ -435,7 +438,7 @@ namespace GOpenAl
 		alSourceStop (source_);
 		state_ = GPLS_Stopped;
 		elapsedFromStart_ = 0;
-		oggcheck ();
+		oggcheck ("stop");
 	}
 
 
@@ -507,7 +510,7 @@ namespace GOpenAl
 			ALuint buffer;
     
 			alSourceUnqueueBuffers (source_, 1, &buffer);
-			oggcheck ();
+			oggcheck ("emptybuf");
 		}
 	}
 
@@ -577,14 +580,14 @@ namespace GOpenAl
 
 
 
-	void GOggStreamedSound::oggcheck ()
+	void GOggStreamedSound::oggcheck (const std::string& comment)
 	{
 		int error = alGetError ();
 
 		if (error != AL_NO_ERROR)
 		{
 			// TODO: add error msg.
-			GTRACE (2, "oggcheck failed: " << makeAlErrorString (error));
+			GTRACE (2, "oggcheck failed (" << makeAlErrorString (error) << "); " << this->getId () << "; " << comment);
 		}
 	}
 

@@ -371,9 +371,9 @@ namespace GOpenAl
 		if (posX && posY && posZ)
 		{
 			ALfloat spos[3] = {0.0, 0.0, 0.0};
-			spos[0] = posX;
-			spos[1] = posY;
-			spos[2] = posZ;
+			spos[0] = (ALfloat)posX;
+			spos[1] = (ALfloat)posY;
+			spos[2] = (ALfloat)posZ;
 			alSourcefv (source_, AL_POSITION, spos);
 			alSourcei (source_, AL_SOURCE_RELATIVE, AL_FALSE);
 
@@ -624,7 +624,10 @@ namespace GOpenAl
 		// Ran through all sources and all are playing. Check whether we can add a new sound source.
 		if (musicSources_.size () >= reservedMusicSources_)
 		{
-			throw std::exception ("Maximum amount of music sources reached!");
+			std::stringstream ss;
+			ss << "Maximum amount of music sources reached! ";
+			ss << "Reserved sources: " << reservedMusicSources_ << "; current music sources: " << musicSources_.size ();
+			throw std::exception (ss.str ().c_str ());
 		}
 
 		// Create a new source
@@ -686,9 +689,9 @@ namespace GOpenAl
 	void OpenAlManagerUtil::setListenerPosition (double posX, double posY, double posZ)
 	{
 		ALfloat listenerPos[3] = {0.0, 0.0, 0.0};
-		listenerPos[0] = posX;
-		listenerPos[1] = posY;
-		listenerPos[2] = posZ;
+		listenerPos[0] = (ALfloat)posX;
+		listenerPos[1] = (ALfloat)posY;
+		listenerPos[2] = (ALfloat)posZ;
 		alListenerfv (AL_POSITION, listenerPos);
 	}
 }

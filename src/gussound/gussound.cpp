@@ -178,7 +178,7 @@ namespace gussound
 	}
 
 
-	void SoundEffect::stop()
+	void SoundEffect::stop ()
 	{
 		internalTimer_ = 0;
 		ended_ = true;
@@ -627,7 +627,7 @@ namespace gussound
 	{
 		if( !ptrToRepository_ )
 		{
-			throw std::exception("Failure by init for playlist ( no access to repository");
+			throw std::exception("Failure by addTrack for playlist (no access to repository)");
 		}
 		if( ! tracks_.empty() )
 		{
@@ -789,11 +789,29 @@ namespace gussound
 			return;
 		}
 
+		// If the playlist contains a single track, skipping to the next track means playing the same track all over again.
+		// The question is: how does one handle cross-fading in this scenario?
+		// Let's just get rid of it in this case.
+		if (playCount_.size () == 1)
+		{
+			if (state_ == GPLS_Playing)
+			{
+				stop (false);
+        play ();
+			}
+			if (ptrToListener_)
+			{
+				ptrToListener_->OnTrackChange (currentTrack_);
+			}
+			return;
+		}
+
+
 		PlayState temp = state_;
 		if( state_ == GPLS_Playing || state_ == GPLS_Paused )
 		{
 			GTRACE(5, "Playlist::skipToNextTrack() while in pause or play.");
-			stop();
+			stop ();
 		}
 
 		int newPos = 0;
@@ -891,7 +909,7 @@ namespace gussound
 		if( state_ == GPLS_Playing || state_ == GPLS_Paused )
 		{
 			GTRACE(5, "Playlist::skipToPreviousTrack() while in pause or play.");
-			stop();
+			stop ();
 		}
 
 		int newPos = 0;
@@ -979,6 +997,42 @@ namespace gussound
 		}
 
 		if (fadeOutAtStop_)
+		{
+			ptrToRepository_->getSound (tracks_ [currentTrackIdx_])->addEffect ( 
+				GSmartPtr<SoundEffect> (
+					new FadeOutEffect (ptrToRepository_->getSound(tracks_[currentTrackIdx_])
+					, (guslib::TimeUnits) (ptrToRepository_->getSound(tracks_ [currentTrackIdx_])->getSeekDuration ())
+					, (guslib::TimeUnits) (ptrToRepository_->getSound(tracks_ [currentTrackIdx_])->getSeekDuration () + getFadeDuration ())
+					, 0
+					, true) 
+					) 
+				);
+			//state_ = GPLS_PlayingButStopping;
+		}
+		else
+		{
+			ptrToRepository_->getSound (tracks_[currentTrackIdx_])->stop ();
+		}
+		GTRACE (GUSSNDTLVL, id_ << " Playlist has stopped state.");
+		state_ = GPLS_Stopped;
+	}
+
+
+
+	void Playlist::stop (bool fadeOut)
+	{
+		GTRACE (GUSSNDTLVL, "[" << id_ << "] Playlist received stop command");
+		if (tracks_.empty ())
+		{
+			return;
+		}
+		
+		if (currentTrackIdx_ < 0 || currentTrackIdx_ >= (int)tracks_.size ())
+		{
+			return;
+		}
+
+		if (fadeOut)
 		{
 			ptrToRepository_->getSound (tracks_ [currentTrackIdx_])->addEffect ( 
 				GSmartPtr<SoundEffect> (
@@ -1291,7 +1345,7 @@ namespace gussound
 		}
 	}
 
-	void MusicPlayer::stop()
+	void MusicPlayer::stop ()
 	{
 		GTRACE (GUSSNDTLVL, "MusicPlayer received stop command");
 
@@ -1422,7 +1476,6 @@ namespace gussound
 
 		playlists_[playlistName]->setShuffle (value);
 	}
-
 
 
 
@@ -1588,7 +1641,7 @@ namespace gussound
 	void SoundManagerUtil::elapseTime ()
 	{
 		guslib::TimeUnits duration = timer_.renew ();
-		repository_->elapseTime (duration/1.0);
+		repository_->elapseTime (duration);
 	}
 
 
