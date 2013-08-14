@@ -25,7 +25,7 @@
 		</Environments>
 		
 		<ObjectGroups>
-			<ObjectGroup object_group="randomLocation" probability="1"/>
+			<ObjectGroup object_group="randomLocation" priority="0" number="1" probability="1"/>
 		</ObjectGroups>
 		<NamedObjectGroups>
 			<NamedObjectGroup name="labCon" object_group="sewerLabConnection" priority="4"/>
