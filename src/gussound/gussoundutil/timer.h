@@ -37,8 +37,6 @@
 
 #if GUSLIB_FLAG_MULTITHREAD
 #include <gussoundutil/thread.h>
-#else
-#pragma message("Timer: Multithreaded synchronization disabled!")
 #endif
 
 namespace guslib

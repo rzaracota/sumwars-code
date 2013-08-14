@@ -29,6 +29,13 @@
 
 #include <gussoundutil/timer.h>
 
+#if GUSLIB_FLAG_MULTITHREAD
+#pragma message("Timer: Multithreaded synchronization enabled!")
+#else
+#pragma message("Timer: Multithreaded synchronization disabled!")
+#endif
+
+
 #include <sstream>
 
 #ifdef _WINDOWS
