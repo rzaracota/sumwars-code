@@ -25,7 +25,7 @@
 
 
 <Sound name="levelup">
-<!--	<Soundfile source="inventory_sound_effects/sell_buy_item.wav"/> -->
+  <Soundfile source="skill_sound_effects/hero_level_up.wav"/>
 </Sound>
 
 <Sound name="increase_attribute">
