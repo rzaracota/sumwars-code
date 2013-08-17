@@ -78,7 +78,8 @@ void SoundHelper::loadSoundInfos (TiXmlNode* node)
 		attr.parseElement (node->ToElement ());
 		
 		std::string groupName;
-		float probability;
+		float probability = 0.0f;
+		int sumOfMemberWeights = 0;
 
 		attr.getString ("name", groupName);
 		attr.getFloat ("probability", probability, 1.0);
@@ -98,6 +99,8 @@ void SoundHelper::loadSoundInfos (TiXmlNode* node)
 
 					attr.getString ("source", fileName);
 					attr.getInt ("weight", weight, 1.0);
+
+					sumOfMemberWeights += weight;
                     
 					DEBUGX ("loading sound file %s for sound %s", fileName.c_str (), groupName.c_str ());
 
@@ -121,6 +124,20 @@ void SoundHelper::loadSoundInfos (TiXmlNode* node)
 					SoundManager::getPtr ()->getSoundGroup (groupName)->addSound (fileName.c_str (), weight);
 				}
 			}
+		}
+
+		if (probability < 1.0f)
+		{
+			// the probability is provided only for playable sounds.
+			// we need to add a no-sound entry in this case.
+			int emptySoundWeight = 1;
+			// probability ... sumOfMemberWeights
+			// 1.0 - probability       ... emptySoundWeight
+			emptySoundWeight = sumOfMemberWeights * ((1.0 - probability) / probability);
+			// we need to calculate the weight for this one.
+			SoundManager::getPtr ()->getSoundGroup (groupName)->addEmptySlot (emptySoundWeight);
+
+			DEBUG ("Added for group [%s], probability %f,  member weights %d, final sound weight %d", groupName.c_str (), probability, sumOfMemberWeights, emptySoundWeight);
 		}
 	}
 	else
@@ -303,7 +320,10 @@ void SoundHelper::playAmbientSoundGroup (const std::string& soundGroupID)
 	{
 		std::string soundToPlay;
 		soundToPlay = SoundManager::getPtr ()->getSoundGroup (soundGroupID)->getRandomSound ();
-		SoundManager::getPtr ()->getRepository ()->getSound (soundToPlay)->play2D ();
+		if (soundToPlay != gussound::EMPTY_SLOT_NAME)
+		{
+			SoundManager::getPtr ()->getRepository ()->getSound (soundToPlay)->play2D ();
+		}
 	}
 	catch (std::exception& e)
 	{
@@ -322,7 +342,10 @@ void SoundHelper::playSoundGroupAtPosition (const std::string& soundGroupID, dou
 	{
 		std::string soundToPlay;
 		soundToPlay = SoundManager::getPtr ()->getSoundGroup (soundGroupID)->getRandomSound ();
-		SoundManager::getPtr ()->getRepository ()->getSound (soundToPlay)->play3D (posX, posY, posZ);
+		if (soundToPlay != gussound::EMPTY_SLOT_NAME && soundToPlay != gussound::EMPTY_SOUND_FILE)
+		{
+			SoundManager::getPtr ()->getRepository ()->getSound (soundToPlay)->play3D (posX, posY, posZ);
+		}
 	}
 	catch (std::exception& e)
 	{

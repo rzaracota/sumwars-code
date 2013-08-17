@@ -163,6 +163,7 @@ namespace gussound
 	const SoundVolume min_volume = 0.0;
 	const SoundDuration standard_fade_duration = 2000;
 	const std::string EMPTY_SLOT_NAME = "_";
+	const std::string EMPTY_SOUND_FILE = "";
 
 
 

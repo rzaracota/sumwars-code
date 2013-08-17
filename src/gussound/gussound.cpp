@@ -492,6 +492,7 @@ namespace gussound
 
 	void SoundGroup::addEmptySlot (int weight)
 	{
+		GTRACE (4, "Adding an empty slot for sound " << " with weight " << weight);
 		addSound (EMPTY_SLOT_NAME, weight);
 	}
 
@@ -552,7 +553,7 @@ namespace gussound
 
 		if (! found)
 		{
-			return std::string ("");
+			return std::string (EMPTY_SOUND_FILE);
 		}
 
 		return iter->first;
@@ -1133,7 +1134,7 @@ namespace gussound
 		{
 			GTRACE (2, "EXCEPTION! Tried to get an inexistent sound: [" << soundName << "]");
 			// Also log the existing sounds. Might be useful for a comparison.
-			if (soundName.compare ("") != 0)
+			if (soundName.compare (EMPTY_SOUND_FILE) != 0)
 			{
 				GTRACE (3, "Current list of sounds:");
 				for (SoundMap::iterator it2 = sounds_.begin(); 
