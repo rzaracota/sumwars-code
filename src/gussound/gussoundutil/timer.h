@@ -36,8 +36,15 @@
 #include <ostream>
 
 #if GUSLIB_FLAG_MULTITHREAD
-#include <gussoundutil/thread.h>
+#	include <gussoundutil/thread.h>
 #endif
+
+#define ENABLE_OGRE_BASED_TIMER
+
+#ifdef ENABLE_OGRE_BASED_TIMER
+#	include <OgreTimer.h>
+#endif
+
 
 namespace guslib
 {
@@ -59,7 +66,7 @@ namespace guslib
 		virtual ~AbstractTimer();
 
 		/// Access the system time units. Override in child classes.
-		virtual TimeUnits getCurrentTimeUnits() const = 0;
+		virtual TimeUnits getCurrentTimeUnits() = 0;
 
 		/// Resets the timer duration to zero
 		virtual void reset();
@@ -72,6 +79,24 @@ namespace guslib
 	};
 
 
+#ifdef ENABLE_OGRE_BASED_TIMER
+	/// Ogre implementation using the Ogre timers. Requires the OGRE3D library!
+	class GusLibOgreTimer
+		: public AbstractTimer
+	{
+	protected:
+		Ogre::Timer timer_;
+	public:
+		GusLibOgreTimer ();
+		virtual ~GusLibOgreTimer ();
+		virtual TimeUnits getCurrentTimeUnits ();
+		virtual TimeUnits getTimeSinceMidnight () const;
+		/// Resets the timer duration to zero
+		virtual void reset();
+	};
+#endif
+
+
 #ifdef _WINDOWS
 	/// Windows implementation for the abstract timer.
 	class WinTimer : public AbstractTimer
@@ -80,17 +105,23 @@ namespace guslib
 	public:
 		WinTimer();
 		virtual ~WinTimer();
-		virtual TimeUnits getCurrentTimeUnits () const;
+		virtual TimeUnits getCurrentTimeUnits ();
 		virtual TimeUnits getTimeSinceMidnight () const;
 	};
 #endif
 
-#ifdef _WINDOWS
-	// The windows timer will be the standard accessible timer, through the Timer name.
-	typedef WinTimer Timer;
+	// Redirection of the timer.
+#ifdef ENABLE_OGRE_BASED_TIMER
+	// The Ogre timer will be the standard accessible timer, through the Timer name.
+	typedef GusLibOgreTimer Timer;
 #else
-	// TODO: define a unix timer?
-#endif
+#	ifdef _WINDOWS
+		// The windows timer will be the standard accessible timer, through the Timer name.
+		typedef WinTimer Timer;
+#	else
+		// TODO: define a unix timer?
+#	endif //_WINDOWS
+#endif //ENABLE_OGRE_BASED_TIMER
 
 	class ApplicationClockUtil;
 
@@ -109,7 +140,7 @@ namespace guslib
 		virtual ~ApplicationClockUtil ();
 		friend class guslib::Singleton <ApplicationClockUtil>;
 
-		virtual TimeUnits getTimeFromStart () const;
+		virtual TimeUnits getTimeFromStart ();
 
 		/**
 			Make the class accessible to ostreams (e.g. cout);
@@ -117,7 +148,7 @@ namespace guslib
 		*/
 		inline friend std::ostream & operator<<(std::ostream& s, const ApplicationClockUtil & cl)
 		{
-			TimeUnits temp (cl.getTimeFromStart ());
+			TimeUnits temp (const_cast<ApplicationClockUtil&>(cl).getTimeFromStart ());
 
 			int nMillis = temp % 1000;
 			temp = (temp - nMillis) / 1000;
@@ -159,7 +190,7 @@ namespace guslib
 			return s;
 		}
 
-		virtual std::string getTimeAsString () const;
+		virtual std::string getTimeAsString ();
 	};
 
 
@@ -179,7 +210,7 @@ namespace guslib
 		friend class guslib::Singleton <SystemClockUtil>;
 
 		// gets the time since the start of day.
-		virtual TimeUnits getTimeFromStart () const;
+		virtual TimeUnits getTimeFromStart ();
 
 		/**
 			Make the class accessible to ostreams (e.g. cout);
@@ -187,7 +218,7 @@ namespace guslib
 		*/
 		inline friend std::ostream & operator<<(std::ostream& s, const SystemClockUtil & cl)
 		{
-			TimeUnits temp (cl.getTimeFromStart ());
+			TimeUnits temp (const_cast<SystemClockUtil&>(cl).getTimeFromStart ());
 
 			int nMillis = temp % 1000;
 			temp = (temp - nMillis) / 1000;
@@ -235,7 +266,7 @@ namespace guslib
 		*/
 		inline friend std::wostream & operator<<(std::wostream& s, const SystemClockUtil & cl)
 		{
-			TimeUnits temp (cl.getTimeFromStart ());
+			TimeUnits temp (const_cast<SystemClockUtil&>(cl).getTimeFromStart ());
 
 			int nMillis = temp % 1000;
 			temp = (temp - nMillis) / 1000;

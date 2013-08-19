@@ -84,6 +84,57 @@ namespace guslib
 	}
 
 
+	// --------------------- the Ogre timer --------------------------
+	GusLibOgreTimer::GusLibOgreTimer ()
+	{
+		reset ();
+	}
+
+	GusLibOgreTimer::~GusLibOgreTimer ()
+	{
+	}
+
+
+	TimeUnits GusLibOgreTimer::getCurrentTimeUnits ()
+	{
+		unsigned long currentMillis = timer_.getMilliseconds ();
+		return static_cast<TimeUnits> (currentMillis);
+	}
+
+	TimeUnits GusLibOgreTimer::getTimeSinceMidnight () const
+	{
+		TimeUnits returnValue (0);
+
+#ifdef _WINDOWS
+		SYSTEMTIME localTime;
+		GetLocalTime (&localTime);
+
+		returnValue = localTime.wHour;
+		returnValue = returnValue * 60 + localTime.wMinute;
+		returnValue = returnValue * 60 + localTime.wSecond;
+		returnValue = returnValue * 1000 + localTime.wMilliseconds;
+#else
+		struct tm *newtime;
+
+		time_t long_time;
+
+		time( &long_time );
+		newtime = localtime( &long_time ); // Convert to local time.
+
+		returnValue = newtime->tm_hour;
+		returnValue = returnValue * 60 + newtime->tm_min;
+		returnValue = returnValue * 60 + newtime->tm_sec;
+		returnValue = returnValue * 1000 + 0; // no millis
+		delete newtime;
+#endif
+		return returnValue;
+	}
+
+	void GusLibOgreTimer::reset ()
+	{
+		timer_.reset ();
+	}
+
 	// --------------------- the windows timer --------------------------
 
 #ifdef _WINDOWS
@@ -99,7 +150,7 @@ namespace guslib
 	}
 
 
-	TimeUnits WinTimer::getCurrentTimeUnits() const
+	TimeUnits WinTimer::getCurrentTimeUnits()
 	{
 		return timeGetTime();
 	}
@@ -148,7 +199,7 @@ namespace guslib
 	{
 	}
 
-	std::string ApplicationClockUtil::getTimeAsString () const
+	std::string ApplicationClockUtil::getTimeAsString ()
 	{
 		TimeUnits temp (getTimeFromStart ());
 		std::string returnValue;
@@ -172,7 +223,7 @@ namespace guslib
 		return returnValue;
 	}
 
-	TimeUnits ApplicationClockUtil::getTimeFromStart () const 
+	TimeUnits ApplicationClockUtil::getTimeFromStart () 
 	{
 		TimeUnits curr = getCurrentTimeUnits();
 		TimeUnits tu = curr - initialTime_;
@@ -194,7 +245,7 @@ namespace guslib
 	}
 
 
-	TimeUnits SystemClockUtil::getTimeFromStart () const 
+	TimeUnits SystemClockUtil::getTimeFromStart () 
 	{
 		TimeUnits curr = getCurrentTimeUnits();
 		TimeUnits tu = curr - initialTime_;
