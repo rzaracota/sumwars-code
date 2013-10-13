@@ -36,6 +36,11 @@
 #endif
 //#include "CEGUI/ScriptingModules/LuaScriptModule/CEGUILua.h"
 
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+#include "onlineservicesmanager.h"
+#endif
+
+
 #include "OgreConfigFile.h"
 #include <OgreParticleSystemManager.h>
 
@@ -198,6 +203,10 @@ bool Application::init()
 	// Augustin Preda, 2011.11.15: trial code: load the options.xml file; it's required
 	// TODO: don't load it again later. Currently it's done via m_document->loadSettings();
 	Options::getInstance()->readFromFile(operationalPath + "/options.xml");
+
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+    new OnlineServicesManager(operationalPath);
+#endif
 
 	// Ogre configurieren
 	ret = configureOgre();
@@ -765,7 +774,7 @@ bool Application::initOgre()
 	// Register as a Window listener
 	Ogre::WindowEventUtilities::addWindowEventListener (m_window, this);
 
-	Ogre::LogManager::getSingleton ().createLog (SumwarsHelper::userPath () + "/BenchLog.log");
+    Ogre::LogManager::getSingleton ().createLog (SumwarsHelper::userPath () + "/BenchLog.log");
 	return true;
 }
 
@@ -1501,7 +1510,13 @@ void Application::eventOccurred(const Ogre::String &eventName, const Ogre::NameV
             // DeviceCreated is called when Device is dragged from one Display to another
             // DeviceRestored is called when RenderWindow is minimized with Alt+Tab or the Windows key
             m_ogre_root->clearEventTimes();
-            ((Ogre::TexturePtr)Ogre::TextureManager::getSingleton().getByName("minimap_tex", "General"))->getBuffer()->getRenderTarget()->getViewport(0)->update();
+
+            #if (OGRE_VERSION < ((1 << 16) | (9 << 8) | 0))
+                Ogre::TexturePtr tex = Ogre::TextureManager::getSingletonPtr()->getByName("minimap_tex", "General");
+            #else
+                Ogre::TexturePtr tex = Ogre::TextureManager::getSingletonPtr()->getByName("minimap_tex", "General").staticCast<Ogre::Texture>();
+            #endif
+            tex->getBuffer()->getRenderTarget()->getViewport(0)->update();
             CEGUI::System::getSingleton().invalidateAllCachedRendering();
         }
     }

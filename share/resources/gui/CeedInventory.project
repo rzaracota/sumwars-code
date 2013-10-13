@@ -1,1 +1,12 @@
-<Project CEGUIVersion="0.7" baseDirectory="." fontsPath="fonts" imagesetsPath="imagesets" layoutsPath="layouts" looknfeelsPath="looknfeel" name="Inventory" schemesPath="schemes" version="CEED Project 1"><Items><Item path="layouts/CharScreen.layout" type="file" /><Item path="imagesets/CharacterScreen.imageset" type="file" /><Item path="imagesets/Inventory.imageset" type="file" /><Item path="layouts/inventory.layout" type="file" /><Item path="imagesets/MainMenu.imageset" type="file" /></Items></Project>
+<?xml version="1.0" encoding="utf-8"?>
+<Project CEGUIDefaultResolution="1280x720" CEGUIVersion="0.7" baseDirectory="." fontsPath="fonts" imagesetsPath="imagesets" layoutsPath="layouts" looknfeelsPath="looknfeel" schemesPath="schemes" version="CEED Project 1" xmlSchemasPath="xml_schemas">
+    <Items>
+        <Item path="layouts/CharScreen.layout" type="file" />
+        <Item path="imagesets/CharacterScreen.imageset" type="file" />
+        <Item path="imagesets/Inventory.imageset" type="file" />
+        <Item path="layouts/LoginDialog.layout" type="file" />
+        <Item path="imagesets/MainMenu.imageset" type="file" />
+        <Item path="layouts/MainMenu.layout" type="file" />
+        <Item path="layouts/inventory.layout" type="file" />
+    </Items>
+</Project>

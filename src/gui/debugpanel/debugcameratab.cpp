@@ -168,8 +168,14 @@ void DebugCameraTab::update ( OIS::Keyboard *keyboard, OIS::Mouse *mouse )
 		debugCam->move(trvec);
 	}
 
-	Ogre::TexturePtr tex = Ogre::TextureManager::getSingleton().getByName ( "debug_tex" );
-	tex.getPointer()->getBuffer()->getRenderTarget()->update();
+#if (OGRE_VERSION < ((1 << 16) | (9 << 8) | 0))
+    Ogre::TexturePtr tex = Ogre::TextureManager::getSingleton().getByName ( "debug_tex" );
+#else
+    Ogre::TexturePtr tex = Ogre::TextureManager::getSingleton().getByName ( "debug_tex" ).staticCast<Ogre::Texture>();
+#endif
+
+    tex.getPointer()->getBuffer()->getRenderTarget()->update();
+
 }
 
 

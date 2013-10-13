@@ -72,7 +72,11 @@ void EventSystem::init()
 		cleanup();
 	}
 
+#if LUA_VERSION_NUM == 501
 	m_lua = lua_open();
+#elif LUA_VERSION_NUM == 502
+    m_lua = luaL_newstate();
+#endif
 
 	luaL_openlibs(m_lua);
 	luaopen_debug(m_lua);

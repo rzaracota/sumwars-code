@@ -18,21 +18,20 @@
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreTexture.h"
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreResourceProvider.h"
-#include <OgrePanelOverlayElement.h>
 
 #include "CEGUI/CEGUI.h"
 
 #include "graphicmanager.h"
 
 #include "soundhelper.h"
-
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+#include "onlineservicesmanager.h"
+#endif
 // Sound and music management classes.
 #include "gussound.h"
 using gussound::SoundManager;
 
 #include "gopenal.h"
-
-
 
 Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 {
@@ -733,6 +732,16 @@ void Scene::updateCharacterView()
 				saveFile.erase(saveFile.length()-4, saveFile.length());
 				img.resize(256, 256);
 				img.save(saveFile.append(".png"));
+
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+                if(OnlineServicesManager::getSingleton().userLoggedIn())
+                {
+                    Ogre::DataStreamPtr ptr = img.encode("png");
+                    OnlineServicesManager::getSingleton().syncCharacterAvatar(pl->getName().getRawText(), saveFile, ptr);
+                }
+#endif
+
+
 			}
 		}
 		DEBUGX("player image is now %s",m_temp_player.c_str());

@@ -251,6 +251,22 @@
             </startMenuShortcutList>
         </component>
     </componentList>
+    <preInstallationActionList>
+        <renameFile>
+            <destination>${env(USERPROFILE)}/.sumwars/plugins.old</destination>
+            <origin>${env(USERPROFILE)}/.sumwars/plugins.cfg</origin>
+            <ruleList>
+                <fileExists path="${env(USERPROFILE)}/.sumwars/plugins.cfg"/>
+            </ruleList>
+        </renameFile>
+        <renameFile>
+            <destination>${env(USERPROFILE)}/.sumwars/resources.old</destination>
+            <origin>${env(USERPROFILE)}/.sumwars/resources.cfg</origin>
+            <ruleList>
+                <fileExists path="${env(USERPROFILE)}/.sumwars/resources.cfg"/>
+            </ruleList>
+        </renameFile>
+    </preInstallationActionList>
     <readyToInstallActionList>
         <componentSelection>
             <deselect>oalruntime</deselect>
@@ -269,7 +285,7 @@
     </readyToInstallActionList>
     <preUninstallationActionList>
         <showQuestion text="Do you want the uninstallation to also remove your saved games?" variable="remove_mysql">
-            <default>yes</default>
+            <default>no</default>
         </showQuestion>
         <deleteFile>
             <path>${env(USERPROFILE)}/.sumwars</path>

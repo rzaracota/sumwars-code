@@ -518,8 +518,12 @@ void ContentEditor::updateTranslation()
 
 bool ContentEditor::onPreviewWindowMouseDown(const CEGUI::EventArgs& evt)
 {
-	Ogre::TexturePtr tex = Ogre::TextureManager::getSingleton().getByName("editor_tex");
-	tex.getPointer()->getBuffer()->getRenderTarget()->setAutoUpdated(true);
+#if (OGRE_VERSION < ((1 << 16) | (9 << 8) | 0))
+    Ogre::TexturePtr tex = Ogre::TextureManager::getSingletonPtr()->getByName("editor_tex");
+#else
+    Ogre::TexturePtr tex = Ogre::TextureManager::getSingletonPtr()->getByName("editor_tex").staticCast<Ogre::Texture>();
+#endif
+    tex.getPointer()->getBuffer()->getRenderTarget()->setAutoUpdated(true);
 	
 	const CEGUI::MouseEventArgs* args = static_cast<const CEGUI::MouseEventArgs*>(&evt);
 	if(args->button == CEGUI::LeftButton)
@@ -532,7 +536,11 @@ bool ContentEditor::onPreviewWindowMouseDown(const CEGUI::EventArgs& evt)
 
 bool ContentEditor::onPreviewWindowMouseUp(const CEGUI::EventArgs& evt)
 {
-	Ogre::TexturePtr tex = Ogre::TextureManager::getSingleton().getByName("editor_tex");
+#if (OGRE_VERSION < ((1 << 16) | (9 << 8) | 0))
+    Ogre::TexturePtr tex = Ogre::TextureManager::getSingletonPtr()->getByName("editor_tex", "General");
+#else
+    Ogre::TexturePtr tex = Ogre::TextureManager::getSingletonPtr()->getByName("editor_tex", "General").staticCast<Ogre::Texture>();
+#endif
 	tex.getPointer()->getBuffer()->getRenderTarget()->setAutoUpdated(false);
 	
 	const CEGUI::MouseEventArgs* args = static_cast<const CEGUI::MouseEventArgs*>(&evt);
@@ -553,7 +561,13 @@ bool ContentEditor::onPreviewWindowScrollWheel(const CEGUI::EventArgs& evt)
 
 	Ogre::Vector3 vec = Ogre::Vector3(0.0f, 0.0f, args->wheelChange * 0.02f);
 	cam->moveRelative(vec);
-	Ogre::TexturePtr tex = Ogre::TextureManager::getSingleton().getByName("editor_tex");
+
+
+#if (OGRE_VERSION < ((1 << 16) | (9 << 8) | 0))
+    Ogre::TexturePtr tex = Ogre::TextureManager::getSingletonPtr()->getByName("editor_tex", "General");
+#else
+    Ogre::TexturePtr tex = Ogre::TextureManager::getSingletonPtr()->getByName("editor_tex", "General").staticCast<Ogre::Texture>();
+#endif
 	tex.getPointer()->getBuffer()->getRenderTarget()->update();
 
 	return true;

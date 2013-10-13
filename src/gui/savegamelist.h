@@ -109,6 +109,12 @@ class SavegameList : public Window
 		  */
 		CEGUI::Window *m_currentSelected;
 
+
+        /**
+          *\brief Holds holds the number of character selection windows currently visible
+          */
+        int m_numCurrentCharacterButtons;
+
 		/**
 		 * \brief The name of the CEGUI skin to use.
 		 */

@@ -31,6 +31,10 @@
 #include <X11/extensions/Xrandr.h>
 #endif
 
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+#include "onlineservicesmanager.h"
+#endif
+
 // Instance of the singleton.
 template<> SumwarsHelper* Ogre::Singleton<SumwarsHelper>::SUMWARS_OGRE_SINGLETON = 0;
 
@@ -305,7 +309,16 @@ Ogre::String SumwarsHelper::userPath ()
 
 Ogre::String SumwarsHelper::savePath ()
 {
-	return userPath() + "/save";
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+    if(OnlineServicesManager::getSingletonPtr() && OnlineServicesManager::getSingleton().userLoggedIn())
+        return userPath() + "/save/" + OnlineServicesManager::getSingleton().getUserName();
+    else
+        return userPath() + "/save";
+#else
+    return userPath() + "/save";
+#endif
+
+
 }
 
 std::string SumwarsHelper::getUpdatedResolutionString (const std::string& initialString, int newWidth, int newHeight)

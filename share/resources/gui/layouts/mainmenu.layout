@@ -47,13 +47,27 @@
             <Property Name="UnifiedAreaRect" Value="{{0.769531,0},{0.914062,0},{0.960937,0},{0.955729,0}}" />
             <Property Name="HorzFormatting" Value="HorzCentred" />
         </Window>
-        
+	<Window Type="SWB/Button" Name="LoginButton" >
+            <Property Name="Text" Value="Login" />
+            <Property Name="InheritsAlpha" Value="False" />
+            <Property Name="UnifiedAreaRect" Value="{{0.25531,0},{0.914062,0},{0.37,0},{0.955729,0}}" />
+        </Window>
         <Window Type="SWB/StaticText" Name="SumwarsVersionLabel" >
             <Property Name="Text" Value="VersionLabel" />
             <Property Name="Alpha" Value="0.7" />
             <Property Name="FrameEnabled" Value="False" />
             <Property Name="HorzFormatting" Value="RightAligned" />
             <Property Name="UnifiedAreaRect" Value="{{0.583594,0},{0.96901,0},{0.958594,0},{0.992448,0}}" />
+            <Property Name="BackgroundEnabled" Value="False" />
+        </Window>
+	<Window Type="SWB/StaticText" Name="SumwarsOnlineIndicatorLabel" >
+            <Property Name="Text" Value="Not logged in." />
+            <Property Name="Alpha" Value="0.7" />
+            <Property Name="HorzExtent" Value="100" />
+            <Property Name="VertExtent" Value="23.1724" />
+            <Property Name="FrameEnabled" Value="False" />
+            <Property Name="HorzFormatting" Value="LeftAligned" />
+            <Property Name="UnifiedAreaRect" Value="{{0.27594,0},{0.96901,0},{0.558594,0},{0.992448,0}}" />
             <Property Name="BackgroundEnabled" Value="False" />
         </Window>
         
