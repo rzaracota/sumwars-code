@@ -699,6 +699,8 @@ bool Player::onItemClick(ClientCommand* command)
 
 						getRegion()->insertPlayerTeleport(getId(), m_revive_position);
 						clearCommand(true,true);
+						// TODO: this is a sound that should be also available to other players.
+						// Switch to an event-based solution.
 						SoundHelper::playAmbientSoundGroup ("teleport");
 					}
 				}
@@ -1498,6 +1500,8 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 					regloc.second="";
 					setPortalPosition(regloc);
 					clearCommand(true,true);
+					// TODO: this is a sound that should be also available to other players.
+					// Switch to an event-based solution.
 					SoundHelper::playAmbientSoundGroup ("teleport");
 				}
 			}
