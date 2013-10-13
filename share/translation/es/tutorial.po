@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-30 08:28+0200\n"
-"Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
+"PO-Revision-Date: 2013-10-13 21:11+0200\n"
+"Last-Translator: Santiago Del Brio <changonc@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/tutorial/es/>\n"
 "Language: es\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.6-dev\n"
+"X-Generator: Weblate 1.7\n"
 
 #: tutorial.xml:1845
 msgid "'course. Send the Branded One first.##female"
@@ -888,7 +888,7 @@ msgstr "No, Tolec. Debes decirlo con mucha más autoridad."
 
 #: tutorial.xml:440
 msgid "None of you will leave it until you surrender your weapons."
-msgstr ""
+msgstr "Ninguno de vosotros se irá hasta que entregue is vuestras armas."
 
 #: tutorial.xml:652
 msgid "Noo!"
