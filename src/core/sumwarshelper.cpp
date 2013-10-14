@@ -622,7 +622,7 @@ void SumwarsHelper::addResourceLocation (const std::string& loc, const std::stri
 	if (bCanAddThis)
 	{
 		DEBUG ("SumwarsHelper: Adding location to resource list: [%s], group:[%s]", location.c_str (), secName.c_str ());
-		Ogre::ResourceGroupManager::getSingleton ().addResourceLocation (location, typeName, secName);
+		Ogre::ResourceGroupManager::getSingleton ().addResourceLocation (location, typeName, secName, true);
 	}
 	else
 	{

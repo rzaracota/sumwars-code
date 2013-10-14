@@ -17,3 +17,22 @@ material editor_area_cyan
 	}
 }
 
+material editor_area_exit
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			lighting off
+			
+			texture_unit
+			{
+				colour_op_ex source1 src_manual src_current 1 0 0
+				alpha_op_ex source1 src_manual src_current 0.2
+			}
+		}
+	
+	}
+}
+
