@@ -46,10 +46,11 @@
 
 #include <physfs.h>
 
-#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
-#include "onlineservicesmanager.h"
 // Sound operations helper.
 #include "soundhelper.h"
+
+#ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
+#include "onlineservicesmanager.h"
 #include "OgreResourceGroupManager.h"
 #include "OgreTextureManager.h"
 #include "OgreTexture.h"

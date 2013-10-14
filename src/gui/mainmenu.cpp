@@ -274,6 +274,8 @@ bool MainMenu::onMainMenuButtonHover (const CEGUI::EventArgs& evt)
 {
 	SoundHelper::playAmbientSoundGroup ("main_menu_hover_item");
 	return true;
+}
+
 #ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
 bool MainMenu::onLoginToOnlineService ( const CEGUI::EventArgs& evt )
 {

@@ -67,6 +67,7 @@ void WorldLoader::loadEvent( TiXmlNode* node, Event *ev, TriggerType &type)
 
 bool WorldLoader::loadRegionData(const char* pFilename)
 {
+	DEBUG ("Loading region data from file: [%s]", pFilename);
 	TiXmlDocument doc(pFilename);
 	bool loadOkay = doc.LoadFile();
 
@@ -131,7 +132,6 @@ bool WorldLoader::loadRegions(TiXmlNode* node)
 
 bool WorldLoader::loadRegion(TiXmlNode* node, RegionData* rdata)
 {
-	
 	TiXmlNode* child;
 	TiXmlNode* child2;
 	for ( child = node->FirstChild(); child != 0; child = child->NextSibling())
