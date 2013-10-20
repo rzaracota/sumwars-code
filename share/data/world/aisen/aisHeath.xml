@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Aisen, Stille Heide [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 5-6 -->
 	<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen? -->
 	<Region id="6" name="aisHeath">
@@ -40,4 +40,4 @@
 			<SpawnGroup group_name="goblins_gobrusch" number="1"/>
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

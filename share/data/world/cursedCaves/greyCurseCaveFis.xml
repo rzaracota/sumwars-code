@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Graue Himmelsleiter, Verfluchte Hoehle, Spalt; Szene 6 -->
 	<Region id="29" name="greyCurseCaveFis">
 		<AmbientLight red="0.0" green="0.0" blue="0.0" />
@@ -26,4 +26,4 @@
 			<Environment height="1.0" name="cave" />
 		</Environments>
 	</Region>
-</world>
+</World>

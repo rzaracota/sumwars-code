@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Aisen, Feenwald [Wald und Steine]; ungefaehr 60 Min, eher verwinkelt; Level 10 - 16 -->
 	<Region id="2100" name="aisFairyforest">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
@@ -43,4 +43,4 @@
 		</SpawnGroups>
 		
 	</Region>
-</world>
+</World>

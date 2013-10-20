@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Aisen, Nebelhang [Wald und Gebirge]; ca. 20 Minuten; eher offen; Level 16 - 18 -->
 	<!-- Goblins, einige Untote, Blutschnaebel -->
 	<Region id="2160" name="aisMistslope">
@@ -44,4 +44,4 @@
 			</Effect>
 		</Event>
 	</Region>
-</world>
+</World>

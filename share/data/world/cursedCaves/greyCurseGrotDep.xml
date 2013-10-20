@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Graue Himmelsleiter, Verfluchte Grotte, Tiefe; ca. 20 Min; Level 17 - 19 -->
 	<!-- Goblins -->
 	<Region id="24" name="greyCurseGrotDep">
@@ -34,4 +34,4 @@
 			<SpawnGroup group_name="goblins_l14_3" number="5" />
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

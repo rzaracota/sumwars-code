@@ -1,4 +1,4 @@
-<world>
+<World>
 	<Region id="1910" name="greyCursedCavern">
 		<AmbientLight red="0.0" green="0.0" blue="0.0" />
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
@@ -35,4 +35,4 @@
 			<SpawnGroup group_name="skeletons_15_1" number="10" />
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

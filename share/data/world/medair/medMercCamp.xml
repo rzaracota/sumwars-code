@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Medair, Soeldnerlager [Stadt]-->
 	<Region id="3" name="medMercCamp">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
@@ -61,4 +61,4 @@
 			</Effect>
 		</Event>
 	</Region>
-</world>
+</World>

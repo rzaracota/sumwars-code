@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Aisen, Dunkler Feenwald -->
 	<!-- Raeuber, Rob der Raeuber -->
 	<Region id="2120" name="aisDarkFairyforest">
@@ -41,4 +41,4 @@
 			<SpawnGroup group_name="bandits_l11_3" number="10"/>
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

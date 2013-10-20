@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Aisen,  Baelens Kluft-->
 	<Region id="2220" name="aisBaelensRift">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
@@ -36,4 +36,4 @@
 		<!--<SpawnGroup group_name="bandits_l12_1" number="10"/>-->
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

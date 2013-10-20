@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Graue Himmelsleiter, Verfluchter See; Template-->
 	<!-- Das Teichmonster-->
 	<Region id="27" name="greyCurseLake">
@@ -31,4 +31,4 @@
 			<Environment height="1.0" name="cave" />
 		</Environments>
 	</Region>
-</world>
+</World>

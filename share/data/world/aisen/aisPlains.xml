@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Aisen, Offene Ebene [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 2 - 6 -->
 	<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Feldalraunen?(falls wir welche bekommen) -->
 	<!-- Orte: entry_Crypt, exit_Crypt => Maylons Grab(Template) -->
@@ -48,4 +48,4 @@
 			<SpawnGroup group_name="goblins_nubreck" number="1"/>
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

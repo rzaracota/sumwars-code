@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Aisen,  Geroellhalde-->
 	<Region id="2180" name="aisBoulderGrounds">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
@@ -36,4 +36,4 @@
 		<!--<SpawnGroup group_name="bandits_l12_1" number="10"/>-->
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

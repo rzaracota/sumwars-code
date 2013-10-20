@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Aisen, Noerdliche Wiese [Feld und Wiesen]; ungefaehr 20 Min, eher offen; Level 7 - 12; Sidequests aus Joringsbrueck -->
 	<!-- Der Bauernhof(Template) -->
 	<!-- Kraeuterbuesche -->
@@ -49,4 +49,4 @@
 			<Environment height="1.0" name="meadow" />
 		</Environments>
 	</Region>
-</world>
+</World>

@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Aisen, Zwergentrutz [Grenzfeste] -->
 	<!-- Entsatz -->
 	<!-- Rob, der Raeuber, Ende -->
@@ -245,4 +245,4 @@
 			</Effect>
 		</Event>		
 	</Region>
-</world>
+</World>
