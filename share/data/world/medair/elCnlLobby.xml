@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Lobby Konzilshalle der Elemtarmagier-->
 	<Region id="2" name="elCnlLobby">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
@@ -32,4 +32,4 @@
 			</Effect>
 		</Event>
 	</Region>
-</world>
+</World>

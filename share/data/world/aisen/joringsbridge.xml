@@ -1,4 +1,4 @@
-<world>	
+<World>	
 	<!-- Aisen, Joringsbrueck [laendliches Dorf] -->
 	<!-- erstes Treffen mit dem Prinzen -->
 	<!-- Der belagerte Bauernhof -->
@@ -67,4 +67,4 @@
 			</Effect>
 		</Event>
 	</Region>
-</world>
+</World>

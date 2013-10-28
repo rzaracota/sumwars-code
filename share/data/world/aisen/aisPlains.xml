@@ -48,4 +48,4 @@
 			<SpawnGroup group_name="goblins_nubreck" number="1"/>
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

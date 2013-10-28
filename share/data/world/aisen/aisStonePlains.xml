@@ -1,4 +1,4 @@
-<world>
+<World>
 	<Region id="2070" name="aisStonePlains">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
 		<HeroLight red="1.0" green="1.0" blue="1.0" /> 
@@ -43,4 +43,4 @@
 			<SpawnGroup group_name="bandits_l6" number="10" />
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

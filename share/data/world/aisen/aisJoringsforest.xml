@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Aisen, Joringsforst [Wald und Wiesen]; ungefaehr 30 Min, halbwegs offen; Level 7 - 12 -->	
 	<!-- Goblinschlaeger, Goblinraeuber, Goblinjaeger, Goblinhunde, Goblinkrieger, Goblinschamanen, Waldalraunen? -->
 	<Region id="9" name="aisJoringsforest">
@@ -37,4 +37,4 @@
 			<SpawnGroup group_name="bandits_l10_2" number="15"/>
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

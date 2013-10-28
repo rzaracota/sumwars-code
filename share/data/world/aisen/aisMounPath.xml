@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Aisen, Gebirgspfad [Wald und Gebirge]; Template -->
 	<!-- Ort von Szene 5 -->
 	<Region id="2150" name="aisMounPath">
@@ -28,4 +28,4 @@
 			<Environment height="1.0" name="hills" />
 		</Environments>
 	</Region>
-</world>
+</World>

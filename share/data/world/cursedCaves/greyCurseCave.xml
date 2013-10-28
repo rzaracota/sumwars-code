@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Graue Himmelsleiter, Verfluchte Hoehle; [Hoehle]; ca 30 Minuten; Level 17 - 19 -->
 	<!-- Goblins, Goblinhunde-->
 	<Region id="21" name="greyCurseCave">
@@ -46,4 +46,4 @@
 			<SpawnGroup group_name="goblins_l13_3" number="10" />
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Maylons Grab, Ebene 1[unterirdisch], ungefaehr 10 Minuten; Level 14 - 17 -->
 	<!-- [kleine Elementare], Zombies, Skelette -->
 	<Region id="15" name="aisMaylonsGraveL1">
@@ -37,4 +37,4 @@
 			<Environment height="1.0" name="vault" />
 		</Environments>
 	</Region>
-</world>
+</World>

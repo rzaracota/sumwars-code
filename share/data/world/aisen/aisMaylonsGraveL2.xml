@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Maylons Grab, Ebene 2[unterirdisch], ungefaehr 10 Minuten; Level 16 - 19 -->
 	<!-- [kleine Elementare], Zombies, Skelette, Maylons Mumie -->
 	<!-- Orte: Maylons Grabkammer -->
@@ -39,4 +39,4 @@
 			<NameObjectGroup name="graveChamber" object_group="maylonsGraveChamber" priority="5"/>
 		</NamedObjectGroups>
 	</Region>	
-</world>
+</World>

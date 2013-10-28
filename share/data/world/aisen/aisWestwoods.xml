@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Aisen, Westwaelder [Wald und Gebirge]; ungefähr 30 Min, eher verwinkelt; Level 15 - 18 -->
 	<!-- Goblins, Goblinhunde, Blutschnaebel-->	
 	<Region id="2140" name="aisWestwoods">
@@ -41,4 +41,4 @@
 			<SpawnGroup group_name="bandits_l12_todd" number="1"/>
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

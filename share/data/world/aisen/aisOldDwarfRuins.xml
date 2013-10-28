@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Aisen,  Alte Zwergenruinen-->
 	<!-- optional, beinhaltet template der Ruine, Eingang in die Kellergewölbe -->
 	<Region id="2200" name="aisOldDwarfRuins">
@@ -34,4 +34,4 @@
 		<!--<SpawnGroup group_name="bandits_l12_1" number="10"/>-->
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

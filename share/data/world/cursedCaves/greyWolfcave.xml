@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Graue Himmelsleiter, Wolfshoehle; [Hoehle]; ca. 20 Min; Level 17- 19 -->
 	<!-- Goblinhunde, DER Goblinhundemonsterboss -->
 	<Region id="23" name="greyWolfcave">
@@ -37,4 +37,4 @@
 			<SpawnGroup group_name="wolves_giant" number="1" />
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

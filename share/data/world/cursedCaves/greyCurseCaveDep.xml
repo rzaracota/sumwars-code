@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Graue Himmelsleiter, Verfluchte Hoehle, Tiefe; ca. 30 Min; Level 17 - 20 -->
 	<!-- Untote -->
 	<!-- Beide Ausgaenge muessen verschliessbar sein. Der Suedausgang wird verschlossen, der Westausgang geoeffnet -->
@@ -42,4 +42,4 @@
 			<SpawnGroup group_name="skeletons_16_1" number="5" />
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

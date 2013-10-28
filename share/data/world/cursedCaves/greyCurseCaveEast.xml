@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Graue Himmelsleiter, Verfluchte Hoehle, Osten -->
 	<!-- Untote -->
 	<Region id="26" name="greyCurseCaveEast">
@@ -43,4 +43,4 @@
 			<SpawnGroup group_name="skeletons_16_1" number="5" />
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

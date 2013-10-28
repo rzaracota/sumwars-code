@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Graue Himmelsleiter, Verfluchte Grotte; [Hoehle]; ca. 25 Min; Level 17 - 19 -->
 	<!-- Goblins, Goblinhunde -->
 	<Region id="22" name="greyCurseGrotto">
@@ -41,4 +41,4 @@
 			<SpawnGroup group_name="wolves" number="5" />
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

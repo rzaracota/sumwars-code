@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Dunkle Lichtung -->
 	<!-- Goblin Cultsite -->
 	<Region id="2080" name="aisDarkClearing">
@@ -41,4 +41,4 @@
 			<SpawnGroup group_name="goblins_temple2" number="15"/> 
 		</SpawnGroups>
 	</Region>
-</world>
+</World>

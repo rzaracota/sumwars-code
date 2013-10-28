@@ -1,4 +1,4 @@
-<world>
+<World>
 	<!-- Maylons Grab, Eingang[Template] -->
 	<Region id="45" name="aisMaylonsGraveEntry">
 		<AmbientLight red="0.4" green="0.4" blue="0.4" />
@@ -30,4 +30,4 @@
 			<Environment height="1.0" name="vault" />
 		</Environments>
 	</Region>
-</world>
+</World>
