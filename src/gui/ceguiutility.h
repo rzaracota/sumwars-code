@@ -17,16 +17,16 @@
 #define __SUMWARS_GUI_CEGUIUTILITY_H__
 
 // Define the CEGUI version. TODO: move to a global definition.
-#define CEGUI_07
+//#define CEGUI_07
 
 #ifdef CEGUI_07
 #include "CEGUI.h"
+#include "CEGUI/CEGUIUDim.h"
+#include "CEGUI/CEGUIFont.h"
 #else
 #include "cegui/CEGUI.h"
 #endif
 
-#include "CEGUI/CEGUIUDim.h"
-#include "CEGUI/CEGUIFont.h"
 #include <list>
 #include <string>
 #include <OIS.h>
@@ -75,6 +75,49 @@ class CEGUIUtility
 			WordWrapJustified
 		};
 
+		static const CEGUI::String EventMouseEntersWindowArea ();
+		static const CEGUI::String EventMouseEntersPushButtonArea ();
+		static const CEGUI::String EventMouseEntersListBoxArea ();
+		static const CEGUI::String EventMouseEntersScrollbarArea ();
+		static const CEGUI::String EventMouseEntersComboboxArea ();
+		static const CEGUI::String EventMouseEntersComboDroplistArea ();
+		static const CEGUI::String EventMouseEntersEditboxArea ();
+		static const CEGUI::String EventMouseEntersToggleButtonArea ();
+		static const CEGUI::String EventToggleButtonStateChanged ();
+		static const CEGUI::String EventMouseLeavesWindowArea ();
+
+#ifdef CEGUI_07
+		typedef CEGUI::Rect Rectf ;
+#else
+		typedef CEGUI::Rectf Rectf;
+#endif
+
+//#ifdef CEGUI_07
+//		typedef CEGUI::Rect CachedRectf ;
+//#else
+//		typedef CEGUI::Element::CachedRectf CachedRectf;
+//#endif
+
+
+#ifdef CEGUI_07
+		typedef CEGUI::Checkbox ToggleButton ;
+#else
+		typedef CEGUI::ToggleButton ToggleButton ;
+#endif
+
+#ifdef CEGUI_07
+		typedef CEGUI::Point Vector2f ;
+#else
+		typedef CEGUI::Vector2f Vector2f;
+#endif
+
+#ifdef CEGUI_07
+		typedef CEGUI::Size Size;
+#else
+		typedef CEGUI::Size<float> Size;
+#endif
+
+
 		enum Colours
 		{
 			Red = 1,
@@ -92,7 +135,7 @@ class CEGUIUtility
 		* \param added The complete list joined together as one string is writen into this argument
 		* \returns The size of the text as a CEGUI::UVector2
 		*/
-		static CEGUI::UVector2 getWindowSizeForText(std::list<std::string> list, CEGUI::Font *font, std::string &added);
+		static CEGUI::UVector2 getWindowSizeForText(std::list<std::string> list, const CEGUI::Font *font, std::string &added);
 
 		/**
 		* \fn static CEGUI::UVector2 getWindowSizeForText(std::string text, CEGUI::Font *font)
@@ -101,7 +144,7 @@ class CEGUIUtility
 		* \param font the CEGUI::Fonts thats used
 		* \returns The size of the text as a CEGUI::UVector2
 		*/
-		static CEGUI::UVector2 getWindowSizeForText(std::string text, CEGUI::Font *font);
+		static CEGUI::UVector2 getWindowSizeForText(std::string text, const CEGUI::Font *font);
 
 		/**
 		* \fn static std::list<std::string> getTextAsList(std::string text)
@@ -147,32 +190,69 @@ class CEGUIUtility
 		* \param x_scale Optional text scale
 		* \returns the formated text and the line count
 		*/
-		static FormatedText fitTextToWindow (const CEGUI::String& text, float maxWidth, TextFormatting fmt, CEGUI::Font *font, float x_scale = 1.0f);
+		static FormatedText fitTextToWindow (const CEGUI::String& text, float maxWidth, TextFormatting fmt, const CEGUI::Font *font, float x_scale = 1.0f);
 		
+		/**
+			Add a child widget to a CEGUI widget
+			@param parentPtr The parent pointer to the CEGUI Window
+			@param childPtr The child pointer to the CEGUI Window.
+		*/
+		static void addChildWidget (CEGUI::Window* parentPtr, CEGUI::Window* childPtr);
+
+		/**
+			Remove a child widget from a CEGUI widget
+			@param parentPtr The parent pointer to the CEGUI Window
+			@param childPtr The child pointer to the CEGUI Window.
+		*/
+		static void removeChildWidget (CEGUI::Window* parentPtr, CEGUI::Window* childPtr);
+
+#ifdef CEGUI_07
+		static CEGUI::ImagesetManager& getImageManager ();
+#else
+		static CEGUI::ImageManager& getImageManager ();
+#endif
+
+		static void loadImageset (const CEGUI::String& name);
+
+		static void addManagedImageFromFile (const CEGUI::String& name, const CEGUI::String& fileName, const CEGUI::String& resourceGroup = "");
 
 		static CEGUI::Window* getWindow (const CEGUI::String& name);
 		static CEGUI::Window* getWindowForSystem (CEGUI::System* sys, const CEGUI::String& name);
+		static CEGUI::Window* getWindowForLoadedLayout (CEGUI::Window* parentWnd, const CEGUI::String& name);
 
-		static void injectKeyDown (OIS::KeyCode myKey);
-		static void injectKeyDown (CEGUI::System* sys, OIS::KeyCode myKey);
+		static CEGUI::Window* getWindowContainingMouse (CEGUI::System* sys);
 
-		static void injectKeyUp (OIS::KeyCode myKey);
-		static void injectKeyUp (CEGUI::System* sys, OIS::KeyCode myKey);
+		static bool isWindowPresent (const CEGUI::String& name);
+		static bool isWindowPresentForSystem (CEGUI::System* sys, const CEGUI::String& name);
 
-		static void injectChar (int myKey);
-		static void injectChar (CEGUI::System* sys, int myKey);
+		static CEGUI::Window* loadLayoutFromFile (const CEGUI::String& name, const CEGUI::String& resGroup = "");
+
+		static bool injectKeyDown (OIS::KeyCode myKey);
+		static bool injectKeyDown (CEGUI::System* sys, OIS::KeyCode myKey);
+
+		static bool injectKeyUp (OIS::KeyCode myKey);
+		static bool injectKeyUp (CEGUI::System* sys, OIS::KeyCode myKey);
+
+		static bool injectChar (int myKey);
+		static bool injectChar (CEGUI::System* sys, int myKey);
 		
-		static void injectMousePosition (float x, float y);
-		static void injectMousePosition (CEGUI::System* sys, float x, float y);
+		static bool injectMousePosition (float x, float y);
+		static bool injectMousePosition (CEGUI::System* sys, float x, float y);
 
-		static void injectMouseWheelChange (float pos);
-		static void injectMouseWheelChange (CEGUI::System* sys, float pos);
+		static bool injectMouseWheelChange (float pos);
+		static bool injectMouseWheelChange (CEGUI::System* sys, float pos);
 
-		static void injectMouseButtonDown (OIS::MouseButtonID btn);
-		static void injectMouseButtonDown (CEGUI::System* sys, OIS::MouseButtonID btn);
+		static bool injectMouseButtonDown (OIS::MouseButtonID btn);
+		static bool injectMouseButtonDown (CEGUI::System* sys, OIS::MouseButtonID btn);
 
-		static void injectMouseButtonUp (OIS::MouseButtonID btn);
-		static void injectMouseButtonUp (CEGUI::System* sys, OIS::MouseButtonID btn);
+		static bool injectMouseButtonUp (OIS::MouseButtonID btn);
+		static bool injectMouseButtonUp (CEGUI::System* sys, OIS::MouseButtonID btn);
+
+		static void injectTimePulse (float timeElapsed);
+		static void injectTimePulse (CEGUI::System* sys, float timeElapsed);
+
+		static void addFont (const CEGUI::String& fontName, const CEGUI::String& resGroup);
+		static void loadScheme (const CEGUI::String& schemeName, const CEGUI::String& resGroup);
 
 		static CEGUI::MouseButton convertOISButtonToCegui (int buttonID);
 
@@ -186,9 +266,24 @@ class CEGUIUtility
 
 
 		static void setDefaultFont (const CEGUI::String& fontName);
+		static CEGUI::Font* getDefaultFont ();
 
 		static void setDefaultMouseCursor (CEGUI::System* sys, const std::string& skinName, const std::string& cursorName);
 		static void setDefaultTooltip (CEGUI::System* sys, const std::string& skinName, const std::string& cursorName);
+
+		static CEGUIUtility::Vector2f getMouseCursorPosition (CEGUI::System* sys);
+		static CEGUI::UVector2 getWidgetSize (CEGUI::Window* widget);
+
+		static void setWidgetSizeRel (CEGUI::Window* widget, float width, float height);
+		static void setWidgetSizeAbs (CEGUI::Window* widget, float width, float height);
+		static void setWidgetSize (CEGUI::Window* widget, CEGUI::UVector2 size);
+		static void setWidgetMaxSize (CEGUI::Window* widget, CEGUI::UVector2 size);
+
+
+		static void setRootSheet (CEGUI::System* sys, CEGUI::Window* widget);
+		static CEGUI::Window* getRootSheet (CEGUI::System* sys);
+
+		static void createImage (const CEGUI::String& imageName);
 
 private:
 		/**
