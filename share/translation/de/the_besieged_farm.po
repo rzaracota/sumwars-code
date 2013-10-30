@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2013-10-30 15:51+0200\n"
+"PO-Revision-Date: 2013-10-30 15:52+0200\n"
 "Last-Translator: Marcel H <hi84@live.at>\n"
 "Language-Team: German "
 "<http://hosted.weblate.org/projects/sumwars/the_besieged_farm/de/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: besieged_farm.xml:2
 msgid "The besieged farm"
-msgstr "Der belagerte Bauernhof"
+msgstr "Die belagerte Farm"
 
 #: besieged_farm.xml:5
 msgid ""
