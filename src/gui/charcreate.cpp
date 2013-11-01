@@ -22,6 +22,10 @@
 // Sound operations helper.
 #include "soundhelper.h"
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
+
+
 CharCreate::CharCreate (Document* doc, const std::string& ceguiSkinName)
 	: Window (doc)
 	, m_ceguiSkinName (ceguiSkinName)
@@ -33,41 +37,41 @@ CharCreate::CharCreate (Document* doc, const std::string& ceguiSkinName)
 	
 
 	// Rahmen fuer das Menue Savegame auswaehlen
-	CEGUI::FrameWindow* char_create = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("charcreate.layout");
+	CEGUI::FrameWindow* char_create = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("charcreate.layout");
 	m_window = char_create;
 	m_window->setMousePassThroughEnabled(true);
 	
 	// pin the the window below the StartMenuRoot to allow display along with MainMenu Elements
-	CEGUI::FrameWindow* start_menu = (CEGUI::FrameWindow*) win_mgr.getWindow("StartMenuRoot");
-	start_menu->addChildWindow(char_create);
+	CEGUI::FrameWindow* start_menu = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("StartMenuRoot");
+	CEGUIUtility::addChildWidget(start_menu, char_create);
 	
 	// Bestandteile der Kontrollleiste hinzufuegen
 	CEGUI::PushButton* btn;
 	CEGUI::Editbox* namebox;
 	
-	namebox = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("NameBox"));
+	namebox = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow("NameBox"));
 	namebox->setWantsMultiClickEvents(false);
 	namebox->setMaxTextLength(31);
 	namebox->subscribeEvent(CEGUI::Editbox::EventMouseClick, CEGUI::Event::Subscriber(&CharCreate::onGUIItemClick, this));
 	
-	CEGUI::Listbox* classlist = (CEGUI::Listbox*) win_mgr.getWindow("ClassList");
+	CEGUI::Listbox* classlist = (CEGUI::Listbox*) CEGUIUtility::getWindow("ClassList");
 	classlist->subscribeEvent(CEGUI::Listbox::EventSelectionChanged, CEGUI::Event::Subscriber(&CharCreate::onClassSelected, this));
-	classlist->subscribeEvent(CEGUI::Listbox::EventMouseEnters, CEGUI::Event::Subscriber(&CharCreate::onGUIItemHover, this));
+	classlist->subscribeEvent(CEGUIUtility::EventMouseEntersListBoxArea (), CEGUI::Event::Subscriber(&CharCreate::onGUIItemHover, this));
 
-	CEGUI::Listbox* looklist = (CEGUI::Listbox*) win_mgr.getWindow("LookList");
+	CEGUI::Listbox* looklist = (CEGUI::Listbox*) CEGUIUtility::getWindow("LookList");
 	looklist->subscribeEvent(CEGUI::Listbox::EventSelectionChanged, CEGUI::Event::Subscriber(&CharCreate::onLookSelected, this));
-	looklist->subscribeEvent(CEGUI::Listbox::EventMouseEnters, CEGUI::Event::Subscriber(&CharCreate::onGUIItemHover, this));
+	looklist->subscribeEvent(CEGUIUtility::EventMouseEntersListBoxArea (), CEGUI::Event::Subscriber(&CharCreate::onGUIItemHover, this));
 
 	// Button Savegame akzeptieren
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("AbortButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("AbortButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&CharCreate::onButtonAbort, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&CharCreate::onGUIItemHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&CharCreate::onGUIItemHover, this));
 	btn->setWantsMultiClickEvents(false);
 	
 	// Button neu
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CharCreateButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("CharCreateButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&CharCreate::onButtonCharCreate, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&CharCreate::onGUIItemHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&CharCreate::onGUIItemHover, this));
 	btn->setWantsMultiClickEvents(false);
 	
 	updateTranslation();
@@ -78,7 +82,7 @@ void CharCreate::update()
 {
 	// aktuell gewaehlte Klasse ermitteln
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Listbox* classlist = (CEGUI::Listbox*) win_mgr.getWindow("ClassList");
+	CEGUI::Listbox* classlist = (CEGUI::Listbox*) CEGUIUtility::getWindow("ClassList");
 	CEGUI::ListboxItem * itm = classlist->getFirstSelectedItem();
 	
 	if (itm !=0)
@@ -90,7 +94,7 @@ void CharCreate::update()
 		std::list< PlayerLook >::iterator it;
 		ObjectFactory::getPlayerLooks(sitm->m_data,looks);
 		
-		CEGUI::Listbox* looklist = (CEGUI::Listbox*) win_mgr.getWindow("LookList");
+		CEGUI::Listbox* looklist = (CEGUI::Listbox*) CEGUIUtility::getWindow("LookList");
 		looklist->resetList();
 		
 		for (it = looks.begin(); it !=	looks.end(); ++it)
@@ -106,23 +110,23 @@ void CharCreate::updateTranslation()
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
 	
-	label = win_mgr.getWindow("CharNameLabel");
+	label = CEGUIUtility::getWindow("CharNameLabel");
 	label->setText((CEGUI::utf8*) gettext("Name"));
 	
-	label = win_mgr.getWindow("CharClassLabel");
+	label = CEGUIUtility::getWindow("CharClassLabel");
 	label->setText((CEGUI::utf8*) gettext("Class"));
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("AbortButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("AbortButton"));
 	btn->setText((CEGUI::utf8*) gettext("Cancel"));
 
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CharCreateButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("CharCreateButton"));
 	btn->setText((CEGUI::utf8*) gettext("Create"));
 }
 
 void CharCreate::updateClassList()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Listbox* classlist = (CEGUI::Listbox*) win_mgr.getWindow("ClassList");
+	CEGUI::Listbox* classlist = (CEGUI::Listbox*) CEGUIUtility::getWindow("ClassList");
 	classlist->resetList();
 	
 	std::map<GameObject::Subtype, PlayerBasicData*>& pcdata = ObjectFactory::getPlayerData();
@@ -143,7 +147,7 @@ void CharCreate::updateClassList()
 bool CharCreate::onClassSelected(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Listbox* classlist = (CEGUI::Listbox*) win_mgr.getWindow("ClassList");
+	CEGUI::Listbox* classlist = (CEGUI::Listbox*) CEGUIUtility::getWindow("ClassList");
 	CEGUI::ListboxItem * itm = classlist->getFirstSelectedItem();
 
 	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
@@ -155,7 +159,7 @@ bool CharCreate::onClassSelected(const CEGUI::EventArgs& evt)
 	
 	update();
 	
-	CEGUI::Listbox* looklist = (CEGUI::Listbox*) win_mgr.getWindow("LookList");
+	CEGUI::Listbox* looklist = (CEGUI::Listbox*) CEGUIUtility::getWindow("LookList");
 	if (looklist->getItemCount() >0)
 	{
 		int idx =0;
@@ -169,7 +173,7 @@ bool CharCreate::onClassSelected(const CEGUI::EventArgs& evt)
 bool CharCreate::onLookSelected(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Listbox* classlist = (CEGUI::Listbox*) win_mgr.getWindow("LookList");
+	CEGUI::Listbox* classlist = (CEGUI::Listbox*) CEGUIUtility::getWindow("LookList");
 	CEGUI::ListboxItem * itm = classlist->getFirstSelectedItem();
 
 	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
@@ -179,13 +183,13 @@ bool CharCreate::onLookSelected(const CEGUI::EventArgs& evt)
 		StrListItem * sitm = (StrListItem *) itm;
 		DEBUGX("selected look %s", sitm->m_data.c_str());
 		
-		CEGUI::Listbox* classlist = (CEGUI::Listbox*) win_mgr.getWindow("ClassList");
+		CEGUI::Listbox* classlist = (CEGUI::Listbox*) CEGUIUtility::getWindow("ClassList");
 		CEGUI::ListboxItem * itm2 = classlist->getFirstSelectedItem();
 		StrListItem * sitm2 = (StrListItem *) itm2;
 		
 		if (sitm2 == 0)
 		{
-			CEGUI::Listbox* looklist = (CEGUI::Listbox*) win_mgr.getWindow("LookList");
+			CEGUI::Listbox* looklist = (CEGUI::Listbox*) CEGUIUtility::getWindow("LookList");
 			looklist->resetList();
 			return true;
 		}
@@ -207,7 +211,7 @@ bool CharCreate::onButtonAbort(const CEGUI::EventArgs& evt)
 
 	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
 
-	namebox = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("NameBox"));
+	namebox = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow("NameBox"));
 	namebox->setText("");
 	
 	m_document->getGUIState()->m_shown_windows = Document::START_MENU;
@@ -222,7 +226,7 @@ bool CharCreate::onButtonCharCreate(const CEGUI::EventArgs& evt)
 
 	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
 
-	namebox = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("NameBox"));
+	namebox = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow("NameBox"));
 	std::string name = namebox->getText().c_str();
 	
 	// check if name is empty
@@ -230,11 +234,11 @@ bool CharCreate::onButtonCharCreate(const CEGUI::EventArgs& evt)
 	{
 		namebox ->activate();
 		
-		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("WarningDialogWindow");
+		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("WarningDialogWindow");
 		message->setInheritsAlpha(false);
 		message->setVisible(true);
 		message->setModalState(true);
-		win_mgr.getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("You must enter a hero name!"));
+		CEGUIUtility::getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("You must enter a hero name!"));
 		
 		return true;
 	}
@@ -246,11 +250,11 @@ bool CharCreate::onButtonCharCreate(const CEGUI::EventArgs& evt)
 	{
 		namebox ->activate();
 		
-		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("WarningDialogWindow");
+		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("WarningDialogWindow");
 		message->setInheritsAlpha(false);
 		message->setVisible(true);
 		message->setModalState(true);
-		win_mgr.getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("A character with that name already exists!"));
+		CEGUIUtility::getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("A character with that name already exists!"));
 		
 		return true;
 	}

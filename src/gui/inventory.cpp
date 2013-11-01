@@ -19,6 +19,9 @@
 // Helper for sound operations
 #include "soundhelper.h"
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
+
 Inventory::Inventory (Document* doc)
 	: ItemWindow(doc)
 {
@@ -26,13 +29,13 @@ Inventory::Inventory (Document* doc)
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
-	CEGUI::Window* inventory = win_mgr.loadWindowLayout("inventory.layout");
+	CEGUI::Window* inventory = CEGUIUtility::loadLayoutFromFile ("inventory.layout");
 	if (!inventory)
 	{
 		DEBUG ("WARNING: Failed to load [%s]", "inventory.layout");
 	}
 
-	CEGUI::Window* inv_holder = win_mgr.loadWindowLayout( "inventory_holder.layout" );
+	CEGUI::Window* inv_holder = CEGUIUtility::loadLayoutFromFile ("inventory_holder.layout");
 	if (!inv_holder)
 	{
 		DEBUG ("WARNING: Failed to load [%s]", "inventory_holder.layout");
@@ -41,13 +44,14 @@ Inventory::Inventory (Document* doc)
 	DEBUG ("Placing layout into holder");
 	inventory->setVisible (true);
 	inv_holder->setVisible (true);
-	//inv_holder->addChildWindow (inventory);
+	//CEGUIUtility::addChildWidget (inv_holder, inventory);
 
-	CEGUI::Window* wndHolder = win_mgr.getWindow("Inventory_Holder");
-	CEGUI::Window* wndInventory = win_mgr.getWindow("Inventory");
+
+	CEGUI::Window* wndHolder = CEGUIUtility::getWindow ("Inventory_Holder");
+	CEGUI::Window* wndInventory = CEGUIUtility::getWindow ("Inventory");
 	if (wndHolder && wndInventory)
 	{
-		wndHolder->addChildWindow (wndInventory);
+		CEGUIUtility::addChildWidget (wndHolder, wndInventory);
 	}
 	else
 	{
@@ -65,7 +69,7 @@ Inventory::Inventory (Document* doc)
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
 	
-	label = win_mgr.getWindow("CharacterImage");
+	label = CEGUIUtility::getWindow ("CharacterImage");
 	label->setProperty("Image", "set:character image:character_img"); 
 	label->setID(Equipement::NONE);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
@@ -79,11 +83,11 @@ Inventory::Inventory (Document* doc)
 	{
 		outStream.str("");
 		outStream << "BigItem" << i<< "Label";
-		label = win_mgr.getWindow(outStream.str());
+		label = CEGUIUtility::getWindow (outStream.str());
 		label->setID(Equipement::BIG_ITEMS+i);
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
-		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
+		label->subscribeEvent(CEGUIUtility::EventMouseEntersWindowArea (), CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
 		label->setWantsMultiClickEvents(false);
 	}
 
@@ -94,11 +98,11 @@ Inventory::Inventory (Document* doc)
 		{
 			outStream.str("");
 			outStream << "MediumItem" << j*6+i<< "Label";
-			label = win_mgr.getWindow(outStream.str());
+			label = CEGUIUtility::getWindow (outStream.str());
 			label->setID(Equipement::MEDIUM_ITEMS+j*6+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
-			label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
+			label->subscribeEvent(CEGUIUtility::EventMouseEntersWindowArea (), CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
 			label->setWantsMultiClickEvents(false);
 		}
 	}
@@ -109,11 +113,11 @@ Inventory::Inventory (Document* doc)
 		{
 			outStream.str("");
 			outStream << "SmallItem" << j*10+i<< "Label";
-			label = win_mgr.getWindow(outStream.str());
+			label = CEGUIUtility::getWindow (outStream.str());
 			label->setID(Equipement::SMALL_ITEMS+j*10+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
-			label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
+			label->subscribeEvent(CEGUIUtility::EventMouseEntersWindowArea (), CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
 			label->setWantsMultiClickEvents(false);
 		}
 	}
@@ -121,110 +125,110 @@ Inventory::Inventory (Document* doc)
 
 
 	// Label Ruestung
-	label = win_mgr.getWindow("ArmorItemLabel");
+	label = CEGUIUtility::getWindow ("ArmorItemLabel");
 	label->setID(Equipement::ARMOR);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
-	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
+	label->subscribeEvent(CEGUIUtility::EventMouseEntersWindowArea (), CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
 	label->setWantsMultiClickEvents(false);
 
 
 	// Label Waffe
-	label = win_mgr.getWindow("WeaponItemLabel");
+	label = CEGUIUtility::getWindow ("WeaponItemLabel");
 	label->setID(Equipement::WEAPON);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
-	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
+	label->subscribeEvent(CEGUIUtility::EventMouseEntersWindowArea (), CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
 	label->setWantsMultiClickEvents(false);
 	
 	// Label Helm
-	label = win_mgr.getWindow("HelmetItemLabel");
+	label = CEGUIUtility::getWindow ("HelmetItemLabel");
 	label->setID(Equipement::HELMET);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
-	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
+	label->subscribeEvent(CEGUIUtility::EventMouseEntersWindowArea (), CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
 	label->setWantsMultiClickEvents(false);
 	
 	// Label Schild
-	label = win_mgr.getWindow("ShieldItemLabel");
+	label = CEGUIUtility::getWindow ("ShieldItemLabel");
 	label->setID(Equipement::SHIELD);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
-	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
+	label->subscribeEvent(CEGUIUtility::EventMouseEntersWindowArea (), CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*) this));
 	label->setWantsMultiClickEvents(false);
 	
 	// Label Handschuhe
-	label = win_mgr.getWindow("GlovesItemLabel");
+	label = CEGUIUtility::getWindow ("GlovesItemLabel");
 	label->setID(Equipement::GLOVES);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
-	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*)this));
+	label->subscribeEvent(CEGUIUtility::EventMouseEntersWindowArea (), CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*)this));
 	label->setWantsMultiClickEvents(false);
 	
 	// Ring links
-	label = win_mgr.getWindow("RingLeftItemLabel");
+	label = CEGUIUtility::getWindow ("RingLeftItemLabel");
 	label->setID(Equipement::RING_LEFT);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
-	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*)this));
+	label->subscribeEvent(CEGUIUtility::EventMouseEntersWindowArea (), CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*)this));
 	label->setWantsMultiClickEvents(false);
 	
 	// Ring rechts
-	label = win_mgr.getWindow("RingRightItemLabel");
+	label = CEGUIUtility::getWindow ("RingRightItemLabel");
 	label->setID(Equipement::RING_RIGHT);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
-	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*)this));
+	label->subscribeEvent(CEGUIUtility::EventMouseEntersWindowArea (), CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*)this));
 	label->setWantsMultiClickEvents(false);
 	
 	// Amulett
-	label = win_mgr.getWindow("AmuletItemLabel");
+	label = CEGUIUtility::getWindow ("AmuletItemLabel");
 	label->setID(Equipement::AMULET);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
-	label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*)this));
+	label->subscribeEvent(CEGUIUtility::EventMouseEntersWindowArea (), CEGUI::Event::Subscriber(&Inventory::onItemHover, (ItemWindow*)this));
 	label->setWantsMultiClickEvents(false);
 	
 	// Swap weapons button
-	if (win_mgr.isWindowPresent ("SwapEquipButton"))
+	if (CEGUIUtility::isWindowPresent ("SwapEquipButton"))
 	{
-		btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow ("SwapEquipButton"));
+		btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("SwapEquipButton"));
 		btn->setText ("1");
 		btn->subscribeEvent (CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber (&Inventory::onSwapEquipClicked, this));
 	}
 
 	// Label drop Gold
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("GoldDropButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("GoldDropButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked,CEGUI::Event::Subscriber(&Inventory::onDropGoldClicked, this));
 	
 	
 	// Label drop Gold (Wert)
 	CEGUI::Editbox* box;
-	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("GoldDropValueBox"));
+	box = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow ("GoldDropValueBox"));
 	box->subscribeEvent(CEGUI::Editbox::EventTextAccepted, CEGUI::Event::Subscriber(&Inventory::onDropGoldClicked,  this));
 	
 	
 	// Tab Labels
 	setState(Inventory::StateSmall);
 
-	//if (win_mgr.isWindowPresent ("SmallTabButton") 
-	//	&& win_mgr.isWindowPresent ("MediumTabButton") 
-	//	&& win_mgr.isWindowPresent ("BigTabButton"))
+	//if (CEGUIUtility::isWindowPresent ("SmallTabButton") 
+	//	&& CEGUIUtility::isWindowPresent ("MediumTabButton") 
+	//	&& CEGUIUtility::isWindowPresent ("BigTabButton"))
 	//{
 	//	CEGUI::TabButton *tabBtn;
-	//	tabBtn = static_cast<CEGUI::TabButton*> (win_mgr.getWindow("SmallTabButton"));
+	//	tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("SmallTabButton"));
 	//}
 
-	label = win_mgr.getWindow("SmallTabButton");
+	label = CEGUIUtility::getWindow ("SmallTabButton");
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onSwitchTabClicked, this));
-	label = win_mgr.getWindow("MediumTabButton");
+	label = CEGUIUtility::getWindow ("MediumTabButton");
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onSwitchTabClicked, this));
-	label = win_mgr.getWindow("BigTabButton");
+	label = CEGUIUtility::getWindow ("BigTabButton");
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onSwitchTabClicked, this));
 	
-	if (win_mgr.isWindowPresent ("InvCloseButton"))
+	if (CEGUIUtility::isWindowPresent ("InvCloseButton"))
 	{
-		label = win_mgr.getWindow("InvCloseButton");
+		label = CEGUIUtility::getWindow ("InvCloseButton");
 		if (label)
 		{
 			label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onCloseButtonClicked, this));
@@ -232,9 +236,9 @@ Inventory::Inventory (Document* doc)
 	}
 	else
 	{
-		if (win_mgr.isWindowPresent ("Inventory__auto_closebutton__"))
+		if (CEGUIUtility::isWindowPresent ("Inventory__auto_closebutton__"))
 		{
-			label = win_mgr.getWindow ("Inventory__auto_closebutton__");
+			label = CEGUIUtility::getWindow ("Inventory__auto_closebutton__");
 			if (label)
 			{
 				label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onCloseButtonClicked, this));
@@ -268,7 +272,7 @@ void Inventory::update()
 
 
 	// Weapon - Label/Slot
-	img =  win_mgr.getWindow("WeaponItemLabel");
+	img =  CEGUIUtility::getWindow ("WeaponItemLabel");
 	it = player->getWeapon();
 	updateItemWindow(img,it,player);
 	weapon = it;
@@ -280,21 +284,21 @@ void Inventory::update()
 
 
 	// Body armor - Label/Slot
-	img =  win_mgr.getWindow("ArmorItemLabel");
+	img =  CEGUIUtility::getWindow ("ArmorItemLabel");
 	it = equ->getItem(Equipement::ARMOR);
 	updateItemWindow(img,it,player);
 	
 
 
 	// Helm - Label/Slot
-	img =  win_mgr.getWindow("HelmetItemLabel");
+	img =  CEGUIUtility::getWindow ("HelmetItemLabel");
 	it = equ->getItem(Equipement::HELMET);
 	updateItemWindow(img,it,player);
 	
 	// Shield - Label/Slot
 	// for two handed weapons this will represent the weapon.
 	float alpha = 1.0;
-	img =  win_mgr.getWindow("ShieldItemLabel");
+	img =  CEGUIUtility::getWindow ("ShieldItemLabel");
 	it = player->getShield();
 	if (two_hand && it ==0)
 	{
@@ -310,31 +314,31 @@ void Inventory::update()
 	
 
 	// Handgloves - Label/Slot
-	img =  win_mgr.getWindow("GlovesItemLabel");
+	img =  CEGUIUtility::getWindow ("GlovesItemLabel");
 	it = equ->getItem(Equipement::GLOVES);
 	updateItemWindow(img,it,player);
 	
 	// Left hand ring - Label/Slot
-	img =  win_mgr.getWindow("RingLeftItemLabel");
+	img =  CEGUIUtility::getWindow ("RingLeftItemLabel");
 	it = equ->getItem(Equipement::RING_LEFT);
 	updateItemWindow(img,it,player);
 	
 	// Right hand ring - Label/Slot
-	img =  win_mgr.getWindow("RingRightItemLabel");
+	img =  CEGUIUtility::getWindow ("RingRightItemLabel");
 	it = equ->getItem(Equipement::RING_RIGHT);
 	updateItemWindow(img,it,player);
 	
 
 	// Amulet - Label/Slot
-	img =  win_mgr.getWindow("AmuletItemLabel");
+	img =  CEGUIUtility::getWindow ("AmuletItemLabel");
 	it = equ->getItem(Equipement::AMULET);
 	updateItemWindow(img,it,player);
 	
 	
 	// Swap button - this will also display the state of the current weapon selection.
-	if (win_mgr.isWindowPresent ("SwapEquipButton"))
+	if (CEGUIUtility::isWindowPresent ("SwapEquipButton"))
 	{
-		btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SwapEquipButton"));
+		btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("SwapEquipButton"));
 		std::string text;// = "set:Inventory image:WeaponSwitchState1";
 		if (player->isUsingSecondaryEquip())
 		{
@@ -369,7 +373,7 @@ void Inventory::update()
 	{
 		out_stream.str("");
 		out_stream << "BigItem" << i<< "Label";
-		img =  win_mgr.getWindow(out_stream.str().c_str());
+		img =  CEGUIUtility::getWindow (out_stream.str().c_str());
 		it = equ->getItem(Equipement::BIG_ITEMS+i);
 		updateItemWindow(img,it,player);
 	}
@@ -379,7 +383,7 @@ void Inventory::update()
 	{
 		out_stream.str("");
 		out_stream << "MediumItem" << i<< "Label";
-		img =  win_mgr.getWindow(out_stream.str().c_str());
+		img =  CEGUIUtility::getWindow (out_stream.str().c_str());
 		it = equ->getItem(Equipement::MEDIUM_ITEMS+i);
 		updateItemWindow(img,it,player);
 	}
@@ -389,12 +393,12 @@ void Inventory::update()
 	{
 		out_stream.str("");
 		out_stream << "SmallItem" << i<< "Label";
-		img =  win_mgr.getWindow(out_stream.str().c_str());
+		img =  CEGUIUtility::getWindow (out_stream.str().c_str());
 		it = equ->getItem(Equipement::SMALL_ITEMS+i);
 		updateItemWindow(img,it,player);
 	}
 	
-	label =  win_mgr.getWindow("GoldValueLabel");
+	label =  CEGUIUtility::getWindow ("GoldValueLabel");
 	out_stream.str("");
 	out_stream << equ->getGold();
 	if (label->getText()!=out_stream.str())
@@ -417,52 +421,52 @@ void Inventory::setState(State s)
 	if(s == Inventory::StateSmall)
 	{
 		CEGUI::TabButton *tabBtn;
-		tabBtn = static_cast<CEGUI::TabButton*> (win_mgr.getWindow ("SmallTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("SmallTabButton"));
 		tabBtn->setSelected (true);
-		tabBtn = static_cast<CEGUI::TabButton*> (win_mgr.getWindow ("MediumTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("MediumTabButton"));
 		tabBtn->setSelected (false);
-		tabBtn = static_cast<CEGUI::TabButton*> (win_mgr.getWindow ("BigTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("BigTabButton"));
 		tabBtn->setSelected (false);
 
-		label = win_mgr.getWindow("SmallTabMain");
+		label = CEGUIUtility::getWindow ("SmallTabMain");
 		label->setVisible(true);
-		label = win_mgr.getWindow("MediumTabMain");
+		label = CEGUIUtility::getWindow ("MediumTabMain");
 		label->setVisible(false);
-		label = win_mgr.getWindow("BigTabMain");
+		label = CEGUIUtility::getWindow ("BigTabMain");
 		label->setVisible(false);
 	}
 	else if(s == Inventory::StateMedium)
 	{
 		CEGUI::TabButton *tabBtn;
-		tabBtn = static_cast<CEGUI::TabButton*> (win_mgr.getWindow ("SmallTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("SmallTabButton"));
 		tabBtn->setSelected (false);
-		tabBtn = static_cast<CEGUI::TabButton*> (win_mgr.getWindow ("MediumTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("MediumTabButton"));
 		tabBtn->setSelected (true);
-		tabBtn = static_cast<CEGUI::TabButton*> (win_mgr.getWindow ("BigTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("BigTabButton"));
 		tabBtn->setSelected (false);
 
-		label = win_mgr.getWindow("SmallTabMain");
+		label = CEGUIUtility::getWindow ("SmallTabMain");
 		label->setVisible(false);
-		label = win_mgr.getWindow("MediumTabMain");
+		label = CEGUIUtility::getWindow ("MediumTabMain");
 		label->setVisible(true);
-		label = win_mgr.getWindow("BigTabMain");
+		label = CEGUIUtility::getWindow ("BigTabMain");
 		label->setVisible(false);
 	}
 	else if(s == Inventory::StateBig)
 	{
 		CEGUI::TabButton *tabBtn;
-		tabBtn = static_cast<CEGUI::TabButton*> (win_mgr.getWindow ("SmallTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("SmallTabButton"));
 		tabBtn->setSelected (false);
-		tabBtn = static_cast<CEGUI::TabButton*> (win_mgr.getWindow ("MediumTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("MediumTabButton"));
 		tabBtn->setSelected (false);
-		tabBtn = static_cast<CEGUI::TabButton*> (win_mgr.getWindow ("BigTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("BigTabButton"));
 		tabBtn->setSelected (true);
 
-		label = win_mgr.getWindow("SmallTabMain");
+		label = CEGUIUtility::getWindow ("SmallTabMain");
 		label->setVisible(false);
-		label = win_mgr.getWindow("MediumTabMain");
+		label = CEGUIUtility::getWindow ("MediumTabMain");
 		label->setVisible(false);
-		label = win_mgr.getWindow("BigTabMain");
+		label = CEGUIUtility::getWindow ("BigTabMain");
 		label->setVisible(true);
 	}
 }
@@ -472,30 +476,30 @@ void Inventory::updateTranslation()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	
-	label = win_mgr.getWindow("GoldDropButton");
+	label = CEGUIUtility::getWindow ("GoldDropButton");
 	label->setText((CEGUI::utf8*) gettext("Drop:"));
 	
-	if (win_mgr.isWindowPresent ("InvLabel"))
+	if (CEGUIUtility::isWindowPresent ("InvLabel"))
 	{
-		label = win_mgr.getWindow("InvLabel");
+		label = CEGUIUtility::getWindow ("InvLabel");
 		label->setText((CEGUI::utf8*) gettext("Inventory"));
 	}
 	else
 	{
-		label = win_mgr.getWindow ("Inventory");
+		label = CEGUIUtility::getWindow ("Inventory");
 		if (label)
 		{
 			label->setText((CEGUI::utf8*) gettext("Inventory"));
 		}
 	}
 	
-	label = win_mgr.getWindow("SmallTabButton");
+	label = CEGUIUtility::getWindow ("SmallTabButton");
 	label->setText((CEGUI::utf8*) gettext("Small"));
 	
-	label = win_mgr.getWindow("MediumTabButton");
+	label = CEGUIUtility::getWindow ("MediumTabButton");
 	label->setText((CEGUI::utf8*) gettext("Medium"));
 	
-	label = win_mgr.getWindow("BigTabButton");
+	label = CEGUIUtility::getWindow ("BigTabButton");
 	label->setText((CEGUI::utf8*) gettext("Big"));
 
 }
@@ -512,7 +516,7 @@ bool Inventory::onDropGoldClicked(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
-	CEGUI::Editbox* gold = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("GoldDropValueBox"));
+	CEGUI::Editbox* gold = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow ("GoldDropValueBox"));
 	int val =0;
 	std::stringstream stream;
 	stream.str(gold->getText().c_str());
@@ -566,21 +570,21 @@ void Inventory::createAnimations()
 	CEGUI::AnimationManager::getSingleton().loadAnimationsFromXML("InventoryAnimations.xml");
 	
 	// Small tab animations
-	label = win_mgr.getWindow("SmallTabMain");
+	label = CEGUIUtility::getWindow ("SmallTabMain");
 	CEGUI::AnimationInstance* instance = CEGUI::AnimationManager::getSingleton().instantiateAnimation("SlotFadeIn");
 	instance->setTargetWindow(label);
     instance->start();
 	label->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&CEGUI::AnimationInstance::handleStart, instance));
 
 	// Medium tab animations
-	label = win_mgr.getWindow("MediumTabMain");
+	label = CEGUIUtility::getWindow ("MediumTabMain");
 	instance = CEGUI::AnimationManager::getSingleton().instantiateAnimation("SlotFadeIn");
 	instance->setTargetWindow(label);
     instance->start();
 	label->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&CEGUI::AnimationInstance::handleStart, instance));
 
 	// Big tab animations
-	label = win_mgr.getWindow("BigTabMain");
+	label = CEGUIUtility::getWindow ("BigTabMain");
 	instance = CEGUI::AnimationManager::getSingleton().instantiateAnimation("SlotFadeIn");
 	instance->setTargetWindow(label);
     instance->start();

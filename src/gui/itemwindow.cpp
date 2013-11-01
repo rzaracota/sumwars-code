@@ -221,10 +221,10 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 	// Fenstermanager
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	if (win_mgr.isWindowPresent(windowname))
+	if (CEGUIUtility::isWindowPresent (windowname))
 	{
 		// update progress bar to reflect item timer
-		CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( windowname));
+		CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow (windowname));
 		double progress = 0;
 		if (item != 0 && item->m_consumable && item->m_consume_timer_nr != 0)
 		{
@@ -276,7 +276,7 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	if ( item == 0 )
 		return;
 
-	CEGUI::Font *font = img->getTooltip()->getFont();
+	const CEGUI::Font *font = img->getTooltip()->getFont();
 	std::string msg;
 	ItemRequirementsMet irm = player->checkItemRequirements ( item );
 	

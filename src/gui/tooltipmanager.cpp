@@ -26,13 +26,14 @@ TooltipManager::TooltipManager():
 	m_timeVisible(0),
 	m_fadeInTime(0),
 	m_fadeOutTime(0),
-	m_toolTipsCreatedCount(0),
-	m_DefaultFont(CEGUI::System::getSingleton().getDefaultFont())
-{}
-
-void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string > list, float timeVisible, CEGUI::Font* font, Tooltip::TooltipType type )
+	m_toolTipsCreatedCount(0)
 {
-	CEGUI::Window *gamescreen = CEGUI::WindowManager::getSingleton().getWindow("GameScreen");
+	m_DefaultFont = CEGUIUtility::getDefaultFont ();
+}
+
+void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string > list, float timeVisible, const CEGUI::Font* font, Tooltip::TooltipType type )
+{
+	CEGUI::Window *gamescreen = CEGUIUtility::getWindow ("GameScreen");
     std::string msg;
     CEGUI::UVector2 size;
     std::ostringstream windowName;
@@ -42,12 +43,14 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
     if ( font )
     {
         size = CEGUIUtility::getWindowSizeForText ( list, font, msg );
-        tempFont = font;
+        tempFont = const_cast<CEGUI::Font*> (font);
     }
     else
         size = CEGUIUtility::getWindowSizeForText ( list, m_DefaultFont, msg );
 
-    CEGUI::Vector2 mousePos = CEGUI::MouseCursor::getSingleton().getPosition();
+	// TODO: maybe store mouse position using own class?
+	CEGUIUtility::Vector2f mousePos = CEGUIUtility::getMouseCursorPosition (m_CEGUISystem);
+    //CEGUI::Vector2 mousePos = CEGUI::MouseCursor::getSingleton().getPosition();
     CEGUI::Renderer *rend = m_CEGUISystem->getRenderer();
     CEGUI::UVector2 position = CEGUI::UVector2 ( CEGUI::UDim ( 0, 20 ), CEGUI::UDim ( 0, 20 ) );
 
@@ -60,7 +63,7 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
         fadeAllOut();
         m_CurrentMain = tt;
         tt->create ( msg, position, size, tempFont );
-        win->subscribeEvent ( CEGUI::Window::EventMouseLeaves, CEGUI::Event::Subscriber ( &TooltipManager::handleMouseLeave, this ) );
+        win->subscribeEvent (CEGUIUtility::EventMouseLeavesWindowArea (), CEGUI::Event::Subscriber ( &TooltipManager::handleMouseLeave, this ) );
         m_Tooltips[windowName.str() ] = tt;
         m_toolTipsCreatedCount++;
     }
@@ -167,7 +170,8 @@ void TooltipManager::update ( float timeSinceLastUpdate )
 
         if ( tt->isDead() )
         {
-            CEGUI::WindowManager::getSingleton().destroyWindow ( tt->getName() );
+			CEGUI::Window* ttWnd = CEGUIUtility::getWindow (tt->getName ());
+            CEGUI::WindowManager::getSingleton().destroyWindow (ttWnd);
             m_Tooltips.erase ( iter++ );
             delete tt;
         }
