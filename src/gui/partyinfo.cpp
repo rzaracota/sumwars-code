@@ -27,7 +27,8 @@ PartyInfo::PartyInfo (Document* doc, const std::string& ceguiSkinName)
 	m_window = party_info;
 	
 	party_info->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f)));
-	party_info->setSize(CEGUI::UVector2(cegui_reldim(0.48f), cegui_reldim( 0.77f)));
+	CEGUIUtility::setWidgetSizeRel (party_info, 0.48f, 0.77f);
+
 	party_info->setProperty("FrameEnabled","false");
 	party_info->setProperty("TitlebarEnabled","false");
 	party_info->setProperty("CloseButtonEnabled","false");
@@ -47,12 +48,12 @@ PartyInfo::PartyInfo (Document* doc, const std::string& ceguiSkinName)
 		stream << i;
 		
 		img = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"),stream.str());
-		party_info->addChildWindow(img);
+		CEGUIUtility::addChildWidget (party_info, img);
 		img->setProperty("InheritsAlpha", "false");
 		img->setProperty("FrameEnabled", "false");
 		img->setProperty("BackgroundEnabled", "false");
 		img->setPosition(CEGUI::UVector2(cegui_reldim(0.01f), cegui_reldim( 0.01f + 0.12f *i)));
-		img->setSize(CEGUI::UVector2(cegui_reldim(0.13f), cegui_reldim( 0.1f)));
+		CEGUIUtility::setWidgetSizeRel (img, 0.13f, 0.1f);
 		img->setID(i);
 		
 		stream.str("");
@@ -60,12 +61,12 @@ PartyInfo::PartyInfo (Document* doc, const std::string& ceguiSkinName)
 		stream << i;
 		
 		label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), stream.str());
-		party_info->addChildWindow(label);
+		CEGUIUtility::addChildWidget (party_info, label);
 		label->setProperty("InheritsAlpha", "false");
 		label->setProperty("FrameEnabled", "false");
 		label->setProperty("BackgroundEnabled", "false");
 		label->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.01f+ 0.12f *i)));
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.06f), cegui_reldim( 0.1f)));
+		CEGUIUtility::setWidgetSizeRel (label, 0.06f, 0.1f);
 		label->setText("0");
 		
 		stream.str("");
@@ -73,12 +74,12 @@ PartyInfo::PartyInfo (Document* doc, const std::string& ceguiSkinName)
 		stream << i;
 		
 		label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), stream.str());
-		party_info->addChildWindow(label);
+		CEGUIUtility::addChildWidget (party_info, label);
 		label->setProperty("InheritsAlpha", "false");
 		label->setProperty("FrameEnabled", "false");
 		label->setProperty("BackgroundEnabled", "false");
 		label->setPosition(CEGUI::UVector2(cegui_reldim(0.21f), cegui_reldim( 0.01f+ 0.12f *i)));
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.30f), cegui_reldim( 0.1f)));
+		CEGUIUtility::setWidgetSizeRel (label, 0.30f, 0.1f);
 		label->setText("Name");
 		
 		stream.str("");
@@ -86,12 +87,12 @@ PartyInfo::PartyInfo (Document* doc, const std::string& ceguiSkinName)
 		stream << i;
 		
 		label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), stream.str());
-		party_info->addChildWindow(label);
+		CEGUIUtility::addChildWidget (party_info, label);
 		label->setProperty("InheritsAlpha", "false");
 		label->setProperty("FrameEnabled", "false");
 		label->setProperty("BackgroundEnabled", "false");
 		label->setPosition(CEGUI::UVector2(cegui_reldim(0.53f), cegui_reldim( 0.01f + 0.12f *i)));
-		label->setSize(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.1f)));
+		CEGUIUtility::setWidgetSizeRel (label, 0.15f, 0.1f);
 		label->setText("Klasse");
 		
 		stream.str("");
@@ -99,10 +100,10 @@ PartyInfo::PartyInfo (Document* doc, const std::string& ceguiSkinName)
 		stream << i;
 		
 		btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "Button"), stream.str() ));
-		party_info->addChildWindow(btn);
+		CEGUIUtility::addChildWidget (party_info, btn);
 		btn->setProperty("InheritsAlpha", "false");
 		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.7), cegui_reldim( 0.02f + 0.12f *i)));
-		btn->setSize(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.08f)));
+		CEGUIUtility::setWidgetSizeRel (btn, 0.12f, 0.08f);
 		btn->setText("A");
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PartyInfo::onAcceptMemberButtonClicked, this));
 		btn->setWantsMultiClickEvents(false);
@@ -113,10 +114,10 @@ PartyInfo::PartyInfo (Document* doc, const std::string& ceguiSkinName)
 		stream << i;
 		
 		btn = static_cast<CEGUI::PushButton*> (win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "Button"), stream.str() ));
-		party_info->addChildWindow(btn);
+		CEGUIUtility::addChildWidget (party_info, btn);
 		btn->setProperty("InheritsAlpha", "false");
 		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.85), cegui_reldim( 0.02f + 0.12f *i)));
-		btn->setSize(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.08f)));
+		CEGUIUtility::setWidgetSizeRel (btn, 0.12f, 0.08f);
 		btn->setText("R");
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PartyInfo::onRejectMemberButtonClicked, this));
 		btn->setWantsMultiClickEvents(false);
@@ -129,10 +130,10 @@ PartyInfo::PartyInfo (Document* doc, const std::string& ceguiSkinName)
 		stream << i;
 		
 		btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "Button"), stream.str() ));
-		party_info->addChildWindow(btn);
+		CEGUIUtility::addChildWidget (party_info, btn);
 		btn->setProperty("InheritsAlpha", "false");
 		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.7), cegui_reldim( 0.02f + 0.12f *i)));
-		btn->setSize(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.08f)));
+		CEGUIUtility::setWidgetSizeRel (btn, 0.12f, 0.08f);
 		btn->setText("C");
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PartyInfo::onApplyButtonClicked, this));
 		btn->setWantsMultiClickEvents(false);
@@ -143,10 +144,10 @@ PartyInfo::PartyInfo (Document* doc, const std::string& ceguiSkinName)
 		stream << i;
 		
 		btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "Button"), stream.str() ));
-		party_info->addChildWindow(btn);
+		CEGUIUtility::addChildWidget (party_info, btn);
 		btn->setProperty("InheritsAlpha", "false");
 		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.85), cegui_reldim( 0.02f + 0.12f *i)));
-		btn->setSize(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.08f)));
+		CEGUIUtility::setWidgetSizeRel (btn, 0.12f, 0.08f);
 		btn->setText("K");
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PartyInfo::onKickMemberButtonClicked, this));
 		btn->setWantsMultiClickEvents(false);
@@ -157,10 +158,10 @@ PartyInfo::PartyInfo (Document* doc, const std::string& ceguiSkinName)
 		stream << i;
 		
 		btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "Button"), stream.str() ));
-		party_info->addChildWindow(btn);
+		CEGUIUtility::addChildWidget (party_info, btn);
 		btn->setProperty("InheritsAlpha", "false");
 		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.85), cegui_reldim( 0.02f + 0.12f *i)));
-		btn->setSize(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.08f)));
+		CEGUIUtility::setWidgetSizeRel (btn, 0.12f, 0.08f);
 		btn->setText("L");
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PartyInfo::onLeavePartyButtonClicked, this));
 		btn->setWantsMultiClickEvents(false);
@@ -173,10 +174,10 @@ PartyInfo::PartyInfo (Document* doc, const std::string& ceguiSkinName)
 		stream << i;
 		
 		btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "Button"), stream.str() ));
-		party_info->addChildWindow(btn);
+		CEGUIUtility::addChildWidget (party_info, btn);
 		btn->setProperty("InheritsAlpha", "false");
 		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.7), cegui_reldim( 0.02f + 0.12f *i)));
-		btn->setSize(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.08f)));
+		CEGUIUtility::setWidgetSizeRel (btn, 0.12f, 0.08f);
 		btn->setText("P");
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PartyInfo::onPeaceButtonClicked, this));
 		btn->setWantsMultiClickEvents(false);
@@ -187,10 +188,10 @@ PartyInfo::PartyInfo (Document* doc, const std::string& ceguiSkinName)
 		stream << i;
 		
 		btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "Button"), stream.str() ));
-		party_info->addChildWindow(btn);
+		CEGUIUtility::addChildWidget (party_info, btn);
 		btn->setProperty("InheritsAlpha", "false");
 		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.85), cegui_reldim( 0.02f + 0.12f *i)));
-		btn->setSize(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim( 0.08f)));
+		CEGUIUtility::setWidgetSizeRel (btn, 0.12f, 0.08f);
 		btn->setText("W");
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PartyInfo::onDeclareWarButtonClicked, this));
 		btn->setWantsMultiClickEvents(false);
@@ -261,7 +262,7 @@ void PartyInfo::update()
 		stream << "PlayerImage";
 		stream << nr;
 		
-		img = win_mgr.getWindow(stream.str());
+		img = CEGUIUtility::getWindow (stream.str());
 		if (img->isVisible()!=true)
 		{
 			img->setVisible(true);
@@ -276,7 +277,7 @@ void PartyInfo::update()
 		stream.str("");
 		stream << "PlayerParty";
 		stream << nr;
-		label = win_mgr.getWindow(stream.str());
+		label = CEGUIUtility::getWindow (stream.str());
 		
 		stream.str("");
 		stream<< pl->getParty()->getId();
@@ -293,7 +294,7 @@ void PartyInfo::update()
 		stream << "PlayerName";
 		stream << nr;
 		
-		label = win_mgr.getWindow(stream.str());
+		label = CEGUIUtility::getWindow (stream.str());
 		stream.str("");
 		stream << pl->getName().getRawText();
 		if (label->isVisible()!=true)
@@ -310,7 +311,7 @@ void PartyInfo::update()
 		stream << "PlayerClass";
 		stream << nr;
 		
-		label = win_mgr.getWindow(stream.str());
+		label = CEGUIUtility::getWindow (stream.str());
 		PlayerBasicData* pdata = ObjectFactory::getPlayerData(pl->getSubtype());
 		if (pdata != 0)
 		{
@@ -337,7 +338,7 @@ void PartyInfo::update()
 		stream << nr;
 		
 		
-		btn = win_mgr.getWindow(stream.str());
+		btn = CEGUIUtility::getWindow (stream.str());
 		if (btn->isVisible()!=vis)
 		{
 			btn->setVisible(vis);
@@ -348,7 +349,7 @@ void PartyInfo::update()
 		stream << "RejectMemberButton";
 		stream << nr;
 		
-		btn = win_mgr.getWindow(stream.str());
+		btn = CEGUIUtility::getWindow (stream.str());
 		if (btn->isVisible()!=vis)
 		{
 			btn->setVisible(vis);
@@ -364,7 +365,7 @@ void PartyInfo::update()
 		stream << "ApplyButton";
 		stream << nr;
 		
-		btn = win_mgr.getWindow(stream.str());
+		btn = CEGUIUtility::getWindow (stream.str());
 		if (btn->isVisible()!=vis)
 		{
 			btn->setVisible(vis);
@@ -381,7 +382,7 @@ void PartyInfo::update()
 		stream << "KickMemberButton";
 		stream << nr;
 		
-		btn = win_mgr.getWindow(stream.str());
+		btn = CEGUIUtility::getWindow (stream.str());
 		if (btn->isVisible()!=vis)
 		{
 			btn->setVisible(vis);
@@ -397,7 +398,7 @@ void PartyInfo::update()
 		stream << "LeavePartyButton";
 		stream << nr;
 		
-		btn = win_mgr.getWindow(stream.str());
+		btn = CEGUIUtility::getWindow (stream.str());
 		if (btn->isVisible()!=vis)
 		{
 			btn->setVisible(vis);
@@ -413,7 +414,7 @@ void PartyInfo::update()
 		stream << "PeaceButton";
 		stream << nr;
 		
-		btn = win_mgr.getWindow(stream.str());
+		btn = CEGUIUtility::getWindow (stream.str());
 		if (btn->isVisible()!=vis)
 		{
 			btn->setVisible(vis);
@@ -429,7 +430,7 @@ void PartyInfo::update()
 		stream << "DeclareWarButton";
 		stream << nr;
 		
-		btn = win_mgr.getWindow(stream.str());
+		btn = CEGUIUtility::getWindow (stream.str());
 		if (btn->isVisible()!=vis)
 		{
 			btn->setVisible(vis);
@@ -452,7 +453,7 @@ void PartyInfo::update()
 			stream << elements[j];
 			stream << i;
 			
-			label = win_mgr.getWindow(stream.str());
+			label = CEGUIUtility::getWindow (stream.str());
 			if (label->isVisible())
 			{
 				label->setVisible(false);
@@ -475,7 +476,7 @@ void PartyInfo::updateTranslation()
 		stream << "PlayerName";
 		stream << i;
 		
-		label = win_mgr.getWindow(stream.str());
+		label = CEGUIUtility::getWindow (stream.str());
 		label->setText((CEGUI::utf8*) gettext("Name"));
 	}
 }

@@ -20,6 +20,9 @@
 // Sound operations helper.
 #include "soundhelper.h"
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
+
 ControlPanel::ControlPanel (Document* doc)
 	: ItemWindow(doc)
 {
@@ -28,23 +31,23 @@ ControlPanel::ControlPanel (Document* doc)
 	std::string name;
 
 	// Rahmen fuer die untere Kontrollleiste
-	CEGUI::FrameWindow* ctrl_panel = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("controlpanel.layout");
+	CEGUI::FrameWindow* ctrl_panel = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("controlpanel.layout");
 	if (!ctrl_panel)
 	{
 		DEBUG ("WARNING: Failed to load [%s]", "controlpanel.layout");
 	}
 
-	CEGUI::Window* ctrl_panel_holder = win_mgr.loadWindowLayout( "controlpanel_holder.layout" );
+	CEGUI::Window* ctrl_panel_holder = CEGUIUtility::loadLayoutFromFile ("controlpanel_holder.layout");
 	if (!ctrl_panel_holder)
 	{
 		DEBUG ("WARNING: Failed to load [%s]", "characterscreen_holder.layout");
 	}
 	
-	CEGUI::Window* wndHolder = win_mgr.getWindow("ControlPanel_Holder");
-	CEGUI::Window* wndCharInfo = win_mgr.getWindow("ControlPanel");
+	CEGUI::Window* wndHolder = CEGUIUtility::getWindow ("ControlPanel_Holder");
+	CEGUI::Window* wndCharInfo = CEGUIUtility::getWindow ("ControlPanel");
 	if (wndHolder && wndCharInfo)
 	{
-		wndHolder->addChildWindow (wndCharInfo);
+		CEGUIUtility::addChildWidget (wndHolder, wndCharInfo);
 	}
 	else
 	{
@@ -63,101 +66,101 @@ ControlPanel::ControlPanel (Document* doc)
 	CEGUI::Window* label;
 
 	// Balken fuer HP
-	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow("HealthProgressBar"));
+	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("HealthProgressBar"));
 	bar->setWantsMultiClickEvents(false);
 	bar->setProgress(0.0);
 	
 	// Balken fuer Experience
-	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow("ExperienceProgressBar"));
+	bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("ExperienceProgressBar"));
 	bar->setWantsMultiClickEvents(false);
 	bar->setProgress(0.0);
 
 
 	// Button Inventar
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("InventoryButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("InventoryButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonInventoryClicked, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
 	btn->setWantsMultiClickEvents(false);
 
 	// Button Charakterinfo
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CharInfoButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("CharInfoButton"));
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonCharInfoClicked, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
 	
 
 	// Button Chat oeffnen
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ChatOpenButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("ChatOpenButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonOpenChatClicked, this));
 	btn->setWantsMultiClickEvents(false);
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
 
 	// Button SkillTree
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SkillTreeButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("SkillTreeButton"));
 	btn->setID(0);
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
 	
 
 	// Button Party
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("PartyButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("PartyButton"));
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonPartyClicked, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
 	
 	// Quest Information Button
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("QuestInfoButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("QuestInfoButton"));
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonQuestInfoClicked, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
 	
 	// Button Speichern und Beenden
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SaveExitButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("SaveExitButton"));
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonSaveExitClicked, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
 
 	// Button Optionen
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("OptionsButton"));
 	btn->setWantsMultiClickEvents(false);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ControlPanel::onButtonOptionsClicked, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
 
 	// Anzeige linke Maustaste Faehigkeit
-	label = win_mgr.getWindow("LeftClickAbilityImage");
+	label = CEGUIUtility::getWindow ("LeftClickAbilityImage");
 	label->setID(1);
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, this));
-	label->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
+	label->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
 
 	// Balken fuer linke Maustaste Faehigkeit
-	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow("LeftClickAbilityProgressBar"));
+	bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("LeftClickAbilityProgressBar"));
 	bar->setWantsMultiClickEvents(false);
 	bar->setProgress(0.0);
 	bar->setAlpha(0.5);
 	bar->setAlwaysOnTop(true);
 
 	// Anzeige rechte Maustaste Faehigkeit
-	label = win_mgr.getWindow("RightClickAbilityImage");
+	label = CEGUIUtility::getWindow ("RightClickAbilityImage");
 	label->setID(2);
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, this));
-	label->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
+	label->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
 
 	// Balken fuer rechte Maustaste Faehigkeit
-	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow("RightClickAbilityProgressBar"));
+	bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("RightClickAbilityProgressBar"));
 	bar->setWantsMultiClickEvents(false);
 	bar->setProgress(0.0);
 	bar->setAlpha(0.5);
 	bar->setAlwaysOnTop(true);
 
 	// alternate right mouse skill
-	label = win_mgr.getWindow("AlternateRightClickAbilityImage");
+	label = CEGUIUtility::getWindow ("AlternateRightClickAbilityImage");
 	label->setID(3);
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&ControlPanel::onButtonSkilltreeClicked, this));
-	label->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
+	label->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&ControlPanel::onGUIItemHover, this));
 
 	// progress bar for alternate right mouse skill
-	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow("AlternateRightClickAbilityProgressBar"));
+	bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("AlternateRightClickAbilityProgressBar"));
 	bar->setWantsMultiClickEvents(false);
 	bar->setProgress(0.0);
 	bar->setAlpha(0.5);
@@ -170,16 +173,16 @@ ControlPanel::ControlPanel (Document* doc)
 	{
 		outStream.str("");
 		outStream << "InventoryItem" << i;
-		label = win_mgr.getWindow(outStream.str());
+		label = CEGUIUtility::getWindow (outStream.str());
 		label->setID(Equipement::BELT_ITEMS+i);
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&ControlPanel::onItemMouseButtonPressed, (ItemWindow*) this));
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&ControlPanel::onItemMouseButtonReleased, (ItemWindow*) this));
-		label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&ControlPanel::onItemHover, (ItemWindow*) this));
+		label->subscribeEvent(CEGUIUtility::EventMouseEntersWindowArea (), CEGUI::Event::Subscriber(&ControlPanel::onItemHover, (ItemWindow*) this));
 		label->setWantsMultiClickEvents(false);
 		
 		outStream.str("");
 		outStream << "InventoryShortcutLabel" << i;
-		label = win_mgr.getWindow(outStream.str());
+		label = CEGUIUtility::getWindow (outStream.str());
 		std::stringstream stream;
 		stream << (i+1)%10;
 		label->setText(stream.str());
@@ -188,7 +191,7 @@ ControlPanel::ControlPanel (Document* doc)
 		
 		outStream.str("");
 		outStream << "BeltPotionCounter" << i;
-		label = win_mgr.getWindow(outStream.str());
+		label = CEGUIUtility::getWindow (outStream.str());
 		label->setAlwaysOnTop(true);
 		label->setMousePassThroughEnabled(true);
 	}
@@ -212,7 +215,7 @@ void ControlPanel::update()
 	m_silent_current_update = m_silent;
 
 	// Balken fuer HP
-	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "HealthProgressBar"));
+	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ( "HealthProgressBar"));
 	float hperc = player->getDynAttr()->m_health / player->getBaseAttrMod()->m_max_health;
 	if (bar->getProgress() != hperc)
 	{
@@ -228,7 +231,7 @@ void ControlPanel::update()
 	}
 	
 	// Balken fuer Experience
-	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "ExperienceProgressBar"));
+	bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ( "ExperienceProgressBar"));
 	float eperc = player->getDynAttr()->m_experience / player->getBaseAttr()->m_max_experience;
 	if (bar->getProgress() != eperc)
 	{
@@ -247,7 +250,7 @@ void ControlPanel::update()
 	std::map<int,LearnableAbility>& ablt = player->getLearnableAbilities();
 	
 	// Image Schaden Attacke links
-	label =  win_mgr.getWindow( "LeftClickAbilityImage");
+	label =  CEGUIUtility::getWindow ( "LeftClickAbilityImage");
 	name = player->getLeftAction();
 	
 	std::string imagename = "";
@@ -279,7 +282,7 @@ void ControlPanel::update()
 	double alpha;
 
 	// Balken fuer Schaden Attacke links
-	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "LeftClickAbilityProgressBar"));
+	bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ( "LeftClickAbilityProgressBar"));
 	timernr =  Action::getActionInfo(player->getLeftAction())->m_timer_nr;
 	perc = player->getTimerPercent(timernr);
 
@@ -301,7 +304,7 @@ void ControlPanel::update()
 	perc =0;
 
 	// Image Attacke rechts
-	label =  win_mgr.getWindow( "RightClickAbilityImage");
+	label =  CEGUIUtility::getWindow ( "RightClickAbilityImage");
 	name = player->getRightAction();
 	for (iter = ablt.begin(); iter != ablt.end(); ++iter)
 	{
@@ -328,7 +331,7 @@ void ControlPanel::update()
 	}
 
 	// Balken fuer Schaden Attacke rechts
-	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "RightClickAbilityProgressBar"));
+	bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ( "RightClickAbilityProgressBar"));
 	timernr =  Action::getActionInfo(player->getRightAction())->m_timer_nr;
 	perc = player->getTimerPercent(timernr);
 
@@ -348,7 +351,7 @@ void ControlPanel::update()
 	}
 	
 	// image for alternate right skill
-	label =  win_mgr.getWindow( "AlternateRightClickAbilityImage");
+	label =  CEGUIUtility::getWindow ( "AlternateRightClickAbilityImage");
 	name = player->getRightAlternateAction();
 	for (iter = ablt.begin(); iter != ablt.end(); ++iter)
 	{
@@ -375,7 +378,7 @@ void ControlPanel::update()
 	}
 
 	// Balken fuer Schaden Attacke rechts
-	bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( "AlternateRightClickAbilityProgressBar"));
+	bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ( "AlternateRightClickAbilityProgressBar"));
 	timernr =  Action::getActionInfo(player->getRightAlternateAction())->m_timer_nr;
 	perc = player->getTimerPercent(timernr);
 
@@ -402,14 +405,14 @@ void ControlPanel::update()
 	{
 		out_stream.str("");
 		out_stream << "InventoryItem" << i;
-		img =  win_mgr.getWindow(out_stream.str().c_str());
+		img =  CEGUIUtility::getWindow (out_stream.str().c_str());
 		it = equ->getItem(Equipement::BELT_ITEMS+i);
 
 		updateItemWindow(img, it, player);
 		
 		out_stream.str("");
 		out_stream << "BeltPotionCounter" << i;
-		label = win_mgr.getWindow(out_stream.str());
+		label = CEGUIUtility::getWindow (out_stream.str());
 		if (it == 0)
 		{
 			if (label->isVisible())
@@ -444,28 +447,28 @@ void ControlPanel::updateTranslation()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("OptionsButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("OptionsButton"));
 	btn->setTooltipText((CEGUI::utf8*) gettext("Options"));
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SaveExitButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("SaveExitButton"));
 	btn->setTooltipText((CEGUI::utf8*) gettext("Save & Exit"));
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ChatOpenButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("ChatOpenButton"));
 	btn->setTooltipText((CEGUI::utf8*) gettext("Chat"));
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("InventoryButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("InventoryButton"));
 	btn->setTooltipText((CEGUI::utf8*) gettext("Inventory"));
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CharInfoButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("CharInfoButton"));
 	btn->setTooltipText((CEGUI::utf8*) gettext("Character"));
 
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SkillTreeButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("SkillTreeButton"));
 	btn->setTooltipText((CEGUI::utf8*) gettext("Skilltree"));
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "PartyButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ( "PartyButton"));
 	btn->setTooltipText((CEGUI::utf8*) gettext("Party"));
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "QuestInfoButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ( "QuestInfoButton"));
 	btn->setTooltipText((CEGUI::utf8*) gettext("Quests"));
 
 	
@@ -540,7 +543,7 @@ void ControlPanel::createAnimations ()
 	CEGUI::AnimationManager::getSingleton().loadAnimationsFromXML("ControlPanelAnimations.xml");
 	
 	// Small tab animations
-	label = win_mgr.getWindow("HealthProgressBar");
+	label = CEGUIUtility::getWindow ("HealthProgressBar");
 	CEGUI::AnimationInstance* instance = CEGUI::AnimationManager::getSingleton().instantiateAnimation("HealthbarAnimation");
 	instance->setTargetWindow(label);
     instance->start();

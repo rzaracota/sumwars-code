@@ -14,13 +14,24 @@
  */
 
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
+
+// needed to be able to create the CEGUI renderer interface
+#ifdef CEGUI_07
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreTexture.h"
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreResourceProvider.h"
+#else
+#include "CEGUI/RendererModules/Ogre/Renderer.h"
+#include "CEGUI/RendererModules/Ogre/Texture.h"
+#include "CEGUI/RendererModules/Ogre/ResourceProvider.h"
+#endif
+
 #include "scene.h"
 
 #include "minimapwindow.h"
-#include "ceguiutility.h"
+
 #include "OgreResource.h"
 
 MinimapWindow::MinimapWindow (Document* doc, const std::string& ceguiSkinName)
@@ -34,13 +45,13 @@ MinimapWindow::MinimapWindow (Document* doc, const std::string& ceguiSkinName)
 	// Create GUI Items.
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::Window* minimapWnd = win_mgr.loadWindowLayout("minimapwindow.layout");
+	CEGUI::Window* minimapWnd = CEGUIUtility::loadLayoutFromFile ("minimapwindow.layout");
 	if (!minimapWnd)
 	{
 		DEBUG ("WARNING: Failed to load [%s]", "minimapwindow.layout");
 	}
 
-	CEGUI::Window* minimapWnd_holder = win_mgr.loadWindowLayout( "minimapwindow_holder.layout" );
+	CEGUI::Window* minimapWnd_holder = CEGUIUtility::loadLayoutFromFile ("minimapwindow_holder.layout");
 	if (!minimapWnd_holder)
 	{
 		DEBUG ("WARNING: Failed to load [%s]", "minimapwindow_holder.layout");
@@ -50,11 +61,11 @@ MinimapWindow::MinimapWindow (Document* doc, const std::string& ceguiSkinName)
 	minimapWnd->setVisible (true);
 	minimapWnd_holder->setVisible (true);
 
-	CEGUI::Window* wndHolder = win_mgr.getWindow("MinimapWindow_Holder");
-	CEGUI::Window* wndHeld = win_mgr.getWindow("MinimapWindow");
+	CEGUI::Window* wndHolder = CEGUIUtility::getWindow ("MinimapWindow_Holder");
+	CEGUI::Window* wndHeld = CEGUIUtility::getWindow ("MinimapWindow");
 	if (wndHolder && wndHeld)
 	{
-		wndHolder->addChildWindow (wndHeld);
+		CEGUIUtility::addChildWidget (wndHolder, wndHeld);
 	}
 	else
 	{
@@ -96,7 +107,7 @@ void MinimapWindow::reloadIconsOnNextUpdate ()
 void MinimapWindow::update()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) win_mgr.getWindow("MinimapWindow");
+	CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("MinimapWindow");
 
 	Player* player = m_document->getLocalPlayer();
 	if (player ==0)
@@ -128,7 +139,8 @@ void MinimapWindow::update()
 		if (cnt >= ncount)
 		{
 			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), stream.str());
-			minimap->addChildWindow(label);
+			CEGUIUtility::addChildWidget (minimap, label);
+
 			label->setProperty("BackgroundEnabled", "true");
 			
 			if (label->isPropertyPresent ("BackgroundColours"))
@@ -142,13 +154,16 @@ void MinimapWindow::update()
 
 			// Not yet sure whether it looks nicer with a frame or without it...
 			// If a frame is used, a larger image size needs to be specified.
+
 #if 1
-			label->setProperty("FrameEnabled", "true");
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.038f), cegui_reldim( 0.038f)));
+			std::string propertyValue ("true");
 #else
-			label->setProperty("FrameEnabled", "false");
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.03f), cegui_reldim( 0.03f)));
+			std::string propertyValue ("false");
 #endif
+
+			label->setProperty("FrameEnabled", propertyValue);
+			CEGUIUtility::setWidgetSizeRel (label, 0.038f, 0.038f);
+
 			label->setMousePassThroughEnabled(true);
 			Player* playerPtr = static_cast<Player*> (pl);
 			if (playerPtr)
@@ -166,14 +181,14 @@ void MinimapWindow::update()
 		}
 		else
 		{
-			label = win_mgr.getWindow(stream.str());
+			label = CEGUIUtility::getWindow (stream.str());
 		}
 
 		if (m_reloadIconsOnNextUpdate)
 		{
-			if (win_mgr.isWindowPresent (stream.str ().c_str ()))
+			if (CEGUIUtility::isWindowPresent (stream.str ().c_str ()))
 			{
-				label = win_mgr.getWindow (stream.str ().c_str ());
+				label = CEGUIUtility::getWindow (stream.str ().c_str ());
 				Player* playerPtr = static_cast<Player*> (pl);
 				if (playerPtr)
 				{
@@ -219,12 +234,12 @@ void MinimapWindow::update()
 		stream << "PlayerMinimapImage";
 		stream << cnt;
 			
-		label = win_mgr.getWindow(stream.str());
+		label = CEGUIUtility::getWindow (stream.str());
 		label->setVisible(false);
 	}
 	
 	// Check to see whether the label displaying the region name needs to be updated.
-	label = win_mgr.getWindow("RegionNameLabel");
+	label = CEGUIUtility::getWindow ("RegionNameLabel");
 	
 	std::string regionName (region->getName ());
 	DEBUGX ("Got region name as: [%s]", regionName.c_str ());

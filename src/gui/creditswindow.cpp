@@ -36,7 +36,7 @@ CreditsWindow::CreditsWindow(Document* doc, const std::string& ceguiSkinName)
 	CEGUI::FrameWindow* creditsframe = (CEGUI::FrameWindow*) win_mgr.createWindow(ss.str ().c_str (), "CreditsWindow");
 	
 	creditsframe->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.1f))); //0.0/0.8
-	creditsframe->setSize(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.8f))); //1.0/0.2
+	CEGUIUtility::setWidgetSizeRel (creditsframe, 0.5f, 0.8f);
 	creditsframe->setProperty("FrameEnabled","false");
 	creditsframe->setProperty("TitlebarEnabled","false");
 	creditsframe->setProperty("CloseButtonEnabled","false");
@@ -47,9 +47,9 @@ CreditsWindow::CreditsWindow(Document* doc, const std::string& ceguiSkinName)
 	ss.str ("");
 	ss << ceguiSkinName << "/ScrollablePaneNoBar";
 	CEGUI::ScrollablePane* pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow(ss.str ().c_str (), "CreditsPane"));
-	creditsframe->addChildWindow(pane);
+	CEGUIUtility::addChildWidget (creditsframe, pane);
 	pane->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
-	pane->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 1.0f)));
+	CEGUIUtility::setWidgetSizeRel (pane, 1.0f, 1.0f);
 	pane->setInheritsAlpha(false);
 	pane->setContentPaneAutoSized(true);
 	
@@ -58,9 +58,9 @@ CreditsWindow::CreditsWindow(Document* doc, const std::string& ceguiSkinName)
 
 	CEGUI::Window* credits;
 	credits = win_mgr.createWindow(ss.str ().c_str (), "CreditWindow");
-	pane->addChildWindow(credits);
+	CEGUIUtility::addChildWidget (pane, credits);
 	credits->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f)));
-	credits->setSize(CEGUI::UVector2(cegui_reldim(1.00f), cegui_reldim( 1.0f)));
+	CEGUIUtility::setWidgetSizeRel (credits, 1.0f, 1.0f);
 	credits->setProperty("FrameEnabled", "false");
 	credits->setProperty("BackgroundEnabled", "true");
 	credits->setProperty("HorzFormatting", "HorzCentred");
@@ -96,10 +96,10 @@ CreditsWindow::CreditsWindow(Document* doc, const std::string& ceguiSkinName)
 	credits->setFont("DejaVuSerif-12");
 	
 	std::string added;
-	CEGUI::UVector2 sz = credits->getSize();
+	CEGUI::UVector2 sz = CEGUIUtility::getWidgetSize (credits);
 	sz.d_y = CEGUIUtility::getWindowSizeForText(content, credits->getFont(), added).d_y;
-	credits->setSize(sz);
-	credits->setMaxSize(CEGUI::UVector2(CEGUI::UDim(5.0,5.0), CEGUI::UDim(5.0,5.0)));
+	CEGUIUtility::setWidgetSize (credits, sz);
+	CEGUIUtility::setWidgetMaxSize (credits, CEGUI::UVector2(CEGUI::UDim(5.0,5.0), CEGUI::UDim(5.0,5.0)));
 	credits->setText(added);
 	if (credits->isPropertyPresent ("BackgroundColours"))
 	{
@@ -120,20 +120,20 @@ CreditsWindow::CreditsWindow(Document* doc, const std::string& ceguiSkinName)
 void CreditsWindow::updateTranslation()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Window* wtext = win_mgr.getWindow("CreditWindow");
+	CEGUI::Window* wtext = CEGUIUtility::getWindow ("CreditWindow");
 	
 	
-	CEGUI::Font* fnt = wtext->getFont();
+	const CEGUI::Font* fnt = wtext->getFont();
 	
 	// Set Size of the Window automatically
-	CEGUI::UVector2 size = wtext->getSize();
-	CEGUI::Rect isize = wtext->getUnclippedInnerRect ();
+	CEGUI::UVector2 credSize = CEGUIUtility::getWidgetSize (wtext);
+	//CEGUIUtility::Rectf isize = wtext->getUnclippedInnerRect ();
 	//float height = PixelAligned(CEGUIUtility::fitTextToWindow(wtext->getText(), isize.getWidth(), CEGUIUtility::WordWrapCentred, fnt).lines * fnt->getLineSpacing());
-	size.d_y = CEGUIUtility::getWindowSizeForText(wtext->getText().c_str(), fnt).d_y; //CEGUI::UDim(0.0, height);
+	credSize.d_y = CEGUIUtility::getWindowSizeForText(wtext->getText().c_str(), fnt).d_y; //CEGUI::UDim(0.0, height);
 	
 	// FIXME: this factor is a hack to achieve the right window size. Size computation is not correct yet
-	size.d_y.d_scale *= 1.2;
-	wtext->setSize(size);
+	credSize.d_y.d_scale *= 1.2;
+	CEGUIUtility::setWidgetSize (wtext, credSize);
 }
 
 void CreditsWindow::update()
@@ -158,7 +158,7 @@ void CreditsWindow::update()
 		
 		// credits scrolling
 		//CEGUI::Window* wtext = win_mgr.getWindow("CreditWindow");
-		CEGUI::ScrollablePane* pane  = static_cast<CEGUI::ScrollablePane*>(win_mgr.getWindow("CreditsPane"));
+		CEGUI::ScrollablePane* pane  = static_cast<CEGUI::ScrollablePane*>(CEGUIUtility::getWindow ("CreditsPane"));
 
 		pane->setVerticalScrollPosition(pos);
 	}

@@ -30,7 +30,8 @@ ChatLine::ChatLine (Document* doc, const std::string& ceguiSkinName)
 	
 	chatline = static_cast<CEGUI::Editbox*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "Editbox"), "Chatline"));
  	chatline->setPosition(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.83f)));
-	chatline->setSize(CEGUI::UVector2(cegui_reldim(.43f), cegui_reldim( 0.05f)));
+	CEGUIUtility::setWidgetSizeRel (chatline, 0.43f, 0.05f);
+
 	chatline->setWantsMultiClickEvents(false);
 	chatline->subscribeEvent(CEGUI::Editbox::EventTextAccepted, CEGUI::Event::Subscriber(&ChatLine::onSendMessage,  this));
 	chatline->subscribeEvent(CEGUI::Window::EventKeyDown, CEGUI::Event::Subscriber(&ChatLine::onKeyPress,  this));
@@ -72,7 +73,7 @@ void ChatLine::updateTranslation()
 void ChatLine::setHistoryLine()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Editbox* line = static_cast<CEGUI::Editbox*>(win_mgr.getWindow( "Chatline"));
+	CEGUI::Editbox* line = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow ("Chatline"));
 	
 	if (m_history_line == 0)
 	{

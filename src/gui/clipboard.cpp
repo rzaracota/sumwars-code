@@ -7,6 +7,9 @@
 #include "tchar.h"
 #endif
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
+
 template<> SWUtil::Clipboard* Ogre::Singleton<SWUtil::Clipboard>::SUMWARS_OGRE_SINGLETON = 0;
 
 namespace SWUtil
@@ -21,7 +24,7 @@ namespace SWUtil
 	bool Clipboard::copy (bool cutInsteadOfCopy) 
 	{
 		DEBUG ("Reached Clipboard copy; cut? %d", cutInsteadOfCopy);
-		CEGUI::Window* sheet = CEGUI::System::getSingleton().getGUISheet();
+		CEGUI::Window* sheet = CEGUIUtility::getRootSheet (CEGUI::System::getSingletonPtr ());
 		if (!sheet) return false;
 
 		CEGUI::Window* active = sheet->getActiveChild();
@@ -91,7 +94,7 @@ namespace SWUtil
 		std::string clipboardContents = _readFromClipboard ();
 		DEBUG ("Got clipboard text to be: %s", clipboardContents.c_str ());
 
-		CEGUI::Window* sheet = CEGUI::System::getSingleton().getGUISheet();
+		CEGUI::Window* sheet = CEGUIUtility::getRootSheet (CEGUI::System::getSingletonPtr ());
 		if (!sheet) return false;
 
 		CEGUI::Window* active = sheet->getActiveChild();
@@ -149,7 +152,12 @@ namespace SWUtil
 			edit->setText (newtext);
 
 			// Also update the caret location, so that it is behind the pasted text.
+#ifdef CEGUI_07
 			edit->setCaratIndex (beg + clipboardContents.length ());
+#else
+			// Ok, I won't create a function just for the caret name.
+			edit->setCaretIndex (beg + clipboardContents.length ());
+#endif
 
 			DEBUG ("updated edit box contents");
 		}
