@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-10-30 15:56+0200\n"
-"Last-Translator: Marcel H <hi84@live.at>\n"
+"PO-Revision-Date: 2013-11-01 15:55+0200\n"
+"Last-Translator: Stefan Stammberger <some.fusion@gmail.com>\n"
 "Language-Team: German "
 "<http://hosted.weblate.org/projects/sumwars/greenorchid/de/>\n"
 "Language: de\n"
@@ -17,14 +17,13 @@ msgid "The Green Orchid"
 msgstr "Die grüne Orchidee"
 
 #: greenOrchid.xml:6
-#, fuzzy
 msgid ""
 "I found the green orchid and gave it to the girl. She gave me a amulet "
 "instead. I'm still trying to recover from the shock that I actually got "
 "something useful out of this ordeal."
 msgstr ""
 "Ich fand die grüne Orchidee und gab sie dem Mädchen. Sie gab mir Stattdessen "
-" ein Amulet. Ich versuche mich immer noch von diesem Schock zu erholen, und "
+"ein Amulet. Ich versuche mich immer noch von diesem Schock zu erholen, und "
 "zu verstehen, dass ich auch etwas nützliches von diesen Qualen hatte."
 
 #: greenOrchid.xml:10
@@ -51,7 +50,6 @@ msgid "joringsbridge"
 msgstr "Joringsbrück"
 
 #: greenOrchid.xml:25
-#, fuzzy
 msgid "Reba"
 msgstr "Reba"
 
@@ -95,7 +93,6 @@ msgid "Oh, how I'd love to have a marvelous green orchid in it..."
 msgstr "Oh, wie ich liebend gerne eine wunderbare Orchidee drinnen hätte..."
 
 #: greenOrchid.xml:39
-#, fuzzy
 msgid "Offer Help?"
 msgstr "Hilfe anbieten?"
 
