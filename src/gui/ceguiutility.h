@@ -17,7 +17,7 @@
 #define __SUMWARS_GUI_CEGUIUTILITY_H__
 
 // Define the CEGUI version. TODO: move to a global definition.
-//#define CEGUI_07
+#define CEGUI_07
 
 #ifdef CEGUI_07
 #include "CEGUI.h"

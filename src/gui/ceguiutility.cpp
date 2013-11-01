@@ -163,7 +163,12 @@ CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> list, 
 
     float textWidth = 0.0f;
     float textHeight = 0.0f;
+
+#ifdef CEGUI_07
+	CEGUI::Size screenSize = CEGUI::System::getSingleton().getRenderer()->getDisplaySize();
+#else
     CEGUI::Sizef screenSize (CEGUI::System::getSingleton().getRenderer()->getDisplaySize ());
+#endif
 
     added.clear();
 	size_t count = 0;
@@ -744,7 +749,10 @@ void CEGUIUtility::setDefaultMouseCursor (CEGUI::System* sys, const std::string&
 void CEGUIUtility::setDefaultTooltip (CEGUI::System* sys, const std::string& skinName, const std::string& cursorName)
 {
 #ifdef CEGUI_07
-	sys->setDefaultTooltip (skinName.c_str (), cursorName.c_str ());
+	std::stringstream ss;
+	ss << skinName << "/" << cursorName;
+	sys->setDefaultTooltip(ss.str ().c_str ());
+	//sys->setDefaultTooltip (skinName.c_str (), cursorName.c_str ());
 #else
 	std::stringstream ss;
 	ss << skinName << "/" << cursorName;
