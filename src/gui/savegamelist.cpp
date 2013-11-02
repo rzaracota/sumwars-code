@@ -51,7 +51,7 @@ SavegameList::SavegameList (Document* doc, const std::string& ceguiSkinName)
 	// Rahmen fuer das Menue Savegame auswaehlen
 	CEGUI::FrameWindow* save_menu = (CEGUI::FrameWindow*) win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "FrameWindow"), "SavegameMenu");
 	save_menu->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f))); //0.0/0.8
-	save_menu->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 1.0f))); //1.0/0.2
+	CEGUIUtility::setWidgetSizeRel (save_menu, 1.0f, 1.0f);
 	save_menu->setProperty("FrameEnabled","false");
 	save_menu->setProperty("TitlebarEnabled","false");
 	save_menu->setProperty("CloseButtonEnabled","false");
@@ -67,11 +67,11 @@ SavegameList::SavegameList (Document* doc, const std::string& ceguiSkinName)
 	
 	// Button neu
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "Button"), "NewCharButton"));
-	save_menu->addChildWindow(btn);
+	CEGUIUtility::addChildWidget (save_menu, btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.85f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.05f)));
+	CEGUIUtility::setWidgetSizeRel (btn, 0.4f, 0.05f);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onNewCharClicked, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&SavegameList::onItemButtonHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&SavegameList::onItemButtonHover, this));
 	btn->setWantsMultiClickEvents(false);
 	btn->setInheritsAlpha(false);
 	if (btn->isPropertyPresent ("NormalImage"))
@@ -185,12 +185,12 @@ void SavegameList::update()
 				
 				// make buttons resolution independant
 				saveItem->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_absdim((height + 2.0f)*n)));
-				saveItem->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_absdim(height)));
+				CEGUIUtility::setWidgetSize (saveItem, CEGUI::UVector2(cegui_reldim(1.0f), cegui_absdim(height)));
 				saveItem->getChild(s.str().append("SaveItemRoot/Name"))->setMousePassThroughEnabled(true);
 				saveItem->getChild(s.str().append("SaveItemRoot/DecriptionLabel"))->setMousePassThroughEnabled(true);
 				saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setMousePassThroughEnabled(true);
 				saveItem->getChild(s.str().append("SaveItemRoot/DelChar"))->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onDeleteCharClicked, this));	
-				saveItem->getChild(s.str().append("SaveItemRoot/DelChar"))->subscribeEvent (CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&SavegameList::onItemButtonHover, this));
+				saveItem->getChild(s.str().append("SaveItemRoot/DelChar"))->subscribeEvent (CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&SavegameList::onItemButtonHover, this));
 			}
 			
 			// set the proper Image
@@ -226,18 +226,35 @@ void SavegameList::update()
 #endif
 
 				// create CEGUI texture for the character thumbnail
-                if(Ogre::ResourceGroupManager::getSingleton().resourceExists(resGrp, nameNoPath))
+				if(Ogre::ResourceGroupManager::getSingleton().resourceExists(resGrp, nameNoPath))
 				{
+					CEGUI::String textureName ("MainMenuAvatar_Tex");
 					Ogre::TexturePtr tex = tmgr->load(texName, "Savegame");
 
-					CEGUI::Texture &ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(tex);
+#ifdef CEGUI_07
+					CEGUI::Texture &ceguiTex = static_cast<CEGUI::OgreRenderer*>
+						(CEGUI::System::getSingleton().getRenderer())->createTexture(tex);
 
-					CEGUI::Imageset& textureImageSet = CEGUI::ImagesetManager::getSingleton().create(imagesetName, ceguiTex);
+
+					CEGUI::Imageset& textureImageSet = CEGUIUtility::getImageManager ().create (imagesetName, ceguiTex);
 					textureImageSet.defineImage( "MainMenuAvatarImg",
-								CEGUI::Point( 0.0f, 0.0f ),
-								CEGUI::Size( ceguiTex.getSize().d_width, ceguiTex.getSize().d_height ),
-								CEGUI::Point( 0.0f, 0.0f ) );
-					
+								CEGUIUtility::Vector2f (0.0f, 0.0f),
+								CEGUIUtility::Size (ceguiTex.getSize().d_width, ceguiTex.getSize().d_height),
+								CEGUIUtility::Vector2f (0.0f, 0.0f)
+								);
+#else
+					CEGUI::Texture &ceguiTex = static_cast<CEGUI::OgreRenderer*>
+						(CEGUI::System::getSingleton ().getRenderer ())->createTexture (textureName, tex);
+
+					CEGUI::OgreRenderer* rendererPtr = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer());
+					CEGUI::String imageName("MainMenuAvatarImg");
+					CEGUI::TextureTarget*   d_textureTarget;
+					CEGUI::BasicImage*      d_textureTargetImage;
+					d_textureTarget = rendererPtr->createTextureTarget();
+					d_textureTargetImage = static_cast<CEGUI::BasicImage*>(&CEGUI::ImageManager::getSingleton().create("BasicImage", imageName));
+					d_textureTargetImage->setTexture(&ceguiTex);
+					d_textureTargetImage->setArea(CEGUI::Rectf(0, 0, ceguiTex.getSize ().d_width,ceguiTex.getSize ().d_height));
+#endif
 					saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setProperty("Image", imageName);
 				}
 				else
