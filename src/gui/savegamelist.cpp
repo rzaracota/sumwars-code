@@ -15,14 +15,22 @@
 
 #include "OgreResourceGroupManager.h"
 #include "OgreTextureManager.h"
-#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 #include "savegamelist.h"
 #include "stdstreamconv.h"
 
 #ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
 #include "onlineservicesmanager.h"
 #endif
+
+// Utility for CEGUI cross-version compatibility
 #include "ceguiutility.h"
+
+// needed to be able to create the CEGUI renderer interface
+#ifdef CEGUI_07
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
+#else
+#include "CEGUI/RendererModules/Ogre/Renderer.h"
+#endif
 
 // Sound operations helper.
 #include "soundhelper.h"
@@ -280,9 +288,12 @@ void SavegameList::update()
         }
 	}
 	
-	CEGUI::PushButton *btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("NewCharButton"));
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_absdim((height + 2.0f)*n+1)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_absdim(height)));
+	CEGUI::PushButton *btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("NewCharButton"));
+	if (btn)
+	{
+		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_absdim((height + 2.0f)*n+1)));
+		CEGUIUtility::setWidgetSize (btn, CEGUI::UVector2(cegui_reldim(1.0f), cegui_absdim(height)));
+	}
 }
 
 void SavegameList::selectDefaultSavegame()
@@ -306,8 +317,11 @@ void SavegameList::updateTranslation()
 	/*btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SelectSavegameButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));*/
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("NewCharButton"));
-	btn->setText((CEGUI::utf8*) gettext("Create"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("NewCharButton"));
+	if (btn)
+	{
+		btn->setText((CEGUI::utf8*) gettext("Create"));
+	}
 }
 
 
