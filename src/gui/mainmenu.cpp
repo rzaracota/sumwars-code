@@ -34,7 +34,11 @@
 // Allow the use of the sound manager.
 #include "gussound.h"
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
+
 using gussound::SoundManager;
+
 
 MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
         : Window (doc)
@@ -48,95 +52,95 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 	m_savegame_player_action.m_type = "noaction";
 	m_savegame_player_action.m_time = 2000;
 	m_savegame_player_action.m_elapsed_time = 0;
-
+	
 	
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 
-	CEGUI::FrameWindow* start_menu_root = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "mainmenu.layout" );
+	CEGUI::FrameWindow* start_menu_root = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("mainmenu.layout");
     m_window = start_menu_root;
 	m_window->setMousePassThroughEnabled(true);
     m_window->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&MainMenu::onShown, this));
     m_window->subscribeEvent(CEGUI::Window::EventHidden, CEGUI::Event::Subscriber(&MainMenu::onHidden, this));
 
     // Button Einzelspieler
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SinglePlayerButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("SinglePlayerButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartSinglePlayer, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
 
 	// Button Server beitreten
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerJoinButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("ServerJoinButton"));
     btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartMultiPlayer, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
 
 
     // Button Server aufsetzen
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ServerHostButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("ServerHostButton"));
     btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartMultiPlayerHost, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
 
     // Button Credits
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("CreditsButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("CreditsButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onShowCredits, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
 
     // Button Optionen
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("MainOptionsButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("MainOptionsButton"));
     btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onShowOptions, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
 
 
     // Button beenden
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("EndGameButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("EndGameButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onQuitGameHost, this));
-	btn->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
 
 	CEGUI::Window* verlbl;
 
-	verlbl = win_mgr.getWindow("SumwarsVersionLabel");
+	verlbl = CEGUIUtility::getWindow("SumwarsVersionLabel");
 	verlbl->setText(CEGUI::String("Version: ").append(SUMWARS_VERSION));
 
 	CEGUI::FrameWindow* lbl;
 
-	if (win_mgr.isWindowPresent ("SinglePlayerButton/Label"))
+	if (CEGUIUtility::isWindowPresent ("SinglePlayerButton/Label"))
 	{
 		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton/Label"));
+		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("SinglePlayerButton/Label"));
 		lbl->setMousePassThroughEnabled(true);
 	}
 
-	if (win_mgr.isWindowPresent ("ServerJoinButton/Label"))
+	if (CEGUIUtility::isWindowPresent ("ServerJoinButton/Label"))
 	{
 		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerJoinButton/Label"));
+		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("ServerJoinButton/Label"));
 		lbl->setMousePassThroughEnabled(true);
 	}
 
-	if (win_mgr.isWindowPresent ("ServerHostButton/Label"))
+	if (CEGUIUtility::isWindowPresent ("ServerHostButton/Label"))
 	{
 		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerHostButton/Label"));
+		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("ServerHostButton/Label"));
 		lbl->setMousePassThroughEnabled(true);
 	}
 
-	if (win_mgr.isWindowPresent ("CreditsButton/Label"))
+	if (CEGUIUtility::isWindowPresent ("CreditsButton/Label"))
 	{
 		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("CreditsButton/Label"));
+		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("CreditsButton/Label"));
 		lbl->setMousePassThroughEnabled(true);
 	}
 
-	if (win_mgr.isWindowPresent ("MainOptionsButton/Label"))
+	if (CEGUIUtility::isWindowPresent ("MainOptionsButton/Label"))
 	{
 		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton/Label"));
+		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("MainOptionsButton/Label"));
 		lbl->setMousePassThroughEnabled(true);
 	}
 
-	if (win_mgr.isWindowPresent ("EndGameButton/Label"))
+	if (CEGUIUtility::isWindowPresent ("EndGameButton/Label"))
 	{
 		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
+		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("EndGameButton/Label"));
 		lbl->setMousePassThroughEnabled(true);
 	}
 
@@ -180,7 +184,7 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 
 void MainMenu::update()
 {
-    updateCharacterView();
+	updateCharacterView();
 }
 
 
@@ -190,69 +194,69 @@ void MainMenu::updateTranslation()
 	CEGUI::FrameWindow* lbl;
 
 	// Update the button labels.
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton"));
+	lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("SinglePlayerButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Single player"));
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerJoinButton"));
+	lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("ServerJoinButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Join game"));
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerHostButton"));
+	lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("ServerHostButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Host game"));
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("CreditsButton"));
+	lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("CreditsButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Credits"));
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton"));
+	lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("MainOptionsButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Options"));
 
-	lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton"));
+	lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("EndGameButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Quit"));
 
-	if (win_mgr.isWindowPresent ("SinglePlayerButton/Label"))
+	if (CEGUIUtility::isWindowPresent ("SinglePlayerButton/Label"))
 	{
 		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SinglePlayerButton/Label"));
+		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("SinglePlayerButton/Label"));
 		lbl->setText((CEGUI::utf8*) gettext("Single player"));
 	}
 
-	if (win_mgr.isWindowPresent ("ServerJoinButton/Label"))
+	if (CEGUIUtility::isWindowPresent ("ServerJoinButton/Label"))
 	{
 		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerJoinButton/Label"));
+		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("ServerJoinButton/Label"));
 		lbl->setText((CEGUI::utf8*) gettext("Join game"));
 	}
 
-	if (win_mgr.isWindowPresent ("ServerHostButton/Label"))
+	if (CEGUIUtility::isWindowPresent ("ServerHostButton/Label"))
 	{
 		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("ServerHostButton/Label"));
+		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("ServerHostButton/Label"));
 		lbl->setText((CEGUI::utf8*) gettext("Host game"));
 	}
 
-	if (win_mgr.isWindowPresent ("CreditsButton/Label"))
+	if (CEGUIUtility::isWindowPresent ("CreditsButton/Label"))
 	{
 		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("CreditsButton/Label"));
+		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("CreditsButton/Label"));
 		lbl->setText((CEGUI::utf8*) gettext("Credits"));
 	}
 
-	if (win_mgr.isWindowPresent ("MainOptionsButton/Label"))
+	if (CEGUIUtility::isWindowPresent ("MainOptionsButton/Label"))
 	{
 		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("MainOptionsButton/Label"));
+		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("MainOptionsButton/Label"));
 		lbl->setText((CEGUI::utf8*) gettext("Options"));
 	}
 
-	if (win_mgr.isWindowPresent ("EndGameButton/Label"))
+	if (CEGUIUtility::isWindowPresent ("EndGameButton/Label"))
 	{
 		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("EndGameButton/Label"));
+		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("EndGameButton/Label"));
 		lbl->setText((CEGUI::utf8*) gettext("Quit"));
 	}
 
 
 	// Update message windows
-	//lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("DeleteCharLabel")); // note: this has no in-between slash!
+	//lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow ("DeleteCharLabel")); // note: this has no in-between slash!
 	//if (lbl) lbl->setText((CEGUI::utf8*) gettext("Really delete savegame?"));
 
 	// Propagation onto sub-windows
@@ -275,7 +279,6 @@ bool MainMenu::onMainMenuButtonHover (const CEGUI::EventArgs& evt)
 	SoundHelper::playAmbientSoundGroup ("main_menu_hover_item");
 	return true;
 }
-
 #ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
 bool MainMenu::onLoginToOnlineService ( const CEGUI::EventArgs& evt )
 {
@@ -339,6 +342,7 @@ void MainMenu::onSyncCharFinished()
 
 #endif
 
+
 bool MainMenu::onStartSinglePlayer(const CEGUI::EventArgs& evt)
 {
 	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
@@ -384,7 +388,7 @@ bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 	root->getAutoCreatedWindow()->getViewport(0)->setCamera(m_mainMenuCamera);
     root->addFrameListener(this);
 	
-    CEGUI::WindowManager::getSingleton().getWindow("MainMenu")->setAlpha(0);
+	CEGUIUtility::getWindow ("MainMenu")->setAlpha(0);
 
 	// Also switch to the menu's playlist.
 	try
@@ -405,7 +409,7 @@ bool MainMenu::onHidden( const CEGUI::EventArgs& evt )
 	{
 		root->getAutoCreatedWindow()->getViewport(0)->setCamera(m_gameCamera);
 	}
-    CEGUI::WindowManager::getSingleton().getWindow("MainMenu")->setAlpha(1);
+	CEGUIUtility::getWindow ("MainMenu")->setAlpha(1);
 
     root->removeFrameListener(this);
 	
@@ -420,14 +424,14 @@ void MainMenu::updateSaveGameList()
 void MainMenu::setSavegameListVisible(bool show)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::FrameWindow* savegameList = (CEGUI::FrameWindow*) win_mgr.getWindow("SaveGameSelectionFrame");
+	CEGUI::FrameWindow* savegameList = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("SaveGameSelectionFrame");
 	if (savegameList->isVisible() != show)
 	{
 		savegameList->setVisible(show);
 		// hide/show some buttons along with savegamelist
-		win_mgr.getWindow("SinglePlayerButton")->setVisible(show);
-		win_mgr.getWindow("ServerJoinButton")->setVisible(show);
-		win_mgr.getWindow("ServerHostButton")->setVisible(show);
+		CEGUIUtility::getWindow("SinglePlayerButton")->setVisible(show);
+		CEGUIUtility::getWindow("ServerJoinButton")->setVisible(show);
+		CEGUIUtility::getWindow("ServerHostButton")->setVisible(show);
 		
 		if (show == true)
 		{
@@ -842,7 +846,7 @@ void MainMenu::updateCharacterView()
 		
 		if ((correctname != m_savegame_player))
 		{
-            DEBUGX("updating inv player %s to %s",m_savegame_player.c_str(), correctname.c_str());
+			DEBUGX("updating inv player %s to %s",m_savegame_player.c_str(), correctname.c_str());
 			GraphicManager::destroyGraphicObject(m_savegame_player_object);
 			m_savegame_player_object =0;
 			update = true;
@@ -950,13 +954,13 @@ void MainMenu::createSavegameList()
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
     // Select the frame for the saved games in the menu
-	CEGUI::FrameWindow* savegameList = (CEGUI::FrameWindow*) win_mgr.getWindow("SaveGameSelectionFrame");
+	CEGUI::FrameWindow* savegameList = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("SaveGameSelectionFrame");
     savegameList->setInheritsAlpha(false);
 
 	SavegameList* sgl = new SavegameList (m_document, m_ceguiSkinName);
     m_saveGameList = sgl;
 
-    savegameList->addChildWindow(m_saveGameList->getCEGUIWindow());
+	CEGUIUtility::addChildWidget (savegameList, m_saveGameList->getCEGUIWindow());
     m_saveGameList->update();
     m_saveGameList->updateTranslation();
 
@@ -970,6 +974,5 @@ void MainMenu::createSavegameList()
 		std::string (gettext("No")),
 		CEGUI::Event::Subscriber(&SavegameList::onDeleteCharAbortClicked, m_saveGameList));
 
-    m_window->addChildWindow(delchar->getCEGUIWindow());
-
+	CEGUIUtility::addChildWidget (m_window, delchar->getCEGUIWindow());
 }

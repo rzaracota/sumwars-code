@@ -21,6 +21,7 @@
 #include "fstream"
 #include "document.h"
 
+// TODO: remove when no longer needed.
 //#include "sound.h"
 //#include "music.h"
 
@@ -48,6 +49,8 @@
 
 // Sound operations helper.
 #include "soundhelper.h"
+
+#include "ceguiutility.h"
 
 #ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
 #include "onlineservicesmanager.h"
@@ -855,11 +858,11 @@ void Document::onButtonHostGame()
 	{
 		// Show a notification.
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("WarningDialogWindow");
+		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("WarningDialogWindow");
 		message->setInheritsAlpha(false);
 		message->setVisible(true);
 		message->setModalState(true);
-		win_mgr.getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("Please select a character first!"));
+		CEGUIUtility::getWindow ("WarningDialogLabel")->setText((CEGUI::utf8*) gettext ("Please select a character first!"));
 
 		DEBUG ("Warning: Tried to host a game without a selected char!");
 		return;
@@ -876,11 +879,11 @@ void Document::onButtonJoinGame()
 	{
 		// Show a notification.
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("WarningDialogWindow");
+		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("WarningDialogWindow");
 		message->setInheritsAlpha(false);
 		message->setVisible(true);
 		message->setModalState(true);
-		win_mgr.getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("Please select a character first!"));
+		CEGUIUtility::getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("Please select a character first!"));
 
 		DEBUG ("Warning: Tried to join a game without a selected char!");
 		return;
@@ -1984,17 +1987,17 @@ void Document::showWarning (const std::string& textMessage)
 {
 	// Show a notification.
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	if (! win_mgr.isWindowPresent ("WarningDialogWindow"))
+	if (! CEGUIUtility::isWindowPresent ("WarningDialogWindow"))
 	{
 		DEBUG ("Could not display the warning widget: [WarningDialogWindow]");
 		return;
 	}
 
-	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("WarningDialogWindow");
+	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("WarningDialogWindow");
 	message->setInheritsAlpha(false);
 	message->setVisible(true);
 	message->setModalState(true);
-	win_mgr.getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) textMessage.c_str ());
+	CEGUIUtility::getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) textMessage.c_str ());
 
 	getGUIState()->m_shown_windows |= MESSAGE;
 	m_modified |= WINDOWS_MODIFIED;
@@ -2007,9 +2010,9 @@ void Document::hideWarning ()
 	// Show a notification.
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
-	if (win_mgr.isWindowPresent ("WarningDialogWindow"))
+	if (CEGUIUtility::isWindowPresent ("WarningDialogWindow"))
 	{
-		CEGUI::Window* widget = win_mgr.getWindow("WarningDialogWindow");
+		CEGUI::Window* widget = CEGUIUtility::getWindow("WarningDialogWindow");
 		if (widget->isVisible ())
 		{
 			widget->setVisible (false);
@@ -2029,13 +2032,13 @@ void Document::showQuestionDialog ()
 {
 	// Show a notification.
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	if (! win_mgr.isWindowPresent ("QuestionInfoRoot"))
+	if (! CEGUIUtility::isWindowPresent ("QuestionInfoRoot"))
 	{
 		DEBUG ("Could not display the warning widget: [QuestionInfoRoot]");
 		return;
 	}
 
-	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) win_mgr.getWindow("QuestionInfoRoot");
+	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("QuestionInfoRoot");
 	message->setInheritsAlpha(false);
 	message->setVisible(true);
 	message->setModalState(true);
@@ -2051,9 +2054,9 @@ void Document::hideQuestionDialog ()
 	// Show a notification.
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
-	if (win_mgr.isWindowPresent ("QuestionInfoRoot"))
+	if (CEGUIUtility::isWindowPresent ("QuestionInfoRoot"))
 	{
-		CEGUI::Window* widget = win_mgr.getWindow("QuestionInfoRoot");
+		CEGUI::Window* widget = CEGUIUtility::getWindow("QuestionInfoRoot");
 		if (widget && widget->isVisible ())
 		{
 			widget->setVisible (false);
