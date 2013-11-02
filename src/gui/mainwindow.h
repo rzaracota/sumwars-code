@@ -18,9 +18,15 @@
 #define __SUMWARS_GUI_MAINWINDOW_H__
 
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
 
 // needed to be able to create the CEGUI renderer interface
+#ifdef CEGUI_07
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
+#else
+#include "CEGUI/RendererModules/Ogre/Renderer.h"
+#endif
 
 // CEGUI includes
 
