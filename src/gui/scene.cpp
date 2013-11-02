@@ -15,9 +15,19 @@
 
 #include "scene.h"
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
+
+// needed to be able to create the CEGUI renderer interface
+#ifdef CEGUI_07
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreTexture.h"
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreResourceProvider.h"
+#else
+#include "CEGUI/RendererModules/Ogre/Renderer.h"
+#include "CEGUI/RendererModules/Ogre/Texture.h"
+#include "CEGUI/RendererModules/Ogre/ResourceProvider.h"
+#endif
 
 #include "CEGUI/CEGUI.h"
 
@@ -80,17 +90,32 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	DEBUGX("viewport size %i %i ratio %f",v->getActualWidth(),v->getActualHeight(), ratio);
 	minimap_camera->setAspectRatio(ratio);
 
-    // get the OgreRenderer from CEGUI and create a CEGUI texture from the Ogre texture
-    CEGUI::Texture &ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(minimap_texture);
-  
+	// get the OgreRenderer from CEGUI and create a CEGUI texture from the Ogre texture
+	CEGUI::OgreRenderer* rendererPtr = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer());
+	
+#ifdef CEGUI_07
+	CEGUI::Texture &ceguiTex = rendererPtr->createTexture(minimap_texture);
+
 	CEGUI::Imageset& textureImageSet = CEGUI::ImagesetManager::getSingleton().create("minimap", ceguiTex);
 
 	textureImageSet.defineImage( "minimap_img",
-				CEGUI::Point( 0.0f, 0.0f ),
-				CEGUI::Size( ceguiTex.getSize().d_width, ceguiTex.getSize().d_height ),
-				CEGUI::Point( 0.0f, 0.0f ) );
+				CEGUIUtility::Vector2f (0.0f, 0.0f),
+				CEGUIUtility::Size (ceguiTex.getSize ().d_width, ceguiTex.getSize ().d_height ),
+				CEGUIUtility::Vector2f (0.0f, 0.0f) );
+#else
+	CEGUI::Texture &ceguiTex = rendererPtr->createTexture (minimap_texture->getName ());
+	{
+		CEGUI::String imageName("minimap_img");
+		CEGUI::TextureTarget*   d_textureTarget;
+		CEGUI::BasicImage*      d_textureTargetImage;
+		d_textureTarget = rendererPtr->createTextureTarget();
+		d_textureTargetImage = static_cast<CEGUI::BasicImage*>(&CEGUI::ImageManager::getSingleton().create("BasicImage", imageName));
+		d_textureTargetImage->setTexture(&ceguiTex);
+		d_textureTargetImage->setArea(CEGUI::Rectf(0, 0, ceguiTex.getSize ().d_width,ceguiTex.getSize ().d_height));
+	}
+#endif
 
-	// Setup fuer die Spieleransicht
+	// Setup for the player's view
 
 	Ogre::SceneManager* char_scene_mng = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC,"CharacterSceneManager");
 	char_scene_mng->setAmbientLight(Ogre::ColourValue(1,1,1));
@@ -120,15 +145,30 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	char_view->setBackgroundColour(Ogre::ColourValue(0,0,0,1.0) );
 	char_rt->update();
 
-	CEGUI::Texture& char_ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(char_texture);
 
+	// Create a CEGUI texture, based on the Ogre Texture object [char_texture]
+	// Create a CEGUI image using this CEGUI texture. Name it "character_img".
+#ifdef CEGUI_07
+	CEGUI::Texture& char_ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(char_texture);
 	CEGUI::Imageset& char_textureImageSet = CEGUI::ImagesetManager::getSingleton().create("character", char_ceguiTex);
 
-	char_textureImageSet.defineImage( "character_img",
-			CEGUI::Point( 0.0f, 0.0f ),
+	char_textureImageSet.defineImage ("character_img",
+			CEGUIUtility::Vector2f ( 0.0f, 0.0f ),
 			CEGUI::Size( char_ceguiTex.getSize().d_width, char_ceguiTex.getSize().d_height ),
-			CEGUI::Point( 0.0f, 0.0f ) );
-	
+			CEGUIUtility::Vector2f (0.0f, 0.0f) );
+#else
+	{
+		CEGUI::OgreRenderer* myRenderer = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer());
+		CEGUI::Texture& char_ceguiTex = myRenderer->createTexture ("character", char_texture);
+		CEGUI::BasicImage*      d_textureTargetImage;
+	    CEGUI::TextureTarget*   d_textureTarget;
+		d_textureTarget = myRenderer->createTextureTarget();
+		CEGUI::String imageName("character_img");
+		d_textureTargetImage = static_cast<CEGUI::BasicImage*>(&CEGUI::ImageManager::getSingleton().create("BasicImage", imageName));
+		d_textureTargetImage->setTexture(&char_ceguiTex);
+		d_textureTargetImage->setArea(CEGUI::Rectf(0, 0, char_ceguiTex.getSize ().d_width, char_ceguiTex.getSize ().d_height));
+	}
+#endif	
 	/*
 	Ogre::MaterialPtr mat = Ogre::MaterialManager::getSingleton().create("RttMat",
 			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);

@@ -21,10 +21,12 @@
 #include "OgreLogManager.h"
 #include "OgreMeshManager.h"
 
-// needed to be able to create the CEGUI renderer interface
-#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
 
-// CEGUI includes
+// needed to be able to create the CEGUI renderer interface
+#ifdef CEGUI_07
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 #include "CEGUI/CEGUISystem.h"
 #include "CEGUI/CEGUIInputEvent.h"
 #include "CEGUI/CEGUIWindow.h"
@@ -32,6 +34,19 @@
 #include "CEGUI/CEGUISchemeManager.h"
 #include "CEGUI/CEGUIFontManager.h"
 #include "CEGUI/elements/CEGUIFrameWindow.h"
+#else
+#include "CEGUI/RendererModules/Ogre/Renderer.h"
+#include "CEGUI/System.h"
+#include "CEGUI/InputEvent.h"
+#include "CEGUI/Window.h"
+#include "CEGUI/WindowManager.h"
+#include "CEGUI/SchemeManager.h"
+#include "CEGUI/FontManager.h"
+#include "CEGUI/widgets/FrameWindow.h"
+#endif
+
+
+// CEGUI includes
 
 #include <stdio.h>
 

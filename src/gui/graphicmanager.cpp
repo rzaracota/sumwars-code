@@ -39,14 +39,24 @@ void StencilOpQueueListener::renderQueueStarted(Ogre::uint8 queueGroupId, const 
 		rendersys->clearFrameBuffer(Ogre::FBT_STENCIL); 
 		rendersys->setStencilCheckEnabled(true); 
 
-#if (OGRE_VERSION < ((1 << 16) | (9 << 8) | 0))
-        rendersys->setStencilBufferParams(Ogre::CMPF_NOT_EQUAL,
-                                          STENCIL_VALUE_FOR_OUTLINE_GLOW, STENCIL_FULL_MASK,
-            Ogre::SOP_KEEP,Ogre::SOP_KEEP,Ogre::SOP_REPLACE,false);
+//Assume we're on major version 1.
+#if OGRE_VERSION_MAJOR > 1 || OGRE_VERSION_MINOR > 8
+		rendersys->setStencilBufferParams(Ogre::CMPF_NOT_EQUAL,				// stencil compare function.
+										  STENCIL_VALUE_FOR_OUTLINE_GLOW,	// reference value used in comparison
+										  STENCIL_FULL_MASK,				// The bitmask applied to both the stencil value and the reference value 
+										  STENCIL_FULL_MASK,				// !Ogre1.9! Write mark : The bitmask the controls which bits from refValue will be written to stencil buffer
+										  Ogre::SOP_KEEP,					// The action to perform when the stencil check fails
+										  Ogre::SOP_KEEP,					// The action to perform when the stencil check passes, but the depth buffer check still fail
+										  Ogre::SOP_REPLACE,				// The action to take when both the stencil and depth check pas
+										  false);							// If set to true, then if you render both back and front faces
 #else
-        rendersys->setStencilBufferParams(Ogre::CMPF_NOT_EQUAL,
-                                          STENCIL_VALUE_FOR_OUTLINE_GLOW, STENCIL_FULL_MASK, STENCIL_FULL_MASK,
-            Ogre::SOP_KEEP,Ogre::SOP_KEEP,Ogre::SOP_REPLACE,false);
+		rendersys->setStencilBufferParams(Ogre::CMPF_NOT_EQUAL,				// stencil compare function.
+										  STENCIL_VALUE_FOR_OUTLINE_GLOW,	// reference value used in comparison
+										  STENCIL_FULL_MASK,				// The bitmask applied to both the stencil value and the reference value 
+										  Ogre::SOP_KEEP,					// The action to perform when the stencil check fails
+										  Ogre::SOP_KEEP,					// The action to perform when the stencil check passes, but the depth buffer check still fail
+										  Ogre::SOP_REPLACE,				// The action to take when both the stencil and depth check pas
+										  false);							// If set to true, then if you render both back and front faces
 #endif
 	} 
 			/*

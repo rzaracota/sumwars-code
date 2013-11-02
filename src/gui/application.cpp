@@ -774,7 +774,7 @@ bool Application::initOgre()
 	// Register as a Window listener
 	Ogre::WindowEventUtilities::addWindowEventListener (m_window, this);
 
-    Ogre::LogManager::getSingleton ().createLog (SumwarsHelper::userPath () + "/BenchLog.log");
+	Ogre::LogManager::getSingleton ().createLog (SumwarsHelper::userPath () + "/BenchLog.log");
 	return true;
 }
 
@@ -893,19 +893,19 @@ bool Application::initCEGUI()
 		parser->setProperty("SchemaDefaultResourceGroup", "GUI_XML_schemas");
     
 	// Load schemes
-	CEGUI::SchemeManager::getSingleton().create((CEGUI::utf8*)"SWB.scheme", (CEGUI::utf8*)"GUI");
-	CEGUI::SchemeManager::getSingleton().create((CEGUI::utf8*)"TaharezLook.scheme", (CEGUI::utf8*)"GUI");
-	CEGUI::SchemeManager::getSingleton().create((CEGUI::utf8*)"SumWarsExtras.scheme", (CEGUI::utf8*)"GUI");
+	CEGUIUtility::loadScheme ((CEGUI::utf8*)"SWB.scheme", (CEGUI::utf8*)"GUI");
+	CEGUIUtility::loadScheme ((CEGUI::utf8*)"TaharezLook.scheme", (CEGUI::utf8*)"GUI");
+	CEGUIUtility::loadScheme ((CEGUI::utf8*)"SumWarsExtras.scheme", (CEGUI::utf8*)"GUI");
 	
 	// Imagesets laden
-	CEGUI::ImagesetManager::getSingleton().create("skills.imageset");
+	CEGUIUtility::loadImageset("skills.imageset");
 
 	DEBUG ("Creating hardcoded images from file");
 
 	try
 	{
-		CEGUI::ImagesetManager::getSingleton().createFromImageFile("SumWarsLogo.png", "SumWarsLogo.png");
-		CEGUI::ImagesetManager::getSingleton().createFromImageFile("worldMap.png","worldMap.png",(CEGUI::utf8*)"GUI");
+		CEGUIUtility::addManagedImageFromFile ("SumWarsLogo.png", "SumWarsLogo.png");
+		CEGUIUtility::addManagedImageFromFile ("worldMap.png", "worldMap.png", (CEGUI::utf8*)"GUI");
 	}
 	catch (CEGUI::Exception& e)
 	{
@@ -922,6 +922,7 @@ bool Application::initCEGUI()
 	CEGUIUtility::setDefaultMouseCursor (m_cegui_system, Options::getInstance ()->getCeguiCursorSkin (), "MouseArrow");
 	CEGUIUtility::setDefaultTooltip (m_cegui_system, Options::getInstance ()->getCeguiSkin (), "Tooltip");
 
+#if 0
 	// Update the fade delay?
 	if (m_cegui_system->getDefaultTooltip ())
 	{
@@ -932,24 +933,24 @@ bool Application::initCEGUI()
 		m_cegui_system->getDefaultTooltip ()->setFadeTime (myFadeTime);
 		//DEBUG ("New tooltip fade time set to %f", myFadeTime);
 	}
-    
+#endif
+
 	DEBUG ("Creating fonts");
 
 	// Load the usable font list.
-	CEGUI::FontManager::getSingleton().create("DejaVuSerif-8.font", (CEGUI::utf8*)"GUI");
-	CEGUI::FontManager::getSingleton().create("DejaVuSerif-10.font", (CEGUI::utf8*)"GUI");
-	CEGUI::FontManager::getSingleton().create("DejaVuSerif-12.font", (CEGUI::utf8*)"GUI");
-	CEGUI::FontManager::getSingleton().create("DejaVuSerif-16.font", (CEGUI::utf8*)"GUI");
-	CEGUI::FontManager::getSingleton().create("DejaVuSans-10.font", (CEGUI::utf8*)"GUI");
-
-	CEGUI::FontManager::getSingleton().create("SWB_S.font", (CEGUI::utf8*)"GUI");
+	CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-8.font", (CEGUI::utf8*)"GUI");
+	CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-10.font", (CEGUI::utf8*)"GUI");
+	CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-12.font", (CEGUI::utf8*)"GUI");
+	CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-16.font", (CEGUI::utf8*)"GUI");
+	CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSans-10.font", (CEGUI::utf8*)"GUI");
+	CEGUIUtility::addFont ((CEGUI::utf8*)"SWB_S.font", (CEGUI::utf8*)"GUI");
 
 	// Set the default font to use based on the current display resolution.
 	int configuredWidth, configuredHeight;
 	SumwarsHelper::getSizesFromResolutionString (Options::getInstance ()->getUsedResolution (), configuredWidth, configuredHeight);
 	std::string defaultFontName = SumwarsHelper::getSingletonPtr ()->getRecommendedDefaultFontForWindowSize (configuredWidth, configuredHeight);
 	DEBUG ("For the current display resolution (%d x %d), the system has decreed that the recommended font is: %s", configuredWidth, configuredHeight, defaultFontName.c_str ());
-	m_cegui_system->setDefaultFont((CEGUI::utf8*)defaultFontName.c_str ());
+	CEGUIUtility::setDefaultFont ((CEGUI::utf8*)defaultFontName.c_str ());
 
 	DEBUG ("Creating own factory for tooltips");
 	// Insert own factories. // TODO: check if this is really needed. Couldn't the custom tooltip just be added to the scheme?
@@ -1078,7 +1079,7 @@ bool Application::loadResources(int datagroups)
 
 			file = it->filename;
 
-			CEGUI::ImagesetManager::getSingleton().createFromImageFile(file,file,(CEGUI::utf8*)"itempictures");
+			CEGUIUtility::addManagedImageFromFile (file, file, (CEGUI::utf8*)"itempictures");
 
 			updateStartScreen(0.1);
 		}
@@ -1090,7 +1091,7 @@ bool Application::loadResources(int datagroups)
 
 			file = it->filename;
 
-			CEGUI::ImagesetManager::getSingleton().create(file);
+			CEGUIUtility::loadImageset (file);
 
 			updateStartScreen(0.2);
 		}
@@ -1102,7 +1103,7 @@ bool Application::loadResources(int datagroups)
 
 			file = it->filename;
 
-			CEGUI::ImagesetManager::getSingleton().create(file);
+			CEGUIUtility::loadImageset (file);
 
 			updateStartScreen(0.3);
 		}
@@ -1510,7 +1511,6 @@ void Application::eventOccurred(const Ogre::String &eventName, const Ogre::NameV
             // DeviceCreated is called when Device is dragged from one Display to another
             // DeviceRestored is called when RenderWindow is minimized with Alt+Tab or the Windows key
             m_ogre_root->clearEventTimes();
-
             #if (OGRE_VERSION < ((1 << 16) | (9 << 8) | 0))
                 Ogre::TexturePtr tex = Ogre::TextureManager::getSingletonPtr()->getByName("minimap_tex", "General");
             #else
