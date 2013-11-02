@@ -161,17 +161,21 @@ void SavegameList::update()
 		{
 			std::ostringstream s;
 			s << n;
+			bool needToLoadLayout = false;
 
 			CEGUI::Window* saveItem = 0;
 			try
 			{
-				saveItem = win_mgr.getWindow(s.str().append("SaveItemRoot"));
-				saveItem->show();
-				m_currentSelected = saveItem;
-				// Store the file name in a mapping, along with this widget name
-				m_fileSaveMapping [s.str().append("SaveItemRoot")] = it->filename;
+				saveItem = CEGUIUtility::getWindow (s.str ().append ("SaveItemRoot"));
+				if (!saveItem)
+					needToLoadLayout = true;
 			}
 			catch(CEGUI::UnknownObjectException&)
+			{
+				needToLoadLayout = true;
+			}
+
+			if (needToLoadLayout)
 			{
 				saveItem = (CEGUI::Window*) win_mgr.loadWindowLayout("saveitem.layout", s.str());
 				m_currentSelected = saveItem;
@@ -192,6 +196,13 @@ void SavegameList::update()
 				saveItem->getChild(s.str().append("SaveItemRoot/DelChar"))->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onDeleteCharClicked, this));	
 				saveItem->getChild(s.str().append("SaveItemRoot/DelChar"))->subscribeEvent (CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&SavegameList::onItemButtonHover, this));
 			}
+			else
+			{
+				saveItem->show();
+				m_currentSelected = saveItem;
+				// Store the file name in a mapping, along with this widget name
+				m_fileSaveMapping [s.str().append("SaveItemRoot")] = it->filename;
+			}
 			
 			// set the proper Image
 			std::string texName = filename.erase(filename.length() - 4, filename.length());
@@ -211,8 +222,9 @@ void SavegameList::update()
 			DEBUGX("imagename %s",imageName.c_str() );
 			DEBUGX("imagesetName %s", imagesetName.c_str());
 			
+			// TODO: need to check if the image in the imageset is defined, not just the imageset.
 			
-			if (CEGUI::ImagesetManager::getSingleton().isDefined(imagesetName))
+			if (CEGUIUtility::getImageManager ().isDefined(imagesetName))
 			{
 				saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setProperty("Image", imageName);
 			}
