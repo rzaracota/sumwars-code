@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-30 10:08+0200\n"
+"PO-Revision-Date: 2013-11-03 14:20+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/the_ambush_of_the_undead/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.6-dev\n"
+"X-Generator: Weblate 1.8-dev\n"
 
 #: theFissure.xml:543
 msgid "((Such an opportunity may never occur again.))"
@@ -498,7 +498,7 @@ msgstr ""
 
 #: theFissure.xml:401
 msgid "Will that be payed extra?"
-msgstr ""
+msgstr "¿Tendrá eso una remuneración extra?"
 
 #: theFissure.xml:158
 msgid "Wow, she's gorgeous."
