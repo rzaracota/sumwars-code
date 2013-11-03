@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-10-13 21:11+0200\n"
-"Last-Translator: Santiago Del Brio <changonc@gmail.com>\n"
+"PO-Revision-Date: 2013-11-03 15:00+0200\n"
+"Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/tutorial/es/>\n"
 "Language: es\n"
@@ -10,15 +10,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.7\n"
+"X-Generator: Weblate 1.8-dev\n"
 
 #: tutorial.xml:1845
 msgid "'course. Send the Branded One first.##female"
-msgstr ""
+msgstr "Por supuesto. Envía a la forajida primero.##female"
 
 #: tutorial.xml:1847
 msgid "'course. Send the Branded One first.##male"
-msgstr ""
+msgstr "Por supuesto. Envía al forajido primero.##male"
 
 #: tutorial.xml:229
 msgid "*urgh*"
@@ -182,11 +182,11 @@ msgstr "Será mejor que tenga cuidado."
 
 #: tutorial.xml:1065
 msgid "Better strange than..."
-msgstr ""
+msgstr "Mejor extraño que..."
 
 #: tutorial.xml:1060
 msgid "Branded Ones use strange phrases indeed."
-msgstr "En efecto, los Yerrados usan frases extrañas."
+msgstr "En efecto, los forajidos usan frases extrañas."
 
 #: tutorial.xml:1058
 msgid "Character class."
@@ -415,7 +415,7 @@ msgstr "Además tu llegada fue... un tanto agotadora. ##solo"
 #: tutorial.xml:920
 msgid "Go in, click on it, kill it. A Branded One wouldn't forget about that."
 msgstr ""
-"Vamos hazlo, haz clic sobre él, mátalo. Un Yerrado nunca se olvidaría de "
+"Vamos hazlo, haz clic sobre él, mátalo. Un forajido nunca se olvidaría de "
 "eso."
 
 #: tutorial.xml:1927
@@ -551,7 +551,7 @@ msgstr "¡Voy a trabajar el doble de duro!"
 
 #: tutorial.xml:1062
 msgid "I wonder why this Soren knows so much about the Branded Ones..."
-msgstr "Me pregunto porqué este Soren sabe tanto sobre los Yerrados..."
+msgstr "Me pregunto porqué este Soren sabe tanto sobre los forajidos..."
 
 #: tutorial.xml:775
 msgid "I wouldn't necessarily call that 'junk'."
@@ -571,7 +571,7 @@ msgstr "¡Te enseñaré la capacidad de resistencia de los chorros de magia!"
 
 #: tutorial.xml:2085
 msgid "I'm a Branded One! That is far worse than being cursed."
-msgstr "¡Soy un Yerrado! Eso es mucho peor que estar maldito."
+msgstr "¡Soy un forajido! Eso es mucho peor que estar maldito."
 
 #: tutorial.xml:1428
 msgid "I'm someone who is stuck down here, that's who."
@@ -1000,7 +1000,7 @@ msgstr "Las habilidades se dividen en dos grupos."
 
 #: tutorial.xml:808
 msgid "Slowly you're getting to me."
-msgstr ""
+msgstr "Empiezas a caerme bien."
 
 #: tutorial.xml:1566
 msgid "So, this really is the lab, and that should be the crystal"
@@ -1042,8 +1042,8 @@ msgstr "¡Ahórraros vuestra tontería elementalista y salid de mi camino!"
 #: tutorial.xml:325
 msgid "Spill it! Where are we, and who has the nerve to cross Branded Ones?!"
 msgstr ""
-"¡Derramalo!¡¿Dónde estamos, y quién tiene el descaro de cruzarse en el "
-"camino de los Yerrados?!"
+"¡Derrámalo!¡¿Dónde estamos, y quién tiene el descaro de cruzarse en el "
+"camino de los forajidos?!"
 
 #: tutorial.xml:806
 msgid ""
@@ -1091,8 +1091,8 @@ msgid ""
 "That's correct, Branded One. You wouldn't want to be called `harvest' now, "
 "would you?"
 msgstr ""
-"Eso es correcto, Yerrado. No querrá que le sigan llamando 'cosechado' ahora. "
-"¿verdad?"
+"Eso es correcto, forajido. No querrá que le sigan llamando 'cosechado' "
+"ahora. ¿verdad?"
 
 #: tutorial.xml:805
 msgid "That's why he gave us these."
@@ -1222,13 +1222,15 @@ msgstr "Este hombre está poniendo a prueba mi paciencia."
 msgid ""
 "To Harad! That's impossible to put up with. Give me my weapon and I'll take "
 "care of that."
-msgstr ""
+msgstr "¡A Harad! Eso es imposible de soportar. Dame mi arma y yo me encargaré."
 
 #: tutorial.xml:792
 msgid ""
 "To Harad! That's impossible to put up with. Give us our weapons and we'll "
 "take care of that."
 msgstr ""
+"¡A Harad! Eso es imposible de soportar. Dadnos nuestras armas y nosotros nos "
+"encargaremos."
 
 #: tutorial.xml:451 tutorial.xml:873 tutorial.xml:1035 tutorial.xml:1140
 #: tutorial.xml:1870
@@ -1248,6 +1250,8 @@ msgid ""
 "Urk! They seem to have broken out somehow. I hope they don't breed in the "
 "crevices."
 msgstr ""
+"¡Urk! Parece que han logrado salir de alguna manera. Espero que no se "
+"reproduzcan en las grietas."
 
 #: tutorial.xml:427
 msgid "Very well. Follow me, please."
@@ -1269,7 +1273,7 @@ msgstr "Espera un segundo, Derred. De alguna manera parecen más fuertes."
 
 #: tutorial.xml:1836
 msgid "Wait a second. What if the old geezer has attached a trap to it?"
-msgstr ""
+msgstr "Espera un segundo. ¿Y si el vejestorio le ha puesto una trampa?"
 
 #: tutorial.xml:1426
 msgid "Wait, who are you?"
@@ -1309,16 +1313,19 @@ msgid ""
 "We were told that the first minutes are like one taking a step for the first "
 "time."
 msgstr ""
+"Nos dijeron que los primeros minutos son como dar un paso por primera vez."
 
 #: tutorial.xml:2091
 msgid "We're Branded Ones! That is far worse than being cursed."
-msgstr "¡Somos Marcados! Eso es mucho peor que estar malditos."
+msgstr "¡Somos forajidos! Eso es mucho peor que estar malditos."
 
 #: tutorial.xml:772
 msgid ""
 "Well, as you are now, you can only do that at places of great magical "
 "concentrations. In other words..."
 msgstr ""
+"Bien, tal como eres ahora, sólo puedes hacer eso en lugares de grandes "
+"concentraciones mágicas. En otras palabras..."
 
 #: tutorial.xml:298
 msgid "Well, if you would follow us, please?"
@@ -1351,7 +1358,7 @@ msgstr "Bien, estas en lo cierto sobre eso..."
 
 #: tutorial.xml:2079
 msgid "What a day. Did you know that thing could spit little monsters?"
-msgstr ""
+msgstr "Qué día. ¿Sabes que esa cosa puede escupir monstruos pequeños?"
 
 #: tutorial.xml:264
 msgid ""
@@ -1363,7 +1370,7 @@ msgstr ""
 
 #: tutorial.xml:809
 msgid "What didn't he take into consideration? He is clearly paranoid."
-msgstr ""
+msgstr "¿Qué no tomó en consideración? Está claramente paranoico."
 
 #: tutorial.xml:921
 msgid "What does this 'click on it' mean, anyway?"
@@ -1386,6 +1393,8 @@ msgid ""
 "What is he researching here all the time? All those flowers can hardly be "
 "for the purpose of the Council and Akeran."
 msgstr ""
+"¿Qué está investigando aquí todo el tiempo? Todas esas flores apenas pueden "
+"servir al propósito del consejo y de Akeran."
 
 #: tutorial.xml:801
 msgid "What is this supposed to be?"
@@ -1401,6 +1410,9 @@ msgid ""
 "even know how to walk anymore? Just click with the left mouse button at a "
 "place on the ground. Then it will all come back to you on its own."
 msgstr ""
+"¿Qué te retiene aquí? ¿Te ha afectado tanto el transporte que ya no sabes "
+"cómo andar? Haz clic con el botón izquierdo del ratón en algún lugar del "
+"suelo. Entonces todo volverá a usted por sí mismo."
 
 #: tutorial.xml:758
 msgid "What?"
@@ -1412,13 +1424,13 @@ msgstr "¿Dónde está mi arma?"
 
 #: tutorial.xml:1784
 msgid "While we are on the topic..."
-msgstr ""
+msgstr "Mientras estamos en el tema..."
 
 #: tutorial.xml:277
 msgid ""
 "Whoever the head honcho is here: He'd better know what he's gotten himself "
 "into."
-msgstr ""
+msgstr "Quienquiera que sea el mandamás aquí, sabría mejor en qué se ha metido."
 
 #: tutorial.xml:297
 msgid "Why didn't you say so in the first place?"
@@ -1426,7 +1438,7 @@ msgstr "¿Porqué no dijiste eso al principio?"
 
 #: tutorial.xml:1460
 msgid "Why don't you get an energy crystal in the meantime?"
-msgstr ""
+msgstr "¿Por qué no consigues un cristal de energía mientras tanto?"
 
 #: tutorial.xml:2082
 #, fuzzy
@@ -1443,12 +1455,16 @@ msgid ""
 "With all the damn beasts roaming around here freely, I almost think they "
 "just want me as an exterminator."
 msgstr ""
+"Con todas esas malditas bestias vagando libremente por aquí, casi creo que "
+"sólo me quieren como exterminador."
 
 #: tutorial.xml:1936
 msgid ""
 "With all the damn beasts roaming around here freely, I almost think they "
 "just want us as exterminators."
 msgstr ""
+"Con todas esas malditas bestias vagando libremente por aquí, casi creo que "
+"sólo nos quieren como exterminadores."
 
 #: tutorial.xml:1812
 msgid ""
@@ -1467,7 +1483,7 @@ msgstr "¡Wow! Pues sí que creen en una investigación ordenada y exhaustiva."
 
 #: tutorial.xml:1357
 msgid "Yeah, even if we have to use our teeth."
-msgstr ""
+msgstr "Sí, incluso si tenemos que usar nuestros dientes."
 
 #: tutorial.xml:410 tutorial.xml:819 tutorial.xml:1028 tutorial.xml:1799
 msgid "Yes"
@@ -1534,18 +1550,20 @@ msgid ""
 "You could use it to get to the sewer tunnels that connect the different "
 "levels of this most magnificent construction."
 msgstr ""
+"Podrías usarlo para llegar a los túneles de los alcantarillados que conectan "
+"los diferentes niveles de esta majestuosa construcción."
 
 #: tutorial.xml:1774
 msgid "You made it!"
-msgstr ""
+msgstr "¡Lo lograste!"
 
 #: tutorial.xml:1447
 msgid "You see that crane over there?"
-msgstr ""
+msgstr "¿Ves esa grúa de allá?"
 
 #: tutorial.xml:908
 msgid "You should equip your weapon first."
-msgstr ""
+msgstr "Deberías equiparte primero."
 
 #: tutorial.xml:333
 msgid "You shouldn't be able to pose a threat to us at the moment."
@@ -1584,23 +1602,23 @@ msgid ""
 "You're right. It's best if you do it, Branded One. At least nothing lasting "
 "can happen that way.##female"
 msgstr ""
-"Tienes razón. Es mejor si lo haces tú, Marcada. Al menos nada duradero puede "
-"suceder de esa manera.##female"
+"Tienes razón. Es mejor si lo haces tú, forajida. Al menos nada duradero "
+"puede suceder de esa manera.##female"
 
 #: tutorial.xml:1840
 msgid ""
 "You're right. It's best if you do it, Branded One. At least nothing lasting "
 "can happen that way.##male"
 msgstr ""
-"Tienes razón. Es mejor si lo haces tú, Marcado. Al menos nada duradero puede "
-"suceder de esa manera.##male"
+"Tienes razón. Es mejor si lo haces tú, forajido. Al menos nada duradero "
+"puede suceder de esa manera.##male"
 
 #: tutorial.xml:1842
 msgid ""
 "You're right. It's best if you do it, Branded Ones. At least nothing lasting "
 "can happen that way."
 msgstr ""
-"Tenéis razón. Es mejor si lo hacéis vosotros, Marcados. Al menos nada "
+"Tenéis razón. Es mejor si lo hacéis vosotros, forajidos. Al menos nada "
 "duradero puede suceder de esa manera."
 
 #: tutorial.xml:811
