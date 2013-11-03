@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-03 15:00+0200\n"
+"PO-Revision-Date: 2013-11-03 21:41+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/tutorial/es/>\n"
@@ -888,7 +888,7 @@ msgstr "No, Tolec. Debes decirlo con mucha más autoridad."
 
 #: tutorial.xml:440
 msgid "None of you will leave it until you surrender your weapons."
-msgstr "Ninguno de vosotros se irá hasta que entregue is vuestras armas."
+msgstr "Ninguno de vosotros se marchará hasta que entreguéis las armas."
 
 #: tutorial.xml:652
 msgid "Noo!"
@@ -1184,7 +1184,7 @@ msgstr ""
 
 #: tutorial.xml:1376
 msgid "They better have some serious coin for all this trouble."
-msgstr ""
+msgstr "Sería mejor si tuviesen alguna moneda seria para todo este problema."
 
 #: tutorial.xml:1778
 msgid "They made it!"
@@ -1430,7 +1430,9 @@ msgstr "Mientras estamos en el tema..."
 msgid ""
 "Whoever the head honcho is here: He'd better know what he's gotten himself "
 "into."
-msgstr "Quienquiera que sea el mandamás aquí, sabría mejor en qué se ha metido."
+msgstr ""
+"Quienquiera que sea el mandamás aquí, sería mejor que supiera en qué se ha "
+"metido."
 
 #: tutorial.xml:297
 msgid "Why didn't you say so in the first place?"
@@ -1568,34 +1570,39 @@ msgstr "Deberías equiparte primero."
 #: tutorial.xml:333
 msgid "You shouldn't be able to pose a threat to us at the moment."
 msgstr ""
+"No deberíais ser capaz de representar una amenaza para nosotros en este "
+"momento."
 
 #: tutorial.xml:329
 msgid "You shouldn't be able to pose a threat to us at the moment. ##solo"
 msgstr ""
+"No deberías ser capaz de representar una amenaza para nosotros en este "
+"momento. ##solo"
 
 #: tutorial.xml:916
 msgid "You still know how to fight, don't you? ##solo"
-msgstr ""
+msgstr "Todavía sabes luchar, ¿no? ##solo"
 
 #: tutorial.xml:437
 msgid "You will not leave it until you surrender your weapon. ##solo"
-msgstr ""
+msgstr "No saldrás hasta que entregues tu arma. ##solo"
 
 #: tutorial.xml:1865
 msgid "You'd better hope there's no trap."
-msgstr ""
+msgstr "Mejor sería que no haya ninguna trampa."
 
 #: tutorial.xml:1017
 msgid "You'd better think about who you're calling `weakling' here!"
 msgstr ""
+"¡Sería mejor que os pensaseis bien a quién estáis llamando 'debil' aquí!"
 
 #: tutorial.xml:1371
 msgid "You'll have to find another way out."
-msgstr ""
+msgstr "Tendrás que encontrar otra salida."
 
 #: tutorial.xml:1235
 msgid "You're not even sure it's there?"
-msgstr ""
+msgstr "¿Ni siquiera estás seguro de esté ahí?"
 
 #: tutorial.xml:1838
 msgid ""
@@ -1623,34 +1630,38 @@ msgstr ""
 
 #: tutorial.xml:811
 msgid "You... can still remember how to use a weapon, right?"
-msgstr ""
+msgstr "Tú... todavía puedes recordar como usar una arma, ¿verdad?"
 
 #: tutorial.xml:1013
 msgid ""
 "Your witch stuff may have weakened me, but I take some of the power from "
 "every being I kill and become stronger."
 msgstr ""
+"Puede que tus cosas de bruja me hayan debilitado, pero entonces absorbo la "
+"vitalidad de los seres que mato y me fortalezco."
 
 #: tutorial.xml:1015
 msgid ""
 "Your witch stuff may have weakened us, but we take some of the power from "
 "every being we kill and become stronger."
 msgstr ""
+"Puede que tus cosas de bruja nos hayan debilitado, pero entonces absorbemos "
+"la vitalidad de los seres que matamos y nos fortalecemos."
 
 #: tutorial.xml:1008
 msgid "Yuck! Those things are really disgusting."
-msgstr ""
+msgstr "¡Puaj!Esas cosas son realmente repugnantes."
 
 #: tutorial.xml:1568
 msgid "but there is no oh-so-blessed master here."
-msgstr ""
+msgstr "pero no hay ningún maestro tan bendito aquí."
 
 #: tutorial.xml:28 tutorial.xml:463 tutorial.xml:952 tutorial.xml:1079
 #: tutorial.xml:1153 tutorial.xml:1543 tutorial.xml:1709 tutorial.xml:1886
 #: tutorial.xml:2136
 msgid "elCnlLobby"
-msgstr ""
+msgstr "elCnlLobby"
 
 #: tutorial.xml:379 tutorial.xml:1316 tutorial.xml:1626
 msgid "elCnlLowerCaves"
-msgstr ""
+msgstr "Consejo de los elementos, Mazmorra subterránea"
