@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-06-01 13:46+0200\n"
+"PO-Revision-Date: 2013-11-04 16:17+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/fortify_dwarfenwall/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.6-dev\n"
+"X-Generator: Weblate 1.8-dev\n"
 
 #: fortify_dwarfenwall.xml:691
 msgid "((And that crystal, he palmed off on me...))"
@@ -730,7 +730,7 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:708
 msgid "What are you trying to say?"
-msgstr ""
+msgstr "¿Qué intentas decir?"
 
 #: fortify_dwarfenwall.xml:437
 msgid "What do you think will happen, if you're revealed in town?"
@@ -860,7 +860,7 @@ msgstr ""
 #: fortify_dwarfenwall.xml:14 fortify_dwarfenwall.xml:63
 #: fortify_dwarfenwall.xml:504
 msgid "elCnlLobby"
-msgstr ""
+msgstr "elCnlLobby"
 
 #: fortify_dwarfenwall.xml:429
 msgid "for who's chestnuts I pulled out of the fire."
