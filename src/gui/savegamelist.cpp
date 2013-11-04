@@ -135,7 +135,7 @@ void SavegameList::update()
         CEGUI::Window* saveItem = 0;
         try
         {
-            saveItem = win_mgr.getWindow(s.str().append("SaveItemRoot"));
+            saveItem = CEGUIUtility::getWindow(s.str().append("SaveItemRoot"));
 			saveItem->hide();
             //m_window->removeChildWindow(saveItem);
         }
@@ -177,11 +177,12 @@ void SavegameList::update()
 
 			if (needToLoadLayout)
 			{
-				saveItem = (CEGUI::Window*) win_mgr.loadWindowLayout("saveitem.layout", s.str());
+				saveItem = (CEGUI::FrameWindow*) (CEGUIUtility::loadLayoutFromFile ("saveitem.layout"));
+				//saveItem = (CEGUI::Window*) win_mgr.loadWindowLayout("saveitem.layout", s.str());
 				m_currentSelected = saveItem;
 				saveItem->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onSavegameChosen, this));
-				saveItem->subscribeEvent(CEGUI::PushButton::EventMouseEnters, CEGUI::Event::Subscriber(&SavegameList::onItemButtonHover, this));
-				m_window->addChildWindow(saveItem);
+				saveItem->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&SavegameList::onItemButtonHover, this));
+				CEGUIUtility::addChildWidget(m_window, saveItem);
 				saveItem->show();
 
 				// Store the mapping entry;

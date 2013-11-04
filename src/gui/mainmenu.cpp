@@ -160,10 +160,10 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 
     OnlineServicesManager::getSingleton().registerLoginStatusListener(this);
 #else
-    lbl = static_cast<CEGUI::FrameWindow*>(win_mgr.getWindow("SumwarsOnlineIndicatorLabel"));
+    lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("SumwarsOnlineIndicatorLabel"));
     lbl->hide();
 
-    btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("LoginButton"));
+    btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("LoginButton"));
     btn->hide();
 #endif
 
