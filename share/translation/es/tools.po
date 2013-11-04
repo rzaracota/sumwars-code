@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-25 18:38+0200\n"
-"PO-Revision-Date: 2013-05-30 09:59+0200\n"
+"PO-Revision-Date: 2013-11-05 00:57+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/tools/es/>\n"
@@ -17,12 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.6-dev\n"
+"X-Generator: Weblate 1.8-dev\n"
 
 #: ../../src/gui/contenteditor/contenteditor.cpp:205
-#, fuzzy
 msgid "Render Info"
-msgstr "Info. de renderizado"
+msgstr "Representar información"
 
 #: ../../src/gui/contenteditor/contenteditor.cpp:208
 msgid "Mesh"
