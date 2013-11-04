@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-06-01 13:46+0200\n"
+"PO-Revision-Date: 2013-11-04 16:29+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/defend_dwarfenwall/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.6-dev\n"
+"X-Generator: Weblate 1.8-dev\n"
 
 #: siegeOfDwarfenwall.xml:217 siegeOfDwarfenwall.xml:2211
 #: siegeOfDwarfenwall.xml:2538
@@ -1035,7 +1035,7 @@ msgstr ""
 #: siegeOfDwarfenwall.xml:10 siegeOfDwarfenwall.xml:253
 #: siegeOfDwarfenwall.xml:2425
 msgid "dwarfenwall"
-msgstr ""
+msgstr "dwarfenwall"
 
 #: siegeOfDwarfenwall.xml:35 siegeOfDwarfenwall.xml:2306
 msgid "dwarfenwallCommand"
