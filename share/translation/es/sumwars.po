@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-30 10:52+0200\n"
+"PO-Revision-Date: 2013-11-04 16:32+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.6-dev\n"
+"X-Generator: Weblate 1.8-dev\n"
 
 #: aisen.xml:6
 msgid "aisMeadow"
@@ -818,7 +818,7 @@ msgstr ""
 
 #: cursedCaves.xml:251
 msgid "greyCurseCaveFis"
-msgstr ""
+msgstr "La fisura"
 
 #: cursedCaves.xml:280
 msgid "greyCurseCaveEast"
@@ -985,7 +985,7 @@ msgstr ""
 
 #: dwarfenwall.xml:6
 msgid "dwarfenwall"
-msgstr ""
+msgstr "dwarfenwall"
 
 #: dwarfenwall.xml:250
 msgid "dwarfenwallCommand"
@@ -1983,11 +1983,11 @@ msgstr ""
 
 #: medair.xml:4
 msgid "elCnlLobby"
-msgstr ""
+msgstr "elCnlLobby"
 
 #: medair.xml:37 tutorial.xml
 msgid "elCnlLowerCaves"
-msgstr ""
+msgstr "Consejo de los elementos, Mazmorra subterránea"
 
 #: medair.xml:89
 msgid "medBackalley"
@@ -1995,7 +1995,7 @@ msgstr ""
 
 #: medair.xml:119
 msgid "medMercCamp"
-msgstr ""
+msgstr "Campo mercenario de Medair"
 
 #: medairnpc.xml:2
 msgid "Robert"
@@ -2275,7 +2275,7 @@ msgstr ""
 
 #: npc.xml:50 npcStats.xml:473
 msgid "The Trader"
-msgstr ""
+msgstr "El Mercader"
 
 #: npc.xml:55 npc.xml:66
 msgid "Buy empty scrolls"
