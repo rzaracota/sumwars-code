@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2013-05-10 20:17+0200\n"
+"PO-Revision-Date: 2013-11-01 15:53+0200\n"
 "Last-Translator: Stefan Stammberger <some.fusion@gmail.com>\n"
-"Language-Team: German <http://hosted.weblate.org/projects/sumwars/"
-"defend_dwarfenwall/de/>\n"
+"Language-Team: German "
+"<http://hosted.weblate.org/projects/sumwars/defend_dwarfenwall/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.6-dev\n"
+"X-Generator: Weblate 1.8-dev\n"
 
 #: siegeOfDwarfenwall.xml:2
 msgid "Defend Dwarfenwall"
@@ -214,7 +214,7 @@ msgstr "Man kann diesen Monstern nicht trauen!"
 
 #: siegeOfDwarfenwall.xml:155
 msgid "As long as I lead this army I will not tolerate such people."
-msgstr "Solange ich diese Armee führe, werde ich solche nicht dulden!"
+msgstr "Solange ich diese Armee führe, werde ich solche Leute nicht dulden!"
 
 #: siegeOfDwarfenwall.xml:159
 msgid "I just prevented the undead from passing by your city!"
@@ -274,7 +274,7 @@ msgstr "Wie schnell er seine Meinung doch ändert."
 
 #: siegeOfDwarfenwall.xml:221
 msgid "I'm already on my way."
-msgstr "Ich bin schon unterwegs"
+msgstr "Ich bin schon unterwegs."
 
 #: siegeOfDwarfenwall.xml:223
 msgid "Get going!"
@@ -405,7 +405,7 @@ msgstr "Die Katapulte?"
 
 #: siegeOfDwarfenwall.xml:1111
 msgid "Ready, my lord."
-msgstr "Sind bereit, mein Gebieter"
+msgstr "Sind bereit, mein Gebieter."
 
 #: siegeOfDwarfenwall.xml:1112
 msgid "Our necromancers?"
@@ -493,7 +493,7 @@ msgstr "Ich habe verstanden, mein Gebieter."
 
 #: siegeOfDwarfenwall.xml:1658
 msgid "Their defense still holds, my lord."
-msgstr "Ihre Verteidigung hält noch immer stand, mein Gebieter"
+msgstr "Ihre Verteidigung hält noch immer stand, mein Gebieter."
 
 #: siegeOfDwarfenwall.xml:1659
 msgid "No one said it had to be easy."
@@ -514,7 +514,7 @@ msgstr ""
 #: siegeOfDwarfenwall.xml:1662
 msgid "I don't see how that has anything to do with the siege, my lord."
 msgstr ""
-"Ich verstehe nicht, was das mit der Belagerung zu tun hat, mein Gebieter"
+"Ich verstehe nicht, was das mit der Belagerung zu tun hat, mein Gebieter."
 
 #: siegeOfDwarfenwall.xml:1663
 msgid "Watch and learn."
@@ -939,7 +939,7 @@ msgstr "Lasst das unsere Sorge sein."
 
 #: siegeOfDwarfenwall.xml:2391
 msgid "You realy are beyond help."
-msgstr "Euch ist wirklich nicht zu helfen"
+msgstr "Euch ist wirklich nicht zu helfen."
 
 #: siegeOfDwarfenwall.xml:2394
 msgid "Finally he cought on to it."

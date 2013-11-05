@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-14 16:23+0200\n"
-"Last-Translator: Chris Oelmueller <chris.oelmueller@gmail.com>\n"
+"PO-Revision-Date: 2013-11-01 15:55+0200\n"
+"Last-Translator: Stefan Stammberger <some.fusion@gmail.com>\n"
 "Language-Team: German "
 "<http://hosted.weblate.org/projects/sumwars/greenorchid/de/>\n"
 "Language: de\n"
@@ -10,11 +10,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.6-dev\n"
+"X-Generator: Weblate 1.8-dev\n"
 
 #: greenOrchid.xml:2
 msgid "The Green Orchid"
-msgstr ""
+msgstr "Die grüne Orchidee"
 
 #: greenOrchid.xml:6
 msgid ""
@@ -22,6 +22,9 @@ msgid ""
 "instead. I'm still trying to recover from the shock that I actually got "
 "something useful out of this ordeal."
 msgstr ""
+"Ich fand die grüne Orchidee und gab sie dem Mädchen. Sie gab mir Stattdessen "
+"ein Amulet. Ich versuche mich immer noch von diesem Schock zu erholen, und "
+"zu verstehen, dass ich auch etwas nützliches von diesen Qualen hatte."
 
 #: greenOrchid.xml:10
 msgid ""
@@ -30,6 +33,10 @@ msgid ""
 "astoundingly boring. I almost fell into a coma after the first three "
 "sentences."
 msgstr ""
+"Ich suche noch immer die grüne Orchidee. Ich hatte kein Glück in "
+"Dwarfenwall,aber ich wurde diesen blöden Hut los. Jetzt hänge ich bei einer "
+"Gelehrtenrolle, welche auch verblüffend langweilig ist.  Nach den ersten "
+"drei Sätzen falle ich beinahe in die Bewusstlosigkeit."
 
 #: greenOrchid.xml:12
 msgid ""
@@ -44,23 +51,26 @@ msgstr "Joringsbrück"
 
 #: greenOrchid.xml:25
 msgid "Reba"
-msgstr ""
+msgstr "Reba"
 
 #: greenOrchid.xml:26
 msgid "Nice Flowers"
-msgstr ""
+msgstr "Schöne Blumen"
 
 #: greenOrchid.xml:30
 msgid "I'm still looking for a green orchid to perfect my flowerbed."
 msgstr ""
+"Ich suche noch immer nach einer grünen Orchidee um mein Blumenbeet zu "
+"perfektionieren."
 
 #: greenOrchid.xml:31
 msgid "Say, perhaps you can look for it on your travels?"
 msgstr ""
+"Sag, möglicherweise könntest Du auf deinen Reisen Ausschau danach halten?"
 
 #: greenOrchid.xml:32
 msgid "Look for the green orchid?"
-msgstr ""
+msgstr "Nach der grünen Orchidee umsehen?"
 
 #: greenOrchid.xml:33 greenOrchid.xml:40
 msgid "Yes"
@@ -72,31 +82,32 @@ msgstr "Nein"
 
 #: greenOrchid.xml:36
 msgid "Hey there, traveller."
-msgstr ""
+msgstr "Hey hier, Reisender."
 
 #: greenOrchid.xml:37
 msgid "Do you like my beautiful flowerbed?"
-msgstr ""
+msgstr "Magst du mein schönes Blumenbeet?"
 
 #: greenOrchid.xml:38
 msgid "Oh, how I'd love to have a marvelous green orchid in it..."
-msgstr ""
+msgstr "Oh, wie ich liebend gerne eine wunderbare Orchidee drinnen hätte..."
 
 #: greenOrchid.xml:39
 msgid "Offer Help?"
-msgstr ""
+msgstr "Hilfe anbieten?"
 
 #: greenOrchid.xml:43 greenOrchid.xml:46
 msgid "Oh, I remember you. Did you find the green orchid?"
 msgstr ""
+"Oh, Ich kann mich an Euch erinnern. Habt Ihr die grüne Orchidee gefunden?"
 
 #: greenOrchid.xml:47
 msgid "Nah, I'm still searching, sorry."
-msgstr ""
+msgstr "Nein, Ich bin noch am Suchen."
 
 #: greenOrchid.xml:54
 msgid "Hm, I somehow like you."
-msgstr ""
+msgstr "Hm, Ich bin irgendwie wie du."
 
 #: greenOrchid.xml:55
 msgid "I'll look around."
@@ -300,4 +311,4 @@ msgstr ""
 
 #: greenOrchid.xml:175
 msgid "Wha... I really got something I want? Thank you man."
-msgstr ""
+msgstr "Was... Ich bekam wirklich etwas das ich wollte? Mann, Danke."

@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2013-05-10 20:17+0200\n"
+"PO-Revision-Date: 2013-11-01 15:51+0200\n"
 "Last-Translator: Stefan Stammberger <some.fusion@gmail.com>\n"
-"Language-Team: German <http://hosted.weblate.org/projects/sumwars/tutorial/"
-"de/>\n"
+"Language-Team: German "
+"<http://hosted.weblate.org/projects/sumwars/tutorial/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.6-dev\n"
+"X-Generator: Weblate 1.8-dev\n"
 
 #: tutorial.xml:2
 msgid "Tutorial"
@@ -1037,12 +1037,14 @@ msgid "Are you all right down there?"
 msgstr "Wie geht es euch da unten?"
 
 #: tutorial.xml:1365
+#, fuzzy
 msgid "Like hell I am! How do I get out of here?"
-msgstr ""
+msgstr "Wie die Hölle bin ich! Wie komme ich von hier weg?"
 
 #: tutorial.xml:1367
+#, fuzzy
 msgid "Like hell we are! How do we get out of here?"
-msgstr ""
+msgstr "Wie kommen wir von hier weg?"
 
 #: tutorial.xml:1370
 msgid "The path is blocked from our side and we can't get to you."
@@ -1052,31 +1054,35 @@ msgstr ""
 
 #: tutorial.xml:1371
 msgid "You'll have to find another way out."
-msgstr ""
+msgstr "Du musst einen anderen Weg nach draußen finden."
 
 #: tutorial.xml:1372
 msgid "There should be workers down there."
-msgstr ""
+msgstr "Es sollten Arbeiter dort unten sein."
 
 #: tutorial.xml:1373
 msgid "Maybe they can help. We will wait here."
-msgstr ""
+msgstr "Vielleicht können sie helfen. Wir werden hier warten."
 
 #: tutorial.xml:1375
+#, fuzzy
 msgid "Damn them! Not exactly what I would call 'customer service'."
-msgstr ""
+msgstr "Verdamm sie! Nicht wirklich das, was ich 'Kundenservice' nennen würde."
 
 #: tutorial.xml:1376
+#, fuzzy
 msgid "They better have some serious coin for all this trouble."
-msgstr ""
+msgstr "Sie haben besser eine ordentliche Belohnung für all den Ärger."
 
 #: tutorial.xml:1416
+#, fuzzy
 msgid "Move it you lazy maggots! This place is not building itself."
-msgstr ""
+msgstr "Bewegt es ihr faulen Maden! Der Ort baut sich nicht von selbst."
 
 #: tutorial.xml:1425
+#, fuzzy
 msgid "Finally you guards return..."
-msgstr ""
+msgstr "Endlich kommt ihr Wächter zurück..."
 
 #: tutorial.xml:1426
 #, fuzzy
@@ -1092,8 +1098,9 @@ msgid "We are people who are stuck down here, that's who."
 msgstr ""
 
 #: tutorial.xml:1432
+#, fuzzy
 msgid "Do you know how to get out of here?"
-msgstr ""
+msgstr "Weisst du wie wir hier herrauskommen?"
 
 #: tutorial.xml:1433
 msgid "Sorry, no. The stairway collapsed earlier."
@@ -1130,9 +1137,8 @@ msgid "We all think alike here."
 msgstr ""
 
 #: tutorial.xml:1441
-#, fuzzy
 msgid "..."
-msgstr "Ähm..."
+msgstr "..."
 
 #: tutorial.xml:1442
 msgid "Be that as it may, but is there another way to get out of here?"
