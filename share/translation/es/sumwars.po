@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-04 16:32+0200\n"
+"PO-Revision-Date: 2013-11-05 01:12+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
@@ -825,8 +825,9 @@ msgid "greyCurseCaveEast"
 msgstr ""
 
 #: cursedCaves.xml:325
+#, fuzzy
 msgid "greyCurseLake"
-msgstr ""
+msgstr "greyCurseLake"
 
 #: dwarfcastle.xml:2
 msgid "Eric"
