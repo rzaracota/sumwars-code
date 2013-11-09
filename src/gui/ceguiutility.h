@@ -262,6 +262,8 @@ class CEGUIUtility
 		// Retrieve the widget with a given skin.
 		static std::string getWidgetWithSkin (const std::string& skin, const std::string& name);
 
+		static std::string getImageNameWithSkin (const std::string& skinName, const std::string& imageName);
+
 		static void setScrollPositionForWidget (const CEGUI::String& widgetName, float newScrollPosition);
 
 

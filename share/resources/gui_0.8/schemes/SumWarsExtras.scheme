@@ -1,0 +1,19 @@
+<!--
+Extra images for SumWars
+-->
+<!--
+version:      0.1
+Last change:  $LastChangedDate: 2012-12-25 20:55:19 +0200 (Ma, 25 dec. 2012) $
+-->
+<GUIScheme version="5" name="SumWarsExtras">
+  <Imageset name="SumWarsExtras" filename="SumWarsExtras.imageset" />
+  <Imageset name="ControlPanel" filename="ControlPanel.imageset" />
+
+	<LookNFeel filename="SumWarsExtras.looknfeel" />
+  
+	<WindowRendererSet filename="CEGUICoreWindowRendererSet" />
+  
+	<FalagardMapping windowType="SumWarsExtras/HPProgressBar" targetType="CEGUI/ProgressBar" renderer="Core/ProgressBar" lookNFeel="SumWarsExtras/HPProgressBar" />
+	<FalagardMapping windowType="SumWarsExtras/HPProgressOrbHighlight" targetType="CEGUI/PushButton" renderer="Core/Button" lookNFeel="SumWarsExtras/HPProgressOrbHighlight" />
+
+</GUIScheme>

@@ -94,23 +94,25 @@ bool MainWindow::init()
 	m_ceguiSkinName = Options::getInstance ()->getCeguiSkin ();
 	DEBUG ("Main Window (init): Cegui skin name found in options as: [%s]", m_ceguiSkinName.c_str ());
 
-	// Eingabegeraete initialisieren
+	// Initialize the input devices
+	DEBUG ("Initializing input devices.");
 	result &= initInputs();
 
+	DEBUG ("Initializing graphics.");
 	GraphicManager::init();
 
-	// Hauptmenue erzeugen
+	// Set-up the main menu.
+	DEBUG ("Initializing main menu.");
 	result &= setupMainMenu();
 
-	// Hauptspielfenster erzeugen
+	// Set-up the main game window/screen
+	DEBUG ("Initializing main game screen.");
 	result &= setupGameScreen();
 
 	// Aktuelle Ebene setzen
 	CEGUIUtility::setRootSheet (CEGUI::System::getSingletonPtr(), m_main_menu);
 
-	
 	return result;
-
 }
 
 
@@ -172,74 +174,88 @@ bool MainWindow::setupMainMenu()
 		// Oberstes Fenster der Hauptmenue Schicht
 		m_main_menu = win_mgr.createWindow("DefaultWindow", "MainMenu");
 
-		CEGUI::Window* start_screen_holder = CEGUIUtility::loadLayoutFromFile ("startscreen.layout");
+		std::string layoutFile ("startscreen.layout");
+		CEGUI::Window* start_screen_holder = CEGUIUtility::loadLayoutFromFile (layoutFile);
+
+		DEBUG ("Loaded layout file [%s]", layoutFile.c_str ());
 
 		if (start_screen_holder)
 		{
 			CEGUIUtility::addChildWidget (m_main_menu, start_screen_holder);
 
-			if (CEGUIUtility::isWindowPresent ("StartScreenImage"))
+			std::string widgetName (CEGUIUtility::getNameForWidget("StartScreenRoot"));
+			CEGUI::Window* item = CEGUIUtility::getWindowForLoadedLayout(start_screen_holder, widgetName);
+			if (item)
 			{
-				CEGUI::Window* temp = CEGUIUtility::getWindow ("StartScreenImage");
-				temp->setMousePassThroughEnabled (true);
+				item->setMousePassThroughEnabled (true);
 			}
-			if (CEGUIUtility::isWindowPresent ("StartScreenRoot"))
+			//if (CEGUIUtility::isWindowPresent (widgetName))
+			//{
+			//	CEGUI::Window* temp = CEGUIUtility::getWindow (widgetName);
+			//	temp->setMousePassThroughEnabled (true);
+			//}
+
+			widgetName = CEGUIUtility::getNameForWidget("StartScreenImage");
+			item = CEGUIUtility::getWindowForLoadedLayout(start_screen_holder, widgetName);
+			if (item)
 			{
-				CEGUI::Window* temp = CEGUIUtility::getWindow ("StartScreenRoot");
-				temp->setMousePassThroughEnabled (true);
+				item->setMousePassThroughEnabled (true);
 			}
-			if (CEGUIUtility::isWindowPresent ("LoadRessourcesProgressBar"))
+			//if (CEGUIUtility::isWindowPresent (widgetName))
+			//{
+			//	CEGUI::Window* temp = CEGUIUtility::getWindow (widgetName);
+			//	temp->setMousePassThroughEnabled (true);
+			//}
+
+			widgetName = CEGUIUtility::getNameForWidget("LoadRessourcesProgressBar");
+			item = CEGUIUtility::getWindowForLoadedLayout(start_screen_holder, widgetName);
+			if (item)
 			{
-				CEGUI::Window* temp = CEGUIUtility::getWindow ("LoadRessourcesProgressBar");
-				temp->setMousePassThroughEnabled (true);
+				item->setMousePassThroughEnabled (true);
 			}
+			//if (CEGUIUtility::isWindowPresent (widgetName))
+			//{
+			//	CEGUI::Window* temp = CEGUIUtility::getWindow (widgetName);
+			//	temp->setMousePassThroughEnabled (true);
+			//}
 		}
 		else
 		{
-			DEBUG ("WARNING: Failed to load [%s]", "characterscreen_holder.layout");
-			// TODO: remove code when no longer needed - begin
-			CEGUI::Window* img;
-
-			img  = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "StartScreenImage");
-			CEGUIUtility::addChildWidget (m_main_menu, img);
-			img->setProperty("Image", "set:SumWarsLogo.png image:full_image");
-			img->moveToBack ();
-			img->setProperty ("FrameEnabled", "False");
-			img->setMousePassThroughEnabled(true);
-		
-			CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.createWindow(CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ProgressBar"), "LoadRessourcesProgressBar"));
-			CEGUIUtility::addChildWidget (m_main_menu, bar);
-			bar->setPosition(CEGUI::UVector2(cegui_reldim(0.15f), cegui_reldim( 0.9f)));
-			CEGUIUtility::setWidgetSizeRel (bar, 0.70f, 0.04f);
-
-			bar->setWantsMultiClickEvents(false);
-			bar->setProgress(0.0);
-			bar->setProperty ("GS_DarkerThemeColour", "FF005464");
-			bar->setProperty ("GS_LighterThemeColour", "FF13C6BC");
-			bar->setProperty ("GS_MainThemeColour", "FF13868B");
-			bar->setProperty ("GS_MainThemeGradientLeftToRight", "tl:00FFFFFF tr:FF13C6BC bl:00FFFFFF br:FF13C6BC");
-			// TODO: remove code when no longer needed - end
+			ERROR ("WARNING: Failed to load [%s]", layoutFile.c_str ());
 		}
+
+		DEBUG ("Creating credits window");
+
 		CreditsWindow* crd = new CreditsWindow (m_document, m_ceguiSkinName);
 		m_sub_windows["CreditsWindow"] = crd;
 		CEGUIUtility::addChildWidget (m_main_menu, crd->getCEGUIWindow());
 
+		DEBUG ("Creating main menu");
+
 		Window * wnd = new MainMenu(m_document, m_ceguiSkinName);
 		m_sub_windows["MainMenu"] = wnd;
 		CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
-		
+
+		DEBUG ("Creating character screen");
+
 		wnd = new CharCreate (m_document, m_ceguiSkinName);
 		m_sub_windows["CharCreate"] = wnd;
 		CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
 		
+		DEBUG ("Creating options window");
+
 		wnd = new OptionsWindow(m_document,m_keyboard, m_ceguiSkinName);
 		m_sub_windows["Options"] = wnd;
 		CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
 		
+		DEBUG ("Creating game hosting screen");
+
 		wnd = new HostGameWindow(m_document);
 		m_sub_windows["HostGame"] = wnd;
 		CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
 		
+		DEBUG ("Creating game joining screen");
+
 		wnd = new JoinGameWindow(m_document);
 		m_sub_windows["JoinGame"] = wnd;
 		CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
@@ -249,6 +265,7 @@ bool MainWindow::setupMainMenu()
 	catch (CEGUI::Exception & e)
 	{
 		ERRORMSG("Error message: %s",e.getMessage().c_str());
+		return false;
 	}
 	return true;
 }
@@ -842,7 +859,7 @@ bool MainWindow::setupGameScreen()
 		CEGUIUtility::setWidgetSizeRel (label, 0.5f, 0.7f);
 		label->setMousePassThroughEnabled(true);
 		label->setInheritsAlpha(false);
-		label->setProperty("Image", "set:character image:character_img"); 
+		label->setProperty("Image", CEGUIUtility::getImageNameWithSkin ("character", "character_img")); 
 		label->setVisible(false);
 		
 		label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), "CharacterPreviewBackground");
@@ -886,19 +903,19 @@ void MainWindow::setupControlPanel()
 	btn->setVisible(false);
 	if (btn->isPropertyPresent ("NormalImage"))
 	{
-		btn->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased"); 	 
+		btn->setProperty("NormalImage", CEGUIUtility::getImageNameWithSkin ("CharScreen", "PlusBtnReleased"));
 	}
 	if (btn->isPropertyPresent ("DisabledImage"))
 	{
-		btn->setProperty("DisabledImage", "set:CharScreen image:PlusBtnReleased"); 	 
+		btn->setProperty("DisabledImage", CEGUIUtility::getImageNameWithSkin ("CharScreen", "PlusBtnReleased")); 	 
 	}
 	if (btn->isPropertyPresent ("HoverImage"))
 	{
-		btn->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased"); 	 
+		btn->setProperty("HoverImage", CEGUIUtility::getImageNameWithSkin ("CharScreen", "PlusBtnReleased")); 	 
 	}
 	if (btn->isPropertyPresent ("PushedImage"))
 	{
-		btn->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
+		btn->setProperty("PushedImage", CEGUIUtility::getImageNameWithSkin ("CharScreen", "PlusBtnPressed"));
 	}
 	
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ImageButton"), "SkillUpgradeButton"));
@@ -913,19 +930,19 @@ void MainWindow::setupControlPanel()
 	
 	if (btn->isPropertyPresent ("NormalImage"))
 	{
-		btn->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased");
+		btn->setProperty("NormalImage", CEGUIUtility::getImageNameWithSkin ("CharScreen", "PlusBtnReleased"));
 	}
 	if (btn->isPropertyPresent ("DisabledImage"))
 	{
-		btn->setProperty("DisabledImage", "set:CharScreen image:PlusBtnReleased");
+		btn->setProperty("DisabledImage", CEGUIUtility::getImageNameWithSkin ("CharScreen", "PlusBtnReleased"));
 	}
 	if (btn->isPropertyPresent ("HoverImage"))
 	{
-		btn->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased");
+		btn->setProperty("HoverImage", CEGUIUtility::getImageNameWithSkin ("CharScreen", "PlusBtnReleased"));
 	}
 	if (btn->isPropertyPresent ("PushedImage"))
 	{
-		btn->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
+		btn->setProperty("PushedImage", CEGUIUtility::getImageNameWithSkin ("CharScreen", "PlusBtnPressed"));
 	}
 
 }
@@ -1003,7 +1020,7 @@ void MainWindow::setupCursorItemImage()
 	CEGUIUtility::setWidgetSizeRel (label, 0.04f, 0.06f);
 
 	// Just use a default image.
-	std::string portraitname ("set:Portrait image:Portrait");
+	std::string portraitname (CEGUIUtility::getImageNameWithSkin ("Portrait", "Portrait"));
 	label->setProperty ("Image", portraitname.c_str ());
 
 	label->setVisible(false);

@@ -886,18 +886,31 @@ bool Application::initCEGUI()
 	CEGUI::DefaultLogger::getSingleton().setLogFilename(SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::userPath() + "/CEGUI.log");
 	
 	// Bootstrap the CEGUI System
+	DEBUG ("Bootstrapping the CEGUI system");
 	CEGUI::OgreRenderer::bootstrapSystem();
 
+	DEBUG ("Getting the XML parser");
+
 	CEGUI::XMLParser* parser = CEGUI::System::getSingleton().getXMLParser();
+	if (NULL == parser)
+	{
+		ERROR ("No XML parser available to CEGUI!!!");
+		return false;
+	}
 	if (parser->isPropertyPresent("SchemaDefaultResourceGroup"))
 		parser->setProperty("SchemaDefaultResourceGroup", "GUI_XML_schemas");
     
+	DEBUG ("Loading (CEGUI) schemes...");
+
 	// Load schemes
+	DEBUG ("Loading scheme: SWB.scheme");
 	CEGUIUtility::loadScheme ((CEGUI::utf8*)"SWB.scheme", (CEGUI::utf8*)"GUI");
+	DEBUG ("Loading scheme: TaharezLook.scheme");
 	CEGUIUtility::loadScheme ((CEGUI::utf8*)"TaharezLook.scheme", (CEGUI::utf8*)"GUI");
+	DEBUG ("Loading scheme: SumWarsExtras.scheme");
 	CEGUIUtility::loadScheme ((CEGUI::utf8*)"SumWarsExtras.scheme", (CEGUI::utf8*)"GUI");
 	
-	// Imagesets laden
+	// Load imagesets
 	CEGUIUtility::loadImageset("skills.imageset");
 
 	DEBUG ("Creating hardcoded images from file");
@@ -956,7 +969,11 @@ bool Application::initCEGUI()
 	// Insert own factories. // TODO: check if this is really needed. Couldn't the custom tooltip just be added to the scheme?
 	std::stringstream ss;
 	ss << Options::getInstance ()->getCeguiSkin () << "/CustomTooltip";
+#ifdef CEGUI_07
 	CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("SumwarsTooltip", "DefaultWindow", ss.str ().c_str (), "Falagard/Default");
+#else
+	CEGUI::WindowFactoryManager::getSingleton().addFalagardWindowMapping ("SumwarsTooltip", "DefaultWindow", ss.str ().c_str (), "Core/Default");
+#endif
 
 #ifdef SUMWARS_BUILD_TOOLS
 	CEGUI::WindowFactoryManager::getSingleton().addFactory< CEGUI::TplWindowFactory<DebugCameraTab> >();

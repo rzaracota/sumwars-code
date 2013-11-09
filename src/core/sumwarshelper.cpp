@@ -102,9 +102,15 @@ bool SumwarsHelper::init()
         }
     }
 #else
+#ifdef _DEBUG
+    std::string ogreCfgUser = ".sumwars/ogre.cfg";
+    std::string pluginsCfgUser = ".sumwars/pluginsdbg.cfg";
+    std::string resourcesCfgUser = ".sumwars/resources.cfg";
+#else
     std::string ogreCfgUser = ".sumwars/ogre.cfg";
     std::string pluginsCfgUser = ".sumwars/plugins.cfg";
     std::string resourcesCfgUser = ".sumwars/resources.cfg";
+#endif
 
     /*
     We have to have something in the default ogre.cfg file, otherwise the options window will

@@ -697,6 +697,18 @@ std::string CEGUIUtility::getWidgetWithSkin (const std::string& skin, const std:
 }
 
 
+std::string CEGUIUtility::getImageNameWithSkin (const std::string& skinName, const std::string& imageName)
+{
+	std::stringstream ss;
+#ifdef CEGUI_07
+	ss << "set:" << skinName << " image:" << imageName;
+#else
+	ss << skinName << "/" << imageName;
+#endif
+	return ss.str ();
+}
+
+
 void CEGUIUtility::setScrollPositionForWidget (const CEGUI::String& widgetName, float newScrollPosition)
 {
 	CEGUI::Scrollbar* scroller;
@@ -740,8 +752,10 @@ void CEGUIUtility::setDefaultMouseCursor (CEGUI::System* sys, const std::string&
 #ifdef CEGUI_07
 	sys->setDefaultMouseCursor ((CEGUI::utf8*)skinName.c_str (), (CEGUI::utf8*)cursorName.c_str ());
 #else
-	sys->getDefaultGUIContext ().getMouseCursor ().setDefaultImage (cursorName);
-	sys->getDefaultGUIContext ().getMouseCursor ().setImage (cursorName);
+	std::stringstream ss;
+	ss << skinName << "/" << cursorName;
+	sys->getDefaultGUIContext ().getMouseCursor ().setDefaultImage (ss.str ());
+	sys->getDefaultGUIContext ().getMouseCursor ().setImage (ss.str ());
 #endif
 }
 

@@ -249,6 +249,11 @@ private:
     SavegameList *m_saveGameList;
 	
 	/**
+	 * \brief The root CEGUI node of the start menu
+	 */
+	CEGUI::Window* m_starMenuRoot;
+
+	/**
 	 * \brief Name of the previewed savegame player 
 	 */
 	std::string m_savegame_player;

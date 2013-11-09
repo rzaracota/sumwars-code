@@ -43,6 +43,7 @@ using gussound::SoundManager;
 MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
         : Window (doc)
 		, m_ceguiSkinName (ceguiSkinName)
+		, m_starMenuRoot (0)
 {
 	DEBUG ("MainMenu created");
 
@@ -57,51 +58,78 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 
-	CEGUI::FrameWindow* start_menu_root = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("mainmenu.layout");
-    m_window = start_menu_root;
+	m_starMenuRoot = CEGUIUtility::loadLayoutFromFile ("mainmenu.layout");
+    m_window = m_starMenuRoot;
 	m_window->setMousePassThroughEnabled(true);
     m_window->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&MainMenu::onShown, this));
     m_window->subscribeEvent(CEGUI::Window::EventHidden, CEGUI::Event::Subscriber(&MainMenu::onHidden, this));
 
-    // Button Einzelspieler
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("SinglePlayerButton"));
-	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartSinglePlayer, this));
-	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+    // Button for a single-player game
+	std::string widgetName (CEGUIUtility::getNameForWidget("SinglePlayerButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
+	if (btn)
+	{
+		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartSinglePlayer, this));
+		btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+	}
 
-	// Button Server beitreten
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("ServerJoinButton"));
-    btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartMultiPlayer, this));
-	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+	// Button used for joining a (remote) server.
+	widgetName = CEGUIUtility::getNameForWidget("ServerJoinButton");
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
+	if (btn)
+	{
 
+		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartMultiPlayer, this));
+		btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+	}
 
-    // Button Server aufsetzen
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("ServerHostButton"));
-    btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartMultiPlayerHost, this));
-	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+    // Button used for hosting a multiplayer game (creating the server)
+	widgetName = CEGUIUtility::getNameForWidget("ServerHostButton");
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
+	if (btn)
+	{
+		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartMultiPlayerHost, this));
+		btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+	}
 
-    // Button Credits
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("CreditsButton"));
-	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onShowCredits, this));
-	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+    // Button used for accessing the game's credits
+	widgetName = CEGUIUtility::getNameForWidget("CreditsButton");
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
+	if (btn)
+	{
+		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onShowCredits, this));
+		btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+	}
 
-    // Button Optionen
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("MainOptionsButton"));
-    btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onShowOptions, this));
-	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+    // Button used for accessing the game's options
+	widgetName = CEGUIUtility::getNameForWidget("MainOptionsButton");
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
+	if (btn)
+	{
+		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onShowOptions, this));
+		btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+	}
 
-
-    // Button beenden
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("EndGameButton"));
-	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onQuitGameHost, this));
-	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+    // Button used for exiting the game
+	widgetName = CEGUIUtility::getNameForWidget("EndGameButton");
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
+	if (btn)
+	{
+		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onQuitGameHost, this));
+		btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&MainMenu::onMainMenuButtonHover, this));
+	}
 
 	CEGUI::Window* verlbl;
 
-	verlbl = CEGUIUtility::getWindow("SumwarsVersionLabel");
-	verlbl->setText(CEGUI::String("Version: ").append(SUMWARS_VERSION));
+	widgetName = CEGUIUtility::getNameForWidget("SumwarsVersionLabel");
+	verlbl = CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName);
+	if (verlbl)
+	{
+		verlbl->setText(CEGUI::String("Version: ").append(SUMWARS_VERSION));
+	}
 
 	CEGUI::FrameWindow* lbl;
-
+#if 0
 	if (CEGUIUtility::isWindowPresent ("SinglePlayerButton/Label"))
 	{
 		// TODO: remove when no longer needed.
@@ -143,6 +171,7 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("EndGameButton/Label"));
 		lbl->setMousePassThroughEnabled(true);
 	}
+#endif
 
 #ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
     btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("LoginButton"));
@@ -160,10 +189,12 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 
     OnlineServicesManager::getSingleton().registerLoginStatusListener(this);
 #else
-    lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("SumwarsOnlineIndicatorLabel"));
+	widgetName = CEGUIUtility::getNameForWidget("SumwarsOnlineIndicatorLabel");
+    lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
     lbl->hide();
 
-    btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("LoginButton"));
+	widgetName = CEGUIUtility::getNameForWidget("LoginButton");
+    btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
     btn->hide();
 #endif
 
@@ -194,6 +225,9 @@ void MainMenu::updateTranslation()
 	CEGUI::FrameWindow* lbl;
 
 	// Update the button labels.
+
+	std::string widgetName (CEGUIUtility::getNameForWidget("SinglePlayerButton"));
+
 	lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("SinglePlayerButton"));
 	lbl->setText((CEGUI::utf8*) gettext("Single player"));
 
@@ -954,7 +988,8 @@ void MainMenu::createSavegameList()
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
     // Select the frame for the saved games in the menu
-	CEGUI::FrameWindow* savegameList = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("SaveGameSelectionFrame");
+	std::string widgetName (CEGUIUtility::getNameForWidget("SaveGameSelectionFrame"));
+	CEGUI::FrameWindow* savegameList = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
     savegameList->setInheritsAlpha(false);
 
 	SavegameList* sgl = new SavegameList (m_document, m_ceguiSkinName);

@@ -1,0 +1,128 @@
+<Falagard version="7">
+
+    <!--
+    ***************************************************
+        SumWarsExtras/HPProgressBar
+    ***************************************************
+    -->
+    <WidgetLook name="SumWarsExtras/HPProgressOrbHighlight">
+        <PropertyDefinition name="NormalImage" initialValue="ControlPanel/HPHighlight" redrawOnWrite="true" />
+        <PropertyDefinition name="VertImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
+        <PropertyDefinition name="HorzImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
+        <PropertyDefinition name="HighlightModifier" initialValue="0" redrawOnWrite="true" />
+        
+        <ImagerySection name="normal">
+            <ImageryComponent>
+                <Area>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
+                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
+                </Area>
+                <ImageProperty name="NormalImage" />
+                <VertFormatProperty name="VertImageFormatting" />
+                <HorzFormatProperty name="HorzImageFormatting" />
+            </ImageryComponent>
+        </ImagerySection>
+
+        <StateImagery name="Normal">
+            <Layer>
+                <Section section="normal"><ColourProperty name="HighlightModifier" /></Section>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="Hover">
+            <Layer>
+                <Section section="normal"><ColourProperty name="HighlightModifier" /></Section>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="Pushed">
+            <Layer>
+                <Section section="normal"><ColourProperty name="HighlightModifier" /></Section>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="PushedOff">
+            <Layer>
+                <Section section="normal"><ColourProperty name="HighlightModifier" /></Section>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="Disabled">
+            <Layer>
+                <Section section="normal"><ColourProperty name="HighlightModifier" /></Section>
+            </Layer>
+        </StateImagery>
+    </WidgetLook>
+
+
+    <!--
+    ***************************************************
+        SumWarsExtras/HPProgressBar
+    ***************************************************
+    -->
+    <WidgetLook name="SumWarsExtras/HPProgressBar">
+        <PropertyLinkDefinition name="HighlightModifier" widget="__auto_orb_highlight__" targetProperty="HighlightModifier" initialValue="FFBBA075" redrawOnWrite="true" />
+        <!--<PropertyDefinition name="HighlightRotation" initialValue="0" redrawOnWrite="true" />-->
+        <!--<PropertyLinkDefinition name="HighlightRotation" widget="__auto_orb_highlight__" targetProperty="ZRotation" initialValue="0" />-->
+
+        <NamedArea name="ProgressArea">
+                <Area>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
+                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
+                </Area>
+        </NamedArea>
+        <ImagerySection name="background">
+            <ImageryComponent>
+                <Area>
+                    <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
+                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
+                </Area>
+                <Image name="ControlPanel/HPBackground" />
+                <VertFormat type="Stretched" />
+                <HorzFormat type="Stretched" />
+            </ImageryComponent>
+        </ImagerySection>   
+        <ImagerySection name="progress" >
+            <ImageryComponent>
+                <Area>
+                    <Dim type="LeftEdge" ><UnifiedDim scale="0" type="LeftEdge" /></Dim>
+                    <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                    <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
+                    <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
+                </Area>
+                <Image name="ControlPanel/HPForeground" />
+                <VertFormat type="Stretched" />
+                <HorzFormat type="Stretched" />
+            </ImageryComponent>
+        </ImagerySection>
+        
+        <Child  type="SumWarsExtras/HPProgressOrbHighlight" nameSuffix="__auto_orb_highlight__">
+            <Area>
+                <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
+                <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>
+                <Dim type="Width" ><UnifiedDim scale="1" offset="-10" type="Width" /></Dim>
+                <Dim type="Height" ><UnifiedDim scale="1" offset="-10" type="Height" /></Dim>
+            </Area>
+            <VertAlignment type="BottomAligned" />
+        </Child>
+        
+        <StateImagery name="Enabled">
+            <Layer>
+                <Section section="background">
+                </Section>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="EnabledProgress">
+            <Layer>
+                <Section section="progress">
+                </Section>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="Disabled" />
+        <StateImagery name="DisabledProgress" />
+    </WidgetLook>
+
+</Falagard>
+
