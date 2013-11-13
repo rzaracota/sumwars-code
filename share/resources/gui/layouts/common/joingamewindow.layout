@@ -2,10 +2,8 @@
 
 <GUILayout >
     <Window Type="SWB/FrameWindow" Name="JoinGameWindow" >
-        <Property Name="Image" Value="set:OptionsWindow image:Background" />
         <Property Name="FrameEnabled" Value="True" />
         <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
-        <Property Name="BackgroundEnabled" Value="False" />
         <Property Name="SizingEnabled" Value="False" />
         <Property Name="DragMovingEnabled" Value="False" />
         <Property Name="CloseButtonEnabled" Value="True" />

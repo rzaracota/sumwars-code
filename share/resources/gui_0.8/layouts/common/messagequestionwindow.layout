@@ -2,7 +2,6 @@
     <Window type="SWB/FrameWindow" name="QuestionInfoRoot" >
         <Property name="FrameEnabled" value="True" />
         <Property name="Area" value="{{0.3,0},{0.25,0},{0.7,0},{0.55,0}}" />
-        <Property name="BackgroundEnabled" value="False" />
         <Property name="MousePassThroughEnabled" value="True" />
         <Property name="Text" value="Confirm" />
         <Property name="SizingEnabled" value="False" />

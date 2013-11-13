@@ -100,7 +100,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene, const std::string& c
 	label->setPosition(CEGUI::UVector2(cegui_reldim(0.58f), cegui_reldim(0.05f)));
 	CEGUIUtility::setWidgetSizeRel (label, 0.3f, 0.22f);
 	
-	pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ScrollablePaneNoBar"), "SpeakerTextPane0"));
+	pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin ("SumWarsExtras", "ScrollablePaneNoBar"), "SpeakerTextPane0"));
 	CEGUIUtility::addChildWidget (lower_bar, pane);
 	pane->setPosition(CEGUI::UVector2(cegui_reldim(0.12f), cegui_reldim(0.27f)));
 	pane->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
@@ -116,7 +116,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene, const std::string& c
 	CEGUIUtility::setWidgetSizeRel (label, 0.99f, 0.99f);
 	label->setWantsMultiClickEvents(false);
 	
-	pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ScrollablePaneNoBar"), "SpeakerTextPane1"));
+	pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin ("SumWarsExtras", "ScrollablePaneNoBar"), "SpeakerTextPane1"));
 	CEGUIUtility::addChildWidget (lower_bar, pane);
 	pane->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim(0.27f)));
 	pane->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));

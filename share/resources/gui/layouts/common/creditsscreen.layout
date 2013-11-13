@@ -20,7 +20,6 @@
             <Property Name="InheritsAlpha" Value="False" />
             <Property Name="ContentPaneAutoSized" Value="True" />
             <Property Name="UnifiedMaxSize" Value="{{1.0,0},{1.0,0}}" />
-            <Property Name="FrameEnabled" Value="False" />
 
             <!-- The top side where the player picture, and main information are displayed -->
             <Window Type="SWB/StaticText" Name="CreditsText" >

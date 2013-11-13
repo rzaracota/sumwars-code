@@ -10,34 +10,29 @@
             <Property name="InheritsAlpha" value="False" />
             <Property name="Area" value="{{0.732617,0},{0.0434896,0},{0.986523,0},{0.100782,0}}" />
             <Property name="Text" value="Singleplayer" />
-            <Property name="HorzFormatting" value="HorzCentred" />
         </Window>
         
         <Window type="SWB/Button" name="ServerJoinButton" >
             <Property name="InheritsAlpha" value="False" />
             <Property name="Area" value="{{0.732812,0},{0.103906,0},{0.986718,0},{0.161198,0}}" />
             <Property name="Text" value="Join Game" />
-            <Property name="HorzFormatting" value="HorzCentred" />
         </Window>
         
         <Window type="SWB/Button" name="ServerHostButton" >
             <Property name="InheritsAlpha" value="False" />
             <Property name="Area" value="{{0.732031,0},{0.166927,0},{0.985937,0},{0.224219,0}}" />
             <Property name="Text" value="Host Game" />
-            <Property name="HorzFormatting" value="HorzCentred" />
         </Window>
         
         <Window type="SWB/Button" name="CreditsButton" >
             <Property name="Text" value="Credits" />
             <Property name="InheritsAlpha" value="False" />
             <Property name="Area" value="{{0.575,0},{0.913542,0},{0.766406,0},{0.955209,0}}" />
-            <Property name="HorzFormatting" value="HorzCentred" />
         </Window>
         
         <Window type="SWB/Button" name="MainOptionsButton" >
             <Property name="InheritsAlpha" value="False" />
             <Property name="Area" value="{{0.380859,0},{0.914062,0},{0.572265,0},{0.955728,0}}" />
-            <Property name="HorzFormatting" value="HorzCentred" />
             <Property name="Text" value="Options" />
         </Window>
         
@@ -45,13 +40,14 @@
             <Property name="Text" value="Quit" />
             <Property name="InheritsAlpha" value="False" />
             <Property name="Area" value="{{0.769531,0},{0.914062,0},{0.960937,0},{0.955729,0}}" />
-            <Property name="HorzFormatting" value="HorzCentred" />
         </Window>
-	<Window type="SWB/Button" name="LoginButton" >
+        
+        <Window type="SWB/Button" name="LoginButton" >
             <Property name="Text" value="Login" />
             <Property name="InheritsAlpha" value="False" />
             <Property name="Area" value="{{0.25531,0},{0.914062,0},{0.37,0},{0.955729,0}}" />
         </Window>
+        
         <Window type="SWB/StaticText" name="SumwarsVersionLabel" >
             <Property name="Text" value="VersionLabel" />
             <Property name="Alpha" value="0.7" />
@@ -60,7 +56,8 @@
             <Property name="Area" value="{{0.583594,0},{0.96901,0},{0.958594,0},{0.992448,0}}" />
             <Property name="BackgroundEnabled" value="False" />
         </Window>
-	<Window type="SWB/StaticText" name="SumwarsOnlineIndicatorLabel" >
+        
+        <Window type="SWB/StaticText" name="SumwarsOnlineIndicatorLabel" >
             <Property name="Text" value="Not logged in." />
             <Property name="Alpha" value="0.7" />
             <Property name="HorzExtent" value="100" />
