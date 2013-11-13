@@ -46,7 +46,6 @@ Last change:  $LastChangedDate: 2012-12-25 20:55:19 +0200 (Ma, 25 dec. 2012) $
   <FalagardMapping WindowType="SWB/RadioButton" TargetType="CEGUI/RadioButton" Renderer="Falagard/ToggleButton" LookNFeel="SWB/Checkbox" />
   <FalagardMapping WindowType="SWB/RoundedPanelFrame"      TargetType="DefaultWindow"  Renderer="Falagard/Button"       LookNFeel="SWB/RoundedPanelFrame" />
   <FalagardMapping WindowType="SWB/ScrollablePane" TargetType="CEGUI/ScrollablePane" Renderer="Falagard/ScrollablePane" LookNFeel="SWB/ScrollablePane" />
-  <FalagardMapping WindowType="SWB/ScrollablePaneNoBar" TargetType="CEGUI/ScrollablePane" Renderer="Falagard/ScrollablePane" LookNFeel="SWB/ScrollablePaneNoBar" />
   <FalagardMapping WindowType="SWB/SimplePanelFrame"      TargetType="DefaultWindow"  Renderer="Falagard/Button"       LookNFeel="SWB/SimplePanelFrame" />
   <FalagardMapping WindowType="SWB/Spinner" TargetType="CEGUI/Spinner" Renderer="Falagard/Default" LookNFeel="SWB/Spinner" />
   <FalagardMapping WindowType="SWB/StaticImage" TargetType="DefaultWindow" Renderer="Falagard/StaticImage" LookNFeel="SWB/StaticImage" />

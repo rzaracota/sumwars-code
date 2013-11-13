@@ -42,7 +42,6 @@
   <FalagardMapping windowType="SWB/RadioButton" targetType="CEGUI/RadioButton" renderer="Core/ToggleButton" lookNFeel="SWB/Checkbox" />
   <FalagardMapping windowType="SWB/RoundedPanelFrame"      targetType="DefaultWindow"  renderer="Core/Button"       lookNFeel="SWB/RoundedPanelFrame" />
   <FalagardMapping windowType="SWB/ScrollablePane" targetType="CEGUI/ScrollablePane" renderer="Core/ScrollablePane" lookNFeel="SWB/ScrollablePane" />
-  <FalagardMapping windowType="SWB/ScrollablePaneNoBar" targetType="CEGUI/ScrollablePane" renderer="Core/ScrollablePane" lookNFeel="SWB/ScrollablePaneNoBar" />
   <FalagardMapping windowType="SWB/SimplePanelFrame"      targetType="DefaultWindow"  renderer="Core/Button"       lookNFeel="SWB/SimplePanelFrame" />
   <FalagardMapping windowType="SWB/Spinner" targetType="CEGUI/Spinner" renderer="Core/Default" lookNFeel="SWB/Spinner" />
   <FalagardMapping windowType="SWB/StaticImage" targetType="DefaultWindow" renderer="Core/StaticImage" lookNFeel="SWB/StaticImage" />

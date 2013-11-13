@@ -89,7 +89,6 @@ Last change:  $LastChangedDate: 2012-12-25 20:55:19 +0200 (Ma, 25 dec. 2012) $
   <FalagardMapping WindowType="Resummoned/StaticImage" TargetType="DefaultWindow" Renderer="Falagard/StaticImage" LookNFeel="Resummoned/StaticImage" />
   <FalagardMapping WindowType="Resummoned/StaticText"  TargetType="DefaultWindow" Renderer="Falagard/StaticText"  LookNFeel="Resummoned/StaticText" />
   <FalagardMapping WindowType="Resummoned/ScrollablePane" TargetType="CEGUI/ScrollablePane" Renderer="Falagard/ScrollablePane" LookNFeel="Resummoned/ScrollablePane" />
-  <FalagardMapping WindowType="Resummoned/ScrollablePaneNoBar" TargetType="CEGUI/ScrollablePane" Renderer="Falagard/ScrollablePane" LookNFeel="Resummoned/ScrollablePaneNoBar" />
   <FalagardMapping WindowType="Resummoned/ItemListbox" TargetType="CEGUI/ItemListbox" Renderer="Falagard/ItemListbox" LookNFeel="Resummoned/ItemListbox" />
   <FalagardMapping WindowType="Resummoned/ListboxItem" TargetType="CEGUI/ItemEntry"   Renderer="Falagard/ItemEntry"   LookNFeel="Resummoned/ListboxItem" />
   <FalagardMapping WindowType="Resummoned/GroupBox" TargetType="CEGUI/GroupBox"   Renderer="Falagard/Default"   LookNFeel="Resummoned/GroupBox" />
