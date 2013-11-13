@@ -12,8 +12,10 @@
         <Property Name="FrameEnabled" Value="True" />
         <Property Name="TitlebarEnabled" Value="True" />
         <Property Name="CloseButtonEnabled" Value="False" />
+        <Property Name="Alpha" Value="1.0" />
+        <Property Name="InheritsAlpha" Value="False" />
 
-        <Window Type="SWB/ScrollablePaneNoBar" Name="CreditsPane" >
+        <Window Type="SumWarsExtras/ScrollablePaneNoBar" Name="CreditsPane" >
             <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
             <Property Name="InheritsAlpha" Value="False" />
             <Property Name="ContentPaneAutoSized" Value="True" />
@@ -26,7 +28,7 @@
                 <Property Name="UnifiedMaxSize" Value="{{1.0,0},{5.0,0}}" />
                 <Property Name="InheritsAlpha" Value="False" />
                 <Property Name="Alpha" Value="1.0" />
-                <Property Name="FrameEnabled" Value="True" />
+                <Property Name="FrameEnabled" Value="False" />
                 <Property Name="BackgroundEnabled" Value="True" />
                 <Property Name="HorzFormatting" Value="HorzCentred" />
                 <Property Name="VertFormatting" Value="TopAligned" />
