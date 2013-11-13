@@ -41,6 +41,27 @@ public:
 #define LINE_ENDING "\n"
 #define ERASE_CNT 1
 
+
+/**
+	A class to hold a custom exception.
+	This is a copy of a CEGUI exception.
+*/
+class CEGUIUtilityNoWidgetException
+	: public std::exception
+{
+public:
+	CEGUIUtilityNoWidgetException (const char* exceptionText)
+		: std::exception(exceptionText)
+	{
+	};
+
+	CEGUIUtilityNoWidgetException (const std::string& exceptionText)
+		: std::exception(exceptionText.c_str ())
+	{
+	};
+};
+
+
 /**
 	A class to be used as a namespace placeholder for most CEGUI functionality.
 	This is to alleviate some of the issues caused by a change in the API syntax between various versions of CEGUI.
@@ -219,6 +240,9 @@ class CEGUIUtility
 		static CEGUI::Window* getWindow (const CEGUI::String& name);
 		static CEGUI::Window* getWindowForSystem (CEGUI::System* sys, const CEGUI::String& name);
 		static CEGUI::Window* getWindowForLoadedLayout (CEGUI::Window* parentWnd, const CEGUI::String& name);
+
+		/// Same as getWindowForLoadedLayout, but also throws an exception if the window ptr is NULL.
+		static CEGUI::Window* getWindowForLoadedLayoutEx (CEGUI::Window* parentWnd, const CEGUI::String& name);
 
 		static CEGUI::Window* getWindowContainingMouse (CEGUI::System* sys);
 

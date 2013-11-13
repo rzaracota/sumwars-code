@@ -14,6 +14,9 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     TR = top right; R = right; BR = bottom right
   -->
 
+  <!-- Empty picture -->
+	<Image Name="EmptyPicture10px" XPos="64" YPos="64" Width="10" Height="10" />
+
   <!-- The symbol to be used for a Town Portal -->
   <Image Name="TownPortalSymbol" XPos="0" YPos="0" Width="48" Height="48" />
 

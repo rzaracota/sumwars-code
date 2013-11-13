@@ -25,7 +25,6 @@
 	<WindowAlias Alias="Taharez StaticImage" Target="TaharezLook/StaticImage" />
 	<WindowAlias Alias="Taharez StaticText" Target="TaharezLook/StaticText" />
 	<WindowAlias Alias="Taharez Tab Button" Target="TaharezLook/TabButton" />
-	<WindowAlias Alias="Taharez Brown Tab Button" Target="TaharezLook/brownTabButton" />
 	<WindowAlias Alias="Taharez Tab Pane" Target="TaharezLook/TabPane" />
 	<WindowAlias Alias="Taharez Tab Control" Target="TaharezLook/TabControl" />
 	<WindowAlias Alias="Taharez Titlebar" Target="TaharezLook/Titlebar" />

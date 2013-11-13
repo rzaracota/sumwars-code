@@ -26,12 +26,10 @@
 ControlPanel::ControlPanel (Document* doc)
 	: ItemWindow(doc)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
 	std::string name;
 
-	// Rahmen fuer die untere Kontrollleiste
-	CEGUI::FrameWindow* ctrl_panel = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("controlpanel.layout");
+	// Load the layout for the panel that the be used to control various actions
+	CEGUI::FrameWindow* ctrl_panel = static_cast <CEGUI::FrameWindow*> (CEGUIUtility::loadLayoutFromFile ("controlpanel.layout"));
 	if (!ctrl_panel)
 	{
 		DEBUG ("WARNING: Failed to load [%s]", "controlpanel.layout");
@@ -203,8 +201,6 @@ ControlPanel::ControlPanel (Document* doc)
 
 void ControlPanel::update()
 {
-		// Fenstermanager
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label, *img;
 	std::ostringstream out_stream;
 	int timernr;
@@ -444,7 +440,6 @@ void ControlPanel::update()
 
 void ControlPanel::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 
 	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("OptionsButton"));
@@ -537,7 +532,6 @@ void ControlPanel::createAnimations ()
 {
 #if ((CEGUI_VERSION_MAJOR << 16) + (CEGUI_VERSION_MINOR << 8) + CEGUI_VERSION_PATCH >= (0 << 16)+(7 << 8)+5)
 
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 
 	CEGUI::AnimationManager::getSingleton().loadAnimationsFromXML("ControlPanelAnimations.xml");

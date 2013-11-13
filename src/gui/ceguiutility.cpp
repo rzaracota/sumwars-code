@@ -456,6 +456,31 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 	}
 
 
+	CEGUI::Window* CEGUIUtility::getWindowForLoadedLayoutEx (CEGUI::Window* parentWnd, const CEGUI::String& name)
+	{
+		CEGUI::Window* result = CEGUIUtility::getWindowForLoadedLayout(parentWnd, name);
+		if (0 == result)
+		{
+			std::string errorText ("Could not find widget/window named [");
+			errorText.append (name.c_str ());
+			errorText.append ("] starting from parent window [");
+			if (0 != parentWnd)
+			{
+				errorText.append (parentWnd->getName ().c_str ());
+			}
+			else
+			{
+				errorText.append ("NULL");
+			}
+			errorText.append ("]");
+
+			throw CEGUIUtilityNoWidgetException (errorText.c_str ());
+		}
+
+		return result;
+	}
+
+
 	CEGUI::Window* CEGUIUtility::getWindowContainingMouse (CEGUI::System* sys)
 	{
 #ifdef CEGUI_07

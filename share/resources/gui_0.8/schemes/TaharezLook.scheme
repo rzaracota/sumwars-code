@@ -1,6 +1,8 @@
 <?xml version="1.0" ?>
 <GUIScheme version="5" name="TaharezLook">
-    <Imageset name="Misc" filename="misc.imageset" />
+	<Imageset filename="TaharezLook.imageset" />
+	<Font filename="DejaVuSans-12.font" />
+  <Imageset name="Misc" filename="misc.imageset" />
 	<Imageset name="Inventory" filename="Inventory.imageset" />
 	<Imageset name="ControlPanel" filename="ControlPanel.imageset" />
 	<Imageset name="CharScreen" filename="CharacterScreen.imageset" />
@@ -17,8 +19,10 @@
 	<Font name="DejaVuSerif-16" filename="DejaVuSerif-16.font" />
 	<LookNFeel filename="TaharezLook.looknfeel" />
 	<WindowRendererSet filename="CEGUICoreWindowRendererSet" />
+
+	<FalagardMapping windowType="TaharezLook/Label"       targetType="DefaultWindow"     renderer="Core/Default"      lookNFeel="TaharezLook/Label" />
 	<FalagardMapping windowType="TaharezLook/Button"      targetType="CEGUI/PushButton"  renderer="Core/Button"       lookNFeel="TaharezLook/Button" />
-	<FalagardMapping windowType="TaharezLook/Checkbox"    targetType="CEGUI/Checkbox"    renderer="Core/ToggleButton" lookNFeel="TaharezLook/Checkbox" />
+	<FalagardMapping windowType="TaharezLook/Checkbox"    targetType="CEGUI/ToggleButton"    renderer="Core/ToggleButton" lookNFeel="TaharezLook/Checkbox" />
 	<FalagardMapping windowType="TaharezLook/ImageButton" targetType="CEGUI/PushButton"  renderer="Core/Button"       lookNFeel="TaharezLook/ImageButton" />
 	<FalagardMapping windowType="TaharezLook/RadioButton" targetType="CEGUI/RadioButton" renderer="Core/ToggleButton" lookNFeel="TaharezLook/RadioButton" />
 	<FalagardMapping windowType="TaharezLook/FrameWindow"  targetType="CEGUI/FrameWindow" renderer="Core/FrameWindow"  lookNFeel="TaharezLook/FrameWindow" />
@@ -42,7 +46,6 @@
 	<FalagardMapping windowType="TaharezLook/LargeVerticalScrollbar"      targetType="CEGUI/Scrollbar" renderer="Core/Scrollbar" lookNFeel="TaharezLook/LargeVerticalScrollbar" />
 	<FalagardMapping windowType="TaharezLook/LargeVerticalScrollbarThumb" targetType="CEGUI/Thumb"     renderer="Core/Button"    lookNFeel="TaharezLook/LargeVerticalScrollbarThumb" />
 	<FalagardMapping windowType="TaharezLook/TabButton"  targetType="CEGUI/TabButton"  renderer="Core/TabButton"  lookNFeel="TaharezLook/TabButton" />
-	<FalagardMapping windowType="TaharezLook/brownTabButton"  targetType="CEGUI/TabButton"  renderer="Core/TabButton"  lookNFeel="TaharezLook/brownTabButton" />
 	<FalagardMapping windowType="TaharezLook/TabControl" targetType="CEGUI/TabControl" renderer="Core/TabControl" lookNFeel="TaharezLook/TabControl" />
 	<FalagardMapping windowType="TaharezLook/TabContentPane"    targetType="DefaultWindow"    renderer="Core/Default"    lookNFeel="TaharezLook/TabContentPane" />
 	<FalagardMapping windowType="TaharezLook/TabButtonPane"    targetType="DefaultWindow"    renderer="Core/Default"    lookNFeel="TaharezLook/TabButtonPane" />

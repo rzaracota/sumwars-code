@@ -410,7 +410,7 @@ void MainWindow::update(float time)
 			}
 		}
 		
-		CEGUI::FrameWindow* credits = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("CreditsWindow");
+		CEGUI::FrameWindow* credits = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("CreditsWindow_Holder");
 		if (wflags & Document::CREDITS)
 		{
 			credits->setVisible(true);

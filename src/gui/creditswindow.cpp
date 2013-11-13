@@ -27,45 +27,23 @@ CreditsWindow::CreditsWindow(Document* doc, const std::string& ceguiSkinName)
 	: Window (doc)
 	, m_ceguiSkinName (ceguiSkinName)
 {
-	DEBUG ("Creating CreditsWindow using the cegui skin: [%s]", ceguiSkinName.c_str ());
+	CEGUI::FrameWindow* creditsframe = static_cast <CEGUI::FrameWindow*> (CEGUIUtility::loadLayoutFromFile ("creditsscreen.layout"));
+	if (!creditsframe)
+	{
+		WARNING ("WARNING: Failed to load [%s]", "creditsscreen.layout");
+	}
+	CEGUI::Window* credits_frame_holder = CEGUIUtility::loadLayoutFromFile ("creditsscreen_holder.layout");
+	if (!credits_frame_holder)
+	{
+		WARNING ("WARNING: Failed to load [%s]", "creditsscreen_holder.layout");
+	}
+	
+	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (credits_frame_holder, "CreditsWindow_Holder");
+	CEGUI::Window* wndCharInfo = CEGUIUtility::getWindowForLoadedLayoutEx (creditsframe, "CreditsWindow");
+	CEGUIUtility::addChildWidget (wndHolder, wndCharInfo);
+	m_window = credits_frame_holder;
 
-	std::stringstream ss;
-	//ss << ceguiSkinName << "/FrameWindow";
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
-	CEGUI::FrameWindow* creditsframe = (CEGUI::FrameWindow*) win_mgr.createWindow(
-		CEGUIUtility::getWidgetWithSkin (ceguiSkinName, "FrameWindow"), "CreditsWindow");
-	
-	creditsframe->setPosition(CEGUI::UVector2(cegui_reldim(0.25f), cegui_reldim( 0.1f))); //0.0/0.8
-	CEGUIUtility::setWidgetSizeRel (creditsframe, 0.5f, 0.8f);
-	creditsframe->setProperty("FrameEnabled","false");
-	creditsframe->setProperty("TitlebarEnabled","false");
-	creditsframe->setProperty("CloseButtonEnabled","false");
-	creditsframe->setAlpha(0.4);
-	
-	m_window = creditsframe;
-	
-	ss.str ("");
-	//ss << ceguiSkinName << "/ScrollablePaneNoBar";
-	CEGUI::ScrollablePane* pane = static_cast<CEGUI::ScrollablePane*> (win_mgr.createWindow(
-		CEGUIUtility::getWidgetWithSkin (ceguiSkinName, "ScrollablePaneNoBar"), "CreditsPane"));
-	CEGUIUtility::addChildWidget (creditsframe, pane);
-	pane->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
-	CEGUIUtility::setWidgetSizeRel (pane, 1.0f, 1.0f);
-	pane->setInheritsAlpha(false);
-	pane->setContentPaneAutoSized(true);
-	
-	ss.str ("");
-	//ss << ceguiSkinName << "/StaticText";
-
-	CEGUI::Window* credits;
-	credits = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (ceguiSkinName, "StaticText"), "CreditsText");
-	CEGUIUtility::addChildWidget (pane, credits);
-	credits->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f)));
-	CEGUIUtility::setWidgetSizeRel (credits, 1.0f, 1.0f);
-	credits->setProperty("FrameEnabled", "false");
-	credits->setProperty("BackgroundEnabled", "true");
-	credits->setProperty("HorzFormatting", "HorzCentred");
+	CEGUI::Window* credits = CEGUIUtility::getWindowForLoadedLayoutEx (creditsframe, "CreditsText");
 
 	Ogre::DataStreamPtr mem_stream(OGRE_NEW Ogre::MemoryDataStream((void*)authors_content.c_str(), authors_content.length(), false, true));
 	mem_stream->seek(0);
@@ -77,6 +55,7 @@ CreditsWindow::CreditsWindow(Document* doc, const std::string& ceguiSkinName)
 	Ogre::ConfigFile::SectionIterator seci = cf.getSectionIterator();
 
 	std::list<std::string> content;
+	CEGUI::String outputText;
 
 	std::string secName, typeName, archName;
 	while (seci.hasMoreElements())
@@ -93,26 +72,16 @@ CreditsWindow::CreditsWindow(Document* doc, const std::string& ceguiSkinName)
 			content.push_back(archName + LINE_ENDING);
 		}
 		content.push_back(std::string(" ") + LINE_ENDING);
+
 	}
-	
+
+	for (std::list<std::string>::iterator it = content.begin (); it != content.end (); ++it)
+	{
+		outputText.append ((CEGUI::utf8*)it->c_str ());
+		outputText.append ((CEGUI::utf8*)LINE_ENDING);
+	}
+	credits->setText (outputText);
 	credits->setFont("DejaVuSerif-12");
-	
-	std::string added;
-	CEGUI::UVector2 sz = CEGUIUtility::getWidgetSize (credits);
-	sz.d_y = CEGUIUtility::getWindowSizeForText(content, credits->getFont(), added).d_y;
-	CEGUIUtility::setWidgetSize (credits, sz);
-	CEGUIUtility::setWidgetMaxSize (credits, CEGUI::UVector2(CEGUI::UDim(5.0,5.0), CEGUI::UDim(5.0,5.0)));
-	credits->setText(added);
-	if (credits->isPropertyPresent ("BackgroundColours"))
-	{
-		credits->setProperty("BackgroundColours", "tl:99000000 tr:99000000 bl:99000000 br:99000000");
-	}
-	else if (credits->isPropertyPresent ("BackgroundColour"))
-	{
-		credits->setProperty("BackgroundColour", "99000000");
-	}
-	credits->setAlpha(0.9);
-	
 	
 	updateTranslation();
 	
@@ -121,22 +90,7 @@ CreditsWindow::CreditsWindow(Document* doc, const std::string& ceguiSkinName)
 
 void CreditsWindow::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	std::string widgetName = CEGUIUtility::getNameForWidget("CreditsWindow");
-	CEGUI::FrameWindow* wtext = (CEGUI::FrameWindow*) (CEGUIUtility::getWindowForLoadedLayout(m_window, widgetName));
-
-	
-	const CEGUI::Font* fnt = wtext->getFont();
-	
-	// Set Size of the Window automatically
-	CEGUI::UVector2 credSize = CEGUIUtility::getWidgetSize (wtext);
-	//CEGUIUtility::Rectf isize = wtext->getUnclippedInnerRect ();
-	//float height = PixelAligned(CEGUIUtility::fitTextToWindow(wtext->getText(), isize.getWidth(), CEGUIUtility::WordWrapCentred, fnt).lines * fnt->getLineSpacing());
-	credSize.d_y = CEGUIUtility::getWindowSizeForText(wtext->getText().c_str(), fnt).d_y; //CEGUI::UDim(0.0, height);
-	
-	// FIXME: this factor is a hack to achieve the right window size. Size computation is not correct yet
-	credSize.d_y.d_scale *= 1.2;
-	CEGUIUtility::setWidgetSize (wtext, credSize);
+	// no translation for credits (at least not yet).
 }
 
 void CreditsWindow::update()
@@ -160,8 +114,9 @@ void CreditsWindow::update()
 			pos = 0.0;
 		
 		// credits scrolling
-		CEGUI::ScrollablePane* pane  = static_cast<CEGUI::ScrollablePane*>(CEGUIUtility::getWindow ("CreditsPane"));
+		CEGUI::ScrollablePane* pane  = static_cast<CEGUI::ScrollablePane*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "CreditsText"));
 
+		DEBUG ("Setting pane scroll position to %f", pos);
 		pane->setVerticalScrollPosition(pos);
 	}
 }
