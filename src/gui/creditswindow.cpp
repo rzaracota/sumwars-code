@@ -43,7 +43,7 @@ CreditsWindow::CreditsWindow(Document* doc, const std::string& ceguiSkinName)
 	CEGUIUtility::addChildWidget (wndHolder, wndCharInfo);
 	m_window = credits_frame_holder;
 
-	CEGUI::Window* credits = CEGUIUtility::getWindowForLoadedLayoutEx (creditsframe, "CreditsText");
+	CEGUI::Window* credits = CEGUIUtility::getWindowForLoadedLayoutEx (creditsframe, "CreditsPane/CreditsText");
 
 	Ogre::DataStreamPtr mem_stream(OGRE_NEW Ogre::MemoryDataStream((void*)authors_content.c_str(), authors_content.length(), false, true));
 	mem_stream->seek(0);
@@ -114,7 +114,7 @@ void CreditsWindow::update()
 			pos = 0.0;
 		
 		// credits scrolling
-		CEGUI::ScrollablePane* pane  = static_cast<CEGUI::ScrollablePane*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "CreditsText"));
+		CEGUI::ScrollablePane* pane  = static_cast<CEGUI::ScrollablePane*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "CreditsPane/CreditsText"));
 		pane->setVerticalScrollPosition(pos);
 	}
 }

@@ -17,7 +17,7 @@
 #define __SUMWARS_GUI_CEGUIUTILITY_H__
 
 // Define the CEGUI version. TODO: move to a global definition.
-#define CEGUI_07
+//#define CEGUI_07
 
 #ifdef CEGUI_07
 #include "CEGUI.h"
@@ -256,7 +256,7 @@ class CEGUIUtility
 
 		static bool injectKeyUp (OIS::KeyCode myKey);
 		static bool injectKeyUp (CEGUI::System* sys, OIS::KeyCode myKey);
-
+		
 		static bool injectChar (int myKey);
 		static bool injectChar (CEGUI::System* sys, int myKey);
 		

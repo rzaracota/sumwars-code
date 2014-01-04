@@ -135,14 +135,17 @@ MessageQuestionWindow::MessageQuestionWindow (Document* doc
 	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile (layoutName.c_str ());
 	m_window = message;
 
-	if (CEGUIUtility::isWindowPresent ("QuestionAnswerButton1"))
+	CEGUI::String widgetName (CEGUIUtility::getNameForWidget("QuestionAnswerButton1"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_window, widgetName));
+	if (btn)
 	{
-		btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("QuestionAnswerButton1"));
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, subscriberButton1Callback);
 	}
-	if (CEGUIUtility::isWindowPresent ("QuestionAnswerButton2"))
+
+	widgetName = CEGUIUtility::getNameForWidget("QuestionAnswerButton2");
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_window, widgetName));
+	if (btn)
 	{
-		btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("QuestionAnswerButton2"));
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, subscriberButton2Callback);
 	}
 
@@ -160,19 +163,22 @@ void MessageQuestionWindow::updateTranslation()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* widget;
 
-	if (CEGUIUtility::isWindowPresent ("QuestionAnswerButton1"))
+	CEGUI::String widgetName (CEGUIUtility::getNameForWidget("QuestionAnswerButton1"));
+	widget = CEGUIUtility::getWindowForLoadedLayout(m_window, widgetName);
+	if (widget)
 	{
-		widget = CEGUIUtility::getWindow ("QuestionAnswerButton1");
 		widget->setText ((CEGUI::utf8*) m_button1.c_str ());
 	}
-	if (CEGUIUtility::isWindowPresent ("QuestionAnswerButton2"))
+	widgetName = CEGUIUtility::getNameForWidget("QuestionAnswerButton2");
+	widget = CEGUIUtility::getWindowForLoadedLayout(m_window, widgetName);
+	if (widget)
 	{
-		widget = CEGUIUtility::getWindow ("QuestionAnswerButton2");
 		widget->setText ((CEGUI::utf8*) m_button2.c_str ());
 	}
-	if (CEGUIUtility::isWindowPresent ("QuestionInfoLabel"))
+	widgetName = CEGUIUtility::getNameForWidget("QuestionInfoLabel");
+	widget = CEGUIUtility::getWindowForLoadedLayout(m_window, widgetName);
+	if (widget)
 	{
-		widget = CEGUIUtility::getWindow ("QuestionInfoLabel");
 		widget->setText ((CEGUI::utf8*) m_question.c_str ());
 	}
 }

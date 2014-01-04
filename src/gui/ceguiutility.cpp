@@ -433,6 +433,7 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 #else
 		if (0 == parentWnd)
 		{
+			DEBUG ("Null parent received.");
 			return 0;
 		}
 
@@ -448,7 +449,18 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 			}
 			else
 			{
-				DEBUG ("Could not find child [%s] within %d children", name.c_str (), parentWnd->getChildCount ());
+				int numChildren = parentWnd->getChildCount ();
+				DEBUG ("Could not find child [%s] within %d children of [%s]", name.c_str (), numChildren, parentWnd->getName ().c_str ());
+				for (int i = 0; i < numChildren; ++ i)
+				{
+					CEGUI::Window* childPtr = parentWnd->getChildAtIdx (i);
+					if (0 == childPtr)
+					{
+						continue;
+					}
+
+					DEBUG ("Child [%d]: [%s]", i, childPtr->getName ().c_str ());
+				}
 			}
 		}
 #endif

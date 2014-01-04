@@ -129,49 +129,7 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 	}
 
 	CEGUI::FrameWindow* lbl;
-#if 0
-	if (CEGUIUtility::isWindowPresent ("SinglePlayerButton/Label"))
-	{
-		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("SinglePlayerButton/Label"));
-		lbl->setMousePassThroughEnabled(true);
-	}
 
-	if (CEGUIUtility::isWindowPresent ("ServerJoinButton/Label"))
-	{
-		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("ServerJoinButton/Label"));
-		lbl->setMousePassThroughEnabled(true);
-	}
-
-	if (CEGUIUtility::isWindowPresent ("ServerHostButton/Label"))
-	{
-		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("ServerHostButton/Label"));
-		lbl->setMousePassThroughEnabled(true);
-	}
-
-	if (CEGUIUtility::isWindowPresent ("CreditsButton/Label"))
-	{
-		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("CreditsButton/Label"));
-		lbl->setMousePassThroughEnabled(true);
-	}
-
-	if (CEGUIUtility::isWindowPresent ("MainOptionsButton/Label"))
-	{
-		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("MainOptionsButton/Label"));
-		lbl->setMousePassThroughEnabled(true);
-	}
-
-	if (CEGUIUtility::isWindowPresent ("EndGameButton/Label"))
-	{
-		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("EndGameButton/Label"));
-		lbl->setMousePassThroughEnabled(true);
-	}
-#endif
 
 #ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
     btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("LoginButton"));
@@ -224,68 +182,50 @@ void MainMenu::updateTranslation()
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::FrameWindow* lbl;
 
+	CEGUI::Window* widget;
+
 	// Update the button labels.
 
 	std::string widgetName (CEGUIUtility::getNameForWidget("SinglePlayerButton"));
-
-	lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("SinglePlayerButton"));
-	lbl->setText((CEGUI::utf8*) gettext("Single player"));
-
-	lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("ServerJoinButton"));
-	lbl->setText((CEGUI::utf8*) gettext("Join game"));
-
-	lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("ServerHostButton"));
-	lbl->setText((CEGUI::utf8*) gettext("Host game"));
-
-	lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("CreditsButton"));
-	lbl->setText((CEGUI::utf8*) gettext("Credits"));
-
-	lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("MainOptionsButton"));
-	lbl->setText((CEGUI::utf8*) gettext("Options"));
-
-	lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("EndGameButton"));
-	lbl->setText((CEGUI::utf8*) gettext("Quit"));
-
-	if (CEGUIUtility::isWindowPresent ("SinglePlayerButton/Label"))
+	widget = CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName);
+	if (widget)
 	{
-		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("SinglePlayerButton/Label"));
-		lbl->setText((CEGUI::utf8*) gettext("Single player"));
+		widget->setText((CEGUI::utf8*) gettext("Single player"));
 	}
 
-	if (CEGUIUtility::isWindowPresent ("ServerJoinButton/Label"))
+	widgetName = CEGUIUtility::getNameForWidget("ServerJoinButton");
+	widget = CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName);
+	if (widget)
 	{
-		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("ServerJoinButton/Label"));
-		lbl->setText((CEGUI::utf8*) gettext("Join game"));
+		widget->setText((CEGUI::utf8*) gettext("Join game"));
 	}
 
-	if (CEGUIUtility::isWindowPresent ("ServerHostButton/Label"))
+	widgetName = CEGUIUtility::getNameForWidget("ServerHostButton");
+	widget = CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName);
+	if (widget)
 	{
-		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("ServerHostButton/Label"));
-		lbl->setText((CEGUI::utf8*) gettext("Host game"));
+		widget->setText((CEGUI::utf8*) gettext("Host game"));
 	}
 
-	if (CEGUIUtility::isWindowPresent ("CreditsButton/Label"))
+	widgetName = CEGUIUtility::getNameForWidget("CreditsButton");
+	widget = CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName);
+	if (widget)
 	{
-		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("CreditsButton/Label"));
-		lbl->setText((CEGUI::utf8*) gettext("Credits"));
+		widget->setText((CEGUI::utf8*) gettext("Credits"));
 	}
 
-	if (CEGUIUtility::isWindowPresent ("MainOptionsButton/Label"))
+	widgetName = CEGUIUtility::getNameForWidget("MainOptionsButton");
+	widget = CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName);
+	if (widget)
 	{
-		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("MainOptionsButton/Label"));
-		lbl->setText((CEGUI::utf8*) gettext("Options"));
+		widget->setText((CEGUI::utf8*) gettext("Options"));
 	}
 
-	if (CEGUIUtility::isWindowPresent ("EndGameButton/Label"))
+	widgetName = CEGUIUtility::getNameForWidget("EndGameButton");
+	widget = CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName);
+	if (widget)
 	{
-		// TODO: remove when no longer needed.
-		lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow("EndGameButton/Label"));
-		lbl->setText((CEGUI::utf8*) gettext("Quit"));
+		widget->setText((CEGUI::utf8*) gettext("Quit"));
 	}
 
 
