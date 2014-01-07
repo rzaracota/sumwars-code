@@ -21,7 +21,7 @@
                 <Property name="Area" value="{{0.0,0},{0.01,0},{1.0,0},{0.32,0}}" />
                 
                 <Window type="SWB/StaticImage" name="Portrait" >
-                    <Property name="Image" value="set:Portrait image:Portrait" />
+                    <Property name="Image" value="Portrait/Portrait" />
                     <Property name="FrameEnabled" value="True" />
                     <Property name="Area" value="{{0.01,0},{0.04,0},{0.335,0},{0.95,0}}" />
                     <Property name="BackgroundEnabled" value="False" />
@@ -98,9 +98,9 @@
                 <Window type="SWB/ImageButton" name="StrengthAddButton" >
                     <Property name="Position" value="{{0.438,0},{0.060,0}}" />
                     <Property name="Size" value="{{0.061,0},{0.228,0}}" />
-                    <Property name="NormalImage" value="set:CharScreen image:PlusBtnReleased" />
-                    <Property name="HoverImage" value="set:CharScreen image:PlusBtnReleased"  />
-                    <Property name="PushedImage" value="set:CharScreen image:PlusBtnPressed" />
+                    <Property name="NormalImage" value="CharScreen/PlusBtnReleased" />
+                    <Property name="HoverImage" value="CharScreen/PlusBtnReleased"  />
+                    <Property name="PushedImage" value="CharScreen/PlusBtnPressed" />
                 </Window>
                 
                 <!-- Dexterity -->
@@ -119,9 +119,9 @@
                 <Window type="SWB/ImageButton" name="DexterityAddButton" >
                     <Property name="Position" value="{{0.438,0},{0.360,0}}" />
                     <Property name="Size" value="{{0.061,0},{0.228,0}}" />
-                    <Property name="NormalImage" value="set:CharScreen image:PlusBtnReleased" />
-                    <Property name="HoverImage" value="set:CharScreen image:PlusBtnReleased"  />
-                    <Property name="PushedImage" value="set:CharScreen image:PlusBtnPressed" />
+                    <Property name="NormalImage" value="CharScreen/PlusBtnReleased" />
+                    <Property name="HoverImage" value="CharScreen/PlusBtnReleased"  />
+                    <Property name="PushedImage" value="CharScreen/PlusBtnPressed" />
                 </Window>
                 
                 <!-- Willpower -->
@@ -140,9 +140,9 @@
                 <Window type="SWB/ImageButton" name="WillpowerAddButton" >
                     <Property name="Position" value="{{0.938,0},{0.060,0}}" />
                     <Property name="Size" value="{{0.061,0},{0.228,0}}" />
-                    <Property name="NormalImage" value="set:CharScreen image:PlusBtnReleased" />
-                    <Property name="HoverImage" value="set:CharScreen image:PlusBtnReleased"  />
-                    <Property name="PushedImage" value="set:CharScreen image:PlusBtnPressed" />
+                    <Property name="NormalImage" value="CharScreen/PlusBtnReleased" />
+                    <Property name="HoverImage" value="CharScreen/PlusBtnReleased"  />
+                    <Property name="PushedImage" value="CharScreen/PlusBtnPressed" />
                 </Window>
                 
                 <!-- Magic power -->
@@ -161,9 +161,9 @@
                 <Window type="SWB/ImageButton" name="MagicpowerAddButton" >
                     <Property name="Position" value="{{0.938,0},{0.360,0}}" />
                     <Property name="Size" value="{{0.061,0},{0.228,0}}" />
-                    <Property name="NormalImage" value="set:CharScreen image:PlusBtnReleased" />
-                    <Property name="HoverImage" value="set:CharScreen image:PlusBtnReleased"  />
-                    <Property name="PushedImage" value="set:CharScreen image:PlusBtnPressed" />
+                    <Property name="NormalImage" value="CharScreen/PlusBtnReleased" />
+                    <Property name="HoverImage" value="CharScreen/PlusBtnReleased"  />
+                    <Property name="PushedImage" value="CharScreen/PlusBtnPressed" />
                 </Window>
                 
                 <Window type="SWB/StaticText" name="AttrPointsValueLabel" >

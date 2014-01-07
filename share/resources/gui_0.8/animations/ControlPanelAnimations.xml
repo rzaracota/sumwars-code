@@ -1,6 +1,6 @@
 <Animations>
     <AnimationDefinition name="HealthbarAnimation" duration="12.42" replayMode="loop">
-      <Affector property="HighlightModifier" interpolator="colour">
+      <Affector property="HighlightModifier" interpolator="Colour">
           <!--<KeyFrame position="0.0" value="1.0" />
           <KeyFrame position="0.4" value="0.5" />-->
           <KeyFrame position="0" value="FFBBA075" />

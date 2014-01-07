@@ -262,7 +262,7 @@ void PartyInfo::update()
 		stream << "PlayerImage";
 		stream << nr;
 		
-		img = CEGUIUtility::getWindow (stream.str());
+		img = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		if (img->isVisible()!=true)
 		{
 			img->setVisible(true);
@@ -277,7 +277,7 @@ void PartyInfo::update()
 		stream.str("");
 		stream << "PlayerParty";
 		stream << nr;
-		label = CEGUIUtility::getWindow (stream.str());
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		
 		stream.str("");
 		stream<< pl->getParty()->getId();
@@ -294,7 +294,7 @@ void PartyInfo::update()
 		stream << "PlayerName";
 		stream << nr;
 		
-		label = CEGUIUtility::getWindow (stream.str());
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		stream.str("");
 		stream << pl->getName().getRawText();
 		if (label->isVisible()!=true)
@@ -311,7 +311,7 @@ void PartyInfo::update()
 		stream << "PlayerClass";
 		stream << nr;
 		
-		label = CEGUIUtility::getWindow (stream.str());
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		PlayerBasicData* pdata = ObjectFactory::getPlayerData(pl->getSubtype());
 		if (pdata != 0)
 		{
@@ -338,7 +338,7 @@ void PartyInfo::update()
 		stream << nr;
 		
 		
-		btn = CEGUIUtility::getWindow (stream.str());
+		btn = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		if (btn->isVisible()!=vis)
 		{
 			btn->setVisible(vis);
@@ -349,7 +349,7 @@ void PartyInfo::update()
 		stream << "RejectMemberButton";
 		stream << nr;
 		
-		btn = CEGUIUtility::getWindow (stream.str());
+		btn = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		if (btn->isVisible()!=vis)
 		{
 			btn->setVisible(vis);
@@ -365,7 +365,7 @@ void PartyInfo::update()
 		stream << "ApplyButton";
 		stream << nr;
 		
-		btn = CEGUIUtility::getWindow (stream.str());
+		btn = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		if (btn->isVisible()!=vis)
 		{
 			btn->setVisible(vis);
@@ -382,7 +382,7 @@ void PartyInfo::update()
 		stream << "KickMemberButton";
 		stream << nr;
 		
-		btn = CEGUIUtility::getWindow (stream.str());
+		btn = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		if (btn->isVisible()!=vis)
 		{
 			btn->setVisible(vis);
@@ -398,7 +398,7 @@ void PartyInfo::update()
 		stream << "LeavePartyButton";
 		stream << nr;
 		
-		btn = CEGUIUtility::getWindow (stream.str());
+		btn = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		if (btn->isVisible()!=vis)
 		{
 			btn->setVisible(vis);
@@ -414,7 +414,7 @@ void PartyInfo::update()
 		stream << "PeaceButton";
 		stream << nr;
 		
-		btn = CEGUIUtility::getWindow (stream.str());
+		btn = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		if (btn->isVisible()!=vis)
 		{
 			btn->setVisible(vis);
@@ -430,7 +430,7 @@ void PartyInfo::update()
 		stream << "DeclareWarButton";
 		stream << nr;
 		
-		btn = CEGUIUtility::getWindow (stream.str());
+		btn = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		if (btn->isVisible()!=vis)
 		{
 			btn->setVisible(vis);
@@ -453,7 +453,7 @@ void PartyInfo::update()
 			stream << elements[j];
 			stream << i;
 			
-			label = CEGUIUtility::getWindow (stream.str());
+			label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 			if (label->isVisible())
 			{
 				label->setVisible(false);
@@ -476,7 +476,7 @@ void PartyInfo::updateTranslation()
 		stream << "PlayerName";
 		stream << i;
 		
-		label = CEGUIUtility::getWindow (stream.str());
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		label->setText((CEGUI::utf8*) gettext("Name"));
 	}
 }

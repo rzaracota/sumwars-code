@@ -27,10 +27,10 @@ class CharCreate : public Window
 {
 	public:
 		/**
-	 * \fn CharCreate (Document* doc)
-	 * \brief Konstruktor
+		 * \fn CharCreate (Document* doc)
+		 * \brief Konstruktor
 		 */
-		CharCreate (Document* doc, const std::string& ceguiSkinName);
+		CharCreate (Document* doc, const std::string& ceguiSkinName, CEGUI::Window* parentWindowPtr);
 	
 		/**
 		 * \fn virtual void update()
@@ -92,6 +92,10 @@ class CharCreate : public Window
 		 */
 		std::string m_ceguiSkinName;
 
+		/**
+		 * \brief Hold a pointer to the parent window.
+		 */
+		CEGUI::Window* m_parentWindowPtr;
 };
 
 #endif // __SUMWARS_GUI_CHARCREATE_H__

@@ -338,6 +338,11 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 		*/
 		void CEGUIUtility::addChildWidget (CEGUI::Window* parentPtr, CEGUI::Window* childPtr)
 		{
+			if (0 == parentPtr)
+			{
+				throw CEGUIUtilityNullPointerException ("addChildWidget received a null parent pointer");
+			}
+
 #ifdef CEGUI_07
 			parentPtr->addChildWindow (childPtr);
 #else
@@ -416,11 +421,114 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 	}
 	else
 	{
+		if (root->getName () == name)
+		{
+			return root;
+		}
+		else
+		{
+			int numChildren = root->getChildCount ();
+			DEBUG ("Could not find child [%s] within %d children of root [%s]", name.c_str (), numChildren, root->getName ().c_str ());
+		}
 	}
 #endif
 	return 0;
 }
 
+	std::vector <std::string> CEGUIUtility::SplitByChar (const std::string& source, const char delimiter)
+	{
+		std::vector <std::string> result;
+		std::stringstream splitter (source);
+		std::string tempItem ("");
+
+		// split the items and add them to the vector.
+		while (std::getline (splitter, tempItem, delimiter))
+		{
+			result.push_back (tempItem);
+		}
+
+		// If we have an empty string, just return the existing content.
+		if (source.length () <= 0)
+		{
+			return result;
+		}
+
+		// If the last char is the separator... add an empty entry.
+		// An elegant way: dereference the reverse iterator. C++11 has support for back().
+
+		const char lastChar = *source.rbegin ();
+		if (lastChar == delimiter)
+		{
+			result.push_back (std::string (""));
+		}
+
+		return result;
+	}
+
+
+	CEGUI::String CEGUIUtility::getMatchingPath (CEGUI::Window* parentWnd, const CEGUI::String& fullWidgetPath)
+	{
+		CEGUI::String result;
+		if (0 == parentWnd)
+		{
+			return result;
+		}
+
+		// Split the string into tokens separated by the slash char.
+		std::vector<std::string> stringList (CEGUIUtility::SplitByChar (fullWidgetPath.c_str(), '/'));
+		std::vector<std::string>::iterator currentToken = stringList.begin ();
+		CEGUI::Window* currentWidget = parentWnd;
+
+		bool foundChild = true;
+		while (foundChild && currentToken != stringList.end ())
+		{
+			// Check to see whether the current token is a child of the current window.
+			int numChildren = currentWidget->getChildCount ();
+			foundChild = false;
+			std::string defToken = *currentToken;
+			CEGUI::String castedName = CEGUI::String (defToken.c_str ());
+
+			for (int i = 0; i < numChildren && !foundChild; ++ i)
+			{
+				CEGUI::Window* childPtr = currentWidget->getChildAtIdx (i);
+				if (0 == childPtr)
+				{
+					continue;
+				}
+				
+
+				// It seems we found this one.
+				if (childPtr->getName () == castedName)
+				{
+					foundChild = true;
+					currentWidget = childPtr;
+					result.append ("/");
+					result.append (currentWidget->getName ());
+					DEBUG ("Child [%d]: [%s]", i, currentWidget->getName ().c_str ());
+
+					// Move to the next token (child name) in the string.
+					++ currentToken;
+				}
+			}
+
+			if (!foundChild)
+			{
+				DEBUG ("Could not find child [%s] within %d children of [%s]", castedName.c_str (), numChildren, currentWidget->getName ().c_str ());
+				for (int i = 0; i < numChildren; ++ i)
+				{
+					CEGUI::Window* childPtr = currentWidget->getChildAtIdx (i);
+					if (0 == childPtr)
+					{
+						continue;
+					}
+
+					DEBUG ("Child [%d]: [%s]", i, childPtr->getName ().c_str ());
+				}
+			}
+		}
+
+		return result;
+	}
 
 	CEGUI::Window* CEGUIUtility::getWindowForLoadedLayout (CEGUI::Window* parentWnd, const CEGUI::String& name)
 	{
@@ -461,6 +569,9 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 
 					DEBUG ("Child [%d]: [%s]", i, childPtr->getName ().c_str ());
 				}
+
+				// TODO: split the child node name by "/". If the first child node is found, signal a partial match in the log.
+				DEBUG ("Matched items: [%s]", CEGUIUtility::getMatchingPath(parentWnd, name).c_str());
 			}
 		}
 #endif

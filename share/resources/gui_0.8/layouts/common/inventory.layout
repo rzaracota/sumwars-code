@@ -19,7 +19,7 @@
         
             <!-- The gold coins icon -->
             <Window type="SWB/StaticImage" name="GoldStaticImage" >
-                <Property name="Image" value="set:Inventory image:GoldPile" />
+                <Property name="Image" value="Inventory/GoldPile" />
                 <Property name="FrameEnabled" value="False" />
                 <Property name="Area" value="{{0.05,0},{0.575,0},{0.104,0},{0.597,0}}" />
                 <Property name="BackgroundEnabled" value="False" />

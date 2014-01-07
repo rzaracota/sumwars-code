@@ -2,15 +2,15 @@
 
 <GUILayout version="4" >
     <Window type="TaharezLook/StaticImage" name="ErrorDialogWindow" >
-        <Property name="Image" value="set:Misc image:QuestionDialog" />
+        <Property name="Image" value="Misc/QuestionDialog" />
         <Property name="FrameEnabled" value="False" />
         <Property name="Area" value="{{0.3,0},{0.25,0},{0.7,0},{0.55,0}}" />
         <Property name="BackgroundEnabled" value="False" />
         <Window type="TaharezLook/Button" name="ErrorDialogConfirmButton" >
-            <Property name="HoverImage" value="set:MainMenu image:SPBtnHover" />
-            <Property name="NormalImage" value="set:MainMenu image:SPBtnNormal" />
-            <Property name="PushedImage" value="set:MainMenu image:SPBtnPushed" />
-            <Property name="DisabledImage" value="set:MainMenu image:SPBtnNormal" />
+            <Property name="HoverImage" value="MainMenu/SPBtnHover" />
+            <Property name="NormalImage" value="MainMenu/SPBtnNormal" />
+            <Property name="PushedImage" value="MainMenu/SPBtnPushed" />
+            <Property name="DisabledImage" value="MainMenu/SPBtnNormal" />
             <Property name="InheritsAlpha" value="False" />
             <Property name="Area" value="{{0.4,0},{0.6,0},{0.6,0},{0.75,0}}" />
         </Window>

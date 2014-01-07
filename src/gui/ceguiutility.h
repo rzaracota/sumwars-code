@@ -61,6 +61,24 @@ public:
 	};
 };
 
+/**
+	A class to hold a custom exception.
+*/
+class CEGUIUtilityNullPointerException
+	: public std::exception
+{
+public:
+	CEGUIUtilityNullPointerException (const char* exceptionText)
+		: std::exception(exceptionText)
+	{
+	};
+
+	CEGUIUtilityNullPointerException (const std::string& exceptionText)
+		: std::exception(exceptionText.c_str ())
+	{
+	};
+};
+
 
 /**
 	A class to be used as a namespace placeholder for most CEGUI functionality.
@@ -243,6 +261,10 @@ class CEGUIUtility
 
 		/// Same as getWindowForLoadedLayout, but also throws an exception if the window ptr is NULL.
 		static CEGUI::Window* getWindowForLoadedLayoutEx (CEGUI::Window* parentWnd, const CEGUI::String& name);
+
+		/// 
+		static CEGUI::String getMatchingPath (CEGUI::Window* parentWnd, const CEGUI::String& fullWidgetPath);
+		static std::vector <std::string> SplitByChar (const std::string& source, const char delimiter);
 
 		static CEGUI::Window* getWindowContainingMouse (CEGUI::System* sys);
 

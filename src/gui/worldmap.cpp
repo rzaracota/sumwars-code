@@ -92,7 +92,7 @@ void Worldmap::update()
 			label->setProperty("BackgroundEnabled", "false");
 			//label->setProperty("BackgroundColours", "tl:00000000 tr:00000000 bl:00000000 br:00000000"); 
 			CEGUIUtility::setWidgetSizeRel (label, 0.02f, 0.02f);
-			label->setProperty("Image", "set:SumWarsExtras image:WaypointMark"); 
+			label->setProperty("Image", CEGUIUtility::getImageNameWithSkin ("SumWarsExtras", "WaypointMark")); 
 			label->setInheritsAlpha (false);
 			label->setAlwaysOnTop(true);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Worldmap::onWaypointClicked, this));
@@ -154,7 +154,7 @@ void Worldmap::update()
 				}
 				CEGUIUtility::setWidgetSizeRel (label, 0.023f, 0.023f);
 
-				label->setProperty("Image", "set:SumWarsExtras image:TownPortalSymbol");
+				label->setProperty("Image", CEGUIUtility::getImageNameWithSkin ("SumWarsExtras", "TownPortalSymbol"));
 				label->setInheritsAlpha (false);
 				label->setAlwaysOnTop(true);
 				label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Worldmap::onWaypointClicked, this));

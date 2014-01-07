@@ -44,8 +44,8 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 		DEBUG ("WARNING: Failed to load [%s]", "tradewindow_holder.layout");
 	}
 
-	CEGUI::Window* wndHolder = CEGUIUtility::getWindow ("TradeWindow_Holder");
-	CEGUI::Window* wndTrade = CEGUIUtility::getWindow ("TradeWindow");
+	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (trade_holder, "TradeWindow_Holder");
+	CEGUI::Window* wndTrade = CEGUIUtility::getWindowForLoadedLayoutEx (trade, "TradeWindow");
 	if (wndHolder && wndTrade)
 	{
 		CEGUIUtility::addChildWidget (wndHolder, wndTrade);

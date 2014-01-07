@@ -1,4 +1,4 @@
-<GUILayout>
+<GUILayout version="4" >
     <Window type="SWB/StaticImage" name="JoinGameWindow_Holder" >
         <Property name="FrameEnabled" value="False" />
         <Property name="Area" value="{{0.25,0},{0.16,0},{0.75,0},{0.72,0}}" />

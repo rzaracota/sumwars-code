@@ -17,7 +17,7 @@
             <Property name="Area" value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
             <Property name="WantsMultiClickEvents" value="False" />
             <Property name="MousePassThroughEnabled" value="True" />
-            <Property name="Image" value="set:minimap image:minimap_img" />
+            <Property name="Image" value="minimap/minimap_img" />
         </Window>
         
         <Window type="SWB/StaticText" name="RegionNameLabel">

@@ -6,8 +6,8 @@
 
         <Window type="SWB/StaticText" name="SaveItemRoot_Name" >
             <Property name="Text" value="SaveItemRoot_Name" />
-            <Property name="HorzExtent" value="165" />
-            <Property name="VertExtent" value="23.8451" />
+            <!--<Property name="HorzExtent" value="165" />-->
+            <!--<Property name="VertExtent" value="23.8451" />-->
             <Property name="FrameEnabled" value="False" />
             <Property name="InheritsAlpha" value="False" />
             <Property name="HorzFormatting" value="HorzCentred" />
@@ -17,8 +17,8 @@
 
         <Window type="SWB/StaticText" name="SaveItemRoot_DecriptionLabel" >
             <Property name="Text" value="Level 5 Fencer" />
-            <Property name="HorzExtent" value="140" />
-            <Property name="VertExtent" value="24.0283" />
+            <!--<Property name="HorzExtent" value="140" />-->
+            <!--<Property name="VertExtent" value="24.0283" />-->
             <Property name="FrameEnabled" value="False" />
             <Property name="InheritsAlpha" value="False" />
             <Property name="HorzFormatting" value="HorzCentred" />

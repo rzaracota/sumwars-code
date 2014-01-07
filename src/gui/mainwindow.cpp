@@ -189,23 +189,13 @@ bool MainWindow::setupMainMenu()
 			{
 				item->setMousePassThroughEnabled (true);
 			}
-			//if (CEGUIUtility::isWindowPresent (widgetName))
-			//{
-			//	CEGUI::Window* temp = CEGUIUtility::getWindow (widgetName);
-			//	temp->setMousePassThroughEnabled (true);
-			//}
-
+			
 			widgetName = CEGUIUtility::getNameForWidget("StartScreenImage");
 			item = CEGUIUtility::getWindowForLoadedLayout(start_screen_holder, widgetName);
 			if (item)
 			{
 				item->setMousePassThroughEnabled (true);
 			}
-			//if (CEGUIUtility::isWindowPresent (widgetName))
-			//{
-			//	CEGUI::Window* temp = CEGUIUtility::getWindow (widgetName);
-			//	temp->setMousePassThroughEnabled (true);
-			//}
 
 			widgetName = CEGUIUtility::getNameForWidget("LoadRessourcesProgressBar");
 			item = CEGUIUtility::getWindowForLoadedLayout(start_screen_holder, widgetName);
@@ -213,11 +203,6 @@ bool MainWindow::setupMainMenu()
 			{
 				item->setMousePassThroughEnabled (true);
 			}
-			//if (CEGUIUtility::isWindowPresent (widgetName))
-			//{
-			//	CEGUI::Window* temp = CEGUIUtility::getWindow (widgetName);
-			//	temp->setMousePassThroughEnabled (true);
-			//}
 		}
 		else
 		{
@@ -238,7 +223,7 @@ bool MainWindow::setupMainMenu()
 
 		DEBUG ("Creating character screen");
 
-		wnd = new CharCreate (m_document, m_ceguiSkinName);
+		wnd = new CharCreate (m_document, m_ceguiSkinName, m_main_menu);
 		m_sub_windows["CharCreate"] = wnd;
 		CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
 		
@@ -786,7 +771,7 @@ void MainWindow::update(float time)
 		{
 			if (vis)
 			{
-				label->setProperty("Image", "set:minimap image:minimap_img"); 
+				label->setProperty("Image", CEGUIUtility::getImageNameWithSkin ("minimap", "minimap_img")); 
 			}
 			label->setVisible(vis);
 		}
@@ -2905,7 +2890,7 @@ void MainWindow::setRessourceLoadingBar(float percent)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("LoadRessourcesProgressBar"));
+	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("MainMenu/LoadRessourcesProgressBar"));
 	bar->setProgress(percent);
 }
 

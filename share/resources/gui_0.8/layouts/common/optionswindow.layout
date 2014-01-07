@@ -190,7 +190,7 @@
                     <Property name="InheritsAlpha" value="False" />
                     <Property name="Area" value="{{0.4,0},{0.146047,0},{0.8,0},{0.246047,0}}" />
                     <Property name="Size" value="{{0.4,0},{0.3,0}}" />
-                    <Property name="MaxEditTextLength" value="1073741823" />
+                    <Property name="MaxTextLength" value="1073741823" />
                 </Window>
                 <Window type="SWB/StaticText" name="TextSpeedLabel" >
                     <Property name="Text" value="Text Speed" />
@@ -276,7 +276,7 @@
                     <Property name="InheritsAlpha" value="False" />
                     <Property name="Area" value="{{0.35,0},{0.15,0},{0.98,0},{0.25,0}}" />
                     <Property name="Size" value="{{0.5,0},{0.25,0}}" />
-                    <Property name="MaxEditTextLength" value="256" />
+                    <Property name="MaxTextLength" value="256" />
                 </Window>
                 <Window type="SWB/StaticText" name="DisplayMode" >
                     <Property name="Text" value="Display Mode" />
@@ -289,7 +289,7 @@
                     <Property name="InheritsAlpha" value="False" />
                     <Property name="Area" value="{{0.35,0},{0.26,0},{0.98,0},{0.36,0}}" />
                     <Property name="Size" value="{{0.5,0},{0.3,0}}" />
-                    <Property name="MaxEditTextLength" value="256" />
+                    <Property name="MaxTextLength" value="256" />
                 </Window>
                 <Window type="SWB/StaticText" name="Resolution" >
                     <Property name="Text" value="Resolution" />
@@ -302,7 +302,7 @@
                     <Property name="InheritsAlpha" value="False" />
                     <Property name="Area" value="{{0.35,0},{0.37,0},{0.98,0},{0.47,0}}" />
                     <Property name="Size" value="{{0.5,0},{0.5,0}}" />
-                    <Property name="MaxEditTextLength" value="256" />
+                    <Property name="MaxTextLength" value="256" />
                 </Window>
                 <Window type="SWB/StaticText" name="EnemyHighlightLabel" >
                     <Property name="Text" value="Enemy Highlight Color" />
@@ -315,7 +315,7 @@
                     <Property name="InheritsAlpha" value="False" />
                     <Property name="Area" value="{{0.35,0},{0.50,0},{0.98,0},{0.60,0}}" />
                     <Property name="Size" value="{{0.5,0},{0.39,0}}" />
-                    <Property name="MaxEditTextLength" value="256" />
+                    <Property name="MaxTextLength" value="256" />
                 </Window>
 
                 <Window type="SWB/StaticText" name="ShadowsLabel" >
@@ -329,7 +329,7 @@
                     <Property name="InheritsAlpha" value="False" />
                     <Property name="Area" value="{{0.35,0},{0.62,0},{0.98,0},{0.72,0}}" />
                     <Property name="Size" value="{{0.5,0},{0.35,0}}" />
-                    <Property name="MaxEditTextLength" value="256" />
+                    <Property name="MaxTextLength" value="256" />
                 </Window>
             </Window>
             
@@ -352,7 +352,7 @@
                     <Property name="InheritsAlpha" value="False" />
                     <Property name="Area" value="{{0.4,0},{0.351176,0},{0.8,0},{0.451176,0}}" />
                     <Property name="Size" value="{{0.4,0},{0.5,0}}" />
-                    <Property name="MaxEditTextLength" value="1073741823" />
+                    <Property name="MaxTextLength" value="1073741823" />
                 </Window>
             </Window>
         </Window>

@@ -61,8 +61,8 @@ MinimapWindow::MinimapWindow (Document* doc, const std::string& ceguiSkinName)
 	minimapWnd->setVisible (true);
 	minimapWnd_holder->setVisible (true);
 
-	CEGUI::Window* wndHolder = CEGUIUtility::getWindow ("MinimapWindow_Holder");
-	CEGUI::Window* wndHeld = CEGUIUtility::getWindow ("MinimapWindow");
+	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (minimapWnd_holder, "MinimapWindow_Holder");
+	CEGUI::Window* wndHeld = CEGUIUtility::getWindowForLoadedLayoutEx (minimapWnd, "MinimapWindow");
 	if (wndHolder && wndHeld)
 	{
 		CEGUIUtility::addChildWidget (wndHolder, wndHeld);
@@ -107,7 +107,7 @@ void MinimapWindow::reloadIconsOnNextUpdate ()
 void MinimapWindow::update()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("MinimapWindow");
+	CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "MinimapWindow");
 
 	Player* player = m_document->getLocalPlayer();
 	if (player ==0)
@@ -181,14 +181,14 @@ void MinimapWindow::update()
 		}
 		else
 		{
-			label = CEGUIUtility::getWindow (stream.str());
+			label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		}
 
 		if (m_reloadIconsOnNextUpdate)
 		{
 			if (CEGUIUtility::isWindowPresent (stream.str ().c_str ()))
 			{
-				label = CEGUIUtility::getWindow (stream.str ().c_str ());
+				label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str ().c_str ());
 				Player* playerPtr = static_cast<Player*> (pl);
 				if (playerPtr)
 				{
@@ -234,12 +234,12 @@ void MinimapWindow::update()
 		stream << "PlayerMinimapImage";
 		stream << cnt;
 			
-		label = CEGUIUtility::getWindow (stream.str());
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		label->setVisible(false);
 	}
 	
 	// Check to see whether the label displaying the region name needs to be updated.
-	label = CEGUIUtility::getWindow ("RegionNameLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "RegionNameLabel");
 	
 	std::string regionName (region->getName ());
 	DEBUGX ("Got region name as: [%s]", regionName.c_str ());

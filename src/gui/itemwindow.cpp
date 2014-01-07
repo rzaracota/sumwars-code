@@ -109,7 +109,7 @@ std::string ItemWindow::getItemImage(Item::Subtype type)
 		return it->second;
 	}
 
-	return "set: noMedia.png image: full_image";
+	return CEGUIUtility::getImageNameWithSkin ("noMedia.png", "full_image");
 }
 
 

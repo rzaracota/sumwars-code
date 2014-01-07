@@ -60,8 +60,8 @@
         <Window type="SWB/StaticText" name="SumwarsOnlineIndicatorLabel" >
             <Property name="Text" value="Not logged in." />
             <Property name="Alpha" value="0.7" />
-            <Property name="HorzExtent" value="100" />
-            <Property name="VertExtent" value="23.1724" />
+            <!--<Property name="HorzExtent" value="100" />-->
+            <!--<Property name="VertExtent" value="23.1724" />-->
             <Property name="FrameEnabled" value="False" />
             <Property name="HorzFormatting" value="LeftAligned" />
             <Property name="Area" value="{{0.27594,0},{0.96901,0},{0.558594,0},{0.992448,0}}" />
@@ -83,7 +83,7 @@
         
         <Window type="SWB/StaticImage" name="MainMenuSumwarsLogo" >
             <Property name="Alpha" value="0.7" />
-            <Property name="Image" value="set:MainMenu image:Logo" />
+            <Property name="Image" value="MainMenu/Logo" />
             <Property name="FrameEnabled" value="False" />
             <Property name="InheritsAlpha" value="False" />
             <Property name="Area" value="{{0.284961,0},{0.0151042,0},{0.69707,0},{0.289844,0}}" />

@@ -97,7 +97,7 @@ Brown/Orange:
         <PropertyDefinition name="HoverImage" initialValue="" redrawOnWrite="true" />
         <PropertyDefinition name="PushedImage" initialValue="" redrawOnWrite="true" />
         <PropertyDefinition name="DisabledImage" initialValue="" redrawOnWrite="true" />
-        <PropertyDefinition name="GlyphImage" initialValue="set:Resummoned image:EmptyGlyph24" redrawOnWrite="true" />
+        <PropertyDefinition name="GlyphImage" initialValue="Resummoned/EmptyGlyph24" redrawOnWrite="true" />
         <PropertyDefinition name="TextUsesGlyph" initialValue="0" redrawOnWrite="true" />
         <PropertyDefinition name="VertImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
         <PropertyDefinition name="HorzImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
@@ -362,7 +362,7 @@ Brown/Orange:
         <PropertyDefinition name="HoverImage" initialValue="" redrawOnWrite="true" />
         <PropertyDefinition name="PushedImage" initialValue="" redrawOnWrite="true" />
         <PropertyDefinition name="DisabledImage" initialValue="" redrawOnWrite="true" />
-        <PropertyDefinition name="GlyphImage" initialValue="set:Resummoned image:EmptyGlyph24" redrawOnWrite="true" />
+        <PropertyDefinition name="GlyphImage" initialValue="Resummoned/EmptyGlyph24" redrawOnWrite="true" />
         <PropertyDefinition name="TextUsesGlyph" initialValue="0" redrawOnWrite="true" />
         <PropertyDefinition name="VertImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
         <PropertyDefinition name="HorzImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
@@ -1344,8 +1344,8 @@ Brown/Orange:
     ***************************************************
     -->
     <WidgetLook name="Resummoned/ListHeaderSegment">
-        <Property name="SizingCursorImage" value="set:ResummonedCursors image:MouseEsWeCursor" />
-        <Property name="MovingCursorImage" value="set:ResummonedCursors image:MouseMoveCursor" />
+        <Property name="SizingCursorImage" value="ResummonedCursors/MouseEsWeCursor" />
+        <Property name="MovingCursorImage" value="ResummonedCursors/MouseMoveCursor" />
         <Property name="MouseInputPropagationEnabled" value="True" />
         
         <PropertyDefinition name="GS_DarkerThemeColour" initialValue="FF940000" redrawOnWrite="true" />
@@ -2032,7 +2032,7 @@ Brown/Orange:
                 <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
             </Area>
             <HorzAlignment type="RightAligned" />
-            <Property name="GlyphImage" value="set:Resummoned image:GlyphArrowRight" />
+            <Property name="GlyphImage" value="Resummoned/GlyphArrowRight" />
         </Child>
         <Child  type="Resummoned/GlyphButton" nameSuffix="__auto_decbtn__">
             <Area>
@@ -2041,7 +2041,7 @@ Brown/Orange:
                 <Dim type="Width" ><UnifiedDim scale="1" type="Height" /></Dim>
                 <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
             </Area>
-            <Property name="GlyphImage" value="set:Resummoned image:GlyphArrowLeft" />
+            <Property name="GlyphImage" value="Resummoned/GlyphArrowLeft" />
         </Child>
         <Child  type="Resummoned/HorizontalScrollbarThumb" nameSuffix="__auto_thumb__">
             <Area>
@@ -2274,7 +2274,7 @@ Brown/Orange:
                 <Dim type="Height" ><UnifiedDim scale="1" type="Width" /></Dim>
             </Area>
             <VertAlignment type="BottomAligned" />
-            <Property name="GlyphImage" value="set:Resummoned image:GlyphArrowDown" />
+            <Property name="GlyphImage" value="Resummoned/GlyphArrowDown" />
         </Child>
         <Child  type="Resummoned/GlyphButton" nameSuffix="__auto_decbtn__">
             <Area>
@@ -2283,7 +2283,7 @@ Brown/Orange:
                 <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
                 <Dim type="Height" ><UnifiedDim scale="1" type="Width" /></Dim>
             </Area>
-            <Property name="GlyphImage" value="set:Resummoned image:GlyphArrowUp" />
+            <Property name="GlyphImage" value="Resummoned/GlyphArrowUp" />
         </Child>
         <Child  type="Resummoned/VerticalScrollbarThumb" nameSuffix="__auto_thumb__">
             <Area>
@@ -3110,7 +3110,7 @@ Brown/Orange:
         <PropertyDefinition name="ActiveSelectionColour" initialValue="FFFF8080" redrawOnWrite="true" />
         <PropertyDefinition name="InactiveSelectionColour" initialValue="FFB15050" redrawOnWrite="true" />
         <!-- Use the default mouse cursor -->
-        <!--<Property name="MouseCursorImage" value="set:ResummonedCursors image:MouseTextBar" />-->
+        <!--<Property name="MouseCursorImage" value="ResummonedCursors/MouseTextBar" />-->
         <NamedArea name="TextArea">
             <Area>
                 <Dim type="LeftEdge" ><AbsoluteDim value="10" /></Dim>
@@ -3259,7 +3259,7 @@ Brown/Orange:
                 <Dim type="Height" ><WidgetDim widget="__auto_editbox__" dimension="Height" /></Dim>
             </Area>
             <HorzAlignment type="RightAligned" />
-            <Property name="GlyphImage" value="set:Resummoned image:ComboboxButtonGlyph" />
+            <Property name="GlyphImage" value="Resummoned/ComboboxButtonGlyph" />
         </Child>
         <StateImagery name="Enabled" />
         <StateImagery name="Disabled" />
@@ -3658,7 +3658,7 @@ Brown/Orange:
     <WidgetLook name="Resummoned/ListboxItem">
         <PropertyDefinition name="TextColour" initialValue="FFFFFFFF" redrawOnWrite="true" />
         <PropertyDefinition name="SelectedTextColour" initialValue="FFFFDDDD" redrawOnWrite="true" />
-        <PropertyDefinition name="SelectionBrush" initialValue="set:Resummoned image:ListboxSelectionBrush" redrawOnWrite="true" />
+        <PropertyDefinition name="SelectionBrush" initialValue="Resummoned/ListboxSelectionBrush" redrawOnWrite="true" />
         
         <PropertyDefinition name="GS_LighterThemeColour" initialValue="FFFF0101" redrawOnWrite="true" />
         
@@ -4100,7 +4100,7 @@ Brown/Orange:
         <PropertyDefinition name="ActiveSelectionColour" initialValue="FFFF8080" redrawOnWrite="true" />
         <PropertyDefinition name="InactiveSelectionColour" initialValue="FFB15050" redrawOnWrite="true" />
         <!-- Use the default mouse cursor -->
-        <!--<Property name="MouseCursorImage" value="set:ResummonedCursors image:MouseTextBar" />-->
+        <!--<Property name="MouseCursorImage" value="ResummonedCursors/MouseTextBar" />-->
         <NamedArea name="TextArea">
             <Area>
                 <Dim type="LeftEdge" ><AbsoluteDim value="10" /></Dim>
@@ -4222,7 +4222,7 @@ Brown/Orange:
                 <Dim type="Height" ><UnifiedDim scale="0.5" type="Height" /></Dim>
             </Area>
             <HorzAlignment type="RightAligned" />
-            <Property name="GlyphImage" value="set:Resummoned image:GlyphArrowUp" />
+            <Property name="GlyphImage" value="Resummoned/GlyphArrowUp" />
         </Child>
         
         <Child  type="Resummoned/GlyphButton" nameSuffix="__auto_decbtn__">
@@ -4233,7 +4233,7 @@ Brown/Orange:
                 <Dim type="Height" ><UnifiedDim scale="0.5" type="Height" /></Dim>
             </Area>
             <HorzAlignment type="RightAligned" />
-            <Property name="GlyphImage" value="set:Resummoned image:GlyphArrowDown" />
+            <Property name="GlyphImage" value="Resummoned/GlyphArrowDown" />
         </Child>
         <StateImagery name="Enabled" />
         <StateImagery name="Disabled" />
@@ -4256,8 +4256,8 @@ Brown/Orange:
         <!-- The size of the scrollbar + buttons -->
         <PropertyDefinition name="ScrollBarPreferredSize" initialValue="24" redrawOnWrite="true" layoutOnWrite="false" />
 
-        <Property name="MouseCursorImage" value="set:ResummonedCursors image:MouseTextBar" />
-        <Property name="SelectionBrushImage" value="set:Resummoned image:MultiLineEditboxSelectionBrush" />
+        <Property name="MouseCursorImage" value="ResummonedCursors/MouseTextBar" />
+        <Property name="SelectionBrushImage" value="Resummoned/MultiLineEditboxSelectionBrush" />
         <NamedArea name="TextArea">
             <Area>
                 <Dim type="LeftEdge" ><ImageDim imageset="Resummoned" image="MultiLineEditboxLeft" dimension="Width" /></Dim>
@@ -5296,7 +5296,7 @@ Brown/Orange:
                 </Dim>
             </Area>
             <Property name="AlwaysOnTop" value="True" />
-            <Property name="GlyphImage" value="set:Resummoned image:GlyphArrowLeft" />
+            <Property name="GlyphImage" value="Resummoned/GlyphArrowLeft" />
         </Child>
         <Child type="Resummoned/GlyphButton" nameSuffix="__auto_TabPane__ScrollRight">
             <Area>
@@ -5324,7 +5324,7 @@ Brown/Orange:
                 </Dim>
             </Area>
             <Property name="AlwaysOnTop" value="True" />
-            <Property name="GlyphImage" value="set:Resummoned image:GlyphArrowRight" />
+            <Property name="GlyphImage" value="Resummoned/GlyphArrowRight" />
         </Child>
         <StateImagery name="Enabled" />
         <StateImagery name="Disabled" />
@@ -5543,10 +5543,10 @@ Brown/Orange:
         <PropertyLinkDefinition name="CaptionColour" widget="__auto_titlebar__" targetProperty="CaptionColour" initialValue="FFFFFFFF" />
         <PropertyLinkDefinition name="TitlebarFont" widget="__auto_titlebar__" targetProperty="Font" />
         <PropertyLinkDefinition name="GlyphImage" widget="__auto_titlebar__" targetProperty="GlyphImage" />
-        <Property name="NSSizingCursorImage" value="set:ResummonedCursors image:MouseNoSoCursor" />
-        <Property name="EWSizingCursorImage" value="set:ResummonedCursors image:MouseEsWeCursor" />
-        <Property name="NWSESizingCursorImage" value="set:ResummonedCursors image:MouseNwSeCursor" />
-        <Property name="NESWSizingCursorImage" value="set:ResummonedCursors image:MouseNeSwCursor" />
+        <Property name="NSSizingCursorImage" value="ResummonedCursors/MouseNoSoCursor" />
+        <Property name="EWSizingCursorImage" value="ResummonedCursors/MouseEsWeCursor" />
+        <Property name="NWSESizingCursorImage" value="ResummonedCursors/MouseNwSeCursor" />
+        <Property name="NESWSizingCursorImage" value="ResummonedCursors/MouseNeSwCursor" />
         <Property name="MinSize" value="{{0.01,0},{0.01,0}}" />
         <Property name="AutoRenderingSurface" value="True" />
         <PropertyDefinition name="BackgroundPictureColour" initialValue="DFFFFFFF" redrawOnWrite="true"/>
@@ -5664,7 +5664,7 @@ Brown/Orange:
                 </Dim>
             </Area>
             <Property name="AlwaysOnTop" value="True" />
-            <Property name="GlyphImage" value="set:Resummoned image:GlyphX" />
+            <Property name="GlyphImage" value="Resummoned/GlyphX" />
             <Property name="NonClient" value="True" />
         </Child>
         
@@ -6124,7 +6124,7 @@ Brown/Orange:
     ***************************************************
     -->
     <WidgetLook name="Resummoned/BackgroundButton">
-        <PropertyDefinition name="Image" initialValue="set:Resummoned image:EmptyGlyph24" redrawOnWrite="true" />
+        <PropertyDefinition name="Image" initialValue="Resummoned/EmptyGlyph24" redrawOnWrite="true" />
         <PropertyDefinition name="VertImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
         <PropertyDefinition name="HorzImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
         <PropertyDefinition name="BackgroundColour" initialValue="22FFFFFF" />

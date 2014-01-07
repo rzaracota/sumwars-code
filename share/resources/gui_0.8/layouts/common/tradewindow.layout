@@ -20,45 +20,45 @@
         
         
             <Window type="SWB/ImageButton" name="TradeBigPrevButton" >
-                <Property name="HoverImage" value="set:TradeWindow image:BtnUpHover" />
-                <Property name="NormalImage" value="set:TradeWindow image:BtnUp" />
-                <Property name="PushedImage" value="set:TradeWindow image:BtnUp" />
-                <Property name="DisabledImage" value="set:TradeWIndow image:BtnUp" />
+                <Property name="HoverImage" value="TradeWindow/BtnUpHover" />
+                <Property name="NormalImage" value="TradeWindow/BtnUp" />
+                <Property name="PushedImage" value="TradeWindow/BtnUp" />
+                <Property name="DisabledImage" value="TradeWindow/BtnUp" />
                 <Property name="Area" value="{{0.95,0},{0.25823,0},{1.0,0},{0.30823,0}}" />
             </Window>
             <Window type="SWB/ImageButton" name="TradeBigNextButton" >
-                <Property name="HoverImage" value="set:TradeWindow image:BtnDownHover" />
-                <Property name="NormalImage" value="set:TradeWindow image:BtnDown" />
-                <Property name="PushedImage" value="set:TradeWindow image:BtnDown" />
-                <Property name="DisabledImage" value="set:TradeWindow image:BtnDown" />
+                <Property name="HoverImage" value="TradeWindow/BtnDownHover" />
+                <Property name="NormalImage" value="TradeWindow/BtnDown" />
+                <Property name="PushedImage" value="TradeWindow/BtnDown" />
+                <Property name="DisabledImage" value="TradeWindow/BtnDown" />
                 <Property name="Area" value="{{0.95,0},{0.341058,0},{1.0,0},{0.391058,0}}" />
             </Window>
             <Window type="SWB/ImageButton" name="TradeMediumPrevButton" >
-                <Property name="HoverImage" value="set:TradeWindow image:BtnUpHover" />
-                <Property name="NormalImage" value="set:TradeWindow image:BtnUp" />
-                <Property name="PushedImage" value="set:TradeWindow image:BtnUp" />
-                <Property name="DisabledImage" value="set:TradeWindow image:BtnUp" />
+                <Property name="HoverImage" value="TradeWindow/BtnUpHover" />
+                <Property name="NormalImage" value="TradeWindow/BtnUp" />
+                <Property name="PushedImage" value="TradeWindow/BtnUp" />
+                <Property name="DisabledImage" value="TradeWindow/BtnUp" />
                 <Property name="Area" value="{{0.95,0},{0.547517,0},{1.0,0},{0.597517,0}}" />
             </Window>
             <Window type="SWB/ImageButton" name="TradeMediumNextButton" >
-                <Property name="HoverImage" value="set:TradeWindow image:BtnDownHover" />
-                <Property name="NormalImage" value="set:TradeWindow image:BtnDown" />
-                <Property name="PushedImage" value="set:TradeWindow image:BtnDown" />
-                <Property name="DisabledImage" value="set:TradeWindow image:BtnDown" />
+                <Property name="HoverImage" value="TradeWindow/BtnDownHover" />
+                <Property name="NormalImage" value="TradeWindow/BtnDown" />
+                <Property name="PushedImage" value="TradeWindow/BtnDown" />
+                <Property name="DisabledImage" value="TradeWindow/BtnDown" />
                 <Property name="Area" value="{{0.95,0},{0.627538,0},{1.0,0},{0.677538,0}}" />
             </Window>
             <Window type="SWB/ImageButton" name="TradeSmallPrevButton" >
-                <Property name="HoverImage" value="set:TradeWindow image:BtnUpHover" />
-                <Property name="NormalImage" value="set:TradeWindow image:BtnUp" />
-                <Property name="PushedImage" value="set:TradeWindow image:BtnUp" />
-                <Property name="DisabledImage" value="set:TradeWindow image:BtnUp" />
+                <Property name="HoverImage" value="TradeWindow/BtnUpHover" />
+                <Property name="NormalImage" value="TradeWindow/BtnUp" />
+                <Property name="PushedImage" value="TradeWindow/BtnUp" />
+                <Property name="DisabledImage" value="TradeWindow/BtnUp" />
                 <Property name="Area" value="{{0.95,0},{0.778209,0},{1.0,0},{0.828209,0}}" />
             </Window>
             <Window type="SWB/ImageButton" name="TradeSmallNextButton" >
-                <Property name="HoverImage" value="set:TradeWindow image:BtnDownHover" />
-                <Property name="NormalImage" value="set:TradeWindow image:BtnDown" />
-                <Property name="PushedImage" value="set:TradeWindow image:BtnDown" />
-                <Property name="DisabledImage" value="set:TradeWindow image:BtnDown" />
+                <Property name="HoverImage" value="TradeWindow/BtnDownHover" />
+                <Property name="NormalImage" value="TradeWindow/BtnDown" />
+                <Property name="PushedImage" value="TradeWindow/BtnDown" />
+                <Property name="DisabledImage" value="TradeWindow/BtnDown" />
                 <Property name="Area" value="{{0.95,0},{0.855422,0},{1.0,0},{0.905422,0}}" />
             </Window>
             

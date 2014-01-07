@@ -47,8 +47,8 @@ Inventory::Inventory (Document* doc)
 	//CEGUIUtility::addChildWidget (inv_holder, inventory);
 
 
-	CEGUI::Window* wndHolder = CEGUIUtility::getWindow ("Inventory_Holder");
-	CEGUI::Window* wndInventory = CEGUIUtility::getWindow ("Inventory");
+	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (inv_holder, "Inventory_Holder");
+	CEGUI::Window* wndInventory = CEGUIUtility::getWindowForLoadedLayoutEx (inventory, "Inventory");
 	if (wndHolder && wndInventory)
 	{
 		CEGUIUtility::addChildWidget (wndHolder, wndInventory);
@@ -69,8 +69,8 @@ Inventory::Inventory (Document* doc)
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
 	
-	label = CEGUIUtility::getWindow ("CharacterImage");
-	label->setProperty("Image", "set:character image:character_img"); 
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/CharImageHolder/CharacterImage");
+	label->setProperty("Image", CEGUIUtility::getImageNameWithSkin ("character", "character_img")); 
 	label->setID(Equipement::NONE);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	//label->setAlpha(1.0);
@@ -82,8 +82,9 @@ Inventory::Inventory (Document* doc)
 	for (i=0;i<5;i++)
 	{
 		outStream.str("");
+		outStream << "Inventory/inventory_aux/StashHolder/StashItemArea/BigTabMain/";
 		outStream << "BigItem" << i<< "Label";
-		label = CEGUIUtility::getWindow (outStream.str());
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, outStream.str());
 		label->setID(Equipement::BIG_ITEMS+i);
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 		label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -97,8 +98,9 @@ Inventory::Inventory (Document* doc)
 		for (i=0;i<6;i++)
 		{
 			outStream.str("");
+			outStream << "Inventory/inventory_aux/StashHolder/StashItemArea/MediumTabMain/";
 			outStream << "MediumItem" << j*6+i<< "Label";
-			label = CEGUIUtility::getWindow (outStream.str());
+			label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, outStream.str());
 			label->setID(Equipement::MEDIUM_ITEMS+j*6+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -112,8 +114,9 @@ Inventory::Inventory (Document* doc)
 		for (i=0;i<10;i++)
 		{
 			outStream.str("");
+			outStream << "Inventory/inventory_aux/StashHolder/StashItemArea/SmallTabMain/";
 			outStream << "SmallItem" << j*10+i<< "Label";
-			label = CEGUIUtility::getWindow (outStream.str());
+			label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, outStream.str());
 			label->setID(Equipement::SMALL_ITEMS+j*10+i);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -125,7 +128,7 @@ Inventory::Inventory (Document* doc)
 
 
 	// Label Ruestung
-	label = CEGUIUtility::getWindow ("ArmorItemLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/ArmorItemLabel");
 	label->setID(Equipement::ARMOR);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -134,7 +137,7 @@ Inventory::Inventory (Document* doc)
 
 
 	// Label Waffe
-	label = CEGUIUtility::getWindow ("WeaponItemLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/WeaponItemLabel");
 	label->setID(Equipement::WEAPON);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -142,7 +145,7 @@ Inventory::Inventory (Document* doc)
 	label->setWantsMultiClickEvents(false);
 	
 	// Label Helm
-	label = CEGUIUtility::getWindow ("HelmetItemLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/HelmetItemLabel");
 	label->setID(Equipement::HELMET);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -150,7 +153,7 @@ Inventory::Inventory (Document* doc)
 	label->setWantsMultiClickEvents(false);
 	
 	// Label Schild
-	label = CEGUIUtility::getWindow ("ShieldItemLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/ShieldItemLabel");
 	label->setID(Equipement::SHIELD);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*) this));
@@ -158,7 +161,7 @@ Inventory::Inventory (Document* doc)
 	label->setWantsMultiClickEvents(false);
 	
 	// Label Handschuhe
-	label = CEGUIUtility::getWindow ("GlovesItemLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/GlovesItemLabel");
 	label->setID(Equipement::GLOVES);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
@@ -166,7 +169,7 @@ Inventory::Inventory (Document* doc)
 	label->setWantsMultiClickEvents(false);
 	
 	// Ring links
-	label = CEGUIUtility::getWindow ("RingLeftItemLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/RingLeftItemLabel");
 	label->setID(Equipement::RING_LEFT);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
@@ -174,7 +177,7 @@ Inventory::Inventory (Document* doc)
 	label->setWantsMultiClickEvents(false);
 	
 	// Ring rechts
-	label = CEGUIUtility::getWindow ("RingRightItemLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/RingRightItemLabel");
 	label->setID(Equipement::RING_RIGHT);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
@@ -182,7 +185,7 @@ Inventory::Inventory (Document* doc)
 	label->setWantsMultiClickEvents(false);
 	
 	// Amulett
-	label = CEGUIUtility::getWindow ("AmuletItemLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/AmuletItemLabel");
 	label->setID(Equipement::AMULET);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*)this));
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonUp, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonReleased, (ItemWindow*)this));
@@ -190,64 +193,34 @@ Inventory::Inventory (Document* doc)
 	label->setWantsMultiClickEvents(false);
 	
 	// Swap weapons button
-	if (CEGUIUtility::isWindowPresent ("SwapEquipButton"))
-	{
-		btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("SwapEquipButton"));
-		btn->setText ("1");
-		btn->subscribeEvent (CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber (&Inventory::onSwapEquipClicked, this));
-	}
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/SwapEquipButton"));
+	btn->setText ("1");
+	btn->subscribeEvent (CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber (&Inventory::onSwapEquipClicked, this));
 
 	// Label drop Gold
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("GoldDropButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GoldStaticImage/GoldDropButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked,CEGUI::Event::Subscriber(&Inventory::onDropGoldClicked, this));
-	
 	
 	// Label drop Gold (Wert)
 	CEGUI::Editbox* box;
-	box = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow ("GoldDropValueBox"));
+	box = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GoldDropValueBox"));
 	box->subscribeEvent(CEGUI::Editbox::EventTextAccepted, CEGUI::Event::Subscriber(&Inventory::onDropGoldClicked,  this));
 	
 	
 	// Tab Labels
 	setState(Inventory::StateSmall);
 
-	//if (CEGUIUtility::isWindowPresent ("SmallTabButton") 
-	//	&& CEGUIUtility::isWindowPresent ("MediumTabButton") 
-	//	&& CEGUIUtility::isWindowPresent ("BigTabButton"))
-	//{
-	//	CEGUI::TabButton *tabBtn;
-	//	tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("SmallTabButton"));
-	//}
-
-	label = CEGUIUtility::getWindow ("SmallTabButton");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/SmallTabButton");
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onSwitchTabClicked, this));
-	label = CEGUIUtility::getWindow ("MediumTabButton");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/MediumTabButton");
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onSwitchTabClicked, this));
-	label = CEGUIUtility::getWindow ("BigTabButton");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/BigTabButton");
 	label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onSwitchTabClicked, this));
 	
-	if (CEGUIUtility::isWindowPresent ("InvCloseButton"))
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/__auto_closebutton__");
+	if (label)
 	{
-		label = CEGUIUtility::getWindow ("InvCloseButton");
-		if (label)
-		{
-			label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onCloseButtonClicked, this));
-		}
-	}
-	else
-	{
-		if (CEGUIUtility::isWindowPresent ("Inventory__auto_closebutton__"))
-		{
-			label = CEGUIUtility::getWindow ("Inventory__auto_closebutton__");
-			if (label)
-			{
-				label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onCloseButtonClicked, this));
-			}
-		}
-		else
-		{
-			DEBUG ("No close button INSIDE the inventory. Will only be closable via hotkeys and external buttons");
-		}
+		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Inventory::onCloseButtonClicked, this));
 	}
 	
 	createAnimations();
@@ -272,7 +245,7 @@ void Inventory::update()
 
 
 	// Weapon - Label/Slot
-	img =  CEGUIUtility::getWindow ("WeaponItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "WeaponItemLabel");
 	it = player->getWeapon();
 	updateItemWindow(img,it,player);
 	weapon = it;
@@ -284,21 +257,21 @@ void Inventory::update()
 
 
 	// Body armor - Label/Slot
-	img =  CEGUIUtility::getWindow ("ArmorItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "ArmorItemLabel");
 	it = equ->getItem(Equipement::ARMOR);
 	updateItemWindow(img,it,player);
 	
 
 
 	// Helm - Label/Slot
-	img =  CEGUIUtility::getWindow ("HelmetItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HelmetItemLabel");
 	it = equ->getItem(Equipement::HELMET);
 	updateItemWindow(img,it,player);
 	
 	// Shield - Label/Slot
 	// for two handed weapons this will represent the weapon.
 	float alpha = 1.0;
-	img =  CEGUIUtility::getWindow ("ShieldItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "ShieldItemLabel");
 	it = player->getShield();
 	if (two_hand && it ==0)
 	{
@@ -314,55 +287,51 @@ void Inventory::update()
 	
 
 	// Handgloves - Label/Slot
-	img =  CEGUIUtility::getWindow ("GlovesItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "GlovesItemLabel");
 	it = equ->getItem(Equipement::GLOVES);
 	updateItemWindow(img,it,player);
 	
 	// Left hand ring - Label/Slot
-	img =  CEGUIUtility::getWindow ("RingLeftItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "RingLeftItemLabel");
 	it = equ->getItem(Equipement::RING_LEFT);
 	updateItemWindow(img,it,player);
 	
 	// Right hand ring - Label/Slot
-	img =  CEGUIUtility::getWindow ("RingRightItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "RingRightItemLabel");
 	it = equ->getItem(Equipement::RING_RIGHT);
 	updateItemWindow(img,it,player);
 	
 
 	// Amulet - Label/Slot
-	img =  CEGUIUtility::getWindow ("AmuletItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "AmuletItemLabel");
 	it = equ->getItem(Equipement::AMULET);
 	updateItemWindow(img,it,player);
 	
 	
 	// Swap button - this will also display the state of the current weapon selection.
-	if (CEGUIUtility::isWindowPresent ("SwapEquipButton"))
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "SwapEquipButton"));
+	std::string text;
+	if (player->isUsingSecondaryEquip())
 	{
-		btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("SwapEquipButton"));
-		std::string text;// = "set:Inventory image:WeaponSwitchState1";
-		if (player->isUsingSecondaryEquip())
+		if (btn->isPropertyPresent ("AltStateImage"))
 		{
-			if (btn->isPropertyPresent ("AltStateImage"))
-			{
-				text = btn->getProperty ("AltStateImage").c_str ();
-			}
-			//text="set:Inventory image:WeaponSwitchState2";
+			text = btn->getProperty ("AltStateImage").c_str ();
 		}
-		else
+	}
+	else
+	{
+		if (btn->isPropertyPresent ("MainStateImage"))
 		{
-			if (btn->isPropertyPresent ("MainStateImage"))
-			{
-				text = btn->getProperty ("MainStateImage").c_str ();
-			}
+			text = btn->getProperty ("MainStateImage").c_str ();
 		}
-		if (btn->isPropertyPresent ("NormalImage") && btn->isPropertyPresent ("HoverImage") && btn->isPropertyPresent ("PushedImage"))
+	}
+	if (btn->isPropertyPresent ("NormalImage") && btn->isPropertyPresent ("HoverImage") && btn->isPropertyPresent ("PushedImage"))
+	{
+		if (btn->getProperty("NormalImage") != text)
 		{
-			if (btn->getProperty("NormalImage") != text)
-			{
-				btn->setProperty("NormalImage",text);
-				btn->setProperty("HoverImage",text);
-				btn->setProperty("PushedImage",text);		
-			}
+			btn->setProperty("NormalImage",text);
+			btn->setProperty("HoverImage",text);
+			btn->setProperty("PushedImage",text);		
 		}
 	}
 
@@ -372,8 +341,9 @@ void Inventory::update()
 	for (i=0;i<5;i++)
 	{
 		out_stream.str("");
+		out_stream << "Inventory/inventory_aux/StashHolder/StashItemArea/BigTabMain/";
 		out_stream << "BigItem" << i<< "Label";
-		img =  CEGUIUtility::getWindow (out_stream.str().c_str());
+		img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, out_stream.str().c_str());
 		it = equ->getItem(Equipement::BIG_ITEMS+i);
 		updateItemWindow(img,it,player);
 	}
@@ -382,8 +352,9 @@ void Inventory::update()
 	for (i=0;i<12;i++)
 	{
 		out_stream.str("");
+		out_stream << "Inventory/inventory_aux/StashHolder/StashItemArea/MediumTabMain/";
 		out_stream << "MediumItem" << i<< "Label";
-		img =  CEGUIUtility::getWindow (out_stream.str().c_str());
+		img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, out_stream.str().c_str());
 		it = equ->getItem(Equipement::MEDIUM_ITEMS+i);
 		updateItemWindow(img,it,player);
 	}
@@ -392,13 +363,14 @@ void Inventory::update()
 	for (i=0;i<30;i++)
 	{
 		out_stream.str("");
+		out_stream << "Inventory/inventory_aux/StashHolder/StashItemArea/SmallTabMain/";
 		out_stream << "SmallItem" << i<< "Label";
-		img =  CEGUIUtility::getWindow (out_stream.str().c_str());
+		img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, out_stream.str().c_str());
 		it = equ->getItem(Equipement::SMALL_ITEMS+i);
 		updateItemWindow(img,it,player);
 	}
 	
-	label =  CEGUIUtility::getWindow ("GoldValueLabel");
+	label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GoldValueLabel");
 	out_stream.str("");
 	out_stream << equ->getGold();
 	if (label->getText()!=out_stream.str())
@@ -421,52 +393,52 @@ void Inventory::setState(State s)
 	if(s == Inventory::StateSmall)
 	{
 		CEGUI::TabButton *tabBtn;
-		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("SmallTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/SmallTabButton"));
 		tabBtn->setSelected (true);
-		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("MediumTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/MediumTabButton"));
 		tabBtn->setSelected (false);
-		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("BigTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/BigTabButton"));
 		tabBtn->setSelected (false);
 
-		label = CEGUIUtility::getWindow ("SmallTabMain");
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/StashItemArea/SmallTabMain");
 		label->setVisible(true);
-		label = CEGUIUtility::getWindow ("MediumTabMain");
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/StashItemArea/MediumTabMain");
 		label->setVisible(false);
-		label = CEGUIUtility::getWindow ("BigTabMain");
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/StashItemArea/BigTabMain");
 		label->setVisible(false);
 	}
 	else if(s == Inventory::StateMedium)
 	{
 		CEGUI::TabButton *tabBtn;
-		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("SmallTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/SmallTabButton"));
 		tabBtn->setSelected (false);
-		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("MediumTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/MediumTabButton"));
 		tabBtn->setSelected (true);
-		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("BigTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/BigTabButton"));
 		tabBtn->setSelected (false);
 
-		label = CEGUIUtility::getWindow ("SmallTabMain");
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/StashItemArea/SmallTabMain");
 		label->setVisible(false);
-		label = CEGUIUtility::getWindow ("MediumTabMain");
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/StashItemArea/MediumTabMain");
 		label->setVisible(true);
-		label = CEGUIUtility::getWindow ("BigTabMain");
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/StashItemArea/BigTabMain");
 		label->setVisible(false);
 	}
 	else if(s == Inventory::StateBig)
 	{
 		CEGUI::TabButton *tabBtn;
-		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("SmallTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/SmallTabButton"));
 		tabBtn->setSelected (false);
-		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("MediumTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/MediumTabButton"));
 		tabBtn->setSelected (false);
-		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindow ("BigTabButton"));
+		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/BigTabButton"));
 		tabBtn->setSelected (true);
 
-		label = CEGUIUtility::getWindow ("SmallTabMain");
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/StashItemArea/SmallTabMain");
 		label->setVisible(false);
-		label = CEGUIUtility::getWindow ("MediumTabMain");
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/StashItemArea/MediumTabMain");
 		label->setVisible(false);
-		label = CEGUIUtility::getWindow ("BigTabMain");
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/StashItemArea/BigTabMain");
 		label->setVisible(true);
 	}
 }
@@ -476,30 +448,22 @@ void Inventory::updateTranslation()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	
-	label = CEGUIUtility::getWindow ("GoldDropButton");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GoldStaticImage/GoldDropButton");
 	label->setText((CEGUI::utf8*) gettext("Drop:"));
 	
-	if (CEGUIUtility::isWindowPresent ("InvLabel"))
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory");
+	if (label)
 	{
-		label = CEGUIUtility::getWindow ("InvLabel");
 		label->setText((CEGUI::utf8*) gettext("Inventory"));
 	}
-	else
-	{
-		label = CEGUIUtility::getWindow ("Inventory");
-		if (label)
-		{
-			label->setText((CEGUI::utf8*) gettext("Inventory"));
-		}
-	}
 	
-	label = CEGUIUtility::getWindow ("SmallTabButton");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/SmallTabButton");
 	label->setText((CEGUI::utf8*) gettext("Small"));
 	
-	label = CEGUIUtility::getWindow ("MediumTabButton");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/MediumTabButton");
 	label->setText((CEGUI::utf8*) gettext("Medium"));
 	
-	label = CEGUIUtility::getWindow ("BigTabButton");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/BigTabButton");
 	label->setText((CEGUI::utf8*) gettext("Big"));
 
 }
@@ -516,7 +480,7 @@ bool Inventory::onDropGoldClicked(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
-	CEGUI::Editbox* gold = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow ("GoldDropValueBox"));
+	CEGUI::Editbox* gold = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "GoldDropValueBox"));
 	int val =0;
 	std::stringstream stream;
 	stream.str(gold->getText().c_str());
@@ -536,15 +500,15 @@ bool Inventory::onSwitchTabClicked(const CEGUI::EventArgs& evt)
 	const CEGUI::WindowEventArgs* args = static_cast<const CEGUI::WindowEventArgs*>(&evt);
 	std::string name = args->window->getName().c_str();
 
-	if(name == "SmallTabButton")
+	if(name == "Inventory/inventory_aux/StashHolder/SmallTabButton")
 	{
 		setState(Inventory::StateSmall);
 	}
-	else if(name == "MediumTabButton")
+	else if(name == "Inventory/inventory_aux/StashHolder/MediumTabButton")
 	{
 		setState(Inventory::StateMedium);
 	}
-	else if(name == "BigTabButton")
+	else if(name == "Inventory/inventory_aux/StashHolder/BigTabButton")
 	{
 		setState(Inventory::StateBig);
 	}
@@ -570,21 +534,21 @@ void Inventory::createAnimations()
 	CEGUI::AnimationManager::getSingleton().loadAnimationsFromXML("InventoryAnimations.xml");
 	
 	// Small tab animations
-	label = CEGUIUtility::getWindow ("SmallTabMain");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/StashItemArea/SmallTabMain");
 	CEGUI::AnimationInstance* instance = CEGUI::AnimationManager::getSingleton().instantiateAnimation("SlotFadeIn");
 	instance->setTargetWindow(label);
     instance->start();
 	label->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&CEGUI::AnimationInstance::handleStart, instance));
 
 	// Medium tab animations
-	label = CEGUIUtility::getWindow ("MediumTabMain");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/StashItemArea/MediumTabMain");
 	instance = CEGUI::AnimationManager::getSingleton().instantiateAnimation("SlotFadeIn");
 	instance->setTargetWindow(label);
     instance->start();
 	label->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&CEGUI::AnimationInstance::handleStart, instance));
 
 	// Big tab animations
-	label = CEGUIUtility::getWindow ("BigTabMain");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/StashItemArea/BigTabMain");
 	instance = CEGUI::AnimationManager::getSingleton().instantiateAnimation("SlotFadeIn");
 	instance->setTargetWindow(label);
     instance->start();

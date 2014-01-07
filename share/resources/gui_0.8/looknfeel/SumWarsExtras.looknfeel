@@ -222,9 +222,9 @@
                     <Dim type="Width" ><UnifiedDim scale="1.0" type="Width" /></Dim>
                     <Dim type="Height" ><UnifiedDim scale="1.0" type="Height" /></Dim>
                 </Area>
-                <Image type="LeftEdge" imageset="SumWarsExtras" image="MiniHorzScrollThumbLeftNormal" />
-                <Image type="RightEdge" imageset="SumWarsExtras" image="MiniHorzScrollThumbRightNormal" />
-                <Image type="Background" imageset="SumWarsExtras" image="MiniHorzScrollThumbMiddleNormal" />
+                <Image type="LeftEdge" name="SumWarsExtras/MiniHorzScrollThumbLeftNormal" />
+                <Image type="RightEdge" name="SumWarsExtras/MiniHorzScrollThumbRightNormal" />
+                <Image type="Background" name="SumWarsExtras/MiniHorzScrollThumbMiddleNormal" />
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="hover">
@@ -235,9 +235,9 @@
                     <Dim type="Width" ><UnifiedDim scale="1.0" type="Width" /></Dim>
                     <Dim type="Height" ><UnifiedDim scale="1.0" type="Height" /></Dim>
                 </Area>
-                <Image type="LeftEdge" imageset="SumWarsExtras" image="MiniHorzScrollThumbLeftHover" />
-                <Image type="RightEdge" imageset="SumWarsExtras" image="MiniHorzScrollThumbRightHover" />
-                <Image type="Background" imageset="SumWarsExtras" image="MiniHorzScrollThumbMiddleHover" />
+                <Image type="LeftEdge" name="SumWarsExtras/MiniHorzScrollThumbLeftHover" />
+                <Image type="RightEdge" name="SumWarsExtras/MiniHorzScrollThumbRightHover" />
+                <Image type="Background" name="SumWarsExtras/MiniHorzScrollThumbMiddleHover" />
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="Normal">
@@ -313,7 +313,7 @@
                 <Dim type="Width" ><UnifiedDim scale="0.1" type="Width" /></Dim>
                 <Dim type="Height" ><UnifiedDim scale="1" type="Height" /></Dim>
             </Area>
-            <Property name="UnifiedMinSize" value="{{0,25},{0,0}}" />
+            <Property name="MinSize" value="{{0,25},{0,0}}" />
         </Child>
         <ImagerySection name="main">
             <ImageryComponent>
@@ -328,7 +328,7 @@
                     </Dim>
                     <Dim type="BottomEdge" ><UnifiedDim scale="1.0" type="BottomEdge" /></Dim>
                 </Area>
-                <Image imageset="SumWarsExtras" image="MiniHorzScrollBarSegment" />
+                <Image name="SumWarsExtras/MiniHorzScrollBarSegment" />
                 <VertFormat type="CentreAligned" />
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
@@ -362,9 +362,9 @@
                     <Dim type="Width" ><UnifiedDim scale="1.0" type="Width" /></Dim>
                     <Dim type="Height" ><UnifiedDim scale="1.0" type="Height" /></Dim>
                 </Area>
-                <Image type="TopEdge" imageset="SumWarsExtras" image="MiniVertScrollThumbTopNormal" />
-                <Image type="BottomEdge" imageset="SumWarsExtras" image="MiniVertScrollThumbBottomNormal" />
-                <Image type="Background" imageset="SumWarsExtras" image="MiniVertScrollThumbMiddleNormal" />
+                <Image type="TopEdge" name="SumWarsExtras/MiniVertScrollThumbTopNormal" />
+                <Image type="BottomEdge" name="SumWarsExtras/MiniVertScrollThumbBottomNormal" />
+                <Image type="Background" name="SumWarsExtras/MiniVertScrollThumbMiddleNormal" />
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="hover">
@@ -375,9 +375,9 @@
                     <Dim type="Width" ><UnifiedDim scale="1.0" type="Width" /></Dim>
                     <Dim type="Height" ><UnifiedDim scale="1.0" type="Height" /></Dim>
                 </Area>
-                <Image type="TopEdge" imageset="SumWarsExtras" image="MiniVertScrollThumbTopHover" />
-                <Image type="BottomEdge" imageset="SumWarsExtras" image="MiniVertScrollThumbBottomHover" />
-                <Image type="Background" imageset="SumWarsExtras" image="MiniVertScrollThumbMiddleHover" />
+                <Image type="TopEdge" name="SumWarsExtras/MiniVertScrollThumbTopHover" />
+                <Image type="BottomEdge" name="SumWarsExtras/MiniVertScrollThumbBottomHover" />
+                <Image type="Background" name="SumWarsExtras/MiniVertScrollThumbMiddleHover" />
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="Normal">
@@ -454,7 +454,7 @@
                 <Dim type="Width" ><UnifiedDim scale="1" type="Width" /></Dim>
                 <Dim type="Height" ><UnifiedDim scale="0.1" type="Height" /></Dim>
             </Area>
-            <Property name="UnifiedMinSize" value="{{0,0},{0,25}}" />
+            <Property name="MinSize" value="{{0,0},{0,25}}" />
         </Child>
         <ImagerySection name="main">
             <ImageryComponent>
@@ -469,7 +469,7 @@
                         </OperatorDim>
                     </Dim>
                 </Area>
-                <Image imageset="SumWarsExtras" image="MiniVertScrollBarSegment" />
+                <Image name="SumWarsExtras/MiniVertScrollBarSegment" />
                 <VertFormat type="Stretched" />
                 <HorzFormat type="CentreAligned" />
             </ImageryComponent>

@@ -1,5 +1,3 @@
-
-
 <GUILayout version="4" >
     <Window type="SWB/FrameWindow" name="JoinGameWindow" >
         <Property name="FrameEnabled" value="True" />
@@ -21,8 +19,8 @@
         
         <Window type="SWB/StaticText" name="HostnameLabel" >
             <Property name="Text" value="Armor" />
-            <Property name="HorzExtent" value="50" />
-            <Property name="VertExtent" value="25.5702" />
+            <!--<Property name="HorzExtent" value="50" />-->
+            <!--<Property name="VertExtent" value="25.5702" />-->
             <Property name="FrameEnabled" value="False" />
             <Property name="Area" value="{{0.07,0},{0.32,0},{0.51,0},{0.39,0}}" />
             <Property name="BackgroundEnabled" value="False" />
@@ -35,8 +33,8 @@
         </Window>
         <Window type="SWB/StaticText" name="PortLabel" >
             <Property name="Text" value="Armor" />
-            <Property name="HorzExtent" value="50" />
-            <Property name="VertExtent" value="25.5702" />
+            <!--<Property name="HorzExtent" value="50" />-->
+            <!--<Property name="VertExtent" value="25.5702" />-->
             <Property name="FrameEnabled" value="False" />
             <Property name="Area" value="{{0.07,0},{0.5,0},{0.51,0},{0.57,0}}" />
             <Property name="BackgroundEnabled" value="False" />

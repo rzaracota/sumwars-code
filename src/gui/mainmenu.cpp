@@ -362,7 +362,7 @@ bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 	root->getAutoCreatedWindow()->getViewport(0)->setCamera(m_mainMenuCamera);
     root->addFrameListener(this);
 	
-	CEGUIUtility::getWindow ("MainMenu")->setAlpha(0);
+	CEGUIUtility::getWindow ("StartMenuRoot/MainMenu")->setAlpha(0);
 
 	// Also switch to the menu's playlist.
 	try
@@ -383,7 +383,7 @@ bool MainMenu::onHidden( const CEGUI::EventArgs& evt )
 	{
 		root->getAutoCreatedWindow()->getViewport(0)->setCamera(m_gameCamera);
 	}
-	CEGUIUtility::getWindow ("MainMenu")->setAlpha(1);
+	CEGUIUtility::getWindow ("StartMenuRoot/MainMenu")->setAlpha(1);
 
     root->removeFrameListener(this);
 	

@@ -31,23 +31,20 @@ SaveExitWindow::SaveExitWindow (Document* doc)
 	CEGUI::FrameWindow* save_exit = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("saveexitwindow.layout");
 	m_window = save_exit;
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("GameExitConfirmButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "GameExitConfirmButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SaveExitWindow ::onExitGameConfirmed, this));
 	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&SaveExitWindow::onGUIItemHover, this));
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("GameExitAbortButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "GameExitAbortButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SaveExitWindow ::onExitGameAborted, this));
 	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&SaveExitWindow::onGUIItemHover, this));
 
-	// If the panel also has an auto-close button, connect it to the Cancel/Abort event.
-	if (CEGUIUtility::isWindowPresent ("SaveExitWindow__auto_closebutton__"))
+	// The panel should also have an auto-close button; connect it to the Cancel/Abort event.
+	btn = static_cast<CEGUI::PushButton*>( CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "__auto_closebutton__"));
+	if (btn)
 	{
-		btn = static_cast<CEGUI::PushButton*>( CEGUIUtility::getWindow ("SaveExitWindow__auto_closebutton__"));
-		if (btn)
-		{
-			btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SaveExitWindow::onExitGameAborted, this));
-			btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&SaveExitWindow::onGUIItemHover, this));
-		}
+		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SaveExitWindow::onExitGameAborted, this));
+		btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&SaveExitWindow::onGUIItemHover, this));
 	}
 	
 	updateTranslation();
@@ -62,26 +59,17 @@ void SaveExitWindow::updateTranslation()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	
-	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow( "GameExitConfirmButton"));
+	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "GameExitConfirmButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("GameExitAbortButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "GameExitAbortButton"));
 	btn->setText((CEGUI::utf8*) gettext("Abort"));
 	
-	if (CEGUIUtility::isWindowPresent ("SaveExitLabel"))
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "SaveExitWindow");
+	if (label->isPropertyPresent ("Text"))
 	{
-		label = CEGUIUtility::getWindow ("SaveExitLabel");
-		label->setText((CEGUI::utf8*) gettext("Save and Exit?"));
+		label->setProperty ("Text", (CEGUI::utf8*) gettext("Save and Exit?"));
 	}
-	else if (CEGUIUtility::isWindowPresent ("SaveExitWindow"))
-	{
-		label = CEGUIUtility::getWindow ("SaveExitWindow");
-		if (label->isPropertyPresent ("Text"))
-		{
-			label->setProperty ("Text", (CEGUI::utf8*) gettext("Save and Exit?"));
-		}
-	}
-
 }
 
 
@@ -205,7 +193,7 @@ WarningDialogWindow::WarningDialogWindow (Document* doc)
 	m_window = warning_dialog;
 	m_warning = "";
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("WarningDialogConfirmButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "WarningDialogConfirmButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&WarningDialogWindow ::onConfirmed, this));
 	
 	updateTranslation();
@@ -220,10 +208,10 @@ void WarningDialogWindow::updateTranslation()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	
-	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("WarningDialogConfirmButton"));
+	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "WarningDialogConfirmButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));
 	
-	label = CEGUIUtility::getWindow ("WarningDialogLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "WarningDialogLabel");
 	label->setText((CEGUI::utf8*) gettext(m_warning.c_str()));
 }
 
@@ -257,7 +245,7 @@ ErrorDialogWindow::ErrorDialogWindow (Document* doc)
 	m_window = error_dialog;
 	m_error = "Network connection timed out";
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("ErrorDialogConfirmButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "ErrorDialogConfirmButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ErrorDialogWindow ::onConfirmed, this));
 	
 	updateTranslation();
@@ -272,10 +260,10 @@ void ErrorDialogWindow::updateTranslation()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	
-	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("ErrorDialogConfirmButton"));
+	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "ErrorDialogConfirmButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));
 	
-	label = CEGUIUtility::getWindow ("ErrorDialogLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "ErrorDialogLabel");
 	label->setText((CEGUI::utf8*) gettext(m_error.c_str()));
 }
 

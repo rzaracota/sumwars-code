@@ -16,7 +16,7 @@
   <WindowRendererSet filename="CEGUICoreWindowRendererSet" />
   <FalagardMapping windowType="SWB/BackgroundButton" targetType="CEGUI/PushButton"  renderer="Core/Button"       lookNFeel="SWB/BackgroundButton" />
   <FalagardMapping windowType="SWB/Button"      targetType="CEGUI/PushButton"  renderer="Core/Button"       lookNFeel="SWB/Button" />
-  <FalagardMapping windowType="SWB/Checkbox"    targetType="CEGUI/Checkbox"    renderer="Core/ToggleButton" lookNFeel="SWB/Checkbox" />
+  <FalagardMapping windowType="SWB/Checkbox"    targetType="CEGUI/ToggleButton"    renderer="Core/ToggleButton" lookNFeel="SWB/Checkbox" />
   <FalagardMapping windowType="SWB/ComboDropList" targetType="CEGUI/ComboDropList" renderer="Core/Listbox" lookNFeel="SWB/ComboDropList" />
   <FalagardMapping windowType="SWB/ComboEditbox"  targetType="CEGUI/Editbox"   renderer="Core/Editbox" lookNFeel="SWB/ComboEditbox" />
   <FalagardMapping windowType="SWB/Combobox"  targetType="CEGUI/Combobox"   renderer="Core/Default" lookNFeel="SWB/Combobox" />
