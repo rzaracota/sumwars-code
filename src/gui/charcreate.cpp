@@ -29,7 +29,7 @@
 CharCreate::CharCreate (Document* doc, const std::string& ceguiSkinName, CEGUI::Window* parentWindowPtr)
 	: Window (doc)
 	, m_ceguiSkinName (ceguiSkinName)
-	, m_parentWindowPtr (parentWindowPtr)
+	, m_parentWindowPtr (parentWindowPtr) // TODO: XXX: remove this param, as it's no longer needed.
 {
 	DEBUG ("CharCreate window created with cegui skin [%s]", m_ceguiSkinName.c_str ());
 	// Create GUI Elements
@@ -41,12 +41,16 @@ CharCreate::CharCreate (Document* doc, const std::string& ceguiSkinName, CEGUI::
 	m_window = char_create;
 	m_window->setMousePassThroughEnabled(true);
 	
-	CEGUI::String widgetName = CEGUIUtility::getNameForWidget("StartMenuRoot");
+	CEGUI::String widgetName;
 
-	// pin the the window below the StartMenuRoot to allow display along with MainMenu Elements
+	// Augustin Preda, 2014.01.08: removed the use of the "MainMenuRoot" widget. Should not be added here anyway.
+#if 0
+	widgetName = CEGUIUtility::getNameForWidget("MainMenuRoot");
+
+	// pin the the window below the MainMenuRoot to allow display along with MainMenu Elements
 	CEGUI::FrameWindow* start_menu = static_cast<CEGUI::FrameWindow*> (CEGUIUtility::getWindowForLoadedLayout (parentWindowPtr, widgetName));
 	CEGUIUtility::addChildWidget(start_menu, char_create);
-	
+#endif
 	// Bestandteile der Kontrollleiste hinzufuegen
 	CEGUI::PushButton* btn;
 	CEGUI::Editbox* namebox;

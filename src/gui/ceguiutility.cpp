@@ -415,21 +415,68 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 	}
 #else
 	CEGUI::Window* root = sys->getDefaultGUIContext().getRootWindow();
-	if (root->isChild (name))
+	if (0 == root)
 	{
-		return root->getChild (name);
+		DEBUG ("Warning! Attempting to get a unnamed widget from a NULL window");
+		return 0;
 	}
-	else
+
+	try
 	{
-		if (root->getName () == name)
+		if (name.length () <= 0)
 		{
-			return root;
+			DEBUG ("Warning! Attempting to get an unnamed widget from the root window");
+		}
+
+		if (root->isChild (name))
+		{
+			return root->getChild (name);
 		}
 		else
 		{
-			int numChildren = root->getChildCount ();
-			DEBUG ("Could not find child [%s] within %d children of root [%s]", name.c_str (), numChildren, root->getName ().c_str ());
+			if (root->getName () == name)
+			{
+				return root;
+			}
+			else
+			{
+				int numChildren = root->getChildCount ();
+				DEBUG ("Could not find child [%s] within %d children of root [%s]", name.c_str (), numChildren, root->getName ().c_str ());
+				for (int i = 0; i < numChildren; ++ i)
+				{
+					CEGUI::Window* childPtr = root->getChildAtIdx (i);
+					if (0 == childPtr)
+					{
+						continue;
+					}
+
+					DEBUG ("Child [%d]: [%s]", i, childPtr->getName ().c_str ());
+				}
+
+				// Show how much of the path was matched.
+				DEBUG ("Matched items: [%s]", CEGUIUtility::getMatchingPath (root, name).c_str ());
+			}
 		}
+	}
+	catch (std::exception &ex)
+	{
+		// Just display the list of child nodes. Then repackage the exception and throw it further along.
+		int numChildren = root->getChildCount ();
+		DEBUG ("Could not find child [%s] within %d children of root [%s]", name.c_str (), numChildren, root->getName ().c_str ());
+		for (int i = 0; i < numChildren; ++ i)
+		{
+			CEGUI::Window* childPtr = root->getChildAtIdx (i);
+			if (0 == childPtr)
+			{
+				continue;
+			}
+
+			DEBUG ("Child [%d]: [%s]", i, childPtr->getName ().c_str ());
+		}
+
+		// Show how much of the path was matched.
+		DEBUG ("Matched items: [%s]", CEGUIUtility::getMatchingPath (root, name).c_str ());
+		throw ex;
 	}
 #endif
 	return 0;
@@ -570,7 +617,7 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 					DEBUG ("Child [%d]: [%s]", i, childPtr->getName ().c_str ());
 				}
 
-				// TODO: split the child node name by "/". If the first child node is found, signal a partial match in the log.
+				// Show how much of the path was matched.
 				DEBUG ("Matched items: [%s]", CEGUIUtility::getMatchingPath(parentWnd, name).c_str());
 			}
 		}

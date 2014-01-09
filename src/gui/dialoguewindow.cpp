@@ -23,9 +23,61 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene, const std::string& c
 	m_scene = scene;
 	CEGUI::Window* label;
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+
+	// The CharInfo window and holder
+	CEGUI::FrameWindow* dialog_wnd = static_cast<CEGUI::FrameWindow*> (CEGUIUtility::loadLayoutFromFile ("dialogwindow.layout"));
+	if (!dialog_wnd)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "dialogwindow.layout");
+	}
+
+	CEGUI::Window* dialog_wnd_holder = CEGUIUtility::loadLayoutFromFile ("dialogwindow_holder.layout");
+	if (!dialog_wnd_holder)
+	{
+		DEBUG ("WARNING: Failed to load [%s]", "dialogwindow_holder.layout");
+	}
+	
+	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (dialog_wnd_holder, "DialogWindow_Holder");
+	CEGUI::Window* wndDialogWindow = CEGUIUtility::getWindowForLoadedLayoutEx (dialog_wnd, "DialogWindow");
+	if (wndHolder && wndDialogWindow)
+	{
+		CEGUIUtility::addChildWidget (wndHolder, wndDialogWindow);
+	}
+	else
+	{
+		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for dialog screen.");
+		if (!wndDialogWindow) DEBUG ("ERROR: Unable to get the window for dialog screen.");
+	}
+
+	m_window = dialog_wnd_holder;
+
+	CEGUI::FrameWindow* frame_widget = static_cast<CEGUI::FrameWindow*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "DialogWindow/DialogueLowerBar"));
+	frame_widget->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
+
+	frame_widget = static_cast<CEGUI::FrameWindow*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "DialogWindow/DialogueUpperBar"));
+	frame_widget->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
+
+	CEGUI::ScrollablePane* pane;
+	pane = static_cast<CEGUI::ScrollablePane*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "DialogWindow/DialogueLowerBar/SpeakerTextPane0"));
+	pane->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
+
+	pane = static_cast<CEGUI::ScrollablePane*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "DialogWindow/DialogueLowerBar/SpeakerTextPane1"));
+	pane->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
+
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "DialogWindow/DialogueLowerBar/SpeakerTextPane0/SpeakerTextLabel0");
+	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
+
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "DialogWindow/DialogueLowerBar/SpeakerTextPane1/SpeakerTextLabel1");
+	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onTextClicked, this));
+
+	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "DialogWindow/DialogueLowerBar/DialogueSkipAllButton"));
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DialogueWindow ::onTextClicked, this));
+
+#if 0
 	CEGUI::Window* game_screen =  CEGUIUtility::getWindow ("GameScreen");
 	CEGUI::ScrollablePane* pane;
 	
+	// TODO: Augustin Preda, 2014.01.07: Move this to a layout file.
 	// Oberer und Unterer Balken
 	CEGUI::FrameWindow* lower_bar = (CEGUI::FrameWindow*) win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "FrameWindow"), "DialogueLowerBar");
 	lower_bar->setProperty("FrameEnabled","false");
@@ -141,7 +193,7 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene, const std::string& c
 	CEGUIUtility::setWidgetSizeRel (btn, 0.06f, 0.18f);
 	btn->setText("Skip");
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DialogueWindow ::onTextClicked, this));
-	
+#endif
 }
 
 void DialogueWindow::update()
@@ -163,8 +215,8 @@ void DialogueWindow::update()
 		bar_vis = false;
 	}
 	
-	CEGUI::FrameWindow* upper_bar = static_cast<CEGUI::FrameWindow*>( CEGUIUtility::getWindow ("DialogueUpperBar"));
-	CEGUI::FrameWindow* lower_bar = static_cast<CEGUI::FrameWindow*>( CEGUIUtility::getWindow ("DialogueLowerBar"));
+	CEGUI::FrameWindow* upper_bar = static_cast<CEGUI::FrameWindow*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "DialogWindow/DialogueUpperBar"));
+	CEGUI::FrameWindow* lower_bar = static_cast<CEGUI::FrameWindow*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "DialogWindow/DialogueLowerBar"));
 	if (upper_bar->isVisible() != bar_vis)
 	{
 		upper_bar->setVisible(bar_vis);
@@ -173,7 +225,7 @@ void DialogueWindow::update()
 	
 	if (bar_vis)
 	{
-		CEGUI::Window* skipButton = CEGUIUtility::getWindow ("DialogueSkipAllButton");
+		CEGUI::Window* skipButton = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "DialogWindow/DialogueLowerBar/DialogueSkipAllButton");
 		
 		CEGUI::Window* wimage;
 		CEGUI::Window* wname;
@@ -195,22 +247,26 @@ void DialogueWindow::update()
 			for (int i=0; i<Dialogue::NR_POSITIONS; i++)
 			{
 				stream.str("");
+				stream << "DialogWindow/DialogueLowerBar/";
 				stream << "SpeakerEmotionImage";
 				stream << i;
 				wimage = CEGUIUtility::getWindow (stream.str());
 						
 				stream.str("");
+				stream << "DialogWindow/DialogueLowerBar/";
 				stream << "SpeakerNameLabel";
 				stream << i;
 				wname = CEGUIUtility::getWindow (stream.str());
 				
 				stream.str("");
+				stream << "DialogWindow/DialogueLowerBar/";
 				stream << "SpeakerTextLabel";
 				stream << i;
 				wtext = CEGUIUtility::getWindow (stream.str());
 				
 				
 				stream.str("");
+				stream << "DialogWindow/DialogueLowerBar/";
 				stream << "SpeakerTextPane";
 				stream << i;
 				wpane = static_cast<CEGUI::ScrollablePane*> (CEGUIUtility::getWindow (stream.str()));
@@ -325,21 +381,25 @@ void DialogueWindow::update()
 			{
 				std::stringstream stream;
 				stream.str("");
+				stream << "DialogWindow/DialogueLowerBar/";
 				stream << "SpeakerEmotionImage";
 				stream << i;
 				wimage = CEGUIUtility::getWindow (stream.str());
 						
 				stream.str("");
+				stream << "DialogWindow/DialogueLowerBar/";
 				stream << "SpeakerNameLabel";
 				stream << i;
 				wname = CEGUIUtility::getWindow (stream.str());
 				
 				stream.str("");
+				stream << "DialogWindow/DialogueLowerBar/";
 				stream << "SpeakerTextLabel";
 				stream << i;
 				wtext = CEGUIUtility::getWindow (stream.str());
 				
 				stream.str("");
+				stream << "DialogWindow/DialogueLowerBar/";
 				stream << "SpeakerTextPane";
 				stream << i;
 				
@@ -361,8 +421,6 @@ void DialogueWindow::updateTranslation()
 
 void DialogueWindow::updateSpeechBubbles()
 {
-
-	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* game_screen =  CEGUIUtility::getWindow ("GameScreen");
 	
@@ -772,7 +830,7 @@ bool DialogueWindow::onTextClicked(const CEGUI::EventArgs& evt)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
-	CEGUI::Window* btn = CEGUIUtility::getWindow ("DialogueSkipAllButton");
+	CEGUI::Window* btn = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "DialogWindow/DialogueLowerBar/DialogueSkipAllButton");
 	bool skipAll = false;
 	if (we.window == btn)
 	{

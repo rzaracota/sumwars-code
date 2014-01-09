@@ -114,7 +114,7 @@ void CreditsWindow::update()
 			pos = 0.0;
 		
 		// credits scrolling
-		CEGUI::ScrollablePane* pane  = static_cast<CEGUI::ScrollablePane*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "CreditsPane/CreditsText"));
+		CEGUI::ScrollablePane* pane  = static_cast<CEGUI::ScrollablePane*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "CreditsWindow/CreditsPane/CreditsText"));
 		pane->setVerticalScrollPosition(pos);
 	}
 }

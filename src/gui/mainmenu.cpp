@@ -58,15 +58,45 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 
+	// Load the holder (this should be aspect ratio dependent).
+	CEGUI::Window* main_menu_holder = CEGUIUtility::loadLayoutFromFile ("mainmenu_holder.layout");
+	if (!main_menu_holder)
+	{
+		WARNING ("WARNING: Failed to load [%s]", "mainmenu_holder.layout");
+	}
+	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (main_menu_holder, "MainMenu_Holder");
+
+	// Load the main menu (will be aspect ratio independent)
 	m_starMenuRoot = CEGUIUtility::loadLayoutFromFile ("mainmenu.layout");
-    m_window = m_starMenuRoot;
+	if (!m_starMenuRoot)
+	{
+		WARNING ("WARNING: Failed to load [%s]", "mainmenu.layout");
+	}
+	CEGUI::Window* wndHeld = CEGUIUtility::getWindowForLoadedLayoutEx (m_starMenuRoot, "MainMenuRoot");
+
+	DEBUG ("Placing layout into holder");
+	m_starMenuRoot->setVisible (true);
+	main_menu_holder->setVisible (true);
+
+	if (wndHolder && wndHeld)
+	{
+		CEGUIUtility::addChildWidget (wndHolder, wndHeld);
+	}
+	else
+	{
+		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for main menu.");
+		if (!wndHeld) DEBUG ("ERROR: Unable to get the window for main menu.");
+	}
+	m_window = main_menu_holder;
+    //m_window = m_starMenuRoot;// AUgustin Preda, 2013.01.08: switched main window to the holder.
+
 	m_window->setMousePassThroughEnabled(true);
     m_window->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&MainMenu::onShown, this));
     m_window->subscribeEvent(CEGUI::Window::EventHidden, CEGUI::Event::Subscriber(&MainMenu::onHidden, this));
 
     // Button for a single-player game
-	std::string widgetName (CEGUIUtility::getNameForWidget("SinglePlayerButton"));
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
+	std::string widgetName (CEGUIUtility::getNameForWidget("MainMenuRoot/SinglePlayerButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName));
 	if (btn)
 	{
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartSinglePlayer, this));
@@ -74,8 +104,8 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 	}
 
 	// Button used for joining a (remote) server.
-	widgetName = CEGUIUtility::getNameForWidget("ServerJoinButton");
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
+	widgetName = CEGUIUtility::getNameForWidget("MainMenuRoot/ServerJoinButton");
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName));
 	if (btn)
 	{
 
@@ -84,8 +114,8 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 	}
 
     // Button used for hosting a multiplayer game (creating the server)
-	widgetName = CEGUIUtility::getNameForWidget("ServerHostButton");
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
+	widgetName = CEGUIUtility::getNameForWidget("MainMenuRoot/ServerHostButton");
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName));
 	if (btn)
 	{
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onStartMultiPlayerHost, this));
@@ -93,8 +123,8 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 	}
 
     // Button used for accessing the game's credits
-	widgetName = CEGUIUtility::getNameForWidget("CreditsButton");
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
+	widgetName = CEGUIUtility::getNameForWidget("MainMenuRoot/CreditsButton");
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName));
 	if (btn)
 	{
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onShowCredits, this));
@@ -102,8 +132,8 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 	}
 
     // Button used for accessing the game's options
-	widgetName = CEGUIUtility::getNameForWidget("MainOptionsButton");
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
+	widgetName = CEGUIUtility::getNameForWidget("MainMenuRoot/MainOptionsButton");
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName));
 	if (btn)
 	{
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onShowOptions, this));
@@ -111,8 +141,8 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 	}
 
     // Button used for exiting the game
-	widgetName = CEGUIUtility::getNameForWidget("EndGameButton");
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
+	widgetName = CEGUIUtility::getNameForWidget("MainMenuRoot/EndGameButton");
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName));
 	if (btn)
 	{
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onQuitGameHost, this));
@@ -121,8 +151,8 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 
 	CEGUI::Window* verlbl;
 
-	widgetName = CEGUIUtility::getNameForWidget("SumwarsVersionLabel");
-	verlbl = CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName);
+	widgetName = CEGUIUtility::getNameForWidget("MainMenuRoot/SumwarsVersionLabel");
+	verlbl = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName);
 	if (verlbl)
 	{
 		verlbl->setText(CEGUI::String("Version: ").append(SUMWARS_VERSION));
@@ -132,7 +162,7 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 
 
 #ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
-    btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("LoginButton"));
+    btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("MainMenuRoot/LoginButton"));
     btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onLoginToOnlineService, this));
 
     CEGUI::FrameWindow* login_dialog = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "LoginDialog.layout" );
@@ -147,12 +177,12 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 
     OnlineServicesManager::getSingleton().registerLoginStatusListener(this);
 #else
-	widgetName = CEGUIUtility::getNameForWidget("SumwarsOnlineIndicatorLabel");
-    lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
+	widgetName = CEGUIUtility::getNameForWidget("MainMenuRoot/SumwarsOnlineIndicatorLabel");
+    lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName));
     lbl->hide();
 
-	widgetName = CEGUIUtility::getNameForWidget("LoginButton");
-    btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
+	widgetName = CEGUIUtility::getNameForWidget("MainMenuRoot/LoginButton");
+    btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName));
     btn->hide();
 #endif
 
@@ -186,43 +216,43 @@ void MainMenu::updateTranslation()
 
 	// Update the button labels.
 
-	std::string widgetName (CEGUIUtility::getNameForWidget("SinglePlayerButton"));
-	widget = CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName);
+	std::string widgetName (CEGUIUtility::getNameForWidget("MainMenuRoot/SinglePlayerButton"));
+	widget = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName);
 	if (widget)
 	{
 		widget->setText((CEGUI::utf8*) gettext("Single player"));
 	}
 
-	widgetName = CEGUIUtility::getNameForWidget("ServerJoinButton");
-	widget = CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName);
+	widgetName = CEGUIUtility::getNameForWidget("MainMenuRoot/ServerJoinButton");
+	widget = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName);
 	if (widget)
 	{
 		widget->setText((CEGUI::utf8*) gettext("Join game"));
 	}
 
-	widgetName = CEGUIUtility::getNameForWidget("ServerHostButton");
-	widget = CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName);
+	widgetName = CEGUIUtility::getNameForWidget("MainMenuRoot/ServerHostButton");
+	widget = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName);
 	if (widget)
 	{
 		widget->setText((CEGUI::utf8*) gettext("Host game"));
 	}
 
-	widgetName = CEGUIUtility::getNameForWidget("CreditsButton");
-	widget = CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName);
+	widgetName = CEGUIUtility::getNameForWidget("MainMenuRoot/CreditsButton");
+	widget = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName);
 	if (widget)
 	{
 		widget->setText((CEGUI::utf8*) gettext("Credits"));
 	}
 
-	widgetName = CEGUIUtility::getNameForWidget("MainOptionsButton");
-	widget = CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName);
+	widgetName = CEGUIUtility::getNameForWidget("MainMenuRoot/MainOptionsButton");
+	widget = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName);
 	if (widget)
 	{
 		widget->setText((CEGUI::utf8*) gettext("Options"));
 	}
 
-	widgetName = CEGUIUtility::getNameForWidget("EndGameButton");
-	widget = CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName);
+	widgetName = CEGUIUtility::getNameForWidget("MainMenuRoot/EndGameButton");
+	widget = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName);
 	if (widget)
 	{
 		widget->setText((CEGUI::utf8*) gettext("Quit"));
@@ -362,7 +392,7 @@ bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 	root->getAutoCreatedWindow()->getViewport(0)->setCamera(m_mainMenuCamera);
     root->addFrameListener(this);
 	
-	CEGUIUtility::getWindow ("StartMenuRoot/MainMenu")->setAlpha(0);
+	CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "MainMenu_Holder/MainMenuRoot/MainMenu")->setAlpha(0);
 
 	// Also switch to the menu's playlist.
 	try
@@ -383,7 +413,7 @@ bool MainMenu::onHidden( const CEGUI::EventArgs& evt )
 	{
 		root->getAutoCreatedWindow()->getViewport(0)->setCamera(m_gameCamera);
 	}
-	CEGUIUtility::getWindow ("StartMenuRoot/MainMenu")->setAlpha(1);
+	CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "MainMenu_Holder/MainMenuRoot/MainMenu")->setAlpha(1);
 
     root->removeFrameListener(this);
 	
@@ -398,14 +428,14 @@ void MainMenu::updateSaveGameList()
 void MainMenu::setSavegameListVisible(bool show)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::FrameWindow* savegameList = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("SaveGameSelectionFrame");
+	CEGUI::FrameWindow* savegameList = (CEGUI::FrameWindow*) CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "MainMenuRoot/SaveGameSelectionFrame");
 	if (savegameList->isVisible() != show)
 	{
 		savegameList->setVisible(show);
 		// hide/show some buttons along with savegamelist
-		CEGUIUtility::getWindow("SinglePlayerButton")->setVisible(show);
-		CEGUIUtility::getWindow("ServerJoinButton")->setVisible(show);
-		CEGUIUtility::getWindow("ServerHostButton")->setVisible(show);
+		CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "MainMenuRoot/SinglePlayerButton")->setVisible(show);
+		CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "MainMenuRoot/ServerJoinButton")->setVisible(show);
+		CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "MainMenuRoot/ServerHostButton")->setVisible(show);
 		
 		if (show == true)
 		{
@@ -929,7 +959,7 @@ void MainMenu::createSavegameList()
 
     // Select the frame for the saved games in the menu
 	std::string widgetName (CEGUIUtility::getNameForWidget("SaveGameSelectionFrame"));
-	CEGUI::FrameWindow* savegameList = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindowForLoadedLayout(m_starMenuRoot, widgetName));
+	CEGUI::FrameWindow* savegameList = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_starMenuRoot, widgetName));
     savegameList->setInheritsAlpha(false);
 
 	SavegameList* sgl = new SavegameList (m_document, m_ceguiSkinName);

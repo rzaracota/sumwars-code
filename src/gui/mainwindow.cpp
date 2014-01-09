@@ -105,12 +105,14 @@ bool MainWindow::init()
 	DEBUG ("Initializing main menu.");
 	result &= setupMainMenu();
 
+	// Once the main menu is created, set it as the root sheet. It shall be used in the game screen set-up.
+	CEGUIUtility::setRootSheet (CEGUI::System::getSingletonPtr(), m_main_menu);
+	m_active_sheet = m_main_menu;
+
 	// Set-up the main game window/screen
 	DEBUG ("Initializing main game screen.");
 	result &= setupGameScreen();
 
-	// Aktuelle Ebene setzen
-	CEGUIUtility::setRootSheet (CEGUI::System::getSingletonPtr(), m_main_menu);
 
 	return result;
 }
@@ -184,25 +186,16 @@ bool MainWindow::setupMainMenu()
 			CEGUIUtility::addChildWidget (m_main_menu, start_screen_holder);
 
 			std::string widgetName (CEGUIUtility::getNameForWidget("StartScreenRoot"));
-			CEGUI::Window* item = CEGUIUtility::getWindowForLoadedLayout(start_screen_holder, widgetName);
-			if (item)
-			{
-				item->setMousePassThroughEnabled (true);
-			}
+			CEGUI::Window* item = CEGUIUtility::getWindowForLoadedLayoutEx (start_screen_holder, widgetName);
+			item->setMousePassThroughEnabled (true);
 			
 			widgetName = CEGUIUtility::getNameForWidget("StartScreenImage");
-			item = CEGUIUtility::getWindowForLoadedLayout(start_screen_holder, widgetName);
-			if (item)
-			{
-				item->setMousePassThroughEnabled (true);
-			}
+			item = CEGUIUtility::getWindowForLoadedLayoutEx (start_screen_holder, widgetName);
+			item->setMousePassThroughEnabled (true);
 
 			widgetName = CEGUIUtility::getNameForWidget("LoadRessourcesProgressBar");
-			item = CEGUIUtility::getWindowForLoadedLayout(start_screen_holder, widgetName);
-			if (item)
-			{
-				item->setMousePassThroughEnabled (true);
-			}
+			item = CEGUIUtility::getWindowForLoadedLayoutEx (start_screen_holder, widgetName);
+			item->setMousePassThroughEnabled (true);
 		}
 		else
 		{
@@ -329,11 +322,19 @@ void MainWindow::update(float time)
 	// Testen ob die Anzeige der Fenster geaendert werden muss
 	if (m_document->getModified() & Document::GUISHEET_MODIFIED)
 	{
+		// TODO: XXX: Augustin Preda, 2014.01.08: This switching is really nasty. Find a better way of dealing with the UI.
 		if (m_document->getGUIState()->m_sheet ==  Document::MAIN_MENU)
 		{
 			updateMainMenu();
 			CEGUIUtility::setRootSheet (m_cegui_system, m_main_menu);
+			m_active_sheet = m_main_menu;
+
 			CEGUIUtility::addChildWidget (m_main_menu, m_sub_windows["Options"]->getCEGUIWindow());
+
+			// Augustin Preda, 2014.01.08: Also switch the parents for the dialogs (message, warning, error).
+			CEGUIUtility::addChildWidget (m_main_menu, m_sub_windows["errorDialog"]->getCEGUIWindow());
+			CEGUIUtility::addChildWidget (m_main_menu, m_sub_windows["warningDialog"]->getCEGUIWindow());
+			CEGUIUtility::addChildWidget (m_main_menu, m_custom_cursor);
 
 			//MusicManager::instance().stop();
 			//SoundManager::getPtr ()->getMusicPlayer ()->stop ();
@@ -342,7 +343,15 @@ void MainWindow::update(float time)
 		if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		{
 			CEGUIUtility::setRootSheet (m_cegui_system, m_game_screen);
+			m_active_sheet = m_game_screen;
+
 			CEGUIUtility::addChildWidget (m_game_screen, m_sub_windows["Options"]->getCEGUIWindow());
+
+			// Augustin Preda, 2014.01.08: Also switch the parents for the dialogs (message, warning, error).
+			CEGUIUtility::addChildWidget (m_game_screen, m_sub_windows["errorDialog"]->getCEGUIWindow());
+			CEGUIUtility::addChildWidget (m_game_screen, m_sub_windows["warningDialog"]->getCEGUIWindow());
+			CEGUIUtility::addChildWidget (m_game_screen, m_custom_cursor);
+
 			//MusicManager::instance().stop();
 			//SoundManager::getPtr ()->getMusicPlayer ()->stop ();
 			
@@ -375,7 +384,11 @@ void MainWindow::update(float time)
 		}*/
 
 		// Menu Spielstart anzeigen wenn entsprechendes Flag gesetzt
-		CEGUI::FrameWindow* start_menu = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("StartMenuRoot");
+		// TODO:XXX: when is this window created???
+		CEGUI::String widgetName = CEGUIUtility::getNameForWidget("MainMenu_Holder/MainMenuRoot");
+		CEGUI::FrameWindow* start_menu = static_cast<CEGUI::FrameWindow*> (CEGUIUtility::getWindow (widgetName));
+
+		//CEGUI::FrameWindow* start_menu = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("MainMenuRoot");
 		MainMenu* main_menu = static_cast<MainMenu*>(m_sub_windows["MainMenu"]);
 		if (wflags & Document::START_MENU)
 		{
@@ -463,7 +476,7 @@ void MainWindow::update(float time)
 			char_create->setVisible(false);
 		}
         
-        CEGUI::FrameWindow* error_dialog = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("ErrorDialogWindow");
+		CEGUI::FrameWindow* error_dialog = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("ErrorDialogWindow");
         if (wflags & Document::MESSAGE)
         {
             m_sub_windows["errorDialog"]->update();
@@ -832,12 +845,14 @@ bool MainWindow::setupGameScreen()
 		setupTrade();
 		
 		setupWorldmap();
-		
-		m_sub_windows["DialogueWindow"] = new DialogueWindow(m_document, m_scene, m_ceguiSkinName);
+
+		setupDialogWindow ();
 		
 		CEGUI::Window* label;
+		CEGUI::Window* temporary_parent = CEGUIUtility::getWindow ("MainMenu_Holder/MainMenuRoot");
 		label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "CharacterPreviewImage");
-		CEGUIUtility::addChildWidget (m_main_menu, label);
+		CEGUIUtility::addChildWidget (temporary_parent, label);
+
 		label->setProperty("FrameEnabled", "false");
 		label->setProperty("BackgroundEnabled", "false");
 		label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.15)));
@@ -848,7 +863,7 @@ bool MainWindow::setupGameScreen()
 		label->setVisible(false);
 		
 		label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), "CharacterPreviewBackground");
-		CEGUIUtility::addChildWidget (m_main_menu, label);
+		CEGUIUtility::addChildWidget (temporary_parent, label);
 		label->setProperty("FrameEnabled", "false");
 		label->setProperty("BackgroundEnabled", "true");
 		label->setPosition(CEGUI::UVector2(cegui_reldim(0.5f), cegui_reldim( 0.0)));
@@ -944,6 +959,17 @@ void MainWindow::setupCharInfo()
 	wnd->getCEGUIWindow()->setVisible(false);
 }
 
+void MainWindow::setupDialogWindow()
+{
+	Window* wnd = new DialogueWindow(m_document, m_scene, m_ceguiSkinName);
+	m_sub_windows["DialogueWindow"] = wnd;
+
+	// Connect the new widget to the game screen.
+	CEGUIUtility::addChildWidget (m_game_screen, wnd->getCEGUIWindow());
+
+	wnd->getCEGUIWindow()->setVisible(false);
+}
+
 void MainWindow::setupInventory()
 {
 	
@@ -995,23 +1021,22 @@ void MainWindow::setupCursorItemImage()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::Window* label;
-	label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "CursorItemImage");
-	CEGUIUtility::addChildWidget (m_game_screen, label);
+	m_custom_cursor = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "CursorItemImage");
+	CEGUIUtility::addChildWidget (m_game_screen, m_custom_cursor);
 
-	label->setProperty("FrameEnabled", "false");
-	label->setProperty("BackgroundEnabled", "false");
-	label->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05)));
-	CEGUIUtility::setWidgetSizeRel (label, 0.04f, 0.06f);
+	m_custom_cursor->setProperty("FrameEnabled", "false");
+	m_custom_cursor->setProperty("BackgroundEnabled", "false");
+	m_custom_cursor->setPosition(CEGUI::UVector2(cegui_reldim(0.05f), cegui_reldim( 0.05)));
+	CEGUIUtility::setWidgetSizeRel (m_custom_cursor, 0.04f, 0.06f);
 
 	// Just use a default image.
 	std::string portraitname (CEGUIUtility::getImageNameWithSkin ("Portrait", "Portrait"));
-	label->setProperty ("Image", portraitname.c_str ());
+	m_custom_cursor->setProperty ("Image", portraitname.c_str ());
 
-	label->setVisible(false);
-	label->setAlwaysOnTop(true);
-	label->setMousePassThroughEnabled(true);
-	label->setID(0);
+	m_custom_cursor->setVisible(false);
+	m_custom_cursor->setAlwaysOnTop(true);
+	m_custom_cursor->setMousePassThroughEnabled(true);
+	m_custom_cursor->setID(0);
 }
 
 void MainWindow::setupMinimap()
@@ -1229,15 +1254,15 @@ void  MainWindow::updateMainMenu()
 		img  = CEGUIUtility::getWindow ("StartScreenRoot");
 		img->setMousePassThroughEnabled (true);
 	}
-	if (CEGUIUtility::isWindowPresent ("StartScreenImage"))
+	if (CEGUIUtility::isWindowPresent ("StartScreenRoot/StartScreenImage"))
 	{
-		img  = CEGUIUtility::getWindow ("StartScreenImage");
+		img  = CEGUIUtility::getWindow ("StartScreenRoot/StartScreenImage");
 		img->setMousePassThroughEnabled (true);
 	}
 	CEGUI::Window* label;
-	label = CEGUIUtility::getWindow("CharacterPreviewImage");
+	label = CEGUIUtility::getWindow("MainMenu_Holder/MainMenuRoot/CharacterPreviewImage");
 	CEGUI::Window* label2;
-	label2 = CEGUIUtility::getWindow ("CharacterPreviewBackground");
+	label2 = CEGUIUtility::getWindow ("MainMenu_Holder/MainMenuRoot/CharacterPreviewBackground");
 	
 	
 	
@@ -1270,7 +1295,7 @@ void MainWindow::updateCursorItemImage()
 	
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Window* label = CEGUIUtility::getWindow ("CursorItemImage");
+	CEGUI::Window* label = CEGUIUtility::getWindowForLoadedLayoutEx (m_active_sheet, "CursorItemImage");
 	
 	if (item == 0)
 	{
@@ -2564,7 +2589,7 @@ bool MainWindow::mouseMoved(const OIS::MouseEvent &evt)
         m_document->onMouseMove(evt.state.X.rel, evt.state.Y.rel,evt.state.Z.rel);
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Window* label = CEGUIUtility::getWindow ("CursorItemImage");
+	CEGUI::Window* label = CEGUIUtility::getWindowForLoadedLayoutEx (m_active_sheet, "CursorItemImage");
 	
 	int off = 0;
 	if (label->getID() == Item::BIG)
@@ -2863,7 +2888,7 @@ void MainWindow::setReadyToStart(bool ready)
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("LoadRessourcesProgressBar"));
+	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("StartScreenRoot/LoadRessourcesProgressBar"));
 	bar->setVisible(!ready);
 
 	// Also hide the background picture
@@ -2890,7 +2915,7 @@ void MainWindow::setRessourceLoadingBar(float percent)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("MainMenu/LoadRessourcesProgressBar"));
+	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("StartScreenRoot/LoadRessourcesProgressBar"));
 	bar->setProgress(percent);
 }
 

@@ -113,6 +113,12 @@ class MainWindow :
 	void setupCharInfo();
 
 	/**
+	 * \fn void setupDialogWindow()
+	 * \brief Create the generic dialog window
+	 */
+	void setupDialogWindow();
+
+	/**
 	 * \fn void setupSkilltree()
 	 * \brief Erzeugt das Fenster Skilltree
 	 */
@@ -418,9 +424,21 @@ class MainWindow :
 
 	/**
 	 * \var CEGUI::Window* m_game_screen
-	 * \brief Fenster, in dem das eigentliche Spiel laeuft
+	 * \brief The window in which the actual game is running in (this is excluding the menu).
 	 */
 	CEGUI::Window* m_game_screen;
+
+	/**
+	 * \var CEGUI::Window* m_custom_cursor
+	 * \brief A custom cursor window. Would be used typically to display items dragged by the user.
+	 */
+	CEGUI::Window* m_custom_cursor;
+
+	/**
+	 * \var CEGUI::Window* m_active_sheet
+	 * \brief Keeps track of the active CEGUI sheet.
+	 */
+	CEGUI::Window* m_active_sheet;
 
 	/**
 	 * \var Scene* m_scene

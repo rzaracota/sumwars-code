@@ -38,9 +38,9 @@ Worldmap::Worldmap (Document* doc, const std::string& ceguiSkinName)
 		DEBUG ("WARNING: Failed to load [%s]", "worldmapwindow_holder.layout");
 	}
 	
-	CEGUI::Window* wndHolder = CEGUIUtility::getWindow ("WorldmapWindow_Holder");
-	CEGUI::Window* wndHolderAux = CEGUIUtility::getWindow ("WorldmapWindow_Holder_aux");
-	CEGUI::Window* wndHeldWindow = CEGUIUtility::getWindow ("WorldmapWindow");
+	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (worldmap_holder, "WorldmapWindow_Holder");
+	CEGUI::Window* wndHolderAux = CEGUIUtility::getWindowForLoadedLayoutEx (worldmap_holder, "WorldmapWindow_Holder_aux");
+	CEGUI::Window* wndHeldWindow = CEGUIUtility::getWindowForLoadedLayoutEx (worldmap, "WorldmapWindow");
 	if (wndHolder && wndHeldWindow && wndHolderAux)
 	{
 		CEGUIUtility::addChildWidget (wndHolderAux, wndHeldWindow);
@@ -59,7 +59,7 @@ void Worldmap::update()
 	Player* player = m_document->getLocalPlayer();
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::FrameWindow* worldmap = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("WorldmapWindow");
+	CEGUI::FrameWindow* worldmap = (CEGUI::FrameWindow*) CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "WorldmapWindow_Holder_aux/WorldmapWindow");
 	
 	static int ncount =0;
 	static bool tpset = false;
@@ -101,7 +101,7 @@ void Worldmap::update()
 		}
 		else
 		{
-			label = CEGUIUtility::getWindow (stream.str());
+			label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		}
 		
 		pos = it->second.m_world_coord;
@@ -121,7 +121,7 @@ void Worldmap::update()
 		stream << "WaypointImage";
 		stream << cnt;
 			
-		label = CEGUIUtility::getWindow (stream.str());
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		label->setVisible(false);
 	}
 	RegionLocation& portal = player->getPortalPosition();
@@ -163,7 +163,7 @@ void Worldmap::update()
 			}
 			else
 			{
-				label = CEGUIUtility::getWindow (stream.str());
+				label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 			}
 			
 			
@@ -193,7 +193,7 @@ void Worldmap::update()
 		if(tpset == true) {
 			stream.str("");
 			stream << "TownPortalImage";
-			label = CEGUIUtility::getWindow (stream.str());
+			label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 			label->setVisible(false);
 		}
 

@@ -59,14 +59,7 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 	m_window = trade_holder;
 
 	CEGUI::Window* tradeContent = 0;
-	if (CEGUIUtility::isWindowPresent ("tradewindow_aux"))
-	{
-		tradeContent = CEGUIUtility::getWindow ("tradewindow_aux");
-	}
-	else
-	{
-		tradeContent = CEGUIUtility::getWindow ("TradeWindow");
-	}
+	tradeContent = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/tradewindow_aux");
 	
 	trade->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&TradeWindow::onTradeAreaMouseButtonPressed, this));
 	trade->setWantsMultiClickEvents(false);
@@ -105,11 +98,11 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 		}
 	}
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("TradeBigPrevButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/tradewindow_aux/TradeBigPrevButton"));
 	btn->setID(0);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&TradeWindow::onTradeNextItems, this));
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("TradeBigNextButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/tradewindow_aux/TradeBigNextButton"));
 	btn->setID(1);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&TradeWindow::onTradeNextItems, this));
 
@@ -132,11 +125,11 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 		}
 	}
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("TradeMediumPrevButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/tradewindow_aux/TradeMediumPrevButton"));
 	btn->setID(2);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&TradeWindow::onTradeNextItems, this));
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("TradeMediumNextButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/tradewindow_aux/TradeMediumNextButton"));
 	btn->setID(3);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&TradeWindow::onTradeNextItems, this));
 	
@@ -158,28 +151,25 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 		}
 	}
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("TradeSmallPrevButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/tradewindow_aux/TradeSmallPrevButton"));
 	btn->setID(4);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&TradeWindow::onTradeNextItems, this));
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("TradeSmallNextButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/tradewindow_aux/TradeSmallNextButton"));
 	btn->setID(5);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&TradeWindow::onTradeNextItems, this));
 	
 	
 	// Both a regular button and an auto-close button are available.
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("TradeCloseButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/tradewindow_aux/TradeCloseButton"));
 	btn->setID(5);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&TradeWindow::onCloseTrade, this));
 
-	if (CEGUIUtility::isWindowPresent ("TradeWindow__auto_closebutton__"))
+	CEGUI::Window* autoCloseButton;
+	autoCloseButton = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/__auto_closebutton__");
+	if (autoCloseButton)
 	{
-		CEGUI::Window* autoCloseButton;
-		autoCloseButton = CEGUIUtility::getWindow ("TradeWindow__auto_closebutton__");
-		if (autoCloseButton)
-		{
-			autoCloseButton->subscribeEvent (CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber (&TradeWindow::onCloseTrade, this));
-		}
+		autoCloseButton->subscribeEvent (CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber (&TradeWindow::onCloseTrade, this));
 	}
 
 
@@ -227,32 +217,32 @@ void TradeWindow::update()
 	CEGUI::PushButton* btn;
 	bool vis;
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("TradeBigPrevButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/tradewindow_aux/TradeBigPrevButton"));
 	vis = (m_big_sheet >0);
 	if (btn->isVisible() != vis)
 		btn->setVisible(vis);
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("TradeBigNextButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/tradewindow_aux/TradeBigNextButton"));
 	vis = (m_big_sheet < nbig/15);
 	if (btn->isVisible() != vis)
 		btn->setVisible(vis);
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("TradeMediumPrevButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/tradewindow_aux/TradeMediumPrevButton"));
 	vis = (m_medium_sheet >0);
 	if (btn->isVisible() != vis)
 		btn->setVisible(vis);
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("TradeMediumNextButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/tradewindow_aux/TradeMediumNextButton"));
 	vis = (m_medium_sheet < nmedium/21);
 	if (btn->isVisible() != vis)
 		btn->setVisible(vis);
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("TradeSmallPrevButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/tradewindow_aux/TradeSmallPrevButton"));
 	vis = (m_small_sheet >0);
 	if (btn->isVisible() != vis)
 		btn->setVisible(vis);
 	
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("TradeSmallNextButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/tradewindow_aux/TradeSmallNextButton"));
 	vis = (m_small_sheet < nsmall/30);
 	if (btn->isVisible() != vis)
 		btn->setVisible(vis);
@@ -266,7 +256,7 @@ void TradeWindow::update()
 	{
 		out_stream.str("");
 		out_stream << "TraderBigItem" << i<< "Label";
-		img =  CEGUIUtility::getWindow (out_stream.str().c_str());
+		img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, out_stream.str().c_str());
 		it = equ->getItem(Equipement::BIG_ITEMS+i + m_big_sheet*15);
 		updateItemWindow(img,it,player,player->getEquipement()->getGold());
 	}
@@ -275,7 +265,7 @@ void TradeWindow::update()
 	{
 		out_stream.str("");
 		out_stream << "TraderMediumItem" << i<< "Label";
-		img =  CEGUIUtility::getWindow (out_stream.str().c_str());
+		img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, out_stream.str().c_str());
 		it = equ->getItem(Equipement::MEDIUM_ITEMS+i + m_medium_sheet*21);
 		updateItemWindow(img,it,player,player->getEquipement()->getGold());
 	}
@@ -284,7 +274,7 @@ void TradeWindow::update()
 	{
 		out_stream.str("");
 		out_stream << "TraderSmallItem" << i<< "Label";
-		img =  CEGUIUtility::getWindow (out_stream.str().c_str());
+		img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, out_stream.str().c_str());
 		it = equ->getItem(Equipement::SMALL_ITEMS+i + m_small_sheet*30);
 		updateItemWindow(img,it,player,player->getEquipement()->getGold());
 	}
@@ -296,21 +286,13 @@ void TradeWindow::updateTranslation()
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
 	
-	if (CEGUIUtility::isWindowPresent ("TradeLabel"))
+	label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow");
+	if (label->isPropertyPresent ("Text"))
 	{
-		label =  CEGUIUtility::getWindow ("TradeLabel");
-		label->setText((CEGUI::utf8*) gettext("Chest"));
-	}
-	else if (CEGUIUtility::isWindowPresent ("TradeWindow"))
-	{
-		label =  CEGUIUtility::getWindow ("TradeWindow");
-		if (label->isPropertyPresent ("Text"))
-		{
-			label->setProperty ("Text", (CEGUI::utf8*) gettext("Chest"));
-		}
+		label->setProperty ("Text", (CEGUI::utf8*) gettext("Chest"));
 	}
 
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("TradeCloseButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "TradeWindow/tradewindow_aux/TradeCloseButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));
 }
 

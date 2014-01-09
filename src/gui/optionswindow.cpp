@@ -450,8 +450,9 @@ void OptionsWindow::update()
 	for (int i=0; i<9; i++)
 	{
 		stream.str("");
+		stream << "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsShortkeys/";
 		stream << "ShortkeyValueLabel"<<i;
-		label = CEGUIUtility::getWindow (stream.str());
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 
 		if (m_key_destination == (int) label->getID())
 		{
@@ -470,7 +471,7 @@ void OptionsWindow::update()
 		}
 	}
 
-	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(CEGUIUtility::getWindow ("SoundVolumeSlider"));
+	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsSound/SoundVolumeSlider"));
 	//if ( fabs ( slider->getScrollPosition() - SoundSystem::getSoundVolume()) > 0.01f)
 	if ( fabs ( slider->getScrollPosition() - SoundManager::getPtr ()->getRepository ()->getVolumeForCategory (gussound::GSC_Effect)) > 0.01f)
 	{
@@ -478,7 +479,7 @@ void OptionsWindow::update()
 		slider->setScrollPosition (SoundManager::getPtr ()->getRepository ()->getVolumeForCategory (gussound::GSC_Effect));
 	}
 
-	slider = static_cast<CEGUI::Scrollbar*>(CEGUIUtility::getWindow ("MusicVolumeSlider"));
+	slider = static_cast<CEGUI::Scrollbar*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsSound/MusicVolumeSlider"));
 	//if ( fabs ( slider->getScrollPosition() - MusicManager::instance().getMusicVolume()) > 0.01f)
 	if ( fabs ( slider->getScrollPosition() - SoundManager::getPtr ()->getRepository ()->getVolumeForCategory (gussound::GSC_Music)) > 0.01f)
 	{
@@ -486,7 +487,7 @@ void OptionsWindow::update()
 		slider->setScrollPosition (SoundManager::getPtr ()->getRepository ()->getVolumeForCategory (gussound::GSC_Music));
 	}
 	
-	slider = static_cast<CEGUI::Scrollbar*>(CEGUIUtility::getWindow ("TextSpeedSlider"));
+	slider = static_cast<CEGUI::Scrollbar*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGameplay/TextSpeedSlider"));
 	float slidpos = (2.0 -Options::getInstance()->getTextSpeed()) / 1.4;
 	if ( fabs ( slider->getScrollPosition() - slidpos) > 0.01f)
 	{
@@ -731,7 +732,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 		bool someVideoSettingsWereChanged (false);
 
 		// Check the driver for changes. ---------------
-		CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow ("VideoDriverBox"));
+		CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGraphic/VideoDriverBox"));
 		if (cbo == 0)
 		{
 			DEBUG ("Could not find widget [VideoDriverBox]");
@@ -767,7 +768,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 		}
 
 		// Check the display mode for changes. ---------------
-		cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow ("DisplayModeBox"));
+		cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGraphic/DisplayModeBox"));
 		if (cbo == 0)
 		{
 			DEBUG ("Could not find widget [DisplayModeBox]");
@@ -808,7 +809,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 
 		// Check the resolution for changes -----------------------
 		std::string userResolution;
-		cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow ("ResolutionBox"));
+		cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGraphic/ResolutionBox"));
 
 		if (cbo == 0)
 		{
@@ -837,7 +838,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 
 		// Check the shadow mode for changes -----------------------------------
 		
-		cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow ("ShadowsDropDownList"));
+		cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGraphic/ShadowsDropDownList"));
 		if (cbo == 0)
 		{
 			DEBUG ("Could not find widget [ShadowsDropDownList]");
@@ -1207,7 +1208,7 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 		DEBUG ("Layout ERROR: Could not find expected combo [ResolutionBox]");
 		return false;
 	}
-	cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow ("ResolutionBox"));
+	cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGraphic/ResolutionBox"));
 	if (myDisplayMode == WINDOWED_FULLSCREEN)
 	{
 		cbo->setEnabled (false);
@@ -1299,7 +1300,7 @@ bool OptionsWindow::onVideoDriverSelected (const CEGUI::EventArgs& evt)
 
 	// Start adding the resolutions as items to the combo-box, one by one.
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton ();
-	cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow ("ResolutionBox"));
+	cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGraphic/ResolutionBox"));
 	cbo->resetList ();
 
 

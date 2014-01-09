@@ -29,7 +29,7 @@ ControlPanel::ControlPanel (Document* doc)
 	std::string name;
 
 	// Load the layout for the panel that the be used to control various actions
-	CEGUI::FrameWindow* ctrl_panel = static_cast <CEGUI::FrameWindow*> (CEGUIUtility::loadLayoutFromFile ("controlpanel.layout"));
+	CEGUI::Window* ctrl_panel = CEGUIUtility::loadLayoutFromFile ("controlpanel.layout");
 	if (!ctrl_panel)
 	{
 		DEBUG ("WARNING: Failed to load [%s]", "controlpanel.layout");
