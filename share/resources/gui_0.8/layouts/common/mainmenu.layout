@@ -1,5 +1,5 @@
 <GUILayout version="4" >
-    <Window type="SWB/StaticImage" name="StartMenuRoot" >
+    <Window type="SWB/StaticImage" name="MainMenuRoot" >
         <Property name="FrameEnabled" value="False" />
         <Property name="InheritsAlpha" value="False" />
         <Property name="Area" value="{{0,0},{-0,0},{1,0},{1,0}}" />

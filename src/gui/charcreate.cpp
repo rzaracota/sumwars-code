@@ -165,6 +165,7 @@ void CharCreate::updateClassList()
 
 bool CharCreate::onClassSelected(const CEGUI::EventArgs& evt)
 {
+	DEBUG ("CharCreate::onClassSelected");
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::String widgetName = CEGUIUtility::getNameForWidget("ClassList");
 	CEGUI::Listbox* classlist = static_cast<CEGUI::Listbox*> (CEGUIUtility::getWindowForLoadedLayoutEx(m_window, widgetName));
@@ -178,7 +179,8 @@ bool CharCreate::onClassSelected(const CEGUI::EventArgs& evt)
 	}
 	
 	update();
-	
+
+	widgetName = CEGUIUtility::getNameForWidget("LookList");
 	CEGUI::Listbox* looklist = static_cast<CEGUI::Listbox*> (CEGUIUtility::getWindowForLoadedLayoutEx(m_window, widgetName));
 	if (looklist->getItemCount() >0)
 	{

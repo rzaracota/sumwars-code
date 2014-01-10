@@ -1113,7 +1113,6 @@ bool Application::loadResources(int datagroups)
 			updateStartScreen(0.2);
 		}
 	
-
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("emotionsets","*.imageset");
 		for (it = files->begin(); it != files->end(); ++it)
 		{

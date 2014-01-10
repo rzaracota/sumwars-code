@@ -213,7 +213,7 @@ void SavegameList::update()
 #ifdef CEGUI_07
 				CEGUI::String widgetName (CEGUIUtility::getNameForWidget(s.str ().append ("SaveItemRoot_Name")));
 #else
-				CEGUI::String widgetName (CEGUIUtility::getNameForWidget("SaveItemRoot_Name"));
+				CEGUI::String widgetName (CEGUIUtility::getNameForWidget("SaveItemRoot/SaveItemRoot_Name"));
 #endif
 				CEGUI::Window *wndPtr = CEGUIUtility::getWindowForLoadedLayout(saveItem, widgetName);
 				if (wndPtr)
@@ -506,9 +506,14 @@ bool SavegameList::onSavegameChosen(const CEGUI::EventArgs& evt)
 	std::string prefix = we.window->getName().c_str();
 	std::string saveWidgetName = prefix;
 
+	DEBUG ("A character save has been chosen (widget [%s]", prefix.c_str ());
 	prefix.erase(prefix.length()-12, prefix.length());
 
+#ifdef CEGUI_07
 	std::string name = we.window->getChild(prefix.append("SaveItemRoot_Name"))->getText().c_str();
+#else
+	std::string name = we.window->getChild("SaveItemRoot_Name")->getText().c_str();
+#endif
 
 	// Get the file mapped to this widget: if we have a mapping, use the mapped name, otherwise, just add an extension and try to use the same file name as the char name.
 	std::map <std::string, std::string>::const_iterator it = m_fileSaveMapping.find (saveWidgetName);

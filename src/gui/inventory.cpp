@@ -70,7 +70,13 @@ Inventory::Inventory (Document* doc)
 	CEGUI::Window* label;
 	
 	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/CharImageHolder/CharacterImage");
+
+#ifdef CEGUI_07
 	label->setProperty("Image", CEGUIUtility::getImageNameWithSkin ("character", "character_img")); 
+#else
+	label->setProperty("Image", "character_img"); 
+#endif
+
 	label->setID(Equipement::NONE);
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Inventory::onItemMouseButtonPressed, (ItemWindow*) this));
 	//label->setAlpha(1.0);

@@ -15,7 +15,7 @@
             <Property name="MousePassThroughEnabled" value="True" />
     
             <Property name="BackgroundEnabled" value="False" />
-            <Property name="Image" value="worldMap.png/full_image" />
+            <Property name="Image" value="worldMap.png" />
         </Window>
             
     </Window>

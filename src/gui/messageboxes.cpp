@@ -124,14 +124,14 @@ MessageQuestionWindow::MessageQuestionWindow (Document* doc
 	m_window = message;
 
 	CEGUI::String widgetName (CEGUIUtility::getNameForWidget("QuestionAnswerButton1"));
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_window, widgetName));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName));
 	if (btn)
 	{
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, subscriberButton1Callback);
 	}
 
 	widgetName = CEGUIUtility::getNameForWidget("QuestionAnswerButton2");
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_window, widgetName));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName));
 	if (btn)
 	{
 		btn->subscribeEvent(CEGUI::PushButton::EventClicked, subscriberButton2Callback);

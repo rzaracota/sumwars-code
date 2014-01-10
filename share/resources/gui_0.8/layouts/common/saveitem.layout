@@ -34,9 +34,9 @@
         </Window>
 
         <Window type="SWB/ImageButton" name="SaveItemRoot_DelChar" >
-            <Property name="HoverImage" value="MainMenu DelCharBtnHover" />
-            <Property name="NormalImage" value="MainMenu DelCharBtnNormal" />
-            <Property name="PushedImage" value="MainMenu DelCharBtnPushed" />
+            <Property name="HoverImage" value="MainMenu/DelCharBtnHover" />
+            <Property name="NormalImage" value="MainMenu/DelCharBtnNormal" />
+            <Property name="PushedImage" value="MainMenu/DelCharBtnPushed" />
             <Property name="Area" value="{{0.891602,0},{0.265625,0},{0.983398,0},{0.736981,0}}" />
         </Window>
     </Window>

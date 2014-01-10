@@ -7,6 +7,7 @@
           <KeyFrame position="6" value="AABBA075" />
           <KeyFrame position="12.42" value="FFBBA075" />
       </Affector>
+      <!--
       <Affector property="HighlightRotation" interpolator="float">
           <KeyFrame position="0.0" value="360" />
           <KeyFrame position="2" value="340" />
@@ -15,5 +16,6 @@
           <KeyFrame position="11" value="10" />
           <KeyFrame position="12.42" value="0" />
       </Affector>
+      -->
     </AnimationDefinition>
 </Animations>

@@ -1203,12 +1203,8 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton ();
 
-	if (! CEGUIUtility::isWindowPresent ("ResolutionBox"))
-	{
-		DEBUG ("Layout ERROR: Could not find expected combo [ResolutionBox]");
-		return false;
-	}
-	cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGraphic/ResolutionBox"));
+	std::string widgetName = CEGUIUtility::getNameForWidget ("OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGraphic/ResolutionBox");
+	cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName));
 	if (myDisplayMode == WINDOWED_FULLSCREEN)
 	{
 		cbo->setEnabled (false);
@@ -1316,9 +1312,9 @@ bool OptionsWindow::onVideoDriverSelected (const CEGUI::EventArgs& evt)
 
 	cbo->handleUpdatedListItemData ();
 
-	if (CEGUIUtility::isWindowPresent ("OptionsWindowTab"))
+	if (CEGUIUtility::isWindowPresent ("OptionsWindow/OptionsWindowTab"))
 	{
-		CEGUI::TabControl* tc = static_cast <CEGUI::TabControl*> (CEGUIUtility::getWindow ("OptionsWindowTab"));
+		CEGUI::TabControl* tc = static_cast <CEGUI::TabControl*> (CEGUIUtility::getWindow ("OptionsWindow/OptionsWindowTab"));
 		if (tc)
 		{
 			if (tc->getTabCount () > 0)

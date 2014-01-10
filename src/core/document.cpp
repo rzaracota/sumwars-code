@@ -2032,13 +2032,14 @@ void Document::showQuestionDialog ()
 {
 	// Show a notification.
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	if (! CEGUIUtility::isWindowPresent ("QuestionInfoRoot"))
+	CEGUI::String widgetName = CEGUIUtility::getNameForWidget ("MainMenu_Holder/QuestionInfoRoot");
+	if (! CEGUIUtility::isWindowPresent (widgetName))
 	{
-		DEBUG ("Could not display the warning widget: [QuestionInfoRoot]");
+		DEBUG ("Could not display the warning widget: [%s]", widgetName.c_str ());
 		return;
 	}
 
-	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("QuestionInfoRoot");
+	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) CEGUIUtility::getWindow (widgetName);
 	message->setInheritsAlpha(false);
 	message->setVisible(true);
 	message->setModalState(true);
@@ -2053,10 +2054,10 @@ void Document::hideQuestionDialog ()
 {
 	// Show a notification.
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
-	if (CEGUIUtility::isWindowPresent ("QuestionInfoRoot"))
+	CEGUI::String widgetName = CEGUIUtility::getNameForWidget ("MainMenu_Holder/QuestionInfoRoot");
+	if (CEGUIUtility::isWindowPresent (widgetName))
 	{
-		CEGUI::Window* widget = CEGUIUtility::getWindow("QuestionInfoRoot");
+		CEGUI::Window* widget = CEGUIUtility::getWindow (widgetName);
 		if (widget && widget->isVisible ())
 		{
 			widget->setVisible (false);

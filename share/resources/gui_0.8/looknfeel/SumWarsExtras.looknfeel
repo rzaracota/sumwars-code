@@ -2,7 +2,7 @@
 
     <!--
     ***************************************************
-        SumWarsExtras/HPProgressBar
+        SumWarsExtras/HPProgressOrbHighlight
     ***************************************************
     -->
     <WidgetLook name="SumWarsExtras/HPProgressOrbHighlight">
@@ -98,7 +98,7 @@
             </ImageryComponent>
         </ImagerySection>
         
-        <Child  type="SumWarsExtras/HPProgressOrbHighlight" nameSuffix="__auto_orb_highlight__">
+        <Child type="SumWarsExtras/HPProgressOrbHighlight" nameSuffix="__auto_orb_highlight__">
             <Area>
                 <Dim type="LeftEdge" ><AbsoluteDim value="0" /></Dim>
                 <Dim type="TopEdge" ><AbsoluteDim value="0" /></Dim>

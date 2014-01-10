@@ -490,6 +490,23 @@ void MainWindow::update(float time)
             //error_dialog->setModalState(false);
         }
 
+#if 0
+		//XXX-begin
+		// Augustin Preda, 2014.01.10: Added the question dialog here as well.
+		CEGUI::FrameWindow* question_dialog = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("QuestionInfoRoot");
+        if (wflags & Document::QUESTION_DIALOG)
+        {
+            m_sub_windows["questionDialog"]->update();
+            question_dialog->setVisible(true);
+			question_dialog->activate();
+        }
+        else
+        {
+            question_dialog->setVisible(false);
+        }
+		//XXX-end
+#endif
+
 		if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		{
 			// Charinfo anzeigen wenn entsprechendes Flag gesetzt
@@ -859,7 +876,11 @@ bool MainWindow::setupGameScreen()
 		CEGUIUtility::setWidgetSizeRel (label, 0.5f, 0.7f);
 		label->setMousePassThroughEnabled(true);
 		label->setInheritsAlpha(false);
+#ifdef CEGUI_07
 		label->setProperty("Image", CEGUIUtility::getImageNameWithSkin ("character", "character_img")); 
+#else
+		label->setProperty("Image", "character_img"); 
+#endif
 		label->setVisible(false);
 		
 		label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), "CharacterPreviewBackground");
@@ -1030,8 +1051,7 @@ void MainWindow::setupCursorItemImage()
 	CEGUIUtility::setWidgetSizeRel (m_custom_cursor, 0.04f, 0.06f);
 
 	// Just use a default image.
-	std::string portraitname (CEGUIUtility::getImageNameWithSkin ("Portrait", "Portrait"));
-	m_custom_cursor->setProperty ("Image", portraitname.c_str ());
+	m_custom_cursor->setProperty ("Image", "Portrait");
 
 	m_custom_cursor->setVisible(false);
 	m_custom_cursor->setAlwaysOnTop(true);
@@ -1199,15 +1219,20 @@ void MainWindow::setupErrorDialogWindow()
 {
 	Window* wnd = new ErrorDialogWindow(m_document);
 	m_sub_windows["errorDialog"] = wnd;
-	
 	CEGUIUtility::addChildWidget (m_game_screen, wnd->getCEGUIWindow());
 	wnd->getCEGUIWindow()->setVisible(false);
 	
 	wnd = new WarningDialogWindow(m_document);
 	m_sub_windows["warningDialog"] = wnd;
-	
 	CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
 	wnd->getCEGUIWindow()->setVisible(false);
+
+#if 0
+	wnd = new MessageQuestionWindow (m_document);
+	m_sub_windows["questionDialog"] = wnd;
+	CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
+	wnd->getCEGUIWindow()->setVisible(false);
+#endif
 }
 
 void MainWindow::setupChatContent()
@@ -2892,9 +2917,9 @@ void MainWindow::setReadyToStart(bool ready)
 	bar->setVisible(!ready);
 
 	// Also hide the background picture
-	if (CEGUIUtility::isWindowPresent ("StartScreenImage"))
+	if (CEGUIUtility::isWindowPresent ("StartScreenRoot/StartScreenImage"))
 	{
-		CEGUI::Window* backgroundPicture = CEGUIUtility::getWindow ("StartScreenImage");
+		CEGUI::Window* backgroundPicture = CEGUIUtility::getWindow ("StartScreenRoot/StartScreenImage");
 		backgroundPicture->setVisible (false);
 		backgroundPicture->setMousePassThroughEnabled (true);
 	}

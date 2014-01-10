@@ -29,7 +29,7 @@
 #  Plugin_OctreeSceneManager, Plugin_OctreeZone,
 #  Plugin_ParticleFX, Plugin_PCZSceneManager,
 #  RenderSystem_GL, RenderSystem_Direct3D9,
-#  Paging, Terrain
+#  Paging, Terrain, RTShaderSystem
 #
 # For each of these components, the following variables are defined:
 #
@@ -97,9 +97,12 @@ elseif (UNIX)
 endif ()
 set(OGRE_PREFIX_PATH
   ${OGRE_HOME} ${OGRE_SDK} ${ENV_OGRE_HOME} ${ENV_OGRE_SDK}
+  ${ENV_OGRE_HOME}/build ${ENV_OGRE_HOME}/.build11
   ${OGRE_PREFIX_GUESSES}
 )
 create_search_paths(OGRE)
+MESSAGE(STATUS ".. OGRE_PREFIX_PATH is \"${OGRE_PREFIX_PATH}\"")
+
 # If both OGRE_BUILD and OGRE_SOURCE are set, prepare to find Ogre in a build dir
 set(OGRE_PREFIX_SOURCE ${OGRE_SOURCE} ${ENV_OGRE_SOURCE})
 set(OGRE_PREFIX_BUILD ${OGRE_BUILD} ${ENV_OGRE_BUILD})
@@ -128,7 +131,7 @@ else()
 endif ()
 
 # redo search if any of the environmental hints changed
-set(OGRE_COMPONENTS Paging Terrain 
+set(OGRE_COMPONENTS Paging Terrain RTShaderSystem 
   Plugin_BSPSceneManager Plugin_CgProgramManager Plugin_OctreeSceneManager
   Plugin_OctreeZone Plugin_PCZSceneManager Plugin_ParticleFX
   RenderSystem_Direct3D11 RenderSystem_Direct3D9 RenderSystem_GL RenderSystem_GLES RenderSystem_GLES2)
@@ -155,9 +158,30 @@ else()
 	set(OGRE_LIBRARY_FWK "")
 endif()
 
+MESSAGE(STATUS ".. OGRE Searching for paths")
+
 # locate Ogre include files
-find_path(OGRE_CONFIG_INCLUDE_DIR NAMES OgreBuildSettings.h HINTS ${OGRE_INC_SEARCH_PATH} ${OGRE_FRAMEWORK_INCLUDES} ${OGRE_PKGC_INCLUDE_DIRS} PATH_SUFFIXES "OGRE")
-find_path(OGRE_INCLUDE_DIR NAMES OgreRoot.h HINTS ${OGRE_CONFIG_INCLUDE_DIR} ${OGRE_INC_SEARCH_PATH} ${OGRE_FRAMEWORK_INCLUDES} ${OGRE_PKGC_INCLUDE_DIRS} PATH_SUFFIXES "OGRE")
+FIND_PATH(OGRE_CONFIG_INCLUDE_DIR 
+          NAMES OgreBuildSettings.h 
+          PATHS ${OGRE_PREFIX_PATH}
+          HINTS ${OGRE_INC_SEARCH_PATH} ${OGRE_FRAMEWORK_INCLUDES} ${OGRE_PKGC_INCLUDE_DIRS}
+          PATH_SUFFIXES "OGRE")
+
+# FIND_PATH(OGRE_HEADER_INCLUDE_DIR 
+#           NAMES Ogre.h 
+#           HINTS ${OGRE_INC_SEARCH_PATH} ${OGRE_FRAMEWORK_INCLUDES} ${OGRE_PKGC_INCLUDE_DIRS} 
+#           PATH_SUFFIXES "OGRE")
+# 
+FIND_PATH(OGRE_INCLUDE_DIR 
+          NAMES OgreRoot.h 
+          PATHS ${OGRE_PREFIX_PATH}
+          HINTS ${OGRE_CONFIG_INCLUDE_DIR} ${OGRE_INC_SEARCH_PATH} ${OGRE_FRAMEWORK_INCLUDES} ${OGRE_PKGC_INCLUDE_DIRS} 
+          PATH_SUFFIXES "OGRE" include OgreMain/include OgreMain)
+
+MESSAGE(STATUS ".. OGRE_CONFIG_INCLUDE_DIR is \"${OGRE_CONFIG_INCLUDE_DIR}\"")
+# MESSAGE(STATUS ".. OGRE_HEADER_INCLUDE_DIR is \"${OGRE_HEADER_INCLUDE_DIR}\"")
+MESSAGE(STATUS ".. OGRE_INCLUDE_DIR is \"${OGRE_INCLUDE_DIR}\"")
+
 set(OGRE_INCOMPATIBLE FALSE)
 
 if (OGRE_INCLUDE_DIR)
@@ -325,10 +349,13 @@ set(OGRE_LIBRARY_DIRS ${OGRE_LIBRARY_DIR_REL} ${OGRE_LIBRARY_DIR_DBG})
 # find binaries
 if (NOT OGRE_STATIC)
 	if (WIN32)
-		find_file(OGRE_BINARY_REL NAMES "OgreMain.dll" HINTS ${OGRE_BIN_SEARCH_PATH}
-          PATH_SUFFIXES "" release relwithdebinfo minsizerel)
-		find_file(OGRE_BINARY_DBG NAMES "OgreMain_d.dll" HINTS ${OGRE_BIN_SEARCH_PATH}
-          PATH_SUFFIXES "" debug )
+    MESSAGE (STATUS "*******Will use Ogre bin search path: ${OGRE_BIN_SEARCH_PATH}")  
+		find_file(OGRE_BINARY_REL NAMES "OgreMain.dll"
+          HINTS ${ENV_OGRE_HOME} ${OGRE_BIN_SEARCH_PATH} 
+          PATH_SUFFIXES release "" relwithdebinfo minsizerel)
+		find_file(OGRE_BINARY_DBG NAMES "OgreMain_d.dll" "OgreMain_d.dll" 
+          HINTS ${ENV_OGRE_HOME} ${OGRE_BIN_SEARCH_PATH} 
+          PATH_SUFFIXES debug "" bin/debug "debug" "bin/debug" )
 	endif()
 	mark_as_advanced(OGRE_BINARY_REL OGRE_BINARY_DBG)
 endif()
@@ -351,7 +378,11 @@ set(OGRE_COMPONENT_SEARCH_PATH_DBG
 
 macro(ogre_find_component COMPONENT HEADER)
   findpkg_begin(OGRE_${COMPONENT})
-  find_path(OGRE_${COMPONENT}_INCLUDE_DIR NAMES ${HEADER} HINTS ${OGRE_INCLUDE_DIRS} ${OGRE_PREFIX_SOURCE} PATH_SUFFIXES ${COMPONENT} OGRE/${COMPONENT} Components/${COMPONENT}/include)
+  MESSAGE (STATUS "Will look into Components/${COMPONENT}/include")
+  find_path(OGRE_${COMPONENT}_INCLUDE_DIR 
+      NAMES ${HEADER} 
+      HINTS ${OGRE_INCLUDE_DIRS} ${OGRE_PREFIX_SOURCE} $ENV{OGRE_HOME}
+      PATH_SUFFIXES ${COMPONENT} OGRE/${COMPONENT} Components/${COMPONENT}/include)
   set(OGRE_${COMPONENT}_LIBRARY_NAMES "Ogre${COMPONENT}${OGRE_LIB_SUFFIX}")
   get_debug_names(OGRE_${COMPONENT}_LIBRARY_NAMES)
   find_library(OGRE_${COMPONENT}_LIBRARY_REL NAMES ${OGRE_${COMPONENT}_LIBRARY_NAMES} HINTS ${OGRE_LIBRARY_DIR_REL} PATH_SUFFIXES "" "release" "relwithdebinfo" "minsizerel")
@@ -374,6 +405,8 @@ endmacro()
 ogre_find_component(Paging OgrePaging.h)
 # look for Terrain component
 ogre_find_component(Terrain OgreTerrain.h)
+# look for RTShaderSystem component
+ogre_find_component(RTShaderSystem OgreRTShaderSystem.h)
 # look for Property component
 ogre_find_component(Property OgreProperty.h)
 # look for RTShaderSystem component

@@ -147,6 +147,8 @@ FIND_PACKAGE(OGRE REQUIRED)
 
 IF("${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
   set(SUMWARS_OGRE_SINGLETON "ms_Singleton")
+ELSEIF("${OGRE_VERSION_NAME}" STREQUAL "Ghadamon")
+  set(SUMWARS_OGRE_SINGLETON "msSingleton")
 ELSE()
   set(SUMWARS_OGRE_SINGLETON "msSingleton")
 ENDIF()
@@ -286,8 +288,10 @@ IF(SUMWARS_NO_TINYXML)
 ELSE()
   SET(SRCS_TINYXML
     ./src/tinyxml/tinystr.cpp
+    ./src/tinyxml/tinystr.h
     ./src/tinyxml/tinyxmlerror.cpp
     ./src/tinyxml/tinyxml.cpp
+    ./src/tinyxml/tinyxml.h
     ./src/tinyxml/tinyxmlparser.cpp)
 ENDIF()
 
@@ -304,80 +308,91 @@ ELSE()
     ./src/enet/protocol.c
     ./src/enet/unix.c
     ./src/enet/win32.c
+    ./src/enet/include/enet/callbacks.h
+    ./src/enet/include/enet/enet.h
+    ./src/enet/include/enet/list.h
+    ./src/enet/include/enet/protocol.h
+    ./src/enet/include/enet/time.h
+    ./src/enet/include/enet/types.h
+    ./src/enet/include/enet/unix.h
+    ./src/enet/include/enet/utility.h
+    ./src/enet/include/enet/win32.h
     )
 ENDIF()
 
 SET(SRCS_GUSSOUND
     ./src/gussound/goggstreamedsound.cpp
+    ./src/gussound/goggstreamedsound.h
     ./src/gussound/gopenal.cpp
+    ./src/gussound/gopenal.h
     ./src/gussound/gussound.cpp
+    ./src/gussound/gussound.h
     ./src/gussound/gussoundutil/stringutil.cpp
     ./src/gussound/gussoundutil/timer.cpp
     )
 
-SET(SRCS
-  ${SRCS_TINYXML}
-  ${SRCS_ENET}
-  ${SRCS_GUSSOUND}
-  ${HEADER_FILES}
-  ./src/core/nlfg.cpp
-  ./src/core/worldobject.cpp
-  ./src/core/itemloader.cpp
-  ./src/core/itemlist.cpp
-  ./src/core/region.cpp
-  ./src/core/objectloader.cpp
-  ./src/core/player.cpp
-  ./src/core/monsterbase.cpp
-  ./src/core/monster.cpp
-  ./src/core/itemfactory.cpp
-  ./src/core/translatablestring.cpp
-  ./src/core/event.cpp
-  ./src/core/charconv.cpp
-  ./src/core/stdstreamconv.cpp
-  ./src/core/gameobject.cpp
-  ./src/core/projectile.cpp
-  ./src/core/treasure.cpp
-  ./src/core/dialogue.cpp
-  ./src/core/playerbase.cpp
-  ./src/core/objectfactory.cpp
-  ./src/core/gettext.cpp
-  ./src/core/dropitem.cpp
-  ./src/core/party.cpp
-  ./src/core/minimap.cpp
-  ./src/core/logger.cpp
-  ./src/core/item.cpp
-  ./src/core/networkstruct.cpp
-  ./src/core/gridunit.cpp
-  ./src/core/quest.cpp
-  ./src/core/eventsystem.cpp
-  ./src/core/creature.cpp
-  ./src/core/random.cpp
-  ./src/core/action.cpp
-  ./src/core/creaturestruct.cpp
-  ./src/core/servernetwork.cpp
-  ./src/core/nlfgservernetwork.cpp
-  ./src/core/nlfgclientnetwork.cpp
-  ./src/core/nlfgnetworkpacket.cpp
-  ./src/core/pathfind.cpp
-  ./src/core/damage.cpp
-  ./src/core/waypoint.cpp
-  ./src/core/document.cpp
-  ./src/core/debug.cpp
-  ./src/core/unionfindtree.cpp
-  ./src/core/world.cpp
-  ./src/core/fixedbase.cpp
-  ./src/core/fixedobject.cpp
-  ./src/core/templateloader.cpp
-  ./src/core/elementattrib.cpp
-  ./src/core/worldloader.cpp
-  ./src/core/geometry.cpp
-  ./src/core/scriptobject.cpp
-  ./src/core/spawnpoint.cpp
-  ./src/core/fraction.cpp
-  ./src/core/command.cpp
-  ./src/core/mapgenerator.cpp
-  ./src/core/options.cpp
-  ./src/core/sumwarshelper.cpp
+SET(SRCS_CORE
+    ./src/core/nlfg.cpp
+    ./src/core/worldobject.cpp
+    ./src/core/itemloader.cpp
+    ./src/core/itemlist.cpp
+    ./src/core/region.cpp
+    ./src/core/objectloader.cpp
+    ./src/core/player.cpp
+    ./src/core/monsterbase.cpp
+    ./src/core/monster.cpp
+    ./src/core/itemfactory.cpp
+    ./src/core/translatablestring.cpp
+    ./src/core/event.cpp
+    ./src/core/charconv.cpp
+    ./src/core/stdstreamconv.cpp
+    ./src/core/gameobject.cpp
+    ./src/core/projectile.cpp
+    ./src/core/treasure.cpp
+    ./src/core/dialogue.cpp
+    ./src/core/playerbase.cpp
+    ./src/core/objectfactory.cpp
+    ./src/core/gettext.cpp
+    ./src/core/dropitem.cpp
+    ./src/core/party.cpp
+    ./src/core/minimap.cpp
+    ./src/core/logger.cpp
+    ./src/core/item.cpp
+    ./src/core/networkstruct.cpp
+    ./src/core/gridunit.cpp
+    ./src/core/quest.cpp
+    ./src/core/eventsystem.cpp
+    ./src/core/creature.cpp
+    ./src/core/random.cpp
+    ./src/core/action.cpp
+    ./src/core/creaturestruct.cpp
+    ./src/core/servernetwork.cpp
+    ./src/core/nlfgservernetwork.cpp
+    ./src/core/nlfgclientnetwork.cpp
+    ./src/core/nlfgnetworkpacket.cpp
+    ./src/core/pathfind.cpp
+    ./src/core/damage.cpp
+    ./src/core/waypoint.cpp
+    ./src/core/document.cpp
+    ./src/core/debug.cpp
+    ./src/core/unionfindtree.cpp
+    ./src/core/world.cpp
+    ./src/core/fixedbase.cpp
+    ./src/core/fixedobject.cpp
+    ./src/core/templateloader.cpp
+    ./src/core/elementattrib.cpp
+    ./src/core/worldloader.cpp
+    ./src/core/geometry.cpp
+    ./src/core/scriptobject.cpp
+    ./src/core/spawnpoint.cpp
+    ./src/core/fraction.cpp
+    ./src/core/command.cpp
+    ./src/core/mapgenerator.cpp
+    ./src/core/options.cpp
+    ./src/core/sumwarshelper.cpp
+    )
+
+SET(SRCS_GUI
   ./src/gui/minimapwindow.cpp
   ./src/gui/worldmap.cpp
   ./src/gui/mainmenu.cpp
@@ -412,12 +427,27 @@ SET(SRCS
   ./src/gui/clipboard.cpp
 #   ./src/gui/ShaderManager.cpp
 #   ./src/gui/ShadowCameraSetup.cpp
+    )    
+
+IF (WIN32)
+  SOURCE_GROUP ("tinyxml" FILES ${SRCS_TINYXML})
+  SOURCE_GROUP ("enet" FILES ${SRCS_ENET})
+  SOURCE_GROUP ("gussound" FILES ${SRCS_GUSSOUND})
+  SOURCE_GROUP ("core" FILES ${SRCS_CORE})
+  SOURCE_GROUP ("gui" FILES ${SRCS_GUI})
+ENDIF ()
+
+SET(SRCS
+  ${SRCS_TINYXML}
+  ${SRCS_ENET}
+  ${SRCS_GUSSOUND}
+  ${HEADER_FILES}
+  ${SRCS_CORE}
+  ${SRCS_GUI}
 )
  
 IF(SUMWARS_BUILD_TOOLS)
-  SET(SRCS
-    ${SRCS}
-    ${HEADER_FILES}
+  SET(SRCS_BUILD_TOOLS
     ./src/gui/debugpanel/benchmarktab.cpp
     ./src/gui/debugpanel/debugpanel.cpp
     ./src/gui/debugpanel/debugcameratab.cpp
@@ -426,7 +456,6 @@ IF(SUMWARS_BUILD_TOOLS)
     ./src/gui/debugpanel/luascripttab.cpp
     ./src/gui/debugpanel/textfileeditwindow.cpp
     ./src/gui/debugpanel/filebrowser/filebrowser.cpp
-    #./src/gui/debugpanel/reloadtab.cpp
     ./src/gui/contenteditor/contenteditor.cpp
     ./src/gui/contenteditor/contenteditortab.cpp
     ./src/gui/contenteditor/fixedobjecteditor.cpp
@@ -434,6 +463,11 @@ IF(SUMWARS_BUILD_TOOLS)
     ./src/gui/contenteditor/itemeditor.cpp
     ./src/gui/contenteditor/monstereditor.cpp
     ./src/gui/contenteditor/gameinfotab.cpp
+    )
+  SOURCE_GROUP ("tools" FILES ${SRCS_BUILD_TOOLS})
+  SET(SRCS
+    ${SRCS}
+    ${SRCS_BUILD_TOOLS}
     )
 ENDIF()
 

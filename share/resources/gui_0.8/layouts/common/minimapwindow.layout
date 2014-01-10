@@ -2,7 +2,6 @@
     <Window type="SWB/FrameWindow" name="MinimapWindow" >
         <Property name="FrameEnabled" value="False" />
         <Property name="Area" value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
-        <Property name="BackgroundEnabled" value="False" />
         <Property name="MousePassThroughEnabled" value="True" />
         <Property name="TitlebarEnabled" value="False" />
         <Property name="CloseButtonEnabled" value="False" />
@@ -17,7 +16,7 @@
             <Property name="Area" value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
             <Property name="WantsMultiClickEvents" value="False" />
             <Property name="MousePassThroughEnabled" value="True" />
-            <Property name="Image" value="minimap/minimap_img" />
+            <Property name="Image" value="minimap_img" />
         </Window>
         
         <Window type="SWB/StaticText" name="RegionNameLabel">

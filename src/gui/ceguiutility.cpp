@@ -342,11 +342,16 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 			{
 				throw CEGUIUtilityNullPointerException ("addChildWidget received a null parent pointer");
 			}
+			if (0 == childPtr)
+			{
+				throw CEGUIUtilityNullPointerException ("addChildWidget received a null child pointer");
+			}
 
 #ifdef CEGUI_07
 			parentPtr->addChildWindow (childPtr);
 #else
 			parentPtr->addChild (childPtr);
+			DEBUG ("[ceguiutil] Added item: [%s]", childPtr->getNamePath ().c_str ());
 #endif
 		}
 
