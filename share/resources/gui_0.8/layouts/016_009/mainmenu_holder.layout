@@ -5,5 +5,7 @@
         <Property name="Area" value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
         <Property name="BackgroundEnabled" value="False" />
         <Property name="MousePassThroughEnabled" value="True" />
+        <Property name="Alpha" value="1.0" />
+        <Property name="Visible" value="True" />
     </Window>
 </GUILayout>

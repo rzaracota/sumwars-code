@@ -4607,7 +4607,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1" type="Width" />
                             <OperatorDim op="Multiply">
-                                <AbsoluteDim value="8" /> <!-- PanelTitleUnderlay left edge-->
+                                <AbsoluteDim value="141" /> <!-- PanelTitleUnderlay left edge-->
                                 <AbsoluteDim value="2" />
                             </OperatorDim>
                         </OperatorDim>
