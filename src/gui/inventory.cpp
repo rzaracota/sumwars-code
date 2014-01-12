@@ -251,7 +251,7 @@ void Inventory::update()
 
 
 	// Weapon - Label/Slot
-	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "WeaponItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/WeaponItemLabel");
 	it = player->getWeapon();
 	updateItemWindow(img,it,player);
 	weapon = it;
@@ -263,21 +263,21 @@ void Inventory::update()
 
 
 	// Body armor - Label/Slot
-	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "ArmorItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/ArmorItemLabel");
 	it = equ->getItem(Equipement::ARMOR);
 	updateItemWindow(img,it,player);
 	
 
 
 	// Helm - Label/Slot
-	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HelmetItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/HelmetItemLabel");
 	it = equ->getItem(Equipement::HELMET);
 	updateItemWindow(img,it,player);
 	
 	// Shield - Label/Slot
 	// for two handed weapons this will represent the weapon.
 	float alpha = 1.0;
-	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "ShieldItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/ShieldItemLabel");
 	it = player->getShield();
 	if (two_hand && it ==0)
 	{
@@ -293,29 +293,29 @@ void Inventory::update()
 	
 
 	// Handgloves - Label/Slot
-	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "GlovesItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/GlovesItemLabel");
 	it = equ->getItem(Equipement::GLOVES);
 	updateItemWindow(img,it,player);
 	
 	// Left hand ring - Label/Slot
-	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "RingLeftItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/RingLeftItemLabel");
 	it = equ->getItem(Equipement::RING_LEFT);
 	updateItemWindow(img,it,player);
 	
 	// Right hand ring - Label/Slot
-	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "RingRightItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/RingRightItemLabel");
 	it = equ->getItem(Equipement::RING_RIGHT);
 	updateItemWindow(img,it,player);
 	
 
 	// Amulet - Label/Slot
-	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "AmuletItemLabel");
+	img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/AmuletItemLabel");
 	it = equ->getItem(Equipement::AMULET);
 	updateItemWindow(img,it,player);
 	
 	
 	// Swap button - this will also display the state of the current weapon selection.
-	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "SwapEquipButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GearHolder/SwapEquipButton"));
 	std::string text;
 	if (player->isUsingSecondaryEquip())
 	{

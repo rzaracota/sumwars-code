@@ -94,6 +94,10 @@ bool MainWindow::init()
 	m_ceguiSkinName = Options::getInstance ()->getCeguiSkin ();
 	DEBUG ("Main Window (init): Cegui skin name found in options as: [%s]", m_ceguiSkinName.c_str ());
 
+	// Set-up the main menu.
+	DEBUG ("Setting up the root window.");
+	result &= setupRootWindow();
+
 	// Initialize the input devices
 	DEBUG ("Initializing input devices.");
 	result &= initInputs();
@@ -104,15 +108,15 @@ bool MainWindow::init()
 	// Set-up the main menu.
 	DEBUG ("Initializing main menu.");
 	result &= setupMainMenu();
+	CEGUIUtility::addChildWidget (m_root_window, m_main_menu);
 
 	// Once the main menu is created, set it as the root sheet. It shall be used in the game screen set-up.
-	CEGUIUtility::setRootSheet (CEGUI::System::getSingletonPtr(), m_main_menu);
-	m_active_sheet = m_main_menu;
+	CEGUIUtility::setRootSheet (CEGUI::System::getSingletonPtr(), m_root_window);
 
 	// Set-up the main game window/screen
 	DEBUG ("Initializing main game screen.");
 	result &= setupGameScreen();
-
+	CEGUIUtility::addChildWidget (m_root_window, m_game_screen);
 
 	return result;
 }
@@ -167,6 +171,25 @@ bool MainWindow::initInputs()
 }
 
 
+bool MainWindow::setupRootWindow ()
+{
+	try
+	{
+		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+
+		// Oberstes Fenster der Hauptmenue Schicht
+		m_root_window = win_mgr.createWindow("DefaultWindow", "SW");
+	}
+	catch (CEGUI::Exception & e)
+	{
+		ERRORMSG("Error message: %s",e.getMessage().c_str());
+		return false;
+	}
+
+	return true;
+}
+
+
 bool MainWindow::setupMainMenu()
 {
 	try
@@ -184,10 +207,12 @@ bool MainWindow::setupMainMenu()
 		if (start_screen_holder)
 		{
 			CEGUIUtility::addChildWidget (m_main_menu, start_screen_holder);
+			std::string widgetName;
+			CEGUI::Window* item;
 
-			std::string widgetName (CEGUIUtility::getNameForWidget("StartScreenRoot"));
-			CEGUI::Window* item = CEGUIUtility::getWindowForLoadedLayoutEx (start_screen_holder, widgetName);
-			item->setMousePassThroughEnabled (true);
+			//widgetName (CEGUIUtility::getNameForWidget("MainMenu/StartScreenRoot"));
+			//item = CEGUIUtility::getWindowForLoadedLayoutEx (start_screen_holder, widgetName);
+			//item->setMousePassThroughEnabled (true);
 			
 			widgetName = CEGUIUtility::getNameForWidget("StartScreenImage");
 			item = CEGUIUtility::getWindowForLoadedLayoutEx (start_screen_holder, widgetName);
@@ -224,7 +249,7 @@ bool MainWindow::setupMainMenu()
 
 		wnd = new OptionsWindow(m_document,m_keyboard, m_ceguiSkinName);
 		m_sub_windows["Options"] = wnd;
-		CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
+		CEGUIUtility::addChildWidget (m_root_window, wnd->getCEGUIWindow());
 		
 		DEBUG ("Creating game hosting screen");
 
@@ -326,15 +351,17 @@ void MainWindow::update(float time)
 		if (m_document->getGUIState()->m_sheet ==  Document::MAIN_MENU)
 		{
 			updateMainMenu();
-			CEGUIUtility::setRootSheet (m_cegui_system, m_main_menu);
-			m_active_sheet = m_main_menu;
+			//CEGUIUtility::setRootSheet (m_cegui_system, m_main_menu);
+			m_main_menu->show ();
+			m_main_menu->activate ();
+			m_game_screen->hide ();
 
-			CEGUIUtility::addChildWidget (m_main_menu, m_sub_windows["Options"]->getCEGUIWindow());
+			//CEGUIUtility::addChildWidget (m_main_menu, m_sub_windows["Options"]->getCEGUIWindow());
 
 			// Augustin Preda, 2014.01.08: Also switch the parents for the dialogs (message, warning, error).
-			CEGUIUtility::addChildWidget (m_main_menu, m_sub_windows["errorDialog"]->getCEGUIWindow());
-			CEGUIUtility::addChildWidget (m_main_menu, m_sub_windows["warningDialog"]->getCEGUIWindow());
-			CEGUIUtility::addChildWidget (m_main_menu, m_custom_cursor);
+			//CEGUIUtility::addChildWidget (m_main_menu, m_sub_windows["errorDialog"]->getCEGUIWindow());
+			//CEGUIUtility::addChildWidget (m_main_menu, m_sub_windows["warningDialog"]->getCEGUIWindow());
+			//CEGUIUtility::addChildWidget (m_main_menu, m_custom_cursor);
 
 			//MusicManager::instance().stop();
 			//SoundManager::getPtr ()->getMusicPlayer ()->stop ();
@@ -342,15 +369,17 @@ void MainWindow::update(float time)
 
 		if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		{
-			CEGUIUtility::setRootSheet (m_cegui_system, m_game_screen);
-			m_active_sheet = m_game_screen;
+			//CEGUIUtility::setRootSheet (m_cegui_system, m_game_screen);
+			m_game_screen->show ();
+			m_game_screen->activate ();
+			m_main_menu->hide ();
 
-			CEGUIUtility::addChildWidget (m_game_screen, m_sub_windows["Options"]->getCEGUIWindow());
+			//CEGUIUtility::addChildWidget (m_game_screen, m_sub_windows["Options"]->getCEGUIWindow());
 
 			// Augustin Preda, 2014.01.08: Also switch the parents for the dialogs (message, warning, error).
-			CEGUIUtility::addChildWidget (m_game_screen, m_sub_windows["errorDialog"]->getCEGUIWindow());
-			CEGUIUtility::addChildWidget (m_game_screen, m_sub_windows["warningDialog"]->getCEGUIWindow());
-			CEGUIUtility::addChildWidget (m_game_screen, m_custom_cursor);
+			//CEGUIUtility::addChildWidget (m_game_screen, m_sub_windows["errorDialog"]->getCEGUIWindow());
+			//CEGUIUtility::addChildWidget (m_game_screen, m_sub_windows["warningDialog"]->getCEGUIWindow());
+			//CEGUIUtility::addChildWidget (m_game_screen, m_custom_cursor);
 
 			//MusicManager::instance().stop();
 			//SoundManager::getPtr ()->getMusicPlayer ()->stop ();
@@ -385,30 +414,45 @@ void MainWindow::update(float time)
 
 		// Menu Spielstart anzeigen wenn entsprechendes Flag gesetzt
 		// TODO:XXX: when is this window created???
-		CEGUI::String widgetName = CEGUIUtility::getNameForWidget("MainMenu_Holder/MainMenuRoot");
+		CEGUI::String widgetName = CEGUIUtility::getNameForWidget("MainMenu/MainMenuRoot");
 		CEGUI::FrameWindow* start_menu = static_cast<CEGUI::FrameWindow*> (CEGUIUtility::getWindow (widgetName));
 
 		//CEGUI::FrameWindow* start_menu = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("MainMenuRoot");
 		MainMenu* main_menu = static_cast<MainMenu*>(m_sub_windows["MainMenu"]);
 		if (wflags & Document::START_MENU)
 		{
-			start_menu->setVisible(true);
-			main_menu->setSavegameListVisible(true);
+			if (start_menu)
+			{
+				start_menu->setVisible (true);
+			}
+			if (main_menu)
+			{
+				main_menu->setSavegameListVisible (true);
+			}
 		}
 		else
 		{
 			if (wflags & Document::CHAR_CREATE)
 			{
-				start_menu->setVisible(true);
-				main_menu->setSavegameListVisible(false);
+				if (start_menu)
+				{
+					start_menu->setVisible(true);
+				}
+				if (main_menu)
+				{
+					main_menu->setSavegameListVisible(false);
+				}
 			}
 			else
 			{
-				start_menu->setVisible(false);
+				if (start_menu)
+				{
+					start_menu->setVisible(false);
+				}
 			}
 		}
 		
-		CEGUI::FrameWindow* credits = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("CreditsWindow_Holder");
+		CEGUI::FrameWindow* credits = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("MainMenu/CreditsWindow_Holder");
 		if (wflags & Document::CREDITS)
 		{
 			credits->setVisible(true);
@@ -418,7 +462,7 @@ void MainWindow::update(float time)
 			credits->setVisible(false);
 		}
 		
-		CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("HostGameWindow_Holder");
+		CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("MainMenu/HostGameWindow_Holder");
 		if (wflags & Document::HOST_GAME)
 		{
 			m_sub_windows["HostGame"]->update();
@@ -429,7 +473,7 @@ void MainWindow::update(float time)
 			host_game->setVisible(false);
 		}
 		
-		CEGUI::FrameWindow* join_game = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("JoinGameWindow_Holder");
+		CEGUI::FrameWindow* join_game = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("MainMenu/JoinGameWindow_Holder");
 		if (wflags & Document::JOIN_GAME)
 		{
 			m_sub_windows["JoinGame"]->update();
@@ -461,7 +505,7 @@ void MainWindow::update(float time)
 		}
 		
 		
-		CEGUI::FrameWindow* char_create = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("CharCreate");
+		CEGUI::FrameWindow* char_create = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("MainMenu/CharCreate");
 		if (wflags & Document::CHAR_CREATE)
 		{
 			if (!char_create->isVisible())
@@ -490,27 +534,10 @@ void MainWindow::update(float time)
             //error_dialog->setModalState(false);
         }
 
-#if 0
-		//XXX-begin
-		// Augustin Preda, 2014.01.10: Added the question dialog here as well.
-		CEGUI::FrameWindow* question_dialog = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("QuestionInfoRoot");
-        if (wflags & Document::QUESTION_DIALOG)
-        {
-            m_sub_windows["questionDialog"]->update();
-            question_dialog->setVisible(true);
-			question_dialog->activate();
-        }
-        else
-        {
-            question_dialog->setVisible(false);
-        }
-		//XXX-end
-#endif
-
 		if (m_document->getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 		{
 			// Charinfo anzeigen wenn entsprechendes Flag gesetzt
-			CEGUI::FrameWindow* char_info = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("CharInfo_Holder");
+			CEGUI::FrameWindow* char_info = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("GameScreen/CharInfo_Holder");
 			if (wflags & Document::CHARINFO)
 			{
 				char_info->setVisible(true);
@@ -521,7 +548,7 @@ void MainWindow::update(float time)
 			}
 	
 			// Inventar anzeigen wenn entsprechendes Flag gesetzt
-			CEGUI::FrameWindow* inventory = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("Inventory_Holder");
+			CEGUI::FrameWindow* inventory = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("GameScreen/Inventory_Holder");
 			if (wflags & Document::INVENTORY)
 			{
 				if (!inventory->isVisible())
@@ -540,7 +567,7 @@ void MainWindow::update(float time)
 			}
 			
 			// show/hide control panel
-			CEGUI::FrameWindow* control_panel = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("ControlPanel_Holder");
+			CEGUI::FrameWindow* control_panel = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("GameScreen/ControlPanel_Holder");
 			if (wflags & Document::CONTROL_PANEL)
 			{
 				if (!control_panel->isVisible())
@@ -560,7 +587,7 @@ void MainWindow::update(float time)
 			}
 			
 			// QuestInfo anzeigen wenn entsprechendes Flag gesetzt
-			CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("QuestInfo_Holder");
+			CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("GameScreen/QuestInfo_Holder");
 			if (wflags & Document::QUEST_INFO)
 			{
 				quest_info->setVisible(true);
@@ -571,7 +598,7 @@ void MainWindow::update(float time)
 				quest_info->setVisible(false);
 			}
 			
-			CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("MinimapWindow_Holder");
+			CEGUI::FrameWindow* minimap = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("GameScreen/MinimapWindow_Holder");
 			if (wflags & Document::MINIMAP)
 			{
 				minimap->setVisible(true);
@@ -581,7 +608,7 @@ void MainWindow::update(float time)
 				minimap->setVisible(false);
 			}
 			
-			CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("TradeWindow_Holder");
+			CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("GameScreen/TradeWindow_Holder");
 			if (wflags & Document::TRADE)
 			{
 								
@@ -601,7 +628,7 @@ void MainWindow::update(float time)
 				trade->setVisible(false);
 			}
 			
-			CEGUI::FrameWindow* worldmap = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("WorldmapWindow_Holder");
+			CEGUI::FrameWindow* worldmap = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("GameScreen/WorldmapWindow_Holder");
 			if (wflags & Document::WORLDMAP)
 			{
 				m_sub_windows["Worldmap"]->update();
@@ -612,7 +639,7 @@ void MainWindow::update(float time)
 				worldmap->setVisible(false);
 			}
 			
-			CEGUI::FrameWindow* save_exit = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("SaveExitWindow");
+			CEGUI::FrameWindow* save_exit = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("GameScreen/SaveExitWindow");
 			if (wflags & Document::SAVE_EXIT)
 			{
 				save_exit->setVisible(true);
@@ -625,14 +652,14 @@ void MainWindow::update(float time)
 			}
 			
 			// Chat Fenster anzeigen wenn entsprechendes Flag gesetzt
-			CEGUI::FrameWindow* chat_window = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("Chatline");
+			CEGUI::FrameWindow* chat_window = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("GameScreen/Chatline");
 			if (wflags & Document::CHAT)
 			{
 				// Fokus setzen, wenn das Fenster gerade geoeffnet wurde
 				if (!chat_window->isVisible())
 				{
 					CEGUI::Editbox* chatline;
-					chatline = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow ("Chatline"));
+					chatline = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow ("GameScreen/Chatline"));
 					chat_window->setVisible(true);
 					chatline->activate();
 				}
@@ -644,11 +671,11 @@ void MainWindow::update(float time)
 				chat_window->setVisible(false);
 				// Chatzeile deaktivieren
 				CEGUI::Editbox* chatline;
-				chatline = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow ("Chatline"));
+				chatline = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow ("GameScreen/Chatline"));
 				chatline->deactivate();
 			}
 			
-			CEGUI::FrameWindow* party_info = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("PartyInfo");
+			CEGUI::FrameWindow* party_info = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("GameScreen/PartyInfo");
 			if (wflags & Document::PARTY)
 			{
 				party_info->setVisible(true);
@@ -662,7 +689,7 @@ void MainWindow::update(float time)
 			{
 				// Skilltree anzeigen wenn entsprechendes Flag gesetzt
 				
-				CEGUI::TabControl* skilltree = (CEGUI::TabControl*) CEGUIUtility::getWindow ("Skilltree_Holder");
+				CEGUI::TabControl* skilltree = (CEGUI::TabControl*) CEGUIUtility::getWindow ("GameScreen/Skilltree_Holder");
 				if (wflags & Document::SKILLTREE)
 				{
 					skilltree->setVisible(true);
@@ -767,7 +794,7 @@ void MainWindow::update(float time)
 		// + Buttons fuer Levelup aktualisieren
 		bool vis = false;
 		CEGUI::PushButton* btn;
-		btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("CharInfoUpgradeButton"));
+		btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("GameScreen/CharInfoUpgradeButton"));
 		if (!(wflags & Document::CHARINFO) && m_document->getLocalPlayer()->getAttributePoints() >0)
 		{
 			vis = true;
@@ -779,7 +806,7 @@ void MainWindow::update(float time)
 		}
 		
 		vis = false;
-		btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("SkillUpgradeButton"));
+		btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow ("GameScreen/SkillUpgradeButton"));
 		if (!(wflags & Document::SKILLTREE) && m_document->getLocalPlayer()->getSkillPoints() >0)
 		{
 			vis = true;
@@ -866,7 +893,7 @@ bool MainWindow::setupGameScreen()
 		setupDialogWindow ();
 		
 		CEGUI::Window* label;
-		CEGUI::Window* temporary_parent = CEGUIUtility::getWindow ("MainMenu_Holder/MainMenuRoot");
+		CEGUI::Window* temporary_parent = CEGUIUtility::getWindow ("MainMenu/MainMenuRoot");
 		label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "CharacterPreviewImage");
 		CEGUIUtility::addChildWidget (temporary_parent, label);
 
@@ -1043,7 +1070,7 @@ void MainWindow::setupCursorItemImage()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	m_custom_cursor = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), "CursorItemImage");
-	CEGUIUtility::addChildWidget (m_game_screen, m_custom_cursor);
+	CEGUIUtility::addChildWidget (m_root_window, m_custom_cursor);
 
 	m_custom_cursor->setProperty("FrameEnabled", "false");
 	m_custom_cursor->setProperty("BackgroundEnabled", "false");
@@ -1209,22 +1236,21 @@ void MainWindow::setupSaveExitWindow()
 	Window* wnd = new SaveExitWindow(m_document);
 	m_sub_windows["saveExit"] = wnd;
 	
-	
 	// Inventar anfangs ausblenden
-	CEGUIUtility::addChildWidget (m_game_screen, wnd->getCEGUIWindow());
+	CEGUIUtility::addChildWidget (m_game_screen, wnd->getCEGUIWindow ());
 	wnd->getCEGUIWindow()->setVisible(false);
 }
 
 void MainWindow::setupErrorDialogWindow()
 {
-	Window* wnd = new ErrorDialogWindow(m_document);
+	Window* wnd = new ErrorDialogWindow (m_document);
 	m_sub_windows["errorDialog"] = wnd;
-	CEGUIUtility::addChildWidget (m_game_screen, wnd->getCEGUIWindow());
+	CEGUIUtility::addChildWidget (m_root_window, wnd->getCEGUIWindow ());
 	wnd->getCEGUIWindow()->setVisible(false);
 	
 	wnd = new WarningDialogWindow(m_document);
 	m_sub_windows["warningDialog"] = wnd;
-	CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
+	CEGUIUtility::addChildWidget (m_root_window, wnd->getCEGUIWindow ());
 	wnd->getCEGUIWindow()->setVisible(false);
 
 #if 0
@@ -1273,32 +1299,33 @@ void  MainWindow::setWindowExtents(int width, int height){
 void  MainWindow::updateMainMenu()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Window* img;
-	if (CEGUIUtility::isWindowPresent ("StartScreenRoot"))
+	CEGUI::Window* img = 0;
+	if (CEGUIUtility::isWindowPresent ("MainMenu/StartScreenRoot"))
 	{
-		img  = CEGUIUtility::getWindow ("StartScreenRoot");
+		img  = CEGUIUtility::getWindow ("MainMenu/StartScreenRoot");
 		img->setMousePassThroughEnabled (true);
 	}
-	if (CEGUIUtility::isWindowPresent ("StartScreenRoot/StartScreenImage"))
+	if (CEGUIUtility::isWindowPresent ("MainMenu/StartScreenRoot/StartScreenImage"))
 	{
-		img  = CEGUIUtility::getWindow ("StartScreenRoot/StartScreenImage");
+		img  = CEGUIUtility::getWindow ("MainMenu/StartScreenRoot/StartScreenImage");
 		img->setMousePassThroughEnabled (true);
 	}
 	CEGUI::Window* label;
-	label = CEGUIUtility::getWindow("MainMenu_Holder/MainMenuRoot/CharacterPreviewImage");
+	label = CEGUIUtility::getWindow ("MainMenu/MainMenuRoot/CharacterPreviewImage");
 	CEGUI::Window* label2;
-	label2 = CEGUIUtility::getWindow ("MainMenu_Holder/MainMenuRoot/CharacterPreviewBackground");
+	label2 = CEGUIUtility::getWindow ("MainMenu/MainMenuRoot/CharacterPreviewBackground");
 	
-	
-	
-	int wflags = m_document->getGUIState()->m_shown_windows;
-	if (wflags & (Document::SAVEGAME_LIST | Document::CHAR_CREATE))
+	if (0 != img)
 	{
-		img->setVisible(false);
-	}
-	else
-	{
-		img->setVisible(true);
+		int wflags = m_document->getGUIState()->m_shown_windows;
+		if (wflags & (Document::SAVEGAME_LIST | Document::CHAR_CREATE))
+		{
+			img->setVisible(false);
+		}
+		else
+		{
+			img->setVisible(true);
+		}
 	}
 	
 	m_sub_windows["MainMenu"]->update();
@@ -1320,7 +1347,7 @@ void MainWindow::updateCursorItemImage()
 	
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Window* label = CEGUIUtility::getWindowForLoadedLayoutEx (m_active_sheet, "CursorItemImage");
+	CEGUI::Window* label = CEGUIUtility::getWindowForLoadedLayoutEx (m_root_window, "CursorItemImage");
 	
 	if (item == 0)
 	{
@@ -1391,9 +1418,9 @@ void MainWindow::updateObjectInfo()
 
 	// Fenstermanager
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Window* label = CEGUIUtility::getWindow ("ObjectInfoLabel");
-	CEGUI::Window* itmlabel = CEGUIUtility::getWindow ("ItemInfoLabel");
-	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ( "MonsterHealthProgressBar"));
+	CEGUI::Window* label = CEGUIUtility::getWindow ("GameScreen/ObjectInfoRoot/ObjectInfoLabel");
+	CEGUI::Window* itmlabel = CEGUIUtility::getWindow ("GameScreen/ItemInfoLabel");
+	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("GameScreen/ObjectInfoRoot/MonsterHealthProgressBar"));
 	
 	
 	// Position der Maus
@@ -1762,7 +1789,7 @@ void MainWindow::updateItemInfo()
 	
 	// Fenstermanager
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Window* label = CEGUIUtility::getWindow ("ItemInfoLabel");
+	CEGUI::Window* label = CEGUIUtility::getWindow ("GameScreen/ItemInfoLabel");
 	
 	
 	
@@ -2177,6 +2204,7 @@ void MainWindow::updatePartyInfo()
 				continue;
 			
 			stream.str("");
+			stream << "GameScreen/";
 			stream << "PartyMemberImage";
 			stream << i;
 			img = CEGUIUtility::getWindow (stream.str());
@@ -2199,6 +2227,7 @@ void MainWindow::updatePartyInfo()
 			}
 			
 			stream.str("");
+			stream << "GameScreen/";
 			stream << "PartyMemberHealthBar";
 			stream << i;
 			bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow (stream.str()));
@@ -2231,6 +2260,7 @@ void MainWindow::updatePartyInfo()
 	for (;i<7; i++)
 	{
 		stream.str("");
+		stream << "GameScreen/";
 		stream << "PartyMemberImage";
 		stream << i;
 		img = CEGUIUtility::getWindow (stream.str());
@@ -2240,6 +2270,7 @@ void MainWindow::updatePartyInfo()
 		}
 		
 		stream.str("");
+		stream << "GameScreen/";
 		stream << "PartyMemberHealthBar";
 		stream << i;
 		bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow (stream.str()));
@@ -2301,7 +2332,7 @@ void MainWindow::updateRegionInfo()
 		
 	
 		CEGUI::Window* label;
-		label = CEGUIUtility::getWindow ("RegionInfoLabel");
+		label = CEGUIUtility::getWindow ("GameScreen/RegionInfoLabel");
 		
 		// Only show when the minimap is not opened.
 		int wflags = m_document->getGUIState()->m_shown_windows;
@@ -2443,7 +2474,7 @@ void MainWindow::updateChatContent()
 	Player* pl = m_document->getLocalPlayer();
 	
 	CEGUI::Window* label;
-	label =  CEGUIUtility::getWindow ("ChatContent");
+	label =  CEGUIUtility::getWindow ("GameScreen/ChatContent");
 	
 	// escape all the [ brackets
 	// CEGUI >= 0.7 uses [brackets] for markup
@@ -2613,20 +2644,26 @@ bool MainWindow::mouseMoved(const OIS::MouseEvent &evt)
     else
         m_document->onMouseMove(evt.state.X.rel, evt.state.Y.rel,evt.state.Z.rel);
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Window* label = CEGUIUtility::getWindowForLoadedLayoutEx (m_active_sheet, "CursorItemImage");
+	try
+	{
+		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
+		CEGUI::Window* label = CEGUIUtility::getWindowForLoadedLayoutEx (m_root_window, "CursorItemImage");
 	
-	int off = 0;
-	if (label->getID() == Item::BIG)
-		off = 24;
-	if (label->getID() == Item::MEDIUM)
-		off = 16;
-	if (label->getID() == Item::SMALL)
-		off = 12;
+		int off = 0;
+		if (label->getID() == Item::BIG)
+			off = 24;
+		if (label->getID() == Item::MEDIUM)
+			off = 16;
+		if (label->getID() == Item::SMALL)
+			off = 12;
 	
 	
-	label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,MathHelper::Max(0,evt.state.X.abs-off)),CEGUI::UDim(0,MathHelper::Max(0,evt.state.Y.abs- off))));
-	
+		label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,MathHelper::Max(0,evt.state.X.abs-off)),CEGUI::UDim(0,MathHelper::Max(0,evt.state.Y.abs- off))));
+	}
+	catch (std::exception& e)
+	{
+		DEBUG ("Caught exception: [%s]", e.what ());
+	}
 	
 	return CEGUIUtility::injectMousePosition (m_cegui_system, evt.state.X.abs, evt.state.Y.abs);
 }
@@ -2913,19 +2950,19 @@ void MainWindow::setReadyToStart(bool ready)
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("StartScreenRoot/LoadRessourcesProgressBar"));
+	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("MainMenu/StartScreenRoot/LoadRessourcesProgressBar"));
 	bar->setVisible(!ready);
 
 	// Also hide the background picture
-	if (CEGUIUtility::isWindowPresent ("StartScreenRoot/StartScreenImage"))
+	if (CEGUIUtility::isWindowPresent ("MainMenu/StartScreenRoot/StartScreenImage"))
 	{
-		CEGUI::Window* backgroundPicture = CEGUIUtility::getWindow ("StartScreenRoot/StartScreenImage");
+		CEGUI::Window* backgroundPicture = CEGUIUtility::getWindow ("MainMenu/StartScreenRoot/StartScreenImage");
 		backgroundPicture->setVisible (false);
 		backgroundPicture->setMousePassThroughEnabled (true);
 	}
-	if (CEGUIUtility::isWindowPresent ("StartScreenRoot"))
+	if (CEGUIUtility::isWindowPresent ("MainMenu/StartScreenRoot"))
 	{
-		CEGUI::Window* backgroundPicture = CEGUIUtility::getWindow ("StartScreenRoot");
+		CEGUI::Window* backgroundPicture = CEGUIUtility::getWindow ("MainMenu/StartScreenRoot");
 		backgroundPicture->setVisible (false);
 		backgroundPicture->setMousePassThroughEnabled (true);
 	}
@@ -2940,7 +2977,7 @@ void MainWindow::setRessourceLoadingBar(float percent)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("StartScreenRoot/LoadRessourcesProgressBar"));
+	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("MainMenu/StartScreenRoot/LoadRessourcesProgressBar"));
 	bar->setProgress(percent);
 }
 

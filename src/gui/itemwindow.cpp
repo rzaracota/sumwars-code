@@ -211,8 +211,19 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 	
 	// try to find a Progressbar with a matching name
 	// remove "Label" and add "ProgressBar"
-	CEGUI::String  windowname = img->getName();
-	std::size_t pos =	windowname.find ("Label");
+	std::size_t pos;
+#ifdef CEGUI_07
+	CEGUI::String  windowname = img->getName ();
+#else
+	CEGUI::String  windowname = img->getNamePath ();
+	pos = windowname.find ("SW/");
+	if (pos != std::string::npos)
+	{
+		windowname.erase (pos, 3);
+	}
+	//DEBUG ("Name [%s], namepath [%s]", windowname.c_str (), img->getNamePath ().c_str ());
+#endif
+	pos = windowname.find ("Label");
 	if (pos != std::string::npos)
 	{
 		windowname.erase(pos,5);
@@ -221,7 +232,7 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 	// Fenstermanager
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	if (CEGUIUtility::isWindowPresent (windowname))
+	try
 	{
 		// update progress bar to reflect item timer
 		CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow (windowname));
@@ -252,6 +263,10 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 		{
 			img->setAlpha(alpha);
 		}
+	}
+	catch (std::exception& e)
+	{
+		DEBUG ("Caught exception [%s]", e.what ());
 	}
 	
 	if (playsound && !m_silent_current_update)

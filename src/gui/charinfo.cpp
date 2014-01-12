@@ -219,7 +219,7 @@ CharInfo::CharInfo (Document* doc)
 
 
 	// Label Klasse
-	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "CharInfo/charinfo_aux/Playerinfo/ClassValueLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "CharInfo/charinfo_aux/Playerinfo/__auto_contentpane__/ClassValueLabel");
 	PlayerBasicData* pdata = ObjectFactory::getPlayerData(player->getSubtype());
 	if (pdata != 0)
 	{
@@ -608,7 +608,7 @@ CharInfo::CharInfo (Document* doc)
 			label->setTooltipText("");
 	}
 	
-	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "CharInfo/charinfo_aux/Playerinfo/Portrait");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "CharInfo/charinfo_aux/Playerinfo/__auto_contentpane__/Portrait");
 	std::string portraitname = player->getEmotionImage("normal");
 	if (label->getProperty("Image") != portraitname)
 	{

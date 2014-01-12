@@ -1084,8 +1084,8 @@ bool Application::loadResources(int datagroups)
 	Ogre::FileInfoList::iterator it;
 	std::string file;
 
-	SWOgreResListener myListener;
-	Ogre::ResourceGroupManager::getSingleton().addResourceGroupListener (&myListener);
+	//SWOgreResListener myListener;
+	//Ogre::ResourceGroupManager::getSingleton().addResourceGroupListener (&myListener);
 
 	if (datagroups & World::DATA_IMAGES)
 	{
@@ -1135,7 +1135,7 @@ bool Application::loadResources(int datagroups)
 	if (datagroups & World::DATA_PARTICLESYSTEMS)
 	{
 		DEBUG("Loading particlesystems.");
-		Ogre::ResourceGroupManager::getSingleton().addResourceGroupListener (&myListener);
+		//Ogre::ResourceGroupManager::getSingleton().addResourceGroupListener (&myListener);
 		
 		Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("Particles");
 		if (m_running)
@@ -1308,7 +1308,7 @@ bool Application::loadResources(int datagroups)
 		m_main_window->setReadyToStart(true);
 	}
 
-	Ogre::ResourceGroupManager::getSingleton().removeResourceGroupListener (&myListener);
+	//Ogre::ResourceGroupManager::getSingleton().removeResourceGroupListener (&myListener);
 
 	return true;
 }

@@ -2032,7 +2032,7 @@ void Document::showQuestionDialog ()
 {
 	// Show a notification.
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::String widgetName = CEGUIUtility::getNameForWidget ("MainMenu_Holder/QuestionInfoRoot");
+	CEGUI::String widgetName = CEGUIUtility::getNameForWidget ("MainMenuRoot/QuestionInfoRoot");
 	if (! CEGUIUtility::isWindowPresent (widgetName))
 	{
 		DEBUG ("Could not display the warning widget: [%s]", widgetName.c_str ());
@@ -2054,7 +2054,7 @@ void Document::hideQuestionDialog ()
 {
 	// Show a notification.
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::String widgetName = CEGUIUtility::getNameForWidget ("MainMenu_Holder/QuestionInfoRoot");
+	CEGUI::String widgetName = CEGUIUtility::getNameForWidget ("MainMenuRoot/QuestionInfoRoot");
 	if (CEGUIUtility::isWindowPresent (widgetName))
 	{
 		CEGUI::Window* widget = CEGUIUtility::getWindow (widgetName);

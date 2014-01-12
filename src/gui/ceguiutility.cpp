@@ -351,7 +351,7 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 			parentPtr->addChildWindow (childPtr);
 #else
 			parentPtr->addChild (childPtr);
-			DEBUG ("[ceguiutil] Added item: [%s]", childPtr->getNamePath ().c_str ());
+			DEBUG ("[ceguiutil] Added item: [%s] to [%s]", childPtr->getNamePath ().c_str (), parentPtr->getNamePath ().c_str ());
 #endif
 		}
 

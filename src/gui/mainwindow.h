@@ -143,6 +143,12 @@ class MainWindow :
 	 */
 	bool setupMainMenu();
 
+	/**
+	 * \fn bool setupRootWindow()
+	 * \brief Create the root window to serve as root element of the CEGUI interface
+	 * \return true, if successfull, false otherwise
+	 */
+	bool setupRootWindow ();
 
 	/**
 	 * \fn bool setupObjectInfo()
@@ -423,6 +429,12 @@ class MainWindow :
 	CEGUI::Window* m_main_menu;
 
 	/**
+	 * \fn CEGUI::Window* m_root_window
+	 * \brief The root window
+	 */
+	CEGUI::Window* m_root_window;
+
+	/**
 	 * \var CEGUI::Window* m_game_screen
 	 * \brief The window in which the actual game is running in (this is excluding the menu).
 	 */
@@ -433,12 +445,6 @@ class MainWindow :
 	 * \brief A custom cursor window. Would be used typically to display items dragged by the user.
 	 */
 	CEGUI::Window* m_custom_cursor;
-
-	/**
-	 * \var CEGUI::Window* m_active_sheet
-	 * \brief Keeps track of the active CEGUI sheet.
-	 */
-	CEGUI::Window* m_active_sheet;
 
 	/**
 	 * \var Scene* m_scene

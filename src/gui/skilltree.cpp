@@ -174,7 +174,7 @@ void SkillTree::update()
 			skilltree->addTab(tabs[i]);
 			
 			stream.str("");
-			stream << "SkilltreeTabs__auto_TabPane__Buttons__auto_btnSkilltreeTab" << i;
+			stream << "Skilltree/skilltree_aux/SkilltreeTabs/__auto_TabPane__/SkilltreeTab" << i;
 			label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 			label->setInheritsAlpha(false);
 		}
@@ -183,7 +183,7 @@ void SkillTree::update()
 		stream.str("");
 		stream << "FFD43D1A";
 
-		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "SkilltreeTabs__auto_TabPane__Buttons__auto_btnSkilltreeTab0");
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkilltreeTabs/__auto_TabPane__/SkilltreeTab0");
 		label->setProperty("NormalTextColour", stream.str());
 		label->setProperty("HoverTextColour", stream.str());
 		label->setProperty("SelectedTextColour", stream.str());
@@ -193,7 +193,7 @@ void SkillTree::update()
 		stream.str("");
 		stream << "FF5CACEE";
 
-		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "SkilltreeTabs__auto_TabPane__Buttons__auto_btnSkilltreeTab1");
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkilltreeTabs/__auto_TabPane__/SkilltreeTab1");
 		label->setProperty("NormalTextColour", stream.str());
 		label->setProperty("HoverTextColour", stream.str());
 		label->setProperty("SelectedTextColour", stream.str());
@@ -203,7 +203,7 @@ void SkillTree::update()
 		stream.str("");
 		stream << "FFD15FEE";
 
-		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "SkilltreeTabs__auto_TabPane__Buttons__auto_btnSkilltreeTab2");
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkilltreeTabs/__auto_TabPane__/SkilltreeTab2");
 		label->setProperty("NormalTextColour", stream.str());
 		label->setProperty("HoverTextColour", stream.str());
 		label->setProperty("SelectedTextColour", stream.str());

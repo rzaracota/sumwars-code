@@ -43,14 +43,6 @@ CharCreate::CharCreate (Document* doc, const std::string& ceguiSkinName, CEGUI::
 	
 	CEGUI::String widgetName;
 
-	// Augustin Preda, 2014.01.08: removed the use of the "MainMenuRoot" widget. Should not be added here anyway.
-#if 0
-	widgetName = CEGUIUtility::getNameForWidget("MainMenuRoot");
-
-	// pin the the window below the MainMenuRoot to allow display along with MainMenu Elements
-	CEGUI::FrameWindow* start_menu = static_cast<CEGUI::FrameWindow*> (CEGUIUtility::getWindowForLoadedLayout (parentWindowPtr, widgetName));
-	CEGUIUtility::addChildWidget(start_menu, char_create);
-#endif
 	// Bestandteile der Kontrollleiste hinzufuegen
 	CEGUI::PushButton* btn;
 	CEGUI::Editbox* namebox;
