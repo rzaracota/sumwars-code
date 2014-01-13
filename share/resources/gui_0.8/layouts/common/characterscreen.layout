@@ -21,7 +21,7 @@
                 <Property name="Area" value="{{0.0,0},{0.01,0},{1.0,0},{0.32,0}}" />
                 
                 <Window type="SWB/StaticImage" name="Portrait" >
-                    <Property name="Image" value="Portrait" />
+                    <Property name="Image" value="Portrait/Portrait" />
                     <Property name="FrameEnabled" value="True" />
                     <Property name="Area" value="{{0.01,0},{0.04,0},{0.335,0},{0.95,0}}" />
                     <Property name="BackgroundEnabled" value="False" />

@@ -21,7 +21,7 @@
     <Image name="injured" xPos="203" yPos="304" width="100" height="100" />
     <Image name="injured2" xPos="304" yPos="304" width="100" height="100" />
     <Image name="injured3" xPos="405" yPos="304" width="100" height="100" />
-	<Image name="fear" xPos="1" yPos="405" width="100" height="100" />
+    <Image name="fear" xPos="1" yPos="405" width="100" height="100" />
     <Image name="panic" xPos="102" yPos="405" width="100" height="100" />
     <Image name="aloof" xPos="203" yPos="405" width="100" height="100" />
     <Image name="disgust" xPos="304" yPos="405" width="100" height="100" />

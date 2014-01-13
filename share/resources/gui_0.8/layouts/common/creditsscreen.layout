@@ -20,7 +20,7 @@
             <Property name="InheritsAlpha" value="False" />
             <Property name="ContentPaneAutoSized" value="True" />
             <Property name="MaxSize" value="{{1.0,0},{1.0,0}}" />
-            <Property name="FrameEnabled" value="False" />
+            <!--<Property name="FrameEnabled" value="False" />--> <!-- Property not added to SumWarsExtras -->
 
             <!-- The top side where the player picture, and main information are displayed -->
             <Window type="SWB/StaticText" name="CreditsText" >

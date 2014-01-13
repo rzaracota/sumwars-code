@@ -25,7 +25,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="VertLabelFormatting" initialValue="CentreAligned" />
         <PropertyDefinition name="HorzLabelFormatting" initialValue="CentreAligned" />
         <!--<PropertyDefinition name="BackgroundColour" initialValue="FFFFDA99" />-->
-        <PropertyDefinition name="BackgroundColour" initialValue="FFFFD9CD" />
+        <PropertyDefinition name="BackgroundColour" initialValue="FFFFD9CD" redrawOnWrite="true" type="Colour" />
 
         <ImagerySection name="label">
             <TextComponent>
@@ -750,8 +750,8 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     </Dim>
                 </Area>
                 <Image name="SWB/Static_M" />
-                <ColourRectProperty name="BackgroundColour" />
-                <Colours topLeft="FFFFFFFF" topRight="FFFFFFFF" bottomLeft="FFFFFFFF" bottomRight="FFFFFFFF" />
+                <ColourProperty name="BackgroundColour" />
+                <!--<Colours topLeft="FFFFFFFF" topRight="FFFFFFFF" bottomLeft="FFFFFFFF" bottomRight="FFFFFFFF" />-->
                 <VertFormat type="Stretched" />
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
@@ -766,8 +766,8 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     <Dim type="BottomEdge"><UnifiedDim scale="1" type="BottomEdge" /></Dim>
                 </Area>
                 <Image name="SWB/Static_M" />
-                <ColourRectProperty name="BackgroundColour" />
-                <Colours topLeft="FFFFFFFF" topRight="FFFFFFFF" bottomLeft="FFFFFFFF" bottomRight="FFFFFFFF" />
+                <ColourProperty name="BackgroundColour" />
+                <!--<Colours topLeft="FFFFFFFF" topRight="FFFFFFFF" bottomLeft="FFFFFFFF" bottomRight="FFFFFFFF" />-->
                 <VertFormat type="Stretched" />
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
@@ -785,7 +785,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     <WidgetLook name="SWB/StaticText">
         <PropertyDefinition name="FrameColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" />
         <!--<PropertyDefinition name="BackgroundColours" initialValue="tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000" redrawOnWrite="true" />-->
-        <PropertyDefinition name="BackgroundColour" initialValue="B2000000" />
+        <PropertyDefinition name="BackgroundColour" initialValue="B2000000" redrawOnWrite="true" type="Colour" />
         <Property name="FrameEnabled" value="True" />
         <Property name="BackgroundEnabled" value="True" />
         
@@ -2055,7 +2055,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="ActiveSelectionColour" initialValue="FFFF8080" redrawOnWrite="true" />
         <PropertyDefinition name="InactiveSelectionColour" initialValue="FFB15050" redrawOnWrite="true" />
         <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
-        <PropertyDefinition name="BackgroundColour" initialValue="77FFFFFF" />
+        <PropertyDefinition name="BackgroundColour" initialValue="77FFFFFF" redrawOnWrite="true" type="Colour" />
 
         <!-- Use the default mouse cursor -->
         <!--<Property name="MouseCursorImage" value="SWBCursors/MouseTextBar" />-->
@@ -2956,7 +2956,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="ActiveSelectionColour" initialValue="FFFF8080" redrawOnWrite="true" />
         <PropertyDefinition name="InactiveSelectionColour" initialValue="FFB15050" redrawOnWrite="true" />
         <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
-        <PropertyDefinition name="BackgroundColour" initialValue="77FFFFFF" />
+        <PropertyDefinition name="BackgroundColour" initialValue="77FFFFFF" redrawOnWrite="true" type="Colour" />
 
         <!-- Use the default mouse cursor -->
         <!--<Property name="MouseCursorImage" value="SWBCursors/MouseTextBar" />-->
@@ -5222,7 +5222,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="Image" initialValue="SWB/EmptyGlyph24" redrawOnWrite="true" />
         <PropertyDefinition name="VertImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
         <PropertyDefinition name="HorzImageFormatting" initialValue="Stretched" redrawOnWrite="true" />
-        <PropertyDefinition name="BackgroundColour" initialValue="11FFFFFF" />
+        <PropertyDefinition name="BackgroundColour" initialValue="11FFFFFF" redrawOnWrite="true" type="Colour" />
         <PropertyDefinition name="BackgroundHighlightColour" initialValue="FFFFFFFF" />
         <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
         <PropertyDefinition name="BorderColourHover" initialValue="FFCCB078" />
