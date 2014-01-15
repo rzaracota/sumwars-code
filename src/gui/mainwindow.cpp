@@ -179,6 +179,7 @@ bool MainWindow::setupRootWindow ()
 
 		// Oberstes Fenster der Hauptmenue Schicht
 		m_root_window = win_mgr.createWindow("DefaultWindow", "SW");
+		m_root_window->setMousePassThroughEnabled (true);
 	}
 	catch (CEGUI::Exception & e)
 	{
@@ -231,36 +232,42 @@ bool MainWindow::setupMainMenu()
 
 		CreditsWindow* crd = new CreditsWindow (m_document, m_ceguiSkinName);
 		m_sub_windows["CreditsWindow"] = crd;
+		crd->getCEGUIWindow ()->setMousePassThroughEnabled (true);
 		CEGUIUtility::addChildWidget (m_main_menu, crd->getCEGUIWindow());
 
 		DEBUG ("Creating main menu");
 
 		Window * wnd = new MainMenu(m_document, m_ceguiSkinName);
 		m_sub_windows["MainMenu"] = wnd;
+		wnd->getCEGUIWindow ()->setMousePassThroughEnabled (true);
 		CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
 
 		DEBUG ("Creating character screen");
 
 		wnd = new CharCreate (m_document, m_ceguiSkinName, m_main_menu);
 		m_sub_windows["CharCreate"] = wnd;
+		wnd->getCEGUIWindow ()->setMousePassThroughEnabled (true);
 		CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
 		
 		DEBUG ("Creating options window");
 
 		wnd = new OptionsWindow(m_document,m_keyboard, m_ceguiSkinName);
 		m_sub_windows["Options"] = wnd;
+		wnd->getCEGUIWindow ()->setMousePassThroughEnabled (true);
 		CEGUIUtility::addChildWidget (m_root_window, wnd->getCEGUIWindow());
 		
 		DEBUG ("Creating game hosting screen");
 
 		wnd = new HostGameWindow(m_document);
 		m_sub_windows["HostGame"] = wnd;
+		wnd->getCEGUIWindow ()->setMousePassThroughEnabled (true);
 		CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
 		
 		DEBUG ("Creating game joining screen");
 
 		wnd = new JoinGameWindow(m_document);
 		m_sub_windows["JoinGame"] = wnd;
+		wnd->getCEGUIWindow ()->setMousePassThroughEnabled (true);
 		CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
 		
 	// Verbinden mit dem Document
@@ -2704,7 +2711,8 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
     // if the returned window is anything else than "GameScreen" then CEGUI needs to process the input
 	CEGUI::Window* mouseWindow = CEGUIUtility::getWindowContainingMouse (m_cegui_system);
 
-	if (! (mouseWindow->getName () == "GameScreen")) 
+	DEBUG ("Mouse Pressed. Mouse window is [%s]", mouseWindow->getName ().c_str ());
+	if (! (mouseWindow->getName () == "SW")) 
     {
         ret = true; // set ret to false if the events where processed by the invisible window
 		CEGUIUtility::injectMouseButtonDown (btn);

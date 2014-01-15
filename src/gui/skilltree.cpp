@@ -342,7 +342,7 @@ void SkillTree::update()
 			{
 				btnWidgetName.erase (string_pos, 31);
 			}
-			m_skill_widgets_pics[cnt] = btnWidgetName;
+			m_skill_widgets_btns[cnt] = btnWidgetName;
 			DEBUG ("Added widget name (btn) [%s]", btnWidgetName.c_str ());
 
 			//
@@ -414,7 +414,7 @@ void SkillTree::update()
 						{
 							depsWidgetName.erase (string_pos, 31);
 						}
-						m_skill_widgets_connections[cnt] = depsWidgetName;
+						m_skill_widgets_connections[m_nr_dependencies] = depsWidgetName;
 						DEBUG ("Added widget name (conn) [%s]", depsWidgetName.c_str ());
 
 						m_nr_dependencies++;
@@ -471,11 +471,9 @@ void SkillTree::update()
 		}
 		else
 		{
-			DEBUG ("Property not found: OverlayColour");
+			DEBUG ("Property not found: OverlayColour (in %s)", label->getNamePath ());
 		}
 		
-		//out_stream.str("");
-		//out_stream << "SkillButton" << j;
 		std::string skillButtonWidget = m_skill_widgets_btns[j];
 
 		button = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, skillButtonWidget));
@@ -486,13 +484,9 @@ void SkillTree::update()
 		}
 	}
 
-	DEBUG ("Preparing skill connections");
-	
 	// Loop over all Dependencies
 	for (int j=0;j<m_nr_dependencies;j++)
 	{
-		//out_stream.str("");
-		//out_stream << "SkillDependencyConnection" << j;
 		std::string skillConnWidget = m_skill_widgets_connections[j];
 
 		// Label for the dependency connecntion
@@ -543,18 +537,17 @@ void SkillTree::update()
 	spstream << player->getSkillPoints();
 	
 	// there is one label on _each_ tab
-	label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "SkillpointsValueLabel");
-		if (label->getText() != spstream.str())
-		{
-			label->setText(spstream.str());
-		}
+	label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkillTreeAdditionalInfoHolder/SkillpointsValueLabel");
+	if (label->getText() != spstream.str())
+	{
+		label->setText(spstream.str());
+	}
 		
-	label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "NextSkillpointsValueLabel");
-		if (label->getText() != lvlstr)
-		{
-			label->setText(lvlstr);
-		}
-	
+	label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkillTreeAdditionalInfoHolder/NextSkillpointsValueLabel");
+	if (label->getText() != lvlstr)
+	{
+		label->setText(lvlstr);
+	}
 	
 	// Markierer fuer Shortkeys einbauen
 	// Zaehler fuer die Fenster
@@ -600,7 +593,17 @@ void SkillTree::update()
 		if (nr >= m_shortkey_labels)
 		{
 			m_shortkey_labels ++;
-			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), stream.str());
+			
+			std::map<int, std::string>::iterator it = m_skill_widgets_shortcuts.find (nr);
+			if (it != m_skill_widgets_shortcuts.end ())
+			{
+				label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, it->second);
+			}
+			else
+			{
+				label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), stream.str());
+			}
+
 			label->setInheritsAlpha(false);
 			label->setProperty("FrameEnabled", "false");
 			label->setProperty("BackgroundEnabled", "false");
@@ -619,7 +622,6 @@ void SkillTree::update()
 				shortkeywidget.erase (string_pos, 31);
 			}
 			m_skill_widgets_shortcuts[nr] = shortkeywidget;
-
 		}
 		else
 		{
@@ -627,19 +629,28 @@ void SkillTree::update()
 			label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, shortkeywidget);
 		}
 		
-		//stream.str("");
-		//stream << "SkillImage" << id;
 		std::string skillImageWidget = m_skill_widgets_pics[id];
 		label2 = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, skillImageWidget);
 		
 		
 		if (label2->getParent() != label->getParent())
 		{
+			DEBUG ("Reassigning siblings: [%s], to image widgets [%s]", label->getNamePath ().c_str (), label2->getNamePath ().c_str ());
+
 			if (label->getParent() != 0)
 			{
 				CEGUIUtility::removeChildWidget (label->getParent(), label);
 			}
 			CEGUIUtility::addChildWidget (label2->getParent(), label);
+			
+			// Re-calculate the name of the widget. 
+			std::string shortkeywidget = label->getNamePath ().c_str ();
+			size_t string_pos = shortkeywidget.find ("SW/GameScreen/Skilltree_Holder/");
+			if (string_pos != std::string::npos)
+			{
+				shortkeywidget.erase (string_pos, 31);
+			}
+			m_skill_widgets_shortcuts[nr] = shortkeywidget;
 		}
 		
 		keyname = m_keyboard->getAsString ( (OIS::KeyCode) key);
@@ -669,8 +680,7 @@ void SkillTree::update()
 		}
 		nr ++;
 	}
-	
-	
+		
 	// restliche Labels ausblenden
 	for (; nr<m_shortkey_labels; nr++)
 	{

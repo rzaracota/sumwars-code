@@ -250,26 +250,26 @@ void DialogueWindow::update()
 				stream << "DialogWindow/DialogueLowerBar/";
 				stream << "SpeakerEmotionImage";
 				stream << i;
-				wimage = CEGUIUtility::getWindow (stream.str());
+				wimage = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 						
 				stream.str("");
 				stream << "DialogWindow/DialogueLowerBar/";
 				stream << "SpeakerNameLabel";
 				stream << i;
-				wname = CEGUIUtility::getWindow (stream.str());
+				wname = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 				
 				stream.str("");
 				stream << "DialogWindow/DialogueLowerBar/";
 				stream << "SpeakerTextLabel";
 				stream << i;
-				wtext = CEGUIUtility::getWindow (stream.str());
+				wtext = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 				
 				
 				stream.str("");
 				stream << "DialogWindow/DialogueLowerBar/";
 				stream << "SpeakerTextPane";
 				stream << i;
-				wpane = static_cast<CEGUI::ScrollablePane*> (CEGUIUtility::getWindow (stream.str()));
+				wpane = static_cast<CEGUI::ScrollablePane*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str()));
 				
 				
 				spstate = dia->getSpeakerState((Dialogue::Position) i);
@@ -384,19 +384,19 @@ void DialogueWindow::update()
 				stream << "DialogWindow/DialogueLowerBar/";
 				stream << "SpeakerEmotionImage";
 				stream << i;
-				wimage = CEGUIUtility::getWindow (stream.str());
+				wimage = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 						
 				stream.str("");
 				stream << "DialogWindow/DialogueLowerBar/";
 				stream << "SpeakerNameLabel";
 				stream << i;
-				wname = CEGUIUtility::getWindow (stream.str());
+				wname = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 				
 				stream.str("");
 				stream << "DialogWindow/DialogueLowerBar/";
 				stream << "SpeakerTextLabel";
 				stream << i;
-				wtext = CEGUIUtility::getWindow (stream.str());
+				wtext = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 				
 				stream.str("");
 				stream << "DialogWindow/DialogueLowerBar/";

@@ -492,7 +492,7 @@ bool Inventory::onDropGoldClicked(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
-	CEGUI::Editbox* gold = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "GoldDropValueBox"));
+	CEGUI::Editbox* gold = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GoldDropValueBox"));
 	int val =0;
 	std::stringstream stream;
 	stream.str(gold->getText().c_str());
