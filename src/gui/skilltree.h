@@ -18,6 +18,9 @@
 
 #include "window.h"
 #include "OISKeyboard.h"
+
+#include <map>
+
 /**
  * \class SkillTree
  * \brief Fenster Faehigkeitenbaum
@@ -118,6 +121,15 @@ class SkillTree : public Window
 		 * \brief The name of the CEGUI skin to use.
 		 */
 		std::string m_ceguiSkinName;
+
+		/**
+		 * \brief Holds the skill widgets.
+		 */
+		std::map<int, std::string> m_skill_widgets_pics;
+		std::map<int, std::string> m_skill_widgets_btns;
+
+		std::map<int, std::string> m_skill_widgets_connections;
+		std::map<int, std::string> m_skill_widgets_shortcuts;
 
 };
 

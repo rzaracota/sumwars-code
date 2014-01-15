@@ -545,18 +545,25 @@ void DialogueWindow::updateSpeechBubbles()
 		else
 		{
 			stream.str("");
+			stream << "GameScreen/";
 			stream << "SpeechFrame";
 			stream << nr;
 			
 			speakframe = static_cast<CEGUI::FrameWindow*>( CEGUIUtility::getWindow (stream.str()) );
 			
 			stream.str("");
-			stream << "SpeechLabel";
+			stream << "GameScreen/";
+			stream << "SpeechFrame";
+			stream << nr;
+			stream << "/SpeechLabel";
 			stream << nr;
 			label = CEGUIUtility::getWindow (stream.str());
 			
 			stream.str("");
-			stream << "SpeechIamge";
+			stream << "GameScreen/";
+			stream << "SpeechFrame";
+			stream << nr;
+			stream << "/SpeechIamge";
 			stream << nr;
 			image = CEGUIUtility::getWindow (stream.str());
 			
@@ -632,6 +639,7 @@ void DialogueWindow::updateSpeechBubbles()
 	for (; nr<lcount; nr++)
 	{
 		stream.str("");
+		stream << "GameScreen/";
 		stream << "SpeechFrame";
 		stream << nr;
 		speakframe = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow (stream.str()));

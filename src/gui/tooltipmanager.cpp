@@ -33,7 +33,7 @@ TooltipManager::TooltipManager():
 
 void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string > list, float timeVisible, const CEGUI::Font* font, Tooltip::TooltipType type )
 {
-	CEGUI::Window *gamescreen = CEGUIUtility::getWindow ("GameScreen");
+	CEGUI::Window *gamescreen = CEGUIUtility::getWindow ("SW");
     std::string msg;
     CEGUI::UVector2 size;
     std::ostringstream windowName;

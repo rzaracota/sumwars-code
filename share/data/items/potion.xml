@@ -1,6 +1,6 @@
 <!-- POTION -->
 <Item type="potion" subtype="town_portal" name="scroll of town portal" size="small" consumable="true">
-	<Image image="set:voidScroll.png image:full_image" />
+	<Image image="voidScroll.png" />
 	<Mesh file="townPortalScroll.mesh" />
 	<Attribute
 			  character_requirement="all"
@@ -14,7 +14,7 @@
 
 <!-- small potion -->
 <Item type="potion" subtype="heal_1" name="small potion" size="small" consumable="true" consume_timer_nr="8" consume_timer="5000" >
-	<Image image="set:potion_health.png image:full_image" />
+	<Image image="potion_health.png" />
 	<RenderInfo name="potion" />
 	<Attribute
 		character_requirement="all"
@@ -34,7 +34,7 @@
 
 <!-- medium potion -->
 <Item type="potion" subtype="heal_2" name="medium potion" size="small" consumable="true" consume_timer_nr="8" consume_timer="5000" >
-	<Image image="set:heal_2.png image:full_image" />
+	<Image image="heal_2.png" />
 	<RenderInfo name="mediumPotion" />
 	<Attribute
 		character_requirement="all"
@@ -54,7 +54,7 @@
 
 <!-- anti blind-->
 <Item type="potion" subtype="heal_bl" name="eyedrops" size="small" consumable="true" consume_timer_nr="7" consume_timer="2000" >
-	<Image image="set:heal_bl.png image:full_image" />
+	<Image image="heal_bl.png" />
 	<RenderInfo name="antiBlind" />
 	<Attribute
 		character_requirement="all"
@@ -74,7 +74,7 @@
 
 <!-- anti poison-->
 <Item type="potion" subtype="heal_ps" name="antidot" size="small" consumable="true" consume_timer_nr="7" consume_timer="2000" >
-	<Image image="set:heal_ps.png image:full_image" />
+	<Image image="heal_ps.png" />
 	<RenderInfo name="antiPoison" />
 	<Attribute
 		character_requirement="all"
@@ -94,7 +94,7 @@
 
 <!-- anti berserk -->
 <Item type="potion" subtype="heal_br" name="calming salve" size="small" consumable="true" consume_timer_nr="7" consume_timer="2000" >
-	<Image image="set:heal_br.png image:full_image" />
+	<Image image="heal_br.png" />
 	<RenderInfo name="antiBerserk" />
 	<Attribute
 		character_requirement="all"
@@ -114,7 +114,7 @@
 
 <!-- anti confuse -->
 <Item type="potion" subtype="heal_cf" name="potion of determination" size="small" consumable="true" consume_timer_nr="7" consume_timer="2000" >
-	<Image image="set:heal_cf.png image:full_image" />
+	<Image image="heal_cf.png" />
 	<RenderInfo name="antiConfuse" />
 	<Attribute
 		character_requirement="all"
@@ -134,7 +134,7 @@
 
 <!-- anti mute -->
 <Item type="potion" subtype="heal_mt" name="echo potion" size="small" consumable="true" consume_timer_nr="7" consume_timer="2000" >
-	<Image image="set:heal_mt.png image:full_image" />
+	<Image image="heal_mt.png" />
 	<RenderInfo name="antiMute" />
 	<Attribute
 		character_requirement="all"
@@ -154,7 +154,7 @@
 
 <!-- anti paralyse -->
 <Item type="potion" subtype="heal_py" name="muscle salve" size="small" consumable="true" consume_timer_nr="7" consume_timer="2000" >
-	<Image image="set:heal_py.png image:full_image" />
+	<Image image="heal_py.png" />
 	<RenderInfo name="antiParalyze" />
 	<Attribute
 		character_requirement="all"
@@ -174,7 +174,7 @@
 
 <!-- anti freeze -->
 <Item type="potion" subtype="heal_fr" name="potion of melting" size="small" consumable="true" consume_timer_nr="7" consume_timer="2000" >
-	<Image image="set:heal_fr.png image:full_image" />
+	<Image image="heal_fr.png" />
 	<RenderInfo name="antiFreeze" />
 	<Attribute
 		character_requirement="all"
@@ -194,7 +194,7 @@
 
 <!-- anti burn -->
 <Item type="potion" subtype="heal_bu" name="spike oil" size="small" consumable="true" consume_timer_nr="7" consume_timer="2000" >
-	<Image image="set:heal_bu.png image:full_image" />
+	<Image image="heal_bu.png" />
 	<RenderInfo name="antiBurn" />
 	<Attribute
 		character_requirement="all"

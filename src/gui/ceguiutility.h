@@ -258,6 +258,7 @@ class CEGUIUtility
 		static CEGUI::Window* getWindow (const CEGUI::String& name);
 		static CEGUI::Window* getWindowForSystem (CEGUI::System* sys, const CEGUI::String& name);
 		static CEGUI::Window* getWindowForLoadedLayout (CEGUI::Window* parentWnd, const CEGUI::String& name);
+		static CEGUI::Window* getWindowForSystemNoEx (CEGUI::System* sys, const CEGUI::String& name);
 
 		/// Same as getWindowForLoadedLayout, but also throws an exception if the window ptr is NULL.
 		static CEGUI::Window* getWindowForLoadedLayoutEx (CEGUI::Window* parentWnd, const CEGUI::String& name);

@@ -59,8 +59,7 @@ bool Gridunit::deleteObject(WorldObject* object, short index)
 	std::vector<WorldObject*>& arr = getObjects(g);
 
 	int size = arr.size();
-
-	DEBUGX("deleting obj %i from group %i",object->getId(),g);
+	DEBUG ("deleting obj %i (%s) from group %i", object->getId (), object->getName ().getRawText ().c_str (), g);
 	if (index != -1 && arr[index]==object)
 	{
 		// Stelle an der geloescht werden soll ist explizit vorgegeben

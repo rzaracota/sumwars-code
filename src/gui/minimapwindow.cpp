@@ -181,11 +181,18 @@ void MinimapWindow::update()
 		}
 		else
 		{
+			stream.str ("");
+			stream << "MinimapWindow/PlayerMinimapImage";
+			stream << cnt;
 			label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		}
 
 		if (m_reloadIconsOnNextUpdate)
 		{
+			stream.str ("");
+			stream << "MinimapWindow/PlayerMinimapImage";
+			stream << cnt;
+
 			if (CEGUIUtility::isWindowPresent (stream.str ().c_str ()))
 			{
 				label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str ().c_str ());
@@ -231,7 +238,7 @@ void MinimapWindow::update()
 	for (; cnt <ncount; cnt++)
 	{
 		stream.str("");
-		stream << "PlayerMinimapImage";
+		stream << "MinimapWindow/PlayerMinimapImage";
 		stream << cnt;
 			
 		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
@@ -239,7 +246,7 @@ void MinimapWindow::update()
 	}
 	
 	// Check to see whether the label displaying the region name needs to be updated.
-	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "RegionNameLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "MinimapWindow/RegionNameLabel");
 	
 	std::string regionName (region->getName ());
 	DEBUGX ("Got region name as: [%s]", regionName.c_str ());

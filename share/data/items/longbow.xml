@@ -3,7 +3,7 @@
 <!-- Turnierbogen -->
 <Item type="weapon" subtype="turney_lbw" name="tourney bow" size="big">
 	<RenderInfo name="turneyLongbow" />
-	<Image image="set:turney_lbw.png image:full_image" />
+	<Image image="turney_lbw.png" />
 	<Attribute
 		level_requirement="1"
 		character_requirement="archer"
@@ -40,7 +40,7 @@
 <!-- Orkbogen -->
 <Item type="weapon" subtype="orc_lbw" name="orc bow" size="big">
 	<RenderInfo name="turneyLongbow" />
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<Attribute
 		level_requirement="3"
 		character_requirement="archer"
@@ -77,7 +77,7 @@
 <!-- Eibenbogen -->
 <Item type="weapon" subtype="yew_lbw" name="yew bow" size="big">
 	<RenderInfo name="turneyLongbow" />
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<Attribute
 		level_requirement="6"
 		character_requirement="archer"
@@ -113,7 +113,7 @@
 
 <!-- Langbogen -->
 <Item type="weapon" subtype="long_lbw" name="longbow" size="big">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="turneyLongbow" />
 	<Attribute
 		level_requirement="8"
@@ -150,7 +150,7 @@
 
 <!-- Soldatenbogen -->
 <Item type="weapon" subtype="soldr_lbw" name="soldier bow" size="big">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="turneyLongbow" />
 	<Attribute
 		level_requirement="14"
@@ -187,7 +187,7 @@
 
 <!-- Hornbogen -->
 <Item type="weapon" subtype="horn_lbw" name="horn bow" size="big">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="turneyLongbow" />
 	<Attribute
 		level_requirement="19"
@@ -224,7 +224,7 @@
 
 <!-- Ahornbogen -->
 <Item type="weapon" subtype="maple_lbw" name="maple bow" size="big">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="turneyLongbow" />
 	<Attribute
 		level_requirement="25"
@@ -261,7 +261,7 @@
 
 <!-- Kriegsbogen -->
 <Item type="weapon" subtype="battle_lbw" name="battle bow" size="big">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="turneyLongbow" />
 	<Attribute
 		level_requirement="30"
@@ -298,7 +298,7 @@
 
 <!-- Kompositlangbogen -->
 <Item type="weapon" subtype="compst_lbw" name="composite longbow" size="big">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="turneyLongbow" />
 	<Attribute
 		level_requirement="35"
@@ -335,7 +335,7 @@
 
 <!-- Sturmsaenger -->
 <Item type="weapon" subtype="wind_lbw" name="stormsinger" size="big">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="turneyLongbow" />
 	<Attribute
 		level_requirement="40"
@@ -374,7 +374,7 @@
 
 <!-- Eichenbogen -->
 <Item type="weapon" subtype="oak_lbw" name="oak bow" size="big">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="turneyLongbow" />
 	<Attribute
 		level_requirement="45"
@@ -411,7 +411,7 @@
 
 <!-- Daemonenhornbogen -->
 <Item type="weapon" subtype="demhrn_lbw" name="demonhorn bow" size="big">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="turneyLongbow" />
 	<Attribute
 		level_requirement="50"
@@ -448,7 +448,7 @@
 
 <!-- Waldlaeuferbogen -->
 <Item type="weapon" subtype="ranger_lbw" name="ranger bow" size="big">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="turneyLongbow" />
 	<Attribute
 		level_requirement="55"
@@ -486,7 +486,7 @@
 
 <!-- Eschenlangbogen -->
 <Item type="weapon" subtype="ash_lbw" name="ash longbow" size="big">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="turneyLongbow" />
 	<Attribute
 		level_requirement="60"
@@ -524,7 +524,7 @@
 
 <!-- Engelsbogen -->
 <Item type="weapon" subtype="angel_lbw" name="soul bow" size="big">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="turneyLongbow" />
 	<Attribute
 		level_requirement="65"
@@ -561,7 +561,7 @@
 
 <!-- Daemonenkompositbogen -->
 <Item type="weapon" subtype="demon_lbw" name="demon compositebow" size="big">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="turneyLongbow" />
 	<Attribute
 		level_requirement="70"
@@ -598,7 +598,7 @@
 
 <!-- Heldenbogen -->
 <Item type="weapon" subtype="hero_lbw" name="hero bow" size="big">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="turneyLongbow" />
 	<Attribute
 		level_requirement="75"
@@ -635,7 +635,7 @@
 
 <!-- Elfenbogen -->
 <Item type="weapon" subtype="elf_lbw" name="elf bow" size="big">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="turneyLongbow" />
 	<Attribute
 		level_requirement="80"

@@ -2,7 +2,7 @@
 
 <!-- Tartsche -->
 <Item type="shield" subtype="targe_shd" name="targe" size="medium">
-	 <Image image="set:shield.png image:full_image" />
+	 <Image image="shield.png" />
 	<Mesh file="shield" />
 	<Attribute
 		level_requirement="1"
@@ -32,7 +32,7 @@
 
 <!-- Buckler 3-->
 <Item type="shield" subtype="buck_shd" name="buckler" size="medium">
-	 <Image image="set:shield.png image:full_image" />
+	 <Image image="shield.png" />
 	<Mesh file="shield" />
 	<Attribute
 		level_requirement="3"
@@ -62,7 +62,7 @@
 
 <!-- Holzschild 5 XX-->
 <Item type="shield" subtype="wood_shd" name="wood shield" size="medium">
-	 <Image image="set:shield.png image:full_image" />
+	 <Image image="shield.png" />
 	<Mesh file="wood_shd" />
 	<Attribute
 		level_requirement="5"
@@ -92,7 +92,7 @@
 
 <!-- Bronzeschild 8-->
 <Item type="shield" subtype="bronze_shd" name="bronze shield" size="medium">
-	<Image image="set:metal_shd.png image:full_image" />
+	<Image image="metal_shd.png" />
 	<Mesh file="metal_shd" />
 	<Attribute
 		level_requirement="8"
@@ -122,7 +122,7 @@
 
 <!-- Eisenschild 13 XX-->
 <Item type="shield" subtype="iron_shd" name="iron shield" size="medium">
-	<Image image="set:metal_shd.png image:full_image" />
+	<Image image="metal_shd.png" />
 	<Mesh file="metal_shd" />
 	<Attribute
 		level_requirement="13"
@@ -152,7 +152,7 @@
 
 <!-- Stahlschild 19-->
 <Item type="shield" subtype="steel_shd" name="steel shield" size="medium">
-	<Image image="set:metal_shd.png image:full_image" />
+	<Image image="metal_shd.png" />
 	<Mesh file="metal_shd" />
 	<Attribute
 		level_requirement="19"

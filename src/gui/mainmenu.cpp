@@ -216,7 +216,6 @@ void MainMenu::update()
 void MainMenu::updateTranslation()
 {
     CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::FrameWindow* lbl;
 
 	CEGUI::Window* widget;
 
@@ -266,6 +265,7 @@ void MainMenu::updateTranslation()
 
 
 	// Update message windows
+	//CEGUI::FrameWindow* lbl;
 	//lbl = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindow ("DeleteCharLabel")); // note: this has no in-between slash!
 	//if (lbl) lbl->setText((CEGUI::utf8*) gettext("Really delete savegame?"));
 
@@ -836,10 +836,6 @@ void MainMenu::createScene()
 		catch (std::exception& e)
 		{
 			DEBUG ("[MainMenu] Caught exception in scene creation: [%s]", e.what ());
-		}
-		catch (Ogre::Exception &e)
-		{
-			DEBUG ("[MainMenu] Caught exception in scene creation: [%s]", e.getFullDescription ().c_str ());
 		}
 	}
     

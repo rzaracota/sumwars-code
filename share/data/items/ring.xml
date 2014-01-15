@@ -2,7 +2,7 @@
 
 <!-- Bronzering -->
 <Item type="ring" subtype="bronze_rng" name="bronze ring" size="small">
-	<Image image="set:bronze_rng.png image:full_image" />
+	<Image image="bronze_rng.png" />
 	<Mesh file="bronze_rng" />
 	<Attribute
 		level_requirement="2"
@@ -31,7 +31,7 @@
 
 <!-- Bernsteinring -->
 <Item type="ring" subtype="amber_rng" name="amber ring" size="small">
-	<Image image="set:bronze_rng.png image:full_image" />
+	<Image image="bronze_rng.png" />
 	<Mesh file="bronze_rng" />
 	<Attribute
 		level_requirement="4"
@@ -60,7 +60,7 @@
 
 <!-- Silberring -->
 <Item type="ring" subtype="silver_rng" name="silver ring" size="small">
-	<Image image="set:silver_rng.png image:full_image" />
+	<Image image="silver_rng.png" />
 	<Mesh file="silver_rng" />
 	<Attribute
 		level_requirement="7"
@@ -89,7 +89,7 @@
 
 <!-- Jettring (schwarzer stein) -->
 <Item type="ring" subtype="jet_rng" name="jet ring" size="small">
-	<Image image="set:bronze_rng.png image:full_image" />
+	<Image image="bronze_rng.png" />
 	<Mesh file="silver_rng" />
 	<Attribute
 		level_requirement="13"
@@ -118,7 +118,7 @@
 
 <!-- Goldring -->
 <Item type="ring" subtype="gold_rng" name="gold ring" size="small">
-	<Image image="set:gold_rng.png image:full_image" />
+	<Image image="gold_rng.png" />
 	<Mesh file="gold_rng" />
 	<Attribute
 		level_requirement="21"

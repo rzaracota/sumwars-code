@@ -24,7 +24,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="DisabledTextColour" initialValue="FF7F7F7F" redrawOnWrite="true" />
         <PropertyDefinition name="VertLabelFormatting" initialValue="CentreAligned" />
         <PropertyDefinition name="HorzLabelFormatting" initialValue="CentreAligned" />
-        <!--<PropertyDefinition name="BackgroundColour" initialValue="FFFFDA99" />-->
         <PropertyDefinition name="BackgroundColour" initialValue="FFFFD9CD" redrawOnWrite="true" type="Colour" />
 
         <ImagerySection name="label">

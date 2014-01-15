@@ -2,7 +2,7 @@
 
 <!-- Fichtenzauberstab -->
 <Item type="weapon" subtype="spruce_wnd_fire" name="spruce wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="spruce_wnd" />
 	<Attribute
 			  level_requirement="1"
@@ -33,7 +33,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="spruce_wnd_air" name="spruce wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="spruce_wnd" />
 	<Attribute
 			  level_requirement="1"
@@ -64,7 +64,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="spruce_wnd_ice" name="spruce wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="spruce_wnd" />
 	<Attribute
 			  level_requirement="1"
@@ -97,7 +97,7 @@
 
 <!-- Lehrlingszauberstab -->
 <Item type="weapon" subtype="prntc_wnd_fire" name="apprentice wand" size="medium">
-	<Image image="set:aprnt_wnd.png image:full_image" />
+	<Image image="aprnt_wnd.png" />
 	<Mesh file="aprnt_wnd" />
 	<Attribute
 			  level_requirement="2"
@@ -128,7 +128,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="prntc_wnd_air" name="apprentice wand" size="medium">
-	<Image image="set:aprnt_wnd.png image:full_image" />
+	<Image image="aprnt_wnd.png" />
 	<Mesh file="aprnt_wnd" />
 	<Attribute
 			  level_requirement="2"
@@ -159,7 +159,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="prntc_wnd_ice" name="apprentice wand" size="medium">
-	<Image image="set:aprnt_wnd.png image:full_image" />
+	<Image image="aprnt_wnd.png" />
 	<Mesh file="aprnt_wnd" />
 	<Attribute
 			  level_requirement="2"
@@ -192,7 +192,7 @@
 
 <!-- Novizenzauberstab -->
 <Item type="weapon" subtype="novice_wnd_fire" name="novice wand" size="medium">
-	<Image image="set:novice_wnd.png image:full_image" />
+	<Image image="novice_wnd.png" />
 	<Mesh file="novice_wnd" />
 	<Attribute
 			  level_requirement="4"
@@ -222,7 +222,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="novice_wnd_air" name="novice wand" size="medium">
-	<Image image="set:novice_wnd.png image:full_image" />
+	<Image image="novice_wnd.png" />
 	<Mesh file="novice_wnd" />
 	<Attribute
 			  level_requirement="4"
@@ -253,7 +253,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="novice_wnd_ice" name="novice wand" size="medium">
-	<Image image="set:novice_wnd.png image:full_image" />
+	<Image image="novice_wnd.png" />
 	<Mesh file="novice_wnd" />
 	<Attribute
 			  level_requirement="4"
@@ -286,7 +286,7 @@
 
 <!-- Eremitenzauberstab -->
 <Item type="weapon" subtype="hermit_wnd_fire" name="hermit wand" size="medium">
-	<Image image="set:novice_wnd.png image:full_image" />
+	<Image image="novice_wnd.png" />
 	<Mesh file="novice_wnd" />
 	<Attribute
 			  level_requirement="6"
@@ -315,7 +315,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="hermit_wnd_air" name="hermit wand" size="medium">
-	<Image image="set:novice_wnd.png image:full_image" />
+	<Image image="novice_wnd.png" />
 	<Mesh file="novice_wnd" />
 	<Attribute
 			  level_requirement="6"
@@ -344,7 +344,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="hermit_wnd_ice" name="hermit wand" size="medium">
-	<Image image="set:novice_wnd.png image:full_image" />
+	<Image image="novice_wnd.png" />
 	<Mesh file="novice_wnd" />
 	<Attribute
 			  level_requirement="6"
@@ -374,7 +374,7 @@
 
 <!-- Felszauberstab -->
 <Item type="weapon" subtype="rock_wnd" name="rock wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="7"
@@ -409,7 +409,7 @@
 
 <!-- Erlenzauberstab -->
 <Item type="weapon" subtype="alder_wnd_fire" name="alder wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="12"
@@ -438,7 +438,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="alder_wnd_air" name="alder wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="12"
@@ -467,7 +467,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="alder_wnd_ice" name="alder wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="12"
@@ -497,7 +497,7 @@
 
 <!-- Bardenzauberstab -->
 <Item type="weapon" subtype="bard_wnd_fire" name="bard's wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="14"
@@ -528,7 +528,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="bard_wnd_air" name="bard's wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="14"
@@ -559,7 +559,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="bard_wnd_ice" name="bard's wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="14"
@@ -592,7 +592,7 @@
 
 <!-- Magierzauberstab -->
 <Item type="weapon" subtype="magus_wnd_fire" name="magus wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="19"
@@ -620,7 +620,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="magus_wnd_air" name="magus wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="19"
@@ -649,7 +649,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="magus_wnd_ice" name="magus wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="19"
@@ -679,7 +679,7 @@
 
 <!-- Silberzauberstab -->
 <Item type="weapon" subtype="silver_wnd_fire" name="silver wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="22"
@@ -707,7 +707,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="silver_wnd_air" name="silver wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="22"
@@ -736,7 +736,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="silver_wnd_ice" name="silver wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="22"
@@ -766,7 +766,7 @@
 
 <!-- Infernozauberstab -->
 <Item type="weapon" subtype="silver_wnd" name="silver wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="25"
@@ -796,7 +796,7 @@
 
 <!-- Eichenzauberstab -->
 <Item type="weapon" subtype="oak_wnd" name="oak wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="29"
@@ -826,7 +826,7 @@
 
 <!-- Phoenixzauberstab -->
 <Item type="weapon" subtype="phenix_wnd" name="phenix wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="34"
@@ -856,7 +856,7 @@
 
 <!-- Frostzauberstab -->
 <Item type="weapon" subtype="frost_wnd" name="frost wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="39"
@@ -886,7 +886,7 @@
 
 <!-- Gewitterzauberstab -->
 <Item type="weapon" subtype="thundr_wnd" name="thunder wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="44"
@@ -916,7 +916,7 @@
 
 <!-- Eschenzauberstab -->
 <Item type="weapon" subtype="ash_wnd" name="ash wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="49"
@@ -946,7 +946,7 @@
 
 <!-- Beschwoererzauberstab -->
 <Item type="weapon" subtype="sumonr_wnd" name="summoner wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="54"
@@ -976,7 +976,7 @@
 
 <!-- Magisterzauberstab -->
 <Item type="weapon" subtype="master_wnd" name="master wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="59"
@@ -1006,7 +1006,7 @@
 
 <!-- Nekromantenzauberstab -->
 <Item type="weapon" subtype="necro_wnd" name="necromancer wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="64"
@@ -1036,7 +1036,7 @@
 
 <!-- Daemonenzauberstab -->
 <Item type="weapon" subtype="demon_wnd" name="demon wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="69"
@@ -1066,7 +1066,7 @@
 
 <!-- Feenzauberstab -->
 <Item type="weapon" subtype="fairy_wnd" name="fairy wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="74"
@@ -1099,7 +1099,7 @@
 
 <!-- Erzmagierzauberstab -->
 <Item type="weapon" subtype="arcmag_wnd" name="archmage wand" size="medium">
-	<Image image="set:spruce_wnd.png image:full_image" />
+	<Image image="spruce_wnd.png" />
 	<Mesh file="basicWand" />
 	<Attribute
 			  level_requirement="80"

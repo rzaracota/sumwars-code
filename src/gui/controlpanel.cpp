@@ -270,7 +270,7 @@ void ControlPanel::update()
 	
 	if (imagename == "")
 	{
-		imagename = CEGUIUtility::getImageNameWithSkin ("skills", "name");
+		imagename = CEGUIUtility::getImageNameWithSkin ("skills", name);
 	}
 	if (imagename != label->getProperty("Image"))
 	{
@@ -320,7 +320,7 @@ void ControlPanel::update()
 	
 	if (imagename == "")
 	{
-		imagename = CEGUIUtility::getImageNameWithSkin ("skills", "name");
+		imagename = CEGUIUtility::getImageNameWithSkin ("skills", name);
 	}
 	if (imagename != label->getProperty("Image"))
 	{
@@ -366,7 +366,7 @@ void ControlPanel::update()
 	
 	if (imagename == "")
 	{
-		imagename = CEGUIUtility::getImageNameWithSkin ("skills", "name");
+		imagename = CEGUIUtility::getImageNameWithSkin ("skills", name);
 	}
 	if (imagename != label->getProperty("Image"))
 	{

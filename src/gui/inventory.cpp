@@ -398,6 +398,8 @@ void Inventory::setState(State s)
 
 	if(s == Inventory::StateSmall)
 	{
+		DEBUG ("Changed state to small inventory");
+
 		CEGUI::TabButton *tabBtn;
 		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/SmallTabButton"));
 		tabBtn->setSelected (true);
@@ -415,6 +417,8 @@ void Inventory::setState(State s)
 	}
 	else if(s == Inventory::StateMedium)
 	{
+		DEBUG ("Changed state to medium inventory");
+
 		CEGUI::TabButton *tabBtn;
 		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/SmallTabButton"));
 		tabBtn->setSelected (false);
@@ -432,6 +436,8 @@ void Inventory::setState(State s)
 	}
 	else if(s == Inventory::StateBig)
 	{
+		DEBUG ("Changed state to big inventory");
+
 		CEGUI::TabButton *tabBtn;
 		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/SmallTabButton"));
 		tabBtn->setSelected (false);
@@ -506,15 +512,17 @@ bool Inventory::onSwitchTabClicked(const CEGUI::EventArgs& evt)
 	const CEGUI::WindowEventArgs* args = static_cast<const CEGUI::WindowEventArgs*>(&evt);
 	std::string name = args->window->getName().c_str();
 
-	if(name == "Inventory/inventory_aux/StashHolder/SmallTabButton")
+	DEBUG ("Inventory: Switch Tab [%s]", name.c_str ());
+
+	if(name == "SmallTabButton")
 	{
 		setState(Inventory::StateSmall);
 	}
-	else if(name == "Inventory/inventory_aux/StashHolder/MediumTabButton")
+	else if(name == "MediumTabButton")
 	{
 		setState(Inventory::StateMedium);
 	}
-	else if(name == "Inventory/inventory_aux/StashHolder/BigTabButton")
+	else if(name == "BigTabButton")
 	{
 		setState(Inventory::StateBig);
 	}

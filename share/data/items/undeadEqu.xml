@@ -1,6 +1,6 @@
 <!-- Zerbrochener Schild 5 -->
 <Item type="shield" subtype="broken_shd" name="broken shield" size="medium">
-	 <Image image="set:shield.png image:full_image" />
+	 <Image image="shield.png" />
 	<Mesh file="broken_shd.mesh" />
 	<Attribute
 		level_requirement="4"
@@ -30,7 +30,7 @@
 
 <!-- Altes Schwert -->
 <Item type="weapon" subtype="old_sw" name="old sword" size="medium">
-	<Image image="set:old_sword.png image:full_image" />
+	<Image image="old_sword.png" />
 	<Mesh file="old_sw.mesh" />
 	<Attribute
 		level_requirement="6"

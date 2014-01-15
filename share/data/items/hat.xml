@@ -2,7 +2,7 @@
 
 <!-- Vagabundenhut -->
 <Item type="helmet" subtype="vag_hat" name="vagabond hat" size="medium">
-	<Image image="set:peasent_hat.png image:full_image" />
+	<Image image="peasent_hat.png" />
 	<RenderInfo name="peasentHat" />
 	<Attribute
 			level_requirement="1"
@@ -34,7 +34,7 @@
 
 <!-- Lehrlingskappe -->
 <Item type="helmet" subtype="prentc_hat" name="apprentice cap" size="medium">
-	<Image image="set:vag_hat.png image:full_image" />
+	<Image image="vag_hat.png" />
 	<RenderInfo name="vagabondHat" />
 	<Attribute
 			level_requirement="3"
@@ -67,7 +67,7 @@
 
 <!-- Novizenhut -->
 <Item type="helmet" subtype="novice_hat" name="novice hat" size="medium">
-	<Image image="set:vag_hat.png image:full_image" />
+	<Image image="vag_hat.png" />
 	<RenderInfo name="vagabondHat" />
 	<Attribute
 			level_requirement="5"
@@ -100,7 +100,7 @@
 
 <!-- Alchemistenkappe -->
 <Item type="helmet" subtype="alch_hat" name="alchemist cap" size="medium">
-	<Image image="set:vag_hat.png image:full_image" />
+	<Image image="vag_hat.png" />
 	<RenderInfo name="vagabondHat" />
 	<Attribute
 			level_requirement="8"
@@ -134,7 +134,7 @@
 
 <!-- Barett -->
 <Item type="helmet" subtype="beret_hat" name="beret" size="medium">
-	<Image image="set:vag_hat.png image:full_image" />
+	<Image image="vag_hat.png" />
 	<RenderInfo name="vagabondHat" />
 	<Attribute
 			level_requirement="13"
@@ -167,7 +167,7 @@
 
 <!-- Magierhut -->
 <Item type="helmet" subtype="mage_hat" name="magus hat" size="medium">
-	<Image image="set:vag_hat.png image:full_image" />
+	<Image image="vag_hat.png" />
 	<RenderInfo name="vagabondHat" />
 	<Attribute
 			level_requirement="19"
@@ -201,7 +201,7 @@
 
 <!-- Konzilsturban -->
 <Item type="helmet" subtype="turban_hat" name="turban" size="medium">
-	<Image image="set:vag_hat.png image:full_image" />
+	<Image image="vag_hat.png" />
 	<Mesh file="turban_hat.mesh" />
 	<Attribute
 			level_requirement="22"

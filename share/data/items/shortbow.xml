@@ -3,7 +3,7 @@
 <!-- Uebungsbogen -->
 <Item type="weapon" subtype="pract_sbw" name="practice bow" size="medium">
 	<RenderInfo name="practiceBow" />
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<Attribute
 		level_requirement="1"
 		character_requirement="archer"
@@ -39,7 +39,7 @@
 <!-- Eibenkurzbogen -->
 <Item type="weapon" subtype="yew_sbw" name="yew shortbow" size="medium">
 	<RenderInfo name="practiceBow" />
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<Attribute
 		level_requirement="3"
 		character_requirement="archer"
@@ -75,7 +75,7 @@
 <!-- Kurzbogen -->
 <Item type="weapon" subtype="short_sbw" name="shortbow" size="medium">
 	<RenderInfo name="practiceBow" />
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<Attribute
 		level_requirement="5"
 		character_requirement="archer"
@@ -110,7 +110,7 @@
 
 <!-- Jagdbogen -->
 <Item type="weapon" subtype="hunter_sbw" name="hunting bow" size="medium">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="practiceBow" />
 	<Attribute
 		level_requirement="8"
@@ -147,7 +147,7 @@
 
 <!-- Rattanbogen -->
 <Item type="weapon" subtype="rattan_sbw" name="rattan bow" size="medium">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="practiceBow" />
 	<Attribute
 		level_requirement="12"
@@ -183,7 +183,7 @@
 
 <!-- Banditenbogen -->
 <Item type="weapon" subtype="bandit_sbw" name="bandit bow" size="medium">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="practiceBow" />
 	<Attribute
 		level_requirement="17"
@@ -219,7 +219,7 @@
 
 <!-- Nordauge -->
 <Item type="weapon" subtype="ice_sbw" name="northeye" size="medium">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="practiceBow" />
 	<Attribute
 		level_requirement="23"
@@ -257,7 +257,7 @@
 
 <!-- Kriegskurzbogen -->
 <Item type="weapon" subtype="battle_sbw" name="battle shortbow" size="medium">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="practiceBow" />
 	<Attribute
 		level_requirement="30"
@@ -293,7 +293,7 @@
 
 <!-- Kompositbogen -->
 <Item type="weapon" subtype="compst_sbw" name="composite shortbow" size="medium">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="practiceBow" />
 	<Attribute
 		level_requirement="35"
@@ -329,7 +329,7 @@
 
 <!-- Reiterbogen -->
 <Item type="weapon" subtype="rider_sbw" name="rider bow" size="medium">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="practiceBow" />
 	<Attribute
 		level_requirement="40"
@@ -365,7 +365,7 @@
 
 <!-- Kohlebogen -->
 <Item type="weapon" subtype="coal_sbw" name="coal bow" size="medium">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="practiceBow" />
 	<Attribute
 		level_requirement="45"
@@ -401,7 +401,7 @@
 
 <!-- Eschenbogen -->
 <Item type="weapon" subtype="ash_sbw" name="ash bow" size="medium">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="practiceBow" />
 	<Attribute
 		level_requirement="50"
@@ -438,7 +438,7 @@
 
 <!-- Fluchbogen -->
 <Item type="weapon" subtype="bane_sbw" name="bane bow" size="medium">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="practiceBow" />
 	<Attribute
 		level_requirement="55"
@@ -475,7 +475,7 @@
 
 <!-- Eichenkurzbogen -->
 <Item type="weapon" subtype="oak_sbw" name="oak shortbow" size="medium">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="practiceBow" />
 	<Attribute
 		level_requirement="60"
@@ -511,7 +511,7 @@
 
 <!-- Seelenbogen -->
 <Item type="weapon" subtype="soul_sbw" name="soul bow" size="medium">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="practiceBow" />
 	<Attribute
 		level_requirement="65"
@@ -547,7 +547,7 @@
 
 <!-- Sucher -->
 <Item type="weapon" subtype="seeker_sbw" name="seeker" size="medium">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="practiceBow" />
 	<Attribute
 		level_requirement="70"
@@ -583,7 +583,7 @@
 
 <!-- Chaosbogen -->
 <Item type="weapon" subtype="chaos_sbw" name="chaos shortbow" size="medium">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="practiceBow" />
 	<Attribute
 		level_requirement="75"
@@ -619,7 +619,7 @@
 
 <!-- Feenbogen -->
 <Item type="weapon" subtype="fairy_sbw" name="fairy bow" size="medium">
-	<Image image="set:bow.png image:full_image" />
+	<Image image="bow.png" />
 	<RenderInfo name="practiceBow" />
 	<Attribute
 		level_requirement="80"

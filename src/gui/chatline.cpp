@@ -38,6 +38,11 @@ ChatLine::ChatLine (Document* doc, const std::string& ceguiSkinName)
 	
 	chatline->setText("");
 	chatline->setAlwaysOnTop(true);
+	if (chatline->isPropertyPresent ("BackgroundColour"))
+	{
+		chatline->setProperty("BackgroundColour", "B2000000"); 
+	}
+
 	m_window = chatline;
 	
 	updateTranslation();
@@ -73,7 +78,8 @@ void ChatLine::updateTranslation()
 void ChatLine::setHistoryLine()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Editbox* line = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow ("Chatline"));
+	//CEGUI::Editbox* line = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow ("Chatline"));
+	CEGUI::Editbox* line = static_cast<CEGUI::Editbox*>(m_window);
 	
 	if (m_history_line == 0)
 	{

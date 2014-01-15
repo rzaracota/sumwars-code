@@ -1078,7 +1078,7 @@ void MainWindow::setupCursorItemImage()
 	CEGUIUtility::setWidgetSizeRel (m_custom_cursor, 0.04f, 0.06f);
 
 	// Just use a default image.
-	m_custom_cursor->setProperty ("Image", "Portrait");
+	m_custom_cursor->setProperty ("Image", "Portrait/Portrait");
 
 	m_custom_cursor->setVisible(false);
 	m_custom_cursor->setAlwaysOnTop(true);
@@ -1263,6 +1263,7 @@ void MainWindow::setupErrorDialogWindow()
 
 void MainWindow::setupChatContent()
 {
+	DEBUG ("Setting up chat content GUI window");
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	CEGUI::Window* label;

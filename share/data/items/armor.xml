@@ -1,7 +1,7 @@
 <!-- Tuchruestung -->
 <!-- WAR, PRI, ARC, MAG-->
 <Item type="armor" subtype="cloth_arm" name="cloth armor" size="big">
-	<Image image="set:leath_arm.png image:full_image" />
+	<Image image="leath_arm.png" />
 	<RenderInfo name="leathArm" />
 	<Attribute
 			level_requirement="1"
@@ -33,7 +33,7 @@
 <!-- Lederruestung -->
 <!-- WAR, PRI, ARC, MAG-->
 <Item type="armor" subtype="leath_arm" name="leather armor" size="big">
-	<Image image="set:leath_arm.png image:full_image" />
+	<Image image="leath_arm.png" />
 	<RenderInfo name="leathArm" />
 	<Attribute
 			level_requirement="3"
@@ -65,7 +65,7 @@
 <!-- Nietenruestung -->
 <!-- WAR, PRI, ARC-->
 <Item type="armor" subtype="rivet_arm" name="rivet armor" size="big">
-	<Image image="set:leath_arm.png image:full_image" />
+	<Image image="leath_arm.png" />
 	<RenderInfo name="rivetArmor" />
 	<Attribute
 			level_requirement="5"
@@ -97,7 +97,7 @@
 <!-- Banditenruestung -->
 <!-- WAR, ARC-->
 <Item type="armor" subtype="bandit_arm" name="bandit armor" size="big">
-	<Image image="set:leath_arm.png image:full_image" />
+	<Image image="leath_arm.png" />
 	<RenderInfo name="rivetArmorOld" />
 	<Attribute
 			level_requirement="8"
@@ -129,7 +129,7 @@
 <!-- Novizenruestung -->
 <!-- PRI-->
 <Item type="armor" subtype="novice_arm" name="novice armor" size="big">
-	<Image image="set:merc_arm.png image:full_image" />
+	<Image image="merc_arm.png" />
 	<RenderInfo name="noviceArmor" />
 	<Attribute
 			level_requirement="8"
@@ -161,7 +161,7 @@
 <!-- Soeldnerruestung -->
 <!-- WAR, PRI-->
 <Item type="armor" subtype="merc_arm" name="mercenary armor" size="big">
-	<Image image="set:merc_arm.png image:full_image" />
+	<Image image="merc_arm.png" />
 	<RenderInfo name="mercArm" />
 	<Attribute
 			level_requirement="13"
@@ -193,7 +193,7 @@
 <!-- Waldlaeuferhemd -->
 <!-- ARC -->
 <Item type="armor" subtype="rngsh_arm" name="ranger shirt" size="big">
-	<Image image="set:leath_arm.png image:full_image" />
+	<Image image="leath_arm.png" />
 	<RenderInfo name="rangerArmor" />
 	<Attribute
 			level_requirement="13"
@@ -225,7 +225,7 @@
 <!-- Assassinenruestung -->
 <!-- WAR, ARC -->
 <Item type="armor" subtype="assass_arm" name="assassin armor" size="big">
-	<Image image="set:leath_arm.png image:full_image" />
+	<Image image="leath_arm.png" />
 	<RenderInfo name="rangerArmor" />
 	<Attribute
 			level_requirement="19"
@@ -258,7 +258,7 @@
 <!-- Tempelruestung -->
 <!-- PRI -->
 <Item type="armor" subtype="temple_arm" name="temple armor" size="big">
-	<Image image="set:merc_arm.png image:full_image" />
+	<Image image="merc_arm.png" />
 	<RenderInfo name="templeArmor" />
 	<Attribute
 			level_requirement="19"
@@ -290,7 +290,7 @@
 <!-- Konzilsruestung -->
 <!-- WAR -->
 <Item type="armor" subtype="councl_arm" name="council armor" size="big">
-	<Image image="set:council_arm.png image:full_image" />
+	<Image image="council_arm.png" />
 	<RenderInfo name="counclArm" />
 	<Attribute
 			level_requirement="25"

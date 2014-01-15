@@ -385,6 +385,7 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 
 	void CEGUIUtility::loadImageset (const CEGUI::String& name)
 	{
+		DEBUG ("Loading imageset file [%s]", name.c_str ());
 #ifdef CEGUI_07
 		CEGUI::ImagesetManager::getSingleton().create(name);
 #else
@@ -486,6 +487,37 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 #endif
 	return 0;
 }
+
+//static
+CEGUI::Window* CEGUIUtility::getWindowForSystemNoEx (CEGUI::System* sys, const CEGUI::String& name)
+{
+	CEGUI::Window* root = sys->getDefaultGUIContext().getRootWindow();
+	if (0 == root)
+	{
+		DEBUG ("Warning! Attempting to get a unnamed widget from a NULL window");
+		return 0;
+	}
+
+	try
+	{
+		if (name.length () <= 0)
+		{
+			DEBUG ("Warning! Attempting to get an unnamed widget from the root window");
+		}
+
+		if (root->isChild (name))
+		{
+			return root->getChild (name);
+		}
+	}
+	catch (std::exception)
+	{
+		return 0;
+	}
+
+	return 0;
+}
+
 
 	std::vector <std::string> CEGUIUtility::SplitByChar (const std::string& source, const char delimiter)
 	{
@@ -667,7 +699,11 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 
 	bool CEGUIUtility::isWindowPresent (const CEGUI::String& name)
 	{
+#ifdef CEGUI_07
 		return (0 != getWindow (name));
+#else
+		return (0 != getWindowForSystemNoEx (CEGUI::System::getSingletonPtr (), name));
+#endif
 	}
 
 	bool CEGUIUtility::isWindowPresentForSystem (CEGUI::System* sys, const CEGUI::String& name)
