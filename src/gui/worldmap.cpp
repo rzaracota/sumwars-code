@@ -101,6 +101,8 @@ void Worldmap::update()
 		}
 		else
 		{
+			stream.str("");
+			stream << "WorldmapWindow_Holder_aux/WorldmapWindow/WaypointImage"<<cnt;
 			label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		}
 		
@@ -118,8 +120,7 @@ void Worldmap::update()
 	for (; cnt <ncount; cnt++)
 	{
 		stream.str("");
-		stream << "WaypointImage";
-		stream << cnt;
+		stream << "WorldmapWindow_Holder_aux/WorldmapWindow/WaypointImage"<<cnt;
 			
 		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		label->setVisible(false);
@@ -163,6 +164,8 @@ void Worldmap::update()
 			}
 			else
 			{
+				stream.str ("");
+				stream << "GameScreen/WorldmapWindow_Holder/WorldmapWindow_Holder_aux/WorldmapWindow/TownPortalImage";
 				label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 			}
 			
@@ -191,8 +194,8 @@ void Worldmap::update()
 	}
 	else {
 		if(tpset == true) {
-			stream.str("");
-			stream << "TownPortalImage";
+			stream.str ("");
+			stream << "GameScreen/WorldmapWindow_Holder/WorldmapWindow_Holder_aux/WorldmapWindow/TownPortalImage";
 			label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 			label->setVisible(false);
 		}

@@ -2079,12 +2079,11 @@ void MainWindow::updateItemInfo()
 			if (rpos.first<0 || rpos.first+len>1 || rpos.second<0 || rpos.second+height>0.9)
 				continue;
 			
-			stream.str("");
-			stream << "ItemLabel";
-			stream << nr;
-			
 			if (nr >= lcount)
 			{
+				stream.str("");
+				stream << "ItemLabel" << nr;
+
 				lcount ++;
 				label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), stream.str());
 				CEGUIUtility::addChildWidget (m_game_screen, label);
@@ -2107,6 +2106,8 @@ void MainWindow::updateItemInfo()
 			}
 			else
 			{
+				stream.str("");
+				stream << "GameScreen/ItemLabel" << nr;
 				label = CEGUIUtility::getWindow (stream.str());
 				
 			}
@@ -2152,8 +2153,7 @@ void MainWindow::updateItemInfo()
 		for (; nr<lcount; nr++)
 		{
 			stream.str("");
-			stream << "ItemLabel";
-			stream << nr;
+			stream << "GameScreen/ItemLabel" << nr;
 			
 			label = CEGUIUtility::getWindow (stream.str());
 			label->setVisible(false);
@@ -2166,8 +2166,8 @@ void MainWindow::updateItemInfo()
 		for (int i=0; i<lcount; i++)
 		{
 			stream.str("");
-			stream << "ItemLabel";
-			stream << i;
+			stream << "GameScreen/ItemLabel" << i;
+
 			label = CEGUIUtility::getWindow (stream.str());
 			label->setVisible(false);
 		}
@@ -2268,9 +2268,7 @@ void MainWindow::updatePartyInfo()
 	for (;i<7; i++)
 	{
 		stream.str("");
-		stream << "GameScreen/";
-		stream << "PartyMemberImage";
-		stream << i;
+		stream << "GameScreen/PartyMemberImage" << i;
 		img = CEGUIUtility::getWindow (stream.str());
 		if (img->isVisible())
 		{
@@ -2278,9 +2276,7 @@ void MainWindow::updatePartyInfo()
 		}
 		
 		stream.str("");
-		stream << "GameScreen/";
-		stream << "PartyMemberHealthBar";
-		stream << i;
+		stream << "GameScreen/PartyMemberHealthBar" << i;
 		bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow (stream.str()));
 		if (bar->isVisible())
 		{
@@ -2414,8 +2410,9 @@ void MainWindow::updateFloatingText()
 		}
 		else
 		{
+			stream.str("");
+			stream << "GameScreen/FloatingTextLabel" << nr;
 			label = CEGUIUtility::getWindow (stream.str());
-				
 		}
 		
 		if (label->getProperty("TextColours") != colour)
@@ -2465,8 +2462,7 @@ void MainWindow::updateFloatingText()
 	for (; nr<lcount; nr++)
 	{
 		stream.str("");
-		stream << "FloatingTextLabel";
-		stream << nr;
+		stream << "GameScreen/FloatingTextLabel" << nr;
 			
 		label = CEGUIUtility::getWindow (stream.str());
 		label->setVisible(false);

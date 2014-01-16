@@ -247,27 +247,24 @@ void DialogueWindow::update()
 			for (int i=0; i<Dialogue::NR_POSITIONS; i++)
 			{
 				stream.str("");
-				stream << "DialogWindow/DialogueLowerBar/";
-				stream << "SpeakerEmotionImage";
+				stream << "DialogWindow/DialogueLowerBar/SpeakerEmotionImage";
 				stream << i;
 				wimage = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 						
 				stream.str("");
-				stream << "DialogWindow/DialogueLowerBar/";
-				stream << "SpeakerNameLabel";
+				stream << "DialogWindow/DialogueLowerBar/SpeakerNameLabel";
 				stream << i;
 				wname = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 				
 				stream.str("");
-				stream << "DialogWindow/DialogueLowerBar/";
+				stream << "DialogWindow/DialogueLowerBar/SpeakerTextPane" << i << "/";
 				stream << "SpeakerTextLabel";
 				stream << i;
 				wtext = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 				
 				
 				stream.str("");
-				stream << "DialogWindow/DialogueLowerBar/";
-				stream << "SpeakerTextPane";
+				stream << "DialogWindow/DialogueLowerBar/SpeakerTextPane";
 				stream << i;
 				wpane = static_cast<CEGUI::ScrollablePane*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str()));
 				
@@ -683,8 +680,8 @@ void DialogueWindow::updateSpeechBubbles()
 		}
 		else
 		{
-			ques = (CEGUI::FrameWindow*)CEGUIUtility::getWindow ("QuestionWindow");
-			label = (CEGUI::Window*) CEGUIUtility::getWindow ("QuestionLabel");
+			ques = (CEGUI::FrameWindow*)CEGUIUtility::getWindow ("GameScreen/QuestionWindow");
+			label = (CEGUI::Window*) CEGUIUtility::getWindow ("GameScreen/QuestionWindow/QuestionLabel");
 			label->setProperty("HorzFormatting", "WordWrapLeftAligned");
 		}
 		
@@ -730,8 +727,7 @@ void DialogueWindow::updateSpeechBubbles()
 		for (it = question->m_answers.begin(); it != question->m_answers.end(); ++it)
 		{
 			stream.str("");
-			stream << "AnswerLabel";
-			stream << nr;
+			stream << "AnswerLabel" << nr;
 			
 			if (nr >= acount)
 			{
@@ -746,6 +742,8 @@ void DialogueWindow::updateSpeechBubbles()
 			}
 			else
 			{
+				stream.str ("");
+				stream << "GameScreen/QuestionWindow/AnswerLabel" << nr;
 				label = CEGUIUtility::getWindow (stream.str());
 			}
 			
@@ -806,8 +804,7 @@ void DialogueWindow::updateSpeechBubbles()
 		for (; nr<acount; nr++)
 		{
 			stream.str("");
-			stream << "AnswerLabel";
-			stream << nr;
+			stream << "GameScreen/QuestionWindow/AnswerLabel" << nr;
 			
 			label = CEGUIUtility::getWindow (stream.str());
 			label->setVisible(false);
@@ -816,7 +813,7 @@ void DialogueWindow::updateSpeechBubbles()
 	else if (acount !=0)
 	{
 		m_document->getGUIState()->m_shown_windows &= ~Document::QUESTIONBOX;
-		ques = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("QuestionWindow");
+		ques = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("GameScreen/QuestionWindow");
 		ques->setVisible(false);
 		
 	}
