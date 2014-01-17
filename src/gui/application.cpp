@@ -951,12 +951,15 @@ bool Application::initCEGUI()
 	DEBUG ("Creating fonts");
 
 	// Load the usable font list.
-	CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-8.font", (CEGUI::utf8*)"GUI");
-	CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-10.font", (CEGUI::utf8*)"GUI");
-	CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-12.font", (CEGUI::utf8*)"GUI");
-	CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-16.font", (CEGUI::utf8*)"GUI");
-	CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSans-10.font", (CEGUI::utf8*)"GUI");
-	CEGUIUtility::addFont ((CEGUI::utf8*)"SWB_S.font", (CEGUI::utf8*)"GUI");
+	//CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-8.font", (CEGUI::utf8*)"GUI");
+	//CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-10.font", (CEGUI::utf8*)"GUI");
+	//CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-12.font", (CEGUI::utf8*)"GUI");
+	//CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-16.font", (CEGUI::utf8*)"GUI");
+	//CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSans-10.font", (CEGUI::utf8*)"GUI");
+	//CEGUIUtility::addFont ((CEGUI::utf8*)"SWB-S.font", (CEGUI::utf8*)"GUI");
+	//CEGUIUtility::addFont ((CEGUI::utf8*)"SWB-M.font", (CEGUI::utf8*)"GUI");
+	//CEGUIUtility::addFont ((CEGUI::utf8*)"SWB-L.font", (CEGUI::utf8*)"GUI");
+	//CEGUIUtility::addFont ((CEGUI::utf8*)"SWB-XL.font", (CEGUI::utf8*)"GUI");
 
 	// Set the default font to use based on the current display resolution.
 	int configuredWidth, configuredHeight;
