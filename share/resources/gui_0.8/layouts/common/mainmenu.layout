@@ -49,11 +49,12 @@
         </Window>
         
         <Window type="SWB/StaticText" name="SumwarsVersionLabel" >
+            <Property name="Font" value="SWB-S" />
             <Property name="Text" value="VersionLabel" />
             <Property name="Alpha" value="0.7" />
-            <Property name="FrameEnabled" value="False" />
+            <Property name="FrameEnabled" value="True" />
             <Property name="HorzFormatting" value="RightAligned" />
-            <Property name="Area" value="{{0.583594,0},{0.96901,0},{0.958594,0},{0.992448,0}}" />
+            <Property name="Area" value="{{0.583594,0},{0.86901,0},{0.958594,0},{0.992448,0}}" />
             <Property name="BackgroundEnabled" value="False" />
         </Window>
         

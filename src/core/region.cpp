@@ -1508,6 +1508,7 @@ bool Region::moveObject(WorldObject* object, Vector pos)
 	}
 	else
 	{
+		DEBUG ("Moved object to [%d] x [%d] ; in region sized %d x %d", x_new, y_new, m_dimx, m_dimy);
 		Gridunit *gu = &(m_data_grid)[x_old][y_old];
 		result =gu->deleteObject(object, object->getGridLocation()->m_index);
 		if (result == false)

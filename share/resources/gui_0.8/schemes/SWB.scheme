@@ -12,10 +12,11 @@
   <Font name="DejaVuSerif-12" filename="DejaVuSerif-12.font" />
   <Font name="DejaVuSerif-16" filename="DejaVuSerif-16.font" />
 
-  <Font name="SWB-S" filename="FellTypes-8.font" />
-  <Font name="SWB-M" filename="FellTypes-10.font" />
-  <Font name="SWB-L" filename="FellTypes-12.font" />
-  <Font name="SWB-XL" filename="FellTypes-16.font" />
+  <Font name="SWB-XS" filename="SWB-XS.font" />
+  <Font name="SWB-S" filename="SWB-S.font" />
+  <Font name="SWB-M" filename="SWB-M.font" />
+  <Font name="SWB-L" filename="SWB-L.font" />
+  <Font name="SWB-XL" filename="SWB-XL.font" />
 
   <LookNFeel filename="SWB.looknfeel" />
   <WindowRendererSet filename="CEGUICoreWindowRendererSet" />
