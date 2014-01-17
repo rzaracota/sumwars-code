@@ -1052,8 +1052,8 @@ void CEGUIUtility::setWidgetSizeAbs (CEGUI::Window* widget, float width, float h
 	widget->setSize (CEGUI::UVector2 (cegui_reldim (width), cegui_reldim (height)));
 	
 #else
-	CEGUI::UDim horz (width, 0);
-	CEGUI::UDim vert (height, 0);
+	CEGUI::UDim horz (0, width);
+	CEGUI::UDim vert (0, height);
 	CEGUI::USize mySize (horz, vert);
 	widget->setSize (mySize);
 #endif
