@@ -5,7 +5,7 @@
         <Property name="Alpha" value="1.0" />
         <!--<Property name="TitleText" value="Options" />-->
         <Property name="Text" value="Options" />
-        <Property name="TitlebarFont" value="DejaVuSerif-12" />
+        <Property name="TitlebarFont" value="SWB-L" />
         <Property name="CloseButtonAlignment" value="1" />
         <Property name="Visible" value="True" />
         <Property name="InheritsAlpha" value="False" />

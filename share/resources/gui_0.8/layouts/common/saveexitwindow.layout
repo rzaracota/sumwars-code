@@ -2,7 +2,7 @@
     <Window type="SWB/FrameWindow" name="SaveExitWindow" >
         <Property name="Area" value="{{0.3,0},{0.25,0},{0.7,0},{0.55,0}}" />
         <Property name="Text" value="Save and Exit" />
-        <Property name="TitlebarFont" value="DejaVuSerif-12" />
+        <Property name="TitlebarFont" value="SWB-L" />
         <Property name="CloseButtonAlignment" value="1" />
         <Property name="SizingEnabled" value="False" />
         <Property name="DragMovingEnabled" value="False" />

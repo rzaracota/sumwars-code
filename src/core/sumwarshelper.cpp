@@ -246,11 +246,11 @@ bool SumwarsHelper::init()
 	guiAspectRatios_[std::string ("016_009")] = (double)16 / (double)9;
 
 	// Fill in the expected default fonts for each screen resolution (height).
-	guiDefaultFonts_[600] = std::string ("DejaVuSerif-8");
-	guiDefaultFonts_[768] = std::string ("DejaVuSerif-10");
-	guiDefaultFonts_[1024] = std::string ("DejaVuSerif-10");
-	guiDefaultFonts_[1050] = std::string ("DejaVuSerif-12");
-	guiDefaultFonts_[1080] = std::string ("DejaVuSerif-12");
+	guiDefaultFonts_[600] = std::string ("SWB-S");
+	guiDefaultFonts_[768] = std::string ("SWB-S");
+	guiDefaultFonts_[1024] = std::string ("SWB-M");
+	guiDefaultFonts_[1050] = std::string ("SWB-M");
+	guiDefaultFonts_[1080] = std::string ("SWB-M");
 
 	return true;
 }

@@ -70,7 +70,7 @@
         
         <Window type="SWB/FrameWindow" name="SaveGameSelectionFrame" >
             <Property name="FrameEnabled" value="False" />
-            <Property name="TitlebarFont" value="DejaVuSans-10" />
+            <Property name="TitlebarFont" value="SWB-M" />
             <Property name="InheritsAlpha" value="False" />
             <Property name="SizingEnabled" value="False" />
             <Property name="TitlebarEnabled" value="False" />

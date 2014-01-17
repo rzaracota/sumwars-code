@@ -139,13 +139,13 @@
                         <Property name="FrameEnabled" value="True" />
                         <Property name="Area" value="{{0.0,0},{0.0,0},{0.08,0},{0.30,0}}" />
                         <Property name="BackgroundEnabled" value="True" />
-                        <Property name="Font" value="SWB_S" />
+                        <Property name="Font" value="SWB-S" />
                     </Window>
                     <Window type="SWB/StaticText" name="BeltPotionCounter0" >
                         <Property name="FrameEnabled" value="False" />
                         <Property name="Area" value="{{0.08,0},{0.6,0},{0.2,0},{1.0,0}}" />
                         <Property name="BackgroundEnabled" value="False" />
-                        <Property name="Font" value="SWB_S" />
+                        <Property name="Font" value="SWB-S" />
                     </Window>
     
                     <!-- Second item -->                
@@ -163,13 +163,13 @@
                         <Property name="FrameEnabled" value="True" />
                         <Property name="Area" value="{{0.2,0},{0.0,0},{0.28,0},{0.30,0}}" />
                         <Property name="BackgroundEnabled" value="True" />
-                        <Property name="Font" value="SWB_S" />
+                        <Property name="Font" value="SWB-S" />
                     </Window>
                     <Window type="SWB/StaticText" name="BeltPotionCounter1" >
                         <Property name="FrameEnabled" value="False" />
                         <Property name="Area" value="{{0.28,0},{0.6,0},{0.4,0},{1.0,0}}" />
                         <Property name="BackgroundEnabled" value="False" />
-                        <Property name="Font" value="SWB_S" />
+                        <Property name="Font" value="SWB-S" />
                     </Window>
 
                     
@@ -188,13 +188,13 @@
                         <Property name="FrameEnabled" value="True" />
                         <Property name="Area" value="{{0.4,0},{0.0,0},{0.48,0},{0.30,0}}" />
                         <Property name="BackgroundEnabled" value="True" />
-                        <Property name="Font" value="SWB_S" />
+                        <Property name="Font" value="SWB-S" />
                     </Window>
                     <Window type="SWB/StaticText" name="BeltPotionCounter2" >
                         <Property name="FrameEnabled" value="False" />
                         <Property name="Area" value="{{0.48,0},{0.6,0},{0.6,0},{1.0,0}}" />
                         <Property name="BackgroundEnabled" value="False" />
-                        <Property name="Font" value="SWB_S" />
+                        <Property name="Font" value="SWB-S" />
                     </Window>
 
                     <!-- Fourth item -->
@@ -212,13 +212,13 @@
                         <Property name="FrameEnabled" value="True" />
                         <Property name="Area" value="{{0.6,0},{0.0,0},{0.68,0},{0.30,0}}" />
                         <Property name="BackgroundEnabled" value="True" />
-                        <Property name="Font" value="SWB_S" />
+                        <Property name="Font" value="SWB-S" />
                     </Window>
                     <Window type="SWB/StaticText" name="BeltPotionCounter3" >
                         <Property name="FrameEnabled" value="False" />
                         <Property name="Area" value="{{0.68,0},{0.6,0},{0.8,0},{1.0,0}}" />
                         <Property name="BackgroundEnabled" value="False" />
-                        <Property name="Font" value="SWB_S" />
+                        <Property name="Font" value="SWB-S" />
                     </Window>
 
 
@@ -237,13 +237,13 @@
                         <Property name="FrameEnabled" value="True" />
                         <Property name="Area" value="{{0.8,0},{0.0,0},{0.88,0},{0.30,0}}" />
                         <Property name="BackgroundEnabled" value="True" />
-                        <Property name="Font" value="SWB_S" />
+                        <Property name="Font" value="SWB-S" />
                     </Window>
                     <Window type="SWB/StaticText" name="BeltPotionCounter4" >
                         <Property name="FrameEnabled" value="False" />
                         <Property name="Area" value="{{0.88,0},{0.6,0},{1.0,0},{1.0,0}}" />
                         <Property name="BackgroundEnabled" value="False" />
-                        <Property name="Font" value="SWB_S" />
+                        <Property name="Font" value="SWB-S" />
                     </Window>
                     <!--
                     <Window type="SWB/StaticImage" name="SlotNumbers" >

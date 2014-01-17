@@ -3,7 +3,7 @@
         <Property name="Area" value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
         <Property name="Alpha" value="1" />
         <Property name="Text" value="Trade" />
-        <Property name="TitlebarFont" value="DejaVuSerif-12" />
+        <Property name="TitlebarFont" value="SWB-L" />
         <Property name="CloseButtonAlignment" value="1" />
         <Property name="MousePassThroughEnabled" value="True" />
         <Property name="SizingEnabled" value="False" />

@@ -5,7 +5,7 @@
         <Property name="Text" value="Gui" />
         <Property name="Alpha" value="0.1" />
         <Property name="FrameEnabled" value="False" />
-        <Property name="TitlebarFont" value="DejaVuSans-10" />
+        <Property name="TitlebarFont" value="SWB-M" />
         <Property name="SizingEnabled" value="False" />
         <Property name="TitlebarEnabled" value="False" />
         <Property name="Area" value="{{0.275196,0},{0.289837,0},{0.736134,0},{0.827709,0}}" />

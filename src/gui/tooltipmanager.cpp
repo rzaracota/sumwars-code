@@ -16,6 +16,7 @@
 #include "tooltipmanager.h"
 #include "ceguiutility.h"
 #include "config.h"
+#include "debug.h"
 
 template<> TooltipManager* Ogre::Singleton<TooltipManager>::SUMWARS_OGRE_SINGLETON = 0;
 
@@ -33,6 +34,7 @@ TooltipManager::TooltipManager():
 
 void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string > list, float timeVisible, const CEGUI::Font* font, Tooltip::TooltipType type )
 {
+	DEBUG ("Creating a tooltip for duration: %.2f", timeVisible);
 	CEGUI::Window *gamescreen = CEGUIUtility::getWindow ("SW");
     std::string msg;
     CEGUI::UVector2 size;
@@ -59,7 +61,7 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
 
     if ( type == Tooltip::Main )
     {
-		Tooltip *tt = new Tooltip ( gamescreen, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.7f );
+		Tooltip *tt = new Tooltip ( gamescreen, windowName.str(), m_fadeInTime, m_fadeOutTime, timeVisible, 0.7f );
         fadeAllOut();
         m_CurrentMain = tt;
         tt->create ( msg, position, size, tempFont );
