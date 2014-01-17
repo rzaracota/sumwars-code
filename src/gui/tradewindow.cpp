@@ -255,7 +255,7 @@ void TradeWindow::update()
 	for (i=0;i<15;i++)
 	{
 		out_stream.str("");
-		out_stream << "TradeWindow_Holder/TradeWindow/tradewindow_aux/TraderBigItem" << i<< "Label";
+		out_stream << "TradeWindow/tradewindow_aux/TraderBigItem" << i<< "Label";
 		img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, out_stream.str().c_str());
 		it = equ->getItem(Equipement::BIG_ITEMS+i + m_big_sheet*15);
 		updateItemWindow(img,it,player,player->getEquipement()->getGold());
@@ -264,7 +264,7 @@ void TradeWindow::update()
 	for (i=0;i<21;i++)
 	{
 		out_stream.str("");
-		out_stream << "TradeWindow_Holder/TradeWindow/tradewindow_aux/TraderMediumItem" << i<< "Label";
+		out_stream << "TradeWindow/tradewindow_aux/TraderMediumItem" << i<< "Label";
 		img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, out_stream.str().c_str());
 		it = equ->getItem(Equipement::MEDIUM_ITEMS+i + m_medium_sheet*21);
 		updateItemWindow(img,it,player,player->getEquipement()->getGold());
@@ -273,7 +273,7 @@ void TradeWindow::update()
 	for (i=0;i<30;i++)
 	{
 		out_stream.str("");
-		out_stream << "TradeWindow_Holder/TradeWindow/tradewindow_aux/TraderSmallItem" << i<< "Label";
+		out_stream << "TradeWindow/tradewindow_aux/TraderSmallItem" << i<< "Label";
 		img =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, out_stream.str().c_str());
 		it = equ->getItem(Equipement::SMALL_ITEMS+i + m_small_sheet*30);
 		updateItemWindow(img,it,player,player->getEquipement()->getGold());
