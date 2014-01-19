@@ -59,18 +59,18 @@ bool Gridunit::deleteObject(WorldObject* object, short index)
 	std::vector<WorldObject*>& arr = getObjects(g);
 
 	int size = arr.size();
-	DEBUG ("deleting obj %i (%s) from group %i", object->getId (), object->getName ().getRawText ().c_str (), g);
+	//DEBUG ("deleting obj %i (%s) from group %i", object->getId (), object->getName ().getRawText ().c_str (), g);
 	if (index != -1 && arr[index]==object)
 	{
-		DEBUG ("index = %d, arr[index] is the object to delete", index);
+		//DEBUG ("index = %d, arr[index] is the object to delete", index);
 		// Stelle an der geloescht werden soll ist explizit vorgegeben
 		
 		// Letztes Objekt an die Stelle des geloeschten kopieren
-		DEBUG ("Setting arr[%d] to arr[%d] (last item)", index, size - 1);
+		//DEBUG ("Setting arr[%d] to arr[%d] (last item)", index, size - 1);
 		arr[index] = arr[size-1];
 		arr[index]->getGridLocation()->m_index = index;
 
-		DEBUG ("resizing (v1) arr to new size: %d", size - 1);
+		//DEBUG ("resizing (v1) arr to new size: %d", size - 1);
 		if (size == 1)
 		{
 			arr.clear ();
@@ -79,7 +79,7 @@ bool Gridunit::deleteObject(WorldObject* object, short index)
 		{
 			arr.resize(size-1);
 		}
-		DEBUG ("done resizing");
+		//DEBUG ("done resizing");
 		return true;
 	}
 	else
@@ -94,7 +94,7 @@ bool Gridunit::deleteObject(WorldObject* object, short index)
 				// Letztes Objekt an die Stelle des geloeschten kopieren
 				arr[i] = arr[size-1];
 				arr[i]->getGridLocation()->m_index = i;
-				DEBUG ("resizing (v2) arr to new size: %d", size - 1);
+				//DEBUG ("resizing (v2) arr to new size: %d", size - 1);
 				if (size == 1)
 				{
 					arr.clear ();

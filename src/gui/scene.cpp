@@ -75,11 +75,18 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	minimap_camera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
 	minimap_camera->setFOVy(Ogre::Degree(90.0));
 
-	Ogre::TexturePtr minimap_texture = Ogre::TextureManager::getSingleton().createManual( "minimap_tex", "General", Ogre::TEX_TYPE_2D,
-                                                                                          512, 512, 0, Ogre::PF_R8G8B8A8, Ogre::TU_RENDERTARGET );
+	Ogre::TexturePtr minimap_texture = 
+		Ogre::TextureManager::getSingleton ().createManual ("minimap_tex"
+				, "General"
+				, Ogre::TEX_TYPE_2D
+				, 512
+				, 512
+				, 0
+				, Ogre::PF_R8G8B8A8
+				, Ogre::TU_RENDERTARGET );
 
 	Ogre::RenderTarget* minimap_rt = minimap_texture->getBuffer()->getRenderTarget();
-	minimap_rt ->setAutoUpdated(false);
+	minimap_rt ->setAutoUpdated (false);
 
 	Ogre::Viewport *v = minimap_rt->addViewport( minimap_camera );
 	v->setClearEveryFrame( true );
@@ -89,6 +96,8 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	DEBUGX("render target size %i %i",minimap_rt ->getWidth (), minimap_rt ->getHeight ());
 	DEBUGX("viewport size %i %i ratio %f",v->getActualWidth(),v->getActualHeight(), ratio);
 	minimap_camera->setAspectRatio(ratio);
+
+	minimap_rt->update ();
 
 	// get the OgreRenderer from CEGUI and create a CEGUI texture from the Ogre texture
 	CEGUI::OgreRenderer* rendererPtr = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer());
@@ -103,7 +112,7 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 				CEGUIUtility::Size (ceguiTex.getSize ().d_width, ceguiTex.getSize ().d_height ),
 				CEGUIUtility::Vector2f (0.0f, 0.0f) );
 #else
-	CEGUI::Texture &ceguiTex = rendererPtr->createTexture (minimap_texture->getName ());
+	CEGUI::Texture &ceguiTex = rendererPtr->createTexture (minimap_texture->getName (), minimap_texture);
 	{
 		CEGUI::String imageName("minimap_img");
 		CEGUI::TextureTarget*   d_textureTarget;

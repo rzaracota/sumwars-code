@@ -296,8 +296,8 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	Item *currentEqItemOffhand = 0;
 	Item *attachedItem = player->getEquipement()->getItem (Equipement::CURSOR_ITEM);
 
-	std::string primary_eq_head = gettext("Equipped:\n");
-	std::string secondary_eq_head = gettext("Equipped:\n");
+	std::string primary_eq_head = gettext("Equipped:");
+	std::string secondary_eq_head = gettext("Equipped:");
 	
 	switch ( item->m_type )
 	{
@@ -344,8 +344,8 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 		case Item::RING:
 			currentEqItem = player->getEquipement()->getItem ( Equipement::RING_LEFT );
 			currentEqItemOffhand = player->getEquipement()->getItem ( Equipement::RING_RIGHT );
-			primary_eq_head = gettext("Equipped (left):\n");
-			secondary_eq_head = gettext("Equipped (right):\n");
+			primary_eq_head = gettext("Equipped (left):");
+			secondary_eq_head = gettext("Equipped (right):");
 			break;
 
 		case Item::AMULET:
@@ -384,9 +384,16 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	{
 		l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, secondary_eq_head, CEGUIUtility::Black ));
 	}
-	l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, gettext("Hovered:\n"), CEGUIUtility::Black ));
+	l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, gettext("Hovered:"), CEGUIUtility::Black ));
 	std::ostringstream out_stream;
 
+	//XXX-begin; TODO: delete this
+	DEBUG ("Obtained description for item as string list.");
+	for (std::list <std::string>::iterator it = l.begin (); it != l.end (); ++ it)
+	{
+		DEBUG ("[%s]", it->c_str ());
+	}
+	//XXX-end
 	tMgr->createTooltip ( img, l, 0, font, Tooltip::Main );
 
 	// create secondary tooltips

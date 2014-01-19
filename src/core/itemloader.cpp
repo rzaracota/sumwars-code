@@ -61,7 +61,7 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 	ElementAttrib attr;
 	attr.parseElement(node->ToElement());
 	
-	std::string type;
+	std::string type ("");
 	attr.getString("type", type);
 	if (type == "armor")
 		item_data->m_type = Item::ARMOR;
@@ -97,7 +97,7 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 	}
 	
 	
-	std::string size;
+	std::string size ("");
 	attr.getString("size", size);
 	if (size == "small")
 		item_data->m_size = Item::SMALL;
@@ -114,7 +114,7 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 	}
 	
 					
-	std::string consumable;
+	std::string consumable ("");
 	attr.getString("consumable",consumable ,"false");
 	item_data->m_consumable = (consumable == "true");
 	attr.getFloat("consume_timer",item_data->m_consume_timer,0);
@@ -129,7 +129,7 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 			
 			if (!strcmp(child->Value(), "Image"))
 			{
-				std::string image;
+				std::string image ("");
 				attr.getString("image", image);
 				if (item_data->m_subtype != "")
 				{
@@ -139,7 +139,7 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 			}
 			else if (!strcmp(child->Value(), "Mesh"))
 			{
-				std::string file;
+				std::string file ("");
 				attr.getString("file", file);
 				if (item_data->m_subtype != "")
 				{
@@ -150,7 +150,7 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 			}
 			else if (!strcmp(child->Value(), "RenderInfo"))
 			{
-				std::string file;
+				std::string file ("");
 				attr.getString("name", file);
 				if (item_data->m_subtype != "")
 				{
@@ -261,7 +261,7 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 				if (item_data->m_weapon_attr == 0)
 					item_data->m_weapon_attr = new WeaponAttr;
 				
-				std::string type;
+				std::string type ("");
 				attr.getString("type",type);
 
 			}
@@ -270,7 +270,7 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 				if (item_data->m_equip_effect == 0)
 					item_data->m_equip_effect = new CreatureBaseAttrMod;
 				
-				std::string type;
+				std::string type ("");
 				attr.getString("type",type);
 				
 				if (type == "blind")
@@ -295,7 +295,7 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 				if (item_data->m_equip_effect == 0)
 					item_data->m_equip_effect = new CreatureBaseAttrMod;
 				
-				std::string type;
+				std::string type ("");
 				attr.getString("type",type);
 				item_data->m_equip_effect->m_xabilities.insert(type);
 			}
@@ -335,7 +335,7 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 				attr.getShort("damage_burning_power", dmg.m_status_mod_power[Damage::BURNING]);
 				
 				attr.getShort("dattack_speed", item_data->m_weapon_attr->m_dattack_speed);
-				std::string twohanded;
+				std::string twohanded ("");
 				attr.getString("two_handed",twohanded);
 				item_data->m_weapon_attr->m_two_handed = (twohanded == "yes");
 				attr.getFloat("attack_range", item_data->m_weapon_attr->m_attack_range);

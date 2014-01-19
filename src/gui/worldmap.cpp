@@ -165,7 +165,7 @@ void Worldmap::update()
 			else
 			{
 				stream.str ("");
-				stream << "GameScreen/WorldmapWindow_Holder/WorldmapWindow_Holder_aux/WorldmapWindow/TownPortalImage";
+				stream << "WorldmapWindow_Holder_aux/WorldmapWindow/TownPortalImage";
 				label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 			}
 			
@@ -195,7 +195,7 @@ void Worldmap::update()
 	else {
 		if(tpset == true) {
 			stream.str ("");
-			stream << "GameScreen/WorldmapWindow_Holder/WorldmapWindow_Holder_aux/WorldmapWindow/TownPortalImage";
+			stream << "WorldmapWindow_Holder_aux/WorldmapWindow/TownPortalImage";
 			label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 			label->setVisible(false);
 		}

@@ -862,7 +862,7 @@ void Document::onButtonHostGame()
 		message->setInheritsAlpha(false);
 		message->setVisible(true);
 		message->setModalState(true);
-		CEGUIUtility::getWindow ("WarningDialogLabel")->setText((CEGUI::utf8*) gettext ("Please select a character first!"));
+		CEGUIUtility::getWindow ("WarningDialogWindow/WarningDialogLabel")->setText((CEGUI::utf8*) gettext ("Please select a character first!"));
 
 		DEBUG ("Warning: Tried to host a game without a selected char!");
 		return;
@@ -883,7 +883,7 @@ void Document::onButtonJoinGame()
 		message->setInheritsAlpha(false);
 		message->setVisible(true);
 		message->setModalState(true);
-		CEGUIUtility::getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) gettext("Please select a character first!"));
+		CEGUIUtility::getWindow ("WarningDialogWindow/WarningDialogLabel")->setText((CEGUI::utf8*) gettext("Please select a character first!"));
 
 		DEBUG ("Warning: Tried to join a game without a selected char!");
 		return;
@@ -1997,7 +1997,7 @@ void Document::showWarning (const std::string& textMessage)
 	message->setInheritsAlpha(false);
 	message->setVisible(true);
 	message->setModalState(true);
-	CEGUIUtility::getWindow( "WarningDialogLabel")->setText((CEGUI::utf8*) textMessage.c_str ());
+	CEGUIUtility::getWindow ("WarningDialogWindow/WarningDialogLabel")->setText((CEGUI::utf8*) textMessage.c_str ());
 
 	getGUIState()->m_shown_windows |= MESSAGE;
 	m_modified |= WINDOWS_MODIFIED;

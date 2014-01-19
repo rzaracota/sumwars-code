@@ -32,11 +32,11 @@ TooltipManager::TooltipManager():
 	m_DefaultFont = CEGUIUtility::getDefaultFont ();
 }
 
-void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string > list, float timeVisible, const CEGUI::Font* font, Tooltip::TooltipType type )
+void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string > textlist, float timeVisible, const CEGUI::Font* font, Tooltip::TooltipType type )
 {
 	DEBUG ("Creating a tooltip for duration: %.2f", timeVisible);
 	CEGUI::Window *gamescreen = CEGUIUtility::getWindow ("SW");
-    std::string msg;
+    std::string msg ("");
     CEGUI::UVector2 size;
     std::ostringstream windowName;
     windowName << "Tooltip__" << m_toolTipsCreatedCount;
@@ -44,12 +44,15 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
 
     if ( font )
     {
-        size = CEGUIUtility::getWindowSizeForText ( list, font, msg );
+        size = CEGUIUtility::getWindowSizeForText ( textlist, font, msg );
         tempFont = const_cast<CEGUI::Font*> (font);
     }
     else
-        size = CEGUIUtility::getWindowSizeForText ( list, m_DefaultFont, msg );
-
+	{
+        size = CEGUIUtility::getWindowSizeForText ( textlist, m_DefaultFont, msg );
+	}
+	DEBUG ("Tooltip font is %s, which looks best at %.2f x %.2f", tempFont->getName ().c_str (), tempFont->getNativeResolution ().d_width, tempFont->getNativeResolution ().d_height);
+	//DEBUG ("Message to display is [%s]", msg.c_str ());
 	// TODO: maybe store mouse position using own class?
 	CEGUIUtility::Vector2f mousePos = CEGUIUtility::getMouseCursorPosition (m_CEGUISystem);
     //CEGUI::Vector2 mousePos = CEGUI::MouseCursor::getSingleton().getPosition();

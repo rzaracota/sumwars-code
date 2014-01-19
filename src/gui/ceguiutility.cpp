@@ -157,7 +157,7 @@ std::list< std::string > CEGUIUtility::getTextAsList(const std::string &text)
     return l;
 }
 
-CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> list, const CEGUI::Font *font, std::string &added)
+CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> textlist, const CEGUI::Font *font, std::string &added)
 {
     using namespace CEGUI;
 
@@ -173,8 +173,8 @@ CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> list, 
     added.clear();
 	size_t count = 0;
 	
-    for (std::list<std::string>::iterator iter = list.begin();
-		iter != list.end();
+    for (std::list<std::string>::iterator iter = textlist.begin();
+		iter != textlist.end();
 		++iter)
     {
 		std::string & s = *iter;
@@ -194,7 +194,8 @@ CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> list, 
 				}
 			}
 			
-			added += s + '\n';
+			added.append (s.c_str ());
+			added.append ("\n");
 
 			float tempwidth = font->getTextExtent(stripColours(s).c_str()) ;
 			if (tempwidth > textWidth)
@@ -203,8 +204,8 @@ CEGUI::UVector2 CEGUIUtility::getWindowSizeForText(std::list<std::string> list, 
     }
 
 	// increase the counter intil we have at least one line break more than we have text
-	if (count <= list.size())  
-		count = list.size() + 1;
+	if (count <= textlist.size())  
+		count = textlist.size() + 1;
 
 	textHeight = count * (font->getLineSpacing());
 
