@@ -179,6 +179,7 @@ void DialogueWindow::update()
 					if (wname->getText() != (CEGUI::utf8*) name.c_str())
 					{
 						wname->setText((CEGUI::utf8*) name.c_str());
+						DEBUG ("Set text of widget (a) [%s] to [%s]", wname->getNamePath ().c_str (), wname->getText ().c_str ());
 					}
 					
 					if (!wname->isVisible())
@@ -216,6 +217,7 @@ void DialogueWindow::update()
 							wtext->setText((CEGUI::utf8*)txt.text.c_str());
 #else
 							wtext->setText((CEGUI::utf8*)text.c_str());
+							DEBUG ("Set text of widget (b) [%s] to [%s]", wname->getNamePath ().c_str (), wname->getText ().c_str ());
 #endif
 						}
 						wtext->setVisible(true);
@@ -411,6 +413,7 @@ void DialogueWindow::updateSpeechBubbles()
 			label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,picsize+10), CEGUI::UDim(0,5)));
 			
 			label->setText("");
+			DEBUG ("Set text of widget (c) [%s] to [%s]", label->getNamePath ().c_str (), label->getText ().c_str ());
 			label->setAlpha(0.9);
 			
 			stream.str("");
@@ -443,6 +446,7 @@ void DialogueWindow::updateSpeechBubbles()
 			
 		if (label->getText() != (CEGUI::utf8*) text.c_str())
 		{
+			DEBUG ("diff label [%s], [%s]", label->getText ().c_str (), text.c_str ());
 
 			const CEGUI::Font* font = label->getFont();
 			
@@ -454,7 +458,8 @@ void DialogueWindow::updateSpeechBubbles()
 			FormatedText txt = CEGUIUtility::fitTextToWindow((CEGUI::utf8*) text.c_str(), maxwidth, CEGUIUtility::WordWrapLeftAligned, font);
 			size_t lines = txt.lines;
 			label->setText((CEGUI::utf8*) txt.text.c_str());
-			
+			DEBUG ("Set text of widget (d) [%s] to [%s]", label->getNamePath ().c_str (), label->getText ().c_str ());
+
 			// Test to see whether the text can fit a single line
 			if (txt.lines <= 1)
 			{
@@ -584,13 +589,14 @@ void DialogueWindow::updateSpeechBubbles()
 		if (label->getText() != ctext)
 		{
 			label->setText((CEGUI::utf8*)ctext);
+			DEBUG ("Set text of widget (e) [%s] to [%s]", label->getNamePath ().c_str (), label->getText ().c_str ());
 		}
 		
 		label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,horzoffset), CEGUI::UDim(0,height)));
 		CEGUIUtility::setWidgetSize (label, CEGUI::UVector2(cegui_reldim(1.0f), CEGUI::UDim(0,elemheight)));
 		height += elemheight + 20;
 		
-		// Antworten einfuegen
+		// Insert answers
 		std::list < std::pair<TranslatableString, std::string> >::iterator it;
 		for (it = question->m_answers.begin(); it != question->m_answers.end(); ++it)
 		{
@@ -604,15 +610,22 @@ void DialogueWindow::updateSpeechBubbles()
 				CEGUIUtility::addChildWidget (ques, label);
 				label->setProperty("FrameEnabled", "false");
 				label->setProperty("BackgroundEnabled", "false");
-				//label->setProperty("HorzFormatting", "WordWrapLeftAligned");
+				label->setMousePassThroughEnabled (false);
 				label->setID(nr);
+//				label->setAlwaysOnTop (true);
 				label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&DialogueWindow::onAnswerClicked, this));
+				label->subscribeEvent(CEGUI::Window::EventMouseEntersArea, CEGUI::Event::Subscriber(&DialogueWindow::onAnswerEnterArea, this));
+				label->subscribeEvent(CEGUI::Window::EventMouseLeavesArea, CEGUI::Event::Subscriber(&DialogueWindow::onAnswerLeaveArea, this));
 			}
 			else
 			{
 				stream.str ("");
 				stream << "GameScreen/QuestionWindow/AnswerLabel" << nr;
+				//DEBUG ("Inserting (existing) answer label [%s]", stream.str ().c_str ());
 				label = CEGUIUtility::getWindow (stream.str());
+				// Augustin Preda, 2014.01.19: for some reason, there are several always on top windows, and not all can be at the front.
+				// These options however must be :-)
+				label->moveToFront ();
 			}
 			
 			CEGUI::String cstring = (CEGUI::utf8*) it->first.getTranslation().c_str();
@@ -636,10 +649,19 @@ void DialogueWindow::updateSpeechBubbles()
 			}
 			width = MathHelper::Max(width,elemwidth);
 
-
-			if (label->getText() != cstring)
+			CEGUI::String selectionColour ("");
+			if (label->isUserStringDefined ("selcol"))
 			{
-				label->setText((CEGUI::utf8*)cstring.c_str());
+				selectionColour = label->getUserString ("selcol");
+			}
+			CEGUI::String expectedString;
+			expectedString.append (selectionColour);
+			expectedString.append (cstring);
+
+			if (label->getText() != expectedString)
+			{
+				DEBUG ("Updating text of widget (f) [%s] to [%s] (prev [%s])", label->getNamePath ().c_str (), expectedString.c_str (), label->getText ().c_str ());
+				label->setText((CEGUI::utf8*)expectedString.c_str());
 			}
 			
 			label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,horzoffset), CEGUI::UDim(0,height)));
@@ -663,9 +685,9 @@ void DialogueWindow::updateSpeechBubbles()
 		
 		width += 2* horzoffset;
 		
-		DEBUG ("Setting position of question window: (%.2f, %.2f), %.2f", 0.5f, -width/2, 0.2);
+		//DEBUG ("Setting position of question window: (%.2f, %.2f), %.2f", 0.5f, -width/2, 0.2);
 		ques->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5f,-width/2), cegui_reldim(0.2)));
-		DEBUG ("Setting size of question window: (%.2f, %.2f)", width, height);
+		//DEBUG ("Setting size of question window: (%.2f, %.2f)", width, height);
 		CEGUIUtility::setWidgetSizeAbs (ques, width, height);
 		
 		ques->setVisible(true);
@@ -700,6 +722,37 @@ bool DialogueWindow::onAnswerClicked(const CEGUI::EventArgs& evt)
 	return true;
 }
 
+bool DialogueWindow::onAnswerEnterArea(const CEGUI::EventArgs& evt)
+{
+	//DEBUG ("DialogueWindow::onAnswerEnterArea");
+	const CEGUI::MouseEventArgs& we =
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
+	CEGUI::String lineText = "[colour='FFFFDD66']";
+	DEBUG ("Entered area for: %s (%s)", we.window->getNamePath ().c_str (), we.window->getTextVisual ().c_str ());
+//	we.window->setTextParsingEnabled (true);
+	we.window->setText ("-");
+	we.window->invalidate (true);
+	we.window->setUserString ("selcol", lineText);
+	
+	//CEGUI::System::getSingletonPtr ()->getDefaultGUIContext ().markAsDirty ();
+	//DEBUG ("Entered area for: %s", we.window->getTextVisual ().c_str ());
+	//XXX, TODO
+	return true;
+}
+
+bool DialogueWindow::onAnswerLeaveArea(const CEGUI::EventArgs& evt)
+{
+	//DEBUG ("DialogueWindow::onAnswerLeaveArea");
+	const CEGUI::MouseEventArgs& we =
+			static_cast<const CEGUI::MouseEventArgs&>(evt);
+	//DEBUG ("Left area for: %s", we.window->getText ().c_str ());
+	DEBUG ("Left area for: %s (%s)", we.window->getNamePath ().c_str (), we.window->getTextVisual ().c_str ());
+	CEGUI::String lineText = "[colour='FFFFFFFF']";
+	we.window->setText ("-");
+	we.window->invalidate (true);
+	we.window->setUserString ("selcol", lineText);
+	return true;
+}
 
 bool DialogueWindow::onTextClicked(const CEGUI::EventArgs& evt)
 {
