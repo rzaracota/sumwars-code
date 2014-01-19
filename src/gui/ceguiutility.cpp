@@ -997,16 +997,16 @@ void CEGUIUtility::setDefaultMouseCursor (CEGUI::System* sys, const std::string&
 }
 
 
-void CEGUIUtility::setDefaultTooltip (CEGUI::System* sys, const std::string& skinName, const std::string& cursorName)
+void CEGUIUtility::setDefaultTooltip (CEGUI::System* sys, const std::string& skinName, const std::string& tooltipName)
 {
 #ifdef CEGUI_07
 	std::stringstream ss;
-	ss << skinName << "/" << cursorName;
+	ss << skinName << "/" << tooltipName;
 	sys->setDefaultTooltip(ss.str ().c_str ());
 	//sys->setDefaultTooltip (skinName.c_str (), cursorName.c_str ());
 #else
 	std::stringstream ss;
-	ss << skinName << "/" << cursorName;
+	ss << skinName << "/" << tooltipName;
 	sys->getDefaultGUIContext().setDefaultTooltipType(ss.str ().c_str ());
 #endif
 }

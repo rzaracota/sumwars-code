@@ -175,10 +175,13 @@ void TooltipManager::update ( float timeSinceLastUpdate )
 
         if ( tt->isDead() )
         {
-			CEGUI::Window* ttWnd = CEGUIUtility::getWindow (tt->getName ());
-            CEGUI::WindowManager::getSingleton().destroyWindow (ttWnd);
-            m_Tooltips.erase ( iter++ );
-            delete tt;
+			if (CEGUIUtility::isWindowPresent (tt->getName ()))
+			{
+				CEGUI::Window* ttWnd = CEGUIUtility::getWindow (tt->getName ());
+				CEGUI::WindowManager::getSingleton().destroyWindow (ttWnd);
+			}
+			m_Tooltips.erase ( iter++ );
+			delete tt;
         }
         else
 		{

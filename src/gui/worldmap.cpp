@@ -186,6 +186,7 @@ void Worldmap::update()
 			stream << dgettext("sumwars","Town Portal") << "\n";
 			stream << dgettext("sumwars",it->second.m_name.c_str());
 			label->setTooltipText((CEGUI::utf8*) stream.str().c_str());
+			//label->setTooltip (); //XXX
 		}
 		else
 		{

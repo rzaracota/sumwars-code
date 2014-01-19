@@ -931,9 +931,21 @@ bool Application::initCEGUI()
 
 	DEBUG ("Setting cursor defaults");
 
-	// Set the mousr cursor.
+	// Set the mouse cursor.
 	CEGUIUtility::setDefaultMouseCursor (m_cegui_system, Options::getInstance ()->getCeguiCursorSkin (), "MouseArrow");
+
+	// Set the tooltip to use.
 	CEGUIUtility::setDefaultTooltip (m_cegui_system, Options::getInstance ()->getCeguiSkin (), "Tooltip");
+
+	CEGUI::Tooltip* defaultTT = CEGUI::System::getSingletonPtr ()->getDefaultGUIContext ().getDefaultTooltipObject ();
+	if (defaultTT)
+	{
+		
+		DEBUG ("Default tooltip is: %s", defaultTT->getNamePath ().c_str ())
+	}
+
+	CEGUI::System::getSingletonPtr ()->getDefaultGUIContext ().markAsDirty ();
+
 
 #if 0
 	// Update the fade delay?
