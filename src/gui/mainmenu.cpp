@@ -162,6 +162,7 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 	if (verlbl)
 	{
 		verlbl->setText(CEGUI::String("Version: ").append(SUMWARS_VERSION));
+		DEBUG ("Set sumwars version text to : [%s]", verlbl->getText ().c_str ());
 	}
 
 	CEGUI::FrameWindow* lbl;

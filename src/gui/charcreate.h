@@ -21,16 +21,16 @@
 
 /**
  * \class CharCreate
- * \brief Fenster Charakter erstellen
+ * \brief Create and control the character window
  */
 class CharCreate : public Window
 {
 	public:
 		/**
 		 * \fn CharCreate (Document* doc)
-		 * \brief Konstruktor
+		 * \brief Constructor.
 		 */
-		CharCreate (Document* doc, const std::string& ceguiSkinName, CEGUI::Window* parentWindowPtr);
+		CharCreate (Document* doc, const std::string& ceguiSkinName);
 	
 		/**
 		 * \fn virtual void update()
@@ -91,11 +91,6 @@ class CharCreate : public Window
 		 * \brief The name of the CEGUI skin to use.
 		 */
 		std::string m_ceguiSkinName;
-
-		/**
-		 * \brief Hold a pointer to the parent window.
-		 */
-		CEGUI::Window* m_parentWindowPtr;
 };
 
 #endif // __SUMWARS_GUI_CHARCREATE_H__

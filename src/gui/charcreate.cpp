@@ -26,10 +26,9 @@
 #include "ceguiutility.h"
 
 
-CharCreate::CharCreate (Document* doc, const std::string& ceguiSkinName, CEGUI::Window* parentWindowPtr)
+CharCreate::CharCreate (Document* doc, const std::string& ceguiSkinName)
 	: Window (doc)
 	, m_ceguiSkinName (ceguiSkinName)
-	, m_parentWindowPtr (parentWindowPtr) // TODO: XXX: remove this param, as it's no longer needed.
 {
 	DEBUG ("CharCreate window created with cegui skin [%s]", m_ceguiSkinName.c_str ());
 	// Create GUI Elements

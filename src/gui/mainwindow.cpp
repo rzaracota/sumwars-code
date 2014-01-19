@@ -244,7 +244,7 @@ bool MainWindow::setupMainMenu()
 
 		DEBUG ("Creating character screen");
 
-		wnd = new CharCreate (m_document, m_ceguiSkinName, m_main_menu);
+		wnd = new CharCreate (m_document, m_ceguiSkinName);
 		m_sub_windows["CharCreate"] = wnd;
 		wnd->getCEGUIWindow ()->setMousePassThroughEnabled (true);
 		CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
@@ -354,7 +354,6 @@ void MainWindow::update(float time)
 	// Testen ob die Anzeige der Fenster geaendert werden muss
 	if (m_document->getModified() & Document::GUISHEET_MODIFIED)
 	{
-		// TODO: XXX: Augustin Preda, 2014.01.08: This switching is really nasty. Find a better way of dealing with the UI.
 		if (m_document->getGUIState()->m_sheet ==  Document::MAIN_MENU)
 		{
 			updateMainMenu();
@@ -362,13 +361,6 @@ void MainWindow::update(float time)
 			m_main_menu->show ();
 			m_main_menu->activate ();
 			m_game_screen->hide ();
-
-			//CEGUIUtility::addChildWidget (m_main_menu, m_sub_windows["Options"]->getCEGUIWindow());
-
-			// Augustin Preda, 2014.01.08: Also switch the parents for the dialogs (message, warning, error).
-			//CEGUIUtility::addChildWidget (m_main_menu, m_sub_windows["errorDialog"]->getCEGUIWindow());
-			//CEGUIUtility::addChildWidget (m_main_menu, m_sub_windows["warningDialog"]->getCEGUIWindow());
-			//CEGUIUtility::addChildWidget (m_main_menu, m_custom_cursor);
 
 			//MusicManager::instance().stop();
 			//SoundManager::getPtr ()->getMusicPlayer ()->stop ();
@@ -380,13 +372,6 @@ void MainWindow::update(float time)
 			m_game_screen->show ();
 			m_game_screen->activate ();
 			m_main_menu->hide ();
-
-			//CEGUIUtility::addChildWidget (m_game_screen, m_sub_windows["Options"]->getCEGUIWindow());
-
-			// Augustin Preda, 2014.01.08: Also switch the parents for the dialogs (message, warning, error).
-			//CEGUIUtility::addChildWidget (m_game_screen, m_sub_windows["errorDialog"]->getCEGUIWindow());
-			//CEGUIUtility::addChildWidget (m_game_screen, m_sub_windows["warningDialog"]->getCEGUIWindow());
-			//CEGUIUtility::addChildWidget (m_game_screen, m_custom_cursor);
 
 			//MusicManager::instance().stop();
 			//SoundManager::getPtr ()->getMusicPlayer ()->stop ();
@@ -420,11 +405,9 @@ void MainWindow::update(float time)
 		}*/
 
 		// Menu Spielstart anzeigen wenn entsprechendes Flag gesetzt
-		// TODO:XXX: when is this window created???
 		CEGUI::String widgetName = CEGUIUtility::getNameForWidget("MainMenu/MainMenuRoot");
 		CEGUI::FrameWindow* start_menu = static_cast<CEGUI::FrameWindow*> (CEGUIUtility::getWindow (widgetName));
 
-		//CEGUI::FrameWindow* start_menu = (CEGUI::FrameWindow*) CEGUIUtility::getWindow ("MainMenuRoot");
 		MainMenu* main_menu = static_cast<MainMenu*>(m_sub_windows["MainMenu"]);
 		if (wflags & Document::START_MENU)
 		{

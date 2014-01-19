@@ -388,11 +388,11 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	std::ostringstream out_stream;
 
 	//XXX-begin; TODO: delete this
-	DEBUG ("Obtained description for item as string list.");
-	for (std::list <std::string>::iterator it = l.begin (); it != l.end (); ++ it)
-	{
-		DEBUG ("[%s]", it->c_str ());
-	}
+	//DEBUG ("Obtained description for item as string list.");
+	//for (std::list <std::string>::iterator it = l.begin (); it != l.end (); ++ it)
+	//{
+	//	DEBUG ("[%s]", it->c_str ());
+	//}
 	//XXX-end
 	tMgr->createTooltip ( img, l, 0, font, Tooltip::Main );
 

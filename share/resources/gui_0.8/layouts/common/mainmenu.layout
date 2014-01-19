@@ -24,22 +24,22 @@
             <Property name="Text" value="Host Game" />
         </Window>
         
+        <Window type="SWB/Button" name="MainOptionsButton" >
+            <Property name="InheritsAlpha" value="False" />
+            <Property name="Area" value="{{0.38,0},{0.914062,0},{0.57,0},{0.955728,0}}" />
+            <Property name="Text" value="Options" />
+        </Window>
+        
         <Window type="SWB/Button" name="CreditsButton" >
             <Property name="Text" value="Credits" />
             <Property name="InheritsAlpha" value="False" />
-            <Property name="Area" value="{{0.575,0},{0.913542,0},{0.766406,0},{0.955209,0}}" />
-        </Window>
-        
-        <Window type="SWB/Button" name="MainOptionsButton" >
-            <Property name="InheritsAlpha" value="False" />
-            <Property name="Area" value="{{0.380859,0},{0.914062,0},{0.572265,0},{0.955728,0}}" />
-            <Property name="Text" value="Options" />
+            <Property name="Area" value="{{0.58,0},{0.913542,0},{0.76,0},{0.955209,0}}" />
         </Window>
         
         <Window type="SWB/Button" name="EndGameButton" >
             <Property name="Text" value="Quit" />
             <Property name="InheritsAlpha" value="False" />
-            <Property name="Area" value="{{0.769531,0},{0.914062,0},{0.960937,0},{0.955729,0}}" />
+            <Property name="Area" value="{{0.77,0},{0.914062,0},{0.96,0},{0.955729,0}}" />
         </Window>
         
         <Window type="SWB/Button" name="LoginButton" >
@@ -52,17 +52,17 @@
             <Property name="Font" value="SWB-S" />
             <Property name="Text" value="VersionLabel" />
             <Property name="Alpha" value="0.7" />
-            <Property name="FrameEnabled" value="True" />
+            <Property name="InheritsAlpha" value="False" />
+            <Property name="FrameEnabled" value="False" />
             <Property name="HorzFormatting" value="RightAligned" />
-            <Property name="Area" value="{{0.583594,0},{0.86901,0},{0.958594,0},{0.992448,0}}" />
+            <Property name="Area" value="{{0.583594,0},{0.96,0},{0.958594,0},{0.999,0}}" />
             <Property name="BackgroundEnabled" value="False" />
         </Window>
         
         <Window type="SWB/StaticText" name="SumwarsOnlineIndicatorLabel" >
             <Property name="Text" value="Not logged in." />
             <Property name="Alpha" value="0.7" />
-            <!--<Property name="HorzExtent" value="100" />-->
-            <!--<Property name="VertExtent" value="23.1724" />-->
+            <Property name="InheritsAlpha" value="False" />
             <Property name="FrameEnabled" value="False" />
             <Property name="HorzFormatting" value="LeftAligned" />
             <Property name="Area" value="{{0.27594,0},{0.96901,0},{0.558594,0},{0.992448,0}}" />
