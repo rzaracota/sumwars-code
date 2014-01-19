@@ -272,27 +272,19 @@ void DialogueWindow::update()
 			{
 				std::stringstream stream;
 				stream.str("");
-				stream << "DialogWindow/DialogueLowerBar/";
-				stream << "SpeakerEmotionImage";
-				stream << i;
+				stream << "DialogWindow/DialogueLowerBar/SpeakerEmotionImage" << i;
 				wimage = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 						
 				stream.str("");
-				stream << "DialogWindow/DialogueLowerBar/";
-				stream << "SpeakerNameLabel";
-				stream << i;
+				stream << "DialogWindow/DialogueLowerBar/SpeakerNameLabel" << i;
 				wname = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 				
 				stream.str("");
-				stream << "DialogWindow/DialogueLowerBar/";
-				stream << "SpeakerTextLabel";
-				stream << i;
+				stream << "DialogWindow/DialogueLowerBar/SpeakerTextPane" << i << "/SpeakerTextLabel" << i;
 				wtext = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 				
 				stream.str("");
-				stream << "DialogWindow/DialogueLowerBar/";
-				stream << "SpeakerTextPane";
-				stream << i;
+				stream << "DialogWindow/DialogueLowerBar/SpeakerTextPane" << i;
 				
 				wimage->setVisible(false);
 				wname->setVisible(false);
