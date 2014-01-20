@@ -51,7 +51,7 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
 	{
         size = CEGUIUtility::getWindowSizeForText ( textlist, m_DefaultFont, msg );
 	}
-	DEBUG ("Tooltip font is %s, which looks best at %.2f x %.2f", tempFont->getName ().c_str (), tempFont->getNativeResolution ().d_width, tempFont->getNativeResolution ().d_height);
+	//DEBUG ("Tooltip font is %s, which looks best at %.2f x %.2f", tempFont->getName ().c_str (), tempFont->getNativeResolution ().d_width, tempFont->getNativeResolution ().d_height);
 	//DEBUG ("Message to display is [%s]", msg.c_str ());
 	// TODO: maybe store mouse position using own class?
 	CEGUIUtility::Vector2f mousePos = CEGUIUtility::getMouseCursorPosition (m_CEGUISystem);

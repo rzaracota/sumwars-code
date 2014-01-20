@@ -249,8 +249,10 @@ std::string Damage::getDamageString(Damage::Usage usage, std::string rarityColor
 	{
 		if (m_max_damage[i]>0)
 		{
-			//if (!first)
-			//	out_stream << "\n";
+			if (!first)
+			{
+				out_stream << "\n";
+			}
 
 			if (magic_mods && magic_mods->test(ItemFactory::DAMAGE_PHYS_MOD+ elemmap[i])) 
 				out_stream << rarityColor;
@@ -268,8 +270,8 @@ std::string Damage::getDamageString(Damage::Usage usage, std::string rarityColor
 	{
 		if (m_multiplier[i]!=1 && (m_max_damage[i]>0 || usage ==ITEM))
 		{
-			//if (!first)
-			//	out_stream << "\n";
+			if (!first)
+				out_stream << "\n";
 
 			if (magic_mods && magic_mods->test(ItemFactory::DAMAGE_MULT_PHYS_MOD+ elemmap[i])) 
 				out_stream << rarityColor;
@@ -288,13 +290,14 @@ std::string Damage::getDamageString(Damage::Usage usage, std::string rarityColor
 				out_stream << defaultColor;
 		}
 	}
+
 	if (usage != NORMAL)
 	{
 		// Attackewert anzeigen
 		if (m_attack>0)
 		{
-			//if (!first)
-			//	out_stream << "\n";
+			if (!first)
+				out_stream << "\n";
 
 			first = false;
 			if (m_special_flags & UNBLOCKABLE)
@@ -316,8 +319,8 @@ std::string Damage::getDamageString(Damage::Usage usage, std::string rarityColor
 		// Durchschlagskraft anzeigen
 		if (m_power>0)
 		{
-			//if (!first)
-			//	out_stream << "\n";
+			if (!first)
+				out_stream << "\n";
 
 			first = false;
 			if (m_special_flags & IGNORE_ARMOR)
@@ -339,7 +342,7 @@ std::string Damage::getDamageString(Damage::Usage usage, std::string rarityColor
 		// Chance auf kritische Treffer
 		if (m_crit_perc>0 && !first)
 		{
-			//out_stream << "\n";
+			out_stream << "\n";
 			out_stream << rarityColor;
 			out_stream << gettext("Chance for critical hit")<<": "<<(int) (100*m_crit_perc)<<"%";
 			out_stream << defaultColor;
@@ -351,8 +354,8 @@ std::string Damage::getDamageString(Damage::Usage usage, std::string rarityColor
 	{
 		if (m_status_mod_power[i]>0)
 		{
-			//if (!first)
-			//	out_stream << "\n";
+			if (!first)
+				out_stream << "\n";
 
 			first = false;
 			

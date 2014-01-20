@@ -1114,13 +1114,14 @@ std::string Item::getDescription(float price_factor, ItemRequirementsMet irm)
 
 		// Schaden
 		std::string dmgstring = m_weapon_attr->m_damage.getDamageString(Damage::ITEM);
+		
 		if (dmgstring != "")
 		{
 			if (m_type == WEAPON)
 			{
-				out_stream << "\n" << gettext("Damage")<<":";
+				out_stream << "\n" << gettext("Damage") << ":";
 			}
-			out_stream<<"\n"<<dmgstring;
+			out_stream << "\n" << dmgstring;
 		}
 
 	}
@@ -1367,6 +1368,7 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
         
         // Schaden
         std::string dmgstring = m_weapon_attr->m_damage.getDamageString(Damage::ITEM,rarityColor,&m_magic_mods);
+		DEBUG ("XXX Got dmg string [%s]", dmgstring.c_str ());
         if (dmgstring != "")
         {
             if (m_type == WEAPON)
@@ -1380,7 +1382,7 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
             std::string::size_type pos = dmgstring.find("\n");
             while(pos != std::string::npos)
             {
-                out_stream << dmgstring.substr(0, pos+1);
+                out_stream << dmgstring.substr(0, pos); // Augustin Preda, 2014.01.20: removed last char (newline)
                 itemDescList.push_back(out_stream.str());
                 out_stream.str("");
                 dmgstring.erase(0,pos+1);
