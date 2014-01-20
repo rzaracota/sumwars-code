@@ -3134,13 +3134,14 @@ void Region::playSound(std::string soundname, Vector position, float volume , bo
 void Region::addMusicTrack(MusicTrack track)
 {
 	DEBUG ("Region: adding music track: %s", track.c_str ());
-	m_music_tracks.push_back(track);
+	//
+	MusicTrack copiedName = track;
+	copiedName = SoundHelper::getNameWithPathForMusicTrack (copiedName);
+	m_music_tracks.push_back(copiedName);
 	
 	// Now also affect the music player. Add the track to the playlist with the name of this region.
-	SoundManager::getPtr ()->addPlaylistTrack (getName (), track);
+	SoundManager::getPtr ()->addPlaylistTrack (getName (), copiedName);
 
-
-	
 	NetEvent event;
 	event.m_type = NetEvent::MUSIC_CHANGED;
 	event.m_id = getId();

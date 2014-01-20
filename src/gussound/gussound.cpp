@@ -1091,6 +1091,7 @@ namespace gussound
 
 	void SoundRepository::addSound (const std::string &soundName, const std::string & fileName, bool loadIntoMemory, SoundCategory cat, bool onlyOneInstance)
 	{
+		GTRACE (4, "Adding sound named [" << soundName << "] from file [" << fileName << "] in categ [" << cat << "]");
 		// search for the given name.
 		SoundMap::iterator iter = sounds_.find (soundName);
 		if( iter != sounds_.end() )
