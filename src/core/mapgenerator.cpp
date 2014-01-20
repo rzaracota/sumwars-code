@@ -139,7 +139,8 @@ void TemplateMap::setMapElement(int i, int j, int template_max_size)
 			m_template_index_map[lastx][lasty] = oldindex;
 		}
 		
-		m_template_places[oldval].resize(vecsize-1);
+		//m_template_places[oldval].resize(vecsize-1);
+		m_template_places[oldval].pop_back ();
 	}
 	
 	m_template_map[i][j] = template_max_size;

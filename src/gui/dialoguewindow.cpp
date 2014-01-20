@@ -625,6 +625,7 @@ void DialogueWindow::updateSpeechBubbles()
 				label = CEGUIUtility::getWindow (stream.str());
 				// Augustin Preda, 2014.01.19: for some reason, there are several always on top windows, and not all can be at the front.
 				// These options however must be :-)
+
 				label->moveToFront ();
 			}
 			

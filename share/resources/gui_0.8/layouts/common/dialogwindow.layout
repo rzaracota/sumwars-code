@@ -86,24 +86,26 @@
             <Window type="SumWarsExtras/ScrollablePaneNoBar" name="SpeakerTextPane0" >
                 <Property name="Area" value="{{0.12,0},{0.27,0},{0.5,0},{0.89,0}}" />
                 
-                <Window type="SWB/StaticText" name="SpeakerTextLabel0" >
+                <Window type="SWB/MultiLineEditbox" name="SpeakerTextLabel0" >
                     <Property name="Text" value="" />
                     <Property name="FrameEnabled" value="False" />
                     <Property name="BackgroundEnabled" value="True" />
                     <Property name="Area" value="{{0.0,0},{0.0,0},{0.99,0},{0.99,0}}" />
                     <Property name="WantsMultiClickEvents" value="False" />
+                    <Property name="Font" value="SWB-S" />
                 </Window>
             </Window>
             
             <Window type="SumWarsExtras/ScrollablePaneNoBar" name="SpeakerTextPane1" >
                 <Property name="Area" value="{{0.5,0},{0.27,0},{0.88,0},{0.89,0}}" />
                 
-                <Window type="SWB/StaticText" name="SpeakerTextLabel1" >
+                <Window type="SWB/MultiLineEditbox" name="SpeakerTextLabel1" >
                     <Property name="Text" value="" />
                     <Property name="FrameEnabled" value="False" />
                     <Property name="BackgroundEnabled" value="True" />
                     <Property name="Area" value="{{0.0,0},{0.0,0},{0.99,0},{0.99,0}}" />
                     <Property name="WantsMultiClickEvents" value="False" />
+                    <Property name="Font" value="SWB-S" />
                 </Window>
             </Window>
             

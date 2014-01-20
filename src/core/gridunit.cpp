@@ -70,16 +70,16 @@ bool Gridunit::deleteObject(WorldObject* object, short index)
 		arr[index] = arr[size-1];
 		arr[index]->getGridLocation()->m_index = index;
 
-		//DEBUG ("resizing (v1) arr to new size: %d", size - 1);
+		DEBUG ("resizing (v1) arr to new size: %d", size - 1);
 		if (size == 1)
 		{
 			arr.clear ();
 		}
 		else
 		{
-			arr.resize(size-1);
+			arr.pop_back();
 		}
-		//DEBUG ("done resizing");
+		DEBUG ("done resizing");
 		return true;
 	}
 	else
@@ -101,7 +101,7 @@ bool Gridunit::deleteObject(WorldObject* object, short index)
 				}
 				else
 				{
-					arr.resize(size-1);
+					arr.pop_back();
 				}
 				return true;
 			}
