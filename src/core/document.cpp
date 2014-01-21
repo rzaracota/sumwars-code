@@ -135,10 +135,10 @@ void Document::startGame(bool server)
 	m_state = LOAD_SAVEGAME;
 }
 
-void Document::setSaveFile(std::string s)
+void Document::setSaveFile(std::string saveFile)
 {
 	// we are using std::streams here, not PHYSFS, therefore we also have to use absolute paths
-	std::string savePath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::savePath() + "/" + s;
+	std::string savePath = SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::savePath() + "/" + saveFile;
 
 	std::fstream file(savePath.c_str(),std::ios::in| std::ios::binary);
 	if (file.is_open())
@@ -147,7 +147,7 @@ void Document::setSaveFile(std::string s)
 		unsigned char* data=0;
 		m_save_file = savePath;
 
-		DEBUG ("Loaded save file %s", s.c_str());
+		DEBUG ("Loaded save file %s", saveFile.c_str());
 
 		file.get(bin);
 
@@ -174,7 +174,7 @@ void Document::setSaveFile(std::string s)
 		if (data)
 			delete[] data;
 		
-		Options::getInstance()->setDefaultSavegame(s);
+		Options::getInstance()->setDefaultSavegame (saveFile);
 	}
 	else
 	{
@@ -183,7 +183,7 @@ void Document::setSaveFile(std::string s)
 			delete m_temp_player;
 			m_temp_player =0;
 		}
-		WARNING("Could not load file %s", s.c_str());
+		WARNING("Could not load file [%s]", saveFile.c_str());
 	}
 	m_modified |= SAVEGAME_MODIFIED;
 	file.close();

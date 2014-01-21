@@ -130,23 +130,6 @@ void SavegameList::update()
 	// iterieren ueber die Files
 	unsigned char* data;
 
-    for(int i = 0; i < m_numCurrentCharacterButtons; i++)
-    {
-		std::ostringstream s;
-		s << i;
-
-        CEGUI::Window* saveItem = 0;
-        try
-        {
-            saveItem = CEGUIUtility::getWindowForLoadedLayout(m_window, s.str().append("SaveItemRoot"));
-			saveItem->hide();
-            //m_window->removeChildWindow(saveItem);
-        }
-        catch(CEGUI::UnknownObjectException&)
-        {
-        }
-    }
-
     m_numCurrentCharacterButtons = files->size();
 
 	float height = m_window->getPixelSize().d_width / 4.0f;
@@ -575,6 +558,7 @@ bool SavegameList::onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
 	// Clear the selection in the menu.
 	if(m_currentSelected != 0)
 	{
+		CEGUIUtility::removeChildWidget (m_currentSelected->getParent (), m_currentSelected);
 		CEGUI::WindowManager::getSingleton().destroyWindow(m_currentSelected);
 		m_currentSelected = 0;
 	}
