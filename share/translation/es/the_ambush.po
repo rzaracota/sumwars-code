@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-30 10:07+0200\n"
+"PO-Revision-Date: 2013-11-03 14:22+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/the_ambush/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.6-dev\n"
+"X-Generator: Weblate 1.8-dev\n"
 
 #: theAmbush.xml:7
 msgid ""
@@ -18,78 +18,86 @@ msgid ""
 "trouble west of Dwarfenwall. Nothing a Branded One couldn't solve. If she "
 "survives long enough..."
 msgstr ""
+"Una maga concejala con el nombre de Ireana de Northborough parece estar en "
+"apuros al oeste de Dwarfenwall. Madie salvo un forajido podría salvarla. Si "
+"ella sobrevive lo suficiente..."
 
 #: theAmbush.xml:136 theAmbush.xml:147
 msgid "Alright already, safe your breath!"
-msgstr ""
+msgstr "¡Está bien ya, ahorrate la saliva!"
 
 #: theAmbush.xml:135 theAmbush.xml:146
 msgid "Argh! Do I have to-"
-msgstr ""
+msgstr "¡Argh! ¿Debo-"
 
 #: theAmbush.xml:120 theAmbush.xml:123
 msgid "Don't start to argue and help her! She needs your help!"
-msgstr ""
+msgstr "¡No comiences a discutir y ayudala!¡Necesita tu ayuda!"
 
 #: theAmbush.xml:29
 msgid "Dwarfenwall is in that direction. I shouldn't go this way yet."
 msgstr ""
+"Dwarfenwall está en esa dirección. No debería ir por este camino todavía."
 
 #: theAmbush.xml:105
 msgid "I am making haste, alright?"
-msgstr ""
+msgstr "Tengo prisa, ¿de acuerdo?"
 
 #: theAmbush.xml:117
 msgid ""
 "I thought she was one of your fancy elementalist amazones. Can't she look "
 "after herself?"
 msgstr ""
+"Pensaba que era una de esas elegantes amazonas elementalistas. ¿No puede "
+"cuidarse sola?"
 
 #: theAmbush.xml:128 theAmbush.xml:140
 msgid "I'm not sure..."
-msgstr ""
+msgstr "No estoy seguro..."
 
 #: theAmbush.xml:5
 msgid ""
 "Ireana survived and, as a token of her gratitude, provided our next job. I "
 "always knew the councilmen only wanted an exterminator."
 msgstr ""
+"Ireana sobrevivió y, como muestra de gratitud, nos proporcionó nuestro "
+"próximo trabajo. Siempre supe que el concejal sólo quería un exterminador."
 
 #: theAmbush.xml:2
 msgid "The Ambush"
-msgstr ""
+msgstr "La emboscada"
 
 #: theAmbush.xml:113
 msgid "The archmage Ireana of Northborough"
-msgstr ""
+msgstr "La archimaga Ireana de Northborough"
 
 #: theAmbush.xml:149
 msgid "The firefighters are on the way."
-msgstr ""
+msgstr "Los bomberos están en camino."
 
 #: theAmbush.xml:111
 msgid "The prince's fiancé is in danger."
-msgstr ""
+msgstr "La prometida del príncipe está en peligro."
 
 #: theAmbush.xml:104
 msgid "Wait!"
-msgstr ""
+msgstr "¡Espera!"
 
 #: theAmbush.xml:108
 msgid "We are making haste, alright?"
-msgstr ""
+msgstr "Tenemos prisa, ¿de acuerdo?"
 
 #: theAmbush.xml:130 theAmbush.xml:143
 msgid "Well, it couldn't really hurt..."
-msgstr ""
+msgstr "Bueno, realmente no podría hacer daño..."
 
 #: theAmbush.xml:138
 msgid "What do you think, friends, do we want to bail someone out?"
-msgstr ""
+msgstr "¿Qué piensan, amigos, queremos rescatar a alguien?"
 
 #: theAmbush.xml:126
 msgid "What do you think? Shall we bail someone out?"
-msgstr ""
+msgstr "¿Qué piensas? ¿Vamos a rescatar a alguien?"
 
 #: theAmbush.xml:116
 msgid "What?"
@@ -97,19 +105,19 @@ msgstr "¿Qué?"
 
 #: theAmbush.xml:112
 msgid "Who?"
-msgstr ""
+msgstr "¿Quién?"
 
 #: theAmbush.xml:114
 msgid "Will that be payed extra?"
-msgstr ""
+msgstr "¿Tendrá eso una remuneración extra?"
 
 #: theAmbush.xml:133 theAmbush.xml:145
 msgid "Will that be payed extra??"
-msgstr ""
+msgstr "¿¿Tendrá eso una remuneración extra??"
 
 #: theAmbush.xml:106 theAmbush.xml:109
 msgid "You have to go into the western woods right now."
-msgstr ""
+msgstr "Tienes que adentrarte por la arboleda del oeste ahora mismo."
 
 #: theAmbush.xml:11
 msgid "aisWolfstones"

@@ -107,6 +107,7 @@ void Gettext::preInit ()
 #if WIN32
 	// Prepare the mappings.
 	// -1 for an entry means it's unsupported!
+    // http://msdn.microsoft.com/en-us/library/ms912047(WinEmbedded.10).aspx
 	winLanguageMappings_["en"] = 0x0409; // en-US
 	winLanguageMappings_["de"] = 0x0407; // de-DE
 	winLanguageMappings_["it"] = 0x0410; // it-IT
@@ -114,6 +115,7 @@ void Gettext::preInit ()
 	winLanguageMappings_["pt"] = 0x0816; // pt-PT
 	winLanguageMappings_["ru"] = 0x0419;
 	winLanguageMappings_["uk"] = 0x0422;
+    winLanguageMappings_["es"] = 0xC0A;
 #endif
 }
 
