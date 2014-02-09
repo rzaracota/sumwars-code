@@ -411,7 +411,10 @@ namespace gussound
 
 				SoundFinishingTrackerInterface * localTracker = tracker_;
 				clearTracker ();
-				localTracker->onSoundEvent ();
+				if (0 != localTracker)
+				{
+					localTracker->onSoundEvent ();
+				}
 			}
 		}
 	}
@@ -1247,6 +1250,11 @@ namespace gussound
 		GTRACE (5, "(destroying player: " << id_ << ")");
 	}
 
+	bool MusicPlayer::isPlaylistRegistered (const std::string& name)
+	{
+		PlaylistMapping::iterator iter = playlists_.find (name);
+		return iter != playlists_.end ();
+	}
 
 	void MusicPlayer::registerPlaylist (const std::string & name)
 	{
@@ -1256,6 +1264,7 @@ namespace gussound
 			throw std::exception ("MusicPlayer: not initialized! (no repository registered). Attempting to register a playlist.");
 			return;
 		}
+
 		PlaylistMapping::iterator iter = playlists_.find (name);
 		if (iter != playlists_.end ())
 		{
@@ -1289,6 +1298,14 @@ namespace gussound
 		{
 			throw( std::exception("MusicPlayer: attempting to un-register a non-existent playlist!") );
 		}
+
+		// If we're unregistering the playlist that we're currently playing, make sure to set the current list to be empty
+		// (so that we don't try to play it).
+		if (currentList_ == name)
+		{
+			currentList_ = "";
+		}
+
 		playlists_.erase( iter );
 
 		// If there are no more registered playlists left, clear the current list.
@@ -1492,6 +1509,7 @@ namespace gussound
 		PlaylistMapping::iterator iter = playlists_.find (playlistName);
 		if (iter == playlists_.end ())
 		{
+			GTRACE (5, id_ << " MusicPlayer: attempting to switch to a non-existent playlist: " << playlistName);
 			throw std::exception ("MusicPlayer: attempting to switch to a non-existent playlist!");
 		}
 

@@ -40,6 +40,7 @@
             <Property name="Text" value="Quit" />
             <Property name="InheritsAlpha" value="False" />
             <Property name="Area" value="{{0.77,0},{0.914062,0},{0.96,0},{0.955729,0}}" />
+            <Property name="TooltipText" value="Exit the [colour='FFFFFF55']game" />
         </Window>
         
         <Window type="SWB/Button" name="LoginButton" >

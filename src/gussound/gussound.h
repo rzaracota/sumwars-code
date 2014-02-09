@@ -739,6 +739,7 @@ namespace gussound
 	public:
 		virtual ~MusicPlayer ();
 
+		virtual bool isPlaylistRegistered (const std::string& name);
 		virtual void registerPlaylist (const std::string & name);
 		virtual void unregisterPlaylist (const std::string & name);
 

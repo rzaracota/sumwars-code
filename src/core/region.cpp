@@ -361,43 +361,46 @@ Region::Region(short dimx, short dimy, short id, std::string name, RegionData* d
 	m_camera.m_region = this;
 
 	// Also create a playlist for this region, bearing the same name.
-	SoundManager::getPtr ()->getMusicPlayer ()->registerPlaylist (m_name);
-	SoundManager::getPtr ()->getMusicPlayer ()->setRepeat (true);
-	SoundManager::getPtr ()->getMusicPlayer ()->setShuffle (true);
-	SoundManager::getPtr ()->getMusicPlayer ()->setFadePreferrences (false, false, false);
-
-	// The track names to be used are stored in rdata.
-	if (data)
+	if (! SoundManager::getPtr ()->getMusicPlayer ()->isPlaylistRegistered (m_name))
 	{
-		for (std::list <std::string>::const_iterator it = data->m_music_tracks.begin ();
-			it != data->m_music_tracks.end (); ++ it)
-		{
-			try
-			{
-				// The region stores track names in the form:
-				// - tread_lightly.ogg
-				// - ambience_2.ogg
-				// The music player needs the files including their full path (absolute or relative), in the form:
-				// - .//./share/resources/music/tread_lightly.ogg
-				// - .//./share/resources/music/ambience_2.ogg
+		SoundManager::getPtr ()->getMusicPlayer ()->registerPlaylist (m_name);
+		SoundManager::getPtr ()->getMusicPlayer ()->setRepeat (true);
+		SoundManager::getPtr ()->getMusicPlayer ()->setShuffle (true);
+		SoundManager::getPtr ()->getMusicPlayer ()->setFadePreferrences (false, false, false);
 
-				std::string fileName = SoundHelper::getNameWithPathForMusicTrack (*it);
-#if 1
-				// One could call the following function to add an "anonymous" track (with a name such as "track_01").
-				SoundManager::getPtr ()->addPlaylistTrack (m_name, fileName);
-#else
-				// Or one could opt for the manual 2 step solution:
-				SoundManager::getPtr ()->getRepository ()->addSound (*it	// sound name
-																	, fileName	// sound file path
-																	, false	// load into memory? don't do this for songs
-																	, gussound::GSC_Music // category: music.
-																	, true);	// allow only one instance of this sound to be played at one point.
-				SoundManager::getPtr ()->getMusicPlayer ()->addTrackToPlaylist (m_name, *it);
-#endif
-			}
-			catch (std::exception& e)
+		// The track names to be used are stored in rdata.
+		if (data)
+		{
+			for (std::list <std::string>::const_iterator it = data->m_music_tracks.begin ();
+				it != data->m_music_tracks.end (); ++ it)
 			{
-				DEBUG ("Region creation caught exception: %s", e.what ());
+				try
+				{
+					// The region stores track names in the form:
+					// - tread_lightly.ogg
+					// - ambience_2.ogg
+					// The music player needs the files including their full path (absolute or relative), in the form:
+					// - .//./share/resources/music/tread_lightly.ogg
+					// - .//./share/resources/music/ambience_2.ogg
+
+					std::string fileName = SoundHelper::getNameWithPathForMusicTrack (*it);
+#if 1
+					// One could call the following function to add an "anonymous" track (with a name such as "track_01").
+					SoundManager::getPtr ()->addPlaylistTrack (m_name, fileName);
+#else
+					// Or one could opt for the manual 2 step solution:
+					SoundManager::getPtr ()->getRepository ()->addSound (*it	// sound name
+																		, fileName	// sound file path
+																		, false	// load into memory? don't do this for songs
+																		, gussound::GSC_Music // category: music.
+																		, true);	// allow only one instance of this sound to be played at one point.
+					SoundManager::getPtr ()->getMusicPlayer ()->addTrackToPlaylist (m_name, *it);
+#endif
+				}
+				catch (std::exception& e)
+				{
+					DEBUG ("Region creation caught exception: %s", e.what ());
+				}
 			}
 		}
 	}
@@ -455,6 +458,11 @@ Region::~Region()
 	{
 		delete *it;
 	}
+
+	// Note: it could be possible to remove the playlist here... but that would mean we would have to instantly cut the music.
+	// If we keep the named playlist alive, we can apply a fade-out, moving from the region playlist to the menu playlist.
+	// Once we create a new region playlist, we can remove the old one. (And if the old one is using the same ID, meaning: the user
+	// is loading the same region, we can even resume from where we were previously playing the track).
 }
 
 WorldObject* Region::getObject ( int id)

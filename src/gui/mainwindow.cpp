@@ -2306,7 +2306,14 @@ void MainWindow::updateRegionInfo()
 			myMinimap->reloadIconsOnNextUpdate ();
 
 			// Also change the playlist to the one for the new region.
-			SoundManager::getPtr ()->getMusicPlayer ()->switchToPlaylist (pl->getRegion ()->getName ());
+			try
+			{
+				SoundManager::getPtr ()->getMusicPlayer ()->switchToPlaylist (pl->getRegion ()->getName ());
+			}
+			catch (std::exception& e)
+			{
+				WARNING ("Caught exception: [%s]", e.what ());
+			}
 		}
 		
 		float time = timer.getTime();

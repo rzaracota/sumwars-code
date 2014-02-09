@@ -3376,7 +3376,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                         </OperatorDim>
                     </Dim>
                 </Area>
-<!--                <Colours topLeft="FFFF6666" topRight="FFFF6666" bottomLeft="FFFF1111" bottomRight="FFFF1111" />-->
                 <Colours topLeft="FFFFE6DA" topRight="FFFFE6DA" bottomLeft="FFFFFBFA" bottomRight="FFFFFBFA" />
                 <VertFormat type="CentreAligned" />
                 <HorzFormat type="CentreAligned" />

@@ -1207,6 +1207,11 @@ void Document::setLeftAction(Action::ActionType act)
 
 void Document::setRightAction(Action::ActionType act)
 {
+	// Make sure that the world pointer is not a null.
+	if (! World::getWorld ())
+	{
+		return;
+	}
 
 	// wenn kein Spieler gesetzt ist, dann keine Faehigkeit setzen
 	// der lokale Spieler

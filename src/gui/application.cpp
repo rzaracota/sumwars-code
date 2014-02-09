@@ -938,10 +938,10 @@ bool Application::initCEGUI()
 	CEGUIUtility::setDefaultTooltip (m_cegui_system, Options::getInstance ()->getCeguiSkin (), "Tooltip");
 
 	CEGUI::Tooltip* defaultTT = CEGUI::System::getSingletonPtr ()->getDefaultGUIContext ().getDefaultTooltipObject ();
-	if (defaultTT)
+	if (0 != defaultTT)
 	{
-		
-		DEBUG ("Default tooltip is: %s", defaultTT->getNamePath ().c_str ())
+		DEBUG ("Default tooltip is: %s", defaultTT->getNamePath ().c_str ());
+		defaultTT->setHoverTime (0.5f); // set it to 0.5 seconds.
 	}
 
 	CEGUI::System::getSingletonPtr ()->getDefaultGUIContext ().markAsDirty ();
