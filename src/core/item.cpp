@@ -1368,7 +1368,6 @@ std::list<std::string> Item::getDescriptionAsStringList(float price_factor, Item
         
         // Schaden
         std::string dmgstring = m_weapon_attr->m_damage.getDamageString(Damage::ITEM,rarityColor,&m_magic_mods);
-		DEBUG ("XXX Got dmg string [%s]", dmgstring.c_str ());
         if (dmgstring != "")
         {
             if (m_type == WEAPON)

@@ -411,6 +411,31 @@ CEGUI::Window* CEGUIUtility::getWindow (const CEGUI::String& name)
 	return getWindowForSystem (ceguiSysPtr_, name);
 }
 
+void CEGUIUtility::dumpFullWindowToLog (CEGUI::Window* startingWindow, int level)
+{
+	if (0 == startingWindow)
+	{
+		return;
+	}
+
+	// Write the current element.
+	std::stringstream ss;
+	ss << level << ":";
+	for (int i = 0; i < level ; ++ i)
+	{
+		ss << "    ";
+	}
+	
+	int numChildren = startingWindow->getChildCount ();
+	DEBUG ("%s%s (%d children)", ss.str ().c_str (), startingWindow->getName().c_str (), numChildren);
+	for (int i = 0; i < numChildren; ++ i)
+	{
+		CEGUI::Window* childPtr = startingWindow->getChildAtIdx (i);
+		dumpFullWindowToLog (childPtr, level + 1);
+	}
+}
+
+
 // static
 CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI::String& name)
 {

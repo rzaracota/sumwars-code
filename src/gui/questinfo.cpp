@@ -59,8 +59,6 @@ QuestInfo::QuestInfo (Document* doc, const std::string& ceguiSkinName)
 	quest_info->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent, (Window*) this));
 	
 	// Bestandteile der Kontrollleiste hinzufuegen
-	CEGUI::Window* label;
-
 	
 	CEGUI::Listbox* questlist = (CEGUI::Listbox*) CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "QuestInfo/questinfo_aux/QuestList");
 	questlist->subscribeEvent(CEGUI::Listbox::EventSelectionChanged, CEGUI::Event::Subscriber(&QuestInfo::onQuestSelected, this));

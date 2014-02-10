@@ -118,6 +118,9 @@ bool MainWindow::init()
 	result &= setupGameScreen();
 	CEGUIUtility::addChildWidget (m_root_window, m_game_screen);
 
+	// Dump the contents to the log for later.
+	//CEGUIUtility::dumpFullWindowToLog (m_root_window);
+
 	return result;
 }
 

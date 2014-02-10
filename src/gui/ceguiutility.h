@@ -260,6 +260,11 @@ class CEGUIUtility
 		static CEGUI::Window* getWindowForLoadedLayout (CEGUI::Window* parentWnd, const CEGUI::String& name);
 		static CEGUI::Window* getWindowForSystemNoEx (CEGUI::System* sys, const CEGUI::String& name);
 
+		/// @param startingWindow: the window from where the dump to log shall commence. For 
+		/// a full system dump, use the root window.
+		/// @param level: the amount of indentation levels to use.
+		static void dumpFullWindowToLog (CEGUI::Window* startingWindow, int level = 0);
+
 		/// Same as getWindowForLoadedLayout, but also throws an exception if the window ptr is NULL.
 		static CEGUI::Window* getWindowForLoadedLayoutEx (CEGUI::Window* parentWnd, const CEGUI::String& name);
 

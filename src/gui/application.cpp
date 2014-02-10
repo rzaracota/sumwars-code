@@ -467,7 +467,7 @@ void Application::run()
 
 		timer2.reset();
 
-		m_cegui_system->injectTimePulse(frametime/1000.0);
+		CEGUIUtility::injectTimePulse (frametime/1000.0);
 
 		t =timer2.getMicroseconds ()/1000.0;
 		time[5] += t;
@@ -960,18 +960,9 @@ bool Application::initCEGUI()
 	}
 #endif
 
+	// Note: you could also add custom fonts here, by calling CEGUIUtility::addFont.
+	// But all fonts can now be specified in the skin's scheme file. This means, we don't need to specify any fonts here.
 	DEBUG ("Creating fonts");
-
-	// Load the usable font list.
-	//CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-8.font", (CEGUI::utf8*)"GUI");
-	//CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-10.font", (CEGUI::utf8*)"GUI");
-	//CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-12.font", (CEGUI::utf8*)"GUI");
-	//CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSerif-16.font", (CEGUI::utf8*)"GUI");
-	//CEGUIUtility::addFont ((CEGUI::utf8*)"DejaVuSans-10.font", (CEGUI::utf8*)"GUI");
-	//CEGUIUtility::addFont ((CEGUI::utf8*)"SWB-S.font", (CEGUI::utf8*)"GUI");
-	//CEGUIUtility::addFont ((CEGUI::utf8*)"SWB-M.font", (CEGUI::utf8*)"GUI");
-	//CEGUIUtility::addFont ((CEGUI::utf8*)"SWB-L.font", (CEGUI::utf8*)"GUI");
-	//CEGUIUtility::addFont ((CEGUI::utf8*)"SWB-XL.font", (CEGUI::utf8*)"GUI");
 
 	// Set the default font to use based on the current display resolution.
 	int configuredWidth, configuredHeight;
@@ -1474,7 +1465,7 @@ void Application::updateStartScreen(float percent)
 	DEBUGX("update time %f  perc: %f",m_timer.getTime(), percent);
 	m_main_window->update(m_timer.getTime()/1000);
 	m_main_window->setRessourceLoadingBar(percent);
-	m_cegui_system->injectTimePulse(m_timer.getTime()/1000);
+	CEGUIUtility::injectTimePulse (m_timer.getTime()/1000.0);
 
 	Ogre::WindowEventUtilities::messagePump();
 
