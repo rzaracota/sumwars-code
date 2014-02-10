@@ -384,10 +384,10 @@ namespace GOpenAl
 		char pcm [BUFFER_SIZE];
 		int  size = 0;
 		int  section;
-		int  result;
 
 		while(size < BUFFER_SIZE)
 		{
+			int  result;
 			result = ov_read (&oggStream_, pcm + size, BUFFER_SIZE - size, 0, 2, 1, &section);
     
 			if(result > 0)

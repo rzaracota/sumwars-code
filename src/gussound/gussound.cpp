@@ -694,7 +694,6 @@ namespace gussound
 		if (currentTrackIdx_ < 0 || currentTrackIdx_ >= (int)tracks_.size ())
 		{
 			throw std::exception ("Playlist play with current track idx outside bounds!");
-			return;
 		}
 
 		// clear all the previous effects that may be still active on this sound.
@@ -915,8 +914,6 @@ namespace gussound
 			GTRACE(5, "Playlist::skipToPreviousTrack() while in pause or play.");
 			stop ();
 		}
-
-		int newPos = 0;
 
 		if( shuffle_ )
 		{
@@ -1262,7 +1259,6 @@ namespace gussound
 		if (!ptrToRepository_)
 		{
 			throw std::exception ("MusicPlayer: not initialized! (no repository registered). Attempting to register a playlist.");
-			return;
 		}
 
 		PlaylistMapping::iterator iter = playlists_.find (name);
