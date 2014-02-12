@@ -64,22 +64,6 @@
 namespace guslib
 {
 #ifndef GUSLIB_NOTRACE
-	/// Just a namespace used to hide the string to wstring parsing.
-	namespace
-	{
-		inline std::wstring _gt_StringToWString (const std::string& s)
-		{
-			std::wstring temp (s.length (), L' ');
-			std::copy (s.begin (), s.end (), temp.begin ());
-			return temp;
-		}
-	}
-
-	enum TraceEncoding
-	{
-		ASCII = 0,
-		UNICODE_WCHAR = 1
-	};
 
 	/// @brief
 	/// Trace logging utility class.
@@ -117,12 +101,8 @@ namespace guslib
 		std::string fileName_;
 		bool enabled_;
 		int level_;
-		TraceEncoding encoding_; // the encoding that is set by the user, according to the preferrence.
-		TraceEncoding encodingUsed_; //  the encoding that was used when opening.
 		std::ostream customOut_; // the output stream; used for write operations.
-		std::wostream customOut_W_; // the wide char custom outputer.
 		std::ofstream of_; // the output filestream; used for file operations.
-		std::wofstream of_W_; // the wide char based output filestream; used for file operations.
 	protected:
 		bool fileIsOpened;
 
@@ -132,14 +112,7 @@ namespace guslib
 		virtual void closeFileHandle ()
 		{
 			// Close the file stream.
-			if (encodingUsed_ == ASCII)
-			{
-				of_.close ();
-			}
-			else
-			{
-				of_W_.close ();
-			}
+			of_.close ();
 			fileIsOpened = false;
 		}
 
@@ -150,32 +123,10 @@ namespace guslib
 		{
 			try
 			{
-				if (encoding_ == ASCII)
-				{
-					// open the file stream
-					of_.open(fileName_.c_str());
-					// store the file stream's buffer in the output stream 
-					customOut_.rdbuf(of_.rdbuf());
-				}
-				else
-				{
-					std::wstring wideFileName = _gt_StringToWString (fileName_);
-					// open the file stream
-					of_W_.open(wideFileName.c_str(), std::ios_base::binary);
-					// store the file stream's buffer in the output stream 
-					customOut_W_.rdbuf(of_W_.rdbuf());
-
-					// write an UTF-8 BOM (0xEFBBBF ) at the beginning of the text file to signal that it will be unicode.
-					// Other BOMs (Byte Order Marks)
-					//		UTF-16LE BOM = 0xFFFE
-					//		UTF-16BE BOM = 0xFEFF
-					//		UTF-32LE BOM = FFFE0000
-					//		UTF-32BE BOM = 0000FEFF 
-					long BOM = 0xEFBBBF;
-					//of_.write((char *) &BOM,sizeof(wchar_t));
-					of_W_.write((wchar_t *) &BOM,sizeof(wchar_t));
-				}
-				encodingUsed_ = encoding_;
+				// open the file stream
+				of_.open(fileName_.c_str());
+				// store the file stream's buffer in the output stream 
+				customOut_.rdbuf(of_.rdbuf());
 
 				// keep track of the opened status.
 				fileIsOpened = true;
@@ -200,10 +151,6 @@ namespace guslib
 			, enabled_(true)
 			, of_( std::ofstream(""))
 			, customOut_(NULL)
-			, of_W_ ( std::wofstream (""))
-			, customOut_W_ (NULL)
-			, encoding_ (ASCII)
-			, encodingUsed_ (ASCII)
 		{
 		}
 
@@ -224,22 +171,6 @@ namespace guslib
 		}
 
 		///
-		/// Get the encoding that was selected upon file open
-		///
-		virtual TraceEncoding getEncodingUsed () const
-		{
-			return encodingUsed_;
-		}
-
-		///
-		/// Get the encoding that was selected upon file open
-		///
-		virtual TraceEncoding getEncodingPreferred () const
-		{
-			return encoding_;
-		}
-
-		///
 		/// Direct access to the output stream. This can be much quicker than
 		/// using the writeLine function, if you need to pass something other
 		/// than plain text.
@@ -247,17 +178,6 @@ namespace guslib
 		virtual std::ostream& getOutputStream ()
 		{
 			return customOut_;
-		}
-
-		///
-		/// Direct access to the output stream. This can be much quicker than
-		/// using the writeLine function, if you need to pass something other
-		/// than plain text.
-		/// WIDE variant.
-		///
-		virtual std::wostream& getOutputStreamW ()
-		{
-			return customOut_W_;
 		}
 
 #if GUSLIB_FLAG_MULTITHREAD
@@ -310,15 +230,6 @@ namespace guslib
 
 
 		///
-		/// Set the encoding to use. Only has effect for files opened after this operation.
-		///
-		virtual void setEncoding (TraceEncoding newEncoding)
-		{
-			encoding_ = newEncoding;
-		}
-
-
-		///
 		/// Setter for the filename. This also opens the file for writing.
 		///
 		virtual void setFileName (const std::string & fileNameToUse)
@@ -361,14 +272,7 @@ namespace guslib
 			{
 			  return;
 			}
-			if (encodingUsed_ == ASCII)
-			{
-				customOut_ << textToWrite << std::endl;
-			}
-			else
-			{
-				customOut_W_ << _gt_StringToWString (textToWrite) << std::endl;
-			}
+			customOut_ << textToWrite << std::endl;
 		}
 
 		///
@@ -389,14 +293,7 @@ namespace guslib
 			{
 			  return;
 			}
-			if (encodingUsed_ == ASCII)
-			{
-				customOut_ << "Warning: you are trying to write unicode text to an ASCII file. If you want to output unicode, please use GSTARTTRACINGW instead of GSTARTTRACING" << std::endl;
-			}
-			else
-			{
-				customOut_W_ << textToWrite << std::endl;
-			}
+			customOut_ << "Warning: you are trying to write unicode text to an ASCII file. If you want to output unicode, please use GSTARTTRACINGW instead of GSTARTTRACING" << std::endl;
 		}
 
 		// Allow the singleton template to have access to the constructor.
