@@ -176,7 +176,8 @@ namespace gussound
 
 	public:
 		SoundException (const char* text);
-		const char* what () const;
+        virtual ~SoundException() throw();
+        const char* what () const throw();
 	};
 
 	///
@@ -327,7 +328,7 @@ namespace gussound
 		virtual const SoundVolume & getVolume() const {return volume_;}
 
 		/// Add an effect to the sound. 
-		virtual void addEffect (SoundEffectPtr & effect);
+        virtual void addEffect (SoundEffectPtr effect);
 
 		/// Clear all effects from the current sound.
 		virtual void clearAllEffects ();

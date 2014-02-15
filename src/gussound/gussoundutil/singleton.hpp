@@ -29,6 +29,7 @@
 
 
 #include <gussoundutil/guslibbuildopts.h>
+#include <stdlib.h>
 
 // Note: for multithreaded synchronization and safe singleton access, be sure to enable the GUSLIB_FLAG_MULTITHREAD flag.
 // This will require boost.
@@ -85,7 +86,7 @@ namespace guslib
           objectPtr_ = (T*) volatileptr;
 		  // If possible, use the std::atexit
 #ifndef ATEXIT_FIXED
-          std::atexit (& destroy);
+          atexit (& destroy);
 #endif// ATEXIT_FIXED
         }
       }

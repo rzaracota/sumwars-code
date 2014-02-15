@@ -49,7 +49,7 @@ class GeneralFactory
 	public:
 		typedef std::map <IdentifierType, ProductCreator> AssociativeMap;
 
-		GeneralFactory::GeneralFactory ()
+        GeneralFactory ()
 		{
 		}
 

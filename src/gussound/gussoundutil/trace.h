@@ -149,8 +149,8 @@ namespace guslib
 			, fileIsOpened(false)
 			, level_(10)
 			, enabled_(true)
-			, of_( std::ofstream(""))
-			, customOut_(NULL)
+            , of_(0)
+            , customOut_(0)
 		{
 		}
 

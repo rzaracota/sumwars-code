@@ -63,7 +63,7 @@ namespace gussound
 		this->exceptionMessage_ = text;
 	}
 
-	const char* SoundException::what () const
+    const char* SoundException::what () const throw()
 	{
 		return this->exceptionMessage_.c_str ();
 	}
@@ -363,7 +363,7 @@ namespace gussound
 	}
 
 
-	void EffectableSound::addEffect( SoundEffectPtr & effect )
+    void EffectableSound::addEffect( SoundEffectPtr effect )
 	{
 		GTRACE(6, " EffectableSound::addEffect... to " << id_);
 		tempEffectList_.push_back( effect );
