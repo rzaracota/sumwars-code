@@ -97,14 +97,14 @@ namespace GOpenAl
 		myErr = alGetError ();
 		if (myErr)
 		{
-			throw std::exception ("Unable to initialize alut!");
+			throw SoundException ("Unable to initialize alut!");
 		}
 		alcDevice_ = alcOpenDevice (NULL);
 
 		myErr = alGetError ();
 		if (myErr)
 		{
-			throw std::exception ("Unable to open OpenAL device!");
+			throw SoundException ("Unable to open OpenAL device!");
 		}
 
 		alcContext_ = alcCreateContext (alcDevice_, NULL);
@@ -112,14 +112,14 @@ namespace GOpenAl
 		if (myErr)
 		{
 			alcCloseDevice (alcDevice_);
-			throw std::exception ("Unable to create OpenAL context!");
+			throw SoundException ("Unable to create OpenAL context!");
 		}
 
 		alcMakeContextCurrent (alcContext_);
 		myErr = alGetError ();
 		if (myErr)
 		{
-			throw std::exception ("Unable to make the current context current!");
+			throw SoundException ("Unable to make the current context current!");
 		}
 
 		GTRACE (2, "Using OpenAL, version: " << alGetString (AL_VERSION) 
@@ -130,7 +130,7 @@ namespace GOpenAl
 		myErr = alGetError ();
 		if (myErr)
 		{
-			throw std::exception ("Unable to set the distance model to: AL_LINEAR_DISTANCE_CLAMPED");
+			throw SoundException ("Unable to set the distance model to: AL_LINEAR_DISTANCE_CLAMPED");
 		}
 	}
 
@@ -249,7 +249,7 @@ namespace GOpenAl
 			GTRACE (2, "Warning: AL error encountered while trying to get buffer size: " << alGetString (myErr));
 			std::string errorMessage ("Failed to calculate stream data for: ");
 			errorMessage.append (getId ());
-			throw std::exception (errorMessage.c_str ());
+			throw SoundException (errorMessage.c_str ());
 		}
 
 		alGetBufferi (buffer_, AL_FREQUENCY, &frequency);
@@ -259,7 +259,7 @@ namespace GOpenAl
 			GTRACE (2, "Warning: AL error encountered while trying to get frequency: " << alGetString (myErr));
 			std::string errorMessage ("Failed to calculate stream data for: ");
 			errorMessage.append (getId ());
-			throw std::exception (errorMessage.c_str ());
+			throw SoundException (errorMessage.c_str ());
 		}
 
 		alGetBufferi (buffer_, AL_CHANNELS, &channels);    
@@ -269,7 +269,7 @@ namespace GOpenAl
 			GTRACE (2, "Warning: AL error encountered while trying to get channels: " << alGetString (myErr));
 			std::string errorMessage ("Failed to calculate stream data for: ");
 			errorMessage.append (getId ());
-			throw std::exception (errorMessage.c_str ());
+			throw SoundException (errorMessage.c_str ());
 		}
 
 		alGetBufferi (buffer_, AL_BITS, &bitsPerSample); 
@@ -279,7 +279,7 @@ namespace GOpenAl
 			GTRACE (2, "Warning: AL error encountered while trying to get bits per sample: " << alGetString (myErr));
 			std::string errorMessage ("Failed to calculate stream data for: ");
 			errorMessage.append (getId ());
-			throw std::exception (errorMessage.c_str ());
+			throw SoundException (errorMessage.c_str ());
 		}
 
 		SoundDuration duration = ((SoundDuration)bufferSize)/(frequency*channels*(bitsPerSample/8));
@@ -589,7 +589,7 @@ namespace GOpenAl
 		// Ran through all sources and all are playing. Check whether we can add a new sound source.
 		if (soundSources_.size () >= maximumConcurrentSounds_)
 		{
-			throw std::exception ("Maximum amount of sound sources reached!");
+			throw SoundException ("Maximum amount of sound sources reached!");
 		}
 
 		// Create a new source
@@ -627,7 +627,7 @@ namespace GOpenAl
 			std::stringstream ss;
 			ss << "Maximum amount of music sources reached! ";
 			ss << "Reserved sources: " << reservedMusicSources_ << "; current music sources: " << musicSources_.size ();
-			throw std::exception (ss.str ().c_str ());
+			throw SoundException (ss.str ().c_str ());
 		}
 
 		// Create a new source

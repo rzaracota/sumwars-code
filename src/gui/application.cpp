@@ -894,7 +894,7 @@ bool Application::initCEGUI()
 	CEGUI::XMLParser* parser = CEGUI::System::getSingleton().getXMLParser();
 	if (NULL == parser)
 	{
-		ERROR ("No XML parser available to CEGUI!!!");
+		WARNING ("No XML parser available to CEGUI!!!");
 		return false;
 	}
 	if (parser->isPropertyPresent("SchemaDefaultResourceGroup"))

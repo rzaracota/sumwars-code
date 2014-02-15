@@ -113,7 +113,7 @@ namespace GOpenAl
 		{
 			std::string errMessage ("Error on opening Ogg stream: ");
 			errMessage.append (makeAlErrorString (error));
-			throw std::exception (errMessage.c_str ());
+			throw SoundException (errMessage.c_str ());
 		}
 
 		int result;
@@ -122,7 +122,7 @@ namespace GOpenAl
 		{
 			std::string errMessage ("Failed to load Ogg file: ");
 			errMessage.append (fileName);
-			throw std::exception (errMessage.c_str ());
+			throw SoundException (errMessage.c_str ());
 		}
 
 		if((result = ov_open (oggFilePtr_, &oggStream_, NULL, 0)) < 0)
@@ -131,7 +131,7 @@ namespace GOpenAl
         
 			std::string errText ("Could not open Ogg stream. ");
 			errText.append (makeOggErrorString (result));
-			throw std::exception (errText.c_str ());
+			throw SoundException (errText.c_str ());
 		}
 	
 		vorbisInfo_ = ov_info (&oggStream_, -1);

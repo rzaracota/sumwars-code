@@ -165,7 +165,19 @@ namespace gussound
 	const std::string EMPTY_SLOT_NAME = "_";
 	const std::string EMPTY_SOUND_FILE = "";
 
+	///
+	/// An exception class.
+	///
+	class SoundException
+		: public std::exception
+	{
+	private:
+		std::string exceptionMessage_;
 
+	public:
+		SoundException (const char* text);
+		const char* what () const;
+	};
 
 	///
 	///	An abstraction of audio devices.

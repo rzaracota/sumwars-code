@@ -58,6 +58,15 @@
 
 namespace gussound
 {
+	SoundException::SoundException (const char* text)
+	{
+		this->exceptionMessage_ = text;
+	}
+
+	const char* SoundException::what () const
+	{
+		return this->exceptionMessage_.c_str ();
+	}
 
 	// ----------------------------------------------- AudioDevice -------------------------------------------------
 
@@ -505,7 +514,7 @@ namespace gussound
 		std::map<std::string, int>::iterator iter = sounds_.find (soundName);
 		if (iter != sounds_.end ())
 		{
-			throw (std::exception ("SoundGroup: attempting to add an already existing sound!"));
+			throw SoundException ("SoundGroup: attempting to add an already existing sound!");
 		}
 
 		sounds_.insert (std::make_pair (soundName, weight));
@@ -525,7 +534,7 @@ namespace gussound
 		std::map<std::string, int>::iterator iter = sounds_.find( soundName );
 		if( iter == sounds_.end() )
 		{
-			throw( std::exception("SoundGroup: attempting to remove a non-existent sound!") );
+			throw SoundException ("SoundGroup: attempting to remove a non-existent sound!");
 		}
 		int weight = iter->second;
 		sounds_.erase( iter );
@@ -631,7 +640,7 @@ namespace gussound
 	{
 		if( !ptrToRepository_ )
 		{
-			throw std::exception("Failure by addTrack for playlist (no access to repository)");
+			throw SoundException ("Failure by addTrack for playlist (no access to repository)");
 		}
 		if( ! tracks_.empty() )
 		{
@@ -640,7 +649,7 @@ namespace gussound
 			{
 				if( *iter == trackName )
 				{
-					throw std::exception("Already using track ");
+					throw SoundException ("Already using track ");
 				}
 			}
 		}
@@ -693,7 +702,7 @@ namespace gussound
 
 		if (currentTrackIdx_ < 0 || currentTrackIdx_ >= (int)tracks_.size ())
 		{
-			throw std::exception ("Playlist play with current track idx outside bounds!");
+			throw SoundException ("Playlist play with current track idx outside bounds!");
 		}
 
 		// clear all the previous effects that may be still active on this sound.
@@ -769,7 +778,7 @@ namespace gussound
 				return;
 			}
 		}
-		throw std::exception("Not using track.");
+		throw SoundException ("Not using track.");
 	}
 
 
@@ -1096,7 +1105,7 @@ namespace gussound
 		SoundMap::iterator iter = sounds_.find (soundName);
 		if( iter != sounds_.end() )
 		{
-			throw( std::exception( "Tried to add a sound with a name already in use!" ) );
+			throw SoundException ("Tried to add a sound with a name already in use!");
 		}
 
 		// Get the extension from the file name
@@ -1144,7 +1153,7 @@ namespace gussound
 					GTRACE(3, " -> [" << it2->first << "]");
 				}
 			}
-			throw std::exception ("Tried to get an inexistent sound!");
+			throw SoundException ("Tried to get an inexistent sound!");
 		}
 		return iter->second;
 	}
@@ -1156,7 +1165,7 @@ namespace gussound
 		if (iter == sounds_.end ())
 		{
 			GTRACE (2, "EXCEPTION! Tried to remove an inexistent sound: " << soundName);
-			throw std::exception ("Tried to remove an inexistent sound!");
+			throw SoundException ("Tried to remove an inexistent sound!");
 		}
 
 		sounds_.erase (iter);
@@ -1258,14 +1267,14 @@ namespace gussound
 		GTRACE (5, "MusicPlayer registering playlist [" << name << "]");
 		if (!ptrToRepository_)
 		{
-			throw std::exception ("MusicPlayer: not initialized! (no repository registered). Attempting to register a playlist.");
+			throw SoundException ("MusicPlayer: not initialized! (no repository registered). Attempting to register a playlist.");
 		}
 
 		PlaylistMapping::iterator iter = playlists_.find (name);
 		if (iter != playlists_.end ())
 		{
 			// There is a playlist already registered.
-			throw std::exception ("MusicPlayer: attempting to re-register a playlist!");
+			throw SoundException ("MusicPlayer: attempting to re-register a playlist!");
 		}
 
 		GTRACE (6, "MusicPlayer registerPlaylist added [" << name << "]");
@@ -1292,7 +1301,7 @@ namespace gussound
 		PlaylistMapping::iterator iter = playlists_.find( name );
 		if( iter == playlists_.end() )
 		{
-			throw( std::exception("MusicPlayer: attempting to un-register a non-existent playlist!") );
+			throw SoundException ("MusicPlayer: attempting to un-register a non-existent playlist!");
 		}
 
 		// If we're unregistering the playlist that we're currently playing, make sure to set the current list to be empty
@@ -1328,7 +1337,7 @@ namespace gussound
 					GTRACE (3, " -> [" << it2->first << "]");
 				}
 			}
-			throw std::exception ("MusicPlayer: attempting to add a track to a non-existent playlist!");
+			throw SoundException ("MusicPlayer: attempting to add a track to a non-existent playlist!");
 		}
 
 		playlists_[playlistName]->addTrack (trackName);
@@ -1341,7 +1350,7 @@ namespace gussound
 		PlaylistMapping::iterator iter = playlists_.find( playlistName );
 		if( iter == playlists_.end() )
 		{
-			throw( std::exception("MusicPlayer: attempting to remove a track from a non-existent playlist!") );
+			throw SoundException("MusicPlayer: attempting to remove a track from a non-existent playlist!");
 		}
 
 		playlists_[playlistName]->removeTrack( trackName );
@@ -1463,7 +1472,7 @@ namespace gussound
 					GTRACE (3, " -> [" << it2->first << "]");
 				}
 			}
-			throw std::exception ("MusicPlayer: attempting set repeat property to a non-existent playlist!");
+			throw SoundException ("MusicPlayer: attempting set repeat property to a non-existent playlist!");
 		}
 
 		playlists_[playlistName]->setRepeat (value);
@@ -1486,7 +1495,7 @@ namespace gussound
 					GTRACE (3, " -> [" << it2->first << "]");
 				}
 			}
-			throw std::exception ("MusicPlayer: attempting set shuffle property to a non-existent playlist!");
+			throw SoundException ("MusicPlayer: attempting set shuffle property to a non-existent playlist!");
 		}
 
 		playlists_[playlistName]->setShuffle (value);
@@ -1506,7 +1515,7 @@ namespace gussound
 		if (iter == playlists_.end ())
 		{
 			GTRACE (5, id_ << " MusicPlayer: attempting to switch to a non-existent playlist: " << playlistName);
-			throw std::exception ("MusicPlayer: attempting to switch to a non-existent playlist!");
+			throw SoundException ("MusicPlayer: attempting to switch to a non-existent playlist!");
 		}
 
 		GTRACE (5, id_ << " MusicPlayer switching to playlist " << playlistName);
@@ -1592,7 +1601,7 @@ namespace gussound
 		SoundGroupMapping::iterator iter = groups_.find( groupName );
 		if( iter != groups_.end() )
 		{
-			throw( std::exception( "Tried to re-create existent group!" ) );
+			throw SoundException ("Tried to re-create existent group!");
 		}
 		groups_.insert (std::make_pair (groupName, SoundGroupSmartPtr(new SoundGroup ())));
 	}
@@ -1619,7 +1628,7 @@ namespace gussound
 				GTRACE (3, " -> [" << it2->first << "]");
 			}
 
-			throw std::exception ("Tried to access inexistent group!");
+			throw SoundException ("Tried to access inexistent group!");
 		}
 		return iter->second;
 	}
@@ -1640,7 +1649,7 @@ namespace gussound
 		SoundGroupMapping::iterator iter = groups_.find( groupName );
 		if( iter == groups_.end() )
 		{
-			throw( std::exception( "Tried to remove inexistent group!" ) );
+			throw SoundException ("Tried to remove inexistent group!");
 		}
 		groups_.erase( iter );
 	}
