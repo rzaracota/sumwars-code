@@ -60,8 +60,12 @@ namespace gussound
 {
 	SoundException::SoundException (const char* text)
 	{
-		this->exceptionMessage_ = text;
-	}
+        this->exceptionMessage_ = text;
+    }
+
+    SoundException::~SoundException() throw()
+    {
+    }
 
     const char* SoundException::what () const throw()
 	{

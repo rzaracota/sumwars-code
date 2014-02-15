@@ -228,7 +228,7 @@ bool MainWindow::setupMainMenu()
 		}
 		else
 		{
-			ERROR ("WARNING: Failed to load [%s]", layoutFile.c_str ());
+            ERRORMSG ("WARNING: Failed to load [%s]", layoutFile.c_str ());
 		}
 
 		DEBUG ("Creating credits window");

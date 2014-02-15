@@ -471,7 +471,7 @@ void SkillTree::update()
 		}
 		else
 		{
-			DEBUG ("Property not found: OverlayColour (in %s)", label->getNamePath ());
+            DEBUG ("Property not found: OverlayColour (in %s)", label->getNamePath().c_str());
 		}
 		
 		std::string skillButtonWidget = m_skill_widgets_btns[j];

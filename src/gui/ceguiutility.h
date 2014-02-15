@@ -24,7 +24,7 @@
 #include "CEGUI/CEGUIUDim.h"
 #include "CEGUI/CEGUIFont.h"
 #else
-#include "cegui/CEGUI.h"
+#include "CEGUI/CEGUI.h"
 #endif
 
 #include <list>
@@ -51,12 +51,12 @@ class CEGUIUtilityNoWidgetException
 {
 public:
 	CEGUIUtilityNoWidgetException (const char* exceptionText)
-		: std::exception(exceptionText)
+        : std::exception()
 	{
 	};
 
 	CEGUIUtilityNoWidgetException (const std::string& exceptionText)
-		: std::exception(exceptionText.c_str ())
+        : std::exception()
 	{
 	};
 };
@@ -69,12 +69,12 @@ class CEGUIUtilityNullPointerException
 {
 public:
 	CEGUIUtilityNullPointerException (const char* exceptionText)
-		: std::exception(exceptionText)
+        : std::exception()
 	{
 	};
 
 	CEGUIUtilityNullPointerException (const std::string& exceptionText)
-		: std::exception(exceptionText.c_str ())
+        : std::exception()
 	{
 	};
 };

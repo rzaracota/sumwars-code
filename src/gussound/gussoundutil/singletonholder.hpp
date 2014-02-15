@@ -37,6 +37,7 @@
 #include <gussoundutil/thread.h>
 #endif
 
+#include <stdexcept>
 
 namespace guslib
 {
@@ -68,7 +69,7 @@ namespace guslib
       // all operations would create and release a lock.
       if (! objectPtr_)
       {
-        throw std::exception ("SingletonHolder getting NULL ptr");
+        throw std::runtime_error ("SingletonHolder getting NULL ptr");
       }
       return objectPtr_;
     }//getptr
@@ -78,7 +79,7 @@ namespace guslib
     {
       if (! ptr)
       {
-        throw std::exception ("SingletonHolder being assigned NULL ptr");
+        throw std::runtime_error ("SingletonHolder being assigned NULL ptr");
       }
 #if GUSLIB_FLAG_MULTITHREAD
         guslib::GScopedLock myLock (creationMutex_);
