@@ -149,7 +149,7 @@ namespace guslib
 			, fileIsOpened(false)
 			, level_(10)
 			, enabled_(true)
-            , of_(0)
+            , of_("")
             , customOut_(0)
 		{
 		}
