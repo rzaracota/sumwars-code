@@ -29,13 +29,13 @@ Worldmap::Worldmap (Document* doc, const std::string& ceguiSkinName)
 	CEGUI::Window* worldmap = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("worldmapwindow.layout");
 	if (!worldmap)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "worldmapwindow.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "worldmapwindow.layout");
 	}
 
 	CEGUI::Window* worldmap_holder = CEGUIUtility::loadLayoutFromFile ("worldmapwindow_holder.layout");
 	if (!worldmap_holder)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "worldmapwindow_holder.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "worldmapwindow_holder.layout");
 	}
 	
 	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (worldmap_holder, "WorldmapWindow_Holder");
@@ -47,8 +47,8 @@ Worldmap::Worldmap (Document* doc, const std::string& ceguiSkinName)
 	}
 	else
 	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for char screen.");
-		if (!wndHeldWindow) DEBUG ("ERROR: Unable to get the window for the worldmap screen.");
+		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for char screen.");
+		if (!wndHeldWindow) SW_DEBUG ("ERROR: Unable to get the window for the worldmap screen.");
 	}
 
 	m_window = worldmap_holder;

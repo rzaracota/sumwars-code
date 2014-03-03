@@ -343,7 +343,7 @@ std::string ItemLoader::loadItem(TiXmlNode* node,bool silent_replace)
 			}
 			else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
 			{
-				DEBUG("unexpected element of <Item>: %s",child->Value());
+				SW_DEBUG("unexpected element of <Item>: %s",child->Value());
 			}
 		}
 	}

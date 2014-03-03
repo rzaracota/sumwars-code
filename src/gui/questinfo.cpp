@@ -34,12 +34,12 @@ QuestInfo::QuestInfo (Document* doc, const std::string& ceguiSkinName)
 	CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("questinfo.layout");
 	if (!quest_info)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "questinfo.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "questinfo.layout");
 	}
 	CEGUI::Window* quest_info_holder = CEGUIUtility::loadLayoutFromFile ("questinfo_holder.layout");
 	if (!quest_info_holder)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "questinfo_holder.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "questinfo_holder.layout");
 	}
 
 	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (quest_info_holder, "QuestInfo_Holder");
@@ -50,8 +50,8 @@ QuestInfo::QuestInfo (Document* doc, const std::string& ceguiSkinName)
 	}
 	else
 	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for quests.");
-		if (!wndQuest) DEBUG ("ERROR: Unable to get the window for quests.");
+		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for quests.");
+		if (!wndQuest) SW_DEBUG ("ERROR: Unable to get the window for quests.");
 	}
 
 	m_window = quest_info_holder;

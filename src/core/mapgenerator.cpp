@@ -301,7 +301,7 @@ void TemplateMap::print()
 	std::map< int, std::vector< std::pair<int, int> > >::iterator it;
 	for (it = m_template_places.begin(); it != m_template_places.end(); ++it)
 	{
-		DEBUG("places of size %i : %i",it->first, it->second.size());
+		SW_DEBUG("places of size %i : %i",it->first, it->second.size());
 	}
 }
 
@@ -382,7 +382,7 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 		// Wenn der Versuch nicht erfolgreich war alles loeschen und von vorn beginnen
 		if (!success)
 		{
-			DEBUG("not successful");
+			SW_DEBUG("not successful");
 
 			delete mdata.m_base_map;
 			delete mdata.m_region;
@@ -411,7 +411,7 @@ Region* MapGenerator::createRegion(RegionData* rdata)
 	Random::setRandomSeed(oldseed);
 	
 	float duration = timer.getTime ();
-	DEBUG ("Map generator created region in %.2f millis", duration);
+	SW_DEBUG ("Map generator created region in %.2f millis", duration);
 	return mdata.m_region;
 }
 
@@ -670,7 +670,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 		if (succ == false)
 		{
 			// Obligatorisches Template konnte nicht platziert werden
-			DEBUG("could not place template %s",it->second.m_group_name.c_str());
+			SW_DEBUG("could not place template %s",it->second.m_group_name.c_str());
 			/*
 			int hdimx = rdata->m_dimx/2;
 			int hdimy = rdata->m_dimy/2;
@@ -714,7 +714,7 @@ bool MapGenerator::insertGroupTemplates(MapData* mdata, RegionData* rdata)
 		if (succ == false)
 		{
 			// Wegpunkt konnte nicht platziert werden
-			DEBUG("could not place waypoint");
+			SW_DEBUG("could not place waypoint");
 			return false;
 		}
 		mdata->m_region->createObjectGroup("waypoint_templ",pos,0);

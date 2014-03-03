@@ -46,7 +46,7 @@ NetworkPacket* NetworkSlot::popReceivedPacket()
 ServerNetwork::ServerNetwork(int max_slots)
 	: Network()
 {
-    DEBUG("Max slots %d", max_slots);
+    SW_DEBUG("Max slots %d", max_slots);
 	m_slots.resize(max_slots);
 	m_max_slots = max_slots;
 	m_active = false;

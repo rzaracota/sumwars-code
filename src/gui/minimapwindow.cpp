@@ -48,16 +48,16 @@ MinimapWindow::MinimapWindow (Document* doc, const std::string& ceguiSkinName)
 	CEGUI::Window* minimapWnd = CEGUIUtility::loadLayoutFromFile ("minimapwindow.layout");
 	if (!minimapWnd)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "minimapwindow.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "minimapwindow.layout");
 	}
 
 	CEGUI::Window* minimapWnd_holder = CEGUIUtility::loadLayoutFromFile ("minimapwindow_holder.layout");
 	if (!minimapWnd_holder)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "minimapwindow_holder.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "minimapwindow_holder.layout");
 	}
 
-	DEBUG ("Placing layout into holder");
+	SW_DEBUG ("Placing layout into holder");
 	minimapWnd->setVisible (true);
 	minimapWnd_holder->setVisible (true);
 
@@ -69,8 +69,8 @@ MinimapWindow::MinimapWindow (Document* doc, const std::string& ceguiSkinName)
 	}
 	else
 	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for inventory.");
-		if (!wndHeld) DEBUG ("ERROR: Unable to get the window for inventory.");
+		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for inventory.");
+		if (!wndHeld) SW_DEBUG ("ERROR: Unable to get the window for inventory.");
 	}
 	m_window = minimapWnd_holder;
 
@@ -175,7 +175,7 @@ void MinimapWindow::update()
 			label->setInheritsAlpha (false);
 			label->setAlwaysOnTop(true);
 			
-			DEBUG("creating Window!");
+			SW_DEBUG("creating Window!");
 			
 			ncount ++;
 		}

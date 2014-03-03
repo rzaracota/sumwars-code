@@ -367,8 +367,8 @@ void Scene::update(float ms)
 	float duration = timer.getTime ();
 	if (duration >= 80)
 	{
-		DEBUG ("scene update update took: %.2f ms. Up to ugo: %.2f", duration, beforeUGO);
-		DEBUG ("Up to createscene: %.2f ms.", durationUpToCrScene);
+		SW_DEBUG ("scene update update took: %.2f ms. Up to ugo: %.2f", duration, beforeUGO);
+		SW_DEBUG ("Up to createscene: %.2f ms.", durationUpToCrScene);
 	}
 
 }
@@ -710,7 +710,7 @@ void Scene::updateCharacterView()
 
 	if ((pl ==0 && m_temp_player!=""))
 	{
-		DEBUG("deleting inv player");
+		SW_DEBUG("deleting inv player");
 		m_temp_player="";
 		GraphicManager::destroyGraphicObject(m_temp_player_object);
 		m_temp_player_object =0;
@@ -1067,11 +1067,11 @@ void Scene::getMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, O
 				indices[index_offset] = pLong[k] + static_cast<unsigned long>(offset);
 				if (indices[index_offset] <0 || indices[index_offset] >= vertex_count)
 				{
-					DEBUG("-----------------------------");
-					DEBUG("illegal index %i at pos %i",indices[index_offset], offset);
-					DEBUG("submesh %i  triangle %i", i,k);
-					DEBUG("vertex count %i  index count %i",vertex_count, index_count);
-					DEBUG("32bit index %i  shared %i",use32bitindexes, submesh->useSharedVertices);
+					SW_DEBUG("-----------------------------");
+					SW_DEBUG("illegal index %i at pos %i",indices[index_offset], offset);
+					SW_DEBUG("submesh %i  triangle %i", i,k);
+					SW_DEBUG("vertex count %i  index count %i",vertex_count, index_count);
+					SW_DEBUG("32bit index %i  shared %i",use32bitindexes, submesh->useSharedVertices);
 				}
 				index_offset++;
 			}
@@ -1084,10 +1084,10 @@ void Scene::getMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, O
 						static_cast<unsigned long>(offset);
 						if (indices[index_offset] <0 || indices[index_offset] >= vertex_count)
 						{
-							DEBUG("illegal index %i at pos %i",indices[index_offset], index_offset);
-							DEBUG("submesh %i  triangle %i", i,k);
-							DEBUG("vertex count %i  index count %i",vertex_count, index_count);
-							DEBUG("32bit index %i  shared %i",use32bitindexes, submesh->useSharedVertices);
+							SW_DEBUG("illegal index %i at pos %i",indices[index_offset], index_offset);
+							SW_DEBUG("submesh %i  triangle %i", i,k);
+							SW_DEBUG("vertex count %i  index count %i",vertex_count, index_count);
+							SW_DEBUG("32bit index %i  shared %i",use32bitindexes, submesh->useSharedVertices);
 						}
 				index_offset++;
 			}

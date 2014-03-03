@@ -17,13 +17,13 @@ namespace SWUtil
 
 	Clipboard::Clipboard ()
 	{
-		DEBUG ("Clipboard costructor!");
+		SW_DEBUG ("Clipboard costructor!");
 	}
 
 
 	bool Clipboard::copy (bool cutInsteadOfCopy) 
 	{
-		DEBUG ("Reached Clipboard copy; cut? %d", cutInsteadOfCopy);
+		SW_DEBUG ("Reached Clipboard copy; cut? %d", cutInsteadOfCopy);
 		CEGUI::Window* sheet = CEGUIUtility::getRootSheet (CEGUI::System::getSingletonPtr ());
 		if (!sheet) return false;
 
@@ -89,10 +89,10 @@ namespace SWUtil
 
 	bool Clipboard::paste ()
 	{
-		DEBUG ("Reached clipboard paste...");
+		SW_DEBUG ("Reached clipboard paste...");
 		
 		std::string clipboardContents = _readFromClipboard ();
-		DEBUG ("Got clipboard text to be: %s", clipboardContents.c_str ());
+		SW_DEBUG ("Got clipboard text to be: %s", clipboardContents.c_str ());
 
 		CEGUI::Window* sheet = CEGUIUtility::getRootSheet (CEGUI::System::getSingletonPtr ());
 		if (!sheet) return false;
@@ -144,7 +144,7 @@ namespace SWUtil
 				edit->setText( newtext.erase( beg, len ) );
 			}
 			
-			DEBUG ("Selection start idx: %d", beg);
+			SW_DEBUG ("Selection start idx: %d", beg);
 
 			// Now paste the new text.
 			CEGUI::String newtext = edit->getText();
@@ -159,7 +159,7 @@ namespace SWUtil
 			edit->setCaretIndex (beg + clipboardContents.length ());
 #endif
 
-			DEBUG ("updated edit box contents");
+			SW_DEBUG ("updated edit box contents");
 		}
 		else 
 		{

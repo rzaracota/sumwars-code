@@ -227,14 +227,14 @@ bool WorldObject::setValue(std::string valname)
 	{
 		if (getType() == "PLAYER")
 		{
-			DEBUG("You cant change the fraction of a player");
+			SW_DEBUG("You cant change the fraction of a player");
 			return false;
 		}
 		std::string fraction  = lua_tostring(EventSystem::getLuaState() ,-1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		Fraction::Id id = World::getWorld()->getFractionId(fraction);
 		setFraction(id);
-		DEBUG("fraction is now %i",getFraction());
+		SW_DEBUG("fraction is now %i",getFraction());
 		return true;
 	}
 	else if (valname == "position")

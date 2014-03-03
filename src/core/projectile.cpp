@@ -391,7 +391,7 @@ void Projectile::handleFlying(float dtime)
 			// zufaelliges weiterspringen, Chance 50%
 			if (rand()<RAND_MAX*0.5)
 			{
-				DEBUG("prob bounce");
+				SW_DEBUG("prob bounce");
 				bounce = true;
 			}
 		}

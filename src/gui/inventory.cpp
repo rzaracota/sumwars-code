@@ -32,16 +32,16 @@ Inventory::Inventory (Document* doc)
 	CEGUI::Window* inventory = CEGUIUtility::loadLayoutFromFile ("inventory.layout");
 	if (!inventory)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "inventory.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "inventory.layout");
 	}
 
 	CEGUI::Window* inv_holder = CEGUIUtility::loadLayoutFromFile ("inventory_holder.layout");
 	if (!inv_holder)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "inventory_holder.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "inventory_holder.layout");
 	}
 
-	DEBUG ("Placing layout into holder");
+	SW_DEBUG ("Placing layout into holder");
 	inventory->setVisible (true);
 	inv_holder->setVisible (true);
 	//CEGUIUtility::addChildWidget (inv_holder, inventory);
@@ -55,8 +55,8 @@ Inventory::Inventory (Document* doc)
 	}
 	else
 	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for inventory.");
-		if (!wndInventory) DEBUG ("ERROR: Unable to get the window for inventory.");
+		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for inventory.");
+		if (!wndInventory) SW_DEBUG ("ERROR: Unable to get the window for inventory.");
 	}
 	m_window = inv_holder;
 
@@ -398,7 +398,7 @@ void Inventory::setState(State s)
 
 	if(s == Inventory::StateSmall)
 	{
-		DEBUG ("Changed state to small inventory");
+		SW_DEBUG ("Changed state to small inventory");
 
 		CEGUI::TabButton *tabBtn;
 		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/SmallTabButton"));
@@ -417,7 +417,7 @@ void Inventory::setState(State s)
 	}
 	else if(s == Inventory::StateMedium)
 	{
-		DEBUG ("Changed state to medium inventory");
+		SW_DEBUG ("Changed state to medium inventory");
 
 		CEGUI::TabButton *tabBtn;
 		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/SmallTabButton"));
@@ -436,7 +436,7 @@ void Inventory::setState(State s)
 	}
 	else if(s == Inventory::StateBig)
 	{
-		DEBUG ("Changed state to big inventory");
+		SW_DEBUG ("Changed state to big inventory");
 
 		CEGUI::TabButton *tabBtn;
 		tabBtn = static_cast<CEGUI::TabButton*> (CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/StashHolder/SmallTabButton"));
@@ -512,7 +512,7 @@ bool Inventory::onSwitchTabClicked(const CEGUI::EventArgs& evt)
 	const CEGUI::WindowEventArgs* args = static_cast<const CEGUI::WindowEventArgs*>(&evt);
 	std::string name = args->window->getName().c_str();
 
-	DEBUG ("Inventory: Switch Tab [%s]", name.c_str ());
+	SW_DEBUG ("Inventory: Switch Tab [%s]", name.c_str ());
 
 	if(name == "SmallTabButton")
 	{

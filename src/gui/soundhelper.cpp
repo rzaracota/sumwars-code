@@ -137,7 +137,7 @@ void SoundHelper::loadSoundInfos (TiXmlNode* node)
 			// we need to calculate the weight for this one.
 			SoundManager::getPtr ()->getSoundGroup (groupName)->addEmptySlot (emptySoundWeight);
 
-			DEBUG ("Added for group [%s], probability %f,  member weights %d, final sound weight %d", groupName.c_str (), probability, sumOfMemberWeights, emptySoundWeight);
+			SW_DEBUG ("Added for group [%s], probability %f,  member weights %d, final sound weight %d", groupName.c_str (), probability, sumOfMemberWeights, emptySoundWeight);
 		}
 	}
 	else
@@ -194,7 +194,7 @@ bool SoundHelper::addPlaylistTrackByShortName (const std::string& playlistName, 
 	}
 	catch (std::exception& e)
 	{
-		DEBUG ("Caught exception while trying to add to playlist [%s] track file [%s]: %s", playlistName.c_str (), fileName.c_str (), e.what ());
+		SW_DEBUG ("Caught exception while trying to add to playlist [%s] track file [%s]: %s", playlistName.c_str (), fileName.c_str (), e.what ());
 		return false;
 	}
 	return true;
@@ -280,7 +280,7 @@ bool SoundHelper::loadPlaylistFromXMLNode (TiXmlNode* node)
 		SoundManager::getPtr ()->getMusicPlayer ()->setPlaylistRepeat (playlistName, repeatOption);
 		SoundManager::getPtr ()->getMusicPlayer ()->setPlaylistShuffle (playlistName, shuffleOption);
 
-		DEBUG ("Got playlist: %s, repeat: %d, shuffle: %d", playlistName.c_str (), repeatOption, shuffleOption);
+		SW_DEBUG ("Got playlist: %s, repeat: %d, shuffle: %d", playlistName.c_str (), repeatOption, shuffleOption);
 
 		for (child = node->FirstChild (); child != 0; child = child->NextSibling ())
 		{
@@ -327,7 +327,7 @@ void SoundHelper::playAmbientSoundGroup (const std::string& soundGroupID)
 	}
 	catch (std::exception& e)
 	{
-		DEBUG ("Encountered exception: %s", e.what ());
+		SW_DEBUG ("Encountered exception: %s", e.what ());
 	}
 }
 
@@ -350,7 +350,7 @@ void SoundHelper::playSoundGroupAtPosition (const std::string& soundGroupID, dou
 	catch (std::exception& e)
 	{
 		// This can happen if the group name is not valid. Or if the group has missing files. Or if the group is empty.
-		DEBUG ("Caught exception while trying to play sound group [%s]: %s", soundGroupID.c_str (), e.what ());
+		SW_DEBUG ("Caught exception while trying to play sound group [%s]: %s", soundGroupID.c_str (), e.what ());
 	}
 }
 

@@ -154,11 +154,11 @@ void SavegameList::update()
 			CEGUI::String layoutRootItemName (CEGUIUtility::getNameForWidget(s.str ().append ("SaveItemRoot")));
 			try
 			{
-				DEBUG ("Trying to get existing item %s", layoutRootItemName.c_str ());
+				SW_DEBUG ("Trying to get existing item %s", layoutRootItemName.c_str ());
 				saveItem = CEGUIUtility::getWindowForLoadedLayout(m_window, layoutRootItemName);
 				if (!saveItem)
 				{
-					DEBUG ("Could not get item; will have to load");
+					SW_DEBUG ("Could not get item; will have to load");
 					needToLoadLayout = true;
 				}
 			}
@@ -169,9 +169,9 @@ void SavegameList::update()
 
 			if (needToLoadLayout)
 			{
-				DEBUG ("Loading layout file [saveitem.layout]");
+				SW_DEBUG ("Loading layout file [saveitem.layout]");
 				saveItem = (CEGUI::FrameWindow*) (CEGUIUtility::loadLayoutFromFile ("saveitem.layout"));
-				DEBUG ("Loaded layout file [saveitem.layout]");
+				SW_DEBUG ("Loaded layout file [saveitem.layout]");
 				//saveItem = (CEGUI::Window*) win_mgr.loadWindowLayout("saveitem.layout", s.str());
 				m_currentSelected = saveItem;
 				saveItem->setName (layoutRootItemName);
@@ -252,7 +252,7 @@ void SavegameList::update()
 				CEGUI::Window* wndPtr = CEGUIUtility::getWindowForLoadedLayout(saveItem, widgetName);
 				if (wndPtr)
 				{
-					DEBUG ("Setting save button avatar for [%s] to [%s]", wndPtr->getNamePath ().c_str (), imageName.c_str ());
+					SW_DEBUG ("Setting save button avatar for [%s] to [%s]", wndPtr->getNamePath ().c_str (), imageName.c_str ());
 					wndPtr->setProperty("Image", imageName);
 				}
 				else
@@ -310,7 +310,7 @@ void SavegameList::update()
 						CEGUI::String widgetName = CEGUIUtility::getNameForWidget("SaveItemRoot_Avatar");
 #endif
 						CEGUI::Window* wndPtr = CEGUIUtility::getWindowForLoadedLayout(saveItem, widgetName);
-						DEBUG ("Setting save button avatar for [%s] to [%s]", widgetName.c_str (), imageName.c_str ());
+						SW_DEBUG ("Setting save button avatar for [%s] to [%s]", widgetName.c_str (), imageName.c_str ());
 						if (wndPtr)
 						{
 							wndPtr->setProperty("Image", imageName);
@@ -458,7 +458,7 @@ bool SavegameList::onSavegameChosen(const CEGUI::EventArgs& evt)
 	std::string prefix = we.window->getName().c_str();
 	std::string saveWidgetName = prefix;
 
-	DEBUG ("A character save has been chosen (widget [%s]", prefix.c_str ());
+	SW_DEBUG ("A character save has been chosen (widget [%s]", prefix.c_str ());
 	prefix.erase(prefix.length()-12, prefix.length());
 
 #ifdef CEGUI_07
@@ -472,7 +472,7 @@ bool SavegameList::onSavegameChosen(const CEGUI::EventArgs& evt)
 	if (it != m_fileSaveMapping.end ())
 	{
 		name = m_fileSaveMapping [saveWidgetName];
-		DEBUG ("got mapping for [%s] as [%s]", saveWidgetName.c_str (), name.c_str ());
+		SW_DEBUG ("got mapping for [%s] as [%s]", saveWidgetName.c_str (), name.c_str ());
 	}
 	else
 	{
@@ -492,7 +492,7 @@ bool SavegameList::onSavegameSelected(const CEGUI::EventArgs& evt)
 {
 	if (m_document->getSaveFile() != "")
 	{
-		DEBUG("savegame accepted %s", m_document->getSaveFile().c_str());
+		SW_DEBUG("savegame accepted %s", m_document->getSaveFile().c_str());
 		m_document->getGUIState()->m_shown_windows = Document::START_MENU;
 		m_document->setModified(Document::WINDOWS_MODIFIED);
 	}

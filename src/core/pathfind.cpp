@@ -443,7 +443,7 @@ void SearchField::createGradient(Matrix2d<float[2]>* grad)
 
 	if (block[i][j]=='X')
 	{
-		DEBUG("blockiertes Feld betreten");
+		SW_DEBUG("blockiertes Feld betreten");
 		qmax = 1000000;
 		for (k=0;k<4;++k)
 		{

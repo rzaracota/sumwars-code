@@ -133,7 +133,7 @@ void Gettext::setLocale(const char* loc)
          locale = loc;
     }
 
-    DEBUG ("set new language [%s]",locale.c_str());
+    SW_DEBUG ("set new language [%s]",locale.c_str());
 
 	if (locale != m_locale)
 	{

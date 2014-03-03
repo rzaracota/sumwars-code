@@ -222,7 +222,7 @@ int main (int argc, char **argv)
 	*/
 	catch (CEGUI::Exception& e)
 	{
-		DEBUG("Program died with exception %s", e.getMessage().c_str());
+		SW_DEBUG("Program died with exception %s", e.getMessage().c_str());
 	}
 	// Ende
 	return 0;

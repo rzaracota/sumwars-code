@@ -30,7 +30,7 @@ CharCreate::CharCreate (Document* doc, const std::string& ceguiSkinName)
 	: Window (doc)
 	, m_ceguiSkinName (ceguiSkinName)
 {
-	DEBUG ("CharCreate window created with cegui skin [%s]", m_ceguiSkinName.c_str ());
+	SW_DEBUG ("CharCreate window created with cegui skin [%s]", m_ceguiSkinName.c_str ());
 	// Create GUI Elements
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -156,7 +156,7 @@ void CharCreate::updateClassList()
 
 bool CharCreate::onClassSelected(const CEGUI::EventArgs& evt)
 {
-	DEBUG ("CharCreate::onClassSelected");
+	SW_DEBUG ("CharCreate::onClassSelected");
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::String widgetName = CEGUIUtility::getNameForWidget("ClassList");
 	CEGUI::Listbox* classlist = static_cast<CEGUI::Listbox*> (CEGUIUtility::getWindowForLoadedLayoutEx(m_window, widgetName));

@@ -317,7 +317,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		std::map <std::string, SoundObject>::iterator it = m_soundobjects.find (object.m_objectname.c_str ());
 		if (it != m_soundobjects.end ())
 		{
-			DEBUG ("WARNING:  %s: subobject %s already exists", m_name.c_str(), object.m_objectname.c_str());
+			SW_DEBUG ("WARNING:  %s: subobject %s already exists", m_name.c_str(), object.m_objectname.c_str());
 		}
 		if (m_soundobjects.count(object.m_objectname) >0)
 		{
@@ -330,7 +330,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 
 		m_soundobjects[object.m_objectname] = SoundObject (name);
 		//m_soundobjects[object.m_objectname] = name;
-		DEBUG ("setting soundobject with name [%s] to: (%s)", object.m_objectname.c_str (), name.c_str ());
+		SW_DEBUG ("setting soundobject with name [%s] to: (%s)", object.m_objectname.c_str (), name.c_str ());
 	}
 	else 
 	{
@@ -1005,7 +1005,7 @@ void GraphicObject::addActiveRenderPart(ActionRenderpart* part)
 			// TODO:XXX: This is where a play command should be triggered.
 			it->second.play ();
 
-			DEBUG ("setting sound object [%s] to sound [%s]", it->first.c_str (), part->m_animation.c_str ());
+			SW_DEBUG ("setting sound object [%s] to sound [%s]", it->first.c_str (), part->m_animation.c_str ());
 		}
 	}
 }

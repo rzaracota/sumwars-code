@@ -157,7 +157,7 @@ bool Application::init()
 	LogManager::instance ().addLog ("stdout", new StdOutLog(Log::LOGLEVEL_DEBUG));
 	LogManager::instance ().addLog ("logfile", new FileLog (operationalPath + "/sumwars.log", Log::LOGLEVEL_DEBUG));
 
-	DEBUG ("Initialized logging. Level: %d", Log::LOGLEVEL_DEBUG);
+	SW_DEBUG ("Initialized logging. Level: %d", Log::LOGLEVEL_DEBUG);
 	Timer tm;
 	m_timer.start();
 
@@ -199,7 +199,7 @@ bool Application::init()
 		ERRORMSG("Sound initialisation failed");
 	}
 
-	DEBUG ("Reading options file (options.xml)...");
+	SW_DEBUG ("Reading options file (options.xml)...");
 	// Augustin Preda, 2011.11.15: trial code: load the options.xml file; it's required
 	// TODO: don't load it again later. Currently it's done via m_document->loadSettings();
 	Options::getInstance()->readFromFile(operationalPath + "/options.xml");
@@ -267,7 +267,7 @@ bool Application::init()
 		return false;
 	}
 
-	DEBUG("time to start %f",tm.getTime());
+	SW_DEBUG("time to start %f",tm.getTime());
 	// Ressourcen laden
 	ret = loadResources();
 	if (ret == false)
@@ -275,7 +275,7 @@ bool Application::init()
 		ERRORMSG("could not load ressources");
 	}
 
-	DEBUG ("Application initialized. Storing data in folder [%s]\n\n", operationalPath.c_str ());
+	SW_DEBUG ("Application initialized. Storing data in folder [%s]\n\n", operationalPath.c_str ());
 	// debugging
 	//MyFrameListener* mfl = new MyFrameListener(m_main_window,m_document);
 	//m_ogre_root->addFrameListener(mfl);
@@ -380,14 +380,14 @@ void Application::run()
 			{
 				count =0;
 				
-				DEBUG("average stats over %i frames",nr);
-				DEBUG("frame time: %f (%f fps)",time[0]/nr, 1000/(time[0]/nr));
-				DEBUG("app update time: %f",time[1]/nr);
-				DEBUG("message pump time: %f",time[2]/nr);
-				DEBUG("world update time: %f",time[3]/nr);
-				DEBUG("scene update time: %f",time[4]/nr);
-				DEBUG("gui update time: %f",time[5]/nr);
-				DEBUG("ogre  time: %f \n",time[6]/nr);
+				SW_DEBUG("average stats over %i frames",nr);
+				SW_DEBUG("frame time: %f (%f fps)",time[0]/nr, 1000/(time[0]/nr));
+				SW_DEBUG("app update time: %f",time[1]/nr);
+				SW_DEBUG("message pump time: %f",time[2]/nr);
+				SW_DEBUG("world update time: %f",time[3]/nr);
+				SW_DEBUG("scene update time: %f",time[4]/nr);
+				SW_DEBUG("gui update time: %f",time[5]/nr);
+				SW_DEBUG("ogre  time: %f \n",time[6]/nr);
 
 
 				for (int i=0; i<7; i++)
@@ -404,7 +404,7 @@ void Application::run()
 		time[1] += t;
 		if (t > 20)
 		{
-			DEBUG("update time was %f",t);
+			SW_DEBUG("update time was %f",t);
 		}
 
 		float musicUpdateTimer = frametime;
@@ -499,7 +499,7 @@ void Application::run()
 		SoundHelper::signalSoundManager ();
 	}
 
-	DEBUG ("Application: run function has run its course");
+	SW_DEBUG ("Application: run function has run its course");
 
 
 }
@@ -552,13 +552,13 @@ std::string Application::retrieveRenderSystemWindowSize (int& videoModeWidth, in
 				it != myCfgMap.end (); 
 				++ it)
 		{
-			DEBUG ("option name=[%s], val=[%s]", it->second.name.c_str (), it->second.currentValue.c_str ());
+			SW_DEBUG ("option name=[%s], val=[%s]", it->second.name.c_str (), it->second.currentValue.c_str ());
 		}
 
 		Ogre::ConfigOptionMap::iterator opt_it = myCfgMap.find ("Video Mode");
 		if (opt_it != myCfgMap.end ())
 		{
-			DEBUG ("Currently selected video mode: %s",  opt_it->second.currentValue.c_str ());
+			SW_DEBUG ("Currently selected video mode: %s",  opt_it->second.currentValue.c_str ());
 			returnValue = opt_it->second.currentValue;
 			std::string sLeft, sRight;
 			int nPos = returnValue.find (" ");
@@ -604,7 +604,7 @@ std::string Application::retrieveRenderSystemWindowSize (int& videoModeWidth, in
 */
 bool Application::initOgre()
 {
-	DEBUG("init ogre");
+	SW_DEBUG("init ogre");
 
 	// Create window.
 	// Here, we have 2 options:
@@ -657,8 +657,8 @@ bool Application::initOgre()
 	usedResolution = retrieveRenderSystemWindowSize (videoModeWidth, videoModeHeight);
 
 	Options::getInstance ()->setUsedResolution (usedResolution);
-	DEBUG ("Stored used resolution into global options [%s]", usedResolution.c_str ());
-	DEBUG ("Size should be %d x %d", videoModeWidth, videoModeHeight);
+	SW_DEBUG ("Stored used resolution into global options [%s]", usedResolution.c_str ());
+	SW_DEBUG ("Size should be %d x %d", videoModeWidth, videoModeHeight);
 
 	//
 	// Platform specific code: 
@@ -782,7 +782,7 @@ bool Application::initOgre()
 
 bool Application::configureOgre()
 {
-	DEBUG("configure ogre");
+	SW_DEBUG("configure ogre");
 
 	// Use the default logging level.
 	// Possible options:
@@ -806,7 +806,7 @@ bool Application::configureOgre()
 
 bool Application::setupResources()
 {
-	DEBUG("initalizing resources");
+	SW_DEBUG("initalizing resources");
 #ifdef NOMIPMAPS
 	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(0);
 #endif
@@ -868,17 +868,17 @@ bool Application::setupResources()
 
 bool Application::initGettext()
 {
-	DEBUG("initializing internationalisation");
+	SW_DEBUG("initializing internationalisation");
 	Ogre::StringVectorPtr path = Ogre::ResourceGroupManager::getSingleton().findResourceLocation("translation", "*");
-	DEBUG("Application initializing Gettext lib with [%s]", path.get ()->at (0).c_str ());
+	SW_DEBUG("Application initializing Gettext lib with [%s]", path.get ()->at (0).c_str ());
 	Gettext::init("", path.get()->at(0));
-	DEBUG("Application initializing Gettext locale is [%s]", Gettext::getLocale ());
+	SW_DEBUG("Application initializing Gettext locale is [%s]", Gettext::getLocale ());
 	return true;
 }
 
 bool Application::initCEGUI()
 {
-	DEBUG("init CEGUI\n");
+	SW_DEBUG("init CEGUI\n");
     
 	// Log level
 	new CEGUI::DefaultLogger();	
@@ -886,10 +886,10 @@ bool Application::initCEGUI()
 	CEGUI::DefaultLogger::getSingleton().setLogFilename(SumwarsHelper::getStorageBasePath() + "/" + SumwarsHelper::userPath() + "/CEGUI.log");
 	
 	// Bootstrap the CEGUI System
-	DEBUG ("Bootstrapping the CEGUI system");
+	SW_DEBUG ("Bootstrapping the CEGUI system");
 	CEGUI::OgreRenderer::bootstrapSystem();
 
-	DEBUG ("Getting the XML parser");
+	SW_DEBUG ("Getting the XML parser");
 
 	CEGUI::XMLParser* parser = CEGUI::System::getSingleton().getXMLParser();
 	if (NULL == parser)
@@ -900,20 +900,20 @@ bool Application::initCEGUI()
 	if (parser->isPropertyPresent("SchemaDefaultResourceGroup"))
 		parser->setProperty("SchemaDefaultResourceGroup", "GUI_XML_schemas");
     
-	DEBUG ("Loading (CEGUI) schemes...");
+	SW_DEBUG ("Loading (CEGUI) schemes...");
 
 	// Load schemes
-	DEBUG ("Loading scheme: SWB.scheme");
+	SW_DEBUG ("Loading scheme: SWB.scheme");
 	CEGUIUtility::loadScheme ((CEGUI::utf8*)"SWB.scheme", (CEGUI::utf8*)"GUI");
-	DEBUG ("Loading scheme: TaharezLook.scheme");
+	SW_DEBUG ("Loading scheme: TaharezLook.scheme");
 	CEGUIUtility::loadScheme ((CEGUI::utf8*)"TaharezLook.scheme", (CEGUI::utf8*)"GUI");
-	DEBUG ("Loading scheme: SumWarsExtras.scheme");
+	SW_DEBUG ("Loading scheme: SumWarsExtras.scheme");
 	CEGUIUtility::loadScheme ((CEGUI::utf8*)"SumWarsExtras.scheme", (CEGUI::utf8*)"GUI");
 	
 	// Load imagesets
 	CEGUIUtility::loadImageset("skills.imageset");
 
-	DEBUG ("Creating hardcoded images from file");
+	SW_DEBUG ("Creating hardcoded images from file");
 
 	try
 	{
@@ -922,14 +922,14 @@ bool Application::initCEGUI()
 	}
 	catch (CEGUI::Exception& e)
 	{
-		DEBUG("CEGUI exception %s",e.getMessage().c_str());
+		SW_DEBUG("CEGUI exception %s",e.getMessage().c_str());
 	}
     m_cegui_system = CEGUI::System::getSingletonPtr();
 	
 	/*CEGUI::LuaScriptModule &scriptm(CEGUI::LuaScriptModule::create());
 	m_cegui_system->setScriptingModule(&scriptm);*/
 
-	DEBUG ("Setting cursor defaults");
+	SW_DEBUG ("Setting cursor defaults");
 
 	// Set the mouse cursor.
 	CEGUIUtility::setDefaultMouseCursor (m_cegui_system, Options::getInstance ()->getCeguiCursorSkin (), "MouseArrow");
@@ -940,7 +940,7 @@ bool Application::initCEGUI()
 	CEGUI::Tooltip* defaultTT = CEGUI::System::getSingletonPtr ()->getDefaultGUIContext ().getDefaultTooltipObject ();
 	if (0 != defaultTT)
 	{
-		DEBUG ("Default tooltip is: %s", defaultTT->getNamePath ().c_str ());
+		SW_DEBUG ("Default tooltip is: %s", defaultTT->getNamePath ().c_str ());
 		defaultTT->setHoverTime (0.5f); // set it to 0.5 seconds.
 	}
 
@@ -962,16 +962,16 @@ bool Application::initCEGUI()
 
 	// Note: you could also add custom fonts here, by calling CEGUIUtility::addFont.
 	// But all fonts can now be specified in the skin's scheme file. This means, we don't need to specify any fonts here.
-	DEBUG ("Creating fonts");
+	SW_DEBUG ("Creating fonts");
 
 	// Set the default font to use based on the current display resolution.
 	int configuredWidth, configuredHeight;
 	SumwarsHelper::getSizesFromResolutionString (Options::getInstance ()->getUsedResolution (), configuredWidth, configuredHeight);
 	std::string defaultFontName = SumwarsHelper::getSingletonPtr ()->getRecommendedDefaultFontForWindowSize (configuredWidth, configuredHeight);
-	DEBUG ("For the current display resolution (%d x %d), the system has decreed that the recommended font is: %s", configuredWidth, configuredHeight, defaultFontName.c_str ());
+	SW_DEBUG ("For the current display resolution (%d x %d), the system has decreed that the recommended font is: %s", configuredWidth, configuredHeight, defaultFontName.c_str ());
 	CEGUIUtility::setDefaultFont ((CEGUI::utf8*)defaultFontName.c_str ());
 
-	DEBUG ("Creating own factory for tooltips");
+	SW_DEBUG ("Creating own factory for tooltips");
 	// Insert own factories. // TODO: check if this is really needed. Couldn't the custom tooltip just be added to the scheme?
 	std::stringstream ss;
 	ss << Options::getInstance ()->getCeguiSkin () << "/CustomTooltip";
@@ -998,7 +998,7 @@ bool Application::initCEGUI()
 //TODO: rename function. It doesn't have to point to openAL as a sound lib.
 bool Application::initOpenAL()
 {
-	DEBUG ("initOpenAL");
+	SW_DEBUG ("initOpenAL");
 	//SoundSystem::init();
 	//bool err = SoundSystem::checkErrors();
 	//return !err;
@@ -1025,7 +1025,7 @@ bool Application::initOpenAL()
 	}
 	catch (std::exception &e)
 	{
-		DEBUG ("Application::initOpenAL caught exception: %s", e.what ());
+		SW_DEBUG ("Application::initOpenAL caught exception: %s", e.what ());
 		return false;
 	}
 
@@ -1036,7 +1036,7 @@ bool Application::initOpenAL()
 
 bool Application::createDocument()
 {
-	DEBUG("create document\n");
+	SW_DEBUG("create document\n");
 	m_document = new Document();
 	m_document->loadSettings();
 
@@ -1056,7 +1056,7 @@ bool Application::createDocument()
 
 bool Application::createView()
 {
-	DEBUG("create view\n");
+	SW_DEBUG("create view\n");
 	m_main_window = new MainWindow(m_ogre_root, m_cegui_system,m_window,m_document);
 
 #ifdef SUMWARS_BUILD_TOOLS
@@ -1095,7 +1095,7 @@ bool Application::loadResources(int datagroups)
 
 	if (datagroups & World::DATA_IMAGES)
 	{
-		DEBUG("Loading images.");
+		SW_DEBUG("Loading images.");
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("itempictures","*.png");
 		for (it = files->begin(); it != files->end(); ++it)
 		{
@@ -1134,13 +1134,13 @@ bool Application::loadResources(int datagroups)
 
 	if (datagroups & World::DATA_MODELS)
 	{
-		DEBUG("Loading models.");
+		SW_DEBUG("Loading models.");
 		Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("General");
 		updateStartScreen(0.35);
 	}
 	if (datagroups & World::DATA_PARTICLESYSTEMS)
 	{
-		DEBUG("Loading particlesystems.");
+		SW_DEBUG("Loading particlesystems.");
 		//Ogre::ResourceGroupManager::getSingleton().addResourceGroupListener (&myListener);
 		
 		Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("Particles");
@@ -1160,7 +1160,7 @@ bool Application::loadResources(int datagroups)
 				}
 				catch (Ogre::Exception& e)
 				{
-					DEBUG("failed with exception %s",e.what());
+					SW_DEBUG("failed with exception %s",e.what());
 				}
 			}
 		}
@@ -1181,7 +1181,7 @@ bool Application::loadResources(int datagroups)
 		if (datagroups & World::DATA_ABILITIES)
 		{
 			EventSystem::init();
-			DEBUG("Loading ability data.");
+			SW_DEBUG("Loading ability data.");
 			Action::init();
 
 			files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("abilities","*.xml");
@@ -1201,7 +1201,7 @@ bool Application::loadResources(int datagroups)
 	// Spielerklassen initialisieren
 	if (datagroups & World::DATA_PLAYERCLASSES)
 	{
-		DEBUG("Loading playerclasses.");
+		SW_DEBUG("Loading playerclasses.");
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("playerclasses","*.xml");
 		for (it = files->begin(); it != files->end(); ++it)
 		{
@@ -1217,7 +1217,7 @@ bool Application::loadResources(int datagroups)
 	
 	if (datagroups & World::DATA_ITEMS)
 	{
-		DEBUG("Loading items.");
+		SW_DEBUG("Loading items.");
 		// Items initialisieren
 		ItemFactory::init();
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("items","*.xml");
@@ -1267,7 +1267,7 @@ bool Application::loadResources(int datagroups)
 
 	if (datagroups & World::DATA_RENDERINFO)
 	{
-		DEBUG("Loading renderinfo.");
+		SW_DEBUG("Loading renderinfo.");
 		
 		// Render Infos
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("renderinfo","*.xml");
@@ -1284,7 +1284,7 @@ bool Application::loadResources(int datagroups)
 
 	if (datagroups & World::DATA_SOUND)
 	{
-		DEBUG("Loading sound.");
+		SW_DEBUG("Loading sound.");
 		
 		// Sounds
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("sounddata","*.xml");
@@ -1295,7 +1295,7 @@ bool Application::loadResources(int datagroups)
 			file += it->filename;
 
 			//SoundSystem::loadSoundData(file.c_str());
-			DEBUG ("Loading sound file [%s]", file.c_str ());
+			SW_DEBUG ("Loading sound file [%s]", file.c_str ());
 			SoundHelper::loadSoundGroupsFromFile (file);
 
 			updateStartScreen(0.9);
@@ -1343,7 +1343,7 @@ void Application::loadAndPlayMenuMusic ()
 		xmlFileName.append ("/");
 		xmlFileName.append (it->filename);
 
-		DEBUG ("Located resource file for menu music: %s", xmlFileName.c_str ());
+		SW_DEBUG ("Located resource file for menu music: %s", xmlFileName.c_str ());
 		if (! SoundHelper::loadPlaylistFromXMLFile (xmlFileName))
 		{
 			ERRORMSG ("Could not successfully load playlist from given file: %s", xmlFileName.c_str ());
@@ -1435,7 +1435,7 @@ void  Application::update()
 		World* world = World::getWorld();
 		if (world->getDataReloadRequests() != World::DATA_NONE)
 		{
-			DEBUG("reload request %x",world->getDataReloadRequests());
+			SW_DEBUG("reload request %x",world->getDataReloadRequests());
 			
 			int datagroups = world->getDataReloadRequests();
 			
@@ -1452,7 +1452,7 @@ void Application::updateStartScreen(float percent)
 	// this occurs when ressources are loaded while running
 	if (m_running)
 	{
-		DEBUG ("Update start screen while running...");
+		SW_DEBUG ("Update start screen while running...");
 		return;
 	}
 
@@ -1495,7 +1495,7 @@ bool Application::windowClosing (Ogre::RenderWindow* rw)
 
 	if (rw && rw == m_window)
 	{
-		DEBUG ("Application got a window closing event.");
+		SW_DEBUG ("Application got a window closing event.");
 
 		if (m_document != 0)
 		{

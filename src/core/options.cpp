@@ -149,7 +149,7 @@ bool Options::readFromFile(const std::string& filename)
 	bool loadOkay = doc.LoadFile();
 
 	ElementAttrib attr;
-	DEBUG ("Reading user modifiable options from file [%s]", filename.c_str ());
+	SW_DEBUG ("Reading user modifiable options from file [%s]", filename.c_str ());
 	if (loadOkay)
 	{
 		TiXmlNode* child;
@@ -289,14 +289,14 @@ bool Options::readFromFile(const std::string& filename)
 		}  // if root == <Options>
 		else
 		{
-			DEBUG ("The file [%s] does not look like an options file. Reverting to default options.", filename.c_str ());
+			SW_DEBUG ("The file [%s] does not look like an options file. Reverting to default options.", filename.c_str ());
 			setToDefaultOptions();
 			return false;
 		}
 	}  // if (loadOkay)
 	else
 	{
-		DEBUG ("Could not read data from file [%s]. Reverting to default options.", filename.c_str ());
+		SW_DEBUG ("Could not read data from file [%s]. Reverting to default options.", filename.c_str ());
 		setToDefaultOptions();
 		return false;
 	}
@@ -427,7 +427,7 @@ bool Options:: setShortkey(KeyCode key,ShortkeyDestination dest)
 
 void Options::setSoundVolume(float vol)
 {
-	DEBUG ("Setting sound volume to: %.2f", vol);
+	SW_DEBUG ("Setting sound volume to: %.2f", vol);
 	SoundManager::getPtr ()->getRepository ()->setVolumeForCategory (gussound::GSC_Effect, vol);
 	SoundManager::getPtr ()->getRepository ()->setVolumeForCategory (gussound::GSC_Master, 1.0);
 	//SoundSystem::setSoundVolume(vol);
@@ -441,7 +441,7 @@ float Options::getSoundVolume()
 
 void Options::setMusicVolume (float vol)
 {
-	DEBUG ("Setting music volume to: %.2f", vol);
+	SW_DEBUG ("Setting music volume to: %.2f", vol);
 	SoundManager::getPtr ()->getRepository ()->setVolumeForCategory (gussound::GSC_Music, vol);
 	SoundManager::getPtr ()->getRepository ()->setVolumeForCategory (gussound::GSC_Master, 1.0);
 	//MusicManager::instance().setMusicVolume(vol);

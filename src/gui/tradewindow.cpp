@@ -36,12 +36,12 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 	CEGUI::FrameWindow* trade = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("tradewindow.layout");
 	if (!trade)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "tradewindow.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "tradewindow.layout");
 	}
 	CEGUI::Window* trade_holder = CEGUIUtility::loadLayoutFromFile ("tradewindow_holder.layout");
 	if (!trade_holder)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "tradewindow_holder.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "tradewindow_holder.layout");
 	}
 
 	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (trade_holder, "TradeWindow_Holder");
@@ -52,8 +52,8 @@ TradeWindow::TradeWindow (Document* doc, const std::string& ceguiSkinName)
 	}
 	else
 	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for trade.");
-		if (!wndTrade) DEBUG ("ERROR: Unable to get the window for trade.");
+		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for trade.");
+		if (!wndTrade) SW_DEBUG ("ERROR: Unable to get the window for trade.");
 	}
 
 	m_window = trade_holder;

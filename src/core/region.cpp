@@ -344,7 +344,7 @@ Region::Region(short dimx, short dimy, short id, std::string name, RegionData* d
 
 	m_light(this)
 {
-	DEBUG ("creating region [%s]", m_name.c_str ());
+	SW_DEBUG ("creating region [%s]", m_name.c_str ());
 
 	m_data_grid.clear();
 	m_height.clear();
@@ -399,7 +399,7 @@ Region::Region(short dimx, short dimy, short id, std::string name, RegionData* d
 				}
 				catch (std::exception& e)
 				{
-					DEBUG ("Region creation caught exception: %s", e.what ());
+					SW_DEBUG ("Region creation caught exception: %s", e.what ());
 				}
 			}
 		}
@@ -997,7 +997,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle )
 	 // Wenn das Element bereits existiert ist die Antwort false
 	if (result==false)
 	{
-		DEBUG("Object with id %i already exists",object->getId());
+		SW_DEBUG("Object with id %i already exists",object->getId());
 		return result;
 	}
 
@@ -1118,7 +1118,7 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 	
 	if (subtype == "")
 	{
-		DEBUG("no subtype found for generictype %s",generictype.c_str());
+		SW_DEBUG("no subtype found for generictype %s",generictype.c_str());
 		return 0;
 	}
 	
@@ -1126,7 +1126,7 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 	WorldObject::Type type = ObjectFactory::getObjectBaseType(subtype);
 	if (type == "NONE")
 	{
-		DEBUG("no base type for subtype %s",subtype.c_str());
+		SW_DEBUG("no base type for subtype %s",subtype.c_str());
 		return 0;
 	}
 
@@ -1135,7 +1135,7 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 
 	if (object ==0)
 	{
-		DEBUG("could not create object for generictype %s",generictype.c_str());
+		SW_DEBUG("could not create object for generictype %s",generictype.c_str());
 		return 0;
 	}
 
@@ -1162,7 +1162,7 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 	bool ret = insertObject(object,pos,angle);
 	if (!ret)
 	{
-		DEBUG("insertion of object %s failed",object->getNameId().c_str());
+		SW_DEBUG("insertion of object %s failed",object->getNameId().c_str());
 	}
 
 	return object->getId();
@@ -1317,7 +1317,7 @@ void Region::createMonsterGroup(MonsterGroupName mgname, Vector position, float 
 
 	if (mgroup == 0)
 	{
-		DEBUG("monster group %s not found",mgname.c_str());
+		SW_DEBUG("monster group %s not found",mgname.c_str());
 		return;
 	}
 
@@ -1467,7 +1467,7 @@ bool Region::deleteObject(int id)
 	}
 	else
 	{
-		DEBUG("no object with id %i",id);
+		SW_DEBUG("no object with id %i",id);
 	}
 	return false;
 }
@@ -2167,7 +2167,7 @@ void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 	WorldObject* oldobj = getObject(obj->getId());
 	if (oldobj != 0)
 	{
-		DEBUG("Object %i already exists",oldobj->getId());
+		SW_DEBUG("Object %i already exists",oldobj->getId());
 		oldobj->destroy();
 		deleteObject(oldobj);
 		delete oldobj;
@@ -2197,7 +2197,7 @@ void Region::createProjectileFromString(CharConv* cv)
 	Projectile* oldproj = getProjectile(proj->getId());
 	if (oldproj != 0)
 	{
-		DEBUG("Projectile %i already exists",oldproj->getId());
+		SW_DEBUG("Projectile %i already exists",oldproj->getId());
 		deleteProjectile(oldproj);
 		delete oldproj;
 	}
@@ -2236,7 +2236,7 @@ void Region::createDialogueFromString(CharConv* cv)
 	
 	if (m_dialogues.count(id) >0)
 	{
-		DEBUG("Dialogue %i already exists",id);
+		SW_DEBUG("Dialogue %i already exists",id);
 		deleteDialogue(m_dialogues[id]);
 	}	
 	
@@ -3141,7 +3141,7 @@ void Region::playSound(std::string soundname, Vector position, float volume , bo
 
 void Region::addMusicTrack(MusicTrack track)
 {
-	DEBUG ("Region: adding music track: %s", track.c_str ());
+	SW_DEBUG ("Region: adding music track: %s", track.c_str ());
 	//
 	MusicTrack copiedName = track;
 	copiedName = SoundHelper::getNameWithPathForMusicTrack (copiedName);

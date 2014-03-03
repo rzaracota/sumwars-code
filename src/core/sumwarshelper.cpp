@@ -470,13 +470,13 @@ std::string SumwarsHelper::getNearestAspectRatioStringForWindowSize (int width, 
 		// return the first entry in the map?
 		if (! guiAspectRatios_.empty ())
 		{
-			DEBUG ("WARNING (SumwarsHelper::getNearestAspectRatioStringForWindowSize): zero height specied; returning any available ratio!");
+			SW_DEBUG ("WARNING (SumwarsHelper::getNearestAspectRatioStringForWindowSize): zero height specied; returning any available ratio!");
 			return guiAspectRatios_.begin ()->first;
 		}
 		else
 		{
 			// this should not occur!
-			DEBUG ("WARNING (SumwarsHelper::getNearestAspectRatioStringForWindowSize): getNearestAspectRatioStringForWindowSize has no access to guiAspectRatios_! (empty map)");
+			SW_DEBUG ("WARNING (SumwarsHelper::getNearestAspectRatioStringForWindowSize): getNearestAspectRatioStringForWindowSize has no access to guiAspectRatios_! (empty map)");
 			return returnValue;
 		}
 	}
@@ -518,13 +518,13 @@ std::string SumwarsHelper::getRecommendedDefaultFontForWindowSize (int width, in
 		// return the first entry in the map?
 		if (! guiDefaultFonts_.empty ())
 		{
-			DEBUG ("WARNING (SumwarsHelper::getRecommendedDefaultFontForWindowSize): zero height specied; returning any available font!");
+			SW_DEBUG ("WARNING (SumwarsHelper::getRecommendedDefaultFontForWindowSize): zero height specied; returning any available font!");
 			return guiDefaultFonts_.begin ()->second;
 		}
 		else
 		{
 			// this should not occur!
-			DEBUG ("WARNING (SumwarsHelper::getRecommendedDefaultFontForWindowSize): getNearestAspectRatioStringForWindowSize has no access to guiDefaultFonts_! (empty map)");
+			SW_DEBUG ("WARNING (SumwarsHelper::getRecommendedDefaultFontForWindowSize): getNearestAspectRatioStringForWindowSize has no access to guiDefaultFonts_! (empty map)");
 			return returnValue;
 		}
 	}
@@ -557,7 +557,7 @@ std::string SumwarsHelper::getRecommendedDefaultFontForWindowSize (int width, in
  */
 void SumwarsHelper::addResourceLocationList (const std::vector<std::string> &locList, const std::string &groupToAddTo)
 {
-	DEBUG ("SumwarsHelper: Adding resource locations (%d items)...", locList.size ());
+	SW_DEBUG ("SumwarsHelper: Adding resource locations (%d items)...", locList.size ());
 	for (std::vector<std::string>::const_iterator it = locList.begin(); it!= locList.end(); ++it )
 	{
 		addResourceLocation (*it, groupToAddTo);
@@ -612,7 +612,7 @@ void SumwarsHelper::addResourceLocation (const std::string& loc, const std::stri
 			}
 			else
 			{
-				DEBUG ("SumwarsHelper: There is a variable in use that is not YET defined: %s", variableName.c_str ());
+				SW_DEBUG ("SumwarsHelper: There is a variable in use that is not YET defined: %s", variableName.c_str ());
 			}
 		}
 	}
@@ -627,12 +627,12 @@ void SumwarsHelper::addResourceLocation (const std::string& loc, const std::stri
 
 	if (bCanAddThis)
 	{
-		DEBUG ("SumwarsHelper: Adding location to resource list: [%s], group:[%s]", location.c_str (), secName.c_str ());
+		SW_DEBUG ("SumwarsHelper: Adding location to resource list: [%s], group:[%s]", location.c_str (), secName.c_str ());
 		Ogre::ResourceGroupManager::getSingleton ().addResourceLocation (location, typeName, secName, true);
 	}
 	else
 	{
-		DEBUG ("SumwarsHelper: Adding location to incomplete resource group list: [%s], group:[%s]. Try calling [retryToAddIncompleteResourceDirs] later on.", location.c_str (), secName.c_str ());
+		SW_DEBUG ("SumwarsHelper: Adding location to incomplete resource group list: [%s], group:[%s]. Try calling [retryToAddIncompleteResourceDirs] later on.", location.c_str (), secName.c_str ());
 		incompleteResourceGroupDirs_ [secName] = location;
 	}
 }
@@ -646,7 +646,7 @@ void SumwarsHelper::addResourceLocation (const std::string& loc, const std::stri
  */
 void SumwarsHelper::setPrefferedAspectRatioString (const std::string& aspectRatio)
 {
-	DEBUG ("SumwarsHelper: setting preffered aspect ratio string to: %s", aspectRatio.c_str ());
+	SW_DEBUG ("SumwarsHelper: setting preffered aspect ratio string to: %s", aspectRatio.c_str ());
 	getEditableApplicationVariablesMapping ()["ASPECT_RATIO"] = aspectRatio;
 }
 
