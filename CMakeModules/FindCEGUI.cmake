@@ -33,9 +33,9 @@ INCLUDE(FindPackageHandleAdvancedArgs)
 INCLUDE(HandleLibraryTypes)
 
 FIND_PATH(CEGUI_INCLUDE_DIR
-  NAMES cegui/CEGUI.h
-  PATHS $ENV{CEGUIDIR}
-  PATH_SUFFIXES /include /cegui/include /cegui/include/cegui /include/CEGUI CEGUI.framework/Headers
+  NAMES CEGUI/CEGUI.h
+  PATHS $ENV{CEGUIDIR} /usr /usr/local 
+  PATH_SUFFIXES cegui-0 cegui-99 /include /cegui/include /cegui/include/cegui /include/CEGUI CEGUI.framework/Headers 
 )
 
 MESSAGE (STATUS "*** CEGUI_INCLUDE_DIR is: ${CEGUI_INCLUDE_DIR}")

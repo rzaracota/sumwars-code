@@ -29,8 +29,9 @@ INCLUDE(HandleLibraryTypes)
 
 FIND_PATH(CEGUIOGRE_INCLUDE_DIRS
   NAMES CEGUIOgreRenderer.h Renderer.h
-  PATHS $ENV{CEGUIDIR}
+  PATHS $ENV{CEGUIDIR} /usr /usr/local 
   PATH_SUFFIXES include/RendererModules/Ogre 
+    cegui-0/CEGUI/RendererModules/Ogre 
     cegui/include/RendererModules/Ogre 
     include/CEGUI/RendererModules/Ogre 
     CEGUI.framework/Headers 
