@@ -53,12 +53,12 @@ SkillTree::SkillTree (Document* doc, OIS::Keyboard *keyboard, const std::string&
 	CEGUI::TabControl* skilltree = (CEGUI::TabControl*) CEGUIUtility::loadLayoutFromFile ("skilltree.layout");
 	if (!skilltree)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "skilltree.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "skilltree.layout");
 	}
 	CEGUI::Window* skilltree_holder = CEGUIUtility::loadLayoutFromFile ("skilltree_holder.layout");
 	if (!skilltree_holder)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "skilltree_holder.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "skilltree_holder.layout");
 	}
 
 	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (skilltree_holder, "Skilltree_Holder");
@@ -69,8 +69,8 @@ SkillTree::SkillTree (Document* doc, OIS::Keyboard *keyboard, const std::string&
 	}
 	else
 	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for skills.");
-		if (!wndSkilltree) DEBUG ("ERROR: Unable to get the window for skills.");
+		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for skills.");
+		if (!wndSkilltree) SW_DEBUG ("ERROR: Unable to get the window for skills.");
 	}
 
 	m_window = skilltree_holder;
@@ -307,7 +307,7 @@ void SkillTree::update()
 				imageWidgetName.erase (string_pos, 31);
 			}
 			m_skill_widgets_pics[cnt] = imageWidgetName;
-			DEBUG ("Added widget name (img) [%s]", imageWidgetName.c_str ());
+			SW_DEBUG ("Added widget name (img) [%s]", imageWidgetName.c_str ());
 
 			//
 			// Setup the button to be used to learn the corresponding skill.
@@ -343,7 +343,7 @@ void SkillTree::update()
 				btnWidgetName.erase (string_pos, 31);
 			}
 			m_skill_widgets_btns[cnt] = btnWidgetName;
-			DEBUG ("Added widget name (btn) [%s]", btnWidgetName.c_str ());
+			SW_DEBUG ("Added widget name (btn) [%s]", btnWidgetName.c_str ());
 
 			//
 			// Set the skill picture settings. This loads the picture and sets specific properties.
@@ -415,7 +415,7 @@ void SkillTree::update()
 							depsWidgetName.erase (string_pos, 31);
 						}
 						m_skill_widgets_connections[m_nr_dependencies] = depsWidgetName;
-						DEBUG ("Added widget name (conn) [%s]", depsWidgetName.c_str ());
+						SW_DEBUG ("Added widget name (conn) [%s]", depsWidgetName.c_str ());
 
 						m_nr_dependencies++;
 						
@@ -471,7 +471,7 @@ void SkillTree::update()
 		}
 		else
 		{
-            DEBUG ("Property not found: OverlayColour (in %s)", label->getNamePath().c_str());
+            SW_DEBUG ("Property not found: OverlayColour (in %s)", label->getNamePath().c_str());
 		}
 		
 		std::string skillButtonWidget = m_skill_widgets_btns[j];
@@ -635,7 +635,7 @@ void SkillTree::update()
 		
 		if (label2->getParent() != label->getParent())
 		{
-			DEBUG ("Reassigning siblings: [%s], to image widgets [%s]", label->getNamePath ().c_str (), label2->getNamePath ().c_str ());
+			SW_DEBUG ("Reassigning siblings: [%s], to image widgets [%s]", label->getNamePath ().c_str (), label2->getNamePath ().c_str ());
 
 			if (label->getParent() != 0)
 			{

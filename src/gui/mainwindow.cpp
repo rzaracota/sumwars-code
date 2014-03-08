@@ -92,21 +92,21 @@ bool MainWindow::init()
 	bool result = true;
 
 	m_ceguiSkinName = Options::getInstance ()->getCeguiSkin ();
-	DEBUG ("Main Window (init): Cegui skin name found in options as: [%s]", m_ceguiSkinName.c_str ());
+	SW_DEBUG ("Main Window (init): Cegui skin name found in options as: [%s]", m_ceguiSkinName.c_str ());
 
 	// Set-up the main menu.
-	DEBUG ("Setting up the root window.");
+	SW_DEBUG ("Setting up the root window.");
 	result &= setupRootWindow();
 
 	// Initialize the input devices
-	DEBUG ("Initializing input devices.");
+	SW_DEBUG ("Initializing input devices.");
 	result &= initInputs();
 
-	DEBUG ("Initializing graphics.");
+	SW_DEBUG ("Initializing graphics.");
 	GraphicManager::init();
 
 	// Set-up the main menu.
-	DEBUG ("Initializing main menu.");
+	SW_DEBUG ("Initializing main menu.");
 	result &= setupMainMenu();
 	CEGUIUtility::addChildWidget (m_root_window, m_main_menu);
 
@@ -114,7 +114,7 @@ bool MainWindow::init()
 	CEGUIUtility::setRootSheet (CEGUI::System::getSingletonPtr(), m_root_window);
 
 	// Set-up the main game window/screen
-	DEBUG ("Initializing main game screen.");
+	SW_DEBUG ("Initializing main game screen.");
 	result &= setupGameScreen();
 	CEGUIUtility::addChildWidget (m_root_window, m_game_screen);
 
@@ -206,7 +206,7 @@ bool MainWindow::setupMainMenu()
 		std::string layoutFile ("startscreen.layout");
 		CEGUI::Window* start_screen_holder = CEGUIUtility::loadLayoutFromFile (layoutFile);
 
-		DEBUG ("Loaded layout file [%s]", layoutFile.c_str ());
+		SW_DEBUG ("Loaded layout file [%s]", layoutFile.c_str ());
 
 		if (start_screen_holder)
 		{
@@ -231,42 +231,42 @@ bool MainWindow::setupMainMenu()
             ERRORMSG ("WARNING: Failed to load [%s]", layoutFile.c_str ());
 		}
 
-		DEBUG ("Creating credits window");
+		SW_DEBUG ("Creating credits window");
 
 		CreditsWindow* crd = new CreditsWindow (m_document, m_ceguiSkinName);
 		m_sub_windows["CreditsWindow"] = crd;
 		crd->getCEGUIWindow ()->setMousePassThroughEnabled (true);
 		CEGUIUtility::addChildWidget (m_main_menu, crd->getCEGUIWindow());
 
-		DEBUG ("Creating main menu");
+		SW_DEBUG ("Creating main menu");
 
 		Window * wnd = new MainMenu(m_document, m_ceguiSkinName);
 		m_sub_windows["MainMenu"] = wnd;
 		wnd->getCEGUIWindow ()->setMousePassThroughEnabled (true);
 		CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
 
-		DEBUG ("Creating character screen");
+		SW_DEBUG ("Creating character screen");
 
 		wnd = new CharCreate (m_document, m_ceguiSkinName);
 		m_sub_windows["CharCreate"] = wnd;
 		wnd->getCEGUIWindow ()->setMousePassThroughEnabled (true);
 		CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
 		
-		DEBUG ("Creating options window");
+		SW_DEBUG ("Creating options window");
 
 		wnd = new OptionsWindow(m_document,m_keyboard, m_ceguiSkinName);
 		m_sub_windows["Options"] = wnd;
 		wnd->getCEGUIWindow ()->setMousePassThroughEnabled (true);
 		CEGUIUtility::addChildWidget (m_root_window, wnd->getCEGUIWindow());
 		
-		DEBUG ("Creating game hosting screen");
+		SW_DEBUG ("Creating game hosting screen");
 
 		wnd = new HostGameWindow(m_document);
 		m_sub_windows["HostGame"] = wnd;
 		wnd->getCEGUIWindow ()->setMousePassThroughEnabled (true);
 		CEGUIUtility::addChildWidget (m_main_menu, wnd->getCEGUIWindow());
 		
-		DEBUG ("Creating game joining screen");
+		SW_DEBUG ("Creating game joining screen");
 
 		wnd = new JoinGameWindow(m_document);
 		m_sub_windows["JoinGame"] = wnd;
@@ -1256,7 +1256,7 @@ void MainWindow::setupErrorDialogWindow()
 
 void MainWindow::setupChatContent()
 {
-	DEBUG ("Setting up chat content GUI window");
+	SW_DEBUG ("Setting up chat content GUI window");
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	CEGUI::Window* label;
@@ -2302,7 +2302,7 @@ void MainWindow::updateRegionInfo()
 
 		if (refresh)
 		{
-			DEBUG ("*** main window expecting refresh for region [%s]", pl->getRegion ()->getName ().c_str ());
+			SW_DEBUG ("*** main window expecting refresh for region [%s]", pl->getRegion ()->getName ().c_str ());
 			timer.start();
 
 			MinimapWindow* myMinimap = static_cast<MinimapWindow*> (m_sub_windows["Minimap"]);
@@ -2659,7 +2659,7 @@ bool MainWindow::mouseMoved(const OIS::MouseEvent &evt)
 	}
 	catch (std::exception& e)
 	{
-		DEBUG ("Caught exception: [%s]", e.what ());
+		SW_DEBUG ("Caught exception: [%s]", e.what ());
 	}
 	
 	return CEGUIUtility::injectMousePosition (m_cegui_system, evt.state.X.abs, evt.state.Y.abs);
@@ -2700,7 +2700,7 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
     // if the returned window is anything else than "GameScreen" then CEGUI needs to process the input
 	CEGUI::Window* mouseWindow = CEGUIUtility::getWindowContainingMouse (m_cegui_system);
 
-	DEBUG ("Mouse Pressed. Mouse window is [%s]", mouseWindow->getName ().c_str ());
+	SW_DEBUG ("Mouse Pressed. Mouse window is [%s]", mouseWindow->getName ().c_str ());
 	if (! (mouseWindow->getName () == "SW")) 
     {
         ret = true; // set ret to false if the events where processed by the invisible window
@@ -2843,7 +2843,7 @@ bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 	{
 		if (m_keyboard->isModifierDown (OIS::Keyboard::Ctrl))
 		{
-			DEBUG ("MainWindow:: ctrl + c pressed!");
+			SW_DEBUG ("MainWindow:: ctrl + c pressed!");
 			SWUtil::Clipboard::getSingletonPtr ()->copy ();
 		}
 	}
@@ -2851,7 +2851,7 @@ bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 	{
 		if (m_keyboard->isModifierDown (OIS::Keyboard::Ctrl))
 		{
-			DEBUG ("MainWindow:: ctrl + X pressed!");
+			SW_DEBUG ("MainWindow:: ctrl + X pressed!");
 			SWUtil::Clipboard::getSingletonPtr ()->cut ();
 		}
 	}
@@ -2859,7 +2859,7 @@ bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 	{
 		if (m_keyboard->isModifierDown (OIS::Keyboard::Ctrl))
 		{
-			DEBUG ("MainWindow:: ctrl + V pressed!");
+			SW_DEBUG ("MainWindow:: ctrl + V pressed!");
 			SWUtil::Clipboard::getSingletonPtr ()->paste ();
 		}
 	}
@@ -2926,7 +2926,7 @@ bool MainWindow::onPartyMemberClicked(const CEGUI::EventArgs& evt)
 	if (pl2 ==0)
 		return true;
 	
-	DEBUG("party member Click %i",id);
+	SW_DEBUG("party member Click %i",id);
 	
 	m_document->getGUIState()->m_cursor_object_id = id;
 	if (we.button == CEGUI::LeftButton)

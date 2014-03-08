@@ -367,7 +367,7 @@ void ItemFactory::init()
 
 void ItemFactory::cleanup()
 {
-	DEBUG("cleanup");
+	SW_DEBUG("cleanup");
 
 	std::map<Item::Subtype,ItemBasicData*>::iterator it;
 	for (it = m_item_data.begin(); it != m_item_data.end(); ++it)

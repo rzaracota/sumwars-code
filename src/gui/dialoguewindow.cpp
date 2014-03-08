@@ -29,13 +29,13 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene, const std::string& c
 	CEGUI::FrameWindow* dialog_wnd = static_cast<CEGUI::FrameWindow*> (CEGUIUtility::loadLayoutFromFile ("dialogwindow.layout"));
 	if (!dialog_wnd)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "dialogwindow.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "dialogwindow.layout");
 	}
 
 	CEGUI::Window* dialog_wnd_holder = CEGUIUtility::loadLayoutFromFile ("dialogwindow_holder.layout");
 	if (!dialog_wnd_holder)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "dialogwindow_holder.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "dialogwindow_holder.layout");
 	}
 	
 	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (dialog_wnd_holder, "DialogWindow_Holder");
@@ -46,8 +46,8 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene, const std::string& c
 	}
 	else
 	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for dialog screen.");
-		if (!wndDialogWindow) DEBUG ("ERROR: Unable to get the window for dialog screen.");
+		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for dialog screen.");
+		if (!wndDialogWindow) SW_DEBUG ("ERROR: Unable to get the window for dialog screen.");
 	}
 
 	m_window = dialog_wnd_holder;
@@ -101,23 +101,23 @@ void DialogueWindow::update()
 		upper_bar->setVisible(bar_vis);
 		lower_bar->setVisible(bar_vis);
 		m_window->setVisible (bar_vis);
-		DEBUG ("Set both lower and upper bar visibility to %d", bar_vis);
+		SW_DEBUG ("Set both lower and upper bar visibility to %d", bar_vis);
 		
 		// note: remove this (only debug)
 		if (bar_vis)
 		{
-			DEBUG ("object visibility set to true: %s", upper_bar->getNamePath ().c_str ());
+			SW_DEBUG ("object visibility set to true: %s", upper_bar->getNamePath ().c_str ());
 			CEGUI::Window *tmp;
 			tmp = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "DialogWindow");
-			DEBUG ("object visibility of %s is %d", tmp->getNamePath ().c_str (), tmp->isVisible ());
+			SW_DEBUG ("object visibility of %s is %d", tmp->getNamePath ().c_str (), tmp->isVisible ());
 			tmp = CEGUIUtility::getWindow ("GameScreen/DialogWindow_Holder");
-			DEBUG ("object visibility of %s is %d", tmp->getNamePath ().c_str (), tmp->isVisible ());
+			SW_DEBUG ("object visibility of %s is %d", tmp->getNamePath ().c_str (), tmp->isVisible ());
 			if (! tmp->isVisible ())
 			{
 				tmp->setVisible (true);
 			}
 			tmp = CEGUIUtility::getWindow ("GameScreen");
-			DEBUG ("object visibility of %s is %d", tmp->getNamePath ().c_str (), tmp->isVisible ());
+			SW_DEBUG ("object visibility of %s is %d", tmp->getNamePath ().c_str (), tmp->isVisible ());
 		}
 	}
 	
@@ -179,7 +179,7 @@ void DialogueWindow::update()
 					if (wname->getText() != (CEGUI::utf8*) name.c_str())
 					{
 						wname->setText((CEGUI::utf8*) name.c_str());
-						DEBUG ("Set text of widget (a) [%s] to [%s]", wname->getNamePath ().c_str (), wname->getText ().c_str ());
+						SW_DEBUG ("Set text of widget (a) [%s] to [%s]", wname->getNamePath ().c_str (), wname->getText ().c_str ());
 					}
 					
 					if (!wname->isVisible())
@@ -217,7 +217,7 @@ void DialogueWindow::update()
 							wtext->setText((CEGUI::utf8*)txt.text.c_str());
 #else
 							wtext->setText((CEGUI::utf8*)text.c_str());
-							DEBUG ("Set text of widget (b) [%s] to [%s]", wname->getNamePath ().c_str (), wname->getText ().c_str ());
+							SW_DEBUG ("Set text of widget (b) [%s] to [%s]", wname->getNamePath ().c_str (), wname->getText ().c_str ());
 #endif
 						}
 						wtext->setVisible(true);
@@ -413,7 +413,7 @@ void DialogueWindow::updateSpeechBubbles()
 			label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,picsize+10), CEGUI::UDim(0,5)));
 			
 			label->setText("");
-			DEBUG ("Set text of widget (c) [%s] to [%s]", label->getNamePath ().c_str (), label->getText ().c_str ());
+			SW_DEBUG ("Set text of widget (c) [%s] to [%s]", label->getNamePath ().c_str (), label->getText ().c_str ());
 			label->setAlpha(0.9);
 			
 			stream.str("");
@@ -446,7 +446,7 @@ void DialogueWindow::updateSpeechBubbles()
 			
 		if (label->getText() != (CEGUI::utf8*) text.c_str())
 		{
-			DEBUG ("diff label [%s], [%s]", label->getText ().c_str (), text.c_str ());
+			SW_DEBUG ("diff label [%s], [%s]", label->getText ().c_str (), text.c_str ());
 
 			const CEGUI::Font* font = label->getFont();
 			
@@ -458,7 +458,7 @@ void DialogueWindow::updateSpeechBubbles()
 			FormatedText txt = CEGUIUtility::fitTextToWindow((CEGUI::utf8*) text.c_str(), maxwidth, CEGUIUtility::WordWrapLeftAligned, font);
 			size_t lines = txt.lines;
 			label->setText((CEGUI::utf8*) txt.text.c_str());
-			DEBUG ("Set text of widget (d) [%s] to [%s]", label->getNamePath ().c_str (), label->getText ().c_str ());
+			SW_DEBUG ("Set text of widget (d) [%s] to [%s]", label->getNamePath ().c_str (), label->getText ().c_str ());
 
 			// Test to see whether the text can fit a single line
 			if (txt.lines <= 1)
@@ -589,7 +589,7 @@ void DialogueWindow::updateSpeechBubbles()
 		if (label->getText() != ctext)
 		{
 			label->setText((CEGUI::utf8*)ctext);
-			DEBUG ("Set text of widget (e) [%s] to [%s]", label->getNamePath ().c_str (), label->getText ().c_str ());
+			SW_DEBUG ("Set text of widget (e) [%s] to [%s]", label->getNamePath ().c_str (), label->getText ().c_str ());
 		}
 		
 		label->setPosition(CEGUI::UVector2(CEGUI::UDim(0,horzoffset), CEGUI::UDim(0,height)));
@@ -661,7 +661,7 @@ void DialogueWindow::updateSpeechBubbles()
 
 			if (label->getText() != expectedString)
 			{
-				DEBUG ("Updating text of widget (f) [%s] to [%s] (prev [%s])", label->getNamePath ().c_str (), expectedString.c_str (), label->getText ().c_str ());
+				SW_DEBUG ("Updating text of widget (f) [%s] to [%s] (prev [%s])", label->getNamePath ().c_str (), expectedString.c_str (), label->getText ().c_str ());
 				label->setText((CEGUI::utf8*)expectedString.c_str());
 			}
 			
@@ -714,7 +714,7 @@ void DialogueWindow::updateSpeechBubbles()
 
 bool DialogueWindow::onAnswerClicked(const CEGUI::EventArgs& evt)
 {
-	DEBUG ("DialogueWindow::onAnswerClicked");
+	SW_DEBUG ("DialogueWindow::onAnswerClicked");
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
@@ -729,7 +729,7 @@ bool DialogueWindow::onAnswerEnterArea(const CEGUI::EventArgs& evt)
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	CEGUI::String lineText = "[colour='FFFFDD66']";
-	DEBUG ("Entered area for: %s (%s)", we.window->getNamePath ().c_str (), we.window->getTextVisual ().c_str ());
+	SW_DEBUG ("Entered area for: %s (%s)", we.window->getNamePath ().c_str (), we.window->getTextVisual ().c_str ());
 //	we.window->setTextParsingEnabled (true);
 	we.window->setText ("-");
 	we.window->invalidate (true);
@@ -747,7 +747,7 @@ bool DialogueWindow::onAnswerLeaveArea(const CEGUI::EventArgs& evt)
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	//DEBUG ("Left area for: %s", we.window->getText ().c_str ());
-	DEBUG ("Left area for: %s (%s)", we.window->getNamePath ().c_str (), we.window->getTextVisual ().c_str ());
+	SW_DEBUG ("Left area for: %s (%s)", we.window->getNamePath ().c_str (), we.window->getTextVisual ().c_str ());
 	CEGUI::String lineText = "[colour='FFFFFFFF']";
 	we.window->setText ("-");
 	we.window->invalidate (true);
@@ -757,7 +757,7 @@ bool DialogueWindow::onAnswerLeaveArea(const CEGUI::EventArgs& evt)
 
 bool DialogueWindow::onTextClicked(const CEGUI::EventArgs& evt)
 {
-	DEBUG ("DialogueWindow::onTextClicked");
+	SW_DEBUG ("DialogueWindow::onTextClicked");
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);

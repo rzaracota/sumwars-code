@@ -352,7 +352,7 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 			parentPtr->addChildWindow (childPtr);
 #else
 			parentPtr->addChild (childPtr);
-			DEBUG ("[ceguiutil] Added item: [%s] to [%s]", childPtr->getNamePath ().c_str (), parentPtr->getNamePath ().c_str ());
+			SW_DEBUG ("[ceguiutil] Added item: [%s] to [%s]", childPtr->getNamePath ().c_str (), parentPtr->getNamePath ().c_str ());
 #endif
 		}
 
@@ -386,7 +386,7 @@ FormatedText CEGUIUtility::fitTextToWindow(const CEGUI::String& text, float maxW
 
 	void CEGUIUtility::loadImageset (const CEGUI::String& name)
 	{
-		DEBUG ("Loading imageset file [%s]", name.c_str ());
+		SW_DEBUG ("Loading imageset file [%s]", name.c_str ());
 #ifdef CEGUI_07
 		CEGUI::ImagesetManager::getSingleton().create(name);
 #else
@@ -427,7 +427,7 @@ void CEGUIUtility::dumpFullWindowToLog (CEGUI::Window* startingWindow, int level
 	}
 	
 	int numChildren = startingWindow->getChildCount ();
-	DEBUG ("%s%s (%d children)", ss.str ().c_str (), startingWindow->getName().c_str (), numChildren);
+	SW_DEBUG ("%s%s (%d children)", ss.str ().c_str (), startingWindow->getName().c_str (), numChildren);
 	for (int i = 0; i < numChildren; ++ i)
 	{
 		CEGUI::Window* childPtr = startingWindow->getChildAtIdx (i);
@@ -449,7 +449,7 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 	CEGUI::Window* root = sys->getDefaultGUIContext().getRootWindow();
 	if (0 == root)
 	{
-		DEBUG ("Warning! Attempting to get a unnamed widget from a NULL window");
+		SW_DEBUG ("Warning! Attempting to get a unnamed widget from a NULL window");
 		return 0;
 	}
 
@@ -457,7 +457,7 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 	{
 		if (name.length () <= 0)
 		{
-			DEBUG ("Warning! Attempting to get an unnamed widget from the root window");
+			SW_DEBUG ("Warning! Attempting to get an unnamed widget from the root window");
 		}
 
 		if (root->isChild (name))
@@ -473,7 +473,7 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 			else
 			{
 				int numChildren = root->getChildCount ();
-				DEBUG ("Could not find child [%s] within %d children of root [%s]", name.c_str (), numChildren, root->getName ().c_str ());
+				SW_DEBUG ("Could not find child [%s] within %d children of root [%s]", name.c_str (), numChildren, root->getName ().c_str ());
 				for (int i = 0; i < numChildren; ++ i)
 				{
 					CEGUI::Window* childPtr = root->getChildAtIdx (i);
@@ -482,11 +482,11 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 						continue;
 					}
 
-					DEBUG ("Child [%d]: [%s]", i, childPtr->getName ().c_str ());
+					SW_DEBUG ("Child [%d]: [%s]", i, childPtr->getName ().c_str ());
 				}
 
 				// Show how much of the path was matched.
-				DEBUG ("Matched items: [%s]", CEGUIUtility::getMatchingPath (root, name).c_str ());
+				SW_DEBUG ("Matched items: [%s]", CEGUIUtility::getMatchingPath (root, name).c_str ());
 			}
 		}
 	}
@@ -494,7 +494,7 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 	{
 		// Just display the list of child nodes. Then repackage the exception and throw it further along.
 		int numChildren = root->getChildCount ();
-		DEBUG ("Could not find child [%s] within %d children of root [%s]", name.c_str (), numChildren, root->getName ().c_str ());
+		SW_DEBUG ("Could not find child [%s] within %d children of root [%s]", name.c_str (), numChildren, root->getName ().c_str ());
 		for (int i = 0; i < numChildren; ++ i)
 		{
 			CEGUI::Window* childPtr = root->getChildAtIdx (i);
@@ -503,11 +503,11 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 				continue;
 			}
 
-			DEBUG ("Child [%d]: [%s]", i, childPtr->getName ().c_str ());
+			SW_DEBUG ("Child [%d]: [%s]", i, childPtr->getName ().c_str ());
 		}
 
 		// Show how much of the path was matched.
-		DEBUG ("Matched items: [%s]", CEGUIUtility::getMatchingPath (root, name).c_str ());
+		SW_DEBUG ("Matched items: [%s]", CEGUIUtility::getMatchingPath (root, name).c_str ());
 		throw ex;
 	}
 #endif
@@ -520,7 +520,7 @@ CEGUI::Window* CEGUIUtility::getWindowForSystemNoEx (CEGUI::System* sys, const C
 	CEGUI::Window* root = sys->getDefaultGUIContext().getRootWindow();
 	if (0 == root)
 	{
-		DEBUG ("Warning! Attempting to get a unnamed widget from a NULL window");
+		SW_DEBUG ("Warning! Attempting to get a unnamed widget from a NULL window");
 		return 0;
 	}
 
@@ -528,7 +528,7 @@ CEGUI::Window* CEGUIUtility::getWindowForSystemNoEx (CEGUI::System* sys, const C
 	{
 		if (name.length () <= 0)
 		{
-			DEBUG ("Warning! Attempting to get an unnamed widget from the root window");
+			SW_DEBUG ("Warning! Attempting to get an unnamed widget from the root window");
 		}
 
 		if (root->isChild (name))
@@ -614,7 +614,7 @@ CEGUI::Window* CEGUIUtility::getWindowForSystemNoEx (CEGUI::System* sys, const C
 					currentWidget = childPtr;
 					result.append ("/");
 					result.append (currentWidget->getName ());
-					DEBUG ("Child [%d]: [%s]", i, currentWidget->getName ().c_str ());
+					SW_DEBUG ("Child [%d]: [%s]", i, currentWidget->getName ().c_str ());
 
 					// Move to the next token (child name) in the string.
 					++ currentToken;
@@ -623,7 +623,7 @@ CEGUI::Window* CEGUIUtility::getWindowForSystemNoEx (CEGUI::System* sys, const C
 
 			if (!foundChild)
 			{
-				DEBUG ("Could not find child [%s] within %d children of [%s]", castedName.c_str (), numChildren, currentWidget->getName ().c_str ());
+				SW_DEBUG ("Could not find child [%s] within %d children of [%s]", castedName.c_str (), numChildren, currentWidget->getName ().c_str ());
 				for (int i = 0; i < numChildren; ++ i)
 				{
 					CEGUI::Window* childPtr = currentWidget->getChildAtIdx (i);
@@ -632,7 +632,7 @@ CEGUI::Window* CEGUIUtility::getWindowForSystemNoEx (CEGUI::System* sys, const C
 						continue;
 					}
 
-					DEBUG ("Child [%d]: [%s]", i, childPtr->getName ().c_str ());
+					SW_DEBUG ("Child [%d]: [%s]", i, childPtr->getName ().c_str ());
 				}
 			}
 		}
@@ -651,7 +651,7 @@ CEGUI::Window* CEGUIUtility::getWindowForSystemNoEx (CEGUI::System* sys, const C
 #else
 		if (0 == parentWnd)
 		{
-			DEBUG ("Null parent received.");
+			SW_DEBUG ("Null parent received.");
 			return 0;
 		}
 
@@ -668,7 +668,7 @@ CEGUI::Window* CEGUIUtility::getWindowForSystemNoEx (CEGUI::System* sys, const C
 			else
 			{
 				int numChildren = parentWnd->getChildCount ();
-				DEBUG ("Could not find child [%s] within %d children of [%s]", name.c_str (), numChildren, parentWnd->getName ().c_str ());
+				SW_DEBUG ("Could not find child [%s] within %d children of [%s]", name.c_str (), numChildren, parentWnd->getName ().c_str ());
 				for (int i = 0; i < numChildren; ++ i)
 				{
 					CEGUI::Window* childPtr = parentWnd->getChildAtIdx (i);
@@ -677,11 +677,11 @@ CEGUI::Window* CEGUIUtility::getWindowForSystemNoEx (CEGUI::System* sys, const C
 						continue;
 					}
 
-					DEBUG ("Child [%d]: [%s]", i, childPtr->getName ().c_str ());
+					SW_DEBUG ("Child [%d]: [%s]", i, childPtr->getName ().c_str ());
 				}
 
 				// Show how much of the path was matched.
-				DEBUG ("Matched items: [%s]", CEGUIUtility::getMatchingPath(parentWnd, name).c_str());
+				SW_DEBUG ("Matched items: [%s]", CEGUIUtility::getMatchingPath(parentWnd, name).c_str());
 			}
 		}
 #endif

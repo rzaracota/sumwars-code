@@ -45,7 +45,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 
 	m_keyboard = keyboard;
 
-	DEBUG ("OptionsWindow being created using cegui skin [%s]", m_ceguiSkinName.c_str ());
+	SW_DEBUG ("OptionsWindow being created using cegui skin [%s]", m_ceguiSkinName.c_str ());
 	// Generate GUI Elements
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
@@ -54,14 +54,14 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	CEGUI::FrameWindow* options = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("optionswindow.layout");
 	if (!options)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "optionswindow.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "optionswindow.layout");
 	}
 
 	// Load the holder layout. This should be diffeent for each aspect ratio.
 	CEGUI::Window* options_holder = CEGUIUtility::loadLayoutFromFile ("options_holder.layout");
 	if (!options_holder)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "options_holder.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "options_holder.layout");
 	}
 
 	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (options_holder, "OptionsWindow_Holder");
@@ -72,8 +72,8 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	}
 	else
 	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for options window.");
-		if (!wndHeldWindow) DEBUG ("ERROR: Unable to get the window for options window.");
+		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for options window.");
+		if (!wndHeldWindow) SW_DEBUG ("ERROR: Unable to get the window for options window.");
 	}
 
 
@@ -81,7 +81,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	options_holder->setAlwaysOnTop (true);
 	m_window = options_holder;
 
-	DEBUG ("OptionsWindow (ctor) loaded layout");
+	SW_DEBUG ("OptionsWindow (ctor) loaded layout");
 
 	// Rahmen fuer das Menue Savegame auswaehlen
 	CEGUI::TabControl* optionstab = (CEGUI::TabControl*) CEGUIUtility::getWindowForLoadedLayoutEx (options, "OptionsWindowTab");
@@ -115,7 +115,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	label->subscribeEvent (CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber (&OptionsWindow::onGUIItemClicked, this));
 	label->setInheritsAlpha(false);
 	
-	DEBUG ("OptionsWindow (ctor) adding labels");
+	SW_DEBUG ("OptionsWindow (ctor) adding labels");
 
 	int targets[9] = {SHOW_INVENTORY, SHOW_CHARINFO, SHOW_SKILLTREE, SHOW_PARTYMENU, SHOW_CHATBOX, SHOW_QUESTINFO, SHOW_MINIMAP, SWAP_EQUIP, SHOW_ITEMLABELS};
 
@@ -141,7 +141,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 		//label->subscribeEvent(CEGUIUtility::EventMouseEntersWindowArea (), CEGUI::Event::Subscriber(&OptionsWindow::onButtonItemHover,  this));
 	}
 	
-	DEBUG ("Adding difficulty combo-box");//xxx
+	SW_DEBUG ("Adding difficulty combo-box");//xxx
 	CEGUI::Combobox* diffcbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGameplay/DifficultyBox"));
 	diffcbo->addItem(new ListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Easy"),Options::EASY));
 	diffcbo->addItem(new ListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) gettext("Normal"),Options::NORMAL));
@@ -154,7 +154,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	diffcbo->setItemSelectState( (size_t) (Options::getInstance()->getDifficulty()-1),true);
 	connectWidgetSoundEvents ("OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGameplay/DifficultyBox", "combobox");
 	
-	DEBUG ("Adding sliders");
+	SW_DEBUG ("Adding sliders");
 	slider = static_cast<CEGUI::Scrollbar*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGameplay/TextSpeedSlider"));
 	slider->setPageSize (0.01f);
 	slider->setDocumentSize(1.0f);
@@ -228,7 +228,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	}
 	catch (std::exception& e)
 	{
-		DEBUG ("Caught exception while creating events for optional object. Carrying on after the exception [%s]", e.what());
+		SW_DEBUG ("Caught exception while creating events for optional object. Carrying on after the exception [%s]", e.what());
 	}
 	
 
@@ -254,7 +254,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 		locale = locale.substr(0,pos);
 	}
 
-	DEBUG ("OptionsWindow (ctor) current locale is [%s]", locale.c_str ());
+	SW_DEBUG ("OptionsWindow (ctor) current locale is [%s]", locale.c_str ());
 	
 	for (int i=0; i < (int)cbo->getItemCount(); i++)
 	{
@@ -276,7 +276,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 
 	if (Options::getInstance ()->isWindowedFullscreenModeSupported ())
 	{
-		DEBUG ("Windowed fullscreen mode supported! Adding combobox item.");
+		SW_DEBUG ("Windowed fullscreen mode supported! Adding combobox item.");
 		std::string modeName = gettext("Window (Fullscreen)");
 		std::string recommended = gettext (" - recommended");
 		std::string sum = modeName + recommended;
@@ -285,7 +285,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	}
 	else
 	{
-		DEBUG ("Windowed fullscreen mode NOT supported!");
+		SW_DEBUG ("Windowed fullscreen mode NOT supported!");
 	}
 
 	cbo->setReadOnly(true);
@@ -338,7 +338,7 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 
 	// Get the resolution in the current options set.
 	std::string usedResolution = Options::getInstance ()->getUsedResolution ();
-	DEBUG ("Used resolution is: [%s]", usedResolution.c_str ());
+	SW_DEBUG ("Used resolution is: [%s]", usedResolution.c_str ());
 
 	// Get the list of available resolutions for the selected video driver.
 	std::vector <std::string> resolutions = Options::getInstance ()->getEditableResolutionsMapping ()[selectedVideoDriver];
@@ -426,12 +426,12 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 		}
 		else
 		{
-			DEBUG ("Options Window init: could not find item named %s", widgetName.c_str());
+			SW_DEBUG ("Options Window init: could not find item named %s", widgetName.c_str());
 		}
 	}
 	catch(std::exception& e)
 	{
-		DEBUG ("Caught exception and continuing [%s]", e.what ());
+		SW_DEBUG ("Caught exception and continuing [%s]", e.what ());
 	}
 
 	reset();
@@ -631,18 +631,18 @@ void OptionsWindow::connectWidgetSoundEvents (const std::string& widgetName, con
 			}
 			catch (std::exception& e)
 			{
-				DEBUG ("Caught an exception while connecting widget sound events (will continue) [%s]", e.what ());
+				SW_DEBUG ("Caught an exception while connecting widget sound events (will continue) [%s]", e.what ());
 			}
 
 		}
 		else
 		{
-			DEBUG ("Developer message: widget type [%s] not recognized in connecting widget sound events", widgetType.c_str ());
+			SW_DEBUG ("Developer message: widget type [%s] not recognized in connecting widget sound events", widgetType.c_str ());
 		}
 	}
 	catch (std::exception& e)
 	{
-		DEBUG ("Caught exception: %s", e.what ());
+		SW_DEBUG ("Caught exception: %s", e.what ());
 	}
 }
 
@@ -718,7 +718,7 @@ bool OptionsWindow::onButtonCancelClicked (const CEGUI::EventArgs& evt)
 
 bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 {
-	DEBUG ("[Ok] button clicked in options. Attempting to save them");
+	SW_DEBUG ("[Ok] button clicked in options. Attempting to save them");
 	// TODO: move video mode checks to separate function? or just wait for the full integration with the rest of the options?
 
 	// Play the sound
@@ -736,14 +736,14 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 		CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGraphic/VideoDriverBox"));
 		if (cbo == 0)
 		{
-			DEBUG ("Could not find widget [VideoDriverBox]");
+			SW_DEBUG ("Could not find widget [VideoDriverBox]");
 			return false;
 		}
 
 		CEGUI::ListboxItem* item = cbo->getSelectedItem();
 		if (item == 0)
 		{
-			DEBUG ("Could not find selected item in widget [VideoDriverBox]. Searching via text values. (slower)");
+			SW_DEBUG ("Could not find selected item in widget [VideoDriverBox]. Searching via text values. (slower)");
 			CEGUI::String currentText = cbo->getText();
 
 			for (unsigned i = 0; i < cbo->getItemCount (); i ++)
@@ -757,7 +757,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 
 		if (item == 0)
 		{
-			DEBUG ("Could not find selected item in widget [VideoDriverBox]. Unable to store any changes!!!");
+			SW_DEBUG ("Could not find selected item in widget [VideoDriverBox]. Unable to store any changes!!!");
 		}
 
 		std::string selectedDriverName (Options::getInstance ()->getUsedVideoDriver ());
@@ -772,14 +772,14 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 		cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGraphic/DisplayModeBox"));
 		if (cbo == 0)
 		{
-			DEBUG ("Could not find widget [DisplayModeBox]");
+			SW_DEBUG ("Could not find widget [DisplayModeBox]");
 			return false;
 		}
 
 		item = cbo->getSelectedItem();
 		if (item == 0)
 		{
-			DEBUG ("Could not find selected item in widget [DisplayModeBox]. Searching via text values. (slower)");
+			SW_DEBUG ("Could not find selected item in widget [DisplayModeBox]. Searching via text values. (slower)");
 			CEGUI::String currentText = cbo->getText();
 			
 			for (unsigned i = 0; i < cbo->getItemCount (); i ++)
@@ -792,7 +792,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 		}
 		if (item == 0)
 		{
-			DEBUG ("Could not find selected item in widget [DisplayModeBox]. Unable to store any changes!!!");
+			SW_DEBUG ("Could not find selected item in widget [DisplayModeBox]. Unable to store any changes!!!");
 		}
 
 		DisplayModes userMode = Options::getInstance ()->getUsedDisplayMode ();
@@ -801,10 +801,10 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 		{
 			size_t selectionIndex = (int)cbo->getItemIndex (item);
 
-			DEBUG ("selected display mode %s",item->getText().c_str());
+			SW_DEBUG ("selected display mode %s",item->getText().c_str());
 		
 			userMode = (DisplayModes)selectionIndex;
-			DEBUG ("Index of combobox selection is: %d. New display mode set to %d", selectionIndex, userMode);
+			SW_DEBUG ("Index of combobox selection is: %d. New display mode set to %d", selectionIndex, userMode);
 			someVideoSettingsWereChanged |= (userMode != Options::getInstance ()->getUsedDisplayMode ());
 		}
 
@@ -814,7 +814,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 
 		if (cbo == 0)
 		{
-			DEBUG ("Could not find widget [ResolutionBox]");
+			SW_DEBUG ("Could not find widget [ResolutionBox]");
 			return false;
 		}
 
@@ -823,7 +823,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 		{
 			userResolution = Options::getInstance ()->getUsedResolution ();
 		}
-		DEBUG ("selected userResolution %s", userResolution.c_str());
+		SW_DEBUG ("selected userResolution %s", userResolution.c_str());
 
 		if (userMode == WINDOWED_FULLSCREEN)
 		{
@@ -832,7 +832,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 			int desktopHeight = (int)GetSystemMetrics (SM_CYSCREEN);
 			userResolution = SumwarsHelper::getUpdatedResolutionString (userResolution, desktopWidth, desktopHeight);
 #endif
-			DEBUG ("Updated selected userResolution to [%s]", userResolution.c_str());
+			SW_DEBUG ("Updated selected userResolution to [%s]", userResolution.c_str());
 		}
 
 		someVideoSettingsWereChanged |= (userResolution != Options::getInstance ()->getUsedResolution ());
@@ -842,14 +842,14 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 		cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGraphic/ShadowsDropDownList"));
 		if (cbo == 0)
 		{
-			DEBUG ("Could not find widget [ShadowsDropDownList]");
+			SW_DEBUG ("Could not find widget [ShadowsDropDownList]");
 			return false;
 		}
 
 		item = cbo->getSelectedItem();
 		if (item == 0)
 		{
-			DEBUG ("Could not find selected item in widget [ShadowsDropDownList]. Searching via text values. (slower)");
+			SW_DEBUG ("Could not find selected item in widget [ShadowsDropDownList]. Searching via text values. (slower)");
 			CEGUI::String currentText = cbo->getText();
 			
 			for (unsigned i = 0; i < cbo->getItemCount (); i ++)
@@ -863,7 +863,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 
 		if (item == 0)
 		{
-			DEBUG ("Could not find selected item in widget [ShadowsDropDownList]. Unable to store any changes!!!");
+			SW_DEBUG ("Could not find selected item in widget [ShadowsDropDownList]. Unable to store any changes!!!");
 		}
 
 		Options::ShadowMode newShadowSettings = Options::getInstance ()->getShadowMode ();
@@ -878,7 +878,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 		}
 
 
-		DEBUG ("Used shadow mode (old - new) : %d - %d", Options::getInstance ()->getShadowMode (), newShadowSettings);
+		SW_DEBUG ("Used shadow mode (old - new) : %d - %d", Options::getInstance ()->getShadowMode (), newShadowSettings);
 	
 		someVideoSettingsWereChanged |= (newShadowSettings != Options::getInstance ()->getShadowMode ());
 
@@ -912,7 +912,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 			{
 				if (e.getNumber () == Ogre::Exception::ERR_FILE_NOT_FOUND)
 				{
-					DEBUG ("Could not find OGRE config file");
+					SW_DEBUG ("Could not find OGRE config file");
 					return false;
 				}
 				else
@@ -931,7 +931,7 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 
 			Ogre::String resolutionValueToSet ("");
 			resolutionValueToSet = Options::getInstance ()->getUsedResolution ();
-			DEBUG ("Saving options; will set resolution to : [%s]", resolutionValueToSet.c_str());
+			SW_DEBUG ("Saving options; will set resolution to : [%s]", resolutionValueToSet.c_str());
 
 			// Update the settings; 
 			Ogre::ConfigFile::SectionIterator iSection = cfg.getSectionIterator ();
@@ -1020,7 +1020,7 @@ bool OptionsWindow::onSoundVolumeChanged(const CEGUI::EventArgs& evt)
 
 	CEGUI::Scrollbar* slider = static_cast<CEGUI::Scrollbar*>(we.window);
 	float vol = slider->getScrollPosition();
-	DEBUG("sound volume change to %f",vol);
+	SW_DEBUG("sound volume change to %f",vol);
 	//SoundSystem::setSoundVolume(vol);
 	SoundManager::getPtr ()->getRepository ()->setVolumeForCategory (gussound::GSC_Effect, vol);
 	SoundManager::getPtr ()->getRepository ()->setVolumeForCategory (gussound::GSC_Master, 1.0);
@@ -1040,11 +1040,11 @@ bool OptionsWindow::onDifficultyChanged(const CEGUI::EventArgs& evt)
 	if (item != 0)
 	{
 		Options::getInstance()->setDifficulty(static_cast<Options::Difficulty>(item->getID()));
-		DEBUG ("Difficulty changed. %s", item->getText ().c_str ());
+		SW_DEBUG ("Difficulty changed. %s", item->getText ().c_str ());
 	}
 	else
 	{
-		DEBUG ("Difficulty changed. Unknown!");
+		SW_DEBUG ("Difficulty changed. Unknown!");
 	}
 	
 	return true;
@@ -1172,7 +1172,7 @@ bool OptionsWindow::onLanguageSelected(const CEGUI::EventArgs& evt)
 
 bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 {
-	DEBUG ("Display mode selected");
+	SW_DEBUG ("Display mode selected");
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 
@@ -1180,7 +1180,7 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 
 	if (cbo == 0)
 	{
-		DEBUG ("CEGUI ERROR: source widget is NULL");
+		SW_DEBUG ("CEGUI ERROR: source widget is NULL");
 		return false;
 	}
 
@@ -1188,7 +1188,7 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 
 	if (item == 0)
 	{
-		DEBUG ("CEGUI ERROR: No valid selection in source widget");
+		SW_DEBUG ("CEGUI ERROR: No valid selection in source widget");
 		return false;
 	}
 
@@ -1234,7 +1234,7 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 
 		std::string usedResolution = Options::getInstance ()->getUsedResolution ();
 		
-		DEBUG ("Will try to show that the used resolution is [%s]", usedResolution.c_str ());
+		SW_DEBUG ("Will try to show that the used resolution is [%s]", usedResolution.c_str ());
 
 		for (size_t i = 0; i < cbo->getItemCount (); ++ i)
 		{
@@ -1244,9 +1244,9 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 			{
 				cbo->setItemSelectState(i, true);
 				
-				DEBUG ("Located item [%s] at [%d]", itemText.c_str (), i);
+				SW_DEBUG ("Located item [%s] at [%d]", itemText.c_str (), i);
 			}
-			DEBUG ("Compared with [%s]", itemText.c_str ());
+			SW_DEBUG ("Compared with [%s]", itemText.c_str ());
 		}
 		cbo->handleUpdatedListItemData();
 	}
@@ -1258,7 +1258,7 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 
 bool OptionsWindow::onVideoDriverSelected (const CEGUI::EventArgs& evt)
 {
-	DEBUG ("Video Driver selected");
+	SW_DEBUG ("Video Driver selected");
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 
@@ -1283,7 +1283,7 @@ bool OptionsWindow::onVideoDriverSelected (const CEGUI::EventArgs& evt)
 	int currentWidth (0), currentHeight (0);
 	SumwarsHelper::getSizesFromResolutionString (Options::getInstance ()->getUsedResolution (), currentWidth, currentHeight);
 
-	DEBUG ("Selected video driver: %s", videoDriver.c_str ());
+	SW_DEBUG ("Selected video driver: %s", videoDriver.c_str ());
 
 	// Get the list of available resolutions for the selected video driver.
 	std::vector <std::string> resolutions = Options::getInstance ()->getEditableResolutionsMapping ()[videoDriver];
@@ -1303,7 +1303,7 @@ bool OptionsWindow::onVideoDriverSelected (const CEGUI::EventArgs& evt)
 
 	for (std::vector <std::string>::const_iterator it = resolutions.begin (); it != resolutions.end (); ++ it)
 	{
-		DEBUG ("New mode: %s", it->c_str ());
+		SW_DEBUG ("New mode: %s", it->c_str ());
 		cbo->addItem (new StrListItem ((CEGUI::utf8*) m_ceguiSkinName.c_str (), (CEGUI::utf8*) it->c_str (), "", 0));
 		if (*it == usedResolution)
 		{

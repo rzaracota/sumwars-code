@@ -186,7 +186,7 @@ bool World::loadGameData()
 
 	if (m_data_reload_requests & DATA_LUACODE)
 	{
-		DEBUG("Loading lua files.");
+		SW_DEBUG("Loading lua files.");
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("lua","*.lua");
 		for (it = files->begin(); it != files->end(); ++it)
 		{
@@ -200,7 +200,7 @@ bool World::loadGameData()
 	// Aktionen initialisieren
 	if (m_data_reload_requests & DATA_ABILITIES)
 	{
-		DEBUG("Loading ability data.");
+		SW_DEBUG("Loading ability data.");
 		Action::init();
 
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("abilities","*.xml");
@@ -217,7 +217,7 @@ bool World::loadGameData()
 
 	if (m_data_reload_requests & DATA_MONSTERS)
 	{
-		DEBUG("Loading monster data.");
+		SW_DEBUG("Loading monster data.");
 		// Monster Data
 		ObjectFactory::init();
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("monsters","*.xml");
@@ -237,7 +237,7 @@ bool World::loadGameData()
 
 	if (m_data_reload_requests & DATA_PROJECTILES)
 	{
-		DEBUG("Loading missile data.");
+		SW_DEBUG("Loading missile data.");
 		// Projectile Data
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("projectiles","*.xml");
 		for (it = files->begin(); it != files->end(); ++it)
@@ -252,7 +252,7 @@ bool World::loadGameData()
 
 	if (m_data_reload_requests & DATA_OBJECTS)
 	{
-		DEBUG("Loading fixed object data.");
+		SW_DEBUG("Loading fixed object data.");
 		// fixed object Data
 		files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("objects","*.xml");
 		for (it = files->begin(); it != files->end(); ++it)
@@ -275,7 +275,7 @@ bool World::loadGameData()
 
 		if (m_data_reload_requests & DATA_EVENTS)
 		{
-			DEBUG("Loading region data.");
+			SW_DEBUG("Loading region data.");
 			files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("world","*.xml");
 			for (it = files->begin(); it != files->end(); ++it)
 			{
@@ -288,7 +288,7 @@ bool World::loadGameData()
 
 		if (m_data_reload_requests & DATA_EVENTS)
 		{
-			DEBUG("Loading npc data.");
+			SW_DEBUG("Loading npc data.");
 
 			files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("npc","*.xml");
 			for (it = files->begin(); it != files->end(); ++it)
@@ -299,7 +299,7 @@ bool World::loadGameData()
 				worldloader.loadNPCData(file.c_str());
 			}
 			
-			DEBUG("Loading quest data.");
+			SW_DEBUG("Loading quest data.");
 
 			files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("quests","*.xml");
 			for (it = files->begin(); it != files->end(); ++it)
@@ -497,7 +497,7 @@ void World::updateLogins()
 			header.fromString(data);
 			if (header.m_content == PTYPE_C2S_SAVEGAME)
 			{
-				DEBUG("got savegame from slot %i",(*i));
+				SW_DEBUG("got savegame from slot %i",(*i));
 				
 				if (m_player_slots->size() < (unsigned)m_max_nr_players)
 				{
@@ -507,7 +507,7 @@ void World::updateLogins()
 				{
 					// reject the player, if the server is full
 					// send a reject notification
-					DEBUG("Rejected Savegame from Slot %i", (*i));
+					SW_DEBUG("Rejected Savegame from Slot %i", (*i));
 					PackageHeader header;
 					header.m_content = PTYPE_S2C_REJECT;
 					header.m_number =1;
@@ -523,7 +523,7 @@ void World::updateLogins()
 			}
 			else
 			{
-				DEBUG("unknown type %i",header.m_content);
+				SW_DEBUG("unknown type %i",header.m_content);
 			}
 			m_network->deallocatePacket(data);
 		}
@@ -777,7 +777,7 @@ bool World::insertPlayer(WorldObject* player, int slot)
 				ERRORMSG("cant open new party");
 			}
 			p->clear();
-			DEBUG("opened Party %i",p->getId());
+			SW_DEBUG("opened Party %i",p->getId());
 		}
 		p->addMember(player->getId());
 	}
@@ -870,7 +870,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 				}
 				// Auf Datenanfrage seitens des Client warten
 				player->setState(WorldObject::STATE_REGION_DATA_WAITING,false);
-				DEBUG("waiting for a client data request");
+				SW_DEBUG("waiting for a client data request");
 			}
 
 
@@ -916,7 +916,7 @@ bool World::insertPlayerIntoRegion(WorldObject* player, short region, LocationNa
 		{
 			if (!reg->hasLocation(m_region_enter_loc[player->getId()]))
 			{
-				DEBUG("location %s does not exist",m_region_enter_loc[player->getId()].c_str());
+				SW_DEBUG("location %s does not exist",m_region_enter_loc[player->getId()].c_str());
 				m_region_enter_loc[player->getId()] = m_player_start_location.second;
 
 				static_cast<Player*>(player)->setRevivePosition(m_player_start_location);
@@ -1551,7 +1551,7 @@ void World::updatePlayers()
 			}
 
 
-			DEBUG("player %i has quit",pl->getId());
+			SW_DEBUG("player %i has quit",pl->getId());
 
 			delete pl;
 			continue;
@@ -1560,7 +1560,7 @@ void World::updatePlayers()
 		// Spielern die auf Daten zur aktuellen Region warten, Daten senden
 		if (pl->getState() == WorldObject::STATE_REGION_DATA_REQUEST)
 		{
-			DEBUG("send data request to server");
+			SW_DEBUG("send data request to server");
 			// Client wartet auf Daten zur Region
 			pl->setState(WorldObject::STATE_REGION_DATA_WAITING,false);
 
@@ -1611,7 +1611,7 @@ void World::updatePlayers()
 
 				if (cv->getDelay()>1000)
 				{
-					DEBUG("got packet with delay %f",cv->getDelay());
+					SW_DEBUG("got packet with delay %f",cv->getDelay());
 				}
 
 				headerp.fromString(cv);
@@ -1712,7 +1712,7 @@ void World::updatePlayers()
 						cv->fromBuffer(id);
 						WorldObject* player;
 
-						DEBUG("got data for player %s id %i",subt.c_str(),id);
+						SW_DEBUG("got data for player %s id %i",subt.c_str(),id);
 
 						// Spieler entweder neu anlegen oder aus den existierenden herraussuchen
 						if (m_players->count(id)==0)
@@ -1734,7 +1734,7 @@ void World::updatePlayers()
 				else if (headerp.m_content == PTYPE_S2C_REGION)
 				{
 					// Daten zu einer Region erhalten
-					DEBUG("got data for region %i",headerp.m_number);
+					SW_DEBUG("got data for region %i",headerp.m_number);
 					short dimx, dimy;
 
 					// Groesse der Region
@@ -1767,20 +1767,20 @@ void World::updatePlayers()
 				{
 					int id;
 					cv->fromBuffer(id);
-					DEBUG("ID at server %i (old ID %i)",id, m_local_player->getId());
+					SW_DEBUG("ID at server %i (old ID %i)",id, m_local_player->getId());
 					m_players->erase(m_local_player->getId());
 					m_local_player->setId(id);
 
 					int frac;
 					cv->fromBuffer(frac);
 					m_local_player->setFraction((Fraction::Id) frac);
-					DEBUG("fraction %i",frac);
+					SW_DEBUG("fraction %i",frac);
 
 					insertPlayer(m_local_player, LOCAL_SLOT);
 				}
 				else if (headerp.m_content == PTYPE_S2C_REJECT)
 				{
-					DEBUG("Got notification that the server rejected the Savegame");
+					SW_DEBUG("Got notification that the server rejected the Savegame");
 					if (m_network != 0)
 					{
 						m_network->setSlotStatus(NET_SLOTS_FULL);
@@ -1910,7 +1910,7 @@ void World::updatePlayers()
 				}
 				else
 				{
-					DEBUG("got package with unknown type %i", headerp.m_content);
+					SW_DEBUG("got package with unknown type %i", headerp.m_content);
 				}
 
 				m_network->deallocatePacket(cv);
@@ -2260,7 +2260,7 @@ bool World::writeNetEvent(Region* region,NetEvent* event, CharConv* cv)
 
 	if (event->m_type == NetEvent::PARTY_RELATION_CHANGED)
 	{
-		DEBUG("party %i changed relation to %i to %i",event->m_data, event->m_id, getParty(event->m_data)->getRelations()[event->m_id]);
+		SW_DEBUG("party %i changed relation to %i to %i",event->m_data, event->m_id, getParty(event->m_data)->getRelations()[event->m_id]);
 		cv->toBuffer(static_cast<char>(getParty(event->m_data)->getRelations()[event->m_id]));
 	}
 
@@ -2398,7 +2398,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 				}
 				else
 				{
-					DEBUG("projectile %i for event does not exist",event.m_id);
+					SW_DEBUG("projectile %i for event does not exist",event.m_id);
 					return false;
 				}
 			}
@@ -2643,7 +2643,7 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			char tmp;
 			cv->fromBuffer(tmp);
 			setRelation(event.m_id, event.m_data, (Fraction::Relation) tmp);
-			DEBUG("set relation %i %i to %i",event.m_id, event.m_data, (int) tmp);
+			SW_DEBUG("set relation %i %i to %i",event.m_id, event.m_data, (int) tmp);
 
 			break;
 
@@ -2810,7 +2810,7 @@ void World::handleDataRequest(ClientDataRequest* request, int slot )
 	}
 	else if (request->m_data == ClientDataRequest::OBJECT)
 	{
-		DEBUG("Daten zu Objekt %i gefordert",request->m_id);
+		SW_DEBUG("Daten zu Objekt %i gefordert",request->m_id);
 		if (region!=0)
 		{
 			// Daten werden per Event aktualisiert

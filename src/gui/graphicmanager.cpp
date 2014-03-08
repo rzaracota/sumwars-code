@@ -163,7 +163,7 @@ void  GraphicManager::invalidateGraphicObjects()
 
 void GraphicManager::clearRenderInfos()
 {
-	DEBUG("clearing all renderinfos");
+	SW_DEBUG("clearing all renderinfos");
 	// delete the renderinfo Data
 	std::map<std::string, GraphicRenderInfo*>::iterator it;
 	for (it = m_render_infos.begin(); it != m_render_infos.end(); ++it)
@@ -461,7 +461,7 @@ Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info
 		catch (Ogre::Exception& e)
 		{
 			WARNING("can't create mesh %s", info.m_source.c_str());
-			DEBUG ("(Caught exception: %s)", e.what ());
+			SW_DEBUG ("(Caught exception: %s)", e.what ());
 			obj_ent = m_scene_manager->createEntity(name, "dummy_r.mesh");
 		}
 		obj= static_cast<Ogre::MovableObject*>(obj_ent);
@@ -476,7 +476,7 @@ Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info
 		catch (Ogre::Exception& e)
 		{	
 			WARNING("can't create particle system %s", info.m_source.c_str());
-			DEBUG ("(Caught exception: %s)", e.what ());
+			SW_DEBUG ("(Caught exception: %s)", e.what ());
 		}
 		obj= static_cast<Ogre::MovableObject*>(part);
 	}

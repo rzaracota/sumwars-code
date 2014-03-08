@@ -88,7 +88,7 @@ Player::Player( int id, Subtype subtype) : Creature( id)
 	bool tmp=Player::init();
 	if (!tmp)
 	{
-		DEBUG("Initialiserung des Players fehlgeschlagen!");
+		SW_DEBUG("Initialiserung des Players fehlgeschlagen!");
 	}
 }
 
@@ -231,7 +231,7 @@ bool Player::canBeAttacked()
 
 void  Player::revive()
 {
-	DEBUG("reviving");
+	SW_DEBUG("reviving");
 
 	getRegion()->changeObjectGroup(this,PLAYER);
 	getDynAttr()->m_health = getBaseAttrMod()->m_max_health;
@@ -379,7 +379,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 						}
 						else
 						{
-							DEBUG("goal is too far away");
+							SW_DEBUG("goal is too far away");
 						}
 					}
 				}
@@ -500,7 +500,7 @@ bool Player::onGamefieldClick(ClientCommand* command)
 	{
 		if (ainfo != 0)
 		{
-			DEBUG("Basisaktion von %s verwendet",com->m_type.c_str());
+			SW_DEBUG("Basisaktion von %s verwendet",com->m_type.c_str());
 			com->m_type = ainfo->m_base_action;
 		}
 	}
@@ -731,7 +731,7 @@ bool Player::onItemClick(ClientCommand* command)
 							m_timers_max[it->m_consume_timer_nr-1] = it->m_consume_timer;
 							addToNetEventMask(NetEvent::DATA_TIMER);
 						}
-						DEBUG("started timer %i for %f",it->m_consume_timer_nr, it->m_consume_timer);
+						SW_DEBUG("started timer %i for %f",it->m_consume_timer_nr, it->m_consume_timer);
 					}
 					else
 					{
@@ -1522,7 +1522,7 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 
 
 		default:
-			DEBUG("unknown command: %i",command->m_button);
+			SW_DEBUG("unknown command: %i",command->m_button);
 	}
 
 	if (oldcommand != *getNextCommand() && delay>0)
@@ -1656,7 +1656,7 @@ void Player::performActionCritPart(Vector goal, WorldObject* goalobj)
 		}
 		else
 		{
-			DEBUG("no item found at %f %f",goal.m_x,goal.m_y);
+			SW_DEBUG("no item found at %f %f",goal.m_x,goal.m_y);
 		}
 	}
 	else
@@ -1971,7 +1971,7 @@ void Player::fromString(CharConv* cv)
 	m_emotion_set = m_look.m_emotion_set;
 	int cnt;
 	cv->fromBuffer(cnt);
-	DEBUG("number of items: %i",cnt);
+	SW_DEBUG("number of itSW_DEBUG%i",cnt);
 	for ( short i = 0; i< cnt; i++)
 	{
 		readItem(cv);

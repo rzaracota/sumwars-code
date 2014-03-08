@@ -45,7 +45,7 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 		, m_ceguiSkinName (ceguiSkinName)
 		, m_starMenuRoot (0)
 {
-	DEBUG ("MainMenu created");
+	SW_DEBUG ("MainMenu created");
 
 	m_savegame_player ="";
 	m_savegame_player_object =0;
@@ -74,7 +74,7 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 	}
 	CEGUI::Window* wndHeld = CEGUIUtility::getWindowForLoadedLayoutEx (m_starMenuRoot, "MainMenuRoot");
 
-	DEBUG ("Placing layout into holder");
+	SW_DEBUG ("Placing layout into holder");
 	m_starMenuRoot->setVisible (true);
 
 #if 0
@@ -162,7 +162,7 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 	if (verlbl)
 	{
 		verlbl->setText(CEGUI::String("Version: ").append(SUMWARS_VERSION));
-		DEBUG ("Set sumwars version text to : [%s]", verlbl->getText ().c_str ());
+		SW_DEBUG ("Set sumwars version text to : [%s]", verlbl->getText ().c_str ());
 	}
 
 	CEGUI::FrameWindow* lbl;
@@ -384,7 +384,7 @@ bool MainMenu::onShowCredits(const CEGUI::EventArgs& evt)
 
 bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 {
-	DEBUG ("Main menu shown");
+	SW_DEBUG ("Main menu shown");
 	Ogre::Root *root = Ogre::Root::getSingletonPtr();
     if (!m_sceneCreated)
 	{
@@ -408,14 +408,14 @@ bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 	}
 	catch (std::exception& e)
 	{
-		DEBUG ("Encountered error while trying to switch to the menu playlist: %s", e.what ());
+		SW_DEBUG ("Encountered error while trying to switch to the menu playlist: %s", e.what ());
 	}
     return true;
 }
 
 bool MainMenu::onHidden( const CEGUI::EventArgs& evt )
 {
-	DEBUG ("Main menu hidden");
+	SW_DEBUG ("Main menu hidden");
 	Ogre::Root *root = Ogre::Root::getSingletonPtr();
     if (m_sceneCreated)
 	{
@@ -836,7 +836,7 @@ void MainMenu::createScene()
 		}
 		catch (std::exception& e)
 		{
-			DEBUG ("[MainMenu] Caught exception in scene creation: [%s]", e.what ());
+			SW_DEBUG ("[MainMenu] Caught exception in scene creation: [%s]", e.what ());
 		}
 	}
     

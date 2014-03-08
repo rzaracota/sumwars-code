@@ -34,7 +34,7 @@ TooltipManager::TooltipManager():
 
 void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string > textlist, float timeVisible, const CEGUI::Font* font, Tooltip::TooltipType type )
 {
-	DEBUG ("Creating a tooltip for duration: %.2f", timeVisible);
+	SW_DEBUG ("Creating a tooltip for duration: %.2f", timeVisible);
 	CEGUI::Window *gamescreen = CEGUIUtility::getWindow ("SW");
     std::string msg ("");
     CEGUI::UVector2 size;

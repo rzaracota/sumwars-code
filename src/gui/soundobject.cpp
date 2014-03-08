@@ -63,7 +63,7 @@ Vector SoundObject::getPosition ()
 
 void SoundObject::setSoundData (const std::string& data)
 {
-	DEBUG ("Setting sound data for [%s] to : [%s]", m_name.c_str (), data.c_str ());
+	SW_DEBUG ("Setting sound data for [%s] to : [%s]", m_name.c_str (), data.c_str ());
 	m_soundData = data;
 }
 

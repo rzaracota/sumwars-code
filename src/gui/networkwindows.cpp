@@ -21,7 +21,7 @@
 HostGameWindow::HostGameWindow (Document* doc)
 	:Window(doc)
 {
-	DEBUG ("HostGameWindow being created");
+	SW_DEBUG ("HostGameWindow being created");
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	CEGUI::Editbox* box;
@@ -30,13 +30,13 @@ HostGameWindow::HostGameWindow (Document* doc)
 	CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("hostgamewindow.layout");
 	if (!host_game)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "hostgamewindow.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "hostgamewindow.layout");
 	}
 
 	CEGUI::Window* host_game_holder = CEGUIUtility::loadLayoutFromFile ("hostgamewindow_holder.layout");
 	if (!host_game_holder)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "hostgamewindow_holder.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "hostgamewindow_holder.layout");
 	}
 	
 	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (host_game_holder, "HostGameWindow_Holder");
@@ -47,8 +47,8 @@ HostGameWindow::HostGameWindow (Document* doc)
 	}
 	else
 	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for char screen.");
-		if (!wndCharInfo) DEBUG ("ERROR: Unable to get the window for char screen.");
+		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for char screen.");
+		if (!wndCharInfo) SW_DEBUG ("ERROR: Unable to get the window for char screen.");
 	}
 
 	m_window = host_game_holder;
@@ -174,7 +174,7 @@ bool HostGameWindow::onCancelHostGame (const CEGUI::EventArgs& evt)
 JoinGameWindow::JoinGameWindow (Document* doc)
 	:Window(doc)
 {
-	DEBUG ("JoinGameWindow being created");
+	SW_DEBUG ("JoinGameWindow being created");
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	CEGUI::Editbox* box;
@@ -183,13 +183,13 @@ JoinGameWindow::JoinGameWindow (Document* doc)
 	CEGUI::FrameWindow* join_game = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("joingamewindow.layout");
 	if (!join_game)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "joingamewindow.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "joingamewindow.layout");
 	}
 
 	CEGUI::Window* join_game_holder = CEGUIUtility::loadLayoutFromFile ("joingamewindow_holder.layout");
 	if (!join_game_holder)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "joingamewindow_holder.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "joingamewindow_holder.layout");
 	}
 	
 	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (join_game_holder, "JoinGameWindow_Holder");
@@ -200,8 +200,8 @@ JoinGameWindow::JoinGameWindow (Document* doc)
 	}
 	else
 	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for char screen.");
-		if (!wndCharInfo) DEBUG ("ERROR: Unable to get the window for char screen.");
+		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for char screen.");
+		if (!wndCharInfo) SW_DEBUG ("ERROR: Unable to get the window for char screen.");
 	}
 
 	m_window = join_game_holder;
@@ -301,7 +301,7 @@ bool JoinGameWindow::onStartJoinGame(const CEGUI::EventArgs& evt)
 	stream.str(box->getText().c_str());
 	stream >> port;
 	
-	DEBUG("join game %i %s",port,hostname.c_str());
+	SW_DEBUG("join game %i %s",port,hostname.c_str());
 	options->setPort(port);
 	options->setServerHost(hostname);
 	

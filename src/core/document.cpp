@@ -147,7 +147,7 @@ void Document::setSaveFile(std::string saveFile)
 		unsigned char* data=0;
 		m_save_file = savePath;
 
-		DEBUG ("Loaded save file %s", saveFile.c_str());
+		SW_DEBUG ("Loaded save file %s", saveFile.c_str());
 
 		file.get(bin);
 
@@ -193,7 +193,7 @@ void Document::loadSavegame()
 {
 	// read savegame
 	std::string fname = m_save_file;
-	DEBUG("savegame is %s",fname.c_str());
+	SW_DEBUG("savegame is %s",fname.c_str());
 
 	std::fstream file(fname.c_str(),std::ios::in| std::ios::binary);
 	if (file.is_open())
@@ -235,7 +235,7 @@ void Document::loadSavegame()
 		}
 
 		m_temp_player->toSavegame(&cv2);
-		DEBUG("sending savegame");
+		SW_DEBUG("sending savegame");
 		World::getWorld()->handleSavegame(&cv2);
 		DEBUGX("sent savegame");
 
@@ -837,7 +837,7 @@ void Document::onButtonStartSinglePlayer ()
 	if (m_temp_player == 0)
 	{
 		showWarning (gettext("Please select a character first!"));
-		DEBUG ("Warning: Tried to start a game without a selected char!");
+		SW_DEBUG ("Warning: Tried to start a game without a selected char!");
 		return;
 	}
 	
@@ -853,7 +853,7 @@ void Document::onButtonStartSinglePlayer ()
 
 void Document::onButtonHostGame()
 {
-	DEBUG("Host Game");
+	SW_DEBUG("Host Game");
 	if (m_temp_player == 0)
 	{
 		// Show a notification.
@@ -864,7 +864,7 @@ void Document::onButtonHostGame()
 		message->setModalState(true);
 		CEGUIUtility::getWindow ("WarningDialogWindow/WarningDialogLabel")->setText((CEGUI::utf8*) gettext ("Please select a character first!"));
 
-		DEBUG ("Warning: Tried to host a game without a selected char!");
+		SW_DEBUG ("Warning: Tried to host a game without a selected char!");
 		return;
 	}
 	getGUIState()->m_shown_windows |= HOST_GAME;
@@ -885,7 +885,7 @@ void Document::onButtonJoinGame()
 		message->setModalState(true);
 		CEGUIUtility::getWindow ("WarningDialogWindow/WarningDialogLabel")->setText((CEGUI::utf8*) gettext("Please select a character first!"));
 
-		DEBUG ("Warning: Tried to join a game without a selected char!");
+		SW_DEBUG ("Warning: Tried to join a game without a selected char!");
 		return;
 	}
 	getGUIState()->m_shown_windows |= JOIN_GAME;
@@ -895,7 +895,7 @@ void Document::onButtonJoinGame()
 
 void Document::onButtonStartHostGame()
 {
-	DEBUG("start multiplayer game");
+	SW_DEBUG("start multiplayer game");
 	// Spieler ist selbst der Host
 	setServer(true);
 	m_single_player = false;
@@ -1063,7 +1063,7 @@ void Document::onButtonOptionsClicked()
 
 	if (!checkSubwindowsAllowed() && getGUIState()->m_sheet ==  Document::GAME_SCREEN)
 	{
-		DEBUG ("Subwindows are allowed, and Current state: GAME_SCREEN; so you're not allowed to toggle this window... for some reason");
+		SW_DEBUG ("Subwindows are allowed, and Current state: GAME_SCREEN; so you're not allowed to toggle this window... for some reason");
 		return;
 	}
 
@@ -1071,7 +1071,7 @@ void Document::onButtonOptionsClicked()
 	// Opened windows have changed.
 	m_modified |= WINDOWS_MODIFIED;
 
-	DEBUG ("Set internal state data for options button toggle");
+	SW_DEBUG ("Set internal state data for options button toggle");
 }
 
 
@@ -1994,7 +1994,7 @@ void Document::showWarning (const std::string& textMessage)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	if (! CEGUIUtility::isWindowPresent ("WarningDialogWindow"))
 	{
-		DEBUG ("Could not display the warning widget: [WarningDialogWindow]");
+		SW_DEBUG ("Could not display the warning widget: [WarningDialogWindow]");
 		return;
 	}
 
@@ -2040,7 +2040,7 @@ void Document::showQuestionDialog ()
 	CEGUI::String widgetName = CEGUIUtility::getNameForWidget ("MainMenu/MainMenuRoot/QuestionInfoRoot");
 	if (! CEGUIUtility::isWindowPresent (widgetName))
 	{
-		DEBUG ("Could not display the warning widget: [%s]", widgetName.c_str ());
+		SW_DEBUG ("Could not display the warning widget: [%s]", widgetName.c_str ());
 		return;
 	}
 

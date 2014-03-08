@@ -32,13 +32,13 @@ ControlPanel::ControlPanel (Document* doc)
 	CEGUI::Window* ctrl_panel = CEGUIUtility::loadLayoutFromFile ("controlpanel.layout");
 	if (!ctrl_panel)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "controlpanel.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "controlpanel.layout");
 	}
 
 	CEGUI::Window* ctrl_panel_holder = CEGUIUtility::loadLayoutFromFile ("controlpanel_holder.layout");
 	if (!ctrl_panel_holder)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "characterscreen_holder.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "characterscreen_holder.layout");
 	}
 	
 	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (ctrl_panel_holder, "ControlPanel_Holder");
@@ -49,8 +49,8 @@ ControlPanel::ControlPanel (Document* doc)
 	}
 	else
 	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for control panel.");
-		if (!wndCharInfo) DEBUG ("ERROR: Unable to get the window for control panel.");
+		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for control panel.");
+		if (!wndCharInfo) SW_DEBUG ("ERROR: Unable to get the window for control panel.");
 	}
 
 	m_window = ctrl_panel_holder;
