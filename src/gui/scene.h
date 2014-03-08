@@ -19,7 +19,6 @@
 #include "OgreSceneManager.h"
 #include "OgreEntity.h"
 #include "OgreTextureManager.h"
-#include "OgreParticleSystem.h"
 #include "OgreRoot.h"
 #include "OgreRenderWindow.h"
 #include "OgreRenderTarget.h"
