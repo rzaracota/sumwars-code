@@ -159,7 +159,7 @@ void Gettext::setLocale(const char* loc)
 
 			if (setWinThreadLocale (win_locale) == 0)
 			{
-				DEBUG ("Could not change locale to %s", win_locale.c_str ());
+				SW_DEBUG ("Could not change locale to %s", win_locale.c_str ());
 				return;
 			}
 
@@ -207,9 +207,9 @@ void Gettext::setLocale(const char* loc)
 		// But what if the locales are both identical and empty? A special case for Windows environments.
 		if (locale.empty())
 		{
-			DEBUG ("Gettext received empty locale. Initializing with OS default");
+			SW_DEBUG ("Gettext received empty locale. Initializing with OS default");
 			locale = getDefaultUsableLocale ();
-			DEBUG ("Gettext received empty locale. Initialized with OS default: %s", locale.c_str ());
+			SW_DEBUG ("Gettext received empty locale. Initialized with OS default: %s", locale.c_str ());
 		}
 
 
@@ -228,7 +228,7 @@ void Gettext::setLocale(const char* loc)
 
 			if (setWinThreadLocale (win_locale) == 0)
 			{
-				DEBUG ("Could not change locale to %s", win_locale.c_str ());
+				SW_DEBUG ("Could not change locale to %s", win_locale.c_str ());
 				return;
 			}
 
@@ -257,7 +257,7 @@ bool Gettext::setWinThreadLocale (const std::string& newLocale)
 	if (newCode == -1)
 		return false;
 	
-	DEBUG ("Setting locale to : %s", newLocale.c_str ());
+	SW_DEBUG ("Setting locale to : %s", newLocale.c_str ());
 	result = SetThreadLocale (newCode);
 
 	return result;

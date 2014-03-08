@@ -676,8 +676,8 @@ bool Application::initOgre()
 
 		if (desktopWidth == videoModeWidth && desktopHeight == videoModeHeight)
 		{
-			DEBUG ("Windowed (Fullscreen) mode selected; desktop at %d x %d.", desktopWidth, desktopHeight);
-			DEBUG ("Correcting settings.");
+			SW_DEBUG ("Windowed (Fullscreen) mode selected; desktop at %d x %d.", desktopWidth, desktopHeight);
+			SW_DEBUG ("Correcting settings.");
 
 			// Retrieve the window handle
 			HWND hwnd; // handle of window
