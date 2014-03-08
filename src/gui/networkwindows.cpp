@@ -313,6 +313,7 @@ bool JoinGameWindow::onStartJoinGame(const CEGUI::EventArgs& evt)
 bool JoinGameWindow::onCancelJoinGame (const CEGUI::EventArgs& evt)
 {
 	m_document->getGUIState()->m_shown_windows = Document::START_MENU;
+    m_document->setState(Document::INACTIVE);
 	m_document->setModified(Document::WINDOWS_MODIFIED);
 
 	return true;
