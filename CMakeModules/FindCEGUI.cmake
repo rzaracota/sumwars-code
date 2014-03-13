@@ -68,7 +68,7 @@ FIND_FILE(CEGUI_BINARY_DBG
 
 
 
-SET (CEGUI_VERSION_GENERATED_FILE ${CEGUI_INCLUDE_DIR}/cegui/Version.h)
+SET (CEGUI_VERSION_GENERATED_FILE ${CEGUI_INCLUDE_DIR}/CEGUI/Version.h)
 MESSAGE (STATUS "Determinating CEGUI version (based on file ${CEGUI_VERSION_GENERATED_FILE})")
 
 # Inspect CEGUIVersion.h for the version number
