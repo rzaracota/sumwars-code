@@ -156,6 +156,10 @@ ENDIF()
 SET(SUMWARS_OGRE_PLUGIN_DIR_REL ${OGRE_PLUGIN_DIR_REL}) 
 SET(SUMWARS_OGRE_PLUGIN_DIR_DBG ${OGRE_PLUGIN_DIR_DBG}) 
 
+IF("${OGRE_PLUGIN_DIR_REL}" STREQUAL "")
+  MESSAGE(WARNING "Ogre plugin dir not found! plugins.cfg may have to be adjusted manually!")
+ENDIF()
+
 IF( WIN32 )# On Windows the plugins are distributed with the executable.
   IF( SUMWARS_PORTABLE_MODE OR SUMWARS_STANDALONE_MODE)
     SET(SUMWARS_OGRE_PLUGIN_DIR_REL "./") 
