@@ -125,7 +125,6 @@ namespace guslib
 		returnValue = returnValue * 60 + newtime->tm_min;
 		returnValue = returnValue * 60 + newtime->tm_sec;
 		returnValue = returnValue * 1000 + 0; // no millis
-		delete newtime;
 #endif
 		return returnValue;
 	}
@@ -179,7 +178,6 @@ namespace guslib
 		returnValue = returnValue * 60 + newtime->tm_min;
 		returnValue = returnValue * 60 + newtime->tm_sec;
 		returnValue = returnValue * 1000 + 0; // no millis
-		delete newtime;
 #endif
 		return returnValue;
 	}

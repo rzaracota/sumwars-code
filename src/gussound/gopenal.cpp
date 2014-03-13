@@ -93,31 +93,28 @@ namespace GOpenAl
 	{
 		ALenum myErr;
 
-		alutInitWithoutContext (NULL,NULL);
-		myErr = alGetError ();
-		if (myErr)
+		bool b = alutInitWithoutContext (NULL,NULL);
+		if (!b)
 		{
 			throw SoundException ("Unable to initialize alut!");
 		}
 		alcDevice_ = alcOpenDevice (NULL);
 
-		myErr = alGetError ();
-		if (myErr)
+		if (!alcDevice_)
 		{
 			throw SoundException ("Unable to open OpenAL device!");
 		}
 
 		alcContext_ = alcCreateContext (alcDevice_, NULL);
-		myErr = alGetError ();
-		if (myErr)
+		if (!alcContext_)
 		{
 			alcCloseDevice (alcDevice_);
 			throw SoundException ("Unable to create OpenAL context!");
 		}
 
-		alcMakeContextCurrent (alcContext_);
+		b = alcMakeContextCurrent (alcContext_);
 		myErr = alGetError ();
-		if (myErr)
+		if (!b)
 		{
 			throw SoundException ("Unable to make the current context current!");
 		}
