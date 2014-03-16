@@ -621,7 +621,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                         </OperatorDim>
                     </Dim>
                 </Area>
-                <Image component="Background" name="SWB/PlainGray" />
+                <Image name="SWB/PlainGray" />
                 <ColourRectProperty name="ImageColours" />
                 <VertFormat type="Stretched" />
                 <HorzFormat type="Stretched" />
@@ -785,6 +785,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="FrameColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" />
         <!--<PropertyDefinition name="BackgroundColours" initialValue="tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000" redrawOnWrite="true" />-->
         <PropertyDefinition name="BackgroundColour" initialValue="B2000000" redrawOnWrite="true" type="Colour" />
+
         <Property name="FrameEnabled" value="True" />
         <Property name="BackgroundEnabled" value="True" />
         
@@ -986,12 +987,12 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     ***************************************************
     -->
     <WidgetLook name="SWB/HorizontalScrollbarThumb">
-        <Property name="HorzFree" value="True" /> <!-- Horizontal mouse drag -->
-        
         <PropertyDefinition name="GS_DarkerThemeColour" initialValue="FF940000" redrawOnWrite="true" />
         <PropertyDefinition name="GS_LighterThemeColour" initialValue="FFFF0101" redrawOnWrite="true" />
         <PropertyDefinition name="GS_MainThemeColour" initialValue="FFDC5F5F" redrawOnWrite="true" />
         <PropertyDefinition name="GS_ShineColour" initialValue="B0FFFFFF" redrawOnWrite="true" />
+
+        <Property name="HorzFree" value="True" /> <!-- Horizontal mouse drag -->
         
         <ImagerySection name="border_section">
             <FrameComponent>
@@ -1031,7 +1032,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                         </OperatorDim>
                     </Dim>
                 </Area>
-                <Image component="Background" name="SWB/HorzScrollThumb_Background" />
+                <Image name="SWB/HorzScrollThumb_Background" />
                 <VertFormat type="Stretched" />
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
@@ -1071,7 +1072,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
             <Layer>
                 <Section section="background_section">
                     <ColourProperty name="GS_MainThemeColour" />
-                    <Colours topLeft="997F7F7F" topRight="997F7F7F" bottomLeft="997F7F7F" bottomRight="997F7F7F" />
                 </Section>
             </Layer>
             <Layer>
@@ -1176,12 +1176,12 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     ***************************************************
     -->
     <WidgetLook name="SWB/VerticalScrollbarThumb">
-        <Property name="VertFree" value="True" />
-        
         <PropertyDefinition name="GS_DarkerThemeColour" initialValue="FF940000" redrawOnWrite="true" />
         <PropertyDefinition name="GS_LighterThemeColour" initialValue="FFFF0101" redrawOnWrite="true" />
         <PropertyDefinition name="GS_MainThemeColour" initialValue="FFDC5F5F" redrawOnWrite="true" />
         <PropertyDefinition name="GS_ShineColour" initialValue="B0FFFFFF" redrawOnWrite="true" />
+
+        <Property name="VertFree" value="True" />
 
         <ImagerySection name="border_section">
             <FrameComponent>
@@ -1221,7 +1221,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                         </OperatorDim>
                     </Dim>
                 </Area>
-                <Image component="Background" name="SWB/VertScrollThumb_Background" />
+                <Image name="SWB/VertScrollThumb_Background" />
                 <VertFormat type="Stretched" />
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
@@ -1460,7 +1460,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                         </OperatorDim>
                     </Dim>
                 </Area>
-                <Image component="Background" name="SWB/MiniButton_Background" /> <!-- shared image from other item -->
+                <Image name="SWB/MiniButton_Background" /> <!-- shared image from other item -->
                 <VertFormatProperty name="VertImageFormatting" />
                 <HorzFormatProperty name="HorzImageFormatting" />
             </ImageryComponent>
@@ -1484,7 +1484,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                         </OperatorDim>
                     </Dim>
                 </Area>
-                <Image component="Background" name="SWB/MiniButton_BackgHighlight" />  <!-- shared image from other item -->
+                <Image name="SWB/MiniButton_BackgHighlight" />  <!-- shared image from other item -->
                 <VertFormatProperty name="VertImageFormatting" />
                 <HorzFormatProperty name="HorzImageFormatting" />
             </ImageryComponent>
@@ -1589,7 +1589,9 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="DisabledTextColour" initialValue="FFDDDDDD" redrawOnWrite="true" type="Colour" />
         <PropertyDefinition name="VertFormatting" initialValue="CentreAligned" redrawOnWrite="true" type="VerticalTextFormatting" />
         <PropertyDefinition name="HorzFormatting" initialValue="CentreAligned" redrawOnWrite="true" type="HorizontalTextFormatting" />
+
         <Property name="Size" value="{{0, 128}, {0, 32}}" />
+
         <ImagerySection name="Label">
             <TextComponent>
                 <Area>
@@ -2338,7 +2340,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                         </OperatorDim>
                     </Dim>
                 </Area>
-                <Image component="Background" name="SWB/MiniButton_Background" /> <!-- shared image from other item -->
+                <Image name="SWB/MiniButton_Background" /> <!-- shared image from other item -->
                 <VertFormatProperty name="VertImageFormatting" />
                 <HorzFormatProperty name="HorzImageFormatting" />
             </ImageryComponent>
@@ -2774,7 +2776,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     </Dim>
                 </Area>
 
-                <Image name="SWB/CheckboxMark" />
+                <Image component="Background" name="SWB/CheckboxMark" />
             </FrameComponent>
         </ImagerySection>
         
@@ -3467,7 +3469,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                         </OperatorDim>
                     </Dim>
                 </Area>
-                <Image component="Background" name="SWB/TooltipMiddle" />
+                <Image name="SWB/TooltipMiddle" />
                 <VertFormat type="Stretched" />
                 <HorzFormat type="Stretched" />
             </ImageryComponent>
@@ -3491,8 +3493,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                         </OperatorDim>
                     </Dim>
                 </Area>
-                <!--<Colours topLeft="FFFFE6DA" topRight="FFFFE6DA" bottomLeft="FFFFFBFA" bottomRight="FFFFFBFA" />-->
-                <Colours topLeft="FFFFFFFF" topRight="FFFFFFFF" bottomLeft="FFFFFFFF" bottomRight="FFFFFFFF" />-->
+                <Colours topLeft="FFFFFFFF" topRight="FFFFFFFF" bottomLeft="FFFFFFFF" bottomRight="FFFFFFFF" />
                 <VertFormat type="CentreAligned" />
                 <HorzFormat type="CentreAligned" />
             </TextComponent>
@@ -4447,6 +4448,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     <WidgetLook name="SWB/TabButtonPane">
         <PropertyDefinition name="EnableTop" initialValue="1" redrawOnWrite="true" layoutOnWrite="true" />
         <PropertyDefinition name="EnableBottom" initialValue="1" redrawOnWrite="true" layoutOnWrite="true" />
+
         <ImagerySection name="normal">
 
         </ImagerySection>
@@ -4471,10 +4473,12 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     ***************************************************
     -->
     <WidgetLook name="SWB/TabControl">
-        <Property name="TabButtonType" value="SWB/TabButton" />
-        <Property name="TabTextPadding" value="{0,6}" />
         <PropertyDefinition name="TCScrollLRatio" initialValue="0.2" redrawOnWrite="true" /> <!-- The ratio is height / width -->
 <!--        <PropertyDefinition name="TCScrollLRatio" initialValue="0.1" redrawOnWrite="true" layoutOnWrite="true" />-->
+
+        <Property name="TabButtonType" value="SWB/TabButton" />
+        <Property name="TabTextPadding" value="{0,6}" />
+
         <Child type="SWB/TabContentPane" nameSuffix="__auto_TabPane__">
             <Area>
                 <Dim type="LeftEdge"><AbsoluteDim value="0" /></Dim>
@@ -4562,12 +4566,10 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
                     </OperatorDim>
                 </Dim>
                 <Dim type="TopEdge">
-                    <WidgetDim widget="__auto_TabPane__Buttons" dimension="TopEdge">
-                    </WidgetDim>
+                    <WidgetDim widget="__auto_TabPane__Buttons" dimension="TopEdge" />
                 </Dim>
                 <Dim type="Height">
-                    <WidgetDim widget="__auto_TabPane__Buttons" dimension="Height">
-                    </WidgetDim>
+                    <WidgetDim widget="__auto_TabPane__Buttons" dimension="Height" />
                 </Dim>
             </Area>
             <Property name="AlwaysOnTop" value="True" />
@@ -4586,11 +4588,11 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     -->
     <WidgetLook name="SWB/Titlebar">
         <PropertyDefinition name="CaptionColour" initialValue="FFFFFFFF" redrawOnWrite="true" />
-        <Property name="NonClient" value="True" />
-        
         <PropertyDefinition name="ActiveColour" initialValue="FFFF0000" redrawOnWrite="true"/>
         <PropertyDefinition name="InactiveColour" initialValue="FFEE1111" redrawOnWrite="true"/>
         <PropertyDefinition name="BackgroundPictureColour" initialValue="FFBBA075" redrawOnWrite="true"/>
+        
+        <Property name="NonClient" value="True" />
         
         <ImagerySection name="overdrawn_section">
             <FrameComponent>
@@ -4711,17 +4713,18 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     <WidgetLook name="SWB/FrameWindow">
         <PropertyDefinition name="ClientAreaColour" initialValue="FFFFFFFF" redrawOnWrite="true" />
         <PropertyDefinition name="TitlebarHeight" initialValue="95" redrawOnWrite="true" />
+        <PropertyDefinition name="BackgroundPictureColour" initialValue="FFBBA075" redrawOnWrite="true"/>
+        <PropertyDefinition name="CloseButtonAlignment" initialValue="1" redrawOnWrite="true"/>
+
         <PropertyLinkDefinition name="CaptionColour" widget="__auto_titlebar__" targetProperty="CaptionColour" initialValue="FFFFFFFF" />
         <PropertyLinkDefinition name="TitlebarFont" widget="__auto_titlebar__" targetProperty="Font" />
+
         <Property name="NSSizingCursorImage" value="SWBCursors/MouseNoSoCursor" />
         <Property name="EWSizingCursorImage" value="SWBCursors/MouseEsWeCursor" />
         <Property name="NWSESizingCursorImage" value="SWBCursors/MouseNwSeCursor" />
         <Property name="NESWSizingCursorImage" value="SWBCursors/MouseNeSwCursor" />
         <Property name="MinSize" value="{{0.01,0},{0.01,0}}" />
         <Property name="AutoRenderingSurface" value="True" />
-        <!--<PropertyDefinition name="BackgroundPictureColour" initialValue="DFFFFFFF" redrawOnWrite="true"/>-->
-        <PropertyDefinition name="BackgroundPictureColour" initialValue="FFBBA075" redrawOnWrite="true"/>
-        <PropertyDefinition name="CloseButtonAlignment" initialValue="1" redrawOnWrite="true"/>
 
         <NamedArea name="ClientWithTitleWithFrame">
             <Area>
@@ -5074,8 +5077,7 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <Child type="DefaultWindow" nameSuffix="__auto_contentpane__">
             <Area>
                 <Dim type="LeftEdge">
-                    <AbsoluteDim value="8">
-                    </AbsoluteDim>
+                    <AbsoluteDim value="8" />
                 </Dim>
                 <Dim type="TopEdge">
                     <AbsoluteDim value="20" />
@@ -5224,7 +5226,6 @@ Last change:	$LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
         <PropertyDefinition name="BackgroundHighlightColour" initialValue="FFFFFFFF" />
         <PropertyDefinition name="BorderColour" initialValue="FFBBA075" />
         <PropertyDefinition name="BorderColourHover" initialValue="FFCCB078" />
-
         
         <ImagerySection name="border_section">
             <FrameComponent>

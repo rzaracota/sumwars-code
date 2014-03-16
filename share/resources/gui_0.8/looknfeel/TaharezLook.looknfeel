@@ -1951,7 +1951,7 @@
                     </Dim>
                 </Area>
                 <Image name="TaharezLook/StaticBackdrop" />
-                <ColourRectProperty name="BackgroundColours" />
+                <!--<ColourRectProperty name="BackgroundColours" />-->
                 <Colours topLeft="FFFFFFFF" topRight="FFFFFFFF" bottomLeft="FFFFFFFF" bottomRight="FFFFFFFF" />
                 <VertFormat type="Stretched" />
                 <HorzFormat type="Stretched" />
@@ -1960,7 +1960,7 @@
         <ImagerySection name="background_noframe">
             <ImageryComponent>
                 <Image name="TaharezLook/StaticBackdrop" />
-                <ColourRectProperty name="BackgroundColours" />
+                <!--<ColourRectProperty name="BackgroundColours" />-->
                 <Colours topLeft="FFFFFFFF" topRight="FFFFFFFF" bottomLeft="FFFFFFFF" bottomRight="FFFFFFFF" />
                 <VertFormat type="Stretched" />
                 <HorzFormat type="Stretched" />

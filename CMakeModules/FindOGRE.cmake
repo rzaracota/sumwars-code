@@ -148,7 +148,7 @@ else()
 endif ()
 
 # redo search if any of the environmental hints changed
-set(OGRE_COMPONENTS Paging Terrain Volume Overlay 
+set(OGRE_COMPONENTS Paging Terrain Volume Overlay RTShaderSystem 
   Plugin_BSPSceneManager Plugin_CgProgramManager Plugin_OctreeSceneManager
   Plugin_OctreeZone Plugin_PCZSceneManager Plugin_ParticleFX
   RenderSystem_Direct3D11 RenderSystem_Direct3D9 RenderSystem_GL RenderSystem_GL3Plus RenderSystem_GLES RenderSystem_GLES2)
@@ -177,6 +177,9 @@ endif()
 
 # locate Ogre include files
 find_path(OGRE_CONFIG_INCLUDE_DIR NAMES OgreBuildSettings.h HINTS ${OGRE_INC_SEARCH_PATH} ${OGRE_FRAMEWORK_INCLUDES} ${OGRE_PKGC_INCLUDE_DIRS} PATH_SUFFIXES "OGRE")
+# Augustin Preda, 2014.03.16: Somehow, the latest change breaks the detection of the header files on Windows 
+# (if "OgreRoot.h" and "OgreBuildSettings.h" are in different directories)
+Set (OGRE_INC_SEARCH_PATH ${OGRE_INC_SEARCH_PATH} ${ENV_OGRE_HOME}/OgreMain/include)
 find_path(OGRE_INCLUDE_DIR NAMES OgreRoot.h HINTS ${OGRE_CONFIG_INCLUDE_DIR} ${OGRE_INC_SEARCH_PATH} ${OGRE_FRAMEWORK_INCLUDES} ${OGRE_PKGC_INCLUDE_DIRS} PATH_SUFFIXES "OGRE")
 set(OGRE_INCOMPATIBLE FALSE)
 
