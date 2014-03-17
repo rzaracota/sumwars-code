@@ -11,7 +11,7 @@
             <Property name="Image" value="SumWarsLogo.png" />
             <Property name="FrameEnabled" value="False" />
             <Property name="MousePassThroughEnabled" value="True" />
-            <Property name="BackgroundColours" value="tl:00000000 tr:00000000 bl:00000000 br:00000000" />
+<!--            <Property name="BackgroundColours" value="tl:00000000 tr:00000000 bl:00000000 br:00000000" />-->
             <Property name="MousePassThroughEnabled" value="True" />
         </Window>
         

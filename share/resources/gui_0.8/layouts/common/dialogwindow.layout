@@ -88,8 +88,8 @@
                 
                 <Window type="SWB/MultiLineEditbox" name="SpeakerTextLabel0" >
                     <Property name="Text" value="" />
-                    <Property name="FrameEnabled" value="False" />
-                    <Property name="BackgroundEnabled" value="True" />
+                    <!--<Property name="FrameEnabled" value="False" />
+                    <Property name="BackgroundEnabled" value="True" />-->
                     <Property name="Area" value="{{0.0,0},{0.0,0},{0.99,0},{0.99,0}}" />
                     <Property name="WantsMultiClickEvents" value="False" />
                     <Property name="Font" value="SWB-S" />
@@ -101,8 +101,8 @@
                 
                 <Window type="SWB/MultiLineEditbox" name="SpeakerTextLabel1" >
                     <Property name="Text" value="" />
-                    <Property name="FrameEnabled" value="False" />
-                    <Property name="BackgroundEnabled" value="True" />
+                    <!--<Property name="FrameEnabled" value="False" />
+                    <Property name="BackgroundEnabled" value="True" />-->
                     <Property name="Area" value="{{0.0,0},{0.0,0},{0.99,0},{0.99,0}}" />
                     <Property name="WantsMultiClickEvents" value="False" />
                     <Property name="Font" value="SWB-S" />
