@@ -1,0 +1,35 @@
+system FrostWave
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                Flare
+        default_particle_width                  2
+        default_particle_height                 2
+        default_particle_depth                  2
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Circle 
+        {
+            emission_rate                       275
+            angle                               360
+            time_to_live                        0.4
+            velocity                            dyn_random
+            {
+                min                             5
+                max                             6
+            }
+            start_colour_range                  0.6 0.6 1 1
+            end_colour_range                    0.2 0.2 0.6 1
+            radius                              1
+        }
+        affector                                Colour Affector13
+        {
+            time_colour                         0    1 1 1 1
+            time_colour                         0.715217  1 1 1 1
+            time_colour                         1    0 0 0 1
+            colour_operation                    multiply
+        }
+    }
+}

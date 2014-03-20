@@ -1,0 +1,23 @@
+system Confuse
+{
+    category                                    Sumwars
+    technique 
+    {
+        visual_particle_quota                   1
+        material                                confuse
+        default_particle_width                  0.6
+        default_particle_height                 0.6
+        default_particle_depth                  0.6
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            emission_rate                       2
+            angle                               0
+            time_to_live                        100
+            velocity                            0
+            position                            0 1 0
+        }
+    }
+}

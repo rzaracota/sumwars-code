@@ -1,0 +1,39 @@
+system Lightning
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                Lightning
+        default_particle_width                  1
+        default_particle_height                 6
+        default_particle_depth                  1
+        renderer                                Billboard
+        {
+            billboard_type                      oriented_common
+            common_direction                    0 1 0
+        }
+        emitter                                 Box 
+        {
+            emission_rate                       1
+            angle                               dyn_random
+            {
+                min                             0
+                max                             10
+            }
+            velocity                            0
+            start_colour_range                  0.9 0.9 1 1
+            end_colour_range                    0.6 0.6 1 1
+            box_width                           0.2
+            box_height                          0.2
+            box_depth                           0.2
+        }
+        affector                                Colour Affector21
+        {
+            time_colour                         0    0 0 0 1
+            time_colour                         0.0478261  1 1 1 1
+            time_colour                         0.354348  1 1 1 1
+            time_colour                         1    0 0 0 1
+            colour_operation                    multiply
+        }
+    }
+}

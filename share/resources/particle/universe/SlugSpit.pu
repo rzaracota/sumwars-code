@@ -1,0 +1,27 @@
+system SlugSpit
+{
+    technique 
+    {
+        material                                Flare
+        default_particle_width                  0.4
+        default_particle_height                 0.4
+        default_particle_depth                  0.4
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            emission_rate                       275
+            angle                               30
+            time_to_live                        0.3
+            velocity                            dyn_random
+            {
+                min                             5
+                max                             6
+            }
+            direction                           0 0 -1
+            start_colour_range                  0.3 0 0 1
+            end_colour_range                    0.3 0.1 0 1
+        }
+    }
+}

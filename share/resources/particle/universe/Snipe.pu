@@ -1,0 +1,22 @@
+system Snipe
+{
+    category                                    Sumwars
+    technique 
+    {
+        visual_particle_quota                   1
+        material                                eye
+        default_particle_width                  1
+        default_particle_height                 1
+        default_particle_depth                  1
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            angle                               0
+            time_to_live                        30
+            velocity                            0
+            position                            0 1 0
+        }
+    }
+}

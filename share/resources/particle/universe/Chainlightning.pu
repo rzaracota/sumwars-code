@@ -1,0 +1,156 @@
+system Chainlightning
+{
+    category                                    Sumwars
+    technique Lightning_1
+    {
+        visual_particle_quota                   20
+        material                                lightning1
+        default_particle_width                  2
+        default_particle_height                 2
+        default_particle_depth                  2
+        renderer                                Billboard
+        {
+            billboard_type                      oriented_self
+            billboard_origin                    top_center
+        }
+        emitter                                 Point 
+        {
+            emission_rate                       20
+            angle                               360
+            time_to_live                        dyn_random
+            {
+                min                             0.05
+                max                             0.15
+            }
+            velocity                            1e-005
+            all_particle_dimensions             dyn_random
+            {
+                min                             7.68
+                max                             15.36
+            }
+            enabled                             false
+            colour                              0.482353 0.713726 0.992157 1
+        }
+        affector                                Colour 
+        {
+            time_colour                         0    1 1 1 1
+            time_colour                         0.491304  1 1 1 1
+            time_colour                         1    0 0 0 0
+            colour_operation                    multiply
+        }
+    }
+    technique Lightning_2
+    {
+        visual_particle_quota                   5
+        material                                lightning1
+        default_particle_width                  2
+        default_particle_height                 2
+        default_particle_depth                  2
+        renderer                                Billboard
+        {
+            billboard_type                      oriented_self
+            billboard_origin                    top_center
+        }
+        emitter                                 Point 
+        {
+            emission_rate                       20
+            angle                               360
+            time_to_live                        dyn_random
+            {
+                min                             0.05
+                max                             0.15
+            }
+            velocity                            1e-005
+            all_particle_dimensions             dyn_random
+            {
+                min                             7.68
+                max                             15.36
+            }
+            enabled                             false
+            colour                              0.482353 0.713726 0.992157 1
+        }
+        affector                                Colour 
+        {
+            time_colour                         0    1 1 1 1
+            time_colour                         0.5  1 1 1 1
+            time_colour                         1    0 0 0 0
+            colour_operation                    multiply
+        }
+    }
+    technique Lightning_3
+    {
+        visual_particle_quota                   5
+        material                                lightning1
+        default_particle_width                  2
+        default_particle_height                 2
+        default_particle_depth                  2
+        renderer                                Billboard
+        {
+            billboard_type                      oriented_self
+            billboard_origin                    top_center
+        }
+        emitter                                 Point 
+        {
+            emission_rate                       20
+            angle                               360
+            time_to_live                        dyn_random
+            {
+                min                             0.05
+                max                             0.15
+            }
+            velocity                            1e-005
+            all_particle_dimensions             dyn_random
+            {
+                min                             7.68
+                max                             15.36
+            }
+            enabled                             false
+            colour                              0.482353 0.713726 0.992157 1
+        }
+        affector                                Colour 
+        {
+            time_colour                         0    1 1 1 1
+            time_colour                         0.5  1 1 1 1
+            time_colour                         1    0 0 0 0
+            colour_operation                    multiply
+        }
+    }
+    technique Lightning_4
+    {
+        visual_particle_quota                   5
+        material                                lightning1
+        default_particle_width                  2
+        default_particle_height                 2
+        default_particle_depth                  2
+        renderer                                Billboard
+        {
+            billboard_type                      oriented_self
+            billboard_origin                    top_center
+        }
+        emitter                                 Point 
+        {
+            emission_rate                       20
+            angle                               360
+            time_to_live                        dyn_random
+            {
+                min                             0.05
+                max                             0.15
+            }
+            velocity                            1e-005
+            all_particle_dimensions             dyn_random
+            {
+                min                             7.68
+                max                             15.36
+            }
+            enabled                             false
+            colour                              0.482353 0.713726 0.992157 1
+        }
+        affector                                Colour 
+        {
+            time_colour                         0    1 1 1 1
+            time_colour                         0.5  1 1 1 1
+            time_colour                         1    0 0 0 0
+            colour_operation                    multiply
+        }
+    }
+}

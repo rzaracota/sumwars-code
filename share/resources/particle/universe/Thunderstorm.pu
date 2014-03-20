@@ -1,0 +1,33 @@
+system Thunderstorm
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                Droplet
+        default_particle_width                  0.4
+        default_particle_height                 2
+        default_particle_depth                  0.4
+        renderer                                Billboard
+        {
+            billboard_type                      oriented_common
+            common_direction                    0 -1 0
+        }
+        emitter                                 Box 
+        {
+            emission_rate                       100
+            angle                               0
+            time_to_live                        5
+            velocity                            2
+            direction                           0 -10 0
+            start_colour_range                  0.3 1 0.3 1
+            end_colour_range                    0.7 1 0.7 1
+            box_width                           20
+            box_height                          0
+            box_depth                           20
+        }
+        affector                                LinearForce 
+        {
+            force_vector                        0 -4 0
+        }
+    }
+}

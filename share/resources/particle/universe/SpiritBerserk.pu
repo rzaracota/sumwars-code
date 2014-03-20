@@ -1,0 +1,22 @@
+system SpiritBerserk
+{
+    category                                    Sumwars
+    technique 
+    {
+        visual_particle_quota                   1
+        material                                berserk
+        default_particle_width                  0.6
+        default_particle_height                 0.6
+        default_particle_depth                  0.6
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            angle                               0
+            time_to_live                        30
+            velocity                            0
+            position                            1 1.2 0
+        }
+    }
+}

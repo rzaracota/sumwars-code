@@ -1,0 +1,32 @@
+system Icebolt
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                Flare
+        default_particle_width                  0.4
+        default_particle_height                 0.4
+        default_particle_depth                  0.4
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            emission_rate                       275
+            angle                               25
+            time_to_live                        0.1
+            velocity                            dyn_random
+            {
+                min                             5
+                max                             6
+            }
+            direction                           1 0 0
+            start_colour_range                  0.6 0.6 1 1
+            end_colour_range                    0.2 0.2 0.6 1
+        }
+        affector                                LinearForce 
+        {
+            force_vector                        0 2 0
+        }
+    }
+}

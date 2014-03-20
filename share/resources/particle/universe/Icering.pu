@@ -1,0 +1,30 @@
+system Icering
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                Flare
+        default_particle_width                  0.8
+        default_particle_height                 0.8
+        default_particle_depth                  0.8
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Box 
+        {
+            emission_rate                       6000
+            angle                               30
+            time_to_live                        0.2
+            velocity                            0
+            start_colour_range                  0.6 0.6 1 1
+            end_colour_range                    0.2 0.2 0.6 1
+            box_width                           2
+            box_height                          0.6
+            box_depth                           2
+        }
+        affector                                LinearForce 
+        {
+            force_vector                        0 2 0
+        }
+    }
+}

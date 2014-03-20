@@ -1,0 +1,36 @@
+system Magic_Arrow_Lightning
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                Flare
+        default_particle_width                  0.5
+        default_particle_height                 0.5
+        default_particle_depth                  0.5
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            emission_rate                       40
+            angle                               5
+            time_to_live                        1
+            velocity                            dyn_random
+            {
+                min                             5
+                max                             6
+            }
+            direction                           0 0 0
+            start_colour_range                  0.9 0.9 1 1
+            end_colour_range                    0.6 0.6 1 1
+        }
+        affector                                Colour Affector7
+        {
+            time_colour                         0    0 0 0 1
+            time_colour                         0.184783  1 1 1 1
+            time_colour                         0.747826  1 1 1 1
+            time_colour                         1    0 0 0 1
+            colour_operation                    multiply
+        }
+    }
+}

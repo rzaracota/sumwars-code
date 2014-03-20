@@ -1,0 +1,36 @@
+system EarthAura
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                flareAlpha
+        default_particle_width                  0.6
+        default_particle_height                 0.6
+        default_particle_depth                  0.6
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Box 
+        {
+            emission_rate                       140
+            angle                               30
+            velocity                            0
+            start_colour_range                  1 0.7 0.7 1
+            end_colour_range                    0.9 0.7 0.3 1
+            box_width                           1.8
+            box_height                          1.2
+            box_depth                           1.8
+        }
+        affector                                LinearForce Affector54
+        {
+            force_vector                        0 2 0
+        }
+        affector                                Colour Affector55
+        {
+            time_colour                         0    1 1 1 1
+            time_colour                         0.171739  1 1 1 1
+            time_colour                         1    0 0 0 0
+            colour_operation                    multiply
+        }
+    }
+}

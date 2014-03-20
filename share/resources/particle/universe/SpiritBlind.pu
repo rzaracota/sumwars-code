@@ -1,0 +1,26 @@
+system SpiritBlind
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                flareAlpha
+        default_particle_width                  0.7
+        default_particle_height                 0.7
+        default_particle_depth                  0.7
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            angle                               360
+            time_to_live                        0.2
+            velocity                            dyn_random
+            {
+                min                             0.1
+                max                             0.4
+            }
+            position                            1 1.2 0
+            end_colour_range                    0.2 0.2 0.2 0.2
+        }
+    }
+}

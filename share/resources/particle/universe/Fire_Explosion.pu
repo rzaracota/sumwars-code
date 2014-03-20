@@ -1,0 +1,30 @@
+system Fire_Explosion
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                Flare
+        default_particle_width                  1.4
+        default_particle_height                 1.4
+        default_particle_depth                  1.4
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Box 
+        {
+            emission_rate                       600
+            angle                               360
+            time_to_live                        0.2
+            velocity                            0.2
+            start_colour_range                  1 0 0 1
+            end_colour_range                    0.5 0.5 0 1
+            box_width                           4
+            box_height                          3.2
+            box_depth                           4
+        }
+        affector                                LinearForce 
+        {
+            force_vector                        0 2 0
+        }
+    }
+}

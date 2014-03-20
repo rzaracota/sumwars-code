@@ -1,0 +1,43 @@
+system LichDeadColumn
+{
+    category                                    Sumwars
+    technique 
+    {
+        visual_particle_quota                   750
+        material                                fire_particle
+        default_particle_width                  1
+        default_particle_height                 1
+        default_particle_depth                  1
+        renderer                                Billboard
+        {
+        }
+        emitter                                 SphereSurface 
+        {
+            emission_rate                       dyn_random
+            {
+                min                             200
+                max                             250
+            }
+            angle                               15
+            time_to_live                        dyn_random
+            {
+                min                             2
+                max                             3
+            }
+            velocity                            dyn_random
+            {
+                min                             1
+                max                             2
+            }
+            radius                              0.5
+        }
+        affector                                Colour Affector0
+        {
+            time_colour                         0    0 0 0 1
+            time_colour                         0.152174  1 1 1 1
+            time_colour                         0.382609  1 1 1 1
+            time_colour                         1    0 0 0 1
+            colour_operation                    multiply
+        }
+    }
+}

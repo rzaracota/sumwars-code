@@ -1,0 +1,35 @@
+system EarthGush
+{
+    category                                    Sumwars
+    technique 
+    {
+        visual_particle_quota                   1000
+        material                                flareAlpha
+        default_particle_width                  1
+        default_particle_height                 1
+        default_particle_depth                  1
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Box 
+        {
+            emission_rate                       250
+            angle                               45
+            velocity                            dyn_random
+            {
+                min                             3
+                max                             4
+            }
+            position                            0 0.2 0
+            start_colour_range                  1 0.7 0.4 1
+            end_colour_range                    0.9 0.7 0.3 1
+            box_width                           1
+            box_height                          0.8
+            box_depth                           1
+        }
+        affector                                LinearForce Affector2
+        {
+            force_vector                        0 -4 0
+        }
+    }
+}

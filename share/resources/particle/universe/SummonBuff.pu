@@ -1,0 +1,37 @@
+system SummonBuff
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                Flare
+        default_particle_width                  0.3
+        default_particle_height                 0.3
+        default_particle_depth                  0.3
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            emission_rate                       20
+            angle                               15
+            time_to_live                        2
+            velocity                            dyn_random
+            {
+                min                             0.3
+                max                             0.4
+            }
+            position                            0 0 1
+            direction                           0 -1 0
+            start_colour_range                  0 0.4 0.8 0
+            end_colour_range                    0.2 0.5 0.8 0
+        }
+        affector                                Colour Affector0
+        {
+            time_colour                         0    0 0 0 1
+            time_colour                         0.123913  1 1 1 1
+            time_colour                         0.793478  1 1 1 1
+            time_colour                         1    0 0 0 1
+            colour_operation                    multiply
+        }
+    }
+}

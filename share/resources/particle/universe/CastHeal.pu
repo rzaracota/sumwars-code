@@ -1,0 +1,48 @@
+system CastHeal
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                heal_particle
+        default_particle_width                  1.5
+        default_particle_height                 1.5
+        default_particle_depth                  1.5
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            emission_rate                       5
+            angle                               90
+            time_to_live                        2
+            velocity                            3
+            particle_width                      1
+            particle_height                     1
+            particle_depth                      1
+            start_colour_range                  1 0 0 1
+            end_colour_range                    1 0.101961 0.101961 1
+            colour                              1 0.0588235 0.0588235 1
+        }
+        affector                                Colour Affector4
+        {
+            time_colour                         0    0 0 0 1
+            time_colour                         0.143478  1 1 1 1
+            time_colour                         0.71087  1 1 1 1
+            time_colour                         1    0 0 0 1
+            colour_operation                    multiply
+        }
+        affector                                TextureRotator Affector1
+        {
+            rotation                            dyn_random
+            {
+                min                             0
+                max                             2
+            }
+            rotation_speed                      0.5
+        }
+        affector                                LinearForce Affector2
+        {
+            force_vector                        0 -4 0
+        }
+    }
+}

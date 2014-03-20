@@ -1,0 +1,31 @@
+system Blizzard
+{
+    category                                    Sumwars
+    technique 
+    {
+        visual_particle_quota                   5000
+        material                                Flare
+        default_particle_width                  2.8
+        default_particle_height                 2.8
+        default_particle_depth                  2.8
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Cylinder 
+        {
+            emission_rate                       300
+            time_to_live                        dyn_random
+            {
+                min                             3
+                max                             4.5
+            }
+            velocity                            8
+            keep_local                          true
+            direction                           0 -1 0
+            start_colour_range                  0.509804 0.509804 1 1
+            end_colour_range                    0.196078 0.196078 0.501961 1
+            radius								6.0
+			height								1.0
+        }
+    }
+}

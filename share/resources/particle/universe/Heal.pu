@@ -1,0 +1,28 @@
+system Heal
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                heal_particle
+        default_particle_width                  0.6
+        default_particle_height                 0.6
+        default_particle_depth                  0.6
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            emission_rate                       20
+            angle                               0
+            time_to_live                        1
+            velocity                            dyn_random
+            {
+                min                             0.02
+                max                             0.04
+            }
+            direction                           1 1 1
+            start_colour_range                  0 0.1 0 1
+            end_colour_range                    0.1 0.1 0 1
+        }
+    }
+}

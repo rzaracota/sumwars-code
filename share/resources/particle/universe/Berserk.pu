@@ -1,0 +1,18 @@
+system Berserk
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                BaseWhite
+        default_particle_width                  1.09292
+        default_particle_height                 1.09292
+        default_particle_depth                  1.09292
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            velocity                            2.18584
+        }
+    }
+}

@@ -1,0 +1,27 @@
+system Poison
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                FlarePointSprite
+        default_particle_width                  0.6
+        default_particle_height                 0.6
+        default_particle_depth                  0.6
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Box 
+        {
+            emission_rate                       100
+            angle                               30
+            time_to_live                        0.3
+            velocity                            0
+            position                            0 1 0
+            start_colour_range                  0 1 0 1
+            end_colour_range                    0.4 1 0.3 1
+            box_width                           0.8
+            box_height                          2.4
+            box_depth                           0.8
+        }
+    }
+}

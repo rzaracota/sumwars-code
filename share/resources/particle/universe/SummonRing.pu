@@ -1,0 +1,23 @@
+system SummonRing
+{
+    technique 
+    {
+        material                                Flare
+        default_particle_width                  0.5
+        default_particle_height                 0.5
+        default_particle_depth                  0.5
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Circle 
+        {
+            emission_rate                       250
+            angle                               30
+            time_to_live                        0.6
+            velocity                            0.6
+            start_colour_range                  0.6 0.6 1 1
+            end_colour_range                    0.2 0.2 0.6 1
+            radius                              0.8
+        }
+    }
+}

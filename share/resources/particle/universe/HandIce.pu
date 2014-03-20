@@ -1,0 +1,37 @@
+system HandIce
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                Flare
+        default_particle_width                  0.4
+        default_particle_height                 0.4
+        default_particle_depth                  0.4
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Box 
+        {
+            emission_rate                       50
+            angle                               60
+            time_to_live                        0.2
+            velocity                            dyn_random
+            {
+                min                             1
+                max                             2
+            }
+            start_colour_range                  0.6 0.6 1 1
+            end_colour_range                    0.2 0.2 0.6 1
+            box_width                           0.8
+            box_height                          0.8
+            box_depth                           0.8
+        }
+        affector                                Colour Affector9
+        {
+            time_colour                         0    1 1 1 1
+            time_colour                         0.2  1 1 1 1
+            time_colour                         1    0 0 0 1
+            colour_operation                    multiply
+        }
+    }
+}

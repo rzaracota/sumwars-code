@@ -1,0 +1,26 @@
+system ElemExplosion
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                Flare
+        default_particle_width                  0.4
+        default_particle_height                 0.4
+        default_particle_depth                  0.4
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            emission_rate                       100
+            angle                               360
+            time_to_live                        0.2
+            velocity                            dyn_random
+            {
+                min                             5
+                max                             6
+            }
+            colour                              1 0 0 1
+        }
+    }
+}

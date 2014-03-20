@@ -1,0 +1,41 @@
+system BladeStorm
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                Flare
+        default_particle_width                  0.3
+        default_particle_height                 0.3
+        default_particle_depth                  0.308824
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Box 
+        {
+            emission_rate                       50
+            angle                               360
+            time_to_live                        0.01
+            velocity                            0
+            particle_width                      dyn_random
+            {
+                min                             0.2
+                max                             0.4
+            }
+            particle_height                     dyn_random
+            {
+                min                             0.2
+                max                             0.4
+            }
+            particle_depth                      dyn_random
+            {
+                min                             0.2
+                max                             0.4
+            }
+            direction                           1 0 0
+            start_colour_range                  1 1 1 1
+            box_width                           0.2
+            box_height                          0.2
+            box_depth                           0.4
+        }
+    }
+}

@@ -1,0 +1,31 @@
+system Burning
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                FlarePointSprite
+        default_particle_width                  0.6
+        default_particle_height                 0.6
+        default_particle_depth                  0.6
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Box Emitter31
+        {
+            emission_rate                       100
+            angle                               30
+            time_to_live                        0.3
+            velocity                            dyn_random
+            {
+                min                             2
+                max                             3
+            }
+            position                            0 1 0
+            start_colour_range                  0.992157 0 0 1
+            end_colour_range                    0.905882 0.392157 0.0117647 1
+            box_width                           0.8
+            box_height                          2.4
+            box_depth                           0.8
+        }
+    }
+}

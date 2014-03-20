@@ -1,0 +1,42 @@
+system CastCureBurnParty
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                Flare
+        default_particle_width                  0.4
+        default_particle_height                 0.4
+        default_particle_depth                  0.308824
+        renderer                                Billboard
+        {
+        }
+        emitter                                 SphereSurface 
+        {
+            emission_rate                       100
+            angle                               180
+            velocity                            dyn_random
+            {
+                min                             12
+                max                             13
+            }
+            particle_width                      4
+            particle_height                     4
+            start_colour_range                  0.0196078 0.839216 0.980392 1
+            end_colour_range                    0.0117647 0.584314 0.886275 1
+            radius                              1
+        }
+        affector                                Colour Affector58
+        {
+            time_colour                         0    0 0 0 1
+            time_colour                         0.143478  1 1 1 1
+            time_colour                         0.782609  1 1 1 1
+            time_colour                         1    0 0 0 1
+            colour_operation                    multiply
+        }
+        affector                                LinearForce Affector71
+        {
+            mass_affector                       200
+            force_vector                        0 -10 0
+        }
+    }
+}

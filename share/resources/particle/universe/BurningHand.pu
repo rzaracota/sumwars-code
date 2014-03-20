@@ -1,0 +1,29 @@
+system BurningHand
+{
+    //the burning hand of a skeleton
+    category                                    Sumwars
+    technique 
+    {
+        material                                Flare
+        default_particle_width                  0.2
+        default_particle_height                 0.2
+        default_particle_depth                  0.2
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            emission_rate                       100
+            angle                               360
+            time_to_live                        0.1
+            velocity                            dyn_random
+            {
+                min                             3
+                max                             5
+            }
+            direction                           1 0 0
+            start_colour_range                  1 0 0 1
+            end_colour_range                    0.784314 0.627451 0 1
+        }
+    }
+}

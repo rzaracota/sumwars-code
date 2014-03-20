@@ -1,0 +1,41 @@
+system Freeze
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                Aureola
+        default_particle_width                  0.5
+        default_particle_height                 0.5
+        default_particle_depth                  0.5
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            time_to_live                        1.5
+            velocity                            dyn_random
+            {
+                min                             2
+                max                             4
+            }
+            start_colour_range                  0.152941 0.478431 0.878431 1
+            end_colour_range                    0.2 0.215686 0.866667 1
+        }
+        affector                                Colour Affector5
+        {
+            time_colour                         0    0 0 0 0
+            time_colour                         0.221739  1 1 1 1
+            time_colour                         0.582609  1 1 1 1
+            time_colour                         1    0 0 0 0
+            colour_operation                    multiply
+        }
+        affector                                TextureRotator Affector6
+        {
+            rotation_speed                      1
+        }
+        affector                                LinearForce Affector11
+        {
+            force_vector                        0 -5 0
+        }
+    }
+}

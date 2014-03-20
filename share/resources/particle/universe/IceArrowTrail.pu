@@ -1,0 +1,31 @@
+system IceArrowTrail
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                Flare
+        default_particle_width                  0.4
+        default_particle_height                 0.4
+        default_particle_depth                  0.4
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Box 
+        {
+            emission_rate                       30
+            angle                               360
+            time_to_live                        0.2
+            velocity                            dyn_random
+            {
+                min                             5
+                max                             6
+            }
+            direction                           1 0 0
+            start_colour_range                  0.6 0.6 1 1
+            end_colour_range                    0.2 0.2 0.6 1
+            box_width                           0.1
+            box_height                          0.1
+            box_depth                           0.1
+        }
+    }
+}

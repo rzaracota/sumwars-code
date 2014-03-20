@@ -1,0 +1,29 @@
+system FireCage
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                fire_particle
+        default_particle_width                  3
+        default_particle_height                 3
+        default_particle_depth                  3
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Circle 
+        {
+            emission_rate                       70
+            angle                               5
+            velocity                            2.30669
+            radius                              3
+        }
+        affector                                Colour Affector8
+        {
+            time_colour                         0    0 0 0 1
+            time_colour                         0.106522  1 1 1 1
+            time_colour                         0.706522  1 1 1 1
+            time_colour                         1    0 0 0 1
+            colour_operation                    multiply
+        }
+    }
+}

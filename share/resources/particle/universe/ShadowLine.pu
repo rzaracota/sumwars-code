@@ -1,0 +1,28 @@
+system ShadowLine
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                smoke
+        default_particle_width                  0.8
+        default_particle_height                 0.8
+        default_particle_depth                  0.8
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            emission_rate                       15
+            angle                               360
+            time_to_live                        2
+            velocity                            dyn_random
+            {
+                min                             0.06
+                max                             0.1
+            }
+            direction                           1 0 0
+            start_colour_range                  0.2 0 0 1
+            end_colour_range                    0.2 0.2 0 1
+        }
+    }
+}

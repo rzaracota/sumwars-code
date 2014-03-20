@@ -1,0 +1,33 @@
+system Smoke
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                smoke
+        default_particle_width                  1
+        default_particle_height                 1
+        default_particle_depth                  1
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Box 
+        {
+            emission_rate                       150
+            angle                               30
+            time_to_live                        2
+            velocity                            2
+            direction                           0 -1 0
+            box_width                           4
+            box_height                          0.4
+            box_depth                           4
+        }
+        affector                                Colour Affector60
+        {
+            time_colour                         0    1 1 1 0
+            time_colour                         0.217391  1 1 1 0.698039
+            time_colour                         0.693478  1 1 1 0.698039
+            time_colour                         1    1 1 1 0
+            colour_operation                    multiply
+        }
+    }
+}

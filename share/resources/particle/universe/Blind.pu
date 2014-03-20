@@ -1,0 +1,29 @@
+system Blind
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                flareAlpha
+        default_particle_width                  0.5
+        default_particle_height                 0.5
+        default_particle_depth                  0.5
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Box 
+        {
+            angle                               360
+            time_to_live                        0.4
+            velocity                            0
+            particle_width                      0.5
+            particle_height                     0.5
+            particle_depth                      0.5
+            direction                           1 0 0
+            end_colour_range                    0 0 0 0.196078
+            colour                              0 0 0 1
+            box_width                           0.2
+            box_height                          0.2
+            box_depth                           0.4
+        }
+    }
+}

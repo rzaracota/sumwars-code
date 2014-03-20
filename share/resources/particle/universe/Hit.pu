@@ -1,0 +1,68 @@
+system Hit
+{
+    category                                    Sumwars
+    technique 
+    {
+        material                                flareAlpha
+        default_particle_width                  0.5
+        default_particle_height                 0.5
+        default_particle_depth                  0.5
+        renderer                                Billboard
+        {
+        }
+        emitter                                 Point 
+        {
+            emission_rate                       50
+            angle                               360
+            velocity                            1
+            duration                            0.2
+            colour                              0.960784 0 0 1
+        }
+        affector                                LinearForce Affector93
+        {
+            force_vector                        0 -6 0
+        }
+        observer                                OnPosition Observer15
+        {
+            handler                             DoPlacementParticle Handler21
+            {
+                force_emitter                   Emitter151
+            }
+            handler                             DoExpire Handler36
+            {
+            }
+            position_y                          less_than 1.2
+        }
+    }
+    technique Technique137
+    {
+        visual_particle_quota                   5000
+        material                                flareAlpha
+        default_particle_width                  1
+        default_particle_height                 1
+        default_particle_depth                  1
+        renderer                                Billboard
+        {
+            billboard_type                      perpendicular_common
+            common_direction                    0 1 0
+            common_up_vector                    0 0 1
+        }
+        emitter                                 Point Emitter151
+        {
+            emission_rate                       2
+            time_to_live                        1
+            velocity                            0
+            colour                              1 0 0 1
+        }
+        affector                                Scale Affector1
+        {
+            xyz_scale                           1.1
+        }
+        affector                                Colour Affector2
+        {
+            time_colour                         0    1 1 1 1
+            time_colour                         1    1 1 1 0
+            colour_operation                    multiply
+        }
+    }
+}
