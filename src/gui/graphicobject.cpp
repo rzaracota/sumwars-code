@@ -34,6 +34,7 @@ GraphicObject::GraphicObject(Type type, GraphicRenderInfo* render_info, std::str
 	
 	m_highlight = false;
 	m_exact_animations = false; // as default ?
+    m_delete_node = true;
 
 	initContent();
 }
@@ -75,7 +76,11 @@ GraphicObject::~GraphicObject()
 	{
 		removeMovableObject(m_dependencies.begin()->first);
 	}
-	m_top_node->getCreator()->destroySceneNode(m_top_node->getName());
+
+    if(m_delete_node)
+	{
+        m_top_node->getCreator()->destroySceneNode(m_top_node->getName());
+	}
 }
 
 void GraphicObject::invalidateRenderInfo()
@@ -330,7 +335,7 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 
 		m_soundobjects[object.m_objectname] = SoundObject (name);
 		//m_soundobjects[object.m_objectname] = name;
-		SW_DEBUG ("setting soundobject with name [%s] to: (%s)", object.m_objectname.c_str (), name.c_str ());
+		//SW_DEBUG ("setting soundobject with name [%s] to: (%s)", object.m_objectname.c_str (), name.c_str ());
 	}
 	else 
 	{
@@ -363,17 +368,52 @@ void GraphicObject::addMovableObject(MovableObjectInfo& object)
 		Ogre::TagPoint* tag =0;
 		Ogre::Entity* ent =0;
 		
-		// attach object to new Node
-		Ogre::SceneNode* snode = GraphicManager::getSceneManager()->getRootSceneNode()->createChildSceneNode();
-		snode->getParent()->removeChild(snode);
-		snode->setInheritScale(true);
-		snode->attachObject(obj);
+		Ogre::SceneNode* snode;
+		if(obj->getMovableType() == "PUParticleSystem")
+		{
+			ParticleUniverse::ParticleSystem* particle_system = static_cast<ParticleUniverse::ParticleSystem*>(obj);
+			snode = obj->getParentSceneNode();
+            m_delete_node = false;
+		
+			if(snode == 0)
+			{
+				// attach object to new Node
+				snode = GraphicManager::getSceneManager()->getRootSceneNode()->createChildSceneNode();
+				snode->getParent()->removeChild(snode);
+				snode->setInheritScale(true);
+				snode->attachObject(obj);
+			}
+			else
+			{
+				snode->getParentSceneNode()->removeChild(snode);
+			}
+
+			// need to start the particle system
+            particle_system->start();
+		}
+		else
+		{
+			// attach object to new Node
+			snode = GraphicManager::getSceneManager()->getRootSceneNode()->createChildSceneNode();
+			snode->getParent()->removeChild(snode);
+			snode->setInheritScale(true);
+			snode->attachObject(obj);
+		}
+
+
 		node = snode;
 		
 		if (object.m_bone == "")
 		{
 			// attach to Topnode
-			getTopNode()->addChild(node);
+			try
+			{
+				getTopNode()->addChild(node);
+			}
+			catch(Ogre::InvalidParametersException e)
+			{
+				SW_DEBUG(e.what());
+			}
 			DEBUGX("node %p parent %p",node,m_top_node );
 			m_attached_objects[object.m_objectname].m_tag_trackpoint = 0;
 		}
@@ -470,10 +510,20 @@ void GraphicObject::removeMovableObject(std::string name)
 		Ogre::Node* node = obj->getParentNode();
 		Ogre::SceneNode* snode = dynamic_cast<Ogre::SceneNode*>(node);
 		Ogre::TagPoint* tag = dynamic_cast<Ogre::TagPoint*>(node);
-		GraphicManager::detachMovableObject(obj);
-		
-		GraphicManager::destroyMovableObject(obj);
-		
+
+		if (obj->getMovableType() == "PUParticleSystem")
+		{
+			ParticleUniverse::ParticleSystem* sys = static_cast<ParticleUniverse::ParticleSystem*>(obj);
+			snode->getParentSceneNode()->removeChild(snode->getName());
+			ParticleEventHandler::getSingleton().addParticleSystem(sys, snode);
+		}
+		else
+		{
+			GraphicManager::detachMovableObject(obj);
+			snode->getCreator()->destroySceneNode(snode->getName());
+			GraphicManager::destroyMovableObject(obj);
+		}
+
 		// remove Highlight Entity
 		obj = getHighlightObject(name);
 		if (obj != 0)
@@ -483,7 +533,6 @@ void GraphicObject::removeMovableObject(std::string name)
 			GraphicManager::destroyMovableObject(obj);
 		}
 		
-		snode->getCreator()->destroySceneNode(snode->getName());
 		std::map<std::string, AttachedMovableObject>::iterator it;
 		it = m_attached_objects.find(name);
 		

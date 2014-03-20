@@ -18,7 +18,7 @@
 #include <OgreRenderWindow.h>
 #include <OgreSubEntity.h>
 #include <OgreMeshManager.h>
-#include <OgreParticleSystem.h>
+#include <ParticleUniverseSystemManager.h>
 #include "listitem.h"
 #include "savegamelist.h"
 #include "messageboxes.h"
@@ -394,6 +394,12 @@ bool MainMenu::onShown( const CEGUI::EventArgs& evt )
 		// we need a scene to display the character, so set the savegame now
 		m_saveGameList->selectDefaultSavegame();
 	}
+    else
+    {
+        ParticleUniverse::ParticleSystem *p = ParticleUniverse::ParticleSystemManager::getSingleton().getParticleSystem("mainMen_Particle#0");
+        p->start();
+    }
+
 	m_saveGameList->update();
 
 	root->getAutoCreatedWindow()->getViewport(0)->setCamera(m_mainMenuCamera);
@@ -420,6 +426,8 @@ bool MainMenu::onHidden( const CEGUI::EventArgs& evt )
     if (m_sceneCreated)
 	{
 		root->getAutoCreatedWindow()->getViewport(0)->setCamera(m_gameCamera);
+        ParticleUniverse::ParticleSystem *p = ParticleUniverse::ParticleSystemManager::getSingleton().getParticleSystem("mainMen_Particle#0");
+        p->stop();
 	}
 	CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "MainMenuRoot")->setAlpha(1);
 
@@ -497,7 +505,7 @@ void MainMenu::createScene()
     {
 		try
 		{
-			m_mainNode = m_sceneMgr->getRootSceneNode()->createChildSceneNode("MainMenuMainNode");
+            m_mainNode = m_sceneMgr->getRootSceneNode()->createChildSceneNode("MainMenuMainNode");
 			m_mainNode->setPosition(Ogre::Vector3::ZERO);
 
 			m_mainMenuCamera->setPosition(Ogre::Vector3(-12.2126, 0.597, -14.1));
@@ -507,7 +515,7 @@ void MainMenu::createScene()
 			Ogre::SceneNode *n = m_mainNode->createChildSceneNode();
 			Ogre::Entity *e;
 			Ogre::MeshPtr ptrMesh; // 2014.01.12: re-added.
-			Ogre::ParticleSystem *p;
+            ParticleUniverse::ParticleSystem *p;
 			Ogre::Light *l;
 
 			m_sceneMgr->setAmbientLight(Ogre::ColourValue(0.1, 0.1, 0.3, 2));
@@ -805,9 +813,10 @@ void MainMenu::createScene()
 			n->setScale(Ogre::Vector3(1, 1, 1));
 			n->setOrientation(Ogre::Quaternion(1, 0, 0, 0));
 
-			p = m_sceneMgr->createParticleSystem("mainMen_Particle#0","CampFire");
+            p = ParticleUniverse::ParticleSystemManager::getSingleton().createParticleSystem("mainMen_Particle#0","CampFire", m_sceneMgr);
 			n = m_mainNode->createChildSceneNode();
-			n->attachObject(p);
+            n->attachObject(p);
+            p->start();
 			n->setPosition(Ogre::Vector3(-10.5017, 0.150328, -21.4926));
 			n->setScale(Ogre::Vector3(1, 1, 1));
 			n->setOrientation(Ogre::Quaternion(1, 0, 0, 0));
@@ -963,7 +972,7 @@ void MainMenu::updateCharacterView()
 		std::string act = pl->getActionString();
 		float perc = m_savegame_player_action.m_elapsed_time / m_savegame_player_action.m_time;
 		
-		m_savegame_player_object->updateAction(act,perc);
+        m_savegame_player_object->updateAction(act,perc);
 		m_savegame_player_object->update(0);
 		
 		pl->setAction(actsave);

@@ -42,7 +42,7 @@
 
 
 #include "OgreConfigFile.h"
-#include <OgreParticleSystemManager.h>
+#include <ParticleUniverseSystemManager.h>
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #include "../winicon/resource.h"
@@ -1146,7 +1146,7 @@ bool Application::loadResources(int datagroups)
 		Ogre::ResourceGroupManager::getSingleton().loadResourceGroup("Particles");
 		if (m_running)
 		{
-			files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("Particles","*.particle");
+            /*files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("Particles","*.particle");
 			for (it = files->begin(); it != files->end(); ++it)
 			{
 				try
@@ -1155,14 +1155,14 @@ bool Application::loadResources(int datagroups)
 					DEBUGX("loading script file %s",file.c_str());
 					Ogre::DataStreamPtr filehandle;
 					filehandle = Ogre::ResourceGroupManager::getSingleton().openResource(file);
-					Ogre::ParticleSystemManager::getSingleton().parseScript(filehandle,"Particles" ); 
+                    ParticleUniverse::ParticleSystemManager::getSingleton().parseScript(filehandle,"Particles" );
 					updateStartScreen(0.36);
 				}
 				catch (Ogre::Exception& e)
 				{
 					SW_DEBUG("failed with exception %s",e.what());
 				}
-			}
+            }*/
 		}
 	}
 	updateStartScreen(0.4);
@@ -1375,12 +1375,7 @@ void Application::cleanup(int datagroups)
 	}
 	
 	if (datagroups & World::DATA_PARTICLESYSTEMS)
-	{
-		//Ogre::ResourceGroupManager::getSingleton().unloadResourceGroup("Particles", true);
-		// delete all the templates from the ParticleSystemManager
-		Ogre::ParticleSystemManager& pmgr = Ogre::ParticleSystemManager::getSingleton();
-		pmgr.removeAllTemplates();
-		
+    {
 		GraphicManager::clearParticlePool();
 		DEBUGX("deleting particlesystems");
 	}

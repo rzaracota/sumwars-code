@@ -64,7 +64,7 @@ const std::string defaultResourcesCfg =
 "FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/materials/textures\n"
 "\n"
 "[Particles]\n"
-"FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/particle/ogre_1_6\n"
+"FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/particle/universe\n"
 "\n"
 "[GUI]\n"
 "FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/gui_common/imagesets\n"

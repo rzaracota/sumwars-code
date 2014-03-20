@@ -519,6 +519,11 @@ class GraphicObject
 		 * \brief Signals if the objects Renderinfo is still valid
 		 */
 		bool m_render_info_valid;
+
+        /**
+         * @brief Signals if the scene node should be deleted. Nodes of particle system are reused
+         */
+        bool m_delete_node;
 };
 
 

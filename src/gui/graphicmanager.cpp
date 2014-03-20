@@ -16,6 +16,8 @@
 #include "graphicmanager.h"
 #include "debug.h"
 #include "elementattrib.h"
+#include "ParticleUniverseSystemManager.h"
+#include "config.h"
 
 double GraphicManager::g_global_scale = 1;
 
@@ -23,7 +25,7 @@ std::map<std::string, GraphicRenderInfo*> GraphicManager::m_render_infos;
 Ogre::SceneManager* GraphicManager::m_scene_manager;
 std::map<std::string, GraphicObject::Type> GraphicManager::m_graphic_mapping;
 StencilOpQueueListener* GraphicManager::m_stencil_listener;
-std::multimap<std::string, Ogre::ParticleSystem*> GraphicManager::m_particle_system_pool;
+std::multimap<std::string, ParticleUniverse::ParticleSystem*> GraphicManager::m_particle_system_pool;
 std::string GraphicManager::m_filename;
 
 std::map<std::string, GraphicObject*> GraphicManager::m_graphic_objects;
@@ -100,13 +102,59 @@ void StencilOpQueueListener::renderQueueEnded(Ogre::uint8 queueGroupId, const Og
 	} 
 } 
 
+template<> ParticleEventHandler* Ogre::Singleton<ParticleEventHandler>::SUMWARS_OGRE_SINGLETON = 0;
+
+ParticleEventHandler::ParticleEventHandler()
+{
+	m_temp_node = Ogre::Root::getSingleton().getSceneManager("DefaultSceneManager")->getRootSceneNode()->createChildSceneNode("ParticleEventHandler::TempNode");
+}
+
+void ParticleEventHandler::addParticleSystem(ParticleUniverse::ParticleSystem *sys, Ogre::SceneNode *n)
+{
+	if(!Ogre::Root::getSingleton().getSceneManager("DefaultSceneManager")->hasSceneNode("ParticleEventHandler::TempNode") || !m_temp_node)
+		m_temp_node = Ogre::Root::getSingleton().getSceneManager("DefaultSceneManager")->getRootSceneNode()->createChildSceneNode("ParticleEventHandler::TempNode");
+
+    if(!m_particle_systems[sys->getName()])
+    {
+        m_particle_systems[sys->getName()] = sys;
+		m_temp_node->addChild(n);
+		sys->stopFade();
+    }
+}
+
+void ParticleEventHandler::handleParticleSystemEvent(ParticleUniverse::ParticleSystem *particleSystem, ParticleUniverse::ParticleUniverseEvent &particleUniverseEvent)
+{
+    if(particleUniverseEvent.eventType == ParticleUniverse::PU_EVT_SYSTEM_STOPPED)
+    {
+			ParticleUniverse::ParticleSystem* psys = m_particle_systems[particleSystem->getName()];
+            if(psys)
+			{
+				Ogre::SceneNode *n = dynamic_cast<Ogre::SceneNode*>(particleSystem->getParentNode());
+				m_particle_systems.erase(psys->getName());
+                GraphicManager::putBackParticleSystem(psys);
+			}
+
+    }
+}
+
+ParticleEventHandler &ParticleEventHandler::getSingleton()
+{
+	assert( SUMWARS_OGRE_SINGLETON );
+	return ( *SUMWARS_OGRE_SINGLETON );
+}
+
+ParticleEventHandler *ParticleEventHandler::getSingletonPtr()
+{
+	return SUMWARS_OGRE_SINGLETON;
+}
+
 void GraphicManager::init()
 {
 	m_scene_manager = Ogre::Root::getSingleton().getSceneManager("DefaultSceneManager");
 	m_stencil_listener = new StencilOpQueueListener;
 	
 	m_scene_manager->addRenderQueueListener(m_stencil_listener);
-
+	new ParticleEventHandler();
 }
 
 void GraphicManager::cleanup()
@@ -241,7 +289,7 @@ void GraphicManager::clearRenderInfo(std::string name)
 
 void GraphicManager::clearParticlePool()
 {
-	std::multimap<std::string, Ogre::ParticleSystem*>::iterator pt;
+    std::multimap<std::string, ParticleUniverse::ParticleSystem*>::iterator pt;
 	for (pt = m_particle_system_pool.begin(); pt != m_particle_system_pool.end(); ++pt)
 	{
 		m_scene_manager->destroyMovableObject(pt->second);
@@ -468,7 +516,7 @@ Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info
 	}
 	else if (info.m_type == MovableObjectInfo::PARTICLE_SYSTEM)
 	{
-		Ogre::ParticleSystem* part =0;
+		ParticleUniverse::ParticleSystem* part =0;
 		try
 		{
 			part = getParticleSystem(info.m_source);
@@ -491,14 +539,7 @@ Ogre::MovableObject* GraphicManager::createMovableObject(MovableObjectInfo& info
 
 void GraphicManager::destroyMovableObject(Ogre::MovableObject* obj)
 {
-	if (obj->getMovableType() == "ParticleSystem")
-	{
-		putBackParticleSystem(static_cast<Ogre::ParticleSystem*>(obj));
-	}
-	else
-	{
-		m_scene_manager->destroyMovableObject(obj);
-	}
+    m_scene_manager->destroyMovableObject(obj);
 }
 
 std::string GraphicManager::getDropSound(std::string objecttype)
@@ -882,13 +923,13 @@ GraphicObject::Type GraphicManager::getGraphicType(std::string objecttype)
 	return "";
 }
 
-Ogre::ParticleSystem* GraphicManager::getParticleSystem(std::string type)
+ParticleUniverse::ParticleSystem* GraphicManager::getParticleSystem(std::string type)
 {
 	// search the pool for a fitting particle system
-	std::multimap<std::string, Ogre::ParticleSystem*>::iterator it;
+    std::multimap<std::string, ParticleUniverse::ParticleSystem*>::iterator it;
 	it = m_particle_system_pool.find(type);
 
-	Ogre::ParticleSystem* part=0;
+    ParticleUniverse::ParticleSystem* part=0;
 	static int count =0;
 
 	if (it == m_particle_system_pool.end())
@@ -898,7 +939,9 @@ Ogre::ParticleSystem* GraphicManager::getParticleSystem(std::string type)
 		name << "ParticleSystem"<<count;
 		count ++;
 
-		part = m_scene_manager->createParticleSystem(name.str(), type);
+        ParticleUniverse::ParticleSystemManager* pManager = ParticleUniverse::ParticleSystemManager::getSingletonPtr();
+		part = pManager->createParticleSystem(name.str(), type.c_str(), m_scene_manager);
+        part->addParticleSystemListener(ParticleEventHandler::getSingletonPtr());
 		// type is stored in the OGRE any Attribute
 		part->setUserAny(Ogre::Any(type));
 		DEBUGX("created particlesystem %p %s for type %s",part, name.str().c_str(), type.c_str());
@@ -911,11 +954,11 @@ Ogre::ParticleSystem* GraphicManager::getParticleSystem(std::string type)
 		DEBUGX("took particlesystem %s for type %s",part->getName().c_str(), type.c_str());
 	}
 
-	part->clear();
+	part->stop();
 	return part;
 }
 
-void GraphicManager::putBackParticleSystem(Ogre::ParticleSystem* part)
+void GraphicManager::putBackParticleSystem(ParticleUniverse::ParticleSystem* part)
 {
 	// store type of the particle system in OGRE any
 	std::string type;

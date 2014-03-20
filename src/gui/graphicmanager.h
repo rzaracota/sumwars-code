@@ -19,8 +19,8 @@
 
 #include "OgreSceneManager.h"
 #include "OgreRoot.h"
-#include "OgreParticleSystem.h"
 #include "OgreEntity.h"
+#include "ParticleUniverseSystem.h"
 #include "OgreMovableObject.h"
 #include "OgreStaticGeometry.h"
 #include "graphicobject.h"
@@ -57,6 +57,42 @@ class StencilOpQueueListener : public Ogre::RenderQueueListener
 		virtual void renderQueueEnded(Ogre::uint8 queueGroupId, const Ogre::String& invocation, bool& repeatThisInvocation);
 
 }; 
+
+class ParticleEventHandler : public ParticleUniverse::ParticleSystemListener, public Ogre::Singleton<ParticleEventHandler>
+{
+    // ParticleSystemListener interface
+public:
+
+    ParticleEventHandler();
+
+    /**
+     * @brief Adds a particle system to be destroyed when all particles have expired
+     * @param sys The particle system that is about to be deleted
+     */
+    void addParticleSystem(ParticleUniverse::ParticleSystem *sys, Ogre::SceneNode *n);
+
+    /**
+     * @brief handleParticleSystemEvent
+     * @param particleSystem
+     * @param particleUniverseEvent
+     */
+    void handleParticleSystemEvent(ParticleUniverse::ParticleSystem *particleSystem, ParticleUniverse::ParticleUniverseEvent &particleUniverseEvent);
+
+    static ParticleEventHandler& getSingleton();
+    static ParticleEventHandler* getSingletonPtr();
+
+private:
+    /**
+     * @brief objects Holds the objects that are about to be deleted
+     */
+    std::map<Ogre::String, ParticleUniverse::ParticleSystem*> m_particle_systems;
+
+
+    /**
+     * @brief This node holds the particle systems that will be removed from scene when all particles are gone
+     */
+    Ogre::SceneNode* m_temp_node;
+};
 
 /**
  * \brief Graphic object creation and destruction class
@@ -245,22 +281,22 @@ class GraphicManager
 		 */
 		static void loadRenderInfo(TiXmlNode* node, GraphicRenderInfo* info);
 		
+        /**
+         * \brief Returns an ParticleUniverse Particlesystem with the requested type
+         * \param type Type of a Particlesystem
+         * The particle system is taken from the particle pool. A new particle system is only created if there is none of the requested type in the pool
+         */
+        static ParticleUniverse::ParticleSystem* getParticleSystem(std::string type);
+
+        /**
+         * \brief Inserts the particle system into the particle pool
+         * \param part particle system
+        */
+        static void putBackParticleSystem(ParticleUniverse::ParticleSystem* part);
+
+
 	private:
-		
-		
-		/**
-		 * \brief Returns an OGRE Particlesystem with the requested type
-		 * \param type Type of a Particlesystem
-		 * The particle system is taken from the particle pool. A new particle system is only created if there is none of the requested type in the pool
-		 */
-		static Ogre::ParticleSystem* getParticleSystem(std::string type);
-	
-		/**
-		 * \brief Inserts the particle system into the particle pool
-		 * \param part particle system
-	 	*/
-		static void putBackParticleSystem(Ogre::ParticleSystem* part);
-		
+
 		/**
 		 * \brief Adds all entities in the subtree below the given scene node to the static geometry
 		 * \param node Top node of the scene subtree
@@ -316,7 +352,7 @@ class GraphicManager
 		/**
 		 * \brief internal pool of Particle system
 		 */
-		static std::multimap<std::string, Ogre::ParticleSystem*> m_particle_system_pool;
+        static std::multimap<std::string, ParticleUniverse::ParticleSystem*> m_particle_system_pool;
 		
 		/**
 		 * \brief Name of XML file being read at the moment
