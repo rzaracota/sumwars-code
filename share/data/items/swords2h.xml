@@ -3,7 +3,7 @@
 <!-- TWO HANDED SWORDS -->
 <!-- farmers two hand sword-->
 <Item type="weapon" subtype="farm2h_sw" name="farmer sword" size="big">
-	<Image image="set:farm2h_sw.png image:full_image" />
+	<Image image="farm2h_sw.png" />
 	<RenderInfo name= "farmerSword" />
 	<Attribute
 		level_requirement="1"
@@ -41,7 +41,7 @@
 
 <!-- mercenary blade -->
 <Item type="weapon" subtype="merc2h_sw" name="mercenary blade" size="big">
-	<Image image="set:merc2h_sw.png image:full_image" />
+	<Image image="merc2h_sw.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="3"
@@ -79,7 +79,7 @@
 
 <!-- two handed steelsword -->
 <Item type="weapon" subtype="steel2h_sw" name="two handed steel sword" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="5"
@@ -117,7 +117,7 @@
 
 <!-- smash sword -->
 <Item type="weapon" subtype="smash_sw" name="smash sword" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="8"
@@ -155,7 +155,7 @@
 
 <!-- horse killer -->
 <Item type="weapon" subtype="horse_sw" name="horse killer" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="12"
@@ -193,7 +193,7 @@
 
 <!-- bastard sword -->
 <Item type="weapon" subtype="bast_sw" name="bastard sword" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="18"
@@ -231,7 +231,7 @@
 
 <!-- Ogerdolch -->
 <Item type="weapon" subtype="ogre_sw" name="ogre dagger" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="25"
@@ -269,7 +269,7 @@
 
 <!-- Goblintoeter -->
 <Item type="weapon" subtype="gobkil_sw" name="goblinkiller" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="30"
@@ -307,7 +307,7 @@
 
 <!-- Richtschwert -->
 <Item type="weapon" subtype="judge_sw" name="executioner's sword" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="35"
@@ -345,7 +345,7 @@
 
 <!-- Gardistenzweihaender -->
 <Item type="weapon" subtype="garde_sw" name="two handed guardsman sword" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="40"
@@ -383,7 +383,7 @@
 
 <!-- Flamberg -->
 <Item type="weapon" subtype="flame2h_sw" name="flamberg" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="45"
@@ -423,7 +423,7 @@
 
 <!-- Aisener Kriegsschwert -->
 <Item type="weapon" subtype="aisen_sw" name="aisener battle sword" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="50"
@@ -461,7 +461,7 @@
 
 <!-- Monsterschwert -->
 <Item type="weapon" subtype="monster_sw" name="monster sword" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="55"
@@ -499,7 +499,7 @@
 
 <!-- Traenenschwert -->
 <Item type="weapon" subtype="tear_sw" name="tear sword" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="60"
@@ -537,7 +537,7 @@
 
 <!-- Todeswind -->
 <Item type="weapon" subtype="death_sw" name="deathwind" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="65"
@@ -577,7 +577,7 @@
 
 <!-- Schreckensschwert -->
 <Item type="weapon" subtype="dread_sw" name="dread sword" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="70"
@@ -615,7 +615,7 @@
 
 <!-- Grossschwert -->
 <Item type="weapon" subtype="great_sw" name="great sword" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="75"
@@ -653,7 +653,7 @@
 
 <!-- Engelsschwert -->
 <Item type="weapon" subtype="angl2h_sw" name="angel sword" size="big">
-	<Image image="set:sword.png image:full_image" />
+	<Image image="sword.png" />
 	<RenderInfo name= "mercenaryBlade" />
 	<Attribute
 		level_requirement="80"

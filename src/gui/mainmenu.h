@@ -141,6 +141,12 @@ private:
     void createSavegameList();
 
     /**
+     * \fn bool onMainMenuButtonHover(const CEGUI::EventArgs& evt)
+     * \brief Handle the hovering of a button in the main menu
+     */
+    bool onMainMenuButtonHover (const CEGUI::EventArgs& evt);
+
+	/**
      * \fn bool onStartSinglePlayer(const CEGUI::EventArgs& evt)
      * \brief Handles start of the SinglePlayer mode
      */
@@ -242,6 +248,11 @@ private:
      */
     SavegameList *m_saveGameList;
 	
+	/**
+	 * \brief The root CEGUI node of the start menu
+	 */
+	CEGUI::Window* m_starMenuRoot;
+
 	/**
 	 * \brief Name of the previewed savegame player 
 	 */

@@ -18,8 +18,10 @@
 #include "itemwindow.h"
 #include "tooltipmanager.h"
 #include "ceguiutility.h"
-#include "sound.h"
+//#include "sound.h"
 
+// Helper for sound operations
+#include "soundhelper.h"
 
 std::map<Item::Subtype, std::string> ItemWindow::m_item_images;
 
@@ -107,7 +109,7 @@ std::string ItemWindow::getItemImage(Item::Subtype type)
 		return it->second;
 	}
 
-	return "set: noMedia.png image: full_image";
+	return CEGUIUtility::getImageNameWithSkin ("noMedia.png", "full_image");
 }
 
 
@@ -209,8 +211,20 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 	
 	// try to find a Progressbar with a matching name
 	// remove "Label" and add "ProgressBar"
-	CEGUI::String  windowname = img->getName();
-	std::size_t pos =	windowname.find ("Label");
+	std::size_t pos;
+#ifdef CEGUI_07
+	CEGUI::String  windowname = img->getName ();
+#else
+	CEGUI::String  windowname = img->getNamePath ();
+	pos = windowname.find ("SW/");
+	if (pos != std::string::npos)
+	{
+		windowname.erase (pos, 3);
+	}
+	//DEBUG ("Name [%s], namepath [%s]", windowname.c_str (), img->getNamePath ().c_str ());
+#endif
+	// TODO:XXX:this was initially meant only for items such as : SmallItem0Label > SmallItem0ProgressBar
+	pos = windowname.find ("Label");
 	if (pos != std::string::npos)
 	{
 		windowname.erase(pos,5);
@@ -219,10 +233,10 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 	// Fenstermanager
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	if (win_mgr.isWindowPresent(windowname))
+	if (CEGUIUtility::isWindowPresent (windowname))
 	{
 		// update progress bar to reflect item timer
-		CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(win_mgr.getWindow( windowname));
+		CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow (windowname));
 		double progress = 0;
 		if (item != 0 && item->m_consumable && item->m_consume_timer_nr != 0)
 		{
@@ -254,10 +268,11 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 	
 	if (playsound && !m_silent_current_update)
 	{
-		SoundName sname = GraphicManager::getDropSound(item->m_subtype);
+		std::string sname = GraphicManager::getDropSound(item->m_subtype);
 		if (sname != "")
 		{
-			SoundSystem::playAmbientSound(sname);
+			//SoundSystem::playAmbientSound(sname);
+			SoundHelper::playAmbientSoundGroup (sname);
 			
 			// play only one sound per update...
 			m_silent_current_update = true;
@@ -273,7 +288,7 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	if ( item == 0 )
 		return;
 
-	CEGUI::Font *font = img->getTooltip()->getFont();
+	const CEGUI::Font *font = img->getTooltip()->getFont();
 	std::string msg;
 	ItemRequirementsMet irm = player->checkItemRequirements ( item );
 	
@@ -281,8 +296,8 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	Item *currentEqItemOffhand = 0;
 	Item *attachedItem = player->getEquipement()->getItem (Equipement::CURSOR_ITEM);
 
-	std::string primary_eq_head = gettext("Equipped:\n");
-	std::string secondary_eq_head = gettext("Equipped:\n");
+	std::string primary_eq_head = gettext("Equipped:");
+	std::string secondary_eq_head = gettext("Equipped:");
 	
 	switch ( item->m_type )
 	{
@@ -329,8 +344,8 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 		case Item::RING:
 			currentEqItem = player->getEquipement()->getItem ( Equipement::RING_LEFT );
 			currentEqItemOffhand = player->getEquipement()->getItem ( Equipement::RING_RIGHT );
-			primary_eq_head = gettext("Equipped (left):\n");
-			secondary_eq_head = gettext("Equipped (right):\n");
+			primary_eq_head = gettext("Equipped (left):");
+			secondary_eq_head = gettext("Equipped (right):");
 			break;
 
 		case Item::AMULET:
@@ -369,9 +384,16 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 	{
 		l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, secondary_eq_head, CEGUIUtility::Black ));
 	}
-	l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, gettext("Hovered:\n"), CEGUIUtility::Black ));
+	l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, gettext("Hovered:"), CEGUIUtility::Black ));
 	std::ostringstream out_stream;
 
+	//XXX-begin; TODO: delete this
+	//DEBUG ("Obtained description for item as string list.");
+	//for (std::list <std::string>::iterator it = l.begin (); it != l.end (); ++ it)
+	//{
+	//	DEBUG ("[%s]", it->c_str ());
+	//}
+	//XXX-end
 	tMgr->createTooltip ( img, l, 0, font, Tooltip::Main );
 
 	// create secondary tooltips

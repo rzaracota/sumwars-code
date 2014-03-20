@@ -64,7 +64,7 @@
  * \def DEBUG( format, ... )
  * \brief Gibt Debug-Informationen aus
  */
-#define DEBUG( format, ... ) \
+#define SW_DEBUG( format, ... ) \
 	LOGGER( Log::MSG_DEBUG,format, ##__VA_ARGS__ )
 
 

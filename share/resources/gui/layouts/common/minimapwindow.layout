@@ -2,7 +2,6 @@
     <Window Type="SWB/FrameWindow" Name="MinimapWindow" >
         <Property Name="FrameEnabled" Value="False" />
         <Property Name="UnifiedAreaRect" Value="{{0.0,0},{0.0,0},{1.0,0},{1.0,0}}" />
-        <Property Name="BackgroundEnabled" Value="False" />
         <Property Name="MousePassThroughEnabled" Value="True" />
         <Property Name="TitlebarEnabled" Value="False" />
         <Property Name="CloseButtonEnabled" Value="False" />

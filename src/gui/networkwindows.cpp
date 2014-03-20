@@ -15,69 +15,66 @@
 
 #include "networkwindows.h"
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
+
 HostGameWindow::HostGameWindow (Document* doc)
 	:Window(doc)
 {
-	DEBUG ("HostGameWindow being created");
+	SW_DEBUG ("HostGameWindow being created");
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	CEGUI::Editbox* box;
 
 	// The host game window and holder
-	CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("hostgamewindow.layout");
+	CEGUI::FrameWindow* host_game = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("hostgamewindow.layout");
 	if (!host_game)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "hostgamewindow.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "hostgamewindow.layout");
 	}
 
-	CEGUI::Window* host_game_holder = win_mgr.loadWindowLayout( "hostgamewindow_holder.layout" );
+	CEGUI::Window* host_game_holder = CEGUIUtility::loadLayoutFromFile ("hostgamewindow_holder.layout");
 	if (!host_game_holder)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "hostgamewindow_holder.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "hostgamewindow_holder.layout");
 	}
 	
-	CEGUI::Window* wndHolder = win_mgr.getWindow("HostGameWindow_Holder");
-	CEGUI::Window* wndCharInfo = win_mgr.getWindow("HostGameWindow");
+	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (host_game_holder, "HostGameWindow_Holder");
+	CEGUI::Window* wndCharInfo = CEGUIUtility::getWindowForLoadedLayoutEx (host_game, "HostGameWindow");
 	if (wndHolder && wndCharInfo)
 	{
-		wndHolder->addChildWindow (wndCharInfo);
+		CEGUIUtility::addChildWidget (wndHolder, wndCharInfo);
 	}
 	else
 	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for char screen.");
-		if (!wndCharInfo) DEBUG ("ERROR: Unable to get the window for char screen.");
+		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for char screen.");
+		if (!wndCharInfo) SW_DEBUG ("ERROR: Unable to get the window for char screen.");
 	}
 
 	m_window = host_game_holder;
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("HostGameStartButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HostGameWindow/HostGameStartButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&HostGameWindow ::onStartHostGame, this));
 		
-	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("PlayerNumberBox"));
+	box = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HostGameWindow/PlayerNumberBox"));
 	box->setWantsMultiClickEvents(false);
 	box->setMaxTextLength(31);
 	
-	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("HostPortBox"));
+	box = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HostGameWindow/HostPortBox"));
 	box->setWantsMultiClickEvents(false);
 	box->setMaxTextLength(31);
 	
 	// Connect the Cancel button to the cancel event.
-	if (win_mgr.isWindowPresent ("HostGameCancelButton"))
-	{
-		btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("HostGameCancelButton"));
-		btn->setID(5);
-		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&HostGameWindow::onCancelHostGame, this));
-	}
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HostGameWindow/HostGameCancelButton"));
+	btn->setID(5);
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&HostGameWindow::onCancelHostGame, this));
 
 	// Connect the window close button to the cancel event.
-	if (win_mgr.isWindowPresent ("HostGameWindow__auto_closebutton__"))
+	CEGUI::Window* autoCloseButton;
+	autoCloseButton = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HostGameWindow/__auto_closebutton__");
+	if (autoCloseButton)
 	{
-		CEGUI::Window* autoCloseButton;
-		autoCloseButton = win_mgr.getWindow ("HostGameWindow__auto_closebutton__");
-		if (autoCloseButton)
-		{
-			autoCloseButton->subscribeEvent (CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber (&HostGameWindow::onCancelHostGame, this));
-		}
+		autoCloseButton->subscribeEvent (CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber (&HostGameWindow::onCancelHostGame, this));
 	}
 
 	updateTranslation();
@@ -97,7 +94,7 @@ void HostGameWindow::update()
 	stream.str("");
 	stream << max_nr;
 	
-	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("PlayerNumberBox"));
+	box = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HostGameWindow/PlayerNumberBox"));
 	if (box->getText() != stream.str())
 	{
 		box->setText(stream.str());
@@ -106,7 +103,7 @@ void HostGameWindow::update()
 	stream.str("");
 	stream << port;
 	
-	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("HostPortBox"));
+	box = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HostGameWindow/HostPortBox"));
 	if (box->getText() != stream.str())
 	{
 		box->setText(stream.str());
@@ -119,31 +116,19 @@ void HostGameWindow::updateTranslation()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	
-	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "HostGameStartButton"));
+	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HostGameWindow/HostGameStartButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));
 
-	if (win_mgr.isWindowPresent ("HostGameCancelButton"))
-	{
-		btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "HostGameCancelButton"));
-		btn->setText((CEGUI::utf8*) gettext("Cancel"));
-	}
-
-	if (win_mgr.isWindowPresent ("HostWindowTitle"))
-	{
-		// Old style host window title.
-		label = win_mgr.getWindow("HostWindowTitle");
-		label->setText((CEGUI::utf8*) gettext("Host_game"));
-	}
-	else if (win_mgr.isWindowPresent ("HostGameWindow"))
-	{
-		label = win_mgr.getWindow("HostGameWindow");
-		label->setText((CEGUI::utf8*) gettext("Host_game"));
-	}
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HostGameWindow/HostGameCancelButton"));
+	btn->setText((CEGUI::utf8*) gettext("Cancel"));
 	
-	label = win_mgr.getWindow("PlayerNumberLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HostGameWindow");
+	label->setText((CEGUI::utf8*) gettext("Host_game"));
+	
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HostGameWindow/PlayerNumberLabel");
 	label->setText((CEGUI::utf8*) gettext("Max. number of players"));
 	
-	label = win_mgr.getWindow("HostPortLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HostGameWindow/HostPortLabel");
 	label->setText((CEGUI::utf8*) gettext("Port"));
 }
 
@@ -160,11 +145,11 @@ bool HostGameWindow::onStartHostGame(const CEGUI::EventArgs& evt)
 	
 	std::stringstream stream,stream2;
 	
-	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("HostPortBox"));
+	box = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HostGameWindow/HostPortBox"));
 	stream.str(box->getText().c_str());
 	stream >> port;
 	
-	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("PlayerNumberBox"));
+	box = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HostGameWindow/PlayerNumberBox"));
 	stream2.str(box->getText().c_str());
 	stream2 >> max_nr;
 	
@@ -189,66 +174,60 @@ bool HostGameWindow::onCancelHostGame (const CEGUI::EventArgs& evt)
 JoinGameWindow::JoinGameWindow (Document* doc)
 	:Window(doc)
 {
-	DEBUG ("JoinGameWindow being created");
+	SW_DEBUG ("JoinGameWindow being created");
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	CEGUI::Editbox* box;
 
 	// The join game window and holder.
-	CEGUI::FrameWindow* join_game = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout("joingamewindow.layout");
+	CEGUI::FrameWindow* join_game = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("joingamewindow.layout");
 	if (!join_game)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "joingamewindow.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "joingamewindow.layout");
 	}
 
-	CEGUI::Window* join_game_holder = win_mgr.loadWindowLayout( "joingamewindow_holder.layout" );
+	CEGUI::Window* join_game_holder = CEGUIUtility::loadLayoutFromFile ("joingamewindow_holder.layout");
 	if (!join_game_holder)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "joingamewindow_holder.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "joingamewindow_holder.layout");
 	}
 	
-	CEGUI::Window* wndHolder = win_mgr.getWindow("JoinGameWindow_Holder");
-	CEGUI::Window* wndCharInfo = win_mgr.getWindow("JoinGameWindow");
+	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (join_game_holder, "JoinGameWindow_Holder");
+	CEGUI::Window* wndCharInfo = CEGUIUtility::getWindowForLoadedLayoutEx (join_game, "JoinGameWindow");
 	if (wndHolder && wndCharInfo)
 	{
-		wndHolder->addChildWindow (wndCharInfo);
+		CEGUIUtility::addChildWidget (wndHolder, wndCharInfo);
 	}
 	else
 	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for char screen.");
-		if (!wndCharInfo) DEBUG ("ERROR: Unable to get the window for char screen.");
+		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for char screen.");
+		if (!wndCharInfo) SW_DEBUG ("ERROR: Unable to get the window for char screen.");
 	}
 
 	m_window = join_game_holder;
 		
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("JoinGameStartButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "JoinGameWindow/JoinGameStartButton"));
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&JoinGameWindow ::onStartJoinGame, this));
 	
-	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("HostnameBox"));
+	box = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "JoinGameWindow/HostnameBox"));
 	box->setWantsMultiClickEvents(false);
 	box->setMaxTextLength(31);
 	
-	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("PortBox"));
+	box = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "JoinGameWindow/PortBox"));
 	box->setWantsMultiClickEvents(false);
 	box->setMaxTextLength(31);
 
 	// Connect the Cancel button to the cancel event.
-	if (win_mgr.isWindowPresent ("JoinGameCancelButton"))
-	{
-		btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("JoinGameCancelButton"));
-		btn->setID(5);
-		btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&JoinGameWindow::onCancelJoinGame, this));
-	}
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "JoinGameWindow/JoinGameCancelButton"));
+	btn->setID(5);
+	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&JoinGameWindow::onCancelJoinGame, this));
 
 	// Connect the window close button to the cancel event.
-	if (win_mgr.isWindowPresent ("JoinGameWindow__auto_closebutton__"))
+	CEGUI::Window* autoCloseButton;
+	autoCloseButton = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "JoinGameWindow/__auto_closebutton__");
+	if (autoCloseButton)
 	{
-		CEGUI::Window* autoCloseButton;
-		autoCloseButton = win_mgr.getWindow ("JoinGameWindow__auto_closebutton__");
-		if (autoCloseButton)
-		{
-			autoCloseButton->subscribeEvent (CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber (&JoinGameWindow::onCancelJoinGame, this));
-		}
+		autoCloseButton->subscribeEvent (CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber (&JoinGameWindow::onCancelJoinGame, this));
 	}
 	
 	updateTranslation();
@@ -265,7 +244,7 @@ void JoinGameWindow::update()
 	std::ostringstream stream;
 	std::string hostname = options->getServerHost();
 	
-	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("HostnameBox"));
+	box = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "JoinGameWindow/HostnameBox"));
 	if (box->getText() != hostname)
 	{
 		box->setText(hostname);
@@ -274,7 +253,7 @@ void JoinGameWindow::update()
 	stream.str("");
 	stream << port;
 	
-	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("PortBox"));
+	box = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "JoinGameWindow/PortBox"));
 	if (box->getText() != stream.str())
 	{
 		box->setText(stream.str());
@@ -287,30 +266,19 @@ void JoinGameWindow::updateTranslation()
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	
-	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "JoinGameStartButton"));
+	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "JoinGameWindow/JoinGameStartButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));
 	
-	if (win_mgr.isWindowPresent ("JoinGameCancelButton"))
-	{
-		btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow( "JoinGameCancelButton"));
-		btn->setText((CEGUI::utf8*) gettext("Cancel"));
-	}
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "JoinGameWindow/JoinGameCancelButton"));
+	btn->setText((CEGUI::utf8*) gettext("Cancel"));
 
-	if (win_mgr.isWindowPresent ("JoinWindowTitle"))
-	{
-		label = win_mgr.getWindow("JoinWindowTitle");
-		label->setText((CEGUI::utf8*) gettext("Join_game"));
-	}
-	else if (win_mgr.isWindowPresent ("JoinGameWindow"))
-	{
-		label = win_mgr.getWindow("JoinGameWindow");
-		label->setText((CEGUI::utf8*) gettext("Join_game"));
-	}
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "JoinGameWindow");
+	label->setText((CEGUI::utf8*) gettext("Join_game"));
 	
-	label = win_mgr.getWindow("HostnameLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "JoinGameWindow/HostnameLabel");
 	label->setText((CEGUI::utf8*) gettext("Host"));
 	
-	label = win_mgr.getWindow("PortLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "JoinGameWindow/PortLabel");
 	label->setText((CEGUI::utf8*) gettext("Port"));
 }
 
@@ -326,14 +294,14 @@ bool JoinGameWindow::onStartJoinGame(const CEGUI::EventArgs& evt)
 	std::stringstream stream;
 	std::string hostname = options->getServerHost();
 	
-	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("HostnameBox"));
+	box = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "JoinGameWindow/HostnameBox"));
 	hostname = box->getText().c_str();
 	
-	box = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("PortBox"));
+	box = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "JoinGameWindow/PortBox"));
 	stream.str(box->getText().c_str());
 	stream >> port;
 	
-	DEBUG("join game %i %s",port,hostname.c_str());
+	SW_DEBUG("join game %i %s",port,hostname.c_str());
 	options->setPort(port);
 	options->setServerHost(hostname);
 	
@@ -345,6 +313,7 @@ bool JoinGameWindow::onStartJoinGame(const CEGUI::EventArgs& evt)
 bool JoinGameWindow::onCancelJoinGame (const CEGUI::EventArgs& evt)
 {
 	m_document->getGUIState()->m_shown_windows = Document::START_MENU;
+    m_document->setState(Document::INACTIVE);
 	m_document->setModified(Document::WINDOWS_MODIFIED);
 
 	return true;

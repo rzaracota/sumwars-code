@@ -145,7 +145,7 @@ Monster::Monster( int id) : Creature( id)
 	bool tmp=Monster::init();
 	if(!tmp)
 	{
-		DEBUG("Initialisierung des Monsters fehlgeschlagen!");
+		SW_DEBUG("Initialisierung des Monsters fehlgeschlagen!");
 	}
 }
 
@@ -611,7 +611,7 @@ void Monster::evalCommand(Action::ActionType act)
 	Action::ActionInfo* aci = Action::getActionInfo(act);
 	if (aci == 0)
 	{
-		DEBUG("unknown action %s",act.c_str());
+		SW_DEBUG("unknown action %s",act.c_str());
 		return;
 	}
 
@@ -953,7 +953,7 @@ int Monster::getValue(std::string valname)
 		if (valname.find("ai_ability_rating:") == 0)
 		{
 			std::string ablt = valname.substr(18); // ai_ability_rating: abschneiden
-			DEBUG("ability %s",ablt.c_str());
+			SW_DEBUG("ability %s",ablt.c_str());
 
 			std::map<std::string, AbilityInfo>::iterator at;
 			at = getBaseAttrMod()->m_abilities.find(ablt);
@@ -983,7 +983,7 @@ bool Monster::setValue(std::string valname)
 		if (valname.find("ai_ability_rating:") == 0)
 		{
 			std::string ablt = valname.substr(18); // ai_ability_rating: abschneiden
-			DEBUG("ability %s",ablt.c_str());
+			SW_DEBUG("ability %s",ablt.c_str());
 
 			std::map<std::string, AbilityInfo>::iterator at;
 			at = getBaseAttrMod()->m_abilities.find(ablt);

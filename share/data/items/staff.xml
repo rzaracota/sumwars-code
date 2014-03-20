@@ -2,7 +2,7 @@
 
 <!-- Fichtenstab -->
 <Item type="weapon" subtype="spruce_stf_fire" name="spruce staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="spruce_stf" />
 	<Attribute
 			  level_requirement="1"
@@ -33,7 +33,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="spruce_stf_air" name="spruce staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="spruce_stf" />
 	<Attribute
 			  level_requirement="1"
@@ -64,7 +64,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="spruce_stf_ice" name="spruce staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="spruce_stf" />
 	<Attribute
 			  level_requirement="1"
@@ -97,7 +97,7 @@
 
 <!-- Lehrlingsstab -->
 <Item type="weapon" subtype="prntc_stf_fire" name="apprentice staff" size="big">
-	<Image image="set:aprnt_stf.png image:full_image" />
+	<Image image="aprnt_stf.png" />
 	<Mesh file="aprnt_stf" />
 	<Attribute
 			  level_requirement="3"
@@ -128,7 +128,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="prntc_stf_air" name="apprentice staff" size="big">
-	<Image image="set:aprnt_stf.png image:full_image" />
+	<Image image="aprnt_stf.png" />
 	<Mesh file="aprnt_stf" />
 	<Attribute
 			  level_requirement="3"
@@ -159,7 +159,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="prntc_stf_ice" name="apprentice staff" size="big">
-	<Image image="set:aprnt_stf.png image:full_image" />
+	<Image image="aprnt_stf.png" />
 	<Mesh file="aprnt_stf" />
 	<Attribute
 			  level_requirement="3"
@@ -192,7 +192,7 @@
 
 <!-- Novizenstab -->
 <Item type="weapon" subtype="novice_stf_fire" name="novice staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="5"
@@ -222,7 +222,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="novice_stf_air" name="novice staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="5"
@@ -253,7 +253,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="novice_stf_ice" name="novice staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="5"
@@ -286,7 +286,7 @@
 
 <!-- Eremitenstab -->
 <Item type="weapon" subtype="hermit_stf_fire" name="hermit staff" size="big">
-	<Image image="set:hermit_stf.png image:full_image" />
+	<Image image="hermit_stf.png" />
 	<Mesh file="hermit_stf" />
 	<Attribute
 			  level_requirement="7"
@@ -317,7 +317,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="hermit_stf_air" name="hermit staff" size="big">
-	<Image image="set:hermit_stf.png image:full_image" />
+	<Image image="hermit_stf.png" />
 	<Mesh file="hermit_stf" />
 	<Attribute
 			  level_requirement="7"
@@ -348,7 +348,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="hermit_stf_ice" name="hermit staff" size="big">
-	<Image image="set:hermit_stf.png image:full_image" />
+	<Image image="hermit_stf.png" />
 	<Mesh file="hermit_stf" />
 	<Attribute
 			  level_requirement="7"
@@ -380,7 +380,7 @@
 
 <!-- Felsstab -->
 <Item type="weapon" subtype="rock_stf" name="rock staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="8"
@@ -417,7 +417,7 @@
 
 <!-- Erlenstab -->
 <Item type="weapon" subtype="alder_stf_fire" name="alder staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="13"
@@ -448,7 +448,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="alder_stf_air" name="alder staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="13"
@@ -479,7 +479,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="alder_stf_ice" name="alder staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="13"
@@ -512,7 +512,7 @@
 
 <!-- Bardenstab -->
 <Item type="weapon" subtype="bard_stf_fire" name="bard's staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="15"
@@ -543,7 +543,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="bard_stf_air" name="bard's staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="15"
@@ -574,7 +574,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="bard_stf_ice" name="bard's staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="15"
@@ -607,7 +607,7 @@
 
 <!-- Magierstab -->
 <Item type="weapon" subtype="magus_stf_fire" name="magus staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="18"
@@ -637,7 +637,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="magus_stf_air" name="magus staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="18"
@@ -668,7 +668,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="magus_stf_ice" name="magus staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="18"
@@ -701,7 +701,7 @@
 
 <!-- Silberstab -->
 <Item type="weapon" subtype="silver_stf_fire" name="silver staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="23"
@@ -732,7 +732,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="silver_stf_air" name="silver staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="23"
@@ -763,7 +763,7 @@
 			   />
 </Item>
 <Item type="weapon" subtype="silver_stf_ice" name="silver staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="23"
@@ -795,7 +795,7 @@
 
 <!-- Infernostab -->
 <Item type="weapon" subtype="inferno_stf" name="inferno staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="26"
@@ -827,7 +827,7 @@
 
 <!-- Eichenstab -->
 <Item type="weapon" subtype="oak_stf" name="oak staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="30"
@@ -859,7 +859,7 @@
 
 <!-- Phoenixstab -->
 <Item type="weapon" subtype="phenix_stf" name="phenix staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="35"
@@ -891,7 +891,7 @@
 
 <!-- Froststab -->
 <Item type="weapon" subtype="frost_stf" name="frost staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="40"
@@ -923,7 +923,7 @@
 
 <!-- Gewitterstab -->
 <Item type="weapon" subtype="thundr_stf" name="thunder staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="45"
@@ -955,7 +955,7 @@
 
 <!-- Eschenstab -->
 <Item type="weapon" subtype="ash_stf" name="ash staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="50"
@@ -987,7 +987,7 @@
 
 <!-- Beschwoererstab -->
 <Item type="weapon" subtype="sumonr_stf" name="summoner staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="55"
@@ -1019,7 +1019,7 @@
 
 <!-- Magisterstab -->
 <Item type="weapon" subtype="master_stf" name="master staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="60"
@@ -1051,7 +1051,7 @@
 
 <!-- Nekromantenstab -->
 <Item type="weapon" subtype="necro_stf" name="necromancer staff" size="big">
-	<Image image="set:necro_stf.png image:full_image" />
+	<Image image="necro_stf.png" />
 	<Mesh file="necro_stf" />
 	<Attribute
 			  level_requirement="65"
@@ -1083,7 +1083,7 @@
 
 <!-- Daemonenstab -->
 <Item type="weapon" subtype="demon_stf" name="demon staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="70"
@@ -1115,7 +1115,7 @@
 
 <!-- Feenstab -->
 <Item type="weapon" subtype="fairy_stf" name="fairy staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="75"
@@ -1151,7 +1151,7 @@
 
 <!-- Ifreetstab -->
 <Item type="weapon" subtype="ifreet_stf" name="ifreet staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="75"
@@ -1183,7 +1183,7 @@
 
 <!-- Eishexenstab -->
 <Item type="weapon" subtype="icewitch_stf" name="icewitch staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="75"
@@ -1215,7 +1215,7 @@
 
 <!-- Sylphenstab -->
 <Item type="weapon" subtype="sylph_stf" name="sylph staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="75"
@@ -1248,7 +1248,7 @@
 
 <!-- Erzmagierstab -->
 <Item type="weapon" subtype="arcmag_stf" name="archmage staff" size="big">
-	<Image image="set:spruce_stf.png image:full_image" />
+	<Image image="spruce_stf.png" />
 	<Mesh file="basicStaff" />
 	<Attribute
 			  level_requirement="80"

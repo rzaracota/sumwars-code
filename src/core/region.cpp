@@ -20,7 +20,18 @@
 #include "itemfactory.h"
 #include "scriptobject.h"
 
-#include "music.h"
+//#include "music.h"
+
+// Allow using the list structure (used to store music tracks in region data).
+#include <list>
+
+// Sound operations helper.
+#include "soundhelper.h"
+
+// Allow the use of the sound manager.
+#include "gussound.h"
+
+using gussound::SoundManager;
 
 RegionData::RegionData()
 {
@@ -333,7 +344,7 @@ Region::Region(short dimx, short dimy, short id, std::string name, RegionData* d
 
 	m_light(this)
 {
-	DEBUGX("creating region");
+	SW_DEBUG ("creating region [%s]", m_name.c_str ());
 
 	m_data_grid.clear();
 	m_height.clear();
@@ -348,6 +359,54 @@ Region::Region(short dimx, short dimy, short id, std::string name, RegionData* d
 	}
 	
 	m_camera.m_region = this;
+
+	// Also create a playlist for this region, bearing the same name.
+	if (! SoundManager::getPtr ()->getMusicPlayer ()->isPlaylistRegistered (m_name))
+	{
+		SoundManager::getPtr ()->getMusicPlayer ()->registerPlaylist (m_name);
+		SoundManager::getPtr ()->getMusicPlayer ()->setRepeat (true);
+		SoundManager::getPtr ()->getMusicPlayer ()->setShuffle (true);
+		SoundManager::getPtr ()->getMusicPlayer ()->setFadePreferrences (false, false, false);
+
+		// The track names to be used are stored in rdata.
+		if (data)
+		{
+			for (std::list <std::string>::const_iterator it = data->m_music_tracks.begin ();
+				it != data->m_music_tracks.end (); ++ it)
+			{
+				try
+				{
+					// The region stores track names in the form:
+					// - tread_lightly.ogg
+					// - ambience_2.ogg
+					// The music player needs the files including their full path (absolute or relative), in the form:
+					// - .//./share/resources/music/tread_lightly.ogg
+					// - .//./share/resources/music/ambience_2.ogg
+
+					std::string fileName = SoundHelper::getNameWithPathForMusicTrack (*it);
+#if 1
+					// One could call the following function to add an "anonymous" track (with a name such as "track_01").
+					SoundManager::getPtr ()->addPlaylistTrack (m_name, fileName);
+#else
+					// Or one could opt for the manual 2 step solution:
+					SoundManager::getPtr ()->getRepository ()->addSound (*it	// sound name
+																		, fileName	// sound file path
+																		, false	// load into memory? don't do this for songs
+																		, gussound::GSC_Music // category: music.
+																		, true);	// allow only one instance of this sound to be played at one point.
+					SoundManager::getPtr ()->getMusicPlayer ()->addTrackToPlaylist (m_name, *it);
+#endif
+				}
+				catch (std::exception& e)
+				{
+					SW_DEBUG ("Region creation caught exception: %s", e.what ());
+				}
+			}
+		}
+	}
+
+	//SoundManager::getPtr ()->getMusicPlayer ()->stop ();
+	//SoundManager::getPtr ()->getMusicPlayer ()->play ();
 }
 
 Region::~Region()
@@ -399,6 +458,11 @@ Region::~Region()
 	{
 		delete *it;
 	}
+
+	// Note: it could be possible to remove the playlist here... but that would mean we would have to instantly cut the music.
+	// If we keep the named playlist alive, we can apply a fade-out, moving from the region playlist to the menu playlist.
+	// Once we create a new region playlist, we can remove the old one. (And if the old one is using the same ID, meaning: the user
+	// is loading the same region, we can even resume from where we were previously playing the track).
 }
 
 WorldObject* Region::getObject ( int id)
@@ -933,7 +997,7 @@ bool Region::insertObject(WorldObject* object, Vector pos, float angle )
 	 // Wenn das Element bereits existiert ist die Antwort false
 	if (result==false)
 	{
-		DEBUG("Object with id %i already exists",object->getId());
+		SW_DEBUG("Object with id %i already exists",object->getId());
 		return result;
 	}
 
@@ -1054,7 +1118,7 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 	
 	if (subtype == "")
 	{
-		DEBUG("no subtype found for generictype %s",generictype.c_str());
+		SW_DEBUG("no subtype found for generictype %s",generictype.c_str());
 		return 0;
 	}
 	
@@ -1062,7 +1126,7 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 	WorldObject::Type type = ObjectFactory::getObjectBaseType(subtype);
 	if (type == "NONE")
 	{
-		DEBUG("no base type for subtype %s",subtype.c_str());
+		SW_DEBUG("no base type for subtype %s",subtype.c_str());
 		return 0;
 	}
 
@@ -1071,7 +1135,7 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 
 	if (object ==0)
 	{
-		DEBUG("could not create object for generictype %s",generictype.c_str());
+		SW_DEBUG("could not create object for generictype %s",generictype.c_str());
 		return 0;
 	}
 
@@ -1098,7 +1162,7 @@ int Region::createObject(ObjectTemplateType generictype, Vector pos, float angle
 	bool ret = insertObject(object,pos,angle);
 	if (!ret)
 	{
-		DEBUG("insertion of object %s failed",object->getNameId().c_str());
+		SW_DEBUG("insertion of object %s failed",object->getNameId().c_str());
 	}
 
 	return object->getId();
@@ -1253,7 +1317,7 @@ void Region::createMonsterGroup(MonsterGroupName mgname, Vector position, float 
 
 	if (mgroup == 0)
 	{
-		DEBUG("monster group %s not found",mgname.c_str());
+		SW_DEBUG("monster group %s not found",mgname.c_str());
 		return;
 	}
 
@@ -1403,7 +1467,7 @@ bool Region::deleteObject(int id)
 	}
 	else
 	{
-		DEBUG("no object with id %i",id);
+		SW_DEBUG("no object with id %i",id);
 	}
 	return false;
 }
@@ -1452,6 +1516,7 @@ bool Region::moveObject(WorldObject* object, Vector pos)
 	}
 	else
 	{
+		//DEBUG ("Moved object to [%d] x [%d] ; in region sized %d x %d", x_new, y_new, m_dimx, m_dimy);
 		Gridunit *gu = &(m_data_grid)[x_old][y_old];
 		result =gu->deleteObject(object, object->getGridLocation()->m_index);
 		if (result == false)
@@ -2102,7 +2167,7 @@ void Region::createObjectFromString(CharConv* cv, WorldObjectMap* players)
 	WorldObject* oldobj = getObject(obj->getId());
 	if (oldobj != 0)
 	{
-		DEBUG("Object %i already exists",oldobj->getId());
+		SW_DEBUG("Object %i already exists",oldobj->getId());
 		oldobj->destroy();
 		deleteObject(oldobj);
 		delete oldobj;
@@ -2132,7 +2197,7 @@ void Region::createProjectileFromString(CharConv* cv)
 	Projectile* oldproj = getProjectile(proj->getId());
 	if (oldproj != 0)
 	{
-		DEBUG("Projectile %i already exists",oldproj->getId());
+		SW_DEBUG("Projectile %i already exists",oldproj->getId());
 		deleteProjectile(oldproj);
 		delete oldproj;
 	}
@@ -2171,7 +2236,7 @@ void Region::createDialogueFromString(CharConv* cv)
 	
 	if (m_dialogues.count(id) >0)
 	{
-		DEBUG("Dialogue %i already exists",id);
+		SW_DEBUG("Dialogue %i already exists",id);
 		deleteDialogue(m_dialogues[id]);
 	}	
 	
@@ -3076,8 +3141,15 @@ void Region::playSound(std::string soundname, Vector position, float volume , bo
 
 void Region::addMusicTrack(MusicTrack track)
 {
-	m_music_tracks.push_back(track);
+	SW_DEBUG ("Region: adding music track: %s", track.c_str ());
+	//
+	MusicTrack copiedName = track;
+	copiedName = SoundHelper::getNameWithPathForMusicTrack (copiedName);
+	m_music_tracks.push_back(copiedName);
 	
+	// Now also affect the music player. Add the track to the playlist with the name of this region.
+	SoundManager::getPtr ()->addPlaylistTrack (getName (), copiedName);
+
 	NetEvent event;
 	event.m_type = NetEvent::MUSIC_CHANGED;
 	event.m_id = getId();
@@ -3090,7 +3162,8 @@ void Region::clearMusicTracks()
 	if (World::getWorld()->getLocalPlayer() !=0
 		&& World::getWorld()->getLocalPlayer()->getRegion() == this)
 	{
-		MusicManager::instance().stop();
+		//MusicManager::instance().stop();
+		SoundManager::getPtr ()->getMusicPlayer ()->stop ();
 	}
 	
 	NetEvent event;

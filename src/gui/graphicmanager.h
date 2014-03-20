@@ -190,7 +190,7 @@ class GraphicManager
 		 * \brief specialized functions for determining the dropsound of an item
 		 * \param objecttype Ingame object type, must be an item type
 		 */
-		static SoundName getDropSound(std::string objecttype);
+		static std::string getDropSound(std::string objecttype);
 		
 		/**
 		 * \brief clears the internal particle pool

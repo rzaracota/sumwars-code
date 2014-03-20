@@ -27,7 +27,7 @@ Creature::Creature(int id)
 {
 	if (!Creature::init())
 	{
-		DEBUG("Creature::init() hat false zurückgeliefert");
+		SW_DEBUG("Creature::init() hat false zurückgeliefert");
 	}
 }
 
@@ -246,13 +246,13 @@ float Creature::getActionTime(Action::ActionType action)
 		Action::ActionInfo* aci = Action::getActionInfo(action);
 		if (aci ==0)
 		{
-			DEBUG("Information for action %s missing ",action.c_str());
+			SW_DEBUG("Information for action %s missing ",action.c_str());
 			return 0;
 		}
 
 		return aci->m_standard_time;
 	}
-	DEBUG("creature %s cant use action %s",getSubtype().c_str(), action.c_str());
+	SW_DEBUG("creature %s cant use action %s",getSubtype().c_str(), action.c_str());
 	return 0;
 }
 
@@ -280,7 +280,7 @@ void Creature::initAction()
 		{
 			// use the base action
 			m_action.m_type = aci->m_base_action;
-			DEBUG("using Base Action due to mute");
+			SW_DEBUG("using Base Action due to mute");
 		}
 	}
 
@@ -2216,7 +2216,7 @@ bool Creature::update (float time)
 
 	if (m_action.m_elapsed_time> m_action.m_time)
 	{
-		DEBUG("elapsed time %f all time %f",m_action.m_elapsed_time,	m_action.m_time);
+		SW_DEBUG("elapsed time %f all time %f",m_action.m_elapsed_time,	m_action.m_time);
 	}
 
 	DEBUGX("Update des Creatureobjekts [%i] wird gestartet", getId());
@@ -4050,7 +4050,7 @@ void Creature::processNetEvent(NetEvent* event, CharConv* cv)
 
 	if (delay>1000)
 	{
-		DEBUG("got packet with delay %f %f",cv->getDelay(),delay);
+		SW_DEBUG("got packet with delay %f %f",cv->getDelay(),delay);
 	}
 
 

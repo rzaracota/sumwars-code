@@ -16,6 +16,7 @@
 #include "tooltipmanager.h"
 #include "ceguiutility.h"
 #include "config.h"
+#include "debug.h"
 
 template<> TooltipManager* Ogre::Singleton<TooltipManager>::SUMWARS_OGRE_SINGLETON = 0;
 
@@ -26,14 +27,16 @@ TooltipManager::TooltipManager():
 	m_timeVisible(0),
 	m_fadeInTime(0),
 	m_fadeOutTime(0),
-	m_toolTipsCreatedCount(0),
-	m_DefaultFont(CEGUI::System::getSingleton().getDefaultFont())
-{}
-
-void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string > list, float timeVisible, CEGUI::Font* font, Tooltip::TooltipType type )
+	m_toolTipsCreatedCount(0)
 {
-	CEGUI::Window *gamescreen = CEGUI::WindowManager::getSingleton().getWindow("GameScreen");
-    std::string msg;
+	m_DefaultFont = CEGUIUtility::getDefaultFont ();
+}
+
+void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string > textlist, float timeVisible, const CEGUI::Font* font, Tooltip::TooltipType type )
+{
+	SW_DEBUG ("Creating a tooltip for duration: %.2f", timeVisible);
+	CEGUI::Window *gamescreen = CEGUIUtility::getWindow ("SW");
+    std::string msg ("");
     CEGUI::UVector2 size;
     std::ostringstream windowName;
     windowName << "Tooltip__" << m_toolTipsCreatedCount;
@@ -41,13 +44,18 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
 
     if ( font )
     {
-        size = CEGUIUtility::getWindowSizeForText ( list, font, msg );
-        tempFont = font;
+        size = CEGUIUtility::getWindowSizeForText ( textlist, font, msg );
+        tempFont = const_cast<CEGUI::Font*> (font);
     }
     else
-        size = CEGUIUtility::getWindowSizeForText ( list, m_DefaultFont, msg );
-
-    CEGUI::Vector2 mousePos = CEGUI::MouseCursor::getSingleton().getPosition();
+	{
+        size = CEGUIUtility::getWindowSizeForText ( textlist, m_DefaultFont, msg );
+	}
+	//DEBUG ("Tooltip font is %s, which looks best at %.2f x %.2f", tempFont->getName ().c_str (), tempFont->getNativeResolution ().d_width, tempFont->getNativeResolution ().d_height);
+	//DEBUG ("Message to display is [%s]", msg.c_str ());
+	// TODO: maybe store mouse position using own class?
+	CEGUIUtility::Vector2f mousePos = CEGUIUtility::getMouseCursorPosition (m_CEGUISystem);
+    //CEGUI::Vector2 mousePos = CEGUI::MouseCursor::getSingleton().getPosition();
     CEGUI::Renderer *rend = m_CEGUISystem->getRenderer();
     CEGUI::UVector2 position = CEGUI::UVector2 ( CEGUI::UDim ( 0, 20 ), CEGUI::UDim ( 0, 20 ) );
 
@@ -56,11 +64,11 @@ void TooltipManager::createTooltip ( CEGUI::Window* win, std::list< std::string 
 
     if ( type == Tooltip::Main )
     {
-		Tooltip *tt = new Tooltip ( gamescreen, windowName.str(), m_fadeInTime, m_fadeOutTime, m_timeVisible, 0.7f );
+		Tooltip *tt = new Tooltip ( gamescreen, windowName.str(), m_fadeInTime, m_fadeOutTime, timeVisible, 0.7f );
         fadeAllOut();
         m_CurrentMain = tt;
         tt->create ( msg, position, size, tempFont );
-        win->subscribeEvent ( CEGUI::Window::EventMouseLeaves, CEGUI::Event::Subscriber ( &TooltipManager::handleMouseLeave, this ) );
+        win->subscribeEvent (CEGUIUtility::EventMouseLeavesWindowArea (), CEGUI::Event::Subscriber ( &TooltipManager::handleMouseLeave, this ) );
         m_Tooltips[windowName.str() ] = tt;
         m_toolTipsCreatedCount++;
     }
@@ -167,9 +175,13 @@ void TooltipManager::update ( float timeSinceLastUpdate )
 
         if ( tt->isDead() )
         {
-            CEGUI::WindowManager::getSingleton().destroyWindow ( tt->getName() );
-            m_Tooltips.erase ( iter++ );
-            delete tt;
+			if (CEGUIUtility::isWindowPresent (tt->getName ()))
+			{
+				CEGUI::Window* ttWnd = CEGUIUtility::getWindow (tt->getName ());
+				CEGUI::WindowManager::getSingleton().destroyWindow (ttWnd);
+			}
+			m_Tooltips.erase ( iter++ );
+			delete tt;
         }
         else
 		{

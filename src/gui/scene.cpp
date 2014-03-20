@@ -15,17 +15,33 @@
 
 #include "scene.h"
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
+
+// needed to be able to create the CEGUI renderer interface
+#ifdef CEGUI_07
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreTexture.h"
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreResourceProvider.h"
+#else
+#include "CEGUI/RendererModules/Ogre/Renderer.h"
+#include "CEGUI/RendererModules/Ogre/Texture.h"
+#include "CEGUI/RendererModules/Ogre/ResourceProvider.h"
+#endif
 
 #include "CEGUI/CEGUI.h"
 
 #include "graphicmanager.h"
 
+#include "soundhelper.h"
 #ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
 #include "onlineservicesmanager.h"
 #endif
+// Sound and music management classes.
+#include "gussound.h"
+using gussound::SoundManager;
+
+#include "gopenal.h"
 
 Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 {
@@ -59,11 +75,18 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	minimap_camera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
 	minimap_camera->setFOVy(Ogre::Degree(90.0));
 
-	Ogre::TexturePtr minimap_texture = Ogre::TextureManager::getSingleton().createManual( "minimap_tex", "General", Ogre::TEX_TYPE_2D,
-                                                                                          512, 512, 0, Ogre::PF_R8G8B8A8, Ogre::TU_RENDERTARGET );
+	Ogre::TexturePtr minimap_texture = 
+		Ogre::TextureManager::getSingleton ().createManual ("minimap_tex"
+				, "General"
+				, Ogre::TEX_TYPE_2D
+				, 512
+				, 512
+				, 0
+				, Ogre::PF_R8G8B8A8
+				, Ogre::TU_RENDERTARGET );
 
 	Ogre::RenderTarget* minimap_rt = minimap_texture->getBuffer()->getRenderTarget();
-	minimap_rt ->setAutoUpdated(false);
+	minimap_rt ->setAutoUpdated (false);
 
 	Ogre::Viewport *v = minimap_rt->addViewport( minimap_camera );
 	v->setClearEveryFrame( true );
@@ -74,17 +97,34 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	DEBUGX("viewport size %i %i ratio %f",v->getActualWidth(),v->getActualHeight(), ratio);
 	minimap_camera->setAspectRatio(ratio);
 
-    // get the OgreRenderer from CEGUI and create a CEGUI texture from the Ogre texture
-    CEGUI::Texture &ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(minimap_texture);
-  
+	minimap_rt->update ();
+
+	// get the OgreRenderer from CEGUI and create a CEGUI texture from the Ogre texture
+	CEGUI::OgreRenderer* rendererPtr = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer());
+	
+#ifdef CEGUI_07
+	CEGUI::Texture &ceguiTex = rendererPtr->createTexture(minimap_texture);
+
 	CEGUI::Imageset& textureImageSet = CEGUI::ImagesetManager::getSingleton().create("minimap", ceguiTex);
 
 	textureImageSet.defineImage( "minimap_img",
-				CEGUI::Point( 0.0f, 0.0f ),
-				CEGUI::Size( ceguiTex.getSize().d_width, ceguiTex.getSize().d_height ),
-				CEGUI::Point( 0.0f, 0.0f ) );
+				CEGUIUtility::Vector2f (0.0f, 0.0f),
+				CEGUIUtility::Size (ceguiTex.getSize ().d_width, ceguiTex.getSize ().d_height ),
+				CEGUIUtility::Vector2f (0.0f, 0.0f) );
+#else
+	CEGUI::Texture &ceguiTex = rendererPtr->createTexture (minimap_texture->getName (), minimap_texture);
+	{
+		CEGUI::String imageName("minimap_img");
+		CEGUI::TextureTarget*   d_textureTarget;
+		CEGUI::BasicImage*      d_textureTargetImage;
+		d_textureTarget = rendererPtr->createTextureTarget();
+		d_textureTargetImage = static_cast<CEGUI::BasicImage*>(&CEGUI::ImageManager::getSingleton().create("BasicImage", imageName));
+		d_textureTargetImage->setTexture(&ceguiTex);
+		d_textureTargetImage->setArea(CEGUI::Rectf(0, 0, ceguiTex.getSize ().d_width,ceguiTex.getSize ().d_height));
+	}
+#endif
 
-	// Setup fuer die Spieleransicht
+	// Setup for the player's view
 
 	Ogre::SceneManager* char_scene_mng = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC,"CharacterSceneManager");
 	char_scene_mng->setAmbientLight(Ogre::ColourValue(1,1,1));
@@ -114,15 +154,30 @@ Scene::Scene(Document* doc,Ogre::RenderWindow* window)
 	char_view->setBackgroundColour(Ogre::ColourValue(0,0,0,1.0) );
 	char_rt->update();
 
-	CEGUI::Texture& char_ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(char_texture);
 
+	// Create a CEGUI texture, based on the Ogre Texture object [char_texture]
+	// Create a CEGUI image using this CEGUI texture. Name it "character_img".
+#ifdef CEGUI_07
+	CEGUI::Texture& char_ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(char_texture);
 	CEGUI::Imageset& char_textureImageSet = CEGUI::ImagesetManager::getSingleton().create("character", char_ceguiTex);
 
-	char_textureImageSet.defineImage( "character_img",
-			CEGUI::Point( 0.0f, 0.0f ),
+	char_textureImageSet.defineImage ("character_img",
+			CEGUIUtility::Vector2f ( 0.0f, 0.0f ),
 			CEGUI::Size( char_ceguiTex.getSize().d_width, char_ceguiTex.getSize().d_height ),
-			CEGUI::Point( 0.0f, 0.0f ) );
-	
+			CEGUIUtility::Vector2f (0.0f, 0.0f) );
+#else
+	{
+		CEGUI::OgreRenderer* myRenderer = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer());
+		CEGUI::Texture& char_ceguiTex = myRenderer->createTexture ("character", char_texture);
+		CEGUI::BasicImage*      d_textureTargetImage;
+	    CEGUI::TextureTarget*   d_textureTarget;
+		d_textureTarget = myRenderer->createTextureTarget();
+		CEGUI::String imageName("character_img");
+		d_textureTargetImage = static_cast<CEGUI::BasicImage*>(&CEGUI::ImageManager::getSingleton().create("BasicImage", imageName));
+		d_textureTargetImage->setTexture(&char_ceguiTex);
+		d_textureTargetImage->setArea(CEGUI::Rectf(0, 0, char_ceguiTex.getSize ().d_width, char_ceguiTex.getSize ().d_height));
+	}
+#endif	
 	/*
 	Ogre::MaterialPtr mat = Ogre::MaterialManager::getSingleton().create("RttMat",
 			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
@@ -216,6 +271,10 @@ void Scene::update(float ms)
 {
 	DEBUGX("update scene");
 
+	//TODO: remove the timer (only added for testing).
+	static Timer timer;
+	timer.start ();
+
 	// Spielerobjekt
 	Player* player = m_document->getLocalPlayer();
 
@@ -231,6 +290,7 @@ void Scene::update(float ms)
 	short region_nr = player->getRegionId();
 	Region* region = player->getRegion();
 
+
 	if (region_nr != m_region_id)
 	{
 		// Spieler hat eine neue Region betreten
@@ -243,6 +303,9 @@ void Scene::update(float ms)
 
 			m_region_id = region_nr;
 
+			// TODO: create a listener class to remove the handling from here?
+			//SoundManager::getPtr ()->getMusicPlayer ()->switchToPlaylist (region->getName ());
+
 		}
 		else
 		{
@@ -250,6 +313,7 @@ void Scene::update(float ms)
 			return;
 		}
 	}
+	float durationUpToCrScene = timer.getTime ();
 
 	// Koordinaten des Spielers
 	Vector pos = player->getShape()->m_center;
@@ -274,7 +338,9 @@ void Scene::update(float ms)
 								   pos.m_y*GraphicManager::g_global_scale));
 	DEBUGX("cam position %f %f %f",pos.m_x*GraphicManager::g_global_scale + r*cos(theta)*cos(phi), r*sin(theta), pos.m_y*GraphicManager::g_global_scale - r*cos(theta)*sin(phi));
 
-	SoundSystem::setListenerPosition(pos);
+
+	// TODO:XXX: find some way to abstract the listener position, so that a cast to the implementation is not needed!!
+	((GOpenAl::OpenAlManagerUtil*)SoundManager::getPtr ())->setListenerPosition (pos.m_x, pos.m_y, 0.0);
 	
 	// Licht aktualisieren
 	float *colour;
@@ -294,8 +360,17 @@ void Scene::update(float ms)
 	
 	colour= region->getLight().getAmbientLight();
 	m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
-	
+
+	float beforeUGO = timer.getTime ();
+
 	updateGraphicObjects(ms);
+	float duration = timer.getTime ();
+	if (duration >= 80)
+	{
+		SW_DEBUG ("scene update update took: %.2f ms. Up to ugo: %.2f", duration, beforeUGO);
+		SW_DEBUG ("Up to createscene: %.2f ms.", durationUpToCrScene);
+	}
+
 }
 
 void  Scene::insertObject(GameObject* gobj, bool is_static)
@@ -575,6 +650,8 @@ void Scene::updateGraphicObjects(float time)
 	GameObjectMap::iterator it = game_objs.begin();
 	std::map<int,GraphicObject*>::iterator jtold, jt = m_graphic_objects.begin();
 	
+	int numOps = 0;
+
 	while (it != game_objs.end() || jt != m_graphic_objects.end())
 	{
 		if (it == game_objs.end() || (jt != m_graphic_objects.end() && it->first > jt->first))
@@ -585,6 +662,7 @@ void Scene::updateGraphicObjects(float time)
 			++jt;
 			
 			deleteGraphicObject(jtold->first);
+			++ numOps;
 		}
 		else if (jt == m_graphic_objects.end() || (it != game_objs.end() && it->first < jt->first))
 		{
@@ -593,6 +671,7 @@ void Scene::updateGraphicObjects(float time)
 			if (it->second->getLayer() != GameObject::LAYER_SPECIAL)
 			{
 				insertObject(it->second,false);
+				++ numOps;
 			}
 			
 			++it;
@@ -604,10 +683,16 @@ void Scene::updateGraphicObjects(float time)
 			updateGraphicObject(jt->second, it->second,time);
 			++it;
 			++jt;
+			++ numOps;
 		}
 		else
 		{
 			ERRORMSG("Fehler beim Abgleich Graphik <-> ingame");
+		}
+		if (numOps > 10)
+		{
+			numOps = 10;
+			SoundHelper::signalSoundManager ();
 		}
 	}
 	
@@ -625,7 +710,7 @@ void Scene::updateCharacterView()
 
 	if ((pl ==0 && m_temp_player!=""))
 	{
-		DEBUG("deleting inv player");
+		SW_DEBUG("deleting inv player");
 		m_temp_player="";
 		GraphicManager::destroyGraphicObject(m_temp_player_object);
 		m_temp_player_object =0;
@@ -737,7 +822,9 @@ void Scene::createScene()
 	GraphicManager::destroyGraphicObject(m_temp_player_object);
 	m_temp_player_object =0;
 	m_temp_player="";
-	SoundSystem::clearObjects();
+
+	// TODO: XXX: stop any ambient sounds that would be playing in the scene.
+	//SoundSystem::clearObjects();
 	
 	GraphicManager::clearStaticGeometry();
 	GraphicManager::clearParticlePool();
@@ -745,9 +832,13 @@ void Scene::createScene()
 	m_scene_manager->clearScene();
 	
 	updateCharacterView();
+
+	SoundHelper::signalSoundManager ();
 	
 	// Liste der statischen Objekte
 	Ogre::StaticGeometry* static_geom = m_scene_manager->createStaticGeometry ("StaticGeometry");
+
+	SoundHelper::signalSoundManager ();
 
 	std::list<WorldObject*> stat_objs;
 
@@ -794,7 +885,9 @@ void Scene::createScene()
 			// Objekt in der Szene erzeugen
 			insertObject(it->second,true);
 		}
+		SoundHelper::signalSoundManager ();
 		GraphicManager::buildStaticGeometry();
+		SoundHelper::signalSoundManager ();
 
 		short dimx = region->getDimX();
 		short dimy = region->getDimY();
@@ -850,10 +943,13 @@ void Scene::createScene()
 				}
 			}
 		}
+		SoundHelper::signalSoundManager ();
 		static_geom->build();
 		
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(0.4,0.4,0.4));
+		SoundHelper::signalSoundManager ();
 		target->update();
+		SoundHelper::signalSoundManager ();
 
 		const float* colour = region->getLight().getAmbientLight();
 		m_scene_manager->setAmbientLight(Ogre::ColourValue(colour[0], colour[1], colour[2]));
@@ -971,11 +1067,11 @@ void Scene::getMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, O
 				indices[index_offset] = pLong[k] + static_cast<unsigned long>(offset);
 				if (indices[index_offset] <0 || indices[index_offset] >= vertex_count)
 				{
-					DEBUG("-----------------------------");
-					DEBUG("illegal index %i at pos %i",indices[index_offset], offset);
-					DEBUG("submesh %i  triangle %i", i,k);
-					DEBUG("vertex count %i  index count %i",vertex_count, index_count);
-					DEBUG("32bit index %i  shared %i",use32bitindexes, submesh->useSharedVertices);
+					SW_DEBUG("-----------------------------");
+					SW_DEBUG("illegal index %i at pos %i",indices[index_offset], offset);
+					SW_DEBUG("submesh %i  triangle %i", i,k);
+					SW_DEBUG("vertex count %i  index count %i",vertex_count, index_count);
+					SW_DEBUG("32bit index %i  shared %i",use32bitindexes, submesh->useSharedVertices);
 				}
 				index_offset++;
 			}
@@ -988,10 +1084,10 @@ void Scene::getMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, O
 						static_cast<unsigned long>(offset);
 						if (indices[index_offset] <0 || indices[index_offset] >= vertex_count)
 						{
-							DEBUG("illegal index %i at pos %i",indices[index_offset], index_offset);
-							DEBUG("submesh %i  triangle %i", i,k);
-							DEBUG("vertex count %i  index count %i",vertex_count, index_count);
-							DEBUG("32bit index %i  shared %i",use32bitindexes, submesh->useSharedVertices);
+							SW_DEBUG("illegal index %i at pos %i",indices[index_offset], index_offset);
+							SW_DEBUG("submesh %i  triangle %i", i,k);
+							SW_DEBUG("vertex count %i  index count %i",vertex_count, index_count);
+							SW_DEBUG("32bit index %i  shared %i",use32bitindexes, submesh->useSharedVertices);
 						}
 				index_offset++;
 			}

@@ -14,39 +14,41 @@
  */
 
 #include "worldmap.h"
+
+// Utility for CEGUI cross-version compatibility
 #include "ceguiutility.h"
+
 
 Worldmap::Worldmap (Document* doc, const std::string& ceguiSkinName)
 	: Window (doc)
 	, m_ceguiSkinName (ceguiSkinName)
 {
-	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	// The World map window and holder
-	CEGUI::Window* worldmap = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "worldmapwindow.layout" );
+	CEGUI::Window* worldmap = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("worldmapwindow.layout");
 	if (!worldmap)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "worldmapwindow.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "worldmapwindow.layout");
 	}
 
-	CEGUI::Window* worldmap_holder = win_mgr.loadWindowLayout( "worldmapwindow_holder.layout" );
+	CEGUI::Window* worldmap_holder = CEGUIUtility::loadLayoutFromFile ("worldmapwindow_holder.layout");
 	if (!worldmap_holder)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "worldmapwindow_holder.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "worldmapwindow_holder.layout");
 	}
 	
-	CEGUI::Window* wndHolder = win_mgr.getWindow("WorldmapWindow_Holder");
-	CEGUI::Window* wndHolderAux = win_mgr.getWindow("WorldmapWindow_Holder_aux");
-	CEGUI::Window* wndHeldWindow = win_mgr.getWindow("WorldmapWindow");
+	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (worldmap_holder, "WorldmapWindow_Holder");
+	CEGUI::Window* wndHolderAux = CEGUIUtility::getWindowForLoadedLayoutEx (worldmap_holder, "WorldmapWindow_Holder_aux");
+	CEGUI::Window* wndHeldWindow = CEGUIUtility::getWindowForLoadedLayoutEx (worldmap, "WorldmapWindow");
 	if (wndHolder && wndHeldWindow && wndHolderAux)
 	{
-		wndHolderAux->addChildWindow (wndHeldWindow);
+		CEGUIUtility::addChildWidget (wndHolderAux, wndHeldWindow);
 	}
 	else
 	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for char screen.");
-		if (!wndHeldWindow) DEBUG ("ERROR: Unable to get the window for the worldmap screen.");
+		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for char screen.");
+		if (!wndHeldWindow) SW_DEBUG ("ERROR: Unable to get the window for the worldmap screen.");
 	}
 
 	m_window = worldmap_holder;
@@ -57,7 +59,7 @@ void Worldmap::update()
 	Player* player = m_document->getLocalPlayer();
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::FrameWindow* worldmap = (CEGUI::FrameWindow*) win_mgr.getWindow("WorldmapWindow");
+	CEGUI::FrameWindow* worldmap = (CEGUI::FrameWindow*) CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "WorldmapWindow_Holder_aux/WorldmapWindow");
 	
 	static int ncount =0;
 	static bool tpset = false;
@@ -84,12 +86,13 @@ void Worldmap::update()
 		if (cnt >= ncount)
 		{
 			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), stream.str());
-			worldmap->addChildWindow(label);
+			CEGUIUtility::addChildWidget (worldmap, label);
+
 			label->setProperty("FrameEnabled", "false");
 			label->setProperty("BackgroundEnabled", "false");
 			//label->setProperty("BackgroundColours", "tl:00000000 tr:00000000 bl:00000000 br:00000000"); 
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.02f), cegui_reldim( 0.02f)));
-			label->setProperty("Image", "set:SumWarsExtras image:WaypointMark"); 
+			CEGUIUtility::setWidgetSizeRel (label, 0.02f, 0.02f);
+			label->setProperty("Image", CEGUIUtility::getImageNameWithSkin ("SumWarsExtras", "WaypointMark")); 
 			label->setInheritsAlpha (false);
 			label->setAlwaysOnTop(true);
 			label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Worldmap::onWaypointClicked, this));
@@ -98,7 +101,9 @@ void Worldmap::update()
 		}
 		else
 		{
-			label = win_mgr.getWindow(stream.str());
+			stream.str("");
+			stream << "WorldmapWindow_Holder_aux/WorldmapWindow/WaypointImage"<<cnt;
+			label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		}
 		
 		pos = it->second.m_world_coord;
@@ -115,10 +120,9 @@ void Worldmap::update()
 	for (; cnt <ncount; cnt++)
 	{
 		stream.str("");
-		stream << "WaypointImage";
-		stream << cnt;
+		stream << "WorldmapWindow_Holder_aux/WorldmapWindow/WaypointImage"<<cnt;
 			
-		label = win_mgr.getWindow(stream.str());
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 		label->setVisible(false);
 	}
 	RegionLocation& portal = player->getPortalPosition();
@@ -136,7 +140,8 @@ void Worldmap::update()
 			if (tpset==false)
 			{
 				label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), stream.str());
-				worldmap->addChildWindow(label);
+				CEGUIUtility::addChildWidget (worldmap, label);
+
 				label->setProperty("FrameEnabled", "false");
 				label->setProperty("BackgroundEnabled", "true");
 
@@ -148,8 +153,9 @@ void Worldmap::update()
 				{
 					label->setProperty("BackgroundColour", "00000000");
 				}
-				label->setSize(CEGUI::UVector2(cegui_reldim(0.023f), cegui_reldim( 0.023f)));
-				label->setProperty("Image", "set:SumWarsExtras image:TownPortalSymbol");
+				CEGUIUtility::setWidgetSizeRel (label, 0.023f, 0.023f);
+
+				label->setProperty("Image", CEGUIUtility::getImageNameWithSkin ("SumWarsExtras", "TownPortalSymbol"));
 				label->setInheritsAlpha (false);
 				label->setAlwaysOnTop(true);
 				label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Worldmap::onWaypointClicked, this));
@@ -158,7 +164,9 @@ void Worldmap::update()
 			}
 			else
 			{
-				label = win_mgr.getWindow(stream.str());
+				stream.str ("");
+				stream << "WorldmapWindow_Holder_aux/WorldmapWindow/TownPortalImage";
+				label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 			}
 			
 			
@@ -178,6 +186,7 @@ void Worldmap::update()
 			stream << dgettext("sumwars","Town Portal") << "\n";
 			stream << dgettext("sumwars",it->second.m_name.c_str());
 			label->setTooltipText((CEGUI::utf8*) stream.str().c_str());
+			//label->setTooltip (); //XXX
 		}
 		else
 		{
@@ -186,9 +195,9 @@ void Worldmap::update()
 	}
 	else {
 		if(tpset == true) {
-			stream.str("");
-			stream << "TownPortalImage";
-			label = win_mgr.getWindow(stream.str());
+			stream.str ("");
+			stream << "WorldmapWindow_Holder_aux/WorldmapWindow/TownPortalImage";
+			label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 			label->setVisible(false);
 		}
 

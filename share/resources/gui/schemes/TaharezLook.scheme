@@ -42,7 +42,6 @@
 	<FalagardMapping WindowType="TaharezLook/LargeVerticalScrollbar"      TargetType="CEGUI/Scrollbar" Renderer="Falagard/Scrollbar" LookNFeel="TaharezLook/LargeVerticalScrollbar" />
 	<FalagardMapping WindowType="TaharezLook/LargeVerticalScrollbarThumb" TargetType="CEGUI/Thumb"     Renderer="Falagard/Button"    LookNFeel="TaharezLook/LargeVerticalScrollbarThumb" />
 	<FalagardMapping WindowType="TaharezLook/TabButton"  TargetType="CEGUI/TabButton"  Renderer="Falagard/TabButton"  LookNFeel="TaharezLook/TabButton" />
-	<FalagardMapping WindowType="TaharezLook/brownTabButton"  TargetType="CEGUI/TabButton"  Renderer="Falagard/TabButton"  LookNFeel="TaharezLook/brownTabButton" />
 	<FalagardMapping WindowType="TaharezLook/TabControl" TargetType="CEGUI/TabControl" Renderer="Falagard/TabControl" LookNFeel="TaharezLook/TabControl" />
 	<FalagardMapping WindowType="TaharezLook/TabContentPane"    TargetType="DefaultWindow"    Renderer="Falagard/Default"    LookNFeel="TaharezLook/TabContentPane" />
 	<FalagardMapping WindowType="TaharezLook/TabButtonPane"    TargetType="DefaultWindow"    Renderer="Falagard/Default"    LookNFeel="TaharezLook/TabButtonPane" />
@@ -56,7 +55,6 @@
 	<FalagardMapping WindowType="TaharezLook/Slider"      TargetType="CEGUI/Slider"      Renderer="Falagard/Slider"  LookNFeel="TaharezLook/Slider" />
 	<FalagardMapping WindowType="TaharezLook/SliderThumb" TargetType="CEGUI/Thumb" Renderer="Falagard/Button"  LookNFeel="TaharezLook/SliderThumb" />
 	<FalagardMapping WindowType="TaharezLook/ScrollablePane" TargetType="CEGUI/ScrollablePane" Renderer="Falagard/ScrollablePane" LookNFeel="TaharezLook/ScrollablePane" />
-	<FalagardMapping WindowType="TaharezLook/ScrollablePaneNoBar" TargetType="CEGUI/ScrollablePane" Renderer="Falagard/ScrollablePane" LookNFeel="TaharezLook/ScrollablePaneNoBar" />
 	<FalagardMapping WindowType="TaharezLook/Spinner" TargetType="CEGUI/Spinner" Renderer="Falagard/Default" LookNFeel="TaharezLook/Spinner" />
 	<FalagardMapping WindowType="TaharezLook/Tooltip" TargetType="CEGUI/Tooltip" Renderer="Falagard/Tooltip" LookNFeel="TaharezLook/Tooltip" />
 	<FalagardMapping WindowType="TaharezLook/StaticImage" TargetType="DefaultWindow" Renderer="Falagard/StaticImage" LookNFeel="TaharezLook/StaticImage" />

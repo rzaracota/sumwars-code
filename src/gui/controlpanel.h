@@ -58,6 +58,18 @@ class ControlPanel : public ItemWindow
 		
 	private:
 		/**
+		 * \fn bool onGUIItemClick (const CEGUI::EventArgs& evt)
+		 * \brief Handle the click of gui items.
+		 */
+		bool onGUIItemClick (const CEGUI::EventArgs& evt);
+
+		/**
+		 * \fn bool onGUIItemHover(const CEGUI::EventArgs& evt)
+		 * \brief Handle the hovering of gui items.
+		 */
+		bool onGUIItemHover (const CEGUI::EventArgs& evt);
+
+		/**
 		* \fn bool onButtonSaveExitClicked(const CEGUI::EventArgs& evt)
 		* \brief Behandelt Klick auf Speichern/Beenden
 		*/

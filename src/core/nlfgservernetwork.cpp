@@ -75,17 +75,17 @@ void NLFGServerNetwork::update()
 				case NLFG_CONNECTED:
 					slot = insertNewSlot(packet->addr);
 					pushNewLoginSlot(slot);
-					DEBUG("connection accepted for slot %i", slot);
+					SW_DEBUG("connection accepted for slot %i", slot);
 					break;
 
 				case NLFG_DISCONNECTED:
-					DEBUG("slot %i disconnected",slot);
+					SW_DEBUG("slot %i disconnected",slot);
 					delete m_slots[slot];
 					m_slots[slot]=0;
 					break;
 					
 				default:
-					DEBUG("unknown id: %i",id);
+					SW_DEBUG("unknown id: %i",id);
 					break;
 			}
 

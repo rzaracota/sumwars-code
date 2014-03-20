@@ -21,10 +21,12 @@
 #include "OgreLogManager.h"
 #include "OgreMeshManager.h"
 
-// needed to be able to create the CEGUI renderer interface
-#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
 
-// CEGUI includes
+// needed to be able to create the CEGUI renderer interface
+#ifdef CEGUI_07
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 #include "CEGUI/CEGUISystem.h"
 #include "CEGUI/CEGUIInputEvent.h"
 #include "CEGUI/CEGUIWindow.h"
@@ -32,6 +34,19 @@
 #include "CEGUI/CEGUISchemeManager.h"
 #include "CEGUI/CEGUIFontManager.h"
 #include "CEGUI/elements/CEGUIFrameWindow.h"
+#else
+#include "CEGUI/RendererModules/Ogre/Renderer.h"
+#include "CEGUI/System.h"
+#include "CEGUI/InputEvent.h"
+#include "CEGUI/Window.h"
+#include "CEGUI/WindowManager.h"
+#include "CEGUI/SchemeManager.h"
+#include "CEGUI/FontManager.h"
+#include "CEGUI/widgets/FrameWindow.h"
+#endif
+
+
+// CEGUI includes
 
 #include <stdio.h>
 
@@ -163,6 +178,13 @@ class Application
 		 */
 		bool loadResources(int datagroups=0xfffffff);
 		
+		/**
+		 * \brief Loads the menu music and commences playing it.
+		 * Typically, this would be placed in the menu class, but that would not allow playing the music while the loading is performed
+		 * (as the menu is not yet created).
+		 */
+		void loadAndPlayMenuMusic ();
+
 		/**
 		 * \brief clears the Ressources specified by \a datagroups
 		 * \param datagroups bitmask consisting of members of \ref World::DataGroups

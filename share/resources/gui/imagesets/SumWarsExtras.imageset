@@ -14,6 +14,9 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
     TR = top right; R = right; BR = bottom right
   -->
 
+  <!-- Empty picture -->
+	<Image Name="EmptyPicture10px" XPos="64" YPos="64" Width="10" Height="10" />
+
   <!-- The symbol to be used for a Town Portal -->
   <Image Name="TownPortalSymbol" XPos="0" YPos="0" Width="48" Height="48" />
 
@@ -27,5 +30,25 @@ Last change:  $LastChangedDate: 2013-01-26 01:26:14 +0200 (S, 26 ian. 2013) $
   <!-- Forward slash like -->
 	<Image Name="SkilltreeDiag2Connection" XPos="144" YPos="0" Width="48" Height="48" />
 
+  <!-- Additional empty pics -->
+	<Image Name="MiniHorzScrollThumbLeftNormal" XPos="64" YPos="64" Width="10" Height="10" />
+	<Image Name="MiniHorzScrollThumbRightNormal" XPos="64" YPos="64" Width="10" Height="10" />
+	<Image Name="MiniHorzScrollThumbMiddleNormal" XPos="64" YPos="64" Width="10" Height="10" />
+	<Image Name="MiniHorzScrollThumbLeftHover" XPos="64" YPos="64" Width="10" Height="10" />
+	<Image Name="MiniHorzScrollThumbRightHover" XPos="64" YPos="64" Width="10" Height="10" />
+	<Image Name="MiniHorzScrollThumbMiddleHover" XPos="64" YPos="64" Width="10" Height="10" />
+	<Image Name="MiniHorzScrollBarSegment" XPos="64" YPos="64" Width="10" Height="10" />
+  
+	<Image Name="MiniVertScrollThumbTopNormal" XPos="64" YPos="64" Width="10" Height="10" />
+	<Image Name="MiniVertScrollThumbBottomNormal" XPos="64" YPos="64" Width="10" Height="10" />
+	<Image Name="MiniVertScrollThumbMiddleNormal" XPos="64" YPos="64" Width="10" Height="10" />
+	<Image Name="MiniVertScrollThumbTopHover" XPos="64" YPos="64" Width="10" Height="10" />
+	<Image Name="MiniVertScrollThumbBottomHover" XPos="64" YPos="64" Width="10" Height="10" />
+	<Image Name="MiniVertScrollThumbMiddleHover" XPos="64" YPos="64" Width="10" Height="10" />
+	<Image Name="MiniVertScrollBarSegment" XPos="64" YPos="64" Width="10" Height="10" />
+  
+  
+  
+  
 </Imageset>
 

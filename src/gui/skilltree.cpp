@@ -16,7 +16,10 @@
 #include "skilltree.h"
 
 #include "tooltipmanager.h"
+
+// Utility for CEGUI cross-version compatibility
 #include "ceguiutility.h"
+
 
 #define DEFAULT_SKILL_ITEM_WIDTH 0.18f
 #define DEFAULT_SKILL_ITEM_HEIGHT 0.16f
@@ -29,6 +32,8 @@ SkillTree::SkillTree (Document* doc, OIS::Keyboard *keyboard, const std::string&
 {
 	DEBUGX("setup skilltree");
 	m_keyboard = keyboard;
+	m_skill_widgets_pics.clear ();
+	m_skill_widgets_btns.clear ();
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
@@ -45,48 +50,38 @@ SkillTree::SkillTree (Document* doc, OIS::Keyboard *keyboard, const std::string&
 	
 	m_player_id =0;
 	
-	CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.loadWindowLayout( "skilltree.layout" );
+	CEGUI::TabControl* skilltree = (CEGUI::TabControl*) CEGUIUtility::loadLayoutFromFile ("skilltree.layout");
 	if (!skilltree)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "skilltree.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "skilltree.layout");
 	}
-	CEGUI::Window* skilltree_holder = win_mgr.loadWindowLayout( "skilltree_holder.layout" );
+	CEGUI::Window* skilltree_holder = CEGUIUtility::loadLayoutFromFile ("skilltree_holder.layout");
 	if (!skilltree_holder)
 	{
-		DEBUG ("WARNING: Failed to load [%s]", "questinfo_holder.layout");
+		SW_DEBUG ("WARNING: Failed to load [%s]", "skilltree_holder.layout");
 	}
 
-	CEGUI::Window* wndHolder = win_mgr.getWindow("Skilltree_Holder");
-	CEGUI::Window* wndSkilltree = win_mgr.getWindow("Skilltree");
+	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (skilltree_holder, "Skilltree_Holder");
+	CEGUI::Window* wndSkilltree = CEGUIUtility::getWindowForLoadedLayoutEx (skilltree, "Skilltree");
 	if (wndHolder && wndSkilltree)
 	{
-		wndHolder->addChildWindow (wndSkilltree);
+		CEGUIUtility::addChildWidget (wndHolder, wndSkilltree);
 	}
 	else
 	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for skills.");
-		if (!wndSkilltree) DEBUG ("ERROR: Unable to get the window for skills.");
+		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for skills.");
+		if (!wndSkilltree) SW_DEBUG ("ERROR: Unable to get the window for skills.");
 	}
 
 	m_window = skilltree_holder;
 	skilltree->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&Window::consumeEvent,  (Window*) this));
 	skilltree->setWantsMultiClickEvents(false);
 	
-	// TODO: remove this when no longer needed (layout updated).
-	if (win_mgr.isWindowPresent ("SkillTreeCloseButton"))
+	// the panel should also have an auto-close button; connect it to the Cancel/Abort event.
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/__auto_closebutton__");
+	if (label)
 	{
-		label = win_mgr.getWindow("SkillTreeCloseButton");
 		label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onCloseButtonClicked, this));
-	}
-	
-	// If the panel also has an auto-close button, connect it to the Cancel/Abort event.
-	if (win_mgr.isWindowPresent ("Skilltree__auto_closebutton__"))
-	{
-		label = win_mgr.getWindow ("Skilltree__auto_closebutton__");
-		if (label)
-		{
-			label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onCloseButtonClicked, this));
-		}
 	}
 
 
@@ -100,7 +95,7 @@ void SkillTree::update()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	Player* player = m_document->getLocalPlayer();
-	CEGUI::TabControl* skilltree = (CEGUI::TabControl*) win_mgr.getWindow("SkilltreeTabs");
+	CEGUI::TabControl* skilltree = (CEGUI::TabControl*) CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkilltreeTabs");
 	
 	CEGUI::Window* wnd;
 	std::vector<CEGUI::DefaultWindow*> tabs(3);
@@ -117,39 +112,43 @@ void SkillTree::update()
 		
 		for (int i=0; i<m_nr_skills; i++)
 		{
-			stream.str("");
-			stream << "SkillImage"<<i;
-			wnd = win_mgr.getWindow(stream.str());
+			//stream.str("");
+			//stream << "SkillImage"<<i;
+			std::string skillImageWidget = m_skill_widgets_pics[i];
+			std::string skillButtonWidget = m_skill_widgets_btns[i];
+			wnd = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, skillImageWidget);
 			
-			wnd->getParent()->removeChildWindow(wnd);
+			CEGUIUtility::removeChildWidget (wnd->getParent (), wnd);
 			win_mgr.destroyWindow(wnd);
 			
-			stream.str("");
-			stream << "SkillButton"<<i;
-			wnd = win_mgr.getWindow(stream.str());
+			//stream.str("");
+			//stream << "SkillButton"<<i;
+			wnd = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, skillButtonWidget);
 			
-			wnd->getParent()->removeChildWindow(wnd);
+			CEGUIUtility::removeChildWidget (wnd->getParent (), wnd);
 			win_mgr.destroyWindow(wnd);
 		}
 		
 		for (int i=0; i<m_nr_dependencies; i++)
 		{
-			stream.str("");
-			stream << "SkillDependencyConnection"<<i;
-			wnd = win_mgr.getWindow(stream.str());
+			//stream.str("");
+			//stream << "SkillDependencyConnection"<<i;
+			std::string skillConnWidget = m_skill_widgets_connections[i];
+			wnd = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, skillConnWidget);
 			
-			wnd->getParent()->removeChildWindow(wnd);
+			CEGUIUtility::removeChildWidget (wnd->getParent (), wnd);
 			win_mgr.destroyWindow(wnd);
 		}
 		m_nr_dependencies=0;
 		
 		for (int i=0; i<m_shortkey_labels; i++)
 		{
-			stream.str("");
-			stream << "SkillShortkeyLabel"<<i;
-			wnd = win_mgr.getWindow(stream.str());
+			//stream.str("");
+			//stream << "SkillShortkeyLabel"<<i;
+			std::string skillShortcutsWidget = m_skill_widgets_shortcuts[i];
+			wnd = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, skillShortcutsWidget);
 			
-			wnd->getParent()->removeChildWindow(wnd);
+			CEGUIUtility::removeChildWidget (wnd->getParent (), wnd);
 			win_mgr.destroyWindow(wnd);
 		}
 		m_shortkey_labels=0;
@@ -157,8 +156,9 @@ void SkillTree::update()
 		for (int i=0; i<m_nr_tabs; i++)
 		{
 			stream.str("");
+			stream << "Skilltree/skilltree_aux/SkilltreeTabs/__auto_TabPane__/";
 			stream << "SkilltreeTab"<<i;
-			wnd = win_mgr.getWindow(stream.str());
+			wnd = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 			
 			skilltree->removeTab(wnd->getID());
 			win_mgr.destroyWindow(wnd);
@@ -181,8 +181,9 @@ void SkillTree::update()
 			skilltree->addTab(tabs[i]);
 			
 			stream.str("");
-			stream << "SkilltreeTabs__auto_TabPane__Buttons__auto_btnSkilltreeTab" << i;
-			label =  win_mgr.getWindow(stream.str());
+			stream << "Skilltree/skilltree_aux/SkilltreeTabs/__auto_TabPane__/SkilltreeTab" << i;
+
+			label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 			label->setInheritsAlpha(false);
 		}
 		
@@ -190,40 +191,85 @@ void SkillTree::update()
 		stream.str("");
 		stream << "FFD43D1A";
 
-		label = win_mgr.getWindow("SkilltreeTabs__auto_TabPane__Buttons__auto_btnSkilltreeTab0");
-		label->setProperty("NormalTextColour", stream.str());
-		label->setProperty("HoverTextColour", stream.str());
-		label->setProperty("SelectedTextColour", stream.str());
-		label->setProperty("PushedTextColour", stream.str());
-		label->setProperty("DisabledTextColour", stream.str());
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkilltreeTabs/__auto_TabPane__/SkilltreeTab0");
+		if (label->isPropertyPresent ("NormalTextColour"))
+		{
+			label->setProperty("NormalTextColour", stream.str());
+		}
+		if (label->isPropertyPresent ("HoverTextColour"))
+		{
+			label->setProperty("HoverTextColour", stream.str());
+		}
+		if (label->isPropertyPresent ("SelectedTextColour"))
+		{
+			label->setProperty("SelectedTextColour", stream.str());
+		}
+		if (label->isPropertyPresent ("PushedTextColour"))
+		{
+			label->setProperty("PushedTextColour", stream.str());
+		}
+		if (label->isPropertyPresent ("DisabledTextColour"))
+		{
+			label->setProperty("DisabledTextColour", stream.str());
+		}
 
 		stream.str("");
 		stream << "FF5CACEE";
 
-		label = win_mgr.getWindow("SkilltreeTabs__auto_TabPane__Buttons__auto_btnSkilltreeTab1");
-		label->setProperty("NormalTextColour", stream.str());
-		label->setProperty("HoverTextColour", stream.str());
-		label->setProperty("SelectedTextColour", stream.str());
-		label->setProperty("PushedTextColour", stream.str());
-		label->setProperty("DisabledTextColour", stream.str());
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkilltreeTabs/__auto_TabPane__/SkilltreeTab1");
+		if (label->isPropertyPresent ("NormalTextColour"))
+		{
+			label->setProperty("NormalTextColour", stream.str());
+		}
+		if (label->isPropertyPresent ("HoverTextColour"))
+		{
+			label->setProperty("HoverTextColour", stream.str());
+		}
+		if (label->isPropertyPresent ("SelectedTextColour"))
+		{
+			label->setProperty("SelectedTextColour", stream.str());
+		}
+		if (label->isPropertyPresent ("PushedTextColour"))
+		{
+			label->setProperty("PushedTextColour", stream.str());
+		}
+		if (label->isPropertyPresent ("DisabledTextColour"))
+		{
+			label->setProperty("DisabledTextColour", stream.str());
+		}
 
 		stream.str("");
 		stream << "FFD15FEE";
 
-		label = win_mgr.getWindow("SkilltreeTabs__auto_TabPane__Buttons__auto_btnSkilltreeTab2");
-		label->setProperty("NormalTextColour", stream.str());
-		label->setProperty("HoverTextColour", stream.str());
-		label->setProperty("SelectedTextColour", stream.str());
-		label->setProperty("PushedTextColour", stream.str());
-		label->setProperty("DisabledTextColour", stream.str());
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkilltreeTabs/__auto_TabPane__/SkilltreeTab2");
+		if (label->isPropertyPresent ("NormalTextColour"))
+		{
+			label->setProperty("NormalTextColour", stream.str());
+		}
+		if (label->isPropertyPresent ("HoverTextColour"))
+		{
+			label->setProperty("HoverTextColour", stream.str());
+		}
+		if (label->isPropertyPresent ("SelectedTextColour"))
+		{
+			label->setProperty("SelectedTextColour", stream.str());
+		}
+		if (label->isPropertyPresent ("PushedTextColour"))
+		{
+			label->setProperty("PushedTextColour", stream.str());
+		}
+		if (label->isPropertyPresent ("DisabledTextColour"))
+		{
+			label->setProperty("DisabledTextColour", stream.str());
+		}
 
 		// labels for skillpoints and next skillpoint
 		
-		label = win_mgr.getWindow("SkillpointsValueLabel");
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkillTreeAdditionalInfoHolder/SkillpointsValueLabel");
 		label->setText("0");
 		
 		
-		label = win_mgr.getWindow("NextSkillpointsValueLabel");
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkillTreeAdditionalInfoHolder/NextSkillpointsValueLabel");
 		label->setText("0");
 		
 		
@@ -244,7 +290,7 @@ void SkillTree::update()
 			stream << "SkillImage"<<cnt;
 			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), stream.str());
 
-			tabs[it->second.m_skilltree_tab-1]->addChildWindow(label);
+			CEGUIUtility::addChildWidget (tabs[it->second.m_skilltree_tab-1], label);
 			spos = it->second.m_skilltree_position;
 			pos = CEGUI::UVector2(cegui_reldim(spos.m_x), cegui_reldim( spos.m_y));
 
@@ -253,7 +299,15 @@ void SkillTree::update()
 				label->setProperty ("FrameEnabled", "True");
 			}
 			label->setPosition(pos);
-			label->setSize (CEGUI::UVector2 (cegui_reldim (DEFAULT_SKILL_ITEM_WIDTH), cegui_reldim (DEFAULT_SKILL_ITEM_HEIGHT)));
+			CEGUIUtility::setWidgetSizeRel (label, DEFAULT_SKILL_ITEM_WIDTH, DEFAULT_SKILL_ITEM_HEIGHT);
+			std::string imageWidgetName = label->getNamePath ().c_str ();
+			size_t string_pos = imageWidgetName.find ("SW/GameScreen/Skilltree_Holder/");
+			if (string_pos != std::string::npos)
+			{
+				imageWidgetName.erase (string_pos, 31);
+			}
+			m_skill_widgets_pics[cnt] = imageWidgetName;
+			SW_DEBUG ("Added widget name (img) [%s]", imageWidgetName.c_str ());
 
 			//
 			// Setup the button to be used to learn the corresponding skill.
@@ -264,24 +318,33 @@ void SkillTree::update()
 			stream << "SkillButton" << cnt;
 			button = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "ImageButton"), stream.str ()));
 			button->setInheritsAlpha (false);
-			tabs [it->second.m_skilltree_tab - 1]->addChildWindow (button);
+			CEGUIUtility::addChildWidget (tabs [it->second.m_skilltree_tab - 1], button);
 			if (button->isPropertyPresent ("HoverImage"))
 			{
-				button->setProperty("HoverImage", "set:CharScreen image:PlusBtnReleased");
+				button->setProperty("HoverImage", CEGUIUtility::getImageNameWithSkin ("CharScreen", "PlusBtnReleased"));
 			}
 			if (button->isPropertyPresent ("NormalImage"))
 			{
-				button->setProperty("NormalImage", "set:CharScreen image:PlusBtnReleased");
+				button->setProperty("NormalImage", CEGUIUtility::getImageNameWithSkin ("CharScreen", "PlusBtnReleased"));
 			}
 			if (button->isPropertyPresent ("PushedImage"))
 			{
-				button->setProperty("PushedImage", "set:CharScreen image:PlusBtnPressed");
+				button->setProperty("PushedImage", CEGUIUtility::getImageNameWithSkin ("CharScreen", "PlusBtnPressed"));
 			}
 			button->setPosition (pos);
-			button->setSize (CEGUI::UVector2 (cegui_reldim (DEFAULT_SKILL_BTN_WIDTH), cegui_reldim (DEFAULT_SKILL_BTN_HEIGHT)));
+			CEGUIUtility::setWidgetSizeRel (button, DEFAULT_SKILL_BTN_WIDTH, DEFAULT_SKILL_BTN_HEIGHT);
 			button->setID(it->first);
 			button->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillLearnMouseClicked, this));
 			
+			std::string btnWidgetName = button->getNamePath ().c_str ();
+			string_pos = btnWidgetName.find ("SW/GameScreen/Skilltree_Holder/");
+			if (string_pos != std::string::npos)
+			{
+				btnWidgetName.erase (string_pos, 31);
+			}
+			m_skill_widgets_btns[cnt] = btnWidgetName;
+			SW_DEBUG ("Added widget name (btn) [%s]", btnWidgetName.c_str ());
+
 			//
 			// Set the skill picture settings. This loads the picture and sets specific properties.
 			// 
@@ -291,12 +354,11 @@ void SkillTree::update()
 			std::string imagename = it->second.m_image;
 			if (imagename == "")
 			{
-				imagename = "set:skills image:";
-				imagename += it->second.m_type;
+				imagename = CEGUIUtility::getImageNameWithSkin ("skills", it->second.m_type);
 			}
 			label->setProperty("Image", imagename);
 			label->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&SkillTree::onSkillMouseClicked, this));
-			label->subscribeEvent(CEGUI::Window::EventMouseEnters, CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
+			label->subscribeEvent(CEGUIUtility::EventMouseEntersWindowArea (), CEGUI::Event::Subscriber(&SkillTree::onAbilityHover, this));
 			
 			//
 			// Create Connections for Dependencies
@@ -315,7 +377,7 @@ void SkillTree::update()
 						stream.str("");
 						stream << "SkillDependencyConnection"<<m_nr_dependencies;
 						label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticImage"), stream.str());
-						tabs[it->second.m_skilltree_tab-1]->addChildWindow(label);
+						CEGUIUtility::addChildWidget (tabs[it->second.m_skilltree_tab-1], label);
 						label->setMousePassThroughEnabled(true);
 						label->setInheritsAlpha(false);
 						label->setProperty("FrameEnabled", "false");
@@ -325,26 +387,36 @@ void SkillTree::update()
 						CEGUI::UVector2 start = CEGUI::UVector2 (cegui_reldim (deppos.m_x + (DEFAULT_SKILL_ITEM_WIDTH / 2) - 0.02f), cegui_reldim (deppos.m_y + DEFAULT_SKILL_ITEM_HEIGHT));
 						CEGUI::UVector2 end   = CEGUI::UVector2 (cegui_reldim (spos.m_x + (DEFAULT_SKILL_ITEM_WIDTH / 2) + 0.02f), cegui_reldim (spos.m_y));
 						label->setPosition(start);
-						label->setSize(end - start);
+						CEGUIUtility::setWidgetSize (label, end - start);
 						label->setID(jt->first);
 						
 						// distinguish vertical and diagonal connectors
 						if (deppos.m_x == spos.m_x)
 						{
-							label->setProperty("Image", "set:SumWarsExtras image:SkilltreeVertConnection"); 
+							label->setProperty("Image", CEGUIUtility::getImageNameWithSkin ("SumWarsExtras", "SkilltreeVertConnection")); 
 						}
 						else if (deppos.m_x <= spos.m_x)
 						{
-							label->setProperty("Image", "set:SumWarsExtras image:SkilltreeDiagConnection"); 
+							label->setProperty("Image", CEGUIUtility::getImageNameWithSkin ("SumWarsExtras", "SkilltreeDiagConnection")); 
 						}
 						else
 						{
-							label->setProperty("Image", "set:SumWarsExtras image:SkilltreeDiag2Connection");
+							label->setProperty("Image", CEGUIUtility::getImageNameWithSkin ("SumWarsExtras", "SkilltreeDiag2Connection"));
 							start= CEGUI::UVector2(cegui_reldim(spos.m_x+0.07f), cegui_reldim( deppos.m_y+0.1f));
 							end= CEGUI::UVector2(cegui_reldim(deppos.m_x+0.06f), cegui_reldim( spos.m_y));
 							label->setPosition(start);
-							label->setSize(end - start);
+							CEGUIUtility::setWidgetSize (label, end - start);
 						}
+
+						std::string depsWidgetName = label->getNamePath ().c_str ();
+						size_t string_pos = depsWidgetName.find ("SW/GameScreen/Skilltree_Holder/");
+						if (string_pos != std::string::npos)
+						{
+							depsWidgetName.erase (string_pos, 31);
+						}
+						m_skill_widgets_connections[m_nr_dependencies] = depsWidgetName;
+						SW_DEBUG ("Added widget name (conn) [%s]", depsWidgetName.c_str ());
+
 						m_nr_dependencies++;
 						
 						DEBUGX("dependency %s from %s", it->second.m_type.c_str(), at->c_str());
@@ -370,9 +442,10 @@ void SkillTree::update()
 	{
 		out_stream.str("");
 		out_stream << "SkillImage" << j;
+		std::string skillImageWidget = m_skill_widgets_pics[j];
 
 		// Label welches das Skillicon zeigt
-		label = win_mgr.getWindow(out_stream.str());
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, skillImageWidget);
 
 		// A gray semi-transparent layer is added on top of the items that are unavailable
 		std::string availAbility ("00FFFFFF");
@@ -398,28 +471,26 @@ void SkillTree::update()
 		}
 		else
 		{
-			DEBUG ("Property not found: OverlayColour");
+            SW_DEBUG ("Property not found: OverlayColour (in %s)", label->getNamePath().c_str());
 		}
 		
-		out_stream.str("");
-		out_stream << "SkillButton" << j;
-		
-		button = static_cast<CEGUI::PushButton*>(win_mgr.getWindow(out_stream.str()));
+		std::string skillButtonWidget = m_skill_widgets_btns[j];
+
+		button = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, skillButtonWidget));
 		vis = player->checkAbilityLearnable(act) && (player->getSkillPoints()>0);
 		if (button->isVisible() != vis)
 		{
 			button->setVisible(vis);
 		}
 	}
-	
+
 	// Loop over all Dependencies
 	for (int j=0;j<m_nr_dependencies;j++)
 	{
-		out_stream.str("");
-		out_stream << "SkillDependencyConnection" << j;
+		std::string skillConnWidget = m_skill_widgets_connections[j];
 
 		// Label for the dependency connecntion
-		label = win_mgr.getWindow(out_stream.str());
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, skillConnWidget);
 		act = ablts[label->getID()].m_type;
 		
 		float alpha = 0.2;
@@ -466,18 +537,17 @@ void SkillTree::update()
 	spstream << player->getSkillPoints();
 	
 	// there is one label on _each_ tab
-	label =  win_mgr.getWindow("SkillpointsValueLabel");
-		if (label->getText() != spstream.str())
-		{
-			label->setText(spstream.str());
-		}
+	label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkillTreeAdditionalInfoHolder/SkillpointsValueLabel");
+	if (label->getText() != spstream.str())
+	{
+		label->setText(spstream.str());
+	}
 		
-	label =  win_mgr.getWindow("NextSkillpointsValueLabel");
-		if (label->getText() != lvlstr)
-		{
-			label->setText(lvlstr);
-		}
-	
+	label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkillTreeAdditionalInfoHolder/NextSkillpointsValueLabel");
+	if (label->getText() != lvlstr)
+	{
+		label->setText(lvlstr);
+	}
 	
 	// Markierer fuer Shortkeys einbauen
 	// Zaehler fuer die Fenster
@@ -523,35 +593,64 @@ void SkillTree::update()
 		if (nr >= m_shortkey_labels)
 		{
 			m_shortkey_labels ++;
-			label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), stream.str());
+			
+			std::map<int, std::string>::iterator it = m_skill_widgets_shortcuts.find (nr);
+			if (it != m_skill_widgets_shortcuts.end ())
+			{
+				label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, it->second);
+			}
+			else
+			{
+				label = win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "StaticText"), stream.str());
+			}
+
 			label->setInheritsAlpha(false);
 			label->setProperty("FrameEnabled", "false");
 			label->setProperty("BackgroundEnabled", "false");
 			label->setProperty("HorzFormatting", "Centred");
 			label->setID(-1);
 			label->setText("");
-			label->setSize(CEGUI::UVector2(cegui_reldim(0.07f), cegui_reldim( 0.05f)));
+			CEGUIUtility::setWidgetSizeRel (label, 0.07f, 0.05f);
 			label->setAlpha(1.0);
 			label->setMousePassThroughEnabled(true);
 			label->setAlwaysOnTop(true);
+
+			std::string shortkeywidget = label->getNamePath ().c_str ();
+			size_t string_pos = shortkeywidget.find ("SW/GameScreen/Skilltree_Holder/");
+			if (string_pos != std::string::npos)
+			{
+				shortkeywidget.erase (string_pos, 31);
+			}
+			m_skill_widgets_shortcuts[nr] = shortkeywidget;
 		}
 		else
 		{
-			label = win_mgr.getWindow(stream.str());
+			std::string shortkeywidget = m_skill_widgets_shortcuts[nr];
+			label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, shortkeywidget);
 		}
 		
-		stream.str("");
-		stream << "SkillImage" << id;
-		label2 = win_mgr.getWindow(stream.str());
+		std::string skillImageWidget = m_skill_widgets_pics[id];
+		label2 = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, skillImageWidget);
 		
 		
 		if (label2->getParent() != label->getParent())
 		{
+			SW_DEBUG ("Reassigning siblings: [%s], to image widgets [%s]", label->getNamePath ().c_str (), label2->getNamePath ().c_str ());
+
 			if (label->getParent() != 0)
 			{
-				label->getParent()->removeChildWindow (label);
+				CEGUIUtility::removeChildWidget (label->getParent(), label);
 			}
-			label2->getParent()->addChildWindow (label);
+			CEGUIUtility::addChildWidget (label2->getParent(), label);
+			
+			// Re-calculate the name of the widget. 
+			std::string shortkeywidget = label->getNamePath ().c_str ();
+			size_t string_pos = shortkeywidget.find ("SW/GameScreen/Skilltree_Holder/");
+			if (string_pos != std::string::npos)
+			{
+				shortkeywidget.erase (string_pos, 31);
+			}
+			m_skill_widgets_shortcuts[nr] = shortkeywidget;
 		}
 		
 		keyname = m_keyboard->getAsString ( (OIS::KeyCode) key);
@@ -581,16 +680,16 @@ void SkillTree::update()
 		}
 		nr ++;
 	}
-	
-	
+		
 	// restliche Labels ausblenden
 	for (; nr<m_shortkey_labels; nr++)
 	{
-		stream.str("");
-		stream << "SkillShortkeyLabel";
-		stream << nr;
-			
-		label = win_mgr.getWindow(stream.str());
+		//stream.str("");
+		//stream << "SkillShortkeyLabel";
+		//stream << nr;
+		std::string shortkeywidget = m_skill_widgets_shortcuts[nr];
+		label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, shortkeywidget);
+
 		label->setVisible(false);
 	}
 	
@@ -608,9 +707,10 @@ void SkillTree::updateTranslation()
 	for (int i=0; i<m_nr_tabs; i++)
 	{
 		stream.str("");
+		stream << "Skilltree/skilltree_aux/SkilltreeTabs/__auto_TabPane__/";
 		stream << "SkilltreeTab" << i;
 			
-		tabs[i] = (CEGUI::DefaultWindow*) win_mgr.getWindow(stream.str());
+		tabs[i] = (CEGUI::DefaultWindow*) CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
 	}
 	
 	// Ueberschriften der Tabs setzen
@@ -625,24 +725,16 @@ void SkillTree::updateTranslation()
 		tabs[i]->setText((CEGUI::utf8*) gettext(pdata->m_tabnames[i].c_str()));
 	}
 
-	label =  win_mgr.getWindow("SkillpointsLabel");
+	label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkillTreeAdditionalInfoHolder/SkillpointsLabel");
 	label->setText((CEGUI::utf8*) gettext("Skillpoints"));
 		
-	label =  win_mgr.getWindow("NextSkillpointsLabel");
+	label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkillTreeAdditionalInfoHolder/NextSkillpointsLabel");
 	label->setText((CEGUI::utf8*) gettext("Next Skillpoint at Level"));
 
-	if (win_mgr.isWindowPresent ("SkilltreeLabel"))
+	label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree");
+	if (label->isPropertyPresent ("Text"))
 	{
-		label =  win_mgr.getWindow("SkilltreeLabel");
-		label->setText((CEGUI::utf8*) gettext("Skilltree"));
-	}
-	else if (win_mgr.isWindowPresent ("Skilltree"))
-	{
-		label =  win_mgr.getWindow("Skilltree");
-		if (label->isPropertyPresent ("Text"))
-		{
-			label->setProperty ("Text", (CEGUI::utf8*) gettext("Skilltree"));
-		}
+		label->setProperty ("Text", (CEGUI::utf8*) gettext("Skilltree"));
 	}
 
 }
@@ -657,11 +749,13 @@ void SkillTree::updateAbilityTooltip(unsigned int pos)
 
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
-	std::ostringstream out_stream;
-	out_stream.str("");
-	out_stream << "SkillImage" << pos;
+	//std::ostringstream out_stream;
+	//out_stream.str("");
+	//out_stream << "SkillImage" << pos;
+	std::string skillImageWidget = m_skill_widgets_pics[pos];
+
 	
-	label = win_mgr.getWindow(out_stream.str());
+	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, skillImageWidget);
 	std::string tooltip = m_document->getAbilityDescription(ablts[pos].m_type);
 	
 	FormatedText txt =  CEGUIUtility::fitTextToWindow((CEGUI::utf8*)tooltip.c_str(), 400, CEGUIUtility::Centred, label->getFont());

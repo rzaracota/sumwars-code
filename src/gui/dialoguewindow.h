@@ -64,10 +64,24 @@ class DialogueWindow : public Window
 		
 		/**
 		 * \fn bool onAnswerClicked(const CEGUI::EventArgs& evt);
-		 * \brief Behandelt das Klick auf eine Antwort in einem Gespraech
+		 * \brief Handles the click on one of the answers in a Dialogue
 		 * \param evt CEGUI Event Parameter
 		 */
 		bool onAnswerClicked(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \fn bool onAnswerEnterArea(const CEGUI::EventArgs& evt);
+		 * \brief Handles the hovering with the mouse on one of the answers in a Dialogue
+		 * \param evt CEGUI Event Parameter
+		 */
+		bool onAnswerEnterArea(const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \fn bool onAnswerLeaveArea(const CEGUI::EventArgs& evt);
+		 * \brief Handles the stopping of hovering with the mouse on one of the answers in a Dialogue
+		 * \param evt CEGUI Event Parameter
+		 */
+		bool onAnswerLeaveArea(const CEGUI::EventArgs& evt);
 		
 		/**
 		 * \fn bool bool onTextClicked(const CEGUI::EventArgs& evt)

@@ -38,7 +38,7 @@ public:
 	TooltipManager ( );
 	
 	/**
-	 * \fn void createTooltip(CEGUI::Window *win, std::list<std::string> list, float timeVisible = 0.0f, CEGUI::Font *font = 0, Tooltip::TooltipType type = Tooltip::Main)
+	 * \fn void createTooltip(CEGUI::Window *win, std::list<std::string> list, float timeVisible = 0.0f, const CEGUI::Font *font = 0, Tooltip::TooltipType type = Tooltip::Main)
 	 * \brief Creates a Tooltip
 	 * \param win parent CEGUI window 
 	 * \param list Text contents for the window as std::list
@@ -46,7 +46,7 @@ public:
 	 * \param font CEGUI font for the Tooltip
 	 * \param type the Tooltip type
 	 */
-	void createTooltip (CEGUI::Window *win, std::list<std::string> list, float timeVisible = 0.0f, CEGUI::Font *font = 0, Tooltip::TooltipType type = Tooltip::Main);
+	void createTooltip (CEGUI::Window *win, std::list<std::string> list, float timeVisible = 0.0f, const CEGUI::Font *font = 0, Tooltip::TooltipType type = Tooltip::Main);
 	
 	/**
 	 * \fn void createTooltip(CEGUI::Window *win, std::string text, float timeVisible = 0.0f, CEGUI::Font *font = 0, Tooltip::TooltipType type = Tooltip::Main)

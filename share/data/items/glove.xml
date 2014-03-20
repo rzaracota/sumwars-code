@@ -1,7 +1,7 @@
 <!-- Lederhandschuhe -->
 <!-- WAR, PRI, ARC, MAG -->
 <Item type="gloves" subtype="leath_glv" name="leather gloves" size="medium">
-	<Image image="set:leath_glv.png image:full_image" />
+	<Image image="leath_glv.png" />
 	<RenderInfo name="leatherGloves" />
 	<Attribute
 		level_requirement="2"
@@ -33,7 +33,7 @@
 <!-- Schlangenlederhandschuhe -->
 <!-- PRI, MAG -->
 <Item type="gloves" subtype="snake_glv" name="snakehide gloves" size="medium">
-	<Image image="set:leath_glv.png image:full_image" />
+	<Image image="leath_glv.png" />
 	<RenderInfo name="leatherGloves" />
 	<Attribute
 		level_requirement="7"
@@ -65,7 +65,7 @@
 <!-- Kettenhandschuhe -->
 <!-- WAR, PRI -->
 <Item type="gloves" subtype="chain_glv" name="chain gloves" size="medium">
-	<Image image="set:plate_glv.png image:full_image" />
+	<Image image="plate_glv.png" />
 	<RenderInfo name="gloves" />
 	<Attribute
 		level_requirement="11"
@@ -97,7 +97,7 @@
 <!-- Wildlederhandschuhe -->
 <!-- WAR, PRI, ARC, MAG -->
 <Item type="gloves" subtype="bucskn_glv" name="buckskin gloves" size="medium">
-	<Image image="set:leath_glv.png image:full_image" />
+	<Image image="leath_glv.png" />
 	<RenderInfo name="leatherGloves" />
 	<Attribute
 		level_requirement="13"
@@ -129,7 +129,7 @@
 <!-- Spinnenseidehandschuhe -->
 <!-- MAG, PRI -->
 <Item type="gloves" subtype="spider_glv" name="spidersilk gloves" size="medium">
-	<Image image="set:leath_glv.png image:full_image" />
+	<Image image="leath_glv.png" />
 	<RenderInfo name="leatherGloves" />
 	<Attribute
 		level_requirement="15"
@@ -161,7 +161,7 @@
 <!-- Shuetzenhandschuhe -->
 <!-- ARC -->
 <Item type="gloves" subtype="marksm_glv" name="marksman gloves" size="medium">
-	<Image image="set:leath_glv.png image:full_image" />
+	<Image image="leath_glv.png" />
 	<RenderInfo name="leatherGloves" />
 	<Attribute
 		level_requirement="16"
@@ -193,7 +193,7 @@
 <!-- Assassinenhandschuhe -->
 <!-- WAR, ARC -->
 <Item type="gloves" subtype="assass_glv" name="assassin gloves" size="medium">
-	<Image image="set:shark_glv.png image:full_image" />
+	<Image image="shark_glv.png" />
 	<RenderInfo name="sharkGloves" />
 	<Attribute
 		level_requirement="18"
@@ -225,7 +225,7 @@
 <!-- Haifischhandschuhe -->
 <!-- WAR, PRI -->
 <Item type="gloves" subtype="shark_glv" name="shark gloves" size="medium">
-	<Image image="set:shark_glv.png image:full_image" />
+	<Image image="shark_glv.png" />
 	<RenderInfo name="sharkGloves" />
 	<Attribute
 		level_requirement="23"

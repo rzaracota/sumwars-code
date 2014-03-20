@@ -15,14 +15,26 @@
 
 #include "OgreResourceGroupManager.h"
 #include "OgreTextureManager.h"
-#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
 #include "savegamelist.h"
 #include "stdstreamconv.h"
 
 #ifdef SUMWARS_BUILD_WITH_ONLINE_SERVICES
 #include "onlineservicesmanager.h"
 #endif
+
+// Utility for CEGUI cross-version compatibility
 #include "ceguiutility.h"
+
+// needed to be able to create the CEGUI renderer interface
+#ifdef CEGUI_07
+#include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
+#else
+#include "CEGUI/RendererModules/Ogre/Renderer.h"
+#endif
+
+// Sound operations helper.
+#include "soundhelper.h"
+
 
 SavegameList::SavegameList (Document* doc, const std::string& ceguiSkinName)
 
@@ -39,7 +51,7 @@ SavegameList::SavegameList (Document* doc, const std::string& ceguiSkinName)
 	// Rahmen fuer das Menue Savegame auswaehlen
 	CEGUI::FrameWindow* save_menu = (CEGUI::FrameWindow*) win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "FrameWindow"), "SavegameMenu");
 	save_menu->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim( 0.0f))); //0.0/0.8
-	save_menu->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_reldim( 1.0f))); //1.0/0.2
+	CEGUIUtility::setWidgetSizeRel (save_menu, 1.0f, 1.0f);
 	save_menu->setProperty("FrameEnabled","false");
 	save_menu->setProperty("TitlebarEnabled","false");
 	save_menu->setProperty("CloseButtonEnabled","false");
@@ -55,23 +67,27 @@ SavegameList::SavegameList (Document* doc, const std::string& ceguiSkinName)
 	
 	// Button neu
 	btn = static_cast<CEGUI::PushButton*>(win_mgr.createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "Button"), "NewCharButton"));
-	save_menu->addChildWindow(btn);
+	CEGUIUtility::addChildWidget (save_menu, btn);
 	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.1f), cegui_reldim( 0.85f)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(0.4f), cegui_reldim( 0.05f)));
+	CEGUIUtility::setWidgetSizeRel (btn, 0.4f, 0.05f);
 	btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onNewCharClicked, this));
+	btn->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&SavegameList::onItemButtonHover, this));
 	btn->setWantsMultiClickEvents(false);
 	btn->setInheritsAlpha(false);
+
 	if (btn->isPropertyPresent ("NormalImage"))
 	{
-		btn->setProperty("NormalImage", "set:MainMenu image:SPBtnNormal");
+		btn->setProperty("NormalImage", CEGUIUtility::getImageNameWithSkin("MainMenu","SPBtnNormal"));
 	}
+
 	if (btn->isPropertyPresent ("HoverImage"))
 	{
-		btn->setProperty("HoverImage", "set:MainMenu image:SPBtnHover");
+		btn->setProperty("HoverImage", CEGUIUtility::getImageNameWithSkin ("MainMenu", "SPBtnHover"));
 	}
+
 	if (btn->isPropertyPresent ("PushedImage"))
 	{
-		btn->setProperty("PushedImage", "set:MainMenu image:SPBtnPushed");
+		btn->setProperty("PushedImage", CEGUIUtility::getImageNameWithSkin ("MainMenu", "SPBtnPushed"));
 	}
 	
     m_numCurrentCharacterButtons = 0;
@@ -114,23 +130,6 @@ void SavegameList::update()
 	// iterieren ueber die Files
 	unsigned char* data;
 
-    for(int i = 0; i < m_numCurrentCharacterButtons; i++)
-    {
-		std::ostringstream s;
-		s << i;
-
-        CEGUI::Window* saveItem = 0;
-        try
-        {
-            saveItem = win_mgr.getWindow(s.str().append("SaveItemRoot"));
-			saveItem->hide();
-            //m_window->removeChildWindow(saveItem);
-        }
-        catch(CEGUI::UnknownObjectException&)
-        {
-        }
-    }
-
     m_numCurrentCharacterButtons = files->size();
 
 	float height = m_window->getPixelSize().d_width / 4.0f;
@@ -148,34 +147,85 @@ void SavegameList::update()
 		{
 			std::ostringstream s;
 			s << n;
+			bool needToLoadLayout = false;
 
 			CEGUI::Window* saveItem = 0;
+			CEGUI::String currentItemNumber (s.str ());
+			CEGUI::String layoutRootItemName (CEGUIUtility::getNameForWidget(s.str ().append ("SaveItemRoot")));
 			try
 			{
-				saveItem = win_mgr.getWindow(s.str().append("SaveItemRoot"));
+				SW_DEBUG ("Trying to get existing item %s", layoutRootItemName.c_str ());
+				saveItem = CEGUIUtility::getWindowForLoadedLayout(m_window, layoutRootItemName);
+				if (!saveItem)
+				{
+					SW_DEBUG ("Could not get item; will have to load");
+					needToLoadLayout = true;
+				}
+			}
+			catch(CEGUI::UnknownObjectException&)
+			{
+				needToLoadLayout = true;
+			}
+
+			if (needToLoadLayout)
+			{
+				SW_DEBUG ("Loading layout file [saveitem.layout]");
+				saveItem = (CEGUI::FrameWindow*) (CEGUIUtility::loadLayoutFromFile ("saveitem.layout"));
+				SW_DEBUG ("Loaded layout file [saveitem.layout]");
+				//saveItem = (CEGUI::Window*) win_mgr.loadWindowLayout("saveitem.layout", s.str());
+				m_currentSelected = saveItem;
+				saveItem->setName (layoutRootItemName);
+				saveItem->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onSavegameChosen, this));
+				saveItem->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&SavegameList::onItemButtonHover, this));
+				CEGUIUtility::addChildWidget(m_window, saveItem);
+				saveItem->show();
+
+				// Store the mapping entry;
+				m_fileSaveMapping [s.str().append("SaveItemRoot_DelChar")] = it->filename;
+				
+				// make buttons resolution independent
+				saveItem->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_absdim((height + 2.0f)*n)));
+				CEGUIUtility::setWidgetSize (saveItem, CEGUI::UVector2(cegui_reldim(1.0f), cegui_absdim(height)));
+
+				// Set child element properties.
+
+				// Augustin Preda, 2014.01.18: dropping support for CEGUI 0.7
+				CEGUI::String widgetName (CEGUIUtility::getNameForWidget("SaveItemRoot/SaveItemRoot_Name"));
+				CEGUI::Window *wndPtr = CEGUIUtility::getWindowForLoadedLayout(saveItem, widgetName);
+				if (wndPtr)
+				{
+					wndPtr->setMousePassThroughEnabled(true);
+				}
+
+				widgetName = CEGUIUtility::getNameForWidget("SaveItemRoot_DecriptionLabel");
+				wndPtr = CEGUIUtility::getWindowForLoadedLayout(saveItem, widgetName);
+				if (wndPtr)
+				{
+					wndPtr->setMousePassThroughEnabled(true);
+				}
+
+				widgetName = CEGUIUtility::getNameForWidget("SaveItemRoot_Avatar");
+				wndPtr = CEGUIUtility::getWindowForLoadedLayout(saveItem, widgetName);
+				if (wndPtr)
+				{
+					wndPtr->setMousePassThroughEnabled(true);
+				}
+
+				// Connect to some events.
+				widgetName = CEGUIUtility::getNameForWidget("SaveItemRoot_DelChar");
+				wndPtr = CEGUIUtility::getWindowForLoadedLayout(saveItem, widgetName);
+				if (wndPtr)
+				{
+					wndPtr->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onDeleteCharClicked, this));
+					wndPtr->subscribeEvent (CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&SavegameList::onItemButtonHover, this));
+				}
+			}
+			else
+			{
 				saveItem->show();
 				m_currentSelected = saveItem;
 				// Store the file name in a mapping, along with this widget name
 				m_fileSaveMapping [s.str().append("SaveItemRoot")] = it->filename;
-			}
-			catch(CEGUI::UnknownObjectException&)
-			{
-				saveItem = (CEGUI::Window*) win_mgr.loadWindowLayout("saveitem.layout", s.str());
-				m_currentSelected = saveItem;
-				saveItem->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onSavegameChosen, this));
-				m_window->addChildWindow(saveItem);
-				saveItem->show();
-
-				// Store the mapping entry;
-				m_fileSaveMapping [s.str().append("SaveItemRoot/DelChar")] = it->filename;
-				
-				// make buttons resolution independant
-				saveItem->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_absdim((height + 2.0f)*n)));
-				saveItem->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_absdim(height)));
-				saveItem->getChild(s.str().append("SaveItemRoot/Name"))->setMousePassThroughEnabled(true);
-				saveItem->getChild(s.str().append("SaveItemRoot/DecriptionLabel"))->setMousePassThroughEnabled(true);
-				saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setMousePassThroughEnabled(true);
-				saveItem->getChild(s.str().append("SaveItemRoot/DelChar"))->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onDeleteCharClicked, this));	
 			}
 			
 			// set the proper Image
@@ -191,15 +241,24 @@ void SavegameList::update()
 			std::string nameNoPath = texName.erase(0, pos+1).append(".png");
 			CEGUI::String imagesetName = (CEGUI::utf8*) (texName + "SaveItemRootAvatarImageset").c_str();
 			
-			CEGUI::String imageName = CEGUI::String("set:") + imagesetName + "  " + "image:MainMenuAvatarImg";
+			CEGUI::String imageName = CEGUIUtility::getImageNameWithSkin (imagesetName.c_str(), s.str ().append("MainMenuAvatarImg"));
 			
 			DEBUGX("imagename %s",imageName.c_str() );
 			DEBUGX("imagesetName %s", imagesetName.c_str());
 			
-			
-			if (CEGUI::ImagesetManager::getSingleton().isDefined(imagesetName))
+			if (CEGUIUtility::getImageManager ().isDefined(imagesetName))
 			{
-				saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setProperty("Image", imageName);
+				CEGUI::String widgetName = CEGUIUtility::getNameForWidget("SaveItemRoot_Avatar");
+				CEGUI::Window* wndPtr = CEGUIUtility::getWindowForLoadedLayout(saveItem, widgetName);
+				if (wndPtr)
+				{
+					SW_DEBUG ("Setting save button avatar for [%s] to [%s]", wndPtr->getNamePath ().c_str (), imageName.c_str ());
+					wndPtr->setProperty("Image", imageName);
+				}
+				else
+				{
+					WARNING ("Could not get widget named [%s]", widgetName.c_str ());
+				}
 			}
 			else
 			{
@@ -211,23 +270,66 @@ void SavegameList::update()
 #endif
 
 				// create CEGUI texture for the character thumbnail
-                if(Ogre::ResourceGroupManager::getSingleton().resourceExists(resGrp, nameNoPath))
+				if(Ogre::ResourceGroupManager::getSingleton().resourceExists(resGrp, nameNoPath))
 				{
+					CEGUI::String textureName (s.str ().append ("MainMenuAvatar_Tex"));
 					Ogre::TexturePtr tex = tmgr->load(texName, "Savegame");
 
-					CEGUI::Texture &ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(tex);
+#ifdef CEGUI_07
+					CEGUI::Texture &ceguiTex = static_cast<CEGUI::OgreRenderer*>
+						(CEGUI::System::getSingleton().getRenderer())->createTexture(tex);
 
-					CEGUI::Imageset& textureImageSet = CEGUI::ImagesetManager::getSingleton().create(imagesetName, ceguiTex);
+
+					CEGUI::Imageset& textureImageSet = CEGUIUtility::getImageManager ().create (imagesetName, ceguiTex);
 					textureImageSet.defineImage( "MainMenuAvatarImg",
-								CEGUI::Point( 0.0f, 0.0f ),
-								CEGUI::Size( ceguiTex.getSize().d_width, ceguiTex.getSize().d_height ),
-								CEGUI::Point( 0.0f, 0.0f ) );
-					
-					saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setProperty("Image", imageName);
+								CEGUIUtility::Vector2f (0.0f, 0.0f),
+								CEGUIUtility::Size (ceguiTex.getSize().d_width, ceguiTex.getSize().d_height),
+								CEGUIUtility::Vector2f (0.0f, 0.0f)
+								);
+#else
+					CEGUI::String imageName (s.str ().append ("MainMenuAvatarImg"));
+					if (! CEGUI::System::getSingleton ().getRenderer ()->isTextureDefined (textureName)
+						&& ! CEGUI::ImageManager::getSingleton().isDefined(imageName))
+					{
+						CEGUI::Texture &ceguiTex = static_cast<CEGUI::OgreRenderer*>
+							(CEGUI::System::getSingleton ().getRenderer ())->createTexture (textureName, tex);
+
+						CEGUI::OgreRenderer* rendererPtr = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer());
+						CEGUI::TextureTarget*   d_textureTarget;
+						CEGUI::BasicImage*      d_textureTargetImage;
+						d_textureTarget = rendererPtr->createTextureTarget();
+						d_textureTargetImage = static_cast<CEGUI::BasicImage*>(&CEGUI::ImageManager::getSingleton().create("BasicImage", imageName));
+						d_textureTargetImage->setTexture(&ceguiTex);
+						d_textureTargetImage->setArea(CEGUI::Rectf(0, 0, ceguiTex.getSize ().d_width,ceguiTex.getSize ().d_height));
+					}
+#endif
+					{
+#ifdef CEGUI_07
+						CEGUI::String widgetName = CEGUIUtility::getNameForWidget(s.str ().append ("SaveItemRoot_Avatar"));
+#else
+						CEGUI::String widgetName = CEGUIUtility::getNameForWidget("SaveItemRoot_Avatar");
+#endif
+						CEGUI::Window* wndPtr = CEGUIUtility::getWindowForLoadedLayout(saveItem, widgetName);
+						SW_DEBUG ("Setting save button avatar for [%s] to [%s]", widgetName.c_str (), imageName.c_str ());
+						if (wndPtr)
+						{
+							wndPtr->setProperty("Image", imageName);
+						}
+						else
+						{
+							WARNING("Could not get widget named [%s]", widgetName.c_str ());
+						}
+					}
 				}
 				else
 				{
-					saveItem->getChild(s.str().append("SaveItemRoot/Avatar"))->setProperty("Image","set:MainMenu image:Logo");
+#ifdef CEGUI_07
+					CEGUI::String widgetName = CEGUIUtility::getNameForWidget(s.str ().append ("SaveItemRoot_Avatar"));
+#else
+					CEGUI::String widgetName = CEGUIUtility::getNameForWidget("SaveItemRoot_Avatar");
+#endif
+					CEGUI::Window* wndPtr = CEGUIUtility::getWindowForLoadedLayout(saveItem, widgetName);
+					wndPtr->setProperty("Image", CEGUIUtility::getImageNameWithSkin ("MainMenu", "Logo"));
 				}
 			}
 
@@ -260,8 +362,31 @@ void SavegameList::update()
 
 			CEGUI::String temp;
 			temp.append((CEGUI::utf8*) gettext("Level")).append(" ").append(stream.str()).append(" ").append((CEGUI::utf8*) gettext(classname.c_str()));
-			saveItem->getChild(s.str().append("SaveItemRoot/Name"))->setText((CEGUI::utf8*) name.c_str());
-			saveItem->getChild(s.str().append("SaveItemRoot/DecriptionLabel"))->setText(temp);
+
+#ifdef CEGUI_07
+			CEGUI::String widgetName (CEGUIUtility::getNameForWidget(s.str ().append ("SaveItemRoot_Name")));
+#else
+			CEGUI::String widgetName (CEGUIUtility::getNameForWidget("SaveItemRoot_Name"));
+#endif
+
+			CEGUI::Window *wndPtr = CEGUIUtility::getWindowForLoadedLayout(saveItem, widgetName);
+			if (wndPtr)
+			{
+				wndPtr->setText ((CEGUI::utf8*) name.c_str ());
+			}
+
+#ifdef CEGUI_07
+			widgetName = CEGUIUtility::getNameForWidget(s.str ().append ("SaveItemRoot_DecriptionLabel"));
+#else
+			widgetName = CEGUIUtility::getNameForWidget("SaveItemRoot_DecriptionLabel");
+#endif
+			wndPtr = CEGUIUtility::getWindowForLoadedLayout (saveItem, widgetName);
+			if (wndPtr)
+			{
+				wndPtr->setText (temp);
+			}
+			//saveItem->getChild(s.str().append("SaveItemRoot_Name"))->setText((CEGUI::utf8*) name.c_str());
+			//saveItem->getChild(s.str().append("SaveItemRoot_DecriptionLabel"))->setText(temp);
 
 			n++;
 
@@ -273,9 +398,13 @@ void SavegameList::update()
         }
 	}
 	
-	CEGUI::PushButton *btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("NewCharButton"));
-	btn->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_absdim((height + 2.0f)*n+1)));
-	btn->setSize(CEGUI::UVector2(cegui_reldim(1.0f), cegui_absdim(height)));
+	CEGUI::String widgetName = CEGUIUtility::getNameForWidget("NewCharButton");
+	CEGUI::PushButton *btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_window, widgetName));
+	if (btn)
+	{
+		btn->setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_absdim((height + 2.0f)*n+1)));
+		CEGUIUtility::setWidgetSize (btn, CEGUI::UVector2(cegui_reldim(1.0f), cegui_absdim(height)));
+	}
 }
 
 void SavegameList::selectDefaultSavegame()
@@ -299,9 +428,28 @@ void SavegameList::updateTranslation()
 	/*btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("SelectSavegameButton"));
 	btn->setText((CEGUI::utf8*) gettext("Ok"));*/
 	
-	btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("NewCharButton"));
-	btn->setText((CEGUI::utf8*) gettext("Create"));
+	CEGUI::String widgetName (CEGUIUtility::getNameForWidget("NewCharButton"));
+	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_window, widgetName));
+
+	//btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow(widgetName));
+//	btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("NewCharButton"));
+	if (btn)
+	{
+		btn->setText((CEGUI::utf8*) gettext("Create"));
+	}
 }
+
+
+/**
+* \fn bool onItemButtonHover(const CEGUI::EventArgs& evt)
+* \brief Handle the hovering of a menu item
+*/
+bool SavegameList::onItemButtonHover(const CEGUI::EventArgs& evt)
+{
+	SoundHelper::playAmbientSoundGroup ("main_menu_hover_item");
+	return true;
+}
+
 
 bool SavegameList::onSavegameChosen(const CEGUI::EventArgs& evt)
 {
@@ -310,16 +458,21 @@ bool SavegameList::onSavegameChosen(const CEGUI::EventArgs& evt)
 	std::string prefix = we.window->getName().c_str();
 	std::string saveWidgetName = prefix;
 
+	SW_DEBUG ("A character save has been chosen (widget [%s]", prefix.c_str ());
 	prefix.erase(prefix.length()-12, prefix.length());
 
-	std::string name = we.window->getChild(prefix.append("SaveItemRoot/Name"))->getText().c_str();
+#ifdef CEGUI_07
+	std::string name = we.window->getChild(prefix.append("SaveItemRoot_Name"))->getText().c_str();
+#else
+	std::string name = we.window->getChild("SaveItemRoot_Name")->getText().c_str();
+#endif
 
 	// Get the file mapped to this widget: if we have a mapping, use the mapped name, otherwise, just add an extension and try to use the same file name as the char name.
 	std::map <std::string, std::string>::const_iterator it = m_fileSaveMapping.find (saveWidgetName);
 	if (it != m_fileSaveMapping.end ())
 	{
 		name = m_fileSaveMapping [saveWidgetName];
-		DEBUG ("got mapping for [%s] as [%s]", saveWidgetName.c_str (), name.c_str ());
+		SW_DEBUG ("got mapping for [%s] as [%s]", saveWidgetName.c_str (), name.c_str ());
 	}
 	else
 	{
@@ -329,6 +482,9 @@ bool SavegameList::onSavegameChosen(const CEGUI::EventArgs& evt)
 	m_document->setSaveFile(name.c_str());
 	DEBUGX("selected Savegame %s", sitm->m_data.c_str());
 
+	// Also play the click sound.
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
+
 	return true;
 }
 
@@ -336,7 +492,7 @@ bool SavegameList::onSavegameSelected(const CEGUI::EventArgs& evt)
 {
 	if (m_document->getSaveFile() != "")
 	{
-		DEBUG("savegame accepted %s", m_document->getSaveFile().c_str());
+		SW_DEBUG("savegame accepted %s", m_document->getSaveFile().c_str());
 		m_document->getGUIState()->m_shown_windows = Document::START_MENU;
 		m_document->setModified(Document::WINDOWS_MODIFIED);
 	}
@@ -345,6 +501,9 @@ bool SavegameList::onSavegameSelected(const CEGUI::EventArgs& evt)
 
 bool SavegameList::onNewCharClicked(const CEGUI::EventArgs& evt)
 {
+	// Also play the click sound.
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
+
 	m_document->onCreateNewCharButton();
 	return true;
 }
@@ -356,6 +515,9 @@ bool SavegameList::onDeleteCharClicked(const CEGUI::EventArgs& evt)
 	const CEGUI::WindowEventArgs& we = static_cast<const CEGUI::WindowEventArgs&>(evt);
 	onSavegameChosen(CEGUI::WindowEventArgs(we.window->getParent()));
 	
+	// Also play the notification sound.
+	SoundHelper::playAmbientSoundGroup ("main_menu_notification");
+
 	m_document->showQuestionDialog ();
 
 	return true;
@@ -363,6 +525,9 @@ bool SavegameList::onDeleteCharClicked(const CEGUI::EventArgs& evt)
 
 bool SavegameList::onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
 {
+	// Also play the click sound.
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
+
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	m_document->hideQuestionDialog ();
 
@@ -393,6 +558,7 @@ bool SavegameList::onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
 	// Clear the selection in the menu.
 	if(m_currentSelected != 0)
 	{
+		CEGUIUtility::removeChildWidget (m_currentSelected->getParent (), m_currentSelected);
 		CEGUI::WindowManager::getSingleton().destroyWindow(m_currentSelected);
 		m_currentSelected = 0;
 	}
@@ -404,6 +570,9 @@ bool SavegameList::onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
 
 bool SavegameList::onDeleteCharAbortClicked(const CEGUI::EventArgs& evt)
 {
+	// Also play the click sound.
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
+
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	m_document->hideQuestionDialog ();
 
@@ -412,6 +581,9 @@ bool SavegameList::onDeleteCharAbortClicked(const CEGUI::EventArgs& evt)
 
 bool SavegameList::onSavegameDoubleClick(const CEGUI::EventArgs& evt)
 {
+	// Also play the click sound.
+	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
+
 	onSavegameSelected(evt);
 	return true;
 }

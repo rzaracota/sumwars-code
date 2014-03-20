@@ -26,10 +26,13 @@
 #include "dialogue.h"
 #include "scriptobject.h"
 #include "options.h"
-#include "sound.h"
+//#include "sound.h"
 #include "sumwarshelper.h"
 #include <algorithm> 
 #include <cctype>
+
+// Helper for sound operations
+#include "soundhelper.h"
 
 #ifdef DEBUG_DATABASE
 		std::map<int, std::string> EventSystem::m_code_fragments;
@@ -382,7 +385,7 @@ int EventSystem::timedExecute(lua_State *L)
 		}
 		if (reg ==0)
 		{
-			DEBUG("region for timedExecute does not exist");
+			SW_DEBUG("region for timedExecute does not exist");
 			return 0;
 		}
 		
@@ -1474,7 +1477,7 @@ int EventSystem::getObjectAt(lua_State *L)
 		if (m_region !=0)
 		{
 			WorldObject* wo = m_region->getObjectAt(pos);
-			DEBUG("pos %f %f wo %p",pos.m_x, pos.m_y,wo);
+			SW_DEBUG("pos %f %f wo %p",pos.m_x, pos.m_y,wo);
 			if (wo !=0)
 			{
 				lua_pushnumber(L,wo->getId());
@@ -2510,7 +2513,7 @@ int EventSystem::setSpeakerAnimation(lua_State *L)
 			bool repeat = lua_toboolean(L, 4);
 			if (repeat)
 			{
-				DEBUG("repeat");
+				SW_DEBUG("repeat");
 				txt="#animation_r#";
 			}
 		}
@@ -2901,7 +2904,7 @@ int EventSystem::createEvent(lua_State *L)
 		}
 		if (reg ==0)
 		{
-			DEBUG("region for createEvent does not exist");
+			SW_DEBUG("region for createEvent does not exist");
 			return 0;
 		}
 		
@@ -3080,7 +3083,8 @@ int EventSystem::playSound(lua_State *L)
 	int argc = lua_gettop(L);
 	if (argc>=1 && lua_isstring(L,1))
 	{
-		SoundName sname = lua_tostring(L,1);
+		std::string sname = lua_tostring(L,1);
+		//SoundName sname = lua_tostring(L,1);
 		float volume = 1.0;
 		if (argc>=2 && lua_isnumber(L,2))
 		{
@@ -3095,7 +3099,13 @@ int EventSystem::playSound(lua_State *L)
 			ppos = &position;
 		}
 		
-		SoundSystem::playAmbientSound(sname, volume, ppos);
+		//SoundSystem::playAmbientSound(sname, volume, ppos);
+		float posX = position.m_x;
+		float posY = position.m_y;
+		float posZ = 0.0;
+		SoundHelper::playSoundGroupAtPosition (sname, posX, posY, posZ);
+
+
 	}
 	else
 	{

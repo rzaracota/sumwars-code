@@ -21,14 +21,14 @@
 
 /**
  * \class CharCreate
- * \brief Fenster Charakter erstellen
+ * \brief Create and control the character window
  */
 class CharCreate : public Window
 {
 	public:
 		/**
-	 * \fn CharCreate (Document* doc)
-	 * \brief Konstruktor
+		 * \fn CharCreate (Document* doc)
+		 * \brief Constructor.
 		 */
 		CharCreate (Document* doc, const std::string& ceguiSkinName);
 	
@@ -51,35 +51,46 @@ class CharCreate : public Window
 		void updateClassList();
 		
 	private:
-	/**
-	 * \fn bool onClassSelected(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Auswahl einer Klasse
-	 */
-	bool onClassSelected(const CEGUI::EventArgs& evt);
-	
-	/**
-	 * \fn bool onLookSelected(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Auswahl eines Aussehens
-	 */
-	bool onLookSelected(const CEGUI::EventArgs& evt);
-	
-	/**
-	 * \fn bool onButtonAbort(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Druck auf Knopf Abbrechen
-	 */
-	bool onButtonAbort(const CEGUI::EventArgs& evt);
-	
-	/**
-	 * \fn bool onButtonCharCreate(const CEGUI::EventArgs& evt)
-	 * \brief Behandelt Druck auf Knopf Charakter erstellen
-	 */
-	bool onButtonCharCreate(const CEGUI::EventArgs& evt);
+		/**
+		 * \fn bool onGUIItemClick (const CEGUI::EventArgs& evt)
+		 * \brief Handle the click of gui items.
+		 */
+		bool onGUIItemClick (const CEGUI::EventArgs& evt);
 
-	/**
-	 * \brief The name of the CEGUI skin to use.
-	 */
-	std::string m_ceguiSkinName;
+		/**
+		 * \fn bool onGUIItemHover(const CEGUI::EventArgs& evt)
+		 * \brief Handle the hovering of gui items.
+		 */
+		bool onGUIItemHover (const CEGUI::EventArgs& evt);
+		
+		/**
+		 * \fn bool onClassSelected(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Auswahl einer Klasse
+		 */
+		bool onClassSelected(const CEGUI::EventArgs& evt);
+	
+		/**
+		 * \fn bool onLookSelected(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Auswahl eines Aussehens
+		 */
+		bool onLookSelected(const CEGUI::EventArgs& evt);
+	
+		/**
+		 * \fn bool onButtonAbort(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Druck auf Knopf Abbrechen
+		 */
+		bool onButtonAbort(const CEGUI::EventArgs& evt);
+	
+		/**
+		 * \fn bool onButtonCharCreate(const CEGUI::EventArgs& evt)
+		 * \brief Behandelt Druck auf Knopf Charakter erstellen
+		 */
+		bool onButtonCharCreate(const CEGUI::EventArgs& evt);
 
+		/**
+		 * \brief The name of the CEGUI skin to use.
+		 */
+		std::string m_ceguiSkinName;
 };
 
 #endif // __SUMWARS_GUI_CHARCREATE_H__

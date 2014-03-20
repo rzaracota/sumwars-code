@@ -24,7 +24,7 @@
 
 #include <string>
 #include "graphicobjectrenderinfo.h"
-#include "sound.h"
+#include "soundobject.h"
 
 class GraphicObject;
 
@@ -449,7 +449,9 @@ class GraphicObject
 		/**
 		 * \brief List of attached Soundobjects
 		 */
-		std::map<std::string, SoundObject* > m_soundobjects;
+		//std::map <std::string, SoundObject*> m_soundobjects;
+		std::map <std::string, SoundObject> m_soundobjects;
+		//std::map<std::string, std::string> m_soundobjects;
 		
 		/**
 		 * \brief Dependency for all Subobjects

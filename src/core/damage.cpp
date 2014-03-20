@@ -250,7 +250,9 @@ std::string Damage::getDamageString(Damage::Usage usage, std::string rarityColor
 		if (m_max_damage[i]>0)
 		{
 			if (!first)
+			{
 				out_stream << "\n";
+			}
 
 			if (magic_mods && magic_mods->test(ItemFactory::DAMAGE_PHYS_MOD+ elemmap[i])) 
 				out_stream << rarityColor;
@@ -288,6 +290,7 @@ std::string Damage::getDamageString(Damage::Usage usage, std::string rarityColor
 				out_stream << defaultColor;
 		}
 	}
+
 	if (usage != NORMAL)
 	{
 		// Attackewert anzeigen
@@ -329,7 +332,7 @@ std::string Damage::getDamageString(Damage::Usage usage, std::string rarityColor
 				if (magic_mods && magic_mods->test(ItemFactory::POWER_MOD)) 
 					out_stream << rarityColor;
 				
-				out_stream <<gettext("Power")<<": "<<(int) m_power << "\n";
+				out_stream <<gettext("Power")<<": "<<(int) m_power;// << "\n";
 				
 				if (magic_mods && magic_mods->test(ItemFactory::POWER_MOD)) 
 					out_stream << defaultColor;
