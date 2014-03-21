@@ -1,0 +1,14 @@
+material sw_magic_streak
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture sw_magic_streak.png
+				colour_op modulate
+			}
+		}
+	}
+}

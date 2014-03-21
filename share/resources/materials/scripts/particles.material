@@ -1,0 +1,137 @@
+material lightning1
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            scene_blend add
+            depth_write off
+
+            texture_unit
+            {
+                texture lightning1.png
+                tex_address_mode clamp
+            }
+        }
+    }
+}
+
+material lightning2
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            scene_blend add
+            depth_write off
+
+            texture_unit
+            {
+                texture lightning2.png
+                tex_address_mode clamp
+            }
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------
+material lightning3
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            scene_blend add
+            depth_write off
+
+            texture_unit
+            {
+                texture lightning3.png
+                tex_address_mode clamp
+            }
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------
+material lightning4
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            scene_blend add
+            depth_write off
+
+            texture_unit
+            {
+                texture lightning4.png
+                tex_address_mode clamp
+            }
+        }
+    }
+}
+
+material lighting_beam
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            scene_blend add
+            depth_write off
+
+            texture_unit
+            {
+                texture pu_beam_02.png 1d
+                tex_address_mode clamp
+                filtering none
+            }
+        }
+    }
+}
+
+material heal_particle
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			scene_blend add
+			depth_write off
+			
+			texture_unit
+			{
+				texture heal.png
+                tex_address_mode clamp
+			}
+		}
+	}
+}
+
+
+material fire_particle
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			scene_blend add
+			depth_write off
+			
+			texture_unit
+			{
+				texture fire_particle.png
+				tex_address_mode clamp
+			}
+		}
+
+	}
+}
