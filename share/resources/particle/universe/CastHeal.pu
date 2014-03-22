@@ -4,21 +4,18 @@ system CastHeal
     technique 
     {
         material                                heal_particle
-        default_particle_width                  1.5
-        default_particle_height                 1.5
-        default_particle_depth                  1.5
+        default_particle_width                  0.3
+        default_particle_height                 0.3
+        default_particle_depth                  0.3
         renderer                                Billboard
         {
         }
         emitter                                 Point 
         {
-            emission_rate                       5
-            angle                               90
+            emission_rate                       40
+            angle                               25
             time_to_live                        2
             velocity                            3
-            particle_width                      1
-            particle_height                     1
-            particle_depth                      1
             start_colour_range                  1 0 0 1
             end_colour_range                    1 0.101961 0.101961 1
             colour                              1 0.0588235 0.0588235 1
