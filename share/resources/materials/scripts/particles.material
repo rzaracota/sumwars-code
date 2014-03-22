@@ -135,3 +135,45 @@ material fire_particle
 
 	}
 }
+
+material fire_particle_cloud
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			scene_blend add
+			depth_write off
+			
+			texture_unit
+			{
+				texture fire_cloud.png
+				tex_address_mode clamp
+			}
+		}
+
+	}
+}
+
+material SmokeSprite
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			scene_blend colour_blend
+			depth_write off
+
+			texture_unit smoke30frames.png
+			{
+				texture_alias smoke30frames.png
+				texture smoke30frames.png
+				max_anisotropy 16
+				filtering anisotropic anisotropic linear
+			}
+		}
+
+	}
+}
