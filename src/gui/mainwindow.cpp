@@ -842,8 +842,8 @@ bool MainWindow::setupGameScreen()
 		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
 		// Oberstes Fenster der Hauptmenue Schicht
-		m_game_screen =  win_mgr.createWindow("DefaultWindow", "GameScreen");
-        m_game_screen->setMousePassThroughEnabled(true);
+    m_game_screen =  win_mgr.createWindow("DefaultWindow", "GameScreen");
+    m_game_screen->setMousePassThroughEnabled(true);
 
 		// Kontrollleiste anlegen
 		setupControlPanel();

@@ -17,7 +17,13 @@
 #define GUITABS_H
 
 #include <contenttab.h>
+
+#ifdef CEGUI_07
 #include <CEGUI/CEGUIWindow.h>
+#else
+#include "CEGUI/Window.h"
+#endif
+
 #include "OgreLog.h"
 
 namespace Ogre

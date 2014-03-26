@@ -13,6 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
 
 #include "graphicmanager.h"
 
@@ -28,15 +30,15 @@ void FixedObjectEditor::init(CEGUI::Window* parent)
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::PushButton* detectCircleButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Prop/DetectCircleButton"));
-	CEGUI::PushButton* detectRectButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Prop/DetectRectButton"));
+	CEGUI::PushButton* detectCircleButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("FOTab/Prop/DetectCircleButton"));
+	CEGUI::PushButton* detectRectButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("FOTab/Prop/DetectRectButton"));
 	
-	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/RadiusSpinner"));
-	CEGUI::Spinner* widthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/WidthSpinner"));
-	CEGUI::Spinner* depthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/DepthSpinner"));
+	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("FOTab/Prop/RadiusSpinner"));
+	CEGUI::Spinner* widthSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("FOTab/Prop/WidthSpinner"));
+	CEGUI::Spinner* depthSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("FOTab/Prop/DepthSpinner"));
 	
-	CEGUI::RadioButton* circleButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/CircleCheckbox"));
-	CEGUI::RadioButton* rectButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/RectangleCheckbox"));
+	CEGUI::RadioButton* circleButton = static_cast<CEGUI::RadioButton*>(CEGUIUtility::getWindow("FOTab/Prop/CircleCheckbox"));
+	CEGUI::RadioButton* rectButton = static_cast<CEGUI::RadioButton*>(CEGUIUtility::getWindow("FOTab/Prop/RectangleCheckbox"));
 	
 	radiusSpinner->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&FixedObjectEditor::onFixedObjectModified, this));
 	widthSpinner->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&FixedObjectEditor::onFixedObjectModified, this));
@@ -49,7 +51,7 @@ void FixedObjectEditor::init(CEGUI::Window* parent)
 	detectCircleButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&FixedObjectEditor::onFixedObjectAutodetectSize, this));
 	detectRectButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&FixedObjectEditor::onFixedObjectAutodetectSize, this));
 	
-	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("FOTab/Prop/LayerSelector"));
+	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("FOTab/Prop/LayerSelector"));
 	layerSelector->addItem(new CEGUI::ListboxTextItem("Normal"));
 	layerSelector->addItem(new CEGUI::ListboxTextItem("Base"));
 	layerSelector->addItem(new CEGUI::ListboxTextItem("Air"));
@@ -57,16 +59,16 @@ void FixedObjectEditor::init(CEGUI::Window* parent)
 	
 	layerSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&FixedObjectEditor::onFixedObjectModified, this));
 	
-	CEGUI::PushButton* xmlsubmitButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/XML/SubmitButton"));
+	CEGUI::PushButton* xmlsubmitButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("FOTab/XML/SubmitButton"));
 	xmlsubmitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&FixedObjectEditor::onFixedObjectXMLModified, this));
 	
-	CEGUI::PushButton* createFOButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/XML/CreateButton"));
+	CEGUI::PushButton* createFOButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("FOTab/XML/CreateButton"));
 	createFOButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&FixedObjectEditor::onFixedObjectCreate, this));
 	
-	CEGUI::PushButton* delallFOButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Create/DelAllButton"));
+	CEGUI::PushButton* delallFOButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("FOTab/Create/DelAllButton"));
 	delallFOButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&FixedObjectEditor::onDelAllObjects, this));
 	
-	CEGUI::PushButton* getplayerButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Create/GetPlPosButton"));
+	CEGUI::PushButton* getplayerButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("FOTab/Create/GetPlPosButton"));
 	getplayerButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&FixedObjectEditor::onGetPlayerPosition, this));
 	
 	
@@ -108,7 +110,7 @@ void FixedObjectEditor::updateAllFixedObjectList()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::Combobox* copyfoSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("FOTab/Properties/CopyDataBox"));
+	CEGUI::Combobox* copyfoSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("FOTab/Properties/CopyDataBox"));
 	
 	// Fill list of all FixedObjects
 	const std::map<GameObject::Subtype, FixedObjectData*>& all_fo = ObjectFactory::getAllFixedObjectData();
@@ -118,7 +120,7 @@ void FixedObjectEditor::updateAllFixedObjectList()
 		copyfoSelector->addItem(new CEGUI::ListboxTextItem(it->first.c_str()));
 	}
 	
-	CEGUI::PushButton* copyfoButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Properties/CopyDataButton"));
+	CEGUI::PushButton* copyfoButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("FOTab/Properties/CopyDataButton"));
 	copyfoButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&FixedObjectEditor::onCopyData, this));
 }
 
@@ -133,7 +135,7 @@ void FixedObjectEditor::updateFixedObjectXML()
 	TiXmlPrinter printer;
 	m_fixed_object_xml.Accept(&printer);
 	
-	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.getWindow("FOTab/XML/FOXMLEditbox"));
+	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindow("FOTab/XML/FOXMLEditbox"));
 	editor->setText(printer.CStr());
 }
 
@@ -143,14 +145,14 @@ void FixedObjectEditor::updateFixedObjectEditor()
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("FOTab/Prop/LayerSelector"));
+	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("FOTab/Prop/LayerSelector"));
 	
-	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/RadiusSpinner"));
-	CEGUI::Spinner* widthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/WidthSpinner"));
-	CEGUI::Spinner* depthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/DepthSpinner"));
+	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("FOTab/Prop/RadiusSpinner"));
+	CEGUI::Spinner* widthSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("FOTab/Prop/WidthSpinner"));
+	CEGUI::Spinner* depthSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("FOTab/Prop/DepthSpinner"));
 	
-	CEGUI::RadioButton* circleButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/CircleCheckbox"));
-	CEGUI::RadioButton* rectButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/RectangleCheckbox"));
+	CEGUI::RadioButton* circleButton = static_cast<CEGUI::RadioButton*>(CEGUIUtility::getWindow("FOTab/Prop/CircleCheckbox"));
+	CEGUI::RadioButton* rectButton = static_cast<CEGUI::RadioButton*>(CEGUIUtility::getWindow("FOTab/Prop/RectangleCheckbox"));
 	
 	// adjust the spinner values
 	if (m_edited_fixed_object.m_shape.m_type == Shape::CIRCLE)
@@ -193,14 +195,14 @@ bool FixedObjectEditor::onFixedObjectModified(const CEGUI::EventArgs& evt)
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::RadioButton* CircleButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/CircleCheckbox"));
-	//CEGUI::RadioButton* RectButton = static_cast<CEGUI::RadioButton*>(win_mgr.getWindow("FOTab/Prop/RectangleCheckbox"));
+	CEGUI::RadioButton* CircleButton = static_cast<CEGUI::RadioButton*>(CEGUIUtility::getWindow("FOTab/Prop/CircleCheckbox"));
+	//CEGUI::RadioButton* RectButton = static_cast<CEGUI::RadioButton*>(CEGUIUtility::getWindow("FOTab/Prop/RectangleCheckbox"));
 	
-	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/RadiusSpinner"));
-	CEGUI::Spinner* widthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/WidthSpinner"));
-	CEGUI::Spinner* depthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/DepthSpinner"));
+	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("FOTab/Prop/RadiusSpinner"));
+	CEGUI::Spinner* widthSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("FOTab/Prop/WidthSpinner"));
+	CEGUI::Spinner* depthSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("FOTab/Prop/DepthSpinner"));
 	
-	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("FOTab/Prop/LayerSelector"));
+	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("FOTab/Prop/LayerSelector"));
 	
 	if (CircleButton->getSelectedButtonInGroup() == CircleButton)
 	{
@@ -236,12 +238,12 @@ bool FixedObjectEditor::onFixedObjectAutodetectSize(const CEGUI::EventArgs& evt)
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::PushButton* detectCircleButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Prop/DetectCircleButton"));
-	//CEGUI::PushButton* detectRectButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("FOTab/Prop/DetectRectButton"));
+	CEGUI::PushButton* detectCircleButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("FOTab/Prop/DetectCircleButton"));
+	//CEGUI::PushButton* detectRectButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("FOTab/Prop/DetectRectButton"));
 	
-	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/RadiusSpinner"));
-	CEGUI::Spinner* widthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/WidthSpinner"));
-	CEGUI::Spinner* depthSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("FOTab/Prop/DepthSpinner"));
+	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("FOTab/Prop/RadiusSpinner"));
+	CEGUI::Spinner* widthSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("FOTab/Prop/WidthSpinner"));
+	CEGUI::Spinner* depthSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("FOTab/Prop/DepthSpinner"));
 	
 	// calculate the size of the bounding box
 	RenderInfoEditor* ri_editor = dynamic_cast<RenderInfoEditor*>(ContentEditor::getSingleton().getComponent("RIEditor"));
@@ -274,7 +276,7 @@ bool FixedObjectEditor::onFixedObjectAutodetectSize(const CEGUI::EventArgs& evt)
 bool FixedObjectEditor::onFixedObjectXMLModified(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.getWindow("FOTab/XML/FOXMLEditbox"));
+	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindow("FOTab/XML/FOXMLEditbox"));
 	
 	// Parse the editor text to XML
 	// use temporary XML document for recovering from errors

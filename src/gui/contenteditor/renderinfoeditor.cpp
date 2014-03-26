@@ -22,6 +22,10 @@
 
 #include <OgreHardwarePixelBuffer.h>
 
+// Utility for CEGUI cross-version compatibility
+// TODO(Augustin Preda, 2014.03.25): remove when no longer needed.
+#include "ceguiutility.h"
+
 void RenderInfoEditor::init(CEGUI::Window* parent)
 {
 	ContentEditorTab::init(parent);
@@ -32,8 +36,8 @@ void RenderInfoEditor::init(CEGUI::Window* parent)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton(); 
 	
 	// add parts to the mesh selectors
-	CEGUI::Combobox* selector = static_cast<CEGUI::Combobox*>(CEGUI::WindowManager::getSingleton().getWindow("RITab/BM/MeshSelector"));
-	CEGUI::Combobox* subSelector = static_cast<CEGUI::Combobox*>(CEGUI::WindowManager::getSingleton().getWindow("RITab/SubMesh/Selector"));
+	CEGUI::Combobox* selector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/BM/MeshSelector"));
+	CEGUI::Combobox* subSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/SubMesh/Selector"));
 	
 	Ogre::FileInfoListPtr files;
 	Ogre::FileInfoList::iterator it;
@@ -61,7 +65,7 @@ void RenderInfoEditor::init(CEGUI::Window* parent)
 		}
 		catch (Ogre::Exception& e)
 		{
-			DEBUG("failed with exception %s",e.what());
+			SW_DEBUG("failed with exception %s",e.what());
 		}
 	}
 	
@@ -69,30 +73,30 @@ void RenderInfoEditor::init(CEGUI::Window* parent)
 	selector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&RenderInfoEditor::onMeshSelected, this));
 	subSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&RenderInfoEditor::onSubMeshSelected, this));
 	
-	CEGUI::PushButton* addSubmeshbutton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("RITab/SubMesh/AddSubMeshButton"));
+	CEGUI::PushButton* addSubmeshbutton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("RITab/SubMesh/AddSubMeshButton"));
 	addSubmeshbutton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&RenderInfoEditor::onSubMeshAdded, this));
 	
-	CEGUI::PushButton* submitRIXMLbutton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("RITab/XML/SubmitButton"));
+	CEGUI::PushButton* submitRIXMLbutton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("RITab/XML/SubmitButton"));
 	submitRIXMLbutton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&RenderInfoEditor::onRenderinfoXMLModified, this));
 	
-	CEGUI::PushButton* delSubmeshbutton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("RITab/SubMesh/DelSubMeshButton"));
+	CEGUI::PushButton* delSubmeshbutton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("RITab/SubMesh/DelSubMeshButton"));
 	delSubmeshbutton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&RenderInfoEditor::onSubMeshDeleted, this));
 	
 	
-	CEGUI::Spinner* rotXspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateX"));
-	CEGUI::Spinner* rotYspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateY"));
-	CEGUI::Spinner* rotZspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateZ"));
+	CEGUI::Spinner* rotXspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMRotateX"));
+	CEGUI::Spinner* rotYspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMRotateY"));
+	CEGUI::Spinner* rotZspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMRotateZ"));
 	
-	CEGUI::Spinner* posXspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetX"));
-	CEGUI::Spinner* posYspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetY"));
-	CEGUI::Spinner* posZspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetZ"));
+	CEGUI::Spinner* posXspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMOffsetX"));
+	CEGUI::Spinner* posYspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMOffsetY"));
+	CEGUI::Spinner* posZspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMOffsetZ"));
 	
-	CEGUI::Spinner* scalespinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMScale"));
+	CEGUI::Spinner* scalespinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMScale"));
 	
-	CEGUI::Combobox* objSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/EditSMSelector"));
-	CEGUI::Combobox* boneobjSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/AttachMeshSelector"));
-	CEGUI::Combobox* boneSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/BoneSelector"));
-	CEGUI::Checkbox* attachCheckbox = static_cast<CEGUI::Checkbox*>(win_mgr.getWindow("RITab/SM/AttachSMCheckbox"));
+	CEGUI::Combobox* objSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/SubMesh/EditSMSelector"));
+	CEGUI::Combobox* boneobjSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/SubMesh/AttachMeshSelector"));
+	CEGUI::Combobox* boneSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/SubMesh/BoneSelector"));
+  CEGUIUtility::ToggleButton* attachCheckbox = static_cast<CEGUIUtility::ToggleButton*>(CEGUIUtility::getWindow("RITab/SM/AttachSMCheckbox"));
 	
 	
 	objSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&RenderInfoEditor::onSubObjectSelected, this));
@@ -109,7 +113,7 @@ void RenderInfoEditor::init(CEGUI::Window* parent)
 	
 	boneobjSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&RenderInfoEditor::onSubMeshModified, this));
 	boneSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&RenderInfoEditor::onSubMeshModified, this));
-	attachCheckbox->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&RenderInfoEditor::onSubMeshModified, this));
+	attachCheckbox->subscribeEvent(CEGUIUtility::EventToggleButtonStateChanged(), CEGUI::Event::Subscriber(&RenderInfoEditor::onSubMeshModified, this));
 	
 	// init the internal data
 	TiXmlElement * renderinfo_root = new TiXmlElement("RenderInfo");  
@@ -246,20 +250,20 @@ void RenderInfoEditor::updateSubmeshEditor(std::string objectname, bool updateLi
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::Spinner* rotXspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateX"));
-	CEGUI::Spinner* rotYspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateY"));
-	CEGUI::Spinner* rotZspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateZ"));
+	CEGUI::Spinner* rotXspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMRotateX"));
+	CEGUI::Spinner* rotYspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMRotateY"));
+	CEGUI::Spinner* rotZspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMRotateZ"));
 	
-	CEGUI::Spinner* posXspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetX"));
-	CEGUI::Spinner* posYspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetY"));
-	CEGUI::Spinner* posZspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetZ"));
+	CEGUI::Spinner* posXspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMOffsetX"));
+	CEGUI::Spinner* posYspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMOffsetY"));
+	CEGUI::Spinner* posZspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMOffsetZ"));
 	
-	CEGUI::Spinner* scalespinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMScale"));
+	CEGUI::Spinner* scalespinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMScale"));
 	
-	CEGUI::Combobox* objSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/EditSMSelector"));
-	CEGUI::Combobox* boneobjSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/AttachMeshSelector"));
-	CEGUI::Combobox* boneSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/BoneSelector"));
-	CEGUI::Checkbox* attachCheckbox = static_cast<CEGUI::Checkbox*>(win_mgr.getWindow("RITab/SM/AttachSMCheckbox"));
+	CEGUI::Combobox* objSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/SubMesh/EditSMSelector"));
+	CEGUI::Combobox* boneobjSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/SubMesh/AttachMeshSelector"));
+	CEGUI::Combobox* boneSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/SubMesh/BoneSelector"));
+	CEGUIUtility::ToggleButton* attachCheckbox = static_cast<CEGUIUtility::ToggleButton*>(CEGUIUtility::getWindow("RITab/SM/AttachSMCheckbox"));
 	
 	if (objectname == "")
 		objectname = objSelector->getText().c_str();
@@ -427,8 +431,8 @@ void RenderInfoEditor::updateSubmeshEditor(std::string objectname, bool updateLi
 void RenderInfoEditor::updateBoneList()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Combobox* boneSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/BoneSelector"));
-	CEGUI::Combobox* boneobjSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/AttachMeshSelector"));
+	CEGUI::Combobox* boneSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/SubMesh/BoneSelector"));
+	CEGUI::Combobox* boneobjSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/SubMesh/AttachMeshSelector"));
 	
 	// get the selected object and the underlying RenderInfo data structure
 	std::string boneobj = boneobjSelector->getText().c_str();
@@ -502,7 +506,7 @@ void RenderInfoEditor::updateRenderInfoXML()
 	TiXmlPrinter printer;
 	m_renderinfo_xml.Accept(&printer);
 	
-	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.getWindow("RITab/XML/RIXMLEditbox"));
+	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindow("RITab/XML/RIXMLEditbox"));
 	editor->setText(printer.CStr());
 }
 
@@ -567,7 +571,7 @@ bool RenderInfoEditor::onSubObjectSelected(const CEGUI::EventArgs& evt)
 	{
 		// place the required mesh in the editor scene
 		std::string meshname = item->getText().c_str();
-		DEBUG("selected mesh %s",meshname.c_str());
+		SW_DEBUG("selected mesh %s",meshname.c_str());
 		
 		updateSubmeshEditor(meshname, false);
 	}
@@ -578,8 +582,8 @@ bool RenderInfoEditor::onSubObjectSelected(const CEGUI::EventArgs& evt)
 bool RenderInfoEditor::onSubMeshSelected(const CEGUI::EventArgs& evt)
 {
 	//CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Combobox* subSelector = static_cast<CEGUI::Combobox*>(CEGUI::WindowManager::getSingleton().getWindow("RITab/SubMesh/Selector"));
-	CEGUI::Editbox* subMeshNameBox = static_cast<CEGUI::Editbox*>(CEGUI::WindowManager::getSingleton().getWindow("RITab/SM/SMNameEditbox"));
+	CEGUI::Combobox* subSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/SubMesh/Selector"));
+	CEGUI::Editbox* subMeshNameBox = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow("RITab/SM/SMNameEditbox"));
 	
 	CEGUI::ListboxItem* item = subSelector->getSelectedItem();
 	if (item != 0)
@@ -600,8 +604,8 @@ bool RenderInfoEditor::onSubMeshSelected(const CEGUI::EventArgs& evt)
 bool RenderInfoEditor::onSubMeshAdded(const CEGUI::EventArgs& evt)
 {
 	//CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Combobox* subSelector = static_cast<CEGUI::Combobox*>(CEGUI::WindowManager::getSingleton().getWindow("RITab/SubMesh/Selector"));
-	CEGUI::Editbox* subMeshNameBox = static_cast<CEGUI::Editbox*>(CEGUI::WindowManager::getSingleton().getWindow("RITab/SM/SMNameEditbox"));
+	CEGUI::Combobox* subSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/SubMesh/Selector"));
+	CEGUI::Editbox* subMeshNameBox = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow("RITab/SM/SMNameEditbox"));
 	
 	CEGUI::ListboxItem* item = subSelector->getSelectedItem();
 	if (item != 0)
@@ -657,20 +661,20 @@ bool RenderInfoEditor::onSubMeshModified(const CEGUI::EventArgs& evt)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	// the the GUI parts
-	CEGUI::Spinner* rotXspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateX"));
-	CEGUI::Spinner* rotYspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateY"));
-	CEGUI::Spinner* rotZspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMRotateZ"));
+	CEGUI::Spinner* rotXspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMRotateX"));
+	CEGUI::Spinner* rotYspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMRotateY"));
+	CEGUI::Spinner* rotZspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMRotateZ"));
 	
-	CEGUI::Spinner* posXspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetX"));
-	CEGUI::Spinner* posYspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetY"));
-	CEGUI::Spinner* posZspinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMOffsetZ"));
+	CEGUI::Spinner* posXspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMOffsetX"));
+	CEGUI::Spinner* posYspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMOffsetY"));
+	CEGUI::Spinner* posZspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMOffsetZ"));
 	
-	CEGUI::Spinner* scalespinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("RITab/SM/SMScale"));
+	CEGUI::Spinner* scalespinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("RITab/SM/SMScale"));
 	
-	CEGUI::Combobox* objSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/EditSMSelector"));
-	CEGUI::Combobox* boneobjSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/AttachMeshSelector"));
-	CEGUI::Combobox* boneSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/BoneSelector"));
-	CEGUI::Checkbox* attachCheckbox = static_cast<CEGUI::Checkbox*>(win_mgr.getWindow("RITab/SM/AttachSMCheckbox"));
+	CEGUI::Combobox* objSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/SubMesh/EditSMSelector"));
+	CEGUI::Combobox* boneobjSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/SubMesh/AttachMeshSelector"));
+	CEGUI::Combobox* boneSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/SubMesh/BoneSelector"));
+	CEGUIUtility::ToggleButton* attachCheckbox = static_cast<CEGUIUtility::ToggleButton*>(CEGUIUtility::getWindow("RITab/SM/AttachSMCheckbox"));
 	
 	// get the MovableObjectInfo
 	CEGUI::ListboxItem* item = objSelector->getSelectedItem();
@@ -733,7 +737,7 @@ bool RenderInfoEditor::onSubMeshDeleted(const CEGUI::EventArgs& evt)
 		return true;
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::Combobox* objSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("RITab/SubMesh/EditSMSelector"));
+	CEGUI::Combobox* objSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("RITab/SubMesh/EditSMSelector"));
 	
 	// get the MovableObjectInfo
 	CEGUI::ListboxItem* item = objSelector->getSelectedItem();
@@ -754,7 +758,7 @@ bool RenderInfoEditor::onSubMeshDeleted(const CEGUI::EventArgs& evt)
 bool RenderInfoEditor::onRenderinfoXMLModified(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.getWindow("RITab/XML/RIXMLEditbox"));
+	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindow("RITab/XML/RIXMLEditbox"));
 	
 	// Parse the editor text to XML
 	// use temporary XML document for recovering from errors
@@ -811,8 +815,8 @@ bool RenderInfoEditor::onRenderinfoXMLModified(const CEGUI::EventArgs& evt)
 			pos++;
 		}
 		
-		editor->setCaratIndex(pos);
-		editor->ensureCaratIsVisible();
+		editor->setCaretIndex(pos);
+		editor->ensureCaretIsVisible();
 		editor->activate();
 	}
 	return true;

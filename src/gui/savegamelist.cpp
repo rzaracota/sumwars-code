@@ -172,8 +172,8 @@ void SavegameList::update()
 				SW_DEBUG ("Loading layout file [saveitem.layout]");
 				saveItem = (CEGUI::FrameWindow*) (CEGUIUtility::loadLayoutFromFile ("saveitem.layout"));
 				SW_DEBUG ("Loaded layout file [saveitem.layout]");
-				//saveItem = (CEGUI::Window*) win_mgr.loadWindowLayout("saveitem.layout", s.str());
-				m_currentSelected = saveItem;
+
+        m_currentSelected = saveItem;
 				saveItem->setName (layoutRootItemName);
 				saveItem->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onSavegameChosen, this));
 				saveItem->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&SavegameList::onItemButtonHover, this));

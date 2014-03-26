@@ -14,9 +14,10 @@
  */
 
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
 
 #include "monstereditor.h"
-
 
 
 #include "graphicmanager.h"
@@ -34,13 +35,13 @@ void MonsterEditor::init(CEGUI::Window* parent)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	
-	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("MonsterTab/Prop/RadiusSpinner"));
+	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("MonsterTab/Prop/RadiusSpinner"));
 	
 	
 	radiusSpinner->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&MonsterEditor::onMonsterModified, this));
 	
 	/*
-	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("MonsterTab/Prop/LayerSelector"));
+	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("MonsterTab/Prop/LayerSelector"));
 	layerSelector->addItem(new CEGUI::ListboxTextItem("Normal"));
 	layerSelector->addItem(new CEGUI::ListboxTextItem("Base"));
 	layerSelector->addItem(new CEGUI::ListboxTextItem("Air"));
@@ -49,19 +50,19 @@ void MonsterEditor::init(CEGUI::Window* parent)
 	layerSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&MonsterEditor::onMonsterModified, this));
 	*/
 	
-	CEGUI::PushButton* xmlsubmitButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("MonsterTab/XML/SubmitButton"));
+	CEGUI::PushButton* xmlsubmitButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("MonsterTab/XML/SubmitButton"));
 	xmlsubmitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MonsterEditor::onMonsterXMLModified, this));
 	
-	CEGUI::PushButton* createFOButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("MonsterTab/XML/CreateButton"));
+	CEGUI::PushButton* createFOButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("MonsterTab/XML/CreateButton"));
 	createFOButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MonsterEditor::onMonsterCreate, this));
 	
-	CEGUI::PushButton* delallFOButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("MonsterTab/Create/DelAllButton"));
+	CEGUI::PushButton* delallFOButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("MonsterTab/Create/DelAllButton"));
 	delallFOButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MonsterEditor::onDelAllObjects, this));
 	
-	CEGUI::PushButton* getplayerButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("MonsterTab/Create/GetPlPosButton"));
+	CEGUI::PushButton* getplayerButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("MonsterTab/Create/GetPlPosButton"));
 	getplayerButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MonsterEditor::onGetPlayerPosition, this));
 	
-	CEGUI::PushButton* copyfoButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("MonsterTab/Properties/CopyDataButton"));
+	CEGUI::PushButton* copyfoButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("MonsterTab/Properties/CopyDataButton"));
 	copyfoButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MonsterEditor::onCopyData, this));
 	
 	// init the internal data
@@ -102,7 +103,7 @@ void MonsterEditor::updateAllMonsterList()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::Combobox* copyfoSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("MonsterTab/Properties/CopyDataBox"));
+	CEGUI::Combobox* copyfoSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("MonsterTab/Properties/CopyDataBox"));
 	
 	// Fill list of all Monsters
 	const std::map<GameObject::Subtype, MonsterBasicData*>& all_fo = ObjectFactory::getAllMonsterData();
@@ -124,7 +125,7 @@ void MonsterEditor::updateMonsterXML()
 	TiXmlPrinter printer;
 	m_monster_xml.Accept(&printer);
 	
-	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.getWindow("MonsterTab/XML/MonsterXMLEditbox"));
+	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindow("MonsterTab/XML/MonsterXMLEditbox"));
 	editor->setText(printer.CStr());
 }
 
@@ -134,9 +135,9 @@ void MonsterEditor::updateMonsterEditor()
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	/*
-	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("MonsterTab/Prop/LayerSelector"));
+	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("MonsterTab/Prop/LayerSelector"));
 	*/
-	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("MonsterTab/Prop/RadiusSpinner"));
+	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("MonsterTab/Prop/RadiusSpinner"));
 	// adjust the spinner values
 	radiusSpinner->setCurrentValue(m_edited_monster.m_radius);
 	
@@ -170,9 +171,9 @@ bool MonsterEditor::onMonsterModified(const CEGUI::EventArgs& evt)
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("MonsterTab/Prop/RadiusSpinner"));
+	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("MonsterTab/Prop/RadiusSpinner"));
 	
-	//CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("MonsterTab/Prop/LayerSelector"));
+	//CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("MonsterTab/Prop/LayerSelector"));
 	
 	m_edited_monster.m_radius = radiusSpinner->getCurrentValue();
 	
@@ -197,7 +198,7 @@ bool MonsterEditor::onMonsterModified(const CEGUI::EventArgs& evt)
 bool MonsterEditor::onMonsterXMLModified(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.getWindow("MonsterTab/XML/MonsterXMLEditbox"));
+	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindow("MonsterTab/XML/MonsterXMLEditbox"));
 	
 	// Parse the editor text to XML
 	// use temporary XML document for recovering from errors

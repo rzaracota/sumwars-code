@@ -13,13 +13,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
+
 #include "benchmarktab.h"
 #include "sumwarshelper.h"
 
 #include "Ogre.h"
 #include "OgrePlatformInformation.h"
 
+#ifdef CEGUI_07
 #include "CEGUI/CEGUIWindowManager.h"
+#else
+#include "CEGUI/WindowManager.h"
+#endif
+
 #include "CEGUI/CEGUI.h"
 
 #include <eventsystem.h>
@@ -36,13 +44,13 @@ BenchmarkTab::BenchmarkTab(const CEGUI::String& type, const CEGUI::String& name)
 {
 	setText("Benchmark");
 
-	m_tabLayout = CEGUI::WindowManager::getSingleton().loadWindowLayout("benchmarktab.layout");
+	m_tabLayout = CEGUIUtility::loadLayoutFromFile ("benchmarktab.layout");
 	m_tabLayout->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
-	m_tabLayout->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
-	this->addChildWindow(m_tabLayout);
+  CEGUIUtility::setWidgetSizeRel (m_tabLayout, 1.0f, 1.0f);
+  CEGUIUtility::addChildWidget(this, m_tabLayout);
 
-	m_CapsBox = static_cast<CEGUI::MultiLineEditbox*>(m_tabLayout->getChild("BenchmarkTab/ResultsEditbox"));
-	m_startBenchmarkButton = static_cast<CEGUI::PushButton*>(m_tabLayout->getChild("BenchmarkTab/StartButton"));
+	m_CapsBox = static_cast<CEGUI::MultiLineEditbox*>(m_tabLayout->getChild("ResultsEditbox"));
+	m_startBenchmarkButton = static_cast<CEGUI::PushButton*>(m_tabLayout->getChild("StartButton"));
 	
 	m_ogreRoot = Ogre::Root::getSingletonPtr();
 

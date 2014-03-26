@@ -13,13 +13,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
+
 #include "luascripttab.h"
 #include "CEGUI/CEGUI.h"
 #include <iostream>
 #include "textfileeditwindow.h"
 
 #include "OgreString.h"
-#include "ceguiutility.h"
 
 using namespace CEGUI;
 
@@ -33,17 +35,17 @@ LuaScriptTab::LuaScriptTab (const CEGUI::String& type, const CEGUI::String& name
 	setText("Lua");
 	m_newFileCtr = 0;
 	
-	m_tabLayout = WindowManager::getSingleton().loadWindowLayout("luascripttab.layout");
+	m_tabLayout = CEGUIUtility::loadLayoutFromFile ("luascripttab.layout");
 	m_tabLayout->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
-	m_tabLayout->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
+  CEGUIUtility::setWidgetSizeRel (m_tabLayout, 1.0f, 1.0f);
 
-	m_fileTabControl = static_cast<TabControl*>(m_tabLayout->getChild("luaScriptTab/FileTabControl"));
-	m_filePathEditBox = static_cast<Editbox*>(m_tabLayout->getChild("luaScriptTab/fileDirectoryEditBox"));
+	m_fileTabControl = static_cast<TabControl*>(m_tabLayout->getChild("FileTabControl"));
+	m_filePathEditBox = static_cast<Editbox*>(m_tabLayout->getChild("FileDirectoryEditBox"));
 	m_filePathEditBox->setText("./data/lua/debug.lua");
 	
 	createMenu();
 	
-	this->addChildWindow(m_tabLayout);
+  CEGUIUtility::addChildWidget (this, m_tabLayout);
 
 	m_fileTabControl->subscribeEvent(TabControl::EventSelectionChanged, CEGUI::Event::Subscriber(&LuaScriptTab::handleTabChanged, this));
 	
@@ -54,7 +56,7 @@ void LuaScriptTab::update(OIS::Keyboard *keyboard, OIS::Mouse *mouse)
 
 }
 
-void LuaScriptTab::onSized(CEGUI::WindowEventArgs& e)
+void LuaScriptTab::onSized(CEGUI::ElementEventArgs& e)
 {
     CEGUI::Window::onSized(e);
 }
@@ -119,7 +121,8 @@ bool LuaScriptTab::handleNew(const CEGUI::EventArgs& e)
 	TextFileEditWindow *win = static_cast<TextFileEditWindow*>(WindowManager::getSingleton().createWindow("TextFileEditWindow"));
 	m_fileTabControl->addTab(win);
 	win->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
-	win->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
+  CEGUIUtility::setWidgetSizeRel (win, 1.0f, 1.0f);
+
 	win->handleTextChanged(CEGUI::EventArgs());
 	m_newFileCtr++;
 	return true;
@@ -165,7 +168,7 @@ bool LuaScriptTab::handleFileBrowserAcceptClicked(const CEGUI::EventArgs& e)
 		TextFileEditWindow *win = static_cast<TextFileEditWindow*>(WindowManager::getSingleton().createWindow("TextFileEditWindow"));
 		m_fileTabControl->addTab(win);
 		win->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
-		win->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
+    CEGUIUtility::setWidgetSizeRel (win, 1.0f, 1.0f);
 		win->load(m_fb->getCurrentSelected());
 		m_newFileCtr++;
 	}
@@ -188,13 +191,16 @@ bool LuaScriptTab::handleFileBrowserCancelClicked(const CEGUI::EventArgs& e)
 
 void LuaScriptTab::createMenu()
 {
-	m_menubar = static_cast<CEGUI::Menubar*>(m_tabLayout->getChild("luaScriptTab/MenuBar"));
+	m_menubar = static_cast<CEGUI::Menubar*>(m_tabLayout->getChild("MenuBar"));
 	
 	MenuItem *fileItem = static_cast<MenuItem*>(WindowManager::getSingleton().createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "MenuItem"), "luaScriptTab/MenuBar/FileItem"));
 	fileItem->setText("File");
 	m_menubar->addItem(fileItem);
 	
-	PopupMenu *filePopup = static_cast<PopupMenu*>(WindowManager::getSingleton().createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "PopupMenu"), "luaScriptTab/MenuBar/FilePopup"));
+	PopupMenu *filePopup = static_cast<PopupMenu*>(
+      WindowManager::getSingleton().createWindow(
+          CEGUIUtility::getWidgetWithSkin(m_ceguiSkinName, "PopupMenu"), 
+          "luaScriptTab/MenuBar/FilePopup"));
 	
 	MenuItem *it = static_cast<MenuItem*>(WindowManager::getSingleton().createWindow (CEGUIUtility::getWidgetWithSkin (m_ceguiSkinName, "MenuItem"), "luaScriptTab/MenuBar/FileItemNew"));
 	it->setText("New");

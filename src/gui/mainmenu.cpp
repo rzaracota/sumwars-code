@@ -172,8 +172,8 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
     btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("LoginButton"));
     btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onLoginToOnlineService, this));
 
-    CEGUI::FrameWindow* login_dialog = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "LoginDialog.layout" );
-    m_window->addChildWindow(login_dialog);
+    CEGUI::FrameWindow* login_dialog = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::loadLayoutFromFile ("LoginDialog.layout"));
+    CEGUIUtility::addChildWidget (m_window, login_dialog);
 	login_dialog->hide();
 
     btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("LoginDialog/LoginButton"));

@@ -13,7 +13,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
+
+#ifdef CEGUI_07
 #include "CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h"
+#else
+#include "CEGUI/RendererModules/Ogre/Renderer.h"
+#endif
+
 #include <OgreHardwarePixelBuffer.h>
 #include <OgreMeshManager.h>
 
@@ -29,28 +37,28 @@ void ItemEditor::init(CEGUI::Window* parent)
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::PushButton* xmlsubmitButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ItemTab/XML/SubmitButton"));
+	CEGUI::PushButton* xmlsubmitButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("ItemTab/XML/SubmitButton"));
 	xmlsubmitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ItemEditor::onItemXMLModified, this));
 	
-	CEGUI::PushButton* createDropButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ItemTab/Create/CreateDropButton"));
+	CEGUI::PushButton* createDropButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("ItemTab/Create/CreateDropButton"));
 	createDropButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ItemEditor::onItemCreateDrop, this));
 	
-	CEGUI::PushButton* createInvButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ItemTab/Create/CreateInventoryButton"));
+	CEGUI::PushButton* createInvButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("ItemTab/Create/CreateInventoryButton"));
 	createInvButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ItemEditor::onItemCreateInInventory, this));
 	
-	CEGUI::Spinner* enchantMin =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/General/EnchantMinSpinner"));
+	CEGUI::Spinner* enchantMin =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/General/EnchantMinSpinner"));
 	enchantMin->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	
-	CEGUI::Spinner* enchantMax =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/General/EnchantMaxSpinner"));
+	CEGUI::Spinner* enchantMax =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/General/EnchantMaxSpinner"));
 	enchantMax->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	
-	CEGUI::Spinner* price =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/General/PriceSpinner"));
+	CEGUI::Spinner* price =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/General/PriceSpinner"));
 	price->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	
-	CEGUI::Editbox* nameBox = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("ItemTab/General/NameBox"));
+	CEGUI::Editbox* nameBox = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow("ItemTab/General/NameBox"));
 	nameBox->subscribeEvent(CEGUI::Editbox::EventTextChanged, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	
-	CEGUI::Combobox* typeSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("ItemTab/Properties/TypeBox"));
+	CEGUI::Combobox* typeSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("ItemTab/Properties/TypeBox"));
 	typeSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	typeSelector->addItem(new CEGUI::ListboxTextItem("Armor"));
 	typeSelector->addItem(new CEGUI::ListboxTextItem("Weapon"));
@@ -64,7 +72,7 @@ void ItemEditor::init(CEGUI::Window* parent)
 	typeSelector->setSelection(0,0);
 	
 	
-	CEGUI::Combobox* sizeSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("ItemTab/Properties/SizeBox"));
+	CEGUI::Combobox* sizeSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("ItemTab/Properties/SizeBox"));
 	sizeSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	sizeSelector->addItem(new CEGUI::ListboxTextItem("Big"));
 	sizeSelector->addItem(new CEGUI::ListboxTextItem("Medium"));
@@ -72,93 +80,93 @@ void ItemEditor::init(CEGUI::Window* parent)
 	sizeSelector->setText("Big");
 	sizeSelector->setSelection(0,0);
 	
-	CEGUI::PushButton* copyfoButton = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("ItemTab/Properties/CopyDataButton"));
+	CEGUI::PushButton* copyfoButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("ItemTab/Properties/CopyDataButton"));
 	copyfoButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ItemEditor::onCopyData, this));
 	
 	// wire weaponattr tab
-	CEGUI::Editbox* wtype = static_cast<CEGUI::Editbox*>(win_mgr.getWindow("ItemTab/Weapon/TypeBox"));
+	CEGUI::Editbox* wtype = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow("ItemTab/Weapon/TypeBox"));
 	wtype->subscribeEvent(CEGUI::Editbox::EventTextChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* physMin =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/PhysMinSpinner"));
+	CEGUI::Spinner* physMin =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/PhysMinSpinner"));
 	physMin->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 
-	CEGUI::Spinner* physMax =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/PhysMaxSpinner"));
+	CEGUI::Spinner* physMax =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/PhysMaxSpinner"));
 	physMax->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* physMult =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/PhysMultSpinner"));
+	CEGUI::Spinner* physMult =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/PhysMultSpinner"));
 	physMult->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 
-	CEGUI::Spinner* fireMin =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/FireMinSpinner"));
+	CEGUI::Spinner* fireMin =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/FireMinSpinner"));
 	fireMin->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 
-	CEGUI::Spinner* fireMax =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/FireMaxSpinner"));
+	CEGUI::Spinner* fireMax =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/FireMaxSpinner"));
 	fireMax->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	
-	CEGUI::Spinner* fireMult =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/FireMultSpinner"));
+	CEGUI::Spinner* fireMult =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/FireMultSpinner"));
 	fireMult->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 
-	CEGUI::Spinner* iceMin =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/IceMinSpinner"));
+	CEGUI::Spinner* iceMin =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/IceMinSpinner"));
 	iceMin->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 
-	CEGUI::Spinner* iceMax =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/IceMaxSpinner"));
+	CEGUI::Spinner* iceMax =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/IceMaxSpinner"));
 	iceMax->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* iceMult =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/IceMultSpinner"));
+	CEGUI::Spinner* iceMult =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/IceMultSpinner"));
 	iceMult->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 
-	CEGUI::Spinner* airMin =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/AirMinSpinner"));
+	CEGUI::Spinner* airMin =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/AirMinSpinner"));
 	airMin->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 
-	CEGUI::Spinner* airMax =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/AirMaxSpinner"));
+	CEGUI::Spinner* airMax =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/AirMaxSpinner"));
 	airMax->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* airMult =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/AirMultSpinner"));
+	CEGUI::Spinner* airMult =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/AirMultSpinner"));
 	airMult->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* precision =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/PrecisionSpinner"));
+	CEGUI::Spinner* precision =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/PrecisionSpinner"));
 	precision->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* power =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/PowerSpinner"));
+	CEGUI::Spinner* power =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/PowerSpinner"));
 	power->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* range =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/RangeSpinner"));
+	CEGUI::Spinner* range =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/RangeSpinner"));
 	range->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* speed =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/SpeedSpinner"));
+	CEGUI::Spinner* speed =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/SpeedSpinner"));
 	speed->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* critperc =  static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Weapon/CritPercentSpinner"));
+	CEGUI::Spinner* critperc =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/CritPercentSpinner"));
 	critperc->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Checkbox* twohanded = static_cast<CEGUI::Checkbox*>(win_mgr.getWindow("ItemTab/Weapon/TwohandedCheckbox"));
-	twohanded->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
+  CEGUIUtility::ToggleButton* twohanded = static_cast<CEGUIUtility::ToggleButton*>(CEGUIUtility::getWindow("ItemTab/Weapon/TwohandedCheckbox"));
+	twohanded->subscribeEvent(CEGUIUtility::EventToggleButtonStateChanged(), CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
 	
 	// Wire the consume tab
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/HealthSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/BlindSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/PoisonedSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/BerserkSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/ConfusedSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/MuteSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/ParalyzedSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/FrozenSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Consume/BurningSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/HealthSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/BlindSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/PoisonedSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/BerserkSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/ConfusedSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/MuteSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/ParalyzedSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/FrozenSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/BurningSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
 	
 	// wire the equip tab
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/HealthSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/StrengthSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/DexteritySpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/MagicPowerSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/WillpowerSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/PhysResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/FireResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/IceResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/AirResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/ArmorSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/BlockSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/AttackSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(win_mgr.getWindow("ItemTab/Equip/PowerSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/HealthSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/StrengthSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/DexteritySpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/MagicPowerSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/WillpowerSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/PhysResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/FireResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/IceResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/AirResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/ArmorSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/BlockSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/AttackSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/PowerSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
 	
 	
 	// init the internal data
@@ -218,7 +226,7 @@ void ItemEditor::updateAllItemList()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::Combobox* copyItemSelector = static_cast<CEGUI::Combobox*>(win_mgr.getWindow("ItemTab/Properties/CopyDataBox"));
+	CEGUI::Combobox* copyItemSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("ItemTab/Properties/CopyDataBox"));
 	
 	// Fill list of all FixedObjects
 	const std::map<Item::Subtype,ItemBasicData*>& all_items = ItemFactory::getAllItemData();
@@ -402,7 +410,7 @@ bool ItemEditor::onEquipEffectsModified(const CEGUI::EventArgs& evt)
 bool ItemEditor::onItemXMLModified(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.getWindow("ItemTab/XML/ItemXMLEditbox"));
+	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindow("ItemTab/XML/ItemXMLEditbox"));
 	
 	// Parse the editor text to XML
 	// use temporary XML document for recovering from errors
@@ -491,8 +499,10 @@ Item* ItemEditor::createItem()
 	item_view->setOverlaysEnabled (false);
 	item_view->setBackgroundColour(Ogre::ColourValue(0,0,0,1.0) );
 
+#ifdef CEGUI_07
 	// create a CEGUI Image from the Texture
-    CEGUI::Texture& item_ceguiTex = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer())->createTexture(item_texture);
+  CEGUI::Texture& item_ceguiTex = static_cast<CEGUI::OgreRenderer*>(
+      CEGUI::System::getSingleton().getRenderer())->createTexture(item_texture);
     
 	CEGUI::Imageset& item_textureImageSet = CEGUI::ImagesetManager::getSingleton().create(std::string("item_imageset_") + idstream.str(), item_ceguiTex);
 
@@ -500,10 +510,29 @@ Item* ItemEditor::createItem()
 			CEGUI::Point( 0.0f, 0.0f ),
 			CEGUI::Size( item_ceguiTex.getSize().d_width, item_ceguiTex.getSize().d_height ),
 			CEGUI::Point( 0.0f, 0.0f ) );
-	
+#else
+  
+  CEGUI::String imageName ("item_img_"+ idstream.str());
+  CEGUI::String textureName ("ItemEditorTexture");
+
+	if (! CEGUI::System::getSingleton ().getRenderer ()->isTextureDefined (textureName)
+		&& ! CEGUI::ImageManager::getSingleton().isDefined(imageName))
+	{
+		CEGUI::Texture &item_ceguiTex = static_cast<CEGUI::OgreRenderer*>
+			  (CEGUI::System::getSingleton ().getRenderer ())->createTexture (textureName, item_texture);
+
+		CEGUI::OgreRenderer* rendererPtr = static_cast<CEGUI::OgreRenderer*>(CEGUI::System::getSingleton().getRenderer());
+		CEGUI::TextureTarget*   d_textureTarget;
+		CEGUI::BasicImage*      d_textureTargetImage;
+		d_textureTarget = rendererPtr->createTextureTarget();
+		d_textureTargetImage = static_cast<CEGUI::BasicImage*>(&CEGUI::ImageManager::getSingleton().create("BasicImage", imageName));
+		d_textureTargetImage->setTexture(&item_ceguiTex);
+		d_textureTargetImage->setArea(CEGUI::Rectf(0, 0, item_ceguiTex.getSize ().d_width, item_ceguiTex.getSize ().d_height));
+	}
+#endif
 	item_rt->update();
 	
-	CEGUI::Window* label = win_mgr.getWindow("ItemTab/BM/itemPreview");
+	CEGUI::Window* label = CEGUIUtility::getWindow("ItemTab/BM/itemPreview");
 
 	// reparse and update the FixedObject Data
 	// create a unique renderinfo (to avoid that the object is modified by the editor after creation)
@@ -556,11 +585,16 @@ bool ItemEditor::onItemCreateDrop(const CEGUI::EventArgs& evt)
 {
 	World* world = World::getWorld();
 	if (world == 0)
+  {
 		return true;
+  }
 	
 	WorldObject* player = world->getLocalPlayer();
 	if (player == 0)
+  {
 		return true;
+  }
+
 	Region* region = player->getRegion();
 	
 	// if the position is set to default, use the player position
@@ -569,7 +603,10 @@ bool ItemEditor::onItemCreateDrop(const CEGUI::EventArgs& evt)
 	// create the object
 	Item* item = createItem();
 	if (item == 0)
+  {
 		return true;
+  }
+
 	region->dropItem(item,pos);
 	
 	return true;
@@ -579,15 +616,22 @@ bool ItemEditor::onItemCreateInInventory(const CEGUI::EventArgs& evt)
 {
 	World* world = World::getWorld();
 	if (world == 0)
+  {
 		return true;
+  }
 	
 	WorldObject* player = world->getLocalPlayer();
 	if (player == 0)
+  {
 		return true;
+  }
 
 	Item* item = createItem();
 	if (item == 0)
+  {
 		return true;
+  }
+
 	static_cast<Player*>(player)->insertItem(item);
 	return true;
 }
@@ -596,12 +640,16 @@ bool ItemEditor::onCopyData(const CEGUI::EventArgs& evt)
 {
 	std::string objname	= getComboboxSelection("ItemTab/Properties/CopyDataBox", "");
 	if (objname == "")
+  {
 		return true;
+  }
 	
 	ItemBasicData* data = ItemFactory::getItemBasicData(objname);
 
 	if (data == 0)
+  {
 		return true;
+  }
 	
 	data->m_subtype = "EditorItem";
 
@@ -624,7 +672,7 @@ void ItemEditor::updateItemXML()
 	TiXmlPrinter printer;
 	m_item_xml.Accept(&printer);
 	
-	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.getWindow("ItemTab/XML/ItemXMLEditbox"));
+	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindow("ItemTab/XML/ItemXMLEditbox"));
 	editor->setText(printer.CStr());
 }
 

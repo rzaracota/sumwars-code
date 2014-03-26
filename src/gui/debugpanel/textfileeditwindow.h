@@ -16,8 +16,14 @@
 #ifndef TEXTFILEEDITWINDOW_H
 #define TEXTFILEEDITWINDOW_H
 
+#ifdef CEGUI_07
 #include <CEGUI/CEGUIWindow.h>
 #include <CEGUI/CEGUIEvent.h>
+#else
+#include "CEGUI/Window.h"
+#include "CEGUI/Event.h"
+#endif
+
 #include "filebrowser/filebrowser.h"
 
 #include "boost/filesystem/path.hpp"
