@@ -516,7 +516,7 @@
                         </Window>
                     </Window>
                 </Window>
-            </Window>			
+            </Window>            
             <Window type="DefaultWindow" name="ItemTab" >
                 <Property name="Text" value="Item" />
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
@@ -585,7 +585,7 @@
                         </Window>
                         <Window type="TaharezLook/Spinner" name="PriceSpinner" >
                             <Property name="Area" value="{{0.2,0},{0.25,0},{0.65,0},{0.3,0}}" />
-							<Property name="StepSize" value="50" />
+                            <Property name="StepSize" value="50" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="10000" />
                             <Property name="MinimumValue" value="0" />
@@ -624,720 +624,720 @@
 </Property>
                         <Property name="Visible" value="False" />
                         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-						
-						
-						<Window type="TaharezLook/StaticText" name="HealthLabel" >
+                        
+                        
+                        <Window type="TaharezLook/StaticText" name="HealthLabel" >
                             <Property name="Text" value="Health:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.03,0},{0.2,0},{0.08,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="HealthSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="HealthSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="10000" />
                             <Property name="MinimumValue" value="0" />
                            <Property name="Area" value="{{0.2,0},{0.03,0},{0.40,0},{0.08,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="AttrLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="AttrLabel" >
                             <Property name="Text" value="Attribute:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.10,0},{0.2,0},{0.16,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="StrengthLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="StrengthLabel" >
                             <Property name="Text" value="Strength:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.17,0},{0.2,0},{0.23,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="StrengthSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="StrengthSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000" />
                             <Property name="MinimumValue" value="0" />
                            <Property name="Area" value="{{0.2,0},{0.17,0},{0.40,0},{0.23,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="DexterityLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="DexterityLabel" >
                             <Property name="Text" value="Dexterity:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.17,0},{0.7,0},{0.23,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="DexteritySpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="DexteritySpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000" />
                             <Property name="MinimumValue" value="0" />
                            <Property name="Area" value="{{0.7,0},{0.17,0},{0.90,0},{0.23,0}}" />
                         </Window>
-						
-						
-						<Window type="TaharezLook/StaticText" name="MagicPowerLabel" >
+                        
+                        
+                        <Window type="TaharezLook/StaticText" name="MagicPowerLabel" >
                             <Property name="Text" value="Magic Power:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.24,0},{0.2,0},{0.30,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="MagicPowerSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="MagicPowerSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000" />
                             <Property name="MinimumValue" value="0" />
                            <Property name="Area" value="{{0.2,0},{0.24,0},{0.40,0},{0.30,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="WillpowerLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="WillpowerLabel" >
                             <Property name="Text" value="Willpower:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.24,0},{0.7,0},{0.30,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="WillpowerSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="WillpowerSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000" />
                             <Property name="MinimumValue" value="0" />
                            <Property name="Area" value="{{0.7,0},{0.24,0},{0.90,0},{0.30,0}}" />
                         </Window>
-						
-						
-						<Window type="TaharezLook/StaticText" name="ResistancesLabel" >
+                        
+                        
+                        <Window type="TaharezLook/StaticText" name="ResistancesLabel" >
                             <Property name="Text" value="Resistances:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.32,0},{0.4,0},{0.38,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="PhysResLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="PhysResLabel" >
                             <Property name="Text" value="Physical:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.39,0},{0.2,0},{0.45,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="PhysResSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="PhysResSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="100" />
                             <Property name="MinimumValue" value="0" />
                            <Property name="Area" value="{{0.2,0},{0.39,0},{0.40,0},{0.45,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="FireResLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="FireResLabel" >
                             <Property name="Text" value="Fire:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.39,0},{0.7,0},{0.45,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="FireResSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="FireResSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="100" />
                             <Property name="MinimumValue" value="0" />
                            <Property name="Area" value="{{0.7,0},{0.39,0},{0.90,0},{0.45,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="IceResLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="IceResLabel" >
                             <Property name="Text" value="Ice:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.46,0},{0.2,0},{0.52,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="IceResSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="IceResSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="100" />
                             <Property name="MinimumValue" value="0" />
                            <Property name="Area" value="{{0.2,0},{0.46,0},{0.40,0},{0.52,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="AirResLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="AirResLabel" >
                             <Property name="Text" value="Air:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.46,0},{0.7,0},{0.52,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="AirResSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="AirResSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="100" />
                             <Property name="MinimumValue" value="0" />
                            <Property name="Area" value="{{0.7,0},{0.46,0},{0.90,0},{0.52,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="OtherLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="OtherLabel" >
                             <Property name="Text" value="Other:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.54,0},{0.2,0},{0.60,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="ArmorLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="ArmorLabel" >
                             <Property name="Text" value="Armor:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.61,0},{0.2,0},{0.67,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="ArmorSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="ArmorSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000" />
                             <Property name="MinimumValue" value="0" />
                            <Property name="Area" value="{{0.2,0},{0.61,0},{0.40,0},{0.67,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="BlockLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="BlockLabel" >
                             <Property name="Text" value="Block:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.61,0},{0.7,0},{0.67,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="BlockSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="BlockSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000" />
                             <Property name="MinimumValue" value="0" />
                            <Property name="Area" value="{{0.7,0},{0.61,0},{0.90,0},{0.67,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="AttackLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="AttackLabel" >
                             <Property name="Text" value="Precision:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.68,0},{0.2,0},{0.74,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="AttackSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="AttackSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000" />
                             <Property name="MinimumValue" value="0" />
                            <Property name="Area" value="{{0.2,0},{0.68,0},{0.40,0},{0.74,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="PowerLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="PowerLabel" >
                             <Property name="Text" value="Power:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.68,0},{0.7,0},{0.74,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="PowerSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="PowerSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000" />
                             <Property name="MinimumValue" value="0" />
                            <Property name="Area" value="{{0.7,0},{0.68,0},{0.90,0},{0.74,0}}" />
                         </Window>
-						
+                        
                     </Window>
                     <Window type="DefaultWindow" name="Weapon" >
                         <Property name="Text" >Weapon
 </Property>
                         <Property name="Visible" value="False" />
                         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-						
-						<Window type="TaharezLook/StaticText" name="TypeLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="TypeLabel" >
                             <Property name="Text" value="Type:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.03,0},{0.2,0},{0.08,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Editbox" name="TypeBox" >
+                        
+                        <Window type="TaharezLook/Editbox" name="TypeBox" >
                             <Property name="MaxTextLength" value="1073741823" />
                             <Property name="Area" value="{{0.2,0},{0.03,0},{0.65,0},{0.08,0}}" />
                             <Property name="TextParsingEnabled" value="False" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="DamageLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="DamageLabel" >
                             <Property name="Text" value="Damage:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.10,0},{0.2,0},{0.16,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="PhysLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="PhysLabel" >
                             <Property name="Text" value="Physical:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.17,0},{0.2,0},{0.23,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="PhysMinSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="PhysMinSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="32767" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.22,0},{0.17,0},{0.42,0},{0.23,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="PhysToLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="PhysToLabel" >
                             <Property name="Text" value="-" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.44,0},{0.17,0},{0.48,0},{0.23,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="PhysMaxSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="PhysMaxSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="32767" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.48,0},{0.17,0},{0.68,0},{0.23,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="PhysMultLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="PhysMultLabel" >
                             <Property name="Text" value="x" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.75,0},{0.17,0},{0.78,0},{0.23,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="PhysMultSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="PhysMultSpinner" >
                             <Property name="StepSize" value="0.1" />
                             <Property name="CurrentValue" value="1" />
                             <Property name="MaximumValue" value="32767" />
                             <Property name="MinimumValue" value="0" />
-							<Property name="TextInputMode" value="FloatingPoint" />
+                            <Property name="TextInputMode" value="FloatingPoint" />
                             <Property name="Area" value="{{0.78,0},{0.17,0},{0.98,0},{0.23,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="FireLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="FireLabel" >
                             <Property name="Text" value="Fire:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.24,0},{0.2,0},{0.30,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="FireMinSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="FireMinSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="32767" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.22,0},{0.24,0},{0.42,0},{0.30,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="FireToLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="FireToLabel" >
                             <Property name="Text" value="-" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.44,0},{0.24,0},{0.48,0},{0.30,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="FireMaxSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="FireMaxSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="32767" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.48,0},{0.24,0},{0.68,0},{0.30,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="FireMultLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="FireMultLabel" >
                             <Property name="Text" value="x" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.75,0},{0.24,0},{0.78,0},{0.30,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="FireMultSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="FireMultSpinner" >
                             <Property name="StepSize" value="0.1" />
                             <Property name="CurrentValue" value="1" />
                             <Property name="MaximumValue" value="32767" />
                             <Property name="MinimumValue" value="0" />
-							<Property name="TextInputMode" value="FloatingPoint" />
+                            <Property name="TextInputMode" value="FloatingPoint" />
                             <Property name="Area" value="{{0.78,0},{0.24,0},{0.98,0},{0.30,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="IceLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="IceLabel" >
                             <Property name="Text" value="Ice:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.31,0},{0.2,0},{0.37,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="IceMinSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="IceMinSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="32767" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.22,0},{0.31,0},{0.42,0},{0.37,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="IceToLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="IceToLabel" >
                             <Property name="Text" value="-" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.44,0},{0.31,0},{0.48,0},{0.37,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="IceMaxSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="IceMaxSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="32767" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.48,0},{0.31,0},{0.68,0},{0.37,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="IceMultLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="IceMultLabel" >
                             <Property name="Text" value="x" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.75,0},{0.31,0},{0.78,0},{0.37,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="IceMultSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="IceMultSpinner" >
                             <Property name="StepSize" value="0.1" />
                             <Property name="CurrentValue" value="1" />
                             <Property name="MaximumValue" value="32767" />
                             <Property name="MinimumValue" value="0" />
-							<Property name="TextInputMode" value="FloatingPoint" />
+                            <Property name="TextInputMode" value="FloatingPoint" />
                             <Property name="Area" value="{{0.78,0},{0.31,0},{0.98,0},{0.37,0}}" />
                         </Window>
-						
-						
-						<Window type="TaharezLook/StaticText" name="AirLabel" >
+                        
+                        
+                        <Window type="TaharezLook/StaticText" name="AirLabel" >
                             <Property name="Text" value="Air:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.38,0},{0.2,0},{0.44,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="AirMinSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="AirMinSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="32767" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.22,0},{0.38,0},{0.42,0},{0.44,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="AirToLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="AirToLabel" >
                             <Property name="Text" value="-" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.44,0},{0.38,0},{0.48,0},{0.44,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="AirMaxSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="AirMaxSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="32767" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.48,0},{0.38,0},{0.68,0},{0.44,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="AirMultLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="AirMultLabel" >
                             <Property name="Text" value="x" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.75,0},{0.38,0},{0.78,0},{0.44,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="AirMultSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="AirMultSpinner" >
                             <Property name="StepSize" value="0.1" />
                             <Property name="CurrentValue" value="1" />
                             <Property name="MaximumValue" value="32767" />
                             <Property name="MinimumValue" value="0" />
-							<Property name="TextInputMode" value="FloatingPoint" />
+                            <Property name="TextInputMode" value="FloatingPoint" />
                             <Property name="Area" value="{{0.78,0},{0.38,0},{0.98,0},{0.44,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="PrecisionLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="PrecisionLabel" >
                             <Property name="Text" value="Precision:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.47,0},{0.2,0},{0.53,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="PrecisionSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="PrecisionSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="1" />
                             <Property name="MaximumValue" value="32767" />
                             <Property name="MinimumValue" value="1" />
                             <Property name="Area" value="{{0.20,0},{0.47,0},{0.40,0},{0.53,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="PowerLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="PowerLabel" >
                             <Property name="Text" value="Power:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.53,0},{0.47,0},{0.7,0},{0.53,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="PowerSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="PowerSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="1" />
                             <Property name="MaximumValue" value="32767" />
                             <Property name="MinimumValue" value="1" />
                             <Property name="Area" value="{{0.70,0},{0.47,0},{0.90,0},{0.53,0}}" />
                         </Window>
-						
-						
-						<Window type="TaharezLook/StaticText" name="RangeLabel" >
+                        
+                        
+                        <Window type="TaharezLook/StaticText" name="RangeLabel" >
                             <Property name="Text" value="Range:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.54,0},{0.2,0},{0.60,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="RangeSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="RangeSpinner" >
                             <Property name="StepSize" value="0.1" />
                             <Property name="CurrentValue" value="1" />
                             <Property name="MaximumValue" value="50" />
                             <Property name="MinimumValue" value="0" />
-							<Property name="TextInputMode" value="FloatingPoint" />
+                            <Property name="TextInputMode" value="FloatingPoint" />
                             <Property name="Area" value="{{0.20,0},{0.54,0},{0.40,0},{0.60,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="SpeedLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="SpeedLabel" >
                             <Property name="Text" value="Speed:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.53,0},{0.54,0},{0.7,0},{0.60,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="SpeedSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="SpeedSpinner" >
                             <Property name="StepSize" value="50" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="5000" />
                             <Property name="MinimumValue" value="-2000" />
                             <Property name="Area" value="{{0.70,0},{0.54,0},{0.90,0},{0.60,0}}" />
                         </Window>
-						
-						
-						<Window type="TaharezLook/Checkbox" name="TwohandedCheckbox" >
+                        
+                        
+                        <Window type="TaharezLook/Checkbox" name="TwohandedCheckbox" >
                             <Property name="Area" value="{{0.03,0},{0.62,0},{0.07,0},{0.66,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="TwohandedLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="TwohandedLabel" >
                             <Property name="Text" value="Twohanded weapon" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.08,0},{0.61,0},{0.50,0},{0.67,0}}" />
                         </Window>
-						
-						
-						<Window type="TaharezLook/StaticText" name="CritPercentLabel" >
+                        
+                        
+                        <Window type="TaharezLook/StaticText" name="CritPercentLabel" >
                             <Property name="Text" value="Crit. Hits:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.68,0},{0.2,0},{0.74,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="CritPercentSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="CritPercentSpinner" >
                             <Property name="StepSize" value="1" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="100" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.20,0},{0.68,0},{0.40,0},{0.74,0}}" />
                         </Window>
-						
-						
+                        
+                        
                     </Window>
                     <Window type="DefaultWindow" name="Consume" >
                         <Property name="Text" >Consume</Property>
                         <Property name="Visible" value="False" />
                         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-						
-						<Window type="TaharezLook/StaticText" name="TypeLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="TypeLabel" >
                             <Property name="Text" value="Health:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.03,0},{0.2,0},{0.08,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="HealthSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="HealthSpinner" >
                             <Property name="StepSize" value="50" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="10000" />
                             <Property name="MinimumValue" value="0" />
                            <Property name="Area" value="{{0.2,0},{0.03,0},{0.40,0},{0.08,0}}" />
                         </Window>
-						
-						
-						<Window type="TaharezLook/StaticText" name="CureLabel" >
+                        
+                        
+                        <Window type="TaharezLook/StaticText" name="CureLabel" >
                             <Property name="Text" value="Status heal and immunity time:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.10,0},{0.7,0},{0.16,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="BlindLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="BlindLabel" >
                             <Property name="Text" value="Blind:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.17,0},{0.2,0},{0.23,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="BlindSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="BlindSpinner" >
                             <Property name="StepSize" value="1000" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000000" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.20,0},{0.17,0},{0.40,0},{0.23,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="PoisonedLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="PoisonedLabel" >
                             <Property name="Text" value="Poisoned:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.17,0},{0.7,0},{0.23,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="PoisonedSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="PoisonedSpinner" >
                             <Property name="StepSize" value="1000" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000000" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.70,0},{0.17,0},{0.90,0},{0.23,0}}" />
                         </Window>
-						
-						
-						<Window type="TaharezLook/StaticText" name="BerserkLabel" >
+                        
+                        
+                        <Window type="TaharezLook/StaticText" name="BerserkLabel" >
                             <Property name="Text" value="Berserk:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.24,0},{0.2,0},{0.30,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="BerserkSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="BerserkSpinner" >
                             <Property name="StepSize" value="1000" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000000" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.20,0},{0.24,0},{0.40,0},{0.30,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="ConfusedLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="ConfusedLabel" >
                             <Property name="Text" value="Confused:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.24,0},{0.7,0},{0.30,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="ConfusedSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="ConfusedSpinner" >
                             <Property name="StepSize" value="1000" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000000" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.70,0},{0.24,0},{0.90,0},{0.30,0}}" />
                         </Window>
-						
-						
-						<Window type="TaharezLook/StaticText" name="MuteLabel" >
+                        
+                        
+                        <Window type="TaharezLook/StaticText" name="MuteLabel" >
                             <Property name="Text" value="Mute:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.31,0},{0.2,0},{0.37,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="MuteSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="MuteSpinner" >
                             <Property name="StepSize" value="1000" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000000" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.20,0},{0.31,0},{0.40,0},{0.37,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="ParalyzedLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="ParalyzedLabel" >
                             <Property name="Text" value="Paralyzed:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.31,0},{0.7,0},{0.37,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="ParalyzedSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="ParalyzedSpinner" >
                             <Property name="StepSize" value="1000" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000000" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.70,0},{0.31,0},{0.90,0},{0.37,0}}" />
                         </Window>
-						
-						
-						<Window type="TaharezLook/StaticText" name="FrozenLabel" >
+                        
+                        
+                        <Window type="TaharezLook/StaticText" name="FrozenLabel" >
                             <Property name="Text" value="Frozen:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.38,0},{0.2,0},{0.44,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="FrozenSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="FrozenSpinner" >
                             <Property name="StepSize" value="1000" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000000" />
                             <Property name="MinimumValue" value="0" />
                             <Property name="Area" value="{{0.20,0},{0.38,0},{0.40,0},{0.44,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/StaticText" name="BurningLabel" >
+                        
+                        <Window type="TaharezLook/StaticText" name="BurningLabel" >
                             <Property name="Text" value="Burning:" />
                             <Property name="HorzExtent" value="36" />
                             <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.38,0},{0.7,0},{0.44,0}}" />
                         </Window>
-						
-						<Window type="TaharezLook/Spinner" name="BurningSpinner" >
+                        
+                        <Window type="TaharezLook/Spinner" name="BurningSpinner" >
                             <Property name="StepSize" value="1000" />
                             <Property name="CurrentValue" value="0" />
                             <Property name="MaximumValue" value="1000000" />
@@ -1389,21 +1389,21 @@
                         </Window>
                     </Window>
                 </Window>
-				<Window type="TaharezLook/StaticImage" name="itemPreview" >
+                <Window type="TaharezLook/StaticImage" name="itemPreview" >
                     <Property name="Area" value="{{0.535738,0},{0.0565595,0},{0.983904,0},{0.772162,0}}" />
                 </Window>
             </Window>
-			<Window type="DefaultWindow" name="GameInfoTab" >
-				<Property name="Text" value="Info" />
+            <Window type="DefaultWindow" name="GameInfoTab" >
+                <Property name="Text" value="Info" />
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-				<Window type="TaharezLook/MultiLineEditbox" name="TextBox" >
+                <Window type="TaharezLook/MultiLineEditbox" name="TextBox" >
                     <Property name="Text" ></Property>
                     <Property name="MaxTextLength" value="1073741823" />
                     <Property name="Area" value="{{0.0229259,0},{0.0172008,0},{0.986204,0},{0.901313,0}}" />
                     <Property name="TextParsingEnabled" value="True" />
                 </Window>
-			</Window>
-		</Window>
+            </Window>
+        </Window>
         <Window type="TaharezLook/Button" name="CloseButton" >
             <Property name="Text" value="Close" />
             <Property name="Area" value="{{0.84668,0},{0.897134,0},{0.996094,0},{0.997395,0}}" />

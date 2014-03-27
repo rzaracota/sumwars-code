@@ -29,7 +29,8 @@
 void RenderInfoEditor::init(CEGUI::Window* parent)
 {
 	ContentEditorTab::init(parent);
-	
+	  m_rootWindow = parent;
+
 	m_edited_graphicobject=0;
 	m_unique_id = 1;
 	

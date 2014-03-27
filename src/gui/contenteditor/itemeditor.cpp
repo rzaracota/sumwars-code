@@ -34,6 +34,7 @@
 void ItemEditor::init(CEGUI::Window* parent)
 {
 	ContentEditorTab::init(parent);
+  m_rootWindow = parent;
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
