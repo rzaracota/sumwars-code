@@ -38,28 +38,36 @@ void ItemEditor::init(CEGUI::Window* parent)
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::PushButton* xmlsubmitButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("ItemTab/XML/SubmitButton"));
+  CEGUI::PushButton* xmlsubmitButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/XML/SubmitButton"));
 	xmlsubmitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ItemEditor::onItemXMLModified, this));
 	
-	CEGUI::PushButton* createDropButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("ItemTab/Create/CreateDropButton"));
+	CEGUI::PushButton* createDropButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/Create/CreateDropButton"));
 	createDropButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ItemEditor::onItemCreateDrop, this));
 	
-	CEGUI::PushButton* createInvButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("ItemTab/Create/CreateInventoryButton"));
+	CEGUI::PushButton* createInvButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/Create/CreateInventoryButton"));
 	createInvButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ItemEditor::onItemCreateInInventory, this));
 	
-	CEGUI::Spinner* enchantMin =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/General/EnchantMinSpinner"));
+	CEGUI::Spinner* enchantMin =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/General/EnchantMinSpinner"));
 	enchantMin->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	
-	CEGUI::Spinner* enchantMax =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/General/EnchantMaxSpinner"));
+	CEGUI::Spinner* enchantMax =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/General/EnchantMaxSpinner"));
 	enchantMax->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	
-	CEGUI::Spinner* price =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/General/PriceSpinner"));
+	CEGUI::Spinner* price =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/General/PriceSpinner"));
 	price->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	
-	CEGUI::Editbox* nameBox = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow("ItemTab/General/NameBox"));
+	CEGUI::Editbox* nameBox = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/General/NameBox"));
 	nameBox->subscribeEvent(CEGUI::Editbox::EventTextChanged, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	
-	CEGUI::Combobox* typeSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("ItemTab/Properties/TypeBox"));
+	CEGUI::Combobox* typeSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/TypeBox"));
 	typeSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	typeSelector->addItem(new CEGUI::ListboxTextItem("Armor"));
 	typeSelector->addItem(new CEGUI::ListboxTextItem("Weapon"));
@@ -73,7 +81,8 @@ void ItemEditor::init(CEGUI::Window* parent)
 	typeSelector->setSelection(0,0);
 	
 	
-	CEGUI::Combobox* sizeSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("ItemTab/Properties/SizeBox"));
+	CEGUI::Combobox* sizeSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/SizeBox"));
 	sizeSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	sizeSelector->addItem(new CEGUI::ListboxTextItem("Big"));
 	sizeSelector->addItem(new CEGUI::ListboxTextItem("Medium"));
@@ -81,93 +90,197 @@ void ItemEditor::init(CEGUI::Window* parent)
 	sizeSelector->setText("Big");
 	sizeSelector->setSelection(0,0);
 	
-	CEGUI::PushButton* copyfoButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("ItemTab/Properties/CopyDataButton"));
+	CEGUI::PushButton* copyfoButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/CopyDataButton"));
 	copyfoButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&ItemEditor::onCopyData, this));
 	
 	// wire weaponattr tab
-	CEGUI::Editbox* wtype = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow("ItemTab/Weapon/TypeBox"));
+	CEGUI::Editbox* wtype = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/TypeBox"));
 	wtype->subscribeEvent(CEGUI::Editbox::EventTextChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* physMin =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/PhysMinSpinner"));
+	CEGUI::Spinner* physMin =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PhysMinSpinner"));
 	physMin->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 
-	CEGUI::Spinner* physMax =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/PhysMaxSpinner"));
+	CEGUI::Spinner* physMax =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PhysMaxSpinner"));
 	physMax->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* physMult =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/PhysMultSpinner"));
+	CEGUI::Spinner* physMult =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PhysMultSpinner"));
 	physMult->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 
-	CEGUI::Spinner* fireMin =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/FireMinSpinner"));
+	CEGUI::Spinner* fireMin =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/FireMinSpinner"));
 	fireMin->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 
-	CEGUI::Spinner* fireMax =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/FireMaxSpinner"));
+	CEGUI::Spinner* fireMax =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/FireMaxSpinner"));
 	fireMax->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onItemModified, this));
 	
-	CEGUI::Spinner* fireMult =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/FireMultSpinner"));
+	CEGUI::Spinner* fireMult =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/FireMultSpinner"));
 	fireMult->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 
-	CEGUI::Spinner* iceMin =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/IceMinSpinner"));
+	CEGUI::Spinner* iceMin =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/IceMinSpinner"));
 	iceMin->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 
-	CEGUI::Spinner* iceMax =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/IceMaxSpinner"));
+	CEGUI::Spinner* iceMax =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/IceMaxSpinner"));
 	iceMax->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* iceMult =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/IceMultSpinner"));
+	CEGUI::Spinner* iceMult =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/IceMultSpinner"));
 	iceMult->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 
-	CEGUI::Spinner* airMin =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/AirMinSpinner"));
+	CEGUI::Spinner* airMin =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/AirMinSpinner"));
 	airMin->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 
-	CEGUI::Spinner* airMax =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/AirMaxSpinner"));
+	CEGUI::Spinner* airMax =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/AirMaxSpinner"));
 	airMax->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* airMult =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/AirMultSpinner"));
+	CEGUI::Spinner* airMult =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/AirMultSpinner"));
 	airMult->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* precision =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/PrecisionSpinner"));
+	CEGUI::Spinner* precision =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PrecisionSpinner"));
 	precision->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* power =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/PowerSpinner"));
+	CEGUI::Spinner* power =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PowerSpinner"));
 	power->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* range =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/RangeSpinner"));
+	CEGUI::Spinner* range =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/RangeSpinner"));
 	range->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* speed =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/SpeedSpinner"));
+	CEGUI::Spinner* speed =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/SpeedSpinner"));
 	speed->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-	CEGUI::Spinner* critperc =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Weapon/CritPercentSpinner"));
+	CEGUI::Spinner* critperc =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/CritPercentSpinner"));
 	critperc->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
-  CEGUIUtility::ToggleButton* twohanded = static_cast<CEGUIUtility::ToggleButton*>(CEGUIUtility::getWindow("ItemTab/Weapon/TwohandedCheckbox"));
+  CEGUIUtility::ToggleButton* twohanded = static_cast<CEGUIUtility::ToggleButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/TwohandedCheckbox"));
 	twohanded->subscribeEvent(CEGUIUtility::EventToggleButtonStateChanged(), CEGUI::Event::Subscriber(&ItemEditor::onWeaponModified, this));
 	
 	
 	// Wire the consume tab
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/HealthSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/BlindSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/PoisonedSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/BerserkSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/ConfusedSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/MuteSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/ParalyzedSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/FrozenSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Consume/BurningSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/HealthSpinner"))-> subscribeEvent(
+          CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/BlindSpinner"))-> subscribeEvent(
+          CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+
+  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/PoisonedSpinner"))-> subscribeEvent(
+          CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/BerserkSpinner"))-> subscribeEvent(
+          CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/ConfusedSpinner"))-> subscribeEvent(
+      CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/MuteSpinner"))-> subscribeEvent(
+          CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/ParalyzedSpinner"))-> subscribeEvent(
+          CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/FrozenSpinner"))-> subscribeEvent(
+          CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
+
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/BurningSpinner"))-> subscribeEvent(
+          CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onConsumeEffectsModified, this));
 	
 	// wire the equip tab
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/HealthSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/StrengthSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/DexteritySpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/MagicPowerSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/WillpowerSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/PhysResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/FireResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/IceResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/AirResSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/ArmorSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/BlockSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/AttackSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
-	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("ItemTab/Equip/PowerSpinner"))-> subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/HealthSpinner"))-> subscribeEvent(
+          CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+
+  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/StrengthSpinner"))-> subscribeEvent(
+          CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	
+  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/DexteritySpinner"))-> subscribeEvent(
+          CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	
+  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/MagicPowerSpinner"))-> subscribeEvent(
+          CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	
+  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/WillpowerSpinner"))-> subscribeEvent(
+          CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	
+  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/PhysResSpinner"))-> subscribeEvent(
+          CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	
+  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/FireResSpinner"))-> subscribeEvent(
+      CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	
+  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/IceResSpinner"))-> subscribeEvent(
+      CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	
+  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/AirResSpinner"))-> subscribeEvent(
+      CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	
+  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/ArmorSpinner"))-> subscribeEvent(
+      CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	
+  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/BlockSpinner"))-> subscribeEvent(
+      CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	
+  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/AttackSpinner"))-> subscribeEvent(
+      CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
+	
+  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(
+      m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/PowerSpinner"))-> subscribeEvent(
+      CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&ItemEditor::onEquipEffectsModified, this));
 	
 	
 	// init the internal data
@@ -176,7 +289,7 @@ void ItemEditor::init(CEGUI::Window* parent)
 	item_root->SetAttribute("subtype","EditorItem");
 	
 	TiXmlElement * item_image = new TiXmlElement("Image");  
-	item_image->SetAttribute("image","set:noMedia.png image:full_image");
+	item_image->SetAttribute("image","noMedia.png"); // previously: "set:noMedia.png image:full_image"
 	item_root->LinkEndChild(item_image);
 	
 	TiXmlElement * item_ri = new TiXmlElement("RenderInfo");  
@@ -227,7 +340,10 @@ void ItemEditor::updateAllItemList()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::Combobox* copyItemSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("ItemTab/Properties/CopyDataBox"));
+	CEGUI::Combobox* copyItemSelector = static_cast<CEGUI::Combobox*>(
+      CEGUIUtility::getWindowForLoadedLayout(
+          m_rootWindow,
+          "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/CopyDataBox"));
 	
 	// Fill list of all FixedObjects
 	const std::map<Item::Subtype,ItemBasicData*>& all_items = ItemFactory::getAllItemData();
@@ -241,20 +357,32 @@ void ItemEditor::updateAllItemList()
 bool ItemEditor::onItemModified(const CEGUI::EventArgs& evt)
 {
 	if (m_no_cegui_events)
+  {
 		return true;
+  }
+
 	m_no_cegui_events = true;
 	
-	m_edited_item.m_price = (int) getSpinnerValue("ItemTab/General/PriceSpinner",1);
-	m_edited_item.m_min_enchant = getSpinnerValue("ItemTab/General/EnchantMinSpinner",1);
-	m_edited_item.m_max_enchant = getSpinnerValue("ItemTab/General/EnchantMaxSpinner",1);
+	m_edited_item.m_price = (int) getSpinnerValue(
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/PriceSpinner", 
+      1);
+
+	m_edited_item.m_min_enchant = getSpinnerValue(
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/EnchantMinSpinner",
+      1);
+
+	m_edited_item.m_max_enchant = getSpinnerValue(
+      "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/EnchantMaxSpinner",
+      1);
+
 	if (m_edited_item.m_max_enchant < m_edited_item.m_min_enchant)
 	{
 		m_edited_item.m_max_enchant = m_edited_item.m_min_enchant;
-		setSpinnerValue("ItemTab/General/EnchantMaxSpinner",m_edited_item.m_max_enchant);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/EnchantMaxSpinner",m_edited_item.m_max_enchant);
 	}
-	m_edited_item.m_name = getWindowText("ItemTab/General/NameBox","EditorItem");
+	m_edited_item.m_name = getWindowText("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/NameBox","EditorItem");
 	
-	std::string type = getWindowText("ItemTab/Properties/TypeBox","Weapon");
+	std::string type = getWindowText("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/TypeBox","Weapon");
 	m_edited_item.m_type = Item::WEAPON;
 	if (type == "Armor") m_edited_item.m_type = Item::ARMOR;
 	else if (type == "Weapon") m_edited_item.m_type = Item::WEAPON;
@@ -265,7 +393,7 @@ bool ItemEditor::onItemModified(const CEGUI::EventArgs& evt)
 	else if (type == "Shield") m_edited_item.m_type = Item::SHIELD;
 	else if (type == "Potion") m_edited_item.m_type = Item::POTION;
 
-	std::string size = getWindowText("ItemTab/Properties/SizeBox","Big");
+	std::string size = getWindowText("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Properties/SizeBox","Big");
 	m_edited_item.m_size = Item::BIG;
 	if (size == "Big") m_edited_item.m_size = Item::BIG;
 	else if (size == "Medium") m_edited_item.m_size = Item::MEDIUM;
@@ -288,53 +416,53 @@ bool ItemEditor::onWeaponModified(const CEGUI::EventArgs& evt)
 		m_edited_item.m_weapon_attr = new WeaponAttr;
 	}
 	
-	m_edited_item.m_weapon_attr->m_weapon_type = getWindowText("ItemTab/Weapon/TypeLabel","sword");
+	m_edited_item.m_weapon_attr->m_weapon_type = getWindowText("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/TypeLabel","sword");
 	
 	Damage& dmg = m_edited_item.m_weapon_attr->m_damage;
 	
-	dmg.m_min_damage[Damage::PHYSICAL] = getSpinnerValue("ItemTab/Weapon/PhysMinSpinner",1);
-	dmg.m_max_damage[Damage::PHYSICAL] = getSpinnerValue("ItemTab/Weapon/PhysMaxSpinner",1);
+	dmg.m_min_damage[Damage::PHYSICAL] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PhysMinSpinner",1);
+	dmg.m_max_damage[Damage::PHYSICAL] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PhysMaxSpinner",1);
 	if (dmg.m_max_damage[Damage::PHYSICAL] < dmg.m_min_damage[Damage::PHYSICAL])
 	{
 		dmg.m_max_damage[Damage::PHYSICAL] =  dmg.m_min_damage[Damage::PHYSICAL];
-		setSpinnerValue("ItemTab/Weapon/PhysMaxSpinner",dmg.m_max_damage[Damage::PHYSICAL]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PhysMaxSpinner",dmg.m_max_damage[Damage::PHYSICAL]);
 	}
-	dmg.m_multiplier[Damage::PHYSICAL] = getSpinnerValue("ItemTab/Weapon/PhysMultSpinner",1);
+	dmg.m_multiplier[Damage::PHYSICAL] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PhysMultSpinner",1);
 	
-	dmg.m_min_damage[Damage::FIRE] = getSpinnerValue("ItemTab/Weapon/FireMinSpinner",1);
-	dmg.m_max_damage[Damage::FIRE] = getSpinnerValue("ItemTab/Weapon/FireMaxSpinner",1);
+	dmg.m_min_damage[Damage::FIRE] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/FireMinSpinner",1);
+	dmg.m_max_damage[Damage::FIRE] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/FireMaxSpinner",1);
 	if (dmg.m_max_damage[Damage::FIRE] < dmg.m_min_damage[Damage::FIRE])
 	{
 		dmg.m_max_damage[Damage::FIRE] =  dmg.m_min_damage[Damage::FIRE];
-		setSpinnerValue("ItemTab/Weapon/FireMaxSpinner",dmg.m_max_damage[Damage::FIRE]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/FireMaxSpinner",dmg.m_max_damage[Damage::FIRE]);
 	}
-	dmg.m_multiplier[Damage::FIRE] = getSpinnerValue("ItemTab/Weapon/FireMultSpinner",1);
+	dmg.m_multiplier[Damage::FIRE] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/FireMultSpinner",1);
 	
-	dmg.m_min_damage[Damage::ICE] = getSpinnerValue("ItemTab/Weapon/IceMinSpinner",1);
-	dmg.m_max_damage[Damage::ICE] = getSpinnerValue("ItemTab/Weapon/IceMaxSpinner",1);
+	dmg.m_min_damage[Damage::ICE] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/IceMinSpinner",1);
+	dmg.m_max_damage[Damage::ICE] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/IceMaxSpinner",1);
 	if (dmg.m_max_damage[Damage::ICE] < dmg.m_min_damage[Damage::ICE])
 	{
 		dmg.m_max_damage[Damage::ICE] =  dmg.m_min_damage[Damage::ICE];
-		setSpinnerValue("ItemTab/Weapon/IceMaxSpinner",dmg.m_max_damage[Damage::ICE]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/IceMaxSpinner",dmg.m_max_damage[Damage::ICE]);
 	}
-	dmg.m_multiplier[Damage::ICE] = getSpinnerValue("ItemTab/Weapon/IceMultSpinner",1);
+	dmg.m_multiplier[Damage::ICE] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/IceMultSpinner",1);
 	
-	dmg.m_min_damage[Damage::AIR] = getSpinnerValue("ItemTab/Weapon/AirMinSpinner",1);
-	dmg.m_max_damage[Damage::AIR] = getSpinnerValue("ItemTab/Weapon/AirMaxSpinner",1);
+	dmg.m_min_damage[Damage::AIR] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/AirMinSpinner",1);
+	dmg.m_max_damage[Damage::AIR] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/AirMaxSpinner",1);
 	if (dmg.m_max_damage[Damage::AIR] < dmg.m_min_damage[Damage::AIR])
 	{
 		dmg.m_max_damage[Damage::AIR] =  dmg.m_min_damage[Damage::AIR];
-		setSpinnerValue("ItemTab/Weapon/AirMaxSpinner",dmg.m_max_damage[Damage::AIR]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/AirMaxSpinner",dmg.m_max_damage[Damage::AIR]);
 	}
-	dmg.m_multiplier[Damage::AIR] = getSpinnerValue("ItemTab/Weapon/AirMultSpinner",1);
+	dmg.m_multiplier[Damage::AIR] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/AirMultSpinner",1);
 	
-	dmg.m_attack = getSpinnerValue("ItemTab/Weapon/PrecisionSpinner",1);
-	dmg.m_power = getSpinnerValue("ItemTab/Weapon/PowerSpinner",1);
-	dmg.m_crit_perc = 0.01* getSpinnerValue("ItemTab/Weapon/CritPercentSpinner",1);
+	dmg.m_attack = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PrecisionSpinner",1);
+	dmg.m_power = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PowerSpinner",1);
+	dmg.m_crit_perc = 0.01* getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/CritPercentSpinner",1);
 	
-	m_edited_item.m_weapon_attr->m_attack_range = getSpinnerValue("ItemTab/Weapon/RangeSpinner");
-	m_edited_item.m_weapon_attr->m_dattack_speed = (int) getSpinnerValue("ItemTab/Weapon/SpeedSpinner");
-	m_edited_item.m_weapon_attr->m_two_handed = getCheckboxSelected("ItemTab/Weapon/TwohandedCheckbox");
+	m_edited_item.m_weapon_attr->m_attack_range = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/RangeSpinner");
+	m_edited_item.m_weapon_attr->m_dattack_speed = (int) getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/SpeedSpinner");
+	m_edited_item.m_weapon_attr->m_two_handed = getCheckboxSelected("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/TwohandedCheckbox");
 	
 	m_no_cegui_events = false;
 	m_modified_item = true;
@@ -355,15 +483,15 @@ bool ItemEditor::onConsumeEffectsModified(const CEGUI::EventArgs& evt)
 	
 	CreatureDynAttrMod* dynmod = m_edited_item.m_useup_effect;
 	
-	dynmod->m_dhealth = getSpinnerValue("ItemTab/Consume/HealthSpinner");
-	dynmod->m_dstatus_mod_immune_time[Damage::BLIND] = getSpinnerValue("ItemTab/Consume/BlindSpinner");
-	dynmod->m_dstatus_mod_immune_time[Damage::POISONED] = getSpinnerValue("ItemTab/Consume/PoisonedSpinner");
-	dynmod->m_dstatus_mod_immune_time[Damage::BERSERK] = getSpinnerValue("ItemTab/Consume/BerserkSpinner");
-	dynmod->m_dstatus_mod_immune_time[Damage::CONFUSED] = getSpinnerValue("ItemTab/Consume/ConfusedSpinner");
-	dynmod->m_dstatus_mod_immune_time[Damage::MUTE] = getSpinnerValue("ItemTab/Consume/MuteSpinner");
-	dynmod->m_dstatus_mod_immune_time[Damage::PARALYZED] = getSpinnerValue("ItemTab/Consume/ParalyzedSpinner");
-	dynmod->m_dstatus_mod_immune_time[Damage::FROZEN] = getSpinnerValue("ItemTab/Consume/FrozenSpinner");
-	dynmod->m_dstatus_mod_immune_time[Damage::BURNING] = getSpinnerValue("ItemTab/Consume/BurningSpinner");
+	dynmod->m_dhealth = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/HealthSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::BLIND] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/BlindSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::POISONED] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/PoisonedSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::BERSERK] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/BerserkSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::CONFUSED] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/ConfusedSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::MUTE] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/MuteSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::PARALYZED] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/ParalyzedSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::FROZEN] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/FrozenSpinner");
+	dynmod->m_dstatus_mod_immune_time[Damage::BURNING] = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/BurningSpinner");
 	
 	m_no_cegui_events = false;
 	m_modified_item = true;
@@ -384,22 +512,22 @@ bool ItemEditor::onEquipEffectsModified(const CEGUI::EventArgs& evt)
 	
 	CreatureBaseAttrMod* basemod = m_edited_item.m_equip_effect;
 	
-	basemod->m_dmax_health = getSpinnerValue("ItemTab/Equip/HealthSpinner");
+	basemod->m_dmax_health = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/HealthSpinner");
 	
-	basemod->m_dstrength = (int) getSpinnerValue("ItemTab/Equip/StrengthSpinner");
-	basemod->m_ddexterity = (int) getSpinnerValue("ItemTab/Equip/DexteritySpinner");
-	basemod->m_dmagic_power = (int) getSpinnerValue("ItemTab/Equip/MagicPowerSpinner");
-	basemod->m_dwillpower = (int) getSpinnerValue("ItemTab/Equip/WillpowerSpinner");
+	basemod->m_dstrength = (int) getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/StrengthSpinner");
+	basemod->m_ddexterity = (int) getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/DexteritySpinner");
+	basemod->m_dmagic_power = (int) getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/MagicPowerSpinner");
+	basemod->m_dwillpower = (int) getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/WillpowerSpinner");
 	
-	basemod->m_dresistances[Damage::PHYSICAL] = (int) getSpinnerValue("ItemTab/Equip/PhysResSpinner");
-	basemod->m_dresistances[Damage::FIRE] = (int) getSpinnerValue("ItemTab/Equip/FireResSpinner");
-	basemod->m_dresistances[Damage::ICE] = (int) getSpinnerValue("ItemTab/Equip/IceResSpinner");
-	basemod->m_dresistances[Damage::AIR] = (int) getSpinnerValue("ItemTab/Equip/AirResSpinner");
+	basemod->m_dresistances[Damage::PHYSICAL] = (int) getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/PhysResSpinner");
+	basemod->m_dresistances[Damage::FIRE] = (int) getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/FireResSpinner");
+	basemod->m_dresistances[Damage::ICE] = (int) getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/IceResSpinner");
+	basemod->m_dresistances[Damage::AIR] = (int) getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/AirResSpinner");
 	
-	basemod->m_darmor = (int) getSpinnerValue("ItemTab/Equip/ArmorSpinner");
-	basemod->m_dblock = (int) getSpinnerValue("ItemTab/Equip/BlockSpinner");
-	basemod->m_dattack = (int) getSpinnerValue("ItemTab/Equip/AttackSpinner");
-	basemod->m_dpower = (int) getSpinnerValue("ItemTab/Equip/PowerSpinner");
+	basemod->m_darmor = (int) getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/ArmorSpinner");
+	basemod->m_dblock = (int) getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/BlockSpinner");
+	basemod->m_dattack = (int) getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/AttackSpinner");
+	basemod->m_dpower = (int) getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/PowerSpinner");
 	
 	
 	m_no_cegui_events = false;
@@ -411,7 +539,8 @@ bool ItemEditor::onEquipEffectsModified(const CEGUI::EventArgs& evt)
 bool ItemEditor::onItemXMLModified(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindow("ItemTab/XML/ItemXMLEditbox"));
+	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/XML/ItemXMLEditbox"));
 	
 	// Parse the editor text to XML
 	// use temporary XML document for recovering from errors
@@ -447,7 +576,7 @@ bool ItemEditor::onItemXMLModified(const CEGUI::EventArgs& evt)
 		int err_row = item_temp_xml.ErrorRow();
 		int err_col = item_temp_xml.ErrorCol();
 		
-		setMultiLineEditboxCursor("ItemTab/XML/ItemXMLEditbox",err_row,err_col);
+		setMultiLineEditboxCursor("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/XML/ItemXMLEditbox",err_row,err_col);
 	}
 	
 	return true;
@@ -533,7 +662,8 @@ Item* ItemEditor::createItem()
 #endif
 	item_rt->update();
 	
-	CEGUI::Window* label = CEGUIUtility::getWindow("ItemTab/BM/itemPreview");
+	CEGUI::Window* label = CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/BM/itemPreview");
 
 	// reparse and update the FixedObject Data
 	// create a unique renderinfo (to avoid that the object is modified by the editor after creation)
@@ -576,7 +706,7 @@ Item* ItemEditor::createItem()
 	m_item_xml.RootElement()->SetAttribute("subtype",plain_subtype.c_str());
 	item_image->SetAttribute("image",image.c_str());
 	
-	float magic = getSpinnerValue("ItemTab/Create/EnchantSpinner",0);
+	float magic = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Create/EnchantSpinner",0);
 	Item::Type type = ItemFactory::getBaseType(subtype);
 	Item* item = ItemFactory::createItem(type, subtype, 0, magic);
 	return item;
@@ -639,7 +769,7 @@ bool ItemEditor::onItemCreateInInventory(const CEGUI::EventArgs& evt)
 
 bool ItemEditor::onCopyData(const CEGUI::EventArgs& evt)
 {
-	std::string objname	= getComboboxSelection("ItemTab/Properties/CopyDataBox", "");
+	std::string objname	= getComboboxSelection("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Properties/CopyDataBox", "");
 	if (objname == "")
   {
 		return true;
@@ -673,7 +803,8 @@ void ItemEditor::updateItemXML()
 	TiXmlPrinter printer;
 	m_item_xml.Accept(&printer);
 	
-	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindow("ItemTab/XML/ItemXMLEditbox"));
+	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/XML/ItemXMLEditbox"));
 	editor->setText(printer.CStr());
 }
 
@@ -681,57 +812,57 @@ void ItemEditor::updateItemEditor()
 {
 	m_no_cegui_events = true;
 	
-	setSpinnerValue("ItemTab/General/PriceSpinner",m_edited_item.m_price);
-	setSpinnerValue("ItemTab/General/EnchantMinSpinner",m_edited_item.m_min_enchant);
-	setSpinnerValue("ItemTab/General/EnchantMaxSpinner",m_edited_item.m_max_enchant);
-	setWindowText("ItemTab/General/NameBox",m_edited_item.m_name);
+	setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/PriceSpinner",m_edited_item.m_price);
+	setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/EnchantMinSpinner",m_edited_item.m_min_enchant);
+	setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/EnchantMaxSpinner",m_edited_item.m_max_enchant);
+	setWindowText("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/NameBox",m_edited_item.m_name);
 	
 	Item::Type type = m_edited_item.m_type;
-	if (type == Item::ARMOR) setComboboxSelection("ItemTab/Properties/TypeBox","Armor");
-	else if (type == Item::WEAPON) setComboboxSelection("ItemTab/Properties/TypeBox","Weapon");
-	else if (type == Item::HELMET) setComboboxSelection("ItemTab/Properties/TypeBox","Helmet");
-	else if (type == Item::GLOVES) setComboboxSelection("ItemTab/Properties/TypeBox","Gloves");
-	else if (type == Item::RING) setComboboxSelection("ItemTab/Properties/TypeBox","Ring");
-	else if (type == Item::AMULET) setComboboxSelection("ItemTab/Properties/TypeBox","Amulet");
-	else if (type == Item::SHIELD) setComboboxSelection("ItemTab/Properties/TypeBox","Shield");
-	else if (type == Item::POTION) setComboboxSelection("ItemTab/Properties/TypeBox","Potion");
+	if (type == Item::ARMOR) setComboboxSelection("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/TypeBox", "Armor");
+	else if (type == Item::WEAPON) setComboboxSelection("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/TypeBox", "Weapon");
+	else if (type == Item::HELMET) setComboboxSelection("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/TypeBox", "Helmet");
+	else if (type == Item::GLOVES) setComboboxSelection("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/TypeBox", "Gloves");
+	else if (type == Item::RING) setComboboxSelection("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/TypeBox", "Ring");
+	else if (type == Item::AMULET) setComboboxSelection("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/TypeBox", "Amulet");
+	else if (type == Item::SHIELD) setComboboxSelection("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/TypeBox", "Shield");
+	else if (type == Item::POTION) setComboboxSelection("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/General/TypeBox", "Potion");
 	
 	Item::Size size = m_edited_item.m_size;
-	if (size == Item::BIG) setComboboxSelection("ItemTab/Properties/SizeBox","Big");
-	else if (size == Item::MEDIUM) setComboboxSelection("ItemTab/Properties/SizeBox","Medium");
-	else if (size == Item::SMALL) setComboboxSelection("ItemTab/Properties/SizeBox","Small");
+	if (size == Item::BIG) setComboboxSelection("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Properties/SizeBox","Big");
+	else if (size == Item::MEDIUM) setComboboxSelection("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Properties/SizeBox","Medium");
+	else if (size == Item::SMALL) setComboboxSelection("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Properties/SizeBox","Small");
 	
 	// update weapon properties
 	if (m_edited_item.m_weapon_attr != 0)
 	{
 		Damage& dmg = m_edited_item.m_weapon_attr->m_damage;
 		
-		setWindowText("ItemTab/Weapon/TypeBox",m_edited_item.m_weapon_attr->m_weapon_type);
+		setWindowText("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/TypeBox",m_edited_item.m_weapon_attr->m_weapon_type);
 
-		setSpinnerValue("ItemTab/Weapon/PhysMinSpinner",dmg.m_min_damage[Damage::PHYSICAL]);
-		setSpinnerValue("ItemTab/Weapon/PhysMaxSpinner",dmg.m_max_damage[Damage::PHYSICAL]);
-		setSpinnerValue("ItemTab/Weapon/PhysMultSpinner",dmg.m_multiplier[Damage::PHYSICAL]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PhysMinSpinner",dmg.m_min_damage[Damage::PHYSICAL]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PhysMaxSpinner",dmg.m_max_damage[Damage::PHYSICAL]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PhysMultSpinner",dmg.m_multiplier[Damage::PHYSICAL]);
 		
-		setSpinnerValue("ItemTab/Weapon/FireMinSpinner",dmg.m_min_damage[Damage::FIRE]);
-		setSpinnerValue("ItemTab/Weapon/FireMaxSpinner",dmg.m_max_damage[Damage::FIRE]);
-		setSpinnerValue("ItemTab/Weapon/FireMultSpinner",dmg.m_multiplier[Damage::FIRE]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/FireMinSpinner",dmg.m_min_damage[Damage::FIRE]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/FireMaxSpinner",dmg.m_max_damage[Damage::FIRE]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/FireMultSpinner",dmg.m_multiplier[Damage::FIRE]);
 		
-		setSpinnerValue("ItemTab/Weapon/IceMinSpinner",dmg.m_min_damage[Damage::ICE]);
-		setSpinnerValue("ItemTab/Weapon/IceMaxSpinner",dmg.m_max_damage[Damage::ICE]);
-		setSpinnerValue("ItemTab/Weapon/IceMultSpinner",dmg.m_multiplier[Damage::ICE]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/IceMinSpinner",dmg.m_min_damage[Damage::ICE]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/IceMaxSpinner",dmg.m_max_damage[Damage::ICE]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/IceMultSpinner",dmg.m_multiplier[Damage::ICE]);
 		
-		setSpinnerValue("ItemTab/Weapon/AirMinSpinner",dmg.m_min_damage[Damage::AIR]);
-		setSpinnerValue("ItemTab/Weapon/AirMaxSpinner",dmg.m_max_damage[Damage::AIR]);
-		setSpinnerValue("ItemTab/Weapon/AirMultSpinner",dmg.m_multiplier[Damage::AIR]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/AirMinSpinner",dmg.m_min_damage[Damage::AIR]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/AirMaxSpinner",dmg.m_max_damage[Damage::AIR]);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/AirMultSpinner",dmg.m_multiplier[Damage::AIR]);
 		
-		setSpinnerValue("ItemTab/Weapon/PrecisionSpinner",dmg.m_attack);
-		setSpinnerValue("ItemTab/Weapon/PowerSpinner",dmg.m_power);
-		setSpinnerValue("ItemTab/Weapon/CritPercentSpinner",dmg.m_crit_perc*100);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PrecisionSpinner",dmg.m_attack);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/PowerSpinner",dmg.m_power);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/CritPercentSpinner",dmg.m_crit_perc*100);
 		
-		setSpinnerValue("ItemTab/Weapon/RangeSpinner",m_edited_item.m_weapon_attr->m_attack_range);
-		setSpinnerValue("ItemTab/Weapon/SpeedSpinner",m_edited_item.m_weapon_attr->m_dattack_speed );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/RangeSpinner",m_edited_item.m_weapon_attr->m_attack_range);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/SpeedSpinner",m_edited_item.m_weapon_attr->m_dattack_speed );
 		
-		setCheckboxSelected("ItemTab/Weapon/TwohandedCheckbox", m_edited_item.m_weapon_attr->m_two_handed);
+		setCheckboxSelected("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Weapon/TwohandedCheckbox", m_edited_item.m_weapon_attr->m_two_handed);
 	}
 
 
@@ -739,37 +870,37 @@ void ItemEditor::updateItemEditor()
 	{
 		CreatureDynAttrMod* dynmod = m_edited_item.m_useup_effect;
 		
-		setSpinnerValue("ItemTab/Consume/HealthSpinner", dynmod->m_dhealth);
-		setSpinnerValue("ItemTab/Consume/BlindSpinner",dynmod->m_dstatus_mod_immune_time[Damage::BLIND] );
-		setSpinnerValue("ItemTab/Consume/PoisonedSpinner",dynmod->m_dstatus_mod_immune_time[Damage::POISONED] );
-		setSpinnerValue("ItemTab/Consume/BerserkSpinner",dynmod->m_dstatus_mod_immune_time[Damage::BERSERK] );
-		setSpinnerValue("ItemTab/Consume/ConfusedSpinner",dynmod->m_dstatus_mod_immune_time[Damage::CONFUSED] );
-		setSpinnerValue("ItemTab/Consume/MuteSpinner",dynmod->m_dstatus_mod_immune_time[Damage::MUTE] );
-		setSpinnerValue("ItemTab/Consume/ParalyzedSpinner",dynmod->m_dstatus_mod_immune_time[Damage::PARALYZED] );
-		setSpinnerValue("ItemTab/Consume/FrozenSpinner",dynmod->m_dstatus_mod_immune_time[Damage::FROZEN] );
-		setSpinnerValue("ItemTab/Consume/BurningSpinner",dynmod->m_dstatus_mod_immune_time[Damage::BURNING] );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/HealthSpinner", dynmod->m_dhealth);
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/BlindSpinner",dynmod->m_dstatus_mod_immune_time[Damage::BLIND] );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/PoisonedSpinner",dynmod->m_dstatus_mod_immune_time[Damage::POISONED] );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/BerserkSpinner",dynmod->m_dstatus_mod_immune_time[Damage::BERSERK] );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/ConfusedSpinner",dynmod->m_dstatus_mod_immune_time[Damage::CONFUSED] );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/MuteSpinner",dynmod->m_dstatus_mod_immune_time[Damage::MUTE] );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/ParalyzedSpinner",dynmod->m_dstatus_mod_immune_time[Damage::PARALYZED] );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/FrozenSpinner",dynmod->m_dstatus_mod_immune_time[Damage::FROZEN] );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Consume/BurningSpinner",dynmod->m_dstatus_mod_immune_time[Damage::BURNING] );
 	}
 
 	if (m_edited_item.m_equip_effect != 0)
 	{
 		CreatureBaseAttrMod* basemod = m_edited_item.m_equip_effect;
 		
-		setSpinnerValue("ItemTab/Equip/HealthSpinner",basemod->m_dmax_health );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/HealthSpinner",basemod->m_dmax_health );
 	
-		setSpinnerValue("ItemTab/Equip/StrengthSpinner",basemod->m_dstrength );
-		setSpinnerValue("ItemTab/Equip/DexteritySpinner",basemod->m_ddexterity );
-		setSpinnerValue("ItemTab/Equip/MagicPowerSpinner",basemod->m_dmagic_power );
-		setSpinnerValue("ItemTab/Equip/WillpowerSpinner",basemod->m_dwillpower );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/StrengthSpinner",basemod->m_dstrength );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/DexteritySpinner",basemod->m_ddexterity );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/MagicPowerSpinner",basemod->m_dmagic_power );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/WillpowerSpinner",basemod->m_dwillpower );
 		
-		setSpinnerValue("ItemTab/Equip/PhysResSpinner",basemod->m_dresistances[Damage::PHYSICAL] );
-		setSpinnerValue("ItemTab/Equip/FireResSpinner",basemod->m_dresistances[Damage::FIRE] );
-		setSpinnerValue("ItemTab/Equip/IceResSpinner",basemod->m_dresistances[Damage::ICE] );
-		setSpinnerValue("ItemTab/Equip/AirResSpinner",basemod->m_dresistances[Damage::AIR] );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/PhysResSpinner",basemod->m_dresistances[Damage::PHYSICAL] );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/FireResSpinner",basemod->m_dresistances[Damage::FIRE] );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/IceResSpinner",basemod->m_dresistances[Damage::ICE] );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/AirResSpinner",basemod->m_dresistances[Damage::AIR] );
 		
-		setSpinnerValue("ItemTab/Equip/ArmorSpinner",basemod->m_darmor );
-		setSpinnerValue("ItemTab/Equip/BlockSpinner",basemod->m_dblock );
-		setSpinnerValue("ItemTab/Equip/AttackSpinner",basemod->m_dattack );
-		setSpinnerValue("ItemTab/Equip/PowerSpinner",basemod->m_dpower );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/ArmorSpinner",basemod->m_darmor );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/BlockSpinner",basemod->m_dblock );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/AttackSpinner",basemod->m_dattack );
+		setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/Equip/PowerSpinner",basemod->m_dpower );
 		
 	}
 

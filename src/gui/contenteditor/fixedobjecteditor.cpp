@@ -32,7 +32,7 @@ void FixedObjectEditor::init(CEGUI::Window* parent)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
   CEGUI::PushButton* detectCircleButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
-    "Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/Properties/DetectCircleButton" /*"FOTab/Prop/DetectCircleButton"*/));
+    "Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/Properties/DetectCircleButton"));
   CEGUI::PushButton* detectRectButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
     "Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/Properties/DetectRectButton"/*"FOTab/Prop/DetectRectButton"*/));
 	
@@ -267,7 +267,7 @@ bool FixedObjectEditor::onFixedObjectAutodetectSize(const CEGUI::EventArgs& evt)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	CEGUI::PushButton* detectCircleButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
-    "FOTab/Prop/DetectCircleButton"));
+    "Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/Properties/DetectCircleButton"));
 	//CEGUI::PushButton* detectRectButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
   //"FOTab/Prop/DetectRectButton"));
 	

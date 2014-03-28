@@ -36,13 +36,15 @@ void MonsterEditor::init(CEGUI::Window* parent)
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
 	
-	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("MonsterTab/Prop/RadiusSpinner"));
+  CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Properties/RadiusSpinner"));
 	
 	
 	radiusSpinner->subscribeEvent(CEGUI::Spinner::EventValueChanged, CEGUI::Event::Subscriber(&MonsterEditor::onMonsterModified, this));
 	
 	/*
-	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("MonsterTab/Prop/LayerSelector"));
+	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Prop/LayerSelector"));
 	layerSelector->addItem(new CEGUI::ListboxTextItem("Normal"));
 	layerSelector->addItem(new CEGUI::ListboxTextItem("Base"));
 	layerSelector->addItem(new CEGUI::ListboxTextItem("Air"));
@@ -51,19 +53,24 @@ void MonsterEditor::init(CEGUI::Window* parent)
 	layerSelector->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&MonsterEditor::onMonsterModified, this));
 	*/
 	
-	CEGUI::PushButton* xmlsubmitButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("MonsterTab/XML/SubmitButton"));
+	CEGUI::PushButton* xmlsubmitButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/XML/SubmitButton"));
 	xmlsubmitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MonsterEditor::onMonsterXMLModified, this));
 	
-	CEGUI::PushButton* createFOButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("MonsterTab/XML/CreateButton"));
+	CEGUI::PushButton* createFOButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Create/CreateButton"));
 	createFOButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MonsterEditor::onMonsterCreate, this));
 	
-	CEGUI::PushButton* delallFOButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("MonsterTab/Create/DelAllButton"));
+	CEGUI::PushButton* delallFOButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Create/DelAllButton"));
 	delallFOButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MonsterEditor::onDelAllObjects, this));
 	
-	CEGUI::PushButton* getplayerButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("MonsterTab/Create/GetPlPosButton"));
+	CEGUI::PushButton* getplayerButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Create/GetPlPosButton"));
 	getplayerButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MonsterEditor::onGetPlayerPosition, this));
 	
-	CEGUI::PushButton* copyfoButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindow("MonsterTab/Properties/CopyDataButton"));
+	CEGUI::PushButton* copyfoButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Properties/CopyDataButton"));
 	copyfoButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MonsterEditor::onCopyData, this));
 	
 	// init the internal data
@@ -104,7 +111,8 @@ void MonsterEditor::updateAllMonsterList()
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::Combobox* copyfoSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("MonsterTab/Properties/CopyDataBox"));
+	CEGUI::Combobox* copyfoSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Properties/CopyDataBox"));
 	
 	// Fill list of all Monsters
 	const std::map<GameObject::Subtype, MonsterBasicData*>& all_fo = ObjectFactory::getAllMonsterData();
@@ -126,7 +134,8 @@ void MonsterEditor::updateMonsterXML()
 	TiXmlPrinter printer;
 	m_monster_xml.Accept(&printer);
 	
-	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindow("MonsterTab/XML/MonsterXMLEditbox"));
+	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/XML/MonsterXMLEditbox"));
 	editor->setText(printer.CStr());
 }
 
@@ -136,9 +145,11 @@ void MonsterEditor::updateMonsterEditor()
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	/*
-	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("MonsterTab/Prop/LayerSelector"));
+	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Prop/LayerSelector"));
 	*/
-	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("MonsterTab/Prop/RadiusSpinner"));
+	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Prop/RadiusSpinner"));
 	// adjust the spinner values
 	radiusSpinner->setCurrentValue(m_edited_monster.m_radius);
 	
@@ -172,9 +183,11 @@ bool MonsterEditor::onMonsterModified(const CEGUI::EventArgs& evt)
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
-	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindow("MonsterTab/Prop/RadiusSpinner"));
+	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Prop/RadiusSpinner"));
 	
-	//CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindow("MonsterTab/Prop/LayerSelector"));
+	//CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+  //  "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Prop/LayerSelector"));
 	
 	m_edited_monster.m_radius = radiusSpinner->getCurrentValue();
 	
@@ -199,7 +212,8 @@ bool MonsterEditor::onMonsterModified(const CEGUI::EventArgs& evt)
 bool MonsterEditor::onMonsterXMLModified(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindow("MonsterTab/XML/MonsterXMLEditbox"));
+	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+      "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/XML/MonsterXMLEditbox"));
 	
 	// Parse the editor text to XML
 	// use temporary XML document for recovering from errors
@@ -234,7 +248,10 @@ bool MonsterEditor::onMonsterXMLModified(const CEGUI::EventArgs& evt)
 		int err_row = ri_temp_xml.ErrorRow();
 		int err_col = ri_temp_xml.ErrorCol();
 		
-		setMultiLineEditboxCursor("MonsterTab/XML/MonsterXMLEditbox",err_row,err_col);
+		setMultiLineEditboxCursor(
+        "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/XML/MonsterXMLEditbox",
+        err_row,
+        err_col);
 	}
 	
 	return true;
@@ -273,9 +290,9 @@ bool MonsterEditor::onMonsterCreate(const CEGUI::EventArgs& evt)
 	Region* region = player->getRegion();
 	
 	// if the position is set to default, use the player position
-	pos.m_x = getSpinnerValue("MonsterTab/Create/PosXSpinner",0);
-	pos.m_y = getSpinnerValue("MonsterTab/Create/PosYSpinner",0);
-	angle = getSpinnerValue("MonsterTab/Create/AngleSpinner",0);
+	pos.m_x = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Create/PosXSpinner",0);
+	pos.m_y = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Create/PosYSpinner",0);
+	angle = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Create/AngleSpinner",0);
 	if (pos.m_x == 0 && pos.m_y == 0)
 	{
 		pos = player->getShape()->m_center;
@@ -290,7 +307,7 @@ bool MonsterEditor::onMonsterCreate(const CEGUI::EventArgs& evt)
 
 bool MonsterEditor::onCopyData(const CEGUI::EventArgs& evt)
 {
-	std::string objname	= getComboboxSelection("MonsterTab/Properties/CopyDataBox", "");
+	std::string objname	= getComboboxSelection("Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Properties/CopyDataBox", "");
 	if (objname == "")
 		return true;
 	
@@ -319,8 +336,8 @@ bool MonsterEditor::onGetPlayerPosition(const CEGUI::EventArgs& evt)
 	
 	Vector pos = player->getShape()->m_center;
 	
-	setSpinnerValue("MonsterTab/Create/PosXSpinner", pos.m_x);
-	setSpinnerValue("MonsterTab/Create/PosYSpinner", pos.m_y);
+	setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Create/PosXSpinner", pos.m_x);
+	setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Create/PosYSpinner", pos.m_y);
 	
 	return true;
 }
