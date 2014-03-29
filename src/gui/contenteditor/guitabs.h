@@ -16,6 +16,11 @@
 #ifndef GUITABS_H
 #define GUITABS_H
 
+//
+// TODO(Augustin Preda, 2014.03.29): This entire file seems to be unused.
+// Verify if needed for anything and (if not used) remove it.
+//
+
 #include <contenttab.h>
 
 #ifdef CEGUI_07

@@ -160,7 +160,7 @@ void ContentEditor::init(bool visible)
 	// place the image in a the CEGUI label
 	CEGUI::Window* label = CEGUIUtility::getWindowForLoadedLayout(m_rootWindow, "Root/ObjectInfoTabControl/__auto_TabPane__/RenderInfoTab/meshPreview");
 
-  CEGUI::String content_editor_image_name(CEGUIUtility::getImageNameWithSkin("editor_tex", "editor_img"));
+  CEGUI::String content_editor_image_name("editor_img");
 	label->setProperty("Image", content_editor_image_name); // prev: "set:editor_imageset image:editor_img"
 	label->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::Event::Subscriber(&ContentEditor::onPreviewWindowMouseDown, this));
   label->subscribeEvent(CEGUIUtility::EventMouseLeavesWindowArea(), CEGUI::Event::Subscriber(&ContentEditor::onPreviewWindowMouseUp, this));

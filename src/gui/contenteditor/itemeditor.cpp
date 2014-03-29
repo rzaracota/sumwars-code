@@ -678,13 +678,17 @@ Item* ItemEditor::createItem()
 	// temporarily replace the image name
 	TiXmlElement * item_image = m_item_xml.RootElement()->FirstChildElement("Image");
 	if (item_image == 0)
-		return 0;
+  {
+    return 0;
+  }
+
 	std::string image = item_image->Attribute("image");
 	
-	if (image == "set:noMedia.png image:full_image")
+	if (image == "noMedia.png") // previously: "set:noMedia.png image:full_image"
 	{
 		std::stringstream itemimage;
-		itemimage <<  "set:item_imageset_" << idstream.str()<< " " << "image:item_img_" << idstream.str();
+		//itemimage <<  "set:item_imageset_" << idstream.str()<< " " << "image:item_img_" << idstream.str();
+    itemimage << "item_img_" << idstream.str();
 		label->setProperty("Image", itemimage.str().c_str());
 		
 		// itemimage.str("");

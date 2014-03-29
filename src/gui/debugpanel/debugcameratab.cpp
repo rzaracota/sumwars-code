@@ -87,7 +87,7 @@ void DebugCameraTab::initialiseComponents ( void )
 bool DebugCameraTab::onPlayerCameraModeChanged ( const CEGUI::EventArgs& evt )
 {
 	CEGUI::Combobox* cbo = static_cast<CEGUI::Combobox*> (
-    CEGUIUtility::getWindow("DebugCameraTab/PlayerCamOptions/ViewModes"));
+    CEGUIUtility::getWindowForLoadedLayout(this, "DebugCameraTabTabs/PlayerCamOptions/ViewModes"));
 	CEGUI::String txt =  cbo->getSelectedItem()->getText();
 	Ogre::Camera *cam = Ogre::Root::getSingleton().getSceneManager ( "DefaultSceneManager" )->getCamera ( "camera" );
 

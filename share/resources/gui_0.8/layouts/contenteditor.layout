@@ -24,8 +24,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="MainMeshLabel" >
                             <Property name="Text" value="Select main mesh:" />
-                            <Property name="HorzExtent" value="115" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03739,0},{0.0186585,0},{0.327415,0},{0.0879001,0}}" />
                         </Window>
@@ -44,22 +42,16 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="NewSubmeshLabel" >
                             <Property name="Text" value="New submesh:" />
-                            <Property name="HorzExtent" value="91" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.022898,0},{0.238785,0},{0.068202,0}}" />
                         </Window>
                         <Window type="TaharezLook/StaticText" name="NewSMNameLabel" >
                             <Property name="Text" value="submesh name:" />
-                            <Property name="HorzExtent" value="97" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.0270315,0},{0.0721111,0},{0.243158,0},{0.127415,0}}" />
                         </Window>
                         <Window type="TaharezLook/StaticText" name="EditSMLabel" >
                             <Property name="Text" value="Edit submesh:" />
-                            <Property name="HorzExtent" value="86" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.0232801,0},{0.181441,0},{0.249406,0},{0.236745,0}}" />
                         </Window>
@@ -69,8 +61,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="AttachMeshLabel" >
                             <Property name="Text" value="Attach to:" />
-                            <Property name="HorzExtent" value="61" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.08,0},{0.228963,0},{0.259419,0},{0.304266,0}}" />
                         </Window>
@@ -80,8 +70,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="BoneLabel" >
                             <Property name="Text" value="at bone:" />
-                            <Property name="HorzExtent" value="51" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.57,0},{0.242082,0},{0.721903,0},{0.301351,0}}" />
                         </Window>
@@ -99,8 +87,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="RotateLabel" >
                             <Property name="Text" value="Rotate(x,y,z):" />
-                            <Property name="HorzExtent" value="84" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.02,0},{0.4,0},{0.219404,0},{0.46,0}}" />
                         </Window>
@@ -133,8 +119,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="ScaleLabel" >
                             <Property name="Text" value="Scale:" />
-                            <Property name="HorzExtent" value="37" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.02,0},{0.5,0},{0.22,0},{0.56,0}}" />
                         </Window>
@@ -149,8 +133,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="OffsetLabel" >
                             <Property name="Text" value="Offset (x,y,z):" />
-                            <Property name="HorzExtent" value="85" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.02,0},{0.6,0},{0.22,0},{0.66,0}}" />
                         </Window>
@@ -226,8 +208,6 @@
                         <Property name="Area" value="{{-0.00215884,0},{0,0},{0.997841,0},{1,0}}" />
                         <Window type="TaharezLook/StaticText" name="ShapeLabel" >
                             <Property name="Text" value="Shape:" />
-                            <Property name="HorzExtent" value="42" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.01,0},{0.347415,0},{0.1,0}}" />
                         </Window>
@@ -236,15 +216,11 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="CircleLabel" >
                             <Property name="Text" value="Circle" />
-                            <Property name="HorzExtent" value="37" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.1,0},{0.1,0},{0.2,0},{0.15,0}}" />
                         </Window>
                         <Window type="TaharezLook/StaticText" name="RadiusLabel" >
                             <Property name="Text" value="Radius:" />
-                            <Property name="HorzExtent" value="42" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.3,0},{0.1,0},{0.4,0},{0.15,0}}" />
                         </Window>
@@ -266,15 +242,11 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="RectangleLabel" >
                             <Property name="Text" value="Rectangle" />
-                            <Property name="HorzExtent" value="63" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.1,0},{0.2,0},{0.2,0},{0.25,0}}" />
                         </Window>
                         <Window type="TaharezLook/StaticText" name="WidthLabel" >
                             <Property name="Text" value="Width:" />
-                            <Property name="HorzExtent" value="38" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.3,0},{0.2,0},{0.4,0},{0.25,0}}" />
                         </Window>
@@ -289,8 +261,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="DepthLabel" >
                             <Property name="Text" value="Depth:" />
-                            <Property name="HorzExtent" value="42" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.3,0},{0.301493,0},{0.4,0},{0.351493,0}}" />
                         </Window>
@@ -309,8 +279,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="CollisionLabel" >
                             <Property name="Text" value="Collision type" />
-                            <Property name="HorzExtent" value="85" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.1,0},{0.4,0},{0.4,0},{0.45,0}}" />
                         </Window>
@@ -320,8 +288,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="CopyDataLabel" >
                             <Property name="Text" value="Copy data from:" />
-                            <Property name="HorzExtent" value="100" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.6,0},{0.3,0},{0.65,0}}" />
                         </Window>
@@ -343,8 +309,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="PosLabel" >
                             <Property name="Text" value="Position:" />
-                            <Property name="HorzExtent" value="53" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.05,0},{0.03,0},{0.22,0},{0.1,0}}" />
                         </Window>
@@ -368,8 +332,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="AngleLabel" >
                             <Property name="Text" value="Angle:" />
-                            <Property name="HorzExtent" value="39" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.2,0},{0.2,0},{0.28,0}}" />
                         </Window>
@@ -417,8 +379,6 @@
                         <Property name="Area" value="{{-0.00215884,0},{0,0},{0.997841,0},{1,0}}" />
                         <Window type="TaharezLook/StaticText" name="RadiusLabel" >
                             <Property name="Text" value="Radius:" />
-                            <Property name="HorzExtent" value="42" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.3,0},{0.1,0},{0.4,0},{0.15,0}}" />
                         </Window>
@@ -434,8 +394,6 @@
 
                         <Window type="TaharezLook/StaticText" name="CopyDataLabel" >
                             <Property name="Text" value="Copy data from:" />
-                            <Property name="HorzExtent" value="100" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.6,0},{0.3,0},{0.65,0}}" />
                         </Window>
@@ -457,8 +415,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="PosLabel" >
                             <Property name="Text" value="Position:" />
-                            <Property name="HorzExtent" value="53" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.05,0},{0.03,0},{0.22,0},{0.1,0}}" />
                         </Window>
@@ -482,8 +438,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="AngleLabel" >
                             <Property name="Text" value="Angle:" />
-                            <Property name="HorzExtent" value="39" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.2,0},{0.2,0},{0.28,0}}" />
                         </Window>
@@ -529,8 +483,6 @@
                         <Property name="Area" value="{{-0.00215884,0},{0,0},{0.997841,0},{1,0}}" />
                         <Window type="TaharezLook/StaticText" name="TypeLabel" >
                             <Property name="Text" value="Type:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.09,0},{0.2,0},{0.15,0}}" />
                         </Window>
@@ -540,8 +492,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="SizeLabel" >
                             <Property name="Text" value="Size:" />
-                            <Property name="HorzExtent" value="29" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.16,0},{0.2,0},{0.24,0}}" />
                         </Window>
@@ -551,8 +501,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="CopyDataLabel" >
                             <Property name="Text" value="Copy data from:" />
-                            <Property name="HorzExtent" value="100" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.6,0},{0.3,0},{0.65,0}}" />
                         </Window>
@@ -566,8 +514,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="NameLabel" >
                             <Property name="Text" value="Name:" />
-                            <Property name="HorzExtent" value="41" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.03,0},{0.2,0},{0.08,0}}" />
                         </Window>
@@ -578,8 +524,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="PriceLabel" >
                             <Property name="Text" value="Value:" />
-                            <Property name="HorzExtent" value="38" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.25,0},{0.2,0},{0.3,0}}" />
                         </Window>
@@ -592,8 +536,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="EnchantRangeLabel" >
                             <Property name="Text" value="Enchant min:" />
-                            <Property name="HorzExtent" value="82" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.34,0},{0.24,0},{0.4,0}}" />
                         </Window>
@@ -606,8 +548,6 @@
                         </Window>
                         <Window type="TaharezLook/StaticText" name="EnchantMaxLabel" >
                             <Property name="Text" value="max:" />
-                            <Property name="HorzExtent" value="29" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.55,0},{0.34,0},{0.65,0},{0.4,0}}" />
                         </Window>
@@ -628,8 +568,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="HealthLabel" >
                             <Property name="Text" value="Health:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.03,0},{0.2,0},{0.08,0}}" />
                         </Window>
@@ -644,16 +582,12 @@
                         
                         <Window type="TaharezLook/StaticText" name="AttrLabel" >
                             <Property name="Text" value="Attribute:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.10,0},{0.2,0},{0.16,0}}" />
                         </Window>
                         
                         <Window type="TaharezLook/StaticText" name="StrengthLabel" >
                             <Property name="Text" value="Strength:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.17,0},{0.2,0},{0.23,0}}" />
                         </Window>
@@ -668,8 +602,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="DexterityLabel" >
                             <Property name="Text" value="Dexterity:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.17,0},{0.7,0},{0.23,0}}" />
                         </Window>
@@ -685,8 +617,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="MagicPowerLabel" >
                             <Property name="Text" value="Magic Power:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.24,0},{0.2,0},{0.30,0}}" />
                         </Window>
@@ -701,8 +631,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="WillpowerLabel" >
                             <Property name="Text" value="Willpower:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.24,0},{0.7,0},{0.30,0}}" />
                         </Window>
@@ -718,16 +646,12 @@
                         
                         <Window type="TaharezLook/StaticText" name="ResistancesLabel" >
                             <Property name="Text" value="Resistances:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.32,0},{0.4,0},{0.38,0}}" />
                         </Window>
                         
                         <Window type="TaharezLook/StaticText" name="PhysResLabel" >
                             <Property name="Text" value="Physical:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.39,0},{0.2,0},{0.45,0}}" />
                         </Window>
@@ -742,8 +666,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="FireResLabel" >
                             <Property name="Text" value="Fire:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.39,0},{0.7,0},{0.45,0}}" />
                         </Window>
@@ -758,8 +680,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="IceResLabel" >
                             <Property name="Text" value="Ice:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.46,0},{0.2,0},{0.52,0}}" />
                         </Window>
@@ -774,8 +694,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="AirResLabel" >
                             <Property name="Text" value="Air:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.46,0},{0.7,0},{0.52,0}}" />
                         </Window>
@@ -790,16 +708,12 @@
                         
                         <Window type="TaharezLook/StaticText" name="OtherLabel" >
                             <Property name="Text" value="Other:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.54,0},{0.2,0},{0.60,0}}" />
                         </Window>
                         
                         <Window type="TaharezLook/StaticText" name="ArmorLabel" >
                             <Property name="Text" value="Armor:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.61,0},{0.2,0},{0.67,0}}" />
                         </Window>
@@ -814,8 +728,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="BlockLabel" >
                             <Property name="Text" value="Block:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.61,0},{0.7,0},{0.67,0}}" />
                         </Window>
@@ -830,8 +742,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="AttackLabel" >
                             <Property name="Text" value="Precision:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.68,0},{0.2,0},{0.74,0}}" />
                         </Window>
@@ -846,8 +756,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="PowerLabel" >
                             <Property name="Text" value="Power:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.68,0},{0.7,0},{0.74,0}}" />
                         </Window>
@@ -869,8 +777,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="TypeLabel" >
                             <Property name="Text" value="Type:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.03,0},{0.2,0},{0.08,0}}" />
                         </Window>
@@ -883,16 +789,12 @@
                         
                         <Window type="TaharezLook/StaticText" name="DamageLabel" >
                             <Property name="Text" value="Damage:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.10,0},{0.2,0},{0.16,0}}" />
                         </Window>
                         
                         <Window type="TaharezLook/StaticText" name="PhysLabel" >
                             <Property name="Text" value="Physical:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.17,0},{0.2,0},{0.23,0}}" />
                         </Window>
@@ -907,8 +809,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="PhysToLabel" >
                             <Property name="Text" value="-" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.44,0},{0.17,0},{0.48,0},{0.23,0}}" />
                         </Window>
@@ -923,8 +823,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="PhysMultLabel" >
                             <Property name="Text" value="x" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.75,0},{0.17,0},{0.78,0},{0.23,0}}" />
                         </Window>
@@ -940,8 +838,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="FireLabel" >
                             <Property name="Text" value="Fire:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.24,0},{0.2,0},{0.30,0}}" />
                         </Window>
@@ -956,8 +852,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="FireToLabel" >
                             <Property name="Text" value="-" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.44,0},{0.24,0},{0.48,0},{0.30,0}}" />
                         </Window>
@@ -972,8 +866,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="FireMultLabel" >
                             <Property name="Text" value="x" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.75,0},{0.24,0},{0.78,0},{0.30,0}}" />
                         </Window>
@@ -989,8 +881,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="IceLabel" >
                             <Property name="Text" value="Ice:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.31,0},{0.2,0},{0.37,0}}" />
                         </Window>
@@ -1005,8 +895,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="IceToLabel" >
                             <Property name="Text" value="-" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.44,0},{0.31,0},{0.48,0},{0.37,0}}" />
                         </Window>
@@ -1021,8 +909,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="IceMultLabel" >
                             <Property name="Text" value="x" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.75,0},{0.31,0},{0.78,0},{0.37,0}}" />
                         </Window>
@@ -1039,8 +925,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="AirLabel" >
                             <Property name="Text" value="Air:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.38,0},{0.2,0},{0.44,0}}" />
                         </Window>
@@ -1055,8 +939,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="AirToLabel" >
                             <Property name="Text" value="-" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.44,0},{0.38,0},{0.48,0},{0.44,0}}" />
                         </Window>
@@ -1071,8 +953,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="AirMultLabel" >
                             <Property name="Text" value="x" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.75,0},{0.38,0},{0.78,0},{0.44,0}}" />
                         </Window>
@@ -1088,8 +968,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="PrecisionLabel" >
                             <Property name="Text" value="Precision:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.47,0},{0.2,0},{0.53,0}}" />
                         </Window>
@@ -1104,8 +982,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="PowerLabel" >
                             <Property name="Text" value="Power:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.53,0},{0.47,0},{0.7,0},{0.53,0}}" />
                         </Window>
@@ -1121,8 +997,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="RangeLabel" >
                             <Property name="Text" value="Range:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.54,0},{0.2,0},{0.60,0}}" />
                         </Window>
@@ -1138,8 +1012,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="SpeedLabel" >
                             <Property name="Text" value="Speed:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.53,0},{0.54,0},{0.7,0},{0.60,0}}" />
                         </Window>
@@ -1159,8 +1031,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="TwohandedLabel" >
                             <Property name="Text" value="Twohanded weapon" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.08,0},{0.61,0},{0.50,0},{0.67,0}}" />
                         </Window>
@@ -1168,8 +1038,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="CritPercentLabel" >
                             <Property name="Text" value="Crit. Hits:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.68,0},{0.2,0},{0.74,0}}" />
                         </Window>
@@ -1191,8 +1059,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="TypeLabel" >
                             <Property name="Text" value="Health:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.03,0},{0.2,0},{0.08,0}}" />
                         </Window>
@@ -1208,16 +1074,12 @@
                         
                         <Window type="TaharezLook/StaticText" name="CureLabel" >
                             <Property name="Text" value="Status heal and immunity time:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.10,0},{0.7,0},{0.16,0}}" />
                         </Window>
                         
                         <Window type="TaharezLook/StaticText" name="BlindLabel" >
                             <Property name="Text" value="Blind:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.17,0},{0.2,0},{0.23,0}}" />
                         </Window>
@@ -1232,8 +1094,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="PoisonedLabel" >
                             <Property name="Text" value="Poisoned:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.17,0},{0.7,0},{0.23,0}}" />
                         </Window>
@@ -1249,8 +1109,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="BerserkLabel" >
                             <Property name="Text" value="Berserk:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.24,0},{0.2,0},{0.30,0}}" />
                         </Window>
@@ -1265,8 +1123,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="ConfusedLabel" >
                             <Property name="Text" value="Confused:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.24,0},{0.7,0},{0.30,0}}" />
                         </Window>
@@ -1282,8 +1138,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="MuteLabel" >
                             <Property name="Text" value="Mute:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.31,0},{0.2,0},{0.37,0}}" />
                         </Window>
@@ -1298,8 +1152,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="ParalyzedLabel" >
                             <Property name="Text" value="Paralyzed:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.31,0},{0.7,0},{0.37,0}}" />
                         </Window>
@@ -1315,8 +1167,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="FrozenLabel" >
                             <Property name="Text" value="Frozen:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.38,0},{0.2,0},{0.44,0}}" />
                         </Window>
@@ -1331,8 +1181,6 @@
                         
                         <Window type="TaharezLook/StaticText" name="BurningLabel" >
                             <Property name="Text" value="Burning:" />
-                            <Property name="HorzExtent" value="36" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.52,0},{0.38,0},{0.7,0},{0.44,0}}" />
                         </Window>
@@ -1351,8 +1199,6 @@
                         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                         <Window type="TaharezLook/StaticText" name="EnchantLabel" >
                             <Property name="Text" value="Enchant:" />
-                            <Property name="HorzExtent" value="55" />
-                            <Property name="VertExtent" value="15.5148" />
                             <Property name="FrameEnabled" value="False" />
                             <Property name="Area" value="{{0.03,0},{0.03,0},{0.2,0},{0.1,0}}" />
                         </Window>
