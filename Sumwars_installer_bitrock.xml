@@ -93,31 +93,49 @@
                             <origin>inst/share</origin>
                         </distributionDirectory>
                         <distributionFile>
+                            <origin>inst/alut.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
                             <origin>inst/AUTHORS</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>inst/boost_filesystem-vc110-mt-1_52.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>inst/boost_system-vc110-mt-1_52.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>inst/boost_thread-vc110-mt-1_52.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>inst/CEGUIBase-0.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>inst/CEGUIOgreRenderer-0.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>inst/cg.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/COPYING</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/README</origin>
+                            <origin>inst/expat.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/alut.dll</origin>
+                            <origin>inst/freetype.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/CEGUIBase.dll</origin>
+                            <origin>inst/libcharset1.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/CEGUIExpatParser.dll</origin>
+                            <origin>inst/libgettextlib.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/CEGUIFalagardWRBase.dll</origin>
+                            <origin>inst/libgettextpo.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/CEGUIOgreRenderer.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>inst/cg.dll</origin>
+                            <origin>inst/libgettextsrc.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/libiconv2.dll</origin>
@@ -132,22 +150,13 @@
                             <origin>inst/OgreMain.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/OgrePaging.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>inst/OgreProperty.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
                             <origin>inst/OgreRTShaderSystem.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>inst/OgreTerrain.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/OIS.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/physfs.dll</origin>
+                            <origin>inst/pcre.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/Plugin_CgProgramManager.dll</origin>
@@ -162,10 +171,7 @@
                             <origin>inst/Plugin_ParticleFX.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/Plugin_PCZSceneManager.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>inst/PocoFoundation.dll</origin>
+                            <origin>inst/README</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/RenderSystem_Direct3D9.dll</origin>
@@ -175,6 +181,9 @@
                         </distributionFile>
                         <distributionFile>
                             <origin>inst/sumwars.exe</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>inst/zlib.dll</origin>
                         </distributionFile>
                     </distributionFileList>
                     <shortcutList>
