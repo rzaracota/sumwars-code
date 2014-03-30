@@ -235,7 +235,9 @@ void ContentEditor::update(OIS::Keyboard *keyboard, OIS::Mouse *mouse)
 	}
 	
 	if(keyboard->isKeyDown(OIS::KC_LCONTROL) && keyboard->isKeyDown(OIS::KC_K))
+  {
 		toggleVisibility();
+  }
 	
 	std::map<std::string, ContentEditorTab*>::iterator it;
 	for (it = m_components.begin(); it != m_components.end(); ++it)
