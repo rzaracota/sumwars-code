@@ -21,6 +21,8 @@
 #include "benchmarktab.h"
 #include "contenttab.h"
 
+#include "debug.h"
+
 // TODO(Augustin Preda, 2014.03.25): re-enable when functionality can be added.
 // #include "reloadtab.h"
 
@@ -48,6 +50,7 @@ void DebugPanel::toogleVisibility()
 {
 	if((Ogre::Root::getSingleton().getTimer()->getMilliseconds() - m_lastVisibilitySwitch) > 500)
 	{
+    SW_DEBUG("Debug panel visibility toggle");
 		m_rootWindow->setVisible(!m_rootWindow->isVisible());
 		m_lastVisibilitySwitch = Ogre::Root::getSingleton().getTimer()->getMilliseconds();
 	}
@@ -58,6 +61,9 @@ void DebugPanel::createPanel(bool visible)
 {
 	m_rootWindow = m_winManager->createWindow("TaharezLook/FrameWindow", "DebugPanel");
 	m_rootWindow->setPosition(UVector2(UDim(0.1f, 0.0f), UDim(0.1f, 0.0f)));
+  m_rootWindow->setProperty("FrameEnabled", "true");
+  m_rootWindow->setVisible(false);
+
   CEGUIUtility::setWidgetSizeRel (m_rootWindow, 0.6f, 0.6f);
 	m_rootWindow->setText((CEGUI::utf8*)"Debug Panel");
   CEGUIUtility::addChildWidget(m_gameScreen, m_rootWindow);
@@ -66,31 +72,37 @@ void DebugPanel::createPanel(bool visible)
 	
 	m_tabControl = static_cast<TabControl*>(m_winManager->createWindow("TaharezLook/TabControl", "DebugPanelTabControl"));
 	m_tabControl->setPosition(UVector2(UDim(0.03f, 0.0f), UDim(0.06f, 0.0f)));
+  m_tabControl->setInheritsAlpha(true);
   CEGUIUtility::setWidgetSizeRel (m_tabControl,0.95f, 0.9f);
-  CEGUIUtility::addChildWidget(m_gameScreen, m_tabControl);
+  CEGUIUtility::addChildWidget(m_rootWindow, m_tabControl);
 	
 	GuiDebugTab *guiTab = static_cast<GuiDebugTab*>(m_winManager->createWindow("GuiDebugTab", "GuiDebugTab"));
 	guiTab->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
+  guiTab->setInheritsAlpha(true);
   CEGUIUtility::setWidgetSizeRel (guiTab, 1.0f, 1.0f);
 	addTabWindow("GuiDebugTab", guiTab);
 
 	LuaScriptTab *luaTab = static_cast<LuaScriptTab*>(m_winManager->createWindow("LuaScriptTab", "LuaScriptTab"));
 	luaTab->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
+  luaTab->setInheritsAlpha(true);
   CEGUIUtility::setWidgetSizeRel (luaTab, 1.0f, 1.0f);
 	addTabWindow("LuaScriptTab", luaTab);
 	
 	IconEditorTab *iconEdTab = static_cast<IconEditorTab*>(m_winManager->createWindow("IconEditorTab", "IconEditorTab"));
 	iconEdTab->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
+  iconEdTab->setInheritsAlpha(true);
   CEGUIUtility::setWidgetSizeRel (iconEdTab, 1.0f, 1.0f);
 	addTabWindow("IconEditorTab", iconEdTab);
 
 	BenchmarkTab *benchTab = static_cast<BenchmarkTab*>(m_winManager->createWindow("BenchmarkTab", "BenchmarkTab"));
 	benchTab->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
+  benchTab->setInheritsAlpha(true);
   CEGUIUtility::setWidgetSizeRel (benchTab, 1.0f, 1.0f);
 	addTabWindow("BenchmarkTab", benchTab);
 	
 	DebugCameraTab *camTab = static_cast<DebugCameraTab*>(m_winManager->createWindow("DebugCamera", "DebugCamera"));
 	camTab->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
+  camTab->setInheritsAlpha(true);
   CEGUIUtility::setWidgetSizeRel (camTab, 1.0f, 1.0f);
 	addTabWindow("DebugCamera", camTab);
 
@@ -120,7 +132,9 @@ void DebugPanel::addTabWindow(std::string name, DebugTab* tab)
 bool DebugPanel::tabExists(std::string tabName)
 {
 	if(m_tabs.find(tabName) != m_tabs.end())
+  {
 		return true;
+  }
 
 	return false;
 }
@@ -129,10 +143,14 @@ bool DebugPanel::tabExists(std::string tabName)
 void DebugPanel::update(OIS::Keyboard *keyboard, OIS::Mouse *mouse)
 {
 	if(m_tabs.size() < 1)
+  {
 		return;
+  }
 	
 	if(keyboard->isKeyDown(OIS::KC_LCONTROL) && keyboard->isKeyDown(OIS::KC_D))
+  {
 		toogleVisibility();
+  }
 	
 	std::map<std::string, DebugTab*>::iterator iter;
 	for (iter = m_tabs.begin(); iter != m_tabs.end(); ++iter)

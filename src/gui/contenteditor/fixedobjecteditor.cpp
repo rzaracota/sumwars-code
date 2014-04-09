@@ -310,7 +310,7 @@ bool FixedObjectEditor::onFixedObjectXMLModified(const CEGUI::EventArgs& evt)
 {
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
-    "FOTab/XML/FOXMLEditbox"));
+    "Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/XML/FOXMLEditbox"));
 	
 	// Parse the editor text to XML
 	// use temporary XML document for recovering from errors
@@ -345,7 +345,7 @@ bool FixedObjectEditor::onFixedObjectXMLModified(const CEGUI::EventArgs& evt)
 		int err_row = ri_temp_xml.ErrorRow();
 		int err_col = ri_temp_xml.ErrorCol();
 		
-		setMultiLineEditboxCursor("FOTab/XML/FOXMLEditbox",err_row,err_col);
+		setMultiLineEditboxCursor("Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/XML/FOXMLEditbox",err_row,err_col);
 	}
 	
 	return true;
@@ -384,9 +384,9 @@ bool FixedObjectEditor::onFixedObjectCreate(const CEGUI::EventArgs& evt)
 	Region* region = player->getRegion();
 	
 	// if the position is set to default, use the player position
-	pos.m_x = getSpinnerValue("FOTab/Create/PosXSpinner",0);
-	pos.m_y = getSpinnerValue("FOTab/Create/PosYSpinner",0);
-	angle = getSpinnerValue("FOTab/Create/AngleSpinner",0);
+	pos.m_x = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/Create/PosXSpinner", 0);
+	pos.m_y = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/Create/PosYSpinner", 0);
+	angle = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/Create/AngleSpinner",0);
 	if (pos.m_x == 0 && pos.m_y == 0)
 	{
 		pos = player->getShape()->m_center;
@@ -401,7 +401,7 @@ bool FixedObjectEditor::onFixedObjectCreate(const CEGUI::EventArgs& evt)
 
 bool FixedObjectEditor::onCopyData(const CEGUI::EventArgs& evt)
 {
-	std::string objname	= getComboboxSelection("FOTab/Properties/CopyDataBox", "");
+	std::string objname	= getComboboxSelection("Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/Properties/CopyDataBox", "");
 	if (objname == "")
 		return true;
 	
@@ -430,8 +430,8 @@ bool FixedObjectEditor::onGetPlayerPosition(const CEGUI::EventArgs& evt)
 	
 	Vector pos = player->getShape()->m_center;
 	
-	setSpinnerValue("FOTab/Create/PosXSpinner", pos.m_x);
-	setSpinnerValue("FOTab/Create/PosYSpinner", pos.m_y);
+	setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/Create/PosXSpinner", pos.m_x);
+	setSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/Create/PosYSpinner", pos.m_y);
 	
 	return true;
 }
