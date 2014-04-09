@@ -37,18 +37,18 @@ void TopicList::addTopic(std::string topic, Event* speech)
 {
 	if (m_topics.count(topic) != 0)
 	{
-			WARNING("duplicate topic %s",topic.c_str());
+			WARNING("duplicate topic %s", topic.c_str());
 			delete m_topics[topic];
 			m_topics.erase(topic);
 	}
 	
-	m_topics.insert(std::make_pair(topic,speech));
+	m_topics.insert(std::make_pair(topic, speech));
 
 }
 
 void TopicList::addStartTopic(TranslatableString text, std::string topic)
 {
-	m_start_topics.push_back(std::make_pair(text,topic));
+	m_start_topics.push_back(std::make_pair(text, topic));
 }
 
 Event* TopicList::getSpeakTopic(std::string topic)
@@ -57,11 +57,12 @@ Event* TopicList::getSpeakTopic(std::string topic)
 
 	it = m_topics.find(topic);
 	if (it == m_topics.end())
+  {
 		return 0;
+  }
 
 	return it->second;
 }
-
 
 
 void NPCTrade::TradeObject::operator=(TradeObject& other)
@@ -86,58 +87,62 @@ NPCTrade::NPCTrade()
 bool NPCTrade::checkRefresh(Equipement* &equ)
 {
 	// update, wenn das Inventar noch garnicht existiert oder zu alt ist
-	if (equ ==0 || m_refresh_timer.getTime() > m_refresh_time)
+	if (equ == 0 || m_refresh_timer.getTime() > m_refresh_time)
 	{
 		if (equ == 0)
 		{
-			equ = new Equipement(100,100,100);
+			equ = new Equipement(100, 100, 100);
 		}
 		equ->clear();
 
-		Item* itm=0;
+		Item* itm = 0;
 		Item::Type type;
 		std::list<TradeObject>::iterator it;
 		// Schleife ueber alle handelbaren Objekte
 		for (it = m_trade_objects.begin(); it != m_trade_objects.end(); ++it)
 		{
 			// nicht magische Objekte erzeugen
-			for (int i=0; i< it->m_number; ++i)
+			for (int i = 0; i < it->m_number; ++i)
 			{
 				if (Random::random() > it->m_probability)
+        {
 					continue;
-				
+        }
+
 				type = ItemFactory::getBaseType(it->m_subtype);
-				itm = ItemFactory::createItem(type,it->m_subtype);
+				itm = ItemFactory::createItem(type, it->m_subtype);
 				if (itm != 0)
 				{
 					itm->m_price = (int) (itm->m_price * m_cost_multiplier);
 	
 					// einfuegen und erfolg testen
-					if (equ->insertItem(itm,false,false) == Equipement::NONE)
+					if (equ->insertItem(itm, false, false) == Equipement::NONE)
 					{
 						delete itm;
 					}
 				}
 				else
 				{
-					ERRORMSG("could not create Item %s",it->m_subtype.c_str());
+					ERRORMSG("could not create Item %s", it->m_subtype.c_str());
 				}
 			}
 
 			// magische Objekte erzeugen
 			float magic;
-			for (int i=0; i< it->m_number_magical; ++i)
+			for (int i = 0; i < it->m_number_magical; ++i)
 			{
 				if (Random::random() > it->m_probability)
+        {
 					continue;
-				
+        }
+
 				type = ItemFactory::getBaseType(it->m_subtype);
 				magic = Random::randrangef(it->m_min_enchant, it->m_max_enchant);
-				itm = ItemFactory::createItem(type,it->m_subtype,0,magic,Item::MAGICAL);
+				itm = ItemFactory::createItem(type, it->m_subtype, 0, magic, Item::MAGICAL);
 				itm->m_price = (int) (itm->m_price * m_cost_multiplier);
 
 				// einfuegen und erfolg testen
-				if (equ->insertItem(itm,false,false) == Equipement::NONE)
+				if (equ->insertItem(itm, false, false) == Equipement::NONE)
 				{
 					delete itm;
 				}
@@ -150,10 +155,9 @@ bool NPCTrade::checkRefresh(Equipement* &equ)
 }
 
 
-
-Dialogue::Dialogue(Region* region, std::string topic_base,int id)
+Dialogue::Dialogue(Region* region, std::string topic_base, int id)
 {
-	if (id ==0)
+	if (id == 0)
 	{
 		m_id = World::getWorld()->getValidId();
 	}
@@ -171,7 +175,7 @@ Dialogue::Dialogue(Region* region, std::string topic_base,int id)
 	m_nr_players =0;
 	m_event_mask = 0;
 	
-	for (int i=0; i<4; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		m_active_speaker[i] =0;
 	}
@@ -188,7 +192,7 @@ Dialogue::~Dialogue()
 	for (it = m_speaker.begin(); it != m_speaker.end(); ++it)
 	{
 		wo = m_region->getObject(it->second);
-		if (wo !=0 && wo->isCreature())
+		if (wo != 0 && wo->isCreature())
 		{
 			cr = static_cast<Creature*>(wo);
 			cr ->clearSpeakText();
@@ -214,13 +218,15 @@ void Dialogue::cleanup()
 
 void Dialogue::addSpeaker(int id, std::string refname, bool force)
 {
-	if (id ==0)
+	if (id == 0)
+  {
 		return;
-	
+  }
+
 	// Pruefen, ob die Kreatur existiert
 	WorldObject* wo =0;
 	wo = m_region->getObject(id);
-	if (wo ==0 || !wo->isCreature())
+	if (wo == 0 || !wo->isCreature())
 	{
 		ERRORMSG("cant add %i: %s to dialogue: not a creature", id, refname.c_str());
 		return;
@@ -679,7 +685,7 @@ Dialogue::Position Dialogue::calcSpeakerPosition(int id)
 {
 	WorldObject* wo =0;
 	wo = m_region->getObject(id);
-	if (wo ==0 || !wo->isCreature())
+	if (wo == 0 || !wo->isCreature())
 	{
 		ERRORMSG("Speaker %i is not a creature", id);
 		return Dialogue::UNKNOWN;
@@ -697,13 +703,24 @@ Dialogue::Position Dialogue::calcSpeakerPosition(int id)
 
 void Dialogue::setSpeakerPosition(int id, Position pos)
 {
-	if (pos<NONE || pos>AUTOMATIC || pos == UNKNOWN || m_speaker_state.count(id) == 0)
+  // Check for invalid input.
+	if (pos < NONE || pos > AUTOMATIC || pos == UNKNOWN || m_speaker_state.count(id) == 0)
+  {
 		return;
+  }
 	
-	m_event_mask =1;
+	m_event_mask = 1;
 	
 	if (pos == AUTOMATIC)
+  {
 		pos = calcSpeakerPosition(id);
+
+    // After calculation, re-check the output for validity, as it may be set to invalid by the called function.
+    if (pos <= NONE || pos == UNKNOWN)
+    {
+      return;
+    }
+  }
 	
 	// Spieler entfernen
 	// bisherige Position ermitteln:
