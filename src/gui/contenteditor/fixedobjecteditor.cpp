@@ -89,7 +89,7 @@ void FixedObjectEditor::init(CEGUI::Window* parent)
   TiXmlNode* linkedNode = NULL;
 	TiXmlElement * fixed_root = new TiXmlElement("Object");  
 	linkedNode = m_fixed_object_xml.LinkEndChild(fixed_root);
-  if (fixed_root == NULL)
+  if (linkedNode == NULL)
   {
     // Failed to link the root item.
     return;
