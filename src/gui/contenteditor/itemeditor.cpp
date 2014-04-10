@@ -318,15 +318,14 @@ void ItemEditor::init(CEGUI::Window* parent)
   {
     // Only use item_root if it was not deleted.
 	  item_root->SetAttribute("subtype", "EditorItem");
+	  TiXmlElement * item_image = new TiXmlElement("Image");  
+	  item_image->SetAttribute("image", "noMedia.png"); // previously: "set:noMedia.png image:full_image"
+	  item_root->LinkEndChild(item_image);
+	
+	  TiXmlElement * item_ri = new TiXmlElement("RenderInfo");  
+	  item_ri->SetAttribute("name", "EditorRenderInfo");
+	  item_root->LinkEndChild(item_ri);
   }
-	
-	TiXmlElement * item_image = new TiXmlElement("Image");  
-	item_image->SetAttribute("image", "noMedia.png"); // previously: "set:noMedia.png image:full_image"
-	item_root->LinkEndChild(item_image);
-	
-	TiXmlElement * item_ri = new TiXmlElement("RenderInfo");  
-	item_ri->SetAttribute("name", "EditorRenderInfo");
-	item_root->LinkEndChild(item_ri);
 	
 	// init the data
 	m_edited_item.m_subtype = "EditorItem";

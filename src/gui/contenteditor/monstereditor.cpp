@@ -74,13 +74,19 @@ void MonsterEditor::init(CEGUI::Window* parent)
 	copyfoButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MonsterEditor::onCopyData, this));
 	
 	// init the internal data
+  TiXmlNode* linkedNode = NULL;
 	TiXmlElement * monster_root = new TiXmlElement("Monster");  
-	m_monster_xml.LinkEndChild( monster_root );  
-	monster_root->SetAttribute("subtype","EditorMonster");
+	linkedNode = m_monster_xml.LinkEndChild(monster_root);
+
+  if (linkedNode != NULL)
+  {
+    // Only use monster_root if it was not deleted.
+	  monster_root->SetAttribute("subtype", "EditorMonster");
 	
-	TiXmlElement * monster_ri = new TiXmlElement("RenderInfo");  
-	monster_ri->SetAttribute("name","EditorRenderInfo");
-	monster_root->LinkEndChild(monster_ri);
+	  TiXmlElement * monster_ri = new TiXmlElement("RenderInfo");  
+	  monster_ri->SetAttribute("name", "EditorRenderInfo");
+	  monster_root->LinkEndChild(monster_ri);
+  }
 	
 	m_update_base_content = true;
 }
@@ -179,7 +185,9 @@ void MonsterEditor::updateMonsterEditor()
 bool MonsterEditor::onMonsterModified(const CEGUI::EventArgs& evt)
 {
 	if (m_no_cegui_events)
+  {
 		return true;
+  }
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
@@ -231,7 +239,7 @@ bool MonsterEditor::onMonsterXMLModified(const CEGUI::EventArgs& evt)
 		m_monster_xml.LinkEndChild(ri_temp_xml.RootElement()->Clone());
 		
 		// parse the XML to the monster data
-		ObjectLoader::loadMonster(m_monster_xml.FirstChildElement(),true);
+		ObjectLoader::loadMonster(m_monster_xml.FirstChildElement(), true);
 		// copy to the local Data structure
 		MonsterBasicData* data = ObjectFactory::getMonsterData("EditorMonster");
 		if (data != 0)
@@ -264,17 +272,20 @@ bool MonsterEditor::onMonsterCreate(const CEGUI::EventArgs& evt)
 	// create a unique renderinfo (to avoid that the object is modified by the editor after creation)
 	RenderInfoEditor* ri_editor = dynamic_cast<RenderInfoEditor*>(ContentEditor::getSingleton().getComponent("RIEditor"));
 	std::string unique_ri = ri_editor->getUniqueRenderinfo();
+
 	// temporarily replace the renderinfo name
 	TiXmlElement * fixed_ri = m_monster_xml.RootElement()->FirstChildElement("RenderInfo");
 	if (fixed_ri == 0)
+  {
 		return true;
+  }
 	
 	std::string name = fixed_ri->Attribute("name");
-	fixed_ri->SetAttribute("name",unique_ri.c_str());
+	fixed_ri->SetAttribute("name", unique_ri.c_str());
 	
-	ObjectLoader::loadMonster(m_monster_xml.FirstChildElement(),true);
+	ObjectLoader::loadMonster(m_monster_xml.FirstChildElement(), true);
 	
-	fixed_ri->SetAttribute("name",name.c_str());
+	fixed_ri->SetAttribute("name", name.c_str());
 	
 	Vector pos;
 	float angle;
@@ -282,24 +293,29 @@ bool MonsterEditor::onMonsterCreate(const CEGUI::EventArgs& evt)
 	
 	World* world = World::getWorld();
 	if (world == 0)
+  {
 		return true;
+  }
 	
 	WorldObject* player = world->getLocalPlayer();
 	if (player == 0)
+  {
 		return true;
+  }
+
 	Region* region = player->getRegion();
 	
 	// if the position is set to default, use the player position
-	pos.m_x = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Create/PosXSpinner",0);
-	pos.m_y = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Create/PosYSpinner",0);
-	angle = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Create/AngleSpinner",0);
+	pos.m_x = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Create/PosXSpinner", 0);
+	pos.m_y = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Create/PosYSpinner", 0);
+	angle = getSpinnerValue("Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Create/AngleSpinner", 0);
 	if (pos.m_x == 0 && pos.m_y == 0)
 	{
 		pos = player->getShape()->m_center;
 	}
 	
 	// create the object
-	int id = region->createObject("EditorMonster", pos,angle, height,WorldObject::STATE_ACTIVE);
+	int id = region->createObject("EditorMonster", pos,angle, height, WorldObject::STATE_ACTIVE);
 	m_created_objects.push_back(std::make_pair(region->getId(), id));
 
 	return false;
@@ -307,13 +323,19 @@ bool MonsterEditor::onMonsterCreate(const CEGUI::EventArgs& evt)
 
 bool MonsterEditor::onCopyData(const CEGUI::EventArgs& evt)
 {
-	std::string objname	= getComboboxSelection("Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Properties/CopyDataBox", "");
+	std::string objname	= getComboboxSelection(
+      "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Properties/CopyDataBox", "");
+
 	if (objname == "")
+  {
 		return true;
+  }
 	
 	MonsterBasicData* modata = ObjectFactory::getMonsterData(objname);
 	if (modata == 0)
+  {
 		return true;
+  }
 	
 	m_edited_monster = *modata;
 	
@@ -327,11 +349,16 @@ bool MonsterEditor::onGetPlayerPosition(const CEGUI::EventArgs& evt)
 {
 	World* world = World::getWorld();
 	if (world == 0)
+  {
 		return true;
+  }
 	
 	WorldObject* player = world->getLocalPlayer();
 	if (player == 0)
+  {
 		return true;
+  }
+
 	//Region* region = player->getRegion();
 	
 	Vector pos = player->getShape()->m_center;
@@ -346,17 +373,22 @@ bool MonsterEditor::onDelAllObjects(const CEGUI::EventArgs& evt)
 {
 	World* world = World::getWorld();
 	if (world == 0)
+  {
 		return true;
+  }
 	
-	std::list< std::pair<int,int> >::iterator it;
+	std::list< std::pair<int, int> >::iterator it;
 	for (it = m_created_objects.begin(); it != m_created_objects.end(); ++it)
 	{
 		Region* region = world->getRegion(it->first);
 		if (region == 0)
+    {
 			continue;
+    }
 		
 		region->deleteObject(it->second);
 	}
+
 	m_created_objects.clear();
 	
 	return true;
