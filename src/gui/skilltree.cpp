@@ -26,9 +26,9 @@
 #define DEFAULT_SKILL_BTN_WIDTH 0.07f
 #define DEFAULT_SKILL_BTN_HEIGHT 0.05f
 
-SkillTree::SkillTree (Document* doc, OIS::Keyboard *keyboard, const std::string& ceguiSkinName)
-	: Window (doc)
-	, m_ceguiSkinName (ceguiSkinName)
+SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard, const std::string& ceguiSkinName)
+	: Window(doc),
+    m_ceguiSkinName(ceguiSkinName)
 {
 	DEBUGX("setup skilltree");
 	m_keyboard = keyboard;
@@ -58,7 +58,7 @@ SkillTree::SkillTree (Document* doc, OIS::Keyboard *keyboard, const std::string&
 	CEGUI::Window* skilltree_holder = CEGUIUtility::loadLayoutFromFile ("skilltree_holder.layout");
 	if (!skilltree_holder)
 	{
-		SW_DEBUG ("WARNING: Failed to load [%s]", "skilltree_holder.layout");
+		SW_DEBUG("WARNING: Failed to load [%s]", "skilltree_holder.layout");
 	}
 
 	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (skilltree_holder, "Skilltree_Holder");
@@ -69,8 +69,15 @@ SkillTree::SkillTree (Document* doc, OIS::Keyboard *keyboard, const std::string&
 	}
 	else
 	{
-		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for skills.");
-		if (!wndSkilltree) SW_DEBUG ("ERROR: Unable to get the window for skills.");
+		if (!wndHolder)
+    {
+      SW_DEBUG("ERROR: Unable to get the window holder for skills.");
+    }
+
+		if (!wndSkilltree) 
+    {
+      SW_DEBUG("ERROR: Unable to get the window for skills.");
+    }
 	}
 
 	m_window = skilltree_holder;
@@ -106,11 +113,11 @@ void SkillTree::update()
 	if (player->getId() != m_player_id)
 	{
 		m_player_id = player->getId();
-		DEBUGX("new Player id %i",m_player_id);
+		DEBUGX("new Player id %i", m_player_id);
 		
 		// alle bisherigen Tabs und Skills entfernen
 		
-		for (int i=0; i<m_nr_skills; i++)
+		for (int i = 0; i < m_nr_skills; i++)
 		{
 			//stream.str("");
 			//stream << "SkillImage"<<i;
@@ -129,7 +136,7 @@ void SkillTree::update()
 			win_mgr.destroyWindow(wnd);
 		}
 		
-		for (int i=0; i<m_nr_dependencies; i++)
+		for (int i = 0; i < m_nr_dependencies; i++)
 		{
 			//stream.str("");
 			//stream << "SkillDependencyConnection"<<i;
@@ -139,9 +146,9 @@ void SkillTree::update()
 			CEGUIUtility::removeChildWidget (wnd->getParent (), wnd);
 			win_mgr.destroyWindow(wnd);
 		}
-		m_nr_dependencies=0;
+		m_nr_dependencies = 0;
 		
-		for (int i=0; i<m_shortkey_labels; i++)
+		for (int i = 0; i < m_shortkey_labels; i++)
 		{
 			//stream.str("");
 			//stream << "SkillShortkeyLabel"<<i;
@@ -151,9 +158,9 @@ void SkillTree::update()
 			CEGUIUtility::removeChildWidget (wnd->getParent (), wnd);
 			win_mgr.destroyWindow(wnd);
 		}
-		m_shortkey_labels=0;
+		m_shortkey_labels = 0;
 		
-		for (int i=0; i<m_nr_tabs; i++)
+		for (int i = 0; i < m_nr_tabs; i++)
 		{
 			stream.str("");
 			stream << "Skilltree/skilltree_aux/SkilltreeTabs/__auto_TabPane__/";
@@ -366,7 +373,7 @@ void SkillTree::update()
 			for (std::list< Action::ActionType >::iterator at = it->second.m_req_abilities.begin(); at != it->second.m_req_abilities.end(); ++at)
 			{
 				// another loop over all abilities
-				std::map<int,LearnableAbility>::iterator jt;
+				std::map<int, LearnableAbility>::iterator jt;
 				for (jt = player->getLearnableAbilities().begin(); jt != player->getLearnableAbilities().end(); ++jt)
 				{
 					if (*at == jt->second.m_type)
@@ -433,7 +440,7 @@ void SkillTree::update()
 	}
 	
 	std::ostringstream out_stream;
-	std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
+	std::map<int, LearnableAbility> &ablts = player->getLearnableAbilities();
 	bool vis;
 	Action::ActionType act;
 	
@@ -485,7 +492,7 @@ void SkillTree::update()
 	}
 
 	// Loop over all Dependencies
-	for (int j=0;j<m_nr_dependencies;j++)
+	for (int j = 0; j < m_nr_dependencies; j++)
 	{
 		std::string skillConnWidget = m_skill_widgets_connections[j];
 
@@ -512,17 +519,23 @@ void SkillTree::update()
 	
 	// update labels for skillpoints and nextskillpoint at
 	// value for next skillpoint level calculation is hacky!
-	int skilllvls[20] = {2,3,5,7,10,15,20,25,30,35,40,45,50,60,70,80,90,100,1000};
-	//int nextlvl; // 2011.10.26: found as unused
+	int skilllvls[20] = {
+    2,   3,  5,  7, 10,
+    15, 20, 25, 30, 35,
+    40, 45, 50, 60, 70,
+    80, 90, 100, 1000};
+
 	int lvlid;
-	for (lvlid=0; lvlid<20; lvlid++)
+	for (lvlid = 0; lvlid < 20; ++lvlid)
 	{
 		if (player->getBaseAttr()->m_level < skilllvls[lvlid])
+    {
 			break;
+    }
 	}
 	
 	std::string lvlstr;
-	if (skilllvls[lvlid] != 1000)
+	if (lvlid < 20 && skilllvls[lvlid] != 1000)
 	{
 		std::stringstream lvlstream;
 		lvlstream << skilllvls[lvlid];
@@ -537,13 +550,17 @@ void SkillTree::update()
 	spstream << player->getSkillPoints();
 	
 	// there is one label on _each_ tab
-	label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkillTreeAdditionalInfoHolder/SkillpointsValueLabel");
+	label = CEGUIUtility::getWindowForLoadedLayoutEx(
+      m_window, "Skilltree/skilltree_aux/SkillTreeAdditionalInfoHolder/SkillpointsValueLabel");
+
 	if (label->getText() != spstream.str())
 	{
 		label->setText(spstream.str());
 	}
 		
-	label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Skilltree/skilltree_aux/SkillTreeAdditionalInfoHolder/NextSkillpointsValueLabel");
+	label =  CEGUIUtility::getWindowForLoadedLayoutEx(
+      m_window, "Skilltree/skilltree_aux/SkillTreeAdditionalInfoHolder/NextSkillpointsValueLabel");
+
 	if (label->getText() != lvlstr)
 	{
 		label->setText(lvlstr);
@@ -564,10 +581,12 @@ void SkillTree::update()
 	
 	for (it = shortkeys.begin(); it != shortkeys.end(); ++it)
 	{
-		if (it->second < USE_SKILL_LEFT || it->second >USE_SKILL_RIGHT+200)
+		if (it->second < USE_SKILL_LEFT || it->second > USE_SKILL_RIGHT + 200)
+    {
 			continue;
+    }
 		
-		DEBUGX("shortkey %i to %i",it->first,it->second);
+		DEBUGX("shortkey %i to %i", it->first, it->second);
 		key = it->first;
 		
 		right = false;
@@ -582,8 +601,11 @@ void SkillTree::update()
 			id = it->second - USE_SKILL_LEFT;
 		}
 		
-		if (ablts.count(id) ==0)
+		if (ablts.count(id) == 0)
+    {
 			continue;
+    }
+
 		act= ablts[id].m_type;
 		
 		stream.str("");
@@ -704,7 +726,7 @@ void SkillTree::updateTranslation()
 	
 	std::stringstream stream;
 	
-	for (int i=0; i<m_nr_tabs; i++)
+	for (int i = 0; i < m_nr_tabs; i++)
 	{
 		stream.str("");
 		stream << "Skilltree/skilltree_aux/SkilltreeTabs/__auto_TabPane__/";
@@ -715,12 +737,14 @@ void SkillTree::updateTranslation()
 	
 	// Ueberschriften der Tabs setzen
 	Player* player = m_document->getLocalPlayer();
-	if (m_nr_tabs <3)
+	if (m_nr_tabs < 3)
+  {
 		return;
+  }
 	
 	PlayerBasicData* pdata = ObjectFactory::getPlayerData(player->getSubtype());
 	CEGUI::Window* label;
-	for (int i=0; i<3; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		tabs[i]->setText((CEGUI::utf8*) gettext(pdata->m_tabnames[i].c_str()));
 	}
@@ -742,7 +766,7 @@ void SkillTree::updateTranslation()
 void SkillTree::updateAbilityTooltip(unsigned int pos)
 {
 	Player* player = m_document->getLocalPlayer();
-	std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
+	std::map<int, LearnableAbility> &ablts = player->getLearnableAbilities();
 	
 	
 	DEBUGX("update tooltip for %i %s", pos, ablts[pos].m_type.c_str());
@@ -767,7 +791,7 @@ void SkillTree::updateAbilityTooltip(unsigned int pos)
 bool SkillTree::onSkillMouseClicked(const CEGUI::EventArgs& evt)
 {
 	Player* player = m_document->getLocalPlayer();
-	std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
+	std::map<int, LearnableAbility> &ablts = player->getLearnableAbilities();
 	
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
@@ -780,7 +804,7 @@ bool SkillTree::onSkillMouseClicked(const CEGUI::EventArgs& evt)
 
 	if (we.button == CEGUI::RightButton)
 	{
-		DEBUGX("right button pressed on skill %i",id);
+		DEBUGX("right button pressed on skill %i", id);
 		m_document->setRightAction(ablts[id].m_type);
 	}
 	
@@ -791,7 +815,7 @@ bool SkillTree::onSkillMouseClicked(const CEGUI::EventArgs& evt)
 bool SkillTree::onSkillLearnMouseClicked(const CEGUI::EventArgs& evt)
 {
 	Player* player = m_document->getLocalPlayer();
-	std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
+	std::map<int, LearnableAbility> &ablts = player->getLearnableAbilities();
 	
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
@@ -813,12 +837,12 @@ bool SkillTree::onAbilityHover(const CEGUI::EventArgs& evt)
 {
 
 	Player* player = m_document->getLocalPlayer();
-	std::map<int,LearnableAbility> &ablts = player->getLearnableAbilities();
+	std::map<int, LearnableAbility> &ablts = player->getLearnableAbilities();
 	
 	const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	unsigned int id = we.window->getID();
-	DEBUGX("mouse entered Ability %i",id);
+	DEBUGX("mouse entered Ability %i", id);
 	updateAbilityTooltip(id);
 	m_document->getGUIState()->m_hover_ability = ablts[id].m_type;
 	
