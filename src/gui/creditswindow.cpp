@@ -95,8 +95,6 @@ void CreditsWindow::updateTranslation()
 
 void CreditsWindow::update()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	if (!m_window->isVisible())
 	{
 		m_shown_timer.start();

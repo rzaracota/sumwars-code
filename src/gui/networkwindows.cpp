@@ -22,7 +22,6 @@ HostGameWindow::HostGameWindow (Document* doc)
 	:Window(doc)
 {
 	SW_DEBUG ("HostGameWindow being created");
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	CEGUI::Editbox* box;
 
@@ -82,7 +81,6 @@ HostGameWindow::HostGameWindow (Document* doc)
 
 void HostGameWindow::update()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Editbox* box;
 	
 	Options* options = Options::getInstance();
@@ -113,7 +111,6 @@ void HostGameWindow::update()
 
 void HostGameWindow::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "HostGameWindow/HostGameStartButton"));
@@ -135,7 +132,6 @@ void HostGameWindow::updateTranslation()
 
 bool HostGameWindow::onStartHostGame(const CEGUI::EventArgs& evt)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Editbox* box;
 	
 	Options* options = Options::getInstance();
@@ -175,7 +171,6 @@ JoinGameWindow::JoinGameWindow (Document* doc)
 	:Window(doc)
 {
 	SW_DEBUG ("JoinGameWindow being created");
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	CEGUI::Editbox* box;
 
@@ -200,8 +195,14 @@ JoinGameWindow::JoinGameWindow (Document* doc)
 	}
 	else
 	{
-		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for char screen.");
-		if (!wndCharInfo) SW_DEBUG ("ERROR: Unable to get the window for char screen.");
+		if (!wndHolder)
+    {
+      SW_DEBUG ("ERROR: Unable to get the window holder for char screen.");
+    }
+		if (!wndCharInfo)
+    {
+      SW_DEBUG ("ERROR: Unable to get the window for char screen.");
+    }
 	}
 
 	m_window = join_game_holder;
@@ -235,7 +236,6 @@ JoinGameWindow::JoinGameWindow (Document* doc)
 
 void JoinGameWindow::update()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Editbox* box;
 	
 	Options* options = Options::getInstance();
@@ -263,7 +263,6 @@ void JoinGameWindow::update()
 
 void JoinGameWindow::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "JoinGameWindow/JoinGameStartButton"));
@@ -285,7 +284,6 @@ void JoinGameWindow::updateTranslation()
 
 bool JoinGameWindow::onStartJoinGame(const CEGUI::EventArgs& evt)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Editbox* box;
 	
 	Options* options = Options::getInstance();

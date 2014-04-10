@@ -407,8 +407,6 @@ void Application::run()
 			SW_DEBUG("update time was %f",t);
 		}
 
-		float musicUpdateTimer = frametime;
-
 		timer2.reset();
 		// run the message pump
 		Ogre::WindowEventUtilities::messagePump();
@@ -561,7 +559,7 @@ std::string Application::retrieveRenderSystemWindowSize (int& videoModeWidth, in
 			SW_DEBUG ("Currently selected video mode: %s",  opt_it->second.currentValue.c_str ());
 			returnValue = opt_it->second.currentValue;
 			std::string sLeft, sRight;
-			int nPos = returnValue.find (" ");
+			size_t nPos = returnValue.find (" ");
 			if (nPos == std::string::npos)
 			{
 				// some error...

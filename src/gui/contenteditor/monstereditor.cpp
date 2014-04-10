@@ -33,9 +33,6 @@ void MonsterEditor::init(CEGUI::Window* parent)
 	ContentEditorTab::init(parent);
   m_rootWindow = parent;
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
-	
   CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
       "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Properties/RadiusSpinner"));
 	
@@ -115,8 +112,6 @@ void MonsterEditor::update()
 
 void MonsterEditor::updateAllMonsterList()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	CEGUI::Combobox* copyfoSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
       "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Properties/CopyDataBox"));
 	
@@ -131,8 +126,6 @@ void MonsterEditor::updateAllMonsterList()
 
 void MonsterEditor::updateMonsterXML()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	// update the XML representation
 	m_edited_monster.writeToXML(m_monster_xml.FirstChildElement());
 	
@@ -149,7 +142,6 @@ void MonsterEditor::updateMonsterEditor()
 {
 	m_no_cegui_events = true;
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	/*
 	CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
     "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Prop/LayerSelector"));
@@ -189,8 +181,6 @@ bool MonsterEditor::onMonsterModified(const CEGUI::EventArgs& evt)
 		return true;
   }
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	CEGUI::Spinner* radiusSpinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
       "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/Prop/RadiusSpinner"));
 	
@@ -219,7 +209,6 @@ bool MonsterEditor::onMonsterModified(const CEGUI::EventArgs& evt)
 
 bool MonsterEditor::onMonsterXMLModified(const CEGUI::EventArgs& evt)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
       "Root/ObjectInfoTabControl/__auto_TabPane__/MonsterTab/MonsterTabControl/__auto_TabPane__/XML/MonsterXMLEditbox"));
 	

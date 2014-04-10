@@ -48,8 +48,6 @@ template<> ContentEditor* Ogre::Singleton<ContentEditor>::SUMWARS_OGRE_SINGLETON
 
 void ContentEditor::init(bool visible)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	//CEGUI::System* guiSystem = System::getSingletonPtr();
 	CEGUI::WindowManager* winManager = WindowManager::getSingletonPtr();
   CEGUI::Window* gameScreen = CEGUIUtility::getWindow("GameScreen");
@@ -262,7 +260,6 @@ bool ContentEditor::handleCloseWindow(const CEGUI::EventArgs& e)
 
 void ContentEditor::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 
 	textdomain("tools");

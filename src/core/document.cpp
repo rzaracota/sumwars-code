@@ -857,7 +857,6 @@ void Document::onButtonHostGame()
 	if (m_temp_player == 0)
 	{
 		// Show a notification.
-		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("WarningDialogWindow");
 		message->setInheritsAlpha(false);
 		message->setVisible(true);
@@ -878,7 +877,6 @@ void Document::onButtonJoinGame()
 	if (m_temp_player == 0)
 	{
 		// Show a notification.
-		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("WarningDialogWindow");
 		message->setInheritsAlpha(false);
 		message->setVisible(true);
@@ -1991,7 +1989,6 @@ Player*  Document::getLocalPlayer()
 void Document::showWarning (const std::string& textMessage)
 {
 	// Show a notification.
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	if (! CEGUIUtility::isWindowPresent ("WarningDialogWindow"))
 	{
 		SW_DEBUG ("Could not display the warning widget: [WarningDialogWindow]");
@@ -2013,8 +2010,6 @@ void Document::showWarning (const std::string& textMessage)
 void Document::hideWarning ()
 {
 	// Show a notification.
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
 	if (CEGUIUtility::isWindowPresent ("WarningDialogWindow"))
 	{
 		CEGUI::Window* widget = CEGUIUtility::getWindow("WarningDialogWindow");
@@ -2036,7 +2031,6 @@ void Document::hideWarning ()
 void Document::showQuestionDialog ()
 {
 	// Show a notification.
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::String widgetName = CEGUIUtility::getNameForWidget ("MainMenu/MainMenuRoot/QuestionInfoRoot");
 	if (! CEGUIUtility::isWindowPresent (widgetName))
 	{
@@ -2058,7 +2052,6 @@ void Document::showQuestionDialog ()
 void Document::hideQuestionDialog ()
 {
 	// Show a notification.
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::String widgetName = CEGUIUtility::getNameForWidget ("MainMenu/MainMenuRoot/QuestionInfoRoot");
 	if (CEGUIUtility::isWindowPresent (widgetName))
 	{

@@ -93,7 +93,7 @@ bool ItemWindow::onItemMouseButtonReleased(const CEGUI::EventArgs& evt)
 	
 	if (we.button == CEGUI::LeftButton)
 	{
-		DEBUGX("left button released on Item %i",id);
+		DEBUGX("left button released on Item %i", id);
 	}
 	return true;
 }
@@ -230,9 +230,8 @@ void ItemWindow::updateItemWindow(CEGUI::Window* img, Item* item, Player* player
 		windowname.erase(pos,5);
 	}
 	windowname.append("ProgressBar");
-	// Fenstermanager
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
+
+  // Fenstermanager
 	if (CEGUIUtility::isWindowPresent (windowname))
 	{
 		// update progress bar to reflect item timer

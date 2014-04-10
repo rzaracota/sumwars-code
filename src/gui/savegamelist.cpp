@@ -97,8 +97,6 @@ SavegameList::SavegameList (Document* doc, const std::string& ceguiSkinName)
 
 void SavegameList::update()
 {	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
 	// Liste aller Files im Save Ordner der Form *.sav
 	Ogre::FileInfoListPtr files;
 	Ogre::FileInfoList::iterator it;
@@ -418,7 +416,6 @@ void SavegameList::selectDefaultSavegame()
 
 void SavegameList::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	/*
 	CEGUI::Window* label;
@@ -511,7 +508,6 @@ bool SavegameList::onNewCharClicked(const CEGUI::EventArgs& evt)
 
 bool SavegameList::onDeleteCharClicked(const CEGUI::EventArgs& evt)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	const CEGUI::WindowEventArgs& we = static_cast<const CEGUI::WindowEventArgs&>(evt);
 	onSavegameChosen(CEGUI::WindowEventArgs(we.window->getParent()));
 	
@@ -528,7 +524,6 @@ bool SavegameList::onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
 	// Also play the click sound.
 	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
 
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	m_document->hideQuestionDialog ();
 
 	// Get the save file to remove.
@@ -573,7 +568,6 @@ bool SavegameList::onDeleteCharAbortClicked(const CEGUI::EventArgs& evt)
 	// Also play the click sound.
 	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
 
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	m_document->hideQuestionDialog ();
 
 	return true;

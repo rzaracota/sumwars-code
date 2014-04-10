@@ -29,8 +29,6 @@ void FixedObjectEditor::init(CEGUI::Window* parent)
 	ContentEditorTab::init(parent);
   m_rootWindow = parent;
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
   CEGUI::PushButton* detectCircleButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
     "Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/Properties/DetectCircleButton"));
   CEGUI::PushButton* detectRectButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
@@ -128,8 +126,6 @@ void FixedObjectEditor::update()
 
 void FixedObjectEditor::updateAllFixedObjectList()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
   CEGUI::Combobox* copyfoSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
     "Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/Properties/CopyDataBox"));
 	
@@ -148,8 +144,6 @@ void FixedObjectEditor::updateAllFixedObjectList()
 
 void FixedObjectEditor::updateFixedObjectXML()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	// update the XML representation
 	m_edited_fixed_object.writeToXML(m_fixed_object_xml.FirstChildElement());
 	
@@ -165,8 +159,6 @@ void FixedObjectEditor::updateFixedObjectXML()
 void FixedObjectEditor::updateFixedObjectEditor()
 {
 	m_no_cegui_events = true;
-	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
   CEGUI::Combobox* layerSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
     "Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/Properties/LayerSelector"));
@@ -230,8 +222,6 @@ bool FixedObjectEditor::onFixedObjectModified(const CEGUI::EventArgs& evt)
 		return true;
   }
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	CEGUI::RadioButton* CircleButton = static_cast<CEGUI::RadioButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
     "Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/Properties/CircleCheckbox"));
 	//CEGUI::RadioButton* RectButton = static_cast<CEGUI::RadioButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
@@ -287,8 +277,6 @@ bool FixedObjectEditor::onFixedObjectAutodetectSize(const CEGUI::EventArgs& evt)
 	const CEGUI::MouseEventArgs& we =
 	static_cast<const CEGUI::MouseEventArgs&>(evt);
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	CEGUI::PushButton* detectCircleButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
     "Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/Properties/DetectCircleButton"));
 	//CEGUI::PushButton* detectRectButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
@@ -331,7 +319,6 @@ bool FixedObjectEditor::onFixedObjectAutodetectSize(const CEGUI::EventArgs& evt)
 
 bool FixedObjectEditor::onFixedObjectXMLModified(const CEGUI::EventArgs& evt)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
     "Root/ObjectInfoTabControl/__auto_TabPane__/FixedObjectTab/FixedObjectTabControl/__auto_TabPane__/XML/FOXMLEditbox"));
 	

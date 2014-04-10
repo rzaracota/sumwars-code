@@ -34,8 +34,6 @@ void RenderInfoEditor::init(CEGUI::Window* parent)
 	m_edited_graphicobject = 0;
 	m_unique_id = 1;
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton(); 
-	
 	// add parts to the mesh selectors
   CEGUI::Combobox* selector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
       "Root/ObjectInfoTabControl/__auto_TabPane__/RenderInfoTab/RenderInfoTabControl/__auto_TabPane__/BasicMesh/MeshSelector"));
@@ -269,8 +267,6 @@ void RenderInfoEditor::updatePreviewImage()
 
 void RenderInfoEditor::updateSubmeshEditor(std::string objectname, bool updateList)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	CEGUI::Spinner* rotXspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
       "Root/ObjectInfoTabControl/__auto_TabPane__/RenderInfoTab/RenderInfoTabControl/__auto_TabPane__/SubMesh/SMRotateX"));
 	CEGUI::Spinner* rotYspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
@@ -470,7 +466,6 @@ void RenderInfoEditor::updateSubmeshEditor(std::string objectname, bool updateLi
 
 void RenderInfoEditor::updateBoneList()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Combobox* boneSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
       "Root/ObjectInfoTabControl/__auto_TabPane__/RenderInfoTab/RenderInfoTabControl/__auto_TabPane__/SubMesh/BoneSelector"));
 	CEGUI::Combobox* boneobjSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
@@ -540,8 +535,6 @@ void RenderInfoEditor::updateBoneList()
 
 void RenderInfoEditor::updateRenderInfoXML()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	// update the XML representation
 	m_edited_renderinfo.writeToXML(m_renderinfo_xml.FirstChildElement());
 	
@@ -708,8 +701,6 @@ bool RenderInfoEditor::onSubMeshModified(const CEGUI::EventArgs& evt)
 		return true;
   }
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	// the the GUI parts
 	CEGUI::Spinner* rotXspinner =  static_cast<CEGUI::Spinner*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
       "Root/ObjectInfoTabControl/__auto_TabPane__/RenderInfoTab/RenderInfoTabControl/__auto_TabPane__/SubMesh/SMRotateX"));
@@ -797,20 +788,25 @@ bool RenderInfoEditor::onSubMeshModified(const CEGUI::EventArgs& evt)
 bool RenderInfoEditor::onSubMeshDeleted(const CEGUI::EventArgs& evt)
 {
 	if (m_no_cegui_events)
+  {
 		return true;
+  }
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Combobox* objSelector = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
       "Root/ObjectInfoTabControl/__auto_TabPane__/RenderInfoTab/RenderInfoTabControl/__auto_TabPane__/SubMesh/EditSMSelector"));
 	
 	// get the MovableObjectInfo
 	CEGUI::ListboxItem* item = objSelector->getSelectedItem();
 	if (item == 0)
+  {
 		return true;
+  }
 	
 	MovableObjectInfo* minfo = m_edited_renderinfo.getObject(item->getText().c_str());
 	if (minfo == 0)
+  {
 		return true;
+  }
 	
 	// Remove it from the renderinfo
 	m_edited_renderinfo.removeObject(minfo->m_objectname);
@@ -821,7 +817,6 @@ bool RenderInfoEditor::onSubMeshDeleted(const CEGUI::EventArgs& evt)
 
 bool RenderInfoEditor::onRenderinfoXMLModified(const CEGUI::EventArgs& evt)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
       "Root/ObjectInfoTabControl/__auto_TabPane__/RenderInfoTab/RenderInfoTabControl/__auto_TabPane__/XML/RIXMLEditbox"));
 	

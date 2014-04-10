@@ -336,8 +336,6 @@ void MainWindow::update(float time)
 		m_document->setModified(m_document->getModified() & (~Document::SAVEGAME_MODIFIED));
 	}
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
 	// Sprache anpassen
 	if (Gettext::getLocaleChanged())
 	{
@@ -1090,9 +1088,6 @@ bool MainWindow::setupObjectInfo()
 {
 	DEBUGX("setup object info");
 
-	// Fenstermanager
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
 	// Leiste fuer Informationen
 	CEGUI::Window* monster_health_holder = CEGUIUtility::loadLayoutFromFile ("monsterhealthbar.layout");
 	if (monster_health_holder)
@@ -1292,7 +1287,6 @@ void  MainWindow::setWindowExtents(int width, int height){
 
 void  MainWindow::updateMainMenu()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* img = 0;
 	if (CEGUIUtility::isWindowPresent ("MainMenu/StartScreenRoot"))
 	{
@@ -1338,9 +1332,6 @@ void MainWindow::updateCursorItemImage()
 	Item* item = 0;
 	item = player->getEquipement()->getItem(Equipement::CURSOR_ITEM);
 	
-	
-	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label = CEGUIUtility::getWindowForLoadedLayoutEx (m_root_window, "CursorItemImage");
 	
 	if (item == 0)
@@ -1411,7 +1402,6 @@ void MainWindow::updateObjectInfo()
 	std::string objname = "";
 
 	// Fenstermanager
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label = CEGUIUtility::getWindow ("GameScreen/ObjectInfoRoot/ObjectInfoLabel");
 	CEGUI::Window* itmlabel = CEGUIUtility::getWindow ("GameScreen/ItemInfoLabel");
 	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("GameScreen/ObjectInfoRoot/MonsterHealthProgressBar"));
@@ -2170,8 +2160,6 @@ void MainWindow::updatePartyInfo()
 		m_sub_windows["PartyInfo"]->update();
 	}
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	CEGUI::Window* img;
 	CEGUI::ProgressBar* bar;
 	
@@ -2298,8 +2286,6 @@ void MainWindow::updateRegionInfo()
 			//SoundManager::getPtr ()->getMusicPlayer ()->stop ();
 		}
 		
-		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
 		if (refresh)
 		{
 			SW_DEBUG ("*** main window expecting refresh for region [%s]", pl->getRegion ()->getName ().c_str ());
@@ -2467,7 +2453,6 @@ void MainWindow::updateChatContent()
 	static Timer timer;
 	int windows = m_document->getGUIState()->m_shown_windows;
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	Player* pl = m_document->getLocalPlayer();
 	
 	CEGUI::Window* label;
@@ -2643,7 +2628,6 @@ bool MainWindow::mouseMoved(const OIS::MouseEvent &evt)
 	
 	try
 	{
-		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 		CEGUI::Window* label = CEGUIUtility::getWindowForLoadedLayoutEx (m_root_window, "CursorItemImage");
 	
 		int off = 0;
@@ -2765,8 +2749,6 @@ bool MainWindow::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID btn
 */
 bool MainWindow::mouseReleased (const OIS::MouseEvent &evt, OIS::MouseButtonID btn)
 {
-	CEGUI::MouseButton button = CEGUI::NoButton;
-
 	// TODO: There are 2 separate if-else blocks; check if it makes sense to unite them,
 	// or the sequence of events is really necessary.
 	if (btn == OIS::MB_Left)
@@ -2946,8 +2928,6 @@ void MainWindow::setReadyToStart(bool ready)
 {
 	m_ready_to_start = ready;
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("MainMenu/StartScreenRoot/LoadRessourcesProgressBar"));
 	bar->setVisible(!ready);
 
@@ -2973,13 +2953,7 @@ void MainWindow::setReadyToStart(bool ready)
 
 void MainWindow::setRessourceLoadingBar(float percent)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	CEGUI::ProgressBar* bar = static_cast<CEGUI::ProgressBar*>(CEGUIUtility::getWindow ("MainMenu/StartScreenRoot/LoadRessourcesProgressBar"));
 	bar->setProgress(percent);
 }
-
-
-
-
 

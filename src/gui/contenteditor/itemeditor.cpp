@@ -51,8 +51,6 @@ void ItemEditor::init(CEGUI::Window* parent)
 	ContentEditorTab::init(parent);
   m_rootWindow = parent;
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
   CEGUI::PushButton* xmlsubmitButton = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayout(
       m_rootWindow,
       "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/XML/SubmitButton"));
@@ -369,8 +367,6 @@ void ItemEditor::update()
 
 void ItemEditor::updateAllItemList()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	CEGUI::Combobox* copyItemSelector = static_cast<CEGUI::Combobox*>(
       CEGUIUtility::getWindowForLoadedLayout(
           m_rootWindow,
@@ -633,7 +629,6 @@ bool ItemEditor::onEquipEffectsModified(const CEGUI::EventArgs& evt)
 
 bool ItemEditor::onItemXMLModified(const CEGUI::EventArgs& evt)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::MultiLineEditbox* editor = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
     "Root/ObjectInfoTabControl/__auto_TabPane__/ItemTab/ItemTabControl/__auto_TabPane__/XML/ItemXMLEditbox"));
 	
@@ -681,7 +676,6 @@ bool ItemEditor::onItemXMLModified(const CEGUI::EventArgs& evt)
 
 Item* ItemEditor::createItem()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	RenderInfoEditor* ri_editor = dynamic_cast<RenderInfoEditor*>(ContentEditor::getSingleton().getComponent("RIEditor"));
 	
 	// create an item picture
@@ -898,8 +892,6 @@ bool ItemEditor::onCopyData(const CEGUI::EventArgs& evt)
 
 void ItemEditor::updateItemXML()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	// update the XML representation
 	m_edited_item.writeToXML(m_item_xml.FirstChildElement());
 	

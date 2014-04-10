@@ -212,8 +212,6 @@ void TradeWindow::update()
 	int nmedium = equ->getMaxItemNumber(Item::MEDIUM);
 	int nsmall = equ->getMaxItemNumber(Item::SMALL);
 	
-	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	bool vis;
 	
@@ -282,7 +280,6 @@ void TradeWindow::update()
 
 void TradeWindow::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
 	

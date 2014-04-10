@@ -23,8 +23,6 @@ Worldmap::Worldmap (Document* doc, const std::string& ceguiSkinName)
 	: Window (doc)
 	, m_ceguiSkinName (ceguiSkinName)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	// The World map window and holder
 	CEGUI::Window* worldmap = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("worldmapwindow.layout");
 	if (!worldmap)

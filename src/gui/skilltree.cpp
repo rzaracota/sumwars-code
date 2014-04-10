@@ -35,9 +35,6 @@ SkillTree::SkillTree(Document* doc, OIS::Keyboard *keyboard, const std::string& 
 	m_skill_widgets_pics.clear ();
 	m_skill_widgets_btns.clear ();
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
-
 	// Rahmen fuer Skilltree Fenster
 
 	// Bestandteile des Charakterfensters hinzufuegen
@@ -720,8 +717,6 @@ void SkillTree::update()
 
 void SkillTree::updateTranslation()
 {
-	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	std::vector<CEGUI::DefaultWindow*> tabs(m_nr_tabs);
 	
 	std::stringstream stream;
@@ -771,7 +766,6 @@ void SkillTree::updateAbilityTooltip(unsigned int pos)
 	
 	DEBUGX("update tooltip for %i %s", pos, ablts[pos].m_type.c_str());
 
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	//std::ostringstream out_stream;
 	//out_stream.str("");
