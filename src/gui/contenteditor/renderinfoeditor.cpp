@@ -31,7 +31,7 @@ void RenderInfoEditor::init(CEGUI::Window* parent)
 	ContentEditorTab::init(parent);
 	  m_rootWindow = parent;
 
-	m_edited_graphicobject=0;
+	m_edited_graphicobject = 0;
 	m_unique_id = 1;
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton(); 
@@ -46,7 +46,7 @@ void RenderInfoEditor::init(CEGUI::Window* parent)
 	Ogre::FileInfoList::iterator it;
 	std::string file;
 	
-	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("General","*.mesh");
+	files = Ogre::ResourceGroupManager::getSingleton().findResourceFileInfo("General", "*.mesh");
 	
 	std::list<std::string> filenames;
 	for (it = files->begin(); it != files->end(); ++it)
@@ -133,10 +133,14 @@ void RenderInfoEditor::init(CEGUI::Window* parent)
 	attachCheckbox->subscribeEvent(CEGUIUtility::EventToggleButtonStateChanged(), CEGUI::Event::Subscriber(&RenderInfoEditor::onSubMeshModified, this));
 	
 	// init the internal data
+  TiXmlNode* linkedNode = NULL;
 	TiXmlElement * renderinfo_root = new TiXmlElement("RenderInfo");  
-	m_renderinfo_xml.LinkEndChild( renderinfo_root );  
-	renderinfo_root->SetAttribute("name","EditorRenderInfo");
-	
+	linkedNode = m_renderinfo_xml.LinkEndChild(renderinfo_root);
+  if (linkedNode != NULL)
+  {
+    // Only use renderinfo_root if it was not deleted (can be deleted when linked).
+	  renderinfo_root->SetAttribute("name", "EditorRenderInfo");
+  }
 }
 
 void RenderInfoEditor::update()
@@ -157,7 +161,7 @@ void RenderInfoEditor::update()
 	m_modified_renderinfo = false;
 }
 
-void checkBounds(const Ogre::SceneNode* node, int level=0)
+void checkBounds(const Ogre::SceneNode* node, int level = 0)
 {
 	const Ogre::AxisAlignedBox& boundingbox = node->_getWorldAABB();
 	
@@ -166,8 +170,10 @@ void checkBounds(const Ogre::SceneNode* node, int level=0)
 	Ogre::Vector3 bbox_max = boundingbox.getMaximum();
 	
 	std::string indent = "";
-	for (int i=0; i<level; i++)
+	for (int i = 0; i < level; i++)
+  {
 		indent += "  ";
+  }
 	std::cout << indent << "Node: " << node->getName() << "\n";
 	std::cout << indent << bbox_min[0] << " " << bbox_min[1] << " " <<  bbox_min[2] << "\n";
 	std::cout << indent << bbox_max[0] << " " << bbox_max[1] << " " <<  bbox_max[2] << "\n";
@@ -179,7 +185,7 @@ void checkBounds(const Ogre::SceneNode* node, int level=0)
 		const Ogre::SceneNode* subnode = dynamic_cast<Ogre::SceneNode*>(child_it.getNext());
 		if (subnode != 0)
 		{
-			checkBounds(subnode,level+1);
+			checkBounds(subnode, level + 1);
 		}
 	}
 	
@@ -200,10 +206,7 @@ void checkBounds(const Ogre::SceneNode* node, int level=0)
 			std::cout << indent << box_max[0] << " " << box_max[1] << " " <<  box_max[2] << "\n";
 		}
 	}
-	
 }
-
-
 
 
 void RenderInfoEditor::updatePreviewImage()
@@ -225,21 +228,21 @@ void RenderInfoEditor::updatePreviewImage()
 	}
 	
 	Ogre::MeshManager::getSingleton().setBoundsPaddingFactor(0.0f);
-	m_edited_graphicobject->getTopNode()->setPosition(0.0,0.0,0.0);
+	m_edited_graphicobject->getTopNode()->setPosition(0.0, 0.0, 0.0);
 	m_edited_graphicobject->update(0);
 	
 	// update the camera to show the full object
 	// first, the subtree needs to be updated
 	Ogre::SceneNode* topnode = m_edited_graphicobject->getTopNode();
-	topnode->_update(true,true);
+	topnode->_update(true, true);
 	topnode->_updateBounds();
 	topnode->showBoundingBox(true);
 	//const Ogre::AxisAlignedBox& boundingbox = topnode->_getWorldAABB();
 	
-	Ogre::Vector3 bbox_min(1000,1000,1000);
-	Ogre::Vector3 bbox_max(-1000,-1000,-1000);
+	Ogre::Vector3 bbox_min(1000, 1000, 1000);
+	Ogre::Vector3 bbox_max(-1000, -1000, -1000);
 	
-	getNodeBounds(topnode,bbox_min,bbox_max);
+	getNodeBounds(topnode, bbox_min, bbox_max);
 	
 	// camera is placed looking along negative X axis, with Y and Z offset
 	double center_y = 0.5*(bbox_max[1] + bbox_min[1]);
@@ -251,11 +254,12 @@ void RenderInfoEditor::updatePreviewImage()
 	double viewsize = MathHelper::Max(size_y, size_z);
 	
 	Ogre::Camera* editor_camera = editor_scene_mng->getCamera("editor_camera");
-	editor_camera->setPosition(Ogre::Vector3(bbox_max[0] + viewsize*sqrt(double(2)) , center_y,center_z));
-	editor_camera->lookAt(Ogre::Vector3(bbox_max[0], center_y,center_z));
+	editor_camera->setPosition(Ogre::Vector3(bbox_max[0] + viewsize*sqrt(double(2)) , center_y, center_z));
+	editor_camera->lookAt(Ogre::Vector3(bbox_max[0], center_y, center_z));
 	
 	// update the texture
-	Ogre::Resource* res= Ogre::TextureManager::getSingleton().createOrRetrieve ("editor_tex",Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).first.getPointer();
+	Ogre::Resource* res= Ogre::TextureManager::getSingleton().createOrRetrieve(
+      "editor_tex",Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).first.getPointer();
 	Ogre::Texture* texture = dynamic_cast<Ogre::Texture*>(res);
 	Ogre::RenderTarget* target = texture->getBuffer()->getRenderTarget();
 	target->update();
@@ -294,7 +298,9 @@ void RenderInfoEditor::updateSubmeshEditor(std::string objectname, bool updateLi
       "Root/ObjectInfoTabControl/__auto_TabPane__/RenderInfoTab/RenderInfoTabControl/__auto_TabPane__/SubMesh/AttachSMCheckbox"));
 	
 	if (objectname == "")
+  {
 		objectname = objSelector->getText().c_str();
+  }
 	
 	// update the content of the objectSelector
 	if (updateList)
@@ -306,7 +312,9 @@ void RenderInfoEditor::updateSubmeshEditor(std::string objectname, bool updateLi
 		CEGUI::ListboxItem* boneobjitem = boneobjSelector->getSelectedItem();
 		std::string boneobj = "mainmesh";
 		if (boneobjitem != 0)
+    {
 			boneobj = boneobjitem->getText().c_str();
+    }
 		
 		objSelector->resetList();
 		boneobjSelector->resetList();
@@ -320,7 +328,9 @@ void RenderInfoEditor::updateSubmeshEditor(std::string objectname, bool updateLi
 		for (std::list<MovableObjectInfo>::iterator it = objects.begin(); it != objects.end(); ++it)
 		{
 			if (it->m_type != MovableObjectInfo::ENTITY)
+      {
 				continue;
+      }
 			
 			listitem = new CEGUI::ListboxTextItem(it->m_objectname);
 			objSelector->addItem(listitem);
@@ -328,7 +338,7 @@ void RenderInfoEditor::updateSubmeshEditor(std::string objectname, bool updateLi
 			// automatically select the right item
 			if (it->m_objectname == objectname)
 			{
-				objSelector->setItemSelectState(listitem,true);
+				objSelector->setItemSelectState(listitem, true);
 				objSelector->setText(objectname);
 				objectfound = true;
 			}
@@ -373,7 +383,9 @@ void RenderInfoEditor::updateSubmeshEditor(std::string objectname, bool updateLi
 	CEGUI::ListboxItem* item = objSelector->getSelectedItem();
 	MovableObjectInfo* minfo = 0;
 	if (item != 0)
+  {
 		minfo = m_edited_renderinfo.getObject(objectname);
+  }
 	
 	if (minfo == 0)
 	{
@@ -405,8 +417,8 @@ void RenderInfoEditor::updateSubmeshEditor(std::string objectname, bool updateLi
 	}
 	else
 	{
-		boneobj = minfo->m_bone.substr(0,pos);
-		bone = minfo->m_bone.substr(pos+1);
+		boneobj = minfo->m_bone.substr(0, pos);
+		bone = minfo->m_bone.substr(pos + 1);
 	}
 	
 	// set the selectors of the mesh attached to and the bone to the right state
@@ -417,19 +429,19 @@ void RenderInfoEditor::updateSubmeshEditor(std::string objectname, bool updateLi
 		boneobjSelector->setText("");
 		boneSelector->setText("");
 		
-		for (size_t i=0; i<boneobjSelector->getItemCount(); i++)
+		for (size_t i = 0; i < boneobjSelector->getItemCount(); i++)
 		{
 			if (boneobjSelector->getListboxItemFromIndex(i)->getText() == boneobj)
 			{
-				boneobjSelector->setSelection(i,i);
+				boneobjSelector->setSelection(i, i);
 				boneobjSelector->setText(boneobj);
 			}
 		}
-		for (size_t i=0; i<boneSelector->getItemCount(); i++)
+		for (size_t i = 0; i < boneSelector->getItemCount(); i++)
 		{
 			if (boneSelector->getListboxItemFromIndex(i)->getText() == bone)
 			{
-				boneSelector->setSelection(i,i);
+				boneSelector->setSelection(i, i);
 				boneSelector->setText(bone);
 			}
 		}
@@ -484,7 +496,8 @@ void RenderInfoEditor::updateBoneList()
 	if (minfo->m_type == MovableObjectInfo::ENTITY)
 	{
 		//get the skeleton of the selected mesh and fill the bone selector combo box
-		Ogre::Mesh* mesh = dynamic_cast<Ogre::Mesh*>(Ogre::MeshManager::getSingleton().createOrRetrieve(minfo->m_source,"General").first.getPointer());
+		Ogre::Mesh* mesh = dynamic_cast<Ogre::Mesh*>(
+        Ogre::MeshManager::getSingleton().createOrRetrieve(minfo->m_source, "General").first.getPointer());
 		
 		Ogre::Skeleton *skel = 0;
 		
@@ -493,7 +506,7 @@ void RenderInfoEditor::updateBoneList()
 			skel = mesh->getSkeleton().getPointer();
 		}
 		
-		if(skel!=0)
+		if (skel != 0)
 		{
 			// iterate the skeleton to get the bones
 			Ogre::Skeleton::BoneIterator bit = skel->getBoneIterator();
@@ -517,7 +530,7 @@ void RenderInfoEditor::updateBoneList()
 				// automatically select the right object
 				if (bonesel == bone)
 				{
-					boneSelector->setItemSelectState(item,true);
+					boneSelector->setItemSelectState(item, true);
 					boneSelector->setText(bone);
 				}
 			}
@@ -557,7 +570,7 @@ bool RenderInfoEditor::onMeshSelected(const CEGUI::EventArgs& evt)
 	{
 		// place the required mesh in the editor scene
 		std::string meshname = item->getText().c_str();
-		DEBUGX("selected mesh %s",meshname.c_str());
+		DEBUGX("selected mesh %s", meshname.c_str());
 		
 		// if the Renderinfo already has a main mesh, edit it
 		// otherwise, create it
@@ -691,7 +704,9 @@ bool RenderInfoEditor::onSubMeshAdded(const CEGUI::EventArgs& evt)
 bool RenderInfoEditor::onSubMeshModified(const CEGUI::EventArgs& evt)
 {
 	if (m_no_cegui_events)
+  {
 		return true;
+  }
 	
 	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	
@@ -725,7 +740,9 @@ bool RenderInfoEditor::onSubMeshModified(const CEGUI::EventArgs& evt)
 	// get the MovableObjectInfo
 	CEGUI::ListboxItem* item = objSelector->getSelectedItem();
 	if (item == 0)
+  {
 		return true;
+  }
 	
 	MovableObjectInfo* minfo = m_edited_renderinfo.getObject(item->getText().c_str());
 	if (minfo == 0)
