@@ -237,8 +237,9 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "English US","en_US",0));
 	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Italian IT","it_IT",0));
 	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Russian RU","ru_RU",0));
-	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Ukrainian UK","uk_UA",0));
-	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Spanish ES","es_ES",0));
+    cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Ukrainian UK","uk_UA",0));
+    cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Spanish ES","es_ES",0));
+    cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "French FR","fr_FR",0));
 
 	cbo->setReadOnly(true);
 	connectWidgetSoundEvents ("OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsMisc/LanguageBox", "combobox");
