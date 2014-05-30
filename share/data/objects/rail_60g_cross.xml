@@ -1,0 +1,4 @@
+<Object type="FIXED_OBJECT" subtype="rail_60g_cross" layer="NORMAL">
+        <Mesh file="rail_60g_cross.mesh" />
+        <Geometry shape="CIRCLE" radius="0.5"/>
+</Object>

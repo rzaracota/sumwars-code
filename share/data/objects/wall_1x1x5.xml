@@ -1,0 +1,4 @@
+<Object type="FIXED_OBJECT" subtype="wall_1x1x5" layer="NORMAL">
+        <Mesh file="wall_1x1x5.mesh" />
+        <Geometry shape="CIRCLE" radius="0.5"/>
+</Object>

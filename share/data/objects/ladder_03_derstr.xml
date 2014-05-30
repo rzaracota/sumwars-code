@@ -1,0 +1,4 @@
+<Object type="FIXED_OBJECT" subtype="ladder_03_derstr" layer="NORMAL">
+        <Mesh file="ladder_03_derstr.mesh" />
+        <Geometry shape="CIRCLE" radius="0.5"/>
+</Object>

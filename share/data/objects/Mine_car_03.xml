@@ -1,0 +1,4 @@
+<Object type="FIXED_OBJECT" subtype="Mine_car_03" layer="NORMAL">
+        <Mesh file="Mine_car_03.mesh" />
+        <Geometry shape="CIRCLE" radius="0.5"/>
+</Object>

@@ -1,0 +1,4 @@
+<Object type="FIXED_OBJECT" subtype="Root" layer="NORMAL">
+        <Mesh file="Root.mesh" />
+        <Geometry shape="CIRCLE" radius="0.5"/>
+</Object>

@@ -1,0 +1,4 @@
+<Object type="FIXED_OBJECT" subtype="Mushroom_cave_01" layer="NORMAL">
+        <Mesh file="Mushroom_cave_01.mesh" />
+        <Geometry shape="CIRCLE" radius="0.5"/>
+</Object>

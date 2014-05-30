@@ -1,0 +1,4 @@
+<Object type="FIXED_OBJECT" subtype="hammer_rusty" layer="NORMAL">
+        <Mesh file="hammer_rusty.mesh" />
+        <Geometry shape="CIRCLE" radius="0.5"/>
+</Object>
