@@ -2855,17 +2855,19 @@ bool MainWindow::keyPressed(const OIS::KeyEvent &evt) {
 
 bool MainWindow::keyReleased(const OIS::KeyEvent &evt)
 {
-
+        //Current key is cleared
 	m_key =0;
 	m_key_repeat = false;
 	
 	bool ret = CEGUIUtility::injectKeyUp (m_cegui_system, evt.key);
 	
+        //Check if releasing key is hold player key.
 	if (evt.key == OIS::KC_RSHIFT || evt.key == OIS::KC_LSHIFT)
 	{
 		m_document->getGUIState()->m_shift_hold = false;
 	}
 
+        //Treats release action
 	if (!ret)
 	{
 		ret = m_document->onKeyRelease(evt.key);
