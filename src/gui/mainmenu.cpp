@@ -55,7 +55,6 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 	m_savegame_player_action.m_elapsed_time = 0;
 	
 	
-    CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 #if 0
 	// Load the holder (this should be aspect ratio dependent).
@@ -72,24 +71,9 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
 	{
 		WARNING ("WARNING: Failed to load [%s]", "mainmenu.layout");
 	}
-	CEGUI::Window* wndHeld = CEGUIUtility::getWindowForLoadedLayoutEx (m_starMenuRoot, "MainMenuRoot");
 
 	SW_DEBUG ("Placing layout into holder");
 	m_starMenuRoot->setVisible (true);
-
-#if 0
-	main_menu_holder->setVisible (true);
-
-	if (wndHolder && wndHeld)
-	{
-		CEGUIUtility::addChildWidget (wndHolder, wndHeld);
-	}
-	else
-	{
-		if (!wndHolder) DEBUG ("ERROR: Unable to get the window holder for main menu.");
-		if (!wndHeld) DEBUG ("ERROR: Unable to get the window for main menu.");
-	}
-#endif
 
 	//m_window = main_menu_holder;
     m_window = m_starMenuRoot;// Augustin Preda, 2014.01.08: switched main window to the holder.
@@ -172,8 +156,8 @@ MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
     btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("LoginButton"));
     btn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::onLoginToOnlineService, this));
 
-    CEGUI::FrameWindow* login_dialog = (CEGUI::FrameWindow*) win_mgr.loadWindowLayout( "LoginDialog.layout" );
-    m_window->addChildWindow(login_dialog);
+    CEGUI::FrameWindow* login_dialog = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::loadLayoutFromFile ("LoginDialog.layout"));
+    CEGUIUtility::addChildWidget (m_window, login_dialog);
 	login_dialog->hide();
 
     btn = static_cast<CEGUI::PushButton*>(win_mgr.getWindow("LoginDialog/LoginButton"));
@@ -216,8 +200,6 @@ void MainMenu::update()
 
 void MainMenu::updateTranslation()
 {
-    CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
 	CEGUI::Window* widget;
 
 	// Update the button labels.
@@ -443,7 +425,6 @@ void MainMenu::updateSaveGameList()
 
 void MainMenu::setSavegameListVisible(bool show)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::FrameWindow* savegameList = (CEGUI::FrameWindow*) CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "SaveGameSelectionFrame");
 	if (savegameList->isVisible() != show)
 	{
@@ -982,8 +963,6 @@ void MainMenu::updateCharacterView()
 
 void MainMenu::createSavegameList()
 {
-    CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
     // Select the frame for the saved games in the menu
 	std::string widgetName (CEGUIUtility::getNameForWidget("SaveGameSelectionFrame"));
 	CEGUI::FrameWindow* savegameList = static_cast<CEGUI::FrameWindow*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_starMenuRoot, widgetName));

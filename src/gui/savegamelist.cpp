@@ -97,8 +97,6 @@ SavegameList::SavegameList (Document* doc, const std::string& ceguiSkinName)
 
 void SavegameList::update()
 {	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
 	// Liste aller Files im Save Ordner der Form *.sav
 	Ogre::FileInfoListPtr files;
 	Ogre::FileInfoList::iterator it;
@@ -172,8 +170,8 @@ void SavegameList::update()
 				SW_DEBUG ("Loading layout file [saveitem.layout]");
 				saveItem = (CEGUI::FrameWindow*) (CEGUIUtility::loadLayoutFromFile ("saveitem.layout"));
 				SW_DEBUG ("Loaded layout file [saveitem.layout]");
-				//saveItem = (CEGUI::Window*) win_mgr.loadWindowLayout("saveitem.layout", s.str());
-				m_currentSelected = saveItem;
+
+        m_currentSelected = saveItem;
 				saveItem->setName (layoutRootItemName);
 				saveItem->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&SavegameList::onSavegameChosen, this));
 				saveItem->subscribeEvent(CEGUIUtility::EventMouseEntersPushButtonArea (), CEGUI::Event::Subscriber(&SavegameList::onItemButtonHover, this));
@@ -418,7 +416,6 @@ void SavegameList::selectDefaultSavegame()
 
 void SavegameList::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	/*
 	CEGUI::Window* label;
@@ -511,7 +508,6 @@ bool SavegameList::onNewCharClicked(const CEGUI::EventArgs& evt)
 
 bool SavegameList::onDeleteCharClicked(const CEGUI::EventArgs& evt)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	const CEGUI::WindowEventArgs& we = static_cast<const CEGUI::WindowEventArgs&>(evt);
 	onSavegameChosen(CEGUI::WindowEventArgs(we.window->getParent()));
 	
@@ -528,7 +524,6 @@ bool SavegameList::onDeleteCharConfirmClicked(const CEGUI::EventArgs& evt)
 	// Also play the click sound.
 	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
 
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	m_document->hideQuestionDialog ();
 
 	// Get the save file to remove.
@@ -573,7 +568,6 @@ bool SavegameList::onDeleteCharAbortClicked(const CEGUI::EventArgs& evt)
 	// Also play the click sound.
 	SoundHelper::playAmbientSoundGroup ("main_menu_click_item");
 
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	m_document->hideQuestionDialog ();
 
 	return true;

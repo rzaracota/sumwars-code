@@ -23,7 +23,6 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene, const std::string& c
 {
 	m_scene = scene;
 	CEGUI::Window* label;
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 
 	// The CharInfo window and holder
 	CEGUI::FrameWindow* dialog_wnd = static_cast<CEGUI::FrameWindow*> (CEGUIUtility::loadLayoutFromFile ("dialogwindow.layout"));
@@ -77,8 +76,6 @@ DialogueWindow::DialogueWindow(Document* doc, Scene* scene, const std::string& c
 
 void DialogueWindow::update()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	Player* player = m_document->getLocalPlayer();
 	Region* reg = player->getRegion();
 	Dialogue* dia =  reg->getDialogue( player->getDialogueId() );
@@ -758,8 +755,8 @@ bool DialogueWindow::onAnswerLeaveArea(const CEGUI::EventArgs& evt)
 bool DialogueWindow::onTextClicked(const CEGUI::EventArgs& evt)
 {
 	SW_DEBUG ("DialogueWindow::onTextClicked");
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	const CEGUI::MouseEventArgs& we =
+
+  const CEGUI::MouseEventArgs& we =
 			static_cast<const CEGUI::MouseEventArgs&>(evt);
 	CEGUI::Window* btn = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "DialogWindow/DialogueLowerBar/DialogueSkipAllButton");
 	bool skipAll = false;

@@ -13,6 +13,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
+
 #include "textfileeditwindow.h"
 #include "CEGUI/CEGUI.h"
 #include <iostream>
@@ -38,8 +41,9 @@ TextFileEditWindow::TextFileEditWindow (const CEGUI::String& type, const CEGUI::
 	ss << m_ceguiSkinName << "/MultiLineEditbox";
 	m_textEditBox = static_cast<MultiLineEditbox*>(WindowManager::getSingleton().createWindow(ss.str ().c_str (), name + "EditBox"));
 	m_textEditBox->setPosition(UVector2(UDim(0.0f, 0.0f), UDim(0.0f, 0.0f)));
-	m_textEditBox->setSize(UVector2(UDim(1.0f, 0.0f), UDim(1.0f, 0.0f)));
-	addChildWindow(m_textEditBox);
+  CEGUIUtility::setWidgetSizeRel(m_textEditBox, 1.0f, 1.0f);
+  CEGUIUtility::addChildWidget (this, m_textEditBox);
+
 	m_isDirty = false;
 	m_fb = 0;
 	
@@ -169,23 +173,23 @@ bool TextFileEditWindow::handleCharacterKey(const CEGUI::EventArgs& ee)
 		int pos = m_textEditBox->getSelectionStartIndex();
 		s = s.insert(pos, TAB);
 		m_textEditBox->setText(s);
-		m_textEditBox->setCaratIndex(pos+3);
+		m_textEditBox->setCaretIndex(pos+3);
 		return true;
 	}
 	else if(e.codepoint == 40)
 	{
 		// Handle (
-		m_textEditBox->insertText(")", m_textEditBox->getCaratIndex());
+		m_textEditBox->insertText(")", m_textEditBox->getCaretIndex());
 	}
 	else if(e.codepoint == 91)
 	{
 		// Handle [
-		m_textEditBox->insertText("]", m_textEditBox->getCaratIndex());
+		m_textEditBox->insertText("]", m_textEditBox->getCaretIndex());
 	}
 	else if(e.codepoint == 123)
 	{
 		// Handle {
-		m_textEditBox->insertText("}", m_textEditBox->getCaratIndex());
+		m_textEditBox->insertText("}", m_textEditBox->getCaretIndex());
 	}
 	
 	return false;

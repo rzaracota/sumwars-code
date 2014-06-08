@@ -22,7 +22,7 @@ MESSAGE(STATUS "")
 
 OPTION(SUMWARS_NO_TINYXML "Do not use bundled, in-source TinyXML Lib" OFF)
 OPTION(SUMWARS_NO_ENET "Do not use bundled, in-source ENET Lib" OFF)
-OPTION(SUMWARS_BUILD_TOOLS "Builds editor tools (not needed for gameplay, only useful for content authors)" ON)
+OPTION(SUMWARS_BUILD_TOOLS "Builds editor tools (not needed for gameplay, only useful for content authors)" OFF)
 OPTION(SUMWARS_BUILD_WITH_ONLINE_SERVICE "Builds enables the online services)" OFF)
 OPTION(SUMWARS_UPDATE_HG_REVISION "Option to enable or disable automatic revision checking" ON)
 IF(WIN32)
@@ -52,7 +52,7 @@ ENDIF()
 
 SET(SUMWARS_VERSION_MAJOR "0")
 SET(SUMWARS_VERSION_MINOR "5")
-SET(SUMWARS_VERSION_PATCH "7")
+SET(SUMWARS_VERSION_PATCH "8")
 SET(SUMWARS_VERSION_REVISION ${Project_WC_REVISION})
 SET(SUMWARS_SHORT_VERSION "${SUMWARS_VERSION_MAJOR}.${SUMWARS_VERSION_MINOR}.${SUMWARS_VERSION_PATCH}")
 SET(SUMWARS_VERSION "${SUMWARS_SHORT_VERSION}.hg-${SUMWARS_VERSION_REVISION}")
@@ -181,11 +181,10 @@ ENDIF (WIN32)
 FIND_PACKAGE(OIS REQUIRED)
 FIND_PACKAGE(Lua REQUIRED)
 FIND_PACKAGE(CEGUI REQUIRED)
+SET(CEGUI_VERSION_RESOURCES "gui_0.8")
 
 IF(CEGUI_VERSION VERSION_LESS "0.8.0")
-	SET(CEGUI_VERSION_RESOURCES "gui")
-ELSE()
-	SET(CEGUI_VERSION_RESOURCES "gui_0.8")
+	MESSAGE(FATAL_ERROR "This version of Sumwars requires at least CEGUI 0.8.0")
 ENDIF()
 
 FIND_PACKAGE(CEGUIOGRE REQUIRED)
@@ -407,38 +406,72 @@ SET(SRCS_CORE
     )
 
 SET(SRCS_GUI
-  ./src/gui/minimapwindow.cpp
-  ./src/gui/worldmap.cpp
-  ./src/gui/mainmenu.cpp
-  ./src/gui/charcreate.cpp
-  ./src/gui/ceguiutility.cpp
-  ./src/gui/tooltipmanager.cpp
-  ./src/gui/controlpanel.cpp
-  ./src/gui/inventory.cpp
-  ./src/gui/tradewindow.cpp
-  ./src/gui/dialoguewindow.cpp
-  ./src/gui/partyinfo.cpp
-  ./src/gui/networkwindows.cpp
-  ./src/gui/creditswindow.cpp
-  ./src/gui/mainwindow.cpp
   ./src/gui/application.cpp
-  ./src/gui/skilltree.cpp
-  ./src/gui/chatline.cpp
+  ./src/gui/application.h
+  ./src/gui/ceguiutility.cpp
+  ./src/gui/ceguiutility.h
+  ./src/gui/charcreate.cpp
+  ./src/gui/charcreate.h
   ./src/gui/charinfo.cpp
-  ./src/gui/itemwindow.cpp
-  ./src/gui/savegamelist.cpp
-  ./src/gui/scene.cpp
-  ./src/gui/graphicmanager.cpp
-  ./src/gui/main_gui.cpp
-  ./src/gui/messageboxes.cpp
-  ./src/gui/graphicobjectrenderinfo.cpp
-  ./src/gui/graphicobject.cpp
-  ./src/gui/questinfo.cpp
-  ./src/gui/soundhelper.cpp
-  ./src/gui/soundobject.cpp
-  ./src/gui/tooltip.cpp
-  ./src/gui/optionswindow.cpp
+  ./src/gui/charinfo.h
+  ./src/gui/chatline.cpp
+  ./src/gui/chatline.h
   ./src/gui/clipboard.cpp
+  ./src/gui/clipboard.h
+  ./src/gui/controlpanel.cpp
+  ./src/gui/controlpanel.h
+  ./src/gui/creditswindow.cpp
+  ./src/gui/creditswindow.h
+  ./src/gui/dialoguewindow.cpp
+  ./src/gui/dialoguewindow.h
+  ./src/gui/graphicmanager.cpp
+  ./src/gui/graphicmanager.h
+  ./src/gui/graphicobject.cpp
+  ./src/gui/graphicobject.h
+  ./src/gui/graphicobjectrenderinfo.cpp
+  ./src/gui/graphicobjectrenderinfo.h
+  ./src/gui/inventory.cpp
+  ./src/gui/inventory.h
+  ./src/gui/itemwindow.cpp
+  ./src/gui/itemwindow.h
+  ./src/gui/listitem.h
+  ./src/gui/main_gui.cpp
+  ./src/gui/mainmenu.cpp
+  ./src/gui/mainmenu.h
+  ./src/gui/mainwindow.cpp
+  ./src/gui/mainwindow.h
+  ./src/gui/messageboxes.cpp
+  ./src/gui/messageboxes.h
+  ./src/gui/minimapwindow.cpp
+  ./src/gui/minimapwindow.h
+  ./src/gui/networkwindows.cpp
+  ./src/gui/networkwindows.h
+  ./src/gui/optionswindow.cpp
+  ./src/gui/optionswindow.h
+  ./src/gui/partyinfo.cpp
+  ./src/gui/partyinfo.h
+  ./src/gui/questinfo.cpp
+  ./src/gui/questinfo.h
+  ./src/gui/savegamelist.cpp
+  ./src/gui/savegamelist.h
+  ./src/gui/scene.cpp
+  ./src/gui/scene.h
+  ./src/gui/skilltree.cpp
+  ./src/gui/skilltree.h
+  ./src/gui/soundhelper.cpp
+  ./src/gui/soundhelper.h
+  ./src/gui/soundobject.cpp
+  ./src/gui/soundobject.h
+  ./src/gui/tooltip.cpp
+  ./src/gui/tooltip.h
+  ./src/gui/tooltipmanager.cpp
+  ./src/gui/tooltipmanager.h
+  ./src/gui/tooltipsettings.h
+  ./src/gui/tradewindow.cpp
+  ./src/gui/tradewindow.h
+  ./src/gui/window.h
+  ./src/gui/worldmap.cpp
+  ./src/gui/worldmap.h
 #   ./src/gui/ShaderManager.cpp
 #   ./src/gui/ShadowCameraSetup.cpp
     )    
@@ -461,27 +494,47 @@ SET(SRCS
 )
  
 IF(SUMWARS_BUILD_TOOLS)
-  SET(SRCS_BUILD_TOOLS
+  SET(SRCS_BUILD_TOOLS_DBG_PANEL
     ./src/gui/debugpanel/benchmarktab.cpp
-    ./src/gui/debugpanel/debugpanel.cpp
+    ./src/gui/debugpanel/benchmarktab.h
     ./src/gui/debugpanel/debugcameratab.cpp
-    ./src/gui/debugpanel/iconeditortab.cpp
+    ./src/gui/debugpanel/debugcameratab.h
+    ./src/gui/debugpanel/debugpanel.cpp
+    ./src/gui/debugpanel/debugpanel.h
     ./src/gui/debugpanel/guidebugtab.cpp
+    ./src/gui/debugpanel/guidebugtab.h
+    ./src/gui/debugpanel/iconeditortab.cpp
+    ./src/gui/debugpanel/iconeditortab.h
     ./src/gui/debugpanel/luascripttab.cpp
+    ./src/gui/debugpanel/luascripttab.h
     ./src/gui/debugpanel/textfileeditwindow.cpp
+    ./src/gui/debugpanel/textfileeditwindow.h
     ./src/gui/debugpanel/filebrowser/filebrowser.cpp
-    ./src/gui/contenteditor/contenteditor.cpp
-    ./src/gui/contenteditor/contenteditortab.cpp
-    ./src/gui/contenteditor/fixedobjecteditor.cpp
-    ./src/gui/contenteditor/renderinfoeditor.cpp
-    ./src/gui/contenteditor/itemeditor.cpp
-    ./src/gui/contenteditor/monstereditor.cpp
-    ./src/gui/contenteditor/gameinfotab.cpp
+    ./src/gui/debugpanel/filebrowser/filebrowser.h
     )
-  SOURCE_GROUP ("tools" FILES ${SRCS_BUILD_TOOLS})
+  SET(SRCS_BUILD_TOOLS_CONTENT_EDITOR
+    ./src/gui/contenteditor/contenteditor.cpp
+    ./src/gui/contenteditor/contenteditor.h
+    ./src/gui/contenteditor/contenteditortab.cpp
+    ./src/gui/contenteditor/contenteditortab.h
+    ./src/gui/contenteditor/contenttab.h
+    ./src/gui/contenteditor/fixedobjecteditor.cpp
+    ./src/gui/contenteditor/fixedobjecteditor.h
+    ./src/gui/contenteditor/gameinfotab.cpp
+    ./src/gui/contenteditor/gameinfotab.h
+    ./src/gui/contenteditor/itemeditor.cpp
+    ./src/gui/contenteditor/itemeditor.h
+    ./src/gui/contenteditor/monstereditor.cpp
+    ./src/gui/contenteditor/monstereditor.h
+    ./src/gui/contenteditor/renderinfoeditor.cpp
+    ./src/gui/contenteditor/renderinfoeditor.h
+    )
+  SOURCE_GROUP ("tools\\dbgpanel" FILES ${SRCS_BUILD_TOOLS_DBG_PANEL})
+  SOURCE_GROUP ("tools\\contedit" FILES ${SRCS_BUILD_TOOLS_CONTENT_EDITOR})
   SET(SRCS
     ${SRCS}
-    ${SRCS_BUILD_TOOLS}
+    ${SRCS_BUILD_TOOLS_DBG_PANEL}
+    ${SRCS_BUILD_TOOLS_CONTENT_EDITOR}
     )
 ENDIF()
 

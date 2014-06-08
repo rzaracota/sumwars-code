@@ -23,8 +23,6 @@ Worldmap::Worldmap (Document* doc, const std::string& ceguiSkinName)
 	: Window (doc)
 	, m_ceguiSkinName (ceguiSkinName)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	// The World map window and holder
 	CEGUI::Window* worldmap = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("worldmapwindow.layout");
 	if (!worldmap)
@@ -67,18 +65,22 @@ void Worldmap::update()
 	std::map<short,WaypointInfo>& winfos = World::getWorld()->getWaypointData();
 	std::map<short,WaypointInfo>::iterator it;
 	
+  // TODO(Augustin Preda, 2014.03.29): revie the way in which this stringstream is used.
+  // From the looks of it, it could be easily removed and regular strings be used instead.
 	std::ostringstream stream;
 	int cnt =0;
 	
 	CEGUI::Window* label;
 	Vector pos;
 	
-	// Schleife ueber alle Wegpunkte
+	// Run through all waypoints.
 	for (it = winfos.begin(); it != winfos.end(); ++it)
 	{
-		// nur Wegpunkte die der Spieler schon gefunden hat
+		// Skip any WayPoints that the player did not find (yet)
 		if (!player->checkWaypoint(it->first))
+    {
 			continue;
+    }
 		
 		stream.str("");
 		stream << "WaypointImage"<<cnt;
@@ -90,7 +92,6 @@ void Worldmap::update()
 
 			label->setProperty("FrameEnabled", "false");
 			label->setProperty("BackgroundEnabled", "false");
-			//label->setProperty("BackgroundColours", "tl:00000000 tr:00000000 bl:00000000 br:00000000"); 
 			CEGUIUtility::setWidgetSizeRel (label, 0.02f, 0.02f);
 			label->setProperty("Image", CEGUIUtility::getImageNameWithSkin ("SumWarsExtras", "WaypointMark")); 
 			label->setInheritsAlpha (false);
@@ -116,7 +117,7 @@ void Worldmap::update()
 	}
 	
 	
-	// restliche Label verstecken
+	// Hide the rest of the labels
 	for (; cnt <ncount; cnt++)
 	{
 		stream.str("");
@@ -186,18 +187,21 @@ void Worldmap::update()
 			stream << dgettext("sumwars","Town Portal") << "\n";
 			stream << dgettext("sumwars",it->second.m_name.c_str());
 			label->setTooltipText((CEGUI::utf8*) stream.str().c_str());
-			//label->setTooltip (); //XXX
 		}
 		else
 		{
 			ERRORMSG("region %s has no world position", portal.first.c_str());
 		}
 	}
-	else {
-		if(tpset == true) {
+	else 
+  {
+		if(tpset == true) 
+    {
 			stream.str ("");
 			stream << "WorldmapWindow_Holder_aux/WorldmapWindow/TownPortalImage";
-			label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, stream.str());
+			label = CEGUIUtility::getWindowForLoadedLayoutEx(
+          m_window, 
+          stream.str());
 			label->setVisible(false);
 		}
 

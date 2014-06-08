@@ -13,6 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// Utility for CEGUI cross-version compatibility
+#include "ceguiutility.h"
 
 #include "gameinfotab.h"
 #include <sstream>
@@ -25,9 +27,10 @@
 void GameInfoTab::init(CEGUI::Window* parent)
 {
 	ContentEditorTab::init(parent);
+  m_rootWindow = parent;
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	m_ShowBox = static_cast<CEGUI::MultiLineEditbox*>(win_mgr.getWindow("GameInfoTab/TextBox"));
+  m_ShowBox = static_cast<CEGUI::MultiLineEditbox*>(CEGUIUtility::getWindowForLoadedLayout(m_rootWindow,
+    "Root/ObjectInfoTabControl/__auto_TabPane__/GameInfoTab/TextBox"));
 }
 
 void GameInfoTab::update()

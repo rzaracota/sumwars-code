@@ -1,0 +1,4 @@
+<Object type="FIXED_OBJECT" subtype="pillar" layer="NORMAL">
+        <Mesh file="pillar.mesh" />
+        <Geometry shape="CIRCLE" radius="0.5"/>
+</Object>

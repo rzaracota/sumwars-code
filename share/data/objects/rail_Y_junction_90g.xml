@@ -1,0 +1,4 @@
+<Object type="FIXED_OBJECT" subtype="rail_Y_junction_90g" layer="NORMAL">
+        <Mesh file="rail_Y_junction_90g.mesh" />
+        <Geometry shape="CIRCLE" radius="0.5"/>
+</Object>

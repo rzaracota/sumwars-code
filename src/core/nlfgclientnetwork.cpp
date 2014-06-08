@@ -124,7 +124,8 @@ void NLFGClientNetwork::pushSlotMessage(const NetworkPacket* data, int slot, Net
 		return;
 	}
 	
-    unsigned int rel;
+  unsigned int rel;
+
 	if (reliability == NET_RELIABLE)
 	{
 		rel = RELIABLE;

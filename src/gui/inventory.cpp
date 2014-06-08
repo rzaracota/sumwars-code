@@ -27,8 +27,6 @@ Inventory::Inventory (Document* doc)
 {
 	DEBUGX("setup inventory");
 
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
 	CEGUI::Window* inventory = CEGUIUtility::loadLayoutFromFile ("inventory.layout");
 	if (!inventory)
 	{
@@ -236,7 +234,6 @@ Inventory::Inventory (Document* doc)
 
 void Inventory::update()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* img;
 	CEGUI::Window* label;
 	Item* it,*weapon;
@@ -393,7 +390,6 @@ void Inventory::update()
 
 void Inventory::setState(State s)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 
 	if(s == Inventory::StateSmall)
@@ -457,7 +453,6 @@ void Inventory::setState(State s)
 
 void Inventory::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	
 	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GoldStaticImage/GoldDropButton");
@@ -490,8 +485,6 @@ bool Inventory::onSwapEquipClicked(const CEGUI::EventArgs& evt)
 
 bool Inventory::onDropGoldClicked(const CEGUI::EventArgs& evt)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
 	CEGUI::Editbox* gold = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "Inventory/inventory_aux/GoldDropValueBox"));
 	int val =0;
 	std::stringstream stream;
@@ -542,7 +535,6 @@ void Inventory::createAnimations()
 {
 #if ((CEGUI_VERSION_MAJOR << 16) + (CEGUI_VERSION_MINOR << 8) + CEGUI_VERSION_PATCH >= (0 << 16)+(7 << 8)+5)
 
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 
 	CEGUI::AnimationManager::getSingleton().loadAnimationsFromXML("InventoryAnimations.xml");

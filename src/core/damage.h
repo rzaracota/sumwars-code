@@ -25,7 +25,7 @@
 
 /**
  * \enum AIMods
- * \brief Modifikationen fuer die AI
+ * \brief AI modifications
  */
 	enum AIMods
 {
@@ -35,7 +35,7 @@
 
 /**
  * \struct Damage
- * \brief Parameter fuer ausgeteilten Schaden
+ * \brief Parameter for the damage dealt
  */
 struct Damage 
 {
@@ -43,80 +43,80 @@ struct Damage
 	
 	/**
 	 * \var m_min_damage[4]
-	 * \brief Gibt den minimalen Schaden fuer die vier verschiedenen Schadensarten an.
+	 * \brief Holds the minimum damage for each of the four damage types.
 	 */
 	float m_min_damage[4];
 	
 	/**
 	 * \var m_max_damage[4]
-	 * \brief Gibt den maximalen Schaden fuer die vier verschiedenen Schadensarten an.
+	 * \brief Holds the maximum damage for each of the four damage types.
 	 */
 	float m_max_damage[4];
 	
 	/**
 	 * \var m_multiplier[4]
-	 * \brief Multiplikatoren fuer die einzelnen Schadensarten
+	 * \brief Multiplier for the each damage type.
 	 */
 	float m_multiplier[4];
 	
 	/**
 	 * \var m_attack
-	 * \brief Gibt den Attackwert an. Der Attackewert beeinflusst Trefferchance.
+	 * \brief Specifies the attack value. The attack value influences the hit chance.
 	 */
 	float m_attack;
 	
 	/**
 	 * \var m_power
-	 * \brief Gibt die Durchschlagskraft an. Die Durchschlagskraft beeinflusst, wie stark der Schaden durch die Ruestung gemindert wird
+	 * \brief Specifies the piercing power. The power influences how much the damage is reduced by the armor.
 	 */
 	float m_power;
 	
 	/**
 	 * \var  m_attacker_id
-	 * \brief ID des Angreifers
+	 * \brief ID of the attacker.
 	 */
 	int m_attacker_id;
 	
 	/**
 	 * \var Fraction::Id m_attacker_fraction
-	 * \brief Fraktion des Angreifers
+	 * \brief Faction of the attacker
 	 */
 	Fraction::Id m_attacker_fraction;
 	
 
 	/**
 	 * \var float m_crit_perc
-	 * \brief Chance auf kritischen Treffer
+	 * \brief Chance for critical hit
 	 */
 	float m_crit_perc;
 	
 	/**
 	 * \var m_status_mod_power
-	 * \brief Gibt fuer alle Statusveraenderungn die Zauberkraft an. Eine Zauberkraft von 0 bedeutet, dass der betreffende Effekt nicht wirksam wird.
+	 * \brief Specifies the spell power for all the status changes. Spell power of 0 means that the effect will have no effect at all to the target.
 	 */
 	short m_status_mod_power[NR_STATUS_MODS];
 	
 	/**
 	 * \var short m_ai_mod_power[NR_AI_MODS]
-	 * \brief Staerke der Einfluesse auf die AI
+	 * \brief Influence of the effect to an AI NPC
 	 */
 	short m_ai_mod_power[NR_AI_MODS];
 	
 	/**
 	 * \var WorldObject::Race m_extra_dmg_race
-	 * \brief Rasse gegen den der Schaden verdreifacht wird
+	 * \brief Specifies the race to whom the spell does tripple damage. 
 	 */
 	WorldObject::Race m_extra_dmg_race;
 	
 	/**
 	 * \var m_special_flags
-	 * \brief bitkodierte Zusammenfassung besonderer Eigenschaften des Schaden, wie besonderer Schaden gegen bestimmte Typen von Monstern.
+	 * \brief Bitcoded summary of the damage properties. Like extra damage to specified types of monsters.
 	 */
 	short m_special_flags;
 	
 	/**
 	 * \enum DamageType
-	 * \brief Aufzaehlung der Schadensarten
+	 * \brief Enumeration of all damage types.
 	 */
 	enum DamageType
 	{
@@ -128,7 +128,7 @@ struct Damage
 	
 	/**
 	 * \enum StatusMods
-	 * \brief Aufzaehlung der Statusmodifikationen
+	 * \brief Enumeration of all status mods.
 	 */
 	enum StatusMods
 	{
@@ -145,7 +145,7 @@ struct Damage
 	
 	/**
 	 * \enum SpecialFlags
-	 * \brief Aufzaehlung von Spezialeigenschaften des Schadens
+	 * \brief Enumeration of all special properties of a damage type.
 	 */
 	enum SpecialFlags
 	{
@@ -158,7 +158,7 @@ struct Damage
 	
 	/**
 	 * \enum Usage
-	 * \brief Verwendung der Beschreibung von Schaden (unterschiedlich ausfuehrlich)
+	 * \brief Usage of the damage description. // Verwendung der Beschreibung von Schaden (unterschiedlich ausfuehrlich)
 	 */
 	enum Usage
 	{
@@ -170,70 +170,70 @@ struct Damage
   
 	/**
 	 * \fn void toString(CharConv* cv)
-	 * \brief Konvertiert das Objekt in einen String und schreibt ihn in der Puffer
-	 * \param cv Ausgabepuffer
+	 * \brief Converts the object into a string and writes it to a given buffer
+	 * \param cv Output buffer
 	 */
 	void toString(CharConv* cv);
 	
 	/**
 	 * \fn void fromString(CharConv* cv)
-	 * \brief Erzeugt das Objekt aus einem String
-	 * \param cv Eingabepuffer
+	 * \brief Creates the object from a string
+	 * \param cv Input buffer
 	 */
 	void fromString(CharConv* cv);
 	
 	/**
 	 * \fn void init()
-	 * \brief initialisiert die Datenfelder
+	 * \brief Initializes all datafields
 	 */
 	void init();
 	
 	/**
 	 * \fn void normalize()
-	 * \brief rechnet alle Multiplikatoren in die Schadenswerte ein
+	 * \brief Applies all multipliers to the damage values
 	 */
 	void normalize();
 	
 	/**
 	 * \fn Damage()
-	 * \brief Konstruktor. Belegt die Datenfelder mit 0
+	 * \brief Constructor. Creates all fields with 0.
 	 */
 	Damage();
 	
 	/**
 	 * \fn static std::string getDamageTypeName(DamageType dt)
-	 * \brief Gibt zu einem Schadenstyp den Name als String aus
+	 * \brief Returns damage type name as a string.
 	 */
 	static std::string getDamageTypeName(DamageType dt);
 	
 	/**
 	 * \fn static std::string getDamageResistanceName(DamageType dt)
-	 * \brief Gibt zu einem Schadenstyp den Name der Resistenz als String aus
+	 * \brief Returns the resistance name of a damage type as a string.
 	 */
 	static std::string getDamageResistanceName(DamageType dt);
 	
 	/**
 	 * \fn static std::string getStatusModName(StatusMods sm)
-	 * \brief Gibt zu einer Statusveraenderung den Name als String aus
+	 * \brief Returns the status change name as a string.
 	 */
 	static std::string getStatusModName(StatusMods sm);
 	
 	/**
 	 * \fn float getSumMinDamage()
-	 * \brief Gibt die Summe des Minimalschaden ueber die Schadensarten aus
+	 * \brief Returns the sum of the minimal damage for all damage types.
 	 */
 	float getSumMinDamage();
 	
 	/**
 	 * \fn float getSumMaxDamage()
-	 * \brief Gibt die Summe des Maximalschadens ueber die Schadensarten aus
+	 * \brief Returns the sum of the maximal damage for all damage types.
 	 */
 	float getSumMaxDamage();
 	
 	/**
 	 * \fn std::string getDamageString((Usage usage= NORMAL)
-	 * \brief Erzeugt einen String der den angegebenen Schaden anzeigt
-	 * \param usage Gibt an wofuer die Beschreibung verwendet wird (beeinflusst welche Daten angegeben werden)
+	 * \brief Creates a string which displays the specified damage.
+	 * \param usage Specifies what the string is used for. This influences which data will be returned.
 	 * \param rarityColor color used to display magically enhanced values
 	 * \param magic_mods bitset with ones set for magically enhanced values (see \ref ItemFactory::ItemMod )
 	 */
@@ -241,21 +241,21 @@ struct Damage
 	
 	/**
 	 * \fn int getValue(std::string valname)
-	 * \brief Schiebt den gewuenschten Attributwert eines Objektes auf den Lua Stack
-	 * \param valname Name des Wertes
+	 * \brief Pushes the value of an attribute to the lua stack
+	 * \param valname Value name
 	 */
 	int getValue(std::string valname);
 	
 	/**
 	 * \fn virtual bool setValue(std::string valname)
-	 * \brief Setzt den gewuenschten Attributwert eines Objektes
-	 * \param valname Name des Wertes
+	 * \brief Sets the attribute value of an object
+	 * \param valname Value name
 	 */
 	bool setValue(std::string valname);
 	
 	/**
 	 * \fn void operator=(Damage& other)
-	 * \brief Zuweisungsoperator
+	 * \brief Assignment operator overload
 	 */
 	void operator=(Damage& other);
 };

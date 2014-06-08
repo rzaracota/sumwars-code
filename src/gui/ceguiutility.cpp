@@ -773,7 +773,7 @@ bool CEGUIUtility::injectKeyUp (OIS::KeyCode myKey)
 	return injectKeyUp (CEGUI::System::getSingletonPtr(), myKey);
 }
 
-
+//Alerts CEGUI about a keyup action and the key itself
 bool CEGUIUtility::injectKeyUp (CEGUI::System* sys, OIS::KeyCode myKey)
 {
 	if (!sys)

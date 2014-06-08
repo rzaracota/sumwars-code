@@ -85,6 +85,7 @@ const std::string defaultResourcesCfg =
 "\n"
 "[emotionsets]\n"
 "FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/emotionsets\n"
+"FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/@CEGUI_VERSION_RESOURCES@/emotionsets\n"
 "\n"
 "[itempictures]\n"
 "FileSystem=@SUMWARS_PREFIX@/@SUMWARS_SHARE_DIR@/resources/itempictures\n"

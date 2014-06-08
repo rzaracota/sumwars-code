@@ -653,7 +653,7 @@ class Document
 
 	/**
 	 * \fn bool onKeyRelease(KeyCode key)
-	 * \brief Behandelt loslassen einer Taste
+	 * \brief Treats and releases a key
 	 */
 	bool onKeyRelease(KeyCode key);
 

@@ -1,7 +1,7 @@
 <project>
     <shortName>Sumwars</shortName>
     <fullName>Summoning Wars</fullName>
-    <version>0.5.7</version>
+    <version>0.5.8</version>
     <readmeFile>README</readmeFile>
     <licenseFile>COPYING</licenseFile>
     <logoImage>share/resources/gui/imagesets/startscreen.png</logoImage>
@@ -10,7 +10,7 @@
     <componentList>
         <component>
             <name>vcruntime</name>
-            <description>Visual C++ 2010 runtime installer</description>
+            <description>Visual C++ 2012 runtime installer</description>
             <canBeEdited>1</canBeEdited>
             <selected>1</selected>
             <show>1</show>
@@ -23,7 +23,7 @@
                         <runProgram>
                             <program>${installdir}/vcredist_x86.exe</program>
                             <programArguments>/q:a /c:"${msiexec.dos} /i vcredist.msi /qn /l*v ${system_temp_directory.dos}\vcredist_x86.log"</programArguments>
-                            <progressText>Installing VC++ 2010 runtime</progressText>
+                            <progressText>Installing VC++ 2012 runtime</progressText>
                         </runProgram>
                     </actionList>
                     <distributionFileList>
@@ -90,91 +90,112 @@
                     <platforms>all</platforms>
                     <distributionFileList>
                         <distributionDirectory>
-                            <origin>inst/share</origin>
+                            <origin>share</origin>
                         </distributionDirectory>
                         <distributionFile>
-                            <origin>inst/AUTHORS</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/alut.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/COPYING</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/AUTHORS</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/README</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/boost_filesystem-vc110-mt-1_52.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/alut.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/boost_system-vc110-mt-1_52.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/CEGUIBase.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/boost_thread-vc110-mt-1_52.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/CEGUIExpatParser.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/CEGUIBase-0.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/CEGUIFalagardWRBase.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/CEGUICommonDialogs-0.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/CEGUIOgreRenderer.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/CEGUICoreWindowRendererSet.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/cg.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/CEGUIExpatParser.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/libiconv2.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/CEGUIOgreRenderer-0.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/libintl3.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/CEGUIXercesParser.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/lua.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/cg.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/OgreMain.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/COPYING</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/OgrePaging.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/expat.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/OgreProperty.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/freetype.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/OgreRTShaderSystem.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/libcharset1.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/OgreTerrain.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/libgettextlib.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/OIS.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/libgettextpo.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/physfs.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/libgettextsrc.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/Plugin_CgProgramManager.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/libiconv2.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/Plugin_OctreeSceneManager.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/libintl3.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/Plugin_OctreeZone.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/lua.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/Plugin_ParticleFX.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/OgreMain.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/Plugin_PCZSceneManager.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/OgreProperty.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/PocoFoundation.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/OgreRTShaderSystem.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/RenderSystem_Direct3D9.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/OIS.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/RenderSystem_GL.dll</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/pcre.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>inst/sumwars.exe</origin>
+                            <origin>../Sumwars-build-cegui-branch/inst/Plugin_CgProgramManager.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>../Sumwars-build-cegui-branch/inst/Plugin_OctreeSceneManager.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>../Sumwars-build-cegui-branch/inst/Plugin_ParticleFX.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>../Sumwars-build-cegui-branch/inst/README</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>../Sumwars-build-cegui-branch/inst/RenderSystem_Direct3D9.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>../Sumwars-build-cegui-branch/inst/RenderSystem_GL.dll</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>../Sumwars-build-cegui-branch/inst/sumwars.exe</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>../Sumwars-build-cegui-branch/inst/zlib.dll</origin>
                         </distributionFile>
                     </distributionFileList>
                     <shortcutList>
@@ -270,6 +291,7 @@
     <readyToInstallActionList>
         <componentSelection>
             <deselect>oalruntime</deselect>
+            <explanation>Library is required to run Summoning Wars</explanation>
             <select></select>
             <ruleList>
                 <fileExists path="${windows_folder_system}/OpenAL*.dll"/>
@@ -277,9 +299,10 @@
         </componentSelection>
         <componentSelection>
             <deselect>vcruntime</deselect>
+            <explanation>Library is required to run Summoning Wars</explanation>
             <select></select>
             <ruleList>
-                <fileExists path="${windows_folder_system}/msvcp100.dll"/>
+                <fileExists path="${windows_folder_system}/msvcp110.dll"/>
             </ruleList>
         </componentSelection>
     </readyToInstallActionList>

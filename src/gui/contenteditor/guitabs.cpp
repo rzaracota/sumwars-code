@@ -13,6 +13,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//
+// TODO(Augustin Preda, 2014.03.29): This entire file seems to be unused.
+// Verify if needed for anything and (if not used) remove it.
+//
+
 #include "guitabs.h"
 
 #include "Ogre.h"

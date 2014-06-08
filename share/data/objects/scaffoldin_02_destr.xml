@@ -1,0 +1,4 @@
+<Object type="FIXED_OBJECT" subtype="scaffoldin_02_destr" layer="NORMAL">
+        <Mesh file="scaffoldin_02_destr.mesh" />
+        <Geometry shape="CIRCLE" radius="0.5"/>
+</Object>

@@ -90,6 +90,11 @@ private:
 	 * @brief holds the world info as string
 	 */
 	std::string m_world_info;
+
+    /**
+     * \brief The root window to use when accessing the widgets.
+     */
+    CEGUI::Window* m_rootWindow;
 };
 
 

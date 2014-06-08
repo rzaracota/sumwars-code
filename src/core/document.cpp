@@ -857,7 +857,6 @@ void Document::onButtonHostGame()
 	if (m_temp_player == 0)
 	{
 		// Show a notification.
-		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("WarningDialogWindow");
 		message->setInheritsAlpha(false);
 		message->setVisible(true);
@@ -878,7 +877,6 @@ void Document::onButtonJoinGame()
 	if (m_temp_player == 0)
 	{
 		// Show a notification.
-		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 		CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) CEGUIUtility::getWindow("WarningDialogWindow");
 		message->setInheritsAlpha(false);
 		message->setVisible(true);
@@ -1425,7 +1423,7 @@ bool Document::onKeyPress(KeyCode key)
 		}
 		else if (dest == SHOW_ITEMLABELS)
 		{
-			getGUIState()->m_item_labels = true;
+			getGUIState()->m_item_labels = !getGUIState()->m_item_labels;
 		}
 		else if (dest >=USE_POTION && dest < USE_POTION+10)
 		{
@@ -1557,20 +1555,8 @@ bool Document::onKeyPress(KeyCode key)
 
 bool  Document::onKeyRelease(KeyCode key)
 {
-	if (m_gui_state.m_pressed_key != 0)
-	{
-		m_gui_state.m_pressed_key = 0;
-	}
-
-	ShortkeyDestination dest = Options::getInstance()->getMappedDestination(key);
-	if (dest != 0)
-	{
-		if (dest == SHOW_ITEMLABELS)
-		{
-			getGUIState()->m_item_labels = false;
-		}
-	}
-	return true;
+    //Currently there's no key that needs to be treated at release action.
+    return true;
 }
 
 void Document::update(float time)
@@ -1991,7 +1977,6 @@ Player*  Document::getLocalPlayer()
 void Document::showWarning (const std::string& textMessage)
 {
 	// Show a notification.
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	if (! CEGUIUtility::isWindowPresent ("WarningDialogWindow"))
 	{
 		SW_DEBUG ("Could not display the warning widget: [WarningDialogWindow]");
@@ -2013,8 +1998,6 @@ void Document::showWarning (const std::string& textMessage)
 void Document::hideWarning ()
 {
 	// Show a notification.
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
 	if (CEGUIUtility::isWindowPresent ("WarningDialogWindow"))
 	{
 		CEGUI::Window* widget = CEGUIUtility::getWindow("WarningDialogWindow");
@@ -2036,7 +2019,6 @@ void Document::hideWarning ()
 void Document::showQuestionDialog ()
 {
 	// Show a notification.
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::String widgetName = CEGUIUtility::getNameForWidget ("MainMenu/MainMenuRoot/QuestionInfoRoot");
 	if (! CEGUIUtility::isWindowPresent (widgetName))
 	{
@@ -2058,7 +2040,6 @@ void Document::showQuestionDialog ()
 void Document::hideQuestionDialog ()
 {
 	// Show a notification.
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::String widgetName = CEGUIUtility::getNameForWidget ("MainMenu/MainMenuRoot/QuestionInfoRoot");
 	if (CEGUIUtility::isWindowPresent (widgetName))
 	{

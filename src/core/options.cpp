@@ -104,7 +104,8 @@ void Options::init()
 	
 	m_default_savegame = "";
 
-	// Also set this in the initialization. In case the options file is edited and no section with these settings is found, the defaults are loaded here.
+	// Also set this in the initialization. In case the options file is edited and no section with 
+  // these settings is found, the defaults are loaded here.
 	setCeguiSkin ("SWB");
 	setCeguiCursorSkin ("SWBCursors");
 
@@ -120,15 +121,15 @@ void Options::setToDefaultOptions()
 {
 	init();
 
-	// shortkeys that may be changed
-	m_shortkey_map[OIS::KC_I] = SHOW_INVENTORY ;
-	m_shortkey_map[OIS::KC_C] =  SHOW_CHARINFO;
-	m_shortkey_map[OIS::KC_T] =  SHOW_SKILLTREE;
-	m_shortkey_map[OIS::KC_P] =  SHOW_PARTYMENU;
-	m_shortkey_map[OIS::KC_M] =  SHOW_MINIMAP;
-	m_shortkey_map[OIS::KC_B] =  SHOW_CHATBOX;
-	m_shortkey_map[OIS::KC_Q] =  SHOW_QUESTINFO;
-	m_shortkey_map[OIS::KC_W] =  SWAP_EQUIP;
+	// Shortkeys that may be changed
+	m_shortkey_map[OIS::KC_I] = SHOW_INVENTORY;
+	m_shortkey_map[OIS::KC_C] = SHOW_CHARINFO;
+	m_shortkey_map[OIS::KC_T] = SHOW_SKILLTREE;
+	m_shortkey_map[OIS::KC_P] = SHOW_PARTYMENU;
+	m_shortkey_map[OIS::KC_M] = SHOW_MINIMAP;
+	m_shortkey_map[OIS::KC_B] = SHOW_CHATBOX;
+	m_shortkey_map[OIS::KC_Q] = SHOW_QUESTINFO;
+	m_shortkey_map[OIS::KC_W] = SWAP_EQUIP;
 	m_shortkey_map[OIS::KC_LMENU] =  SHOW_ITEMLABELS;
 
 
@@ -162,7 +163,7 @@ bool Options::readFromFile(const std::string& filename)
 		{
 			for ( child = root->FirstChild(); child != 0; child = child->NextSibling())
 			{
-				if (child->Type()==TiXmlNode::TINYXML_ELEMENT)
+				if (child->Type() == TiXmlNode::TINYXML_ELEMENT)
 				{
 					attr.parseElement(child->ToElement());
 					
@@ -170,13 +171,13 @@ bool Options::readFromFile(const std::string& filename)
 					{
 						for ( child2 = child->FirstChild(); child2 != 0; child2 = child2->NextSibling())
 						{
-							if (child2->Type()==TiXmlNode::TINYXML_ELEMENT && !strcmp(child2->Value(), "Shortkey"))
+							if (child2->Type() == TiXmlNode::TINYXML_ELEMENT && !strcmp(child2->Value(), "Shortkey"))
 							{
 								attr.parseElement(child2->ToElement());
 
 								int key, target;
-								attr.getInt("key",key);
-								attr.getInt("target",target);
+								attr.getInt("key", key);
+								attr.getInt("target", target);
 								if (key != 0 && target != 0)
 								{
 									setShortkey(key, (ShortkeyDestination) target);
@@ -199,16 +200,16 @@ bool Options::readFromFile(const std::string& filename)
 					else if (!strcmp(child->Value(), "Language"))
 					{
 						std::string locale;
-						attr.getString("locale",locale);
+						attr.getString("locale", locale);
 						setLocale(locale);
 					}
 					else if (!strcmp(child->Value(), "Gameplay"))
 					{
 						int diff;
-						attr.getInt("difficulty",diff);
+						attr.getInt("difficulty", diff);
 						setDifficulty( static_cast<Difficulty>(diff));
 						float text_speed;
-						attr.getFloat("text_speed",text_speed);
+						attr.getFloat("text_speed", text_speed);
 						setTextSpeed( text_speed);
 
 						int showConsoleWindow;
@@ -220,9 +221,9 @@ bool Options::readFromFile(const std::string& filename)
 						std::string host;
 						int port;
 						int max_players;
-						attr.getString("host",host,"127.0.0.1");
-						attr.getInt("port",port,5331);
-						attr.getInt("max_players",max_players,8);
+						attr.getString("host", host, "127.0.0.1");
+						attr.getInt("port", port, 5331);
+						attr.getInt("max_players", max_players, 8);
 
 						setPort(port);
 						setServerHost(host);
@@ -280,9 +281,9 @@ bool Options::readFromFile(const std::string& filename)
 						}
 						setCeguiCursorSkin (ceguiCursorSkin);
 					}
-					else if (child->Type()!=TiXmlNode::TINYXML_COMMENT)
+					else if (child->Type() != TiXmlNode::TINYXML_COMMENT)
 					{
-						WARNING("unexpected element in options.xml: %s",child->Value());
+						WARNING("unexpected element in options.xml: %s", child->Value());
 					}
 				}
 			}
@@ -309,73 +310,118 @@ bool Options::writeToFile(const std::string& filename)
 	TiXmlDeclaration * decl = new TiXmlDeclaration( "1.0", "UTF-8", "" );
 	doc.LinkEndChild( decl );
 
+  TiXmlNode* linkedNode = NULL;
+
 	TiXmlElement* root;
 	root = new TiXmlElement("Options");
-	doc.LinkEndChild(root);
+	linkedNode = doc.LinkEndChild(root);
 
-	TiXmlElement * element;
-	element = new TiXmlElement( "Shortkeys" );
-	root->LinkEndChild(element);
+  if (linkedNode == NULL)
+  {
+    // Failed to link the root item.
+    return false;
+  }
 
-	TiXmlElement * subele;
-	ShortkeyMap::iterator it;
-	for (it = m_shortkey_map.begin(); it != m_shortkey_map.end(); ++it)
-	{
-		subele = new TiXmlElement("Shortkey");
-		subele->SetAttribute("key",it->first);
-		subele->SetAttribute("target",it->second);
-		element->LinkEndChild(subele);
-	}
+	TiXmlElement* element;
+	element = new TiXmlElement("Shortkeys");
+	linkedNode = root->LinkEndChild(element);
 
-	element = new TiXmlElement( "Gameplay" );
-	root->LinkEndChild(element);
-	element->SetAttribute("difficulty",getDifficulty());
-	element->SetDoubleAttribute("text_speed",getTextSpeed());
-	element->SetAttribute ("showConsoleWindow", getShowConsoleWindow ());
+  if (linkedNode != NULL)
+  {
+    // element is not destroyed
 
-	element = new TiXmlElement( "Music" );
-	root->LinkEndChild(element);
-	element->SetDoubleAttribute("volume",getMusicVolume());
+	  TiXmlElement * subele;
+	  ShortkeyMap::iterator it;
+	  for (it = m_shortkey_map.begin(); it != m_shortkey_map.end(); ++it)
+	  {
+		  subele = new TiXmlElement("Shortkey");
+		  subele->SetAttribute("key", it->first);
+		  subele->SetAttribute("target", it->second);
+		  element->LinkEndChild(subele);
+	  }
+  }
 
-	element = new TiXmlElement( "Sound" );
-	element->SetDoubleAttribute("volume",getSoundVolume());
+	element = new TiXmlElement("Gameplay");
+	linkedNode = root->LinkEndChild(element);
+
+  if (linkedNode != NULL)
+  {
+    // element is not destroyed
+	  element->SetAttribute("difficulty", getDifficulty());
+	  element->SetDoubleAttribute("text_speed", getTextSpeed());
+	  element->SetAttribute ("showConsoleWindow", getShowConsoleWindow ());
+  }
+
+	element = new TiXmlElement("Music");
+	linkedNode = root->LinkEndChild(element);
+  if (linkedNode != NULL)
+  {
+    // element is not destroyed
+	  element->SetDoubleAttribute("volume", getMusicVolume());
+  }
+
+	element = new TiXmlElement("Sound");
+	element->SetDoubleAttribute("volume", getSoundVolume());
 	root->LinkEndChild(element);
 
 	element = new TiXmlElement("Graphic");
-	root->LinkEndChild(element);
-	element->SetAttribute("ehl_color", getEnemyHighlightColor().c_str());
-	element->SetAttribute("grabMouseWhenWindowed", getGrabMouseInWindowedMode());
-	element->SetAttribute("display_mode", getUsedDisplayMode());
-	element->SetAttribute ("shadowMode", getShadowMode ());
-	
-	element = new TiXmlElement( "Language" );
-	root->LinkEndChild(element);
-	element->SetAttribute("locale",getLocale().c_str());
+	linkedNode = root->LinkEndChild(element);
+  if (linkedNode != NULL)
+  {
+    // element is not destroyed
+	  element->SetAttribute("ehl_color", getEnemyHighlightColor().c_str());
+	  element->SetAttribute("grabMouseWhenWindowed", getGrabMouseInWindowedMode());
+	  element->SetAttribute("display_mode", getUsedDisplayMode());
+	  element->SetAttribute ("shadowMode", getShadowMode ());
+  }
+
+	element = new TiXmlElement("Language");
+	linkedNode = root->LinkEndChild(element);
+  if (linkedNode != NULL)
+  {
+    // element is not destroyed
+	  element->SetAttribute("locale", getLocale().c_str());
+  }
 
 	element = new TiXmlElement( "Network" );
-	root->LinkEndChild(element);
-	element->SetAttribute("host",getServerHost().c_str());
-	element->SetAttribute("port",getPort());
-	element->SetAttribute("max_players",getMaxNumberPlayers());
-	
-	element = new TiXmlElement( "Savegame" );
-	root->LinkEndChild(element);
-	element->SetAttribute("file",getDefaultSavegame().c_str());
+	linkedNode = root->LinkEndChild(element);
+  if (linkedNode != NULL)
+  {
+    // element is not destroyed
+	  element->SetAttribute("host", getServerHost().c_str());
+	  element->SetAttribute("port", getPort());
+	  element->SetAttribute("max_players", getMaxNumberPlayers());
+  }
 
-	element = new TiXmlElement( "Internal" );
-	root->LinkEndChild(element);
-	element->SetAttribute("cegui_skin",getCeguiSkin().c_str());
-	element->SetAttribute("cegui_cursor_skin",getCeguiCursorSkin().c_str());
+	element = new TiXmlElement("Savegame");
+	linkedNode = root->LinkEndChild(element);
+  if (linkedNode != NULL)
+  {
+    // element is not destroyed
+  	element->SetAttribute("file", getDefaultSavegame().c_str());
+  }
+
+	element = new TiXmlElement("Internal");
+	linkedNode = root->LinkEndChild(element);
+  if (linkedNode != NULL)
+  {
+    // element is not destroyed
+	  element->SetAttribute("cegui_skin", getCeguiSkin().c_str());
+	  element->SetAttribute("cegui_cursor_skin", getCeguiCursorSkin().c_str());
+  }
 
 	if (!m_debug_options.empty())
 	{
-		element = new TiXmlElement( "Debug" );
-		root->LinkEndChild(element);
-		std::map<std::string, std::string>::iterator it;
-		for(it = m_debug_options.begin(); it != m_debug_options.end(); ++it)
-		{
-			element->SetAttribute(it->first.c_str(), it->second.c_str());
-		}
+		element = new TiXmlElement("Debug");
+		linkedNode = root->LinkEndChild(element);
+    if (linkedNode)
+    {
+		  std::map<std::string, std::string>::iterator it;
+		  for (it = m_debug_options.begin(); it != m_debug_options.end(); ++it)
+		  {
+			  element->SetAttribute(it->first.c_str(), it->second.c_str());
+		  }
+    }
 	}
 
 	doc.SaveFile( filename.c_str());
@@ -385,7 +431,7 @@ bool Options::writeToFile(const std::string& filename)
 KeyCode Options::getMappedKey(ShortkeyDestination sd)
 {
 	std::map<KeyCode, ShortkeyDestination>::iterator it;
-	for (it=m_shortkey_map.begin(); it!= m_shortkey_map.end();++it)
+	for (it = m_shortkey_map.begin(); it != m_shortkey_map.end(); ++it)
 	{
 		if (it->second == sd)
 		{
@@ -402,15 +448,19 @@ ShortkeyDestination Options::getMappedDestination(KeyCode key)
 	it = m_shortkey_map.find(key);
 
 	if (it != m_shortkey_map.end())
+  {
 		return it->second;
+  }
 
 	return NO_KEY;
 }
 
-bool Options:: setShortkey(KeyCode key,ShortkeyDestination dest)
+bool Options:: setShortkey(KeyCode key, ShortkeyDestination dest)
 {
 	if (isSpecialKey(key))
+  {
 		return false;
+  }
 
 	// key that was mapped to the action dest so far
 	KeyCode oldkey = getMappedKey(dest);
@@ -421,7 +471,7 @@ bool Options:: setShortkey(KeyCode key,ShortkeyDestination dest)
 	}
 
 	// create new mapping
-	m_shortkey_map[key]=dest;
+	m_shortkey_map[key] = dest;
 	return true;
 }
 
@@ -462,8 +512,11 @@ std::string Options::getLocale()
 	{
 		locstr = locale;
 	}
+
 	if (locstr == "")
+  {
 		locstr = "#default#";
+  }
 
 	return locstr;
 }
@@ -480,30 +533,30 @@ int Options::getValue(std::string valname)
 {
 	if (valname =="server_host")
 	{
-		lua_pushstring(EventSystem::getLuaState() , m_server_host.c_str() );
+		lua_pushstring(EventSystem::getLuaState(), m_server_host.c_str() );
 		return 1;
 	}
 	else if (valname =="port")
 	{
-		lua_pushnumber(EventSystem::getLuaState() , m_port );
+		lua_pushnumber(EventSystem::getLuaState(), m_port );
 		return 1;
 	}
 	else if (valname =="difficulty")
 	{
-		std::string values[4] = {"easy","normal","hard","insane"};
-		lua_pushstring(EventSystem::getLuaState() , values[m_difficulty- EASY].c_str() );
+		std::string values[4] = {"easy", "normal", "hard", "insane"};
+		lua_pushstring(EventSystem::getLuaState(), values[m_difficulty- EASY].c_str() );
 		return 1;
 	}
 	else if (valname =="text_speed")
 	{
-		lua_pushnumber(EventSystem::getLuaState() , m_text_speed );
+		lua_pushnumber(EventSystem::getLuaState(), m_text_speed );
 		return 1;
 	}
 	else
 	{
 		if (m_debug_options.count(valname))
 		{
-			lua_pushstring(EventSystem::getLuaState() , m_debug_options[valname].c_str() );
+			lua_pushstring(EventSystem::getLuaState(), m_debug_options[valname].c_str());
 			return 1;
 		}
 	}
@@ -514,36 +567,48 @@ bool Options::setValue(std::string valname)
 {
 	if (valname =="server_host")
 	{
-		m_server_host = lua_tostring(EventSystem::getLuaState() ,-1);
+		m_server_host = lua_tostring(EventSystem::getLuaState(), -1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="port")
 	{
-		m_port = lua_tonumber(EventSystem::getLuaState() ,-1);
+		m_port = lua_tonumber(EventSystem::getLuaState(), -1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="difficulty")
 	{
-		std::string diffstr = lua_tostring(EventSystem::getLuaState() ,-1);
-		if (diffstr == "easy") m_difficulty = EASY;
-		if (diffstr == "normal") m_difficulty = NORMAL;
-		if (diffstr == "hard") m_difficulty = HARD;
-		if (diffstr == "insane") m_difficulty = INSANE;
+		std::string diffstr = lua_tostring(EventSystem::getLuaState(), -1);
+		if (diffstr == "easy") 
+    {
+        m_difficulty = EASY;
+    }
+    else if (diffstr == "normal") 
+    {
+        m_difficulty = NORMAL;
+    }
+		else if (diffstr == "hard") 
+    {
+        m_difficulty = HARD;
+    }
+		else if (diffstr == "insane") 
+    {
+      m_difficulty = INSANE;
+    }
 		
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else if (valname =="text_speed")
 	{
-		m_text_speed = lua_tonumber(EventSystem::getLuaState() ,-1);
+		m_text_speed = lua_tonumber(EventSystem::getLuaState(), -1);
 		lua_pop(EventSystem::getLuaState(), 1);
 		return true;
 	}
 	else
 	{
-		std::string value = lua_tostring(EventSystem::getLuaState() ,-1);
+		std::string value = lua_tostring(EventSystem::getLuaState(), -1);
 		m_debug_options[valname] = value;
 	}
 

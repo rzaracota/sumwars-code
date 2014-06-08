@@ -46,10 +46,8 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	m_keyboard = keyboard;
 
 	SW_DEBUG ("OptionsWindow being created using cegui skin [%s]", m_ceguiSkinName.c_str ());
-	// Generate GUI Elements
 
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
+  // Generate GUI Elements
 	// Load the base options window - containing the actual elements.
 	CEGUI::FrameWindow* options = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("optionswindow.layout");
 	if (!options)
@@ -239,8 +237,9 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "English US","en_US",0));
 	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Italian IT","it_IT",0));
 	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Russian RU","ru_RU",0));
-	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Ukrainian UK","uk_UA",0));
-	cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Spanish ES","es_ES",0));
+    cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Ukrainian UK","uk_UA",0));
+    cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "Spanish ES","es_ES",0));
+    cbo->addItem(new StrListItem((CEGUI::utf8*) m_ceguiSkinName.c_str (), "French FR","fr_FR",0));
 
 	cbo->setReadOnly(true);
 	connectWidgetSoundEvents ("OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsMisc/LanguageBox", "combobox");
@@ -440,7 +439,6 @@ OptionsWindow::OptionsWindow (Document* doc, OIS::Keyboard *keyboard, const std:
 
 void OptionsWindow::update()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	Options* options = Options::getInstance();
 
@@ -499,7 +497,6 @@ void OptionsWindow::update()
 
 void OptionsWindow::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	CEGUIUtility::ToggleButton* box;
 	
@@ -603,7 +600,6 @@ void OptionsWindow::connectWidgetSoundEvents (const std::string& widgetName, con
 {
 	try
 	{
-		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 		if (widgetType == "combobox")
 		{
 			try
@@ -727,8 +723,6 @@ bool OptionsWindow::onButtonOkClicked (const CEGUI::EventArgs& evt)
 	// Check to see if the display mode was updated. The display mode is stored in a different file at the moment.
 	// TODO: move towards integrated settings file (single file for most settings).
 	{
-		CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
 		// Flag to keep track of whether we need updating of the settings.
 		bool someVideoSettingsWereChanged (false);
 
@@ -1202,8 +1196,6 @@ bool OptionsWindow::onDisplayModeSelected (const CEGUI::EventArgs& evt)
 
 	// For windowed (fullscreen) mode, make sure the resolution can't be edited.
 
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton ();
-
 	std::string widgetName = CEGUIUtility::getNameForWidget ("OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGraphic/ResolutionBox");
 	cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, widgetName));
 	if (myDisplayMode == WINDOWED_FULLSCREEN)
@@ -1296,7 +1288,6 @@ bool OptionsWindow::onVideoDriverSelected (const CEGUI::EventArgs& evt)
 	}
 
 	// Start adding the resolutions as items to the combo-box, one by one.
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton ();
 	cbo = static_cast<CEGUI::Combobox*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "OptionsWindow/OptionsWindowTab/__auto_TabPane__/OptionsGraphic/ResolutionBox"));
 	cbo->resetList ();
 

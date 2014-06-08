@@ -22,19 +22,17 @@
 CharInfo::CharInfo (Document* doc)
 	: Window(doc)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	// The CharInfo window and holder
 	CEGUI::FrameWindow* char_info = (CEGUI::FrameWindow*) (CEGUIUtility::loadLayoutFromFile ("characterscreen.layout"));
 	if (!char_info)
 	{
-		SW_DEBUG ("WARNING: Failed to load [%s]", "characterscreen.layout");
+		SW_DEBUG("WARNING: Failed to load [%s]", "characterscreen.layout");
 	}
 
 	CEGUI::Window* char_info_holder = CEGUIUtility::loadLayoutFromFile ("characterscreen_holder.layout");
 	if (!char_info_holder)
 	{
-		SW_DEBUG ("WARNING: Failed to load [%s]", "characterscreen_holder.layout");
+		SW_DEBUG("WARNING: Failed to load [%s]", "characterscreen_holder.layout");
 	}
 	
 	CEGUI::Window* wndHolder = CEGUIUtility::getWindowForLoadedLayoutEx (char_info_holder, "CharInfo_Holder");
@@ -45,8 +43,15 @@ CharInfo::CharInfo (Document* doc)
 	}
 	else
 	{
-		if (!wndHolder) SW_DEBUG ("ERROR: Unable to get the window holder for char screen.");
-		if (!wndCharInfo) SW_DEBUG ("ERROR: Unable to get the window for char screen.");
+		if (!wndHolder)
+    {
+      SW_DEBUG ("ERROR: Unable to get the window holder for char screen.");
+    }
+
+		if (!wndCharInfo) 
+    {
+      SW_DEBUG ("ERROR: Unable to get the window for char screen.");
+    }
 	}
 
 	m_window = char_info_holder;
@@ -201,8 +206,6 @@ CharInfo::CharInfo (Document* doc)
 	CEGUI::String ttext="";
 
 	// Fenstermanager
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-
 	CEGUI::PushButton* btn;
 	CEGUI::Window* label;
 	std::ostringstream out_stream;
@@ -230,7 +233,7 @@ CharInfo::CharInfo (Document* doc)
 		out_stream.str("");
 	}
 	
-	if (label->getText()!= (CEGUI::utf8*) out_stream.str().c_str())
+	if (label->getText() != (CEGUI::utf8*) out_stream.str().c_str())
 	{
 		SW_DEBUG("set class label");
 		label->setText((CEGUI::utf8*) out_stream.str().c_str());
@@ -619,7 +622,6 @@ CharInfo::CharInfo (Document* doc)
 
 void CharInfo::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 
 	label = CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "CharInfo");

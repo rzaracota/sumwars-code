@@ -77,8 +77,6 @@ void ChatLine::updateTranslation()
 
 void ChatLine::setHistoryLine()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	//CEGUI::Editbox* line = static_cast<CEGUI::Editbox*>(CEGUIUtility::getWindow ("Chatline"));
 	CEGUI::Editbox* line = static_cast<CEGUI::Editbox*>(m_window);
 	
 	if (m_history_line == 0)

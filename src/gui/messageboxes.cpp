@@ -25,7 +25,6 @@
 SaveExitWindow::SaveExitWindow (Document* doc)
 	:Window(doc)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	
 	CEGUI::FrameWindow* save_exit = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("saveexitwindow.layout");
@@ -56,7 +55,6 @@ void SaveExitWindow::update()
 
 void SaveExitWindow::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "GameExitConfirmButton"));
@@ -117,7 +115,6 @@ MessageQuestionWindow::MessageQuestionWindow (Document* doc
 {
 	m_question = question;
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	
 	CEGUI::FrameWindow* message = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile (layoutName.c_str ());
@@ -148,7 +145,6 @@ MessageQuestionWindow::~MessageQuestionWindow ()
 
 void MessageQuestionWindow::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* widget;
 
 	CEGUI::String widgetName (CEGUIUtility::getNameForWidget("QuestionAnswerButton1"));
@@ -186,7 +182,6 @@ void MessageQuestionWindow::setQuestion(std::string question)
 WarningDialogWindow::WarningDialogWindow (Document* doc)
 :Window(doc)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 	
 	CEGUI::FrameWindow* warning_dialog = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile("warningdialogwindow.layout");
@@ -205,7 +200,6 @@ void WarningDialogWindow::update()
 
 void WarningDialogWindow::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "WarningDialogConfirmButton"));
@@ -238,7 +232,6 @@ void WarningDialogWindow::setWarning(std::string warning)
 ErrorDialogWindow::ErrorDialogWindow (Document* doc)
 :Window(doc)
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::PushButton* btn;
 
 	CEGUI::FrameWindow* error_dialog = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("errordialogwindow.layout");
@@ -257,7 +250,6 @@ void ErrorDialogWindow::update()
 
 void ErrorDialogWindow::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	
 	CEGUI::PushButton* btn = static_cast<CEGUI::PushButton*>(CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "ErrorDialogConfirmButton"));

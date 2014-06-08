@@ -2969,7 +2969,7 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 				s2.m_center.m_y += dir[d][1];
 
 				// solange Richtung weiterdrehen bis ein Punkt im Suchraum gefunden wird
-				while ((d<=10) && (s2.m_center.m_x<c1.m_x || s2.m_center.m_y<c1.m_y ||
+				while ((d <= 10) && (s2.m_center.m_x < c1.m_x || s2.m_center.m_y<c1.m_y ||
 									s2.m_center.m_x>c2.m_x || s2.m_center.m_y>c2.m_y))
 				{
 					d++;
@@ -2978,9 +2978,10 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 					DEBUGX("trying %f %f",s2.m_center.m_x,s2.m_center.m_y);
 				}
 
-				if (d==10)
+				if (d >= 10)
+        {
 					break;
-
+        }
 
 				if (wos->intersects(s2))
 				{
@@ -3006,16 +3007,17 @@ bool World::calcBlockmat(PathfindInfo * pathinfo)
 				{
 					// Suchrichtung solange weiter drehen bis ein zulaessiger Punkt im Objekt gefunden wurde
 					DEBUGX("not intersecting: %i %i %f %f",is+idir[d][0],js+idir[d][1],s2.m_center.m_x,s2.m_center.m_y);
-					do
-					{
-						d++;
-						s2.m_center.m_x = x+dir[d][0];
-						s2.m_center.m_y = y+dir[d][1];
-					} while (d<=10 && (s2.m_center.m_x<c1.m_x || s2.m_center.m_y<c1.m_y ||
-											s2.m_center.m_x>c2.m_x || s2.m_center.m_y>c2.m_y || !wos->intersects(s2)));
 
+          while (d < 10 && (s2.m_center.m_x < c1.m_x || s2.m_center.m_y < c1.m_y ||
+											s2.m_center.m_x > c2.m_x || s2.m_center.m_y > c2.m_y || !wos->intersects(s2)))
+          {
+						d++;
+						s2.m_center.m_x = x + dir[d][0];
+						s2.m_center.m_y = y + dir[d][1];
+          }
 				}
-				if (d<10)
+
+				if (d < 10)
 				{
 					// Hindernis eintragen
 					DEBUGX("d: %i",d);

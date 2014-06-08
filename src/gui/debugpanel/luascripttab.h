@@ -16,7 +16,12 @@
 #ifndef LUASCRIPTTAB_H
 #define LUASCRIPTTAB_H
 
+#ifdef CEGUI_07
 #include <CEGUI/CEGUIWindow.h>
+#else
+#include "CEGUI/Window.h"
+#endif
+
 #include "debugtab.h"
 #include "filebrowser/filebrowser.h"
 
@@ -27,7 +32,7 @@ public:
 	virtual void update(OIS::Keyboard *keyboard, OIS::Mouse *mouse);
 
 protected:
-	virtual void onSized(CEGUI::WindowEventArgs& e);
+	virtual void onSized(CEGUI::ElementEventArgs& e);
 	virtual void onTextChanged(CEGUI::WindowEventArgs& e);
 	virtual void onMouseMove(CEGUI::MouseEventArgs& e);
 	virtual void onMouseWheel(CEGUI::MouseEventArgs& e);

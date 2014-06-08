@@ -43,8 +43,6 @@ MinimapWindow::MinimapWindow (Document* doc, const std::string& ceguiSkinName)
 	DEBUGX("setup main menu");
 
 	// Create GUI Items.
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	CEGUI::Window* minimapWnd = CEGUIUtility::loadLayoutFromFile ("minimapwindow.layout");
 	if (!minimapWnd)
 	{

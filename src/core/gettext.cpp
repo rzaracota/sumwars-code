@@ -116,6 +116,7 @@ void Gettext::preInit ()
 	winLanguageMappings_["ru"] = 0x0419;
 	winLanguageMappings_["uk"] = 0x0422;
     winLanguageMappings_["es"] = 0xC0A;
+    winLanguageMappings_["fr"] = 0x40C;
 #endif
 }
 

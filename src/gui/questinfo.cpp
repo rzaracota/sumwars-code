@@ -27,9 +27,6 @@ QuestInfo::QuestInfo (Document* doc, const std::string& ceguiSkinName)
 	DEBUGX("setup main menu");
 	// GUI Elemente erzeugen
 
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
-
 	// Rahmen fuer das Menue Savegame auswaehlen
 	CEGUI::FrameWindow* quest_info = (CEGUI::FrameWindow*) CEGUIUtility::loadLayoutFromFile ("questinfo.layout");
 	if (!quest_info)
@@ -99,8 +96,6 @@ void QuestInfo::update()
 	if (World::getWorld() ==0)
 		return;
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
-	
 	// Auswahl ermitteln
 	bool open,done,failed;
 	CEGUIUtility::ToggleButton * box;
@@ -158,7 +153,6 @@ void QuestInfo::update()
 
 void QuestInfo::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 
 	label =  CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "QuestInfo");
@@ -200,7 +194,6 @@ bool QuestInfo::onCloseButtonClicked(const CEGUI::EventArgs& evt)
 
 void QuestInfo::updateDescription()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Listbox* classlist = (CEGUI::Listbox*) CEGUIUtility::getWindowForLoadedLayoutEx (m_window, "QuestInfo/questinfo_aux/QuestList");
 	CEGUI::ListboxItem * itm = classlist->getFirstSelectedItem();
 	

@@ -232,7 +232,6 @@ void PartyInfo::update()
 	
 	Fraction::Relation rel,rel2;
 	
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	std::ostringstream stream;
 	CEGUI::Window* label, *img, *btn;
 	bool vis;
@@ -466,7 +465,6 @@ void PartyInfo::update()
 
 void PartyInfo::updateTranslation()
 {
-	CEGUI::WindowManager& win_mgr = CEGUI::WindowManager::getSingleton();
 	CEGUI::Window* label;
 	
 	std::ostringstream stream;
