@@ -1423,7 +1423,7 @@ bool Document::onKeyPress(KeyCode key)
 		}
 		else if (dest == SHOW_ITEMLABELS)
 		{
-			getGUIState()->m_item_labels = true;
+			getGUIState()->m_item_labels = !getGUIState()->m_item_labels;
 		}
 		else if (dest >=USE_POTION && dest < USE_POTION+10)
 		{
@@ -1555,20 +1555,8 @@ bool Document::onKeyPress(KeyCode key)
 
 bool  Document::onKeyRelease(KeyCode key)
 {
-	if (m_gui_state.m_pressed_key != 0)
-	{
-		m_gui_state.m_pressed_key = 0;
-	}
-
-	ShortkeyDestination dest = Options::getInstance()->getMappedDestination(key);
-	if (dest != 0)
-	{
-		if (dest == SHOW_ITEMLABELS)
-		{
-			getGUIState()->m_item_labels = false;
-		}
-	}
-	return true;
+    //Currently there's no key that needs to be treated at release action.
+    return true;
 }
 
 void Document::update(float time)

@@ -325,7 +325,7 @@ class MainWindow :
 
 	/**
 	 * \fn bool keyReleased(const OIS::KeyEvent &evt)
-	 * \brief Behandelt Loslassen von Tasten auf der Tastatur
+	 * \brief Treats keyboard's keys when released
 	 */
 	bool keyReleased(const OIS::KeyEvent &evt);
 
@@ -478,7 +478,7 @@ class MainWindow :
 	
 	/**
 	 * \var unsigned int m_key
-	 * \brief gedrueckte Taste
+	 * \brief Pressed key
 	 */
 	unsigned int m_key;
 	
