@@ -368,6 +368,22 @@ struct Item {
 	 * \brief Gibt Preis des Gegenstands an
 	 */
 	int m_price;
+    
+    /**
+	 * \brief true, if the item can be consumed
+	 */
+	bool m_consumable;
+	
+	/**
+	 * \brief Specifies the timer that is required to consume this items. If 0, no timer is required.
+	 */
+	int m_consume_timer_nr;
+
+	
+	/**
+	 * \brief How long the timer will run. While the timer is running, no item using the same timer can be consumed.
+	 */
+	float m_consume_timer;
 
 	/**
 	 * \var m_useup_effect
@@ -398,22 +414,6 @@ struct Item {
 	 * \brief Anforderungen an die Charakterklasse
 	 */
 	std::string m_char_req;
-	
-	/**
-	 * \brief true, if the item can be consumed
-	 */
-	bool m_consumable;
-	
-	/**
-	 * \brief Specifies the timer that is required to consume this items. If 0, no timer is required.
-	 */
-	int m_consume_timer_nr;
-
-	
-	/**
-	 * \brief How long the timer will run. While the timer is running, no item using the same timer can be consumed.
-	 */
-	float m_consume_timer;
 
 	/**
 	 * \var float m_magic_power

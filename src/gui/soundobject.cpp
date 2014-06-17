@@ -39,8 +39,8 @@ SoundObject::SoundObject ()
 
 SoundObject::SoundObject (const std::string& name, Vector pos)
 	: m_name (name)
+    , m_soundData ("")
 	, m_pos (pos)
-	, m_soundData ("")
 {
 }
 

@@ -18,9 +18,10 @@
 
 NLFGNetworkPacket::NLFGNetworkPacket()
   : m_data(NULL),
-    m_packet(NULL),
     m_length(0),
-    m_timestamp(0)
+    m_timestamp(0),
+    m_packet(NULL)
+    
 {
   m_timestamp = time(NULL);
   m_packet = new NLFG_Message;

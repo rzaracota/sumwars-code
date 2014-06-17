@@ -42,8 +42,8 @@ using gussound::SoundManager;
 
 MainMenu::MainMenu (Document* doc, const std::string& ceguiSkinName)
         : Window (doc)
-		, m_ceguiSkinName (ceguiSkinName)
 		, m_starMenuRoot (0)
+        , m_ceguiSkinName (ceguiSkinName)
 {
 	SW_DEBUG ("MainMenu created");
 

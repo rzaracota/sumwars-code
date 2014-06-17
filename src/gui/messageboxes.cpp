@@ -109,9 +109,9 @@ MessageQuestionWindow::MessageQuestionWindow (Document* doc
 							, const std::string& button2Text
 							, CEGUI::Event::Subscriber subscriberButton2Callback)
 	: Window (doc)
+    , m_layoutName (layoutName) 
 	, m_button1 (button1Text)
 	, m_button2 (button2Text)
-	, m_layoutName (layoutName)
 {
 	m_question = question;
 	

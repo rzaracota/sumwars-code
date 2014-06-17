@@ -2846,7 +2846,7 @@ Item*  Region::getItemAt(Vector pos)
 	int id = sx*10000 + sy;
 
 	it = m_drop_item_locations.find(id);
-	if (it == m_drop_items.end())
+	if (it == m_drop_item_locations.end())
 	{
 		return 0;
 	}

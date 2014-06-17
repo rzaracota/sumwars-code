@@ -87,7 +87,6 @@ struct Gridunit
 		{
 			if (group & WorldObject::CREATURE) return m_creatures;
 			else if (group == WorldObject::FIXED) return m_fixed;
-			else if (group == WorldObject::DEAD) return m_dead;
 			else return m_dead;
 		}
 

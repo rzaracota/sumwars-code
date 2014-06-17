@@ -193,7 +193,7 @@ void SearchField::createPotential(int start_x, int start_y)
 	{
 		m_heap[i]=0;
 	}*/
-	memset(m_heap,0,sizeof(m_heap));
+	memset(m_heap,0,sizeof(*m_heap));
 
 	for (i=0;i<m_dim;++i)
 	{

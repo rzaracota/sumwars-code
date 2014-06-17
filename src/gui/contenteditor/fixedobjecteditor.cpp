@@ -200,7 +200,7 @@ void FixedObjectEditor::updateFixedObjectEditor()
   }
 	else if (m_edited_fixed_object.m_layer == WorldObject::LAYER_NOCOLLISION)
   {
-		layer == "NoCollision";
+		layer = "NoCollision";
   }
 	
 	CEGUI::ListboxItem* selection = layerSelector->findItemWithText(CEGUI::String(layer),0);

@@ -142,7 +142,7 @@ bool DebugPanel::tabExists(std::string tabName)
 
 void DebugPanel::update(OIS::Keyboard *keyboard, OIS::Mouse *mouse)
 {
-	if(m_tabs.size() < 1)
+	if(m_tabs.empty())
   {
 		return;
   }
