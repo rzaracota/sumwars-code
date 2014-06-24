@@ -67,8 +67,6 @@ class TemplateMap
 		 */
 		void setMapElement(int i, int j, int template_max_size);
 		
-		void print();
-		
 		/**
 		 * \brief Orte an denen Templates platziert werden koennen
 		 * Map von Groesse des Templates auf einen Vector mit Positionen

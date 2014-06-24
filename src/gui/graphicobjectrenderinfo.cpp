@@ -114,9 +114,8 @@ void MovableObjectInfo::writeToXML(TiXmlNode* node)
 }
 
 GraphicRenderInfo::GraphicRenderInfo(std::string parent)
-	:m_objects(),m_action_infos(), m_action_references()
+	:m_objects(),m_action_infos(), m_action_references(), m_parent(parent)
 {
-	m_parent = parent;
 	m_parent_ptr =0;
 	m_inherit_mask = INHERIT_ALL;
 }

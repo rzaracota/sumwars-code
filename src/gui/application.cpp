@@ -191,9 +191,7 @@ bool Application::init()
 	if (m_ogre_root == 0)
 		return false;
 
-	bool ret = true;
-
-	ret = initOpenAL();
+	bool ret = initOpenAL();
 	if (ret == false)
 	{
 		ERRORMSG("Sound initialisation failed");

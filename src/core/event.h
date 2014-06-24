@@ -177,28 +177,17 @@ class Event
 		 * \fn Event()
 		 * \brief Konstruktor
 		 */
-		Event()
-		{
-			m_once = false;
-			m_condition = LUA_NOREF;
-			m_effect = LUA_NOREF;
-			m_copy = false;
-			m_gettext_domain = "sumwars-events";
-		}
+		Event(): m_condition(LUA_NOREF), m_once(false), m_effect(LUA_NOREF),
+				 m_copy(false), m_gettext_domain("sumwars-events") {};
 		
 		/**
 		 * \fn Event( Event& other)
 		 * \brief Kopierkonstruktor
 		 * \param other anderes Event
 		 */
-		Event( Event& other)
-		{
-			m_copy = true;
-			m_once = other.m_once;
-			m_condition = other.m_condition;
-			m_effect = other.m_effect;
-			m_gettext_domain = other.m_gettext_domain;
-		}
+		Event( Event& other): m_condition(true), m_once(other.m_once),
+							  m_effect(other.m_effect), m_copy(true),
+							  m_gettext_domain(other.m_gettext_domain) {};
 		
 		/**
 		 * \fn ~Event()

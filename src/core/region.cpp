@@ -72,7 +72,6 @@ void RegionData::addObjectGroup(ObjectGroupName group_name, int prio, int number
 	newgroup.m_group_name = group_name;
 	newgroup.m_probability = probability;
 	newgroup.m_number = number;
-	newgroup.m_probability = probability;
 	newgroup.m_decoration = decoration;
 	
 	m_object_groups.insert(std::make_pair(prio,newgroup));

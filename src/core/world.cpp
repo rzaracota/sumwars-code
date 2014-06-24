@@ -2452,8 +2452,8 @@ bool World::processNetEvent(Region* region,CharConv* cv)
 			item->fromStringComplete(cv);
 
 			cr->getEquipement()->swapItem(item, event.m_data);
-			if (item !=0)
-				delete item;
+			
+			delete item;
 
 			break;
 

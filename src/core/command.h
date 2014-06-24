@@ -50,29 +50,25 @@ public:
      * \param goal_object_id Initializes the ID of the goal object
      * Creates a new command object
 	 */
-	Command(Action::ActionType type, Vector goal, int goal_object_id)
-	{
-		m_type = type;
-		m_goal = goal;
-		m_goal_object_id= goal_object_id;
-		m_damage_mult=1;
-		m_range=1;
-		m_flags =0;
-	}
+	Command(Action::ActionType type, Vector goal, int goal_object_id):
+			  m_type(type)
+			, m_goal(goal)
+			, m_goal_object_id(goal_object_id)
+			, m_range(1)
+			, m_damage_mult(1)
+			, m_flags(0) {};
 
 	/**
 	 * \fn Command()
      * \brief Constructor
 	 */
-	Command()
-	{
-		m_type = "noaction";
-		m_goal = Vector(0,0);
-		m_goal_object_id= 0;
-		m_damage_mult=1;
-		m_range=1;
-		m_flags =0;
-	}
+	Command():
+			  m_type("noaction")
+			, m_goal(Vector(0,0))
+			, m_goal_object_id(0)
+			, m_range(1)
+			, m_damage_mult(1)
+			, m_flags(0) {};
 
 	/**
 	 * \fn void toString(CharConv* cv)

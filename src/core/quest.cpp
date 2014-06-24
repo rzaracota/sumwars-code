@@ -16,15 +16,11 @@
 #include "quest.h"
 #include <libintl.h>
 
-Quest::Quest(TranslatableString name, std::string table_name)
-{
-	m_name = name;
-	m_table_name = table_name;
-	
-	m_initialisation = LUA_NOREF;
-	m_description = LUA_NOREF;
-	
-}
+Quest::Quest(TranslatableString name, std::string table_name):
+		  m_name(name)
+		, m_table_name(table_name)
+		, m_initialisation(LUA_NOREF)
+		, m_description(LUA_NOREF) {};
 
 Quest::~Quest()
 {

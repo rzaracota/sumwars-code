@@ -17,13 +17,11 @@
 #include "debug.h"
 #include "eventsystem.h"
 
-Trigger::Trigger(TriggerType type)
-{
-	m_type = type,
-	m_lua_variables = "trigger = {} \n";
-	m_object_id =0;
-	m_dialogue_id =0;
-}
+Trigger::Trigger(TriggerType type):
+		  m_type(type)
+		, m_lua_variables("trigger = {} \n")
+		, m_obect_id(0)
+		, m_dialogue_id(0) {};
 
 void Trigger::addVariable(std::string name, int value)
 {

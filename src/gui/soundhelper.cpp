@@ -130,10 +130,9 @@ void SoundHelper::loadSoundInfos (TiXmlNode* node)
 		{
 			// the probability is provided only for playable sounds.
 			// we need to add a no-sound entry in this case.
-			int emptySoundWeight = 1;
 			// probability ... sumOfMemberWeights
 			// 1.0 - probability       ... emptySoundWeight
-			emptySoundWeight = sumOfMemberWeights * ((1.0 - probability) / probability);
+			int emptySoundWeight = sumOfMemberWeights * ((1.0 - probability) / probability);
 			// we need to calculate the weight for this one.
 			SoundManager::getPtr ()->getSoundGroup (groupName)->addEmptySlot (emptySoundWeight);
 

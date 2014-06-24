@@ -20,9 +20,9 @@
 
 QuestInfo::QuestInfo (Document* doc, const std::string& ceguiSkinName)
 	: Window (doc)
+	, m_questname = "";
 	, m_ceguiSkinName (ceguiSkinName)
 {
-	m_questname = "";
 	
 	DEBUGX("setup main menu");
 	// GUI Elemente erzeugen

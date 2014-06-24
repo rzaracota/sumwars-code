@@ -42,10 +42,10 @@ void FileBrowser::init(CEGUI::String defaultDir, FileBrowserType type, bool visi
 	m_type = type;
 	m_guiSystem = System::getSingletonPtr();
 	m_winManager = WindowManager::getSingletonPtr();
-  m_gameScreen = CEGUIUtility::getWindow("GameScreen");
+	m_gameScreen = CEGUIUtility::getWindow("GameScreen");
 
 	m_rootWindow = CEGUIUtility::loadLayoutFromFile ("filebrowser.layout");
-  CEGUIUtility::addChildWidget (m_gameScreen, m_rootWindow);
+	CEGUIUtility::addChildWidget (m_gameScreen, m_rootWindow);
 	m_rootWindow->setVisible(visible);
 
 	m_acceptBtn = static_cast<PushButton*>(m_rootWindow->getChild("Ok"));

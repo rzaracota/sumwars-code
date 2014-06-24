@@ -203,14 +203,13 @@ class Dialogue
 		struct Question
 		{  
 			/**
-			 * \brief Konstruktor
+			 * \brief Constructor
 			 */
-			Question()
-			{
-				m_text="";
-				m_active=0;
-				m_asked_player = "main_player";
-			}
+			Question(): 
+			, m_text("")
+			, m_active(0)
+			, m_asked_player("main_player")
+			{};
 			
 			/**
 			* \var std::string m_text

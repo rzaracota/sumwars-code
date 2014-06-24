@@ -2008,10 +2008,7 @@ void Player::readItem(CharConv* cv)
 		item->fromString(cv);
 		getEquipement()->swapItem(item,pos);
 
-		if (item !=0)
-		{
 			delete item;
-		}
 	}
 }
 
