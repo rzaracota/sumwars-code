@@ -1159,7 +1159,7 @@
 				setCutsceneMode(true)
 				addCameraPosition(0,"locBackroute2" , -120,40, 20);
 				tutorial_tmp.slugs = createMonsterGroup("tutorialMutantSlugs","locBackroute3",3);
-				tutorial_tmp.slugnr = table.getn(tutorial_tmp.slugs);
+				tutorial_tmp.slugnr = #tutorial_tmp.slugs;
 				
 				timedExecute("door_toggle('slugFarmFoodDoor')",1000);
 				startTimer("go_backroute2",2000);
