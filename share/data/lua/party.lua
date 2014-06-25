@@ -74,7 +74,7 @@ function groupObjectsArc(objects,location,lookatloc,radius, arcangle)
 		if (radius == nil) then
 			radius = math.sqrt(dir[1]*dir[1] + dir[2]*dir[2]);
 		end;
-		generateArc(loc,lookatloc,radius,table.getn(objects),arcangle,angle);
+		generateArc(loc,lookatloc,radius,#objects,arcangle,angle);
 		
 		-- zweimal ausfuehren, weil beim ersten Mal haeuffig noch Verdraengung stattfindet
 		for i,obj in ipairs(objects) do
