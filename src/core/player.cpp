@@ -1111,7 +1111,6 @@ bool Player::onClientCommand( ClientCommand* command, float delay)
 	Party* 	p;
 	Player* pl;
 	Dialogue* dia;
-	std::list< std::pair<std::string, std::string> >::iterator it;
 
 	bool stashtrade;
 	bool sell;
@@ -2030,8 +2029,7 @@ void Player::readItemComplete(CharConv* cv)
 	item->fromStringComplete(cv);
 	getEquipement()->swapItem(item,pos);
 
-	if (item !=0)
-		delete item;
+	delete item;
 }
 
 void Player::recalcDamage()

@@ -288,7 +288,6 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 		return;
 
 	const CEGUI::Font *font = img->getTooltip()->getFont();
-	std::string msg;
 	ItemRequirementsMet irm = player->checkItemRequirements ( item );
 	
 	Item *currentEqItem = 0;
@@ -384,7 +383,7 @@ void ItemWindow::updateItemWindowTooltip(CEGUI::Window* img, Item* item, Player*
 		l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, secondary_eq_head, CEGUIUtility::Black ));
 	}
 	l.push_front (  CEGUIUtility::getColourizedString(CEGUIUtility::Blue, gettext("Hovered:"), CEGUIUtility::Black ));
-	std::ostringstream out_stream;
+	//std::ostringstream out_stream;
 
 	//XXX-begin; TODO: delete this
 	//DEBUG ("Obtained description for item as string list.");

@@ -769,7 +769,7 @@ void GraphicObject::updateAllStates(std::set<std::string>& states)
 
 	
 	std::set<std::string>::iterator it = states.begin();
-	std::map<std::string,  AttachedState>::iterator jt = m_attached_states.begin(),jtold;
+	std::map<std::string,  AttachedState>::iterator jt = m_attached_states.begin();
 	
 	while (it != states.end() || jt != m_attached_states.end())
 	{

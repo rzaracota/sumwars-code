@@ -239,7 +239,6 @@ void Party::fromString(CharConv* cv)
 	
 	
 	cv->fromBuffer(nr_member);
-	std::set<int>::iterator it;
 	for (int i=0; i<nr_member; i++)
 	{
 		cv->fromBuffer(id);
@@ -254,7 +253,6 @@ void Party::fromString(CharConv* cv)
 	}
 	
 	cv->fromBuffer(nr_rel);
-	std::map<int, Fraction::Relation>::iterator jt;
 	char rel;
 	int pid;
 	for (int i=0; i<nr_rel; i++)

@@ -1908,7 +1908,7 @@ void Document::writeSavegame(bool writeShortkeys)
             if(OnlineServicesManager::getSingletonPtr() && OnlineServicesManager::getSingleton().userLoggedIn())
             {
                 std::string name = getLocalPlayer()->getName().getRawText();
-                std::string rsgrp = OnlineServicesManager::getSingleton().getUserDataResGroupId();
+                //std::string rsgrp = OnlineServicesManager::getSingleton().getUserDataResGroupId();
                 /*std::stringstream* imgStream;
                 if(Ogre::ResourceGroupManager::getSingleton().resourceExists(rsgrp, name + ".png"))
                 {

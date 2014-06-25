@@ -174,7 +174,6 @@ bool TemplateMap::getTemplatePlace(Shape* shape, Vector & place)
 	int size = MathHelper::Max(ex,ey);
 	DEBUGX("template size %i %i angle %f extent %f %f",ex,ey,shape->m_angle,shape->m_extent.m_x, shape->m_extent.m_y);
 	std::map< int, std::vector< std::pair<int, int> > >::iterator mt, mt2;
-	std::vector<int>::iterator st;
 	
 	int px,py;
 	

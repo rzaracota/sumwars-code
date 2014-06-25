@@ -975,8 +975,7 @@ int Monster::getValue(std::string valname)
 
 bool Monster::setValue(std::string valname)
 {
-	bool ret = false;
-	ret = m_ai.setValue(valname, getEventMaskRef());
+	bool ret = m_ai.setValue(valname, getEventMaskRef());
 
 	if (ret == 0)
 	{

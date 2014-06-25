@@ -508,7 +508,7 @@ CEGUI::Window* CEGUIUtility::getWindowForSystem (CEGUI::System* sys, const CEGUI
 
 		// Show how much of the path was matched.
 		SW_DEBUG ("Matched items: [%s]", CEGUIUtility::getMatchingPath (root, name).c_str ());
-		throw ex;
+		throw;
 	}
 #endif
 	return 0;

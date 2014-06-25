@@ -227,7 +227,6 @@ void SearchField::createPotential(int start_x, int start_y)
 		y=fentry->m_y;
 		f=fentry->m_f;
 		//printf("processing (%i %i) : %f\n",x,y,f);
-		po = penalty[(int) *(m_block->ind(x,y))];
 
 		for (i=0;i<4;++i)
 		{

@@ -110,7 +110,6 @@ bool Projectile::update(float time)
 	float dtime;
 	// Liste der getroffenen Objekte
 	WorldObjectList hitobj;
-	WorldObjectList::iterator i;
 
 	while (time>0.1)
 	{

@@ -131,7 +131,7 @@ void DialogueWindow::update()
 		{
 			skipButton->setVisible(true);
 			// Schleife fuer die moeglichen Sprecher eines Dialogs
-			std::string image, name, text;
+			std::string name, text;
 			
 			WorldObject* wo;
 			Creature* cr;
