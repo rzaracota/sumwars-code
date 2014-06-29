@@ -506,7 +506,7 @@
 			<Effect>
 				setCutsceneMode(false);
 				fortify_dwall_tmp.elemental = createObject("fireElemS","locElemental");
-				fortify_dwall_tmp.playernr = table.getn(getPlayers());
+				fortify_dwall_tmp.playernr = #getPlayers();
 				fortify_dwall_tmp.inactive_pl = {};
 				fortify_dwall_tmp.inactive_pl_nr = 0;
 				fortify_dwall_tmp.inactive_pl_wall = {};

@@ -4,7 +4,7 @@ function generateArc(locations, center, radius, number, arcangle, angle)
 	angle = angle or 0;
 	arcangle = arcangle or 120;
 	number = number or 1;
-	local n = table.getn(locations);
+	local n = #locations;
 	local inc = arcangle / (number);
 	local angl = angle - 0.5*arcangle + inc*0.5;
 	local i;
@@ -28,7 +28,7 @@ function generateRect(locations, center, number, dim, angle, dist)
 	local i,j
 	local x,y;
 	local jmax;
-	local n = table.getn(locations);
+	local n = #locations;
 	for i=1,dim2 do
 		x = ((dim2+1)/2 - i)*dist;
 		jmax = math.min(number,dim);
