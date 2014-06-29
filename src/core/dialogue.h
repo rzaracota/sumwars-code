@@ -206,7 +206,7 @@ class Dialogue
 			 * \brief Constructor
 			 */
 			Question(): 
-			, m_text("")
+			m_text("")
 			, m_active(0)
 			, m_asked_player("main_player")
 			{};

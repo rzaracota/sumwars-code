@@ -61,8 +61,12 @@ class Fraction
 		 * \fn Fraction(Id id, Type type)
 		 * \brief Constructor
 		 */
-		Fraction(Id id, Type type): m_id(id), m_type(type),
-									m_relations[DEFAULT](NEUTRAL) {};		
+		Fraction(Id id, Type type): 
+			m_id(id), 
+			m_type(type)
+		{
+			m_relations[DEFAULT] = NEUTRAL;
+		};		
 		
 		/**
 		 * \fn int getId()

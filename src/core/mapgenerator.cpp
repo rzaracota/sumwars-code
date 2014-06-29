@@ -281,30 +281,6 @@ bool TemplateMap::getTemplatePlace(Shape* shape, Vector & place)
 	return true;
 }
 
-
-void TemplateMap::print()
-{
-	for (int i=0; i< m_dimx; i++)
-	{
-		for (int j=0; j<m_dimy; j++)
-		{
-			if (m_template_map[i][j]>0)
-				std::cout << m_template_map[i][j] << " ";
-			else
-				std::cout << "# ";
-		}
-		std::cout << "\n";
-	}
-	std::cout << "\n";
-	
-	std::map< int, std::vector< std::pair<int, int> > >::iterator it;
-	for (it = m_template_places.begin(); it != m_template_places.end(); ++it)
-	{
-		SW_DEBUG("places of size %i : %i",it->first, it->second.size());
-	}
-}
-
-
 Region* MapGenerator::createRegion(RegionData* rdata)
 {
 	// TODO: remove timer.

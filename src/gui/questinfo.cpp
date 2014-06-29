@@ -20,7 +20,7 @@
 
 QuestInfo::QuestInfo (Document* doc, const std::string& ceguiSkinName)
 	: Window (doc)
-	, m_questname = "";
+	, m_questname("")
 	, m_ceguiSkinName (ceguiSkinName)
 {
 	
