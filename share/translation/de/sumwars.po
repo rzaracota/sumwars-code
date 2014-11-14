@@ -790,7 +790,7 @@ msgstr "Fernkampfangriff"
 
 #: copperrock.xml:2
 msgid "Thomas"
-msgstr ""
+msgstr "Thomas"
 
 #: councilNPCStats.xml:4
 msgid "Tolec"
@@ -891,7 +891,7 @@ msgstr "Versteckter See"
 
 #: dwarfcastle.xml:2
 msgid "Eric"
-msgstr ""
+msgstr "Eric"
 
 #: dwarfcastle.xml:6
 msgid "Haffgar"
