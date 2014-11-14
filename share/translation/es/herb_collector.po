@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-30 10:04+0200\n"
+"PO-Revision-Date: 2013-11-07 12:51+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/herb_collector/es/>\n"
@@ -10,107 +10,112 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.6-dev\n"
+"X-Generator: Weblate 1.8\n"
 
 #: herbalist.xml:95 herbalist.xml:121
 msgid "Accept Quest?"
-msgstr ""
+msgstr "¿Aceptar misión?"
 
 #: herbalist.xml:87
 msgid "Ah, well done, young one."
-msgstr ""
+msgstr "Ah, bien hecho, joven."
 
 #: herbalist.xml:9
 msgid "And another good deed done. I could get used to this."
-msgstr ""
+msgstr "Y otra buena acción hecha. Podría acostumbrarme a esto."
 
 #: herbalist.xml:146
 msgid "But if you change your mind, I'm not running away from here."
-msgstr ""
+msgstr "Pero si cambias de opinión, no estoy huyendo de aquí."
 
 #: herbalist.xml:119
 msgid "But only the red berries."
-msgstr ""
+msgstr "Pero sólo las bayas rojas."
 
 #: herbalist.xml:223
 msgid "Collect"
-msgstr ""
+msgstr "Recolectar"
 
 #: herbalist.xml:94
 msgid "Do you want to collect some berries after all?"
-msgstr ""
+msgstr "¿Quieres recolectar algunas bayas después de todo?"
 
 #: herbalist.xml:112
 msgid "Fiddlesticks!"
-msgstr ""
+msgstr "¡Tonterías!"
 
 #: herbalist.xml:143
 msgid "Forget it, herb woman."
-msgstr ""
+msgstr "Olvídalo, mujer de hierbas."
 
 #: herbalist.xml:74
+#, fuzzy
 msgid "Gertlinde Kampfer"
-msgstr ""
+msgstr "Gertlinde Kampfer"
 
 #: herbalist.xml:145
 msgid "Have it your way."
-msgstr ""
+msgstr "Tú sabrás lo que haces."
 
 #: herbalist.xml:2
 msgid "Herb collector"
-msgstr ""
+msgstr "Recolector de hierbas"
 
 #: herbalist.xml:75
 msgid "Herb gathering"
-msgstr ""
+msgstr "Recolección de hierbas"
 
 #: herbalist.xml:88
 msgid "Here, let me give you something in return."
-msgstr ""
+msgstr "Aquí, déjame darle algo a cambio."
 
 #: herbalist.xml:86
 msgid "Here, old women. Your berries."
-msgstr ""
+msgstr "Aquí, viejas. Sus bayas."
 
 #: herbalist.xml:100
 msgid "Hey there, young one!"
-msgstr ""
+msgstr "¡Ey, joven!"
 
 #: herbalist.xml:91
 msgid "I need more berries, if I am to do something useful with them."
-msgstr ""
+msgstr "Necesito más bayas, si debo hacer algo útil con ellos."
 
 #: herbalist.xml:118
 msgid "I need the berries of at least ten bushes."
-msgstr ""
+msgstr "Necesito las bayas de al menos 10 arbustos."
 
 #: herbalist.xml:101
 msgid "I see you are going to the Northern Meadow."
-msgstr ""
+msgstr "Veo que vas camino a Prado del Norte."
 
 #: herbalist.xml:144
 msgid ""
 "I'm not going to crawl through the meadows just to search for some stupid "
 "bushes."
 msgstr ""
+"No voy a gatear a través de los prados sólo para buscar unos arbustos "
+"estúpidos."
 
 #: herbalist.xml:108
 msgid ""
 "If you are roaming around there anyway, why don't you collect some berries "
 "for me?"
 msgstr ""
+"Si de todos modos estás vagando por ahí, ¿porqué no recoges algunas bayas "
+"para mí?"
 
 #: herbalist.xml:114
 msgid "It's not like I want you to collect something exotic, you know."
-msgstr ""
+msgstr "No es que quiera nada exótico, sabes."
 
 #: herbalist.xml:115
 msgid "Just rilfberries."
-msgstr ""
+msgstr "Tan sólo frutos de licio."
 
 #: herbalist.xml:116
 msgid "Look for big bushes with fancy red fruits."
-msgstr ""
+msgstr "Busca grandes arbustos con unos elegantes frutos rojos."
 
 #: herbalist.xml:97 herbalist.xml:123
 msgid "No"
@@ -118,67 +123,73 @@ msgstr "No"
 
 #: herbalist.xml:106
 msgid "Peace."
-msgstr ""
+msgstr "La paz."
 
 #: herbalist.xml:111
 msgid "Plants are not really my forte..."
-msgstr ""
+msgstr "Las plantas no son mi fuerte..."
 
 #: herbalist.xml:104
 msgid "Quite a trick."
-msgstr ""
+msgstr "Un buen truco."
 
 #: herbalist.xml:165
 msgid "Still no."
-msgstr ""
+msgstr "Sigo negandome."
 
 #: herbalist.xml:166
 msgid "Tell me when you're not too mighty for simple work anymore, sweety."
 msgstr ""
+"Hazme saber cuando no tengas tantos reparos para un trabajo tan simple, "
+"cariño."
 
 #: herbalist.xml:135 herbalist.xml:158
 msgid "Thanks, sweety."
-msgstr ""
+msgstr "Gracias, cielo."
 
 #: herbalist.xml:102
 msgid "That's right."
-msgstr ""
+msgstr "Eso es cierto."
 
 #: herbalist.xml:11
 msgid ""
 "The herbalist of Joringsbridge wants to have the berries of 10 bushes. "
 "Berries from "
 msgstr ""
+"El herbalista de Puente de Joring quiere tener las bayas de 10 arbustos. "
+"Bayas de "
 
 #: herbalist.xml:120
 msgid "The rest is of no use at all."
-msgstr ""
+msgstr "El resto no sirve para nada."
 
 #: herbalist.xml:154
 msgid "Very well, if I find some, I'll bring them along."
-msgstr ""
+msgstr "Muy bien, si encuentro alguna, las traeré conmigo."
 
 #: herbalist.xml:131
 msgid "Very well, if I find some, I'll bring them."
-msgstr ""
+msgstr "Muy bien, si encuentro alguna, las traeré."
 
 #: herbalist.xml:133 herbalist.xml:156
 msgid "Very well, if we find some, we'll bring them."
-msgstr ""
+msgstr "Muy bien, si encontramos alguna, las traeremos."
 
 #: herbalist.xml:167
 msgid "Watch your tongue, hag!"
-msgstr ""
+msgstr "¡Cuida esa boca, bruja!"
 
 #: herbalist.xml:105
 msgid "We were only walking through the gate."
-msgstr ""
+msgstr "Sólo estábamos cruzando la puerta."
 
 #: herbalist.xml:109
 msgid ""
 "With all those goblins about an old woman can't even set a foot out of the "
 "village."
 msgstr ""
+"Con todos esos gublins rodeando una anciana no puede siquiera poner un pie "
+"fuera de la aldea."
 
 #: herbalist.xml:96 herbalist.xml:122
 msgid "Yes"
@@ -186,11 +197,11 @@ msgstr "Sí"
 
 #: herbalist.xml:117
 msgid "You will find them for sure."
-msgstr ""
+msgstr "Seguro que los encontrarás."
 
 #: herbalist.xml:214
 msgid "aisNorthMeadow"
-msgstr "Pradera Norte"
+msgstr "Prado del Norte"
 
 #: herbalist.xml:15 herbalist.xml:197
 msgid "joringsbridge"
