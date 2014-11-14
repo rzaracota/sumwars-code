@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-03-05 17:52+0200\n"
+"PO-Revision-Date: 2014-03-06 12:17+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/rescue_willard/es/>\n"
@@ -30,9 +30,8 @@ msgid "And doesn't even ask what the rest of us is thinking."
 msgstr "Y que ni siquiera pregunte lo que el resto de nosotros está pensando."
 
 #: rescue_willard.xml:103
-#, fuzzy
 msgid "And not wish to butcher every living thing that crossed their path."
-msgstr "Y no quisieron matar a todo ser viviente que se cruzó en su camino."
+msgstr "Y no querrían matar a todo ser viviente que se cruzara por su camino."
 
 #: rescue_willard.xml:127
 msgid ""
@@ -45,8 +44,8 @@ msgstr ""
 msgid ""
 "But don't worry, I will give no one away, as long as they behave themselves."
 msgstr ""
-"Pero no te preocupes, no se lo daré a nadie, siempre y cuando se comporten "
-"ellos mismos."
+"Pero no te preocupes, no se lo diría a nadie, siempre y cuando se "
+"comportaran ellos mismos."
 
 #: rescue_willard.xml:116
 msgid ""
@@ -108,11 +107,11 @@ msgstr ""
 
 #: rescue_willard.xml:25
 msgid "Hey there!"
-msgstr "¡Eh allí!"
+msgstr "¡Oye!"
 
 #: rescue_willard.xml:89
 msgid "I could always tell if someone was a Branded One."
-msgstr "Siempre he sabido darme cuenta de si alguien tiene La Marca."
+msgstr "Siempre he sabido decir si alguien es un Marcado."
 
 #: rescue_willard.xml:107
 msgid "I have a friend with the gamekeepers."
@@ -146,7 +145,7 @@ msgstr ""
 
 #: rescue_willard.xml:84
 msgid "If I'm not mistaken you are Branded Ones."
-msgstr "Si no me equivoco vosotros sois Marcados."
+msgstr "Si no me equivoco sois unos Marcados."
 
 #: rescue_willard.xml:80 rescue_willard.xml:82
 msgid "If I'm not mistaken you are a Branded One."
@@ -198,7 +197,7 @@ msgstr ""
 
 #: rescue_willard.xml:96
 msgid "Only someone like you could do it reliable."
-msgstr "Sólo alguien como vosotros podríais hacerlo de forma fiable."
+msgstr "Sólo alguien como vosotros podría hacerlo de forma fiable."
 
 #: rescue_willard.xml:93
 msgid "Only someone like you could do it reliably. ##solo"
@@ -209,8 +208,8 @@ msgid ""
 "Perhaps I was mistaken and the stories are true. I had believed that a few "
 "Branded Ones might be capable of restraint..."
 msgstr ""
-"Quizás me equivoqué y las historias son ciertas. Creí que unos cuantos con "
-"La Marca podrían ser capaces de contener..."
+"Quizás me equivoqué y las historias son ciertas. Creí que unos cuantos "
+"Marcados serían capaces de contener..."
 
 #: rescue_willard.xml:74 rescue_willard.xml:132
 msgid "Search for Willard?"
@@ -295,11 +294,11 @@ msgstr "Entonces, ¿qué quieres de mí? ##solo"
 
 #: rescue_willard.xml:95
 msgid "There is something I'd like to ask of you."
-msgstr "Hay algo que nos gustaría pedirle."
+msgstr "Hay algo que me gustaría pediros."
 
 #: rescue_willard.xml:92
 msgid "There is something I'd like to ask of you. ##solo"
-msgstr "Hay algo que me gustaría pedirle. ##solo"
+msgstr "Hay algo que me gustaría pedirte. ##solo"
 
 #: rescue_willard.xml:222
 msgid "This was the cause of a few youthful follies."
@@ -307,7 +306,7 @@ msgstr "Ésta era la causa de algunas locuras juveniles."
 
 #: rescue_willard.xml:86
 msgid "What the..."
-msgstr "Pero, ¿que..."
+msgstr "Pero, ¿qué..."
 
 #: rescue_willard.xml:101
 msgid "What? I could have hired a professional assassin for that."
