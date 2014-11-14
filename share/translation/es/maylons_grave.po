@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-03-06 20:01+0200\n"
+"PO-Revision-Date: 2014-03-06 22:15+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/maylons_grave/es/>\n"
@@ -76,7 +76,8 @@ msgstr ""
 #: maylons_grave.xml:208
 msgid "Good warning, yes? Mighty warrior-humans let us live, no?"
 msgstr ""
-"Buena advertencia, ¿no?. Poderosos guerreros humanos nos dejan vivir, ¿no?"
+"Buena advertencia, ¿sí?. Poderosos guerreros humanos dejan vivir a nosotros, "
+"¿no?"
 
 #: maylons_grave.xml:7
 msgid ""
@@ -84,7 +85,7 @@ msgid ""
 "were chased by a zombie. Something is going on in this grave. Maybe I should "
 "have a look at it."
 msgstr ""
-"Me encontré con algunos gublins en la tumba de Maylon quiénes balbucearon "
+"Me encontré con algunos gúblins en la tumba de Maylon quiénes balbucearon "
 "alguna tontería y fueron perseguidos por un zombi. Algo está pasando en esa "
 "tumba. Tal vez debería echar un vistazo."
 
@@ -93,7 +94,7 @@ msgid ""
 "I came across some goblins in Maylon's Grave who were chased by a zombie. "
 "Something is going on in this grave. Maybe I should take a look at it."
 msgstr ""
-"Me encontré con algunos gublins en la tumba de Maylon quiénes fueron "
+"Me encontré con algunos gúblins en la tumba de Maylon quiénes fueron "
 "perseguidos por un zombi. Algo está pasando en esa tumba. Tal vez debería "
 "echar un vistazo."
 
@@ -103,7 +104,7 @@ msgid ""
 "necromancer animated some undead down in the crypt. I should take a look at "
 "it."
 msgstr ""
-"Me encontré con algunos gublins en la tumba de Maylon. Según su chamán, un "
+"Me encontré con algunos gúblins en la tumba de Maylon. Según su chamán, un "
 "nigromante animó algunos no-muertos bajo la cripta. Debería echar un "
 "vistazo."
 
@@ -133,7 +134,7 @@ msgstr "Tumba Maylons"
 
 #: maylons_grave.xml:227
 msgid "Miserable brood! Die!"
-msgstr "¡Prole miserable! ¡Muere!"
+msgstr "¡Miserable prole! ¡Morid!"
 
 #: maylons_grave.xml:229
 msgid "Miserable brood! Slay them all!"
@@ -173,8 +174,8 @@ msgid ""
 "Really, we should free those poor bound souls and send them off to a short "
 "brake in Harad's Hell."
 msgstr ""
-"En serio, deberíamos liberar esas pobres almas herrantes y enviarlas a hacer "
-"un pequeño descanso al infierno de Harad."
+"En serio, deberíamos liberar a esas pobres almas herrantes y enviarlas a "
+"hacer un pequeño descanso al infierno de Harad."
 
 #: maylons_grave.xml:177
 msgid "Slay the goblins"
