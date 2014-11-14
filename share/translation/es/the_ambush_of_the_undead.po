@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-08 12:52+0200\n"
+"PO-Revision-Date: 2013-12-29 13:33+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/the_ambush_of_the_undead/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.8\n"
+"X-Generator: Weblate 1.9-dev\n"
 
 #: theFissure.xml:543
 msgid "((Such an opportunity may never occur again.))"
@@ -284,11 +284,11 @@ msgstr ""
 
 #: theFissure.xml:383
 msgid "Listen, Branded One!"
-msgstr "¡Escucha, Forajido!"
+msgstr "¡Escucha, Marcado!"
 
 #: theFissure.xml:393
 msgid "Listen, Branded Ones!"
-msgstr "¡Escuchad, forajidos!"
+msgstr "¡Escuchad, Marcados!"
 
 #: theFissure.xml:408
 msgid "Mages have to be naturally patient."
@@ -396,7 +396,7 @@ msgstr "Eso tiene que ser el liche atacando Dwarfenwall."
 
 #: theFissure.xml:385
 msgid "That's a Branded One?"
-msgstr "¿Ese es el forajido?"
+msgstr "¿Ese es un Marcado?"
 
 #: theFissure.xml:599 theFissure.xml:602 theFissure.xml:605
 msgid "That's a lich."
@@ -486,7 +486,7 @@ msgstr "Deberían ser capaces de luchar, también."
 
 #: theFissure.xml:395
 msgid "Those are Branded Ones?"
-msgstr "¿Esos son forajidos?"
+msgstr "¿Esos son Marcados?"
 
 #: theFissure.xml:502
 msgid "Unknown Lich"
