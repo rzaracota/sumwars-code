@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-09 12:47+0200\n"
+"PO-Revision-Date: 2013-12-29 13:31+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/rescue_willard/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.8\n"
+"X-Generator: Weblate 1.9-dev\n"
 
 #: rescue_willard.xml:2
 msgid "A friend in need"
@@ -146,11 +146,11 @@ msgstr ""
 
 #: rescue_willard.xml:84
 msgid "If I'm not mistaken you are Branded Ones."
-msgstr "Si no me equivoco vosotros tenéis La Marca."
+msgstr "Si no me equivoco vosotros sois Marcados."
 
 #: rescue_willard.xml:80 rescue_willard.xml:82
 msgid "If I'm not mistaken you are a Branded One."
-msgstr "Si no me equivoco tú tienes La Marca."
+msgstr "Si no me equivoco eres un Marcado."
 
 #: rescue_willard.xml:165
 msgid "If only I could leave my post."
