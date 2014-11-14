@@ -7,14 +7,16 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-11-01 \n"
-"Last-Translator: kalimgard <kalimgard@users.sourceforge.net>\n"
-"Language-Team: german <translation-team-de@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2014-11-14 16:15+0200\n"
+"Last-Translator: Michal Čihař <michal@cihar.com>\n"
+"Language-Team: German "
+"<https://hosted.weblate.org/projects/sumwars/rescue_willard/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.1-dev\n"
 
 #: rescue_willard.xml:2
 msgid "A friend in need"
@@ -269,7 +271,7 @@ msgstr ""
 
 #: rescue_willard.xml:141
 msgid "Your friend is as good as safe."
-msgstr "Euer Freund ist so gut wie gerettet"
+msgstr "Euer Freund ist so gut wie gerettet."
 
 #: rescue_willard.xml:143
 msgid "And doesn't even ask what the rest of us is thinking."
@@ -281,7 +283,7 @@ msgstr "Ich danke Euch ##solo"
 
 #: rescue_willard.xml:148
 msgid "Thank you."
-msgstr "Ich danke Euch"
+msgstr "Ich danke Euch."
 
 #: rescue_willard.xml:159
 #, fuzzy
