@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-08-05 22:08+0200\n"
+"PO-Revision-Date: 2014-10-02 23:46+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
@@ -1016,7 +1016,7 @@ msgstr "No tienes suficiente oro para pagar el precio de 1$"
 
 #: dwarfcastle.xml:241 joringsbridge_npc.xml:297 npc.xml:155
 msgid "The price is $1"
-msgstr "El precio es 1$"
+msgstr "El precio es $1"
 
 #: dwarfcastle.xml:260 npc.xml:174
 msgid "It seems that this item already has such an enchantment."
@@ -1571,7 +1571,7 @@ msgstr "Marco"
 
 #: joringsbridge_npc.xml:145
 msgid "Objects found"
-msgstr "Objetos encontrados"
+msgstr "Objetos perdidos"
 
 #: joringsbridge_npc.xml:147
 msgid "What are these Items?"
@@ -1608,7 +1608,7 @@ msgid ""
 "Having the responsibility for Joringsbridge is never easy, not even when I "
 "had enough soldiers."
 msgstr ""
-"Ser el responsable de Puente de Joring nunca es fácil, ni siquiera cuando "
+"Ser el responsable de Puente de Joring nunca fue fácil, ni siquiera cuando "
 "tenía suficientes soldados."
 
 #: joringsbridge_npc.xml:165
@@ -1623,7 +1623,7 @@ msgstr ""
 msgid ""
 "And I'm not even one step closer to find out who, than when I first noticed!"
 msgstr ""
-"¡Y ni siquiera estoy cerca de encontrar quién es, desde que me dí cuenta por "
+"¡Y ni siquiera estoy cerca de encontrar quién es, desde que me percaté por "
 "primera vez!"
 
 #: joringsbridge_npc.xml:167
@@ -1640,7 +1640,7 @@ msgstr "Los alrededores de Puente de Joring"
 
 #: joringsbridge_npc.xml:174
 msgid "You better be careful when leaving the village."
-msgstr "Sé prudente al salir de la aldea."
+msgstr "Será mejor que seas prudente al salir de la aldea."
 
 #: joringsbridge_npc.xml:175
 msgid ""
@@ -1656,7 +1656,7 @@ msgid ""
 "bandit life for themselves."
 msgstr ""
 "Y todos aquellos que no fueron reclutados para el ejército parecen haber "
-"descubierto la feliz vida de bandido por sí mismos."
+"descubierto la feliz vida del bandido por sí mismos."
 
 #: joringsbridge_npc.xml:177
 msgid "Thanks for the warning, sergeant."
@@ -1684,7 +1684,7 @@ msgstr ""
 
 #: joringsbridge_npc.xml:191
 msgid "Who knows if your physique will help you against that, too?"
-msgstr "Quién sabe si su físico le ayudará contra eso, también."
+msgstr "Quién sabe si su físico le ayudará en eso, también."
 
 #: joringsbridge_npc.xml:207
 msgid "Welcome to the humble... village, they call it... of Joringsbridge."
@@ -1724,16 +1724,16 @@ msgid ""
 "but, as you are no doubt unaware, casting and enchanting are two utterly "
 "different activities."
 msgstr ""
-"pero, como usted sin duda sabrá, fundir y encantar son actividades "
-"completamente diferentes."
+"pero, como sin duda sabrá, fundir y encantar son actividades completamente "
+"diferentes."
 
 #: joringsbridge_npc.xml:220
 msgid "Be grateful I am able to enchant two elements."
-msgstr "Estese agradecido de que sea capaz de encantar dos elementos."
+msgstr "Agradezca que sea capaz de encantar dos elementos."
 
 #: joringsbridge_npc.xml:221
 msgid "That's a rare talent, just so you know. "
-msgstr "Es un talento poco común, que lo sepas. "
+msgstr "Es un talento poco común, que lo sepa. "
 
 #: joringsbridge_npc.xml:225
 msgid "Enchant Equipment"
