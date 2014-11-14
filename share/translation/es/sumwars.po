@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-18 22:06+0200\n"
+"PO-Revision-Date: 2013-12-29 12:11+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
@@ -395,7 +395,7 @@ msgid ""
 "might hit another enemy behind him."
 msgstr ""
 "El arquero desata un poderoso disparo que perfora a un enemigo y podría "
-"alcanzar a otro enemigo detrás de él."
+"alcanzar a otro más detrás de él."
 
 #: archer_ablt.xml:298
 msgid "North Hunter"
@@ -980,7 +980,7 @@ msgstr "Daño por hielo"
 
 #: dwarfcastle.xml:178 dwarfcastle.xml:181
 msgid "Power"
-msgstr "Poder"
+msgstr "Fuerza de ataque"
 
 #: dwarfcastle.xml:185 npc.xml:105
 msgid "Gloves"
