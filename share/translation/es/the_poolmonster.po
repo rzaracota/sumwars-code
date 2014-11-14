@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-03-05 21:19+0200\n"
-"Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
+"PO-Revision-Date: 2014-07-18 17:09+0200\n"
+"Last-Translator: alunacast38 <alvineloy@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/the_poolmonster/es/>\n"
 "Language: es\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.9-dev\n"
+"X-Generator: Weblate 1.10-dev\n"
 
 #: scene7.xml:53
 msgid "*Roar!*"
@@ -81,9 +81,8 @@ msgid "Soren Windclaw"
 msgstr "Soren Garra de Viento"
 
 #: scene7.xml:2
-#, fuzzy
 msgid "The Poolmonster"
-msgstr "El Monstruo del Estanque"
+msgstr "Monstruo del Estanque"
 
 #: scene7.xml:40
 msgid "We have to go now."
