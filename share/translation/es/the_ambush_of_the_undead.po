@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-04 16:29+0200\n"
+"PO-Revision-Date: 2013-11-07 18:28+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/the_ambush_of_the_undead/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.8-dev\n"
+"X-Generator: Weblate 1.8\n"
 
 #: theFissure.xml:543
 msgid "((Such an opportunity may never occur again.))"
@@ -458,7 +458,7 @@ msgstr ""
 
 #: theFissure.xml:502
 msgid "Unknown Lich"
-msgstr ""
+msgstr "Lich desconocido"
 
 #: theFissure.xml:318
 msgid "Very bad, I'm afraid."
@@ -570,7 +570,7 @@ msgstr "Camino a la montaña"
 
 #: theFissure.xml:921
 msgid "greyCurseCaveDep"
-msgstr ""
+msgstr "Cuevas Malditas, Profundo"
 
 #: theFissure.xml:446
 msgid "greyCurseCaveFis"
