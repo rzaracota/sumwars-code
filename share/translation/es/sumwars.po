@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-12-29 12:11+0200\n"
+"PO-Revision-Date: 2014-03-06 00:18+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
-"<http://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
+"<https://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -792,7 +792,7 @@ msgstr "Derred"
 
 #: councilNPCStats.xml:90 councilNPCStats.xml:290 npc.xml:16
 msgid "Soren Windclaw"
-msgstr "Soren Windclaw"
+msgstr "Soren Garra de Viento"
 
 #: councilNPCStats.xml:133 councilNPCStats.xml:172 councilNPCStats.xml:211
 msgid "Worker"
@@ -1052,7 +1052,7 @@ msgid ""
 "One! ##female"
 msgstr ""
 "¡Deja eso como estaba inmediatamente o todos los guardias de Aisen te "
-"perseguirán, Forajida! ##female"
+"perseguirán, Maldita! ##female"
 
 #: fortify_dwarfenwall.xml
 msgid ""
@@ -1060,7 +1060,7 @@ msgid ""
 "One! ##male"
 msgstr ""
 "¡Deja eso como estaba inmediatamente o todos los guardias de Aisen te "
-"perseguirán, Forajido! ##male"
+"perseguirán, Maldito! ##male"
 
 #: fortify_dwarfenwall.xml
 msgid "You are better prepared to suffer the consequences, wretched creature."
@@ -2107,7 +2107,7 @@ msgstr "elCnlLobby"
 
 #: medair.xml:37 tutorial.xml
 msgid "elCnlLowerCaves"
-msgstr "Consejo de los elementos, Mazmorra subterránea"
+msgstr "Consejo de los elementalistas, Mazmorra subterránea"
 
 #: medair.xml:89
 msgid "medBackalley"
@@ -3290,8 +3290,8 @@ msgstr "Lich desconocido"
 msgid ""
 "I have to find an energy source and a cog before that thing will work again."
 msgstr ""
-"Tengo que encontrar una fuente de energía y una rueda dentada antes de que "
-"esa cosa vuelva a funcionar otra vez."
+"Tengo que encontrar una fuente de energía y una rueda dentada para que esa "
+"cosa vuelva a funcionar otra vez."
 
 #: undeadEqu.xml:3
 msgid "broken shield"
@@ -3593,13 +3593,13 @@ msgid "Taunt"
 msgstr "Burla"
 
 #: warrior_ablt.xml:141
-#, fuzzy
 msgid ""
 "The warrior has become used to the ways of the battlefield to a point, where "
 "he can regenerate his abilities faster than normal."
 msgstr ""
-"El guerrero se ha acostumbrado a las situaciones en el campo de batalla a un "
-"punto, donde sus habilidades se regeneran más rápido de lo normal."
+"El guerrero se ha acostumbrado en parte a las diferentes situaciones en el "
+"campo de batalla, dónde sus habilidades se regeneran más rápido de lo "
+"normal."
 
 #: warrior_ablt.xml:141
 msgid "Warmaster"
