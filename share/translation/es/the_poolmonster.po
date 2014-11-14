@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-05 01:12+0200\n"
+"PO-Revision-Date: 2013-11-06 11:24+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/the_poolmonster/es/>\n"
@@ -77,8 +77,9 @@ msgid "Sometimes I wish,"
 msgstr "A veces me gustaría,"
 
 #: scene7.xml:15
+#, fuzzy
 msgid "Soren Windclaw"
-msgstr ""
+msgstr "Soren Windclaw"
 
 #: scene7.xml:2
 msgid "The Poolmonster"
@@ -101,6 +102,5 @@ msgid "Wow, thats beautiful."
 msgstr "Wow, eso es hermoso."
 
 #: scene7.xml:59
-#, fuzzy
 msgid "greyCurseLake"
-msgstr "greyCurseLake"
+msgstr "Lago Maldito"
