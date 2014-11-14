@@ -8,13 +8,17 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-10-07 23:22+0400\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2014-05-31 08:25+0200\n"
+"Last-Translator: Вячеслав <webslavic@yahoo.com>\n"
+"Language-Team: Russian "
+"<https://hosted.weblate.org/projects/sumwars/tutorial/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 1.10-dev\n"
 
 #: tutorial.xml:2
 msgid "Tutorial"
@@ -209,7 +213,7 @@ msgstr "Вполне возможно, он будет последним в т�
 
 #: tutorial.xml:325
 msgid "Spill it! Where are we, and who has the nerve to cross Branded Ones?!"
-msgstr "Цыц! Где мы и кто посмел потревожить Избранного?"
+msgstr "Цыц! Где мы и кто посмел потревожить Избранного?!"
 
 #: tutorial.xml:327
 msgid ""
@@ -713,7 +717,7 @@ msgstr "Всем следует сначала взять оружие в рук
 
 #: tutorial.xml:916
 msgid "You still know how to fight, don't you? ##solo"
-msgstr "Ты все ещё помнишь, как надо сражаться?"
+msgstr "Ты все ещё помнишь, как надо сражаться? ##solo"
 
 #: tutorial.xml:918
 msgid "You all still know how to fight, don't you?"
