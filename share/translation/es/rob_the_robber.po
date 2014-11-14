@@ -1,20 +1,20 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-08 19:28+0200\n"
+"PO-Revision-Date: 2014-10-02 00:32+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
-"<http://hosted.weblate.org/projects/sumwars/rob_the_robber/es/>\n"
+"<https://hosted.weblate.org/projects/sumwars/rob_the_robber/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.8\n"
+"X-Generator: Weblate 1.10-dev\n"
 
 #: rob_the_robber.xml:45 rob_the_robber.xml:116
 msgid "10000 gold pieces are quite interesting for the traveling fund."
-msgstr "10.000 piezas de oro son muy interesantes para los fondos del viaje."
+msgstr "10.000 piezas de oro son muy interesantes para financiar el viaje."
 
 #: rob_the_robber.xml:35 rob_the_robber.xml:106
 msgid "Accept the quest?"
@@ -22,7 +22,7 @@ msgstr "¿Aceptas la misión?"
 
 #: rob_the_robber.xml:46 rob_the_robber.xml:117
 msgid "And I'm pretty lucky myself."
-msgstr "Y soy muy afortunada."
+msgstr "Y soy muy afortunado."
 
 #: rob_the_robber.xml:32 rob_the_robber.xml:103
 #, fuzzy
@@ -63,7 +63,7 @@ msgstr ""
 
 #: rob_the_robber.xml:26 rob_the_robber.xml:97
 msgid "Excuse me, sergeant, but I noticed this wanted poster."
-msgstr "Disculpe, Sargento, pero me di cuenta de este cartel de se busca."
+msgstr "Disculpe, Sargento, pero he reparado en este cartel de se busca."
 
 #: rob_the_robber.xml:281
 msgid "Have fun with that. If you escape hell, that is."
@@ -87,7 +87,7 @@ msgstr ""
 msgid ""
 "I really should pay this guy a visit. 10000 gold pieces are not chickenfeed."
 msgstr ""
-"Ciertamente debería pagar a este tipo una visita. 10.000 piezas de oro no "
+"Ciertamente debería hacerle a este tipo una visita. 10.000 piezas de oro no "
 "son limosna."
 
 #: rob_the_robber.xml:226
@@ -114,7 +114,7 @@ msgid ""
 "If you can take it to sergeant Wober in Dwarfenwall he will believe you that "
 "Rob is dead."
 msgstr ""
-"Si te lo puedes llevar al sargento Wober en Dwarfenwall creerá que Rob está "
+"Si se lo puedes llevar al sargento Wober en Dwarfenwall creerá que Rob está "
 "muerto."
 
 #: rob_the_robber.xml:44 rob_the_robber.xml:115
@@ -134,7 +134,7 @@ msgstr "Parece que tiene mucha suerte, ese villano."
 
 #: rob_the_robber.xml:58 rob_the_robber.xml:129
 msgid "Just curious."
-msgstr "Sólo por curiosidad."
+msgstr "Sólo es curiosidad."
 
 #: rob_the_robber.xml:270 rob_the_robber.xml:273
 msgid ""
@@ -232,7 +232,7 @@ msgstr "Los cazadores de recompensas mantienen alejadas sus manos de él."
 
 #: rob_the_robber.xml:48 rob_the_robber.xml:119
 msgid "Then take his necklace."
-msgstr "Entonces tome su collar."
+msgstr "Entonces consigue su collar."
 
 #: rob_the_robber.xml:13 rob_the_robber.xml:84
 msgid "Wanted poster"
