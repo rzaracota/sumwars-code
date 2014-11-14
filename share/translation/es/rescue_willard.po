@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-03-06 12:17+0200\n"
+"PO-Revision-Date: 2014-03-06 16:44+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/rescue_willard/es/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 
 #: rescue_willard.xml:2
 msgid "A friend in need"
-msgstr "Un amigo en necesidad"
+msgstr "Un amigo en apuros"
 
 #: rescue_willard.xml:10
 msgid ""
@@ -36,9 +36,7 @@ msgstr "Y no querrían matar a todo ser viviente que se cruzara por su camino."
 #: rescue_willard.xml:127
 msgid ""
 "And you cannot use a phasestone since it is dedicated to the goddess Avaera."
-msgstr ""
-"Y no puedes usar una piedra de fase desde que está dedicada a la diosa "
-"Avaera."
+msgstr "Y no podéis usar una piedra de fase si está dedicada a la diosa Avaera."
 
 #: rescue_willard.xml:90
 msgid ""
@@ -63,7 +61,7 @@ msgstr ""
 
 #: rescue_willard.xml:221
 msgid "By Avaera's blessed and arcane...! He still has that thing?"
-msgstr "¡Por la bendición y arcana de Avaera!... ¿Todavía tiene esa cosa?"
+msgstr "¡Por la bendición de Avaera y arcana...! ¿Todavía tiene esa cosa?"
 
 #: rescue_willard.xml:215
 msgid "Can I ask you for another favor?"
@@ -95,7 +93,7 @@ msgstr "Mi viejo y buen Fenor. Aquí tiene una muestra de mi agradecimiento."
 
 #: rescue_willard.xml:73
 msgid "Have you changed your mind?"
-msgstr "¿Has cambiado de parecer?"
+msgstr "¿Has cambiado de idea?"
 
 #: rescue_willard.xml:108
 msgid ""
@@ -119,11 +117,11 @@ msgstr "Tengo un amigo con los agentes forestales."
 
 #: rescue_willard.xml:69
 msgid "I sincerely hope you find Willard in time."
-msgstr "Sinceramente espero que encontréis a Willard a tiempo."
+msgstr "Sinceramente, espero que encontréis a Willard a tiempo."
 
 #: rescue_willard.xml:67
 msgid "I sincerely hope you find Willard in time. ##solo"
-msgstr "Sinceramente espero que encuentres a Willard a tiempo. ##solo"
+msgstr "Sinceramente, espero que encuentres a Willard a tiempo. ##solo"
 
 #: rescue_willard.xml:166
 msgid "I would search for him myself."
@@ -131,7 +129,7 @@ msgstr "Lo buscaría por mí mismo."
 
 #: rescue_willard.xml:123
 msgid "I wouldn't entrust this to anyone else normally."
-msgstr "No le confiaría esto a cualquiera normalmente."
+msgstr "Normalmente no le confiaría esto a cualquiera."
 
 #: rescue_willard.xml:159
 msgid "I'm sorry, but I don't want to waste my time searching for gamekeepers."
@@ -157,17 +155,17 @@ msgstr "Si tan sólo pudiera dejar mi puesto."
 
 #: rescue_willard.xml:177
 msgid "Leave, before I tell someone about you!"
-msgstr "¡Iros, antes de hablarle a alguien acerca de vosotros!"
+msgstr "¡Marchaos, antes de le hable a alguien de vosotros!"
 
 #: rescue_willard.xml:174
 msgid "Leave, before I tell someone about you! ##solo"
-msgstr "¡Vete, antes de hablarle a alguien acerca de ti! ##solo"
+msgstr "¡Vete, antes de le hable a alguien de ti! ##solo"
 
 #: rescue_willard.xml:130
 msgid "Medair, the seat of learning! Where even the city guard are scholars"
 msgstr ""
-"Medair, ¡el asiento del aprendizaje! Donde incluso los guardias de la ciudad "
-"son eruditos"
+"Medair, ¡sede del conocimiento! Donde incluso los guardias de la ciudad son "
+"eruditos"
 
 #: rescue_willard.xml:223
 msgid "Mine is long used up."
@@ -175,7 +173,7 @@ msgstr "La mina hace tiempo que se agotó."
 
 #: rescue_willard.xml:124
 msgid "Much less someone totally unknown."
-msgstr "Ni mucho menos alguien totalmente desconocido."
+msgstr "Ni mucho menos a alguien totalmente desconocido."
 
 #: rescue_willard.xml:104
 msgid "My apologies. It was a slip of the tongue."
@@ -192,7 +190,7 @@ msgstr "No"
 #: rescue_willard.xml:115
 msgid "No, Willard isn't someone likely to be caught by a few lousy goblins."
 msgstr ""
-"No, Willard no es alguien que pueda ser fácilmente atrapado por unos pésimos "
+"No, Willard no es alguien que deje atrapar fácilmente por unos pésimos "
 "gublins."
 
 #: rescue_willard.xml:96
@@ -225,20 +223,19 @@ msgstr "Entonces, ¿qué es lo que quieres?"
 
 #: rescue_willard.xml:129
 msgid "Somebody else who appears to know quite a lot."
-msgstr "Alguien más que parece saber bastante."
+msgstr "Alguien más que parece saber mucho."
 
 #: rescue_willard.xml:225
 msgid "Surely someone of your trade can always use a little money?"
-msgstr ""
-"Seguramente alguien de tu profesión siempre puede usar un poco de dinero."
+msgstr "Seguro que alguien de tu profesión siempre puede pagar en efectivo."
 
 #: rescue_willard.xml:111
 msgid "Surely you don't want me to bring back his corpse, do you?"
-msgstr "Seguro que no quieres traerme su cadáver, ¿verdad?"
+msgstr "Seguro que no quieres que traiga su cadáver, ¿verdad?"
 
 #: rescue_willard.xml:113
 msgid "Surely you don't want us to bring back his corpse, do you?"
-msgstr "Seguro que no queréis traerme su cadáver, ¿verdad?"
+msgstr "Seguro que no quieres que traigamos su cadáver, ¿verdad?"
 
 #: rescue_willard.xml:226
 msgid "Thank you very much."
@@ -274,7 +271,7 @@ msgstr "Por eso sólo te pido llevarle esta piedra de fase. ##solo"
 
 #: rescue_willard.xml:128
 msgid "That is why I would trust you to help."
-msgstr "Por eso confío en tu ayuda."
+msgstr "Por eso confiaría en tu ayuda."
 
 #: rescue_willard.xml:219
 msgid "That's me. How do you know my name?"
@@ -282,7 +279,7 @@ msgstr "Ese soy yo. ¿Cómo sabes mi nombre?"
 
 #: rescue_willard.xml:109
 msgid "The cowards left him behind!"
-msgstr "¡Los cobardes le dejaron atrás!"
+msgstr "¡Esos cobardes le dejaron atrás!"
 
 #: rescue_willard.xml:176
 msgid "Then what do you want from me?"
@@ -302,7 +299,7 @@ msgstr "Hay algo que me gustaría pedirte. ##solo"
 
 #: rescue_willard.xml:222
 msgid "This was the cause of a few youthful follies."
-msgstr "Ésta era la causa de algunas locuras juveniles."
+msgstr "Ésta fue la causa de algunas locuras juveniles."
 
 #: rescue_willard.xml:86
 msgid "What the..."
@@ -318,7 +315,7 @@ msgstr "¿Quién lo habría pensado?"
 
 #: rescue_willard.xml:125
 msgid "Who wouldn't take off with it?"
-msgstr "¿Quién no se lo quitaría?"
+msgstr "¿Quién no se lo quedaría?"
 
 #: rescue_willard.xml:56 rescue_willard.xml:203
 msgid "Willard"
@@ -339,9 +336,8 @@ msgid ""
 "Willard is in hiding somewhere around the Aisen Meadow. Due to his injury he "
 "will show himself only if there are no goblins around."
 msgstr ""
-"Willard está escondido en algún lugar alrededor de la pradera de Aisen. "
-"Debido a su lesión sólo se mostrará a sí mismo si no hay ningún gublin "
-"alrededor."
+"Willard está escondido en algún lugar cerca de la pradera de Aisen. Debido a "
+"su lesión sólo se mostrará a sí mismo si no hay ningún gúblin alrededor."
 
 #: rescue_willard.xml:75 rescue_willard.xml:133
 msgid "Yes"
@@ -372,7 +368,7 @@ msgstr ""
 
 #: rescue_willard.xml:141
 msgid "Your friend is as good as safe."
-msgstr "Tu amigo es tan bueno como seguro."
+msgstr "Tu amigo estará tan bien como seguro."
 
 #: rescue_willard.xml:247
 msgid "aisMeadow"
