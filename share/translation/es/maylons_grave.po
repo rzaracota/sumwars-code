@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-09 18:20+0200\n"
+"PO-Revision-Date: 2013-11-10 14:01+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/maylons_grave/es/>\n"
@@ -154,68 +154,79 @@ msgstr ""
 "cueva."
 
 #: maylons_grave.xml:192
+#, fuzzy
 msgid ""
 "Now horror of the depth wandering to surface, too and being after poor "
 "goblins who never not wants to steal anything."
 msgstr ""
+"Ahora el horror de la profundidad vagando a la superficie, también y después "
+"de que pobres gublins que no nunca quieren robar nada."
 
 #: maylons_grave.xml:201
+#, fuzzy
 msgid ""
 "Really, I should free those poor bound souls and send them off to a short "
 "brake in Harad's Hell."
 msgstr ""
+"En serio, debería liberar esas pobres almas herrantes y enviarlas al "
+"infierno de Harad a hacer un pequeño descanso."
 
 #: maylons_grave.xml:203
 msgid ""
 "Really, we should free those poor bound souls and send them off to a short "
 "brake in Harad's Hell."
 msgstr ""
+"En serio, deberíamos liberar esas pobres almas herrantes y enviarlas a hacer "
+"un pequeño descanso al infierno de Harad."
 
 #: maylons_grave.xml:177
 msgid "Slay the goblins"
-msgstr ""
+msgstr "Matar a los gublins"
 
 #: maylons_grave.xml:5
 msgid ""
 "Some necromancer really resurrected an old council mage. Probably to cause "
 "confusion behind the lines. At least one problem that is solved."
 msgstr ""
+"Algún nigromante resucitó a un viejo mago del Consejo. Probablemente para "
+"causar confusión detrás de las líneas. Bueno, al menos un problema que se "
+"resuelve."
 
 #: maylons_grave.xml:159
 msgid "Talk with the goblins?"
-msgstr ""
+msgstr "¿Hablar con los gublins?"
 
 #: maylons_grave.xml:431
 msgid "Thank you very much for liberating my soul."
-msgstr ""
+msgstr "Muchas gracias por liberar a mi alma."
 
 #: maylons_grave.xml:193
 msgid "That almost sounds as if a necromancer came by."
-msgstr ""
+msgstr "Eso casi suena como si viniera un nigromante."
 
 #: maylons_grave.xml:436
 msgid "The same holds true for your friends."
-msgstr ""
+msgstr "Lo mismo es válido para sus amigos."
 
 #: maylons_grave.xml:197
 msgid "We cannot leave such a problem amidst this under-guarded region."
-msgstr ""
+msgstr "No podemos dejar tal problema en medio de esta región bajo vigilancia."
 
 #: maylons_grave.xml:189
 msgid "We often hide here."
-msgstr ""
+msgstr "A menudo nos escondemos aquí."
 
 #: maylons_grave.xml:188
 msgid "What could a goblin possibly have to say?"
-msgstr ""
+msgstr "¿Qué podría tener que decir un gublin?"
 
 #: maylons_grave.xml:174
 msgid "What will you do?"
-msgstr ""
+msgstr "¿Qué harás?"
 
 #: maylons_grave.xml:199
 msgid "Who knows what could happen?"
-msgstr ""
+msgstr "¿Quién sabe lo que podría pasar?"
 
 #: maylons_grave.xml:160
 msgid "Yes"
@@ -223,11 +234,11 @@ msgstr "Sí"
 
 #: maylons_grave.xml:171
 msgid "Yes. No hurt, no kill."
-msgstr ""
+msgstr "Sí. No herir, no matar."
 
 #: maylons_grave.xml:173
 msgid "You listen, yes?"
-msgstr ""
+msgstr "Tú escucha, ¿sí?"
 
 #: maylons_grave.xml:16 maylons_grave.xml:264
 msgid "aisMaylonsGraveEntry"
