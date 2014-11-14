@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-27 23:06+0200\n"
+"PO-Revision-Date: 2013-11-06 18:36+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/scout/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.6-dev\n"
+"X-Generator: Weblate 1.8-dev\n"
 
 #: scout.xml:71
 msgid "..."
@@ -190,7 +190,7 @@ msgstr ""
 
 #: scout.xml:23
 msgid "Wounded Scout"
-msgstr ""
+msgstr "Explorador herido"
 
 #: scout.xml:34
 msgid ""
@@ -227,11 +227,11 @@ msgstr ""
 
 #: scout.xml:11
 msgid "greyCurseCave"
-msgstr ""
+msgstr "Cueva Maldita"
 
 #: scout.xml:118
 msgid "greyWolfcave"
-msgstr ""
+msgstr "Cueva del Lobo"
 
 #: scout.xml:44
 msgid ""
