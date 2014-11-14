@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-08 11:06+0200\n"
+"PO-Revision-Date: 2013-11-11 22:01+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/defend_dwarfenwall/es/>\n"
@@ -19,130 +19,137 @@ msgstr "..."
 
 #: siegeOfDwarfenwall.xml:135
 msgid "... are they Cursed Ones?"
-msgstr ""
+msgstr "...son estos unos Malditos?"
 
 #: siegeOfDwarfenwall.xml:131 siegeOfDwarfenwall.xml:133
 msgid "... is this a Cursed One?"
-msgstr ""
+msgstr "... es este un Maldito?"
 
 #: siegeOfDwarfenwall.xml:60
 msgid ""
 "... wind-elementals did see it clearly: It's only this one lich leading them."
 msgstr ""
+"...elementales de viento lo vieron claro: es sólo este liche quién los "
+"dirige."
 
 #: siegeOfDwarfenwall.xml:123
 msgid "A handful of mercenaries?"
-msgstr ""
+msgstr "¿Un puñado de mercenarios?"
 
 #: siegeOfDwarfenwall.xml:1102
+#, fuzzy
 msgid "Acursed elementalists!"
-msgstr ""
+msgstr "¡Malditos elementalistas!"
 
 #: siegeOfDwarfenwall.xml:164
 msgid "All warriors are connected by narrow-mindedness."
-msgstr ""
+msgstr "Todos los guerreros están conectados por por la estrechez de miras."
 
 #: siegeOfDwarfenwall.xml:2537
+#, fuzzy
 msgid "And about the crystal: Why don't you ask your employers?"
-msgstr ""
+msgstr "Y acerca del cristal: ¿Por qué no les preguntas a los empresarios?"
 
 #: siegeOfDwarfenwall.xml:1902
 msgid "And don't forget that you owe me land after this."
-msgstr ""
+msgstr "Y no olvides que me debes tierras después de esto."
 
 #: siegeOfDwarfenwall.xml:2565
 msgid "And now I will find a way to kill Branded Ones."
-msgstr ""
+msgstr "Y ahora encontraré la manera de matar a Los Malditos."
 
 #: siegeOfDwarfenwall.xml:2242
 msgid "And thanks to the councils backing the city is still standing."
-msgstr ""
+msgstr "Y gracias a los consejos que respaldan la ciudad sigue en pie."
 
 #: siegeOfDwarfenwall.xml:2062
 msgid "And what of it? I thought, there was none."
-msgstr ""
+msgstr "Y ¿qué? pensé, no había ninguno."
 
 #: siegeOfDwarfenwall.xml:89
 msgid "And who are you?"
-msgstr ""
+msgstr "¿Y quién sois vosotros?"
 
 #: siegeOfDwarfenwall.xml:87
 msgid "And who are you? ##solo"
-msgstr ""
+msgstr "¿Y quién eres tú? ##solo"
 
 #: siegeOfDwarfenwall.xml:2360
 msgid "And who?!"
-msgstr ""
+msgstr "¡¿Y quién?!"
 
 #: siegeOfDwarfenwall.xml:63
 msgid "And with what army are you planning to do this break-through?"
-msgstr ""
+msgstr "Y con qué ejercito planeas abrirte camino?"
 
 #: siegeOfDwarfenwall.xml:1898
+#, fuzzy
 msgid "And your mountain tops are more lively?"
-msgstr ""
+msgstr "¿Y tus cimas de montaña están más animadas?"
 
 #: siegeOfDwarfenwall.xml:2381
 msgid "Apart from yourself you are not taking care of anyone!"
-msgstr ""
+msgstr "¡No cuidas de nadie excepto de ti mismo!"
 
 #: siegeOfDwarfenwall.xml:1899
 msgid "Are we here to count the bugs on our estates?"
-msgstr ""
+msgstr "Estamos aquí para contar los bichos de nuestras fincas?"
 
 #: siegeOfDwarfenwall.xml:2344
 msgid "As if I ever made one."
-msgstr ""
+msgstr "Como si alguna vez hiciera uno."
 
 #: siegeOfDwarfenwall.xml:2347
 msgid "As if we ever made one."
-msgstr ""
+msgstr "Como si alguna vez hicieramos uno."
 
 #: siegeOfDwarfenwall.xml:2355
 msgid "As if we hadn't enough problems with shortage of soldiers."
-msgstr ""
+msgstr "Como si no tuviéramos suficientes problemas con la escasez de soldados."
 
 #: siegeOfDwarfenwall.xml:155
 msgid "As long as I lead this army I will not tolerate such people."
-msgstr ""
+msgstr "Mientras lidere este ejercito no toleraré tales personas."
 
 #: siegeOfDwarfenwall.xml:2068
 msgid "As you command, my lord."
-msgstr ""
+msgstr "Como ordene, mi señor."
 
 #: siegeOfDwarfenwall.xml:1835
 msgid "As you wish, my lord."
-msgstr ""
+msgstr "Como desee, mi señor."
 
 #: siegeOfDwarfenwall.xml:2396
 msgid "As you wish..."
-msgstr ""
+msgstr "Como desee..."
 
 #: siegeOfDwarfenwall.xml:2278
 msgid ""
 "At least more effective than one could have expected from a band of "
 "mercenaries."
 msgstr ""
+"Al menos más efectivo que lo que uno puede haber esperado de un grupo de "
+"mercenarios."
 
 #: siegeOfDwarfenwall.xml:2346
 msgid "At least you are worth the trouble."
-msgstr ""
+msgstr "Por lo menos valéis la pena."
 
 #: siegeOfDwarfenwall.xml:2343
 msgid "At least you are worth the trouble. ##solo"
-msgstr ""
+msgstr "Por lo menos vales la pena. ##solo"
 
 #: siegeOfDwarfenwall.xml:1113
 msgid "Await your order."
-msgstr ""
+msgstr "Esperan su orden."
 
 #: siegeOfDwarfenwall.xml:2528
 msgid "Bah! Your skeletons are dust and the one lackey will not save you!"
-msgstr ""
+msgstr "¡Vagh! ¡Tus esqueletos son polvo y el lacayo no te salvará!"
 
 #: siegeOfDwarfenwall.xml:2064
 msgid "Branded Ones!"
-msgstr ""
+msgstr "¡Malditos!"
 
 #: siegeOfDwarfenwall.xml:2066
 msgid ""
@@ -700,7 +707,7 @@ msgstr ""
 
 #: siegeOfDwarfenwall.xml:1106
 msgid "Silence!"
-msgstr ""
+msgstr "¡Silencio!"
 
 #: siegeOfDwarfenwall.xml:2212
 msgid "So what."
