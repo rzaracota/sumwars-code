@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-06-01 13:37+0200\n"
+"PO-Revision-Date: 2013-11-06 18:32+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/rob_the_robber/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.6-dev\n"
+"X-Generator: Weblate 1.8-dev\n"
 
 #: rob_the_robber.xml:45 rob_the_robber.xml:116
 msgid "10000 gold pieces are quite interesting for the traveling fund."
@@ -18,7 +18,7 @@ msgstr ""
 
 #: rob_the_robber.xml:35 rob_the_robber.xml:106
 msgid "Accept the quest?"
-msgstr ""
+msgstr "¿Aceptas la misión?"
 
 #: rob_the_robber.xml:46 rob_the_robber.xml:117
 msgid "And I'm pretty lucky myself."
@@ -184,11 +184,11 @@ msgstr ""
 
 #: rob_the_robber.xml:12
 msgid "Sergeant Lutterer"
-msgstr ""
+msgstr "Sargento Lutterer"
 
 #: rob_the_robber.xml:83
 msgid "Sergeant Wober"
-msgstr ""
+msgstr "Sargento Wober"
 
 #: rob_the_robber.xml:77
 msgid "Sergeant Wober in Dwarfenwall has it."
