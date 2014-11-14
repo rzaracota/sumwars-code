@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-07 12:51+0200\n"
+"PO-Revision-Date: 2014-10-05 17:15+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
-"<http://hosted.weblate.org/projects/sumwars/herb_collector/es/>\n"
+"<https://hosted.weblate.org/projects/sumwars/herb_collector/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.8\n"
+"X-Generator: Weblate 1.10-dev\n"
 
 #: herbalist.xml:95 herbalist.xml:121
 msgid "Accept Quest?"
@@ -26,7 +26,7 @@ msgstr "Y otra buena acción hecha. Podría acostumbrarme a esto."
 
 #: herbalist.xml:146
 msgid "But if you change your mind, I'm not running away from here."
-msgstr "Pero si cambias de opinión, no estoy huyendo de aquí."
+msgstr "Pero si cambias de opinión, no me alejaré de aquí."
 
 #: herbalist.xml:119
 msgid "But only the red berries."
@@ -46,7 +46,7 @@ msgstr "¡Tonterías!"
 
 #: herbalist.xml:143
 msgid "Forget it, herb woman."
-msgstr "Olvídalo, mujer de hierbas."
+msgstr "Olvídalo, herbolaria."
 
 #: herbalist.xml:74
 #, fuzzy
@@ -79,7 +79,7 @@ msgstr "¡Ey, joven!"
 
 #: herbalist.xml:91
 msgid "I need more berries, if I am to do something useful with them."
-msgstr "Necesito más bayas, si debo hacer algo útil con ellos."
+msgstr "Necesitaré más bayas, si tengo que hacer algo útil con ellas."
 
 #: herbalist.xml:118
 msgid "I need the berries of at least ten bushes."
@@ -135,7 +135,7 @@ msgstr "Un buen truco."
 
 #: herbalist.xml:165
 msgid "Still no."
-msgstr "Sigo negandome."
+msgstr "Aún no."
 
 #: herbalist.xml:166
 msgid "Tell me when you're not too mighty for simple work anymore, sweety."
@@ -149,7 +149,7 @@ msgstr "Gracias, cielo."
 
 #: herbalist.xml:102
 msgid "That's right."
-msgstr "Eso es cierto."
+msgstr "Así es."
 
 #: herbalist.xml:11
 msgid ""
@@ -161,7 +161,7 @@ msgstr ""
 
 #: herbalist.xml:120
 msgid "The rest is of no use at all."
-msgstr "El resto no sirve para nada."
+msgstr "El resto no sirven para nada."
 
 #: herbalist.xml:154
 msgid "Very well, if I find some, I'll bring them along."
@@ -188,8 +188,8 @@ msgid ""
 "With all those goblins about an old woman can't even set a foot out of the "
 "village."
 msgstr ""
-"Con todos esos gublins rodeando una anciana no puede siquiera poner un pie "
-"fuera de la aldea."
+"Con todos esos gúblins por alrededor una anciana como yo ni siquiera puede "
+"poner un pie fuera de la aldea."
 
 #: herbalist.xml:96 herbalist.xml:122
 msgid "Yes"
