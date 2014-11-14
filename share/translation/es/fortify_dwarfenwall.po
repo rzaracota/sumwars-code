@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-03-06 01:53+0200\n"
+"PO-Revision-Date: 2014-03-06 22:36+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/fortify_dwarfenwall/es/>\n"
@@ -916,7 +916,7 @@ msgstr "Te estás yendo por las ramas."
 
 #: fortify_dwarfenwall.xml:321
 msgid "You're presence is no longer needed."
-msgstr "Tu presencia ya no es necesaria."
+msgstr "Vuestra presencia ya no es necesaria."
 
 #: fortify_dwarfenwall.xml:344
 msgid ""
