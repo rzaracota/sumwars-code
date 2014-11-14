@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-15 22:27+0200\n"
+"PO-Revision-Date: 2013-11-18 09:54+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/defend_dwarfenwall/es/>\n"
@@ -274,48 +274,55 @@ msgid "Enough of that. Let's talk in the command center."
 msgstr "Ya es suficiente. Vayamos a hablar con el centro de comando."
 
 #: siegeOfDwarfenwall.xml:84
+#, fuzzy
 msgid ""
 "Excuse me for interrupting like that, but small groups travel considerably "
 "faster then armies."
 msgstr ""
+"Disculpe que le interrumpa así, pero los pequeños grupos viajan "
+"considerablemente más rápido que los ejercitos."
 
 #: siegeOfDwarfenwall.xml:2394
+#, fuzzy
 msgid "Finally he cought on to it."
-msgstr ""
+msgstr "Finalmente, se había percatado de ello."
 
 #: siegeOfDwarfenwall.xml:1896
 msgid "Finally."
-msgstr ""
+msgstr "Por fin."
 
 #: siegeOfDwarfenwall.xml:69
+#, fuzzy
 msgid ""
 "First they send away the mage of Northborough and than they send in backup "
 "again?"
 msgstr ""
+"¿Primero envían lejos el mago de Northborough y luego envían refuerzos otra "
+"vez?"
 
 #: siegeOfDwarfenwall.xml:223
 msgid "Get going!"
-msgstr ""
+msgstr "¡En marcha!"
 
 #: siegeOfDwarfenwall.xml:101 siegeOfDwarfenwall.xml:103
 msgid "Get lost, you fool."
-msgstr ""
+msgstr "Piérdete, idiota."
 
 #: siegeOfDwarfenwall.xml:105
 msgid "Get lost, you fools."
-msgstr ""
+msgstr "Perdeos, idiotas."
 
 #: siegeOfDwarfenwall.xml:971
 msgid "Get ready, soldiers!"
-msgstr ""
+msgstr "¡Preparados, soldados!"
 
 #: siegeOfDwarfenwall.xml:218
 msgid "Get to the walls!"
-msgstr ""
+msgstr "¡Llegad a las paredes!"
 
 #: siegeOfDwarfenwall.xml:98
 msgid "Good joke."
-msgstr ""
+msgstr "Buen chiste."
 
 #: siegeOfDwarfenwall.xml:2518 siegeOfDwarfenwall.xml:2551
 msgid "Harvest!"
@@ -323,99 +330,110 @@ msgstr "¡Cosecha!"
 
 #: siegeOfDwarfenwall.xml:2358
 msgid "He has to be destroyed!"
-msgstr ""
+msgstr "¡Tiene que ser destruido!"
 
 #: siegeOfDwarfenwall.xml:174
 msgid "He is under orders of the council, it is not your decision."
-msgstr ""
+msgstr "Está bajo las órdenes del consejo, no es tu decisión."
 
 #: siegeOfDwarfenwall.xml:1060
 msgid "He is waiting for my orders right now."
-msgstr ""
+msgstr "Está esperando mis órdenes ahora mismo."
 
 #: siegeOfDwarfenwall.xml:1834
 msgid "He should be here any moment. We are playing for time right now."
 msgstr ""
+"Debería llegar en cualquier momento. Estamos tratando de ganar tiempo ahora "
+"mismo."
 
 #: siegeOfDwarfenwall.xml:2499
 msgid "Here comes the root of my little problem."
-msgstr ""
+msgstr "Aquí viene la raíz de mi pequeño problema."
 
 #: siegeOfDwarfenwall.xml:969
 msgid "Here they come."
-msgstr ""
+msgstr "Aquí vienen."
 
 #: siegeOfDwarfenwall.xml:219
 msgid "How fast he changes his mind."
-msgstr ""
+msgstr "Qué rápido cambia de opinión."
 
 #: siegeOfDwarfenwall.xml:1059
 msgid "I bound an earth-elemental weeks ago."
-msgstr ""
+msgstr "Até un elemental de tierra hace semanas."
 
 #: siegeOfDwarfenwall.xml:2512 siegeOfDwarfenwall.xml:2514
 msgid ""
 "I can't believe that a single Branded One would be sufficient to cause so "
 "much chaos."
 msgstr ""
+"No puedo creer que un simple Maldito fuera suficiente para causar tanto "
+"caos."
 
 #: siegeOfDwarfenwall.xml:2070
 msgid "I count on you."
-msgstr ""
+msgstr "Cuento contigo."
 
 #: siegeOfDwarfenwall.xml:2361
 msgid "I don't have enough men to lead a successful excursion."
 msgstr ""
+"No tengo suficientes hombres para llevar a cabo exitosamente una excursión."
 
 #: siegeOfDwarfenwall.xml:166
 msgid "I don't kill indiscriminately!"
-msgstr ""
+msgstr "¡No mato indiscriminadamente!"
 
 #: siegeOfDwarfenwall.xml:73
 msgid ""
 "I don't like saying this, but until an army makes it's way here, our bodies "
 "are long fighting for the other side, venerated lady."
 msgstr ""
+"No me gusta decir esto, pero hasta que un ejército se pase por aquí, "
+"nuestros cuerpos estarán luchando siempre por el otro lado, venerada señora."
 
 #: siegeOfDwarfenwall.xml:1662
 msgid "I don't see how that has anything to do with the siege, my lord."
-msgstr ""
+msgstr "No veo cómo eso tiene algo que ver con el asedio, mi señor."
 
 #: siegeOfDwarfenwall.xml:283
 msgid "I don't want to go there. I only see boring walls."
-msgstr ""
+msgstr "No quiero ir allí. Sólo veo paredes aburridas."
 
 #: siegeOfDwarfenwall.xml:2059
 msgid "I felt it, too."
-msgstr ""
+msgstr "Yo lo sentí, también."
 
 #: siegeOfDwarfenwall.xml:2245
 msgid ""
 "I have to admit, I wouldn't have thought in my wildest dreams that someone "
 "could fight like that."
 msgstr ""
+"Debo admitir que ni en mis mejores sueños habría pensado que alguien pudiera "
+"pelear así."
 
 #: siegeOfDwarfenwall.xml:2280
 msgid "I hope they will not plan a new raid soon."
-msgstr ""
+msgstr "Espero que no planeen en una nueva incursión pronto."
 
 #: siegeOfDwarfenwall.xml:232
 msgid "I just hope you have enough money to keep them at it."
-msgstr ""
+msgstr "Sólo espero que tengas suficiente dinero para mantenerlos en ello."
 
 #: siegeOfDwarfenwall.xml:159
 msgid "I just prevented the undead from passing by your city!"
-msgstr ""
+msgstr "¡Sólo evité que los no-muertos pasaran por tú ciudad!"
 
 #: siegeOfDwarfenwall.xml:236
 msgid "I pray that you're right..."
-msgstr ""
+msgstr "Rezo para que tengas razón..."
 
 #: siegeOfDwarfenwall.xml:1057
 msgid ""
 "I reckon there is so many undead back there that your oh-so mighty backup "
 "will not be able to avert our death."
 msgstr ""
+"Creo que hay tantos no-muertos ahí atrás que su oh gran poderoso refuerzo no "
+"será capaz de evitar nuestra muerte."
 
 #: siegeOfDwarfenwall.xml:2539
 msgid "I thought so."
@@ -423,72 +441,80 @@ msgstr "Ya me lo imaginaba."
 
 #: siegeOfDwarfenwall.xml:1395
 msgid "I understand, my lord."
-msgstr ""
+msgstr "Lo entiendo, señor."
 
 #: siegeOfDwarfenwall.xml:2290
 msgid "I want to get away from all the blood."
-msgstr ""
+msgstr "Quiero alejarme de toda la sangre."
 
 #: siegeOfDwarfenwall.xml:1830
 msgid "I want you to use the brothers."
-msgstr ""
+msgstr "Quiero utilizar a los hermanos."
 
 #: siegeOfDwarfenwall.xml:2213
 msgid "I will triumph in the end."
-msgstr ""
+msgstr "Triunfaré al final."
 
 #: siegeOfDwarfenwall.xml:1062
 msgid ""
 "I'm afraid, there will be quite some cleaning up to do by the survivors."
-msgstr ""
+msgstr "Me temo que los supervivientes tendrán bastante limpieza por hacer."
 
 #: siegeOfDwarfenwall.xml:221
 msgid "I'm already on my way."
-msgstr ""
+msgstr "Ya continúo por mi camino."
 
 #: siegeOfDwarfenwall.xml:1114
 msgid "I'm not fighting with Dwarfenwall for centuries for nothing."
-msgstr ""
+msgstr "No llevo luchando con Dwarfenwall durante siglos para nada."
 
 #: siegeOfDwarfenwall.xml:267 siegeOfDwarfenwall.xml:296
 msgid "I'm sorry, but only members of the aisen army are allowed beyond here."
 msgstr ""
+"Lo siento, pero sólo a los miembros del ejercito de Aisen se les permite "
+"permanecer más allá de aquí."
 
 #: siegeOfDwarfenwall.xml:2264
 msgid "I've never seen anyone who could fight like this."
-msgstr ""
+msgstr "Nunca he visto a nadie que pudiera pelear así."
 
 #: siegeOfDwarfenwall.xml:2254
 msgid "If both sides have souls to offer, you take the one paying, of course."
 msgstr ""
+"Si ambos lados tienen almas que ofrecer, te irás con el que paga, por "
+"supuesto."
 
 #: siegeOfDwarfenwall.xml:2069
 msgid "If need be, I, the Black Raven himself, will go to battle."
-msgstr ""
+msgstr "Si fuera necesario, yo, el Cuervo Negro por mí mismo, iré a la batalla."
 
 #: siegeOfDwarfenwall.xml:142
 msgid ""
 "If the price is right I let myself be torn apart as often as need be to "
 "protect the town."
 msgstr ""
+"Si el precio es bueno me dejaré desgarrar tan a menudo como sea necesario "
+"para proteger la ciudad."
 
 #: siegeOfDwarfenwall.xml:144
 msgid ""
 "If the price is right we let ourselves be torn apart as often as need be to "
 "protect the town."
 msgstr ""
+"Si el precio es bueno nos dejarémos desgarrar tan a menudo como sea "
+"necesario para proteger la ciudad."
 
 #: siegeOfDwarfenwall.xml:2713
 msgid "If you want the process to be faster, just help out a bit."
-msgstr ""
+msgstr "Si quieres que el proceso sea más rápido, tan sólo ayuda un poco."
 
 #: siegeOfDwarfenwall.xml:2373
 msgid "In her tense manner she reminds of a certain other council mage."
-msgstr ""
+msgstr "En su forma tensa recuerda a otro determinado mago del consejo."
 
 #: siegeOfDwarfenwall.xml:1832
 msgid "In the worst case they will do no damage at all."
-msgstr ""
+msgstr "En el peor de los casos no harían ningún daño en absoluto."
 
 #: siegeOfDwarfenwall.xml:2267
 msgid "Indeed."
@@ -496,192 +522,205 @@ msgstr "En efecto."
 
 #: siegeOfDwarfenwall.xml:2364
 msgid "It has nothing to do with you."
-msgstr ""
+msgstr "No tiene nada que hacer contigo."
 
 #: siegeOfDwarfenwall.xml:2247
 msgid "It is good that he is on our side at the moment."
-msgstr ""
+msgstr "Es bueno que él esté de nuestro lado en este momento."
 
 #: siegeOfDwarfenwall.xml:2249
 msgid "It is good that she is on our side at the moment."
-msgstr ""
+msgstr "Es bueno que ella esté de nuestro lado en este momento."
 
 #: siegeOfDwarfenwall.xml:2251
 msgid "It is good that they are on our side at the moment."
-msgstr ""
+msgstr "Es bueno que ellos estén de nuestro lado en este momento."
 
 #: siegeOfDwarfenwall.xml:2241
 msgid "It is over."
-msgstr ""
+msgstr "Se acabó."
 
 #: siegeOfDwarfenwall.xml:67
 msgid "It should be here shortly."
-msgstr ""
+msgstr "Debería llegar pronto."
 
 #: siegeOfDwarfenwall.xml:1103
 msgid ""
 "It will be a great pleasure to reanimate the body of that witch only to burn "
 "her!"
 msgstr ""
+"¡Será un gran placer reanimar el cuerpo de esa bruja sólo para quemarla!"
 
 #: siegeOfDwarfenwall.xml:1104
 msgid "It will be done, my lord."
-msgstr ""
+msgstr "Así se hará, mi señor."
 
 #: siegeOfDwarfenwall.xml:234
 msgid "It will not fail due to this."
-msgstr ""
+msgstr "No fallaré debido a esto mismo."
 
 #: siegeOfDwarfenwall.xml:1139
 msgid "It won't hurt if I call some more helpers, too."
-msgstr ""
+msgstr "No hará daño que llame a algunos ayudantes más, también."
 
 #: siegeOfDwarfenwall.xml:2383
 msgid "It wouldn't be the first time..."
-msgstr ""
+msgstr "No sería la primera vez..."
 
 #: siegeOfDwarfenwall.xml:2260
 msgid ""
 "It wouldn't be wise to hit the soldiers over the head who their saviours "
 "were."
 msgstr ""
+"No sería sensato golpear en la cabeza a los soldados que eran sus "
+"salvadores."
 
 #: siegeOfDwarfenwall.xml:2710
 msgid "It's a wrap."
-msgstr ""
+msgstr "Es una envoltura."
 
 #: siegeOfDwarfenwall.xml:2500
 msgid "It's hard to believe someone was crazy enough to storm out here."
 msgstr ""
+"Es difícil de creer que alguien esté lo suficientemente loco para irrumpir "
+"aquí."
 
 #: siegeOfDwarfenwall.xml:1147
 msgid "Just do it!"
-msgstr ""
+msgstr "¡Sólo hazlo!"
 
 #: siegeOfDwarfenwall.xml:62
 msgid "Just great."
-msgstr ""
+msgstr "Simplemente genial."
 
 #: siegeOfDwarfenwall.xml:2387
 msgid "Let that be my concern."
-msgstr ""
+msgstr "Que esa sea mi preocupación."
 
 #: siegeOfDwarfenwall.xml:2389
 msgid "Let that be our concern."
-msgstr ""
+msgstr "Que esa sea nuestra preocupación."
 
 #: siegeOfDwarfenwall.xml:1030
 msgid "Let us begin with the last rush on this wretched stronghold."
-msgstr ""
+msgstr "Comencemos con el último asalto a esta miserable fortaleza."
 
 #: siegeOfDwarfenwall.xml:2258
 msgid ""
 "Maybe aside from the fact, that Branded Ones don't change sides in the "
 "middle."
-msgstr ""
+msgstr "Quizás aparte del hecho, esos Malditos no cambian de bando en mitad."
 
 #: siegeOfDwarfenwall.xml:1904
 msgid "Me and my frostmages will arrange for that."
-msgstr ""
+msgstr "Mi magos de hielo y yo nos encargaremos de eso."
 
 #: siegeOfDwarfenwall.xml:66
 msgid "My colleague assured me that the council is sending backup."
-msgstr ""
+msgstr "Mi colega me aseguró que el consejo está enviando refuerzos."
 
 #: siegeOfDwarfenwall.xml:1893
 msgid "My lord."
-msgstr ""
+msgstr "Mi señor."
 
 #: siegeOfDwarfenwall.xml:1895
 msgid "Neivan the Frostbringer is now here."
-msgstr ""
+msgstr "Neivan el Portador de Hielo ya está aquí."
 
 #: siegeOfDwarfenwall.xml:2378
 msgid "No false sympathy."
-msgstr ""
+msgstr "Nada de falsas simpatías."
 
 #: siegeOfDwarfenwall.xml:2379
 msgid "No matter how often I die, the lich will be destroyed in the end."
-msgstr ""
+msgstr "No importa cuantas veces me muera, el liche será destruido al final."
 
 #: siegeOfDwarfenwall.xml:1659
 msgid "No one said it had to be easy."
-msgstr ""
+msgstr "Nadie dijo que fuera a ser fácil."
 
 #: siegeOfDwarfenwall.xml:2674
 msgid "No! It cannot be! You baleful..."
-msgstr ""
+msgstr "¡No! ¡No puede ser! Tú, funesto..."
 
 #: siegeOfDwarfenwall.xml:2385
 msgid "Nobody deserves such a treatment, not even them."
-msgstr ""
+msgstr "Nadie merece ese trato, ni siquiera ellos."
 
 #: siegeOfDwarfenwall.xml:2519
 msgid "Not so fast."
-msgstr ""
+msgstr "No tan rápido."
 
 #: siegeOfDwarfenwall.xml:2377
 msgid ""
 "Not that I would cry a tear over them, but we cannot waste a single soul "
 "right now!"
 msgstr ""
+"¡No derramaría una lágrima sobre ellos, pero no podemos perder una sola alma "
+"ahora!"
 
 #: siegeOfDwarfenwall.xml:2529
 msgid "Now that you mention it..."
-msgstr ""
+msgstr "Ahora que lo mencionas..."
 
 #: siegeOfDwarfenwall.xml:2061
 msgid "Now, of all times?"
-msgstr ""
+msgstr "¿Ahora, de todos los tiempos?"
 
 #: siegeOfDwarfenwall.xml:1061
 msgid "Of course I couldn't know, where the undead would attack."
-msgstr ""
+msgstr "Por supuesto que no podía saber dónde iban a atacar los no-muertos."
 
 #: siegeOfDwarfenwall.xml:2716
 msgid "Of course not. Did you pay anything for this?"
-msgstr ""
+msgstr "Por supuesto que no. ¿Pagaste algo para esto?"
 
 #: siegeOfDwarfenwall.xml:2516
 msgid ""
 "Of course, if some Branded Ones are in the vicinity everything is a bit "
 "different."
 msgstr ""
+"Por supuesto, si algunos Malditos están en las proximidades todo es un poco "
+"diferente."
 
 #: siegeOfDwarfenwall.xml:72
 msgid "Of course."
-msgstr ""
+msgstr "Por supuesto."
 
 #: siegeOfDwarfenwall.xml:2398
 msgid ""
 "One of these arrows could have come from anywhere in the heat of battle..."
 msgstr ""
+"Una de estas flechas pudo haber venido de cualquier parte en el fragor de la "
+"batalla..."
 
 #: siegeOfDwarfenwall.xml:2714
 msgid ""
 "Or visit www.sumwars.org and take a look at the forum. Criticism, hints and "
 "comments are always welcome."
 msgstr ""
+"O visite www.sumwars.org y eche un vistazo en el foro. Sus críticas, "
+"sugerencias y comentarios son siempre bienvenidas."
 
 #: siegeOfDwarfenwall.xml:1112
 msgid "Our necromancers?"
-msgstr ""
+msgstr "¿Nuestros nigromantes?"
 
 #: siegeOfDwarfenwall.xml:2067
 msgid "Overrun them. Send out your order."
-msgstr ""
+msgstr "Invádalos. Emita su orden."
 
 #: siegeOfDwarfenwall.xml:138
 msgid "Personally I like the term Branded One somehow better."
-msgstr ""
+msgstr "Personalmente de alguna manera me gusta más el término Marcado."
 
 #: siegeOfDwarfenwall.xml:1394
 msgid "Prepare everything."
-msgstr ""
+msgstr "Prepárelo todo."
 
 #: siegeOfDwarfenwall.xml:2509
 msgid "Prepare to pass off forever!"
-msgstr ""
+msgstr "¡Preparaos para pasar para siempre!"
 
 #: siegeOfDwarfenwall.xml:6
 msgid "Quest description"
@@ -693,23 +732,23 @@ msgstr "Misión finalizada"
 
 #: siegeOfDwarfenwall.xml:1111
 msgid "Ready, my lord."
-msgstr ""
+msgstr "Preparado, mi señor."
 
 #: siegeOfDwarfenwall.xml:1146
 msgid "Say 'please'."
-msgstr ""
+msgstr "Diga 'por favor'."
 
 #: siegeOfDwarfenwall.xml:1115
 msgid "Send the skeletons through the underdrives."
-msgstr ""
+msgstr "Envía los esqueletos a través, por abajo."
 
 #: siegeOfDwarfenwall.xml:172
 msgid "She is under orders of the council, it is not your decision."
-msgstr ""
+msgstr "Está bajo las órdenes del Consejo, no es tu decisión."
 
 #: siegeOfDwarfenwall.xml:1392
 msgid "Show them that we can play with fire, too."
-msgstr ""
+msgstr "Muéstrales que también podemos jugar con fuego."
 
 #: siegeOfDwarfenwall.xml:1106
 msgid "Silence!"
@@ -717,253 +756,266 @@ msgstr "¡Silencio!"
 
 #: siegeOfDwarfenwall.xml:2212
 msgid "So what."
-msgstr ""
+msgstr "Y qué."
 
 #: siegeOfDwarfenwall.xml:1136
 msgid "Something is going on over there."
-msgstr ""
+msgstr "Algo está pasando por allí."
 
 #: siegeOfDwarfenwall.xml:2531
 msgid "Still, I can handle such a loss."
-msgstr ""
+msgstr "Aún así, puedo lidiar con esa pérdida."
 
 #: siegeOfDwarfenwall.xml:1063
 msgid "Stop scoffing and do whatever it is you're planing."
-msgstr ""
+msgstr "Déjate de burlas y haz lo que sea que estés planeando."
 
 #: siegeOfDwarfenwall.xml:2525
 msgid ""
 "Sure, you are immortal, or at least they say so, but you do feel pain, don't "
 "you?"
 msgstr ""
+"Seguro que eres inmortal, o al menos eso dicen, pero sentís dolor, ¿verdad?"
 
 #: siegeOfDwarfenwall.xml:2522
 msgid ""
 "Sure, you are immortal, or at least they say so, but you do feel pain, don't "
 "you? ##solo"
 msgstr ""
+"Seguro que eres inmortal, o al menos eso dicen, pero sientes dolor, ¿verdad? "
+"##solo"
 
 #: siegeOfDwarfenwall.xml:2071
 msgid "Tear their defense into pieces."
-msgstr ""
+msgstr "Rompe su defensa en pedazos."
 
 #: siegeOfDwarfenwall.xml:2256
 msgid "Thank you for reminding me, why I cannot stand your kind."
-msgstr ""
+msgstr "Gracias por recordarme porqué no soporto a los de tu calaña."
 
 #: siegeOfDwarfenwall.xml:1833
 msgid "That doesn't matter."
-msgstr ""
+msgstr "Eso no importa."
 
 #: siegeOfDwarfenwall.xml:2065
 msgid "That explaines a lot."
-msgstr ""
+msgstr "Eso explica muchas cosas."
 
 #: siegeOfDwarfenwall.xml:163
 msgid "That proves nothing!"
-msgstr ""
+msgstr "¡Eso no demuestra nada!"
 
 #: siegeOfDwarfenwall.xml:2362
 msgid "That would be suicide."
-msgstr ""
+msgstr "Eso sería un suicidio."
 
 #: siegeOfDwarfenwall.xml:1901
 msgid "That's what I'm here for."
-msgstr ""
+msgstr "Para eso es para lo que estoy aquí."
 
 #: siegeOfDwarfenwall.xml:2058
 msgid "The Frostbringer is dead, my lord."
-msgstr ""
+msgstr "El Portador de Hielo está muerto, mi señor."
 
 #: siegeOfDwarfenwall.xml:91
 msgid "The backup."
-msgstr ""
+msgstr "El refuerzo."
 
 #: siegeOfDwarfenwall.xml:1110
 msgid "The catapults?"
-msgstr ""
+msgstr "¿Las catapultas?"
 
 #: siegeOfDwarfenwall.xml:2352
 msgid "The city is safe for the moment."
-msgstr ""
+msgstr "La ciudad está a salvo de momento."
 
 #: siegeOfDwarfenwall.xml:2540
 msgid "The elementalists are not exactly talkative, am I right?"
-msgstr ""
+msgstr "Los elementalistas no son precisamente locuaces, ¿estoy en lo cierto?"
 
 #: siegeOfDwarfenwall.xml:1661
 msgid ""
 "The humans called him the giant killer and didn't want to have anything to "
 "do with him."
 msgstr ""
+"Los humanos lo llaman el asesino gigante y no querían tener nada que ver con "
+"él."
 
 #: siegeOfDwarfenwall.xml:2281
 msgid "The lich took his time, but until now he also had no backup."
-msgstr ""
+msgstr "El lich se tomó su tiempo, pero hasta ahora tampoco tenía ningun apoyo."
 
 #: siegeOfDwarfenwall.xml:71
 msgid "The mage is much needed elsewhere."
-msgstr ""
+msgstr "El mago es mucho más necesitado en otros lugares."
 
 #: siegeOfDwarfenwall.xml:2532
 msgid "The people of Dwarfenwall will surely help me raise a new army."
 msgstr ""
+"La gente de Dwarfenwall seguro que me ayudará a levantar un nuevo ejercito."
 
 #: siegeOfDwarfenwall.xml:1897
 msgid ""
 "The road from the Grey Skyladder into this desolate and sear plain was long, "
 "you know."
 msgstr ""
+"El camino desde la montaña de Grey Skyladder en esta llanura desolada y "
+"marchita era largo, ya sabes."
 
 #: siegeOfDwarfenwall.xml:2357
 msgid "The source of the attacks is the lich!"
-msgstr ""
+msgstr "¡El origen de los ataques es el linche!"
 
 #: siegeOfDwarfenwall.xml:1658
 msgid "Their defense still holds, my lord."
-msgstr ""
+msgstr "Sus defensas aun resisten, mi señor."
 
 #: siegeOfDwarfenwall.xml:2257
 msgid "There is no big difference to normal mercenaries."
-msgstr ""
+msgstr "No hay gran diferencia con respecto a los mercenarios normales."
 
 #: siegeOfDwarfenwall.xml:2063
 msgid "There was, my lord. But it seems they are Branded Ones."
-msgstr ""
+msgstr "La había, mi señor. Pero parece que ellos son Marcados."
 
 #: siegeOfDwarfenwall.xml:1390
 msgid "There's no hurry."
-msgstr ""
+msgstr "No hay ninguna prisa."
 
 #: siegeOfDwarfenwall.xml:2370
 msgid "These people are under my direct order."
-msgstr ""
+msgstr "Esta gente está bajo mis órdenes directas."
 
 #: siegeOfDwarfenwall.xml:1137
 msgid "They are coming!"
-msgstr ""
+msgstr "¡Están viniendo!"
 
 #: siegeOfDwarfenwall.xml:195
 msgid "They are coming! The attack begins!"
-msgstr ""
+msgstr "¡Están viniendo! ¡El ataque comienza!"
 
 #: siegeOfDwarfenwall.xml:1388
 msgid "They are struggling on."
-msgstr ""
+msgstr "Están avanzando."
 
 #: siegeOfDwarfenwall.xml:176
 msgid "They are under orders of the council, it is not your decision."
-msgstr ""
+msgstr "Están bajo las órdenes del consejo, no es tu decisión."
 
 #: siegeOfDwarfenwall.xml:120
 msgid "This is your great backup?"
-msgstr ""
+msgstr "¿Es esto tu grandioso refuerzo?"
 
 #: siegeOfDwarfenwall.xml:2366
 msgid "This man is under my direct orders."
-msgstr ""
+msgstr "Este hombre está bajo mis órdenes directas."
 
 #: siegeOfDwarfenwall.xml:110 siegeOfDwarfenwall.xml:112
 msgid "This mercenary is telling the truth."
-msgstr ""
+msgstr "Estos mercenarios están diciendo la verdad."
 
 #: siegeOfDwarfenwall.xml:2368
 msgid "This woman is under my direct order."
-msgstr ""
+msgstr "Esta mujer está bajo mis órdenes directas."
 
 #: siegeOfDwarfenwall.xml:1058
 msgid ""
 "This... backup is not the only thing the council can and will do for "
 "Dwarfenwall."
 msgstr ""
+"Este... refuerzo no es lo único que el consejo puede y hará por Dwarfenwall."
 
 #: siegeOfDwarfenwall.xml:1393
 msgid "Those mages are beginning to get on my nerves."
-msgstr ""
+msgstr "Esos magos están empezando a ponerme nervioso."
 
 #: siegeOfDwarfenwall.xml:1144
 msgid "To the front with you, butcher."
-msgstr ""
+msgstr "Hasta el frente con usted, carniceros."
 
 #: siegeOfDwarfenwall.xml:1142
 msgid "To the front with you, butcher. ##solo"
-msgstr ""
+msgstr "Hasta el frente con usted, carnicero. ##solo"
 
 #: siegeOfDwarfenwall.xml:2287
 msgid "Two third of my men are dead!"
-msgstr ""
+msgstr "¡Dos tercios de mis hombres están muertos!"
 
 #: siegeOfDwarfenwall.xml:2210
+#, fuzzy
 msgid "Verdammte Branded Ones!"
-msgstr ""
+msgstr "¡Malditos Marcados!"
 
 #: siegeOfDwarfenwall.xml:1663
 msgid "Watch and learn."
-msgstr ""
+msgstr "Mira y aprende."
 
 #: siegeOfDwarfenwall.xml:1170
 msgid "Watch out!"
-msgstr ""
+msgstr "¡Cuidado!"
 
 #: siegeOfDwarfenwall.xml:2353
 msgid "We cannot rest now."
-msgstr ""
+msgstr "No podemos descansar ahora."
 
 #: siegeOfDwarfenwall.xml:2395
 msgid "We don't have time for petty arguments! Go and slay the lich!"
 msgstr ""
+"¡No tenemos tiempo para argumentos insignificantes! ¡Vé y mata al liche!"
 
 #: siegeOfDwarfenwall.xml:168
 msgid "We don't kill indiscriminately!"
-msgstr ""
+msgstr "¡No matamos indiscriminadamente!"
 
 #: siegeOfDwarfenwall.xml:2060
 msgid "We finally learned something about the backup the council sent here."
 msgstr ""
+"Al final aprendimos algo sobre el refuerzo que el Consejo nos envió aquí."
 
 #: siegeOfDwarfenwall.xml:1391
 msgid "We have time, that is our advantage."
-msgstr ""
+msgstr "Tenemos tiempo, esa es nuestra ventaja."
 
 #: siegeOfDwarfenwall.xml:64
 msgid "We have to stop the rush, that is assembling out there."
-msgstr ""
+msgstr "Tenemos que detener la carrera que está reuniéndose allí."
 
 #: siegeOfDwarfenwall.xml:161
 msgid "We just prevented the undead from passing by your city!"
-msgstr ""
+msgstr "¡Sólo evitamos que los no-muertos pasaran por tú ciudad!"
 
 #: siegeOfDwarfenwall.xml:2288
 msgid "We will never survive a second attack."
-msgstr ""
+msgstr "Nunca sobreviviremos a un segundo ataque."
 
 #: siegeOfDwarfenwall.xml:2341
 msgid "Well fought"
-msgstr ""
+msgstr "Bien luchado"
 
 #: siegeOfDwarfenwall.xml:2498
 msgid "Well well."
-msgstr ""
+msgstr "Bueno, bueno."
 
 #: siegeOfDwarfenwall.xml:127
 msgid "What do you say?"
-msgstr ""
+msgstr "¿Qué dices?"
 
 #: siegeOfDwarfenwall.xml:1894
 msgid "What is it?"
-msgstr ""
+msgstr "¿Qué es?"
 
 #: siegeOfDwarfenwall.xml:2534
+#, fuzzy
 msgid "What is this crystal your rotting masters want, banddog?"
-msgstr ""
+msgstr "¿Qué es este cristal que tus podridos amos quieren, sabueso?"
 
 #: siegeOfDwarfenwall.xml:2286
 msgid "What kind of backing?"
-msgstr ""
+msgstr "¿Qué tipo de respaldo?"
 
 #: siegeOfDwarfenwall.xml:70
 msgid "What kind of game is this?"
-msgstr ""
+msgstr "¿Qué clase de juego es este?"
 
 #: siegeOfDwarfenwall.xml:115
 msgid "What?"
@@ -971,79 +1023,82 @@ msgstr "¿Qué?"
 
 #: siegeOfDwarfenwall.xml:2711
 msgid "What? Are you kidding?"
-msgstr ""
+msgstr "¿Qué? ¿Estás bromeando?"
 
 #: siegeOfDwarfenwall.xml:61
 msgid "When he's gone the others are no problem."
-msgstr ""
+msgstr "Cuando se va los demás no son un problema."
 
 #: siegeOfDwarfenwall.xml:1029
 msgid "With the help from the capital it will succeed at last."
-msgstr ""
+msgstr "Con la ayuda de la capital lo conseguiremos al final."
 
 #: siegeOfDwarfenwall.xml:2718
 msgid "With this, the demo is officially over."
-msgstr ""
+msgstr "Con esto, la demo está oficialmente terminada."
 
 #: siegeOfDwarfenwall.xml:2269 siegeOfDwarfenwall.xml:2271
 msgid "Without your 'friend' this would look different."
-msgstr ""
+msgstr "Sin su 'amigo' esto tendría un aspecto diferente."
 
 #: siegeOfDwarfenwall.xml:2273
 msgid "Without your 'friends' this would look different."
-msgstr ""
+msgstr "Sin sus 'amigos' esto tendría un aspecto diferente."
 
 #: siegeOfDwarfenwall.xml:1900
 msgid ""
 "You are right. Could you move those really unnerving people over there out "
 "of the way?"
 msgstr ""
+"Tienes razón. ¿Puedes echar a esas gente tan irritante fuera del camino?"
 
 #: siegeOfDwarfenwall.xml:2375
 msgid "You are sending them into their sure death!"
-msgstr ""
+msgstr "¡Les estás enviando a una muerte segura!"
 
 #: siegeOfDwarfenwall.xml:1829
 msgid "You called, my lord?"
-msgstr ""
+msgstr "Llamáste, ¿mi señor?"
 
 #: siegeOfDwarfenwall.xml:151
 msgid "You cannot be prim in times like these."
-msgstr ""
+msgstr "No puedes ser estirada en tiempos como estos."
 
 #: siegeOfDwarfenwall.xml:2536
 msgid "You cannot make me angry."
-msgstr ""
+msgstr "No puedes hacerme enfadar."
 
 #: siegeOfDwarfenwall.xml:154
 msgid "You cannot trust these monsters!"
-msgstr ""
+msgstr "¡No te puedes fiar de estos monstruos!"
 
 #: siegeOfDwarfenwall.xml:148
 msgid "You make a deal with the devil to drive out the devil?"
-msgstr ""
+msgstr "¿Haces un trato con el diablo para expulsar al diablo?"
 
 #: siegeOfDwarfenwall.xml:2530
 msgid "You really smashed most of them."
-msgstr ""
+msgstr "Les has machacado a la mayoría de ellos."
 
 #: siegeOfDwarfenwall.xml:2391
 msgid "You realy are beyond help."
-msgstr ""
+msgstr "Eres realmente más que una ayuda."
 
 #: siegeOfDwarfenwall.xml:126
 msgid ""
 "You will realize the worth of our assistance, when they fall for you again "
 "and again."
 msgstr ""
+"Te darás cuenta de el valor de nuestra asistencia, cuando caigan por ti una "
+"y otra vez."
 
 #: siegeOfDwarfenwall.xml:2542
 msgid "Your talking is as foul as the rest of your body."
-msgstr ""
+msgstr "Sus habladurías son tan asquerosas como el resto de su cuerpo."
 
 #: siegeOfDwarfenwall.xml:1027
 msgid "Your time has come, pathetic humans!"
-msgstr ""
+msgstr "¡Vuestra hora ha llegado, patéticos humanos!"
 
 #: siegeOfDwarfenwall.xml:10 siegeOfDwarfenwall.xml:253
 #: siegeOfDwarfenwall.xml:2425
@@ -1060,7 +1115,7 @@ msgstr "Muralla de Dwarfenwall"
 
 #: siegeOfDwarfenwall.xml:2340
 msgid "hmpf"
-msgstr ""
+msgstr "hmpf"
 
 #: siegeOfDwarfenwall.xml:2437
 #, fuzzy
