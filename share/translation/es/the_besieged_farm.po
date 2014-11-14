@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-05-30 10:04+0200\n"
+"PO-Revision-Date: 2013-11-06 13:23+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/the_besieged_farm/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.6-dev\n"
+"X-Generator: Weblate 1.8-dev\n"
 
 #: besieged_farm.xml:23
 msgid "Ah! Are you feeling like earning the money after all?"
@@ -102,7 +102,7 @@ msgstr ""
 
 #: besieged_farm.xml:15 besieged_farm.xml:134
 msgid "Sergeant Lutterer"
-msgstr ""
+msgstr "Sargento Lutterer"
 
 #: besieged_farm.xml:112
 msgid "Thank you very much."
@@ -168,4 +168,4 @@ msgstr ""
 
 #: besieged_farm.xml:42
 msgid "aisNorthMeadow"
-msgstr "Pradera Norte"
+msgstr "Prado del Norte"
