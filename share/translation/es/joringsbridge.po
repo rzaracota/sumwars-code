@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-03 13:58+0200\n"
+"PO-Revision-Date: 2013-11-06 13:24+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/joringsbridge/es/>\n"
@@ -178,7 +178,7 @@ msgstr ""
 
 #: joringsbridge.xml:2
 msgid "Joringsbridge"
-msgstr ""
+msgstr "Puente de Joring"
 
 #: joringsbridge.xml:106
 msgid "Leave at least a handful of soldiers here."
@@ -256,7 +256,7 @@ msgstr ""
 
 #: joringsbridge.xml:133
 msgid "Sergeant Lutterer"
-msgstr ""
+msgstr "Sargento Lutterer"
 
 #: joringsbridge.xml:351 joringsbridge.xml:371
 msgid "Sergeant!"
@@ -389,7 +389,7 @@ msgstr ""
 
 #: joringsbridge.xml:325
 msgid "Who is that?"
-msgstr ""
+msgstr "¿Quén es?"
 
 #: joringsbridge.xml:278
 msgid "Who knows how many sou... goblins are walking around there!"
