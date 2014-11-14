@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-10-05 17:15+0200\n"
+"PO-Revision-Date: 2014-10-23 21:36+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/herb_collector/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.10-dev\n"
+"X-Generator: Weblate 2.0-dev\n"
 
 #: herbalist.xml:95 herbalist.xml:121
 msgid "Accept Quest?"
@@ -67,11 +67,11 @@ msgstr "Recolección de hierbas"
 
 #: herbalist.xml:88
 msgid "Here, let me give you something in return."
-msgstr "Aquí, déjame darle algo a cambio."
+msgstr "Aquí, déjeme darle algo a cambio."
 
 #: herbalist.xml:86
 msgid "Here, old women. Your berries."
-msgstr "Aquí, viejas. Sus bayas."
+msgstr "Aquí tiene, anciana. Sus bayas."
 
 #: herbalist.xml:100
 msgid "Hey there, young one!"
