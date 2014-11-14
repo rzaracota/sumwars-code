@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-25 18:38+0200\n"
-"PO-Revision-Date: 2013-11-05 00:36+0200\n"
+"PO-Revision-Date: 2013-12-29 12:59+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish <http://hosted.weblate.org/projects/sumwars/menu/es/>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.8-dev\n"
+"X-Generator: Weblate 1.9-dev\n"
 
 #: ../../src/core/damage.cpp:159 ../../src/gui/charinfo.cpp:735
 msgid "Physical"
@@ -101,7 +101,7 @@ msgstr "ignora la armadura"
 
 #: ../../src/core/damage.cpp:332 ../../src/gui/charinfo.cpp:721
 msgid "Power"
-msgstr "Poder"
+msgstr "Fuerza de ataque"
 
 #: ../../src/core/damage.cpp:344
 msgid "Chance for critical hit"
@@ -120,11 +120,11 @@ msgstr "Nivel requerido"
 
 #: ../../src/core/document.cpp:1266
 msgid "Timer"
-msgstr "Temporizador"
+msgstr "Duración"
 
 #: ../../src/core/document.cpp:1267
 msgid "Cast delay"
-msgstr "Retardo"
+msgstr "Tiempo de recarga"
 
 #: ../../src/core/item.cpp:1005 ../../src/core/item.cpp:1229
 msgid "Value"
@@ -140,7 +140,7 @@ msgstr "Clase requerida"
 
 #: ../../src/core/item.cpp:1082 ../../src/core/item.cpp:1324
 msgid " hitpoints"
-msgstr " puntos de ataque"
+msgstr " puntos de vida"
 
 #: ../../src/core/item.cpp:1082 ../../src/core/item.cpp:1090
 #: ../../src/core/item.cpp:1324 ../../src/core/item.cpp:1334
@@ -176,7 +176,7 @@ msgstr "Bloqueo"
 
 #: ../../src/core/item.cpp:1143 ../../src/core/item.cpp:1426
 msgid "max hitpoints"
-msgstr "puntos de ataque máximos"
+msgstr "puntos de vida máximos"
 
 #: ../../src/core/item.cpp:1148 ../../src/core/item.cpp:1438
 #: ../../src/gui/charinfo.cpp:681
@@ -249,7 +249,7 @@ msgstr "Posibilidad de acertar "
 
 #: ../../src/gui/charinfo.cpp:380
 msgid "Evade"
-msgstr "Huir"
+msgstr "Evasión"
 
 #: ../../src/gui/charinfo.cpp:398
 msgid "Chance to get hit by "
@@ -282,21 +282,21 @@ msgstr "Nivel"
 #: ../../src/gui/charinfo.cpp:682
 msgid "Strength increases hitpoints, melee damage and attack power."
 msgstr ""
-"La fuerza incrementa los puntos de daño, el daño cuerpo a cuerpo y la fuerza "
+"La fuerza incrementa los puntos de vida, el daño cuerpo a cuerpo y el valor "
 "de ataque."
 
 #: ../../src/gui/charinfo.cpp:686
 msgid "Dexterity increases ranged damage, attack accuracy and attack speed"
 msgstr ""
-"La destreza incrementa el daño a distancia, la precisión y la velocidad de "
-"ataque"
+"La destreza incrementa el daño por ataques a distancia, la precisión y la "
+"velocidad de ataque"
 
 #: ../../src/gui/charinfo.cpp:690
 msgid ""
 "Willpower decreases the duration and the impact of status changes \n"
 " and increases magical melee damage."
 msgstr ""
-"La fuerza de voluntad reduce la duración y el impacto de cambios de estado ↵\n"
+"La fuerza de voluntad reduce la duración y el impacto de cambios de estado \n"
 " e incrementa el daño mágico cuerpo a cuerpo."
 
 #: ../../src/gui/charinfo.cpp:693
@@ -305,7 +305,7 @@ msgstr "Poder mágico"
 
 #: ../../src/gui/charinfo.cpp:694
 msgid "Magic power increases the damage of magical attacks."
-msgstr "El poder mágico incrementa el dato de ataques mágicos."
+msgstr "El poder mágico incrementa el daño por ataques mágicos."
 
 #: ../../src/gui/charinfo.cpp:697 ../../src/gui/controlpanel.cpp:225
 msgid "Experience"
@@ -319,18 +319,18 @@ msgstr ""
 
 #: ../../src/gui/charinfo.cpp:701 ../../src/gui/controlpanel.cpp:209
 msgid "Hitpoints"
-msgstr "Puntos de ataque"
+msgstr "Puntos de vida"
 
 #: ../../src/gui/charinfo.cpp:702
 msgid "Current and maximal hitpoints."
-msgstr "Puntos de ataque actuales y máximos."
+msgstr "Puntos de vida actuales y máximos."
 
 #: ../../src/gui/charinfo.cpp:707
 msgid ""
 "Attack value determines the chance to hit enemies that can block or evade."
 msgstr ""
 "El valor de ataque determina la posibilidad de acertar a los oponentes que "
-"puedan bloquear o huir."
+"puedan bloquear o evadir un ataque."
 
 #: ../../src/gui/charinfo.cpp:711
 msgid "Attacks/s"
@@ -346,7 +346,8 @@ msgstr "Alcance del arma en metros."
 
 #: ../../src/gui/charinfo.cpp:722
 msgid "Attack power influences the damage dealt to armored enemies."
-msgstr "El poder mágico influye sobre el daño realizado en armaduras enemigas."
+msgstr ""
+"La fuerza de ataque influye sobre el daño realizado en armaduras enemigas."
 
 #: ../../src/gui/charinfo.cpp:727
 msgid "Armor reduces the damage of physical attacks."
@@ -356,7 +357,7 @@ msgstr "La armadura reduce el daño de ataques físicos."
 msgid ""
 "Block value determines the chance to avoid damage from physical attacks."
 msgstr ""
-"El valor de bloqueo determina la posibilidad de evitar daño de ataques "
+"El valor de evasión determina la posibilidad de eludir daño de ataques "
 "físicos."
 
 #: ../../src/gui/controlpanel.cpp:435 ../../src/gui/mainmenu.cpp:170
@@ -385,7 +386,7 @@ msgstr "Personaje"
 #: ../../src/gui/controlpanel.cpp:450 ../../src/gui/optionswindow.cpp:479
 #: ../../src/gui/skilltree.cpp:637 ../../src/gui/skilltree.cpp:644
 msgid "Skilltree"
-msgstr "Arbol de habilidades"
+msgstr "Árbol de habilidades"
 
 #: ../../src/gui/controlpanel.cpp:453
 msgid "Party"
@@ -446,7 +447,7 @@ msgstr "Unirse a partida"
 
 #: ../../src/gui/mainmenu.cpp:164 ../../src/gui/mainmenu.cpp:193
 msgid "Host game"
-msgstr "Juego anfitrión"
+msgstr "Crear partida"
 
 #: ../../src/gui/mainmenu.cpp:167 ../../src/gui/mainmenu.cpp:200
 msgid "Credits"
@@ -473,7 +474,7 @@ msgstr "No"
 #: ../../src/gui/networkwindows.cpp:291 ../../src/gui/optionswindow.cpp:537
 #: ../../src/gui/tradewindow.cpp:310
 msgid "Ok"
-msgstr "Bien"
+msgstr "Aceptar"
 
 #: ../../src/gui/messageboxes.cpp:59
 msgid "Abort"
@@ -497,7 +498,7 @@ msgstr "Puerto"
 
 #: ../../src/gui/networkwindows.cpp:302 ../../src/gui/networkwindows.cpp:307
 msgid "Join_game"
-msgstr "Unirse_a_partida"
+msgstr "Unirse a partida"
 
 #: ../../src/gui/networkwindows.cpp:311
 msgid "Host"
@@ -701,15 +702,15 @@ msgstr ""
 
 #: ../../src/gui/questinfo.cpp:186
 msgid "open"
-msgstr "abrir"
+msgstr "abiertas"
 
 #: ../../src/gui/questinfo.cpp:189
 msgid "finished"
-msgstr "finalizado"
+msgstr "finalizadas"
 
 #: ../../src/gui/questinfo.cpp:192
 msgid "failed"
-msgstr "falló"
+msgstr "fallidas"
 
 #: ../../src/gui/skilltree.cpp:629
 msgid "Skillpoints"
@@ -737,7 +738,7 @@ msgstr "guerrero"
 
 #: playerclasses.xml:40
 msgid "fencer"
-msgstr "esgrimidor"
+msgstr "esgrimidora"
 
 #: playerclasses.xml:42
 msgid "Fighting skills"
@@ -785,7 +786,7 @@ msgstr "guardabosques"
 
 #: playerclasses.xml:268
 msgid "archer"
-msgstr "arquero"
+msgstr "arquera"
 
 #: playerclasses.xml:270
 msgid "Hunter magic"
