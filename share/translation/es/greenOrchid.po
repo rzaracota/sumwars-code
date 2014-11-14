@@ -1,24 +1,24 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-18 10:29+0200\n"
+"PO-Revision-Date: 2014-10-01 21:54+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
-"<http://hosted.weblate.org/projects/sumwars/greenorchid/es/>\n"
+"<https://hosted.weblate.org/projects/sumwars/greenorchid/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.9-dev\n"
+"X-Generator: Weblate 1.10-dev\n"
 
 #: greenOrchid.xml:63
 msgid "(It's just a stupid hat. No harm done.)"
-msgstr "(Es sólo un estúpido sombrero. No ha hecho ningún daño.)"
+msgstr "(Sólo es un estúpido sombrero. No hace ningún daño)"
 
 #: greenOrchid.xml:62
 msgid "(Not exactly what I meant, but oh well.)"
-msgstr "(No es exactamente lo que quería decir, pero bueno.)"
+msgstr "(No es eso exactamente a lo que me refería, pero bueno)"
 
 #: greenOrchid.xml:140
 msgid "Another stupid thing to carry around."
@@ -92,7 +92,7 @@ msgstr "¡Hey!, pareces un erudito."
 
 #: greenOrchid.xml:54
 msgid "Hm, I somehow like you."
-msgstr "Hmm, de alguna manera me gustas."
+msgstr "Hmm, de algún modo me caes bien."
 
 #: greenOrchid.xml:128
 msgid "I can put you out of your misery if you like."
@@ -162,7 +162,7 @@ msgstr ""
 
 #: greenOrchid.xml:56
 msgid "If I find one, I'll give it to you."
-msgstr "Si encuentro uno, te lo daré."
+msgstr "Si encuentro una, te la daré."
 
 #: greenOrchid.xml:131
 msgid "If only I hadn't lost my hat. I can handle anything with a good hat."
@@ -217,7 +217,7 @@ msgstr "No"
 
 #: greenOrchid.xml:60
 msgid "No problem, girl, but this is really not necessary."
-msgstr "Sin problema, pequeña, pero esto no es realmente necesario."
+msgstr "Sin problema, pequeña, pero esto es realmente innecesario."
 
 #: greenOrchid.xml:170
 msgid "No, this can't be real."
@@ -246,7 +246,7 @@ msgstr "Reba"
 
 #: greenOrchid.xml:31
 msgid "Say, perhaps you can look for it on your travels?"
-msgstr "Diga, quizás puedas buscarla en tus viajes."
+msgstr "Dime, ¿podrías buscarla durante tus excursiones?"
 
 #: greenOrchid.xml:138
 msgid "Take it instead."
@@ -296,7 +296,7 @@ msgstr "¿Qué es lo que buscas?"
 
 #: greenOrchid.xml:57
 msgid "Wow, thanks!"
-msgstr "¡Uau, gracias!"
+msgstr "¡Vaya, gracias!"
 
 #: greenOrchid.xml:33 greenOrchid.xml:40
 msgid "Yes"
