@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-03-06 01:32+0200\n"
+"PO-Revision-Date: 2014-03-06 13:59+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
@@ -2416,7 +2416,7 @@ msgstr "Comprar pergaminos vacíos"
 
 #: npc.xml:56
 msgid "Access stash"
-msgstr "Alijo de acceso"
+msgstr "Acceder a alijo"
 
 #: npc.xml:59
 msgid "The Lost Trader"
