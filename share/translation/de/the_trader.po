@@ -7,14 +7,16 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2010-08-31 17:29+0200\n"
-"Last-Translator: kalimgard <kalimgard@users.sourceforge.net>\n"
-"Language-Team: german <de@sumwars>\n"
+"PO-Revision-Date: 2013-11-05 10:34+0200\n"
+"Last-Translator: Michal Čihař <michal@cihar.com>\n"
+"Language-Team: German "
+"<http://hosted.weblate.org/projects/sumwars/the_trader/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 1.8-dev\n"
 
 #: theTrader.xml:2 theTrader.xml:124 theTrader.xml:262 theTrader.xml:300
 msgid "The Trader"
@@ -41,9 +43,8 @@ msgid "A moment, dear madam."
 msgstr "Einen Augenblick, ehrenwerte Dame."
 
 #: theTrader.xml:74
-#, fuzzy
 msgid "A moment, dear sir."
-msgstr "Einen Augenblick, ehrenwerte Herren."
+msgstr "Einen Augenblick, ehrenwerte Herr."
 
 #: theTrader.xml:76
 msgid "A moment, dear ladies."
