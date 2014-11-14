@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-09 15:49+0200\n"
+"PO-Revision-Date: 2013-11-18 22:06+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.8\n"
+"X-Generator: Weblate 1.9-dev\n"
 
 #: aisen.xml:6
 msgid "aisMeadow"
@@ -42,7 +42,7 @@ msgstr "Llanura de piedra"
 
 #: aisen.xml:300
 msgid "aisDarkClearing"
-msgstr ""
+msgstr "Claro de Tinieblas"
 
 #: aisen.xml:341
 msgid "aisWideHeath"
@@ -791,7 +791,6 @@ msgid "Derred"
 msgstr "Derred"
 
 #: councilNPCStats.xml:90 councilNPCStats.xml:290 npc.xml:16
-#, fuzzy
 msgid "Soren Windclaw"
 msgstr "Soren Windclaw"
 
