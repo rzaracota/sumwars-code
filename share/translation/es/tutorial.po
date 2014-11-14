@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-03-06 01:02+0200\n"
+"PO-Revision-Date: 2014-03-06 01:03+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/tutorial/es/>\n"
@@ -961,7 +961,7 @@ msgid ""
 "requests your presence. ##solo"
 msgstr ""
 "Por favor, disculpe si su llegada ha sido un tanto desagradable. El Señor "
-"Maestro Soren Windclaw requiere su presencia. ##solo"
+"Maestro Soren Garra de Viento requiere su presencia. ##solo"
 
 #: tutorial.xml:651
 msgid "Please!"
@@ -1103,8 +1103,8 @@ msgid ""
 "The Lord Master Windclaw feared that you would kill yourself after your "
 "arrival in order to escape, so he took... measures."
 msgstr ""
-"El Señor Maestro Windclaw temió que se automutilara tras su llegada para "
-"poder escapar, así que tomó... medidas."
+"El Señor Maestro Garra de Viento temió que se automutilara tras su llegada "
+"para poder escapar, así que tomó... medidas."
 
 #: tutorial.xml:2080
 msgid "The Lord Master didn't say anything about that..."
