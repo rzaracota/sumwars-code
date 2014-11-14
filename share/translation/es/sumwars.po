@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-07 19:40+0200\n"
+"PO-Revision-Date: 2013-11-09 15:49+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 
 #: aisen.xml:6
 msgid "aisMeadow"
-msgstr ""
+msgstr "Pradera de Aisen"
 
 #: aisen.xml:52
 msgid "aisPlains"
@@ -2384,7 +2384,7 @@ msgstr "Fantasma Maylons"
 
 #: npc.xml:22
 msgid "Gab Resh"
-msgstr ""
+msgstr "Gab Resh"
 
 #: npc.xml:28
 msgid "Maga Convocatis Darna Eistaucher"
