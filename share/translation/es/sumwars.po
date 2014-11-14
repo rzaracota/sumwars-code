@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-10-02 23:46+0200\n"
+"PO-Revision-Date: 2014-10-23 21:00+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.10-dev\n"
+"X-Generator: Weblate 2.0-dev\n"
 
 #: aisen.xml:6
 msgid "aisMeadow"
@@ -1214,7 +1214,7 @@ msgstr "Marblak"
 
 #: goblinStats.xml:897
 msgid "goblin youngling"
-msgstr "jovenzuelo gublin"
+msgstr "jovenzuelo gúblin"
 
 #: goblinStats.xml:943
 msgid "Gab'Resh"
