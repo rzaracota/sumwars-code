@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-25 18:38+0200\n"
-"PO-Revision-Date: 2014-03-06 13:53+0200\n"
+"PO-Revision-Date: 2014-03-07 01:29+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/menu/es/>\n"
@@ -436,7 +436,7 @@ msgstr "Señalado por ratón:\n"
 
 #: ../../src/gui/itemwindow.cpp:381
 msgid "Attached:\n"
-msgstr "Unido:\n"
+msgstr "Agarrado al ratón:\n"
 
 #: ../../src/gui/mainmenu.cpp:158 ../../src/gui/mainmenu.cpp:179
 msgid "Single player"
