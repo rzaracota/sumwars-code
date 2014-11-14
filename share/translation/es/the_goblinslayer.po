@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-06-01 13:46+0200\n"
+"PO-Revision-Date: 2013-11-08 09:04+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/the_goblinslayer/es/>\n"
@@ -10,43 +10,43 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.6-dev\n"
+"X-Generator: Weblate 1.8\n"
 
 #: goblins.xml:36
 msgid "Accept the quest?"
-msgstr ""
+msgstr "¿Aceptas la misión?"
 
 #: goblins.xml:19
 msgid "Goblins"
-msgstr ""
+msgstr "Gublins"
 
 #: goblins.xml:43
 msgid "Goblins (reward)"
-msgstr ""
+msgstr "Gublins (recompensa)"
 
 #: goblins.xml:61
 msgid "Have fun then."
-msgstr ""
+msgstr "Que te entretengas entonces."
 
 #: goblins.xml:26
 msgid "I have killed them all."
-msgstr ""
+msgstr "Los he matado a todos."
 
 #: goblins.xml:34
 msgid "If you kill 10 of 'em, I'll give you a precious reward."
-msgstr ""
+msgstr "Si matas a 10 de ellos te daré una valiosa recompensa."
 
 #: goblins.xml:35
 msgid "Interested?"
-msgstr ""
+msgstr "¿Te interesa?"
 
 #: goblins.xml:30
 msgid "Leave me alone and kill some more goblins."
-msgstr ""
+msgstr "Déjame en paz y mata algunos gublins más."
 
 #: goblins.xml:60
 msgid "Nearly done."
-msgstr ""
+msgstr "Falta poco."
 
 #: goblins.xml:38
 msgid "No"
@@ -54,7 +54,7 @@ msgstr "No"
 
 #: goblins.xml:50
 msgid "Of course!"
-msgstr ""
+msgstr "¡Por supuesto!"
 
 #: goblins.xml:9
 msgid "Quest finished"
@@ -62,19 +62,19 @@ msgstr "Misión finalizada"
 
 #: goblins.xml:2
 msgid "The goblinslayer"
-msgstr ""
+msgstr "El asesino de gublins"
 
 #: goblins.xml:51
 msgid "Then I'll give you this goblin club. Be happy."
-msgstr ""
+msgstr "Entonces te daré este garrote de gublin. Sé feliz."
 
 #: goblins.xml:33
 msgid "There are some stupid goblins pissing me off."
-msgstr ""
+msgstr "Hay algunos gublins estúpidos que me están haciendo enojar."
 
 #: goblins.xml:27
 msgid "Wow... you're a real hero, aren't ya?"
-msgstr ""
+msgstr "Wow... eres un héroe de verdad, ¿no es cierto?"
 
 #: goblins.xml:37
 msgid "Yes"
@@ -82,16 +82,16 @@ msgstr "Sí"
 
 #: goblins.xml:49
 msgid "You want a second reward?"
-msgstr ""
+msgstr "¿Quieres una segunda recompensa?"
 
 #: goblins.xml:18
 msgid "peasant"
-msgstr ""
+msgstr "campesino"
 
 #: goblins.xml:90
 msgid "region1"
-msgstr ""
+msgstr "región1"
 
 #: goblins.xml:12
 msgid "you killed enough goblins"
-msgstr ""
+msgstr "has matado suficientes gublins"
