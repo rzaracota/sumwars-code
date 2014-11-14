@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-03-06 02:33+0200\n"
+"PO-Revision-Date: 2014-10-23 21:41+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/the_trader/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.9-dev\n"
+"X-Generator: Weblate 2.0-dev\n"
 
 #: theTrader.xml:199
 msgid ""
@@ -359,8 +359,8 @@ msgid ""
 "Well, I noticed you were headed north, and I thought it would be convenient "
 "for you to know I'm nearby."
 msgstr ""
-"Bueno, he visto que te diriges al norte, y he creído conveniente hacerte "
-"saber de mi presencia."
+"Bueno, advertí que te dirigías al norte, y creí conveniente hacerte saber de "
+"mi presencia."
 
 #: theTrader.xml:92
 msgid "Well, I want to say I'd like to lend you my services."
