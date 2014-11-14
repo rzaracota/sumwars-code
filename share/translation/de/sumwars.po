@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2013-11-01 15:55+0200\n"
-"Last-Translator: Stefan Stammberger <some.fusion@gmail.com>\n"
+"PO-Revision-Date: 2014-05-18 09:48+0200\n"
+"Last-Translator: Sven Mäurer <maeurer.sven@gmail.com>\n"
 "Language-Team: German "
-"<http://hosted.weblate.org/projects/sumwars/sumwars/de/>\n"
+"<https://hosted.weblate.org/projects/sumwars/sumwars/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.8-dev\n"
+"X-Generator: Weblate 1.9\n"
 
 #: aisen.xml:6
 msgid "aisMeadow"
@@ -714,7 +714,7 @@ msgstr "sterben"
 
 #: base_abilities.xml:19
 msgid "first action that is performed by a summoned monster"
-msgstr ""
+msgstr "erste Aktion, die von einem heraufbeschworenem Monster ausgeführt wird"
 
 #: base_abilities.xml:19
 msgid "summoned"
@@ -722,7 +722,7 @@ msgstr "beschworen"
 
 #: base_abilities.xml:28
 msgid "no action"
-msgstr ""
+msgstr "keine Aktion"
 
 #: base_abilities.xml:37
 msgid "speak"
