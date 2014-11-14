@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-07 12:54+0200\n"
+"PO-Revision-Date: 2013-11-08 11:06+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/defend_dwarfenwall/es/>\n"
@@ -306,7 +306,7 @@ msgstr ""
 
 #: siegeOfDwarfenwall.xml:2518 siegeOfDwarfenwall.xml:2551
 msgid "Harvest!"
-msgstr ""
+msgstr "¡Cosecha!"
 
 #: siegeOfDwarfenwall.xml:2358
 msgid "He has to be destroyed!"
