@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-03 21:41+0200\n"
+"PO-Revision-Date: 2013-12-29 15:05+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/tutorial/es/>\n"
@@ -10,15 +10,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.8-dev\n"
+"X-Generator: Weblate 1.9-dev\n"
 
 #: tutorial.xml:1845
 msgid "'course. Send the Branded One first.##female"
-msgstr "Por supuesto. Envía a la forajida primero.##female"
+msgstr "Por supuesto. Envía a La Marcada primero.##female"
 
 #: tutorial.xml:1847
 msgid "'course. Send the Branded One first.##male"
-msgstr "Por supuesto. Envía al forajido primero.##male"
+msgstr "Por supuesto. Envía al Marcado primero.##male"
 
 #: tutorial.xml:229
 msgid "*urgh*"
@@ -30,7 +30,7 @@ msgstr "..."
 
 #: tutorial.xml:773
 msgid "... just back there with all the junk."
-msgstr "... acabo de volver de allá con toda la chatarra."
+msgstr "... sólo regreso ahí con toda la chatarra."
 
 #: tutorial.xml:787
 msgid ""
@@ -70,7 +70,7 @@ msgstr "Otra vez."
 
 #: tutorial.xml:765
 msgid "Akeran must truly hate you..."
-msgstr "Verdaderamente, Akeran debe de odiarte..."
+msgstr "Francamente, Akeran debe de odiarle..."
 
 #: tutorial.xml:1466
 msgid "Akeran protects, Akeran guides."
@@ -83,8 +83,8 @@ msgstr "¡Akeran!"
 #: tutorial.xml:714
 msgid "Akeran's Shield! That THING is free! Back everyone! Go, go, go!"
 msgstr ""
-"¡Escudo de Akeran!¡Esa COSA está libre!¡Atrás todo el mundo!¡Vamos, vamos, "
-"vamos!"
+"¡Akeran protegeme! ¡Esa COSA está libre! ¡Todo el mundo atrás! ¡Vamos, "
+"vamos, vamos!"
 
 #: tutorial.xml:1732
 msgid "Akerans Flaming Eyes, look over there!"
@@ -138,15 +138,15 @@ msgstr "¿Está bien allá abajo? ##solo"
 
 #: tutorial.xml:754
 msgid "Are you blind? The beast is gigantic!"
-msgstr "¿Estás ciego?¡La bestia es gigantesca!"
+msgstr "¿Estáis ciego? ¡Esa bestia es gigantesca!"
 
 #: tutorial.xml:302
 msgid "Are you kidding me? Who the hell is this windpaw?"
-msgstr "¿Estás bromeando?¿Quién demonios es este pata de viento?"
+msgstr "¿Me estás bromeando? ¿Quién demonios es ese tal Windclaw?"
 
 #: tutorial.xml:300
 msgid "Are you kidding us? Who the hell is this windpaw?"
-msgstr "¿Nos estás bromeando?¿Quién demonios es ese pata de viento?"
+msgstr "¿Nos estás bromeando? ¿Quién demonios es ese tal Windclaw?"
 
 #: tutorial.xml:1010
 msgid "Are you looking for trouble, weakling?!"
@@ -202,7 +202,7 @@ msgstr ""
 
 #: tutorial.xml:359
 msgid "Council? The Council of Summoners?! Is this Aisen?"
-msgstr "¿Consejo? El Consejo de invocadores?! ¿Es esto Aisen?"
+msgstr "¿Consejo? !¿El Consejo de invocadores?! ¿Es esto Aisen?"
 
 #: tutorial.xml:2090
 msgid ""
@@ -270,11 +270,11 @@ msgstr ""
 
 #: tutorial.xml:339
 msgid "Don't worry. We have strict orders not to kill you."
-msgstr "No te preocupes. Tenemos ordenes estrictas de no mataros."
+msgstr "No se preocupen. Tenemos ordenes estrictas de no mataros."
 
 #: tutorial.xml:337
 msgid "Don't worry. We have strict orders not to kill you. ##solo"
-msgstr "No te preocupes. Tenemos ordenes estrictas de no matarte. ##solo"
+msgstr "No se preocupe. Tenemos ordenes estrictas de no mataros. ##solo"
 
 #: tutorial.xml:650
 msgid "Dont let me die!"
@@ -282,7 +282,7 @@ msgstr "¡No me dejes morir!"
 
 #: tutorial.xml:757
 msgid "Er yes... about that..."
-msgstr "Ehm sí... sobre que..."
+msgstr "Ehh sí... acerca de eso..."
 
 #: tutorial.xml:785
 msgid ""
@@ -301,8 +301,8 @@ msgid ""
 "Er... Lord Master Windclaw feared that there could be a situation in which "
 "you had to fall back to, er, force of arms."
 msgstr ""
-"Ehm... el Señor Maestro Garra de viento teme que pueda haber una situación "
-"en la que haya que recurrir a, ehm, las armas."
+"Eh... el Señor Maestro Windclaw temió que pudiera haber alguna situación en "
+"la que hubiera que recurrir a, eh, las armas."
 
 #: tutorial.xml:910
 msgid "Everyone should equip their weapons first."
@@ -371,14 +371,15 @@ msgid ""
 "Fine. Now that that's clarified I'd like to ask you all to surrender your "
 "weapons."
 msgstr ""
-"Bueno. Ahora que se está claro me gustaría pediros que entreguéis las armas."
+"Bueno. Ahora que está todo claro me gustaría pedirles que entreguen sus "
+"armas."
 
 #: tutorial.xml:348
 msgid ""
 "Fine. Now that that's clarified I'd like to ask you to surrender your "
 "weapons. ##solo"
 msgstr ""
-"Bueno. Ahora que se está claro me gustaría pedirte que entregues tus armas. "
+"Bueno. Ahora que está todo claro me gustaría pedirle que entregue sus armas. "
 "##solo"
 
 #: tutorial.xml:847
@@ -410,7 +411,7 @@ msgstr "Además vuestra llegada fue... un tanto agotadora."
 
 #: tutorial.xml:328
 msgid "Further more, your arrival was... somewhat exhausting. ##solo"
-msgstr "Además tu llegada fue... un tanto agotadora. ##solo"
+msgstr "Además su llegada fue... un tanto agotadora. ##solo"
 
 #: tutorial.xml:920
 msgid "Go in, click on it, kill it. A Branded One wouldn't forget about that."
@@ -428,7 +429,7 @@ msgstr "Entrégale tu arma a Derred."
 
 #: tutorial.xml:231
 msgid "Harad's bones!"
-msgstr "¡Los huesos de Harad!"
+msgstr "¡Por los huesos de Harad!"
 
 #: tutorial.xml:1233
 msgid "Have you ever heard of safety measures?"
@@ -547,11 +548,11 @@ msgstr "Yo soy realmente el exterminador aquí."
 
 #: tutorial.xml:649
 msgid "I will work twice as hard!"
-msgstr "¡Voy a trabajar el doble de duro!"
+msgstr "¡Trabajaré el doble de duro!"
 
 #: tutorial.xml:1062
 msgid "I wonder why this Soren knows so much about the Branded Ones..."
-msgstr "Me pregunto porqué este Soren sabe tanto sobre los forajidos..."
+msgstr "Me pregunto porqué este Soren sabe tanto sobre los Marcados..."
 
 #: tutorial.xml:775
 msgid "I wouldn't necessarily call that 'junk'."
@@ -588,16 +589,14 @@ msgid ""
 "I'm very sorry, but before that we cannot release any of you of the safety "
 "area."
 msgstr ""
-"Lo siento mucho, pero antes de eso no podemos sacaros a nadie de la zona "
-"segura."
+"Lo siento mucho, pero antes de eso no podemos sacar a nadie del área segura."
 
 #: tutorial.xml:366
 msgid ""
 "I'm very sorry, but before that we cannot release you of the safety area. "
 "##solo"
 msgstr ""
-"Lo siento mucho, pero antes de eso no puedo sacaros de la zona segura. "
-"##solo"
+"Lo siento mucho, pero antes de eso no puedo sacaros del área segura. ##solo"
 
 #: tutorial.xml:1459
 msgid ""
@@ -656,16 +655,16 @@ msgstr "En el inventario verás tus artículos. Están ordenados según su tama�
 #: tutorial.xml:764
 msgid "Instead you can resurrect where you want after your body is destroyed."
 msgstr ""
-"En cambio puedes resucitar donde quieres una vez que tu cuerpo sea "
+"En su lugar podéis resucitar donde queráis una vez que su cuerpo sea "
 "destruido."
 
 #: tutorial.xml:753
 msgid "Is this thing really that bad?"
-msgstr "¿Es esto realmente tan malo?"
+msgstr "¿De veras esa cosa es tan mala?"
 
 #: tutorial.xml:784
 msgid "It can't be all too healthy to be this smart."
-msgstr "No puede ser tan saludable para ser tan listo."
+msgstr "No puede ser todo bueno si es tan listo."
 
 #: tutorial.xml:1437
 msgid "It is through the Council's will and Akeran's wisdom."
@@ -759,8 +758,8 @@ msgstr ""
 #: tutorial.xml:441
 msgid "Just tell us by clicking on one of us, when you change your minds."
 msgstr ""
-"Simplemente dínoslo, haciendo clic sobre uno de nosotros, cuando cambiéis de "
-"idea."
+"Simplemente háganoslo saber, haciendo clic sobre uno de nosotros, cuando "
+"cambien de parecer."
 
 #: tutorial.xml:313
 msgid "Keep your head, my son. Take your time to think the answer over."
@@ -777,7 +776,7 @@ msgstr "Mata todas las huevas del behemot."
 
 #: tutorial.xml:352
 msgid "Kindly ask."
-msgstr "Solicito amablemente."
+msgstr "Lo pido amablemente."
 
 #: tutorial.xml:857
 msgid "Let us know when you're ready."
@@ -888,7 +887,7 @@ msgstr "No, Tolec. Debes decirlo con mucha más autoridad."
 
 #: tutorial.xml:440
 msgid "None of you will leave it until you surrender your weapons."
-msgstr "Ninguno de vosotros se marchará hasta que entreguéis las armas."
+msgstr "Nadie saldrá hasta que entreguen sus armas."
 
 #: tutorial.xml:652
 msgid "Noo!"
@@ -908,7 +907,7 @@ msgstr "Pues claro. Entonces, ¿dónde?"
 
 #: tutorial.xml:695
 msgid "Oh Akeran! Close the gates!"
-msgstr "¡Oh Akeran!¡Cierra las puertas!"
+msgstr "¡Por Akeran! ¡Cierren las puertas!"
 
 #: tutorial.xml:260
 msgid "Oh yes! The miraculous mental abilities of club swingers."
@@ -949,16 +948,16 @@ msgid ""
 "Please excuse your somewhat unpleasant arrival. Lord Master Soren Windclaw "
 "requests your presence."
 msgstr ""
-"Por favor, disculpe su llegada un tanto desagradable. El Señor Maestro Soren "
-"Windclaw requiere de vuestra presencia."
+"Por favor, disculpe si su llegada ha sido un tanto desagradable. El Señor "
+"Maestro Soren Windclaw requiere vuestra presencia."
 
 #: tutorial.xml:281
 msgid ""
 "Please excuse your somewhat unpleasant arrival. Lord Master Soren Windclaw "
 "requests your presence. ##solo"
 msgstr ""
-"Por favor, disculpe su llegada un tanto desagradable. El Señor Maestro Soren "
-"Windclaw requiere de tu presencia. ##solo"
+"Por favor, disculpe si su llegada ha sido un tanto desagradable. El Señor "
+"Maestro Soren Windclaw requiere su presencia. ##solo"
 
 #: tutorial.xml:651
 msgid "Please!"
@@ -984,7 +983,7 @@ msgstr "¿De veras?"
 
 #: tutorial.xml:370
 msgid "Safety area?! This is a goddamn prison!"
-msgstr "¡¿Area segura?!¡Esto es una maldita prisión!"
+msgstr "¡¿Área segura?! ¡Esto es una maldita prisión!"
 
 #: tutorial.xml:648
 msgid "Save me!"
@@ -1008,15 +1007,15 @@ msgstr "Entonces, este debe ser el laboratorio y ese el cristal"
 
 #: tutorial.xml:769
 msgid "So? I didn't wish for this ability."
-msgstr "¿Y qué? Yo no deseaba tener esta habilidad."
+msgstr "¿Y qué? Nunca deseé tener esta habilidad."
 
 #: tutorial.xml:767
 msgid "So? None of us wished for this ability."
-msgstr "¿Y qué? Ninguno de nosotros deseaba tener esta habilidad."
+msgstr "¿Y qué? Ninguno de nosotros deseamos tener esta habilidad."
 
 #: tutorial.xml:647
 msgid "Someone!"
-msgstr "¡Alguien!"
+msgstr "¡Quién sea!"
 
 #: tutorial.xml:2081
 #, fuzzy
@@ -1042,14 +1041,14 @@ msgstr "¡Ahórraros vuestra tontería elementalista y salid de mi camino!"
 #: tutorial.xml:325
 msgid "Spill it! Where are we, and who has the nerve to cross Branded Ones?!"
 msgstr ""
-"¡Derrámalo!¡¿Dónde estamos, y quién tiene el descaro de cruzarse en el "
-"camino de los forajidos?!"
+"¡Suéltalo! ¡¿Dónde estamos, y quién tiene el descaro de cruzarse en el "
+"camino de Los Marcados?!"
 
 #: tutorial.xml:806
 msgid ""
 "Surely you understand that you cannot run around here with unchecked weapons."
 msgstr ""
-"Seguramente comprendes que no puedes corretear por aquí con armas sin "
+"Seguramente comprenderéis que no puede corretear por aquí con armas fuera de "
 "control."
 
 #: tutorial.xml:400 tutorial.xml:452
@@ -1083,8 +1082,8 @@ msgstr "¡Esas cosas deben valer una fortuna!"
 #: tutorial.xml:232
 msgid "That was at least as nasty as the first years in hell! Where am I?"
 msgstr ""
-"¡Eso fue al menos tan repugnante como los primeros años en el "
-"infierno!¿Dónde estoy?"
+"¡Eso ha debido ser casi tan repugnante como pasar una temporada en el "
+"infierno! ¿Dónde estoy?"
 
 #: tutorial.xml:1238
 msgid ""
@@ -1096,14 +1095,14 @@ msgstr ""
 
 #: tutorial.xml:805
 msgid "That's why he gave us these."
-msgstr "Eso es por lo que él nos dio estos."
+msgstr "Por eso nos los dio."
 
 #: tutorial.xml:759
 msgid ""
 "The Lord Master Windclaw feared that you would kill yourself after your "
 "arrival in order to escape, so he took... measures."
 msgstr ""
-"El Señor Maestro Windclaw temió que te automutilaras tras tu llegada para "
+"El Señor Maestro Windclaw temió que se automutilara tras su llegada para "
 "poder escapar, así que tomó... medidas."
 
 #: tutorial.xml:2080
@@ -1164,7 +1163,7 @@ msgstr "Debería haber trabajadores aquí abajo."
 
 #: tutorial.xml:786
 msgid "There's a back door for feeding, and word is..."
-msgstr "Hay una puerta trasera para alimentar, y la palabra es..."
+msgstr "Hay una puerta trasera para alimentarlos, y dicen..."
 
 #: tutorial.xml:1434
 msgid "There's only one way down here?!"
@@ -1222,14 +1221,14 @@ msgstr "Este hombre está poniendo a prueba mi paciencia."
 msgid ""
 "To Harad! That's impossible to put up with. Give me my weapon and I'll take "
 "care of that."
-msgstr "¡A Harad! Eso es imposible de soportar. Dame mi arma y yo me encargaré."
+msgstr "¡Por Harad! Eso no se puede soportar. Dadme mi arma y yo me encargaré."
 
 #: tutorial.xml:792
 msgid ""
 "To Harad! That's impossible to put up with. Give us our weapons and we'll "
 "take care of that."
 msgstr ""
-"¡A Harad! Eso es imposible de soportar. Dadnos nuestras armas y nosotros nos "
+"¡Por Harad! Eso no se puede soportar. Dadnos nuestras armas y nosotros nos "
 "encargaremos."
 
 #: tutorial.xml:451 tutorial.xml:873 tutorial.xml:1035 tutorial.xml:1140
@@ -1255,7 +1254,7 @@ msgstr ""
 
 #: tutorial.xml:427
 msgid "Very well. Follow me, please."
-msgstr "Muy bien. Sígueme, por favor."
+msgstr "Muy bien. Sígame, por favor."
 
 #: tutorial.xml:941
 msgid "Very well. Just cover our backs while we try to open the hatch. "
@@ -1293,16 +1292,19 @@ msgstr "Somos gente atrapada aquí abajo, eso es quiénes somos."
 
 #: tutorial.xml:752
 msgid "We can't pass there. What do we do now?"
-msgstr "No podemos pasar ahí. ¿Qué hacemos ahora?"
+msgstr "No podemos pasar por ahí. ¿Qué hacemos ahora?"
 
 #: tutorial.xml:356
 msgid "We cannot take any risks, and inside the council you are safe."
-msgstr "No podemos tomar ningún riesgo, y dentro del consejo estáis a salvo."
+msgstr ""
+"No podemos correr ningún riesgo, y además dentro del consejo estarán a "
+"salvo."
 
 #: tutorial.xml:354
 msgid "We cannot take any risks, and inside the council you are safe. ##solo"
 msgstr ""
-"No podemos tomar ningún riesgo, y dentro del consejo estás a salvo. ##solo"
+"No podemos correr ningún riesgo, y además dentro del consejo estaréis a "
+"salvo. ##solo"
 
 #: tutorial.xml:2094
 msgid "We truly are the exterminators here."
@@ -1324,25 +1326,24 @@ msgid ""
 "Well, as you are now, you can only do that at places of great magical "
 "concentrations. In other words..."
 msgstr ""
-"Bien, tal como eres ahora, sólo puedes hacer eso en lugares de grandes "
+"Bien, con lo que sois ahora, sólo podéis hacer eso en lugares de grandes "
 "concentraciones mágicas. En otras palabras..."
 
 #: tutorial.xml:298
 msgid "Well, if you would follow us, please?"
-msgstr "Bien, ¿si pudieras seguirnos, por favor?"
+msgstr "Bien, ¿si pudiera seguirnos, por favor?"
 
 #: tutorial.xml:331
 msgid ""
 "Well, the Lord Master has affirmed that he will explain everything in detail "
 "to you."
-msgstr "Bien, el Señor Maestro ha afirmado que os explicará todo con detalle."
+msgstr "Bien, el Señor Maestro afirma que les explicará todo con detalle."
 
 #: tutorial.xml:327
 msgid ""
 "Well, the Lord Master has affirmed that he will explain everything in detail "
 "to you. ##solo"
-msgstr ""
-"Bien, el Señor Maestro ha afirmado que te explicará todo con detalle. ##solo"
+msgstr "Bien, el Señor Maestro afirma que le explicará todo con detalle. ##solo"
 
 #: tutorial.xml:1446
 msgid "Well, there might be."
@@ -1350,7 +1351,7 @@ msgstr "Bien, ahí debe de estar."
 
 #: tutorial.xml:763
 msgid "Well, we don't understand much, but it seems you don't die like us."
-msgstr "Bien, no entendemos mucho, pero parece que no morís como nosotros."
+msgstr "Bien, no entendemos mucho, pero al parecer no morís como nosotros."
 
 #: tutorial.xml:796
 msgid "Well, you're right about that..."
@@ -1410,9 +1411,9 @@ msgid ""
 "even know how to walk anymore? Just click with the left mouse button at a "
 "place on the ground. Then it will all come back to you on its own."
 msgstr ""
-"¿Qué te retiene aquí? ¿Te ha afectado tanto el transporte que ya no sabes "
-"cómo andar? Haz clic con el botón izquierdo del ratón en algún lugar del "
-"suelo. Entonces todo volverá a usted por sí mismo."
+"¿Qué os retiene aquí? ¿Le ha afectado tanto el viaje que ya no recuerda ya "
+"cómo andar? Haga clic con el botón izquierdo del ratón en algún lugar del "
+"suelo. Entonces todo volverá a su memoria por su cuenta."
 
 #: tutorial.xml:758
 msgid "What?"
@@ -1500,8 +1501,8 @@ msgid ""
 "Yes. Considering the difficult circumstances we can do that, I guess. Here "
 "you go."
 msgstr ""
-"Sí. Considerando las circunstancias difíciles podemos hacerlo, imagino. Aquí "
-"tienes."
+"Sí. Considerando estas difíciles circunstancias podemos hacerlo, supongo. "
+"Aquí tienes."
 
 #: tutorial.xml:1053
 msgid ""
@@ -1569,15 +1570,12 @@ msgstr "Deberías equiparte primero."
 
 #: tutorial.xml:333
 msgid "You shouldn't be able to pose a threat to us at the moment."
-msgstr ""
-"No deberíais ser capaz de representar una amenaza para nosotros en este "
-"momento."
+msgstr "No deberían representar una amenaza para nosotros en este momento."
 
 #: tutorial.xml:329
 msgid "You shouldn't be able to pose a threat to us at the moment. ##solo"
 msgstr ""
-"No deberías ser capaz de representar una amenaza para nosotros en este "
-"momento. ##solo"
+"No debería representar una amenaza para nosotros en este momento. ##solo"
 
 #: tutorial.xml:916
 msgid "You still know how to fight, don't you? ##solo"
@@ -1585,7 +1583,7 @@ msgstr "Todavía sabes luchar, ¿no? ##solo"
 
 #: tutorial.xml:437
 msgid "You will not leave it until you surrender your weapon. ##solo"
-msgstr "No saldrás hasta que entregues tu arma. ##solo"
+msgstr "No saldréis hasta que entreguéis vuestra arma. ##solo"
 
 #: tutorial.xml:1865
 msgid "You'd better hope there's no trap."
