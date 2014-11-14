@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-03-06 01:03+0200\n"
+"PO-Revision-Date: 2014-03-08 19:36+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/tutorial/es/>\n"
@@ -285,7 +285,7 @@ msgstr "¡No me dejes morir!"
 
 #: tutorial.xml:757
 msgid "Er yes... about that..."
-msgstr "Ehh sí... acerca de eso..."
+msgstr "Ehm sí... en cuanto a eso..."
 
 #: tutorial.xml:785
 msgid ""
