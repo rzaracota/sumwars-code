@@ -7,14 +7,16 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-04-07 21:09+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Portuguese\n"
+"PO-Revision-Date: 2014-06-17 08:10+0200\n"
+"Last-Translator: Zoé Junior <zoejunior@gmail.com>\n"
+"Language-Team: Portuguese "
+"<https://hosted.weblate.org/projects/sumwars/the_goblinslayer/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 1.10-dev\n"
 
 #: goblins.xml:2
 msgid "The goblinslayer"
@@ -22,7 +24,7 @@ msgstr ""
 
 #: goblins.xml:9
 msgid "Quest finished"
-msgstr ""
+msgstr "Missão finalizada"
 
 #: goblins.xml:12
 msgid "you killed enough goblins"
