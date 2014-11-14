@@ -8,13 +8,17 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-25 18:38+0200\n"
-"PO-Revision-Date: 2011-10-01 00:20+0400\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2014-11-14 16:32+0200\n"
+"Last-Translator: Michal Čihař <michal@cihar.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/sumwars/menu/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 2.1-dev\n"
 
 #: ../../src/core/damage.cpp:159 ../../src/gui/charinfo.cpp:735
 msgid "Physical"
@@ -146,7 +150,7 @@ msgstr "Восстанавливает "
 
 #: ../../src/core/item.cpp:1093 ../../src/core/item.cpp:1340
 msgid "immune for "
-msgstr "устойчивость к"
+msgstr "устойчивость к "
 
 #: ../../src/core/item.cpp:1105 ../../src/core/item.cpp:1354
 msgid "Two-handed weapon"
@@ -284,7 +288,7 @@ msgstr "Сила увеличивает здоровье, урон в ближн
 
 #: ../../src/gui/charinfo.cpp:686
 msgid "Dexterity increases ranged damage, attack accuracy and attack speed"
-msgstr "Ловкость увеличивает дальний урон, точность и скорость атаки  "
+msgstr "Ловкость увеличивает дальний урон, точность и скорость атаки"
 
 #: ../../src/gui/charinfo.cpp:690
 msgid ""
@@ -300,7 +304,7 @@ msgstr "Магич. сила"
 
 #: ../../src/gui/charinfo.cpp:694
 msgid "Magic power increases the damage of magical attacks."
-msgstr "Магическая сила увеличивает урон от магических атак"
+msgstr "Магическая сила увеличивает урон от магических атак."
 
 #: ../../src/gui/charinfo.cpp:697 ../../src/gui/controlpanel.cpp:225
 msgid "Experience"
@@ -308,7 +312,7 @@ msgstr "Опыт"
 
 #: ../../src/gui/charinfo.cpp:698
 msgid "Current experience and experience necessary for next level-up."
-msgstr "Текущий опыт и опыт, необходимый для достижения следующего уровня"
+msgstr "Текущий опыт и опыт, необходимый для достижения следующего уровня."
 
 #: ../../src/gui/charinfo.cpp:701 ../../src/gui/controlpanel.cpp:209
 msgid "Hitpoints"
@@ -316,7 +320,7 @@ msgstr "Здоровье"
 
 #: ../../src/gui/charinfo.cpp:702
 msgid "Current and maximal hitpoints."
-msgstr "Текущее и максимальное здоровье"
+msgstr "Текущее и максимальное здоровье."
 
 #: ../../src/gui/charinfo.cpp:707
 msgid ""
@@ -331,11 +335,11 @@ msgstr "Атак/сек"
 
 #: ../../src/gui/charinfo.cpp:712
 msgid "Number of attacks per second."
-msgstr "Количество ударов в секунду"
+msgstr "Количество ударов в секунду."
 
 #: ../../src/gui/charinfo.cpp:717
 msgid "Weapon Range in meters."
-msgstr "Дальность оружия в метрах"
+msgstr "Дальность оружия в метрах."
 
 #: ../../src/gui/charinfo.cpp:722
 msgid "Attack power influences the damage dealt to armored enemies."
@@ -343,12 +347,12 @@ msgstr "Сила атаки влияет на урон, наносимый вр�
 
 #: ../../src/gui/charinfo.cpp:727
 msgid "Armor reduces the damage of physical attacks."
-msgstr "Доспехи снижают урон физических атак"
+msgstr "Доспехи снижают урон физических атак."
 
 #: ../../src/gui/charinfo.cpp:731
 msgid ""
 "Block value determines the chance to avoid damage from physical attacks."
-msgstr "Значение уклонения означает шанс избежать урона от физических атак"
+msgstr "Значение уклонения означает шанс избежать урона от физических атак."
 
 #: ../../src/gui/controlpanel.cpp:435 ../../src/gui/mainmenu.cpp:170
 #: ../../src/gui/mainmenu.cpp:207 ../../src/gui/optionswindow.cpp:461
@@ -389,7 +393,7 @@ msgstr "Квесты"
 
 #: ../../src/gui/inventory.cpp:472
 msgid "Drop:"
-msgstr "Выбросить"
+msgstr "Выбросить:"
 
 #: ../../src/gui/inventory.cpp:489
 msgid "Small"
