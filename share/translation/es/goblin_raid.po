@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-06 13:23+0200\n"
+"PO-Revision-Date: 2013-11-18 19:42+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/goblin_raid/es/>\n"
@@ -10,35 +10,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.8-dev\n"
+"X-Generator: Weblate 1.9-dev\n"
 
 #: goblin_raid.xml:110
 msgid "And I could care less what happens to some peasant family."
 msgstr ""
+"Y me podría importar menos aun lo que le suceda a una familia campesina."
 
 #: goblin_raid.xml:89
 msgid "As they say: One hand washes the other."
-msgstr ""
+msgstr "Tal como dicen: Una mano lava la otra y las dos lavan la cara."
 
 #: goblin_raid.xml:36 goblin_raid.xml:55
 msgid "Crude battle plans"
-msgstr ""
+msgstr "Planes de batalla crudos"
 
 #: goblin_raid.xml:91
 msgid "Do you want to help the peasant?"
-msgstr ""
+msgstr "¿Quieres ayudar al campesino?"
 
 #: goblin_raid.xml:101
 msgid "Fine, I'll wipe out those goblins for you."
-msgstr ""
+msgstr "Bien, barreré a esos gublins por ti."
 
 #: goblin_raid.xml:43
 msgid "Hey, sergeant, I found these in the woods with some goblins."
 msgstr ""
+"Eh, sargento, he encontrado estas cosas en el bosque junto a algunos "
+"gublins."
 
 #: goblin_raid.xml:62
 msgid "Hey, sergeant, ready to pay for the pre-emptive rescue of the village?"
 msgstr ""
+"Eh, sargento, ¿preparado para pagar por el rescate preventivo de la aldea?"
 
 #: goblin_raid.xml:8
 msgid ""
@@ -47,36 +51,46 @@ msgid ""
 "that party prematurely. Maybe someone official will appreciate not having "
 "hordes of goblins kicking in their doors."
 msgstr ""
+"He descubierto los planes de una incursión de gublins contra un pueblo "
+"llamado Puente de Joring. Fueron encontrados entre los restos de una tribu "
+"gublin. Supongo que me destrocé esa comitiva prematuramente. Tal vez algún "
+"oficial aprecie no tener hordas de goblins pateando sus puertas."
 
 #: goblin_raid.xml:73
+#, fuzzy
 msgid "I guess you can be trusted."
-msgstr ""
+msgstr "Supongo que se puede confiar en usted."
 
 #: goblin_raid.xml:6
 msgid ""
 "It seems the sergeant from Joringsbridge is willing to pay, but he wants me "
 "to help those peasants first. There's no trust in this world anymore."
 msgstr ""
+"Parece que el sargento de Puente de Joring está dispuesto a pagar, pero "
+"quiere que yo ayude primero a los campesinos. Ya no hay ninguna confianza en "
+"este mundo."
 
 #: goblin_raid.xml:81
 msgid "It's always a pleasure when a good deed goes rewarded."
-msgstr ""
+msgstr "Es siempre un placer cuándo una buena acción se ve recompensada."
 
 #: goblin_raid.xml:103
 msgid "Just go already."
-msgstr ""
+msgstr "Vete ya."
 
 #: goblin_raid.xml:74
 msgid "Let me thank you on behalf of the whole village."
-msgstr ""
+msgstr "Permítame agradecerle en nombre de todo el pueblo."
 
 #: goblin_raid.xml:88
 msgid "Maybe I will show some gratitude after you help Michel's family."
 msgstr ""
+"Tal vez muestre algo de gratitud después de que ayudes a la familia de "
+"Michel."
 
 #: goblin_raid.xml:46
 msgid "Meant it. Whatever."
-msgstr ""
+msgstr "Hablando en serio. Lo que sea."
 
 #: goblin_raid.xml:93
 msgid "No"
@@ -89,28 +103,34 @@ msgstr "Sargento Lutterer"
 #: goblin_raid.xml:45
 msgid "Some kind of head honcho shaman had them, so I figure they mean it."
 msgstr ""
+"Una especie de chamán mandamás los tenía, así que me imagino que es en "
+"serio."
 
 #: goblin_raid.xml:87
 msgid "Sorry, but I don't know you."
-msgstr ""
+msgstr "Perdón, pero no te conozco."
 
 #: goblin_raid.xml:95
 msgid "Then I better get back to saving helpless peasants, no?"
 msgstr ""
+"Entonces será mejor que vuelva a salvar a los campesinos indefensos, ¿no?"
 
 #: goblin_raid.xml:44
 msgid "This looks like it could be Joringsbridge. Are you sure it's reliable?"
 msgstr ""
+"Esto parece que podría ser Puente de Joring. ¿Estás seguro que es de fiar?"
 
 #: goblin_raid.xml:4
 msgid ""
 "Well, I got a little money for killing some goblins I would have wasted "
 "anyway. Not a bad day."
 msgstr ""
+"Bueno, conseguí un poco de dinero por matar a algunos gublins que habría "
+"perdido de todas formas. No es un mal día."
 
 #: goblin_raid.xml:109
 msgid "Whatever. It's not like I need the money or anything."
-msgstr ""
+msgstr "Lo que sea. No es que necesite el dinero ni nada."
 
 #: goblin_raid.xml:92
 msgid "Yes"
@@ -118,12 +138,12 @@ msgstr "Sí"
 
 #: goblin_raid.xml:102
 msgid "You do realise there's plenty more where they came from?"
-msgstr ""
+msgstr "¿Te das cuenta de que hay mucho más de donde vinieron?"
 
 #: goblin_raid.xml:11
 msgid "aisDarkClearing"
-msgstr ""
+msgstr "Claro de Tinieblas"
 
 #: goblin_raid.xml:2
 msgid "goblin_raid"
-msgstr ""
+msgstr "Redada_gublin"
