@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-03-06 00:18+0200\n"
+"PO-Revision-Date: 2014-03-06 01:32+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
@@ -1051,21 +1051,22 @@ msgid ""
 "Reverse this at once or every guard of Aisen will be on your trail, Cursed "
 "One! ##female"
 msgstr ""
-"¡Deja eso como estaba inmediatamente o todos los guardias de Aisen te "
-"perseguirán, Maldita! ##female"
+"¡Olvida eso inmediatamente o todos los guardias de Aisen te perseguirán, "
+"Maldita! ##female"
 
 #: fortify_dwarfenwall.xml
 msgid ""
 "Reverse this at once or every guard of Aisen will be on your trail, Cursed "
 "One! ##male"
 msgstr ""
-"¡Deja eso como estaba inmediatamente o todos los guardias de Aisen te "
-"perseguirán, Maldito! ##male"
+"¡Olvida eso inmediatamente o todos los guardias de Aisen te perseguirán, "
+"Maldito! ##male"
 
 #: fortify_dwarfenwall.xml
 msgid "You are better prepared to suffer the consequences, wretched creature."
 msgstr ""
-"Estás mejor preparada para sufrir las consecuencias, desdichada criatura."
+"Será mejor que te prepares para sufrir las consecuencias, desdichada "
+"criatura."
 
 #: glove.xml:4
 msgid "leather gloves"
@@ -1671,7 +1672,7 @@ msgstr ""
 
 #: joringsbridge_npc.xml:189
 msgid "You are the backup sent by Lord Master Windclaw, arn't you?"
-msgstr "Eres el refuerzo que mandó el Señor Maestro Windclaw, ¿verdad?"
+msgstr "Eres el refuerzo que mandó el Señor Maestro Garra de Viento, ¿verdad?"
 
 #: joringsbridge_npc.xml:190
 msgid ""
