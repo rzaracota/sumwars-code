@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-03-06 16:44+0200\n"
+"PO-Revision-Date: 2014-03-16 22:50+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/rescue_willard/es/>\n"
@@ -227,7 +227,7 @@ msgstr "Alguien más que parece saber mucho."
 
 #: rescue_willard.xml:225
 msgid "Surely someone of your trade can always use a little money?"
-msgstr "Seguro que alguien de tu profesión siempre puede pagar en efectivo."
+msgstr "¿Seguro que alguien de tu profesión siempre puede pagar en efectivo?"
 
 #: rescue_willard.xml:111
 msgid "Surely you don't want me to bring back his corpse, do you?"
