@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-03-07 00:48+0200\n"
+"PO-Revision-Date: 2014-06-03 22:15+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.9-dev\n"
+"X-Generator: Weblate 1.10-dev\n"
 
 #: aisen.xml:6
 msgid "aisMeadow"
@@ -3092,7 +3092,7 @@ msgstr "bastón de hada"
 
 #: staff.xml:1154
 msgid "ifreet staff"
-msgstr ""
+msgstr "bastón ifrit"
 
 #: staff.xml:1186
 msgid "icewitch staff"
@@ -3229,7 +3229,7 @@ msgstr ""
 
 #: swords2h.xml:424
 msgid "aisener battle sword"
-msgstr ""
+msgstr "Espada de guerra aisenita"
 
 #: swords2h.xml:462
 msgid "monster sword"
@@ -3257,7 +3257,7 @@ msgstr "espada de ángel"
 
 #: testregions.xml:47
 msgid "maptest"
-msgstr ""
+msgstr "mapa de prueba"
 
 #: testregions.xml:67
 msgid "sandbox"
@@ -3277,7 +3277,7 @@ msgstr "región0"
 
 #: testregions.xml:611
 msgid "testregion"
-msgstr ""
+msgstr "región de prueba"
 
 #: testregions.xml:624
 msgid "region1"
