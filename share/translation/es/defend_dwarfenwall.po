@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-11 22:01+0200\n"
+"PO-Revision-Date: 2013-11-15 22:27+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/defend_dwarfenwall/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.8\n"
+"X-Generator: Weblate 1.9-dev\n"
 
 #: siegeOfDwarfenwall.xml:217 siegeOfDwarfenwall.xml:2211
 #: siegeOfDwarfenwall.xml:2538
@@ -156,116 +156,122 @@ msgid ""
 "But even they will not be able to hold the city once the wretched humans are "
 "gone."
 msgstr ""
+"Pero hasta ellos serían incapaces de contener la ciudad una vez se vayan "
+"esos seres miserables."
 
 #: siegeOfDwarfenwall.xml:1105
 msgid "But how will we attack the city now? She blocked the path for our army."
 msgstr ""
+"Pero, ¿cómo atacaremos la ciudad ahora? Ella bloqueó el camino de nuestro "
+"ejercito."
 
 #: siegeOfDwarfenwall.xml:2717
 msgid "But the gods will remember you for all eternity."
-msgstr ""
+msgstr "Pero los dioses te recordarán por toda la eternidad."
 
 #: siegeOfDwarfenwall.xml:1831
 msgid "But they are still not stable!"
-msgstr ""
+msgstr "¡Pero aun son inestables!"
 
 #: siegeOfDwarfenwall.xml:99
 msgid "But we have a war here."
-msgstr ""
+msgstr "Pero tenemos una guerra aquí."
 
 #: siegeOfDwarfenwall.xml:2279
 msgid "But we have quite some losses."
-msgstr ""
+msgstr "Pero tenemos unas cuántas pérdidas."
 
 #: siegeOfDwarfenwall.xml:1171
 msgid "Catapults!"
-msgstr ""
+msgstr "¡Catapultas!"
 
 #: siegeOfDwarfenwall.xml:2208
+#, fuzzy
 msgid "Curse on them!"
-msgstr ""
+msgstr "¡Maldición sobre ellos!"
 
 #: siegeOfDwarfenwall.xml:2209
 msgid "Cursed council-mages!"
-msgstr ""
+msgstr "¡Magos consejeros Malditos!"
 
 #: siegeOfDwarfenwall.xml:2214
 msgid "Death always wins."
-msgstr ""
+msgstr "La muerte siempre gana."
 
 #: siegeOfDwarfenwall.xml:2
 msgid "Defend Dwarfenwall"
-msgstr ""
+msgstr "Defender Dwarfenwall"
 
 #: siegeOfDwarfenwall.xml:2712
 msgid "Did you forget the defense of Dwarfenwall was only a warm-up?"
-msgstr ""
+msgstr "¿Has olvidado que la defensa de Dwarfenwall era solo un calentamiento?"
 
 #: siegeOfDwarfenwall.xml:2556
 msgid "Did you know there is quite a lot of unbound souls in the air?"
-msgstr ""
+msgstr "¿Sabíais que hay muchas almas sin consolidar en el aire?"
 
 #: siegeOfDwarfenwall.xml:2554
 msgid "Did you know there is quite a lot of unbound souls in the air? ##solo"
-msgstr ""
+msgstr "¿Sabías que hay muchas almas sin consolidar en el aire? ##solo"
 
 #: siegeOfDwarfenwall.xml:1660
+#, fuzzy
 msgid "Did you now there was a wild man here two-hundred years ago?"
-msgstr ""
+msgstr "¿Sabías que había un hombre salvaje aquí hace doscientos años?"
 
 #: siegeOfDwarfenwall.xml:2544
 msgid "Die!"
-msgstr ""
+msgstr "¡Muere!"
 
 #: siegeOfDwarfenwall.xml:2715
 msgid "Do I get money for it?"
-msgstr ""
+msgstr "¿Consigo dinero por ello?"
 
 #: siegeOfDwarfenwall.xml:2526
 msgid "Do you really want to be hacked into pieces by me over and over again?"
-msgstr ""
+msgstr "¿De veras queréis ser cortados en pedazos por mí una y otra vez?"
 
 #: siegeOfDwarfenwall.xml:2523
 msgid ""
 "Do you really want to be hacked into pieces by me over and over again? ##solo"
-msgstr ""
+msgstr "¿De veras quieres ser cortado en pedazos por mí una y otra vez? ##solo"
 
 #: siegeOfDwarfenwall.xml:1903
 msgid "Do you think I'm going to miss two villages after I got Dwarfenwall?"
-msgstr ""
+msgstr "¿Crees que voy a perder dos aldeas después de consiga Dwarfenwall?"
 
 #: siegeOfDwarfenwall.xml:152
 msgid "Do you want to live or be backup for the undead?"
-msgstr ""
+msgstr "¿Quieres vivir o formar parte de los refuerzos de los no-muertos?"
 
 #: siegeOfDwarfenwall.xml:2384
 msgid "Do you want to tell me how to use my people?"
-msgstr ""
+msgstr "¿Quieres decirme cómo usar a mi gente?"
 
 #: siegeOfDwarfenwall.xml:2399
 msgid "Don't even think about it."
-msgstr ""
+msgstr "No pienses ni siquiera en ello."
 
 #: siegeOfDwarfenwall.xml:233
 msgid "Don't trouble yourself."
-msgstr ""
+msgstr "No te compliques."
 
 #: siegeOfDwarfenwall.xml:1389
 msgid "Don't worry, my lord, we will have overrun them soon."
-msgstr ""
+msgstr "No te preocupes, mi señor, les habremos invadido pronto."
 
 #: siegeOfDwarfenwall.xml:65
 msgid "Don't worry."
-msgstr ""
+msgstr "No te preocupes."
 
 #: siegeOfDwarfenwall.xml:1028
 msgid "Dwarfenwall will finally be yours, my lord."
-msgstr ""
+msgstr "Dwarfenwall finalmente será suya, mi señor."
 
 #: siegeOfDwarfenwall.xml:2259 siegeOfDwarfenwall.xml:2282
 #: siegeOfDwarfenwall.xml:2289
 msgid "Enough of that. Let's talk in the command center."
-msgstr ""
+msgstr "Ya es suficiente. Vayamos a hablar con el centro de comando."
 
 #: siegeOfDwarfenwall.xml:84
 msgid ""
