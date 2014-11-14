@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-06 11:24+0200\n"
+"PO-Revision-Date: 2013-11-19 12:23+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/the_poolmonster/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.8-dev\n"
+"X-Generator: Weblate 1.9-dev\n"
 
 #: scene7.xml:53
 msgid "*Roar!*"
@@ -38,7 +38,7 @@ msgstr "¿Te estás poniendo sentimental ahora?"
 
 #: scene7.xml:33
 msgid "Do you really think that it"
-msgstr ""
+msgstr "¿De verdad crees que"
 
 #: scene7.xml:24
 msgid "Du kannst dich an dein Leben vor der"
@@ -77,13 +77,13 @@ msgid "Sometimes I wish,"
 msgstr "A veces me gustaría,"
 
 #: scene7.xml:15
-#, fuzzy
 msgid "Soren Windclaw"
 msgstr "Soren Windclaw"
 
 #: scene7.xml:2
+#, fuzzy
 msgid "The Poolmonster"
-msgstr ""
+msgstr "El Monstruo del Estanque"
 
 #: scene7.xml:40
 msgid "We have to go now."
@@ -95,7 +95,7 @@ msgstr "¿Qué es eso de ahí en el agua?"
 
 #: scene7.xml:36
 msgid "Why has it really"
-msgstr ""
+msgstr "¿Porqué realmente ha"
 
 #: scene7.xml:21
 msgid "Wow, thats beautiful."
