@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-03-06 22:36+0200\n"
+"PO-Revision-Date: 2014-10-03 00:24+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/fortify_dwarfenwall/es/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.9-dev\n"
+"X-Generator: Weblate 1.10-dev\n"
 
 #: fortify_dwarfenwall.xml:691
 msgid "((And that crystal, he palmed off on me...))"
@@ -811,7 +811,8 @@ msgstr "¡Garra de Viento!"
 
 #: fortify_dwarfenwall.xml:351
 msgid "With all those wimps here it's hardly worth the effort, isn't it?"
-msgstr "Con todos esos peleles aquí no vale la pena el esfuerzo, ¿no es así?"
+msgstr ""
+"Con todos esos peleles por aquí no vale la pena el esfuerzo, ¿no es así?"
 
 #: fortify_dwarfenwall.xml:380
 msgid ""
