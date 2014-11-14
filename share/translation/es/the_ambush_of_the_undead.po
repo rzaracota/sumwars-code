@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-12-29 13:33+0200\n"
+"PO-Revision-Date: 2014-03-05 21:19+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
-"<http://hosted.weblate.org/projects/sumwars/the_ambush_of_the_undead/es/>\n"
+"<https://hosted.weblate.org/projects/sumwars/the_ambush_of_the_undead/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,11 +26,11 @@ msgstr "..."
 
 #: theFissure.xml:828
 msgid "Alright, Windclaw, I'm done here."
-msgstr "Está bien, Windclaw, he terminado aquí."
+msgstr "Está bien, Garra de Viento, he terminado aquí."
 
 #: theFissure.xml:830
 msgid "Alright, Windclaw, We are done here."
-msgstr "Está bien, Windclaw, hemos terminado aquí."
+msgstr "Está bien, Garra de Viento, hemos terminado aquí."
 
 #: theFissure.xml:712 theFissure.xml:714
 msgid "Alright, go!"
@@ -95,7 +95,7 @@ msgstr "¡Vamos, esta es nuestra oportunidad!"
 
 #: theFissure.xml:900
 msgid "Curse you, Windclaw!"
-msgstr "¡Maldito seas, Windclaw!"
+msgstr "¡Maldito seas, Garra de Viento!"
 
 #: theFissure.xml:843
 msgid "Does he have any idea how painful this always is?"
