@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-06 18:32+0200\n"
+"PO-Revision-Date: 2013-11-08 19:28+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/rob_the_robber/es/>\n"
@@ -10,11 +10,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.8-dev\n"
+"X-Generator: Weblate 1.8\n"
 
 #: rob_the_robber.xml:45 rob_the_robber.xml:116
 msgid "10000 gold pieces are quite interesting for the traveling fund."
-msgstr ""
+msgstr "10.000 piezas de oro son muy interesantes para los fondos del viaje."
 
 #: rob_the_robber.xml:35 rob_the_robber.xml:106
 msgid "Accept the quest?"
@@ -22,87 +22,100 @@ msgstr "¿Aceptas la misión?"
 
 #: rob_the_robber.xml:46 rob_the_robber.xml:117
 msgid "And I'm pretty lucky myself."
-msgstr ""
+msgstr "Y soy muy afortunada."
 
 #: rob_the_robber.xml:32 rob_the_robber.xml:103
+#, fuzzy
 msgid "And Rob is plundering and murdering on."
-msgstr ""
+msgstr "Y Rob está saqueando y asesinando."
 
 #: rob_the_robber.xml:34 rob_the_robber.xml:105
 msgid "Are you interested?"
-msgstr ""
+msgstr "¿Estás interesado?"
 
 #: rob_the_robber.xml:75
 msgid ""
 "Better hope that the stories about him rising from his grave are just "
 "fairytales."
 msgstr ""
+"Mejor esperar que las historias que cuentan sobre él levantándose de su "
+"tumba sean sólo cuentos de hadas."
 
 #: rob_the_robber.xml:94
 msgid "Bring me his necklace and I give you the 10000 gold pieces."
-msgstr ""
+msgstr "Tráeme su collar y te daré 10.000 piezas de oro."
 
 #: rob_the_robber.xml:148
 msgid "But that shall not be my problem."
-msgstr ""
+msgstr "Pero eso no será problema mío."
 
 #: rob_the_robber.xml:144
 msgid "By all devils!"
-msgstr ""
+msgstr "!Por todos los demonios!"
 
 #: rob_the_robber.xml:31 rob_the_robber.xml:102
 msgid ""
 "Every time someone wants to have killed him, he winds up dead a short time "
 "later himself."
 msgstr ""
+"Cada vez que alguien quiere matarlo, termina muerto poco tiempo después él "
+"mismo."
 
 #: rob_the_robber.xml:26 rob_the_robber.xml:97
 msgid "Excuse me, sergeant, but I noticed this wanted poster."
-msgstr ""
+msgstr "Disculpe, Sargento, pero me di cuenta de este cartel de se busca."
 
 #: rob_the_robber.xml:281
 msgid "Have fun with that. If you escape hell, that is."
-msgstr ""
+msgstr "Que te diviertas con eso. Si escapas del infierno, es decir."
 
 #: rob_the_robber.xml:149
 msgid "Here are the 10000 gold pieces."
-msgstr ""
+msgstr "Aquí están las 10.000 piezas de oro."
 
 #: rob_the_robber.xml:72 rob_the_robber.xml:143
 msgid "Here is the necklace of Rob the robber."
-msgstr ""
+msgstr "Aquí está el collar de Rob el ratero."
 
 #: rob_the_robber.xml:147
 msgid "His vengeful spirit will supposedly hunt all those who hurt him."
 msgstr ""
+"Su espíritu vengativo supuestamente dará caza a todos aquellos que le hagan "
+"daño."
 
 #: rob_the_robber.xml:23
 msgid ""
 "I really should pay this guy a visit. 10000 gold pieces are not chickenfeed."
 msgstr ""
+"Ciertamente debería pagar a este tipo una visita. 10.000 piezas de oro no "
+"son limosna."
 
 #: rob_the_robber.xml:226
 msgid ""
 "I will quarter and skin everyone of you, before I throw you to the wolves!"
 msgstr ""
+"¡Descuartizaré y despellejaré a cada uno de vosotros, antes de que os eche a "
+"los lobos!"
 
 #: rob_the_robber.xml:221
 msgid "I will quarter and skin you, before I throw you to the wolves!"
-msgstr ""
+msgstr "¡Te descuartizaré y despellejaré, antes de que te eche a los lobos!"
 
 #: rob_the_robber.xml:73
 msgid "I'll be damned!"
-msgstr ""
+msgstr "¡Que me aspen!"
 
 #: rob_the_robber.xml:121
 msgid "If you can bring it to me I will believe you that Rob is dead."
-msgstr ""
+msgstr "Si puedes traerlo me creeré que Rob está muerto."
 
 #: rob_the_robber.xml:50
 msgid ""
 "If you can take it to sergeant Wober in Dwarfenwall he will believe you that "
 "Rob is dead."
 msgstr ""
+"Si te lo puedes llevar al sargento Wober en Dwarfenwall creerá que Rob está "
+"muerto."
 
 #: rob_the_robber.xml:44 rob_the_robber.xml:115
 msgid "Indeed."
@@ -112,19 +125,22 @@ msgstr "En efecto."
 msgid ""
 "Isn't a bounty of 10000 gold pieces a little bit over the top for one man?"
 msgstr ""
+"¿No son 10000 piezas de oro una recompensa demasiado grande para un sólo "
+"hombre?"
 
 #: rob_the_robber.xml:33 rob_the_robber.xml:104
 msgid "It seems he has oodles of luck, that villain."
-msgstr ""
+msgstr "Parece que tiene mucha suerte, ese villano."
 
 #: rob_the_robber.xml:58 rob_the_robber.xml:129
 msgid "Just curious."
-msgstr ""
+msgstr "Sólo por curiosidad."
 
 #: rob_the_robber.xml:270 rob_the_robber.xml:273
 msgid ""
 "My soul will crawl out of it's grave and hunt you to the ends of the world!"
 msgstr ""
+"¡Mi alma saldrá de su tumba y te perseguirán hasta los confines del mundo!"
 
 #: rob_the_robber.xml:37 rob_the_robber.xml:108
 msgid "No"
@@ -132,41 +148,47 @@ msgstr "No"
 
 #: rob_the_robber.xml:95
 msgid "Not a second earlier!"
-msgstr ""
+msgstr "¡Ni un segundo antes!"
 
 #: rob_the_robber.xml:29 rob_the_robber.xml:100
 msgid "Oh, him."
-msgstr ""
+msgstr "Oh, él."
 
 #: rob_the_robber.xml:51
 msgid ""
 "Right now we suspect him to be in the Fairywoods between here and "
 "Dwarvenwall."
 msgstr ""
+"Ahora mismo sospechamos que está en el Bosque de Hadas a medio camino entre "
+"aquí y Dwarvenwall."
 
 #: rob_the_robber.xml:122
 msgid ""
 "Right now we suspect him to be in the Fairywoods between here and "
 "Joringsbridge."
 msgstr ""
+"Ahora mismo sospechamos que está en el Bosque de Hadas a medio camino entre "
+"aquí y Puente de Joring."
 
 #: rob_the_robber.xml:133
 msgid "Rob the Robber (Reward)"
-msgstr ""
+msgstr "Rob el ratero (recompensa)"
 
 #: rob_the_robber.xml:62
 msgid "Rob the Robber killed"
-msgstr ""
+msgstr "Rob el ratero asesinado"
 
 #: rob_the_robber.xml:2
 msgid "Rob the robber"
-msgstr ""
+msgstr "Rob el ratero"
 
 #: rob_the_robber.xml:4
 msgid ""
 "Rob the robber breathed his last and provided a downright windfall while he "
 "was on it."
 msgstr ""
+"Rob el ratero dio su último suspiro y proporcionó una completa e inesperada "
+"ganancia mientras lo hacía."
 
 #: rob_the_robber.xml:6
 msgid ""
@@ -174,6 +196,9 @@ msgid ""
 "I'm on my way to Dwarfenwall to show it to this sergeant Wober. I have no "
 "idea why everyone was so afraid of this guy."
 msgstr ""
+"Rob el ratero está muerto y pronto será olvidado. Tengo su tirilla y estoy "
+"de camino a Dwarfenwall a enseñarselo al sargento Wober. No tengo ni idea de "
+"por qué todo el mundo tenía tanto miedo a este tipo."
 
 #: rob_the_robber.xml:8
 msgid ""
@@ -181,6 +206,9 @@ msgid ""
 "dispose of him and take his neckband. At least it spares me the unsavory "
 "task of carrying a head around."
 msgstr ""
+"Rob el ratero supuestamente se esconde en las profundidades del Bosque de "
+"Hadas. Encuéntralo, deshazte de él y recupera su tirilla. Por lo menos me "
+"ahorra la tarea desagradable de llevar una cabeza."
 
 #: rob_the_robber.xml:12
 msgid "Sergeant Lutterer"
@@ -192,39 +220,39 @@ msgstr "Sargento Wober"
 
 #: rob_the_robber.xml:77
 msgid "Sergeant Wober in Dwarfenwall has it."
-msgstr ""
+msgstr "El sargento Wober en Dwarfenwall lo tiene."
 
 #: rob_the_robber.xml:145
 msgid "Someone really got him?"
-msgstr ""
+msgstr "¿Alguien realmente lo consiguió?"
 
 #: rob_the_robber.xml:30 rob_the_robber.xml:101
 msgid "The bounty hunters keep their fingers off him."
-msgstr ""
+msgstr "Los cazadores de recompensas mantienen alejadas sus manos de él."
 
 #: rob_the_robber.xml:48 rob_the_robber.xml:119
 msgid "Then take his necklace."
-msgstr ""
+msgstr "Entonces tome su collar."
 
 #: rob_the_robber.xml:13 rob_the_robber.xml:84
 msgid "Wanted poster"
-msgstr ""
+msgstr "Cartel de se busca"
 
 #: rob_the_robber.xml:24
 msgid "Watch your back."
-msgstr ""
+msgstr "Cuida de tus espaldas."
 
 #: rob_the_robber.xml:146
 msgid "Well, I wish you luck."
-msgstr ""
+msgstr "Bien, le deseo suerte."
 
 #: rob_the_robber.xml:76
 msgid "What about my reward?"
-msgstr ""
+msgstr "¿Qué hay de mi recompensa?"
 
 #: rob_the_robber.xml:49 rob_the_robber.xml:120
 msgid "Word is, he treasures it quite a lot."
-msgstr ""
+msgstr "Se dice que lo atesora bastante."
 
 #: rob_the_robber.xml:36 rob_the_robber.xml:107
 msgid "Yes"
@@ -232,15 +260,15 @@ msgstr "Sí"
 
 #: rob_the_robber.xml:74
 msgid "You really got him?"
-msgstr ""
+msgstr "¿De verdad lo tienes?"
 
 #: rob_the_robber.xml:223 rob_the_robber.xml:228
 msgid "You talk too much!"
-msgstr ""
+msgstr "¡Hablas demasiado!"
 
 #: rob_the_robber.xml:248 rob_the_robber.xml:250
 msgid "You will die! I will destroy you!!"
-msgstr ""
+msgstr "¡Vas a morir! ¡Te destruiré!"
 
 #: rob_the_robber.xml:167
 msgid "aisDarkFairyforest"
