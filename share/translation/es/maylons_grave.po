@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-07 12:54+0200\n"
+"PO-Revision-Date: 2013-11-09 18:20+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/maylons_grave/es/>\n"
@@ -14,60 +14,69 @@ msgstr ""
 
 #: maylons_grave.xml:170
 msgid "A goblin who wants to talk?"
-msgstr ""
+msgstr "¿Un gublin que quiere hablar?"
 
 #: maylons_grave.xml:433
 msgid "Akerans blessing to you."
-msgstr ""
+msgstr "Akerans bendiciendote."
 
 #: maylons_grave.xml:205
 msgid "Better them than us."
-msgstr ""
+msgstr "Mejor ellos que nosotros."
 
 #: maylons_grave.xml:191
 msgid "But last moon black human came."
-msgstr ""
+msgstr "Pero llegó el último humano de la luna negra."
 
 #: maylons_grave.xml:437
 msgid "But now I have to return into the bliss of Akerans eternal oasis."
 msgstr ""
+"Pero ahora tengo que volver a la bienaventuranza del oasis eterno de "
+"Akerans."
 
 #: maylons_grave.xml:176
 msgid "Chase the goblins away"
-msgstr ""
+msgstr "Ahuyenta a los gublins"
 
 #: maylons_grave.xml:435
 msgid ""
 "For a long time now I have no use for it anymore. Choose yourself a weapon "
 "you like."
 msgstr ""
+"Hace ya mucho tiempo que deje de darle uso. Elige el arma que te guste por "
+"ti mismo."
 
 #: maylons_grave.xml:167
 msgid "Gab Resh"
-msgstr ""
+msgstr "Gab Resh"
 
 #: maylons_grave.xml:172
 msgid "Gab'Resh and his only harmless rustlers. No bandits."
-msgstr ""
+msgstr "Sólo Gab Resh y sus inofensivos ladrones. No hay bandidos."
 
 #: maylons_grave.xml:250
 msgid "Get lost, before I change my mind!"
-msgstr ""
+msgstr "¡Piérdete, antes de que cambie de idea!"
 
 #: maylons_grave.xml:210
 msgid ""
 "Get lost. I have better things to do than killing a band of pathetic goblins."
 msgstr ""
+"Piérdete. Tengo mejores cosas que hacer que matar a una pandilla de "
+"patéticos gublins."
 
 #: maylons_grave.xml:212
 msgid ""
 "Get lost. we have better things to do than killing a band of pathetic "
 "goblins."
 msgstr ""
+"Piérdete. Tenemos mejores cosas que hacer que matar a una pandilla de "
+"patéticos gublins."
 
 #: maylons_grave.xml:208
 msgid "Good warning, yes? Mighty warrior-humans let us live, no?"
 msgstr ""
+"Buena advertencia, ¿no?. Poderosos guerreros humanos nos dejan vivir, ¿no?"
 
 #: maylons_grave.xml:7
 msgid ""
@@ -75,12 +84,18 @@ msgid ""
 "were chased by a zombie. Something is going on in this grave. Maybe I should "
 "have a look at it."
 msgstr ""
+"Me encontré con algunos gublins en la tumba de Maylon quiénes balbucearon "
+"alguna tontería y fueron perseguidos por un zombi. Algo está pasando en esa "
+"tumba. Tal vez debería echar un vistazo."
 
 #: maylons_grave.xml:11
 msgid ""
 "I came across some goblins in Maylon's Grave who were chased by a zombie. "
 "Something is going on in this grave. Maybe I should take a look at it."
 msgstr ""
+"Me encontré con algunos gublins en la tumba de Maylon quiénes fueron "
+"perseguidos por un zombi. Algo está pasando en esa tumba. Tal vez debería "
+"echar un vistazo."
 
 #: maylons_grave.xml:9
 msgid ""
@@ -88,40 +103,45 @@ msgid ""
 "necromancer animated some undead down in the crypt. I should take a look at "
 "it."
 msgstr ""
+"Me encontré con algunos gublins en la tumba de Maylon. Según su chamán, un "
+"nigromante animó algunos no-muertos bajo la cripta. Debería echar un "
+"vistazo."
 
 #: maylons_grave.xml:195
 msgid "I cannot leave such a problem amidst this under-guarded region."
-msgstr ""
+msgstr "No puedo dejar este problema en medio de esta región bajo vigilancia."
 
 #: maylons_grave.xml:440
 msgid ""
 "I wander if he would have said that if he had known that he will make a "
 "detour to Harad's Hell first?"
 msgstr ""
+"Me pregunto si habría dicho que si él lo hubiera sabido habría hecho primero "
+"un desvío al infierno de Harad."
 
 #: maylons_grave.xml:175
 msgid "Listen to the goblins"
-msgstr ""
+msgstr "Escuchad a los duendes"
 
 #: maylons_grave.xml:432
 msgid "May you do many other great deeds."
-msgstr ""
+msgstr "Usted puede hacer otras muchas hazañas."
 
 #: maylons_grave.xml:2
 msgid "Maylons Grave"
-msgstr ""
+msgstr "Tumba Maylons"
 
 #: maylons_grave.xml:227
 msgid "Miserable brood! Die!"
-msgstr ""
+msgstr "¡Prole miserable! ¡Muere!"
 
 #: maylons_grave.xml:229
 msgid "Miserable brood! Slay them all!"
-msgstr ""
+msgstr "¡Prole miserable! ¡Matadlos a todos!"
 
 #: maylons_grave.xml:434
 msgid "My sarcophagus contains many remains of my mortal life."
-msgstr ""
+msgstr "Mi sarcófago contiene muchos restos de mi vida mortal."
 
 #: maylons_grave.xml:161
 msgid "No"
@@ -130,6 +150,8 @@ msgstr "No"
 #: maylons_grave.xml:190
 msgid "No humans coming, and if do, they never return from depth of cave."
 msgstr ""
+"Ningún humano viene, y si lo hace, nunca regresa de las profundidades de la "
+"cueva."
 
 #: maylons_grave.xml:192
 msgid ""
