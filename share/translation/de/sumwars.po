@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2014-05-18 09:50+0200\n"
+"PO-Revision-Date: 2014-05-18 09:53+0200\n"
 "Last-Translator: Sven Mäurer <maeurer.sven@gmail.com>\n"
 "Language-Team: German "
 "<https://hosted.weblate.org/projects/sumwars/sumwars/de/>\n"
@@ -176,7 +176,7 @@ msgstr "General Greif"
 
 #: aisenNPCStats.xml:133 npc.xml:31
 msgid "Prince Karlen"
-msgstr "Prince Karlen"
+msgstr "Prinz Karlen"
 
 #: aisenNPCStats.xml:176 npc.xml:19
 msgid "Leonard von Robenforst"
@@ -734,23 +734,23 @@ msgstr "mit jemandem sprechen"
 
 #: base_abilities.xml:51
 msgid "take item"
-msgstr ""
+msgstr "Gegenstand nehmen"
 
 #: base_abilities.xml:51
 msgid "take up item"
-msgstr ""
+msgstr "Gegenstand aufnehmen"
 
 #: base_abilities.xml:65
 msgid "use"
-msgstr ""
+msgstr "benutzen"
 
 #: base_abilities.xml:79
 msgid "walk"
-msgstr ""
+msgstr "gehen"
 
 #: base_abilities.xml:89
 msgid "guard"
-msgstr ""
+msgstr "beschützen"
 
 #: base_abilities.xml:100 dwarfcastle.xml:178 dwarfcastle.xml:181
 msgid "Attack"
