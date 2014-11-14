@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-06 13:23+0200\n"
+"PO-Revision-Date: 2013-11-08 10:30+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/the_besieged_farm/es/>\n"
@@ -10,95 +10,97 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.8-dev\n"
+"X-Generator: Weblate 1.8\n"
 
 #: besieged_farm.xml:23
 msgid "Ah! Are you feeling like earning the money after all?"
-msgstr ""
+msgstr "¡Ah! ¿Tienes ganas de ganar dinero después de todo?"
 
 #: besieged_farm.xml:135
 msgid "Brons Farm"
-msgstr ""
+msgstr "Granja Brons"
 
 #: besieged_farm.xml:31
 msgid "But I don't want to complain."
-msgstr ""
+msgstr "Pero no quiero quejarme."
 
 #: besieged_farm.xml:115
 msgid "But I will give word to my husband that we are alive and well."
-msgstr ""
+msgstr "Pero le diré a mi marido que estamos sanos y salvos."
 
 #: besieged_farm.xml:144
 msgid "But that shall be of no concern to you."
-msgstr ""
+msgstr "Pero eso no le será de interés."
 
 #: besieged_farm.xml:27
 msgid ""
 "Don't think I haven't seen you and your friend hanging around back there."
-msgstr ""
+msgstr "No creas que no te he visto a ti y tu amigo merodeando por allí."
 
 #: besieged_farm.xml:29
 msgid ""
 "Don't think I haven't seen you and your friends hanging around back there."
-msgstr ""
+msgstr "No creas que no te he visto a ti y tus amigos merodeando por allí."
 
 #: besieged_farm.xml:25
 msgid "Don't think I haven't seen you hanging around back there."
-msgstr ""
+msgstr "No creas que no te he visto merodeando por allí."
 
 #: besieged_farm.xml:145
 msgid "Here's the money."
-msgstr ""
+msgstr "Aquí tienes el dinero."
 
 #: besieged_farm.xml:116
 msgid "How so?"
-msgstr ""
+msgstr "¿Cómo es eso?"
 
 #: besieged_farm.xml:33
 msgid "I don't care how you do it, even if you gobble them raw."
-msgstr ""
+msgstr "No me importa cómo lo hagas. Como si te los comes crudos."
 
 #: besieged_farm.xml:36
 msgid "I'm on my way."
-msgstr ""
+msgstr "Voy en camino."
 
 #: besieged_farm.xml:142
 msgid "I've already heard of it."
-msgstr ""
+msgstr "Ya he oído hablar de él."
 
 #: besieged_farm.xml:141
 msgid "It's done."
-msgstr ""
+msgstr "Hecho."
 
 #: besieged_farm.xml:34
 msgid "Just kidding."
-msgstr ""
+msgstr "Sólo bromeaba."
 
 #: besieged_farm.xml:122 besieged_farm.xml:124
 msgid "Let's just go collect the money."
-msgstr ""
+msgstr "Vayamos a recoger el dinero."
 
 #: besieged_farm.xml:143
 msgid ""
 "Michel is in the tavern getting plastered - all in honor of your bravery, of "
 "course."
 msgstr ""
+"Michel está en la taberna poniéndose fino - todo en honor a tu valentía, por "
+"supuesto."
 
 #: besieged_farm.xml:118
 msgid "Of course. Silly of me."
-msgstr ""
+msgstr "Claro. Tonto de mí."
 
 #: besieged_farm.xml:114
 msgid "Our barricade is quite heavy."
-msgstr ""
+msgstr "Nuestra barricada es bastante pesada."
 
 #: besieged_farm.xml:120
 msgid "Really now, "
-msgstr ""
+msgstr "Realmente ahora, "
 
 #: besieged_farm.xml:113
 msgid "Sadly I cannot ask you in."
-msgstr ""
+msgstr "Lamentablemente no te puedo preguntar dentro."
 
 #: besieged_farm.xml:15 besieged_farm.xml:134
 msgid "Sergeant Lutterer"
@@ -106,30 +108,34 @@ msgstr "Sargento Lutterer"
 
 #: besieged_farm.xml:112
 msgid "Thank you very much."
-msgstr ""
+msgstr "Muchas gracias."
 
 #: besieged_farm.xml:88
 msgid ""
 "That should have been enough goblins. I better look after Bron's family."
 msgstr ""
+"Eso deberían ser suficientes gublins. Será mejor que haga una visita a la "
+"familia de Bron."
 
 #: besieged_farm.xml:2
 msgid "The besieged farm"
-msgstr ""
+msgstr "La granja sitiada"
 
 #: besieged_farm.xml:16
 msgid "The farm"
-msgstr ""
+msgstr "La granja"
 
 #: besieged_farm.xml:11
 msgid ""
 "The farm of a peasant named Michel Bron is besieged by goblins. His family "
 "needs help - fast."
 msgstr ""
+"La granja de un campesino llamado Michel Bron es asediada por gublins. Su "
+"familia necesita ayuda - rápido."
 
 #: besieged_farm.xml:111
 msgid "The goblins are gone. Are you alright?"
-msgstr ""
+msgstr "Los gublins se han ido. ¿Todo bien?"
 
 #: besieged_farm.xml:9
 msgid ""
@@ -137,34 +143,45 @@ msgid ""
 "knock at the door and make sure everything is all right. No peasants, no "
 "money."
 msgstr ""
+"Los gublins que rodean la granja de Bron ya no están entre los vivos más. "
+"Debería llamar a la puerta para asegurarme de que está todo bien. Sin "
+"campesinos no hay dinero."
 
 #: besieged_farm.xml:7
 msgid ""
 "The peasants are rescued and the goblins slain. It's time to collect the "
 "reward for the trouble in Joringsbridge."
 msgstr ""
+"Los campesinos están rescatados y los gublins muertos. Es hora de recoger la "
+"recompensa por el trabajo en Puente de Joring."
 
 #: besieged_farm.xml:5
 msgid ""
 "The peasants are rescued, the goblins slain, and the service paid. What more "
 "can you ask for?"
 msgstr ""
+"Los campesinos están rescatados, los gublins muertos, y el servicio pagado. "
+"¿Qué más puedes pedir?"
 
 #: besieged_farm.xml:35
 msgid "When you're done, come back to me."
-msgstr ""
+msgstr "Cuando acabes, vuelve aquí."
 
 #: besieged_farm.xml:117
 msgid ""
 "With a crytal of Avearea, of course. It's been handed down in my family for "
 "generations."
 msgstr ""
+"Con una crytal de Avearea, por supuesto. Ha sido transmitida en mi familia "
+"durante generaciones."
 
 #: besieged_farm.xml:32
 msgid ""
 "You know the drill: Get to the Northern Meadow and drive away the goblins "
 "around Bron's farm."
 msgstr ""
+"Lo de siempre: Llegar a la Pradera Norte y ahuyentar a los gublins que "
+"rodeen la granja de Bron."
 
 #: besieged_farm.xml:42
 msgid "aisNorthMeadow"
