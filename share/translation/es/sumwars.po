@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-03-06 13:59+0200\n"
+"PO-Revision-Date: 2014-03-07 00:48+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
@@ -3537,7 +3537,7 @@ msgstr "varita de archimago"
 
 #: warrior_ablt.xml:2
 msgid "Barbarian anger"
-msgstr "varita bárbara"
+msgstr "Cólera bárbara"
 
 #: warrior_ablt.xml:2
 msgid ""
