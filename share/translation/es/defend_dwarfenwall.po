@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-18 09:54+0200\n"
+"PO-Revision-Date: 2013-12-29 13:32+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/defend_dwarfenwall/es/>\n"
@@ -149,7 +149,7 @@ msgstr "¡Vagh! ¡Tus esqueletos son polvo y el lacayo no te salvará!"
 
 #: siegeOfDwarfenwall.xml:2064
 msgid "Branded Ones!"
-msgstr "¡Malditos!"
+msgstr "¡Marcados!"
 
 #: siegeOfDwarfenwall.xml:2066
 msgid ""
