@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-18 22:06+0200\n"
+"PO-Revision-Date: 2013-12-29 13:30+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/fortify_dwarfenwall/es/>\n"
@@ -66,7 +66,7 @@ msgstr "Recuerda siempre eso."
 
 #: fortify_dwarfenwall.xml:729 fortify_dwarfenwall.xml:731
 msgid "And it's Branded One."
-msgstr "Y está Marcado."
+msgstr "Y es un Marcado."
 
 #: fortify_dwarfenwall.xml:757
 msgid "And now he can't hear us anymore?"
@@ -205,7 +205,7 @@ msgstr "¿Sabes lo que pasa, si entra en contacto con la sangre de los Marcados?
 
 #: fortify_dwarfenwall.xml:774
 msgid "Does he really have the power to take Harad's curse from us?"
-msgstr "¿Realmente tiene el poder para quitarnos la maldición de Harad?"
+msgstr "¿De veras tiene el poder de quitarnos la maldición de Harad?"
 
 #: fortify_dwarfenwall.xml:752
 msgid "Don't you dare, or-"
@@ -263,7 +263,7 @@ msgid ""
 "power to release you of his claws."
 msgstr ""
 "Cumple mis órdenes para satisfacción de Akeran y del Consejo y tengo el "
-"poder para liberarte de sus garras."
+"poder de liberarte de sus garras."
 
 #: fortify_dwarfenwall.xml:714
 msgid "Guard your tongue, scum! What is that supposed to change?"
