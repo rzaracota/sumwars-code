@@ -1,20 +1,20 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-10 14:01+0200\n"
+"PO-Revision-Date: 2014-03-06 20:01+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
-"<http://hosted.weblate.org/projects/sumwars/maylons_grave/es/>\n"
+"<https://hosted.weblate.org/projects/sumwars/maylons_grave/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.8\n"
+"X-Generator: Weblate 1.9-dev\n"
 
 #: maylons_grave.xml:170
 msgid "A goblin who wants to talk?"
-msgstr "¿Un gublin que quiere hablar?"
+msgstr "¿Un gúblin que quiere hablar?"
 
 #: maylons_grave.xml:433
 msgid "Akerans blessing to you."
@@ -26,7 +26,7 @@ msgstr "Mejor ellos que nosotros."
 
 #: maylons_grave.xml:191
 msgid "But last moon black human came."
-msgstr "Pero llegó el último humano de la luna negra."
+msgstr "Pero, en pasada luna, humano oscuro venir."
 
 #: maylons_grave.xml:437
 msgid "But now I have to return into the bliss of Akerans eternal oasis."
@@ -36,7 +36,7 @@ msgstr ""
 
 #: maylons_grave.xml:176
 msgid "Chase the goblins away"
-msgstr "Ahuyenta a los gublins"
+msgstr "Ahuyentar a los gúblins"
 
 #: maylons_grave.xml:435
 msgid ""
@@ -52,7 +52,7 @@ msgstr "Gab Resh"
 
 #: maylons_grave.xml:172
 msgid "Gab'Resh and his only harmless rustlers. No bandits."
-msgstr "Sólo Gab Resh y sus inofensivos ladrones. No hay bandidos."
+msgstr "Sólo Gab Resh y sus inofensivos ladrones. No bandidos."
 
 #: maylons_grave.xml:250
 msgid "Get lost, before I change my mind!"
@@ -109,7 +109,7 @@ msgstr ""
 
 #: maylons_grave.xml:195
 msgid "I cannot leave such a problem amidst this under-guarded region."
-msgstr "No puedo dejar este problema en medio de esta región bajo vigilancia."
+msgstr "No puedo dejar este problema, en medio de esta región bajo vigilancia."
 
 #: maylons_grave.xml:440
 msgid ""
@@ -121,7 +121,7 @@ msgstr ""
 
 #: maylons_grave.xml:175
 msgid "Listen to the goblins"
-msgstr "Escuchad a los duendes"
+msgstr "Escuchar a los gúblins"
 
 #: maylons_grave.xml:432
 msgid "May you do many other great deeds."
@@ -150,26 +150,23 @@ msgstr "No"
 #: maylons_grave.xml:190
 msgid "No humans coming, and if do, they never return from depth of cave."
 msgstr ""
-"Ningún humano viene, y si lo hace, nunca regresa de las profundidades de la "
-"cueva."
+"No humano venir, y si hace, nunca regresar de las profundidades de cueva."
 
 #: maylons_grave.xml:192
-#, fuzzy
 msgid ""
 "Now horror of the depth wandering to surface, too and being after poor "
 "goblins who never not wants to steal anything."
 msgstr ""
-"Ahora el horror de la profundidad vagando a la superficie, también y después "
-"de que pobres gublins que no nunca quieren robar nada."
+"Ahora, horror de la profundidad vagando a superficie también, después de que "
+"pobres gúblins nunca querer no robar nada."
 
 #: maylons_grave.xml:201
-#, fuzzy
 msgid ""
 "Really, I should free those poor bound souls and send them off to a short "
 "brake in Harad's Hell."
 msgstr ""
-"En serio, debería liberar esas pobres almas herrantes y enviarlas al "
-"infierno de Harad a hacer un pequeño descanso."
+"En serio, debería liberar a esas pobres almas herrantes y enviarlas al "
+"infierno de Harad a tomar un pequeño descanso."
 
 #: maylons_grave.xml:203
 msgid ""
@@ -181,7 +178,7 @@ msgstr ""
 
 #: maylons_grave.xml:177
 msgid "Slay the goblins"
-msgstr "Matar a los gublins"
+msgstr "Matar a los gúblins"
 
 #: maylons_grave.xml:5
 msgid ""
@@ -202,7 +199,7 @@ msgstr "Muchas gracias por liberar a mi alma."
 
 #: maylons_grave.xml:193
 msgid "That almost sounds as if a necromancer came by."
-msgstr "Eso casi suena como si viniera un nigromante."
+msgstr "Eso suena casi como si hubiese pasado un nigromante."
 
 #: maylons_grave.xml:436
 msgid "The same holds true for your friends."
@@ -214,11 +211,11 @@ msgstr "No podemos dejar tal problema en medio de esta región bajo vigilancia."
 
 #: maylons_grave.xml:189
 msgid "We often hide here."
-msgstr "A menudo nos escondemos aquí."
+msgstr "Nosotros a menudo esconder aquí."
 
 #: maylons_grave.xml:188
 msgid "What could a goblin possibly have to say?"
-msgstr "¿Qué podría tener que decir un gublin?"
+msgstr "¿Qué podría un gúblin tener que decir?"
 
 #: maylons_grave.xml:174
 msgid "What will you do?"
@@ -238,7 +235,7 @@ msgstr "Sí. No herir, no matar."
 
 #: maylons_grave.xml:173
 msgid "You listen, yes?"
-msgstr "Tú escucha, ¿sí?"
+msgstr "Tú escuchar, ¿sí?"
 
 #: maylons_grave.xml:16 maylons_grave.xml:264
 msgid "aisMaylonsGraveEntry"
