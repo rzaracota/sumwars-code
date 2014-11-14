@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-06-03 22:15+0200\n"
+"PO-Revision-Date: 2014-08-05 22:08+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/sumwars/es/>\n"
@@ -1530,7 +1530,7 @@ msgstr "Todd"
 
 #: humans.xml:582
 msgid "Rob the Robber"
-msgstr "Rob el ladrón violento"
+msgstr "Rob el Ratero"
 
 #: humans.xml:707
 msgid "Ronny the Rat"
