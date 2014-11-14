@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-11-04 16:29+0200\n"
+"PO-Revision-Date: 2013-11-06 13:01+0200\n"
 "Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
 "Language-Team: Spanish "
 "<http://hosted.weblate.org/projects/sumwars/greenorchid/es/>\n"
@@ -64,7 +64,7 @@ msgstr ""
 
 #: greenOrchid.xml:115
 msgid "Eric"
-msgstr ""
+msgstr "Eric"
 
 #: greenOrchid.xml:87
 msgid "Gee, thank you. Thank you thank you thank you."
@@ -220,7 +220,7 @@ msgstr ""
 
 #: greenOrchid.xml:25
 msgid "Reba"
-msgstr ""
+msgstr "Reba"
 
 #: greenOrchid.xml:31
 msgid "Say, perhaps you can look for it on your travels?"
@@ -250,7 +250,7 @@ msgstr ""
 
 #: greenOrchid.xml:156
 msgid "Thomas"
-msgstr ""
+msgstr "Tomás"
 
 #: greenOrchid.xml:130
 msgid ""
