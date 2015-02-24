@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-03-05 21:19+0200\n"
-"Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
+"PO-Revision-Date: 2015-02-24 19:49+0200\n"
+"Last-Translator: Gonzalo Exequiel Pedone <hipersayan.x@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/the_ambush_of_the_undead/es/>\n"
 "Language: es\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.9-dev\n"
+"X-Generator: Weblate 2.3-dev\n"
 
 #: theFissure.xml:543
 msgid "((Such an opportunity may never occur again.))"
@@ -463,12 +463,10 @@ msgid "There is a cave in the east, too, but that was a bit fishy."
 msgstr "Hay una cueva en el este, también, pero eso era un poco sospechoso."
 
 #: theFissure.xml:845
-#, fuzzy
 msgid "There really are better employers."
-msgstr "Realmente hay mejores empresarios."
+msgstr "Realmente hay mejores empleadores."
 
 #: theFissure.xml:370
-#, fuzzy
 msgid "These undead layed an ambush for us here."
 msgstr "Estos no-muertos nos prepararon una emboscada aquí."
 
