@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-08 12:45+0200\n"
+"PO-Revision-Date: 2015-03-08 20:48+0200\n"
 "Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/joringsbridge/fr/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: joringsbridge.xml:112
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: joringsbridge.xml:345
 msgid "... probably not. Alright, even if I don't like it."
@@ -264,7 +264,7 @@ msgstr ""
 
 #: joringsbridge.xml:111
 msgid "Silence!"
-msgstr ""
+msgstr "Silence !"
 
 #: joringsbridge.xml:286
 msgid "So it's decided."
