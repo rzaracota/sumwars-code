@@ -1,14 +1,16 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2015-03-08 12:45+0200\n"
+"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
+"Language-Team: French "
+"<https://hosted.weblate.org/projects/sumwars/rescue_willard/fr/>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Last-Translator: stefan <some.fusion@gmail.com>\n"
-"Language-Team: French\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"PO-Revision-Date: 2014-05-27 20:59+0200\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.3-dev\n"
 
 #: rescue_willard.xml:2
 msgid "A friend in need"
@@ -164,7 +166,7 @@ msgstr ""
 
 #: rescue_willard.xml:76 rescue_willard.xml:134
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: rescue_willard.xml:115
 msgid "No, Willard isn't someone likely to be caught by a few lousy goblins."
@@ -311,7 +313,7 @@ msgstr ""
 
 #: rescue_willard.xml:75 rescue_willard.xml:133
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 #: rescue_willard.xml:217
 msgid "You are Willard, I suppose."
