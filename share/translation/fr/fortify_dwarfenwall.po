@@ -1,14 +1,16 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2015-03-08 12:46+0200\n"
+"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
+"Language-Team: French "
+"<https://hosted.weblate.org/projects/sumwars/fortify_dwarfenwall/fr/>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Last-Translator: stefan <some.fusion@gmail.com>\n"
-"Language-Team: French\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"PO-Revision-Date: 2014-05-27 20:58+0200\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.3-dev\n"
 
 #: fortify_dwarfenwall.xml:691
 msgid "((And that crystal, he palmed off on me...))"
@@ -448,7 +450,7 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:443 fortify_dwarfenwall.xml:799
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: fortify_dwarfenwall.xml:702
 msgid "Not a pretty habit you have there, Airpaw..."
@@ -784,7 +786,7 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:442 fortify_dwarfenwall.xml:798
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 #: fortify_dwarfenwall.xml:465
 msgid "Yes, they warned me about that, too."
