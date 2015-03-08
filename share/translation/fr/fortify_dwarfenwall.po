@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-08 12:46+0200\n"
+"PO-Revision-Date: 2015-03-08 20:45+0200\n"
 "Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/fortify_dwarfenwall/fr/>\n"
@@ -34,7 +34,7 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:324
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: fortify_dwarfenwall.xml:701
 msgid "... said the spying Lord Master."
@@ -462,7 +462,7 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:478 fortify_dwarfenwall.xml:627
 msgid "Of course."
-msgstr ""
+msgstr "Bien sûr."
 
 #: fortify_dwarfenwall.xml:751
 msgid "Of course. There is this nice little trick."
@@ -486,11 +486,11 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:11
 msgid "Quest description"
-msgstr ""
+msgstr "Description de la quête"
 
 #: fortify_dwarfenwall.xml:9
 msgid "Quest finished"
-msgstr ""
+msgstr "Quête terminé"
 
 #: fortify_dwarfenwall.xml:180
 msgid "Quiet!"
