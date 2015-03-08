@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-08 12:45+0200\n"
+"PO-Revision-Date: 2015-03-08 22:15+0200\n"
 "Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/the_trader/fr/>\n"
@@ -154,7 +154,7 @@ msgstr ""
 
 #: theTrader.xml:189
 msgid "I thought so."
-msgstr ""
+msgstr "Je m'en doutais."
 
 #: theTrader.xml:153
 msgid ""
@@ -196,7 +196,7 @@ msgstr ""
 
 #: theTrader.xml:95 theTrader.xml:195
 msgid "Indeed."
-msgstr ""
+msgstr "En effet."
 
 #: theTrader.xml:86 theTrader.xml:88
 msgid "It seems, you are stuck in Harad's black claws."
@@ -246,7 +246,7 @@ msgstr ""
 
 #: theTrader.xml:5
 msgid "Quest finished"
-msgstr ""
+msgstr "Quête terminé"
 
 #: theTrader.xml:160
 msgid ""
@@ -407,7 +407,7 @@ msgstr ""
 
 #: theTrader.xml:288
 msgid "dwarfenwall"
-msgstr ""
+msgstr "dwarfenwall"
 
 #: theTrader.xml:11
 msgid "elCnlLobby"
