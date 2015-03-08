@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-08 13:15+0200\n"
+"PO-Revision-Date: 2015-03-08 22:20+0200\n"
 "Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/sumwars/fr/>\n"
@@ -945,15 +945,15 @@ msgstr ""
 
 #: dwarfenwall.xml:5
 msgid "dwarfenwall"
-msgstr ""
+msgstr "dwarfenwall"
 
 #: dwarfenwallCommand.xml:2
 msgid "dwarfenwallCommand"
-msgstr ""
+msgstr "dwarfenwall Commande"
 
 #: dwarfenwallRampart.xml:5
 msgid "dwarfenwallRampart"
-msgstr ""
+msgstr "Rampart de dwarfenwall"
 
 #: elCnlLobby.xml:3
 msgid "elCnlLobby"
@@ -2234,8 +2234,9 @@ msgid "mandragora"
 msgstr ""
 
 #: necrotia.xml:5
+#, fuzzy
 msgid "necFieldcamp"
-msgstr ""
+msgstr "necFieldcamp"
 
 #: npc.xml:4
 msgid "Brons Tuer"
