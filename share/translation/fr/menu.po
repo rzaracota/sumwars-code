@@ -398,7 +398,7 @@ msgstr "Quêtes"
 
 #: ../../src/gui/inventory.cpp:459
 msgid "Drop:"
-msgstr "Ce qui est à jeter:"
+msgstr "Ce qui est à jeter :"
 
 #: ../../src/gui/inventory.cpp:468
 msgid "Small"
