@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-08 12:45+0200\n"
+"PO-Revision-Date: 2015-03-08 22:15+0200\n"
 "Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/greenorchid/fr/>\n"
@@ -296,7 +296,7 @@ msgstr ""
 
 #: greenOrchid.xml:106
 msgid "dwarfenwall"
-msgstr ""
+msgstr "dwarfenwall"
 
 #: greenOrchid.xml:16
 msgid "joringsbridge"
