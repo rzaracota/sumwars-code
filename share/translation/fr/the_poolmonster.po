@@ -1,14 +1,16 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2015-03-08 20:45+0200\n"
+"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
+"Language-Team: French "
+"<https://hosted.weblate.org/projects/sumwars/the_poolmonster/fr/>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Last-Translator: stefan <some.fusion@gmail.com>\n"
-"Language-Team: French\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"PO-Revision-Date: 2014-05-27 20:59+0200\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.3-dev\n"
 
 #: scene7.xml:53
 msgid "*Roar!*"
@@ -16,7 +18,7 @@ msgstr ""
 
 #: scene7.xml:29
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: scene7.xml:23
 msgid "... Der Anblick hat mich nur an mein Leben"
@@ -64,11 +66,11 @@ msgstr ""
 
 #: scene7.xml:11
 msgid "Quest description"
-msgstr ""
+msgstr "Description de la quête"
 
 #: scene7.xml:9
 msgid "Quest finished"
-msgstr ""
+msgstr "Quête terminé"
 
 #: scene7.xml:26
 msgid "Sometimes I wish,"
