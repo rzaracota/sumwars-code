@@ -1,14 +1,16 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2015-03-08 12:46+0200\n"
+"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
+"Language-Team: French "
+"<https://hosted.weblate.org/projects/sumwars/tutorial/fr/>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Last-Translator: stefan <some.fusion@gmail.com>\n"
-"Language-Team: French\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"PO-Revision-Date: 2014-05-27 20:59+0200\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.3-dev\n"
 
 #: tutorial.xml:1845
 msgid "'course. Send the Branded One first.##female"
@@ -761,7 +763,7 @@ msgstr ""
 
 #: tutorial.xml:411 tutorial.xml:820 tutorial.xml:1029 tutorial.xml:1800
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: tutorial.xml:926
 msgid "No idea, but the Lord Master said that he speaks like this."
@@ -1333,7 +1335,7 @@ msgstr ""
 
 #: tutorial.xml:410 tutorial.xml:819 tutorial.xml:1028 tutorial.xml:1799
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 #: tutorial.xml:360
 msgid "Yes, but that's neither here nor there!"
