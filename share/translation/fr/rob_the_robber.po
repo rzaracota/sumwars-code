@@ -1,14 +1,16 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2015-03-08 12:45+0200\n"
+"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
+"Language-Team: French "
+"<https://hosted.weblate.org/projects/sumwars/rob_the_robber/fr/>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Last-Translator: stefan <some.fusion@gmail.com>\n"
-"Language-Team: French\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"PO-Revision-Date: 2014-05-27 20:59+0200\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.3-dev\n"
 
 #: rob_the_robber.xml:45 rob_the_robber.xml:116
 msgid "10000 gold pieces are quite interesting for the traveling fund."
@@ -126,7 +128,7 @@ msgstr ""
 
 #: rob_the_robber.xml:37 rob_the_robber.xml:108
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: rob_the_robber.xml:95
 msgid "Not a second earlier!"
@@ -226,7 +228,7 @@ msgstr ""
 
 #: rob_the_robber.xml:36 rob_the_robber.xml:107
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 #: rob_the_robber.xml:74
 msgid "You really got him?"
