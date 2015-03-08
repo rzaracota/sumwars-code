@@ -1,14 +1,16 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2015-03-08 13:15+0200\n"
+"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
+"Language-Team: French "
+"<https://hosted.weblate.org/projects/sumwars/sumwars/fr/>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Last-Translator: stefan <some.fusion@gmail.com>\n"
-"Language-Team: French\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"PO-Revision-Date: 2014-05-27 20:59+0200\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.3-dev\n"
 
 #: aisBaelensRift.xml:3
 msgid "aisBaelensRift"
@@ -684,7 +686,7 @@ msgstr ""
 
 #: base_abilities.xml:100 dwarfcastle.xml:178 dwarfcastle.xml:181
 msgid "Attack"
-msgstr ""
+msgstr "Attaque"
 
 #: base_abilities.xml:100
 msgid "Basic melee attack"
@@ -846,7 +848,7 @@ msgstr ""
 #: dwarfcastle.xml:168 dwarfcastle.xml:189 joringsbridge_npc.xml:238
 #: npc.xml:93 npc.xml:108
 msgid "Armor"
-msgstr ""
+msgstr "Armure"
 
 #: dwarfcastle.xml:171 npc.xml:96
 msgid "Armor class"
@@ -858,11 +860,11 @@ msgstr ""
 
 #: dwarfcastle.xml:171
 msgid "Magic power"
-msgstr ""
+msgstr "Pouvoir magique"
 
 #: dwarfcastle.xml:171
 msgid "Willpower"
-msgstr ""
+msgstr "Volonté"
 
 #: dwarfcastle.xml:174 joringsbridge_npc.xml:244 npc.xml:99
 msgid "Weapon"
@@ -887,7 +889,7 @@ msgstr ""
 
 #: dwarfcastle.xml:178 dwarfcastle.xml:181
 msgid "Power"
-msgstr ""
+msgstr "Puissance"
 
 #: dwarfcastle.xml:185 npc.xml:105
 msgid "Gloves"
@@ -895,15 +897,15 @@ msgstr ""
 
 #: dwarfcastle.xml:189 npc.xml:108 warrior_ablt.xml:85
 msgid "Block"
-msgstr ""
+msgstr "Bloquer"
 
 #: dwarfcastle.xml:189 dwarfcastle.xml:192 npc.xml:108
 msgid "Dexterity"
-msgstr ""
+msgstr "Dextérité"
 
 #: dwarfcastle.xml:189 dwarfcastle.xml:192
 msgid "Strength"
-msgstr ""
+msgstr "Force"
 
 #: dwarfcastle.xml:197 joringsbridge_npc.xml:250 npc.xml:111
 msgid "Which part of your equipment should be enchanted?"
@@ -1667,11 +1669,11 @@ msgstr ""
 
 #: joringsbridge_npc.xml:241 npc.xml:96
 msgid "Air resistance"
-msgstr ""
+msgstr "Résistance à l'air"
 
 #: joringsbridge_npc.xml:241 npc.xml:96
 msgid "Fire resistance"
-msgstr ""
+msgstr "Résistance au feu"
 
 #: joringsbridge_npc.xml:247
 msgid "Increase Firemagic"
@@ -2297,7 +2299,7 @@ msgstr ""
 
 #: npc.xml:96
 msgid "Ice resistance"
-msgstr ""
+msgstr "Résistance à la glace"
 
 #: npcStats.xml:320 npcStats.xml:358
 msgid "Peasant"
