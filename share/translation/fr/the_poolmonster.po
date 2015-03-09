@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-08 20:45+0200\n"
-"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
+"PO-Revision-Date: 2015-03-09 11:11+0200\n"
+"Last-Translator: M for Momo <mo@rtnp.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/the_poolmonster/fr/>\n"
 "Language: fr\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: scene7.xml:29
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: scene7.xml:23
 msgid "... Der Anblick hat mich nur an mein Leben"
