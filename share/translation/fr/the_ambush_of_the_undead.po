@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-08 16:12+0200\n"
-"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
+"PO-Revision-Date: 2015-03-09 11:11+0200\n"
+"Last-Translator: M for Momo <mo@rtnp.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/the_ambush_of_the_undead/fr/>\n"
 "Language: fr\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: theFissure.xml:420
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: theFissure.xml:828
 msgid "Alright, Windclaw, I'm done here."
