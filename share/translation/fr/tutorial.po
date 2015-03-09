@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-09 11:40+0200\n"
-"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
+"PO-Revision-Date: 2015-03-09 14:40+0200\n"
+"Last-Translator: M for Momo <mo@rtnp.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/tutorial/fr/>\n"
 "Language: fr\n"
@@ -867,7 +867,7 @@ msgstr ""
 
 #: tutorial.xml:24
 msgid "Quest description"
-msgstr "Description de la quête"
+msgstr "Description de quête"
 
 #: tutorial.xml:1105
 msgid "Quickly distribute your new points, and then let's get out of here!"
