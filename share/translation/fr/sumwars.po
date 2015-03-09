@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-08 22:20+0200\n"
-"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
+"PO-Revision-Date: 2015-03-09 17:29+0200\n"
+"Last-Translator: M for Momo <mo@rtnp.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/sumwars/fr/>\n"
 "Language: fr\n"
@@ -734,7 +734,7 @@ msgstr ""
 
 #: councilNPCStats.xml:47
 msgid "Derred"
-msgstr ""
+msgstr "Derred"
 
 #: councilNPCStats.xml:90 councilNPCStats.xml:290 npc.xml:16
 msgid "Soren Windclaw"
@@ -3094,6 +3094,8 @@ msgstr ""
 msgid ""
 "I have to find an energy source and a cog before that thing will work again."
 msgstr ""
+"Je dois encore trouver une source d'énergie et un rouage pour réparer cette "
+"chose."
 
 #: undeadEqu.xml:3
 msgid "broken shield"
