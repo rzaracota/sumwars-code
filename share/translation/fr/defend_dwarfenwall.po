@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-08 22:20+0200\n"
-"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
+"PO-Revision-Date: 2015-03-09 11:38+0200\n"
+"Last-Translator: M for Momo <mo@rtnp.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/defend_dwarfenwall/fr/>\n"
 "Language: fr\n"
@@ -15,22 +15,22 @@ msgstr ""
 #: siegeOfDwarfenwall.xml:217 siegeOfDwarfenwall.xml:2211
 #: siegeOfDwarfenwall.xml:2538
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: siegeOfDwarfenwall.xml:135
 msgid "... are they Cursed Ones?"
-msgstr "... sont-ils maudit ?"
+msgstr "… sont-ils Les Maudits ?"
 
 #: siegeOfDwarfenwall.xml:131 siegeOfDwarfenwall.xml:133
 msgid "... is this a Cursed One?"
-msgstr "... sont-ils maudit ?"
+msgstr "… est-ce un Maudit ?"
 
 #: siegeOfDwarfenwall.xml:60
 msgid ""
 "... wind-elementals did see it clearly: It's only this one lich leading them."
 msgstr ""
-"... l'élémentaire de l'air n'a rien vue: C'est juste une liche qui les "
-"conduits."
+"… les élémentaires d'air n'ont pas bien vu : C'est juste une liche qui les "
+"mène."
 
 #: siegeOfDwarfenwall.xml:123
 msgid "A handful of mercenaries?"
@@ -38,7 +38,7 @@ msgstr "Une poignée de mercenaires ?"
 
 #: siegeOfDwarfenwall.xml:1102
 msgid "Acursed elementalists!"
-msgstr "Elémentalistes maudit !"
+msgstr "Maudits élémentalistes !"
 
 #: siegeOfDwarfenwall.xml:164
 msgid "All warriors are connected by narrow-mindedness."
@@ -46,7 +46,7 @@ msgstr "Tous les guerriers sont reliées par l'étroitesse d'esprit."
 
 #: siegeOfDwarfenwall.xml:2537
 msgid "And about the crystal: Why don't you ask your employers?"
-msgstr "A propos du cristal: Pourquoi ne pas demander à vos employeurs ?"
+msgstr "À propos du cristal : Pourquoi ne pas demander à vos employeurs ?"
 
 #: siegeOfDwarfenwall.xml:1902
 msgid "And don't forget that you owe me land after this."
@@ -54,8 +54,7 @@ msgstr "Et n'oubliez pas que vous me devrez une terre après ça."
 
 #: siegeOfDwarfenwall.xml:2565
 msgid "And now I will find a way to kill Branded Ones."
-msgstr ""
-"Et maintenant, je vais trouver un moyen de tuer ceux qui ont une marque."
+msgstr "Et maintenant, je vais trouver un moyen de tuer Les Marqués."
 
 #: siegeOfDwarfenwall.xml:2242
 msgid "And thanks to the councils backing the city is still standing."
@@ -75,19 +74,19 @@ msgstr "Et qui êtes-vous ? ##solo"
 
 #: siegeOfDwarfenwall.xml:2360
 msgid "And who?!"
-msgstr "Et qui ? !"
+msgstr "Et qui ?!"
 
 #: siegeOfDwarfenwall.xml:63
 msgid "And with what army are you planning to do this break-through?"
-msgstr "Et avec quelle armée vous prévoyez de faire cette percée ?"
+msgstr "Et avec quelle armée prévoyez-vous de faire cette percée ?"
 
 #: siegeOfDwarfenwall.xml:1898
 msgid "And your mountain tops are more lively?"
-msgstr "Et le dessus de vos montagnes sont plus vivante ?"
+msgstr "Et vos sommets sont plus vivants ?"
 
 #: siegeOfDwarfenwall.xml:2381
 msgid "Apart from yourself you are not taking care of anyone!"
-msgstr "Mis à part de vous même, vous ne prenez soins de personne !"
+msgstr "Mis à part de vous même, vous ne vous souciez de personne !"
 
 #: siegeOfDwarfenwall.xml:1899
 msgid "Are we here to count the bugs on our estates?"
@@ -99,7 +98,7 @@ msgstr "Comme si j'en avais jamais fait."
 
 #: siegeOfDwarfenwall.xml:2347
 msgid "As if we ever made one."
-msgstr "Comme si nous n'en avions jamais fait."
+msgstr "Comme si nous en avions jamais fait."
 
 #: siegeOfDwarfenwall.xml:2355
 msgid "As if we hadn't enough problems with shortage of soldiers."
@@ -109,27 +108,27 @@ msgstr ""
 
 #: siegeOfDwarfenwall.xml:155
 msgid "As long as I lead this army I will not tolerate such people."
-msgstr "Tant que je mène cette armée je ne tolérerai pas ce genre de personnes."
+msgstr ""
+"Tant que je mènerai cette armée, je ne tolérerai pas ce genre de personnes."
 
 #: siegeOfDwarfenwall.xml:2068
 msgid "As you command, my lord."
-msgstr "A vos ordres, mon Seigneur."
+msgstr "À vos ordres, mon Seigneur."
 
 #: siegeOfDwarfenwall.xml:1835
 msgid "As you wish, my lord."
-msgstr "Comme vous le souhaitez, votre seigneurie."
+msgstr "Selon vos souhaits, mon Seigneur."
 
 #: siegeOfDwarfenwall.xml:2396
 msgid "As you wish..."
-msgstr "Comme vous le souhaitez ..."
+msgstr "Comme vous le souhaitez…"
 
 #: siegeOfDwarfenwall.xml:2278
 msgid ""
 "At least more effective than one could have expected from a band of "
 "mercenaries."
 msgstr ""
-"Au moins plus efficace qu'on aurait pu le supposer d'une bande de "
-"mercenaires."
+"Au moins plus efficace qu'on aurait pu espérer d'une bande de mercenaires."
 
 #: siegeOfDwarfenwall.xml:2346
 msgid "At least you are worth the trouble."
@@ -150,7 +149,7 @@ msgstr ""
 
 #: siegeOfDwarfenwall.xml:2064
 msgid "Branded Ones!"
-msgstr "Ceux qui ont une marque !"
+msgstr "Les Marqués !"
 
 #: siegeOfDwarfenwall.xml:2066
 msgid ""
@@ -172,7 +171,7 @@ msgstr "Mais les dieux ce souviendront de vous pour l'éternité."
 
 #: siegeOfDwarfenwall.xml:1831
 msgid "But they are still not stable!"
-msgstr "Mais ce n'est toujours pas stables !"
+msgstr "Mais ils ne sont toujours pas stables !"
 
 #: siegeOfDwarfenwall.xml:99
 msgid "But we have a war here."
@@ -188,11 +187,11 @@ msgstr "Catapultes !"
 
 #: siegeOfDwarfenwall.xml:2208
 msgid "Curse on them!"
-msgstr "Guérissez les !"
+msgstr "Maudits soient-ils !"
 
 #: siegeOfDwarfenwall.xml:2209
 msgid "Cursed council-mages!"
-msgstr "Maudit mages du Conseil !"
+msgstr "Maudit conseil des mages !"
 
 #: siegeOfDwarfenwall.xml:2214
 msgid "Death always wins."
@@ -209,11 +208,11 @@ msgstr ""
 
 #: siegeOfDwarfenwall.xml:2556
 msgid "Did you know there is quite a lot of unbound souls in the air?"
-msgstr "Saviez-vous qu'il y a beaucoup d'âmes errante dans l'air ?"
+msgstr "Saviez-vous qu'il y a beaucoup d'âmes errantes dans l'air ?"
 
 #: siegeOfDwarfenwall.xml:2554
 msgid "Did you know there is quite a lot of unbound souls in the air? ##solo"
-msgstr "Saviez-vous qu'il y a beaucoup d'âmes errante dans l'air ? ##solo"
+msgstr "Saviez-vous qu'il y a beaucoup d'âmes errantes dans l'air ? ##solo"
 
 #: siegeOfDwarfenwall.xml:1660
 msgid "Did you now there was a wild man here two-hundred years ago?"
@@ -1129,9 +1128,8 @@ msgid "dwarfenwallRampart"
 msgstr "Rampart de dwarfenwall"
 
 #: siegeOfDwarfenwall.xml:2340
-#, fuzzy
 msgid "hmpf"
-msgstr "hmpf"
+msgstr "pfff"
 
 #: siegeOfDwarfenwall.xml:2437
 #, fuzzy
