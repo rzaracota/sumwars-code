@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-09 11:11+0200\n"
+"PO-Revision-Date: 2015-03-09 14:40+0200\n"
 "Last-Translator: M for Momo <mo@rtnp.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/fortify_dwarfenwall/fr/>\n"
@@ -486,7 +486,7 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:11
 msgid "Quest description"
-msgstr "Description de la quête"
+msgstr "Description de quête"
 
 #: fortify_dwarfenwall.xml:9
 msgid "Quest finished"
