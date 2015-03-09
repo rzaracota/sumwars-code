@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-08 20:45+0200\n"
-"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
+"PO-Revision-Date: 2015-03-09 11:11+0200\n"
+"Last-Translator: M for Momo <mo@rtnp.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/fortify_dwarfenwall/fr/>\n"
 "Language: fr\n"
@@ -34,7 +34,7 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:324
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: fortify_dwarfenwall.xml:701
 msgid "... said the spying Lord Master."
