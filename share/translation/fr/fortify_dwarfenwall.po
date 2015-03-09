@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-09 14:40+0200\n"
+"PO-Revision-Date: 2015-03-09 17:29+0200\n"
 "Last-Translator: M for Momo <mo@rtnp.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/fortify_dwarfenwall/fr/>\n"
@@ -172,7 +172,7 @@ msgstr ""
 
 #: fortify_dwarfenwall.xml:39
 msgid "Derred"
-msgstr ""
+msgstr "Derred"
 
 #: fortify_dwarfenwall.xml:773
 msgid "Did I get that right?"
