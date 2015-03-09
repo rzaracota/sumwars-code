@@ -11,14 +11,16 @@ msgstr ""
 "Project-Id-Version: sumwars 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: 2011-10-26 18:07+0200\n"
-"Last-Translator: Eugenio Fagioli <eugenio.fagioli@gmail.com>\n"
-"Language-Team: Italiano <>\n"
+"PO-Revision-Date: 2015-03-09 09:48+0200\n"
+"Last-Translator: Michal Čihař <michal@cihar.com>\n"
+"Language-Team: Italian "
+"<https://hosted.weblate.org/projects/sumwars/the_ambush_of_the_undead/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bits\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.3-dev\n"
 
 #: theFissure.xml:2
 msgid "The ambush of the undead"
@@ -332,7 +334,7 @@ msgstr "Attaccare il Lich...immediatamente?"
 
 #: theFissure.xml:557
 msgid "Yes"
-msgstr "Si'"
+msgstr "Si"
 
 #: theFissure.xml:558
 msgid "No"
