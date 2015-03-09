@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-09 11:11+0200\n"
-"Last-Translator: M for Momo <mo@rtnp.org>\n"
+"PO-Revision-Date: 2015-03-09 11:40+0200\n"
+"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/tutorial/fr/>\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 
 #: tutorial.xml:1845
 msgid "'course. Send the Branded One first.##female"
-msgstr ""
+msgstr "' cours. Envoyé les Marqués en premier.##female"
 
 #: tutorial.xml:1847
 msgid "'course. Send the Branded One first.##male"
