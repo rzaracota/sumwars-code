@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-27 20:58+0200\n"
-"PO-Revision-Date: 2015-03-08 13:19+0200\n"
-"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
+"PO-Revision-Date: 2015-03-10 01:35+0200\n"
+"Last-Translator: M for Momo <mo@rtnp.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/sumwars/menu/fr/>"
 "\n"
 "Language: fr\n"
@@ -30,7 +30,7 @@ msgstr "Feu"
 
 #: ../../src/core/damage.cpp:163 ../../src/gui/charinfo.cpp:713
 msgid "Ice"
-msgstr "Glasse"
+msgstr "Glace"
 
 #: ../../src/core/damage.cpp:165 ../../src/gui/charinfo.cpp:710
 msgid "Air"
@@ -493,7 +493,7 @@ msgstr "Enregistrer et Quitter ?"
 
 #: ../../src/gui/networkwindows.cpp:123
 msgid "Host_game"
-msgstr "Host_game"
+msgstr "Héberger une partie"
 
 #: ../../src/gui/networkwindows.cpp:126
 msgid "Max. number of players"
@@ -505,7 +505,7 @@ msgstr "Port"
 
 #: ../../src/gui/networkwindows.cpp:275
 msgid "Join_game"
-msgstr "Join_game"
+msgstr "Rejoindre une partie"
 
 #: ../../src/gui/networkwindows.cpp:278
 msgid "Host"
