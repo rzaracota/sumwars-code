@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-08 22:15+0200\n"
-"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
+"PO-Revision-Date: 2015-03-10 17:32+0200\n"
+"Last-Translator: M for Momo <mo@rtnp.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/the_trader/fr/>\n"
 "Language: fr\n"
@@ -17,56 +17,62 @@ msgid ""
 " A common skill. Any sell-sword that wants to avoid a quick and meaningless "
 "death knows of it."
 msgstr ""
+" Une compétence commune. N'importe quel mercenaire qui veut éviter une mort "
+"rapide et futile la connait."
 
 #: theTrader.xml:76
 msgid "A moment, dear ladies."
-msgstr ""
+msgstr "Un moment, chères dames."
 
 #: theTrader.xml:71
 msgid "A moment, dear madam."
-msgstr ""
+msgstr "Un moment, chère dame."
 
 #: theTrader.xml:74
 msgid "A moment, dear sir."
-msgstr ""
+msgstr "Un moment, cher monsieur."
 
 #: theTrader.xml:78
 msgid "A moment, dear sirs."
-msgstr ""
+msgstr "Un moment, chers messieurs."
 
 #: theTrader.xml:80
 msgid "A moment, ladies and gentlemen."
-msgstr ""
+msgstr "Un moment, messieurs et dames."
 
 #: theTrader.xml:7
 msgid "A strange trader offered me to sell Empty Scrolls."
-msgstr ""
+msgstr "Un étrange vendeur m'a proposé des Parchemins Vierges."
 
 #: theTrader.xml:197
 msgid "A useful skill."
-msgstr ""
+msgstr "Une compétence utile."
 
 #: theTrader.xml:151
 msgid "Actually not, regrettably."
-msgstr ""
+msgstr "Il se trouve que non, c'est regrettable."
 
 #: theTrader.xml:161
 msgid "Allow me to give you an Empty Scroll as a gift."
-msgstr ""
+msgstr "Permettez moi de vous offrir un Parchemin Vierge en cadeau."
 
 #: theTrader.xml:205
 msgid "Alternatively you can select the number of the belt slot it is in."
 msgstr ""
+"Vous pouvez aussi choisir le numéro de l'emplacement de ceinture dans lequel "
+"c'est."
 
 #: theTrader.xml:177
 msgid "And how do we use them?"
-msgstr ""
+msgstr "Et comment pouvons-nous les utiliser ?"
 
 #: theTrader.xml:152
 msgid ""
 "As reported, I invested badly in the Empty Scrolls and have no available "
 "capital."
 msgstr ""
+"Comme je vous l'ai dit, j'ai investi massivement dans les Parchemins Vierges "
+"et je n'ai plus de capital disponible."
 
 #: theTrader.xml:190
 msgid ""
