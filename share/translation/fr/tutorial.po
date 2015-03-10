@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-10 17:22+0200\n"
-"Last-Translator: M for Momo <mo@rtnp.org>\n"
+"PO-Revision-Date: 2015-03-10 23:40+0200\n"
+"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/tutorial/fr/>\n"
 "Language: fr\n"
@@ -1187,27 +1187,27 @@ msgstr ""
 
 #: tutorial.xml:1778
 msgid "They made it!"
-msgstr ""
+msgstr "Ils l'ont fait !"
 
 #: tutorial.xml:1572
 msgid "This doesn't look like I can simply take it."
-msgstr ""
+msgstr "Il ne semble pas que je puisse tout simplement le prendre."
 
 #: tutorial.xml:1583
 msgid "This doesn't look like you can simply take it."
-msgstr ""
+msgstr "Il ne semble pas que vous puissiez tout simplement le prendre."
 
 #: tutorial.xml:1436
 msgid "This is not for me to decide."
-msgstr ""
+msgstr "Ce n'est pas à moi de décider."
 
 #: tutorial.xml:344
 msgid "This is not the right time to be impressed."
-msgstr ""
+msgstr "Ce n'est point le moment de ce faire impressionner."
 
 #: tutorial.xml:2167
 msgid "This junk?"
-msgstr ""
+msgstr "Cette ordure ?"
 
 #: tutorial.xml:1516
 msgid "This looks like it could be a way up."
@@ -1215,7 +1215,7 @@ msgstr ""
 
 #: tutorial.xml:1470
 msgid "This man is beginning to test my patience."
-msgstr ""
+msgstr "Cet homme commence à éprouver ma patience."
 
 #: tutorial.xml:794
 msgid ""
@@ -1236,11 +1236,11 @@ msgstr ""
 
 #: tutorial.xml:2
 msgid "Tutorial"
-msgstr ""
+msgstr "Tutoriel"
 
 #: tutorial.xml:11
 msgid "Tutorial finished"
-msgstr ""
+msgstr "Tutoriel terminé"
 
 #: tutorial.xml:1232
 msgid ""
@@ -1250,7 +1250,7 @@ msgstr ""
 
 #: tutorial.xml:427
 msgid "Very well. Follow me, please."
-msgstr ""
+msgstr "Très bien. Suivez-moi, s'il vous plaît."
 
 #: tutorial.xml:941
 msgid "Very well. Just cover our backs while we try to open the hatch. "
@@ -1258,7 +1258,7 @@ msgstr ""
 
 #: tutorial.xml:1835
 msgid "Very well. The secret door is here."
-msgstr ""
+msgstr "Très bien. La porte secrète est ici."
 
 #: tutorial.xml:1011
 msgid "Wait a sec, Derred. They somehow seem stronger."
@@ -1270,7 +1270,7 @@ msgstr ""
 
 #: tutorial.xml:1426
 msgid "Wait, who are you?"
-msgstr ""
+msgstr "Attendez, qui êtes-vous ?"
 
 #: tutorial.xml:1440
 msgid "We all think alike here."
@@ -1291,14 +1291,18 @@ msgstr ""
 #: tutorial.xml:356
 msgid "We cannot take any risks, and inside the council you are safe."
 msgstr ""
+"Nous ne pouvons pas prendre de risques, et vous êtes en sécurité à "
+"l'intérieur du Conseil."
 
 #: tutorial.xml:354
 msgid "We cannot take any risks, and inside the council you are safe. ##solo"
 msgstr ""
+"Nous ne pouvons pas prendre de risques, et vous êtes en sécurité à "
+"l'intérieur du Conseil. ##solo"
 
 #: tutorial.xml:2094
 msgid "We truly are the exterminators here."
-msgstr ""
+msgstr "Ici nous sommes vraiment des exterminateurs."
 
 #: tutorial.xml:812
 msgid ""
@@ -1318,7 +1322,7 @@ msgstr ""
 
 #: tutorial.xml:298
 msgid "Well, if you would follow us, please?"
-msgstr ""
+msgstr "Eh bien, si vous voulez bien nous suivre, s'il vous plaît ?"
 
 #: tutorial.xml:331
 msgid ""
@@ -1342,11 +1346,13 @@ msgstr ""
 
 #: tutorial.xml:796
 msgid "Well, you're right about that..."
-msgstr ""
+msgstr "Eh bien, vous avez raison à ce sujet..."
 
 #: tutorial.xml:2079
 msgid "What a day. Did you know that thing could spit little monsters?"
 msgstr ""
+"Quelle journée. Saviez-vous que cette chose pouvait cracher de petits "
+"monstres ?"
 
 #: tutorial.xml:264
 msgid ""
@@ -1357,6 +1363,8 @@ msgstr ""
 #: tutorial.xml:809
 msgid "What didn't he take into consideration? He is clearly paranoid."
 msgstr ""
+"Qu'est ce qu'il n'a pas pris en considération ? Qu'il est clairement "
+"paranoïaque."
 
 #: tutorial.xml:921
 msgid "What does this 'click on it' mean, anyway?"
@@ -1364,15 +1372,15 @@ msgstr ""
 
 #: tutorial.xml:335
 msgid "What have you done, you bastards?!"
-msgstr ""
+msgstr "Vous êtes un bâtards, qu'avez vous fait ? !"
 
 #: tutorial.xml:365
 msgid "What if I don't feel like surrendering my weapons?"
-msgstr ""
+msgstr "Que se passe-t-il si je n'est pas envie de rendre les armes ?"
 
 #: tutorial.xml:362
 msgid "What if we don't feel like surrendering our weapons?"
-msgstr ""
+msgstr "Que se passe-t-il si nous n'avons pas envie de rendre les armes ?"
 
 #: tutorial.xml:1928
 msgid ""
@@ -1382,7 +1390,7 @@ msgstr ""
 
 #: tutorial.xml:801
 msgid "What is this supposed to be?"
-msgstr ""
+msgstr "Qu'est ce que c'est censé être ?"
 
 #: tutorial.xml:1009
 msgid "What kind of sissy are you?"
@@ -1401,11 +1409,11 @@ msgstr "Quoi ?"
 
 #: tutorial.xml:802
 msgid "Where is my weapon?"
-msgstr ""
+msgstr "Où est mon arme ?"
 
 #: tutorial.xml:1784
 msgid "While we are on the topic..."
-msgstr ""
+msgstr "Temps que nous sommes sur le sujet ..."
 
 #: tutorial.xml:277
 msgid ""
