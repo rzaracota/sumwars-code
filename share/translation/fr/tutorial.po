@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-10 01:53+0200\n"
-"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
+"PO-Revision-Date: 2015-03-10 17:22+0200\n"
+"Last-Translator: M for Momo <mo@rtnp.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/tutorial/fr/>\n"
 "Language: fr\n"
@@ -1002,14 +1002,12 @@ msgid "Skills are distinguished into two groups."
 msgstr "Les compétences ce distinguent en deux groupes."
 
 #: tutorial.xml:808
-#, fuzzy
 msgid "Slowly you're getting to me."
-msgstr "Lentement, vous obtenez pour moi."
+msgstr "Lentement, vous venez vers moi."
 
 #: tutorial.xml:1566
-#, fuzzy
 msgid "So, this really is the lab, and that should be the crystal"
-msgstr "Donc, c'est vraiment le laboratoire, et ça devrait être le cristal"
+msgstr "Donc, c'est ça le laboratoire, et ça devrait être le cristal"
 
 #: tutorial.xml:769
 msgid "So? I didn't wish for this ability."
@@ -1025,15 +1023,15 @@ msgstr "Quelqu'un !"
 
 #: tutorial.xml:2081
 msgid "Something unwritten in the book of the omniscient airpaw?"
-msgstr ""
+msgstr "Quelque chose d'implicite dans le livre de l'omniscient Patte-Vent ?"
 
 #: tutorial.xml:1234
 msgid "Somewhere back there has to be the secret door."
-msgstr ""
+msgstr "Il doit y avoir une porte secrète là-derrière."
 
 #: tutorial.xml:1433
 msgid "Sorry, no. The stairway collapsed earlier."
-msgstr ""
+msgstr "Désolé, non. Les escaliers se sont effondrés il y a quelques temps."
 
 #: tutorial.xml:2087
 msgid "Spare me your elementalist drivel and get out of my way!"
@@ -1045,7 +1043,7 @@ msgstr "Épargnez-nous vos sornettes élémentaliste et sortez de notre chemin !
 
 #: tutorial.xml:325
 msgid "Spill it! Where are we, and who has the nerve to cross Branded Ones?!"
-msgstr ""
+msgstr "Crache ! Où sommes nous, et qui a le cran de croiser Les Marqués ?!"
 
 #: tutorial.xml:806
 msgid ""
@@ -1056,112 +1054,126 @@ msgstr ""
 
 #: tutorial.xml:400 tutorial.xml:452
 msgid "Surrender weapons"
-msgstr ""
+msgstr "Déposer les armes"
 
 #: tutorial.xml:2162
-#, fuzzy
 msgid "Take a look around. That stuff has to be worth a fortune!"
-msgstr "Jetez un oeil autour. Ça doit valoir une fortune !"
+msgstr "Regardez autour. Ça doit valoir une fortune !"
 
 #: tutorial.xml:1104
 msgid "That blasted thing! I hope the walls hold out."
-msgstr ""
+msgstr "Ce fichu machin ! J'espère que les murs vont tenir bon."
 
 #: tutorial.xml:1611
 msgid ""
 "That felt like standing on a single mountaintop during a thunderstorm... and "
 "the energy source still won't come of."
 msgstr ""
+"C'était comme se tenir au sommet d'une montagne en plein orage… mais que la "
+"source d'énergie restait cachée."
 
 #: tutorial.xml:342
 msgid "That guy seems to know what he's doing."
-msgstr ""
+msgstr "Ce type semble savoir ce qu'il fait."
 
 #: tutorial.xml:2164
 msgid "That stuff must be worth a fortune!"
-msgstr ""
+msgstr "Ça doit valoir une fortune !"
 
 #: tutorial.xml:232
 msgid "That was at least as nasty as the first years in hell! Where am I?"
 msgstr ""
+"C'était au moins aussi désagréable que les premières années en enfer ! Où "
+"suis-je ?"
 
 #: tutorial.xml:1238
 msgid ""
 "That's correct, Branded One. You wouldn't want to be called `harvest' now, "
 "would you?"
 msgstr ""
+"C'est correct, Le Marqué. Tu ne voudrait pas te faire appeler \"récolte\" "
+"maintenant, si ?"
 
 #: tutorial.xml:805
 msgid "That's why he gave us these."
-msgstr ""
+msgstr "Voilà pourquoi il nous a donné ça."
 
 #: tutorial.xml:759
 msgid ""
 "The Lord Master Windclaw feared that you would kill yourself after your "
 "arrival in order to escape, so he took... measures."
 msgstr ""
+"Le Seigneur et Maître Ventgriffe redoutait que vous vous suicidiez à votre "
+"arrivée pour vous échapper. Il a donc pris… des mesures."
 
 #: tutorial.xml:2080
 msgid "The Lord Master didn't say anything about that..."
-msgstr ""
+msgstr "Le Seigneur et Maître n'a rien dit là-dessus…"
 
 #: tutorial.xml:1790
 msgid ""
 "The Lord Master thought that you could do considerably more than dully beat "
 "your enemies."
 msgstr ""
+"Le Seigneur et Maître pensait que vous pouviez faire bien plus que bêtement "
+"assommer vos ennemis."
 
 #: tutorial.xml:1787
 msgid ""
 "The Lord Master thought that you could do considerably more than dully beat "
 "your enemies.##solo"
 msgstr ""
+"Le Seigneur et Maître pensait que vous pouviez faire bien plus que bêtement "
+"assommer vos ennemis. ##solo"
 
 #: tutorial.xml:371
 msgid "The choice is yours."
-msgstr ""
+msgstr "Le choix vous appartient."
 
 #: tutorial.xml:2092
 msgid "The mighty Akeran truly punished them dearly."
-msgstr ""
+msgstr "Le puissant Akeran les a vraiment chèrement puni."
 
 #: tutorial.xml:2086
 msgid "The mighty Akeran truly punished you dearly."
-msgstr ""
+msgstr "Le puissant Akeran vous a vraiment chèrement puni."
 
 #: tutorial.xml:1370
 msgid "The path is blocked from our side and we can't get to you."
-msgstr ""
+msgstr "Le chemin est bloqué de notre côté et nous ne pouvons vous rejoindre."
 
 #: tutorial.xml:850
 msgid ""
 "The weapon you just obtained is a mid-sized item and thus is found in the "
 "middle field."
 msgstr ""
+"L'arme que vous venez d'obtenir est un objet de taille moyenne et donc se "
+"retrouve dans le champ du milieu."
 
 #: tutorial.xml:932
 msgid "Then I shall put the fear of Harad into these experiments!"
-msgstr ""
+msgstr "Il faut donc je j'injecte la peur de Harad dans ces expériences !"
 
 #: tutorial.xml:1569
 msgid "Then he can't have any objections, can he?"
-msgstr ""
+msgstr "Donc il ne peut qu'être d'accord, n'est-ce pas ?"
 
 #: tutorial.xml:1372
 msgid "There should be workers down there."
-msgstr ""
+msgstr "Il doit y avoir des ouvriers là en bas."
 
 #: tutorial.xml:786
+#, fuzzy
 msgid "There's a back door for feeding, and word is..."
-msgstr ""
+msgstr "Il y a une porte arrière pour la nourriture, et le mot est…"
 
 #: tutorial.xml:1434
 msgid "There's only one way down here?!"
-msgstr ""
+msgstr "Il n'y a qu'une façon de descendre ?!"
 
 #: tutorial.xml:1463
 msgid "These halls are not forsaken!"
-msgstr ""
+msgstr "Ces salles ne sont pas abandonnées !"
 
 #: tutorial.xml:1464
 msgid ""
