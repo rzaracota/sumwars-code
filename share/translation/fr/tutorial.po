@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2015-03-10 00:29+0200\n"
-"Last-Translator: M for Momo <mo@rtnp.org>\n"
+"PO-Revision-Date: 2015-03-10 01:53+0200\n"
+"Last-Translator: Tuux <tuxa@galaxie.eu.org>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/sumwars/tutorial/fr/>\n"
 "Language: fr\n"
@@ -918,54 +918,60 @@ msgstr "Ô Akeran ! Ferme les portes !"
 #: tutorial.xml:260
 msgid "Oh yes! The miraculous mental abilities of club swingers."
 msgstr ""
+"Oh oui! Les aptitudes mentales miraculeuses des échangistes et membres des "
+"club libertins."
 
 #: tutorial.xml:1059
 msgid "Oh, right!"
-msgstr ""
+msgstr "Ah, oui !"
 
 #: tutorial.xml:2046
 msgid "Oops"
-msgstr ""
+msgstr "Oups"
 
 #: tutorial.xml:1112 tutorial.xml:1141
 msgid "Open hatch"
-msgstr ""
+msgstr "Ouvrir le hayon"
 
 #: tutorial.xml:1855 tutorial.xml:1871
 msgid "Open secret door"
-msgstr ""
+msgstr "Ouvrir la porte secrète"
 
 #: tutorial.xml:1614
 msgid "Ouch, I burnt my hands!"
-msgstr ""
+msgstr "Aïe, je me suis brûlé les mains !"
 
 #: tutorial.xml:2170
 msgid "Philistine."
-msgstr ""
+msgstr "Philistin."
 
 #: tutorial.xml:1129
 msgid "Please distribute your attribute points first."
-msgstr ""
+msgstr "Veuillez distribuer vos points d'attribut en premier."
 
 #: tutorial.xml:283
 msgid ""
 "Please excuse your somewhat unpleasant arrival. Lord Master Soren Windclaw "
 "requests your presence."
 msgstr ""
+"Veuillez excuser votre fâcheuse arrivée. Seigneur maître Soren Windclaw "
+"réclame votre présence."
 
 #: tutorial.xml:281
 msgid ""
 "Please excuse your somewhat unpleasant arrival. Lord Master Soren Windclaw "
 "requests your presence. ##solo"
 msgstr ""
+"Veuillez excuser votre fâcheuse arrivée. Seigneur maître Soren Windclaw "
+"réclame votre présence.  ##solo"
 
 #: tutorial.xml:651
 msgid "Please!"
-msgstr ""
+msgstr "S'il vous plaît !"
 
 #: tutorial.xml:1444
 msgid "Preferably today."
-msgstr ""
+msgstr "De préférence aujourd'hui."
 
 #: tutorial.xml:24
 msgid "Quest description"
@@ -973,47 +979,49 @@ msgstr "Description de quête"
 
 #: tutorial.xml:1105
 msgid "Quickly distribute your new points, and then let's get out of here!"
-msgstr ""
+msgstr "Distribuez rapidement vos nouveaux points et nous sortirons d'ici !"
 
 #: tutorial.xml:1792
 msgid "Really?"
-msgstr ""
+msgstr "Vraiment ?"
 
 #: tutorial.xml:370
 msgid "Safety area?! This is a goddamn prison!"
-msgstr ""
+msgstr "Une zone sure ? ! Il s'agit d'une prison nom de nom !"
 
 #: tutorial.xml:648
 msgid "Save me!"
-msgstr ""
+msgstr "Sauve-moi !"
 
 #: tutorial.xml:755
 msgid "Size isn't everything."
-msgstr ""
+msgstr "La taille ne fait pas tout."
 
 #: tutorial.xml:1814
 msgid "Skills are distinguished into two groups."
-msgstr ""
+msgstr "Les compétences ce distinguent en deux groupes."
 
 #: tutorial.xml:808
+#, fuzzy
 msgid "Slowly you're getting to me."
-msgstr ""
+msgstr "Lentement, vous obtenez pour moi."
 
 #: tutorial.xml:1566
+#, fuzzy
 msgid "So, this really is the lab, and that should be the crystal"
-msgstr ""
+msgstr "Donc, c'est vraiment le laboratoire, et ça devrait être le cristal"
 
 #: tutorial.xml:769
 msgid "So? I didn't wish for this ability."
-msgstr ""
+msgstr "Alors ? Je ne voulait pas de cette capacité."
 
 #: tutorial.xml:767
 msgid "So? None of us wished for this ability."
-msgstr ""
+msgstr "Alors ? Aucun de nous n'a souhaité de cette capacité."
 
 #: tutorial.xml:647
 msgid "Someone!"
-msgstr ""
+msgstr "Quelqu'un !"
 
 #: tutorial.xml:2081
 msgid "Something unwritten in the book of the omniscient airpaw?"
@@ -1029,11 +1037,11 @@ msgstr ""
 
 #: tutorial.xml:2087
 msgid "Spare me your elementalist drivel and get out of my way!"
-msgstr ""
+msgstr "Épargnez-moi vos sornettes élémentaliste et sortez de mon chemin !"
 
 #: tutorial.xml:2093
 msgid "Spare us your elementalist drivel and get out of our way!"
-msgstr ""
+msgstr "Épargnez-nous vos sornettes élémentaliste et sortez de notre chemin !"
 
 #: tutorial.xml:325
 msgid "Spill it! Where are we, and who has the nerve to cross Branded Ones?!"
@@ -1043,14 +1051,17 @@ msgstr ""
 msgid ""
 "Surely you understand that you cannot run around here with unchecked weapons."
 msgstr ""
+"Vous comprenez sûrement que vous ne pouvez vous promener ici avec des armes "
+"non vérifiées."
 
 #: tutorial.xml:400 tutorial.xml:452
 msgid "Surrender weapons"
 msgstr ""
 
 #: tutorial.xml:2162
+#, fuzzy
 msgid "Take a look around. That stuff has to be worth a fortune!"
-msgstr ""
+msgstr "Jetez un oeil autour. Ça doit valoir une fortune !"
 
 #: tutorial.xml:1104
 msgid "That blasted thing! I hope the walls hold out."
