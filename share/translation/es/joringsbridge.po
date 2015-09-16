@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-10-03 00:13+0200\n"
-"Last-Translator: Rubén Viguera <vyproyects@gmail.com>\n"
+"PO-Revision-Date: 2015-09-16 23:28+0200\n"
+"Last-Translator: Ronnie Simon <ronniesimonf@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/sumwars/joringsbridge/es/>\n"
 "Language: es\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 1.10-dev\n"
+"X-Generator: Weblate 2.4-dev\n"
 
 #: joringsbridge.xml:142
 msgid "!"
@@ -258,9 +258,8 @@ msgid "Quite so!"
 msgstr "¡Así es!"
 
 #: joringsbridge.xml:255
-#, fuzzy
 msgid "Rubbish! Take a look at the crystal on the mege's staff."
-msgstr "¡Basura! Echa un vistazo al cristal del bastón de mege."
+msgstr "¡Basura! Hecha un vistazo al cristal del bastón de mege."
 
 #: joringsbridge.xml:137
 msgid "Self-satisfied parasite, that mage!"
