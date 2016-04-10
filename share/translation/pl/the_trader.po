@@ -7,14 +7,17 @@ msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 15:15+0100\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2016-04-10 14:34+0000\n"
+"Last-Translator: Martoceratops <martoceratops@gmail.com>\n"
+"Language-Team: Polish "
+"<https://hosted.weblate.org/projects/sumwars/the_trader/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 2.6-dev\n"
 
 #: theTrader.xml:2 theTrader.xml:124 theTrader.xml:262 theTrader.xml:300
 msgid "The Trader"
@@ -22,7 +25,7 @@ msgstr ""
 
 #: theTrader.xml:5
 msgid "Quest finished"
-msgstr ""
+msgstr "Misja ukończona"
 
 #: theTrader.xml:7
 msgid "A strange trader offered me to sell Empty Scrolls."
