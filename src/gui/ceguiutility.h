@@ -19,15 +19,17 @@
 // Define the CEGUI version. TODO: move to a global definition.
 //#define CEGUI_07
 
-#ifdef CEGUI_07
-#include "CEGUI.h"
-#include "CEGUI/CEGUIUDim.h"
-#include "CEGUI/CEGUIFont.h"
-#else
+#define CEGUI_CUSTOM_ALLOCATORS true
+
 #include "CEGUI/Base.h"
+
+
+using CEGUI::STLAllocatorWrapper;
+#include "CEGUI/MemoryAllocation.h"
 #include "CEGUI/CEGUI.h"
 #include "CEGUI/String.h"
-#endif
+
+using CEGUI::String;
 
 #include <list>
 #include <string>

@@ -872,7 +872,7 @@ void Document::onButtonHostGame()
 		message->setInheritsAlpha(false);
 		message->setVisible(true);
 		message->setModalState(true);
-		CEGUIUtility::getWindow ("WarningDialogWindow/WarningDialogLabel")->setText((CEGUI::utf8*) gettext ("Please select a character first!"));
+		CEGUIUtility::getWindow ("WarningDialogWindow/WarningDialogLabel")->setText(gettext ("Please select a character first!"));
 
 		SW_DEBUG ("Warning: Tried to host a game without a selected char!");
 		return;
@@ -892,7 +892,7 @@ void Document::onButtonJoinGame()
 		message->setInheritsAlpha(false);
 		message->setVisible(true);
 		message->setModalState(true);
-		CEGUIUtility::getWindow ("WarningDialogWindow/WarningDialogLabel")->setText((CEGUI::utf8*) gettext("Please select a character first!"));
+		CEGUIUtility::getWindow ("WarningDialogWindow/WarningDialogLabel")->setText(gettext("Please select a character first!"));
 
 		SW_DEBUG ("Warning: Tried to join a game without a selected char!");
 		return;
@@ -1997,7 +1997,7 @@ void Document::showWarning (const std::string& textMessage)
 	message->setInheritsAlpha(false);
 	message->setVisible(true);
 	message->setModalState(true);
-	CEGUIUtility::getWindow ("WarningDialogWindow/WarningDialogLabel")->setText((CEGUI::utf8*) textMessage.c_str ());
+	CEGUIUtility::getWindow ("WarningDialogWindow/WarningDialogLabel")->setText(textMessage.c_str ());
 
 	getGUIState()->m_shown_windows |= MESSAGE;
 	m_modified |= WINDOWS_MODIFIED;
@@ -2029,7 +2029,7 @@ void Document::hideWarning ()
 void Document::showQuestionDialog ()
 {
 	// Show a notification.
-	CEGUI::String widgetName = CEGUIUtility::getNameForWidget ("MainMenu/MainMenuRoot/QuestionInfoRoot");
+  CEGUI::String widgetName = CEGUIUtility::getNameForWidget ("MainMenu/MainMenuRoot/QuestionInfoRoot").c_str();
 	if (! CEGUIUtility::isWindowPresent (widgetName))
 	{
 		SW_DEBUG ("Could not display the warning widget: [%s]", widgetName.c_str ());
@@ -2050,7 +2050,7 @@ void Document::showQuestionDialog ()
 void Document::hideQuestionDialog ()
 {
 	// Show a notification.
-	CEGUI::String widgetName = CEGUIUtility::getNameForWidget ("MainMenu/MainMenuRoot/QuestionInfoRoot");
+  CEGUI::String widgetName = CEGUIUtility::getNameForWidget ("MainMenu/MainMenuRoot/QuestionInfoRoot").c_str();
 	if (CEGUIUtility::isWindowPresent (widgetName))
 	{
 		CEGUI::Window* widget = CEGUIUtility::getWindow (widgetName);
