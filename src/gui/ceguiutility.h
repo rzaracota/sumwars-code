@@ -23,9 +23,9 @@
 
 #include "CEGUI/Base.h"
 
+#include "CEGUI/MemoryAllocation.h"
 
 using CEGUI::STLAllocatorWrapper;
-#include "CEGUI/MemoryAllocation.h"
 #include "CEGUI/CEGUI.h"
 #include "CEGUI/String.h"
 

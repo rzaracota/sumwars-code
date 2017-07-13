@@ -1,3 +1,5 @@
+#include "cegui-update.h"
+
 #include "clipboard.h"
 #include "config.h"
 

@@ -13,6 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "cegui-update.h"
+
 #include "tooltipmanager.h"
 #include "ceguiutility.h"
 #include "config.h"
