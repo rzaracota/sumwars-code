@@ -24,7 +24,9 @@
 #include "CEGUI/CEGUIUDim.h"
 #include "CEGUI/CEGUIFont.h"
 #else
+#include "CEGUI/Base.h"
 #include "CEGUI/CEGUI.h"
+#include "CEGUI/String.h"
 #endif
 
 #include <list>

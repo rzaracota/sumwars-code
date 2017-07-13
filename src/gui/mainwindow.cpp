@@ -13,6 +13,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <OgreCamera.h>
+
 #include "mainwindow.h"
 
 #include <string>

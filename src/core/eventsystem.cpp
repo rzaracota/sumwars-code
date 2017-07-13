@@ -15,6 +15,7 @@
 
 
 #include <OgreRoot.h>
+#include <OgreLogManager.h>
 #include <OgreRenderTarget.h>
 #include <OgreRenderWindow.h>
 

@@ -17,6 +17,10 @@
 #define __SUMWARS_GUI_MAINMENU_H__
 
 #include "OgreRoot.h"
+
+#include <OgreFrameListener.h>
+#include <OgreCamera.h>
+
 #include "window.h"
 #include "graphicobject.h"
 

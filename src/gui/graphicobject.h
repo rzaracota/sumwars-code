@@ -22,6 +22,8 @@
 #include "OgreBone.h"
 #include "OgreSceneManager.h"
 
+#include <OgreSkeletonInstance.h>
+
 #include <string>
 #include "graphicobjectrenderinfo.h"
 #include "soundobject.h"

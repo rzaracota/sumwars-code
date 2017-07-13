@@ -14,6 +14,8 @@
  */
 
 #include "OgreEntity.h"
+#include <OgreFrameListener.h>
+#include <OgreCamera.h>
 #include "mainmenu.h"
 #include <OgreRenderWindow.h>
 #include <OgreSubEntity.h>
