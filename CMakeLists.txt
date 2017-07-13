@@ -20,6 +20,8 @@ MESSAGE(STATUS "**********************************************")
 MESSAGE(STATUS "  http://sumwars.org/wiki/Build_instructions  ")
 MESSAGE(STATUS "")
 
+add_compile_options(-I/usr/include/cegui-0)
+
 OPTION(SUMWARS_NO_TINYXML "Do not use bundled, in-source TinyXML Lib" OFF)
 OPTION(SUMWARS_NO_ENET "Do not use bundled, in-source ENET Lib" OFF)
 OPTION(SUMWARS_BUILD_TOOLS "Builds editor tools (not needed for gameplay, only useful for content authors)" OFF)
