@@ -77,6 +77,8 @@ void EventSystem::init()
 	m_lua = lua_open();
 #elif LUA_VERSION_NUM == 502
     m_lua = luaL_newstate();
+#else
+    m_lua = luaL_newstate();
 #endif
 
 	luaL_openlibs(m_lua);
