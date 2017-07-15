@@ -185,7 +185,7 @@ class Event
 		 * \brief Kopierkonstruktor
 		 * \param other anderes Event
 		 */
-		Event( Event& other): m_condition(true), m_once(other.m_once),
+		Event( Event& other): m_condition(other.m_condition), m_once(other.m_once),
 							  m_effect(other.m_effect), m_copy(true),
 							  m_gettext_domain(other.m_gettext_domain) {};
 		
